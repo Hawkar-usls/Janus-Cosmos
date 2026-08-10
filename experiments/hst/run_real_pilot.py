@@ -19,23 +19,26 @@ NULLS = 256
 SCALES = (1.0, 2.0, 4.0)
 ORIENTATIONS = tuple(range(0, 180, 30))
 SIZE = 256
-USER_AGENT = "Janus-Cosmos/0.3 (+https://github.com/Hawkar-usls/Janus-Cosmos)"
+USER_AGENT = "Janus-Cosmos/0.4 (+https://github.com/Hawkar-usls/Janus-Cosmos)"
 FITS_MAGIC = b"SIMPLE  ="
+EVENT_LOG = Path("janus-cosmos-events.jsonl")
+
+
+def emit(event: str, **fields: object) -> None:
+    record = {"schema": "janus.cosmos.event.v0.1", "event": event, "ts_unix": time.time(), **fields}
+    with EVENT_LOG.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, sort_keys=True) + "\n")
 
 
 def download(url: str, path: Path) -> dict:
-    """Download and validate a public MAST/HLSP FITS product with retries."""
     last_error = None
     for attempt in range(1, 4):
         try:
-            request = urllib.request.Request(
-                url,
-                headers={
-                    "User-Agent": USER_AGENT,
-                    "Accept": "application/fits,application/octet-stream,*/*",
-                    "Connection": "close",
-                },
-            )
+            request = urllib.request.Request(url, headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/fits,application/octet-stream,*/*",
+                "Connection": "close",
+            })
             h = hashlib.sha256()
             total = 0
             content_type = ""
@@ -51,26 +54,22 @@ def download(url: str, path: Path) -> dict:
                     total += len(chunk)
                     h.update(chunk)
                     f.write(chunk)
-
             if total < 2880:
                 raise RuntimeError(f"Downloaded payload is too small to be FITS: {total} bytes")
             with open(path, "rb") as f:
                 magic = f.read(len(FITS_MAGIC))
             if magic != FITS_MAGIC:
-                raise RuntimeError(
-                    f"Payload is not a FITS primary HDU (magic={magic!r}, content_type={content_type!r})"
-                )
-            return {
-                "bytes": total,
-                "content_type": content_type,
-                "sha256": h.hexdigest(),
-                "attempt": attempt,
-            }
+                raise RuntimeError(f"Payload is not a FITS primary HDU (magic={magic!r}, content_type={content_type!r})")
+            metadata = {"bytes": total, "content_type": content_type, "sha256": h.hexdigest(), "attempt": attempt}
+            emit("download_ok", url=url, **metadata)
+            return metadata
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError, RuntimeError) as exc:
             last_error = exc
+            emit("download_retry", url=url, attempt=attempt, error=repr(exc))
             print(f"Download attempt {attempt}/3 failed: {exc}")
             if attempt < 3:
                 time.sleep(3 * attempt)
+    emit("download_failed", url=url, error=repr(last_error))
     raise RuntimeError(f"MAST download failed after 3 attempts: {url}: {last_error}") from last_error
 
 
@@ -124,16 +123,19 @@ def score(image: np.ndarray) -> float:
     return float(np.mean(vals))
 
 
-def analyze(image: np.ndarray, rng: random.Random) -> dict:
+def analyze(image: np.ndarray, rng: random.Random, filter_name: str) -> dict:
     observed = score(image)
     null = []
-    for _ in range(NULLS):
+    for i in range(NULLS):
         shuffled = image.ravel().copy()
         rng.shuffle(shuffled)
-        null.append(score(shuffled.reshape(image.shape)))
+        null_score = score(shuffled.reshape(image.shape))
+        null.append(null_score)
+        if i in (0, NULLS // 2, NULLS - 1):
+            emit("null_checkpoint", filter=filter_name, null_index=i + 1, null_score=null_score)
     ge = sum(v >= observed for v in null)
     p = (ge + 1) / (NULLS + 1)
-    return {
+    result = {
         "observed_score": observed,
         "null_median": float(np.median(null)),
         "null_min": float(np.min(null)),
@@ -141,9 +143,13 @@ def analyze(image: np.ndarray, rng: random.Random) -> dict:
         "p_empirical": p,
         "candidate_by_filter": p < 0.05,
     }
+    emit("filter_analyzed", filter=filter_name, **result)
+    return result
 
 
 def main():
+    EVENT_LOG.unlink(missing_ok=True)
+    emit("run_started", seed=SEED, nulls=NULLS, scales=SCALES, orientations_deg=ORIENTATIONS, image_size=SIZE)
     manifest = json.loads(Path("data/hst_real_pilot.json").read_text())
     out = {
         "schema": "janus.cosmos.hst.real_receipt.v0.3",
@@ -160,16 +166,13 @@ def main():
         for item in manifest["filters"]:
             path = Path(td) / (item["filter"] + ".fits")
             print(f"Downloading {item['filter']} from MAST: {item['url']}")
+            emit("download_started", filter=item["filter"], band=item["band"], url=item["url"])
             metadata = download(item["url"], path)
             print(f"Downloaded {item['filter']}: {metadata['bytes']} bytes ({metadata['content_type']})")
             image = read_image(path)
-            result = analyze(image, rng)
-            out["source_products"].append({
-                "filter": item["filter"],
-                "band": item["band"],
-                "url": item["url"],
-                **metadata,
-            })
+            emit("fits_parsed", filter=item["filter"], shape=list(image.shape))
+            result = analyze(image, rng, item["filter"])
+            out["source_products"].append({"filter": item["filter"], "band": item["band"], "url": item["url"], **metadata})
             out["filters"][item["filter"]] = result
             print(f"Analyzed {item['filter']}: p_empirical={result['p_empirical']:.6f}")
 
@@ -177,11 +180,10 @@ def main():
     out["cross_band_candidate"] = len(passing) >= 2
     out["passing_filters"] = passing
     out["astronomical_discovery"] = False
-    out["claim_ceiling"] = (
-        "Known M51 positive-control pilot only. A cross-band candidate is not a new discovery; "
-        "it demonstrates that the image-level gate responds to real HST morphology."
-    )
+    out["claim_ceiling"] = "Known M51 positive-control pilot only. A cross-band candidate is not a new discovery; it demonstrates that the image-level gate responds to real HST morphology."
+    out["event_log"] = {"path": str(EVENT_LOG), "sha256": hashlib.sha256(EVENT_LOG.read_bytes()).hexdigest()}
     Path("janus-cosmos-real-hst-receipt.json").write_text(json.dumps(out, indent=2, sort_keys=True))
+    emit("run_completed", cross_band_candidate=out["cross_band_candidate"], passing_filters=passing, receipt_sha256=hashlib.sha256(Path("janus-cosmos-real-hst-receipt.json").read_bytes()).hexdigest())
     print(json.dumps(out, indent=2, sort_keys=True))
 
 
