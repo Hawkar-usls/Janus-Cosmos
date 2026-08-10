@@ -39,7 +39,7 @@ jobs:
           python - <<'PY'
           import json
           p='results/direct/janus-cosmos-blind-corpus-receipt.json'
-          d=json.load(open(p))
+          d=json.load(open(p, encoding='utf-8'))
           assert d['backend']=='direct'
           assert len(d['targets'])==7
           assert d['blind_gate']['semantic_analysis'] is False
@@ -53,6 +53,21 @@ jobs:
         with:
           name: janus-cosmos-direct-receipt
           path: results/direct/
+      - name: Persist direct receipt
+        env:
+          BACKEND: direct
+        run: |
+          mkdir -p data/runtime/blind_variants
+          cp results/direct/janus-cosmos-blind-corpus-receipt.json "data/runtime/blind_variants/${BACKEND}-latest.json"
+          cp results/direct/janus-cosmos-blind-events.jsonl "data/runtime/blind_variants/${BACKEND}-latest.events.jsonl"
+          git config user.name 'janus-cosmos[bot]'
+          git config user.email 'janus-cosmos[bot]@users.noreply.github.com'
+          git add data/runtime/blind_variants/${BACKEND}-latest.json data/runtime/blind_variants/${BACKEND}-latest.events.jsonl
+          git commit -m "Persist Janus Cosmos direct variant receipt" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && break
+            sleep $((i * 2))
+          done
 
   mast-api:
     if: ${{ github.event_name == 'push' || inputs.backend == 'both' || inputs.backend == 'mast_api' }}
@@ -69,7 +84,7 @@ jobs:
           python - <<'PY'
           import json
           p='results/mast_api/janus-cosmos-blind-corpus-receipt.json'
-          d=json.load(open(p))
+          d=json.load(open(p, encoding='utf-8'))
           assert d['backend']=='mast_api'
           assert len(d['targets'])==7
           assert d['blind_gate']['semantic_analysis'] is False
@@ -83,16 +98,18 @@ jobs:
         with:
           name: janus-cosmos-mast-api-receipt
           path: results/mast_api/
-
-  publish:
-    if: always()
-    needs: [direct, mast-api]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Collect successful receipts when present
+      - name: Persist MAST API receipt
+        env:
+          BACKEND: mast_api
         run: |
-          mkdir -p results
-          echo '{"schema":"janus.cosmos.variant_bundle.v0.1","note":"Receipts are published by successful variant jobs; this bundle contains only files available in this job workspace."}' > results/bundle-note.json
-      - name: Publish note
-        run: cat results/bundle-note.json
+          mkdir -p data/runtime/blind_variants
+          cp results/mast_api/janus-cosmos-blind-corpus-receipt.json "data/runtime/blind_variants/${BACKEND}-latest.json"
+          cp results/mast_api/janus-cosmos-blind-events.jsonl "data/runtime/blind_variants/${BACKEND}-latest.events.jsonl"
+          git config user.name 'janus-cosmos[bot]'
+          git config user.email 'janus-cosmos[bot]@users.noreply.github.com'
+          git add data/runtime/blind_variants/${BACKEND}-latest.json data/runtime/blind_variants/${BACKEND}-latest.events.jsonl
+          git commit -m "Persist Janus Cosmos MAST API variant receipt" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && break
+            sleep $((i * 2))
+          done
