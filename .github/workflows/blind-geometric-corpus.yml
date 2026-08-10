@@ -1,0 +1,50 @@
+name: Janus Cosmos Blind Geometric Corpus
+
+on:
+  push:
+    paths:
+      - 'data/hst_blind_corpus.json'
+      - 'experiments/hst/run_blind_corpus.py'
+      - 'experiments/hst/blind_gate_config.json'
+      - '.github/workflows/blind-geometric-corpus.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  blind-geometric-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install scientific dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy astropy
+      - name: Run blind geometric corpus
+        run: python experiments/hst/run_blind_corpus.py > janus-cosmos-blind-run.log
+      - name: Validate machine receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('janus-cosmos-blind-corpus-receipt.json')
+          data = json.loads(p.read_text())
+          assert data['blind_gate']['semantic_analysis'] is False
+          assert data['blind_gate']['ocr'] is False
+          assert data['blind_gate']['face_search'] is False
+          assert data['blind_gate']['cipher_search'] is False
+          assert data['blind_gate']['post_hoc_tuning'] is False
+          assert len(data['targets']) == 7
+          print('JANUS COSMOS BLIND GEOMETRIC CORPUS PASS')
+          print('candidate_count =', data['candidate_count'])
+          PY
+      - name: Upload machine-readable receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-cosmos-blind-geometric-receipt
+          path: |
+            janus-cosmos-blind-corpus-receipt.json
+            janus-cosmos-blind-events.jsonl
+            janus-cosmos-blind-run.log
+            data/hst_blind_corpus.json
+            experiments/hst/blind_gate_config.json
