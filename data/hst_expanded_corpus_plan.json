@@ -1,0 +1,78 @@
+{
+  "schema": "janus.cosmos.hst.expanded_corpus_plan.v0.1",
+  "purpose": "Expand Janus Cosmos from a seven-galaxy pilot to a broad, provenance-controlled public HST galaxy corpus without enabling OCR, face search, semantic search, or cipher search.",
+  "status": "PLANNED",
+  "selection_principles": {
+    "public_archive_only": true,
+    "prefer_MAST": true,
+    "real_images_only": true,
+    "preserve_filter_pairs": true,
+    "minimum_filters": ["F555W", "F814W"],
+    "deduplicate_by_product_sha256": true,
+    "record_provenance": true,
+    "stratify_by_morphology": true,
+    "stratify_by_angular_size": true,
+    "stratify_by_surface_brightness": true,
+    "stratify_by_signal_to_noise": true,
+    "include_negative_controls": true,
+    "include_known_positive_controls": true
+  },
+  "target_classes": [
+    "spiral",
+    "barred_spiral",
+    "elliptical",
+    "lenticular",
+    "irregular",
+    "dwarf",
+    "interacting",
+    "merger",
+    "edge_on",
+    "face_on",
+    "ringed",
+    "starburst",
+    "low_surface_brightness"
+  ],
+  "sampling_strategy": {
+    "phase_1_target": 100,
+    "phase_2_target": 500,
+    "phase_3_target": 1000,
+    "selection": "stratified_and_deduplicated",
+    "avoid_single_catalog_bias": true,
+    "retain_target_identity": true,
+    "split_policy": "target_level_no_leakage"
+  },
+  "controls": {
+    "morphology_preserving_phase_null": true,
+    "local_block_shuffle_null": true,
+    "legacy_pixel_permutation_null": true,
+    "blank_sky_or_noise_controls": true,
+    "instrument_artifact_controls": true,
+    "multiple_testing_correction_required": true
+  },
+  "blind_gate": {
+    "ocr": false,
+    "face_search": false,
+    "semantic_analysis": false,
+    "cipher_search": false,
+    "post_hoc_tuning": false,
+    "human_label_used_by_detector": false
+  },
+  "required_receipt_fields": [
+    "target",
+    "target_class",
+    "instrument",
+    "filter",
+    "product_uri",
+    "bytes",
+    "sha256",
+    "observed_score",
+    "null_model",
+    "null_count",
+    "p_empirical",
+    "multiple_testing_adjusted_p",
+    "candidate_by_filter",
+    "robust_candidate",
+    "run_seed"
+  ],
+  "next_action": "Build a MAST discovery manifest first; do not download the full corpus until the manifest is deterministic, deduplicated, stratified, and reviewable."
+}
