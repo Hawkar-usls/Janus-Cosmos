@@ -3,9 +3,10 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import os
 import random
 import tempfile
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -18,18 +19,37 @@ NULLS = 256
 SCALES = (1.0, 2.0, 4.0)
 ORIENTATIONS = tuple(range(0, 180, 30))
 SIZE = 256
+USER_AGENT = "Janus-Cosmos/0.2 (+https://github.com/Hawkar-usls/Janus-Cosmos)"
 
 
 def download(url: str, path: Path) -> str:
-    h = hashlib.sha256()
-    with urllib.request.urlopen(url, timeout=120) as r, open(path, "wb") as f:
-        while True:
-            chunk = r.read(1024 * 1024)
-            if not chunk:
-                break
-            h.update(chunk)
-            f.write(chunk)
-    return h.hexdigest()
+    """Download a public MAST product with retries and an explicit User-Agent."""
+    last_error = None
+    for attempt in range(1, 4):
+        try:
+            request = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": USER_AGENT,
+                    "Accept": "application/fits,application/octet-stream,*/*",
+                },
+            )
+            h = hashlib.sha256()
+            with urllib.request.urlopen(request, timeout=180) as r, open(path, "wb") as f:
+                while True:
+                    chunk = r.read(1024 * 1024)
+                    if not chunk:
+                        break
+                    h.update(chunk)
+                    f.write(chunk)
+            if path.stat().st_size < 1024:
+                raise RuntimeError(f"Downloaded file is unexpectedly small: {path.stat().st_size} bytes")
+            return h.hexdigest()
+        except (urllib.error.URLError, TimeoutError, OSError, RuntimeError) as exc:
+            last_error = exc
+            if attempt < 3:
+                time.sleep(3 * attempt)
+    raise RuntimeError(f"MAST download failed after 3 attempts: {url}: {last_error}") from last_error
 
 
 def read_image(path: Path) -> np.ndarray:
@@ -43,8 +63,6 @@ def read_image(path: Path) -> np.ndarray:
             raise RuntimeError(f"No 2-D image plane in {path}")
         image = max(arrays, key=lambda a: a.size)
     image = np.nan_to_num(image, nan=0.0, posinf=0.0, neginf=0.0)
-    # Center crop to a square, then downsample. This is a pipeline control,
-    # not a claim that the center is the only scientifically interesting area.
     h, w = image.shape
     side = min(h, w)
     y0, x0 = (h - side) // 2, (w - side) // 2
@@ -113,7 +131,9 @@ def main():
     with tempfile.TemporaryDirectory() as td:
         for item in manifest["filters"]:
             path = Path(td) / (item["filter"] + ".fits")
+            print(f"Downloading {item['filter']} from MAST: {item['url']}")
             sha = download(item["url"], path)
+            print(f"Downloaded {item['filter']}: {path.stat().st_size} bytes")
             image = read_image(path)
             result = analyze(image, rng)
             out["source_products"].append({
@@ -123,6 +143,7 @@ def main():
                 "sha256": sha,
             })
             out["filters"][item["filter"]] = result
+            print(f"Analyzed {item['filter']}: p_empirical={result['p_empirical']:.6f}")
 
     passing = [f for f, r in out["filters"].items() if r["candidate_by_filter"]]
     out["cross_band_candidate"] = len(passing) >= 2
