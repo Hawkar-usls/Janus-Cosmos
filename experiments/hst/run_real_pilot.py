@@ -19,11 +19,12 @@ NULLS = 256
 SCALES = (1.0, 2.0, 4.0)
 ORIENTATIONS = tuple(range(0, 180, 30))
 SIZE = 256
-USER_AGENT = "Janus-Cosmos/0.2 (+https://github.com/Hawkar-usls/Janus-Cosmos)"
+USER_AGENT = "Janus-Cosmos/0.3 (+https://github.com/Hawkar-usls/Janus-Cosmos)"
+FITS_MAGIC = b"SIMPLE  ="
 
 
-def download(url: str, path: Path) -> str:
-    """Download a public MAST product with retries and an explicit User-Agent."""
+def download(url: str, path: Path) -> dict:
+    """Download and validate a public MAST/HLSP FITS product with retries."""
     last_error = None
     for attempt in range(1, 4):
         try:
@@ -32,28 +33,49 @@ def download(url: str, path: Path) -> str:
                 headers={
                     "User-Agent": USER_AGENT,
                     "Accept": "application/fits,application/octet-stream,*/*",
+                    "Connection": "close",
                 },
             )
             h = hashlib.sha256()
+            total = 0
+            content_type = ""
             with urllib.request.urlopen(request, timeout=180) as r, open(path, "wb") as f:
+                status = getattr(r, "status", 200)
+                content_type = r.headers.get("Content-Type", "")
+                if status != 200:
+                    raise RuntimeError(f"HTTP status {status} from {url}")
                 while True:
                     chunk = r.read(1024 * 1024)
                     if not chunk:
                         break
+                    total += len(chunk)
                     h.update(chunk)
                     f.write(chunk)
-            if path.stat().st_size < 1024:
-                raise RuntimeError(f"Downloaded file is unexpectedly small: {path.stat().st_size} bytes")
-            return h.hexdigest()
-        except (urllib.error.URLError, TimeoutError, OSError, RuntimeError) as exc:
+
+            if total < 2880:
+                raise RuntimeError(f"Downloaded payload is too small to be FITS: {total} bytes")
+            with open(path, "rb") as f:
+                magic = f.read(len(FITS_MAGIC))
+            if magic != FITS_MAGIC:
+                raise RuntimeError(
+                    f"Payload is not a FITS primary HDU (magic={magic!r}, content_type={content_type!r})"
+                )
+            return {
+                "bytes": total,
+                "content_type": content_type,
+                "sha256": h.hexdigest(),
+                "attempt": attempt,
+            }
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError, RuntimeError) as exc:
             last_error = exc
+            print(f"Download attempt {attempt}/3 failed: {exc}")
             if attempt < 3:
                 time.sleep(3 * attempt)
     raise RuntimeError(f"MAST download failed after 3 attempts: {url}: {last_error}") from last_error
 
 
 def read_image(path: Path) -> np.ndarray:
-    with fits.open(path, memmap=True) as hdul:
+    with fits.open(path, memmap=True, lazy_load_hdus=True) as hdul:
         arrays = []
         for hdu in hdul:
             data = getattr(hdu, "data", None)
@@ -77,14 +99,20 @@ def read_image(path: Path) -> np.ndarray:
 def directional_correlation(image: np.ndarray, sigma: float, degrees: int) -> float:
     sm = gaussian_filter(image, sigma=sigma, mode="reflect")
     a = math.radians(degrees)
-    dx = max(1, int(round(2.0 * sigma * math.cos(a))))
-    dy = max(1, int(round(2.0 * sigma * math.sin(a))))
-    y1, y2 = max(0, dy), min(SIZE, SIZE + dy)
-    x1, x2 = max(0, dx), min(SIZE, SIZE + dx)
-    if y2 - y1 < 8 or x2 - x1 < 8:
+    dx = int(round(2.0 * sigma * math.cos(a)))
+    dy = int(round(2.0 * sigma * math.sin(a)))
+    if dx >= 0:
+        ax0, ax1, bx0, bx1 = dx, SIZE, 0, SIZE - dx
+    else:
+        ax0, ax1, bx0, bx1 = 0, SIZE + dx, -dx, SIZE
+    if dy >= 0:
+        ay0, ay1, by0, by1 = dy, SIZE, 0, SIZE - dy
+    else:
+        ay0, ay1, by0, by1 = 0, SIZE + dy, -dy, SIZE
+    if ax1 - ax0 < 8 or ay1 - ay0 < 8:
         return 0.0
-    a1 = sm[y1:y2, x1:x2]
-    b1 = sm[y1-dy:y2-dy, x1-dx:x2-dx]
+    a1 = sm[ay0:ay1, ax0:ax1]
+    b1 = sm[by0:by1, bx0:bx1]
     a1 = a1 - float(a1.mean())
     b1 = b1 - float(b1.mean())
     denom = float(np.sqrt(np.sum(a1 * a1) * np.sum(b1 * b1)))
@@ -98,11 +126,11 @@ def score(image: np.ndarray) -> float:
 
 def analyze(image: np.ndarray, rng: random.Random) -> dict:
     observed = score(image)
-    flat = image.ravel().copy()
     null = []
     for _ in range(NULLS):
-        rng.shuffle(flat)
-        null.append(score(flat.reshape(image.shape)))
+        shuffled = image.ravel().copy()
+        rng.shuffle(shuffled)
+        null.append(score(shuffled.reshape(image.shape)))
     ge = sum(v >= observed for v in null)
     p = (ge + 1) / (NULLS + 1)
     return {
@@ -118,7 +146,7 @@ def analyze(image: np.ndarray, rng: random.Random) -> dict:
 def main():
     manifest = json.loads(Path("data/hst_real_pilot.json").read_text())
     out = {
-        "schema": "janus.cosmos.hst.real_receipt.v0.2",
+        "schema": "janus.cosmos.hst.real_receipt.v0.3",
         "status": "REAL_HST_IMAGE_PILOT",
         "source": manifest["source_archive"],
         "target": manifest["target"],
@@ -132,15 +160,15 @@ def main():
         for item in manifest["filters"]:
             path = Path(td) / (item["filter"] + ".fits")
             print(f"Downloading {item['filter']} from MAST: {item['url']}")
-            sha = download(item["url"], path)
-            print(f"Downloaded {item['filter']}: {path.stat().st_size} bytes")
+            metadata = download(item["url"], path)
+            print(f"Downloaded {item['filter']}: {metadata['bytes']} bytes ({metadata['content_type']})")
             image = read_image(path)
             result = analyze(image, rng)
             out["source_products"].append({
                 "filter": item["filter"],
                 "band": item["band"],
                 "url": item["url"],
-                "sha256": sha,
+                **metadata,
             })
             out["filters"][item["filter"]] = result
             print(f"Analyzed {item['filter']}: p_empirical={result['p_empirical']:.6f}")
