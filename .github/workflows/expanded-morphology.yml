@@ -36,6 +36,7 @@ permissions:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  PYTHONUNBUFFERED: '1'
 
 jobs:
   expanded-morphology:
@@ -47,11 +48,28 @@ jobs:
       - name: Install scientific dependencies
         run: python -m pip install --disable-pip-version-check numpy scipy astropy astroquery
 
+      - name: Preflight DNS and MAST API
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          import socket
+          import urllib.request
+          for host in ('mast.stsci.edu', 'archive.stsci.edu'):
+              print('DNS', host, socket.gethostbyname_ex(host))
+          req = urllib.request.Request('https://mast.stsci.edu/api/v0.1/', headers={'User-Agent': 'Janus-Cosmos/expanded-ci'})
+          try:
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  print('MAST HTTP status =', getattr(r, 'status', None))
+          except Exception as exc:
+              print('MAST API preflight exception:', repr(exc))
+          PY
+
       - name: Discover live MAST products
         env:
           TARGET_LIMIT: ${{ inputs.target_limit || '22' }}
         run: |
-          python experiments/hst/discover_mast_galaxy_products.py \
+          set -euxo pipefail
+          python -u experiments/hst/discover_mast_galaxy_products.py \
             --out data/hst_expanded_live_manifest.json \
             --targets $(python - <<'PY'
           from pathlib import Path
@@ -66,14 +84,22 @@ jobs:
                           names = [e.value for e in n.value.elts]
           print(' '.join(names[:int(os.environ['TARGET_LIMIT'])]))
           PY
-          )
+          ) | tee janus-cosmos-mast-discovery.log
+
+      - name: Validate live manifest
+        run: |
+          set -euxo pipefail
           python - <<'PY'
           import json
           d = json.load(open('data/hst_expanded_live_manifest.json'))
-          assert d['selected_targets'] >= 2
+          names = {x['target'] for x in d['targets']}
+          assert d['status'] == 'LIVE_MAST_DISCOVERY'
+          assert d['selected_targets'] >= 2, d
+          assert {'NGC1425', 'NGC1637'} <= names, f"focus targets missing: {names}"
           print('LIVE MAST DISCOVERY PASS')
           print('selected_targets =', d['selected_targets'])
           print('selected_products =', d['selected_products'])
+          print('query_error_count =', d['query_error_count'])
           PY
 
       - name: Run expanded morphology test
@@ -81,15 +107,17 @@ jobs:
           NULLS: ${{ inputs.nulls || '2048' }}
           SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
         run: |
-          python experiments/hst/run_expanded_morphology.py \
+          set -euxo pipefail
+          python -u experiments/hst/run_expanded_morphology.py \
             --manifest data/hst_expanded_live_manifest.json \
             --backend mast_api \
             --nulls "$NULLS" \
             --seeds "$SEEDS" \
-            --output-dir results/expanded_morphology
+            --output-dir results/expanded_morphology | tee janus-cosmos-expanded-run.log
 
       - name: Validate expanded receipt
         run: |
+          set -euxo pipefail
           python - <<'PY'
           import json
           from pathlib import Path
@@ -115,14 +143,16 @@ jobs:
 
       - name: Run focused survivor recheck
         run: |
-          python experiments/hst/run_focus_recheck.py \
+          set -euxo pipefail
+          python -u experiments/hst/run_focus_recheck.py \
             --manifest data/hst_expanded_live_manifest.json \
             --nulls 4096 \
             --seeds 20260810,20260811,20260812,20260813,20260814 \
-            --output-dir results/focus_recheck
+            --output-dir results/focus_recheck | tee janus-cosmos-focus-run.log
 
       - name: Validate focus recheck
         run: |
+          set -euxo pipefail
           python - <<'PY'
           import json
           from pathlib import Path
@@ -147,6 +177,7 @@ jobs:
           NULLS: ${{ inputs.nulls || '2048' }}
           SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
         run: |
+          set -euxo pipefail
           python - <<'PY'
           import hashlib, json, os
           from pathlib import Path
@@ -195,11 +226,16 @@ jobs:
             results/expanded_morphology/
             results/focus_recheck/
             data/hst_expanded_live_manifest.json
+            janus-cosmos-mast-discovery.log
+            janus-cosmos-expanded-run.log
+            janus-cosmos-focus-run.log
 
       - name: Publish runtime receipts
+        if: success()
         env:
           RUN_ID: ${{ github.run_id }}
         run: |
+          set -euxo pipefail
           mkdir -p data/runtime/expanded_morphology
           cp results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json data/runtime/expanded_morphology/latest.json
           cp results/expanded_morphology/janus-cosmos-expanded-morphology-ci-receipt.json "data/runtime/expanded_morphology/run-${RUN_ID}.json"
