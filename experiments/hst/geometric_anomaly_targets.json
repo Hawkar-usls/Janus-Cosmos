@@ -1,0 +1,46 @@
+{
+  "schema": "janus.cosmos.geometric_anomaly_targets.v1",
+  "purpose": "Blind geometric hypothesis classes for public HST imagery. These are measurement targets, not semantic claims or evidence of artificial origin.",
+  "semantic_analysis": false,
+  "human_label_inference": false,
+  "targets": [
+    {
+      "id": "topology_discontinuity",
+      "description": "Unexpected connected-component, hole, branch, or boundary topology relative to fixed null models.",
+      "features": ["connected_components", "holes", "skeleton_branch_count", "boundary_euler_characteristic"]
+    },
+    {
+      "id": "symmetry_extreme",
+      "description": "Unusually strong or unusually constrained rotational/reflection symmetry under fixed transforms.",
+      "features": ["rotational_symmetry_score", "reflection_symmetry_score", "symmetry_residual"]
+    },
+    {
+      "id": "repeated_motif",
+      "description": "Repeated spatial motifs at separated locations or scales that exceed the fixed null distribution.",
+      "features": ["autocorrelation_peaks", "template_repetition_score", "scale_consistency"]
+    },
+    {
+      "id": "geometric_regular_boundary",
+      "description": "Boundary segments unusually close to simple geometric primitives compared with nulls.",
+      "features": ["line_residual", "arc_residual", "polygonal_residual", "curvature_variance"]
+    },
+    {
+      "id": "long_range_alignment",
+      "description": "Spatial features showing unusually persistent alignment over large separations.",
+      "features": ["orientation_coherence", "ridge_alignment", "pairwise_alignment"]
+    },
+    {
+      "id": "flag_like_silhouette",
+      "description": "A deliberately non-semantic shape class for elongated body-plus-lateral-extension morphology. The system measures geometry only; it must never label an object as a flag or infer intent.",
+      "features": ["aspect_ratio", "elongation", "lateral_extension_ratio", "junction_angle", "silhouette_residual"]
+    },
+    {
+      "id": "physically_unusual_geometry",
+      "description": "Candidate morphology occupying an extreme tail of the empirical geometric feature distribution. 'Unusual' means statistically rare under the chosen null, not physically impossible.",
+      "features": ["multivariate_tail_score", "null_tail_probability", "cross_band_consistency"]
+    }
+  ],
+  "interpretation_rule": "No target class is evidence of intelligence, artificiality, messaging, or impossibility. A candidate is only a reproducible geometric anomaly requiring independent astronomical investigation.",
+  "required_controls": ["known_positive", "known_negative", "blind_holdout"],
+  "replication_required": true
+}
