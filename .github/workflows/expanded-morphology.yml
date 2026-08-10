@@ -5,6 +5,8 @@ on:
     paths:
       - 'experiments/hst/discover_mast_galaxy_products.py'
       - 'experiments/hst/run_expanded_morphology.py'
+      - 'experiments/hst/repo_derived_anomaly_protocol.py'
+      - 'docs/REPO_DERIVED_METHODS.md'
       - '.github/workflows/expanded-morphology.yml'
       - 'data/hst_blind_corpus.json'
       - 'data/hst_expanded_live_manifest.json'
@@ -51,11 +53,9 @@ jobs:
           python experiments/hst/discover_mast_galaxy_products.py \
             --out data/hst_expanded_live_manifest.json \
             --targets $(python - <<'PY'
-          import json
-          d = json.load(open('experiments/hst/discover_mast_galaxy_products.py')) if False else None
           from pathlib import Path
+          import ast, os
           text = Path('experiments/hst/discover_mast_galaxy_products.py').read_text()
-          import ast
           tree = ast.parse(text)
           names = []
           for n in ast.walk(tree):
@@ -63,7 +63,7 @@ jobs:
                   for t in n.targets:
                       if isinstance(t, ast.Name) and t.id == 'DEFAULT_TARGETS':
                           names = [e.value for e in n.value.elts]
-          print(' '.join(names[:int(__import__('os').environ['TARGET_LIMIT'])]))
+          print(' '.join(names[:int(os.environ['TARGET_LIMIT'])]))
           PY
           )
           python - <<'PY'
@@ -97,7 +97,12 @@ jobs:
           assert d['target_count'] >= 2
           assert d['nulls_per_null_model'] >= 2048
           assert len(d['seeds']) >= 3
-          for k in ('semantic_analysis', 'ocr', 'face_search', 'cipher_search', 'post_hoc_tuning'):
+          assert d.get('repo_derived_mechanics', {}).get('fundamentum_attack_survivor') is True
+          assert d.get('repo_derived_mechanics', {}).get('lapis_gate_rejection_records') is True
+          assert d.get('repo_derived_mechanics', {}).get('hrain_graph_observation_model') is True
+          assert d.get('repo_derived_mechanics', {}).get('distributed_swarm_invariant_boundary') is True
+          assert d.get('repo_derived_mechanics', {}).get('demiurge_adaptive_gate_tuning') is False
+          for k in ('semantic_analysis', 'ocr', 'face_search', 'cipher_search', 'post_hoc_tuning', 'human_label_inference'):
               assert d['blind_gate'][k] is False
           print('JANUS COSMOS EXPANDED MORPHOLOGY PASS')
           print('target_count =', d['target_count'])
@@ -122,7 +127,7 @@ jobs:
           p = Path('results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json')
           d = json.loads(p.read_text())
           out = {
-            'schema': 'janus.cosmos.expanded_morphology_ci_receipt.v0.1',
+            'schema': 'janus.cosmos.expanded_morphology_ci_receipt.v0.2',
             'status': 'PASS',
             'run_id': int(os.environ['RUN_ID']),
             'run_attempt': int(os.environ['RUN_ATTEMPT']),
@@ -136,6 +141,7 @@ jobs:
             'consensus_candidate_count': d['consensus_candidate_count'],
             'consensus_candidates': [x for x in d['consensus'] if x['consensus_cross_band_candidate']],
             'manifest_sha256': d['manifest_sha256'],
+            'protocol_sha256': d['protocol_sha256'],
             'receipt_sha256': hashlib.sha256(p.read_bytes()).hexdigest(),
             'claim_ceiling': d['claim_ceiling'],
           }
@@ -158,6 +164,7 @@ jobs:
           mkdir -p data/runtime/expanded_morphology
           cp results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json data/runtime/expanded_morphology/latest.json
           cp results/expanded_morphology/janus-cosmos-expanded-morphology-ci-receipt.json "data/runtime/expanded_morphology/run-${RUN_ID}.json"
+          cp results/expanded_morphology/janus-cosmos-repo-derived-protocol.json data/runtime/expanded_morphology/protocol-${RUN_ID}.json
           cp data/hst_expanded_live_manifest.json "data/runtime/expanded_morphology/manifest-${RUN_ID}.json"
           git config user.name 'janus-cosmos[bot]'
           git config user.email 'janus-cosmos[bot]@users.noreply.github.com'
