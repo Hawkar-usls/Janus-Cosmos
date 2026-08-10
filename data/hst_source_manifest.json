@@ -1,0 +1,16 @@
+{
+  "schema": "janus.cosmos.hst_source_manifest.v0.1",
+  "status": "PILOT_MANIFEST",
+  "archive": "MAST/Hubble public archive",
+  "targets": [
+    {"name": "M51", "description": "Whirlpool galaxy; multi-filter HST imaging"},
+    {"name": "NGC 4038/4039", "description": "Antennae interacting galaxies; multi-filter HST imaging"},
+    {"name": "M87", "description": "Elliptical galaxy with a prominent HST-observed jet"}
+  ],
+  "provenance_required": ["archive_identifier", "instrument", "filter", "observation_date", "source_identifier"],
+  "semantic_analysis": false,
+  "face_search": false,
+  "ocr": false,
+  "cipher_search": false,
+  "selection_policy": "Targets are a public, source-confirmed pilot corpus; they are not treated as discoveries."
+}
