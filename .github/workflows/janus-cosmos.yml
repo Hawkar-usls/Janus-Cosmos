@@ -21,6 +21,7 @@ jobs:
         run: |
           python experiments/hst/run_real_pilot.py > janus-cosmos-real-hst-run.log
           test -s janus-cosmos-real-hst-receipt.json
+          test -s janus-cosmos-events.jsonl
           cat janus-cosmos-real-hst-run.log
           echo '--- RECEIPT ---'
           cat janus-cosmos-real-hst-receipt.json
@@ -38,14 +39,58 @@ jobs:
           assert r['blind_gate']['cipher_search'] is False
           assert r['blind_gate']['nulls'] == 256
           assert len(r['source_products']) == 3
+          events=[json.loads(x) for x in Path('janus-cosmos-events.jsonl').read_text().splitlines()]
+          assert events and events[0]['event'] == 'run_started'
+          assert events[-1]['event'] == 'run_completed'
           print('JANUS COSMOS REAL HST PILOT PASS')
           print('cross_band_candidate =', r['cross_band_candidate'])
           print('passing_filters =', r['passing_filters'])
+          print('event_count =', len(events))
           PY
-      - name: Upload real HST receipt and run log
+      - name: Build machine-readable execution record
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          SHA: ${{ github.sha }}
+          REF: ${{ github.ref_name }}
+          SERVER_URL: ${{ github.server_url }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          receipt=Path('janus-cosmos-real-hst-receipt.json')
+          events=Path('janus-cosmos-events.jsonl')
+          r=json.loads(receipt.read_text())
+          execution={
+            'schema':'janus.cosmos.execution.v0.1',
+            'status':'SUCCEEDED',
+            'repository':os.environ['REPOSITORY'],
+            'commit':os.environ['SHA'],
+            'ref':os.environ['REF'],
+            'run_id':int(os.environ['RUN_ID']),
+            'run_attempt':int(os.environ['RUN_ATTEMPT']),
+            'run_url':f"{os.environ['SERVER_URL']}/{os.environ['REPOSITORY']}/actions/runs/{os.environ['RUN_ID']}",
+            'receipt_sha256':hashlib.sha256(receipt.read_bytes()).hexdigest(),
+            'event_log_sha256':hashlib.sha256(events.read_bytes()).hexdigest(),
+            'receipt_schema':r['schema'],
+            'target':r['target'],
+            'target_class':r['target_class'],
+            'cross_band_candidate':r['cross_band_candidate'],
+            'passing_filters':r['passing_filters'],
+            'filters':r['filters'],
+            'astronomical_discovery':r['astronomical_discovery'],
+            'blind_gate':r['blind_gate'],
+            'claim_ceiling':r['claim_ceiling']
+          }
+          Path('janus-cosmos-execution.json').write_text(json.dumps(execution, indent=2, sort_keys=True))
+          PY
+      - name: Upload machine-readable Cosmos evidence
         uses: actions/upload-artifact@v4
         with:
           name: janus-cosmos-real-hst-receipt
           path: |
             janus-cosmos-real-hst-receipt.json
+            janus-cosmos-events.jsonl
+            janus-cosmos-execution.json
             janus-cosmos-real-hst-run.log
