@@ -1,5 +1,5 @@
 {
-  "schema": "janus.cosmos.blind_geometric_gate_config.v1",
+  "schema": "janus.cosmos.blind_geometric_gate_config.v2",
   "enabled": true,
   "semantic_analysis": false,
   "ocr": false,
@@ -11,6 +11,8 @@
   "spatial_nulls": 256,
   "null_strategy": "spatial_permutation",
   "cross_filter_required": true,
+  "anomaly_target_manifest": "experiments/hst/geometric_anomaly_targets.json",
+  "target_classes_are_nonsemantic": true,
   "discovery_claim_requires_blind_replication": true,
-  "claim_ceiling": "Image-level geometric candidate only; no astronomical discovery claim without independent blind replication."
+  "claim_ceiling": "Image-level geometric candidate only; unusual geometry is not evidence of intelligence, artificiality, messaging, or physical impossibility without independent astronomical replication."
 }
