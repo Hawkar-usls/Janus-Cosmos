@@ -1,0 +1,34 @@
+name: Janus Cosmos FractalGPT
+
+on:
+  push:
+    paths:
+      - 'experiments/**'
+      - 'data/**'
+      - 'schemas/**'
+      - '.github/workflows/janus-cosmos.yml'
+  workflow_dispatch:
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run blind FractalGPT preflight
+        run: python experiments/fractalgpt/run_search.py data/preflight_features.csv | tee janus-cosmos-receipt.json
+      - name: Validate claim boundary
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('janus-cosmos-receipt.json'))
+          assert r['astronomical_discovery'] is False
+          assert r['semantic_analysis'] is False
+          assert r['nulls'] == 256
+          assert r['scales'] == [8,16,32]
+          print('JANUS COSMOS PREFLIGHT PASS')
+          PY
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-cosmos-receipt
+          path: janus-cosmos-receipt.json
