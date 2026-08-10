@@ -1,6 +1,13 @@
 name: Janus Cosmos Expanded Morphology Blind Test
 
 on:
+  push:
+    paths:
+      - 'experiments/hst/discover_mast_galaxy_products.py'
+      - 'experiments/hst/run_expanded_morphology.py'
+      - '.github/workflows/expanded-morphology.yml'
+      - 'data/hst_blind_corpus.json'
+      - 'data/hst_expanded_live_manifest.json'
   workflow_dispatch:
     inputs:
       nulls:
@@ -39,27 +46,39 @@ jobs:
 
       - name: Discover live MAST products
         env:
-          TARGET_LIMIT: ${{ inputs.target_limit }}
+          TARGET_LIMIT: ${{ inputs.target_limit || '22' }}
         run: |
+          python experiments/hst/discover_mast_galaxy_products.py \
+            --out data/hst_expanded_live_manifest.json \
+            --targets $(python - <<'PY'
+          import json
+          d = json.load(open('experiments/hst/discover_mast_galaxy_products.py')) if False else None
+          from pathlib import Path
+          text = Path('experiments/hst/discover_mast_galaxy_products.py').read_text()
+          import ast
+          tree = ast.parse(text)
+          names = []
+          for n in ast.walk(tree):
+              if isinstance(n, ast.Assign):
+                  for t in n.targets:
+                      if isinstance(t, ast.Name) and t.id == 'DEFAULT_TARGETS':
+                          names = [e.value for e in n.value.elts]
+          print(' '.join(names[:int(__import__('os').environ['TARGET_LIMIT'])]))
+          PY
+          )
           python - <<'PY'
           import json
-          from pathlib import Path
-          from experiments.hst import discover_mast_galaxy_products as d
-          targets = d.DEFAULT_TARGETS[:int(__import__('os').environ['TARGET_LIMIT'])]
-          import sys
-          sys.argv = ['discover', '--out', 'data/hst_expanded_live_manifest.json', '--targets', *targets]
-          d.main()
-          data = json.loads(Path('data/hst_expanded_live_manifest.json').read_text())
-          assert data['selected_targets'] >= 2
+          d = json.load(open('data/hst_expanded_live_manifest.json'))
+          assert d['selected_targets'] >= 2
           print('LIVE MAST DISCOVERY PASS')
-          print('selected_targets =', data['selected_targets'])
-          print('selected_products =', data['selected_products'])
+          print('selected_targets =', d['selected_targets'])
+          print('selected_products =', d['selected_products'])
           PY
 
       - name: Run expanded morphology test
         env:
-          NULLS: ${{ inputs.nulls }}
-          SEEDS: ${{ inputs.seeds }}
+          NULLS: ${{ inputs.nulls || '2048' }}
+          SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
         run: |
           python experiments/hst/run_expanded_morphology.py \
             --manifest data/hst_expanded_live_manifest.json \
@@ -78,11 +97,8 @@ jobs:
           assert d['target_count'] >= 2
           assert d['nulls_per_null_model'] >= 2048
           assert len(d['seeds']) >= 3
-          assert d['blind_gate']['semantic_analysis'] is False
-          assert d['blind_gate']['ocr'] is False
-          assert d['blind_gate']['face_search'] is False
-          assert d['blind_gate']['cipher_search'] is False
-          assert d['blind_gate']['post_hoc_tuning'] is False
+          for k in ('semantic_analysis', 'ocr', 'face_search', 'cipher_search', 'post_hoc_tuning'):
+              assert d['blind_gate'][k] is False
           print('JANUS COSMOS EXPANDED MORPHOLOGY PASS')
           print('target_count =', d['target_count'])
           print('consensus_candidate_count =', d['consensus_candidate_count'])
@@ -97,8 +113,8 @@ jobs:
           RUN_ATTEMPT: ${{ github.run_attempt }}
           SHA: ${{ github.sha }}
           SERVER_URL: ${{ github.server_url }}
-          NULLS: ${{ inputs.nulls }}
-          SEEDS: ${{ inputs.seeds }}
+          NULLS: ${{ inputs.nulls || '2048' }}
+          SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
         run: |
           python - <<'PY'
           import hashlib, json, os
