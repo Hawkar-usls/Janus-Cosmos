@@ -18,12 +18,18 @@ jobs:
       - name: Install image-analysis dependencies
         run: python -m pip install --disable-pip-version-check numpy scipy astropy
       - name: Run real HST image-level FractalGPT pilot
-        run: python experiments/hst/run_real_pilot.py | tee janus-cosmos-real-hst-receipt.json
+        run: |
+          python experiments/hst/run_real_pilot.py > janus-cosmos-real-hst-run.log
+          test -s janus-cosmos-real-hst-receipt.json
+          cat janus-cosmos-real-hst-run.log
+          echo '--- RECEIPT ---'
+          cat janus-cosmos-real-hst-receipt.json
       - name: Validate claim boundary
         run: |
           python - <<'PY'
           import json
-          r=json.load(open('janus-cosmos-real-hst-receipt.json'))
+          from pathlib import Path
+          r=json.loads(Path('janus-cosmos-real-hst-receipt.json').read_text())
           assert r['status'] == 'REAL_HST_IMAGE_PILOT'
           assert r['astronomical_discovery'] is False
           assert r['blind_gate']['semantic_analysis'] is False
@@ -36,8 +42,10 @@ jobs:
           print('cross_band_candidate =', r['cross_band_candidate'])
           print('passing_filters =', r['passing_filters'])
           PY
-      - name: Upload real HST receipt
+      - name: Upload real HST receipt and run log
         uses: actions/upload-artifact@v4
         with:
           name: janus-cosmos-real-hst-receipt
-          path: janus-cosmos-real-hst-receipt.json
+          path: |
+            janus-cosmos-real-hst-receipt.json
+            janus-cosmos-real-hst-run.log
