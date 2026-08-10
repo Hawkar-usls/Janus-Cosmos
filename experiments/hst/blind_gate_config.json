@@ -1,0 +1,16 @@
+{
+  "schema": "janus.cosmos.blind_geometric_gate_config.v1",
+  "enabled": true,
+  "semantic_analysis": false,
+  "ocr": false,
+  "face_search": false,
+  "cipher_search": false,
+  "post_hoc_tuning": false,
+  "multiscale_scales": [1.0, 2.0, 4.0],
+  "orientations_deg": [0, 30, 60, 90, 120, 150],
+  "spatial_nulls": 256,
+  "null_strategy": "spatial_permutation",
+  "cross_filter_required": true,
+  "discovery_claim_requires_blind_replication": true,
+  "claim_ceiling": "Image-level geometric candidate only; no astronomical discovery claim without independent blind replication."
+}
