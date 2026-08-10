@@ -25,6 +25,12 @@ DEFAULT_TARGETS = [
 ]
 DISCOVERY_RETRIES = 3
 DISCOVERY_BACKOFF_SECONDS = 3.0
+MAST_TIMEOUT_SECONDS = 120
+
+try:
+    Observations.TIMEOUT = MAST_TIMEOUT_SECONDS
+except Exception:
+    pass
 
 
 def safe(v):
@@ -137,6 +143,7 @@ def main():
         "selected_products": sum(len(t["filters"]) for t in targets),
         "filters": list(FILTERS),
         "discovery_retries": DISCOVERY_RETRIES,
+        "mast_timeout_seconds": MAST_TIMEOUT_SECONDS,
         "query_error_count": len(query_errors),
         "target_status": target_status,
         "blind_restrictions": {"ocr": False, "face_search": False, "semantic_analysis": False, "cipher_search": False, "post_hoc_tuning": False},
