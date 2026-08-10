@@ -117,12 +117,13 @@ jobs:
         env:
           JANUS_META_REGISTRY_TOKEN: ${{ secrets.JANUS_META_REGISTRY_TOKEN }}
           RUN_ID: ${{ github.run_id }}
+          GH_TOKEN: ${{ secrets.JANUS_META_REGISTRY_TOKEN }}
         run: |
           if [ -z "${JANUS_META_REGISTRY_TOKEN:-}" ]; then
             echo 'JANUS_META_REGISTRY_TOKEN is not configured; receipt remains available as a CI artifact.'
             exit 0
           fi
-          git clone --depth 1 "https://x-access-token:${JANUS_META_REGISTRY_TOKEN}@github.com/Hawkar-usls/janus-meta-registry.git" meta-registry
+          gh repo clone Hawkar-usls/janus-meta-registry meta-registry -- --depth 1
           mkdir -p meta-registry/data/cosmos
           cp janus-cosmos-blind-ci-receipt.json "meta-registry/data/cosmos/JANUS-COSMOS-BLIND-GEOMETRIC-CORPUS-RUN-${RUN_ID}.json"
           cd meta-registry
