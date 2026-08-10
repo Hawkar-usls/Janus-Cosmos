@@ -4,9 +4,7 @@ import argparse
 import hashlib
 import json
 import math
-import random
 import tempfile
-import time
 from pathlib import Path
 
 import numpy as np
@@ -34,29 +32,29 @@ def quantile_remap(source: np.ndarray, reference: np.ndarray) -> np.ndarray:
 
 
 def morphology_preserving_surrogate(image: np.ndarray, rng: np.random.Generator) -> np.ndarray:
-    """Preserve intensity distribution and most 2-D power spectrum.
+    """Preserve marginal intensity and the Fourier power envelope.
 
-    Low spatial frequencies keep their original phase to retain large-scale morphology;
-    higher frequencies get randomized phase. A final rank remap restores the exact
-    empirical intensity distribution. This is a null, not a physical galaxy model.
+    The low spatial frequencies retain their original phase so the broad morphology
+    remains represented; higher frequencies receive randomized phase. rfft2/irfft2
+    preserves the real-valued conjugate symmetry exactly. Rank remapping restores the
+    empirical intensity distribution. This is a statistical null, not a physical model.
     """
     h, w = image.shape
-    fy = np.fft.fftfreq(h)
-    fx = np.fft.fftfreq(w)
-    yy, xx = np.meshgrid(fy, fx, indexing="ij")
-    radius = np.sqrt(xx * xx + yy * yy)
+    fy = np.fft.fftfreq(h)[:, None]
+    fx = np.fft.rfftfreq(w)[None, :]
+    radius = np.sqrt(fy * fy + fx * fx)
     cutoff = np.quantile(radius, LOW_FREQ_FRACTION)
 
-    F = np.fft.fft2(image)
+    F = np.fft.rfft2(image)
     amplitude = np.abs(F)
     phase = np.angle(F)
     random_phase = rng.uniform(-np.pi, np.pi, size=phase.shape)
-    # Blend original phase at low frequency into randomized phase.
+
     alpha = np.clip((radius - cutoff) / max(cutoff, 1e-9), 0.0, 1.0)
     alpha = alpha ** PHASE_STRENGTH
     new_phase = phase * (1.0 - alpha) + random_phase * alpha
     new_phase[0, 0] = phase[0, 0]
-    out = np.fft.ifft2(amplitude * np.exp(1j * new_phase)).real.astype(np.float32)
+    out = np.fft.irfft2(amplitude * np.exp(1j * new_phase), s=image.shape).astype(np.float32)
     return quantile_remap(out, image)
 
 
@@ -108,22 +106,23 @@ def smooth_residual_delta(a: np.ndarray, b: np.ndarray) -> float:
 
 def empirical_result(observed: float, null_scores: list[float]) -> dict:
     ge = sum(v >= observed for v in null_scores)
+    p = (ge + 1) / (len(null_scores) + 1)
     return {
         "observed_score": float(observed),
         "null_min": float(np.min(null_scores)),
         "null_median": float(np.median(null_scores)),
         "null_max": float(np.max(null_scores)),
         "ge_count": int(ge),
-        "p_empirical": float((ge + 1) / (len(null_scores) + 1)),
-        "candidate": bool((ge + 1) / (len(null_scores) + 1) < 0.05),
+        "p_empirical": float(p),
+        "candidate": bool(p < 0.05),
     }
 
 
 def analyze_filter(image: np.ndarray, rng: np.random.Generator, target: str, filter_name: str) -> dict:
     observed = base.score(image)
-    permutation = []
-    morphology = []
-    blocks = []
+    permutation: list[float] = []
+    morphology: list[float] = []
+    blocks: list[float] = []
     diagnostics = []
     for i in range(NULLS):
         p = image.ravel().copy()
@@ -141,15 +140,18 @@ def analyze_filter(image: np.ndarray, rng: np.random.Generator, target: str, fil
                 "morphology_local_corr_delta": local_corr_delta(image, m),
                 "morphology_smooth_residual_delta": smooth_residual_delta(image, m),
             })
+
+    legacy = empirical_result(observed, permutation)
+    morph = empirical_result(observed, morphology)
+    block = empirical_result(observed, blocks)
+    robust = bool(morph["candidate"] and block["candidate"])
     result = {
-        "legacy_pixel_permutation": empirical_result(observed, permutation),
-        "morphology_preserving_phase": empirical_result(observed, morphology),
-        "local_block_shuffle": empirical_result(observed, blocks),
+        "legacy_pixel_permutation": legacy,
+        "morphology_preserving_phase": morph,
+        "local_block_shuffle": block,
         "morphology_preserving_diagnostics": diagnostics,
-        "robust_candidate": bool(
-            empirical_result(observed, morphology)["candidate"]
-            and empirical_result(observed, blocks)["candidate"]
-        ),
+        "robust_candidate": robust,
+        "robust_rule": "phase_preserving_null AND local_block_shuffle both p<0.05",
     }
     base.emit("morphology_filter_analyzed", target=target, filter=filter_name, **result)
     return result
@@ -177,6 +179,7 @@ def main() -> None:
         nulls=NULLS,
         block_size=BLOCK,
         low_freq_fraction=LOW_FREQ_FRACTION,
+        phase_strength=PHASE_STRENGTH,
         semantic_analysis=False,
         ocr=False,
         face_search=False,
@@ -198,23 +201,30 @@ def main() -> None:
             t["robust_passing_filters"] = robust
             t["robust_cross_band_candidate"] = len(robust) >= 2
             targets.append(t)
-            base.emit(
-                "target_completed",
-                target=target["target"],
-                robust_passing_filters=robust,
-                robust_cross_band_candidate=t["robust_cross_band_candidate"],
-            )
+            base.emit("target_completed", target=target["target"], robust_passing_filters=robust, robust_cross_band_candidate=t["robust_cross_band_candidate"])
 
     receipt = {
-        "schema": "janus.cosmos.hst.morphology_null_receipt.v0.1",
+        "schema": "janus.cosmos.hst.morphology_null_receipt.v0.2",
         "status": "MORPHOLOGY_PRESERVING_NULL_PILOT",
         "backend": args.backend,
         "source": manifest["source_archive"],
         "selection": manifest["selection"],
         "null_models": {
-            "legacy_pixel_permutation": {"preserves": ["marginal_intensity"], "destroys": ["local_correlation", "power_spectrum", "large_scale_morphology"]},
-            "morphology_preserving_phase": {"preserves": ["marginal_intensity", "approx_power_spectrum", "low_frequency_phase"], "controls": ["local_correlation", "large_scale_smooth_morphology"]},
-            "local_block_shuffle": {"block_size": BLOCK, "preserves": ["within_block_local_correlation", "marginal_intensity"], "destroys": ["global_layout"]},
+            "legacy_pixel_permutation": {
+                "preserves": ["marginal_intensity"],
+                "destroys": ["local_correlation", "power_spectrum", "large_scale_morphology"],
+            },
+            "morphology_preserving_phase": {
+                "preserves": ["marginal_intensity", "Fourier_power_envelope", "low_frequency_phase"],
+                "controls": ["local_correlation", "large_scale_smooth_morphology"],
+                "low_freq_fraction": LOW_FREQ_FRACTION,
+                "phase_strength": PHASE_STRENGTH,
+            },
+            "local_block_shuffle": {
+                "block_size": BLOCK,
+                "preserves": ["within_block_local_correlation", "marginal_intensity"],
+                "destroys": ["global_layout"],
+            },
         },
         "targets": targets,
         "robust_candidate_count": sum(1 for t in targets if t["robust_cross_band_candidate"]),
