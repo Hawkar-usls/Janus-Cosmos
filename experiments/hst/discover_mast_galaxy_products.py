@@ -3,6 +3,8 @@
 
 Discovery only: no OCR, face, semantic, cipher, or candidate scoring.
 Selects one reproducible HST IMAGE FITS product per target/filter when available.
+Transient MAST failures are recorded per target and retried instead of aborting
+an entire corpus discovery run.
 """
 from __future__ import annotations
 
@@ -10,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+import time
 from pathlib import Path
 
 from astroquery.mast import Observations
@@ -20,6 +23,8 @@ DEFAULT_TARGETS = [
     "M51", "M81", "M82", "NGC253", "NGC4258", "NGC4565", "NGC5194", "NGC5195",
     "NGC2403", "NGC6946", "NGC5457", "NGC3351", "NGC3621", "NGC6744", "NGC7793",
 ]
+DISCOVERY_RETRIES = 3
+DISCOVERY_BACKOFF_SECONDS = 3.0
 
 
 def safe(v):
@@ -43,42 +48,55 @@ def product_score(row):
 
 
 def discover(target: str):
-    obs = Observations.query_object(target, radius="0.05 deg", obs_collection="HST", dataproduct_type="IMAGE")
-    if len(obs) == 0:
-        return []
-    products = Observations.get_unique_product_list(obs)
-    rows = []
-    for filt in FILTERS:
-        candidates = []
-        for row in products:
-            filters = safe(row["filters"])
-            filename = safe(row["productFilename"])
-            if filt not in filters.split(";") and filt not in filters.split(",") and filt not in filters:
-                continue
-            if not re.search(r"\.fits(?:\.gz)?$", filename, re.I):
-                continue
-            if safe(row["dataproduct_type"]).lower() not in ("image", ""):
-                continue
-            candidates.append(row)
-        if not candidates:
-            rows.append({"target": target, "filter": filt, "discovery_status": "NOT_FOUND"})
-            continue
-        row = max(candidates, key=product_score)
-        rows.append({
-            "target": target,
-            "filter": filt,
-            "band": {"F435W": "B", "F555W": "V", "F814W": "I"}[filt],
-            "discovery_status": "FOUND",
-            "dataURI": safe(row["dataURI"]),
-            "obs_collection": safe(row["obs_collection"]),
-            "obs_id": safe(row["obs_id"]),
-            "obsid": safe(row["obsid"]),
-            "productFilename": safe(row["productFilename"]),
-            "productType": safe(row["productType"]),
-            "productGroupDescription": safe(row["productGroupDescription"]),
-            "size": int(row["size"]) if safe(row["size"]).isdigit() else None,
-        })
-    return rows
+    last_error = None
+    for attempt in range(1, DISCOVERY_RETRIES + 1):
+        try:
+            obs = Observations.query_object(target, radius="0.05 deg", obs_collection="HST", dataproduct_type="IMAGE")
+            if len(obs) == 0:
+                return [], {"target": target, "status": "NO_OBSERVATIONS", "attempts": attempt}
+            products = Observations.get_unique_product_list(obs)
+            rows = []
+            for filt in FILTERS:
+                candidates = []
+                for row in products:
+                    filters = safe(row["filters"])
+                    filename = safe(row["productFilename"])
+                    if filt not in filters.split(";") and filt not in filters.split(",") and filt not in filters:
+                        continue
+                    if not re.search(r"\.fits(?:\.gz)?$", filename, re.I):
+                        continue
+                    if safe(row["dataproduct_type"]).lower() not in ("image", ""):
+                        continue
+                    candidates.append(row)
+                if not candidates:
+                    rows.append({"target": target, "filter": filt, "discovery_status": "NOT_FOUND"})
+                    continue
+                row = max(candidates, key=product_score)
+                rows.append({
+                    "target": target,
+                    "filter": filt,
+                    "band": {"F435W": "B", "F555W": "V", "F814W": "I"}[filt],
+                    "discovery_status": "FOUND",
+                    "dataURI": safe(row["dataURI"]),
+                    "obs_collection": safe(row["obs_collection"]),
+                    "obs_id": safe(row["obs_id"]),
+                    "obsid": safe(row["obsid"]),
+                    "productFilename": safe(row["productFilename"]),
+                    "productType": safe(row["productType"]),
+                    "productGroupDescription": safe(row["productGroupDescription"]),
+                    "size": int(row["size"]) if safe(row["size"]).isdigit() else None,
+                })
+            return rows, {"target": target, "status": "OK", "attempts": attempt}
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            if attempt < DISCOVERY_RETRIES:
+                time.sleep(DISCOVERY_BACKOFF_SECONDS * attempt)
+    return [], {
+        "target": target,
+        "status": "MAST_QUERY_ERROR",
+        "attempts": DISCOVERY_RETRIES,
+        "error": last_error,
+    }
 
 
 def main():
@@ -88,8 +106,12 @@ def main():
     args = ap.parse_args()
 
     products = []
+    target_status = []
     for target in sorted(dict.fromkeys(args.targets)):
-        products.extend(discover(target))
+        rows, status = discover(target)
+        products.extend(rows)
+        target_status.append(status)
+        print(json.dumps(status, sort_keys=True), flush=True)
 
     targets = []
     for target in sorted(dict.fromkeys(args.targets)):
@@ -104,8 +126,9 @@ def main():
                 ], key=lambda x: x["filter"]),
             })
 
+    query_errors = [x for x in target_status if x["status"] == "MAST_QUERY_ERROR"]
     receipt = {
-        "schema": "janus.cosmos.hst.live_mast_manifest.v0.2",
+        "schema": "janus.cosmos.hst.live_mast_manifest.v0.3",
         "status": "LIVE_MAST_DISCOVERY",
         "source": "MAST / STScI",
         "selection": "Deterministic per-target/filter HST IMAGE FITS selection from live MAST products; targets with fewer than two requested filters are excluded from scoring.",
@@ -113,6 +136,9 @@ def main():
         "selected_targets": len(targets),
         "selected_products": sum(len(t["filters"]) for t in targets),
         "filters": list(FILTERS),
+        "discovery_retries": DISCOVERY_RETRIES,
+        "query_error_count": len(query_errors),
+        "target_status": target_status,
         "blind_restrictions": {"ocr": False, "face_search": False, "semantic_analysis": False, "cipher_search": False, "post_hoc_tuning": False},
         "targets": targets,
         "discovery_log": products,
@@ -121,7 +147,7 @@ def main():
     receipt["manifest_sha256"] = hashlib.sha256(raw).hexdigest()
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({"selected_targets": len(targets), "selected_products": receipt["selected_products"], "manifest_sha256": receipt["manifest_sha256"]}, indent=2))
+    print(json.dumps({"selected_targets": len(targets), "selected_products": receipt["selected_products"], "query_error_count": len(query_errors), "manifest_sha256": receipt["manifest_sha256"]}, indent=2), flush=True)
 
 
 if __name__ == "__main__":
