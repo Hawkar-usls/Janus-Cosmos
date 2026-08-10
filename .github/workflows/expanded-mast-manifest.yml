@@ -1,0 +1,59 @@
+name: Janus Cosmos Expanded MAST Manifest
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_count:
+        description: 'Number of galaxy targets to prepare'
+        required: false
+        default: '100'
+        type: string
+  push:
+    paths:
+      - 'data/hst_expanded_corpus_plan.json'
+      - 'experiments/hst/build_expanded_mast_manifest.py'
+      - '.github/workflows/expanded-mast-manifest.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build deterministic manifest
+        env:
+          JANUS_TARGET_N: ${{ inputs.target_count || '100' }}
+        run: python experiments/hst/build_expanded_mast_manifest.py
+      - name: Validate manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('janus-cosmos-expanded-mast-manifest.json')
+          d = json.loads(p.read_text())
+          assert d['blind_gate']['ocr'] is False
+          assert d['blind_gate']['face_search'] is False
+          assert d['blind_gate']['semantic_analysis'] is False
+          assert d['blind_gate']['cipher_search'] is False
+          assert d['product_count'] == d['target_count'] * len(d['filters'])
+          print('JANUS COSMOS EXPANDED MANIFEST PASS')
+          print('targets =', d['target_count'])
+          print('products =', d['product_count'])
+          PY
+      - name: Publish manifest receipt
+        run: |
+          mkdir -p data/runtime/expanded_corpus
+          cp janus-cosmos-expanded-mast-manifest.json data/runtime/expanded_corpus/latest-manifest.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/runtime/expanded_corpus/latest-manifest.json
+          git diff --cached --quiet || git commit -m 'Publish expanded MAST corpus manifest'
+          git push
+      - name: Upload manifest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-cosmos-expanded-mast-manifest
+          path: janus-cosmos-expanded-mast-manifest.json
