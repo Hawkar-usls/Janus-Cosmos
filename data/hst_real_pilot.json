@@ -1,5 +1,5 @@
 {
-  "schema": "janus.cosmos.hst.real_pilot.v0.2",
+  "schema": "janus.cosmos.hst.real_pilot.v0.3",
   "status": "FROZEN_SOURCE_MANIFEST",
   "source_archive": "MAST / STScI Hubble archive",
   "source_page": "https://archive.stsci.edu/prepds/m51/datalist.html",
@@ -9,10 +9,11 @@
   "proposal": "10452",
   "product_class": "public HLSP low-resolution quick-look FITS",
   "scientific_caveat": "The archive explicitly labels the s20 products as low-resolution quick-look/educational products and not intended for scientific analysis. They are used here only to validate the end-to-end image-level pipeline before higher-fidelity HST products are ingested.",
+  "download_endpoint": "https://archive.stsci.edu/pub/hlsp/m51/version1/",
   "filters": [
-    {"filter": "F435W", "band": "B", "url": "https://archive.stsci.edu/prepds/m51/version1/h_m51_b_s20_drz_sci.fits"},
-    {"filter": "F555W", "band": "V", "url": "https://archive.stsci.edu/prepds/m51/version1/h_m51_v_s20_drz_sci.fits"},
-    {"filter": "F814W", "band": "I", "url": "https://archive.stsci.edu/prepds/m51/version1/h_m51_i_s20_drz_sci.fits"}
+    {"filter": "F435W", "band": "B", "url": "https://archive.stsci.edu/pub/hlsp/m51/version1/h_m51_b_s20_drz_sci.fits"},
+    {"filter": "F555W", "band": "V", "url": "https://archive.stsci.edu/pub/hlsp/m51/version1/h_m51_v_s20_drz_sci.fits"},
+    {"filter": "F814W", "band": "I", "url": "https://archive.stsci.edu/pub/hlsp/m51/version1/h_m51_i_s20_drz_sci.fits"}
   ],
   "blind_gate": {
     "semantic_analysis": false,
