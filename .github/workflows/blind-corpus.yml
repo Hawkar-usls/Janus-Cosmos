@@ -1,0 +1,43 @@
+name: janus-cosmos-blind-corpus
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  blind-corpus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image-analysis dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy astropy
+      - name: Run fixed blind HST corpus
+        run: python experiments/hst/run_blind_corpus.py > janus-cosmos-blind-run.log
+      - name: Validate machine-readable receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('janus-cosmos-blind-corpus-receipt.json')
+          d=json.loads(p.read_text())
+          assert d['status']=='BLIND_GEOMETRIC_CORPUS_PILOT'
+          assert d['blind_gate']['semantic_analysis'] is False
+          assert d['blind_gate']['ocr'] is False
+          assert d['blind_gate']['face_search'] is False
+          assert d['blind_gate']['cipher_search'] is False
+          assert d['blind_gate']['post_hoc_tuning'] is False
+          print('JANUS COSMOS BLIND CORPUS PASS')
+          print('candidate_count =', d['candidate_count'])
+          PY
+      - name: Upload machine-readable receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-cosmos-blind-corpus
+          path: |
+            janus-cosmos-blind-corpus-receipt.json
+            janus-cosmos-blind-events.jsonl
+            janus-cosmos-blind-run.log
