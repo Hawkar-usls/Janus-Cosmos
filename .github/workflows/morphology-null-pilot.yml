@@ -1,0 +1,124 @@
+name: Janus Cosmos Morphology-Preserving Null Pilot
+
+on:
+  push:
+    paths:
+      - 'experiments/hst/run_blind_corpus_morphology.py'
+      - 'experiments/hst/run_blind_corpus_variant.py'
+      - 'experiments/hst/run_blind_corpus.py'
+      - 'data/hst_blind_corpus.json'
+      - '.github/workflows/morphology-null-pilot.yml'
+  workflow_dispatch:
+    inputs:
+      backend:
+        description: 'Downloader backend'
+        required: true
+        type: choice
+        options: [direct, mast_api]
+        default: direct
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  morphology-null-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install scientific dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy astropy
+
+      - name: Run morphology-preserving null pilot
+        env:
+          BACKEND: ${{ inputs.backend || 'direct' }}
+        run: |
+          python experiments/hst/run_blind_corpus_morphology.py \
+            --backend "$BACKEND" \
+            --output-dir results/morphology
+
+      - name: Validate morphology receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('results/morphology/janus-cosmos-morphology-receipt.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          assert len(d['targets']) == 7
+          assert d['blind_gate']['semantic_analysis'] is False
+          assert d['blind_gate']['ocr'] is False
+          assert d['blind_gate']['face_search'] is False
+          assert d['blind_gate']['cipher_search'] is False
+          assert d['blind_gate']['post_hoc_tuning'] is False
+          assert set(d['null_models']) == {
+              'legacy_pixel_permutation',
+              'morphology_preserving_phase',
+              'local_block_shuffle',
+          }
+          print('JANUS COSMOS MORPHOLOGY NULL PILOT PASS')
+          print('robust_candidate_count =', d['robust_candidate_count'])
+          for t in d['targets']:
+              print(t['target'], 'robust_cross_band_candidate =', t['robust_cross_band_candidate'])
+          PY
+
+      - name: Create CI machine receipt
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          SHA: ${{ github.sha }}
+          BACKEND: ${{ inputs.backend || 'direct' }}
+          SERVER_URL: ${{ github.server_url }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          p = Path('results/morphology/janus-cosmos-morphology-receipt.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          ci = {
+              'schema': 'janus.cosmos.morphology_ci_receipt.v0.1',
+              'status': 'PASS',
+              'project': 'Janus Cosmos',
+              'experiment': 'morphology_preserving_null_pilot',
+              'repository': 'Hawkar-usls/Janus-Cosmos',
+              'run_id': int(os.environ['RUN_ID']),
+              'run_attempt': int(os.environ['RUN_ATTEMPT']),
+              'commit_sha': os.environ['SHA'],
+              'backend': os.environ['BACKEND'],
+              'run_url': f"{os.environ['SERVER_URL']}/Hawkar-usls/Janus-Cosmos/actions/runs/{os.environ['RUN_ID']}",
+              'result': {
+                  'robust_candidate_count': d['robust_candidate_count'],
+                  'target_count': len(d['targets']),
+                  'robust_cross_band_targets': [t['target'] for t in d['targets'] if t['robust_cross_band_candidate']],
+              },
+              'null_models': d['null_models'],
+              'claim_ceiling': d['claim_ceiling'],
+              'receipt_sha256': hashlib.sha256(p.read_bytes()).hexdigest(),
+              'event_log_sha256': d['event_log']['sha256'],
+          }
+          Path('results/morphology/janus-cosmos-morphology-ci-receipt.json').write_text(json.dumps(ci, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print(json.dumps(ci, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload machine-readable results
+        uses: actions/upload-artifact@v6
+        with:
+          name: janus-cosmos-morphology-null-receipt
+          path: results/morphology/
+
+      - name: Publish receipt to repository runtime
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          mkdir -p data/runtime/morphology_null
+          cp results/morphology/janus-cosmos-morphology-receipt.json data/runtime/morphology_null/latest.json
+          cp results/morphology/janus-cosmos-morphology-ci-receipt.json "data/runtime/morphology_null/run-${RUN_ID}.json"
+          git config user.name 'janus-cosmos[bot]'
+          git config user.email 'janus-cosmos[bot]@users.noreply.github.com'
+          git add data/runtime/morphology_null
+          git diff --cached --quiet && exit 0
+          git commit -m "Persist Janus Cosmos morphology null receipt ${RUN_ID}"
+          git push origin main
