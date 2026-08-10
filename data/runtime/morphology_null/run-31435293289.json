@@ -1,0 +1,58 @@
+{
+  "backend": "direct",
+  "claim_ceiling": "Image-level geometric robustness test only. No astronomical discovery claim without independent replication and scientific review.",
+  "commit_sha": "0d9cb70b6c54f48a487abff89fd521d26d201c64",
+  "event_log_sha256": "96629e86ea8aecd8441ce6bdbce1b9c961a5ae0ec486cc6e89b9b598e20876f9",
+  "experiment": "morphology_preserving_null_pilot",
+  "null_models": {
+    "legacy_pixel_permutation": {
+      "destroys": [
+        "local_correlation",
+        "power_spectrum",
+        "large_scale_morphology"
+      ],
+      "preserves": [
+        "marginal_intensity"
+      ]
+    },
+    "local_block_shuffle": {
+      "block_size": 16,
+      "destroys": [
+        "global_layout"
+      ],
+      "preserves": [
+        "within_block_local_correlation",
+        "marginal_intensity"
+      ]
+    },
+    "morphology_preserving_phase": {
+      "controls": [
+        "local_correlation",
+        "large_scale_smooth_morphology"
+      ],
+      "low_freq_fraction": 0.1,
+      "phase_strength": 1.0,
+      "preserves": [
+        "marginal_intensity",
+        "Fourier_power_envelope",
+        "low_frequency_phase"
+      ]
+    }
+  },
+  "project": "Janus Cosmos",
+  "receipt_sha256": "5da213faac2da3c52905d58485a798dac4649693e73a6672ed3d0ab1a67acd9c",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "result": {
+    "robust_candidate_count": 2,
+    "robust_cross_band_targets": [
+      "NGC1425",
+      "NGC1637"
+    ],
+    "target_count": 7
+  },
+  "run_attempt": 1,
+  "run_id": 31435293289,
+  "run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/31435293289",
+  "schema": "janus.cosmos.morphology_ci_receipt.v0.1",
+  "status": "PASS"
+}
