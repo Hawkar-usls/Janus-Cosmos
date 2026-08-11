@@ -37,6 +37,13 @@ def safe(v):
     return "" if v is None else str(v)
 
 
+def mast_query_name(target: str) -> str:
+    """Use catalogue-friendly spacing for NGC designations."""
+    if re.fullmatch(r"NGC\d+", target, flags=re.I):
+        return re.sub(r"^NGC", "NGC ", target, flags=re.I)
+    return target
+
+
 def product_score(row):
     filename = safe(row["productFilename"]).lower()
     desc = safe(row["description"]).lower()
@@ -54,12 +61,13 @@ def product_score(row):
 
 
 def discover(target: str):
+    query_name = mast_query_name(target)
     last_error = None
     for attempt in range(1, DISCOVERY_RETRIES + 1):
         try:
-            obs = Observations.query_object(target, radius="0.05 deg", obs_collection="HST", dataproduct_type="IMAGE")
+            obs = Observations.query_object(query_name, radius="0.05 deg", obs_collection="HST", dataproduct_type="IMAGE")
             if len(obs) == 0:
-                return [], {"target": target, "status": "NO_OBSERVATIONS", "attempts": attempt}
+                return [], {"target": target, "query_name": query_name, "status": "NO_OBSERVATIONS", "attempts": attempt}
             products = Observations.get_unique_product_list(obs)
             rows = []
             for filt in FILTERS:
@@ -80,6 +88,7 @@ def discover(target: str):
                 row = max(candidates, key=product_score)
                 rows.append({
                     "target": target,
+                    "query_name": query_name,
                     "filter": filt,
                     "band": {"F435W": "B", "F555W": "V", "F814W": "I"}[filt],
                     "discovery_status": "FOUND",
@@ -92,13 +101,14 @@ def discover(target: str):
                     "productGroupDescription": safe(row["productGroupDescription"]),
                     "size": int(row["size"]) if safe(row["size"]).isdigit() else None,
                 })
-            return rows, {"target": target, "status": "OK", "attempts": attempt}
+            return rows, {"target": target, "query_name": query_name, "status": "OK", "attempts": attempt}
         except Exception as exc:
             last_error = f"{type(exc).__name__}: {exc}"
             if attempt < DISCOVERY_RETRIES:
                 time.sleep(DISCOVERY_BACKOFF_SECONDS * attempt)
     return [], {
         "target": target,
+        "query_name": query_name,
         "status": "MAST_QUERY_ERROR",
         "attempts": DISCOVERY_RETRIES,
         "error": last_error,
@@ -134,7 +144,7 @@ def main():
 
     query_errors = [x for x in target_status if x["status"] == "MAST_QUERY_ERROR"]
     receipt = {
-        "schema": "janus.cosmos.hst.live_mast_manifest.v0.3",
+        "schema": "janus.cosmos.hst.live_mast_manifest.v0.4",
         "status": "LIVE_MAST_DISCOVERY",
         "source": "MAST / STScI",
         "selection": "Deterministic per-target/filter HST IMAGE FITS selection from live MAST products; targets with fewer than two requested filters are excluded from scoring.",
