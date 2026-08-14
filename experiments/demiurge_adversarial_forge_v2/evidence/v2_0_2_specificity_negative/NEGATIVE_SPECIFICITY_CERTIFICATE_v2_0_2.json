@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.negative_specificity_certificate.v1",
+  "version": "2.0.2",
+  "classification": "VALID_NEGATIVE_DETECTOR_SPECIFICITY",
+  "source_commit": "99b52b3ce3cd34fcdfa7c8815257fd7fa938799c",
+  "portable_detector_identity": {
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a"
+  },
+  "execution": {
+    "status": "PASS",
+    "smoke_only": false,
+    "errors": [],
+    "model_pairs_started": 84,
+    "model_pairs_completed": 84,
+    "first_event_utc": "2026-08-14T18:46:22Z",
+    "last_event_utc": "2026-08-14T19:04:15Z"
+  },
+  "scientific_gate": {
+    "specificity_gate": "FAIL",
+    "blind_field_count": 4,
+    "false_positive_fields_whole": 2,
+    "maximum_false_positive_fields_whole": 1,
+    "false_positive_fields_corridor": 4,
+    "maximum_false_positive_fields_corridor": 1,
+    "control_model_tests": 64,
+    "control_tests_at_minimum_resolvable_p": 57,
+    "minimum_resolvable_p": 0.0013003901170351106,
+    "orion_status": "DETECTOR_SPECIFICITY_BLOCKED",
+    "ngc1425_status": "DETECTOR_SPECIFICITY_BLOCKED",
+    "orion_candidate_admitted": false,
+    "ngc1425_candidate_admitted": false
+  },
+  "interpretation": {
+    "binding_result": "The frozen v2.0.2 detector rejected its synthetic nulls on ordinary blind sky too often to attribute either target response specifically to Orion or NGC1425.",
+    "forbidden_reinterpretations": [
+      "astronomical discovery",
+      "artificial structure",
+      "hidden message",
+      "censorship",
+      "new physics"
+    ],
+    "claim_ceiling": "Image-level sky-fixed morphology candidate only after specificity gate. No artificial-structure, hidden-message, censorship, or new-physics claim."
+  },
+  "artifact_sha256": {
+    "SUMMARY_v2.0.txt": "b24402a1dcfa658b115facd161a110561215ed1ccaa6059d52ad5255a886ce31",
+    "janus-cosmos-v2.0-events.jsonl": "084b708a8b1b629503a08d39b8901866ae9e6255c1219d7362f97ad4bb0bd531",
+    "janus-cosmos-v2.0-report.json": "874524540e1f6b200a7f6ea81a9f6b8fff6e3e318f7827be8ae5288046245497",
+    "ngc1425_f555w_preview.png": "8234d1dc31f7a3e928273a08b477168513125113e66519d321b7712a4999db81",
+    "ngc1425_f814w_preview.png": "a82115580e0d2c24099fd0638a59411feef5940c7bc6bc97ccf3156647920925",
+    "orion_2mass_j_preview.png": "796c549628c590203c4ce7e9206d618cc1ce7d73f83ccdfc340c229de3ecb68b",
+    "orion_2mass_k_preview.png": "9b17ef0f484e1ee9f77592be1015389af2537536d4dd4690ac58d219eea08e81",
+    "orion_dss2_blue_preview.png": "c1796a87043660fc37851baca0c2ec74249d70331fe290d1fa98afcc356e50f2",
+    "orion_dss2_red_preview.png": "8d67dccc2e3d1faae84eb83a2d3f2c28efb35d1254a58902ad9ccb7cf6777f89",
+    "terminal.log": "a7d2fa348062f87ae7bf6950f2a0cd821297bfb2dd49ffd53d5d030675c0cf1c"
+  }
+}

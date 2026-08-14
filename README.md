@@ -144,6 +144,35 @@ Windows entry point:
 experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_0.bat
 ```
 
+## Detector specificity repair v2.1
+
+The full v2.0.2 run is retained as a hash-bound
+`VALID_NEGATIVE_DETECTOR_SPECIFICITY` certificate: 57 of 64 blind-control
+model tests saturated the empirical p-value floor, so neither Orion nor
+NGC1425 was admitted.
+
+v2.1 keeps the v2.0.2 detector genome unchanged and freezes a new admission
+protocol around independent real observations:
+
+- 20 fresh deterministic DSS2/2MASS sky controls; the four already observed
+  v2.0.2 controls are excluded from admission;
+- 255 deterministic random-position/random-orientation corridors inside every
+  image;
+- target ranking against real controls, with ties conservatively blocking;
+- actual rank-standardized, PSF/resolution-matched cross-survey morphology;
+- 20 same-archive HST/WFPC2 SGAL controls;
+- mask-aware F555/F814 analysis on the precommitted WF3 chip and common positive
+  weight-map support instead of the mosaic silhouette.
+
+Synthetic surrogates remain diagnostics and effect-size calibration. A small
+synthetic p-value alone can no longer admit a candidate.
+
+Windows entry point:
+
+```text
+experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_1.bat
+```
+
 ## Tests and CI
 
 ```bash

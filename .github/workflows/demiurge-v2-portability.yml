@@ -1,4 +1,4 @@
-name: Demiurge v2 portable freeze
+name: Demiurge v2.1 portable specificity repair
 
 on:
   push:
@@ -60,11 +60,20 @@ jobs:
       - name: Offline scientific and portability self-test
         run: python self_test_v2_0.py
 
+      - name: v2.1 negative-certificate and specificity-protocol self-test
+        run: python self_test_v2_1.py
+
       - name: Re-forge and verify portable identity
         run: python demiurge_forge_v2.py --quiet --verify-expected
 
       - name: Verify runtime frozen detector
         run: python janus_cosmos_v2_0.py --self-test
+
+      - name: Verify v2.1 runtime protocol binding
+        run: python janus_cosmos_v2_1.py --self-test
+
+      - name: Verify frozen 168-product download plan
+        run: python download_sky_v2_1.py --dry-run
 
       - name: Emit machine-readable portability evidence
         shell: python
