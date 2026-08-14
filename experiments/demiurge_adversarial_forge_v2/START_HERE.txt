@@ -1,0 +1,19 @@
+JANUS COSMOS v2.0.2
+===================
+
+This patch replaces the failed v2.0.1 decimal-rounding workaround with a
+portable detector identity plus a separately hashed numerical evidence receipt.
+Windows/Python/NumPy/SciPy differences are allowed only inside the registered
+2e-6 synthetic-metric tolerance. Integrity checks remain fail-closed.
+
+1. Extract the ZIP into a NEW folder.
+2. Double-click: run_janus_cosmos_v2_0.bat
+3. Let the forge, downloads and powered sky run finish.
+4. Send back the entire results_v2_0 folder, especially:
+   - janus-cosmos-v2.0-report.json
+   - janus-cosmos-v2.0-events.jsonl
+   - terminal.log
+   - SUMMARY_v2.0.txt
+
+Do not edit FROZEN_DETECTOR_v2_0.json or EXPECTED_FORGE_v2_0.json between the
+forge and sky run. The runner verifies their hashes and fails closed on drift.

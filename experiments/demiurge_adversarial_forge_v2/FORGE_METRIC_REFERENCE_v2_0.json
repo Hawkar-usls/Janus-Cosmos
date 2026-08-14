@@ -1,0 +1,58 @@
+{
+  "schema": "janus.cosmos.forge_metric_reference.v2.0.2",
+  "purpose": "Portable numerical conformance envelope for the held-out synthetic forge. These values are not astronomical evidence.",
+  "contract": {
+    "schema": "janus.cosmos.metric_tolerance.v1",
+    "scope": "cross_platform_synthetic_validation_only",
+    "absolute_tolerance": 2e-06,
+    "relative_tolerance": 2e-06,
+    "scientific_gate_uses_raw_metrics": true
+  },
+  "sections": {
+    "train_metrics": {
+      "fitness": -0.6245798632162147,
+      "base_median": 0.9173450850896268,
+      "signal_absolute_median": 1.1541953941489642,
+      "artifact_absolute_median": 1.3128168876078297,
+      "paired_signal_median": 0.8502501995877494,
+      "paired_artifact_median": 1.2453632175190743,
+      "signal_to_artifact_ratio": 0.6827327061108794,
+      "pairwise_signal_beats_artifact_rate": 0.25,
+      "signal_recovery_at_base_p99": 0.2222222222222222,
+      "artifact_fp_rate_at_base_p99": 0.4722222222222222,
+      "base_p99_threshold": 1.538379163479023,
+      "seed_instability": 0.8585078462868011,
+      "complexity": 0.3484005045172709
+    },
+    "validation_metrics": {
+      "fitness": -1.379936912255823,
+      "base_median": 0.9007939939863363,
+      "signal_absolute_median": 1.1203801979636734,
+      "artifact_absolute_median": 1.49643350401087,
+      "paired_signal_median": 0.7207103305433733,
+      "paired_artifact_median": 1.6827560051652597,
+      "signal_to_artifact_ratio": 0.4282916408149106,
+      "pairwise_signal_beats_artifact_rate": 0.3333333333333333,
+      "signal_recovery_at_base_p99": 0.125,
+      "artifact_fp_rate_at_base_p99": 0.4583333333333333,
+      "base_p99_threshold": 1.6191250350302087,
+      "seed_instability": 0.9611014267182271,
+      "complexity": 0.3484005045172709
+    },
+    "canonical_validation_metrics": {
+      "fitness": -1.6961371988193459,
+      "base_median": 0.9205517223517964,
+      "signal_absolute_median": 1.1370967000671741,
+      "artifact_absolute_median": 1.4963494189813624,
+      "paired_signal_median": 0.6289362174488746,
+      "paired_artifact_median": 1.7914443027874847,
+      "signal_to_artifact_ratio": 0.3510777401620864,
+      "pairwise_signal_beats_artifact_rate": 0.2916666666666667,
+      "signal_recovery_at_base_p99": 0.0,
+      "artifact_fp_rate_at_base_p99": 0.5,
+      "base_p99_threshold": 1.6267940372675707,
+      "seed_instability": 0.948483334546218,
+      "complexity": 0.0
+    }
+  }
+}

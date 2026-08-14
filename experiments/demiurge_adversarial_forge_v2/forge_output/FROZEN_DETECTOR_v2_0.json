@@ -1,0 +1,117 @@
+{
+  "schema": "janus.cosmos.frozen_detector.v2.0",
+  "version": "2.0.2",
+  "status": "FROZEN",
+  "origin": "Demiurge-inspired adversarial detector forge",
+  "training_rank": 2,
+  "genome": {
+    "asinh_scale": 6.0,
+    "clip_high": 99.5,
+    "low_freq_frac": 0.1,
+    "block_size": 16,
+    "group_weights": {
+      "directional": 0.915278,
+      "rotation": 0.518538,
+      "anisotropy": 1.478561,
+      "high_frequency": 0.956171,
+      "component_count": 1.320692,
+      "largest_component": 0.596
+    }
+  },
+  "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+  "train_metrics": {
+    "fitness": -0.6245798632162097,
+    "base_median": 0.9173450850896265,
+    "signal_absolute_median": 1.154195394148964,
+    "artifact_absolute_median": 1.3128168876078314,
+    "paired_signal_median": 0.8502501995877503,
+    "paired_artifact_median": 1.2453632175190719,
+    "signal_to_artifact_ratio": 0.6827327061108815,
+    "pairwise_signal_beats_artifact_rate": 0.25,
+    "signal_recovery_at_base_p99": 0.2222222222222222,
+    "artifact_fp_rate_at_base_p99": 0.4722222222222222,
+    "base_p99_threshold": 1.5383791634790223,
+    "seed_instability": 0.8585078462868007,
+    "complexity": 0.3484005045172709
+  },
+  "validation_metrics": {
+    "fitness": -1.3799369122558218,
+    "base_median": 0.9007939939863359,
+    "signal_absolute_median": 1.1203801979636732,
+    "artifact_absolute_median": 1.49643350401087,
+    "paired_signal_median": 0.7207103305433735,
+    "paired_artifact_median": 1.6827560051652592,
+    "signal_to_artifact_ratio": 0.4282916408149109,
+    "pairwise_signal_beats_artifact_rate": 0.3333333333333333,
+    "signal_recovery_at_base_p99": 0.125,
+    "artifact_fp_rate_at_base_p99": 0.4583333333333333,
+    "base_p99_threshold": 1.6191250350302093,
+    "seed_instability": 0.961101426718227,
+    "complexity": 0.3484005045172709
+  },
+  "canonical_validation_metrics": {
+    "fitness": -1.6961371988193448,
+    "base_median": 0.9205517223517974,
+    "signal_absolute_median": 1.1370967000671737,
+    "artifact_absolute_median": 1.4963494189813624,
+    "paired_signal_median": 0.6289362174488748,
+    "paired_artifact_median": 1.7914443027874842,
+    "signal_to_artifact_ratio": 0.35107774016208665,
+    "pairwise_signal_beats_artifact_rate": 0.2916666666666667,
+    "signal_recovery_at_base_p99": 0.0,
+    "artifact_fp_rate_at_base_p99": 0.5,
+    "base_p99_threshold": 1.626794037267571,
+    "seed_instability": 0.9484833345462179,
+    "complexity": 0.0
+  },
+  "validation_pass": true,
+  "metric_contract": {
+    "schema": "janus.cosmos.metric_tolerance.v1",
+    "scope": "cross_platform_synthetic_validation_only",
+    "absolute_tolerance": 2e-06,
+    "relative_tolerance": 2e-06,
+    "scientific_gate_uses_raw_metrics": true
+  },
+  "forbidden_target_access_verified": true,
+  "source_hashes": {
+    "demiurge_forge_v2.py": "88511fc146e87673fe4d8e21184e2203756d75fec87e2305492e36e5c958e4c5",
+    "janus_cosmos_core_v2.py": "3df685901dfde434706d4e90dfbe9e8dfccbb88cfe6fccef13ff473f46391b23",
+    "FORGE_MANIFEST_v2_0.json": "2c764aece0f21ad0facdbfc1966a43b601d700b4509ee4b6db1b1fdef9ca4277",
+    "FORGE_METRIC_REFERENCE_v2_0.json": "5c3251035d0595d14203d4b9dbaf07a0843040b9113ddc0ee2ef3f7390b77e03"
+  },
+  "numeric_environment": {
+    "python": "3.12.13",
+    "implementation": "CPython",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.39"
+  },
+  "frozen_utc": "DETERMINISTIC_BUILD_NO_RUNTIME_CLOCK_IN_HASH",
+  "freeze_hash_scope": {
+    "contract": "portable_detector_identity.v1",
+    "included_fields": [
+      "schema",
+      "version",
+      "status",
+      "origin",
+      "training_rank",
+      "genome",
+      "genome_sha256",
+      "validation_pass",
+      "metric_contract",
+      "forbidden_target_access_verified",
+      "source_hashes",
+      "frozen_utc",
+      "freeze_hash_scope"
+    ],
+    "excluded_platform_evidence": [
+      "train_metrics",
+      "validation_metrics",
+      "canonical_validation_metrics",
+      "metrics_sha256",
+      "numeric_environment"
+    ]
+  },
+  "metrics_sha256": "443282e184b16d56a7320fc9b1a04d4bbfedf676059a66da167aa942d85ab07c",
+  "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a"
+}

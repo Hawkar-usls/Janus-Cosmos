@@ -1,0 +1,21 @@
+JANUS COSMOS v1.6 — SURVEY ARTIFACT EXCLUSION
+
+status: PASS
+global_flags: DSS_POLYGON_MATERIAL_DRIVER, DSS_BELT_CORRIDOR_SURVIVES_POLYGON_MASK, DSS_WHOLE_FIELD_SURVIVES_POLYGON_MASK_AND_CLEANING, INDEPENDENT_SURVEY_BELT_REPLICATION, INDEPENDENT_SURVEY_WHOLE_REPLICATION, SURVEY_ARTIFACT_DISFAVORED
+
+DSS2 family summary:
+  BELT_CORRIDOR: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  BELT_CORRIDOR_CLEAN: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  BELT_CORRIDOR_POLYGON_MASKED: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  WHOLE_CLEAN: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  WHOLE_CLEAN_POLYGON_MASKED: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  WHOLE_ORIGINAL: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+  WHOLE_POLYGON_MASKED: cross_band_outlier=True passing_bands=['DSS2_RED', 'DSS2_BLUE']
+
+2MASS family summary:
+  BELT_CORRIDOR: cross_band_outlier=True passing_bands=['TMASS_J', 'TMASS_K']
+  BELT_CORRIDOR_CLEAN: cross_band_outlier=True passing_bands=['TMASS_J', 'TMASS_K']
+  WHOLE_CLEAN: cross_band_outlier=True passing_bands=['TMASS_J', 'TMASS_K']
+  WHOLE_ORIGINAL: cross_band_outlier=True passing_bands=['TMASS_J', 'TMASS_K']
+
+Claim ceiling: Detector-specificity and survey-artifact attribution only. No astronomical anomaly, hidden-message, censorship, or discovery claim is established by this package.

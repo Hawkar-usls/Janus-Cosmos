@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.package_validation.v2.0.2",
+  "version": "2.0.2",
+  "status": "PASS_WITH_WINDOWS_PYTHON_3_14_CI_REGISTERED",
+  "tests": {
+    "python_compile_all": "PASS",
+    "offline_self_test_numpy_2_3_5_scipy_1_17_0": "PASS",
+    "offline_self_test_numpy_2_5_2_scipy_1_18_0": "PASS",
+    "portable_freeze_same_across_tested_stacks": "PASS",
+    "exact_metric_receipts_differ_across_tested_stacks": "PASS_EXPECTED",
+    "metric_tolerance_envelope": "PASS",
+    "material_metric_drift_rejection": "PASS",
+    "normalized_lf_crlf_source_identity": "PASS",
+    "deterministic_genome_identity": "PASS",
+    "downloader_22_product_dry_run": "PASS",
+    "runtime_frozen_detector_verification": "PASS",
+    "fresh_archive_retest": "PASS",
+    "windows_python_3_14_numpy_2_5_2_scipy_1_18_0": "REGISTERED_IN_GITHUB_CI",
+    "full_real_sky_network_run": "NOT_RUN"
+  },
+  "network_note": "No real-sky claim is inherited from portability tests. The user-side run downloads the fixed FITS products and produces the scientific receipt.",
+  "frozen_detector": {
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a",
+    "portable_identity_contract": "portable_detector_identity.v1",
+    "metric_contract": {
+      "absolute_tolerance": 2e-06,
+      "relative_tolerance": 2e-06,
+      "scientific_gate_uses_raw_metrics": true,
+      "exact_platform_metrics_sha256_required": true
+    },
+    "reference_stack_metrics_sha256": "443282e184b16d56a7320fc9b1a04d4bbfedf676059a66da167aa942d85ab07c",
+    "numpy_2_5_2_scipy_1_18_0_metrics_sha256": "471a1a308c0107af7bfb37bc1404ee60735e620e000e83fb83c303ed539bca47"
+  },
+  "file_hashes": {
+    "janus_cosmos_core_v2.py": {"bytes": 14553, "sha256": "3df685901dfde434706d4e90dfbe9e8dfccbb88cfe6fccef13ff473f46391b23"},
+    "demiurge_forge_v2.py": {"bytes": 19781, "sha256": "88511fc146e87673fe4d8e21184e2203756d75fec87e2305492e36e5c958e4c5"},
+    "download_sky_v2.py": {"bytes": 5124, "sha256": "c896705817867b2b470b16ff26bdcaf6fbe684677d8b0021166f5dd9897837aa"},
+    "janus_cosmos_v2_0.py": {"bytes": 16029, "sha256": "bb615bcd3e6a333a5f0e8e9ff38f2548a71c5571b271d9003024b028cf844485"},
+    "self_test_v2_0.py": {"bytes": 6070, "sha256": "79f262639d15e6af14666eee9c0c5a1fa6c4a4d42c9a63cd9723ffea1e221180"},
+    "FORGE_MANIFEST_v2_0.json": {"bytes": 1696, "sha256": "2c764aece0f21ad0facdbfc1966a43b601d700b4509ee4b6db1b1fdef9ca4277"},
+    "FORGE_METRIC_REFERENCE_v2_0.json": {"bytes": 2449, "sha256": "5c3251035d0595d14203d4b9dbaf07a0843040b9113ddc0ee2ef3f7390b77e03"},
+    "SKY_MANIFEST_v2_0.json": {"bytes": 3979, "sha256": "5bf7ff5f2fe61aeecb2a68eeec4e57d380f5ef70c65596ed9efd6e503b83e34a"},
+    "EXPECTED_FORGE_v2_0.json": {"bytes": 858, "sha256": "9982f2c0cd9229cba4ade84132731c7fdcf2d598d8088d8df081027c1442d8f0"},
+    "forge_output/FROZEN_DETECTOR_v2_0.json": {"bytes": 4259, "sha256": "487dcdb730303a7fe3de8e4fcf63ee2e7be738f1ffc776fe71aeed6d66133e61"},
+    "PATCH_NOTES_v2_0_2.txt": {"bytes": 1851, "sha256": "961fc0fad5ecfbaa40d1a9be64fa5910d888a2c7256e9f79455c6d12782b9873"},
+    "PORTABILITY_VALIDATION_v2_0_2.json": {"bytes": 1884, "sha256": "9e8ec79e9549b8dd32d1219d03d59b17aa61c376e4dd8f13cdc0f31326f74a13"},
+    "README_v2_0.txt": {"bytes": 7407, "sha256": "55cb48c61c03406cc09ac1ce81b4d2d8f1f8fdc6982214ede340041245c7fbed"},
+    "START_HERE.txt": {"bytes": 806, "sha256": "bd2319e7b0c7f029971676829a2520e1cebacd335a4e45ff71fb7897783ccf64"},
+    "run_janus_cosmos_v2_0.bat": {"bytes": 2429, "sha256": "080704c29cb8b8e0d9974aeee9bdbe0968bfe6b1aef7eceb8d6523b3ef53ae83"},
+    "DEMIURGE_BRIDGE_PROVENANCE.json": {"bytes": 1729, "sha256": "9f57c6a24177cbb3ac950e4ae7b0e50d5577343518e269ed432c5858f4e832d7"},
+    "prior_evidence/parent_v1_6_report.json": {"bytes": 65800, "sha256": "854a0ed1ca16aa40f688889193f0e3920b27d4a737e885a30b290289ce8d0aab"}
+  }
+}

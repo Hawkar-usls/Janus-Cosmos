@@ -126,6 +126,24 @@ run_janus_cosmos_windows.bat
 
 The BAT always changes to its own directory (`cd /d "%~dp0"`), streams output through PowerShell `Tee-Object`, writes a terminal log, and keeps the window open.
 
+## Demiurge adversarial forge v2.0.2
+
+The independent [v2.0.2 forge line](experiments/demiurge_adversarial_forge_v2/) adds a synthetic adversarial detector forge, a hard freeze-before-target wall, unrelated real-sky specificity controls, Orion cross-survey validation, and the historical NGC1425 HST gate.
+
+Its portability contract deliberately separates:
+
+- `freeze_sha256`: the portable detector identity (genome, validation decision, normalized source/manifests, blind-wall declaration and numerical contract);
+- `metrics_sha256`: the exact raw synthetic metrics emitted by the current Python/NumPy/SciPy platform;
+- `FORGE_METRIC_REFERENCE_v2_0.json`: a source-bound `2e-6` cross-platform conformance envelope.
+
+The scientific gate always uses raw metrics. Metric drift outside the envelope, source drift, genome drift, manifest drift or validation failure blocks the real-sky run. CI covers Linux plus the reported Windows stack: Python 3.14, NumPy 2.5.2 and SciPy 1.18.0.
+
+Windows entry point:
+
+```text
+experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_0.bat
+```
+
 ## Tests and CI
 
 ```bash

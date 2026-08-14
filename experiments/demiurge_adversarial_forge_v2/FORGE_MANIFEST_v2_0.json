@@ -1,0 +1,82 @@
+{
+  "schema": "janus.cosmos.demiurge_forge.manifest.v2.0",
+  "version": "2.0.0",
+  "forge_seed": 20260814,
+  "population": 32,
+  "generations": 5,
+  "elite_count": 8,
+  "validation_candidates": 8,
+  "training_seeds": [
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012
+  ],
+  "validation_seeds": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008
+  ],
+  "genome_space": {
+    "fixed_backbone": {
+      "asinh_scale": 6.0,
+      "clip_high": 99.5,
+      "low_freq_frac": 0.1,
+      "block_size": 16
+    },
+    "group_weight_bounds": [
+      0.5,
+      1.5
+    ],
+    "group_weights": [
+      "directional",
+      "rotation",
+      "anisotropy",
+      "high_frequency",
+      "component_count",
+      "largest_component"
+    ]
+  },
+  "fitness": {
+    "ratio_reward": 1.5,
+    "signal_sensitivity_reward": 0.3,
+    "artifact_false_positive_penalty": 0.25,
+    "seed_instability_penalty": 0.2,
+    "complexity_penalty": 0.05,
+    "validation_gate": {
+      "min_signal_to_artifact_ratio_improvement_over_canonical": 1.15,
+      "max_artifact_delta_fraction_of_canonical": 0.95,
+      "min_signal_delta_fraction_of_canonical": 0.9,
+      "min_pairwise_signal_beats_artifact_rate": 0.25
+    }
+  },
+  "forbidden_inputs": [
+    "NGC1425",
+    "Orion Belt",
+    "DSS2 Orion",
+    "2MASS Orion",
+    "blind sky controls"
+  ],
+  "forbidden_heuristics": [
+    "filter_37",
+    "digital_root",
+    "tachyonic_correction",
+    "resonance_boost",
+    "mood_influence",
+    "target_informed_tuning"
+  ],
+  "claim": "Forge optimizes robustness on synthetic controls only; it never sees astronomical target data."
+}
