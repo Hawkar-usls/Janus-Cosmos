@@ -1,250 +1,84 @@
-name: Janus Cosmos Expanded Morphology Blind Test
+name: Janus Cosmos Expanded Morphology v1 (manual)
 
 on:
-  push:
-    paths:
-      - 'experiments/hst/discover_mast_galaxy_products.py'
-      - 'experiments/hst/run_expanded_morphology.py'
-      - 'experiments/hst/run_focus_recheck.py'
-      - 'experiments/hst/repo_derived_anomaly_protocol.py'
-      - 'docs/REPO_DERIVED_METHODS.md'
-      - '.github/workflows/expanded-morphology.yml'
-      - 'data/hst_blind_corpus.json'
-      - 'data/hst_expanded_live_manifest.json'
   workflow_dispatch:
     inputs:
       nulls:
-        description: 'Nulls per model'
+        description: 'Primary test nulls per model'
         required: true
         type: choice
-        options: ['2048', '4096']
-        default: '2048'
-      seeds:
-        description: 'Comma-separated deterministic seeds'
-        required: true
-        type: string
-        default: '20260810,20260811,20260812'
+        options: ['4096', '8192']
+        default: '4096'
       target_limit:
-        description: 'Maximum discovered targets to score'
+        description: 'Number of discovery targets to consider'
         required: true
         type: choice
         options: ['7', '22']
         default: '22'
 
 permissions:
-  contents: write
+  contents: read
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   PYTHONUNBUFFERED: '1'
 
 jobs:
-  expanded-morphology:
+  expanded:
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - uses: actions/checkout@v6
-
-      - name: Install scientific dependencies
-        run: python -m pip install --disable-pip-version-check numpy scipy astropy astroquery
-
-      - name: Preflight DNS and MAST API
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install and test canonical code
         run: |
-          set -euxo pipefail
-          python - <<'PY'
-          import socket
-          import urllib.request
-          for host in ('mast.stsci.edu', 'archive.stsci.edu'):
-              print('DNS', host, socket.gethostbyname_ex(host))
-          req = urllib.request.Request('https://mast.stsci.edu/api/v0.1/', headers={'User-Agent': 'Janus-Cosmos/expanded-ci'})
-          try:
-              with urllib.request.urlopen(req, timeout=30) as r:
-                  print('MAST HTTP status =', getattr(r, 'status', None))
-          except Exception as exc:
-              print('MAST API preflight exception:', repr(exc))
-          PY
-
+          python -m pip install --disable-pip-version-check -r requirements.txt pytest
+          python -m pytest -q
+          python -m py_compile janus_cosmos/*.py
       - name: Discover live MAST products
         env:
-          TARGET_LIMIT: ${{ inputs.target_limit || '22' }}
+          TARGET_LIMIT: ${{ inputs.target_limit }}
         run: |
-          set -euxo pipefail
-          python -u experiments/hst/discover_mast_galaxy_products.py \
-            --out data/hst_expanded_live_manifest.json \
-            --targets $(python - <<'PY'
-          from pathlib import Path
-          import ast, os
-          text = Path('experiments/hst/discover_mast_galaxy_products.py').read_text()
-          tree = ast.parse(text)
-          names = []
-          for n in ast.walk(tree):
-              if isinstance(n, ast.Assign):
-                  for t in n.targets:
-                      if isinstance(t, ast.Name) and t.id == 'DEFAULT_TARGETS':
-                          names = [e.value for e in n.value.elts]
-          print(' '.join(names[:int(os.environ['TARGET_LIMIT'])]))
-          PY
-          ) | tee janus-cosmos-mast-discovery.log
-
-      - name: Validate live manifest
-        run: |
-          set -euxo pipefail
+          mkdir -p results/expanded
           python - <<'PY'
-          import json
-          d = json.load(open('data/hst_expanded_live_manifest.json'))
-          names = {x['target'] for x in d['targets']}
-          assert d['status'] == 'LIVE_MAST_DISCOVERY'
-          assert d['selected_targets'] >= 2, d
-          assert {'NGC1425', 'NGC1637'} <= names, f"focus targets missing: {names}"
-          print('LIVE MAST DISCOVERY PASS')
-          print('selected_targets =', d['selected_targets'])
-          print('selected_products =', d['selected_products'])
-          print('query_error_count =', d['query_error_count'])
+          import os
+          from janus_cosmos.discovery import DEFAULT_TARGETS, build_manifest, write_manifest
+          n=int(os.environ['TARGET_LIMIT'])
+          m=build_manifest(DEFAULT_TARGETS[:n])
+          write_manifest('results/expanded/manifest.json',m)
+          print('selected_targets =',m['selected_targets'])
+          print('selected_products =',m['selected_products'])
+          if m['selected_targets']==0:
+              raise SystemExit('No live MAST targets discovered')
           PY
-
-      - name: Run expanded morphology test
+      - name: Verify empirical-p resolution
         env:
-          NULLS: ${{ inputs.nulls || '2048' }}
-          SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
+          NULLS: ${{ inputs.nulls }}
         run: |
-          set -euxo pipefail
-          python -u experiments/hst/run_expanded_morphology.py \
-            --manifest data/hst_expanded_live_manifest.json \
-            --backend mast_api \
-            --nulls "$NULLS" \
-            --seeds "$SEEDS" \
-            --output-dir results/expanded_morphology | tee janus-cosmos-expanded-run.log
-
-      - name: Validate expanded receipt
-        run: |
-          set -euxo pipefail
           python - <<'PY'
-          import json
-          from pathlib import Path
-          p = Path('results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json')
-          d = json.loads(p.read_text())
-          assert d['target_count'] >= 2
-          assert d['nulls_per_null_model'] >= 2048
-          assert len(d['seeds']) >= 3
-          assert d.get('repo_derived_mechanics', {}).get('fundamentum_attack_survivor') is True
-          assert d.get('repo_derived_mechanics', {}).get('lapis_gate_rejection_records') is True
-          assert d.get('repo_derived_mechanics', {}).get('hrain_graph_observation_model') is True
-          assert d.get('repo_derived_mechanics', {}).get('distributed_swarm_invariant_boundary') is True
-          assert d.get('repo_derived_mechanics', {}).get('demiurge_adaptive_gate_tuning') is False
-          for k in ('semantic_analysis', 'ocr', 'face_search', 'cipher_search', 'post_hoc_tuning', 'human_label_inference'):
-              assert d['blind_gate'][k] is False
-          print('JANUS COSMOS EXPANDED MORPHOLOGY PASS')
-          print('target_count =', d['target_count'])
-          print('consensus_candidate_count =', d['consensus_candidate_count'])
-          for row in d['consensus']:
-              if row['consensus_cross_band_candidate']:
-                  print('CONSENSUS CANDIDATE:', row['target'], row['consensus_passing_filters'])
+          import json, os
+          from janus_cosmos.core import bonferroni_alpha, minimum_test_nulls
+          m=json.load(open('results/expanded/manifest.json'))
+          filters=sum(len(t['filters']) for t in m['targets'])
+          alpha=bonferroni_alpha(0.05,filters,2)
+          required=minimum_test_nulls(alpha)
+          supplied=int(os.environ['NULLS'])
+          print('filters =',filters,'alpha =',alpha,'minimum_nulls =',required,'supplied =',supplied)
+          if supplied < required:
+              raise SystemExit(f'Underpowered: need at least {required} test nulls/model')
           PY
-
-      - name: Run focused survivor recheck
+      - name: Run canonical expanded pipeline
         run: |
-          set -euxo pipefail
-          python -u experiments/hst/run_focus_recheck.py \
-            --manifest data/hst_expanded_live_manifest.json \
-            --nulls 4096 \
-            --seeds 20260810,20260811,20260812,20260813,20260814 \
-            --output-dir results/focus_recheck | tee janus-cosmos-focus-run.log
-
-      - name: Validate focus recheck
-        run: |
-          set -euxo pipefail
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          p = Path('results/focus_recheck/janus-cosmos-focus-receipt.json')
-          d = json.loads(p.read_text())
-          assert d['targets'] == ['NGC1425', 'NGC1637']
-          assert d['nulls_per_null_model'] == 4096
-          assert len(d['seeds']) == 5
-          assert d['blind_gate']['main_gate_unchanged'] is True
-          print('JANUS COSMOS FOCUS RECHECK PASS')
-          print('focus_consensus_candidate_count =', d['focus_consensus_candidate_count'])
-          for row in d['consensus']:
-              print('FOCUS', row['target'], row['passing_filters_all_seeds'])
-          PY
-
-      - name: Create CI receipt
-        env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          SHA: ${{ github.sha }}
-          SERVER_URL: ${{ github.server_url }}
-          NULLS: ${{ inputs.nulls || '2048' }}
-          SEEDS: ${{ inputs.seeds || '20260810,20260811,20260812' }}
-        run: |
-          set -euxo pipefail
-          python - <<'PY'
-          import hashlib, json, os
-          from pathlib import Path
-          p = Path('results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json')
-          f = Path('results/focus_recheck/janus-cosmos-focus-receipt.json')
-          d = json.loads(p.read_text())
-          focus = json.loads(f.read_text())
-          out = {
-            'schema': 'janus.cosmos.expanded_morphology_ci_receipt.v0.3',
-            'status': 'PASS',
-            'run_id': int(os.environ['RUN_ID']),
-            'run_attempt': int(os.environ['RUN_ATTEMPT']),
-            'commit_sha': os.environ['SHA'],
-            'run_url': f"{os.environ['SERVER_URL']}/Hawkar-usls/Janus-Cosmos/actions/runs/{os.environ['RUN_ID']}",
-            'main_test': {
-              'nulls_per_null_model': int(os.environ['NULLS']),
-              'seeds': [int(x) for x in os.environ['SEEDS'].split(',')],
-              'target_count': d['target_count'],
-              'filter_count': d['filter_count'],
-              'familywise_alpha': d['familywise_alpha'],
-              'consensus_candidate_count': d['consensus_candidate_count'],
-              'consensus_candidates': [x for x in d['consensus'] if x['consensus_cross_band_candidate']],
-            },
-            'focus_recheck': {
-              'targets': focus['targets'],
-              'nulls_per_null_model': focus['nulls_per_null_model'],
-              'seeds': focus['seeds'],
-              'consensus_candidate_count': focus['focus_consensus_candidate_count'],
-              'consensus_candidates': [x for x in focus['consensus'] if x['focus_cross_band_consensus']],
-            },
-            'manifest_sha256': d['manifest_sha256'],
-            'protocol_sha256': d['protocol_sha256'],
-            'main_receipt_sha256': hashlib.sha256(p.read_bytes()).hexdigest(),
-            'focus_receipt_sha256': hashlib.sha256(f.read_bytes()).hexdigest(),
-            'claim_ceiling': d['claim_ceiling'],
-          }
-          Path('results/expanded_morphology/janus-cosmos-expanded-morphology-ci-receipt.json').write_text(json.dumps(out, indent=2, sort_keys=True) + '\n')
-          print(json.dumps(out, indent=2, sort_keys=True))
-          PY
-
-      - name: Upload machine-readable results
-        uses: actions/upload-artifact@v6
+          python -u -m janus_cosmos.pipeline \
+            --manifest results/expanded/manifest.json \
+            --nulls "${{ inputs.nulls }}" \
+            --seeds 20260810,20260811,20260812 \
+            --output-dir results/expanded/run
+      - uses: actions/upload-artifact@v6
+        if: always()
         with:
-          name: janus-cosmos-expanded-morphology-receipt
-          path: |
-            results/expanded_morphology/
-            results/focus_recheck/
-            data/hst_expanded_live_manifest.json
-            janus-cosmos-mast-discovery.log
-            janus-cosmos-expanded-run.log
-            janus-cosmos-focus-run.log
-
-      - name: Publish runtime receipts
-        if: success()
-        env:
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          set -euxo pipefail
-          mkdir -p data/runtime/expanded_morphology
-          cp results/expanded_morphology/janus-cosmos-expanded-morphology-receipt.json data/runtime/expanded_morphology/latest.json
-          cp results/expanded_morphology/janus-cosmos-expanded-morphology-ci-receipt.json "data/runtime/expanded_morphology/run-${RUN_ID}.json"
-          cp results/expanded_morphology/janus-cosmos-repo-derived-protocol.json data/runtime/expanded_morphology/protocol-${RUN_ID}.json
-          cp results/focus_recheck/janus-cosmos-focus-receipt.json data/runtime/expanded_morphology/focus-${RUN_ID}.json
-          cp data/hst_expanded_live_manifest.json "data/runtime/expanded_morphology/manifest-${RUN_ID}.json"
-          git config user.name 'janus-cosmos[bot]'
-          git config user.email 'janus-cosmos[bot]@users.noreply.github.com'
-          git add data/runtime/expanded_morphology
-          git diff --cached --quiet && exit 0
-          git commit -m "Persist expanded Janus Cosmos morphology and focus recheck ${RUN_ID}"
-          git push origin main
+          name: janus-cosmos-expanded-v1
+          if-no-files-found: warn
+          path: results/expanded/
