@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import concurrent.futures
 import json
 import math
+import multiprocessing
+import os
 import tempfile
 import time
 from pathlib import Path
@@ -142,6 +145,25 @@ def main() -> int:
         runtime.emit = original_emit
         runtime.persist_running_report = original_persist
     print("[PASS] parallel scheduler restores frozen input order after out-of-order completion")
+
+    spawn_context = multiprocessing.get_context("spawn")
+    spawn_messages = spawn_context.Queue()
+    try:
+        with concurrent.futures.ProcessPoolExecutor(
+            max_workers=2,
+            mp_context=spawn_context,
+            initializer=runtime.process_worker_init,
+            initargs=(spawn_messages,),
+        ) as process_pool:
+            spawn_rows = list(process_pool.map(runtime.process_spawn_probe, range(4)))
+        queued_rows = [spawn_messages.get(timeout=5) for _ in spawn_rows]
+    finally:
+        spawn_messages.close()
+        spawn_messages.join_thread()
+    check([row["value"] for row in spawn_rows] == list(range(4)), "spawn process result drift")
+    check(all(row["pid"] != os.getpid() for row in spawn_rows), "spawn probe ran in parent process")
+    check({row["value"] for row in queued_rows} == set(range(4)), "spawn IPC queue lost a worker message")
+    print("[PASS] Windows-safe spawn process pool + child-to-parent IPC queue")
 
     length = protocol["corridor_null"]["length_pixels_normalized"]
     half_width = protocol["corridor_null"]["half_width_pixels_normalized"]

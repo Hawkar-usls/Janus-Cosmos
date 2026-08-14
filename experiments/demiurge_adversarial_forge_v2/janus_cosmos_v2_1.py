@@ -212,6 +212,16 @@ def process_worker_init(message_queue) -> None:
     PROGRESS = QueueProgress(message_queue)
 
 
+def process_spawn_probe(value: int) -> dict:
+    """Exercise the real Windows-spawn initializer/IPC path in the self-test."""
+    if WORKER_MESSAGE_QUEUE is None or not isinstance(PROGRESS, QueueProgress):
+        raise RuntimeError("spawn worker did not receive the Janus IPC initializer")
+    time.sleep(0.05)
+    row = {"kind": "spawn_probe", "value": int(value), "pid": os.getpid()}
+    WORKER_MESSAGE_QUEUE.put(row)
+    return {"value": int(value), "pid": os.getpid()}
+
+
 def log(message: str) -> None:
     with LOG_LOCK:
         if PROGRESS is not None:
