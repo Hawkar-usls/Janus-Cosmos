@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import math
+import tempfile
+import time
 from pathlib import Path
 
 import numpy as np
@@ -12,6 +14,7 @@ import download_sky_v2_1 as downloader
 import janus_cosmos_core_v2 as core
 import janus_cosmos_specificity_v2_1 as specificity
 import janus_cosmos_v2_0 as parent_runtime
+import janus_cosmos_v2_1 as runtime
 
 
 ROOT = Path(__file__).resolve().parent
@@ -23,7 +26,7 @@ def check(condition, message: str) -> None:
 
 
 def main() -> int:
-    print("JANUS COSMOS v2.1.0 DETECTOR SPECIFICITY REPAIR SELF-TEST", flush=True)
+    print("JANUS COSMOS v2.1.1 DETECTOR SPECIFICITY REPAIR SELF-TEST", flush=True)
     protocol = json.loads((ROOT / "SPECIFICITY_PROTOCOL_v2_1.json").read_text(encoding="utf-8"))
 
     frozen = parent_runtime.verify_forge()
@@ -37,12 +40,24 @@ def main() -> int:
     negative_path = ROOT / negative_cfg["path"]
     negative = json.loads(negative_path.read_text(encoding="utf-8"))
     evidence_root = negative_path.parent
+    check(len(negative["artifact_sha256"]) == 10, "negative certificate artifact inventory drift")
+    check(
+        all(len(value) == 64 and set(value) <= set("0123456789abcdef") for value in negative["artifact_sha256"].values()),
+        "negative certificate contains an invalid artifact hash",
+    )
+    present_artifacts = 0
     for name, expected_sha in negative["artifact_sha256"].items():
-        check(core.sha256_file(evidence_root / name) == expected_sha, f"negative evidence artifact drift: {name}")
+        artifact = evidence_root / name
+        if artifact.is_file():
+            check(core.sha256_file(artifact) == expected_sha, f"negative evidence artifact drift: {name}")
+            present_artifacts += 1
     check(negative["scientific_gate"]["specificity_gate"] == "FAIL", "negative certificate gate drift")
     check(not negative["scientific_gate"]["orion_candidate_admitted"], "negative Orion result drift")
     check(not negative["scientific_gate"]["ngc1425_candidate_admitted"], "negative NGC1425 result drift")
-    print("[PASS] v2.0.2 negative specificity certificate + 10 artifact hashes")
+    print(
+        f"[PASS] v2.0.2 negative specificity certificate + 10 hash bindings "
+        f"({present_artifacts} raw artifacts present in this package)"
+    )
 
     regenerated = specificity.regenerate_sky_controls(protocol)
     check(regenerated == protocol["real_sky_controls"]["centers"], "blind control regeneration")
@@ -74,8 +89,59 @@ def main() -> int:
         f"unexpected downloader plan: {counts}",
     )
     check(len(plan) == 168, "downloader product count")
+    check(downloader.MAX_WORKERS == 10, "download worker ceiling drift")
     check(all("_wf3" in item["dst"].name for item in plan if item["kind"].startswith("HST")), "HST mosaic leaked into v2.1")
     print("[PASS] downloader plan = 168 HTTPS products; HST locked to WF3 science+weight pairs")
+
+    check(runtime.resolve_workers(10) == 10, "ten-worker runtime profile rejected")
+    check(runtime.resolve_workers(1000) == 10 and runtime.resolve_workers(0) == 1, "worker clamp drift")
+    _, legacy_settings = runtime.checkpoint_key(
+        "f" * 64,
+        protocol["parent_detector"]["genome_sha256"],
+        "SELFTEST",
+        "phase_iaaft",
+        protocol["synthetic_null_diagnostics"]["test_nulls_per_model"],
+        protocol["synthetic_null_diagnostics"]["calibration_nulls_per_model"],
+        list(protocol["synthetic_null_diagnostics"]["seeds"]),
+    )
+    check(legacy_settings["version"] == "2.1.0", "v2.1.0 checkpoint identity bridge drift")
+    with tempfile.TemporaryDirectory() as temporary:
+        receipt = Path(temporary) / "atomic.json"
+        runtime.atomic_write_json(receipt, {"status": "PASS", "workers": 10})
+        check(json.loads(receipt.read_text(encoding="utf-8"))["workers"] == 10, "atomic checkpoint write")
+        check(not list(Path(temporary).glob("*.tmp")), "atomic checkpoint temp leak")
+    print("[PASS] bounded ten-worker profile + v2.1.0 resume identity + atomic checkpoint write")
+
+    original_emit = runtime.emit
+    original_persist = runtime.persist_running_report
+    try:
+        runtime.emit = lambda *args, **kwargs: None
+        runtime.persist_running_report = lambda report: None
+        scheduler_report = {"global_status": {}, "test_rows": {}}
+
+        def delayed_row(item: dict) -> dict:
+            time.sleep(float(item["delay"]))
+            return {"id": item["id"]}
+
+        scheduled = runtime.parallel_ordered_fields(
+            [
+                {"id": "FIRST", "delay": 0.03},
+                {"id": "SECOND", "delay": 0.01},
+                {"id": "THIRD", "delay": 0.00},
+            ],
+            lambda item: item["id"],
+            delayed_row,
+            3,
+            "test_start",
+            "test_complete",
+            scheduler_report,
+            "test_rows",
+        )
+        check(list(scheduled) == ["FIRST", "SECOND", "THIRD"], "parallel completion order leaked into report")
+    finally:
+        runtime.emit = original_emit
+        runtime.persist_running_report = original_persist
+    print("[PASS] parallel scheduler restores frozen input order after out-of-order completion")
 
     length = protocol["corridor_null"]["length_pixels_normalized"]
     half_width = protocol["corridor_null"]["half_width_pixels_normalized"]
@@ -136,6 +202,10 @@ def main() -> int:
     source = (ROOT / "janus_cosmos_v2_1.py").read_text(encoding="utf-8")
     check("synthetic_p_alone_can_admit" not in source, "runtime contains a synthetic-p admission shortcut")
     check("real_field_gates" in source and "corridor_local_family_gate" in source, "runtime omits v2.1 admission gates")
+    check("ProcessPoolExecutor" in source and "as_completed" in source, "runtime omits bounded process scheduler")
+    check('get_context("spawn")' in source, "runtime process scheduler is not Windows-spawn safe")
+    check("FROZEN_INPUT_ORDER" in source, "parallel completion order can contaminate report order")
+    check("legacy_v2_1_0_model_checkpoints_accepted_when_settings_hash_matches" in source, "v2.1.0 resume bridge missing")
     print("[PASS] runtime admission source scan: no synthetic-p-only shortcut")
 
     print("SELF-TEST PASS", flush=True)

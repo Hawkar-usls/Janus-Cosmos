@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import hashlib
 import json
 import os
+import sys
 import time
 import urllib.parse
 from pathlib import Path
@@ -21,7 +23,7 @@ HIPS_ENDPOINTS = [
     "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
     "https://alaskybis.cds.unistra.fr/hips-image-services/hips2fits",
 ]
-SESSION = requests.Session()
+MAX_WORKERS = 10
 
 
 def sha256_file(path: Path) -> str:
@@ -61,38 +63,68 @@ def download(urls: list[str], destination: Path, retries: int = 3) -> dict:
     if fits_ok(destination):
         return {"status": "cached", "bytes": destination.stat().st_size, "sha256": sha256_file(destination), "url": "CACHE"}
     last_error: Exception | None = None
-    for url in urls:
-        for attempt in range(1, retries + 1):
-            partial = destination.with_suffix(destination.suffix + ".part")
-            try:
-                with SESSION.get(
-                    url,
-                    stream=True,
-                    timeout=(20, 300),
-                    headers={"User-Agent": "Janus-Cosmos-v2.1/specificity-repair"},
-                ) as response:
-                    response.raise_for_status()
-                    with partial.open("wb") as handle:
-                        for chunk in response.iter_content(1024 * 1024):
-                            if chunk:
-                                handle.write(chunk)
-                if not fits_ok(partial):
-                    sample = partial.read_bytes()[:200] if partial.exists() else b""
-                    raise RuntimeError("server response is not FITS: " + repr(sample))
-                os.replace(partial, destination)
-                return {
-                    "status": "downloaded",
-                    "bytes": destination.stat().st_size,
-                    "sha256": sha256_file(destination),
-                    "url": url,
-                }
-            except Exception as error:
-                last_error = error
-                if partial.exists():
-                    partial.unlink()
-                if attempt < retries:
-                    time.sleep(attempt * 2)
+    with requests.Session() as session:
+        for url in urls:
+            for attempt in range(1, retries + 1):
+                partial = destination.with_suffix(destination.suffix + ".part")
+                try:
+                    with session.get(
+                        url,
+                        stream=True,
+                        timeout=(20, 300),
+                        headers={"User-Agent": "Janus-Cosmos-v2.1.1/specificity-repair"},
+                    ) as response:
+                        response.raise_for_status()
+                        with partial.open("wb") as handle:
+                            for chunk in response.iter_content(1024 * 1024):
+                                if chunk:
+                                    handle.write(chunk)
+                    if not fits_ok(partial):
+                        sample = partial.read_bytes()[:200] if partial.exists() else b""
+                        raise RuntimeError("server response is not FITS: " + repr(sample))
+                    os.replace(partial, destination)
+                    return {
+                        "status": "downloaded",
+                        "bytes": destination.stat().st_size,
+                        "sha256": sha256_file(destination),
+                        "url": url,
+                    }
+                except Exception as error:
+                    last_error = error
+                    if partial.exists():
+                        partial.unlink()
+                    if attempt < retries:
+                        time.sleep(attempt * 2)
     raise RuntimeError(f"download failed: {last_error}")
+
+
+def atomic_write_json(path: Path, value) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    with temporary.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(value, handle, indent=2, ensure_ascii=False)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+
+
+def render_progress(completed: int, total: int, started: float, workers: int, final: bool = False) -> None:
+    fraction = completed / max(total, 1)
+    width = 36
+    filled = min(width, int(round(width * fraction)))
+    bar = "█" * filled + "░" * (width - filled)
+    elapsed = max(time.monotonic() - started, 1e-9)
+    rate = completed / elapsed
+    eta = (total - completed) / rate if rate > 0 else 0.0
+    line = (
+        f"[DOWNLOAD {bar}] {100 * fraction:6.2f}%  {completed}/{total}  "
+        f"workers={workers}  elapsed={elapsed / 60:5.1f}m  ETA={eta / 60:5.1f}m"
+    )
+    if sys.stdout.isatty():
+        print("\r" + line, end="\n" if final else "", flush=True)
+    elif final or completed == total or completed % max(1, total // 10) == 0:
+        print(line, flush=True)
 
 
 def _hips_item(kind: str, identifier: str, destination: Path, survey: dict, center: dict, fov: float, pixels: int) -> dict:
@@ -175,6 +207,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--skip-real-sky-controls", action="store_true")
     parser.add_argument("--skip-hst-controls", action="store_true")
+    parser.add_argument("--workers", type=int, default=None)
     args = parser.parse_args()
     selected = []
     for item in plan():
@@ -183,50 +216,67 @@ def main() -> int:
         if args.skip_hst_controls and item["kind"] == "HST_REAL_CONTROL":
             continue
         selected.append(item)
-    records: list[dict] = []
-    errors: list[dict] = []
-    for item in selected:
-        if args.dry_run:
+    if args.dry_run:
+        for item in selected:
             print(f"[DRY] {item['id']} -> {item['dst'].relative_to(ROOT)}")
             for url in item["urls"]:
                 print("      " + url)
-            continue
-        try:
-            info = download(item["urls"], item["dst"])
-            record = {
-                "kind": item["kind"],
-                "id": item["id"],
-                "file": str(item["dst"].relative_to(ROOT)),
-                **info,
-            }
-            for key in ("center", "survey", "field_id", "band", "chip", "role"):
-                if key in item:
-                    record[key] = item[key]
-            records.append(record)
-            print(f"[OK] {item['id']} {info['status']} {info['bytes']} bytes", flush=True)
-        except Exception as error:
-            errors.append({"kind": item["kind"], "id": item["id"], "error": f"{type(error).__name__}: {error}"})
-            print(f"[ERROR] {item['id']}: {error}", flush=True)
-    if args.dry_run:
         print(f"DRY-RUN PASS: {len(selected)} of {len(plan())} frozen source products planned")
         return 0
+    workers_raw = args.workers if args.workers is not None else os.environ.get("JANUS_COSMOS_WORKERS", MAX_WORKERS)
+    try:
+        workers = max(1, min(MAX_WORKERS, int(workers_raw)))
+    except (TypeError, ValueError) as error:
+        raise RuntimeError(f"invalid worker count: {workers_raw!r}") from error
+    started = time.monotonic()
+    records_by_index: dict[int, dict] = {}
+    errors_by_index: dict[int, dict] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers, thread_name_prefix="janus-download") as pool:
+        futures = {
+            pool.submit(download, item["urls"], item["dst"]): (index, item)
+            for index, item in enumerate(selected)
+        }
+        completed = 0
+        for future in concurrent.futures.as_completed(futures):
+            index, item = futures[future]
+            try:
+                info = future.result()
+                record = {
+                    "kind": item["kind"],
+                    "id": item["id"],
+                    "file": str(item["dst"].relative_to(ROOT)),
+                    **info,
+                }
+                for key in ("center", "survey", "field_id", "band", "chip", "role"):
+                    if key in item:
+                        record[key] = item[key]
+                records_by_index[index] = record
+            except Exception as error:
+                errors_by_index[index] = {
+                    "kind": item["kind"],
+                    "id": item["id"],
+                    "error": f"{type(error).__name__}: {error}",
+                }
+            completed += 1
+            render_progress(completed, len(selected), started, workers, final=completed == len(selected))
+    records = [records_by_index[index] for index in range(len(selected)) if index in records_by_index]
+    errors = [errors_by_index[index] for index in range(len(selected)) if index in errors_by_index]
     DATA.mkdir(parents=True, exist_ok=True)
-    PROVENANCE.write_text(
-        json.dumps(
-            {
-                "schema": "janus.cosmos.download_provenance.v2.1",
-                "protocol_sha256": hashlib.sha256(
-                    json.dumps(PROTOCOL, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-                ).hexdigest(),
-                "records": records,
-                "errors": errors,
-            },
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
+    atomic_write_json(
+        PROVENANCE,
+        {
+            "schema": "janus.cosmos.download_provenance.v2.1",
+            "runtime_version": "2.1.1",
+            "workers": workers,
+            "result_order": "FROZEN_DOWNLOAD_PLAN_ORDER",
+            "protocol_sha256": hashlib.sha256(
+                json.dumps(PROTOCOL, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+            ).hexdigest(),
+            "records": records,
+            "errors": errors,
+        },
     )
-    ERRORS.write_text(json.dumps(errors, indent=2, ensure_ascii=False), encoding="utf-8")
+    atomic_write_json(ERRORS, errors)
     print("DOWNLOAD PASS" if not errors else f"DOWNLOAD PARTIAL: {len(errors)} error(s)")
     return 0 if not errors else 2
 

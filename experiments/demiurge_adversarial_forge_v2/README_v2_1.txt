@@ -1,5 +1,5 @@
-JANUS COSMOS v2.1.0 — DETECTOR SPECIFICITY REPAIR
-=================================================
+JANUS COSMOS v2.1.1 — PARALLEL DETECTOR SPECIFICITY REPAIR
+==========================================================
 
 PURPOSE
 -------
@@ -12,6 +12,12 @@ v2.1 does not retrain or tune the detector after seeing Orion or NGC1425. The
 v2.0.2 genome and portable freeze identity remain unchanged. v2.1 freezes a new
 admission protocol that asks whether a target is more extreme than comparable
 real observations.
+
+v2.1.1 is an execution-only repair. It does not change the v2.1.0 scientific
+protocol, detector, null models, null counts, seeds, control cohorts, scores or
+admission rules. It schedules up to ten independent fields in Windows-safe
+spawned processes and then restores the frozen protocol order before writing
+the report.
 
 WHAT CHANGED
 ------------
@@ -27,6 +33,15 @@ WHAT CHANGED
    compared with 20 other real MAST SGAL WFPC2 fields.
 5. Real-field ties block admission. All 20 controls are mandatory. Synthetic
    p-values remain diagnostics and cannot admit a candidate by themselves.
+6. Downloads use a bounded thread pool; CPU-heavy independent field evaluations
+   use a bounded ten-process pool. Internal BLAS pools are capped to one thread
+   to avoid CPU oversubscription.
+7. The console shows an animated progress bar, completed model count, active
+   workers, elapsed time and ETA. A machine-readable progress snapshot is
+   written to results_v2_1/progress_v2.1.json.
+8. Model and whole-field checkpoints use atomic replacement. Partial reports
+   are also written after every completed field, and prior reports/logs are
+   rotated into results_v2_1/history instead of being overwritten.
 
 RUN ON WINDOWS
 --------------
@@ -36,13 +51,14 @@ Double-click:
 
 The BAT verifies dependencies, the v2.0.2 negative certificate, the frozen
 v2.1 protocol and the unchanged parent detector. It then downloads 168 frozen
-FITS products and runs the evaluation. Completed downloads and model
-checkpoints are cached, so an interrupted run can be resumed by launching the
-same BAT again.
+FITS products and runs the evaluation. Completed downloads and v2.1.0 model
+checkpoints remain compatible, so the interrupted original v2.1 run can be
+resumed by launching the same BAT again.
 
-The expanded control cohort makes v2.1 intentionally larger and slower than
-v2.0.2. Do not reduce the cohort or manually edit the protocol/expected files;
-either change fails closed or disables admission.
+The expanded control cohort remains intentionally larger than v2.0.2. The
+parallel scheduler reduces wall-clock time without reducing that workload. Do
+not reduce the cohort or manually edit the protocol/expected files; either
+change fails closed or disables admission.
 
 OUTPUTS
 -------
@@ -50,6 +66,7 @@ OUTPUTS
     results_v2_1/janus-cosmos-v2.1-events.jsonl
     results_v2_1/SUMMARY_v2.1.txt
     results_v2_1/terminal_v2.1.log
+    results_v2_1/progress_v2.1.json
 
 INTERPRETATION
 --------------

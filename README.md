@@ -144,7 +144,7 @@ Windows entry point:
 experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_0.bat
 ```
 
-## Detector specificity repair v2.1
+## Detector specificity repair v2.1.1
 
 The full v2.0.2 run is retained as a hash-bound
 `VALID_NEGATIVE_DETECTOR_SPECIFICITY` certificate: 57 of 64 blind-control
@@ -166,6 +166,13 @@ protocol around independent real observations:
 
 Synthetic surrogates remain diagnostics and effect-size calibration. A small
 synthetic p-value alone can no longer admit a candidate.
+
+The v2.1.1 runtime patch keeps that scientific protocol byte-for-byte frozen
+while scheduling up to ten independent fields in Windows-safe spawned
+processes. Results are restored to frozen cohort order, BLAS oversubscription
+is capped, v2.1.0 model checkpoints remain reusable, writes are atomic,
+interrupted reports are preserved, and the Windows runner shows live progress
+and ETA.
 
 Windows entry point:
 

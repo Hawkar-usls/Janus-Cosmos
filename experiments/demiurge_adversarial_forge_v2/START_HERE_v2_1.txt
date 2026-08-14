@@ -1,5 +1,5 @@
-JANUS COSMOS v2.1.0
-===================
+JANUS COSMOS v2.1.1 RUNTIME PATCH
+================================
 
 v2.1 preserves the completed v2.0.2 run as a negative specificity certificate
 and repairs the admission protocol without retraining the frozen detector.
@@ -8,14 +8,25 @@ requires random-position/random-orientation corridor specificity and actual
 cross-survey morphology agreement. HST uses common-valid-support WF3 products
 instead of the mosaic footprint.
 
-1. Extract the ZIP into a NEW folder.
-2. Double-click: run_janus_cosmos_v2_1.bat
-3. Let the certificate checks, downloads and real-control run finish.
-4. Send back the entire results_v2_1 folder, especially:
+THIS DELIVERY IS A SMALL PATCH FOR YOUR EXISTING v2.1 FOLDER.
+
+1. Stop the old v2.1 process if it is still running.
+2. Extract the ZIP directly over the existing Janus_Cosmos_v2_1 folder and
+   allow replacement of files with the same names.
+3. DO NOT delete external_data or results_v2_1/checkpoints. They contain the
+   completed downloads and compatible v2.1.0 model checkpoints.
+4. Double-click: run_janus_cosmos_v2_1.bat
+5. Let the certificate checks, cached download scan and parallel run finish.
+6. Send back these result files:
    - janus-cosmos-v2.1-report.json
    - janus-cosmos-v2.1-events.jsonl
    - terminal_v2.1.log
    - SUMMARY_v2.1.txt
+
+The runner uses up to 10 concurrent field workers, keeps the scientific model
+unchanged, shows a live progress/ETA bar and writes an atomic partial report
+after every completed field. Previous output files are preserved in
+results_v2_1/history.
 
 Do not edit FROZEN_DETECTOR_v2_0.json, SPECIFICITY_PROTOCOL_v2_1.json or either
 EXPECTED file. The runner verifies every identity and fails closed on drift.

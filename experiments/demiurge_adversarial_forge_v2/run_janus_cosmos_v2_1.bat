@@ -4,10 +4,15 @@ cd /d "%~dp0"
 chcp 65001 >nul
 set PYTHONUTF8=1
 set PYTHONUNBUFFERED=1
-title JANUS COSMOS v2.1 - DETECTOR SPECIFICITY REPAIR
+set JANUS_COSMOS_WORKERS=10
+set OMP_NUM_THREADS=1
+set OPENBLAS_NUM_THREADS=1
+set MKL_NUM_THREADS=1
+set NUMEXPR_NUM_THREADS=1
+title JANUS COSMOS v2.1.1 - PARALLEL SPECIFICITY REPAIR
 
 echo ============================================================
-echo JANUS COSMOS v2.1 - DETECTOR SPECIFICITY REPAIR
+echo JANUS COSMOS v2.1.1 - PARALLEL DETECTOR SPECIFICITY REPAIR
 echo ============================================================
 echo Working directory: %CD%
 echo.
@@ -40,20 +45,22 @@ echo [3/5] Re-forging unchanged parent detector identity...
 if errorlevel 1 goto forgefail
 
 echo.
-echo [4/5] Downloading 168 frozen source products...
+echo [4/5] Downloading 168 frozen source products, up to 10 concurrently...
 echo       Orion: 4 target bands + 20 fresh fields x 4 matching bands
 echo       HST: NGC1425 WF3 science/weight pairs
 echo       HST controls: 20 SGAL fields x 2 bands x science/weight
 echo       Completed files are cached; interrupted downloads can be resumed.
-%PY% -u download_sky_v2_1.py
+%PY% -u download_sky_v2_1.py --workers 10
 if errorlevel 1 goto downloadfail
 
 echo.
 echo [5/5] Starting real-field detector-specificity evaluation...
 echo       Synthetic nulls remain diagnostics; admission uses real controls.
-echo       Checkpoints are saved. This run is intentionally larger than v2.0.2.
+echo       10 independent fields run concurrently; frozen result order is restored.
+echo       Existing v2.1.0 model checkpoints are reused when hashes match.
+echo       Live progress, ETA and atomic partial reports are enabled.
 echo.
-%PY% -u janus_cosmos_v2_1.py
+%PY% -u janus_cosmos_v2_1.py --workers 10
 set "RC=%errorlevel%"
 
 echo.
@@ -63,6 +70,7 @@ echo Report : results_v2_1\janus-cosmos-v2.1-report.json
 echo Summary: results_v2_1\SUMMARY_v2.1.txt
 echo Events : results_v2_1\janus-cosmos-v2.1-events.jsonl
 echo Log    : results_v2_1\terminal_v2.1.log
+echo Progress: results_v2_1\progress_v2.1.json
 echo ============================================================
 pause
 exit /b %RC%
