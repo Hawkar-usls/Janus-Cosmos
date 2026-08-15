@@ -48,7 +48,7 @@ jobs:
       - name: Inspect LUCI/LBT archive relations and sample rows
         run: python experiments/luci/inspect_lbt_archive.py
 
-  live-luci-powered-gate:
+  live-luci-full-null-gate:
     needs: [unit-and-binding-tests, official-archive-tap-preflight]
     runs-on: ubuntu-latest
     steps:
@@ -65,22 +65,22 @@ jobs:
           --filters J,Ks
           --limit 2000
           --max-targets 1
-          --output data/runtime/luci/luci_powered_manifest.json
-      - name: Run minimum powered JANUS gate against real LUCI J+Ks FITS
+          --output data/runtime/luci/luci_full_manifest.json
+      - name: Run 1024-null JANUS gate against real LUCI J+Ks FITS
         run: >-
           python -m janus_cosmos.luci_pipeline
-          --manifest data/runtime/luci/luci_powered_manifest.json
-          --output-dir results/luci_real_fits_powered
+          --manifest data/runtime/luci/luci_full_manifest.json
+          --output-dir results/luci_real_fits_full
           --cache-dir .cache/janus_cosmos_luci
-          --nulls 80
-          --seeds 20260815,20260816,20260817
+          --nulls 1024
+          --seeds 20260815,20260816,20260817,20260818
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: luci-real-fits-powered
+          name: luci-real-fits-full-1024
           path: |
-            data/runtime/luci/luci_powered_manifest.json
-            results/luci_real_fits_powered/
+            data/runtime/luci/luci_full_manifest.json
+            results/luci_real_fits_full/
           if-no-files-found: warn
 
   live-luci-manifest:
