@@ -18,37 +18,25 @@ def main() -> int:
         )
         report[table_name] = rows_to_dicts(cols)
 
-    keys = tap_query(
-        "SELECT * FROM TAP_SCHEMA.keys "
-        "WHERE from_table='lbt.luci' OR target_table='lbt.luci' "
-        "OR from_table='lbt.lbt' OR target_table='lbt.lbt'"
+    report["gratname_values"] = rows_to_dicts(
+        tap_query("SELECT DISTINCT gratname FROM lbt.luci")
     )
-    report["keys"] = rows_to_dicts(keys)
-
-    key_columns = tap_query("SELECT * FROM TAP_SCHEMA.key_columns")
-    relevant_key_ids = {r.get("key_id", "") for r in report["keys"]}
-    report["key_columns"] = [
-        row for row in rows_to_dicts(key_columns)
-        if row.get("key_id", "") in relevant_key_ids
-    ]
-
-    samples = tap_query(
-        "SELECT TOP 5 instrument, telescope, object, filters, gratname, imagetyp, "
-        "file_name, dataprod, date_obs FROM lbt.luci"
+    report["optic_values"] = rows_to_dicts(
+        tap_query("SELECT DISTINCT optic FROM lbt.luci")
     )
-    report["luci_samples"] = rows_to_dicts(samples)
-
-    gratings = tap_query("SELECT DISTINCT gratname FROM lbt.luci")
-    report["gratname_values"] = rows_to_dicts(gratings)
-
-    imaging_like = tap_query(
-        "SELECT TOP 20 l.instrument, l.telescope, l.object, l.filters, l.filter1, l.filter2, "
-        "l.gratname, l.optic, l.imagetyp, l.file_name, b.file_url, b.policy "
-        "FROM lbt.luci AS l JOIN lbt.lbt AS b ON l.file_name=b.file_name "
-        "WHERE l.imagetyp='SCIENCE' AND (l.gratname IS NULL OR l.gratname='' "
-        "OR UPPER(l.gratname) LIKE '%MIRROR%' OR UPPER(l.gratname) LIKE '%IMAGE%')"
+    report["science_mode_samples"] = rows_to_dicts(
+        tap_query(
+            "SELECT TOP 30 instrument, telescope, object, filters, filter1, filter2, "
+            "gratname, optic, imagetyp, file_name, date_obs FROM lbt.luci "
+            "WHERE imagetyp='SCIENCE'"
+        )
     )
-    report["imaging_like_join_samples"] = rows_to_dicts(imaging_like)
+    report["joined_url_samples"] = rows_to_dicts(
+        tap_query(
+            "SELECT TOP 5 lbt.luci.file_name, lbt.lbt.file_url, lbt.lbt.policy "
+            "FROM lbt.luci JOIN lbt.lbt ON lbt.luci.file_name=lbt.lbt.file_name"
+        )
+    )
 
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0
