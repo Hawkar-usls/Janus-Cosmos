@@ -1,0 +1,169 @@
+{
+  "schema": "janus.cosmos.sky.manifest.v2.0",
+  "version": "2.0.0",
+  "orion": {
+    "center_j2000": {
+      "ra_deg": 84.0816,
+      "dec_deg": -1.1475
+    },
+    "fov_deg": 5.0,
+    "pixels": 1024,
+    "belt_stars_j2000": [
+      {
+        "name": "Alnitak",
+        "ra_deg": 85.189694,
+        "dec_deg": -1.942574
+      },
+      {
+        "name": "Alnilam",
+        "ra_deg": 84.053389,
+        "dec_deg": -1.201917
+      },
+      {
+        "name": "Mintaka",
+        "ra_deg": 83.001667,
+        "dec_deg": -0.299095
+      }
+    ],
+    "surveys": [
+      {
+        "family": "DSS2",
+        "band": "RED",
+        "hips": "CDS/P/DSS2/red",
+        "filename": "orion_dss2_red.fits"
+      },
+      {
+        "family": "DSS2",
+        "band": "BLUE",
+        "hips": "CDS/P/DSS2/blue",
+        "filename": "orion_dss2_blue.fits"
+      },
+      {
+        "family": "2MASS",
+        "band": "J",
+        "hips": "CDS/P/2MASS/J",
+        "filename": "orion_2mass_j.fits"
+      },
+      {
+        "family": "2MASS",
+        "band": "K",
+        "hips": "CDS/P/2MASS/K",
+        "filename": "orion_2mass_k.fits"
+      }
+    ],
+    "family_tests": 16,
+    "alpha_family": 0.05,
+    "alpha_corrected": 0.003125
+  },
+  "ngc1425": {
+    "surveys": [
+      {
+        "family": "HST_WFPC2",
+        "band": "F555W",
+        "filename": "ngc1425_f555w.fits",
+        "url": "https://archive.stsci.edu/pub/hlsp/sgal/h_n1425_f555_mosaic.fits"
+      },
+      {
+        "family": "HST_WFPC2",
+        "band": "F814W",
+        "filename": "ngc1425_f814w.fits",
+        "url": "https://archive.stsci.edu/pub/hlsp/sgal/h_n1425_f814_mosaic.fits"
+      }
+    ],
+    "alpha_family": 0.05,
+    "frozen_parent_family_tests": 28,
+    "alpha_corrected": 0.0017857142857142859
+  },
+  "blind_controls": {
+    "generation_seed_sha256": "adb077c193e8ce647c58a1b1550dbf1101da8510847b9cc7084b3b3c6f6db8bf",
+    "centers": [
+      {
+        "id": "CTRL_01",
+        "ra_deg": 120.19757409118974,
+        "dec_deg": 27.763785441900232
+      },
+      {
+        "id": "CTRL_02",
+        "ra_deg": 60.227434839559116,
+        "dec_deg": 56.562045426052435
+      },
+      {
+        "id": "CTRL_03",
+        "ra_deg": 24.37506186588447,
+        "dec_deg": -17.98304217706124
+      },
+      {
+        "id": "CTRL_04",
+        "ra_deg": 153.66926043477002,
+        "dec_deg": 26.60363903284716
+      }
+    ],
+    "fov_deg": 5.0,
+    "pixels": 512,
+    "surveys": [
+      {
+        "family": "DSS2",
+        "band": "RED",
+        "hips": "CDS/P/DSS2/red"
+      },
+      {
+        "family": "DSS2",
+        "band": "BLUE",
+        "hips": "CDS/P/DSS2/blue"
+      },
+      {
+        "family": "2MASS",
+        "band": "J",
+        "hips": "CDS/P/2MASS/J"
+      },
+      {
+        "family": "2MASS",
+        "band": "K",
+        "hips": "CDS/P/2MASS/K"
+      }
+    ],
+    "family_tests": 32,
+    "alpha_family": 0.05,
+    "alpha_corrected": 0.0015625,
+    "specificity_gate": {
+      "max_false_positive_fields_whole": 1,
+      "max_false_positive_fields_corridor": 1,
+      "field_definition": "robust in >=1 DSS2 band AND >=1 2MASS band, with both null models below the pre-registered family alpha"
+    },
+    "whole_family_tests": 32,
+    "corridor_family_tests": 32,
+    "alpha_corrected_whole": 0.0015625,
+    "alpha_corrected_corridor": 0.0015625,
+    "pseudo_belt_template_norm": [
+      [
+        35.3375,
+        43.2665
+      ],
+      [
+        64.1853,
+        62.087
+      ],
+      [
+        90.9011,
+        85.0155
+      ]
+    ]
+  },
+  "monte_carlo": {
+    "test_nulls_per_model": 768,
+    "calibration_nulls_per_model": 96,
+    "seeds": [
+      20260901,
+      20260902,
+      20260903
+    ]
+  },
+  "cross_survey_rule": {
+    "orion_requires_families": [
+      "DSS2",
+      "2MASS"
+    ],
+    "min_passing_bands_per_family": 2
+  },
+  "claim_ceiling": "Image-level sky-fixed morphology candidate only after specificity gate. No artificial-structure, hidden-message, censorship, or new-physics claim."
+}

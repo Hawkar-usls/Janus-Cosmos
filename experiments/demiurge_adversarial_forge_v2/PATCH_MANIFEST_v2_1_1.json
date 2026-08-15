@@ -1,0 +1,53 @@
+{
+  "schema": "janus.cosmos.runtime_patch_manifest.v1",
+  "runtime_version": "2.1.1",
+  "scientific_protocol_version": "2.1.0",
+  "install_mode": "OVERLAY_EXISTING_V2_1_DIRECTORY",
+  "worker_profile": {
+    "cpu_executor": "WINDOWS_SAFE_SPAWN_PROCESS_POOL",
+    "download_executor": "BOUNDED_THREAD_POOL",
+    "maximum_workers": 10,
+    "frozen_result_order": true
+  },
+  "scientific_identity": {
+    "protocol_sha256": "19513a026bd96519f048aa36b3cd01ee35d639acbc6eadeeaed4d3b287bc561d",
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a",
+    "null_models_or_counts_changed": false,
+    "admission_rules_changed": false
+  },
+  "payload_sha256": {
+    "EXPECTED_PROTOCOL_v2_1.json": "26bef96fe24d10c3256581a255bee129c70bd28b6f6260cd9e0b554fb403b7cf",
+    "PATCH_NOTES_v2_1_1.txt": "11a9e4ea82966afb0bedba0d0d4ef1e17dee4b6a41f5d9572033254e76bd5549",
+    "README_v2_1.txt": "6aef339616bc719e016aa862c92b6c4aeab23bcce1d6b538fe3cda4387930aa8",
+    "START_HERE_v2_1.txt": "2095b0d9e711af1e7c06b957e3664851506d8c0e6eea48e162dac543bf62eb3c",
+    "download_sky_v2_1.py": "a4201fdee2c3f429b44f1f35ea77ed3ca17b2027184a0ea46c2510697790734a",
+    "janus_cosmos_v2_1.py": "f531bdcedc7f949845b1169bc8ba143824f16bb089ef686541da2b8289d36f4a",
+    "run_janus_cosmos_v2_1.bat": "ee1e29ca8949f0fccad134867c657341642c35737f5eed39891592679ad4c1cb",
+    "self_test_v2_1.py": "9955d1b19e298da7f5ee2871a4fda30291a0747038d248d6e6ffc3cb1bff5a6f"
+  },
+  "required_existing_paths": [
+    "SPECIFICITY_PROTOCOL_v2_1.json",
+    "demiurge_forge_v2.py",
+    "janus_cosmos_core_v2.py",
+    "janus_cosmos_specificity_v2_1.py",
+    "janus_cosmos_v2_0.py",
+    "requirements_v2_0.txt",
+    "EXPECTED_FORGE_v2_0.json",
+    "FORGE_MANIFEST_v2_0.json",
+    "FORGE_METRIC_REFERENCE_v2_0.json",
+    "SKY_MANIFEST_v2_0.json",
+    "forge_output/FROZEN_DETECTOR_v2_0.json",
+    "evidence/v2_0_2_specificity_negative/NEGATIVE_SPECIFICITY_CERTIFICATE_v2_0_2.json"
+  ],
+  "preserve_directories": [
+    "external_data",
+    "results_v2_1/checkpoints"
+  ],
+  "intentionally_omitted": [
+    "old reports, JSONL event streams, terminal logs and previews",
+    "legacy v2.0 and offline/smoke BAT launchers",
+    "prior package-validation receipts and forge ledgers",
+    "Python bytecode caches"
+  ]
+}

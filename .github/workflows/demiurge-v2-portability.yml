@@ -1,0 +1,98 @@
+name: Demiurge v2.1.1 parallel specificity repair
+
+on:
+  push:
+    paths:
+      - 'experiments/demiurge_adversarial_forge_v2/**'
+      - '.github/workflows/demiurge-v2-portability.yml'
+  pull_request:
+    paths:
+      - 'experiments/demiurge_adversarial_forge_v2/**'
+      - '.github/workflows/demiurge-v2-portability.yml'
+  workflow_dispatch:
+
+jobs:
+  portable-forge:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-reference
+            os: ubuntu-latest
+            python: '3.12'
+            numpy: '2.3.5'
+            scipy: '1.17.0'
+          - name: linux-reported-libraries
+            os: ubuntu-latest
+            python: '3.12'
+            numpy: '2.5.2'
+            scipy: '1.18.0'
+          - name: windows-reported-stack
+            os: windows-latest
+            python: '3.14'
+            numpy: '2.5.2'
+            scipy: '1.18.0'
+
+    defaults:
+      run:
+        working-directory: experiments/demiurge_adversarial_forge_v2
+
+    env:
+      JANUS_COSMOS_WORKERS: '10'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: experiments/demiurge_adversarial_forge_v2/requirements_v2_0.txt
+
+      - name: Install registered numerical stack
+        run: >-
+          python -m pip install --disable-pip-version-check
+          numpy==${{ matrix.numpy }} scipy==${{ matrix.scipy }} "requests>=2.31"
+
+      - name: Compile package
+        run: python -m compileall -q .
+
+      - name: Offline scientific and portability self-test
+        run: python self_test_v2_0.py
+
+      - name: v2.1 negative-certificate and specificity-protocol self-test
+        run: python self_test_v2_1.py
+
+      - name: Re-forge and verify portable identity
+        run: python demiurge_forge_v2.py --quiet --verify-expected
+
+      - name: Verify runtime frozen detector
+        run: python janus_cosmos_v2_0.py --self-test
+
+      - name: Verify v2.1 runtime protocol binding
+        run: python janus_cosmos_v2_1.py --self-test --workers 10
+
+      - name: Verify frozen 168-product download plan
+        run: python download_sky_v2_1.py --dry-run --workers 10
+
+      - name: Emit machine-readable portability evidence
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          frozen=json.loads(Path('forge_output/FROZEN_DETECTOR_v2_0.json').read_text(encoding='utf-8'))
+          print(json.dumps({
+              'version':frozen['version'],
+              'genome_sha256':frozen['genome_sha256'],
+              'freeze_sha256':frozen['freeze_sha256'],
+              'metrics_sha256':frozen['metrics_sha256'],
+              'numeric_environment':frozen['numeric_environment'],
+              'validation_pass':frozen['validation_pass'],
+          },indent=2))

@@ -1,0 +1,44 @@
+{
+  "schema": "janus.cosmos.demiurge_bridge.provenance.v2.0",
+  "source_repository": "Hawkar-usls/Janus-Demiurge",
+  "source_repository_status": "legacy_experimental_sandbox",
+  "integration_style": "clean-room scientific bridge; architecture concepts reused, legacy runtime not imported",
+  "concepts_reused": [
+    {
+      "source": "architect_ai.py",
+      "blob_sha": "9a8ad4d79e587fd35e41b81ac9eb3a9824114151",
+      "idea": "bounded architecture genome and mutation"
+    },
+    {
+      "source": "auto_evolution.py",
+      "blob_sha": "4b2da552b3c6cf6ccebd3c17eba1933e59bafa65",
+      "idea": "mutate candidate, evaluate, retain only improved candidates"
+    },
+    {
+      "source": "swarm_optimizer.py",
+      "blob_sha": "da6420b9720dd6c3dda3111e1abb27ac15428f2c",
+      "idea": "population search with retained best configurations"
+    },
+    {
+      "source": "counterfactual_engine.py",
+      "blob_sha": "09df1141ae438b30e547d5468ed034e23d752e36",
+      "idea": "paired counterfactual interventions used here as signal-vs-artifact transformations"
+    },
+    {
+      "source": "bayes_optimizer.py",
+      "blob_sha": "382be08924693dc9dbd0d4e416b4341da6911bd2",
+      "idea": "ask/evaluate/history pattern only; no tachyonic or numerological acquisition retained"
+    }
+  ],
+  "explicitly_excluded": [
+    "filter_37",
+    "digital_root",
+    "tachyonic correction",
+    "resonance boost",
+    "mood influence",
+    "runtime self-modification after freeze",
+    "target-informed hyperparameter tuning",
+    "Orion or NGC1425 data inside the forge"
+  ],
+  "scientific_firewall": "Demiurge sees synthetic training/validation controls only. The frozen genome hash is verified before any astronomical target analysis."
+}

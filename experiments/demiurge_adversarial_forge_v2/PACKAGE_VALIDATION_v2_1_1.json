@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.package_validation.v2.1.1",
+  "status": "PASS",
+  "runtime_version": "2.1.1",
+  "scientific_protocol_version": "2.1.0",
+  "scientific_protocol_sha256": "19513a026bd96519f048aa36b3cd01ee35d639acbc6eadeeaed4d3b287bc561d",
+  "archive": {
+    "name": "Janus_Cosmos_v2_1_1_Runtime_Accelerator_PATCH.zip",
+    "sha256": "b0c725e165f05d47429673f326ac7345ef26d5f78b29c7695912e116f188ebea",
+    "file_count": 9,
+    "bat_count": 1,
+    "install_mode": "OVERLAY_EXISTING_V2_1_DIRECTORY",
+    "old_raw_evidence_included": false,
+    "legacy_launchers_included": false
+  },
+  "local_numeric_environment": {
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0"
+  },
+  "tests": {
+    "compileall": "PASS",
+    "v2_0_2_offline_self_test": "PASS",
+    "v2_1_1_self_test": "PASS",
+    "windows_spawn_process_and_ipc_probe": "PASS",
+    "portable_forge_identity": "PASS",
+    "download_plan_168_products": "PASS",
+    "canonical_v1_pytest": "9_PASS",
+    "archive_overlay_smoke": "PASS",
+    "supplied_v2_1_checkpoint_resume": "103_OF_103_PASS",
+    "supplied_checkpoint_event_exact_binding": "PASS",
+    "archive_overlay_scheduler": "WINDOWS_SAFE_SPAWN_PROCESS_POOL_FROZEN_RESULT_ORDER",
+    "archive_overlay_scientific_protocol_unchanged": true
+  },
+  "determinism_validation": {
+    "one_worker_vs_ten_process_scientific_report_sections_exactly_equal": true,
+    "ten_field_one_worker_vs_ten_process_field_objects_exactly_equal": true,
+    "completion_order_restored_to_frozen_input_order": true
+  },
+  "performance_validation": {
+    "smoke": {
+      "one_worker_seconds": 16.786309,
+      "ten_process_seconds": 10.350454,
+      "speedup": 1.622
+    },
+    "ten_field_synthetic_fits": {
+      "one_process_seconds": 70.894517,
+      "ten_process_seconds": 12.249599,
+      "speedup": 5.787,
+      "test_nulls_per_model": 24,
+      "calibration_nulls_per_model": 12
+    },
+    "whole_field_checkpoint_resume_seconds": 0.599
+  },
+  "claim": "Measured local timings validate parallel execution, not a guaranteed speedup on every host. Scientific null generation and admission rules are unchanged."
+}

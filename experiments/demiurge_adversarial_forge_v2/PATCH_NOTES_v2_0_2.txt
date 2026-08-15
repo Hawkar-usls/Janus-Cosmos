@@ -1,0 +1,50 @@
+JANUS COSMOS v2.0.2 — PORTABLE DETECTOR IDENTITY FIX
+====================================================
+
+Observed failures
+-----------------
+v2.0 hashed raw synthetic validation floats and failed across numerical stacks.
+v2.0.1 rounded those metrics to 12 decimal places, but still failed on:
+
+  Python 3.14 / NumPy 2.5.2 / SciPy 1.18.0 / Windows
+
+Root cause
+----------
+Detector identity and platform-specific numerical evidence were incorrectly
+treated as one byte-identical object. A scientific receipt may preserve exact
+floating-point evidence without requiring every numerical library build to emit
+the same final bits.
+
+v2.0.2 proof layers
+-------------------
+1. freeze_sha256 binds the portable detector identity:
+   - selected genome and genome_sha256;
+   - validation PASS decision;
+   - normalized source and manifest hashes;
+   - blind-wall declaration;
+   - fixed numerical-conformance contract.
+
+2. metrics_sha256 binds the exact raw metrics emitted by the current platform.
+
+3. FORGE_METRIC_REFERENCE_v2_0.json is source-hash bound and admits only a
+   2e-6 absolute/relative cross-platform deviation. The scientific gate itself
+   still evaluates unrounded raw values.
+
+4. self_test_v2_0.py proves that harmless metric drift does not alter detector
+   identity, exact evidence drift does alter metrics_sha256, and material drift
+   is rejected by the tolerance gate.
+
+Expected portable hashes
+------------------------
+genome_sha256:
+  ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6
+
+freeze_sha256:
+  55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a
+
+How to run
+----------
+1. Extract this v2.0.2 ZIP into a new folder.
+2. Double-click run_janus_cosmos_v2_0.bat.
+3. Do not copy EXPECTED_FORGE_v2_0.json, FORGE_METRIC_REFERENCE_v2_0.json or
+   forge_output/FROZEN_DETECTOR_v2_0.json from v2.0/v2.0.1.

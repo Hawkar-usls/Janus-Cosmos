@@ -126,6 +126,60 @@ run_janus_cosmos_windows.bat
 
 The BAT always changes to its own directory (`cd /d "%~dp0"`), streams output through PowerShell `Tee-Object`, writes a terminal log, and keeps the window open.
 
+## Demiurge adversarial forge v2.0.2
+
+The independent [v2.0.2 forge line](experiments/demiurge_adversarial_forge_v2/) adds a synthetic adversarial detector forge, a hard freeze-before-target wall, unrelated real-sky specificity controls, Orion cross-survey validation, and the historical NGC1425 HST gate.
+
+Its portability contract deliberately separates:
+
+- `freeze_sha256`: the portable detector identity (genome, validation decision, normalized source/manifests, blind-wall declaration and numerical contract);
+- `metrics_sha256`: the exact raw synthetic metrics emitted by the current Python/NumPy/SciPy platform;
+- `FORGE_METRIC_REFERENCE_v2_0.json`: a source-bound `2e-6` cross-platform conformance envelope.
+
+The scientific gate always uses raw metrics. Metric drift outside the envelope, source drift, genome drift, manifest drift or validation failure blocks the real-sky run. CI covers Linux plus the reported Windows stack: Python 3.14, NumPy 2.5.2 and SciPy 1.18.0.
+
+Windows entry point:
+
+```text
+experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_0.bat
+```
+
+## Detector specificity repair v2.1.1
+
+The full v2.0.2 run is retained as a hash-bound
+`VALID_NEGATIVE_DETECTOR_SPECIFICITY` certificate: 57 of 64 blind-control
+model tests saturated the empirical p-value floor, so neither Orion nor
+NGC1425 was admitted.
+
+v2.1 keeps the v2.0.2 detector genome unchanged and freezes a new admission
+protocol around independent real observations:
+
+- 20 fresh deterministic DSS2/2MASS sky controls; the four already observed
+  v2.0.2 controls are excluded from admission;
+- 255 deterministic random-position/random-orientation corridors inside every
+  image;
+- target ranking against real controls, with ties conservatively blocking;
+- actual rank-standardized, PSF/resolution-matched cross-survey morphology;
+- 20 same-archive HST/WFPC2 SGAL controls;
+- mask-aware F555/F814 analysis on the precommitted WF3 chip and common positive
+  weight-map support instead of the mosaic silhouette.
+
+Synthetic surrogates remain diagnostics and effect-size calibration. A small
+synthetic p-value alone can no longer admit a candidate.
+
+The v2.1.1 runtime patch keeps that scientific protocol byte-for-byte frozen
+while scheduling up to ten independent fields in Windows-safe spawned
+processes. Results are restored to frozen cohort order, BLAS oversubscription
+is capped, v2.1.0 model checkpoints remain reusable, writes are atomic,
+interrupted reports are preserved, and the Windows runner shows live progress
+and ETA.
+
+Windows entry point:
+
+```text
+experiments\demiurge_adversarial_forge_v2\run_janus_cosmos_v2_1.bat
+```
+
 ## Tests and CI
 
 ```bash

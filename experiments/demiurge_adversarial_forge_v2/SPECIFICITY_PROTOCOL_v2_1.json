@@ -1,0 +1,155 @@
+{
+  "schema": "janus.cosmos.detector_specificity_protocol.v2.1",
+  "version": "2.1.0",
+  "status": "FROZEN",
+  "frozen_utc": "2026-08-14T00:00:00Z",
+  "parent_detector": {
+    "version": "2.0.2",
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a",
+    "policy": "Genome, feature weights, normalization backbone and synthetic null generators remain unchanged after target inspection."
+  },
+  "negative_parent_certificate": {
+    "path": "evidence/v2_0_2_specificity_negative/NEGATIVE_SPECIFICITY_CERTIFICATE_v2_0_2.json",
+    "sha256": "5882df9d537510b81b40ad6d3ecc7b952209cc165f354c0810f936be811e85fa",
+    "required_classification": "VALID_NEGATIVE_DETECTOR_SPECIFICITY"
+  },
+  "real_sky_controls": {
+    "cohort": "FRESH_UNSEEN_V2_1",
+    "legacy_v2_0_2_fields_excluded_from_admission": true,
+    "generation": {
+      "seed_string": "JANUS_COSMOS_V2_1_BLIND_SKY_CONTROL_FREEZE_2026-08-14",
+      "algorithm": "sha256-counter-uniform-ra-uniform-sin-dec",
+      "declination_cap_deg": 70.0,
+      "minimum_orion_separation_deg": 15.0,
+      "minimum_pairwise_separation_deg": 12.0,
+      "accepted_attempt_count": 22
+    },
+    "fov_deg": 5.0,
+    "pixels": 512,
+    "centers": [
+      {"id": "SKYCTRL_01", "ra_deg": 150.249118388946, "dec_deg": 3.440582832875, "generator_attempt": 0},
+      {"id": "SKYCTRL_02", "ra_deg": 231.190076150048, "dec_deg": -39.893709734804, "generator_attempt": 1},
+      {"id": "SKYCTRL_03", "ra_deg": 153.835587404719, "dec_deg": 48.171405473900, "generator_attempt": 2},
+      {"id": "SKYCTRL_04", "ra_deg": 198.590927331076, "dec_deg": -15.960318111149, "generator_attempt": 3},
+      {"id": "SKYCTRL_05", "ra_deg": 161.319226845418, "dec_deg": 62.846275682846, "generator_attempt": 4},
+      {"id": "SKYCTRL_06", "ra_deg": 319.857062095466, "dec_deg": -5.198349315571, "generator_attempt": 5},
+      {"id": "SKYCTRL_07", "ra_deg": 126.543813390736, "dec_deg": 4.078016463662, "generator_attempt": 7},
+      {"id": "SKYCTRL_08", "ra_deg": 316.878595145667, "dec_deg": -54.333873410058, "generator_attempt": 8},
+      {"id": "SKYCTRL_09", "ra_deg": 168.339903035998, "dec_deg": 31.663510272044, "generator_attempt": 9},
+      {"id": "SKYCTRL_10", "ra_deg": 267.299320275907, "dec_deg": 48.738698716709, "generator_attempt": 10},
+      {"id": "SKYCTRL_11", "ra_deg": 196.834885289139, "dec_deg": -42.127679885666, "generator_attempt": 11},
+      {"id": "SKYCTRL_12", "ra_deg": 95.490183774504, "dec_deg": 15.572306867419, "generator_attempt": 12},
+      {"id": "SKYCTRL_13", "ra_deg": 116.913611843572, "dec_deg": -28.696314059299, "generator_attempt": 13},
+      {"id": "SKYCTRL_14", "ra_deg": 11.561475890999, "dec_deg": 18.035196792603, "generator_attempt": 14},
+      {"id": "SKYCTRL_15", "ra_deg": 200.101732490544, "dec_deg": 15.364966359070, "generator_attempt": 15},
+      {"id": "SKYCTRL_16", "ra_deg": 1.229950476526, "dec_deg": -40.414548229639, "generator_attempt": 16},
+      {"id": "SKYCTRL_17", "ra_deg": 288.503273445441, "dec_deg": -2.743736067853, "generator_attempt": 18},
+      {"id": "SKYCTRL_18", "ra_deg": 130.440720647787, "dec_deg": -24.409128274400, "generator_attempt": 19},
+      {"id": "SKYCTRL_19", "ra_deg": 0.364860284895, "dec_deg": -65.390315894599, "generator_attempt": 20},
+      {"id": "SKYCTRL_20", "ra_deg": 245.672858271856, "dec_deg": 28.989423626004, "generator_attempt": 21}
+    ],
+    "surveys": [
+      {"family": "DSS2", "band": "RED", "hips": "CDS/P/DSS2/red"},
+      {"family": "DSS2", "band": "BLUE", "hips": "CDS/P/DSS2/blue"},
+      {"family": "2MASS", "band": "J", "hips": "CDS/P/2MASS/J"},
+      {"family": "2MASS", "band": "K", "hips": "CDS/P/2MASS/K"}
+    ]
+  },
+  "orion_target": {
+    "center_j2000": {"ra_deg": 84.0816, "dec_deg": -1.1475},
+    "fov_deg": 5.0,
+    "pixels": 1024,
+    "belt_stars_j2000": [
+      {"name": "Alnitak", "ra_deg": 85.189694, "dec_deg": -1.942574},
+      {"name": "Alnilam", "ra_deg": 84.053389, "dec_deg": -1.201917},
+      {"name": "Mintaka", "ra_deg": 83.001667, "dec_deg": -0.299095}
+    ],
+    "surveys": [
+      {"family": "DSS2", "band": "RED", "hips": "CDS/P/DSS2/red", "filename": "orion_dss2_red.fits"},
+      {"family": "DSS2", "band": "BLUE", "hips": "CDS/P/DSS2/blue", "filename": "orion_dss2_blue.fits"},
+      {"family": "2MASS", "band": "J", "hips": "CDS/P/2MASS/J", "filename": "orion_2mass_j.fits"},
+      {"family": "2MASS", "band": "K", "hips": "CDS/P/2MASS/K", "filename": "orion_2mass_k.fits"}
+    ]
+  },
+  "corridor_null": {
+    "method": "within-image deterministic random position and orientation",
+    "null_corridors_per_image": 255,
+    "length_pixels_normalized": 87.0,
+    "half_width_pixels_normalized": 10.0,
+    "candidate_seed_domain": "janus-cosmos-v2.1-heldout-candidate",
+    "null_seed_domain": "janus-cosmos-v2.1-corridor-null",
+    "local_empirical_alpha": 0.05,
+    "required_passing_bands_per_family": 2,
+    "calibration": "weighted frozen geometry distance from random-corridor median with MAD scale",
+    "real_field_score": "minimum candidate-score divided by within-image null-q99 across every required band"
+  },
+  "hst_target": {
+    "id": "n1425",
+    "instrument": "HST_WFPC2",
+    "canonical_chip": "wf3",
+    "bands": ["f555", "f814"],
+    "common_valid_support": {
+      "requires_weight_maps": true,
+      "minimum_valid_fraction": 0.98,
+      "minimum_native_side_pixels": 64,
+      "invalid_pixels_filled_after_crop_only": true
+    }
+  },
+  "hst_real_controls": {
+    "source": "MAST_SGAL_WFPC2",
+    "catalog_url": "https://archive.stsci.edu/prepds/sgal/datalist.html",
+    "base_url": "https://archive.stsci.edu/pub/hlsp/sgal/",
+    "canonical_chip": "wf3",
+    "target_excluded": "n1425",
+    "field_ids": [
+      "n1637", "n2541", "n2841", "n3031", "n3198",
+      "n3319", "n3351", "n3621-off", "n3621", "n3627",
+      "n4321", "n4414-1", "n4414-2", "n4496A", "n4559",
+      "n4571", "n4603", "n4639", "n4725", "n5194-1"
+    ],
+    "products_per_field": [
+      "h_{id}_f555_wf3.fits",
+      "h_{id}_f555_wf3_wgt.fits",
+      "h_{id}_f814_wf3.fits",
+      "h_{id}_f814_wf3_wgt.fits"
+    ]
+  },
+  "synthetic_null_diagnostics": {
+    "test_nulls_per_model": 768,
+    "calibration_nulls_per_model": 96,
+    "seeds": [20260901, 20260902, 20260903],
+    "models": ["phase_iaaft", "block_shuffle"],
+    "admission_uses_real_field_rank": true,
+    "synthetic_p_alone_can_admit": false,
+    "band_effect": "minimum observed-statistic divided by null-q99 across both models",
+    "field_effect": "minimum band effect across every required band"
+  },
+  "morphology_agreement": {
+    "photometric_transform": "within-image rank standardization",
+    "gaussian_sigma_pixels": 2.0,
+    "comparison_size_pixels": 64,
+    "orion_score": "median of four DSS2-to-2MASS correlations",
+    "hst_score": "F555-to-F814 correlation on common valid WF3 support",
+    "independent_admission_gate": true
+  },
+  "real_field_admission": {
+    "control_count_per_target_family": 20,
+    "empirical_p_formula": "(1 + number_of_controls_with_score_greater_or_equal_target) / (N + 1)",
+    "maximum_control_exceedances": 0,
+    "minimum_resolvable_p": 0.047619047619047616,
+    "orion_required_gates": [
+      "whole_detector_real_field_rank",
+      "corridor_local_randomization",
+      "corridor_detector_real_field_rank",
+      "whole_cross_survey_morphology_real_field_rank",
+      "corridor_cross_survey_morphology_real_field_rank"
+    ],
+    "ngc1425_required_gates": [
+      "mask_aware_wf3_common_support",
+      "whole_detector_real_hst_field_rank",
+      "cross_filter_morphology_real_hst_field_rank"
+    ]
+  },
+  "claim_ceiling": "Image-level sky-fixed morphology candidate only after all frozen real-field specificity gates. No artificial-structure, hidden-message, censorship, astronomical-discovery, or new-physics claim."
+}

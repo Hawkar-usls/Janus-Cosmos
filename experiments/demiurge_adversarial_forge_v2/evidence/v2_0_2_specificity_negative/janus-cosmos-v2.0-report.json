@@ -1,0 +1,3263 @@
+{
+  "schema": "janus.cosmos.v2.0.report",
+  "version": "2.0.2",
+  "status": "PASS",
+  "smoke_only": false,
+  "frozen_detector": {
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "freeze_sha256": "55bdf9f19820623a392b6b7a859408d3beffb68f28dd4a32001bb1903025403a",
+    "validation_metrics": {
+      "fitness": -1.3799371070761126,
+      "base_median": 0.9007938838986395,
+      "signal_absolute_median": 1.1203802192230912,
+      "artifact_absolute_median": 1.49643348933688,
+      "paired_signal_median": 0.7207102685998443,
+      "paired_artifact_median": 1.6827560258956193,
+      "signal_to_artifact_ratio": 0.4282915987279012,
+      "pairwise_signal_beats_artifact_rate": 0.3333333333333333,
+      "signal_recovery_at_base_p99": 0.125,
+      "artifact_fp_rate_at_base_p99": 0.4583333333333333,
+      "base_p99_threshold": 1.6191250386667786,
+      "seed_instability": 0.9611015709005363,
+      "complexity": 0.3484005045172709
+    }
+  },
+  "monte_carlo": {
+    "test_nulls_per_model": 768,
+    "calibration_nulls": 96,
+    "seeds": [
+      20260901,
+      20260902,
+      20260903
+    ],
+    "min_resolvable_p": 0.0013003901170351106
+  },
+  "blind_controls": {
+    "CTRL_01": {
+      "center": {
+        "id": "CTRL_01",
+        "ra_deg": 120.19757409118974,
+        "dec_deg": 27.763785441900232
+      },
+      "bands": {
+        "CTRL_01_DSS2_RED": {
+          "family": "DSS2",
+          "band": "RED",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_01_dss2_red.fits",
+            "sha256": "b6066b877e4cd390c5f526c17d4dabfc33e2b8e8dbc067bef06b2b04b060cc18",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.833138301548571,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.42744474966280727,
+                    "null_median": 0.9968219231874124,
+                    "null_max": 1.8358914805343665,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9806296509009302
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0189981294693315
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9862970986804418
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.093037184280716,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.31820848933513907,
+                    "null_median": 0.9172027274798539,
+                    "null_max": 3.8296298236465325,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9242494580761053
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9043034863398248
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9074490982281197
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.098390611338053,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.40437484751992353,
+                    "null_median": 0.974123369202468,
+                    "null_max": 1.8567207017545155,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9616375225698395
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9921839899407718
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9749671571240611
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 6.803399657905942,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.27992693177830297,
+                    "null_median": 0.9094108222662983,
+                    "null_max": 2.0594754712852374,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8856841988898355
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9248338293837457
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9122890433470358
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_01_DSS2_BLUE": {
+          "family": "DSS2",
+          "band": "BLUE",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_01_dss2_blue.fits",
+            "sha256": "e698cac07c4536379b287270c0c70f0e81d8f43e54b150af98c09e8d4b04574b",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.007491172994894,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4457913763482188,
+                    "null_median": 0.9105649529483342,
+                    "null_max": 2.039289076009274,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9308849346080268
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9023533798087284
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9091357721194946
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.399061479407123,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.37734966792144575,
+                    "null_median": 0.8861723806715508,
+                    "null_max": 2.261634892912276,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8913950935488402
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8861723806715508
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.8799336459258276
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.753686202798948,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4337731010790994,
+                    "null_median": 0.948059980114326,
+                    "null_max": 1.8805181379293117,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9460581017434588
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9605387030439501
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9274812378686154
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 6.986874723792295,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3358052476072111,
+                    "null_median": 0.9473121389433536,
+                    "null_max": 2.493881120270429,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9398145010949972
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9309027323991217
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9714861618852427
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_01_2MASS_J": {
+          "family": "2MASS",
+          "band": "J",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_01_tmass_j.fits",
+            "sha256": "a743f30e15cd273e0cff7dc494dfe12d0ea315003231d6edd63ebae77f61cacc",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 0.945848517626085,
+                    "null_count": 768,
+                    "ge_count": 372,
+                    "p_empirical": 0.4850455136540962,
+                    "null_min": 0.49895990060254714,
+                    "null_median": 0.94024338227555,
+                    "null_max": 2.1311860199326365,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9383546893860454
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9385096293425601
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9433220473615626
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 0.9968017027145566,
+                    "null_count": 768,
+                    "ge_count": 271,
+                    "p_empirical": 0.35370611183355005,
+                    "null_min": 0.3824438481032258,
+                    "null_median": 0.8952977261534703,
+                    "null_max": 25699.941207492244,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8971000052302405
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8894534985781446
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9033139865046069
+                      }
+                    ]
+                  }
+                },
+                "robust": false
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.569215237348282,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4285159776581859,
+                    "null_median": 1.0307685564529119,
+                    "null_max": 2.412046689401466,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.04158921884998
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0246887750995262
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 1.0260317846682951
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 6.185344438038724,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3547319890726076,
+                    "null_median": 0.9441542066077102,
+                    "null_max": 1.7776094100388329,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9282644259710002
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9399980496010294
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9628086884465274
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_01_2MASS_K": {
+          "family": "2MASS",
+          "band": "K",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_01_tmass_k.fits",
+            "sha256": "220149f602229c2cd557f8764cdb5c0febe53bdaec388c4c80401a42dcfa11cf",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.088582912628501,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3796924019093963,
+                    "null_median": 0.9054431137791927,
+                    "null_max": 1.8861453020230925,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8995985408790537
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9110049284166568
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9089801205630329
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 1.1190100422708715,
+                    "null_count": 768,
+                    "ge_count": 162,
+                    "p_empirical": 0.21196358907672302,
+                    "null_min": 0.30383368630483526,
+                    "null_median": 0.9309933316826697,
+                    "null_max": 12849.970575448746,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9462658558039412
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.918877395805573
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9272851631288126
+                      }
+                    ]
+                  }
+                },
+                "robust": false
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.194102024758199,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3928339040715795,
+                    "null_median": 0.9277452059639228,
+                    "null_max": 1.6445816007716012,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9264941338754065
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9217730870254309
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9293560206392746
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.656296992799484,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3884873894412627,
+                    "null_median": 0.9283783535448145,
+                    "null_max": 2.096017555873425,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9138693717324369
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9346627343981974
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9302959695726322
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        }
+      },
+      "false_positive_whole": false,
+      "false_positive_corridor": true
+    },
+    "CTRL_02": {
+      "center": {
+        "id": "CTRL_02",
+        "ra_deg": 60.227434839559116,
+        "dec_deg": 56.562045426052435
+      },
+      "bands": {
+        "CTRL_02_DSS2_RED": {
+          "family": "DSS2",
+          "band": "RED",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_02_dss2_red.fits",
+            "sha256": "2443e0e9c7353778bf0874a92139584930d8d7dacc0a4126fc9454245d635afe",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.498655346077338,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3915648379103395,
+                    "null_median": 1.0013817309742985,
+                    "null_max": 2.008403015038593,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9991257388353012
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0124058395840443
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9858346450546216
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.978945796863956,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.33378099685587775,
+                    "null_median": 0.9052125225401326,
+                    "null_max": 2.0602032103475953,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9243531973846365
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8790251329492118
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.897563720974669
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 2.2277964816513003,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3586212513283224,
+                    "null_median": 0.907119355746308,
+                    "null_max": 2.1119166269666456,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9052419051900423
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9122407801231637
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.907119355746308
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 8.4563568439593,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3672312228440551,
+                    "null_median": 1.0069742371344383,
+                    "null_max": 2.1999621594364167,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.0057132810502558
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0281706851977446
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9756121505700044
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_02_DSS2_BLUE": {
+          "family": "DSS2",
+          "band": "BLUE",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_02_dss2_blue.fits",
+            "sha256": "68cb33d1e02ccfc809d17f0f9a92a34ea85b7c73558a9888e16e6ace1679846b",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.055290229431986,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.40027131854447695,
+                    "null_median": 0.9583282753761182,
+                    "null_max": 1.702549865080633,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9640881037979033
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9375357929479069
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9646419197988234
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.843327462491218,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.36118516333069073,
+                    "null_median": 0.9228049914615953,
+                    "null_max": 2.409428824549854,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9268769368696111
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9151417776229256
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.924059215246446
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.7177089196176545,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3965586462413951,
+                    "null_median": 0.9000602559565705,
+                    "null_max": 1.8189235175816727,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9018955298049076
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9010063506842834
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.8964514792150846
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 9.111677567919193,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.39363271805836847,
+                    "null_median": 0.9713366447458567,
+                    "null_max": 2.7564394965552097,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9621825486102076
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9652538436433133
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.986465827346642
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_02_2MASS_J": {
+          "family": "2MASS",
+          "band": "J",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_02_tmass_j.fits",
+            "sha256": "9652bf390dc60e35967e2bc930459b37b00eb5d08a380cf79ca65a7d42a06673",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 2.1452457251894286,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.39852366089704616,
+                    "null_median": 1.0192766788859915,
+                    "null_max": 1.8662130458564925,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.012131782898879
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0168913331717992
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 1.021518915291389
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 2.1124634499186543,
+                    "null_count": 768,
+                    "ge_count": 2,
+                    "p_empirical": 0.0039011703511053317,
+                    "null_min": 0.4074223092030766,
+                    "null_median": 0.9867301917709215,
+                    "null_max": 2.4423294928375756,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9742890308112527
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.001842597368103
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9921785518632047
+                      }
+                    ]
+                  }
+                },
+                "robust": false
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.713697782544988,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4577510688476671,
+                    "null_median": 0.95054060383936,
+                    "null_max": 2.0507176670388643,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9625962372319288
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9186909748794401
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9576577032781837
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 7.0739678771060355,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.41000121570908393,
+                    "null_median": 0.9354048169768769,
+                    "null_max": 2.1735495639551843,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9201002240404217
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9531953994658369
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9409181189441502
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_02_2MASS_K": {
+          "family": "2MASS",
+          "band": "K",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_02_tmass_k.fits",
+            "sha256": "4e286a48ed873af3a9baef78d2ea2648546fcd54d610291db5b0bd8ab8216603",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 1.6577274457721214,
+                    "null_count": 768,
+                    "ge_count": 6,
+                    "p_empirical": 0.009102730819245773,
+                    "null_min": 0.3215916129460522,
+                    "null_median": 0.9793450694757907,
+                    "null_max": 2.1856177521881195,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9869875557755132
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9753813791722452
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9738321070748424
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 1.4324089387352115,
+                    "null_count": 768,
+                    "ge_count": 34,
+                    "p_empirical": 0.045513654096228866,
+                    "null_min": 0.30268782807302824,
+                    "null_median": 0.9532958498318771,
+                    "null_max": 1.828327874061552,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9536199027763556
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.969759993443476
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9405986938031139
+                      }
+                    ]
+                  }
+                },
+                "robust": false
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.917871207792826,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.379896649831144,
+                    "null_median": 0.95196182612489,
+                    "null_max": 1.6697369850789605,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9547586510000745
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9483282829714538
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9495542544742168
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 7.191911657468827,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3973217790188708,
+                    "null_median": 0.96257967900363,
+                    "null_max": 2.108392276816049,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.0013396753194073
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9443439032432743
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9630015847818925
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        }
+      },
+      "false_positive_whole": false,
+      "false_positive_corridor": true
+    },
+    "CTRL_03": {
+      "center": {
+        "id": "CTRL_03",
+        "ra_deg": 24.37506186588447,
+        "dec_deg": -17.98304217706124
+      },
+      "bands": {
+        "CTRL_03_DSS2_RED": {
+          "family": "DSS2",
+          "band": "RED",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_03_dss2_red.fits",
+            "sha256": "d13dcbe75b8fcac1d5c6ca18722f08bb2b2571ea87d60b0b8f52c04962eb6c9c",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.357229185346091,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.41745254490679196,
+                    "null_median": 0.9346130875159797,
+                    "null_max": 2.1199555211429835,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9563750055717362
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.92493364706415
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9324910798586925
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.433098889002786,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3442686859984259,
+                    "null_median": 0.9209605013239899,
+                    "null_max": 2.957326442680051,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9159816192004965
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9341598019104446
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9200561736632222
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.5927776686184,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3891745892378146,
+                    "null_median": 0.995336329693371,
+                    "null_max": 2.4571040014972225,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.0358770944817157
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9624517400809384
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9887346953307659
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 9.097296137999209,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.39021231786319865,
+                    "null_median": 0.9597406038036045,
+                    "null_max": 2.14857590596907,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9611655581475674
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.938870385621954
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9734151768397572
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_03_DSS2_BLUE": {
+          "family": "DSS2",
+          "band": "BLUE",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_03_dss2_blue.fits",
+            "sha256": "afbb27d8c8a53bd5f82d3fec68f83c06b5498e66babb7d625c9ef88742b0b9a6",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 8.37716407162142,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3896358289721875,
+                    "null_median": 0.9466029040921187,
+                    "null_max": 1.9519658374520854,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9564650844980017
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9439076919138452
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9328327173908467
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.65369239963076,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3786617341883215,
+                    "null_median": 0.8782745266424825,
+                    "null_max": 1.9579385613506624,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8747967630463447
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8904330444764598
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.8714322521349076
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.913726182066417,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3024912340793599,
+                    "null_median": 0.9758164127364419,
+                    "null_max": 3.2160190869759626,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9758164127364419
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9742629925085328
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9794016393186027
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 7.868937852068868,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.36288490703472354,
+                    "null_median": 0.9379195283058791,
+                    "null_max": 2.0183156451112376,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9382694238500131
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9319487112417801
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9447179476733563
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_03_2MASS_J": {
+          "family": "2MASS",
+          "band": "J",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_03_tmass_j.fits",
+            "sha256": "317410427b6b5940b78a9bada567e3792322f5e1a5b2115b98aea84ac496b5d0",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.262650525236015,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.36623002850703834,
+                    "null_median": 0.9446492684517691,
+                    "null_max": 1.7920219073644397,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9526091090393051
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9476491036984707
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9338966556709687
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 1.6233304909919943,
+                    "null_count": 768,
+                    "ge_count": 28,
+                    "p_empirical": 0.0377113133940182,
+                    "null_min": 0.4271819874290899,
+                    "null_median": 0.9688599201302601,
+                    "null_max": 2.1048050870913655,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9552214663658686
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9772686821290768
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9738003513833334
+                      }
+                    ]
+                  }
+                },
+                "robust": false
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 7.329713161561775,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.41186560338810235,
+                    "null_median": 0.9720669029568634,
+                    "null_max": 2.0172237605308516,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9640686603152719
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9887702034188433
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9461182202465974
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 9.242652540989637,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3839456064862523,
+                    "null_median": 0.9783282493341141,
+                    "null_max": 4.129747726997992,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9817188808241603
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9886610918329826
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9594206734875775
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_03_2MASS_K": {
+          "family": "2MASS",
+          "band": "K",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_03_tmass_k.fits",
+            "sha256": "275c3796e59022979e6fdfac9041f50608c17351b8ef5367f12ab91bc8863ee5",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.457998969708868,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.37973425330301364,
+                    "null_median": 0.9662501740505458,
+                    "null_max": 2.227155955432173,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.948738705256376
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.982737462037047
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9587691173354014
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 2.9063302350605156,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.33888001780399774,
+                    "null_median": 0.9258431055845469,
+                    "null_max": 2.829712709158783,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.920590510942578
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9242176095982021
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9363231964457686
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 6.11239266941868,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.45057960138927006,
+                    "null_median": 1.015082516620359,
+                    "null_max": 1.9491161367753818,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.0229889259765028
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9950946418103743
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 1.0171080807516013
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 8.23468522094048,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4035662325388973,
+                    "null_median": 0.9957841725010159,
+                    "null_max": 1.913033865515212,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9555270678348864
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.020149098001866
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9860657660725783
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        }
+      },
+      "false_positive_whole": true,
+      "false_positive_corridor": true
+    },
+    "CTRL_04": {
+      "center": {
+        "id": "CTRL_04",
+        "ra_deg": 153.66926043477002,
+        "dec_deg": 26.60363903284716
+      },
+      "bands": {
+        "CTRL_04_DSS2_RED": {
+          "family": "DSS2",
+          "band": "RED",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_04_dss2_red.fits",
+            "sha256": "b1e22e3f6a21696c9dcfd8638f9e5b6a45e44a10e23b30b1876f0eaf5074a9d1",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.430486224873442,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.26364692360766984,
+                    "null_median": 0.9617260524094194,
+                    "null_max": 2.0386962933104766,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9713189309772954
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9481867613870576
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9441530139294476
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 6.41797087006733,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.32915969014231117,
+                    "null_median": 0.9785886560641448,
+                    "null_max": 4.502356457339265,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9962436619678288
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9577966586647491
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9800960622899577
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.4042779329833555,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.26845127015428505,
+                    "null_median": 0.8830216227818328,
+                    "null_max": 2.4405152473047376,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.902774167829753
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8928168523489188
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.8503584903493664
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 7.963351848485599,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.33550251590294616,
+                    "null_median": 0.9570188653107572,
+                    "null_max": 2.855644537189531,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9760293141701826
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9861722338379535
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9328469568696989
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_04_DSS2_BLUE": {
+          "family": "DSS2",
+          "band": "BLUE",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_04_dss2_blue.fits",
+            "sha256": "0666ee4a96f28cda6e530a0b2a7af5098118b0f26cde9c3fe166048a3a937976",
+            "meta": {
+              "fits_bitpix": 16,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 7.756343448222793,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.43284772706676616,
+                    "null_median": 0.9621970337366486,
+                    "null_max": 2.0442590862427132,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.962492256088191
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9686150629574694
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9558872895179069
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 5.2490096094226235,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.2908933146125175,
+                    "null_median": 0.9162167587885959,
+                    "null_max": 2.4571367381500577,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9098804993556764
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9325658156850114
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9075055047549123
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.065565541115132,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.41791325018598247,
+                    "null_median": 0.9013091315653361,
+                    "null_max": 2.1201610907094395,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.90315920929837
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.8964379693947055
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9003754566775226
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 8.06490695626711,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.33424101727937305,
+                    "null_median": 0.9112372630890169,
+                    "null_max": 2.4108776224006276,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.8784176302415685
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9275816610899457
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9196690891883237
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_04_2MASS_J": {
+          "family": "2MASS",
+          "band": "J",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_04_tmass_j.fits",
+            "sha256": "3295139ba099f29c202323513fef2fd0e6be86790af089145d55beb2e70a9e91",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 3.602705353313149,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.40589492746977474,
+                    "null_median": 0.9530798143755532,
+                    "null_max": 1.8018644112768425,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9520173664133629
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9238804283241987
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9656973320706428
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 2.3523098978383925,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4051272076815426,
+                    "null_median": 0.9376070918622509,
+                    "null_max": 1.8885820565050202,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9255485649731685
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9348468289922438
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9458591836782608
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.95565785815576,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.3865765135844475,
+                    "null_median": 1.0236198667223824,
+                    "null_max": 2.0212114847274143,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.047026502969478
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0008720771365271
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 1.0260309336152154
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 7.155560917416907,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4686727700986246,
+                    "null_median": 0.9788208457268215,
+                    "null_max": 2.159796109455763,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9793044141323005
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9611431739339819
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9929890812869373
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        },
+        "CTRL_04_2MASS_K": {
+          "family": "2MASS",
+          "band": "K",
+          "analysis": {
+            "file": "external_data\\controls\\ctrl_04_tmass_k.fits",
+            "sha256": "633e2ed9c601bfea2714df3615955a05ef8a1fea865b2d8bc28a9ce2fef0dcc8",
+            "meta": {
+              "fits_bitpix": -32,
+              "fits_native_shape": [
+                512,
+                512
+              ],
+              "fits_object": "",
+              "fits_header_filter": "",
+              "fits_instrument": "",
+              "fits_exptime": null
+            },
+            "variants": {
+              "WHOLE": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 5.105693408837329,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4281202342316258,
+                    "null_median": 0.979482572769337,
+                    "null_max": 2.077461176191024,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9639513144846088
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.981136359459305
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9855643004230445
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 3.4409429609784623,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.39480090942728396,
+                    "null_median": 0.9547503267032216,
+                    "null_max": 2.0734523115830346,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9607076964898611
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9306691332798283
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9624618370175007
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              },
+              "PSEUDO_BELT_CORRIDOR": {
+                "models": {
+                  "phase_iaaft": {
+                    "observed_stat": 4.175566128692378,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.42800786514547806,
+                    "null_median": 1.012133204467561,
+                    "null_max": 1.8639934631902084,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 1.004024148375485
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 1.0027759109461705
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 1.039094831259259
+                      }
+                    ]
+                  },
+                  "block_shuffle": {
+                    "observed_stat": 6.554521125549164,
+                    "null_count": 768,
+                    "ge_count": 0,
+                    "p_empirical": 0.0013003901170351106,
+                    "null_min": 0.4115111376734085,
+                    "null_median": 0.9336558300829412,
+                    "null_max": 2.1635866540640367,
+                    "calibration_nulls": 96,
+                    "seed_chunks": [
+                      {
+                        "seed": 20260901,
+                        "null_count": 256,
+                        "median_stat": 0.9310874809105709
+                      },
+                      {
+                        "seed": 20260902,
+                        "null_count": 256,
+                        "median_stat": 0.9323765627281884
+                      },
+                      {
+                        "seed": 20260903,
+                        "null_count": 256,
+                        "median_stat": 0.9398032412905166
+                      }
+                    ]
+                  }
+                },
+                "robust": true
+              }
+            }
+          }
+        }
+      },
+      "false_positive_whole": true,
+      "false_positive_corridor": true
+    }
+  },
+  "orion": {
+    "bands": {
+      "ORION_DSS2_RED": {
+        "family": "DSS2",
+        "band": "RED",
+        "analysis": {
+          "file": "external_data\\orion\\orion_dss2_red.fits",
+          "sha256": "7b16f7920b0fd8a3b15e3e6f5e0e9b8be2da835b3d5db32b2630d63f23ff2ea3",
+          "meta": {
+            "fits_bitpix": 16,
+            "fits_native_shape": [
+              1024,
+              1024
+            ],
+            "fits_object": "",
+            "fits_header_filter": "",
+            "fits_instrument": "",
+            "fits_exptime": null
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 9.023926747941859,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.42151641248484417,
+                  "null_median": 0.913137701460951,
+                  "null_max": 1.6652484132811682,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.8958353213219661
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9340792421643938
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9095079855633443
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 6.96756406879793,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.33232190960427377,
+                  "null_median": 0.8978133524869759,
+                  "null_max": 2.656137192573307,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.87940939462066
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.8987567763371341
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9315828511788944
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            },
+            "BELT_CORRIDOR": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 5.581589395996297,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.3079190320354286,
+                  "null_median": 0.9374200823279717,
+                  "null_max": 2.0857461939651163,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9534170427134395
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9304879687359306
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9282502569165152
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 9.64187788658261,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.363488291530073,
+                  "null_median": 0.935570307524681,
+                  "null_max": 2.353787127803307,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9204599383627714
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9310274111737713
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9563355352555208
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        },
+        "corridor": {
+          "stars": [
+            {
+              "name": "Alnitak",
+              "native_pixel_1based": [
+                285.28666062391665,
+                349.1874240752179
+              ],
+              "norm_pixel_0based": [
+                35.29267438830637,
+                43.225613741498215
+              ]
+            },
+            {
+              "name": "Alnilam",
+              "native_pixel_1based": [
+                517.7726784471618,
+                500.8624387218083
+              ],
+              "norm_pixel_0based": [
+                64.15457493918821,
+                62.05525876605049
+              ]
+            },
+            {
+              "name": "Mintaka",
+              "native_pixel_1based": [
+                733.0773001137723,
+                685.6448772705321
+              ],
+              "norm_pixel_0based": [
+                90.88349669056605,
+                84.9950140893036
+              ]
+            }
+          ],
+          "center_xy": [
+            63.4435820060202,
+            63.4252955322841
+          ],
+          "axis_xy": [
+            0.7993284288281505,
+            0.6008943857843244
+          ],
+          "sample_shape": [
+            21,
+            87
+          ]
+        }
+      },
+      "ORION_DSS2_BLUE": {
+        "family": "DSS2",
+        "band": "BLUE",
+        "analysis": {
+          "file": "external_data\\orion\\orion_dss2_blue.fits",
+          "sha256": "958c3043ed753d48bdc87d642f96f23b17affbd7f77d396db13c03ef46cbe172",
+          "meta": {
+            "fits_bitpix": 16,
+            "fits_native_shape": [
+              1024,
+              1024
+            ],
+            "fits_object": "",
+            "fits_header_filter": "",
+            "fits_instrument": "",
+            "fits_exptime": null
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 10.235696281448014,
+                  "null_count": 768,
+                  "ge_count": 1,
+                  "p_empirical": 0.002600780234070221,
+                  "null_min": 0.31279109398202365,
+                  "null_median": 1.000175747778228,
+                  "null_max": 10.357919563204188,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 1.0034455977069912
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9992138816256775
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9998660148738525
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 6.748140709362082,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.2949929829264745,
+                  "null_median": 0.9232800621244839,
+                  "null_max": 2.406862258628469,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9161786679722648
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9068537006401034
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9533330241318099
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            },
+            "BELT_CORRIDOR": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 3.7984627866155964,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.33827286850989396,
+                  "null_median": 0.8520507149401482,
+                  "null_max": 2.320961163523659,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.8591475617207436
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.8282207647752458
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.8737243050388529
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 10.80826498954013,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.40242814411810507,
+                  "null_median": 1.0329808996118004,
+                  "null_max": 2.6108126088431427,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 1.0449109551390385
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 1.0146267709490064
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 1.0351542185340958
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        },
+        "corridor": {
+          "stars": [
+            {
+              "name": "Alnitak",
+              "native_pixel_1based": [
+                285.28666062391665,
+                349.1874240752179
+              ],
+              "norm_pixel_0based": [
+                35.29267438830637,
+                43.225613741498215
+              ]
+            },
+            {
+              "name": "Alnilam",
+              "native_pixel_1based": [
+                517.7726784471618,
+                500.8624387218083
+              ],
+              "norm_pixel_0based": [
+                64.15457493918821,
+                62.05525876605049
+              ]
+            },
+            {
+              "name": "Mintaka",
+              "native_pixel_1based": [
+                733.0773001137723,
+                685.6448772705321
+              ],
+              "norm_pixel_0based": [
+                90.88349669056605,
+                84.9950140893036
+              ]
+            }
+          ],
+          "center_xy": [
+            63.4435820060202,
+            63.4252955322841
+          ],
+          "axis_xy": [
+            0.7993284288281505,
+            0.6008943857843244
+          ],
+          "sample_shape": [
+            21,
+            87
+          ]
+        }
+      },
+      "ORION_2MASS_J": {
+        "family": "2MASS",
+        "band": "J",
+        "analysis": {
+          "file": "external_data\\orion\\orion_2mass_j.fits",
+          "sha256": "bbf2c0c21f9aecb616f0d24ced8e26fdf40a9d596f4a31b08c9b15790c540481",
+          "meta": {
+            "fits_bitpix": -32,
+            "fits_native_shape": [
+              1024,
+              1024
+            ],
+            "fits_object": "",
+            "fits_header_filter": "",
+            "fits_instrument": "",
+            "fits_exptime": null
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 3.398018339088969,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.40310101698801937,
+                  "null_median": 0.9733849107831405,
+                  "null_max": 1.9519432283458789,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9741092039662472
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9700363471676408
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9749448323233207
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 4.426494262416299,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.401392367535376,
+                  "null_median": 0.9349902587645067,
+                  "null_max": 3.488727075134499,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9039977516564883
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9474105194181701
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9466945447441071
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            },
+            "BELT_CORRIDOR": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 4.085604504851372,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.34958406753083543,
+                  "null_median": 0.92539980758341,
+                  "null_max": 1.9236665035540863,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9463815428650285
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9083334272101509
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9317624762219646
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 7.31731250116106,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.4008105492012523,
+                  "null_median": 0.9194098691074047,
+                  "null_max": 2.177688041986117,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9159862047291971
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9127707862449326
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9253761714874651
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        },
+        "corridor": {
+          "stars": [
+            {
+              "name": "Alnitak",
+              "native_pixel_1based": [
+                285.28666062391665,
+                349.1874240752179
+              ],
+              "norm_pixel_0based": [
+                35.29267438830637,
+                43.225613741498215
+              ]
+            },
+            {
+              "name": "Alnilam",
+              "native_pixel_1based": [
+                517.7726784471618,
+                500.8624387218083
+              ],
+              "norm_pixel_0based": [
+                64.15457493918821,
+                62.05525876605049
+              ]
+            },
+            {
+              "name": "Mintaka",
+              "native_pixel_1based": [
+                733.0773001137723,
+                685.6448772705321
+              ],
+              "norm_pixel_0based": [
+                90.88349669056605,
+                84.9950140893036
+              ]
+            }
+          ],
+          "center_xy": [
+            63.4435820060202,
+            63.4252955322841
+          ],
+          "axis_xy": [
+            0.7993284288281505,
+            0.6008943857843244
+          ],
+          "sample_shape": [
+            21,
+            87
+          ]
+        }
+      },
+      "ORION_2MASS_K": {
+        "family": "2MASS",
+        "band": "K",
+        "analysis": {
+          "file": "external_data\\orion\\orion_2mass_k.fits",
+          "sha256": "a3a896c93bf791c28ce2ca0aa3d9b12af4f2e79d35808638084bc82db848ee65",
+          "meta": {
+            "fits_bitpix": -32,
+            "fits_native_shape": [
+              1024,
+              1024
+            ],
+            "fits_object": "",
+            "fits_header_filter": "",
+            "fits_instrument": "",
+            "fits_exptime": null
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 5.0326055469613244,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.32662624884493013,
+                  "null_median": 0.9935525249264736,
+                  "null_max": 2.7969487883964153,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9941436532406678
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9834999568997751
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 1.0080308057855927
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 4.4464723712183,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.3142697888986764,
+                  "null_median": 0.909326604068875,
+                  "null_max": 2.9915953627458305,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9233643418336406
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.8854869184806682
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9048722527327632
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            },
+            "BELT_CORRIDOR": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 7.265490057156067,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.3372292587706069,
+                  "null_median": 0.954166395475387,
+                  "null_max": 1.9415038509614237,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9758849007137567
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9525153133943126
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9345856385816136
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 6.793257291363417,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.2969665776761842,
+                  "null_median": 0.8931074546761553,
+                  "null_max": 2.5306301517052816,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9059705124040762
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.8988101254634704
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.8751819610495344
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        },
+        "corridor": {
+          "stars": [
+            {
+              "name": "Alnitak",
+              "native_pixel_1based": [
+                285.28666062391665,
+                349.1874240752179
+              ],
+              "norm_pixel_0based": [
+                35.29267438830637,
+                43.225613741498215
+              ]
+            },
+            {
+              "name": "Alnilam",
+              "native_pixel_1based": [
+                517.7726784471618,
+                500.8624387218083
+              ],
+              "norm_pixel_0based": [
+                64.15457493918821,
+                62.05525876605049
+              ]
+            },
+            {
+              "name": "Mintaka",
+              "native_pixel_1based": [
+                733.0773001137723,
+                685.6448772705321
+              ],
+              "norm_pixel_0based": [
+                90.88349669056605,
+                84.9950140893036
+              ]
+            }
+          ],
+          "center_xy": [
+            63.4435820060202,
+            63.4252955322841
+          ],
+          "axis_xy": [
+            0.7993284288281505,
+            0.6008943857843244
+          ],
+          "sample_shape": [
+            21,
+            87
+          ]
+        }
+      }
+    },
+    "family_status": {
+      "DSS2": {
+        "whole_robust": true,
+        "corridor_robust": true
+      },
+      "2MASS": {
+        "whole_robust": true,
+        "corridor_robust": true
+      }
+    },
+    "whole_cross_survey": true,
+    "belt_corridor_cross_survey": true,
+    "cross_band_smooth_correlations": {
+      "ORION_2MASS_J__ORION_2MASS_K": 0.8955074774314781,
+      "ORION_2MASS_J__ORION_DSS2_BLUE": 0.3245233904027297,
+      "ORION_2MASS_J__ORION_DSS2_RED": 0.2962548678227556,
+      "ORION_2MASS_K__ORION_DSS2_BLUE": 0.33993853997316936,
+      "ORION_2MASS_K__ORION_DSS2_RED": 0.3427218686037024,
+      "ORION_DSS2_BLUE__ORION_DSS2_RED": 0.8075748767437092
+    },
+    "status": "DETECTOR_SPECIFICITY_BLOCKED"
+  },
+  "ngc1425": {
+    "bands": {
+      "NGC1425_F555W": {
+        "family": "HST_WFPC2",
+        "band": "F555W",
+        "analysis": {
+          "file": "external_data\\ngc1425\\ngc1425_f555w.fits",
+          "sha256": "d32da53431c8bc8078057075c08f949bb2aeb2c1560618bec322e173b28e9245",
+          "meta": {
+            "fits_bitpix": -32,
+            "fits_native_shape": [
+              4096,
+              4096
+            ],
+            "fits_object": "MOSAIC[1/1]",
+            "fits_header_filter": "",
+            "fits_instrument": "WFPC2",
+            "fits_exptime": 235200.0
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 4.683174878544921,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.3965522727325229,
+                  "null_median": 0.9121896218021904,
+                  "null_max": 3.115176891538427,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9108356920153693
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9069747326714317
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9187369073980136
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 7.898010070681318,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.32742935381504384,
+                  "null_median": 0.8759925711614376,
+                  "null_max": 2.339088362929376,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.8837233793754597
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.8649236110382936
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.8894668353886737
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        }
+      },
+      "NGC1425_F814W": {
+        "family": "HST_WFPC2",
+        "band": "F814W",
+        "analysis": {
+          "file": "external_data\\ngc1425\\ngc1425_f814w.fits",
+          "sha256": "9f2e17ad0ff5dc9f993f8d31d92c9d1a74d6797caa6d35e6bf6674a658566415",
+          "meta": {
+            "fits_bitpix": -32,
+            "fits_native_shape": [
+              4096,
+              4096
+            ],
+            "fits_object": "MOSAIC[1/1]",
+            "fits_header_filter": "",
+            "fits_instrument": "WFPC2",
+            "fits_exptime": 118800.0
+          },
+          "variants": {
+            "WHOLE": {
+              "models": {
+                "phase_iaaft": {
+                  "observed_stat": 3.890160950862113,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.4359778268817117,
+                  "null_median": 0.9468545530386108,
+                  "null_max": 2.5414171621126496,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9389970107782182
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9293032835913124
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.969113365070313
+                    }
+                  ]
+                },
+                "block_shuffle": {
+                  "observed_stat": 7.86441397913915,
+                  "null_count": 768,
+                  "ge_count": 0,
+                  "p_empirical": 0.0013003901170351106,
+                  "null_min": 0.36649392931706926,
+                  "null_median": 0.9478336814109505,
+                  "null_max": 2.4183138235749273,
+                  "calibration_nulls": 96,
+                  "seed_chunks": [
+                    {
+                      "seed": 20260901,
+                      "null_count": 256,
+                      "median_stat": 0.9518677195657979
+                    },
+                    {
+                      "seed": 20260902,
+                      "null_count": 256,
+                      "median_stat": 0.9572172175351463
+                    },
+                    {
+                      "seed": 20260903,
+                      "null_count": 256,
+                      "median_stat": 0.9328036244606202
+                    }
+                  ]
+                }
+              },
+              "robust": true
+            }
+          }
+        }
+      }
+    },
+    "cross_filter_robust": true,
+    "status": "DETECTOR_SPECIFICITY_BLOCKED"
+  },
+  "global_status": {
+    "specificity_gate": {
+      "status": "FAIL",
+      "false_positive_fields_whole": 2,
+      "false_positive_fields_corridor": 4,
+      "field_count": 4,
+      "max_whole": 1,
+      "max_corridor": 1
+    },
+    "orion_candidate_admitted": false,
+    "ngc1425_candidate_admitted": false,
+    "claim_ceiling_enforced": true
+  },
+  "errors": [],
+  "claim_ceiling": "Image-level sky-fixed morphology candidate only after specificity gate. No artificial-structure, hidden-message, censorship, or new-physics claim."
+}

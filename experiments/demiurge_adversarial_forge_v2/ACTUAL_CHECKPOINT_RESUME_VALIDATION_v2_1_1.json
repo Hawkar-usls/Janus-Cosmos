@@ -1,0 +1,63 @@
+{
+  "schema": "janus.cosmos.actual_checkpoint_resume_validation.v1",
+  "classification": "VALID_INTERRUPTED_V2_1_RUN_RESUME_SOURCE",
+  "runtime_version_verified": "2.1.1",
+  "scientific_protocol_version": "2.1.0",
+  "scientific_identity": {
+    "protocol_sha256": "19513a026bd96519f048aa36b3cd01ee35d639acbc6eadeeaed4d3b287bc561d",
+    "genome_sha256": "ebec8aaf0b623e8f805615130362570738ddacf4c5f4a90cc347652209fd20d6",
+    "test_nulls_per_model": 768,
+    "calibration_nulls_per_model": 96,
+    "seeds": [20260901, 20260902, 20260903]
+  },
+  "supplied_artifact_sha256": {
+    "checkpoints.rar": "a3f940e3fbc9b72916b94b768b0cfd0764e8836f0f254c967ccc3dcbc107556c",
+    "janus-cosmos-v2.1-events.jsonl": "2cf42e7ee0fd7aba7f2afcd28c8f65e5d78cad95759806f0123d0ffc9c6b90f6",
+    "terminal_v2.1.log": "2f5f91c2e271aad9d298a3c18852e3854165f7f8fd56845c23035737614ed2c7"
+  },
+  "checkpoint_validation": {
+    "json_count": 103,
+    "json_parse_pass": 103,
+    "settings_hash_pass": 103,
+    "scientific_identity_pass": 103,
+    "result_invariant_pass": 103,
+    "v2_1_1_runtime_cache_key_pass": 103,
+    "v2_1_1_cache_hit_result_exact_pass": 103,
+    "problems": []
+  },
+  "event_binding": {
+    "model_complete_count": 103,
+    "checkpoint_event_keyset_exact": true,
+    "p_empirical_exact": true,
+    "tail_ratio_q99_exact": true
+  },
+  "coverage": {
+    "SKYCTRL_01": 8,
+    "SKYCTRL_02": 8,
+    "SKYCTRL_03": 8,
+    "SKYCTRL_04": 8,
+    "SKYCTRL_05": 8,
+    "SKYCTRL_06": 8,
+    "SKYCTRL_07": 8,
+    "SKYCTRL_08": 8,
+    "SKYCTRL_09": 8,
+    "SKYCTRL_10": 8,
+    "SKYCTRL_11": 8,
+    "SKYCTRL_12": 8,
+    "SKYCTRL_13": 7
+  },
+  "next_missing_model_checkpoint": "SKYCTRL_13_2MASS_K__WHOLE__block_shuffle.json",
+  "synthetic_p_floor": {
+    "count": 77,
+    "total": 103,
+    "fraction": 0.7475728155339806
+  },
+  "resume_conclusion": {
+    "matching_v2_1_0_model_checkpoints_reused": true,
+    "completed_model_work_preserved": "103/252 full-run model units (40.9%); 103/160 sky-control model units (64.4%)",
+    "external_data_must_be_preserved": true,
+    "checkpoint_directory_must_be_preserved": true,
+    "target_result_present": false
+  },
+  "claim_ceiling": "This receipt proves checkpoint integrity and runtime resume compatibility only. It does not admit or reject Orion or NGC1425."
+}

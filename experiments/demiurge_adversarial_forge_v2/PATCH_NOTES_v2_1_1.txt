@@ -1,0 +1,33 @@
+JANUS COSMOS v2.1.1 RUNTIME ACCELERATOR
+=======================================
+
+Scientific identity
+-------------------
+- SPECIFICITY_PROTOCOL_v2_1.json is unchanged (scientific version 2.1.0).
+- Frozen detector genome and portable freeze identities are unchanged.
+- Null models, null counts, seed list, scores, cohorts and admission rules are
+  unchanged.
+
+Execution repairs
+-----------------
+- Up to 10 independent real-sky/HST fields run in Windows-safe spawned
+  processes, bypassing the Python GIL for CPU-heavy null generation.
+- Completion order cannot affect the report: results are restored to frozen
+  protocol order.
+- Existing matching v2.1.0 model checkpoints are accepted.
+- New whole-field checkpoints make subsequent resumes immediate.
+- Checkpoints, progress state and partial/final reports use atomic replacement.
+- Corrupt checkpoint JSON is rejected and recomputed instead of crashing.
+- Previous reports/logs are rotated into results_v2_1/history.
+- The 168-product downloader is also bounded to 10 concurrent transfers and
+  writes provenance in frozen plan order.
+- The Windows runner caps nested numerical-library threads to avoid a 10 x N
+  oversubscription storm.
+- Live animated progress reports model units, active workers, elapsed time and
+  ETA; a JSON snapshot is available for non-interactive monitoring.
+
+Minimal delivery
+----------------
+The user-facing patch deliberately omits old raw v2.0.2 reports, previews,
+events, logs and legacy BAT launchers. The hash-bound negative certificate is
+retained; its raw artifacts remain available in repository history.

@@ -1,0 +1,21 @@
+JANUS COSMOS v2.1.0 PATCH NOTES
+===============================
+
+- Preserved the user-supplied full v2.0.2 run and all ten artifacts as a
+  SHA-256-bound negative specificity certificate.
+- Kept the v2.0.2 detector genome/freeze unchanged to prevent post-target
+  tuning.
+- Added a separately frozen specificity protocol and source-hash receipt.
+- Replaced synthetic-p-only admission with empirical ranking against 20 fresh
+  real sky controls per target family.
+- Added deterministic in-image corridor position/orientation randomization.
+- Added tie-conservative rank gates and mandatory complete cohorts.
+- Added rank-standardized Gaussian-smoothed resolution-matched morphology
+  agreement as an independent gate.
+- Replaced HST mosaics with common-valid-support WF3 science/weight pairs.
+- Added 20 same-archive MAST SGAL WFPC2 control fields.
+- Added resumable 168-product downloader, checkpoints, machine-readable report,
+  Windows launcher, adversarial self-test and CI coverage.
+
+Scientific claim ceiling remains deliberately restrictive. No astronomical
+discovery is asserted by this package.
