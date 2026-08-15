@@ -1,0 +1,79 @@
+name: LUCI Palomar JPFM 2F-D Exhaustive Coverage
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'experiments/luci/run_palomar_2f_d.py'
+      - 'tests/test_luci_palomar_2f_d.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-PREREG.json'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-RUN-001.json'
+      - '.github/workflows/luci-palomar-2f-d.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_palomar_2f_d.py'
+      - 'tests/test_luci_palomar_2f_d.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-PREREG.json'
+      - '.github/workflows/luci-palomar-2f-d.yml'
+
+jobs:
+  luci-palomar-2f-d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests for exhaustive archive-first coverage
+        run: python -m unittest tests/test_luci_palomar_2f_d.py -v
+      - name: Execute frozen full-S0 archive-first crossmatch
+        shell: bash
+        run: |
+          set +e
+          python -m experiments.luci.run_palomar_2f_d \
+            --output-dir results/luci_palomar_2f_d \
+            --cache-dir .cache/luci_palomar_2f_d
+          rc=$?
+          set -e
+          mkdir -p results/luci_palomar_2f_d
+          echo "$rc" > results/luci_palomar_2f_d/scientific_runner_exit_code.txt
+          test -s results/luci_palomar_2f_d/receipt.json
+          test -s results/luci_palomar_2f_d/frozen_poss_s0_122820.csv
+          test -s results/luci_palomar_2f_d/frozen_luci_public_imaging_inventory.csv
+          test -s results/luci_palomar_2f_d/frozen_coarse_overlap_pairs.csv
+          test -s results/luci_palomar_2f_d/frozen_metadata_wcs_overlap_pairs.csv
+      - name: Print admitted interpretation
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/luci_palomar_2f_d/receipt.json', encoding='utf-8'))
+          c=d['archive_first_crossmatch']
+          e=d['exact_fits_chain']
+          print(json.dumps({
+              'status': d['status'],
+              'scientific_status': d['scientific_status'],
+              'full_s0_n': d['frozen_full_poss_s0']['sample_n'],
+              'full_s0_sha256': d['frozen_full_poss_s0']['sha256'],
+              'luci_inventory_n': d['frozen_luci_inventory']['row_count'],
+              'luci_inventory_sha256': d['frozen_luci_inventory']['sha256'],
+              'coarse_pairs': c['frozen_coarse_pairs']['pair_count'],
+              'metadata_wcs_pairs': c['frozen_metadata_wcs_pairs']['pair_count'],
+              'exact_fits_wcs_pairs': e['exact_fits_wcs_pair_count'],
+              'r1_gate_fail_pairs': e['r1_gate_fail_pair_count'],
+              'counterpart_present': e['counterpart_present_count'],
+              'counterpart_absent': e['counterpart_absent_count'],
+              'matched_morphology_available': e['matched_morphology_available_count'],
+              'claim_ceiling': d['claim_ceiling'],
+          }, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-palomar-jpfm-2f-d
+          path: |
+            results/luci_palomar_2f_d/
+          if-no-files-found: error
