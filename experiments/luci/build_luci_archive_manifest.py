@@ -49,47 +49,68 @@ def _find_column(columns: list[str], *candidates: str) -> str | None:
     return None
 
 
-def discover_obscore() -> tuple[str, list[str]]:
+def discover_luci_table() -> tuple[str, list[str]]:
     tables = tap_query("SELECT table_name, description FROM TAP_SCHEMA.tables")
     names = [_s(row["table_name"]) for row in tables]
-    obscore = next((name for name in names if name.lower() == "ivoa.obscore"), None)
-    if obscore is None:
-        obscore = next((name for name in names if "obscore" in name.lower()), None)
-    if obscore is None:
-        raise RuntimeError(f"No ObsCore-like table exposed by LBT TAP. Tables: {names[:50]}")
+    table_name = next((name for name in names if name.lower() == "lbt.luci"), None)
+    if table_name is None:
+        table_name = next((name for name in names if "luci" in name.lower()), None)
+    if table_name is None:
+        raise RuntimeError(f"No LUCI table exposed by LBT TAP. Tables: {names[:50]}")
     columns_table = tap_query(
         "SELECT column_name FROM TAP_SCHEMA.columns "
-        f"WHERE table_name='{obscore.replace(chr(39), chr(39)*2)}'"
+        f"WHERE table_name='{table_name.replace(chr(39), chr(39)*2)}'"
     )
     columns = [_s(row["column_name"]) for row in columns_table]
-    return obscore, columns
+    return table_name, columns
 
 
 def query_luci_rows(table_name: str, columns: list[str], *, limit: int) -> Table:
-    instrument = _find_column(columns, "instrument_name", "instrument", "instrume")
-    if instrument is None:
-        raise RuntimeError("ObsCore table has no recognizable instrument column")
-    where = f"({instrument} LIKE 'LUCI%' OR {instrument} LIKE 'LUCIFER%')"
-    rights = _find_column(columns, "data_rights", "rights")
-    if rights:
-        where += f" AND ({rights}='public' OR {rights}='PUBLIC' OR {rights} IS NULL)"
-    dataproduct = _find_column(columns, "dataproduct_type")
+    where_parts = []
+    rights = _find_column(columns, "data_rights", "rights", "public")
+    if rights and rights.lower() != "public":
+        where_parts.append(f"({rights}='public' OR {rights}='PUBLIC' OR {rights} IS NULL)")
+    dataproduct = _find_column(columns, "dataproduct_type", "product_type", "obstype", "obs_type")
     if dataproduct:
-        where += f" AND ({dataproduct}='image' OR {dataproduct}='IMAGE')"
-    return tap_query(f"SELECT TOP {int(limit)} * FROM {table_name} WHERE {where}")
+        # Keep broad values because the LBT archive is not ObsCore; the FITS-level
+        # imaging gate remains authoritative downstream.
+        where_parts.append(f"({dataproduct} IS NULL OR {dataproduct} NOT LIKE '%SPEC%')")
+    where = " WHERE " + " AND ".join(where_parts) if where_parts else ""
+    return tap_query(f"SELECT TOP {int(limit)} * FROM {table_name}{where}")
+
+
+def _instrument_from_row(row, columns: list[str], filename_col: str | None) -> str:
+    instrument_col = _find_column(columns, "instrument_name", "instrument", "instrume")
+    if instrument_col:
+        value = _s(row[instrument_col])
+        if value:
+            return value
+    arm_col = _find_column(columns, "arm", "luci_arm", "side")
+    if arm_col:
+        arm = _s(row[arm_col])
+        if arm in {"1", "LUCI1", "SX", "LEFT"}:
+            return "LUCI1"
+        if arm in {"2", "LUCI2", "DX", "RIGHT"}:
+            return "LUCI2"
+    if filename_col:
+        filename = _s(row[filename_col]).lower()
+        if filename.startswith("luci1."):
+            return "LUCI1"
+        if filename.startswith("luci2."):
+            return "LUCI2"
+    return "LUCI"
 
 
 def build_manifest(rows: Table, *, table_name: str, max_targets: int = 5) -> dict:
     columns = list(rows.colnames)
-    instrument_col = _find_column(columns, "instrument_name", "instrument", "instrume")
-    access_col = _find_column(columns, "access_url", "access_reference", "url")
-    target_col = _find_column(columns, "target_name", "object", "object_name", "obs_target")
-    filter_col = _find_column(columns, "filter", "filter_name", "bandpass", "obs_bandpass")
-    obsid_col = _find_column(columns, "obs_id", "observation_id", "filename", "file_name")
+    access_col = _find_column(columns, "access_url", "access_reference", "download_url", "file_url", "url")
+    target_col = _find_column(columns, "target_name", "object", "object_name", "obs_target", "target")
+    filter_col = _find_column(columns, "filter", "filter_name", "bandpass", "obs_bandpass", "filtname")
+    filename_col = _find_column(columns, "filename", "file_name", "obs_id", "observation_id")
     em_min_col = _find_column(columns, "em_min")
     em_max_col = _find_column(columns, "em_max")
 
-    missing = [name for name, col in (("instrument", instrument_col), ("access_url", access_col), ("target", target_col)) if col is None]
+    missing = [name for name, col in (("access_url", access_col), ("target", target_col)) if col is None]
     if missing:
         raise RuntimeError(f"Cannot build downloadable LUCI manifest; missing columns: {missing}. Available: {columns}")
 
@@ -99,7 +120,7 @@ def build_manifest(rows: Table, *, table_name: str, max_targets: int = 5) -> dic
         url = _s(row[access_col])
         if not url.startswith(("http://", "https://")):
             continue
-        instrument = _s(row[instrument_col])
+        instrument = _instrument_from_row(row, columns, filename_col)
         if filter_col:
             filt = _s(row[filter_col]) or "UNKNOWN_FILTER"
         else:
@@ -111,7 +132,7 @@ def build_manifest(rows: Table, *, table_name: str, max_targets: int = 5) -> dic
             "band": filt,
             "instrument": instrument,
             "url": url,
-            "archive_obs_id": _s(row[obsid_col]) if obsid_col else "",
+            "archive_obs_id": _s(row[filename_col]) if filename_col else "",
         })
 
     targets = []
@@ -134,7 +155,7 @@ def build_manifest(rows: Table, *, table_name: str, max_targets: int = 5) -> dic
         "source_archive": "LBT Archive / IA2 TAP",
         "tap_service": TAP_SYNC,
         "tap_table": table_name,
-        "selection": "Public LUCI/LUCIFER imaging rows; first deterministic targets with >=2 distinct bands in TAP result.",
+        "selection": "Public/downloadable rows from the dedicated lbt.luci table; deterministic targets with >=2 distinct bands.",
         "instrument_scope": ["LUCI1", "LUCI2", "legacy LUCIFER naming"],
         "targets": targets,
     }
@@ -148,7 +169,7 @@ def main() -> int:
     ap.add_argument("--metadata-only", action="store_true")
     args = ap.parse_args()
 
-    table_name, columns = discover_obscore()
+    table_name, columns = discover_luci_table()
     report = {"tap": TAP_SYNC, "table": table_name, "column_count": len(columns), "columns": columns}
     print(json.dumps(report, indent=2))
     if args.metadata_only:
