@@ -25,6 +25,15 @@ The median is 0.855046 and the observed range is 0.342966–1.924269. Unlike the
 saturated synthetic p-values, this continuous real-field effect has usable
 dispersion for the frozen cross-field rank.
 
+The subsequently supplied checkpoint archive closes the resume uncertainty:
+all 103 JSON files parse, all 103 settings hashes and frozen scientific
+identities verify, and the v2.1.1 cache-hit path returns every stored result
+exactly. Its key set and p/tail summaries also match all 103 `model_complete`
+events. Fields 01–12 contain all eight expected checkpoints; field 13 contains
+seven, with only `SKYCTRL_13_2MASS_K / block_shuffle` missing. The run therefore
+preserves 103/160 sky-control model units and 103/252 model units in the entire
+frozen run.
+
 ## Runtime validation
 
 On a ten-field synthetic FITS benchmark using the unchanged numerical core,
