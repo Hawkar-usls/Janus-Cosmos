@@ -81,21 +81,35 @@ def query_luci_rows(*, limit: int, target: str | None = None) -> Table:
     return tap_query(adql)
 
 
-def _science_filter(row) -> str:
+def _science_filter(row) -> str | None:
     f1 = _s(row["filter1"])
     f2 = _s(row["filter2"])
-    excluded = {"", "clear", "blind", "open", "none"}
-    if f2.lower() not in excluded:
+
+    def usable(value: str) -> bool:
+        token = value.strip().lower()
+        if token in {"", "clear", "blind", "open", "none"}:
+            return False
+        if "spec" in token or token.startswith("free"):
+            return False
+        return True
+
+    if usable(f2):
         return f2
-    if f1.lower() not in excluded:
+    if usable(f1):
         return f1
-    combined = _s(row["filters"])
-    return combined or "UNKNOWN_FILTER"
+    return None
 
 
-def build_manifest(rows: Table, *, target_requested: str | None, max_targets: int = 5) -> dict:
+def build_manifest(
+    rows: Table,
+    *,
+    target_requested: str | None,
+    max_targets: int = 5,
+    allowed_filters: set[str] | None = None,
+) -> dict:
     grouped: dict[str, list[dict]] = defaultdict(list)
     rejected = 0
+    allow_norm = {x.casefold() for x in allowed_filters} if allowed_filters else None
     for row in rows:
         target = _s(row["object"])
         url = _s(row["file_url"])
@@ -104,6 +118,9 @@ def build_manifest(rows: Table, *, target_requested: str | None, max_targets: in
         instrument = _s(row["instrument"])
         filt = _science_filter(row)
         if not target or target.upper() in {"NOTARGET", "UNKNOWN", "UNKNOWN_TARGET"}:
+            rejected += 1
+            continue
+        if filt is None or (allow_norm is not None and filt.casefold() not in allow_norm):
             rejected += 1
             continue
         if not url.startswith(("http://", "https://")) or policy.upper() != "FREE":
@@ -129,15 +146,13 @@ def build_manifest(rows: Table, *, target_requested: str | None, max_targets: in
 
     targets = []
     for target in sorted(grouped):
-        # Sorting before de-duplication makes selection deterministic even if TAP
-        # returns rows in a different physical order.
         items = sorted(
             grouped[target],
-            key=lambda x: (x["filter"], x["archive_date_obs"], x["archive_file_name"]),
+            key=lambda x: (x["filter"].casefold(), x["archive_date_obs"], x["archive_file_name"]),
         )
         by_filter = {}
         for item in items:
-            by_filter.setdefault(item["filter"], item)
+            by_filter.setdefault(item["filter"].casefold(), item)
         distinct = list(by_filter.values())
         if len(distinct) < 2:
             continue
@@ -147,9 +162,10 @@ def build_manifest(rows: Table, *, target_requested: str | None, max_targets: in
 
     if not targets:
         scope = f" target={target_requested!r}" if target_requested else ""
+        filter_scope = f" filters={sorted(allowed_filters)!r}" if allowed_filters else ""
         raise RuntimeError(
-            "No LUCI imaging target with >=2 distinct downloadable FREE bands was found"
-            f" in the queried rows.{scope}"
+            "No LUCI imaging target with >=2 distinct downloadable FREE science bands was found"
+            f" in the queried rows.{scope}{filter_scope}"
         )
 
     return {
@@ -159,10 +175,11 @@ def build_manifest(rows: Table, *, target_requested: str | None, max_targets: in
         "tap_tables": ["lbt.luci", "lbt.lbt"],
         "join_key": "file_name",
         "selection": (
-            "FREE LUCI science rows with GRATNAME=Mirror only; deterministic first file per distinct filter; "
-            "targets require at least two distinct imaging filters."
+            "FREE LUCI SCIENCE rows with GRATNAME=Mirror; technical/open/blind/spec wheel positions excluded; "
+            "deterministic first file per distinct admitted filter; targets require >=2 admitted imaging filters."
         ),
         "target_requested": target_requested,
+        "filter_allowlist": sorted(allowed_filters) if allowed_filters else None,
         "instrument_scope": ["LUCI1", "LUCI2", "legacy LUCIFER naming"],
         "row_count_from_tap": len(rows),
         "row_count_rejected_pre_manifest": rejected,
@@ -175,6 +192,7 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=5000)
     ap.add_argument("--max-targets", type=int, default=5)
     ap.add_argument("--target", default="", help="Optional exact LBT OBJECT name; useful for a deterministic infrastructure smoke test")
+    ap.add_argument("--filters", default="", help="Optional comma-separated exact filter allowlist, e.g. J,Ks")
     ap.add_argument("--output", default="data/runtime/luci/luci_archive_manifest.json")
     ap.add_argument("--metadata-only", action="store_true")
     args = ap.parse_args()
@@ -186,8 +204,14 @@ def main() -> int:
         return 0
 
     target = args.target.strip() or None
+    allowed_filters = {x.strip() for x in args.filters.split(",") if x.strip()} or None
     rows = query_luci_rows(limit=args.limit, target=target)
-    manifest = build_manifest(rows, target_requested=target, max_targets=args.max_targets)
+    manifest = build_manifest(
+        rows,
+        target_requested=target,
+        max_targets=args.max_targets,
+        allowed_filters=allowed_filters,
+    )
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
