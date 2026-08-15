@@ -1,0 +1,81 @@
+name: LUCI x Palomar JPFM transfer
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - '.github/workflows/luci-palomar-transfer.yml'
+      - 'experiments/luci/run_palomar_star_morphology_transfer.py'
+      - 'tests/test_luci_palomar_transfer.py'
+      - 'docs/LUCI_PALOMAR_TRANSFER_PROTOCOL.md'
+  pull_request:
+    paths:
+      - '.github/workflows/luci-palomar-transfer.yml'
+      - 'experiments/luci/run_palomar_star_morphology_transfer.py'
+      - 'tests/test_luci_palomar_transfer.py'
+      - 'docs/LUCI_PALOMAR_TRANSFER_PROTOCOL.md'
+
+jobs:
+  luci-palomar-jpfm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit-test transferred morphology contract
+        run: python -m unittest tests/test_luci_palomar_transfer.py -v
+      - name: Build deterministic HIP 65599 J+Ks manifest
+        run: >-
+          python experiments/luci/build_luci_archive_manifest.py
+          --target 'HIP 65599'
+          --filters J,Ks
+          --limit 2000
+          --max-targets 1
+          --output data/runtime/luci/luci_palomar_hip65599.json
+      - name: Build deterministic three-target J+Ks comparison manifest
+        run: >-
+          python experiments/luci/build_luci_archive_manifest.py
+          --filters J,Ks
+          --limit 20000
+          --max-targets 3
+          --output data/runtime/luci/luci_palomar_controls.json
+      - name: Run LUCI x frozen-Palomar transfer and overlap pilot
+        shell: bash
+        run: |
+          set +e
+          python experiments/luci/run_palomar_star_morphology_transfer.py \
+            --manifest data/runtime/luci/luci_palomar_hip65599.json \
+            --manifest data/runtime/luci/luci_palomar_controls.json \
+            --output results/luci_palomar_transfer/receipt.json \
+            --cache-dir .cache/luci_palomar_transfer
+          rc=$?
+          mkdir -p results/luci_palomar_transfer
+          echo "$rc" > results/luci_palomar_transfer/scientific_runner_exit_code.txt
+          set -e
+          test -s results/luci_palomar_transfer/receipt.json
+          python - <<'PY'
+          import json
+          p='results/luci_palomar_transfer/receipt.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['status']=='EXECUTED'
+          print(json.dumps({
+              'morphology_outcome': d['morphology_transfer']['outcome'],
+              'frame_pass_fraction': d['morphology_transfer']['frame_gate_pass_fraction'],
+              'palomar_sources_with_archive_overlap': d['direct_sky_overlap_preflight'].get('unique_palomar_sources_with_overlap', 0),
+              'overlap_status': d['direct_sky_overlap_preflight']['status'],
+              'claim_ceiling': d['claim_ceiling'],
+          }, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-palomar-jpfm-transfer
+          path: |
+            data/runtime/luci/luci_palomar_hip65599.json
+            data/runtime/luci/luci_palomar_controls.json
+            results/luci_palomar_transfer/
+          if-no-files-found: warn
