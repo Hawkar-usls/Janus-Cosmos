@@ -38,6 +38,18 @@ def main() -> int:
     )
     report["luci_samples"] = rows_to_dicts(samples)
 
+    gratings = tap_query("SELECT DISTINCT gratname FROM lbt.luci")
+    report["gratname_values"] = rows_to_dicts(gratings)
+
+    imaging_like = tap_query(
+        "SELECT TOP 20 l.instrument, l.telescope, l.object, l.filters, l.filter1, l.filter2, "
+        "l.gratname, l.optic, l.imagetyp, l.file_name, b.file_url, b.policy "
+        "FROM lbt.luci AS l JOIN lbt.lbt AS b ON l.file_name=b.file_name "
+        "WHERE l.imagetyp='SCIENCE' AND (l.gratname IS NULL OR l.gratname='' "
+        "OR UPPER(l.gratname) LIKE '%MIRROR%' OR UPPER(l.gratname) LIKE '%IMAGE%')"
+    )
+    report["imaging_like_join_samples"] = rows_to_dicts(imaging_like)
+
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0
 
