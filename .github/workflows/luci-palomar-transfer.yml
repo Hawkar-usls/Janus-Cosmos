@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python experiments/luci/run_palomar_star_morphology_transfer.py \
+          python -m experiments.luci.run_palomar_star_morphology_transfer \
             --manifest data/runtime/luci/luci_palomar_hip65599.json \
             --manifest data/runtime/luci/luci_palomar_controls.json \
             --output results/luci_palomar_transfer/receipt.json \
