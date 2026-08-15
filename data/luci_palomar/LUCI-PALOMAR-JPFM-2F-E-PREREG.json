@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_e.prereg.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-E-STAGED-EXACT-WCS",
+  "date_utc": "2026-08-15",
+  "parent": {
+    "result": "data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-RUN-001.json",
+    "workflow_run_id": 31888129868,
+    "artifact_id": 9247843315,
+    "artifact_zip_sha256": "1240a600dfb0189243dfb3188ab53dcc8ad6f7b270236c56756b49c2e4fc6184",
+    "metadata_wcs_pair_sha256": "aa57e64deca11bb2afd09364fa8b72837e92fc3c2187357c5041b273023754c6",
+    "metadata_wcs_pair_count": 918,
+    "metadata_wcs_unique_sources": 64,
+    "metadata_wcs_unique_files": 798,
+    "parent_pixel_inspection": false
+  },
+  "exposure_admissibility": {
+    "rule": "Reject a frozen metadata-WCS pair from counterpart inference if the archive filters string contains either 'blind' or 'PV lens', case-insensitive. No other configuration is removed at this stage.",
+    "expected_after_rule": {
+      "pair_count": 443,
+      "unique_sources": 42,
+      "unique_files": 403
+    },
+    "reason": "Conservative pre-pixel configuration gate. The parent exhaustive inventory remains unchanged and is not reinterpreted."
+  },
+  "staged_exact_wcs": {
+    "header_only_before_freeze": true,
+    "header_shard_size_files": 225,
+    "maximum_files_per_header_shard": 250,
+    "expected_shard_count": 2,
+    "rule": "Sort the 403 admissible file names lexicographically and partition into deterministic contiguous shards. Download files and inspect FITS headers/WCS only; do not read image arrays. Exact celestial WCS containment is evaluated with the existing exact_wcs_pixel contract. Freeze the complete exact-pair CSV and SHA before any image array is read."
+  },
+  "representative_selection": {
+    "maximum_per_exact_source": 3,
+    "preferred_pool": "standard broad-band archive configurations whose filters string matches clear z, clear J, clear H, clear K or clear Ks, case-insensitive",
+    "fallback_pool": "all exposure-admissible exact FITS-WCS pairs for that source",
+    "temporal_rule": "Within the selected pool, sort unique files by date_obs then file_name and freeze earliest, median and latest indices, deduplicated.",
+    "must_freeze_before_pixel_access": true
+  },
+  "pixel_gate": {
+    "per_selected_file_r1": {
+      "minimum_all_star_recovery_fraction": 0.8,
+      "minimum_star_recovery_fraction_snr_ge_8": 0.9,
+      "maximum_hot_pixel_acceptance_fraction": 0.05
+    },
+    "source_present": "Use local R1 coordinate classifier; if present, compute PSF morphology against same-frame SNR-matched local controls.",
+    "source_absent": "A no-source result is admitted only when local coordinate injection at SNR 8 and 12 with frame-derived R1 PSF FWHM is recovered at both levels. Otherwise the no-source result is blocked by local sensitivity."
+  },
+  "matched_local_controls": {
+    "radius_px": 300.0,
+    "peak_snr_ratio_min": 0.5,
+    "peak_snr_ratio_max": 2.0,
+    "minimum_controls": 8,
+    "maximum_controls": 20
+  },
+  "firewall": "No Palomar temporal-event, UAP, artificial-origin, ETI, or causal labels may enter exposure admission, exact-WCS scoring, representative selection, source extraction, injection-recovery, or morphology controls.",
+  "claim_ceiling": "REPRESENTATIVE_EXACT_OVERLAP_NEAR_IR_COUNTERPART_TEST_ONLY__NOT_FULL_ARCHIVE_PHOTOMETRIC_COMPLETENESS__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY"
+}
