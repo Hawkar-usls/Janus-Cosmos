@@ -48,7 +48,7 @@ jobs:
       - name: Inspect LUCI/LBT archive relations and sample rows
         run: python experiments/luci/inspect_lbt_archive.py
 
-  live-luci-fits-smoke:
+  live-luci-powered-gate:
     needs: [unit-and-binding-tests, official-archive-tap-preflight]
     runs-on: ubuntu-latest
     steps:
@@ -58,30 +58,29 @@ jobs:
           python-version: '3.12'
       - name: Install
         run: python -m pip install -r requirements.txt
-      - name: Build deterministic J+Ks LUCI2 smoke manifest
+      - name: Build deterministic J+Ks LUCI2 manifest
         run: >-
           python experiments/luci/build_luci_archive_manifest.py
           --target 'HIP 65599'
           --filters J,Ks
           --limit 2000
           --max-targets 1
-          --output data/runtime/luci/luci_smoke_manifest.json
-      - name: Run JANUS against real public LUCI J+Ks FITS
+          --output data/runtime/luci/luci_powered_manifest.json
+      - name: Run minimum powered JANUS gate against real LUCI J+Ks FITS
         run: >-
           python -m janus_cosmos.luci_pipeline
-          --manifest data/runtime/luci/luci_smoke_manifest.json
-          --output-dir results/luci_real_fits_smoke
+          --manifest data/runtime/luci/luci_powered_manifest.json
+          --output-dir results/luci_real_fits_powered
           --cache-dir .cache/janus_cosmos_luci
-          --nulls 8
-          --seeds 20260815
-          --allow-underpowered
+          --nulls 80
+          --seeds 20260815,20260816,20260817
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: luci-real-fits-smoke
+          name: luci-real-fits-powered
           path: |
-            data/runtime/luci/luci_smoke_manifest.json
-            results/luci_real_fits_smoke/
+            data/runtime/luci/luci_powered_manifest.json
+            results/luci_real_fits_powered/
           if-no-files-found: warn
 
   live-luci-manifest:
