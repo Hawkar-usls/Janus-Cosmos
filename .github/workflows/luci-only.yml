@@ -58,14 +58,15 @@ jobs:
           python-version: '3.12'
       - name: Install
         run: python -m pip install -r requirements.txt
-      - name: Build deterministic two-band LUCI2 smoke manifest
+      - name: Build deterministic J+Ks LUCI2 smoke manifest
         run: >-
           python experiments/luci/build_luci_archive_manifest.py
           --target 'HIP 65599'
+          --filters J,Ks
           --limit 2000
           --max-targets 1
           --output data/runtime/luci/luci_smoke_manifest.json
-      - name: Run JANUS against real public LUCI FITS
+      - name: Run JANUS against real public LUCI J+Ks FITS
         run: >-
           python -m janus_cosmos.luci_pipeline
           --manifest data/runtime/luci/luci_smoke_manifest.json
@@ -94,7 +95,7 @@ jobs:
           python-version: '3.12'
       - name: Install
         run: python -m pip install -r requirements.txt
-      - name: Build public LUCI two-band manifest
+      - name: Build public LUCI multi-band manifest
         run: python experiments/luci/build_luci_archive_manifest.py --limit 5000 --max-targets 5
       - uses: actions/upload-artifact@v4
         with:
