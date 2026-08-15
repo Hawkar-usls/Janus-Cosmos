@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping
 
@@ -11,7 +10,6 @@ class LuciProvenanceError(RuntimeError):
     """Raised when a FITS file cannot prove LUCI/LUCIFER provenance."""
 
 
-_LUCI_TOKENS = {"LUCI", "LUCI1", "LUCI2", "LUCIFER", "LUCIFER1", "LUCIFER2"}
 _IMAGING_GRATING_TOKENS = {"", "NONE", "N/A", "NA", "OPEN", "OUT", "CLEAR", "MIRROR", "IMAGING", "IMAGE"}
 
 
@@ -115,7 +113,8 @@ def read_luci_fits_image(path: Path, *, require_imaging: bool = True, expected_i
     if expected_instrument:
         expected = canonical_luci_instrument(expected_instrument)
         actual = provenance["instrument"]
-        if expected != actual and "LEGACY_UNNUMBERED" not in {expected, actual}:
+        legacy_wildcard = expected == "LUCI_LEGACY_UNNUMBERED" or actual == "LUCI_LEGACY_UNNUMBERED"
+        if expected != actual and not legacy_wildcard:
             raise LuciProvenanceError(f"manifest instrument {expected!r} does not match FITS header {actual!r}")
 
     meta = {
