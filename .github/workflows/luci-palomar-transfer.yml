@@ -7,12 +7,14 @@ on:
     paths:
       - '.github/workflows/luci-palomar-transfer.yml'
       - 'experiments/luci/run_palomar_star_morphology_transfer.py'
+      - 'experiments/luci/audit_palomar_transfer_receipt.py'
       - 'tests/test_luci_palomar_transfer.py'
       - 'docs/LUCI_PALOMAR_TRANSFER_PROTOCOL.md'
   pull_request:
     paths:
       - '.github/workflows/luci-palomar-transfer.yml'
       - 'experiments/luci/run_palomar_star_morphology_transfer.py'
+      - 'experiments/luci/audit_palomar_transfer_receipt.py'
       - 'tests/test_luci_palomar_transfer.py'
       - 'docs/LUCI_PALOMAR_TRANSFER_PROTOCOL.md'
 
@@ -57,17 +59,26 @@ jobs:
           echo "$rc" > results/luci_palomar_transfer/scientific_runner_exit_code.txt
           set -e
           test -s results/luci_palomar_transfer/receipt.json
+      - name: Corrective fail-closed morphology implementation audit
+        run: >-
+          python experiments/luci/audit_palomar_transfer_receipt.py
+          results/luci_palomar_transfer/receipt.json
+          --output results/luci_palomar_transfer/corrective_audit.json
+      - name: Print admitted interpretation
+        run: |
           python - <<'PY'
           import json
-          p='results/luci_palomar_transfer/receipt.json'
-          d=json.load(open(p, encoding='utf-8'))
-          assert d['status']=='EXECUTED'
+          r=json.load(open('results/luci_palomar_transfer/receipt.json', encoding='utf-8'))
+          a=json.load(open('results/luci_palomar_transfer/corrective_audit.json', encoding='utf-8'))
+          assert r['status']=='EXECUTED'
           print(json.dumps({
-              'morphology_outcome': d['morphology_transfer']['outcome'],
-              'frame_pass_fraction': d['morphology_transfer']['frame_gate_pass_fraction'],
-              'palomar_sources_with_archive_overlap': d['direct_sky_overlap_preflight'].get('unique_palomar_sources_with_overlap', 0),
-              'overlap_status': d['direct_sky_overlap_preflight']['status'],
-              'claim_ceiling': d['claim_ceiling'],
+              'raw_morphology_outcome': r['morphology_transfer']['outcome'],
+              'corrective_audit_status': a['status'],
+              'invalid_morphology_frames': a['invalid_frame_count'],
+              'morphology_frame_count': a['frame_count'],
+              'palomar_sources_with_archive_overlap': r['direct_sky_overlap_preflight'].get('unique_palomar_sources_with_overlap', 0),
+              'overlap_status': r['direct_sky_overlap_preflight']['status'],
+              'admitted_claim_ceiling': a['claim_ceiling'],
           }, indent=2))
           PY
       - uses: actions/upload-artifact@v4
