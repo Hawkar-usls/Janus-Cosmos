@@ -6,6 +6,7 @@ on:
       - research/luci-only-v1
     paths:
       - 'experiments/luci/run_palomar_2f_d.py'
+      - 'experiments/luci/run_palomar_2f_d_r1.py'
       - 'tests/test_luci_palomar_2f_d.py'
       - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-PREREG.json'
       - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-RUN-001.json'
@@ -13,6 +14,7 @@ on:
   pull_request:
     paths:
       - 'experiments/luci/run_palomar_2f_d.py'
+      - 'experiments/luci/run_palomar_2f_d_r1.py'
       - 'tests/test_luci_palomar_2f_d.py'
       - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-PREREG.json'
       - '.github/workflows/luci-palomar-2f-d.yml'
@@ -34,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -m experiments.luci.run_palomar_2f_d \
+          python -m experiments.luci.run_palomar_2f_d_r1 \
             --output-dir results/luci_palomar_2f_d \
             --cache-dir .cache/luci_palomar_2f_d
           rc=$?
