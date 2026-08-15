@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       run_live_manifest:
-        description: 'Build a live LUCI manifest from the official LBT TAP archive'
+        description: 'Build a broader live LUCI manifest from the official LBT TAP archive'
         required: true
         default: false
         type: boolean
@@ -48,6 +48,41 @@ jobs:
       - name: Inspect LUCI/LBT archive relations and sample rows
         run: python experiments/luci/inspect_lbt_archive.py
 
+  live-luci-fits-smoke:
+    needs: [unit-and-binding-tests, official-archive-tap-preflight]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Build deterministic two-band LUCI2 smoke manifest
+        run: >-
+          python experiments/luci/build_luci_archive_manifest.py
+          --target 'HIP 65599'
+          --limit 2000
+          --max-targets 1
+          --output data/runtime/luci/luci_smoke_manifest.json
+      - name: Run JANUS against real public LUCI FITS
+        run: >-
+          python -m janus_cosmos.luci_pipeline
+          --manifest data/runtime/luci/luci_smoke_manifest.json
+          --output-dir results/luci_real_fits_smoke
+          --cache-dir .cache/janus_cosmos_luci
+          --nulls 8
+          --seeds 20260815
+          --allow-underpowered
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-real-fits-smoke
+          path: |
+            data/runtime/luci/luci_smoke_manifest.json
+            results/luci_real_fits_smoke/
+          if-no-files-found: warn
+
   live-luci-manifest:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_live_manifest }}
     needs: [unit-and-binding-tests, official-archive-tap-preflight]
@@ -60,7 +95,7 @@ jobs:
       - name: Install
         run: python -m pip install -r requirements.txt
       - name: Build public LUCI two-band manifest
-        run: python experiments/luci/build_luci_archive_manifest.py --limit 2000 --max-targets 5
+        run: python experiments/luci/build_luci_archive_manifest.py --limit 5000 --max-targets 5
       - uses: actions/upload-artifact@v4
         with:
           name: luci-archive-manifest
