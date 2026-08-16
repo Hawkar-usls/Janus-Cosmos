@@ -7,6 +7,7 @@ on:
       - 'tests/test_tachyon_star_t2b_ztf.py'
       - 'data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv'
       - 'data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-MANIFEST-DIGEST-AMENDMENT-001.json'
       - '.github/workflows/tachyon-star-t2b-ztf.yml'
 permissions: {contents: read}
 jobs:
@@ -18,8 +19,13 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install -r requirements.txt
-      - name: Verify frozen ZTF prepointed manifest before external pixel access
-        run: echo '86665d8468ee7cee6f30afb6cdbb074d4b80185480f6e1b1ef34cb217d5b9229  data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv' | sha256sum -c -
+      - name: Verify exact frozen Git blob and record SHA-256 before external pixel access
+        shell: bash
+        run: |
+          p=data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv
+          echo "manifest_sha256_pre_pixel=$(sha256sum "$p" | awk '{print $1}')"
+          test "$(git hash-object "$p")" = '902ac74624b8c30c365544555f5071c78ec4cae2'
+          test "$(wc -l < "$p")" -eq 42
       - run: python -m unittest tests/test_tachyon_star_t2b_ztf.py -v
       - name: Execute prepointed ZTF pixel replication
         shell: bash
