@@ -1,0 +1,62 @@
+{
+  "archive_arms": {
+    "TESS": {
+      "metadata_endpoint": "https://mast.stsci.edu/tesscut/api/v0.1/sector",
+      "outputs": [
+        "covered sectors",
+        "camera",
+        "ccd when provided",
+        "sector count"
+      ],
+      "query": "one sector-coverage request per frozen coordinate; no astrocut/pixel request in T2A",
+      "selection_rule": "No TESS B cadence is selected in T2A. A later cadence-manifest stage must freeze cadence IDs before reading FLUX pixels."
+    },
+    "ZTF": {
+      "eligible_triple_rule": "three consecutive unique exposures in a group with both adjacent DATE-OBS gaps between 30 and 900 seconds inclusive",
+      "metadata_endpoint": "https://irsa.ipac.caltech.edu/ibe/search/ztf/products/sci",
+      "pixel_rule": "Freeze selected ZTF exposure identities and metadata hashes in a later commit before retrieving any sciimg/difference-image/cutout pixels.",
+      "primary_sequence_rule": "for each source with at least one eligible triple, choose the triple minimizing abs(delta_pre-232.5827)+abs(delta_post-432.2595); tie by B observation time then filefracday/field/ccdid/qid",
+      "query": "POS=<ra>,<dec>&ct=csv metadata only; no science/difference image retrieval in T2A",
+      "sequence_group": [
+        "src_id",
+        "field",
+        "ccdid",
+        "qid",
+        "filtercode",
+        "exptime"
+      ]
+    }
+  },
+  "claim_ceiling": "EXTERNAL_ARCHIVE_METADATA_DISCOVERY_ONLY__NO_TRANSIENT_DETECTION__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY__NO_NUCLEAR_CAUSALITY",
+  "date_utc": "2026-08-16",
+  "discovery_outputs": [
+    "raw per-source metadata responses with SHA-256",
+    "normalized coverage table",
+    "ZTF eligible-triple table",
+    "ZTF primary metadata-only sequence manifest",
+    "TESS sector coverage table",
+    "receipt.json"
+  ],
+  "experiment_id": "JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY",
+  "hard_boundaries": [
+    "NO_EXTERNAL_TARGET_PIXELS_IN_T2A",
+    "NO_SELECTION_BY_FLUX_OR_CANDIDATE_STATUS",
+    "NO_NUCLEAR_DATE_FILTER",
+    "NO_POST_QUERY_SOURCE_RESELECTION",
+    "METADATA_COVERAGE_IS_NOT_EVENT_EVIDENCE"
+  ],
+  "purpose": "Discover independent non-nuclear high-cadence archive coverage for the frozen 42-source Palomar/LUCI source universe before any T2 target pixels are opened.",
+  "schema": "janus.cosmos.tachyon_star.t2_external_metadata_discovery.prereg.v1",
+  "source_universe": {
+    "origin": "2F-E frozen exact-WCS source coordinates; source membership fixed before external archive queries",
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-T2-EXTERNAL-SOURCE-UNIVERSE.csv",
+    "sha256": "94dee39740c5a2c402832e8d6b1c6681521331fe11cee630402b95e873a0adcb",
+    "sources": 42
+  },
+  "status": "PREREGISTERED_METADATA_ONLY__NO_EXTERNAL_TARGET_PIXELS",
+  "training_signature": {
+    "delta_post_seconds": 432.2595,
+    "delta_pre_seconds": 232.5827,
+    "use": "ranking target only; not a physical identity claim"
+  }
+}
