@@ -1,0 +1,85 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3b.tess_prepointed_flux.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3B-TESS-PREPOINTED-FLUX-REPLICATION",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-T3A-TESS-RUN-001.json",
+    "result_commit": "8b43dba449ede196182d28bfa98e06d4342e477f",
+    "workflow_run_id": 31951308441,
+    "artifact_id": 9264741704,
+    "artifact_name": "janus-tachyon-star-t3a-tess",
+    "artifact_zip_sha256": "317a3c7ea2b0a7d1b8ae58b6e9ecbe6b09d8bdb8ffe76af46c399c3c95a8dfc0",
+    "prepointed_manifest_sha256": "be8bc23021e9b9a6fa6efa65815e79bc39a1bb011192acab2825c013c1ac4202",
+    "sources_prepointed": 42,
+    "parent_flux_values_inspected": false
+  },
+  "immutable_selection": {
+    "source_coordinates": "UNCHANGED_FROM_T3A",
+    "sector": "UNCHANGED_FROM_T3A",
+    "a_b_c_table_rows": "UNCHANGED_FROM_T3A",
+    "a_b_c_cadenceno": "UNCHANGED_FROM_T3A",
+    "a_b_c_times": "UNCHANGED_FROM_T3A",
+    "replacement_sector_allowed": false,
+    "replacement_b_cadence_allowed": false
+  },
+  "tesscut_replay": {
+    "cutout_size_px": [11, 11],
+    "same_sector_required": true,
+    "same_source_fits_name_required": true,
+    "preferred_exact_fits_sha256_match": true,
+    "if_regenerated_fits_sha_changes": "Continue only if frozen A/B/C TIME, CADENCENO and QUALITY=0 match the T3A manifest exactly within time tolerance 1e-9 day; record content-hash change explicitly.",
+    "time_tolerance_day": 1e-9
+  },
+  "fixed_aperture": {
+    "target_region": "geometric central 3x3 pixels of the 11x11 TESSCut, fixed for all cadences",
+    "background_region": "pixels with Chebyshev distance >=4 from geometric center",
+    "scalar_flux": "sum(target 3x3 of FLUX-FLUX_BKG when FLUX_BKG exists, otherwise FLUX) minus 9 times median(background region of same cadence)",
+    "centroid_repositioning_allowed": false,
+    "source_finding_allowed": false,
+    "crowding_deblend_allowed": false
+  },
+  "cadence_native_statistic": {
+    "isolated_contrast": "D_i = F_i - 0.5*(F_{i-1}+F_{i+1})",
+    "control_window_radius_rows": 120,
+    "control_requires_quality_zero_for_i-1_i_i+1": true,
+    "exclude_rows_within_distance_of_frozen_b": 3,
+    "minimum_control_contrasts": 30,
+    "robust_center": "median",
+    "robust_sigma": "1.4826*MAD; fallback sample standard deviation only if MAD is zero and finite control count is sufficient"
+  },
+  "candidate_gate": {
+    "b_contrast_z_min": 8.0,
+    "b_minus_a_in_sigma_min": 4.0,
+    "b_minus_c_in_sigma_min": 4.0,
+    "a_b_c_quality_required_zero": true,
+    "finite_target_aperture_required": true,
+    "candidate_label": "TESS_PREPOINTED_ISOLATED_B_APERTURE_EVENT_L0",
+    "identity_limit": "A candidate is an aperture-time-series event only; it is not by itself a counterpart, star identity, particle, transient class, or astrophysical origin."
+  },
+  "sensitivity_gate_for_null": {
+    "injection_location": "frozen scalar F_B only",
+    "injection_units": "same pre-injection robust contrast sigma",
+    "injection_snr_grid": [8.0, 10.0, 12.0],
+    "qualified_null_requires_injected_10_and_12_sigma_candidates": true,
+    "eight_sigma_injection_recorded_but_not_required_for_null": true,
+    "reason": "Avoid a threshold-boundary floating-point artifact while still requiring strong deterministic recovery above the frozen 8-sigma candidate threshold."
+  },
+  "trial_classification": {
+    "CANDIDATE_REQUIRES_ADJUDICATION": "Raw frozen B passes the candidate gate.",
+    "QUALIFIED_NO_ISOLATED_B_EVENT": "Raw B fails candidate gate, controls are valid, and +10sigma and +12sigma injected B both pass the unchanged candidate gate.",
+    "NON_ISOLATED_OR_VARIABLE_PATTERN": "Raw B has z>=8 but fails one or both neighbor-dominance requirements.",
+    "UNRESOLVED_TRIAL": "Control/sigma/finite-data/replay/sensitivity requirements fail."
+  },
+  "experiment_status": {
+    "PASS_ALL_42_PREPOINTED_NULL": "42 qualified no-isolated-B trials and zero candidates/nonisolated/unresolved.",
+    "CANDIDATE_REQUIRES_ADJUDICATION": "At least one raw candidate.",
+    "BLOCKED_PREPOINTED_REPLICATION_INCOMPLETE": "No raw candidate but at least one nonisolated or unresolved trial."
+  },
+  "not_admitted": [
+    "No claim that the central 3x3 aperture isolates a unique astrophysical source at TESS resolution.",
+    "No claim that a null excludes events below the preregistered aperture sensitivity.",
+    "No global rejection of transient phenomena.",
+    "No physical tachyon identification, faster-than-light propagation, retrocausality, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "claim_ceiling": "PREPOINTED_TESS_CADENCE_NATIVE_APERTURE_EVENT_REPLICATION_ONLY__NO_SOURCE_IDENTITY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}
