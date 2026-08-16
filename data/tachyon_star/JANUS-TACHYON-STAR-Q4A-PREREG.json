@@ -11,58 +11,85 @@
   "scientific_question": "At the frozen sky coordinate of the one-frame LUCI1 Br-gamma marginal candidate, is the measured excess more consistent with a sky-fixed astrophysical flux excess or with detector-local/background/systematic structure?",
   "q4a_scope": "HEADER_WCS_AND_GEOMETRY_ONLY__NO_NEW_FORCED_PHOTOMETRY",
   "frozen_frames": [
-    {"role":"A_BEFORE","filename":"luci1.20220319.0114.fits.gz","date_obs":"2022-03-19T11:44:15.5176","filter":"Br_gam clear","exposure_s":60},
-    {"role":"B_CANDIDATE","filename":"luci1.20220319.0116.fits.gz","date_obs":"2022-03-19T11:48:08.1003","filter":"Br_gam clear","exposure_s":60},
-    {"role":"C_AFTER","filename":"luci1.20220319.0120.fits.gz","date_obs":"2022-03-19T11:55:20.3598","filter":"Br_gam clear","exposure_s":60}
+    {
+      "role": "A_BEFORE",
+      "filename": "luci1.20220319.0114.fits.gz",
+      "date_obs": "2022-03-19T11:44:15.5176",
+      "filter": "Br_gam clear",
+      "exposure_s": 60
+    },
+    {
+      "role": "B_CANDIDATE",
+      "filename": "luci1.20220319.0116.fits.gz",
+      "date_obs": "2022-03-19T11:48:08.1003",
+      "filter": "Br_gam clear",
+      "exposure_s": 60
+    },
+    {
+      "role": "C_AFTER",
+      "filename": "luci1.20220319.0120.fits.gz",
+      "date_obs": "2022-03-19T11:55:20.3598",
+      "filter": "Br_gam clear",
+      "exposure_s": 60
+    }
   ],
   "frozen_candidate_measurement": {
-    "source_id":"tile_RA307.409_DECp40.547:701",
-    "candidate_frame":"luci1.20220319.0116.fits.gz",
-    "centroid_x_zero_based":1437.216755721343,
-    "centroid_y_zero_based":2038.7227543099102,
-    "source_peak_snr_parent":4.1839504924,
-    "source_fwhm_geom_px_parent":6.0367063489,
-    "native_psf_fwhm_px_parent":6.0313418764,
-    "centroid_source":"Frozen 2F-F candidate receipt; Q4A must not recenter it."
+    "source_id": "tile_RA307.409_DECp40.547:701",
+    "candidate_frame": "luci1.20220319.0116.fits.gz",
+    "centroid_x_zero_based": 1437.216755721343,
+    "centroid_y_zero_based": 2038.7227543099102,
+    "source_peak_snr_parent": 4.1839504924,
+    "source_fwhm_geom_px_parent": 6.0367063489,
+    "native_psf_fwhm_px_parent": 6.0313418764,
+    "centroid_source": "Frozen 2F-F candidate receipt; Q4A must not recenter it."
   },
   "coordinate_contract": {
-    "candidate_hdu":0,
-    "pixel_origin":0,
-    "candidate_sky_coordinate":"Derived once from the exact B-frame FITS WCS and frozen candidate centroid.",
-    "sky_track":"Map that exact derived RA/Dec into A/B/C using each frame's own HDU0 WCS with origin=0.",
-    "detector_track":"Use the exact frozen B candidate detector pixel (x,y) unchanged in A/B/C.",
-    "roundtrip_tolerance_px":0.001,
-    "all_mapped_positions_must_be_finite":true,
-    "no_centroid_recentering":true,
-    "no_alternate_hdu":true,
-    "no_epoch_substitution":true
+    "candidate_hdu": 0,
+    "pixel_origin": 0,
+    "candidate_sky_coordinate": "Derived once from the exact B-frame FITS WCS and frozen candidate centroid.",
+    "sky_track": "Map that exact derived RA/Dec into A/B/C using each frame's own HDU0 WCS with origin=0.",
+    "detector_track": "Use the exact frozen B candidate detector pixel (x,y) unchanged in A/B/C.",
+    "roundtrip_tolerance_px": 0.001,
+    "all_mapped_positions_must_be_finite": true,
+    "no_centroid_recentering": true,
+    "no_alternate_hdu": true,
+    "no_epoch_substitution": true
   },
   "detector_control_geometry": {
-    "purpose":"Freeze a detector-local edge-matched comparison ensemble before new forced photometry.",
-    "y_zero_based":2038.7227543099102,
-    "x_grid_zero_based":[128,256,384,512,640,768,896,1024,1152,1280,1664,1792,1920],
-    "selection_rule":"Fixed same-y grid across the 2048x2048 detector, excluding x positions within 128 pixels of the frozen candidate centroid and excluding positions that would put the preregistered 17x17 Q4B patch out of bounds.",
-    "pixel_data_used_for_control_selection":false,
-    "source_avoidance_by_pixel_brightness_allowed":false,
-    "control_replacement_allowed":false
+    "purpose": "Freeze a detector-local edge-matched comparison ensemble before new forced photometry.",
+    "y_zero_based": 2038.7227543099102,
+    "x_grid_zero_based": [128,256,384,512,640,768,896,1024,1152,1280,1664,1792,1920],
+    "selection_rule": "Fixed same-y grid across the 2048x2048 detector, excluding x positions within 128 pixels of the frozen candidate centroid and excluding positions that would put the preregistered 17x17 Q4B patch out of bounds.",
+    "pixel_data_used_for_control_selection": false,
+    "source_avoidance_by_pixel_brightness_allowed": false,
+    "control_replacement_allowed": false
   },
   "q4b_forced_measurement_contract_frozen_in_advance": {
-    "patch_size_px":17,
-    "centroid":"FIXED_ONLY",
-    "fit_model":"Fixed-centroid circular Gaussian amplitude plus planar background over all finite in-bounds pixels in the 17x17 patch.",
-    "gaussian_fwhm_px_by_frame":{"luci1.20220319.0114.fits.gz":6.026402,"luci1.20220319.0116.fits.gz":6.0313418764,"luci1.20220319.0120.fits.gz":5.945551},
-    "fwhm_source":"Inherited frozen native-PSF measurements from the parent 2F-F sequence; Q4B may not refit FWHM to improve the target result.",
-    "primary_tracks":["SKY_FIXED_TRACK","DETECTOR_FIXED_TRACK"],
-    "matched_controls":"The frozen same-y detector-control grid above, evaluated with the same patch and fit model.",
-    "free_recentring":false,
-    "free_psf_width_fit":false,
-    "posthoc_control_removal":false
+    "patch_size_px": 17,
+    "centroid": "FIXED_ONLY",
+    "fit_model": "Fixed-centroid circular Gaussian amplitude plus planar background over all finite in-bounds pixels in the 17x17 patch.",
+    "gaussian_fwhm_px_by_frame": {
+      "luci1.20220319.0114.fits.gz": 6.026402,
+      "luci1.20220319.0116.fits.gz": 6.0313418764,
+      "luci1.20220319.0120.fits.gz": 5.945551
+    },
+    "fwhm_source": "Inherited frozen native-PSF measurements from the parent 2F-F sequence; Q4B may not refit FWHM to improve the target result.",
+    "primary_tracks": ["SKY_FIXED_TRACK", "DETECTOR_FIXED_TRACK"],
+    "matched_controls": "The frozen same-y detector-control grid above, evaluated with the same patch and fit model.",
+    "free_recentring": false,
+    "free_psf_width_fit": false,
+    "posthoc_control_removal": false
   },
   "q4a_success": {
-    "PASS_GEOMETRY_FROZEN":"All three exact frames are retrievable, HDU0 WCS is celestial and finite, B centroid roundtrip is within tolerance, sky-track coordinates map into all three frames, detector-control grid remains valid, and a machine-readable geometry manifest is emitted without dereferencing image pixel arrays.",
-    "BLOCKED_GEOMETRY_INCOMPLETE":"Any required exact frame, WCS binding, roundtrip, mapped position, or control geometry fails."
+    "PASS_GEOMETRY_FROZEN": "All three exact frames are retrievable, HDU0 WCS is celestial and finite, B centroid roundtrip is within tolerance, sky-track coordinates map into all three frames, detector-control grid remains valid, and a machine-readable geometry manifest is emitted without dereferencing image pixel arrays.",
+    "BLOCKED_GEOMETRY_INCOMPLETE": "Any required exact frame, WCS binding, roundtrip, mapped position, or control geometry fails."
   },
-  "not_admitted":["No Q4A flux measurement or candidate adjudication.","No sky-origin or detector-origin conclusion.","No use of the closed ZTF/TESS line as evidence for Q4.","No tachyon, faster-than-light, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation."],
-  "next_gate_if_pass":"JANUS-TACHYON-STAR-Q4B-LUCI-FIXED-COORDINATE-FORCED-PHOTOMETRY",
-  "claim_ceiling":"HEADER_WCS_GEOMETRY_FREEZE_ONLY__NO_NEW_PIXEL_MEASUREMENT__NO_ORIGIN_CONCLUSION__NO_TACHYON_OR_FTL_CLAIM"
+  "not_admitted": [
+    "No Q4A flux measurement or candidate adjudication.",
+    "No sky-origin or detector-origin conclusion.",
+    "No use of the closed ZTF/TESS line as evidence for Q4.",
+    "No tachyon, faster-than-light, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation."
+  ],
+  "next_gate_if_pass": "JANUS-TACHYON-STAR-Q4B-LUCI-FIXED-COORDINATE-FORCED-PHOTOMETRY",
+  "claim_ceiling": "HEADER_WCS_GEOMETRY_FREEZE_ONLY__NO_NEW_PIXEL_MEASUREMENT__NO_ORIGIN_CONCLUSION__NO_TACHYON_OR_FTL_CLAIM"
 }
