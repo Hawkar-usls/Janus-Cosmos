@@ -1,0 +1,19 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2b.manifest_sha256_correction.v1",
+  "amendment_id": "JANUS-TACHYON-STAR-T2B-ZTF-MANIFEST-SHA256-CORRECTION-001",
+  "created_on": "2026-08-16",
+  "status": "OBSERVED_PRE_PIXEL_SHA256_FROZEN",
+  "manifest_path": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv",
+  "authoritative_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+  "superseded_incorrect_local_serialization_sha256": "86665d8468ee7cee6f30afb6cdbb074d4b80185480f6e1b1ef34cb217d5b9229",
+  "correct_checked_out_sha256": "f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb",
+  "observed_in_workflow": {
+    "run_id": 31943737212,
+    "job_id": 95156554928,
+    "log_event": "manifest_sha256_pre_pixel=f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb",
+    "ordering": "RECORDED_AFTER_EXACT_GIT_CHECKOUT_AND_BEFORE_UNIT_TESTS_AND_BEFORE_FIRST_EXTERNAL_PIXEL_DOWNLOAD"
+  },
+  "selection_changed": false,
+  "manifest_bytes_changed": false,
+  "note": "This append-only correction records the SHA-256 of the already frozen Git blob; it does not rewrite the preregistration or any scientific row."
+}
