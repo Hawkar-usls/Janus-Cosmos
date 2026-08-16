@@ -2,6 +2,7 @@
 from __future__ import annotations
 import argparse,csv,hashlib,json,time,urllib.parse,urllib.request
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor,as_completed
 from datetime import datetime
 from pathlib import Path
 SOURCE_SHA256='94dee39740c5a2c402832e8d6b1c6681521331fe11cee630402b95e873a0adcb'
@@ -10,6 +11,7 @@ TRAIN_PRE=232.5827
 TRAIN_POST=432.2595
 MIN_GAP=30.0
 MAX_GAP=900.0
+ZTF_WORKERS=4
 ZTF_COLS=('ra','dec','field','ccdid','qid','filtercode','pid','nid','expid','imgtypecode','obsdate','obsjd','exptime','filefracday','seeing','airmass','moonillf','maglimit','infobits','ipac_pub_date')
 CLAIM='EXTERNAL_ARCHIVE_METADATA_DISCOVERY_ONLY__NO_TRANSIENT_DETECTION__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY__NO_NUCLEAR_CAUSALITY'
 def sha256_file(p:Path):
@@ -17,11 +19,11 @@ def sha256_file(p:Path):
  with p.open('rb') as f:
   for c in iter(lambda:f.read(1<<20),b''):h.update(c)
  return h.hexdigest()
-def _get(url:str,timeout=180,retries=3)->bytes:
+def _get(url:str,timeout=120,retries=2)->bytes:
  err=None
  for attempt in range(1,retries+1):
   try:
-   req=urllib.request.Request(url,headers={'User-Agent':'Janus-Cosmos-TachyonStar-T2A/1.0','Accept':'application/json,text/csv,text/plain,*/*'})
+   req=urllib.request.Request(url,headers={'User-Agent':'Janus-Cosmos-TachyonStar-T2A/1.1','Accept':'application/json,text/csv,text/plain,*/*'})
    with urllib.request.urlopen(req,timeout=timeout) as r:return r.read()
   except Exception as e:
    err=f'{type(e).__name__}: {e}'
@@ -58,30 +60,43 @@ def write_csv(path:Path,rows:list[dict],fields:list[str]|None=None):
  with path.open('w',encoding='utf-8',newline='') as f:
   if not fields:return
   w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
+def _ztf_query(idx:int,s:dict):
+ sid=s['src_id'];ra=s['ra_deg'];dec=s['dec_deg'];safe=f'{idx:02d}_{hashlib.sha256(sid.encode()).hexdigest()[:12]}'
+ params={'POS':f'{ra},{dec}','COLUMNS':','.join(ZTF_COLS),'ct':'csv'};url='https://irsa.ipac.caltech.edu/ibe/search/ztf/products/sci?'+urllib.parse.urlencode(params)
+ b=_get(url,timeout=120,retries=2)
+ rr=list(csv.DictReader(b.decode('utf-8-sig').splitlines()));rows=[]
+ for r in rr:
+  if not r:continue
+  r={k:(v if v is not None else '') for k,v in r.items()};r['src_id']=sid;r['source_ra_deg']=ra;r['source_dec_deg']=dec;rows.append(r)
+ return {'idx':idx,'sid':sid,'safe':safe,'url':url,'bytes':b,'rows':rows}
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--sources',default='data/tachyon_star/JANUS-TACHYON-STAR-T2-EXTERNAL-SOURCE-UNIVERSE.csv');ap.add_argument('--output-dir',default='results/tachyon_star_t2a');a=ap.parse_args();src=Path(a.sources);out=Path(a.output_dir);raw=out/'raw';raw.mkdir(parents=True,exist_ok=True)
  if sha256_file(src)!=SOURCE_SHA256:raise RuntimeError('frozen source-universe SHA mismatch')
  sources=list(csv.DictReader(src.open(encoding='utf-8')))
  if len(sources)!=EXPECTED_SOURCES or len({r['src_id'] for r in sources})!=EXPECTED_SOURCES:raise RuntimeError('source-universe cardinality changed')
  failures=[];tess_rows=[];ztf_rows=[];raw_manifest=[]
+ # TESS has an explicit <=5 req/s service limit. Keep this arm serial and paced.
  for idx,s in enumerate(sources):
-  sid=s['src_id'];ra=s['ra_deg'];dec=s['dec_deg'];safe=f'{idx:02d}_{hashlib.sha256(sid.encode()).hexdigest()[:12]}'
-  tu='https://mast.stsci.edu/tesscut/api/v0.1/sector?'+urllib.parse.urlencode({'ra':ra,'dec':dec})
+  sid=s['src_id'];ra=s['ra_deg'];dec=s['dec_deg'];safe=f'{idx:02d}_{hashlib.sha256(sid.encode()).hexdigest()[:12]}';tu='https://mast.stsci.edu/tesscut/api/v0.1/sector?'+urllib.parse.urlencode({'ra':ra,'dec':dec})
   try:
-   b=_get(tu);p=raw/f'tess_{safe}.json';p.write_bytes(b);raw_manifest.append({'src_id':sid,'arm':'TESS','path':str(p.relative_to(out)),'sha256':sha256_file(p),'bytes':len(b),'url':tu});j=json.loads(b.decode('utf-8'));results=j.get('results',[]) if isinstance(j,dict) else []
+   b=_get(tu,timeout=60,retries=2);p=raw/f'tess_{safe}.json';p.write_bytes(b);raw_manifest.append({'src_id':sid,'arm':'TESS','path':str(p.relative_to(out)),'sha256':sha256_file(p),'bytes':len(b),'url':tu});j=json.loads(b.decode('utf-8'));results=j.get('results',[]) if isinstance(j,dict) else []
    if not results:tess_rows.append({'src_id':sid,'ra_deg':ra,'dec_deg':dec,'sector':'','sectorName':'','camera':'','ccd':'','covered':False})
    else:
     for q in results:tess_rows.append({'src_id':sid,'ra_deg':ra,'dec_deg':dec,'sector':q.get('sector',''),'sectorName':q.get('sectorName',''),'camera':q.get('camera',''),'ccd':q.get('ccd',''),'covered':True})
   except Exception as e:failures.append({'src_id':sid,'arm':'TESS','error':f'{type(e).__name__}: {e}'})
   time.sleep(0.25)
-  params={'POS':f'{ra},{dec}','COLUMNS':','.join(ZTF_COLS),'ct':'csv'};zu='https://irsa.ipac.caltech.edu/ibe/search/ztf/products/sci?'+urllib.parse.urlencode(params)
-  try:
-   b=_get(zu);p=raw/f'ztf_{safe}.csv';p.write_bytes(b);raw_manifest.append({'src_id':sid,'arm':'ZTF','path':str(p.relative_to(out)),'sha256':sha256_file(p),'bytes':len(b),'url':zu});rr=list(csv.DictReader(b.decode('utf-8-sig').splitlines()))
-   for r in rr:
-    if not r:continue
-    r={k:(v if v is not None else '') for k,v in r.items()};r['src_id']=sid;r['source_ra_deg']=ra;r['source_dec_deg']=dec;ztf_rows.append(r)
-  except Exception as e:failures.append({'src_id':sid,'arm':'ZTF','error':f'{type(e).__name__}: {e}'})
+ # IRSA metadata queries are independent by frozen source; parallelism is transport-only.
+ results=[]
+ with ThreadPoolExecutor(max_workers=ZTF_WORKERS) as ex:
+  futs={ex.submit(_ztf_query,idx,s):(idx,s['src_id']) for idx,s in enumerate(sources)}
+  for fut in as_completed(futs):
+   idx,sid=futs[fut]
+   try:results.append(fut.result())
+   except Exception as e:failures.append({'src_id':sid,'arm':'ZTF','error':f'{type(e).__name__}: {e}'})
+ for res in sorted(results,key=lambda x:x['idx']):
+  p=raw/f"ztf_{res['safe']}.csv";p.write_bytes(res['bytes']);raw_manifest.append({'src_id':res['sid'],'arm':'ZTF','path':str(p.relative_to(out)),'sha256':sha256_file(p),'bytes':len(res['bytes']),'url':res['url']});ztf_rows.extend(res['rows'])
+ raw_manifest.sort(key=lambda r:(r['src_id'],r['arm']))
  triples=eligible_ztf_triples(ztf_rows);primary=primary_ztf(triples)
  write_csv(out/'tess_sector_coverage.csv',tess_rows,['src_id','ra_deg','dec_deg','sector','sectorName','camera','ccd','covered']);write_csv(out/'ztf_normalized_metadata.csv',ztf_rows,['src_id','source_ra_deg','source_dec_deg']+list(ZTF_COLS));write_csv(out/'ztf_eligible_triples.csv',triples);write_csv(out/'ztf_primary_metadata_sequences.csv',primary)
- (out/'raw_manifest.json').write_text(json.dumps(raw_manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8');status='PASS_METADATA_COMPLETE' if not failures else 'BLOCKED_METADATA_QUERY_FAILURE';rec={'schema':'janus.cosmos.tachyon_star.t2a.receipt.v1','experiment_id':'JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY','status':status,'source_universe_sha256':SOURCE_SHA256,'sources':EXPECTED_SOURCES,'failures':failures,'tess':{'rows':len(tess_rows),'sources_with_coverage':len({r['src_id'] for r in tess_rows if r['covered']}),'sectors_unique':len({str(r['sector']) for r in tess_rows if r['covered']})},'ztf':{'metadata_rows':len(ztf_rows),'sources_with_metadata':len({r['src_id'] for r in ztf_rows}),'eligible_triples':len(triples),'sources_with_eligible_triples':len({r['src_id'] for r in triples}),'primary_sequences':len(primary)},'raw_manifest_sha256':sha256_file(out/'raw_manifest.json'),'claim_ceiling':CLAIM,'external_target_pixels_opened':False};(out/'receipt.json').write_text(json.dumps(rec,indent=2,sort_keys=True)+'\n',encoding='utf-8');print(json.dumps(rec,indent=2));return 0 if not failures else 3
+ (out/'raw_manifest.json').write_text(json.dumps(raw_manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8');status='PASS_METADATA_COMPLETE' if not failures else 'BLOCKED_METADATA_QUERY_FAILURE';rec={'schema':'janus.cosmos.tachyon_star.t2a.receipt.v1','experiment_id':'JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY','status':status,'transport_revision':'R1_ZTF_MAX4_PARALLEL_SAME_FROZEN_QUERIES','source_universe_sha256':SOURCE_SHA256,'sources':EXPECTED_SOURCES,'failures':sorted(failures,key=lambda x:(x['src_id'],x['arm'])),'tess':{'rows':len(tess_rows),'sources_with_coverage':len({r['src_id'] for r in tess_rows if r['covered']}),'sectors_unique':len({str(r['sector']) for r in tess_rows if r['covered']})},'ztf':{'metadata_rows':len(ztf_rows),'sources_with_metadata':len({r['src_id'] for r in ztf_rows}),'eligible_triples':len(triples),'sources_with_eligible_triples':len({r['src_id'] for r in triples}),'primary_sequences':len(primary)},'raw_manifest_sha256':sha256_file(out/'raw_manifest.json'),'claim_ceiling':CLAIM,'external_target_pixels_opened':False};(out/'receipt.json').write_text(json.dumps(rec,indent=2,sort_keys=True)+'\n',encoding='utf-8');print(json.dumps(rec,indent=2));return 0 if not failures else 3
 if __name__=='__main__':raise SystemExit(main())
