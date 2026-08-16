@@ -1,5 +1,8 @@
+import csv
+import tempfile
 import unittest
-from experiments.luci.run_tachyon_star_t2a import eligible_ztf_triples,primary_ztf
+from pathlib import Path
+from experiments.luci.run_tachyon_star_t2a import eligible_ztf_triples,primary_ztf,write_csv
 class T(unittest.TestCase):
  def row(self,t,ff='1',sid='s',ex='30',field='1',ccd='2',qid='3',f='zr'):
   return {'src_id':sid,'obsdate':t,'filefracday':ff,'field':field,'ccdid':ccd,'qid':qid,'filtercode':f,'exptime':ex,'pid':'1','ipac_pub_date':'2020-01-01'}
@@ -14,4 +17,9 @@ class T(unittest.TestCase):
   b={**a,'timing_distance_s':2,'b_obsdate':'2024-01-01','b_filefracday':'1'}
   c={**a,'src_id':'b','timing_distance_s':4}
   x=primary_ztf(sorted([a,b,c],key=lambda r:(r['src_id'],r['timing_distance_s'],r['b_obsdate'])));self.assertEqual(len(x),2);self.assertEqual(x[0]['timing_distance_s'],2)
+ def test_unrequested_server_columns_are_not_normalized(self):
+  with tempfile.TemporaryDirectory() as td:
+   p=Path(td)/'x.csv';write_csv(p,[{'src_id':'s','ra':'1','in_ra':'SERVER_EXTRA','in_row_id':'7'}],['src_id','ra'])
+   rows=list(csv.DictReader(p.open(encoding='utf-8')))
+   self.assertEqual(rows,[{'src_id':'s','ra':'1'}])
 if __name__=='__main__':unittest.main()

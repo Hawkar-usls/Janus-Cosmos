@@ -23,7 +23,7 @@ def _get(url:str,timeout=120,retries=2)->bytes:
  err=None
  for attempt in range(1,retries+1):
   try:
-   req=urllib.request.Request(url,headers={'User-Agent':'Janus-Cosmos-TachyonStar-T2A/1.1','Accept':'application/json,text/csv,text/plain,*/*'})
+   req=urllib.request.Request(url,headers={'User-Agent':'Janus-Cosmos-TachyonStar-T2A/1.2','Accept':'application/json,text/csv,text/plain,*/*'})
    with urllib.request.urlopen(req,timeout=timeout) as r:return r.read()
   except Exception as e:
    err=f'{type(e).__name__}: {e}'
@@ -59,7 +59,7 @@ def write_csv(path:Path,rows:list[dict],fields:list[str]|None=None):
  if fields is None:fields=list(rows[0].keys()) if rows else []
  with path.open('w',encoding='utf-8',newline='') as f:
   if not fields:return
-  w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
+  w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(rows)
 def _ztf_query(idx:int,s:dict):
  sid=s['src_id'];ra=s['ra_deg'];dec=s['dec_deg'];safe=f'{idx:02d}_{hashlib.sha256(sid.encode()).hexdigest()[:12]}'
  params={'POS':f'{ra},{dec}','COLUMNS':','.join(ZTF_COLS),'ct':'csv'};url='https://irsa.ipac.caltech.edu/ibe/search/ztf/products/sci?'+urllib.parse.urlencode(params)
@@ -98,5 +98,5 @@ def main():
  raw_manifest.sort(key=lambda r:(r['src_id'],r['arm']))
  triples=eligible_ztf_triples(ztf_rows);primary=primary_ztf(triples)
  write_csv(out/'tess_sector_coverage.csv',tess_rows,['src_id','ra_deg','dec_deg','sector','sectorName','camera','ccd','covered']);write_csv(out/'ztf_normalized_metadata.csv',ztf_rows,['src_id','source_ra_deg','source_dec_deg']+list(ZTF_COLS));write_csv(out/'ztf_eligible_triples.csv',triples);write_csv(out/'ztf_primary_metadata_sequences.csv',primary)
- (out/'raw_manifest.json').write_text(json.dumps(raw_manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8');status='PASS_METADATA_COMPLETE' if not failures else 'BLOCKED_METADATA_QUERY_FAILURE';rec={'schema':'janus.cosmos.tachyon_star.t2a.receipt.v1','experiment_id':'JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY','status':status,'transport_revision':'R1_ZTF_MAX4_PARALLEL_SAME_FROZEN_QUERIES','source_universe_sha256':SOURCE_SHA256,'sources':EXPECTED_SOURCES,'failures':sorted(failures,key=lambda x:(x['src_id'],x['arm'])),'tess':{'rows':len(tess_rows),'sources_with_coverage':len({r['src_id'] for r in tess_rows if r['covered']}),'sectors_unique':len({str(r['sector']) for r in tess_rows if r['covered']})},'ztf':{'metadata_rows':len(ztf_rows),'sources_with_metadata':len({r['src_id'] for r in ztf_rows}),'eligible_triples':len(triples),'sources_with_eligible_triples':len({r['src_id'] for r in triples}),'primary_sequences':len(primary)},'raw_manifest_sha256':sha256_file(out/'raw_manifest.json'),'claim_ceiling':CLAIM,'external_target_pixels_opened':False};(out/'receipt.json').write_text(json.dumps(rec,indent=2,sort_keys=True)+'\n',encoding='utf-8');print(json.dumps(rec,indent=2));return 0 if not failures else 3
+ (out/'raw_manifest.json').write_text(json.dumps(raw_manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8');status='PASS_METADATA_COMPLETE' if not failures else 'BLOCKED_METADATA_QUERY_FAILURE';rec={'schema':'janus.cosmos.tachyon_star.t2a.receipt.v1','experiment_id':'JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY','status':status,'transport_revision':'R2_ZTF_MAX4_PARALLEL_IGNORE_UNREQUESTED_SERVER_COLUMNS_SAME_FROZEN_QUERIES','source_universe_sha256':SOURCE_SHA256,'sources':EXPECTED_SOURCES,'failures':sorted(failures,key=lambda x:(x['src_id'],x['arm'])),'tess':{'rows':len(tess_rows),'sources_with_coverage':len({r['src_id'] for r in tess_rows if r['covered']}),'sectors_unique':len({str(r['sector']) for r in tess_rows if r['covered']})},'ztf':{'metadata_rows':len(ztf_rows),'sources_with_metadata':len({r['src_id'] for r in ztf_rows}),'eligible_triples':len(triples),'sources_with_eligible_triples':len({r['src_id'] for r in triples}),'primary_sequences':len(primary)},'raw_manifest_sha256':sha256_file(out/'raw_manifest.json'),'claim_ceiling':CLAIM,'external_target_pixels_opened':False};(out/'receipt.json').write_text(json.dumps(rec,indent=2,sort_keys=True)+'\n',encoding='utf-8');print(json.dumps(rec,indent=2));return 0 if not failures else 3
 if __name__=='__main__':raise SystemExit(main())
