@@ -24,8 +24,12 @@ class T(unittest.TestCase):
 
     def test_header_reader_does_not_dereference_hdu_data(self):
         src = inspect.getsource(header_wcs)
-        self.assertNotIn(".data", src)
-        self.assertIn("fits.getheader", src)
+        executable = "\n".join(
+            line for line in src.splitlines()
+            if not line.lstrip().startswith("#")
+        )
+        self.assertNotIn(".data", executable)
+        self.assertIn("fits.getheader", executable)
 
     def test_no_target_recentering_constant_is_mutable(self):
         self.assertAlmostEqual(CANDIDATE_X, 1437.216755721343, places=12)
