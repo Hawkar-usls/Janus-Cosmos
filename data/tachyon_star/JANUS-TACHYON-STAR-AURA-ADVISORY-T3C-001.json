@@ -1,0 +1,61 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "source_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_sha256": "e70c13176addc8e9a80c1ac84c371fd8549bacd6fe7c2516c63b17d7671fd727"
+  },
+  "request": {
+    "request_id": "JANUS-TACHYON-STAR-AURA-T3C-001",
+    "speaker": "JANUS_COSMOS",
+    "topic": "Choose the next scientific gate after independent prepointed TESS replication returned zero isolated-B candidates, forty of forty-two sensitivity-qualified null trials, and two sensitivity-unresolved trials.",
+    "question": "Given zero TESS candidates, 40/42 qualified null trials, and exactly two unresolved trials whose raw B values are negative excursions but whose +10 sigma injection failed while +12 sigma recovered, should the next gate characterize only those two sensitivity limits, stop this replication line, or open a materially different test?",
+    "context": "The ZTF branch is already frozen at 23/28 qualified null trials, zero candidates, and five explicitly characterized unresolved limitations. TESS T3A froze all 42 B cadences before FLUX inspection. T3B found 40 qualified null trials, zero candidates, zero non-isolated patterns, and two unresolved trials. Thresholds, sectors, B cadences, and the 40 qualified nulls must not be weakened or reopened. We want the smallest reversible evidence-preserving next step.",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "no_reopen_qualified_nulls": true,
+      "no_threshold_weakening": true
+    }
+  },
+  "response": {
+    "status": "HEURISTIC_ONLY",
+    "cards": [
+      {
+        "id": "LANTERN",
+        "lens": "Look for the missing piece of information with the highest value.",
+        "question": "What single observation would most reduce uncertainty?"
+      },
+      {
+        "id": "THRESHOLD",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?"
+      },
+      {
+        "id": "ANCHOR",
+        "lens": "Return to the user-stated goal and constraints before optimizing details.",
+        "question": "Which part of the goal is actually non-negotiable?"
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong.",
+      "Separate source identity, observation, inference, and confidence into different fields."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "evidence_upgrade": false,
+    "prediction_claim": false
+  },
+  "janus_interpretation": {
+    "lantern": "Measure the exact detector sensitivity deficit for only the two unresolved TESS trials.",
+    "threshold": "Use an analytic bound from already frozen T3B metrics, requiring no new pixel read and reopening none of the forty qualified null trials.",
+    "anchor": "After characterizing those two limits, return to the original goal of independent replication and close this specific 0-to-1-to-0 replication line unless a new independently preregistered scientific question is posed."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-T3C-TESS-RESIDUAL-SENSITIVITY-BOUND",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}
