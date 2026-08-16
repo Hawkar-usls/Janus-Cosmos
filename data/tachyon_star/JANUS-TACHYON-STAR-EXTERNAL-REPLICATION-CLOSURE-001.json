@@ -1,0 +1,104 @@
+{
+  "schema": "janus.cosmos.tachyon_star.external_replication_closure.v1",
+  "certificate_id": "JANUS-TACHYON-STAR-EXTERNAL-REPLICATION-CLOSURE-001",
+  "date_utc": "2026-08-16",
+  "status": "CLOSED_NO_PREREGISTERED_ISOLATED_B_REPLICATION_DETECTED",
+  "closure_reason": "The preregistered/prepointed ZTF and TESS external replication arms both returned zero isolated-B candidates. Remaining incompleteness is explicitly bounded by archive/product availability and sensitivity limitations rather than repaired by post-hoc selection. Aura Oracle's final ANCHOR heuristic recommended returning to the original replication goal after the residual limits were characterized instead of continuing to optimize the same motif.",
+  "aura_advisory_lineage": [
+    {
+      "advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json",
+      "request_sha256": "2c5abb92bbe2a89d9db877c8dfdec2b0d74bb1dcc74fcf0077326a191659eee2",
+      "cards": ["THRESHOLD", "MIRROR", "FORK"],
+      "effect": "Resolve the eight ZTF unresolved trials with a ZTF-native gate before opening TESS."
+    },
+    {
+      "advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2D-001.json",
+      "request_sha256": "fb811cc2c7645e95074bd08c413f044c49fa2341f8c205104d0a56453787fe43",
+      "cards": ["THRESHOLD", "THREAD", "LANTERN"],
+      "effect": "Characterize residual ZTF sensitivity and exact product lineage, then move to an independent TESS arm."
+    },
+    {
+      "advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json",
+      "request_sha256": "e70c13176addc8e9a80c1ac84c371fd8549bacd6fe7c2516c63b17d7671fd727",
+      "cards": ["LANTERN", "THRESHOLD", "ANCHOR"],
+      "effect": "Characterize only the two residual TESS sensitivity limits without new pixel reads, then close the specific replication line."
+    }
+  ],
+  "zft_branch": {
+    "instrument": "ZTF",
+    "prepointed_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-RUN-001.json",
+    "native_recovery_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-RUN-001.json",
+    "residual_forensics_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2D-ZTF-RUN-001.json",
+    "quality_admissible_trials": 28,
+    "fully_sensitivity_qualified_null_trials": 23,
+    "isolated_b_candidates": 0,
+    "nonisolated_source_patterns": 0,
+    "characterized_unresolved_trials": 5,
+    "strongest_timing_matches": [
+      {
+        "delta_pre_s": 247.636,
+        "delta_post_s": 432.973,
+        "classification": "QUALIFIED_A_B_C_ABSENCE"
+      },
+      {
+        "delta_pre_s": 227.606,
+        "delta_post_s": 420.852,
+        "classification": "QUALIFIED_A_B_C_ABSENCE"
+      },
+      {
+        "delta_pre_s": 245.794,
+        "delta_post_s": 435.522,
+        "classification": "QUALIFIED_A_B_C_ABSENCE"
+      }
+    ],
+    "residual_limitations": {
+      "sensitivity_bound_trials": 3,
+      "exact_product_availability_or_mask_trials": 2,
+      "retroactive_negative_upgrades": 0
+    }
+  },
+  "tess_branch": {
+    "instrument": "TESS",
+    "metadata_prepoint_result": "data/tachyon_star/JANUS-TACHYON-STAR-T3A-TESS-RUN-001.json",
+    "prepointed_flux_result": "data/tachyon_star/JANUS-TACHYON-STAR-T3B-TESS-RUN-001.json",
+    "residual_sensitivity_result": "data/tachyon_star/JANUS-TACHYON-STAR-T3C-TESS-RUN-001.json",
+    "prepointed_trials": 42,
+    "fully_sensitivity_qualified_null_trials": 40,
+    "isolated_b_candidates": 0,
+    "nonisolated_patterns": 0,
+    "characterized_unresolved_trials": 2,
+    "selection_frozen_before_flux_inspection": true,
+    "residual_sensitivity_required_injected_snr": {
+      "TS-T3B-TESS-15": 11.021045239642227,
+      "TS-T3B-TESS-39": 10.09740353666039
+    },
+    "retroactive_negative_upgrades": 0
+  },
+  "combined_external_replication": {
+    "instruments": ["ZTF", "TESS"],
+    "prepointed_or_preregistered_isolated_b_candidates": 0,
+    "qualified_null_trials": 63,
+    "qualified_trials_denominator_within_each_arm": {
+      "ZTF": "23_of_28_quality_admissible",
+      "TESS": "40_of_42_prepointed"
+    },
+    "explicitly_characterized_unresolved_trials": 7,
+    "note_on_combination": "The ZTF and TESS trial definitions, cadence, aperture/PSF methods and denominators differ. The value 63 is descriptive bookkeeping only and is not treated as 63 exchangeable independent Bernoulli trials or as a pooled p-value."
+  },
+  "admitted_claim": "Across two external optical archives tested with preregistered or prepointed selections, JANUS did not detect a replication of the isolated central B-event motif under the frozen ZTF and TESS candidate gates. ZTF produced zero isolated-B candidates with 23 of 28 quality-admissible trials fully sensitivity-qualified as null and five explicitly characterized unresolved trials. TESS independently produced zero isolated-B candidates with 40 of 42 prepointed trials sensitivity-qualified as null and two explicitly characterized sensitivity-unresolved trials. This closes the present external replication line as a non-replication result with explicit incompleteness, not as proof that transient phenomena or tachyons do not exist.",
+  "not_admitted": [
+    "An all-28 negative ZTF result.",
+    "An all-42 sensitivity-qualified TESS negative result.",
+    "A pooled 63-trial frequentist significance claim.",
+    "Proof that the original LUCI marginal candidate was an artifact or physically disappeared.",
+    "A global rejection of short-lived optical or near-infrared transients.",
+    "Existence or nonexistence of a physical tachyon particle.",
+    "Faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "line_state": {
+    "external_replication": "CLOSED",
+    "result": "NO_PREREGISTERED_ISOLATED_B_REPLICATION_DETECTED_WITH_EXPLICIT_INCOMPLETE_COVERAGE",
+    "reopen_condition": "A new materially independent scientific question and preregistration, not another post-hoc optimization of the current isolated-B motif."
+  },
+  "claim_ceiling": "EXTERNAL_PREPOINTED_REPLICATION_NONREPLICATION_CERTIFICATE_ONLY__EXPLICIT_INCOMPLETE_COVERAGE__NO_TACHYON_EXISTENCE_OR_NONEXISTENCE_CLAIM__NO_FTL__NO_RETROCAUSALITY__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}
