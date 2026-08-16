@@ -1,0 +1,39 @@
+name: JANUS TACHYON STAR T2A External Metadata Discovery
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2-EXTERNAL-SOURCE-UNIVERSE.csv'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY-PREREG.json'
+      - 'experiments/luci/run_tachyon_star_t2a.py'
+      - 'tests/test_tachyon_star_t2a.py'
+      - '.github/workflows/tachyon-star-t2a.yml'
+permissions: {contents: read}
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Verify frozen 42-source universe before any external query
+        run: echo '94dee39740c5a2c402832e8d6b1c6681521331fe11cee630402b95e873a0adcb  data/tachyon_star/JANUS-TACHYON-STAR-T2-EXTERNAL-SOURCE-UNIVERSE.csv' | sha256sum -c -
+      - run: python -m unittest tests/test_tachyon_star_t2a.py -v
+      - name: Query TESS and ZTF metadata only
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_t2a
+          set +e
+          python -m experiments.luci.run_tachyon_star_t2a --output-dir results/tachyon_star_t2a
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_t2a/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_t2a/receipt.json
+          grep -q '"external_target_pixels_opened": false' results/tachyon_star_t2a/receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-t2a-metadata
+          path: results/tachyon_star_t2a/
+          if-no-files-found: error
