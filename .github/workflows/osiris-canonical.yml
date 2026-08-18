@@ -1,0 +1,50 @@
+name: OSIRIS canonical
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canonical:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify exact source pins
+        run: |
+          test "$(git -C vendor/Janus-Fundamentum rev-parse HEAD)" = "00b09d778a6d57fc7f905df9b6235fb30e29c5a3"
+          test "$(git -C vendor/janus-meta-registry rev-parse HEAD)" = "be1c7538932a823907b805516efaca035029ea8b"
+      - name: Compile canonical dependency closure
+        run: |
+          python -m py_compile \
+            experiments/direct/janus_c025_core.py \
+            experiments/direct/janus_c025_families.py \
+            experiments/direct/osiris_v2_technical_sat_solver.py \
+            experiments/direct/osiris_v2_1_pr192_prebirth_quotient.py \
+            experiments/direct/s_phallus_h_gate_0_articulation_decomposition.py \
+            experiments/direct/s_phallus_h_gate_1_k2_ribbon_decomposition.py \
+            experiments/direct/s_phallus_h_gate_2_bounded_k_scaling_holdout.py \
+            experiments/direct/s_phallus_h_gate_2_bounded_k_scaling_holdout_budget_guard.py \
+            run_osiris.py
+      - name: Execute frozen S𓂸ḥ/2 self-test
+        run: python run_osiris.py
+      - name: Enforce claim ceiling
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('PROJECT_STATUS.json').read_text(encoding='utf-8'))
+          assert d['P_VS_NP']=='OPEN'
+          assert d['P_EQUALS_NP']=='NOT_ESTABLISHED'
+          assert d['P_NOT_EQUALS_NP']=='NOT_ESTABLISHED'
+          PY
