@@ -1,0 +1,60 @@
+{
+  "schema": "janus.cosmos.love_edem.catalog_crosscheck.gate.v1",
+  "gate_id": "LOVE-EDEM-CATALOG-CROSSCHECK-v1",
+  "status": "FROZEN_READY_TO_RUN",
+  "purpose": "Confirm what cataloged astronomical sources actually exist around the frozen LOVE and EDEM directions without anomaly scoring or semantic promotion.",
+  "targets": {
+    "LOVE": {
+      "ra_deg": 204.30267916666668,
+      "dec_deg": -36.78240527777778,
+      "frame": "ICRS"
+    },
+    "EDEM_SEARCH_CENTER_ZP": {
+      "ra_deg": 139.22409686590188,
+      "dec_deg": 30.26038779947318,
+      "frame": "ICRS"
+    }
+  },
+  "frozen_search": {
+    "catalog_radius_arcsec": 30.0,
+    "source_group_linking_arcsec": 1.5,
+    "hst_radius_arcmin": 6.0,
+    "catalogs": [
+      "Gaia DR3",
+      "AllWISE",
+      "Pan-STARRS DR1",
+      "SDSS DR16",
+      "2MASS PSC",
+      "SIMBAD",
+      "MAST/STScI HST"
+    ],
+    "anomaly_scoring_used": false,
+    "anomaly_gate_required": false
+  },
+  "questions": [
+    "Are there cataloged sources within 30 arcsec of each frozen direction?",
+    "How many independent survey roots support the same source groups?",
+    "What is the nearest cataloged source to each exact center?",
+    "Does SIMBAD contain an identified object in the cone?",
+    "Does HST/MAST have coverage within the frozen 6 arcmin radius?"
+  ],
+  "firewall": {
+    "source_presence_is_not_anomaly": true,
+    "source_presence_is_not_planet_claim": true,
+    "source_presence_is_not_love_activation": true,
+    "source_presence_is_not_edem_identity_confirmation": true,
+    "geometric_relation_is_not_physical_association": true,
+    "posthoc_pattern_is_not_significance": true
+  },
+  "upstream_receipts": [
+    "data/love/LOVE-EDEM-ORION-BELT-ICRS-GEOMETRY-v1-RUN-001-RECEIPT.json",
+    "data/love/LOVE-EDEM-ORION-BISECTOR-REVERSE-v1-RUN-001-RECEIPT.json"
+  ],
+  "runner": "workspace/love_edem_catalog_verify.py",
+  "next_terminal_states": [
+    "CATALOG_SOURCES_PRESENT",
+    "NO_CATALOG_SOURCES_WITHIN_FROZEN_RADIUS",
+    "PARTIAL_SERVICE_FAILURE",
+    "RUN_FAILED"
+  ]
+}
