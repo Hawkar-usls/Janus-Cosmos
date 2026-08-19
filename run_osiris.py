@@ -6,7 +6,7 @@ import sys
 root = Path(__file__).resolve().parent
 direct = root / "experiments" / "direct"
 legacy = direct / "s_phallus_h_gate_2_bounded_k_scaling_holdout_budget_guard.py"
-spiral = root / "workspace" / "osiris_spiral_runtime.py"
+spiral = root / "workspace" / "osiris_spiral_runtime_strict.py"
 
 args = list(sys.argv[1:])
 legacy_mode = "--legacy" in args
