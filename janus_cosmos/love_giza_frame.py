@@ -37,10 +37,11 @@ def _time_grid(start: str, stop: str, step_seconds: int) -> Time:
 
 
 def _surface_parallax_mas(target: SkyCoord, location: EarthLocation, times: Time) -> tuple[np.ndarray, float]:
-    """Return Giza-vs-geocenter angular shift without comparing non-equivalent frames.
+    """Return Giza-vs-geocenter angular shift in a common GCRS vector space.
 
-    The star vector and site baseline are both expressed in the same GCRS axes.
-    Topocentric line of sight is (geocentric star vector - site position).
+    The tiny angle is evaluated with atan2(|a x b|, a dot b), which remains
+    stable at microarcsecond scale where arccos of a normalized dot product
+    can round to zero in double precision.
     """
     site_pos, _ = location.get_gcrs_posvel(times)
     geocentric = target.transform_to(GCRS(obstime=times))
@@ -48,11 +49,9 @@ def _surface_parallax_mas(target: SkyCoord, location: EarthLocation, times: Time
     site_xyz = np.moveaxis(site_pos.xyz.to_value(u.m), 0, -1)
     topo_xyz = star_xyz - site_xyz
 
-    geo_norm = np.linalg.norm(star_xyz, axis=1)
-    topo_norm = np.linalg.norm(topo_xyz, axis=1)
-    dot = np.sum(star_xyz * topo_xyz, axis=1) / (geo_norm * topo_norm)
-    dot = np.clip(dot, -1.0, 1.0)
-    angle_rad = np.arccos(dot)
+    cross_norm = np.linalg.norm(np.cross(star_xyz, topo_xyz), axis=1)
+    dot_raw = np.sum(star_xyz * topo_xyz, axis=1)
+    angle_rad = np.arctan2(cross_norm, dot_raw)
     mas = np.degrees(angle_rad) * 3600.0 * 1000.0
 
     baseline_m = float(np.max(np.linalg.norm(site_xyz, axis=1)))
@@ -144,7 +143,7 @@ def run(prereg_path: Path, output_path: Path) -> dict:
     )
 
     result = {
-        "schema": "janus.cosmos.love.giza_frame.result.v1.1",
+        "schema": "janus.cosmos.love.giza_frame.result.v1.2",
         "experiment_id": prereg["experiment_id"],
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "analysis_label": target_cfg["analysis_label"],
