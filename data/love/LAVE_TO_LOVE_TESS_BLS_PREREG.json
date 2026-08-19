@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.love.tess_bls.prereg.v1",
+  "experiment_id": "LOVE-G1-007-TESS-BLS-v1",
+  "parent_receipt": "data/love/LOVE-G1-007-MULTIEYE-v2-RUN-001-RECEIPT.json",
+  "date_utc": "2026-08-19",
+  "blind_identity_firewall": {
+    "analysis_root": "TARGET_A",
+    "reserved_post_gate_codename": "Love",
+    "name_is_hidden_from_signal_scoring": true,
+    "phonetic_match_is_not_evidence": true,
+    "known_planet_is_control_not_discovery": true
+  },
+  "frozen_sources": [
+    {"rank": 1, "gaia_source_id": "6163733512389228672", "tic_id": "102039892", "k_like": false},
+    {"rank": 2, "gaia_source_id": "6163541785049288960", "tic_id": "165827520", "k_like": false},
+    {"rank": 3, "gaia_source_id": "6164379784707817216", "tic_id": "165636116", "k_like": true},
+    {"rank": 4, "gaia_source_id": "6162963270134151168", "tic_id": "242103812", "k_like": false},
+    {"rank": 5, "gaia_source_id": "6164768633867103616", "tic_id": "107289258", "k_like": false},
+    {"rank": 8, "gaia_source_id": "6167921689617745152", "tic_id": "131314000", "k_like": false},
+    {"rank": 12, "gaia_source_id": "6163549103673109632", "tic_id": "165769727", "k_like": false}
+  ],
+  "lightcurve_selection": {
+    "source": "MAST/TESS public time-series products",
+    "preferred_flux": "PDCSAP_FLUX",
+    "fallback_flux": "SAP_FLUX",
+    "quality_rule": "QUALITY == 0",
+    "one_lightcurve_per_sector": true,
+    "prefer_standard_lc_over_fast_lc": true,
+    "download_real_fits": true
+  },
+  "bls_search": {
+    "minimum_period_days": 0.5,
+    "maximum_period_days": 15.0,
+    "duration_hours": [1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 10.0],
+    "frequency_factor": 5.0,
+    "sector_screen_sde_min": 5.0,
+    "combined_sde_min": 8.0,
+    "repeat_period_relative_tolerance": 0.01,
+    "minimum_matching_sectors": 2,
+    "minimum_estimated_transits": 2,
+    "depth_fraction_min": 0.0001,
+    "depth_fraction_max": 0.05
+  },
+  "admission": {
+    "tess_repeat_watchlist_requires_all": [
+      "not a known exoplanet host match in NASA Exoplanet Archive cone control",
+      "combined BLS SDE >= 8",
+      "depth between 0.01% and 5%",
+      "at least 2 estimated transits",
+      "best period repeats within 1% in at least 2 distinct TESS sectors"
+    ],
+    "love_codename_activation": false,
+    "reason": "TESS-only repeatability can create a follow-up watchlist item but cannot activate Love without independent non-TESS replication and false-positive rejection."
+  },
+  "claim_ceiling": "BLIND_TESS_TRANSIT_SCREEN_ONLY__NO_EXOPLANET_DISCOVERY__LOVE_REMAINS_SEALED"
+}
