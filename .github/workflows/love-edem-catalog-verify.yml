@@ -35,22 +35,25 @@ jobs:
           python workspace/love_edem_catalog_verify.py \
             --output data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json
 
-      - name: Show receipt
+      - name: Show compact summary
         run: |
-          cat data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json
+          cat data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json
 
-      - name: Upload receipt
+      - name: Upload receipts
         uses: actions/upload-artifact@v4
         with:
           name: love-edem-catalog-crosscheck-${{ github.run_number }}
-          path: data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json
+          path: |
+            data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json
+            data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json
           if-no-files-found: error
           retention-days: 90
 
-      - name: Persist receipt to Janus-Cosmos
+      - name: Persist receipts to Janus-Cosmos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json
+          git add data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json
           git commit -m "cosmos: freeze LOVE EDEM catalog crosscheck run ${{ github.run_number }}"
           git push
