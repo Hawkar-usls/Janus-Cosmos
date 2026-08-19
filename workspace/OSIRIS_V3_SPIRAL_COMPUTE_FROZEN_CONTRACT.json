@@ -1,0 +1,113 @@
+{
+  "schema": "janus.cosmos.osiris_v3_spiral_compute_frozen_contract.v1",
+  "artifact_id": "OSIRIS-V3-ORIGIN-PRIME-SPIRAL-COMPUTE-FROZEN-CONTRACT-2026-08-19-v1.0",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION_AND_RUN",
+  "parent": {
+    "repository": "Hawkar-usls/Janus-Cosmos",
+    "sha": "c77f920d764229efb6932bc4ea522a4ec0342c64",
+    "fundamentum_pin": "00b09d778a6d57fc7f905df9b6235fb30e29c5a3",
+    "parent_canonical_gate": "S𓂸ḥ/2"
+  },
+  "semantic_spec": {
+    "path": "workspace/OSIRIS_ORIGIN_PRIME_SPIRAL_SEMANTIC_SPEC_v1.0.json",
+    "git_blob_sha": "b3163013ff7b0c22a86dff732092374a191e5a2a",
+    "required_path": ["ORIGIN", "EXPERIENCE", "RETURN", "ORIGIN_PRIME"]
+  },
+  "goal": "Make ORIGIN_PRIME computationally active: exact formula-bound verified experience from generation n may reduce repeated discovery work in generation n+1 without gaining verdict authority.",
+  "runtime_law": {
+    "old_state_model": "A -> B -> C -> A",
+    "old_state_model_status": "REJECTED",
+    "new_state_model": "ORIGIN_n -> COMPUTE_EXPERIENCE_n -> VERIFIED_RETURN_n -> ORIGIN_PRIME_n+1",
+    "next_generation_origin": "ORIGIN_PRIME_n+1",
+    "position_may_repeat": true,
+    "state_must_advance": true,
+    "experience_may_affect_search": true,
+    "experience_may_create_verdict_authority": false
+  },
+  "safe_reuse_classes": {
+    "verified_separator_route": {
+      "allowed": true,
+      "requirements": [
+        "exact canonical formula hash match",
+        "exact provider/fundamentum pin match",
+        "stored experience commitment verifies",
+        "separator and claimed components are revalidated against the current formula before reuse"
+      ],
+      "effect": "may bypass repeated exhaustive minimum-separator discovery at the matching root and reuse the already discovered route",
+      "fresh_minimality_claim_on_reuse": false
+    },
+    "sat_witness": {
+      "allowed": true,
+      "requirements": [
+        "exact canonical formula hash match",
+        "stored assignment is rechecked with satisfies(current_formula, assignment)"
+      ],
+      "effect": "may serve as an immediately reverified SAT witness",
+      "memory_itself_is_authority": false
+    },
+    "unsat_memory_only": {
+      "allowed_as_verdict_shortcut": false,
+      "effect": "UNSAT may use structural route memory, but all current boundary/component closure still has to execute unless a separately checkable proof object is introduced in a later frozen contract"
+    }
+  },
+  "frozen_fixtures": [
+    {
+      "id": "SPIRAL_K4_SAT",
+      "generator": "separator_clique_dumbbell",
+      "params": {"k": 4, "left_size": 4, "right_size": 4, "conflict": false},
+      "formula_sha256": "6f82d8badb79ec5ea4662c7d4125d7300a78d03018e116cfb78907e8ecebfe04",
+      "expected": "SAT",
+      "budget": 50000
+    },
+    {
+      "id": "SPIRAL_K4_UNSAT",
+      "generator": "separator_clique_dumbbell",
+      "params": {"k": 4, "left_size": 4, "right_size": 4, "conflict": true},
+      "formula_sha256": "1b1483d820670955b41ed571dd634a51ffdcf8bebe5c7e4fb2cbc08e3bf7730e",
+      "expected": "UNSAT",
+      "budget": 50000
+    },
+    {
+      "id": "SPIRAL_MISMATCH_K3_SAT",
+      "generator": "separator_clique_dumbbell",
+      "params": {"k": 3, "left_size": 4, "right_size": 4, "conflict": false},
+      "formula_sha256": "48cd636c25b7e06ab295c8f95fafa8c8e0b30d5c74fc5be3d0a7e9136436ca07",
+      "expected": "SAT",
+      "budget": 50000
+    }
+  ],
+  "required_positive_gates": [
+    "parent frozen S𓂸ḥ/2 remains executable and unchanged",
+    "first K4 SAT traversal is exact and stores verified experience",
+    "second exact K4 SAT traversal advances state generation and reuses exact formula-bound experience",
+    "second K4 SAT traversal independently rechecks SAT witness against the current formula",
+    "first K4 UNSAT traversal is exact and stores verified separator route",
+    "second K4 UNSAT traversal revalidates the separator on the current formula and still executes current closure rather than trusting UNSAT memory",
+    "reused root route performs strictly less exhaustive root separator-candidate discovery than first traversal",
+    "same technical input may preserve POSITION while state commitment changes",
+    "formula mismatch does not reuse another formula's experience",
+    "P_VS_NP remains OPEN"
+  ],
+  "negative_controls": [
+    "experience commitment bitflip",
+    "formula-hash swap",
+    "provider/fundamentum-pin mismatch",
+    "separator mutation",
+    "component partition mutation",
+    "cached SAT assignment mutation",
+    "attempt to use cached UNSAT as verdict without current closure",
+    "forced ORIGIN state reuse instead of advancing generation"
+  ],
+  "cost_accounting": {
+    "first_discovery_and_reuse_validation_reported_separately": true,
+    "heterogeneous_units_not_summed": true,
+    "cache_hit_not_reported_as_proof_of_complexity_improvement": true
+  },
+  "scientific_boundary": {
+    "P_VS_NP": "OPEN",
+    "P_EQUALS_NP": "NOT_ESTABLISHED",
+    "P_NOT_EQUALS_NP": "NOT_ESTABLISHED",
+    "restricted_repeated_input_speedup_is_not_arbitrary_CNF_polynomial_time": true,
+    "semantic_text_is_not_solver_correctness_evidence": true
+  }
+}

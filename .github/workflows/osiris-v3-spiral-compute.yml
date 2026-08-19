@@ -1,8 +1,6 @@
-name: OSIRIS canonical
+name: OSIRIS v3 ORIGIN_PRIME Spiral Compute
 
 on:
-  push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -10,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  canonical:
+  spiral-compute:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -20,15 +18,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Verify exact source pins
+
+      - name: Verify exact inherited source pins
         run: |
           test "$(git -C vendor/Janus-Fundamentum rev-parse HEAD)" = "00b09d778a6d57fc7f905df9b6235fb30e29c5a3"
           test "$(git -C vendor/janus-meta-registry rev-parse HEAD)" = "be1c7538932a823907b805516efaca035029ea8b"
-      - name: Compile canonical dependency closure
+
+      - name: Compile parent and spiral dependency closure
         run: |
           python -m py_compile \
             experiments/direct/janus_c025_core.py \
-            experiments/direct/janus_c025_families.py \
             experiments/direct/osiris_v2_technical_sat_solver.py \
             experiments/direct/osiris_v2_1_pr192_prebirth_quotient.py \
             experiments/direct/s_phallus_h_gate_0_articulation_decomposition.py \
@@ -38,22 +37,36 @@ jobs:
             workspace/osiris_spiral_runtime.py \
             workspace/osiris_spiral_runtime_strict.py \
             run_osiris.py
-      - name: Re-run frozen S𓂸ḥ/2 legacy baseline
+
+      - name: Re-run frozen legacy S𓂸ḥ/2 baseline unchanged
         run: python run_osiris.py --legacy > legacy-s2.json
-      - name: Execute canonical ORIGIN_PRIME spiral self-test
+
+      - name: Execute ORIGIN_PRIME spiral self-test
         run: python run_osiris.py > spiral-v3.json
-      - name: Enforce canonical spiral status and claim ceiling
+
+      - name: Enforce spiral gates and claim ceiling
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           r=json.loads(Path('spiral-v3.json').read_text(encoding='utf-8'))
-          d=json.loads(Path('PROJECT_STATUS.json').read_text(encoding='utf-8'))
           assert r['status']=='PASS_KEEP_OSIRIS_V3_ORIGIN_PRIME_SPIRAL_COMPUTE'
           assert all(r['gates'].values())
-          assert d['canonical_gate']=='OSIRIS_V3_ORIGIN_PRIME_SPIRAL_COMPUTE'
-          assert d['canonical_result_integrity_sha256']==r['integrity_sha256']
-          assert d['P_VS_NP']=='OPEN'
-          assert d['P_EQUALS_NP']=='NOT_ESTABLISHED'
-          assert d['P_NOT_EQUALS_NP']=='NOT_ESTABLISHED'
+          assert r['cost_observation']['SAT_first_root_discovery_candidates'] > r['cost_observation']['SAT_second_root_discovery_candidates']
+          assert r['cost_observation']['UNSAT_first_root_discovery_candidates'] > r['cost_observation']['UNSAT_second_root_discovery_candidates']
+          assert r['state_observation']['same_position_generation_2'] is True
+          assert r['state_observation']['state_changed_generation_2'] is True
+          assert r['scientific_boundary']['P_VS_NP']=='OPEN'
+          assert r['scientific_boundary']['P_EQUALS_NP']=='NOT_ESTABLISHED'
+          assert r['scientific_boundary']['P_NOT_EQUALS_NP']=='NOT_ESTABLISHED'
           PY
+
+      - name: Upload spiral receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: osiris-v3-origin-prime-spiral-compute
+          path: |
+            legacy-s2.json
+            spiral-v3.json
+            workspace/OSIRIS_ORIGIN_PRIME_SPIRAL_SEMANTIC_SPEC_v1.0.json
+            workspace/OSIRIS_V3_SPIRAL_COMPUTE_FROZEN_CONTRACT.json
