@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.love_edem.hst_zaporizhzhia.receipt.v1",
+  "experiment_id": "LOVE-EDEM-HST-ZAPORIZHZHIA-v1",
+  "run_id": 32278165614,
+  "job_id": 96150358536,
+  "run_conclusion": "success",
+  "source": "MAST/STScI Hubble archive",
+  "synthetic_generation_used": false,
+  "query_radius_arcmin": 6.0,
+  "observer_source": {
+    "latitude_deg": 47.83206,
+    "longitude_deg_east": 35.13137,
+    "source": "User-supplied Apple Maps screenshot"
+  },
+  "targets": [
+    {
+      "label": "LOVE",
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778,
+      "observation_count": 0,
+      "wcs_contained_products": 0,
+      "status": "NO_HST_COVERAGE"
+    },
+    {
+      "label": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318,
+      "observation_count": 0,
+      "wcs_contained_products": 0,
+      "status": "NO_HST_COVERAGE"
+    }
+  ],
+  "artifact": {
+    "name": "love-edem-zaporizhzhia-real-hst-data",
+    "id": 9374915846,
+    "sha256": "d6bf849d93a0d61428912740dd468138144c9295b88495d1f44614826d9c0f64",
+    "size_bytes": 648
+  },
+  "interpretation": {
+    "real_hubble_image_available_for_exact_love_coordinate": false,
+    "real_hubble_image_available_for_exact_zaporizhzhia_edem_coordinate": false,
+    "nearest_hst_field_may_be_searched_separately_but_must_not_be_presented_as_exact_target": true
+  },
+  "claim_firewall": {
+    "hst_image_is_not_planet_detection": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false
+  }
+}
