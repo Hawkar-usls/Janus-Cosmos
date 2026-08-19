@@ -1,0 +1,141 @@
+{
+  "schema": "janus.cosmos.love_edem.orion_belt_icrs_geometry.receipt.v1",
+  "experiment_id": "LOVE-EDEM-ORION-BELT-ICRS-GEOMETRY-v1",
+  "run_id": "MANUAL_SPHERICAL_GEOMETRY_2026-08-20",
+  "status": "COMPLETE",
+  "mode": "REAL_COORDINATE_SET_COMPARISON",
+  "anomaly_scoring_used": false,
+  "inputs": {
+    "frame": "ICRS",
+    "epoch": "J2000",
+    "janus_frozen_centers": {
+      "LOVE": {
+        "ra_deg": 204.30267916666668,
+        "dec_deg": -36.78240527777778
+      },
+      "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {
+        "ra_deg": 139.22409686590188,
+        "dec_deg": 30.26038779947318
+      }
+    },
+    "orion_belt_simbad": {
+      "Mintaka_delta_Ori": {
+        "ra_hms": "05 32 00.40009",
+        "dec_dms": "-00 17 56.7424",
+        "ra_deg": 83.00166704166666,
+        "dec_deg": -0.2990951111111111
+      },
+      "Alnilam_epsilon_Ori": {
+        "ra_hms": "05 36 12.81335",
+        "dec_dms": "-01 12 06.9089",
+        "ra_deg": 84.05338895833333,
+        "dec_deg": -1.2019191388888888
+      },
+      "Alnitak_zeta_Ori": {
+        "ra_hms": "05 40 45.52666",
+        "dec_dms": "-01 56 33.2649",
+        "ra_deg": 85.18969441666667,
+        "dec_deg": -1.9425735833333333
+      }
+    }
+  },
+  "methods": {
+    "pairwise_separation": "great-circle angular separation using spherical cosine/dot-product geometry",
+    "belt_centroid": "normalized mean of the three unit direction vectors",
+    "belt_great_circle": "least-squares plane through origin fitted to the three Orion Belt unit vectors by SVD",
+    "cross_track": "absolute angular latitude relative to the fitted great-circle plane",
+    "linearity_angle": "spherical tangent-plane angle at Alnilam between Mintaka and Alnitak directions"
+  },
+  "orion_belt_geometry": {
+    "segment_separations_deg": {
+      "Mintaka_Alnilam": 1.386000555,
+      "Alnilam_Alnitak": 1.356012182,
+      "Mintaka_Alnitak": 2.736114892
+    },
+    "adjacent_segment_ratio": 1.022115121,
+    "angle_at_Alnilam_deg": 172.483042058,
+    "deviation_from_perfect_straight_line_deg": 7.516957942,
+    "best_fit_great_circle_max_star_residual_deg": 0.059904121,
+    "direction_centroid": {
+      "ra_deg": 84.081376388,
+      "dec_deg": -1.148004001
+    }
+  },
+  "pairwise_angular_separations_deg": {
+    "LOVE__EDEM": 90.586788289,
+    "LOVE__Mintaka": 114.391636964,
+    "LOVE__Alnilam": 113.005719614,
+    "LOVE__Alnitak": 111.663256733,
+    "EDEM__Mintaka": 61.472603876,
+    "EDEM__Alnilam": 61.142417666,
+    "EDEM__Alnitak": 60.665811346,
+    "Mintaka__Alnilam": 1.386000555,
+    "Mintaka__Alnitak": 2.736114892,
+    "Alnilam__Alnitak": 1.356012182
+  },
+  "comparison_to_orion_belt_great_circle": {
+    "LOVE": {
+      "cross_track_deg": 3.963705383,
+      "cross_track_as_belt_span_multiple": 1.448661894,
+      "closest_point_on_fitted_great_circle": {
+        "ra_deg": 202.805030964,
+        "dec_deg": -33.013647388
+      },
+      "distance_difference_Mintaka_minus_Alnitak_deg": 2.728380231,
+      "difference_from_full_belt_span_percent": 0.282688
+    },
+    "EDEM": {
+      "cross_track_deg": 56.77514367,
+      "cross_track_as_belt_span_multiple": 20.75027764,
+      "closest_point_on_fitted_great_circle": {
+        "ra_deg": 107.308055556,
+        "dec_deg": -17.481388977
+      },
+      "distance_difference_Mintaka_minus_Alnitak_deg": 0.806792531,
+      "difference_from_full_belt_span_percent": 70.513207
+    }
+  },
+  "centroid_triangle": {
+    "sides_deg": {
+      "LOVE_EDEM": 90.586788289,
+      "LOVE_ORION_BELT_CENTROID": 113.02023574,
+      "EDEM_ORION_BELT_CENTROID": 61.088117713
+    },
+    "spherical_vertex_angles_deg": {
+      "at_LOVE_deg": 58.602609415,
+      "at_EDEM_deg": 116.174233693,
+      "at_ORION_BELT_CENTROID_deg": 77.176046152
+    },
+    "reference_angle_checks": {
+      "LOVE_EDEM_minus_90_deg": 0.586788289,
+      "EDEM_ORION_CENTROID_minus_60_deg": 1.088117713
+    }
+  },
+  "interpretation": {
+    "orion_belt_is_nearly_great_circle_linear": true,
+    "love_is_near_extension_of_orion_belt_great_circle": true,
+    "love_cross_track_deg": 3.963705,
+    "but_love_is_not_a_tight_visual_continuation_of_belt": true,
+    "reason_love_cross_track_exceeds_belt_end_to_end_span": true,
+    "edem_is_not_near_orion_belt_great_circle": true,
+    "edem_cross_track_deg": 56.775144,
+    "love_edem_remains_near_quarter_circle": true,
+    "love_edem_separation_deg": 90.586788,
+    "direct_sqrt_pi_coordinate_relation_found": false,
+    "statistical_significance_claimed": false,
+    "note": "The near-great-circle relation of LOVE to the Orion Belt extension is a real spherical-geometric property of these coordinates, but it was found post hoc. Approximately sin(3.9637 deg) ~ 6.9% of an isotropic sky lies within this cross-track distance of any fixed great circle, so this alone is not evidence of a physical association."
+  },
+  "firewall": {
+    "coordinate_geometry_is_not_physical_association": true,
+    "orion_belt_relation_is_not_identity": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "posthoc_pattern_is_not_discovery": true,
+    "claim_ceiling": "SPHERICAL_COORDINATE_GEOMETRY_ONLY"
+  },
+  "sources": {
+    "LOVE_EDEM": "Janus-Cosmos frozen coordinate receipts",
+    "Orion_Belt": "SIMBAD/CDS ICRS J2000 object coordinates for delta Ori, epsilon Ori, zeta Ori",
+    "calculation": "deterministic spherical geometry from the above coordinates"
+  }
+}
