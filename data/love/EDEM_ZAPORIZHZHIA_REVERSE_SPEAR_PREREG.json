@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.edem.observer_reverse_spear.prereg.v1",
+  "experiment_id": "EDEM-ZAPORIZHZHIA-REVERSE-SPEAR-v1",
+  "date_utc": "2026-08-19",
+  "analysis_label": "UPSTREAM_TARGET_B",
+  "observer": {
+    "name": "ZAPORIZHZHIA_POBEDY_ST_USER_MARKED_POINT",
+    "latitude_deg": 47.83206,
+    "longitude_deg_east": 35.13137,
+    "height_m": 0.0,
+    "height_note": "User supplied latitude/longitude only. Sea-level height is used for the first pass; tens-to-hundreds of metres of height uncertainty are negligible for this angular gate compared with the registered 0.25 deg threshold.",
+    "source": "User-supplied Apple Maps screenshot, Pobedy Street, Zaporizhzhia, Ukraine"
+  },
+  "love_target": {
+    "analysis_label": "TARGET_A",
+    "ra_deg_icrs": 204.30267916666667,
+    "dec_deg_icrs": -36.78240527777778,
+    "distance_pc": 35.119084119255824,
+    "use_finite_distance_topocentric_projection": true
+  },
+  "khufu_faces": {
+    "face_normal_altitude_deg": 38.16,
+    "outward_normal_azimuth_deg": {
+      "NORTH": 359.94,
+      "EAST": 89.9433333333,
+      "SOUTH": 179.9916666667,
+      "WEST": 269.9383333333
+    },
+    "note": "Same frozen Khufu face normals as the Giza run. Only observer location changes."
+  },
+  "time_window": {
+    "start_utc": "2026-01-01T00:00:00Z",
+    "stop_utc": "2026-02-01T00:00:00Z",
+    "coarse_step_seconds": 60,
+    "refine_half_window_seconds": 180,
+    "refine_step_seconds": 1
+  },
+  "reverse_spear_geometry": {
+    "upstream_direction_rule": "s_edem = 2*dot(s_love,n_face)*n_face - s_love",
+    "selector": "Choose visible/front-side time and face whose derived upstream direction is closest to the Moon direction, with all topocentric directions computed from this observer location.",
+    "primary_gate_deg": 0.25,
+    "strong_gate_deg": 0.10,
+    "exact_center_gate_deg": 0.05
+  },
+  "comparison_baseline": {
+    "giza_edem_ra_deg": 191.6974004645327,
+    "giza_edem_dec_deg": -6.427310115607929,
+    "giza_run_id": 32274568803
+  },
+  "claim_ceiling": "OBSERVER_TOPOCENTRIC_RECIPROCAL_DIRECTION_ONLY__NOT_AN_IDENTIFIED_EDEN_OBJECT__NOT_A_HISTORICAL_DEVICE_CLAIM"
+}
