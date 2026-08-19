@@ -1,0 +1,61 @@
+name: LOVE G1-007 TOI Unblind Gate
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LOVE-G1-007-TESS-BLS-v1-RUN-001-RAW-RECEIPT.json'
+      - 'data/love/LAVE_TO_LOVE_TESS_BLS_PREREG.json'
+      - 'janus_cosmos/love_toi_unblind.py'
+      - '.github/workflows/love-g1-007-toi-unblind.yml'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LOVE-G1-007-TESS-BLS-v1-RUN-001-RAW-RECEIPT.json'
+      - 'janus_cosmos/love_toi_unblind.py'
+      - '.github/workflows/love-g1-007-toi-unblind.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  authoritative-toi-unblind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile unblind gate
+        run: python -m py_compile janus_cosmos/love_toi_unblind.py
+      - name: Query NASA Exoplanet Archive TOI table
+        run: >-
+          python -u -m janus_cosmos.love_toi_unblind
+          --raw-receipt data/love/LOVE-G1-007-TESS-BLS-v1-RUN-001-RAW-RECEIPT.json
+          --prereg data/love/LAVE_TO_LOVE_TESS_BLS_PREREG.json
+          --output results/love_toi_unblind/love-toi-unblind-result.json
+      - name: Enforce novelty firewall
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/love_toi_unblind/love-toi-unblind-result.json', encoding='utf-8'))
+          assert d['status']=='PASS', d
+          assert d['love_gate']['candidate_activated'] is False
+          print('classification =', d['blind_hit']['classification'])
+          for row in d['blind_hit']['matching_period_rows']:
+              print('MATCH', row['toi'], row['tic_id'], row['disposition'], row['period_days'], row['depth_ppm'])
+          print('next_gate =', d['love_gate']['next_gate'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: love-g1-007-toi-unblind
+          path: results/love_toi_unblind/
+          if-no-files-found: error
+          retention-days: 14
