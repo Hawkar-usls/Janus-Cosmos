@@ -1,0 +1,52 @@
+name: LOVE EDEM Catalog Crosscheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/love-edem-catalog-verify.yml"
+      - "workspace/love_edem_catalog_verify.py"
+      - "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-GATE-v1.json"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install legacy astronomy dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "astropy>=7.0" "astroquery>=0.4.11"
+
+      - name: Query real catalogs
+        run: |
+          mkdir -p artifacts
+          python workspace/love_edem_catalog_verify.py \
+            --output artifacts/LOVE-EDEM-CATALOG-CROSSCHECK-v1-RUN-${{ github.run_number }}-RECEIPT.json
+
+      - name: Show receipt
+        if: always()
+        run: |
+          ls -lah artifacts || true
+          cat artifacts/LOVE-EDEM-CATALOG-CROSSCHECK-v1-RUN-${{ github.run_number }}-RECEIPT.json || true
+
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: love-edem-catalog-crosscheck-${{ github.run_number }}
+          path: artifacts/*.json
+          if-no-files-found: warn
+          retention-days: 90
