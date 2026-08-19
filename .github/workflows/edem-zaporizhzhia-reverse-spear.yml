@@ -1,0 +1,66 @@
+name: EDEM Zaporizhzhia Reverse Spear Resolver
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/EDEM_ZAPORIZHZHIA_REVERSE_SPEAR_PREREG.json'
+      - 'janus_cosmos/edem_observer_resolver.py'
+      - '.github/workflows/edem-zaporizhzhia-reverse-spear.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/EDEM_ZAPORIZHZHIA_REVERSE_SPEAR_PREREG.json'
+      - 'janus_cosmos/edem_observer_resolver.py'
+      - '.github/workflows/edem-zaporizhzhia-reverse-spear.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  resolve-edem-from-zaporizhzhia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile observer resolver
+        run: python -m py_compile janus_cosmos/edem_observer_resolver.py
+      - name: Run user-coordinate observer-frame calculation
+        run: >-
+          python -u -m janus_cosmos.edem_observer_resolver
+          --prereg data/love/EDEM_ZAPORIZHZHIA_REVERSE_SPEAR_PREREG.json
+          --output results/edem_zaporizhzhia/edem-zaporizhzhia-result.json
+      - name: Enforce observer firewall
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/edem_zaporizhzhia/edem-zaporizhzhia-result.json', encoding='utf-8'))
+          assert d['observer']['latitude_deg'] == 47.83206
+          assert d['observer']['longitude_deg_east'] == 35.13137
+          assert d['frame_policy']['telescope_locations_used_for_geometry'] is False
+          assert d['edem_identity_confirmed'] is False
+          print('ZAPORIZHZHIA OBSERVER FIREWALL PASS')
+          print('gate=', d['gate_status'])
+          print('best=', d['refined_best'])
+          print('comparison_to_giza=', d['comparison_to_giza'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edem-zaporizhzhia-reverse-spear-result
+          path: results/edem_zaporizhzhia/
+          if-no-files-found: error
+          retention-days: 14

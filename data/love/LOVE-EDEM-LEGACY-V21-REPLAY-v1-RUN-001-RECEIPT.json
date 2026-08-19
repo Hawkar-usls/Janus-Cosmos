@@ -1,0 +1,67 @@
+{
+  "schema": "janus.cosmos.love_edem.legacy_v21_replay.receipt.v1",
+  "experiment_id": "LOVE-EDEM-LEGACY-V21-REPLAY-v1",
+  "run_id": 32280824991,
+  "job_id": 96158937369,
+  "run_conclusion": "success",
+  "legacy_authority": {
+    "commit_sha": "964546bbca8361a00cc3acc754bd5eafbfb65312",
+    "protocol_sha256": "19513a026bd96519f048aa36b3cd01ee35d639acbc6eadeeaed4d3b287bc561d",
+    "real_sky_control_count": 20,
+    "hst_control_count": 20,
+    "source_verification": "PASS"
+  },
+  "data": {
+    "downloaded_products": 88,
+    "target_surveys": ["DSS2/RED", "DSS2/BLUE", "2MASS/J", "2MASS/K"],
+    "fov_deg": 5.0,
+    "pixels": 512,
+    "artifact_id": 9375818044,
+    "artifact_sha256": "9127ad365c5df62a00c0ff76c1e82d80e279e377f243e3953d7f9d4670ae4967"
+  },
+  "control_distribution": {
+    "score_min": 0.01805151753416572,
+    "score_median": 0.047623191719036354,
+    "score_max": 0.5031941689510457
+  },
+  "targets": [
+    {
+      "analysis_label": "TARGET_A",
+      "semantic_alias_unblinded_after_scoring": "LOVE",
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778,
+      "morphology_score": 0.10995852002648043,
+      "cross_family_correlations": [0.12411573508995728, 0.08335857368003362, 0.13251083529632107, 0.09580130496300357],
+      "control_exceedances": 4,
+      "empirical_p": 0.23809523809523808,
+      "gate_status": "LEGACY_V21_CROSS_SURVEY_MORPHOLOGY_FAIL"
+    },
+    {
+      "analysis_label": "TARGET_B",
+      "semantic_alias_unblinded_after_scoring": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318,
+      "morphology_score": 0.03214122071908782,
+      "cross_family_correlations": [0.08908759310142826, 0.042140708795641114, 0.02214173264253453, 0.010030688482189295],
+      "control_exceedances": 18,
+      "empirical_p": 0.9047619047619048,
+      "gate_status": "LEGACY_V21_CROSS_SURVEY_MORPHOLOGY_FAIL"
+    }
+  ],
+  "interpretation": {
+    "key_result": "The original pinned Janus-Cosmos v2.1 DSS2-to-2MASS cross-survey morphology gate does not classify either frozen direction as an outlier relative to the 20 frozen real-sky controls.",
+    "love_is_more_cross_survey_coherent_than_control_median": true,
+    "love_outperforms_all_controls": false,
+    "edem_is_below_control_median": true,
+    "edem_outperforms_all_controls": false,
+    "this_does_not_mean_empty_sky": true,
+    "this_does_not_identify_or_exclude_a_planet": true
+  },
+  "firewall": {
+    "full_v21_admission_claimed": false,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "posthoc_threshold_tuning": false,
+    "claim_ceiling": "LEGACY_V21_CROSS_SURVEY_MORPHOLOGY_REPLAY_ONLY__NO_ASTRONOMICAL_DISCOVERY_CLAIM"
+  }
+}

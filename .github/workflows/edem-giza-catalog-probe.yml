@@ -1,0 +1,65 @@
+name: EDEM Giza Catalog Probe
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/EDEM-GIZA-REVERSE-SPEAR-v1-RUN-001-RECEIPT.json'
+      - 'janus_cosmos/edem_catalog_probe.py'
+      - '.github/workflows/edem-giza-catalog-probe.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/EDEM-GIZA-REVERSE-SPEAR-v1-RUN-001-RECEIPT.json'
+      - 'janus_cosmos/edem_catalog_probe.py'
+      - '.github/workflows/edem-giza-catalog-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  probe-edem-direction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile catalog probe
+        run: python -m py_compile janus_cosmos/edem_catalog_probe.py
+      - name: Query Gaia DR3 and NASA Exoplanet Archive
+        run: >-
+          python -u -m janus_cosmos.edem_catalog_probe
+          --receipt data/love/EDEM-GIZA-REVERSE-SPEAR-v1-RUN-001-RECEIPT.json
+          --output results/edem_catalog_probe/edem-catalog-probe.json
+          --radius-deg 0.25
+      - name: Enforce catalog interpretation firewall
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/edem_catalog_probe/edem-catalog-probe.json', encoding='utf-8'))
+          assert d['edem_identity_confirmed'] is False
+          print('EDEM CATALOG FIREWALL PASS')
+          print('center =', d['center_icrs'])
+          print('nearest_gaia =', d['gaia_dr3']['nearest_source'])
+          print('known_planets_in_cone =', d['nasa_exoplanet_archive']['known_planets_in_cone_count'])
+          print('planet_query_error =', d['nasa_exoplanet_archive']['query_error'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edem-giza-catalog-probe
+          path: results/edem_catalog_probe/
+          if-no-files-found: error
+          retention-days: 14

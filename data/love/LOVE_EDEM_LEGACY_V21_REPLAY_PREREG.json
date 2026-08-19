@@ -1,0 +1,58 @@
+{
+  "schema": "janus.cosmos.love_edem.legacy_v21_replay.prereg.v1",
+  "experiment_id": "LOVE-EDEM-LEGACY-V21-REPLAY-v1",
+  "frozen_utc": "2026-08-19T17:15:00Z",
+  "legacy_authority": {
+    "repository": "Hawkar-usls/Janus-Cosmos",
+    "commit_sha": "964546bbca8361a00cc3acc754bd5eafbfb65312",
+    "branch_at_freeze": "agent/demiurge-v2-portable-freeze",
+    "protocol_path": "experiments/demiurge_adversarial_forge_v2/SPECIFICITY_PROTOCOL_v2_1.json",
+    "downloader_path": "experiments/demiurge_adversarial_forge_v2/download_sky_v2_1.py",
+    "specificity_path": "experiments/demiurge_adversarial_forge_v2/janus_cosmos_specificity_v2_1.py",
+    "core_path": "experiments/demiurge_adversarial_forge_v2/janus_cosmos_core_v2.py",
+    "policy": "Extract and execute the exact historical Janus-Cosmos v2.1 sources at the pinned commit; do not rewrite the detector or its 20 frozen control coordinates."
+  },
+  "targets": [
+    {
+      "analysis_label": "TARGET_A",
+      "semantic_alias": "LOVE",
+      "semantic_alias_hidden_from_scoring": true,
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778,
+      "coordinate_status": "FROZEN_LAVE_REAL_SKY_DIRECTION"
+    },
+    {
+      "analysis_label": "TARGET_B",
+      "semantic_alias": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "semantic_alias_hidden_from_scoring": true,
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318,
+      "coordinate_status": "OBSERVER_DERIVED_DIRECTION_CANDIDATE__IDENTITY_UNCONFIRMED"
+    }
+  ],
+  "replay": {
+    "fov_deg": 5.0,
+    "pixels": 512,
+    "surveys_from_frozen_v21_protocol": [
+      "DSS2/RED",
+      "DSS2/BLUE",
+      "2MASS/J",
+      "2MASS/K"
+    ],
+    "frozen_real_sky_control_count": 20,
+    "score": "legacy v2.1 median of four DSS2-to-2MASS PSF-matched morphology correlations",
+    "ranking": "legacy v2.1 real_field_rank against all 20 frozen controls",
+    "pass_rule": "target must strictly outperform every frozen control",
+    "important_scope": "This replays the legacy independent cross-survey morphology gate only. It is not the complete v2.1 admission stack and cannot by itself activate an astronomical candidate."
+  },
+  "firewall": {
+    "posthoc_threshold_tuning": false,
+    "wise_used_in_score": false,
+    "simbad_used_in_score": false,
+    "gaia_used_in_score": false,
+    "hst_noncoverage_used_as_negative_evidence": false,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "claim_ceiling": "LEGACY_V21_CROSS_SURVEY_MORPHOLOGY_REPLAY_ONLY__NO_ASTRONOMICAL_DISCOVERY_CLAIM"
+  }
+}

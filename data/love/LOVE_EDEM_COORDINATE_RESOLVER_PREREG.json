@@ -1,0 +1,65 @@
+{
+  "schema": "janus.cosmos.love_edem.coordinate_resolver.prereg.v1",
+  "experiment_id": "LOVE-EDEM-COORDINATE-RESOLVER-v1",
+  "status": "FROZEN",
+  "scientific_question": "What catalogued and directly imaged astronomical sources are present at or near the frozen sky coordinates?",
+  "not_the_question": [
+    "Is the field morphologically anomalous?",
+    "Does a legacy Janus anomaly gate pass?",
+    "Does a coordinate coincidence prove an object identity?"
+  ],
+  "targets": {
+    "TARGET_A": {
+      "semantic_alias": "LOVE",
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778
+    },
+    "TARGET_B": {
+      "semantic_alias": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318
+    }
+  },
+  "primary_channel": {
+    "name": "PRECISE_CATALOG_OBJECT_RESOLVER",
+    "implementation": "janus_cosmos.love_edem_center_object_probe",
+    "radius_arcsec": 30.0,
+    "catalogs": [
+      "Gaia DR3",
+      "SIMBAD",
+      "AllWISE",
+      "2MASS PSC",
+      "SDSS DR17 where covered",
+      "Pan-STARRS DR2 where covered"
+    ],
+    "purpose": "Identify and characterize actual catalogued sources nearest to the frozen coordinate."
+  },
+  "secondary_channel": {
+    "name": "SKYVIEW_BYPASS_CALIBRATION",
+    "implementation": "janus_cosmos.love_edem_open_sky_scan",
+    "role": "Independent acquisition and cross-check path, not a replacement for the primary resolver.",
+    "catalog_cross_checks": ["Gaia DR3", "SIMBAD", "AllWISE", "2MASS PSC", "Pan-STARRS DR2 where covered"],
+    "image_surveys": ["DSS2 Red", "2MASS-J", "WISE 3.4"],
+    "uses": [
+      "confirm that independent services are pointed at the same sky coordinate",
+      "compare nearest-source positions returned through two query paths",
+      "inspect direct survey cutouts",
+      "calibrate WCS center residuals when FITS products are available",
+      "catch service-specific outages or parse failures"
+    ]
+  },
+  "legacy_janus_v21_role": {
+    "status": "DIAGNOSTIC_ONLY",
+    "morphology_anomaly_scoring_in_identity_chain": false,
+    "reason": "The current task is coordinate content resolution, not anomaly detection. Historical Janus v2.1 replay remains available only as an auxiliary diagnostic record."
+  },
+  "cross_check_rules": {
+    "same_source_positional_tolerance_arcsec": 1.0,
+    "service_disagreement_is_not_zero_sources": true,
+    "query_error_is_not_zero_sources": true,
+    "single_catalog_proximity_is_not_identity": true,
+    "same_source_requires": "authoritative identifier/crossmatch or positional agreement within tolerance, with proper-motion/epoch effects considered when relevant",
+    "empty_sky_claim_requires": "successful coverage-aware checks from multiple independent catalogs plus image inspection"
+  },
+  "claim_ceiling": "Coordinate-neighborhood characterization and cross-service calibration only. No anomaly, planet, EDEM-identity, artificial-structure, or new-physics claim from this resolver alone."
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "janus.cosmos.love_edem.hst_direct.receipt.v1",
+  "experiment_id": "LOVE-EDEM-HST-DIRECT-v1",
+  "run_id": 32276784020,
+  "job_id": 96145970607,
+  "run_conclusion": "success",
+  "artifact": {
+    "id": 9374337691,
+    "name": "love-edem-real-hst-data",
+    "sha256": "5899bbf182fe1d248840d8e1a029f9ca366d431fef5b379cd73560036da653b7",
+    "size_bytes": 637
+  },
+  "source": "MAST/STScI Hubble archive",
+  "synthetic_generation_used": false,
+  "query_radius_arcmin": 6.0,
+  "targets": [
+    {
+      "label": "LOVE",
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778,
+      "observation_count": 0,
+      "wcs_contained_products": 0,
+      "status": "NO_HST_COVERAGE"
+    },
+    {
+      "label": "EDEM_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 191.6974004645327,
+      "dec_deg_icrs": -6.427310115607929,
+      "observation_count": 0,
+      "wcs_contained_products": 0,
+      "status": "NO_HST_COVERAGE"
+    }
+  ],
+  "interpretation": {
+    "real_hubble_image_available_for_exact_love_coordinate": false,
+    "real_hubble_image_available_for_exact_edem_candidate_coordinate": false,
+    "reason": "MAST returned zero public HST image observations within the preregistered 6 arcmin cone for either exact coordinate.",
+    "nearest_hst_field_may_be_searched_separately_but_must_not_be_presented_as_the_target": true
+  },
+  "claim_firewall": {
+    "hst_image_is_not_planet_detection": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false
+  }
+}
