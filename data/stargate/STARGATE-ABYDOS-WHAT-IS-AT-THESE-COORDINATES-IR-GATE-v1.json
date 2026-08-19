@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cosmos.stargate_abydos.what_is_at_coordinates_ir.gate.v1",
+  "experiment_id": "STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1",
+  "status": "PREREGISTERED",
+  "preregistered_on": "2026-08-20",
+  "upstream_geometry_receipt": "data/stargate/STARGATE-ABYDOS-GEOMETRY-v1-FROZEN-RECEIPT.json",
+  "target": {
+    "name": "STARGATE_ABYDOS_EXPLORATORY_CONVERGENCE_POINT",
+    "frame": "ICRS",
+    "ra_deg": 223.415064157,
+    "dec_deg": 33.97931567,
+    "immutable_after_catalog_view": true
+  },
+  "mode": "WHAT_IS_AT_THESE_COORDINATES_WITH_INFRARED_PRIORITY",
+  "anomaly_scoring_used": false,
+  "frozen_rules": {
+    "field_search_radius_arcsec": 30.0,
+    "center_counterpart_radius_arcsec": 2.0,
+    "source_group_link_radius_arcsec": 2.0,
+    "catalogs": {
+      "ALLWISE": "II/328/allwise",
+      "CATWISE2020": "II/365/catwise",
+      "UNWISE": "II/363/unwise",
+      "2MASS_PSC": "II/246/out",
+      "GAIA_DR3": "I/355/gaiadr3",
+      "PANSTARRS_DR1": "II/349/ps1",
+      "SDSS_DR16": "V/154/sdss16"
+    },
+    "infrared_catalogs": ["ALLWISE", "CATWISE2020", "UNWISE", "2MASS_PSC"],
+    "multi_catalog_ir_confirmation": "at least two independent infrared catalog roots linked within 2 arcsec and group reaches within 2 arcsec of frozen center",
+    "single_catalog_center_ir_detection": "may establish a catalogued IR candidate at the center but not an anomaly or astrophysical class",
+    "no_post_hoc_radius_changes": true,
+    "raw_image_signal_is_distinct_from_catalog_detection": true
+  },
+  "decision_labels": [
+    "MULTI_CATALOG_IR_SOURCE_AT_FROZEN_CENTER",
+    "SINGLE_CATALOG_IR_CANDIDATE_AT_FROZEN_CENTER",
+    "NO_IR_CATALOG_SOURCE_AT_FROZEN_CENTER__NEARBY_FIELD_SOURCES_EXIST",
+    "NO_IR_CATALOG_SOURCES_WITHIN_30ARCSEC",
+    "INCONCLUSIVE_DUE_TO_IR_SERVICE_FAILURE"
+  ],
+  "firewall": {
+    "nearby_source_is_real_Abydos": false,
+    "infrared_detection_is_planet": false,
+    "infrared_detection_is_anomaly": false,
+    "absence_from_catalog_is_proof_of_no_raw_IR_flux": false,
+    "post_hoc_geometry_is_not_promoted_by_catalog_coincidence": true,
+    "claim_ceiling": "CATALOG_INVENTORY_AND_COUNTERPART_CLASSIFICATION_AROUND_FROZEN_COORDINATE_ONLY"
+  }
+}
