@@ -1,0 +1,33 @@
+name: LOVE EDEM Source Nature Finalize
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/love-edem-source-finalize.yml"
+      - "workspace/love_edem_source_finalize.py"
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Finalize source nature from frozen classification receipt
+        run: |
+          python workspace/love_edem_source_finalize.py \
+            --input data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json \
+            --output data/love/LOVE-EDEM-SOURCE-NATURE-v1-LATEST-RECEIPT.json
+      - name: Show receipt
+        run: cat data/love/LOVE-EDEM-SOURCE-NATURE-v1-LATEST-RECEIPT.json
+      - name: Persist receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-SOURCE-NATURE-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze LOVE EDEM source nature run ${{ github.run_number }}"
+          git push
