@@ -1,0 +1,115 @@
+{
+  "schema": "janus.cosmos.love_edem.gaia_mirror_cluster.receipt.v1",
+  "experiment_id": "LOVE-EDEM-GAIA-MIRROR-CLUSTER-v1",
+  "mode": "WHAT_IS_AT_THESE_COORDINATES",
+  "run": {
+    "workflow": "LOVE EDEM Gaia Mirror Source Clustering",
+    "run_id": 32283265906,
+    "job_id": 96166703424,
+    "conclusion": "success",
+    "artifact_id": 9376688732,
+    "artifact_name": "love-edem-gaia-mirror-cluster",
+    "artifact_sha256": "c8ae86c898e9b22b399eaff5a82367b4063f6b3fd1677a61ec853be75ffd2d37"
+  },
+  "anomaly_scoring_used": false,
+  "anomaly_gate_required": false,
+  "gaia_mirror": {
+    "service": "CDS VizieR",
+    "catalog": "I/355/gaiadr3"
+  },
+  "targets": {
+    "LOVE": {
+      "center_icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+      "search_radius_arcsec": 30.0,
+      "gaia_mirror_count": 2,
+      "total_catalog_detections": 8,
+      "cluster_count": 6,
+      "multi_catalog_cluster_count": 1,
+      "nearest_cluster": {
+        "cluster_id": "C003",
+        "label": "WISE_ONLY_CURRENT_MATCH_RADIUS",
+        "source_id": "AllWISE J133711.05-364649.7",
+        "separation_arcsec": 20.289587649284115
+      },
+      "gaia_linked_cluster": {
+        "cluster_id": "C001",
+        "catalogs": ["Gaia DR3", "AllWISE", "2MASS PSC"],
+        "separation_arcsec": 23.128602893946496,
+        "gaia_source_id": "6163586620213012352",
+        "gaia_parallax_mas": 0.7101,
+        "gaia_parallax_error_mas": 0.10930000245571136,
+        "gaia_parallax_snr": 6.496797658240989,
+        "naive_inverse_parallax_distance_pc": 1408.2523588227011,
+        "gaia_g_mag": 17.621157,
+        "bp_rp": 1.607878,
+        "ruwe": 0.988,
+        "allwise_source_id": "J133710.98-364644.9",
+        "twomass_source_id": "13371100-3646446"
+      },
+      "second_gaia_source": {
+        "gaia_source_id": "6163586693225664768",
+        "separation_arcsec": 29.51567149172327,
+        "parallax_mas": 0.0484,
+        "parallax_error_mas": 0.22579999268054962,
+        "parallax_snr": 0.21434898834772712,
+        "distance_interpretation": "not reliable from inverse parallax"
+      }
+    },
+    "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {
+      "center_icrs": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+      "search_radius_arcsec": 30.0,
+      "gaia_mirror_count": 1,
+      "total_catalog_detections": 26,
+      "cluster_count": 12,
+      "multi_catalog_cluster_count": 5,
+      "nearest_cluster": {
+        "cluster_id": "C002",
+        "label": "WISE_ONLY_CURRENT_MATCH_RADIUS",
+        "source_id": "AllWISE J091653.98+301546.0",
+        "separation_arcsec": 9.021198661597598,
+        "w1_mag": 17.574,
+        "w1_snr": 5.5,
+        "w2_snr": 0.8,
+        "w3_snr": -0.7,
+        "w4_snr": -0.6,
+        "photometric_quality": "BUUU"
+      },
+      "nearest_optical_cluster": {
+        "cluster_id": "C006",
+        "label": "OPTICAL_CROSS_SURVEY_SOURCE_GROUP",
+        "separation_arcsec": 13.308878315135571,
+        "sdss_objid": "1237664320537363072",
+        "panstarrs_objid": "144301392226548847",
+        "sdss_panstarrs_separation_arcsec": 0.15491340483627752
+      },
+      "gaia_linked_cluster": {
+        "cluster_id": "C001",
+        "catalogs": ["Gaia DR3", "AllWISE", "SDSS DR17", "Pan-STARRS DR2"],
+        "separation_arcsec": 20.755103592258187,
+        "gaia_source_id": "699051350998534656",
+        "gaia_parallax_mas": 0.7325,
+        "gaia_parallax_error_mas": 0.36149999499320984,
+        "gaia_parallax_snr": 2.0262794194886746,
+        "gaia_g_mag": 19.18639,
+        "bp_rp": 1.844583,
+        "ruwe": 0.928,
+        "distance_interpretation": "parallax SNR is too low for a robust naive inverse-parallax distance",
+        "allwise_source_id": "J091652.31+301545.8",
+        "panstarrs_objid": "144311392180445928"
+      }
+    }
+  },
+  "interpretation": {
+    "LOVE": "There are two Gaia DR3 sources within 30 arcsec; the strongest cross-catalog source group is Gaia+AllWISE+2MASS at about 23.13 arcsec from the frozen center. The closest detection to the center is a separate AllWISE-only group at about 20.29 arcsec under the frozen match radii.",
+    "EDEM": "The closest catalog detection is AllWISE J091653.98+301546.0 at about 9.02 arcsec and remains unmatched to Gaia/SDSS/Pan-STARRS under the frozen tolerances. A separate SDSS+Pan-STARRS optical source group lies at about 13.31 arcsec. A Gaia-linked Gaia+WISE+SDSS+Pan-STARRS group lies farther away at about 20.76 arcsec.",
+    "key_result": "Gaia mirror resolves the previous direct-Gaia service outage and confirms that the nearest EDEM WISE detection is not the same source as the Gaia-linked optical/IR group under the preregistered clustering rules."
+  },
+  "firewall": {
+    "catalog_proximity_is_not_identity": true,
+    "cluster_is_not_semantic_identity": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "claim_ceiling": "Coordinate-neighborhood source grouping and catalog characterization only."
+  },
+  "next_gate": "SOURCE_CLASSIFICATION_AND_DEEPER_COUNTERPART_RESOLUTION_WITHOUT_ANOMALY_SCORING"
+}
