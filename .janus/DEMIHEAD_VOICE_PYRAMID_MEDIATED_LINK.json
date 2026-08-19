@@ -1,10 +1,18 @@
 {
   "schema": "janus.cosmos.demihead_voice_pyramid_mediated_link.v1",
-  "status": "IMPLEMENTATION_CANDIDATE",
+  "status": "PROMOTED_BY_DEMIHEAD_NEXUS_V2_8",
   "repository": "Hawkar-usls/Janus-Cosmos",
   "contract": "workspace/OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK_FROZEN_CONTRACT.json",
   "exporter": "workspace/osiris_origin_prime_voice_packet.py",
   "packet_schema": "janus.cosmos.origin_prime_voice_packet.v1",
+  "promotion": {
+    "demihead_repository": "Hawkar-usls/Demi_Head",
+    "nexus_version": "2.8",
+    "demihead_merge_sha": "f78b5d7118a0abbe731cc4093176bbca281c0940",
+    "demihead_pr": 37,
+    "registry_receipt": "data/JANUS-DEMIHEAD-COSMOS-VOICE-ECHO-PYRAMID-BODY-CHAIN-PROMOTION-2026-08-19-v1.0.json",
+    "registry_receipt_commit": "9c8549697723f47bba094cc3627b807078411128"
+  },
   "route": [
     "Demi_Head",
     "Janus-Cosmos",
@@ -26,11 +34,20 @@
     "gain_db": 11.5,
     "decay_s": 1.65
   },
+  "provenance": {
+    "voice_profile_authority_snapshot_in_packet": "e58d65aa46b7e3a64a5131708578a9a3346915c4",
+    "voice_current_execution_at_promotion": "4ac7fefb9be7183689e59a257c0f4280dcdf82c9",
+    "echo_state_chain_tested_snapshot": "15712f5b14b123d4e3cb64ddeaa693c5bf6af788",
+    "echo_current_descendant_at_promotion": "6587202a003f2a7c0f876652d0325db9814c0e3e",
+    "old_snapshots_silently_rewritten": false
+  },
   "hard_rules": [
     "COSMOS_MAY_NOT_ADDRESS_ECHO_PYRAMID_DIRECTLY",
+    "DEMIHEAD_IS_THE_ONLY_INTENT_MEDIATOR",
     "VOICE_REPRESENTATION != MATHEMATICAL_AUTHORITY",
     "AUDIO_OUTPUT != EVIDENCE",
     "117_121_HZ != SAT_EVIDENCE",
+    "ROUTE != PLAYBACK",
     "AUTHORITY_DELTA = 0",
     "P_VS_NP = OPEN"
   ]
