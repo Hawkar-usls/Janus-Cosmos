@@ -49,11 +49,20 @@ jobs:
           retention-days: 90
 
       - name: Persist receipt to Janus-Cosmos
-        if: success()
+        if: always()
         run: |
+          RECEIPT="data/stargate/STARGATE-ABYDOS-RAW-UNWISE-FROZEN-CENTER-v1-LATEST-RECEIPT.json"
+          if [ ! -f "$RECEIPT" ]; then
+            echo "No receipt produced; nothing to persist"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/stargate/STARGATE-ABYDOS-RAW-UNWISE-FROZEN-CENTER-v1-LATEST-RECEIPT.json
+          git add "$RECEIPT"
+          if git diff --cached --quiet; then
+            echo "Receipt unchanged; nothing to commit"
+            exit 0
+          fi
           git commit -m "cosmos: freeze Stargate Abydos raw unWISE run ${{ github.run_number }}"
           git pull --rebase origin main
           git push
