@@ -1,0 +1,103 @@
+{
+  "schema": "janus.cosmos.love_edem.physical_source_identification.prereg.v1",
+  "experiment_id": "LOVE-EDEM-PHYSICAL-SOURCE-IDENTIFICATION-v1",
+  "status": "FROZEN",
+  "mode": "WHAT_IS_AT_THESE_COORDINATES",
+  "parent_receipt": "data/love/LOVE-EDEM-GAIA-MIRROR-CLUSTER-v1-RUN-001-RECEIPT.json",
+  "scientific_question": "What is the most defensible physical/catalog nature of the frozen source groups nearest the EDEM and LOVE coordinates, using catalog morphology, photometric quality, counterpart structure, and Gaia astrometry without anomaly scoring?",
+  "targets": {
+    "EDEM": {
+      "center_icrs": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+      "focus_sources": {
+        "WISE_NEAREST": "J091653.98+301546.0",
+        "OPTICAL_SDSS": "1237664320537363072",
+        "OPTICAL_PS1": "144301392226548847",
+        "GAIA_CONTROL": "699051350998534656"
+      }
+    },
+    "LOVE": {
+      "center_icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+      "focus_sources": {
+        "WISE_NEAREST": "J133711.05-364649.7",
+        "GAIA_MULTICATALOG_CONTROL": "6163586620213012352",
+        "WISE_MULTICATALOG_CONTROL": "J133710.98-364644.9",
+        "TWOMASS_MULTICATALOG_CONTROL": "13371100-3646446"
+      }
+    }
+  },
+  "frozen_matching_rules": {
+    "default_optical_arcsec": 1.0,
+    "with_2mass_arcsec": 2.0,
+    "with_allwise_arcsec": 3.0,
+    "do_not_expand_after_seeing_result": true,
+    "catalog_proximity_is_not_identity": true
+  },
+  "classification_rules": {
+    "WISE_CLEAN_POINTLIKE_CATALOG_DETECTION": {
+      "requires": [
+        "AllWISE source exists at frozen identifier",
+        "cc_flags == 0000",
+        "ext_flg == 0",
+        "nb == 1",
+        "na == 0",
+        "W1 SNR is finite and positive"
+      ],
+      "meaning": "No catalog-level evidence of a flagged image artifact, resolved/known-extended association, or active blend in the AllWISE summary fields. This does not prove the source is astrophysical or identify its class."
+    },
+    "WISE_ONLY_NO_FROZEN_COUNTERPART": {
+      "requires": [
+        "no Gaia/SDSS/Pan-STARRS/2MASS member joins the AllWISE detection under frozen tolerances"
+      ],
+      "meaning": "The source remains IR-only under the current catalog depths and match radii. This is compatible with a faint ordinary IR source, unresolved distant galaxy, or an object below optical/NIR catalog limits; those alternatives require deeper data."
+    },
+    "SDSS_GALAXY_MORPHOLOGY_SUPPORTED": {
+      "requires": [
+        "SDSS type == 3",
+        "a Pan-STARRS positional counterpart exists within 1 arcsec"
+      ],
+      "meaning": "SDSS imaging morphology supports an extended/galaxy interpretation for the optical group. This is a morphology classification, not a spectroscopic redshift or semantic EDEM identity."
+    },
+    "GAIA_STELLAR_ASTROMETRIC_GROUP": {
+      "requires": [
+        "Gaia DR3 member exists",
+        "RUWE is finite",
+        "cross-survey members join under frozen tolerances"
+      ],
+      "meaning": "A Gaia-linked astrometric source group is consistent with a stellar/point-source interpretation. Reliable distance inference additionally requires the preregistered parallax-SNR rule."
+    }
+  },
+  "distance_rule": {
+    "naive_inverse_parallax_allowed_only_if_snr_gte": 5.0,
+    "otherwise": "REPORT_PARALLAX_WITHOUT_ROBUST_DISTANCE"
+  },
+  "required_outputs": [
+    "WISE quality/artifact/blend flag assessment",
+    "counterpart membership under frozen radii",
+    "SDSS morphology for the 13.31 arcsec optical group",
+    "Gaia astrometric context for control groups",
+    "pairwise separation between EDEM WISE-nearest and optical-nearest groups",
+    "conservative physical classification label with explicit uncertainty"
+  ],
+  "allowed_labels": [
+    "WISE_CLEAN_POINTLIKE_IR_ONLY_UNCLASSIFIED",
+    "WISE_FLAGGED_OR_BLEND_SUSPECT",
+    "SDSS_GALAXY_MORPHOLOGY_SUPPORTED",
+    "GAIA_LINKED_STELLAR_SOURCE_GROUP",
+    "INSUFFICIENT_DATA"
+  ],
+  "firewall": {
+    "anomaly_scoring_used": false,
+    "anomaly_gate_required": false,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "no_exotic_object_label_without_independent_evidence": true,
+    "absence_of_counterpart_is_not_anomaly": true,
+    "wise_catalog_entry_is_not_automatically_a_real_single_astrophysical_object": true,
+    "claim_ceiling": "Catalog-based physical source characterization only. No anomaly, artificial object, EDEM identity, planet, or new-physics claim."
+  },
+  "reference_notes": {
+    "allwise": "IRSA AllWISE Explanatory Supplement: cc_flags reports artifact contamination/confusion; ext_flg reports extended/confused/2MASS-XSC association; nb/na describe blend/deblend context.",
+    "sdss": "SDSS PhotoObj type=3 is galaxy morphology and type=6 is star morphology.",
+    "panstarrs": "Pan-STARRS provides independent optical positions; detailed star/galaxy separation may later use PSF-Kron or PS1-PSC, but this v1 does not tune a new morphology threshold after seeing the field."
+  }
+}
