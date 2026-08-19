@@ -5,6 +5,7 @@ import argparse
 import copy
 import json
 import tempfile
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -36,8 +37,7 @@ def _normalize_map(variable_map: Mapping[Any, Any]) -> dict[int, int]:
 def remap_formula(formula: Any, variable_map: Mapping[Any, Any]) -> Any:
     source = spiral.canonical_cnf(formula)
     mapping = _normalize_map(variable_map)
-    source_vars = _vars(source)
-    if sorted(mapping) != source_vars:
+    if sorted(mapping) != _vars(source):
         raise ValueError("VARIABLE_MAP_NOT_TOTAL_ON_SOURCE")
     if len(set(mapping.values())) != len(mapping):
         raise ValueError("VARIABLE_MAP_NOT_INJECTIVE")
@@ -55,8 +55,7 @@ def build_variable_renaming_certificate(source_formula: Any, target_formula: Any
     source = spiral.canonical_cnf(source_formula)
     target = spiral.canonical_cnf(target_formula)
     mapping = _normalize_map(variable_map)
-    remapped = remap_formula(source, mapping)
-    if remapped != target:
+    if remap_formula(source, mapping) != target:
         raise ValueError("REMAPPED_SOURCE_DOES_NOT_EQUAL_TARGET")
     if sorted(mapping.values()) != _vars(target):
         raise ValueError("VARIABLE_MAP_NOT_SURJECTIVE_ON_TARGET")
@@ -118,12 +117,7 @@ def _remap_components(values: Any, mapping: Mapping[int, int]) -> list[list[int]
     return [sorted(mapping[int(v)] for v in component) for component in (values or [])]
 
 
-def transform_experience(
-    source_record: Mapping[str, Any],
-    target_formula: Any,
-    budget: int,
-    certificate: Mapping[str, Any],
-) -> dict[str, Any]:
+def transform_experience(source_record: Mapping[str, Any], target_formula: Any, budget: int, certificate: Mapping[str, Any]) -> dict[str, Any]:
     target = spiral.canonical_cnf(target_formula)
     source_formula, mapping = verify_variable_renaming_certificate(certificate, target)
     if not spiral.verify_experience_commitment(source_record):
@@ -144,14 +138,22 @@ def transform_experience(
 
     separator = _remap_var_list(source_record.get("separator"), mapping)
     components = _remap_components(source_record.get("components"), mapping)
-    route_reusable = False
     separator_claim = None
     if separator:
         separator_claim = spiral.gate.verify_separator_claim(target_residual, separator, components)
         if not separator_claim.get("passed"):
             raise ValueError("LINEAGE_TRANSFERRED_SEPARATOR_REJECTED")
-        route_reusable = True
 
+    lineage_transfer = {
+        "class": TRANSFER_CLASS,
+        "source_experience_commitment": source_record["experience_commitment"],
+        "source_formula_hash": source_record["formula_hash"],
+        "transformation_certificate_sha256": certificate["certificate_sha256"],
+        "target_sat_witness_revalidated": sat_assignment is not None,
+        "target_separator_revalidated": bool(separator_claim and separator_claim.get("passed")),
+        "memory_may_propose_not_verdict": True,
+        "authority_delta": 0,
+    }
     core = {
         "schema": spiral.EXPERIENCE_SCHEMA,
         "created_generation": int(source_record.get("created_generation", 0)),
@@ -167,29 +169,15 @@ def transform_experience(
         "components": components,
         "prior_separator_certificate": None,
         "prior_minimality_proof": copy.deepcopy(source_record.get("prior_minimality_proof")),
-        "route_reusable_after_revalidation": route_reusable,
+        "route_reusable_after_revalidation": bool(separator_claim and separator_claim.get("passed")),
         "sat_assignment": sat_assignment,
         "unsat_memory_is_verdict_shortcut": False,
-        "lineage_transfer": {
-            "class": TRANSFER_CLASS,
-            "source_experience_commitment": source_record["experience_commitment"],
-            "source_formula_hash": source_record["formula_hash"],
-            "transformation_certificate_sha256": certificate["certificate_sha256"],
-            "target_sat_witness_revalidated": sat_assignment is not None,
-            "target_separator_revalidated": bool(separator_claim and separator_claim.get("passed")),
-            "memory_may_propose_not_verdict": True,
-            "authority_delta": 0,
-        },
+        "lineage_transfer": lineage_transfer,
     }
     return spiral.committed(core, "experience_commitment")
 
 
-def propose_lineage_experience(
-    state_path: Path,
-    target_formula: Any,
-    budget: int,
-    certificate: Mapping[str, Any],
-) -> dict[str, Any]:
+def propose_lineage_experience(state_path: Path, target_formula: Any, budget: int, certificate: Mapping[str, Any]) -> dict[str, Any]:
     target = spiral.canonical_cnf(target_formula)
     source_formula, _mapping = verify_variable_renaming_certificate(certificate, target)
     store, memory_event = spiral.load_store(state_path)
@@ -216,16 +204,40 @@ def propose_lineage_experience(
         "source_experience_commitment": source_record["experience_commitment"],
         "target_experience_commitment": transferred["experience_commitment"],
         "transformation_certificate_sha256": certificate["certificate_sha256"],
+        "lineage_transfer": copy.deepcopy(transferred["lineage_transfer"]),
         "authority_delta": 0,
     }
 
 
-def solve_resonant(
-    formula: Any,
-    budget: int,
-    state_path: Path,
-    certificate: Mapping[str, Any] | None = None,
-) -> dict[str, Any]:
+@contextmanager
+def inherit_lineage_on_fresh_target_experience(lineage_transfer: Mapping[str, Any] | None):
+    """Preserve transfer provenance if base v3 emits a fresh target experience.
+
+    This does not alter the base solver or verdict. It only attaches already
+    verified v3.1 provenance before the new experience commitment is computed.
+    """
+    if not lineage_transfer:
+        yield
+        return
+    original = spiral.make_experience
+
+    def wrapped(formula: Any, budget: int, solved: Mapping[str, Any], generation: int):
+        record = original(formula, budget, solved, generation)
+        if record is None:
+            return None
+        core = dict(record)
+        core.pop("experience_commitment", None)
+        core["lineage_transfer"] = copy.deepcopy(dict(lineage_transfer))
+        return spiral.committed(core, "experience_commitment")
+
+    spiral.make_experience = wrapped
+    try:
+        yield
+    finally:
+        spiral.make_experience = original
+
+
+def solve_resonant(formula: Any, budget: int, state_path: Path, certificate: Mapping[str, Any] | None = None) -> dict[str, Any]:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     if contract.get("status") != "FROZEN_BEFORE_IMPLEMENTATION":
         raise ValueError("RESONANT_LINEAGE_CONTRACT_NOT_FROZEN")
@@ -236,16 +248,20 @@ def solve_resonant(
         "reason": None,
         "transfer": None,
     }
+    lineage_transfer = None
     if certificate is not None:
         try:
             transfer = propose_lineage_experience(state_path, formula, int(budget), certificate)
             lineage["proposal_accepted"] = True
             lineage["transfer"] = transfer
+            lineage_transfer = transfer["lineage_transfer"]
         except (TypeError, ValueError) as exc:
             lineage["fallback_to_fresh_target_solve"] = True
             lineage["reason"] = str(exc)
 
-    result = spiral.solve_spiral(formula, int(budget), state_path)
+    context = inherit_lineage_on_fresh_target_experience(lineage_transfer) if lineage_transfer else nullcontext()
+    with context:
+        result = spiral.solve_spiral(formula, int(budget), state_path)
     result = dict(result)
     result["artifact_id"] = RUNTIME_ID
     result["resonant_lineage"] = {
@@ -263,8 +279,8 @@ def self_test() -> dict[str, Any]:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     if contract["admitted_transformation_classes"][TRANSFER_CLASS]["status"] != "ADMITTED_WITH_EXACT_VERIFIER":
         raise AssertionError("TRANSFER_CLASS_NOT_ADMITTED")
-    _base_contract, _semantic = spiral.load_frozen_inputs()
-    specs = {row["id"]: row for row in _base_contract["frozen_fixtures"]}
+    base_contract, _semantic = spiral.load_frozen_inputs()
+    specs = {row["id"]: row for row in base_contract["frozen_fixtures"]}
     source_formula = spiral.fixture_formula(specs["SPIRAL_K4_SAT"])
     mapping = {v: v + 100 for v in _vars(source_formula)}
     target_formula = remap_formula(source_formula, mapping)
@@ -277,13 +293,28 @@ def self_test() -> dict[str, Any]:
         first = spiral.solve_spiral(source_formula, 50000, state_path)
         if first.get("status") != "SAT" or first.get("authorized") is not True:
             raise AssertionError("SELFTEST_SOURCE_SOLVE_FAILED")
+        source_store = json.loads(state_path.read_text(encoding="utf-8"))
+        source_key = spiral.experience_key(spiral.cnf_hash(source_formula), 50000)
+        source_experience = source_store["experiences"][source_key]
+
         second = solve_resonant(target_formula, 50000, state_path, cert)
         if second["resonant_lineage"]["proposal_accepted"] is not True:
             raise AssertionError("SELFTEST_LINEAGE_PROPOSAL_NOT_ACCEPTED")
-        if second["technical"]["spiral"]["reuse_mode"] != "REVERIFIED_SAT_WITNESS":
+        expected_reuse = "REVERIFIED_SAT_WITNESS" if source_experience.get("sat_assignment") is not None else "REVALIDATED_SEPARATOR_ROUTE"
+        if second["technical"]["spiral"]["reuse_mode"] != expected_reuse:
+            raise AssertionError(f"SELFTEST_TARGET_REVALIDATION_MODE_INVALID:{second['technical']['spiral']['reuse_mode']}:{expected_reuse}")
+        if expected_reuse == "REVERIFIED_SAT_WITNESS" and second["memory"]["validation_details"].get("sat_witness_reverified") is not True:
             raise AssertionError("SELFTEST_TARGET_WITNESS_NOT_REVERIFIED")
+        if expected_reuse == "REVALIDATED_SEPARATOR_ROUTE" and second["memory"]["validation_details"].get("separator_revalidated") is not True:
+            raise AssertionError("SELFTEST_TARGET_SEPARATOR_NOT_REVALIDATED")
         if second["state_transition"]["generation_advanced"] is not True:
             raise AssertionError("SELFTEST_GENERATION_DID_NOT_ADVANCE")
+
+        final_store = json.loads(state_path.read_text(encoding="utf-8"))
+        final_state = final_store["current_state"]
+        bound = [r for r in final_store["experiences"].values() if r.get("experience_commitment") == final_state.get("experience_commitment")]
+        if len(bound) != 1 or bound[0].get("lineage_transfer", {}).get("transformation_certificate_sha256") != cert["certificate_sha256"]:
+            raise AssertionError("SELFTEST_LINEAGE_PROVENANCE_NOT_BOUND_TO_FINAL_EXPERIENCE")
 
         negatives: dict[str, bool] = {}
         bad_map = dict(mapping)
@@ -311,15 +342,15 @@ def self_test() -> dict[str, Any]:
             negatives["target_mismatch"] = True
 
         try:
-            transform_experience(
-                next(iter(json.loads(state_path.read_text(encoding="utf-8"))["experiences"].values())),
-                target_formula,
-                49999,
-                cert,
-            )
+            transform_experience(source_experience, target_formula, 49999, cert)
             negatives["budget_mismatch"] = False
         except ValueError:
             negatives["budget_mismatch"] = True
+
+        lineage_bad = copy.deepcopy(bound[0])
+        lineage_bad["lineage_transfer"] = dict(lineage_bad["lineage_transfer"])
+        lineage_bad["lineage_transfer"]["authority_delta"] = 1
+        negatives["lineage_authority_mutation_breaks_commitment"] = not spiral.verify_experience_commitment(lineage_bad)
 
         if not all(negatives.values()):
             raise AssertionError(f"RESONANT_LINEAGE_NEGATIVE_FAILED:{negatives}")
@@ -330,8 +361,12 @@ def self_test() -> dict[str, Any]:
             "target_formula_hash": spiral.cnf_hash(target_formula),
             "hash_changed": True,
             "transfer_class": TRANSFER_CLASS,
+            "source_experience_has_sat_assignment": source_experience.get("sat_assignment") is not None,
+            "source_experience_has_separator": bool(source_experience.get("separator")),
             "target_reuse_mode": second["technical"]["spiral"]["reuse_mode"],
+            "target_revalidation": copy.deepcopy(second["memory"]["validation_details"]),
             "lineage_proposal_accepted": True,
+            "lineage_provenance_bound_to_final_experience": True,
             "negative_controls": negatives,
             "authority_delta": 0,
             "P_VS_NP": "OPEN",
