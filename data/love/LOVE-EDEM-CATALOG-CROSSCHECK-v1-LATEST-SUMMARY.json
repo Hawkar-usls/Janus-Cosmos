@@ -1,0 +1,733 @@
+{
+  "anomaly_scoring_used": false,
+  "claim_ceiling": "CATALOG_SOURCE_INVENTORY_AROUND_FROZEN_DIRECTIONS_ONLY",
+  "cluster_threshold_arcsec": 1.5,
+  "experiment_id": "LOVE-EDEM-CATALOG-CROSSCHECK-v1",
+  "mode": "WHAT_IS_AT_THESE_COORDINATES",
+  "run_time_utc": "2026-08-19T22:37:59.913171+00:00",
+  "schema": "janus.cosmos.love_edem.catalog_crosscheck.summary.v1",
+  "search_radius_arcsec": 30.0,
+  "service_failures": [],
+  "status": "COMPLETE",
+  "targets": {
+    "EDEM_SEARCH_CENTER_ZP": {
+      "catalog_counts": {
+        "2MASS_PSC": {
+          "count": 0,
+          "nearest": null,
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "count": 5,
+          "nearest": {
+            "catalog": "ALLWISE",
+            "dec_deg": 30.262781,
+            "independent_root": "NASA_IPAC_ALLWISE",
+            "ra_deg": 139.2249571,
+            "separation_arcsec": 9.021198661597598,
+            "source_id": "J091653.98+301546.0"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "count": 1,
+          "nearest": {
+            "catalog": "GAIA_DR3",
+            "dec_deg": 30.26276387854,
+            "independent_root": "ESA_GAIA_DR3",
+            "ra_deg": 139.21802643661,
+            "separation_arcsec": 20.72338948797579,
+            "source_id": "699051350998534656"
+          },
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "count": 5,
+          "nearest": {
+            "catalog": "PANSTARRS_DR1",
+            "dec_deg": 30.25687634,
+            "independent_root": "PANSTARRS_DR1",
+            "ra_deg": 139.22269411,
+            "separation_arcsec": 13.372644968576678,
+            "source_id": "144301392226548847"
+          },
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "count": 15,
+          "nearest": {
+            "catalog": "SDSS_DR16",
+            "dec_deg": 30.256918,
+            "independent_root": "SDSS_DR16",
+            "ra_deg": 139.222681,
+            "separation_arcsec": 13.244457192554428,
+            "source_id": "SDSS J091653.44+301524.9"
+          },
+          "status": "OK"
+        }
+      },
+      "catalog_detection_count": 26,
+      "center": {
+        "dec_deg": 30.26038779947318,
+        "frame": "ICRS",
+        "ra_deg": 139.22409686590188
+      },
+      "mast_hst_6arcmin": {
+        "hst_observation_count": 0,
+        "observations": [],
+        "radius_arcmin": 6.0,
+        "status": "OK",
+        "target": "EDEM_SEARCH_CENTER_ZP"
+      },
+      "multi_independent_root_group_count": 5,
+      "nearest_catalog_detection": {
+        "catalog": "ALLWISE",
+        "dec_deg": 30.262781,
+        "independent_root": "NASA_IPAC_ALLWISE",
+        "ra_deg": 139.2249571,
+        "separation_arcsec": 9.021198661597598,
+        "source_id": "J091653.98+301546.0"
+      },
+      "nearest_five_source_groups": [
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": 30.262781,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 139.2249571,
+              "separation_arcsec": 9.021198661597598,
+              "source_id": "J091653.98+301546.0"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 9.021198661597598,
+          "representative_dec_deg": 30.262781,
+          "representative_ra_deg": 139.2249571
+        },
+        {
+          "catalogs": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 2,
+          "independent_root_count": 2,
+          "independent_roots": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.256918,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.222681,
+              "separation_arcsec": 13.244457192554428,
+              "source_id": "SDSS J091653.44+301524.9"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.25687634,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.22269411,
+              "separation_arcsec": 13.372644968576678,
+              "source_id": "144301392226548847"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 13.244457192554428,
+          "representative_dec_deg": 30.256918,
+          "representative_ra_deg": 139.222681
+        },
+        {
+          "catalogs": [
+            "SDSS_DR16"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.25598,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.222608,
+              "separation_arcsec": 16.5296713480012,
+              "source_id": "SDSS J091653.42+301521.5"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 16.5296713480012,
+          "representative_dec_deg": 30.25598,
+          "representative_ra_deg": 139.222608
+        },
+        {
+          "catalogs": [
+            "SDSS_DR16"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.264587,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.221522,
+              "separation_arcsec": 17.10638877896189,
+              "source_id": "SDSS J091653.16+301552.5"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 17.10638877896189,
+          "representative_dec_deg": 30.264587,
+          "representative_ra_deg": 139.221522
+        },
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": 30.2655856,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 139.2217591,
+              "separation_arcsec": 20.07438600097359,
+              "source_id": "J091653.22+301556.1"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 20.07438600097359,
+          "representative_dec_deg": 30.2655856,
+          "representative_ra_deg": 139.2217591
+        }
+      ],
+      "plain_status": "CATALOG_SOURCES_PRESENT",
+      "simbad": {
+        "count": 0,
+        "nearest_objects": [],
+        "status": "OK"
+      },
+      "source_group_count": 12,
+      "strongest_multi_root_groups": [
+        {
+          "catalogs": [
+            "ALLWISE",
+            "GAIA_DR3",
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 7,
+          "independent_root_count": 4,
+          "independent_roots": [
+            "ESA_GAIA_DR3",
+            "NASA_IPAC_ALLWISE",
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "GAIA_DR3",
+              "dec_deg": 30.26276387854,
+              "independent_root": "ESA_GAIA_DR3",
+              "ra_deg": 139.21802643661,
+              "separation_arcsec": 20.72338948797579,
+              "source_id": "699051350998534656"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.26276744,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.21802721,
+              "separation_arcsec": 20.72649481948057,
+              "source_id": "144311392180445928"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.262817,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.218051,
+              "separation_arcsec": 20.7337730569085,
+              "source_id": "SDSS J091652.33+301546.1"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.26279,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.21803,
+              "separation_arcsec": 20.75230639345296,
+              "source_id": "SDSS J091652.32+301546.0"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.262793,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.218023,
+              "separation_arcsec": 20.776592853677965,
+              "source_id": "SDSS J091652.32+301546.0"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.262793,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.218023,
+              "separation_arcsec": 20.776592853677965,
+              "source_id": "SDSS J091652.32+301546.0"
+            },
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": 30.2627468,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 139.2179911,
+              "separation_arcsec": 20.79834026259606,
+              "source_id": "J091652.31+301545.8"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 20.72338948797579,
+          "representative_dec_deg": 30.26276387854,
+          "representative_ra_deg": 139.21802643661
+        },
+        {
+          "catalogs": [
+            "ALLWISE",
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 4,
+          "independent_root_count": 3,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE",
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.255066,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.228978,
+              "separation_arcsec": 24.442276629750094,
+              "source_id": "SDSS J091654.95+301518.2"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.25495299,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.22894415,
+              "separation_arcsec": 24.69808060914984,
+              "source_id": "144301392289436473"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.254945,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.228985,
+              "separation_arcsec": 24.798528676933078,
+              "source_id": "SDSS J091654.95+301517.8"
+            },
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": 30.254804,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 139.2288671,
+              "separation_arcsec": 24.98211674200867,
+              "source_id": "J091654.92+301517.2"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 24.442276629750094,
+          "representative_dec_deg": 30.255066,
+          "representative_ra_deg": 139.228978
+        },
+        {
+          "catalogs": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 2,
+          "independent_root_count": 2,
+          "independent_roots": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.256918,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.222681,
+              "separation_arcsec": 13.244457192554428,
+              "source_id": "SDSS J091653.44+301524.9"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.25687634,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.22269411,
+              "separation_arcsec": 13.372644968576678,
+              "source_id": "144301392226548847"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 13.244457192554428,
+          "representative_dec_deg": 30.256918,
+          "representative_ra_deg": 139.222681
+        },
+        {
+          "catalogs": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 3,
+          "independent_root_count": 2,
+          "independent_roots": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.26623,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.222451,
+              "separation_arcsec": 21.645597885123063,
+              "source_id": "SDSS J091653.38+301558.4"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.266238,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.222449,
+              "separation_arcsec": 21.67505163262563,
+              "source_id": "SDSS J091653.38+301558.4"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.26624885,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.22244526,
+              "separation_arcsec": 21.71575364786951,
+              "source_id": "144321392224230106"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 21.645597885123063,
+          "representative_dec_deg": 30.26623,
+          "representative_ra_deg": 139.222451
+        },
+        {
+          "catalogs": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "detection_count": 3,
+          "independent_root_count": 2,
+          "independent_roots": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "members": [
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.252971,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.223683,
+              "separation_arcsec": 26.731475575742934,
+              "source_id": "SDSS J091653.68+301510.6"
+            },
+            {
+              "catalog": "SDSS_DR16",
+              "dec_deg": 30.252963,
+              "independent_root": "SDSS_DR16",
+              "ra_deg": 139.223674,
+              "separation_arcsec": 26.76160274077647,
+              "source_id": "SDSS J091653.68+301510.6"
+            },
+            {
+              "catalog": "PANSTARRS_DR1",
+              "dec_deg": 30.25293738,
+              "independent_root": "PANSTARRS_DR1",
+              "ra_deg": 139.22360849,
+              "separation_arcsec": 26.86446926161937,
+              "source_id": "144301392235394233"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 26.731475575742934,
+          "representative_dec_deg": 30.252971,
+          "representative_ra_deg": 139.223683
+        }
+      ]
+    },
+    "LOVE": {
+      "catalog_counts": {
+        "2MASS_PSC": {
+          "count": 1,
+          "nearest": {
+            "catalog": "2MASS_PSC",
+            "dec_deg": -36.779072,
+            "independent_root": "2MASS_PSC",
+            "ra_deg": 204.295861,
+            "separation_arcsec": 23.032148764332643,
+            "source_id": "13371100-3646446"
+          },
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "count": 5,
+          "nearest": {
+            "catalog": "ALLWISE",
+            "dec_deg": -36.7804774,
+            "independent_root": "NASA_IPAC_ALLWISE",
+            "ra_deg": 204.2960668,
+            "separation_arcsec": 20.289587649207107,
+            "source_id": "J133711.05-364649.7"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "count": 2,
+          "nearest": {
+            "catalog": "GAIA_DR3",
+            "dec_deg": -36.77911588007,
+            "independent_root": "ESA_GAIA_DR3",
+            "ra_deg": 204.29573215827,
+            "separation_arcsec": 23.269252366704684,
+            "source_id": "6163586620213012352"
+          },
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "count": 0,
+          "nearest": null,
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "count": 0,
+          "nearest": null,
+          "status": "OK"
+        }
+      },
+      "catalog_detection_count": 8,
+      "center": {
+        "dec_deg": -36.78240527777778,
+        "frame": "ICRS",
+        "ra_deg": 204.30267916666668
+      },
+      "mast_hst_6arcmin": {
+        "hst_observation_count": 0,
+        "observations": [],
+        "radius_arcmin": 6.0,
+        "status": "OK",
+        "target": "LOVE"
+      },
+      "multi_independent_root_group_count": 1,
+      "nearest_catalog_detection": {
+        "catalog": "ALLWISE",
+        "dec_deg": -36.7804774,
+        "independent_root": "NASA_IPAC_ALLWISE",
+        "ra_deg": 204.2960668,
+        "separation_arcsec": 20.289587649207107,
+        "source_id": "J133711.05-364649.7"
+      },
+      "nearest_five_source_groups": [
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7804774,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.2960668,
+              "separation_arcsec": 20.289587649207107,
+              "source_id": "J133711.05-364649.7"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 20.289587649207107,
+          "representative_dec_deg": -36.7804774,
+          "representative_ra_deg": 204.2960668
+        },
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7767,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.3037483,
+              "separation_arcsec": 20.769059114603444,
+              "source_id": "J133712.89-364636.1"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 20.769059114603444,
+          "representative_dec_deg": -36.7767,
+          "representative_ra_deg": 204.3037483
+        },
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7875539,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.2980249,
+              "separation_arcsec": 22.882786439261388,
+              "source_id": "J133711.52-364715.1"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 22.882786439261388,
+          "representative_dec_deg": -36.7875539,
+          "representative_ra_deg": 204.2980249
+        },
+        {
+          "catalogs": [
+            "2MASS_PSC",
+            "ALLWISE",
+            "GAIA_DR3"
+          ],
+          "detection_count": 3,
+          "independent_root_count": 3,
+          "independent_roots": [
+            "2MASS_PSC",
+            "ESA_GAIA_DR3",
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "2MASS_PSC",
+              "dec_deg": -36.779072,
+              "independent_root": "2MASS_PSC",
+              "ra_deg": 204.295861,
+              "separation_arcsec": 23.032148764332643,
+              "source_id": "13371100-3646446"
+            },
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7791466,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.2957833,
+              "separation_arcsec": 23.086040255024916,
+              "source_id": "J133710.98-364644.9"
+            },
+            {
+              "catalog": "GAIA_DR3",
+              "dec_deg": -36.77911588007,
+              "independent_root": "ESA_GAIA_DR3",
+              "ra_deg": 204.29573215827,
+              "separation_arcsec": 23.269252366704684,
+              "source_id": "6163586620213012352"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 23.032148764332643,
+          "representative_dec_deg": -36.779072,
+          "representative_ra_deg": 204.295861
+        },
+        {
+          "catalogs": [
+            "ALLWISE"
+          ],
+          "detection_count": 1,
+          "independent_root_count": 1,
+          "independent_roots": [
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7770239,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.3075744,
+              "separation_arcsec": 23.96960384874286,
+              "source_id": "J133713.81-364637.2"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 23.96960384874286,
+          "representative_dec_deg": -36.7770239,
+          "representative_ra_deg": 204.3075744
+        }
+      ],
+      "plain_status": "CATALOG_SOURCES_PRESENT",
+      "simbad": {
+        "count": 0,
+        "nearest_objects": [],
+        "status": "OK"
+      },
+      "source_group_count": 6,
+      "strongest_multi_root_groups": [
+        {
+          "catalogs": [
+            "2MASS_PSC",
+            "ALLWISE",
+            "GAIA_DR3"
+          ],
+          "detection_count": 3,
+          "independent_root_count": 3,
+          "independent_roots": [
+            "2MASS_PSC",
+            "ESA_GAIA_DR3",
+            "NASA_IPAC_ALLWISE"
+          ],
+          "members": [
+            {
+              "catalog": "2MASS_PSC",
+              "dec_deg": -36.779072,
+              "independent_root": "2MASS_PSC",
+              "ra_deg": 204.295861,
+              "separation_arcsec": 23.032148764332643,
+              "source_id": "13371100-3646446"
+            },
+            {
+              "catalog": "ALLWISE",
+              "dec_deg": -36.7791466,
+              "independent_root": "NASA_IPAC_ALLWISE",
+              "ra_deg": 204.2957833,
+              "separation_arcsec": 23.086040255024916,
+              "source_id": "J133710.98-364644.9"
+            },
+            {
+              "catalog": "GAIA_DR3",
+              "dec_deg": -36.77911588007,
+              "independent_root": "ESA_GAIA_DR3",
+              "ra_deg": 204.29573215827,
+              "separation_arcsec": 23.269252366704684,
+              "source_id": "6163586620213012352"
+            }
+          ],
+          "nearest_to_search_center_arcsec": 23.032148764332643,
+          "representative_dec_deg": -36.779072,
+          "representative_ra_deg": 204.295861
+        }
+      ]
+    }
+  }
+}
