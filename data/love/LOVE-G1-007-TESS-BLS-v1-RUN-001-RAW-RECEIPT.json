@@ -1,0 +1,60 @@
+{
+  "schema": "janus.cosmos.love.tess_bls.raw_receipt.v1",
+  "experiment_id": "LOVE-G1-007-TESS-BLS-v1",
+  "run_id": 32269389588,
+  "job_id": 96121812760,
+  "run_conclusion": "success",
+  "artifact": {
+    "id": 9371836961,
+    "name": "love-g1-007-tess-bls-real-data",
+    "sha256": "b9594fe18b797742768c88d17dc0c37adc56a3cef300322ee34836fe46eec47b",
+    "size_bytes": 39472930,
+    "uploaded_file_count": 21
+  },
+  "blind_search": {
+    "frozen_sources": 7,
+    "tess_lightcurve_sources_with_data": 7,
+    "raw_screen_watchlist_count": 1,
+    "raw_screen_watchlist_labels": ["TARGET_A_R2"]
+  },
+  "raw_hit": {
+    "blind_label": "TARGET_A_R2",
+    "rank": 2,
+    "gaia_source_id": "6163541785049288960",
+    "tic_id": "165827520",
+    "k_like": false,
+    "gaia_ruwe": 3.7245614528656006,
+    "gaia_ruwe_warning": true,
+    "distinct_tess_sectors": [11, 37, 64, 102],
+    "repeat_cluster": {
+      "matching_sectors": [64, 102],
+      "periods_days": [7.751436617241466, 7.748187440347048],
+      "median_period_days": 7.749812028794257,
+      "max_relative_spread": 0.0004192588003870765
+    },
+    "combined_bls": {
+      "best_period_days": 7.749085302234917,
+      "best_duration_hours": 2.0,
+      "best_depth_fraction": 0.003018173824954684,
+      "best_depth_ppm": 3018.173824954684,
+      "best_depth_snr": 17.50909959900578,
+      "screening_power_sde": 8.196515874842847,
+      "estimated_transits": 10,
+      "odd_depth_fraction": 0.003311182646982269,
+      "even_depth_fraction": 0.0029002845242626085,
+      "time_baseline_days": 2549.8775547262685
+    },
+    "catalog_firewall_in_run": {
+      "confirmed_planet_query": "ERROR_TIMEOUT",
+      "error": "URLError: <urlopen error timed out>",
+      "important_correction": "A catalog timeout must fail closed. Therefore the raw screen hit is not an admitted new-candidate watchlist item until the TESS Project Candidate/TOI catalog is checked successfully."
+    },
+    "status": "PROVISIONAL_BLIND_SIGNAL_HIT__BLOCKED_PENDING_TOI_UNBLIND"
+  },
+  "love_gate": {
+    "reserved_codename": "Love",
+    "candidate_activated": false,
+    "reason": "Blind signal scoring produced one repeat pattern, but the catalog firewall timed out. Identity remains sealed until an authoritative TOI/known-object unblind succeeds; independent replication would still be required afterward."
+  },
+  "claim_ceiling": "RAW_BLIND_TESS_REPEAT_PATTERN_ONLY__NOT_A_NEW_PLANET_CANDIDATE__LOVE_SEALED"
+}
