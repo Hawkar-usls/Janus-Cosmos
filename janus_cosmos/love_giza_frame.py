@@ -36,6 +36,31 @@ def _time_grid(start: str, stop: str, step_seconds: int) -> Time:
     return t0 + np.arange(n, dtype=float) * step_seconds * u.s
 
 
+def _surface_parallax_mas(target: SkyCoord, location: EarthLocation, times: Time) -> tuple[np.ndarray, float]:
+    """Return Giza-vs-geocenter angular shift without comparing non-equivalent frames.
+
+    The star vector and site baseline are both expressed in the same GCRS axes.
+    Topocentric line of sight is (geocentric star vector - site position).
+    """
+    site_pos, _ = location.get_gcrs_posvel(times)
+    geocentric = target.transform_to(GCRS(obstime=times))
+    star_xyz = np.moveaxis(geocentric.cartesian.xyz.to_value(u.m), 0, -1)
+    site_xyz = np.moveaxis(site_pos.xyz.to_value(u.m), 0, -1)
+    topo_xyz = star_xyz - site_xyz
+
+    geo_norm = np.linalg.norm(star_xyz, axis=1)
+    topo_norm = np.linalg.norm(topo_xyz, axis=1)
+    dot = np.sum(star_xyz * topo_xyz, axis=1) / (geo_norm * topo_norm)
+    dot = np.clip(dot, -1.0, 1.0)
+    angle_rad = np.arccos(dot)
+    mas = np.degrees(angle_rad) * 3600.0 * 1000.0
+
+    baseline_m = float(np.max(np.linalg.norm(site_xyz, axis=1)))
+    distance_m = float(target.distance.to_value(u.m))
+    upper_bound_mas = math.degrees(math.asin(min(1.0, baseline_m / distance_m))) * 3600.0 * 1000.0
+    return mas, upper_bound_mas
+
+
 def run(prereg_path: Path, output_path: Path) -> dict:
     prereg = json.loads(prereg_path.read_text(encoding="utf-8"))
     target_cfg = prereg["target"]
@@ -64,12 +89,7 @@ def run(prereg_path: Path, output_path: Path) -> dict:
     alt = np.asarray(altaz.alt.deg, dtype=float)
     az = np.asarray(altaz.az.deg, dtype=float)
 
-    # Explicitly measure the finite-distance observer shift caused only by moving
-    # from the Earth geocenter to the Giza site at the same obstime.
-    pos, vel = location.get_gcrs_posvel(times)
-    geocentric = target.transform_to(GCRS(obstime=times))
-    giza_observer = target.transform_to(GCRS(obstime=times, obsgeoloc=pos, obsgeovel=vel))
-    giza_vs_geocenter_mas = np.asarray(geocentric.separation(giza_observer).to_value(u.mas), dtype=float)
+    giza_vs_geocenter_mas, theoretical_upper_bound_mas = _surface_parallax_mas(target, location, times)
 
     visible = alt > 0.0
     imax = int(np.nanargmax(alt))
@@ -124,7 +144,7 @@ def run(prereg_path: Path, output_path: Path) -> dict:
     )
 
     result = {
-        "schema": "janus.cosmos.love.giza_frame.result.v1",
+        "schema": "janus.cosmos.love.giza_frame.result.v1.1",
         "experiment_id": prereg["experiment_id"],
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "analysis_label": target_cfg["analysis_label"],
@@ -138,11 +158,12 @@ def run(prereg_path: Path, output_path: Path) -> dict:
         "time_window": window,
         "giza_topocentric_visibility": visibility,
         "observer_shift": {
-            "meaning": "Angular difference between a geocentric observer and the Giza surface observer for the same finite-distance ICRS target.",
+            "meaning": "Angular difference between Earth-geocentric and Giza-surface lines of sight, computed by subtracting the Giza site vector in common GCRS axes.",
             "minimum_mas": float(np.nanmin(giza_vs_geocenter_mas)),
             "maximum_mas": float(np.nanmax(giza_vs_geocenter_mas)),
             "median_mas": float(np.nanmedian(giza_vs_geocenter_mas)),
-            "cannot_explain_arcsecond_or_degree_scale_target_changes": bool(np.nanmax(giza_vs_geocenter_mas) < 1.0),
+            "theoretical_surface_baseline_upper_bound_mas": float(theoretical_upper_bound_mas),
+            "cannot_explain_arcsecond_or_degree_scale_target_changes": bool(theoretical_upper_bound_mas < 1.0),
         },
         "idealized_pyramid_face_alignment": {
             "face_inclination_deg_above_horizontal": float(pyramid["face_inclination_deg_above_horizontal"]),
@@ -167,6 +188,7 @@ def run(prereg_path: Path, output_path: Path) -> dict:
         "observer": result["observer"]["frame_name"],
         "max_alt_deg": result["giza_topocentric_visibility"]["maximum_altitude_deg"],
         "max_surface_shift_mas": result["observer_shift"]["maximum_mas"],
+        "surface_shift_upper_bound_mas": result["observer_shift"]["theoretical_surface_baseline_upper_bound_mas"],
         "best_face": result["idealized_pyramid_face_alignment"]["best_face"],
         "best_face_angle_deg": result["idealized_pyramid_face_alignment"]["best_face_minimum_angle_deg"],
         "love_candidate_activated": result["love_gate"]["candidate_activated"],
