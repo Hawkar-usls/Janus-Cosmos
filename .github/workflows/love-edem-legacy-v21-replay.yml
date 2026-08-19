@@ -1,0 +1,91 @@
+name: LOVE EDEM Legacy Janus v2.1 Replay
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LOVE_EDEM_LEGACY_V21_REPLAY_PREREG.json'
+      - 'janus_cosmos/love_edem_legacy_v21_replay.py'
+      - '.github/workflows/love-edem-legacy-v21-replay.yml'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LOVE_EDEM_LEGACY_V21_REPLAY_PREREG.json'
+      - 'janus_cosmos/love_edem_legacy_v21_replay.py'
+      - '.github/workflows/love-edem-legacy-v21-replay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+  LEGACY_V21_SHA: '964546bbca8361a00cc3acc754bd5eafbfb65312'
+
+jobs:
+  replay-original-janus-v21:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+
+      - name: Extract exact historical Janus v2.1 authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin agent/demiurge-v2-portable-freeze
+          ACTUAL="$(git rev-parse FETCH_HEAD)"
+          test "$ACTUAL" = "$LEGACY_V21_SHA"
+          mkdir -p "$RUNNER_TEMP/janus-v21"
+          git archive "$LEGACY_V21_SHA" experiments/demiurge_adversarial_forge_v2 | tar -x -C "$RUNNER_TEMP/janus-v21"
+          test -f "$RUNNER_TEMP/janus-v21/experiments/demiurge_adversarial_forge_v2/SPECIFICITY_PROTOCOL_v2_1.json"
+          test -f "$RUNNER_TEMP/janus-v21/experiments/demiurge_adversarial_forge_v2/download_sky_v2_1.py"
+          test -f "$RUNNER_TEMP/janus-v21/experiments/demiurge_adversarial_forge_v2/janus_cosmos_specificity_v2_1.py"
+          echo "LEGACY_DIR=$RUNNER_TEMP/janus-v21/experiments/demiurge_adversarial_forge_v2" >> "$GITHUB_ENV"
+
+      - name: Compile replay adapter
+        run: python -m py_compile janus_cosmos/love_edem_legacy_v21_replay.py
+
+      - name: Download frozen DSS2/2MASS controls and target fields, then replay gate
+        run: >-
+          python -u -m janus_cosmos.love_edem_legacy_v21_replay
+          --prereg data/love/LOVE_EDEM_LEGACY_V21_REPLAY_PREREG.json
+          --legacy-dir "$LEGACY_DIR"
+          --output-dir results/love_edem_legacy_v21_replay
+          --workers 10
+
+      - name: Enforce claim firewall and print result
+        run: |
+          python - <<'PY'
+          import json
+          p='results/love_edem_legacy_v21_replay/love-edem-legacy-v21-replay-result.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['legacy_authority']['commit_sha'] == '964546bbca8361a00cc3acc754bd5eafbfb65312'
+          assert d['controls']['count'] == 20
+          assert d['firewall']['edem_identity_confirmed'] is False
+          assert d['firewall']['love_candidate_activated'] is False
+          assert d['firewall']['full_legacy_v21_admission_claimed'] is False
+          for t in d['targets']:
+              print(t['analysis_label'], 'score=', t['morphology_score'], 'rank=', t['real_field_rank'], 'gate=', t['gate_status'])
+          print('LEGACY V2.1 REPLAY FIREWALL PASS')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-edem-legacy-v21-replay
+          path: results/love_edem_legacy_v21_replay/
+          if-no-files-found: error
+          retention-days: 14
