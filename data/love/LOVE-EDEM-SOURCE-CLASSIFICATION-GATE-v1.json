@@ -1,0 +1,29 @@
+{
+  "schema": "janus.cosmos.love_edem.source_classification.gate.v1",
+  "experiment_id": "LOVE-EDEM-SOURCE-CLASSIFICATION-v1",
+  "status": "PREREGISTERED",
+  "mode": "ASTROPHYSICAL_CLASSIFICATION_OF_FROZEN_SOURCE_GROUPS",
+  "anomaly_scoring_used": false,
+  "classification_radius_arcsec": 2.0,
+  "groups": [
+    "LOVE_NEAREST_WISE_ONLY",
+    "LOVE_GAIA_WISE_2MASS",
+    "EDEM_NEAREST_WISE_ONLY",
+    "EDEM_OPTICAL_SDSS_PS1",
+    "EDEM_GAIA_WISE_SDSS_PS1"
+  ],
+  "decision_rules": {
+    "GALACTIC_STAR_HIGH_CONFIDENCE": "Gaia parallax S/N >= 5 OR combined proper-motion significance >= 5 sigma",
+    "LIKELY_STAR_OR_COMPACT_SOURCE": "Gaia counterpart exists but high-confidence astrometric star gate is not passed",
+    "OPTICAL_SOURCE_STAR_OR_GALAXY_UNRESOLVED": "SDSS and Pan-STARRS counterpart within 2 arcsec, no Gaia counterpart within 2 arcsec",
+    "FAINT_INFRARED_SOURCE_UNCLASSIFIED": "AllWISE only within 2 arcsec",
+    "UNCLASSIFIED_CATALOG_SOURCE": "none of the stronger rules pass"
+  },
+  "firewall": {
+    "thresholds_frozen_before_run": true,
+    "catalog_group_is_semantic_identity": false,
+    "classification_is_anomaly_claim": false,
+    "planet_claim_allowed": false,
+    "physical_LOVE_EDEM_ORION_association_allowed": false
+  }
+}
