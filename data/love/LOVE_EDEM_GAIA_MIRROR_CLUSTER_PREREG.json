@@ -1,0 +1,58 @@
+{
+  "schema": "janus.cosmos.love_edem.gaia_mirror_cluster.prereg.v1",
+  "experiment_id": "LOVE-EDEM-GAIA-MIRROR-CLUSTER-v1",
+  "status": "FROZEN",
+  "mode": "WHAT_IS_AT_THESE_COORDINATES",
+  "targets": {
+    "TARGET_A": {
+      "semantic_alias": "LOVE",
+      "ra_deg_icrs": 204.30267916666668,
+      "dec_deg_icrs": -36.78240527777778
+    },
+    "TARGET_B": {
+      "semantic_alias": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318
+    }
+  },
+  "search_radius_arcsec": 30.0,
+  "gaia_mirror": {
+    "service": "CDS VizieR",
+    "catalog": "I/355/gaiadr3",
+    "role": "Independent Gaia DR3 mirror/fallback when the direct ESA Gaia service is unavailable"
+  },
+  "source_clustering": {
+    "method": "position graph connected components",
+    "pair_tolerance_arcsec": {
+      "default": 1.0,
+      "with_2mass": 2.0,
+      "with_allwise": 3.0
+    },
+    "catalogs": [
+      "Gaia DR3 via VizieR",
+      "SIMBAD",
+      "AllWISE",
+      "2MASS PSC",
+      "SDSS DR17 where covered",
+      "Pan-STARRS DR2 where covered"
+    ],
+    "cluster_center": "unweighted spherical mean of member positions",
+    "physical_identity_rule": "A positional cluster is a cross-catalog source group, not automatically a physical classification or semantic identity."
+  },
+  "classification_labels": [
+    "GAIA_LINKED_SOURCE_GROUP",
+    "OPTICAL_CROSS_SURVEY_SOURCE_GROUP",
+    "IR_LINKED_SOURCE_GROUP",
+    "WISE_ONLY_CURRENT_MATCH_RADIUS",
+    "SINGLE_CATALOG_SOURCE_GROUP"
+  ],
+  "firewall": {
+    "anomaly_scoring_used": false,
+    "anomaly_gate_required": false,
+    "catalog_proximity_is_not_identity": true,
+    "query_error_is_not_zero_sources": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "claim_ceiling": "Coordinate-neighborhood source grouping and catalog characterization only."
+  }
+}
