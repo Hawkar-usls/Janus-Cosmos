@@ -1,0 +1,97 @@
+{
+  "schema": "janus.cosmos.love_edem.center_object_probe.receipt.v1",
+  "experiment_id": "LOVE-EDEM-CENTER-OBJECT-PROBE-v1",
+  "run_id": 32281325490,
+  "job_id": 96160547627,
+  "run_conclusion": "success",
+  "search_radius_arcsec": 30.0,
+  "artifact": {
+    "id": 9375960810,
+    "name": "love-edem-center-object-probe",
+    "sha256": "3c85c7eb767052d5944f57b1494910b1e10749b92ab8bec0df200fe7ff11f555"
+  },
+  "targets": {
+    "TARGET_A": {
+      "semantic_alias": "LOVE",
+      "center_icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+      "allwise": {
+        "count_30arcsec": 5,
+        "nearest": {
+          "designation": "J133711.05-364649.7",
+          "separation_arcsec": 20.289587649207107,
+          "W1": 15.974, "W2": 16.186, "W3": 12.412, "W4": 9.145,
+          "snr": {"W1": 19.4, "W2": 5.8, "W3": 0.8, "W4": -0.4},
+          "ph_qual": "ABUU", "cc_flags": "0000", "ext_flg": 0
+        }
+      },
+      "2mass_psc": {
+        "count_30arcsec": 1,
+        "nearest": {
+          "designation": "13371100-3646446",
+          "separation_arcsec": 23.032148764332643,
+          "J": 15.697, "H": 14.961, "Ks": 15.042,
+          "ph_qual": "AAB", "cc_flg": "000"
+        }
+      },
+      "simbad_count_30arcsec": 0,
+      "sdss_dr17_count_30arcsec": 0,
+      "panstarrs_status": "OUTSIDE_PS1_3PI_DEC_COVERAGE",
+      "gaia_dr3": {"status": "QUERY_ERROR", "error": "RemoteDisconnected: Remote end closed connection without response"}
+    },
+    "TARGET_B": {
+      "semantic_alias": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "center_icrs": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+      "allwise": {
+        "count_30arcsec": 5,
+        "nearest": {
+          "designation": "J091653.98+301546.0",
+          "separation_arcsec": 9.021198661597598,
+          "W1": 17.574, "W2": 16.917, "W3": 12.592, "W4": 9.014,
+          "snr": {"W1": 5.5, "W2": 0.8, "W3": -0.7, "W4": -0.6},
+          "ph_qual": "BUUU", "cc_flags": "0000", "ext_flg": 0,
+          "nearest_sdss_separation_from_wise_arcsec": 12.503927725385733
+        }
+      },
+      "2mass_psc_count_30arcsec": 0,
+      "simbad_count_30arcsec": 0,
+      "sdss_dr17": {
+        "count_30arcsec": 15,
+        "nearest_to_center": {
+          "objid": 1237664320537363072,
+          "ra_deg": 139.222680832912,
+          "dec_deg": 30.2569178151199,
+          "separation_arcsec": 13.24525762834276,
+          "type_raw": 3,
+          "u": 25.63188, "g": 23.04796, "r": 22.63702, "i": 20.89185, "z": 19.9841
+        }
+      },
+      "panstarrs": {
+        "status": "OK",
+        "count_30arcsec": 5,
+        "nearest_to_center": {
+          "objID": 144301392226548847,
+          "ra_deg": 139.22269411,
+          "dec_deg": 30.25687634,
+          "separation_arcsec": 13.372644968576678,
+          "imag": 21.793, "zmag": 21.1874
+        },
+        "nearest_sdss_and_panstarrs_positions_agree_arcsec": 0.155
+      },
+      "gaia_dr3": {"status": "QUERY_ERROR", "error": "RemoteDisconnected: Remote end closed connection without response"}
+    }
+  },
+  "interpretation": {
+    "edem_center_is_not_empty": true,
+    "nearest_edem_catalog_source_is_allwise_9arcsec": true,
+    "nearest_edem_allwise_source_has_significant_w1_but_w2_w3_w4_snr_below_1": true,
+    "there_is_no_tight_sdss_match_to_that_wise_source_in_this_probe": true,
+    "a_separate_faint_optical_source_is_seen_consistently_by_sdss_and_panstarrs_about_13arcsec_from_center": true,
+    "gaia_failure_is_a_service_query_failure_not_zero_sources": true,
+    "catalog_proximity_is_not_edem_identity": true
+  },
+  "firewall": {
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "claim_ceiling": "CATALOG_NEIGHBORHOOD_CHARACTERIZATION_ONLY"
+  }
+}
