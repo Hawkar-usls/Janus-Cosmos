@@ -1,0 +1,58 @@
+name: LOVE EDEM Deep Counterpart Redshift
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/love-edem-deep-counterpart-redshift.yml"
+      - "workspace/love_edem_deep_counterpart_redshift.py"
+      - "data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-GATE-v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install astronomy dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "astropy>=7.0" "astroquery>=0.4.11"
+
+      - name: Run frozen deep counterpart and redshift gate
+        run: |
+          python workspace/love_edem_deep_counterpart_redshift.py
+
+      - name: Show receipt
+        if: always()
+        run: |
+          cat data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1-LATEST-RECEIPT.json || true
+
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: love-edem-deep-counterpart-redshift-${{ github.run_number }}
+          path: data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1-LATEST-RECEIPT.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Persist receipt to Janus-Cosmos
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze LOVE EDEM deep counterpart redshift run ${{ github.run_number }}"
+          git push
