@@ -1,0 +1,100 @@
+name: OSIRIS v3.1 Resonant Lineage Orion Pyramid
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  resonant-lineage:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out Janus-Cosmos
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile inherited and additive runtimes
+        run: |
+          python -m py_compile \
+            workspace/osiris_spiral_runtime.py \
+            workspace/osiris_origin_prime_voice_packet.py \
+            workspace/osiris_resonant_lineage.py \
+            workspace/osiris_origin_prime_resonant_packet.py
+
+      - name: Re-run canonical OSIRIS v3 unchanged
+        run: python run_osiris.py > /tmp/osiris-v3.json
+
+      - name: Re-run existing Voice Pyramid bridge
+        run: python workspace/osiris_origin_prime_voice_packet.py --self-test > /tmp/voice-link.json
+
+      - name: Execute cross-formula resonant-lineage self-test
+        run: python workspace/osiris_resonant_lineage.py --self-test > /tmp/resonant-lineage.json
+
+      - name: Execute ORIGIN PRIME Voice Orion representation packet self-test
+        run: python workspace/osiris_origin_prime_resonant_packet.py --self-test > /tmp/resonant-packet.json
+
+      - name: Verify frozen boundaries and receipts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          contract = json.loads(Path('workspace/OSIRIS_V3_1_RESONANT_LINEAGE_ORION_PYRAMID_FROZEN_CONTRACT.json').read_text())
+          assert contract['status'] == 'FROZEN_BEFORE_IMPLEMENTATION'
+          assert contract['parent']['must_remain_unchanged'] is True
+          assert contract['admitted_transformation_classes']['VARIABLE_RENAMING_BIJECTION']['status'] == 'ADMITTED_WITH_EXACT_VERIFIER'
+          assert contract['admitted_transformation_classes']['CERTIFIED_COFACTOR']['status'].startswith('NOT_ADMITTED')
+          assert contract['admitted_transformation_classes']['CLAUSE_PRESERVING_NORMALIZATION']['status'].startswith('NOT_ADMITTED')
+          assert contract['voice_representation']['center_hz'] == 119.0
+          assert contract['voice_representation']['authority_delta'] == 0
+          assert contract['astral_representation']['star_triplet'] == ['Mintaka', 'Alnilam', 'Alnitak']
+          assert contract['astral_representation']['giza_orion_correlation'] == 'HYPOTHESIS_NOT_ASSERTED_AS_ARCHITECTURAL_FACT'
+          assert contract['astral_representation']['janus_rebus_alias'] == 'S𓂸ḥ'
+          assert contract['astral_representation']['janus_rebus_alias_is_historical_transliteration'] is False
+          assert contract['astral_representation']['authority_delta'] == 0
+          assert contract['scientific_boundary']['P_VS_NP'] == 'OPEN'
+
+          lineage = json.loads(Path('/tmp/resonant-lineage.json').read_text())
+          assert lineage['status'] == 'PASS_KEEP_OSIRIS_V3_1_RESONANT_LINEAGE'
+          assert lineage['hash_changed'] is True
+          assert lineage['lineage_proposal_accepted'] is True
+          assert lineage['lineage_provenance_bound_to_final_experience'] is True
+          if lineage['source_experience_has_sat_assignment']:
+              assert lineage['target_reuse_mode'] == 'REVERIFIED_SAT_WITNESS'
+              assert lineage['target_revalidation']['sat_witness_reverified'] is True
+          else:
+              assert lineage['source_experience_has_separator'] is True
+              assert lineage['target_reuse_mode'] == 'REVALIDATED_SEPARATOR_ROUTE'
+              assert lineage['target_revalidation']['separator_revalidated'] is True
+          assert all(lineage['negative_controls'].values())
+          assert lineage['authority_delta'] == 0
+
+          packet = json.loads(Path('/tmp/resonant-packet.json').read_text())
+          assert packet['status'] == 'PASS_KEEP_OSIRIS_V3_1_RESONANT_ORION_PYRAMID_PACKET'
+          assert packet['voice_profile'] == 'PYRAMID_LANGUAGE_117_121_ANCHORED_SPACE_v0.3'
+          assert packet['orion_anchor'] == 'ORION_BELT_SAH_OSIRIS_CONTEXT_v1'
+          assert packet['lineage_transfer_present'] is True
+          assert all(packet['negative_controls'].values())
+          assert packet['authority_delta'] == 0
+          assert packet['P_VS_NP'] == 'OPEN'
+          PY
+
+      - name: Upload resonant-lineage receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: osiris-v3-1-resonant-lineage-orion-pyramid
+          path: |
+            /tmp/osiris-v3.json
+            /tmp/voice-link.json
+            /tmp/resonant-lineage.json
+            /tmp/resonant-packet.json
+            workspace/OSIRIS_V3_1_RESONANT_LINEAGE_ORION_PYRAMID_FROZEN_CONTRACT.json
