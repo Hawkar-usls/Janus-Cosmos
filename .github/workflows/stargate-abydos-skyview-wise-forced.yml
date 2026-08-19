@@ -1,0 +1,52 @@
+name: Stargate Abydos SkyView WISE Forced Center
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/stargate-abydos-skyview-wise-forced.yml"
+      - "workspace/stargate_abydos_skyview_wise_forced.py"
+      - "data/stargate/STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-GATE-v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy>=2.0" "astropy>=7.0" "astroquery>=0.4.11"
+      - name: Run frozen-center WISE forced photometry
+        run: python workspace/stargate_abydos_skyview_wise_forced.py
+      - name: Show receipt
+        if: always()
+        run: cat data/stargate/STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-v1-LATEST-RECEIPT.json || true
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stargate-abydos-skyview-wise-forced-${{ github.run_number }}
+          path: data/stargate/STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-v1-LATEST-RECEIPT.json
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Persist receipt
+        if: always()
+        run: |
+          RECEIPT="data/stargate/STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-v1-LATEST-RECEIPT.json"
+          if [ ! -f "$RECEIPT" ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$RECEIPT"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "cosmos: freeze Stargate Abydos SkyView WISE forced run ${{ github.run_number }}"
+          git pull --rebase origin main
+          git push
