@@ -55,4 +55,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/stargate/STARGATE-ABYDOS-RAW-UNWISE-FROZEN-CENTER-v1-LATEST-RECEIPT.json
           git commit -m "cosmos: freeze Stargate Abydos raw unWISE run ${{ github.run_number }}"
+          git pull --rebase origin main
           git push
