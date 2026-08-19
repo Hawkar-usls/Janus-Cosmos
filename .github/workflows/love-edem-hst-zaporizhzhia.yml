@@ -1,0 +1,65 @@
+name: LOVE EDEM HST Zaporizhzhia Real Data
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LOVE_EDEM_HST_ZAPORIZHZHIA_PREREG.json'
+      - 'janus_cosmos/love_edem_hst_direct.py'
+      - '.github/workflows/love-edem-hst-zaporizhzhia.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LOVE_EDEM_HST_ZAPORIZHZHIA_PREREG.json'
+      - 'janus_cosmos/love_edem_hst_direct.py'
+      - '.github/workflows/love-edem-hst-zaporizhzhia.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  real-hst-love-edem-zaporizhzhia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack and renderer
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          python -m pip install --disable-pip-version-check 'matplotlib>=3.9'
+      - name: Compile HST direct pass
+        run: python -m py_compile janus_cosmos/love_edem_hst_direct.py
+      - name: Query MAST and download real HST FITS
+        run: >-
+          python -u -m janus_cosmos.love_edem_hst_direct
+          --prereg data/love/LOVE_EDEM_HST_ZAPORIZHZHIA_PREREG.json
+          --output-dir results/love_edem_hst_zaporizhzhia
+      - name: Enforce real-data firewall
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/love_edem_hst_zaporizhzhia/love-edem-hst-direct-result.json', encoding='utf-8'))
+          assert d['synthetic_generation_used'] is False
+          for t in d['targets']:
+              print(t['label'], t['status'], 'observations=', t['observation_count'], 'wcs-contained=', len(t['wcs_contained_products']))
+              for p in t['wcs_contained_products']:
+                  print('REAL_HST', p['filename'], p['instrument'], p['filter'], p['quicklook_png'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-edem-zaporizhzhia-real-hst-data
+          path: results/love_edem_hst_zaporizhzhia/
+          if-no-files-found: error
+          retention-days: 14
