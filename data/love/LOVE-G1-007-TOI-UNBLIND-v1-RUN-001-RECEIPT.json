@@ -1,0 +1,47 @@
+{
+  "schema": "janus.cosmos.love.toi_unblind.receipt.v1",
+  "experiment_id": "LOVE-G1-007-TOI-UNBLIND-v1",
+  "run_id": 32270839723,
+  "job_id": 96126592699,
+  "run_conclusion": "success",
+  "artifact": {
+    "id": 9372075197,
+    "name": "love-g1-007-toi-unblind",
+    "sha256": "9d3f9fce96d4e6faf53a2760aca3c47985111959b92276c927d200f67906df8a",
+    "size_bytes": 1308
+  },
+  "blind_hit": {
+    "blind_label": "TARGET_A_R2",
+    "tic_id": "165827520",
+    "gaia_source_id": "6163541785049288960",
+    "blind_bls_period_days": 7.749085302234917,
+    "blind_repeat_sectors": [64, 102],
+    "blind_sector_periods_days": [7.751436617241466, 7.748187440347048],
+    "blind_combined_depth_ppm": 3018.173824954684,
+    "blind_screening_power_sde": 8.196515874842847
+  },
+  "authoritative_unblind": {
+    "catalog": "NASA Exoplanet Archive TESS Project Candidates / TOI table",
+    "toi": "3494.01",
+    "tic_id": "165827520",
+    "tfopwg_disposition": "PC",
+    "catalog_period_days": 7.748612,
+    "catalog_depth_ppm": 5124.9808086,
+    "relative_period_delta": 0.00006108033028225791,
+    "relative_period_delta_percent": 0.006108033028225791,
+    "period_match_within_preregistered_1pct": true
+  },
+  "classification": "KNOWN_TESS_PROJECT_SIGNAL_REDISCOVERED",
+  "science_interpretation": {
+    "new_planet_candidate_from_this_run": false,
+    "positive_control": true,
+    "meaning": "The blind JANUS TESS/BLS pass independently recovered an already cataloged TESS Object of Interest at essentially the same period. This is evidence that the blind search is sensitive to a real cataloged transit-like signal, not evidence of a new exoplanet discovery."
+  },
+  "love_gate": {
+    "reserved_codename": "Love",
+    "candidate_activated": false,
+    "reason": "The first blind repeat hit is already cataloged as TOI 3494.01 and is rejected by the novelty firewall.",
+    "next_gate": "RETURN_TO_BLIND_SEARCH__DO_NOT_TUNE_ON_REDISCOVERED_TOI"
+  },
+  "claim_ceiling": "KNOWN_TOI_REDISCOVERY_ONLY__NO_NEW_EXOPLANET_DISCOVERY__LOVE_SEALED"
+}
