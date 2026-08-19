@@ -1,0 +1,35 @@
+{
+  "schema": "janus.cosmos.stargate_abydos.skyview_wise_forced_center.gate.v1",
+  "experiment_id": "STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-v1",
+  "status": "PREREGISTERED",
+  "preregistered_on": "2026-08-20",
+  "target": {"frame": "ICRS", "ra_deg": 223.415064157, "dec_deg": 33.97931567, "immutable": true},
+  "surveys": ["WISE 3.4", "WISE 4.6"],
+  "frozen_measurement": {
+    "cutout_radius_arcmin": 1.5,
+    "cutout_pixels": 256,
+    "aperture_radius_arcsec": 4.0,
+    "control_ring_arcsec": 45.0,
+    "control_count": 32,
+    "detection_threshold_sigma": 5.0,
+    "recenter_for_detection": false,
+    "no_post_hoc_radius_or_threshold_changes": true
+  },
+  "known_blend_warning": {
+    "nearest_catalogued_ir_group_arcsec": 8.537689265953338,
+    "rule": "A raw aperture excess may contain PSF-wing flux from nearby sources and is not an independent-source identification."
+  },
+  "decision_labels": [
+    "RAW_W1_W2_BOTH_PASS_5SIGMA__BLEND_UNRESOLVED",
+    "RAW_SINGLE_BAND_PASS_5SIGMA__BLEND_UNRESOLVED",
+    "RAW_NEITHER_BAND_PASS_5SIGMA",
+    "RAW_IMAGE_GATE_INCONCLUSIVE"
+  ],
+  "firewall": {
+    "raw_aperture_excess_is_independent_source": false,
+    "raw_aperture_excess_is_real_Abydos": false,
+    "raw_aperture_excess_is_planet": false,
+    "raw_aperture_excess_is_anomaly": false,
+    "claim_ceiling": "PIXEL_LEVEL_WISE_PERSISTENCE_AT_FROZEN_COORDINATE_WITH_BLEND_WARNING"
+  }
+}
