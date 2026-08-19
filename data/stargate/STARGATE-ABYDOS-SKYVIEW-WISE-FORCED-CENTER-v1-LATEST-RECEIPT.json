@@ -1,0 +1,99 @@
+{
+  "anomaly_scoring_used": false,
+  "experiment_id": "STARGATE-ABYDOS-SKYVIEW-WISE-FORCED-CENTER-v1",
+  "firewall": {
+    "claim_ceiling": "PIXEL_LEVEL_WISE_PERSISTENCE_AT_FROZEN_COORDINATE_WITH_BLEND_WARNING",
+    "nearby_8p54arcsec_source_blending_unresolved": true,
+    "raw_aperture_excess_is_anomaly": false,
+    "raw_aperture_excess_is_independent_source": false,
+    "raw_aperture_excess_is_planet": false,
+    "raw_aperture_excess_is_real_Abydos": false
+  },
+  "frozen_rules": {
+    "aperture_radius_arcsec": 4.0,
+    "control_count": 32,
+    "control_ring_arcsec": 45.0,
+    "detection_threshold_sigma": 5.0,
+    "no_post_hoc_radius_or_threshold_changes": true,
+    "recenter_for_detection": false,
+    "surveys": [
+      "WISE 3.4",
+      "WISE 4.6"
+    ]
+  },
+  "frozen_target": {
+    "dec_deg": 33.97931567,
+    "frame": "ICRS",
+    "ra_deg": 223.415064157
+  },
+  "known_nearest_catalogued_ir_group_arcsec": 8.537689265953338,
+  "mode": "IMAGE_LEVEL_FORCED_PHOTOMETRY_WITHOUT_RECENTERING",
+  "next_gate": "FIXED_POSITION_PSF_DEBLEND_CENTER_VS_NEARBY_IR_GROUPS_IF_RAW_EXCESS_PRESENT",
+  "results": {
+    "WISE 3.4": {
+      "measurement": {
+        "annulus_pixels": 509,
+        "aperture_pixels": 101,
+        "aperture_radius_arcsec": 4.0,
+        "background_median": 2.3721494674682617,
+        "bunit": null,
+        "control_count_requested": 32,
+        "control_count_used": 32,
+        "control_median_flux": 0.9820355176925659,
+        "control_ring_arcsec": 45.0,
+        "control_robust_sigma": 2.81745798869133,
+        "forced_control_z": 4.99751845850873,
+        "image_sha256_float32_nan0": "f27060a396d24477a35c12a04ddcdb8fd57459d8fc73356200f429229f4fbfe6",
+        "passes_frozen_5sigma_gate": false,
+        "pixel_scale_arcsec": 0.703125,
+        "source_flux_native_units_background_subtracted": 15.062333822250366,
+        "source_pixel": [
+          127.21706221891756,
+          127.59028085108571
+        ],
+        "survey": "WISE 3.4"
+      },
+      "status": "OK",
+      "survey": "WISE 3.4"
+    },
+    "WISE 4.6": {
+      "measurement": {
+        "annulus_pixels": 509,
+        "aperture_pixels": 101,
+        "aperture_radius_arcsec": 4.0,
+        "background_median": 7.175777435302734,
+        "bunit": null,
+        "control_count_requested": 32,
+        "control_count_used": 32,
+        "control_median_flux": 1.071101188659668,
+        "control_ring_arcsec": 45.0,
+        "control_robust_sigma": 3.834928251171112,
+        "forced_control_z": 1.274500026444864,
+        "image_sha256_float32_nan0": "96fd8384124726ab948a1e4a8c2a5f087c7e5f9ea374948bfb01e88b6d054a93",
+        "passes_frozen_5sigma_gate": false,
+        "pixel_scale_arcsec": 0.703125,
+        "source_flux_native_units_background_subtracted": 5.958717346191406,
+        "source_pixel": [
+          127.21706221891756,
+          127.59028085108571
+        ],
+        "survey": "WISE 4.6"
+      },
+      "status": "OK",
+      "survey": "WISE 4.6"
+    }
+  },
+  "run_time_utc": "2026-08-19T23:16:49.692725+00:00",
+  "schema": "janus.cosmos.stargate_abydos.skyview_wise_forced_center.receipt.v1",
+  "service_errors": [],
+  "status": "COMPLETE",
+  "summary": {
+    "per_band_z": {
+      "WISE 3.4": 4.99751845850873,
+      "WISE 4.6": 1.274500026444864
+    },
+    "surveys_passing_forced_5sigma": [],
+    "usable_band_count": 2,
+    "verdict": "RAW_NEITHER_BAND_PASS_5SIGMA"
+  }
+}
