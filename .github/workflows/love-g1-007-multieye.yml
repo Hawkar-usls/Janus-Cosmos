@@ -1,0 +1,74 @@
+name: LOVE G1-007 Multi-Eye Real Sky Search
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/**'
+      - 'janus_cosmos/love_multieye.py'
+      - 'janus_cosmos/discovery.py'
+      - 'janus_cosmos/luci.py'
+      - 'experiments/luci/**'
+      - '.github/workflows/love-g1-007-multieye.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/**'
+      - 'janus_cosmos/love_multieye.py'
+      - '.github/workflows/love-g1-007-multieye.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  multieye-real-archive-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile LOVE multi-eye resolver
+        run: python -m py_compile janus_cosmos/love_multieye.py janus_cosmos/discovery.py janus_cosmos/luci.py experiments/luci/build_luci_archive_manifest.py
+      - name: Acquire and bind real archive data
+        run: >-
+          python -u -m janus_cosmos.love_multieye
+          --prereg data/love/LAVE_TO_LOVE_MULTIEYE_PREREG.json
+          --output-dir results/love_multieye
+      - name: Enforce blind identity and discovery firewall
+        run: |
+          python - <<'PY'
+          import json
+          p='results/love_multieye/love-multieye-result.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['analysis_label']=='TARGET_A'
+          assert d['blind_identity_firewall']['name_is_hidden_from_scoring'] is True
+          assert d['gaia']['status'] != 'ERROR', d['gaia']['error']
+          assert d['love_gate']['candidate_activated'] is False
+          assert d['claim_ceiling'].startswith('TARGETED_REAL_SKY_MULTI_ARCHIVE_SEARCH_ONLY')
+          print('LOVE MULTI-EYE FIREWALL PASS')
+          print('Gaia ranked:', d['gaia']['ranked_source_count'])
+          print('Gaia K-like:', d['gaia']['k_like_count'])
+          print('Known planets rejected as discoveries:', d['known_planet_firewall']['known_planet_count'])
+          print('HST WCS-bound FITS:', d['hst_mast']['wcs_contained_download_count'])
+          print('LUCI WCS-bound FITS:', d['luci_lbt']['wcs_contained_download_count'])
+          print('TESS timeseries available:', d['tess']['timeseries_available_count'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-g1-007-multieye-real-archive
+          path: results/love_multieye/
+          if-no-files-found: warn
+          retention-days: 14
