@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.love_edem.deep_counterpart_redshift.gate.v1",
+  "experiment_id": "LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1",
+  "status": "PREREGISTERED",
+  "mode": "DEEP_COUNTERPART_AND_REDSHIFT_WITHOUT_ANOMALY_SCORING",
+  "anomaly_scoring_used": false,
+  "frozen_inputs": {
+    "EDEM_NEAREST_WISE_ONLY": {
+      "ra_deg": 139.2249571,
+      "dec_deg": 30.262781,
+      "allwise_id": "J091653.98+301546.0"
+    },
+    "LOVE_NEAREST_WISE_ONLY": {
+      "ra_deg": 204.2960668,
+      "dec_deg": -36.7804774,
+      "allwise_id": "J133711.05-364649.7"
+    },
+    "EDEM_OPTICAL_SDSS_PS1_GALAXY": {
+      "ra_deg": 139.222681,
+      "dec_deg": 30.256918,
+      "sdss_objid": "1237664320537363072"
+    }
+  },
+  "frozen_catalogs": {
+    "deep_infrared": ["II/365/catwise", "II/363/unwise"],
+    "deep_optical_love": ["II/379/smssdr4", "II/371/des_dr2"],
+    "deep_optical_edem": ["II/349/ps1"],
+    "redshift": ["V/154/sdss16", "V/161/zcatdr1"]
+  },
+  "frozen_rules": {
+    "counterpart_radius_arcsec": 2.0,
+    "catwise_motion_significance_gate_sigma": 5.0,
+    "catwise_motion_alone_does_not_establish_stellar_identity": true,
+    "spectroscopic_redshift_acceptance": "non-null z and warning bitmask == 0 (or absent in mirror row)",
+    "deep_wise_persistence": "counterparts in both CatWISE2020 and unWISE within 2 arcsec",
+    "no_post_hoc_threshold_changes": true
+  },
+  "admission": {
+    "IR_PERSISTENCE": "CatWISE2020 and unWISE both recover the source within 2 arcsec",
+    "OPTICAL_COUNTERPART": "at least one frozen optical survey recovers a source within 2 arcsec",
+    "SPECTROSCOPIC_REDSHIFT": "SDSS DR16 or DESI DR1 returns non-null spectroscopic z passing the frozen warning gate"
+  },
+  "firewall": {
+    "ir_persistence_is_not_anomaly": true,
+    "ir_persistence_is_not_planet": true,
+    "catwise_motion_is_not_automatic_stellar_identity": true,
+    "catalog_source_is_not_semantic_LOVE_or_EDEM_identity": true,
+    "physical_LOVE_EDEM_ORION_association_not_established": true,
+    "claim_ceiling": "DEEP_CATALOG_COUNTERPART_AND_SPECTROSCOPIC_REDSHIFT_CHECK_ONLY"
+  }
+}
