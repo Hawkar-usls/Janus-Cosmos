@@ -1,0 +1,68 @@
+name: LOVE G1-007 Giza Observer Frame
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LAVE_TO_LOVE_GIZA_FRAME_PREREG.json'
+      - 'janus_cosmos/love_giza_frame.py'
+      - '.github/workflows/love-g1-007-giza-frame.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LAVE_TO_LOVE_GIZA_FRAME_PREREG.json'
+      - 'janus_cosmos/love_giza_frame.py'
+      - '.github/workflows/love-g1-007-giza-frame.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  giza-topocentric-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile Giza frame gate
+        run: python -m py_compile janus_cosmos/love_giza_frame.py
+      - name: Project TARGET_A from Giza
+        run: >-
+          python -u -m janus_cosmos.love_giza_frame
+          --prereg data/love/LAVE_TO_LOVE_GIZA_FRAME_PREREG.json
+          --output results/love_giza_frame/love-giza-frame-result.json
+      - name: Enforce frame firewall
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/love_giza_frame/love-giza-frame-result.json', encoding='utf-8'))
+          assert d['analysis_label']=='TARGET_A'
+          assert d['frame_policy']['archive_query_frame']=='ICRS'
+          assert d['frame_policy']['archive_coordinates_must_not_be_shifted_to_giza_altaz'] is True
+          assert d['love_gate']['candidate_activated'] is False
+          assert d['observer_shift']['maximum_mas'] < 1.0
+          print('GIZA FRAME FIREWALL PASS')
+          print('max altitude =', d['giza_topocentric_visibility']['maximum_altitude_deg'])
+          print('max Giza-vs-geocenter shift mas =', d['observer_shift']['maximum_mas'])
+          print('best idealized pyramid face =', d['idealized_pyramid_face_alignment']['best_face'])
+          print('best face-normal angle deg =', d['idealized_pyramid_face_alignment']['best_face_minimum_angle_deg'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-g1-007-giza-frame
+          path: results/love_giza_frame/
+          if-no-files-found: error
+          retention-days: 14
