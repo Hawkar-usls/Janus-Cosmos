@@ -1,0 +1,168 @@
+{
+  "anomaly_scoring_used": false,
+  "experiment_id": "LOVE-EDEM-SOURCE-NATURE-v1",
+  "firewall": {
+    "claim_ceiling": "NATURE_OF_CATALOG_SOURCE_GROUPS_AROUND_FROZEN_COORDINATES_ONLY",
+    "near_EDEM_source_is_identity_EDEM": false,
+    "near_LOVE_source_is_identity_LOVE": false,
+    "source_classification_establishes_anomaly": false,
+    "source_classification_establishes_physical_LOVE_EDEM_ORION_link": false,
+    "source_classification_establishes_planet": false
+  },
+  "groups": {
+    "EDEM_GAIA_WISE_SDSS_PS1": {
+      "nature_result": {
+        "ceiling": "GALACTIC_STELLAR_SOURCE_CLASSIFICATION",
+        "confidence": "HIGH",
+        "evidence": {
+          "bp_rp": 1.844583,
+          "feh": null,
+          "g_mag": 19.18639,
+          "gaia_source_id": "699051350998534656",
+          "logg": null,
+          "naive_distance_pc_if_high_snr": null,
+          "parallax_mas": 0.7325,
+          "parallax_snr": 2.0262794194886746,
+          "proper_motion_vector_snr": 34.17614684202574,
+          "ruwe": 0.928,
+          "sdss_mapping_if_present": "6=STAR",
+          "sdss_photo_class": 6,
+          "teff_K": null
+        },
+        "nature": "RED_GALACTIC_STAR",
+        "plain_ru": "Это красная галактическая звезда: Gaia фиксирует очень значимое собственное движение; точный спектральный подтип пока не заморожен."
+      },
+      "offset_from_frozen_target_center_arcsec": 20.72338948797579,
+      "representative_icrs": {
+        "dec_deg": 30.26276387854,
+        "ra_deg": 139.21802643661
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "EDEM_NEAREST_WISE_ONLY": {
+      "nature_result": {
+        "ceiling": "INFRARED_CATALOG_SOURCE_ONLY",
+        "confidence": "LOW_MEDIUM",
+        "evidence": {
+          "W1mag": 17.573999404907227,
+          "W2mag": 16.91699981689453,
+          "allwise_source_id": "J091653.98+301546.0",
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "gaia_counterpart_within_2arcsec": false,
+          "panstarrs_counterpart_within_2arcsec": false,
+          "photometric_quality": "BUUU",
+          "twomass_counterpart_within_2arcsec": false
+        },
+        "nature": "FAINT_INFRARED_POINT_SOURCE_UNCLASSIFIED",
+        "plain_ru": "Это реальный слабый инфракрасный точечный источник в AllWISE, но без Gaia/оптического/2MASS совпадения в нашем жёстком радиусе его нельзя честно назвать звездой или галактикой."
+      },
+      "offset_from_frozen_target_center_arcsec": 9.021198661597598,
+      "representative_icrs": {
+        "dec_deg": 30.262781,
+        "ra_deg": 139.2249571
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "EDEM_OPTICAL_SDSS_PS1": {
+      "nature_result": {
+        "ceiling": "MORPHOLOGICAL_GALAXY_CLASSIFICATION_NOT_SPECTROSCOPIC_REDSHIFT",
+        "confidence": "MEDIUM_HIGH",
+        "evidence": {
+          "allwise_counterpart_within_2arcsec": false,
+          "gaia_counterpart_within_2arcsec": false,
+          "panstarrs_counterpart": true,
+          "sdss_mapping": "3=GALAXY",
+          "sdss_photo_class": 3,
+          "twomass_counterpart_within_2arcsec": false
+        },
+        "nature": "GALAXY",
+        "plain_ru": "Это очень вероятно галактика: SDSS морфологически помечает источник как galaxy (class=3), а Pan-STARRS независимо видит объект в той же позиции."
+      },
+      "offset_from_frozen_target_center_arcsec": 13.244457192554428,
+      "representative_icrs": {
+        "dec_deg": 30.256918,
+        "ra_deg": 139.222681
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "LOVE_GAIA_WISE_2MASS": {
+      "nature_result": {
+        "ceiling": "GALACTIC_STELLAR_SOURCE_CLASSIFICATION",
+        "confidence": "HIGH",
+        "evidence": {
+          "bp_rp": 1.607878,
+          "feh": 0.2623,
+          "g_mag": 17.621157,
+          "gaia_source_id": "6163586620213012352",
+          "logg": 4.5727,
+          "naive_distance_pc_if_high_snr": 1408.2523588227011,
+          "parallax_mas": 0.7101,
+          "parallax_snr": 6.496797658240989,
+          "proper_motion_vector_snr": 133.6328435324476,
+          "ruwe": 0.988,
+          "sdss_mapping_if_present": null,
+          "sdss_photo_class": null,
+          "teff_K": 4369.0
+        },
+        "nature": "COOL_K_TYPE_DWARF_STAR",
+        "plain_ru": "Это холодный карлик K-типа: Gaia видит значимое движение/параллакс, а температура и высокая поверхностная гравитация соответствуют карликовой звезде."
+      },
+      "offset_from_frozen_target_center_arcsec": 23.269252366704684,
+      "representative_icrs": {
+        "dec_deg": -36.77911588007,
+        "ra_deg": 204.29573215827
+      },
+      "target": "LOVE"
+    },
+    "LOVE_NEAREST_WISE_ONLY": {
+      "nature_result": {
+        "ceiling": "INFRARED_CATALOG_SOURCE_ONLY",
+        "confidence": "LOW_MEDIUM",
+        "evidence": {
+          "W1mag": 15.973999977111816,
+          "W2mag": 16.18600082397461,
+          "allwise_source_id": "J133711.05-364649.7",
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "gaia_counterpart_within_2arcsec": false,
+          "panstarrs_counterpart_within_2arcsec": false,
+          "photometric_quality": "ABUU",
+          "twomass_counterpart_within_2arcsec": false
+        },
+        "nature": "FAINT_INFRARED_POINT_SOURCE_UNCLASSIFIED",
+        "plain_ru": "Это реальный слабый инфракрасный точечный источник в AllWISE, но без Gaia/оптического/2MASS совпадения в нашем жёстком радиусе его нельзя честно назвать звездой или галактикой."
+      },
+      "offset_from_frozen_target_center_arcsec": 20.289587649207107,
+      "representative_icrs": {
+        "dec_deg": -36.7804774,
+        "ra_deg": 204.2960668
+      },
+      "target": "LOVE"
+    }
+  },
+  "input_receipt": "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json",
+  "input_service_failures": [],
+  "input_status": "COMPLETE",
+  "run_time_utc": "2026-08-19T22:51:27.053559+00:00",
+  "schema": "janus.cosmos.love_edem.source_nature.receipt.v1",
+  "sdss_photo_type_mapping": {
+    "3": "GALAXY",
+    "6": "STAR",
+    "reference": "SDSS SkyServer PhotoObj/PhotoType convention"
+  },
+  "status": "COMPLETE",
+  "summary": {
+    "galaxy_classifications": [
+      "EDEM_OPTICAL_SDSS_PS1"
+    ],
+    "high_confidence_galactic_stars": [
+      "EDEM_GAIA_WISE_SDSS_PS1",
+      "LOVE_GAIA_WISE_2MASS"
+    ],
+    "infrared_unclassified": [
+      "EDEM_NEAREST_WISE_ONLY",
+      "LOVE_NEAREST_WISE_ONLY"
+    ]
+  }
+}
