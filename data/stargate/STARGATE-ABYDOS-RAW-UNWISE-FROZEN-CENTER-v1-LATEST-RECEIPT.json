@@ -1,0 +1,63 @@
+{
+  "anomaly_scoring_used": false,
+  "data_source": {
+    "bands": [
+      "W1",
+      "W2"
+    ],
+    "service": "unWISE cutout_fits",
+    "url": "https://unwise.me/cutout_fits?version=neo2&ra=223.415064157000&dec=33.979315670000&size=64&bands=12&file_img_m=on&file_invvar_m=on",
+    "version": "neo2"
+  },
+  "experiment_id": "STARGATE-ABYDOS-RAW-UNWISE-FROZEN-CENTER-v1",
+  "firewall": {
+    "claim_ceiling": "RAW_COADD_BRIGHTNESS_EXCESS_AT_EXACT_FROZEN_COORDINATE_WITHOUT_SOURCE_IDENTITY",
+    "coadd_inverse_variance_z_is_diagnostic_not_primary": true,
+    "nearby_8p54arcsec_source_blending_unresolved": true,
+    "raw_coadd_excess_is_anomaly": false,
+    "raw_coadd_excess_is_independent_centered_source": false,
+    "raw_coadd_excess_is_planet": false,
+    "raw_coadd_excess_is_real_Abydos": false
+  },
+  "frozen_target": {
+    "dec_deg": 33.97931567,
+    "frame": "ICRS",
+    "ra_deg": 223.415064157
+  },
+  "known_nearest_catalogued_ir_group_arcsec": 8.537689265953338,
+  "measurements": [],
+  "mode": "RAW_COADD_BRIGHTNESS_AT_EXACT_FROZEN_COORDINATE",
+  "next_gate": "PSF_DEBLEND_FROZEN_CENTER_VS_KNOWN_8P54ARCSEC_IR_NEIGHBOR_IF_RAW_EXCESS_PRESENT",
+  "run_time_utc": "2026-08-19T23:15:10.213415+00:00",
+  "schema": "janus.cosmos.stargate_abydos.raw_unwise_center.receipt.v1",
+  "service_errors": [
+    {
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='unwise.me', port=443): Max retries exceeded with url: /cutout_fits?version=neo2&ra=223.415064157000&dec=33.979315670000&size=64&bands=12&file_img_m=on&file_invvar_m=on (Caused by ConnectTimeoutError(<HTTPSConnection(host='unwise.me', port=443) at 0x7fdf12931970>, 'Connection to unwise.me timed out. (connect timeout=180)'))",
+      "service": "unWISE cutout_fits"
+    }
+  ],
+  "status": "INCONCLUSIVE",
+  "summary": {
+    "per_band": {
+      "W1": {
+        "max_primary_empirical_z": null,
+        "measurement_count": 0,
+        "median_primary_empirical_z": null,
+        "min_primary_empirical_z": null
+      },
+      "W2": {
+        "max_primary_empirical_z": null,
+        "measurement_count": 0,
+        "median_primary_empirical_z": null,
+        "min_primary_empirical_z": null
+      }
+    },
+    "plain_en": "Raw unWISE gate did not recover usable W1 and W2 coadd measurements for the exact frozen coordinate.",
+    "thresholds": {
+      "strong_requires_both_bands": true,
+      "strong_sigma": 5.0,
+      "weak_sigma": 3.0
+    },
+    "verdict": "INCONCLUSIVE_RAW_COADD_GATE"
+  }
+}
