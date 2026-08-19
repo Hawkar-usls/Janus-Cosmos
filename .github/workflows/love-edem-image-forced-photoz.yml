@@ -51,8 +51,20 @@ jobs:
       - name: Persist receipt to Janus-Cosmos
         if: success()
         run: |
+          set -euo pipefail
+          RECEIPT="data/love/IMAGE_LEVEL_FORCED_PHOTOMETRY_AND_EDEM_GALAXY_PHOTOZ-v1-LATEST-RECEIPT.json"
+          cp "$RECEIPT" /tmp/janus-image-photoz-receipt.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/love/IMAGE_LEVEL_FORCED_PHOTOMETRY_AND_EDEM_GALAXY_PHOTOZ-v1-LATEST-RECEIPT.json
-          git commit -m "cosmos: freeze image-level forced photometry photo-z run ${{ github.run_number }}"
-          git push
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/janus-image-photoz-receipt.json "$RECEIPT"
+            git add "$RECEIPT"
+            git commit -m "cosmos: freeze image-level forced photometry photo-z run ${{ github.run_number }}"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "push race on attempt $attempt; retrying against latest main"
+          done
+          exit 1
