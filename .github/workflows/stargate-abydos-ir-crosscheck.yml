@@ -1,0 +1,58 @@
+name: Stargate Abydos Frozen Coordinate IR Crosscheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/stargate-abydos-ir-crosscheck.yml"
+      - "workspace/stargate_abydos_ir_crosscheck.py"
+      - "data/stargate/STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-GATE-v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install astronomy dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "astropy>=7.0" "astroquery>=0.4.11"
+
+      - name: Run frozen-coordinate IR crosscheck
+        run: |
+          python workspace/stargate_abydos_ir_crosscheck.py
+
+      - name: Show receipt
+        if: always()
+        run: |
+          cat data/stargate/STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1-LATEST-RECEIPT.json || true
+
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stargate-abydos-ir-crosscheck-${{ github.run_number }}
+          path: data/stargate/STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1-LATEST-RECEIPT.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Persist receipt to Janus-Cosmos
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stargate/STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze Stargate Abydos IR crosscheck run ${{ github.run_number }}"
+          git push
