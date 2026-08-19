@@ -279,22 +279,81 @@ def verify_target(name: str, center: SkyCoord) -> dict[str, Any]:
     }
 
 
+def _service_failures(targets: dict[str, Any]) -> list[dict[str, Any]]:
+    failures: list[dict[str, Any]] = []
+    for name, item in targets.items():
+        for catalog in item["vizier_inventory"]["catalogs"]:
+            if catalog["status"] != "OK":
+                failures.append({"target": name, "service": catalog["catalog"], "status": catalog["status"], "error": catalog.get("error")})
+        if item["simbad"]["status"] != "OK":
+            failures.append({"target": name, "service": "SIMBAD", "status": item["simbad"]["status"], "error": item["simbad"].get("error")})
+        if item["mast_hst_6arcmin"]["status"] != "OK":
+            failures.append({"target": name, "service": "MAST_HST", "status": item["mast_hst_6arcmin"]["status"], "error": item["mast_hst_6arcmin"].get("error")})
+    return failures
+
+
+def _compact_summary(payload: dict[str, Any]) -> dict[str, Any]:
+    targets: dict[str, Any] = {}
+    for name, item in payload["targets"].items():
+        detections = item["vizier_inventory"]["detections"]
+        groups = item["source_groups_1p5arcsec"]["groups"]
+        targets[name] = {
+            "center": item["center"],
+            "catalog_counts": {
+                c["catalog"]: {"status": c["status"], "count": c["count"], "nearest": c.get("nearest")}
+                for c in item["vizier_inventory"]["catalogs"]
+            },
+            "catalog_detection_count": len(detections),
+            "nearest_catalog_detection": detections[0] if detections else None,
+            "source_group_count": len(groups),
+            "multi_independent_root_group_count": item["source_groups_1p5arcsec"]["multi_independent_root_group_count"],
+            "nearest_five_source_groups": groups[:5],
+            "strongest_multi_root_groups": sorted(
+                [g for g in groups if g["independent_root_count"] >= 2],
+                key=lambda g: (-g["independent_root_count"], g["nearest_to_search_center_arcsec"]),
+            )[:5],
+            "simbad": {
+                "status": item["simbad"]["status"],
+                "count": item["simbad"]["count"],
+                "nearest_objects": item["simbad"]["objects"][:10],
+            },
+            "mast_hst_6arcmin": item["mast_hst_6arcmin"],
+            "plain_status": "CATALOG_SOURCES_PRESENT" if detections else "NO_CATALOG_SOURCES_WITHIN_FROZEN_RADIUS",
+        }
+    return {
+        "schema": "janus.cosmos.love_edem.catalog_crosscheck.summary.v1",
+        "experiment_id": payload["experiment_id"],
+        "run_time_utc": payload["run_time_utc"],
+        "status": payload["status"],
+        "mode": payload["mode"],
+        "anomaly_scoring_used": payload["anomaly_scoring_used"],
+        "search_radius_arcsec": payload["search_radius_arcsec"],
+        "cluster_threshold_arcsec": payload["cluster_threshold_arcsec"],
+        "service_failures": payload["service_failures"],
+        "targets": targets,
+        "claim_ceiling": payload["interpretation_contract"]["claim_ceiling"],
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="JANUS-Cosmos catalog-only WHAT_IS_AT_THESE_COORDINATES verifier for LOVE/EDEM.")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
+    targets = {name: verify_target(name, center) for name, center in TARGETS.items()}
+    failures = _service_failures(targets)
     payload = {
         "schema": "janus.cosmos.love_edem.catalog_crosscheck.receipt.v1",
         "experiment_id": "LOVE-EDEM-CATALOG-CROSSCHECK-v1",
         "run_time_utc": datetime.now(timezone.utc).isoformat(),
-        "status": "COMPLETE",
+        "status": "COMPLETE" if not failures else "PARTIAL_SERVICE_FAILURE",
         "mode": "WHAT_IS_AT_THESE_COORDINATES",
         "anomaly_scoring_used": False,
         "anomaly_gate_required": False,
         "search_radius_arcsec": 30.0,
         "cluster_threshold_arcsec": 1.5,
-        "targets": {name: verify_target(name, center) for name, center in TARGETS.items()},
+        "targets": targets,
+        "service_failures": failures,
         "interpretation_contract": {
             "catalog_detection_means_cataloged_source_near_direction": True,
             "catalog_detection_is_not_anomaly": True,
@@ -313,9 +372,19 @@ def main() -> None:
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    summary = _compact_summary(payload)
+    if args.output.name.endswith("-RECEIPT.json"):
+        summary_name = args.output.name[:-len("-RECEIPT.json")] + "-SUMMARY.json"
+    else:
+        summary_name = args.output.stem + "-SUMMARY.json"
+    summary_path = args.output.with_name(summary_name)
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
     print(json.dumps({
         "status": payload["status"],
         "output": str(args.output),
+        "summary_output": str(summary_path),
         "summary": {
             name: {
                 "catalog_detections": len(item["vizier_inventory"]["detections"]),
