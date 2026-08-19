@@ -35,15 +35,24 @@ jobs:
             experiments/direct/s_phallus_h_gate_1_k2_ribbon_decomposition.py \
             experiments/direct/s_phallus_h_gate_2_bounded_k_scaling_holdout.py \
             experiments/direct/s_phallus_h_gate_2_bounded_k_scaling_holdout_budget_guard.py \
+            workspace/osiris_spiral_runtime.py \
+            workspace/osiris_spiral_runtime_strict.py \
             run_osiris.py
-      - name: Execute frozen S𓂸ḥ/2 self-test
-        run: python run_osiris.py
-      - name: Enforce claim ceiling
+      - name: Re-run frozen S𓂸ḥ/2 legacy baseline
+        run: python run_osiris.py --legacy > legacy-s2.json
+      - name: Execute canonical ORIGIN_PRIME spiral self-test
+        run: python run_osiris.py > spiral-v3.json
+      - name: Enforce canonical spiral status and claim ceiling
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+          r=json.loads(Path('spiral-v3.json').read_text(encoding='utf-8'))
           d=json.loads(Path('PROJECT_STATUS.json').read_text(encoding='utf-8'))
+          assert r['status']=='PASS_KEEP_OSIRIS_V3_ORIGIN_PRIME_SPIRAL_COMPUTE'
+          assert all(r['gates'].values())
+          assert d['canonical_gate']=='OSIRIS_V3_ORIGIN_PRIME_SPIRAL_COMPUTE'
+          assert d['canonical_result_integrity_sha256']==r['integrity_sha256']
           assert d['P_VS_NP']=='OPEN'
           assert d['P_EQUALS_NP']=='NOT_ESTABLISHED'
           assert d['P_NOT_EQUALS_NP']=='NOT_ESTABLISHED'
