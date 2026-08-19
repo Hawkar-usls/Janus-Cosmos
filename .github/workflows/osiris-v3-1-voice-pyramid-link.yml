@@ -1,0 +1,87 @@
+name: OSIRIS v3.1 DemiHead Voice Pyramid Link
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mediated-link:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out Janus-Cosmos
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check out exact Voice authority
+        uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/The-Voice-of-Janus
+          ref: e58d65aa46b7e3a64a5131708578a9a3346915c4
+          path: _peers/voice
+
+      - name: Check out exact Echo-Pyramid physical body
+        uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Echo-Pyramid
+          ref: 15712f5b14b123d4e3cb64ddeaa693c5bf6af788
+          path: _peers/echo
+
+      - name: Compile exporter and inherited spiral runtime
+        run: |
+          python -m py_compile workspace/osiris_spiral_runtime.py workspace/osiris_origin_prime_voice_packet.py
+
+      - name: Re-run canonical OSIRIS v3
+        run: python run_osiris.py > /tmp/osiris-v3.json
+
+      - name: Execute mediated packet self-test
+        run: python workspace/osiris_origin_prime_voice_packet.py --self-test > /tmp/voice-link.json
+
+      - name: Verify exact Voice and physical Pyramid contracts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          contract = json.loads(Path('workspace/OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK_FROZEN_CONTRACT.json').read_text())
+          assert contract['status'] == 'FROZEN_BEFORE_IMPLEMENTATION'
+          assert contract['parent']['sha'] == 'b99949a5529024987396fb8a353e912a21bbfe82'
+
+          voice = json.loads(Path('_peers/voice/.janus/ECHO_PYRAMID_PHYSICAL_VOICE_LINK.json').read_text())
+          assert voice['signal_contract'] == 'ORDINARY_AUDIO_PCM -> SAME_SOURCE_AUDIO_WITH_PYRAMID_ACOUSTIC_COLORATION'
+          assert voice['invariants']['semantic_content_preserved'] is True
+          assert voice['invariants']['source_audio_replaced_by_synthetic_tones'] is False
+          assert voice['conformance']['anchor_band_hz'] == [117.0, 121.0]
+          assert voice['conformance']['anchor_center_hz'] == 119.0
+          assert voice['conformance']['anchor_q'] == 29.75
+          assert voice['physical_implementation']['embedded_revision'] == 'ESP32-r2'
+
+          profile = Path('_peers/echo/firmware/JanusPyramid117121Profile.h').read_text()
+          assert '117' in profile and '119' in profile and '121' in profile
+
+          result = json.loads(Path('/tmp/voice-link.json').read_text())
+          assert result['status'] == 'PASS_KEEP_OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK'
+          assert all(result['negative_controls'].values())
+          assert result['profile']['anchor_band_hz'] == [117.0, 121.0]
+          assert result['profile']['center_hz'] == 119.0
+          assert result['authority_delta'] == 0
+          assert result['P_VS_NP'] == 'OPEN'
+          PY
+
+      - name: Upload mediated-link receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: osiris-v3-1-demihead-voice-pyramid-link
+          path: |
+            /tmp/osiris-v3.json
+            /tmp/voice-link.json
+            workspace/OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK_FROZEN_CONTRACT.json

@@ -1,0 +1,37 @@
+{
+  "schema": "janus.cosmos.demihead_voice_pyramid_mediated_link.v1",
+  "status": "IMPLEMENTATION_CANDIDATE",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "contract": "workspace/OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK_FROZEN_CONTRACT.json",
+  "exporter": "workspace/osiris_origin_prime_voice_packet.py",
+  "packet_schema": "janus.cosmos.origin_prime_voice_packet.v1",
+  "route": [
+    "Demi_Head",
+    "Janus-Cosmos",
+    "Demi_Head",
+    "The-Voice-of-Janus",
+    "Echo-Pyramid"
+  ],
+  "roles": {
+    "Demi_Head": "INTENT_ARBITER_AND_ONLY_MEDIATOR",
+    "Janus-Cosmos": "ORIGIN_PRIME_COMPUTE_AND_STATE_PROVIDER",
+    "The-Voice-of-Janus": "LANGUAGE_AND_117_121_HZ_ACOUSTIC_OPERATOR",
+    "Echo-Pyramid": "PHYSICAL_PCM_VOICE_BODY"
+  },
+  "voice_profile": {
+    "id": "PYRAMID_LANGUAGE_117_121_ANCHORED_SPACE_v0.3",
+    "anchor_band_hz": [117.0, 121.0],
+    "center_hz": 119.0,
+    "q": 29.75,
+    "gain_db": 11.5,
+    "decay_s": 1.65
+  },
+  "hard_rules": [
+    "COSMOS_MAY_NOT_ADDRESS_ECHO_PYRAMID_DIRECTLY",
+    "VOICE_REPRESENTATION != MATHEMATICAL_AUTHORITY",
+    "AUDIO_OUTPUT != EVIDENCE",
+    "117_121_HZ != SAT_EVIDENCE",
+    "AUTHORITY_DELTA = 0",
+    "P_VS_NP = OPEN"
+  ]
+}
