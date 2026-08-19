@@ -1,0 +1,63 @@
+name: OSIRIS v3.1 Resonant Debug
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect transfer and target validation
+        run: |
+          python - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, 'workspace')
+          import osiris_spiral_runtime as s
+          import osiris_resonant_lineage as r
+
+          contract, _ = s.load_frozen_inputs()
+          specs = {row['id']: row for row in contract['frozen_fixtures']}
+          source = s.fixture_formula(specs['SPIRAL_K4_SAT'])
+          mapping = {v: v + 100 for v in r._vars(source)}
+          target = r.remap_formula(source, mapping)
+          cert = r.build_variable_renaming_certificate(source, target, mapping)
+          with tempfile.TemporaryDirectory() as td:
+              p = Path(td) / 'state.json'
+              first = s.solve_spiral(source, 50000, p)
+              before = json.loads(p.read_text())
+              source_key = s.experience_key(s.cnf_hash(source), 50000)
+              source_exp = before['experiences'][source_key]
+              transfer = r.propose_lineage_experience(p, target, 50000, cert)
+              proposed = json.loads(p.read_text())
+              target_key = s.experience_key(s.cnf_hash(target), 50000)
+              target_exp = proposed['experiences'][target_key]
+              valid, reason, details = s.validate_experience_for_formula(target_exp, target, 50000)
+              second = s.solve_spiral(target, 50000, p)
+              print(json.dumps({
+                  'first_status': first.get('status'),
+                  'source_prior_status': source_exp.get('prior_status'),
+                  'source_has_assignment': source_exp.get('sat_assignment') is not None,
+                  'source_has_separator': bool(source_exp.get('separator')),
+                  'transfer': transfer,
+                  'target_prior_status': target_exp.get('prior_status'),
+                  'target_has_assignment': target_exp.get('sat_assignment') is not None,
+                  'target_has_separator': bool(target_exp.get('separator')),
+                  'target_validation': {'valid': valid, 'reason': reason, 'details': details},
+                  'second_reuse_mode': second['technical']['spiral']['reuse_mode'],
+                  'second_memory': second['memory'],
+                  'second_spiral': second['technical']['spiral'],
+              }, indent=2, sort_keys=True))
+          PY
