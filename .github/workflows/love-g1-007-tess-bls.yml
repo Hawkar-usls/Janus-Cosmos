@@ -1,0 +1,67 @@
+name: LOVE G1-007 TESS BLS Search
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LAVE_TO_LOVE_TESS_BLS_PREREG.json'
+      - 'janus_cosmos/love_tess_bls.py'
+      - '.github/workflows/love-g1-007-tess-bls.yml'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LAVE_TO_LOVE_TESS_BLS_PREREG.json'
+      - 'janus_cosmos/love_tess_bls.py'
+      - '.github/workflows/love-g1-007-tess-bls.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  blind-tess-bisector-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile TESS BLS gate
+        run: python -m py_compile janus_cosmos/love_tess_bls.py
+      - name: Download real TESS lightcurves and run blind BLS
+        run: >-
+          python -u -m janus_cosmos.love_tess_bls
+          --prereg data/love/LAVE_TO_LOVE_TESS_BLS_PREREG.json
+          --output-dir results/love_tess_bls
+      - name: Enforce sealed LOVE gate
+        run: |
+          python - <<'PY'
+          import json
+          p='results/love_tess_bls/love-tess-bls-result.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['blind_identity_firewall']['name_is_hidden_from_signal_scoring'] is True
+          assert d['love_gate']['candidate_activated'] is False
+          assert d['claim_ceiling'].startswith('BLIND_TESS_TRANSIT_SCREEN_ONLY')
+          print('LOVE TESS BLS FIREWALL PASS')
+          print('Frozen sources:', d['frozen_source_count'])
+          print('Repeat watchlist:', d['watchlist_count'], d['watchlist_blind_labels'])
+          for s in d['sources']:
+              print(s['blind_label'], 'sectors=', s['distinct_sector_count'], 'watch=', s['tess_repeat_watchlist'], 'known=', s['known_planet_control']['matched_planets'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-g1-007-tess-bls-real-data
+          path: results/love_tess_bls/
+          if-no-files-found: warn
+          retention-days: 14
