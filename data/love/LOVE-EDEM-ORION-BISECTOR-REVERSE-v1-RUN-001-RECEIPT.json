@@ -1,0 +1,122 @@
+{
+  "schema": "janus.cosmos.love_edem.orion_bisector_reverse.receipt.v1",
+  "experiment_id": "LOVE-EDEM-ORION-BISECTOR-REVERSE-v1",
+  "run_id": "MANUAL_DETERMINISTIC_REVERSE_2026-08-20",
+  "status": "COMPLETE",
+  "mode": "REVERSE_ONLY_TRANCEPTION_SIX_DIRECTION_GEOMETRY_PASS",
+  "anomaly_scoring_used": false,
+  "extends": [
+    "data/love/LOVE-EDEM-ORION-BELT-ICRS-GEOMETRY-v1-RUN-001-RECEIPT.json",
+    "janus-meta-registry/data/JANUS-OSIRIS-REVERSE-ONLY-TRANCEPTION-SIX-DIRECTION-PASS-2026-08-18-v1.0.json"
+  ],
+  "method_binding": {
+    "reverse_is_outer_direction": true,
+    "sequence": ["BACK", "FORWARD", "LEFT", "RIGHT", "FORWARD_AGAIN", "BACK_AGAIN"],
+    "operator_boundary": "JANUS research operator derived from the stored Reverse/Tranception method; not a claim of physical time reversal."
+  },
+  "inputs": {
+    "frame": "ICRS",
+    "LOVE": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+    "EDEM": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+    "orion_belt": {
+      "Mintaka_delta_Ori": {"ra_deg": 83.00166704166666, "dec_deg": -0.2990951111111111},
+      "Alnilam_epsilon_Ori": {"ra_deg": 84.05338895833333, "dec_deg": -1.2019191388888888},
+      "Alnitak_zeta_Ori": {"ra_deg": 85.18969441666667, "dec_deg": -1.9425735833333333}
+    }
+  },
+  "derived_geometry": {
+    "love_edem_separation_deg": 90.58678828902669,
+    "internal_bisector": {
+      "ra_deg": 170.38390326101873,
+      "dec_deg": -3.8654180644718967,
+      "separation_to_LOVE_deg": 45.293394144513336,
+      "separation_to_EDEM_deg": 45.293394144513336,
+      "half_angle_deg": 45.293394144513344
+    },
+    "orion_belt_centroid": {"ra_deg": 84.08137638816612, "dec_deg": -1.1480040013137136},
+    "bisector_to_orion_belt_centroid_deg": 86.23414186911207,
+    "bisector_cross_track_to_orion_belt_great_circle_deg": 33.05442290238276,
+    "LOVE_cross_track_to_orion_belt_great_circle_deg": 3.963705383222261,
+    "EDEM_cross_track_to_orion_belt_great_circle_deg": 56.77514367024879
+  },
+  "analytic_null_baselines": {
+    "random_direction_within_0.586788289_deg_of_90_deg_from_fixed_LOVE_fraction": 0.010241208626865013,
+    "random_direction_within_3.963705383_deg_of_fixed_great_circle_fraction": 0.06912454230529178,
+    "warning": "These are separate analytic baselines. Do not multiply them into a composite p-value: the pattern was inspected post hoc and independence/preregistration are absent."
+  },
+  "reverse_pass": [
+    {
+      "step": 1,
+      "direction": "BACK",
+      "operator": "REMOVE_SEMANTIC_LABELS",
+      "result": "The input reduces to five fixed sky directions plus deterministic spherical operations. No semantic name is needed to reproduce the geometry."
+    },
+    {
+      "step": 2,
+      "direction": "FORWARD",
+      "operator": "RECONSTRUCT_FROM_FROZEN_COORDINATES",
+      "result": {
+        "LOVE_EDEM_near_right_angle": true,
+        "separation_deg": 90.58678828902669,
+        "bisector_equal_split_deg": [45.293394144513336, 45.293394144513336],
+        "LOVE_near_orion_belt_great_circle": true,
+        "EDEM_near_orion_belt_great_circle": false
+      }
+    },
+    {
+      "step": 3,
+      "direction": "LEFT",
+      "operator": "HOMOLOG_AND_TAUTOLOGY_CONTROL",
+      "result": "Every non-antipodal pair of directions has an internal angular bisector. Therefore the exact 45.293394/45.293394 degree equality is a mathematical consequence of the LOVE-EDEM angle and is NOT an independent astronomical signal."
+    },
+    {
+      "step": 4,
+      "direction": "RIGHT",
+      "operator": "MIRROR_ORIENTATION_CONTROL",
+      "result": {
+        "orion_is_the_LOVE_EDEM_bisector": false,
+        "bisector_to_orion_centroid_deg": 86.23414186911207,
+        "bisector_cross_track_to_orion_great_circle_deg": 33.05442290238276,
+        "interpretation": "The Orion-to-LOVE great-circle relation and the LOVE-to-EDEM near-right-angle/bisector relation are geometrically distinct."
+      }
+    },
+    {
+      "step": 5,
+      "direction": "FORWARD_AGAIN",
+      "operator": "REBUILD_ONLY_WHAT_SURVIVES_CONTROLS",
+      "result": "Two bounded geometric statements survive: LOVE lies relatively near the Orion Belt fitted great circle; LOVE and EDEM are separated by about 90.59 degrees. The bisector is a useful derived axis, but it does not connect the Orion Belt to the pair."
+    },
+    {
+      "step": 6,
+      "direction": "BACK_AGAIN",
+      "operator": "GAP_SPLIT",
+      "result": "Split measured coordinate geometry from statistical rarity and from physical/intentional association."
+    }
+  ],
+  "gap_split": {
+    "GAP_A_MEASURED_GEOMETRY": {
+      "status": "STRONGLY_ESTABLISHED_DETERMINISTICALLY",
+      "includes": ["LOVE_EDEM_ANGLE", "INTERNAL_BISECTOR", "ORION_BELT_GREAT_CIRCLE_CROSS_TRACKS"]
+    },
+    "GAP_B_STATISTICAL_RARITY": {
+      "status": "OPEN",
+      "reason": "The composite pattern was identified post hoc. A preregistered isotropic/matched-sky control is required before assigning a composite significance."
+    },
+    "GAP_C_PHYSICAL_OR_INTENTIONAL_ASSOCIATION": {
+      "status": "NOT_ESTABLISHED",
+      "reason": "Coordinate geometry alone does not establish a common physical system, causal relation, design, or intentional alignment."
+    }
+  },
+  "canonical_conclusion_ru": "Реверс не усилил мистическую трактовку. Он разделил две реальные геометрии: Пояс Ориона проходит рядом с направлением LOVE, а LOVE и EDEM образуют почти прямой угол. Биссектриса честно делит этот угол пополам, но сама с Поясом Ориона не совпадает.",
+  "firewall": {
+    "bisector_equality_is_independent_signal": false,
+    "orion_is_bisector": false,
+    "coordinate_geometry_is_physical_association": false,
+    "statistical_significance_claimed": false,
+    "love_candidate_activated": false,
+    "edem_identity_confirmed": false,
+    "physical_reverse_time_claimed": false,
+    "claim_ceiling": "SPHERICAL_COORDINATE_GEOMETRY_ONLY"
+  },
+  "next_gate": "PREREGISTERED_ISOTROPIC_AND_MATCHED_SKY_CONTROL_FOR_COMPOSITE_GEOMETRY"
+}
