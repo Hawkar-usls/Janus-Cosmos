@@ -1,0 +1,192 @@
+{
+  "anomaly_scoring_used": false,
+  "deep_sources": {
+    "EDEM_NEAREST_WISE_ONLY": {
+      "allwise_anchor": "J091653.98+301546.0",
+      "catwise_motion_test": {
+        "interpretation": "motion candidate only; CatWISE motion alone is not promoted to a stellar identity in this gate",
+        "pm_quality": "2N000",
+        "pmdec_arcsec_per_year": -0.08151,
+        "pmdec_error_arcsec_per_year": 0.113,
+        "pmra_arcsec_per_year": -0.01332,
+        "pmra_error_arcsec_per_year": 0.0996,
+        "significant_at_frozen_5sigma_gate": false,
+        "vector_significance_sigma": 0.7336199974218051
+      },
+      "deep_ir_match_catalogs": [
+        "CATWISE2020"
+      ],
+      "optical_match_catalogs": [],
+      "queries": {
+        "CATWISE2020": {
+          "catalog_id": "II/365/catwise",
+          "count": 1,
+          "nearest": {
+            "dec_deg": 30.2624753,
+            "features": {
+              "Name": "J091653.88+301544.9",
+              "W1mproPM": 17.50200080871582,
+              "W2mproPM": 17.88599967956543,
+              "abf": "00",
+              "e_pmDE": 0.113,
+              "e_pmRA": 0.0996,
+              "pmDE": -0.08151,
+              "pmQual": "2N000",
+              "pmRA": -0.01332,
+              "snrW1pm": 13.300000190734863,
+              "snrW2pm": 2.799999952316284
+            },
+            "ra_deg": 139.2245026,
+            "separation_arcsec": 1.7911872730621519
+          },
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "catalog_id": "II/349/ps1",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        },
+        "UNWISE": {
+          "catalog_id": "II/363/unwise",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        }
+      },
+      "representative_icrs": {
+        "dec_deg": 30.262781,
+        "ra_deg": 139.2249571
+      },
+      "result": {
+        "confidence": "LOW_MEDIUM",
+        "nature_gate": "DEEP_COUNTERPART_INCONCLUSIVE",
+        "plain_ru": "Глубокий проход не дал достаточного нового counterpart для более узкой классификации."
+      }
+    },
+    "LOVE_NEAREST_WISE_ONLY": {
+      "allwise_anchor": "J133711.05-364649.7",
+      "catwise_motion_test": null,
+      "deep_ir_match_catalogs": [],
+      "optical_match_catalogs": [],
+      "queries": {
+        "CATWISE2020": {
+          "catalog_id": "II/365/catwise",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        },
+        "DES_DR2": {
+          "catalog_id": "II/371/des_dr2",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        },
+        "SKYMAPPER_DR4": {
+          "catalog_id": "II/379/smssdr4",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        },
+        "UNWISE": {
+          "catalog_id": "II/363/unwise",
+          "count": 0,
+          "nearest": null,
+          "radius_arcsec": 2.0,
+          "status": "OK"
+        }
+      },
+      "representative_icrs": {
+        "dec_deg": -36.7804774,
+        "ra_deg": 204.2960668
+      },
+      "result": {
+        "confidence": "LOW_MEDIUM",
+        "nature_gate": "DEEP_COUNTERPART_INCONCLUSIVE",
+        "plain_ru": "Глубокий проход не дал достаточного нового counterpart для более узкой классификации."
+      }
+    }
+  },
+  "edem_optical_galaxy_redshift": {
+    "accepted_redshifts": [],
+    "plain_ru": "Морфологическая классификация галактики сохраняется, но качественный спектроскопический redshift в SDSS DR16/DESI DR1 в этом проходе не найден.",
+    "queries": {
+      "DESI_DR1": {
+        "catalog_id": "V/161/zcatdr1",
+        "count": 0,
+        "nearest": null,
+        "radius_arcsec": 2.0,
+        "status": "OK"
+      },
+      "SDSS_DR16": {
+        "catalog_id": "V/154/sdss16",
+        "count": 1,
+        "nearest": {
+          "dec_deg": 30.256918,
+          "features": {
+            "class": 3,
+            "e_zsp": null,
+            "f_zsp": null,
+            "gmag": 23.04800033569336,
+            "imag": 20.892000198364258,
+            "objID": 1237664320537363072,
+            "rmag": 22.636999130249023,
+            "umag": 25.631999969482422,
+            "zmag": 19.983999252319336,
+            "zsp": null
+          },
+          "ra_deg": 139.222681,
+          "separation_arcsec": 0.0
+        },
+        "radius_arcsec": 2.0,
+        "status": "OK"
+      }
+    },
+    "redshift_candidates": [],
+    "representative_icrs": {
+      "dec_deg": 30.256918,
+      "ra_deg": 139.222681
+    },
+    "result": "NO_ACCEPTED_SPECTROSCOPIC_REDSHIFT_IN_SDSS_DR16_OR_DESI_DR1"
+  },
+  "experiment_id": "LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1",
+  "firewall": {
+    "catwise_motion_candidate_is_not_automatic_star": true,
+    "claim_ceiling": "DEEP_CATALOG_COUNTERPART_AND_SPECTROSCOPIC_REDSHIFT_CHECK_ONLY",
+    "deep_ir_persistence_is_not_anomaly": true,
+    "deep_ir_persistence_is_not_planet": true,
+    "near_source_is_not_semantic_LOVE_or_EDEM_identity": true,
+    "physical_LOVE_EDEM_ORION_association_not_established": true
+  },
+  "frozen_rules": {
+    "catwise_motion_alone_does_not_establish_stellar_identity": true,
+    "catwise_motion_significance_gate_sigma": 5.0,
+    "counterpart_radius_arcsec": 2.0,
+    "no_post_hoc_threshold_changes": true,
+    "spectroscopic_redshift_acceptance": "non-null z and warning bitmask == 0 (or absent in mirror row)"
+  },
+  "mode": "DEEP_COUNTERPART_AND_REDSHIFT_WITHOUT_ANOMALY_SCORING",
+  "provenance": {
+    "catalog_frontend": "CDS VizieR via astroquery.vizier",
+    "catalogs": {
+      "CATWISE2020": "II/365/catwise",
+      "DESI_DR1": "V/161/zcatdr1",
+      "DES_DR2": "II/371/des_dr2",
+      "PANSTARRS_DR1": "II/349/ps1",
+      "SDSS_DR16": "V/154/sdss16",
+      "SKYMAPPER_DR4": "II/379/smssdr4",
+      "UNWISE": "II/363/unwise"
+    },
+    "cosmology_if_redshift_available": "Astropy Planck18"
+  },
+  "run_time_utc": "2026-08-19T23:02:32.882015+00:00",
+  "schema": "janus.cosmos.love_edem.deep_counterpart_redshift.receipt.v1",
+  "service_failures": [],
+  "status": "COMPLETE"
+}
