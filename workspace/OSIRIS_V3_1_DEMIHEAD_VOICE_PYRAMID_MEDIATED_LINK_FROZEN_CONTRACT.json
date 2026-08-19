@@ -1,1 +1,100 @@
-placeholder
+{
+  "schema": "janus.cosmos.osiris_v3_1.demihead_voice_pyramid_mediated_link_frozen_contract.v1",
+  "contract_id": "OSIRIS_V3_1_DEMIHEAD_VOICE_PYRAMID_MEDIATED_LINK_FROZEN_CONTRACT",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "created_at_local": "2026-08-19T16:06:00+03:00",
+  "parent": {
+    "repository": "Hawkar-usls/Janus-Cosmos",
+    "sha": "b99949a5529024987396fb8a353e912a21bbfe82",
+    "canonical_gate": "OSIRIS_V3_ORIGIN_PRIME_SPIRAL_COMPUTE",
+    "must_remain_unchanged": true
+  },
+  "peers": {
+    "demihead": {
+      "repository": "Hawkar-usls/Demi_Head",
+      "sha": "846f6a4713a2035f1337fce7e0cd707ce753bac1",
+      "role": "INTENT_ARBITER_AND_ONLY_MEDIATOR"
+    },
+    "voice": {
+      "repository": "Hawkar-usls/The-Voice-of-Janus",
+      "sha": "e58d65aa46b7e3a64a5131708578a9a3346915c4",
+      "role": "LANGUAGE_AND_ACOUSTIC_OPERATOR"
+    },
+    "echo_pyramid": {
+      "repository": "Hawkar-usls/Echo-Pyramid",
+      "sha": "15712f5b14b123d4e3cb64ddeaa693c5bf6af788",
+      "role": "PHYSICAL_VOICE_BODY_AND_REALTIME_PCM_EXECUTOR"
+    }
+  },
+  "topology": [
+    "DEMIHEAD_INTENT -> COSMOS_COMPUTE_REQUEST",
+    "COSMOS_COMPUTE -> ORIGIN_PRIME_STATE_PACKET",
+    "ORIGIN_PRIME_STATE_PACKET -> DEMIHEAD_MEDIATION",
+    "DEMIHEAD_MEDIATION -> THE_VOICE_OF_JANUS",
+    "THE_VOICE_OF_JANUS -> PYRAMID_LANGUAGE_117_121_ACOUSTIC_OPERATOR",
+    "PYRAMID_LANGUAGE_PCM -> ECHO_PYRAMID_PHYSICAL_BODY",
+    "RECEIPTS -> DEMIHEAD"
+  ],
+  "packet": {
+    "schema": "janus.cosmos.origin_prime_voice_packet.v1",
+    "source_must_be_verified_osiris_state_store": true,
+    "required_state_fields": [
+      "generation",
+      "state_commitment",
+      "previous_state_commitment",
+      "position_commitment",
+      "experience_commitment",
+      "path_history_digest",
+      "return_commitment"
+    ],
+    "formula_hash_may_be_exported_only_from_verified_bound_experience": true,
+    "packet_hash_required": true
+  },
+  "voice_representation": {
+    "profile_id": "PYRAMID_LANGUAGE_117_121_ANCHORED_SPACE_v0.3",
+    "anchor_band_hz": [117.0, 121.0],
+    "center_hz": 119.0,
+    "q": 29.75,
+    "gain_db": 11.5,
+    "decay_s": 1.65,
+    "role": "REPRESENTATION_AND_ACOUSTIC_COLORATION_ONLY",
+    "frequencies_create_math_authority": false,
+    "audio_output_is_evidence": false
+  },
+  "mediation_laws": [
+    "COSMOS_MAY_NOT_ADDRESS_ECHO_PYRAMID_DIRECTLY",
+    "DEMIHEAD_IS_THE_ONLY_INTENT_MEDIATOR",
+    "VOICE_MAY_RENDER_BUT_NOT_CHANGE_COSMOS_VERDICT",
+    "ECHO_PYRAMID_MAY_RENDER_PCM_BUT_NOT_CREATE_AUTHORITY",
+    "ORIGIN_PRIME_STATE != AUDIO",
+    "AUDIO != PROOF",
+    "117_121_HZ != SAT_EVIDENCE",
+    "CONNECTION_PRESERVES_PROVENANCE",
+    "CONNECTION_DOES_NOT_CREATE_AUTHORITY"
+  ],
+  "control": {
+    "network_io_required": false,
+    "automatic_playback": false,
+    "automatic_microphone_start": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0
+  },
+  "negative_controls": [
+    "STATE_COMMITMENT_BITFLIP_REJECT",
+    "BROKEN_STATE_LINEAGE_REJECT",
+    "EXPERIENCE_COMMITMENT_BITFLIP_REJECT",
+    "VOICE_PROFILE_TAMPER_REJECT",
+    "DIRECT_COSMOS_TO_ECHO_ROUTE_REJECT",
+    "AUTHORITY_ESCALATION_REJECT",
+    "FORMULA_HASH_NOT_BOUND_TO_EXPERIENCE_REJECT",
+    "PACKET_HASH_TAMPER_REJECT"
+  ],
+  "scientific_boundary": {
+    "P_VS_NP": "OPEN",
+    "P_EQUALS_NP": "NOT_ESTABLISHED",
+    "P_NOT_EQUALS_NP": "NOT_ESTABLISHED",
+    "acoustic_profile_changes_solver_correctness": false,
+    "ancient_tuning_claimed": false,
+    "measured_chamber_ir_used": false
+  }
+}
