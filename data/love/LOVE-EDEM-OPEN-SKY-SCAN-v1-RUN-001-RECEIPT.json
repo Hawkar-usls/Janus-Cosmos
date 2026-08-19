@@ -1,0 +1,79 @@
+{
+  "schema": "janus.cosmos.open_sky_scan.receipt.v1",
+  "experiment_id": "LOVE-EDEM-OPEN-SKY-SCAN-v1",
+  "run_id": 32279691965,
+  "job_id": 96155253537,
+  "run_conclusion": "success",
+  "search_radius_arcsec": 120.0,
+  "artifact": {
+    "id": 9375380900,
+    "name": "love-edem-open-sky-scan",
+    "sha256": "e32a40c3c9ea1455e9b914e7f7f218ac94a6367aaa09ee33dca1afb315a27cbe",
+    "size_bytes": 6715227,
+    "file_count": 19
+  },
+  "targets": {
+    "LOVE": {
+      "icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+      "simbad": {
+        "count_within_120_arcsec": 2,
+        "nearest": {
+          "main_id": "UCAC4 267-067981",
+          "otype": "star",
+          "separation_arcsec": 70.29618311235782,
+          "V_mag": 13.532999992370605,
+          "cross_ids": ["Gaia DR3 6163586418349303936", "2MASS J13371650-3647495", "WISE J133716.51-364749.4", "GALAH 140710000101115"]
+        }
+      },
+      "2mass_psc": {
+        "count_within_120_arcsec": 26,
+        "nearest": {"designation": "13371100-3646446", "separation_arcsec": 23.032148764332643, "J": 15.697, "H": 14.961, "Ks": 15.042}
+      },
+      "allwise": {
+        "count_within_120_arcsec": 80,
+        "nearest": {"designation": "J133711.05-364649.7", "separation_arcsec": 20.289587649207107, "W1": 15.974, "W2": 16.186, "W3": 12.412, "W4": 9.145}
+      },
+      "panstarrs_dr2": {"status": "OUTSIDE_PS1_3PI_DEC_COVERAGE"},
+      "skyview_real_images": ["DSS2 Red", "2MASS-J", "WISE 3.4"],
+      "hst_exact_6arcmin": "NO_HST_COVERAGE"
+    },
+    "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {
+      "icrs": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+      "simbad": {
+        "count_within_120_arcsec": 14,
+        "nearest": {
+          "main_id": "SDSS J091654.36+301627.2",
+          "otype": "galaxy",
+          "separation_arcsec": 50.45180795593327,
+          "cross_ids": ["SHELS 139.2264909+30.2742400", "SDSS J091654.36+301627.2"]
+        }
+      },
+      "2mass_psc": {
+        "count_within_120_arcsec": 3,
+        "nearest": {"designation": "09164939+3016242", "separation_arcsec": 73.67805643704592, "J": 15.181, "H": 14.474, "Ks": 14.373}
+      },
+      "allwise": {
+        "count_within_120_arcsec": 59,
+        "nearest": {"designation": "J091653.98+301546.0", "separation_arcsec": 9.021198661597598, "W1": 17.574, "W2": 16.917, "W3": 12.592, "W4": 9.014}
+      },
+      "panstarrs_dr2": {"status": "QUERY_ERROR_IN_THIS_RUN__RETRY_REQUIRED"},
+      "skyview_real_images": ["DSS2 Red", "2MASS-J", "WISE 3.4"],
+      "hst_exact_6arcmin": "NO_HST_COVERAGE"
+    }
+  },
+  "query_health": {
+    "gaia_dr3": "ERROR_IN_THIS_RUN__DO_NOT_INTERPRET_AS_ZERO_SOURCES",
+    "simbad": "PASS",
+    "2mass": "PASS",
+    "allwise": "PASS",
+    "skyview": "PASS",
+    "panstarrs_love": "OUTSIDE_DECLINATION_COVERAGE",
+    "panstarrs_edem": "ERROR_IN_THIS_RUN__RETRY_REQUIRED"
+  },
+  "interpretation": {
+    "empty_sky": false,
+    "key_result": "Both directions contain ordinary catalogued sky sources and are covered by wide-field optical/infrared surveys. Hubble simply did not observe the exact 6-arcmin cones used in the HST gate.",
+    "edem_identity_confirmed": false,
+    "love_planet_discovery_claim": false
+  }
+}
