@@ -1,0 +1,99 @@
+{
+  "schema": "janus.cosmos.stargate_abydos.geometry.receipt.v1",
+  "experiment_id": "STARGATE-ABYDOS-GEOMETRY-v1",
+  "status": "FROZEN_EXPLORATORY_POST_HOC",
+  "frozen_on": "2026-08-20",
+  "purpose": "Freeze the exploratory Stargate/Abydos geometry result before any catalog or infrared lookup at the derived sky coordinate.",
+  "mode": "CULTURAL_GEOMETRY_FUN_TEST_WITH_SCIENTIFIC_FIREWALL",
+  "anomaly_scoring_used": false,
+  "inputs": {
+    "abydos_glyph_sequence_interpretation": [
+      "Taurus",
+      "Serpens_Caput",
+      "Capricornus",
+      "Monoceros",
+      "Sagittarius",
+      "Orion"
+    ],
+    "pairing_rule": [
+      ["Taurus", "Serpens_Caput"],
+      ["Capricornus", "Monoceros"],
+      ["Sagittarius", "Orion"]
+    ],
+    "constellation_region_centers_used_deg": {
+      "Taurus": {"ra": 66.1713, "dec": 17.0939},
+      "Serpens_Caput": {"ra": 235.4277, "dec": 9.9076},
+      "Capricornus": {"ra": 315.3644, "dec": -18.75},
+      "Monoceros": {"ra": 105.2799, "dec": -2.7014},
+      "Sagittarius": {"ra": 287.5544, "dec": -27.5168},
+      "Orion": {"ra": 83.9006, "dec": 5.1743}
+    },
+    "edem_center_icrs_deg": {
+      "ra": 139.224096866,
+      "dec": 30.260387799
+    }
+  },
+  "great_circle_pair_intersections_deg": [
+    {
+      "lines": ["Taurus_Serpens_Caput", "Capricornus_Monoceros"],
+      "ra": 223.800478704076,
+      "dec": 34.570415050128,
+      "distance_to_EDEM_deg": 69.319015887007
+    },
+    {
+      "lines": ["Taurus_Serpens_Caput", "Sagittarius_Orion"],
+      "ra": 225.789456707958,
+      "dec": 31.069960376053,
+      "distance_to_EDEM_deg": 72.278304360269
+    },
+    {
+      "lines": ["Capricornus_Monoceros", "Sagittarius_Orion"],
+      "ra": 218.2961637395,
+      "dec": 35.628516091133,
+      "distance_to_EDEM_deg": 64.745104195881
+    }
+  ],
+  "edem_test": {
+    "verdict": "VALID_NEGATIVE_FOR_THIS_GEOMETRY",
+    "nearest_intersection_distance_deg": 64.745104195881,
+    "previous_exploratory_random_orientation_run": {
+      "reported_trials": 1000000,
+      "reported_fraction_equal_or_better": 0.614,
+      "verification_state": "PRESERVED_FROM_PRIOR_EXPLORATORY_RUN_NOT_USED_AS_DISCOVERY_SIGNIFICANCE"
+    }
+  },
+  "canonical_pairing_convergence": {
+    "best_common_point_recomputed_from_frozen_rounded_centers_deg": {
+      "ra": 223.41483465,
+      "dec": 33.97938274
+    },
+    "rms_cross_track_deg": 0.799201656563,
+    "individual_cross_track_deg": [
+      0.546726691559,
+      0.652513853564,
+      1.091551858229
+    ],
+    "pairing_rank_among_all_15_perfect_pairings": 1,
+    "nominal_rank_fraction": 0.066666666667,
+    "significance_status": "NOT_VALID_AS_PREREGISTERED_P_VALUE_BECAUSE_TEST_WAS_NOTICED_POST_HOC"
+  },
+  "frozen_downstream_target_icrs_deg": {
+    "ra": 223.415064157,
+    "dec": 33.97931567,
+    "reason": "Exact coordinate published before the catalog/IR follow-up; kept fixed to prevent downstream target drift."
+  },
+  "classification": "POST_HOC_INTERESTING_GEOMETRIC_COINCIDENCE",
+  "firewall": {
+    "this_does_not_identify_real_Abydos": true,
+    "this_does_not_establish_a_planet": true,
+    "this_does_not_establish_an_anomaly": true,
+    "post_hoc_pairing_rank_is_not_discovery_significance": true,
+    "catalog_lookup_must_not_move_the_frozen_coordinate": true,
+    "nearby_catalog_sources_are_not_the_target_identity": true
+  },
+  "next_gate": {
+    "id": "STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1",
+    "question": "What catalogued optical/near-IR/mid-IR sources exist around the frozen coordinate, with special attention to AllWISE, CatWISE2020, unWISE and 2MASS?",
+    "target_icrs_deg": {"ra": 223.415064157, "dec": 33.97931567}
+  }
+}
