@@ -1,0 +1,75 @@
+name: LOVE EDEM Coordinate Resolver
+
+on:
+  push:
+    branches:
+      - research/love-g1-007-multieye-v2
+    paths:
+      - 'data/love/LOVE_EDEM_COORDINATE_RESOLVER_PREREG.json'
+      - 'janus_cosmos/love_edem_coordinate_resolver.py'
+      - 'janus_cosmos/love_edem_center_object_probe.py'
+      - 'janus_cosmos/love_edem_open_sky_scan.py'
+      - '.github/workflows/love-edem-coordinate-resolver.yml'
+  pull_request:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'data/love/LOVE_EDEM_COORDINATE_RESOLVER_PREREG.json'
+      - 'janus_cosmos/love_edem_coordinate_resolver.py'
+      - 'janus_cosmos/love_edem_center_object_probe.py'
+      - 'janus_cosmos/love_edem_open_sky_scan.py'
+      - '.github/workflows/love-edem-coordinate-resolver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coordinate-resolver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install astronomy stack
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile coordinate resolver and both acquisition paths
+        run: |
+          python -m py_compile janus_cosmos/love_edem_coordinate_resolver.py
+          python -m py_compile janus_cosmos/love_edem_center_object_probe.py
+          python -m py_compile janus_cosmos/love_edem_open_sky_scan.py
+      - name: Resolve what is at the frozen coordinates
+        run: >-
+          python -u -m janus_cosmos.love_edem_coordinate_resolver
+          --prereg data/love/LOVE_EDEM_COORDINATE_RESOLVER_PREREG.json
+          --output-dir results/love_edem_coordinate_resolver
+      - name: Enforce coordinate-first interpretation
+        run: |
+          python - <<'PY'
+          import json
+          p='results/love_edem_coordinate_resolver/coordinate-resolver-result.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['mode'] == 'WHAT_IS_AT_THESE_COORDINATES'
+          assert d['anomaly_scoring_used'] is False
+          assert d['legacy_janus_v21_morphology_role'] == 'DIAGNOSTIC_ONLY'
+          assert d['firewall']['anomaly_gate_required'] is False
+          assert d['firewall']['catalog_proximity_is_not_identity'] is True
+          assert d['firewall']['query_error_is_not_zero_sources'] is True
+          assert d['firewall']['edem_identity_confirmed'] is False
+          assert d['firewall']['love_candidate_activated'] is False
+          for label, target in d['targets'].items():
+              print('\n###', label, target['semantic_alias'])
+              print('center=', target['center_icrs'])
+              print('catalog calibration=', json.dumps(target['cross_service_catalog_calibration'], indent=2, default=str))
+              print('skyview=', json.dumps(target['skyview_bypass'], indent=2, default=str))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: love-edem-coordinate-resolver
+          path: results/love_edem_coordinate_resolver/
+          if-no-files-found: error
+          retention-days: 14
