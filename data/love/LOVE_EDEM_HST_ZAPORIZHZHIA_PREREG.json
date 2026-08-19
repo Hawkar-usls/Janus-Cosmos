@@ -1,0 +1,40 @@
+{
+  "schema": "janus.cosmos.love_edem.hst_direct.prereg.v1",
+  "experiment_id": "LOVE-EDEM-HST-ZAPORIZHZHIA-v1",
+  "targets": [
+    {
+      "label": "LOVE",
+      "ra_deg_icrs": 204.30267916666667,
+      "dec_deg_icrs": -36.78240527777778,
+      "coordinate_role": "fixed LOVE sky direction"
+    },
+    {
+      "label": "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE",
+      "ra_deg_icrs": 139.22409686590188,
+      "dec_deg_icrs": 30.26038779947318,
+      "coordinate_role": "observer-frame derived direction from 47.83206 N, 35.13137 E; not an identified Eden object"
+    }
+  ],
+  "mast": {
+    "archive": "MAST/STScI",
+    "collection": "HST",
+    "query_radius_arcmin": 6.0,
+    "require_public": true,
+    "require_science": true,
+    "require_image": true,
+    "require_exact_target_inside_fits_wcs": true,
+    "max_downloaded_products_per_target": 6,
+    "preferred_subgroups": ["DRC", "DRZ", "SCI", "FLC", "FLT"]
+  },
+  "render": {
+    "source": "downloaded HST FITS only",
+    "synthetic_generation_allowed": false,
+    "quicklook_percentiles": [1.0, 99.5],
+    "mark_exact_coordinate": true
+  },
+  "claim_firewall": {
+    "hst_image_is_not_planet_detection": true,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false
+  }
+}
