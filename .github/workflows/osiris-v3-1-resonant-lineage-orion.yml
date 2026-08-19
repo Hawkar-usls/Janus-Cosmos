@@ -67,7 +67,14 @@ jobs:
           assert lineage['status'] == 'PASS_KEEP_OSIRIS_V3_1_RESONANT_LINEAGE'
           assert lineage['hash_changed'] is True
           assert lineage['lineage_proposal_accepted'] is True
-          assert lineage['target_reuse_mode'] == 'REVERIFIED_SAT_WITNESS'
+          assert lineage['lineage_provenance_bound_to_final_experience'] is True
+          if lineage['source_experience_has_sat_assignment']:
+              assert lineage['target_reuse_mode'] == 'REVERIFIED_SAT_WITNESS'
+              assert lineage['target_revalidation']['sat_witness_reverified'] is True
+          else:
+              assert lineage['source_experience_has_separator'] is True
+              assert lineage['target_reuse_mode'] == 'REVALIDATED_SEPARATOR_ROUTE'
+              assert lineage['target_revalidation']['separator_revalidated'] is True
           assert all(lineage['negative_controls'].values())
           assert lineage['authority_delta'] == 0
 
