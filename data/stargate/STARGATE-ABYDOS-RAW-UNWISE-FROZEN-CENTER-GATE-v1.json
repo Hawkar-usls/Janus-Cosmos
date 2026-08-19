@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cosmos.stargate_abydos.raw_unwise_center.gate.v1",
+  "experiment_id": "STARGATE-ABYDOS-RAW-UNWISE-FROZEN-CENTER-v1",
+  "status": "PREREGISTERED",
+  "preregistered_on": "2026-08-20",
+  "upstream_catalog_receipt": "data/stargate/STARGATE-ABYDOS-WHAT-IS-AT-THESE-COORDINATES-IR-v1-LATEST-RECEIPT.json",
+  "target": {
+    "frame": "ICRS",
+    "ra_deg": 223.415064157,
+    "dec_deg": 33.97931567,
+    "immutable": true
+  },
+  "data_source": {
+    "product": "unWISE NeoWISE-R2 coadd cutout",
+    "version": "neo2",
+    "bands": ["W1", "W2"],
+    "cutout_size_pixels": 64,
+    "pixel_scale_arcsec": 2.75,
+    "requested_products": ["image", "inverse_variance"]
+  },
+  "frozen_measurements": {
+    "central_pixel": true,
+    "central_3x3_aperture": true,
+    "empirical_background_annulus_pixels": [6, 14],
+    "empirical_comparison_apertures": true,
+    "positive_excess_threshold_sigma": 5.0,
+    "weak_excess_threshold_sigma": 3.0,
+    "require_both_bands_for_strong_raw_excess_label": true
+  },
+  "known_blend_warning": {
+    "nearest_catalogued_ir_group_arcsec": 8.537689265953338,
+    "wise_native_fwhm_arcsec_approx": {"W1": 6.1, "W2": 6.4},
+    "rule": "Any raw central excess is not promoted to an independent centered source because a catalogued IR group lies only ~8.54 arcsec away and WISE/unWISE PSFs can blend neighboring flux."
+  },
+  "decision_labels": [
+    "STRONG_RAW_COADD_EXCESS_BOTH_W1_W2__BLEND_IDENTITY_UNRESOLVED",
+    "WEAK_OR_SINGLE_BAND_RAW_COADD_EXCESS__BLEND_IDENTITY_UNRESOLVED",
+    "NO_SIGNIFICANT_RAW_COADD_EXCESS_AT_FROZEN_CENTER",
+    "INCONCLUSIVE_RAW_COADD_GATE"
+  ],
+  "firewall": {
+    "raw_pixel_excess_is_catalog_source": false,
+    "raw_pixel_excess_is_real_Abydos": false,
+    "raw_pixel_excess_is_planet": false,
+    "raw_pixel_excess_is_anomaly": false,
+    "nearby_source_may_move_center": false,
+    "coadd_pixel_noise_is_fully_independent": false,
+    "claim_ceiling": "RAW_COADD_BRIGHTNESS_EXCESS_AT_EXACT_FROZEN_COORDINATE_WITHOUT_SOURCE_IDENTITY"
+  }
+}
