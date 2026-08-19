@@ -1,0 +1,67 @@
+{
+  "schema": "janus.cosmos.love_search.prereg.v1",
+  "experiment_id": "LOVE-G1-007-REAL-SKY-v1",
+  "date_utc": "2026-08-19",
+  "origin": {
+    "screen_label": "G1/007 Lave",
+    "phonetic_observation": "Lave ~ Love",
+    "phonetic_observation_affects_scientific_gate": false,
+    "source_system": "Elite Dangerous / EDSM Lave",
+    "elite_cartesian_ly": {
+      "x": 75.75,
+      "y": 48.75,
+      "z": 70.75
+    },
+    "edsm_galactic": {
+      "distance_ly": 114.543,
+      "l_deg": 313.045,
+      "b_deg": 25.189
+    },
+    "edsm_icrs": {
+      "ra_deg": 204.30267916666667,
+      "dec_deg": -36.78240527777778,
+      "ra_hms": "13:37:12.643",
+      "dec_dms": "-36:46:56.659"
+    },
+    "target_distance_pc": 35.119084119255824,
+    "target_parallax_mas": 28.47454667679386
+  },
+  "search_volume": {
+    "angular_radius_deg": 5.0,
+    "parallax_min_mas": 23.0,
+    "parallax_max_mas": 36.0,
+    "gaia_parallax_over_error_min": 10.0,
+    "gaia_ruwe_max_preferred": 1.4,
+    "top_ranked_sources": 50,
+    "tess_probe_top_sources": 12
+  },
+  "ranking": {
+    "primary": "3D Euclidean separation from the EDSM-mapped Lave point using Gaia DR3 parallax and ICRS angular separation",
+    "secondary": [
+      "K-like stellar temperature/color",
+      "Gaia astrometric quality",
+      "TESS catalog/observation availability"
+    ],
+    "k_like_temperature_k": [3900, 5200],
+    "k_like_bp_rp_fallback": [0.8, 1.7]
+  },
+  "catalogs": [
+    "Gaia DR3",
+    "NASA Exoplanet Archive",
+    "MAST/TIC/TESS"
+  ],
+  "discovery_firewall": {
+    "known_catalog_object_is_not_our_discovery": true,
+    "phonetic_match_is_not_evidence": true,
+    "gaia_counterpart_alone_is_not_a_planet_candidate": true,
+    "tess_availability_alone_is_not_a_planet_candidate": true,
+    "candidate_codename": "Love",
+    "codename_may_activate_only_after": [
+      "new repeatable transit/RV/astrometric signal",
+      "instrumental and eclipsing-binary controls",
+      "independent re-observation or archive replication"
+    ],
+    "official_name_claim": false
+  },
+  "claim_ceiling": "TARGETED_REAL_SKY_COUNTERPART_SEARCH_ONLY__NO_EXOPLANET_DISCOVERY_UNTIL_SIGNAL_AND_REPLICATION_GATES_PASS"
+}
