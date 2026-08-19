@@ -1,0 +1,713 @@
+{
+  "anomaly_scoring_used": false,
+  "classification_radius_arcsec": 2.0,
+  "experiment_id": "LOVE-EDEM-SOURCE-CLASSIFICATION-v1",
+  "frozen_rules": {
+    "gaia_compact_medium": "Gaia counterpart exists but does not pass high-confidence astrometric star rule",
+    "galactic_star_high_confidence": "Gaia parallax S/N >= 5 OR combined proper-motion significance >= 5 sigma",
+    "no_post_hoc_threshold_changes": true,
+    "optical_unresolved_medium": "SDSS + Pan-STARRS counterpart, no Gaia within 2 arcsec",
+    "wise_only": "AllWISE only within 2 arcsec => faint infrared source, class unresolved"
+  },
+  "groups": {
+    "EDEM_GAIA_WISE_SDSS_PS1": {
+      "catalog_queries": {
+        "2MASS_PSC": {
+          "catalog": "2MASS_PSC",
+          "catalog_id": "II/246/out",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "candidate_count": 1,
+          "catalog": "ALLWISE",
+          "catalog_id": "II/328/allwise",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.2627468,
+            "expected_id_match": true,
+            "features": {
+              "AllWISE": "J091652.31+301545.8",
+              "DEJ2000": 30.2627468,
+              "Hmag": null,
+              "Jmag": null,
+              "Kmag": null,
+              "RAJ2000": 139.2179911,
+              "W1mag": 16.18899917602539,
+              "W2mag": 16.493000030517578,
+              "W3mag": 12.418000221252441,
+              "W4mag": 8.428999900817871,
+              "ccf": "0000",
+              "e_W1mag": 0.06300000101327896,
+              "e_W2mag": 0.27900001406669617,
+              "e_W3mag": null,
+              "e_W4mag": null,
+              "e_pmDE": 742,
+              "e_pmRA": 675,
+              "ex": 0,
+              "pmDE": -30,
+              "pmRA": -829,
+              "qph": "ABUU"
+            },
+            "ra_deg": 139.2179911,
+            "separation_from_group_arcsec": 0.12590797600641898,
+            "source_id": "J091652.31+301545.8"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "candidate_count": 1,
+          "catalog": "GAIA_DR3",
+          "catalog_id": "I/355/gaiadr3",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.26276387854,
+            "expected_id_match": true,
+            "features": {
+              "BP-RP": 1.844583,
+              "BPmag": 20.166325,
+              "DE_ICRS": 30.26276387854,
+              "Gmag": 19.18639,
+              "Plx": 0.7325,
+              "RA_ICRS": 139.21802643661,
+              "RPmag": 18.321741,
+              "RUWE": 0.928,
+              "Source": 699051350998534656,
+              "Teff": null,
+              "[Fe/H]": null,
+              "e_Plx": 0.36149999499320984,
+              "e_pmDE": 0.23899999260902405,
+              "e_pmRA": 0.3370000123977661,
+              "logg": null,
+              "pmDE": -8.028,
+              "pmRA": 2.124
+            },
+            "ra_deg": 139.21802643661,
+            "separation_from_group_arcsec": 0.0,
+            "source_id": "699051350998534656"
+          },
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "candidate_count": 1,
+          "catalog": "PANSTARRS_DR1",
+          "catalog_id": "II/349/ps1",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.26276744,
+            "expected_id_match": true,
+            "features": {
+              "DEJ2000": 30.26276744,
+              "Nd": 56,
+              "Qual": 52,
+              "RAJ2000": 139.21802721,
+              "e_gmag": 0.019300000742077827,
+              "e_imag": 0.006300000008195639,
+              "e_rmag": 0.017999999225139618,
+              "e_ymag": 0.02160000056028366,
+              "e_zmag": 0.007699999958276749,
+              "gmag": 20.2909,
+              "imag": 18.6449,
+              "objID": 144311392180445928,
+              "rmag": 19.2225,
+              "ymag": 18.2013,
+              "zmag": 18.3882
+            },
+            "ra_deg": 139.21802721,
+            "separation_from_group_arcsec": 0.013044829654726184,
+            "source_id": "144311392180445928"
+          },
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "candidate_count": 4,
+          "catalog": "SDSS_DR16",
+          "catalog_id": "V/154/sdss16",
+          "count": 4,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.262817,
+            "expected_id_match": true,
+            "features": {
+              "DE_ICRS": 30.262817,
+              "RA_ICRS": 139.218051,
+              "SDSS16": "SDSS J091652.33+301546.1",
+              "class": 6,
+              "e_gmag": 0.027,
+              "e_imag": 0.016,
+              "e_rmag": 0.021,
+              "e_umag": 0.547,
+              "e_zmag": 0.043,
+              "gmag": 20.34000015258789,
+              "imag": 18.527000427246094,
+              "objID": 1237664320537362761,
+              "rmag": 19.243000030517578,
+              "umag": 22.638999938964844,
+              "zmag": 18.17799949645996
+            },
+            "ra_deg": 139.218051,
+            "separation_from_group_arcsec": 0.205925245880468,
+            "source_id": "SDSS J091652.33+301546.1"
+          },
+          "status": "OK"
+        }
+      },
+      "classification": {
+        "class": "GALACTIC_STAR",
+        "confidence": "HIGH",
+        "gaia_derived": {
+          "absolute_g_no_extinction_if_distance_available": null,
+          "bp_mag": 20.166325,
+          "bp_rp": 1.844583,
+          "g_mag": 19.18639,
+          "naive_inverse_parallax_distance_pc_if_snr_ge_5": null,
+          "parallax_error_mas": 0.36149999499320984,
+          "parallax_mas": 0.7325,
+          "parallax_snr": 2.0262794194886746,
+          "pmdec_error_masyr": 0.23899999260902405,
+          "pmdec_masyr": -8.028,
+          "pmra_error_masyr": 0.3370000123977661,
+          "pmra_masyr": 2.124,
+          "proper_motion_vector_snr": 34.17614684202574,
+          "rp_mag": 18.321741,
+          "ruwe": 0.928
+        },
+        "independent_catalog_roots": [
+          "GAIA_DR3",
+          "ALLWISE",
+          "PANSTARRS_DR1",
+          "SDSS_DR16"
+        ],
+        "reasons": [
+          "Gaia astrometry shows statistically significant parallax and/or proper motion, which is strong evidence for a Galactic star.",
+          "Gaia RUWE is below 1.4, consistent with a well-behaved single-source astrometric solution."
+        ],
+        "wise_derived": {
+          "W1": 16.18899917602539,
+          "W1_minus_W2": -0.3040008544921875,
+          "W2": 16.493000030517578,
+          "W2_minus_W3": 4.074999809265137,
+          "W3": 12.418000221252441,
+          "W4": 8.428999900817871,
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "quality": "ABUU"
+        }
+      },
+      "offset_from_frozen_target_center_arcsec": 20.72338948797579,
+      "representative_icrs": {
+        "dec_deg": 30.26276387854,
+        "ra_deg": 139.21802643661
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "EDEM_NEAREST_WISE_ONLY": {
+      "catalog_queries": {
+        "2MASS_PSC": {
+          "catalog": "2MASS_PSC",
+          "catalog_id": "II/246/out",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "candidate_count": 1,
+          "catalog": "ALLWISE",
+          "catalog_id": "II/328/allwise",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.262781,
+            "expected_id_match": true,
+            "features": {
+              "AllWISE": "J091653.98+301546.0",
+              "DEJ2000": 30.262781,
+              "Hmag": null,
+              "Jmag": null,
+              "Kmag": null,
+              "RAJ2000": 139.2249571,
+              "W1mag": 17.573999404907227,
+              "W2mag": 16.91699981689453,
+              "W3mag": 12.592000007629395,
+              "W4mag": 9.013999938964844,
+              "ccf": "0000",
+              "e_W1mag": 0.19699999690055847,
+              "e_W2mag": null,
+              "e_W3mag": null,
+              "e_W4mag": null,
+              "e_pmDE": 3647,
+              "e_pmRA": 3388,
+              "ex": 0,
+              "pmDE": -380,
+              "pmRA": 275,
+              "qph": "BUUU"
+            },
+            "ra_deg": 139.2249571,
+            "separation_from_group_arcsec": 0.0,
+            "source_id": "J091653.98+301546.0"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "catalog": "GAIA_DR3",
+          "catalog_id": "I/355/gaiadr3",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "catalog": "PANSTARRS_DR1",
+          "catalog_id": "II/349/ps1",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "catalog": "SDSS_DR16",
+          "catalog_id": "V/154/sdss16",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        }
+      },
+      "classification": {
+        "class": "FAINT_INFRARED_SOURCE_UNCLASSIFIED",
+        "confidence": "LOW_TO_MEDIUM",
+        "gaia_derived": null,
+        "independent_catalog_roots": [
+          "ALLWISE"
+        ],
+        "reasons": [
+          "Only an AllWISE counterpart is recovered within the frozen 2 arcsec classification radius.",
+          "A single-band or weak mid-infrared detection without optical/Gaia/2MASS support is insufficient to distinguish a faint star, galaxy, or low-S/N infrared source."
+        ],
+        "wise_derived": {
+          "W1": 17.573999404907227,
+          "W1_minus_W2": 0.6569995880126953,
+          "W2": 16.91699981689453,
+          "W2_minus_W3": 4.324999809265137,
+          "W3": 12.592000007629395,
+          "W4": 9.013999938964844,
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "quality": "BUUU"
+        }
+      },
+      "offset_from_frozen_target_center_arcsec": 9.021198661597598,
+      "representative_icrs": {
+        "dec_deg": 30.262781,
+        "ra_deg": 139.2249571
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "EDEM_OPTICAL_SDSS_PS1": {
+      "catalog_queries": {
+        "2MASS_PSC": {
+          "catalog": "2MASS_PSC",
+          "catalog_id": "II/246/out",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "catalog": "ALLWISE",
+          "catalog_id": "II/328/allwise",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "catalog": "GAIA_DR3",
+          "catalog_id": "I/355/gaiadr3",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "candidate_count": 1,
+          "catalog": "PANSTARRS_DR1",
+          "catalog_id": "II/349/ps1",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.25687634,
+            "expected_id_match": true,
+            "features": {
+              "DEJ2000": 30.25687634,
+              "Nd": 5,
+              "Qual": 52,
+              "RAJ2000": 139.22269411,
+              "e_gmag": null,
+              "e_imag": 0.04490000009536743,
+              "e_rmag": null,
+              "e_ymag": null,
+              "e_zmag": 0.13819999992847443,
+              "gmag": null,
+              "imag": 21.793,
+              "objID": 144301392226548847,
+              "rmag": null,
+              "ymag": null,
+              "zmag": 21.1874
+            },
+            "ra_deg": 139.22269411,
+            "separation_from_group_arcsec": 0.1554179072235494,
+            "source_id": "144301392226548847"
+          },
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "candidate_count": 1,
+          "catalog": "SDSS_DR16",
+          "catalog_id": "V/154/sdss16",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": 30.256918,
+            "expected_id_match": true,
+            "features": {
+              "DE_ICRS": 30.256918,
+              "RA_ICRS": 139.222681,
+              "SDSS16": "SDSS J091653.44+301524.9",
+              "class": 3,
+              "e_gmag": 0.405,
+              "e_imag": 0.188,
+              "e_rmag": 0.608,
+              "e_umag": 1.707,
+              "e_zmag": 0.322,
+              "gmag": 23.04800033569336,
+              "imag": 20.892000198364258,
+              "objID": 1237664320537363072,
+              "rmag": 22.636999130249023,
+              "umag": 25.631999969482422,
+              "zmag": 19.983999252319336
+            },
+            "ra_deg": 139.222681,
+            "separation_from_group_arcsec": 0.0,
+            "source_id": "SDSS J091653.44+301524.9"
+          },
+          "status": "OK"
+        }
+      },
+      "classification": {
+        "class": "OPTICAL_SOURCE_STAR_OR_GALAXY_UNRESOLVED",
+        "confidence": "MEDIUM",
+        "gaia_derived": null,
+        "independent_catalog_roots": [
+          "SDSS_DR16",
+          "PANSTARRS_DR1"
+        ],
+        "reasons": [
+          "The source is independently detected in SDSS and Pan-STARRS at the same optical position.",
+          "No Gaia counterpart was recovered within the frozen 2 arcsec classification radius, so stellar versus compact-galaxy identity is not established by astrometry."
+        ],
+        "wise_derived": null
+      },
+      "offset_from_frozen_target_center_arcsec": 13.244457192554428,
+      "representative_icrs": {
+        "dec_deg": 30.256918,
+        "ra_deg": 139.222681
+      },
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "LOVE_GAIA_WISE_2MASS": {
+      "catalog_queries": {
+        "2MASS_PSC": {
+          "candidate_count": 1,
+          "catalog": "2MASS_PSC",
+          "catalog_id": "II/246/out",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": -36.779072,
+            "expected_id_match": true,
+            "features": {
+              "Bflg": "111",
+              "Cflg": "000",
+              "DEJ2000": -36.779072,
+              "Hmag": 14.961000442504883,
+              "Jmag": 15.696999549865723,
+              "Kmag": 15.041999816894531,
+              "Qflg": "AAB",
+              "RAJ2000": 204.295861,
+              "Rflg": "222",
+              "e_Hmag": 0.06599999964237213,
+              "e_Jmag": 0.054999999701976776,
+              "e_Kmag": 0.13600000739097595
+            },
+            "ra_deg": 204.295861,
+            "separation_from_group_arcsec": 0.40369513565409065,
+            "source_id": "13371100-3646446"
+          },
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "candidate_count": 1,
+          "catalog": "ALLWISE",
+          "catalog_id": "II/328/allwise",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": -36.7791466,
+            "expected_id_match": true,
+            "features": {
+              "AllWISE": "J133710.98-364644.9",
+              "DEJ2000": -36.7791466,
+              "Hmag": 14.961000442504883,
+              "Jmag": 15.696999549865723,
+              "Kmag": 15.041999816894531,
+              "RAJ2000": 204.2957833,
+              "W1mag": 14.878000259399414,
+              "W2mag": 15.043000221252441,
+              "W3mag": 12.571000099182129,
+              "W4mag": 9.222999572753906,
+              "ccf": "0000",
+              "e_W1mag": 0.03200000151991844,
+              "e_W2mag": 0.06800000369548798,
+              "e_W3mag": null,
+              "e_W4mag": null,
+              "e_pmDE": 105,
+              "e_pmRA": 96,
+              "ex": 0,
+              "pmDE": 17,
+              "pmRA": 81,
+              "qph": "AAUU"
+            },
+            "ra_deg": 204.2957833,
+            "separation_from_group_arcsec": 0.1843254448219389,
+            "source_id": "J133710.98-364644.9"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "candidate_count": 1,
+          "catalog": "GAIA_DR3",
+          "catalog_id": "I/355/gaiadr3",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": -36.77911588007,
+            "expected_id_match": true,
+            "features": {
+              "BP-RP": 1.607878,
+              "BPmag": 18.375313,
+              "DE_ICRS": -36.77911588007,
+              "Gmag": 17.621157,
+              "Plx": 0.7101,
+              "RA_ICRS": 204.29573215827,
+              "RPmag": 16.767435,
+              "RUWE": 0.988,
+              "Source": 6163586620213012352,
+              "Teff": 4369.0,
+              "[Fe/H]": 0.2623,
+              "e_Plx": 0.10930000245571136,
+              "e_pmDE": 0.07800000160932541,
+              "e_pmRA": 0.12300000339746475,
+              "logg": 4.5727,
+              "pmDE": -4.695,
+              "pmRA": -14.675
+            },
+            "ra_deg": 204.29573215827,
+            "separation_from_group_arcsec": 0.0,
+            "source_id": "6163586620213012352"
+          },
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "catalog": "PANSTARRS_DR1",
+          "catalog_id": "II/349/ps1",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "catalog": "SDSS_DR16",
+          "catalog_id": "V/154/sdss16",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        }
+      },
+      "classification": {
+        "class": "GALACTIC_STAR",
+        "confidence": "HIGH",
+        "gaia_derived": {
+          "absolute_g_no_extinction_if_distance_available": 6.877754563243725,
+          "bp_mag": 18.375313,
+          "bp_rp": 1.607878,
+          "g_mag": 17.621157,
+          "naive_inverse_parallax_distance_pc_if_snr_ge_5": 1408.2523588227011,
+          "parallax_error_mas": 0.10930000245571136,
+          "parallax_mas": 0.7101,
+          "parallax_snr": 6.496797658240989,
+          "pmdec_error_masyr": 0.07800000160932541,
+          "pmdec_masyr": -4.695,
+          "pmra_error_masyr": 0.12300000339746475,
+          "pmra_masyr": -14.675,
+          "proper_motion_vector_snr": 133.6328435324476,
+          "rp_mag": 16.767435,
+          "ruwe": 0.988
+        },
+        "independent_catalog_roots": [
+          "GAIA_DR3",
+          "ALLWISE",
+          "2MASS_PSC"
+        ],
+        "reasons": [
+          "Gaia astrometry shows statistically significant parallax and/or proper motion, which is strong evidence for a Galactic star.",
+          "Gaia RUWE is below 1.4, consistent with a well-behaved single-source astrometric solution."
+        ],
+        "wise_derived": {
+          "W1": 14.878000259399414,
+          "W1_minus_W2": -0.16499996185302734,
+          "W2": 15.043000221252441,
+          "W2_minus_W3": 2.4720001220703125,
+          "W3": 12.571000099182129,
+          "W4": 9.222999572753906,
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "quality": "AAUU"
+        }
+      },
+      "offset_from_frozen_target_center_arcsec": 23.269252366704684,
+      "representative_icrs": {
+        "dec_deg": -36.77911588007,
+        "ra_deg": 204.29573215827
+      },
+      "target": "LOVE"
+    },
+    "LOVE_NEAREST_WISE_ONLY": {
+      "catalog_queries": {
+        "2MASS_PSC": {
+          "catalog": "2MASS_PSC",
+          "catalog_id": "II/246/out",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "ALLWISE": {
+          "candidate_count": 1,
+          "catalog": "ALLWISE",
+          "catalog_id": "II/328/allwise",
+          "count": 1,
+          "radius_arcsec": 2.0,
+          "selected": {
+            "dec_deg": -36.7804774,
+            "expected_id_match": true,
+            "features": {
+              "AllWISE": "J133711.05-364649.7",
+              "DEJ2000": -36.7804774,
+              "Hmag": null,
+              "Jmag": null,
+              "Kmag": null,
+              "RAJ2000": 204.2960668,
+              "W1mag": 15.973999977111816,
+              "W2mag": 16.18600082397461,
+              "W3mag": 12.411999702453613,
+              "W4mag": 9.145000457763672,
+              "ccf": "0000",
+              "e_W1mag": 0.0560000017285347,
+              "e_W2mag": 0.18700000643730164,
+              "e_W3mag": null,
+              "e_W4mag": null,
+              "e_pmDE": 363,
+              "e_pmRA": 279,
+              "ex": 0,
+              "pmDE": 843,
+              "pmRA": -127,
+              "qph": "ABUU"
+            },
+            "ra_deg": 204.2960668,
+            "separation_from_group_arcsec": 0.0,
+            "source_id": "J133711.05-364649.7"
+          },
+          "status": "OK"
+        },
+        "GAIA_DR3": {
+          "catalog": "GAIA_DR3",
+          "catalog_id": "I/355/gaiadr3",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "PANSTARRS_DR1": {
+          "catalog": "PANSTARRS_DR1",
+          "catalog_id": "II/349/ps1",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        },
+        "SDSS_DR16": {
+          "catalog": "SDSS_DR16",
+          "catalog_id": "V/154/sdss16",
+          "count": 0,
+          "radius_arcsec": 2.0,
+          "selected": null,
+          "status": "OK"
+        }
+      },
+      "classification": {
+        "class": "FAINT_INFRARED_SOURCE_UNCLASSIFIED",
+        "confidence": "LOW_TO_MEDIUM",
+        "gaia_derived": null,
+        "independent_catalog_roots": [
+          "ALLWISE"
+        ],
+        "reasons": [
+          "Only an AllWISE counterpart is recovered within the frozen 2 arcsec classification radius.",
+          "A single-band or weak mid-infrared detection without optical/Gaia/2MASS support is insufficient to distinguish a faint star, galaxy, or low-S/N infrared source."
+        ],
+        "wise_derived": {
+          "W1": 15.973999977111816,
+          "W1_minus_W2": -0.21200084686279297,
+          "W2": 16.18600082397461,
+          "W2_minus_W3": 3.774001121520996,
+          "W3": 12.411999702453613,
+          "W4": 9.145000457763672,
+          "contamination_flags": "0000",
+          "extended_flag": 0,
+          "quality": "ABUU"
+        }
+      },
+      "offset_from_frozen_target_center_arcsec": 20.289587649207107,
+      "representative_icrs": {
+        "dec_deg": -36.7804774,
+        "ra_deg": 204.2960668
+      },
+      "target": "LOVE"
+    }
+  },
+  "interpretation_contract": {
+    "catalog_classification_is_not_anomaly_detection": true,
+    "claim_ceiling": "ASTROPHYSICAL_CLASSIFICATION_OF_NEARBY_CATALOG_SOURCE_GROUPS_ONLY",
+    "classification_is_of_catalog_source_group_not_of_semantic_name": true,
+    "group_near_EDEM_is_not_the_identity_EDEM": true,
+    "group_near_LOVE_is_not_the_identity_LOVE": true,
+    "physical_LOVE_EDEM_Orion_association_not_established": true
+  },
+  "mode": "ASTROPHYSICAL_CLASSIFICATION_OF_FROZEN_SOURCE_GROUPS",
+  "run_time_utc": "2026-08-19T22:48:20.395872+00:00",
+  "schema": "janus.cosmos.love_edem.source_classification.receipt.v1",
+  "service_failures": [],
+  "source_lineage": [
+    "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-RECEIPT.json",
+    "research/love-g1-007-multieye-v2:data/love/LOVE-EDEM-GAIA-MIRROR-CLUSTER-v1-RUN-001-RECEIPT.json"
+  ],
+  "status": "COMPLETE"
+}
