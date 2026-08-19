@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cosmos.love_edem.image_level_forced_photometry_photoz.gate.v1",
+  "experiment_id": "IMAGE_LEVEL_FORCED_PHOTOMETRY_AND_EDEM_GALAXY_PHOTOZ",
+  "status": "PREREGISTERED",
+  "mode": "IMAGE_LEVEL_FORCED_PHOTOMETRY_AND_PHOTOZ_WITHOUT_ANOMALY_SCORING",
+  "frozen_targets": {
+    "EDEM_NEAREST_WISE_ONLY": {"ra_deg": 139.2249571, "dec_deg": 30.262781, "anchor": "AllWISE J091653.98+301546.0"},
+    "LOVE_NEAREST_WISE_ONLY": {"ra_deg": 204.2960668, "dec_deg": -36.7804774, "anchor": "AllWISE J133711.05-364649.7"},
+    "EDEM_OPTICAL_GALAXY": {"ra_deg": 139.222681, "dec_deg": 30.256918, "anchor": "SDSS J091653.44+301524.9 / Pan-STARRS 144301392226548847"}
+  },
+  "image_rules": {
+    "service": "NASA HEASARC SkyView via astroquery.skyview",
+    "surveys": ["WISE 3.4", "WISE 4.6", "2MASS-J", "DSS2 Red"],
+    "cutout_radius_arcmin": 1.5,
+    "pixels": 256,
+    "aperture_radius_arcsec": {"WISE 3.4": 9.0, "WISE 4.6": 9.0, "2MASS-J": 4.0, "DSS2 Red": 4.0},
+    "background_annulus_multipliers": [2.0, 3.0],
+    "control_ring_arcsec": 45.0,
+    "control_apertures": 24,
+    "forced_detection_threshold_sigma": 5.0,
+    "recenter_for_detection": false,
+    "widen_radius_after_result": false,
+    "same_mission_WISE_image_is_independent_catalog_root": false
+  },
+  "photoz_rules": {
+    "catalogs": ["VII/292", "V/147/sdss12"],
+    "match_radius_arcsec": 2.0,
+    "accepted_match_max_arcsec": 1.0,
+    "prefer_high_quality_flag": true,
+    "VII_292_requires_fclean_1_and_fqual_1_when_fields_present": true,
+    "distance_cosmology": "Astropy Planck18",
+    "spectroscopic_redshift_is_not_inferred_from_photoz": true
+  },
+  "firewall": {
+    "image_excess_is_not_anomaly": true,
+    "WISE_image_recovery_is_not_independent_of_AllWISE": true,
+    "photoz_is_approximate_not_spectroscopic": true,
+    "near_source_is_not_semantic_LOVE_or_EDEM_identity": true,
+    "physical_LOVE_EDEM_ORION_association_not_established": true,
+    "planet_claim": false
+  },
+  "claim_ceiling": "PIXEL_LEVEL_PERSISTENCE_AND_CATALOG_PHOTOZ_ONLY"
+}
