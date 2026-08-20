@@ -1,0 +1,92 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-AFRICA-FROZEN-POINT-EXACT-COVERAGE-AUDIT-RUN-001-2026-08-20-v1.0",
+  "run_id": "COUSTEAU_AFRICA_FROZEN_POINT_EXACT_COVERAGE_AUDIT_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T22:04:00+03:00",
+  "purpose": "Determine whether an authoritative public marine acoustic/geophysical survey footprint, multibeam swath, ping-file geometry, side-scan/subbottom line, or seismic track directly intersects the frozen LOVE-EDEM ocean point, without recentering or admitting cruise bounding boxes as local evidence.",
+  "frozen_origin": {
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING"
+  },
+  "coverage_admission_tiers": {
+    "TIER_A_EXACT_LOCAL": [
+      "authoritative_multibeam_swath_polygon_contains_frozen_point",
+      "authoritative_ping_or_file_geometry_contains_frozen_point",
+      "authoritative_side_scan_or_subbottom_footprint_contains_frozen_point",
+      "authoritative_seismic_or_trackline_geometry_intersects_frozen_point"
+    ],
+    "TIER_B_NEAR_LOCAL_NOT_EXACT": "centerline or station lies within a separately preregistered small radius but its measured footprint is not shown to contain the frozen point",
+    "TIER_C_REGIONAL_CONTROL": "regional cruise, survey, CTD, seismic context or broad bounding box without local intersection proof"
+  },
+  "current_results": {
+    "M121_GA08": {
+      "verdict": "NO_AS_EXACT_LOCAL_DATA",
+      "documented_section_latitude_deg_approx": -3.0,
+      "minimum_meridional_separation_from_frozen_latitude_km_approx": 96.23,
+      "role": "TIER_C_REGIONAL_CONTROL",
+      "note": "Raw EM122 data remain scientifically useful but the documented 3S transect does not intersect the frozen point."
+    },
+    "broad_open_web_and_literature_search": {
+      "verdict": "NO_CONCRETE_INTERSECTING_PUBLIC_DATASET_IDENTIFIED_IN_THIS_PASS",
+      "important_boundary": "This is not equivalent to proving that no public local dataset exists."
+    },
+    "legacy_angola_brazil_geotraverse": {
+      "status": "REJECTED_AS_DIRECT_CANDIDATE_FOR_THIS_POINT",
+      "reason": "Published descriptions place the main Angola-Brazil Geotraverse near 12 S, far south of the frozen point; it remains geological/seismoacoustic background only."
+    }
+  },
+  "authoritative_exact_query_routes_identified": [
+    {
+      "id": "NOAA_NCEI_TRACKLINE_ARCGIS",
+      "service": "web_mercator/trackline_combined_dynamic",
+      "geometry": "polyline",
+      "modalities": ["bathymetry", "gravity", "magnetics", "multi_channel_seismics", "seismic_refraction", "shot_point_navigation", "side_scan_sonar", "single_channel_seismics", "subbottom_profile"],
+      "capability": "supports spatial query and query-with-distance against authoritative survey trackline geometry",
+      "status": "AUTHORITATIVE_QUERY_ROUTE_FOUND__POINT_RESULT_NOT_YET_EXTRACTED"
+    },
+    {
+      "id": "NOAA_NCEI_MULTIBEAM_CATALOG",
+      "service": "next-catalogs multibeam catalog and ArcGIS multibeam datasets/files",
+      "capability": "geometry bounding-box filters for surveys and file-specific geometries; raw/processed/product layers exposed separately",
+      "status": "AUTHORITATIVE_QUERY_ROUTE_FOUND__POINT_RESULT_NOT_YET_EXTRACTED"
+    },
+    {
+      "id": "GMRT_SWATH_POLYGONS",
+      "service": "GMRT v4.5.0 swath polygons",
+      "capability": "polygons represent curated multibeam coverage based on swath-file extent at approximately 100 m synthesis resolution",
+      "status": "AUTHORITATIVE_COVERAGE_ROUTE_FOUND__POINT_IN_POLYGON_TEST_PENDING"
+    },
+    {
+      "id": "GMRT_TOPO_MASK",
+      "service": "GMRT GridServer topo-mask",
+      "capability": "masked ocean grid contains only curated high-resolution data and NaN where high-resolution data do not exist",
+      "status": "HIGH_RESOLUTION_COVERAGE_DIAGNOSTIC_FOUND__POINT_QUERY_PENDING"
+    }
+  ],
+  "regional_geological_context": {
+    "basin": "ANGOLA_BASIN",
+    "context": "The central Angola Basin is an abyssal plain with comparatively subdued acoustic-basement relief; historical seismic work exists regionally, but regional geology does not substitute for an intersecting local survey line."
+  },
+  "current_coverage_verdict": "PUBLIC_LOCAL_ACOUSTIC_COVERAGE_NOT_YET_PROVEN",
+  "why_not_NOT_FOUND_yet": "The authoritative NCEI and GMRT spatial-index/coverage services have been identified, but their exact point-intersection outputs have not yet been successfully extracted in this execution. Failure of a text/web search is not evidence of archive absence.",
+  "next_gate": "COUSTEAU_FROZEN_POINT_AUTHORITATIVE_SPATIAL_INDEX_INTERSECTION_QUERY_V1",
+  "decision_rule": {
+    "if_any_TIER_A_hit": "PUBLIC_LOCAL_ACOUSTIC_COVERAGE_FOUND__FETCH_RAWEST_AVAILABLE_DATA_AND_NAVIGATION",
+    "if_all_preregistered_authoritative_indexes_return_empty": "PUBLIC_LOCAL_ACOUSTIC_COVERAGE_NOT_FOUND_IN_QUERIED_PUBLIC_ARCHIVES_AS_OF_2026_08_20",
+    "if_only_TIER_B_hits": "NEAR_LOCAL_COVERAGE_FOUND__DO_NOT_LABEL_EXACT_POINT_DATA",
+    "if_only_TIER_C_hits": "REGIONAL_CONTEXT_ONLY"
+  },
+  "hard_rules": [
+    "NO_RECENTERING_OF_FROZEN_LOVE_EDEM_BISECTOR",
+    "NO_LOCAL_DATA_CLAIM_FROM_CRUISE_BOUNDING_BOX_ONLY",
+    "TRACK_SWATH_PING_FILE_OR_MEASURED_FOOTPRINT_INTERSECTION_REQUIRED_FOR_TIER_A",
+    "GLOBAL_INTERPOLATED_BATHYMETRY_IS_NOT_LOCAL_ACOUSTIC_DATA",
+    "M121_GA08_3S_TRANSECT_REMAINS_NEGATIVE_FOR_EXACT_LOCAL_COVERAGE",
+    "DO_NOT_UPGRADE_SEARCH_FAILURE_TO_ARCHIVE_ABSENCE",
+    "NEGATIVE_RESULTS_ARE_FIRST_CLASS_RECEIPTS",
+    "TITANIC_CALIBRATION_GATE_STILL_PRECEDES_AFRICA_TARGET_IDENTITY_INTERPRETATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "RUN_001_FROZEN__NO_EXACT_LOCAL_DATASET_ADMITTED__AUTHORITATIVE_POINT_QUERY_ROUTES_IDENTIFIED__FINAL_NOT_FOUND_VERDICT_PENDING"
+}
