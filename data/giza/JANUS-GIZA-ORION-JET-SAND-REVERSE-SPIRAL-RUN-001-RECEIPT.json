@@ -1,0 +1,196 @@
+{
+  "contract_sha256": "48562e1e0dde43af49ae7fe22a1683df4b95f416223777e8a99012ec9653270c",
+  "experiment_id": "JANUS-GIZA-ORION-JET-SAND-REVERSE-SPIRAL-RUN-001",
+  "gates": {
+    "all_prior_layers_preserved": true,
+    "automatic_canonization_disabled": true,
+    "direction_sequence_exact": true,
+    "negative_geology_layer_preserved": true,
+    "negative_glass_mechanism_layer_preserved": true,
+    "sha_parent_chain_valid": true,
+    "symbolic_layer_does_not_override_physics": true
+  },
+  "hieroglyphic_overlay": {
+    "class": "MODERN_JANUS_ICONIC_REBUS_NOT_ANCIENT_EGYPTIAN_TRANSLATION",
+    "forward_hypothesis": "𓇼 → 𓇳 → [GLASS] → 𓈖 → [SAND] → 𓉴",
+    "gloss": "PERSON + LIGHT -> STAR/LIGHT-BEING is a modern project rebus echoing the attested star/transfiguration motif; it is not an ancient sentence.",
+    "historical_firewall": "Sꜣḥ is retained as the historical Orion label; S𓂸ḥ remains a project overlay and is not used as a translation.",
+    "light_bearer_rebus": "𓀀𓇳 → 𓇼",
+    "reverse_audit": "𓉴 → [SAND] → 𓈖 → [GLASS?] → 𓇳 → 𓇼"
+  },
+  "input_artifact_id": "JANUS-GIZA-ORION-JET-SAND-REVERSE-SPIRAL-EVIDENCE-2026-08-20-v1.0",
+  "origin_prime": {
+    "contract_sha256": "48562e1e0dde43af49ae7fe22a1683df4b95f416223777e8a99012ec9653270c",
+    "next_test": "If the physical hypothesis is to be reopened, obtain actual Giza sediment samples and test amorphous fraction, Raman/XRD glass signatures, shock/high-temperature mineral markers and stratigraphic age before any new Orion alignment search.",
+    "origin_prime_sha256": "70da44b254144ae04ba2fa36c63bf5c3068980432d9168b3394d7f98cd959e76",
+    "preserved_result": "The physical chain ORION_JET -> GIZA_GLASS -> WATER -> SAND fails the current geological, alteration-mechanism and astrophysical evidence gates. The Orion/Osiris/star/shining transformation motif survives independently as a real textual-symbolic layer.",
+    "previous_layer_sha256": "b147a00355b21bf307896f5c32c85b28359467d591cef6c27028882868ebe3c4",
+    "source_sha256": "0a6541848b35081b4cf8eb380fa5cce3cb082b6e9d9f3ee82b45c424453f9c50",
+    "state": "ORIGIN_PRIME_1"
+  },
+  "receipt_sha256": "f2fff384ec69a5a4bde64bed3205b6b5736b6e7d95f6ce34b4d43b94207daf02",
+  "schema": "janus.cosmos.epistemic_spiral.receipt.v1",
+  "scientific_boundary": {
+    "giza_sand_from_hydrated_orion_glass": "NOT_ESTABLISHED__CURRENT_EVIDENCE_GATE_FAIL",
+    "hieroglyphic_overlay_is_historical_translation": false,
+    "memory_is_truth": false,
+    "orion_jet_vitrified_giza": "NOT_ESTABLISHED__CURRENT_EVIDENCE_GATE_FAIL",
+    "orion_osiris_star_shining_textual_motif": "SUPPORTED_AS_SYMBOLIC_TEXTUAL_CONTEXT"
+  },
+  "source_sha256": "0a6541848b35081b4cf8eb380fa5cce3cb082b6e9d9f3ee82b45c424453f9c50",
+  "spiral": {
+    "automatic_winner_selection": false,
+    "layer_count": 6,
+    "layers": [
+      {
+        "alternatives": [],
+        "claim_ceiling": "PREDICTIONS_ONLY",
+        "direction": "BACK",
+        "evidence_against": [],
+        "evidence_for": [],
+        "generation": 0,
+        "layer_id": "L0_ORIGIN",
+        "layer_sha256": "13d96bbdda4fa7e36f1a166c4f942dddb546cac3012c8e59f8881d2a43588471",
+        "necessary_predictions": [
+          "A laterally coherent high-temperature melt/glass signature should exist in or beneath the relevant Giza sand source units.",
+          "Mineralogy or microtextures should retain amorphous glass, melt relics, high-temperature transformations or another diagnostic thermal event signature.",
+          "A datable event horizon should precede the sand-forming/weathering sequence.",
+          "The source direction/energy mechanism must be astrophysically identifiable rather than the name Orion alone.",
+          "Water alteration products must bridge the proposed glass to the observed sediment mineralogy."
+        ],
+        "parent_layer_sha256": null,
+        "question": "Assume present Giza sand came from an Orion/Osiris jet-vitrified precursor. What must be true?",
+        "status": "HYPOTHESIS_ONLY"
+      },
+      {
+        "alternatives": [
+          "marine carbonate deposition",
+          "Pliocene marine transgression",
+          "Nile/pre-Nile fluvial deposition",
+          "alluvial and aeolian reworking",
+          "weathering of ordinary source rocks"
+        ],
+        "claim_ceiling": "NO_PUBLISHED_GIZA_VITRIFICATION_LAYER_FOUND_IN_THIS_PASS",
+        "direction": "FORWARD",
+        "evidence_against": [
+          "Published Giza plateau geology describes Eocene limestone, karst and sedimentary geomorphic processes.",
+          "Quaternary deposits south of the Sphinx include fluvial/alluvial quartzose sands with sedimentary structures.",
+          "No credible published regional Giza vitrification/melt-glass horizon was found in this pass."
+        ],
+        "evidence_for": [],
+        "generation": 1,
+        "layer_id": "L1_GEOLOGY",
+        "layer_sha256": "b5f8a6900354486392ba62a0d39c8f4c652742d779580ea76596c15769cf4e4d",
+        "necessary_predictions": [],
+        "parent_layer_sha256": "13d96bbdda4fa7e36f1a166c4f942dddb546cac3012c8e59f8881d2a43588471",
+        "question": "Do published Giza geology and sedimentology show the required vitrification horizon?",
+        "status": "PHYSICAL_SUBHYPOTHESIS_FAILS_CURRENT_GEOLOGY_GATE"
+      },
+      {
+        "alternatives": [
+          "mechanical fragmentation of glass would leave glassy grains",
+          "chemical dissolution and secondary precipitation",
+          "ordinary sediment transport and abrasion"
+        ],
+        "claim_ceiling": "GLASS_WEATHERS_BUT_NOT_BY_THE_PROPOSED_SIMPLE_CONVERSION",
+        "direction": "LEFT",
+        "evidence_against": [
+          "Documented glass alteration mechanisms are hydration, ion exchange, hydrolysis, dissolution/corrosion and formation of altered silica-rich layers or secondary products.",
+          "The simple causal rule GLASS + WATER -> QUARTZ SAND is not supported by the reviewed glass-weathering literature."
+        ],
+        "evidence_for": [
+          "Water does penetrate and chemically alter silicate glasses."
+        ],
+        "generation": 2,
+        "layer_id": "L2_GLASS_TO_SAND",
+        "layer_sha256": "445fb32ea7c935795479f488a94b5fbe30cb7ad8051d7669dffabdb90c664a6c",
+        "necessary_predictions": [],
+        "parent_layer_sha256": "b5f8a6900354486392ba62a0d39c8f4c652742d779580ea76596c15769cf4e4d",
+        "question": "Does water naturally convert silica glass into ordinary quartzose desert sand by the proposed pathway?",
+        "status": "SIMPLE_GLASS_HYDRATION_TO_SAND_MECHANISM_FAIL"
+      },
+      {
+        "alternatives": [
+          "impact/airburst-related fusion of silica-rich target material"
+        ],
+        "claim_ceiling": "ANALOG_CONTROL_ONLY",
+        "direction": "RIGHT",
+        "evidence_against": [
+          "The field is in the southwestern Great Sand Sea near Libya, geographically distinct from Giza.",
+          "Its diagnostic evidence supports extreme terrestrial impact-related heating, not an Orion/Osiris jet."
+        ],
+        "evidence_for": [
+          "Libyan Desert Glass demonstrates that large natural silica-glass fields can occur in Egyptian desert environments.",
+          "Its high-temperature mineral evidence includes zircon breakdown at temperatures above 1676 C."
+        ],
+        "generation": 3,
+        "layer_id": "L3_LIBYAN_DESERT_GLASS_CONTROL",
+        "layer_sha256": "a06728c61893c0dd9ef228d79055621fabb433f3c0dc268bbab56257faccdcbd",
+        "necessary_predictions": [],
+        "parent_layer_sha256": "445fb32ea7c935795479f488a94b5fbe30cb7ad8051d7669dffabdb90c664a6c",
+        "question": "What does a genuine high-temperature silica-glass field in Egypt look like?",
+        "status": "POSITIVE_CONTROL_FOR_EXPECTED_VITRIFICATION_SIGNATURES__NOT_GIZA_SUPPORT"
+      },
+      {
+        "alternatives": [
+          "ordinary protostellar outflows",
+          "stellar winds",
+          "unrelated line-of-sight stars",
+          "symbolic Orion association"
+        ],
+        "claim_ceiling": "REAL_ORION_JETS_EXIST__PROPOSED_GIZA_CAUSAL_LINK_UNSUPPORTED",
+        "direction": "FORWARD_AGAIN",
+        "evidence_against": [
+          "Orion is a line-of-sight constellation, not one physical emitter.",
+          "The open sources found here describe protostellar jets shaping their local molecular-cloud environment, not an Earth-directed beam reaching Giza.",
+          "No credible published evidence for an ancient Orion jet vitrifying Giza was found in this pass."
+        ],
+        "evidence_for": [
+          "Astrophysical jets/outflows genuinely exist in Orion star-forming regions."
+        ],
+        "generation": 4,
+        "layer_id": "L4_ASTROPHYSICS",
+        "layer_sha256": "b645a6def8e72859df10fc46cca2bf9034632448b90e1b3d4381068c9fefb0dc",
+        "necessary_predictions": [],
+        "parent_layer_sha256": "a06728c61893c0dd9ef228d79055621fabb433f3c0dc268bbab56257faccdcbd",
+        "question": "Is there an identified Orion source capable of the proposed ancient Earth-directed vitrifying jet?",
+        "status": "EARTH_DIRECTED_ORION_JET_NOT_ADMITTED"
+      },
+      {
+        "alternatives": [
+          "funerary astral rebirth",
+          "royal transfiguration",
+          "ritual/cosmological symbolism"
+        ],
+        "claim_ceiling": "TEXTUAL_SYMBOLIC_PROVENANCE_ONLY",
+        "direction": "BACK_AGAIN",
+        "evidence_against": [
+          "No reviewed Pyramid Text passage says an Orion jet melted Giza ground into glass or sand.",
+          "Textual star/light transformation does not establish an engineering emitter, receiver or geological event."
+        ],
+        "evidence_for": [
+          "Pyramid Text traditions genuinely connect royal post-mortem transformation with stars and Orion.",
+          "A scholarly source gives Unas as the great star, companion of Orion, and discusses Orion as embodying Osiris in that context.",
+          "The motif of renewed shining in the East is textually attested in scholarly translation/commentary."
+        ],
+        "generation": 5,
+        "layer_id": "L5_TEXT_AND_SYMBOL",
+        "layer_sha256": "b147a00355b21bf307896f5c32c85b28359467d591cef6c27028882868ebe3c4",
+        "necessary_predictions": [],
+        "parent_layer_sha256": "b645a6def8e72859df10fc46cca2bf9034632448b90e1b3d4381068c9fefb0dc",
+        "question": "Does the Egyptian textual layer preserve an Orion/Osiris/light transformation motif even if the physical jet hypothesis fails?",
+        "status": "SYMBOLIC_ORION_OSIRIS_LIGHT_LAYER_PASSES__PHYSICAL_JET_LAYER_DOES_NOT"
+      }
+    ],
+    "order": [
+      "BACK",
+      "FORWARD",
+      "LEFT",
+      "RIGHT",
+      "FORWARD_AGAIN",
+      "BACK_AGAIN"
+    ],
+    "preserve_all_layers": true
+  },
+  "status": "PASS_SPIRAL_ASSEMBLY__PHYSICAL_HYPOTHESIS_FAIL__SYMBOLIC_LAYER_PRESERVED"
+}
