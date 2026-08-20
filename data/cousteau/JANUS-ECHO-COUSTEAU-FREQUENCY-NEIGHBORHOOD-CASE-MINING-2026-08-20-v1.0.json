@@ -1,0 +1,124 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-FREQUENCY-NEIGHBORHOOD-CASE-MINING-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "run_class": "OPEN_SOURCE_SPECTRAL_CASE_MINING__POST_HOC_COMPARISON_TO_PREEXISTING_MODEL_PRIOR",
+  "parent_model": "Hawkar-usls/Echo-Pyramid:config/underwater_resonator_recipe.v1.json",
+  "prior": {
+    "nominal_band_hz": [511.6618075801749, 529.1545189504374],
+    "center_hz": 520.4081632653061,
+    "ctd_sensitivity_envelope_hz": [504.8396501457726, 543.265306122449],
+    "claim_ceiling": "MODEL_PRIOR_ONLY"
+  },
+  "cases": [
+    {
+      "rank": 1,
+      "id": "ICEBERG_HARMONIC_TREMOR",
+      "source_status": "RESOLVED_NATURAL",
+      "spectrum": "40 Hz fundamental with 40 Hz overtone spacing; published report states as many as 15 overtones visible",
+      "comparison": {
+        "harmonic_line_hz": 520,
+        "difference_from_prior_center_hz": 0.40816326530614333,
+        "relative_difference_percent": 0.07843137254902362,
+        "match_type": "VERY_CLOSE_ABSOLUTE_HZ_FALSE_POSITIVE"
+      },
+      "meaning": "A natural resonant/frictional ice-seafloor system can land almost exactly on the modeled 520 Hz center. Absolute frequency alone has essentially zero specificity."
+    },
+    {
+      "rank": 2,
+      "id": "SEI_WHALE_MID_FREQUENCY_CALLS",
+      "source_status": "KNOWN_BIOLOGICAL",
+      "published_band_hz": [200, 600],
+      "comparison": {
+        "nominal_prior_fully_inside_band": true,
+        "match_type": "DIRECT_BAND_OVERLAP_BIOLOGICAL_CONTROL"
+      },
+      "meaning": "Natural marine mammals can emit directly in the entire modeled 512-529 Hz neighborhood."
+    },
+    {
+      "rank": 3,
+      "id": "ANTARCTIC_MINKE_BIO_DUCK",
+      "source_status": "RESOLVED_BIOLOGICAL_AFTER_DECADES_OF_MYSTERY",
+      "published_fundamental_energy_hz": [50, 500],
+      "published_harmonics_to_hz": 2000,
+      "comparison": {
+        "fundamental_nominal_overlap": false,
+        "gap_to_nominal_low_edge_hz": 11.661807580174923,
+        "harmonic_cloud_can_span_prior": true,
+        "match_type": "HARMONIC_NEIGHBORHOOD_FALSE_POSITIVE"
+      },
+      "meaning": "Repetitive machine-like signals with harmonics in the target neighborhood can be biological."
+    },
+    {
+      "rank": 4,
+      "id": "FISH_SWIMBLADDER_RESONANCE",
+      "source_status": "KNOWN_BIOACOUSTIC_RESONANCE",
+      "comparison": {
+        "match_type": "BIOLOGICAL_CAVITY_RESONANCE_CLASS",
+        "note": "resonance varies with species, size and depth; published models and measurements place some fish resonances in the several-hundred-hertz neighborhood"
+      },
+      "meaning": "A gas-filled biological cavity can create strong resonant target strength and must be a mandatory control."
+    },
+    {
+      "rank": 5,
+      "id": "SUBMERGED_ELASTIC_SHELL_RESONANCE",
+      "source_status": "ENGINEERED_EXPERIMENTAL_PHYSICS_CONTROL",
+      "comparison": {
+        "match_type": "MECHANISM_POSITIVE_CONTROL",
+        "note": "published submerged-shell studies show resonance-rich echoes, ringing and fluid-fill dependence; one modern simulation library spans 500 Hz upward"
+      },
+      "meaning": "The transformed-echo mechanism is physically real for submerged resonant objects, but geometry identity requires multi-feature inversion."
+    },
+    {
+      "rank": 6,
+      "id": "SURTASS_LFA",
+      "source_status": "MILITARY_ACTIVE_SONAR_ILLUMINATOR",
+      "transmit_band_hz": [100, 500],
+      "gap_to_nominal_prior_low_edge_hz": 11.661807580174923,
+      "comparison": {
+        "match_type": "NEARBY_EXCITATION_BAND_NOT_RETURN_MATCH",
+        "warning": "frequency proximity of the illuminator is not evidence of a 520 Hz target response"
+      }
+    },
+    {
+      "rank": 7,
+      "id": "NOAA_UPSWEEP",
+      "source_status": "UNRESOLVED_SOURCE",
+      "published_spectrogram_hz": [0, 64],
+      "comparison": {
+        "match_type": "REJECT_ABSOLUTE_FREQUENCY",
+        "reason": "far below modeled flooded prior"
+      }
+    }
+  ],
+  "high_priority_archive_cases_missing_numeric_spectra": [
+    {
+      "id": "GALLAUDET_1980S_BALLISTIC_MISSILE_SUBMARINE_SONAR_ACCOUNT",
+      "needed": ["raw waveform", "spectrum", "ping waveform", "TWTT", "bearing", "Doppler", "platform navigation", "SSP"]
+    },
+    {
+      "id": "SOVIET_QUACKERS",
+      "needed": ["raw hydroacoustic recordings", "absolute frequency calibration", "bearing history", "active-ping timestamps", "platform navigation"]
+    },
+    {
+      "id": "NUNAVUT_FURY_AND_HECLA_2016_PING",
+      "source_status": "REPORTED_SEAFLOOR_PING__CANADIAN_MILITARY_SWEEP_FOUND_NO UNUSUAL CONTACT",
+      "needed": ["original sailboat sonar recording", "frequency calibration", "location", "instrument model"]
+    }
+  ],
+  "search_policy": {
+    "primary_key": "FULL_TRANSFER_FUNCTION_AND_REPEATABLE_MODAL_PATTERN",
+    "secondary_key": "ABSOLUTE_FREQUENCY_NEIGHBORHOOD",
+    "admission_requires": [
+      "published or raw calibrated spectrum",
+      "repeat observations",
+      "Q or linewidth where possible",
+      "decay/ringing",
+      "phase or impulse response",
+      "active/passive context",
+      "geolocation and geometry",
+      "biological/ice/ship/ASW control comparison"
+    ]
+  },
+  "status": "FREQUENCY_MINING_PASS_AS_CALIBRATION__ABSOLUTE_520_HZ_SPECIFICITY_REJECTED__RAW_HISTORICAL_MILITARY_SPECTRA_STILL_NEEDED",
+  "next_gate": "COUSTEAU_RAW_SPECTRUM_ARCHIVE_ACQUISITION_V1"
+}
