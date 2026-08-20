@@ -1,0 +1,212 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-GLOBAL-OCEAN-ACOUSTIC-ADVERSARIAL-CORPUS-2026-08-20-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T22:22:00+03:00",
+  "scope": "GLOBAL_OCEAN__ANY_PUBLIC_MENTION_OR_DATASET_RELEVANT_TO_RESONANT_RETURN_FALSE_TARGET_TARGET_TRANSFER_PROPAGATION_OR_CALIBRATION",
+  "purpose": "Expand Cousteau from one frozen field point into a global adversarial control and calibration corpus so every future candidate is compared against known natural, biological, geological, engineered, propagation and instrumentation mechanisms before interpretation.",
+  "frozen_africa_target_unchanged": {
+    "coordinate": [-3.865418, 3.854924],
+    "rule": "NO_RECENTERING__GLOBAL_MINING_MUST_NOT_MOVE_OR_RETUNE_THE_FIELD_TARGET"
+  },
+  "mining_keywords": [
+    "sonar", "hydrophone", "acoustic", "echo", "backscatter", "resonance", "ringing", "harmonic", "tremor", "false bottom", "gas plume", "bubble plume", "pockmark", "gas hydrate", "acoustic chimney", "wipeout", "wreck", "shell", "beacon", "sound source", "airgun", "active sonar", "passive acoustic", "side-scan", "subbottom", "seismic reflection", "seismic refraction", "water column sonar", "saturation", "self-noise", "interference", "multipath", "bottom bounce", "ducting", "sound speed profile", "CTD", "swim bladder", "marine mammal", "icequake", "iceberg grounding", "submarine volcano", "hydrothermal vent"
+  ],
+  "case_classes": {
+    "NATURAL_FALSE_TARGETS": [
+      "DEEP_SCATTERING_LAYER_FALSE_BOTTOM",
+      "FISH_SWIMBLADDER_RESONANCE",
+      "GAS_BUBBLE_PLUMES_AND_SEEPS",
+      "GAS_CHARGED_SEDIMENT_ACOUSTIC_CHIMNEYS_AND_WIPEOUT",
+      "ICEBERG_HARMONIC_TREMOR",
+      "ICEQUAKES_BLOOP_CLASS",
+      "ICEBERG_GROUNDING_TRAIN_SLOWDOWN_JULIA",
+      "SUBMARINE_VOLCANIC_HARMONIC_TREMOR",
+      "SUBMARINE_VOLCANIC_WHISTLE_CLASS",
+      "HYDROTHERMAL_MINERAL_AND_SULFIDE_BACKSCATTER"
+    ],
+    "BIOLOGICAL_MIMICS": [
+      "SEI_WHALE_200_600_HZ",
+      "ANTARCTIC_MINKE_BIO_DUCK",
+      "LEOPARD_SEAL_200_400_HZ",
+      "BLUE_AND_FIN_WHALE_LOW_FREQUENCY_CALLS",
+      "DEEP_SCATTERING_LAYER_COLLECTIVE_VOLUME_SCATTERING"
+    ],
+    "ENGINEERED_AND_CALIBRATION_CONTROLS": [
+      "SUBMERGED_ELASTIC_SHELL",
+      "RMS_TITANIC_KNOWN_WRECK",
+      "OTHER_KNOWN_SHIPWRECK_MULTIBEAM_SIDE_SCAN_TARGETS",
+      "OCEANOGRAPHIC_SOUND_SOURCE_270_HZ_RAMP",
+      "SURTASS_LFA_100_500_HZ",
+      "SEISMIC_AIRGUN_TRAINS",
+      "VESSEL_PASSES",
+      "KNOWN_INSTRUMENT_OR_POWER_SUPPLY_TONES"
+    ],
+    "PROPAGATION_AND_SYSTEM_FALSE_POSITIVES": [
+      "BOTTOM_BOUNCE_AND_SEAFLOOR_REFRACTION",
+      "SURFACE_BOTTOM_DUCTING",
+      "CTD_SSP_MISMATCH",
+      "MULTIPATH_AND_REVERBERATION",
+      "INTERNAL_WAVE_SOUND_SPEED_PERTURBATION",
+      "HYDROPHONE_SATURATION_CLIPPING",
+      "SONAR_CROSSTALK_AND_SYNCHRONIZATION_INTERFERENCE",
+      "SENSOR_SELF_NOISE_FIXED_TONES",
+      "MILITARY_DATA_DIVERSION_OR_MISSING_RAW_AUDIO_AS_AVAILABILITY_CONFOUND"
+    ],
+    "UNRESOLVED_OR_HISTORICAL_WATCHLIST": [
+      "NOAA_UPSWEEP__UNRESOLVED_ORIGIN_BUT_FREQUENCY_REJECT_FOR_520_PRIOR",
+      "SOVIET_QUACKERS__RAW_DATA_NOT_RECOVERED",
+      "GALLAUDET_1980S_SUBMARINE_SONAR_ACCOUNT__TESTIMONY_NOT_RAW_TRACK",
+      "WATKINS_WHALE_UNKNOWN_CALL_CLASS",
+      "OTHER_PMEL_UNKNOWN_ORIGIN_SIGNALS_ONLY_IF_RAW_OR_TRACEABLE_METADATA_EXISTS"
+    ]
+  },
+  "new_high_value_cases": [
+    {
+      "case_id": "DSL_FALSE_BOTTOM",
+      "class": "NATURAL_FALSE_TARGET",
+      "fact": "Dense layers of fish, squid, jellyfish and other organisms can produce a sonar reflector that historically appeared as a moving second seafloor; swim bladders can dominate the return.",
+      "why_cousteau_needs_it": "Mandatory control against coherent seafloor-like or moving-layer target hallucination.",
+      "source": "NOAA Ocean Exploration deep scattering layer"
+    },
+    {
+      "case_id": "GAS_PLUME_MULTIBEAM_WATER_COLUMN",
+      "class": "NATURAL_FALSE_TARGET",
+      "fact": "Gas seeps form near-vertical high-reflectivity columns in multibeam water-column imagery; NOAA has labeled hundreds of thousands of water-column images for seep detection.",
+      "why_cousteau_needs_it": "Controls vertical geometric targets, bright water-column returns and apparent fixed seafloor sources.",
+      "source": "NOAA Ocean Exploration seep auto-detection and NCEI water-column archive"
+    },
+    {
+      "case_id": "GAS_CHARGED_SEDIMENT_CHIMNEY_WIPEOUT",
+      "class": "GEOLOGICAL_PROPAGATION_CONTROL",
+      "fact": "High-resolution marine seismic data can show acoustic chimneys, diffractions, abrupt reflectivity changes and wipeout zones associated with gas and gas hydrate.",
+      "why_cousteau_needs_it": "A buried or vertical-looking acoustic structure is not automatically an engineered body.",
+      "source": "USGS Gulf of Mexico gas-hydrate seismic studies"
+    },
+    {
+      "case_id": "ICEBERG_GROUNDING_FAMILY",
+      "class": "CRYOGENIC_FALSE_POSITIVE",
+      "members": ["HARMONIC_TREMOR", "TRAIN", "SLOW_DOWN", "JULIA", "BLOOP_ICEQUAKE"],
+      "fact": "Grounding and fracturing ice can create steady tones, harmonic combs, frequency sweeps and enormous long-range broadband events detected thousands of kilometers away.",
+      "why_cousteau_needs_it": "Controls apparently mechanical, harmonic, moving and long-range acoustic anomalies.",
+      "source": "NOAA PMEL Acoustics"
+    },
+    {
+      "case_id": "SUBMARINE_VOLCANIC_TREMOR_AND_WHISTLE",
+      "class": "GEOPHYSICAL_FALSE_POSITIVE",
+      "fact": "Submarine/volcanogenic activity can produce harmonic tremor packets and undulating narrow-band signals detectable over ocean-basin scales.",
+      "why_cousteau_needs_it": "Controls resonant-looking low-frequency signatures not caused by structures.",
+      "source": "NOAA PMEL Acoustics"
+    },
+    {
+      "case_id": "OCEANOGRAPHIC_SOUND_SOURCE_270_HZ",
+      "class": "ENGINEERED_ILLUMINATOR_CONTROL",
+      "fact": "A deliberate oceanographic sound beacon recorded by NOAA ramps to about 270 Hz and lasts about three minutes.",
+      "why_cousteau_needs_it": "A clean engineered tone/ramp in the sea can be an illuminator or beacon rather than a target return.",
+      "source": "NOAA PMEL Acoustics"
+    },
+    {
+      "case_id": "VESSEL_NEAR_HYDROPHONE_SATURATION",
+      "class": "INSTRUMENTATION_FALSE_POSITIVE",
+      "fact": "A small vessel passing close to a hydrophone can overwhelm other sounds and saturate the recording.",
+      "why_cousteau_needs_it": "Clipping and saturation can fabricate harmonics, broadened lines and distorted decay envelopes.",
+      "source": "NOAA PMEL Acoustics"
+    },
+    {
+      "case_id": "MARS_50_KHZ_POWER_TONE",
+      "class": "INSTRUMENT_SELF_NOISE_CONTROL",
+      "fact": "A published MARS hydrophone analysis documents a 50 kHz tone attributed to the cabled observatory power supply.",
+      "why_cousteau_needs_it": "Fixed spectral lines can come from the observing system itself; sensor/site self-noise must be modeled before target inference.",
+      "source": "MBARI MARS hydrophone analysis"
+    },
+    {
+      "case_id": "BOTTOM_BOUNCE_DUCTING",
+      "class": "PROPAGATION_FALSE_POSITIVE",
+      "fact": "Low-frequency sonar can interact with the seabed, refract within it, return to the water column and form variable surface/bottom ducts depending on depth, bottom composition, topography and weather.",
+      "why_cousteau_needs_it": "A delayed or spatially displaced return may be propagation geometry rather than target motion or resonance.",
+      "source": "SURTASS LFA environmental documentation"
+    },
+    {
+      "case_id": "SONAR_INTERFERENCE_SYNC_CONTROL",
+      "class": "SYSTEM_CROSSTALK_CONTROL",
+      "fact": "NOAA Okeanos mapping operations explicitly calibrate multiple sonars and use K-Sync to reduce interference between systems.",
+      "why_cousteau_needs_it": "Cross-system interference must be treated as a first-class false-positive source in multi-sonar datasets.",
+      "source": "NOAA Ocean Exploration EX1902"
+    }
+  ],
+  "global_open_data_backbone": [
+    {
+      "archive_id": "NOAA_NCEI_MARINE_TRACKLINE",
+      "coverage": "WORLDWIDE_1939_PRESENT",
+      "modalities": ["singlebeam_bathymetry", "subbottom", "side_scan", "seismic_reflection", "seismic_refraction", "shotpoint_navigation", "magnetics", "gravity"],
+      "cousteau_role": "Global exact-line discovery and geological control mining"
+    },
+    {
+      "archive_id": "NOAA_NCEI_MULTIBEAM_AND_WATER_COLUMN",
+      "modalities": ["raw_vendor_multibeam", "sound_speed_profiles", "water_column_sonar", "side_scan"],
+      "cousteau_role": "Raw active-sonar geometry, backscatter and water-column target corpus"
+    },
+    {
+      "archive_id": "NOAA_NCEI_PASSIVE_ACOUSTIC_DATA",
+      "status": "FREE_GLOBALLY_ACCESSIBLE_RAW_AUDIO_AND_PRODUCTS",
+      "modalities": ["WAV", "AIF", "MP3", "netCDF", "CSV", "sound_level_products"],
+      "cousteau_role": "Global passive-acoustic false-positive and ambient-sound corpus"
+    },
+    {
+      "archive_id": "NOAA_NPS_NOISE_REFERENCE_STATIONS",
+      "frequency_band_hz": [10, 2000],
+      "stations": 13,
+      "public_audio_years_cumulative_min": 63,
+      "cousteau_role": "Calibrated long-term low-frequency reference set across diverse ocean regions"
+    },
+    {
+      "archive_id": "GMRT_V4_5",
+      "survey_count": 1644,
+      "curated_multibeam_area_km2": 44896399,
+      "global_ocean_fraction_percent": 12.41,
+      "cousteau_role": "Global swath-footprint and known-geometry bathymetric control discovery"
+    },
+    {
+      "archive_id": "OCEAN_NETWORKS_CANADA_OCEANS_3_0",
+      "hydrophone_device_count_approx_min": 160,
+      "archive_scale_pb_approx": 1.2,
+      "formats": ["WAV", "FLAC", "HYD", "FFT", "MAT", "PNG", "PDF"],
+      "calibration_metadata": true,
+      "cousteau_role": "High-volume raw hydrophone and calibrated spectral control library"
+    }
+  ],
+  "global_admission_contract": {
+    "P0_RAW_CONTROL": "Raw or near-raw acoustic data plus traceable source/geometry/calibration. Highest value.",
+    "P1_RESOLVED_MIMIC": "Phenomenon with a resolved natural/biological/instrumental cause and measurable acoustic signature.",
+    "P2_ENGINEERED_TARGET": "Known submerged object or deliberate sound source with independent ground truth.",
+    "P3_UNRESOLVED_TRACEABLE": "Unresolved signal with traceable primary recording and metadata. Watchlist only, never positive evidence.",
+    "P4_SECONDARY_STORY": "Testimony/memoir/news without raw trace. Archive target only.",
+    "reject_rule": "No case is promoted merely because it overlaps 119 Hz or 520 Hz. Frequency coincidence is non-specific."
+  },
+  "required_feature_vector_for_each_case": [
+    "source_type", "resolved_status", "active_or_passive", "frequency_band", "waveform_or_spectral_shape", "harmonic_spacing", "Q_or_linewidth_if_known", "ringdown_or_duration", "phase_if_available", "bearing_range_location_quality", "platform_sensor", "calibration", "CTD_SSP", "repeatability", "raw_data_access", "known_ground_truth", "known_false_positive_mechanism", "cousteau_priority"
+  ],
+  "future_global_mining_fronts": [
+    "KNOWN_WRECKS_WITH_RAW_MULTIBEAM_SIDE_SCAN_AND_3D_GROUND_TRUTH",
+    "SUBSEA_PIPELINES_CABLES_PLATFORMS_AND_ARTIFICIAL_REEFS_AS_ENGINEERED_GEOMETRY_CONTROLS",
+    "MUD_VOLCANOES_BRINE_POOLS_CARBONATE_CHIMNEYS_AND_HYDROTHERMAL_VENTS",
+    "SEAMOUNTS_LAVA_FLOWS_AND_MINERAL_DEPOSITS_WITH STRONG BACKSCATTER",
+    "OPEN_OCEAN_PASSIVE_HYDROPHONE_STATIONS_NEAR_ACTIVE_SONAR_OR_SEISMIC_SURVEYS",
+    "MULTI_SENSOR_EVENTS_WITH_SIMULTANEOUS_PASSIVE_ACTIVE_SEISMIC_AND_OPTICAL GROUND TRUTH",
+    "INSTRUMENT SELF-NOISE AND SONAR CROSSTALK CATALOGS",
+    "RESOLVED HISTORICAL OCEAN SOUND MYSTERIES AS NEGATIVE TRAINING SET"
+  ],
+  "hard_rules": [
+    "GLOBAL_EXPANSION_IS_CONTROL_MINING_NOT_TARGET_CHERRY_PICKING",
+    "NO_FREQUENCY_ONLY_ADMISSION",
+    "NO_RECENTERING_OF_FROZEN_AFRICA_POINT",
+    "RAW_DATA_OUTRANKS_STORIES",
+    "KNOWN_FALSE_POSITIVES_ARE_FIRST_CLASS_TRAINING_DATA",
+    "INSTRUMENT_AND_PROPAGATION_ARTIFACTS_ARE_EQUAL_PRIORITY_TO NATURAL CONTROLS",
+    "UNRESOLVED_DOES_NOT_MEAN_EXOTIC",
+    "TITANIC_CST_EXP_03_STILL_PRECEDES_AFRICA_TARGET_IDENTITY_INTERPRETATION",
+    "PRESERVE_PASS_FAIL_AMBIGUOUS_NEGATIVE_UNLOCATABLE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "GLOBAL_OCEAN_ADVERSARIAL_CORPUS_V1_FROZEN__MINING_EXPANDED_FROM_SINGLE_POINT_TO_WORLD_OCEAN",
+  "next_gate": "COUSTEAU_GLOBAL_OCEAN_CASE_MINING_AND_RAW_DATA_HARVEST_RUN_001"
+}
