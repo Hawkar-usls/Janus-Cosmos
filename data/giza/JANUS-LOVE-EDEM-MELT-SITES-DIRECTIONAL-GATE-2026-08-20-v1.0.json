@@ -2,6 +2,7 @@
   "artifact_id": "JANUS-LOVE-EDEM-MELT-SITES-DIRECTIONAL-GATE-2026-08-20-v1.0",
   "schema": "janus.cosmos.love_edem.melt_sites.directional_gate.v1",
   "created_at_local": "2026-08-20T11:40:00+03:00",
+  "updated_at_local": "2026-08-20T11:40:00+03:00",
   "status": "COMPLETE__NO_CLEAN_LOVE_DIRECTIONAL_MATCH_FOUND__EDEM_HAS_ONE_MODEL_SENSITIVE_WABAR_COMPATIBILITY__DAKHLEH_REMAINS_UNSCORABLE",
   "correction_of_previous_framing": {
     "previous_overfocus": "ORION_AS_PRIMARY_SOURCE",
@@ -35,10 +36,7 @@
       "LOVE_endpoint": {"dec_deg": -36.78240528, "result": "FAIL", "minimum_declination_mismatch_deg": 76.65592682},
       "EDEM_endpoint": {"dec_deg": 30.2603878, "result": "FAIL", "minimum_declination_mismatch_deg": 9.61313374},
       "interpretation": "Kamil is a valuable real Egyptian melt-direction control, but its independently reconstructed local trajectory cannot point to either frozen endpoint even before RA is considered.",
-      "sources": [
-        "https://doi.org/10.1111/maps.12023",
-        "https://doi.org/10.1111/j.1945-5100.2011.01222.x"
-      ]
+      "sources": ["https://doi.org/10.1111/maps.12023", "https://doi.org/10.1111/j.1945-5100.2011.01222.x"]
     },
     {
       "id": "DAKHLEH_GLASS_EGYPT",
@@ -52,11 +50,14 @@
       "directional_status": "UNSCORABLE_WITH_CURRENT_PUBLIC_TRAJECTORY_CONSTRAINTS",
       "LOVE_endpoint": {"result": "OPEN_NOT_TESTABLE_YET"},
       "EDEM_endpoint": {"result": "OPEN_NOT_TESTABLE_YET"},
-      "why_priority": "This was absent from the prior Janus vitrification set and is one of the strongest missed Egyptian physical controls. Its broad glass distribution may permit a future spatial-gradient/airburst trajectory reconstruction.",
-      "sources": [
-        "https://doi.org/10.1016/j.epsl.2010.01.014",
-        "https://doi.org/10.1016/j.epsl.2006.10.039"
-      ]
+      "rejected_trajectory_lead": {
+        "early_report": "An earlier Dakhleh project report associated a Bow Wave Structure with glass/melt displaced southward and south-eastward.",
+        "later_peer_reviewed_check": "The 2008 systematic field study found that the DBWS likely comprises arcuate ridges of a fold-basin structure and that its size rules out association with the Dakhleh Glass; another candidate circular depression also lacked impact evidence.",
+        "rule": "DO_NOT_USE_DBWS_SOUTHWARD_EJECTA_AS_A_LOVE_EDEM_TRAJECTORY",
+        "status": "REJECTED_AS_DIRECTIONAL_AUTHORITY"
+      },
+      "why_priority": "This was absent from the prior Janus vitrification set and is one of the strongest missed Egyptian physical controls. Its broad glass distribution may permit a future independent airburst-trajectory reconstruction, but no route is presently admitted.",
+      "sources": ["https://doi.org/10.1016/j.epsl.2010.01.014", "https://doi.org/10.1016/j.epsl.2006.10.039", "https://doi.org/10.1111/j.1945-5100.2008.tb00663.x"]
     },
     {
       "id": "LIBYAN_DESERT_GLASS",
@@ -77,19 +78,8 @@
       "physical_status": "IRON_METEORITE_IMPACT_WITH_FUSED_SAND_AND_IMPACT_GLASS",
       "trajectory_status": "MODEL_SENSITIVE",
       "azimuth_deg": 300.0,
-      "published_model_A": {
-        "elevation_deg": [22.0, 45.0],
-        "derived_declination_envelope_deg": [34.6552917, 36.31748767],
-        "EDEM_result": "FAIL_BY_AT_LEAST_4.3949_DEG",
-        "LOVE_result": "FAIL"
-      },
-      "published_model_B": {
-        "elevation_deg": [0.0, 22.0],
-        "derived_declination_envelope_deg": [27.72307253, 34.6552917],
-        "EDEM_result": "DECLINATION_COMPATIBLE_ONLY",
-        "elevation_deg_required_for_exact_EDEM_declination_at_A300": 6.54184665,
-        "LOVE_result": "FAIL"
-      },
+      "published_model_A": {"elevation_deg": [22.0, 45.0], "derived_declination_envelope_deg": [34.6552917, 36.31748767], "EDEM_result": "FAIL_BY_AT_LEAST_4.3949_DEG", "LOVE_result": "FAIL"},
+      "published_model_B": {"elevation_deg": [0.0, 22.0], "derived_declination_envelope_deg": [27.72307253, 34.6552917], "EDEM_result": "DECLINATION_COMPATIBLE_ONLY", "elevation_deg_required_for_exact_EDEM_declination_at_A300": 6.54184665, "LOVE_result": "FAIL"},
       "verdict": "MODEL_SENSITIVE_EDEM_DECLINATION_COMPATIBILITY_ONLY__NOT_A_CELESTIAL_HIT",
       "reason": "Published trajectory-angle reconstructions differ and event time/RA are not known; matching only declination under one shallow model is not evidence."
     },
@@ -145,12 +135,7 @@
   },
   "next_gate": {
     "name": "LOVE_EDEM_MELT_FULL_VECTOR_GATE_V2",
-    "priority": [
-      "Search Dakhleh field maps, glass abundance/thickness gradients and airburst modeling for an independently recoverable trajectory before seeing LOVE/EDEM scores.",
-      "Resolve Wabar trajectory model disagreement and event-age/time constraints; only then compute full celestial RA/Dec.",
-      "Expand to other impact-glass sites only when incident direction is independently constrained.",
-      "Compare LOVE, EDEM, Orion and randomized sky directions with identical fit freedom."
-    ],
+    "priority": ["Search Dakhleh field maps and airburst modeling for an independently recoverable trajectory before seeing LOVE/EDEM scores.", "Resolve Wabar trajectory model disagreement and event-age/time constraints; only then compute full celestial RA/Dec.", "Expand to other impact-glass sites only when incident direction is independently constrained.", "Compare LOVE, EDEM, Orion and randomized sky directions with identical fit freedom."],
     "promotion_rule": "No Osiris/Spear/ancient-technology status unless an independently reconstructed physical incoming direction survives endpoint matching and randomized controls."
   },
   "claim_ceiling": "DIRECTIONAL_NECESSARY_CONDITION_AUDIT_ONLY__NO_ANCIENT_TECHNOLOGY__NO_OSIRIS_RETURN_SITE__NO_PHYSICAL_SPEAR_CLAIM"
