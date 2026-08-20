@@ -1,0 +1,73 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-ATLANTIC-117-121HZ-REVERSE-PASS-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_ATLANTIC_117_121_HZ_REVERSE_PASS_RUN_001",
+  "parent": "JANUS-ECHO-COUSTEAU-REVERSE-ASSUMPTION-AUDIT-RUN-001-2026-08-21-v1.0",
+  "purpose": "Test the original 117-121 Hz project-anchor band in Atlantic marine acoustics after reverse audit showed that the 520-Hz prior was a wavelength-equivalence transform rather than a direct measurement.",
+  "search_prior": {
+    "band_hz": [117.0, 121.0],
+    "center_hz": 119.0,
+    "status": "PROJECT_ANCHOR_SEARCH_BRANCH__NOT_TARGET_IDENTITY_KEY"
+  },
+  "passive_data_leads": [
+    {
+      "id": "EQUATORIAL_ATLANTIC_HYDROPHONE_ARRAY_2011_2015",
+      "network": "8 autonomous SOFAR hydrophones plus CTBTO HA10 support",
+      "sampling_hz": 250,
+      "nyquist_hz": 125,
+      "recording_span": "2011-08-10 to 2015-01-13",
+      "waveform_recording": "16-bit at 250 Hz for autonomous array; HA10 also 250 Hz",
+      "public_product_found": "T-phase location catalog with 6843 events",
+      "raw_waveform_public_access": "NOT_CONFIRMED_IN_THIS_PASS",
+      "frequency_relevance": "119 Hz is inside recorded Nyquist band; 121 Hz is near the upper edge and may be affected by anti-alias/roll-off depending on channel processing"
+    },
+    {
+      "id": "CTBTO_HA10_ASCENSION",
+      "location": "Ascension Island, South Atlantic",
+      "sampling_hz": 250,
+      "role": "long-range Atlantic passive hydroacoustic control",
+      "frequency_relevance": "117-120 Hz is directly within commonly analyzed upper band; 121 Hz requires instrument-response/roll-off audit"
+    }
+  ],
+  "frequency_controls": [
+    {
+      "id": "SEI_WHALE_FALKLANDS_ARCH_CALL",
+      "class": "BIOLOGICAL_BAND_EDGE_CONTROL",
+      "published_range_hz": [19.0, 119.0],
+      "match": "CENTER_119_HZ_IS_REPORTED_UPPER_EDGE_OF_CALL_RANGE__NOT_A_STABLE_DISCRETE_119_HZ_LINE",
+      "sample_context": "93 high-SNR arch calls measured",
+      "geography": "Falkland Islands, South Atlantic"
+    },
+    {
+      "id": "NORTH_ATLANTIC_RIGHT_WHALE_UPCALL",
+      "class": "BIOLOGICAL_DISCRETE_REFERENCE_CONTROL",
+      "reference_frequency_hz": 121.0,
+      "match": "INSIDE_OR_AT_EDGE_OF_117_121_PROJECT_BAND",
+      "geography": "North Atlantic",
+      "note": "121 Hz is used as the upcall source frequency in published underwater propagation modeling based on right-whale acoustic literature; this is a biological control, not target evidence."
+    },
+    {
+      "id": "LOW_FREQUENCY_SEISMIC_AND_SHIP_NOISE",
+      "class": "ANTHROPOGENIC_BROADBAND_CONTROL",
+      "match": "BROAD_LOW_FREQUENCY_ENERGY_CAN_INCLUDE_117_121_HZ",
+      "gate_effect": "SOURCE_X_F_AND_AMBIENT_NOISE_MUST_BE_SEPARATED_BEFORE_ANY_119_HZ_CANDIDATE_IS_SCORED"
+    }
+  ],
+  "results": {
+    "verified_exact_119_000_hz_discrete_target_like_hits": 0,
+    "biological_overlap": "YES",
+    "passive_atlantic_sensor_coverage_of_119_hz": "YES",
+    "public_raw_waveform_access_for_long_term_119_hz_scan": "NOT_YET_CONFIRMED",
+    "specificity": "LOW_FOR_SINGLE_117_121_HZ_FREQUENCY_FEATURE"
+  },
+  "aggregate_verdict": "ORIGINAL_117_121_HZ_BRANCH_IS_REALISTICALLY_OBSERVABLE_IN_ATLANTIC_PASSIVE_DATA_BUT_IS_NOT_FREQUENCY_SPECIFIC__BIOLOGICAL_CONTROLS_OVERLAP__RAW_WAVEFORM_ACQUISITION_GATE_OPEN",
+  "next_gate": "COUSTEAU_EQUATORIAL_ATLANTIC_119HZ_WAVEFORM_ACCESS_AND_SPECTRAL_SCAN_V1",
+  "hard_rules": [
+    "119_HZ_IS_PROJECT_ANCHOR_NOT_IDENTITY",
+    "BAND_EDGE_IS_NOT_DISCRETE_PEAK",
+    "NYQUIST_COVERAGE_IS_NOT_SIGNAL_DETECTION",
+    "121_HZ_NEAR_125_HZ_NYQUIST_REQUIRES_INSTRUMENT_RESPONSE_AUDIT",
+    "BIOLOGICAL_CONTROLS_MUST_BE_REJECTED_BY_FULL_TEMPORAL_SPECTRAL_AND_GEODETIC_FINGERPRINT",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "REVERSE_117_121_HZ_RUN_001_FROZEN__119_HZ_SENSOR_COVERAGE_FOUND__BIOLOGICAL_OVERLAP_CONFIRMED__RAW_WAVEFORM_GATE_OPEN"
+}
