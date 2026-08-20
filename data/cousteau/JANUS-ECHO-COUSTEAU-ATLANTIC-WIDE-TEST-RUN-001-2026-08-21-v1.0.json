@@ -1,0 +1,202 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-ATLANTIC-WIDE-TEST-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_ATLANTIC_WIDE_TEST_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-21T01:03:00+03:00",
+  "parent_protocol": "data/cousteau/JANUS-ECHO-COUSTEAU-ATLANTIC-WIDE-INFLUENCE-ZONE-PROTOCOL-2026-08-21-v1.0.json",
+  "frozen_anchor": {
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING__REFERENCE_ANCHOR_NOT_SEARCH_BOUNDARY"
+  },
+  "test_scope": "SOUTH_ATLANTIC_BASIN_WIDE_WITH_ATLANTIC_WIDE_CONTROLS",
+  "influence_bands": {
+    "Z0": "0-10 km",
+    "Z1": "10-150 km",
+    "Z2": "150-750 km",
+    "Z3": "750-3000 km",
+    "Z4": "3000-7000 km",
+    "Z5": ">7000 km or cross-equatorial Atlantic-wide control"
+  },
+  "audited_nodes": [
+    {
+      "id": "M121_GA08_NEAREST_VERIFIED_CTD",
+      "coordinate": [-3.0027777778, 4.4158333333],
+      "distance_km": 114.354,
+      "bearing_deg": 33.003,
+      "zone": "Z1",
+      "role": "NEAR_REGIONAL_ENVIRONMENTAL_CONTROL",
+      "note": "Not exact target data. Documented GA08 ~3S transect misses frozen latitude by about 96.23 km meridionally."
+    },
+    {
+      "id": "KOUILOU_HYDRATE_HOLE",
+      "coordinate": [-4.81, 9.9083],
+      "distance_km": 679.337,
+      "bearing_deg": 99.115,
+      "zone": "Z2",
+      "role": "NATURAL_GEOACOUSTIC_CONTROL"
+    },
+    {
+      "id": "REGAB_GIANT_POCKMARK",
+      "coordinate": [-5.7966666667, 9.71],
+      "distance_km": 683.330,
+      "bearing_deg": 108.547,
+      "zone": "Z2",
+      "role": "NATURAL_GEOACOUSTIC_CONTROL"
+    },
+    {
+      "id": "M148_RAW_EM122_COVERAGE_MEDIAN",
+      "coordinate": [-10.577198, -9.022848],
+      "distance_km": 1603.901,
+      "bearing_deg": 241.583,
+      "zone": "Z3",
+      "role": "RAW_MULTIBEAM_BASIN_CONTROL",
+      "provenance": "PANGAEA 10.1594/PANGAEA.892720",
+      "warning": "Median coordinate is descriptive corpus metadata, not a claim that the survey track passes through that exact median point."
+    },
+    {
+      "id": "M132_RAW_EM122_COVERAGE_MEDIAN",
+      "coordinate": [-25.901697, 12.388672],
+      "distance_km": 2613.885,
+      "bearing_deg": 160.448,
+      "zone": "Z3",
+      "role": "RAW_MULTIBEAM_BASIN_CONTROL",
+      "provenance": "PANGAEA 10.1594/PANGAEA.875140",
+      "warning": "Median coordinate is descriptive corpus metadata."
+    },
+    {
+      "id": "M49_1_NAMIBIA_SEISMIC_COVERAGE_MEDIAN",
+      "coordinate": [-28.19505, 14.062523],
+      "distance_km": 2913.111,
+      "bearing_deg": 159.281,
+      "zone": "Z3",
+      "role": "LOW_FREQUENCY_SEISMIC_ILLUMINATOR_AND_GEOLOGY_CONTROL",
+      "provenance": "PANGAEA 10.1594/PANGAEA.932317 plus M49/1 seismic-method documentation",
+      "source_frequency_bands_hz": [[30,200],[100,500],[200,1600]],
+      "meaning": "South Atlantic active seismic illumination itself can occupy or approach the Cousteau frequency neighborhood; source-spectrum separation is mandatory."
+    },
+    {
+      "id": "MSM20_1_WALVIS_RIDGE_COVERAGE_MEDIAN",
+      "coordinate": [-28.4239, 16.46835],
+      "distance_km": 3039.186,
+      "bearing_deg": 155.275,
+      "zone": "Z4",
+      "role": "RAW_HYDROACOUSTIC_MECHANISM_AND_MORPHOLOGY_CONTROL",
+      "provenance": ["PANGAEA 10.1594/PANGAEA.901471", "PANGAEA 10.1594/PANGAEA.901304"],
+      "instruments": ["EM1002 ~95 kHz beam time series", "EM120 11.25-12.6 kHz beam time series", "PARASOUND simultaneous sub-bottom profiling"],
+      "meaning": "Rich raw beam-time-series data are available for real South Atlantic geology, but their transmit bands are not evidence for a ~520 Hz target resonance."
+    },
+    {
+      "id": "RMS_TITANIC",
+      "coordinate": [41.7325, -49.9469444444],
+      "distance_km": 7421.537,
+      "bearing_deg": 319.044,
+      "zone": "Z5",
+      "role": "KNOWN_REAL_TARGET_CALIBRATION",
+      "status": "PARTIAL_PASS__RAW_MULTIBEAM_AND_SVP_FOUND__COMPLEX_PHASE_RESOLVED_TARGET_RETURN_OPEN"
+    }
+  ],
+  "tests": [
+    {
+      "test_id": "ATL-T01-TRACEABLE-MARINE-DATA-BREADTH",
+      "question": "Does the expanded Atlantic domain contain enough traceable real acoustic/geophysical data to support a multi-zone control corpus?",
+      "verdict": "PASS",
+      "evidence": [
+        "M121 raw EM122 in the SE Atlantic",
+        "M148 raw EM122 across the South Atlantic",
+        "M132 raw EM122 in the eastern South Atlantic",
+        "MSM20/1 raw EM1002 and EM120 beam-time-series plus PARASOUND at Walvis Ridge",
+        "M49/1 multichannel seismic data on the Namibia/Walvis sector",
+        "NOAA/NCEI worldwide marine trackline archive with bathymetry, seismic, side-scan and subbottom classes"
+      ],
+      "claim_after_pass": "ATLANTIC_CONTROL_CORPUS_IS_FEASIBLE__NOT_TARGET_EVIDENCE"
+    },
+    {
+      "test_id": "ATL-T02-ANCHOR-SPECIFIC-GEOGRAPHIC-CONVERGENCE",
+      "question": "Do currently traceable measurements/anomaly controls converge uniquely on the frozen LOVE-EDEM anchor?",
+      "verdict": "FAIL_NOT_SUPPORTED",
+      "evidence": [
+        "No Tier-A exact local acoustic dataset has yet been admitted at the anchor.",
+        "Nearest verified M121 environmental control is ~114 km away; documented ~3S transect misses by ~96 km meridionally.",
+        "Nearest strong natural geoacoustic controls are Kouilou/Regab ~679-683 km east/east-southeast.",
+        "Rich real-acoustic surveys occur throughout Z3-Z4 South Atlantic without selecting the anchor."
+      ],
+      "meaning": "The present corpus does not show a unique spatial attractor at the frozen point."
+    },
+    {
+      "test_id": "ATL-T03-SINGLE-FREQUENCY-AND-ILLUMINATOR-SPECIFICITY",
+      "question": "Can a ~520 Hz or nearby spectral feature by itself identify a target/resonator in the Atlantic-wide corpus?",
+      "verdict": "FAIL__NON_SPECIFIC",
+      "evidence": [
+        "Existing mandatory natural controls include iceberg harmonic tremor, whale calls, bio-duck and fish swimbladder resonance.",
+        "M49/1 used active seismic source bands of 30-200 Hz, 100-500 Hz and 200-1600 Hz, demonstrating that real South Atlantic survey illumination can itself overlap or approach the candidate frequency neighborhood."
+      ],
+      "required_rule": "Recover or marginalize X(f) before attributing any spectral feature to S_target; full modal/phase/decay fingerprint outranks absolute frequency."
+    },
+    {
+      "test_id": "ATL-T04-PUBLIC-DATA-TRANSFORMED-ECHO-IDENTIFIABILITY",
+      "question": "Do currently located public Atlantic datasets already permit calibrated recovery of a complex resonant target transfer function?",
+      "verdict": "BLOCKED_PARTIAL",
+      "evidence": [
+        "Raw multibeam and beam-time-series products support morphology, travel-time, bathymetric and propagation-control work.",
+        "M49/1 processed multichannel seismic supports low-frequency structure and illuminator controls.",
+        "A calibrated phase-referenced transmit waveform plus complex return suitable for H_target(f) recovery has not yet been established for the frozen Africa anchor or Titanic calibration."
+      ],
+      "meaning": "Geometry/control tests can run now; transformed-resonator identity gate cannot yet be closed."
+    },
+    {
+      "test_id": "ATL-T05-NATURAL-GEOACOUSTIC-FALSE-POSITIVE-PRESSURE",
+      "question": "Are there strong natural Atlantic structures capable of generating unusual acoustic/backscatter signatures within the expanded influence zone?",
+      "verdict": "PASS_STRONG_CONTROL_PRESSURE",
+      "evidence": [
+        "Kouilou/Regab pockmark, gas/hydrate, carbonate and fluid-flow systems occur ~679-683 km from anchor.",
+        "Walvis Ridge and Namibia margin surveys show complex slope/ridge/abyssal morphology and seafloor depressions with dense hydroacoustic/seismic coverage."
+      ],
+      "meaning": "Any future candidate must quantitatively beat a large natural-geology control family; unusual morphology/backscatter alone is insufficient."
+    },
+    {
+      "test_id": "ATL-T06-HISTORICAL-ANOMALY-RECURRENCE-AT-ANCHOR",
+      "question": "Do historical sonar/UAP anomaly cases independently recur at or near the frozen anchor?",
+      "verdict": "FAIL_NOT_ESTABLISHED",
+      "evidence": [
+        "Gallaudet 1980s and Soviet quacker cases remain unlocatable from public raw coordinates.",
+        "Puerto Rico legacy numerical claims remain unverified in the current corpus.",
+        "No traceable historical anomaly case currently supplies repeat geodetic convergence on the anchor."
+      ],
+      "meaning": "Historical stories do not presently raise the anchor-specific prior."
+    },
+    {
+      "test_id": "ATL-T07-KNOWN-TARGET-CALIBRATION",
+      "question": "Has the Cousteau pipeline already passed the known-real-target Titanic exam needed before target identity interpretation?",
+      "verdict": "PARTIAL_PASS_ONLY",
+      "evidence": ["Public raw SeaBeam multibeam and sound-speed profiles were recovered for Titanic survey calibration."],
+      "blockers": ["complex phase-resolved target return", "direct hull transfer function", "waveform/phase reference", "withheld-pass replay"],
+      "meaning": "Africa target identity interpretation remains blocked."
+    }
+  ],
+  "aggregate_verdict": {
+    "code": "ATLANTIC_CONTROL_CORPUS_VALIDATED__ANCHOR_SPECIFICITY_NOT_ESTABLISHED__SINGLE_FREQUENCY_REJECTED__TRANSFORMED_ECHO_IDENTITY_BLOCKED_ON_COMPLEX_DATA",
+    "plain_meaning": "Expanding to the whole Atlantic gives Cousteau many real measurements and strong controls, but it does not currently reveal a unique anomaly centered on LOVE-EDEM. The strongest scientific gain is a harder false-positive firewall and several real datasets for geometry/propagation testing.",
+    "evidence_direction": "CONTROL_STRENGTH_INCREASED__TARGET_EVIDENCE_UNCHANGED",
+    "semantic_status": "UNCONFIRMED"
+  },
+  "next_gates": [
+    "COUSTEAU_ATLANTIC_WIDE_RAW_DATA_INGEST_AND_NORMALIZATION_V1",
+    "COUSTEAU_M148_M121_MINIMUM_DISTANCE_TRACK_RECONSTRUCTION_V1",
+    "COUSTEAU_M49_SOURCE_SPECTRUM_LEAKAGE_CONTROL_V1",
+    "COUSTEAU_TITANIC_COMPLEX_RETURN_AND_PHASE_CALIBRATION_ACQUISITION_V1"
+  ],
+  "hard_rules": [
+    "NO_RECENTERING",
+    "ANCHOR_IS_REFERENCE_NOT_SEARCH_BOUNDARY",
+    "DISTANCE_IS_METADATA_NOT_CAUSATION",
+    "MEDIAN_COVERAGE_COORDINATE_IS_NOT_TRACK_INTERSECTION",
+    "ABSOLUTE_520_HZ_IS_NOT_TARGET_IDENTITY",
+    "ILLUMINATOR_SPECTRUM_MUST_BE_SEPARATED_FROM_TARGET_RESPONSE",
+    "RAW_MULTIBEAM_SUPPORTS_GEOMETRY_BUT_IS_NOT_AUTOMATICALLY_COMPLEX_H_TARGET",
+    "NEGATIVE_AND_BLOCKED_RESULTS_ARE_FIRST_CLASS_RECEIPTS",
+    "TITANIC_GATE_PRECEDES_AFRICA_TARGET_IDENTITY_INTERPRETATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "ATLANTIC_WIDE_TEST_RUN_001_EXECUTED__CONTROL_CORPUS_PASS__ANCHOR_CONVERGENCE_FAIL__RESONANCE_SPECIFICITY_FAIL__TARGET_IDENTITY_BLOCKED"
+}
