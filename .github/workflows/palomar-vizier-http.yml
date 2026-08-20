@@ -1,0 +1,31 @@
+name: Palomar VizieR HTTP Probe
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/palomar-vizier-http.yml"
+      - "workspace/palomar_vizier_http_probe.py"
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run HTTP VizieR probe
+        run: python workspace/palomar_vizier_http_probe.py
+      - name: Persist
+        if: always()
+        run: |
+          test -f data/love/LOVE-EDEM-STARGATE-PALOMAR-VIZIER-HTTP-v1-LATEST-RECEIPT.json || exit 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-STARGATE-PALOMAR-VIZIER-HTTP-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze Palomar VizieR HTTP run ${{ github.run_number }}"
+          git pull --rebase origin main
+          git push
