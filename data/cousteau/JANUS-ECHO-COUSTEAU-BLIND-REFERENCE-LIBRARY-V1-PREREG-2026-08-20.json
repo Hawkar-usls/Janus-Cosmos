@@ -1,0 +1,54 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-BLIND-REFERENCE-LIBRARY-V1-PREREG-2026-08-20",
+  "research_branch": {
+    "display_name": "Janus-Echo-Кусто",
+    "slug": "janus-echo-cousteau",
+    "honoree": "Jacques-Yves Cousteau",
+    "historical_anchor": "J. Alinat & J.-Y. Cousteau (1962), Accidents de terrain en mer de Ligurie, CNRS, pp. 121-123"
+  },
+  "document_class": "FROZEN_SYNTHETIC_BLIND_REFERENCE_CALIBRATION_PREREGISTRATION",
+  "seed": 1962,
+  "purpose": "Calibrate the reverse acoustic pipeline before any underwater expedition. Preserve PASS, FAIL and AMBIGUOUS outcomes unchanged.",
+  "classes": [
+    "HOLLOW_PYRAMID",
+    "BOX",
+    "CONE",
+    "SOLID_PYRAMID",
+    "IRREGULAR_ROCK",
+    "LAYERED_SEDIMENT"
+  ],
+  "states": [
+    "DRY_AIR",
+    "SEALED_SUBMERGED",
+    "FULLY_FLOODED",
+    "PARTIAL_25",
+    "PARTIAL_50",
+    "PARTIAL_75",
+    "PARTIALLY_BURIED",
+    "FULLY_BURIED"
+  ],
+  "balanced_design": {
+    "samples_per_class_state": 50,
+    "train_per_class_state": 30,
+    "holdout_per_class_state": 20,
+    "train_total": 1440,
+    "holdout_total": 960
+  },
+  "blind_rules": [
+    "holdout labels are not exposed to the inverse classifier before scoring",
+    "absolute anchor frequencies 119 Hz and approximately 520 Hz are not classifier features",
+    "object scale L is not supplied to the first-stage classifier",
+    "first-stage features are scale-free frequency ratios, Q ratios, decay ratios, phase descriptors and multi-aspect normalized responses",
+    "all outcomes are persisted regardless of result"
+  ],
+  "admission_thresholds_frozen_before_scoring": {
+    "geometry_class_accuracy_min": 0.80,
+    "flood_state_accuracy_min": 0.80,
+    "joint_class_state_accuracy_min": 0.75,
+    "median_scale_absolute_percentage_error_max": 0.15,
+    "wrong_joint_model_forward_replay_pass_rate_max": 0.20,
+    "label_permutation_control_expected_near_chance": 0.16666666666666666
+  },
+  "interpretation_rule": "A synthetic PASS only validates software identifiability under the declared generator. It does not establish real-world identifiability. Any failed threshold remains a calibration blocker for expedition use until repaired and re-preregistered.",
+  "claim_ceiling": "SOFTWARE_CALIBRATION_ONLY__NO_UNDERWATER_STRUCTURE_DETECTED"
+}
