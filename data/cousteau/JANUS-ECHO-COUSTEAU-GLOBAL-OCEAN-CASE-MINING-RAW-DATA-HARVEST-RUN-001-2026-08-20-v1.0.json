@@ -1,0 +1,236 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-GLOBAL-OCEAN-CASE-MINING-RAW-DATA-HARVEST-RUN-001-2026-08-20-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T22:22:00+03:00",
+  "parent": "data/cousteau/JANUS-ECHO-COUSTEAU-GLOBAL-OCEAN-ACOUSTIC-ADVERSARIAL-CORPUS-2026-08-20-v1.0.json",
+  "run_goal": "Populate the global corpus with traceable cases and open data sources that can train, calibrate, falsify or stress the Cousteau transformed-echo pipeline.",
+  "priority_scale": {
+    "P0": "directly downloadable raw/near-raw data with metadata/calibration useful now",
+    "P1": "resolved physical false-positive or engineered control with strong measurable signature",
+    "P2": "useful contextual/control case but incomplete for full transfer-function testing",
+    "P3": "unresolved traceable signal; watchlist only",
+    "P4": "secondary historical account; archive-acquisition target only"
+  },
+  "raw_data_harvest_targets": [
+    {
+      "id": "NOAA_NCEI_PASSIVE_ACOUSTIC_ARCHIVE",
+      "priority": "P0",
+      "data": "free globally accessible raw audio and derived products",
+      "formats": ["wav", "aif", "mp3", "netCDF", "csv"],
+      "uses": ["background frequency occurrence", "ship/biology/geophysical false positives", "long-duration repeatability", "blind negative fields"],
+      "limitation": "passive recordings do not by themselves test active-sonar transformed echo"
+    },
+    {
+      "id": "NOAA_NPS_NOISE_REFERENCE_STATION_NETWORK",
+      "priority": "P0",
+      "stations": 13,
+      "frequency_band_hz": [10, 2000],
+      "public_audio_years_cumulative_min": 63,
+      "uses": ["520-Hz neighborhood background statistics", "calibrated cross-region control", "anthropogenic vs natural sound comparison"],
+      "limitation": "mostly passive ambient sound, not known active illumination"
+    },
+    {
+      "id": "OCEAN_NETWORKS_CANADA_OCEANS_3_0_HYDROPHONES",
+      "priority": "P0",
+      "hydrophone_count_approx_min": 160,
+      "archive_scale_pb_approx": 1.2,
+      "source_formats": ["WAV", "FLAC", "HYD"],
+      "derived_formats": ["FFT", "MAT", "PNG", "PDF"],
+      "sample_rates_hz_examples": [32000, 64000, 128000, 256000],
+      "calibration": "device sensitivity metadata and post-deployment calibration fields documented",
+      "uses": ["instrument-calibrated spectral controls", "ship passages", "cetaceans", "seismology", "fixed-site repeatability"],
+      "limitation": "some raw offshore streams can be diverted/delayed for security reasons"
+    },
+    {
+      "id": "NOAA_NCEI_WATER_COLUMN_SONAR_ARCHIVE",
+      "priority": "P0",
+      "uses": ["bubble plumes", "fish layers", "water-column targets", "active sonar backscatter controls"],
+      "access": "map viewer plus public cloud/archive routes",
+      "special_value": "closer to Cousteau active-return physics than passive-audio-only archives"
+    },
+    {
+      "id": "NOAA_NCEI_MULTIBEAM_RAW_ARCHIVE",
+      "priority": "P0",
+      "raw_formats_examples": [".all", ".s7k", ".xse"],
+      "ancillary": ["sound speed profiles", "tides", "vessel offsets", "cruise reports", "processed products"],
+      "uses": ["known geometry recovery", "swath footprint", "bathymetric target controls", "path/environment metadata"]
+    },
+    {
+      "id": "GMRT_V4_5_MULTIBEAM",
+      "priority": "P0",
+      "survey_count": 1644,
+      "curated_area_km2": 44896399,
+      "global_ocean_percent": 12.41,
+      "typical_synthesis_resolution_m": 120,
+      "uses": ["global known-geometry controls", "swath provenance", "processed multibeam file retrieval", "blank-field sampling"]
+    },
+    {
+      "id": "NOAA_OKEANOS_RAW_PLUS_WATER_COLUMN_CRUISES",
+      "priority": "P0",
+      "example": "EX1707",
+      "example_assets": ["663 raw multibeam files", "sound speed profiles", "XBT", "water-column-sonar availability"],
+      "uses": ["paired bathymetry plus water-column active-sonar control", "gas plume/target mining", "withheld-pass design"]
+    }
+  ],
+  "adversarial_case_harvest": [
+    {
+      "id": "DEEP_SCATTERING_LAYER_FALSE_BOTTOM",
+      "priority": "P1",
+      "status": "RESOLVED_NATURAL",
+      "signature": "strong coherent layer that can resemble a second moving seafloor; typically migrates vertically between day and night",
+      "mechanism": "collective scattering from organisms including fish swim bladders",
+      "cousteau_test": "seafloor-like reflector must not be promoted to fixed engineered geometry if it migrates with diel biology"
+    },
+    {
+      "id": "GAS_SEEP_VERTICAL_PLUME",
+      "priority": "P1",
+      "status": "RESOLVED_GEOLOGICAL",
+      "signature": "near-vertical high-reflectivity water-column feature anchored to a seafloor source",
+      "mechanism": "gas bubbles from seep",
+      "cousteau_test": "vertical/fixed bright target must survive bubble-plume morphology and water-column behavior controls"
+    },
+    {
+      "id": "GAS_CHARGED_SEDIMENT_ACOUSTIC_CHIMNEY_WIPEOUT",
+      "priority": "P1",
+      "status": "RESOLVED_OR_STRONGLY_INTERPRETED_GEOLOGICAL_CLASS",
+      "signature": "vertical chimney-like diffractions, abrupt reflectivity changes and reflection wipeout",
+      "mechanism": "gas/gas hydrate and disturbed sediment",
+      "cousteau_test": "buried geometric-looking seismic anomaly is not automatically a structure"
+    },
+    {
+      "id": "ICEBERG_HARMONIC_TREMOR",
+      "priority": "P1",
+      "status": "RESOLVED_CRYOGENIC",
+      "signature": "40 Hz fundamental with 40 Hz overtone spacing; harmonic comb can include approximately 520 Hz",
+      "cousteau_test": "single 520-Hz or harmonic-comb detection fails specificity without geometry/phase/path evidence"
+    },
+    {
+      "id": "ICEBERG_TRAIN_SLOWDOWN_JULIA_BLOOP",
+      "priority": "P1",
+      "status": "RESOLVED_OR_HIGH_CONFIDENCE_CRYOGENIC_FAMILY",
+      "signature": "steady 32-35 Hz tones, long frequency sweeps, grounding events and broadband icequakes detectable across thousands of km",
+      "cousteau_test": "machine-like motion/sweep and extraordinary detection range are not technology indicators"
+    },
+    {
+      "id": "SUBMARINE_VOLCANIC_HARMONIC_TREMOR",
+      "priority": "P1",
+      "status": "GEOPHYSICAL",
+      "signature": "fundamental around 10 Hz with harmonics and drifting spectral peaks in multi-minute packets",
+      "cousteau_test": "harmonic structure plus spectral drift requires volcanic/geophysical control"
+    },
+    {
+      "id": "SUBMARINE_VOLCANIC_WHISTLE",
+      "priority": "P2",
+      "status": "VOLCANOGENIC_INTERPRETATION",
+      "signature": "undulating single-frequency low-frequency signal; PMEL example filtered 8-20 Hz",
+      "cousteau_test": "narrow-band whistle is not target resonance absent localization and echo geometry"
+    },
+    {
+      "id": "OCEANOGRAPHIC_SOUND_SOURCE_270HZ",
+      "priority": "P1",
+      "status": "KNOWN_ENGINEERED_SOURCE",
+      "signature": "specific tone ramping to about 270 Hz for about 3 minutes",
+      "cousteau_test": "clean engineered tonal energy can be emitted illumination/beacon, not target transfer"
+    },
+    {
+      "id": "SMALL_VESSEL_HYDROPHONE_SATURATION",
+      "priority": "P1",
+      "status": "KNOWN_INSTRUMENT_RESPONSE",
+      "signature": "nearby vessel overwhelms other sounds and saturates hydrophone",
+      "cousteau_test": "reject harmonic distortion/ringing caused by clipping before physical target inference"
+    },
+    {
+      "id": "MARS_POWER_SUPPLY_50KHZ_TONE",
+      "priority": "P1",
+      "status": "KNOWN_INSTRUMENT_SELF_NOISE",
+      "signature": "stable 50 kHz line attributed to observatory power supply",
+      "cousteau_test": "fixed narrow line may belong to sensor/platform power system; require station self-noise inventory"
+    },
+    {
+      "id": "BOTTOM_BOUNCE_AND_DUCTING",
+      "priority": "P1",
+      "status": "KNOWN_PROPAGATION_PHYSICS",
+      "signature": "low-frequency energy can refract within seafloor and return to water; surface/bottom ducts extend range and change apparent arrival geometry",
+      "cousteau_test": "delays, displaced foci and long range must survive ray/path alternatives before target motion or resonance is inferred"
+    },
+    {
+      "id": "SONAR_CROSSTALK_SYNCHRONIZATION",
+      "priority": "P1",
+      "status": "KNOWN_SYSTEM_INTERFERENCE",
+      "signature": "multiple active sonars can interfere; Okeanos operations use K-Sync to reduce interference",
+      "cousteau_test": "multi-instrument spectral lines or repeated returns require synchronization/crosstalk audit"
+    },
+    {
+      "id": "SEI_WHALE_200_600HZ",
+      "priority": "P1",
+      "status": "BIOLOGICAL_CONTROL",
+      "signature": "direct overlap with Cousteau nominal flooded 512-529 Hz neighborhood",
+      "cousteau_test": "biological discrimination mandatory"
+    },
+    {
+      "id": "ANTARCTIC_MINKE_BIO_DUCK",
+      "priority": "P1",
+      "status": "RESOLVED_BIOLOGICAL",
+      "signature": "historically machine-like repetitive signal with harmonics",
+      "cousteau_test": "regularity and machine-like character are non-specific"
+    },
+    {
+      "id": "LEOPARD_SEAL_200_400HZ",
+      "priority": "P2",
+      "status": "BIOLOGICAL_CONTROL",
+      "signature": "calls documented in 200-400 Hz band in Antarctic hydrophone records",
+      "cousteau_test": "expands biological near-band control below nominal 520 neighborhood"
+    },
+    {
+      "id": "NOAA_UPSWEEP",
+      "priority": "P3",
+      "status": "ORIGIN_UNRESOLVED",
+      "signature": "seasonal train of narrow-band upsweeps detectable across Pacific",
+      "cousteau_test": "retain as morphology/history control but hard-reject from 520-Hz candidate set under current absolute-frequency evidence"
+    },
+    {
+      "id": "WATKINS_WHALE_UNKNOWN_CALL",
+      "priority": "P3",
+      "status": "UNKNOWN_SOURCE_CALL_CLASS",
+      "signature": "unknown-source call documented in Gulf of Alaska hydrophone work with seasonal/geographic variation",
+      "cousteau_test": "unknown biological-source classes prevent unknown-signal-equals-engineered reasoning"
+    },
+    {
+      "id": "SOVIET_QUACKERS",
+      "priority": "P4",
+      "status": "SECONDARY_HISTORY_RAW_DATA_NOT_RECOVERED",
+      "cousteau_test": "archive acquisition target only"
+    },
+    {
+      "id": "GALLAUDET_1980S_SUBMARINE_SONAR_ACCOUNT",
+      "priority": "P4",
+      "status": "SWORN_TESTIMONY_SECOND_HAND_RAW_TRACK_NOT_PUBLIC",
+      "cousteau_test": "archive acquisition target only"
+    }
+  ],
+  "immediate_training_battery_v1": [
+    "DEEP_SCATTERING_LAYER_FALSE_BOTTOM",
+    "GAS_SEEP_VERTICAL_PLUME",
+    "GAS_CHARGED_SEDIMENT_ACOUSTIC_CHIMNEY_WIPEOUT",
+    "ICEBERG_HARMONIC_TREMOR",
+    "SUBMARINE_VOLCANIC_HARMONIC_TREMOR",
+    "OCEANOGRAPHIC_SOUND_SOURCE_270HZ",
+    "SMALL_VESSEL_HYDROPHONE_SATURATION",
+    "MARS_POWER_SUPPLY_50KHZ_TONE",
+    "BOTTOM_BOUNCE_AND_DUCTING",
+    "SONAR_CROSSTALK_SYNCHRONIZATION",
+    "SEI_WHALE_200_600HZ",
+    "ANTARCTIC_MINKE_BIO_DUCK"
+  ],
+  "immediate_data_actions": [
+    "Harvest a fixed low-frequency 10-2000 Hz sample matrix from NOAA NRS across all 13 stations with held-out regions.",
+    "Harvest calibrated ONC fixed-hydrophone clips containing ships, cetaceans, earthquakes and quiet controls; preserve device sensitivity and deployment metadata.",
+    "Harvest NOAA water-column sonar examples with labeled gas seeps and matched no-seep frames.",
+    "Harvest raw Okeanos multibeam plus SVP plus water-column data from cruises where wrecks, seeps or volcanic targets have independent ground truth.",
+    "Build known-sensor self-noise registry before accepting any persistent spectral line.",
+    "Keep Africa frozen-point coverage search independent from global corpus training to avoid target leakage."
+  ],
+  "claim_ceiling": "GLOBAL_CONTROL_AND_DATASET_DISCOVERY_ONLY__NO_NEW_TARGET_IDENTIFICATION",
+  "status": "RUN_001_COMPLETE__GLOBAL_CORPUS_POPULATED__P0_RAW_DATA_BACKBONE_IDENTIFIED__TRAINING_BATTERY_V1_DEFINED",
+  "next_gate": "COUSTEAU_GLOBAL_RAW_CONTROL_SAMPLESET_BUILD_V1"
+}
