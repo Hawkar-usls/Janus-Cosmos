@@ -1,0 +1,158 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-REVERSE-ASSUMPTION-AUDIT-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_REVERSE_ASSUMPTION_AUDIT_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "method": "JANUS_REVERSE_PASS__START_FROM_LATEST_OUTPUTS_AND_WALK_BACKWARD_THROUGH_ASSUMPTIONS",
+  "frozen_anchor": [-3.865418, 3.854924],
+  "reverse_chain": [
+    "EXACT_FREQUENCY_MATCH_RUN_001",
+    "ATLANTIC_WIDE_TEST_RUN_001",
+    "AFRICA_EXACT_COVERAGE_AUDIT",
+    "THREE_KEY_TITANIC_AFRICA_PALOMAR_RUN",
+    "FREQUENCY_NEIGHBORHOOD_MODEL_PRIOR",
+    "PYRAMID_LANGUAGE_117_121_HZ_PROJECT_ANCHOR"
+  ],
+  "key_reverse_findings": [
+    {
+      "id": "REV_01_FREQUENCY_PRIOR_PROVENANCE_RECOVERED",
+      "finding": "The underwater center 520.4081632653061 Hz is exactly 119 Hz * (1500 m/s / 343 m/s). The nominal band 511.6618075801749-529.1545189504374 Hz is exactly 117-121 Hz scaled by the same 1500/343 factor.",
+      "air_anchor_hz": [117.0, 119.0, 121.0],
+      "air_sound_speed_m_s": 343.0,
+      "nominal_water_sound_speed_m_s": 1500.0,
+      "preserved_wavelength_m_at_center": 2.8823529411764706,
+      "classification": "MODEL_DERIVED_WAVELENGTH_EQUIVALENCE__NOT_AN_INDEPENDENT_MEASUREMENT"
+    },
+    {
+      "id": "REV_02_CTD_ENVELOPE_PROVENANCE_RECOVERED",
+      "finding": "The CTD sensitivity envelope is also constructed by the same wavelength-preserving transform using water sound speeds 1480-1540 m/s: 117*1480/343=504.8396501457726 Hz and 121*1540/343=543.265306122449 Hz.",
+      "same_model_center_by_sound_speed_hz": {
+        "1480_m_s": 513.469387755102,
+        "1500_m_s": 520.4081632653061,
+        "1540_m_s": 534.2857142857143
+      },
+      "gate_effect": "520.408163_HZ_IS_A_CONDITIONAL_NOMINAL_POINT_NOT_AN_ENVIRONMENT_INVARIANT_EXACT_KEY"
+    },
+    {
+      "id": "REV_03_FREQUENCY_TRANSMISSION_VS_WAVELENGTH_EQUIVALENCE",
+      "finding": "For a driven sound wave crossing between media, frequency is generally set by the source while wavelength changes with propagation speed. Therefore 119 -> 520.408 is not literal transmission physics; it is a separate same-wavelength/same-geometric-scale hypothesis.",
+      "required_hypothesis_split": [
+        "H0_SOURCE_FREQUENCY_INVARIANT__TEST_117_121_HZ_IN_WATER",
+        "H1_WAVELENGTH_EQUIVALENT_ACOUSTIC_MODE__TEST_SPEED_DEPENDENT_MANIFOLD_AROUND_520_HZ",
+        "H2_FLUID_LOADED_STRUCTURAL_RESONANCE__NO_SIMPLE_SPEED_RATIO_ASSUMED"
+      ]
+    },
+    {
+      "id": "REV_04_Q_PRIOR_IS_NOT_MEASURED_DAMPING",
+      "finding": "Q=29.75 equals 119/(121-117). The source project artifact explicitly marks 117-121 Hz as a project acoustic anchor and states that no measured impulse response was used. Therefore Q=29.75 must not be treated as an experimentally measured wet-resonator quality factor.",
+      "classification": "PROJECT_BAND_RATIO_PRIOR__NOT_MEASURED_RINGDOWN_Q"
+    },
+    {
+      "id": "REV_05_EXACT_520_WORDING_OVERSTATED_PRECISION",
+      "finding": "Published values such as 40 Hz harmonic spacing and 520 Hz transducer resonance do not by themselves establish millihertz-level physical exactness unless uncertainty or spectral-bin resolution is reported. Prior E1 'EXACT_520' controls should be read as REPORTED_OR_DERIVED_NOMINAL_520_HZ.",
+      "gate_effect": "MATCH_TOLERANCE_MUST_BE_SET_BY_MEASUREMENT_RESOLUTION_AND_UNCERTAINTY"
+    },
+    {
+      "id": "REV_06_ENGINEERED_CONTROL_SHOWS_MODEL_TO_WET_SHIFT",
+      "finding": "The Class IV flextensional transducer control was modeled near 510 Hz but experimentally measured in water at 520 Hz, a 10 Hz shift. This shift is much larger than the 0.408163 Hz gap between 520 and the model center, so sub-hertz exactness is not physically meaningful without uncertainty-aware prediction.",
+      "gate_effect": "MODEL_VS_MEASUREMENT_ERROR_BUDGET_REQUIRED_BEFORE_EXACT_MATCH_SCORING"
+    },
+    {
+      "id": "REV_07_FLUID_LOADING_BREAKS_SIMPLE_SCALING_FOR_STRUCTURAL_MODES",
+      "finding": "Submerged elastic structures acquire added mass and damping; wet modal frequencies depend on geometry, materials and fluid-structure coupling. A simple c_water/c_air frequency ratio is therefore only one acoustic-cavity hypothesis and cannot stand in for a wet structural resonance solution.",
+      "gate_effect": "H2_REQUIRES_FLUID_LOADED_FORWARD_MODEL_OR_MEASURED_TRANSFER_FUNCTION"
+    },
+    {
+      "id": "REV_08_ORIGINAL_117_121_HZ_BRANCH_WAS_NEGLECTED",
+      "finding": "Because 520 Hz came from a same-wavelength transform, the original 117-121 Hz band must remain an independent search branch rather than being replaced by 520 Hz.",
+      "new_data_lead": "Equatorial Atlantic hydroacoustic networks used 250 Hz sampling, giving a 125 Hz Nyquist limit and direct coverage of 117-121 Hz. The 2011-2015 Equatorial Atlantic array plus CTBTO HA10 Ascension therefore forms a relevant passive 119-Hz corpus lead.",
+      "gate": "COUSTEAU_ATLANTIC_117_121_HZ_PASSIVE_HYDROPHONE_CORPUS_V1"
+    },
+    {
+      "id": "REV_09_ANCHOR_LEAKAGE_CONTROL",
+      "finding": "The LOVE-EDEM ocean coordinate is a project-derived anchor, not a marine-data-derived cluster center. Atlantic anomaly clustering should therefore be performed blind to the anchor, frozen first, and only then should anchor distance be revealed and scored.",
+      "gate": "COUSTEAU_BLIND_ATLANTIC_CLUSTER_THEN_ANCHOR_REVEAL_V1"
+    },
+    {
+      "id": "REV_10_PALOMAR_CHANNEL_REMAINS_NEGATIVE",
+      "finding": "The exact Palomar XE325 exposure geometry places the field below the frozen site's horizon during the exposure. Reverse review finds no basis to use Palomar as positive support for the marine anchor.",
+      "status": "DIRECT_SAME_INSTANT_SURFACE_LINE_OF_SIGHT_REMAINS_CLOSED_NO"
+    },
+    {
+      "id": "REV_11_TITANIC_CALIBRATION_CAPABILITY_SPLIT",
+      "finding": "Public Titanic raw multibeam and sound-speed data can validate localization, geometry and path handling, but not Q/phase/ringdown target fingerprints without complex phase-referenced returns. The calibration must remain split into geometry-tier and resonance-tier capability.",
+      "status": "GEOMETRY_TIER_PARTIAL_PASS__RESONANCE_TIER_BLOCKED"
+    },
+    {
+      "id": "REV_12_ATLANTIC_WIDE_SCOPE_STRENGTHENS_CONTROLS_NOT_LOCAL_TARGET_EVIDENCE",
+      "finding": "Remote Atlantic datasets increase false-positive pressure and model calibration breadth, but cannot substitute for local or repeatable evidence at the frozen anchor.",
+      "status": "CONTROL_STRENGTH_UP__ANCHOR_TARGET_EVIDENCE_UNCHANGED"
+    }
+  ],
+  "newly_surfaced_external_data_leads": [
+    {
+      "id": "EQUATORIAL_ATLANTIC_HYDROPHONE_ARRAY_2011_2015",
+      "type": "PASSIVE_HYDROACOUSTIC_WAVEFORM_LEAD",
+      "sampling_hz": 250,
+      "bit_depth": 16,
+      "recording_span": "2011-08-10 to 2015-01-13",
+      "network": "8 autonomous SOFAR hydrophones plus HA10 Ascension support",
+      "frequency_relevance": "Nyquist 125 Hz directly retains 117-121 Hz",
+      "public_state": "T-phase event catalog is public; full waveform accessibility requires acquisition audit"
+    },
+    {
+      "id": "HA10_ASCENSION",
+      "type": "CTBTO_SOUTH_ATLANTIC_HYDROPHONE_ARRAY",
+      "sampling_hz": 250,
+      "frequency_relevance": "directly covers original 119-Hz project anchor band",
+      "role": "Atlantic-wide passive control and event-localization source"
+    },
+    {
+      "id": "WT10148_TRANSATLANTICILAB",
+      "type": "EQUATORIAL_ATLANTIC_MCS_PROFILE",
+      "source": "airgun",
+      "streamer_length_m": 12000,
+      "navigation": "GPS",
+      "role": "new Atlantic-wide seismic profile candidate; geometry must be checked before anchor relevance is claimed"
+    }
+  ],
+  "corrected_frequency_logic": {
+    "branch_H0": {
+      "name": "SOURCE_FREQUENCY_INVARIANT",
+      "search_band_hz": [117.0, 121.0],
+      "center_hz": 119.0,
+      "meaning": "same driven source frequency observed in water; wavelength changes with sound speed"
+    },
+    "branch_H1": {
+      "name": "WAVELENGTH_EQUIVALENT_ACOUSTIC_MODE",
+      "nominal_center_hz_at_1500_m_s": 520.4081632653061,
+      "center_manifold_hz_for_1480_1540_m_s": [513.469387755102, 534.2857142857143],
+      "broad_endpoint_envelope_hz": [504.8396501457726, 543.265306122449],
+      "meaning": "same wavelength/geometric scale hypothesis; frequency changes with medium sound speed"
+    },
+    "branch_H2": {
+      "name": "FLUID_LOADED_STRUCTURAL_MODE",
+      "search_rule": "predict from geometry, material, water density, sound speed, added mass, damping and boundary conditions or measure directly",
+      "meaning": "no direct 119->520 scaling assumed"
+    }
+  },
+  "aggregate_verdict": "REVERSE_PASS_FOUND_MODEL_LEAKAGE_AND_A_MISSING_119_HZ_DATA_BRANCH__NO_NEW_TARGET_IDENTITY_EVIDENCE",
+  "next_gates": [
+    "COUSTEAU_ATLANTIC_117_121_HZ_PASSIVE_HYDROPHONE_CORPUS_V1",
+    "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_V1",
+    "COUSTEAU_FLUID_LOADED_STRUCTURAL_FORWARD_MODEL_V1",
+    "COUSTEAU_BLIND_ATLANTIC_CLUSTER_THEN_ANCHOR_REVEAL_V1",
+    "COUSTEAU_MEASUREMENT_RESOLUTION_AWARE_FREQUENCY_MATCH_V1"
+  ],
+  "hard_rules": [
+    "DO_NOT_TREAT_520_408163_HZ_AS_AN_INDEPENDENT_MEASUREMENT",
+    "DO_NOT_TREAT_Q_29_75_AS_MEASURED_WET_RESONANCE_Q",
+    "DO_NOT_CALL_REPORTED_INTEGER_HZ_VALUES_MILLIHERTZ_EXACT_WITHOUT_RESOLUTION",
+    "KEEP_117_121_AND_520_MODEL_BRANCHES_SEPARATE",
+    "RUN_ATLANTIC_CLUSTERING_BLIND_TO_LOVE_EDEM_ANCHOR_BEFORE_REVEAL",
+    "PALOMAR_DIRECT_VIEWING_REMAINS_CLOSED_NO",
+    "REMOTE_ATLANTIC_CONTROLS_DO_NOT_REPLACE_LOCAL_EVIDENCE",
+    "PRESERVE_NEGATIVE_AMBIGUOUS_BLOCKED_AND_CORRECTION_RECEIPTS",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "REVERSE_ASSUMPTION_AUDIT_RUN_001_FROZEN__MAJOR_MODEL_PROVENANCE_CORRECTION__119_HZ_BRANCH_REOPENED"
+}
