@@ -1,0 +1,50 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1",
+  "supersedes": "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.0",
+  "correction_reason": "Reverse-pass recovered the 520.408163 Hz prior as a wavelength-equivalence transform of the 117-121 Hz project anchor and identified measurement-resolution overclaim in the phrase EXACT_520.",
+  "frequency_prior_provenance": {
+    "air_anchor_hz": [117.0, 119.0, 121.0],
+    "air_sound_speed_m_s": 343.0,
+    "nominal_water_sound_speed_m_s": 1500.0,
+    "formula": "f_water_model = f_air * c_water / c_air",
+    "center_hz": 520.4081632653061,
+    "nominal_band_hz": [511.6618075801749, 529.1545189504374],
+    "classification": "WAVELENGTH_EQUIVALENT_MODEL_PRIOR__NOT_MEASURED_TARGET_FREQUENCY"
+  },
+  "precision_correction": {
+    "old_E1_label": "EXACT_520",
+    "new_E1_label": "REPORTED_OR_DERIVED_NOMINAL_520_HZ",
+    "reason": "A literature value reported as 520 Hz or derived from 40 Hz-spaced harmonics does not establish sub-Hz physical exactness without frequency uncertainty/bin width.",
+    "520_vs_model_center_delta_hz": 0.4081632653061433,
+    "rule": "Do not decide physical mismatch until source frequency resolution and uncertainty are known."
+  },
+  "control_reclassification": [
+    {
+      "id": "ICEBERG_A53A_SCOTIA_SEA_HARMONIC_TREMOR",
+      "old": "E1_EXACT_520__DERIVED_EXACT_HARMONIC",
+      "new": "E1_REPORTED_DERIVED_NOMINAL_520__NATURAL_FALSE_POSITIVE",
+      "note": "40 Hz fundamental and 40 Hz spacing with sufficient overtone count imply a nominal 520-Hz harmonic; direct peak uncertainty remains unspecified."
+    },
+    {
+      "id": "CLASS_IV_FLEXTENSIONAL_UNDERWATER_TRANSDUCER",
+      "old": "E1_EXACT_520__DIRECT_MEASURED_RESONANCE",
+      "new": "E1_REPORTED_MEASURED_NOMINAL_520__ENGINEERED_CONTROL",
+      "note": "Publication reports experimental in-water resonance at 520 Hz; FE prediction was 510 Hz, demonstrating a 10-Hz model-to-measurement shift."
+    }
+  ],
+  "new_frequency_hypothesis_split": {
+    "H0": "117-121 Hz source-frequency-invariant branch",
+    "H1": "speed-dependent wavelength-equivalent branch around 520 Hz",
+    "H2": "fluid-loaded structural-resonance branch without simple speed scaling"
+  },
+  "aggregate_verdict": "NO_VERIFIED_520_408163_TARGET_HIT__NOMINAL_520_CONTROLS_EXIST__EXACTNESS_REQUIRES_UNCERTAINTY_AWARE_SCORING__117_121_BRANCH_REOPENED",
+  "next_gate": "COUSTEAU_MEASUREMENT_RESOLUTION_AWARE_FREQUENCY_MATCH_V1",
+  "hard_rules": [
+    "520_408163_IS_MODEL_DERIVED_NOT_MEASURED",
+    "REPORTED_520_IS_NOT_MILLIHERTZ_EXACT",
+    "KEEP_H0_H1_H2_SEPARATE",
+    "FULL_FINGERPRINT_OUTRANKS_SINGLE_FREQUENCY",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "CORRECTION_FROZEN__EXACT_FREQUENCY_RUN_001_V1_1"
+}
