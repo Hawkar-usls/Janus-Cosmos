@@ -1,0 +1,87 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-ATLANTIC-WIDE-INFLUENCE-ZONE-PROTOCOL-2026-08-21-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-21T00:31:00+03:00",
+  "purpose": "Expand the frozen LOVE-EDEM marine analysis from exact-point-only coverage to the entire connected Atlantic marine domain while preserving the frozen point as the zero-distance anchor.",
+  "frozen_anchor": {
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING__ANCHOR_IS_REFERENCE_NOT_SEARCH_BOUNDARY"
+  },
+  "scope": {
+    "primary_domain": "SOUTH_ATLANTIC_BASIN_WIDE",
+    "extended_domain": "ATLANTIC_OCEAN_CONNECTED_MARINE_DOMAIN",
+    "principle": "DO_NOT_DISCARD_DISTANT_MARINE_CASES__RANK_THEM_BY_DISTANCE_DIRECTION_DATA_QUALITY_AND_PHYSICAL_CONTEXT"
+  },
+  "distance_influence_bands": [
+    {"band":"Z0_EXACT", "distance_km":"0 to 10", "meaning":"direct/local footprint or station around frozen anchor"},
+    {"band":"Z1_NEAR", "distance_km":"10 to 150", "meaning":"near-local survey context; may constrain bathymetry, water column and propagation"},
+    {"band":"Z2_REGIONAL", "distance_km":"150 to 750", "meaning":"regional geology/acoustics and natural false-positive controls"},
+    {"band":"Z3_BASIN", "distance_km":"750 to 3000", "meaning":"Angola Basin, Congo margin, Walvis Ridge, Mid-Atlantic systems and comparable South Atlantic structures/surveys"},
+    {"band":"Z4_SOUTH_ATLANTIC", "distance_km":"3000 to 7000", "meaning":"South Atlantic-wide comparison including cross-basin surveys and historical acoustic/seismic cases"},
+    {"band":"Z5_ATLANTIC_WIDE", "distance_km":">7000 or cross-equatorial", "meaning":"Atlantic-wide controls and anomaly cases retained for mechanism comparison, not local-geography claims"}
+  ],
+  "required_record_fields": [
+    "case_or_dataset_id",
+    "coordinate_or_track_geometry",
+    "minimum_distance_from_frozen_anchor_km",
+    "bearing_or_sector_from_anchor",
+    "data_type",
+    "raw_processed_or_secondary",
+    "instrument_or_method",
+    "geological_or_acoustic_context",
+    "anomaly_or_control_class",
+    "localization_quality",
+    "public_data_access_status",
+    "use_in_cousteau"
+  ],
+  "marine_data_types": [
+    "multibeam_bathymetry",
+    "singlebeam_bathymetry",
+    "water_column_sonar",
+    "side_scan_sonar",
+    "subbottom_chirp",
+    "single_channel_seismic",
+    "multi_channel_seismic",
+    "seismic_refraction",
+    "shot_point_navigation",
+    "hydrophone_or_passive_acoustics",
+    "CTD_and_sound_speed_profiles",
+    "gravity",
+    "magnetics",
+    "ROV_AUV_photogrammetry_and_3D_ground_truth"
+  ],
+  "authoritative_public_sources": [
+    {"source":"NOAA_NCEI_MARINE_TRACKLINE_GEOPHYSICS", "coverage":"worldwide", "modalities":["bathymetry","gravity","magnetics","seismic_reflection","seismic_refraction","shot_point_navigation","side_scan","subbottom"]},
+    {"source":"NOAA_NCEI_SEAFLOOR_MAPPING_AND_MULTIBEAM", "coverage":"worldwide holdings"},
+    {"source":"GMRT", "coverage":"curated global multibeam swaths and cruise tracks"},
+    {"source":"PANGAEA", "coverage":"cruise-level raw and processed marine geophysics including South Atlantic datasets"}
+  ],
+  "known_current_examples": [
+    {"id":"M121_GA08", "band":"Z1_NEAR", "status":"REAL_DATA_REGIONAL_NEAR_CONTROL__NOT_EXACT_LOCAL", "note":"documented 3S section remains ~96 km from frozen latitude"},
+    {"id":"KOUILOU_REGAB", "band":"Z2_REGIONAL", "status":"NATURAL_GEOACOUSTIC_CONTROL", "note":"pockmarks/gas-hydrate/carbonate/backscatter controls around ~679-683 km"},
+    {"id":"WALVIS_RIDGE_MSM20_1", "band":"Z3_BASIN", "status":"PUBLIC_RAW_MULTIBEAM_CONTROL", "note":"PANGAEA raw EM1002 bathymetry and beam-time-series dataset exists for Walvis Ridge"},
+    {"id":"ATLANTIC_HISTORICAL_ACOUSTIC_CASES", "band":"Z4_OR_Z5", "status":"RETAIN_IF_TRACEABLY_LOCATED", "note":"distance does not discard a case; it changes only the allowed interpretation"}
+  ],
+  "interpretation_rules": {
+    "exact_local": "May contribute directly to frozen-anchor seafloor or water-column inference.",
+    "near_and_regional": "May constrain propagation, geology and natural false positives but cannot be called direct target data.",
+    "basin_and_ocean_wide": "May constrain mechanism prevalence, tectonic/acoustic context and anomaly recurrence; cannot establish a local physical connection without an independent bridge.",
+    "distance": "Great-circle distance is metadata, not proof of influence or acoustic coupling.",
+    "direction": "Azimuth/sector is descriptive unless a physical propagation, tectonic, current, ridge, fracture-zone or survey-path bridge is independently demonstrated."
+  },
+  "search_objective": "Build an Atlantic-wide ranked corpus around the frozen anchor rather than accepting only exact-point coverage.",
+  "new_gate": "COUSTEAU_ATLANTIC_WIDE_MARINE_DATA_AND_ANOMALY_CORPUS_V1",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "ANCHOR_IS_NOT_A_RADIUS_CUTOFF",
+    "DISTANT_CASES_MUST_NOT_BE_DISCARDED_SOLELY_FOR_DISTANCE",
+    "DISTANCE_DOES_NOT_IMPLY_CAUSAL_INFLUENCE",
+    "REGIONAL_AND_BASIN_DATA_MUST_NOT_BE_RELABELLED_AS_EXACT_LOCAL_DATA",
+    "RAW_AND_TRACEABLE_DATA_OUTRANK_SECONDARY_STORIES",
+    "PRESERVE_NEGATIVE_AMBIGUOUS_AND_UNLOCATABLE_CASES",
+    "TITANIC_CALIBRATION_GATE_STILL_PRECEDES_TARGET_IDENTITY_INTERPRETATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "ATLANTIC_WIDE_SCOPE_FROZEN__EXACT_POINT_RETAINED_AS_ZERO_ANCHOR__OCEAN_WIDE_CORPUS_BUILD_ACTIVE"
+}
