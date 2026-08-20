@@ -1,0 +1,188 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_EXACT_FREQUENCY_MATCH_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-21T01:18:00+03:00",
+  "purpose": "Test the frozen flooded-resonator frequency prior against traceable marine, biological, cryogenic, engineered and survey-source controls using exact numeric matching before any target interpretation.",
+  "frozen_frequency_prior": {
+    "center_hz": 520.4081632653061,
+    "nominal_band_hz": [511.6618075801749, 529.1545189504374],
+    "ctd_sensitivity_envelope_hz": [504.8396501457726, 543.265306122449],
+    "status": "MODEL_PRIOR_NOT_UNIVERSAL_FREQUENCY__NOT_A_BLIND_KEY"
+  },
+  "match_classes": {
+    "E0_EXACT_CENTER": "Published/measured discrete frequency equals 520.4081632653061 Hz within +/-0.001 Hz.",
+    "E1_EXACT_520": "Published/measured/physically derived discrete value equals exactly 520.000 Hz; this is a rounded-center near-hit, not an exact model-center hit.",
+    "E2_NOMINAL_DISCRETE": "Discrete published/measured value lies inside 511.6618075801749-529.1545189504374 Hz.",
+    "E3_CTD_ONLY": "Discrete value lies outside nominal band but inside 504.8396501457726-543.265306122449 Hz.",
+    "E4_BAND_OVERLAP_ONLY": "A reported source/signal band contains the prior, but no discrete peak/line at the center is established.",
+    "E5_NO_MATCH": "Reported discrete value or entire band does not reach the CTD envelope."
+  },
+  "results": {
+    "E0_exact_center_hits": {
+      "count": 0,
+      "verdict": "NO_VERIFIED_EXACT_520_408163_HZ_HIT_IN_QUERIED_CORPUS",
+      "boundary": "This is not proof that no such frequency exists anywhere; it means no traceable exact-center hit was verified in this pass."
+    },
+    "strongest_exact_520_hits": [
+      {
+        "id": "ICEBERG_A53A_SCOTIA_SEA_HARMONIC_TREMOR",
+        "class": "NATURAL_CRYOGENIC_FALSE_POSITIVE",
+        "geography": "Scotia Sea / near South Georgia, South Atlantic-Southern Ocean sector",
+        "source_fact": "Example harmonic tremor has 40 Hz fundamental, 40 Hz overtone spacing, and as many as 15 overtones visible.",
+        "derived_frequency_hz": 520.0,
+        "derivation": "13th harmonic = 40 Hz * 13 = 520 Hz; equivalently the 12th overtone above the 40 Hz fundamental.",
+        "match_class": "E1_EXACT_520__DERIVED_EXACT_HARMONIC",
+        "delta_from_model_center_hz": -0.4081632653061433,
+        "absolute_delta_hz": 0.4081632653061433,
+        "relative_delta_percent": -0.07843137254902362,
+        "inside_nominal_band": true,
+        "inside_ctd_envelope": true,
+        "provenance": [
+          "NOAA PMEL Cryogenic Acoustics: https://www.pmel.noaa.gov/acoustics/sounds_cryogenic.html",
+          "Dziak et al. 2013 Oceanography 'Life and death sounds of Iceberg A53a': https://tos.org/oceanography/assets/docs/26-2_dziak.pdf"
+        ],
+        "gate_effect": "VERY_STRONG_NATURAL_FALSE_POSITIVE__EXACT_520_ALONE_REJECTED"
+      },
+      {
+        "id": "CLASS_IV_FLEXTENSIONAL_UNDERWATER_TRANSDUCER",
+        "class": "ENGINEERED_MECHANISM_POSITIVE_CONTROL",
+        "geography": "anechoic underwater tank experiment, Harbin Engineering University, China",
+        "measured_resonance_hz": 520.0,
+        "match_class": "E1_EXACT_520__DIRECT_MEASURED_RESONANCE",
+        "delta_from_model_center_hz": -0.4081632653061433,
+        "absolute_delta_hz": 0.4081632653061433,
+        "relative_delta_percent": -0.07843137254902362,
+        "inside_nominal_band": true,
+        "inside_ctd_envelope": true,
+        "additional_fact": "Experimentally measured in-water resonance 520 Hz; corresponding TVR reported 135.4 dB at 520 Hz. FE model predicted 510 Hz.",
+        "provenance": "Zhou et al., Sensors 2018, DOI 10.3390/s18072102, https://www.mdpi.com/1424-8220/18/7/2102",
+        "gate_effect": "EXACT_520_CAN_BE_REAL_ENGINEERED_RESONANCE__DOES_NOT_IDENTIFY_GEOMETRY"
+      }
+    ],
+    "nominal_band_discrete_hits": [
+      {
+        "id": "ATLANTIC_CROAKER_MATURE_FISH_F0",
+        "class": "BIOLOGICAL_SOUND_CONTROL",
+        "reported_value_hz": 525.0,
+        "reported_context": "mean fundamental frequency for mature Atlantic croaker in laboratory measurements, reported with +/-71 Hz SD",
+        "match_class": "E2_NOMINAL_DISCRETE",
+        "delta_from_model_center_hz": 4.591836734693857,
+        "absolute_delta_hz": 4.591836734693857,
+        "relative_delta_percent": 0.8823529411764666,
+        "inside_nominal_band": true,
+        "inside_ctd_envelope": true,
+        "provenance": "East Carolina University thesis dataset surfaced in exact-frequency audit; Atlantic croaker Micropogonias undulatus.",
+        "gate_effect": "BIOLOGICAL_FREQUENCY_OVERLAP__MEAN_VALUE_NOT_A_STABLE_TARGET_LINE"
+      },
+      {
+        "id": "CLASS_IV_FLEXTENSIONAL_FE_MODEL",
+        "class": "ENGINEERED_MODEL_CONTROL",
+        "reported_value_hz": 510.0,
+        "match_class": "E3_CTD_ONLY",
+        "delta_from_model_center_hz": -10.408163265306143,
+        "absolute_delta_hz": 10.408163265306143,
+        "relative_delta_percent": -2.000000000000004,
+        "inside_nominal_band": false,
+        "inside_ctd_envelope": true,
+        "note": "The same device's FE design predicted 510 Hz, while measured in-water resonance shifted to 520 Hz.",
+        "provenance": "Zhou et al., Sensors 2018, DOI 10.3390/s18072102"
+      }
+    ],
+    "atlantic_survey_source_overlap": [
+      {
+        "id": "METEOR_M49_1_WATERGUN",
+        "geography": "Walvis Ridge / South Atlantic",
+        "source_band_hz": [200.0, 1600.0],
+        "match_class": "E4_BAND_OVERLAP_ONLY",
+        "contains_center": true,
+        "contains_entire_nominal_band": true,
+        "contains_entire_ctd_envelope": true,
+        "provenance": "IODP Leg 208 site-survey methods: water gun 0.16 L, 200-1600 Hz; https://www-odp.tamu.edu/publications/208_SR/204/204_3.htm",
+        "gate_effect": "INCIDENT_SOURCE_X_F_CAN_CONTAIN_OUR_PRIOR__NOT_A_TARGET_RESONANCE"
+      },
+      {
+        "id": "METEOR_M49_1_REDUCED_GI_GUN",
+        "geography": "Walvis Ridge / South Atlantic",
+        "source_band_hz": [100.0, 500.0],
+        "match_class": "E5_NO_MATCH",
+        "contains_center": false,
+        "distance_to_ctd_lower_edge_hz": 4.8396501457726,
+        "provenance": "IODP Leg 208 site-survey methods"
+      },
+      {
+        "id": "METEOR_M49_1_NORMAL_GI_GUN",
+        "geography": "Walvis Ridge / South Atlantic",
+        "source_band_hz": [30.0, 200.0],
+        "match_class": "E5_NO_MATCH",
+        "contains_center": false,
+        "provenance": "IODP Leg 208 site-survey methods"
+      }
+    ],
+    "existing_cousteau_controls_reclassified_for_exactness": [
+      {
+        "id": "SEI_WHALE_200_600_HZ",
+        "match_class": "E4_BAND_OVERLAP_ONLY",
+        "reason": "Broad biological band covers center; no exact stable 520.408163 Hz line established."
+      },
+      {
+        "id": "ANTARCTIC_MINKE_BIO_DUCK",
+        "match_class": "E4_BAND_OR_HARMONIC_OVERLAP_ONLY",
+        "reason": "Broad/harmonic content can cross the prior; no exact model-center line established."
+      },
+      {
+        "id": "FISH_SWIMBLADDER_RESONANCE",
+        "match_class": "VARIABLE_RESONANCE_CONTROL",
+        "reason": "Resonance is size/depth/species dependent; no single universal exact center frequency."
+      },
+      {
+        "id": "SURTASS_LFA_100_500_HZ",
+        "match_class": "E5_NO_MATCH_TO_CTD_ENVELOPE",
+        "reason": "Published upper edge 500 Hz is 4.8396501457726 Hz below frozen CTD lower edge."
+      },
+      {
+        "id": "NOAA_UPSWEEP_0_64_HZ",
+        "match_class": "E5_HARD_NO_MATCH",
+        "reason": "Far below frozen frequency prior."
+      }
+    ]
+  },
+  "semantic_exclusions": [
+    "A 512 Hz instrument sampling rate is not an acoustic signal frequency and is not counted as a hit.",
+    "A 520 Hz high-pass filter breakpoint is not a source or target resonance and is not counted as a hit.",
+    "A broadband source containing 520.408163 Hz is not an exact spectral peak unless a calibrated spectrum shows a discrete feature there.",
+    "A frequency match without X(f) separation, phase, Q/linewidth, modal spacing, ringdown and geodetic repeat is not target identification."
+  ],
+  "aggregate_verdict": {
+    "exact_model_center_520_408163_hz": "NO_VERIFIED_HIT",
+    "exact_520_000_hz": "MULTIPLE_VERIFIED_PHYSICAL_HITS_ACROSS_NATURAL_AND_ENGINEERED_CLASSES",
+    "nominal_band": "MULTIPLE_BIOLOGICAL_ENGINEERED_AND_SOURCE_BAND_OVERLAPS",
+    "specificity": "LOW_FOR_FREQUENCY_ALONE",
+    "most_relevant_atlantic_exact_control": "ICEBERG_A53A_SCOTIA_SEA_520_HZ_DERIVED_HARMONIC",
+    "evidence_direction": "EXACT_FREQUENCY_MATCH_STRENGTHENS_CONTROL_FIREWALL__DOES_NOT_STRENGTHEN_TARGET_IDENTITY"
+  },
+  "next_gate": "COUSTEAU_520_HZ_FULL_FINGERPRINT_DISCRIMINATION_GATE_V1",
+  "required_next_features": [
+    "calibrated peak frequency with uncertainty",
+    "Q or linewidth",
+    "harmonic/modal spacing",
+    "phase or complex response",
+    "ringdown/group delay",
+    "incident X(f) estimate",
+    "two-leg path correction",
+    "geodetic repeatability",
+    "independent pass replication"
+  ],
+  "hard_rules": [
+    "NO_RECENTERING",
+    "DO_NOT_ROUND_520_408163_TO_520_FOR_E0_EXACT_CENTER_CLAIMS",
+    "EXACT_520_HZ_IS_NOT_UNIQUE",
+    "DERIVED_HARMONIC_MUST_BE_LABELLED_DERIVED_NOT_DIRECTLY_MEASURED_LINE",
+    "BAND_CONTAINMENT_IS_NOT_DISCRETE_PEAK_MATCH",
+    "SAMPLING_RATE_AND_FILTER_CUTOFF_ARE_NOT_ACOUSTIC_TARGET_FREQUENCIES",
+    "FULL_FINGERPRINT_OUTRANKS_SINGLE_FREQUENCY",
+    "PRESERVE_NEGATIVE_AND_AMBIGUOUS_RESULTS",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "EXACT_FREQUENCY_RUN_001_FROZEN__E0_ZERO_HITS__E1_520_HZ_MULTIPLE_CONTROL_HITS__FREQUENCY_ALONE_NON_SPECIFIC"
+}
