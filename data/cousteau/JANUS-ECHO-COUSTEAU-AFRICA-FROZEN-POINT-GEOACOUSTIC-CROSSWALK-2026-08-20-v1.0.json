@@ -1,0 +1,175 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-AFRICA-FROZEN-POINT-GEOACOUSTIC-CROSSWALK-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "created_at_local": "2026-08-20T16:10:00+03:00",
+  "origin": {
+    "id": "LOVE_EDEM_BISECTOR_FROZEN_OCEAN_POINT",
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "status": "FROZEN_INTERNAL_PROJECT_COORDINATE__DO_NOT_RECENTER",
+    "provenance": "User-supplied frozen coordinate from prior Janus-Cosmos LOVE--EDEM bisector search; this pass does not independently re-derive the astronomical-to-ocean construction."
+  },
+  "distance_policy": {
+    "metric": "great_circle_surface_distance",
+    "earth_radius_km": 6371.0088,
+    "bearing": "initial_geodesic_bearing_clockwise_from_true_north",
+    "warning": "Surface great-circle distance is a geographic comparison metric, not an underwater acoustic propagation path length.",
+    "event_rule": "Compute anomaly-event distance only from a traceable event coordinate. Region names, narrative oceans and guessed centroids do not qualify as event coordinates.",
+    "missing_coordinate_status": "UNLOCATABLE"
+  },
+  "verified_geoacoustic_controls": [
+    {
+      "id": "KOUILOU_HYDRATE_HOLE_GEOB6520_3",
+      "latitude_deg": -4.81,
+      "longitude_deg": 9.9083,
+      "coordinate_quality": "A_DATASET_STATION",
+      "depth_context_m": 3100,
+      "distance_from_frozen_origin_km": 679.337,
+      "initial_bearing_deg": 99.115,
+      "direction": "E",
+      "anomaly_class": ["POCKMARK", "GAS_HYDRATE", "HIGH_REFLECTION_OR_BACKSCATTER_CONTEXT", "FLUID_FLOW"],
+      "acoustic_value": "Natural seafloor resonant/scattering confound and geoacoustic control.",
+      "source": "PANGAEA GeoB6520-3 Hydrate Hole dataset"
+    },
+    {
+      "id": "KOUILOU_BLACK_HOLE_GEOB8205_2",
+      "latitude_deg": -4.813333,
+      "longitude_deg": 9.924167,
+      "coordinate_quality": "A_DATASET_STATION_INSIDE_NAMED_POCKMARK",
+      "depth_context_m": 3118,
+      "distance_from_frozen_origin_km": 681.131,
+      "initial_bearing_deg": 99.124,
+      "direction": "E",
+      "anomaly_class": ["POCKMARK", "GAS_HYDRATE", "CARBONATE", "FLUID_FLOW"],
+      "acoustic_value": "Natural seep/pockmark control; station data document hydrate and carbonate context.",
+      "source": "PANGAEA Northern Congo Fan pockmark dataset, event GeoB8205-2"
+    },
+    {
+      "id": "KOUILOU_WORM_HOLE_GEOB6521_2",
+      "latitude_deg": -4.7617,
+      "longitude_deg": 9.9383,
+      "coordinate_quality": "A_DATASET_STATION",
+      "depth_context_m": 3100,
+      "distance_from_frozen_origin_km": 681.84,
+      "initial_bearing_deg": 98.626,
+      "direction": "E",
+      "anomaly_class": ["POCKMARK", "GAS_HYDRATE", "FLUID_FLOW", "STRONG_SEEP_CONTEXT"],
+      "acoustic_value": "Natural cavity/fluid-flow/backscatter control.",
+      "source": "PANGAEA GeoB6521-2 Worm Hole dataset"
+    },
+    {
+      "id": "REGAB_GIANT_POCKMARK",
+      "latitude_deg": -5.7966666667,
+      "longitude_deg": 9.71,
+      "coordinate_quality": "A_PUBLISHED_POCKMARK_CENTER_APPROX",
+      "depth_m": 3160,
+      "distance_from_frozen_origin_km": 683.33,
+      "initial_bearing_deg": 108.547,
+      "direction": "ESE",
+      "size_context": "approximately 800 m scale giant pockmark",
+      "anomaly_class": ["GIANT_POCKMARK", "METHANE_SEEP", "GAS_HYDRATE", "AUTHIGENIC_CARBONATE", "HIGH_BACKSCATTER", "SIDESCAN_GAS_EMISSIONS"],
+      "acoustic_value": "Exceptional natural-control laboratory: ROV micro-bathymetry, backscatter, high-resolution photo mosaic and sidescan gas-emission mapping exist.",
+      "source": "Marcon et al. 2014 / PANGAEA Regab survey; published center about 5°47.8'S, 9°42.6'E"
+    }
+  ],
+  "regional_interpretation": {
+    "nearest_verified_controls_in_this_pass_km": [679.337, 683.33],
+    "summary": "The closest coordinate-verified geoacoustic controls recovered in this pass are the Kouilou/Regab pockmark systems roughly 679-683 km east to east-southeast of the frozen point.",
+    "geological_relation": "They occupy the Congo deep-sea fan / Congo-Angola margin seep province. The frozen point is a separate offshore location; no continuous tectonic, sedimentary or acoustic structure connecting them has been established.",
+    "local_physical_connection_status": "NOT_ESTABLISHED",
+    "scientific_use": "Use the pockmark systems as nearby regional natural controls for unusual backscatter, gas-related reflectors, cavities, hydrates, carbonate crusts and fluid-flow signatures, not as evidence that the frozen point contains the same geology."
+  },
+  "prior_distance_range_audit": {
+    "prior_conversation_summary_km": "approximately 527-683 km",
+    "current_status": "PARTIALLY_REPRODUCED",
+    "reproduced_upper_end": "approximately 683 km for Regab/Kouilou controls",
+    "unreproduced_lower_end": "No traceable 527 km control coordinate was recovered in this pass; do not freeze 527 km as verified until its original coordinate/source is recovered.",
+    "rule": "PRESERVE_PRIOR_NUMBER_AS_PRIOR_SUMMARY_NOT_AS_VERIFIED_MEASUREMENT"
+  },
+  "external_known_target_reference": {
+    "id": "RMS_TITANIC_BOW",
+    "latitude_deg": 41.7325,
+    "longitude_deg": -49.9469444444,
+    "coordinate_quality": "A_NOAA_MISSION_WAYPOINT",
+    "distance_from_frozen_origin_km": 7421.537,
+    "initial_bearing_deg": 319.044,
+    "direction": "NW",
+    "role": "GLOBAL_EXTERNAL_CALIBRATION_BENCHMARK_NOT_LOCAL_ANALOGUE"
+  },
+  "legacy_case_location_audit": [
+    {
+      "id": "GALLAUDET_1980S",
+      "location_status": "UNLOCATABLE",
+      "reason": "Public testimony relays a sonar account but does not supply a traceable event coordinate or raw track."
+    },
+    {
+      "id": "SOVIET_QUACKERS",
+      "location_status": "UNLOCATABLE",
+      "reason": "Corpus consists of broad historical recollections without one traceable geodetic event point."
+    },
+    {
+      "id": "PR_TRENCH_FAST",
+      "location_status": "UNLOCATABLE_EXACT__REGION_LABEL_ONLY",
+      "reason": "Legacy Puerto Rico Trench numerical sonar claim remains unverified and lacks traceable raw telemetry/event coordinate."
+    },
+    {
+      "id": "CA_SHAG_1967",
+      "location_status": "REGION_LOCATABLE__ACOUSTIC_EVENT_POINT_NOT_VERIFIED",
+      "regional_reference": {
+        "name": "Shag Harbour",
+        "latitude_deg": 43.475731,
+        "longitude_deg": -65.733609,
+        "source": "Natural Resources Canada geographical-name centroid"
+      },
+      "distance_policy": "Do not rank as an acoustic anomaly distance because the sonar-tracking component and exact acoustic event coordinate were not verified in the Cousteau source audit."
+    },
+    {
+      "id": "US_OMAHA_SPHERE_2019",
+      "location_status": "REGION_ONLY_IN_CURRENT_CORPUS",
+      "reason": "Current Cousteau receipt contains visual/thermal context but no traceable sonar event coordinate; no distance assigned."
+    },
+    {
+      "id": "US_NIMITZ_2004",
+      "location_status": "NOT_USED_FOR_UNDERWATER_DISTANCE_GATE",
+      "reason": "Legacy receipt is radar/FLIR/visual context with no public sonar channel in the recovered record."
+    }
+  ],
+  "source_register": [
+    {
+      "id": "SAHLING_2008_KOUILOU",
+      "facts": ["Hydrate Hole, Black Hole, Worm Hole", "swath mapping", "parametric sediment echosounder", "deep-towed sidescan sonar", "gas hydrate and backscatter facies"],
+      "doi": "10.1016/j.margeo.2007.11.010"
+    },
+    {
+      "id": "PANGAEA_HYDRATE_HOLE_GEOB6520_3",
+      "facts": ["coordinate -4.810000, 9.908300", "sediment/gas-hydrate dataset"],
+      "url": "https://doi.pangaea.de/10.1594/PANGAEA.825982"
+    },
+    {
+      "id": "PANGAEA_WORM_HOLE_GEOB6521_2",
+      "facts": ["coordinate -4.761700, 9.938300", "pore-water dataset"],
+      "url": "https://doi.pangaea.de/10.1594/PANGAEA.825964"
+    },
+    {
+      "id": "PANGAEA_NORTHERN_CONGO_POCKMARKS",
+      "facts": ["GeoB8205-2 Black Hole station coordinate -4.813333, 9.924167", "gas hydrates", "carbonates", "heat-flow context"],
+      "url": "https://doi.pangaea.de/10.1594/PANGAEA.763522"
+    },
+    {
+      "id": "MARCON_2014_REGAB",
+      "facts": ["Regab center about 5°47.8'S, 9°42.6'E", "3160 m depth", "micro-bathymetry", "backscatter", "105000 m2 photo mosaic", "sidescan gas-emission mapping"],
+      "doi": "10.1130/G34801.1"
+    }
+  ],
+  "hard_rules": [
+    "FROZEN_ORIGIN_MUST_NOT_MOVE_TO_FIT_CONTROLS",
+    "NO_DISTANCE_WITHOUT_TRACEABLE_COORDINATE",
+    "REGION_CENTROID_IS_NOT_EVENT_COORDINATE",
+    "GREAT_CIRCLE_DISTANCE_IS_NOT_ACOUSTIC_PATH_LENGTH",
+    "NEARBY_POCKMARKS_ARE_NATURAL_CONTROLS_NOT_TARGET_EVIDENCE",
+    "NO_LOCAL_PHYSICAL_CONNECTION_CLAIM_WITHOUT_A_CONTINUOUS_GEOLOGICAL_OR_ACOUSTIC_BRIDGE",
+    "PRESERVE_UNLOCATABLE_AND_NEGATIVE_CASES"
+  ],
+  "status": "AFRICA_FROZEN_POINT_CROSSWALK_V1_FROZEN__VERIFIED_NEAREST_CONTROLS_APPROX_679_TO_683_KM__LOCAL_CONNECTION_NOT_ESTABLISHED",
+  "next_gate": "COUSTEAU_FROZEN_POINT_LOCAL_BATHYMETRY_SEISMIC_AND_ACOUSTIC_CONTEXT_GATE_V1"
+}
