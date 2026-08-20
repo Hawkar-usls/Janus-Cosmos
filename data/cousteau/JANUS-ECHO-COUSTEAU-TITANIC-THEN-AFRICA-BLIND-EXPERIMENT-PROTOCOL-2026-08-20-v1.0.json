@@ -1,0 +1,162 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-TITANIC-THEN-AFRICA-BLIND-EXPERIMENT-PROTOCOL-2026-08-20-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T16:26:00+03:00",
+  "protocol_class": "PREREGISTERED_CALIBRATION_LADDER_AND_BLIND_REPLAY_CONTRACT",
+  "purpose": "Prove the Cousteau round-trip acoustic inference pipeline on progressively harder known controls before permitting interpretation of the frozen LOVE-EDEM Africa point.",
+  "frozen_field_target": {
+    "id": "LOVE_EDEM_BISECTOR_FROZEN_OCEAN_POINT",
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING__NO_TARGET_LABEL_LEAKAGE"
+  },
+  "round_trip_model": {
+    "equation": "Y(f) = X(f) * H_tx(f) * S_target(f,theta_in,theta_out) * H_rx(f) + N(f)",
+    "target_operator": "S_target = C_in * H_resonator * B_scatter * C_out",
+    "interpretation": "Recover or marginalize the emitted field and both ocean-path legs before inferring the residual target/scatterer operator."
+  },
+  "experiment_ladder": [
+    {
+      "stage_id": "CST-EXP-00",
+      "designation": "SYNTHETIC_RESONATOR_CONTROL",
+      "meaning": "Software-only sanity check that the inversion can recover a deliberately injected resonant transfer function under known noise and path conditions.",
+      "inputs": ["synthetic X(f)", "synthetic H_tx/H_rx", "known injected S_target", "controlled noise"],
+      "pass_gate": ["recover injected modal structure within preregistered tolerance", "recover ringdown/group-delay class", "reject wrong geometry controls"],
+      "failure_meaning": "STOP. Core inversion is not trustworthy even under controlled conditions.",
+      "claim_after_pass": "ALGORITHM_SANITY_ONLY__NO_FIELD_VALIDATION"
+    },
+    {
+      "stage_id": "CST-EXP-01",
+      "designation": "SUBMERGED_ELASTIC_SHELL_POSITIVE_CONTROL",
+      "meaning": "Real-physics mechanism control showing that resonance-rich transformed echoes from a submerged engineered body can be recognized without implying any particular target identity.",
+      "inputs": ["published or measured submerged-shell acoustic response", "illumination metadata where available", "geometry/material priors"],
+      "pass_gate": ["detect resonance-rich transformed return", "separate source illumination from target response", "retain geometry ambiguity unless independently constrained"],
+      "failure_meaning": "Pipeline lacks sensitivity to a known transformed-echo mechanism.",
+      "claim_after_pass": "MECHANISM_SENSITIVITY_ESTABLISHED__IDENTITY_NOT_ESTABLISHED"
+    },
+    {
+      "stage_id": "CST-EXP-02",
+      "designation": "NATURAL_FALSE_POSITIVE_BATTERY",
+      "meaning": "Demonstrate specificity by forcing the pipeline to survive strong natural and biological acoustic confounds before it is allowed to call a target anomalous.",
+      "controls": [
+        "ICEBERG_HARMONIC_TREMOR",
+        "SEI_WHALE_MID_FREQUENCY_CALLS",
+        "ANTARCTIC_MINKE_BIO_DUCK",
+        "FISH_SWIMBLADDER_RESONANCE"
+      ],
+      "pass_gate": ["no admission from a single ~520 Hz line", "full modal/phase/decay structure outranks absolute frequency", "biological cavity resonance is not promoted to engineered geometry"],
+      "failure_meaning": "False-positive firewall is insufficient.",
+      "claim_after_pass": "CONTROL_SPECIFICITY_IMPROVED__FIELD_TARGET_STILL_UNTESTED"
+    },
+    {
+      "stage_id": "CST-EXP-03",
+      "designation": "RMS_TITANIC_KNOWN_TARGET_REAL_OCEAN_CALIBRATION",
+      "meaning": "First full end-to-end real-ocean exam using a large known metallic wreck with independently known fixed location, geometry, materials, environmental survey data and multi-epoch imaging/sonar ground truth.",
+      "required_inputs": [
+        "raw_or_near_raw_transmit_waveform_X",
+        "raw_or_near_raw_complex_return_Y",
+        "sensor_and_array_calibration",
+        "ping_geometry_and_platform_navigation",
+        "phase_and_frequency_calibration",
+        "CTD_or_sound_speed_profile",
+        "multiple_aspects_or_passes",
+        "withheld_independent_pass",
+        "independent_3D_ground_truth_used_only_after_blind_inference"
+      ],
+      "blindness_contract": [
+        "do_not provide Titanic name to the inference stage",
+        "do not provide known wreck coordinates to the localization stage",
+        "do not provide 3D model or true dimensions before reconstruction is frozen",
+        "do not tune thresholds after viewing ground truth"
+      ],
+      "pipeline": [
+        "KNOWN_OR_RECOVERED_SONAR_X",
+        "H_TX_CORRECTION",
+        "UNKNOWN_S_TARGET_INFERENCE",
+        "H_RX_CORRECTION",
+        "FIXED_EARTH_LOCATION",
+        "GEOMETRY_RECONSTRUCTION",
+        "FREEZE_INFERENCE",
+        "COMPARE_TO_TITANIC_3D_AND_SURVEY_TRUTH"
+      ],
+      "pass_gate": [
+        "localization error within preregistered bound",
+        "stable Earth-fixed focus across independent passes",
+        "geometry class and principal dimensions recovered above preregistered score",
+        "withheld pass forward replay succeeds",
+        "material/scattering interpretation remains compatible with known metallic wreck without using material truth as an input",
+        "environmental path correction materially improves consistency or is shown unnecessary by a justified reciprocity/path test"
+      ],
+      "failure_meaning": "STOP BEFORE AFRICA INTERPRETATION. If Cousteau cannot recover a known wreck blindly, anomalous Africa returns are not trustworthy as target inference.",
+      "claim_after_pass": "REAL_OCEAN_KNOWN_TARGET_CALIBRATION_PASSED__DOES_NOT_VALIDATE_PYRAMID_HYPOTHESIS"
+    },
+    {
+      "stage_id": "CST-EXP-04",
+      "designation": "FROZEN_AFRICA_POINT_BLIND_RUN",
+      "meaning": "Run the same already-frozen pipeline at the LOVE-EDEM bisector point without moving the point or retuning the detector to whatever appears there.",
+      "target_coordinate": [-3.865418, 3.854924],
+      "required_inputs": ["local bathymetry", "seismic/sub-bottom context", "CTD/SSP where available", "calibrated acoustic data", "platform/sensor geometry", "matched blank and natural-control fields"],
+      "pass_gate": ["candidate survives preregistered thresholds", "candidate has stable geodetic focus", "candidate repeats across independent observations where available", "candidate exhibits residual structure not explained by X, H_tx, H_rx or known controls"],
+      "failure_meaning": "Record negative or ambiguous result without recentering.",
+      "claim_after_pass": "LOCALIZED_ACOUSTIC_ANOMALY_CANDIDATE_ONLY__IDENTITY_UNCONFIRMED"
+    },
+    {
+      "stage_id": "CST-EXP-05",
+      "designation": "KOUILOU_REGAB_NATURAL_GEOACOUSTIC_CONTROL",
+      "meaning": "Compare the Africa-point output against nearby eastern South Atlantic natural structures known to create unusual acoustic/backscatter signatures, including pockmarks, gas/hydrate systems, carbonates and fluid-flow features.",
+      "controls": ["KOUILOU_HYDRATE_HOLE", "KOUILOU_BLACK_HOLE", "KOUILOU_WORM_HOLE", "REGAB_GIANT_POCKMARK"],
+      "distance_context_km": [679.337, 683.33],
+      "pass_gate": ["candidate is quantitatively distinguishable from matched natural geoacoustic controls", "difference is based on full transfer/morphology/phase/decay/geodetic evidence rather than one frequency peak"],
+      "failure_meaning": "Prefer natural geoacoustic explanation or keep AMBIGUOUS.",
+      "claim_after_pass": "NATURAL_CONTROL_SEPARATION_PASSED__EXOTIC_IDENTITY_STILL_NOT_ESTABLISHED"
+    },
+    {
+      "stage_id": "CST-EXP-06",
+      "designation": "WITHHELD_BLIND_REPLAY",
+      "meaning": "Final anti-overfit gate: replay the frozen model on observations not used for thresholding, localization, geometry selection or interpretation.",
+      "inputs": ["withheld Titanic pass where available", "withheld Africa observation or matched independent field", "frozen code/config/hashes"],
+      "pass_gate": ["predeclared metrics remain above threshold", "geodetic localization remains stable", "modal/phase/decay fingerprint reproduces within tolerance", "wrong-model controls continue to fail"],
+      "failure_meaning": "Downgrade prior pass to OVERFIT_OR_NONREPLICATING; preserve receipt.",
+      "claim_after_pass": "REPLICATED_ACOUSTIC_CANDIDATE_BEHAVIOR_ONLY__SEMANTIC_IDENTITY_REQUIRES_SEPARATE EVIDENCE"
+    }
+  ],
+  "titanic_data_acquisition_gate": {
+    "gate_id": "COUSTEAU_TITANIC_RAW_SONAR_AND_TRANSFER_FUNCTION_ACQUISITION_V1",
+    "minimum_desired_fields": [
+      "transmit waveform or documented pulse/chirp",
+      "complex I/Q return if available, otherwise highest-fidelity calibrated amplitude/phase product",
+      "hydrophone/sonar sensor response and calibration",
+      "platform position/attitude and ping timestamps",
+      "range/bearing/beam geometry",
+      "frequency calibration",
+      "phase reference or enough metadata to reconstruct relative phase",
+      "CTD/SSP and seafloor context",
+      "multiple aspect angles",
+      "independent pass reserved as withheld data"
+    ],
+    "open_question": "DIRECT_COMPLEX_HULL_RESONANCE_TRANSFER_FUNCTION_NOT_YET_LOCATED",
+    "rule": "Do not fabricate missing resonance data; infer only what the raw/near-raw dataset supports."
+  },
+  "decision_logic": {
+    "if_CST_EXP_03_fails": "HALT_TARGET_INTERPRETATION__AFRICA_RUN_MAY_CONTINUE_ONLY_AS_PIPELINE_DEBUG_OR_DESCRIPTIVE_MAPPING",
+    "if_CST_EXP_03_passes_and_CST_EXP_04_fails": "NEGATIVE_FIELD_RESULT__DO_NOT_MOVE_POINT",
+    "if_CST_EXP_04_passes_but_CST_EXP_05_fails": "PREFER_NATURAL_GEOACOUSTIC_EXPLANATION_OR_AMBIGUOUS",
+    "if_CST_EXP_04_and_05_pass_but_CST_EXP_06_fails": "NONREPLICATING_CANDIDATE__NO_ADMISSION",
+    "if_all_pass": "REPLICATED_LOCALIZED_ACOUSTIC_CANDIDATE__IDENTITY_REMAINS_UNCONFIRMED_PENDING_INDEPENDENT_PHYSICAL EVIDENCE"
+  },
+  "hard_rules": [
+    "CALIBRATE_ON_KNOWN_REAL_TARGET_BEFORE_TRUSTING_UNKNOWN_FIELD_TARGET",
+    "NO_RECENTERING_OF_FROZEN_LOVE_EDEM_BISECTOR",
+    "NO_TITANIC_NAME_COORDINATE_OR_3D_TRUTH_LEAKAGE_BEFORE_INFERENCE_FREEZE",
+    "NO_THRESHOLD_RETUNING_AFTER_GROUND_TRUTH_REVEAL",
+    "NO_ABSOLUTE_520_HZ_ADMISSION",
+    "OUTBOUND_ILLUMINATOR_IS_NOT_TARGET_RETURN",
+    "SEPARATE_OR_JUSTIFY_H_TX_AND_H_RX",
+    "NATURAL_BIOLOGICAL_ENGINEERED_AND_GEOLOGICAL_CONTROLS_ARE_MANDATORY",
+    "PRESERVE_PASS_FAIL_AMBIGUOUS_NEGATIVE_AND_UNLOCATABLE_RESULTS",
+    "WITHHELD_FORWARD_REPLAY_IS_MANDATORY_BEFORE REPLICATION CLAIM",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "current_status": "PROTOCOL_FROZEN__AWAITING_TITANIC_RAW_OR_NEAR_RAW_DATA_ACQUISITION",
+  "next_gate": "COUSTEAU_TITANIC_RAW_SONAR_AND_TRANSFER_FUNCTION_ACQUISITION_V1"
+}
