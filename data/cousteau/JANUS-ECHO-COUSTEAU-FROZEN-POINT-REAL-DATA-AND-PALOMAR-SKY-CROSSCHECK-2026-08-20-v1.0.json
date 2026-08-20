@@ -1,0 +1,150 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-FROZEN-POINT-REAL-DATA-AND-PALOMAR-SKY-CROSSCHECK-2026-08-20-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T18:37:00+03:00",
+  "purpose": "Acquire traceable real ocean measurements near or intersecting the frozen LOVE-EDEM bisector point and independently test the viewing geometry of the April 12 1950 Palomar nine-transient field from that Earth location.",
+  "frozen_origin": {
+    "id": "LOVE_EDEM_BISECTOR_FROZEN_OCEAN_POINT",
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING"
+  },
+  "ocean_real_data_hunt": {
+    "status": "REAL_DATASETS_LOCATED__EXACT_FROZEN_POINT_SWATH_INTERSECTION_NOT_YET_PROVEN",
+    "datasets": [
+      {
+        "id": "METEOR_M121_GA08_RAW_EM122",
+        "type": "RAW_MULTIBEAM_BATHYMETRY",
+        "instrument": "Kongsberg/Simrad EM122",
+        "campaign": "METEOR M121 / GEOTRACES GA08",
+        "dates": ["2015-11-23", "2015-12-25"],
+        "record_count": 6108,
+        "coverage_bounds": {
+          "north_lat_deg": -2.996650,
+          "south_lat_deg": -29.578650,
+          "west_lon_deg": -0.026970,
+          "east_lon_deg": 16.267930
+        },
+        "provenance": "PANGAEA DOI 10.1594/PANGAEA.869762",
+        "data_fields": ["DATE_TIME", "LATITUDE", "LONGITUDE", "RAW_FILE_NAME", "RAW_FILE_URL"],
+        "meaning": "This is actual underway multibeam acoustic acquisition in the SE Atlantic, not a global interpolated map.",
+        "limitation": "Coverage bounds do not prove that a swath intersects the exact frozen coordinate; file-level track/swath intersection must be computed before local admission.",
+        "acoustic_ceiling": "REAL_MULTIBEAM_ACOUSTIC_BATHYMETRY__NOT_COMPLEX_IQ_TARGET_TRANSFER_FUNCTION"
+      },
+      {
+        "id": "METEOR_M121_ATLANTOS_PROCESSED_EM122",
+        "type": "PROCESSED_MULTIBEAM_BATHYMETRY",
+        "resolution_m": 150,
+        "processing": "QPS Qimera cleaned and quality assured",
+        "provenance": "PANGAEA DOI 10.1594/PANGAEA.896811",
+        "role": "Geometry/bathymetry cross-check after raw-track intersection is established"
+      },
+      {
+        "id": "METEOR_M121_GA08_CTD",
+        "type": "REGIONAL_IN_SITU_WATER_COLUMN_CONTROL",
+        "campaign": "M121 / GA08",
+        "casts_total": 142,
+        "nearest_verified_station_used_here": {
+          "latitude_deg": -3.0027777778,
+          "longitude_deg": 4.4158333333,
+          "distance_from_frozen_origin_km_approx": 114.35,
+          "bearing_from_frozen_origin_deg_approx": 33.0,
+          "bodc_id_examples": [2208073, 2208085, 2208097]
+        },
+        "measured_fields": ["temperature", "salinity", "vertical_coordinate", "dissolved_oxygen", "transmittance_attenuance", "suspended_particulate_material", "chlorophyll"],
+        "provenance": "British Oceanographic Data Centre cruise M121/GA08 inventory and series documentation",
+        "meaning": "Useful regional water-column prior for sound-speed/environmental modelling.",
+        "limitation": "Approximately 114 km from the frozen point; it is not local target data and does not establish the exact SSP at the frozen coordinate."
+      },
+      {
+        "id": "NOAA_NCEI_MARINE_TRACKLINE_GEOPHYSICAL_ARCHIVE",
+        "type": "TRACK_INTERSECTION_DISCOVERY_SOURCE",
+        "available_modalities": ["bathymetry", "multi_channel_seismic", "single_channel_seismic", "subbottom_profile", "side_scan_sonar", "gravity", "magnetics", "shot_point_navigation", "seismic_refraction"],
+        "role": "Query real survey polylines against the frozen point or a preregistered radius.",
+        "status": "ARCHIVE_LOCATED__EXACT_INTERSECTING_SURVEY_IDS_PENDING"
+      },
+      {
+        "id": "GMRT_MARINE_GEOPHYSICS",
+        "type": "MULTIBEAM_SWATH_COVERAGE_DISCOVERY_SOURCE",
+        "role": "Use high-resolution-only mask/swath polygons and cruise tracks to distinguish genuine multibeam coverage from global background bathymetry.",
+        "status": "QUERY_READY__EXACT_POINT_MASK_OR_SWATH_INTERSECTION_PENDING"
+      },
+      {
+        "id": "NORTHERN_CONGO_FAN_SO86_CONTEXT",
+        "type": "REGIONAL_SEISMIC_AND_ACOUSTIC_CONTEXT",
+        "known_methods": ["high_resolution_reflection_seismic", "3.5_kHz_profiles", "EM12_acoustic_imagery", "side_scan_sonar"],
+        "role": "Regional geological/acoustic context and natural-control corpus.",
+        "status": "REGIONAL_CONTEXT_ONLY__EXACT_LINE_INTERSECTION_WITH_FROZEN_POINT_PENDING"
+      }
+    ],
+    "admission_rule": "A dataset becomes FROZEN_POINT_LOCAL_DATA only after an authoritative navigation polyline, swath polygon, ping footprint or station coordinate demonstrates intersection with the frozen point or a preregistered local radius. Broad cruise bounding boxes are insufficient.",
+    "next_gate": "COUSTEAU_FROZEN_POINT_EXACT_TRACK_AND_SWATH_INTERSECTION_ACQUISITION_V1"
+  },
+  "palomar_sky_crosscheck": {
+    "target_event": {
+      "id": "POSS_I_XE325_NINE_TRANSIENTS_1950_04_12",
+      "plate": "XE 325",
+      "field_center_j2000": {
+        "ra_deg": 212.9291,
+        "dec_deg": 26.8311
+      },
+      "field_size_arcmin": [10.0, 10.0],
+      "reported_source_count": 9,
+      "semantic_firewall": "These are nine apparent transient detections on a photographic plate, not nine established stars and not an established extraterrestrial phenomenon."
+    },
+    "earth_site": {
+      "latitude_deg": -3.865418,
+      "longitude_deg": 3.854924
+    },
+    "preliminary_geometry": {
+      "field_coordinates_precessed_to_1950_04_12_approx": {
+        "ra_deg": 212.368055,
+        "dec_deg": 27.064219
+      },
+      "maximum_altitude_at_upper_transit_deg_approx": 59.07,
+      "time_above_geometric_horizon_per_sidereal_day_hours_approx": 11.74,
+      "civil_UTC_date_1950_04_12_reference_only": {
+        "upper_transit_utc_approx": "00:35",
+        "rise_utc_approx": "1950-04-11T18:44Z",
+        "set_utc_approx": "1950-04-12T06:27Z"
+      },
+      "interpretation": "The Palomar field is physically visible from the frozen African latitude and can rise to about 59 degrees altitude. This is ordinary Earth-rotation sky visibility and is not a special geographic alignment."
+    },
+    "palomar_observatory_reference": {
+      "oschin_schmidt_latitude_deg": 33.35722,
+      "oschin_schmidt_longitude_deg_east_equivalent": -116.85889,
+      "source": "NASA PDS telescope context",
+      "civil_UTC_date_1950_04_12_field_upper_transit_utc_approx": "08:37"
+    },
+    "critical_missing_field": "EXACT_XE325_EXPOSURE_START_AND_END_UTC",
+    "why_missing_time_matters": "Without the exact exposure UTC we cannot validly test simultaneous altitude/azimuth from the frozen point, Sun altitude, solar-reflection geometry, Earth-shadow geometry or any same-instant line-of-sight hypothesis.",
+    "current_verdict": [
+      "PALOMAR_FIELD_VISIBLE_FROM_FROZEN_LATITUDE",
+      "NO_FIXED_GEOGRAPHIC_RA_ALIGNMENT__EARTH_ROTATION_CONTROLS_VIEWING",
+      "EXACT_SIMULTANEOUS_GEOMETRY_UNRESOLVED",
+      "EXACT_XE325_UTC_REQUIRED",
+      "NO_CAUSAL_CONNECTION_ESTABLISHED"
+    ],
+    "next_gate": "COUSTEAU_PALOMAR_XE325_EXACT_UTC_SKY_GEOMETRY_GATE_V1"
+  },
+  "parallel_acquisition_plan": [
+    "Query PANGAEA M121 file-level navigation and compute minimum distance/swath intersection to frozen point.",
+    "Query NOAA/NCEI Trackline layers for bathymetry, side-scan, subbottom and seismic lines intersecting preregistered radii around frozen point.",
+    "Query GMRT high-resolution-only mask/swath polygons; do not treat background GEBCO-filled grid as multibeam evidence.",
+    "Recover MAST DSS SurveyPlateList metadata/FITS header for XE325 exact exposure epoch/time.",
+    "Only after exact XE325 UTC recovery compute frozen-point alt/az, Sun/Moon state and Earth-shadow/reflection geometry."
+  ],
+  "hard_rules": [
+    "NO_RECENTERING_OF_FROZEN_LOVE_EDEM_BISECTOR",
+    "NO_LOCAL_DATA_CLAIM_FROM_CRUISE_BOUNDING_BOX_ONLY",
+    "REGIONAL_CTD_IS_NOT_LOCAL_TARGET_DATA",
+    "GLOBAL_OR_INTERPOLATED_BATHYMETRY_IS_NOT_PROOF_OF_REAL_MULTIBEAM_COVERAGE",
+    "PALOMAR_VISIBILITY_IS_NOT_ALIGNMENT",
+    "PALOMAR_ALIGNMENT_IS_NOT_CAUSATION",
+    "EXACT_XE325_UTC_REQUIRED_FOR_SIMULTANEOUS_GEOMETRY",
+    "PRESERVE_NEGATIVE_AMBIGUOUS_AND_MISSING_DATA",
+    "TITANIC_CALIBRATION_GATE_REMAINS_REQUIRED_BEFORE_AFRICA_TARGET_INTERPRETATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "REAL_OCEAN_DATA_ACQUISITION_OPEN__PALOMAR_VISIBILITY_CHECK_PASSED__SIMULTANEOUS_PALOMAR_GEOMETRY_BLOCKED_ON_EXACT_PLATE_TIME"
+}
