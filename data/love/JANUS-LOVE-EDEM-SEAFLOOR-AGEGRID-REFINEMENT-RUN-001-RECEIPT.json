@@ -1,0 +1,115 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-SEAFLOOR-AGEGRID-REFINEMENT-RUN-001-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.seafloor.agegrid_refinement.v1",
+  "frozen_point": {
+    "lat_deg": -3.8654180644718967,
+    "lon_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "grids": {
+    "age_GeeK2007_2m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GeeK2007.2m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.8666666666666742,
+      "nearest_grid_lat_deg": -3.8666666666666742,
+      "value": 95.9502944946289,
+      "units": null,
+      "grid_shape": [
+        5401,
+        10801
+      ]
+    },
+    "age_GTS2012_2m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GTS2012.2m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.8666666666666742,
+      "nearest_grid_lat_deg": -3.8666666666666742,
+      "value": 98.20699310302734,
+      "units": null,
+      "grid_shape": [
+        5401,
+        10801
+      ]
+    },
+    "age_GTS2012_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GTS2012.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 98.37372589111328,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "confidence_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/conf.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 2.0,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "age_misfit_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age_misfit.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000004,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 3.5873024463653564,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "asymmetry_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/asym.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 55.42094802856445,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "obliquity_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/obliq.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 22.5588436126709,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "full_rate_band_6m": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/full_rate_bands.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 2.0,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    }
+  },
+  "derived": {
+    "GeeK2007_2m_minus_prior_6m_ma": -0.14849090576171875,
+    "GTS2012_minus_GeeK2007_2m_ma": 2.2566986083984375,
+    "inside_Cretaceous_Normal_Superchron_by_age": true
+  },
+  "confidence_boundary": "Seton et al. 2020 assigns lower confidence to crust within the Cretaceous Normal Superchron and to other poorly constrained settings. Confidence-grid numeric value is exported raw; interpretation must follow the published code/legend rather than guessing its scale.",
+  "claim_ceiling": "AGE_GRID_REPLICATION_AND_PARAMETER_AUDIT_ONLY__NO_ARTIFACT_OR_RELAY_CLAIM",
+  "status": "REFINEMENT_COMPLETE"
+}
