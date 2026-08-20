@@ -1,0 +1,113 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-EXACT-POINT-SWATH-AND-TID-RESOLUTION-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.seafloor.exact_point_swath_tid_resolution.v1",
+  "created_at_local": "2026-08-20T13:00:00+03:00",
+  "document_class": "FROZEN_EXACT_POINT_DATA_PROVENANCE_GATE",
+  "status": "PARTIAL_COMPLETE__SOURCE_INFRASTRUCTURE_CONFIRMED__EXACT_TID_CELL_AND_SWATH_INTERSECTION_NOT_YET_RESOLVED__MORPHOLOGY_GATE_BLOCKED",
+  "parent": "data/love/JANUS-LOVE-EDEM-BISECTOR-SEAFLOOR-DATA-AUDIT-2026-08-20-v1.0.json",
+  "frozen_point": {
+    "latitude_deg": -3.8654180644718967,
+    "longitude_deg_east": 3.854924373538978,
+    "rule": "NO_RECENTER__NO_NEARBY_FEATURE_SUBSTITUTION"
+  },
+  "frozen_buffers": [
+    {"radius_km": 0, "bbox": null, "meaning": "exact point only"},
+    {"radius_km": 1, "bbox_north_west_south_east": [-3.8564349527219868, 3.845920779955233, -3.8744011762218067, 3.863927967122723]},
+    {"radius_km": 5, "bbox_north_west_south_east": [-3.820502505722346, 3.8099064056202527, -3.9103336232214474, 3.8999423414577032]},
+    {"radius_km": 10, "bbox_north_west_south_east": [-3.775586946972795, 3.7648884377015275, -3.9552491819709985, 3.9449603093764285]},
+    {"radius_km": 25, "bbox_north_west_south_east": [-3.6408402707241425, 3.6298345339453517, -4.089995858219651, 4.080014213132604]}
+  ],
+  "gebco_2026": {
+    "grid_interval_arcsec": 15,
+    "tid_grid_exists": true,
+    "tid_codes_relevant_to_gate": {
+      "10": "singlebeam direct measurement",
+      "11": "multibeam direct measurement",
+      "12": "seismic direct measurement",
+      "13": "isolated sounding",
+      "17": "combination of direct methods",
+      "40": "predicted based on satellite-derived gravity",
+      "41": "computer interpolation",
+      "44": "sounding-constrained gridded value with satellite-gravity-guided interpolation",
+      "70": "pre-generated grid with mixed source types",
+      "71": "unknown source"
+    },
+    "official_2026_tid_netcdf": "https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/type_identifier_grid/netcdf/gebco_2026_tid.nc?download=1",
+    "official_2026_tid_zip": "https://dap.ceda.ac.uk/bodc/gebco/global/gebco_2026/type_identifier_grid/netcdf/gebco_2026_tid.zip?download=1",
+    "wms_2026_tid_layer": "gebco_2026_tid_2",
+    "exact_cell_tid_value": null,
+    "exact_cell_status": "UNRESOLVED_IN_THIS_RUN",
+    "reason": "Official GEBCO/CEDA metadata and TID codebook were reachable, but the binary subset/full-file response needed to read the exact 15-arcsec cell was not retrievable in this execution environment. Do not infer a TID code from regional context or WMS appearance.",
+    "interpretation_rule": "UNRESOLVED != NO_DIRECT_DATA"
+  },
+  "gmrt_v4_5_0": {
+    "release_context": "GMRT v4.5.0 released June 2026; public site states 44,896,399 square kilometres of curated multibeam from 1,644 surveys.",
+    "point_server": "https://www.gmrt.org/services/PointServer",
+    "grid_server": "https://www.gmrt.org/services/GridServer",
+    "cruise_tracks_shapefile": "https://gmrt.org/shapefiles/gmrt_cruise_tracks.zip",
+    "swath_polygons_shapefile": "https://gmrt.org/shapefiles/gmrt_swath_polygons.zip",
+    "swath_definition": "curated multibeam content polygons, approximately 100 m synthesis scale, aggregated by survey",
+    "exact_point_pointserver_value": null,
+    "exact_point_curated_swath_hit": null,
+    "buffer_results": [
+      {"radius_km": 0, "cruise_track_hit": null, "curated_swath_hit": null, "status": "UNRESOLVED"},
+      {"radius_km": 1, "cruise_track_hit": null, "curated_swath_hit": null, "status": "UNRESOLVED"},
+      {"radius_km": 5, "cruise_track_hit": null, "curated_swath_hit": null, "status": "UNRESOLVED"},
+      {"radius_km": 10, "cruise_track_hit": null, "curated_swath_hit": null, "status": "UNRESOLVED"},
+      {"radius_km": 25, "cruise_track_hit": null, "curated_swath_hit": null, "status": "UNRESOLVED"}
+    ],
+    "reason": "The authoritative GMRT service documentation and public shapefile endpoints were confirmed, but the parameterised PointServer response and shapefile payloads were not retrievable in this execution environment. No negative coverage claim is permitted from this failure.",
+    "interpretation_rule": "SERVICE_RETRIEVAL_FAILURE != ABSENCE_OF_SWATH"
+  },
+  "independent_ncei_control": {
+    "status": "DISCOVERY_INTERFACE_CONFIRMED",
+    "source": "NOAA NCEI Bathymetric Data Viewer / Multibeam Bathymetry Database",
+    "capabilities": ["multibeam raw", "multibeam processed", "survey footprints", "single-beam", "trackline geophysics"],
+    "bbox_search_supported": true,
+    "exact_bbox_intersection_executed": false,
+    "role": "FOLLOW_UP_INDEPENDENT_ARCHIVE_CONTROL"
+  },
+  "morphology_gate": {
+    "status": "BLOCKED_BY_DIRECT_DATA_PROVENANCE",
+    "forbidden_until_resolved": [
+      "pyramid-like relief scoring",
+      "regular-facet scoring",
+      "pockmark/scarp/channel anomaly ranking",
+      "claiming artificial morphology"
+    ],
+    "reason": "Morphology inspection before knowing whether the exact cell is directly sounded would mix measured and gravity-predicted bathymetry and create a false anomaly search."
+  },
+  "gate_results": {
+    "GEBCO_2026_INFRASTRUCTURE": "PASS",
+    "GEBCO_TID_CODEBOOK": "PASS",
+    "GEBCO_EXACT_CELL_TID": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "GMRT_POINT_SERVICE_EXISTENCE": "PASS",
+    "GMRT_CRUISE_TRACK_PRODUCT_EXISTENCE": "PASS",
+    "GMRT_CURATED_SWATH_POLYGON_PRODUCT_EXISTENCE": "PASS",
+    "GMRT_EXACT_POINT_INTERSECTION": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "GMRT_1KM_INTERSECTION": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "GMRT_5KM_INTERSECTION": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "GMRT_10KM_INTERSECTION": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "GMRT_25KM_INTERSECTION": "INCONCLUSIVE_RETRIEVAL_BLOCKED",
+    "MORPHOLOGY_INSPECTION": "NOT_AUTHORIZED_YET"
+  },
+  "reverse_pass": {
+    "BACK": "Freeze exact LOVE-EDEM bisector seafloor point and prohibit recentering.",
+    "FORWARD": "Resolve GEBCO 2026 TID at exact 15-arcsec cell.",
+    "LEFT": "Intersect GMRT curated swath polygons with point and 1/5/10/25 km buffers.",
+    "RIGHT": "Intersect GMRT cruise tracks and query NCEI independently.",
+    "FORWARD_AGAIN": "Only if direct-data provenance exists, fetch the highest-resolution bathymetry for morphology analysis.",
+    "BACK_AGAIN": "If only indirect bathymetry exists, classify morphology as unresolved rather than anomalous."
+  },
+  "next_action": {
+    "name": "EXACT_POINT_SWATH_AND_TID_RESOLUTION_V1_RERUN_WITH_BINARY_OR_OPENDAP_ACCESS",
+    "requirements": [
+      "Read one GEBCO_2026 TID cell from the official NetCDF/OPeNDAP source.",
+      "Download or query gmrt_swath_polygons and gmrt_cruise_tracks.",
+      "Perform exact geodesic intersection for 0/1/5/10/25 km buffers.",
+      "Record survey/cruise IDs and acquisition dates for every hit.",
+      "Do not inspect morphology until provenance is classified."
+    ]
+  },
+  "claim_ceiling": "SOURCE_INFRASTRUCTURE_CONFIRMED__EXACT_DATA_PROVENANCE_UNRESOLVED__NO_SEAFLOOR_ANOMALY_CLAIM"
+}
