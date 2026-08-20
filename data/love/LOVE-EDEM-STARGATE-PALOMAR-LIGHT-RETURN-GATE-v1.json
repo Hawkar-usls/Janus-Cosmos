@@ -1,0 +1,35 @@
+{
+  "schema": "janus.cosmos.love_edem_stargate.palomar_light_return.gate.v1",
+  "experiment_id": "LOVE-EDEM-STARGATE-PALOMAR-LIGHT-RETURN-v1",
+  "status": "PREREGISTERED",
+  "targets": {
+    "LOVE": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778, "frame": "ICRS"},
+    "EDEM": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318, "frame": "ICRS"},
+    "STARGATE_ABYDOS_GEOMETRY": {"ra_deg": 223.415064157, "dec_deg": 33.979315670, "frame": "ICRS"}
+  },
+  "palomar_open_cohort": {
+    "repository": "jannefi/poss1-plate-slice",
+    "commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "stage_path": "results/s0-642-20260814/stage_S0.csv.gz",
+    "tile_manifest_path": "results/s0-642-20260814/tile_manifest.csv.gz",
+    "expected_stage_rows": 122820,
+    "expected_stage_uncompressed_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0"
+  },
+  "frozen_radii_arcsec": [2, 5, 10, 30, 60, 300, 600],
+  "light_return_model": {
+    "model": "EARTH_EMISSION_TO_REFLECTOR_TO_EARTH",
+    "speed_of_light_m_s": 299792458,
+    "round_trip_delay_years_for_distance_ly": "2 * distance_ly",
+    "one_way_arrival_years_for_distance_ly": "distance_ly",
+    "rule": "A Palomar-era return attributed to an Earth emission must satisfy distance_ly approximately delay_years/2; direction agreement alone is insufficient."
+  },
+  "rules": {
+    "no_recenter": true,
+    "no_post_hoc_radius_changes": true,
+    "nearest_open_cohort_row_is_not_verified_physical_transient": true,
+    "palomar_temporal_nuclear_association_is_not_causation": true,
+    "solar_reflection_hypothesis_is_not_nuclear_flash_reflection": true,
+    "planet_or_artificial_mirror_claim_requires_independent_object_distance_and_repeatable_optical_signature": true
+  },
+  "claim_ceiling": "SPATIAL_POSS1_CROSSMATCH_AND_CAUSAL_LIGHT_TRAVEL_CONSTRAINT_ONLY"
+}
