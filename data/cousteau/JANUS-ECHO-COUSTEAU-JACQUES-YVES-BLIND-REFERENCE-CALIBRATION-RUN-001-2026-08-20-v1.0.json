@@ -1,0 +1,216 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-JACQUES-YVES-BLIND-REFERENCE-CALIBRATION-RUN-001-2026-08-20-v1.0",
+  "research_branch": {
+    "display_name": "Janus-Echo-Кусто",
+    "slug": "janus-echo-cousteau",
+    "honoree": "Jacques-Yves Cousteau"
+  },
+  "run_class": "SYNTHETIC_BLIND_HOLDOUT_CALIBRATION__NOT_PHYSICAL_HYDROPHONE_DATA",
+  "seed": 1962,
+  "design": {
+    "train": 1440,
+    "holdout": 960,
+    "classes": [
+      "HOLLOW_PYRAMID",
+      "BOX",
+      "CONE",
+      "SOLID_PYRAMID",
+      "IRREGULAR_ROCK",
+      "LAYERED_SEDIMENT"
+    ],
+    "states": [
+      "DRY_AIR",
+      "SEALED_SUBMERGED",
+      "FULLY_FLOODED",
+      "PARTIAL_25",
+      "PARTIAL_50",
+      "PARTIAL_75",
+      "PARTIALLY_BURIED",
+      "FULLY_BURIED"
+    ],
+    "absolute_119_or_520_hz_used_as_classifier_feature": false,
+    "scale_L_exposed_to_first_stage": false
+  },
+  "metrics": {
+    "geometry_class_accuracy": 0.9979166666666667,
+    "geometry_class_macro_f1": 0.9979165852832793,
+    "flood_state_accuracy": 0.6416666666666667,
+    "flood_state_macro_f1": 0.6421380499397246,
+    "joint_class_state_accuracy": 0.640625,
+    "median_scale_absolute_percentage_error": 0.05782098828657037,
+    "mean_scale_absolute_percentage_error": 0.20474625065874505,
+    "forward_replay_threshold_rmse_train_p95": 0.3559504477222817,
+    "forward_replay_pass_rate_all": 0.9552083333333333,
+    "forward_replay_pass_rate_correct_joint": 0.9642276422764228,
+    "forward_replay_pass_rate_wrong_joint": 0.9391304347826087,
+    "label_permutation_accuracy_mean_20": 0.16552083333333334,
+    "label_permutation_accuracy_sd_20": 0.027597090287947226,
+    "label_permutation_accuracy_range_20": [
+      0.11458333333333333,
+      0.23541666666666666
+    ]
+  },
+  "gates": {
+    "geometry_class": true,
+    "flood_state": false,
+    "joint_class_state": false,
+    "scale": true,
+    "forward_replay_specificity": false
+  },
+  "confusion": {
+    "class": {
+      "HOLLOW_PYRAMID": {
+        "HOLLOW_PYRAMID": 158,
+        "BOX": 2,
+        "CONE": 0,
+        "SOLID_PYRAMID": 0,
+        "IRREGULAR_ROCK": 0,
+        "LAYERED_SEDIMENT": 0
+      },
+      "BOX": {
+        "HOLLOW_PYRAMID": 0,
+        "BOX": 160,
+        "CONE": 0,
+        "SOLID_PYRAMID": 0,
+        "IRREGULAR_ROCK": 0,
+        "LAYERED_SEDIMENT": 0
+      },
+      "CONE": {
+        "HOLLOW_PYRAMID": 0,
+        "BOX": 0,
+        "CONE": 160,
+        "SOLID_PYRAMID": 0,
+        "IRREGULAR_ROCK": 0,
+        "LAYERED_SEDIMENT": 0
+      },
+      "SOLID_PYRAMID": {
+        "HOLLOW_PYRAMID": 0,
+        "BOX": 0,
+        "CONE": 0,
+        "SOLID_PYRAMID": 160,
+        "IRREGULAR_ROCK": 0,
+        "LAYERED_SEDIMENT": 0
+      },
+      "IRREGULAR_ROCK": {
+        "HOLLOW_PYRAMID": 0,
+        "BOX": 0,
+        "CONE": 0,
+        "SOLID_PYRAMID": 0,
+        "IRREGULAR_ROCK": 160,
+        "LAYERED_SEDIMENT": 0
+      },
+      "LAYERED_SEDIMENT": {
+        "HOLLOW_PYRAMID": 0,
+        "BOX": 0,
+        "CONE": 0,
+        "SOLID_PYRAMID": 0,
+        "IRREGULAR_ROCK": 0,
+        "LAYERED_SEDIMENT": 160
+      }
+    },
+    "state": {
+      "DRY_AIR": {
+        "DRY_AIR": 81,
+        "SEALED_SUBMERGED": 39,
+        "FULLY_FLOODED": 0,
+        "PARTIAL_25": 0,
+        "PARTIAL_50": 0,
+        "PARTIAL_75": 0,
+        "PARTIALLY_BURIED": 0,
+        "FULLY_BURIED": 0
+      },
+      "SEALED_SUBMERGED": {
+        "DRY_AIR": 34,
+        "SEALED_SUBMERGED": 75,
+        "FULLY_FLOODED": 11,
+        "PARTIAL_25": 0,
+        "PARTIAL_50": 0,
+        "PARTIAL_75": 0,
+        "PARTIALLY_BURIED": 0,
+        "FULLY_BURIED": 0
+      },
+      "FULLY_FLOODED": {
+        "DRY_AIR": 2,
+        "SEALED_SUBMERGED": 10,
+        "FULLY_FLOODED": 97,
+        "PARTIAL_25": 8,
+        "PARTIAL_50": 0,
+        "PARTIAL_75": 3,
+        "PARTIALLY_BURIED": 0,
+        "FULLY_BURIED": 0
+      },
+      "PARTIAL_25": {
+        "DRY_AIR": 0,
+        "SEALED_SUBMERGED": 0,
+        "FULLY_FLOODED": 2,
+        "PARTIAL_25": 53,
+        "PARTIAL_50": 14,
+        "PARTIAL_75": 50,
+        "PARTIALLY_BURIED": 1,
+        "FULLY_BURIED": 0
+      },
+      "PARTIAL_50": {
+        "DRY_AIR": 0,
+        "SEALED_SUBMERGED": 0,
+        "FULLY_FLOODED": 0,
+        "PARTIAL_25": 8,
+        "PARTIAL_50": 57,
+        "PARTIAL_75": 36,
+        "PARTIALLY_BURIED": 19,
+        "FULLY_BURIED": 0
+      },
+      "PARTIAL_75": {
+        "DRY_AIR": 0,
+        "SEALED_SUBMERGED": 0,
+        "FULLY_FLOODED": 1,
+        "PARTIAL_25": 27,
+        "PARTIAL_50": 35,
+        "PARTIAL_75": 51,
+        "PARTIALLY_BURIED": 6,
+        "FULLY_BURIED": 0
+      },
+      "PARTIALLY_BURIED": {
+        "DRY_AIR": 0,
+        "SEALED_SUBMERGED": 0,
+        "FULLY_FLOODED": 0,
+        "PARTIAL_25": 0,
+        "PARTIAL_50": 14,
+        "PARTIAL_75": 0,
+        "PARTIALLY_BURIED": 90,
+        "FULLY_BURIED": 16
+      },
+      "FULLY_BURIED": {
+        "DRY_AIR": 0,
+        "SEALED_SUBMERGED": 0,
+        "FULLY_FLOODED": 0,
+        "PARTIAL_25": 0,
+        "PARTIAL_50": 0,
+        "PARTIAL_75": 0,
+        "PARTIALLY_BURIED": 8,
+        "FULLY_BURIED": 112
+      }
+    }
+  },
+  "result_interpretation": {
+    "geometry": "PASS_SYNTHETIC_TEMPLATE_SEPARABILITY_ONLY",
+    "state": "FAIL_STATE_IDENTIFIABILITY",
+    "joint": "FAIL_JOINT_IDENTIFIABILITY",
+    "scale": "PASS_SYNTHETIC",
+    "forward_replay": "FAIL_SPECIFICITY__WRONG_MODELS_TOO_OFTEN_REPLAY",
+    "permutation_control": "PASS_NEAR_CHANCE"
+  },
+  "status": "CALIBRATION_NEGATIVE_SPECIFICITY_CERTIFICATE__GEOMETRY_SYNTHETIC_PASS__STATE_AND_REPLAY_FAIL",
+  "expedition_use": {
+    "allowed": "Use as software calibration and failure-mode reference.",
+    "forbidden": "Do not use this synthetic library as a real underwater-pyramid detector or as evidence of a structure.",
+    "next_gate": "MEASURED_TANK_LIBRARY_V1_WITH_CALIBRATED_PROJECTOR_HYDROPHONES_AND_BLIND_HOLDOUT"
+  },
+  "scientific_firewall": [
+    "SYNTHETIC_IDENTIFIABILITY != REAL_WORLD_IDENTIFIABILITY",
+    "HIGH_CLASS_ACCURACY != UNDERWATER_PYRAMID_DETECTION",
+    "FAILED_STATE_GATE_MUST_BE_PRESERVED",
+    "FAILED_REPLAY_SPECIFICITY_MUST_BE_PRESERVED",
+    "NO_RECENTERING",
+    "NO_TARGET_DETECTED"
+  ]
+}
