@@ -1,0 +1,97 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-BISECTOR-SEAFLOOR-DATA-AUDIT-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.bisector.seafloor_data_audit.v1",
+  "created_at_local": "2026-08-20T12:41:00+03:00",
+  "document_class": "SEAFLOOR_DATA_AVAILABILITY_AND_REGIONAL_GEOLOGY_AUDIT",
+  "status": "REGIONAL_BATHYMETRY_AND_MULTIBEAM_DATA_CONFIRMED__EXACT_DIRECT_SWATH_AT_FROZEN_POINT_NOT_YET_CONFIRMED",
+  "frozen_search_point": {
+    "latitude_deg": -3.8654180644718967,
+    "longitude_deg_east": 3.854924373538978,
+    "source": "JANUS-LOVE-EDEM-BISECTOR-RELAY-EARTH-LOCUS-2026-08-20-v1.0",
+    "rule": "SEARCH_HERE_FIRST__DO_NOT_MOVE_POINT_TO_MATCH_INTERESTING_SEAFLOOR_FEATURES"
+  },
+  "regional_context": {
+    "broad_setting": "eastern tropical South Atlantic, northern Angola Basin, immediately north of the commonly mapped Congo deep-sea fan extent",
+    "congo_fan_approx_reference_extent": {
+      "longitude_deg_east": [3.0, 10.0],
+      "latitude_deg_south": [4.0, 10.5]
+    },
+    "interpretation": "The frozen point at 3.8654 S, 3.8549 E sits just north of the approximate 4 S northern boundary used in published Congo Fan summaries and inside its broad longitude range.",
+    "known_regional_morphology": [
+      "abyssal plain",
+      "Congo submarine channel-levee and turbidite fan system nearby",
+      "regional pockmarks and mass-transport features in parts of the margin/fan",
+      "water depths in the deep fan/lobe system commonly around 4.7 to 5.0 km"
+    ]
+  },
+  "data_availability": {
+    "global_grids": [
+      {
+        "name": "GEBCO_2026",
+        "type": "global bathymetric terrain grid",
+        "resolution": "15 arc-second",
+        "status_at_point": "AVAILABLE_BY_GLOBAL_COVERAGE",
+        "important_boundary": "A GEBCO cell is not automatically a direct sonar sounding. The accompanying Type Identifier grid must be checked to distinguish measured data from interpolation/other source classes."
+      },
+      {
+        "name": "GMRT",
+        "type": "Global Multi-Resolution Topography synthesis",
+        "status_at_point": "POINT_QUERY_SERVICE_AVAILABLE_IN_PRINCIPLE",
+        "important_boundary": "Exact highest-resolution source and direct curated multibeam coverage at the frozen point still need to be resolved from GMRT swath polygons/cruise metadata."
+      }
+    ],
+    "regional_direct_acoustic_surveys": [
+      {
+        "survey_family": "GUINESS / ZAIANGO / ZAISAR / ZAICAR",
+        "instruments": ["Simrad EM12 dual swath multibeam", "Simrad EM300 multibeam in parts", "3.5 kHz sub-bottom profiler", "2D high-resolution seismic"],
+        "published_scale": "more than 25,000 km of 2D high-resolution seismic reported for Congo deep-sea fan survey set",
+        "regional_coverage": "large portions of Congo fan/canyon-channel system",
+        "exact_frozen_point_swath_intersection": "NOT_YET_CONFIRMED"
+      },
+      {
+        "survey_family": "WACS / CONGOLOBE 2011-2012",
+        "platform": "ROV Victor 6000 and RV Pourquoi Pas?",
+        "data": ["high-resolution ROV multibeam", "video", "cores", "in-situ instruments"],
+        "resolution": "about 1-2 m vertical/depth map scale for 60 m-altitude ROV surveys; down to about 0.2 m vertical resolution for low-altitude transects",
+        "regional_coverage": "selected terminal lobe sites of Congo deep-sea fan, not the entire basin",
+        "exact_frozen_point_swath_intersection": "NOT_YET_CONFIRMED"
+      }
+    ],
+    "lidar": {
+      "status": "NOT_PRIMARY_FOR_THIS_TARGET",
+      "reason": "Airborne bathymetric lidar is useful in shallow clear water; a several-kilometre-deep abyssal target requires acoustic sounding or other marine geophysical methods."
+    }
+  },
+  "current_evidence_ceiling": {
+    "can_say": [
+      "Global gridded bathymetry exists for the exact frozen point.",
+      "Extensive multibeam, sonar, sub-bottom and seismic surveys exist in the broader Congo/Angola Basin system.",
+      "The frozen point is geographically close to the northern edge of a major surveyed deep-sea fan system."
+    ],
+    "cannot_yet_say": [
+      "A modern direct multibeam swath passes through the exact frozen point.",
+      "A pyramid-like or artificial structure exists there.",
+      "Any seabed feature is connected to LOVE, EDEM, Giza, Osiris or an ancient relay."
+    ]
+  },
+  "next_gate": {
+    "name": "EXACT_POINT_SWATH_AND_TID_RESOLUTION_V1",
+    "steps": [
+      "Query GEBCO TID/source class at the exact frozen cell.",
+      "Query GMRT point value and highest-resolution source at the exact coordinate.",
+      "Intersect GMRT curated multibeam swath polygons and cruise tracks with 0, 1, 5, 10 and 25 km buffers around the frozen point.",
+      "Search Ifremer/Geo-Ocean and NCEI cruise catalogs for raw bathymetry/seismic tracks intersecting those buffers.",
+      "Only after direct-data provenance is known, inspect morphology for relief, pockmarks, scarps, channels, seamounts or geometric anomalies."
+    ],
+    "frozen_buffer_km": [0, 1, 5, 10, 25],
+    "no_recenter_rule": true
+  },
+  "sources": [
+    "GEBCO_2026 Grid and TID documentation",
+    "GMRT PointServer/MapTool/services documentation",
+    "Babonneau et al. / Droz et al. Congo fan multibeam literature",
+    "Frontiers 2024 Congo canyon-channel bathymetric survey synthesis",
+    "Congolobe project / ROV Victor 6000 high-resolution bathymetry publications"
+  ],
+  "claim_ceiling": "DATA_AVAILABILITY_AND_REGIONAL_CONTEXT_ONLY__NO_SEAFLOOR_ARTIFACT_CLAIM"
+}
