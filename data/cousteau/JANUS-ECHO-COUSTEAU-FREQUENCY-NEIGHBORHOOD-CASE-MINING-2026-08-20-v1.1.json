@@ -1,0 +1,222 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-FREQUENCY-NEIGHBORHOOD-CASE-MINING-2026-08-20-v1.1",
+  "supersedes": "JANUS-ECHO-COUSTEAU-FREQUENCY-NEIGHBORHOOD-CASE-MINING-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "run_class": "OPEN_SOURCE_SPECTRAL_CASE_MINING__RESONANT_RETURN_CONTROL_MATRIX__POST_HOC_COMPARISON_TO_PREEXISTING_MODEL_PRIOR",
+  "parent_model": "Hawkar-usls/Echo-Pyramid:config/underwater_resonator_recipe.v1.json",
+  "reverse_operator": "Hawkar-usls/Echo-Pyramid:config/cousteau_transformed_echo_reverse_operator.v1.1.json",
+  "prior": {
+    "nominal_band_hz": [511.6618075801749, 529.1545189504374],
+    "center_hz": 520.4081632653061,
+    "ctd_sensitivity_envelope_hz": [504.8396501457726, 543.265306122449],
+    "claim_ceiling": "MODEL_PRIOR_ONLY__NOT_A_BLIND_KEY"
+  },
+  "round_trip_echo_model": {
+    "equation": "Y(f) = X(f) * H_tx(f) * S_target(f,theta_in,theta_out) * H_rx(f) + N(f)",
+    "expanded_target_operator": "S_target = C_in * H_resonator * B_scatter * C_out",
+    "terms": {
+      "X": "known_or_estimated_active_sonar_or_incident_field",
+      "H_tx": "outbound_water_column_seafloor_and_multipath_transfer_function",
+      "S_target": "target_scattering_or_resonant_transfer_operator",
+      "C_in": "incident_field_to_target_coupling",
+      "H_resonator": "internal_or_surface_resonant_response_if_present",
+      "B_scatter": "boundary_backscatter_and_reradiation_operator",
+      "C_out": "target_to_return_field_coupling",
+      "H_rx": "inbound_return_path_transfer_function",
+      "Y": "received_complex_spectrum_or_impulse_response",
+      "N": "noise_reverberation_biology_shipping_and_unmodelled_terms"
+    },
+    "interpretation": "A transformed echo is a round-trip measurement. The outbound illuminator, target interaction and inbound return path must be separated before assigning a residual spectral feature to the target.",
+    "firewall": "DO_NOT_ASSUME_LITERAL_THROUGH_TRANSMISSION_THROUGH_THE_OBJECT; resonance may appear through scattering, ringing, cavity coupling or reradiation without the wave traversing the entire body."
+  },
+  "control_classes": {
+    "natural_false_positive": [
+      "ICEBERG_HARMONIC_TREMOR",
+      "SEI_WHALE_MID_FREQUENCY_CALLS",
+      "ANTARCTIC_MINKE_BIO_DUCK",
+      "FISH_SWIMBLADDER_RESONANCE"
+    ],
+    "mechanism_positive_control": [
+      "SUBMERGED_ELASTIC_SHELL_RESONANCE"
+    ],
+    "illuminator_control": [
+      "SURTASS_LFA"
+    ],
+    "hard_absolute_frequency_reject": [
+      "NOAA_UPSWEEP"
+    ]
+  },
+  "cases": [
+    {
+      "rank": 1,
+      "id": "ICEBERG_HARMONIC_TREMOR",
+      "source_status": "RESOLVED_NATURAL",
+      "control_role": "NATURAL_HARMONIC_FALSE_POSITIVE",
+      "spectrum": "40 Hz fundamental with 40 Hz overtone spacing; published example reports as many as 15 overtones visible",
+      "comparison": {
+        "harmonic_number_at_520_hz": 13,
+        "harmonic_line_hz": 520,
+        "difference_from_prior_center_hz": 0.40816326530614333,
+        "relative_difference_percent": 0.07843137254902362,
+        "match_type": "VERY_CLOSE_ABSOLUTE_HZ_FALSE_POSITIVE"
+      },
+      "meaning": "A natural ice-contact resonant/frictional system can produce a harmonic essentially on the modeled flooded-center frequency. One 520 Hz line has no geometry specificity.",
+      "sources": [
+        "https://www.pmel.noaa.gov/acoustics/sounds_cryogenic.html",
+        "https://tos.org/oceanography/assets/docs/26-2_dziak.pdf"
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "SEI_WHALE_MID_FREQUENCY_CALLS",
+      "source_status": "KNOWN_BIOLOGICAL",
+      "control_role": "DIRECT_BIOLOGICAL_BAND_OVERLAP",
+      "published_band_hz": [200, 600],
+      "comparison": {
+        "nominal_prior_fully_inside_band": true,
+        "match_type": "DIRECT_BAND_OVERLAP_BIOLOGICAL_CONTROL"
+      },
+      "meaning": "A marine mammal can emit directly across the entire modeled 512-529 Hz neighborhood; absolute frequency is therefore not diagnostic.",
+      "sources": [
+        "https://link.springer.com/article/10.1007/s40857-017-0101-z"
+      ]
+    },
+    {
+      "rank": 3,
+      "id": "ANTARCTIC_MINKE_BIO_DUCK",
+      "source_status": "RESOLVED_BIOLOGICAL_AFTER_DECADES_OF_MYSTERY",
+      "control_role": "MACHINE_LIKE_REPETITIVE_HARMONIC_BIOLOGICAL_FALSE_POSITIVE",
+      "published_measurement_band_hz": [40, 500],
+      "published_harmonics_to_hz": 2000,
+      "comparison": {
+        "fundamental_nominal_overlap": false,
+        "gap_to_nominal_low_edge_hz": 11.661807580174923,
+        "harmonic_cloud_can_span_prior": true,
+        "match_type": "HARMONIC_NEIGHBORHOOD_FALSE_POSITIVE"
+      },
+      "meaning": "Historically mysterious machine-like repetitive signals with harmonics through the target neighborhood can be biological.",
+      "sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4013705/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10363173/"
+      ]
+    },
+    {
+      "rank": 4,
+      "id": "FISH_SWIMBLADDER_RESONANCE",
+      "source_status": "KNOWN_BIOACOUSTIC_RESONANCE",
+      "control_role": "BIOLOGICAL_GAS_CAVITY_RESONATOR_AND_BACKSCATTER_CONTROL",
+      "comparison": {
+        "match_type": "BIOLOGICAL_CAVITY_RESONANCE_CLASS",
+        "note": "Resonance depends on species, bladder size, depth, pressure and damping. Swimbladders are major acoustic scatterers and can produce strong frequency-dependent sonar returns."
+      },
+      "meaning": "A natural gas-filled biological cavity can transform incident sonar into a resonant return; candidate target signatures must beat this control using full transfer-function, localization and repeatability tests.",
+      "sources": [
+        "https://www.sciencedirect.com/science/article/pii/0022460X71904330",
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267338"
+      ]
+    },
+    {
+      "rank": 5,
+      "id": "SUBMERGED_ELASTIC_SHELL_RESONANCE",
+      "source_status": "ENGINEERED_EXPERIMENTAL_PHYSICS_CONTROL",
+      "control_role": "TRANSFORMED_ECHO_MECHANISM_POSITIVE_CONTROL",
+      "comparison": {
+        "match_type": "MECHANISM_POSITIVE_CONTROL",
+        "note": "Published submerged elastic-shell scattering studies show prominent resonance structure, backscatter/sonar-cross-section features and transient ringing under acoustic illumination."
+      },
+      "meaning": "The transformed-echo mechanism is physically real for submerged resonant objects. Passing this control establishes sensitivity to resonance transformation, not pyramid identity.",
+      "sources": [
+        "https://www.sciencedirect.com/science/article/abs/pii/002076839190029F",
+        "https://pubmed.ncbi.nlm.nih.gov/22899124/"
+      ]
+    },
+    {
+      "rank": 6,
+      "id": "SURTASS_LFA",
+      "source_status": "MILITARY_ACTIVE_SONAR_ILLUMINATOR",
+      "control_role": "INCIDENT_FIELD_ILLUMINATOR_CONTROL",
+      "transmit_band_hz": [100, 500],
+      "gap_to_nominal_prior_low_edge_hz": 11.661807580174923,
+      "comparison": {
+        "match_type": "NEARBY_EXCITATION_BAND_NOT_RETURN_MATCH",
+        "warning": "Frequency proximity of the illuminator is not evidence of a target resonance. Recover or marginalize X(f) before estimating S_target."
+      },
+      "sources": [
+        "https://www.nepa.navy.mil/Portals/20/Documents/surtass-lfa/2018/02/SURTASS-LFA_BO_2015-2016.pdf"
+      ]
+    },
+    {
+      "rank": 7,
+      "id": "NOAA_UPSWEEP",
+      "source_status": "UNRESOLVED_SOURCE",
+      "control_role": "HARD_ABSOLUTE_FREQUENCY_REJECT",
+      "noaa_page": "https://www.pmel.noaa.gov/acoustics/sounds/upsweep.html",
+      "spectrogram_axis_hz": [0, 64],
+      "spectrogram_axis_provenance": "USER_VERIFIED_FROM_NOAA_PMEL_SPECTROGRAM_IMAGE; NOAA text page confirms the signal identity but does not expose the numeric frequency axis as machine-readable text.",
+      "comparison": {
+        "match_type": "REJECT_ABSOLUTE_FREQUENCY",
+        "reason": "The displayed spectrum is far below the modeled flooded prior and must not be promoted as a 520 Hz neighborhood candidate."
+      },
+      "meaning": "Retain as a historical unresolved-signal sanity check only; exclude from the flooded-frequency candidate set."
+    }
+  ],
+  "required_transformed_echo_features": [
+    "calibrated_absolute_frequency",
+    "full_modal_pattern_not_single_peak",
+    "Q_or_linewidth",
+    "harmonic_or_mode_spacing",
+    "ringdown_or_group_delay",
+    "phase_or_complex_impulse_response_where_available",
+    "outbound_illuminator_estimate_X",
+    "separate_H_tx_and_H_rx_or_justified_stationary_reciprocal_approximation",
+    "bearing_range_TWTT_and_Doppler_where_available",
+    "CTD_or_sound_speed_profile",
+    "geodetic_backpropagation_focus",
+    "repeat_independent_passes",
+    "forward_replay_on_withheld_pass",
+    "mandatory_ice_biology_fish_ship_seafloor_and_ASW_controls"
+  ],
+  "admission_logic": {
+    "single_frequency_match": "REJECT_AS_NON_SPECIFIC",
+    "resonant_return_without_localization": "CONTROL_OR_CANDIDATE_ONLY",
+    "stable_localization_without_modal_fingerprint": "OBSERVATION_ONLY",
+    "modal_fingerprint_without_illuminator_separation": "OBSERVATION_ONLY",
+    "admit_transformed_target_candidate_only_if": [
+      "incident field is recovered or marginalized",
+      "path transfer is corrected or bounded",
+      "residual target operator is repeatable across independent passes",
+      "residual refocuses to a stable Earth-fixed locus",
+      "natural and engineered controls are quantitatively outperformed",
+      "withheld-pass forward replay succeeds"
+    ],
+    "geometry_identity_claim": "REQUIRES_SEPARATE_MULTI_MODEL_INVERSION; transformed echo alone never identifies a pyramid."
+  },
+  "high_priority_archive_cases_missing_numeric_spectra": [
+    {
+      "id": "GALLAUDET_1980S_BALLISTIC_MISSILE_SUBMARINE_SONAR_ACCOUNT",
+      "needed": ["raw waveform", "spectrum", "ping waveform", "TWTT", "bearing", "Doppler", "platform navigation", "SSP"]
+    },
+    {
+      "id": "SOVIET_QUACKERS",
+      "needed": ["raw hydroacoustic recordings", "absolute frequency calibration", "bearing history", "active-ping timestamps", "platform navigation"]
+    },
+    {
+      "id": "NUNAVUT_FURY_AND_HECLA_2016_PING",
+      "source_status": "REPORTED_SEAFLOOR_PING__CANADIAN_MILITARY_SWEEP_FOUND_NO_UNUSUAL_CONTACT",
+      "needed": ["original sailboat sonar recording", "frequency calibration", "location", "instrument model"]
+    }
+  ],
+  "hard_rules": [
+    "ABSOLUTE_520_HZ_MATCH_IS_NOT_EVIDENCE_OF_PYRAMID_GEOMETRY",
+    "FULL_MODAL_PATTERN_OUTRANKS_SINGLE_PEAK",
+    "OUTBOUND_ILLUMINATOR_IS_NOT_TARGET_RETURN",
+    "TRANSFORMED_ECHO_REQUIRES_ROUND_TRIP_PATH_ACCOUNTING",
+    "ICE_BIOLOGY_FISH_SHIP_SEAFLOOR_AND_ASW_CONTROLS_ARE_MANDATORY",
+    "SUBMERGED_ELASTIC_SHELL_IS_MECHANISM_POSITIVE_CONTROL_NOT_TARGET_IDENTITY",
+    "NOAA_UPSWEEP_IS_REJECTED_FROM_520_HZ_CANDIDATE_SET_BY_ABSOLUTE_FREQUENCY",
+    "HISTORICAL_UAP_LABELS_DO_NOT_OVERRIDE_RAW_ACOUSTIC_DATA",
+    "PRESERVE_NEGATIVE_AND_AMBIGUOUS_RESULTS"
+  ],
+  "status": "CONTROL_MATRIX_V1_1_FROZEN__ROUND_TRIP_TRANSFORMED_ECHO_GATE_ADDED__ABSOLUTE_520_HZ_SPECIFICITY_REJECTED__RAW_SPECTRA_SEARCH_CONTINUES",
+  "next_gate": "COUSTEAU_ROUND_TRIP_RESONANT_RETURN_BLIND_CONTROL_GATE_V1"
+}
