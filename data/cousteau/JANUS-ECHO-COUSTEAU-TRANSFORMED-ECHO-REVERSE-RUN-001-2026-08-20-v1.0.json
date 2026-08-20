@@ -1,0 +1,96 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-TRANSFORMED-ECHO-REVERSE-RUN-001-2026-08-20-v1.0",
+  "created_at_local": "2026-08-20T15:04:00+03:00",
+  "branch": "janus-echo-cousteau",
+  "run_class": "HISTORICAL_EVIDENCE_REVERSE_OPERATOR_AUDIT__NO_RAW_SONAR_REPROCESSING",
+  "parents": [
+    "data/cousteau/JANUS-ECHO-COUSTEAU-HISTORICAL-MILITARY-ACOUSTIC-ANOMALY-CORPUS-2026-08-20-v1.0.json",
+    "Hawkar-usls/Echo-Pyramid:config/cousteau_transformed_echo_reverse_operator.v1.json"
+  ],
+  "operator": {
+    "forward": "X -> H_path -> H_target -> Y",
+    "reverse": "Y -> platform/sensor geometry -> estimate X -> backpropagate H_path -> residual H_target -> stationary-focus test -> fingerprint controls -> withheld forward replay",
+    "objective": "Treat the observed sound as already transformed by an unknown target and ask what stationary target transfer function, if any, is required to explain it."
+  },
+  "case_results": [
+    {
+      "case_id": "GALLAUDET_1980S_BALLISTIC_MISSILE_SUBMARINE_SONAR_ACCOUNT",
+      "input_quality": "TESTIMONY_ONLY__NO_RAW_TRACK",
+      "reverse_steps": {
+        "assume_physical_mover": "NOT_REQUIRED_FOR_FIRST_REVERSE_PASS",
+        "stationary_direct_monostatic_reflector_test": "FAIL_FOR_REPORTED_KINEMATIC_SHAPE_IF_CLOSING_RATE_EXCEEDED_PLATFORM_RADIAL_SPEED_OR_CONTACT_MAINTAINED_WAKE_POSITION",
+        "constant_resonant_delay_test": "FAIL_AS_MOTION_GENERATOR__A_CONSTANT_DELAY_ONLY_BIASES_RANGE",
+        "multipath_or_track_switch_test": "POSSIBLE_IN_PRINCIPLE__RAW_DELAY_BEARING_DOPPLER_HISTORY_REQUIRED",
+        "distributed_stationary_resonator_test": "OPEN_NEW_MODEL__REQUIRES_MULTIPLE_FIXED_SCATTERING_POINTS_OR_GUIDED_PATHS_AND_MUST_BE_PREREGISTERED_SEPARATELY",
+        "actual_moving_target_test": "REMAINS_OPEN",
+        "sensor_or_processing_artifact_test": "REMAINS_OPEN"
+      },
+      "key_physics": [
+        "For direct monostatic ranging to one stationary point, platform motion alone bounds the apparent direct-path range rate by the platform radial speed.",
+        "A target transfer function can reshape spectrum, phase and impulse response and can add ringing/group delay, but a time-invariant delay is a fixed range bias rather than sustained apparent velocity.",
+        "A moving apparent contact can arise without a moving solid target only if the dominant propagation/scattering locus changes with time, for example multipath switching, extended/distributed scattering or track association changes."
+      ],
+      "reverse_verdict": "SINGLE_STATIONARY_PYRAMID_DIRECT_ECHO_FAILS_REPORTED_MOTION_CLASS__DISTRIBUTED_OR_MULTIPATH_TRANSFORMED_ECHO_MODEL_REMAINS_TESTABLE_BUT_UNVERIFIED",
+      "next_required_data": ["raw sonar record", "ownship navigation", "bearing/range/TWTT series", "Doppler", "waveform", "CTD/SSP", "processor/track association metadata"]
+    },
+    {
+      "case_id": "WWII_DEEP_SCATTERING_LAYER_FALSE_BOTTOM",
+      "input_quality": "RESOLVED_PHENOMENON",
+      "reverse_steps": {
+        "stationary_pyramid_test": "REJECT",
+        "distributed_scattering_layer_test": "PASS_KNOWN_NATURAL_SOURCE",
+        "day_night_motion_test": "PASS_BIOLOGICAL_DIEL_VERTICAL_MIGRATION",
+        "pyramid_fingerprint_test": "NOT_AUTHORIZED_AND_UNNECESSARY"
+      },
+      "reverse_verdict": "NATURAL_DISTRIBUTED_BIOLOGICAL_SCATTERING_CONTROL",
+      "lesson_for_cousteau": "A coherent and apparently geometric acoustic boundary can be created by a spatially distributed biological layer."
+    },
+    {
+      "case_id": "BIO_DUCK_1960S_TO_2014",
+      "input_quality": "RESOLVED_WITH_MULTI_SENSOR_TAGS",
+      "reverse_steps": {
+        "stationary_resonator_test": "REJECT",
+        "repetitive_spectral_fingerprint_test": "PASS_AS_BIOLOGICAL_LOOKALIKE_CONTROL",
+        "source_localization_test": "RESOLVED_TO_TAGGED_ANTARCTIC_MINKE_WHALES"
+      },
+      "reverse_verdict": "BIOLOGICAL_SOURCE__MANDATORY_FALSE_TECHNOLOGY_CONTROL",
+      "lesson_for_cousteau": "Highly regular pulse trains and harmonics can remain mysterious for decades without implying a structure or vehicle."
+    },
+    {
+      "case_id": "SOVIET_QUACKERS",
+      "input_quality": "MEMOIR_SECONDARY_HISTORY__NO_RAW_RECORDINGS",
+      "reverse_steps": {
+        "stationary_pyramid_test": "BLOCKED",
+        "active_sonobuoy_ASW_test": "PLAUSIBLE_FOR_AT_LEAST_SOME_REPORTED_EPISODES",
+        "response_to_active_ping_test": "UNVERIFIED_WITHOUT_RAW_TIMING_AND_WAVEFORM",
+        "fixed_geodetic_recurrence_test": "BLOCKED_BY_MISSING_NAVIGATION_AND_RAW_DATA"
+      },
+      "reverse_verdict": "AMBIGUOUS__ASW_SONOBUOY_EXPLANATION_HAS_DIRECT_MILITARY_MEMOIR_SUPPORT__PYRAMID_MODEL_NOT_ADMITTED",
+      "lesson_for_cousteau": "Reported apparent responsiveness to a submarine is not sufficient; the first discriminator is whether the acoustic focus follows deployed sensor geometry or a fixed seafloor coordinate."
+    }
+  ],
+  "cross_case_result": {
+    "single_stationary_pyramid_can_explain_all_cases": false,
+    "stationary_resonant_structure_can_modify_active_sonar_return": true,
+    "stationary_resonant_structure_alone_can_generate_arbitrary_moving_track": false,
+    "distributed_or_multipath_stationary_structure_can_generate_apparent_moving_scattering_locus": "PHYSICALLY_POSSIBLE_CLASS__NOT_DEMONSTRATED_FOR_THE_1980S_CASE",
+    "highest_value_discriminator": "BACKPROPAGATE_EACH_PING_OR_CONTACT_TO_EARTH_FIXED_COORDINATES_AND_TEST_WHETHER_THE_FOCUS_IS_STATIONARY_ACROSS_OWN_SHIP_MOTION",
+    "highest_value_archive_target": "1980s ballistic-missile-submarine raw sonar account discussed by Gallaudet"
+  },
+  "new_gate": {
+    "id": "COUSTEAU_GHOST_MOVER_TO_FIXED_RESONATOR_BACKPROP_GATE_V1",
+    "question": "Can an apparent moving sonar track be better explained by a stationary/distributed target transfer function plus propagation than by a physical moving target?",
+    "minimum_inputs": [
+      "ownship trajectory",
+      "transmitter/receiver geometry",
+      "ping times and waveform or passive reference",
+      "bearing/range/TWTT history",
+      "Doppler if available",
+      "sound speed profile",
+      "bathymetry and seabed model"
+    ],
+    "pass_condition": "After propagation correction and time-reversal/matched-field backpropagation, at least three independent segments or passes refocus to one Earth-fixed locus within propagated uncertainty and preserve a repeatable target-specific transfer function that beats biological, reverberation and ASW-system controls.",
+    "fail_condition": "Recovered focus moves with the reported contact, sonobuoy/transmitter geometry, biological layer or processing association rather than remaining fixed."
+  },
+  "claim_ceiling": "REVERSE_OPERATOR_DIAGNOSTIC_ONLY__NO_HISTORICAL_CASE_IDENTIFIED_AS_PYRAMID__1980S_SIMPLE_SINGLE_FIXED_PYRAMID_MODEL_FAILS_KINEMATIC_SANITY_CHECK"
+}
