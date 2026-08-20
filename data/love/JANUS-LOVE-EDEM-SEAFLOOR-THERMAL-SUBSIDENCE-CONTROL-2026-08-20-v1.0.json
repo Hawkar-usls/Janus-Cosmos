@@ -1,0 +1,32 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-SEAFLOOR-THERMAL-SUBSIDENCE-CONTROL-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.seafloor.thermal_subsidence_control.v1",
+  "created_at_local": "2026-08-20T13:42:00+03:00",
+  "status": "THERMAL_AGE_DEPTH_CONTROL_COMPLETE__NO_DEPTH_ANOMALY_PROMOTED",
+  "parent": "data/love/JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-RECEIPT.json",
+  "frozen_point": {"lat_deg": -3.8654180644718967, "lon_deg_east": 3.854924373538978, "no_recenter": true},
+  "inputs": {
+    "oceanic_crust_age_ma": 96.09878540039062,
+    "gmrt_synthesis_seafloor_depth_m": 5065.0,
+    "depth_provenance": "GMRT_SYNTHESIS__GEBCO_TID40_REGION__NOT_DIRECT_LOCAL_MULTIBEAM"
+  },
+  "parsons_sclater_1977_control": {
+    "applicable_branch": "t > 20 Ma",
+    "equation": "d(t) = 6400 - 3200 * exp(-t/62.8) metres",
+    "predicted_unloaded_ocean_floor_depth_m": 5707.248982534621,
+    "predicted_minus_gmrt_seafloor_m": 642.248982534621,
+    "interpretation": "The synthesis seafloor is about 0.64 km shallower than the classic bare/unloaded age-depth prediction. This is not an anomaly claim: sediments, sediment loading/decompaction, regional isostasy, dynamic topography, model choice and indirect bathymetry can all contribute."
+  },
+  "paleobathymetry_boundary": {
+    "full_pybacktrack_run_authorized": false,
+    "why": "Reliable backtracking needs present unloaded basement depth plus sediment thickness/stratigraphic or suitable global sediment constraints; current point lacks direct local multibeam/seismic provenance.",
+    "next_requirement": "Acquire or constrain sediment thickness and basement depth at the frozen point, then run multiple age-depth models rather than treating Parsons-Sclater as truth."
+  },
+  "firewall": [
+    "SEAFLOOR_DEPTH_MINUS_THERMAL_MODEL != SEDIMENT_THICKNESS",
+    "MODEL_RESIDUAL != ARTIFICIAL_STRUCTURE",
+    "GMRT_SYNTHESIS_DEPTH != DIRECT_SONAR_DEPTH",
+    "THERMAL_SUBSIDENCE_MODEL != EXACT_PALEOBATHYMETRY"
+  ],
+  "claim_ceiling": "FIRST_ORDER_THERMAL_SUBSIDENCE_CONTROL_ONLY__NO_MORPHOLOGY__NO_ARTIFICIAL_STRUCTURE"
+}
