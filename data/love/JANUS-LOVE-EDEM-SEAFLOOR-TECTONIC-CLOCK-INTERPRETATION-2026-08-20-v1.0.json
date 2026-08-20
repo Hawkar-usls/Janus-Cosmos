@@ -1,0 +1,88 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-CLOCK-INTERPRETATION-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.seafloor.tectonic_clock_interpretation.v1",
+  "created_at_local": "2026-08-20T13:35:00+03:00",
+  "status": "TECTONIC_CLOCK_RESOLVED__LOCAL_LATER_FLOOD_MODEL_REJECTED__DIRECT_MORPHOLOGY_STILL_BLOCKED",
+  "parent_receipt": "data/love/JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-RECEIPT.json",
+  "frozen_point": {
+    "latitude_deg": -3.8654180644718967,
+    "longitude_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "exact_current_results": {
+    "seton_2020_6arcmin_oceanic_crust_age_ma": 96.09878540039062,
+    "nearest_age_grid_node": {"lat_deg": -3.9, "lon_deg": 3.9},
+    "full_spreading_rate_at_crustal_accretion_mm_per_yr": 46.262691497802734,
+    "symmetric_half_rate_proxy_mm_per_yr": 23.131345748901367,
+    "half_rate_boundary": "PROXY_ONLY__ACTUAL_SIDE_SPECIFIC_RATE_REQUIRES_ASYMMETRY_GRID",
+    "raw_spreading_direction_grid_value_deg": 78.94754028320312,
+    "gmrt_synthesis_elevation_m": -5065,
+    "depth_boundary": "GMRT_SYNTHESIS_VALUE__NOT_DIRECT_LOCAL_SONAR_SOUNDING"
+  },
+  "submergence_result": {
+    "question": "When was this exact place flooded?",
+    "answer": "The current best model places the point on oceanic crust created about 96.1 Ma ago. Oceanic crust is created at a spreading ridge as seafloor, so the clean physical model is not LAND_THEN_FLOODED but RIDGE_BIRTH_AS_SEAFLOOR -> COOLING_SUBSIDENCE -> SEDIMENTATION.",
+    "best_current_water_covered_start_clock_ma": 96.09878540039062,
+    "classification": "OCEAN_FLOOR_BIRTH_CLOCK__NOT_A_DISCRETE_LATER_FLOOD_DATE",
+    "regional_context": {
+      "south_atlantic_rifting": "major Early Cretaceous rifting roughly 145-125 Ma in modern reconstructions",
+      "angola_sector_oceanic_crust_generation": "commonly placed around ~110 Ma with model dependence and northward propagation",
+      "equatorial_shallow_intermediate_gateway": "around ~100 Ma in some reconstructions",
+      "deep_gateway": "developed later over several Myr; regional gateway timing is not the local crust-formation age"
+    }
+  },
+  "age_confidence_firewall": {
+    "cretaceous_normal_superchron_window_approx_ma": [83, 120.6],
+    "point_age_inside_cns": true,
+    "seton_2020_rule": "Crust within the Cretaceous Normal Superchron is assigned lower confidence because magnetic reversal constraints are sparse; the equatorial Atlantic is additionally difficult because magnetic anomaly signatures are weak in this geometry.",
+    "interpretation": "96.0988 Ma is a model-grid estimate, not a precise radiometric date. Future direct magnetic/seismic constraints may shift it."
+  },
+  "plate_motion_first_order": {
+    "model": "Muller et al. 2019 optimized absolute reference frame as distributed in EarthByte presentday-agegridding",
+    "assumed_plate_id": 701,
+    "assumed_plate_name": "Africa",
+    "reconstructed_at_crust_age": {
+      "latitude_deg": -23.74977654071065,
+      "longitude_deg": -14.548890558166233,
+      "finite_rotation_interpolated_between_ma": [95.0, 100.0],
+      "finite_rotation_pole_lat_deg": -26.55878654778628,
+      "finite_rotation_pole_lon_deg": 127.78885419840186,
+      "finite_rotation_angle_deg": 30.248775464187666
+    },
+    "great_circle_separation_reconstructed_to_present_km": 2964.6175728514113,
+    "meaning": "This is first-order absolute-frame displacement of a point assumed fixed to African plate 701, not cumulative seafloor-spreading distance and not validated local static-polygon assignment.",
+    "south_america_relative_to_africa_at_same_age": {
+      "moving_plate_id": 201,
+      "fixed_plate_id": 701,
+      "interpolation_bracket_ma": [96.0, 120.6],
+      "finite_rotation_pole_lat_deg": 57.431624146206396,
+      "finite_rotation_pole_lon_deg": -34.018442175816475,
+      "finite_rotation_angle_deg": 39.8409971447486
+    }
+  },
+  "direct_data_gate": {
+    "gebco_2026_tid_code": 40,
+    "gebco_2026_tid_meaning": "satellite-gravity prediction",
+    "gmrt_curated_swath_hits_within_km": {"0": 0, "1": 0, "5": 0, "10": 0, "25": 0},
+    "gmrt_cruise_track_hits_within_km": {"0": 0, "1": 0, "5": 0, "10": 0, "25": 0},
+    "ncei_multibeam_track_hits_within_km": {"0": 0, "1": 0, "5": 0, "10": 0, "25": 0},
+    "verdict": "NO_DIRECT_MULTIBEAM_PROVENANCE_FOUND_WITHIN_FROZEN_25_KM_BUFFER_IN_CURRENT_GMRT_AND_NCEI_CATALOGS",
+    "important_boundary": "This is a catalog/provenance result, not proof that no ship has ever sounded the area. It does establish that the current globally available surface used here is not authorized for fine artificial-morphology inference."
+  },
+  "causal_constraints": [
+    "A feature physically rooted in this oceanic crust cannot predate the crust itself without later transport/emplacement.",
+    "The exact point is not modeled as former continental land that was suddenly flooded in human antiquity.",
+    "Regional Aptian-Albian marine transgression on the African continental margin must not be substituted for the local oceanic-crust birth clock.",
+    "The ~5.065 km GMRT depth is a synthesis value and cannot be used to infer geometric structures at meter scale.",
+    "No morphology search is admitted until direct bathymetry or seismic data are obtained at the frozen point."
+  ],
+  "next_gates": [
+    "SETON_2ARCMIN_AGE_CELL_REPLICATION",
+    "SETON_CONFIDENCE_ASYMMETRY_OBLIQUITY_CELL_AUDIT",
+    "LOCAL_STATIC_POLYGON_PLATE_ID_VALIDATION_BEFORE_PALAEOPOSITION_PROMOTION",
+    "SEARCH_NON_GMRT_NON_NCEI_ACADEMIC_AND_INDUSTRY_SEISMIC_LINES_AT_EXACT_POINT",
+    "IF_DIRECT_DATA_FOUND_THEN_BLIND_MORPHOLOGY_SCAN",
+    "PYBACKTRACK_PALEOBATHYMETRY_ONLY_AFTER_SEDIMENT_THICKNESS_AND_BASEMENT_CONSTRAINTS"
+  ],
+  "claim_ceiling": "TECTONIC_AND_BATHYMETRIC_PROVENANCE_ONLY__NO_ARTIFICIAL_STRUCTURE__NO_ANCIENT_RELAY_CAUSATION"
+}
