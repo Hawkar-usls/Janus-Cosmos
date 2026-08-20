@@ -1,0 +1,218 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.seafloor.tectonic_submergence_direct_data.v1",
+  "status": "TECTONIC_CLOCK_RESOLVED_OR_ATTEMPTED__DIRECT_DATA_PROVENANCE_NOT_YET_SUFFICIENT__MORPHOLOGY_BLOCKED",
+  "frozen_point": {
+    "lat_deg": -3.8654180644718967,
+    "lon_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "frozen_buffers_km": [
+    0,
+    1,
+    5,
+    10,
+    25
+  ],
+  "geological_clock": {
+    "age_grid": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 96.09878540039062,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "formation_full_spreading_rate_grid": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/full_rate.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 46.262691497802734,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "formation_spreading_direction_grid": {
+      "url": "https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/dir.2020.1.GeeK2007.6m.nc",
+      "variable": "z",
+      "nearest_grid_lon_deg": 3.9000000000000057,
+      "nearest_grid_lat_deg": -3.8999999999999915,
+      "value": 78.94754028320312,
+      "units": null,
+      "grid_shape": [
+        1801,
+        3601
+      ]
+    },
+    "status": "AGE_AND_FIRST_ORDER_PLATE_RECONSTRUCTION_RESOLVED",
+    "crust_formation_age_ma": 96.09878540039062,
+    "interpretation": "If the Seton 2020 cell is oceanic, the site was created as seafloor at a spreading ridge at approximately this age; this is not a later flooding date of pre-existing continental land.",
+    "africa_plate_701_absolute_rotation_at_age": {
+      "lower_age_ma": 95.0,
+      "upper_age_ma": 100.0,
+      "pole_lat_deg": -26.55878654778628,
+      "pole_lon_deg": 127.78885419840186,
+      "angle_deg": 30.248775464187666
+    },
+    "first_order_paleolocation_assuming_africa_plate_701": {
+      "lat_deg": -23.74977654071065,
+      "lon_deg": -14.548890558166233
+    },
+    "great_circle_offset_paleolocation_to_present_km": 2964.6175728514113,
+    "south_america_201_relative_to_africa_701_at_age": {
+      "lower_age_ma": 96.0,
+      "upper_age_ma": 120.6,
+      "pole_lat_deg": 57.431624146206396,
+      "pole_lon_deg": -34.018442175816475,
+      "angle_deg": 39.8409971447486
+    },
+    "rotation_caveat": "The exact oceanic static-polygon plate ID at the point is not independently resolved here. Plate 701 is an African-side first-order assignment; do not use this reconstruction before the crust-formation age or as an exact ridge-axis paleoposition without static-polygon validation."
+  },
+  "regional_timeline_context": {
+    "south_atlantic_rifting": "Early Cretaceous; regional literature brackets major rifting roughly 145-125 Ma then stronger separation toward ~115-110 Ma.",
+    "angola_margin_oceanic_crust_onset": "Published models place oceanic crust generation along Brazil-Angola sector around ~110 Ma, with northward propagation and model uncertainty.",
+    "equatorial_gateway": "Shallow/intermediate circulation became possible around ~100 Ma in some reconstructions; deep-water connection developed later over several Myr.",
+    "critical_distinction": "REGIONAL_MARINE_TRANSGRESSION != EXACT_POINT_SUBMERGENCE. If the exact point samples oceanic crust, its water-covered history begins with oceanic crust formation, not a later flood of continental terrain."
+  },
+  "gebco_2026_tid": {
+    "resolved": true,
+    "tid_code": 40,
+    "tid_meaning": "satellite-gravity prediction",
+    "attempts": [
+      {
+        "format": "application/json",
+        "status_code": 200,
+        "content_type": "text/xml; charset=UTF-8",
+        "body_head": "<?xml version='1.0' encoding=\"UTF-8\" standalone=\"no\" ?>\n<ServiceExceptionReport version=\"1.3.0\" xmlns=\"http://www.opengis.net/ogc\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengis.net/ogc http://schemas.opengis.net/wms/1.3.0/exceptions_1_3_0.xsd\">\n<ServiceException code=\"InvalidFormat\">\nmsWMSFeatureInfo(): WMS server error. Unsupported INFO_FORMAT value (application/json).\nmsSearchDiskTree(): Search returned no results. Unable to open spatial index for /local2/mapserver/data/GEBCO_2026_TID.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.\n</ServiceException>\n</ServiceExceptionReport>\n"
+      },
+      {
+        "format": "text/plain",
+        "status_code": 200,
+        "content_type": "text/plain; charset=UTF-8",
+        "body_head": "GetFeatureInfo results:\n\nLayer 'GEBCO_2026_TID_2'\n  Feature 0: \n    x = '3.85625'\n    y = '-3.8645833'\n    value_list = '40'\n"
+      }
+    ]
+  },
+  "gmrt_pointserver": {
+    "resolved": true,
+    "request_url": "https://www.gmrt.org/services/PointServer?latitude=-3.8654180644718967&longitude=3.854924373538978&format=json",
+    "payload": {
+      "longitude": "3.854924373538978",
+      "latitude": "-3.8654180644718967",
+      "elevation": "-5065"
+    }
+  },
+  "gmrt_curated_swath_polygons": {
+    "url": "https://gmrt.org/shapefiles/gmrt_swath_polygons.zip",
+    "kind": "swaths",
+    "resolved": true,
+    "buffers": {
+      "0": [],
+      "1": [],
+      "5": [],
+      "10": [],
+      "25": []
+    },
+    "shapefile": "gmrt_swath_polygons.shp",
+    "fields": [
+      "CRUISE",
+      "ENTRY_ID",
+      "SURVEY_ID",
+      "ENTRY_TYPE",
+      "VESSEL",
+      "START",
+      "STOP",
+      "PLAT_TYPE",
+      "MB_DATA",
+      "CHIEF_SCI",
+      "CRUISE_DOI",
+      "OPERATOR",
+      "YEAR",
+      "GMRT_VERSI",
+      "SQKM",
+      "NUMFILES",
+      "MAKE_ID",
+      "MODEL_ID",
+      "PROC_ORG",
+      "FLAG_FILE",
+      "MD5"
+    ],
+    "feature_count": 1638
+  },
+  "gmrt_cruise_tracks": {
+    "url": "https://gmrt.org/shapefiles/gmrt_cruise_tracks.zip",
+    "kind": "tracks",
+    "resolved": true,
+    "buffers": {
+      "0": [],
+      "1": [],
+      "5": [],
+      "10": [],
+      "25": []
+    },
+    "shapefile": "gmrt_cruise_tracks.shp",
+    "fields": [
+      "ENTRY_ID",
+      "SURVEY_ID",
+      "ENTRY_TYPE",
+      "START",
+      "STOP",
+      "URL",
+      "VESSEL",
+      "SQKM",
+      "PLAT_TYPE",
+      "MAKE_ID",
+      "MODEL_ID",
+      "MB_DATA",
+      "CHIEF_SCI",
+      "GMRT_VERSI",
+      "MD5"
+    ],
+    "feature_count": 1640
+  },
+  "ncei_multibeam_trackline_query": {
+    "0": {
+      "resolved": true,
+      "count": 0,
+      "features": []
+    },
+    "1": {
+      "resolved": true,
+      "count": 0,
+      "features": []
+    },
+    "5": {
+      "resolved": true,
+      "count": 0,
+      "features": []
+    },
+    "10": {
+      "resolved": true,
+      "count": 0,
+      "features": []
+    },
+    "25": {
+      "resolved": true,
+      "count": 0,
+      "features": []
+    }
+  },
+  "morphology_gate": {
+    "authorized": false,
+    "rule": "Only inspect geometric seabed morphology if at least one independent direct-sounding provenance route reaches the exact point. Nearby-only hits remain context, not a substitute for the point."
+  },
+  "scientific_firewall": [
+    "OCEANIC_CRUST_AGE_IS_NOT_AN_ARTIFACT_AGE",
+    "PLATE_RECONSTRUCTION_IS_NOT_EVIDENCE_OF_ANCIENT_TECHNOLOGY",
+    "REGIONAL_TRANSGRESSION_IS_NOT_A_LOCAL_FLOOD_EVENT",
+    "NO_RECENTERING_TO_NEARBY_FEATURES",
+    "INTERPOLATED_BATHYMETRY_CANNOT_AUTHORIZE_ARTIFICIAL_MORPHOLOGY_CLAIMS"
+  ]
+}
