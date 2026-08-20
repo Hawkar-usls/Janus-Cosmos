@@ -1,0 +1,68 @@
+{
+  "schema": "janus.cosmos.epistemic_spiral.contract.v1",
+  "artifact_id": "JANUS-COSMOS-EPISTEMIC-SPIRAL-FROZEN-CONTRACT-2026-08-20-v1.0",
+  "status": "FROZEN_BEFORE_FIRST_EPISTEMIC_SPIRAL_RUN",
+  "inherits": [
+    "workspace/OSIRIS_V3_SPIRAL_COMPUTE_FROZEN_CONTRACT.json",
+    "workspace/OSIRIS_ORIGIN_PRIME_SPIRAL_SEMANTIC_SPEC_v1.0.json",
+    "Hawkar-usls/Demi_Head:contracts/NEXUS_V2_8_AIDAR_EUGENE_VOICE_SPIRAL_FROZEN_CONTRACT.json"
+  ],
+  "purpose": "Apply the existing ORIGIN->EXPERIENCE->RETURN->ORIGIN_PRIME spiral to research hypotheses while preserving every prior layer and separating symbolic context from physical evidence.",
+  "runtime_law": {
+    "ring_model": "H0 -> H1 -> H2 -> H0",
+    "ring_model_status": "REJECTED",
+    "spiral_model": "ORIGIN_n -> REVERSE_NECESSITY_n -> EVIDENCE_n -> COUNTERMODEL_n -> VERIFIED_RETURN_n -> ORIGIN_PRIME_n+1",
+    "position_may_repeat": true,
+    "state_must_advance": true,
+    "preserve_all_layers": true,
+    "automatic_winner_selection": false,
+    "memory_may_guide_search": true,
+    "memory_may_create_truth_authority": false
+  },
+  "demihead_parity": {
+    "canonical_json_content_addressing": true,
+    "sha256_each_layer": true,
+    "previous_layer_sha_bound_into_next_layer": true,
+    "comparison_does_not_delete_inputs": true,
+    "preserve_failed_and_negative_layers": true,
+    "automatic_canonization": false
+  },
+  "janus_reverse_order": [
+    "BACK",
+    "FORWARD",
+    "LEFT",
+    "RIGHT",
+    "FORWARD_AGAIN",
+    "BACK_AGAIN"
+  ],
+  "epistemic_layer_schema": [
+    "layer_id",
+    "direction",
+    "question",
+    "necessary_predictions",
+    "evidence_for",
+    "evidence_against",
+    "alternatives",
+    "status",
+    "claim_ceiling",
+    "parent_layer_sha256"
+  ],
+  "firewalls": [
+    "MEMORY != TRUTH",
+    "METAPHOR != PHYSICS",
+    "ANCIENT_TEXT != MODERN_ALGORITHM",
+    "STRUCTURAL_PARALLEL != HISTORICAL_INTENT",
+    "ABSENCE_IN_SEARCH != PROOF_OF_ABSENCE",
+    "POSTHOC_PATTERN != PREREGISTERED_SIGNIFICANCE",
+    "NEGATIVE_LAYER_MUST_BE_PRESERVED",
+    "SYMBOLIC_PASS_MUST_NOT_OVERRIDE_PHYSICAL_FAIL",
+    "Sꜣḥ_ORION != sꜣḫ_TRANSFIGURATION != S𓂸ḥ_PROJECT_OVERLAY"
+  ],
+  "hieroglyphic_overlay_policy": {
+    "allowed": true,
+    "class": "MODERN_ICONIC_REBUS_NOT_ANCIENT_TRANSLATION",
+    "must_label_uncertain_or_modern_semantics": true,
+    "must_not_back_project_project_symbols_as_historical_spellings": true
+  },
+  "claim_ceiling": "EPISTEMIC_SPIRAL_ORCHESTRATION_ONLY__NO_HYPOTHESIS_IS_TRUE_UNLESS_ITS_OWN_EVIDENCE_GATE_PASSES"
+}
