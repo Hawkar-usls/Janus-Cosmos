@@ -1,0 +1,58 @@
+name: Janus Echo Cousteau Blind Reference V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/janus_echo_cousteau_blind_reference_v1.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-BLIND-REFERENCE-LIBRARY-V1-PREREG-2026-08-20.json"
+      - ".github/workflows/janus-echo-cousteau-blind-reference-v1.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  blind-calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deterministic runtime
+        run: pip install "numpy==2.2.6"
+      - name: Compile
+        run: python -m py_compile workspace/janus_echo_cousteau_blind_reference_v1.py
+      - name: Run blind synthetic calibration
+        run: python workspace/janus_echo_cousteau_blind_reference_v1.py
+      - name: Enforce honest result ceiling
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/cousteau/JANUS-ECHO-COUSTEAU-JACQUES-YVES-BLIND-REFERENCE-CALIBRATION-RUN-001-2026-08-20-v1.0.json')
+          r=json.loads(p.read_text(encoding='utf-8'))
+          assert r['run_class']=='SYNTHETIC_BLIND_HOLDOUT_CALIBRATION__NOT_PHYSICAL_HYDROPHONE_DATA'
+          assert r['design']['absolute_119_or_520_hz_used_as_classifier_feature'] is False
+          assert r['design']['scale_L_exposed_to_first_stage'] is False
+          assert r['gates']['geometry_class'] is True
+          assert r['gates']['flood_state'] is False
+          assert r['gates']['joint_class_state'] is False
+          assert r['gates']['forward_replay_specificity'] is False
+          assert r['status']=='CALIBRATION_NEGATIVE_SPECIFICITY_CERTIFICATE__GEOMETRY_SYNTHETIC_PASS__STATE_AND_REPLAY_FAIL'
+          assert 'NO_TARGET_DETECTED' in r['scientific_firewall']
+          PY
+      - name: Persist calibration receipt regardless of scientific outcome
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-JACQUES-YVES-BLIND-REFERENCE-CALIBRATION-RUN-001-2026-08-20-v1.0.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "cousteau: freeze blind reference calibration run 1"
+          git pull --rebase origin janus-echo-cousteau
+          git push origin HEAD:janus-echo-cousteau
