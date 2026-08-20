@@ -1,0 +1,46 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-GLOBSED-EXACT-CELL-RUN-001-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.globsed_exact_cell.v1",
+  "status": "GLOBSED_CELL_RESOLVED",
+  "frozen_point": {
+    "lat_deg": -3.8654180644718967,
+    "lon_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "dataset": {
+    "name": "GlobSed Version 3",
+    "resolution": "5 arc-minute",
+    "archive_url": "https://data.caltech.edu/records/k4070-ngc79/files/GlobSed.zip?download=1",
+    "source": "NOAA NCEI dataset archived at CaltechDATA",
+    "doi": "10.22002/k4070-ngc79"
+  },
+  "grid_samples": [
+    {
+      "file": "GlobSed-v3.nc",
+      "variable": "z",
+      "nearest_lon_deg": 3.8333333333333144,
+      "nearest_lat_deg": -3.833333333333343,
+      "value": 467.0,
+      "units": null,
+      "shape": [
+        2161,
+        4321
+      ]
+    }
+  ],
+  "preferred_sample": {
+    "file": "GlobSed-v3.nc",
+    "variable": "z",
+    "nearest_lon_deg": 3.8333333333333144,
+    "nearest_lat_deg": -3.833333333333343,
+    "value": 467.0,
+    "units": null,
+    "shape": [
+      2161,
+      4321
+    ]
+  },
+  "interpretation_boundary": "GlobSed is a compiled regional/global sediment-thickness grid, not a new seismic measurement at this exact coordinate. It constrains sediment cover but does not authorize fine morphology claims.",
+  "next_gate": "PALEOBATHYMETRY_INPUT_ASSEMBLY_AFTER_STATIC_PLATE_ID_AND_SEDIMENT_CELL",
+  "claim_ceiling": "GLOBAL_SEDIMENT_GRID_CELL_ONLY__NO_ARTIFICIAL_STRUCTURE"
+}
