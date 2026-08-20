@@ -1,0 +1,346 @@
+{
+  "artifact_id": "JANUS-KAMIL-WHITE-GLASS-EGYPTIAN-GOLD-PYRAMID-MATRIX-PASS1-2026-08-20-v1.0",
+  "schema": "janus.cosmos.kamil.white_glass.gold_pyramid_matrix.pass1.v1",
+  "created_at_local": "2026-08-20T12:43:00+03:00",
+  "document_class": "PUBLISHED_DATA_SAMPLE_LEVEL_SCREEN_WITH_PREIMPACT_ARCHAEOLOGICAL_FIREWALL",
+  "status": "PASS1_COMPLETE__GOLD_GATE_UNSCORED_AU_AG_NOT_PUBLISHED_FOR_KEY_WHITE_GLASS_TABLE__BULK_PYRAMID_MATRIX_NOT_SUPPORTED__TARGET_QUARTZARENITE_MODEL_FAVORED",
+  "parents": [
+    "janus-meta-registry:data/JANUS-KAMIL-PREIMPACT-GOLD-TARGET-VS-METEORITIC-DISCRIMINATOR-2026-08-20-v1.0.json",
+    "janus-meta-registry:data/JANUS-KAMIL-PREIMPACT-EGYPTIAN-GOLD-AND-PYRAMID-MATERIAL-FINGERPRINT-GATE-2026-08-20-v1.0.json",
+    "janus-meta-registry:data/JANUS-KAMIL-SKY-FIRE-JET-KARNAK-KITCHEN-REVERSE-GATE-2026-08-20-v1.0.json"
+  ],
+  "question": "Do published Kamil white-glass data already contain a coupled signature compatible with pre-impact Egyptian gold plus pyramid-like construction material?",
+  "frozen_candidate_rule": {
+    "gold_branch": [
+      "Au substantially above meteoritic/background expectation",
+      "Ag and Cu compatible with an Au-Ag-Cu Egyptian gold/electrum class",
+      "no proportional Fe-Ni-Co meteoritic enrichment",
+      "worked morphology preferred: foil/sheet/wire/edge/seam/solder zone"
+    ],
+    "matrix_branch": [
+      "carbonate_or_mortar_vector: Ca plus S and/or Mg distinctly above local Kamil quartzarenite baseline",
+      "granite_vector: Al plus K plus Na plus Si with accessory Ti/Zr/Ba/Sr where available",
+      "same micro-domain as candidate gold signal preferred"
+    ],
+    "coupled_candidate_requires": "gold_branch AND matrix_branch in the same sample or spatially linked micro-domain; bulk chemistry alone is insufficient for worked-object status"
+  },
+  "published_kamil_baseline": {
+    "source": "Fazio et al. 2016, Geochimica et Cosmochimica Acta 180:33-50, Tables 1 and 3",
+    "doi": "10.1016/j.gca.2016.02.003",
+    "target_M26_pale_quartzarenite_negligible_matrix": {
+      "major_oxide_wt_percent": {
+        "SiO2": 99.8,
+        "TiO2": 0.07,
+        "Al2O3": 0.25,
+        "FeOT": 0.10,
+        "MgO": 0.18,
+        "CaO": 0.05,
+        "Na2O": 0.05,
+        "K2O": "<0.01",
+        "P2O5": "<0.0102"
+      },
+      "trace_ug_g": {
+        "Ni": 6.9,
+        "Co": 0.5,
+        "Cu": 5.2
+      }
+    },
+    "clean_white_glass_M23": {
+      "class": "WHITE_GLASS",
+      "major_oxide_wt_percent": {
+        "SiO2": 99.9,
+        "TiO2": 0.08,
+        "Al2O3": 0.46,
+        "FeOT": 0.40,
+        "MgO": 0.22,
+        "CaO": 0.12,
+        "Na2O": 0.10,
+        "K2O": "<0.01",
+        "P2O5": "<0.01"
+      },
+      "trace_ug_g": {
+        "Ni": 34,
+        "Co": 1.8,
+        "Cu": 12
+      },
+      "Au": "NOT_REPORTED_IN_THIS_TABLE",
+      "Ag": "NOT_REPORTED_IN_THIS_TABLE"
+    },
+    "clean_white_glass_L04": {
+      "class": "WHITE_GLASS",
+      "major_oxide_wt_percent": {
+        "SiO2": 99.4,
+        "TiO2": 0.06,
+        "Al2O3": 0.69,
+        "FeOT": 0.42,
+        "MgO": 0.43,
+        "CaO": 0.65,
+        "Na2O": 0.11,
+        "K2O": 0.04,
+        "P2O5": 0.02
+      },
+      "trace_ug_g": {
+        "Ni": 18,
+        "Co": 1.2,
+        "Cu": 24
+      },
+      "Au": "NOT_REPORTED_IN_THIS_TABLE",
+      "Ag": "NOT_REPORTED_IN_THIS_TABLE"
+    },
+    "white_glass_with_dark_coating_L03": {
+      "class": "WHITE_GLASS_COATED_BY_DARK_GLASS_CONTROL",
+      "major_oxide_wt_percent": {
+        "SiO2": 96.2,
+        "TiO2": 0.15,
+        "Al2O3": 1.76,
+        "FeOT": 0.77,
+        "MgO": 0.30,
+        "CaO": 0.34,
+        "Na2O": 0.09,
+        "K2O": 0.04,
+        "P2O5": 0.03
+      },
+      "trace_ug_g": {
+        "Ni": 121,
+        "Co": 7.2,
+        "Cu": 15
+      },
+      "interpretation": "elevated Fe-Ni-Co relative to clean white glass is consistent with dark-glass coating contamination"
+    },
+    "white_glass_with_dark_coating_L08": {
+      "class": "WHITE_GLASS_COATED_BY_DARK_GLASS_CONTROL",
+      "major_oxide_wt_percent": {
+        "SiO2": 98.7,
+        "TiO2": 0.05,
+        "Al2O3": 0.64,
+        "FeOT": 0.84,
+        "MgO": 0.31,
+        "CaO": 0.34,
+        "Na2O": 0.10,
+        "K2O": 0.02,
+        "P2O5": 0.02
+      },
+      "trace_ug_g": {
+        "Ni": 233,
+        "Co": 11,
+        "Cu": 21
+      },
+      "interpretation": "elevated Fe-Ni-Co relative to clean white glass is consistent with dark-glass coating contamination"
+    },
+    "dark_glass_L06": {
+      "class": "DARK_GLASS_PROJECTILE_RICH_POSITIVE_CONTROL",
+      "major_oxide_wt_percent": {
+        "SiO2": 74.2,
+        "TiO2": 0.57,
+        "Al2O3": 5.80,
+        "FeOT": 14.6,
+        "MgO": 0.22,
+        "CaO": 0.37,
+        "Na2O": 0.07,
+        "K2O": 0.06,
+        "P2O5": 0.22
+      },
+      "trace_ug_g": {
+        "Ni": 22950,
+        "Co": 908,
+        "Cu": 87
+      },
+      "interpretation": "strong projectile-rich control; not suitable as primary pre-impact-gold discriminator"
+    }
+  },
+  "morphology_screen": {
+    "published_white_glass_description": "highly vesicular, almost pure SiO2/lechatelierite; generally clast-poor to clast-free and described as inclusion-free or nearly so, with rare shocked sandstone/quartz relics in some samples",
+    "worked_gold_morphology_reported": false,
+    "foil_sheet_wire_seam_solder_reported": false,
+    "interpretation": "NO_PUBLISHED_WORKED_METAL_CANDIDATE_IN_WHITE_GLASS_FOUND_IN_THIS_PASS",
+    "limitation": "published petrography was designed for impact mineralogy, not a blinded archaeological-metal search; absence in descriptions is not a dedicated micro-CT/Au-map null"
+  },
+  "egyptian_pyramid_reference_controls": {
+    "Khufu_Giza_general": {
+      "limestone": "calcite-dominant, with minor quartz, iron oxides and accessory dolomite/halite",
+      "mortar": "gypsum + anhydrite + calcite, with limestone/dolostone fragments, minor quartz and micas",
+      "granite": "Aswan red granite: alkali feldspar + plagioclase + quartz + biotite + hornblende; accessory Zr/Ba/Sr/Th-bearing phases may occur"
+    },
+    "Sahure_quantitative_analogue_not_identity": {
+      "why_used": "published whole-rock XRF gives a quantitative pyramid-material control while preserving a firewall that Sahure material is not Khufu and not a hypothetical Kamil structure",
+      "core_stone_wt_percent": {
+        "SiO2": 4.80,
+        "TiO2": 0.10,
+        "Al2O3": 0.40,
+        "Fe2O3": 5.10,
+        "MgO": 2.40,
+        "CaO": 47.90,
+        "Na2O": 0.09,
+        "K2O": 0.06,
+        "P2O5": 0.02,
+        "SO3": 0.69
+      },
+      "unweathered_casing_wt_percent": {
+        "SiO2": 1.90,
+        "TiO2": 0.10,
+        "Al2O3": 0.11,
+        "Fe2O3": 0.50,
+        "MgO": 1.18,
+        "CaO": 53.22,
+        "Na2O": 0.07,
+        "K2O": 0.06,
+        "P2O5": 0.08,
+        "SO3": 0.66
+      },
+      "mortar_wt_percent": {
+        "SiO2": 18.80,
+        "TiO2": 0.80,
+        "Al2O3": 3.79,
+        "Fe2O3": 7.93,
+        "MgO": 0.97,
+        "CaO": 31.19,
+        "Na2O": 0.12,
+        "K2O": 0.90,
+        "P2O5": 0.14,
+        "SO3": 16.90
+      }
+    }
+  },
+  "pass1_results": {
+    "GOLD_AU_AG": {
+      "status": "UNSCORED",
+      "reason": "the key Fazio 2016 bulk table for clean white glass reports Ni/Co/Cu but not Au or Ag; therefore the requested Egyptian Au-Ag-Cu fingerprint cannot yet be tested from these published values"
+    },
+    "COPPER_ONLY": {
+      "status": "NON_DIAGNOSTIC",
+      "clean_white_glass_Cu_ug_g": {
+        "M23": 12,
+        "L04": 24
+      },
+      "target_M26_Cu_ug_g": 5.2,
+      "reason": "ppm-level bulk Cu without Au/Ag and without worked morphology is not an Egyptian-gold signature"
+    },
+    "METEORITIC_CONTAMINATION_CONTROL": {
+      "status": "PASS_AS_CONTROL",
+      "reason": "clean white M23/L04 have Ni and Co orders of magnitude below dark L06, while coated L03/L08 move toward the projectile-rich direction; this preserves a useful contamination gradient"
+    },
+    "PYRAMID_CARBONATE_MORTAR_MATRIX": {
+      "status": "NO_BULK_SUPPORT_IN_CLEAN_WHITE_GLASS",
+      "reason": "M23/L04 remain approximately 99.4-99.9 wt% SiO2 with CaO only 0.12-0.65 wt%; known pyramid limestone/mortar controls are Ca-rich and mortar can be strongly S-rich",
+      "important_limitation": "S is not reported in the Fazio 2016 white-glass bulk table, so gypsum-specific scoring is incomplete"
+    },
+    "PYRAMID_GRANITE_MATRIX": {
+      "status": "NO_STRONG_BULK_SUPPORT_IN_CLEAN_WHITE_GLASS",
+      "reason": "clean white glass has very low Al2O3, K2O and Na2O and remains nearly pure silica; no published feldspar/biotite/hornblende-style assemblage or worked architectural clast is reported in those samples"
+    },
+    "MORPHOLOGY": {
+      "status": "NO_CANDIDATE_REPORTED",
+      "reason": "no foil/sheet/wire/seam/solder morphology is reported in the published white-glass petrography"
+    },
+    "COUPLED_CANDIDATE": {
+      "status": "NOT_ADMITTED_FROM_CURRENT_PUBLIC_DATA",
+      "reason": "gold branch is unscored because Au/Ag are missing, while the bulk matrix and morphology branches do not presently show a pyramid-like anomaly"
+    }
+  },
+  "illustrative_linear_mix_screen": {
+    "warning": "NOT_AN_EXCLUSION_LIMIT. Impact melting, volatilization, phase separation and target heterogeneity violate simple linear mixing. Values are only a screening sanity check.",
+    "reference_target": "Kamil M26 pale quartzarenite",
+    "reference_pyramid_analogue": "Sahure core/casing/mortar XRF",
+    "multi_oxide_best_fit_component_fraction_wt_fraction_approx": {
+      "M23": {
+        "Sahure_core": 0.0,
+        "Sahure_casing": 0.0,
+        "Sahure_mortar": 0.0
+      },
+      "L04": {
+        "Sahure_core": 0.0061,
+        "Sahure_casing": 0.0058,
+        "Sahure_mortar": 0.0073
+      }
+    },
+    "interpretation": "under an intentionally naive bulk-mixing model, the clean white samples do not require a multi-percent pyramid-like component; L04 is fit by well below ~1 wt% of the chosen analogue, which is compatible with ordinary target heterogeneity and is not archaeological evidence"
+  },
+  "priority_samples_for_real_reanalysis": [
+    {
+      "sample": "M23",
+      "priority": 1,
+      "why": "clean white glass, 99.9 wt% SiO2, low Ni/Co; best projectile-minimized Au/Ag test"
+    },
+    {
+      "sample": "L04",
+      "priority": 2,
+      "why": "clean pumiceous white lechatelierite, 99.4 wt% SiO2; second independent white-glass target"
+    },
+    {
+      "sample": "L09",
+      "priority": 3,
+      "why": "published as white SiO2-rich impactite with Ni below detection in a later microscopy study; useful independent morphology target"
+    },
+    {
+      "sample": "L03",
+      "priority": 4,
+      "why": "white glass with dark coating; contamination control"
+    },
+    {
+      "sample": "L08",
+      "priority": 5,
+      "why": "white glass with dark coating; contamination control"
+    },
+    {
+      "sample": "L06",
+      "priority": 6,
+      "why": "dark projectile-rich glass; positive meteoritic control"
+    },
+    {
+      "sample": "M26/L13/M27 target rocks",
+      "priority": 7,
+      "why": "unmelted local geological baseline"
+    }
+  ],
+  "required_next_measurements": {
+    "stage_1_non_destructive": [
+      "micro-CT or high-resolution X-ray tomography for high-density inclusions and foil/sheet-like geometry",
+      "micro-XRF elemental maps for Au, Ag, Cu, Ni, Co, Fe plus Ca, S, Al, K and other available matrix markers"
+    ],
+    "stage_2_targeted_microanalysis": [
+      "SEM-BSE plus EDS/EPMA on any dense inclusion or anomalous micro-domain",
+      "LA-ICP-MS or micro-PIXE for Au-Ag-Cu-Pt-Ir-Os-Ru and meteoritic discriminants such as Ni-Co-Ga-Ge where analytically feasible",
+      "Raman/XRD/EPMA for carbonate, gypsum/anhydrite, feldspar, mica, amphibole and accessory phases"
+    ],
+    "blind_rule": "classify micro-domains by chemistry and morphology before revealing whether the host is clean white, coated white, dark glass or target rock"
+  },
+  "next_gate": {
+    "name": "KAMIL_WHITE_GLASS_AU_AG_MICRODOMAIN_GATE",
+    "open_condition": "obtain published supplementary data or new measurements for Au and Ag in M23/L04/L09 or equivalent clean white glass",
+    "promotion_condition": "Au-rich micro-domain above geological/meteoritic background + Au-Ag-Cu pattern compatible with worked Egyptian gold/electrum + no proportional Ni-Co-Ga-Ge meteoritic signature + independent pyramid-material or worked morphology evidence",
+    "current_terminal": "PUBLIC_BULK_DATA_DO_NOT_SHOW_A_COUPLED_GOLD_PLUS_PYRAMID_CANDIDATE__BUT_THE_PRIMARY_AU_AG_TEST_HAS_NOT_YET_BEEN_RUN"
+  },
+  "evidence_firewall": [
+    "PRE_IMPACT_GOLD_IS_A_TESTABLE_HYPOTHESIS_NOT_A_FINDING",
+    "NO_PYRAMID_AT_KAMIL_IS_ESTABLISHED",
+    "NO_WORKED_GOLD_IN_KAMIL_GLASS_IS_CURRENTLY ESTABLISHED",
+    "LOW_Ca_Al_K_Na_IN_CLEAN_WHITE_GLASS_FAVORS_LOCAL_QUARTZARENITE_AS_THE_BULK_SOURCE",
+    "ABSENCE_OF_PUBLISHED_Au_Ag_VALUES_IS_NOT_EVIDENCE_OF_ABSENCE"
+  ],
+  "sources": [
+    {
+      "citation": "Fazio A., D'Orazio M., Cordier C., Folco L. (2016) Target-projectile interaction during impact melting at Kamil Crater, Egypt. Geochimica et Cosmochimica Acta 180, 33-50.",
+      "doi": "10.1016/j.gca.2016.02.003"
+    },
+    {
+      "citation": "Fazio A. et al. (2014) Shock metamorphism and impact melting in small impact craters on Earth: Evidence from Kamil crater, Egypt. Meteoritics & Planetary Science.",
+      "doi": "10.1111/maps.12385"
+    },
+    {
+      "citation": "Sighinolfi G.P. et al. (2015) Chemical and isotopic characterization of products of small-scale hypervelocity impacts: the Gebel Kamil event. Periodico di Mineralogia 84(2), 323-339.",
+      "doi": "10.2451/2015PM0016"
+    },
+    {
+      "citation": "Hemeda S., Sonbol A. (2020) Sustainability problems of the Giza pyramids. Heritage Science 8:8.",
+      "doi": "10.1186/s40494-020-0356-9"
+    },
+    {
+      "citation": "Fahmy A. et al. (2022) Geoenvironmental investigation of Sahure's pyramid, Abusir archeological site, Giza, Egypt. Heritage Science 10:61.",
+      "doi": "10.1186/s40494-022-00699-1"
+    },
+    {
+      "citation": "Sessa C. et al. (2026) Material characterization of stone surfaces in the inner chambers of the Khufu (Cheops) Pyramid: towards informed conservation strategies. Scientific Reports 16, 12586.",
+      "doi": "10.1038/s41598-026-48805-8"
+    }
+  ]
+}
