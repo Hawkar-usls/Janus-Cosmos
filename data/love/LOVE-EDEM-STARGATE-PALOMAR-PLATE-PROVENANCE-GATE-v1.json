@@ -1,0 +1,23 @@
+{
+  "schema": "janus.cosmos.love_edem_stargate.palomar_plate_provenance.gate.v1",
+  "experiment_id": "LOVE-EDEM-STARGATE-PALOMAR-PLATE-PROVENANCE-v1",
+  "status": "PREREGISTERED",
+  "targets": {
+    "LOVE": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+    "EDEM": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318, "nearest_open_plate_id": "XE313"},
+    "STARGATE_ABYDOS_GEOMETRY": {"ra_deg": 223.415064157, "dec_deg": 33.979315670, "nearest_open_plate_id": "XE272"}
+  },
+  "sources": {
+    "irsa_dss1red_base": "https://irsa.ipac.caltech.edu/data/DSS/images/dss1red/",
+    "cds_poss_plate_catalog": "VI/25",
+    "cds_description": "POSS-I plus Whiteoak Extension; 1037 fields"
+  },
+  "rules": {
+    "plate_dates_must_come_from_header_or_catalog_metadata": true,
+    "LOVE_standard_XE_noncoverage_is_not_no_palomar_coverage": true,
+    "whiteoak_must_be_checked_separately": true,
+    "plate_center_nearness_is_not_exact_footprint_membership": true,
+    "no_post_hoc_target_movement": true
+  },
+  "claim_ceiling": "PLATE_PROVENANCE_DATE_AND_COVERAGE_CANDIDATES_ONLY"
+}
