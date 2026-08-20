@@ -1,0 +1,139 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-THREE-KEY-ACQUISITION-RUN-001-2026-08-20-v1.0",
+  "run_id": "COUSTEAU_THREE_KEY_ACQUISITION_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T21:38:00+03:00",
+  "purpose": "Advance three independent acquisition gates in parallel: Titanic known-target calibration data, exact Africa frozen-point marine measurements, and exact Palomar XE325 exposure-time sky geometry.",
+  "frozen_origin": {
+    "id": "LOVE_EDEM_BISECTOR_FROZEN_OCEAN_POINT",
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING"
+  },
+  "keys": {
+    "TITANIC": {
+      "status": "PARTIAL_PASS__PUBLIC_RAW_MULTIBEAM_AND_SVP_FOUND__COMPLEX_TARGET_RETURN_OPEN",
+      "dataset": {
+        "id": "NOAA_NCEI_TITANIC2004_MULTIBEAM",
+        "platform": "NOAA Ship RONALD H. BROWN (R104)",
+        "chief_scientist": "Robert Ballard",
+        "project": "RMS Titanic 2004 Expedition",
+        "dates": ["2004-05-27", "2004-06-12"],
+        "instrument": "SeaBeam 2112",
+        "raw_full_resolution_files": 147,
+        "records": 11045,
+        "beams": 1667795,
+        "good_beam_fraction": 0.7963,
+        "track_km": 322.1168,
+        "survey_hours": 31.3775,
+        "raw_format": "ELAC/SeaBeam XSE vendor format",
+        "raw_file_pattern_example": "RHB200406*.xse.mb94.gz",
+        "sound_speed_profile_archive": "svp.tar.gz",
+        "source": "NOAA National Centers for Environmental Information"
+      },
+      "what_this_closes": [
+        "PUBLIC_RAW_MULTIBEAM_ACQUISITION",
+        "PUBLIC_SOUND_SPEED_PROFILE_ACQUISITION",
+        "REAL_OCEAN_BATHYMETRY_LOCALIZATION_AND_PATH_GEOMETRY_INPUT_AVAILABLE"
+      ],
+      "still_open": [
+        "RAW_COMPLEX_IQ_OR_PHASE_RESOLVED_TARGET_RETURN",
+        "DIRECT_COMPLEX_HULL_TRANSFER_FUNCTION",
+        "EXACT_PING_WAVEFORM_AND_PHASE_REFERENCE_FOR_TARGET_TRANSFER_INFERENCE",
+        "MULTIPLE_ASPECT_PHASE_CALIBRATED_TARGET_RETURNS",
+        "WITHHELD_PASS_SPLIT_FOR_FINAL_REPLAY"
+      ],
+      "firewall": "Raw multibeam bathymetry plus SVP can test real-ocean localization, geometry and path corrections, but it is not equivalent to a complex target transfer function H_target(f) and does not by itself test the project 520 Hz resonator prior.",
+      "CST_EXP_03_status": "NOT_YET_PASSED",
+      "next_gate": "COUSTEAU_TITANIC_COMPLEX_RETURN_AND_PHASE_CALIBRATION_ACQUISITION_V1"
+    },
+    "AFRICA": {
+      "status": "FIRST_CLEAN_NO__M121_GA08_3S_TRANSECT_DOES_NOT_INTERSECT_FROZEN_POINT__LOCAL_SURVEY_SEARCH_OPEN",
+      "candidate_dataset": "METEOR_M121_GA08_KONGSBERG_EM122",
+      "candidate_role_before_audit": "POSSIBLE_NEARBY_REAL_MULTIBEAM_SOURCE",
+      "documented_GA08_section": {
+        "latitude_deg_approx": -3.0,
+        "station_longitudes_include_deg_east_approx": [9.3167, 9.0667, 6.7667, 4.4167, 2.2167, 0.0],
+        "precise_station_examples": [
+          {"bodc_series": "2208073", "latitude_deg": -3.0027777778, "longitude_deg": 4.4158333333},
+          {"bodc_series": "2208097", "latitude_deg": -3.0038888889, "longitude_deg": 4.4158333333},
+          {"bodc_series": "2208104", "latitude_deg": -3.0008333333, "longitude_deg": 2.2138888889}
+        ]
+      },
+      "frozen_latitude_deg": -3.865418,
+      "minimum_meridional_separation_from_3S_section_km_approx": 96.23,
+      "nearest_verified_CTD_distance_from_frozen_point_km_approx": 114.35,
+      "verdict": "M121_GA08_DOCUMENTED_3S_TRANSECT_REJECTED_AS_FROZEN_POINT_LOCAL_DATA",
+      "retain_role": "REGIONAL_MULTIBEAM_AND_CTD_CONTROL",
+      "important_boundary": "This clean NO applies to the documented GA08 3S section. A complete file-level audit of every M121 raw ping is still required before claiming the entire cruise never approached closer on another transit leg.",
+      "still_open": [
+        "FULL_M121_RAW_PING_MIN_DISTANCE_AUDIT",
+        "NOAA_NCEI_TRACKLINE_EXACT_BBOX_QUERY",
+        "NOAA_NCEI_MULTIBEAM_EXACT_BBOX_QUERY",
+        "GMRT_HIGH_RESOLUTION_SWATH_INTERSECTION",
+        "OTHER_SEISMIC_SIDESCAN_SUBBOTTOM_SURVEYS_INTERSECTING_PREREGISTERED_RADIUS"
+      ],
+      "next_gate": "COUSTEAU_FROZEN_POINT_EXACT_TRACK_AND_SWATH_INTERSECTION_ACQUISITION_V1"
+    },
+    "PALOMAR": {
+      "status": "PRIMARY_ARCHIVE_PATH_FOUND__EXACT_UTC_NOT_EXTRACTED__SECONDARY_0230_LOCAL_TIME_LEAD_GIVES_CONDITIONAL_NO",
+      "event": {
+        "id": "POSS_I_XE325_NINE_APPARENT_TRANSIENTS_1950_04_12",
+        "plate": "XE325",
+        "field_center_j2000": {"ra_deg": 212.9291, "dec_deg": 26.8311},
+        "reported_source_count": 9,
+        "semantic_firewall": "Nine apparent transient photographic detections; not nine established unusual stars and not an established extraterrestrial phenomenon."
+      },
+      "primary_time_sources_located": [
+        "Caltech Palomar Observatory Observing Schedule Survey Log, 1949-June 1953, including plate log",
+        "MAST DSS Plate Finder plate Epoch metadata",
+        "MAST SurveyPlateListLatest.csv individual plate metadata"
+      ],
+      "primary_exact_UTC_status": "PENDING_EXTRACTION",
+      "secondary_time_lead": {
+        "reported_local_clock_time": "02:30",
+        "timezone_conflict_in_secondary_sources": ["PST", "PDT"],
+        "admission_status": "UNVERIFIED_SECONDARY_ONLY__DO_NOT_FREEZE_AS_PLATE_TIME",
+        "UTC_if_PDT": "1950-04-12T09:30:00Z",
+        "UTC_if_PST": "1950-04-12T10:30:00Z",
+        "frozen_point_field_altitude_deg_at_09_30Z_approx": -40.38,
+        "frozen_point_field_azimuth_deg_at_09_30Z_approx": 302.77,
+        "frozen_point_field_altitude_deg_at_10_30Z_approx": -52.43,
+        "frozen_point_field_azimuth_deg_at_10_30Z_approx": 311.30,
+        "conditional_verdict": "FIELD_BELOW_GEOMETRIC_HORIZON_FROM_FROZEN_POINT_IN_BOTH_TIMEZONE_INTERPRETATIONS"
+      },
+      "meaning": "If a primary plate log or FITS/plate header confirms an exposure near 02:30 local time, a literal same-instant surface line-of-sight from the frozen Africa point to the XE325 field is rejected. This tests viewing geometry only and does not establish or refute broader causal hypotheses.",
+      "final_gate_status": "OPEN_UNTIL_PRIMARY_EXPOSURE_UTC_IS_RECOVERED",
+      "next_gate": "COUSTEAU_PALOMAR_XE325_EXACT_UTC_SKY_GEOMETRY_GATE_V1"
+    }
+  },
+  "gate_update": {
+    "TITANIC": "PARTIAL_PASS",
+    "AFRICA_M121_GA08_3S_SECTION": "NO",
+    "PALOMAR": "CONDITIONAL_NO_PENDING_PRIMARY_UTC"
+  },
+  "scientific_meaning": {
+    "TITANIC": "The public-data problem is smaller than before: raw real-ocean multibeam and sound-speed profiles exist and can already support the geometry/path part of CST-EXP-03. The phase-resolved target-transfer part remains open.",
+    "AFRICA": "The first plausible nearby cruise candidate did not collapse onto the frozen coordinate. It becomes a regional control rather than local evidence, demonstrating that the NO_RECENTERING rule is working.",
+    "PALOMAR": "A potentially decisive negative line-of-sight result is visible in a secondary time lead, but the gate remains deliberately open until a primary archival exposure time is recovered."
+  },
+  "hard_rules": [
+    "NO_RECENTERING_OF_FROZEN_LOVE_EDEM_BISECTOR",
+    "NEGATIVE_RESULTS_ARE_FIRST_CLASS_RECEIPTS",
+    "NO_LOCAL_DATA_CLAIM_FROM_CRUISE_BOUNDING_BOX_ONLY",
+    "M121_REGIONAL_DATA_IS_NOT_TARGET_RETURN",
+    "SECONDARY_TIME_DOES_NOT_CLOSE_PALOMAR_GATE",
+    "PALOMAR_VISIBILITY_OR_NONVISIBILITY_IS_GEOMETRY_NOT_CAUSATION",
+    "TITANIC_RAW_MULTIBEAM_IS_NOT_COMPLEX_TARGET_TRANSFER_FUNCTION",
+    "TITANIC_CST_EXP_03_REMAINS_REQUIRED_BEFORE_AFRICA_TARGET_IDENTITY_INTERPRETATION",
+    "PRESERVE_PASS_FAIL_AMBIGUOUS_NEGATIVE_AND_MISSING_DATA",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "next_actions": [
+    "Download or enumerate Titanic 2004 raw XSE files plus SVP and design a blind localization/geometry subset and withheld subset.",
+    "Continue searching for phase-resolved or target-strength Titanic sonar products and exact sonar waveform/calibration metadata.",
+    "Execute file-level minimum-distance audit on M121 raw navigation and exact geometry queries against NOAA/NCEI and GMRT around the frozen coordinate.",
+    "Recover the primary XE325 exposure start/end UTC from Caltech plate log, MAST plate metadata or plate/FITS header; only then freeze final Palomar alt-az, Sun, Moon and Earth-shadow geometry."
+  ],
+  "status": "THREE_KEY_RUN_001__TITANIC_PARTIAL_PASS__AFRICA_M121_NO__PALOMAR_CONDITIONAL_NO_PENDING_PRIMARY_UTC"
+}
