@@ -1,0 +1,31 @@
+{
+  "schema": "janus.cosmos.stargate_abydos.palomar_spatial_crossmatch.gate.v1",
+  "experiment_id": "STARGATE-ABYDOS-PALOMAR-SPATIAL-CROSSMATCH-v1",
+  "status": "PREREGISTERED",
+  "frozen_target": {
+    "ra_deg": 223.415064157,
+    "dec_deg": 33.979315670,
+    "frame": "ICRS/J2000-compatible sky direction"
+  },
+  "frozen_comparison_radii_arcsec": [2, 5, 10, 30, 60, 300],
+  "open_cohort": {
+    "repository": "jannefi/poss1-plate-slice",
+    "commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "path": "results/s0-642-20260814/stage_S0.csv.gz",
+    "expected_rows": 122820,
+    "expected_uncompressed_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0"
+  },
+  "published_event_controls": {
+    "PALOMAR_NINE_1950_FIELD_CENTER": {"ra_deg": 212.9291, "dec_deg": 26.8311, "date": "1950-04-12"},
+    "PALOMAR_TRIPLE_1952_CENTER": {"ra_deg": 319.5433333333333, "dec_deg": 50.37872222222222, "date": "1952-07-19"}
+  },
+  "rules": {
+    "no_recenter": true,
+    "no_post_hoc_radius_changes": true,
+    "nearest_open_cohort_row_is_not_automatically_physical_transient": true,
+    "open_122820_cohort_is_not_identical_to_request_only_107875_VASCO_catalog": true,
+    "temporal_nuclear_association_is_not_spatial_identity": true,
+    "nuclear_test_association_does_not_establish_light_echo_or_causation": true
+  },
+  "claim_ceiling": "SPATIAL_CROSSMATCH_TO_PINNED_OPEN_POSS1_CANDIDATE_COHORT_AND_PUBLISHED_EVENT_COORDINATES_ONLY"
+}
