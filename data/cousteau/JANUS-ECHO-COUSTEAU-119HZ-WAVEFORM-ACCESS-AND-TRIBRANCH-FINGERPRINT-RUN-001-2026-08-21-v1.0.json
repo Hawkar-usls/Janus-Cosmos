@@ -1,0 +1,204 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_119HZ_WAVEFORM_ACCESS_AND_TRIBRANCH_FINGERPRINT_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-21T01:38:00+03:00",
+  "frozen_anchor": [-3.865418, 3.854924],
+  "parents": [
+    "JANUS-ECHO-COUSTEAU-REVERSE-ASSUMPTION-AUDIT-RUN-001-2026-08-21-v1.0",
+    "JANUS-ECHO-COUSTEAU-ATLANTIC-117-121HZ-REVERSE-PASS-RUN-001-2026-08-21-v1.0",
+    "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.0"
+  ],
+  "purpose": "Execute the corrected three-branch frequency logic after reverse audit: H0 source-frequency-invariant 117-121 Hz, H1 wavelength-equivalent speed-dependent ~520 Hz class, and H2 fluid-loaded structural resonance without simple speed-ratio scaling.",
+  "hypotheses": {
+    "H0": {
+      "name": "SOURCE_FREQUENCY_INVARIANT",
+      "band_hz": [117.0, 121.0],
+      "center_hz": 119.0
+    },
+    "H1": {
+      "name": "WAVELENGTH_EQUIVALENT_ACOUSTIC_MODE",
+      "nominal_center_hz_at_1500_m_s": 520.4081632653061,
+      "center_manifold_hz_for_1480_1540_m_s": [513.469387755102, 534.2857142857143],
+      "broad_endpoint_envelope_hz": [504.8396501457726, 543.265306122449]
+    },
+    "H2": {
+      "name": "FLUID_LOADED_STRUCTURAL_MODE",
+      "rule": "No direct 119-to-520 scaling; require geometry, material properties, water loading, damping and boundary conditions or a measured transfer function."
+    }
+  },
+  "H0_119Hz_waveform_access_gate": {
+    "sensor_recording_existence": {
+      "status": "PASS",
+      "evidence": "Parnell-Turner et al. 2022 report equatorial Atlantic hydrophone waveforms recorded 2011-08-10 to 2015-01-13 at 16-bit resolution and 250 Hz sampling; HA10 Ascension data were also recorded at 250 Hz.",
+      "sampling_hz": 250.0,
+      "nyquist_hz": 125.0,
+      "band_fraction_of_nyquist": {
+        "117_Hz": 0.936,
+        "119_Hz": 0.952,
+        "121_Hz": 0.968
+      },
+      "nyquist_margin_hz": {
+        "117_Hz": 8.0,
+        "119_Hz": 6.0,
+        "121_Hz": 4.0
+      },
+      "warning": "Band is close to Nyquist; instrument response and anti-alias roll-off must be recovered before quantitative amplitude comparison, especially at 121 Hz."
+    },
+    "public_product": {
+      "status": "PASS_CATALOG_ONLY",
+      "dataset": "T-phase location catalog for equatorial Atlantic ocean, 2011-2015",
+      "doi": "10.26022/IEDA/330497",
+      "event_count": 6843,
+      "format": "ASCII text catalog",
+      "meaning": "Public event positions/times exist, but this product is not waveform audio/time-series and therefore cannot be Fourier-scanned for 119 Hz."
+    },
+    "direct_public_waveform_bytes": {
+      "status": "NOT_FOUND_IN_PUBLISHED_DATA_AVAILABILITY",
+      "evidence": "The paper's Data Availability Statement points to the MGDS T-phase catalog; it does not expose the full waveform corpus as an anonymous public download."
+    },
+    "HA10_waveform_access": {
+      "status": "ACCESSIBLE_BY_APPROVED_REQUEST_NOT_OPEN_ANONYMOUS_DOWNLOAD",
+      "mechanism": "CTBTO virtual Data Exploitation Centre (vDEC)",
+      "conditions": [
+        "scientific project approval",
+        "normally organization-level contract",
+        "geographic and temporal request bounds",
+        "data confidentiality agreement",
+        "raw IMS data may not be redistributed"
+      ],
+      "cost": "free of charge after approval"
+    },
+    "spectral_scan_execution": {
+      "status": "BLOCKED_BY_WAVEFORM_ACCESS",
+      "reason": "A catalog of event origins cannot establish whether a discrete 119.000 Hz line exists in the original pressure waveforms. No synthetic replacement is permitted.",
+      "verified_exact_119Hz_target_like_hits": 0,
+      "interpretation": "ZERO_VERIFIED does not mean ZERO_EXISTS; the scan has not yet had the necessary waveform bytes."
+    }
+  },
+  "H0_specificity_controls": [
+    {
+      "id": "SEI_WHALE_FALKLANDS_ARCH_CALL",
+      "class": "BIOLOGICAL_CONTROL",
+      "published_frequency_range_hz": [19.0, 119.0],
+      "sample_count_high_SNR": 93,
+      "match": "119_HZ_IS_REPORTED_HIGH_EDGE_NOT_A_STABLE_DISCRETE_LINE",
+      "gate_effect": "H0_SINGLE_FREQUENCY_SPECIFICITY_FAILS"
+    },
+    {
+      "id": "NORTH_ATLANTIC_RIGHT_WHALE_UPCALL_121_REFERENCE",
+      "class": "BIOLOGICAL_PROPAGATION_MODEL_CONTROL",
+      "reference_center_hz": 121.0,
+      "critical_bandwidth_hz": 50.0,
+      "match": "PROJECT_BAND_OVERLAP_NOT_EXACT_TARGET_FINGERPRINT",
+      "gate_effect": "121_HZ_ALONE_IS_NON_SPECIFIC"
+    },
+    {
+      "id": "LOW_FREQUENCY_SHIP_AND_SEISMIC_NOISE",
+      "class": "ANTHROPOGENIC_AND_GEOPHYSICAL_BROADBAND_CONTROL",
+      "gate_effect": "AMBIENT_OR_SOURCE_X_F_MUST_BE_SEPARATED_BEFORE_SCORING_119_HZ"
+    }
+  ],
+  "H1_measurement_resolution_gate": {
+    "status": "PASS_CORRECTION__SUB_HZ_EXACTNESS_REJECTED_WITHOUT_UNCERTAINTY",
+    "model_center_hz": 520.4081632653061,
+    "nominal_520_controls": [
+      {
+        "id": "ICEBERG_A53A_HARMONIC_TREMOR",
+        "reported_or_derived_hz": 520.0,
+        "classification": "REPORTED_OR_DERIVED_NOMINAL_520__NOT_MILLIHERTZ_EXACT",
+        "reason": "Published harmonic description uses integer-Hz fundamental/spacing and iceberg harmonic tremor fundamentals are time-variable; no uncertainty supports sub-Hz identity.",
+        "fingerprint": {
+          "modal_spacing": "YES__approximately 40 Hz harmonic spacing in the cited example",
+          "long_duration": "YES__iceberg harmonic tremor can persist for long periods",
+          "earth_fixed_geodetic_focus": "NO__iceberg is a moving natural source",
+          "phase_resolved_target_transfer": "NO",
+          "target_identity": "NATURAL_FALSE_POSITIVE"
+        }
+      },
+      {
+        "id": "CLASS_IV_FLEXTENSIONAL_TRANSDUCER",
+        "measured_in_water_resonance_hz": 520.0,
+        "model_prediction_hz": 510.0,
+        "classification": "REPORTED_NOMINAL_520_ENGINEERED_POSITIVE_CONTROL",
+        "reason": "The same device shifted 10 Hz between FE prediction and wet measurement, far exceeding the 0.408163 Hz difference from the H1 nominal center; no reported uncertainty justifies sub-Hz exactness.",
+        "fingerprint": {
+          "measured_resonance": "YES",
+          "conductance_at_resonance_mS": 0.62,
+          "TVR_dB_at_resonance": 135.4,
+          "Q_or_linewidth_numeric": "NOT_RECOVERED_AS_TRACEABLE_NUMERIC_VALUE_IN_THIS_PASS",
+          "ringdown": "NOT_REPORTED_AS_IMPULSE_RINGDOWN_IN_MACHINE_READABLE_TEXT",
+          "phase_resolved_target_transfer": "NOT_RECOVERED",
+          "geography": "ANECHOIC_TANK_CONTROL__NOT_ATLANIC_FIELD_TARGET"
+        }
+      }
+    ],
+    "verdict": "H1_FREQUENCY_ONLY_CANNOT_DISCRIMINATE_TARGET_FROM_NATURAL_OR_ENGINEERED_CONTROLS"
+  },
+  "H1_full_fingerprint_discrimination": {
+    "required_fields": [
+      "frequency_with_measurement_uncertainty",
+      "Q_or_linewidth",
+      "modal_spacing",
+      "phase_or_complex_response",
+      "ringdown_or_group_delay",
+      "incident_X_f_separation",
+      "H_tx_and_H_rx_path_accounting",
+      "stable_earth_fixed_geodetic_focus",
+      "independent_repeat_or_withheld_replay"
+    ],
+    "field_candidates_passing_all_required_fields": 0,
+    "verdict": "NO_FULL_520_CLASS_TARGET_FINGERPRINT_VERIFIED",
+    "reason": "The strongest 520-class hits are controls with known natural or engineered explanations and incomplete target-transfer observables."
+  },
+  "H2_fluid_loaded_structural_gate": {
+    "status": "BLOCKED",
+    "reason": "No candidate geometry/material/local complex return is established at the frozen anchor from which a wet structural eigenmode can be independently predicted or inverted.",
+    "required_inputs": [
+      "candidate geometry",
+      "material density and elastic constants",
+      "water density and local sound-speed profile",
+      "boundary conditions",
+      "added-mass and radiation damping model",
+      "measured or simulated complex transfer function for validation"
+    ]
+  },
+  "test_results": {
+    "T01_H0_SENSOR_CAN_RECORD_119_HZ": "PASS_WITH_NEAR_NYQUIST_RESPONSE_WARNING",
+    "T02_H0_PUBLIC_WAVEFORM_DOWNLOAD": "BLOCKED_NOT_PUBLICLY_EXPOSED_IN_CURRENT_DATA_PRODUCT",
+    "T03_H0_EXACT_119_HZ_SPECTRAL_SCAN": "BLOCKED_BY_WAVEFORM_ACCESS",
+    "T04_H0_SINGLE_FREQUENCY_SPECIFICITY": "FAIL_BIOLOGICAL_OVERLAP",
+    "T05_H1_SUB_HZ_EXACT_MATCH_CLAIM": "FAIL_WITHOUT_MEASUREMENT_UNCERTAINTY",
+    "T06_H1_FULL_TARGET_FINGERPRINT": "FAIL_ZERO_VERIFIED_FIELD_CANDIDATES_PASS_ALL_FEATURES",
+    "T07_H2_STRUCTURAL_MODE_INFERENCE": "BLOCKED_BY_MISSING_GEOMETRY_AND_COMPLEX_RETURN"
+  },
+  "aggregate_verdict": "CORRECTED_TRIBRANCH_GATE_EXECUTED__119HZ_IS_RECORDABLE_BUT_RAW_SPECTRAL_SCAN_BLOCKED__520_CLASS_HAS_CONTROL_MATCHES_BUT_NO_FULL_FIELD_FINGERPRINT__H2_BLOCKED",
+  "evidence_direction": "MODEL_CORRECTION_AND_CONTROL_STRENGTH_INCREASED__TARGET_EVIDENCE_UNCHANGED",
+  "next_gates": [
+    "COUSTEAU_EA_TPHASE_CATALOG_DOWNLOAD_AND_BLIND_CLUSTER_V1",
+    "COUSTEAU_VDEC_OR_EQUIVALENT_119HZ_WAVEFORM_ACQUISITION_PREP_V1",
+    "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_V1",
+    "COUSTEAU_FLUID_LOADED_STRUCTURAL_FORWARD_MODEL_V1",
+    "COUSTEAU_TITANIC_COMPLEX_RETURN_AND_PHASE_CALIBRATION_ACQUISITION_V1"
+  ],
+  "provenance": [
+    "Parnell-Turner et al. 2022, JGR Solid Earth, DOI 10.1029/2022JB024008",
+    "MGDS DOI 10.26022/IEDA/330497",
+    "CTBTO vDEC official researcher access documentation",
+    "Cerchio and Weir 2022, Mid-frequency song and low-frequency calls of sei whales in the Falkland Islands",
+    "Zhou et al. 2018, Sensors 18(7):2102, DOI 10.3390/s18072102",
+    "Dziak et al. 2013, Oceanography 26(2), Iceberg A53a"
+  ],
+  "hard_rules": [
+    "KEEP_H0_H1_H2_SEPARATE",
+    "DO_NOT_TREAT_520_408163_HZ_AS_AN_INDEPENDENT_MEASUREMENT",
+    "DO_NOT_TREAT_REPORTED_INTEGER_HZ_AS_MILLIHERTZ_EXACT_WITHOUT_UNCERTAINTY",
+    "NYQUIST_COVERAGE_IS_NOT_SIGNAL_DETECTION",
+    "CATALOG_AVAILABILITY_IS_NOT_WAVEFORM_AVAILABILITY",
+    "BAND_EDGE_IS_NOT_A_DISCRETE_LINE",
+    "FULL_FINGERPRINT_OUTRANKS_SINGLE_FREQUENCY",
+    "NO_RECENTERING",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "RUN_001_FROZEN__H0_SCAN_BLOCKED_ON_WAVEFORMS__H1_NO_FULL_FINGERPRINT__H2_BLOCKED"
+}
