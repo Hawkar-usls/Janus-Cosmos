@@ -1,0 +1,134 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-TITANIC-KNOWN-TARGET-CALIBRATION-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "created_at_local": "2026-08-20T16:10:00+03:00",
+  "benchmark_id": "RMS_TITANIC_KNOWN_METALLIC_WRECK",
+  "purpose": "Use a deeply surveyed, geographically fixed, metallic wreck with known geometry and repeated acoustic/optical observations as an external calibration target for Cousteau localization, target reconstruction, path correction, material priors and repeat-pass change detection.",
+  "claim_ceiling": "KNOWN_TARGET_CALIBRATION_ONLY__DOES_NOT_VALIDATE_ANY_PYRAMID_OR_UAP_HYPOTHESIS",
+  "site_geometry": {
+    "bow": {
+      "latitude_deg": 41.7325,
+      "longitude_deg": -49.94694444444444,
+      "source_coordinate": "NOAA 2004 preliminary cruise instructions: 41°43'57\"N 49°56'49\"W"
+    },
+    "stern": {
+      "latitude_deg": 41.72638888888889,
+      "longitude_deg": -49.94833333333333,
+      "source_coordinate": "NOAA 2004 preliminary cruise instructions: 41°43'35\"N 49°56'54\"W"
+    },
+    "debris_field_center": {
+      "latitude_deg": 41.72555555555556,
+      "longitude_deg": -49.94694444444444,
+      "source_coordinate": "NOAA 2004 preliminary cruise instructions: 41°43'32\"N 49°56'49\"W"
+    },
+    "bow_to_stern_geodesic_km_recomputed": 0.689,
+    "water_depth_m_approx": 3800
+  },
+  "available_calibration_layers": {
+    "fixed_geodetic_target": {
+      "status": "STRONG",
+      "uses": ["localization error", "bearing/range reconstruction", "repeat-pass geodetic focus"]
+    },
+    "sonar_mapping": {
+      "status": "STRONG",
+      "evidence": "2010 REMUS 6000 AUV survey produced comprehensive side-looking/side-scan sonar mapping at multiple scales across the wreck and debris field.",
+      "uses": ["target-vs-seafloor segmentation", "multi-aspect return consistency", "known-geometry acoustic reconstruction", "debris-field false-contact calibration"]
+    },
+    "ctd_sound_speed_environment": {
+      "status": "STRONG",
+      "evidence": "NOAA 2004 archive records CTD, conductivity, pressure, salinity, temperature and sound-velocity instrumentation/data around the wreck mission.",
+      "uses": ["sound-speed correction", "H_tx/H_rx path modeling", "TWTT/range calibration"]
+    },
+    "optical_and_3d_geometry": {
+      "status": "STRONG",
+      "evidence": "WHOI/NOAA produced detailed mosaics; Magellan created a full-size digital twin from the 2022 survey with dense XYZ point-cloud geometry and imagery.",
+      "uses": ["sonar-to-optical registration", "geometry inversion scoring", "withheld-view forward replay"]
+    },
+    "materials_metallurgy": {
+      "status": "STRONG",
+      "evidence": "NIST metallurgical and mechanical analyses exist for recovered Titanic steel and wrought-iron rivets.",
+      "uses": ["material acoustic prior", "elastic-property uncertainty envelope", "metal-vs-rock control design"]
+    },
+    "corrosion_rusticles": {
+      "status": "STRONG",
+      "evidence": "NOAA and peer-reviewed literature document rusticles, iron corrosion products, microbial degradation and multi-year deterioration.",
+      "uses": ["surface-roughness/degradation confound", "time-varying target signature", "multi-epoch change detection"]
+    },
+    "direct_complex_resonance_transfer_function": {
+      "status": "OPEN_NOT_LOCATED_IN_THIS_PASS",
+      "required_data": ["raw calibrated active-sonar transmit waveform", "raw complex return waveform", "sensor response", "ping geometry", "frequency/phase calibration", "repeat aspect angles"],
+      "firewall": "DO_NOT_CLAIM_TITANIC_HULL_RESONANCE_WAS_MEASURED_UNLESS_TRACEABLE_RAW_OR_PUBLISHED_TRANSFER_FUNCTION_DATA_ARE_RECOVERED"
+    }
+  },
+  "cousteau_round_trip_application": {
+    "model": "Y(f)=X(f)*H_tx(f)*S_TITANIC(f,theta_in,theta_out)*H_rx(f)+N(f)",
+    "known_target_advantage": "Unlike an unknown candidate, Titanic supplies independently constrained target location, broad geometry and material class, allowing the inversion pipeline to be tested without target-label ambiguity.",
+    "calibration_sequence": [
+      "INGEST_CTD_SOUND_SPEED_AND_PLATFORM_NAVIGATION",
+      "RECOVER_OR_ESTIMATE_SONAR_X",
+      "BACKPROPAGATE_H_TX_AND_H_RX",
+      "LOCALIZE_KNOWN_WRECK_WITHOUT_USING_OPTICAL_LABEL",
+      "ESTIMATE_RESIDUAL_S_TARGET",
+      "COMPARE_TO_KNOWN_WRECK_GEOMETRY",
+      "REGISTER_TO_OPTICAL_OR_3D_TRUTH_AFTER_INFERENCE",
+      "RUN_DEBRIS_SEAFLOOR_AND_NATURAL_RESONATOR_CONTROLS",
+      "WITHHOLD_ONE_PASS_OR_ASPECT_AND_FORWARD_REPLAY"
+    ]
+  },
+  "proposed_scores": [
+    "geodetic_focus_error_m",
+    "bow_stern_separation_error_m",
+    "sonar_to_3d_registration_error_m",
+    "target_extent_iou",
+    "multi_aspect_signature_repeatability",
+    "false_positive_rate_on_debris_and_bare_seafloor",
+    "path_corrected_signature_stability",
+    "multi_epoch_change_sensitivity"
+  ],
+  "source_register": [
+    {
+      "id": "NOAA_2004_CRUISE_INSTRUCTIONS",
+      "type": "PRIMARY_GOVERNMENT_MISSION_DOCUMENT",
+      "facts": ["bow/stern/debris coordinates", "scanning sonar target acquisition workflow"],
+      "url": "https://repository.library.noaa.gov/view/noaa/10519/noaa_10519_DS1.pdf"
+    },
+    {
+      "id": "NOAA_NCEI_2004_ACCESSION_0072311",
+      "type": "PRIMARY_GOVERNMENT_DATA_ARCHIVE",
+      "facts": ["CTD", "conductivity", "pressure", "salinity", "temperature", "sound velocity", "GPS-associated cruise observations"],
+      "url": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/accession/details/72311"
+    },
+    {
+      "id": "NOAA_TITANIC_2010_EXPEDITION_RESULTS",
+      "type": "PRIMARY_GOVERNMENT_EXPEDITION_SUMMARY",
+      "facts": ["REMUS 6000 sonar mapping", "multi-resolution sonar maps", "GIS and optical mosaics"],
+      "url": "https://sanctuaries.noaa.gov/maritime/titanic/expedition_results.html"
+    },
+    {
+      "id": "WHOI_QUEST_TO_MAP_TITANIC",
+      "type": "PRIMARY_RESEARCH_INSTITUTION_SUMMARY",
+      "facts": ["REMUS survey design", "side-looking sonar", "large-area acoustic mapping"],
+      "url": "https://www.whoi.edu/oceanus/feature/the-quest-to-map-titanic/"
+    },
+    {
+      "id": "NIST_IR_6118",
+      "type": "PRIMARY_METALLURGY_REPORT",
+      "facts": ["steel mechanical/metallurgical analysis", "wrought-iron rivet analysis"],
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=852863"
+    },
+    {
+      "id": "MAGELLAN_TITANIC_DIGITAL_TWIN",
+      "type": "PRIMARY_SURVEY_OPERATOR_SUMMARY",
+      "facts": ["2022 full-size digital twin", "dense XYZ point-cloud and imagery"],
+      "url": "https://www.magellan.gg/magellan-titanic-tt24/"
+    },
+    {
+      "id": "NOAA_RUSTICLES",
+      "type": "PRIMARY_GOVERNMENT_EXPLORATION_RECORD",
+      "facts": ["rusticle observations", "ongoing deterioration context"],
+      "url": "https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201014/"
+    }
+  ],
+  "status": "TITANIC_KNOWN_TARGET_CALIBRATION_BENCHMARK_FROZEN__DIRECT_RESONANCE_DATA_GATE_OPEN",
+  "next_gate": "COUSTEAU_TITANIC_RAW_SONAR_AND_TRANSFER_FUNCTION_ACQUISITION_V1"
+}
