@@ -1,0 +1,119 @@
+{
+  "artifact_id": "JANUS-KAMIL-FROZEN-ORIENTATION-THREE-OPERATOR-REVERSE-SKY-CONTROL-2026-08-20-v1.0",
+  "schema": "janus.cosmos.kamil.frozen_orientation.reverse_sky_control.v1",
+  "created_at_local": "2026-08-20T12:14:00+03:00",
+  "status": "COMPLETE__FREE_ROTATION_REMOVED__NO_OPERATOR_HITS_LOVE_OR_EDEM__POSTHOC_TWO_ANCHOR_LOVE_SHAFT_SCORE_NOT_INDEPENDENT",
+  "parents": [
+    "janus-meta-registry:data/JANUS-12-12-MIRROR-CHECKPOINT-KAMIL-LOVE-EDEM-2026-08-20-v1.0.json",
+    "janus-meta-registry:data/JANUS-KAMIL-VIRTUAL-GIZA-LOVE-EDEM-FIFTH-ELEMENT-REVERSE-GEOMETRY-2026-08-20-v1.0.json",
+    "janus-meta-registry:data/JANUS-KAMIL-VIRTUAL-PYRAMID-MULTI-OPERATOR-CONTROL-2026-08-20-v1.0.json",
+    "experiments/kamil_virtual_pyramid_frozen_orientation_gate_v1.py"
+  ],
+  "site": {
+    "name": "Kamil impact crater",
+    "lat_deg": 22.0183333333,
+    "lon_deg_east": 26.0877777778
+  },
+  "targets": {
+    "LOVE": {"ra_j2000_deg": 204.30267916666668, "dec_j2000_deg": -36.78240527777778},
+    "EDEM": {"ra_j2000_deg": 139.22409686590188, "dec_j2000_deg": 30.26038779947318, "identity_confirmed": false},
+    "ORION_BELT_CENTROID": {"ra_j2000_deg": 84.08137638816612, "dec_j2000_deg": -1.1480040013137136}
+  },
+  "route": {
+    "inbound": "EDEM -> LOVE -> KAMIL/VIRTUAL_PYRAMID",
+    "reverse": "KAMIL/VIRTUAL_PYRAMID -> LOVE -> EDEM",
+    "earth_leg_target": "LOVE",
+    "why": "For either direction of the two-hop route, the Kamil local operator couples to the LOVE<->Earth leg; EDEM is the second celestial hop/competing target control."
+  },
+  "frozen_orientation_contract": {
+    "azimuth_convention": "0=N,90=E,180=S,270=W",
+    "operators": {
+      "SHAFT_44_5_SOUTH": {"az_deg": 180.0, "alt_deg": 44.5, "beam_declination_deg": -23.4816666667},
+      "FACE_51_84_SOUTH": {"az_deg": 180.0, "alt_deg": 51.84, "beam_declination_deg": -16.1416666667},
+      "APEX_BEAM_ZENITH": {"az_deg": 0.0, "alt_deg": 90.0, "beam_declination_deg": 22.0183333333}
+    },
+    "free_azimuth_rotation": false,
+    "free_elevation_rotation": false
+  },
+  "january_anchor_timestamps_utc": ["2026-01-05T02:03:34Z", "2026-01-10T03:47:22Z"],
+  "exact_anchor_results": {
+    "SHAFT_44_5_SOUTH": {
+      "beam_points": [
+        {"time_utc": "2026-01-05T02:03:34Z", "ra_mean_date_deg": 161.6674711632, "dec_mean_date_deg": -23.4816666667, "separations_deg": {"LOVE": 39.1476594318, "EDEM": 57.6607792997, "ORION_BELT_CENTROID": 77.8673953755}},
+        {"time_utc": "2026-01-10T03:47:22Z", "ra_mean_date_deg": 192.6167566653, "dec_mean_date_deg": -23.4816666667, "separations_deg": {"LOVE": 16.9720657821, "EDEM": 73.9116028901, "ORION_BELT_CENTROID": 106.1769206190}}
+      ],
+      "best_two_anchor": {
+        "LOVE": {"obs_best_sep_deg": 16.9720657821, "descriptive_mc_fraction_leq": 0.0421559157},
+        "EDEM": {"obs_best_sep_deg": 57.6607792997, "descriptive_mc_fraction_leq": 0.2988934022},
+        "ORION_BELT_CENTROID": {"obs_best_sep_deg": 77.8673953755, "descriptive_mc_fraction_leq": 0.4716370567}
+      },
+      "full_january_any_time": {
+        "LOVE": {"target_dec_date_deg": -36.9143225330, "best_possible_sep_over_full_sidereal_sweep_deg": 13.4326558663, "analytic_isotropic_fraction_leq": 0.2130647948},
+        "EDEM": {"target_dec_date_deg": 30.1502928536, "best_possible_sep_over_full_sidereal_sweep_deg": 53.6319595203, "analytic_isotropic_fraction_leq": 0.7385421066},
+        "ORION_BELT_CENTROID": {"target_dec_date_deg": -1.1334724607, "best_possible_sep_over_full_sidereal_sweep_deg": 22.3481942060, "analytic_isotropic_fraction_leq": 0.3487461581}
+      }
+    },
+    "FACE_51_84_SOUTH": {
+      "beam_points": [
+        {"time_utc": "2026-01-05T02:03:34Z", "ra_mean_date_deg": 161.6674711632, "dec_mean_date_deg": -16.1416666667, "separations_deg": {"LOVE": 43.2352023359, "EDEM": 50.9351613284, "ORION_BELT_CENTROID": 77.4458452237}},
+        {"time_utc": "2026-01-10T03:47:22Z", "ra_mean_date_deg": 192.6167566653, "dec_mean_date_deg": -16.1416666667, "separations_deg": {"LOVE": 23.3598768831, "EDEM": 68.8879964447, "ORION_BELT_CENTROID": 107.1299375466}}
+      ],
+      "best_two_anchor": {
+        "LOVE": {"obs_best_sep_deg": 23.3598768831, "descriptive_mc_fraction_leq": 0.0716178568},
+        "EDEM": {"obs_best_sep_deg": 50.9351613284, "descriptive_mc_fraction_leq": 0.2489955020},
+        "ORION_BELT_CENTROID": {"obs_best_sep_deg": 77.4458452237, "descriptive_mc_fraction_leq": 0.4720930558}
+      },
+      "full_january_any_time": {
+        "LOVE": {"target_dec_date_deg": -36.9143225330, "best_possible_sep_over_full_sidereal_sweep_deg": 20.7726558663, "analytic_isotropic_fraction_leq": 0.3406790710},
+        "EDEM": {"target_dec_date_deg": 30.1502928536, "best_possible_sep_over_full_sidereal_sweep_deg": 46.2919595203, "analytic_isotropic_fraction_leq": 0.6943726411},
+        "ORION_BELT_CENTROID": {"target_dec_date_deg": -1.1334724607, "best_possible_sep_over_full_sidereal_sweep_deg": 15.0081942060, "analytic_isotropic_fraction_leq": 0.2487483759}
+      }
+    },
+    "APEX_BEAM_ZENITH": {
+      "beam_points": [
+        {"time_utc": "2026-01-05T02:03:34Z", "ra_mean_date_deg": 161.6674711632, "dec_mean_date_deg": 22.0183333333, "separations_deg": {"LOVE": 71.5303679149, "EDEM": 21.3644076327, "ORION_BELT_CENTROID": 78.6352145580}},
+        {"time_utc": "2026-01-10T03:47:22Z", "ra_mean_date_deg": 192.6167566653, "dec_mean_date_deg": 22.0183333333, "separations_deg": {"LOVE": 60.0214936460, "EDEM": 47.8792922726, "ORION_BELT_CENTROID": 107.2767542958}}
+      ],
+      "best_two_anchor": {
+        "LOVE": {"obs_best_sep_deg": 60.0214936460, "descriptive_mc_fraction_leq": 0.3198993602},
+        "EDEM": {"obs_best_sep_deg": 21.3644076327, "descriptive_mc_fraction_leq": 0.0612358775},
+        "ORION_BELT_CENTROID": {"obs_best_sep_deg": 78.6352145580, "descriptive_mc_fraction_leq": 0.4800610399}
+      },
+      "full_january_any_time": {
+        "LOVE": {"target_dec_date_deg": -36.9143225330, "best_possible_sep_over_full_sidereal_sweep_deg": 58.9326558663, "analytic_isotropic_fraction_leq": 0.7940871366},
+        "EDEM": {"target_dec_date_deg": 30.1502928536, "best_possible_sep_over_full_sidereal_sweep_deg": 8.1319595203, "analytic_isotropic_fraction_leq": 0.1311363874},
+        "ORION_BELT_CENTROID": {"target_dec_date_deg": -1.1334724607, "best_possible_sep_over_full_sidereal_sweep_deg": 23.1518057940, "analytic_isotropic_fraction_leq": 0.3644924708}
+      }
+    }
+  },
+  "random_sky_control": {
+    "mode": "isotropic_sphere",
+    "n": 500000,
+    "seed": 20260820,
+    "score": "minimum angular separation to the same operator at the two inherited January timestamps",
+    "warning": "These timestamps were inherited from prior LOVE/EDEM searches, so the resulting fractions are descriptive post-hoc controls, not independent p-values."
+  },
+  "full_january_any_time_control": {
+    "method": "A fixed local Alt/Az operator traces a constant-declination circle as Earth rotates; over a full sidereal sweep the minimum possible separation is abs(target_dec - beam_dec).",
+    "interpretation": "This intentionally exposes how much specificity is lost when arbitrary time within January is allowed."
+  },
+  "reverse_pass": [
+    {"direction": "BACK", "result": "Remove semantic labels; retain Kamil latitude, three fixed local vectors and three fixed sky directions."},
+    {"direction": "FORWARD", "result": "Evaluate the inherited January timestamps without rotating any operator."},
+    {"direction": "LEFT", "result": "Compare LOVE/EDEM/Orion to matched isotropic random-sky directions under identical two-timestamp scoring."},
+    {"direction": "RIGHT", "result": "Allow any January sidereal phase analytically but keep operator orientation fixed; measure the best possible declination-only residual and its null sky fraction."},
+    {"direction": "FORWARD_AGAIN", "result": "Rebuild EDEM -> LOVE -> Kamil and Kamil -> LOVE -> EDEM using LOVE as the only Earth-leg endpoint."},
+    {"direction": "BACK_AGAIN", "result": "Separate geometry from timestamp-selection bias, archaeology and Kamil impact causality."}
+  ],
+  "firewall": {
+    "ancient_device_claimed": false,
+    "kamil_melt_caused_by_love_or_edem": false,
+    "edem_identity_confirmed": false,
+    "12_12_used_for_scoring": false,
+    "january_is_activation_date": false,
+    "statistical_significance_claimed": false,
+    "coordinate_frame_note": "Exact-anchor transform uses mean sidereal time plus IAU-1976 J2000->mean-of-date precession; nutation/refraction omitted. All decisive residuals are many degrees."
+  },
+  "canonical_result_ru": "После запрета свободного вращения прежнее попадание EDEM на 44.5° исчезает: оно требовало азимута около 291°, а замороженный южный shaft имеет az=180°. Ни один из трёх фиксированных операторов не попадает ни в LOVE, ни в EDEM на двух унаследованных январских моментах. Лучший Earth-leg результат для LOVE — SHAFT_44.5° на 2026-01-10, остаток ~16.97°. В полном январском sweep тот же shaft всё равно не может приблизиться к LOVE ближе ~13.43° из-за несовпадения деклинаций. APEX ближе всего к EDEM при произвольном январском времени (~8.13°), но EDEM не является земным плечом маршрута. Двухточечный isotropic control даёт для LOVE/SHAFT ~4.22%, однако это не независимый p-value: оба времени были получены в прошлых LOVE/EDEM-поисках. При разрешении произвольного времени в январе null fraction для LOVE/SHAFT раздувается примерно до 21.3%, поэтому специфичность не выдерживает свободу времени.",
+  "terminal": "FROZEN_ORIENTATION_GATE_CLOSES_PRIOR_EDEM_REORIENTATION_EFFECT__NO_SPECIFIC_FIXED_PYRAMID_ALIGNMENT_ADMITTED"
+}
