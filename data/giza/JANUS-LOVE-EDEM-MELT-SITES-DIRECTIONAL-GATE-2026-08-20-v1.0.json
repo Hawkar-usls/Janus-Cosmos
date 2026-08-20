@@ -1,0 +1,157 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-MELT-SITES-DIRECTIONAL-GATE-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.melt_sites.directional_gate.v1",
+  "created_at_local": "2026-08-20T11:40:00+03:00",
+  "status": "COMPLETE__NO_CLEAN_LOVE_DIRECTIONAL_MATCH_FOUND__EDEM_HAS_ONE_MODEL_SENSITIVE_WABAR_COMPATIBILITY__DAKHLEH_REMAINS_UNSCORABLE",
+  "correction_of_previous_framing": {
+    "previous_overfocus": "ORION_AS_PRIMARY_SOURCE",
+    "corrected_primary_hypothesis": "EDEM_TO_LOVE_ROUTE_IS_THE_PROJECT_SPEAR_AXIS_TO_TEST_AGAINST_REAL_MELT_SITES",
+    "orion_role_now": "HISTORICAL_PROJECT_MISROUTE_CONTROL_AND_SEPARATE_TEXTUAL_SYMBOLIC_LAYER",
+    "giza_role_now": "NEGATIVE_MATERIAL_CONTROL_AND_PROJECT_FAILED_ATTEMPT_HYPOTHESIS_ONLY",
+    "important_boundary": "The absence of melt at Giza cannot by itself prove a failed machine, missing phallus/key, or wrong coordinate."
+  },
+  "frozen_celestial_endpoints": {
+    "LOVE": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+    "EDEM": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+    "angular_separation_deg": 90.586788289
+  },
+  "physics_gate": {
+    "problem": "A terrestrial melt-site latitude/longitude cannot be directly overlaid on a fixed RA/Dec because Earth rotates. Without an event epoch/time, local longitude does not determine celestial right ascension.",
+    "time_independent_necessary_test": "If an incoming local trajectory is independently reconstructed by azimuth A, elevation h, at geographic latitude phi, its celestial declination obeys sin(delta)=sin(phi)sin(h)+cos(phi)cos(h)cos(A). This supplies a necessary 1-D endpoint gate even when RA is unknown.",
+    "full_vector_requirement": "Exact event time or an independently recovered celestial trajectory is required to reconstruct RA and perform a true 2-D LOVE/EDEM match.",
+    "relay_note": "For the project route EDEM -> LOVE -> Earth, an actual final incoming ray at Earth would normally arrive from the LOVE direction; testing EDEM as the incident endpoint is retained as a competing model, not silently merged with LOVE.",
+    "great_circle_warning": "Testing only membership in the EDEM-LOVE great-circle with unknown RA is too permissive to be evidential; endpoint tests are stronger."
+  },
+  "site_results": [
+    {
+      "id": "KAMIL_EGYPT",
+      "site": "Kamil impact crater, southwestern Egypt",
+      "lat_deg": 22.0183333333,
+      "lon_deg": 26.0877777778,
+      "physical_status": "CONFIRMED_HYPERVELOCITY_IRON_METEORITE_IMPACT_WITH_SHOCK_METAMORPHISM_AND_IMPACT_MELT",
+      "age": "<5000 years; thermoluminescence work places the event broadly around the second millennium BCE / roughly four millennia ago",
+      "trajectory_source": "NW incidence; published azimuth envelope about 305-340 deg from north, impact angle about 30-45 deg above horizontal",
+      "derived_declination_envelope_deg": [39.87352154, 70.37212013],
+      "LOVE_endpoint": {"dec_deg": -36.78240528, "result": "FAIL", "minimum_declination_mismatch_deg": 76.65592682},
+      "EDEM_endpoint": {"dec_deg": 30.2603878, "result": "FAIL", "minimum_declination_mismatch_deg": 9.61313374},
+      "interpretation": "Kamil is a valuable real Egyptian melt-direction control, but its independently reconstructed local trajectory cannot point to either frozen endpoint even before RA is considered.",
+      "sources": [
+        "https://doi.org/10.1111/maps.12023",
+        "https://doi.org/10.1111/j.1945-5100.2011.01222.x"
+      ]
+    },
+    {
+      "id": "DAKHLEH_GLASS_EGYPT",
+      "site": "Dakhleh Glass, Dakhleh Oasis, Western Desert, Egypt",
+      "representative_lat_deg": 25.5,
+      "representative_lon_deg": 29.1167,
+      "physical_status": "LARGE_HIGH_TEMPERATURE_IMPACT_GLASS_FIELD__IMPACT_OR_AIRBURST_SUPPORTED__NO_CONFIRMED_CRATER",
+      "age": "145 +/- 19 ka by 40Ar/39Ar",
+      "minimum_published_extent": "about 400 km^2",
+      "diagnostics": ["heterogeneous quenched glass", "lechatelierite", "burnt sediments", "melt phases", "shattered quartz"],
+      "directional_status": "UNSCORABLE_WITH_CURRENT_PUBLIC_TRAJECTORY_CONSTRAINTS",
+      "LOVE_endpoint": {"result": "OPEN_NOT_TESTABLE_YET"},
+      "EDEM_endpoint": {"result": "OPEN_NOT_TESTABLE_YET"},
+      "why_priority": "This was absent from the prior Janus vitrification set and is one of the strongest missed Egyptian physical controls. Its broad glass distribution may permit a future spatial-gradient/airburst trajectory reconstruction.",
+      "sources": [
+        "https://doi.org/10.1016/j.epsl.2010.01.014",
+        "https://doi.org/10.1016/j.epsl.2006.10.039"
+      ]
+    },
+    {
+      "id": "LIBYAN_DESERT_GLASS",
+      "site": "Libyan Desert Glass field, Great Sand Sea, Egypt",
+      "physical_status": "EXTREME_HIGH_TEMPERATURE_SILICA_GLASS__IMPACT_ORIGIN_STRONGLY_SUPPORTED",
+      "age": "about 28.5 Ma",
+      "directional_status": "UNSCORABLE_FOR_LOVE_EDEM_WITH_CURRENT_EVENT_TRAJECTORY; PRESENT_J2000_COORDINATES_CANNOT_BE_NAIVELY_BACKPROJECTED_OVER_28.5_MYR",
+      "LOVE_endpoint": {"result": "NOT_TESTABLE_FROM_CURRENT_DIRECTION_DATA"},
+      "EDEM_endpoint": {"result": "NOT_TESTABLE_FROM_CURRENT_DIRECTION_DATA"},
+      "orion_control": "The present Orion Belt population is much younger than the glass event, so the current Belt cannot be its literal source.",
+      "note": "Later Egyptian use of LDG is cultural reuse, not evidence that its 28.5 Ma formation was an Osirian event."
+    },
+    {
+      "id": "WABAR_SAUDI_ARABIA",
+      "site": "Wabar impact field, Rub al-Khali",
+      "lat_deg": 21.5032,
+      "lon_deg": 50.4725,
+      "physical_status": "IRON_METEORITE_IMPACT_WITH_FUSED_SAND_AND_IMPACT_GLASS",
+      "trajectory_status": "MODEL_SENSITIVE",
+      "azimuth_deg": 300.0,
+      "published_model_A": {
+        "elevation_deg": [22.0, 45.0],
+        "derived_declination_envelope_deg": [34.6552917, 36.31748767],
+        "EDEM_result": "FAIL_BY_AT_LEAST_4.3949_DEG",
+        "LOVE_result": "FAIL"
+      },
+      "published_model_B": {
+        "elevation_deg": [0.0, 22.0],
+        "derived_declination_envelope_deg": [27.72307253, 34.6552917],
+        "EDEM_result": "DECLINATION_COMPATIBLE_ONLY",
+        "elevation_deg_required_for_exact_EDEM_declination_at_A300": 6.54184665,
+        "LOVE_result": "FAIL"
+      },
+      "verdict": "MODEL_SENSITIVE_EDEM_DECLINATION_COMPATIBILITY_ONLY__NOT_A_CELESTIAL_HIT",
+      "reason": "Published trajectory-angle reconstructions differ and event time/RA are not known; matching only declination under one shallow model is not evidence."
+    },
+    {
+      "id": "LONAR_INDIA",
+      "site": "Lonar impact crater",
+      "lat_deg": 19.976389,
+      "lon_deg": 76.508611,
+      "physical_status": "CONFIRMED_BASALTIC_IMPACT_WITH_SHOCK_MELT_AND_GLASS",
+      "trajectory_model": "from east, approximately 30-45 deg above horizontal",
+      "derived_declination_envelope_deg": [9.83529189, 13.97927611],
+      "LOVE_endpoint": {"result": "FAIL"},
+      "EDEM_endpoint": {"result": "FAIL", "minimum_declination_mismatch_deg": 16.28111169},
+      "age_note": "Published age estimates have changed substantially across studies; no chronology claim is made here from the older registry value."
+    },
+    {
+      "id": "BOSUMTWI_GHANA",
+      "site": "Bosumtwi impact crater",
+      "lat_deg": 6.533333,
+      "lon_deg": -1.416667,
+      "physical_status": "CONFIRMED_IMPACT_WITH_TEKTITE_LINK",
+      "trajectory_model": "modelled N-to-NE approach, broad azimuth 0-45 deg, elevation 30-45 deg",
+      "derived_declination_envelope_deg": [35.2544343, 66.533333],
+      "LOVE_endpoint": {"result": "FAIL"},
+      "EDEM_endpoint": {"result": "FAIL_IN_THIS_BROAD_MODEL", "minimum_declination_mismatch_deg": 4.9940465},
+      "confidence": "LOWER_THAN_KAMIL_BECAUSE_DIRECTION_IS_MODEL_BASED"
+    },
+    {
+      "id": "AOUELLOUL_MAURITANIA",
+      "site": "Aouelloul crater",
+      "physical_status": "CONFIRMED_IMPACT_WITH_IMPACT_GLASS",
+      "trajectory_status": "UNDERCONSTRAINED",
+      "LOVE_endpoint": {"result": "UNSCORABLE"},
+      "EDEM_endpoint": {"result": "UNSCORABLE"},
+      "reason": "Published ejecta asymmetry suggests obliquity but the available directional and elevation envelope is too broad for an endpoint test."
+    }
+  ],
+  "registry_crosscheck": {
+    "internal_transition_found": {
+      "older_route": "JANUS-ARTIFACT-OSIRIS-PHALLUS-ORION-BELT-SEMANTIC-SIGNAL: parent_route=ORION_BELT; targets=Mintaka, Alnilam, Alnitak",
+      "later_route": "JANUS-SPEAR-OF-OSIRIS-EDAN-LOVE-PYRAMID-REVERSAL and MULTIPASS reversal: EDAN/EDEM -> LOVE -> PYRAMID",
+      "classification": "REAL_PROJECT_MODEL_TRANSITION__NOT_EVIDENCE_OF_ANCIENT_EGYPTIAN_COORDINATE_ERROR"
+    },
+    "important_textual_gap_already_in_registry": "The reverse textual chronology explicitly says no ancient/early Egyptian bridge currently links the Osiris-as-Orion stellar operator to the phallus-loss event with one shared chronology/operator.",
+    "spear_definition_conflict_to_preserve": "Existing canonical Spear receipt defines the spear as a resultant route/vector and explicitly spear_is_object=false. A competing PHALLUS_AS_MISSING_SPEAR_COMPONENT model may be explored only as a new project hypothesis without overwriting that receipt.",
+    "material_relic_boundary": "CG 53469 is catalogued as a human funerary gold phallus sheath from Mendes; its identity as an original Osiris relic or technology remains NOT_ESTABLISHED."
+  },
+  "current_verdict": {
+    "LOVE": "NO_RECONSTRUCTABLE_MELT_SITE_IN_THIS_PASS_MATCHES_THE_LOVE_DECLINATION_ENDPOINT",
+    "EDEM": "NO_CLEAN_ENDPOINT_MATCH; WABAR_IS_MODEL_SENSITIVE_DECLINATION_ONLY_AND_REQUIRES_FULL_VECTOR_RECONSTRUCTION",
+    "DAKHLEH": "HIGHEST_PRIORITY_MISSED_EGYPTIAN_MELT_FIELD_BUT_DIRECTION_CURRENTLY_UNKNOWN",
+    "GIZA_WRONG_COORDINATE_THEORY": "PROJECT_HYPOTHESIS_ONLY__NOT_CONFIRMED_BY_ABSENCE_OF_MELT"
+  },
+  "next_gate": {
+    "name": "LOVE_EDEM_MELT_FULL_VECTOR_GATE_V2",
+    "priority": [
+      "Search Dakhleh field maps, glass abundance/thickness gradients and airburst modeling for an independently recoverable trajectory before seeing LOVE/EDEM scores.",
+      "Resolve Wabar trajectory model disagreement and event-age/time constraints; only then compute full celestial RA/Dec.",
+      "Expand to other impact-glass sites only when incident direction is independently constrained.",
+      "Compare LOVE, EDEM, Orion and randomized sky directions with identical fit freedom."
+    ],
+    "promotion_rule": "No Osiris/Spear/ancient-technology status unless an independently reconstructed physical incoming direction survives endpoint matching and randomized controls."
+  },
+  "claim_ceiling": "DIRECTIONAL_NECESSARY_CONDITION_AUDIT_ONLY__NO_ANCIENT_TECHNOLOGY__NO_OSIRIS_RETURN_SITE__NO_PHYSICAL_SPEAR_CLAIM"
+}
