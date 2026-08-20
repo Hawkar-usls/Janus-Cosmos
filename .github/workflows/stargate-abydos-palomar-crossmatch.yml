@@ -1,0 +1,39 @@
+name: Stargate Abydos Palomar Spatial Crossmatch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/stargate-abydos-palomar-crossmatch.yml"
+      - "workspace/stargate_abydos_palomar_crossmatch.py"
+      - "data/stargate/STARGATE-ABYDOS-PALOMAR-SPATIAL-CROSSMATCH-GATE-v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install "numpy>=2.0" "pandas>=2.2" "requests>=2.31"
+      - name: Run frozen Palomar crossmatch
+        run: python workspace/stargate_abydos_palomar_crossmatch.py
+      - name: Show receipt
+        if: always()
+        run: cat data/stargate/STARGATE-ABYDOS-PALOMAR-SPATIAL-CROSSMATCH-v1-LATEST-RECEIPT.json || true
+      - name: Persist receipt
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stargate/STARGATE-ABYDOS-PALOMAR-SPATIAL-CROSSMATCH-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze Stargate Abydos Palomar crossmatch run ${{ github.run_number }}"
+          git pull --rebase origin main
+          git push
