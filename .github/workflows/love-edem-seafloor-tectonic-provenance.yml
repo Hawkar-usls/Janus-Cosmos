@@ -1,0 +1,53 @@
+name: LOVE EDEM Seafloor Tectonic Provenance
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "workspace/love_edem_seafloor_tectonic_provenance.py"
+      - ".github/workflows/love-edem-seafloor-tectonic-provenance.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install scientific dependencies
+        run: python -m pip install --disable-pip-version-check requests numpy netCDF4 pyshp shapely pyproj
+      - name: Compile runner
+        run: python -m py_compile workspace/love_edem_seafloor_tectonic_provenance.py
+      - name: Resolve direct-data provenance and tectonic clock
+        run: python workspace/love_edem_seafloor_tectonic_provenance.py
+      - name: Validate frozen point and firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/love/JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-RECEIPT.json')
+          r=json.loads(p.read_text(encoding='utf-8'))
+          assert abs(r['frozen_point']['lat_deg'] - (-3.8654180644718967)) < 1e-12
+          assert abs(r['frozen_point']['lon_deg_east'] - 3.854924373538978) < 1e-12
+          assert r['frozen_point']['no_recenter'] is True
+          assert r['frozen_buffers_km'] == [0,1,5,10,25]
+          assert 'OCEANIC_CRUST_AGE_IS_NOT_AN_ARTIFACT_AGE' in r['scientific_firewall']
+          assert r['morphology_gate']['authorized'] in (True,False)
+          PY
+      - name: Persist receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-RECEIPT.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "cosmos: freeze LOVE EDEM seafloor tectonic provenance run 1"
+          git pull --rebase origin main
+          git push
