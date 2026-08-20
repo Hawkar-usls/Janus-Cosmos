@@ -1,0 +1,133 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-THREE-KEY-ACQUISITION-RUN-001-2026-08-20-v1.1",
+  "supersedes": "JANUS-ECHO-COUSTEAU-THREE-KEY-ACQUISITION-RUN-001-2026-08-20-v1.0",
+  "run_id": "COUSTEAU_THREE_KEY_ACQUISITION_RUN_001",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_at_local": "2026-08-20T21:38:00+03:00",
+  "purpose": "Advance three independent acquisition gates in parallel and freeze the first exact-time Palomar geometry result without recentering or post-hoc rescue.",
+  "frozen_origin": {
+    "id": "LOVE_EDEM_BISECTOR_FROZEN_OCEAN_POINT",
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "rule": "NO_RECENTERING"
+  },
+  "keys": {
+    "TITANIC": {
+      "status": "PARTIAL_PASS__PUBLIC_RAW_MULTIBEAM_AND_SVP_FOUND__COMPLEX_TARGET_RETURN_OPEN",
+      "dataset": {
+        "id": "NOAA_NCEI_TITANIC2004_MULTIBEAM",
+        "platform": "NOAA Ship RONALD H. BROWN (R104)",
+        "instrument": "SeaBeam 2112",
+        "dates": ["2004-05-27", "2004-06-12"],
+        "raw_full_resolution_files": 147,
+        "records": 11045,
+        "beams": 1667795,
+        "good_beam_fraction": 0.7963,
+        "track_km": 322.1168,
+        "raw_format": "ELAC/SeaBeam XSE vendor format",
+        "sound_speed_profile_archive": "svp.tar.gz",
+        "source": "NOAA National Centers for Environmental Information"
+      },
+      "closed_subgates": ["PUBLIC_RAW_MULTIBEAM_ACQUISITION", "PUBLIC_SVP_ACQUISITION", "REAL_OCEAN_GEOMETRY_PATH_INPUT_AVAILABLE"],
+      "still_open": ["RAW_COMPLEX_IQ_OR_PHASE_RESOLVED_TARGET_RETURN", "DIRECT_COMPLEX_HULL_TRANSFER_FUNCTION", "EXACT_PING_WAVEFORM_AND_PHASE_REFERENCE", "WITHHELD_PASS_SPLIT"],
+      "CST_EXP_03_status": "NOT_YET_PASSED",
+      "next_gate": "COUSTEAU_TITANIC_COMPLEX_RETURN_AND_PHASE_CALIBRATION_ACQUISITION_V1"
+    },
+    "AFRICA": {
+      "status": "FIRST_CLEAN_NO__M121_GA08_DOCUMENTED_3S_TRANSECT_DOES_NOT_INTERSECT_FROZEN_POINT__LOCAL_SURVEY_SEARCH_OPEN",
+      "candidate_dataset": "METEOR_M121_GA08_KONGSBERG_EM122",
+      "documented_section_latitude_deg_approx": -3.0,
+      "frozen_latitude_deg": -3.865418,
+      "minimum_meridional_separation_km_approx": 96.23,
+      "nearest_verified_CTD_distance_km_approx": 114.35,
+      "verdict": "M121_GA08_DOCUMENTED_3S_TRANSECT_REJECTED_AS_FROZEN_POINT_LOCAL_DATA",
+      "retain_role": "REGIONAL_MULTIBEAM_AND_CTD_CONTROL",
+      "boundary": "Full raw-ping minimum-distance audit for all M121 transit legs remains pending; NOAA/NCEI and GMRT exact local survey search remains open.",
+      "next_gate": "COUSTEAU_FROZEN_POINT_EXACT_TRACK_AND_SWATH_INTERSECTION_ACQUISITION_V1"
+    },
+    "PALOMAR": {
+      "status": "EXACT_TIME_SUBGATE_CLOSED__DIRECT_SAME_INSTANT_SURFACE_LINE_OF_SIGHT_NO",
+      "event": {
+        "id": "POSS_I_XE325_NINE_APPARENT_TRANSIENTS_1950_04_12",
+        "plate": "XE325",
+        "field_center_j2000": {"ra_deg": 212.9291, "dec_deg": 26.8311},
+        "reported_source_count": 9,
+        "semantic_firewall": "Nine apparent transient photographic detections; no origin identity is implied."
+      },
+      "exact_time_evidence": {
+        "source_class": "PUBLIC_EXPORTED_FULL_DSS_FITS_HEADER_DERIVED_FROM_STScI_MAST_SOURCE_FILE",
+        "repository": "jannefi/vasco",
+        "path": "metadata/plates/headers/dss1red_XE325.fits.header.json",
+        "header_origin": "STScI/MAST",
+        "survey": "POSSI-E",
+        "region": "XE325",
+        "plateid": "06OG",
+        "plate_label": "E70",
+        "date_obs": "1950-04-12T09:30:00",
+        "date_obs_time_scale_interpretation": "UT under FITS default for pre-1972 four-digit DATE-OBS timestamps",
+        "date_obs_semantics": "START_OF_OBSERVATION under FITS default absent contrary comment",
+        "exposure_minutes": 45.0,
+        "palomar_header_site_latitude_deg": 33.356,
+        "palomar_header_site_longitude_deg_west": 116.863,
+        "palomar_observed_hour_angle_hours": -0.133333,
+        "palomar_observed_zenith_distance_deg": 4.29812,
+        "palomar_airmass": 1.00281,
+        "internal_consistency": "Header places the field close to Palomar meridian and near zenith during the exposure, consistent with an actual observing timestamp rather than a date-only metadata placeholder."
+      },
+      "frozen_point_geometry": {
+        "coordinate_used_for_epoch_geometry_approx": {"ra_deg_1950": 212.368055, "dec_deg_1950": 27.064219},
+        "exposure_start_UT": "1950-04-12T09:30:00Z",
+        "exposure_mid_UT": "1950-04-12T09:52:30Z",
+        "exposure_end_UT": "1950-04-12T10:15:00Z",
+        "field_altitude_deg": {
+          "start": -40.38,
+          "mid": -45.05,
+          "end": -49.55
+        },
+        "field_azimuth_deg": {
+          "start": 302.77,
+          "mid": 305.30,
+          "end": 308.58
+        },
+        "sun_altitude_deg_approx": {
+          "start": 54.01,
+          "mid": 59.21,
+          "end": 64.24
+        },
+        "sun_azimuth_deg_approx": {
+          "start": 69.74,
+          "mid": 66.15,
+          "end": 61.12
+        },
+        "sun_to_field_angular_separation_deg_at_start_approx": 142.51,
+        "verdict": "XE325_FIELD_REMAINS_40_TO_50_DEGREES_BELOW_GEOMETRIC_HORIZON_FROM_FROZEN_POINT_FOR_ENTIRE_EXPOSURE"
+      },
+      "gate_effect": {
+        "direct_same_instant_surface_viewing_alignment": "REJECTED",
+        "ordinary_daily_visibility_from_frozen_latitude": "TRUE_BUT_IRRELEVANT_TO_EXPOSURE_INSTANT",
+        "causal_connection": "NOT_TESTED_BY_THIS_GATE",
+        "meaning": "At the actual XE325 exposure time, an observer located at the frozen ocean surface point could not look directly at the photographed sky field because Earth itself lay between the site horizon and that direction."
+      },
+      "claim_ceiling": "GEOMETRIC_NO_ONLY__DOES_NOT_IDENTIFY_OR_EXPLAIN_THE_PALOMAR_TRANSIENTS",
+      "next_gate": "PALOMAR_CONNECTION_CHANNEL_CLOSED_FOR_DIRECT_SURFACE_LINE_OF_SIGHT__NO_FURTHER_ALIGNMENT_ESCALATION_WITHOUT_A_DISTINCT_PREREGISTERED_HYPOTHESIS"
+    }
+  },
+  "gate_update": {
+    "TITANIC": "PARTIAL_PASS",
+    "AFRICA_M121_GA08_3S_SECTION": "NO",
+    "PALOMAR_DIRECT_SAME_INSTANT_SURFACE_LINE_OF_SIGHT": "NO"
+  },
+  "hard_rules": [
+    "NO_RECENTERING_OF_FROZEN_LOVE_EDEM_BISECTOR",
+    "NEGATIVE_RESULTS_ARE_FIRST_CLASS_RECEIPTS",
+    "NO_LOCAL_DATA_CLAIM_FROM_CRUISE_BOUNDING_BOX_ONLY",
+    "M121_REGIONAL_DATA_IS_NOT_TARGET_RETURN",
+    "PALOMAR_BELOW_HORIZON_RESULT_CLOSES_ONLY_DIRECT_SURFACE_LINE_OF_SIGHT_CHANNEL",
+    "DO_NOT_REINTERPRET_PALOMAR_NO_AS_CAUSAL_EVIDENCE",
+    "TITANIC_RAW_MULTIBEAM_IS_NOT_COMPLEX_TARGET_TRANSFER_FUNCTION",
+    "TITANIC_CST_EXP_03_REMAINS_REQUIRED_BEFORE_AFRICA_TARGET_IDENTITY_INTERPRETATION",
+    "PRESERVE_PASS_FAIL_AMBIGUOUS_NEGATIVE_AND_MISSING_DATA",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "THREE_KEY_RUN_001_V1_1__TITANIC_PARTIAL_PASS__AFRICA_M121_NO__PALOMAR_DIRECT_LINE_OF_SIGHT_NO"
+}
