@@ -1,0 +1,151 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-UNDERWATER-PYRAMID-REVERSE-ACOUSTIC-CLOSURE-GATE-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.underwater_pyramid_reverse_acoustic_closure_gate.v1",
+  "created_at_local": "2026-08-20T14:09:00+03:00",
+  "document_class": "FROZEN_JANUS_REVERSE_AND_BACKFORTH_GATE",
+  "status": "REVERSE_OPERATOR_VALID__REFERENCE_LIBRARY_AND_REAL_FIELD_DATA_REQUIRED",
+  "parents": [
+    "data/love/JANUS-LOVE-EDEM-UNDERWATER-PYRAMID-ACOUSTIC-FINGERPRINT-GATE-2026-08-20-v1.0.json",
+    "Hawkar-usls/Echo-Pyramid:config/underwater_resonator_recipe.v1.json",
+    "Hawkar-usls/Echo-Pyramid:config/underwater_resonator_reverse_recipe.v1.json"
+  ],
+  "frozen_point": {
+    "lat_deg": -3.8654180644718967,
+    "lon_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "forward_operator": [
+    "KNOWN_PYRAMID_GEOMETRY",
+    "DRY_IMPULSE_RESPONSE",
+    "SUBMERGE",
+    "SEALED_FLOODED_PARTIAL_BURIED",
+    "BROADBAND_CHIRP",
+    "HYDROPHONE_ARRAY",
+    "TRANSFER_FUNCTION",
+    "MODE_FREQUENCIES_Q_DECAY_PHASE",
+    "DIMENSIONLESS_FINGERPRINT",
+    "BLIND_SEARCH"
+  ],
+  "reverse_operator": [
+    "BLIND_SEARCH_OBSERVATION",
+    "REPEATABLE_CANDIDATE",
+    "SCALE_FREE_FINGERPRINT",
+    "MODE_FREQUENCIES_Q_DECAY_PHASE",
+    "TRANSFER_FUNCTION",
+    "HYDROPHONE_FIELD_PLUS_PROJECTOR_REFERENCE",
+    "KNOWN_BROADBAND_CHIRP",
+    "INFER_MEDIUM_AND_STATE",
+    "INFER_DRY_EQUIVALENT_RESPONSE_POSTERIOR",
+    "INFER_GEOMETRY_CLASS",
+    "INFER_SCALE_ORIENTATION_MATERIAL",
+    "FORWARD_REPLAY",
+    "HELDOUT_MATCH_OR_REJECT"
+  ],
+  "reverse_audit_findings": [
+    {
+      "finding": "UNKNOWN_SCALE_LEAK",
+      "problem": "fi*L/c cannot be computed before L is inferred.",
+      "repair": "Use fi/f1, Q-ratios, decay-ratios, phase topology and angular periodicity first; infer L only after blind class/state matching.",
+      "status": "REPAIRED"
+    },
+    {
+      "finding": "FIXED_FREQUENCY_CIRCULARITY",
+      "problem": "Searching specifically at 117-121 Hz or nominal flooded 512-529 Hz would leak the forward hypothesis into the reverse search.",
+      "repair": "Broadband search first; 119/520 values may be used only after a blind candidate exists as a post-classification model comparison.",
+      "status": "REPAIRED"
+    },
+    {
+      "finding": "INVERSE_NONUNIQUENESS",
+      "problem": "Different geometries/materials/states can share similar resonance patterns.",
+      "repair": "Return a posterior over classes and preserve ambiguity; require matched controls and heldout forward replay.",
+      "status": "STRUCTURAL_LIMIT_PRESERVED"
+    },
+    {
+      "finding": "BURIED_TARGET_DOMAIN_CHANGE",
+      "problem": "A target beneath sediment may not expose a water-column flooded-cavity resonance fingerprint.",
+      "repair": "Switch reverse input to low-frequency sub-bottom/seismic multi-offset complex reflections and elastic/scattering modes.",
+      "status": "BRANCH_ADDED"
+    }
+  ],
+  "blind_input_firewall": {
+    "forbidden": [
+      "label_pyramid",
+      "known_target_size",
+      "known_target_orientation",
+      "117_121_hz_search_window",
+      "512_529_hz_search_window",
+      "manual_peak_selection",
+      "recenter_bisector"
+    ],
+    "allowed": [
+      "projector_waveform",
+      "instrument_calibration",
+      "hydrophone_positions",
+      "navigation",
+      "CTD_sound_speed_profile",
+      "measured_environmental_uncertainties",
+      "preregistered_control_library"
+    ]
+  },
+  "reference_library_required": {
+    "geometry_classes": [
+      "hollow_square_pyramid",
+      "solid_pyramid",
+      "same_volume_rectangular_cavity",
+      "cone",
+      "irregular_rock",
+      "natural_ridge_or_seamount",
+      "pockmark_or_layered_sediment_control"
+    ],
+    "states": [
+      "dry_air",
+      "sealed_submerged",
+      "fully_flooded",
+      "25_percent_flooded",
+      "50_percent_flooded",
+      "75_percent_flooded",
+      "partially_buried",
+      "fully_buried"
+    ],
+    "variation_axes": [
+      "scale",
+      "material",
+      "wall_thickness",
+      "opening_size",
+      "orientation",
+      "sediment_type",
+      "sound_speed_profile",
+      "range_and_aspect"
+    ]
+  },
+  "janus_backforth_closure": {
+    "sequence": "FIELD_OBSERVATION -> REVERSE_POSTERIOR -> FORWARD_SIMULATION -> WITHHELD_FIELD_OBSERVATION",
+    "why": "A reverse match that cannot regenerate the withheld acoustic field is rejected even if its modal ratios look attractive.",
+    "advance_only_if": [
+      "at_least_3_independent_passes",
+      "stable_navigation_corrected_localization",
+      "same_top_class_and_state_on_independent_passes",
+      "better_than_all_preregistered_nonpyramid_controls",
+      "forward_replay_predicts_heldout_hydrophones_or_aspects",
+      "result_survives_environmental_uncertainty_sweep",
+      "independent_instrument_or_survey_replication"
+    ]
+  },
+  "current_point_context": {
+    "gebco_tid": 40,
+    "direct_multibeam_within_25km": false,
+    "synthesized_depth_m": -5065,
+    "nearest_globsed_v3_sediment_thickness_m": 467,
+    "implication": "The first field reverse pass should prioritize existing low-frequency trackline/seismic/sub-bottom data before interpreting high-frequency cavity acoustics."
+  },
+  "scientific_boundary": [
+    "INVERSE_ACOUSTIC_MATCH_IS_NOT_UNIQUE_GEOMETRY_PROOF",
+    "A_SINGLE_PEAK_IS_NOT_A_PYRAMID",
+    "119_HZ_AND_520_HZ_ARE_NOT_ALLOWED_BLIND_SEARCH_KEYS",
+    "REFERENCE_LIBRARY_MUST_EXIST_BEFORE_FIELD_CLASSIFICATION",
+    "FORWARD_REPLAY_IS_REQUIRED_FOR_REVERSE_CLOSURE",
+    "NO_RECENTERING",
+    "NO_UNDERWATER_PYRAMID_DETECTED"
+  ],
+  "claim_ceiling": "REVERSE_METHOD_AND_BACKFORTH_PREREGISTRATION_ONLY"
+}
