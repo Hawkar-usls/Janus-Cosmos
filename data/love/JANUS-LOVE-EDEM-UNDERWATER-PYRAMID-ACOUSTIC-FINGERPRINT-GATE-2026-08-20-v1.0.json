@@ -1,0 +1,108 @@
+{
+  "artifact_id": "JANUS-LOVE-EDEM-UNDERWATER-PYRAMID-ACOUSTIC-FINGERPRINT-GATE-2026-08-20-v1.0",
+  "schema": "janus.cosmos.love_edem.underwater_pyramid_acoustic_fingerprint_gate.v1",
+  "created_at_local": "2026-08-20T13:54:00+03:00",
+  "document_class": "FROZEN_ACOUSTIC_FINGERPRINT_AND_BISECTOR_RESIDUAL_CALIBRATION_GATE",
+  "status": "PREREGISTERED__REFERENCE_LIBRARY_REQUIRED__FIELD_TARGET_UNCONFIRMED",
+  "parents": [
+    "data/love/JANUS-LOVE-EDEM-BISECTOR-RELAY-EARTH-LOCUS-2026-08-20-v1.0.json",
+    "data/love/JANUS-LOVE-EDEM-SEAFLOOR-TECTONIC-SUBMERGENCE-AND-DIRECT-DATA-RUN-001-RECEIPT.json",
+    "data/love/JANUS-LOVE-EDEM-GLOBSED-EXACT-CELL-RUN-001-RECEIPT.json"
+  ],
+  "echo_pyramid_recipe": "Hawkar-usls/Echo-Pyramid:config/underwater_resonator_recipe.v1.json",
+  "frozen_point": {
+    "lat_deg": -3.8654180644718967,
+    "lon_deg_east": 3.854924373538978,
+    "no_recenter": true
+  },
+  "current_physical_context": {
+    "gebco_2026_tid": 40,
+    "direct_multibeam_at_point": false,
+    "gmrt_swath_hits_0_1_5_10_25_km": [0, 0, 0, 0, 0],
+    "ncei_multibeam_hits_0_1_5_10_25_km": [0, 0, 0, 0, 0],
+    "gmrt_synthesized_depth_m": -5065,
+    "globsed_v3_sediment_thickness_m_nearest_5_arcmin_cell": 467,
+    "seafloor_age_model_ma": {
+      "GeeK2007_2arcmin": 95.9502944946289,
+      "GTS2012_2arcmin": 98.20699310302734
+    }
+  },
+  "hypothesis": {
+    "statement": "If a stationary geometric structure near the frozen point has cavities or elastic modes that survive submergence or burial, active broadband acoustics may reveal a reproducible multi-mode spectral fingerprint distinguishable from matched natural controls.",
+    "music_translation": "PYRAMID_MUSIC is operationalized as deterministic spectral coloration or ringing of an incident signal, not spontaneous sound generation."
+  },
+  "reference_to_field_operator": {
+    "air_model_anchor": {
+      "band_hz": [117.0, 121.0],
+      "center_hz": 119.0,
+      "status": "MODEL_BASED_ECHO_PYRAMID_PROFILE"
+    },
+    "nominal_flooded_same_geometry_prior": {
+      "c_air_m_s": 343.0,
+      "c_water_nominal_m_s": 1500.0,
+      "band_hz": [511.6618075801749, 529.1545189504374],
+      "center_hz": 520.4081632653061,
+      "status": "LAB_PRIOR_NOT_FIELD_EXPECTATION"
+    },
+    "preferred_field_signature": [
+      "dimensionless modal frequencies fi*L/c",
+      "frequency ratios fi/f1",
+      "Q and decay ratios",
+      "phase response",
+      "multi-aspect target-strength spectrum",
+      "repeatable impulse-response peaks"
+    ]
+  },
+  "survey_ladder": [
+    {
+      "stage": "A_REFERENCE_LIBRARY",
+      "action": "Measure scaled pyramid and non-pyramid controls in dry, sealed, flooded, partial and buried states with calibrated projector and at least 3 hydrophones.",
+      "advance_if": "fingerprint is repeatable and classifier separates pyramid controls from non-pyramid controls on blind holdout"
+    },
+    {
+      "stage": "B_EXISTING_DATA",
+      "action": "Search any available low-frequency sub-bottom, seismic and trackline data through the frozen point before requesting new field work.",
+      "advance_if": "direct acoustic or seismic line intersects the frozen point or preregistered buffer"
+    },
+    {
+      "stage": "C_DEDICATED_SURVEY",
+      "action": "At frozen point run CTD, low-frequency sub-bottom or seismic, then broadband multi-aspect active acoustic sweep if environmental and legal conditions permit.",
+      "advance_if": "stationary subsurface reflector or resonant target repeats on at least 3 passes"
+    },
+    {
+      "stage": "D_LOCALIZATION",
+      "action": "Solve acoustic target coordinates from navigation plus travel time and beam geometry and compare to frozen bisector coordinate.",
+      "advance_if": "residual and uncertainty ellipse are reported without moving the predicted point"
+    }
+  ],
+  "bisector_calibration": {
+    "principle": "OBSERVED_TARGET_POSITION - FROZEN_BISECTOR_POSITION = RESIDUAL",
+    "allowed_outputs": [
+      "geodesic_offset_m",
+      "bearing_deg",
+      "horizontal_uncertainty_ellipse",
+      "depth_m",
+      "vertical_uncertainty_m"
+    ],
+    "forbidden": "Do not modify LOVE or EDEM coordinates or bisector longitude or latitude to absorb a target residual."
+  },
+  "controls": [
+    "empty sediment",
+    "natural ridge or seamount",
+    "pockmark",
+    "shipwreck or known manmade object if available",
+    "rectangular cavity",
+    "cone",
+    "irregular rock",
+    "solid pyramid"
+  ],
+  "reject_conditions": [
+    "single spectral peak only",
+    "feature appears only on gravity-predicted bathymetry",
+    "signal does not repeat on independent pass",
+    "candidate disappears after CTD sound-speed correction",
+    "template score is not better than matched natural controls",
+    "location requires recentering the frozen point"
+  ],
+  "claim_ceiling": "ACOUSTIC_SEARCH_METHOD_AND_PREREGISTRATION_ONLY__NO_UNDERWATER_PYRAMID_DETECTED"
+}
