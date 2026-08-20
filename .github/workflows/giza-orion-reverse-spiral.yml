@@ -1,0 +1,55 @@
+name: Giza Orion Reverse Epistemic Spiral
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "workspace/JANUS_COSMOS_EPISTEMIC_SPIRAL_FROZEN_CONTRACT_v1.json"
+      - "workspace/janus_epistemic_spiral.py"
+      - "data/giza/JANUS-GIZA-ORION-JET-SAND-REVERSE-SPIRAL-EVIDENCE-v1.json"
+      - ".github/workflows/giza-orion-reverse-spiral.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  reverse-spiral:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python -m py_compile workspace/janus_epistemic_spiral.py
+      - name: Deterministic self-test
+        run: python workspace/janus_epistemic_spiral.py --self-test
+      - name: Assemble preserved reverse spiral
+        run: python workspace/janus_epistemic_spiral.py
+      - name: Enforce scientific ceiling
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/giza/JANUS-GIZA-ORION-JET-SAND-REVERSE-SPIRAL-RUN-001-RECEIPT.json')
+          r=json.loads(p.read_text(encoding='utf-8'))
+          assert r['status']=='PASS_SPIRAL_ASSEMBLY__PHYSICAL_HYPOTHESIS_FAIL__SYMBOLIC_LAYER_PRESERVED'
+          assert all(r['gates'].values())
+          assert r['scientific_boundary']['orion_jet_vitrified_giza']=='NOT_ESTABLISHED__CURRENT_EVIDENCE_GATE_FAIL'
+          assert r['scientific_boundary']['giza_sand_from_hydrated_orion_glass']=='NOT_ESTABLISHED__CURRENT_EVIDENCE_GATE_FAIL'
+          assert r['scientific_boundary']['orion_osiris_star_shining_textual_motif']=='SUPPORTED_AS_SYMBOLIC_TEXTUAL_CONTEXT'
+          assert r['scientific_boundary']['hieroglyphic_overlay_is_historical_translation'] is False
+          PY
+      - name: Persist receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/giza/JANUS-GIZA-ORION-JET-SAND-REVERSE-SPIRAL-RUN-001-RECEIPT.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "cosmos: freeze Giza Orion reverse epistemic spiral run 1"
+          git pull --rebase origin main
+          git push
