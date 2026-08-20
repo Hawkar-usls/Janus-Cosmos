@@ -1,0 +1,95 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0",
+  "run_id": "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_RUN_001",
+  "created_at_local": "2026-08-21T01:38:00+03:00",
+  "frozen_anchor": [-3.865418, 3.854924],
+  "hypothesis": "H1_WAVELENGTH_EQUIVALENT_ACOUSTIC_MODE",
+  "model": {
+    "air_anchor_band_hz": [117.0, 121.0],
+    "air_center_hz": 119.0,
+    "air_sound_speed_m_s": 343.0,
+    "center_preserved_wavelength_m": 2.8823529411764706,
+    "water_sound_speed_test_interval_m_s": [1480.0, 1540.0],
+    "center_frequency_manifold_hz": [513.469387755102, 534.2857142857143],
+    "full_117_121_x_1480_1540_envelope_hz": [504.8396501457726, 543.265306122449],
+    "equation_center": "f_water = 119 * c_water / 343",
+    "equation_inverse_center": "c_equivalent = f_observed * 343 / 119"
+  },
+  "tested_values": [
+    {
+      "id": "MODEL_NOMINAL_CENTER",
+      "frequency_hz": 520.4081632653061,
+      "equivalent_center_sound_speed_m_s": 1500.0,
+      "inside_center_manifold": true,
+      "classification": "BY_CONSTRUCTION_MODEL_NOMINAL__NOT_OBSERVATIONAL_CONFIRMATION"
+    },
+    {
+      "id": "ICEBERG_A53A_NOMINAL_520_CONTROL",
+      "frequency_hz": 520.0,
+      "equivalent_center_sound_speed_m_s": 1498.8235294117646,
+      "inside_center_manifold": true,
+      "delta_from_1500_m_s": -1.176470588235361,
+      "classification": "H1_NUMERICALLY_COMPATIBLE__KNOWN_NATURAL_CONTROL__NO_TARGET_EVIDENCE"
+    },
+    {
+      "id": "CLASS_IV_FLEXTENSIONAL_WET_RESONANCE_520_CONTROL",
+      "frequency_hz": 520.0,
+      "equivalent_center_sound_speed_m_s": 1498.8235294117646,
+      "inside_center_manifold": true,
+      "classification": "H1_NUMERICALLY_COMPATIBLE__KNOWN_ENGINEERED_CONTROL__NO_TARGET_IDENTITY"
+    },
+    {
+      "id": "ATLANTIC_CROAKER_MEAN_525_CONTROL",
+      "frequency_hz": 525.0,
+      "equivalent_center_sound_speed_m_s": 1513.235294117647,
+      "inside_center_manifold": true,
+      "classification": "H1_NUMERICALLY_COMPATIBLE__BIOLOGICAL_CONTROL__MEAN_NOT_STABLE_LINE"
+    },
+    {
+      "id": "CLASS_IV_FE_MODEL_510_CONTROL",
+      "frequency_hz": 510.0,
+      "equivalent_center_sound_speed_m_s": 1470.0,
+      "inside_center_manifold": false,
+      "inside_full_band_envelope": true,
+      "classification": "CENTER_119_MANIFOLD_REJECT__FULL_117_121_ENVELOPE_COMPATIBLE__DEMONSTRATES_BAND_DEGENERACY"
+    }
+  ],
+  "degeneracy_test": {
+    "question": "Does frequency membership in the H1 manifold discriminate a target?",
+    "result": "NO",
+    "reason": "Natural, engineered and biological controls all map to plausible equivalent water sound speeds. The full 117-121 x 1480-1540 envelope is broader still and even admits 510 Hz.",
+    "specificity": "LOW",
+    "required_additional_observables": [
+      "local measured CTD or sound-speed profile",
+      "frequency uncertainty and spectral resolution",
+      "modal spacing",
+      "Q or linewidth",
+      "phase or complex response",
+      "ringdown or group delay",
+      "incident source X(f) separation",
+      "stable geodetic focus",
+      "repeat/withheld replay"
+    ]
+  },
+  "test_results": {
+    "H1_T01_CENTER_MANIFOLD_MATHEMATICS": "PASS",
+    "H1_T02_520_CONTROL_COMPATIBILITY": "PASS_BUT_NON_SPECIFIC",
+    "H1_T03_525_BIOLOGICAL_COMPATIBILITY": "PASS_CONTROL_OVERLAP",
+    "H1_T04_510_CENTER_MANIFOLD": "FAIL_OUTSIDE_1480_1540_CENTER_MANIFOLD",
+    "H1_T05_FULL_BAND_DISCRIMINATION": "FAIL_TOO_DEGENERATE",
+    "H1_T06_TARGET_SPECIFICITY": "FAIL_FREQUENCY_ONLY"
+  },
+  "aggregate_verdict": "H1_MANIFOLD_MATHEMATICALLY_VALID_AS_A_MODEL_BRANCH__FREQUENCY_MEMBERSHIP_NON_SPECIFIC__NO_TARGET_EVIDENCE_GAIN",
+  "evidence_direction": "MODEL_SHARPENED__CONTROL_PRESSURE_INCREASED__TARGET_EVIDENCE_UNCHANGED",
+  "next_gate": "COUSTEAU_H1_LOCAL_CTD_CONDITIONED_FINGERPRINT_TEST_V1",
+  "hard_rules": [
+    "H1_IS_A_SAME_WAVELENGTH_HYPOTHESIS_NOT_TRANSMISSION_FREQUENCY_PHYSICS",
+    "MODEL_NOMINAL_CENTER_IS_NOT_A_MEASUREMENT",
+    "MANIFOLD_MEMBERSHIP_IS_NOT_TARGET_IDENTITY",
+    "LOCAL_CTD_REQUIRED_TO_NARROW_H1_BEFORE_FIELD_SCORING",
+    "KNOWN_CONTROLS_REMAIN_CONTROLS_EVEN_IF_NUMERICALLY_COMPATIBLE",
+    "NO_RECENTERING",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "RUN_001_FROZEN__H1_MANIFOLD_EXECUTED__NON_SPECIFIC"
+}
