@@ -1,0 +1,39 @@
+name: Palomar Plate Provenance LOVE EDEM Stargate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/palomar-plate-provenance.yml"
+      - "workspace/palomar_plate_provenance_probe.py"
+      - "data/love/LOVE-EDEM-STARGATE-PALOMAR-PLATE-PROVENANCE-GATE-v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: python -m pip install "requests>=2.31" "astropy>=7.0" "astroquery>=0.4.10"
+      - name: Run provenance probe
+        run: python workspace/palomar_plate_provenance_probe.py
+      - name: Show receipt
+        if: always()
+        run: cat data/love/LOVE-EDEM-STARGATE-PALOMAR-PLATE-PROVENANCE-v1-LATEST-RECEIPT.json || true
+      - name: Persist receipt
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-STARGATE-PALOMAR-PLATE-PROVENANCE-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze Palomar plate provenance run ${{ github.run_number }}"
+          git pull --rebase origin main
+          git push
