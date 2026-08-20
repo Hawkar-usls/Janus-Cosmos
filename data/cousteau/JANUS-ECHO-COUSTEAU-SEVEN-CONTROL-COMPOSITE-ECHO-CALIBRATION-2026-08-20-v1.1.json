@@ -1,0 +1,100 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-SEVEN-CONTROL-COMPOSITE-ECHO-CALIBRATION-2026-08-20-v1.1",
+  "research_branch": "Janus-Echo-Кусто",
+  "document_class": "CANONICAL_UNDERWATER_ACOUSTIC_CALIBRATION_CONTRACT",
+  "source_recipe": "Hawkar-usls/Echo-Pyramid:config/cousteau_frequency_neighborhood_search_recipe.v1.json@v1.1",
+  "model_prior": {
+    "nominal_band_hz": [511.6618075801749, 529.1545189504374],
+    "center_hz": 520.4081632653061,
+    "ctd_sensitivity_envelope_hz": [504.8396501457726, 543.265306122449],
+    "claim_ceiling": "MODEL_PRIOR_ONLY"
+  },
+  "composite_echo_operator": {
+    "equation": "Y(f)=SUM_p[X(f)*H_path_p(f)*H_target_p(f)*H_secondary_p(f)] + N(f)",
+    "interpretation": "A received anomaly can be a coherent combination of direct target return, resonator ringing, multipath, bottom/surface reverberation, ice/biology interactions, elastic-target response, and transmitter imprint. Do not assume literal serial traversal through every class.",
+    "reverse_order": [
+      "recover source waveform where available",
+      "correct CTD/sound-speed and propagation",
+      "separate direct and multipath candidates",
+      "fit scale-free modal fingerprint",
+      "search geometry x orientation x flood-state x occlusion x biofouling",
+      "compare all seven mandatory controls",
+      "backpropagate to Earth-fixed location",
+      "forward replay on withheld passes/aspects"
+    ]
+  },
+  "mandatory_seven_controls": [
+    {
+      "rank": 1,
+      "id": "ICEBERG_HARMONIC_TREMOR",
+      "frequency_fact": "40 Hz fundamental/spacing with a natural 520 Hz harmonic line",
+      "role": "CRITICAL_NATURAL_FALSE_POSITIVE__INVERTED_TRIANGULAR_GEOMETRY_CONTROL"
+    },
+    {
+      "rank": 2,
+      "id": "SEI_WHALE_MID_FREQUENCY_CALLS",
+      "frequency_fact": "published mid-frequency calls approximately 200-600 Hz",
+      "role": "BIOLOGICAL_DIRECT_BAND_OVERLAP_CONTROL"
+    },
+    {
+      "rank": 3,
+      "id": "ANTARCTIC_MINKE_BIO_DUCK",
+      "frequency_fact": "fundamental energy through hundreds of hertz with harmonics extending above the modeled prior",
+      "role": "BIOLOGICAL_MACHINE_LIKE_HARMONIC_FALSE_POSITIVE"
+    },
+    {
+      "rank": 4,
+      "id": "FISH_SWIMBLADDER_RESONANCE",
+      "frequency_fact": "gas-cavity resonance can occur in the several-hundred-hertz regime depending on species/size/depth",
+      "role": "BIOLOGICAL_CAVITY_RESONATOR_CONTROL"
+    },
+    {
+      "rank": 5,
+      "id": "SUBMERGED_ELASTIC_SHELL_RESONANCE",
+      "frequency_fact": "submerged elastic shells exhibit resonance-rich backscatter, ringing and fill-state sensitivity",
+      "role": "PHYSICS_POSITIVE_CONTROL_FOR_TRANSFORMED_ECHO"
+    },
+    {
+      "rank": 6,
+      "id": "SURTASS_LFA",
+      "frequency_fact": "military active-sonar illumination approximately 100-500 Hz",
+      "role": "ILLUMINATOR_CONTROL_NOT_TARGET_RETURN",
+      "required_check": "recover actual transmit waveform before interpreting nearby-band energy"
+    },
+    {
+      "rank": 7,
+      "id": "NOAA_UPSWEEP",
+      "frequency_fact": "published spectrogram energy approximately 0-64 Hz",
+      "role": "ABSOLUTE_FREQUENCY_REJECT_CONTROL",
+      "absolute_frequency_gate": "REJECT_FOR_512_529_HZ_MATCH"
+    }
+  ],
+  "orientation_condition_matrix": {
+    "orientation": ["upright", "inverted", "side-resting", "edge-resting", "tilted", "yaw_pitch_roll_grid"],
+    "flood_state": ["sealed_air", "fully_flooded", "partial_flood", "mixed_air_water"],
+    "occlusion": ["open", "partial_blockage", "sediment_fill", "calcite_or_mineral_lining"],
+    "biofouling": ["clean", "biofilm", "coral_or_calcareous_encrustation", "sponge_or_soft_growth", "faunal_occupancy"],
+    "effects": ["mode_shift", "Q_change", "decay_change", "phase_change", "added_mass", "roughness_scattering", "aperture_closure", "aspect_dependence"]
+  },
+  "admission_gate": {
+    "requires": [
+      "repeatable modal ratios",
+      "Q or linewidth",
+      "decay/ringing",
+      "phase or impulse response",
+      "multi-aspect orientation consistency",
+      "stable Earth-fixed backpropagation focus",
+      "better fit than all seven controls",
+      "independent repeat/instrument replication",
+      "withheld forward replay"
+    ],
+    "single_peak_520_hz": "REJECT_AS_NON_SPECIFIC"
+  },
+  "watchlist_without_public_numeric_spectrum": [
+    "GALLAUDET_1980S_SUBMARINE_SONAR_ACCOUNT",
+    "SOVIET_QUACKERS",
+    "NUNAVUT_FURY_AND_HECLA_2016_PING"
+  ],
+  "status": "FROZEN_CANONICAL_COUS-TEAU_V1_1__SEVEN_CONTROLS_REQUIRED__COMPOSITE_PATH_MODEL_ACTIVE",
+  "next_gate": "COUSTEAU_SEVEN_CONTROL_COMPOSITE_ECHO_REPLAY_V1"
+}
