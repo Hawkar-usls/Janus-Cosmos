@@ -1,0 +1,92 @@
+{
+  "artifact_id": "JANUS-KAMIL-WHITE-GLASS-AU-AG-MICRODOMAIN-OUTREACH-GATE-2026-08-20-v1.0",
+  "schema": "janus.cosmos.kamil.white_glass.au_ag_microdomain.outreach_gate.v1",
+  "created_at_local": "2026-08-20T12:56:00+03:00",
+  "status": "OUTREACH_PACKET_FROZEN__SAMPLE_CUSTODY_AND_UNPUBLISHED_AU_AG_DATA_REQUEST_READY__NO_EXTERNAL_EMAIL_SENT_YET",
+  "parents": [
+    "data/giza/JANUS-KAMIL-WHITE-GLASS-EGYPTIAN-GOLD-PYRAMID-MATRIX-PASS1-2026-08-20-v1.0.json",
+    "janus-meta-registry:data/JANUS-KAMIL-PREIMPACT-EGYPTIAN-GOLD-AND-PYRAMID-MATERIAL-FINGERPRINT-GATE-2026-08-20-v1.0.json"
+  ],
+  "scientific_question": "Do target-dominated Kamil white-glass samples M23, L04 or L09 contain Au-Ag-Cu-rich microdomains that are chemically and morphologically inconsistent with meteoritic Fe-Ni-Co-Ga-Ge contamination and, if present, are any such domains spatially associated with construction-material markers?",
+  "priority_samples": [
+    {"sample":"M23","priority":1,"reason":"clean white glass; ~99.9 wt% SiO2; low Ni/Co; Au and Ag not reported in key bulk table"},
+    {"sample":"L04","priority":2,"reason":"independent clean white glass; ~99.4 wt% SiO2; low Ni/Co; Au and Ag not reported in key bulk table"},
+    {"sample":"L09","priority":3,"reason":"white SiO2-rich impactite; described as projectile-poor/Ni below detection in later work; retains large quartz relics and has been repeatedly studied microscopically"},
+    {"sample":"L03","priority":4,"role":"white glass with dark coating contamination control"},
+    {"sample":"L08","priority":5,"role":"white glass with dark coating contamination control"},
+    {"sample":"L06","priority":6,"role":"dark projectile-rich positive meteoritic control"},
+    {"sample":"M26/L13/M27","priority":7,"role":"unmelted local target-rock controls"}
+  ],
+  "frozen_measurement_sequence": [
+    "NON_DESTRUCTIVE_IMAGING: micro-CT or equivalent high-resolution X-ray tomography to locate high-density inclusions and foil/sheet/wire/seam-like morphology",
+    "ELEMENTAL_MAPPING: micro-XRF or equivalent map for Au, Ag, Cu, Ni, Co, Fe, Ca, S, Al, K, Na, Mg; add Ga, Ge, Pt, Ir where instrumental sensitivity allows",
+    "MORPHOLOGY_AND_PHASE: SEM-BSE plus EDS on any high-Z or morphologically anomalous inclusion",
+    "TRACE_CONFIRMATION: LA-ICP-MS and/or micro-PIXE on Au-Ag-Cu-Pt-Ir-Os-Ru plus Ni-Co-Ga-Ge; preserve spatial registration to the imaged microdomain",
+    "MATRIX_CONTROL: compare same microdomain against adjacent white glass and target-rock controls for Ca-S-Mg and feldspar/granite-style Al-K-Na-Si plus accessory Ti-Zr-Ba-Sr markers"
+  ],
+  "candidate_rule": {
+    "gold_branch": [
+      "Au-Ag-Cu-rich relative to white-glass background",
+      "no proportional Fe-Ni-Co-Ga-Ge co-enrichment expected from projectile contamination",
+      "worked morphology preferred: foil, sheet, wire, flattened edge, repeated thickness, seam or solder-like zone"
+    ],
+    "matrix_branch": [
+      "same or spatially linked microdomain shows Ca-S-Mg carbonate/mortar vector OR Al-K-Na-Si feldspar/granite vector with suitable accessory elements",
+      "must exceed local Kamil quartzarenite/weathering controls"
+    ],
+    "coupled_candidate": "gold_branch AND matrix_branch in a spatially linked microdomain",
+    "claim_ceiling": "CHEMICAL_AND_MORPHOLOGICAL_COMPATIBILITY_ONLY__NOT_PROOF_OF_PYRAMID_OR_ANCIENT_TECHNOLOGY"
+  },
+  "conventional_nulls": [
+    "meteoritic Au and siderophile contamination",
+    "impact-induced metal/glass phase separation and fractionation",
+    "natural Egyptian/desert placer gold",
+    "pre-impact weathered surface layer and ordinary lithophile heterogeneity",
+    "analytical contamination or mounting/polishing artefacts",
+    "single rounded metal droplet without worked morphology"
+  ],
+  "verified_current_contacts": [
+    {
+      "name":"Luigi Folco",
+      "role":"Full Professor, Department of Earth Sciences, University of Pisa; impact rocks and planetary materials",
+      "email":"luigi.folco@unipi.it",
+      "address":"Dipartimento di Scienze della Terra, Universita di Pisa, Via Santa Maria 53, 56126 Pisa, Italy",
+      "priority":"PRIMARY"
+    },
+    {
+      "name":"Massimo D'Orazio",
+      "role":"Associate Professor, Department of Earth Sciences, University of Pisa; petrology/geochemistry, meteorites, Kamil field activity",
+      "email":"massimo.dorazio@unipi.it",
+      "address":"Dipartimento di Scienze della Terra, Universita di Pisa, Via Santa Maria 53, 56126 Pisa, Italy",
+      "priority":"PRIMARY_CC"
+    }
+  ],
+  "verified_pisa_capabilities": {
+    "department_micropreparation_and_XRF":"University of Pisa Earth Sciences lists micropreparation and portable XRF; Luigi Folco is research lead for micropreparation",
+    "SEM_EDS":"Earth Sciences/CISUP lists SEM-EDS and electron microscopy capability",
+    "ICP_MS":"Earth Sciences lists ICP-MS trace-element analysis including Ag, Cu, Ni, Co and Ga among available series",
+    "LA_ICP_MS":"CISUP LA-ICP-MS: NWR-193 excimer + NexION 2000; in-situ trace analysis and elemental mapping; laser spots reported as small as 2 micrometres; suitable for geological glasses, inclusions, metals and alloys",
+    "micro_CT":"University of Pisa has micro-CT infrastructure elsewhere in the university; exact suitability/access for Kamil geological specimens should be confirmed by the custodians"
+  },
+  "custody_status": {
+    "M23":"CURRENT_PHYSICAL_CUSTODY_NOT_PUBLICLY_CONFIRMED",
+    "L04":"CURRENT_PHYSICAL_CUSTODY_NOT_PUBLICLY_CONFIRMED",
+    "L09":"CURRENT_PHYSICAL_CUSTODY_NOT_PUBLICLY_CONFIRMED",
+    "evidence":"all three sample IDs appear in University of Pisa-linked Kamil research; this does not prove they remain intact or available today"
+  },
+  "request_questions": [
+    "Are specimens M23, L04 and L09, or polished sections/chips derived from them, still retained and accessible for non-destructive or minimally destructive re-analysis?",
+    "Do any unpublished measurements for Au and Ag already exist for M23, L04, L09 or closely matched Kamil white-glass samples?",
+    "If intact material exists, would the group consider a targeted microdomain survey beginning with non-destructive high-Z imaging and Au-Ag-Cu/Ni-Co-Fe elemental mapping?",
+    "Could any candidate high-Z domains then be checked by SEM-BSE/EDS and, only if warranted, LA-ICP-MS or micro-PIXE for Au-Ag-Cu-Pt-Ir-Os-Ru versus Ni-Co-Ga-Ge?",
+    "Are there archived BSE/SEM/XRF maps of M23, L04 or L09 that might already reveal high-Z inclusions, foil-like geometry, seams or anomalous Ca-S-Mg / Al-K-Na microdomains?",
+    "Would the custodians prefer that any test be framed strictly as a blind geochemical discrimination between target-derived, projectile-derived and anomalous pre-impact microdomains?"
+  ],
+  "outreach_email_draft": {
+    "to":"luigi.folco@unipi.it",
+    "cc":"massimo.dorazio@unipi.it",
+    "subject":"Question on Kamil white-glass samples M23, L04 and L09: Au-Ag microdomain re-analysis",
+    "body":"Dear Prof. Folco and Prof. D'Orazio,\n\nI am following the published geochemical and petrographic work on Kamil crater impact glasses and would like to ask a narrowly defined sample/data question. In the published bulk data for target-dominated white glass, samples such as M23 and L04 are extremely SiO2-rich and have low Ni-Co relative to projectile-rich dark glass, but Au and Ag are not reported in the key bulk table. L09 is also especially interesting as a projectile-poor white SiO2-rich impactite that has been repeatedly studied microscopically.\n\nCould you please let me know whether M23, L04 and L09, or polished sections/chips from them, are still retained and potentially available for re-analysis, and whether any unpublished Au or Ag measurements already exist for these samples or closely matched white-glass material?\n\nThe proposed test would be deliberately conservative and begin non-destructively: locate any high-density micro-inclusions, then map Au-Ag-Cu against Ni-Co-Fe and relevant matrix elements. Only if a reproducible anomalous microdomain were found would follow-up SEM-BSE/EDS and, if appropriate, LA-ICP-MS or micro-PIXE be considered. The main discriminator would be whether any Au-Ag-Cu-rich domain lacks proportional meteoritic Ni-Co-Ga-Ge enrichment and whether its morphology/adjacent matrix can be explained by ordinary target geology, weathering or impact fractionation.\n\nI am not assuming an archaeological interpretation; the immediate goal is simply to determine whether the existing Kamil white-glass collection contains any chemically distinct pre-impact metal microdomains that deserve closer study.\n\nIf useful, I can send a one-page frozen analysis protocol with the exact control hierarchy (M23 -> L04 -> L09; L03/L08 contamination controls; L06 projectile-rich positive control; M26/L13/M27 target-rock controls).\n\nThank you for your time and for the Kamil work.\n\nBest regards,\nHawkar"
+  },
+  "next_gate": "AWAIT_CUSTODIAN_RESPONSE_OR_FIND_EXISTING_AU_AG_MICRODATA__DO_NOT_PROMOTE_ARCHAEOLOGICAL_INTERPRETATION_BEFORE_SAMPLE_LEVEL_SIGNAL"
+}
