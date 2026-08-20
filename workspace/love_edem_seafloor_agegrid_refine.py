@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
-from workspace.love_edem_seafloor_tectonic_provenance import sample_nc, LAT, LON
+from love_edem_seafloor_tectonic_provenance import sample_nc, LAT, LON
 
 BASE='https://earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/'
 OUT=Path('data/love/JANUS-LOVE-EDEM-SEAFLOOR-AGEGRID-REFINEMENT-RUN-001-RECEIPT.json')
