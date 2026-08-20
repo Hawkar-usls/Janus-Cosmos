@@ -1,0 +1,38 @@
+name: Underwater Acoustic Reverse Closure Gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "data/love/JANUS-LOVE-EDEM-UNDERWATER-PYRAMID-REVERSE-ACOUSTIC-CLOSURE-GATE-2026-08-20-v1.0.json"
+      - "workspace/underwater_acoustic_reverse_gate_check.py"
+      - ".github/workflows/underwater-acoustic-reverse-gate.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  reverse-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python -m py_compile workspace/underwater_acoustic_reverse_gate_check.py
+      - name: Run JANUS reverse audit
+        run: python workspace/underwater_acoustic_reverse_gate_check.py
+      - name: Persist receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/JANUS-LOVE-EDEM-UNDERWATER-PYRAMID-REVERSE-ACOUSTIC-CLOSURE-RUN-001-RECEIPT.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "cosmos: freeze underwater acoustic reverse closure run 1"
+          git pull --rebase origin main
+          git push
