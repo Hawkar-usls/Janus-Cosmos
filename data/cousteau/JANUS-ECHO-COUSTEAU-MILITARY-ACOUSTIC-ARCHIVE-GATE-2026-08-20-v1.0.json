@@ -1,0 +1,78 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-MILITARY-ACOUSTIC-ARCHIVE-GATE-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "created_at_local": "2026-08-20T14:44:00+03:00",
+  "status": "PREREGISTERED__ARCHIVE_ACQUISITION_REQUIRED",
+  "parents": [
+    "data/cousteau/JANUS-ECHO-COUSTEAU-JACQUES-YVES-BLIND-REFERENCE-CALIBRATION-RUN-001-2026-08-20-v1.0.json",
+    "Hawkar-usls/janus-meta-registry:data/JANUS-ECHO-COUSTEAU-MILITARY-SONAR-UAP-LEGACY-CROSSWALK-2026-08-20-v1.0.json"
+  ],
+  "question": "Do historical military acoustic anomalies contain fixed-location recurrent echoes consistent with a stationary seafloor/subsurface transfer function rather than moving targets, biological scattering, environmental propagation, or platform/sensor artifacts?",
+  "primary_hypotheses": {
+    "H0": "Apparent anomalies are explained by observation opportunity plus known ASW false contacts, marine biology, environmental propagation, active-sonar geometry, moving vehicles, or instrumentation.",
+    "H1": "At least one anomaly repeats at a fixed geodetic location and preserves a target-specific transfer function across independent insonifications and platforms.",
+    "H2_PROJECT_ONLY": "A fixed recurrent target surviving H1 could be compared to Janus-Echo-Cousteau pyramid/control fingerprints; pyramid identity is not assumed."
+  },
+  "mandatory_negative_controls": [
+    "WWII deep-scattering-layer false bottom",
+    "bio-duck / Antarctic minke whale",
+    "documented ASW false submarine contacts",
+    "sonobuoy/transmitter geometry",
+    "internal waves and sound-speed-profile refraction",
+    "bottom and surface reverberation",
+    "known ship/submarine/torpedo tracks"
+  ],
+  "archive_priority": [
+    {
+      "rank": 1,
+      "target": "raw or declassified submarine sonar tracks associated with the 1980s witness account discussed in the 2024 U.S. House UAP hearing",
+      "status": "testimony_public__raw_data_not_publicly_resolved"
+    },
+    {
+      "rank": 2,
+      "target": "Soviet/Russian quacker-era hydroacoustic recordings, logs, bearings and active-transmission notes",
+      "status": "testimony_and_secondary_history__raw_data_needed"
+    },
+    {
+      "rank": 3,
+      "target": "WWII/Cold-War ASW false-contact and false-bottom records with known later resolution",
+      "status": "positive calibration corpus"
+    },
+    {
+      "rank": 4,
+      "target": "public SOSUS/SURTASS metadata or acoustic examples where legal/public release exists",
+      "status": "metadata_and_public_material_only"
+    }
+  ],
+  "minimum_event_schema": [
+    "event_time_utc",
+    "platform_lat_lon_depth",
+    "sensor_or_array",
+    "active_or_passive",
+    "transmit_frequency_band_and_waveform",
+    "contact_bearing",
+    "contact_range_or_TWTT",
+    "CTD_or_sound_speed_profile",
+    "estimated_target_lat_lon_depth",
+    "track_over_time",
+    "operator_classification",
+    "environmental_context"
+  ],
+  "fixed_structure_admission": [
+    "same location within propagated uncertainty on >=3 independent passes",
+    "at least 2 distinct platforms or survey epochs",
+    "stationary location after CTD/refraction correction",
+    "repeatable spectral/phase or impulse-response features",
+    "better fit than biological/environmental/sensor controls",
+    "no dependence on moving sonobuoy or transmitter coordinates"
+  ],
+  "cousteau_fingerprint_admission_after_fixed_structure_only": [
+    "blind scale-free modal ratio match",
+    "Q/decay/phase match",
+    "multi-aspect orientation periodicity",
+    "forward replay on withheld pass",
+    "pyramid model must beat box/cone/rock/layered-sediment controls"
+  ],
+  "warfare_opportunity_firewall": "More anomalies during combat or exercises can arise simply because more active sonar, hydrophones, trained operators and classified analysis are present. Military correlation is not target activation unless matched non-operational opportunity controls are available.",
+  "claim_ceiling": "ARCHIVE_SEARCH_AND_FIXED_STRUCTURE_PREREGISTRATION_ONLY__NO_PYRAMID_DETECTED__NO_CLAIM_MILITARY_ALREADY_HAS_PYRAMID_COORDINATES"
+}
