@@ -1,0 +1,58 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HISTORICAL-MILITARY-ACOUSTIC-ANOMALY-CORPUS-2026-08-20-v1.0",
+  "branch": "janus-echo-cousteau",
+  "created_at_local": "2026-08-20T15:04:00+03:00",
+  "document_class": "SOURCE_AUDITED_HISTORICAL_ACOUSTIC_CONTROL_CORPUS",
+  "purpose": "Preserve verified, resolved, ambiguous and testimony-only military/ocean acoustic anomalies before applying the Janus transformed-echo reverse operator.",
+  "cases": [
+    {
+      "case_id": "GALLAUDET_1980S_BALLISTIC_MISSILE_SUBMARINE_SONAR_ACCOUNT",
+      "source_status": "CONGRESSIONAL_SWORN_TESTIMONY__SECOND_HAND_ACCOUNT__RAW_SONAR_NOT_PUBLIC",
+      "date": "1980s_unspecified",
+      "source_event": "U.S. House hearing 2024-11-13",
+      "reported_observation": "Retired Rear Admiral Tim Gallaudet stated that submarine witnesses told him of sonar data from a nuclear-powered ballistic-missile submarine. The reported contact had a Russian-torpedo-like speed/closing rate, slowed and followed in the submarine wake for minutes, then rapidly exited.",
+      "hard_boundary": "Gallaudet explicitly said he had no personal submersible-object experience; this is witness testimony about sonar data, not the raw track.",
+      "acoustic_value": "HIGHEST_PRIORITY_ARCHIVE_TARGET",
+      "raw_fields_missing": ["platform navigation", "sonar mode", "active/passive state", "waveform", "bearing", "range/TWTT", "Doppler", "CTD/SSP", "track points", "signal spectrum"]
+    },
+    {
+      "case_id": "WWII_DEEP_SCATTERING_LAYER_FALSE_BOTTOM",
+      "source_status": "RESOLVED_NATURAL_ACOUSTIC_PHENOMENON",
+      "date": "World_War_II_era",
+      "reported_observation": "Early sonar/echo-sounding operators observed an apparent second seafloor whose depth changed between day and night.",
+      "resolved_source": "Deep scattering layer of marine organisms; swim bladders and dense organism layers strongly reflect sound and undergo diel vertical migration.",
+      "acoustic_value": "MANDATORY_FALSE_STRUCTURE_CONTROL"
+    },
+    {
+      "case_id": "BIO_DUCK_1960S_TO_2014",
+      "source_status": "RESOLVED_BIOACOUSTIC_SOURCE",
+      "date": "first_named_by_submarine_personnel_in_1960s__source_resolved_2014",
+      "reported_observation": "Highly repetitive mechanical-sounding underwater pulse series recorded widely in the Southern Ocean.",
+      "measured_characteristics": {
+        "reported_band_hz": [50, 300],
+        "harmonics_to_hz": 1000,
+        "typical_series_interval_s": 3.1
+      },
+      "resolved_source": "Antarctic minke whale Balaenoptera bonaerensis, established with multi-sensor acoustic tags on whales.",
+      "acoustic_value": "MANDATORY_REPEATABLE_ENGINEERED_SOUND_LOOKALIKE_CONTROL"
+    },
+    {
+      "case_id": "SOVIET_QUACKERS",
+      "source_status": "MILITARY_MEMOIR_AND_SECONDARY_HISTORY__RAW_RECORDINGS_NOT_RECOVERED",
+      "date": "Cold_War_unspecified_multiple_accounts",
+      "reported_observation": "Later Soviet/Russian submarine recollections describe recurring quacking contacts, sometimes described as changing with submarine approach or active acoustic transmissions.",
+      "competing_military_interpretation": "A published naval recollection by Rear Admiral Vladlen Naumov interprets at least some 'quacker' episodes as active airborne radio-hydroacoustic sonobuoys used in ASW interaction with SOSUS and patrol aviation.",
+      "acoustic_value": "AMBIGUOUS_ACTIVE_SONAR_RESPONSE_CONTROL",
+      "hard_boundary": "No raw hydroacoustic recording, navigation solution or complete event denominator recovered in this pass."
+    }
+  ],
+  "shared_firewall": [
+    "MILITARY_OPERATION != TARGET_ACTIVATION",
+    "MORE_ACTIVE_SONAR_MEANS_MORE_DETECTION_OPPORTUNITY_AND_MORE_FALSE_CONTACTS",
+    "TESTIMONY != RAW_TRACK",
+    "REPEATABILITY != TECHNOLOGY",
+    "APPARENT_MOTION != PHYSICAL_TARGET_MOTION_UNTIL_PROPAGATION_AND_PLATFORM_GEOMETRY_ARE_SOLVED",
+    "PYRAMID_IDENTITY_NOT_ASSUMED"
+  ],
+  "next_artifact": "JANUS-ECHO-COUSTEAU-TRANSFORMED-ECHO-REVERSE-RUN-001-2026-08-20-v1.0"
+}
