@@ -1,0 +1,121 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+  "created_local": "2026-08-21T14:01:00+03:00",
+  "purpose": "Freeze a five-axis analytical feature space and event-sourced reasoning contract before running Cousteau deep analysis. Five-dimensional here means five orthogonal analysis axes, not five physical spacetime dimensions.",
+  "source_architecture": {
+    "HRAIN": "LEFT_HRAIN__STRUCTURAL_CONTEXT",
+    "INAIHR": "RIGHT_INAIHR__ASSOCIATIVE_CONTEXT",
+    "DEMIHEAD": "BIND_COMPARE_PRESERVE_DISAGREEMENT_WITHOUT_TRUTH_PROMOTION",
+    "TRANCEPTION": "HOMOLOG_RETRIEVAL_PLUS_DIRECTIONAL_READING",
+    "JANUS_REVERSE": "NEWEST_TO_OLDEST_ERROR_LOCALIZATION_THEN_FORWARD_REPLAY"
+  },
+  "dimensions": [
+    {
+      "id": "D0_SPACE",
+      "meaning": "geodesic location, distance, bearing, basin membership, localization uncertainty",
+      "authority": "MEASURED_OR_TRACEABLE_GEOMETRY_ONLY"
+    },
+    {
+      "id": "D1_TIME",
+      "meaning": "event time, recurrence, temporal ordering, precursor/follow-up structure, sensor epoch",
+      "authority": "TRACEABLE_EVENT_TIMES_ONLY"
+    },
+    {
+      "id": "D2_ACOUSTIC",
+      "meaning": "H0 117-121 Hz, H1 wavelength-equivalent 520-class, H2 fluid-loaded structural mode, source level, instrument response, path and frequency uncertainty",
+      "authority": "KEEP_H0_H1_H2_SEPARATE"
+    },
+    {
+      "id": "D3_REVERSE_CAUSAL",
+      "meaning": "forward/reverse consistency, source-versus-target separation, contradiction localization, back-forth replay, counterfactual ordinary explanations",
+      "authority": "ASSOCIATION_NE_CAUSATION"
+    },
+    {
+      "id": "D4_ASSOCIATIVE_PROVENANCE",
+      "meaning": "homolog retrieval, semantic analogy, provenance tier, structural-versus-associative disagreement, novelty and gap generation",
+      "authority": "ASSOCIATION_NE_EVIDENCE__PROVENANCE_REQUIRED"
+    }
+  ],
+  "direction_sequence": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "FORWARD_AGAIN",
+    "BACK_AGAIN"
+  ],
+  "event_sourced_json_contract": {
+    "principle": "A reasoning node may be emitted at any stage when a new contradiction, homolog, gap, control, blocker, or testable branch becomes necessary. Do not wait for the final report.",
+    "node_required_fields": [
+      "node_id",
+      "sequence",
+      "direction",
+      "trigger",
+      "parent_nodes",
+      "dimensions_touched",
+      "structural_context",
+      "associative_context",
+      "claim_class",
+      "evidence_status",
+      "counter_hypothesis",
+      "provenance",
+      "next_operator"
+    ],
+    "allowed_claim_classes": [
+      "FACT",
+      "DERIVATION",
+      "HYPOTHESIS",
+      "CONTROL",
+      "NEGATIVE",
+      "BLOCKED",
+      "CORRECTION",
+      "NEW_GATE"
+    ],
+    "emit_triggers": [
+      "NEW_VERIFIABLE_FACT",
+      "DIRECTIONAL_DISAGREEMENT",
+      "MODEL_LEAKAGE",
+      "CONTROL_MATCH",
+      "UNRESOLVED_GAP",
+      "DATA_BLOCKER",
+      "CLAIM_CEILING_CHANGE",
+      "NEW_TESTABLE_BRANCH"
+    ],
+    "mutation_rule": "Previously emitted nodes are immutable. Later nodes may supersede or correct them only by explicit edge.",
+    "truth_rule": "Neither HRain/iNaiHR agreement nor repeated association promotes a hypothesis to fact."
+  },
+  "deep_analysis_tests": [
+    "T5D_01_ALL_FIVE_AXES_PRESENT",
+    "T5D_02_SIX_DIRECTION_PASS_COMPLETE",
+    "T5D_03_INTERMEDIATE_JSON_NODES_EMITTED",
+    "T5D_04_DIRECTIONAL_DISAGREEMENT_PRESERVED",
+    "T5D_05_H0_H1_H2_NOT_MERGED",
+    "T5D_06_BLOCKED_DATA_STAYS_BLOCKED",
+    "T5D_07_NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+    "T5D_08_PROVENANCE_ATTACHED_TO_EVERY_FACTUAL_NODE",
+    "T5D_09_NEW_GATES_MUST_BE_TESTABLE",
+    "T5D_10_FINAL_SYNTHESIS_CANNOT_EXCEED_CLAIM_CEILING"
+  ],
+  "frozen_claim_ceiling": {
+    "underwater_pyramid_detected": false,
+    "unique_target_at_love_edem_anchor": false,
+    "119_hz_target_signal_verified": false,
+    "520_class_target_identity_verified": false,
+    "palomar_direct_same_instant_surface_line_of_sight": false,
+    "titanic_resonance_tier_calibration_complete": false
+  },
+  "hard_rules": [
+    "FIVE_D_IS_ANALYSIS_FEATURE_SPACE_NOT_PHYSICAL_DIMENSION_CLAIM",
+    "HRAIN_STRUCTURE_AND_INAIHR_ASSOCIATION_ARE_COMPLEMENTARY_NOT_INDEPENDENT_WITNESSES",
+    "BOTH_HEMISPHERES_AGREE_NE_TRUTH",
+    "ASSOCIATION_NE_EVIDENCE",
+    "KEEP_H0_H1_H2_SEPARATE",
+    "NO_RECENTERING",
+    "NO_SEMANTIC_PROMOTION_OF_BLOCKED_OR_NEGATIVE_RESULTS",
+    "EMIT_JSON_WHEN_REASONING_BRANCH_IS_BORN",
+    "PRESERVE_DIRECTIONAL_DISAGREEMENT",
+    "PRESERVE_PASS_FAIL_AMBIGUOUS_BLOCKED_CORRECTION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+}
