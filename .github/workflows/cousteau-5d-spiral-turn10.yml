@@ -1,0 +1,42 @@
+name: Cousteau 5D Spiral Turn 10
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-5d-spiral-turn10.yml"
+      - "workspace/cousteau_5d_spiral_turn10.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json"
+
+permissions:
+  contents: write
+
+jobs:
+  turn10:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python workspace/cousteau_5d_spiral_turn10.py
+      - run: cat data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0-SUMMARY.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-5d-turn10-${{ github.run_number }}
+          path: |
+            data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0.json
+            data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0-SUMMARY.json
+          retention-days: 90
+      - name: Freeze Turn 10
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0*.json
+          git commit -m "Cousteau: freeze 5D spiral Turn 10 ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
