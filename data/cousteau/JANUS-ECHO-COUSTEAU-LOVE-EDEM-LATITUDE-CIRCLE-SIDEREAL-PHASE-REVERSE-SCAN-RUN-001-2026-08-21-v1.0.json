@@ -1,0 +1,103 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-LOVE-EDEM-LATITUDE-CIRCLE-SIDEREAL-PHASE-REVERSE-SCAN-RUN-001-2026-08-21-v1.0",
+  "status": "RUN_COMPLETE",
+  "preregistration": {
+    "path": "data/cousteau/JANUS-ECHO-COUSTEAU-LOVE-EDEM-LATITUDE-CIRCLE-SIDEREAL-PHASE-REVERSE-SCAN-PREREG-2026-08-21-v1.0.json",
+    "status": "PREREGISTERED_BEFORE_SCAN"
+  },
+  "frozen_intrinsic_latitude_deg": -3.8654180644718967,
+  "legacy_longitude_deg_east": 3.854924373538978,
+  "sources": {
+    "pb2002": {
+      "url": "https://raw.githubusercontent.com/fraxen/tectonicplates/339b0c56563c118307b1f4542703047f5f698fae/GeoJSON/PB2002_boundaries.json",
+      "sha256": "42b3e0876a7e40f133e958ba7ab85f8851b5c693a046fbc3b138e7751863d92a",
+      "af_sa_features": [
+        {
+          "name": "AF-SA",
+          "source": "Mueller et al. [1987]",
+          "segments": 172
+        },
+        {
+          "name": "AF-SA",
+          "source": "by Peter Bird, October 2001",
+          "segments": 44
+        },
+        {
+          "name": "AF-SA",
+          "source": "Mueller et al. [1987]",
+          "segments": 39
+        }
+      ],
+      "segments": 255
+    },
+    "prior_turn_control": "data/cousteau/JANUS-ECHO-COUSTEAU-TURN5-PB2002-TECTONIC-CONTROL-2026-08-21-v1.0.json"
+  },
+  "primary_af_sa_scan": {
+    "coarse_step_deg": 0.25,
+    "refinement_step_deg": 0.01,
+    "full_longitude_trials_coarse": 1441,
+    "minimum_distance_km": 0.52,
+    "minimum_longitude_deg_east": -11.79,
+    "legacy_distance_km": 1664.013,
+    "legacy_distance_percentile_low_is_close": 0.146426,
+    "fraction_of_longitudes_within_km": {
+      "25": 0.001388,
+      "50": 0.002776,
+      "100": 0.005552,
+      "200": 0.011103,
+      "500": 0.058987
+    },
+    "distance_quantiles_km": {
+      "0": 4.799,
+      "0.01": 189.652,
+      "0.05": 399.818,
+      "0.1": 1025.529,
+      "0.25": 3384.147,
+      "0.5": 8001.316,
+      "0.75": 11538.693,
+      "0.9": 13203.688,
+      "0.95": 13434.182,
+      "0.99": 13484.078,
+      "1": 13486.046
+    },
+    "top_local_minima_coarse": [
+      {
+        "longitude_deg_east": -11.75,
+        "distance_km": 4.799
+      },
+      {
+        "longitude_deg_east": -15.5,
+        "distance_km": 263.943
+      },
+      {
+        "longitude_deg_east": -24.5,
+        "distance_km": 307.383
+      },
+      {
+        "longitude_deg_east": -30.0,
+        "distance_km": 518.558
+      }
+    ]
+  },
+  "secondary_blind_cluster_center_scan": {
+    "nearest_possible_distance_km_on_latitude_circle": 131.139,
+    "longitude_deg_east": -16.25,
+    "legacy_nearest_center_distance_km": 1675.4
+  },
+  "interpretation": {
+    "legacy_longitude_is_intrinsic": false,
+    "latitude_circle_intersects_or_approaches_ridge_somewhere": true,
+    "ridge_intersection_counts_as_target_evidence": false,
+    "previous_legacy_longitude_negative_tests_preserved": true,
+    "claim_ceiling": "COORDINATE_PROVENANCE_AND_GEOMETRIC_CONTROL_ONLY"
+  },
+  "hard_rules": [
+    "LATITUDE_REMAINS_FROZEN",
+    "LEGACY_LONGITUDE_REMAINS_RECORDED_AS_ORIGINAL_TEST_POINT",
+    "DO_NOT_SELECT_NEW_LONGITUDE_AS_TARGET_AFTER_SCAN",
+    "FULL_360_DEG_LOOK_ELSEWHERE_ACCOUNTED",
+    "RIDGE_INTERSECTION_IS_EXPECTED_GEOMETRY_NOT_TARGET_EVIDENCE",
+    "PREVIOUS_NEGATIVE_TESTS_REMAIN_VALID_AT_LEGACY_LONGITUDE",
+    "NO_ANCIENT_RELAY_OR_UNDERWATER_STRUCTURE_CLAIM_FROM_GEOMETRY"
+  ]
+}
