@@ -1,0 +1,100 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-011-2026-08-21-v1.0",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0",
+  "program": "OSIRIS_PYRAMID_SEARCH",
+  "search_node": "TOBI_SPERMAN__THE_SONAR_THAT_SEARCHES",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": ["D0_SPACE", "D1_TIME", "D2_ACOUSTIC", "D3_REVERSE_CAUSAL", "D4_ASSOCIATIVE_PROVENANCE"],
+  "phases": ["BACK", "FORWARD", "LEFT_HRAIN", "RIGHT_INAIHR", "ASCEND"],
+  "trigger": "CD169_TOBI02_DEVICE_LEVEL_INTRINSIC_LATITUDE_CROSSING_RESOLVED",
+  "turn": {
+    "turn": 11,
+    "height": 11,
+    "prior_radius": 43,
+    "radius": 48,
+    "prior_state_sha256": "c747664bf1d602fbec44694891f5d6c62bb59c844007d3f3bfba135caafbbc53",
+    "state_sha256": "8638aef14ec0b35b12e125c405c6bc2c0ef23de3639a28d80c468e2775220fe8",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "DEVICE_POSITION_OUTRANKS_SHIP_POSITION_FOR_TOBI_CROSSING",
+      "PLUME_NEGATIVE_IS_NOT_SEAFLOOR_NEGATIVE",
+      "TOBI02_INTRINSIC_CROSSING_IS_APPROX_FROM_PLOTTED_POSITIONS_UNTIL_RAW_NAV",
+      "KNOWN_TOBI_GEOMETRIC_ANOMALIES_REQUIRE_GROUNDTRUTH",
+      "ASCEND_REQUIRES_SONOGRAM_OR_NAV_RECOVERY_FOR_TARGET_INTERPRETATION"
+    ],
+    "scientific_delta": "ACTIVE_TOBI_DEVICE_TRACK_CROSSES_INTRINSIC_LATITUDE__PLUME_CHANNEL_NEGATIVE__SEAFLOOR_IMAGERY_GATE_OPEN__TARGET_EVIDENCE_NOT_INCREASED"
+  },
+  "nodes": [
+    {
+      "node_id": "S11N01",
+      "phase": "BACK",
+      "claim_class": "CORRECTION",
+      "structural_context": "Return from the preceding provenance and frequency gains to the historical search-sonar branch using new CD169 file-level science-log evidence. Ship and plotted TOBI positions are separate fields and tow lag must be preserved.",
+      "evidence_status": "DEVICE_VS_SHIP_COORDINATE_FIREWALL_RESOLVED"
+    },
+    {
+      "node_id": "S11N02",
+      "phase": "FORWARD",
+      "claim_class": "FACT",
+      "structural_context": "TOBI-02 was actively surveying while the vehicle crossed the intrinsic Love-Edem latitude. Interpolation between plotted vehicle positions at JD059 01:00 and 01:29 yields an approximate crossing at 2005-02-28T01:07:25Z, 3.865418S, 12.14244W.",
+      "evidence_status": "ACTIVE_SEARCH_INSTRUMENT_CROSSING_RESOLVED",
+      "payload": {
+        "crossing_coordinate_approx": [-3.8654180644718967, -12.142441475],
+        "crossing_utc_approx": "2005-02-28T01:07:25Z",
+        "bracketing_tobi_positions": [
+          {"utc":"2005-02-28T01:00:00Z","lat_deg":-3.869,"lon_deg":-12.145},
+          {"utc":"2005-02-28T01:29:00Z","lat_deg":-3.855,"lon_deg":-12.135}
+        ],
+        "precision": "LINEAR_INTERPOLATION_OF_PLOTTED_TOBI_POSITIONS__RAW_PING_NAVIGATION_PENDING"
+      }
+    },
+    {
+      "node_id": "S11N03",
+      "phase": "LEFT_HRAIN",
+      "claim_class": "NEGATIVE_SCOPE_LIMITED",
+      "structural_context": "Published CD169 TOBI/MAPR results report significant optical-backscatter plume signals only at two locations and both occurred in TOBI-01. The intrinsic crossing is in TOBI-02, so no significant water-column plume is reported at that crossing.",
+      "evidence_status": "WATER_COLUMN_PLUME_CHANNEL_NEGATIVE",
+      "payload": {
+        "scope": "OPTICAL_BACKSCATTER_ONLY",
+        "not_excluded": ["30_KHZ_SIDESCAN_TEXTURE", "PHASE_DIFFERENCE_BATHYMETRY", "CHIRP_SUB_BOTTOM", "MAGNETICS", "OFF_AXIS_OR_LOW_TEMPERATURE_SYSTEM", "NON_HYDROTHERMAL_STRUCTURE"]
+      }
+    },
+    {
+      "node_id": "S11N04",
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "CONTROL",
+      "structural_context": "CD169 itself supplies a library of unusual TOBI image features later checked with rocks, ABE imagery and hydrothermal sensors. Mexican's Hat, mottled and speckled terrain, collapse pits, mounds and young sheet flows become mandatory adversarial controls for any future geometric candidate.",
+      "evidence_status": "NATURAL_SONAR_FALSE_POSITIVE_LIBRARY_PROMOTED",
+      "payload": {
+        "controls": ["MEXICANS_HAT", "MOTTLED_VALLEY", "SPECKLED_AREA", "COLLAPSE_PITS", "PARSONS_NOSE", "YOUNG_SHEET_FLOWS"]
+      }
+    },
+    {
+      "node_id": "S11N05",
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 11 ascends because a real historical TOBI device track is now tied to the intrinsic latitude. Target evidence does not increase: the plume channel is negative and the seafloor sonogram window is still unresolved. The next admissible gain is recovery of the TOBI-02 sonar/nav window and adversarial comparison against the natural-control library.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_REAL_TOBI_CROSSING_AND_SENSOR_SPECIFIC_NEGATIVE",
+      "payload": {
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gate": "OSIRIS_PYRAMID_SEARCH__TOBI_SPERMAN_CD169_TOBI02_SONOGRAM_WINDOW_RECOVERY_V1"
+      }
+    }
+  ],
+  "provenance": {
+    "cd169_cruise_report": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+    "meta_corpus": "janus-meta-registry:data/JANUS-TOBI-SPERMAN-THE-SONAR-THAT-SEARCHES-PUBLIC-ARCHIVE-CORPUS-2026-08-21-v1.1.json"
+  },
+  "hard_rules": [
+    "TOBI_SPERMAN_IS_INTERNAL_CODENAME_NOT_CAUSAL_PROOF",
+    "APPARENT_COINCIDENCE_IS_NOT_DISMISSED",
+    "INSUFFICIENT_DATA_MEANS_RELATION_UNRESOLVED",
+    "DEVICE_POSITION_OUTRANKS_SHIP_POSITION_FOR_TOBI_CROSSING",
+    "PLUME_NEGATIVE_IS_NOT_SEAFLOOR_NEGATIVE",
+    "KNOWN_TOBI_ANOMALIES_ARE_CONTROLS_UNTIL_GROUNDTRUTH",
+    "NO_RETARGETING_AFTER_LOOKING",
+    "NO_OSIRIS_PYRAMID_DETECTED_YET"
+  ],
+  "status": "TURN_11_ASCENDED__TOBI02_INTRINSIC_CROSSING_RESOLVED__SONOGRAM_RECOVERY_OPEN"
+}
