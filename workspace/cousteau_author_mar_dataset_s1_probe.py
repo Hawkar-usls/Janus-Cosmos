@@ -17,7 +17,8 @@ URLS=[
 def sha(b:bytes): return hashlib.sha256(b).hexdigest()
 
 def main():
- s=requests.Session(); s.headers['User-Agent']='Janus-Echo-Cousteau/1.0 independent MAR Data Set S1 replication'
+ s=requests.Session(); s.headers['User-Agent']='Mozilla/5.0 Janus-Echo-Cousteau/1.0 independent MAR Data Set S1 replication'
+ s.headers['Referer']='https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022JB024008'
  rep={'artifact_id':'JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0','created_utc':datetime.now(timezone.utc).isoformat(),'paper_doi':DOI,'expected_filename':FILENAME,'responses':[],'status':'BLOCKED'}
  for u in URLS:
   try:
