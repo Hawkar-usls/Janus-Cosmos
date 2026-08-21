@@ -1,0 +1,242 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T15:12:25.298178+00:00",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "phases": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "ASCEND"
+  ],
+  "trigger": "MGDS_FILE_LEVEL_PREPUBLICATION_PROVENANCE_RECOVERY",
+  "turn": {
+    "turn": 10,
+    "height": 10,
+    "prior_radius": 40,
+    "radius": 43,
+    "prior_state_sha256": "f347025527022673cf9332dad6e67faeea0d9c3275b6cd5f2aa9b63e2c38ff00",
+    "state_sha256": "c747664bf1d602fbec44694891f5d6c62bb59c844007d3f3bfba135caafbbc53",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "PREPUBLICATION_MGDS_RELEASE_DISFAVORS_POSTPUBLICATION_DRIFT_EXPLANATION",
+      "MISSING_900_LEADING_THREE_PICK_EXPLANATION_MAY_ROUTE_SEARCH_BUT_NOT_CLOSE_GATE",
+      "HISTORICAL_CHECKSUM_OR_EXPLICIT_PRIMARY_SOURCE_REQUIRED_TO_CLOSE_COUNT_GATE"
+    ],
+    "scientific_delta": "MGDS_PREPUBLICATION_RELEASE_PROVENANCE_RECOVERED__POSTPUBLICATION_DRIFT_DISFAVORED__MISSING900_BOUNDARY_NARROWED_NOT_SOLVED__TARGET_EVIDENCE_NOT_INCREASED"
+  },
+  "nodes": [
+    {
+      "node_id": "S10N01",
+      "turn": 10,
+      "phase": "BACK",
+      "claim_class": "FACT",
+      "structural_context": "Return to the 6843-versus-5943 mismatch after recovering MGDS file-level XML provenance.",
+      "evidence_status": "FILE_PROVENANCE_ENTERED",
+      "parents": [],
+      "payload": {
+        "dataset_created": "2021-12-21",
+        "release_date": "2022-05-31",
+        "file_uid": 2504732,
+        "file_name": "EA_CTBTO_catalog_all.dat"
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0.json",
+          "sha256": "deb4bddc8f6809bf7f811002337f0398c97e0bb93601da4f0e220210e039ffb8"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+          "sha256": "fbd15e0ea7bf80ffc0f60c5b8658acb6b558907cb197beb6992b2fe25af5b289"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json",
+          "sha256": "94b9b0dbb36d0913920109dfc84a43b7a9ab24dd063cb4223b253b5d962ea27d"
+        }
+      ],
+      "node_sha256": "acf3de8a9acdba0e86e4e410cf576fba866d1d07498238ab2a3a9c6623da46ad"
+    },
+    {
+      "node_id": "S10N02",
+      "turn": 10,
+      "phase": "FORWARD",
+      "claim_class": "CORRECTION",
+      "structural_context": "MGDS release on 2022-05-31 precedes paper acceptance on 2022-06-16 and publication on 2022-06-26. Current XML records one current file whose data-file size matches the currently downloaded gzip member.",
+      "evidence_status": "POSTPUBLICATION_DRIFT_DISFAVORED",
+      "parents": [
+        "S10N01"
+      ],
+      "payload": {
+        "release_before_acceptance": true,
+        "size_match": true
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0.json",
+          "sha256": "deb4bddc8f6809bf7f811002337f0398c97e0bb93601da4f0e220210e039ffb8"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+          "sha256": "fbd15e0ea7bf80ffc0f60c5b8658acb6b558907cb197beb6992b2fe25af5b289"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json",
+          "sha256": "94b9b0dbb36d0913920109dfc84a43b7a9ab24dd063cb4223b253b5d962ea27d"
+        }
+      ],
+      "node_sha256": "0012d9a581d477444d87c0638564228fb0a3a35c7200531ce0a70f03d94eb215"
+    },
+    {
+      "node_id": "S10N03",
+      "turn": 10,
+      "phase": "LEFT_HRAIN",
+      "claim_class": "HYPOTHESIS",
+      "structural_context": "The structural leading explanation remains the three-pick boundary: paper admits origins from three or more arrival picks, while the deposit contains only 4-8 recording-hydrophone rows and is short by exactly 900.",
+      "evidence_status": "LEADING_EXPLANATION_NOT_PROVEN",
+      "parents": [
+        "S10N02"
+      ],
+      "payload": {
+        "h1_status": "LEADING_STRONGLY_COMPATIBLE_NOT_PROVEN",
+        "difference": 900
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0.json",
+          "sha256": "deb4bddc8f6809bf7f811002337f0398c97e0bb93601da4f0e220210e039ffb8"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+          "sha256": "fbd15e0ea7bf80ffc0f60c5b8658acb6b558907cb197beb6992b2fe25af5b289"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json",
+          "sha256": "94b9b0dbb36d0913920109dfc84a43b7a9ab24dd063cb4223b253b5d962ea27d"
+        }
+      ],
+      "node_sha256": "91f9e3b442dda16112c719b0a6bb1294976c9d68dc641e7377559993d858a310"
+    },
+    {
+      "node_id": "S10N04",
+      "turn": 10,
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "NEW_GATE",
+      "structural_context": "The attractive exact-900 explanation may guide source recovery, but arrival picks and recording hydrophones are not silently equated. Closure requires a historical checksum/file copy or explicit repository/author statement.",
+      "evidence_status": "PROVENANCE_CLOSURE_RULE_FROZEN",
+      "parents": [
+        "S10N03"
+      ],
+      "payload": {
+        "generated_gate": "COUSTEAU_EA_TPHASE_MISSING_900_EXPLICIT_SOURCE_OR_HISTORICAL_CHECKSUM_RECOVERY_V1"
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0.json",
+          "sha256": "deb4bddc8f6809bf7f811002337f0398c97e0bb93601da4f0e220210e039ffb8"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+          "sha256": "fbd15e0ea7bf80ffc0f60c5b8658acb6b558907cb197beb6992b2fe25af5b289"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json",
+          "sha256": "94b9b0dbb36d0913920109dfc84a43b7a9ab24dd063cb4223b253b5d962ea27d"
+        }
+      ],
+      "node_sha256": "4e0a9ca5bf3704a334d03c1bf62dc0dcc95b8e47a00b02e476f20e8cbea6d49f"
+    },
+    {
+      "node_id": "S10N05",
+      "turn": 10,
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 10 ascends because provenance evidence changed hypothesis weights without creating target evidence. Post-publication drift is disfavored; the missing-900 question is narrower but remains open.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_PROVENANCE_RESOLUTION_GAIN",
+      "parents": [
+        "S10N04"
+      ],
+      "payload": {
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gates": [
+          "COUSTEAU_EA_TPHASE_MISSING_900_EXPLICIT_SOURCE_OR_HISTORICAL_CHECKSUM_RECOVERY_V1",
+          "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1",
+          "COUSTEAU_HA10_PREDECLARED_RESPONSE_CORRECTED_CONFIRMATORY_PROTOCOL_V1"
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0.json",
+          "sha256": "deb4bddc8f6809bf7f811002337f0398c97e0bb93601da4f0e220210e039ffb8"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+          "sha256": "fbd15e0ea7bf80ffc0f60c5b8658acb6b558907cb197beb6992b2fe25af5b289"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-FILE-2504732-PROVENANCE-DETAIL-PROBE-2026-08-21-v1.0.json",
+          "sha256": "94b9b0dbb36d0913920109dfc84a43b7a9ab24dd063cb4223b253b5d962ea27d"
+        }
+      ],
+      "node_sha256": "206c708242938cafbe2b2c0c4ed042967da706bdc32085041ff32f79aba35826"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T10_01_PARENT_T9_ASCENDED",
+      "pass": true
+    },
+    {
+      "id": "T10_02_RELEASE_PRECEDES_ACCEPTANCE",
+      "pass": true
+    },
+    {
+      "id": "T10_03_CURRENT_FILE_SIZE_MATCHES_DOWNLOAD",
+      "pass": true
+    },
+    {
+      "id": "T10_04_COUNT_DIFFERENCE_900",
+      "pass": true
+    },
+    {
+      "id": "T10_05_NO_3_HYDROPHONE_ROWS",
+      "pass": true
+    },
+    {
+      "id": "T10_06_H1_LEADING_NOT_PROVEN",
+      "pass": true
+    },
+    {
+      "id": "T10_07_H2_DISFAVORED_NOT_EXCLUDED",
+      "pass": true
+    },
+    {
+      "id": "T10_08_NO_SYNTHETIC_ROWS",
+      "pass": true
+    },
+    {
+      "id": "T10_09_RADIUS_ASCENDS",
+      "pass": true
+    },
+    {
+      "id": "T10_10_TARGET_NOT_PROMOTED",
+      "pass": true
+    }
+  ],
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_10",
+  "hard_rules": [
+    "DO_NOT_SYNTHESIZE_MISSING_ROWS",
+    "HYPOTHESIS_MAY_ROUTE_SEARCH_BUT_NOT_CLOSE_GATE",
+    "METADATA_UPDATE_NOT_FILE_REPLACEMENT_PROOF",
+    "TARGET_IDENTITY_UNCONFIRMED"
+  ],
+  "status": "TURN_10_ASCENDED"
+}
