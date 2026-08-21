@@ -1,0 +1,48 @@
+{
+  "node_id": "N001",
+  "sequence": 1,
+  "created_utc": "2026-08-21T11:07:06.367342+00:00",
+  "direction": "BACK",
+  "trigger": "NEW_VERIFIABLE_FACT",
+  "parent_nodes": [],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "The five-axis schema and six-direction order were frozen before this run; the anchor and claim ceiling are inherited unchanged.",
+  "associative_context": "HRain structural context and iNaiHR associative context are paired views, not independent witnesses.",
+  "claim_class": "FACT",
+  "evidence_status": "PREREG_VERIFIED",
+  "counter_hypothesis": "A richer feature space could create more opportunities for pattern overfitting; therefore every associative branch remains subordinate to provenance and falsification.",
+  "provenance": [
+    {
+      "note": "frozen preregistration",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+      "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+    }
+  ],
+  "next_operator": "BACK_FROM_LATEST_BLOCKERS",
+  "payload": {
+    "dimensions": [
+      "D0_SPACE",
+      "D1_TIME",
+      "D2_ACOUSTIC",
+      "D3_REVERSE_CAUSAL",
+      "D4_ASSOCIATIVE_PROVENANCE"
+    ],
+    "directions": [
+      "BACK",
+      "FORWARD",
+      "LEFT_HRAIN",
+      "RIGHT_INAIHR",
+      "FORWARD_AGAIN",
+      "BACK_AGAIN"
+    ]
+  },
+  "node_sha256": "641a52606036c4ba7e5f9dfec3659ebc10af646a0589a898ee098b747b6ae480"
+}

@@ -1,0 +1,50 @@
+{
+  "node_id": "N007",
+  "sequence": 7,
+  "created_utc": "2026-08-21T11:07:06.368550+00:00",
+  "direction": "RIGHT_INAIHR",
+  "trigger": "NEW_TESTABLE_BRANCH",
+  "parent_nodes": [
+    "N006"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "The structural side exposes three unresolved classes: catalog acquisition, local/full acoustic fingerprint, and resonance-tier calibration.",
+  "associative_context": "Homolog retrieval links these gaps to known false-positive classes: iceberg harmonics, biological calls, engineered resonators, seismic illuminators and natural geoacoustic structures. The useful abstraction is not 'they match'; it is 'each apparent match names the control that must beat it'.",
+  "claim_class": "NEW_GATE",
+  "evidence_status": "ASSOCIATIVE_BRANCH_GROUNDED_IN_EXISTING_CONTROLS",
+  "counter_hypothesis": "Associative similarity alone has no evidentiary weight and may increase false discoveries if it is allowed to tune thresholds after seeing the anchor.",
+  "provenance": [
+    {
+      "note": "control homologs",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1",
+      "status": "CORRECTION_FROZEN__EXACT_FREQUENCY_RUN_001_V1_1",
+      "aggregate_verdict": "NO_VERIFIED_520_408163_TARGET_HIT__NOMINAL_520_CONTROLS_EXIST__EXACTNESS_REQUIRES_UNCERTAINTY_AWARE_SCORING__117_121_BRANCH_REOPENED"
+    },
+    {
+      "note": "manifold controls",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_RUN_001",
+      "status": "RUN_001_FROZEN__H1_MANIFOLD_EXECUTED__NON_SPECIFIC",
+      "aggregate_verdict": "H1_MANIFOLD_MATHEMATICALLY_VALID_AS_A_MODEL_BRANCH__FREQUENCY_MEMBERSHIP_NON_SPECIFIC__NO_TARGET_EVIDENCE_GAIN"
+    },
+    {
+      "note": "iNaiHR boundary",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+      "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+    }
+  ],
+  "next_operator": "DEMIHEAD_PRESERVE_DISAGREEMENT",
+  "payload": {
+    "generated_gate": "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1",
+    "gate_question": "Can any future candidate outperform natural, biological, engineered and illuminator controls simultaneously across all populated dimensions without post-reveal retuning?"
+  },
+  "node_sha256": "069ad8f4f22bde025c7468eac7d41e6eaf47f3bb7dc77f0716f55023884886bd"
+}

@@ -1,0 +1,55 @@
+{
+  "node_id": "N010",
+  "sequence": 10,
+  "created_utc": "2026-08-21T11:07:06.369130+00:00",
+  "direction": "BACK_AGAIN",
+  "trigger": "CLAIM_CEILING_CHANGE",
+  "parent_nodes": [
+    "N009"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "Back-again audit checks that no enriched graph edge reopens closed negatives or promotes blocked tiers. Palomar direct surface line-of-sight remains negative; Titanic resonance-tier calibration remains incomplete; no unique underwater target is admitted.",
+  "associative_context": "The deeper graph produced better routing and more explicit controls, not stronger target identity evidence.",
+  "claim_class": "NEGATIVE",
+  "evidence_status": "CLAIM_CEILING_PRESERVED",
+  "counter_hypothesis": "If later raw data populate currently blocked dimensions, a new run may supersede this state by explicit evidence; this run cannot anticipate that result.",
+  "provenance": [
+    {
+      "note": "closed Palomar channel if available",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-FROZEN-POINT-REAL-DATA-AND-PALOMAR-SKY-CROSSCHECK-2026-08-20-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-FROZEN-POINT-REAL-DATA-AND-PALOMAR-SKY-CROSSCHECK-2026-08-20-v1.0",
+      "status": "REAL_OCEAN_DATA_ACQUISITION_OPEN__PALOMAR_VISIBILITY_CHECK_PASSED__SIMULTANEOUS_PALOMAR_GEOMETRY_BLOCKED_ON_EXACT_PLATE_TIME"
+    },
+    {
+      "note": "Titanic calibration state if available",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-TITANIC-KNOWN-TARGET-CALIBRATION-2026-08-20-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-TITANIC-KNOWN-TARGET-CALIBRATION-2026-08-20-v1.0",
+      "status": "TITANIC_KNOWN_TARGET_CALIBRATION_BENCHMARK_FROZEN__DIRECT_RESONANCE_DATA_GATE_OPEN"
+    },
+    {
+      "note": "frozen claim ceiling",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+      "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+    }
+  ],
+  "next_operator": "FREEZE_RUN_AND_REPLAY_ONLY_WHEN_NEW_DATA_ARRIVE",
+  "payload": {
+    "frozen_claim_ceiling": {
+      "underwater_pyramid_detected": false,
+      "unique_target_at_love_edem_anchor": false,
+      "119_hz_target_signal_verified": false,
+      "520_class_target_identity_verified": false,
+      "palomar_direct_same_instant_surface_line_of_sight": false,
+      "titanic_resonance_tier_calibration_complete": false
+    }
+  },
+  "node_sha256": "59969f545cabbab299a1077aa03f562e80c0e6355b3c7a448eda0b7e0a99a2ab"
+}

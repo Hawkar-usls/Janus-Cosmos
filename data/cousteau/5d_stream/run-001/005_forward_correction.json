@@ -1,0 +1,40 @@
+{
+  "node_id": "N005",
+  "sequence": 5,
+  "created_utc": "2026-08-21T11:07:06.368046+00:00",
+  "direction": "FORWARD",
+  "trigger": "MODEL_LEAKAGE",
+  "parent_nodes": [
+    "N004"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL"
+  ],
+  "structural_context": "Forward replay keeps H0, H1 and H2 separated: 119 Hz is source-frequency branch; 520-class is wavelength-equivalent branch; wet structural resonance has no simple speed ratio.",
+  "associative_context": "The exact-frequency corpus state (NO_VERIFIED_520_408163_TARGET_HIT__NOMINAL_520_CONTROLS_EXIST__EXACTNESS_REQUIRES_UNCERTAINTY_AWARE_SCORING__117_121_BRANCH_REOPENED) increases control pressure instead of target confidence.",
+  "claim_class": "CORRECTION",
+  "evidence_status": "HYPOTHESES_SEPARATED_FORWARD_REPLAY_PASS",
+  "counter_hypothesis": "Collapsing 119 and 520 into one key would manufacture agreement between physically different hypotheses.",
+  "provenance": [
+    {
+      "note": "exact-frequency audit",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1",
+      "status": "CORRECTION_FROZEN__EXACT_FREQUENCY_RUN_001_V1_1",
+      "aggregate_verdict": "NO_VERIFIED_520_408163_TARGET_HIT__NOMINAL_520_CONTROLS_EXIST__EXACTNESS_REQUIRES_UNCERTAINTY_AWARE_SCORING__117_121_BRANCH_REOPENED"
+    },
+    {
+      "note": "tri-branch correction",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_119HZ_WAVEFORM_ACCESS_AND_TRIBRANCH_FINGERPRINT_RUN_001",
+      "status": "RUN_001_FROZEN__H0_SCAN_BLOCKED_ON_WAVEFORMS__H1_NO_FULL_FINGERPRINT__H2_BLOCKED",
+      "aggregate_verdict": "CORRECTED_TRIBRANCH_GATE_EXECUTED__119HZ_IS_RECORDABLE_BUT_RAW_SPECTRAL_SCAN_BLOCKED__520_CLASS_HAS_CONTROL_MATCHES_BUT_NO_FULL_FIELD_FINGERPRINT__H2_BLOCKED"
+    }
+  ],
+  "next_operator": "LEFT_HRAIN_STRUCTURE_PASS",
+  "payload": {},
+  "node_sha256": "99645d71f2f7c81de562149eda8ccceea2ef3d3b56a9a69e6322b4bb1d3689b4"
+}

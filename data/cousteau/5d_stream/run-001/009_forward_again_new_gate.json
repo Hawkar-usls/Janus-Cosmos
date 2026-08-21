@@ -1,0 +1,65 @@
+{
+  "node_id": "N009",
+  "sequence": 9,
+  "created_utc": "2026-08-21T11:07:06.368920+00:00",
+  "direction": "FORWARD_AGAIN",
+  "trigger": "NEW_TESTABLE_BRANCH",
+  "parent_nodes": [
+    "N008"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "Forward-again synthesis retains only branches with an executable next observation: MGDS catalog prebind/replay, H0 waveform acquisition, H1 local-CTD conditioning, H2 geometry/material/complex-return modeling, Titanic resonance-tier calibration.",
+  "associative_context": "The five axes can interact through edges, but missing data in one axis is not imputed from another. An associative clue may route the next measurement; it cannot fill the measurement.",
+  "claim_class": "NEW_GATE",
+  "evidence_status": "TESTABLE_BRANCH_SET_FROZEN",
+  "counter_hypothesis": "A broad deep-analysis graph may generate endless branches; pruning criterion is executable falsifiability plus provenance, not narrative attractiveness.",
+  "provenance": [
+    {
+      "note": "testability contract",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+      "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+    },
+    {
+      "note": "",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_119HZ_WAVEFORM_ACCESS_AND_TRIBRANCH_FINGERPRINT_RUN_001",
+      "status": "RUN_001_FROZEN__H0_SCAN_BLOCKED_ON_WAVEFORMS__H1_NO_FULL_FINGERPRINT__H2_BLOCKED",
+      "aggregate_verdict": "CORRECTED_TRIBRANCH_GATE_EXECUTED__119HZ_IS_RECORDABLE_BUT_RAW_SPECTRAL_SCAN_BLOCKED__520_CLASS_HAS_CONTROL_MATCHES_BUT_NO_FULL_FIELD_FINGERPRINT__H2_BLOCKED"
+    },
+    {
+      "note": "",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_RUN_001",
+      "status": "RUN_001_FROZEN__H1_MANIFOLD_EXECUTED__NON_SPECIFIC",
+      "aggregate_verdict": "H1_MANIFOLD_MATHEMATICALLY_VALID_AS_A_MODEL_BRANCH__FREQUENCY_MEMBERSHIP_NON_SPECIFIC__NO_TARGET_EVIDENCE_GAIN"
+    },
+    {
+      "note": "",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-001-2026-08-21-v1.0-STATUS.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-001-2026-08-21-v1.0",
+      "status": "BLOCKED_DATA_ACQUISITION_OR_PARSE"
+    }
+  ],
+  "next_operator": "BACK_AGAIN_CLAIM_CEILING_AUDIT",
+  "payload": {
+    "surviving_gates": [
+      "COUSTEAU_MGDS_AUTHORITATIVE_DATASET_ID_PREBIND_REPLAY_V1",
+      "COUSTEAU_VDEC_OR_EQUIVALENT_119HZ_WAVEFORM_ACQUISITION_PREP_V1",
+      "COUSTEAU_H1_LOCAL_CTD_CONDITIONED_FINGERPRINT_TEST_V1",
+      "COUSTEAU_FLUID_LOADED_STRUCTURAL_FORWARD_MODEL_V1",
+      "COUSTEAU_TITANIC_COMPLEX_RETURN_AND_PHASE_CALIBRATION_ACQUISITION_V1",
+      "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+    ]
+  },
+  "node_sha256": "f86b269110b48c707da434da4c514d2c5f3026f7e8678b08e49221bcb90a1d73"
+}

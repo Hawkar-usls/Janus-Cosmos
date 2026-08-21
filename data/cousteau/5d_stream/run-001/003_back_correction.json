@@ -1,0 +1,35 @@
+{
+  "node_id": "N003",
+  "sequence": 3,
+  "created_utc": "2026-08-21T11:07:06.367730+00:00",
+  "direction": "BACK",
+  "trigger": "DIRECTIONAL_DISAGREEMENT",
+  "parent_nodes": [
+    "N002"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "119-Hz-capable recording existence is UNKNOWN, while the exact 119-Hz spectral scan is UNKNOWN.",
+  "associative_context": "This is a useful asymmetry: observability and detection are different layers. The missing waveform cannot be replaced by catalog-level association.",
+  "claim_class": "CORRECTION",
+  "evidence_status": "H0_RECORDABLE_BUT_NOT_SPECTRALLY_TESTED",
+  "counter_hypothesis": "A 119-Hz feature may or may not exist in raw waveforms; current public catalog products cannot decide it.",
+  "provenance": [
+    {
+      "note": "tri-branch H0 state",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_119HZ_WAVEFORM_ACCESS_AND_TRIBRANCH_FINGERPRINT_RUN_001",
+      "status": "RUN_001_FROZEN__H0_SCAN_BLOCKED_ON_WAVEFORMS__H1_NO_FULL_FINGERPRINT__H2_BLOCKED",
+      "aggregate_verdict": "CORRECTED_TRIBRANCH_GATE_EXECUTED__119HZ_IS_RECORDABLE_BUT_RAW_SPECTRAL_SCAN_BLOCKED__520_CLASS_HAS_CONTROL_MATCHES_BUT_NO_FULL_FIELD_FINGERPRINT__H2_BLOCKED"
+    }
+  ],
+  "next_operator": "KEEP_H0_OPEN_WITH_WAVEFORM_GATE",
+  "payload": {},
+  "node_sha256": "61ae92139095b1b17bed0ceedf790375da71d62ff51ca2b5661da3bd71d0d045"
+}

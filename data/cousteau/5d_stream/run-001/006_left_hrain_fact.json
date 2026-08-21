@@ -1,0 +1,53 @@
+{
+  "node_id": "N006",
+  "sequence": 6,
+  "created_utc": "2026-08-21T11:07:06.368245+00:00",
+  "direction": "LEFT_HRAIN",
+  "trigger": "NEW_VERIFIABLE_FACT",
+  "parent_nodes": [
+    "N005"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "HRain-side structural map separates exact/local, basin-wide controls, sensor capability, acquisition blockers, calibration tiers, and closed negative channels without merging them.",
+  "associative_context": "Structure says where evidence lives and what is missing; it deliberately does not infer a hidden target from graph topology.",
+  "claim_class": "FACT",
+  "evidence_status": "STRUCTURAL_CONTEXT_BUILT",
+  "counter_hypothesis": "A graph that merely connects many Cousteau artifacts can look dense even if all edges are bookkeeping rather than physical relations.",
+  "provenance": [
+    {
+      "note": "Atlantic-wide run",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-ATLANTIC-WIDE-TEST-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-ATLANTIC-WIDE-TEST-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_ATLANTIC_WIDE_TEST_RUN_001",
+      "status": "ATLANTIC_WIDE_TEST_RUN_001_EXECUTED__CONTROL_CORPUS_PASS__ANCHOR_CONVERGENCE_FAIL__RESONANCE_SPECIFICITY_FAIL__TARGET_IDENTITY_BLOCKED",
+      "aggregate_verdict": {
+        "code": "ATLANTIC_CONTROL_CORPUS_VALIDATED__ANCHOR_SPECIFICITY_NOT_ESTABLISHED__SINGLE_FREQUENCY_REJECTED__TRANSFORMED_ECHO_IDENTITY_BLOCKED_ON_COMPLEX_DATA",
+        "plain_meaning": "Expanding to the whole Atlantic gives Cousteau many real measurements and strong controls, but it does not currently reveal a unique anomaly centered on LOVE-EDEM. The strongest scientific gain is a harder false-positive firewall and several real datasets for geometry/propagation testing.",
+        "evidence_direction": "CONTROL_STRENGTH_INCREASED__TARGET_EVIDENCE_UNCHANGED",
+        "semantic_status": "UNCONFIRMED"
+      }
+    },
+    {
+      "note": "HRain binding",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-PREREG-2026-08-21-v1.0",
+      "status": "PREREG_FROZEN__READY_FOR_5D_DEEP_ANALYSIS_RUN_001"
+    }
+  ],
+  "next_operator": "RIGHT_INAIHR_HOMOLOG_PASS",
+  "payload": {
+    "atlantic_verdict": {
+      "code": "ATLANTIC_CONTROL_CORPUS_VALIDATED__ANCHOR_SPECIFICITY_NOT_ESTABLISHED__SINGLE_FREQUENCY_REJECTED__TRANSFORMED_ECHO_IDENTITY_BLOCKED_ON_COMPLEX_DATA",
+      "plain_meaning": "Expanding to the whole Atlantic gives Cousteau many real measurements and strong controls, but it does not currently reveal a unique anomaly centered on LOVE-EDEM. The strongest scientific gain is a harder false-positive firewall and several real datasets for geometry/propagation testing.",
+      "evidence_direction": "CONTROL_STRENGTH_INCREASED__TARGET_EVIDENCE_UNCHANGED",
+      "semantic_status": "UNCONFIRMED"
+    }
+  },
+  "node_sha256": "67bde4d632c79a2aab06e716bdd8a243475d6ff3cd8f5eb45f8fa006ac9937fe"
+}

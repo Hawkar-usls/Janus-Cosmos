@@ -1,0 +1,36 @@
+{
+  "node_id": "N004",
+  "sequence": 4,
+  "created_utc": "2026-08-21T11:07:06.367873+00:00",
+  "direction": "BACK",
+  "trigger": "CONTROL_MATCH",
+  "parent_nodes": [
+    "N003"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "H1 wavelength-manifold run verdict: H1_MANIFOLD_MATHEMATICALLY_VALID_AS_A_MODEL_BRANCH__FREQUENCY_MEMBERSHIP_NON_SPECIFIC__NO_TARGET_EVIDENCE_GAIN.",
+  "associative_context": "Natural, engineered, and biological controls can occupy the same wavelength-equivalent manifold, so manifold membership is a retrieval cue, not identity evidence.",
+  "claim_class": "CONTROL",
+  "evidence_status": "H1_FREQUENCY_ONLY_NON_SPECIFIC",
+  "counter_hypothesis": "A real target could still have a compatible H1 frequency, but it must add local CTD conditioning plus modal/phase/ringdown features that controls fail.",
+  "provenance": [
+    {
+      "note": "H1 manifold run",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-WAVELENGTH-EQUIVALENT-MANIFOLD-TEST-RUN-001-2026-08-21-v1.0",
+      "run_id": "COUSTEAU_WAVELENGTH_EQUIVALENT_MANIFOLD_TEST_RUN_001",
+      "status": "RUN_001_FROZEN__H1_MANIFOLD_EXECUTED__NON_SPECIFIC",
+      "aggregate_verdict": "H1_MANIFOLD_MATHEMATICALLY_VALID_AS_A_MODEL_BRANCH__FREQUENCY_MEMBERSHIP_NON_SPECIFIC__NO_TARGET_EVIDENCE_GAIN"
+    }
+  ],
+  "next_operator": "DEMAND_LOCAL_CTD_AND_FULL_FINGERPRINT",
+  "payload": {
+    "control_results": {}
+  },
+  "node_sha256": "1b7637a555b9f4cfb0988d884878bf3d2f4c81090e94f2d8e4a86d96b232f3ff"
+}

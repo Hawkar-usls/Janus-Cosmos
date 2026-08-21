@@ -1,0 +1,35 @@
+{
+  "node_id": "N002",
+  "sequence": 2,
+  "created_utc": "2026-08-21T11:07:06.367577+00:00",
+  "direction": "BACK",
+  "trigger": "DATA_BLOCKER",
+  "parent_nodes": [
+    "N001"
+  ],
+  "supersedes": [],
+  "dimensions_touched": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "structural_context": "The latest automated T-phase cluster attempt reports BLOCKED_DATA_ACQUISITION_OR_PARSE; therefore no event coordinates or time structure from that run may be used as if parsed.",
+  "associative_context": "The public-catalog lead still exists in prior receipts, so the contradiction is acquisition-path failure versus dataset existence, not evidence that the catalog itself is absent.",
+  "claim_class": "BLOCKED",
+  "evidence_status": "BLOCKED_DATA_ACQUISITION_OR_PARSE",
+  "counter_hypothesis": "The failed downloader may be using the wrong MGDS discovery route; a direct dataset-identifier/metadata download route could resolve it without altering clustering parameters.",
+  "provenance": [
+    {
+      "note": "actual run status",
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-001-2026-08-21-v1.0-STATUS.json",
+      "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-001-2026-08-21-v1.0",
+      "status": "BLOCKED_DATA_ACQUISITION_OR_PARSE"
+    }
+  ],
+  "next_operator": "LOCALIZE_ACQUISITION_FAILURE_BEFORE_CLUSTERING",
+  "payload": {
+    "blind_cluster_status": "BLOCKED_DATA_ACQUISITION_OR_PARSE"
+  },
+  "node_sha256": "2821ce97dde44d4fa5966728c3b834487eba69365b60d9713a0b046b508897dc"
+}
