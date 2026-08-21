@@ -1,0 +1,3076 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6",
+  "research_branch": "Janus-Echo-Кусто",
+  "started_at_utc": "2026-08-21T13:26:45.278598+00:00",
+  "completed_at_utc": "2026-08-21T13:26:48.095131+00:00",
+  "source": {
+    "doi": "10.26022/IEDA/330497",
+    "dataset": "EA_Hydroacoustics",
+    "data_set_uid": 30497,
+    "file_uid": "2504732",
+    "archive_sha256": "e102dca19128786dd043375fa9a82fd5ec18a326c7be7021c477be6cd3a521c9",
+    "archive_bytes": 138752,
+    "member_name": "MGDS_Download/EA_Hydroacoustics/EA_CTBTO_catalog_all.dat.gz",
+    "member_gzip_sha256": "06ae7ee8c49b32566757d0760d6d6695e03c7a394948b2cd5759836a96410b5d",
+    "catalog_ascii_sha256": "4eea7ca55456a271df79ad165d76dc6c77ad3752705b46ad031468bb00232558",
+    "catalog_ascii_bytes": 342121,
+    "raw_committed": false,
+    "parse": {
+      "parser": "EXACT_EA_CTBTO_EIGHT_FIELD_WHITESPACE_V1",
+      "row_regex": "^\\s*(\\d{14})\\s+(\\d+)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s+([-+]?\\d+(?:\\.\\d+)?)\\s*$",
+      "data_rows": 5943,
+      "paper_reported_event_count": 6843,
+      "paper_minus_file_rows": 900,
+      "paper_vs_file_count_match": false,
+      "header_nonblank_lines": [
+        {
+          "line": 2,
+          "text": "COLUMN  FIELD"
+        },
+        {
+          "line": 3,
+          "text": "1  Source Time (GMT)  YYYYDDDHHMMSSS"
+        },
+        {
+          "line": 4,
+          "text": "2  Number of recording hydrophones"
+        },
+        {
+          "line": 5,
+          "text": "3  T-phase origin latitude  (Degrees, N=+, S=-)"
+        },
+        {
+          "line": 6,
+          "text": "4  T-phase origin longitude (Degrees, E=+, W=-)"
+        },
+        {
+          "line": 7,
+          "text": "5  Estimated error in latitude (degrees)"
+        },
+        {
+          "line": 8,
+          "text": "6  Estimated error in longitude (degrees)"
+        },
+        {
+          "line": 9,
+          "text": "7  Estimated error in source time (seconds)"
+        },
+        {
+          "line": 10,
+          "text": "8  Source Magnitude (dB re 1 micro-Pa @ 1m)"
+        }
+      ],
+      "unexpected_nonmatching_data_lines_sample": [],
+      "n_hydrophones_distribution": {
+        "4": 1830,
+        "5": 1644,
+        "6": 2228,
+        "7": 238,
+        "8": 3
+      },
+      "lat_range": [
+        -60.254,
+        57.195
+      ],
+      "lon_range": [
+        -91.679,
+        170.63
+      ],
+      "time_code_first": "20112220242267",
+      "time_code_last": "20150060556578",
+      "columns": [
+        "source_time_code",
+        "n_hydrophones",
+        "lat",
+        "lon",
+        "lat_error_deg",
+        "lon_error_deg",
+        "source_time_error_s",
+        "source_magnitude_db"
+      ]
+    },
+    "acquisition_trace": [
+      {
+        "stage": "authoritative_prebind",
+        "dataset_uid": "30497",
+        "file_uids": [
+          "2504732"
+        ]
+      },
+      {
+        "stage": "download",
+        "status": 200,
+        "bytes": 138752,
+        "content_type": "application/x-tar",
+        "content_disposition": "attachment; filename=\"MGDS_Download.tar\"",
+        "archive_sha256": "e102dca19128786dd043375fa9a82fd5ec18a326c7be7021c477be6cd3a521c9"
+      },
+      {
+        "stage": "tar_members",
+        "members": [
+          {
+            "name": "MGDS_Download/EA_Hydroacoustics/EA_CTBTO_catalog_all.dat.gz",
+            "bytes": 134459
+          },
+          {
+            "name": "MGDS_Download/README.txt",
+            "bytes": 1990
+          }
+        ]
+      },
+      {
+        "stage": "nested_gzip",
+        "member": "MGDS_Download/EA_Hydroacoustics/EA_CTBTO_catalog_all.dat.gz",
+        "gzip_bytes": 134459,
+        "gzip_sha256": "06ae7ee8c49b32566757d0760d6d6695e03c7a394948b2cd5759836a96410b5d",
+        "uncompressed_bytes": 342121,
+        "uncompressed_sha256": "4eea7ca55456a271df79ad165d76dc6c77ad3752705b46ad031468bb00232558"
+      }
+    ]
+  },
+  "count_reconciliation_gate": {
+    "paper_reported_events": 6843,
+    "authoritative_download_rows": 5943,
+    "difference": 900,
+    "status": "OPEN_MISMATCH_REQUIRES_SOURCE_RECONCILIATION",
+    "rule": "DO_NOT_SYNTHESIZE_MISSING_ROWS__CLUSTER_ONLY_AUTHORITATIVE_DOWNLOADED_ROWS"
+  },
+  "preregistration": {
+    "anchor_hidden_during_clustering": true,
+    "clustering_parameters_frozen_before_anchor_reveal": true,
+    "dbscan_grid": [
+      {
+        "eps_km": 25.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 20
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 20
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 20
+      }
+    ],
+    "null_domain": {
+      "lat_min": -15.0,
+      "lat_max": 20.0,
+      "lon_min": -50.0,
+      "lon_max": 10.0
+    },
+    "null_samples": 20000,
+    "null_seed": 119520,
+    "parameter_change_from_original_blind_contract": false
+  },
+  "blind_phase": {
+    "anchor_visible": false,
+    "metric": "DBSCAN_HAVERSINE_GREAT_CIRCLE",
+    "earth_radius_km": 6371.0088,
+    "parameter_grid": [
+      {
+        "eps_km": 25.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 20
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 20
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 5
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 10
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 20
+      }
+    ],
+    "event_count": 5943,
+    "catalog_bbox": {
+      "lat_min": -60.254,
+      "lat_max": 57.195,
+      "lon_min": -91.679,
+      "lon_max": 170.63
+    },
+    "configs": [
+      {
+        "eps_km": 25.0,
+        "min_samples": 5,
+        "cluster_count": 74,
+        "clustered_events": 4198,
+        "noise_events": 1745,
+        "noise_fraction": 0.293623,
+        "clusters": [
+          {
+            "cluster_id": 28,
+            "n": 626,
+            "center_lat": 24.1834605,
+            "center_lon": -44.9056696,
+            "radius_p50_km": 237.956,
+            "radius_p95_km": 496.659,
+            "radius_max_km": 621.266
+          },
+          {
+            "cluster_id": 21,
+            "n": 397,
+            "center_lat": 30.5850242,
+            "center_lon": -41.2594755,
+            "radius_p50_km": 94.933,
+            "radius_p95_km": 222.955,
+            "radius_max_km": 260.268
+          },
+          {
+            "cluster_id": 18,
+            "n": 372,
+            "center_lat": -12.1484756,
+            "center_lon": -14.1282441,
+            "radius_p50_km": 148.761,
+            "radius_p95_km": 238.654,
+            "radius_max_km": 274.655
+          },
+          {
+            "cluster_id": 10,
+            "n": 343,
+            "center_lat": -5.4921864,
+            "center_lon": -11.7128459,
+            "radius_p50_km": 55.519,
+            "radius_p95_km": 134.993,
+            "radius_max_km": 179.818
+          },
+          {
+            "cluster_id": 2,
+            "n": 277,
+            "center_lat": -7.6048913,
+            "center_lon": -13.3956613,
+            "radius_p50_km": 46.82,
+            "radius_p95_km": 114.84,
+            "radius_max_km": 162.466
+          },
+          {
+            "cluster_id": 37,
+            "n": 215,
+            "center_lat": 16.5284503,
+            "center_lon": -46.5674573,
+            "radius_p50_km": 74.959,
+            "radius_p95_km": 139.121,
+            "radius_max_km": 161.737
+          },
+          {
+            "cluster_id": 3,
+            "n": 156,
+            "center_lat": -0.8449647,
+            "center_lon": -16.0312529,
+            "radius_p50_km": 69.083,
+            "radius_p95_km": 113.922,
+            "radius_max_km": 126.617
+          },
+          {
+            "cluster_id": 13,
+            "n": 152,
+            "center_lat": 0.888672,
+            "center_lon": -29.4905828,
+            "radius_p50_km": 24.347,
+            "radius_p95_km": 78.855,
+            "radius_max_km": 111.151
+          },
+          {
+            "cluster_id": 24,
+            "n": 147,
+            "center_lat": 2.6663934,
+            "center_lon": -31.1825778,
+            "radius_p50_km": 71.56,
+            "radius_p95_km": 100.285,
+            "radius_max_km": 138.775
+          },
+          {
+            "cluster_id": 16,
+            "n": 128,
+            "center_lat": 4.3128683,
+            "center_lon": -32.6040585,
+            "radius_p50_km": 50.176,
+            "radius_p95_km": 82.864,
+            "radius_max_km": 98.724
+          },
+          {
+            "cluster_id": 32,
+            "n": 114,
+            "center_lat": 14.6881579,
+            "center_lon": -44.9293924,
+            "radius_p50_km": 26.399,
+            "radius_p95_km": 64.186,
+            "radius_max_km": 74.241
+          },
+          {
+            "cluster_id": 1,
+            "n": 87,
+            "center_lat": 8.4525945,
+            "center_lon": -39.4346811,
+            "radius_p50_km": 40.547,
+            "radius_p95_km": 106.025,
+            "radius_max_km": 140.875
+          },
+          {
+            "cluster_id": 8,
+            "n": 72,
+            "center_lat": 5.4750312,
+            "center_lon": -32.9778303,
+            "radius_p50_km": 24.782,
+            "radius_p95_km": 47.536,
+            "radius_max_km": 66.143
+          },
+          {
+            "cluster_id": 0,
+            "n": 70,
+            "center_lat": -0.0065286,
+            "center_lon": -17.8371089,
+            "radius_p50_km": 54.64,
+            "radius_p95_km": 125.453,
+            "radius_max_km": 158.341
+          },
+          {
+            "cluster_id": 5,
+            "n": 65,
+            "center_lat": 0.4915245,
+            "center_lon": -25.3847868,
+            "radius_p50_km": 50.349,
+            "radius_p95_km": 103.561,
+            "radius_max_km": 111.092
+          },
+          {
+            "cluster_id": 11,
+            "n": 63,
+            "center_lat": -1.0085897,
+            "center_lon": -24.2302653,
+            "radius_p50_km": 35.318,
+            "radius_p95_km": 71.116,
+            "radius_max_km": 89.787
+          },
+          {
+            "cluster_id": 17,
+            "n": 56,
+            "center_lat": 12.9282866,
+            "center_lon": -44.7048796,
+            "radius_p50_km": 45.066,
+            "radius_p95_km": 73.699,
+            "radius_max_km": 93.533
+          },
+          {
+            "cluster_id": 40,
+            "n": 52,
+            "center_lat": 7.9325748,
+            "center_lon": -37.9695557,
+            "radius_p50_km": 23.631,
+            "radius_p95_km": 66.502,
+            "radius_max_km": 83.299
+          },
+          {
+            "cluster_id": 35,
+            "n": 51,
+            "center_lat": 35.1976279,
+            "center_lon": -34.5817173,
+            "radius_p50_km": 61.89,
+            "radius_p95_km": 115.011,
+            "radius_max_km": 136.217
+          },
+          {
+            "cluster_id": 48,
+            "n": 51,
+            "center_lat": 33.6694616,
+            "center_lon": -37.6908747,
+            "radius_p50_km": 44.086,
+            "radius_p95_km": 91.777,
+            "radius_max_km": 96.144
+          },
+          {
+            "cluster_id": 30,
+            "n": 45,
+            "center_lat": 7.1298503,
+            "center_lon": -34.3024285,
+            "radius_p50_km": 33.06,
+            "radius_p95_km": 76.756,
+            "radius_max_km": 97.801
+          },
+          {
+            "cluster_id": 42,
+            "n": 36,
+            "center_lat": -16.9608075,
+            "center_lon": -14.4885692,
+            "radius_p50_km": 31.27,
+            "radius_p95_km": 61.461,
+            "radius_max_km": 70.486
+          },
+          {
+            "cluster_id": 15,
+            "n": 33,
+            "center_lat": 0.9389506,
+            "center_lon": -27.4595122,
+            "radius_p50_km": 27.051,
+            "radius_p95_km": 61.147,
+            "radius_max_km": 68.654
+          },
+          {
+            "cluster_id": 31,
+            "n": 33,
+            "center_lat": 9.2150889,
+            "center_lon": -40.5582557,
+            "radius_p50_km": 29.725,
+            "radius_p95_km": 65.559,
+            "radius_max_km": 86.225
+          },
+          {
+            "cluster_id": 22,
+            "n": 31,
+            "center_lat": -15.2322239,
+            "center_lon": -13.8568353,
+            "radius_p50_km": 25.333,
+            "radius_p95_km": 51.473,
+            "radius_max_km": 58.793
+          },
+          {
+            "cluster_id": 26,
+            "n": 31,
+            "center_lat": -2.3639343,
+            "center_lon": -12.4867091,
+            "radius_p50_km": 37.978,
+            "radius_p95_km": 53.786,
+            "radius_max_km": 54.899
+          },
+          {
+            "cluster_id": 64,
+            "n": 29,
+            "center_lat": 29.163058,
+            "center_lon": -39.8577127,
+            "radius_p50_km": 36.732,
+            "radius_p95_km": 58.705,
+            "radius_max_km": 82.846
+          },
+          {
+            "cluster_id": 6,
+            "n": 23,
+            "center_lat": -1.0222344,
+            "center_lon": -13.8085611,
+            "radius_p50_km": 34.181,
+            "radius_p95_km": 65.086,
+            "radius_max_km": 68.534
+          },
+          {
+            "cluster_id": 46,
+            "n": 21,
+            "center_lat": 12.0017225,
+            "center_lon": -43.8138005,
+            "radius_p50_km": 21.678,
+            "radius_p95_km": 55.291,
+            "radius_max_km": 58.06
+          },
+          {
+            "cluster_id": 52,
+            "n": 21,
+            "center_lat": 34.6276571,
+            "center_lon": -36.9702322,
+            "radius_p50_km": 38.363,
+            "radius_p95_km": 67.41,
+            "radius_max_km": 75.216
+          },
+          {
+            "cluster_id": 9,
+            "n": 20,
+            "center_lat": -3.8100716,
+            "center_lon": -12.3897215,
+            "radius_p50_km": 20.89,
+            "radius_p95_km": 47.089,
+            "radius_max_km": 47.797
+          },
+          {
+            "cluster_id": 23,
+            "n": 19,
+            "center_lat": -38.6938428,
+            "center_lon": -17.2789475,
+            "radius_p50_km": 26.601,
+            "radius_p95_km": 56.39,
+            "radius_max_km": 63.629
+          },
+          {
+            "cluster_id": 67,
+            "n": 19,
+            "center_lat": -2.3873352,
+            "center_lon": -29.3322446,
+            "radius_p50_km": 27.194,
+            "radius_p95_km": 45.422,
+            "radius_max_km": 58.583
+          },
+          {
+            "cluster_id": 33,
+            "n": 18,
+            "center_lat": 32.7801536,
+            "center_lon": -40.9334904,
+            "radius_p50_km": 30.28,
+            "radius_p95_km": 49.172,
+            "radius_max_km": 68.335
+          },
+          {
+            "cluster_id": 14,
+            "n": 17,
+            "center_lat": 0.9413,
+            "center_lon": -28.4892975,
+            "radius_p50_km": 25.316,
+            "radius_p95_km": 42.419,
+            "radius_max_km": 43.857
+          },
+          {
+            "cluster_id": 25,
+            "n": 16,
+            "center_lat": -12.5061641,
+            "center_lon": -13.5901031,
+            "radius_p50_km": 18.682,
+            "radius_p95_km": 34.695,
+            "radius_max_km": 37.337
+          },
+          {
+            "cluster_id": 44,
+            "n": 16,
+            "center_lat": 7.4914532,
+            "center_lon": -36.2137522,
+            "radius_p50_km": 14.852,
+            "radius_p95_km": 26.047,
+            "radius_max_km": 30.102
+          },
+          {
+            "cluster_id": 12,
+            "n": 15,
+            "center_lat": 6.1686176,
+            "center_lon": -33.6387051,
+            "radius_p50_km": 22.097,
+            "radius_p95_km": 43.367,
+            "radius_max_km": 55.728
+          },
+          {
+            "cluster_id": 19,
+            "n": 14,
+            "center_lat": -38.04002,
+            "center_lon": -17.3656597,
+            "radius_p50_km": 20.364,
+            "radius_p95_km": 40.472,
+            "radius_max_km": 41.059
+          },
+          {
+            "cluster_id": 53,
+            "n": 13,
+            "center_lat": 29.2330323,
+            "center_lon": -43.5311999,
+            "radius_p50_km": 19.264,
+            "radius_p95_km": 42.461,
+            "radius_max_km": 48.604
+          },
+          {
+            "cluster_id": 39,
+            "n": 11,
+            "center_lat": -30.9807788,
+            "center_lon": -15.9168825,
+            "radius_p50_km": 21.305,
+            "radius_p95_km": 35.734,
+            "radius_max_km": 38.711
+          },
+          {
+            "cluster_id": 62,
+            "n": 11,
+            "center_lat": 18.2432083,
+            "center_lon": -46.4764661,
+            "radius_p50_km": 15.08,
+            "radius_p95_km": 30.754,
+            "radius_max_km": 32.051
+          },
+          {
+            "cluster_id": 70,
+            "n": 11,
+            "center_lat": 32.4560351,
+            "center_lon": -43.5178604,
+            "radius_p50_km": 16.517,
+            "radius_p95_km": 29.312,
+            "radius_max_km": 34.615
+          },
+          {
+            "cluster_id": 43,
+            "n": 10,
+            "center_lat": 10.6103327,
+            "center_lon": -40.9737009,
+            "radius_p50_km": 15.248,
+            "radius_p95_km": 29.957,
+            "radius_max_km": 30.824
+          },
+          {
+            "cluster_id": 49,
+            "n": 10,
+            "center_lat": -0.7636014,
+            "center_lon": -20.7268011,
+            "radius_p50_km": 17.388,
+            "radius_p95_km": 29.302,
+            "radius_max_km": 30.592
+          },
+          {
+            "cluster_id": 68,
+            "n": 10,
+            "center_lat": 2.6679034,
+            "center_lon": -29.4181026,
+            "radius_p50_km": 9.543,
+            "radius_p95_km": 23.003,
+            "radius_max_km": 23.242
+          },
+          {
+            "cluster_id": 71,
+            "n": 10,
+            "center_lat": 34.7706225,
+            "center_lon": -41.2693618,
+            "radius_p50_km": 21.673,
+            "radius_p95_km": 28.879,
+            "radius_max_km": 29.688
+          },
+          {
+            "cluster_id": 7,
+            "n": 9,
+            "center_lat": 1.5321154,
+            "center_lon": -30.6937807,
+            "radius_p50_km": 14.069,
+            "radius_p95_km": 27.589,
+            "radius_max_km": 28.799
+          },
+          {
+            "cluster_id": 51,
+            "n": 8,
+            "center_lat": -25.2404796,
+            "center_lon": -14.5730304,
+            "radius_p50_km": 19.406,
+            "radius_p95_km": 31.613,
+            "radius_max_km": 34.517
+          },
+          {
+            "cluster_id": 57,
+            "n": 8,
+            "center_lat": -1.9157529,
+            "center_lon": -13.130751,
+            "radius_p50_km": 18.544,
+            "radius_p95_km": 22.163,
+            "radius_max_km": 22.33
+          },
+          {
+            "cluster_id": 63,
+            "n": 8,
+            "center_lat": 28.4410821,
+            "center_lon": -42.9077241,
+            "radius_p50_km": 13.896,
+            "radius_p95_km": 25.187,
+            "radius_max_km": 26.642
+          },
+          {
+            "cluster_id": 27,
+            "n": 7,
+            "center_lat": -39.4170052,
+            "center_lon": -17.3966139,
+            "radius_p50_km": 16.063,
+            "radius_p95_km": 26.936,
+            "radius_max_km": 28.205
+          },
+          {
+            "cluster_id": 36,
+            "n": 7,
+            "center_lat": -32.8909369,
+            "center_lon": -15.892572,
+            "radius_p50_km": 17.416,
+            "radius_p95_km": 22.531,
+            "radius_max_km": 23.463
+          },
+          {
+            "cluster_id": 41,
+            "n": 7,
+            "center_lat": -18.091327,
+            "center_lon": -13.4185784,
+            "radius_p50_km": 13.39,
+            "radius_p95_km": 25.33,
+            "radius_max_km": 27.39
+          },
+          {
+            "cluster_id": 54,
+            "n": 7,
+            "center_lat": -16.3159188,
+            "center_lon": -14.8915859,
+            "radius_p50_km": 18.04,
+            "radius_p95_km": 27.766,
+            "radius_max_km": 28.677
+          },
+          {
+            "cluster_id": 58,
+            "n": 7,
+            "center_lat": -32.112198,
+            "center_lon": -15.8113315,
+            "radius_p50_km": 11.417,
+            "radius_p95_km": 27.748,
+            "radius_max_km": 29.234
+          },
+          {
+            "cluster_id": 69,
+            "n": 7,
+            "center_lat": 33.0161919,
+            "center_lon": -43.6594535,
+            "radius_p50_km": 16.325,
+            "radius_p95_km": 29.215,
+            "radius_max_km": 29.974
+          },
+          {
+            "cluster_id": 4,
+            "n": 6,
+            "center_lat": 16.3993478,
+            "center_lon": -47.30547,
+            "radius_p50_km": 12.522,
+            "radius_p95_km": 25.013,
+            "radius_max_km": 27.122
+          },
+          {
+            "cluster_id": 29,
+            "n": 6,
+            "center_lat": -0.5923336,
+            "center_lon": -20.3190002,
+            "radius_p50_km": 11.828,
+            "radius_p95_km": 18.773,
+            "radius_max_km": 19.623
+          },
+          {
+            "cluster_id": 34,
+            "n": 6,
+            "center_lat": -8.075863,
+            "center_lon": -14.5094816,
+            "radius_p50_km": 20.242,
+            "radius_p95_km": 24.148,
+            "radius_max_km": 24.352
+          },
+          {
+            "cluster_id": 38,
+            "n": 6,
+            "center_lat": -16.8438578,
+            "center_lon": -13.4854959,
+            "radius_p50_km": 12.376,
+            "radius_p95_km": 23.945,
+            "radius_max_km": 24.132
+          },
+          {
+            "cluster_id": 59,
+            "n": 6,
+            "center_lat": -31.5628665,
+            "center_lon": -15.8253646,
+            "radius_p50_km": 16.104,
+            "radius_p95_km": 20.082,
+            "radius_max_km": 20.257
+          },
+          {
+            "cluster_id": 60,
+            "n": 6,
+            "center_lat": 10.9116859,
+            "center_lon": -42.4281504,
+            "radius_p50_km": 14.499,
+            "radius_p95_km": 22.786,
+            "radius_max_km": 23.554
+          },
+          {
+            "cluster_id": 65,
+            "n": 6,
+            "center_lat": -10.3573505,
+            "center_lon": -12.442508,
+            "radius_p50_km": 12.68,
+            "radius_p95_km": 16.843,
+            "radius_max_km": 17.499
+          },
+          {
+            "cluster_id": 20,
+            "n": 5,
+            "center_lat": -8.1888022,
+            "center_lon": -10.7102039,
+            "radius_p50_km": 8.633,
+            "radius_p95_km": 12.108,
+            "radius_max_km": 12.833
+          },
+          {
+            "cluster_id": 50,
+            "n": 5,
+            "center_lat": 13.7866159,
+            "center_lon": -45.0746115,
+            "radius_p50_km": 13.072,
+            "radius_p95_km": 15.285,
+            "radius_max_km": 15.321
+          },
+          {
+            "cluster_id": 55,
+            "n": 5,
+            "center_lat": 18.6992017,
+            "center_lon": -46.0437968,
+            "radius_p50_km": 8.021,
+            "radius_p95_km": 23.293,
+            "radius_max_km": 25.617
+          },
+          {
+            "cluster_id": 61,
+            "n": 5,
+            "center_lat": -7.9774105,
+            "center_lon": -12.8173907,
+            "radius_p50_km": 7.964,
+            "radius_p95_km": 17.48,
+            "radius_max_km": 18.2
+          },
+          {
+            "cluster_id": 66,
+            "n": 5,
+            "center_lat": 8.6986073,
+            "center_lon": -38.7217945,
+            "radius_p50_km": 13.907,
+            "radius_p95_km": 17.574,
+            "radius_max_km": 18.2
+          },
+          {
+            "cluster_id": 72,
+            "n": 5,
+            "center_lat": -0.5278009,
+            "center_lon": -17.0794007,
+            "radius_p50_km": 11.905,
+            "radius_p95_km": 21.794,
+            "radius_max_km": 23.832
+          },
+          {
+            "cluster_id": 45,
+            "n": 4,
+            "center_lat": 15.8317601,
+            "center_lon": -47.3222734,
+            "radius_p50_km": 10.059,
+            "radius_p95_km": 16.431,
+            "radius_max_km": 17.119
+          },
+          {
+            "cluster_id": 47,
+            "n": 4,
+            "center_lat": -37.9098279,
+            "center_lon": -16.7270569,
+            "radius_p50_km": 15.452,
+            "radius_p95_km": 20.167,
+            "radius_max_km": 20.795
+          },
+          {
+            "cluster_id": 56,
+            "n": 3,
+            "center_lat": 3.9023367,
+            "center_lon": -31.4896654,
+            "radius_p50_km": 11.73,
+            "radius_p95_km": 12.016,
+            "radius_max_km": 12.047
+          },
+          {
+            "cluster_id": 73,
+            "n": 3,
+            "center_lat": 32.252674,
+            "center_lon": -40.8253081,
+            "radius_p50_km": 8.977,
+            "radius_p95_km": 14.527,
+            "radius_max_km": 15.143
+          }
+        ]
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 10,
+        "cluster_count": 58,
+        "clustered_events": 3485,
+        "noise_events": 2458,
+        "noise_fraction": 0.413596,
+        "clusters": [
+          {
+            "cluster_id": 3,
+            "n": 334,
+            "center_lat": -5.4754029,
+            "center_lon": -11.7198527,
+            "radius_p50_km": 54.021,
+            "radius_p95_km": 132.353,
+            "radius_max_km": 168.416
+          },
+          {
+            "cluster_id": 36,
+            "n": 287,
+            "center_lat": 25.757358,
+            "center_lon": -44.5972267,
+            "radius_p50_km": 83.295,
+            "radius_p95_km": 189.039,
+            "radius_max_km": 212.786
+          },
+          {
+            "cluster_id": 1,
+            "n": 273,
+            "center_lat": -7.6158046,
+            "center_lon": -13.4090622,
+            "radius_p50_km": 45.475,
+            "radius_p95_km": 114.801,
+            "radius_max_km": 155.062
+          },
+          {
+            "cluster_id": 12,
+            "n": 208,
+            "center_lat": 30.7857486,
+            "center_lon": -40.6288214,
+            "radius_p50_km": 72.24,
+            "radius_p95_km": 176.852,
+            "radius_max_km": 218.13
+          },
+          {
+            "cluster_id": 15,
+            "n": 172,
+            "center_lat": -13.20078,
+            "center_lon": -14.7118747,
+            "radius_p50_km": 80.957,
+            "radius_p95_km": 153.59,
+            "radius_max_km": 186.817
+          },
+          {
+            "cluster_id": 28,
+            "n": 161,
+            "center_lat": 16.8448276,
+            "center_lon": -46.5209442,
+            "radius_p50_km": 50.588,
+            "radius_p95_km": 91.056,
+            "radius_max_km": 116.104
+          },
+          {
+            "cluster_id": 5,
+            "n": 146,
+            "center_lat": 0.8931537,
+            "center_lon": -29.4530041,
+            "radius_p50_km": 20.388,
+            "radius_p95_km": 56.228,
+            "radius_max_km": 95.125
+          },
+          {
+            "cluster_id": 8,
+            "n": 144,
+            "center_lat": -10.9390457,
+            "center_lon": -13.4130281,
+            "radius_p50_km": 53.279,
+            "radius_p95_km": 98.634,
+            "radius_max_km": 116.206
+          },
+          {
+            "cluster_id": 7,
+            "n": 127,
+            "center_lat": 4.3083698,
+            "center_lon": -32.600133,
+            "radius_p50_km": 49.993,
+            "radius_p95_km": 79.596,
+            "radius_max_km": 98.135
+          },
+          {
+            "cluster_id": 21,
+            "n": 121,
+            "center_lat": 20.6384623,
+            "center_lon": -45.7038777,
+            "radius_p50_km": 48.535,
+            "radius_p95_km": 101.775,
+            "radius_max_km": 126.51
+          },
+          {
+            "cluster_id": 38,
+            "n": 113,
+            "center_lat": 14.6838382,
+            "center_lon": -44.9261731,
+            "radius_p50_km": 25.782,
+            "radius_p95_km": 63.746,
+            "radius_max_km": 74.705
+          },
+          {
+            "cluster_id": 30,
+            "n": 112,
+            "center_lat": 22.5340593,
+            "center_lon": -45.0244443,
+            "radius_p50_km": 55.496,
+            "radius_p95_km": 115.488,
+            "radius_max_km": 138.227
+          },
+          {
+            "cluster_id": 40,
+            "n": 87,
+            "center_lat": 30.7462534,
+            "center_lon": -41.7997204,
+            "radius_p50_km": 51.783,
+            "radius_p95_km": 107.144,
+            "radius_max_km": 110.616
+          },
+          {
+            "cluster_id": 18,
+            "n": 86,
+            "center_lat": 3.0291738,
+            "center_lon": -31.4361737,
+            "radius_p50_km": 33.278,
+            "radius_p95_km": 57.411,
+            "radius_max_km": 67.704
+          },
+          {
+            "cluster_id": 14,
+            "n": 71,
+            "center_lat": 5.4799305,
+            "center_lon": -32.9712326,
+            "radius_p50_km": 24.732,
+            "radius_p95_km": 44.236,
+            "radius_max_km": 65.626
+          },
+          {
+            "cluster_id": 10,
+            "n": 69,
+            "center_lat": -1.3465332,
+            "center_lon": -15.8365648,
+            "radius_p50_km": 31.313,
+            "radius_p95_km": 81.271,
+            "radius_max_km": 86.021
+          },
+          {
+            "cluster_id": 22,
+            "n": 60,
+            "center_lat": 8.6269171,
+            "center_lon": -39.5719006,
+            "radius_p50_km": 17.773,
+            "radius_p95_km": 55.092,
+            "radius_max_km": 61.273
+          },
+          {
+            "cluster_id": 4,
+            "n": 58,
+            "center_lat": -1.0101886,
+            "center_lon": -24.239672,
+            "radius_p50_km": 30.259,
+            "radius_p95_km": 69.444,
+            "radius_max_km": 79.162
+          },
+          {
+            "cluster_id": 20,
+            "n": 53,
+            "center_lat": 2.0802521,
+            "center_lon": -30.7821387,
+            "radius_p50_km": 26.962,
+            "radius_p95_km": 49.953,
+            "radius_max_km": 60.616
+          },
+          {
+            "cluster_id": 31,
+            "n": 48,
+            "center_lat": 7.9504333,
+            "center_lon": -38.0223816,
+            "radius_p50_km": 18.264,
+            "radius_p95_km": 45.19,
+            "radius_max_km": 61.941
+          },
+          {
+            "cluster_id": 2,
+            "n": 43,
+            "center_lat": -0.5023511,
+            "center_lon": -16.1591874,
+            "radius_p50_km": 24.504,
+            "radius_p95_km": 53.435,
+            "radius_max_km": 55.971
+          },
+          {
+            "cluster_id": 41,
+            "n": 40,
+            "center_lat": 15.4319344,
+            "center_lon": -46.6795613,
+            "radius_p50_km": 18.574,
+            "radius_p95_km": 42.356,
+            "radius_max_km": 52.328
+          },
+          {
+            "cluster_id": 0,
+            "n": 36,
+            "center_lat": 0.1901132,
+            "center_lon": -17.4655847,
+            "radius_p50_km": 27.463,
+            "radius_p95_km": 59.786,
+            "radius_max_km": 62.46
+          },
+          {
+            "cluster_id": 24,
+            "n": 36,
+            "center_lat": 7.1025806,
+            "center_lon": -34.1722167,
+            "radius_p50_km": 21.864,
+            "radius_p95_km": 45.689,
+            "radius_max_km": 50.059
+          },
+          {
+            "cluster_id": 42,
+            "n": 35,
+            "center_lat": 28.2396596,
+            "center_lon": -43.6740805,
+            "radius_p50_km": 29.765,
+            "radius_p95_km": 58.365,
+            "radius_max_km": 60.973
+          },
+          {
+            "cluster_id": 39,
+            "n": 34,
+            "center_lat": 29.971032,
+            "center_lon": -42.7499494,
+            "radius_p50_km": 36.084,
+            "radius_p95_km": 56.053,
+            "radius_max_km": 71.847
+          },
+          {
+            "cluster_id": 17,
+            "n": 32,
+            "center_lat": -11.841466,
+            "center_lon": -14.3342568,
+            "radius_p50_km": 25.934,
+            "radius_p95_km": 41.862,
+            "radius_max_km": 47.585
+          },
+          {
+            "cluster_id": 32,
+            "n": 32,
+            "center_lat": -16.9814451,
+            "center_lon": -14.5125299,
+            "radius_p50_km": 25.624,
+            "radius_p95_km": 46.894,
+            "radius_max_km": 50.284
+          },
+          {
+            "cluster_id": 9,
+            "n": 30,
+            "center_lat": 0.447668,
+            "center_lon": -25.0929988,
+            "radius_p50_km": 25.189,
+            "radius_p95_km": 40.959,
+            "radius_max_km": 49.303
+          },
+          {
+            "cluster_id": 29,
+            "n": 28,
+            "center_lat": 12.6330357,
+            "center_lon": -44.563215,
+            "radius_p50_km": 23.571,
+            "radius_p95_km": 41.855,
+            "radius_max_km": 44.179
+          },
+          {
+            "cluster_id": 43,
+            "n": 28,
+            "center_lat": 29.3167111,
+            "center_lon": -42.0877616,
+            "radius_p50_km": 20.97,
+            "radius_p95_km": 41.878,
+            "radius_max_km": 44.03
+          },
+          {
+            "cluster_id": 13,
+            "n": 27,
+            "center_lat": -15.225451,
+            "center_lon": -13.8207331,
+            "radius_p50_km": 25.165,
+            "radius_p95_km": 40.614,
+            "radius_max_km": 48.453
+          },
+          {
+            "cluster_id": 46,
+            "n": 27,
+            "center_lat": 33.6894439,
+            "center_lon": -37.5303536,
+            "radius_p50_km": 26.182,
+            "radius_p95_km": 48.829,
+            "radius_max_km": 53.538
+          },
+          {
+            "cluster_id": 6,
+            "n": 25,
+            "center_lat": 0.6843652,
+            "center_lon": -25.8767189,
+            "radius_p50_km": 20.96,
+            "radius_p95_km": 46.907,
+            "radius_max_km": 47.901
+          },
+          {
+            "cluster_id": 16,
+            "n": 25,
+            "center_lat": 0.934885,
+            "center_lon": -27.5363167,
+            "radius_p50_km": 21.357,
+            "radius_p95_km": 42.654,
+            "radius_max_km": 50.496
+          },
+          {
+            "cluster_id": 25,
+            "n": 23,
+            "center_lat": 9.3219755,
+            "center_lon": -40.6113785,
+            "radius_p50_km": 21.707,
+            "radius_p95_km": 40.526,
+            "radius_max_km": 41.732
+          },
+          {
+            "cluster_id": 37,
+            "n": 23,
+            "center_lat": 13.304994,
+            "center_lon": -44.8696875,
+            "radius_p50_km": 18.023,
+            "radius_p95_km": 39.999,
+            "radius_max_km": 41.729
+          },
+          {
+            "cluster_id": 45,
+            "n": 18,
+            "center_lat": 12.0150854,
+            "center_lon": -43.7960881,
+            "radius_p50_km": 18.783,
+            "radius_p95_km": 32.411,
+            "radius_max_km": 33.466
+          },
+          {
+            "cluster_id": 52,
+            "n": 16,
+            "center_lat": 28.9817728,
+            "center_lon": -39.9101122,
+            "radius_p50_km": 23.311,
+            "radius_p95_km": 34.83,
+            "radius_max_km": 36.449
+          },
+          {
+            "cluster_id": 35,
+            "n": 15,
+            "center_lat": 7.5046139,
+            "center_lon": -36.2262083,
+            "radius_p50_km": 14.234,
+            "radius_p95_km": 22.583,
+            "radius_max_km": 23.672
+          },
+          {
+            "cluster_id": 26,
+            "n": 14,
+            "center_lat": -12.4768876,
+            "center_lon": -13.5740546,
+            "radius_p50_km": 17.421,
+            "radius_p95_km": 31.497,
+            "radius_max_km": 33.581
+          },
+          {
+            "cluster_id": 53,
+            "n": 13,
+            "center_lat": -2.4603124,
+            "center_lon": -29.469072,
+            "radius_p50_km": 16.608,
+            "radius_p95_km": 25.744,
+            "radius_max_km": 27.605
+          },
+          {
+            "cluster_id": 11,
+            "n": 12,
+            "center_lat": -3.8681748,
+            "center_lon": -12.3302515,
+            "radius_p50_km": 14.456,
+            "radius_p95_km": 26.883,
+            "radius_max_km": 30.767
+          },
+          {
+            "cluster_id": 27,
+            "n": 11,
+            "center_lat": 34.55082,
+            "center_lon": -34.8437806,
+            "radius_p50_km": 15.747,
+            "radius_p95_km": 27.001,
+            "radius_max_km": 29.651
+          },
+          {
+            "cluster_id": 34,
+            "n": 11,
+            "center_lat": -2.3790022,
+            "center_lon": -12.8213652,
+            "radius_p50_km": 12.569,
+            "radius_p95_km": 22.201,
+            "radius_max_km": 24.799
+          },
+          {
+            "cluster_id": 51,
+            "n": 11,
+            "center_lat": -0.4339103,
+            "center_lon": -18.7439086,
+            "radius_p50_km": 15.145,
+            "radius_p95_km": 25.343,
+            "radius_max_km": 26.14
+          },
+          {
+            "cluster_id": 19,
+            "n": 10,
+            "center_lat": -38.1021961,
+            "center_lon": -17.3521669,
+            "radius_p50_km": 15.744,
+            "radius_p95_km": 22.708,
+            "radius_max_km": 25.666
+          },
+          {
+            "cluster_id": 23,
+            "n": 10,
+            "center_lat": -38.8246658,
+            "center_lon": -17.3711391,
+            "radius_p50_km": 13.043,
+            "radius_p95_km": 21.466,
+            "radius_max_km": 22.057
+          },
+          {
+            "cluster_id": 33,
+            "n": 10,
+            "center_lat": -1.0211024,
+            "center_lon": -13.6202013,
+            "radius_p50_km": 13.531,
+            "radius_p95_km": 24.269,
+            "radius_max_km": 24.437
+          },
+          {
+            "cluster_id": 48,
+            "n": 10,
+            "center_lat": 0.9236015,
+            "center_lon": -28.6394012,
+            "radius_p50_km": 10.893,
+            "radius_p95_km": 23.764,
+            "radius_max_km": 25.928
+          },
+          {
+            "cluster_id": 54,
+            "n": 10,
+            "center_lat": 2.6679034,
+            "center_lon": -29.4181026,
+            "radius_p50_km": 9.543,
+            "radius_p95_km": 23.003,
+            "radius_max_km": 23.242
+          },
+          {
+            "cluster_id": 55,
+            "n": 10,
+            "center_lat": 32.4871384,
+            "center_lon": -43.5163407,
+            "radius_p50_km": 16.978,
+            "radius_p95_km": 23.988,
+            "radius_max_km": 27.215
+          },
+          {
+            "cluster_id": 56,
+            "n": 10,
+            "center_lat": 8.0203146,
+            "center_lon": -38.8615013,
+            "radius_p50_km": 19.099,
+            "radius_p95_km": 23.313,
+            "radius_max_km": 23.48
+          },
+          {
+            "cluster_id": 49,
+            "n": 9,
+            "center_lat": -1.0597784,
+            "center_lon": -14.1142216,
+            "radius_p50_km": 14.218,
+            "radius_p95_km": 22.083,
+            "radius_max_km": 23.742
+          },
+          {
+            "cluster_id": 50,
+            "n": 9,
+            "center_lat": 27.4968059,
+            "center_lon": -43.6283522,
+            "radius_p50_km": 15.004,
+            "radius_p95_km": 20.574,
+            "radius_max_km": 20.798
+          },
+          {
+            "cluster_id": 57,
+            "n": 8,
+            "center_lat": 0.0725001,
+            "center_lon": -16.27525,
+            "radius_p50_km": 13.507,
+            "radius_p95_km": 23.154,
+            "radius_max_km": 24.031
+          },
+          {
+            "cluster_id": 44,
+            "n": 7,
+            "center_lat": -1.0797148,
+            "center_lon": -16.3302868,
+            "radius_p50_km": 10.899,
+            "radius_p95_km": 25.269,
+            "radius_max_km": 30.314
+          },
+          {
+            "cluster_id": 47,
+            "n": 7,
+            "center_lat": -0.7182859,
+            "center_lon": -16.5881426,
+            "radius_p50_km": 5.631,
+            "radius_p95_km": 16.664,
+            "radius_max_km": 20.085
+          }
+        ]
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 20,
+        "cluster_count": 29,
+        "clustered_events": 2245,
+        "noise_events": 3698,
+        "noise_fraction": 0.622245,
+        "clusters": [
+          {
+            "cluster_id": 2,
+            "n": 252,
+            "center_lat": -5.6391077,
+            "center_lon": -11.5662355,
+            "radius_p50_km": 37.537,
+            "radius_p95_km": 103.902,
+            "radius_max_km": 126.47
+          },
+          {
+            "cluster_id": 1,
+            "n": 242,
+            "center_lat": -7.6596515,
+            "center_lon": -13.4933649,
+            "radius_p50_km": 44.847,
+            "radius_p95_km": 84.025,
+            "radius_max_km": 107.772
+          },
+          {
+            "cluster_id": 15,
+            "n": 155,
+            "center_lat": 16.8671468,
+            "center_lon": -46.5148833,
+            "radius_p50_km": 49.071,
+            "radius_p95_km": 86.218,
+            "radius_max_km": 96.622
+          },
+          {
+            "cluster_id": 3,
+            "n": 142,
+            "center_lat": 0.8929166,
+            "center_lon": -29.4333918,
+            "radius_p50_km": 19.623,
+            "radius_p95_km": 55.39,
+            "radius_max_km": 75.488
+          },
+          {
+            "cluster_id": 18,
+            "n": 136,
+            "center_lat": 25.5536971,
+            "center_lon": -44.621555,
+            "radius_p50_km": 40.246,
+            "radius_p95_km": 78.451,
+            "radius_max_km": 93.135
+          },
+          {
+            "cluster_id": 7,
+            "n": 135,
+            "center_lat": 30.4046414,
+            "center_lon": -40.7327969,
+            "radius_p50_km": 30.563,
+            "radius_p95_km": 73.947,
+            "radius_max_km": 81.299
+          },
+          {
+            "cluster_id": 5,
+            "n": 117,
+            "center_lat": -10.9371851,
+            "center_lon": -13.367353,
+            "radius_p50_km": 43.545,
+            "radius_p95_km": 78.222,
+            "radius_max_km": 85.796
+          },
+          {
+            "cluster_id": 19,
+            "n": 106,
+            "center_lat": 14.6693705,
+            "center_lon": -44.9169896,
+            "radius_p50_km": 23.499,
+            "radius_p95_km": 57.591,
+            "radius_max_km": 65.319
+          },
+          {
+            "cluster_id": 4,
+            "n": 86,
+            "center_lat": 4.4800381,
+            "center_lon": -32.6998367,
+            "radius_p50_km": 30.668,
+            "radius_p95_km": 57.742,
+            "radius_max_km": 62.025
+          },
+          {
+            "cluster_id": 10,
+            "n": 82,
+            "center_lat": 3.0333254,
+            "center_lon": -31.4531951,
+            "radius_p50_km": 32.488,
+            "radius_p95_km": 49.972,
+            "radius_max_km": 63.307
+          },
+          {
+            "cluster_id": 8,
+            "n": 67,
+            "center_lat": 5.485562,
+            "center_lon": -32.9697725,
+            "radius_p50_km": 24.484,
+            "radius_p95_km": 39.911,
+            "radius_max_km": 44.76
+          },
+          {
+            "cluster_id": 21,
+            "n": 66,
+            "center_lat": 20.8552955,
+            "center_lon": -45.6996853,
+            "radius_p50_km": 24.421,
+            "radius_p95_km": 46.637,
+            "radius_max_km": 49.512
+          },
+          {
+            "cluster_id": 22,
+            "n": 62,
+            "center_lat": 22.0937954,
+            "center_lon": -45.0544044,
+            "radius_p50_km": 23.499,
+            "radius_p95_km": 44.945,
+            "radius_max_km": 57.508
+          },
+          {
+            "cluster_id": 0,
+            "n": 56,
+            "center_lat": -4.6448517,
+            "center_lon": -12.3916769,
+            "radius_p50_km": 13.575,
+            "radius_p95_km": 39.335,
+            "radius_max_km": 43.488
+          },
+          {
+            "cluster_id": 9,
+            "n": 55,
+            "center_lat": -13.5233988,
+            "center_lon": -14.8125499,
+            "radius_p50_km": 20.355,
+            "radius_p95_km": 43.342,
+            "radius_max_km": 45.461
+          },
+          {
+            "cluster_id": 12,
+            "n": 53,
+            "center_lat": 8.6313811,
+            "center_lon": -39.5343012,
+            "radius_p50_km": 16.975,
+            "radius_p95_km": 40.734,
+            "radius_max_km": 46.435
+          },
+          {
+            "cluster_id": 6,
+            "n": 48,
+            "center_lat": -1.3237796,
+            "center_lon": -15.7953087,
+            "radius_p50_km": 24.115,
+            "radius_p95_km": 43.429,
+            "radius_max_km": 44.919
+          },
+          {
+            "cluster_id": 11,
+            "n": 44,
+            "center_lat": 1.9991894,
+            "center_lon": -30.7767138,
+            "radius_p50_km": 21.401,
+            "radius_p95_km": 38.766,
+            "radius_max_km": 41.196
+          },
+          {
+            "cluster_id": 16,
+            "n": 41,
+            "center_lat": 7.9719679,
+            "center_lon": -38.0655764,
+            "radius_p50_km": 13.897,
+            "radius_p95_km": 31.756,
+            "radius_max_km": 37.752
+          },
+          {
+            "cluster_id": 17,
+            "n": 39,
+            "center_lat": -12.2485985,
+            "center_lon": -15.0411152,
+            "radius_p50_km": 22.626,
+            "radius_p95_km": 33.183,
+            "radius_max_km": 36.984
+          },
+          {
+            "cluster_id": 14,
+            "n": 38,
+            "center_lat": -0.9940048,
+            "center_lon": -24.3237351,
+            "radius_p50_km": 23.426,
+            "radius_p95_km": 36.338,
+            "radius_max_km": 37.396
+          },
+          {
+            "cluster_id": 23,
+            "n": 37,
+            "center_lat": 15.4243418,
+            "center_lon": -46.6645883,
+            "radius_p50_km": 17.719,
+            "radius_p95_km": 40.052,
+            "radius_max_km": 40.665
+          },
+          {
+            "cluster_id": 20,
+            "n": 36,
+            "center_lat": 20.034776,
+            "center_lon": -45.6981601,
+            "radius_p50_km": 22.112,
+            "radius_p95_km": 39.583,
+            "radius_max_km": 41.856
+          },
+          {
+            "cluster_id": 24,
+            "n": 34,
+            "center_lat": 30.8533255,
+            "center_lon": -41.7862506,
+            "radius_p50_km": 23.724,
+            "radius_p95_km": 33.413,
+            "radius_max_km": 41.518
+          },
+          {
+            "cluster_id": 25,
+            "n": 31,
+            "center_lat": 26.6543372,
+            "center_lon": -44.3903202,
+            "radius_p50_km": 17.196,
+            "radius_p95_km": 33.682,
+            "radius_max_km": 39.037
+          },
+          {
+            "cluster_id": 13,
+            "n": 28,
+            "center_lat": -0.4488225,
+            "center_lon": -16.1824288,
+            "radius_p50_km": 17.994,
+            "radius_p95_km": 31.303,
+            "radius_max_km": 34.332
+          },
+          {
+            "cluster_id": 27,
+            "n": 23,
+            "center_lat": 7.0934115,
+            "center_lon": -34.1603874,
+            "radius_p50_km": 18.479,
+            "radius_p95_km": 23.238,
+            "radius_max_km": 24.231
+          },
+          {
+            "cluster_id": 28,
+            "n": 20,
+            "center_lat": 24.3449159,
+            "center_lon": -44.8786673,
+            "radius_p50_km": 15.059,
+            "radius_p95_km": 22.683,
+            "radius_max_km": 27.193
+          },
+          {
+            "cluster_id": 26,
+            "n": 14,
+            "center_lat": -12.7399437,
+            "center_lon": -14.8919987,
+            "radius_p50_km": 12.39,
+            "radius_p95_km": 20.174,
+            "radius_max_km": 21.528
+          }
+        ]
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 5,
+        "cluster_count": 32,
+        "clustered_events": 4943,
+        "noise_events": 1000,
+        "noise_fraction": 0.168265,
+        "clusters": [
+          {
+            "cluster_id": 3,
+            "n": 1525,
+            "center_lat": 25.4146342,
+            "center_lon": -43.9182871,
+            "radius_p50_km": 556.038,
+            "radius_p95_km": 1089.404,
+            "radius_max_km": 1218.784
+          },
+          {
+            "cluster_id": 2,
+            "n": 1214,
+            "center_lat": -8.5592571,
+            "center_lon": -13.0875893,
+            "radius_p50_km": 357.112,
+            "radius_p95_km": 695.812,
+            "radius_max_km": 834.28
+          },
+          {
+            "cluster_id": 1,
+            "n": 980,
+            "center_lat": 4.2647055,
+            "center_lon": -32.6959861,
+            "radius_p50_km": 501.977,
+            "radius_p95_km": 1016.213,
+            "radius_max_km": 1220.673
+          },
+          {
+            "cluster_id": 0,
+            "n": 313,
+            "center_lat": -0.6500814,
+            "center_lon": -16.7791694,
+            "radius_p50_km": 134.467,
+            "radius_p95_km": 431.597,
+            "radius_max_km": 562.193
+          },
+          {
+            "cluster_id": 5,
+            "n": 225,
+            "center_lat": 13.7997509,
+            "center_lon": -44.7951023,
+            "radius_p50_km": 110.47,
+            "radius_p95_km": 230.467,
+            "radius_max_km": 281.066
+          },
+          {
+            "cluster_id": 12,
+            "n": 180,
+            "center_lat": 34.4829331,
+            "center_lon": -36.403371,
+            "radius_p50_km": 155.105,
+            "radius_p95_km": 293.387,
+            "radius_max_km": 346.988
+          },
+          {
+            "cluster_id": 6,
+            "n": 89,
+            "center_lat": -38.5500101,
+            "center_lon": -17.2344861,
+            "radius_p50_km": 100.28,
+            "radius_p95_km": 278.791,
+            "radius_max_km": 322.309
+          },
+          {
+            "cluster_id": 9,
+            "n": 82,
+            "center_lat": -17.0545437,
+            "center_lon": -14.250982,
+            "radius_p50_km": 76.577,
+            "radius_p95_km": 161.551,
+            "radius_max_km": 204.393
+          },
+          {
+            "cluster_id": 4,
+            "n": 76,
+            "center_lat": -1.0477373,
+            "center_lon": -24.2195591,
+            "radius_p50_km": 39.921,
+            "radius_p95_km": 120.158,
+            "radius_max_km": 144.398
+          },
+          {
+            "cluster_id": 16,
+            "n": 49,
+            "center_lat": -31.8481193,
+            "center_lon": -15.8565478,
+            "radius_p50_km": 78.993,
+            "radius_p95_km": 141.929,
+            "radius_max_km": 154.267
+          },
+          {
+            "cluster_id": 22,
+            "n": 25,
+            "center_lat": -24.8478262,
+            "center_lon": -14.5191674,
+            "radius_p50_km": 57.536,
+            "radius_p95_km": 94.739,
+            "radius_max_km": 111.44
+          },
+          {
+            "cluster_id": 29,
+            "n": 25,
+            "center_lat": -2.4045052,
+            "center_lon": -29.2007679,
+            "radius_p50_km": 36.576,
+            "radius_p95_km": 98.803,
+            "radius_max_km": 118.677
+          },
+          {
+            "cluster_id": 11,
+            "n": 23,
+            "center_lat": 32.7766597,
+            "center_lon": -43.4940817,
+            "radius_p50_km": 38.394,
+            "radius_p95_km": 116.533,
+            "radius_max_km": 122.266
+          },
+          {
+            "cluster_id": 23,
+            "n": 13,
+            "center_lat": -26.7675258,
+            "center_lon": -14.0483547,
+            "radius_p50_km": 58.653,
+            "radius_p95_km": 77.689,
+            "radius_max_km": 83.098
+          },
+          {
+            "cluster_id": 13,
+            "n": 12,
+            "center_lat": -28.6980192,
+            "center_lon": -14.4237729,
+            "radius_p50_km": 59.378,
+            "radius_p95_km": 95.219,
+            "radius_max_km": 100.448
+          },
+          {
+            "cluster_id": 7,
+            "n": 11,
+            "center_lat": -8.0367748,
+            "center_lon": -10.7055612,
+            "radius_p50_km": 29.135,
+            "radius_p95_km": 63.021,
+            "radius_max_km": 68.898
+          },
+          {
+            "cluster_id": 30,
+            "n": 11,
+            "center_lat": 2.6174583,
+            "center_lon": -29.4254596,
+            "radius_p50_km": 10.814,
+            "radius_p95_km": 42.33,
+            "radius_max_km": 56.685
+          },
+          {
+            "cluster_id": 25,
+            "n": 9,
+            "center_lat": -22.0730197,
+            "center_lon": -14.1266547,
+            "radius_p50_km": 34.029,
+            "radius_p95_km": 55.501,
+            "radius_max_km": 57.899
+          },
+          {
+            "cluster_id": 26,
+            "n": 9,
+            "center_lat": 10.800643,
+            "center_lon": -43.5439462,
+            "radius_p50_km": 31.863,
+            "radius_p95_km": 47.864,
+            "radius_max_km": 50.747
+          },
+          {
+            "cluster_id": 10,
+            "n": 8,
+            "center_lat": -36.0063712,
+            "center_lon": -15.3679936,
+            "radius_p50_km": 33.208,
+            "radius_p95_km": 61.642,
+            "radius_max_km": 62.073
+          },
+          {
+            "cluster_id": 18,
+            "n": 8,
+            "center_lat": -35.0423375,
+            "center_lon": -16.0475087,
+            "radius_p50_km": 28.651,
+            "radius_p95_km": 51.635,
+            "radius_max_km": 54.085
+          },
+          {
+            "cluster_id": 8,
+            "n": 7,
+            "center_lat": 5.3485732,
+            "center_lon": -22.8545836,
+            "radius_p50_km": 31.299,
+            "radius_p95_km": 38.783,
+            "radius_max_km": 39.616
+          },
+          {
+            "cluster_id": 15,
+            "n": 7,
+            "center_lat": 14.3094992,
+            "center_lon": -46.7681536,
+            "radius_p50_km": 47.237,
+            "radius_p95_km": 66.097,
+            "radius_max_km": 68.006
+          },
+          {
+            "cluster_id": 28,
+            "n": 7,
+            "center_lat": 10.8961737,
+            "center_lon": -42.4667124,
+            "radius_p50_km": 18.894,
+            "radius_p95_km": 26.051,
+            "radius_max_km": 27.301
+          },
+          {
+            "cluster_id": 14,
+            "n": 5,
+            "center_lat": -15.1884297,
+            "center_lon": -18.4246509,
+            "radius_p50_km": 27.065,
+            "radius_p95_km": 42.162,
+            "radius_max_km": 44.743
+          },
+          {
+            "cluster_id": 19,
+            "n": 5,
+            "center_lat": 20.2805622,
+            "center_lon": -40.2186594,
+            "radius_p50_km": 26.61,
+            "radius_p95_km": 44.365,
+            "radius_max_km": 45.992
+          },
+          {
+            "cluster_id": 20,
+            "n": 5,
+            "center_lat": 17.2923352,
+            "center_lon": -48.6635862,
+            "radius_p50_km": 24.602,
+            "radius_p95_km": 38.445,
+            "radius_max_km": 41.484
+          },
+          {
+            "cluster_id": 21,
+            "n": 5,
+            "center_lat": -8.9513475,
+            "center_lon": -12.2165641,
+            "radius_p50_km": 40.501,
+            "radius_p95_km": 47.717,
+            "radius_max_km": 49.128
+          },
+          {
+            "cluster_id": 24,
+            "n": 5,
+            "center_lat": 21.6031501,
+            "center_lon": -38.0051144,
+            "radius_p50_km": 36.907,
+            "radius_p95_km": 44.231,
+            "radius_max_km": 44.746
+          },
+          {
+            "cluster_id": 27,
+            "n": 5,
+            "center_lat": 33.3835196,
+            "center_lon": -34.6099707,
+            "radius_p50_km": 29.218,
+            "radius_p95_km": 39.653,
+            "radius_max_km": 42.157
+          },
+          {
+            "cluster_id": 31,
+            "n": 3,
+            "center_lat": -2.4726688,
+            "center_lon": -27.7946686,
+            "radius_p50_km": 16.852,
+            "radius_p95_km": 20.59,
+            "radius_max_km": 21.005
+          },
+          {
+            "cluster_id": 17,
+            "n": 2,
+            "center_lat": -15.1570165,
+            "center_lon": -14.8684665,
+            "radius_p50_km": 13.013,
+            "radius_p95_km": 13.013,
+            "radius_max_km": 13.013
+          }
+        ]
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 10,
+        "cluster_count": 23,
+        "clustered_events": 4657,
+        "noise_events": 1286,
+        "noise_fraction": 0.216389,
+        "clusters": [
+          {
+            "cluster_id": 3,
+            "n": 1466,
+            "center_lat": 25.2198712,
+            "center_lon": -43.9787738,
+            "radius_p50_km": 554.558,
+            "radius_p95_km": 1040.747,
+            "radius_max_km": 1179.166
+          },
+          {
+            "cluster_id": 4,
+            "n": 734,
+            "center_lat": 2.91747,
+            "center_lon": -30.6930137,
+            "radius_p50_km": 274.404,
+            "radius_p95_km": 674.007,
+            "radius_max_km": 776.054
+          },
+          {
+            "cluster_id": 2,
+            "n": 688,
+            "center_lat": -6.3986111,
+            "center_lon": -12.4638576,
+            "radius_p50_km": 161.338,
+            "radius_p95_km": 274.043,
+            "radius_max_km": 343.171
+          },
+          {
+            "cluster_id": 7,
+            "n": 456,
+            "center_lat": -12.3893099,
+            "center_lon": -14.0639126,
+            "radius_p50_km": 152.912,
+            "radius_p95_km": 307.703,
+            "radius_max_km": 366.194
+          },
+          {
+            "cluster_id": 0,
+            "n": 246,
+            "center_lat": -0.5690525,
+            "center_lon": -16.6632999,
+            "radius_p50_km": 120.235,
+            "radius_p95_km": 223.795,
+            "radius_max_km": 322.037
+          },
+          {
+            "cluster_id": 8,
+            "n": 222,
+            "center_lat": 13.8150099,
+            "center_lon": -44.780722,
+            "radius_p50_km": 107.617,
+            "radius_p95_km": 231.633,
+            "radius_max_km": 281.69
+          },
+          {
+            "cluster_id": 1,
+            "n": 215,
+            "center_lat": 8.3675565,
+            "center_lon": -38.9035934,
+            "radius_p50_km": 106.101,
+            "radius_p95_km": 312.59,
+            "radius_max_km": 377.404
+          },
+          {
+            "cluster_id": 16,
+            "n": 96,
+            "center_lat": 33.9585754,
+            "center_lon": -37.4444828,
+            "radius_p50_km": 81.365,
+            "radius_p95_km": 153.988,
+            "radius_max_km": 178.623
+          },
+          {
+            "cluster_id": 6,
+            "n": 75,
+            "center_lat": -1.0405841,
+            "center_lon": -24.2044236,
+            "radius_p50_km": 39.901,
+            "radius_p95_km": 114.357,
+            "radius_max_km": 142.734
+          },
+          {
+            "cluster_id": 15,
+            "n": 69,
+            "center_lat": 35.2185059,
+            "center_lon": -34.6145732,
+            "radius_p50_km": 70.679,
+            "radius_p95_km": 163.217,
+            "radius_max_km": 171.322
+          },
+          {
+            "cluster_id": 11,
+            "n": 67,
+            "center_lat": -16.8698747,
+            "center_lon": -14.3846939,
+            "radius_p50_km": 59.089,
+            "radius_p95_km": 112.656,
+            "radius_max_km": 136.971
+          },
+          {
+            "cluster_id": 9,
+            "n": 66,
+            "center_lat": -38.5736464,
+            "center_lon": -17.2857005,
+            "radius_p50_km": 77.284,
+            "radius_p95_km": 160.797,
+            "radius_max_km": 181.995
+          },
+          {
+            "cluster_id": 10,
+            "n": 45,
+            "center_lat": -2.3336983,
+            "center_lon": -12.6315054,
+            "radius_p50_km": 46.335,
+            "radius_p95_km": 92.043,
+            "radius_max_km": 111.925
+          },
+          {
+            "cluster_id": 14,
+            "n": 40,
+            "center_lat": -31.7237413,
+            "center_lon": -15.8757342,
+            "radius_p50_km": 65.432,
+            "radius_p95_km": 128.868,
+            "radius_max_km": 136.869
+          },
+          {
+            "cluster_id": 5,
+            "n": 31,
+            "center_lat": -1.0507353,
+            "center_lon": -13.7687075,
+            "radius_p50_km": 42.391,
+            "radius_p95_km": 84.943,
+            "radius_max_km": 98.597
+          },
+          {
+            "cluster_id": 20,
+            "n": 28,
+            "center_lat": 34.745326,
+            "center_lon": -41.1441872,
+            "radius_p50_km": 46.577,
+            "radius_p95_km": 92.748,
+            "radius_max_km": 105.372
+          },
+          {
+            "cluster_id": 12,
+            "n": 23,
+            "center_lat": -0.7161437,
+            "center_lon": -20.4899918,
+            "radius_p50_km": 37.26,
+            "radius_p95_km": 80.821,
+            "radius_max_km": 85.102
+          },
+          {
+            "cluster_id": 21,
+            "n": 22,
+            "center_lat": -2.423755,
+            "center_lon": -29.3233833,
+            "radius_p50_km": 29.627,
+            "radius_p95_km": 67.674,
+            "radius_max_km": 77.116
+          },
+          {
+            "cluster_id": 13,
+            "n": 19,
+            "center_lat": 32.7035374,
+            "center_lon": -43.543693,
+            "radius_p50_km": 35.264,
+            "radius_p95_km": 64.55,
+            "radius_max_km": 76.879
+          },
+          {
+            "cluster_id": 18,
+            "n": 14,
+            "center_lat": 10.5632472,
+            "center_lon": -40.97719,
+            "radius_p50_km": 17.617,
+            "radius_p95_km": 67.0,
+            "radius_max_km": 70.505
+          },
+          {
+            "cluster_id": 19,
+            "n": 13,
+            "center_lat": -25.2801622,
+            "center_lon": -14.4491217,
+            "radius_p50_km": 35.429,
+            "radius_p95_km": 48.524,
+            "radius_max_km": 55.881
+          },
+          {
+            "cluster_id": 17,
+            "n": 11,
+            "center_lat": -18.1009934,
+            "center_lon": -13.4054446,
+            "radius_p50_km": 21.483,
+            "radius_p95_km": 44.036,
+            "radius_max_km": 44.305
+          },
+          {
+            "cluster_id": 22,
+            "n": 11,
+            "center_lat": 2.6174583,
+            "center_lon": -29.4254596,
+            "radius_p50_km": 10.814,
+            "radius_p95_km": 42.33,
+            "radius_max_km": 56.685
+          }
+        ]
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 20,
+        "cluster_count": 24,
+        "clustered_events": 4206,
+        "noise_events": 1737,
+        "noise_fraction": 0.292277,
+        "clusters": [
+          {
+            "cluster_id": 1,
+            "n": 672,
+            "center_lat": -6.4207679,
+            "center_lon": -12.4747735,
+            "radius_p50_km": 160.546,
+            "radius_p95_km": 265.998,
+            "radius_max_km": 334.7
+          },
+          {
+            "cluster_id": 12,
+            "n": 669,
+            "center_lat": 24.3679581,
+            "center_lon": -44.8414938,
+            "radius_p50_km": 246.875,
+            "radius_p95_km": 506.6,
+            "radius_max_km": 590.118
+          },
+          {
+            "cluster_id": 9,
+            "n": 478,
+            "center_lat": 30.5551659,
+            "center_lon": -41.1962484,
+            "radius_p50_km": 115.87,
+            "radius_p95_km": 243.329,
+            "radius_max_km": 288.245
+          },
+          {
+            "cluster_id": 7,
+            "n": 444,
+            "center_lat": -12.402142,
+            "center_lon": -14.0862758,
+            "radius_p50_km": 149.521,
+            "radius_p95_km": 306.095,
+            "radius_max_km": 365.28
+          },
+          {
+            "cluster_id": 4,
+            "n": 385,
+            "center_lat": 3.8959087,
+            "center_lon": -32.1098571,
+            "radius_p50_km": 143.231,
+            "radius_p95_km": 288.017,
+            "radius_max_km": 324.626
+          },
+          {
+            "cluster_id": 18,
+            "n": 238,
+            "center_lat": 16.5715708,
+            "center_lon": -46.5880968,
+            "radius_p50_km": 82.377,
+            "radius_p95_km": 163.785,
+            "radius_max_km": 203.313
+          },
+          {
+            "cluster_id": 6,
+            "n": 209,
+            "center_lat": 0.9062911,
+            "center_lon": -29.0977112,
+            "radius_p50_km": 47.36,
+            "radius_p95_km": 190.041,
+            "radius_max_km": 250.682
+          },
+          {
+            "cluster_id": 3,
+            "n": 162,
+            "center_lat": -0.8447178,
+            "center_lon": -16.051546,
+            "radius_p50_km": 70.235,
+            "radius_p95_km": 120.197,
+            "radius_max_km": 143.363
+          },
+          {
+            "cluster_id": 13,
+            "n": 148,
+            "center_lat": 8.2632541,
+            "center_lon": -38.9272781,
+            "radius_p50_km": 89.272,
+            "radius_p95_km": 161.422,
+            "radius_max_km": 194.823
+          },
+          {
+            "cluster_id": 16,
+            "n": 124,
+            "center_lat": 14.6705919,
+            "center_lon": -44.9696794,
+            "radius_p50_km": 28.636,
+            "radius_p95_km": 79.887,
+            "radius_max_km": 103.843
+          },
+          {
+            "cluster_id": 0,
+            "n": 75,
+            "center_lat": 0.0004001,
+            "center_lon": -17.7935823,
+            "radius_p50_km": 58.682,
+            "radius_p95_km": 125.774,
+            "radius_max_km": 140.345
+          },
+          {
+            "cluster_id": 2,
+            "n": 70,
+            "center_lat": 0.5150022,
+            "center_lon": -25.3876017,
+            "radius_p50_km": 51.272,
+            "radius_p95_km": 102.455,
+            "radius_max_km": 113.351
+          },
+          {
+            "cluster_id": 5,
+            "n": 70,
+            "center_lat": -1.0212548,
+            "center_lon": -24.2530789,
+            "radius_p50_km": 37.421,
+            "radius_p95_km": 95.494,
+            "radius_max_km": 106.729
+          },
+          {
+            "cluster_id": 8,
+            "n": 69,
+            "center_lat": 13.0051751,
+            "center_lon": -44.7868596,
+            "radius_p50_km": 51.594,
+            "radius_p95_km": 107.883,
+            "radius_max_km": 122.518
+          },
+          {
+            "cluster_id": 20,
+            "n": 69,
+            "center_lat": 33.8407891,
+            "center_lon": -37.5051794,
+            "radius_p50_km": 64.123,
+            "radius_p95_km": 110.058,
+            "radius_max_km": 118.493
+          },
+          {
+            "cluster_id": 14,
+            "n": 50,
+            "center_lat": 7.0893829,
+            "center_lon": -34.2393316,
+            "radius_p50_km": 30.867,
+            "radius_p95_km": 82.126,
+            "radius_max_km": 86.591
+          },
+          {
+            "cluster_id": 19,
+            "n": 49,
+            "center_lat": -16.980341,
+            "center_lon": -14.4714836,
+            "radius_p50_km": 39.38,
+            "radius_p95_km": 87.699,
+            "radius_max_km": 89.552
+          },
+          {
+            "cluster_id": 17,
+            "n": 46,
+            "center_lat": 34.9686352,
+            "center_lon": -34.7795897,
+            "radius_p50_km": 47.197,
+            "radius_p95_km": 89.243,
+            "radius_max_km": 93.568
+          },
+          {
+            "cluster_id": 11,
+            "n": 39,
+            "center_lat": -2.3655535,
+            "center_lon": -12.5652452,
+            "radius_p50_km": 37.937,
+            "radius_p95_km": 72.089,
+            "radius_max_km": 75.069
+          },
+          {
+            "cluster_id": 10,
+            "n": 38,
+            "center_lat": -38.30959,
+            "center_lon": -17.2233965,
+            "radius_p50_km": 45.068,
+            "radius_p95_km": 73.679,
+            "radius_max_km": 77.579
+          },
+          {
+            "cluster_id": 15,
+            "n": 34,
+            "center_lat": 9.3023877,
+            "center_lon": -40.554786,
+            "radius_p50_km": 31.552,
+            "radius_p95_km": 69.699,
+            "radius_max_km": 81.438
+          },
+          {
+            "cluster_id": 21,
+            "n": 26,
+            "center_lat": 11.9446241,
+            "center_lon": -43.752644,
+            "radius_p50_km": 24.848,
+            "radius_p95_km": 56.717,
+            "radius_max_km": 59.4
+          },
+          {
+            "cluster_id": 22,
+            "n": 22,
+            "center_lat": -1.0636023,
+            "center_lon": -13.8234079,
+            "radius_p50_km": 35.052,
+            "radius_p95_km": 43.827,
+            "radius_max_km": 48.316
+          },
+          {
+            "cluster_id": 23,
+            "n": 20,
+            "center_lat": 7.4700597,
+            "center_lon": -36.1183925,
+            "radius_p50_km": 18.514,
+            "radius_p95_km": 52.02,
+            "radius_max_km": 56.221
+          }
+        ]
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 5,
+        "cluster_count": 15,
+        "clustered_events": 5407,
+        "noise_events": 536,
+        "noise_fraction": 0.09019,
+        "clusters": [
+          {
+            "cluster_id": 0,
+            "n": 5273,
+            "center_lat": 6.610124,
+            "center_lon": -29.3371337,
+            "radius_p50_km": 2384.484,
+            "radius_p95_km": 3798.312,
+            "radius_max_km": 5535.2
+          },
+          {
+            "cluster_id": 1,
+            "n": 27,
+            "center_lat": 22.3236075,
+            "center_lon": -38.1977172,
+            "radius_p50_km": 147.304,
+            "radius_p95_km": 247.026,
+            "radius_max_km": 304.925
+          },
+          {
+            "cluster_id": 2,
+            "n": 14,
+            "center_lat": 20.5409304,
+            "center_lon": -41.0323143,
+            "radius_p50_km": 107.752,
+            "radius_p95_km": 161.507,
+            "radius_max_km": 171.671
+          },
+          {
+            "cluster_id": 4,
+            "n": 12,
+            "center_lat": 5.2362315,
+            "center_lon": -22.9142895,
+            "radius_p50_km": 47.276,
+            "radius_p95_km": 103.41,
+            "radius_max_km": 117.104
+          },
+          {
+            "cluster_id": 6,
+            "n": 11,
+            "center_lat": -15.3536577,
+            "center_lon": -18.5904634,
+            "radius_p50_km": 63.999,
+            "radius_p95_km": 138.256,
+            "radius_max_km": 169.788
+          },
+          {
+            "cluster_id": 9,
+            "n": 10,
+            "center_lat": 14.6390321,
+            "center_lon": -60.0165346,
+            "radius_p50_km": 74.432,
+            "radius_p95_km": 109.531,
+            "radius_max_km": 111.013
+          },
+          {
+            "cluster_id": 3,
+            "n": 9,
+            "center_lat": -5.0394645,
+            "center_lon": -16.3621695,
+            "radius_p50_km": 57.072,
+            "radius_p95_km": 129.674,
+            "radius_max_km": 131.931
+          },
+          {
+            "cluster_id": 8,
+            "n": 8,
+            "center_lat": -3.6660432,
+            "center_lon": -20.1327547,
+            "radius_p50_km": 67.445,
+            "radius_p95_km": 111.077,
+            "radius_max_km": 116.13
+          },
+          {
+            "cluster_id": 10,
+            "n": 8,
+            "center_lat": 26.0839624,
+            "center_lon": -21.5580254,
+            "radius_p50_km": 42.382,
+            "radius_p95_km": 126.817,
+            "radius_max_km": 136.196
+          },
+          {
+            "cluster_id": 12,
+            "n": 8,
+            "center_lat": 15.3906931,
+            "center_lon": -57.0858431,
+            "radius_p50_km": 66.98,
+            "radius_p95_km": 94.72,
+            "radius_max_km": 97.47
+          },
+          {
+            "cluster_id": 5,
+            "n": 6,
+            "center_lat": 20.9169749,
+            "center_lon": -49.4745555,
+            "radius_p50_km": 33.733,
+            "radius_p95_km": 115.256,
+            "radius_max_km": 119.449
+          },
+          {
+            "cluster_id": 11,
+            "n": 6,
+            "center_lat": 18.9968662,
+            "center_lon": -67.8031114,
+            "radius_p50_km": 49.21,
+            "radius_p95_km": 66.532,
+            "radius_max_km": 69.084
+          },
+          {
+            "cluster_id": 13,
+            "n": 6,
+            "center_lat": 38.7443457,
+            "center_lon": -26.0180015,
+            "radius_p50_km": 53.608,
+            "radius_p95_km": 70.359,
+            "radius_max_km": 71.849
+          },
+          {
+            "cluster_id": 7,
+            "n": 5,
+            "center_lat": 18.4762039,
+            "center_lon": -38.6506639,
+            "radius_p50_km": 56.785,
+            "radius_p95_km": 73.916,
+            "radius_max_km": 76.144
+          },
+          {
+            "cluster_id": 14,
+            "n": 4,
+            "center_lat": -12.2597982,
+            "center_lon": -17.2133778,
+            "radius_p50_km": 58.63,
+            "radius_p95_km": 94.09,
+            "radius_max_km": 98.339
+          }
+        ]
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 10,
+        "cluster_count": 8,
+        "clustered_events": 5237,
+        "noise_events": 706,
+        "noise_fraction": 0.118795,
+        "clusters": [
+          {
+            "cluster_id": 1,
+            "n": 3183,
+            "center_lat": 17.6251954,
+            "center_lon": -39.1445612,
+            "radius_p50_km": 1306.129,
+            "radius_p95_km": 2314.727,
+            "radius_max_km": 2833.004
+          },
+          {
+            "cluster_id": 0,
+            "n": 1682,
+            "center_lat": -7.4740628,
+            "center_lon": -13.8615374,
+            "radius_p50_km": 431.78,
+            "radius_p95_km": 1046.285,
+            "radius_max_km": 1275.075
+          },
+          {
+            "cluster_id": 2,
+            "n": 199,
+            "center_lat": -35.9122272,
+            "center_lon": -16.5921857,
+            "radius_p50_km": 332.649,
+            "radius_p95_km": 572.199,
+            "radius_max_km": 673.987
+          },
+          {
+            "cluster_id": 4,
+            "n": 107,
+            "center_lat": -24.8387795,
+            "center_lon": -14.0750381,
+            "radius_p50_km": 289.834,
+            "radius_p95_km": 553.358,
+            "radius_max_km": 621.918
+          },
+          {
+            "cluster_id": 7,
+            "n": 34,
+            "center_lat": -2.3643142,
+            "center_lon": -29.2332208,
+            "radius_p50_km": 48.162,
+            "radius_p95_km": 154.311,
+            "radius_max_km": 169.381
+          },
+          {
+            "cluster_id": 3,
+            "n": 12,
+            "center_lat": 5.2362315,
+            "center_lon": -22.9142895,
+            "radius_p50_km": 47.276,
+            "radius_p95_km": 103.41,
+            "radius_max_km": 117.104
+          },
+          {
+            "cluster_id": 5,
+            "n": 10,
+            "center_lat": 20.9610412,
+            "center_lon": -38.2629533,
+            "radius_p50_km": 67.972,
+            "radius_p95_km": 94.443,
+            "radius_max_km": 101.958
+          },
+          {
+            "cluster_id": 6,
+            "n": 10,
+            "center_lat": 23.8816239,
+            "center_lon": -38.1708839,
+            "radius_p50_km": 73.465,
+            "radius_p95_km": 90.954,
+            "radius_max_km": 92.726
+          }
+        ]
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 20,
+        "cluster_count": 8,
+        "clustered_events": 5006,
+        "noise_events": 937,
+        "noise_fraction": 0.157664,
+        "clusters": [
+          {
+            "cluster_id": 2,
+            "n": 2013,
+            "center_lat": 24.811328,
+            "center_lon": -43.3692051,
+            "radius_p50_km": 682.867,
+            "radius_p95_km": 1381.634,
+            "radius_max_km": 1677.947
+          },
+          {
+            "cluster_id": 0,
+            "n": 1656,
+            "center_lat": -7.4541165,
+            "center_lon": -13.8765485,
+            "radius_p50_km": 434.098,
+            "radius_p95_km": 1043.845,
+            "radius_max_km": 1225.701
+          },
+          {
+            "cluster_id": 1,
+            "n": 1105,
+            "center_lat": 3.8839459,
+            "center_lon": -32.077515,
+            "radius_p50_km": 446.666,
+            "radius_p95_km": 1094.572,
+            "radius_max_km": 1300.866
+          },
+          {
+            "cluster_id": 3,
+            "n": 94,
+            "center_lat": -38.685706,
+            "center_lon": -17.1350712,
+            "radius_p50_km": 99.407,
+            "radius_p95_km": 248.076,
+            "radius_max_km": 270.591
+          },
+          {
+            "cluster_id": 4,
+            "n": 56,
+            "center_lat": -31.9149027,
+            "center_lon": -15.7864611,
+            "radius_p50_km": 97.39,
+            "radius_p95_km": 191.073,
+            "radius_max_km": 215.439
+          },
+          {
+            "cluster_id": 7,
+            "n": 31,
+            "center_lat": -2.3762784,
+            "center_lon": -29.2941786,
+            "radius_p50_km": 40.49,
+            "radius_p95_km": 133.069,
+            "radius_max_km": 155.461
+          },
+          {
+            "cluster_id": 5,
+            "n": 26,
+            "center_lat": 32.7204649,
+            "center_lon": -43.5446744,
+            "radius_p50_km": 42.131,
+            "radius_p95_km": 144.391,
+            "radius_max_km": 148.307
+          },
+          {
+            "cluster_id": 6,
+            "n": 25,
+            "center_lat": -24.8478262,
+            "center_lon": -14.5191674,
+            "radius_p50_km": 57.536,
+            "radius_p95_km": 94.739,
+            "radius_max_km": 111.44
+          }
+        ]
+      }
+    ],
+    "freeze_sha256": "5b63e4d631329b9c9d9517c55113974f80293c39c2561942b797db3bd00f7f5b"
+  },
+  "post_reveal": {
+    "anchor_lat": -3.865418,
+    "anchor_lon": 3.854924,
+    "blind_freeze_sha256_verified": true,
+    "nearest_event": {
+      "distance_km": 477.597,
+      "lat": -2.412,
+      "lon": -0.193,
+      "catalog_row_zero_based": 2692
+    },
+    "configs": [
+      {
+        "eps_km": 25.0,
+        "min_samples": 5,
+        "nearest_cluster": {
+          "cluster_id": 20,
+          "n": 5,
+          "center_lat": -8.1888022,
+          "center_lon": -10.7102039,
+          "radius_p50_km": 8.633,
+          "radius_p95_km": 12.108,
+          "radius_max_km": 12.833,
+          "anchor_to_center_km": 1680.408,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.7506,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 10,
+        "nearest_cluster": {
+          "cluster_id": 3,
+          "n": 334,
+          "center_lat": -5.4754029,
+          "center_lon": -11.7198527,
+          "radius_p50_km": 54.021,
+          "radius_p95_km": 132.353,
+          "radius_max_km": 168.416,
+          "anchor_to_center_km": 1735.254,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.7624,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 20,
+        "nearest_cluster": {
+          "cluster_id": 2,
+          "n": 252,
+          "center_lat": -5.6391077,
+          "center_lon": -11.5662355,
+          "radius_p50_km": 37.537,
+          "radius_p95_km": 103.902,
+          "radius_max_km": 126.47,
+          "anchor_to_center_km": 1720.101,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.7343,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 5,
+        "nearest_cluster": {
+          "cluster_id": 7,
+          "n": 11,
+          "center_lat": -8.0367748,
+          "center_lon": -10.7055612,
+          "radius_p50_km": 29.135,
+          "radius_p95_km": 63.021,
+          "radius_max_km": 68.898,
+          "anchor_to_center_km": 1675.4,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.7561,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 10,
+        "nearest_cluster": {
+          "cluster_id": 2,
+          "n": 688,
+          "center_lat": -6.3986111,
+          "center_lon": -12.4638576,
+          "radius_p50_km": 161.338,
+          "radius_p95_km": 274.043,
+          "radius_max_km": 343.171,
+          "anchor_to_center_km": 1828.915,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.77805,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 20,
+        "nearest_cluster": {
+          "cluster_id": 1,
+          "n": 672,
+          "center_lat": -6.4207679,
+          "center_lon": -12.4747735,
+          "radius_p50_km": 160.546,
+          "radius_p95_km": 265.998,
+          "radius_max_km": 334.7,
+          "anchor_to_center_km": 1830.456,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.772,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 5,
+        "nearest_cluster": {
+          "cluster_id": 3,
+          "n": 9,
+          "center_lat": -5.0394645,
+          "center_lon": -16.3621695,
+          "radius_p50_km": 57.072,
+          "radius_p95_km": 129.674,
+          "radius_max_km": 131.931,
+          "anchor_to_center_km": 2244.945,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.80445,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 10,
+        "nearest_cluster": {
+          "cluster_id": 0,
+          "n": 1682,
+          "center_lat": -7.4740628,
+          "center_lon": -13.8615374,
+          "radius_p50_km": 431.78,
+          "radius_p95_km": 1046.285,
+          "radius_max_km": 1275.075,
+          "anchor_to_center_km": 2000.589,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.78635,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 20,
+        "nearest_cluster": {
+          "cluster_id": 0,
+          "n": 1656,
+          "center_lat": -7.4541165,
+          "center_lon": -13.8765485,
+          "radius_p50_km": 434.098,
+          "radius_p95_km": 1043.845,
+          "radius_max_km": 1225.701,
+          "anchor_to_center_km": 2001.81,
+          "anchor_inside_cluster_p95_radius": false,
+          "anchor_inside_cluster_max_radius": false
+        },
+        "diagnostic_rectangular_null": {
+          "domain": {
+            "lat_min": -15.0,
+            "lat_max": 20.0,
+            "lon_min": -50.0,
+            "lon_max": 10.0
+          },
+          "samples": 20000,
+          "seed": 119520,
+          "fraction_random_points_with_equal_or_smaller_nearest_cluster_distance": 0.7465,
+          "formal_p_value": false,
+          "warning": "RECTANGULAR_DOMAIN_NOT_OCEAN_MASKED__DIAGNOSTIC_ONLY"
+        }
+      }
+    ]
+  },
+  "summary": {
+    "blind_freeze_sha256": "5b63e4d631329b9c9d9517c55113974f80293c39c2561942b797db3bd00f7f5b",
+    "authoritative_rows": 5943,
+    "paper_reported_rows": 6843,
+    "count_mismatch": true,
+    "n_hydrophones_distribution": {
+      "4": 1830,
+      "5": 1644,
+      "6": 2228,
+      "7": 238,
+      "8": 3
+    },
+    "nearest_catalog_event_to_anchor_km": 477.597,
+    "nearest_blind_cluster_center_across_grid_km": 1675.4,
+    "anchor_inside_any_blind_cluster_p95_radius": false,
+    "anchor_inside_any_blind_cluster_max_radius": false,
+    "verdict": "NO_BLIND_CLUSTER_P95_OVERLAP_WITH_FROZEN_ANCHOR",
+    "semantic_status": "UNCONFIRMED",
+    "tectonic_control_required": true
+  },
+  "hard_rules": [
+    "EXACT_FILE_FORMAT_PARSER_ONLY",
+    "NO_SYNTHETIC_ROWS_TO_REACH_PAPER_COUNT",
+    "BLIND_CLUSTER_BEFORE_ANCHOR_REVEAL",
+    "NO_PARAMETER_RETUNING_AFTER_REVEAL",
+    "MID_ATLANTIC_RIDGE_SEISMICITY_IS_MANDATORY_TECTONIC_CONTROL",
+    "DISTANCE_IS_NOT_CAUSATION",
+    "NO_RECENTERING",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "BLIND_CLUSTER_RUN_COMPLETE_WITH_COUNT_RECONCILIATION_GATE"
+}
