@@ -1,0 +1,66 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0",
+  "created_local": "2026-08-21T16:36:00+03:00",
+  "research_branch": "Janus-Echo-Кусто",
+  "question": "Why does the primary paper report 6843 hydroacoustic events while the authoritative current MGDS downloadable catalog contains 5943 parsed event rows?",
+  "primary_paper_evidence": {
+    "doi": "10.1029/2022JB024008",
+    "final_catalog_events": 6843,
+    "location_admission_language": "T-phase origin location, source time, and errors were calculated for events with three or more arrival picks.",
+    "groomed_catalog_events": 3458,
+    "groomed_rule": "lat/lon uncertainty <0.5 degrees; detected by four or more stations; within 200 km of ridge axis or OTF",
+    "implication": "The full 6843-event catalog is broader than the four-or-more-station groomed subset."
+  },
+  "authoritative_download_evidence": {
+    "dataset_doi": "10.26022/IEDA/330497",
+    "data_set_uid": 30497,
+    "file_uid": "2504732",
+    "member": "MGDS_Download/EA_Hydroacoustics/EA_CTBTO_catalog_all.dat.gz",
+    "ascii_sha256": "4eea7ca55456a271df79ad165d76dc6c77ad3752705b46ad031468bb00232558",
+    "parsed_rows": 5943,
+    "parser": "EXACT_EA_CTBTO_EIGHT_FIELD_WHITESPACE_V1",
+    "unexpected_nonmatching_data_lines": 0,
+    "number_of_recording_hydrophones_distribution": {
+      "4": 1830,
+      "5": 1644,
+      "6": 2228,
+      "7": 238,
+      "8": 3
+    },
+    "three_hydrophone_rows": 0
+  },
+  "arithmetic": {
+    "paper_minus_download": 900,
+    "download_is_groomed_catalog": false,
+    "reason_download_is_not_groomed": "5943 is not 3458 and downloaded rows are not restricted by the paper's full groomed rule."
+  },
+  "candidate_explanation": {
+    "hypothesis": "The missing 900 rows may correspond to full-catalog events admitted at the three-arrival-pick boundary but omitted from the current downloadable table, whose number-of-recording-hydrophones field begins at four.",
+    "compatibility": "STRONGLY_ARITHMETICALLY_AND_METHODologically_COMPATIBLE",
+    "verified": false,
+    "why_not_verified": [
+      "The paper says arrival picks while the file field says number of recording hydrophones; exact one-to-one equivalence is not explicitly established in the inspected sources.",
+      "No authoritative source inspected in this run states that exactly 900 three-pick/three-hydrophone events were removed from the deposited file.",
+      "The current MGDS dataset exposes only file UID 2504732, so a second public companion file containing the 900 rows has not been identified."
+    ]
+  },
+  "tests": {
+    "TCR_01_PAPER_6843_PRIMARY_VERIFIED": "PASS",
+    "TCR_02_PAPER_ALLOWS_THREE_OR_MORE_PICKS": "PASS",
+    "TCR_03_DOWNLOAD_5943_EXACT_PARSED": "PASS",
+    "TCR_04_DOWNLOAD_HAS_ZERO_THREE_HYDROPHONE_ROWS": "PASS",
+    "TCR_05_DOWNLOAD_IS_NOT_GROOMED_3458": "PASS",
+    "TCR_06_MISSING_900_PROVENANCE_EXPLICITLY_VERIFIED": "FAIL_OPEN"
+  },
+  "aggregate_verdict": "COUNT_MISMATCH_LOCALIZED__THREE_PICK_BOUNDARY_HYPOTHESIS_STRONGLY_COMPATIBLE_BUT_NOT_VERIFIED__MISSING_900_PROVENANCE_OPEN",
+  "scientific_effect": "BLIND_5943_ROW_RESULT_REMAINS_VALID_FOR_DOWNLOADED_ROWS__CANNOT_BE_PROMOTED_TO_FULL_6843_CATALOG_WITHOUT_MISSING_ROWS",
+  "next_gate": "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+  "hard_rules": [
+    "DO_NOT_SYNTHESIZE_THE_900_ROWS",
+    "ARRIVAL_PICK_NE_NUMBER_OF_HYDROPHONES_UNLESS_SOURCE_EXPLICITLY_BINDS_THEM",
+    "5943_ROW_BLIND_RESULT_APPLIES_TO_DOWNLOADED_ROWS_ONLY",
+    "PRIMARY_PAPER_6843_COUNT_IS_NOT_OVERRIDDEN_BY_CURRENT_FILE_COUNT",
+    "CURRENT_FILE_COUNT_IS_NOT_OVERRIDDEN_BY_PAPER_COUNT"
+  ],
+  "status": "RUN_COMPLETE__COUNT_MISMATCH_NARROWED_NOT_CLOSED"
+}
