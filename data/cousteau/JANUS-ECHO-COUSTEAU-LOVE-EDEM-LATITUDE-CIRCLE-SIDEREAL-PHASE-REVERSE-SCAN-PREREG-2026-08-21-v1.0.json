@@ -1,0 +1,50 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-LOVE-EDEM-LATITUDE-CIRCLE-SIDEREAL-PHASE-REVERSE-SCAN-PREREG-2026-08-21-v1.0",
+  "status": "PREREGISTERED_BEFORE_SCAN",
+  "frozen_intrinsic_latitude_deg": -3.8654180644718967,
+  "legacy_timestamp_longitude_deg_east": 3.854924373538978,
+  "interpretation": {
+    "latitude": "INTRINSIC_FROM_LOVE_EDEM_INTERNAL_BISECTOR_DECLINATION",
+    "longitude": "TIME_DEPENDENT_SIDEREAL_PHASE__NOT_INTRINSIC_WITHOUT_INDEPENDENT_TIMESTAMP"
+  },
+  "scan": {
+    "longitude_domain_deg_east": [-180.0, 180.0],
+    "coarse_step_deg": 0.25,
+    "refinement_step_deg": 0.01,
+    "refinement_half_width_deg": 1.0,
+    "no_posthoc_recenter": true,
+    "all_longitudes_count_toward_look_elsewhere": true
+  },
+  "primary_control": {
+    "dataset": "PB2002 Bird 2003 plate boundaries via fraxen/tectonicplates pinned commit 339b0c56563c118307b1f4542703047f5f698fae",
+    "target_boundary": "AF-SA",
+    "metric": "minimum great-circle distance from each fixed-latitude scan point to AF-SA boundary segments",
+    "primary_questions": [
+      "Where does latitude -3.865418 deg most closely approach/cross the AF-SA boundary?",
+      "How exceptional is legacy longitude +3.854924 E relative to the full latitude-circle distribution?"
+    ]
+  },
+  "secondary_control": {
+    "dataset": "EA_Hydroacoustics authoritative deposited catalog, file_uid 2504732, 5943 rows",
+    "metric": "distance from each longitude scan point to nearest catalog event and to nearest frozen blind-cluster center",
+    "rule": "secondary metrics cannot override primary tectonic control or prior blind negative"
+  },
+  "predeclared_outputs": [
+    "minimum_AF_SA_distance_km_and_longitude",
+    "legacy_longitude_AF_SA_distance_km",
+    "legacy_longitude_percentile_vs_full_circle",
+    "fraction_of_longitudes_within_25_50_100_200_500_km_of_AF_SA",
+    "nearest_event_distance_curve_summary",
+    "nearest_blind_cluster_center_curve_summary"
+  ],
+  "hard_rules": [
+    "LATITUDE_REMAINS_FROZEN",
+    "LEGACY_LONGITUDE_REMAINS_RECORDED_AS_ORIGINAL_TEST_POINT",
+    "DO_NOT_SELECT_NEW_LONGITUDE_AS_TARGET_AFTER_SCAN",
+    "FULL_360_DEG_LOOK_ELSEWHERE_ACCOUNTED",
+    "RIDGE_INTERSECTION_IS_EXPECTED_GEOMETRY_NOT_TARGET_EVIDENCE",
+    "PREVIOUS_NEGATIVE_TESTS_REMAIN_VALID_AT_LEGACY_LONGITUDE",
+    "NO_ANCIENT_RELAY_OR_UNDERWATER_STRUCTURE_CLAIM_FROM_GEOMETRY"
+  ],
+  "claim_ceiling": "COORDINATE_PROVENANCE_AND_GEOMETRIC_CONTROL_ONLY"
+}
