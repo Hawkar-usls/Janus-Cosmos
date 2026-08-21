@@ -1,0 +1,300 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T15:05:36.846844+00:00",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "phases": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "ASCEND"
+  ],
+  "trigger": "PUBLIC_HA10_STATIONXML_PLUS_MINISEED_BYTES",
+  "turn": {
+    "turn": 8,
+    "height": 8,
+    "prior_radius": 31,
+    "radius": 36,
+    "prior_state_sha256": "882429e7de4d7e476132e700d87890a6226effd9a42319c2afa537f68c0f676f",
+    "state_sha256": "a117ffc2b845816d1afd439391e62510f5e7ce88ae35679cc63d5630b1b9670b",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "PUBLIC_WAVEFORM_BYTES_DO_NOT_EQUAL_TARGET_EVIDENCE",
+      "HA10_EDH_NOMINAL_PASSBAND_1_100_HZ_OVERRIDES_NYQUIST_ONLY_ARGUMENT",
+      "119_HZ_OCEAN_SPECTRAL_TEST_FORBIDDEN_UNTIL_RESPONSE_EDGE_CALIBRATION_JUSTIFIES",
+      "RESPONSE_ONLY_CALIBRATION_PRECEDES_FFT",
+      "EVENT_AND_NOISE_WINDOWS_PREREGISTERED_BEFORE_OCEAN_SPECTRAL_INSPECTION"
+    ],
+    "scientific_delta": "PUBLIC_HA10_BYTES_RECOVERED__IM_H10N1_H10S2_EDH_250HZ_AND_1_100HZ_METADATA_VERIFIED__119HZ_MEASUREMENT_VALIDITY_RESTRICTED__TARGET_EVIDENCE_NOT_INCREASED"
+  },
+  "nodes": [
+    {
+      "node_id": "S08N01",
+      "turn": 8,
+      "phase": "BACK",
+      "claim_class": "CORRECTION",
+      "structural_context": "Return to the 117-121 Hz branch after real public waveform bytes became available. Access is now proven at EarthScope for IM.H10N1..EDH and IM.H10S2..EDH on the 2015 calibration slice.",
+      "evidence_status": "PUBLIC_HA10_BYTES_RECOVERED",
+      "parents": [],
+      "payload": {
+        "resolved_channels": [
+          {
+            "network": "IM",
+            "station": "H10N1",
+            "location": "",
+            "channel": "EDH",
+            "latitude": "-7.845673",
+            "longitude": "-14.48023",
+            "sensor_description": "1 to 100 Hz HiTech hydrophone and datalogger",
+            "scale": "1828.14",
+            "scale_frequency": "10.0",
+            "scale_units": "PA",
+            "sample_rate_hz": 250.0,
+            "starttime": "2004-09-14T00:00:00.0000",
+            "endtime": ""
+          },
+          {
+            "network": "IM",
+            "station": "H10S2",
+            "location": "",
+            "channel": "EDH",
+            "latitude": "-8.9591",
+            "longitude": "-14.64531",
+            "sensor_description": "HiTech 1 to 100 Hz hydrophone and datalogger",
+            "scale": "1808.31",
+            "scale_frequency": "10.0",
+            "scale_units": "PA",
+            "sample_rate_hz": 250.0,
+            "starttime": "2004-09-14T00:00:00.0000",
+            "endtime": ""
+          }
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0.json",
+          "sha256": "f8c5452b55574db8665cf9980c0bc04ac1e4e9b1f992e0f80b3e234cf707d560"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1.json",
+          "sha256": "129b8592e51a88c7da2df93d9a6b90b6d461723482e7f281286ae9c91156aa3e"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0.json",
+          "sha256": "2ee9f4570a0ecc194f67d8364d4ce682b3da3a1bbe886f420f460f111d7b1654"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0.json",
+          "sha256": "29959201e76ef1dc2694908db8503203da965e70967348c6e6593c48315b3097"
+        }
+      ],
+      "node_sha256": "2a86e817286d53ff1dcd3503ebbfc4d0249f9f17fe49aeef57c641f166d534e9"
+    },
+    {
+      "node_id": "S08N02",
+      "turn": 8,
+      "phase": "FORWARD",
+      "claim_class": "CONTROL",
+      "structural_context": "Forward metadata replay shows both channels sample at 250 Hz but describe the sensor/datalogger as 1 to 100 Hz. Therefore Nyquist=125 Hz does not validate a 119 Hz physical measurement.",
+      "evidence_status": "NOMINAL_PASSBAND_BLOCKS_NYQUIST_ONLY_INFERENCE",
+      "parents": [
+        "S08N01"
+      ],
+      "payload": {
+        "sample_rate_hz": 250.0,
+        "nyquist_hz": 125.0,
+        "nominal_passband_hz": [
+          1.0,
+          100.0
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0.json",
+          "sha256": "f8c5452b55574db8665cf9980c0bc04ac1e4e9b1f992e0f80b3e234cf707d560"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1.json",
+          "sha256": "129b8592e51a88c7da2df93d9a6b90b6d461723482e7f281286ae9c91156aa3e"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0.json",
+          "sha256": "2ee9f4570a0ecc194f67d8364d4ce682b3da3a1bbe886f420f460f111d7b1654"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0.json",
+          "sha256": "29959201e76ef1dc2694908db8503203da965e70967348c6e6593c48315b3097"
+        }
+      ],
+      "node_sha256": "cb13c8b67bcc01e9fc11cf16ba01440dda4f3dbe12f91a6c5b69f42ee28094e5"
+    },
+    {
+      "node_id": "S08N03",
+      "turn": 8,
+      "phase": "LEFT_HRAIN",
+      "claim_class": "FACT",
+      "structural_context": "Structural lane records two StationXML payloads and two independent 60-second miniSEED payloads without performing FFT or viewing target-band ocean amplitudes.",
+      "evidence_status": "RESPONSE_AND_BYTES_PROVENANCE_FROZEN",
+      "parents": [
+        "S08N02"
+      ],
+      "payload": {
+        "response_payloads_recovered": 2,
+        "tiny_waveform_payloads_recovered": 2,
+        "spectral_inspection_performed": false
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0.json",
+          "sha256": "f8c5452b55574db8665cf9980c0bc04ac1e4e9b1f992e0f80b3e234cf707d560"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1.json",
+          "sha256": "129b8592e51a88c7da2df93d9a6b90b6d461723482e7f281286ae9c91156aa3e"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0.json",
+          "sha256": "2ee9f4570a0ecc194f67d8364d4ce682b3da3a1bbe886f420f460f111d7b1654"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0.json",
+          "sha256": "29959201e76ef1dc2694908db8503203da965e70967348c6e6593c48315b3097"
+        }
+      ],
+      "node_sha256": "eb27937a0b782717d7ce53e70dedf43d75594a9e5f55eecc18e0e28fc9464828"
+    },
+    {
+      "node_id": "S08N04",
+      "turn": 8,
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "NEW_GATE",
+      "structural_context": "The new waveform access is useful only if instrument response near the band edge is calibrated before any target-band FFT. Association to the 119-Hz voice prior cannot bypass this measurement-validity gate.",
+      "evidence_status": "RESPONSE_EDGE_CALIBRATION_REQUIRED",
+      "parents": [
+        "S08N03"
+      ],
+      "payload": {
+        "generated_gate": "COUSTEAU_HA10_RESPONSE_EDGE_CALIBRATION_V1",
+        "target_frequency_hz": 119.0
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0.json",
+          "sha256": "f8c5452b55574db8665cf9980c0bc04ac1e4e9b1f992e0f80b3e234cf707d560"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1.json",
+          "sha256": "129b8592e51a88c7da2df93d9a6b90b6d461723482e7f281286ae9c91156aa3e"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0.json",
+          "sha256": "2ee9f4570a0ecc194f67d8364d4ce682b3da3a1bbe886f420f460f111d7b1654"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0.json",
+          "sha256": "29959201e76ef1dc2694908db8503203da965e70967348c6e6593c48315b3097"
+        }
+      ],
+      "node_sha256": "a068a210c142100245cc6be6dc1af7c70b7a5dacfc5d3eafe6107cd52fc302b6"
+    },
+    {
+      "node_id": "S08N05",
+      "turn": 8,
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 8 ascends because genuinely new raw waveform bytes and response metadata entered the graph. The ascent tightens rather than promotes the target: 119-Hz interpretation is restricted by the nominal 1-100 Hz channel metadata and must wait for response-only edge calibration.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_MEASUREMENT_VALIDITY_GAIN",
+      "parents": [
+        "S08N04"
+      ],
+      "payload": {
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gates": [
+          "COUSTEAU_HA10_RESPONSE_EDGE_CALIBRATION_V1",
+          "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+          "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1",
+          "COUSTEAU_LOVE_EDEM_LATITUDE_CIRCLE_INDEPENDENT_GEOACOUSTIC_SCAN_V1"
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0.json",
+          "sha256": "f8c5452b55574db8665cf9980c0bc04ac1e4e9b1f992e0f80b3e234cf707d560"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1.json",
+          "sha256": "129b8592e51a88c7da2df93d9a6b90b6d461723482e7f281286ae9c91156aa3e"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0.json",
+          "sha256": "2ee9f4570a0ecc194f67d8364d4ce682b3da3a1bbe886f420f460f111d7b1654"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-007-2026-08-21-v1.0.json",
+          "sha256": "29959201e76ef1dc2694908db8503203da965e70967348c6e6593c48315b3097"
+        }
+      ],
+      "node_sha256": "7c880339cf6e2f28a814c4fca19f6cad26951ac91ffb975a06f6c6379ddf0a05"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T8_01_PARENT_TURN7_ASCENDED",
+      "pass": true
+    },
+    {
+      "id": "T8_02_NEW_RAW_WAVEFORM_BYTES",
+      "pass": true
+    },
+    {
+      "id": "T8_03_NO_SPECTRAL_INSPECTION_IN_TRIGGER",
+      "pass": true
+    },
+    {
+      "id": "T8_04_TWO_250HZ_EDH_CHANNELS",
+      "pass": true
+    },
+    {
+      "id": "T8_05_NOMINAL_1_100HZ_METADATA",
+      "pass": true
+    },
+    {
+      "id": "T8_06_TWO_STATIONXML_RESPONSES",
+      "pass": true
+    },
+    {
+      "id": "T8_07_TWO_TINY_WAVEFORMS",
+      "pass": true
+    },
+    {
+      "id": "T8_08_CONTROL_MATRIX_NO_ADMISSION",
+      "pass": true
+    },
+    {
+      "id": "T8_09_RADIUS_ASCENDS",
+      "pass": true
+    },
+    {
+      "id": "T8_10_TARGET_NOT_PROMOTED",
+      "pass": true
+    }
+  ],
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_8",
+  "hard_rules": [
+    "NO_FFT_BEFORE_RESPONSE_EDGE_GATE",
+    "NO_TARGET_PROMOTION_FROM_PUBLIC_ACCESS",
+    "NO_POSTHOC_RETARGETING",
+    "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "TURN_8_ASCENDED"
+}
