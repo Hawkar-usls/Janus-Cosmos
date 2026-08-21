@@ -22,11 +22,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install requests beautifulsoup4 pandas numpy scikit-learn
+      - run: python -m pip install requests beautifulsoup4 lxml pandas numpy scikit-learn
       - name: Run independent tectonic control with frozen diagnostics
         shell: bash
         run: |
           set +e
+          rm -f data/cousteau/JANUS-ECHO-COUSTEAU-TURN5-PB2002-TECTONIC-CONTROL-2026-08-21-v1.0.json
           python workspace/cousteau_turn5_pb2002_tectonic_control.py > /tmp/cousteau_turn5.log 2>&1
           code=$?
           cat /tmp/cousteau_turn5.log
