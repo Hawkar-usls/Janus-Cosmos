@@ -1,0 +1,8 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-TURN5-PB2002-TECTONIC-CONTROL-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T13:44:55.815307+00:00",
+  "status": "BLOCKED_TECHNICAL_EXECUTION",
+  "exit_code": 1,
+  "log_tail": "Traceback (most recent call last):\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_turn5_pb2002_tectonic_control.py\", line 10, in <module>\n    from cousteau_ea_tphase_blind_cluster_v7 import acquire_exact_file, parse_exact, ANCHOR_LAT, ANCHOR_LON, PAPER_REPORTED_EVENT_COUNT\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_ea_tphase_blind_cluster_v7.py\", line 13, in <module>\n    from cousteau_ea_tphase_blind_cluster import (\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_ea_tphase_blind_cluster.py\", line 31, in <module>\n    from lxml import etree\nModuleNotFoundError: No module named 'lxml'\n",
+  "scientific_interpretation": "BLOCKER_ONLY__NOT_TECTONIC_RESULT"
+}
