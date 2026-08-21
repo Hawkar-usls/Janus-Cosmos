@@ -1,8 +1,192 @@
 {
   "artifact_id": "JANUS-ECHO-COUSTEAU-TURN5-PB2002-TECTONIC-CONTROL-2026-08-21-v1.0",
-  "created_utc": "2026-08-21T13:44:55.815307+00:00",
-  "status": "BLOCKED_TECHNICAL_EXECUTION",
-  "exit_code": 1,
-  "log_tail": "Traceback (most recent call last):\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_turn5_pb2002_tectonic_control.py\", line 10, in <module>\n    from cousteau_ea_tphase_blind_cluster_v7 import acquire_exact_file, parse_exact, ANCHOR_LAT, ANCHOR_LON, PAPER_REPORTED_EVENT_COUNT\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_ea_tphase_blind_cluster_v7.py\", line 13, in <module>\n    from cousteau_ea_tphase_blind_cluster import (\n  File \"/home/runner/work/Janus-Cosmos/Janus-Cosmos/workspace/cousteau_ea_tphase_blind_cluster.py\", line 31, in <module>\n    from lxml import etree\nModuleNotFoundError: No module named 'lxml'\n",
-  "scientific_interpretation": "BLOCKER_ONLY__NOT_TECTONIC_RESULT"
+  "created_utc": "2026-08-21T13:46:37.746323+00:00",
+  "frozen_anchor": [
+    -3.865418,
+    3.854924
+  ],
+  "sources": {
+    "tphase": {
+      "doi": "10.26022/IEDA/330497",
+      "file_uid": "2504732",
+      "rows": 5943,
+      "ascii_sha256": "4eea7ca55456a271df79ad165d76dc6c77ad3752705b46ad031468bb00232558"
+    },
+    "paper": {
+      "doi": "10.1029/2022JB024008",
+      "reported_final_events": 6843,
+      "reported_location_threshold": "THREE_OR_MORE_ARRIVAL_PICKS"
+    },
+    "tectonic_control": {
+      "dataset": "PB2002 Bird 2003 via fraxen GeoJSON conversion",
+      "doi": "10.1029/2001GC000252",
+      "git_commit": "339b0c56563c118307b1f4542703047f5f698fae",
+      "url": "https://raw.githubusercontent.com/fraxen/tectonicplates/339b0c56563c118307b1f4542703047f5f698fae/GeoJSON/PB2002_boundaries.json",
+      "sha256": "42b3e0876a7e40f133e958ba7ab85f8851b5c693a046fbc3b138e7751863d92a",
+      "af_sa_features": [
+        {
+          "name": "AF-SA",
+          "source": "Mueller et al. [1987]",
+          "segments": 172
+        },
+        {
+          "name": "AF-SA",
+          "source": "by Peter Bird, October 2001",
+          "segments": 44
+        },
+        {
+          "name": "AF-SA",
+          "source": "Mueller et al. [1987]",
+          "segments": 39
+        }
+      ],
+      "arc_segments": 255
+    },
+    "author_specific_mar_dataset_s1": {
+      "filename": "2022JB024008-sup-0003-Data Set SI-S01.zip",
+      "status": "BLOCKED_BY_WILEY_HTTP_403_IN_RUNNER",
+      "role": "REPLICATION_GATE_NOT_REPLACED_BY_PB2002"
+    }
+  },
+  "count_reconciliation": {
+    "paper_reported": 6843,
+    "downloaded_rows": 5943,
+    "difference": 900,
+    "downloaded_n_hydrophones_distribution": {
+      "4": 1830,
+      "5": 1644,
+      "6": 2228,
+      "7": 238,
+      "8": 3
+    },
+    "observation": "AUTHORITATIVE_DOWNLOAD_HAS_NO_3_HYDROPHONE_ROWS",
+    "inference": "EXACT_900_ROW_GAP_IS_STRUCTURALLY_COMPATIBLE_WITH_OMITTED_THREE_PICK_EVENTS__NOT_SOURCE_CONFIRMED",
+    "status": "OPEN_REQUIRES_SOURCE_CONFIRMATION",
+    "synthetic_row_repair": false
+  },
+  "tectonic_distance_control": {
+    "anchor_to_af_sa_boundary_km": 1664.013,
+    "event_to_af_sa_boundary_km_quantiles": {
+      "0": 0.03,
+      "0.1": 7.556,
+      "0.25": 19.884,
+      "0.5": 71.845,
+      "0.75": 1030.491,
+      "0.9": 1788.33,
+      "0.95": 2195.932,
+      "0.99": 2837.556,
+      "1": 10938.363
+    },
+    "event_fraction_within_km": {
+      "25": 0.29682,
+      "50": 0.443884,
+      "100": 0.542487,
+      "200": 0.604913,
+      "300": 0.631331,
+      "500": 0.665152,
+      "750": 0.707219,
+      "1000": 0.745078,
+      "1500": 0.830052,
+      "2000": 0.931011
+    },
+    "anchor_distance_percentile_vs_events": 0.860508,
+    "anchor_to_event_median_ridge_distance_ratio": 23.161,
+    "nearest_anchor_event": {
+      "lat": -2.412,
+      "lon": -0.193,
+      "event_to_anchor_km": 477.597,
+      "event_to_af_sa_boundary_km": 1261.139,
+      "n_hydrophones": 6
+    },
+    "nearest_blind_cluster_controls": [
+      {
+        "eps_km": 25.0,
+        "min_samples": 5,
+        "anchor_to_cluster_center_km": 1680.408,
+        "cluster_center_lat": -8.1888022,
+        "cluster_center_lon": -10.7102039,
+        "cluster_center_to_af_sa_boundary_km": 167.606
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 10,
+        "anchor_to_cluster_center_km": 1735.254,
+        "cluster_center_lat": -5.4754029,
+        "cluster_center_lon": -11.7198527,
+        "cluster_center_to_af_sa_boundary_km": 23.532
+      },
+      {
+        "eps_km": 25.0,
+        "min_samples": 20,
+        "anchor_to_cluster_center_km": 1720.101,
+        "cluster_center_lat": -5.6391077,
+        "cluster_center_lon": -11.5662355,
+        "cluster_center_to_af_sa_boundary_km": 25.526
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 5,
+        "anchor_to_cluster_center_km": 1675.4,
+        "cluster_center_lat": -8.0367748,
+        "cluster_center_lon": -10.7055612,
+        "cluster_center_to_af_sa_boundary_km": 151.8
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 10,
+        "anchor_to_cluster_center_km": 1828.915,
+        "cluster_center_lat": -6.3986111,
+        "cluster_center_lon": -12.4638576,
+        "cluster_center_to_af_sa_boundary_km": 73.354
+      },
+      {
+        "eps_km": 50.0,
+        "min_samples": 20,
+        "anchor_to_cluster_center_km": 1830.456,
+        "cluster_center_lat": -6.4207679,
+        "cluster_center_lon": -12.4747735,
+        "cluster_center_to_af_sa_boundary_km": 71.261
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 5,
+        "anchor_to_cluster_center_km": 2244.945,
+        "cluster_center_lat": -5.0394645,
+        "cluster_center_lon": -16.3621695,
+        "cluster_center_to_af_sa_boundary_km": 398.514
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 10,
+        "anchor_to_cluster_center_km": 2000.589,
+        "cluster_center_lat": -7.4740628,
+        "cluster_center_lon": -13.8615374,
+        "cluster_center_to_af_sa_boundary_km": 28.605
+      },
+      {
+        "eps_km": 100.0,
+        "min_samples": 20,
+        "anchor_to_cluster_center_km": 2001.81,
+        "cluster_center_lat": -7.4541165,
+        "cluster_center_lon": -13.8765485,
+        "cluster_center_to_af_sa_boundary_km": 29.675
+      }
+    ],
+    "verdict": "TECTONIC_CONTROL_STRONGLY_FAVORED_FOR_CATALOG_SPATIAL_STRUCTURE"
+  },
+  "scientific_interpretation": {
+    "target_evidence": "NOT_INCREASED",
+    "target_identity": "UNCONFIRMED",
+    "rule": "IF_CATALOG_EVENTS_AND_CLUSTERS_ARE_SYSTEMATICALLY_CLOSER_TO_MAR_THAN_ANCHOR__TECTONIC_BACKGROUND_OUTPERFORMS_ANCHOR_ASSOCIATION",
+    "author_dataset_s1_replication_required": true
+  },
+  "hard_rules": [
+    "PB2002_IS_INDEPENDENT_TECTONIC_CONTROL_NOT_AUTHOR_DATASET_S1",
+    "NO_RECENTERING",
+    "DISTANCE_IS_NOT_CAUSATION",
+    "NO_SYNTHETIC_MISSING_ROWS",
+    "THREE_PICK_OMISSION_IS_INFERENCE_NOT_FACT",
+    "NEGATIVE_RESULT_NOT_RESCUED_BY_ASSOCIATION"
+  ],
+  "status": "RUN_COMPLETE"
 }
