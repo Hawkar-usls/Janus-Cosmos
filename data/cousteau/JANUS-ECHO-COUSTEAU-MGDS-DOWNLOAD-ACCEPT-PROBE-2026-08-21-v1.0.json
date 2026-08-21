@@ -1,0 +1,75 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-MGDS-DOWNLOAD-ACCEPT-PROBE-2026-08-21-v1.0",
+  "created_at_utc": "2026-08-21T13:20:53.798343+00:00",
+  "steps": [
+    {
+      "stage": "uid_lookup",
+      "requested_url": "https://www.marine-geo.org/tools/search/file_uids.php?data_set_uid=30497",
+      "method": "GET",
+      "final_url": "https://www.marine-geo.org/tools/search/file_uids.php?data_set_uid=30497",
+      "status": 200,
+      "history": [],
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "11"
+      },
+      "bytes": 11,
+      "magic_hex": "5b2232353034373332225d",
+      "body_prefix": "[\"2504732\"]"
+    },
+    {
+      "stage": "modal",
+      "requested_url": "https://www.marine-geo.org/services/download/download_modal.php",
+      "method": "POST",
+      "final_url": "https://www.marine-geo.org/services/download/download_modal.php",
+      "status": 200,
+      "history": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Content-Length": "1492"
+      },
+      "bytes": 4092,
+      "magic_hex": "3c73637269707420747970653d22746578742f6a617661736372697074223e0a",
+      "body_prefix": "<script type=\"text/javascript\">\n$(document).ready(function(){\n\t$('.requesttape').click(function(event){\n        event.preventDefault();\n        $(\"#dialog\").dialog('close').promise().done(function(){\n            $(\"#requestselected\").click();\n        });\n\t});\n    $('#acceptTerms').click(function(event){\n        $('#postForm').show();\n        $('#download_terms').hide();\n    });\n    $('#bundle_docs').change(function(){\n        $('#doc_uids').val('');\n        if ($(this).is(':checked')) {\n            $('.doc_check').prop( \"checked\", true ).attr('disabled','disabled');\n        } else {\n            $('.doc_check').prop( \"checked\", false ).removeAttr('disabled');\n        }\n    });\n    $('.doc_check').click(function(){\n        $('#doc_uids').val($.map($('.doc_check:checked'),function(n,i){return n.value;}).join(','));\n    });\n    $('#showdocs').click(function(){\n        $('#document_list').toggle();\n        $(this).find('i').toggleClass('fa-caret-right').toggleClass('fa-caret-down');\n    });\n    $('.purpose').change(function(){\n        $('.download_submit').removeAttr('disabled');\n        if ($(this).val()=='Other') {\n\t\t\t$('#otherText').removeAttr('disabled').show();\n\t\t} else {\n\t\t\t$('#otherText').attr('disabled','disabled').hide().val('');\n\t\t}\n    });\n    $('#data_link').submit(function(event) {\n\t\t$(\"#dialog\").dialog('close');\n\t\treturn true;\n\t});\n});\n</script>\n<div id=\"download_terms\">\n<p>You may browse freely, but you may not circulate or publish materials you\nobtained from this site if you do not accept the terms of providing adequate\ncitation to the contributing scientists and MGDS\n(<a href=\"/index.php\">www.marine-geo.org</a>).</p>\n<p>Users are strongly encouraged to contact the original investigators responsible\nfor data made available on this site. Where appropriate, researchers are also\nencouraged to consider collaboration and/or co-authorship with original\ninvestigators.  Click the button below to agree to our <a href=\"/about/terms_of_use.php\">terms of use</a>.\n</p>\n<button type=\"button\" id=\"acceptTerms\">Accept Terms</button>\n</div>\n<div id=\"postForm\">\n<form method=\"post\" action=\"https://api.marine-geo.org/services/download/download_accept.php\" name=\"data_link\" id=\"data_link\" target=\"_blank\">\n    <hr class=\"gradient\"/>\n    <span class=\"setstitle\">What is the intended use for this data?</span>\n    <hr class=\"gradient\" style=\"margin-bottom:5px;\"/>\n    <div id=\"purpose_block\">\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Educational\" />\n            <div>Educational</div>\n        </label></div>\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Research\" />\n            <div>Research</div>\n        </label></div>\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Personal\" />\n            <div>Personal Interest</div>\n        </label></div>\n                    <div class=\"clearfix\"><label>\n                <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Business\" />\n                <div>Commercial</div>\n            </label></div>\n                <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Other\" />\n            <div>Other&nbsp;<input type=\"text\" value=\"\" name=\"otherText\" id=\"otherText\" disabled size=\"40\" placeholder=\"Please describe\" /></div>\n        </label></div>\n    </div>\n        <div id=\"downloaddiv\">\n        <button type=\"submit\" class=\"download_submit\" disabled=\"disabled\">Download</button>\n    <div style=\"font-size:.8em;font-weight:100;color:gray;font-style:italic;\">Archive Download is 138.8kB (344.1kB uncompressed)</div>\n\t</div>\n\t<input type=\"hidden\" id=\"client\" name=\"client\" value=\"DataLink\" />\n\t<input type=\"hidden\" id=\"force_download\" name=\"force_download\" value=\"1\" />\n    \n    <input type=\"hidden\" id=\"data_uids\" name=\"data_uids\" value=\"2504732\" />\n\t<div style=\"font-size:.8em;font-weight:100;color:red;text-align:center\">\n\t\tData not intended for navigation\n\t</div>\n</form>\n</div>"
+    },
+    {
+      "stage": "accept_no_redirect",
+      "requested_url": "https://api.marine-geo.org/services/download/download_accept.php",
+      "method": "POST",
+      "final_url": "https://api.marine-geo.org/services/download/download_accept.php",
+      "status": 200,
+      "history": [],
+      "headers": {
+        "Content-Disposition": "attachment; filename=\"MGDS_Download.tar\"",
+        "Content-Type": "application/x-tar"
+      },
+      "bytes": 138752,
+      "magic_hex": "45415f435442544f5f636174616c6f675f616c6c2e6461742e677a0000000000",
+      "body_prefix": null
+    },
+    {
+      "stage": "accept_follow_enabled",
+      "requested_url": "https://api.marine-geo.org/services/download/download_accept.php",
+      "method": "POST",
+      "final_url": "https://api.marine-geo.org/services/download/download_accept.php",
+      "status": 200,
+      "history": [],
+      "headers": {
+        "Content-Disposition": "attachment; filename=\"MGDS_Download.tar\"",
+        "Content-Type": "application/x-tar"
+      },
+      "bytes": 138752,
+      "magic_hex": "45415f435442544f5f636174616c6f675f616c6c2e6461742e677a0000000000",
+      "body_prefix": null
+    }
+  ],
+  "accept_contract": {
+    "action": "https://api.marine-geo.org/services/download/download_accept.php",
+    "payload": {
+      "purpose": "Research",
+      "client": "DataLink",
+      "force_download": "1",
+      "data_uids": "2504732"
+    }
+  }
+}
