@@ -1,0 +1,89 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-SOUTH-ATLANTIC-KAMIL-LIKE-RING-SCAN-RUN-001-2026-08-21-v1.0",
+  "program": "OSIRIS_PYRAMID_SEARCH",
+  "codename": "TOBI_SPERMAN__THE_SONAR_THAT_SEARCHES",
+  "created_local": "2026-08-21T19:38:00+03:00",
+  "document_class": "TWO_BEAM_PUBLICATION_LEVEL_GEOSCIENCE_SCAN",
+  "status": "RUN_COMPLETE_PUBLICATION_LEVEL__RAW_TOBI_IMAGE_SCAN_PENDING__NO_OSIRIS_PYRAMID_DETECTED",
+  "beam_A_tobi02_intrinsic_latitude": {
+    "crossing_approx": [-3.8654180644718967, -12.142441475],
+    "crossing_time_approx_utc": "2005-02-28T01:07:25Z",
+    "cruise": "CD169",
+    "tow": "TOBI_02",
+    "survey_capabilities_verified": [
+      "30_KHZ_DEEP_TOW_SIDESCAN",
+      "PHASE_DIFFERENCE_INTERFEROMETRIC_BATHYMETRY",
+      "CHIRP_SEISMIC_PROFILER",
+      "THREE_COMPONENT_MAGNETOMETER",
+      "MAPR_OPTICAL_BACKSCATTER_CONTEXT"
+    ],
+    "survey_area_insonified_km2_approx": 2700,
+    "publication_level_impact_like_candidate_at_crossing": "NOT_FOUND_YET",
+    "raw_or_processed_window_recovered": false,
+    "nearest_strong_natural_control": {
+      "class": "TECTONIC_HYDROTHERMAL_NON_TRANSFORM_DISCONTINUITY",
+      "published_site_approx": [-4.03, -12.25],
+      "distance_from_tobi02_crossing_km_approx": 21.85,
+      "status": "ACTIVE_INFERRED_HYDROTHERMAL_FIELD_AROUND_4_02S",
+      "interpretation": "Any circular, bowl, ring, radial or magnetic feature in the TOBI-02 window must first beat local fault/relay-basin/hydrothermal/volcanic explanations."
+    },
+    "known_false_positive_family": [
+      "MEXICANS_HAT_YOUNG_SHEET_FLOW_FEATURE",
+      "TURTLE_PITS_COLLAPSE_PITS",
+      "PARSONS_NOSE_MOUND",
+      "MOTTLED_VALLEY",
+      "SPECKLED_AREA",
+      "VOLCANIC_RIDGES",
+      "NON_TRANSFORM_DISCONTINUITY_RELAY_BASINS"
+    ],
+    "verdict": "NO_PUBLICATION_LEVEL_IMPACT_CANDIDATE_AT_CURRENT_TOBI02_WINDOW__RAW_MULTICHANNEL_WINDOW_REQUIRED"
+  },
+  "beam_B_south_atlantic_ring_structures": {
+    "strongest_public_candidate_found": {
+      "name": "MALVINAS_FALKLAND_PLATEAU_STRUCTURE",
+      "center_approx": [-51.0, -62.0],
+      "diameter_km_approx": 250,
+      "water_depth_m": [250, 450],
+      "surface_expression": "NONE__ENTIRELY_BURIED",
+      "reported_geophysical_features": [
+        "ROUGHLY_CIRCULAR_SEISMIC_BASIN",
+        "CENTRAL_NEGATIVE_BOUGUER_GRAVITY_ANOMALY_AROUND_MINUS_30_6_MGAL",
+        "SURROUNDING_POSITIVE_GRAVITY_RING_UP_TO_PLUS_47_6_MGAL",
+        "CIRCULAR_ROSE_LIKE_POSITIVE_MAGNETIC_ANOMALIES_UP_TO_ABOUT_214_NT"
+      ],
+      "impact_proposal_status": "DEBATED",
+      "2019_review_verdict": "IMPACT_EVIDENCE_INSUFFICIENT_AND_NOT_COMPELLING__ALTERNATIVE_VOLCANIC_INTRUSIVE_AND_TECTONIC_MODELS_NOT_ADEQUATELY_EXCLUDED",
+      "cousteau_role": "ADVERSARIAL_GEOPHYSICAL_RING_CANDIDATE__NOT_TARGET_EVIDENCE"
+    },
+    "confirmed_or_better_documented_marine_impact_controls_outside_target_corridor": [
+      "MJOLNIR",
+      "CHICXULUB",
+      "CHESAPEAKE_BAY",
+      "MONTAGNAIS",
+      "NADIR_AS_GENERAL_ATLANTIC_TEMPLATE"
+    ],
+    "verdict": "SOUTH_ATLANTIC_CONTAINS_AT_LEAST_ONE_MAJOR_DEBATED_RING_GEOPHYSICAL_STRUCTURE__NO_CONFIRMED_KAMIL_LIKE_IMPACT_FOUND_IN_CURRENT_3_TO_7S_TOBI_CORRIDOR"
+  },
+  "decision_matrix": {
+    "IMPACT_LIKE": "Require coherent surface/seismic geometry plus potential-field anomaly plus alternative-model rejection plus ground truth where possible.",
+    "VOLCANIC_COLLAPSE": "Default when morphology aligns with young flows, collapse pits, volcanic ridges or sheet-flow texture without independent impact diagnostics.",
+    "FAULT_BASIN": "Default when ring/bowl geometry follows NTD, relay basin, transform or normal-fault architecture.",
+    "UNRESOLVED": "Use when multi-channel evidence exists but no physical model clearly outperforms alternatives."
+  },
+  "hard_rules": [
+    "PUBLICATION_LEVEL_NOT_FOUND_IS_NOT_RAW_DATA_NEGATIVE",
+    "NO_TARGET_PROMOTION_FROM_CIRCULARITY_ALONE",
+    "MALVINAS_IS_DEBATED_CONTROL_NOT_CONFIRMED_IMPACT",
+    "LOCAL_4_02S_TECTONIC_HYDROTHERMAL_BACKGROUND_IS_MANDATORY_CONTROL",
+    "RAW_TOBI02_SIDESCAN_PHASE_BATHY_CHIRP_MAGNETICS_REQUIRED",
+    "NO_RETARGETING_AFTER_LOOKING",
+    "NO_OSIRIS_PYRAMID_DETECTED_YET"
+  ],
+  "next_gate": "OSIRIS_PYRAMID_SEARCH__TOBI_SPERMAN_RAW_WINDOW_PLUS_SOUTH_ATLANTIC_RING_MODEL_OUTPERFORMANCE_V1",
+  "sources": [
+    "CD169_CRUISE_REPORT",
+    "10.1016/j.epsl.2008.06.048",
+    "10.1111/ter.12269",
+    "10.1111/maps.13227"
+  ]
+}
