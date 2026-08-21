@@ -1,0 +1,200 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-MGDS-DOWNLOAD-MODAL-PROBE-2026-08-21-v1.0",
+  "created_at_utc": "2026-08-21T11:02:31.595219+00:00",
+  "uid_lookup": {
+    "status": 200,
+    "url": "https://www.marine-geo.org/tools/search/file_uids.php?data_set_uid=30497",
+    "text": "[\"2504732\"]",
+    "headers": {
+      "Date": "Fri, 21 Aug 2026 11:02:31 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "11",
+      "Connection": "keep-alive",
+      "Server": "Apache/2.4.54 (Debian)",
+      "X-Powered-By": "PHP/7.4.33",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT"
+    }
+  },
+  "modal": {
+    "status": 200,
+    "url": "https://www.marine-geo.org/services/download/download_modal.php",
+    "headers": {
+      "Date": "Fri, 21 Aug 2026 11:02:32 GMT",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Content-Length": "1492",
+      "Connection": "keep-alive",
+      "Server": "Apache/2.4.54 (Debian)",
+      "X-Powered-By": "PHP/7.4.33",
+      "Vary": "Accept-Encoding",
+      "Content-Encoding": "gzip",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT"
+    },
+    "body": "<script type=\"text/javascript\">\n$(document).ready(function(){\n\t$('.requesttape').click(function(event){\n        event.preventDefault();\n        $(\"#dialog\").dialog('close').promise().done(function(){\n            $(\"#requestselected\").click();\n        });\n\t});\n    $('#acceptTerms').click(function(event){\n        $('#postForm').show();\n        $('#download_terms').hide();\n    });\n    $('#bundle_docs').change(function(){\n        $('#doc_uids').val('');\n        if ($(this).is(':checked')) {\n            $('.doc_check').prop( \"checked\", true ).attr('disabled','disabled');\n        } else {\n            $('.doc_check').prop( \"checked\", false ).removeAttr('disabled');\n        }\n    });\n    $('.doc_check').click(function(){\n        $('#doc_uids').val($.map($('.doc_check:checked'),function(n,i){return n.value;}).join(','));\n    });\n    $('#showdocs').click(function(){\n        $('#document_list').toggle();\n        $(this).find('i').toggleClass('fa-caret-right').toggleClass('fa-caret-down');\n    });\n    $('.purpose').change(function(){\n        $('.download_submit').removeAttr('disabled');\n        if ($(this).val()=='Other') {\n\t\t\t$('#otherText').removeAttr('disabled').show();\n\t\t} else {\n\t\t\t$('#otherText').attr('disabled','disabled').hide().val('');\n\t\t}\n    });\n    $('#data_link').submit(function(event) {\n\t\t$(\"#dialog\").dialog('close');\n\t\treturn true;\n\t});\n});\n</script>\n<div id=\"download_terms\">\n<p>You may browse freely, but you may not circulate or publish materials you\nobtained from this site if you do not accept the terms of providing adequate\ncitation to the contributing scientists and MGDS\n(<a href=\"/index.php\">www.marine-geo.org</a>).</p>\n<p>Users are strongly encouraged to contact the original investigators responsible\nfor data made available on this site. Where appropriate, researchers are also\nencouraged to consider collaboration and/or co-authorship with original\ninvestigators.  Click the button below to agree to our <a href=\"/about/terms_of_use.php\">terms of use</a>.\n</p>\n<button type=\"button\" id=\"acceptTerms\">Accept Terms</button>\n</div>\n<div id=\"postForm\">\n<form method=\"post\" action=\"https://api.marine-geo.org/services/download/download_accept.php\" name=\"data_link\" id=\"data_link\" target=\"_blank\">\n    <hr class=\"gradient\"/>\n    <span class=\"setstitle\">What is the intended use for this data?</span>\n    <hr class=\"gradient\" style=\"margin-bottom:5px;\"/>\n    <div id=\"purpose_block\">\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Educational\" />\n            <div>Educational</div>\n        </label></div>\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Research\" />\n            <div>Research</div>\n        </label></div>\n        <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Personal\" />\n            <div>Personal Interest</div>\n        </label></div>\n                    <div class=\"clearfix\"><label>\n                <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Business\" />\n                <div>Commercial</div>\n            </label></div>\n                <div class=\"clearfix\"><label>\n            <input type=\"radio\" class=\"purpose\" name=\"purpose\" value=\"Other\" />\n            <div>Other&nbsp;<input type=\"text\" value=\"\" name=\"otherText\" id=\"otherText\" disabled size=\"40\" placeholder=\"Please describe\" /></div>\n        </label></div>\n    </div>\n        <div id=\"downloaddiv\">\n        <button type=\"submit\" class=\"download_submit\" disabled=\"disabled\">Download</button>\n    <div style=\"font-size:.8em;font-weight:100;color:gray;font-style:italic;\">Archive Download is 138.8kB (344.1kB uncompressed)</div>\n\t</div>\n\t<input type=\"hidden\" id=\"client\" name=\"client\" value=\"DataLink\" />\n\t<input type=\"hidden\" id=\"force_download\" name=\"force_download\" value=\"1\" />\n    \n    <input type=\"hidden\" id=\"data_uids\" name=\"data_uids\" value=\"2504732\" />\n\t<div style=\"font-size:.8em;font-weight:100;color:red;text-align:center\">\n\t\tData not intended for navigation\n\t</div>\n</form>\n</div>"
+  },
+  "forms": [
+    {
+      "index": 0,
+      "action": "https://api.marine-geo.org/services/download/download_accept.php",
+      "method": "post",
+      "id": "data_link",
+      "class": null,
+      "fields": [
+        {
+          "tag": "input",
+          "type": "radio",
+          "name": "purpose",
+          "value": "Educational",
+          "id": null,
+          "class": [
+            "purpose"
+          ],
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "name": "purpose",
+          "value": "Research",
+          "id": null,
+          "class": [
+            "purpose"
+          ],
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "name": "purpose",
+          "value": "Personal",
+          "id": null,
+          "class": [
+            "purpose"
+          ],
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "name": "purpose",
+          "value": "Business",
+          "id": null,
+          "class": [
+            "purpose"
+          ],
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "name": "purpose",
+          "value": "Other",
+          "id": null,
+          "class": [
+            "purpose"
+          ],
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "name": "otherText",
+          "value": "",
+          "id": "otherText",
+          "class": null,
+          "text": ""
+        },
+        {
+          "tag": "button",
+          "type": "submit",
+          "name": null,
+          "value": null,
+          "id": null,
+          "class": [
+            "download_submit"
+          ],
+          "text": "Download"
+        },
+        {
+          "tag": "input",
+          "type": "hidden",
+          "name": "client",
+          "value": "DataLink",
+          "id": "client",
+          "class": null,
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "hidden",
+          "name": "force_download",
+          "value": "1",
+          "id": "force_download",
+          "class": null,
+          "text": ""
+        },
+        {
+          "tag": "input",
+          "type": "hidden",
+          "name": "data_uids",
+          "value": "2504732",
+          "id": "data_uids",
+          "class": null,
+          "text": ""
+        }
+      ],
+      "html": "<form action=\"https://api.marine-geo.org/services/download/download_accept.php\" id=\"data_link\" method=\"post\" name=\"data_link\" target=\"_blank\">\n<hr class=\"gradient\"/>\n<span class=\"setstitle\">What is the intended use for this data?</span>\n<hr class=\"gradient\" style=\"margin-bottom:5px;\"/>\n<div id=\"purpose_block\">\n<div class=\"clearfix\"><label>\n<input class=\"purpose\" name=\"purpose\" type=\"radio\" value=\"Educational\"/>\n<div>Educational</div>\n</label></div>\n<div class=\"clearfix\"><label>\n<input class=\"purpose\" name=\"purpose\" type=\"radio\" value=\"Research\"/>\n<div>Research</div>\n</label></div>\n<div class=\"clearfix\"><label>\n<input class=\"purpose\" name=\"purpose\" type=\"radio\" value=\"Personal\"/>\n<div>Personal Interest</div>\n</label></div>\n<div class=\"clearfix\"><label>\n<input class=\"purpose\" name=\"purpose\" type=\"radio\" value=\"Business\"/>\n<div>Commercial</div>\n</label></div>\n<div class=\"clearfix\"><label>\n<input class=\"purpose\" name=\"purpose\" type=\"radio\" value=\"Other\"/>\n<div>Other <input disabled=\"\" id=\"otherText\" name=\"otherText\" placeholder=\"Please describe\" size=\"40\" type=\"text\" value=\"\"/></div>\n</label></div>\n</div>\n<div id=\"downloaddiv\">\n<button class=\"download_submit\" disabled=\"disabled\" type=\"submit\">Download</button>\n<div style=\"font-size:.8em;font-weight:100;color:gray;font-style:italic;\">Archive Download is 138.8kB (344.1kB uncompressed)</div>\n</div>\n<input id=\"client\" name=\"client\" type=\"hidden\" value=\"DataLink\"/>\n<input id=\"force_download\" name=\"force_download\" type=\"hidden\" value=\"1\"/>\n<input id=\"data_uids\" name=\"data_uids\" type=\"hidden\" value=\"2504732\"/>\n<div style=\"font-size:.8em;font-weight:100;color:red;text-align:center\">\n\t\tData not intended for navigation\n\t</div>\n</form>"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://www.marine-geo.org/index.php",
+      "id": null,
+      "class": null,
+      "text": "www.marine-geo.org"
+    },
+    {
+      "href": "https://www.marine-geo.org/about/terms_of_use.php",
+      "id": null,
+      "class": null,
+      "text": "terms of use"
+    }
+  ],
+  "buttons": [
+    {
+      "id": "acceptTerms",
+      "class": null,
+      "name": null,
+      "value": null,
+      "type": "button",
+      "onclick": null,
+      "text": "Accept Terms"
+    },
+    {
+      "id": null,
+      "class": [
+        "download_submit"
+      ],
+      "name": null,
+      "value": null,
+      "type": "submit",
+      "onclick": null,
+      "text": "Download"
+    }
+  ],
+  "scripts": [
+    "\n$(document).ready(function(){\n\t$('.requesttape').click(function(event){\n        event.preventDefault();\n        $(\"#dialog\").dialog('close').promise().done(function(){\n            $(\"#requestselected\").click();\n        });\n\t});\n    $('#acceptTerms').click(function(event){\n        $('#postForm').show();\n        $('#download_terms').hide();\n    });\n    $('#bundle_docs').change(function(){\n        $('#doc_uids').val('');\n        if ($(this).is(':checked')) {\n            $('.doc_check').prop( \"checked\", true ).attr('disabled','disabled');\n        } else {\n            $('.doc_check').prop( \"checked\", false ).removeAttr('disabled');\n        }\n    });\n    $('.doc_check').click(function(){\n        $('#doc_uids').val($.map($('.doc_check:checked'),function(n,i){return n.value;}).join(','));\n    });\n    $('#showdocs').click(function(){\n        $('#document_list').toggle();\n        $(this).find('i').toggleClass('fa-caret-right').toggleClass('fa-caret-down');\n    });\n    $('.purpose').change(function(){\n        $('.download_submit').removeAttr('disabled');\n        if ($(this).val()=='Other') {\n\t\t\t$('#otherText').removeAttr('disabled').show();\n\t\t} else {\n\t\t\t$('#otherText').attr('disabled','disabled').hide().val('');\n\t\t}\n    });\n    $('#data_link').submit(function(event) {\n\t\t$(\"#dialog\").dialog('close');\n\t\treturn true;\n\t});\n});\n"
+  ],
+  "endpoint_strings": [
+    "#download_terms",
+    ".download_submit",
+    "download_terms",
+    "https://api.marine-geo.org/services/download/download_accept.php",
+    "downloaddiv",
+    "download_submit",
+    ">Download</button>\n    <div style=",
+    ">Archive Download is 138.8kB (344.1kB uncompressed)</div>\n\t</div>\n\t<input type=",
+    "force_download"
+  ]
+}
