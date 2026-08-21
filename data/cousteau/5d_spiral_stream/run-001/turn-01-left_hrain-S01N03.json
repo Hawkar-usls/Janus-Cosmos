@@ -1,0 +1,31 @@
+{
+  "node_id": "S01N03",
+  "turn": 1,
+  "phase": "LEFT_HRAIN",
+  "created_utc": "2026-08-21T11:23:03.487938+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "FACT",
+  "structural_context": "Structural lane separates acquisition identity -> download bytes -> parse rows -> blind cluster -> anchor reveal.",
+  "associative_context": "No later stage may compensate for a missing earlier stage.",
+  "evidence_status": "STRUCTURAL_DEPENDENCY_CHAIN_FROZEN",
+  "new_constraints": [
+    "STAGE_ORDER_IS_PROOF_OBLIGATION"
+  ],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S01N02"
+  ],
+  "payload": {},
+  "node_sha256": "d3f296711d1e6fbbaf6435f5efbddda44f2d5f5158fa0655a07fa25d698298a6"
+}

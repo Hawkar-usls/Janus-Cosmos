@@ -1,0 +1,31 @@
+{
+  "node_id": "S01N02",
+  "turn": 1,
+  "phase": "FORWARD",
+  "created_utc": "2026-08-21T11:23:03.487780+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "CORRECTION",
+  "structural_context": "Forward replay shows the failure happens before event rows are materialized.",
+  "associative_context": "Therefore a dataset/file identity binding is an upstream prerequisite, not a post-hoc patch.",
+  "evidence_status": "FAILURE_LOCALIZED_PRE_MATERIALIZATION",
+  "new_constraints": [
+    "PREBIND_AUTHORITATIVE_MGDS_DATASET_ID_BEFORE_PARSE"
+  ],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S01N01"
+  ],
+  "payload": {},
+  "node_sha256": "336639503ffc9fd272af77099a6d88d91b06a5d0a43db0019b98f97fa0a46142"
+}

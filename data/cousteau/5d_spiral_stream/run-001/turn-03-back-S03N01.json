@@ -1,0 +1,29 @@
+{
+  "node_id": "S03N01",
+  "turn": 3,
+  "phase": "BACK",
+  "created_utc": "2026-08-21T11:23:03.489189+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "AUDIT",
+  "structural_context": "Revisit the entire graph from the higher state and ask whether any blocked scientific tier was actually populated by new raw data.",
+  "associative_context": "No association is allowed to substitute for missing waveform, catalog rows, geometry/material or complex-return data.",
+  "evidence_status": "RAW_DATA_AVAILABILITY_AUDIT",
+  "new_constraints": [],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S02N05"
+  ],
+  "payload": {},
+  "node_sha256": "7a8ff4c0014e2e480ff6e047f3ae42fec40f8c707233436eb74aad0c7990de39"
+}

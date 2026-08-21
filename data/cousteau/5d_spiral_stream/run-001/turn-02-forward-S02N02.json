@@ -1,0 +1,31 @@
+{
+  "node_id": "S02N02",
+  "turn": 2,
+  "phase": "FORWARD",
+  "created_utc": "2026-08-21T11:23:03.488600+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "CORRECTION",
+  "structural_context": "Forward replay asks what a true candidate must add beyond nominal frequency membership.",
+  "associative_context": "It must carry Q/linewidth, modal spacing, phase, ringdown, location repeatability and source/target separation.",
+  "evidence_status": "FULL_FINGERPRINT_REQUIREMENT_EXPANDED",
+  "new_constraints": [
+    "FREQUENCY_ONLY_CANNOT_PROMOTE_TARGET"
+  ],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S02N01"
+  ],
+  "payload": {},
+  "node_sha256": "08312d04541fc35f153e1e63532b89e03b2e402b5156be0ebd7ee2f6644876e7"
+}

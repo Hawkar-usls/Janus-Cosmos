@@ -1,0 +1,33 @@
+{
+  "node_id": "S02N04",
+  "turn": 2,
+  "phase": "RIGHT_INAIHR",
+  "created_utc": "2026-08-21T11:23:03.488840+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "NEW_GATE",
+  "structural_context": "Associative lane retrieves homolog false positives but cannot count similarity as evidence.",
+  "associative_context": "A candidate advances only if it outperforms every relevant control without post-reveal tuning.",
+  "evidence_status": "ASSOCIATION_ROUTED_TO_FALSIFICATION",
+  "new_constraints": [
+    "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES"
+  ],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S02N03"
+  ],
+  "payload": {
+    "generated_gate": "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+  },
+  "node_sha256": "641695f678c594b613822c4fff5a82da800ba715144b91ff6a1de277ae240585"
+}

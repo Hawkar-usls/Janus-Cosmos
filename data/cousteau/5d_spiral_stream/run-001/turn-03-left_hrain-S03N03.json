@@ -1,0 +1,31 @@
+{
+  "node_id": "S03N03",
+  "turn": 3,
+  "phase": "LEFT_HRAIN",
+  "created_utc": "2026-08-21T11:23:03.489460+00:00",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "claim_class": "FACT",
+  "structural_context": "Structural lane marks unresolved inputs explicitly: MGDS authoritative catalog binding, 119-Hz waveforms, local CTD conditioning, H2 geometry/material/complex return, Titanic phase calibration.",
+  "associative_context": "These are concrete ingress points for the next spiral turn.",
+  "evidence_status": "PLATEAU_INPUTS_ENUMERATED",
+  "new_constraints": [
+    "NEXT_TURN_REQUIRES_NEW_INPUT_OR_RESOLVED_BLOCKER"
+  ],
+  "provenance": [
+    {
+      "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-TRANCEPTION-REVERSE-DEEP-ANALYSIS-RUN-001-2026-08-21-v1.0.json",
+      "run_sha256": "71fb1942583faa5611e437f5efd9fbd70099c4a390a5252af029e57365ec5709"
+    }
+  ],
+  "parents": [
+    "S03N02"
+  ],
+  "payload": {},
+  "node_sha256": "2086fa915297b4c844f50b3bce7257bf59b59b5df5a5f19d729b63cd34043270"
+}
