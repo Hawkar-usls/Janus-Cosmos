@@ -1,0 +1,38 @@
+name: Cousteau MGDS Download Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-mgds-download-probe.yml"
+      - "workspace/cousteau_mgds_download_probe.py"
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install requests beautifulsoup4
+      - run: python workspace/cousteau_mgds_download_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-mgds-download-probe-${{ github.run_number }}
+          path: data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.0.json
+          retention-days: 30
+      - name: Freeze probe
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.0.json
+          git commit -m "Cousteau: freeze MGDS download protocol probe ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
