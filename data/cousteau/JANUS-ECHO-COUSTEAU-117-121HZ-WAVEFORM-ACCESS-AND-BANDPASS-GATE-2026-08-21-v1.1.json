@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.1",
+  "supersedes": "JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_local": "2026-08-21T17:47:00+03:00",
+  "question": "Can the 117-121 Hz / 119 Hz branch be tested honestly on a public Equatorial Atlantic hydroacoustic waveform slice?",
+  "correction": {
+    "prior_ha10_public_access_state": "TREATED_AS_BLOCKED_OR_VDEC_ONLY",
+    "new_state": "PARTIAL_PUBLIC_ACCESS_VERIFIED_FOR_HA10",
+    "reason": "Published IMS/EarthScope access audits report HA10 open in FDSN network IM from 2014-12-11; Parnell-Turner et al. used HA10N1/HA10S2 through January 2015.",
+    "target_evidence_change": "NONE__ACCESS_CORRECTION_ONLY"
+  },
+  "public_access_window": {
+    "station": "HA10 Ascension Island",
+    "components_used_by_ea_study": ["H10N1", "H10S2"],
+    "network_code_primary_hypothesis": "IM",
+    "start_utc": "2014-12-11T00:00:00Z",
+    "ea_catalog_end_utc_approx": "2015-01-06T05:56:58Z",
+    "ea_experiment_end_utc": "2015-01-13T00:00:00Z",
+    "role": "PUBLIC_CALIBRATION_SLICE__NOT_FULL_2011_2015_CORPUS"
+  },
+  "measurement_geometry": {
+    "sampling_rate_hz_reported": 250.0,
+    "nyquist_hz": 125.0,
+    "published_ha10_response_band_hz": [1.0, 120.0],
+    "target_center_hz": 119.0,
+    "target_band_original_hz": [117.0, 121.0],
+    "response_safe_candidate_subband_pending_stationxml": [117.0, 120.0],
+    "edge_risk_subband_hz": [120.0, 121.0],
+    "exact_stationxml_response_recovery": "OPEN",
+    "rule": "DO_NOT_ASSUME_FLAT_RESPONSE_NEAR_UPPER_BAND_EDGE"
+  },
+  "access_state": {
+    "ha10_public_fdsn_metadata_route": "VERIFIED_SERVICE_EXISTS__EXACT_CHANNEL_QUERY_PENDING",
+    "ha10_public_waveform_route": "VERIFIED_IN_LITERATURE__BYTE_LEVEL_PROBE_PENDING",
+    "ea_autonomous_pmels_full_waveform_corpus": "NOT_PUBLICLY_RECOVERED_IN_THIS_PASS",
+    "ctbto_vdec": "STILL_RELEVANT_FOR_NONPUBLIC_IMS_PERIODS_OR_CHANNELS"
+  },
+  "next_gate": "COUSTEAU_HA10_EARTHSCOPE_FDSN_RESPONSE_AND_TINY_WAVEFORM_PROBE_V1",
+  "spectral_gate_after_probe": {
+    "allowed_now": false,
+    "prerequisites": [
+      "EXACT_NETWORK_STATION_LOCATION_CHANNEL_RESOLVED",
+      "STATIONXML_RESPONSE_HASHED",
+      "SAMPLE_RATE_CONFIRMED_FROM_METADATA_AND_WAVEFORM",
+      "117_119_120_HZ_RESPONSE_EVALUATED_WITHOUT_VIEWING_OCEAN_SPECTRUM",
+      "EVENT_WINDOWS_AND_MATCHED_OFF_EVENT_NOISE_WINDOWS_PREREGISTERED",
+      "RESPONSE_DECONVOLUTION_METHOD_PREREGISTERED"
+    ]
+  },
+  "scientific_verdict": "PARTIAL_PUBLIC_ACCESS__RESPONSE_CALIBRATION_GATE_NOW_ACTIONABLE__NO_SPECTRAL_CLAIM_YET",
+  "h0_117_121_hz_status": "PARTIAL_PUBLIC_ACCESS__117_120_POTENTIALLY_TESTABLE_AFTER_RESPONSE_VALIDATION__120_121_EDGE_RISK",
+  "hard_rules": [
+    "OPEN_WAVEFORM_ACCESS_DOES_NOT_EQUAL_VALID_SPECTRAL_RESULT",
+    "RESPONSE_DECONVOLUTION_REQUIRED_NEAR_BAND_EDGE",
+    "117_120_AND_120_121_MUST_BE_SEPARATED",
+    "NO_FFT_BEFORE_EVENT_AND_NOISE_WINDOWS_ARE_PREREGISTERED",
+    "NO_TARGET_PROMOTION_FROM_FREQUENCY_ONLY",
+    "FULL_2011_2015_PMEL_CORPUS_REMAINS_SEPARATE_FROM_PUBLIC_HA10_SLICE",
+    "TARGET_IDENTITY_REMAINS_UNCONFIRMED"
+  ],
+  "target_identity": "UNCONFIRMED",
+  "target_evidence": "NOT_INCREASED",
+  "status": "FROZEN_PARTIAL_PUBLIC_ACCESS_CORRECTION"
+}
