@@ -1,0 +1,331 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-004-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T13:29:15.607014+00:00",
+  "parent_spiral_artifact": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TRANCEPTION-REVERSE-RUN-001-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "phases": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "ASCEND"
+  ],
+  "trigger": "RESOLVED_MGDS_BLOCKER_PLUS_AUTHORITATIVE_CATALOG_ROWS",
+  "turn": {
+    "turn": 4,
+    "inherited_constraints": [
+      "ABSTRACT_NOVELTY_WITHOUT_TESTABLE_PAYOFF_IS_REJECTED",
+      "BLOCKED_DATA_STAYS_BLOCKED",
+      "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES",
+      "CLAIM_CEILING_PRESERVED",
+      "FREQUENCY_ONLY_CANNOT_PROMOTE_TARGET",
+      "KEEP_H0_H1_H2_SEPARATE",
+      "MATCHED_CONTROL_PER_POPULATED_DIMENSION",
+      "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+      "NEXT_TURN_REQUIRES_NEW_INPUT_OR_RESOLVED_BLOCKER",
+      "NO_RECENTERING",
+      "PREBIND_AUTHORITATIVE_MGDS_DATASET_ID_BEFORE_PARSE",
+      "PREBIND_REPLAY_MUST_KEEP_DBSCAN_PARAMETERS_UNCHANGED",
+      "SPIRAL_MUST_STOP_ON_EVIDENCE_PLATEAU",
+      "STAGE_ORDER_IS_PROOF_OBLIGATION"
+    ],
+    "added_constraints": [
+      "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+      "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE",
+      "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT",
+      "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+      "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION"
+    ],
+    "active_constraints": [
+      "ABSTRACT_NOVELTY_WITHOUT_TESTABLE_PAYOFF_IS_REJECTED",
+      "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+      "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT",
+      "BLOCKED_DATA_STAYS_BLOCKED",
+      "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES",
+      "CLAIM_CEILING_PRESERVED",
+      "FREQUENCY_ONLY_CANNOT_PROMOTE_TARGET",
+      "KEEP_H0_H1_H2_SEPARATE",
+      "MATCHED_CONTROL_PER_POPULATED_DIMENSION",
+      "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+      "NEXT_TURN_REQUIRES_NEW_INPUT_OR_RESOLVED_BLOCKER",
+      "NO_RECENTERING",
+      "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE",
+      "PREBIND_AUTHORITATIVE_MGDS_DATASET_ID_BEFORE_PARSE",
+      "PREBIND_REPLAY_MUST_KEEP_DBSCAN_PARAMETERS_UNCHANGED",
+      "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+      "SPIRAL_MUST_STOP_ON_EVIDENCE_PLATEAU",
+      "STAGE_ORDER_IS_PROOF_OBLIGATION",
+      "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION"
+    ],
+    "anchor_node": "S04N05",
+    "scientific_delta": "ACQUISITION_BLOCKER_RESOLVED__BLIND_SPATIAL_RESULT_NEGATIVE__COUNT_RECONCILIATION_GATE_OPEN__TARGET_EVIDENCE_NOT_INCREASED",
+    "state_sha256": "4f0eb47ca15288d84c007c73259c46e9f414024497e1d19ed1f9ce758fe1a1f2",
+    "repeats_prior_state": false,
+    "radius": 19,
+    "height": 4
+  },
+  "nodes": [
+    {
+      "node_id": "S04N01",
+      "turn": 4,
+      "phase": "BACK",
+      "created_utc": "2026-08-21T13:29:15.595863+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "CORRECTION",
+      "structural_context": "Return to the plateau blocker after new evidence arrived: MGDS dataset 30497/file 2504732 now materializes as a TAR→GZIP→ASCII catalog and the exact-format replay completed.",
+      "associative_context": "The reverse question changes from how to obtain rows to whether the rows independently organize around the frozen anchor.",
+      "evidence_status": "BLOCKER_RESOLVED_BY_AUTHORITATIVE_RAW_ROWS",
+      "new_constraints": [],
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+          "run_sha256": "1f944fa1e33fec88b6498566c9ddce830a9788eae8776ce2a740408241e7007c"
+        }
+      ],
+      "parents": [],
+      "payload": {
+        "source_status": {
+          "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6",
+          "status": "SUCCESS",
+          "completed_at_utc": "2026-08-21T13:26:48.099746+00:00",
+          "authoritative_rows": 5943,
+          "paper_reported_rows": 6843,
+          "count_mismatch": true,
+          "blind_freeze_sha256": "5b63e4d631329b9c9d9517c55113974f80293c39c2561942b797db3bd00f7f5b",
+          "verdict": "NO_BLIND_CLUSTER_P95_OVERLAP_WITH_FROZEN_ANCHOR",
+          "result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json"
+        }
+      },
+      "node_sha256": "197f06a92ad000d61701a7b0e021d55ad8d1ee639a2786a84db6a677f2b5d556"
+    },
+    {
+      "node_id": "S04N02",
+      "turn": 4,
+      "phase": "FORWARD",
+      "created_utc": "2026-08-21T13:29:15.598232+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "NEGATIVE",
+      "structural_context": "Forward replay preserves the frozen DBSCAN grid and produces blind hash 5b63e4d631329b9c9d9517c55113974f80293c39c2561942b797db3bd00f7f5b; after reveal the nearest event is 477.597 km and nearest blind cluster center is 1675.4 km.",
+      "associative_context": "A nearest isolated event is not allowed to rescue the cluster-level negative result.",
+      "evidence_status": "BLIND_SPATIAL_RESULT_NEGATIVE",
+      "new_constraints": [
+        "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT"
+      ],
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+          "run_sha256": "1f944fa1e33fec88b6498566c9ddce830a9788eae8776ce2a740408241e7007c"
+        }
+      ],
+      "parents": [
+        "S04N01"
+      ],
+      "payload": {
+        "p95_overlap": false,
+        "max_overlap": false,
+        "verdict": "NO_BLIND_CLUSTER_P95_OVERLAP_WITH_FROZEN_ANCHOR"
+      },
+      "node_sha256": "1062f149db48a16c5826ecab2b7845fbdbad309fbbbad7e90f86c738698045ae"
+    },
+    {
+      "node_id": "S04N03",
+      "turn": 4,
+      "phase": "LEFT_HRAIN",
+      "created_utc": "2026-08-21T13:29:15.600440+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "FACT",
+      "structural_context": "Structural lane records 5943 authoritative rows versus 6843 paper-reported events, a difference of 900; downloaded rows contain hydrophone counts {'4': 1830, '5': 1644, '6': 2228, '7': 238, '8': 3}.",
+      "associative_context": "The mismatch becomes a separate source-reconciliation branch; missing rows are not synthesized and do not enter clustering.",
+      "evidence_status": "SOURCE_COUNT_MISMATCH_PRESERVED",
+      "new_constraints": [
+        "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+        "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE"
+      ],
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+          "run_sha256": "1f944fa1e33fec88b6498566c9ddce830a9788eae8776ce2a740408241e7007c"
+        }
+      ],
+      "parents": [
+        "S04N02"
+      ],
+      "payload": {
+        "reconciliation": {
+          "paper_reported_events": 6843,
+          "authoritative_download_rows": 5943,
+          "difference": 900,
+          "status": "OPEN_MISMATCH_REQUIRES_SOURCE_RECONCILIATION",
+          "rule": "DO_NOT_SYNTHESIZE_MISSING_ROWS__CLUSTER_ONLY_AUTHORITATIVE_DOWNLOADED_ROWS"
+        }
+      },
+      "node_sha256": "f3fc03943ef643a7d759a86782eceb6987d99fdd1ca1f07cf72e8bbda13de539"
+    },
+    {
+      "node_id": "S04N04",
+      "turn": 4,
+      "phase": "RIGHT_INAIHR",
+      "created_utc": "2026-08-21T13:29:15.602617+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "CONTROL",
+      "structural_context": "Across the nine frozen DBSCAN settings, the diagnostic rectangular-null fractions span 0.73430–0.80445; the anchor is therefore not unusually close to a blind cluster under this diagnostic.",
+      "associative_context": "This is useful falsification pressure, not a formal ocean-masked p-value. Association cannot promote the target; the Mid-Atlantic Ridge tectonic origin of the catalog remains the mandatory control interpretation.",
+      "evidence_status": "CONTROL_PRESSURE_INCREASED_TARGET_NOT_PROMOTED",
+      "new_constraints": [
+        "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+        "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION"
+      ],
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+          "run_sha256": "1f944fa1e33fec88b6498566c9ddce830a9788eae8776ce2a740408241e7007c"
+        }
+      ],
+      "parents": [
+        "S04N03"
+      ],
+      "payload": {
+        "diagnostic_null_fractions": [
+          0.7506,
+          0.7624,
+          0.7343,
+          0.7561,
+          0.77805,
+          0.772,
+          0.80445,
+          0.78635,
+          0.7465
+        ],
+        "formal_p_value": false
+      },
+      "node_sha256": "c4a66c00b8a9666805b01d14259576bdb6ac2011d4d3e46bc0971c1ea2dec3dc"
+    },
+    {
+      "node_id": "S04N05",
+      "turn": 4,
+      "phase": "ASCEND",
+      "created_utc": "2026-08-21T13:29:15.604826+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 4 ascends because a real blocker was resolved and new authoritative data entered the graph. It ascends with a negative blind spatial result plus an open source-count reconciliation gate.",
+      "associative_context": "Returning to the original search question now occurs at higher resolution: future acoustic/frequency evidence must survive both the 5943-row blind spatial negative and the existing natural/biological/engineered controls.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_NEGATIVE_SCIENTIFIC_DELTA",
+      "new_constraints": [
+        "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+        "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE",
+        "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT",
+        "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+        "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION"
+      ],
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+          "run_sha256": "1f944fa1e33fec88b6498566c9ddce830a9788eae8776ce2a740408241e7007c"
+        }
+      ],
+      "parents": [
+        "S04N04"
+      ],
+      "payload": {
+        "next_gates": [
+          "COUSTEAU_EA_TPHASE_6843_VS_5943_COUNT_RECONCILIATION_V1",
+          "COUSTEAU_EA_TPHASE_EVENT_ERROR_AWARE_DISTANCE_GATE_V1",
+          "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+        ]
+      },
+      "node_sha256": "2b86c05e4e27938ef2d3090dce7b2b4cfc8c7049b4a8125b87f6a6672497d73b"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T4_01_NEW_RAW_OR_RESOLVED_BLOCKER_TRIGGER",
+      "pass": true
+    },
+    {
+      "id": "T4_02_HEIGHT_ASCENDS_3_TO_4",
+      "pass": true
+    },
+    {
+      "id": "T4_03_STATE_HASH_UNIQUE",
+      "pass": true
+    },
+    {
+      "id": "T4_04_RADIUS_NONDECREASING",
+      "pass": true
+    },
+    {
+      "id": "T4_05_ANCHOR_HIDDEN_DURING_BLIND",
+      "pass": true
+    },
+    {
+      "id": "T4_06_FROZEN_DBSCAN_UNCHANGED",
+      "pass": true
+    },
+    {
+      "id": "T4_07_NEGATIVE_CLUSTER_RESULT_PRESERVED",
+      "pass": true
+    },
+    {
+      "id": "T4_08_COUNT_MISMATCH_NOT_FILLED",
+      "pass": true
+    },
+    {
+      "id": "T4_09_DIAGNOSTIC_NULL_NOT_FORMAL",
+      "pass": true
+    },
+    {
+      "id": "T4_10_NO_TARGET_PROMOTION",
+      "pass": true
+    }
+  ],
+  "tests_passed": 10,
+  "tests_total": 10,
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_4",
+  "scientific_verdict": "ACQUISITION_BLOCKER_RESOLVED__BLIND_SPATIAL_RESULT_NEGATIVE__COUNT_RECONCILIATION_GATE_OPEN__TARGET_EVIDENCE_NOT_INCREASED",
+  "target_identity": "UNCONFIRMED",
+  "underwater_pyramid_detected": false,
+  "next_gates": [
+    "COUSTEAU_EA_TPHASE_6843_VS_5943_COUNT_RECONCILIATION_V1",
+    "COUSTEAU_EA_TPHASE_EVENT_ERROR_AWARE_DISTANCE_GATE_V1",
+    "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+  ],
+  "status": "TURN_4_ASCENDED",
+  "artifact_sha256": "60fdccbfaa4237ca9ed795945c82943230667e1129da2abe97f18770f265c005"
+}
