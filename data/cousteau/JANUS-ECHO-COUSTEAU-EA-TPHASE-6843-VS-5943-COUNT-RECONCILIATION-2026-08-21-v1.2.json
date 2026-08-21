@@ -1,0 +1,103 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_local": "2026-08-21T18:15:00+03:00",
+  "question": "Why does the primary paper report 6843 T-phase origins while the authoritative MGDS download currently contains 5943 rows?",
+  "known_counts": {
+    "paper_reported_events": 6843,
+    "mgds_downloaded_rows": 5943,
+    "difference": 900,
+    "downloaded_number_of_recording_hydrophones_distribution": {
+      "4": 1830,
+      "5": 1644,
+      "6": 2228,
+      "7": 238,
+      "8": 3
+    },
+    "download_contains_3_hydrophone_rows": false
+  },
+  "paper_method_boundary": {
+    "origin_location_minimum": "three or more arrival picks",
+    "final_catalog_count": 6843,
+    "groomed_subset_requires_four_or_more_stations_plus_location/geometry filters": true,
+    "arrival_pick_equals_recording_hydrophone_field_explicitly_proven": false,
+    "source": "Parnell-Turner, Smith & Dziak 2022, DOI 10.1029/2022JB024008"
+  },
+  "mgds_provenance": {
+    "dataset_uid": 30497,
+    "file_uid": 2504732,
+    "entry_id": "EA_Hydroacoustics",
+    "file_name": "EA_CTBTO_catalog_all.dat",
+    "dataset_created": "2021-12-21",
+    "dataset_release_date": "2022-05-31",
+    "file_access_release_date": "2022-05-31",
+    "current_data_file_size_bytes": 134459,
+    "current_downloaded_gzip_member_size_bytes": 134459,
+    "size_match": true,
+    "dataset_current_flag": true,
+    "file_count_in_current_xml": 1,
+    "historical_file_checksum_recovered": false,
+    "file_level_replacement_history_recovered": false
+  },
+  "publication_timeline": {
+    "manuscript_received": "2022-01-12",
+    "mgds_public_release": "2022-05-31",
+    "paper_accepted": "2022-06-16",
+    "paper_first_published": "2022-06-26",
+    "implication": "The deposited artifact was already public before article acceptance/publication. A purely post-publication drift explanation is therefore disfavored, though a later silent replacement cannot be excluded without a historical checksum."
+  },
+  "datacite_signal": {
+    "doi": "10.26022/IEDA/330497",
+    "created": "2022-01-04T00:18:50.000Z",
+    "registered": "2022-01-04T00:18:52.000Z",
+    "updated": "2024-08-16T18:27:18.000Z",
+    "version": "1",
+    "interpretation": "A metadata update timestamp is not proof of file replacement."
+  },
+  "hypotheses": [
+    {
+      "id": "H1_THREE_PICK_OR_THREE_HYDROPHONE_ROWS_OMITTED_FROM_DEPOSIT",
+      "status": "LEADING_STRONGLY_COMPATIBLE_NOT_PROVEN",
+      "support": [
+        "paper admits origins from >=3 arrival picks",
+        "download contains only hydrophone counts 4-8",
+        "arithmetic difference is exactly 900"
+      ],
+      "blocker": "No primary-source statement yet explicitly equates the missing 900 with three-pick/three-hydrophone events or states that the deposited file intentionally excludes them."
+    },
+    {
+      "id": "H2_POST_PUBLICATION_FILE_DRIFT_OR_REPLACEMENT",
+      "status": "DISFAVORED_NOT_EXCLUDED",
+      "support": ["DataCite metadata updated in 2024"],
+      "against": [
+        "MGDS release date precedes article acceptance and publication",
+        "current XML presents a single current file and the recorded data-file size matches the currently downloadable gzip member"
+      ],
+      "blocker": "No historical checksum or archived prepublication file bytes recovered."
+    },
+    {
+      "id": "H3_PAPER_COUNT_OR_DEPOSIT_DOCUMENTATION_MISMATCH",
+      "status": "OPEN",
+      "blocker": "Requires explicit repository/author clarification or independent historical copy."
+    }
+  ],
+  "wayback_state": {
+    "attempted": true,
+    "runner_cdx_result": "HTTP_400_EMPTY",
+    "interpretation": "ARCHIVE_ACCESS_BLOCKER_ONLY__NOT_NO_HISTORY"
+  },
+  "scientific_verdict": "COUNT_MISMATCH_NOT_CLOSED__THREE_PICK_BOUNDARY_IS_LEADING_EXPLANATION__POST_PUBLICATION_DRIFT_DISFAVORED__DO_NOT_SYNTHESIZE_900_ROWS",
+  "analysis_rule": "CLUSTER_ONLY_AUTHORITATIVE_DOWNLOADED_ROWS_UNTIL_MISSING_900_BYTES_OR_PROVENANCE_ARE_RECOVERED",
+  "next_gate": "COUSTEAU_EA_TPHASE_MISSING_900_EXPLICIT_SOURCE_OR_HISTORICAL_CHECKSUM_RECOVERY_V1",
+  "hard_rules": [
+    "DO_NOT_SYNTHESIZE_MISSING_ROWS",
+    "ARRIVAL_PICK_AND_RECORDING_HYDROPHONE_ARE_NOT_SILENTLY_EQUATED",
+    "METADATA_UPDATE_IS_NOT_FILE_REPLACEMENT_PROOF",
+    "WAYBACK_HTTP_400_IS_NOT_NO_ARCHIVE_HISTORY",
+    "NEGATIVE_AND_AMBIGUOUS_PROVENANCE_IS_PRESERVED",
+    "TARGET_EVIDENCE_NOT_INCREASED"
+  ],
+  "target_identity": "UNCONFIRMED",
+  "target_evidence": "NOT_INCREASED",
+  "status": "FROZEN_COUNT_RECONCILIATION_V1_2__LEADING_EXPLANATION_NARROWED_GATE_OPEN"
+}
