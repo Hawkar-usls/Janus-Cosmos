@@ -1,0 +1,73 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_local": "2026-08-21T17:47:00+03:00",
+  "question": "Can the 117-121 Hz / 119 Hz branch be tested honestly on the Equatorial Atlantic 2011-2015 hydrophone corpus?",
+  "source_facts": [
+    {
+      "fact": "Parnell-Turner et al. report EA autonomous hydrophone waveforms recorded at 16-bit resolution and 250 Hz sampling; HA10 was also sampled at 250 Hz.",
+      "source": "Parnell-Turner, Smith & Dziak 2022, JGR Solid Earth, DOI 10.1029/2022JB024008",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022JB024008",
+      "status": "VERIFIED"
+    },
+    {
+      "fact": "The current MGDS EA_Hydroacoustics deposit exposes the processed T-phase location catalog, not the underlying waveform byte stream.",
+      "source": "MGDS dataset 30497 / DOI 10.26022/IEDA/330497",
+      "url": "https://www.marine-geo.org/tools/files/30497",
+      "status": "VERIFIED"
+    },
+    {
+      "fact": "CTBTO IMS waveform access can be requested through vDEC; access is contract-bound, project-scoped, organization-oriented, and raw IMS data cannot be redistributed.",
+      "source": "CTBTO vDEC",
+      "url": "https://www.ctbto.org/resources/for-researchers-experts/vdec",
+      "status": "VERIFIED"
+    },
+    {
+      "fact": "Published NOAA/PMEL autonomous-hydrophone configurations using 250 Hz sampling are documented with a 1-110 Hz band-pass; PMEL Model 3 hardware has programmable filtering, so the exact EA 2011-2015 deployment setting must be recovered rather than assumed.",
+      "source": "NOAA/PMEL autonomous hydrophone technical publications and HARU model documentation",
+      "urls": [
+        "https://www.pmel.noaa.gov/acoustics/haru_models.html",
+        "https://www.ldeo.columbia.edu/~felixw/papers/Dziak_etal_GC2009.pdf"
+      ],
+      "status": "VERIFIED_AS_INSTRUMENT_FAMILY_CONTROL__NOT_YET_EA_DEPLOYMENT_SPECIFIC"
+    }
+  ],
+  "measurement_geometry": {
+    "sampling_rate_hz": 250.0,
+    "nyquist_hz": 125.0,
+    "target_band_hz": [117.0, 121.0],
+    "target_center_hz": 119.0,
+    "target_band_below_nyquist": true,
+    "historical_250hz_family_passband_upper_hz": 110.0,
+    "target_band_above_historical_family_passband": true,
+    "exact_ea_2011_2015_anti_alias_filter_setting": "NOT_RECOVERED",
+    "exact_ea_2011_2015_instrument_response": "NOT_RECOVERED"
+  },
+  "access_state": {
+    "ea_autonomous_raw_waveforms_publicly_recovered": false,
+    "ha10_ctbto_raw_waveforms_publicly_recovered": false,
+    "ha10_vdec_route_exists": true,
+    "spectral_scan_can_be_run_now": false
+  },
+  "scientific_verdict": "MEASUREMENT_VALIDITY_BLOCKED__DO_NOT_TREAT_ABSENCE_OR_PRESENCE_NEAR_119_HZ_AS_PHYSICAL_EVIDENCE_UNTIL_RAW_WAVEFORMS_AND_DEPLOYMENT_SPECIFIC_RESPONSE_ARE_RECOVERED",
+  "h0_117_121_hz_status": "BLOCKED_BY_WAVEFORM_ACCESS_AND_DEPLOYMENT_SPECIFIC_BANDPASS_CALIBRATION",
+  "next_required_inputs": [
+    "EA_2011_2015_RAW_WAVEFORM_ACCESS_OR_TRACEABLE_EVENT_WAVEFORM_EXCERPTS",
+    "EA_PER_DEPLOYMENT_FILTER_AND_GAIN_CONFIGURATION",
+    "EA_HYDROPHONE_PLUS_PREAMPLIFIER_TRANSFER_FUNCTION_NEAR_100_125_HZ",
+    "HA10_RESPONSE_METADATA_IF_HA10_IS_USED",
+    "PREREGISTERED_SPECTRAL_ESTIMATOR_BEFORE_VIEWING_117_121_HZ_RESULTS"
+  ],
+  "hard_rules": [
+    "NYQUIST_BELOW_DOES_NOT_IMPLY_FLAT_RESPONSE",
+    "FAMILY_PASSBAND_IS_NOT_DEPLOYMENT_SPECIFIC_CALIBRATION",
+    "NO_117_121_HZ_NEGATIVE_FROM_A_POSSIBLY_110_HZ_LOW_PASS_RECORDING",
+    "NO_117_121_HZ_POSITIVE_WITHOUT_RESPONSE_CORRECTION",
+    "CATALOG_LOCATIONS_ARE_NOT_WAVEFORM_SPECTRA",
+    "VDEC_ACCESS_RESTRICTIONS_MUST_BE_RESPECTED",
+    "NO_TARGET_PROMOTION_FROM_FREQUENCY_ONLY"
+  ],
+  "target_identity": "UNCONFIRMED",
+  "target_evidence": "NOT_INCREASED",
+  "status": "FROZEN_ACCESS_AND_MEASUREMENT_VALIDITY_GATE"
+}
