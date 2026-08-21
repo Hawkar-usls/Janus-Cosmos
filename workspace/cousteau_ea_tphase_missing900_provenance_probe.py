@@ -24,7 +24,7 @@ def meta(r):
  return {'requested_url':r.request.url,'final_url':r.url,'status':r.status_code,'content_type':r.headers.get('content-type'),'bytes':len(r.content),'sha256':sha(r.content)}
 
 def main():
- s=requests.Session(); s.headers['User-Agent']='Janus-Echo-Cousteau/1.0 missing-900 provenance audit'
+ s=requests.Session(); s.headers['User-Agent']='Mozilla/5.0 Janus-Echo-Cousteau/1.0 missing-900 provenance audit'
  rep={'artifact_id':'JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.0','created_utc':datetime.now(timezone.utc).isoformat(),'known_contract':{'paper_reported_events':6843,'deposited_rows':5943,'difference':900,'deposited_hydrophone_counts':[4,5,6,7,8]},'current_sources':{},'wayback':[],'candidate_explanations':[]}
  for k,u in URLS.items():
   try:
@@ -45,9 +45,7 @@ def main():
   try:
    r=s.get(cdx,timeout=90); ent['cdx']=meta(r); rows=r.json() if r.status_code==200 else []
    ent['snapshots']=rows[1:] if isinstance(rows,list) and rows and isinstance(rows[0],list) else []
-   probes=[]
-   snaps=ent['snapshots']
-   picks=[]
+   probes=[]; snaps=ent['snapshots']; picks=[]
    if snaps:
     picks=[snaps[0],snaps[-1]]
     if len(snaps)>2:picks.append(snaps[len(snaps)//2])
@@ -55,8 +53,7 @@ def main():
    for row in picks:
     ts=row[0]
     if ts in seen: continue
-    seen.add(ts)
-    wu=f'https://web.archive.org/web/{ts}id_/{target}'
+    seen.add(ts); wu=f'https://web.archive.org/web/{ts}id_/{target}'
     try:
      rr=s.get(wu,timeout=90,allow_redirects=True); txt=rr.text
      probes.append({'timestamp':ts,'url':wu,**meta(rr),'numeric_hits':{n:[m.start() for m in re.finditer(str(n),txt)][:20] for n in [30497,2504732,5943,6843,900]},'file_uid_like':list(dict.fromkeys(re.findall(r'(?:data[_-]?uid|file[_-]?uid)[^0-9]{0,20}([0-9]{5,})',txt,re.I)))[:50],'text_prefix':txt[:12000]})
@@ -64,8 +61,6 @@ def main():
    ent['snapshot_probes']=probes
   except Exception as e: ent['error']=f'{type(e).__name__}: {e}'
   rep['wayback'].append(ent)
-
- # Hypotheses are routed, not closed, by current evidence.
  rep['candidate_explanations']=[
   {'id':'H3_STATION_ROWS_OMITTED_FROM_DEPOSIT','status':'STRONGLY_COMPATIBLE_NOT_VERIFIED','reason':'paper catalog allows origins from >=3 arrival picks while current deposited rows have hydrophone counts 4-8 and difference is exactly 900'},
   {'id':'POST_PUBLICATION_DEPOSIT_VERSION_DRIFT','status':'OPEN','reason':'requires historical file UID or archive snapshot evidence'},
@@ -73,7 +68,6 @@ def main():
  ]
  rep['status']='PROBE_COMPLETE__PROVENANCE_GATE_REMAINS_OPEN'
  OUT.parent.mkdir(parents=True,exist_ok=True); OUT.write_text(json.dumps(rep,indent=2,ensure_ascii=False),encoding='utf-8')
- print(json.dumps({'status':rep['status'],'wayback_targets':len(rep['wayback'])},indent=2))
- return 0
+ print(json.dumps({'status':rep['status'],'wayback_targets':len(rep['wayback'])},indent=2)); return 0
 
 if __name__=='__main__': raise SystemExit(main())
