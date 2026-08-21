@@ -1,0 +1,113 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-006-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T13:48:00+00:00",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-005-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": ["D0_SPACE", "D1_TIME", "D2_ACOUSTIC", "D3_REVERSE_CAUSAL", "D4_ASSOCIATIVE_PROVENANCE"],
+  "phases": ["BACK", "FORWARD", "LEFT_HRAIN", "RIGHT_INAIHR", "ASCEND"],
+  "trigger": "NEW_INDEPENDENT_PB2002_TECTONIC_GEOMETRY_CONTROL",
+  "turn": {
+    "turn": 6,
+    "height": 6,
+    "prior_radius": 22,
+    "radius": 26,
+    "prior_state_sha256": "657a3b953d4474cf5eee58b082ca32844a582422b4730edfd833aa8b01127813",
+    "state_sha256": "899dd4c84ec904cd4c1ba2f11b64920486070b63b37146ab6507a77f8915879e",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "INDEPENDENT_PB2002_TECTONIC_CONTROL_PRECEDES_TARGET_INTERPRETATION",
+      "AUTHOR_S1_403_DOES_NOT_BLOCK_INDEPENDENT_CONTROL__BUT_REPLICATION_REMAINS_OPEN",
+      "RIDGE_DISTANCE_OUTPERFORMANCE_REQUIRED",
+      "PB2002_CONTROL_IS_NOT_AUTHOR_DATASET_S1"
+    ],
+    "scientific_delta": "TECTONIC_BACKGROUND_STRONGLY_OUTPERFORMS_ANCHOR_ASSOCIATION__TARGET_EVIDENCE_NOT_INCREASED__AUTHOR_S1_REPLICATION_OPEN"
+  },
+  "provenance": {
+    "turn5": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-005-2026-08-21-v1.0.json",
+    "blind_cluster": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json",
+    "error_aware": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+    "pb2002_control": "data/cousteau/JANUS-ECHO-COUSTEAU-TURN5-PB2002-TECTONIC-CONTROL-2026-08-21-v1.0.json",
+    "wiley_s1_probe": "data/cousteau/JANUS-ECHO-COUSTEAU-TURN5-MAR-SUPPORT-DATA-PROBE-2026-08-21-v1.0.json"
+  },
+  "nodes": [
+    {
+      "node_id": "S06N01",
+      "turn": 6,
+      "phase": "BACK",
+      "claim_class": "CORRECTION",
+      "structural_context": "Return after Turn 5 with a new independent tectonic geometry dataset. The author-specific Data Set S1 remains blocked by Wiley HTTP 403 and is not substituted silently.",
+      "evidence_status": "NEW_INDEPENDENT_CONTROL_ENTERED",
+      "parents": [],
+      "payload": {"author_dataset_s1": "BLOCKED_HTTP_403", "pb2002": "AVAILABLE_AND_PINNED"}
+    },
+    {
+      "node_id": "S06N02",
+      "turn": 6,
+      "phase": "FORWARD",
+      "claim_class": "NEGATIVE",
+      "structural_context": "The frozen Love-Edem anchor is 1664.013 km from the PB2002 Africa-South America boundary, while the median T-phase event is only 71.845 km from that boundary.",
+      "evidence_status": "ANCHOR_FAR_FROM_TECTONIC_SOURCE_GEOMETRY",
+      "parents": ["S06N01"],
+      "payload": {"anchor_to_af_sa_boundary_km": 1664.013, "median_event_to_af_sa_boundary_km": 71.845, "ratio": 23.161}
+    },
+    {
+      "node_id": "S06N03",
+      "turn": 6,
+      "phase": "LEFT_HRAIN",
+      "claim_class": "FACT",
+      "structural_context": "Across all 5943 authoritative T-phase rows, 54.2487% lie within 100 km of the AF-SA boundary and 60.4913% within 200 km. The anchor is farther from the boundary than 86.0508% of catalog events.",
+      "evidence_status": "TECTONIC_STRUCTURE_DOMINATES_CATALOG_GEOMETRY",
+      "parents": ["S06N02"],
+      "payload": {"within_100_km": 0.542487, "within_200_km": 0.604913, "anchor_distance_percentile_vs_events": 0.860508}
+    },
+    {
+      "node_id": "S06N04",
+      "turn": 6,
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "CONTROL",
+      "structural_context": "Blind cluster centers that were nearest to the anchor are themselves much closer to the Mid-Atlantic tectonic boundary: several are about 23-74 km from the AF-SA boundary while remaining roughly 1.7-2.0 thousand km from the anchor.",
+      "evidence_status": "TECTONIC_CONTROL_OUTPERFORMS_ANCHOR_ASSOCIATION",
+      "parents": ["S06N03"],
+      "payload": {"nearest_cluster_to_anchor_km": 1675.4, "representative_cluster_to_boundary_km": [23.532, 25.526, 28.605, 29.675, 71.261, 73.354]}
+    },
+    {
+      "node_id": "S06N05",
+      "turn": 6,
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 6 ascends because independent tectonic geometry explains the T-phase spatial structure substantially better than the frozen anchor. Target evidence is not increased. The author-specific ridge-segment Data Set S1 remains an open replication gate, and the 6843-versus-5943 provenance question remains open.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_STRONGER_NATURAL_CONTROL",
+      "parents": ["S06N04"],
+      "payload": {
+        "scientific_verdict": "TECTONIC_BACKGROUND_STRONGLY_FAVORED_FOR_TPHASE_SPATIAL_STRUCTURE",
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gates": [
+          "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1",
+          "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+          "COUSTEAU_117_121HZ_WAVEFORM_ACCESS_V1",
+          "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+        ]
+      }
+    }
+  ],
+  "count_reconciliation": {
+    "paper_reported_events": 6843,
+    "authoritative_download_rows": 5943,
+    "difference": 900,
+    "downloaded_hydrophone_counts": {"4": 1830, "5": 1644, "6": 2228, "7": 238, "8": 3},
+    "observation": "NO_3_HYDROPHONE_ROWS_IN_DOWNLOADED_FILE",
+    "inference": "EXACT_900_ROW_GAP_IS_STRUCTURALLY_COMPATIBLE_WITH_OMITTED_THREE_PICK_EVENTS__NOT_SOURCE_CONFIRMED",
+    "status": "OPEN"
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+    "PB2002_IS_INDEPENDENT_CONTROL_NOT_AUTHOR_DATASET_S1",
+    "DISTANCE_IS_NOT_CAUSATION",
+    "NO_SYNTHETIC_900_ROWS",
+    "THREE_PICK_OMISSION_IS_INFERENCE_NOT_FACT",
+    "TARGET_EVIDENCE_NOT_INCREASED"
+  ],
+  "status": "TURN_6_ASCENDED"
+}
