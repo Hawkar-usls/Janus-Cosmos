@@ -1,0 +1,255 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-009-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T15:08:12.720994+00:00",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "phases": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "ASCEND"
+  ],
+  "trigger": "HA10_STATIONXML_RESPONSE_EDGE_QUANTIFICATION",
+  "turn": {
+    "turn": 9,
+    "height": 9,
+    "prior_radius": 36,
+    "radius": 40,
+    "prior_state_sha256": "a117ffc2b845816d1afd439391e62510f5e7ce88ae35679cc63d5630b1b9670b",
+    "state_sha256": "f347025527022673cf9332dad6e67faeea0d9c3275b6cd5f2aa9b63e2c38ff00",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "NYQUIST_DOES_NOT_DEFINE_USABLE_DISCOVERY_BAND",
+      "HA10_EDH_119HZ_RESPONSE_IS_ABOUT_MINUS_50_9DB_RELATIVE_TO_10HZ",
+      "119_HZ_ON_HA10_EDH_IS_CONFIRMATORY_ONLY_NOT_DISCOVERY_GRADE",
+      "RAW_AND_RESPONSE_CORRECTED_SNR_THRESHOLDS_MUST_BE_PREREGISTERED_BEFORE_TARGET_BAND_FFT"
+    ],
+    "scientific_delta": "HA10_RESPONSE_EDGE_QUANTIFIED__119HZ_MINUS_50_9DB_RELATIVE_10HZ_ON_BOTH_CHANNELS__119HZ_DISCOVERY_KEY_REJECTED__CONFIRMATORY_ONLY__TARGET_EVIDENCE_NOT_INCREASED"
+  },
+  "nodes": [
+    {
+      "node_id": "S09N01",
+      "turn": 9,
+      "phase": "BACK",
+      "claim_class": "FACT",
+      "structural_context": "Return to the 119-Hz measurement question after StationXML response-only calibration on both public HA10 EDH channels.",
+      "evidence_status": "RESPONSE_EDGE_CALIBRATION_ENTERED",
+      "parents": [],
+      "payload": {
+        "db117_vs_10": [
+          -39.13699248399518,
+          -39.13699248399518
+        ],
+        "db119_vs_10": [
+          -50.90423571809036,
+          -50.90423571809036
+        ],
+        "db120_vs_10": [
+          -57.94313877083482,
+          -57.94313877083483
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0.json",
+          "sha256": "76dc178fd1d5eeee5420bbc012218113d35cd49182233bc43d3895b24fc951e6"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0.json",
+          "sha256": "ce0158e07fe9ecb9eae8b7b0ee1b67ee9b77db68c7b29ddcc4058173377841fb"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+          "sha256": "5da3c897e3b58510b54680cdfa230368650fa74720155540999344afa2c11ba1"
+        }
+      ],
+      "node_sha256": "559f44919eaae7e8f9eda4affdceb66678d416e06ab4d28d4810cb78ebb95b58"
+    },
+    {
+      "node_id": "S09N02",
+      "turn": 9,
+      "phase": "FORWARD",
+      "claim_class": "NEGATIVE",
+      "structural_context": "Both H10N1 and H10S2 show about -50.904 dB response at 119 Hz relative to 10 Hz; 117 Hz is about -39.137 dB and 120 Hz about -57.943 dB. The roll-off is an instrument property, not an ocean signal.",
+      "evidence_status": "119HZ_DISCOVERY_SENSITIVITY_REJECTED",
+      "parents": [
+        "S09N01"
+      ],
+      "payload": {
+        "inverse_response_gain_119_vs_10": 350.9229615935248
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0.json",
+          "sha256": "76dc178fd1d5eeee5420bbc012218113d35cd49182233bc43d3895b24fc951e6"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0.json",
+          "sha256": "ce0158e07fe9ecb9eae8b7b0ee1b67ee9b77db68c7b29ddcc4058173377841fb"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+          "sha256": "5da3c897e3b58510b54680cdfa230368650fa74720155540999344afa2c11ba1"
+        }
+      ],
+      "node_sha256": "6373663e472f174358d337d7732ada5ba80d0ce60684cfdb931c8946a44c7c12"
+    },
+    {
+      "node_id": "S09N03",
+      "turn": 9,
+      "phase": "LEFT_HRAIN",
+      "claim_class": "CONTROL",
+      "structural_context": "The structural lane separates digitization, passband and recoverability: 119 Hz is below Nyquist yet deep in the EDH anti-alias/response roll-off. Deconvolution is possible in principle but necessarily magnifies noise where response is small.",
+      "evidence_status": "MEASUREMENT_VALIDITY_CONTROL_DOMINATES",
+      "parents": [
+        "S09N02"
+      ],
+      "payload": {
+        "sample_rate_hz": 250.0,
+        "nyquist_hz": 125.0,
+        "nominal_sensor_band_hz": [
+          1.0,
+          100.0
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0.json",
+          "sha256": "76dc178fd1d5eeee5420bbc012218113d35cd49182233bc43d3895b24fc951e6"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0.json",
+          "sha256": "ce0158e07fe9ecb9eae8b7b0ee1b67ee9b77db68c7b29ddcc4058173377841fb"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+          "sha256": "5da3c897e3b58510b54680cdfa230368650fa74720155540999344afa2c11ba1"
+        }
+      ],
+      "node_sha256": "2f0cb5e8aad71f6c842f660f04b57c315a45c11eeb64cb470a0e6f58aada10a3"
+    },
+    {
+      "node_id": "S09N04",
+      "turn": 9,
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "NEW_GATE",
+      "structural_context": "The 119-Hz prior may route a confirmatory test only. It cannot define a discovery band. Any confirmatory FFT requires frozen event/noise windows, forward-response or response-removal method, raw/corrected SNR gates and neighboring-frequency controls before target-band inspection.",
+      "evidence_status": "CONFIRMATORY_PROTOCOL_REQUIRED",
+      "parents": [
+        "S09N03"
+      ],
+      "payload": {
+        "generated_gate": "COUSTEAU_HA10_PREDECLARED_RESPONSE_CORRECTED_CONFIRMATORY_PROTOCOL_V1"
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0.json",
+          "sha256": "76dc178fd1d5eeee5420bbc012218113d35cd49182233bc43d3895b24fc951e6"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0.json",
+          "sha256": "ce0158e07fe9ecb9eae8b7b0ee1b67ee9b77db68c7b29ddcc4058173377841fb"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+          "sha256": "5da3c897e3b58510b54680cdfa230368650fa74720155540999344afa2c11ba1"
+        }
+      ],
+      "node_sha256": "3e3457d2ef152864fbfa7356a2bd6106c471eda7b2e832cf2310d4ec3d63ba24"
+    },
+    {
+      "node_id": "S09N05",
+      "turn": 9,
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 9 ascends because new calibration data reduced the admissible hypothesis space. The target is not promoted; instead 119-Hz discovery use is rejected on HA10 EDH and preserved only as a preregistered confirmatory possibility.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_INSTRUMENT_FALSIFICATION_GAIN",
+      "parents": [
+        "S09N04"
+      ],
+      "payload": {
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gates": [
+          "COUSTEAU_HA10_PREDECLARED_RESPONSE_CORRECTED_CONFIRMATORY_PROTOCOL_V1",
+          "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+          "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1"
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-008-2026-08-21-v1.0.json",
+          "sha256": "76dc178fd1d5eeee5420bbc012218113d35cd49182233bc43d3895b24fc951e6"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0.json",
+          "sha256": "ce0158e07fe9ecb9eae8b7b0ee1b67ee9b77db68c7b29ddcc4058173377841fb"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+          "sha256": "5da3c897e3b58510b54680cdfa230368650fa74720155540999344afa2c11ba1"
+        }
+      ],
+      "node_sha256": "0b850c06c4b6f40c46520d4978e1f8fc8f5e15f66f13f34f2aa7c69fc8445710"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T9_01_PARENT_T8_ASCENDED",
+      "pass": true
+    },
+    {
+      "id": "T9_02_RESPONSE_EDGE_SUCCESS",
+      "pass": true
+    },
+    {
+      "id": "T9_03_NO_WAVEFORM_FFT",
+      "pass": true
+    },
+    {
+      "id": "T9_04_BOTH_CHANNELS_EVALUATED",
+      "pass": true
+    },
+    {
+      "id": "T9_05_119_BELOW_MINUS45DB",
+      "pass": true
+    },
+    {
+      "id": "T9_06_117_ROLLOFF_VERIFIED",
+      "pass": true
+    },
+    {
+      "id": "T9_07_120_ROLLOFF_VERIFIED",
+      "pass": true
+    },
+    {
+      "id": "T9_08_DISCOVERY_KEY_REJECTED",
+      "pass": true
+    },
+    {
+      "id": "T9_09_RADIUS_ASCENDS",
+      "pass": true
+    },
+    {
+      "id": "T9_10_TARGET_NOT_PROMOTED",
+      "pass": true
+    }
+  ],
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_9",
+  "hard_rules": [
+    "119_HZ_NOT_A_BLIND_KEY",
+    "RESPONSE_IS_NOT_OCEAN_SPECTRUM",
+    "NO_FFT_FISHING",
+    "NO_TARGET_PROMOTION_FROM_FREQUENCY_ONLY",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "status": "TURN_9_ASCENDED"
+}
