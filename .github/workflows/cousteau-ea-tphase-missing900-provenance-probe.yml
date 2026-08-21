@@ -23,22 +23,22 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install requests
-      - name: Run missing-900 provenance probe
+      - name: Run missing-900 provenance probe v1.1
         run: python workspace/cousteau_ea_tphase_missing900_provenance_probe.py
       - name: Show result
         if: always()
-        run: cat data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.0.json
+        run: cat data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.1.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cousteau-ea-tphase-missing900-provenance-${{ github.run_number }}
-          path: data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.0.json
+          path: data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.1.json
           retention-days: 90
       - name: Freeze probe
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.0.json
-          git commit -m "Cousteau: freeze missing-900 provenance probe ${{ github.run_number }}" || true
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-MISSING-900-PROVENANCE-PROBE-2026-08-21-v1.1.json
+          git commit -m "Cousteau: freeze missing-900 provenance v1.1 ${{ github.run_number }}" || true
           git push origin HEAD:janus-echo-cousteau
