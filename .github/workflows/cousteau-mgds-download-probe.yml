@@ -27,12 +27,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: cousteau-mgds-download-probe-${{ github.run_number }}
-          path: data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.0.json
+          path: data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.1.json
           retention-days: 30
       - name: Freeze probe
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.0.json
-          git commit -m "Cousteau: freeze MGDS download protocol probe ${{ github.run_number }}" || true
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-MGDS-EA-HYDROACOUSTICS-DOWNLOAD-PROBE-2026-08-21-v1.1.json
+          git commit -m "Cousteau: freeze MGDS download protocol probe v1.1 run ${{ github.run_number }}" || true
           git push origin HEAD:janus-echo-cousteau
