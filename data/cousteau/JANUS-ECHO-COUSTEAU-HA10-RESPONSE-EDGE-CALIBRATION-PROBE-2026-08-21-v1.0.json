@@ -1,0 +1,328 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-RESPONSE-EDGE-CALIBRATION-PROBE-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T15:04:35.957097+00:00",
+  "policy": "INSTRUMENT_RESPONSE_ONLY__NO_WAVEFORM_SPECTRAL_INSPECTION",
+  "frequencies_hz": [
+    1.0,
+    5.0,
+    10.0,
+    40.0,
+    70.0,
+    90.0,
+    100.0,
+    105.0,
+    110.0,
+    115.0,
+    117.0,
+    119.0,
+    120.0,
+    121.0,
+    124.0
+  ],
+  "channels": [
+    {
+      "id": "IM.H10N1..EDH",
+      "status": 200,
+      "bytes": 27334,
+      "stationxml_sha256": "b7d0f55466b688cb319e31377de3f61f2f877d298b850234be5bbf1b8649fbc7",
+      "content_type": "application/xml",
+      "metadata": {
+        "sample_rate_hz": 250.0,
+        "sensor_description": "1 to 100 Hz HiTech hydrophone and datalogger",
+        "sensitivity_value": 1828.14,
+        "sensitivity_frequency_hz": 10.0,
+        "input_units": "PA",
+        "output_units": "COUNTS"
+      },
+      "response_eval": [
+        {
+          "frequency_hz": 1.0,
+          "response_amplitude_abs": 310.22456208090256,
+          "relative_to_10hz": 0.16971112978617134,
+          "relative_to_10hz_db": -15.405793507657119,
+          "complex_real": -64.83006254095027,
+          "complex_imag": 303.3749197102889
+        },
+        {
+          "frequency_hz": 5.0,
+          "response_amplitude_abs": 1328.0123811791016,
+          "relative_to_10hz": 0.7265010870453035,
+          "relative_to_10hz_db": -2.775274630831274,
+          "complex_real": 730.7344202497957,
+          "complex_imag": 1108.8931831457808
+        },
+        {
+          "frequency_hz": 10.0,
+          "response_amplitude_abs": 1827.956495674574,
+          "relative_to_10hz": 1.0,
+          "relative_to_10hz_db": 0.0,
+          "complex_real": 1499.5353678479273,
+          "complex_imag": 1045.3796586178871
+        },
+        {
+          "frequency_hz": 40.0,
+          "response_amplitude_abs": 2149.338852829574,
+          "relative_to_10hz": 1.1758151016807432,
+          "relative_to_10hz_db": 1.4067806757361392,
+          "complex_real": 2125.4971952858,
+          "complex_imag": 319.24783024313103
+        },
+        {
+          "frequency_hz": 70.0,
+          "response_amplitude_abs": 2159.446778933035,
+          "relative_to_10hz": 1.181344733336299,
+          "relative_to_10hz_db": 1.4475329893397424,
+          "complex_real": 2155.4992718383864,
+          "complex_imag": 130.511609247782
+        },
+        {
+          "frequency_hz": 90.0,
+          "response_amplitude_abs": 2153.740521582978,
+          "relative_to_10hz": 1.1782230740607311,
+          "relative_to_10hz_db": 1.4245504722114415,
+          "complex_real": 2152.891954228998,
+          "complex_imag": 60.45219371174842
+        },
+        {
+          "frequency_hz": 100.0,
+          "response_amplitude_abs": 1916.5687625803237,
+          "relative_to_10hz": 1.048476135572936,
+          "relative_to_10hz_db": 0.4111709982316067,
+          "complex_real": 1916.3499641063472,
+          "complex_imag": 28.959225961247
+        },
+        {
+          "frequency_hz": 105.0,
+          "response_amplitude_abs": 1190.1845768244677,
+          "relative_to_10hz": 0.6511011501864282,
+          "relative_to_10hz_db": -3.727030749207736,
+          "complex_real": 1190.1345229766569,
+          "complex_imag": 10.915316301540209
+        },
+        {
+          "frequency_hz": 110.0,
+          "response_amplitude_abs": 406.0473736072096,
+          "relative_to_10hz": 0.22213185848132846,
+          "relative_to_10hz_db": -13.067782996485885,
+          "complex_real": 406.0448470074068,
+          "complex_imag": 1.4324217411267142
+        },
+        {
+          "frequency_hz": 115.0,
+          "response_amplitude_abs": 60.001881490131055,
+          "relative_to_10hz": 0.03282456756061279,
+          "relative_to_10hz_db": -29.676019734184266,
+          "complex_real": 60.001777876843505,
+          "complex_imag": -0.11150772916981411
+        },
+        {
+          "frequency_hz": 117.0,
+          "response_amplitude_abs": 20.189066166009383,
+          "relative_to_10hz": 0.01104460976712631,
+          "relative_to_10hz_db": -39.13699248399518,
+          "complex_real": 20.188908814156196,
+          "complex_imag": -0.07970915374657364
+        },
+        {
+          "frequency_hz": 119.0,
+          "response_amplitude_abs": 5.20899654834186,
+          "relative_to_10hz": 0.0028496282929422645,
+          "relative_to_10hz_db": -50.90423571809036,
+          "complex_real": 5.208902671371153,
+          "complex_imag": -0.03127300465061777
+        },
+        {
+          "frequency_hz": 120.0,
+          "response_amplitude_abs": 2.3163752557585506,
+          "relative_to_10hz": 0.001267193864427137,
+          "relative_to_10hz_db": -57.94313877083482,
+          "complex_real": 2.3163181935709574,
+          "complex_imag": -0.016258893648311283
+        },
+        {
+          "frequency_hz": 121.0,
+          "response_amplitude_abs": 0.9133681617759649,
+          "relative_to_10hz": 0.0004996662469469237,
+          "relative_to_10hz_db": -66.02639973357356,
+          "complex_real": 0.9133387385680414,
+          "complex_imag": -0.007331273896412833
+        },
+        {
+          "frequency_hz": 124.0,
+          "response_amplitude_abs": 0.012689432593789698,
+          "relative_to_10hz": 6.941867940411183e-06,
+          "relative_to_10hz_db": -103.17047304894822,
+          "complex_real": 0.012688664368570432,
+          "complex_imag": -0.00013962841438439793
+        }
+      ]
+    },
+    {
+      "id": "IM.H10S2..EDH",
+      "status": 200,
+      "bytes": 27316,
+      "stationxml_sha256": "02311bd3e592510f921134c953e4c9b565dff18864d05a4be3bc96b62da1ca9d",
+      "content_type": "application/xml",
+      "metadata": {
+        "sample_rate_hz": 250.0,
+        "sensor_description": "HiTech 1 to 100 Hz hydrophone and datalogger",
+        "sensitivity_value": 1808.31,
+        "sensitivity_frequency_hz": 10.0,
+        "input_units": "PA",
+        "output_units": "COUNTS"
+      },
+      "response_eval": [
+        {
+          "frequency_hz": 1.0,
+          "response_amplitude_abs": 306.8594258697942,
+          "relative_to_10hz": 0.1697111297861713,
+          "relative_to_10hz_db": -15.405793507657123,
+          "complex_real": -64.1268236047371,
+          "complex_imag": 300.08408444885356
+        },
+        {
+          "frequency_hz": 5.0,
+          "response_amplitude_abs": 1313.6068727218421,
+          "relative_to_10hz": 0.7265010870453033,
+          "relative_to_10hz_db": -2.7752746308312757,
+          "complex_real": 722.8078368684174,
+          "complex_imag": 1096.8645527245637
+        },
+        {
+          "frequency_hz": 10.0,
+          "response_amplitude_abs": 1808.1278832827513,
+          "relative_to_10hz": 1.0,
+          "relative_to_10hz_db": 0.0,
+          "complex_real": 1483.269277463805,
+          "complex_imag": 1034.0399860917198
+        },
+        {
+          "frequency_hz": 40.0,
+          "response_amplitude_abs": 2126.024070933895,
+          "relative_to_10hz": 1.175815101680743,
+          "relative_to_10hz_db": 1.4067806757361379,
+          "complex_real": 2102.4410338700573,
+          "complex_imag": 315.7848148498214
+        },
+        {
+          "frequency_hz": 70.0,
+          "response_amplitude_abs": 2136.022352114588,
+          "relative_to_10hz": 1.1813447333362987,
+          "relative_to_10hz_db": 1.4475329893397406,
+          "complex_real": 2132.117665288518,
+          "complex_imag": 129.09589496873275
+        },
+        {
+          "frequency_hz": 90.0,
+          "response_amplitude_abs": 2130.3779929363254,
+          "relative_to_10hz": 1.1782230740607307,
+          "relative_to_10hz_db": 1.424550472211438,
+          "complex_real": 2129.538630349084,
+          "complex_imag": 59.79644335872741
+        },
+        {
+          "frequency_hz": 100.0,
+          "response_amplitude_abs": 1895.7789356859716,
+          "relative_to_10hz": 1.048476135572936,
+          "relative_to_10hz_db": 0.4111709982316067,
+          "complex_real": 1895.5625106110026,
+          "complex_imag": 28.645093065791592
+        },
+        {
+          "frequency_hz": 105.0,
+          "response_amplitude_abs": 1177.274144489551,
+          "relative_to_10hz": 0.6511011501864281,
+          "relative_to_10hz_db": -3.7270307492077377,
+          "complex_real": 1177.2246335968648,
+          "complex_imag": 10.79691327795101
+        },
+        {
+          "frequency_hz": 110.0,
+          "response_amplitude_abs": 401.6428070855081,
+          "relative_to_10hz": 0.22213185848132844,
+          "relative_to_10hz_db": -13.067782996485885,
+          "complex_real": 401.64030789279525,
+          "complex_imag": 1.4168836604592419
+        },
+        {
+          "frequency_hz": 115.0,
+          "response_amplitude_abs": 59.35101586304246,
+          "relative_to_10hz": 0.032824567560612784,
+          "relative_to_10hz_db": -29.67601973418427,
+          "complex_real": 59.350913373691796,
+          "complex_imag": -0.1102981579652299
+        },
+        {
+          "frequency_hz": 117.0,
+          "response_amplitude_abs": 19.970066879918093,
+          "relative_to_10hz": 0.011044609767126309,
+          "relative_to_10hz_db": -39.13699248399518,
+          "complex_real": 19.969911234926595,
+          "complex_imag": -0.07884451505442701
+        },
+        {
+          "frequency_hz": 119.0,
+          "response_amplitude_abs": 5.152492373460336,
+          "relative_to_10hz": 0.002849628292942264,
+          "relative_to_10hz_db": -50.90423571809036,
+          "complex_real": 5.152399514812586,
+          "complex_imag": -0.030933773225246274
+        },
+        {
+          "frequency_hz": 120.0,
+          "response_amplitude_abs": 2.2912485597955285,
+          "relative_to_10hz": 0.0012671938644271369,
+          "relative_to_10hz_db": -57.94313877083483,
+          "complex_real": 2.291192116585467,
+          "complex_imag": -0.016082526595356195
+        },
+        {
+          "frequency_hz": 121.0,
+          "response_amplitude_abs": 0.9034604734399776,
+          "relative_to_10hz": 0.0004996662469469237,
+          "relative_to_10hz_db": -66.02639973357356,
+          "complex_real": 0.9034313693979569,
+          "complex_imag": -0.007251748487151595
+        },
+        {
+          "frequency_hz": 124.0,
+          "response_amplitude_abs": 0.012551784985124066,
+          "relative_to_10hz": 6.941867940411183e-06,
+          "relative_to_10hz_db": -103.17047304894822,
+          "complex_real": 0.012551025093166633,
+          "complex_imag": -0.0001381138062882729
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "channels_evaluated": 2,
+    "response_only": true,
+    "waveform_fft_performed": false,
+    "db_at_100hz_vs_10hz": [
+      0.4111709982316067,
+      0.4111709982316067
+    ],
+    "db_at_117hz_vs_10hz": [
+      -39.13699248399518,
+      -39.13699248399518
+    ],
+    "db_at_119hz_vs_10hz": [
+      -50.90423571809036,
+      -50.90423571809036
+    ],
+    "db_at_120hz_vs_10hz": [
+      -57.94313877083482,
+      -57.94313877083483
+    ],
+    "target_evidence": "NOT_INCREASED",
+    "target_identity": "UNCONFIRMED"
+  },
+  "status": "SUCCESS_RESPONSE_EDGE_QUANTIFIED",
+  "hard_rules": [
+    "INSTRUMENT_RESPONSE_IS_NOT_OCEAN_SPECTRUM",
+    "NO_FFT",
+    "NO_TARGET_PROMOTION",
+    "119_HZ_INTERPRETATION_REQUIRES_RESPONSE_CORRECTION_AND_PASSBAND_VALIDITY"
+  ]
+}
