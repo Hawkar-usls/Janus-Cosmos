@@ -1,0 +1,71 @@
+name: Cousteau EA T-phase Blind Cluster v7
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ea-tphase-blind-cluster-v7.yml"
+      - "workspace/cousteau_ea_tphase_blind_cluster_v7.py"
+
+permissions:
+  contents: write
+
+jobs:
+  blind-cluster-v7:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen scientific dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests beautifulsoup4 lxml numpy pandas scikit-learn
+      - name: Execute exact-format blind replay
+        id: run_gate
+        continue-on-error: true
+        run: |
+          python workspace/cousteau_ea_tphase_blind_cluster_v7.py \
+            --output data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json \
+            --status-output data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6-STATUS.json
+      - name: Show scientific status
+        if: always()
+        run: |
+          cat data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6-STATUS.json
+          if [ -f data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json ]; then
+            python - <<'PY'
+          import json
+          p='data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json'
+          print(json.dumps(json.load(open(p,encoding='utf-8'))['summary'],indent=2,ensure_ascii=False))
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cousteau-ea-tphase-blind-cluster-v7-${{ github.run_number }}
+          path: |
+            data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json
+            data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6-STATUS.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Freeze run
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6-STATUS.json
+          if [ -f data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json ]; then
+            git add data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-BLIND-CLUSTER-RUN-007-2026-08-21-v1.6.json
+          fi
+          git commit -m "Cousteau: freeze EA T-phase exact-format blind cluster run ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
+      - name: Enforce scientific gate
+        if: steps.run_gate.outcome != 'success'
+        run: |
+          echo "Exact-format blind cluster remains blocked; receipt frozen."
+          exit 1
