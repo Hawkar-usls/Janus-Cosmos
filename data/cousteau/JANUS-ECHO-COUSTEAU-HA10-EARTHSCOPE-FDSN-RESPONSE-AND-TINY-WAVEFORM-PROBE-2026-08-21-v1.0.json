@@ -1,0 +1,209 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-EARTHSCOPE-FDSN-RESPONSE-AND-TINY-WAVEFORM-PROBE-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T15:02:02.837606+00:00",
+  "policy": "RESPONSE_AND_ACCESS_ONLY__NO_OCEAN_SPECTRAL_INSPECTION",
+  "station_queries": [
+    {
+      "network_requested": "IM",
+      "station_requested": "H10N1",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10N1&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10N1&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "status": 200,
+      "content_type": "text/plain",
+      "content_disposition": "inline; filename=fdsn-station_2026-08-21T15:02:03.1760.txt",
+      "bytes": 333,
+      "sha256": "999090d90ae899be19a9d76836b71fb622435bf2cf2d7868a3e6e2be57ae175b",
+      "channels": [
+        {
+          "network": "IM",
+          "station": "H10N1",
+          "location": "",
+          "channel": "EDH",
+          "latitude": "-7.845673",
+          "longitude": "-14.48023",
+          "sensor_description": "1 to 100 Hz HiTech hydrophone and datalogger",
+          "scale": "1828.14",
+          "scale_frequency": "10.0",
+          "scale_units": "PA",
+          "sample_rate_hz": 250.0,
+          "starttime": "2004-09-14T00:00:00.0000",
+          "endtime": ""
+        }
+      ]
+    },
+    {
+      "network_requested": "IR",
+      "station_requested": "H10N1",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10N1&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10N1&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "status": 404,
+      "content_type": "text/plain",
+      "content_disposition": null,
+      "bytes": 315,
+      "sha256": "a1aff3397f18ca098eb847da0cab8efd3f4997959b7ace76a565660b68190e44",
+      "body_prefix": "Error 404 NOT_FOUND: No data found!\n\nRequest:\nhttps://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10N1&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404\n\nRequest Submitted:\n2026-08-21T15:02:03\n\nService version:1.1.56\n          build:0.0.0-SNAPSHOT\n"
+    },
+    {
+      "network_requested": "IM",
+      "station_requested": "H10S2",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10S2&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10S2&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "status": 200,
+      "content_type": "text/plain",
+      "content_disposition": "inline; filename=fdsn-station_2026-08-21T15:02:03.4830.txt",
+      "bytes": 331,
+      "sha256": "9ec3baea7c55e4e03abb3f6b79a35e01ee02422356840b6481ae01708a005b83",
+      "channels": [
+        {
+          "network": "IM",
+          "station": "H10S2",
+          "location": "",
+          "channel": "EDH",
+          "latitude": "-8.9591",
+          "longitude": "-14.64531",
+          "sensor_description": "HiTech 1 to 100 Hz hydrophone and datalogger",
+          "scale": "1808.31",
+          "scale_frequency": "10.0",
+          "scale_units": "PA",
+          "sample_rate_hz": 250.0,
+          "starttime": "2004-09-14T00:00:00.0000",
+          "endtime": ""
+        }
+      ]
+    },
+    {
+      "network_requested": "IR",
+      "station_requested": "H10S2",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10S2&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10S2&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404",
+      "status": 404,
+      "content_type": "text/plain",
+      "content_disposition": null,
+      "bytes": 315,
+      "sha256": "6bca0297ec095b6f0a6effc645f064fef3952c75e13f87f2f781b6492abe8238",
+      "body_prefix": "Error 404 NOT_FOUND: No data found!\n\nRequest:\nhttps://service.earthscope.org/fdsnws/station/1/query?net=IR&sta=H10S2&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=channel&format=text&nodata=404\n\nRequest Submitted:\n2026-08-21T15:02:03\n\nService version:1.1.56\n          build:0.0.0-SNAPSHOT\n"
+    }
+  ],
+  "resolved_channels": [
+    {
+      "network": "IM",
+      "station": "H10N1",
+      "location": "",
+      "channel": "EDH",
+      "latitude": "-7.845673",
+      "longitude": "-14.48023",
+      "sensor_description": "1 to 100 Hz HiTech hydrophone and datalogger",
+      "scale": "1828.14",
+      "scale_frequency": "10.0",
+      "scale_units": "PA",
+      "sample_rate_hz": 250.0,
+      "starttime": "2004-09-14T00:00:00.0000",
+      "endtime": ""
+    },
+    {
+      "network": "IM",
+      "station": "H10S2",
+      "location": "",
+      "channel": "EDH",
+      "latitude": "-8.9591",
+      "longitude": "-14.64531",
+      "sensor_description": "HiTech 1 to 100 Hz hydrophone and datalogger",
+      "scale": "1808.31",
+      "scale_frequency": "10.0",
+      "scale_units": "PA",
+      "sample_rate_hz": 250.0,
+      "starttime": "2004-09-14T00:00:00.0000",
+      "endtime": ""
+    }
+  ],
+  "response_queries": [
+    {
+      "channel_id": "IM.H10N1..EDH",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=response&format=xml&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=response&format=xml&nodata=404",
+      "status": 200,
+      "content_type": "application/xml",
+      "content_disposition": "inline; filename=fdsn-station_2026-08-21T15:02:03.6120.xml",
+      "bytes": 27360,
+      "sha256": "a0dba88ee2f2f7a7763ecd7e80dfef5ed7e07f5f12622c9a7554537059048909",
+      "xml_prefix": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n\n <FDSNStationXML xmlns=\"http://www.fdsn.org/xml/station/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:iris=\"http://www.fdsn.org/xml/station/1/iris\" xsi:schemaLocation=\"http://www.fdsn.org/xml/station/1 http://www.fdsn.org/xml/station/fdsn-station-1.1.xsd\" schemaVersion=\"1.1\">\n  <Source>EarthScope</Source>\n  <Sender>EarthScope</Sender>\n  <Module>EarthScope WEB SERVICE: fdsnws-station | version: 1.1.56</Module>\n  <ModuleURI>https://serv"
+    },
+    {
+      "channel_id": "IM.H10S2..EDH",
+      "requested_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=response&format=xml&nodata=404",
+      "final_url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00&endtime=2015-01-13T00%3A00%3A00&level=response&format=xml&nodata=404",
+      "status": 200,
+      "content_type": "application/xml",
+      "content_disposition": "inline; filename=fdsn-station_2026-08-21T15:02:04.1650.xml",
+      "bytes": 27342,
+      "sha256": "d093b599c6863cae4e5b414008b0efe8c1c71ec0baf1073d8d9bb0d5a7bc52b8",
+      "xml_prefix": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n\n <FDSNStationXML xmlns=\"http://www.fdsn.org/xml/station/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:iris=\"http://www.fdsn.org/xml/station/1/iris\" xsi:schemaLocation=\"http://www.fdsn.org/xml/station/1 http://www.fdsn.org/xml/station/fdsn-station-1.1.xsd\" schemaVersion=\"1.1\">\n  <Source>EarthScope</Source>\n  <Sender>EarthScope</Sender>\n  <Module>EarthScope WEB SERVICE: fdsnws-station | version: 1.1.56</Module>\n  <ModuleURI>https://serv"
+    }
+  ],
+  "waveform_probes": [
+    {
+      "channel_id": "IM.H10N1..EDH",
+      "requested_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-01T00%3A00%3A00&endtime=2015-01-01T00%3A01%3A00&nodata=404&format=miniseed",
+      "final_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-01T00%3A00%3A00&endtime=2015-01-01T00%3A01%3A00&nodata=404&format=miniseed",
+      "status": 200,
+      "content_type": "application/vnd.fdsn.mseed",
+      "content_disposition": "attachment; filename=fdsnws-dataselect_2026-08-21t15:02:03z.mseed",
+      "bytes": 23552,
+      "sha256": "b79f973c48a27eabddd7f79ee7134bc764d2274792534d6a1bf22727c00de8a7",
+      "window": {
+        "start": "2015-01-01T00:00:00",
+        "end": "2015-01-01T00:01:00"
+      },
+      "trace_metadata": [
+        {
+          "id": "IM.H10N1..EDH",
+          "starttime": "2015-01-01T00:00:00.002000Z",
+          "endtime": "2015-01-01T00:00:59.998000Z",
+          "sampling_rate_hz": 250.0,
+          "npts": 15000
+        }
+      ]
+    },
+    {
+      "channel_id": "IM.H10S2..EDH",
+      "requested_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-01T00%3A00%3A00&endtime=2015-01-01T00%3A01%3A00&nodata=404&format=miniseed",
+      "final_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-01T00%3A00%3A00&endtime=2015-01-01T00%3A01%3A00&nodata=404&format=miniseed",
+      "status": 200,
+      "content_type": "application/vnd.fdsn.mseed",
+      "content_disposition": "attachment; filename=fdsnws-dataselect_2026-08-21t15:02:04z.mseed",
+      "bytes": 34816,
+      "sha256": "343610b31fe02930daef4c909a8985ee9c6d046f0cc859119329a0a92967c3a2",
+      "window": {
+        "start": "2015-01-01T00:00:00",
+        "end": "2015-01-01T00:01:00"
+      },
+      "trace_metadata": [
+        {
+          "id": "IM.H10S2..EDH",
+          "starttime": "2015-01-01T00:00:00.002000Z",
+          "endtime": "2015-01-01T00:00:59.998000Z",
+          "sampling_rate_hz": 250.0,
+          "npts": 15000
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "resolved_channel_count": 2,
+    "candidate_count": 2,
+    "response_payloads_recovered": 2,
+    "tiny_waveform_payloads_recovered": 2,
+    "public_waveform_bytes_verified": true,
+    "spectral_inspection_performed": false,
+    "target_evidence": "NOT_INCREASED",
+    "target_identity": "UNCONFIRMED"
+  },
+  "status": "SUCCESS_PUBLIC_HA10_BYTES_RECOVERED",
+  "hard_rules": [
+    "NO_FFT_IN_THIS_PROBE",
+    "NO_FREQUENCY_TARGET_INSPECTION",
+    "RESPONSE_FIRST",
+    "TINY_WINDOW_IS_ACCESS_PROOF_NOT_EVENT_EVIDENCE",
+    "NO_TARGET_PROMOTION"
+  ]
+}
