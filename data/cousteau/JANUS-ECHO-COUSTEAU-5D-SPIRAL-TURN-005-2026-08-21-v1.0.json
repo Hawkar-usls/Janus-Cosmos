@@ -1,0 +1,340 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-005-2026-08-21-v1.0",
+  "created_utc": "2026-08-21T13:36:59.267188+00:00",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-004-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "dimensions": [
+    "D0_SPACE",
+    "D1_TIME",
+    "D2_ACOUSTIC",
+    "D3_REVERSE_CAUSAL",
+    "D4_ASSOCIATIVE_PROVENANCE"
+  ],
+  "phases": [
+    "BACK",
+    "FORWARD",
+    "LEFT_HRAIN",
+    "RIGHT_INAIHR",
+    "ASCEND"
+  ],
+  "turn": {
+    "turn": 5,
+    "inherited_constraints": [
+      "ABSTRACT_NOVELTY_WITHOUT_TESTABLE_PAYOFF_IS_REJECTED",
+      "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+      "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT",
+      "BLOCKED_DATA_STAYS_BLOCKED",
+      "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES",
+      "CLAIM_CEILING_PRESERVED",
+      "FREQUENCY_ONLY_CANNOT_PROMOTE_TARGET",
+      "KEEP_H0_H1_H2_SEPARATE",
+      "MATCHED_CONTROL_PER_POPULATED_DIMENSION",
+      "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+      "NEXT_TURN_REQUIRES_NEW_INPUT_OR_RESOLVED_BLOCKER",
+      "NO_RECENTERING",
+      "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE",
+      "PREBIND_AUTHORITATIVE_MGDS_DATASET_ID_BEFORE_PARSE",
+      "PREBIND_REPLAY_MUST_KEEP_DBSCAN_PARAMETERS_UNCHANGED",
+      "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+      "SPIRAL_MUST_STOP_ON_EVIDENCE_PLATEAU",
+      "STAGE_ORDER_IS_PROOF_OBLIGATION",
+      "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION"
+    ],
+    "added_constraints": [
+      "REPORTED_EVENT_ERRORS_MUST_BE_PROPAGATED_BEFORE_NEAREST_EVENT_INTERPRETATION",
+      "ERROR_EXTENT_PROXY_IS_NOT_A_CONFIDENCE_ELLIPSE",
+      "THREE_PICK_MISSING_900_EXPLANATION_REMAINS_HYPOTHESIS_UNTIL_PROVENANCE_RECOVERED"
+    ],
+    "active_constraints": [
+      "ABSTRACT_NOVELTY_WITHOUT_TESTABLE_PAYOFF_IS_REJECTED",
+      "AUTHORITATIVE_FILE_ROWS_ARE_ANALYSIS_INPUT__NO_SYNTHETIC_COUNT_REPAIR",
+      "BLIND_CLUSTER_NEGATIVE_CANNOT_BE_OVERRIDDEN_BY_NEAREST_EVENT",
+      "BLOCKED_DATA_STAYS_BLOCKED",
+      "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES",
+      "CLAIM_CEILING_PRESERVED",
+      "ERROR_EXTENT_PROXY_IS_NOT_A_CONFIDENCE_ELLIPSE",
+      "FREQUENCY_ONLY_CANNOT_PROMOTE_TARGET",
+      "KEEP_H0_H1_H2_SEPARATE",
+      "MATCHED_CONTROL_PER_POPULATED_DIMENSION",
+      "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+      "NEXT_TURN_REQUIRES_NEW_INPUT_OR_RESOLVED_BLOCKER",
+      "NO_RECENTERING",
+      "PAPER_FILE_COUNT_MISMATCH_IS_FIRST_CLASS_RECONCILIATION_GATE",
+      "PREBIND_AUTHORITATIVE_MGDS_DATASET_ID_BEFORE_PARSE",
+      "PREBIND_REPLAY_MUST_KEEP_DBSCAN_PARAMETERS_UNCHANGED",
+      "RECTANGULAR_LOOK_ELSEWHERE_IS_DIAGNOSTIC_NOT_FORMAL_P_VALUE",
+      "REPORTED_EVENT_ERRORS_MUST_BE_PROPAGATED_BEFORE_NEAREST_EVENT_INTERPRETATION",
+      "SPIRAL_MUST_STOP_ON_EVIDENCE_PLATEAU",
+      "STAGE_ORDER_IS_PROOF_OBLIGATION",
+      "TECTONIC_MAR_CONTROL_PRECEDES_TARGET_INTERPRETATION",
+      "THREE_PICK_MISSING_900_EXPLANATION_REMAINS_HYPOTHESIS_UNTIL_PROVENANCE_RECOVERED"
+    ],
+    "anchor_node": "S05N05",
+    "scientific_delta": "ERROR_AWARE_SPATIAL_NEGATIVE_STRENGTHENED__COUNT_MISMATCH_NARROWED_NOT_CLOSED__TARGET_EVIDENCE_NOT_INCREASED",
+    "state_sha256": "657a3b953d4474cf5eee58b082ca32844a582422b4730edfd833aa8b01127813",
+    "repeats_prior_state": false,
+    "radius": 22,
+    "height": 5
+  },
+  "nodes": [
+    {
+      "node_id": "S05N01",
+      "turn": 5,
+      "phase": "BACK",
+      "created_utc": "2026-08-21T13:36:59.263757+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "FACT",
+      "structural_context": "Revisit the nearest-event branch with catalog-reported location errors: nominal distance 477.597 km, radial proxy 30.575 km, conservative axis-sum proxy 38.225 km.",
+      "associative_context": "The old question nearest event? becomes can the reported positional uncertainty plausibly bridge the anchor gap?",
+      "evidence_status": "ERROR_AWARE_REVISIT",
+      "new_constraints": [],
+      "parents": [],
+      "payload": {
+        "nearest_event": {
+          "nearest_nominal_distance_km": 477.597,
+          "nearest_event_lat": -2.412,
+          "nearest_event_lon": -0.193,
+          "nearest_n_hydrophones": 6,
+          "nearest_lat_error_deg": 0.081,
+          "nearest_lon_error_deg": 0.263,
+          "nearest_radial_error_extent_proxy_km": 30.575,
+          "nearest_axis_sum_error_extent_proxy_km": 38.225,
+          "nearest_nominal_minus_radial_proxy_km": 447.021,
+          "nearest_nominal_minus_axis_sum_proxy_km": 439.371,
+          "verdict": "NEAREST_EVENT_REMAINS_SEPARATED_BEYOND_CONSERVATIVE_AXIS_SUM_PROXY",
+          "target_identity": "UNCONFIRMED"
+        }
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aac0cff159e16ff9d76122f4fe934cbba470029e3c31c5969df6ca2b16af75f3"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aa890889b99fb76a637375d8bbeaebddaf16a551de7bb6fbe2fa450fb5d22f1e"
+        }
+      ],
+      "node_sha256": "36f371129e8447422f9c4270252d350e3354aac869607f4c30997901ce54e420"
+    },
+    {
+      "node_id": "S05N02",
+      "turn": 5,
+      "phase": "FORWARD",
+      "created_utc": "2026-08-21T13:36:59.264578+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "NEGATIVE",
+      "structural_context": "Even subtracting the conservative axis-sum error proxy leaves 439.371 km separation from the frozen anchor.",
+      "associative_context": "An isolated nearest event therefore still cannot rescue the already-negative blind cluster result.",
+      "evidence_status": "NEAREST_EVENT_REMAINS_SEPARATED",
+      "new_constraints": [
+        "REPORTED_EVENT_ERRORS_MUST_BE_PROPAGATED_BEFORE_NEAREST_EVENT_INTERPRETATION",
+        "ERROR_EXTENT_PROXY_IS_NOT_A_CONFIDENCE_ELLIPSE"
+      ],
+      "parents": [
+        "S05N01"
+      ],
+      "payload": {
+        "verdict": "NEAREST_EVENT_REMAINS_SEPARATED_BEYOND_CONSERVATIVE_AXIS_SUM_PROXY"
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aac0cff159e16ff9d76122f4fe934cbba470029e3c31c5969df6ca2b16af75f3"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aa890889b99fb76a637375d8bbeaebddaf16a551de7bb6fbe2fa450fb5d22f1e"
+        }
+      ],
+      "node_sha256": "4d577b4f4fec0925f8f4179b2a2b8fb3f9dbedf81e7ec29d4c692d37efa6c04b"
+    },
+    {
+      "node_id": "S05N03",
+      "turn": 5,
+      "phase": "LEFT_HRAIN",
+      "created_utc": "2026-08-21T13:36:59.265250+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "CORRECTION",
+      "structural_context": "Count reconciliation preserves two authoritative observations at once: the primary paper reports 6843 events admitted at three-or-more arrival picks, while the current deposited table contains 5943 rows whose hydrophone-count field spans 4 through 8.",
+      "associative_context": "The 900-row difference is a source-provenance problem, not permission to repair the catalog numerically.",
+      "evidence_status": "COUNT_BOUNDARY_LOCALIZED_NOT_CLOSED",
+      "new_constraints": [
+        "THREE_PICK_MISSING_900_EXPLANATION_REMAINS_HYPOTHESIS_UNTIL_PROVENANCE_RECOVERED"
+      ],
+      "parents": [
+        "S05N02"
+      ],
+      "payload": {
+        "count_gate": "COUNT_MISMATCH_LOCALIZED__THREE_PICK_BOUNDARY_HYPOTHESIS_STRONGLY_COMPATIBLE_BUT_NOT_VERIFIED__MISSING_900_PROVENANCE_OPEN",
+        "next_gate": "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1"
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aac0cff159e16ff9d76122f4fe934cbba470029e3c31c5969df6ca2b16af75f3"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aa890889b99fb76a637375d8bbeaebddaf16a551de7bb6fbe2fa450fb5d22f1e"
+        }
+      ],
+      "node_sha256": "04de0e8067e9f9702d52f8ce2b4a5f961af16d4f4035b16666d1133fa3b9c8f7"
+    },
+    {
+      "node_id": "S05N04",
+      "turn": 5,
+      "phase": "RIGHT_INAIHR",
+      "created_utc": "2026-08-21T13:36:59.265901+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "HYPOTHESIS",
+      "structural_context": "The exact 900-row difference and absence of 3-hydrophone rows make the three-pick boundary a strong candidate explanation.",
+      "associative_context": "Association is allowed to nominate this explanation for provenance recovery, but not to promote it to fact because arrival picks and recording hydrophones have not been explicitly equated by a source.",
+      "evidence_status": "STRONG_CANDIDATE_EXPLANATION_NOT_EVIDENCE",
+      "new_constraints": [
+        "THREE_PICK_HYPOTHESIS_CAN_ROUTE_SEARCH_BUT_NOT_CLOSE_GATE"
+      ],
+      "parents": [
+        "S05N03"
+      ],
+      "payload": {
+        "hypothesis": "MISSING_900_MAY_BE_THREE_PICK_EVENTS",
+        "verified": false
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aac0cff159e16ff9d76122f4fe934cbba470029e3c31c5969df6ca2b16af75f3"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aa890889b99fb76a637375d8bbeaebddaf16a551de7bb6fbe2fa450fb5d22f1e"
+        }
+      ],
+      "node_sha256": "bcb9bad712627227ee4ab1bb8ad4eddfc5e9ae8aaee7736800ac56a4118e1f6a"
+    },
+    {
+      "node_id": "S05N05",
+      "turn": 5,
+      "phase": "ASCEND",
+      "created_utc": "2026-08-21T13:36:59.266534+00:00",
+      "dimensions": [
+        "D0_SPACE",
+        "D1_TIME",
+        "D2_ACOUSTIC",
+        "D3_REVERSE_CAUSAL",
+        "D4_ASSOCIATIVE_PROVENANCE"
+      ],
+      "claim_class": "STATE_LIFT",
+      "structural_context": "Turn 5 ascends with a stronger spatial negative and a narrower provenance question. No target evidence is gained.",
+      "associative_context": "The next useful move is no longer more spatial clustering; it is recovery of the missing-900 provenance and independent acoustic waveform/fingerprint evidence.",
+      "evidence_status": "SPIRAL_ASCENT_WITH_FALSIFICATION_GAIN",
+      "new_constraints": [
+        "REPORTED_EVENT_ERRORS_MUST_BE_PROPAGATED_BEFORE_NEAREST_EVENT_INTERPRETATION",
+        "ERROR_EXTENT_PROXY_IS_NOT_A_CONFIDENCE_ELLIPSE",
+        "THREE_PICK_MISSING_900_EXPLANATION_REMAINS_HYPOTHESIS_UNTIL_PROVENANCE_RECOVERED",
+        "THREE_PICK_HYPOTHESIS_CAN_ROUTE_SEARCH_BUT_NOT_CLOSE_GATE"
+      ],
+      "parents": [
+        "S05N04"
+      ],
+      "payload": {
+        "next_gates": [
+          "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+          "COUSTEAU_VDEC_OR_EQUIVALENT_119HZ_WAVEFORM_ACQUISITION_PREP_V1",
+          "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+        ]
+      },
+      "provenance": [
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-EVENT-ERROR-AWARE-DISTANCE-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aac0cff159e16ff9d76122f4fe934cbba470029e3c31c5969df6ca2b16af75f3"
+        },
+        {
+          "path": "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-RUN-001-2026-08-21-v1.0.json",
+          "sha256": "aa890889b99fb76a637375d8bbeaebddaf16a551de7bb6fbe2fa450fb5d22f1e"
+        }
+      ],
+      "node_sha256": "7b019b6f2274ff62e8957ba025a60a23cfb362db690f1ddc2b78e3617a7fe981"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T5_01_HEIGHT_ASCENDS_4_TO_5",
+      "pass": true
+    },
+    {
+      "id": "T5_02_STATE_HASH_DIFFERS_FROM_TURN4",
+      "pass": true
+    },
+    {
+      "id": "T5_03_RADIUS_INCREASES",
+      "pass": true
+    },
+    {
+      "id": "T5_04_NEAREST_EVENT_ERROR_PROPAGATED",
+      "pass": true
+    },
+    {
+      "id": "T5_05_NEAREST_EVENT_STILL_SEPARATED",
+      "pass": true
+    },
+    {
+      "id": "T5_06_ERROR_PROXY_NOT_PROMOTED_TO_CONFIDENCE_ELLIPSE",
+      "pass": true
+    },
+    {
+      "id": "T5_07_MISSING_900_NOT_SYNTHESIZED",
+      "pass": true
+    },
+    {
+      "id": "T5_08_THREE_PICK_EXPLANATION_NOT_PROMOTED",
+      "pass": true
+    },
+    {
+      "id": "T5_09_BLIND_NEGATIVE_NOT_RESCUED",
+      "pass": true
+    },
+    {
+      "id": "T5_10_NO_TARGET_PROMOTION",
+      "pass": true
+    }
+  ],
+  "tests_passed": 10,
+  "tests_total": 10,
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_5",
+  "scientific_verdict": "ERROR_AWARE_SPATIAL_NEGATIVE_STRENGTHENED__COUNT_MISMATCH_NARROWED_NOT_CLOSED__TARGET_EVIDENCE_NOT_INCREASED",
+  "target_identity": "UNCONFIRMED",
+  "underwater_pyramid_detected": false,
+  "next_gates": [
+    "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+    "COUSTEAU_VDEC_OR_EQUIVALENT_119HZ_WAVEFORM_ACQUISITION_PREP_V1",
+    "COUSTEAU_5D_CONTROL_OUTPERFORMANCE_MATRIX_V1"
+  ],
+  "status": "TURN_5_ASCENDED",
+  "artifact_sha256": "69219cfd3f148c63e54e76f552a7b9075b81bda3e5c90a00a40d6f7b6dddace9"
+}
