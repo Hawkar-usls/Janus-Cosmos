@@ -1,0 +1,118 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-CONTROL-OUTPERFORMANCE-MATRIX-2026-08-21-v1.0",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_local": "2026-08-21T17:47:00+03:00",
+  "purpose": "Require any future target candidate to quantitatively outperform the strongest relevant natural, biological, engineered, propagation and instrumentation controls in every populated dimension before target promotion.",
+  "dimensions": {
+    "D0_SPACE": {
+      "candidate_observation": "Legacy timestamp-specific Love-Edem point and frozen intrinsic latitude-circle model",
+      "strongest_control": "MID_ATLANTIC_RIDGE_AF_SA_TECTONIC_GEOMETRY",
+      "facts": {
+        "legacy_anchor_to_af_sa_boundary_km": 1664.013,
+        "median_tphase_event_to_af_sa_boundary_km": 71.845,
+        "distance_ratio_legacy_over_event_median": 23.161,
+        "fraction_events_within_100_km_boundary": 0.542487,
+        "fraction_events_within_200_km_boundary": 0.604913,
+        "legacy_anchor_farther_than_fraction_of_events": 0.860508,
+        "full_latitude_circle_min_af_sa_distance_km": 0.52,
+        "full_latitude_circle_minimum_was_found_by_360_scan": true
+      },
+      "verdict": "CONTROL_OUTPERFORMS_CANDIDATE_ASSOCIATION",
+      "promotion": false,
+      "firewall": "LATITUDE_CIRCLE_RIDGE_INTERSECTION_IS_LOOK_ELSEWHERE_GEOMETRY_NOT_A_NEW_TARGET_LONGITUDE"
+    },
+    "D1_TIME": {
+      "candidate_observation": "No preregistered repeated Earth-fixed transformed-return event sequence exists yet.",
+      "strongest_control": "TECTONIC_EVENT_CATALOG_PLUS_CONTINUOUS_AMBIENT_BACKGROUND",
+      "verdict": "UNPOPULATED_FOR_TARGET__CONTROL_BASELINE_REQUIRED",
+      "promotion": false,
+      "next_requirement": "PREDEFINE_EVENT_AND_OFF_EVENT_WINDOWS_BEFORE_SPECTRAL_INSPECTION"
+    },
+    "D2_ACOUSTIC": {
+      "candidate_observation": "119-Hz voice prior and approximately 520-Hz flooded-model prior exist as model priors only.",
+      "controls": [
+        "ICEBERG_HARMONIC_TREMOR_520_CLASS",
+        "SEI_WHALE_200_600_HZ",
+        "ANTARCTIC_MINKE_BIO_DUCK_HARMONICS",
+        "FISH_SWIMBLADDER_RESONANCE",
+        "SUBMERGED_ELASTIC_SHELL_RESONANCE",
+        "SURTASS_LFA_ILLUMINATOR",
+        "HA10_INSTRUMENT_RESPONSE_AND_BAND_EDGE"
+      ],
+      "facts": {
+        "absolute_520_hz_specificity": "REJECTED",
+        "single_frequency_match": "NON_SPECIFIC",
+        "ha10_sampling_rate_hz_reported": 250.0,
+        "ha10_nyquist_hz": 125.0,
+        "ha10_published_response_upper_hz": 120.0,
+        "117_120_hz_status": "POTENTIALLY_MEASURABLE_AFTER_EXACT_RESPONSE_RECOVERY",
+        "120_121_hz_status": "EDGE_OR_OUT_OF_BAND_RISK"
+      },
+      "verdict": "TARGET_HAS_NOT_OUTPERFORMED_ACOUSTIC_CONTROLS",
+      "promotion": false
+    },
+    "D3_REVERSE_CAUSAL": {
+      "candidate_observation": "Round-trip transformed-echo operator is physically defined but not identified from a real candidate return.",
+      "strongest_controls": [
+        "OUTBOUND_ILLUMINATOR_X_F",
+        "H_TX_H_RX_PROPAGATION",
+        "MULTIPATH_REVERBERATION",
+        "NATURAL_RESONATORS"
+      ],
+      "required_model": "Y(f)=X(f)*H_tx(f)*S_target(f,theta_in,theta_out)*H_rx(f)+N(f)",
+      "verdict": "BLOCKED_BY_MISSING_COMPLEX_OR_CALIBRATED_TARGET_RETURN",
+      "promotion": false
+    },
+    "D4_ASSOCIATIVE_PROVENANCE": {
+      "candidate_observation": "LOVE/EDEM narrative and coordinate derivation can route tests but cannot serve as an independent witness.",
+      "strongest_control": "PRE_REGISTRATION_PLUS_INDEPENDENT_DATA_PROVENANCE",
+      "facts": {
+        "legacy_longitude_is_intrinsic": false,
+        "intrinsic_latitude_deg": -3.8654180644718967,
+        "posthoc_retarget_to_minus_11_79_allowed": false,
+        "ea_catalog_paper_rows": 6843,
+        "ea_download_rows": 5943,
+        "missing_rows": 900,
+        "missing_900_provenance": "OPEN"
+      },
+      "verdict": "ASSOCIATION_CANNOT_PROMOTE_TARGET",
+      "promotion": false
+    }
+  },
+  "global_score": {
+    "populated_dimensions": ["D0_SPACE", "D2_ACOUSTIC", "D4_ASSOCIATIVE_PROVENANCE"],
+    "dimensions_where_target_outperforms_controls": [],
+    "dimensions_where_controls_outperform_or_block_target": ["D0_SPACE", "D1_TIME", "D2_ACOUSTIC", "D3_REVERSE_CAUSAL", "D4_ASSOCIATIVE_PROVENANCE"],
+    "candidate_admission": false,
+    "scientific_verdict": "NO_TARGET_PROMOTION__NATURAL_TECTONIC_AND_MEASUREMENT_CONTROLS_CURRENTLY_DOMINATE_OR_BLOCK_ALL_POPULATED_DIMENSIONS"
+  },
+  "admission_rule": {
+    "required": [
+      "REAL_WAVEFORM_OR_COMPLEX_RETURN",
+      "CALIBRATED_INSTRUMENT_RESPONSE",
+      "PRE_REGISTERED_EVENT_AND_NOISE_WINDOWS",
+      "EARTH_FIXED_LOCALIZATION_WITH_LOOK_ELSEWHERE_ACCOUNTED",
+      "REPEAT_INDEPENDENT_PASSES",
+      "NATURAL_BIOLOGICAL_ENGINEERED_CONTROLS_QUANTITATIVELY_OUTPERFORMED",
+      "WITHHELD_FORWARD_REPLAY_PASS"
+    ],
+    "frequency_only": "REJECT",
+    "geometry_only": "REJECT",
+    "association_only": "REJECT"
+  },
+  "next_gates": [
+    "COUSTEAU_HA10_EARTHSCOPE_FDSN_RESPONSE_AND_TINY_WAVEFORM_PROBE_V1",
+    "COUSTEAU_EA_TPHASE_MISSING_900_PROVENANCE_RECOVERY_V1",
+    "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1"
+  ],
+  "hard_rules": [
+    "CANDIDATE_MUST_OUTPERFORM_ALL_RELEVANT_CONTROL_CLASSES",
+    "MATCHED_CONTROL_PER_POPULATED_DIMENSION",
+    "HRAIN_AND_INAIHR_AGREEMENT_IS_NOT_INDEPENDENT_REPLICATION",
+    "NEGATIVE_RESULTS_NOT_RESCUED_BY_ASSOCIATION",
+    "NO_POSTHOC_RETARGETING",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET",
+    "TARGET_IDENTITY_UNCONFIRMED"
+  ],
+  "status": "CONTROL_OUTPERFORMANCE_MATRIX_V1_FROZEN__NO_TARGET_ADMISSION"
+}
