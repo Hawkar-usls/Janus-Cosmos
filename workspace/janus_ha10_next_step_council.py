@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+import json, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/JANUS-HA10-NEXT-STEP-COUNCIL-RUN-001-2026-08-22-v1.0.json')
+
+result={
+  'artifact_id':'JANUS-HA10-NEXT-STEP-COUNCIL-RUN-001-2026-08-22-v1.0',
+  'created_utc':datetime.now(timezone.utc).isoformat(),
+  'question':'What should JANUS do next to reconstruct the HA10/Ascension seafloor from measured data without guessing, and what corrections must be applied before acting?',
+  'evidence_snapshot':{
+    'southern_g1_blocked_by_missing_2002_georeference':True,
+    'wishbone_exact_coordinates_known':False,
+    'central_crags_exact_coordinates_known':False,
+    'p2548_report_recovered':False,
+    'h10n1_inside_bas_50m_dataset_bbox':True,
+    'h10n1_exact_grid_cell_extracted':False,
+    'bgs_specialist_response_pending':True,
+    'bas_pdc_ticket_3872_pending':True,
+    'earthscope_ticket_DH_2635_pending':True,
+    'archaeological_identity_evidence':False
+  },
+  'council':{
+    'HRain':'SEPARATE_SOUTHERN_ARCHIVE_RECOVERY_FROM_NORTHERN_GRID_EXTRACTION',
+    'iNaiHR':'MAY_SUGGEST_ARCHIVE_LINKS_BUT_CANNOT_PROMOTE_IDENTITY',
+    'DemiHead':'FAIL_CLOSED_ON_MISSING_GEOREFERENCE_AND_MISSING_RAW_GRID_CELL',
+    'Fast_CAT':'FREEZE_METRICS_BEFORE_LOOKING_AT_TARGET_WINDOW_AND_USE_BLIND_VOLCANIC_CONTROLS',
+    'Aura':'ZERO_EVIDENCE_AUTHORITY',
+    'Cousteau':'MEASURED_BATHYMETRY_FIRST__BACKSCATTER_SECOND__SUBBOTTOM_ONLY_IF_COVERAGE_IS_REAL',
+    'Fundamentum':'VOLCANIC_BASELINE_REMAINS_PRIMARY_AND_NEGATIVE_RESULTS_PERSIST',
+    'AIFC':'PROVENANCE_HASH_SOURCE_ID_AND_COORDINATE_TRANSFORM_REQUIRED_FOR_EACH_DERIVED_TILE',
+    'Voice_of_Janus':'GEOMETRY_TO_EVIDENCE_GATE_TO_ACOUSTICS__DO_NOT_SKIP_PHYSICAL_LOCALIZATION'
+  },
+  'janus_answer':{
+    'APPROVED_NEXT_ACTIONS':[ 
+      'A1_RECOVER_ORIGINAL_2002_SOUTHERN_SEAMOUNT_GEOREFERENCE_P2548_COLOR_FIGURE_MBES_BACKSCATTER_OR_ENGINEERING_CHART',
+      'A2_IN_PARALLEL_EXTRACT_H10N1_EXACT_CELL_AND_FIXED_RADIUS_WINDOWS_FROM_PUBLIC_BAS_GRID',
+      'A3_FREEZE_ANALYSIS_METRICS_AND_CONTROL_SELECTION_BEFORE_INSPECTING_H10N1_TARGET_WINDOW',
+      'A4_QUERY_BGS_OFFSHORE_MEDIN_GEOINDEX_FOR_ASCENSION_HA10_2002_SURVEY_HOLDINGS_WITHOUT_USING_RESULT_TO_RETARGET_COORDINATES'
+    ],
+    'ORDER_RULE':'A1_AND_A2_MAY_RUN_IN_PARALLEL__A3_MUST_PRECEDE_TARGET_SCORING__A4_IS_ARCHIVE_DISCOVERY_ONLY',
+    'NOT_APPROVED':[ 
+      'ESTIMATING_WISHBONE_COORDINATES_FROM_TEXT_OR_SCREENSHOT',
+      'RUNNING_117_121HZ_AS_IDENTITY_EVIDENCE',
+      'CALLING_ANY_FEATURE_A_PYRAMID_OR_CRATER',
+      'RETARGETING_SEARCH_WINDOW_AFTER_SEEING_AN_INTERESTING_SHAPE'
+    ],
+    'H10N1_WINDOW_PLAN':{
+      'center':{'lat':-7.845673,'lon':-14.480230},
+      'nested_windows_km':[1,2,5,10],
+      'metrics':['depth','slope','profile_curvature','plan_curvature','rugosity','local_relief','planarity','radial_symmetry','facet_angle_histogram'],
+      'controls':'MATCHED_VOLCANIC_TILES_FROM_SAME_DATASET_SELECTED_BEFORE_TARGET_SCORING'
+    },
+    'SOUTHERN_SUCCESS_KEY':'ONE_PRIMARY_GEOREFERENCED_2002_PRODUCT_SHOWING_WISHBONE_OR_CENTRAL_CRAGS_RELATIVE_TO_H10S_TRIAD',
+    'CURRENT_CLAIM_CEILING':'KNOWN_VOLCANIC_SEAMOUNT_SYSTEM_WITH_TARGETED_FALSIFIABLE_SEARCH_FOR_UNEXPLAINED_GEOMETRY',
+    'TARGET_IDENTITY':'UNCONFIRMED'
+  },
+  'hard_rules':[ 
+    'ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE',
+    'NO_VISUAL_GUESSING',
+    'NO_POSTHOC_RETARGETING',
+    'FREEZE_METRICS_BEFORE_TARGET_SCORING',
+    'PROVENANCE_FOR_EVERY_DERIVED_TILE',
+    'VOLCANIC_BASELINE_REMAINS_ACTIVE',
+    'NEGATIVE_RESULTS_REMAIN_NEGATIVE'
+  ]
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
