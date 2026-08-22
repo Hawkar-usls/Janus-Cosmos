@@ -75,7 +75,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py \
+          python -m workspace.cousteau_ha10_n1_s2_independent_noise_asymmetry_replication \
             --output "artifacts/ha10-independent-noise-replication/run-${GITHUB_RUN_ID}.json"
 
       - name: Validate non-promotional result boundary
