@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
+# Retrigger of the same JANUS-authorized archive stage; no gate, target, or inference rule changed.
 import hashlib, html, json, math, re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -51,7 +52,6 @@ for u in candidates:
  except Exception as e:
   probes.append({'url':u,'error':repr(e)})
 
-# Metadata facts independently present in the BODC series narrative.
 metadata_facts={
  'originator_identifier':'JR15001_PRODQXF_NAV',
  'nominal_cycle_interval_s':30,
@@ -65,7 +65,6 @@ metadata_facts={
  'bathymetry_quality_warning':'periods of large-scale noise exist in final bathymetry channel; flagged by BODC'
 }
 
-# Deliberately no guessing parser: public payload must be clearly machine-readable before track computation.
 track_computation={'status':'NOT_RUN','reason':'NO_UNAMBIGUOUS_MACHINE_READABLE_ODV_OR_NAV_PAYLOAD_RECOVERED'}
 for d in downloaded:
  fn=d['filename'].lower()
