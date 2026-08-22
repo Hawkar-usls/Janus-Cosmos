@@ -1,0 +1,98 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_PREREGISTERED_TEMPORAL_STABILITY_DIAGNOSTIC",
+  "source": {
+    "github_actions_run_id": 32570957918,
+    "head_sha": "679226a4b9032f42a713a0ff1c2bdc1a1ab2e3e3",
+    "artifact_id": 9475304900,
+    "artifact_name": "cousteau-ha10-temporal-scale-stability-32570957918",
+    "artifact_zip_sha256": "27b52c7495416725a486de067a1244b7c6c5b9a378f3949304e362db11a389df",
+    "run_receipt_member": "run-32570957918.json",
+    "run_receipt_sha256": "2cc3cb0e63eb59f077a6274f414325a7fd12e799851db9948de42a99b0239a4f",
+    "run_receipt_bytes": 41121,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "new_window_count": 20,
+    "window_duration_s": 600,
+    "window_start_time_utc": "06:00:00Z",
+    "band_hz": [10.0, 80.0],
+    "minimum_complete_paired_windows": 15,
+    "large_asymmetry_floor_db": 6.0,
+    "maximum_stable_iqr_db": 3.0,
+    "minimum_fraction_windows_above_floor": 0.8,
+    "window_replacement_allowed": false,
+    "frequency_retuning_allowed": false,
+    "threshold_retuning_allowed": false
+  },
+  "result": {
+    "complete_paired_windows": 18,
+    "blocked_station_windows": 3,
+    "verdict": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "median_raw_s2_minus_n1_db": 12.479728560324869,
+    "median_corrected_s2_minus_n1_db": 12.616188132659623,
+    "raw_q25_db": 11.365168489832534,
+    "raw_q75_db": 13.594613509900176,
+    "corrected_q25_db": 11.488243429787364,
+    "corrected_q75_db": 13.721213583265953,
+    "raw_iqr_db": 2.229445020067642,
+    "corrected_iqr_db": 2.2329701534785897,
+    "fraction_raw_windows_ge_6db": 1.0,
+    "fraction_corrected_windows_ge_6db": 1.0,
+    "fraction_both_raw_and_corrected_windows_ge_6db": 1.0,
+    "raw_min_db": 6.542997116388369,
+    "raw_max_db": 15.767739702082986,
+    "corrected_min_db": 6.4651328891172355,
+    "corrected_max_db": 15.847500312328993
+  },
+  "data_access_notes": [
+    {
+      "date": "2014-12-15",
+      "station": "IM.H10S2..EDH",
+      "status": "INCOMPLETE_WINDOW"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10N1..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10S2..EDH",
+      "status": "INCOMPLETE_WINDOW"
+    }
+  ],
+  "cross_gate_synthesis": {
+    "positive_control": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "independent_1200utc_asymmetry_replication": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "independent_0000utc_spectral_shape": "BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY",
+    "independent_0600utc_temporal_stability": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "synthesis": "Across three independently frozen baseline time samples, H10S2 shows a large, broadband and temporally persistent 10-80 Hz power excess relative to H10N1. The documented StationXML response correction does not materially remove it. This substantially strengthens the measurement-path asymmetry finding, but it still does not identify whether the mechanism is environmental/site/deployment related, an unmodeled calibration/gain issue, or another persistent station-path effect."
+  },
+  "interpretation": {
+    "supported": [
+      "THE_H10S2_OVER_H10N1_OFFSET_IS_NOT_LIMITED_TO_ONE_TIME_OF_DAY_SAMPLE",
+      "THE_OFFSET_REMAINS_LARGE_AFTER_DOCUMENTED_RESPONSE_CORRECTION",
+      "ALL_18_COMPLETE_0600UTC_PAIRS_EXCEED_THE_6DB_FLOOR_IN_RAW_AND_CORRECTED_POWER",
+      "THE_CORRECTED_RATIO_HAS_A_2_233DB_IQR_BELOW_THE_PREDECLARED_3DB_STABILITY_LIMIT"
+    ],
+    "not_supported": [
+      "SENSOR_GAIN_FAULT_PROVEN",
+      "CALIBRATION_ERROR_PROVEN",
+      "ENVIRONMENTAL_OR_SITE_CAUSE_IDENTIFIED",
+      "DEPLOYMENT_FAULT_PROVEN",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_INDEPENDENT_SCALAR_COLLAPSE_HOLDOUT_V1"
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_TEMPORAL_STABILITY_DIAGNOSTIC",
+    "source_writeback_during_diagnostic": false
+  },
+  "claim_ceiling": "This append-only result establishes a large, broadband and temporally persistent H10S2-over-H10N1 baseline-power offset across a third independently frozen HA10 time sample. It narrows the measurement-path morphology but does not identify a physical cause, does not repair the failed positive control, and has zero authority to validate or promote the frozen 119-Hz target claim."
+}
