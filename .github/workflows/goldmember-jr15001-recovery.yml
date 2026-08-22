@@ -1,0 +1,43 @@
+name: GOLDMEMBER JR15001 Recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/goldmember-jr15001-recovery.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run repaired preauthorized JR15001 archive gate
+        run: python workspace/janus_jr15001_bodc_track_recovery.py
+      - name: Show receipt
+        run: cat data/cousteau/JANUS-JR15001-BODC-TRACK-RECOVERY-GATE-001-2026-08-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldmember-jr15001-recovery-${{ github.run_number }}
+          path: |
+            data/cousteau/JANUS-JR15001-BODC-TRACK-RECOVERY-GATE-001-2026-08-22-v1.0.json
+            workspace/jr15001_bodc_track/
+          retention-days: 90
+      - name: Freeze repaired receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-JR15001-BODC-TRACK-RECOVERY-GATE-001-2026-08-22-v1.0.json
+          git commit -m "GOLDMEMBER: freeze JR15001 repaired recovery ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
