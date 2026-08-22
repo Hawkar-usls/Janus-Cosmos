@@ -1,0 +1,42 @@
+{
+  "artifact_id": "JANUS-HA10-F1-F3-COVERAGE-AND-DEPTH-CORRECTION-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:17:00Z",
+  "parent_council": "JANUS-HA10-SOURCE-FALLBACK-COUNCIL-RUN-001-2026-08-22-v1.0",
+  "F1_modern_bgs_ukho": {
+    "h10n1": {"lat": -7.845673, "lon": -14.480230},
+    "report_map_frame_reaches_7deg50S": true,
+    "protector_native_raster_or_coverage_polygon_recovered": false,
+    "exact_h10n1_pixel_intersection_machine_verified": false,
+    "status": "BLOCKED__MAP_FRAME_OVERLAP_IS_NOT_RASTER_INTERSECTION",
+    "no_scoring_performed": true
+  },
+  "F3_ctbto_crosscheck": {
+    "fig22": "H10N cable route, triplet location and depth contours",
+    "fig23": "H10S cable route, triplet location and depth contours",
+    "triplet_sensor_depth_m": "approximately 800-875 depending source/epoch description",
+    "sampling_rate_hz": 250,
+    "critical_depth_rule": "HYDROPHONE_SENSOR_DEPTH_IS_NOT_SEAFLOOR_DEPTH",
+    "early_southern_route_engineering": {
+      "route_length_km_approx": 120,
+      "descent_to_island_base_depth_m_approx": 3000,
+      "relatively_flat_traverse_km_approx": 80,
+      "proposed_hdas_seafloor_depth_m_early_estimate": 2200
+    },
+    "status": "SECONDARY_GEOMETRY_AND_DEPTH_CONTEXT_ONLY"
+  },
+  "southern_primary_gate": {
+    "p2548_recovered": false,
+    "wishbone_georeferenced": false,
+    "central_crags_georeferenced": false,
+    "status": "OPEN_UNSCORED"
+  },
+  "claim_ceiling": "KNOWN_VOLCANIC_SEAMOUNT_SYSTEM_WITH_TARGETED_FALSIFIABLE_SEARCH_FOR_UNEXPLAINED_GEOMETRY",
+  "target_identity": "UNCONFIRMED",
+  "hard_rules": [
+    "NO_H10N1_MODERN_MBES_SCORING_WITHOUT_NATIVE_RASTER_INTERSECTION",
+    "SENSOR_DEPTH_NE_SEAFLOOR_DEPTH",
+    "CTBTO_ROUTE_FIGURES_ARE_SECONDARY_NOT_PRIMARY_MBES",
+    "NO_POSTHOC_RETARGETING",
+    "NEGATIVE_AND_BLOCKED_RESULTS_REMAIN_RECORDED"
+  ]
+}
