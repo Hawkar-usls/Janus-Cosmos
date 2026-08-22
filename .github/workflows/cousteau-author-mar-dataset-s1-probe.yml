@@ -27,6 +27,14 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
 
+      - name: Bind repaired acquisition probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object workspace/cousteau_author_mar_dataset_s1_probe.py)" = "58f06fe524ae715db81c50fce58d36efa3835be1"
+          python -m py_compile workspace/cousteau_author_mar_dataset_s1_probe.py
+          echo "AUTHOR_MAR_S1_PROBE_IMPLEMENTATION_BINDING=PASS"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -41,15 +49,10 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts/cousteau-author-mar-s1
           set +e
-          (
-            cd "$RUNNER_TEMP"
-            python "$GITHUB_WORKSPACE/workspace/cousteau_author_mar_dataset_s1_probe.py"
-          )
+          python workspace/cousteau_author_mar_dataset_s1_probe.py \
+            --output "artifacts/cousteau-author-mar-s1/run-${GITHUB_RUN_ID}.json"
           rc=$?
           set -e
-          result="$RUNNER_TEMP/data/cousteau/JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0.json"
-          test -f "$result"
-          cp "$result" "artifacts/cousteau-author-mar-s1/run-${GITHUB_RUN_ID}.json"
           if [ "$rc" -ne 0 ] && [ "$rc" -ne 2 ]; then
             echo "UNEXPECTED_PROBE_EXIT=$rc" >&2
             exit "$rc"
@@ -59,6 +62,7 @@ jobs:
       - name: Validate probe claim ceiling
         shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
           import json
           from pathlib import Path
@@ -67,6 +71,7 @@ jobs:
           r=json.loads(paths[0].read_text(encoding='utf-8'))
           assert r['paper_doi']=='10.1029/2022JB024008'
           assert r['status'] in {'SUCCESS','BLOCKED'}
+          assert 'Acquisition/provenance probe only' in r['claim_ceiling']
           print('AUTHOR_MAR_S1_PROBE_STATUS=' + r['status'])
           print('SOURCE_WRITEBACK=FALSE')
           PY
