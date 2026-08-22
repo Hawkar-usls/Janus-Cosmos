@@ -1,0 +1,104 @@
+name: Cousteau HA10 Calibration Sequence Public Recovery
+
+on:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0.json'
+      - 'workspace/cousteau_ha10_calibration_sequence_public_recovery.py'
+      - 'tests/test_cousteau_ha10_calibration_sequence_public_recovery.py'
+      - '.github/workflows/cousteau-ha10-calibration-sequence-public-recovery.yml'
+  push:
+    branches: [audit/cousteau-immutable-positive-control-20260822]
+    paths:
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0.json'
+      - 'workspace/cousteau_ha10_calibration_sequence_public_recovery.py'
+      - 'tests/test_cousteau_ha10_calibration_sequence_public_recovery.py'
+      - '.github/workflows/cousteau-ha10-calibration-sequence-public-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cousteau-ha10-calibration-public-recovery-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install bounded public-recovery stack
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'requests==2.34.2' 'beautifulsoup4==4.13.5' 'pypdf==6.0.0' 'pytest>=8,<9'
+          python -m pip freeze | sort > "$RUNNER_TEMP/python-environment.txt"
+
+      - name: Verify exact frozen blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0.json)" = '44d14209974c31c010b1f6a9ba502ea558013a57'
+          test "$(git hash-object workspace/cousteau_ha10_calibration_sequence_public_recovery.py)" = 'd095a3ddf72e2aff8b6e6efcf075f04e282d3ed9'
+          test "$(git hash-object tests/test_cousteau_ha10_calibration_sequence_public_recovery.py)" = '339c8745c66dd5f90fc2d1f654d5eb3d6771cb6f'
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = 'eb8b48fb7f043160c057f9df6264a781412ed854'
+
+      - name: Compile and test before acquisition
+        run: |
+          python -m py_compile workspace/cousteau_ha10_calibration_sequence_public_recovery.py
+          pytest -q tests/test_cousteau_ha10_calibration_sequence_public_recovery.py
+
+      - name: Execute Janus-selected public recovery gate
+        run: |
+          mkdir -p "$RUNNER_TEMP/cousteau-calibration-public-recovery"
+          python workspace/cousteau_ha10_calibration_sequence_public_recovery.py \
+            --output "$RUNNER_TEMP/cousteau-calibration-public-recovery/run-${{ github.run_id }}.json"
+
+      - name: Validate evidence-class and authority boundary
+        env:
+          RECEIPT: ${{ runner.temp }}/cousteau-calibration-public-recovery/run-${{ github.run_id }}.json
+        run: |
+          python - <<'PY'
+          import json, os
+          r=json.load(open(os.environ['RECEIPT'],encoding='utf-8'))
+          allowed={
+            'PUBLIC_H10S_CALIBRATION_SEQUENCE_BYTES_RECOVERED',
+            'PUBLIC_NUMERIC_H10S_RESPONSE_RECOVERED__RAW_SEQUENCE_NOT_PUBLICLY_RECOVERED',
+            'PUBLISHED_H10S_CALIBRATION_RESULTS_RECOVERED__RAW_SEQUENCE_PUBLIC_ACCESS_NOT_FOUND',
+            'BLOCKED_CALIBRATION_PUBLIC_RECOVERY',
+          }
+          assert r['gate_id']=='COUSTEAU_HA10_CALIBRATION_SEQUENCE_PUBLIC_RECOVERY_V1'
+          assert r['verdict'] in allowed
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_CALIBRATION_PUBLIC_RECOVERY'
+          assert r['source_writeback'] is False
+          assert r['janus_next_step_required'] is True
+          print('CALIBRATION_PUBLIC_RECOVERY_EPISTEMIC_BOUNDARY=PASS')
+          PY
+
+      - name: Prove source tree unchanged
+        run: git diff --exit-code
+
+      - name: Upload exact receipt and environment
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-calibration-public-recovery-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/cousteau-calibration-public-recovery/run-${{ github.run_id }}.json
+            ${{ runner.temp }}/python-environment.txt
+          if-no-files-found: error
+          retention-days: 30
