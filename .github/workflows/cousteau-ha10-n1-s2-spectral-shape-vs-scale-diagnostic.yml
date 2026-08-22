@@ -1,0 +1,128 @@
+name: Cousteau HA10 N1-S2 Spectral Shape vs Scale Diagnostic
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-spectral-shape-vs-scale-diagnostic.yml"
+      - "workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py"
+      - "tests/test_cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-RUN-001-SUMMARY-2026-08-22-v1.0.json"
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-spectral-shape-vs-scale-diagnostic.yml"
+      - "workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py"
+      - "tests/test_cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: read
+
+jobs:
+  spectral-shape-vs-scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind preregistration and immutable upstream evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json)" = "1dd7a9135d74f7b2ed262b761543f40565db1dea"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "8add6bdb329f4758a67c0a1525dfd281ec46de61"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = "244169a1331a16529e2a963585a5659dae109c66"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control_v2.py)" = "c3d37fe4f5a75514390862be4c1d2870c4c01fe9"
+          test "$(git hash-object workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py)" = "734d7d2256386a2f73e36d0a9a26d6e6e62375bf"
+          test "$(git hash-object tests/test_cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py)" = "0d88f8201e2b8490959e89f180cda1bd8c145076"
+          echo "SPECTRAL_SHAPE_PREREGISTRATION=PASS"
+          echo "REPLICATED_ASYMMETRY_BINDING=PASS"
+          echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install same frozen direct scientific stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
+          mkdir -p artifacts/ha10-spectral-shape-vs-scale
+          python -m pip freeze | sort > artifacts/ha10-spectral-shape-vs-scale/python-environment.txt
+
+      - name: Compile and test frozen classification semantics before data download
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py \
+            tests/test_cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py
+          python -m unittest tests.test_cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic -v
+
+      - name: Execute new frozen-window diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m workspace.cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic \
+            --output "artifacts/ha10-spectral-shape-vs-scale/run-${GITHUB_RUN_ID}.json"
+
+      - name: Validate non-promotional diagnostic boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/ha10-spectral-shape-vs-scale').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['status']=='DIAGNOSTIC_RUN_COMPLETE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_SPECTRAL_SHAPE_DIAGNOSTIC'
+          assert r['replication_verdict']=='REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY'
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frequency_contract']['broadband_hz']==[10.0,80.0]
+          assert r['frequency_contract']['fixed_subbands_hz']=={'low':[10.0,30.0],'mid':[30.0,55.0],'high':[55.0,80.0]}
+          assert r['frequency_contract']['best_subband_selection_performed'] is False
+          assert r['frequency_contract']['whole_spectrum_peak_search_performed'] is False
+          assert r['frequency_contract']['119hz_or_117_121hz_bins_used'] is False
+          assert r['summary']['verdict'] in {
+              'BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY',
+              'FREQUENCY_SELECTIVE_OR_NONUNIFORM_H10S2_ASYMMETRY',
+              'BLOCKED_SPECTRAL_SHAPE_DIAGNOSTIC_DATA_ACCESS',
+          }
+          print('SPECTRAL_SHAPE_RECEIPT_VALID=TRUE')
+          print('SPECTRAL_SHAPE_VERDICT=' + r['summary']['verdict'])
+          print('COMPLETE_PAIRED_WINDOWS=' + str(r['summary']['complete_paired_windows']))
+          print('AUTHORITY_DELTA_FOR_119HZ=0')
+          PY
+
+      - name: Prove source tree is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/cousteau workspace tests
+          echo "SOURCE_WRITEBACK=FALSE"
+
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-spectral-shape-vs-scale-${{ github.run_id }}
+          path: artifacts/ha10-spectral-shape-vs-scale/
+          if-no-files-found: error
+          retention-days: 30
