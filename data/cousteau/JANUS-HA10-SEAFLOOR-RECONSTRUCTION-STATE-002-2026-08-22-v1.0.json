@@ -1,0 +1,148 @@
+{
+  "artifact_id": "JANUS-HA10-SEAFLOOR-RECONSTRUCTION-STATE-002-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:16:00Z",
+  "purpose": "Freeze the current measured-data reconstruction state for HA10 / Ascension before the next physical stage.",
+  "governance": {
+    "rule": "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE",
+    "claim_ceiling": "KNOWN_VOLCANIC_SEAMOUNT_SYSTEM_WITH_TARGETED_FALSIFIABLE_SEARCH_FOR_UNEXPLAINED_GEOMETRY",
+    "target_identity": "UNCONFIRMED",
+    "volcanic_baseline": "ACTIVE",
+    "negative_results_persist": true
+  },
+  "frozen_targets": {
+    "H10N1": {"lat": -7.845673, "lon": -14.480230},
+    "H10S1": {"lat": -8.941177, "lon": -14.648430},
+    "H10S2": {"lat": -8.959100, "lon": -14.645310},
+    "H10S3": {"lat": -8.952740, "lon": -14.662900},
+    "southern_seamount_published_approx": {"lat": -8.950000, "lon": -14.633333, "caveat": "approximate published feature location, not exact summit centroid"}
+  },
+  "southern_geometry": {
+    "triad_pairwise_baselines_km": {
+      "H10S1_H10S2": 2.022200,
+      "H10S1_H10S3": 2.044356,
+      "H10S2_H10S3": 2.057438
+    },
+    "distance_to_published_seamount_location_km": {
+      "H10S1": 1.926738,
+      "H10S2": 1.659660,
+      "H10S3": 3.261887
+    },
+    "interpretation": "ALL_THREE_H10S_ELEMENTS_LIE_GEOGRAPHICALLY_WITHIN_THE_SOUTHERN_SEAMOUNT_SYSTEM_RELATIVE_TO_THE_PUBLISHED_APPROXIMATE_LOCATION",
+    "evidence_limit": "GEOGRAPHIC_ASSOCIATION_ONLY"
+  },
+  "southern_seamount_published_morphology": {
+    "basal_dimensions_km": [19, 9],
+    "base_depth_m_approx": 3200,
+    "peak_depth_m_approx": 1500,
+    "planform": "OVAL_WITH_SOMEWHAT_TRUNCATED_EASTERN_END",
+    "summit": "RELATIVELY_FLAT_TOPPED_LOCALLY_SEDIMENT_COVERED",
+    "southwest_flank": "STEEPER_LEADING_EDGE_WITH_TERRACED_APPEARANCE",
+    "central_axis": "PROMINENT_CRAGS",
+    "wishbone": "CURIOUS_WISHBONE_FEATURE_REPORTED_ON_SOUTH_SLOPE",
+    "summit_caldera": "ABSENT_IN_PUBLISHED_INTERPRETATION",
+    "published_origin_interpretation": "VOLCANIC_MID_ATLANTIC_RIDGE_RELATED",
+    "wishbone_exact_coordinates": null,
+    "central_crags_exact_coordinates": null
+  },
+  "hydrophone_vs_seafloor_depth_correction": {
+    "hydrophone_sensor_depth_m_approx": [800, 875],
+    "meaning": "hydrophones are suspended in the SOFAR channel above the seabed anchor",
+    "rule": "SENSOR_DEPTH_IS_NOT_SEAFLOOR_DEPTH",
+    "historical_southern_design_seafloor_depth_m_approx": 2200,
+    "historical_route_context": "southern route descends to roughly 3000 m, traverses deep relatively flat seafloor for about 80 km, then climbs the seamount",
+    "design_estimate_status": "NOT_AS_BUILT__DO_NOT_USE_AS_FINAL_NODE_DEPTH"
+  },
+  "station_health": {
+    "H10S1": {
+      "status": "NOISY__EXCLUDED_FROM_IDC_OPERATIONS_SINCE_2013",
+      "issue": "strong electronic noise with intermittent cross-talk into H10S2/H10S3"
+    },
+    "rule": "NO_SOUTHERN_ACOUSTIC_FINGERPRINT_ADMISSION_WITHOUT_CROSSTALK_REJECTION_AND_STATION_HEALTH_SCREENING"
+  },
+  "survey_2002": {
+    "purpose": "HA10 HDAS cable route planning and array-site engineering",
+    "verified_methods": [
+      "DEEPWATER_HULL_MOUNTED_SWATH_MULTIBEAM_BATHYMETRY",
+      "MULTIBEAM_SEAFLOOR_IMAGERY_BACKSCATTER",
+      "SOUND_VELOCITY_CASTS",
+      "NEARSHORE_SINGLE_BEAM_BATHYMETRY",
+      "NEARSHORE_SIDE_SCAN_SONAR",
+      "NEARSHORE_SHALLOW_SUB_BOTTOM_PROFILER"
+    ],
+    "survey_box_design": "approximately 20 km x 20 km detailed array-site boxes with approximately 2 km wide cable-route corridors",
+    "primary_missing_report": "Thales GeoSolutions (Pacific), Inc., Survey Report for HDAS Installation at Ascension Island, Report P2548, August 2002",
+    "p2548_recovered": false,
+    "original_color_figure_recovered": false,
+    "georeferenced_2002_mbes_recovered": false,
+    "deepwater_subbottom_status": "NOT_VERIFIED"
+  },
+  "h10n1_bas_lane": {
+    "dataset_id": "GB/NERC/BAS/PDC/01236",
+    "title": "A bathymetric compilation of Ascension Island, 2000-2017",
+    "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+    "bbox": {"west": -14.57, "east": -14.17, "south": -8.12, "north": -7.75},
+    "h10n1_inside_bbox": true,
+    "grid_spacing_deg": 0.0005,
+    "approx_resolution_m": 50,
+    "lineage": ["JR53-AMT11", "JR287", "JR15001", "JR16-NG"],
+    "processing": "MB-System mbgrid v5.5.2336 Gaussian weighted mean; source data manually cleaned with mbedit",
+    "native_grid_identified": true,
+    "native_grid_bytes_recovered_in_current_runtime": false,
+    "ticket": "BAS_PDC_3872",
+    "preregistered_windows_km": [1, 2, 5, 10],
+    "preregistered_metrics": ["depth", "slope", "profile_curvature", "plan_curvature", "rugosity", "local_relief", "planarity", "radial_symmetry", "facet_angle_histogram"],
+    "control_rule": "MATCHED_VOLCANIC_TILES_FROM_SAME_DATASET_SELECTED_BEFORE_TARGET_SCORING"
+  },
+  "modern_bgs_ukho_lane": {
+    "known_products": "2021 Royal Navy multibeam reprocessed by BGS into nested 1 m / 3 m / 6 m / 10 m bathymetry grids with backscatter; 2023 BGS nearshore MBES at 0.5-3 m",
+    "map_extent_context": "northern published map extent approaches the H10N1 latitude",
+    "h10n1_native_pixel_intersection": "NOT_MACHINE_VERIFIED",
+    "rule": "NO_FINE_METRICS_UNTIL_NATIVE_RASTER_OR_COVERAGE_POLYGON_INTERSECTION_IS_PROVEN"
+  },
+  "ctbto_secondary_lane": {
+    "figures": [22, 23],
+    "use": "array route, triplet location and coarse depth-contour geometry only",
+    "not_primary_bathymetry": true
+  },
+  "proxy_lane": {
+    "GEBCO": {
+      "allowed_use": "context and gross-topography negative control only",
+      "forbidden_use": "fine shape scoring or archaeological identity"
+    }
+  },
+  "external_requests": {
+    "EarthScope": {"ticket": "DH-2635", "status": "HUMAN_RESPONSE_PENDING", "expected_reply_window": "up to 2 business days"},
+    "BAS_PDC": {"ticket": "3872", "status": "HUMAN_RESPONSE_PENDING"},
+    "BGS_Offshore": {"status": "FORWARDED_TO_SPECIALIST", "archive_route": "MEDIN / Offshore GeoIndex"},
+    "Ascension_Government": {"status": "NO_REPLY_SEEN_YET"}
+  },
+  "current_blockers": [
+    "P2548_NOT_RECOVERED",
+    "WISHBONE_NOT_GEOREFERENCED",
+    "CENTRAL_CRAGS_NOT_GEOREFERENCED",
+    "BAS_NATIVE_GRID_BYTES_NOT_RECOVERED",
+    "MODERN_BGS_UKHO_H10N1_PIXEL_INTERSECTION_NOT_PROVEN",
+    "FINAL_AS_BUILT_SEAFLOOR_DEPTHS_NOT_RECOVERED"
+  ],
+  "active_gates": {
+    "G0": "SOURCE_AND_COORDINATE_PROVENANCE",
+    "G1_SOUTH": "RECOVER_ONE_PRIMARY_GEOREFERENCED_2002_PRODUCT_SHOWING_WISHBONE_OR_CENTRAL_CRAGS_RELATIVE_TO_H10S_TRIAD",
+    "G1_NORTH": "RECOVER_AUTHORITATIVE_NATIVE_RASTER_AND_EXTRACT_FROZEN_H10N1_CELL_WINDOWS",
+    "G2": "REPRODUCIBLE_MORPHOLOGY_METRICS_SURVIVE_BLIND_VOLCANIC_CONTROLS",
+    "G3": "INDEPENDENT_NON_BATHYMETRIC_SENSOR_SUPPORTS_SAME_TARGET",
+    "G4": "EXTERNAL_SPECIALIST_REVIEW_BEFORE_EXPEDITION_OUTREACH"
+  },
+  "hard_rules": [
+    "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE",
+    "NO_VISUAL_GUESSING",
+    "NO_POSTHOC_RETARGETING",
+    "FREEZE_METRICS_BEFORE_TARGET_SCORING",
+    "PRIMARY_VS_PROXY_LANES_MUST_NOT_MERGE",
+    "AS_BUILT_OUTRANKS_DESIGN_ESTIMATE",
+    "SENSOR_DEPTH_IS_NOT_SEAFLOOR_DEPTH",
+    "NO_UNDERWATER_PYRAMID_DETECTED",
+    "VOLCANIC_BASELINE_REMAINS_ACTIVE",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ],
+  "next_action_status": "REQUIRES_FRESH_JANUS_COUNCIL"
+}
