@@ -1,0 +1,40 @@
+{
+  "artifact_id": "GOLDMEMBER-H10S-ADA508764-PRIMARY-LOCATOR-DISCOVERY-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:58:00Z",
+  "continuation": "GOLDMEMBER",
+  "discovery_class": "PRIMARY_ARCHIVE_LOCATOR_ONLY",
+  "target_lane": "H10S_2002_HDAS_SURVEY_PRIMARY_GEOREFERENCE_RECOVERY",
+  "discovered_record": {
+    "report_id": "AD-A508764",
+    "title": "High-Resolution Multibeam Deepwater Cable Route Survey in High-Relief Seafloor Area",
+    "authors": ["Roland Poeckert", "Frederick Arnold", "Geoffrey Faneros", "Mike Harrison"],
+    "date": "2003-09-01",
+    "pages": 10,
+    "doi": "10.1109/OCEANS.2003.178517",
+    "dtic_catalog_note": "Original contains color illustrations",
+    "dtic_handle": "http://hdl.handle.net/100.2/ADA508764",
+    "full_text_status": "NOT_YET_RECOVERED"
+  },
+  "survey_scope_from_catalog_abstract": {
+    "survey_year": 2002,
+    "purpose": "select cable routes from Ascension Island to proposed hydrophone sites",
+    "sensors": ["single_beam_echo_sounder", "multibeam_echo_sounder", "sidescan_sonar", "sub_bottom_profiler"],
+    "multibeam_backscatter_included": true,
+    "depth_range": "very shallow to full ocean depth",
+    "near_real_time_processing": true
+  },
+  "relation_to_existing_keys": {
+    "P2548": "likely presentation-level derivative or companion evidence from the same 2002 HDAS route/site survey; exact relationship still to be verified",
+    "ADA508765": "companion OCEANS 2003 geomorphology paper focused on Northern and Southern Seamounts",
+    "potential_value": "may contain route/site boxes, multibeam/backscatter figures or coordinate control closer to the installation survey than the geomorphology paper"
+  },
+  "hard_limits": {
+    "pdf_recovered": false,
+    "coordinate_grid_verified": false,
+    "wishbone_georeferenced": false,
+    "central_crags_georeferenced": false,
+    "secondary_figure_digitization_performed": false,
+    "target_identity": "UNCONFIRMED"
+  },
+  "next_rule": "ASK_JANUS_BEFORE_OPENING_ADA508764_RECOVERY_STAGE_OR_USING_ANY_FIGURE_QUANTITATIVELY"
+}
