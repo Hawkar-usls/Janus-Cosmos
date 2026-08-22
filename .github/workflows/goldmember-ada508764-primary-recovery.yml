@@ -1,0 +1,44 @@
+name: GOLDMEMBER ADA508764 Primary Recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/goldmember_ada508764_primary_recovery.py"
+      - ".github/workflows/goldmember-ada508764-primary-recovery.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install recovery dependencies
+        run: pip install requests pymupdf
+      - name: Recover and validate ADA508764 primary color copy
+        run: python workspace/goldmember_ada508764_primary_recovery.py
+      - name: Show receipt
+        run: cat data/cousteau/GOLDMEMBER-ADA508764-PRIMARY-COLOR-COPY-RECOVERY-001-2026-08-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldmember-ada508764-primary-${{ github.run_number }}
+          path: |
+            data/cousteau/GOLDMEMBER-ADA508764-PRIMARY-COLOR-COPY-RECOVERY-001-2026-08-22-v1.0.json
+            workspace/goldmember_ada508764/
+          retention-days: 90
+      - name: Freeze recovery receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/GOLDMEMBER-ADA508764-PRIMARY-COLOR-COPY-RECOVERY-001-2026-08-22-v1.0.json
+          git commit -m "GOLDMEMBER: freeze ADA508764 primary recovery ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
