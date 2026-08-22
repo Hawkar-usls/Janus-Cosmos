@@ -1,0 +1,136 @@
+{
+  "artifact_id": "JANUS-HA10-SOUTHERN-SEAMOUNT-PHYSICAL-GATE-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T10:44:00Z",
+  "purpose": "Freeze the first physical-data gate for the HA10 Southern Seamount target and the parallel H10N1 BAS bathymetry lane before any archaeological identity claim.",
+  "claim_ceiling": "KNOWN_VOLCANIC_SEAMOUNT_SYSTEM_WITH_TARGETED_FALSIFIABLE_SEARCH_FOR_UNEXPLAINED_GEOMETRY",
+  "target_identity": "UNCONFIRMED",
+  "primary_target": {
+    "id": "H10S2",
+    "lat": -8.959100,
+    "lon": -14.645310,
+    "role": "PRIMARY_SOUTHERN_HYDROPHONE_ANCHOR"
+  },
+  "southern_triad": {
+    "stations": {
+      "H10S1": {"lat": -8.941177, "lon": -14.648430},
+      "H10S2": {"lat": -8.959100, "lon": -14.645310},
+      "H10S3": {"lat": -8.952740, "lon": -14.662900}
+    },
+    "pairwise_baselines_km": {
+      "H10S1_H10S2": 2.022200,
+      "H10S1_H10S3": 2.044356,
+      "H10S2_H10S3": 2.057438
+    },
+    "station_health_gate": {
+      "status": "REQUIRED_FOR_ANY_ACOUSTIC_STAGE",
+      "fact": "H10S1 has been excluded from IDC operations since 2013 because of strong electronic noise with intermittent cross-talk into H10S2 and H10S3.",
+      "rule": "NO_SOUTHERN_ACOUSTIC_FINGERPRINT_ADMISSION_WITHOUT_CROSSTALK_REJECTION_AND_STATION_HEALTH_SCREENING"
+    }
+  },
+  "southern_seamount": {
+    "published_location_approx": {
+      "lat": -8.950000,
+      "lon": -14.633333,
+      "source_notation": "8°57′S, 14°38′W",
+      "caveat": "Published feature location is approximate and must not be treated as an exact summit centroid."
+    },
+    "published_morphology": {
+      "basal_dimensions_km": [19, 9],
+      "base_depth_m": 3200,
+      "peak_depth_m_approx": 1500,
+      "planform": "OVAL_WITH_SOMEWHAT_TRUNCATED_EASTERN_END",
+      "summit": "RELATIVELY_FLAT_TOPPED_LOCALLY_SEDIMENT_COVERED",
+      "southwest_flank": "STEEPER_LEADING_EDGE_WITH_TERRACED_APPEARANCE",
+      "central_axis": "PROMINENT_CRAGS",
+      "summit_caldera": "ABSENT_IN_PUBLISHED_INTERPRETATION",
+      "wishbone": "CURIOUS_WISHBONE_FEATURE_REPORTED_ON_SOUTH_SLOPE",
+      "published_origin_interpretation": "VOLCANIC_MID_ATLANTIC_RIDGE_RELATED"
+    },
+    "distance_from_published_approx_location_km": {
+      "H10S1": 1.926738,
+      "H10S2": 1.659660,
+      "H10S3": 3.261887
+    },
+    "physical_inference": "ALL_THREE_H10S_HYDROPHONES_ARE_WITHIN_APPROX_3_3_KM_OF_THE_PUBLISHED_SEAMOUNT_LOCATION__THIS_IS_SMALL_RELATIVE_TO_THE_19_BY_9_KM_EDIFICE_FOOTPRINT",
+    "inference_ceiling": "GEOGRAPHIC_ASSOCIATION_ONLY__NOT_ARCHAEOLOGICAL_EVIDENCE"
+  },
+  "survey_2002": {
+    "purpose": "Hydroacoustic Data Acquisition System cable route planning and array-site engineering",
+    "verified_methods": [
+      "DEEPWATER_HULL_MOUNTED_SWATH_MULTIBEAM_BATHYMETRY",
+      "MULTIBEAM_SEAFLOOR_IMAGERY_BACKSCATTER",
+      "SOUND_VELOCITY_CASTS",
+      "NEARSHORE_SINGLE_BEAM_BATHYMETRY",
+      "NEARSHORE_SIDE_SCAN_SONAR",
+      "NEARSHORE_SHALLOW_SUB_BOTTOM_PROFILER"
+    ],
+    "verified_design": "Approximately 20 km x 20 km detailed array-site survey boxes plus approximately 2 km-wide route corridors toward shore.",
+    "missing_primary_archive_target": "Thales GeoSolutions (Pacific), Inc., Survey Report for HDAS Installation at Ascension Island, Report P2548, August 2002",
+    "related_publication": {
+      "title": "Geomorphology of two seamounts offshore Ascension Island, South Atlantic Ocean",
+      "doi": "10.1109/OCEANS.2003.178518"
+    },
+    "deepwater_subbottom_status": "NOT_VERIFIED__DO_NOT_INFER_FROM_NEARSHORE_SUBBOTTOM"
+  },
+  "wishbone_georeference_gate": {
+    "status": "OPEN",
+    "exact_coordinates": null,
+    "current_knowledge": "Indexed text locates the feature only on the south slope; an exact coordinate/shape polygon has not yet been recovered.",
+    "required_inputs": [
+      "ORIGINAL_2002_COLOR_FIGURE_OR_CHART",
+      "P2548_SURVEY_REPORT",
+      "RAW_OR_GEOREFERENCED_MBES_BACKSCATTER_PRODUCT",
+      "ARRAY_SITE_CHART_WITH_H10S1_H10S2_H10S3"
+    ],
+    "rule": "NO_SYMBOLIC_WEIGHT_FOR_THE_WORD_WISHBONE__ONLY_GEOREFERENCED_GEOMETRY_COUNTS"
+  },
+  "central_crag_georeference_gate": {
+    "status": "OPEN",
+    "exact_coordinates": null,
+    "required_input": "GEOREFERENCED_2002_BATHYMETRY_OR_ORIGINAL_CHART"
+  },
+  "parallel_h10n1_lane": {
+    "target": {"id": "H10N1", "lat": -7.845673, "lon": -14.480230},
+    "bas_dataset": {
+      "id": "GB/NERC/BAS/PDC/01236",
+      "title": "A bathymetric compilation of Ascension Island, 2000-2017",
+      "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+      "bbox": {"west": -14.57, "east": -14.17, "south": -8.12, "north": -7.75},
+      "h10n1_inside_bbox": true,
+      "grid_spacing_deg": 0.0005,
+      "approx_resolution_m": 50,
+      "lineage": ["JR53-AMT11", "JR287", "JR15001", "JR16-NG"],
+      "processing": "MB-System mbgrid v5.5.2336 with Gaussian weighted mean; source data manually cleaned with mbedit"
+    },
+    "next_gate": "EXTRACT_EXACT_H10N1_CELL_AND_LOCAL_WINDOW__COMPUTE_SLOPE_CURVATURE_RUGOSITY_PLANARITY_AND_COMPARE_WITH_BLIND_VOLCANIC_CONTROLS"
+  },
+  "modern_bgs_ukho_lane": {
+    "status": "SECONDARY_HIGH_RESOLUTION_COVERAGE_CHECK",
+    "facts": "2021 Royal Navy MBES was reprocessed into 1 m / 3 m / 6 m / 10 m nested bathymetry grids by depth, with backscatter products; 2023 BGS acquired 0.5-3 m nearshore MBES.",
+    "h10n1_exact_cell_coverage": "LIKELY_FROM_MAP_EXTENT_BUT_NOT_YET_MACHINE_VERIFIED",
+    "rule": "DO_NOT_PROMOTE_TO_CONFIRMED_10M_H10N1_COVERAGE_UNTIL_GRID_OR_TRACKLINE_INTERSECTION_IS_EXTRACTED"
+  },
+  "promotion_gates": {
+    "G0": "CURRENT__SOURCE_AND_COORDINATE_PROVENANCE",
+    "G1": "GEOREFERENCE_WISHBONE_AND_CENTRAL_CRAGS_TO_ORIGINAL_2002_MBES_AND_H10S_TRIAD",
+    "G2": "REPRODUCIBLE_MORPHOLOGY_METRICS_SURVIVE_BLIND_VOLCANIC_CONTROLS",
+    "G3": "INDEPENDENT_NON_BATHYMETRIC_SENSOR_SUPPORTS_SAME_TARGET",
+    "G4": "EXTERNAL_SPECIALIST_REVIEW_BEFORE_EXPEDITION_OUTREACH"
+  },
+  "hard_rules": [
+    "NO_UNDERWATER_PYRAMID_DETECTED",
+    "VOLCANIC_BASELINE_IS_PRIMARY_UNTIL_PHYSICAL_DATA_REJECTS_IT",
+    "GEOGRAPHIC_OVERLAP_DOES_NOT_EQUAL_ARCHAEOLOGICAL_IDENTITY",
+    "WISHBONE_NAME_HAS_ZERO_SYMBOLIC_EVIDENCE_WEIGHT",
+    "NO_SOUTHERN_ACOUSTIC_RESULT_WITHOUT_H10S1_CROSSTALK_GATE",
+    "DEEPWATER_SUBBOTTOM_COVERAGE_MUST_NOT_BE_INFERRED_FROM_NEARSHORE_SURVEY_METHODS",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ],
+  "source_registry": [
+    {"type": "PUBLICATION", "id": "DOI:10.1109/OCEANS.2003.178518", "role": "Southern/Northern Seamount morphology"},
+    {"type": "DATASET", "id": "GB/NERC/BAS/PDC/01236", "role": "H10N1 multibeam compilation"},
+    {"type": "JNCC_REPORT", "role": "Published Southern Seamount location and dimensions"},
+    {"type": "CTBTO_TECHNICAL_HISTORY", "role": "H10S1 station-health/crosstalk provenance"},
+    {"type": "BGS_UKHO_2021_2024", "role": "Modern high-resolution bathymetry/backscatter coverage context"}
+  ]
+}
