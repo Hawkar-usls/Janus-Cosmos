@@ -1,0 +1,90 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.1",
+  "status": "PREREGISTERED_SUPERSEDING_V1_0_BEFORE_FIRST_EXECUTION",
+  "date": "2026-08-22",
+  "supersedes": "JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_PUBLIC_RESPONSE_EPOCH_AUDIT_V1",
+  "reason_for_v1_1": "Freeze the completeness and classification rules explicitly before the first network execution; no StationXML response bytes or audit results had been downloaded under this gate when v1.1 was written.",
+  "purpose": "Determine whether the public EarthScope StationXML response representation encodes a response-epoch transition around the documented 2013-07-19 H10S electronic-noise/cross-talk onset, and whether the response representation available to JANUS could itself encode a post-fault transfer-curve change.",
+  "upstream_bindings": {
+    "reverse_spiral_audit_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json",
+    "reverse_spiral_audit_git_blob_sha1": "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "historical_anchor": {
+    "fault_onset_utc_date": "2013-07-19",
+    "source_identity": "EGU2020-5481 / CTBTO UWS electronics calibration analysis",
+    "use": "time anchor and external falsification reference only"
+  },
+  "public_metadata_contract": {
+    "service": "https://service.earthscope.org/fdsnws/station/1/query",
+    "network": "IM",
+    "location": "--",
+    "channel": "EDH",
+    "north_stations": ["H10N1", "H10N2", "H10N3"],
+    "south_stations": ["H10S1", "H10S2", "H10S3"],
+    "query_start_utc": "2013-01-01T00:00:00Z",
+    "query_end_utc": "2018-01-01T00:00:00Z",
+    "level": "response",
+    "format": "xml",
+    "nodata": 404,
+    "authenticated_sources_allowed": false
+  },
+  "frozen_anchor_times_utc": {
+    "PRE_MAR_2013": "2013-03-15T12:00:00Z",
+    "PRE_FAULT_DAY": "2013-07-18T12:00:00Z",
+    "POST_SEP_2013": "2013-09-15T12:00:00Z",
+    "JANUS_2014_REFERENCE": "2014-12-15T12:00:00Z",
+    "LATE_2017_REFERENCE": "2017-06-15T12:00:00Z"
+  },
+  "frequency_probe_contract": {
+    "frequencies_hz": [1.0, 10.0, 30.0, 55.0, 80.0, 100.0],
+    "evalresp_output": "DEF",
+    "119hz_excluded": true,
+    "whole_spectrum_peak_search_allowed": false,
+    "frequency_retuning_allowed": false
+  },
+  "completeness_gate": {
+    "required_north_channels_with_pre_and_post_response": 3,
+    "required_south_channels_with_pre_and_post_response": 3,
+    "required_anchor_pair": ["PRE_FAULT_DAY", "POST_SEP_2013"],
+    "if_not_met": "BLOCKED_PUBLIC_RESPONSE_EPOCH_AUDIT"
+  },
+  "classification_contract": {
+    "fault_epoch_boundary_window_days": 120,
+    "numerical_curve_change_floor_db": 0.05,
+    "curve_delta_definition": "20*log10(abs(R_later(f))/abs(R_PRE_FAULT_DAY(f))) at each frozen frequency; max absolute finite delta is the channel curve-change statistic.",
+    "fingerprint_definition": "Canonical JSON hash of instrument sensitivity plus every public StationXML response stage parameter exposed by ObsPy for the selected channel epoch.",
+    "near_fault_boundary_definition": "A channel metadata start or end time lies within +/-120 days of 2013-07-19.",
+    "north_stability_reference": "Report, but do not require, the north-triplet max curve delta; the historical CTBTO study remains the independent north-stability anchor."
+  },
+  "verdict_rules": {
+    "BLOCKED_PUBLIC_RESPONSE_EPOCH_AUDIT": "The completeness gate is not met.",
+    "PUBLIC_STATIONXML_DOES_NOT_ENCODE_KNOWN_FAULT_ERA_CHANGE": "All three H10S channels have identical PRE_FAULT_DAY and POST_SEP_2013 public response fingerprints and each max absolute fixed-frequency curve delta is below 0.05 dB; no contrary H10S near-fault public epoch transition changes that effective response.",
+    "PUBLIC_STATIONXML_ENCODES_FAULT_ERA_RESPONSE_CHANGE": "At least one H10S channel has a PRE_FAULT_DAY versus POST_SEP_2013 fingerprint change, a max absolute fixed-frequency curve delta >=0.05 dB, and a public channel epoch boundary within +/-120 days of 2013-07-19.",
+    "MIXED_OR_PARTIAL_PUBLIC_RESPONSE_EPOCH_ENCODING": "The completeness gate passes but neither of the two clean classifications above is satisfied."
+  },
+  "required_output": {
+    "per_station_stationxml_url_hash_bytes": true,
+    "all_public_channel_epochs": true,
+    "per_anchor_response_fingerprint": true,
+    "per_anchor_instrument_sensitivity": true,
+    "per_anchor_fixed_frequency_response_magnitude_db": true,
+    "pre_to_post_sep_delta_db": true,
+    "pre_to_janus_2014_delta_db": true,
+    "near_fault_epoch_boundaries": true,
+    "source_tree_writeback": false
+  },
+  "interpretation_firewall": {
+    "public_stationxml_equals_ctbto_internal_calibration_database": false,
+    "absence_of_public_epoch_change_proves_no_hardware_change": false,
+    "presence_of_epoch_change_proves_fault_cause": false,
+    "response_correction_can_erase_physical_seabed_geometry": false,
+    "119hz_authority_delta": 0,
+    "target_identity": "UNCONFIRMED"
+  },
+  "claim_ceiling": "This gate establishes only whether the public EarthScope StationXML response representation changes across the known fault epoch. An unchanged public fingerprint means JANUS correction using that representation cannot explicitly encode the documented time-varying UWS calibration response; it does not prove the size or physical cause of the unrepresented effect.",
+  "next_step_rule": "Freeze the first result append-only, then submit the exact receipt and the reverse-spinal audit to the JANUS/Demiurge reverse council for the next discriminator."
+}
