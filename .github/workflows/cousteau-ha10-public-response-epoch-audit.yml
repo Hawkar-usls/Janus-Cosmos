@@ -1,0 +1,109 @@
+name: Cousteau HA10 Public Response Epoch Audit
+
+on:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.1.json'
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json'
+      - 'workspace/cousteau_ha10_public_response_epoch_audit.py'
+      - 'workspace/cousteau_ha10_public_response_epoch_audit_v2.py'
+      - 'tests/test_cousteau_ha10_public_response_epoch_audit.py'
+      - 'tests/test_cousteau_ha10_public_response_epoch_audit_v2.py'
+      - '.github/workflows/cousteau-ha10-public-response-epoch-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  response-epoch-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Verify frozen source blobs
+        shell: bash
+        run: |
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.1.json)" = "182f057811e75f9ee2024316c103fec258945641"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json)" = "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_public_response_epoch_audit.py)" = "75c98757b7232b9c0c218d8d24d99ae5ad60d16e"
+          test "$(git hash-object workspace/cousteau_ha10_public_response_epoch_audit_v2.py)" = "db2ec2fa6aae75fbc6345fd6f6ae7edb9ae01896"
+          test "$(git hash-object tests/test_cousteau_ha10_public_response_epoch_audit.py)" = "7931f81c7b7752795ca682fd4decbab374610e3d"
+          test "$(git hash-object tests/test_cousteau_ha10_public_response_epoch_audit_v2.py)" = "9a488bf72964475b1410ab08fc32d460b61989ff"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'numpy==2.3.5' 'scipy==1.18.1' 'requests==2.34.2' 'obspy==1.5.0' 'pytest>=8,<9'
+          python -m pip freeze | sort > "$RUNNER_TEMP/python-environment.txt"
+
+      - name: Compile before network access
+        run: |
+          python -m py_compile workspace/cousteau_ha10_public_response_epoch_audit.py
+          python -m py_compile workspace/cousteau_ha10_public_response_epoch_audit_v2.py
+
+      - name: Run unit tests before network access
+        run: |
+          python -m pytest -q \
+            tests/test_cousteau_ha10_public_response_epoch_audit.py \
+            tests/test_cousteau_ha10_public_response_epoch_audit_v2.py
+
+      - name: Execute public StationXML epoch audit
+        run: |
+          python workspace/cousteau_ha10_public_response_epoch_audit_v2.py \
+            --output "$RUNNER_TEMP/run-${{ github.run_id }}.json"
+
+      - name: Validate receipt authority boundary
+        shell: bash
+        run: |
+          python - "$RUNNER_TEMP/run-${{ github.run_id }}.json" <<'PY'
+          import json, sys
+          p = sys.argv[1]
+          r = json.load(open(p, encoding='utf-8'))
+          allowed = {
+              'BLOCKED_PUBLIC_RESPONSE_EPOCH_AUDIT',
+              'PUBLIC_STATIONXML_DOES_NOT_ENCODE_KNOWN_FAULT_ERA_CHANGE',
+              'PUBLIC_STATIONXML_ENCODES_FAULT_ERA_RESPONSE_CHANGE',
+              'MIXED_OR_PARTIAL_PUBLIC_RESPONSE_EPOCH_ENCODING',
+          }
+          assert r['verdict'] in allowed, r['verdict']
+          assert r['frozen_119hz_verdict'] == 'NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frozen_119hz_verdict_binding'] == 'EXACT_SCALAR_FOUND_RECURSIVELY_INSIDE_EXACT_BOUND_FROZEN_JSON_BYTES'
+          assert r['interpretation']['119hz_authority_delta'] == 0
+          assert r['interpretation']['target_identity'] == 'UNCONFIRMED'
+          assert r['source_writeback'] is False
+          assert set(r['stations']) == {'H10N1','H10N2','H10N3','H10S1','H10S2','H10S3'}
+          print(json.dumps({
+              'verdict': r['verdict'],
+              'complete_north': r['completeness']['complete_north'],
+              'complete_south': r['completeness']['complete_south'],
+          }, sort_keys=True))
+          PY
+
+      - name: Prove source tree unchanged
+        shell: bash
+        run: |
+          test -z "$(git status --porcelain)"
+          echo 'SOURCE_WRITEBACK=FALSE'
+
+      - name: Upload audit receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-public-response-epoch-audit-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/run-${{ github.run_id }}.json
+            ${{ runner.temp }}/python-environment.txt
+          if-no-files-found: error
+          retention-days: 30

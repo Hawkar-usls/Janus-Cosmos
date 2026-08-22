@@ -1,0 +1,134 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-JANUARY-0600UTC-SAME-SCALAR-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_PREREGISTERED_JANUARY_0600_SAME_SCALAR_DISCRIMINATOR",
+  "source": {
+    "github_actions_run_id": 32572890007,
+    "head_sha": "e501f9cfa0b993e39c2e28879bb9ded7503e7eaa",
+    "artifact_id": 9475796401,
+    "artifact_name": "cousteau-ha10-january-0600-same-scalar-32572890007",
+    "artifact_zip_sha256": "f2b343e08be77b10a79610267f267d5ab4f8529201ceb5db21a94158325bbaff",
+    "run_receipt_member": "run-32572890007.json",
+    "run_receipt_sha256": "42fb70dff602e7c2edc293ed73a9690a94444bd2ac787a2b51f8a2585376ffd1",
+    "run_receipt_bytes": 116387,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "protocol_git_blob_sha1": "3bfd9adfd7fc305081c5d239ca100eee94c78686",
+    "january_1800_fail_summary_git_blob_sha1": "09ea4c580d93e88c152b81989a6316153e28d8f7",
+    "december_scalar_summary_git_blob_sha1": "6b2c075396b3fc60df3fafe41024a72c86a3afff",
+    "window_count": 20,
+    "window_duration_s": 600,
+    "window_start_time_utc": "06:00:00Z",
+    "date_block": ["2015-01-01", "2015-01-20"],
+    "minimum_complete_paired_windows": 15,
+    "frozen_scalar_db": 12.616188132659623,
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "window_replacement_allowed": false,
+    "posthoc_date_exclusion_allowed": false,
+    "thresholds_identical_to_prior_scalar_holdouts": true
+  },
+  "result": {
+    "complete_paired_windows": 20,
+    "blocked_station_windows": 0,
+    "verdict": "JANUARY_0600_SAME_SCALAR_FAIL",
+    "cross_gate_discriminator": "SUPPORTS_BROADER_OUT_OF_MONTH_NONSTATIONARITY_BEYOND_ONE_DAYPART",
+    "broadband_residual_statistics": {
+      "median_raw_residual_db": 1.3922163792114528,
+      "median_corrected_residual_db": 1.4505627249197515,
+      "raw_q25_residual_db": 0.45187140593174835,
+      "raw_q75_residual_db": 2.2504827317528875,
+      "corrected_q25_residual_db": 0.4961357319333617,
+      "corrected_q75_residual_db": 2.3359931691420917,
+      "raw_residual_iqr_db": 1.7986113258211391,
+      "corrected_residual_iqr_db": 1.83985743720873,
+      "fraction_raw_windows_within_3db": 0.75,
+      "fraction_corrected_windows_within_3db": 0.75,
+      "fraction_both_windows_within_3db": 0.75,
+      "raw_residual_min_db": -1.295550011153475,
+      "raw_residual_max_db": 7.786591317725875,
+      "corrected_residual_min_db": -1.2168795546374689,
+      "corrected_residual_max_db": 7.830037376279591
+    },
+    "fixed_subband_residual_medians_db": {
+      "low_10_30": {"raw": 1.5170458458453782, "corrected": 1.6284669994636394},
+      "mid_30_55": {"raw": 1.1226401185820407, "corrected": 1.2190856199062896},
+      "high_55_80": {"raw": 2.0267500439819717, "corrected": 2.1215943764378498}
+    },
+    "gate_checks": {
+      "minimum_complete_pairs": true,
+      "broadband_medians": true,
+      "broadband_iqrs": true,
+      "window_fractions": false,
+      "fixed_subbands": true
+    }
+  },
+  "strict_window_outliers_corrected_residual_abs_gt_3db": [
+    {
+      "date": "2015-01-02",
+      "corrected_residual_db": 7.830037376279591,
+      "corrected_subband_residuals_db": {"low": 7.382771563692238, "mid": 7.764922270259156, "high": 9.15412924108659}
+    },
+    {
+      "date": "2015-01-03",
+      "corrected_residual_db": 3.8772438442475625,
+      "corrected_subband_residuals_db": {"low": 2.3170994625586587, "mid": 4.960497121118287, "high": 5.9530341408434495}
+    },
+    {
+      "date": "2015-01-07",
+      "corrected_residual_db": 4.475647026093188,
+      "corrected_subband_residuals_db": {"low": 5.811906716263589, "mid": 3.268829723190322, "high": 2.8471050094867945}
+    },
+    {
+      "date": "2015-01-09",
+      "corrected_residual_db": 3.4166707990337173,
+      "corrected_subband_residuals_db": {"low": 3.887871352751823, "mid": 2.931734690212007, "high": 2.597652305178894}
+    },
+    {
+      "date": "2015-01-20",
+      "corrected_residual_db": 3.1475379054845654,
+      "corrected_subband_residuals_db": {"low": 3.6584690085399245, "mid": 2.9465721441709647, "high": 2.1880678451151603}
+    }
+  ],
+  "cross_gate_synthesis": {
+    "december_0600_temporal_stability": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "december_1800_scalar_holdout": "SCALAR_COLLAPSE_HOLDOUT_PASS",
+    "january_1800_out_of_month": "OUT_OF_MONTH_SCALAR_HOLDOUT_FAIL",
+    "january_0600_same_scalar": "JANUARY_0600_SAME_SCALAR_FAIL",
+    "shared_failure_mode_in_january": "WINDOW_FRACTION_GATE_ONLY",
+    "synthesis": "The exact frozen scalar remains close to the January central tendency at both tested dayparts and all fixed-subband median gates remain inside the unchanged tolerances, but strict per-window collapse fails at both 18:00 and 06:00 UTC. This rejects a simple explanation in which the January failure is specific only to the 18:00 daypart and supports broader out-of-month residual nonstationarity."
+  },
+  "postrun_morphology_audit_nonconfirmatory": {
+    "status": "POSTHOC_DIAGNOSTIC_ONLY",
+    "observation": "All five 06:00 UTC windows outside the frozen plus-or-minus 3 dB tolerance are positive residual excursions. The largest, 2015-01-02, is broadband across all three fixed subbands. Other excursions show varying subband shape. This is useful for designing a future independent regime test but is not an admission reanalysis and does not change the frozen FAIL.",
+    "not_an_admission_reanalysis": true
+  },
+  "interpretation": {
+    "supported": [
+      "JANUARY_0600_AND_1800_BOTH_FAIL_THE_SAME_STRICT_WINDOW_FRACTION_GATE",
+      "THE_JANUARY_FAILURE_IS_NOT_EXPLAINED_BY_1800UTC_DAYPART_ALONE",
+      "THE_FROZEN_SCALAR_REMAINS_A_REASONABLE_CENTRAL_TENDENCY_DESCRIPTION_AT_BOTH_JANUARY_DAYPARTS",
+      "FIXED_SUBBAND_MEDIANS_REMAIN_WITHIN_THE_UNCHANGED_GATE_AT_JANUARY_0600",
+      "WINDOW_LEVEL_RESIDUAL_VARIABILITY_IS_BROADER_THAN_A_SINGLE_DAYPART"
+    ],
+    "not_supported": [
+      "A_SINGLE_CONSTANT_SCALAR_IS_A_STATIONARY_PER_WINDOW_MODEL_ACROSS_JANUARY",
+      "THE_RESIDUAL_EXCURSIONS_HAVE_A_KNOWN_PHYSICAL_CAUSE",
+      "SENSOR_GAIN_FAULT_PROVEN",
+      "CALIBRATION_ERROR_PROVEN",
+      "ENVIRONMENTAL_OR_SITE_CAUSE_RULED_OUT",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_FEBRUARY_RESIDUAL_EXCURSION_REPLICATION_V1"
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_JANUARY_0600_DISCRIMINATOR",
+    "source_writeback_during_diagnostic": false
+  },
+  "claim_ceiling": "This append-only discriminator establishes that the January strict per-window scalar-collapse failure appears at both 18:00 and 06:00 UTC under the same frozen scalar and unchanged thresholds. It therefore argues against an 18:00-only explanation of the failure, while preserving the result that the scalar remains close to the central offset. It does not identify the physical source of residual excursions and has zero authority to validate the frozen 119-Hz target claim."
+}

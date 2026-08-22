@@ -2,6 +2,11 @@ name: Cousteau Author MAR Data Set S1 Probe
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-author-mar-dataset-s1-probe.yml"
+      - "workspace/cousteau_author_mar_dataset_s1_probe.py"
   push:
     branches: [janus-echo-cousteau]
     paths:
@@ -9,47 +14,74 @@ on:
       - "workspace/cousteau_author_mar_dataset_s1_probe.py"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   probe:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
         with:
-          ref: janus-echo-cousteau
-          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind repaired acquisition probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object workspace/cousteau_author_mar_dataset_s1_probe.py)" = "58f06fe524ae715db81c50fce58d36efa3835be1"
+          python -m py_compile workspace/cousteau_author_mar_dataset_s1_probe.py
+          echo "AUTHOR_MAR_S1_PROBE_IMPLEMENTATION_BINDING=PASS"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install requests
-      - name: Probe author MAR Data Set S1
+
+      - name: Install direct dependency
+        run: python -m pip install "requests==2.34.2"
+
+      - name: Probe author MAR Data Set S1 without source-tree writeback
         id: probe
-        continue-on-error: true
-        run: python workspace/cousteau_author_mar_dataset_s1_probe.py
-      - name: Show result
-        if: always()
+        shell: bash
         run: |
-          test -f data/cousteau/JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0.json
-          cat data/cousteau/JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0.json
-      - uses: actions/upload-artifact@v4
+          set -euo pipefail
+          mkdir -p artifacts/cousteau-author-mar-s1
+          set +e
+          python workspace/cousteau_author_mar_dataset_s1_probe.py \
+            --output "artifacts/cousteau-author-mar-s1/run-${GITHUB_RUN_ID}.json"
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ] && [ "$rc" -ne 2 ]; then
+            echo "UNEXPECTED_PROBE_EXIT=$rc" >&2
+            exit "$rc"
+          fi
+          echo "probe_exit=$rc" >> "$GITHUB_OUTPUT"
+
+      - name: Validate probe claim ceiling
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/cousteau-author-mar-s1').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['paper_doi']=='10.1029/2022JB024008'
+          assert r['status'] in {'SUCCESS','BLOCKED'}
+          assert 'Acquisition/provenance probe only' in r['claim_ceiling']
+          print('AUTHOR_MAR_S1_PROBE_STATUS=' + r['status'])
+          print('SOURCE_WRITEBACK=FALSE')
+          PY
+          test -z "$(git status --porcelain -- data/cousteau)"
+
+      - name: Upload probe evidence
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: cousteau-author-mar-dataset-s1-probe-${{ github.run_number }}
-          path: data/cousteau/JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0.json
+          name: cousteau-author-mar-dataset-s1-probe-${{ github.run_id }}
+          path: artifacts/cousteau-author-mar-s1/
           if-no-files-found: error
           retention-days: 90
-      - name: Freeze probe, including BLOCKED state
-        if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cousteau/JANUS-ECHO-COUSTEAU-AUTHOR-MAR-DATASET-S1-ACQUISITION-PROBE-2026-08-21-v1.0.json
-          git commit -m "Cousteau: freeze author MAR Data Set S1 probe ${{ github.run_number }}" || true
-          for i in 1 2 3; do
-            git pull --rebase origin janus-echo-cousteau || true
-            git push origin HEAD:janus-echo-cousteau && exit 0
-            sleep 2
-          done
-          exit 1

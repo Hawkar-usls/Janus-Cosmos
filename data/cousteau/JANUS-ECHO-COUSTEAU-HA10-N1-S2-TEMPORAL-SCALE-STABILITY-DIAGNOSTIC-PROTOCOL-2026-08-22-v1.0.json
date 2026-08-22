@@ -1,0 +1,122 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_TEMPORAL_SCALE_STABILITY_DIAGNOSTIC_V1",
+  "status": "PREREGISTERED_BEFORE_NEW_0600UTC_WINDOWS_ARE_DOWNLOADED",
+  "research_branch": "Janus-Echo-Кусто",
+  "purpose": "Test on a third independent time sample whether the already replicated broadband/scale-like H10S2-over-H10N1 10-80 Hz baseline-power offset is temporally persistent rather than driven by a small number of isolated windows.",
+  "epistemic_position": {
+    "created_after_broadband_scale_like_classification": true,
+    "prior_results_used_only_to_define_followup_question": true,
+    "new_0600utc_waveforms_inspected_before_freeze": false,
+    "may_classify_temporal_persistence": true,
+    "may_identify_physical_cause": false,
+    "may_prove_gain_or_calibration_error": false,
+    "may_reclassify_positive_control": false,
+    "may_reclassify_119hz_negative": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "spectral_shape_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "spectral_shape_summary_git_blob_sha1": "26c7b3cf8a5e0707b5ca254ee9ae9d35c064c18b",
+    "spectral_shape_verdict_required": "BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict_required": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10S2..EDH"
+  ],
+  "new_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "06:00:00Z",
+    "dates": [
+      "2014-12-12",
+      "2014-12-13",
+      "2014-12-14",
+      "2014-12-15",
+      "2014-12-16",
+      "2014-12-17",
+      "2014-12-18",
+      "2014-12-19",
+      "2014-12-20",
+      "2014-12-21",
+      "2014-12-22",
+      "2014-12-23",
+      "2014-12-24",
+      "2014-12-25",
+      "2014-12-26",
+      "2014-12-27",
+      "2014-12-28",
+      "2014-12-29",
+      "2014-12-30",
+      "2014-12-31"
+    ],
+    "independence_from_prior_samples": "The new windows begin at 06:00 UTC and do not overlap either the prior 00:00 spectral-shape sample or the prior 12:00 asymmetry-replication sample.",
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_recentering": true,
+    "no_event_catalog_selection": true
+  },
+  "frequency_contract": {
+    "band_hz": [10.0, 80.0],
+    "selection_basis": "Exactly the same frozen broadband interval used by the prior replication and morphology gates.",
+    "whole_spectrum_peak_search_allowed": false,
+    "subband_selection_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "spectral_estimator": {
+    "preprocessing": [
+      "merge_without_interpolation",
+      "demean",
+      "linear_detrend"
+    ],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration over 10-80 Hz"
+  },
+  "predeclared_statistics": {
+    "per_complete_window": [
+      "raw S2-minus-N1 10-80 Hz integrated-power ratio in dB",
+      "response-corrected S2-minus-N1 10-80 Hz integrated-power ratio in dB"
+    ],
+    "aggregate": [
+      "median raw ratio",
+      "median corrected ratio",
+      "raw ratio interquartile range",
+      "corrected ratio interquartile range",
+      "fraction of complete windows with raw ratio >= 6 dB",
+      "fraction of complete windows with corrected ratio >= 6 dB",
+      "fraction of complete windows with both raw and corrected ratios >= 6 dB"
+    ]
+  },
+  "classification_thresholds": {
+    "large_asymmetry_floor_db": 6.0,
+    "maximum_stable_iqr_db": 3.0,
+    "minimum_fraction_windows_above_floor": 0.8,
+    "engineering_interpretation": "A temporally stable scale offset requires a large median effect, an interquartile range no wider than 3 dB, and at least 80% of complete paired windows independently exceeding the 6 dB floor in both raw and corrected power. These thresholds classify persistence only; they do not identify cause."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_TEMPORAL_SCALE_STABILITY_DATA_ACCESS",
+    "both_medians_ge_6db_both_iqrs_le_3db_and_both_fraction_ge_0_8": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "otherwise": "TEMPORALLY_VARIABLE_H10S2_SCALE_OFFSET"
+  },
+  "claim_ceiling": "A TEMPORALLY_STABLE result establishes only that a large broadband H10S2-over-H10N1 baseline-power offset persists across this third frozen time sample with limited dispersion. It narrows the morphology away from a single isolated episode but does not distinguish persistent environmental/site noise from deployment, calibration, gain, or other station-path mechanisms. A VARIABLE result likewise does not erase the two previous independent findings. Neither outcome validates 119 Hz or increases target evidence.",
+  "hard_rules": [
+    "NEW_0600UTC_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "NO_WINDOW_REPLACEMENT",
+    "NO_FREQUENCY_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_TARGET_BAND_USE",
+    "NO_CAUSAL_IDENTIFICATION_FROM_PERSISTENCE_ALONE",
+    "PRIOR_POSITIVE_CONTROL_FAIL_IMMUTABLE",
+    "PRIOR_ASYMMETRY_REPLICATION_IMMUTABLE",
+    "PRIOR_SCALE_LIKE_CLASSIFICATION_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

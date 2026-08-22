@@ -1,0 +1,127 @@
+name: Cousteau HA10 Pre2013 N1-S2 Pair Baseline
+
+on:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - '.github/workflows/cousteau-ha10-pre2013-n1-s2-pair-baseline.yml'
+      - 'workspace/cousteau_ha10_pre2013_n1_s2_pair_baseline.py'
+      - 'tests/test_cousteau_ha10_pre2013_n1_s2_pair_baseline.py'
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PRE2013-N1-S2-PAIR-BASELINE-PROTOCOL-2026-08-22-v1.0.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cousteau-ha10-pre2013-pair-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  pre2013-n1-s2-pair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Verify exact frozen implementation and evidence blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object workspace/cousteau_ha10_pre2013_n1_s2_pair_baseline.py)" = "9fc0eba7f03c18779502f0d6046dc90fbbd0c052"
+          test "$(git hash-object tests/test_cousteau_ha10_pre2013_n1_s2_pair_baseline.py)" = "bd0dcbf12ba357915e3e7d1f4d8cfac85d78cace"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PRE2013-N1-S2-PAIR-BASELINE-PROTOCOL-2026-08-22-v1.0.json)" = "b4cb0298672bdb34147737e1efcde1b61becb9b7"
+          test "$(git hash-object workspace/cousteau_ha10_first_available_six_channel_baseline.py)" = "89eb62a693cf5dd0fb1eada5ccb4477ff494e776"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "45f2901adde866df610a563f27c50177d32be414"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'numpy==2.3.5' \
+            'scipy==1.18.1' \
+            'requests==2.34.2' \
+            'obspy==1.5.0' \
+            'pytest>=8,<9'
+
+      - name: Compile and test before acquisition
+        run: |
+          python -m py_compile workspace/cousteau_ha10_pre2013_n1_s2_pair_baseline.py
+          python -m pytest -q tests/test_cousteau_ha10_pre2013_n1_s2_pair_baseline.py
+
+      - name: Execute value-blind pre2013 pair scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/cousteau-pre2013-pair
+          python -m pip freeze > "artifacts/cousteau-pre2013-pair/python-environment-${GITHUB_RUN_ID}.txt"
+          set +e
+          python workspace/cousteau_ha10_pre2013_n1_s2_pair_baseline.py \
+            --output "artifacts/cousteau-pre2013-pair/run-${GITHUB_RUN_ID}.json"
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('artifacts/cousteau-pre2013-pair') / f"transport-failure-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps({
+            'status':'BLOCKED_TRANSPORT_EXECUTION',
+            'scientific_result_produced':False,
+            'selection_used_waveform_values':False,
+            'exit_code':int(os.environ['RC']),
+            'authority_delta_for_119hz':0,
+            'target_identity':'UNCONFIRMED'
+          }, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+          PY
+            exit "$rc"
+          fi
+
+      - name: Validate epistemic firewalls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/cousteau-pre2013-pair').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          allowed={
+            'PRE2013_LARGE_OFFSET_SIMILAR_TO_2014',
+            'PRE2013_OFFSET_MATERIALLY_LOWER_THAN_2014',
+            'PRE2013_OFFSET_DIFFERENT_OR_MIXED',
+            'NO_PRE2013_SIMULTANEOUS_N1_S2_PAIR_FOUND_IN_PUBLIC_DATSELECT_SCAN',
+            'BLOCKED_PRE2013_N1_S2_PAIR_COMPLETENESS',
+          }
+          assert r['analysis']['classification'] in allowed
+          assert r['selection_used_waveform_values'] is False
+          assert r['source_writeback'] is False
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          print('CLASSIFICATION=' + r['analysis']['classification'])
+          print('EARLIEST=' + str(r['discovery']['earliest_pre2013_pair_date']))
+          print('SELECTED=' + str(r['discovery']['selected_count']))
+          print('RAW_MEDIAN_DB=' + str((r['analysis']['summary'] or {}).get('raw_s2_minus_n1_db',{}).get('median')))
+          PY
+
+      - name: Prove no source-tree writeback
+        run: test -z "$(git status --porcelain)"
+
+      - name: Upload exact receipt and environment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-pre2013-pair-${{ github.run_id }}
+          path: artifacts/cousteau-pre2013-pair/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,58 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-V2-REPLAY-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_OVERLAP_SAFE_BOUNDED_REPLAY",
+  "source": {
+    "github_actions_run_id": 32568639321,
+    "head_sha": "b4d56a933d42be128bd62b2b7feec76c56365cf1",
+    "artifact_id": 9474744000,
+    "artifact_name": "cousteau-ha10-inband-positive-control-v2-32568639321",
+    "artifact_zip_sha256": "dcbe965f7bd2cd30135025437bc622284769a35a5a67173881fceca9e03b9b83",
+    "run_receipt_member": "replay-v2-32568639321.json",
+    "run_receipt_sha256": "6aa5d33890dec3e8553c272fd15b8fbb68c777b58a4135d9c31b18d420a98fbf",
+    "run_receipt_bytes": 137238,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "implementation_repairs_verified": {
+    "overlap_deduplication": "MAXIMUM_CARDINALITY_PAIRWISE_NONOVERLAPPING_PASSING_EVENT_SUBSET",
+    "network_attempts_per_request": 2,
+    "network_timeout_per_attempt_s": 15,
+    "source_writeback": false,
+    "unit_tests_passed": 18,
+    "review_feedback_fixed": [
+      "P1_OVERLAPPING_WINDOWS_COULD_FALSELY_COUNT_AS_INDEPENDENT",
+      "P2_UNBOUNDED_RETRIES_COULD_PREVENT_BLOCKED_RECEIPT"
+    ]
+  },
+  "control_summary": {
+    "selected_complete_events": 8,
+    "complete_events_analyzed_on_both_stations": 8,
+    "raw_candidate_events_passing_both_stations": 1,
+    "independent_events_passing_both_stations": 1,
+    "minimum_independent_events_required": 3,
+    "blocked_station_event_pairs": 0,
+    "verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL"
+  },
+  "comparison_to_first_executed_control": {
+    "first_executed_run_id": 32568063356,
+    "first_executed_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "first_executed_cross_station_pass_count": 1,
+    "v2_replay_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "v2_raw_candidate_pass_count": 1,
+    "v2_independent_pass_count": 1,
+    "scientific_outcome_changed_by_repairs": false,
+    "interpretation": "The stricter independence rule and bounded-network repair preserve the already-frozen FAIL. No overlap correction can promote this result because only one event passed both stations before deduplication."
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_POSITIVE_CONTROL_REPLAY",
+    "frequency_retuning": false,
+    "threshold_retuning": false,
+    "window_retuning": false,
+    "best_subband_selection": false,
+    "whole_spectrum_peak_search": false
+  },
+  "claim_ceiling": "This append-only summary freezes the corrected V2 replay of the preregistered HA10 10-80 Hz pipeline positive control. It verifies that overlap-safe independent-event counting and bounded network retries do not change the completed scientific outcome: the control remains FAIL. It does not validate 119 Hz, identify a source, increase target evidence, or authorize threshold/frequency/window retuning."
+}

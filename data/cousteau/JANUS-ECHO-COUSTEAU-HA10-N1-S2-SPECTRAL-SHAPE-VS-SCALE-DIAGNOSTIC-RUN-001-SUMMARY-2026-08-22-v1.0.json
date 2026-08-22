@@ -1,0 +1,101 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_PREREGISTERED_SPECTRAL_SHAPE_DIAGNOSTIC",
+  "source": {
+    "github_actions_run_id": 32570768191,
+    "head_sha": "0dd1a4b504fbb7b198fc27dfa6d0f0ed0d2aa84d",
+    "artifact_id": 9475256429,
+    "artifact_name": "cousteau-ha10-spectral-shape-vs-scale-32570768191",
+    "artifact_zip_sha256": "aaf4f1ae16cc7e01b4ec86a73bc59efdea4ec66b4cdb8a45468fa3fd7b72f129",
+    "run_receipt_member": "run-32570768191.json",
+    "run_receipt_sha256": "6fcc16f21f1b5e0eed954203a68fff71d5d92fb24bc513c75f0619075b4f2c73",
+    "run_receipt_bytes": 99651,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "new_window_count": 20,
+    "window_duration_s": 600,
+    "window_start_time_utc": "00:00:00Z",
+    "minimum_complete_paired_windows": 15,
+    "subbands_hz": {
+      "low": [10.0, 30.0],
+      "mid": [30.0, 55.0],
+      "high": [55.0, 80.0]
+    },
+    "large_asymmetry_floor_db_each_subband": 6.0,
+    "maximum_scale_like_spread_db": 3.0,
+    "window_replacement_allowed": false,
+    "frequency_retuning_allowed": false,
+    "best_subband_selection_allowed": false,
+    "whole_spectrum_peak_search_allowed": false
+  },
+  "result": {
+    "complete_paired_windows": 18,
+    "blocked_station_windows": 4,
+    "verdict": "BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY",
+    "raw_median_ratio_spread_db": 1.448392276090173,
+    "corrected_median_ratio_spread_db": 1.445864204188915,
+    "all_raw_and_corrected_subband_medians_ge_6db": true,
+    "raw_and_corrected_spreads_le_3db": true,
+    "subband_medians": {
+      "low_10_30hz": {
+        "raw_s2_minus_n1_db": 12.654857987943013,
+        "corrected_s2_minus_n1_db": 12.811722561402645,
+        "corrected_minus_raw_ratio_delta_db": 0.1427254457843894
+      },
+      "mid_30_55hz": {
+        "raw_s2_minus_n1_db": 11.902771322997465,
+        "corrected_s2_minus_n1_db": 12.00048346975894,
+        "corrected_minus_raw_ratio_delta_db": 0.0951213978150891
+      },
+      "high_55_80hz": {
+        "raw_s2_minus_n1_db": 13.351163599087638,
+        "corrected_s2_minus_n1_db": 13.446347673947855,
+        "corrected_minus_raw_ratio_delta_db": 0.09496910997046548
+      }
+    }
+  },
+  "stationxml_sensitivity_diagnostic": {
+    "IM.H10N1..EDH": {
+      "instrument_sensitivity_counts_per_pa": 1828.14,
+      "reference_frequency_hz": 10.0,
+      "input_units": "PA",
+      "output_units": "COUNTS"
+    },
+    "IM.H10S2..EDH": {
+      "instrument_sensitivity_counts_per_pa": 1808.31,
+      "reference_frequency_hz": 10.0,
+      "input_units": "PA",
+      "output_units": "COUNTS"
+    },
+    "nominal_s2_over_n1_sensitivity_ratio_db": -0.09473134449147567,
+    "interpretation": "The nominal StationXML sensitivity difference is about 0.095 dB in the opposite direction and is tiny relative to the observed approximately 12-13.5 dB corrected S2-over-N1 baseline-power offset. The documented nominal sensitivity values therefore do not explain the measured scale-like offset. This does not exclude an unrepresented calibration/deployment issue."
+  },
+  "interpretation": {
+    "supported": [
+      "THE_LARGE_H10S2_OVER_H10N1_BASELINE_POWER_OFFSET_REPLICATES_ON_A_SECOND_INDEPENDENT_TIME_SAMPLE",
+      "THE_OFFSET_IS_PRESENT_IN_ALL_THREE_PREDECLARED_10_80HZ_SUBBANDS",
+      "THE_MEDIAN_SUBBAND_RATIO_SPREAD_IS_ONLY_ABOUT_1_45_DB_RAW_AND_CORRECTED",
+      "THE_DOCUMENTED_RESPONSE_CORRECTION_CHANGES_THE_SUBBAND_STATION_RATIO_BY_ONLY_ABOUT_0_095_TO_0_143_DB"
+    ],
+    "not_supported": [
+      "SENSOR_GAIN_FAULT_PROVEN",
+      "ENVIRONMENTAL_NOISE_SOURCE_IDENTIFIED",
+      "DEPLOYMENT_SITE_EFFECT_PROVEN",
+      "CALIBRATION_ERROR_PROVEN",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_TEMPORAL_SCALE_STABILITY_DIAGNOSTIC_V1"
+  },
+  "authority": {
+    "positive_control_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "replicated_noise_asymmetry_verdict": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_SPECTRAL_SHAPE_DIAGNOSTIC",
+    "source_writeback_during_diagnostic": false
+  },
+  "claim_ceiling": "The data support an approximately broadband/scale-like H10S2-over-H10N1 baseline-power offset across the three frozen 10-80 Hz subbands on this independent time sample. This is a measurement-path morphology result only. It does not identify whether the cause is environmental, site/deployment related, an unmodeled calibration/gain issue, or another mechanism, and it has zero authority to promote the frozen 119-Hz target claim."
+}

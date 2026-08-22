@@ -1,0 +1,272 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_EXECUTED_PREREGISTERED_CONTROL",
+  "source": {
+    "github_actions_run_id": 32568063356,
+    "head_sha": "feb4ff157ebd641b8f210330e06d8f6e68ab5946",
+    "artifact_id": 9474606727,
+    "artifact_name": "cousteau-ha10-inband-positive-control-32568063356",
+    "artifact_zip_sha256": "a9b3836b8b7c5e8810c05979e047ef5ac1feab8837f1fbcfc5f059a416e1486c",
+    "run_receipt_member": "run-32568063356.json",
+    "run_receipt_sha256": "fb69aa93fee63c556e573866aff1e8bc4556dee600e39c99b2ac5e9af9b6aaab",
+    "run_receipt_bytes": 133558,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_upstream": {
+    "protocol_git_blob_sha1": "d1800856076fc46cb04b5461bb1f2bf786af532e",
+    "window_freeze_git_blob_sha1": "f5fbc4b155d514094867b88bb33af71d3b458f76",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "control_summary": {
+    "selected_complete_events": 8,
+    "complete_events_analyzed_on_both_stations": 8,
+    "events_passing_both_stations": 1,
+    "minimum_events_required": 3,
+    "blocked_station_event_pairs": 0,
+    "verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL"
+  },
+  "station_summary": {
+    "IM.H10N1..EDH": {
+      "event_count": 8,
+      "matched_noise_window_count": 16,
+      "event_pass_count": 4,
+      "median_raw_event_vs_noise_snr_db": 3.264865147929863,
+      "median_corrected_event_vs_noise_snr_db": 3.3543492692919537,
+      "median_response_correction_delta_snr_db": 0.31683819358650434,
+      "median_raw_event_integrated_power": 45035.69605710643,
+      "median_raw_noise_integrated_power": 17350.70787735773,
+      "median_corrected_event_integrated_power_pa2": 0.010408376948725692,
+      "median_corrected_noise_integrated_power_pa2": 0.003940434073580249
+    },
+    "IM.H10S2..EDH": {
+      "event_count": 8,
+      "matched_noise_window_count": 16,
+      "event_pass_count": 1,
+      "median_raw_event_vs_noise_snr_db": 0.6113065397691084,
+      "median_corrected_event_vs_noise_snr_db": 0.6722294767327199,
+      "median_response_correction_delta_snr_db": 0.09576631508362743,
+      "median_raw_event_integrated_power": 459738.2619070327,
+      "median_raw_noise_integrated_power": 325541.72288399504,
+      "median_corrected_event_integrated_power_pa2": 0.11138319272621863,
+      "median_corrected_noise_integrated_power_pa2": 0.07592321761533016
+    }
+  },
+  "cross_station_postrun_diagnostic": {
+    "s2_minus_n1_median_raw_noise_power_db": 12.732894596815063,
+    "s2_minus_n1_median_corrected_noise_power_db": 12.848305393187097,
+    "s2_minus_n1_median_raw_event_power_db": 10.089537701461193,
+    "s2_minus_n1_median_corrected_event_power_db": 10.294366502955194
+  },
+  "events": [
+    {
+      "source_time_code": "20150042123086",
+      "replicated_both_stations": true,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 12.257579822846253,
+          "corrected_broadband_event_vs_noise_snr_db": 12.65923171046538,
+          "per_station_event_pass": true,
+          "raw_event_integrated_power": 393012.0500778283,
+          "corrected_event_integrated_power_pa2": 0.09599947025994983,
+          "median_raw_matched_noise_integrated_power": 23368.84279072941,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.005203813399219858
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 5.332745249799661,
+          "corrected_broadband_event_vs_noise_snr_db": 5.678642058932337,
+          "per_station_event_pass": true,
+          "raw_event_integrated_power": 1347322.6910576348,
+          "corrected_event_integrated_power_pa2": 0.3090205356228606,
+          "median_raw_matched_noise_integrated_power": 394865.4409485597,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.08356836173825417
+        }
+      }
+    },
+    {
+      "source_time_code": "20150031825065",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 4.1094479097554135,
+          "corrected_broadband_event_vs_noise_snr_db": 4.001978998829263,
+          "per_station_event_pass": true,
+          "raw_event_integrated_power": 51002.680699029675,
+          "corrected_event_integrated_power_pa2": 0.011589870502017926,
+          "median_raw_matched_noise_integrated_power": 19794.632590219422,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.004614317127956198
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 0.5103055548194072,
+          "corrected_broadband_event_vs_noise_snr_db": 0.5718117968289059,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 1098178.3308318285,
+          "corrected_event_integrated_power_pa2": 0.2447892477175516,
+          "median_raw_matched_noise_integrated_power": 975396.1202907395,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.21460499861414748
+        }
+      }
+    },
+    {
+      "source_time_code": "20150050445600",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 2.1087481398076773,
+          "corrected_broadband_event_vs_noise_snr_db": 2.422042613094742,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 21667.844461808417,
+          "corrected_event_integrated_power_pa2": 0.004880991387631119,
+          "median_raw_matched_noise_integrated_power": 13335.432401728135,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.0027937566214846513
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 0.7123075247188095,
+          "corrected_broadband_event_vs_noise_snr_db": 0.7726471566365339,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 374344.9609299983,
+          "corrected_event_integrated_power_pa2": 0.0825261130024525,
+          "median_raw_matched_noise_integrated_power": 317674.4516619694,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.06907615863675657
+        }
+      }
+    },
+    {
+      "source_time_code": "20150041644482",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 9.211819439952393,
+          "corrected_broadband_event_vs_noise_snr_db": 9.694085826888768,
+          "per_station_event_pass": true,
+          "raw_event_integrated_power": 340291.45236813056,
+          "corrected_event_integrated_power_pa2": 0.08226233912892292,
+          "median_raw_matched_noise_integrated_power": 40830.09705592807,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.008825585661347412
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 1.1790258012520718,
+          "corrected_broadband_event_vs_noise_snr_db": 1.2932009143691958,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 502842.8319822047,
+          "corrected_event_integrated_power_pa2": 0.1128609531382247,
+          "median_raw_matched_noise_integrated_power": 383135.0611595779,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.08382036716937164
+        }
+      }
+    },
+    {
+      "source_time_code": "20150031234191",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": -1.6766758552641687,
+          "corrected_broadband_event_vs_noise_snr_db": -1.3562939413782247,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 31551.463806935815,
+          "corrected_event_integrated_power_pa2": 0.006826706332621399,
+          "median_raw_matched_noise_integrated_power": 46445.92698748835,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.009329160944579283
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": -0.6388529791701502,
+          "corrected_broadband_event_vs_noise_snr_db": -0.5810845579513492,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 807522.0548817848,
+          "corrected_event_integrated_power_pa2": 0.17850740263762858,
+          "median_raw_matched_noise_integrated_power": 935438.0509668943,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.2039965556927476
+        }
+      }
+    },
+    {
+      "source_time_code": "20150042102473",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 5.170854575422745,
+          "corrected_broadband_event_vs_noise_snr_db": 5.502486091239016,
+          "per_station_event_pass": true,
+          "raw_event_integrated_power": 68550.67183385059,
+          "corrected_event_integrated_power_pa2": 0.017202740679672665,
+          "median_raw_matched_noise_integrated_power": 20854.99021926344,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.004844943249485162
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 1.5687272485912183,
+          "corrected_broadband_event_vs_noise_snr_db": 1.7470755517053471,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 458074.9389003484,
+          "corrected_event_integrated_power_pa2": 0.1099434874767114,
+          "median_raw_matched_noise_integrated_power": 318980.6747941064,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.07348641101800359
+        }
+      }
+    },
+    {
+      "source_time_code": "20150042128432",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 2.4202823861043123,
+          "corrected_broadband_event_vs_noise_snr_db": 2.706719539754644,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 40826.94360160768,
+          "corrected_event_integrated_power_pa2": 0.009223113412799945,
+          "median_raw_matched_noise_integrated_power": 23368.7990256027,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.004944623962429575
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 0.06792747902390242,
+          "corrected_broadband_event_vs_noise_snr_db": 0.16931601793284035,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 385546.6012849587,
+          "corrected_event_integrated_power_pa2": 0.08688633279038993,
+          "median_raw_matched_noise_integrated_power": 379562.7291849371,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.0835693424257184
+        }
+      }
+    },
+    {
+      "source_time_code": "20150042131072",
+      "replicated_both_stations": false,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 1.688117558361986,
+          "corrected_broadband_event_vs_noise_snr_db": 1.9537274689016058,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 34782.71181039805,
+          "corrected_event_integrated_power_pa2": 0.007012507153173143,
+          "median_raw_matched_noise_integrated_power": 23570.815306076954,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.004473110929983541
+        },
+        "IM.H10S2..EDH": {
+          "raw_broadband_event_vs_noise_snr_db": 0.01755418503223207,
+          "corrected_broadband_event_vs_noise_snr_db": 0.10769827629054901,
+          "per_station_event_pass": false,
+          "raw_event_integrated_power": 375131.5849137064,
+          "corrected_event_integrated_power_pa2": 0.08432997932416063,
+          "median_raw_matched_noise_integrated_power": 373618.328185398,
+          "median_corrected_matched_noise_integrated_power_pa2": 0.08226469552793668
+        }
+      }
+    }
+  ],
+  "interpretation": {
+    "control_outcome": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "data_access_failure": false,
+    "response_metadata_failure": false,
+    "observed_pattern": "H10S2_HAS_MUCH_HIGHER_MATCHED_NOISE_FLOOR_AND_ONLY_1_OF_8_FIXED_EVENT_PASSES; H10N1_PASSES_4_OF_8",
+    "response_correction_is_not_primary_explanation": "RAW_AND_CORRECTED_SNR_PATTERNS_ARE_SIMILAR; MEDIAN_CORRECTION_DELTA_IS_SMALL_ON_BOTH_STATIONS",
+    "next_diagnostic": "COUSTEAU_HA10_N1_S2_STATION_NOISE_ASYMMETRY_DIAGNOSTIC_V1",
+    "may_reclassify_119hz_negative": false,
+    "may_retune_completed_positive_control": false
+  },
+  "authority": {
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_POSITIVE_CONTROL",
+    "source_writeback_during_control": false
+  },
+  "claim_ceiling": "This append-only summary freezes the first executed preregistered 10-80 Hz HA10 pipeline-control outcome and a deterministic post-run aggregation of its station-level powers/SNRs. It does not retune the control, validate 119 Hz, identify a source, or promote any target claim. The failed positive control requires measurement-path diagnosis before new HA10 spectral claims."
+}

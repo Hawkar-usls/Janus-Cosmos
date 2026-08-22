@@ -1,0 +1,127 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PRE-POST-2013-CROSSTALK-TRIPLET-PROTOCOL-2026-08-22-v1.0",
+  "status": "PREREGISTERED_BEFORE_ANY_NEW_PRE_POST_WAVEFORM_DOWNLOAD",
+  "date": "2026-08-22",
+  "gate_id": "COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1",
+  "selected_by_janus": {
+    "council_repository": "Hawkar-usls/Janus-Demiurge",
+    "council_run_id": 32575681171,
+    "council_result_sha256": "c6ac01d82b2179dcf52af35544088a1262f659b7acba58f27b336494f385575d",
+    "input_sha256": "5792c11955cd7c754b0275513f2c91af265eb194a39492c32fc3d8a81152ea6a",
+    "top1_votes": "17/17",
+    "selected_gate": "COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1"
+  },
+  "upstream_bindings": {
+    "public_response_epoch_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "public_response_epoch_summary_git_blob_sha1": "4db3760f0ee04d5d832941f5001212e8414978f8",
+    "reverse_spiral_audit_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json",
+    "reverse_spiral_audit_git_blob_sha1": "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "historical_anchor": {
+    "documented_h10s_fault_onset_utc_date": "2013-07-19",
+    "use": "Frozen external time anchor only; the gate does not infer fault mechanism from the date alone."
+  },
+  "channels": {
+    "network": "IM",
+    "location": "--",
+    "channel": "EDH",
+    "north_triplet": ["H10N1", "H10N2", "H10N3"],
+    "south_triplet": ["H10S1", "H10S2", "H10S3"],
+    "expected_sample_rate_hz": 250.0
+  },
+  "window_freeze": {
+    "window_duration_s": 600,
+    "window_start_time_utc": "12:00:00Z",
+    "pre_fault_dates_utc": [
+      "2013-06-20", "2013-06-21", "2013-06-22", "2013-06-23", "2013-06-24",
+      "2013-06-25", "2013-06-26", "2013-06-27", "2013-06-28", "2013-06-29",
+      "2013-06-30", "2013-07-01", "2013-07-02", "2013-07-03", "2013-07-04",
+      "2013-07-05", "2013-07-06", "2013-07-07", "2013-07-08", "2013-07-09"
+    ],
+    "post_fault_dates_utc": [
+      "2013-09-01", "2013-09-02", "2013-09-03", "2013-09-04", "2013-09-05",
+      "2013-09-06", "2013-09-07", "2013-09-08", "2013-09-09", "2013-09-10",
+      "2013-09-11", "2013-09-12", "2013-09-13", "2013-09-14", "2013-09-15",
+      "2013-09-16", "2013-09-17", "2013-09-18", "2013-09-19", "2013-09-20"
+    ],
+    "windows_per_epoch": 20,
+    "minimum_complete_six_channel_windows_per_epoch": 15,
+    "replacement_allowed": false,
+    "recentering_allowed": false,
+    "event_catalog_filtering_allowed": false,
+    "gap_interpolation_allowed": false
+  },
+  "spectral_contract": {
+    "primary_domain": "RAW_COUNTS",
+    "secondary_domain": "PUBLIC_STATIONXML_RESPONSE_CORRECTED_POWER_ONLY",
+    "band_hz": [10.0, 80.0],
+    "fixed_diagnostic_subbands_hz": [[10.0, 30.0], [30.0, 55.0], [55.0, 80.0]],
+    "welch_window": "hann",
+    "welch_nperseg": 8192,
+    "welch_noverlap": 4096,
+    "welch_scaling": "density",
+    "detrend": "constant",
+    "whole_spectrum_peak_search_allowed": false,
+    "best_subband_selection_allowed": false,
+    "119hz_excluded": true
+  },
+  "primary_linear_crosstalk_statistic": {
+    "pairwise_metric": "Mean magnitude-squared coherence across the fixed 10-80 Hz band per frozen six-channel window.",
+    "south_fault_source_pairs": ["H10S1-H10S2", "H10S1-H10S3"],
+    "north_analog_control_pairs": ["H10N1-H10N2", "H10N1-H10N3"],
+    "per_window_contrast": "mean(S1-S2,S1-S3 coherence) - mean(N1-N2,N1-N3 coherence)",
+    "epoch_statistic": "median(per_window_contrast)",
+    "primary_delta": "POST median contrast - PRE median contrast",
+    "permutation_test": {
+      "one_sided_alternative": "POST contrast greater than PRE contrast",
+      "permutations": 100000,
+      "rng_seed": 20260822,
+      "p_threshold": 0.01
+    },
+    "effect_thresholds": {
+      "minimum_primary_delta_msc": 0.03,
+      "minimum_individual_s1_s2_post_minus_pre_median_msc": 0.02,
+      "minimum_individual_s1_s3_post_minus_pre_median_msc": 0.02
+    }
+  },
+  "preexistence_subgate": {
+    "purpose": "Test whether the later large H10S2-over-H10N1 broadband power offset already existed before the documented 2013 H10S fault.",
+    "metric": "Per-window 10*log10(raw integrated 10-80 Hz S2 power / raw integrated 10-80 Hz N1 power), summarized by epoch median.",
+    "large_offset_floor_db": 6.0,
+    "maximum_pre_post_median_change_for_stability_db": 3.0,
+    "classifications": {
+      "LARGE_S2_N1_OFFSET_PREEXISTS_AND_IS_STABLE_ACROSS_FAULT": "PRE median >=6 dB and absolute POST-PRE median change <=3 dB.",
+      "LARGE_S2_N1_OFFSET_EMERGES_AFTER_FAULT": "PRE median <6 dB and POST median >=6 dB.",
+      "S2_N1_OFFSET_PRE_POST_MIXED": "Any other complete-data outcome."
+    }
+  },
+  "secondary_diagnostics": {
+    "pairwise_coherence": ["H10S2-H10S3", "H10N2-H10N3"],
+    "raw_power_pre_post_db_change_all_six_channels": true,
+    "public_response_corrected_power_pre_post_db_change_all_six_channels": true,
+    "raw_s2_n1_ratio_pre_post": true,
+    "corrected_s2_n1_ratio_pre_post": true,
+    "fixed_subband_coherence_report_only": true,
+    "diagnostics_cannot_rescue_failed_primary_gate": true
+  },
+  "verdict_rules": {
+    "BLOCKED_PRE_POST_2013_TRIPLET_DATA": "Fewer than 15 complete simultaneous six-channel frozen windows are available in either PRE or POST epoch.",
+    "LINEAR_COHERENT_SOUTH_TRIPLET_CROSSTALK_SIGNATURE_DETECTED": "Completeness passes; primary contrast delta >=0.03 MSC; one-sided fixed-seed permutation p<=0.01; and both S1-S2 and S1-S3 individual median coherence increases are >=0.02 MSC.",
+    "NO_PREREGISTERED_LINEAR_COHERENT_CROSSTALK_SIGNATURE": "Completeness passes but the complete primary signature above is not satisfied."
+  },
+  "interpretation_firewall": {
+    "detected_signature_proves_riser_failure": false,
+    "detected_signature_proves_all_s2_power_excess_is_crosstalk": false,
+    "failed_signature_rules_out_noncoherent_or_time_variable_crosstalk": false,
+    "preexisting_s2_n1_offset_proves_seafloor_structure": false,
+    "response_corrected_secondary_can_override_raw_primary": false,
+    "bathymetry_lane_remains_independent": true,
+    "119hz_authority_delta": 0,
+    "target_identity": "UNCONFIRMED"
+  },
+  "claim_ceiling": "This gate can detect or fail to detect a preregistered linear/coherent south-triplet change across the documented fault epoch and can establish whether the large S2/N1 broadband power offset preexisted that epoch. It cannot identify the physical cause of a preexisting site offset, prove a specific hardware failure, or promote any 119-Hz target claim.",
+  "next_step_rule": "Freeze the first successful result append-only and submit the exact result plus the updated whole-picture synthesis to the JANUS/Demiurge reverse council for the next gate."
+}

@@ -1,0 +1,131 @@
+name: Cousteau HA10 N1-S2 January 06UTC Same-Scalar Holdout
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-january-0600-same-scalar-holdout.yml"
+      - "workspace/cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py"
+      - "tests/test_cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-JANUARY-0600UTC-SAME-SCALAR-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-OUT-OF-MONTH-SCALAR-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json"
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-january-0600-same-scalar-holdout.yml"
+      - "workspace/cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py"
+      - "tests/test_cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-JANUARY-0600UTC-SAME-SCALAR-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: read
+
+jobs:
+  january-0600-same-scalar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind discriminator preregistration and immutable upstream evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-JANUARY-0600UTC-SAME-SCALAR-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json)" = "3bfd9adfd7fc305081c5d239ca100eee94c78686"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-OUT-OF-MONTH-SCALAR-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "09ea4c580d93e88c152b81989a6316153e28d8f7"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "6b2c075396b3fc60df3fafe41024a72c86a3afff"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py)" = "8c171a0f3b65193716f7e43121a6152fe0b5869a"
+          test "$(git hash-object tests/test_cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py)" = "886639f7f6fae9e4d3c8c1a7a918a191d4d53453"
+          echo "JANUARY_0600_DISCRIMINATOR_PREREGISTRATION=PASS"
+          echo "JANUARY_1800_FAIL_BINDING=PASS"
+          echo "EXACT_SCALAR_AND_THRESHOLD_BINDING=PASS"
+          echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen scientific stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
+          mkdir -p artifacts/ha10-january-0600-same-scalar
+          python -m pip freeze | sort > artifacts/ha10-january-0600-same-scalar/python-environment.txt
+
+      - name: Compile and test frozen discriminator semantics before data download
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            workspace/cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py \
+            tests/test_cousteau_ha10_n1_s2_january_0600_same_scalar_holdout.py
+          python -m unittest tests.test_cousteau_ha10_n1_s2_january_0600_same_scalar_holdout -v
+
+      - name: Execute frozen January 06UTC discriminator
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m workspace.cousteau_ha10_n1_s2_january_0600_same_scalar_holdout \
+            --output "artifacts/ha10-january-0600-same-scalar/run-${GITHUB_RUN_ID}.json"
+
+      - name: Validate non-promotional discriminator boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/ha10-january-0600-same-scalar').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['status']=='DIAGNOSTIC_RUN_COMPLETE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_JANUARY_0600_DISCRIMINATOR'
+          assert r['january_1800_verdict']=='OUT_OF_MONTH_SCALAR_HOLDOUT_FAIL'
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frozen_scalar']['source_value_db']==12.616188132659623
+          assert r['frozen_scalar']['holdout_refit_allowed'] is False
+          assert r['summary']['verdict'] in {
+              'JANUARY_0600_SAME_SCALAR_PASS',
+              'JANUARY_0600_SAME_SCALAR_FAIL',
+              'BLOCKED_JANUARY_0600_SAME_SCALAR_DATA_ACCESS',
+          }
+          assert r['summary']['cross_gate_discriminator'] in {
+              'SUPPORTS_DAYPART_OR_REGIME_DEPENDENCE_OF_WINDOW_LEVEL_RESIDUAL_VARIABILITY',
+              'SUPPORTS_BROADER_OUT_OF_MONTH_NONSTATIONARITY_BEYOND_ONE_DAYPART',
+              'BLOCKED_NO_DISCRIMINATION',
+          }
+          print('JANUARY_0600_DISCRIMINATOR_RECEIPT_VALID=TRUE')
+          print('JANUARY_0600_VERDICT=' + r['summary']['verdict'])
+          print('CROSS_GATE=' + r['summary']['cross_gate_discriminator'])
+          print('COMPLETE_PAIRED_WINDOWS=' + str(r['summary']['complete_paired_windows']))
+          print('AUTHORITY_DELTA_FOR_119HZ=0')
+          PY
+
+      - name: Prove source tree is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/cousteau workspace tests
+          echo "SOURCE_WRITEBACK=FALSE"
+
+      - name: Upload January 06UTC discriminator evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-january-0600-same-scalar-${{ github.run_id }}
+          path: artifacts/ha10-january-0600-same-scalar/
+          if-no-files-found: error
+          retention-days: 30
