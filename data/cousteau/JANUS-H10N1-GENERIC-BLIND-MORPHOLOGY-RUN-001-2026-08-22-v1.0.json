@@ -1,0 +1,1273 @@
+{
+  "artifact_id": "JANUS-H10N1-GENERIC-BLIND-MORPHOLOGY-RUN-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:27:31.419781+00:00",
+  "authorized_by": "JANUS-H10N1-MORPHOLOGY-METRICS-COUNCIL-RUN-005-2026-08-22-v1.0",
+  "source": {
+    "dataset_id": "GB/NERC/BAS/PDC/01236",
+    "netcdf_sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81",
+    "crs": "WGS84 geographic",
+    "native_spacing_deg": 0.0005
+  },
+  "code_sha256": "6a8e268abf975c93fb80b92b3ff9f839b621ce9873ffa429b641ee678d715da2",
+  "control_manifest_sha256": "dda377751b5d3d8470328a59c99f7435f78b7c5653f37eca59a1a5c1f2fccd2d",
+  "metric_council_sha256": "54d48469a9981f9e71dbcce4b55dc3557de1e6a9290b6cbda4cfd5b0305cfb1a",
+  "frozen_metrics": [
+    "local_relief_m",
+    "slope_median_deg",
+    "slope_p95_deg",
+    "rugosity_surface_ratio",
+    "planarity_rmse_over_relief",
+    "profile_curvature_rms",
+    "plan_curvature_rms",
+    "radial_rotation_similarity",
+    "facet_aspect_entropy",
+    "facet_dominant_bin_fraction"
+  ],
+  "scales": {
+    "2": {
+      "radius_km": 2,
+      "target_metrics": {
+        "local_relief_m": 755.3570556640625,
+        "slope_median_deg": 8.29321584898317,
+        "slope_p95_deg": 27.691853386934678,
+        "rugosity_surface_ratio": 1.029501527815169,
+        "planarity_rmse_over_relief": 0.07758854823295709,
+        "profile_curvature_rms": 0.0012613169936890132,
+        "plan_curvature_rms": 0.014051908057215476,
+        "radial_rotation_similarity": 0.39495323735806753,
+        "facet_aspect_entropy": 0.7753956317341887,
+        "facet_dominant_bin_fraction": 0.26508120649651973,
+        "_integrity": {
+          "valid_fraction": 0.9994212962962963,
+          "rows": 72,
+          "cols": 72,
+          "dx_m": 55.13898570997833,
+          "dy_m": 55.65999999996916,
+          "rotation_components": [
+            0.45662181957042614,
+            0.27161607293335016,
+            0.4566218195704264
+          ]
+        }
+      },
+      "control_metrics": {
+        "C01": {
+          "local_relief_m": 815.151611328125,
+          "slope_median_deg": 10.499427022368259,
+          "slope_p95_deg": 27.38019936489111,
+          "rugosity_surface_ratio": 1.0316012344478644,
+          "planarity_rmse_over_relief": 0.05610238979091355,
+          "profile_curvature_rms": 0.0011348096958336583,
+          "plan_curvature_rms": 0.012156254174107959,
+          "radial_rotation_similarity": 0.46208928817123224,
+          "facet_aspect_entropy": 0.7398234273238953,
+          "facet_dominant_bin_fraction": 0.2591355599214145,
+          "_integrity": {
+            "valid_fraction": 0.9947906617788925,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.14238462256742,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.44309195395565537,
+              0.500083956602386,
+              0.4430919539556555
+            ]
+          }
+        },
+        "C02": {
+          "local_relief_m": 797.889404296875,
+          "slope_median_deg": 10.075927915508151,
+          "slope_p95_deg": 28.393902438999163,
+          "rugosity_surface_ratio": 1.0343970634227078,
+          "planarity_rmse_over_relief": 0.08196538993636843,
+          "profile_curvature_rms": 0.0015440963759263337,
+          "plan_curvature_rms": 0.015400233043273533,
+          "radial_rotation_similarity": -0.26691235805072316,
+          "facet_aspect_entropy": 0.8721346944290287,
+          "facet_dominant_bin_fraction": 0.21312119426438814,
+          "_integrity": {
+            "valid_fraction": 0.9917036465367548,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13973772549457,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.41245606538342944,
+              0.02417505661468932,
+              -0.41245606538342944
+            ]
+          }
+        },
+        "C03": {
+          "local_relief_m": 816.7225341796875,
+          "slope_median_deg": 10.490231092426168,
+          "slope_p95_deg": 30.14108284390357,
+          "rugosity_surface_ratio": 1.0393540468851783,
+          "planarity_rmse_over_relief": 0.06944024308096432,
+          "profile_curvature_rms": 0.0013392090660828099,
+          "plan_curvature_rms": 0.012476467356769393,
+          "radial_rotation_similarity": -0.10312169037976816,
+          "facet_aspect_entropy": 0.8040428984308999,
+          "facet_dominant_bin_fraction": 0.2307395250048272,
+          "_integrity": {
+            "valid_fraction": 0.9998070615473664,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.12908295434295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.3836721798876278,
+              0.4579792886359511,
+              -0.3836721798876278
+            ]
+          }
+        },
+        "C04": {
+          "local_relief_m": 1115.2843017578125,
+          "slope_median_deg": 12.995002601462001,
+          "slope_p95_deg": 31.460471203466433,
+          "rugosity_surface_ratio": 1.0480294737719476,
+          "planarity_rmse_over_relief": 0.03939498132283342,
+          "profile_curvature_rms": 0.0013976651882899583,
+          "plan_curvature_rms": 0.011797528636655763,
+          "radial_rotation_similarity": -0.060233164028413715,
+          "facet_aspect_entropy": 0.6731452508106923,
+          "facet_dominant_bin_fraction": 0.36179731569733514,
+          "_integrity": {
+            "valid_fraction": 0.9976847385683967,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.11289928484871,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.014184737658661859,
+              -0.20906896740256486,
+              0.014184737658661878
+            ]
+          }
+        },
+        "C05": {
+          "local_relief_m": 864.97265625,
+          "slope_median_deg": 10.593600956067021,
+          "slope_p95_deg": 29.661233512706417,
+          "rugosity_surface_ratio": 1.037570155819449,
+          "planarity_rmse_over_relief": 0.056102044426167244,
+          "profile_curvature_rms": 0.0012587958303526968,
+          "plan_curvature_rms": 0.012803490063901073,
+          "radial_rotation_similarity": 0.21752921975816739,
+          "facet_aspect_entropy": 0.7842936920767037,
+          "facet_dominant_bin_fraction": 0.24107142857142858,
+          "_integrity": {
+            "valid_fraction": 0.9980706154736639,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.142384622567306,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.15049381729305047,
+              0.35160002468840124,
+              0.15049381729305045
+            ]
+          }
+        },
+        "C06": {
+          "local_relief_m": 1283.9493408203125,
+          "slope_median_deg": 16.45549581919647,
+          "slope_p95_deg": 33.96287334764144,
+          "rugosity_surface_ratio": 1.066538708893327,
+          "planarity_rmse_over_relief": 0.07081527548656334,
+          "profile_curvature_rms": 0.0015630021862426612,
+          "plan_curvature_rms": 0.010490937289707444,
+          "radial_rotation_similarity": -0.12818545298128678,
+          "facet_aspect_entropy": 0.7948324023495215,
+          "facet_dominant_bin_fraction": 0.23205928237129486,
+          "_integrity": {
+            "valid_fraction": 0.9959482924946942,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13175672391162,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.3686073891108142,
+              0.3526584192777681,
+              -0.3686073891108142
+            ]
+          }
+        },
+        "C07": {
+          "local_relief_m": 1145.4000244140625,
+          "slope_median_deg": 13.63903234988718,
+          "slope_p95_deg": 31.929796611256947,
+          "rugosity_surface_ratio": 1.0528397802546965,
+          "planarity_rmse_over_relief": 0.05414375855444335,
+          "profile_curvature_rms": 0.001493042706869674,
+          "plan_curvature_rms": 0.010784997920072434,
+          "radial_rotation_similarity": -0.1116879398546949,
+          "facet_aspect_entropy": 0.8075730639626071,
+          "facet_dominant_bin_fraction": 0.2313360480899748,
+          "_integrity": {
+            "valid_fraction": 0.9984564923789311,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.12908295434295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.2233947947869476,
+              0.11172577000981032,
+              -0.2233947947869474
+            ]
+          }
+        },
+        "C08": {
+          "local_relief_m": 1069.611083984375,
+          "slope_median_deg": 10.862219257484309,
+          "slope_p95_deg": 31.828954490975867,
+          "rugosity_surface_ratio": 1.0519670207620175,
+          "planarity_rmse_over_relief": 0.058205172282693764,
+          "profile_curvature_rms": 0.002011678340104303,
+          "plan_curvature_rms": 0.018956755171052626,
+          "radial_rotation_similarity": -0.1394240963674446,
+          "facet_aspect_entropy": 0.9053577968937062,
+          "facet_dominant_bin_fraction": 0.18973862536302033,
+          "_integrity": {
+            "valid_fraction": 0.9990353077368319,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.107451002116704,
+            "dy_m": 55.66000000006795,
+            "rotation_components": [
+              -0.3330286892166606,
+              0.24778508933098745,
+              -0.3330286892166607
+            ]
+          }
+        },
+        "C09": {
+          "local_relief_m": 900.4759521484375,
+          "slope_median_deg": 13.769601580790326,
+          "slope_p95_deg": 31.241802745542333,
+          "rugosity_surface_ratio": 1.0503072841312728,
+          "planarity_rmse_over_relief": 0.08005190121314046,
+          "profile_curvature_rms": 0.001555903366307379,
+          "plan_curvature_rms": 0.014633045383307338,
+          "radial_rotation_similarity": 0.14519912916728553,
+          "facet_aspect_entropy": 0.799415359137917,
+          "facet_dominant_bin_fraction": 0.28313603725984865,
+          "_integrity": {
+            "valid_fraction": 0.9984564923789311,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13973772549457,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.02695951594145851,
+              0.3816783556189395,
+              0.026959515941458578
+            ]
+          }
+        },
+        "C10": {
+          "local_relief_m": 889.315673828125,
+          "slope_median_deg": 9.897193163086577,
+          "slope_p95_deg": 29.406984454541288,
+          "rugosity_surface_ratio": 1.0467929437954004,
+          "planarity_rmse_over_relief": 0.07834077443998168,
+          "profile_curvature_rms": 0.002071468550918117,
+          "plan_curvature_rms": 0.020770030063837746,
+          "radial_rotation_similarity": 0.4963937384005013,
+          "facet_aspect_entropy": 0.8972326044439048,
+          "facet_dominant_bin_fraction": 0.172781984080761,
+          "_integrity": {
+            "valid_fraction": 0.9984564923789311,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.10471678857084,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.45939448857776805,
+              0.5703922380459681,
+              0.45939448857776793
+            ]
+          }
+        },
+        "C11": {
+          "local_relief_m": 1181.3826904296875,
+          "slope_median_deg": 16.389071582893624,
+          "slope_p95_deg": 32.8671934600839,
+          "rugosity_surface_ratio": 1.0655846126139368,
+          "planarity_rmse_over_relief": 0.06057591816592519,
+          "profile_curvature_rms": 0.0013175803858495017,
+          "plan_curvature_rms": 0.013286865567437614,
+          "radial_rotation_similarity": -0.015701082810962386,
+          "facet_aspect_entropy": 0.7443845425270673,
+          "facet_dominant_bin_fraction": 0.27174123571566916,
+          "_integrity": {
+            "valid_fraction": 0.9990353077368319,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.11561335337109,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.06842008980092938,
+              -0.18394342803474595,
+              0.06842008980092941
+            ]
+          }
+        },
+        "C12": {
+          "local_relief_m": 1116.3125,
+          "slope_median_deg": 19.145068586028877,
+          "slope_p95_deg": 32.877094525231456,
+          "rugosity_surface_ratio": 1.0720918309200609,
+          "planarity_rmse_over_relief": 0.08282103413367065,
+          "profile_curvature_rms": 0.0016246090831274148,
+          "plan_curvature_rms": 0.011998483436292942,
+          "radial_rotation_similarity": -0.19507772959988287,
+          "facet_aspect_entropy": 0.8649747891966405,
+          "facet_dominant_bin_fraction": 0.21037181996086105,
+          "_integrity": {
+            "valid_fraction": 0.9953694771367934,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.12371526359766,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.25125707694384164,
+              -0.08271903491196529,
+              -0.25125707694384164
+            ]
+          }
+        },
+        "C13": {
+          "local_relief_m": 973.795654296875,
+          "slope_median_deg": 12.12070650923157,
+          "slope_p95_deg": 33.697207656083066,
+          "rugosity_surface_ratio": 1.053271651963526,
+          "planarity_rmse_over_relief": 0.0837602851745972,
+          "profile_curvature_rms": 0.0014526513736866746,
+          "plan_curvature_rms": 0.021656367489833257,
+          "radial_rotation_similarity": -0.08468512579620828,
+          "facet_aspect_entropy": 0.846905764254232,
+          "facet_dominant_bin_fraction": 0.21299921691464369,
+          "_integrity": {
+            "valid_fraction": 0.9942118464209917,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13442377584295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.2347074795751421,
+              0.21535958176165934,
+              -0.23470747957514204
+            ]
+          }
+        },
+        "C14": {
+          "local_relief_m": 823.0311279296875,
+          "slope_median_deg": 10.68185510108011,
+          "slope_p95_deg": 29.407066041769447,
+          "rugosity_surface_ratio": 1.0393794209643672,
+          "planarity_rmse_over_relief": 0.07529007963929886,
+          "profile_curvature_rms": 0.00171226508455128,
+          "plan_curvature_rms": 0.016625056009370413,
+          "radial_rotation_similarity": -0.12618528803831358,
+          "facet_aspect_entropy": 0.8663455670865166,
+          "facet_dominant_bin_fraction": 0.22681215900233828,
+          "_integrity": {
+            "valid_fraction": 0.996527107852595,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13708410981195,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.3879167004677379,
+              0.39727753682053507,
+              -0.3879167004677379
+            ]
+          }
+        },
+        "C15": {
+          "local_relief_m": 609.223876953125,
+          "slope_median_deg": 8.930693624449244,
+          "slope_p95_deg": 29.999310651068807,
+          "rugosity_surface_ratio": 1.035128884924525,
+          "planarity_rmse_over_relief": 0.07851450676058433,
+          "profile_curvature_rms": 0.00171567092696034,
+          "plan_curvature_rms": 0.018496791500958686,
+          "radial_rotation_similarity": 0.052999334236905886,
+          "facet_aspect_entropy": 0.8963821082319913,
+          "facet_dominant_bin_fraction": 0.20287602020987175,
+          "_integrity": {
+            "valid_fraction": 0.9980706154736639,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.14238462256742,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.009913847360845534,
+              0.17882569743240873,
+              -0.009913847360845548
+            ]
+          }
+        },
+        "C16": {
+          "local_relief_m": 617.2510986328125,
+          "slope_median_deg": 10.949475870402397,
+          "slope_p95_deg": 31.453648861631727,
+          "rugosity_surface_ratio": 1.043518408137128,
+          "planarity_rmse_over_relief": 0.13017748980401428,
+          "profile_curvature_rms": 0.0017432629750963739,
+          "plan_curvature_rms": 0.015818384767211705,
+          "radial_rotation_similarity": -0.11188835065862146,
+          "facet_aspect_entropy": 0.8967136308443363,
+          "facet_dominant_bin_fraction": 0.21305637982195846,
+          "_integrity": {
+            "valid_fraction": 0.9928612772525565,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.145024800707915,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.27250037938301924,
+              0.2093357067901742,
+              -0.2725003793830193
+            ]
+          }
+        },
+        "C17": {
+          "local_relief_m": 869.758544921875,
+          "slope_median_deg": 12.501015963621485,
+          "slope_p95_deg": 30.84425960685709,
+          "rugosity_surface_ratio": 1.0464408104070935,
+          "planarity_rmse_over_relief": 0.08172771500852746,
+          "profile_curvature_rms": 0.0014756934161722652,
+          "plan_curvature_rms": 0.014230281419409838,
+          "radial_rotation_similarity": 0.2606123436569663,
+          "facet_aspect_entropy": 0.810427767680741,
+          "facet_dominant_bin_fraction": 0.24387855044074436,
+          "_integrity": {
+            "valid_fraction": 0.9938259695157244,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.13442377584295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.19763253338579076,
+              0.38657196419931733,
+              0.19763253338579076
+            ]
+          }
+        },
+        "C18": {
+          "local_relief_m": 801.814208984375,
+          "slope_median_deg": 10.076335131972971,
+          "slope_p95_deg": 31.70905424686666,
+          "rugosity_surface_ratio": 1.0447681947189238,
+          "planarity_rmse_over_relief": 0.0874138300339171,
+          "profile_curvature_rms": 0.0014033958825380654,
+          "plan_curvature_rms": 0.011579377607009595,
+          "radial_rotation_similarity": 0.13901570084499354,
+          "facet_aspect_entropy": 0.8584570740898163,
+          "facet_dominant_bin_fraction": 0.21513555685586114,
+          "_integrity": {
+            "valid_fraction": 0.9971059232104958,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.1264024674627,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.17176855420001882,
+              0.07350999413494305,
+              0.17176855420001874
+            ]
+          }
+        },
+        "C19": {
+          "local_relief_m": 645.789794921875,
+          "slope_median_deg": 9.64926924014014,
+          "slope_p95_deg": 28.870744017836873,
+          "rugosity_surface_ratio": 1.0349186110004682,
+          "planarity_rmse_over_relief": 0.0776183768114069,
+          "profile_curvature_rms": 0.0020052956582798215,
+          "plan_curvature_rms": 0.021605521978152128,
+          "radial_rotation_similarity": 0.18058777083471156,
+          "facet_aspect_entropy": 0.9048170154272537,
+          "facet_dominant_bin_fraction": 0.165625,
+          "_integrity": {
+            "valid_fraction": 0.9967200463052286,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.10471678857084,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.20236566601362743,
+              0.13703198047687973,
+              0.2023656660136275
+            ]
+          }
+        },
+        "C20": {
+          "local_relief_m": 723.8763427734375,
+          "slope_median_deg": 9.084404936525324,
+          "slope_p95_deg": 29.81539130444687,
+          "rugosity_surface_ratio": 1.03501601401553,
+          "planarity_rmse_over_relief": 0.08088010320602025,
+          "profile_curvature_rms": 0.0018467205937882896,
+          "plan_curvature_rms": 0.026168461851346306,
+          "radial_rotation_similarity": -0.20521180068403697,
+          "facet_aspect_entropy": 0.8989435533588891,
+          "facet_dominant_bin_fraction": 0.18869035931670922,
+          "_integrity": {
+            "valid_fraction": 0.9953694771367934,
+            "rows": 71,
+            "cols": 73,
+            "dx_m": 55.10471678857084,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              -0.2926026927762011,
+              -0.030430016499708612,
+              -0.2926026927762012
+            ]
+          }
+        }
+      },
+      "per_metric_comparison": {
+        "local_relief_m": {
+          "target": 755.3570556640625,
+          "control_median": 867.3656005859375,
+          "control_MAD": 124.95965576171875,
+          "target_abs_robust_z": 0.6045849604154245,
+          "empirical_extremeness_rank_nplus1": 11,
+          "control_n": 20
+        },
+        "slope_median_deg": {
+          "target": 8.29321584898317,
+          "control_median": 10.77203717928221,
+          "control_MAD": 1.235718634545715,
+          "target_abs_robust_z": 1.3530119518630035,
+          "empirical_extremeness_rank_nplus1": 6,
+          "control_n": 20
+        },
+        "slope_p95_deg": {
+          "target": 27.691853386934678,
+          "control_median": 31.04303117619971,
+          "control_MAD": 1.3047187676230685,
+          "target_abs_robust_z": 1.7324334625310445,
+          "empirical_extremeness_rank_nplus1": 2,
+          "control_n": 20
+        },
+        "rugosity_surface_ratio": {
+          "target": 1.029501527815169,
+          "control_median": 1.0456045025630085,
+          "control_MAD": 0.007451213546102675,
+          "target_abs_robust_z": 1.4576562059724802,
+          "empirical_extremeness_rank_nplus1": 4,
+          "control_n": 20
+        },
+        "planarity_rmse_over_relief": {
+          "target": 0.07758854823295709,
+          "control_median": 0.0779795756256943,
+          "control_MAD": 0.00647250484401693,
+          "target_abs_robust_z": 0.04074842266781332,
+          "empirical_extremeness_rank_nplus1": 19,
+          "control_n": 20
+        },
+        "profile_curvature_rms": {
+          "target": 0.0012613169936890132,
+          "control_median": 0.0015499998711168564,
+          "control_MAD": 0.00016396813463895354,
+          "target_abs_robust_z": 1.187510815274818,
+          "empirical_extremeness_rank_nplus1": 7,
+          "control_n": 20
+        },
+        "plan_curvature_rms": {
+          "target": 0.014051908057215476,
+          "control_median": 0.014431663401358588,
+          "control_MAD": 0.0025336573648842356,
+          "target_abs_robust_z": 0.10109554434487904,
+          "empirical_extremeness_rank_nplus1": 19,
+          "control_n": 20
+        },
+        "radial_rotation_similarity": {
+          "target": 0.39495323735806753,
+          "control_median": -0.072459144912311,
+          "control_MAD": 0.12403853191839437,
+          "target_abs_robust_z": 2.54167255795745,
+          "empirical_extremeness_rank_nplus1": 3,
+          "control_n": 20
+        },
+        "facet_aspect_entropy": {
+          "target": 0.7753956317341887,
+          "control_median": 0.8526814191720242,
+          "control_MAD": 0.045685244698141,
+          "target_abs_robust_z": 1.1410368886086666,
+          "empirical_extremeness_rank_nplus1": 4,
+          "control_n": 20
+        },
+        "facet_dominant_bin_fraction": {
+          "target": 0.26508120649651973,
+          "control_median": 0.2209738579290997,
+          "control_MAD": 0.019097704180778413,
+          "target_abs_robust_z": 1.5577788173973823,
+          "empirical_extremeness_rank_nplus1": 6,
+          "control_n": 20
+        }
+      },
+      "aggregate": {
+        "target_median_abs_robust_z": 1.2702613835689107,
+        "control_leave_one_out_scores": [
+          1.7398048728795343,
+          0.4261992721173866,
+          0.4913551715503667,
+          1.118449560434529,
+          0.9404879697813302,
+          0.9985204010604386,
+          0.748287500096749,
+          1.0326062832220444,
+          0.3520685326256836,
+          0.7768473160390386,
+          1.8050130408753857,
+          0.7264876495774266,
+          0.5774231737649853,
+          0.3199992145308564,
+          0.9116298706828949,
+          0.4919791727209688,
+          0.3730205313278818,
+          0.47726598846378654,
+          1.286601895503268,
+          0.9671886443884337
+        ],
+        "empirical_p": 0.19047619047619047,
+        "target_rank_high_to_low": 4,
+        "n_controls": 20
+      }
+    },
+    "1": {
+      "radius_km": 1,
+      "target_metrics": {
+        "local_relief_m": 275.6787109375,
+        "slope_median_deg": 5.30410201185339,
+        "slope_p95_deg": 16.579405837365382,
+        "rugosity_surface_ratio": 1.0108174213110253,
+        "planarity_rmse_over_relief": 0.06155542500801995,
+        "profile_curvature_rms": 0.0010610718119627228,
+        "plan_curvature_rms": 0.0177915716174772,
+        "radial_rotation_similarity": 0.25016486845930475,
+        "facet_aspect_entropy": 0.7976615922608438,
+        "facet_dominant_bin_fraction": 0.2623456790123457,
+        "_integrity": {
+          "valid_fraction": 1.0,
+          "rows": 36,
+          "cols": 36,
+          "dx_m": 55.13898570997833,
+          "dy_m": 55.65999999996916,
+          "rotation_components": [
+            0.1860519620654769,
+            0.37839068124696046,
+            0.1860519620654769
+          ]
+        }
+      },
+      "control_metrics": {
+        "C01": {
+          "local_relief_m": 412.594970703125,
+          "slope_median_deg": 9.227163430154432,
+          "slope_p95_deg": 22.448589582501906,
+          "rugosity_surface_ratio": 1.0227229231528034,
+          "planarity_rmse_over_relief": 0.050953999227631976,
+          "profile_curvature_rms": 0.0011439904068093053,
+          "plan_curvature_rms": 0.01564529530650108,
+          "radial_rotation_similarity": 0.09793494037082733,
+          "facet_aspect_entropy": 0.6544133182295844,
+          "facet_dominant_bin_fraction": 0.32323232323232326,
+          "_integrity": {
+            "valid_fraction": 0.9969111969111969,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.14238462256742,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.25591870329017075,
+              -0.21803258546785956,
+              0.2559187032901708
+            ]
+          }
+        },
+        "C02": {
+          "local_relief_m": 409.25390625,
+          "slope_median_deg": 10.810800104046264,
+          "slope_p95_deg": 30.958291549348978,
+          "rugosity_surface_ratio": 1.0413737126852447,
+          "planarity_rmse_over_relief": 0.09052731919979036,
+          "profile_curvature_rms": 0.001691502779600277,
+          "plan_curvature_rms": 0.013989722013799223,
+          "radial_rotation_similarity": -0.19404690986147624,
+          "facet_aspect_entropy": 0.8259055720521128,
+          "facet_dominant_bin_fraction": 0.23706563706563707,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.139737725494626,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.17704100397070832,
+              -0.22805872164301222,
+              -0.17704100397070827
+            ]
+          }
+        },
+        "C03": {
+          "local_relief_m": 302.755126953125,
+          "slope_median_deg": 8.927700272772853,
+          "slope_p95_deg": 16.95036111400736,
+          "rugosity_surface_ratio": 1.0169677791378775,
+          "planarity_rmse_over_relief": 0.07014591458988846,
+          "profile_curvature_rms": 0.0010339683539394436,
+          "plan_curvature_rms": 0.010516204344062084,
+          "radial_rotation_similarity": 0.38717734407793164,
+          "facet_aspect_entropy": 0.7993832145889338,
+          "facet_dominant_bin_fraction": 0.21698841698841698,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.12908295434295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.4008939270731977,
+              0.3597441780873998,
+              0.40089392707319754
+            ]
+          }
+        },
+        "C04": {
+          "local_relief_m": 650.9552001953125,
+          "slope_median_deg": 14.66056307142817,
+          "slope_p95_deg": 34.58650050373299,
+          "rugosity_surface_ratio": 1.062141525805201,
+          "planarity_rmse_over_relief": 0.07186314357430862,
+          "profile_curvature_rms": 0.0014200540488270117,
+          "plan_curvature_rms": 0.011555346781401021,
+          "radial_rotation_similarity": -0.036693898488822284,
+          "facet_aspect_entropy": 0.7162683731144558,
+          "facet_dominant_bin_fraction": 0.3309466984884646,
+          "_integrity": {
+            "valid_fraction": 0.9915057915057915,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.11289928484871,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              -0.02476365548933832,
+              -0.06055438448779017,
+              -0.024763655489338354
+            ]
+          }
+        },
+        "C05": {
+          "local_relief_m": 483.427734375,
+          "slope_median_deg": 11.345525971630508,
+          "slope_p95_deg": 27.017156330560223,
+          "rugosity_surface_ratio": 1.0345840325913074,
+          "planarity_rmse_over_relief": 0.07077689076499884,
+          "profile_curvature_rms": 0.0011470163581300678,
+          "plan_curvature_rms": 0.008973912373905005,
+          "radial_rotation_similarity": 0.1765801223298342,
+          "facet_aspect_entropy": 0.6836962494302367,
+          "facet_dominant_bin_fraction": 0.3159126365054602,
+          "_integrity": {
+            "valid_fraction": 0.9969111969111969,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.14238462256742,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.06233632566108706,
+              0.6544130183116764,
+              -0.062336325661086794
+            ]
+          }
+        },
+        "C06": {
+          "local_relief_m": 589.81494140625,
+          "slope_median_deg": 12.209941342367838,
+          "slope_p95_deg": 28.814484530278285,
+          "rugosity_surface_ratio": 1.0443368011466097,
+          "planarity_rmse_over_relief": 0.07868685049861204,
+          "profile_curvature_rms": 0.0013157131797492054,
+          "plan_curvature_rms": 0.010316518336261618,
+          "radial_rotation_similarity": -0.24089838543875094,
+          "facet_aspect_entropy": 0.7849266008616925,
+          "facet_dominant_bin_fraction": 0.23166023166023167,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.13175672391162,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.5359168799553148,
+              0.349138603594377,
+              -0.535916879955315
+            ]
+          }
+        },
+        "C07": {
+          "local_relief_m": 754.6917724609375,
+          "slope_median_deg": 17.95470426167354,
+          "slope_p95_deg": 34.62041562981232,
+          "rugosity_surface_ratio": 1.0740543937162563,
+          "planarity_rmse_over_relief": 0.075527816386946,
+          "profile_curvature_rms": 0.001437585317561024,
+          "plan_curvature_rms": 0.009105608881423895,
+          "radial_rotation_similarity": -0.12628573507372945,
+          "facet_aspect_entropy": 0.7661101156066223,
+          "facet_dominant_bin_fraction": 0.24197337509788566,
+          "_integrity": {
+            "valid_fraction": 0.9953667953667954,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.12908295434295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.3359667839830825,
+              0.2930763627449766,
+              -0.33596678398308244
+            ]
+          }
+        },
+        "C08": {
+          "local_relief_m": 282.0992431640625,
+          "slope_median_deg": 8.47706957104766,
+          "slope_p95_deg": 20.944947002467647,
+          "rugosity_surface_ratio": 1.0206049049124102,
+          "planarity_rmse_over_relief": 0.09823984765234181,
+          "profile_curvature_rms": 0.0014982096927057033,
+          "plan_curvature_rms": 0.021628394227199043,
+          "radial_rotation_similarity": -0.004519210979934292,
+          "facet_aspect_entropy": 0.8807620165683314,
+          "facet_dominant_bin_fraction": 0.1722007722007722,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.107451002116704,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              -0.0825167615680334,
+              0.15147589019626406,
+              -0.08251676156803353
+            ]
+          }
+        },
+        "C09": {
+          "local_relief_m": 416.7923583984375,
+          "slope_median_deg": 11.299913211493585,
+          "slope_p95_deg": 19.943047393133256,
+          "rugosity_surface_ratio": 1.0272700439774862,
+          "planarity_rmse_over_relief": 0.08174698517898417,
+          "profile_curvature_rms": 0.0011510653590074253,
+          "plan_curvature_rms": 0.014835200603057172,
+          "radial_rotation_similarity": -0.10520361361544019,
+          "facet_aspect_entropy": 0.7387645461122352,
+          "facet_dominant_bin_fraction": 0.3328185328185328,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.1397377254946,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.4324720333462927,
+              0.5493332258462648,
+              -0.43247203334629264
+            ]
+          }
+        },
+        "C10": {
+          "local_relief_m": 323.8563232421875,
+          "slope_median_deg": 8.859195338498164,
+          "slope_p95_deg": 23.16412859215577,
+          "rugosity_surface_ratio": 1.0260567448998534,
+          "planarity_rmse_over_relief": 0.08052520529643084,
+          "profile_curvature_rms": 0.0016220905352379762,
+          "plan_curvature_rms": 0.022841172915563625,
+          "radial_rotation_similarity": 0.1715913885580612,
+          "facet_aspect_entropy": 0.9029476754160629,
+          "facet_dominant_bin_fraction": 0.19519752130131682,
+          "_integrity": {
+            "valid_fraction": 0.9992277992277993,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.1047167885709,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.30344076742526593,
+              -0.09210736917634865,
+              0.30344076742526627
+            ]
+          }
+        },
+        "C11": {
+          "local_relief_m": 563.5103759765625,
+          "slope_median_deg": 15.208905351900698,
+          "slope_p95_deg": 32.48459748878278,
+          "rugosity_surface_ratio": 1.058800655583318,
+          "planarity_rmse_over_relief": 0.0687474655741283,
+          "profile_curvature_rms": 0.0011512655770755166,
+          "plan_curvature_rms": 0.005803600584478584,
+          "radial_rotation_similarity": -0.1606615130423626,
+          "facet_aspect_entropy": 0.623477741651112,
+          "facet_dominant_bin_fraction": 0.3199070487993803,
+          "_integrity": {
+            "valid_fraction": 0.9992277992277993,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.11561335337109,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              -0.35372561326597923,
+              0.22546668740487086,
+              -0.3537256132659794
+            ]
+          }
+        },
+        "C12": {
+          "local_relief_m": 652.8746337890625,
+          "slope_median_deg": 19.47890371506964,
+          "slope_p95_deg": 33.74073942090432,
+          "rugosity_surface_ratio": 1.075127308013393,
+          "planarity_rmse_over_relief": 0.1405895343266736,
+          "profile_curvature_rms": 0.0017251481747277515,
+          "plan_curvature_rms": 0.013720439623867778,
+          "radial_rotation_similarity": -0.30039696929802046,
+          "facet_aspect_entropy": 0.9308221582036537,
+          "facet_dominant_bin_fraction": 0.18354430379746836,
+          "_integrity": {
+            "valid_fraction": 0.993050193050193,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.12371526359762,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.5158336169575419,
+              0.13047632602102296,
+              -0.5158336169575425
+            ]
+          }
+        },
+        "C13": {
+          "local_relief_m": 506.3409423828125,
+          "slope_median_deg": 9.086883901625313,
+          "slope_p95_deg": 26.989767619393117,
+          "rugosity_surface_ratio": 1.0286298069882414,
+          "planarity_rmse_over_relief": 0.08237312059070015,
+          "profile_curvature_rms": 0.0008950962381316672,
+          "plan_curvature_rms": 0.010363222942341271,
+          "radial_rotation_similarity": 0.05710203476026079,
+          "facet_aspect_entropy": 0.7586725961575731,
+          "facet_dominant_bin_fraction": 0.2725868725868726,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.13442377584296,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.2743317983251951,
+              0.7199697009311725,
+              -0.27433179832519505
+            ]
+          }
+        },
+        "C14": {
+          "local_relief_m": 313.3603515625,
+          "slope_median_deg": 14.144590915386246,
+          "slope_p95_deg": 31.38047445221391,
+          "rugosity_surface_ratio": 1.0510033498286535,
+          "planarity_rmse_over_relief": 0.16002844448563988,
+          "profile_curvature_rms": 0.002306982958311345,
+          "plan_curvature_rms": 0.020450878772620133,
+          "radial_rotation_similarity": -0.05527955906032487,
+          "facet_aspect_entropy": 0.9587868135824004,
+          "facet_dominant_bin_fraction": 0.15879163439194424,
+          "_integrity": {
+            "valid_fraction": 0.9992277992277993,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.13708410981201,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.3586529095804154,
+              0.551467141979856,
+              -0.35865290958041524
+            ]
+          }
+        },
+        "C15": {
+          "local_relief_m": 558.1129150390625,
+          "slope_median_deg": 9.030493628138977,
+          "slope_p95_deg": 26.536577002942703,
+          "rugosity_surface_ratio": 1.0290333793994788,
+          "planarity_rmse_over_relief": 0.05121805018463936,
+          "profile_curvature_rms": 0.001303113399706464,
+          "plan_curvature_rms": 0.013220192980741043,
+          "radial_rotation_similarity": 0.033229280484551406,
+          "facet_aspect_entropy": 0.7555720320816425,
+          "facet_dominant_bin_fraction": 0.2687838884585593,
+          "_integrity": {
+            "valid_fraction": 0.9992277992277993,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.14238462256742,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.07341633225356602,
+              0.2465205059607864,
+              -0.07341633225356614
+            ]
+          }
+        },
+        "C16": {
+          "local_relief_m": 454.4844970703125,
+          "slope_median_deg": 15.430999961595147,
+          "slope_p95_deg": 34.362054958592864,
+          "rugosity_surface_ratio": 1.0681184476550736,
+          "planarity_rmse_over_relief": 0.15072024251625227,
+          "profile_curvature_rms": 0.002311251051533178,
+          "plan_curvature_rms": 0.015870294419402443,
+          "radial_rotation_similarity": -0.25967908232249043,
+          "facet_aspect_entropy": 0.9373732315974349,
+          "facet_dominant_bin_fraction": 0.17683397683397684,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.145024800707915,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.419198895053747,
+              0.059360543140022995,
+              -0.4191988950537473
+            ]
+          }
+        },
+        "C17": {
+          "local_relief_m": 475.9276123046875,
+          "slope_median_deg": 11.817677080596356,
+          "slope_p95_deg": 25.992442688161777,
+          "rugosity_surface_ratio": 1.034108547334693,
+          "planarity_rmse_over_relief": 0.06854303330871486,
+          "profile_curvature_rms": 0.0013058191549665018,
+          "plan_curvature_rms": 0.010089694397355553,
+          "radial_rotation_similarity": 0.2214964893724302,
+          "facet_aspect_entropy": 0.7554181774969552,
+          "facet_dominant_bin_fraction": 0.31529411764705884,
+          "_integrity": {
+            "valid_fraction": 0.993050193050193,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.13442377584295,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              0.03609691596527587,
+              0.5922956361867387,
+              0.03609691596527603
+            ]
+          }
+        },
+        "C18": {
+          "local_relief_m": 545.2557373046875,
+          "slope_median_deg": 13.324668355798938,
+          "slope_p95_deg": 32.11260555240871,
+          "rugosity_surface_ratio": 1.0575705399454955,
+          "planarity_rmse_over_relief": 0.11020191516924377,
+          "profile_curvature_rms": 0.0014351080198949408,
+          "plan_curvature_rms": 0.011276080861662891,
+          "radial_rotation_similarity": -0.08461346858116552,
+          "facet_aspect_entropy": 0.8929804761372891,
+          "facet_dominant_bin_fraction": 0.15907335907335907,
+          "_integrity": {
+            "valid_fraction": 1.0,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.12640246746275,
+            "dy_m": 55.65999999996916,
+            "rotation_components": [
+              -0.2746212105031331,
+              0.2954020152627695,
+              -0.27462121050313293
+            ]
+          }
+        },
+        "C19": {
+          "local_relief_m": 362.33056640625,
+          "slope_median_deg": 9.304237542031357,
+          "slope_p95_deg": 28.19901165799784,
+          "rugosity_surface_ratio": 1.0420792204473548,
+          "planarity_rmse_over_relief": 0.08915751416243077,
+          "profile_curvature_rms": 0.0023014292200724804,
+          "plan_curvature_rms": 0.02240533003385708,
+          "radial_rotation_similarity": 0.43542735951321987,
+          "facet_aspect_entropy": 0.8831415278058082,
+          "facet_dominant_bin_fraction": 0.1864801864801865,
+          "_integrity": {
+            "valid_fraction": 0.9984555984555985,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.1047167885709,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              0.3557728608392559,
+              0.5947363568611478,
+              0.35577286083925597
+            ]
+          }
+        },
+        "C20": {
+          "local_relief_m": 292.21337890625,
+          "slope_median_deg": 8.310846210533787,
+          "slope_p95_deg": 20.647842689235283,
+          "rugosity_surface_ratio": 1.0194839779995533,
+          "planarity_rmse_over_relief": 0.12213129786326633,
+          "profile_curvature_rms": 0.0014122874307407073,
+          "plan_curvature_rms": 0.018897009984976818,
+          "radial_rotation_similarity": -0.2608454337762471,
+          "facet_aspect_entropy": 0.9313365193410029,
+          "facet_dominant_bin_fraction": 0.16653574234092694,
+          "_integrity": {
+            "valid_fraction": 0.9953667953667954,
+            "rows": 35,
+            "cols": 37,
+            "dx_m": 55.1047167885709,
+            "dy_m": 55.66000000006801,
+            "rotation_components": [
+              -0.6393968161246509,
+              0.4962573309205607,
+              -0.639396816124651
+            ]
+          }
+        }
+      },
+      "per_metric_comparison": {
+        "local_relief_m": {
+          "target": 275.6787109375,
+          "control_median": 465.2060546875,
+          "control_MAD": 100.58990478515625,
+          "target_abs_robust_z": 1.2708476292979192,
+          "empirical_extremeness_rank_nplus1": 2,
+          "control_n": 20
+        },
+        "slope_median_deg": {
+          "target": 5.30410201185339,
+          "control_median": 11.322719591562047,
+          "control_MAD": 2.3436226411061316,
+          "target_abs_robust_z": 1.7321482866460511,
+          "empirical_extremeness_rank_nplus1": 3,
+          "control_n": 20
+        },
+        "slope_p95_deg": {
+          "target": 16.579405837365382,
+          "control_median": 27.60808399427903,
+          "control_MAD": 4.6905175263167145,
+          "target_abs_robust_z": 1.5859106088706987,
+          "empirical_extremeness_rank_nplus1": 1,
+          "control_n": 20
+        },
+        "rugosity_surface_ratio": {
+          "target": 1.0108174213110253,
+          "control_median": 1.0379788726382762,
+          "control_MAD": 0.014140213337925034,
+          "target_abs_robust_z": 1.295606190400828,
+          "empirical_extremeness_rank_nplus1": 4,
+          "control_n": 20
+        },
+        "planarity_rmse_over_relief": {
+          "target": 0.06155542500801995,
+          "control_median": 0.08113609523770751,
+          "control_MAD": 0.011689405155699134,
+          "target_abs_robust_z": 1.129824910538215,
+          "empirical_extremeness_rank_nplus1": 8,
+          "control_n": 20
+        },
+        "profile_curvature_rms": {
+          "target": 0.0010610718119627228,
+          "control_median": 0.0014161707397838596,
+          "control_MAD": 0.0002650052717423887,
+          "target_abs_robust_z": 0.9037969091733072,
+          "empirical_extremeness_rank_nplus1": 6,
+          "control_n": 20
+        },
+        "plan_curvature_rms": {
+          "target": 0.0177915716174772,
+          "control_median": 0.01347031630230441,
+          "control_MAD": 0.003130445663002966,
+          "target_abs_robust_z": 0.9310644851210144,
+          "empirical_extremeness_rank_nplus1": 9,
+          "control_n": 20
+        },
+        "radial_rotation_similarity": {
+          "target": 0.25016486845930475,
+          "control_median": -0.045986728774573576,
+          "control_MAD": 0.14599092511615178,
+          "target_abs_robust_z": 1.3682461124180223,
+          "empirical_extremeness_rank_nplus1": 3,
+          "control_n": 20
+        },
+        "facet_aspect_entropy": {
+          "target": 0.7976615922608438,
+          "control_median": 0.7921549077253132,
+          "control_MAD": 0.08979686446175666,
+          "target_abs_robust_z": 0.04136233327111207,
+          "empirical_extremeness_rank_nplus1": 21,
+          "control_n": 20
+        },
+        "facet_dominant_bin_fraction": {
+          "target": 0.2623456790123457,
+          "control_median": 0.23436293436293437,
+          "control_MAD": 0.05984555984555985,
+          "target_abs_robust_z": 0.3153801675433971,
+          "empirical_extremeness_rank_nplus1": 17,
+          "control_n": 20
+        }
+      },
+      "aggregate": {
+        "target_median_abs_robust_z": 1.200336269918067,
+        "control_leave_one_out_scores": [
+          0.7830048697234505,
+          0.36174051034350185,
+          0.8366366082555494,
+          0.8340613273143491,
+          0.6271730018640271,
+          0.2601917233725848,
+          0.6555944399128871,
+          0.8751488619088177,
+          0.4316496604079275,
+          0.7584092707874852,
+          0.9464198626533089,
+          1.1590425318326343,
+          0.4794966900085299,
+          1.0786633981049019,
+          0.4053796288996966,
+          1.1007685353877563,
+          0.3282943508755352,
+          0.6639882092281846,
+          0.6303437567874576,
+          1.076717172544587
+        ],
+        "empirical_p": 0.047619047619047616,
+        "target_rank_high_to_low": 1,
+        "n_controls": 20
+      }
+    }
+  },
+  "context_only_5km_10km": "NOT_SCORED_BY_COUNCIL_RULE",
+  "pyramidality_score_computed": false,
+  "crater_score_computed": false,
+  "cosmos_or_symbolic_weight_used": false,
+  "target_identity": "UNCONFIRMED",
+  "next_rule": "FREEZE_RESULT_AND_ASK_JANUS_AGAIN_WHETHER_ANY_PHYSICAL_ANOMALY_GATE_ADVANCES_OR_REMAINS_NEGATIVE",
+  "sha256": "5b8661a5b2b982d14917f836ca1af8d805eca28bd9f73f5282d2fe2d0e3da90f"
+}
