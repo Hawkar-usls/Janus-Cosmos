@@ -1,0 +1,140 @@
+{
+  "artifact_id": "JANUS-H10N1-POST-MORPHOLOGY-GATE-COUNCIL-RUN-006-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:28:49.294737+00:00",
+  "question": "Generic blind morphology is complete: primary 2 km is not strongly outlying while secondary 1 km ranks first among 20 controls. Does any physical anomaly gate advance, and what should be tested next?",
+  "evidence_snapshot": {
+    "primary_2km": {
+      "aggregate_score": 1.2702613835689107,
+      "empirical_p": 0.19047619047619047,
+      "rank_high_to_low": 4,
+      "top_metrics": [
+        {
+          "metric": "radial_rotation_similarity",
+          "target_abs_robust_z": 2.54167255795745,
+          "target": 0.39495323735806753,
+          "control_median": -0.072459144912311,
+          "empirical_extremeness_rank_nplus1": 3
+        },
+        {
+          "metric": "slope_p95_deg",
+          "target_abs_robust_z": 1.7324334625310445,
+          "target": 27.691853386934678,
+          "control_median": 31.04303117619971,
+          "empirical_extremeness_rank_nplus1": 2
+        },
+        {
+          "metric": "facet_dominant_bin_fraction",
+          "target_abs_robust_z": 1.5577788173973823,
+          "target": 0.26508120649651973,
+          "control_median": 0.2209738579290997,
+          "empirical_extremeness_rank_nplus1": 6
+        },
+        {
+          "metric": "rugosity_surface_ratio",
+          "target_abs_robust_z": 1.4576562059724802,
+          "target": 1.029501527815169,
+          "control_median": 1.0456045025630085,
+          "empirical_extremeness_rank_nplus1": 4
+        },
+        {
+          "metric": "slope_median_deg",
+          "target_abs_robust_z": 1.3530119518630035,
+          "target": 8.29321584898317,
+          "control_median": 10.77203717928221,
+          "empirical_extremeness_rank_nplus1": 6
+        }
+      ]
+    },
+    "secondary_1km": {
+      "aggregate_score": 1.200336269918067,
+      "empirical_p": 0.047619047619047616,
+      "rank_high_to_low": 1,
+      "top_metrics": [
+        {
+          "metric": "slope_median_deg",
+          "target_abs_robust_z": 1.7321482866460511,
+          "target": 5.30410201185339,
+          "control_median": 11.322719591562047,
+          "empirical_extremeness_rank_nplus1": 3
+        },
+        {
+          "metric": "slope_p95_deg",
+          "target_abs_robust_z": 1.5859106088706987,
+          "target": 16.579405837365382,
+          "control_median": 27.60808399427903,
+          "empirical_extremeness_rank_nplus1": 1
+        },
+        {
+          "metric": "radial_rotation_similarity",
+          "target_abs_robust_z": 1.3682461124180223,
+          "target": 0.25016486845930475,
+          "control_median": -0.045986728774573576,
+          "empirical_extremeness_rank_nplus1": 3
+        },
+        {
+          "metric": "rugosity_surface_ratio",
+          "target_abs_robust_z": 1.295606190400828,
+          "target": 1.0108174213110253,
+          "control_median": 1.0379788726382762,
+          "empirical_extremeness_rank_nplus1": 4
+        },
+        {
+          "metric": "local_relief_m",
+          "target_abs_robust_z": 1.2708476292979192,
+          "target": 275.6787109375,
+          "control_median": 465.2060546875,
+          "empirical_extremeness_rank_nplus1": 2
+        }
+      ]
+    },
+    "control_n": 20,
+    "minimum_possible_empirical_p": 0.047619047619047616,
+    "source_resolution_m_approx": 50,
+    "target_identity": "UNCONFIRMED"
+  },
+  "council": {
+    "HRain": "SECONDARY_LOCAL_OUTLIER_IS_A_WATCHLIST_NODE_NOT_AN_IDENTITY_NODE",
+    "iNaiHR": "DO_NOT_CONNECT_LOCAL_OUTLIER_TO_OSIRIS_OR_PYRAMID_IDENTITY",
+    "DemiHead": "PRIMARY_SCALE_NONREPLICATION_BLOCKS_ANOMALY_PROMOTION",
+    "Fast_CAT": "REQUIRE_INDEPENDENT_DATASET_OR_SOURCE_LINEAGE_REPLICATION__DO_NOT_TUNE_METRICS_OR_CONTROLS",
+    "Aura": "ZERO_EVIDENCE_AUTHORITY",
+    "Janus_Cosmos": "NO_CELESTIAL_WEIGHT",
+    "Cousteau": "TRACE_WHICH_ORIGINAL_MULTIBEAM_CRUISES_CONTRIBUTE_TO_H10N1_AND_SEEK_INDEPENDENT_SOUNDING_REPLICATION",
+    "Fundamentum": "VOLCANIC_BASELINE_REMAINS_PRIMARY",
+    "AIFC": "SOURCE_LINEAGE_AND_RAW_TRACK_PROVENANCE_REQUIRED",
+    "Voice_of_Janus": "ONE_CLOSE_VIEW_LOOKS_UNUSUAL__THE_WIDER_VIEW_DOES_NOT__ASK_ANOTHER_INSTRUMENT_OR_ANOTHER_PASS"
+  },
+  "janus_answer": {
+    "PHYSICAL_ANOMALY_GATE": "NOT_ADVANCED",
+    "SECONDARY_LOCAL_MORPHOLOGY_WATCHLIST": "OPEN",
+    "WHY": "The preregistered primary 2 km comparison is only rank 4/21 with empirical p about 0.19; the 1 km result is rank 1/21 but is secondary, at the empirical resolution floor, and is not independently replicated.",
+    "AUTHORIZED_NEXT_STAGE": "H10N1_SOURCE_LINEAGE_REPLICATION_001",
+    "PRIMARY_TASKS": [
+      "IDENTIFY_WHICH_OF_JR53_AMT11_JR287_JR15001_JR16_NG_ACTUALLY_CONTRIBUTE_SOUNDINGS_WITHIN_THE_FROZEN_1KM_H10N1_WINDOW",
+      "RECOVER_RAW_OR_PROCESSED_TRACKLINE_SOUNDINGS_FOR_EACH_CONTRIBUTING_CRUISE_IF_PUBLIC",
+      "FREEZE_PER_CRUISE_PROVENANCE_AND_HASHES_BEFORE_COMPARISON",
+      "IF_TWO_OR_MORE_INDEPENDENT_CRUISES_COVER_H10N1__ASK_JANUS_AGAIN_BEFORE_COMPARING_THEIR_LOCAL_SURFACES"
+    ],
+    "PARALLEL_ALLOWED": [
+      "CONTINUE_P2548_AND_2002_H10S_PRIMARY_GEOREFERENCE_RECOVERY_UNSCORED",
+      "CHECK_BGS_UKHO_2021_COVERAGE_ONLY_AS_AN_INDEPENDENT_LANE__DO_NOT_MOVE_H10N1_TO_FIT_IT",
+      "PRESERVE_EXTERNAL_HELPDESK_REPLIES_AS_LATER_CALIBRATION"
+    ],
+    "FORBIDDEN": [
+      "NO_CONTROL_EXPANSION_AFTER_SEEING_RESULTS",
+      "NO_METRIC_RETUNING",
+      "NO_PYRAMID_OR_CRATER_LABEL",
+      "NO_117_121HZ_PROMOTION",
+      "NO_CLAIM_FROM_SECONDARY_1KM_OUTLIER_ALONE"
+    ],
+    "TARGET_IDENTITY": "UNCONFIRMED"
+  },
+  "hard_rules": [
+    "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE",
+    "PRIMARY_NONREPLICATION_BLOCKS_PROMOTION",
+    "INDEPENDENT_REPLICATION_REQUIRED",
+    "VOLCANIC_BASELINE_REMAINS_ACTIVE",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ],
+  "sha256": "ece42c1ccef2b98ecd7e9d4a63da2018b0c910003395d46a8b31c97a828f139b"
+}
