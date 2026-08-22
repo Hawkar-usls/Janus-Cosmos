@@ -1,0 +1,82 @@
+{
+  "artifact_id": "GOLDMEMBER-2026-08-22-v1.0",
+  "title": "GOLDMEMBER",
+  "created_utc": "2026-08-22T12:00:00Z",
+  "purpose": "Continuation of the HA10/Ascension seafloor reconstruction under JANUS fail-closed, falsification-first protocol.",
+  "protocol": {
+    "rule": "JANUS_COUNCIL_BEFORE_EACH_NEW_PHYSICAL_OR_ARCHIVE_STAGE",
+    "confirmation_seeking": false,
+    "no_posthoc_retargeting": true,
+    "volcanic_baseline_active": true,
+    "negative_results_persist": true,
+    "target_identity": "UNCONFIRMED",
+    "no_underwater_pyramid_detected": true
+  },
+  "h10n1": {
+    "frozen_coordinate": {"lat": -7.845673, "lon": -14.480230},
+    "authoritative_dataset": "GB/NERC/BAS/PDC/01236",
+    "native_grid_resolution_deg": 0.0005,
+    "nearest_cell": {"lat": -7.8455, "lon": -14.48, "topography_m": -1927.934326171875},
+    "primary_2km": {"empirical_p": 0.19047619047619047, "rank_high_to_low": 4, "n_total": 21},
+    "secondary_1km": {"empirical_p": 0.047619047619047616, "rank_high_to_low": 1, "n_total": 21},
+    "physical_anomaly_gate": "NOT_ADVANCED",
+    "secondary_local_morphology_watchlist": "OPEN",
+    "next_replication_requirement": "INDEPENDENT_SOURCE_LINEAGE"
+  },
+  "jr15001": {
+    "bodc_series": "1762365",
+    "originator_identifier": "JR15001_PRODQXF_NAV",
+    "originator_multibeam_file": "em122.ACO",
+    "originator_multibeam_channel": "MBANSWCB",
+    "anonymous_recovery": {
+      "series_page_accessible": true,
+      "odv_download_declared": true,
+      "odv_download_redirects_to_login": true,
+      "machine_readable_navigation_recovered": false,
+      "clean_archive_access_negative_receipt": true,
+      "contributor_status": "NOT_CONFIRMED"
+    },
+    "custodian_action": {
+      "authorized_by": "GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0",
+      "recipient": "enquiries@bodc.ac.uk",
+      "gmail_message_id": "1a02954766c58cc0",
+      "request": "navigation + EM122 provenance/footprint for Ascension interval 2015-10-14 to 2015-10-18",
+      "status": "SENT_WAITING_RESPONSE"
+    }
+  },
+  "h10s_southern_seamount": {
+    "p2548": {"recovered": false},
+    "wishbone_georeferenced": false,
+    "central_crags_georeferenced": false,
+    "ada508765": {
+      "title": "Geomorphology of Two Seamounts Offshore Ascension Island, South Atlantic Ocean",
+      "dtic_id": "AD-A508765",
+      "primary_color_copy_recovered": false,
+      "access_status": "FAILED_PUBLIC_PRIMARY_ACCESS"
+    },
+    "ada508764": {
+      "title": "High-Resolution Multibeam Deepwater Cable Route Survey in High-Relief Seafloor Area",
+      "dtic_id": "AD-A508764",
+      "doi": "10.1109/OCEANS.2003.178517",
+      "pages": 10,
+      "catalog_note": "Original contains color illustrations",
+      "survey_sensors": ["multibeam", "backscatter", "sidescan", "sub-bottom"],
+      "priority": "PRIMARY_SURVEY_DOCUMENT_FIRST",
+      "recovery_authorized_by": "GOLDMEMBER-ADA508764-PRIORITY-COUNCIL-RUN-003-2026-08-22-v1.0",
+      "recovery_status": "RUNNING_OR_PENDING_RECEIPT",
+      "quantitative_use_authorized": false
+    }
+  },
+  "external_calibration": {
+    "earthscope": {"ticket": "DH-2635", "status": "WAITING_HUMAN_RESPONSE"},
+    "bas_pdc": {"ticket": "3872", "status": "WAITING_HUMAN_RESPONSE"},
+    "bgs_offshore": {"status": "FORWARDED_TO_SPECIALIST"},
+    "ascension_government": {"status": "NO_REPLY_SEEN_YET"}
+  },
+  "council_chain": [
+    "GOLDMEMBER-COUNCIL-RUN-001-2026-08-22-v1.0",
+    "GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0",
+    "GOLDMEMBER-ADA508764-PRIORITY-COUNCIL-RUN-003-2026-08-22-v1.0"
+  ],
+  "current_rule": "WAIT_FOR_OR_FREEZE_ADA508764_PRIMARY_RECOVERY_RECEIPT__THEN_ASK_JANUS_AGAIN_BEFORE_NEXT_ARCHIVE_OR_QUANTITATIVE_STAGE"
+}
