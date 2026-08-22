@@ -1,0 +1,560 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T08:43:02.321420+00:00",
+  "protocol_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json",
+  "protocol_blob_sha_not_embedded": "VERIFY_BY_GIT_PROVENANCE",
+  "source": {
+    "archive_sha256": "40ee5b1a5bc8029bc1ac22aa07bcb6917468529d2d10d720607ede70d96eb9f0",
+    "archive_bytes": 138752,
+    "member": "MGDS_Download/EA_Hydroacoustics/EA_CTBTO_catalog_all.dat.gz",
+    "member_gzip_sha256": "06ae7ee8c49b32566757d0760d6d6695e03c7a394948b2cd5759836a96410b5d",
+    "catalog_ascii_sha256": "4eea7ca55456a271df79ad165d76dc6c77ad3752705b46ad031468bb00232558",
+    "catalog_ascii_bytes": 342121
+  },
+  "catalog_rows": 5943,
+  "eligible_event_count_before_topN": 8,
+  "selected_event_count": 8,
+  "complete_event_count": 8,
+  "minimum_required": 3,
+  "selected_events": [
+    {
+      "selection_rank": 1,
+      "source_time_code": "20150042123086",
+      "origin_utc": "2015-01-04T21:23:08.600000Z",
+      "source_line": 5947,
+      "n_hydrophones": 6,
+      "lat": 14.515,
+      "lon": -44.932,
+      "lat_error_deg": 0.16,
+      "lon_error_deg": 0.102,
+      "source_time_error_s": 5.175,
+      "source_magnitude_db": 227.61,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 4178.56689,
+          "predicted_arrival_utc": "2015-01-04T22:10:11.956007Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:05:11.956007Z",
+            "end_utc": "2015-01-04T22:15:11.956007Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:05:11.956007Z",
+              "center_utc": "2015-01-04T20:10:11.956007Z",
+              "end_utc": "2015-01-04T20:15:11.956007Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:05:11.956007Z",
+              "center_utc": "2015-01-05T00:10:11.956007Z",
+              "end_utc": "2015-01-05T00:15:11.956007Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 4238.737927,
+          "predicted_arrival_utc": "2015-01-04T22:10:52.612113Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:05:52.612113Z",
+            "end_utc": "2015-01-04T22:15:52.612113Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:05:52.612113Z",
+              "center_utc": "2015-01-04T20:10:52.612113Z",
+              "end_utc": "2015-01-04T20:15:52.612113Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:05:52.612113Z",
+              "center_utc": "2015-01-05T00:10:52.612113Z",
+              "end_utc": "2015-01-05T00:15:52.612113Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 2,
+      "source_time_code": "20150031825065",
+      "origin_utc": "2015-01-03T18:25:06.500000Z",
+      "source_line": 5940,
+      "n_hydrophones": 6,
+      "lat": 24.216,
+      "lon": -44.413,
+      "lat_error_deg": 0.133,
+      "lon_error_deg": 0.028,
+      "source_time_error_s": 8.078,
+      "source_magnitude_db": 220.79,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 4822.24723,
+          "predicted_arrival_utc": "2015-01-03T19:19:24.775155Z",
+          "event_window": {
+            "start_utc": "2015-01-03T19:14:24.775155Z",
+            "end_utc": "2015-01-03T19:24:24.775155Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T17:14:24.775155Z",
+              "center_utc": "2015-01-03T17:19:24.775155Z",
+              "end_utc": "2015-01-03T17:24:24.775155Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T21:14:24.775155Z",
+              "center_utc": "2015-01-03T21:19:24.775155Z",
+              "end_utc": "2015-01-03T21:24:24.775155Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 4903.694493,
+          "predicted_arrival_utc": "2015-01-03T19:20:19.807090Z",
+          "event_window": {
+            "start_utc": "2015-01-03T19:15:19.807090Z",
+            "end_utc": "2015-01-03T19:25:19.807090Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T17:15:19.807090Z",
+              "center_utc": "2015-01-03T17:20:19.807090Z",
+              "end_utc": "2015-01-03T17:25:19.807090Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T21:15:19.807090Z",
+              "center_utc": "2015-01-03T21:20:19.807090Z",
+              "end_utc": "2015-01-03T21:25:19.807090Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 3,
+      "source_time_code": "20150050445600",
+      "origin_utc": "2015-01-05T04:46:00Z",
+      "source_line": 5950,
+      "n_hydrophones": 6,
+      "lat": 38.417,
+      "lon": -25.723,
+      "lat_error_deg": 0.322,
+      "lon_error_deg": 0.156,
+      "source_time_error_s": 23.172,
+      "source_magnitude_db": 219.66,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 5274.260151,
+          "predicted_arrival_utc": "2015-01-05T05:45:23.689291Z",
+          "event_window": {
+            "start_utc": "2015-01-05T05:40:23.689291Z",
+            "end_utc": "2015-01-05T05:50:23.689291Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-05T03:40:23.689291Z",
+              "center_utc": "2015-01-05T03:45:23.689291Z",
+              "end_utc": "2015-01-05T03:50:23.689291Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T07:40:23.689291Z",
+              "center_utc": "2015-01-05T07:45:23.689291Z",
+              "end_utc": "2015-01-05T07:50:23.689291Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 5391.750557,
+          "predicted_arrival_utc": "2015-01-05T05:46:43.074701Z",
+          "event_window": {
+            "start_utc": "2015-01-05T05:41:43.074701Z",
+            "end_utc": "2015-01-05T05:51:43.074701Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-05T03:41:43.074701Z",
+              "center_utc": "2015-01-05T03:46:43.074701Z",
+              "end_utc": "2015-01-05T03:51:43.074701Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T07:41:43.074701Z",
+              "center_utc": "2015-01-05T07:46:43.074701Z",
+              "end_utc": "2015-01-05T07:51:43.074701Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 4,
+      "source_time_code": "20150041644482",
+      "origin_utc": "2015-01-04T16:44:48.200000Z",
+      "source_line": 5942,
+      "n_hydrophones": 6,
+      "lat": -5.687,
+      "lon": -12.138,
+      "lat_error_deg": 0.039,
+      "lon_error_deg": 0.151,
+      "source_time_error_s": 9.539,
+      "source_magnitude_db": 219.6,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 352.842114,
+          "predicted_arrival_utc": "2015-01-04T16:48:46.606834Z",
+          "event_window": {
+            "start_utc": "2015-01-04T16:43:46.606834Z",
+            "end_utc": "2015-01-04T16:53:46.606834Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T14:43:46.606834Z",
+              "center_utc": "2015-01-04T14:48:46.606834Z",
+              "end_utc": "2015-01-04T14:53:46.606834Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T18:43:46.606834Z",
+              "center_utc": "2015-01-04T18:48:46.606834Z",
+              "end_utc": "2015-01-04T18:53:46.606834Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 456.974215,
+          "predicted_arrival_utc": "2015-01-04T16:49:56.966362Z",
+          "event_window": {
+            "start_utc": "2015-01-04T16:44:56.966362Z",
+            "end_utc": "2015-01-04T16:54:56.966362Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T14:44:56.966362Z",
+              "center_utc": "2015-01-04T14:49:56.966362Z",
+              "end_utc": "2015-01-04T14:54:56.966362Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T18:44:56.966362Z",
+              "center_utc": "2015-01-04T18:49:56.966362Z",
+              "end_utc": "2015-01-04T18:54:56.966362Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 5,
+      "source_time_code": "20150031234191",
+      "origin_utc": "2015-01-03T12:34:19.100000Z",
+      "source_line": 5939,
+      "n_hydrophones": 6,
+      "lat": 4.647,
+      "lon": -32.573,
+      "lat_error_deg": 0.117,
+      "lon_error_deg": 0.123,
+      "source_time_error_s": 4.067,
+      "source_magnitude_db": 218.86,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 2440.867463,
+          "predicted_arrival_utc": "2015-01-03T13:01:48.334772Z",
+          "event_window": {
+            "start_utc": "2015-01-03T12:56:48.334772Z",
+            "end_utc": "2015-01-03T13:06:48.334772Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T10:56:48.334772Z",
+              "center_utc": "2015-01-03T11:01:48.334772Z",
+              "end_utc": "2015-01-03T11:06:48.334772Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T14:56:48.334772Z",
+              "center_utc": "2015-01-03T15:01:48.334772Z",
+              "end_utc": "2015-01-03T15:06:48.334772Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 2497.686987,
+          "predicted_arrival_utc": "2015-01-03T13:02:26.726343Z",
+          "event_window": {
+            "start_utc": "2015-01-03T12:57:26.726343Z",
+            "end_utc": "2015-01-03T13:07:26.726343Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T10:57:26.726343Z",
+              "center_utc": "2015-01-03T11:02:26.726343Z",
+              "end_utc": "2015-01-03T11:07:26.726343Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T14:57:26.726343Z",
+              "center_utc": "2015-01-03T15:02:26.726343Z",
+              "end_utc": "2015-01-03T15:07:26.726343Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 6,
+      "source_time_code": "20150042102473",
+      "origin_utc": "2015-01-04T21:02:47.300000Z",
+      "source_line": 5944,
+      "n_hydrophones": 6,
+      "lat": 14.481,
+      "lon": -44.803,
+      "lat_error_deg": 0.146,
+      "lon_error_deg": 0.093,
+      "source_time_error_s": 4.789,
+      "source_magnitude_db": 218.3,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 4164.991457,
+          "predicted_arrival_utc": "2015-01-04T21:49:41.483417Z",
+          "event_window": {
+            "start_utc": "2015-01-04T21:44:41.483417Z",
+            "end_utc": "2015-01-04T21:54:41.483417Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T19:44:41.483417Z",
+              "center_utc": "2015-01-04T19:49:41.483417Z",
+              "end_utc": "2015-01-04T19:54:41.483417Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T23:44:41.483417Z",
+              "center_utc": "2015-01-04T23:49:41.483417Z",
+              "end_utc": "2015-01-04T23:54:41.483417Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 4225.302169,
+          "predicted_arrival_utc": "2015-01-04T21:50:22.233898Z",
+          "event_window": {
+            "start_utc": "2015-01-04T21:45:22.233898Z",
+            "end_utc": "2015-01-04T21:55:22.233898Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T19:45:22.233898Z",
+              "center_utc": "2015-01-04T19:50:22.233898Z",
+              "end_utc": "2015-01-04T19:55:22.233898Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T23:45:22.233898Z",
+              "center_utc": "2015-01-04T23:50:22.233898Z",
+              "end_utc": "2015-01-04T23:55:22.233898Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 7,
+      "source_time_code": "20150042128432",
+      "origin_utc": "2015-01-04T21:28:43.200000Z",
+      "source_line": 5948,
+      "n_hydrophones": 6,
+      "lat": 14.773,
+      "lon": -44.836,
+      "lat_error_deg": 0.0,
+      "lon_error_deg": 0.0,
+      "source_time_error_s": 0.001,
+      "source_magnitude_db": 214.71,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 4186.444062,
+          "predicted_arrival_utc": "2015-01-04T22:15:51.878420Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:10:51.878420Z",
+            "end_utc": "2015-01-04T22:20:51.878420Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:10:51.878420Z",
+              "center_utc": "2015-01-04T20:15:51.878420Z",
+              "end_utc": "2015-01-04T20:20:51.878420Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:10:51.878420Z",
+              "center_utc": "2015-01-05T00:15:51.878420Z",
+              "end_utc": "2015-01-05T00:20:51.878420Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 4247.436256,
+          "predicted_arrival_utc": "2015-01-04T22:16:33.089362Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:11:33.089362Z",
+            "end_utc": "2015-01-04T22:21:33.089362Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:11:33.089362Z",
+              "center_utc": "2015-01-04T20:16:33.089362Z",
+              "end_utc": "2015-01-04T20:21:33.089362Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:11:33.089362Z",
+              "center_utc": "2015-01-05T00:16:33.089362Z",
+              "end_utc": "2015-01-05T00:21:33.089362Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    },
+    {
+      "selection_rank": 8,
+      "source_time_code": "20150042131072",
+      "origin_utc": "2015-01-04T21:31:07.200000Z",
+      "source_line": 5949,
+      "n_hydrophones": 6,
+      "lat": 14.562,
+      "lon": -44.955,
+      "lat_error_deg": 0.216,
+      "lon_error_deg": 0.137,
+      "source_time_error_s": 6.977,
+      "source_magnitude_db": 214.69,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "station_lat": -7.845673,
+          "station_lon": -14.48023,
+          "source_to_station_distance_km": 4183.572341,
+          "predicted_arrival_utc": "2015-01-04T22:18:13.938068Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:13:13.938068Z",
+            "end_utc": "2015-01-04T22:23:13.938068Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:13:13.938068Z",
+              "center_utc": "2015-01-04T20:18:13.938068Z",
+              "end_utc": "2015-01-04T20:23:13.938068Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:13:13.938068Z",
+              "center_utc": "2015-01-05T00:18:13.938068Z",
+              "end_utc": "2015-01-05T00:23:13.938068Z"
+            }
+          ],
+          "pair_complete": true
+        },
+        "IM.H10S2..EDH": {
+          "station_lat": -8.9591,
+          "station_lon": -14.64531,
+          "source_to_station_distance_km": 4243.822624,
+          "predicted_arrival_utc": "2015-01-04T22:18:54.647719Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:13:54.647719Z",
+            "end_utc": "2015-01-04T22:23:54.647719Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:13:54.647719Z",
+              "center_utc": "2015-01-04T20:18:54.647719Z",
+              "end_utc": "2015-01-04T20:23:54.647719Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:13:54.647719Z",
+              "center_utc": "2015-01-05T00:18:54.647719Z",
+              "end_utc": "2015-01-05T00:23:54.647719Z"
+            }
+          ],
+          "pair_complete": true
+        }
+      },
+      "complete_on_both_stations": true
+    }
+  ],
+  "fft_performed": false,
+  "waveform_samples_inspected": false,
+  "target_band_inspected": false,
+  "window_freeze_sha256": "d5f3c29c1dc4f7d7862724d1225688f9ee88460266d32fb0ec99fabe52cf2671",
+  "status": "WINDOWS_FROZEN_READY_FOR_FFT",
+  "hard_rules": [
+    "NO_WAVEFORM_SPECTRAL_INSPECTION_IN_WINDOW_FREEZE",
+    "NO_TARGET_BAND_INSPECTION",
+    "NO_THRESHOLD_RETUNING",
+    "WINDOW_FREEZE_HASH_PRECEDES_FFT"
+  ]
+}
