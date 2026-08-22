@@ -1,0 +1,44 @@
+name: Cousteau HA10 Confirmatory Window Freeze
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-confirmatory-window-freeze.yml"
+      - "workspace/cousteau_ha10_confirmatory_window_freeze.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: write
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install requests beautifulsoup4
+      - name: Freeze windows without FFT
+        id: freeze
+        continue-on-error: true
+        run: python workspace/cousteau_ha10_confirmatory_window_freeze.py
+      - name: Show freeze receipt
+        if: always()
+        run: cat data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json
+      - name: Freeze receipt in branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json
+          git commit -m "Cousteau: freeze preregistered HA10 confirmatory windows ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
+      - name: Enforce readiness
+        if: steps.freeze.outcome != 'success'
+        run: exit 1
