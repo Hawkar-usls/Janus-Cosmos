@@ -7,8 +7,11 @@ on:
     paths:
       - ".github/workflows/cousteau-ha10-tphase-inband-positive-control.yml"
       - "workspace/cousteau_ha10_tphase_inband_positive_control.py"
+      - "workspace/cousteau_ha10_tphase_inband_positive_control_v2.py"
       - "tests/test_cousteau_ha10_tphase_inband_positive_control.py"
+      - "tests/test_cousteau_ha10_tphase_inband_positive_control_v2.py"
       - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-ARRIVAL-POSITIVE-CONTROL-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-INDEPENDENCE-ADDENDUM-2026-08-22-v1.0.json"
       - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json"
       - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json"
   push:
@@ -16,8 +19,11 @@ on:
     paths:
       - ".github/workflows/cousteau-ha10-tphase-inband-positive-control.yml"
       - "workspace/cousteau_ha10_tphase_inband_positive_control.py"
+      - "workspace/cousteau_ha10_tphase_inband_positive_control_v2.py"
       - "tests/test_cousteau_ha10_tphase_inband_positive_control.py"
+      - "tests/test_cousteau_ha10_tphase_inband_positive_control_v2.py"
       - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-ARRIVAL-POSITIVE-CONTROL-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-INDEPENDENCE-ADDENDUM-2026-08-22-v1.0.json"
 
 permissions:
   contents: read
@@ -33,16 +39,20 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
 
-      - name: Verify preregistration and immutable upstream receipts
+      - name: Verify frozen protocol and implementation lineage
         shell: bash
         run: |
           set -euo pipefail
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-ARRIVAL-POSITIVE-CONTROL-PROTOCOL-2026-08-22-v1.0.json)" = "d1800856076fc46cb04b5461bb1f2bf786af532e"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-INDEPENDENCE-ADDENDUM-2026-08-22-v1.0.json)" = "f517c170948ed16e6097fc6fca38af7b7fd6edda"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json)" = "f5fbc4b155d514094867b88bb33af71d3b458f76"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
           test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = "244169a1331a16529e2a963585a5659dae109c66"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control_v2.py)" = "c3d37fe4f5a75514390862be4c1d2870c4c01fe9"
           test "$(git hash-object tests/test_cousteau_ha10_tphase_inband_positive_control.py)" = "f87c058aa247c81c904aaf56764d12e106eb314e"
+          test "$(git hash-object tests/test_cousteau_ha10_tphase_inband_positive_control_v2.py)" = "0c441111120feb5a71501eab7127e6ef54d6e8d5"
           echo "INBAND_CONTROL_PREREGISTRATION_BINDING=PASS"
+          echo "INDEPENDENCE_CLARIFICATION_BINDING=PASS"
           echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
 
       - uses: actions/setup-python@v5
@@ -53,9 +63,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Run 32567886788 stopped in unit tests before any waveform-control
-          # execution because NumPy 2.5 removed np.trapz. Pinning 2.3.5 preserves
-          # the preregistered trapezoidal integral without inspecting control data.
           python -m pip install \
             "numpy==2.3.5" \
             "scipy==1.18.1" \
@@ -76,15 +83,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m py_compile workspace/cousteau_ha10_tphase_inband_positive_control.py tests/test_cousteau_ha10_tphase_inband_positive_control.py
-          python -m unittest tests.test_cousteau_ha10_tphase_inband_positive_control -v
+          python -m py_compile \
+            workspace/cousteau_ha10_tphase_inband_positive_control.py \
+            workspace/cousteau_ha10_tphase_inband_positive_control_v2.py \
+            tests/test_cousteau_ha10_tphase_inband_positive_control.py \
+            tests/test_cousteau_ha10_tphase_inband_positive_control_v2.py
+          python -m unittest \
+            tests.test_cousteau_ha10_tphase_inband_positive_control \
+            tests.test_cousteau_ha10_tphase_inband_positive_control_v2 -v
 
-      - name: Execute preregistered in-band control
+      - name: Execute overlap-safe bounded replay
         shell: bash
         run: |
           set -euo pipefail
-          python workspace/cousteau_ha10_tphase_inband_positive_control.py \
-            --output "artifacts/ha10-inband-positive-control/run-${GITHUB_RUN_ID}.json"
+          python workspace/cousteau_ha10_tphase_inband_positive_control_v2.py \
+            --output "artifacts/ha10-inband-positive-control/replay-v2-${GITHUB_RUN_ID}.json"
 
       - name: Validate claim ceiling and immutable-negative firewall
         shell: bash
@@ -93,41 +106,44 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          paths = list(Path('artifacts/ha10-inband-positive-control').glob('run-*.json'))
+          paths = list(Path('artifacts/ha10-inband-positive-control').glob('replay-v2-*.json'))
           assert len(paths) == 1, paths
           receipt = json.loads(paths[0].read_text(encoding='utf-8'))
-          assert receipt['status'] == 'CONTROL_RUN_COMPLETE'
+          assert receipt['status'] == 'CONTROL_REPLAY_COMPLETE'
+          assert receipt['implementation_semantics'] == 'V2_BOUNDED_DOWNLOADS_AND_NONOVERLAPPING_INDEPENDENT_EVENT_COUNT'
           assert receipt['authority_delta_for_119hz'] == 0
           assert receipt['frozen_119hz_negative_result_immutable'] is True
           assert receipt['frozen_119hz_verdict'] == 'NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
           assert receipt['target_identity'] == 'UNCONFIRMED'
-          assert receipt['target_evidence_delta'] == 'NONE_FROM_POSITIVE_CONTROL'
-          assert receipt['processing_contract']['119hz_or_117_121hz_bins_used'] is False
-          assert receipt['processing_contract']['whole_spectrum_peak_search_performed'] is False
-          assert receipt['processing_contract']['best_subband_selection_performed'] is False
+          assert receipt['target_evidence_delta'] == 'NONE_FROM_POSITIVE_CONTROL_REPLAY'
+          assert receipt['network_budget']['attempts_per_request'] == 2
+          assert receipt['network_budget']['timeout_per_attempt_s'] == 15
+          assert receipt['independence']['overlap_deduplication_applied'] is True
+          assert receipt['summary']['independent_events_passing_both_stations'] <= receipt['summary']['raw_candidate_events_passing_both_stations']
           assert receipt['summary']['verdict'] in {
               'PASS_HA10_INBAND_TPHASE_PIPELINE_CONTROL',
               'FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL',
               'BLOCKED_POSITIVE_CONTROL_DATA_ACCESS_OR_RESPONSE',
           }
-          print('POSITIVE_CONTROL_RECEIPT_VALID=TRUE')
-          print('POSITIVE_CONTROL_AUTHORITY_DELTA_FOR_119HZ=0')
-          print('FROZEN_119HZ_NEGATIVE_RESULT_IMMUTABLE=TRUE')
+          print('POSITIVE_CONTROL_V2_RECEIPT_VALID=TRUE')
+          print('RAW_CANDIDATE_PASSES=' + str(receipt['summary']['raw_candidate_events_passing_both_stations']))
+          print('INDEPENDENT_PASSES=' + str(receipt['summary']['independent_events_passing_both_stations']))
           print('CONTROL_VERDICT=' + receipt['summary']['verdict'])
+          print('POSITIVE_CONTROL_AUTHORITY_DELTA_FOR_119HZ=0')
           PY
 
       - name: Prove workflow has no repository writeback
         shell: bash
         run: |
           set -euo pipefail
-          git diff --exit-code -- data/cousteau
+          git diff --exit-code -- data/cousteau workspace tests
           echo "SOURCE_WRITEBACK=FALSE"
 
-      - name: Upload positive-control evidence
+      - name: Upload positive-control replay evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cousteau-ha10-inband-positive-control-${{ github.run_id }}
+          name: cousteau-ha10-inband-positive-control-v2-${{ github.run_id }}
           path: artifacts/ha10-inband-positive-control/
           if-no-files-found: error
           retention-days: 30
