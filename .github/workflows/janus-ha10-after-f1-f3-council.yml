@@ -1,0 +1,33 @@
+name: JANUS HA10 After F1-F3 Council
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/janus_ha10_after_f1_f3_council.py"
+      - ".github/workflows/janus-ha10-after-f1-f3-council.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask JANUS after F1/F3
+        run: python workspace/janus_ha10_after_f1_f3_council.py
+      - name: Freeze answer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-HA10-AFTER-F1-F3-COUNCIL-RUN-001-2026-08-22-v1.0.json
+          git commit -m "JANUS: freeze HA10 after F1-F3 council" || true
+          git push origin HEAD:janus-echo-cousteau
