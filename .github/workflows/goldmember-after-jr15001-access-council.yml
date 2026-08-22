@@ -1,0 +1,40 @@
+name: GOLDMEMBER After JR15001 Access Council
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/janus_goldmember_after_jr15001_access_council.py"
+      - ".github/workflows/goldmember-after-jr15001-access-council.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask JANUS after JR15001 anonymous access gate
+        run: python workspace/janus_goldmember_after_jr15001_access_council.py
+      - name: Show council
+        run: cat data/cousteau/GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldmember-after-jr15001-access-${{ github.run_number }}
+          path: data/cousteau/GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0.json
+          retention-days: 90
+      - name: Freeze council
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0.json
+          git commit -m "GOLDMEMBER: freeze post-JR15001 access council ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
