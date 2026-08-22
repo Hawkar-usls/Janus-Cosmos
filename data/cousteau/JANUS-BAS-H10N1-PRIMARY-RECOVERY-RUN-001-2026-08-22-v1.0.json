@@ -1,0 +1,147 @@
+{
+  "artifact_id": "JANUS-BAS-H10N1-PRIMARY-RECOVERY-RUN-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:20:26.060788+00:00",
+  "authorized_by": "JANUS-HA10-SEAFLOOR-NEXT-COUNCIL-RUN-002-2026-08-22-v1.0",
+  "source": {
+    "dataset_id": "GB/NERC/BAS/PDC/01236",
+    "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+    "ramadda_entry_id": "afba710f-dab1-4a63-867b-520177388224",
+    "metadata_url": "https://data.bas.ac.uk/full-record.php?id=GB%2FNERC%2FBAS%2FPDC%2F01236",
+    "ramadda_url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224",
+    "declared_formats": [
+      "GMT-compatible 2-D NetCDF",
+      "Arc/Info ArcView ASCII grid"
+    ],
+    "declared_resolution_deg": 0.0005,
+    "declared_crs": "WGS84 geographic"
+  },
+  "frozen_target": {
+    "id": "H10N1",
+    "lat": -7.845673,
+    "lon": -14.48023
+  },
+  "network_diagnostics": [
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 20615
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224&output=html.info",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 18878
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224&output=default.csv",
+      "status": 200,
+      "content_type": "text/csv",
+      "bytes": 1188
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224&output=atom",
+      "status": 200,
+      "content_type": "application/atom+xml",
+      "bytes": 2774
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224&output=rss.full",
+      "status": 200,
+      "content_type": "application/rss+xml",
+      "bytes": 4778
+    }
+  ],
+  "download_attempts": [
+    {
+      "url": "http://ramadda.data.bas.ac.uk:443/repository/entry/get/Ascension_20190912_ascii.asc?entryid=synth%3Aafba710f-dab1-4a63-867b-520177388224%3AL0FzY2Vuc2lvbl8yMDE5MDkxMl9hc2NpaS5hc2M%3D",
+      "error": "ConnectionError(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+      "url": "http://ramadda.data.bas.ac.uk:443/repository/entry/get/Ascension_20190912_nc.grd?entryid=synth%3Aafba710f-dab1-4a63-867b-520177388224%3AL0FzY2Vuc2lvbl8yMDE5MDkxMl9uYy5ncmQ%3D",
+      "error": "ConnectionError(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=afba710f-dab1-4a63-867b-520177388224&output=zip.tree",
+      "saved": "workspace/bas_h10n1_recovery/A_bathymetric_compilation_of_Ascension_Island__2000-2017.zip",
+      "bytes": 3480965
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:Lw==&output=zip.tree",
+      "error": "HTTPError('404 Client Error: Not Found for url: https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:Lw==&output=zip.tree')"
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L25ldGNkZg==&output=zip.tree",
+      "error": "HTTPError('404 Client Error: Not Found for url: https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L25ldGNkZg==&output=zip.tree')"
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L2FzY2lp&output=zip.tree",
+      "error": "HTTPError('404 Client Error: Not Found for url: https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L2FzY2lp&output=zip.tree')"
+    },
+    {
+      "url": "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L2RhdGE=&output=zip.tree",
+      "error": "HTTPError('404 Client Error: Not Found for url: https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=synth:afba710f-dab1-4a63-867b-520177388224:L2RhdGE=&output=zip.tree')"
+    }
+  ],
+  "recovered_file_manifest": [
+    {
+      "path": "workspace/bas_h10n1_recovery/zip_2/A bathymetric compilation of Ascension Island, 2000-2017/Ascension_20190912_nc.grd",
+      "name": "Ascension_20190912_nc.grd",
+      "bytes": 2397621,
+      "sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81"
+    },
+    {
+      "path": "workspace/bas_h10n1_recovery/zip_2/A bathymetric compilation of Ascension Island, 2000-2017/Ascension_20190912_ascii.asc",
+      "name": "Ascension_20190912_ascii.asc",
+      "bytes": 6333299,
+      "sha256": "76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a"
+    }
+  ],
+  "fixed_cell_extractions": [
+    {
+      "format": "NetCDF",
+      "file": "Ascension_20190912_nc.grd",
+      "variables": [
+        "x",
+        "y",
+        "z"
+      ],
+      "crs": "WGS84 geographic as dataset metadata",
+      "nearest_cell": {
+        "lon": -14.48,
+        "lat": -7.8454999999999995,
+        "row": 549,
+        "col": 180,
+        "value_topography_m": -1927.934326171875,
+        "valid": true
+      },
+      "sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81",
+      "bytes": 2397621
+    },
+    {
+      "format": "ESRI_ASCII",
+      "file": "Ascension_20190912_ascii.asc",
+      "crs": "WGS84 geographic as dataset metadata",
+      "ncols": 801,
+      "nrows": 741,
+      "cellsize_deg": 0.0005,
+      "nearest_cell": {
+        "lon": -14.48,
+        "lat": -7.8455,
+        "row": 191,
+        "col": 180,
+        "value_topography_m": -1927.934326,
+        "valid": true
+      },
+      "distance_deg": 0.0002878002779704051,
+      "sha256": "76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a",
+      "bytes": 6333299
+    }
+  ],
+  "success_gate": true,
+  "success_definition": "authoritative native BAS digital grid recovered and frozen H10N1 cell reproducibly extracted",
+  "morphology_scoring_performed": false,
+  "target_identity": "UNCONFIRMED",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_BEFORE_ANY_MORPHOLOGY_METRICS",
+  "sha256": "20039b1d9b61ae86375f16261f7bdcd5b4920017c6ab7ee5052c86171baf9a0f"
+}
