@@ -52,7 +52,7 @@ jobs:
           set -euo pipefail
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0.json)" = '44d14209974c31c010b1f6a9ba502ea558013a57'
           test "$(git hash-object workspace/cousteau_ha10_calibration_sequence_public_recovery.py)" = 'd095a3ddf72e2aff8b6e6efcf075f04e282d3ed9'
-          test "$(git hash-object tests/test_cousteau_ha10_calibration_sequence_public_recovery.py)" = '339c8745c66dd5f90fc2d1f654d5eb3d6771cb6f'
+          test "$(git hash-object tests/test_cousteau_ha10_calibration_sequence_public_recovery.py)" = '452a43d0d27fe17085a6f969e5960a2ff6f8e8fe'
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = 'eb8b48fb7f043160c057f9df6264a781412ed854'
 
       - name: Compile and test before acquisition
