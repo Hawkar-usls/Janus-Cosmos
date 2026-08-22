@@ -1,0 +1,34 @@
+{
+  "artifact_id": "GOLDMEMBER-UKHO-HI1751-EXACT-COVERAGE-OUTBOUND-RECEIPT-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:18:30Z",
+  "authorized_by": "GOLDMEMBER-AFTER-MODERN-COVERAGE-BLOCK-COUNCIL-RUN-009-2026-08-22-v1.0",
+  "stage": "GOLDMEMBER_UKHO_HI1751_EXACT_COVERAGE_CUSTODIAN_QUERY_001",
+  "recipient": "BathyQueries@UKHO.gov.uk",
+  "recipient_basis": "Official UKHO public bathymetry query route.",
+  "subject": "Historical HI1751 Ascension bathymetry coverage query at one fixed coordinate",
+  "gmail_message_id": "1a02966d9cfd450b",
+  "status": "SENT",
+  "frozen_target": {
+    "lat": -7.845673,
+    "lon": -14.480230,
+    "crs": "WGS84"
+  },
+  "request_scope": [
+    "Confirm whether HI1751 is the correct identifier for the 2021 Ascension Royal Navy survey, while noting the HI1571 conflict without asserting an error.",
+    "Confirm boolean intersection of the frozen coordinate with the HI1751 HMS Protector / SMB James Cairn MBES footprint.",
+    "Provide public/shareable coverage polygon, survey drawing, grid bounds, accession/reference, or authoritative yes/no sufficient to reproduce the intersection.",
+    "Use documented filenames Asc_1000m_Down_10m.asc and Asc_comb_10m.asc only for product-lineage disambiguation."
+  ],
+  "excluded_scope": [
+    "restricted current hydrographic data",
+    "operational or defence information",
+    "security information",
+    "pyramid or Osiris claim",
+    "anomaly claim",
+    "frequency or Cosmos claim"
+  ],
+  "reply_policy": "FREEZE_REPLY_AND_ASK_JANUS_BEFORE_USING_ANY_NEW_GRID_OR_FOOTPRINT_QUANTITATIVELY",
+  "waiting_policy": "DO_NOT_OPEN_A_NEW_PHYSICAL_TARGET_WHILE_THIS_GATE_IS_PENDING",
+  "target_identity": "UNCONFIRMED",
+  "volcanic_baseline": "ACTIVE"
+}
