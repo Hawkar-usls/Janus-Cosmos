@@ -1,0 +1,4748 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0",
+  "started_and_completed_utc": "2026-08-22T08:45:08.102828+00:00",
+  "protocol_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json",
+  "protocol_file_sha256": "d86648ee349854caeb80e54e22a082abb1874b932756a7c74546317e5ec11e41",
+  "window_freeze_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json",
+  "window_freeze_file_sha256": "455709a0940b82b1ca6a190610abb3d71c24ca0b4215ab5bf05fe4a12f898d38",
+  "window_freeze_sha256": "d5f3c29c1dc4f7d7862724d1225688f9ee88460266d32fb0ec99fabe52cf2671",
+  "response_metadata": {
+    "IM.H10N1..EDH": {
+      "url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00Z&endtime=2015-01-13T00%3A00%3A00Z&level=response&format=xml&nodata=404",
+      "bytes": 27362,
+      "sha256": "bb8a0e0041df32e02f7805d75ad1fd2aa23963d88f98ee02a26be5d071056935",
+      "content_type": "application/xml"
+    },
+    "IM.H10S2..EDH": {
+      "url": "https://service.earthscope.org/fdsnws/station/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2014-12-11T00%3A00%3A00Z&endtime=2015-01-13T00%3A00%3A00Z&level=response&format=xml&nodata=404",
+      "bytes": 27344,
+      "sha256": "4183dd8a45f5a080c4ba3ea170c7fa4b93cc9fed7428dc5ccd3b69ac9ab1cbc0",
+      "content_type": "application/xml"
+    }
+  },
+  "processing_contract": {
+    "welch_nperseg": 16384,
+    "welch_noverlap": 8192,
+    "whole_spectrum_peak_search_performed": false,
+    "only_predeclared_bands_summarized": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "thresholds_changed_after_inspection": false
+  },
+  "events": [
+    {
+      "selection_rank": 1,
+      "source_time_code": "20150042123086",
+      "origin_utc": "2015-01-04T21:23:08.600000Z",
+      "source_magnitude_db": 227.61,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:10:11.956007Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:05:11.956007Z",
+            "end_utc": "2015-01-04T22:15:11.956007Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:05:11.956007Z",
+              "center_utc": "2015-01-04T20:10:11.956007Z",
+              "end_utc": "2015-01-04T20:15:11.956007Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:05:11.956007Z",
+              "center_utc": "2015-01-05T00:10:11.956007Z",
+              "end_utc": "2015-01-05T00:15:11.956007Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T22%3A05%3A11.956007Z&endtime=2015-01-04T22%3A15%3A11.956007Z&nodata=404&format=miniseed",
+            "bytes": 239104,
+            "sha256": "f3dae436672aa3917917ddd1073ced1cd495fe7121d6c7e666d4ccbf8865913f",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:05:11.959000Z",
+            "endtime": "2015-01-04T22:15:11.955000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T20%3A05%3A11.956007Z&endtime=2015-01-04T20%3A15%3A11.956007Z&nodata=404&format=miniseed",
+              "bytes": 242176,
+              "sha256": "f079436c61c385ab9ffe0ccb7f92793a2621cd378d35355f5a53058660f74b1c",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:05:11.959000Z",
+              "endtime": "2015-01-04T20:15:11.955000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T00%3A05%3A11.956007Z&endtime=2015-01-05T00%3A15%3A11.956007Z&nodata=404&format=miniseed",
+              "bytes": 226816,
+              "sha256": "b0bd6403c93950ead7186d0dd2ea3225e73272cc62f0e591b269631a960b852c",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:05:11.958000Z",
+              "endtime": "2015-01-05T00:15:11.954000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0006979889138293991,
+              "corrected_power_pa2_per_hz": 2.4888657167811396e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2474365234375,
+              "corrected_peak_power": 5.840075931918809e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.0009796577659349638,
+                "corrected_power_pa2_per_hz": 8.48567573553968e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0007508238315001123,
+                "corrected_power_pa2_per_hz": 0.00013949167370449003,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.003526623508659798,
+                "corrected_power_pa2_per_hz": 2.7447051569652726e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.4541756747346842,
+                "corrected_power_pa2_per_hz": 2.7396015871512165e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 18.27402092980242,
+                "corrected_power_pa2_per_hz": 5.008330886577351e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 33.231765123775084,
+                "corrected_power_pa2_per_hz": 7.164289979596877e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0008164047473383585,
+                "corrected_power_pa2_per_hz": 2.8389303447538563e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.232177734375,
+                "corrected_peak_power": 7.435952831082239e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0011214096548855122,
+                  "corrected_power_pa2_per_hz": 9.905220508273354e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0005708295754994764,
+                  "corrected_power_pa2_per_hz": 0.00011370293390728391,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.0077215482529013404,
+                  "corrected_power_pa2_per_hz": 6.410222215819493e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.2121223020398102,
+                  "corrected_power_pa2_per_hz": 7.254642128455136e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 34.08314042393566,
+                  "corrected_power_pa2_per_hz": 9.408857019841245e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 66.93180791090846,
+                  "corrected_power_pa2_per_hz": 1.4428515238662096e-05,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.000736650807764838,
+                "corrected_power_pa2_per_hz": 2.5762745124453958e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.232177734375,
+                "corrected_peak_power": 5.77591620183952e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0009232435389111035,
+                  "corrected_power_pa2_per_hz": 8.125681241947682e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006073876412513155,
+                  "corrected_power_pa2_per_hz": 0.00011313591580778371,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.0034380846219240306,
+                  "corrected_power_pa2_per_hz": 2.751058050589987e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.4814548137573067,
+                  "corrected_power_pa2_per_hz": 2.89667754089233e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 15.51775574728485,
+                  "corrected_power_pa2_per_hz": 4.253497039374342e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 32.46977357291081,
+                  "corrected_power_pa2_per_hz": 6.99986189550898e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.46308470930114287,
+          "corrected_event_vs_noise_snr_db": -0.36583429470302936,
+          "raw_minus_corrected_snr_db": -0.09725041459811351,
+          "corrected_target_sideband_contrast_db": -4.731637828408235,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.18515274002094045,
+              "corrected_event_vs_noise_snr_db": -0.2630101928212488
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 1.0534267994882902,
+              "corrected_event_vs_noise_snr_db": 0.8986084455214371
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -1.992608137089209,
+              "corrected_event_vs_noise_snr_db": -2.224304755304295
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -2.7055111098779845,
+              "corrected_event_vs_noise_snr_db": -2.678050993028815
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -1.32625409587235,
+              "corrected_event_vs_noise_snr_db": -1.3480252641405666
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -1.7480988874839647,
+              "corrected_event_vs_noise_snr_db": -1.7478612967767133
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -1.2644427402244665,
+          "target_peak_frequency_hz": 119.2474365234375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:10:52.612113Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:05:52.612113Z",
+            "end_utc": "2015-01-04T22:15:52.612113Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:05:52.612113Z",
+              "center_utc": "2015-01-04T20:10:52.612113Z",
+              "end_utc": "2015-01-04T20:15:52.612113Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:05:52.612113Z",
+              "center_utc": "2015-01-05T00:10:52.612113Z",
+              "end_utc": "2015-01-05T00:15:52.612113Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T22%3A05%3A52.612113Z&endtime=2015-01-04T22%3A15%3A52.612113Z&nodata=404&format=miniseed",
+            "bytes": 348672,
+            "sha256": "ce4c4b7a4da978e58f95433085ccb099a941812841121c59893e7e4fc324bd85",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:05:52.614000Z",
+            "endtime": "2015-01-04T22:15:52.610000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T20%3A05%3A52.612113Z&endtime=2015-01-04T20%3A15%3A52.612113Z&nodata=404&format=miniseed",
+              "bytes": 347648,
+              "sha256": "cec480c3aac67e022cfef77a45f3be7cd02fe0ba40b446aa04ecf39340b2e3ae",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:05:52.614000Z",
+              "endtime": "2015-01-04T20:15:52.610000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T00%3A05%3A52.612113Z&endtime=2015-01-05T00%3A15%3A52.612113Z&nodata=404&format=miniseed",
+              "bytes": 352256,
+              "sha256": "417c67359ece13723280aea9ea6d3f2bbdfece73dc54e40af32a5027a50d7a20",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:05:52.614000Z",
+              "endtime": "2015-01-05T00:15:52.610000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.005910415882416599,
+              "corrected_power_pa2_per_hz": 0.00020589040077436806,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.140625,
+              "corrected_peak_power": 0.00035437992587489535
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.02231896019426735,
+                "corrected_power_pa2_per_hz": 0.00019814990318065947,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0015718251123273599,
+                "corrected_power_pa2_per_hz": 0.0002919478579033385,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.263115668501605,
+                "corrected_power_pa2_per_hz": 0.00019755486860612774,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 32.939669229833534,
+                "corrected_power_pa2_per_hz": 0.00021439639978688125,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 963.9017943886266,
+                "corrected_power_pa2_per_hz": 0.0002649606462433067,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1417.3692717771637,
+                "corrected_power_pa2_per_hz": 0.0003122868966638938,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.005126804475439473,
+                "corrected_power_pa2_per_hz": 0.00019465647289652576,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0032958984375,
+                "corrected_peak_power": 0.0002818825692910714
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.02166241404863343,
+                  "corrected_power_pa2_per_hz": 0.00020719959562429894,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0015647036678209801,
+                  "corrected_power_pa2_per_hz": 0.00029892283482350717,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.25251613232525244,
+                  "corrected_power_pa2_per_hz": 0.00019981740904675055,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 37.21165310930226,
+                  "corrected_power_pa2_per_hz": 0.00023503360616282702,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 831.2146057638903,
+                  "corrected_power_pa2_per_hz": 0.00023156859144875502,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1384.1834099801554,
+                  "corrected_power_pa2_per_hz": 0.0003050067024437025,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.006180873916130906,
+                "corrected_power_pa2_per_hz": 0.00022839538813230895,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2474365234375,
+                "corrected_peak_power": 0.00036790404590453734
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.023633873527838883,
+                  "corrected_power_pa2_per_hz": 0.00022517702596010734,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017586220938405836,
+                  "corrected_power_pa2_per_hz": 0.00035855973016442225,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.2886125370524435,
+                  "corrected_power_pa2_per_hz": 0.0002236591569627777,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 36.18555911278246,
+                  "corrected_power_pa2_per_hz": 0.0002223158473620779,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 1182.6417629247815,
+                  "corrected_power_pa2_per_hz": 0.0003302521614647869,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1675.1192304340218,
+                  "corrected_power_pa2_per_hz": 0.0003691013092794465,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.19274588493351696,
+          "corrected_event_vs_noise_snr_db": -0.11727515228689028,
+          "raw_minus_corrected_snr_db": 0.31002103722040725,
+          "corrected_target_sideband_contrast_db": -0.7561662387984855,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.06358655978231471,
+              "corrected_event_vs_noise_snr_db": -0.37838343671888275
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.24138695441805,
+              "corrected_event_vs_noise_snr_db": -0.515489520340101
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.12123837073404418,
+              "corrected_event_vs_noise_snr_db": -0.3011165000131737
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -0.4693033536056188,
+              "corrected_event_vs_noise_snr_db": -0.2800068056037678
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.18965708362929018,
+              "corrected_event_vs_noise_snr_db": -0.2538640740273607
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.33109432743112777,
+              "corrected_event_vs_noise_snr_db": -0.33145731137945944
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.13658892174047044,
+          "target_peak_frequency_hz": 119.140625,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.1068115234375,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 2,
+      "source_time_code": "20150031825065",
+      "origin_utc": "2015-01-03T18:25:06.500000Z",
+      "source_magnitude_db": 220.79,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-03T19:19:24.775155Z",
+          "event_window": {
+            "start_utc": "2015-01-03T19:14:24.775155Z",
+            "end_utc": "2015-01-03T19:24:24.775155Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T17:14:24.775155Z",
+              "center_utc": "2015-01-03T17:19:24.775155Z",
+              "end_utc": "2015-01-03T17:24:24.775155Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T21:14:24.775155Z",
+              "center_utc": "2015-01-03T21:19:24.775155Z",
+              "end_utc": "2015-01-03T21:24:24.775155Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T19%3A14%3A24.775155Z&endtime=2015-01-03T19%3A24%3A24.775155Z&nodata=404&format=miniseed",
+            "bytes": 260608,
+            "sha256": "8ae5b1688c6653624b43644a2f9af4028d3f9211c07e08b2da99c1100414f20d",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-03T19:14:24.778000Z",
+            "endtime": "2015-01-03T19:24:24.774000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T17%3A14%3A24.775155Z&endtime=2015-01-03T17%3A24%3A24.775155Z&nodata=404&format=miniseed",
+              "bytes": 225792,
+              "sha256": "31e9cee1e222b5d09422a72c18f58a9a5c3292478317148414814443811cc995",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T17:14:24.779000Z",
+              "endtime": "2015-01-03T17:24:24.775000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T21%3A14%3A24.775155Z&endtime=2015-01-03T21%3A24%3A24.775155Z&nodata=404&format=miniseed",
+              "bytes": 237568,
+              "sha256": "0c0cddda5ebf75a9328553b63658346ec752686820bfdc24505db4e995f2795c",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T21:14:24.778000Z",
+              "endtime": "2015-01-03T21:24:24.774000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0008795383259365962,
+              "corrected_power_pa2_per_hz": 2.846265088315315e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2474365234375,
+              "corrected_peak_power": 5.950568452854696e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.0015282178400076573,
+                "corrected_power_pa2_per_hz": 1.2576074844893068e-05,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0007471157944690182,
+                "corrected_power_pa2_per_hz": 0.00013262992384548302,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.04491761074736444,
+                "corrected_power_pa2_per_hz": 3.4559446948528174e-05,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 1.4668133743533733,
+                "corrected_power_pa2_per_hz": 8.288625306705826e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 235.51900703038393,
+                "corrected_power_pa2_per_hz": 6.357195712724056e-05,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 58.98306388762907,
+                "corrected_power_pa2_per_hz": 1.2716663137772291e-05,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0007782370243900233,
+                "corrected_power_pa2_per_hz": 2.901549235195524e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.232177734375,
+                "corrected_peak_power": 4.928343385998711e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.001033846114745245,
+                  "corrected_power_pa2_per_hz": 1.051425099107671e-05,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006063281605793046,
+                  "corrected_power_pa2_per_hz": 0.0001114534008659696,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.006307278449967775,
+                  "corrected_power_pa2_per_hz": 5.034518568417397e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.6283056910086919,
+                  "corrected_power_pa2_per_hz": 3.918153148996231e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 19.260744857524035,
+                  "corrected_power_pa2_per_hz": 5.199916120129902e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 46.27190641385033,
+                  "corrected_power_pa2_per_hz": 9.974916458901726e-06,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0008336327414558136,
+                "corrected_power_pa2_per_hz": 2.977634595702862e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2169189453125,
+                "corrected_peak_power": 4.5101248529368405e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0008375885282202361,
+                  "corrected_power_pa2_per_hz": 8.481552123518118e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006924559411067933,
+                  "corrected_power_pa2_per_hz": 0.00012215654365472063,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.005155144301461611,
+                  "corrected_power_pa2_per_hz": 3.751845255873915e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.48009873079027515,
+                  "corrected_power_pa2_per_hz": 2.7805337010968435e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 16.306208738931865,
+                  "corrected_power_pa2_per_hz": 4.472904370129796e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 33.398309625923474,
+                  "corrected_power_pa2_per_hz": 7.200305508475647e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.379548150596897,
+          "corrected_event_vs_noise_snr_db": -0.14011698435347528,
+          "raw_minus_corrected_snr_db": 0.5196651349503723,
+          "corrected_target_sideband_contrast_db": -4.066792166007094,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": 2.130405962438247,
+              "corrected_event_vs_noise_snr_db": 1.2191744940446463
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 0.6088094958999087,
+              "corrected_event_vs_noise_snr_db": 0.5518018964633136
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": 8.9417022107096,
+              "corrected_event_vs_noise_snr_db": 8.957875970587663
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 4.227066071918206,
+              "corrected_event_vs_noise_snr_db": 3.935228272611049
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": 11.22009288991123,
+              "corrected_event_vs_noise_snr_db": 11.187424493546878
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": 1.7046132915081824,
+              "corrected_event_vs_noise_snr_db": 1.7050080425934866
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -11.327541477900354,
+          "target_peak_frequency_hz": 119.2474365234375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": false,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-03T19:20:19.807090Z",
+          "event_window": {
+            "start_utc": "2015-01-03T19:15:19.807090Z",
+            "end_utc": "2015-01-03T19:25:19.807090Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T17:15:19.807090Z",
+              "center_utc": "2015-01-03T17:20:19.807090Z",
+              "end_utc": "2015-01-03T17:25:19.807090Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T21:15:19.807090Z",
+              "center_utc": "2015-01-03T21:20:19.807090Z",
+              "end_utc": "2015-01-03T21:25:19.807090Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T19%3A15%3A19.807090Z&endtime=2015-01-03T19%3A25%3A19.807090Z&nodata=404&format=miniseed",
+            "bytes": 352768,
+            "sha256": "68dba4e0741ee9863906459512ccb9090a68fe3f6b1c7f3b923a5d00e78affa7",
+            "npts": 150001,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-03T19:15:19.808000Z",
+            "endtime": "2015-01-03T19:25:19.808000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T17%3A15%3A19.807090Z&endtime=2015-01-03T17%3A25%3A19.807090Z&nodata=404&format=miniseed",
+              "bytes": 355840,
+              "sha256": "bebbfb6ee1ee863293ddd020f91274b95275b5fb5f69ad7a3670be7244d9ef5f",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T17:15:19.808000Z",
+              "endtime": "2015-01-03T17:25:19.808000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T21%3A15%3A19.807090Z&endtime=2015-01-03T21%3A25%3A19.807090Z&nodata=404&format=miniseed",
+              "bytes": 353280,
+              "sha256": "5f8de1aebfe18be2c70a416a4c1411414ed1dc7965377d420b8c865ad210d29f",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T21:15:19.808000Z",
+              "endtime": "2015-01-03T21:25:19.808000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.015131689626243009,
+              "corrected_power_pa2_per_hz": 0.0005129644742280858,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.1558837890625,
+              "corrected_peak_power": 0.0008584975729690266
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.05049808886933123,
+                "corrected_power_pa2_per_hz": 0.0004396041836502966,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0032942281134901163,
+                "corrected_power_pa2_per_hz": 0.0006324914421972622,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.525408881867298,
+                "corrected_power_pa2_per_hz": 0.00040174443454600714,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 98.94387513149795,
+                "corrected_power_pa2_per_hz": 0.0006126241334889998,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 3253.8312408485963,
+                "corrected_power_pa2_per_hz": 0.0009104422200918593,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 5915.582230821256,
+                "corrected_power_pa2_per_hz": 0.001303312152938809,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0068965016938442765,
+                "corrected_power_pa2_per_hz": 0.0002586726566902668,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.1253662109375,
+                "corrected_peak_power": 0.00048148228709376156
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.02776582216232833,
+                  "corrected_power_pa2_per_hz": 0.0002592997250315342,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0020123200219238067,
+                  "corrected_power_pa2_per_hz": 0.00040872820272558563,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.331659526038668,
+                  "corrected_power_pa2_per_hz": 0.0002757619443160848,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 53.1593208094553,
+                  "corrected_power_pa2_per_hz": 0.0003193773643967593,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 1880.5791844890798,
+                  "corrected_power_pa2_per_hz": 0.0005242678260508544,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 3996.922531972031,
+                  "corrected_power_pa2_per_hz": 0.0008807078842021308,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.009650575209530736,
+                "corrected_power_pa2_per_hz": 0.0003899740414849482,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0948486328125,
+                "corrected_peak_power": 0.0006059971950068774
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.05460861858101519,
+                  "corrected_power_pa2_per_hz": 0.00048377233495498025,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0025953747735183246,
+                  "corrected_power_pa2_per_hz": 0.0004818647653761869,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.6885864794574046,
+                  "corrected_power_pa2_per_hz": 0.000586871574871297,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 115.6161469222996,
+                  "corrected_power_pa2_per_hz": 0.0007385722998261721,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 2946.5692280210224,
+                  "corrected_power_pa2_per_hz": 0.0008094783921066498,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 3642.1766710583943,
+                  "corrected_power_pa2_per_hz": 0.0008024602316488003,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 2.6219613503105315,
+          "corrected_event_vs_noise_snr_db": 1.9910907267178293,
+          "raw_minus_corrected_snr_db": 0.6308706235927022,
+          "corrected_target_sideband_contrast_db": -0.1911623969378372,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": 0.885124588572832,
+              "corrected_event_vs_noise_snr_db": 0.7306088070833119
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 1.552999603119796,
+              "corrected_event_vs_noise_snr_db": 1.5240538768569556
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": 0.12822502700677496,
+              "corrected_event_vs_noise_snr_db": -0.30846464672205043
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 0.6910959091114808,
+              "corrected_event_vs_noise_snr_db": 0.6375909184618299
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": 1.2973436870053328,
+              "corrected_event_vs_noise_snr_db": 1.3520918380319544
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": 1.8998534149699786,
+              "corrected_event_vs_noise_snr_db": 1.8995094485019286
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.09158127821590067,
+          "target_peak_frequency_hz": 119.1558837890625,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": false,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.091552734375,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 3,
+      "source_time_code": "20150050445600",
+      "origin_utc": "2015-01-05T04:46:00Z",
+      "source_magnitude_db": 219.66,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-05T05:45:23.689291Z",
+          "event_window": {
+            "start_utc": "2015-01-05T05:40:23.689291Z",
+            "end_utc": "2015-01-05T05:50:23.689291Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-05T03:40:23.689291Z",
+              "center_utc": "2015-01-05T03:45:23.689291Z",
+              "end_utc": "2015-01-05T03:50:23.689291Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T07:40:23.689291Z",
+              "center_utc": "2015-01-05T07:45:23.689291Z",
+              "end_utc": "2015-01-05T07:50:23.689291Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T05%3A40%3A23.689291Z&endtime=2015-01-05T05%3A50%3A23.689291Z&nodata=404&format=miniseed",
+            "bytes": 226304,
+            "sha256": "aff75d0b353ed41af7c665b7ee176e73da435edb48115287f3e64f11a4739ca1",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-05T05:40:23.691000Z",
+            "endtime": "2015-01-05T05:50:23.687000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T03%3A40%3A23.689291Z&endtime=2015-01-05T03%3A50%3A23.689291Z&nodata=404&format=miniseed",
+              "bytes": 229376,
+              "sha256": "6714185237232f2825a7fd4dd427775a27d6f5b9cdd45e279c57a8b2df537fbb",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T03:40:23.692000Z",
+              "endtime": "2015-01-05T03:50:23.688000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T07%3A40%3A23.689291Z&endtime=2015-01-05T07%3A50%3A23.689291Z&nodata=404&format=miniseed",
+              "bytes": 224768,
+              "sha256": "773978c89edfb672401b277a452909d577ad441f31b70f19f77d1c3f1198bcd5",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T07:40:23.691000Z",
+              "endtime": "2015-01-05T07:50:23.687000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0007376612059745325,
+              "corrected_power_pa2_per_hz": 2.6034577199327076e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.140625,
+              "corrected_peak_power": 6.81186611603631e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.0010073067544114356,
+                "corrected_power_pa2_per_hz": 8.145104730368015e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0005831883575438067,
+                "corrected_power_pa2_per_hz": 0.00011014423108068026,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.004211862030436776,
+                "corrected_power_pa2_per_hz": 3.2627713479709728e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.5492383109188168,
+                "corrected_power_pa2_per_hz": 3.482437694567003e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 14.0790162189058,
+                "corrected_power_pa2_per_hz": 3.822951684657297e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 37.24347934115379,
+                "corrected_power_pa2_per_hz": 8.028590979193539e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0007004285898325187,
+                "corrected_power_pa2_per_hz": 2.5976001034597866e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.1864013671875,
+                "corrected_peak_power": 5.994477229983249e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0008421073523603561,
+                  "corrected_power_pa2_per_hz": 7.386260190596912e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006719749715500381,
+                  "corrected_power_pa2_per_hz": 0.00013222157184894132,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.004024213066540801,
+                  "corrected_power_pa2_per_hz": 3.00941206001792e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.4257646018653616,
+                  "corrected_power_pa2_per_hz": 2.67662229002316e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 14.500752733755814,
+                  "corrected_power_pa2_per_hz": 3.936740816563204e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 44.30427464084928,
+                  "corrected_power_pa2_per_hz": 9.551899232409313e-06,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0006858017600768736,
+                "corrected_power_pa2_per_hz": 2.5791939096965455e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.07958984375,
+                "corrected_peak_power": 4.4087544213409986e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0008495830060181434,
+                  "corrected_power_pa2_per_hz": 7.703408740226258e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006587738719188636,
+                  "corrected_power_pa2_per_hz": 0.00012263530747714418,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.003172288004119971,
+                  "corrected_power_pa2_per_hz": 2.374636784027247e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.38594290272207976,
+                  "corrected_power_pa2_per_hz": 2.417813755226789e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 14.598265008220167,
+                  "corrected_power_pa2_per_hz": 3.9807927879982294e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 34.01224513973505,
+                  "corrected_power_pa2_per_hz": 7.332663202965525e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.2705153693699704,
+          "corrected_event_vs_noise_snr_db": 0.025196402421110452,
+          "raw_minus_corrected_snr_db": 0.24531896694885993,
+          "corrected_target_sideband_contrast_db": -3.5636506845209426,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": 0.7587086765331523,
+              "corrected_event_vs_noise_snr_db": 0.3324695712924583
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.5725725636618053,
+              "corrected_event_vs_noise_snr_db": -0.6330460983152286
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": 0.6838273772027764,
+              "corrected_event_vs_noise_snr_db": 0.8350764440890872
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 1.3139125732208345,
+              "corrected_event_vs_noise_snr_db": 1.3581723617853825
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.142760244145072,
+              "corrected_event_vs_noise_snr_db": -0.1516111032931176
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.2177313779755942,
+              "corrected_event_vs_noise_snr_db": -0.21820481563767546
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -1.332975959364272,
+          "target_peak_frequency_hz": 119.140625,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-05T05:46:43.074701Z",
+          "event_window": {
+            "start_utc": "2015-01-05T05:41:43.074701Z",
+            "end_utc": "2015-01-05T05:51:43.074701Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-05T03:41:43.074701Z",
+              "center_utc": "2015-01-05T03:46:43.074701Z",
+              "end_utc": "2015-01-05T03:51:43.074701Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T07:41:43.074701Z",
+              "center_utc": "2015-01-05T07:46:43.074701Z",
+              "end_utc": "2015-01-05T07:51:43.074701Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T05%3A41%3A43.074701Z&endtime=2015-01-05T05%3A51%3A43.074701Z&nodata=404&format=miniseed",
+            "bytes": 348160,
+            "sha256": "871966215e9f8bd21fafb2d73e6831104020d9853114077977b654dbdbedac73",
+            "npts": 150001,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-05T05:41:43.075000Z",
+            "endtime": "2015-01-05T05:51:43.075000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T03%3A41%3A43.074701Z&endtime=2015-01-05T03%3A51%3A43.074701Z&nodata=404&format=miniseed",
+              "bytes": 347136,
+              "sha256": "3cbbb4e14c4aa2a0dc08a18a58f5e1c48810c2770f2128fa62a6b10e81fd7549",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T03:41:43.075000Z",
+              "endtime": "2015-01-05T03:51:43.075000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T07%3A41%3A43.074701Z&endtime=2015-01-05T07%3A51%3A43.074701Z&nodata=404&format=miniseed",
+              "bytes": 347136,
+              "sha256": "46d517cdca5da20caf034ba1b7b3cc2a1adc38d4d1b02b259654532bbbd9e290",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T07:41:43.075000Z",
+              "endtime": "2015-01-05T07:51:43.075000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0062018514399884836,
+              "corrected_power_pa2_per_hz": 0.00023373597221179696,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.07958984375,
+              "corrected_peak_power": 0.0003706644427896339
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.02455966146830514,
+                "corrected_power_pa2_per_hz": 0.00021726464006521518,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.00160092689400597,
+                "corrected_power_pa2_per_hz": 0.00032495346491687464,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.23804461535791344,
+                "corrected_power_pa2_per_hz": 0.00019446530026703864,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 38.81254378619627,
+                "corrected_power_pa2_per_hz": 0.00022635111218198233,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 987.7016068237656,
+                "corrected_power_pa2_per_hz": 0.0002703510058046076,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1428.9323222089613,
+                "corrected_power_pa2_per_hz": 0.00031483839605115076,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.005319563515321742,
+                "corrected_power_pa2_per_hz": 0.0002042490829656847,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 118.804931640625,
+                "corrected_peak_power": 0.0003137713192464253
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.020967684492007223,
+                  "corrected_power_pa2_per_hz": 0.00020115769483420654,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0014807005803419556,
+                  "corrected_power_pa2_per_hz": 0.0002805604851455903,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.24644041735857294,
+                  "corrected_power_pa2_per_hz": 0.00019972390222463117,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 27.245218592671222,
+                  "corrected_power_pa2_per_hz": 0.00017002310198450867,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 948.7098263128989,
+                  "corrected_power_pa2_per_hz": 0.00026496548286234964,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1481.2901199628714,
+                  "corrected_power_pa2_per_hz": 0.00032639860012374664,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.005663241182149877,
+                "corrected_power_pa2_per_hz": 0.00021012934336986784,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.1253662109375,
+                "corrected_peak_power": 0.00029288230095474583
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.02085189807859972,
+                  "corrected_power_pa2_per_hz": 0.00018608345970990708,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.001572469740984964,
+                  "corrected_power_pa2_per_hz": 0.00027867130542405435,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.24539492259289475,
+                  "corrected_power_pa2_per_hz": 0.0001914127918289556,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 34.993394109415746,
+                  "corrected_power_pa2_per_hz": 0.00022188280964201276,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 939.8933138666987,
+                  "corrected_power_pa2_per_hz": 0.00026377231171717714,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1579.7794299589552,
+                  "corrected_power_pa2_per_hz": 0.0003480704890524112,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.5283809374304715,
+          "corrected_event_vs_noise_snr_db": 0.5235841479978679,
+          "raw_minus_corrected_snr_db": 0.004796789432603643,
+          "corrected_target_sideband_contrast_db": -0.6441846325806099,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": 0.6987267831802995,
+              "corrected_event_vs_noise_snr_db": 0.5003753979438658
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 0.20650463945297293,
+              "corrected_event_vs_noise_snr_db": 0.6525931607536495
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.14131373268098754,
+              "corrected_event_vs_noise_snr_db": -0.02456446522083622
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 0.9594219946142524,
+              "corrected_event_vs_noise_snr_db": 0.6263081386158244
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": 0.19515048504979182,
+              "corrected_event_vs_noise_snr_db": 0.09717630098507649
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.29831541549112583,
+              "corrected_event_vs_noise_snr_db": -0.29844363934585794
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.12900901275578158,
+          "target_peak_frequency_hz": 119.07958984375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": true
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.06103515625,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 4,
+      "source_time_code": "20150041644482",
+      "origin_utc": "2015-01-04T16:44:48.200000Z",
+      "source_magnitude_db": 219.6,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-04T16:48:46.606834Z",
+          "event_window": {
+            "start_utc": "2015-01-04T16:43:46.606834Z",
+            "end_utc": "2015-01-04T16:53:46.606834Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T14:43:46.606834Z",
+              "center_utc": "2015-01-04T14:48:46.606834Z",
+              "end_utc": "2015-01-04T14:53:46.606834Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T18:43:46.606834Z",
+              "center_utc": "2015-01-04T18:48:46.606834Z",
+              "end_utc": "2015-01-04T18:53:46.606834Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T16%3A43%3A46.606834Z&endtime=2015-01-04T16%3A53%3A46.606834Z&nodata=404&format=miniseed",
+            "bytes": 238592,
+            "sha256": "d9db034ca7c69a2978a9115fbbe41ef37eff9f9f7705162fc8556d528d9c1c8d",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T16:43:46.608000Z",
+            "endtime": "2015-01-04T16:53:46.604000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T14%3A43%3A46.606834Z&endtime=2015-01-04T14%3A53%3A46.606834Z&nodata=404&format=miniseed",
+              "bytes": 238080,
+              "sha256": "74a7668cfd5f94c4ba6074600db3bd0e4c94b3f259e4155213a850a44c528614",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T14:43:46.609000Z",
+              "endtime": "2015-01-04T14:53:46.605000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T18%3A43%3A46.606834Z&endtime=2015-01-04T18%3A53%3A46.606834Z&nodata=404&format=miniseed",
+              "bytes": 232960,
+              "sha256": "d4ee95ee610f1722cdac8509aec9b6cb040ac548e1423c0d562b32731bf9791b",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T18:43:46.608000Z",
+              "endtime": "2015-01-04T18:53:46.604000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0006681392587149427,
+              "corrected_power_pa2_per_hz": 2.4997192637624265e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2474365234375,
+              "corrected_peak_power": 5.3997295956969176e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.0009026923674013816,
+                "corrected_power_pa2_per_hz": 8.097629826697304e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0005846724080537729,
+                "corrected_power_pa2_per_hz": 0.00011709921488921887,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.0037312608837151706,
+                "corrected_power_pa2_per_hz": 2.987650201707496e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.39984884616831073,
+                "corrected_power_pa2_per_hz": 2.2907487403944604e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 12.07439027135748,
+                "corrected_power_pa2_per_hz": 3.3259935340639964e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 33.75604480329922,
+                "corrected_power_pa2_per_hz": 7.277317128185918e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0006385729267275199,
+                "corrected_power_pa2_per_hz": 2.4713549526437503e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2474365234375,
+                "corrected_peak_power": 4.992074989474756e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0012186377592605855,
+                  "corrected_power_pa2_per_hz": 9.874921860862412e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006778425702547007,
+                  "corrected_power_pa2_per_hz": 0.00012623842105247368,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.0048100516899780895,
+                  "corrected_power_pa2_per_hz": 3.6066722060672242e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.6881455790418957,
+                  "corrected_power_pa2_per_hz": 4.357823304172102e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 21.45262569267407,
+                  "corrected_power_pa2_per_hz": 5.804247062617774e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 37.14554126087481,
+                  "corrected_power_pa2_per_hz": 8.008492858385213e-06,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0006740067785560547,
+                "corrected_power_pa2_per_hz": 2.53562013152216e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2474365234375,
+                "corrected_peak_power": 4.9765345638130335e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0008653673166964217,
+                  "corrected_power_pa2_per_hz": 7.505439539367982e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006941740363453493,
+                  "corrected_power_pa2_per_hz": 0.00012189261698131279,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.0040708885716556845,
+                  "corrected_power_pa2_per_hz": 3.3441448820205984e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.7064644105004954,
+                  "corrected_power_pa2_per_hz": 4.181617801000861e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 21.505887134931108,
+                  "corrected_power_pa2_per_hz": 5.9314882900119e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 46.4912212186945,
+                  "corrected_power_pa2_per_hz": 1.00217943753105e-05,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.07771301524135084,
+          "corrected_event_vs_noise_snr_db": -0.00654197539235268,
+          "raw_minus_corrected_snr_db": 0.08425499063370352,
+          "corrected_target_sideband_contrast_db": -3.9867215095083064,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.6232900641015905,
+              "corrected_event_vs_noise_snr_db": -0.306708874450607
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.694167733156617,
+              "corrected_event_vs_noise_snr_db": -0.2509711343270552
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.7557333782110864,
+              "corrected_event_vs_noise_snr_db": -0.6567611615389788
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -2.415269289275116,
+              "corrected_event_vs_noise_snr_db": -2.7042199553768915
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -2.5015403341619495,
+              "corrected_event_vs_noise_snr_db": -2.4655891111001504
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.9301566293401266,
+              "corrected_event_vs_noise_snr_db": -0.930013488396344
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.24442915893470252,
+          "target_peak_frequency_hz": 119.2474365234375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-04T16:49:56.966362Z",
+          "event_window": {
+            "start_utc": "2015-01-04T16:44:56.966362Z",
+            "end_utc": "2015-01-04T16:54:56.966362Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T14:44:56.966362Z",
+              "center_utc": "2015-01-04T14:49:56.966362Z",
+              "end_utc": "2015-01-04T14:54:56.966362Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T18:44:56.966362Z",
+              "center_utc": "2015-01-04T18:49:56.966362Z",
+              "end_utc": "2015-01-04T18:54:56.966362Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T16%3A44%3A56.966362Z&endtime=2015-01-04T16%3A54%3A56.966362Z&nodata=404&format=miniseed",
+            "bytes": 348160,
+            "sha256": "3bd90e0d2924fff5a1dca2ef49141f8ecb774c6dab722eec60b7bac9549bf209",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T16:44:56.969000Z",
+            "endtime": "2015-01-04T16:54:56.965000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T14%3A44%3A56.966362Z&endtime=2015-01-04T14%3A54%3A56.966362Z&nodata=404&format=miniseed",
+              "bytes": 349696,
+              "sha256": "688988632f8fe6089238f641433157c178b040a4fe7db2ec0c8309375f6992c7",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T14:44:56.969000Z",
+              "endtime": "2015-01-04T14:54:56.965000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T18%3A44%3A56.966362Z&endtime=2015-01-04T18%3A54%3A56.966362Z&nodata=404&format=miniseed",
+              "bytes": 346112,
+              "sha256": "2a36e26f9e7d727fe1cd8f6bd7995a9b48a267de6a257268bde2dc99bb1d43a1",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T18:44:56.969000Z",
+              "endtime": "2015-01-04T18:54:56.965000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.004564741521476763,
+              "corrected_power_pa2_per_hz": 0.00019674595985629396,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 118.7744140625,
+              "corrected_peak_power": 0.0003085701801013784
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.022089738906020423,
+                "corrected_power_pa2_per_hz": 0.00019302678166074764,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0016174247930864163,
+                "corrected_power_pa2_per_hz": 0.0003170707187969909,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.24460377930750418,
+                "corrected_power_pa2_per_hz": 0.00018745124926693854,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 33.17290507915611,
+                "corrected_power_pa2_per_hz": 0.00020388378390372841,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 869.273086766967,
+                "corrected_power_pa2_per_hz": 0.00023946956662170943,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1389.2602353995774,
+                "corrected_power_pa2_per_hz": 0.000306126644281621,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.00583987540954527,
+                "corrected_power_pa2_per_hz": 0.00023054341971700068,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 118.9422607421875,
+                "corrected_peak_power": 0.0003995126910364602
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.021647909791037725,
+                  "corrected_power_pa2_per_hz": 0.000202070433008083,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017173071155824786,
+                  "corrected_power_pa2_per_hz": 0.00035350311304659484,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.26958020663197163,
+                  "corrected_power_pa2_per_hz": 0.00020540252336859316,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 33.809006990144375,
+                  "corrected_power_pa2_per_hz": 0.00020491153172671594,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 1011.3790549416099,
+                  "corrected_power_pa2_per_hz": 0.00028556011498941065,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1385.1790922993805,
+                  "corrected_power_pa2_per_hz": 0.00030517633543396185,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.005825179818597666,
+                "corrected_power_pa2_per_hz": 0.00022517133372189572,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0643310546875,
+                "corrected_peak_power": 0.00037029796968129626
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.023003705439081548,
+                  "corrected_power_pa2_per_hz": 0.00019943392278141427,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017491647235062255,
+                  "corrected_power_pa2_per_hz": 0.00033276219975674826,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.262642173173536,
+                  "corrected_power_pa2_per_hz": 0.00021083236862257202,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 36.249963476662145,
+                  "corrected_power_pa2_per_hz": 0.00021180515945171347,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 811.5572781143942,
+                  "corrected_power_pa2_per_hz": 0.0002231691044053154,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1730.8800165359523,
+                  "corrected_power_pa2_per_hz": 0.00038137572684451696,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -1.0644061299738723,
+          "corrected_event_vs_noise_snr_db": -0.6375727015719144,
+          "raw_minus_corrected_snr_db": -0.4268334284019579,
+          "corrected_target_sideband_contrast_db": -1.1271737681272351,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.04616595365126028,
+              "corrected_event_vs_noise_snr_db": -0.17042695759086293
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.30033584751777076,
+              "corrected_event_vs_noise_snr_db": -0.3430591525565553
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.36599973979670974,
+              "corrected_event_vs_noise_snr_db": -0.45420148503338054
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -0.23650249277528612,
+              "corrected_event_vs_noise_snr_db": -0.09428215266160987
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.20585271501198416,
+              "corrected_event_vs_noise_snr_db": -0.26206358602705393
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.4979208644837888,
+              "corrected_event_vs_noise_snr_db": -0.49742349521509993
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.5432905489103045,
+          "target_peak_frequency_hz": 118.7744140625,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.4730224609375,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 5,
+      "source_time_code": "20150031234191",
+      "origin_utc": "2015-01-03T12:34:19.100000Z",
+      "source_magnitude_db": 218.86,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-03T13:01:48.334772Z",
+          "event_window": {
+            "start_utc": "2015-01-03T12:56:48.334772Z",
+            "end_utc": "2015-01-03T13:06:48.334772Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T10:56:48.334772Z",
+              "center_utc": "2015-01-03T11:01:48.334772Z",
+              "end_utc": "2015-01-03T11:06:48.334772Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T14:56:48.334772Z",
+              "center_utc": "2015-01-03T15:01:48.334772Z",
+              "end_utc": "2015-01-03T15:06:48.334772Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T12%3A56%3A48.334772Z&endtime=2015-01-03T13%3A06%3A48.334772Z&nodata=404&format=miniseed",
+            "bytes": 223232,
+            "sha256": "6c645799b74afed78c83a45e810c4df79fcbde3b88fd96cdb79a69a1925fd8f4",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-03T12:56:48.338000Z",
+            "endtime": "2015-01-03T13:06:48.334000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T10%3A56%3A48.334772Z&endtime=2015-01-03T11%3A06%3A48.334772Z&nodata=404&format=miniseed",
+              "bytes": 234496,
+              "sha256": "41d4fc71362f63240c16fdb8f61d362b8463f5614b86e3670ba6601cb6467169",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T10:56:48.338000Z",
+              "endtime": "2015-01-03T11:06:48.334000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-03T14%3A56%3A48.334772Z&endtime=2015-01-03T15%3A06%3A48.334772Z&nodata=404&format=miniseed",
+              "bytes": 258048,
+              "sha256": "2865b4a271136c59c65a580c30b834acadf87e77772316d9fec8add9da61ab1c",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T14:56:48.337000Z",
+              "endtime": "2015-01-03T15:06:48.333000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0007206518158533268,
+              "corrected_power_pa2_per_hz": 2.6673670609052478e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.0338134765625,
+              "corrected_peak_power": 5.0176125777809075e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.001152586010839624,
+                "corrected_power_pa2_per_hz": 1.006703612958437e-05,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0006399621166222545,
+                "corrected_power_pa2_per_hz": 0.00012727655047364088,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.004774441516297374,
+                "corrected_power_pa2_per_hz": 3.826939423539611e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.6164060826467148,
+                "corrected_power_pa2_per_hz": 3.7071312772861674e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 14.225316420756515,
+                "corrected_power_pa2_per_hz": 3.8339156184179866e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 24.245218946370603,
+                "corrected_power_pa2_per_hz": 5.226517005710473e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0009110991074513226,
+                "corrected_power_pa2_per_hz": 3.521238466369939e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0643310546875,
+                "corrected_peak_power": 6.36063453036315e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.001654169843369071,
+                  "corrected_power_pa2_per_hz": 1.5093908460658594e-05,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0007030253965256905,
+                  "corrected_power_pa2_per_hz": 0.00013054974784445207,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.012346159387028804,
+                  "corrected_power_pa2_per_hz": 1.010705531104152e-05,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.9487802622831238,
+                  "corrected_power_pa2_per_hz": 1.1622521657080749e-05,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 40.70537891719871,
+                  "corrected_power_pa2_per_hz": 1.1049698338571173e-05,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 73.47449147974868,
+                  "corrected_power_pa2_per_hz": 1.5839125844032547e-05,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0008995678853645018,
+                "corrected_power_pa2_per_hz": 3.0439117328042987e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.171142578125,
+                "corrected_peak_power": 5.8570140911829687e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0011452867789841896,
+                  "corrected_power_pa2_per_hz": 1.0184391441091547e-05,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006649993445983455,
+                  "corrected_power_pa2_per_hz": 0.0001257842083862174,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.010714636846319145,
+                  "corrected_power_pa2_per_hz": 9.057825821071221e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.2249699089042185,
+                  "corrected_power_pa2_per_hz": 7.465609871774806e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 39.402132465921476,
+                  "corrected_power_pa2_per_hz": 1.0964330306351801e-05,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 101.04413832165551,
+                  "corrected_power_pa2_per_hz": 2.178354477030041e-05,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.9908310383903483,
+          "corrected_event_vs_noise_snr_db": -0.901318869720657,
+          "raw_minus_corrected_snr_db": -0.08951216866969125,
+          "corrected_target_sideband_contrast_db": -4.106956049462733,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.8437040265505322,
+              "corrected_event_vs_noise_snr_db": -0.9881623909322846
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.289096900064647,
+              "corrected_event_vs_noise_snr_db": -0.030277484792696374
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -3.829217247949466,
+              "corrected_event_vs_noise_snr_db": -3.98624546424932
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -4.106758259916966,
+              "corrected_event_vs_noise_snr_db": -4.106954576466993
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -4.495813091046051,
+              "corrected_event_vs_noise_snr_db": -4.580269814309916
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -5.561856885225787,
+              "corrected_event_vs_noise_snr_db": -5.562072568671333
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.8710413849279606,
+          "target_peak_frequency_hz": 119.0338134765625,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": true
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-03T13:02:26.726343Z",
+          "event_window": {
+            "start_utc": "2015-01-03T12:57:26.726343Z",
+            "end_utc": "2015-01-03T13:07:26.726343Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-03T10:57:26.726343Z",
+              "center_utc": "2015-01-03T11:02:26.726343Z",
+              "end_utc": "2015-01-03T11:07:26.726343Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-03T14:57:26.726343Z",
+              "center_utc": "2015-01-03T15:02:26.726343Z",
+              "end_utc": "2015-01-03T15:07:26.726343Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T12%3A57%3A26.726343Z&endtime=2015-01-03T13%3A07%3A26.726343Z&nodata=404&format=miniseed",
+            "bytes": 356864,
+            "sha256": "a5d04841e82a066d8fe805b3c48fee5e62b85d5a44cf5b67b13e7fd582a705e4",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-03T12:57:26.728000Z",
+            "endtime": "2015-01-03T13:07:26.724000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T10%3A57%3A26.726343Z&endtime=2015-01-03T11%3A07%3A26.726343Z&nodata=404&format=miniseed",
+              "bytes": 348160,
+              "sha256": "5692768657bdcbea9035c355453681ce730a44def37b0de981685beed55a290f",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T10:57:26.728000Z",
+              "endtime": "2015-01-03T11:07:26.724000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-03T14%3A57%3A26.726343Z&endtime=2015-01-03T15%3A07%3A26.726343Z&nodata=404&format=miniseed",
+              "bytes": 355840,
+              "sha256": "3a3f7dbe99fcf44a880e355179d795102dd5ddcb0c07967219e4430c8850a763",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-03T14:57:26.728000Z",
+              "endtime": "2015-01-03T15:07:26.724000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.01426336470553761,
+              "corrected_power_pa2_per_hz": 0.000553664069648872,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 118.9727783203125,
+              "corrected_peak_power": 0.0010787879035919553
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.07165981053337117,
+                "corrected_power_pa2_per_hz": 0.0006437796575135795,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.003746009297321958,
+                "corrected_power_pa2_per_hz": 0.0006807590378893626,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.4355950368910274,
+                "corrected_power_pa2_per_hz": 0.0003773777181397303,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 95.58195074708476,
+                "corrected_power_pa2_per_hz": 0.0005772748076112306,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 3049.9771318353733,
+                "corrected_power_pa2_per_hz": 0.0008504190044393745,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 4753.22545765617,
+                "corrected_power_pa2_per_hz": 0.001047208938340958,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.005490043393075694,
+                "corrected_power_pa2_per_hz": 0.00022135714541568754,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0032958984375,
+                "corrected_peak_power": 0.00037154718741918473
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.02551559723193503,
+                  "corrected_power_pa2_per_hz": 0.0002218754389822582,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017001174934294786,
+                  "corrected_power_pa2_per_hz": 0.000350046440526956,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.25232425028521266,
+                  "corrected_power_pa2_per_hz": 0.00019212483557552818,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 37.17261214002109,
+                  "corrected_power_pa2_per_hz": 0.0002285451981881623,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 1073.2767815837144,
+                  "corrected_power_pa2_per_hz": 0.00029859654428718665,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1509.3997220700026,
+                  "corrected_power_pa2_per_hz": 0.00033257179107016514,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.011124239766040876,
+                "corrected_power_pa2_per_hz": 0.0003873103493039501,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.171142578125,
+                "corrected_peak_power": 0.0008540037102911856
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.05667287272979226,
+                  "corrected_power_pa2_per_hz": 0.0005424210766562522,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.002122915367593462,
+                  "corrected_power_pa2_per_hz": 0.00040443123678623257,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.45554576405722547,
+                  "corrected_power_pa2_per_hz": 0.0003629634237234654,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 74.00531126633332,
+                  "corrected_power_pa2_per_hz": 0.00044170635863584334,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 2673.913956005193,
+                  "corrected_power_pa2_per_hz": 0.0007429238234883922,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 3932.3109704379117,
+                  "corrected_power_pa2_per_hz": 0.0008664108575787188,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 2.347703747354752,
+          "corrected_event_vs_noise_snr_db": 2.598962269891996,
+          "raw_minus_corrected_snr_db": -0.2512585225372441,
+          "corrected_target_sideband_contrast_db": -0.777883141076891,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": 2.4149475562951843,
+              "corrected_event_vs_noise_snr_db": 2.2650536548750733
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 2.9219081556213,
+              "corrected_event_vs_noise_snr_db": 2.5637701663593413
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": 0.9015940265513191,
+              "corrected_event_vs_noise_snr_db": 1.3344420815714768
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 2.3538732754612313,
+              "corrected_event_vs_noise_snr_db": 2.3617476946578284
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": 2.1162077887092243,
+              "corrected_event_vs_noise_snr_db": 2.1299518518307514
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": 2.4228296127108035,
+              "corrected_event_vs_noise_snr_db": 2.4225043794445864
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.035192103532654784,
+          "target_peak_frequency_hz": 118.9727783203125,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": true
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.06103515625,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 6,
+      "source_time_code": "20150042102473",
+      "origin_utc": "2015-01-04T21:02:47.300000Z",
+      "source_magnitude_db": 218.3,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-04T21:49:41.483417Z",
+          "event_window": {
+            "start_utc": "2015-01-04T21:44:41.483417Z",
+            "end_utc": "2015-01-04T21:54:41.483417Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T19:44:41.483417Z",
+              "center_utc": "2015-01-04T19:49:41.483417Z",
+              "end_utc": "2015-01-04T19:54:41.483417Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T23:44:41.483417Z",
+              "center_utc": "2015-01-04T23:49:41.483417Z",
+              "end_utc": "2015-01-04T23:54:41.483417Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T21%3A44%3A41.483417Z&endtime=2015-01-04T21%3A54%3A41.483417Z&nodata=404&format=miniseed",
+            "bytes": 235008,
+            "sha256": "77d4c1aa2dc420ffb0a5fa311fdc226f44d3c0a9cafa958afb807f7b9f25c36a",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T21:44:41.485000Z",
+            "endtime": "2015-01-04T21:54:41.481000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T19%3A44%3A41.483417Z&endtime=2015-01-04T19%3A54%3A41.483417Z&nodata=404&format=miniseed",
+              "bytes": 241152,
+              "sha256": "1744ee44f7b3932e03b8adc4b43304d983bb47d61f8594d3954188b4a939e3f7",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T19:44:41.485000Z",
+              "endtime": "2015-01-04T19:54:41.481000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T23%3A44%3A41.483417Z&endtime=2015-01-04T23%3A54%3A41.483417Z&nodata=404&format=miniseed",
+              "bytes": 221184,
+              "sha256": "1c50f9a97915919e1c18331072a7c83e2542cd77939266817a41ffd3b1ed6092",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T23:44:41.484000Z",
+              "endtime": "2015-01-04T23:54:41.484000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0006971911982442403,
+              "corrected_power_pa2_per_hz": 2.750285434490932e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.1864013671875,
+              "corrected_peak_power": 5.072954520550017e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.0009500186269014443,
+                "corrected_power_pa2_per_hz": 8.484319134472596e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0006195775266940485,
+                "corrected_power_pa2_per_hz": 0.0001181885892439861,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.0037629695785979284,
+                "corrected_power_pa2_per_hz": 2.8423649384733294e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.4827985611579874,
+                "corrected_power_pa2_per_hz": 2.7990735366016595e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 29.65857210814964,
+                "corrected_power_pa2_per_hz": 8.110678916131066e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 41.718294801785575,
+                "corrected_power_pa2_per_hz": 8.993666108354396e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0008363698592464133,
+                "corrected_power_pa2_per_hz": 3.1921307349499483e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2474365234375,
+                "corrected_peak_power": 5.82271513750708e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0013134258332820035,
+                  "corrected_power_pa2_per_hz": 1.2033479371931552e-05,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0007172048451275833,
+                  "corrected_power_pa2_per_hz": 0.00012997507020989871,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.008552917873853656,
+                  "corrected_power_pa2_per_hz": 6.761317366550729e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.4345360410063677,
+                  "corrected_power_pa2_per_hz": 8.434370289775963e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 46.00325959430427,
+                  "corrected_power_pa2_per_hz": 1.2583300542717962e-05,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 65.81095181885506,
+                  "corrected_power_pa2_per_hz": 1.4188040617314725e-05,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.000650968887115215,
+                "corrected_power_pa2_per_hz": 2.7091868500113768e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.2474365234375,
+                "corrected_peak_power": 4.7236191970045864e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0009033707957912776,
+                  "corrected_power_pa2_per_hz": 7.1642811491688605e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.000630356703938016,
+                  "corrected_power_pa2_per_hz": 0.00011309220645748873,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.003057187447783307,
+                  "corrected_power_pa2_per_hz": 2.4722527702311502e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.4204709312371307,
+                  "corrected_power_pa2_per_hz": 2.5530154247979775e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 15.128039540916868,
+                  "corrected_power_pa2_per_hz": 4.0779224847983576e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 27.896304484566162,
+                  "corrected_power_pa2_per_hz": 6.014302848391447e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.2802800045953576,
+          "corrected_event_vs_noise_snr_db": -0.3054122276133374,
+          "raw_minus_corrected_snr_db": 0.025132223017979793,
+          "corrected_target_sideband_contrast_db": -3.6227597748367684,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.6696373617740039,
+              "corrected_event_vs_noise_snr_db": -0.5360357820724818
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.3642295813733595,
+              "corrected_event_vs_noise_snr_db": -0.12120950773002091
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -1.8827545649816437,
+              "corrected_event_vs_noise_snr_db": -2.106598193614647
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -2.835495834950756,
+              "corrected_event_vs_noise_snr_db": -2.9285006682347694
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.13083391275113226,
+              "corrected_event_vs_noise_snr_db": -0.11619673253849648
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.5041667778293667,
+              "corrected_event_vs_noise_snr_db": -0.5043499447072017
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.18921549507484092,
+          "target_peak_frequency_hz": 119.1864013671875,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-04T21:50:22.233898Z",
+          "event_window": {
+            "start_utc": "2015-01-04T21:45:22.233898Z",
+            "end_utc": "2015-01-04T21:55:22.233898Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T19:45:22.233898Z",
+              "center_utc": "2015-01-04T19:50:22.233898Z",
+              "end_utc": "2015-01-04T19:55:22.233898Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-04T23:45:22.233898Z",
+              "center_utc": "2015-01-04T23:50:22.233898Z",
+              "end_utc": "2015-01-04T23:55:22.233898Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T21%3A45%3A22.233898Z&endtime=2015-01-04T21%3A55%3A22.233898Z&nodata=404&format=miniseed",
+            "bytes": 347136,
+            "sha256": "d3b6a03e7d48509586a2bb65207fa66bd5f52dc5bfb9c8d725bac68d79cb16b7",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T21:45:22.235000Z",
+            "endtime": "2015-01-04T21:55:22.231000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T19%3A45%3A22.233898Z&endtime=2015-01-04T19%3A55%3A22.233898Z&nodata=404&format=miniseed",
+              "bytes": 347136,
+              "sha256": "59d5a5013f1853331ec0e002ab597c4e6b5933aea68232a3d042c0c9091fb75e",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T19:45:22.235000Z",
+              "endtime": "2015-01-04T19:55:22.231000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T23%3A45%3A22.233898Z&endtime=2015-01-04T23%3A55%3A22.233898Z&nodata=404&format=miniseed",
+              "bytes": 349184,
+              "sha256": "5a747a2d2ef2b8898aefc32fb4eafd2bd01555684b54056900603c962c613c0c",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T23:45:22.235000Z",
+              "endtime": "2015-01-04T23:55:22.231000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0054426279012745335,
+              "corrected_power_pa2_per_hz": 0.00021222021192493555,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 118.896484375,
+              "corrected_peak_power": 0.0002921318708369296
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.021379374646094098,
+                "corrected_power_pa2_per_hz": 0.00019243088097696016,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0015572052887809803,
+                "corrected_power_pa2_per_hz": 0.0003008644217017764,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.24736762586612226,
+                "corrected_power_pa2_per_hz": 0.00020616153241447444,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 33.445731853322386,
+                "corrected_power_pa2_per_hz": 0.00019815715106466373,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 1048.2562835420013,
+                "corrected_power_pa2_per_hz": 0.00028922458888738084,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1268.3179169173575,
+                "corrected_power_pa2_per_hz": 0.00027945002883544774,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.00539924855991924,
+                "corrected_power_pa2_per_hz": 0.0002261500029766287,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 118.7591552734375,
+                "corrected_peak_power": 0.00040143730125976354
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.02372389639393063,
+                  "corrected_power_pa2_per_hz": 0.00020163794422648607,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0015782791686548355,
+                  "corrected_power_pa2_per_hz": 0.0002802647060139522,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.25725049943653844,
+                  "corrected_power_pa2_per_hz": 0.0002186692080308919,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 37.20351837140044,
+                  "corrected_power_pa2_per_hz": 0.00023098287040609027,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 901.5651785627354,
+                  "corrected_power_pa2_per_hz": 0.00024994321243662144,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1396.9890888190039,
+                  "corrected_power_pa2_per_hz": 0.0003077907221614212,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.005779404557834608,
+                "corrected_power_pa2_per_hz": 0.00022474095293653588,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 118.988037109375,
+                "corrected_peak_power": 0.00036085051194425794
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.021368013243594032,
+                  "corrected_power_pa2_per_hz": 0.00020096719849767894,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0019160855470196187,
+                  "corrected_power_pa2_per_hz": 0.0003190510480257657,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.22980698406290054,
+                  "corrected_power_pa2_per_hz": 0.00018945980467186392,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 33.92786855383545,
+                  "corrected_power_pa2_per_hz": 0.00021520442484908398,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 976.5231441987751,
+                  "corrected_power_pa2_per_hz": 0.0002737561236593447,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1551.7063278256674,
+                  "corrected_power_pa2_per_hz": 0.0003418933666902833,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.11550840489426306,
+          "corrected_event_vs_noise_snr_db": -0.26254784650635177,
+          "raw_minus_corrected_snr_db": 0.1470394416120887,
+          "corrected_target_sideband_contrast_db": -0.6529024043311393,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.23073634557928913,
+              "corrected_event_vs_noise_snr_db": -0.1957455430927254
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.49992365705574904,
+              "corrected_event_vs_noise_snr_db": 0.017451355385741798
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": 0.06792636024735406,
+              "corrected_event_vs_noise_snr_db": 0.044401607626051665
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -0.26690577479323957,
+              "corrected_event_vs_noise_snr_db": -0.5147745464603727
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": 0.477814576134799,
+              "corrected_event_vs_noise_snr_db": 0.4318318475249686
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.6537179150532086,
+              "corrected_event_vs_noise_snr_db": -0.6536807633721358
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.6943796940313204,
+          "target_peak_frequency_hz": 118.896484375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.2899169921875,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 7,
+      "source_time_code": "20150042128432",
+      "origin_utc": "2015-01-04T21:28:43.200000Z",
+      "source_magnitude_db": 214.71,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:15:51.878420Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:10:51.878420Z",
+            "end_utc": "2015-01-04T22:20:51.878420Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:10:51.878420Z",
+              "center_utc": "2015-01-04T20:15:51.878420Z",
+              "end_utc": "2015-01-04T20:20:51.878420Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:10:51.878420Z",
+              "center_utc": "2015-01-05T00:15:51.878420Z",
+              "end_utc": "2015-01-05T00:20:51.878420Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T22%3A10%3A51.878420Z&endtime=2015-01-04T22%3A20%3A51.878420Z&nodata=404&format=miniseed",
+            "bytes": 232960,
+            "sha256": "d0a4243caaf7c5b871b01d1a89deb5b3ef67603930dc73fa4e64ed9da60a00c1",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:10:51.882000Z",
+            "endtime": "2015-01-04T22:20:51.878000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T20%3A10%3A51.878420Z&endtime=2015-01-04T20%3A20%3A51.878420Z&nodata=404&format=miniseed",
+              "bytes": 241152,
+              "sha256": "8ecd92ce2055f3c455f76f59fc8208519bae92f15091a91a2769dbb255be17f4",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:10:51.879000Z",
+              "endtime": "2015-01-04T20:20:51.879000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T00%3A10%3A51.878420Z&endtime=2015-01-05T00%3A20%3A51.878420Z&nodata=404&format=miniseed",
+              "bytes": 226816,
+              "sha256": "4f78c02dd5b8ec55b0d2d19a98e8b879fb9a58efaa16a1e6d154c29726dc8dd6",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:10:51.882000Z",
+              "endtime": "2015-01-05T00:20:51.878000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0007788814795268925,
+              "corrected_power_pa2_per_hz": 2.669227955079614e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2474365234375,
+              "corrected_peak_power": 5.076640346275285e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.000896858180455848,
+                "corrected_power_pa2_per_hz": 7.471089396076642e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0006346427877267533,
+                "corrected_power_pa2_per_hz": 0.00011292770902423132,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.0034956304653036624,
+                "corrected_power_pa2_per_hz": 2.9048798267272792e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.4970594311760057,
+                "corrected_power_pa2_per_hz": 2.942758407177431e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 20.419283032333155,
+                "corrected_power_pa2_per_hz": 5.557753812529959e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 44.46419616490149,
+                "corrected_power_pa2_per_hz": 9.585840350295732e-06,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0007290982777944264,
+                "corrected_power_pa2_per_hz": 2.7175507145653976e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.232177734375,
+                "corrected_peak_power": 5.650358990371709e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.001180200621492592,
+                  "corrected_power_pa2_per_hz": 1.0775945066900533e-05,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006029554148605985,
+                  "corrected_power_pa2_per_hz": 0.00011901562726229892,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.007983570095462902,
+                  "corrected_power_pa2_per_hz": 6.870985072251614e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.6029131874034321,
+                  "corrected_power_pa2_per_hz": 9.902151954639661e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 36.57678306000392,
+                  "corrected_power_pa2_per_hz": 9.852694019315116e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 63.327093377368826,
+                  "corrected_power_pa2_per_hz": 1.3652186591387585e-05,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0006739194129129848,
+                "corrected_power_pa2_per_hz": 2.522180294810213e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0032958984375,
+                "corrected_peak_power": 4.806509202088665e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.000893875977619628,
+                  "corrected_power_pa2_per_hz": 7.900462777472255e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006992870312071532,
+                  "corrected_power_pa2_per_hz": 0.00013164449179364903,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.0039022206737562254,
+                  "corrected_power_pa2_per_hz": 2.9481968076209827e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.5743827587839371,
+                  "corrected_power_pa2_per_hz": 3.4848071459654884e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 21.71557905643757,
+                  "corrected_power_pa2_per_hz": 5.856477949116027e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 30.602642997785022,
+                  "corrected_power_pa2_per_hz": 6.597804265400967e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.45438225744479155,
+          "corrected_event_vs_noise_snr_db": 0.08106667974110468,
+          "raw_minus_corrected_snr_db": 0.37331557770368684,
+          "corrected_target_sideband_contrast_db": -3.5320649241147404,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.6307102210894132,
+              "corrected_event_vs_noise_snr_db": -0.9687942053011228
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.11132502270502277,
+              "corrected_event_vs_noise_snr_db": -0.4525472829180679
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -2.3047256957147058,
+              "corrected_event_vs_noise_snr_db": -2.2791713826270104
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -3.4047914982616927,
+              "corrected_event_vs_noise_snr_db": -3.568973317701481
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -1.5454116949606878,
+              "corrected_event_vs_noise_snr_db": -1.5022399302161593
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.23762662339746227,
+              "corrected_event_vs_noise_snr_db": -0.23764644142324032
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.318713121164345,
+          "target_peak_frequency_hz": 119.2474365234375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:16:33.089362Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:11:33.089362Z",
+            "end_utc": "2015-01-04T22:21:33.089362Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:11:33.089362Z",
+              "center_utc": "2015-01-04T20:16:33.089362Z",
+              "end_utc": "2015-01-04T20:21:33.089362Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:11:33.089362Z",
+              "center_utc": "2015-01-05T00:16:33.089362Z",
+              "end_utc": "2015-01-05T00:21:33.089362Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T22%3A11%3A33.089362Z&endtime=2015-01-04T22%3A21%3A33.089362Z&nodata=404&format=miniseed",
+            "bytes": 347648,
+            "sha256": "46098cc2773912a353eafeb964384e1eecee056f7ec051b80ef8fab674d115fb",
+            "npts": 150001,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:11:33.090000Z",
+            "endtime": "2015-01-04T22:21:33.090000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T20%3A11%3A33.089362Z&endtime=2015-01-04T20%3A21%3A33.089362Z&nodata=404&format=miniseed",
+              "bytes": 347648,
+              "sha256": "d1074a64cbb4304ab3c31bf10ff9ececbc361130a76ecf4c744df41ee19e60c1",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:11:33.090000Z",
+              "endtime": "2015-01-04T20:21:33.090000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T00%3A11%3A33.089362Z&endtime=2015-01-05T00%3A21%3A33.089362Z&nodata=404&format=miniseed",
+              "bytes": 352768,
+              "sha256": "c99627c4832417199044acf90d12c2cc0017f73250048430622d4e94936229bf",
+              "npts": 150001,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:11:33.090000Z",
+              "endtime": "2015-01-05T00:21:33.090000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.00581503557741004,
+              "corrected_power_pa2_per_hz": 0.00021191704972143855,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2169189453125,
+              "corrected_peak_power": 0.00041389118269830787
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.019887472268840307,
+                "corrected_power_pa2_per_hz": 0.00019240611712463253,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.001736898014501051,
+                "corrected_power_pa2_per_hz": 0.00030251836510383735,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.23882565410902643,
+                "corrected_power_pa2_per_hz": 0.00019846107414388204,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 37.728308452490175,
+                "corrected_power_pa2_per_hz": 0.00023215644128420806,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 868.5714989105825,
+                "corrected_power_pa2_per_hz": 0.00024170628789641678,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1463.2745087110552,
+                "corrected_power_pa2_per_hz": 0.00032239501465063103,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0053738812615701445,
+                "corrected_power_pa2_per_hz": 0.00020027373925891447,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.1558837890625,
+                "corrected_peak_power": 0.00031682429560823483
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.020845317054170524,
+                  "corrected_power_pa2_per_hz": 0.0001969628923880486,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017400745178035477,
+                  "corrected_power_pa2_per_hz": 0.0003395577925000019,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.2826248588888748,
+                  "corrected_power_pa2_per_hz": 0.00021778888296195806,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 36.99027794758137,
+                  "corrected_power_pa2_per_hz": 0.0002241650705614568,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 881.0433990261971,
+                  "corrected_power_pa2_per_hz": 0.0002432712977431945,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1496.9805961870643,
+                  "corrected_power_pa2_per_hz": 0.0003298428110451795,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.006453123082170631,
+                "corrected_power_pa2_per_hz": 0.0002499835362792616,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 118.988037109375,
+                "corrected_peak_power": 0.00041740183742254133
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.024239140230338886,
+                  "corrected_power_pa2_per_hz": 0.00023077805812707382,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.001548732190808264,
+                  "corrected_power_pa2_per_hz": 0.0003120969018796804,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.2665541300456995,
+                  "corrected_power_pa2_per_hz": 0.00020916990752598767,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 39.84659471326519,
+                  "corrected_power_pa2_per_hz": 0.00024618833213665975,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 987.1024630705408,
+                  "corrected_power_pa2_per_hz": 0.0002727174873117396,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1663.5426883283021,
+                  "corrected_power_pa2_per_hz": 0.0003665165849460764,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.07292384489134093,
+          "corrected_event_vs_noise_snr_db": -0.2626484433947344,
+          "raw_minus_corrected_snr_db": 0.1897245985033935,
+          "corrected_target_sideband_contrast_db": -0.6734304260118912,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.5441726337616917,
+              "corrected_event_vs_noise_snr_db": -0.45931959163358066
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": 0.23765964715253105,
+              "corrected_event_vs_noise_snr_db": -0.3223578782711999
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.6060294163566957,
+              "corrected_event_vs_noise_snr_db": -0.31680626253983035
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -0.07872350598438639,
+              "corrected_event_vs_noise_snr_db": -0.05613556679998245
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.3157521220317291,
+              "corrected_event_vs_noise_snr_db": -0.28322318176092826
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.3340319164598618,
+              "corrected_event_vs_noise_snr_db": -0.3341512676940088
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.20651287659475198,
+          "target_peak_frequency_hz": 119.2169189453125,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.030517578125,
+      "replicated_both_stations": false
+    },
+    {
+      "selection_rank": 8,
+      "source_time_code": "20150042131072",
+      "origin_utc": "2015-01-04T21:31:07.200000Z",
+      "source_magnitude_db": 214.69,
+      "stations": {
+        "IM.H10N1..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:18:13.938068Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:13:13.938068Z",
+            "end_utc": "2015-01-04T22:23:13.938068Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:13:13.938068Z",
+              "center_utc": "2015-01-04T20:18:13.938068Z",
+              "end_utc": "2015-01-04T20:23:13.938068Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:13:13.938068Z",
+              "center_utc": "2015-01-05T00:18:13.938068Z",
+              "end_utc": "2015-01-05T00:23:13.938068Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T22%3A13%3A13.938068Z&endtime=2015-01-04T22%3A23%3A13.938068Z&nodata=404&format=miniseed",
+            "bytes": 229376,
+            "sha256": "5ffa32a447a8a18b9ae9c97413ff8d57eb8ce787495ee0bb39b20d0c325c59f7",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:13:13.942000Z",
+            "endtime": "2015-01-04T22:23:13.938000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-04T20%3A13%3A13.938068Z&endtime=2015-01-04T20%3A23%3A13.938068Z&nodata=404&format=miniseed",
+              "bytes": 239616,
+              "sha256": "7dadf9a6deeaa282a3c672dd33debf9879b80554e2aed686f836b7e4bb9f416e",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:13:13.942000Z",
+              "endtime": "2015-01-04T20:23:13.938000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10N1&loc=--&cha=EDH&starttime=2015-01-05T00%3A13%3A13.938068Z&endtime=2015-01-05T00%3A23%3A13.938068Z&nodata=404&format=miniseed",
+              "bytes": 225280,
+              "sha256": "0293ee844b739021b385dbdd9b484540e9e268c3c6a96cf656f2cb22484dcbb9",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:13:13.941000Z",
+              "endtime": "2015-01-05T00:23:13.937000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0007286553516986033,
+              "corrected_power_pa2_per_hz": 2.7205980561086387e-05,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2474365234375,
+              "corrected_peak_power": 4.495437923575404e-05
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.000819469780708495,
+                "corrected_power_pa2_per_hz": 7.1228187754105965e-06,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.000619524992196367,
+                "corrected_power_pa2_per_hz": 0.00010491473852024015,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.0032947496218050983,
+                "corrected_power_pa2_per_hz": 2.736094625607655e-06,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 0.47425842267438334,
+                "corrected_power_pa2_per_hz": 2.806119042024029e-06,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 23.00670325034094,
+                "corrected_power_pa2_per_hz": 6.331848727947033e-06,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 47.82041109384956,
+                "corrected_power_pa2_per_hz": 1.0308664172124396e-05,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.0007476876247270038,
+                "corrected_power_pa2_per_hz": 2.907158519095959e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.20166015625,
+                "corrected_peak_power": 5.296758760147655e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0011110700429402553,
+                  "corrected_power_pa2_per_hz": 9.737293494108005e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.000637839686045176,
+                  "corrected_power_pa2_per_hz": 0.00012244046589268565,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.006782752015295788,
+                  "corrected_power_pa2_per_hz": 5.432709185685942e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 1.3957982751321258,
+                  "corrected_power_pa2_per_hz": 8.388242719202879e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 32.99986479457698,
+                  "corrected_power_pa2_per_hz": 9.019264658196779e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 73.37726140058246,
+                  "corrected_power_pa2_per_hz": 1.5817211779585603e-05,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.0007065165594416825,
+                "corrected_power_pa2_per_hz": 2.3356258479135812e-05,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.20166015625,
+                "corrected_peak_power": 4.2147585269462785e-05
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.0008059685703455131,
+                  "corrected_power_pa2_per_hz": 7.488120708958844e-06,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0006774834613171199,
+                  "corrected_power_pa2_per_hz": 0.00012472752242966457,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.004146437882687679,
+                  "corrected_power_pa2_per_hz": 3.1383544590213867e-06,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 0.5309172173632216,
+                  "corrected_power_pa2_per_hz": 3.3713805366590985e-06,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 21.67398805028606,
+                  "corrected_power_pa2_per_hz": 5.906149472488831e-06,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 31.076560311912854,
+                  "corrected_power_pa2_per_hz": 6.699228905091431e-06,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": 0.0092676474134342,
+          "corrected_event_vs_noise_snr_db": 0.16132383304558257,
+          "raw_minus_corrected_snr_db": -0.15205618563214837,
+          "corrected_target_sideband_contrast_db": -3.1366925244820982,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.6806792204738827,
+              "corrected_event_vs_noise_snr_db": -0.8248778329623099
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.25943636437064055,
+              "corrected_event_vs_noise_snr_db": -0.7112572467180642
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -2.1973555955566795,
+              "corrected_event_vs_noise_snr_db": -1.9487361128866971
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": -3.0777254128568,
+              "corrected_event_vs_noise_snr_db": -3.2125732191254794
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.7489529304544124,
+              "corrected_event_vs_noise_snr_db": -0.7136586380258853
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.382810334669237,
+              "corrected_event_vs_noise_snr_db": -0.38267352544751987
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": 0.5439973584931024,
+          "target_peak_frequency_hz": 119.2474365234375,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        },
+        "IM.H10S2..EDH": {
+          "predicted_arrival_utc": "2015-01-04T22:18:54.647719Z",
+          "event_window": {
+            "start_utc": "2015-01-04T22:13:54.647719Z",
+            "end_utc": "2015-01-04T22:23:54.647719Z"
+          },
+          "noise_windows": [
+            {
+              "center_offset_s": -7200,
+              "start_utc": "2015-01-04T20:13:54.647719Z",
+              "center_utc": "2015-01-04T20:18:54.647719Z",
+              "end_utc": "2015-01-04T20:23:54.647719Z"
+            },
+            {
+              "center_offset_s": 7200,
+              "start_utc": "2015-01-05T00:13:54.647719Z",
+              "center_utc": "2015-01-05T00:18:54.647719Z",
+              "end_utc": "2015-01-05T00:23:54.647719Z"
+            }
+          ],
+          "data_status": "ANALYZED",
+          "event_waveform": {
+            "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T22%3A13%3A54.647719Z&endtime=2015-01-04T22%3A23%3A54.647719Z&nodata=404&format=miniseed",
+            "bytes": 348160,
+            "sha256": "305608bd04a502256df1b74dc110f64c9ca6c4a22ada18e515f62fe617bba4f2",
+            "npts": 150000,
+            "sampling_rate_hz": 250.0,
+            "starttime": "2015-01-04T22:13:54.650000Z",
+            "endtime": "2015-01-04T22:23:54.646000Z"
+          },
+          "noise_waveforms": [
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-04T20%3A13%3A54.647719Z&endtime=2015-01-04T20%3A23%3A54.647719Z&nodata=404&format=miniseed",
+              "bytes": 346624,
+              "sha256": "6e4ad08c9f01a151ea3e5cad377668ce2f4e19169a50a9fb0653c52e0c4a9360",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-04T20:13:54.650000Z",
+              "endtime": "2015-01-04T20:23:54.646000Z"
+            },
+            {
+              "url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=IM&sta=H10S2&loc=--&cha=EDH&starttime=2015-01-05T00%3A13%3A54.647719Z&endtime=2015-01-05T00%3A23%3A54.647719Z&nodata=404&format=miniseed",
+              "bytes": 352768,
+              "sha256": "26528350dac54cd4782812caeca4f19154c1401a4d3f14b2cb3c8104f4219b15",
+              "npts": 150000,
+              "sampling_rate_hz": 250.0,
+              "starttime": "2015-01-05T00:13:54.650000Z",
+              "endtime": "2015-01-05T00:23:54.646000Z"
+            }
+          ],
+          "event_band_summary": {
+            "target": {
+              "raw_power": 0.0056856895494695175,
+              "corrected_power_pa2_per_hz": 0.00022098416738536083,
+              "bin_count": 33,
+              "corrected_peak_frequency_hz": 119.2169189453125,
+              "corrected_peak_power": 0.000428627904982171
+            },
+            "controls": {
+              "near_left": {
+                "band_hz": [
+                  117.75,
+                  118.25
+                ],
+                "raw_power": 0.02229402283739805,
+                "corrected_power_pa2_per_hz": 0.00018679332937602283,
+                "bin_count": 33
+              },
+              "near_right": {
+                "band_hz": [
+                  119.75,
+                  120.25
+                ],
+                "raw_power": 0.0016157863901271436,
+                "corrected_power_pa2_per_hz": 0.0003013169756435237,
+                "bin_count": 33
+              },
+              "edge_116": {
+                "band_hz": [
+                  115.75,
+                  116.25
+                ],
+                "raw_power": 0.24909639576813938,
+                "corrected_power_pa2_per_hz": 0.00019154180865083945,
+                "bin_count": 33
+              },
+              "edge_110": {
+                "band_hz": [
+                  109.75,
+                  110.25
+                ],
+                "raw_power": 36.85601774765776,
+                "corrected_power_pa2_per_hz": 0.00024404903036269503,
+                "bin_count": 33
+              },
+              "inband_100": {
+                "band_hz": [
+                  99.75,
+                  100.25
+                ],
+                "raw_power": 882.7547098430675,
+                "corrected_power_pa2_per_hz": 0.00024406676309037524,
+                "bin_count": 32
+              },
+              "inband_90": {
+                "band_hz": [
+                  89.75,
+                  90.25
+                ],
+                "raw_power": 1492.541676776575,
+                "corrected_power_pa2_per_hz": 0.00032888359433519307,
+                "bin_count": 33
+              }
+            }
+          },
+          "noise_band_summaries": [
+            {
+              "target": {
+                "raw_power": 0.005547668680234192,
+                "corrected_power_pa2_per_hz": 0.00019922187762789513,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.1558837890625,
+                "corrected_peak_power": 0.0004226662303689777
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.020529156018787378,
+                  "corrected_power_pa2_per_hz": 0.00019753245195375856,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0017108198035097272,
+                  "corrected_power_pa2_per_hz": 0.00035550003917253373,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.22772801600621326,
+                  "corrected_power_pa2_per_hz": 0.0001897931601080696,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 33.891910662362385,
+                  "corrected_power_pa2_per_hz": 0.00021398000895838282,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 843.16076659104,
+                  "corrected_power_pa2_per_hz": 0.0002344351359161986,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1500.6887982204387,
+                  "corrected_power_pa2_per_hz": 0.00033068018086482493,
+                  "bin_count": 33
+                }
+              }
+            },
+            {
+              "target": {
+                "raw_power": 0.00639341494607398,
+                "corrected_power_pa2_per_hz": 0.00025595466617500987,
+                "bin_count": 33,
+                "corrected_peak_frequency_hz": 119.0643310546875,
+                "corrected_peak_power": 0.0003777586149193759
+              },
+              "controls": {
+                "near_left": {
+                  "band_hz": [
+                    117.75,
+                    118.25
+                  ],
+                  "raw_power": 0.024422653367244373,
+                  "corrected_power_pa2_per_hz": 0.00022562102087540423,
+                  "bin_count": 33
+                },
+                "near_right": {
+                  "band_hz": [
+                    119.75,
+                    120.25
+                  ],
+                  "raw_power": 0.0015358296562804205,
+                  "corrected_power_pa2_per_hz": 0.00031710295913730337,
+                  "bin_count": 33
+                },
+                "edge_116": {
+                  "band_hz": [
+                    115.75,
+                    116.25
+                  ],
+                  "raw_power": 0.29428919906589385,
+                  "corrected_power_pa2_per_hz": 0.0002087304118233039,
+                  "bin_count": 33
+                },
+                "edge_110": {
+                  "band_hz": [
+                    109.75,
+                    110.25
+                  ],
+                  "raw_power": 36.918482067416456,
+                  "corrected_power_pa2_per_hz": 0.00023672869828820383,
+                  "bin_count": 33
+                },
+                "inband_100": {
+                  "band_hz": [
+                    99.75,
+                    100.25
+                  ],
+                  "raw_power": 1075.494427417495,
+                  "corrected_power_pa2_per_hz": 0.00029611981738615547,
+                  "bin_count": 32
+                },
+                "inband_90": {
+                  "band_hz": [
+                    89.75,
+                    90.25
+                  ],
+                  "raw_power": 1728.5933397918172,
+                  "corrected_power_pa2_per_hz": 0.0003808820539773269,
+                  "bin_count": 33
+                }
+              }
+            }
+          ],
+          "raw_event_vs_noise_snr_db": -0.21230601543276148,
+          "corrected_event_vs_noise_snr_db": -0.1278871882809103,
+          "raw_minus_corrected_snr_db": -0.08441882715185117,
+          "corrected_target_sideband_contrast_db": -0.4312682157468417,
+          "control_band_scores": {
+            "near_left": {
+              "raw_event_vs_noise_snr_db": -0.03528740169277559,
+              "corrected_event_vs_noise_snr_db": -0.5410655085477811
+            },
+            "near_right": {
+              "raw_event_vs_noise_snr_db": -0.020214590690638835,
+              "corrected_event_vs_noise_snr_db": -0.47705203590151635
+            },
+            "edge_116": {
+              "raw_event_vs_noise_snr_db": -0.2028738605092596,
+              "corrected_event_vs_noise_snr_db": -0.17160434574095457
+            },
+            "edge_110": {
+              "raw_event_vs_noise_snr_db": 0.17441400954283942,
+              "corrected_event_vs_noise_snr_db": 0.34611133861677745
+            },
+            "inband_100": {
+              "raw_event_vs_noise_snr_db": -0.36126894638447604,
+              "corrected_event_vs_noise_snr_db": -0.3619173642942291
+            },
+            "inband_90": {
+              "raw_event_vs_noise_snr_db": -0.3414952780094054,
+              "corrected_event_vs_noise_snr_db": -0.34140684636757523
+            }
+          },
+          "target_minus_max_control_corrected_snr_db": -0.47399852689768773,
+          "target_peak_frequency_hz": 119.2169189453125,
+          "per_station_event_checks": {
+            "raw_snr_ge_threshold": false,
+            "corrected_snr_ge_threshold": false,
+            "raw_corrected_snr_agree": true,
+            "target_sideband_contrast_ge_threshold": false,
+            "target_peak_center_in_tolerance": false
+          },
+          "per_station_event_pass": false
+        }
+      },
+      "cross_station_peak_difference_hz": 0.030517578125,
+      "replicated_both_stations": false
+    }
+  ],
+  "summary": {
+    "frozen_events": 8,
+    "analyzed_station_event_pairs": 16,
+    "blocked_station_event_pairs": 0,
+    "replicated_event_count": 0,
+    "replicated_source_time_codes": [],
+    "replicated_station_event_pairs": 0,
+    "target_outperforms_all_controls_by_required_margin_fraction": 0.0,
+    "required_outperformance_fraction": 0.75,
+    "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "target_identity": "UNCONFIRMED",
+    "target_evidence": "NOT_PROMOTED_BY_FREQUENCY_ONLY"
+  },
+  "data_errors": [],
+  "hard_rules": [
+    "FROZEN_WINDOWS_ONLY",
+    "NO_FFT_FISHING",
+    "NO_UNDECLARED_BANDS",
+    "NO_THRESHOLD_RETUNING",
+    "RAW_AND_RESPONSE_CORRECTED_SNR_BOTH_REPORTED",
+    "MATCHED_NOISE_REQUIRED",
+    "BOTH_STATIONS_REQUIRED",
+    "CONTROL_OUTPERFORMANCE_REQUIRED",
+    "PASS_DOES_NOT_IDENTIFY_SOURCE_OR_TARGET",
+    "NEGATIVE_AND_AMBIGUOUS_RESULTS_PRESERVED"
+  ],
+  "status": "RUN_COMPLETE"
+}
