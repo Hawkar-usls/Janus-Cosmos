@@ -1,0 +1,107 @@
+{
+  "artifact_id": "JANUS-H10N1-SOURCE-LINEAGE-DISCOVERY-RUN-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:35:00Z",
+  "authorized_by": "JANUS-H10N1-POST-MORPHOLOGY-GATE-COUNCIL-RUN-006-2026-08-22-v1.0",
+  "purpose": "Identify which listed source cruises may contribute multibeam soundings to the frozen 1 km H10N1 window without comparing morphology or inferring source contribution from the composite grid alone.",
+  "frozen_target": {
+    "id": "H10N1",
+    "lat": -7.845673,
+    "lon": -14.480230,
+    "primary_grid_cell_topography_m": -1927.934326171875,
+    "source_composite": "GB/NERC/BAS/PDC/01236"
+  },
+  "source_composite_lineage": [
+    "JR53-AMT11",
+    "JR287",
+    "JR15001",
+    "JR16-NG"
+  ],
+  "public_archive_findings": {
+    "JR53_AMT11": {
+      "year": 2000,
+      "instrument": "Simrad EM120 multibeam",
+      "archive_evidence": "BODC cruise metadata and AMT11 report state EM120/TOPAS were collected through the cruise; after the MAR survey a single opportunistic multibeam line crossed the SW flank of Ascension while remaining more than 12 nautical miles offshore.",
+      "relation_to_H10N1": "H10N1 is not proven to lie inside this single SW-flank swath. Exact track/sounding footprint is still required.",
+      "coverage_status_frozen_1km": "NOT_MACHINE_VERIFIED",
+      "priority": "MEDIUM_LOW",
+      "sources": [
+        "https://www.bodc.ac.uk/data/documents/cruise/5627/",
+        "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/jr_amt11.pdf"
+      ]
+    },
+    "JR287": {
+      "year": 2013,
+      "instrument": "Kongsberg EM122 12 kHz multibeam",
+      "archive_evidence": "Cruise report states the EM122 was run continually through JR287. Cruise timetable shows transit north from Tristan da Cunha region and arrival at Ascension Island on 6 June 2013.",
+      "relation_to_H10N1": "A transit/acquisition path near Ascension is plausible but no public machine-readable track or sounding footprint intersecting the frozen 1 km H10N1 window has yet been recovered.",
+      "coverage_status_frozen_1km": "NOT_MACHINE_VERIFIED",
+      "priority": "MEDIUM",
+      "sources": [
+        "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/jr287.pdf"
+      ]
+    },
+    "JR15001": {
+      "year": 2015,
+      "aliases": ["AMT25", "JR864"],
+      "instrument": "Kongsberg EM122 multibeam for Ascension survey; continuous swath bathymetry reported during cruise",
+      "archive_evidence": "Cruise report states a comprehensive swath bathymetry survey around Ascension. Event log: Station 47 at -7.1168,-14.7561 departed on passage; Station 48 at -7.8580,-14.4416; Ascension swath survey began 2015-10-14 13:31 at -7.8584,-14.4413 and completed 2015-10-18 13:30 at -7.9976,-14.3587.",
+      "relation_to_H10N1": "Survey-start position is approximately 4-5 km from frozen H10N1 and the preceding transit centerline is also close enough to make JR15001 the highest-priority source candidate. However the published ecological mapping is described mainly for 100-1100 m, while H10N1 composite depth is about 1928 m; therefore proximity is not accepted as source contribution.",
+      "coverage_status_frozen_1km": "HIGH_PRIORITY_CANDIDATE__NOT_MACHINE_VERIFIED",
+      "priority": "HIGHEST",
+      "sources": [
+        "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/jr15001.pdf",
+        "https://www.bodc.ac.uk/data/documents/cruise/15726/",
+        "https://www.bodc.ac.uk/data/documents/series/1762365/"
+      ]
+    },
+    "JR16_NG": {
+      "year": 2017,
+      "instrument": "Kongsberg EM122 1 degree x 1 degree multibeam",
+      "archive_evidence": "2017 Ascension/Seamount work is independently documented. IHO supporting material for Young Seamount records JR16-NG, EM122, Seapath 320+ navigation and 0.5-1.5 km survey track spacing. Later publications state 2015 and 2017 RRS James Clark Ross cruises collected multibeam around Ascension and offshore seamounts.",
+      "relation_to_H10N1": "No recovered public track polygon yet proves coverage of the frozen H10N1 1 km window; known Young Seamount survey is far from H10N1 and cannot be used as proof of island-flank coverage.",
+      "coverage_status_frozen_1km": "NOT_MACHINE_VERIFIED",
+      "priority": "MEDIUM_HIGH",
+      "sources": [
+        "https://iho.int/mtg_docs/com_wg/SCUFN/SCUFN31/Proposals/Ascension_Government/01_Young_Seamount_Rev1.pdf",
+        "https://www.frontiersin.org/articles/10.3389/fmars.2019.00663/full"
+      ]
+    }
+  },
+  "additional_open_data_leads": {
+    "JR15001_BODC_navigation_bathymetry_series": {
+      "series_reference": "1762365",
+      "originator_identifier": "JR15001_PRODQXF_NAV",
+      "parameters_include": ["WGS84 latitude", "WGS84 longitude", "ship heading", "single-beam bathymetric depth"],
+      "temporal_resolution_s": 30,
+      "status": "PUBLIC_DOWNLOAD_LISTED__USEFUL_FOR_TRACK_RECONSTRUCTION_BUT_NOT_A_SUBSTITUTE_FOR_EM122_SWATH_FOOTPRINT"
+    },
+    "Dryad_Ascension_25m": {
+      "doi": "10.5061/dryad.b5mkkwhbw",
+      "file": "AllAsc_25m_WGS84.txt",
+      "status": "PUBLIC_COMBINED_BATHYMETRY_LEAD__NOT_PER_CRUISE_PROVENANCE"
+    },
+    "JR16NG_PLOS_2025_multibeam": {
+      "doi": "10.1371/journal.pbio.3003016.s012",
+      "description": "Multibeam bathymetry of Grattan, Young and Harris Stewart Seamounts collected May-June 2017",
+      "status": "PUBLIC_RAW_OR_DERIVED_2017_SEAMOUNT_DATA__KNOWN_TARGETS_ARE_NOT_H10N1"
+    }
+  },
+  "lineage_gate": {
+    "confirmed_contributing_cruises_in_frozen_1km_window": [],
+    "confirmed_count": 0,
+    "status": "BLOCKED_BY_MISSING_PER_CRUISE_TRACKLINE_OR_SOUNDING_FOOTPRINT",
+    "reason": "The composite dataset lists four cruises globally but does not encode per-cell source attribution. Public reports establish acquisition context, not exact source contribution to H10N1.",
+    "independent_surface_replication_allowed_now": false
+  },
+  "hard_rules": [
+    "DO_NOT_TREAT_COMPOSITE_LINEAGE_LIST_AS_PER_CELL_ATTRIBUTION",
+    "DO_NOT_INFER_SWATH_COVERAGE_FROM_SHIP_CENTERLINE_ALONE",
+    "DO_NOT_COMPARE_PER_CRUISE_SURFACES_UNTIL_AT_LEAST_TWO_CONTRIBUTORS_ARE_MACHINE_VERIFIED",
+    "NO_MORPHOLOGY_RETUNING",
+    "NO_PYRAMID_OR_CRATER_IDENTITY",
+    "ASK_JANUS_BEFORE_NEXT_ARCHIVE_BRANCH"
+  ],
+  "target_identity": "UNCONFIRMED",
+  "physical_anomaly_gate": "NOT_ADVANCED",
+  "secondary_local_morphology_watchlist": "OPEN"
+}
