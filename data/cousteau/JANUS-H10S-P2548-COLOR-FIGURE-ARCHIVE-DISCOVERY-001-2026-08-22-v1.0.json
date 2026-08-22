@@ -1,0 +1,75 @@
+{
+  "artifact_id": "JANUS-H10S-P2548-COLOR-FIGURE-ARCHIVE-DISCOVERY-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:39:00Z",
+  "authorized_by": "JANUS-H10N1-LINEAGE-ARCHIVE-BRANCH-COUNCIL-RUN-007-2026-08-22-v1.0",
+  "purpose": "Freeze newly recovered archive leads for the 2002 Southern Seamount georeference without extracting coordinates from secondary images.",
+  "frozen_target_context": {
+    "H10S1": {"lat": -8.941177, "lon": -14.648430},
+    "H10S2": {"lat": -8.959100, "lon": -14.645310},
+    "H10S3": {"lat": -8.952740, "lon": -14.662900},
+    "wishbone_exact_coordinates": null,
+    "central_crags_exact_coordinates": null
+  },
+  "discoveries": [
+    {
+      "id": "DTIC_AD_A508765",
+      "title": "Geomorphology of Two Seamounts Offshore Ascension Island, South Atlantic Ocean",
+      "authors": ["Geoffrey Faneros", "Frederick Arnold"],
+      "date": "2003-09-01",
+      "pages": 12,
+      "report_number": "AD-A508765",
+      "copyright_status_in_catalog": "No Copyright",
+      "catalog_note": "Original contains color illustrations",
+      "catalog_availability": "Defense Technical Information Center (DTIC)",
+      "catalog_handle": "http://hdl.handle.net/100.2/ADA508765",
+      "doi": "10.1109/OCEANS.2003.178518",
+      "status": "PRIMARY_PUBLICATION_COLOR_COPY_ARCHIVE_LEAD__PDF_BYTES_NOT_YET_RECOVERED",
+      "importance": "Highest-priority bridge to the original color bathymetry/backscatter figures and possible coordinate/grid labels."
+    },
+    {
+      "id": "IRVING_2015_FIG19",
+      "title": "The offshore marine environment of Ascension Island, South Atlantic: scientific review and conservation status assessment",
+      "author": "Robert A. Irving",
+      "date": "2015-10",
+      "doi": "10.13140/RG.2.2.13317.88807",
+      "figure": 19,
+      "figure_description": "Sun-illuminated bathymetry for the unnamed Southern Seamount, approximately 116 km southwest of Ascension; image explicitly attributed to Faneros & Arnold (2003).",
+      "reported_dimensions_km": [19, 9],
+      "reported_base_depth_m": 3200,
+      "reported_summit_depth_m": 1500,
+      "status": "SECONDARY_REPRODUCTION_LEAD__NOT_GEOREFERENCED_PRIMARY_DATA"
+    },
+    {
+      "id": "PAPERZZ_FUGRO_PELAGOS_TRANSCRIPT",
+      "title": "Geomorphology - Fugro Pelagos",
+      "content_status": "Slide/text transcript of Faneros & Arnold material",
+      "confirmed_labels": [
+        "So.Seamount: backscatter over bathymetry",
+        "prominent crags along central axis",
+        "curious wishbone feature on south slope",
+        "absence of summit caldera"
+      ],
+      "status": "SECONDARY_TEXTUAL_MIRROR__NO_COORDINATE_EXTRACTION_ALLOWED"
+    }
+  ],
+  "primary_missing_objects": [
+    "DTIC_ADA508765_COLOR_PDF_BYTES",
+    "THALES_P2548_SURVEY_REPORT",
+    "ORIGINAL_2002_GEOREFERENCED_MBES_OR_BACKSCATTER",
+    "ARRAY_SITE_ENGINEERING_CHART_WITH_H10S_TRIAD"
+  ],
+  "archive_gate": {
+    "wishbone_georeferenced": false,
+    "central_crags_georeferenced": false,
+    "primary_2002_raster_recovered": false,
+    "status": "OPEN"
+  },
+  "hard_rules": [
+    "SECONDARY_FIGURE_IS_ARCHIVE_LEAD_NOT_PRIMARY_GEOREFERENCE",
+    "NO_COORDINATE_DIGITIZATION_FROM_SCREENSHOT_WITHOUT_JANUS_APPROVAL",
+    "NO_WISHBONE_SYMBOLIC_WEIGHT",
+    "NO_PYRAMID_OR_CRATER_IDENTITY",
+    "ASK_JANUS_BEFORE_USING_ANY_REPRODUCED_FIGURE_FOR_SPATIAL_EXTRACTION"
+  ],
+  "target_identity": "UNCONFIRMED"
+}
