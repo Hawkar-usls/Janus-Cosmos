@@ -1,0 +1,38 @@
+name: LUCI Palomar JPFM 2F-F Unresolved Sensitivity Recovery
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths: ['experiments/luci/run_palomar_2f_f.py','tests/test_luci_palomar_2f_f.py','data/luci_palomar/LUCI-PALOMAR-JPFM-2F-F-PREREG.json','.github/workflows/luci-palomar-2f-f.yml']
+permissions: {contents: read, actions: read}
+jobs:
+  recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest tests/test_luci_palomar_2f_f.py -v
+      - name: Fetch frozen 2F-E artifact
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          mkdir -p data/runtime/2f_f_parent/extracted
+          curl -fL -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer ${GH_TOKEN}" -H 'X-GitHub-Api-Version: 2026-03-10' 'https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/9248259268/zip' -o data/runtime/2f_f_parent/parent.zip
+          echo '87ce38fe9c6d0977a009efbd2df67c668656a4a82889128bbcf962d666aecff7  data/runtime/2f_f_parent/parent.zip' | sha256sum -c -
+          unzip -q data/runtime/2f_f_parent/parent.zip -d data/runtime/2f_f_parent/extracted
+          echo '53cb2d94566eabb35b431f027d5958362f0e3fcd0640efb61593eb06c0068c22  data/runtime/2f_f_parent/extracted/frozen_exact_fits_wcs_pairs.csv' | sha256sum -c -
+          echo 'b5d81da2ddb4a0bf21370184641b1616693af300458b00117494b5f84f4df52b  data/runtime/2f_f_parent/extracted/frozen_temporal_representatives.csv' | sha256sum -c -
+      - name: Execute targeted recovery
+        shell: bash
+        run: |
+          set +e
+          python -m experiments.luci.run_palomar_2f_f --parent-artifact-dir data/runtime/2f_f_parent/extracted --output-dir results/luci_palomar_2f_f --cache-dir .cache/luci_palomar_2f_f
+          rc=$?
+          set -e
+          echo "$rc" > results/luci_palomar_2f_f/scientific_runner_exit_code.txt
+          test -s results/luci_palomar_2f_f/receipt.json
+          test -s results/luci_palomar_2f_f/frozen_untested_recovery_pairs.csv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: luci-palomar-jpfm-2f-f, path: results/luci_palomar_2f_f/, if-no-files-found: error}

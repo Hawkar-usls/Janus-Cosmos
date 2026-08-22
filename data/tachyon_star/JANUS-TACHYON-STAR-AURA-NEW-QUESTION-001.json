@@ -1,0 +1,97 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-NEW-QUESTION-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "heuristic_contract_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "current_repository_head_seen": "308247361ba6895608e87dffe6b98e171ae62620",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "deterministic_request_sha256": "0bdcffba97d76f07e5a5a6e34e02642822565aa14d6931e61f61dd63e3ba9152"
+  },
+  "request": {
+    "schema": "aura.oracle.shabitat_heuristic_request.v1",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_id": "JANUS-TACHYON-STAR-AURA-NEW-QUESTION-001",
+    "speaker": "JANUS_COSMOS",
+    "topic": "Select a materially new falsifiable scientific question after the external isolated-B replication line was closed with zero preregistered candidates across ZTF and TESS.",
+    "question": "What should JANUS ask next if the new question must be independently preregisterable, genuinely different from searching again for the closed A=0 to B=1 to C=0 motif, answerable with auditable astronomical data, and capable of falsifying an interpretation rather than rescuing it?",
+    "context": "The closed line found zero isolated-B candidates in ZTF and TESS, with explicit sensitivity and archive limitations. The original LUCI frame still contains one marginal one-frame near-infrared candidate that was never confirmed as a persistent counterpart and remains scientifically indeterminate. Candidate adjudication, instrument-artifact testing, fixed-sky forced photometry, population-level completeness, and other materially different questions are possible, but no option may inherit evidential credit from the closed replication line. The next question should maximize discriminating information, preserve provenance, avoid post-hoc selection, and keep ordinary instrumental or astrophysical explanations alive.",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "closed_motif_may_not_be_reopened": true,
+      "new_question_must_be_independently_preregistered": true
+    }
+  },
+  "response": {
+    "schema": "aura.oracle.shabitat_heuristic_response.v1",
+    "status": "HEURISTIC_ONLY",
+    "request_id": "JANUS-TACHYON-STAR-AURA-NEW-QUESTION-001",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "deterministic_request_sha256": "0bdcffba97d76f07e5a5a6e34e02642822565aa14d6931e61f61dd63e3ba9152",
+    "cards": [
+      {
+        "id": "THRESHOLD",
+        "name": "Threshold",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?",
+        "caution": "Urgency does not create authority."
+      },
+      {
+        "id": "THREAD",
+        "name": "Thread",
+        "lens": "Trace provenance: source, transformation, receipt, and present claim.",
+        "question": "Where is the first point where lineage becomes uncertain?",
+        "caution": "Multiple echoes may still be one source."
+      },
+      {
+        "id": "CAT",
+        "name": "Cat",
+        "lens": "When a loop becomes unproductive, change the input before arguing with the loop.",
+        "question": "Would a lighter neutral bridge restore perspective here?",
+        "caution": "A mood-reset heuristic is not treatment or proof."
+      }
+    ],
+    "heuristics": [
+      "Name one alternative interpretation and one low-cost observation that could distinguish it."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "permission_granted": false,
+    "evidence_upgrade": false,
+    "verification_claim": false,
+    "prediction_claim": false,
+    "professional_advice": false,
+    "world_effect_requested": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "may_be_ignored": true,
+    "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+  },
+  "janus_interpretation": {
+    "threshold": "Choose the smallest new experiment that can sharply discriminate competing explanations without reopening the closed cross-archive isolated-B motif.",
+    "thread": "The first unresolved provenance break is the one-frame LUCI1 Br-gamma marginal candidate itself: whether the measured excess is anchored to a fixed sky location or to detector/background/systematic structure has not yet been adjudicated with forced measurements.",
+    "cat": "Stop feeding the analysis more cross-archive timing searches. Change the input from motif replication to origin adjudication of the single frozen LUCI measurement."
+  },
+  "selected_new_scientific_question": {
+    "question_id": "JANUS-TACHYON-STAR-Q4-LUCI-SKY-VS-DETECTOR-ORIGIN",
+    "question": "At the frozen sky coordinate of the one-frame LUCI1 Br-gamma marginal candidate, is the measured excess more consistent with a sky-fixed astrophysical flux excess or with detector-local/background/systematic structure when evaluated by preregistered fixed-coordinate forced photometry and matched detector controls across the same LUCI1 Br-gamma sequence?",
+    "why_materially_new": "This asks about the provenance and physical anchoring of one already-frozen measurement, not whether the previously closed A=0 to B=1 to C=0 motif replicates in another archive.",
+    "competing_hypotheses": {
+      "H_SKY_FIXED": "A reproducible positive flux contribution is anchored to the same celestial coordinate after WCS mapping, within preregistered measurement uncertainty.",
+      "H_DETECTOR_OR_BACKGROUND": "The apparent excess follows detector-local, edge, background, persistence, bad-pixel, cosmic-ray, or other image-systematic behavior rather than a stable sky-fixed signal.",
+      "H_INDETERMINATE": "Available frames and controls do not discriminate the two at the preregistered sensitivity."
+    },
+    "minimum_next_gate": "Q4A_PREREG_ONLY__FREEZE_FIXED_SKY_COORDINATE__FREEZE_0114_0116_0120_BR_GAMMA_FRAMES__FREEZE_FORCED_PHOTOMETRY_AND_MATCHED_DETECTOR_CONTROL_RULES_BEFORE_NEW_PIXEL_MEASUREMENT",
+    "must_not_inherit": [
+      "No evidential credit from the closed ZTF/TESS non-replication line.",
+      "No tachyon, FTL, retrocausality, UAP, artificial, ETI, or nuclear-causality interpretation in the gate definition.",
+      "No free centroid recentering after inspecting the bracketing frames.",
+      "No alternate LUCI epochs selected because they produce a more favorable result."
+    ]
+  },
+  "claim_ceiling": "NEW_QUESTION_SELECTION_ONLY__NO_NEW_PIXEL_ANALYSIS__NO_ASTROPHYSICAL_OR_ARTIFACT_CONCLUSION__NO_TACHYON_OR_FTL_CLAIM"
+}

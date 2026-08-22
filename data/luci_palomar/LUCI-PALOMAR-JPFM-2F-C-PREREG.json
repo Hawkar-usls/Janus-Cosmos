@@ -1,0 +1,70 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_c.prereg.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-C",
+  "date_utc": "2026-08-15",
+  "parent_result": "data/luci_palomar/LUCI-PALOMAR-JPFM-TRANSFER-RUN-001.json",
+  "branch": "research/luci-only-v1",
+  "hypothesis_scope": "Independent near-IR counterpart test of frozen Palomar/POSS candidate coordinates using public LUCI/LUCIFER imaging only.",
+  "palomar_corpus": {
+    "parent_registry_commit": "7890cd5c8f4650c02dd439dbf96f09bc45638654",
+    "poss_commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "structural_clusters": 16,
+    "typical_per_cluster": 20,
+    "unusual_per_cluster": 20,
+    "total_coordinates": 640,
+    "selection_rule": "Within each frozen structural cluster select 20 rows closest to the cluster median anomaly_score as typical, then 20 remaining rows with highest anomaly_score as unusual; break ties by src_id. No LUCI metadata or outcome is available to selection.",
+    "freeze_rule": "Materialize CSV and SHA-256 before the first LUCI overlap query in the run."
+  },
+  "luci_scope": {
+    "archive": "LBT Archive / IA2 TAP",
+    "policy": "FREE",
+    "image_type": "SCIENCE",
+    "grating": "Mirror/mirror",
+    "instrument": "LUCI/LUCIFER imaging only",
+    "validation_targets": ["HIP 65599", "0848-0021928", "3C 294"],
+    "validation_filters": ["J", "Ks"]
+  },
+  "psf_extractor": {
+    "smoothed_peak_threshold_sigma": 5.0,
+    "minimum_connected_component_area_px": 5,
+    "minimum_minor_fwhm_px": 0.8,
+    "maximum_major_fwhm_px": 12.0,
+    "maximum_elongation": 4.0,
+    "hot_pixel_definition": "single-pixel positive impulse injected into the same real LUCI background"
+  },
+  "injection_recovery": {
+    "real_backgrounds_required": true,
+    "fwhm_grid_px": [1.5, 2.0, 3.0],
+    "peak_snr_grid": [6.0, 8.0, 12.0],
+    "replicates_per_grid_cell": 4,
+    "minimum_all_star_recovery_fraction": 0.8,
+    "minimum_star_recovery_fraction_snr_ge_8": 0.9,
+    "maximum_hot_pixel_acceptance_fraction": 0.05,
+    "validation_admission": "all preregistered LUCI validation frames must pass before 2F-C is scientifically admitted"
+  },
+  "overlap_chain": {
+    "coarse_archive_center_radius_deg": 0.2,
+    "coarse_geometry_only": true,
+    "exact_requirement": "downloaded FITS celestial WCS must contain Palomar coordinate",
+    "counterpart_radius_px": 3.0,
+    "minimum_local_controls_for_morphology": 5,
+    "local_control_radius_px": 300.0,
+    "maximum_local_controls": 20,
+    "execution_order": [
+      "Palomar corpus freeze + SHA-256",
+      "LUCI archive coarse overlap query",
+      "download exact candidate FITS",
+      "exact WCS containment",
+      "overlap-frame injection-recovery gate",
+      "IR source/no-source",
+      "PSF morphology",
+      "matched local controls"
+    ]
+  },
+  "firewalls": [
+    "No UAP, nuclear-window, witness, temporal-event, or later outcome labels enter Palomar corpus selection.",
+    "No morphology or counterpart inspection occurs before exact FITS WCS containment and frame injection-recovery admission.",
+    "A green CI status is not a scientific PASS when the scientific receipt status is BLOCKED."
+  ],
+  "claim_ceiling": "INDEPENDENT_NEAR_IR_COUNTERPART_TEST_ONLY__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY"
+}

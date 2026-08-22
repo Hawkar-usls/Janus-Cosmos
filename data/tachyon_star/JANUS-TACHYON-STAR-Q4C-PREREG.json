@@ -1,0 +1,85 @@
+{
+  "schema": "janus.cosmos.tachyon_star.q4c.luci_dense_same_y_edge_residual.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-Q4C-LUCI-DENSE-SAME-Y-EDGE-RESIDUAL",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-Q4B-RUN-001.json",
+    "result_commit": "f860a026a58ed8bcc07583521bb046434fefed3b",
+    "workflow_run_id": 31957495791,
+    "artifact_id": 9266355031,
+    "artifact_zip_sha256": "ffe2956b9479e85481a1a1c9615e92b82ea5620c2806a72511594c44d022c050",
+    "receipt_sha256": "3814c5653a529b355fcffed7153e584e6eb4e05170284ebc04298f50a4f9a64b",
+    "measurements_sha256": "0d6375bb0f58f77b4aa986e1cb675faecbc0a2e47ba6ed496eb4922f8da90912"
+  },
+  "aura_advisory": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001.json",
+    "request_sha256": "20ecc1ed6fd4e6603698b9acf60954ea54435edb9ea69de6163485ba3f3092a0",
+    "cards": ["LANTERN", "CAT", "OPEN_DOOR"],
+    "authority_delta": 0,
+    "evidence_upgrade": false
+  },
+  "scientific_question": "Does the frozen B candidate detector location contain a unique positive one-frame local residual above the broad same-y detector-edge pedestal when compared against a dense, pixel-selection-independent detector-matched ensemble?",
+  "scope": "POST_Q4B_ADJUDICATION__NOT_BLIND_DISCOVERY",
+  "immutable_inputs": {
+    "frames": ["luci1.20220319.0114.fits.gz", "luci1.20220319.0116.fits.gz", "luci1.20220319.0120.fits.gz"],
+    "target_x_zero_based": 1437.216755721343,
+    "target_y_zero_based": 2038.7227543099102,
+    "patch_size_px": 17,
+    "fit_model": "Identical fixed-centroid circular Gaussian plus planar background estimator used in Q4B.",
+    "fixed_fwhm_px_by_frame": {
+      "luci1.20220319.0114.fits.gz": 6.026402,
+      "luci1.20220319.0116.fits.gz": 6.0313418764,
+      "luci1.20220319.0120.fits.gz": 5.945551
+    },
+    "recenter_allowed": false,
+    "free_fwhm_allowed": false,
+    "epoch_substitution_allowed": false
+  },
+  "dense_control_grid": {
+    "y_zero_based": 2038.7227543099102,
+    "x_generation": "integer x = 32,64,...,2016",
+    "x_step_px": 32,
+    "candidate_neighborhood_exclusion": "exclude any x with abs(x-target_x) < 128 pixels",
+    "expected_control_count": 55,
+    "patch_overlap": "17-pixel patches at 32-pixel spacing do not overlap each other",
+    "pixel_brightness_used_for_selection": false,
+    "source_masking_or_control_removal": false,
+    "replacement_controls_allowed": false,
+    "minimum_empirical_one_sided_rank_fraction": "1/56 ~= 0.017857"
+  },
+  "primary_statistic": {
+    "per_position_temporal_contrast": "T(x) = amp_B(x) - 0.5*(amp_A(x)+amp_C(x))",
+    "control_center": "median of the 55 frozen control T(x) values",
+    "control_scale": "1.4826*MAD around the control median; sample standard deviation fallback only if MAD is nonpositive",
+    "target_residual_z": "(T_target-control_median)/control_scale",
+    "empirical_one_sided_rank_fraction": "(1 + count controls with T_control >= T_target)/(55+1)"
+  },
+  "unique_local_residual_gate": {
+    "target_residual_z_min": 3.0,
+    "empirical_one_sided_rank_fraction_max": 0.05,
+    "positive_temporal_contrast_required": true,
+    "classification_if_pass": "UNIQUE_LOCAL_B_RESIDUAL_CANDIDATE_REQUIRES_ADJUDICATION"
+  },
+  "null_sensitivity_gate": {
+    "purpose": "A raw non-unique result may be called qualified only if the unchanged estimator could recover a clearly unique positive B residual at the same frozen target location.",
+    "injection": "Add the frozen B-frame Gaussian template at the target detector coordinate with peak amplitude equal to 5 times the pre-injection dense-control temporal-contrast robust scale; A and C unchanged.",
+    "control_distribution_recomputed_after_injection": false,
+    "required": "The injected target must pass the exact same residual-z and empirical-rank gate.",
+    "classification_if_raw_fails_and_injection_passes": "QUALIFIED_NO_UNIQUE_LOCAL_B_RESIDUAL_AT_5SIGMA_CONTROL_SCALE",
+    "classification_if_injection_fails": "UNRESOLVED_DENSE_CONTROL_SENSITIVITY"
+  },
+  "interpretation": {
+    "if_unique_residual": "A unique one-frame local B excess above the broad detector pedestal is supported, but its sky versus detector origin remains unresolved and requires a new gate.",
+    "if_qualified_no_unique_residual": "No unique local B residual is supported at the preregistered 5-control-sigma sensitivity scale. This strengthens a broad detector/background explanation for Q4B but does not exclude a smaller one-frame sky transient.",
+    "if_unresolved": "No origin conclusion."
+  },
+  "not_admitted": [
+    "No control may be removed because it contains an astronomical source or inconvenient value.",
+    "No claim that empirical rank fractions are exact independent-trial p-values; same-row detector structure can be correlated.",
+    "No proof of a specific bad-pixel, cosmic-ray, persistence, or electronics mechanism.",
+    "No exclusion of sky transients below the preregistered residual sensitivity.",
+    "No reopening of the closed ZTF/TESS timing-replication line.",
+    "No tachyon, FTL, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation."
+  ],
+  "claim_ceiling": "DENSE_SAME_Y_LOCAL_RESIDUAL_ADJUDICATION_ONLY__POST_Q4B__NO_SPECIFIC_ARTIFACT_MECHANISM__NO_TACHYON_OR_FTL_OR_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}
