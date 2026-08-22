@@ -1,0 +1,101 @@
+{
+  "artifact_id": "JANUS-HA10-SEAFLOOR-RECONSTRUCTION-STATUS-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:35:00Z",
+  "purpose": "Freeze the current measured-seafloor reconstruction state before the next JANUS-authorized physical stage.",
+  "governance_rule": "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE",
+  "claim_ceiling": "KNOWN_VOLCANIC_SEAMOUNT_SYSTEM_WITH_TARGETED_FALSIFIABLE_SEARCH_FOR_UNEXPLAINED_GEOMETRY",
+  "target_identity": "UNCONFIRMED",
+  "frozen_targets": {
+    "H10N1": {"lat": -7.845673, "lon": -14.480230},
+    "H10S1": {"lat": -8.941177, "lon": -14.648430},
+    "H10S2": {"lat": -8.959100, "lon": -14.645310},
+    "H10S3": {"lat": -8.952740, "lon": -14.662900}
+  },
+  "southern_seamount_state": {
+    "published_approx_location": {"lat": -8.950000, "lon": -14.633333},
+    "published_dimensions_km": [19, 9],
+    "published_morphology": [
+      "RELATIVELY_FLAT_TOPPED",
+      "CENTRAL_CRAGS",
+      "TERRACED_SOUTHWEST_FLANK",
+      "CURIOUS_WISHBONE_FEATURE_ON_SOUTH_SLOPE",
+      "NO_SUMMIT_CALDERA_IN_PUBLISHED_INTERPRETATION"
+    ],
+    "published_origin_baseline": "VOLCANIC_MID_ATLANTIC_RIDGE_RELATED",
+    "wishbone_exact_georeference": null,
+    "central_crags_exact_georeference": null,
+    "p2548_recovered": false,
+    "g1_status": "BLOCKED_BY_MISSING_PRIMARY_2002_GEOREFERENCE"
+  },
+  "depth_correction": {
+    "hydrophone_sensor_depth_approx_m": [800, 875],
+    "rule": "SENSOR_DEPTH_IS_NOT_SEAFLOOR_DEPTH",
+    "southern_route_context": "Route descends to roughly 3000 m, traverses deep seafloor, then rises onto Southern Seamount.",
+    "historical_design_seafloor_estimate_m": 2200,
+    "historical_design_estimate_status": "CONTEXT_ONLY__NOT_FINAL_AS_BUILT_DEPTH",
+    "required_upgrade": "FINAL_AS_BUILT_OR_PRIMARY_SURVEY_SEAFLOOR_DEPTH"
+  },
+  "h10n1_primary_lane": {
+    "dataset": "GB/NERC/BAS/PDC/01236",
+    "dataset_type": "MULTIBEAM_BATHYMETRY_COMPILATION",
+    "resolution_approx_m": 50,
+    "bbox": {"west": -14.57, "east": -14.17, "south": -8.12, "north": -7.75},
+    "h10n1_inside_bbox": true,
+    "lineage": ["JR53-AMT11", "JR287", "JR15001", "JR16-NG"],
+    "native_grid_bytes_retrieved": false,
+    "exact_h10n1_cell_extracted": false,
+    "preregistered_windows_km": [1, 2, 5, 10],
+    "preregistered_metrics": [
+      "depth",
+      "slope",
+      "profile_curvature",
+      "plan_curvature",
+      "rugosity",
+      "local_relief",
+      "planarity",
+      "radial_symmetry",
+      "facet_angle_histogram"
+    ],
+    "controls": "MATCHED_VOLCANIC_TILES_FROM_SAME_DATASET_SELECTED_BEFORE_TARGET_SCORING"
+  },
+  "modern_bgs_ukho_lane": {
+    "known_products": "2021 Royal Navy MBES reprocessed by BGS into nested 1 m / 3 m / 6 m / 10 m grids with backscatter products; 2023 BGS nearshore MBES also exists.",
+    "h10n1_native_intersection_machine_verified": false,
+    "rule": "NO_FINE_SHAPE_SCORING_UNTIL_NATIVE_RASTER_OR_COVERAGE_POLYGON_PROVES_INTERSECTION_WITH_FROZEN_H10N1"
+  },
+  "ctbto_secondary_lane": {
+    "route_figures_identified": true,
+    "use": "ARRAY_ROUTE_AND_COARSE_DEPTH_CONTEXT_ONLY",
+    "station_health_correction": "H10S1 electronic noise/cross-talk requires a station-health rejection gate before any southern acoustic fingerprint analysis"
+  },
+  "proxy_policy": {
+    "GEBCO": "CONTEXT_AND_GROSS_TOPOGRAPHY_NEGATIVE_CONTROL_ONLY",
+    "screenshots": "NOT_PRIMARY_BATHYMETRY",
+    "text_description_digitization": "NOT_ALLOWED_FOR_WISHBONE_COORDINATES"
+  },
+  "external_requests": {
+    "BAS_PDC": {"ticket": "3872", "status": "PENDING_HUMAN_RESPONSE"},
+    "EarthScope": {"ticket": "DH-2635", "status": "PENDING_HUMAN_RESPONSE"},
+    "BGS_Offshore": {"status": "FORWARDED_TO_SPECIALIST"},
+    "Ascension_Government": {"status": "NO_RESPONSE_SEEN_YET"}
+  },
+  "currently_missing_primary_keys": [
+    "Thales GeoSolutions (Pacific) Report P2548, August 2002",
+    "original OCEANS 2003 color figure or author copy with coordinate grid",
+    "raw or georeferenced 2002 HDAS MBES bathymetry/backscatter",
+    "final HA10 as-built array engineering report",
+    "final H10N/H10S route survey products",
+    "BAS native NetCDF or Arc/Info ASCII grid bytes",
+    "BGS/UKHO native grids or coverage polygon proving frozen-coordinate intersection"
+  ],
+  "hard_rules": [
+    "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE",
+    "NO_VISUAL_GUESSING",
+    "NO_POSTHOC_RETARGETING",
+    "PRIMARY_VS_PROXY_LANES_MUST_NOT_MERGE",
+    "AS_BUILT_OUTRANKS_DESIGN_ESTIMATE",
+    "VOLCANIC_BASELINE_REMAINS_ACTIVE",
+    "NO_UNDERWATER_PYRAMID_DETECTED",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ]
+}
