@@ -6,8 +6,11 @@ on:
     paths:
       - '.github/workflows/cousteau-ha10-first-available-six-channel-baseline.yml'
       - 'workspace/cousteau_ha10_first_available_six_channel_baseline.py'
+      - 'workspace/cousteau_ha10_first_available_six_channel_baseline_v2.py'
       - 'tests/test_cousteau_ha10_first_available_six_channel_baseline.py'
+      - 'tests/test_cousteau_ha10_first_available_six_channel_baseline_v2.py'
       - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-PROTOCOL-2026-08-22-v1.0.json'
+      - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-TRANSPORT-ADDENDUM-2026-08-22-v1.0.json'
       - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json'
       - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json'
   workflow_dispatch:
@@ -35,8 +38,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git hash-object workspace/cousteau_ha10_first_available_six_channel_baseline.py)" = "89eb62a693cf5dd0fb1eada5ccb4477ff494e776"
+          test "$(git hash-object workspace/cousteau_ha10_first_available_six_channel_baseline_v2.py)" = "ceac99c1b02f27f97bc86e2599584d5807232452"
           test "$(git hash-object tests/test_cousteau_ha10_first_available_six_channel_baseline.py)" = "c7360362cefb638c424a3e714c1a717a5091eade"
+          test "$(git hash-object tests/test_cousteau_ha10_first_available_six_channel_baseline_v2.py)" = "a800a65aacdda888101e5fe5b84268bc97419e6d"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-PROTOCOL-2026-08-22-v1.0.json)" = "f040c5df715fb1cc3dca3d478be9334c5c09d271"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-TRANSPORT-ADDENDUM-2026-08-22-v1.0.json)" = "106ee138ff66f5d3204ad37bbee6a0ff225fc577"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "45f2901adde866df610a563f27c50177d32be414"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
 
@@ -57,16 +63,40 @@ jobs:
       - name: Compile and test before network acquisition
         run: |
           python -m py_compile workspace/cousteau_ha10_first_available_six_channel_baseline.py
-          python -m pytest -q tests/test_cousteau_ha10_first_available_six_channel_baseline.py
+          python -m py_compile workspace/cousteau_ha10_first_available_six_channel_baseline_v2.py
+          python -m pytest -q \
+            tests/test_cousteau_ha10_first_available_six_channel_baseline.py \
+            tests/test_cousteau_ha10_first_available_six_channel_baseline_v2.py
 
       - name: Execute JANUS-selected value-blind earliest six-channel gate
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p artifacts/cousteau-first-six
-          python workspace/cousteau_ha10_first_available_six_channel_baseline.py \
-            --output "artifacts/cousteau-first-six/run-${GITHUB_RUN_ID}.json"
           python -m pip freeze > "artifacts/cousteau-first-six/python-environment-${GITHUB_RUN_ID}.txt"
+          set +e
+          python workspace/cousteau_ha10_first_available_six_channel_baseline_v2.py \
+            --output "artifacts/cousteau-first-six/run-${GITHUB_RUN_ID}.json"
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('artifacts/cousteau-first-six') / f"transport-failure-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps({
+              'status':'BLOCKED_TRANSPORT_EXECUTION',
+              'scientific_result_produced':False,
+              'selection_used_waveform_values':False,
+              'failed_predecessor_run_id':32578915494,
+              'current_run_id':int(os.environ['GITHUB_RUN_ID']),
+              'exit_code':int(os.environ['RC']),
+              'authority_delta_for_119hz':0,
+              'target_identity':'UNCONFIRMED'
+          }, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+          PY
+            exit "$rc"
+          fi
 
       - name: Validate result and epistemic firewalls
         shell: bash
@@ -91,6 +121,10 @@ jobs:
           assert r['authority_delta_for_119hz']==0
           assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
           assert r['target_identity']=='UNCONFIRMED'
+          tr=r['transport_repair']
+          assert tr['mode']=='DETERMINISTIC_CALENDAR_MONTH_CHUNKS'
+          assert tr['scientific_contract_unchanged'] is True
+          assert tr['authority_delta_for_119hz']==0
           print('CLASSIFICATION=' + r['analysis']['classification'])
           print('EARLIEST=' + str(r['discovery']['earliest_simultaneous_six_channel_probe_date']))
           print('SELECTED=' + str(r['discovery']['selected_count']))
