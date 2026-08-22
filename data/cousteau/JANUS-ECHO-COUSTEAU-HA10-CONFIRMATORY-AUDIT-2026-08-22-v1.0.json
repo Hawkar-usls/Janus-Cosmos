@@ -1,0 +1,397 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-AUDIT-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T08:46:52.724595+00:00",
+  "source_artifact": "JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0",
+  "source_summary": {
+    "frozen_events": 8,
+    "analyzed_station_event_pairs": 16,
+    "blocked_station_event_pairs": 0,
+    "replicated_event_count": 0,
+    "replicated_source_time_codes": [],
+    "replicated_station_event_pairs": 0,
+    "target_outperforms_all_controls_by_required_margin_fraction": 0.0,
+    "required_outperformance_fraction": 0.75,
+    "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "target_identity": "UNCONFIRMED",
+    "target_evidence": "NOT_PROMOTED_BY_FREQUENCY_ONLY"
+  },
+  "analysis_scope": "POSTRUN_AGGREGATION_ONLY__NO_REPROCESSING__NO_NEW_BANDS__NO_THRESHOLD_CHANGES",
+  "station_event_pairs": 16,
+  "per_station_event_pass_count": 0,
+  "check_pass_rates": {
+    "corrected_snr_ge_threshold": {
+      "passed": 0,
+      "total": 16,
+      "fraction": 0.0
+    },
+    "raw_corrected_snr_agree": {
+      "passed": 14,
+      "total": 16,
+      "fraction": 0.875
+    },
+    "raw_snr_ge_threshold": {
+      "passed": 0,
+      "total": 16,
+      "fraction": 0.0
+    },
+    "target_peak_center_in_tolerance": {
+      "passed": 3,
+      "total": 16,
+      "fraction": 0.1875
+    },
+    "target_sideband_contrast_ge_threshold": {
+      "passed": 0,
+      "total": 16,
+      "fraction": 0.0
+    }
+  },
+  "metric_distributions": {
+    "raw_event_vs_noise_snr_db": {
+      "n": 16,
+      "min": -1.0644061299738723,
+      "median": 0.04349033132739252,
+      "max": 2.6219613503105315,
+      "mean": 0.23017988828853933
+    },
+    "corrected_event_vs_noise_snr_db": {
+      "n": 16,
+      "min": -0.901318869720657,
+      "median": -0.1225811702839003,
+      "max": 2.598962269891996,
+      "mean": 0.14087927349948987
+    },
+    "corrected_target_sideband_contrast_db": {
+      "n": 16,
+      "min": -4.731637828408235,
+      "median": -2.1319331463046667,
+      "max": -0.1911623969378372,
+      "mean": -2.2500904178094907
+    },
+    "target_minus_max_control_corrected_snr_db": {
+      "n": 16,
+      "min": -11.327541477900354,
+      "median": -0.19786418583479645,
+      "max": 0.5439973584931024,
+      "mean": -0.9788691109125353
+    },
+    "target_peak_frequency_hz": {
+      "n": 16,
+      "min": 118.7744140625,
+      "median": 119.171142578125,
+      "max": 119.2474365234375,
+      "mean": 119.12822723388672
+    }
+  },
+  "failure_combinations": [
+    {
+      "failed_checks": [
+        "corrected_snr_ge_threshold",
+        "raw_snr_ge_threshold",
+        "target_peak_center_in_tolerance",
+        "target_sideband_contrast_ge_threshold"
+      ],
+      "count": 11
+    },
+    {
+      "failed_checks": [
+        "corrected_snr_ge_threshold",
+        "raw_snr_ge_threshold",
+        "target_sideband_contrast_ge_threshold"
+      ],
+      "count": 3
+    },
+    {
+      "failed_checks": [
+        "corrected_snr_ge_threshold",
+        "raw_corrected_snr_agree",
+        "raw_snr_ge_threshold",
+        "target_peak_center_in_tolerance",
+        "target_sideband_contrast_ge_threshold"
+      ],
+      "count": 2
+    }
+  ],
+  "pairs": [
+    {
+      "source_time_code": "20150042123086",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": -0.46308470930114287,
+      "corrected_snr_db": -0.36583429470302936,
+      "sideband_contrast_db": -4.731637828408235,
+      "target_minus_max_control_snr_db": -1.2644427402244665,
+      "peak_hz": 119.2474365234375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042123086",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": 0.19274588493351696,
+      "corrected_snr_db": -0.11727515228689028,
+      "sideband_contrast_db": -0.7561662387984855,
+      "target_minus_max_control_snr_db": 0.13658892174047044,
+      "peak_hz": 119.140625,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150031825065",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": 0.379548150596897,
+      "corrected_snr_db": -0.14011698435347528,
+      "sideband_contrast_db": -4.066792166007094,
+      "target_minus_max_control_snr_db": -11.327541477900354,
+      "peak_hz": 119.2474365234375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": false,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150031825065",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": 2.6219613503105315,
+      "corrected_snr_db": 1.9910907267178293,
+      "sideband_contrast_db": -0.1911623969378372,
+      "target_minus_max_control_snr_db": 0.09158127821590067,
+      "peak_hz": 119.1558837890625,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": false,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150050445600",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": 0.2705153693699704,
+      "corrected_snr_db": 0.025196402421110452,
+      "sideband_contrast_db": -3.5636506845209426,
+      "target_minus_max_control_snr_db": -1.332975959364272,
+      "peak_hz": 119.140625,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150050445600",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": 0.5283809374304715,
+      "corrected_snr_db": 0.5235841479978679,
+      "sideband_contrast_db": -0.6441846325806099,
+      "target_minus_max_control_snr_db": -0.12900901275578158,
+      "peak_hz": 119.07958984375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": true
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150041644482",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": 0.07771301524135084,
+      "corrected_snr_db": -0.00654197539235268,
+      "sideband_contrast_db": -3.9867215095083064,
+      "target_minus_max_control_snr_db": 0.24442915893470252,
+      "peak_hz": 119.2474365234375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150041644482",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": -1.0644061299738723,
+      "corrected_snr_db": -0.6375727015719144,
+      "sideband_contrast_db": -1.1271737681272351,
+      "target_minus_max_control_snr_db": -0.5432905489103045,
+      "peak_hz": 118.7744140625,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150031234191",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": -0.9908310383903483,
+      "corrected_snr_db": -0.901318869720657,
+      "sideband_contrast_db": -4.106956049462733,
+      "target_minus_max_control_snr_db": -0.8710413849279606,
+      "peak_hz": 119.0338134765625,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": true
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150031234191",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": 2.347703747354752,
+      "corrected_snr_db": 2.598962269891996,
+      "sideband_contrast_db": -0.777883141076891,
+      "target_minus_max_control_snr_db": 0.035192103532654784,
+      "peak_hz": 118.9727783203125,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": true
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042102473",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": -0.2802800045953576,
+      "corrected_snr_db": -0.3054122276133374,
+      "sideband_contrast_db": -3.6227597748367684,
+      "target_minus_max_control_snr_db": -0.18921549507484092,
+      "peak_hz": 119.1864013671875,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042102473",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": -0.11550840489426306,
+      "corrected_snr_db": -0.26254784650635177,
+      "sideband_contrast_db": -0.6529024043311393,
+      "target_minus_max_control_snr_db": -0.6943796940313204,
+      "peak_hz": 118.896484375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042128432",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": 0.45438225744479155,
+      "corrected_snr_db": 0.08106667974110468,
+      "sideband_contrast_db": -3.5320649241147404,
+      "target_minus_max_control_snr_db": 0.318713121164345,
+      "peak_hz": 119.2474365234375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042128432",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": -0.07292384489134093,
+      "corrected_snr_db": -0.2626484433947344,
+      "sideband_contrast_db": -0.6734304260118912,
+      "target_minus_max_control_snr_db": -0.20651287659475198,
+      "peak_hz": 119.2169189453125,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042131072",
+      "station": "IM.H10N1..EDH",
+      "raw_snr_db": 0.0092676474134342,
+      "corrected_snr_db": 0.16132383304558257,
+      "sideband_contrast_db": -3.1366925244820982,
+      "target_minus_max_control_snr_db": 0.5439973584931024,
+      "peak_hz": 119.2474365234375,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    },
+    {
+      "source_time_code": "20150042131072",
+      "station": "IM.H10S2..EDH",
+      "raw_snr_db": -0.21230601543276148,
+      "corrected_snr_db": -0.1278871882809103,
+      "sideband_contrast_db": -0.4312682157468417,
+      "target_minus_max_control_snr_db": -0.47399852689768773,
+      "peak_hz": 119.2169189453125,
+      "checks": {
+        "raw_snr_ge_threshold": false,
+        "corrected_snr_ge_threshold": false,
+        "raw_corrected_snr_agree": true,
+        "target_sideband_contrast_ge_threshold": false,
+        "target_peak_center_in_tolerance": false
+      },
+      "pass": false
+    }
+  ],
+  "scientific_interpretation": "NEGATIVE_CONFIRMATORY_RESULT_REMAINS__AUDIT_ONLY_IDENTIFIES_WHICH_PREDECLARED_GATES_FAILED",
+  "target_identity": "UNCONFIRMED",
+  "target_evidence": "NOT_INCREASED",
+  "hard_rules": [
+    "NO_RESCORING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_NEW_FREQUENCY_BANDS",
+    "NEGATIVE_RESULT_IMMUTABLE"
+  ]
+}
