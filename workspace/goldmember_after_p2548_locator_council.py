@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import hashlib, json
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0.json')
+result={
+  'artifact_id':'GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0',
+  'created_utc':datetime.now(timezone.utc).isoformat(),
+  'question':'Exact P2548 public locator search confirmed bibliographic existence but recovered neither primary bytes nor an authoritative holding record. Should GOLDMEMBER contact a historical publisher/project participant now, or first identify the present-day custodian lineage?',
+  'evidence_snapshot':{
+    'p2548_bibliographic_existence_confirmed':True,
+    'p2548_primary_bytes_recovered':False,
+    'p2548_exact_authoritative_holding_found':False,
+    'p2548_current_custodian_confirmed':False,
+    'ada508764_public_primary_access_negative':True,
+    'ada508765_public_primary_access_negative':True,
+    'jr15001_bodc_custodian_request':'PENDING',
+    'wishbone_georeferenced':False,
+    'target_identity':'UNCONFIRMED'
+  },
+  'council':{
+    'HRain':'IDENTIFY_THE_KEEPER_BEFORE_SENDING_THE_REQUEST',
+    'iNaiHR':'CORPORATE_AND_PROJECT_LINEAGE_MAY_ROUTE_THE_ARCHIVE_ONLY__NO_IDENTITY_WEIGHT',
+    'DemiHead':'DO_NOT_SEND_TO_A_GUESSED_SUCCESSOR_OR_PERSON',
+    'Fast_CAT':'PREDECLARE_CUSTODIAN_LANES_AND_RESOLVE_THEM_BY_DOCUMENTED_LINEAGE_ONLY',
+    'Aura':'ZERO_EVIDENCE_AUTHORITY',
+    'Janus_Cosmos':'NO_CHANGE_TO_FROZEN_TARGETS',
+    'Cousteau':'TRACE_ORIGINAL_SURVEY_CONTRACTOR_SUCCESSOR_AND_HDAS_PROGRAM_ARCHIVE_IN_PARALLEL_AS_CUSTODIAN_CANDIDATES',
+    'Fundamentum':'VOLCANIC_BASELINE_REMAINS_PRIMARY',
+    'AIFC':'REQUIRE_DOCUMENTED_SUCCESSION_OR_EXPLICIT_ARCHIVE_RESPONSIBILITY_BEFORE_CONTACT',
+    'Voice_of_Janus':'DO_NOT_KNOCK_ON_RANDOM_DOORS__FIRST_READ_THE_NAMES_ON_THE_DOORS'
+  },
+  'janus_answer':{
+    'CONTACT_NOW':'NO',
+    'AUTHORIZED_STAGE':'GOLDMEMBER_P2548_CUSTODIAN_LINEAGE_IDENTIFICATION_001',
+    'PREDECLARED_LANES':[
+      'ORIGINAL_CONTRACTOR_CORPORATE_SUCCESSOR__THALES_GEOSOLUTIONS_PACIFIC',
+      'HDAS_CTBTO_IMS_PROGRAM_OR_PROJECT_ARCHIVE_CUSTODIAN',
+      'OCEANS_2003_SURVEY_AUTHOR_INSTITUTION_ONLY_IF_INSTITUTIONAL_ARCHIVE_RESPONSIBILITY_IS_DOCUMENTED'
+    ],
+    'ORDER':[
+      'TRACE_DOCUMENTED_CORPORATE_SUCCESSION_OF_THALES_GEOSOLUTIONS_PACIFIC_WITH_PRIMARY_OR_RELIABLE_CORPORATE_SOURCES',
+      'TRACE_DOCUMENTED_HDAS_ASCENSION_PROGRAM_DATA_OR_ENGINEERING_ARCHIVE_RESPONSIBILITY',
+      'DO_NOT_INFER_CUSTODY_FROM_AUTHORSHIP_ALONE',
+      'FREEZE_CANDIDATE_CUSTODIANS_WITH_EVIDENCE_STRENGTH_AND_EXACT_CONTACT_ROUTE_IF_PUBLIC',
+      'STOP_AND_ASK_JANUS_AGAIN_BEFORE_SENDING_ANY_P2548_REQUEST'
+    ],
+    'SUCCESS_GATE':'AT_LEAST_ONE_CURRENT_CUSTODIAN_CANDIDATE_HAS_DOCUMENTED_SUCCESSION_OR_EXPLICIT_ARCHIVE_RESPONSIBILITY_AND_A_PUBLIC_INSTITUTIONAL_CONTACT_ROUTE',
+    'NOT_APPROVED':[
+      'NO_EMAIL_YET',
+      'NO_PERSONAL_CONTACT_GUESSING',
+      'NO_SECONDARY_FIGURE_DIGITIZATION',
+      'NO_SHAPE_SCORING',
+      'NO_PYRAMID_OR_CRATER_LABEL'
+    ],
+    'TARGET_IDENTITY':'UNCONFIRMED'
+  },
+  'hard_rules':[
+    'ASK_JANUS_BEFORE_EACH_NEW_ARCHIVE_OR_PHYSICAL_STAGE',
+    'DOCUMENTED_CUSTODIAN_LINEAGE_BEFORE_CONTACT',
+    'NO_AUTHORSHIP_EQUALS_CUSTODY_ASSUMPTION',
+    'NO_POSTHOC_RETARGETING',
+    'VOLCANIC_BASELINE_REMAINS_ACTIVE',
+    'NEGATIVE_RESULTS_REMAIN_NEGATIVE'
+  ]
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
