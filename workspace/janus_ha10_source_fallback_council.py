@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+import json, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/JANUS-HA10-SOURCE-FALLBACK-COUNCIL-RUN-001-2026-08-22-v1.0.json')
+result={
+  'artifact_id':'JANUS-HA10-SOURCE-FALLBACK-COUNCIL-RUN-001-2026-08-22-v1.0',
+  'created_utc':datetime.now(timezone.utc).isoformat(),
+  'question':'The authoritative BAS 50 m raster is identified but its bytes are not currently retrievable in this runtime, and P2548 remains unrecovered. Which secondary sources may be used without contaminating the preregistered target test?',
+  'blockers':{
+    'bas_dataset_identified':True,
+    'bas_grid_bytes_retrieved':False,
+    'p2548_recovered':False,
+    'wishbone_georeferenced':False,
+    'modern_bgs_ukho_deliverables_identified':True,
+    'ctbto_h10n_h10s_official_route_figures_identified':True,
+    'gebco_available_as_lower_authority_global_grid':True
+  },
+  'council':{
+    'HRain':'KEEP_PRIMARY_AND_SECONDARY_MAP_LANES_SEPARATE',
+    'DemiHead':'NO_PRIMARY_CLAIM_FROM_PROXY_GRID',
+    'Fast_CAT':'TARGET_METRICS_REMAIN_LOCKED_UNTIL_EQUIVALENT_OR_BETTER_AUTHORITATIVE_RASTER_INTERSECTION_IS_VERIFIED',
+    'Cousteau':'USE_OFFICIAL_ROUTE_FIGURES_FOR_GEOMETRY_ONLY__MODERN_MBES_FOR_INDEPENDENT_PHYSICAL_REPLICATION_IF_COVERAGE_INTERSECTS',
+    'Fundamentum':'LOWER_RESOLUTION_PROXY_MAY_FALSIFY_GROSS_CLAIMS_BUT_CANNOT_CONFIRM_FINE_STRUCTURE',
+    'AIFC':'RECORD_SOURCE_CLASS_RESOLUTION_CRS_AND_TRANSFORM_FOR_EVERY_TILE',
+    'Voice_of_Janus':'DO_NOT_LET_AVAILABLE_DATA_REDEFINE_THE_QUESTION'
+  },
+  'janus_answer':{
+    'APPROVED':[ 
+      'CTBTO_FIG22_FIG23_AS_SECONDARY_ARRAY_ROUTE_AND_DEPTH_CONTOUR_GEOMETRY_ONLY',
+      'BGS_UKHO_2021_2024_MBES_AS_INDEPENDENT_REPLICATION_LANE_ONLY_AFTER_MACHINE_VERIFYING_H10N1_OR_H10S_INTERSECTION',
+      'GEBCO_AS_CONTEXT_AND_GROSS_TOPOGRAPHY_NEGATIVE_CONTROL_ONLY__NO_FINE_SHAPE_SCORING',
+      'CONTINUE_ARCHIVE_RECOVERY_FOR_P2548_AND_BAS_SOURCE_GRID_IN_PARALLEL'
+    ],
+    'NOT_APPROVED':[ 
+      'DIGITIZING_WISHBONE_FROM_TEXT_DESCRIPTION',
+      'USING_SCREENSHOT_PIXELS_AS_PRIMARY_BATHYMETRY',
+      'SCORING_PYRAMIDALITY_FROM_GEBCO',
+      'MOVING_H10N1_TARGET_OR_WINDOWS_TO_FIT_MODERN_SURVEY_COVERAGE'
+    ],
+    'NEXT_STAGE_ORDER':[ 
+      'F1_MACHINE_VERIFY_MODERN_BGS_UKHO_COVERAGE_INTERSECTION_WITH_FROZEN_H10N1',
+      'F2_IF_INTERSECTION_TRUE_RECOVER_OR_REQUEST_THE_NATIVE_GRID_AND_SCORE_ONLY_AFTER_PREREG_INTEGRITY_CHECK',
+      'F3_USE_CTBTO_ROUTE_FIGURES_TO_CROSSCHECK_ARRAY_PLACEMENT_AND_COARSE_DEPTHS',
+      'F4_KEEP_P2548_WISHBONE_GATE_OPEN_AND_UNSCORED'
+    ],
+    'SUCCESS_CONDITION':'AUTHORITATIVE_GEOREFERENCED_RASTER_INTERSECTS_FROZEN_COORDINATE_AND_CAN_BE_REPRODUCIBLY_EXTRACTED',
+    'TARGET_IDENTITY':'UNCONFIRMED'
+  },
+  'hard_rules':['ASK_JANUS_BEFORE_NEXT_NEW_PHYSICAL_STAGE','PRIMARY_VS_PROXY_LANES_MUST_NOT_MERGE','NO_POSTHOC_RETARGETING','NEGATIVE_RESULTS_REMAIN_NEGATIVE']
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
