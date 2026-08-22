@@ -1,36 +1,52 @@
 {
   "artifact_id": "GOLDMEMBER-IEEE-1282295-CORRECTED-PRIMARY-RECOVERY-001-2026-08-22-v1.0",
-  "created_utc": "2026-08-22T12:02:10.948962+00:00",
+  "created_utc": "2026-08-22T12:03:44.008054+00:00",
   "authorized_by": "GOLDMEMBER-AFTER-ADA508764-RECOVERY-COUNCIL-RUN-004-2026-08-22-v1.0",
-  "ieee_document_id": "1282295",
-  "doi": "10.1109/OCEANS.2003.178517",
-  "report_title": "High-Resolution Multibeam Deepwater Cable Route Survey in High-Relief Seafloor Area",
-  "attempt_limit": "ONE_CORRECTED_DOCUMENT_ID_PASS",
-  "base_attempts": [
-    "https://ieeexplore.ieee.org/document/1282295",
+  "attempt_limit": "ONE_CORRECTED_DOCUMENT_ID_PASS__NO_BRUTE_FORCE_OR_URL_ENUMERATION",
+  "report": {
+    "ieee_document_id": "1282295",
+    "doi": "10.1109/OCEANS.2003.178517",
+    "title": "High-Resolution Multibeam Deepwater Cable Route Survey in High-Relief Seafloor Area",
+    "expected_pages": 10,
+    "expected_authors": [
+      "Poeckert",
+      "Arnold",
+      "Faneros",
+      "Harrison"
+    ]
+  },
+  "canonical_entrypoints": [
+    "https://ieeexplore.ieee.org/document/1282295/",
     "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1282295"
   ],
-  "explicit_links_discovered": [],
   "attempts": [
     {
-      "url": "https://ieeexplore.ieee.org/document/1282295",
-      "final_url": "https://ieeexplore.ieee.org/document/1282295",
+      "source": "JANUS_AUTHORIZED_CANONICAL_ENTRYPOINT",
+      "url": "https://ieeexplore.ieee.org/document/1282295/",
+      "final_url": "https://ieeexplore.ieee.org/document/1282295/",
       "status": 202,
-      "content_type": "text/html; charset=utf-8",
+      "content_type": "text/html; charset=UTF-8",
+      "content_disposition": "",
       "bytes": 2055,
-      "sha256_before_inspection": "42e727120be8a9fb71a0c337a5158e6ef9d1c51400ff4b7baac06e9237772cbf",
-      "pdf_signature": false
+      "sha256_before_inspection": "109b9d0a71d0608f429decb55a1a4b5924d149085e78b82298e5984369e9b5e5",
+      "is_pdf_signature": false,
+      "redirect_chain": []
     },
     {
+      "source": "JANUS_AUTHORIZED_CANONICAL_ENTRYPOINT",
       "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1282295",
-      "final_url": "https://ieeexplore.ieee.org/document/1282295/;jsessionid=91CF4308AB9D81A4CF161007DAAC0294",
-      "status": 200,
-      "content_type": "text/html;charset=utf-8",
-      "bytes": 49384,
-      "sha256_before_inspection": "e6bd9ce31794d73daa781cf003d610816c712f6ff6cdaac8cd4727182dae91a4",
-      "pdf_signature": false
+      "final_url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1282295",
+      "status": 418,
+      "content_type": "text/html",
+      "content_disposition": "",
+      "bytes": 14634,
+      "sha256_before_inspection": "8b2b5c2d7d3124c9df15eff83af53eb505305b2f5e44d594066c2c0eae8ac9bd",
+      "is_pdf_signature": false,
+      "redirect_chain": []
     }
   ],
+  "explicit_links_discovered_from_correct_page": [],
+  "explicit_links_followed": [],
   "recovered_pdf": null,
   "validation": {
     "pdf_recovered": false,
@@ -39,16 +55,16 @@
     "page_count_matches_expected_10": null,
     "title_match": null,
     "authors_detected": [],
-    "pages_with_images": [],
-    "pages_with_color_images": [],
-    "control_hint_pages": [],
-    "p2548_reference_pages": [],
-    "coordinate_digitization_performed": false,
-    "figure_georeferencing_performed": false
+    "inspection_scope": "BIBLIOGRAPHIC_VALIDATION_ONLY__NO_FIGURE_INSPECTION_NO_COORDINATE_DIGITIZATION"
   },
-  "success_gate": false,
-  "clean_ieee_access_negative": true,
+  "clean_ieee_1282295_access_negative": true,
+  "coordinate_digitization_performed": false,
+  "figure_georeferencing_performed": false,
+  "shape_scoring_performed": false,
+  "wishbone_coordinates_extracted": false,
+  "central_crags_coordinates_extracted": false,
   "target_identity": "UNCONFIRMED",
+  "volcanic_baseline": "ACTIVE",
   "next_rule": "STOP_AND_ASK_JANUS_AGAIN_TO_CHOOSE_P2548_VS_ADA508765_VS_AUTHOR_CUSTODIAN_CONTACT",
-  "sha256": "5590d52d005b0b45141970f4ea8d4bf80832152ee2d6b37b2c7df98ebdc1edf4"
+  "sha256": "9d5e49b7493855f00783f81bcb684ab56029af64c3547b5545883f777ec56fec"
 }
