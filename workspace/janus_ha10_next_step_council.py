@@ -70,3 +70,4 @@ result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(','
 OUT.parent.mkdir(parents=True,exist_ok=True)
 OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
 print(json.dumps(result,indent=2,ensure_ascii=False))
+# workflow trigger refresh
