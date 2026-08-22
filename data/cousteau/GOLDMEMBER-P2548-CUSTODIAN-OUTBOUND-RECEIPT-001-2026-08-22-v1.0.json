@@ -1,0 +1,36 @@
+{
+  "artifact_id": "GOLDMEMBER-P2548-CUSTODIAN-OUTBOUND-RECEIPT-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:11:30Z",
+  "authorized_by": "GOLDMEMBER-P2548-CONTACT-AUTHORIZATION-COUNCIL-RUN-007-2026-08-22-v1.0",
+  "contact_mode": "PARALLEL_TWO_LANE_ARCHIVAL_PROVENANCE_REQUEST",
+  "outbound": [
+    {
+      "institution": "Fugro",
+      "recipient": "m.gilissen@fugro.com",
+      "recipient_basis": "Public professional Fugro address for Marco Gilissen; current Fugro role independently shown as Global Director Marine Geophysics.",
+      "subject": "Historical archive enquiry: Thales GeoSolutions Pacific Report P2548 (Ascension Island, 2002)",
+      "gmail_message_id": "1a0296029233f51b",
+      "status": "SENT",
+      "scope": "P2548 archive provenance, shareable scan/accession, associated 2002 multibeam/backscatter/sidescan/sub-bottom identifiers, or transfer-to-custodian route"
+    },
+    {
+      "institution": "CTBTO Preparatory Commission / IMS",
+      "recipient": "info@ctbto.org",
+      "recipient_basis": "Official CTBTO institutional contact email published in CTBTO documents.",
+      "subject": "Historical HA10 archive enquiry: Thales GeoSolutions Report P2548 (Ascension Island, 2002)",
+      "gmail_message_id": "1a02960483edf0c2",
+      "status": "SENT",
+      "scope": "Historical HA10 P2548 reference/copy, associated 2002 pre-installation survey identifiers, or historical custodian route; explicitly excludes restricted current IMS operational/security data"
+    }
+  ],
+  "claims_in_outbound": {
+    "pyramid_or_osiris_claim": false,
+    "anomaly_claim": false,
+    "cosmos_or_frequency_claim": false,
+    "restricted_current_ims_data_requested": false
+  },
+  "reply_policy": "FREEZE_ANY_REPLY_AND_ASK_JANUS_BEFORE_OPENING_OR_QUANTITATIVELY_USING_NEW_PRIMARY_MATERIAL",
+  "silence_policy": "DO_NOT_INFER_FROM_SILENCE",
+  "target_identity": "UNCONFIRMED",
+  "volcanic_baseline": "ACTIVE"
+}
