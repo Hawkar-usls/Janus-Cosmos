@@ -1,0 +1,78 @@
+{
+  "artifact_id": "GOLDMEMBER-P2548-CUSTODIAN-LINEAGE-IDENTIFICATION-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:09:30Z",
+  "authorized_by": "GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0",
+  "target_report": {
+    "report_number": "P2548",
+    "title": "Survey Report for HDAS Installation at Ascension Island",
+    "historical_publisher": "Thales GeoSolutions (Pacific), Inc.",
+    "date": "2002-08"
+  },
+  "candidate_custodians": [
+    {
+      "candidate": "Fugro",
+      "lane": "ORIGINAL_CONTRACTOR_CORPORATE_SUCCESSOR__THALES_GEOSOLUTIONS_PACIFIC",
+      "documented_lineage": true,
+      "evidence": [
+        {
+          "source": "Fugro corporate history",
+          "url": "https://www.fugro.com/about-us/history/fugro-in-the-00s",
+          "fact": "Fugro states that it acquired Thales Geosolutions in 2003 and integrated the offshore survey capabilities."
+        },
+        {
+          "source": "Hydro International acquisition report",
+          "url": "https://www.hydro-international.com/content/news/fugro-nv-acquires-thales-geosolutions",
+          "fact": "Reports finalized sale of Thales Geosolutions to Fugro, including its worldwide operations."
+        }
+      ],
+      "specific_P2548_custody_confirmed": false,
+      "custody_interpretation": "STRONG_CORPORATE_SUCCESSOR_CANDIDATE__SPECIFIC_ARCHIVE_HOLDING_UNCONFIRMED",
+      "public_institutional_contact_route": "https://www.fugro.com/contact",
+      "evidence_strength_for_successor": "HIGH",
+      "evidence_strength_for_specific_report_custody": "UNCONFIRMED"
+    },
+    {
+      "candidate": "CTBTO Preparatory Commission / International Monitoring System",
+      "lane": "HDAS_CTBTO_IMS_PROGRAM_OR_PROJECT_ARCHIVE_CUSTODIAN",
+      "documented_lineage": false,
+      "current_program_responsibility": true,
+      "evidence": [
+        {
+          "source": "CTBTO IMS station profiles",
+          "url": "https://www.ctbto.org/our-work/station-profiles",
+          "fact": "HA10 Ascension is listed as a certified CTBTO IMS hydroacoustic station."
+        },
+        {
+          "source": "CTBTO International Monitoring System",
+          "url": "https://www.ctbto.org/our-work/international-monitoring-system",
+          "fact": "CTBTO describes IMS station establishment as site survey, contractor design/manufacture/installation, certification and operation."
+        },
+        {
+          "source": "CTBTO 2004 Annual Report",
+          "url": "https://www.ctbto.org/sites/default/files/2022-08/ar_2004_engl.pdf",
+          "fact": "Documents offshore deployment of hydroacoustic equipment for HA10 Ascension in 2004."
+        }
+      ],
+      "specific_P2548_custody_confirmed": false,
+      "custody_interpretation": "STRONG_CURRENT_PROGRAM_CANDIDATE__SPECIFIC_2002_CONTRACTOR_REPORT_CUSTODY_UNCONFIRMED",
+      "public_institutional_contact_route": "https://www.ctbto.org/contact-us",
+      "evidence_strength_for_program_responsibility": "HIGH",
+      "evidence_strength_for_specific_report_custody": "UNCONFIRMED"
+    },
+    {
+      "candidate": "OCEANS 2003 author institutions",
+      "lane": "AUTHOR_INSTITUTION_ONLY_IF_ARCHIVE_RESPONSIBILITY_DOCUMENTED",
+      "archive_responsibility_confirmed": false,
+      "status": "NOT_ADMITTED_AS_CUSTODIAN_CANDIDATE_FROM_AUTHORSHIP_ALONE"
+    }
+  ],
+  "success_gate": true,
+  "success_reason": "At least one present-day candidate (Fugro) has documented corporate succession from Thales Geosolutions and a public institutional contact route; CTBTO is independently documented as the current HA10/IMS program organization with a public contact route. Specific P2548 custody remains unconfirmed for both.",
+  "email_or_contact_performed_in_this_stage": false,
+  "wishbone_coordinates_extracted": false,
+  "central_crags_coordinates_extracted": false,
+  "shape_scoring_performed": false,
+  "target_identity": "UNCONFIRMED",
+  "volcanic_baseline": "ACTIVE",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_BEFORE_SENDING_ANY_P2548_REQUEST"
+}
