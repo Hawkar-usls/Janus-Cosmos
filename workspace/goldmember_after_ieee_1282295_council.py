@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import hashlib, json
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/GOLDMEMBER-AFTER-IEEE-1282295-COUNCIL-RUN-005-2026-08-22-v1.0.json')
+
+result={
+  'artifact_id':'GOLDMEMBER-AFTER-IEEE-1282295-COUNCIL-RUN-005-2026-08-22-v1.0',
+  'created_utc':datetime.now(timezone.utc).isoformat(),
+  'question':'Corrected IEEE document 1282295 recovery is now a clean access negative. ADA508764 and ADA508765 primary color copies remain unrecovered, P2548 remains unrecovered, and BODC JR15001 custodian response is pending. Which single southern archive branch should GOLDMEMBER open next before any quantitative figure use?',
+  'evidence_snapshot':{
+    'ieee_1282295_corrected_access_negative':True,
+    'ada508764_pdf_recovered':False,
+    'ada508765_pdf_recovered':False,
+    'p2548_recovered':False,
+    'wishbone_georeferenced':False,
+    'central_crags_georeferenced':False,
+    'jr15001_bodc_custodian_response':'PENDING',
+    'h10n1_physical_anomaly_gate':'NOT_ADVANCED',
+    'target_identity':'UNCONFIRMED'
+  },
+  'council':{
+    'HRain':'MOVE_UPSTREAM_TO_THE_PRIMARY_SURVEY_REPORT_BEFORE_CONTACTING_INTERPRETERS',
+    'iNaiHR':'ARCHIVE_RELATIONSHIPS_MAY_ONLY_LOCATE_PRIMARY_EVIDENCE',
+    'DemiHead':'TWO_ACCESS_FAILURES_DO_NOT_AUTHORIZE_SECONDARY_FIGURE_DIGITIZATION',
+    'Fast_CAT':'P2548_IS_PREDECLARED_AND_CLOSEST_TO_AS_BUILT_SURVEY_PROVENANCE__OPEN_IT_NEXT_ONLY',
+    'Aura':'ZERO_EVIDENCE_AUTHORITY',
+    'Janus_Cosmos':'H10S_COORDINATES_REMAIN_FROZEN__NO_BACKSOLVING',
+    'Cousteau':'RECOVER_P2548_OR_AN_AUTHORITATIVE_CATALOG_RECORD_WITH_EXACT_HOLDING_OR_CUSTODIAN',
+    'Fundamentum':'VOLCANIC_BASELINE_REMAINS_PRIMARY',
+    'AIFC':'RECORD_EXACT_TITLE_REPORT_NUMBER_DATE_PUBLISHER_HOLDING_ID_AND_HASH_ANY_BYTES_BEFORE_INSPECTION',
+    'Voice_of_Janus':'THE_PAPER_DESCRIBES_THE_MAP__THE_SURVEY_REPORT_IS_THE_MAPS_LEDGER__FIND_THE_LEDGER'
+  },
+  'janus_answer':{
+    'AUTHORIZED_STAGE':'GOLDMEMBER_P2548_PRIMARY_SURVEY_REPORT_LOCATOR_RECOVERY_001',
+    'PRIMARY_TARGET':{
+      'report_number':'P2548',
+      'title':'Survey Report for HDAS Installation at Ascension Island',
+      'publisher':'Thales GeoSolutions (Pacific), Inc.',
+      'date':'2002-08'
+    },
+    'ORDER':[
+      'SEARCH_EXACT_REPORT_NUMBER_TITLE_AND_PUBLISHER_IN_PUBLIC_GOVERNMENT_INSTITUTIONAL_AND_MARINE_DATA_CATALOGS',
+      'FOLLOW_ONLY_EXACT_OR_AUTHORITATIVE_CATALOG_LOCATORS__NO_BROAD_SIMILAR_TITLE_SUBSTITUTION',
+      'IF_PRIMARY_REPORT_BYTES_ARE_RECOVERED_HASH_BEFORE_INSPECTION',
+      'IF_ONLY_HOLDING_OR_CUSTODIAN_IS_FOUND_FREEZE_EXACT_HOLDING_METADATA_WITHOUT_CONTACTING_YET',
+      'IF_NO_PRIMARY_OR_HOLDING_LOCATOR_IS_FOUND_FREEZE_NEGATIVE_LOCATOR_RECEIPT'
+    ],
+    'NOT_APPROVED':[
+      'NO_AUTHOR_OR_CUSTODIAN_CONTACT_UNTIL_THIS_LOCATOR_PASS_COMPLETES',
+      'NO_ADA508765_SECONDARY_DIGITIZATION',
+      'NO_WISHBONE_OR_CRAG_COORDINATE_ESTIMATION',
+      'NO_SHAPE_SCORING',
+      'NO_PYRAMID_OR_CRATER_LABEL'
+    ],
+    'SUCCESS_GATE':'P2548_PRIMARY_BYTES_RECOVERED_OR_EXACT_AUTHORITATIVE_HOLDING_CUSTODIAN_IDENTIFIED_OR_CLEAN_LOCATOR_NEGATIVE_FROZEN',
+    'ON_COMPLETION':'STOP_AND_ASK_JANUS_AGAIN_BEFORE_OPENING_THE_REPORT_OR_CONTACTING_A_CUSTODIAN',
+    'TARGET_IDENTITY':'UNCONFIRMED'
+  },
+  'hard_rules':[
+    'ASK_JANUS_BEFORE_EACH_NEW_ARCHIVE_OR_PHYSICAL_STAGE',
+    'ONE_PRIMARY_BRANCH_AT_A_TIME',
+    'HASH_BEFORE_INSPECTION',
+    'NO_POSTHOC_RETARGETING',
+    'VOLCANIC_BASELINE_REMAINS_ACTIVE',
+    'NEGATIVE_RESULTS_REMAIN_NEGATIVE'
+  ]
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
