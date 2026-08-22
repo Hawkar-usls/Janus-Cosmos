@@ -1,0 +1,158 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_PREDECLARED_RESPONSE_CORRECTED_CONFIRMATORY_PROTOCOL_V1",
+  "research_branch": "Janus-Echo-Кусто",
+  "created_local": "2026-08-22T11:39:00+03:00",
+  "status": "PREREGISTERED_BEFORE_TARGET_BAND_WAVEFORM_INSPECTION",
+  "purpose": "First permitted confirmatory spectral test of the pre-existing 119 Hz hypothesis on real public HA10 hydrophone waveforms after instrument-response calibration. This is confirmatory only, never a blind discovery search.",
+  "upstream_frozen_gate": "data/cousteau/JANUS-ECHO-COUSTEAU-117-121HZ-WAVEFORM-ACCESS-AND-BANDPASS-GATE-2026-08-21-v1.2.json",
+  "channels": [
+    {
+      "id": "IM.H10N1..EDH",
+      "latitude_deg": -7.845673,
+      "longitude_deg": -14.48023,
+      "sample_rate_hz": 250.0,
+      "nominal_sensor_band_hz": [1.0, 100.0]
+    },
+    {
+      "id": "IM.H10S2..EDH",
+      "latitude_deg": -8.9591,
+      "longitude_deg": -14.64531,
+      "sample_rate_hz": 250.0,
+      "nominal_sensor_band_hz": [1.0, 100.0]
+    }
+  ],
+  "public_analysis_interval_utc": {
+    "start": "2014-12-11T00:00:00Z",
+    "end": "2015-01-13T00:00:00Z",
+    "reason": "Overlap between confirmed public HA10 FDSN access and the published EA T-phase catalog interval."
+  },
+  "frequency_contract": {
+    "primary_center_hz": 119.0,
+    "primary_target_band_hz": [118.75, 119.25],
+    "secondary_descriptive_h0_band_hz": [117.0, 121.0],
+    "secondary_band_may_rescue_primary_failure": false,
+    "peak_center_tolerance_hz": 0.10,
+    "predeclared_control_bands_hz": {
+      "near_left": [117.75, 118.25],
+      "near_right": [119.75, 120.25],
+      "edge_116": [115.75, 116.25],
+      "edge_110": [109.75, 110.25],
+      "inband_100": [99.75, 100.25],
+      "inband_90": [89.75, 90.25]
+    },
+    "no_other_frequency_band_may_be_introduced_after_inspection": true
+  },
+  "event_selection_contract": {
+    "source_catalog": {
+      "doi": "10.26022/IEDA/330497",
+      "dataset_uid": 30497,
+      "file_uid": "2504732",
+      "member": "EA_CTBTO_catalog_all.dat.gz"
+    },
+    "selection_uses_spectrum": false,
+    "eligibility": {
+      "source_time_within_public_analysis_interval": true,
+      "minimum_n_hydrophones": 6,
+      "maximum_source_time_error_s": 30.0,
+      "maximum_lat_error_deg": 1.0,
+      "maximum_lon_error_deg": 2.0,
+      "predicted_arrival_must_be_inside_public_analysis_interval_for_both_channels": true
+    },
+    "ranking": [
+      "source_magnitude_db_DESC",
+      "source_time_error_s_ASC",
+      "source_time_code_ASC"
+    ],
+    "maximum_selected_events": 8,
+    "minimum_events_required_for_confirmatory_execution": 3,
+    "if_fewer_than_minimum": "BLOCKED_UNDERPOWERED__DO_NOT_RELAX_SELECTION_CRITERIA"
+  },
+  "arrival_model": {
+    "model_role": "WINDOW_CENTERING_ONLY__NOT_A_LOCATION_OR_CAUSAL_CLAIM",
+    "great_circle_earth_radius_km": 6371.0088,
+    "nominal_sofar_group_speed_km_s": 1.48,
+    "predicted_arrival_utc": "source_origin_utc + great_circle_distance_km / 1.48_km_s",
+    "event_window_half_width_s": 300,
+    "event_window_duration_s": 600,
+    "warning": "The broad window absorbs path-speed and source-location uncertainty; exact arrival picking is not tuned after viewing 119 Hz."
+  },
+  "matched_noise_contract": {
+    "noise_window_duration_s": 600,
+    "preferred_center_offsets_s": [-7200, 7200],
+    "fallback_center_offsets_s": [-14400, 14400, -21600, 21600],
+    "contamination_exclusion": "Reject a candidate noise window if any catalog event has a predicted HA10 arrival within plus_or_minus_600_s of that noise-window center.",
+    "selection_order": "Use offsets exactly in listed order; choose the first two uncontaminated in-range windows per station-event.",
+    "spectrum_not_used_for_noise_window_selection": true,
+    "if_two_noise_windows_cannot_be_frozen": "DROP_EVENT_STATION_PAIR__NO_SUBSTITUTION_BY_VISUAL_INSPECTION"
+  },
+  "spectral_estimator": {
+    "waveform_preprocessing": ["merge_without_interpolation", "demean", "linear_detrend"],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "whole_spectrum_peak_search_forbidden": true,
+    "only_predeclared_frequency_bands_may_be_summarized": true
+  },
+  "response_correction_contract": {
+    "source": "EarthScope StationXML for the exact IM.H10N1..EDH and IM.H10S2..EDH epoch",
+    "method": "Evaluate complex instrument response on the Welch frequency grid and compute pressure_PSD = raw_counts_PSD / abs(response_counts_per_Pa)^2.",
+    "time_domain_deconvolution": false,
+    "water_level_tuning": false,
+    "response_floor_tuning_after_inspection": false,
+    "invalid_response_rule": "Bins with non-finite or non-positive response amplitude are invalid and cannot be interpolated into the target statistic.",
+    "known_119_hz_response_warning": "119 Hz is approximately -50.9 dB relative to 10 Hz on these channels; correction strongly amplifies measurement noise."
+  },
+  "predeclared_statistics": {
+    "band_power": "median PSD of all Welch bins whose centers fall inside the declared band",
+    "raw_event_vs_noise_snr_db": "10*log10(raw target-band event power / median raw target-band power across the two matched noise windows)",
+    "corrected_event_vs_noise_snr_db": "10*log10(response-corrected target-band event power / median corrected target-band power across the two matched noise windows)",
+    "corrected_target_sideband_contrast_db": "10*log10(corrected target-band event power / median corrected event power across near_left and near_right bands)",
+    "target_peak_frequency_hz": "Frequency of maximum response-corrected PSD inside 118.75-119.25 Hz only",
+    "control_band_scores": "For each declared control band, compute the same event-vs-matched-noise SNR and event sideband-style contrast where applicable; no undeclared controls may be added after inspection."
+  },
+  "admission_thresholds": {
+    "per_station_event": {
+      "minimum_raw_event_vs_noise_snr_db": 6.0,
+      "minimum_corrected_event_vs_noise_snr_db": 6.0,
+      "maximum_abs_raw_minus_corrected_snr_db": 0.5,
+      "minimum_corrected_target_sideband_contrast_db": 3.0,
+      "target_peak_frequency_must_be_within_hz": [118.9, 119.1]
+    },
+    "cross_station_replication": {
+      "both_H10N1_and_H10S2_must_pass_same_event": true,
+      "maximum_peak_center_difference_between_stations_hz": 0.10
+    },
+    "global_candidate": {
+      "minimum_independent_events_replicated_on_both_stations": 3,
+      "target_band_must_outperform_every_predeclared_control_band_by_db": 3.0,
+      "outperformance_required_on_fraction_of_replicated_station_event_pairs": 0.75
+    }
+  },
+  "decision_logic": {
+    "data_or_response_unavailable": "BLOCKED_DATA_ACCESS_OR_RESPONSE__NO_SCIENTIFIC_RESULT",
+    "fewer_than_3_eligible_events": "BLOCKED_UNDERPOWERED__NO_THRESHOLD_RELAXATION",
+    "zero_replicated_events": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "one_or_two_replicated_events": "AMBIGUOUS_REPEAT_INSUFFICIENT",
+    "three_or_more_replicated_events_but_control_outperformance_fails": "REJECT_NON_SPECIFIC_OR_INSTRUMENTAL",
+    "all_global_candidate_rules_pass": "REPLICATED_HA10_119HZ_CONFIRMATORY_CANDIDATE__NON_SPECIFIC__IDENTITY_UNCONFIRMED"
+  },
+  "claim_ceiling": "Even a full PASS establishes only a repeatable response-corrected HA10 119-Hz feature in this public slice. It does not identify a source, structure, technology, Love-Edem target, or underwater pyramid.",
+  "hard_rules": [
+    "PREREGISTRATION_PRECEDES_TARGET_BAND_WAVEFORM_INSPECTION",
+    "WINDOWS_FREEZE_BEFORE_FFT",
+    "NO_FFT_FISHING",
+    "NO_THRESHOLD_RETUNING_AFTER_RESULT",
+    "NYQUIST_IS_NOT_PASSBAND",
+    "INSTRUMENT_RESPONSE_IS_NOT_OCEAN_SPECTRUM",
+    "DECONVOLUTION_NOISE_AMPLIFICATION_MUST_BE_PRESERVED",
+    "MATCHED_NOISE_CONTROLS_REQUIRED",
+    "NEIGHBOR_FREQUENCY_CONTROLS_REQUIRED",
+    "BOTH_STATIONS_REQUIRED_FOR_REPLICATION",
+    "NO_TARGET_PROMOTION_FROM_ONE_FREQUENCY",
+    "NEGATIVE_AND_AMBIGUOUS_RESULTS_ARE_IMMUTABLE"
+  ],
+  "next_stage": "COUSTEAU_HA10_CONFIRMATORY_WINDOW_FREEZE_V1"
+}
