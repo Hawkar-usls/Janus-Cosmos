@@ -1,0 +1,47 @@
+name: GOLDMEMBER After P2548 Locator Council
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/goldmember_after_p2548_locator_council.py"
+      - ".github/workflows/goldmember-after-p2548-locator-council.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: goldmember-after-p2548-council-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask JANUS whether to identify custodian or contact now
+        run: python workspace/goldmember_after_p2548_locator_council.py
+      - name: Show council answer
+        run: cat data/cousteau/GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldmember-after-p2548-council-${{ github.run_number }}
+          path: data/cousteau/GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0.json
+          retention-days: 90
+      - name: Freeze council result safely
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0.json
+          git commit -m "GOLDMEMBER: freeze post-P2548 locator council ${{ github.run_number }}" || true
+          git fetch origin janus-echo-cousteau
+          git rebase origin/janus-echo-cousteau
+          git push origin HEAD:janus-echo-cousteau
