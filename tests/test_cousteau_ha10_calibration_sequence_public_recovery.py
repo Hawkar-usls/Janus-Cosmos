@@ -1,8 +1,14 @@
 from pathlib import Path
+import importlib.util
 
 import pytest
 
-from workspace import cousteau_ha10_calibration_sequence_public_recovery as gate
+ROOT = Path(__file__).resolve().parents[1]
+MODULE_PATH = ROOT / "workspace" / "cousteau_ha10_calibration_sequence_public_recovery.py"
+SPEC = importlib.util.spec_from_file_location("cousteau_calibration_public_recovery", MODULE_PATH)
+assert SPEC and SPEC.loader
+gate = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(gate)
 
 
 def test_frozen_contract_and_authority():
@@ -25,7 +31,7 @@ def test_raw_sequence_binary_is_not_confused_with_presentation():
     assert "RAW_SAMPLE_PAYLOAD_SHAPE" in evidence
 
 
-def test_numeric_response_requires_machine_readable_numeric_payload(monkeypatch):
+def test_numeric_response_requires_machine_readable_numeric_payload():
     text = "H10S calibration transfer function frequency_db " + " ".join(f"{i} {0.1*i}" for i in range(100))
     row = {
         "status": "FETCHED",
@@ -70,6 +76,6 @@ def test_public_not_found_does_not_become_custodian_absence():
     assert protocol["claim_ceiling"]["derived_curve_is_not_raw_sequence"] is True
 
 
-def test_canonical_output_is_refused(tmp_path: Path):
+def test_canonical_output_is_refused():
     with pytest.raises(RuntimeError, match="CANONICAL_DATA_WRITE_FORBIDDEN"):
         gate.run(gate.DATA / "forbidden.json")
