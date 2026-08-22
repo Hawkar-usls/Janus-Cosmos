@@ -49,13 +49,28 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install scientific stack and record exact environment
+      - name: Install frozen direct scientific stack and record full environment
         shell: bash
         run: |
           set -euo pipefail
-          python -m pip install numpy scipy requests obspy
+          # Run 32567886788 stopped in unit tests before any waveform-control
+          # execution because NumPy 2.5 removed np.trapz. Pinning 2.3.5 preserves
+          # the preregistered trapezoidal integral without inspecting control data.
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
           mkdir -p artifacts/ha10-inband-positive-control
           python -m pip freeze | sort > artifacts/ha10-inband-positive-control/python-environment.txt
+          python - <<'PY'
+          import numpy, scipy, requests, obspy
+          assert numpy.__version__ == '2.3.5'
+          assert scipy.__version__ == '1.18.1'
+          assert requests.__version__ == '2.34.2'
+          assert obspy.__version__ == '1.5.0'
+          print('DIRECT_DEPENDENCY_PIN=PASS')
+          PY
 
       - name: Compile and test fail-closed control semantics
         shell: bash
