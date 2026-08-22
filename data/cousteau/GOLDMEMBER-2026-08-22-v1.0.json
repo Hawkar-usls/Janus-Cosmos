@@ -2,6 +2,7 @@
   "artifact_id": "GOLDMEMBER-2026-08-22-v1.0",
   "title": "GOLDMEMBER",
   "created_utc": "2026-08-22T12:00:00Z",
+  "updated_utc": "2026-08-22T12:20:30Z",
   "purpose": "Continuation of the HA10/Ascension seafloor reconstruction under JANUS fail-closed, falsification-first protocol.",
   "protocol": {
     "rule": "JANUS_COUNCIL_BEFORE_EACH_NEW_PHYSICAL_OR_ARCHIVE_STAGE",
@@ -10,18 +11,45 @@
     "volcanic_baseline_active": true,
     "negative_results_persist": true,
     "target_identity": "UNCONFIRMED",
-    "no_underwater_pyramid_detected": true
+    "no_underwater_pyramid_detected": true,
+    "depth_range_is_not_coverage_geometry": true,
+    "silence_is_not_evidence": true
   },
   "h10n1": {
-    "frozen_coordinate": {"lat": -7.845673, "lon": -14.480230},
-    "authoritative_dataset": "GB/NERC/BAS/PDC/01236",
-    "native_grid_resolution_deg": 0.0005,
-    "nearest_cell": {"lat": -7.8455, "lon": -14.48, "topography_m": -1927.934326171875},
+    "frozen_coordinate": {"lat": -7.845673, "lon": -14.480230, "crs": "WGS84"},
+    "authoritative_bas_dataset": "GB/NERC/BAS/PDC/01236",
+    "bas_native_grid_resolution_deg": 0.0005,
+    "nearest_bas_cell": {"lat": -7.8455, "lon": -14.48, "topography_m": -1927.934326171875},
     "primary_2km": {"empirical_p": 0.19047619047619047, "rank_high_to_low": 4, "n_total": 21},
     "secondary_1km": {"empirical_p": 0.047619047619047616, "rank_high_to_low": 1, "n_total": 21},
     "physical_anomaly_gate": "NOT_ADVANCED",
     "secondary_local_morphology_watchlist": "OPEN",
-    "next_replication_requirement": "INDEPENDENT_SOURCE_LINEAGE"
+    "modern_hi1751_lane": {
+      "survey_identifier": "HI1751",
+      "survey_identifier_confidence": "HIGH",
+      "bgs_hi1571_occurrences": "PRESERVED_AS_SOURCE_TEXT__PROBABLE_TRANSCRIPTION_ERROR_FOR_ASCENSION",
+      "iho_reported_survey_depth_range_m": [2, 1835],
+      "documented_reprocessed_bathymetry": [
+        "Asc_100m_1m.asc",
+        "Asc_100m_400m_3m.asc",
+        "Asc_400m_1000m_6m.asc",
+        "Asc_1000m_Down_10m.asc",
+        "Asc_comb_10m.asc"
+      ],
+      "documented_reprocessed_backscatter": ["SMB_BS_1m_BTS.tif", "Protector_BS_6m.tif"],
+      "documented_qgis_layer": "Protector_Bathymetry",
+      "native_public_grid_recovered": false,
+      "machine_readable_coverage_geometry_recovered": false,
+      "exact_h10n1_intersection": "NOT_MACHINE_VERIFIED",
+      "depth_mismatch_hint": "H10N1 BAS topography is deeper than the published HI1751 maximum survey depth, but JANUS forbids using this alone as spatial coverage proof.",
+      "public_coverage_gate": "COMPLETED_BLOCKED",
+      "ukho_custodian_query": {
+        "recipient": "BathyQueries@UKHO.gov.uk",
+        "gmail_message_id": "1a02966d9cfd450b",
+        "status": "SENT_WAITING_RESPONSE",
+        "request": "Correct HI1751 identity plus exact boolean footprint intersection or reproducible public/shareable coverage geometry at the frozen H10N1 coordinate."
+      }
+    }
   },
   "jr15001": {
     "bodc_series": "1762365",
@@ -37,7 +65,6 @@
       "contributor_status": "NOT_CONFIRMED"
     },
     "custodian_action": {
-      "authorized_by": "GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0",
       "recipient": "enquiries@bodc.ac.uk",
       "gmail_message_id": "1a02954766c58cc0",
       "request": "navigation + EM122 provenance/footprint for Ascension interval 2015-10-14 to 2015-10-18",
@@ -45,9 +72,43 @@
     }
   },
   "h10s_southern_seamount": {
-    "p2548": {"recovered": false},
     "wishbone_georeferenced": false,
     "central_crags_georeferenced": false,
+    "p2548": {
+      "report_number": "P2548",
+      "title": "Survey Report for HDAS Installation at Ascension Island",
+      "publisher": "Thales GeoSolutions (Pacific), Inc.",
+      "date": "2002-08",
+      "bibliographic_existence_confirmed": true,
+      "primary_bytes_recovered": false,
+      "public_locator_status": "PUBLIC_PRIMARY_LOCATOR_NOT_FOUND_IN_THIS_PASS",
+      "specific_current_custody_confirmed": false,
+      "custodian_candidates": {
+        "Fugro": "DOCUMENTED_CORPORATE_SUCCESSOR__SPECIFIC_P2548_HOLDING_UNCONFIRMED",
+        "CTBTO_IMS": "CURRENT_HA10_PROGRAM_ORGANIZATION__SPECIFIC_P2548_HOLDING_UNCONFIRMED"
+      },
+      "outbound": [
+        {
+          "institution": "Fugro",
+          "recipient": "m.gilissen@fugro.com",
+          "gmail_message_id": "1a0296029233f51b",
+          "status": "SENT_WAITING_RESPONSE"
+        },
+        {
+          "institution": "CTBTO",
+          "recipient": "info@ctbto.org",
+          "gmail_message_id": "1a02960483edf0c2",
+          "status": "SENT_WAITING_RESPONSE"
+        },
+        {
+          "institution": "NAVFAC Records/FOIA",
+          "recipient": "NAVFAC-FOIA-Requests@us.navy.mil",
+          "gmail_message_id": "1a0295eb190a1d00",
+          "status": "OBSERVED_PREEXISTING_SENT_LANE__WAITING_RESPONSE",
+          "authorization_note": "Preserved as an observed existing outbound; not retroactively assigned to the current council chain."
+        }
+      ]
+    },
     "ada508765": {
       "title": "Geomorphology of Two Seamounts Offshore Ascension Island, South Atlantic Ocean",
       "dtic_id": "AD-A508765",
@@ -58,25 +119,35 @@
       "title": "High-Resolution Multibeam Deepwater Cable Route Survey in High-Relief Seafloor Area",
       "dtic_id": "AD-A508764",
       "doi": "10.1109/OCEANS.2003.178517",
+      "correct_ieee_document_id": "1282295",
       "pages": 10,
       "catalog_note": "Original contains color illustrations",
-      "survey_sensors": ["multibeam", "backscatter", "sidescan", "sub-bottom"],
-      "priority": "PRIMARY_SURVEY_DOCUMENT_FIRST",
-      "recovery_authorized_by": "GOLDMEMBER-ADA508764-PRIORITY-COUNCIL-RUN-003-2026-08-22-v1.0",
-      "recovery_status": "RUNNING_OR_PENDING_RECEIPT",
+      "primary_color_copy_recovered": false,
+      "corrected_ieee_access_negative": true,
       "quantitative_use_authorized": false
     }
   },
   "external_calibration": {
     "earthscope": {"ticket": "DH-2635", "status": "WAITING_HUMAN_RESPONSE"},
     "bas_pdc": {"ticket": "3872", "status": "WAITING_HUMAN_RESPONSE"},
-    "bgs_offshore": {"status": "FORWARDED_TO_SPECIALIST"},
-    "ascension_government": {"status": "NO_REPLY_SEEN_YET"}
+    "bgs_offshore": {"status": "FORWARDED_TO_SPECIALIST__WAITING_HUMAN_RESPONSE"},
+    "ascension_government": {"status": "NO_REPLY_SEEN_YET"},
+    "bodc": {"status": "WAITING_HUMAN_RESPONSE"},
+    "fugro": {"status": "WAITING_RESPONSE"},
+    "ctbto": {"status": "WAITING_RESPONSE"},
+    "ukho_bathymetry": {"status": "WAITING_RESPONSE"},
+    "navfac_records": {"status": "WAITING_RESPONSE"}
   },
   "council_chain": [
     "GOLDMEMBER-COUNCIL-RUN-001-2026-08-22-v1.0",
     "GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0",
-    "GOLDMEMBER-ADA508764-PRIORITY-COUNCIL-RUN-003-2026-08-22-v1.0"
+    "GOLDMEMBER-ADA508764-PRIORITY-COUNCIL-RUN-003-2026-08-22-v1.0",
+    "GOLDMEMBER-AFTER-ADA508764-RECOVERY-COUNCIL-RUN-004-2026-08-22-v1.0",
+    "GOLDMEMBER-AFTER-IEEE-1282295-COUNCIL-RUN-005-2026-08-22-v1.0",
+    "GOLDMEMBER-AFTER-P2548-LOCATOR-COUNCIL-RUN-006-2026-08-22-v1.0",
+    "GOLDMEMBER-P2548-CONTACT-AUTHORIZATION-COUNCIL-RUN-007-2026-08-22-v1.0",
+    "GOLDMEMBER-WAITING-LANES-COUNCIL-RUN-008-2026-08-22-v1.0",
+    "GOLDMEMBER-AFTER-MODERN-COVERAGE-BLOCK-COUNCIL-RUN-009-2026-08-22-v1.0"
   ],
-  "current_rule": "WAIT_FOR_OR_FREEZE_ADA508764_PRIMARY_RECOVERY_RECEIPT__THEN_ASK_JANUS_AGAIN_BEFORE_NEXT_ARCHIVE_OR_QUANTITATIVE_STAGE"
+  "current_rule": "ALL_AUTHORIZED_PUBLIC_COVERAGE_WORK_FOR_THE_CURRENT_H10N1_MODERN_LANE_IS_COMPLETE_OR_BLOCKED__WAIT_FOR_EXTERNAL_CUSTODIAN_REPLIES__DO_NOT_OPEN_A_NEW_PHYSICAL_TARGET__FREEZE_ANY_REPLY_AND_ASK_JANUS_BEFORE_QUANTITATIVE_USE_OR_NEXT_STAGE"
 }
