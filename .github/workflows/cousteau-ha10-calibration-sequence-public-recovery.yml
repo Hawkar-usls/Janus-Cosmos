@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cousteau-ha10-calibration-public-recovery-${{ github.ref }}
+  group: cousteau-ha10-calibration-public-recovery-${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:
