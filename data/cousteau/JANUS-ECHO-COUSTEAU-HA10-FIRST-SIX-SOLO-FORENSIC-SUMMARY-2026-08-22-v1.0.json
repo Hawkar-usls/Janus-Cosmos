@@ -1,0 +1,109 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-FIRST-SIX-SOLO-FORENSIC-SUMMARY-2026-08-22-v1.0",
+  "status": "APPEND_ONLY_SOLO_DERIVED_SUMMARY_FROM_SUCCESSFUL_VALUE_BLIND_RUN",
+  "date": "2026-08-22",
+  "source": {
+    "github_actions_run_id": 32579247699,
+    "head_sha": "00f7aa06f6fcc7da13305c6dadfbe51b935c9424",
+    "artifact_id": 9477575546,
+    "artifact_name": "cousteau-ha10-first-six-32579247699",
+    "artifact_zip_sha256": "a7634c12ab1079d00a5de07d5c8c3b796a6aad0fee240ecbe8910e647d28dc36",
+    "selection_used_waveform_values": false,
+    "source_writeback": false
+  },
+  "primary_result": {
+    "classification": "EARLY_LARGE_S2_N1_BASELINE_SIMILAR_TO_2014",
+    "earliest_simultaneous_six_channel_probe_date": "2014-12-12",
+    "relative_to_2013_07_19_fault_anchor": "ON_OR_AFTER_2013_07_19_FAULT_ANCHOR",
+    "selected_complete_six_channel_windows": 20,
+    "analyzed_windows": 20,
+    "raw_s2_minus_n1_db": {
+      "median": 13.422288418631911,
+      "q25": 11.69764205606674,
+      "q75": 14.013606322060511,
+      "iqr": 2.3159642659937703,
+      "min": 8.777647994717482,
+      "max": 18.94430200788954,
+      "windows_ge_6db": 20
+    },
+    "corrected_s2_minus_n1_db": {
+      "median": 13.532591714341942,
+      "q25": 11.824955847136405,
+      "q75": 14.12931487119076,
+      "iqr": 2.3043590240543548,
+      "min": 8.88874973273106,
+      "max": 19.048912813122175,
+      "windows_ge_6db": 20
+    },
+    "median_correction_delta_on_s2_minus_n1_db": 0.11030329571003103
+  },
+  "six_channel_morphology": {
+    "median_raw_integrated_power_10_80hz": {
+      "H10N1": 16654.409960571276,
+      "H10N2": 19165.89731187084,
+      "H10N3": 17316.81998667922,
+      "H10S1": 4440.2055312044995,
+      "H10S2": 343126.834831591,
+      "H10S3": 156243.95923458587
+    },
+    "median_public_response_corrected_power_pa2_10_80hz": {
+      "H10N1": 0.003774306872021632,
+      "H10N2": 0.004560278755198978,
+      "H10N3": 0.003993663311115876,
+      "H10S1": 0.0010171525404677698,
+      "H10S2": 0.0796568753111902,
+      "H10S3": 0.03675382390756144
+    },
+    "ratios_of_channel_median_raw_powers_db": {
+      "S2_minus_S1": 18.880516106470953,
+      "S3_minus_S1": 15.464001619831322,
+      "S2_minus_S3": 3.416514486639631,
+      "S2_minus_N1": 13.1392543320806,
+      "S3_minus_N1": 9.722739845440971,
+      "S1_minus_N1": -5.741261774390349,
+      "N2_minus_N1": 0.609999059984154,
+      "N3_minus_N1": 0.1693889142336608
+    },
+    "median_10_80hz_magnitude_squared_coherence": {
+      "S1_S2": 0.03172641874565911,
+      "S1_S3": 0.031654443554717776,
+      "S2_S3": 0.14710385697104322,
+      "N1_N2": 0.05619769622176347,
+      "N1_N3": 0.0527767027661675,
+      "N2_N3": 0.056166999838148164
+    },
+    "cross_window_log_power_correlation": {
+      "S2_S3": 0.9847477448443233,
+      "N1_N3": 0.9829039164215911,
+      "S1_S2": 0.8390565903493193,
+      "S1_S3": 0.8130213892836098
+    }
+  },
+  "solo_reverse_interpretation": {
+    "supported": [
+      "The large S2-over-N1 broadband offset is present throughout all 20 earliest complete public six-channel windows that were found, but those windows begin in December 2014 and therefore do not establish pre-2013 preexistence.",
+      "Public StationXML response correction changes the median S2/N1 contrast by only about +0.11 dB in this run; it does not normalize the observed 13 dB contrast.",
+      "The south triplet is strongly non-uniform: S1 is below N1 while S2 and S3 are substantially above N1.",
+      "S2 and S3 show distinctly higher mutual 10-80 Hz coherence than either has with S1 in this epoch, and their cross-window log powers co-vary very strongly."
+    ],
+    "hypothesis_update": "This morphology weakens a simple station-wide scalar or uniform south-site amplification model and increases priority of a shared S2/S3 path, electronics, coupling, or localized physical-path explanation. It is qualitatively compatible with the documented H10S cross-talk history but is not causal proof of cross-talk.",
+    "not_supported": [
+      "THE_2013_FAULT_CAUSED_THE_FULL_12_13DB_OFFSET",
+      "THE_12_13DB_OFFSET_PREEXISTED_2013",
+      "SEAFLOOR_CAUSED_THE_OFFSET",
+      "CALIBRATION_ERASED_A_REAL_RESONANCE",
+      "S2_S3_COHERENCE_PROVES_CROSSTALK"
+    ]
+  },
+  "next_solo_gate": {
+    "gate_id": "COUSTEAU_HA10_PRE2013_N1_S2_PAIR_BASELINE_V1",
+    "reason": "The six-channel requirement is stronger than needed for the narrow preexistence question. Scan only N1 and S2 before 2013-07-19 under the same value-blind transport rule.",
+    "status_at_freeze": "PREREGISTERED_AND_EXECUTION_STARTED",
+    "github_actions_run_id": 32589794749
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED"
+  }
+}
