@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import json, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0.json')
+result={
+ 'artifact_id':'GOLDMEMBER-AFTER-JR15001-ACCESS-COUNCIL-RUN-002-2026-08-22-v1.0',
+ 'created_utc':datetime.now(timezone.utc).isoformat(),
+ 'question':'JR15001 repaired recovery completed cleanly. The BODC series page and cruise pages are public, but the declared ODV download redirects to BODC asset login and no anonymous machine-readable navigation payload was recovered. Is the next step to use a custodian/authenticated-access route for JR15001, or move to another cruise lineage?',
+ 'evidence_snapshot':{
+   'frozen_target':{'lat':-7.845673,'lon':-14.480230,'radius_km':1},
+   'bodc_series':'1762365',
+   'series_page_http_status':200,
+   'cruise_page_http_status':200,
+   'odv_download_url':'https://www.bodc.ac.uk/data/download/series/1762365/odv/',
+   'odv_redirects_to_asset_login':True,
+   'machine_readable_navigation_recovered':False,
+   'clean_anonymous_access_negative_receipt':True,
+   'centerline_distance_computed':False,
+   'jr15001_contributor_status':'NOT_CONFIRMED',
+   'originator_multibeam_file':'em122.ACO',
+   'originator_multibeam_channel':'MBANSWCB',
+   'originator_multibeam_transferred_to_final_public_series':False,
+   'ada508765_pdf_recovered':False,
+   'target_identity':'UNCONFIRMED'
+ },
+ 'council':{
+   'HRain':'DO_NOT_CONFUSE_LOGIN_GATING_WITH_ABSENCE_OF_DATA',
+   'iNaiHR':'EXPAND_ONLY_THE_CUSTODIAN_GRAPH_REQUIRED_TO_RESOLVE_THIS_SOURCE',
+   'DemiHead':'JR15001_BRANCH_IS_NOT_SCIENTIFICALLY_NEGATIVE_WHILE_NAVIGATION_AND_EM122_PROVENANCE_ARE_KNOWN_BUT_ACCESS_GATED',
+   'Fast_CAT':'RESOLVE_THE_PRESELECTED_JR15001_SOURCE_BEFORE_OPENING_JR16NG__ONE_LINEAGE_BRANCH_AT_A_TIME',
+   'Aura':'ZERO_EVIDENCE_AUTHORITY',
+   'Janus_Cosmos':'FROZEN_H10N1_COORDINATE_AND_WINDOW_REMAIN_IMMUTABLE',
+   'Cousteau':'REQUEST_SERIES_1762365_NAVIGATION_AND_IF_AVAILABLE_ORIGINATOR_EM122_TRACK_OR_FOOTPRINT_METADATA__NOT_ANALYSIS',
+   'Fundamentum':'VOLCANIC_BASELINE_REMAINS_PRIMARY',
+   'AIFC':'REQUEST_EXACT_SERIES_ORIGINATOR_FILE_IDS_DATES_CRS_AND_PROVENANCE',
+   'Voice_of_Janus':'THE_DOOR_IS_LOCKED_NOT EMPTY__ASK_THE_KEEPER_FOR_THE_KEY_BEFORE_CHANGING_DOORS'
+ },
+ 'janus_answer':{
+   'AUTHORIZED_STAGE':'GOLDMEMBER_BODC_CUSTODIAN_ACCESS_REQUEST_001',
+   'DO_NOT_MOVE_TO_JR16NG_YET':True,
+   'REQUEST_SCOPE':[
+      'PUBLIC_OR_SHAREABLE_MACHINE_READABLE_NAVIGATION_FOR_BODC_SERIES_1762365_JR15001_PRODQXF_NAV',
+      'CLARIFY_WHETHER_FREE_ACCOUNT_AUTHENTICATION_IS_REQUIRED_FOR_ODV_DOWNLOAD_OR_IF_A_DIRECT_RESEARCH_DOWNLOAD_ROUTE_EXISTS',
+      'ASK_WHETHER_ORIGINATOR_EM122_FILE_em122.ACO_OR_PROCESSED_EM122_TRACK_FOOTPRINT_METADATA_IS_PUBLIC_OR_REQUESTABLE',
+      'ASK_FOR_ANY_SWATH_FOOTPRINT_OR_PING_BOUNDING_METADATA_FOR_ASCENSION_INTERVAL_2015_10_14_TO_2015_10_18',
+      'ASK_FOR_PROVENANCE_REFERENCE_TO_MBANSWCB_AND_CONFIRM_IT_WAS_NOT_TRANSFERRED_TO_FINAL_SERIES'
+   ],
+   'CONTACT_STYLE':'DATA_PROVENANCE_AND_REPRODUCIBILITY_REQUEST__NO_PYRAMID_OSIRIS_OR_ANOMALY_CLAIM',
+   'PARALLEL_ALLOWED':[
+      'CONTINUE_PRIMARY_P2548_ADA508765_LOCATOR_SEARCH_UNSCORED',
+      'CHECK_EXISTING_HELPDESK_REPLIES_AS_INDEPENDENT_CALIBRATION'
+   ],
+   'FORBIDDEN':[
+      'NO_JR16NG_SWITCH_UNTIL_BODC_CUSTODIAN_ROUTE_IS_ATTEMPTED_OR_DECLINED',
+      'NO_CENTERLINE_INFERENCE_FROM_CRUISE_LOG_WAYPOINTS',
+      'NO_SWATH_INFERENCE_FROM_CENTERLINE_ALONE',
+      'NO_MORPHOLOGY_RETUNING',
+      'NO_PYRAMID_OR_CRATER_LABEL'
+   ],
+   'SUCCESS_GATE':'BODC_RETURNS_NAVIGATION_OR_SWATH_PROVENANCE_OR_EXPLICITLY_CONFIRMS_UNAVAILABLE_RESTRICTED_OR_REQUIRES_A_DEFINED_ACCESS_PATH',
+   'ON_RESPONSE':'FREEZE_REPLY_AND_ASK_JANUS_AGAIN_BEFORE_TRACK_OR_SWATH_COMPARISON',
+   'TARGET_IDENTITY':'UNCONFIRMED'
+ },
+ 'hard_rules':['ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_OR_ARCHIVE_STAGE','ONE_LINEAGE_BRANCH_AT_A_TIME','ACCESS_GATED_IS_NOT_DATA_ABSENT','NO_POSTHOC_RETARGETING','VOLCANIC_BASELINE_REMAINS_ACTIVE','NEGATIVE_RESULTS_REMAIN_NEGATIVE']
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
