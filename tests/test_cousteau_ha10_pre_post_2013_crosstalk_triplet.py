@@ -54,6 +54,12 @@ def row(*, contrast_shift=0.0, s12_shift=0.0, s13_shift=0.0, s2_n1_db=10.0):
     }
 
 
+def separated_continuous_rows(pre_ratio=10.0, post_ratio=10.5):
+    pre = [row(contrast_shift=i * 0.0005, s2_n1_db=pre_ratio + i * 0.002) for i in range(15)]
+    post = [row(contrast_shift=0.08 + i * 0.0005, s2_n1_db=post_ratio + i * 0.002) for i in range(15)]
+    return pre, post
+
+
 def test_exact_frozen_blob_bindings_and_janus_selection():
     p = protocol()
     assert m.git_blob_sha1_file(m.PROTOCOL) == m.EXPECTED_PROTOCOL_BLOB
@@ -67,8 +73,7 @@ def test_exact_frozen_blob_bindings_and_janus_selection():
 
 def test_synthetic_linear_coherent_post_change_detects_signature():
     p = protocol()
-    pre = [row(s2_n1_db=10.0) for _ in range(15)]
-    post = [row(contrast_shift=0.08, s2_n1_db=10.5) for _ in range(15)]
+    pre, post = separated_continuous_rows()
     result = m.summarize_complete_rows(pre, post, p, permutations_override=5000)
     assert result["verdict"] == "LINEAR_COHERENT_SOUTH_TRIPLET_CROSSTALK_SIGNATURE_DETECTED"
     assert result["primary"]["post_minus_pre_contrast_delta_msc"] == pytest.approx(0.08)
@@ -78,8 +83,8 @@ def test_synthetic_linear_coherent_post_change_detects_signature():
 
 def test_no_coherence_change_does_not_detect_signature():
     p = protocol()
-    pre = [row(s2_n1_db=10.0) for _ in range(15)]
-    post = [row(s2_n1_db=10.4) for _ in range(15)]
+    pre = [row(contrast_shift=i * 0.0005, s2_n1_db=10.0) for i in range(15)]
+    post = [row(contrast_shift=i * 0.0005, s2_n1_db=10.4) for i in range(15)]
     result = m.summarize_complete_rows(pre, post, p, permutations_override=1000)
     assert result["verdict"] == "NO_PREREGISTERED_LINEAR_COHERENT_CROSSTALK_SIGNATURE"
     assert result["primary"]["post_minus_pre_contrast_delta_msc"] == pytest.approx(0.0)
@@ -94,12 +99,11 @@ def test_large_s2_n1_offset_preexistence_classification():
 
 def test_summary_reports_preexisting_offset_independently_of_primary_signature():
     p = protocol()
-    pre = [row(s2_n1_db=11.8) for _ in range(15)]
-    post = [row(contrast_shift=0.08, s2_n1_db=12.7) for _ in range(15)]
+    pre, post = separated_continuous_rows(pre_ratio=11.8, post_ratio=12.7)
     result = m.summarize_complete_rows(pre, post, p, permutations_override=5000)
     assert result["verdict"] == "LINEAR_COHERENT_SOUTH_TRIPLET_CROSSTALK_SIGNATURE_DETECTED"
     assert result["preexistence"]["classification"] == "LARGE_S2_N1_OFFSET_PREEXISTS_AND_IS_STABLE_ACROSS_FAULT"
-    assert result["preexistence"]["raw_pre_median_s2_minus_n1_db"] == pytest.approx(11.8)
+    assert result["preexistence"]["raw_pre_median_s2_minus_n1_db"] == pytest.approx(11.814)
 
 
 def test_completeness_gate_blocks_without_fifteen_each_epoch():
@@ -110,11 +114,12 @@ def test_completeness_gate_blocks_without_fifteen_each_epoch():
 
 
 def test_permutation_is_deterministic_for_fixed_seed():
-    pre = [0.0] * 15
-    post = [0.1] * 15
+    pre = [i * 0.001 for i in range(15)]
+    post = [0.1 + i * 0.001 for i in range(15)]
     a = m.one_sided_permutation_p(pre, post, 2000, 20260822)
     b = m.one_sided_permutation_p(pre, post, 2000, 20260822)
     assert a == b
+    assert a[1] <= 0.01
 
 
 def test_band_power_uses_fixed_band_and_is_positive():
