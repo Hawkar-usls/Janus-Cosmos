@@ -32,7 +32,7 @@ jobs:
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json)" = "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
           test "$(git hash-object workspace/cousteau_ha10_pre_post_2013_crosstalk_triplet.py)" = "01b62eb0c6af28ff97700b2bb8a2faa53a4eea5e"
-          test "$(git hash-object tests/test_cousteau_ha10_pre_post_2013_crosstalk_triplet.py)" = "c2ab121ebf05b3174d1dbd21333ee0064a511562"
+          test "$(git hash-object tests/test_cousteau_ha10_pre_post_2013_crosstalk_triplet.py)" = "59afcd0100e46d51eb440d6f57b11e187ebf3f08"
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
