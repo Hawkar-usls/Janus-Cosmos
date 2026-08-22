@@ -7,7 +7,9 @@ on:
       - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.1.json'
       - 'data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json'
       - 'workspace/cousteau_ha10_public_response_epoch_audit.py'
+      - 'workspace/cousteau_ha10_public_response_epoch_audit_v2.py'
       - 'tests/test_cousteau_ha10_public_response_epoch_audit.py'
+      - 'tests/test_cousteau_ha10_public_response_epoch_audit_v2.py'
       - '.github/workflows/cousteau-ha10-public-response-epoch-audit.yml'
   workflow_dispatch:
 
@@ -32,7 +34,9 @@ jobs:
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json)" = "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf"
           test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
           test "$(git hash-object workspace/cousteau_ha10_public_response_epoch_audit.py)" = "75c98757b7232b9c0c218d8d24d99ae5ad60d16e"
+          test "$(git hash-object workspace/cousteau_ha10_public_response_epoch_audit_v2.py)" = "db2ec2fa6aae75fbc6345fd6f6ae7edb9ae01896"
           test "$(git hash-object tests/test_cousteau_ha10_public_response_epoch_audit.py)" = "7931f81c7b7752795ca682fd4decbab374610e3d"
+          test "$(git hash-object tests/test_cousteau_ha10_public_response_epoch_audit_v2.py)" = "9a488bf72964475b1410ab08fc32d460b61989ff"
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -46,14 +50,19 @@ jobs:
           python -m pip freeze | sort > "$RUNNER_TEMP/python-environment.txt"
 
       - name: Compile before network access
-        run: python -m py_compile workspace/cousteau_ha10_public_response_epoch_audit.py
+        run: |
+          python -m py_compile workspace/cousteau_ha10_public_response_epoch_audit.py
+          python -m py_compile workspace/cousteau_ha10_public_response_epoch_audit_v2.py
 
       - name: Run unit tests before network access
-        run: python -m pytest -q tests/test_cousteau_ha10_public_response_epoch_audit.py
+        run: |
+          python -m pytest -q \
+            tests/test_cousteau_ha10_public_response_epoch_audit.py \
+            tests/test_cousteau_ha10_public_response_epoch_audit_v2.py
 
       - name: Execute public StationXML epoch audit
         run: |
-          python workspace/cousteau_ha10_public_response_epoch_audit.py \
+          python workspace/cousteau_ha10_public_response_epoch_audit_v2.py \
             --output "$RUNNER_TEMP/run-${{ github.run_id }}.json"
 
       - name: Validate receipt authority boundary
@@ -71,6 +80,7 @@ jobs:
           }
           assert r['verdict'] in allowed, r['verdict']
           assert r['frozen_119hz_verdict'] == 'NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frozen_119hz_verdict_binding'] == 'EXACT_SCALAR_FOUND_RECURSIVELY_INSIDE_EXACT_BOUND_FROZEN_JSON_BYTES'
           assert r['interpretation']['119hz_authority_delta'] == 0
           assert r['interpretation']['target_identity'] == 'UNCONFIRMED'
           assert r['source_writeback'] is False
