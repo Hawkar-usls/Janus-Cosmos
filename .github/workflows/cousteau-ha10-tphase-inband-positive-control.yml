@@ -96,7 +96,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python workspace/cousteau_ha10_tphase_inband_positive_control_v2.py \
+          python -m workspace.cousteau_ha10_tphase_inband_positive_control_v2 \
             --output "artifacts/ha10-inband-positive-control/replay-v2-${GITHUB_RUN_ID}.json"
 
       - name: Validate claim ceiling and immutable-negative firewall
