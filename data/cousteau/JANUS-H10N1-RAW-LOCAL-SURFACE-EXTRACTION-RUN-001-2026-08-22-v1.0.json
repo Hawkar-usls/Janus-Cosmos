@@ -1,0 +1,156 @@
+{
+  "artifact_id": "JANUS-H10N1-RAW-LOCAL-SURFACE-EXTRACTION-RUN-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:22:35.946941+00:00",
+  "authorized_by": "JANUS-HA10-AFTER-BAS-PRIMARY-RECOVERY-COUNCIL-RUN-003-2026-08-22-v1.0",
+  "source": {
+    "dataset_id": "GB/NERC/BAS/PDC/01236",
+    "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+    "netcdf_file": "Ascension_20190912_nc.grd",
+    "netcdf_sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81",
+    "ascii_file": "Ascension_20190912_ascii.asc",
+    "ascii_sha256": "76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a",
+    "crs": "WGS84 geographic",
+    "topography_sign": "positive_up",
+    "declared_native_spacing_deg": 0.0005
+  },
+  "frozen_target": {
+    "id": "H10N1",
+    "lat": -7.845673,
+    "lon": -14.48023
+  },
+  "windows": [
+    {
+      "radius_km": 1,
+      "requested_center": {
+        "lat": -7.845673,
+        "lon": -14.48023
+      },
+      "native_bounds": {
+        "west": -14.489,
+        "east": -14.4715,
+        "south": -7.854499999999999,
+        "north": -7.836999999999999
+      },
+      "shape_rows_cols": [
+        36,
+        36
+      ],
+      "cell_spacing_deg": {
+        "lon": 0.0005000000000006111,
+        "lat": 0.0004999999999997229
+      },
+      "valid_cells": 1296,
+      "total_cells": 1296,
+      "valid_fraction": 1.0,
+      "min_topography_m": -2017.41259765625,
+      "max_topography_m": -1741.73388671875,
+      "canonical_raw_tile_sha256": "f1e940e277629a4c5e94ff6ab0b06dce02398d14e3f1342f176456f3b40bd619",
+      "artifact_npz_name": "H10N1_raw_1km.npz",
+      "netcdf_ascii_max_abs_difference_m": 4.999999418942025e-07,
+      "morphology_metrics_computed": false
+    },
+    {
+      "radius_km": 2,
+      "requested_center": {
+        "lat": -7.845673,
+        "lon": -14.48023
+      },
+      "native_bounds": {
+        "west": -14.498000000000001,
+        "east": -14.4625,
+        "south": -7.863499999999999,
+        "north": -7.827999999999999
+      },
+      "shape_rows_cols": [
+        72,
+        72
+      ],
+      "cell_spacing_deg": {
+        "lon": 0.0005000000000006111,
+        "lat": 0.0004999999999997229
+      },
+      "valid_cells": 5181,
+      "total_cells": 5184,
+      "valid_fraction": 0.9994212962962963,
+      "min_topography_m": -2153.60791015625,
+      "max_topography_m": -1398.2508544921875,
+      "canonical_raw_tile_sha256": "39b7b637a7aff929047688b1e99638877c61912690e0c78378e446e347c1a118",
+      "artifact_npz_name": "H10N1_raw_2km.npz",
+      "netcdf_ascii_max_abs_difference_m": 5.000001692678779e-07,
+      "morphology_metrics_computed": false
+    },
+    {
+      "radius_km": 5,
+      "requested_center": {
+        "lat": -7.845673,
+        "lon": -14.48023
+      },
+      "native_bounds": {
+        "west": -14.525500000000001,
+        "east": -14.435,
+        "south": -7.890499999999999,
+        "north": -7.800999999999999
+      },
+      "shape_rows_cols": [
+        180,
+        182
+      ],
+      "cell_spacing_deg": {
+        "lon": 0.0005000000000006111,
+        "lat": 0.0004999999999997229
+      },
+      "valid_cells": 29327,
+      "total_cells": 32760,
+      "valid_fraction": 0.8952075702075702,
+      "min_topography_m": -2877.3408203125,
+      "max_topography_m": -141.8429412841797,
+      "canonical_raw_tile_sha256": "9fc5a69201dfd4f478604c84097711fc0f0cbeb2770c09b474b9aa0d02c89da5",
+      "artifact_npz_name": "H10N1_raw_5km.npz",
+      "netcdf_ascii_max_abs_difference_m": 5.000001692678779e-07,
+      "morphology_metrics_computed": false
+    },
+    {
+      "radius_km": 10,
+      "requested_center": {
+        "lat": -7.845673,
+        "lon": -14.48023
+      },
+      "native_bounds": {
+        "west": -14.57,
+        "east": -14.39,
+        "south": -7.935499999999999,
+        "north": -7.755999999999999
+      },
+      "shape_rows_cols": [
+        360,
+        361
+      ],
+      "cell_spacing_deg": {
+        "lon": 0.0005000000000006111,
+        "lat": 0.0004999999999997229
+      },
+      "valid_cells": 94781,
+      "total_cells": 129960,
+      "valid_fraction": 0.7293090181594337,
+      "min_topography_m": -3441.285400390625,
+      "max_topography_m": -39.93479919433594,
+      "canonical_raw_tile_sha256": "760c8ad94a9934c22051946e477c465a3904d4012c4c9d30937bd097f434c3e5",
+      "artifact_npz_name": "H10N1_raw_10km.npz",
+      "netcdf_ascii_max_abs_difference_m": 5.000001692678779e-07,
+      "morphology_metrics_computed": false
+    }
+  ],
+  "success_gate": true,
+  "forbidden_metrics_verified_absent": [
+    "slope",
+    "profile_curvature",
+    "plan_curvature",
+    "rugosity",
+    "planarity",
+    "radial_symmetry",
+    "facet_angle_histogram"
+  ],
+  "target_identity": "UNCONFIRMED",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_TO_FREEZE_BLIND_CONTROL_SELECTION_BEFORE_MORPHOLOGY_METRICS",
+  "sha256": "201994f7e555a8c14c76b3d9b51fc7240400cc83c81e97960b528c7c4d189800"
+}
