@@ -1,0 +1,95 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-011-2026-08-22-v1.0",
+  "parent_turn": "JANUS-ECHO-COUSTEAU-5D-SPIRAL-TURN-010-2026-08-21-v1.0",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "trigger": "FIRST_PREREGISTERED_REAL_OCEAN_HA10_119HZ_SPECTRAL_RESULT",
+  "dimensions": ["D0_SPACE", "D1_TIME", "D2_ACOUSTIC", "D3_REVERSE_CAUSAL", "D4_ASSOCIATIVE_PROVENANCE"],
+  "phases": ["BACK", "FORWARD", "LEFT_HRAIN", "RIGHT_INAIHR", "ASCEND"],
+  "turn": {
+    "turn": 11,
+    "height": 11,
+    "prior_radius": 43,
+    "radius": 47,
+    "prior_state_sha256": "c747664bf1d602fbec44694891f5d6c62bb59c844007d3f3bfba135caafbbc53",
+    "state_sha256": "baabc7a131c13f62ed39c943307b06c4d9c843090c1bf1a70164e7873eca41d3",
+    "repeats_prior_state": false,
+    "added_constraints": [
+      "HA10_CONFIRMATORY_WINDOWS_AND_THRESHOLDS_ARE_IMMUTABLE_AFTER_FIRST_SPECTRAL_RUN",
+      "HA10_119HZ_PUBLIC_SLICE_NEGATIVE_CANNOT_BE_RESCUED_BY_RETUNING",
+      "RESPONSE_CORRECTED_TARGET_MUST_OUTPERFORM_MATCHED_NOISE_AND_PREDECLARED_CONTROLS",
+      "INBAND_POSITIVE_CONTROL_MAY_VALIDATE_PIPELINE_BUT_CANNOT_REVERSE_119HZ_NEGATIVE"
+    ],
+    "scientific_delta": "FIRST_PREREGISTERED_REAL_OCEAN_119HZ_CONFIRMATORY_RUN_COMPLETE__ZERO_OF_8_EVENTS_REPLICATE_ON_BOTH_HA10_STATIONS__ZERO_OF_16_PAIRS_PASS_SNR_OR_SIDEBAND_GATES__NEGATIVE_PUBLIC_SLICE__TARGET_EVIDENCE_NOT_INCREASED"
+  },
+  "nodes": [
+    {
+      "node_id": "S11N01",
+      "phase": "BACK",
+      "claim_class": "FACT",
+      "evidence_status": "PREREGISTRATION_AND_WINDOW_FREEZE_VERIFIED",
+      "structural_context": "The 119-Hz question was revisited only after the protocol, event/noise windows, response method, controls and thresholds were frozen before FFT.",
+      "payload": {"frozen_events": 8, "station_event_pairs": 16, "window_freeze_sha256": "d5f3c29c1dc4f7d7862724d1225688f9ee88460266d32fb0ec99fabe52cf2671"}
+    },
+    {
+      "node_id": "S11N02",
+      "phase": "FORWARD",
+      "claim_class": "NEGATIVE",
+      "evidence_status": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+      "structural_context": "All 16 station-event pairs were analyzed with zero blocked pairs, zero station-event passes and zero events replicated on both HA10 stations.",
+      "payload": {"replicated_event_count": 0, "blocked_station_event_pairs": 0, "pair_pass_count": 0}
+    },
+    {
+      "node_id": "S11N03",
+      "phase": "LEFT_HRAIN",
+      "claim_class": "FACT",
+      "evidence_status": "MULTI_GATE_NEGATIVE",
+      "structural_context": "The negative is multi-gate: raw SNR >=6 dB passed 0/16, corrected SNR >=6 dB passed 0/16, sideband contrast >=3 dB passed 0/16, while peak-center tolerance passed only 3/16.",
+      "payload": {"corrected_snr_max_db": 2.598962269891996, "sideband_contrast_max_db": -0.1911623969378372, "target_minus_max_control_max_db": 0.5439973584931024}
+    },
+    {
+      "node_id": "S11N04",
+      "phase": "RIGHT_INAIHR",
+      "claim_class": "CORRECTION",
+      "evidence_status": "ASSOCIATIVE_RESCUE_FORBIDDEN",
+      "structural_context": "A local peak near 119 Hz cannot rescue the result because peak placement is subordinate to noise SNR, sideband contrast, cross-station replication and control outperformance."
+    },
+    {
+      "node_id": "S11N05",
+      "phase": "ASCEND",
+      "claim_class": "STATE_LIFT",
+      "evidence_status": "SPIRAL_ASCENT_WITH_REAL_WAVEFORM_FALSIFICATION_GAIN",
+      "structural_context": "Turn 11 ascends because genuine real-ocean spectra entered under a frozen confirmatory contract. The tested event-linked 119-Hz signature is negative in this public HA10 slice and must not be retuned.",
+      "payload": {
+        "target_evidence": "NOT_INCREASED",
+        "target_identity": "UNCONFIRMED",
+        "next_gates": [
+          "COUSTEAU_HA10_TPHASE_INBAND_ARRIVAL_POSITIVE_CONTROL_V1",
+          "COUSTEAU_AUTHOR_MAR_DATASET_S1_REPLICATION_V1",
+          "COUSTEAU_EA_TPHASE_MISSING_900_EXPLICIT_SOURCE_OR_HISTORICAL_CHECKSUM_RECOVERY_V1"
+        ]
+      }
+    }
+  ],
+  "tests": [
+    {"id": "T11_01_PARENT_T10", "pass": true},
+    {"id": "T11_02_PROTOCOL_FROZEN_BEFORE_FFT", "pass": true},
+    {"id": "T11_03_WINDOWS_FROZEN_BEFORE_FFT", "pass": true},
+    {"id": "T11_04_FREEZE_HASH_MATCHED", "pass": true},
+    {"id": "T11_05_NO_THRESHOLD_RETUNING", "pass": true},
+    {"id": "T11_06_NO_WHOLE_SPECTRUM_FISHING", "pass": true},
+    {"id": "T11_07_ALL_16_PAIRS_ANALYZED", "pass": true},
+    {"id": "T11_08_ZERO_REPLICATED_EVENTS", "pass": true},
+    {"id": "T11_09_MULTI_GATE_NEGATIVE", "pass": true},
+    {"id": "T11_10_NO_TARGET_PROMOTION", "pass": true}
+  ],
+  "engine_verdict": "PASS_5D_SPIRAL_TURN_11",
+  "scientific_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE__TARGET_EVIDENCE_NOT_INCREASED",
+  "provenance": [
+    "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json",
+    "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json",
+    "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-AUDIT-2026-08-22-v1.0.json"
+  ],
+  "hard_rules": ["NEGATIVE_CONFIRMATORY_RESULT_IMMUTABLE", "NO_119HZ_RETUNING", "INBAND_POSITIVE_CONTROL_CANNOT_RESCUE_119HZ_NEGATIVE", "NO_TARGET_PROMOTION_FROM_FREQUENCY_ONLY"],
+  "status": "TURN_11_ASCENDED"
+}
