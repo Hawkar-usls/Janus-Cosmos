@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import json, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+STATE=Path('data/cousteau/JANUS-H10N1-SOURCE-LINEAGE-DISCOVERY-RUN-001-2026-08-22-v1.0.json')
+OUT=Path('data/cousteau/JANUS-H10N1-LINEAGE-ARCHIVE-BRANCH-COUNCIL-RUN-007-2026-08-22-v1.0.json')
+s=json.loads(STATE.read_text(encoding='utf-8'))
+
+result={
+ 'artifact_id':'JANUS-H10N1-LINEAGE-ARCHIVE-BRANCH-COUNCIL-RUN-007-2026-08-22-v1.0',
+ 'created_utc':datetime.now(timezone.utc).isoformat(),
+ 'question':'No per-cruise contributor to the frozen H10N1 1 km window is yet machine verified. Which archive branch should be opened first, and what is allowed before any per-cruise surface comparison?',
+ 'evidence_snapshot':{
+   'confirmed_contributing_cruises':s['lineage_gate']['confirmed_contributing_cruises_in_frozen_1km_window'],
+   'confirmed_count':s['lineage_gate']['confirmed_count'],
+   'highest_priority_candidate':'JR15001',
+   'JR15001_public_nav_bathy_series':'BODC 1762365 / JR15001_PRODQXF_NAV',
+   'JR16NG_public_seamount_multibeam':'PLOS Biology supplementary S1 Data DOI 10.1371/journal.pbio.3003016.s012',
+   'JR53_documented_ascension_geometry':'single SW-flank line',
+   'JR287_documented_geometry':'northbound transit ending Ascension; continuous EM122 but no recovered local track',
+   'target_identity':'UNCONFIRMED'
+ },
+ 'council':{
+   'HRain':'PROVE_SHIP_TRACK_FIRST__THEN_PROVE_SWATH_FOOTPRINT__THEN_SOURCE_SOUNDINGS',
+   'iNaiHR':'ARCHIVE_GRAPH_ONLY__NO_IDENTITY_WEIGHT',
+   'DemiHead':'CENTERLINE_PROXIMITY_IS_NOT_SWATH_COVERAGE',
+   'Fast_CAT':'START_WITH_HIGHEST_PRIOR_PROBABILITY_SOURCE_USING_PREEXISTING_PUBLIC_METADATA__DO_NOT_SEARCH_ALL_BRANCHES_FOR_A_FAVORABLE_MATCH',
+   'Aura':'ZERO_EVIDENCE_AUTHORITY',
+   'Janus_Cosmos':'FROZEN_1KM_WINDOW_CANNOT_MOVE',
+   'Cousteau':'JR15001_FIRST_BECAUSE_PUBLIC_HIGH_RESOLUTION_NAVIGATION_EXISTS_AND_ASCENSION_SWATH_SURVEY_IS_EXPLICITLY_LOGGED',
+   'Fundamentum':'A_NEGATIVE_JR15001_RESULT_IS_VALID_AND_MUST_BE_PRESERVED',
+   'AIFC':'HASH_DOWNLOADED_NAVIGATION_AND_RECORD_TEMPORAL_SPACING_SOURCE_SERIES_AND_CRS',
+   'Voice_of_Janus':'FOLLOW_THE_SHIP_BEFORE_YOU_FOLLOW_THE_SHAPE'
+ },
+ 'janus_answer':{
+   'AUTHORIZED_STAGE':'JR15001_TRACKLINE_PROXIMITY_AND_SWATH_ELIGIBILITY_GATE_001',
+   'ORDER':[ 
+     'RECOVER_BODC_SERIES_1762365_NAVIGATION_BATHYMETRY_IF_PUBLICLY_DOWNLOADABLE',
+     'FILTER_ONLY_THE_2015_10_14_TO_2015_10_18_ASCENSION_INTERVAL',
+     'COMPUTE_MINIMUM_SHIP_CENTERLINE_DISTANCE_TO_FROZEN_H10N1_AND_TIME_OF_CLOSEST_APPROACH',
+     'RECORD_SIMULTANEOUS_BATHYMETRIC_DEPTH_IF_PRESENT',
+     'DO_NOT_DECLARE_SWATH_COVERAGE_FROM_CENTERLINE_DISTANCE_ALONE',
+     'THEN_SEARCH_FOR_JR15001_EM122_RAW_OR_PROCESSED_SWATH_FILES_OR_FOOTPRINT_METADATA_USING_EXACT_DATES_AND_TRACK_SEGMENT'
+   ],
+   'SWATH_ELIGIBILITY_ONLY_RULE':'If centerline comes within a physically plausible EM122 half-swath distance at the contemporaneous water depth, label ELIGIBLE_FOR_SWATH_INTERSECTION_CHECK, not CONTRIBUTOR_CONFIRMED.',
+   'ON_RAW_SWATH_RECOVERY':'Freeze source file hashes and ping/sounding bounding geometry, then ASK JANUS AGAIN before gridding or comparing.',
+   'ON_JR15001_NEGATIVE':'Freeze negative receipt and ASK JANUS before moving to JR16-NG, JR287 or JR53.',
+   'PARALLEL_ALLOWED':['CONTINUE_P2548_H10S_ARCHIVE_RECOVERY_UNSCORED','WAIT_FOR_HELPDESK_REPLIES'],
+   'FORBIDDEN':['NO_CENTERLINE_EQUALS_COVERAGE','NO_PER_CRUISE_MORPHOLOGY','NO_CONTROL_RETUNING','NO_PYRAMID_OR_CRATER_LABEL'],
+   'TARGET_IDENTITY':'UNCONFIRMED'
+ },
+ 'hard_rules':['ASK_JANUS_BEFORE_NEXT_PHYSICAL_OR_ARCHIVE_STAGE','ONE_ARCHIVE_BRANCH_AT_A_TIME_FOR_LINEAGE_REPLICATION','NEGATIVE_RESULTS_REMAIN_NEGATIVE','NO_POSTHOC_RETARGETING']
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
