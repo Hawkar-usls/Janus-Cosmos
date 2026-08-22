@@ -1,0 +1,125 @@
+name: Cousteau HA10 N1-S2 Independent Noise Asymmetry Replication
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-independent-noise-asymmetry-replication.yml"
+      - "workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py"
+      - "tests/test_cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-RUN-001-SUMMARY-2026-08-22-v1.0.json"
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-independent-noise-asymmetry-replication.yml"
+      - "workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py"
+      - "tests/test_cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: read
+
+jobs:
+  independent-noise-replication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind preregistration and immutable upstream evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-PROTOCOL-2026-08-22-v1.0.json)" = "70e58ca56e202639c7e2d4d647e3ffb70bc53495"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "848c53633fe662e37df615626600953267119eff"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = "244169a1331a16529e2a963585a5659dae109c66"
+          test "$(git hash-object workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py)" = "b462b9f85e9bc60ba6f13958648513d63c2b161e"
+          test "$(git hash-object tests/test_cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py)" = "1f6ec977d5b6a0ad4092e8fb8c9bd6bd487f7edd"
+          echo "INDEPENDENT_NOISE_WINDOW_PREREGISTRATION=PASS"
+          echo "FAILED_POSITIVE_CONTROL_BINDING=PASS"
+          echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install same frozen direct scientific stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
+          mkdir -p artifacts/ha10-independent-noise-replication
+          python -m pip freeze | sort > artifacts/ha10-independent-noise-replication/python-environment.txt
+
+      - name: Compile and test frozen decision semantics before data download
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py \
+            tests/test_cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py
+          python -m unittest tests.test_cousteau_ha10_n1_s2_independent_noise_asymmetry_replication -v
+
+      - name: Execute independent frozen-window replication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python workspace/cousteau_ha10_n1_s2_independent_noise_asymmetry_replication.py \
+            --output "artifacts/ha10-independent-noise-replication/run-${GITHUB_RUN_ID}.json"
+
+      - name: Validate non-promotional result boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/ha10-independent-noise-replication').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['status']=='REPLICATION_RUN_COMPLETE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_NOISE_REPLICATION'
+          assert r['positive_control_verdict']=='FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL'
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frequency_band_hz']==[10.0,80.0]
+          assert r['independent_window_count_frozen']==20
+          assert r['large_asymmetry_effect_size_db']==6.0
+          assert r['summary']['verdict'] in {
+              'REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY',
+              'NOT_REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY',
+              'BLOCKED_INDEPENDENT_NOISE_REPLICATION_DATA_ACCESS',
+          }
+          print('INDEPENDENT_NOISE_REPLICATION_RECEIPT_VALID=TRUE')
+          print('NOISE_REPLICATION_VERDICT=' + r['summary']['verdict'])
+          print('COMPLETE_PAIRED_WINDOWS=' + str(r['summary']['complete_paired_windows']))
+          print('AUTHORITY_DELTA_FOR_119HZ=0')
+          PY
+
+      - name: Prove source tree is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/cousteau workspace tests
+          echo "SOURCE_WRITEBACK=FALSE"
+
+      - name: Upload independent replication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-independent-noise-replication-${{ github.run_id }}
+          path: artifacts/ha10-independent-noise-replication/
+          if-no-files-found: error
+          retention-days: 30
