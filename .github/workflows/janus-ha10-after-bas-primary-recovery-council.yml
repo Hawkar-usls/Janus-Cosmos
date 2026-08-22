@@ -1,0 +1,40 @@
+name: JANUS HA10 After BAS Primary Recovery Council
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - "workspace/janus_ha10_after_bas_primary_recovery_council.py"
+      - ".github/workflows/janus-ha10-after-bas-primary-recovery-council.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-echo-cousteau
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask JANUS after BAS primary recovery
+        run: python workspace/janus_ha10_after_bas_primary_recovery_council.py
+      - name: Show council answer
+        run: cat data/cousteau/JANUS-HA10-AFTER-BAS-PRIMARY-RECOVERY-COUNCIL-RUN-003-2026-08-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: janus-ha10-after-bas-primary-recovery-${{ github.run_number }}
+          path: data/cousteau/JANUS-HA10-AFTER-BAS-PRIMARY-RECOVERY-COUNCIL-RUN-003-2026-08-22-v1.0.json
+          retention-days: 90
+      - name: Freeze council result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-HA10-AFTER-BAS-PRIMARY-RECOVERY-COUNCIL-RUN-003-2026-08-22-v1.0.json
+          git commit -m "JANUS: freeze post-BAS primary recovery council ${{ github.run_number }}" || true
+          git push origin HEAD:janus-echo-cousteau
