@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-HA10-H10N1-MORPHOLOGY-PREREG-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:07:00Z",
+  "parent_council": "JANUS-HA10-NEXT-STEP-COUNCIL-RUN-001-2026-08-22-v1.0",
+  "target": {"id": "H10N1", "lat": -7.845673, "lon": -14.480230},
+  "source_dataset": "GB/NERC/BAS/PDC/01236",
+  "nested_windows_km": [1, 2, 5, 10],
+  "metrics": [
+    "depth",
+    "slope",
+    "profile_curvature",
+    "plan_curvature",
+    "rugosity",
+    "local_relief",
+    "planarity",
+    "radial_symmetry",
+    "facet_angle_histogram"
+  ],
+  "control_rule": "Select matched volcanic tiles from the same dataset using fixed spatial rules before target scoring; do not move target or controls after visual inspection.",
+  "minimum_control_count": 20,
+  "target_scoring_locked_until": [
+    "source grid bytes or authoritative raster endpoint obtained",
+    "coordinate reference system verified",
+    "target cell index computed reproducibly",
+    "control tile centers frozen"
+  ],
+  "hard_rules": [
+    "NO_POSTHOC_RETARGETING",
+    "NO_MANUAL_SHAPE_PICKING",
+    "NO_ARCHAEOLOGICAL_LABEL_FROM_BATHYMETRY_ALONE",
+    "VOLCANIC_BASELINE_REMAINS_PRIMARY",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ],
+  "status": "PREREG_FROZEN_BEFORE_TARGET_SCORING"
+}
