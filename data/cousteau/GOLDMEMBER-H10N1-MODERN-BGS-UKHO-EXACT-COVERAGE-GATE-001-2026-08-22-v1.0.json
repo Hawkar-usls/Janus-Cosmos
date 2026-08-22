@@ -1,0 +1,70 @@
+{
+  "artifact_id": "GOLDMEMBER-H10N1-MODERN-BGS-UKHO-EXACT-COVERAGE-GATE-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:17:00Z",
+  "authorized_by": "GOLDMEMBER-WAITING-LANES-COUNCIL-RUN-008-2026-08-22-v1.0",
+  "purpose": "INDEPENDENT_MEASUREMENT_COVERAGE_REPLICATION_ONLY",
+  "frozen_target": {
+    "id": "H10N1",
+    "lat": -7.845673,
+    "lon": -14.480230,
+    "bas_native_topography_m": -1927.934326171875
+  },
+  "survey_identifier_resolution": {
+    "accepted_working_identifier": "HI1751",
+    "confidence": "HIGH",
+    "evidence": [
+      "IHO C-55 / UK national reporting identifies HI1751, September-October 2021, HMS Protector around Ascension Island, survey depth range 2-1835 m.",
+      "Peer-reviewed Journal of Maps 2026 paper identifies Royal Navy 2021 Ascension campaign as UKHO Hydrographic Instruction HI 1751 and cites Report of Survey – HI 1751 Ascension and St. Helena.",
+      "A separate UK hydrographic procurement record documents HI1571 as Red Wharf Bay to Gwynt y Mor, showing that HI1571 is a real but unrelated survey identifier."
+    ],
+    "bgs_hi1571_occurrences": "PRESERVED_AS_SOURCE_TEXT__TREATED_AS_PROBABLE_TRANSCRIPTION_ERROR_FOR_ASCENSION",
+    "posthoc_identifier_switching": false
+  },
+  "documented_hi1751_reprocessed_products": {
+    "bathymetry": [
+      "Asc_100m_1m.asc",
+      "Asc_100m_400m_3m.asc",
+      "Asc_400m_1000m_6m.asc",
+      "Asc_1000m_Down_10m.asc",
+      "Asc_comb_10m.asc"
+    ],
+    "backscatter": [
+      "SMB_BS_1m_BTS.tif",
+      "Protector_BS_6m.tif"
+    ],
+    "qgis_layer": "Protector_Bathymetry",
+    "documented_delivery": "BGS OR/24/015 Appendix 1 states these files were delivered to Ascension Island Government."
+  },
+  "public_access_checks": {
+    "nora_539110_visible_documents": ["OR24015.pdf"],
+    "nora_native_grid_bytes_recovered": false,
+    "exact_web_filename_search_recovered_grid": false,
+    "arcgis_global_exact_product_search_relevant_item_count": 0,
+    "admiralty_portal_exact_product_search_relevant_item_count": 0,
+    "catalog_probe_artifact": "GOLDMEMBER-H10N1-MODERN-BGS-UKHO-EXACT-CATALOG-PROBE-001-2026-08-22-v1.0",
+    "catalog_probe_sha256": "97bee5a28ed7bc34b3a30a607a2ca0bbcb97cafc814b731899ea53312be8b07f"
+  },
+  "published_data_access_statement": {
+    "royal_navy_ukho_data_licensing_restrictions": true,
+    "access_direction": "Requests for access should be directed to the relevant data owners.",
+    "note": "The 2026 paper points to NORA 539110 for final processed products, but the currently visible NORA record exposes the report PDF and not the documented HI1751 ASCII grids. This is recorded as an access/discovery discrepancy, not evidence that the files do not exist."
+  },
+  "depth_range_falsification_hint": {
+    "target_bas_topography_m": -1927.934326171875,
+    "iho_hi1751_reported_range_m": [2, 1835],
+    "journal_description_max_depth_m_approx": 1800,
+    "interpretation": "TARGET_IS_DEEPER_THAN_PUBLISHED_HI1751_SURVEY_RANGE__SUGGESTS_NONINTERSECTION_BUT_IS_NOT_ACCEPTED_AS_COVERAGE_GEOMETRY_PROOF"
+  },
+  "machine_readable_native_coverage_polygon_recovered": false,
+  "native_raster_or_grid_bounds_recovered": false,
+  "h10n1_exact_intersection": "NOT_MACHINE_VERIFIED",
+  "coverage_gate_status": "BLOCKED_BY_NONPUBLIC_OR_UNDISCOVERED_NATIVE_COVERAGE_GEOMETRY",
+  "negative_intersection_claimed": false,
+  "positive_intersection_claimed": false,
+  "shape_scoring_performed": false,
+  "modern_surface_extraction_performed": false,
+  "target_moved": false,
+  "target_identity": "UNCONFIRMED",
+  "volcanic_baseline": "ACTIVE",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_BEFORE_ANY_NEW_CONTACT_OR_BEFORE_USING_DEPTH_RANGE_AS_A_COVERAGE_FALSIFIER"
+}
