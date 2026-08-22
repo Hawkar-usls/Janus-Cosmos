@@ -1,0 +1,149 @@
+{
+  "artifact_id": "GOLDMEMBER-2002-SURVEY-MEASUREMENT-PROVENANCE-RECONSTRUCTION-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:18:00Z",
+  "authorized_by": "GOLDMEMBER-WAITING-LANE-COUNCIL-RUN-007-2026-08-22-v1.0",
+  "continuation": "GOLDMEMBER",
+  "purpose": "Reconstruct the published measurement chain of the 2002 Ascension Island HDAS seabed survey while explicitly separating measured/published facts from inference and unknowns. This artifact must not be used to reinterpret target identity without another JANUS council.",
+  "source_class_policy": {
+    "EXPLICIT_NEAR_PRIMARY": "Explicitly stated in contemporaneous HDAS/OCEANS technical material or DTIC abstract of the survey paper.",
+    "EXPLICIT_SECONDARY_TECHNICAL": "Explicitly stated in a later technical source reproducing or summarizing the original survey.",
+    "INFERRED": "Logically inferred but not explicitly documented for this survey; may not be promoted to fact.",
+    "UNKNOWN": "Not recovered from public sources reviewed in this pass."
+  },
+  "survey_program": {
+    "contractor": {"value": "Thales GeoSolutions (Pacific), Inc.", "status": "EXPLICIT_NEAR_PRIMARY"},
+    "intermediate_client": {"value": "MCA Engineers, Inc.", "status": "EXPLICIT_NEAR_PRIMARY"},
+    "government_client": {"value": "Naval Facilities Engineering Service Center (NFESC)", "status": "EXPLICIT_NEAR_PRIMARY"},
+    "overall_dates": {"value": "2002-06-13 to 2002-07-29", "status": "EXPLICIT_NEAR_PRIMARY", "note": "The same source separately gives inshore operations as June 12-23, producing a one-day start-date discrepancy that is preserved rather than harmonized."},
+    "mission": {"value": "Detailed geophysical seabed survey to identify hydrophone installation sites and low-risk cable routes from Ascension Island to the two proposed HDAS arrays.", "status": "EXPLICIT_NEAR_PRIMARY"},
+    "survey_design": {
+      "hydrophone_site_boxes": {"value": "20 km x 20 km at each candidate site", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "minimum_offshore_corridor_width": {"value": "2 km from hydrophone sites toward shallow water, narrowing near landfall", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "selection_hazards": {"value": ["excessive slopes", "strong currents", "slumps", "hard or rocky seafloor"], "status": "EXPLICIT_NEAR_PRIMARY"},
+      "survey_plan_defined_equipment_and_processing": {"value": true, "status": "EXPLICIT_NEAR_PRIMARY", "note": "The public overview says the May 2002 survey plan defined equipment and processing, but the plan itself has not been recovered."}
+    }
+  },
+  "phases": {
+    "inshore": {
+      "dates": {"value": "2002-06-12 to 2002-06-23", "status": "EXPLICIT_NEAR_PRIMARY", "date_discrepancy": "Overall survey start is separately reported as June 13."},
+      "coverage": {"value": "shore facility to approximately the 50 m isobath", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "platform": {"value": "small survey launch for shallow water work; abstract states depths <100 m", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "measurement_classes": [
+        {"sensor_class": "single_beam_echo_sounder", "model": null, "frequency": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_CLASS__UNKNOWN_FOR_MODEL_AND_FREQUENCY"},
+        {"sensor_class": "sidescan_sonar", "model": null, "frequency": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_CLASS__UNKNOWN_FOR_MODEL_AND_FREQUENCY"},
+        {"sensor_class": "shallow_sub_bottom_profiler", "model": null, "frequency": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_CLASS__UNKNOWN_FOR_MODEL_AND_FREQUENCY"}
+      ],
+      "additional_surveys": [
+        {"type": "land survey", "scope": "between proposed landfalls and MILS building", "status": "EXPLICIT_NEAR_PRIMARY"},
+        {"type": "nearshore diver survey", "scope": "surf-zone seabed characterization", "status": "EXPLICIT_NEAR_PRIMARY"}
+      ]
+    },
+    "offshore": {
+      "dates": {"value": "2002-07-15 to 2002-07-29", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "coverage": {"value": "approximately the 30 m isobath to proposed acoustic array sites", "status": "EXPLICIT_NEAR_PRIMARY"},
+      "array_context": {
+        "north": {"value": "approximately 30 km northwest of landfall", "status": "EXPLICIT_NEAR_PRIMARY"},
+        "south": {"value": "approximately 115 km south of Ascension Island", "status": "EXPLICIT_NEAR_PRIMARY"}
+      },
+      "platform": {"value": "approximately 1200-ton survey ship for deep-water work", "vessel_name": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_TONNAGE_CLASS__UNKNOWN_FOR_NAME"},
+      "measurement_products": [
+        {"product": "multibeam_bathymetry", "status": "EXPLICIT_NEAR_PRIMARY"},
+        {"product": "multibeam_backscatter", "status": "EXPLICIT_NEAR_PRIMARY"},
+        {"product": "shallow_sub_bottom_data", "status": "EXPLICIT_NEAR_PRIMARY"}
+      ],
+      "measurement_classes": [
+        {"sensor_class": "multibeam_echo_sounder", "model": null, "frequency": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_CLASS__UNKNOWN_FOR_MODEL_AND_FREQUENCY"},
+        {"sensor_class": "sub_bottom_profiler", "model": null, "frequency": null, "status": "EXPLICIT_NEAR_PRIMARY_FOR_CLASS__UNKNOWN_FOR_MODEL_AND_FREQUENCY"}
+      ],
+      "backscatter_acquired_with_multibeam": {"value": true, "status": "EXPLICIT_NEAR_PRIMARY"},
+      "deepest_operating_context": {"value": "full ocean depth capability is stated for the sensor suite", "status": "EXPLICIT_NEAR_PRIMARY", "note": "This is a capability/context statement, not a recovered maximum sounding depth for a specific line."}
+    }
+  },
+  "positioning_and_environmental_corrections": {
+    "horizontal_positioning_method": {"value": null, "status": "UNKNOWN"},
+    "horizontal_crs_or_datum": {"value": null, "status": "UNKNOWN"},
+    "positioning_accuracy": {"value": null, "status": "UNKNOWN"},
+    "heading_sensor": {"value": null, "status": "UNKNOWN"},
+    "motion_reference_unit": {"value": null, "status": "UNKNOWN"},
+    "heave_correction_method": {"value": null, "status": "UNKNOWN"},
+    "pitch_roll_correction_method": {"value": null, "status": "UNKNOWN"},
+    "latency_calibration": {"value": null, "status": "UNKNOWN"},
+    "patch_test_or_boresight": {"value": null, "status": "UNKNOWN"},
+    "sound_speed_surface_sensor": {"value": null, "status": "UNKNOWN"},
+    "sound_velocity_profiles": {"value": null, "status": "UNKNOWN"},
+    "ray_tracing_method": {"value": null, "status": "UNKNOWN"},
+    "tidal_correction_method": {"value": null, "status": "UNKNOWN"},
+    "vertical_datum": {"value": null, "status": "UNKNOWN"},
+    "water_level_reference": {"value": null, "status": "UNKNOWN"}
+  },
+  "acquisition_geometry_and_quality": {
+    "multibeam_swath_width_or_angle": {"value": null, "status": "UNKNOWN"},
+    "beam_count": {"value": null, "status": "UNKNOWN"},
+    "ping_rate": {"value": null, "status": "UNKNOWN"},
+    "along_track_spacing": {"value": null, "status": "UNKNOWN"},
+    "across_track_spacing": {"value": null, "status": "UNKNOWN"},
+    "raw_sounding_density": {"value": null, "status": "UNKNOWN"},
+    "stated_depth_accuracy": {"value": null, "status": "UNKNOWN"},
+    "stated_horizontal_accuracy": {"value": null, "status": "UNKNOWN"},
+    "grid_cell_size": {"value": null, "status": "UNKNOWN"},
+    "backscatter_radiometric_calibration": {"value": null, "status": "UNKNOWN"},
+    "sub_bottom_vertical_resolution": {"value": null, "status": "UNKNOWN"},
+    "sub_bottom_penetration": {"value": null, "status": "UNKNOWN"}
+  },
+  "processing_and_qc": {
+    "near_real_time_processing": {"value": true, "status": "EXPLICIT_NEAR_PRIMARY", "purpose": "rapid assessment and revision of the survey route"},
+    "processing_software": {"value": null, "status": "UNKNOWN"},
+    "manual_editing_or_sounding_rejection": {"value": null, "status": "UNKNOWN"},
+    "surface_generation_method": {"value": null, "status": "UNKNOWN"},
+    "uncertainty_model": {"value": null, "status": "UNKNOWN"},
+    "qc_acceptance_thresholds": {"value": null, "status": "UNKNOWN"}
+  },
+  "published_product_capabilities": {
+    "supported_from_public_text": [
+      "Map seafloor bathymetry and imagery at route/site-survey scale.",
+      "Delineate regional and seamount slopes relevant to cable/sensor placement.",
+      "Identify broad rough/hard/rocky seabed hazards using bathymetry and imagery.",
+      "Use multibeam backscatter as a seafloor-imagery/characterization product.",
+      "Provide shallow sub-bottom information where that channel was actually collected."
+    ],
+    "not_supported_without_primary_raw_or_georeferenced_products": [
+      "Exact coordinates or polygon of the Southern Seamount 'wishbone' feature.",
+      "Exact coordinates or polygon of central crags.",
+      "Fine engineered-structure classification.",
+      "A quantitative pyramid or crater identity.",
+      "Raw sounding uncertainty, beam footprint, ping geometry, or survey-grid resolution.",
+      "Buried-object interpretation without exact sub-bottom coverage, model/frequency, resolution and raw/profile evidence.",
+      "Treating the historical ~2200 m southern site design estimate as final as-built seafloor depth."
+    ]
+  },
+  "explicit_nonfindings": {
+    "sensor_models_recovered": false,
+    "sensor_frequencies_recovered": false,
+    "survey_ship_name_recovered": false,
+    "navigation_system_recovered": false,
+    "motion_sensor_recovered": false,
+    "sound_speed_method_recovered": false,
+    "vertical_datum_recovered": false,
+    "accuracy_specification_recovered": false,
+    "raw_grid_resolution_recovered": false,
+    "note": "Searches for DGPS/GPS, SeaBat, Simrad EM120/EM300, Klein, model/frequency, sound velocity and motion-sensor terms did not yield an Ascension-specific public statement. Generic cable-survey standards or unrelated Ascension cruises are not substituted."
+  },
+  "source_manifest": [
+    {"id": "HDAS_OVERVIEW_OCEANS_2003", "url": "https://citeseerx.ist.psu.edu/document?doi=009766a2622dd8f25a1a44fffb6c93caadf4c71d&repid=rep1&type=pdf", "class": "EXPLICIT_NEAR_PRIMARY", "supports": ["survey objectives and design", "Thales/MCA/NFESC provenance", "overall and phase dates", "inshore sensor classes", "offshore product classes", "20x20 km boxes", "2 km corridor", "nearshore/offshore extents"]},
+    {"id": "ADA508764_DTIC_ABSTRACT", "url": "http://hdl.handle.net/100.2/ADA508764", "class": "EXPLICIT_NEAR_PRIMARY_CATALOG_ABSTRACT", "supports": ["survey sensor classes", "multibeam backscatter", "shallow launch <100 m", "1200-ton deep-water ship", "land/diver surveys", "near-real-time processing", "full-ocean-depth operating context"]},
+    {"id": "ADA508764_RESEARCHGATE_ABSTRACT", "url": "https://www.researchgate.net/publication/4066181_High-resolution_multibeam_deepwater_cable_route_survey_in_high-relief_seafloor_area", "class": "EXPLICIT_SECONDARY_HOST_OF_PRIMARY_ABSTRACT", "supports": ["same survey-paper abstract facts as DTIC catalog"]}
+  ],
+  "firewall": {
+    "generic_IMCA_or_modern_cable_survey_specs_used_as_2002_facts": false,
+    "modern_JR864_EM122_equipment_merged_into_2002_stack": false,
+    "inferred_sensor_model_promoted": false,
+    "inferred_frequency_promoted": false,
+    "target_reinterpretation_performed": false,
+    "target_identity": "UNCONFIRMED",
+    "volcanic_baseline": "ACTIVE"
+  },
+  "success_gate": true,
+  "success_definition": "Measurement provenance manifest frozen with explicit unknown fields and source classification, without filling missing instrument metadata by inference.",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_BEFORE_USING_THIS_PROVENANCE_TO_FILTER_OR_REINTERPRET_ANY_TARGET_FEATURE",
+  "sha256": "db7e01c0272abe80599920de10d0c5143f3361b240a7a77d69f9fb1d18273914"
+}
