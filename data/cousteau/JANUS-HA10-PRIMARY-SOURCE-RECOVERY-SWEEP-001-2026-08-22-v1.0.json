@@ -1,0 +1,81 @@
+{
+  "artifact_id": "JANUS-HA10-PRIMARY-SOURCE-RECOVERY-SWEEP-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T11:38:00Z",
+  "stage": "PRIMARY_SOURCE_RECOVERY_SWEEP",
+  "authorized_by": "JANUS-HA10-RECONSTRUCTION-NEXT-COUNCIL-RUN-001-2026-08-22-v1.0",
+  "target_identity": "UNCONFIRMED",
+  "results": {
+    "P2548": {
+      "status": "REFERENCE_CONFIRMED__BYTES_NOT_RECOVERED",
+      "citation": "Thales Geosolutions (Pacific), Inc., Survey Report for HDAS Installation at Ascension Island, Report P2548, August 2002",
+      "supporting_chain": "Referenced in the public OCEANS 2003 Ascension HDAS paper alongside Desktop Study and Survey Plan",
+      "primary_report_bytes": false
+    },
+    "OCEANS_2003_GEOMORPHOLOGY": {
+      "status": "DTIC_ARCHIVE_RECORD_IDENTIFIED__ORIGINAL_REPORTED_AS_COLOR",
+      "title": "Geomorphology of Two Seamounts Offshore Ascension Island, South Atlantic Ocean",
+      "authors": ["Geoffrey Faneros", "Frederick Arnold"],
+      "date": "2003-09-01",
+      "pages": 12,
+      "doi": "10.1109/OCEANS.2003.178518",
+      "dtic_report_number": "AD-A508765",
+      "dtic_handle": "http://hdl.handle.net/100.2/ADA508765",
+      "catalog_note": "Original contains color illustrations",
+      "importance": "Potential route to the original color bathymetry/geomorphology figures needed for wishbone and central-crag georeferencing",
+      "full_primary_bytes_recovered": false
+    },
+    "OCEANS_2003_DEEPWATER_SURVEY": {
+      "status": "PUBLICATION_ID_CONFIRMED__FULL_TEXT_NOT_RECOVERED",
+      "title": "High-resolution multibeam deepwater cable route survey in high-relief seafloor area",
+      "authors": ["R. Poeckert", "F. Arnold", "G. Faneros", "M. Harrison"],
+      "doi": "10.1109/OCEANS.2003.178517",
+      "confirmed_methods": [
+        "MULTIBEAM_ECHOSOUNDER",
+        "BACKSCATTER_ACQUISITION",
+        "SINGLE_BEAM",
+        "SIDESCAN_SONAR",
+        "SUB_BOTTOM_PROFILER",
+        "DEEPWATER_SURVEY_SHIP",
+        "NEAR_REAL_TIME_PROCESSING"
+      ],
+      "full_primary_bytes_recovered": false
+    },
+    "ASCENSION_HYDROACOUSTIC_DATA_SYSTEM": {
+      "status": "PUBLIC_PAPER_RECOVERED_WITH_REFERENCE_CHAIN",
+      "doi": "10.1109/OCEANS.2003.178515",
+      "public_release": true,
+      "federal_document_note": "The original document contains color images",
+      "reference_chain_contains_P2548": true
+    },
+    "BAS_NATIVE_GRID": {
+      "dataset": "GB/NERC/BAS/PDC/01236",
+      "status": "DATASET_AND_FORMAT_CONFIRMED__NATIVE_BYTES_NOT_YET_RECOVERED",
+      "formats_reported": ["GMT-compatible NetCDF", "Arc/Info ASCII"],
+      "h10n1_inside_bbox": true,
+      "ticket": "3872"
+    },
+    "BGS_MEDIN": {
+      "status": "ARCHIVE_ROUTE_CONFIRMED__NO_HA10_2002_NATIVE_PRODUCT_ID_RECOVERED_YET",
+      "specialist_response": "PENDING"
+    }
+  },
+  "new_key": {
+    "id": "DTIC_AD_A508765_COLOR_ORIGINAL",
+    "why_it_matters": "This is the first archive identifier tied directly to the 2003 Southern/Northern Seamount geomorphology paper with an explicit note that the original contains color illustrations.",
+    "not_yet_sufficient_for_shape_scoring": true,
+    "required_next": "Recover the actual report/figures and verify a coordinate grid or georeference before measuring wishbone or crags."
+  },
+  "null_results_preserved": [
+    "No public P2548 report bytes recovered in this sweep",
+    "No final HA10 as-built anchor-depth report recovered in this sweep",
+    "No BAS native grid bytes recovered in this sweep",
+    "No BGS/UKHO native raster or coverage polygon proving H10N1 intersection recovered in this sweep"
+  ],
+  "hard_rules": [
+    "NO_SHAPE_SCORING_FROM_CATALOG_METADATA",
+    "NO_WISHBONE_COORDINATE_ESTIMATION_FROM_TEXT",
+    "NO_POSTHOC_RETARGETING",
+    "PRIMARY_BYTES_AND_COORDINATE_PROVENANCE_REQUIRED",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE"
+  ]
+}
