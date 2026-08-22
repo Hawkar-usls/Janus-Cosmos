@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import json, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+OUT=Path('data/cousteau/GOLDMEMBER-COUNCIL-RUN-001-2026-08-22-v1.0.json')
+result={
+ 'artifact_id':'GOLDMEMBER-COUNCIL-RUN-001-2026-08-22-v1.0',
+ 'created_utc':datetime.now(timezone.utc).isoformat(),
+ 'question':'Continue the HA10/Ascension seafloor reconstruction without confirmation seeking. Two active blockers remain: JR15001 BODC track recovery has a technical workflow failure, and ADA508765 primary color PDF recovery completed with access failure. Which branch should be pursued first, what technical corrections are allowed, and what must remain frozen?',
+ 'evidence_snapshot':{
+   'h10n1_primary_depth_m':-1927.934326171875,
+   'h10n1_primary_2km_empirical_p':0.19047619047619047,
+   'h10n1_secondary_1km_empirical_p':0.047619047619047616,
+   'physical_anomaly_gate':'NOT_ADVANCED',
+   'secondary_local_morphology_watchlist':'OPEN',
+   'jr15001_track_recovery_workflow_status':'TECHNICAL_FAILURE_NO_SCIENTIFIC_RESULT',
+   'jr15001_contributor_status':'NOT_CONFIRMED',
+   'ada508765_catalogued_color_original':True,
+   'ada508765_pdf_recovered':False,
+   'ada508765_access_result':'403_403_404_HANDLE_500',
+   'p2548_recovered':False,
+   'wishbone_georeferenced':False,
+   'central_crags_georeferenced':False,
+   'target_identity':'UNCONFIRMED'
+ },
+ 'council':{
+   'HRain':'FIX_EXECUTION_BEFORE_OPENING_A_NEW_SCIENTIFIC_BRANCH',
+   'iNaiHR':'MAY_EXPAND_ARCHIVE_GRAPH_ONLY_NO_IDENTITY_WEIGHT',
+   'DemiHead':'TECHNICAL_FAILURE_IS_NOT_NEGATIVE_EVIDENCE',
+   'Fast_CAT':'COMPLETE_PREAUTHORIZED_JR15001_TRACK_GATE_WITHOUT_CHANGING_TARGET_WINDOW_OR_SELECTION_RULES',
+   'Aura':'ZERO_EVIDENCE_AUTHORITY',
+   'Janus_Cosmos':'H10N1_COORDINATES_AND_1KM_WINDOW_REMAIN_IMMUTABLE',
+   'Cousteau':'FOLLOW_SHIP_TRACK_THEN_SWATH_FOOTPRINT_BEFORE_ANY_PER_CRUISE_SURFACE_COMPARISON',
+   'Fundamentum':'VOLCANIC_BASELINE_REMAINS_PRIMARY',
+   'AIFC':'RECORD_FAILURE_MODE_CODE_HASH_AND_SOURCE_ENDPOINTS_FOR_REPAIRED_RUN',
+   'Voice_of_Janus':'REPAIR_THE_LANTERN_BEFORE_WALKING_FARTHER_IN_THE_DARK'
+ },
+ 'janus_answer':{
+   'CONTINUATION_NAME':'GOLDMEMBER',
+   'AUTHORIZED_STAGE':'GOLDMEMBER_JR15001_EXECUTION_REPAIR_AND_TRACK_GATE_001',
+   'PRIMARY_ORDER':[
+      'INSPECT_FAILED_GITHUB_ACTION_JOB_LOGS_FOR_THE_JR15001_TRACK_RECOVERY_GATE',
+      'FIX_ONLY_RUNTIME_OR_PARSER_EXECUTION_ERRORS_WITHOUT_CHANGING_FROZEN_SCIENTIFIC_RULES',
+      'RERUN_BODC_1762365_TRACK_RECOVERY',
+      'IF_MACHINE_READABLE_NAVIGATION_IS_RECOVERED_FILTER_ONLY_2015_10_14_TO_2015_10_18_AND_COMPUTE_CLOSEST_CENTERLINE_APPROACH_TO_FROZEN_H10N1',
+      'DO_NOT_EQUATE_CENTERLINE_PROXIMITY_WITH_SWATH_COVERAGE',
+      'IF_TRACK_GATE_COMPLETES_STOP_AND_ASK_JANUS_BEFORE_SWATH_FOOTPRINT_OR_ANY_PER_CRUISE_COMPARISON'
+   ],
+   'PARALLEL_ALLOWED':[
+      'PRESERVE_ADA508765_ACCESS_FAILURE_AS_VALID_ARCHIVE_RECEIPT',
+      'SEARCH_ONLY_FOR_NEW_PRIMARY_OR_AUTHORITATIVE_ADA508765_P2548_LOCATORS_WITHOUT_DIGITIZING_SECONDARY_FIGURES',
+      'WAIT_FOR_BAS_BGS_EARTHSCOPE_HELPDESK_REPLIES_AS_INDEPENDENT_CALIBRATION'
+   ],
+   'NOT_APPROVED':[
+      'MOVE_H10N1_WINDOW',
+      'RETUNE_CONTROLS_OR_METRICS',
+      'USE_SECONDARY_FIGURE_PIXELS_FOR_WISHBONE_COORDINATES',
+      'CALL_ANY_FEATURE_PYRAMID_OR_CRATER',
+      'USE_117_121HZ_OR_COSMOS_TO_PROMOTE_PHYSICAL_IDENTITY'
+   ],
+   'SUCCESS_GATE':'JR15001_TRACK_RECOVERY_COMPLETES_WITH_MACHINE_READABLE_NAVIGATION_OR_A_CLEAN_ARCHIVE_ACCESS_NEGATIVE_RECEIPT_AFTER_RUNTIME_ERRORS_ARE_REMOVED',
+   'ON_SUCCESS':'STOP_AND_ASK_JANUS_AGAIN_BEFORE_NEXT_PHYSICAL_OR_ARCHIVE_STAGE',
+   'TARGET_IDENTITY':'UNCONFIRMED'
+ },
+ 'hard_rules':[
+   'ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_OR_ARCHIVE_STAGE',
+   'TECHNICAL_FAILURE_IS_NOT_NEGATIVE_EVIDENCE',
+   'NO_POSTHOC_RETARGETING',
+   'INDEPENDENT_REPLICATION_REQUIRED',
+   'VOLCANIC_BASELINE_REMAINS_ACTIVE',
+   'NEGATIVE_RESULTS_REMAIN_NEGATIVE'
+ ]
+}
+result['sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+OUT.parent.mkdir(parents=True,exist_ok=True)
+OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(result,indent=2,ensure_ascii=False))
