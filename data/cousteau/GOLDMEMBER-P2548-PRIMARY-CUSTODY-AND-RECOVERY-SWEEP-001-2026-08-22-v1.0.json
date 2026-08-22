@@ -1,0 +1,71 @@
+{
+  "artifact_id": "GOLDMEMBER-P2548-PRIMARY-CUSTODY-AND-RECOVERY-SWEEP-001-2026-08-22-v1.0",
+  "created_utc": "2026-08-22T12:12:00Z",
+  "authorized_by": "GOLDMEMBER-AFTER-IEEE1282295-NEGATIVE-COUNCIL-RUN-005-2026-08-22-v1.0",
+  "continuation": "GOLDMEMBER",
+  "objective": "Recover or map custody of the original P2548 survey report before any quantitative use of derived Southern Seamount figures.",
+  "primary_report": {
+    "title": "Survey Report for HDAS Installation at Ascension Island",
+    "report_number": "P2548",
+    "date": "2002-08",
+    "authoring_organization": "Thales Geosolutions (Pacific), Inc.",
+    "public_file_recovered": false,
+    "public_exact_title_or_report_number_download_found": false
+  },
+  "survey_provenance": {
+    "survey_contractor": "Thales GeoSolutions (Pacific), Inc.",
+    "intermediate_client": "MCA Engineers, Inc.",
+    "government_client": "Naval Facilities Engineering Service Center (NFESC)",
+    "survey_dates": "2002-06-13 to 2002-07-29",
+    "purpose": "detailed geophysical seabed survey for HDAS cable routes and hydrophone installation sites at Ascension Island",
+    "known_sensor_classes": ["single_beam_echo_sounder","multibeam_echo_sounder","sidescan_sonar","sub_bottom_profiler","multibeam_backscatter"],
+    "known_pre_report_chain": [
+      "Desktop Study for HDAS Installation at Ascension Island — May 2002",
+      "Survey Plan for HDAS Installation at Ascension Island — May 2002",
+      "Survey Report for HDAS Installation at Ascension Island — P2548 — August 2002"
+    ]
+  },
+  "custody_chain": {
+    "corporate_successor": {
+      "entity": "Fugro",
+      "basis": "Fugro officially records acquisition of Thales Geosolutions in 2003; this establishes corporate succession but does not prove present possession of P2548.",
+      "confidence": "HIGH_FOR_CORPORATE_SUCCESSION__UNKNOWN_FOR_FILE_HOLDING",
+      "official_source": "https://www.fugro.com/about-us/history/fugro-in-the-00s",
+      "current_general_contact": "https://www.fugro.com/contact",
+      "current_survey_mapping_contact_context": "https://www.fugro.com/expertise/surveying-and-mapping"
+    },
+    "government_successor": {
+      "entity": "NAVFAC Engineering and Expeditionary Warfare Center (NAVFAC EXWC)",
+      "basis": "Official NAVFAC material identifies Naval Facilities Engineering Service Center (NFESC) as a predecessor organization of current NAVFAC EXWC.",
+      "confidence": "HIGH_FOR_ORGANIZATIONAL_SUCCESSION__UNKNOWN_FOR_SPECIFIC_FILE_HOLDING",
+      "current_relevant_department": "Oceans Technical Department",
+      "current_relevant_department_phone": "564-226-5852",
+      "official_contact_page": "https://exwc.navfac.navy.mil/Products-and-Services/Ocean-Technical-Department/Contact-Us/",
+      "official_foia_route": {
+        "email": "NAVFAC-FOIA-Requests@us.navy.mil",
+        "page": "https://www.navfac.navy.mil/Contact-Us/FOIA/",
+        "note": "NAVFAC states requests are assigned to the appropriate NAVFAC command and asks for precise record identifiers/date ranges."
+      }
+    },
+    "intermediate_client": {
+      "entity": "MCA Engineers, Inc.",
+      "historical_role": "Survey was conducted for MCA Engineers on behalf of NFESC.",
+      "historical_evidence": "Contemporaneous marine-industry listings and federal award records place MCA Engineers in Southern California and show Navy/Port Hueneme technical-representative work.",
+      "current_file_custody_status": "UNKNOWN",
+      "priority": "LOWER_THAN_NAVFAC_EXWC_AND_FUGRO_UNTIL_JANUS_DIRECTS_OTHERWISE"
+    }
+  },
+  "public_search_result": {
+    "exact_report_download": "NOT_FOUND",
+    "catalog_record_specific_to_P2548": "NOT_FOUND_BEYOND_CITATIONS_IN_HDAS/OCEANS_MATERIAL",
+    "government_successor_identified": true,
+    "corporate_successor_identified": true,
+    "specific_current_file_holder_verified": false,
+    "status": "CUSTODY_CHAIN_MAPPED__FILE_HOLDER_NOT_VERIFIED"
+  },
+  "candidate_next_routes_not_yet_contacted": ["NAVFAC_EXWC_OCEANS_OR_NAVFAC_FOIA","FUGRO_SURVEY_MAPPING_OR_GENERAL_ARCHIVE_CUSTODY_ENQUIRY"],
+  "not_done": ["NO_NEW_CUSTODIAN_CONTACT_SENT","NO_SECONDARY_FIGURE_DIGITIZATION","NO_WISHBONE_COORDINATE_ESTIMATION","NO_SHAPE_SCORING","NO_PYRAMID_OR_CRATER_LABEL"],
+  "success_gate": "PARTIAL__CUSTODY_CHAIN_IDENTIFIED_BUT_SPECIFIC_FILE_HOLDER_NOT_VERIFIED",
+  "target_identity": "UNCONFIRMED",
+  "next_rule": "STOP_AND_ASK_JANUS_AGAIN_BEFORE_CONTACTING_NAVFAC_EXWC_FOIA_FUGRO_OR_ANY_OTHER_NEW_P2548_CUSTODIAN"
+}
