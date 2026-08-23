@@ -1,0 +1,66 @@
+{
+  "schema": "JANUS_TOPA_J1832_CRACO_NUMERIC_MORPHOLOGY_PREREG",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C3",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "parent_safe_acquisition": "data/tesla-sweep/results/TOPA-HUNT-005C2-J1832-CRACO-SAFE-NPY-ACQUISITION-RUN-001.json",
+  "status": "FROZEN_BEFORE_FIRST_NUMERIC_MORPHOLOGY_SCORE",
+  "input_contract": {
+    "filename": "SB55237_CRACO_filterbank.npy",
+    "published_md5": "41fca6b1dccc464e65e948ed6c82695e",
+    "required_shape": [49152, 288],
+    "required_dtype": "float32",
+    "allow_pickle": false,
+    "object_dtype_allowed": false
+  },
+  "axis_semantics_from_external_metadata": {
+    "row_axis": "time",
+    "time_resolution_ms": 13.824,
+    "column_axis": "frequency_channel",
+    "frequency_resolution_MHz": 1.0,
+    "reference_or_center_frequency_MHz": 887.49074074,
+    "reference_frequency_origin": "public SB55237 timing TOA frequency",
+    "frequency_channel_order": "UNKNOWN_BEFORE_SCORE__TEST_ASCENDING_AND_DESCENDING_AS_PREDECLARED_ORIENTATIONS",
+    "bandwidth_if_all_288_channels_contiguous_MHz": 288.0
+  },
+  "dispersion_replay": {
+    "subbands": 24,
+    "channels_per_subband": 12,
+    "coarse_DM_pc_cm3": {"min": 0, "max": 800, "step": 10},
+    "fine_DM_rule": "best_coarse_DM plus/minus 30 pc cm-3, clipped to 0..800, step 1",
+    "dedispersion_constant": "delay_seconds = 4.148808e3 * DM * (nu_MHz^-2 - nu_ref_MHz^-2)",
+    "alignment": "shift lower-frequency subband profiles earlier by their predicted delay relative to highest frequency",
+    "score": "maximum robust-z of the dedispersed broadband profile",
+    "orientation_test": ["frequency_ascending_with_column_index", "frequency_descending_with_column_index"],
+    "predeclared_comparison_DMs": [430, 458],
+    "important_boundary": "Published discovery-spectrum DM 458 +/- 14 and timing-model DM 430 are known before this replay. They may be compared but may not define the search maximum or rescue a different result."
+  },
+  "morphology_metrics": [
+    "best_DM_and_orientation",
+    "dedispersed_broadband_peak_robust_z",
+    "pulse_FWHM_seconds_around_strongest_peak",
+    "pulse_fraction_of_11_minute_filterbank_window",
+    "frequency_channel_occupancy_fraction_above_fixed_onpulse_z_threshold",
+    "spectral_patchiness_coefficient_on_pulse",
+    "near_constant_or_low_variance_channel_fraction",
+    "number_of_prominent_time_subpeaks_after_dedispersion"
+  ],
+  "frozen_thresholds": {
+    "onpulse_channel_z": 3.0,
+    "prominent_time_subpeak_z": 5.0,
+    "FWHM_fraction_of_peak": 0.5,
+    "low_variance_channel_relative_threshold": 0.05
+  },
+  "hard_rules": [
+    "NO_AXIS_INFERENCE_FROM_SHAPE_ALONE",
+    "NO_DM_WINDOW_RETUNING_AFTER_RESULT",
+    "NO_MESSAGE_SCORE",
+    "NO_ORIGIN_SCORE",
+    "ONE_DISCOVERY_FILTERBANK_IS_NOT_CROSS_TELESCOPE_REPLICATION",
+    "MORPHOLOGY_DIFFERENCE_FROM_FRB_PULSAR_OR_RFI_CONTROLS_REQUIRES_A_SEPARATE_CONTROL_PASS"
+  ],
+  "maximum_label": "NUMERIC_ASTROPHYSICAL_MORPHOLOGY_CHARACTERIZED__CONTROL_COMPARISON_PENDING",
+  "claim_ceiling": "FROZEN_SINGLE_FILTERBANK_NUMERIC_REPLAY_DESIGN__NO_RESULT_YET__NO_ORIGIN_CLAIM"
+}
