@@ -1,0 +1,39 @@
+{
+  "schema": "JANUS_TOPA_TESLA_SWEEP_ADVERSARIAL_SIGNAL_CONTROL",
+  "version": "1.0",
+  "created_local": "2026-08-23T17:04:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "control_id": "EA_AIRGUN_20_SECOND_CADENCE",
+  "status": "KNOWN_ANTHROPOGENIC_PERIODICITY_CONTROL",
+  "discovered_during": "TOPA-TESLA-HUNT-003 retrospective signal reread",
+  "source": {
+    "citation": "Parnell-Turner, Smith & Dziak 2022, DOI 10.1029/2022JB024008",
+    "context": "Example spectrogram for a Mw 4.8 St Paul transform-fault event on 2012-07-09",
+    "paper_interpretation": "Arrivals in the 5-25 Hz band spaced at approximately 20-second intervals and visible at multiple EA hydrophones were identified as likely airgun shots associated with exploration activity on the west African margin."
+  },
+  "observed_fingerprint": {
+    "band_hz": [5, 25],
+    "cadence_seconds_approx": 20,
+    "multi_station_visibility_reported": ["EA2", "EA7", "EA1", "EA4", "EA5"],
+    "morphology_class": ["PERIODIC_PULSE_TRAIN", "MULTI_STATION", "ANTHROPOGENIC_EXPLORATION_SIGNAL"],
+    "semantic_content": "NONE_REQUIRED"
+  },
+  "why_topa_keeps_it": "This is an unusually clean cross-domain lesson for Tesla Sweep: a highly regular pulse train can propagate over a large oceanic sensor network and appear alongside genuine geophysical events while having a mundane engineered source. Periodicity plus multi-station detection is therefore not enough to infer a message or an unknown source.",
+  "tesla_number_gate_transfer": [
+    "TEST_CONSTANT_CADENCE_BEFORE_NUMBER_GROUPING",
+    "TEST_SURVEY_AIRGUN_AND_SONAR_SCHEDULES_BEFORE_MESSAGE_INTERPRETATION",
+    "CHECK_CROSS_STATION_TIME_DELAYS_AGAINST_PROPAGATION_GEOMETRY",
+    "SEARCH_FOR_LONG_TRAINS_EXTENDING_BEYOND_THE_CANDIDATE_WINDOW",
+    "SEARCH_SAME_CADENCE_AT_UNRELATED_TARGETS_OR_TIMES",
+    "ORDER_IS_NOT_MESSAGE"
+  ],
+  "relationship_to_other_controls": {
+    "MLc4_MLc5": "frequency-spacing / matching-drift machine-family control",
+    "VLF_COUNTING_LIKE_BEACON": "number-like auditory cadence control",
+    "EA_AIRGUN_20_SECOND_CADENCE": "low-frequency periodic multi-station pulse-train control",
+    "LIGHTNING_WHISTLER": "natural chirp/impulse morphology control"
+  },
+  "future_candidate_rule": "Any candidate promoted partly because of regular pulse spacing must be scored against this airgun-class control and other scheduled-transmitter families using the full physical fingerprint, not pulse count alone.",
+  "source_url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022JB024008",
+  "claim_ceiling": "KNOWN_ANTHROPOGENIC_CONTROL_ONLY__NO_CONNECTION_TO_TESLA_1899_SOURCE"
+}
