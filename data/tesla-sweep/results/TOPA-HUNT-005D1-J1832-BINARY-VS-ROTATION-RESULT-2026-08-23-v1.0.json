@@ -1,0 +1,82 @@
+{
+  "schema": "JANUS_TOPA_J1832_BINARY_VS_ROTATION_RESULT",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005D1",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "target": "ASKAP_DART_J1832_MINUS_0911",
+  "parent_prereg": "data/tesla-sweep/results/TOPA-HUNT-005D-J1832-BINARY-VS-ROTATION-PREREG-2026-08-23-v1.0.json",
+  "status": "ROTATION_NEUTRON_STAR_ORIGIN_NOW_FAVORED__EMISSION_MECHANISM_STILL_UNRESOLVED",
+  "identity_note": "DART J1832-0911 and ASKAP J1832-0911 refer to the same long-period transient in the cited literature.",
+  "new_post_prereg_evidence": [
+    {
+      "source": "Li et al. 2026, Science Bulletin, DOI 10.1016/j.scib.2026.06.015",
+      "publication_date": "2026-07-30",
+      "observations": [
+        "DART period 2656.23 +/- 0.15 s, consistent with the ASKAP timing clock",
+        "plausible association with supernova remnant G22.7-0.2",
+        "dispersion measure, SNR CO emission, H I absorption and low chance-alignment probability are reported as mutually consistent with the association",
+        "phase-locked circular or nearly 100 percent linear polarization, interpreted as evidence for a strong geometrically stable magnetic field",
+        "no detectable optical counterpart even with a 10 m-class telescope",
+        "authors favor a young neutron-star origin whose spin may have been braked by fallback material"
+      ],
+      "independence_value": "New observing campaign and physical context beyond the 2025 ASKAP/X-ray discovery dataset."
+    },
+    {
+      "source": "Tsinghua University summary of the Science Bulletin result, 2026-07-01",
+      "observations": [
+        "FAST detected a short approximately 0.2-second broadband pulse during a DART radio-quiet interval",
+        "the FAST pulse was reported as nearly 100 percent linearly polarized"
+      ],
+      "boundary": "Institutional summary of the peer-reviewed study; preserve as supporting description, not a substitute for the paper's quantitative tables."
+    },
+    {
+      "source": "Wang et al. 2025 Nature, DOI 10.1038/s41586-025-09077-w and supplementary discussion",
+      "observations": [
+        "no secular or periodic TOA variations were detected in the published timing analysis and the period derivative was constrained",
+        "deep near-infrared non-detections disfavor ordinary luminous stellar companions",
+        "an eclipse-like X-ray dip was considered but a simple 44.2-minute compact-binary eclipse interpretation was described as geometrically problematic because the implied eclipse duration is too long for the allowed Roche-lobe scale",
+        "broadband highly polarized radio substructure is difficult to reconcile with simple accretion-stream radio emission"
+      ]
+    }
+  ],
+  "preregistered_test_scorecard": {
+    "rotation_spin": {
+      "coherent_multi_epoch_clock": "PASS",
+      "stable_magnetic_geometry_or_polarization": "STRONG_PASS_WITH_2026_DART_FAST_EVIDENCE",
+      "independent_supernova_remnant_context": "SUPPORTS_YOUNG_NS_ORIGIN_BUT_ASSOCIATION_NOT_YET_DIRECT_DISTANCE_PROOF",
+      "ordinary_optical_companion_required": "NO",
+      "ultralong_spin_emission_physics_easy": "FAIL_OR_STRESSED",
+      "overall": "CURRENTLY_FAVORED_ORIGIN_CLASS"
+    },
+    "binary_orbital_44min_clock": {
+      "independent_companion_detection": "FAIL_NOT_DETECTED",
+      "radial_velocity_or_orbital_delay_evidence": "NOT_ESTABLISHED_IN_CURRENT_EVIDENCE_SET",
+      "simple_eclipse_geometry": "DISFAVORED_BY_DURATION_ROCHE_SCALE_ARGUMENT",
+      "ordinary_luminous_companion": "DISFAVORED_BY_OPTICAL_IR_LIMITS",
+      "can_all_binary_variants_be_excluded": "NO",
+      "overall": "DISFAVORED_AS_PRIMARY_EXPLANATION_OF_44MIN_CLOCK__NOT_LOGICALLY_EXCLUDED"
+    }
+  },
+  "TOPA_update": {
+    "before": "KNOWN_ASTROPHYSICAL_SOURCE__ORIGIN_AND_EMISSION_MECHANISM_UNRESOLVED",
+    "after": "YOUNG_NEUTRON_STAR_ORIGIN_FAVORED_BY_NEW_INDEPENDENT_EVIDENCE__ULTRALONG_RADIO_XRAY_EMISSION_MECHANISM_UNRESOLVED",
+    "why_not_closed": [
+      "The SNR association is described as plausible rather than a direct geometric distance lock.",
+      "The fallback-braking scenario explains how a young neutron star might reach an ultralong period, but the coherent radio and variable X-ray emission mechanism at that period remains physically challenging.",
+      "Alternative compact-object models are weakened, not mathematically eliminated."
+    ]
+  },
+  "impact_on_tesla_sweep": "This is an exemplary demotion of apparent mystery. The 44-minute clock remains extraordinary, but accumulating localization, dispersion, polarization, SNR-context and multiwavelength evidence moves the source toward a natural compact-object interpretation instead of toward a message interpretation.",
+  "next_physical_questions": [
+    "direct distance or astrometric test of the SNR association",
+    "phase stability of radio-Xray offset across multiple epochs",
+    "polarization geometry and mode changes across the 44-minute cycle",
+    "fallback-disc braking predictions versus period derivative and age",
+    "mechanism capable of producing broadband coherent substructure below second scales at an ultralong spin period"
+  ],
+  "technosignature_status": "NOT_ADMITTED",
+  "ETI_status": "NOT_ADMITTED",
+  "unknown_physics_status": "NOT_CLAIMED",
+  "claim_ceiling": "NEUTRON_STAR_ORIGIN_FAVORED__MECHANISM_OPEN__NO_TECHNOSIGNATURE_OR_UNKNOWN_PHYSICS_CLAIM"
+}
