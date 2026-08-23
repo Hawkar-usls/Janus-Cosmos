@@ -1,0 +1,70 @@
+{
+  "schema": "JANUS_TOPA_SYNTHETIC_MORPHOLOGY_ENGINE_QA",
+  "version": "1.0",
+  "training_id": "TOPA-TRAINING-GROUND-003A",
+  "created_local": "2026-08-23T21:49:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "engine": "workspace/tesla_sweep/topa_bathymetry_benchmark.py",
+  "mode": "SYNTHETIC_ENGINE_QA_BEFORE_FIELD_GRID_SCORING",
+  "status": "FAIL_SPECIFICITY__LINEATED_FAULT_GRABEN_DOMINATES_BASE_SCORE",
+  "field_data_claim": false,
+  "purpose": "Stress the frozen generic morphology score against an ordinary-geology adversary before allowing it to rank FKt230303 bathymetry.",
+  "synthetic_fixture": {
+    "seed": 230303,
+    "array_shape": [512, 512],
+    "tile_size_px": 64,
+    "stride_px": 32,
+    "candidate_tiles": 225,
+    "components": [
+      "smooth volcanic background",
+      "five-small-pinnacle positive cluster centered near pixel 112,112",
+      "strong parallel fault/graben/scarp family spanning approximately x=275..345",
+      "multi-pit field centered near pixel 120,370"
+    ],
+    "boundary": "Synthetic terrain is engine QA, not an estimate of real vent prevalence or FKt230303 performance."
+  },
+  "frozen_v1_score": {
+    "positive_metrics": [
+      "local_relief_p95_p05",
+      "slope_p95",
+      "abs_curvature_p95",
+      "rugosity_residual_std",
+      "pinnacle_density",
+      "multiscale_positive_persistence"
+    ],
+    "weights": [0.15, 0.10, 0.15, 0.15, 0.25, 0.20],
+    "orientation_anisotropy_usage": "reported as confounder flag only; no penalty in v1.0"
+  },
+  "result_before_repair": {
+    "positive_chimney_like_nearest_tile": {
+      "rank": 61,
+      "of": 225,
+      "center_px": [96, 96],
+      "morphology_score": 3.018763169650232,
+      "orientation_anisotropy": 0.20424640027130606
+    },
+    "fault_graben_nearest_tile": {
+      "rank": 1,
+      "of": 225,
+      "center_px": [320, 256],
+      "morphology_score": 9.808357910778065,
+      "orientation_anisotropy": 0.9159290558098523
+    },
+    "pit_field_nearest_tile": {
+      "rank": 68,
+      "of": 225,
+      "center_px": [128, 384],
+      "morphology_score": 1.0046768845570009,
+      "orientation_anisotropy": 0.05346120546281198
+    },
+    "top20_lineation_flagged_tiles": 20
+  },
+  "TOPA_interpretation": "This is a useful failure. A generic roughness/relief detector mistakes coherent fault-scarp geometry for the strongest morphology candidate. Real Puy des Folles contains exactly this kind of fault/graben terrain, so v1.0 is not authorized for field ranking.",
+  "lesson": "A detector can be sensitive to structure while being specific to the wrong structure. Regularity and large relief are not vent evidence; geological lineation must be modeled explicitly as an adversarial family.",
+  "required_repair": {
+    "name": "LINEATION_CONFOUNDER_PENALTY_V1_1",
+    "rule": "Penalize unusually high orientation anisotropy in the candidate score while preserving the tile as a reported geological confounder rather than deleting it.",
+    "freeze_before_real_grid": true
+  },
+  "claim_ceiling": "SYNTHETIC_ENGINE_FAILURE_AND_REPAIR_TRIGGER_ONLY__NO_FIELD_ACCURACY__NO_VENT_DISCOVERY"
+}
