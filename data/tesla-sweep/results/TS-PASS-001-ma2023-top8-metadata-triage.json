@@ -1,0 +1,27 @@
+{
+  "schema": "JANUS_TESLA_SWEEP_METADATA_TRIAGE",
+  "principle": "BAND_MEMBERSHIP_IS_PRIOR_NOT_PROOF",
+  "rows": [
+    {"id":"MLc1","target":"HIP13402","freq_mhz":1188.539231,"mjd":57541.68902,"drift_hz_s":1.11,"snr":6.53,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["RNSS/GNSS / aeronautical radionavigation"]},
+    {"id":"MLc2","target":"HIP118212","freq_mhz":1347.862244,"mjd":57752.7858,"drift_hz_s":-0.44,"snr":16.38,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["aeronautical radionavigation / radiolocation"]},
+    {"id":"MLc3","target":"HIP62207","freq_mhz":1351.62541,"mjd":57543.08647,"drift_hz_s":-0.05,"snr":57.52,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["fixed/mobile/radiolocation; RFI-heavy region"]},
+    {"id":"MLc4","target":"HIP54677","freq_mhz":1372.987594,"mjd":57517.08789,"drift_hz_s":-0.11,"snr":30.2,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["fixed/mobile/radiolocation; RFI-heavy region"]},
+    {"id":"MLc5","target":"HIP54677","freq_mhz":1376.988694,"mjd":57517.09628,"drift_hz_s":-0.11,"snr":44.58,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["fixed/mobile/radiolocation; RFI-heavy region"]},
+    {"id":"MLc6","target":"HIP56802","freq_mhz":1435.940307,"mjd":57522.13197,"drift_hz_s":-0.18,"snr":39.61,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["aeronautical telemetry/telecommand"]},
+    {"id":"MLc7","target":"HIP13402","freq_mhz":1487.482046,"mjd":57544.51645,"drift_hz_s":0.1,"snr":129.16,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["aeronautical telemetry/telecommand"]},
+    {"id":"MLc8","target":"HIP62207","freq_mhz":1724.972561,"mjd":57543.10165,"drift_hz_s":-0.126,"snr":34.09,"source_status":"published_candidate_nonrepeated","human_active_band_tags":["AWS/mobile + federal fixed/mobile use"]}
+  ],
+  "summary": {
+    "row_count": 8,
+    "rows_in_known_human_active_bands": 8,
+    "same_target_pairs": 3,
+    "fingerprint_pairs": [
+      {"a":"MLc4","b":"MLc5","target":"HIP54677","drift_delta_hz_s":0.0,"frequency_spacing_mhz":4.0011,"nearest_integer_spacing_mhz":4,"integer_spacing_residual_hz":1100.0,"time_separation_s":724.896,"same_drift_gate":true,"integer_spacing_gate":true,"fingerprint_gate":true}
+    ]
+  },
+  "same_target_pairs": [
+    {"a":"MLc1","b":"MLc7","target":"HIP13402","drift_delta_hz_s":1.01,"frequency_spacing_mhz":298.942815,"nearest_integer_spacing_mhz":299,"integer_spacing_residual_hz":57185.0,"time_separation_s":244289.952,"same_drift_gate":false,"integer_spacing_gate":false,"fingerprint_gate":false},
+    {"a":"MLc3","b":"MLc8","target":"HIP62207","drift_delta_hz_s":0.076,"frequency_spacing_mhz":373.347151,"nearest_integer_spacing_mhz":373,"integer_spacing_residual_hz":347151.0,"time_separation_s":1311.552,"same_drift_gate":false,"integer_spacing_gate":false,"fingerprint_gate":false},
+    {"a":"MLc4","b":"MLc5","target":"HIP54677","drift_delta_hz_s":0.0,"frequency_spacing_mhz":4.0011,"nearest_integer_spacing_mhz":4,"integer_spacing_residual_hz":1100.0,"time_separation_s":724.896,"same_drift_gate":true,"integer_spacing_gate":true,"fingerprint_gate":true}
+  ]
+}
