@@ -1,9 +1,9 @@
 {
   "schema": "JANUS_TOPA_HUNT_STATE_POINTER",
-  "version": "1.2",
+  "version": "1.3",
   "updated_local": "2026-08-23T22:19:00+03:00",
   "branch": "janus-tesla-sweep",
-  "status": "HUNT_ACTIVE__RADIO_XRAY_PHASE_GATE_PASSED__SAFE_MORPHOLOGY_GATE_BLOCKED_PENDING_SAFE_ARRAY",
+  "status": "HUNT_ACTIVE__PHASE_GATE_PASSED__SAFE_CRACO_NPY_ROUTE_FOUND_AND_ARMED",
   "latest_hunt": {
     "id": "TOPA-TESLA-HUNT-005",
     "focus": "long-period coherent radio transients with multimodal physical evidence",
@@ -16,22 +16,27 @@
       "id": "TOPA-TESLA-HUNT-005A",
       "gate": "J1832_PUBLIC_TOA_PERIOD_REPLAY",
       "result": "PASS_PUBLIC_TOA_CADENCE_REPLAY",
-      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005A-J1832-PUBLIC-TOA-CADENCE-REPLAY-2026-08-23-v1.0.json",
-      "summary": "Dense ASKAP and ATCA TOA sequences independently recover approximately 44.23-minute recurrence, within 0.1 percent of the public fitted 44.2706-minute ephemeris."
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005A-J1832-PUBLIC-TOA-CADENCE-REPLAY-2026-08-23-v1.0.json"
     },
     {
       "id": "TOPA-TESLA-HUNT-005B",
       "gate": "J1832_RADIO_XRAY_PHASE_REPLAY",
       "result": "PASS_PUBLISHED_NOTEBOOK_PHASE_METHOD_AND_OUTPUT_CONCORDANCE__INDEPENDENT_PROFILE_REFIT_PENDING",
       "receipt": "data/tesla-sweep/results/TOPA-HUNT-005B-J1832-RADIO-XRAY-PHASE-REPLAY-2026-08-23-v1.0.json",
-      "summary": "Published folded-product analysis gives about -0.055 cycle by cross-correlation and -0.0507 cycle by Gaussian pulse-center fitting, corresponding to roughly 135-146 seconds at the 44.2706-minute period. The estimators agree internally but are not independent datasets."
+      "summary": "Cross-correlation and Gaussian pulse-center estimators both give a relative radio-Xray offset of about five percent of the 44.2706-minute cycle, roughly 135-146 seconds; internal agreement is not independent replication."
     },
     {
       "id": "TOPA-TESLA-HUNT-005C1",
-      "gate": "J1832_SAFE_DYNAMIC_SPECTRUM_FIRST_PASS",
+      "gate": "J1832_SAFE_DYNAMIC_SPECTRUM_FIRST_ROUTE",
       "result": "BLOCKED_NUMERIC_ARRAY_REPLAY__UNSAFE_PICKLE_EXECUTION_REFUSED",
-      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C1-J1832-DYNAMIC-SPECTRUM-SAFE-PASS-001-2026-08-23-v1.0.json",
-      "summary": "Public dynamic-spectrum products were identified, but no trusted non-executable numeric array was available in the current pass. The gate remains blocked rather than executing external pickle objects or pretending a visual inspection is a numeric replay."
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C1-J1832-DYNAMIC-SPECTRUM-SAFE-PASS-001-2026-08-23-v1.0.json"
+    },
+    {
+      "id": "TOPA-TESLA-HUNT-005C2",
+      "gate": "J1832_SAFE_NONPICKLE_ARRAY_ROUTE_SEARCH",
+      "result": "SAFE_NONPICKLE_ROUTE_FOUND__BYTE_ACQUISITION_PENDING_ACTIONS_RUN",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C2-J1832-SAFE-NPY-ROUTE-FOUND-2026-08-23-v1.0.json",
+      "summary": "Official Zenodo dataset exposes SB55237_CRACO_filterbank.npy, 56.6 MB, published MD5 41fca6b1dccc464e65e948ed6c82695e. A fail-closed downloader/header verifier using np.load(..., allow_pickle=False) is committed and an Actions workflow is armed."
     }
   ],
   "frozen_preregistrations": [
@@ -46,28 +51,22 @@
       "receipt": "data/tesla-sweep/results/TOPA-HUNT-005D-J1832-BINARY-VS-ROTATION-PREREG-2026-08-23-v1.0.json"
     }
   ],
-  "lead_target_reasons": [
-    "44.2-minute radio periodicity is independently reproduced across multiple radio facilities",
-    "X-ray behavior shares the same long clock and the published folded analysis measures a small relative phase offset of about five percent of a cycle",
-    "public timing and long-term light-curve products exist for replay",
-    "published compact-object explanations remain theoretically challenging",
-    "simple terrestrial RFI cannot explain a localized X-ray counterpart coupled to the same long periodic behavior"
-  ],
   "active_replay_queue": [
-    "J1832_SAFE_ARRAY_ACQUISITION_OR_PRIMARY_ARCHIVE_DYNAMIC_SPECTRUM_RECONSTRUCTION",
-    "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLAY",
+    "VERIFY_TOPA_HUNT_005C2_ACTIONS_RECEIPT",
+    "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLAY_ON_VERIFIED_NPY",
+    "RECONCILE_DISCOVERY_DYNAMIC_SPECTRUM_DM_458_PLUSMINUS14_WITH_TIMING_MODEL_DM_430_BEFORE_RESIDUAL_DISPERSION_SCORING",
     "J1832_BINARY_VS_ROTATION_MODEL_DISCRIMINATION",
     "LPT_CLASS_CONTROL_MATRIX_WITH_J1935_J1755_J1839_0756_GPM_J1839_10",
-    "J1832_INDEPENDENT_RADIO_XRAY_PROFILE_REFIT_WHEN_PROFILE_OR_EVENT_DATA_ARE_RETRIEVED",
+    "J1832_INDEPENDENT_RADIO_XRAY_PROFILE_REFIT_FROM_ZENODO_CHANDRA_DATA",
     "FKT230303_NUMERIC_FIELD_BENCHMARK_WHEN_PUBLIC_GRID_BYTES_ARE_RETRIEVED"
   ],
   "hunt_rules": [
     "EXISTENCE_BEFORE_INTERPRETATION",
     "MULTIMODAL_CONVERGENCE_BEFORE_ORIGIN",
     "INTERNAL_ESTIMATOR_AGREEMENT_IS_NOT_INDEPENDENT_REPLICATION",
+    "A_BLOCKED_UNSAFE_ROUTE_TRIGGERS_A_SEARCH_FOR_A_SAFER_REPRESENTATION_NOT_A_WEAKER_GATE",
     "RESOLVED_CASES_BECOME_CONTROLS_INSTEAD_OF_STAYING_MYSTERIES",
     "FAILED_BLOCKED_OR_ORDINARY_EXPLANATIONS_ARE_RETAINED_AS_TRAINING_MEMORY",
-    "NO_UNSAFE_PICKLE_EXECUTION_FOR_SCIENTIFIC_EAGERNESS",
     "NO_MESSAGE_OR_ETI_PROMOTION_FROM_PERIODICITY",
     "UNRESOLVED_IS_AN_ALLOWED_FINAL_STATE"
   ],
