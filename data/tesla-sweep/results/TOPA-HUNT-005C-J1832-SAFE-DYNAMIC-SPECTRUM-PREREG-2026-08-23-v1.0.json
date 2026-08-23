@@ -1,0 +1,99 @@
+{
+  "schema": "JANUS_TOPA_J1832_SAFE_DYNAMIC_SPECTRUM_PREREG",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_phase_replay": "data/tesla-sweep/results/TOPA-HUNT-005B-J1832-RADIO-XRAY-PHASE-REPLAY-2026-08-23-v1.0.json",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "FROZEN_BEFORE_NUMERIC_DYNAMIC_SPECTRUM_SCORING",
+  "purpose": "Inspect J1832 radio time-frequency structure without allowing unsafe external pickle execution, post-hoc feature invention, or message/origin interpretation to contaminate morphology scoring.",
+  "public_inventory": {
+    "repository": "Andywang201605/J1832-0911_radio_xray",
+    "supporting_directory": "radio_dynamic_spectra_light_curves",
+    "public_products_seen": [
+      "ASKAP dynamic-spectrum pickle products in data/",
+      "discovery_plot.ipynb",
+      "askap_folded_fullpol.ipynb",
+      "widefreq_radio_dynamic_spectra.ipynb",
+      "burst.py",
+      "vis_ds.py"
+    ],
+    "raw_archive_routes_reported_by_authors": [
+      "ASKAP/CASDA",
+      "GMRT/NCRA archive",
+      "MeerKAT/SARAO archive"
+    ]
+  },
+  "security_boundary": {
+    "NO_PICKLE_EXECUTION": true,
+    "rule": "Do not pickle.load or execute external serialized Python objects merely to obtain a spectrogram.",
+    "allowed_routes": [
+      "inspect pickle opcodes/globals without execution when bytes become locally available",
+      "convert through a trusted isolated/export path",
+      "use author-exported non-executable arrays or rendered products",
+      "retrieve raw telescope products from primary archives and construct arrays independently"
+    ]
+  },
+  "frozen_feature_family": [
+    "burst_duration_and_duty_cycle",
+    "occupied_fractional_bandwidth",
+    "frequency_drift_and_curvature",
+    "subburst_count_and_repetition",
+    "dispersion_residual_after_DM_430",
+    "spectral_patchiness_and_modulation_index",
+    "polarization_fraction_and_position_angle_evolution_when_exported",
+    "recurrence_phase_stability",
+    "cross_telescope_morphology_similarity",
+    "instrument_edge_channelization_and_RFI_family_similarity"
+  ],
+  "frozen_controls": {
+    "astrophysical_long_period": [
+      "GPM_J1839_MINUS_10",
+      "ASKAP_J1935_PLUS_2148",
+      "ASKAP_J1839_MINUS_0756",
+      "ASKAP_J1755_MINUS_2527"
+    ],
+    "natural_radio": [
+      "FRB_dispersed_and_drifting_subbursts",
+      "pulsar_periodic_emission",
+      "Jupiter_and_solar_burst_controls_when_replayed"
+    ],
+    "anthropogenic_or_instrumental": [
+      "BLC1_RFI_family",
+      "MLc4_MLc5_matching_drift_integer_like_spacing_family",
+      "VLF_counting_beacon",
+      "20_second_airgun_cadence_cross_domain_timing_control",
+      "known_backend_comb_and_channel_edge_artifacts"
+    ]
+  },
+  "analysis_order": [
+    "1_VERIFY_NONEXECUTABLE_OR_SAFE_ARRAY_PROVENANCE",
+    "2_RECORD_TIME_AND_FREQUENCY_RESOLUTION",
+    "3_RECORD_BANDPASS_CHANNELIZATION_AND_FLAGGING",
+    "4_APPLY_DM_430_OR_VERIFY_AUTHOR_DEDISPERSION",
+    "5_MEASURE_FROZEN_MORPHOLOGY_FEATURES",
+    "6_FREEZE_J1832_FEATURE_VECTOR",
+    "7_ONLY_THEN_COMPARE_TO_CONTROL_CLASSES",
+    "8_REPORT_CLOSEST_ORDINARY_MORPHOLOGY_FAMILY_AND_RESIDUALS",
+    "9_DO_NOT_SCORE_INTELLIGENCE_OR_MESSAGE_CONTENT"
+  ],
+  "hard_rules": [
+    "MORPHOLOGY_CAN_NOMINATE_NOT_IDENTIFY_ORIGIN",
+    "NO_POSTHOC_FEATURE_ADDITION_AFTER_J1832_VIEW",
+    "NO_MESSAGE_OR_INTELLIGENCE_SCORE",
+    "PUBLISHED_RENDERED_PRODUCTS_CAN_CALIBRATE_BUT_DO_NOT_COUNT_AS_RAW_REPLAY",
+    "CROSS_TELESCOPE_SIMILARITY_COUNTS_ONLY_AFTER_INSTRUMENT_DEPENDENCIES_ARE_SEPARATED",
+    "ONE_FALSE_POSITIVE_FAMILY_REMOVED_DOES_NOT_AUTHORIZE_THE_REMAINDER_AS_UNKNOWN"
+  ],
+  "promotion_gate": {
+    "required_for_unresolved_morphology": [
+      "feature_vector reproducible from safe numeric arrays",
+      "morphology not explained by obvious bandpass/channelization/RFI artifact",
+      "consistent structure across independent telescope products where comparable",
+      "difference from control classes stated quantitatively rather than visually"
+    ],
+    "maximum_label": "ASTROPHYSICAL_MORPHOLOGY_UNRESOLVED"
+  },
+  "claim_ceiling": "PREREG_ONLY__NO_DYNAMIC_SPECTRUM_NUMERIC_RESULT_YET__NO_MESSAGE_CLAIM__NO_ORIGIN_CLAIM"
+}
