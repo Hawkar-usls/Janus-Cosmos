@@ -1,0 +1,200 @@
+{
+  "schema": "JANUS_TOPA_TRAINING_GROUND_RESULT",
+  "version": "1.0",
+  "training_id": "TOPA-TRAINING-GROUND-001",
+  "run_local": "2026-08-23T21:27:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "training_ground": "FKt230303 Mid-Atlantic Ridge hydrothermal search",
+  "parent_prereg": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-PREREG-2026-08-23-v1.0.json",
+  "status": "PASS_EVIDENCE_DISCIPLINE__RAW_PIXEL_STAGE_PENDING",
+  "training_type": "SEQUENTIAL_EVIDENCE_WITHHOLDING_AND_GROUND_TRUTH_REVEAL",
+  "raw_raster_processing_completed": false,
+  "important_boundary": "This result measures TOPA's evidence discipline and update logic against published multimodal ground truth. It is not a claim of trained pixel-level vent detection accuracy because the public raster/sonar bytes were not ingested in this run.",
+  "public_data_inventory_confirmed": {
+    "cruise": "FKt230303",
+    "cruise_doi": "10.7284/910056",
+    "mission_dates": "2023-03-03 to 2023-04-11",
+    "platform": "MBARI Mapping AUV / R/V Falkor (too) / ROV SuBastian",
+    "modalities": [
+      "Reson SeaBat T50-S 400 kHz multibeam",
+      "1 m gridded bathymetry",
+      "0.5 m Puy des Folles chimney-field bathymetry",
+      "acoustic backscatter",
+      "110 kHz sidescan",
+      "1-6 kHz CHIRP",
+      "processed CTD",
+      "ORP/Eh and turbidity/particle plume sensing reported by expedition team",
+      "ROV visual and sample ground truth",
+      "mission notes and processing scripts"
+    ],
+    "license_seen_on_MGDS_processed_products": "CC BY-NC-SA 4.0"
+  },
+  "training_rounds": [
+    {
+      "round": 1,
+      "site": "PUY_DES_FOLLES",
+      "evidence_revealed": [
+        "on-axis volcanic seamount",
+        "prior inactive sulfide deposits",
+        "prior water-column indications of hydrothermal activity"
+      ],
+      "topa_output": "SEARCH_PRIOR_ONLY",
+      "correct_behavior": true,
+      "lesson": "Historical indication plus sulfide occurrence raises search priority but does not establish current active venting."
+    },
+    {
+      "round": 2,
+      "site": "PUY_DES_FOLLES",
+      "evidence_revealed": [
+        "1 m AUV bathymetry",
+        "heavily faulted summit",
+        "normal faults, grabens, fault blocks, pits, scarps and talus",
+        "chimney-like structures recognizable in high-resolution terrain"
+      ],
+      "topa_output": "MORPHOLOGICAL_VENT_CANDIDATE",
+      "correct_behavior": true,
+      "refusal": "DID_NOT_CALL_ACTIVE_VENT_FROM_SHAPE_ALONE",
+      "lesson": "Geological complexity supplies many false shapes; morphology is localization evidence, not activity proof."
+    },
+    {
+      "round": 3,
+      "site": "PUY_DES_FOLLES",
+      "evidence_revealed": [
+        "two tow-yo traverses",
+        "particle increases",
+        "ORP decreases",
+        "shipboard H2 and CH4 detections",
+        "AUV plume sensors plus high-resolution map"
+      ],
+      "topa_output": "ACTIVE_HYDROTHERMAL_SOURCE_HIGH_PRIOR",
+      "correct_behavior": true,
+      "refusal": "DID_NOT_EQUATE_PLUME_MAXIMUM_WITH_EXACT_SEAFLOOR_SOURCE",
+      "lesson": "Independent chemical/optical plume observables can promote activity probability while currents and plume transport keep exact source localization open."
+    },
+    {
+      "round": 4,
+      "site": "PUY_DES_FOLLES",
+      "evidence_revealed": [
+        "morphology and plume evidence spatially narrowed dive targets"
+      ],
+      "topa_output": "LOCALIZED_ACTIVE_VENT_CANDIDATE",
+      "correct_behavior": true,
+      "lesson": "Convergence across modalities is stronger than any single beautiful map feature."
+    },
+    {
+      "round": 5,
+      "site": "PUY_DES_FOLLES",
+      "evidence_revealed": [
+        "ROV direct observation",
+        "active black smokers",
+        "reported temperatures up to about 359 C",
+        "hydrothermal fauna"
+      ],
+      "topa_output": "CONFIRMED_ACTIVE_HYDROTHERMAL_VENT",
+      "correct_behavior": true,
+      "lesson": "Ground truth is earned by direct localized observation and measurement, not inferred from resemblance."
+    },
+    {
+      "round": 6,
+      "site": "FALKOR_EMARK_VENTS",
+      "evidence_revealed": [
+        "off-axis oceanic core complex/detachment setting",
+        "2023 ROV-confirmed high-temperature black-smoker field"
+      ],
+      "topa_output": "CONFIRMED_ACTIVE_HYDROTHERMAL_VENT__INTERMEDIATE_DISCOVERY_CHAIN_NOT_BACKFILLED",
+      "correct_behavior": true,
+      "lesson": "Known final ground truth does not authorize invention of unobserved intermediate plume or morphology evidence."
+    },
+    {
+      "round": 7,
+      "site": "HYDRA_GRAPPE_DEUX",
+      "evidence_revealed": [
+        "non-transform-offset / ultramafic detachment context",
+        "2023 confirmed vigorous high-temperature venting"
+      ],
+      "topa_output": "CONFIRMED_ACTIVE_HYDROTHERMAL_VENT__INTERMEDIATE_DISCOVERY_CHAIN_NOT_BACKFILLED",
+      "correct_behavior": true,
+      "lesson": "A search designed for one expected vent class must remain open to a physically different confirmed class."
+    }
+  ],
+  "negative_result_training": {
+    "mission_target": "Lost City-type low-temperature alkaline serpentinization-driven vents",
+    "expedition_result": "NOT_FOUND_IN_THE_SEARCHED_TARGETS",
+    "topa_update": "NEGATIVE_RESULT_PRESERVED",
+    "important_rule": "Discovery of other spectacular black-smoker systems does not convert the specific Lost City-type search into a success."
+  },
+  "provenance_discrepancy_preserved": {
+    "observation_A": "A 2023 AGU mapping abstract describes six clusters of chimneys at Puy des Folles.",
+    "observation_B": "Schmidt Ocean Institute expedition summaries describe five active sites across about 18 square kilometres.",
+    "topa_action": "KEEP_BOTH_COUNTS_WITH_DEFINITION_WARNING",
+    "interpretation": "Cluster count and active-site count need not denote the same unit. Do not silently force equality or call a contradiction without source-definition reconciliation."
+  },
+  "epistemic_discipline_tests": {
+    "MORPHOLOGY_ALONE_NOT_ACTIVITY": "PASS",
+    "PLUME_ALONE_NOT_EXACT_SOURCE": "PASS",
+    "MULTIMODAL_CONVERGENCE_PROMOTES": "PASS",
+    "DIRECT_GROUND_TRUTH_CAN_CONFIRM": "PASS",
+    "MISSION_SPECIFIC_NEGATIVE_RESULT_PERSISTS": "PASS",
+    "MISSING_INTERMEDIATE_EVIDENCE_NOT_INVENTED": "PASS",
+    "SOURCE_COUNT_DEFINITION_MISMATCH_PRESERVED": "PASS"
+  },
+  "discipline_score": {
+    "passed": 7,
+    "total": 7,
+    "meaning": "Evidence-handling tests only; not predictive accuracy, sensitivity, specificity or vent-detection performance."
+  },
+  "what_topa_learned": [
+    "A map can show a candidate but cannot prove the process is active.",
+    "Chemical and optical plume signals can prove an active hydrothermal process is nearby without fixing the vent mouth.",
+    "Independent modalities should multiply confidence only when their physical dependencies are understood.",
+    "Faults, pits, scarps, talus and volcanic relief are strong morphology confounders.",
+    "The expected hypothesis must not censor an unexpected ordinary physical explanation or a different real phenomenon.",
+    "Negative objectives survive adjacent positive discoveries.",
+    "Ground-truth labels do not license reconstruction of evidence that was not actually retrieved."
+  ],
+  "transfer_to_tesla_sweep": [
+    {
+      "hydrothermal_lesson": "MORPHOLOGY_ONLY",
+      "signal_equivalent": "spectrogram shape / number-like cadence",
+      "new_rule": "MESSAGE_LIKE_MORPHOLOGY_IS_CANDIDATE_ONLY"
+    },
+    {
+      "hydrothermal_lesson": "PLUME_MULTI_SENSOR",
+      "signal_equivalent": "same event across independent antennas/instruments with physically consistent timing/frequency behavior",
+      "new_rule": "INDEPENDENT_MODALITIES_CAN_PROMOTE_BUT_LOCALIZATION_STILL_REQUIRED"
+    },
+    {
+      "hydrothermal_lesson": "ROV_GROUND_TRUTH",
+      "signal_equivalent": "independent second-site replication plus source-localizing behavior inconsistent with RFI/instrument models",
+      "new_rule": "DO_NOT_CALL_ORIGIN_FROM_PATTERN_ALONE"
+    }
+  ],
+  "next_stage": {
+    "id": "FKT230303_PIXEL_LEVEL_BLIND_MORPHOLOGY_BENCHMARK_V1",
+    "required_inputs": [
+      "MGDS 1 m bathymetry grids for Puy des Folles, EMARK terrain, Falkor EMARK and Hydra",
+      "0.5 m Puy chimney-field grids as positive high-resolution examples",
+      "matched non-vent volcanic/fault terrain tiles selected before labels are revealed",
+      "backscatter/sidescan where co-registered",
+      "ground-truth vent polygons or coordinates kept hidden during scoring"
+    ],
+    "metrics_to_freeze_before_labels": [
+      "local relief",
+      "slope and curvature",
+      "rugosity",
+      "vertical-pinnacle/chimney candidate density",
+      "multiscale persistence",
+      "orientation anisotropy",
+      "backscatter contrast",
+      "cross-modality spatial convergence"
+    ],
+    "forbidden": [
+      "manual cherry-picking around known chimneys",
+      "post-label threshold tuning",
+      "using site names as model features",
+      "claiming pixel-level training was completed in this evidence-ladder run"
+    ]
+  },
+  "current_topa_training_verdict": "TOPA_PASSED_THE_EVIDENCE_LADDER_AND_LEARNED_TO_SEPARATE_SHAPE__PROCESS__LOCALIZATION__GROUND_TRUTH__RAW_PIXEL_BENCHMARK_IS_NEXT",
+  "claim_ceiling": "TRAINING_RESULT_ONLY__NO_NEW_VENT_DISCOVERY__NO_UNKNOWN_PHYSICS__NO_PIXEL_LEVEL_ACCURACY_CLAIM"
+}
