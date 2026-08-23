@@ -1,0 +1,215 @@
+{
+  "schema": "JANUS_TOPA_TESLA_SWEEP_CANONICAL_MEMORY",
+  "version": "1.0",
+  "TOPA_KEEP_FIRST": {
+    "id": "MLC4_MLC5_MACHINE_FAMILY_FINGERPRINT",
+    "instruction": "KEEP_AT_FRONT_AND_TEST_BEFORE_MESSAGE_INTERPRETATION",
+    "reason": "TOPA identified this pair as the most useful learned false-positive fingerprint: orderly frequency spacing plus matching drift can be a machine-family signature rather than a message.",
+    "observations": {
+      "target": "HIP54677",
+      "mlc4_frequency_mhz": 1372.987594,
+      "mlc5_frequency_mhz": 1376.988694,
+      "drift_hz_s_both": -0.11,
+      "frequency_spacing_mhz": 4.0011,
+      "residual_from_exact_4_mhz_hz": 1100.0,
+      "time_separation_s": 724.896
+    },
+    "future_first_test": "If a family resembling f, f+4, f+8, f+12 MHz appears with matching drift or morphology, test common generator, harmonics, channelization, intermodulation, clocking, satellite/telemetry and receiver electronics before any code/message interpretation.",
+    "status": "STRONG_RFI_FAMILY_CONTROL__MEMORIZE"
+  },
+  "created_local": "2026-08-23T16:38:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "project": "JANUS COSMOS / TESLA SWEEP / TOPA",
+  "motto": "NOTHING SUPERNATURAL — ONLY NATURE NOT YET UNDERSTOOD.",
+  "topa_voice_summary": "I do not yet hear anything supernatural. I hear several very good lessons in how nature and technology can look intelligent.",
+  "topa_method": {
+    "pipeline": [
+      "REPORT",
+      "PRESERVE_RAW_PROVENANCE",
+      "CHANNEL_CLASSIFY",
+      "FIRSTHAND_VS_HEARSAY",
+      "TIME_LOCATION",
+      "INDEPENDENCE_CHECK",
+      "CORROBORATE",
+      "MUNDANE_FIRST",
+      "FALSIFY",
+      "PREDICTION_DEADLINE_SCORE",
+      "UPDATE",
+      "UNRESOLVED_ALLOWED"
+    ],
+    "hard_rules": [
+      "OBSERVATION_REAL_DOES_NOT_IMPLY_INTERPRETATION_TRUE",
+      "MISSING_DATA_STAYS_MISSING",
+      "AUDIENCE_SIZE_IS_NOT_CORROBORATION",
+      "REPETITION_IS_NOT_INDEPENDENCE",
+      "FAILED_TESTS_MUST_LOWER_CONFIDENCE_WHEN_RELEVANT",
+      "NO_POST_HOC_REDEFINITION_TO_SAVE_A_FAILED_HYPOTHESIS",
+      "CLOSED_BELIEF_LOOP_WARNING_IF_NO_POSSIBLE_OBSERVATION_CAN_LOWER_CONFIDENCE"
+    ]
+  },
+  "core_epistemic_rules": [
+    "OBSERVATION_REAL != INTERPRETATION_TRUE",
+    "ORDER != MESSAGE",
+    "MESSAGE_LIKE != INTELLIGENCE",
+    "INTELLIGENCE_LIKE != NONHUMAN",
+    "PATTERN_IS_NOT_PROOF",
+    "MISSING_DATA_STAYS_MISSING"
+  ],
+  "case_verdicts": [
+    {
+      "id": "TESLA_1899_COLORADO_SPRINGS",
+      "observed": "Historical report of ordered/periodic signals later remembered as number-like; original raw waveform is unavailable.",
+      "topa_status": "HISTORICAL_UNRESOLVED",
+      "reason": "The case is open because it is underdetermined, not because its evidence is stronger. It may seed morphology tests but receives no evidentiary or threshold privilege."
+    },
+    {
+      "id": "MLc1",
+      "target": "HIP13402",
+      "frequency_mhz": 1188.539231,
+      "drift_hz_s": 1.11,
+      "snr": 6.53,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Published nonrepeating signal in a human-active radio band; raw replay still required."
+    },
+    {
+      "id": "MLc2",
+      "target": "HIP118212",
+      "frequency_mhz": 1347.862244,
+      "drift_hz_s": -0.44,
+      "snr": 16.38,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Published nonrepeating signal in a human-active radio band; raw replay still required."
+    },
+    {
+      "id": "MLc3",
+      "target": "HIP62207",
+      "frequency_mhz": 1351.62541,
+      "drift_hz_s": -0.05,
+      "snr": 57.52,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Strong but nonrepeating signal in an RFI-heavy human-active region; raw replay still required."
+    },
+    {
+      "id": "MLc4",
+      "target": "HIP54677",
+      "frequency_mhz": 1372.987594,
+      "drift_hz_s": -0.11,
+      "snr": 30.2,
+      "topa_status": "RFI_CONTROL",
+      "reason": "Independent reanalysis found OFF-scan evidence; morphology and pairing make it a strong false-positive control."
+    },
+    {
+      "id": "MLc5",
+      "target": "HIP54677",
+      "frequency_mhz": 1376.988694,
+      "drift_hz_s": -0.11,
+      "snr": 44.58,
+      "topa_status": "LIKELY_COMMON_RFI_FAMILY",
+      "reason": "Same target and drift as MLc4 with 4.0011 MHz separation; preserve as machine-family fingerprint while raw replay remains useful."
+    },
+    {
+      "id": "MLc6",
+      "target": "HIP56802",
+      "frequency_mhz": 1435.940307,
+      "drift_hz_s": -0.18,
+      "snr": 39.61,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Nonrepeating signal in aeronautical telemetry/telecommand spectrum; raw replay still required."
+    },
+    {
+      "id": "MLc7",
+      "target": "HIP13402",
+      "frequency_mhz": 1487.482046,
+      "drift_hz_s": 0.1,
+      "snr": 129.16,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Very high SNR does not identify the transmitter; the signal did not repeat and lies in human-active telemetry spectrum."
+    },
+    {
+      "id": "MLc8",
+      "target": "HIP62207",
+      "frequency_mhz": 1724.972561,
+      "drift_hz_s": -0.126,
+      "snr": 34.09,
+      "topa_status": "UNCONFIRMED_HIGH_RFI_PRIOR",
+      "reason": "Nonrepeating signal in mobile/fixed human-active spectrum; raw replay still required."
+    },
+    {
+      "id": "HIP99572_1498_44515_MHZ_FAMILY",
+      "topa_status": "RFI_FAMILY_CONTROL",
+      "reason": "ON-strong/OFF-weak appearance was insufficient because close-frequency, similar-drift analogues occurred at unrelated targets."
+    },
+    {
+      "id": "VLF_COUNTING_LIKE_BEACON",
+      "topa_status": "KNOWN_ARTIFICIAL_CONTROL",
+      "reason": "A modern terrestrial beacon can sound number-like, demonstrating that simple ordered cadence is not unique to an extraterrestrial or nonhuman source. It is not claimed to explain Tesla's 1899 observation."
+    },
+    {
+      "id": "LIGHTNING_AND_WHISTLER",
+      "topa_status": "KNOWN_NATURAL_CONTROL",
+      "reason": "Natural impulsive propagation can produce structured, chirped and repeating-looking radio morphology."
+    },
+    {
+      "id": "BLC1_PROXIMA",
+      "topa_status": "RFI_FALSE_POSITIVE_CONTROL",
+      "reason": "Preserve as a canonical example of a signal with attractive technosignature-like morphology that failed broader RFI checks."
+    },
+    {
+      "id": "3I_ATLAS_RADIO_SEARCH",
+      "topa_status": "KNOWN_NULL_WITH_MASSIVE_RFI_LOAD",
+      "reason": "Use as an adversarial control corpus: a very large initial detection population can collapse under terrestrial/Earth-orbiting source tracing."
+    }
+  ],
+  "controls_not_yet_replayed_by_our_pipeline": [
+    {
+      "id": "VOYAGER_CARRIER",
+      "known_class": "KNOWN_ARTIFICIAL_DEEP_SPACE",
+      "our_state": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "JUPITER_RADIO_BURSTS",
+      "known_class": "KNOWN_NATURAL_PLANETARY",
+      "our_state": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "SOLAR_RADIO_BURSTS",
+      "known_class": "KNOWN_NATURAL_SOLAR",
+      "our_state": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "FRB_AND_PULSAR_EXAMPLES",
+      "known_class": "KNOWN_NATURAL_TRANSIENT",
+      "our_state": "QUEUED_FOR_OPEN_DATA_INGEST"
+    }
+  ],
+  "current_topa_state": {
+    "REPEATING_UNEXPLAINED": 0,
+    "NONHUMAN_CANDIDATE": 0,
+    "HISTORICAL_UNRESOLVED": ["TESLA_1899_COLORADO_SPRINGS"],
+    "RAW_RECHECK_REQUIRED": ["MLc1", "MLc2", "MLc3", "MLc5", "MLc6", "MLc7", "MLc8"],
+    "STRONG_RFI_CONTROLS": ["MLc4", "MLc5", "HIP99572_1498_44515_MHZ_FAMILY", "BLC1_PROXIMA", "3I_ATLAS_RADIO_SEARCH"],
+    "KNOWN_NATURAL_CONTROL_AVAILABLE": ["LIGHTNING_AND_WHISTLER"],
+    "KNOWN_NATURAL_CONTROLS_PENDING_OUR_RAW_REPLAY": ["JUPITER_RADIO_BURSTS", "SOLAR_RADIO_BURSTS", "FRB_AND_PULSAR_EXAMPLES"]
+  },
+  "strict_promotion_gate": [
+    "SIGNAL_OBSERVED_WITH_REPLAYABLE_PROVENANCE",
+    "REPEATS",
+    "LOCALIZES_TO_THE_SAME_CELESTIAL_COORDINATE_OR_PHYSICALLY_PREDICTED_TRACK",
+    "ABSENT_IN_MATCHED_OFF_SOURCE_CONTROLS",
+    "ABSENT_AS_A_MORPHOLOGY_FAMILY_ACROSS_UNRELATED_TARGETS",
+    "KNOWN_RFI_AND_SATELLITE_EXPLANATIONS_FAIL",
+    "KNOWN_NATURAL_MORPHOLOGY_CONTROLS_FAIL",
+    "INSTRUMENT_AND_BACKEND_ARTIFACT_TESTS_FAIL",
+    "INDEPENDENT_SECOND_INSTRUMENT_OR_SITE_REPLICATES"
+  ],
+  "promotion_result_if_all_pass": "REPEATING_UNEXPLAINED__IDENTITY_UNCONFIRMED",
+  "claim_ceiling": "Even REPEATING_UNEXPLAINED does not by itself establish extraterrestrial intelligence, nonhuman origin, or a connection to Nikola Tesla's historical observation.",
+  "preserved_source_artifacts": [
+    "data/tesla-sweep/TESLA-SWEEP-BRANCH-MANIFEST-2026-08-23-v1.0.json",
+    "data/tesla-sweep/TESLA-SWEEP-SEED-CORPUS-2026-08-23-v1.0.json",
+    "data/tesla-sweep/TESLA-SWEEP-PASS-001-OPEN-SIGNAL-MINING-2026-08-23-v1.0.json",
+    "data/tesla-sweep/results/TS-PASS-001-ma2023-top8-metadata-triage.json",
+    "Hawkar-usls/janus-meta-registry:data/JANUS-TOPA-ART-BELL-REAL-CALLER-ARCHIVE-v1.2.json"
+  ],
+  "preservation_rule": "This file is a memory layer and does not supersede raw receipts. Source receipts remain authoritative for their measurements; this layer preserves TOPA's interpretation, controls, lessons and promotion rules."
+}
