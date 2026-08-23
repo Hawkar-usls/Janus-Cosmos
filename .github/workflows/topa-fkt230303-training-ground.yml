@@ -1,0 +1,78 @@
+name: TOPA FKt230303 Training Ground
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [janus-tesla-sweep]
+    paths:
+      - ".github/workflows/topa-fkt230303-training-ground.yml"
+      - "workspace/tesla_sweep/topa_fkt230303_acquire_and_benchmark.py"
+      - "workspace/tesla_sweep/topa_bathymetry_benchmark.py"
+      - "workspace/tesla_sweep/topa_bathymetry_benchmark_v1_1.py"
+
+permissions:
+  contents: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: janus-tesla-sweep
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numeric and acquisition dependencies
+        run: python -m pip install --upgrade numpy scipy requests xarray netCDF4
+
+      - name: Acquire public FKt230303 grids and run frozen TOPA v1.1
+        id: train
+        continue-on-error: true
+        run: python workspace/tesla_sweep/topa_fkt230303_acquire_and_benchmark.py
+
+      - name: Show frozen result
+        if: always()
+        run: |
+          test -f data/tesla-sweep/results/TOPA-FKT230303-ACQUISITION-AND-FIELDGRID-RUN-001.json
+          python - <<'PY'
+          import json
+          p='data/tesla-sweep/results/TOPA-FKT230303-ACQUISITION-AND-FIELDGRID-RUN-001.json'
+          d=json.load(open(p, encoding='utf-8'))
+          print(json.dumps({
+              'status': d.get('status'),
+              'verdict': d.get('verdict'),
+              'selected_first_grid': d.get('selected_first_grid'),
+              'discovered_grid_candidates': d.get('discovered_grid_candidates', [])[:10],
+              'field_candidate_output_summary': {
+                  'candidate_count': d.get('field_candidate_output', {}).get('candidate_count'),
+                  'top_candidates': d.get('field_candidate_output', {}).get('top_candidates', [])[:3],
+              }
+          }, indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: topa-fkt230303-training-${{ github.run_number }}
+          path: data/tesla-sweep/results/TOPA-FKT230303-ACQUISITION-AND-FIELDGRID-RUN-001.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Freeze training result, including blocked/negative state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/tesla-sweep/results/TOPA-FKT230303-ACQUISITION-AND-FIELDGRID-RUN-001.json
+          git commit -m "TOPA: freeze FKt230303 training-ground run ${{ github.run_number }}" || true
+          for i in 1 2 3; do
+            git pull --rebase origin janus-tesla-sweep || true
+            git push origin HEAD:janus-tesla-sweep && exit 0
+            sleep 3
+          done
+          exit 1
