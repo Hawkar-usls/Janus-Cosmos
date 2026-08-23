@@ -1,0 +1,167 @@
+{
+  "schema": "JANUS_TOPA_RETROSPECTIVE_HIGH_INFORMATION_PASS",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-002",
+  "created_local": "2026-08-23T16:49:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "COMPLETE__REAL_INTEREST_NODES_RANKED__NO_UNKNOWN_PHYSICS_PROMOTED",
+  "mission": "Re-read the JANUS COSMOS research trail from the beginning using the falsification lessons learned in TOPA-TESLA-HUNT-001, and retain only nodes that contain reproducible measurements, independently checkable discrepancies, or sharp next experiments.",
+  "interest_definition": "INTERESTING means either (A) a measured effect survives enough mundane controls to deserve independent replication, or (B) the node creates a high-information falsifiable experiment. Symbolic resemblance, isolated number matches, semantic naming and visual suggestiveness do not raise rank.",
+  "topa_keep_first_reference": "data/tesla-sweep/00-TOPA-TESLA-SWEEP-CANONICAL-MEMORY-2026-08-23-v1.0.json#TOPA_KEEP_FIRST",
+  "topa_keep_first_summary": "MLc4/MLc5 remains the first machine-family false-positive fingerprint: matching drift plus approximately 4 MHz spacing can be instrumentation/RFI structure rather than a message.",
+  "major_redirection": "The strongest overlooked material is not a hidden message in a frozen anchor. It is the combination of retrospective precursor behavior before normal-faulting mainshocks, seismicity/segment asymmetry as a possible hydrothermal-vent search prior, a cross-catalog off-axis seismicity feature, and a concrete 900-row catalog provenance discrepancy.",
+  "ranked_nodes": [
+    {
+      "rank": 1,
+      "id": "EA_TPHASE_NORMAL_FAULT_PRECURSOR_LANE",
+      "interest": "HIGH__REAL_MEASURED_PATTERN_REQUIRES_INDEPENDENT_REPLICATION",
+      "observation": "The Parnell-Turner, Smith and Dziak equatorial Atlantic hydroacoustic study reports that Mw>5 normal-faulting events show more frequent precursory/foreshock activity than strike-slip events, with a modest background rise beginning up to about 24 hours before the mainshock and stronger activity at closer time/distance scales.",
+      "why_topa_keeps_it": "This is a time-ordered physical observation with a defined event class and a falsifiable replication path. It is more informative than a post-hoc spatial or numerical match.",
+      "critical_boundary": "Retrospective precursor association is not an operational earthquake prediction system and does not establish deterministic predictability.",
+      "next_gate": "Pre-register an independent holdout replication using mainshocks not used in the original 2011-2015 analysis, freeze magnitude/mechanism/time/distance windows first, and compare normal-faulting versus strike-slip controls with identical detection rules.",
+      "sources": ["DOI:10.1029/2022JB024008"]
+    },
+    {
+      "rank": 2,
+      "id": "EA_TPHASE_HYDROTHERMAL_VENT_DISCOVERY_PRIOR",
+      "interest": "HIGH__DISCOVERY_RANKING_HYPOTHESIS",
+      "observation": "The same study reports that active confirmed hydrothermal vents and hydroacoustic seismicity are more common on asymmetric spreading segments than symmetric segments; the paper explicitly notes that undiscovered vents may weaken the observed seismicity-vent relation.",
+      "why_topa_keeps_it": "This can be converted into a prospective search problem: rank ventless ridge segments before looking at later vent discoveries or independent geochemical/multibeam evidence.",
+      "critical_boundary": "Seismicity/asymmetry is only a prior for vent occurrence, not evidence of a vent at any specific location.",
+      "next_gate": "Use the frozen ridge-segment supplement plus the authoritative T-phase catalog and a dated vent inventory to train only on pre-cutoff discoveries; hold out later discoveries or independent surveys for validation.",
+      "sources": ["DOI:10.1029/2022JB024008", "2022JB024008 supporting Table S1 and Data Set S1"]
+    },
+    {
+      "rank": 3,
+      "id": "EA_OFF_AXIS_70KM_SEISMICITY_REPLICATED",
+      "interest": "HIGH__CROSS_CATALOG_GEOLOGICAL_ANOMALY",
+      "observation": "An approximately 70 km west-of-axis seismicity feature is described as visible in the 2011-2015 hydroacoustic catalog, an earlier 1999-2003 northern Mid-Atlantic Ridge catalog, and the ISC catalog. Published ordinary-geology hypotheses include a ridge jump/incipient rifting or stress related to a nearby triple-junction setting.",
+      "why_topa_keeps_it": "Appearance across three independent catalog lineages is qualitatively stronger than recurrence inside one instrument stream.",
+      "critical_boundary": "Anomalous here means tectonically unusual, not unknown physics or artificial origin.",
+      "next_gate": "Freeze a geographic polygon from the published feature, quantify its persistence in newer independent seismic catalogs, and compare against bathymetry/gravity/magnetic structure under ridge-jump versus stress-transfer models.",
+      "sources": ["DOI:10.1029/2022JB024008"]
+    },
+    {
+      "rank": 4,
+      "id": "H10N1_SECONDARY_1KM_MORPHOLOGY_WATCHLIST",
+      "interest": "MEDIUM_HIGH__MEASURED_LOCAL_OUTLIER_BLOCKED_BY_NONREPLICATION",
+      "observation": "At the preregistered primary 2 km scale H10N1 ranked 4/21 with empirical p=0.190476. At the secondary 1 km scale it ranked 1/21 with empirical p=0.047619, exactly the minimum possible with 20 controls. The close-scale surface was flatter/less rugged than the matched volcanic controls on several metrics.",
+      "why_topa_keeps_it": "There is a real measured local contrast, but the wider primary scale does not replicate it and the p-value is at the empirical resolution floor.",
+      "critical_boundary": "PHYSICAL_ANOMALY_GATE remains NOT_ADVANCED. No pyramid/crater/artificial identity is allowed.",
+      "next_gate": "Recover machine-verifiable per-cruise multibeam coverage and compare independent source surfaces without changing metrics or controls.",
+      "sources": [
+        "data/cousteau/JANUS-H10N1-POST-MORPHOLOGY-GATE-COUNCIL-RUN-006-2026-08-22-v1.0.json",
+        "data/cousteau/JANUS-H10N1-SOURCE-LINEAGE-DISCOVERY-RUN-001-2026-08-22-v1.0.json"
+      ]
+    },
+    {
+      "rank": 5,
+      "id": "EA_TPHASE_6843_VS_5943_PROVENANCE_GAP",
+      "interest": "MEDIUM_HIGH__DATA_INTEGRITY_OPEN_QUESTION",
+      "observation": "The primary paper reports 6843 T-phase origins while the currently downloadable authoritative MGDS artifact contains 5943 rows, an exact difference of 900. Current rows use 4-8 recording hydrophones and contain no 3-hydrophone rows. The paper permits locations from at least three arrival picks; the leading explanation is therefore omission of the three-pick boundary population, but this is not explicitly proven.",
+      "why_topa_keeps_it": "A closed provenance gap changes what population is actually being analyzed and can materially affect tail/cluster studies.",
+      "critical_boundary": "Do not synthesize the missing 900 and do not equate arrival-pick count with recording-hydrophone count without a primary source.",
+      "next_gate": "Recover a historical checksum/file copy or an explicit author/repository statement identifying the 900-row difference.",
+      "sources": [
+        "data/cousteau/JANUS-ECHO-COUSTEAU-EA-TPHASE-6843-VS-5943-COUNT-RECONCILIATION-2026-08-21-v1.2.json",
+        "DOI:10.1029/2022JB024008",
+        "MGDS DOI:10.26022/IEDA/330497"
+      ]
+    },
+    {
+      "rank": 6,
+      "id": "EDEM_NEAREST_IR_SOURCE",
+      "interest": "MEDIUM__REAL_SOURCE_CLASSIFICATION_GAP",
+      "observation": "AllWISE J091653.98+301546.0 lies about 9.02 arcsec from the frozen EDEM search center. It is a faint infrared point source with clean contamination flags and no Gaia/Pan-STARRS/2MASS counterpart inside the frozen 2 arcsec radius. A CatWISE counterpart is 1.79 arcsec away, but its motion significance is only about 0.73 sigma and does not establish a star.",
+      "why_topa_keeps_it": "The source is catalog-real and still incompletely classified, which is a legitimate characterization target.",
+      "critical_boundary": "Nine arcseconds is not positional identity with EDEM; incomplete classification is not anomaly evidence.",
+      "next_gate": "Image-level forced photometry/deblending and deeper optical/IR catalog or archival-image characterization, with the frozen center and counterpart radii unchanged.",
+      "sources": [
+        "data/love/LOVE-EDEM-SOURCE-NATURE-v1-LATEST-RECEIPT.json",
+        "data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1-LATEST-RECEIPT.json"
+      ]
+    },
+    {
+      "rank": 7,
+      "id": "LOVE_NEAREST_IR_SOURCE",
+      "interest": "LOW_MEDIUM__REAL_SOURCE_CLASSIFICATION_GAP",
+      "observation": "AllWISE J133711.05-364649.7 lies about 20.29 arcsec from the frozen LOVE center and remains without a CatWISE, DES DR2, SkyMapper DR4 or unWISE counterpart inside the frozen 2 arcsec deep-counterpart radius.",
+      "why_topa_keeps_it": "It is a legitimate faint-source characterization question but is substantially farther from the frozen center than the EDEM infrared source.",
+      "critical_boundary": "No center identity, planet claim, or anomaly promotion.",
+      "next_gate": "Only pursue with image-level confusion/artifact checks or deeper archival imaging; do not retarget LOVE to the source.",
+      "sources": [
+        "data/love/LOVE-EDEM-SOURCE-NATURE-v1-LATEST-RECEIPT.json",
+        "data/love/LOVE-EDEM-DEEP-COUNTERPART-REDSHIFT-v1-LATEST-RECEIPT.json"
+      ]
+    },
+    {
+      "rank": 8,
+      "id": "KAMIL_AU_AG_MICRODOMAIN_BLIND_TEST",
+      "interest": "HIGH_INFORMATION_EXPERIMENT__NOT_CURRENT_EVIDENCE",
+      "observation": "Target-dominated Kamil white-glass specimens such as M23 and L04 are extremely silica-rich with low Ni/Co in the cited bulk context, while Au/Ag were not reported in the key table used by the project. A frozen micro-CT -> micro-XRF -> SEM-BSE/EDS -> trace-analysis discrimination sequence already exists with projectile-rich, contamination and target-rock controls.",
+      "why_topa_keeps_it": "The question can be answered at sample level and has strong conventional nulls. That makes it scientifically useful even if the result is fully ordinary.",
+      "critical_boundary": "Absence of reported Au/Ag is not evidence that Au/Ag-rich domains exist. No archaeological interpretation before a reproducible sample-level signal.",
+      "next_gate": "Resolve current sample custody and existing unpublished Au/Ag measurements; if material is available, execute the frozen blind microdomain protocol.",
+      "sources": ["data/giza/JANUS-KAMIL-WHITE-GLASS-AU-AG-MICRODOMAIN-OUTREACH-GATE-2026-08-20-v1.0.json"]
+    },
+    {
+      "rank": 9,
+      "id": "NGC1425_NGC1637_LEGACY_MORPHOLOGY_STRESS_TARGETS",
+      "interest": "MEDIUM__METHOD_STRESS_TARGETS_ONLY",
+      "observation": "NGC1425 and NGC1637 survived an older morphology-preserving 256-null pilot after the destructive pixel-permutation 7/7 result was rejected as a bad-null failure. Under the later family-wise correction, 256 nulls could not provide enough empirical p-value resolution to pass the canonical gate.",
+      "why_topa_keeps_it": "They are useful challenge cases for testing a powered, morphology-preserving pipeline without changing thresholds.",
+      "critical_boundary": "Historical survival is not anomaly confirmation.",
+      "next_gate": "Only rerun if a fully powered holdout protocol is frozen first; require WCS-localized cross-filter persistence and an independent dataset.",
+      "sources": ["legacy-cosmos-pre-osiris-2026-08-19/docs/PROJECT_AUDIT_2026-08-14.md"]
+    }
+  ],
+  "closed_or_deprioritized_lanes": [
+    {
+      "id": "HA10_119HZ_PUBLIC_SLICE",
+      "status": "NEGATIVE_CONFIRMATORY",
+      "reason": "0/16 station-event pairs passed the frozen gate, 0 replicated events, and the target did not outperform controls by the required margin. Preserve as an instrument/false-positive control, not a candidate."
+    },
+    {
+      "id": "EA_TPHASE_FROZEN_ANCHOR_BLIND_CLUSTER",
+      "status": "NEGATIVE",
+      "reason": "No blind cluster p95 overlap with the frozen anchor in the authoritative 5943-row catalog."
+    },
+    {
+      "id": "PALOMAR_LIGHT_RETURN",
+      "status": "DEPRIORITIZED_PHYSICAL_RETURN_HYPOTHESIS",
+      "reason": "No tight spatial counterpart was found near the frozen EDEM center and the light-travel timing excludes kpc-scale neighbors as decade-scale Earth-flash reflectors."
+    },
+    {
+      "id": "DEEP_TIME_ORION_VITRIFICATION_CAUSALITY",
+      "status": "REJECTED_FOR_OLDER_SITES",
+      "reason": "Chronology excludes present Orion Belt population causality for older impact-glass sites such as Libyan Desert Glass and Ries; younger sites remain calibration/geometry questions only."
+    },
+    {
+      "id": "SEMANTIC_NUMBER_AND_SYMBOL_OVERLAYS",
+      "status": "POST_PHYSICAL_GATE_ONLY",
+      "reason": "They can annotate an admitted physical candidate but cannot create one."
+    }
+  ],
+  "new_priority_order": [
+    "EA_TPHASE_NORMAL_FAULT_PRECURSOR_LANE",
+    "EA_TPHASE_HYDROTHERMAL_VENT_DISCOVERY_PRIOR",
+    "EA_OFF_AXIS_70KM_SEISMICITY_REPLICATED",
+    "H10N1_SECONDARY_1KM_MORPHOLOGY_WATCHLIST",
+    "EA_TPHASE_6843_VS_5943_PROVENANCE_GAP",
+    "EDEM_NEAREST_IR_SOURCE",
+    "KAMIL_AU_AG_MICRODOMAIN_BLIND_TEST",
+    "NGC1425_NGC1637_LEGACY_MORPHOLOGY_STRESS_TARGETS",
+    "LOVE_NEAREST_IR_SOURCE"
+  ],
+  "topa_second_pass_conclusion": "The trail becomes more interesting after removing the seductive parts. The highest-value nodes are those that predict a future observation, replicate across independent catalogs, or expose a resolvable data-provenance gap. No unknown-physics or nonhuman signal is admitted in this pass.",
+  "next_freeze_before_new_scoring": {
+    "name": "TOPA_REAL_INTEREST_THREE_LANE_PREREG_V1",
+    "lanes": [
+      "NORMAL_FAULT_PRECURSOR_INDEPENDENT_REPLICATION",
+      "VENTLESS_ASYMMETRIC_SEGMENT_PROSPECTIVE_RANKING",
+      "OFF_AXIS_70KM_SEISMICITY_NEW_CATALOG_REPLICATION"
+    ],
+    "rule": "Freeze event definitions, geographic windows, comparison populations, multiple-testing family and holdouts before retrieving/scoring the new validation data."
+  },
+  "claim_ceiling": "RETROSPECTIVE_HIGH_INFORMATION_NODE_SELECTION_ONLY__NO_EARTHQUAKE_PREDICTION_CLAIM__NO_UNDISCOVERED_VENT_CLAIM__NO_UNKNOWN_PHYSICS__NO_ARTIFICIAL_OR_NONHUMAN_ORIGIN"
+}
