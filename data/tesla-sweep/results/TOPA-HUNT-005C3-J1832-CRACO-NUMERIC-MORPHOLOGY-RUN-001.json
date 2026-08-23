@@ -1,0 +1,218 @@
+{
+  "schema": "JANUS_TOPA_J1832_CRACO_NUMERIC_MORPHOLOGY_RUN",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C3",
+  "parent_prereg": "data/tesla-sweep/results/TOPA-HUNT-005C3-J1832-CRACO-NUMERIC-MORPHOLOGY-PREREG-2026-08-23-v1.0.json",
+  "status": "PASS_SAFE_NUMERIC_CRACO_MORPHOLOGY_CHARACTERIZATION__CONTROL_COMPARISON_PENDING",
+  "security": {
+    "allow_pickle": false,
+    "external_pickle_execution": false
+  },
+  "computed_md5": "41fca6b1dccc464e65e948ed6c82695e",
+  "md5_match": true,
+  "array": {
+    "shape": [
+      49152,
+      288
+    ],
+    "dtype": "float32",
+    "time_resolution_ms": 13.824,
+    "frequency_resolution_MHz": 1.0,
+    "reference_center_frequency_MHz": 887.49074074,
+    "window_duration_seconds": 679.4772479999999,
+    "nominal_bandwidth_MHz": 288.0,
+    "low_variance_channel_fraction": 0.0
+  },
+  "DM_replay": {
+    "orientation_results": {
+      "ascending": {
+        "best_coarse_dm": 460.0,
+        "best_coarse_score": 61.89989546568719,
+        "best_dm": 451.0,
+        "best_score": 62.28845179654009,
+        "score_dm_430": 60.72115916619485,
+        "score_dm_458": 61.89742703651448,
+        "coarse_top5": [
+          [
+            460.0,
+            61.89989546568719
+          ],
+          [
+            450.0,
+            61.74690953741617
+          ],
+          [
+            470.0,
+            61.52531468286228
+          ],
+          [
+            490.0,
+            61.117522754161975
+          ],
+          [
+            480.0,
+            60.784213137678954
+          ]
+        ],
+        "fine_top10": [
+          [
+            451.0,
+            62.28845179654009
+          ],
+          [
+            464.0,
+            62.286375510837814
+          ],
+          [
+            461.0,
+            62.065052684006645
+          ],
+          [
+            452.0,
+            62.057601719258095
+          ],
+          [
+            462.0,
+            61.915469341116605
+          ],
+          [
+            463.0,
+            61.915469341116605
+          ],
+          [
+            460.0,
+            61.89989546568719
+          ],
+          [
+            458.0,
+            61.89742703651448
+          ],
+          [
+            467.0,
+            61.7645439814371
+          ],
+          [
+            450.0,
+            61.74690953741617
+          ]
+        ]
+      },
+      "descending": {
+        "best_coarse_dm": 20.0,
+        "best_coarse_score": 40.760676314141804,
+        "best_dm": 21.0,
+        "best_score": 41.36612425437995,
+        "score_dm_430": 31.01353993954283,
+        "score_dm_458": 30.839570259369502,
+        "coarse_top5": [
+          [
+            20.0,
+            40.760676314141804
+          ],
+          [
+            0.0,
+            40.47201973565825
+          ],
+          [
+            10.0,
+            40.204250629336826
+          ],
+          [
+            40.0,
+            39.8682625337963
+          ],
+          [
+            30.0,
+            39.85942092880913
+          ]
+        ],
+        "fine_top10": [
+          [
+            21.0,
+            41.36612425437995
+          ],
+          [
+            23.0,
+            41.296708947850135
+          ],
+          [
+            22.0,
+            41.27989037153456
+          ],
+          [
+            7.0,
+            41.05826169450516
+          ],
+          [
+            6.0,
+            40.94075386726378
+          ],
+          [
+            18.0,
+            40.84950923704584
+          ],
+          [
+            3.0,
+            40.80774968179991
+          ],
+          [
+            20.0,
+            40.760676314141804
+          ],
+          [
+            17.0,
+            40.717425875751026
+          ],
+          [
+            15.0,
+            40.68617705696495
+          ]
+        ]
+      }
+    },
+    "best_frequency_orientation": "ascending",
+    "best_DM_pc_cm3": 451.0,
+    "published_discovery_dynamic_spectrum_DM_pc_cm3": "458 +/- 14",
+    "public_timing_model_DM_pc_cm3": 430.0,
+    "important_boundary": "Grid-peak DM is a replay diagnostic; no uncertainty interval is claimed from score width alone."
+  },
+  "morphology": {
+    "dedispersed_broadband_peak_robust_z": 49.882981305608354,
+    "peak_time_seconds_from_array_start": 462.979584,
+    "FWHM_seconds": 1.5482879999999999,
+    "FWHM_fraction_of_filterbank_window": 0.0022786458333333335,
+    "onpulse_frequency_channel_occupancy_fraction_z_gt_3": 1.0,
+    "spectral_patchiness_coefficient": 0.09880677153677718,
+    "prominent_time_subpeaks_z_gt_5_separated_by_at_least_1s": 23,
+    "prominent_subpeak_times_seconds": [
+      425.12947199999996,
+      430.576128,
+      434.0736,
+      435.704832,
+      439.50643199999996,
+      441.52473599999996,
+      442.547712,
+      447.71788799999996,
+      449.40441599999997,
+      451.325952,
+      453.71750399999996,
+      456.74496,
+      460.601856,
+      462.979584,
+      465.85497599999997,
+      466.988544,
+      468.951552,
+      472.06195199999996,
+      477.453312,
+      480.24575999999996,
+      482.775552,
+      487.296,
+      492.53529599999996
+    ],
+    "classification_ceiling": "NUMERIC_ASTROPHYSICAL_MORPHOLOGY_CHARACTERIZED__CONTROL_COMPARISON_PENDING"
+  },
+  "raw_telescope_voltage_processing_completed": false,
+  "author_exported_filterbank_processing_completed": true,
+  "cross_telescope_morphology_replication_completed": false,
+  "next_gate": "TOPA-HUNT-005C4-LPT-FRB-PULSAR-RFI-CONTROL-MATRIX"
+}
