@@ -1,9 +1,9 @@
 {
   "schema": "JANUS_TOPA_HUNT_STATE_POINTER",
-  "version": "1.0",
+  "version": "1.1",
   "updated_local": "2026-08-23T22:08:00+03:00",
   "branch": "janus-tesla-sweep",
-  "status": "HUNT_ACTIVE",
+  "status": "HUNT_ACTIVE__LEAD_TARGET_PERIOD_REPLAY_PASSED",
   "latest_hunt": {
     "id": "TOPA-TESLA-HUNT-005",
     "focus": "long-period coherent radio transients with multimodal physical evidence",
@@ -11,6 +11,15 @@
     "lead_target": "ASKAP_J1832_MINUS_0911",
     "lead_class": "HIGH_INTEREST_KNOWN_ASTROPHYSICAL_SOURCE__EMISSION_MECHANISM_UNRESOLVED"
   },
+  "completed_replays": [
+    {
+      "id": "TOPA-TESLA-HUNT-005A",
+      "gate": "J1832_PUBLIC_TOA_PERIOD_REPLAY",
+      "result": "PASS_PUBLIC_TOA_CADENCE_REPLAY",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005A-J1832-PUBLIC-TOA-CADENCE-REPLAY-2026-08-23-v1.0.json",
+      "summary": "Dense ASKAP and ATCA TOA sequences independently recover approximately 44.23-minute recurrence, within 0.1 percent of the public fitted 44.2706-minute ephemeris."
+    }
+  ],
   "lead_target_reasons": [
     "44.2-minute radio periodicity is independently reproduced across multiple radio facilities",
     "X-ray pulses share the same period and are phase-locked with the radio behavior",
@@ -19,7 +28,6 @@
     "simple terrestrial RFI cannot account for a localized phase-locked X-ray counterpart"
   ],
   "active_replay_queue": [
-    "J1832_PUBLIC_TOA_PERIOD_REPLAY",
     "J1832_RADIO_XRAY_PHASE_REPLAY",
     "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLAY",
     "J1832_BINARY_VS_ROTATION_MODEL_DISCRIMINATION",
