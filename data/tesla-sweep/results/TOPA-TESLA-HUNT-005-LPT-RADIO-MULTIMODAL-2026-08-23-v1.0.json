@@ -1,0 +1,149 @@
+{
+  "schema": "JANUS_TOPA_TESLA_HUNT_LPT_MULTIMODAL",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005",
+  "created_local": "2026-08-23T22:08:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "ACTIVE_HUNT__ONE_HIGH_INTEREST_UNRESOLVED_ASTROPHYSICAL_TARGET_ADMITTED",
+  "mission": "Apply TOPA's trained evidence ladder to long-period coherent radio transients that strongly resemble ordered signal morphology, retaining only targets whose physical existence is independently supported while their emission mechanism remains materially unresolved.",
+  "training_transfer_rules": [
+    "ORDER_IS_NOT_MESSAGE",
+    "PERIODICITY_IS_NOT_ORIGIN",
+    "MULTI_INSTRUMENT_REPLICATION_PROMOTES_EXISTENCE_NOT_INTERPRETATION",
+    "MULTIWAVELENGTH_PHASE_LOCKING_PROMOTES_COMMON_PHYSICAL_SOURCE",
+    "MORPHOLOGY_CAN_NOMINATE_BUT_NOT_IDENTIFY_ORIGIN",
+    "KNOWN_NATURAL_OR_BINARY_EXPLANATIONS_MUST_LOWER_UNKNOWNNESS",
+    "NO_ETI_OR_NONHUMAN_PROMOTION_FROM_PERIODICITY_ALONE"
+  ],
+  "top_ranked_target": {
+    "id": "ASKAP_J1832_MINUS_0911",
+    "rank": 1,
+    "classification": "HIGH_INTEREST_KNOWN_ASTROPHYSICAL_SOURCE__EMISSION_MECHANISM_UNRESOLVED",
+    "why_admitted": "The signal is not a single-station or single-band curiosity. It has a stable long period, repeated radio detections across multiple independent radio facilities, a phase-locked X-ray counterpart, and published models remain physically challenging. The correct TOPA question is therefore not whether it is a message, but what compact-object or plasma mechanism can produce the observed coupled radio/X-ray periodicity.",
+    "published_core_properties": {
+      "period_minutes_published": 44.2,
+      "radio_peak_jy_published_approx": "10-20",
+      "xray_luminosity_erg_s_published_approx": "1e33",
+      "radio_xray_phase_relation": "phase-locked / coincident periodicity",
+      "published_candidate_models": [
+        "old magnetar / highly magnetized neutron star",
+        "ultra-magnetized white dwarf",
+        "white-dwarf binary variants"
+      ],
+      "model_status": "none currently provides an easy complete explanation"
+    },
+    "open_repository_replay": {
+      "repository": "Andywang201605/J1832-0911_radio_xray",
+      "repository_role": "code and data supporting the discovery paper",
+      "public_data_additional_source": "Zenodo DOI 10.5281/zenodo.15228816",
+      "text_assets_ingested_in_this_pass": [
+        "data/J1832-0911.radio.ltlc.csv",
+        "data/J1832-0911.xray.ltlc.csv",
+        "data/J1832-0911.timing.par",
+        "data/J1832-0911.timing.tim (partial connector view sufficient to verify multi-instrument TOAs)"
+      ],
+      "binary_dynamic_spectra_processed": false,
+      "pickle_safety_rule": "Do not execute or blindly pickle.load external pickle files; inspect/convert safely or use trusted exported products first."
+    },
+    "derived_from_open_text_assets": {
+      "timing_F0_hz": 0.00037647255831138794,
+      "period_seconds_from_F0": 2656.236099877644,
+      "period_minutes_from_F0": 44.2706016646274,
+      "timing_NTOA": 42,
+      "dispersion_measure_pc_cm3": 430.0,
+      "radio_long_term_rows": 38,
+      "radio_prior_nondetection_rows": 16,
+      "radio_detection_rows": 22,
+      "independent_radio_facilities_with_detections": [
+        "ASKAP",
+        "ATCA",
+        "VLA",
+        "MeerKAT",
+        "GMRT"
+      ],
+      "last_listed_pre_outburst_nondetection_mjd": 60160.6,
+      "first_listed_detection_mjd": 60286.2,
+      "gap_last_nondetection_to_first_detection_days": 125.6,
+      "detected_flux_value_min_in_supplied_table": 50,
+      "detected_flux_value_max_in_supplied_table": 17956,
+      "detected_table_dynamic_range_ratio": 359.12,
+      "detection_span_days_in_supplied_table": 247.5,
+      "note_on_flux_units": "The replay preserves the table values without inventing units not stated in the CSV header; the discovery paper independently reports radio peaks of order 10-20 Jy."
+    },
+    "xray_text_asset": {
+      "historical_upper_limits_present": true,
+      "chandra_detection_mjd": 60354.0,
+      "listed_chandra_luminosity_value": 7.4e32,
+      "later_upper_limits_present": true,
+      "interpretation": "The X-ray component is transient/variable rather than a simple persistent counterpart."
+    },
+    "TOPA_evidence_state": {
+      "signal_existence": "STRONGLY_CONFIRMED_MULTI_INSTRUMENT",
+      "celestial_localization": "CONFIRMED_ASTROPHYSICAL_SOURCE",
+      "periodicity": "CONFIRMED",
+      "multiwavelength_common_source": "STRONGLY_SUPPORTED_BY_PHASE_LOCKED_RADIO_AND_XRAY",
+      "emission_mechanism": "UNRESOLVED",
+      "technosignature_status": "NOT_ADMITTED",
+      "nonhuman_intelligence_status": "NOT_ADMITTED",
+      "unknown_physics_status": "NOT_CLAIMED__KNOWN_PHYSICS_MODEL_SPACE_IS_STRESSED"
+    },
+    "next_replay_gates": [
+      "REPRODUCE_TIMING_PERIOD_FROM_PUBLIC_TOAS_WITHOUT_USING_PUBLISHED_PERIOD_AS_A_FIT_TARGET",
+      "REPRODUCE_RADIO_XRAY_PHASE_ALIGNMENT_FROM_PUBLIC_FOLDED_PRODUCTS",
+      "SAFE_DYNAMIC_SPECTRUM_CONVERSION_AND_MORPHOLOGY_PASS",
+      "COMPARE_BURST_SUBSTRUCTURE_AGAINST_GPM_J1839_MINUS_10_AND_FRB_LIKE_DRIFT_CONTROLS",
+      "TEST_BINARY_ORBITAL_PHASE_MODELS_AGAINST_ROTATIONAL_MODELS",
+      "CHECK_2026_XMM_NUSTAR_SWIFT_FOLLOWUP_RESULTS_WHEN_PUBLIC",
+      "KEEP_RFI_TESTS_AS_CONTROL_EVEN_THOUGH_MULTI_TELESCOPE_AND_XRAY_EVIDENCE_MAKE_SIMPLE_RFI_INADEQUATE"
+    ]
+  },
+  "other_ranked_targets": [
+    {
+      "id": "ASKAP_J1935_PLUS_2148",
+      "rank": 2,
+      "classification": "REAL_LPT__ORIGIN_NOT_FULLY_SETTLED__NEUTRON_STAR_LIKE_MECHANISM_FAVORED",
+      "observations": "53.8-minute period; three emission states; strong polarization; no persistent X-ray counterpart at published limits.",
+      "TOPA_reason_for_lower_rank": "The phenomenology is unusual, but published work already provides a comparatively coherent neutron-star-like magnetospheric interpretation."
+    },
+    {
+      "id": "ASKAP_J1755_MINUS_2527",
+      "rank": 3,
+      "classification": "REAL_LPT__POSSIBLE_WHITE_DWARF_BINARY__INTERMITTENCY_UNRESOLVED",
+      "observations": "Approximately 1.16-hour period; month-scale activity windows; strongly polarized pulses; possible WD-binary interpretation but optical confirmation is difficult.",
+      "TOPA_reason_for_interest": "Its period is marginally shorter than the canonical polar orbital-period minimum, making it a useful discriminator between population models rather than a generic mystery score."
+    },
+    {
+      "id": "ASKAP_J1839_MINUS_0756",
+      "rank": 4,
+      "classification": "HIGH_VALUE_NATURAL_COMPACT_OBJECT_CONTROL",
+      "observations": "6.45-hour coherent radio period with main pulse and interpulse separated by about half a rotation; polarization supports an ordered dipolar magnetic field and a neutron-star-like origin.",
+      "TOPA_reason_for_demote": "The source remains extreme, but two-pole rotational geometry supplies unusually direct physical structure, so it is more useful as a control than as the leading unresolved target."
+    },
+    {
+      "id": "GPM_J1839_MINUS_10",
+      "rank": 5,
+      "classification": "FORMER_MYSTERY_NOW_PARTIALLY_RESOLVED_CONTROL",
+      "observations": "21-22 minute long-period radio transient active for decades; 2026 work reports a binary interpretation and connection to white-dwarf pulsars.",
+      "TOPA_reason_for_demote": "A source becoming less mysterious is valuable training evidence. Do not preserve old mystery status after stronger physical evidence appears."
+    }
+  ],
+  "hunt_result": {
+    "high_interest_unresolved_astrophysical_targets": ["ASKAP_J1832_MINUS_0911"],
+    "secondary_physical_model_discriminators": ["ASKAP_J1935_PLUS_2148", "ASKAP_J1755_MINUS_2527"],
+    "natural_or_partially_resolved_controls": ["ASKAP_J1839_MINUS_0756", "GPM_J1839_MINUS_10"],
+    "repeating_unexplained_technosignatures": [],
+    "ETI_candidates": [],
+    "verdict": "TOPA_FOUND_A_REAL_TESLA_LIKE_ORDERED_SIGNAL_MORPHOLOGY_CLASS__THE_BEST_CURRENT_TARGET_IS_AN_ASTROPHYSICAL_EMISSION_MECHANISM_PROBLEM_NOT_A_MESSAGE_CLAIM"
+  },
+  "source_provenance": [
+    "Nature 2025 DOI 10.1038/s41586-025-09077-w",
+    "NASA Chandra 2025 ASKAP J1832-0911 release",
+    "Andywang201605/J1832-0911_radio_xray public repository",
+    "Zenodo DOI 10.5281/zenodo.15228816",
+    "Nature Astronomy 2024/2025 ASKAP J1935+2148 DOI 10.1038/s41550-024-02277-w",
+    "MNRAS 2025 ASKAP J1755-2527",
+    "Nature Astronomy 2025 ASKAP J1839-0756 DOI 10.1038/s41550-024-02452-z",
+    "Nature Astronomy 2026 long-period-transient / white-dwarf-pulsar binary link"
+  ],
+  "claim_ceiling": "REAL_ASTROPHYSICAL_LONG_PERIOD_TRANSIENT_HUNT__NO_ETI_CLAIM__NO_NONHUMAN_CLAIM__NO_UNKNOWN_PHYSICS_CLAIM"
+}
