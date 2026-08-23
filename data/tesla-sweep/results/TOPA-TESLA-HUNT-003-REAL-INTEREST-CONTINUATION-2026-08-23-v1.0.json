@@ -1,0 +1,103 @@
+{
+  "schema": "JANUS_TOPA_TESLA_HUNT_CONTINUATION",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-003",
+  "created_local": "2026-08-23T17:04:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "COMPLETE_WITH_ONE_MAJOR_SELF_CORRECTION_AND_NEW_HIGH_VALUE_CONTROLS",
+  "mission": "Continue rereading JANUS COSMOS with the TOPA falsification filter, explicitly searching for information that survives mundane explanations, exposes validation leakage, or supplies strong adversarial controls for signal interpretation.",
+  "topa_keep_first": "MLc4/MLc5 machine-family fingerprint remains first memory: orderly spacing plus matching drift can be engineered-family structure, not a message.",
+  "findings": [
+    {
+      "rank": 1,
+      "id": "HYDROTHERMAL_OUT_OF_TIME_DESIGN_SELF_CORRECTION",
+      "classification": "MAJOR_METHOD_REPAIR",
+      "observation": "The attractive 2023 Falkor EMARK and Hydra/Grappe Deux vent discoveries are approximately 23.47N and 24.96N, while the 2011-2015 autonomous hydrophone network used by the 2022 study covered approximately 20N to 10S. Therefore their segment-level 2011-2015 hydroacoustic event rate is not a clean validation variable. Separately, Koralovoe and Molodezhnoe at 13N were publicly announced on 2020-02-07, before the InterRidge v3.4 completion date of 2020-03-25, so they are not true future holdouts either.",
+      "why_topa_keeps_it": "This catches two forms of invisible leakage before scoring: sensor-domain mismatch and information-cutoff leakage.",
+      "action": "Use 2023 northern discoveries only for frozen spreading-style and possibly pre-discovery ISC-based validation; continue searching for a truly post-2020 discovery inside the hydrophone domain.",
+      "artifact": "data/tesla-sweep/results/TOPA-HUNT-002A-v1.1-HYDROTHERMAL-VALIDATION-COVERAGE-REPAIR-2026-08-23.json"
+    },
+    {
+      "rank": 2,
+      "id": "EA_AIRGUN_20_SECOND_CADENCE",
+      "classification": "KNOWN_ANTHROPOGENIC_PERIODIC_SIGNAL_CONTROL",
+      "observation": "The 2022 equatorial Atlantic paper shows 5-25 Hz arrivals spaced at approximately 20-second intervals across several hydrophones and identifies them as likely airgun shots from exploration activity on the west African margin.",
+      "why_topa_keeps_it": "This is exactly the sort of signal Tesla Sweep must learn: regular, repeated, multi-station, physically propagated and strongly message-like in timing, yet ordinary engineered activity.",
+      "action": "Add constant-cadence and long-train survey-source checks ahead of any number/message interpretation.",
+      "artifact": "data/tesla-sweep/results/TOPA-SIGNAL-CONTROL-20S-AIRGUN-CADENCE-2026-08-23-v1.0.json"
+    },
+    {
+      "rank": 3,
+      "id": "2023_FALKOR_OPEN_MULTISENSOR_GROUND_TRUTH_CORPUS",
+      "classification": "HIGH_VALUE_OPEN_PHYSICAL_BENCHMARK",
+      "observation": "MGDS now exposes raw and processed 2023 MBARI Mapping AUV products from Puy des Folles, EMARK/Falkor EMARK and Hydra/Grappe Deux: 400 kHz multibeam, acoustic backscatter, 1 m processed bathymetry, 0.5 m grids over three Puy des Folles chimney fields, navigation, CTD, sidescan, 1-6 kHz CHIRP sub-bottom data, mission notes and processing scripts.",
+      "why_topa_keeps_it": "Unlike semantic target hunting, this corpus contains known hydrothermal positives plus high-resolution physical sensor data and processing provenance. It can train/test morphology extraction and instrument-aware controls against real geology.",
+      "boundary": "It is not a clean 2011-2015 hydroacoustic event-rate holdout for sites north of 20N and must not be used to retune a predictor before validation.",
+      "next_gate": "Freeze a morphology benchmark task independent of vent prediction: compare known chimney/vent terrain against matched non-vent terrain using only preregistered physical features and source-specific instrument metadata.",
+      "source": "https://www.marine-geo.org/tools/files/32240"
+    },
+    {
+      "rank": 4,
+      "id": "OFF_AXIS_SEISMICITY_UNFAULTING_MUNDANE_CONTROL",
+      "classification": "NEW_CONVENTIONAL_MECHANISM_CONTROL",
+      "observation": "A 2024 Nature study reports reverse-faulting earthquake sequences approximately 15 km off-axis at the Mid-Atlantic and Carlsberg ridges and models them as ridge-flank lithosphere unbending plus magmatic-intrusion stress, with widespread reverse reactivation of normal faults ('unfaulting').",
+      "why_topa_keeps_it": "Our approximately 70 km west-of-axis 12-14N seismicity band remains a real cross-catalog geological feature, but the library of ordinary off-axis mechanisms is broader than ridge-jump or plate-boundary stress alone. Unfaulting must be included as an adversarial null even though its demonstrated distance scale is smaller.",
+      "boundary": "The 15 km mechanism is not asserted to explain the 70 km feature. It is a mandatory competing mechanism to test, not a solved attribution.",
+      "next_gate": "For the 70 km polygon, compare focal mechanisms, hypocentral depths, age/distance-from-axis, bathymetric fault fabric and magmatic-swarm timing against predictions of ridge-jump, diffuse plate-boundary deformation, off-axis magmatism and unfaulting models.",
+      "source": "DOI:10.1038/s41586-024-07247-w"
+    },
+    {
+      "rank": 5,
+      "id": "STARGATE_ABYDOS_CENTER_NEGATIVE_REWEIGHT",
+      "classification": "DEPRIORITIZE_SEMANTIC_GEOMETRY",
+      "observation": "The frozen Abydos exploratory sky coordinate has no catalogued infrared source within the preregistered 2 arcsec center radius. The nearest CatWISE source is about 8.54 arcsec away, and the independent Palomar candidate crossmatch has no candidate within 300 arcsec; nearest is about 332.4 arcsec. The raw unWISE exact-center attempt was inconclusive due service timeout, not positive evidence.",
+      "why_topa_keeps_it": "The negative center results prevent nearby sources from being promoted by semantic naming or geometry. This lane is low-information until an exact-center raw measurement becomes available.",
+      "action": "Deprioritize; preserve frozen coordinate and only retry exact-center raw imaging without recentering."
+    },
+    {
+      "rank": 6,
+      "id": "LOVE_EDEM_BISECTOR_SEAFLOOR_DIRECT_DATA_NEGATIVE_REWEIGHT",
+      "classification": "DEPRIORITIZE_FINE_MORPHOLOGY",
+      "observation": "At the frozen LOVE-EDEM bisector seafloor point, the later direct-data audit resolved GEBCO 2026 TID=40 (satellite-gravity prediction) and found no curated GMRT or NCEI multibeam track/swath within the frozen 25 km buffer in the current catalogs. The crust-age model is about 96.1 Ma and the point is normal oceanic crust in the current model.",
+      "why_topa_keeps_it": "This closes the temptation to infer fine artificial morphology from a gravity-predicted global bathymetry surface.",
+      "action": "No fine morphology scoring unless a direct academic/industry seismic or sonar line is recovered at the exact frozen point."
+    }
+  ],
+  "updated_signal_control_stack": [
+    "MLc4_MLc5_MATCHING_DRIFT_INTEGER_LIKE_SPACING_RFI_FAMILY",
+    "VLF_COUNTING_LIKE_BEACON",
+    "EA_AIRGUN_20_SECOND_CADENCE",
+    "LIGHTNING_WHISTLER",
+    "BLC1_RFI_FALSE_POSITIVE",
+    "3I_ATLAS_HIGH_VOLUME_RFI_NULL"
+  ],
+  "updated_real_interest_priority": [
+    "NORMAL_FAULT_PRECURSOR_INDEPENDENT_HOLDOUT",
+    "TRUE_POST_2020_IN_DOMAIN_HYDROTHERMAL_DISCOVERY_SEARCH",
+    "2023_NORTH_MAR_SPREADING_STYLE_OR_ISC_HOLDOUT_WITHOUT_HYDROACOUSTIC_LEAKAGE",
+    "OFF_AXIS_70KM_SEISMICITY_MECHANISM_DISCRIMINATION",
+    "H10N1_INDEPENDENT_PER_CRUISE_SURFACE_REPLICATION",
+    "EA_TPHASE_6843_VS_5943_PROVENANCE_RECOVERY",
+    "2023_FALKOR_MULTISENSOR_MORPHOLOGY_BENCHMARK"
+  ],
+  "what_was_not_promoted": [
+    "No unknown physical signal",
+    "No nonhuman communication",
+    "No earthquake prediction capability",
+    "No vent prediction result yet",
+    "No artificial seafloor morphology",
+    "No semantic Stargate/Abydos identity"
+  ],
+  "next_pass": {
+    "name": "TOPA-TESLA-HUNT-004",
+    "tasks": [
+      "Search post-2020 literature and expedition records for genuinely new hydrothermal fields inside approximately 20N-10S that were not public before 2020-03-25",
+      "Recover original 2022 Table S1 / Data Set S1 and freeze segment lookup before using any later vent labels",
+      "Build the 20-second airgun cadence into Tesla Sweep's machine-family control schema",
+      "Construct an off-axis seismicity mechanism matrix for the 70 km feature",
+      "Keep semantic/coordinate-only lanes below measured physical replication lanes"
+    ]
+  },
+  "topa_conclusion": "The hunt improved because TOPA rejected one of its own attractive validation ideas before scoring it. The genuinely useful discoveries in this pass are the correction itself, a new periodic anthropogenic control already embedded in the hydroacoustic corpus, and an open multisensor hydrothermal ground-truth dataset suitable for blinded physical-method testing.",
+  "claim_ceiling": "METHOD_AND_DATASET_DISCOVERY__NO_UNKNOWN_PHYSICS__NO_NONHUMAN_ORIGIN"
+}
