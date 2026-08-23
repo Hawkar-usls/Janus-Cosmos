@@ -1,0 +1,56 @@
+{
+  "schema": "JANUS_TOPA_SYNTHETIC_MORPHOLOGY_ENGINE_REPAIR",
+  "version": "1.1",
+  "training_id": "TOPA-TRAINING-GROUND-003B",
+  "created_local": "2026-08-23T21:49:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_failure": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-003A-SYNTHETIC-CONFOUNDER-ENGINE-QA-2026-08-23-v1.0.json",
+  "status": "PASS_SYNTHETIC_REPAIR__FIELD_GENERALIZATION_UNTESTED",
+  "repair": {
+    "name": "LINEATION_CONFOUNDER_PENALTY_V1_1",
+    "formula": "score_v1_1 = score_v1_0 - 2.0 * max(robust_z(orientation_anisotropy), 0)",
+    "reason": "Strong coherent lineation is a known ordinary-geology confounder at Puy des Folles. It should reduce a chimney-like morphology rank, while the tile remains visible as a confounder rather than being discarded.",
+    "parameter_origin": "Selected during synthetic adversarial QA before numeric FKt230303 grid scoring. It is therefore frozen for the first field-grid pass and may not be retuned after field labels are scored."
+  },
+  "same_fixture_replay": {
+    "seed": 230303,
+    "candidate_tiles": 225,
+    "positive_chimney_like_nearest_tile": {
+      "rank": 1,
+      "of": 225,
+      "center_px": [96, 96],
+      "score_v1_1": 3.018763169650232,
+      "orientation_anisotropy": 0.20424640027130606
+    },
+    "fault_graben_nearest_tile": {
+      "rank": 33,
+      "of": 225,
+      "center_px": [320, 256],
+      "score_v1_1": 0.3248970366794719,
+      "orientation_anisotropy": 0.9159290558098523
+    },
+    "pit_field_nearest_tile": {
+      "rank": 8,
+      "of": 225,
+      "center_px": [128, 384],
+      "score_v1_1": 1.0046768845570009,
+      "orientation_anisotropy": 0.05346120546281198
+    },
+    "top20_lineation_flagged_tiles": 0
+  },
+  "TOPA_interpretation": [
+    "The failure mode was reduced without using real FKt230303 numeric labels.",
+    "The pit field moved upward and remains a strong adversarial morphology family; this is desirable because the engine must expose rather than hide remaining false positives.",
+    "Passing this synthetic repair is not evidence of real-world specificity. Real bathymetry may contain lineated vents, non-lineated scarps, lava knobs, acquisition artifacts and scale effects absent from the fixture."
+  ],
+  "frozen_first_field_pass": {
+    "metric_family": "GENERIC_MORPHOLOGY_V1_1",
+    "tile_scales": "must be converted from physical metres when grid spacing metadata are available; do not silently treat pixels as metres",
+    "lineation_penalty": 2.0,
+    "classification_ceiling": "MORPHOLOGICAL_CANDIDATE_ONLY",
+    "no_post_label_retuning": true,
+    "matched_controls_required": true
+  },
+  "next_gate": "FKT230303_LABEL_BLIND_NUMERIC_BATHYMETRY_BENCHMARK_V1_1",
+  "claim_ceiling": "SYNTHETIC_REPAIR_ONLY__NO_FIELD_SENSITIVITY__NO_FIELD_SPECIFICITY__NO_NEW_VENT_DISCOVERY"
+}
