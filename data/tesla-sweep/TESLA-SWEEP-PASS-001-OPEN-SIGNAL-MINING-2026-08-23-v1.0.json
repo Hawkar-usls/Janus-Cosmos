@@ -1,0 +1,123 @@
+{
+  "schema": "JANUS_TESLA_SWEEP_PASS",
+  "version": "1.0",
+  "pass_id": "TS-PASS-001",
+  "run_utc": "2026-08-23T13:13:00Z",
+  "branch": "janus-tesla-sweep",
+  "mode": "OPEN_SOURCE_METADATA_LITERATURE_PROVENANCE_PASS",
+  "raw_waveform_processing_completed": false,
+  "status": "COMPLETE_WITH_ESCALATIONS",
+  "scientific_boundary": "This pass ranks and falsifies signal cases from published/open metadata. It does not claim raw-sample verification. Frequency allocation membership raises an RFI prior but does not identify a source by itself.",
+  "findings": [
+    {
+      "id": "TS-FIND-001",
+      "title": "MLc4 / MLc5 common-interferer fingerprint",
+      "interest": "HIGH_AS_ADVERSARIAL_RFI_CONTROL",
+      "observations": {
+        "target": "HIP 54677",
+        "mlc4_freq_mhz": 1372.987594,
+        "mlc5_freq_mhz": 1376.988694,
+        "both_reported_drift_hz_s": -0.11,
+        "frequency_spacing_mhz": 4.0011,
+        "residual_from_exact_4_mhz_hz": 1100,
+        "time_separation_seconds": 724.896
+      },
+      "independent_check": "UCLA reanalysis reports MLc4 in an OFF scan and identifies it as RFI; MLc5 has weaker OFF evidence but closely matches MLc4 morphology, and the nearly exact 4 MHz spacing suggests a common interferer.",
+      "classification": "RFI_CONTROL_PAIR",
+      "lesson": "Same-target + same-drift + nearly integer frequency spacing can be a machine-family fingerprint rather than independent celestial evidence."
+    },
+    {
+      "id": "TS-FIND-002",
+      "title": "All eight Ma et al. top signals fall inside known human-active spectrum allocations",
+      "interest": "HIGH_RFI_PRIOR_NOT_SOURCE_PROOF",
+      "mapping": [
+        {"ids": ["MLc1"], "band_mhz": "1164-1215", "activity": "RNSS/GNSS and aeronautical radionavigation"},
+        {"ids": ["MLc2"], "band_mhz": "1300-1350", "activity": "radiolocation and aeronautical radionavigation"},
+        {"ids": ["MLc3", "MLc4", "MLc5"], "band_mhz": "1350-1390", "activity": "fixed/mobile/radiolocation"},
+        {"ids": ["MLc6", "MLc7"], "band_mhz": "1435-1525", "activity": "aeronautical telemetry and telecommand"},
+        {"ids": ["MLc8"], "band_mhz": "1710-1755", "activity": "AWS/mobile and federal fixed/mobile uses"}
+      ],
+      "classification": "RFI_PRIOR_HIGH",
+      "lesson": "Band occupancy is a prior only; OFF-source, repeatability and cross-target recurrence remain decisive."
+    },
+    {
+      "id": "TS-FIND-003",
+      "title": "ON-strong/OFF-weak appearance is not sufficient",
+      "interest": "HIGH_METHOD_REPAIR",
+      "observations": "A large GBT archive search found examples such as HIP 99572 at 1498.44515 MHz that look isolated and are strong in ON / weak in OFF, yet similar signals recur within 10 kHz in several unrelated stars with similar drift; the study ultimately attributed all visually inspected candidates to RFI.",
+      "classification": "ADVERSARIAL_FALSE_POSITIVE_FAMILY",
+      "lesson": "TESLA SWEEP must add cross-target recurrence and morphology-family matching, not only cadence ON/OFF gating."
+    },
+    {
+      "id": "TS-FIND-004",
+      "title": "Number-like VLF patterns have a modern terrestrial control",
+      "interest": "HIGH_FOR_TESLA_NUMBER_GATE",
+      "observations": "Stanford AWESOME educational data describe lightning atmospherics, lightning-generated whistlers, and a high-pitched VLF navigation-beacon pattern heard as 1,2,3...1,2,3... from Russian transmitters.",
+      "classification": "MODERN_NEGATIVE_CONTROL",
+      "historical_firewall": "This is NOT proposed as the source of Tesla's 1899 observation; the modern transmitters did not exist then. It demonstrates only that simple counting-like morphology is not unique to extraterrestrial or intelligent non-human sources.",
+      "lesson": "The Tesla Number Gate must compare candidate timing against natural impulsive propagation and man-made beacon cadence controls."
+    },
+    {
+      "id": "TS-FIND-005",
+      "title": "3I/ATLAS is a current high-volume adversarial control",
+      "interest": "HIGH_RECENT_CONTROL",
+      "observations": "SETI Institute ATA observations covered 1-9 GHz for more than seven hours; about 74 million initial narrowband detections were reduced to about 200 candidates and all were traced to terrestrial or Earth-orbiting technology.",
+      "classification": "KNOWN_NULL_WITH_MASSIVE_RFI_LOAD",
+      "lesson": "Use the public 3I/ATLAS products to test whether TESLA SWEEP can preserve moving-target sensitivity while rejecting huge RFI populations."
+    }
+  ],
+  "first_metadata_engine_result": {
+    "input": "data/tesla-sweep/ma2023_top8.csv",
+    "engine": "workspace/tesla_sweep/tesla_sweep.py",
+    "rows": 8,
+    "rows_in_known_human_active_bands": 8,
+    "fingerprint_pair": {
+      "a": "MLc4",
+      "b": "MLc5",
+      "target": "HIP54677",
+      "frequency_spacing_mhz": 4.0011,
+      "integer_spacing_residual_hz": 1100,
+      "time_separation_s": 724.896,
+      "same_drift_gate": true,
+      "integer_spacing_gate": true
+    }
+  },
+  "source_provenance": [
+    "https://www.nature.com/articles/s41550-022-01872-z",
+    "https://github.com/PetchMa/ML_GBT_SETI/tree/4096_pipeline/data_archive",
+    "https://iopscience.iop.org/article/10.3847/1538-3881/acfda4",
+    "https://arxiv.org/abs/2412.05786",
+    "https://solar-center.stanford.edu/SID/AWESOME/",
+    "https://www.ntia.gov/files/ntia/publications/compendium/1164.00-1215.00_01MAY15.pdf",
+    "https://redbook.ntia.gov/view/4-17",
+    "https://www.ntia.gov/files/ntia/publications/compendium/1435.00-1525.00_01MAY15.pdf",
+    "https://www.ntia.gov/report/2024/2023-commercial-spectrum-enhancement-act-csea-report/part-i-1710-1755-mhz-band-aws-1",
+    "https://www.seti.org/news/seti-institute-looks-for-signs-of-technology-in-interstellar-visitor-3iatlas/",
+    "https://breakthroughlisten.physics.ox.ac.uk/articles/breakthrough-listen-observations-interstellar-object-3iatlas"
+  ],
+  "next_raw_data_queue": [
+    {
+      "priority": 1,
+      "target": "Ma 2023 top-8 pickle",
+      "artifact": "PetchMa/ML_GBT_SETI data_archive/top_8_data.pkl",
+      "goal": "Replay candidate morphology and cadence directly from the published candidate arrays."
+    },
+    {
+      "priority": 2,
+      "target": "VLF lightning / whistler / beacon controls",
+      "goal": "Build temporal-structure controls for Tesla Number Gate from open VLF data."
+    },
+    {
+      "priority": 3,
+      "target": "3I/ATLAS public radio products",
+      "goal": "Adversarial moving-target replay against a very large known-RFI population."
+    },
+    {
+      "priority": 4,
+      "target": "Blind Breakthrough Listen fields",
+      "goal": "Freeze a holdout before tuning Tesla Sweep scoring thresholds."
+    }
+  ],
+  "current_verdict": "NO_UNEXPLAINED_SIGNAL_ADMITTED_YET",
+  "escalation_rule": "Only signals surviving OFF-source, cross-target recurrence, known-band/RFI, repeatability and independent-instrument gates may advance to REPEATING_UNEXPLAINED or higher."
+}
