@@ -1,0 +1,82 @@
+{
+  "schema": "JANUS_TOPA_POST2020_HYDROTHERMAL_VALIDATION_LEAD",
+  "version": "1.0",
+  "created_local": "2026-08-23T16:49:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "HIGH_INTEREST_VALIDATION_LEAD__NOT_YET_SCORED",
+  "parent": "data/tesla-sweep/results/TOPA-TESLA-HUNT-002-RETROSPECTIVE-HIGH-INFORMATION-NODES-2026-08-23-v1.0.json",
+  "question": "Can the 2022 hydroacoustic-seismicity plus spreading-style relation, frozen using a 2020 hydrothermal-vent inventory, prospectively rank hydrothermal systems that were confirmed/discovered later?",
+  "why_this_is_special": "The source study used Beaulieu and Szafranski 2020 vent data. A 2023 expedition subsequently discovered/confirmed three active hydrothermal vent fields between about 20 and 25 N on the Mid-Atlantic Ridge. This creates a natural out-of-time validation opportunity that was not available to the 2022 analysis.",
+  "frozen_background_before_validation_scoring": {
+    "source_study": "Parnell-Turner, Smith & Dziak 2022, DOI 10.1029/2022JB024008",
+    "source_vent_inventory_cutoff": "InterRidge Global Database of Active Submarine Hydrothermal Vent Fields v3.4, Beaulieu & Szafranski 2020",
+    "reported_prior": {
+      "all_known_vents_on_asymmetric_segments_fraction": 0.74,
+      "active_confirmed_vents_on_asymmetric_segments": "8 of 10",
+      "mean_vent_rate_per_100km_asymmetric": 0.97,
+      "mean_vent_rate_per_100km_symmetric": 0.48,
+      "hydroacoustic_event_rate_mean_asymmetric_events_per_year_per_km": 0.224,
+      "hydroacoustic_event_rate_mean_symmetric_events_per_year_per_km": 0.094
+    },
+    "source_segment_assets": [
+      "2022JB024008-sup-0002-Table SI-S01.xlsx",
+      "2022JB024008-sup-0003-Data Set SI-S01.zip"
+    ]
+  },
+  "post_cutoff_targets": [
+    {
+      "id": "PUY_DES_FOLLES_ACTIVE_2023",
+      "approx_lat": 20.5083,
+      "approx_lon": -45.6417,
+      "setting": "ON_AXIS_BASALTIC_VOLCANIC_STRUCTURE",
+      "2023_result": "Five active high-temperature black-smoker sites were documented across the summit area; prior work had identified inactive sulfide deposits, so this is not a clean previously-unknown-location test.",
+      "validation_role": "ACTIVITY_STATUS_UPDATE_CONTROL__NOT_CLEAN_NEW_LOCATION"
+    },
+    {
+      "id": "FALKOR_EMARK_2023",
+      "approx_lat": 23.4735,
+      "approx_lon": -44.9866,
+      "setting": "OFF_AXIS_NEAR_KANE_FRACTURE_ZONE_OCEANIC_CORE_COMPLEX_DETACHMENT_SETTING",
+      "2023_result": "Active black smokers were found near the SE base of the massif, about 7 km west of the MAR axis; reported temperatures reached about 338 C.",
+      "validation_role": "CANDIDATE_OUT_OF_TIME_NEW_ACTIVE_FIELD"
+    },
+    {
+      "id": "HYDRA_GRAPPE_DEUX_2023",
+      "approx_lat": 24.9598,
+      "approx_lon": -45.5749,
+      "setting": "NON_TRANSFORM_OFFSET_OCEANIC_CORE_COMPLEX_ULTRAMAFIC_DETACHMENT_SETTING",
+      "2023_result": "A vigorously venting high-temperature system was discovered; later descriptions place Hydra on the Grappe Deux non-transform offset and report ultramafic/detachment context.",
+      "validation_role": "CANDIDATE_OUT_OF_TIME_NEW_ACTIVE_FIELD"
+    }
+  ],
+  "pre_scoring_rules": [
+    "DO_NOT_USE_2023_VENT_LOCATIONS_TO_CHANGE_2022_SEGMENT_BOUNDARIES",
+    "DO_NOT_RECLASSIFY_SPREADING_STYLE_AFTER_SEEING_THE_NEW_VENTS",
+    "RECOVER_THE_ORIGINAL_2022_TABLE_S1_AND_DATA_SET_S1_FIRST",
+    "FOR_EACH_2023_FIELD_IDENTIFY_THE_PREEXISTING_2022_SEGMENT_AND_ITS_FROZEN_SYMMETRIC_ASYMMETRIC_UNASSIGNED_LABEL",
+    "RECOVER_THE_2011_2015_HYDROACOUSTIC_EVENT_RATE_FOR_THAT_SEGMENT_USING_THE_ORIGINAL_RULE",
+    "SEPARATE_PREVIOUSLY_KNOWN_INACTIVE_OR_INFERRED_LOCATIONS_FROM_TRULY_NEW_LOCATIONS",
+    "COMPARE_AGAINST_ALL_ELIGIBLE_PRE2020_VENTLESS_SEGMENTS__NOT_ONLY_THE_SUCCESSFUL_2023_SITES",
+    "FREEZE_RANK_METRIC_AND_TIE_HANDLING_BEFORE_SCORING",
+    "NO_CLAIM_OF_PREDICTION_IF_THE_2023_FIELDS_WERE_ALREADY_IN_THE_2020_INVENTORY_AS_VENT_LOCATIONS"
+  ],
+  "proposed_blind_rank_metric": {
+    "purpose": "Rank pre-2020 ventless segments without using post-2020 labels.",
+    "components": [
+      "FROZEN_2022_SPREADING_STYLE_PRIOR",
+      "FROZEN_2011_2015_NORMALIZED_HYDROACOUSTIC_EVENT_RATE",
+      "DISTANCE_FROM_SEGMENT_EDGE_OR_TRANSFORM_AS_PREDECLARED_COVARIATE_ONLY_IF_PRESENT_IN_ORIGINAL_ASSETS"
+    ],
+    "forbidden_components": [
+      "2023_AUV_BATHYMETRY",
+      "2023_PLUME_CHEMISTRY",
+      "2023_ROV_VISUALS",
+      "POST2020_VENT_LABEL",
+      "MANUAL_SCORE_BONUS_FOR_EMARK_OR_HYDRA"
+    ]
+  },
+  "success_gate": "Call this an out-of-time support only if genuinely pre-2020-ventless 2023 discoveries rank materially above the full eligible ventless-segment control population under a metric frozen before looking up their ranks.",
+  "failure_gate": "If the new fields rank ordinary/low, or were already represented as vent locations in the 2020 inventory, record the result as negative or non-independent and do not rescue the hypothesis by retuning the score.",
+  "current_topa_verdict": "THIS_IS_A_REAL_PROSPECTIVE_VALIDATION_OPPORTUNITY__BUT_THE_CRITICAL_2022_SEGMENT_TABLE_HAS_NOT_YET_BEEN_REPLAYED_AGAINST_THE_2023_FIELDS",
+  "claim_ceiling": "VALIDATION_DESIGN_ONLY__NO_PREDICTED_VENT_CLAIM_YET__NO_UNKNOWN_PHYSICS"
+}
