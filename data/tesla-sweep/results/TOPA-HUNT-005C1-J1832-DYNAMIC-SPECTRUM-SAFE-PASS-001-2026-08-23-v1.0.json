@@ -1,0 +1,32 @@
+{
+  "schema": "JANUS_TOPA_J1832_SAFE_DYNAMIC_SPECTRUM_PASS",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C1",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_prereg": "data/tesla-sweep/results/TOPA-HUNT-005C-J1832-SAFE-DYNAMIC-SPECTRUM-PREREG-2026-08-23-v1.0.json",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "BLOCKED_NUMERIC_ARRAY_REPLAY__PUBLIC_PRODUCTS_IDENTIFIED__UNSAFE_PICKLE_EXECUTION_REFUSED",
+  "raw_dynamic_spectrum_processing_completed": false,
+  "safe_numeric_array_extracted": false,
+  "what_was_verified": [
+    "The supporting public repository exposes multiple ASKAP J1832 dynamic-spectrum pickle files spanning approximately 1.3 MB to tens of MB.",
+    "The authors provide vis_ds.py and burst.py for loading/folding dynamic spectra and notebooks for the discovery plot, folded polarization, and simultaneous wide-frequency analysis.",
+    "The authors point to primary ASKAP, GMRT and MeerKAT archives for raw data.",
+    "The current connected GitHub path exposes repository metadata/text but does not provide a trusted non-executable numeric conversion path inside this pass."
+  ],
+  "TOPA_action": "REFUSE_TO_EXECUTE_EXTERNAL_PICKLE_AND_PRESERVE_GATE_AS_BLOCKED_RATHER_THAN_PRETEND_MORPHOLOGY_WAS_MEASURED",
+  "why_this_is_a_training_success": "TOPA learned that eagerness to inspect an interesting target is itself a source of methodological risk. A blocked gate with preserved provenance is preferable to unsafe execution or a visual-only morphology claim mislabeled as numeric replay.",
+  "allowed_next_routes": [
+    "retrieve author-exported safe numeric array or trusted Zenodo representation",
+    "retrieve primary-archive raw telescope product and rebuild the dynamic spectrum independently",
+    "materialize pickle bytes in an isolated environment and audit pickle opcodes/globals before any conversion, without importing arbitrary globals",
+    "use rendered products only as calibration and keep them explicitly separate from numeric replay"
+  ],
+  "frozen_feature_family_unchanged": true,
+  "posthoc_threshold_changes": false,
+  "current_morphology_classification": "NOT_SCORED",
+  "next_gate": "SAFE_ARRAY_ACQUISITION_OR_PRIMARY_ARCHIVE_RECONSTRUCTION",
+  "parallel_gate": "J1832_BINARY_VS_ROTATION_DISCRIMINATION_PREREG",
+  "claim_ceiling": "ACQUISITION_SAFETY_RESULT_ONLY__NO_NUMERIC_MORPHOLOGY__NO_MESSAGE_OR_ORIGIN_CLAIM"
+}
