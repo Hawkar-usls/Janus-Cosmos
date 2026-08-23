@@ -1,77 +1,88 @@
 {
   "schema": "JANUS_TOPA_HUNT_STATE_POINTER",
-  "version": "1.3",
+  "version": "1.4",
   "updated_local": "2026-08-23T22:19:00+03:00",
   "branch": "janus-tesla-sweep",
-  "status": "HUNT_ACTIVE__PHASE_GATE_PASSED__SAFE_CRACO_NPY_ROUTE_FOUND_AND_ARMED",
+  "status": "HUNT_ACTIVE__J1832_NATURAL_ORIGIN_NARROWED__EMISSION_MECHANISM_REMAINS_OPEN",
   "latest_hunt": {
     "id": "TOPA-TESLA-HUNT-005",
     "focus": "long-period coherent radio transients with multimodal physical evidence",
-    "receipt": "data/tesla-sweep/results/TOPA-TESLA-HUNT-005-LPT-RADIO-MULTIMODAL-2026-08-23-v1.0.json",
-    "lead_target": "ASKAP_J1832_MINUS_0911",
-    "lead_class": "HIGH_INTEREST_KNOWN_ASTROPHYSICAL_SOURCE__EMISSION_MECHANISM_UNRESOLVED"
+    "lead_target": "ASKAP_DART_J1832_MINUS_0911",
+    "lead_class_before_latest_evidence": "HIGH_INTEREST_KNOWN_ASTROPHYSICAL_SOURCE__EMISSION_MECHANISM_UNRESOLVED",
+    "lead_class_now": "YOUNG_NEUTRON_STAR_ORIGIN_FAVORED__ULTRALONG_COHERENT_RADIO_XRAY_EMISSION_MECHANISM_UNRESOLVED"
   },
   "completed_replays": [
     {
       "id": "TOPA-TESLA-HUNT-005A",
-      "gate": "J1832_PUBLIC_TOA_PERIOD_REPLAY",
-      "result": "PASS_PUBLIC_TOA_CADENCE_REPLAY",
+      "gate": "PUBLIC_TOA_PERIOD_REPLAY",
+      "result": "PASS",
       "receipt": "data/tesla-sweep/results/TOPA-HUNT-005A-J1832-PUBLIC-TOA-CADENCE-REPLAY-2026-08-23-v1.0.json"
     },
     {
       "id": "TOPA-TESLA-HUNT-005B",
-      "gate": "J1832_RADIO_XRAY_PHASE_REPLAY",
-      "result": "PASS_PUBLISHED_NOTEBOOK_PHASE_METHOD_AND_OUTPUT_CONCORDANCE__INDEPENDENT_PROFILE_REFIT_PENDING",
+      "gate": "RADIO_XRAY_PHASE_REPLAY",
+      "result": "PASS_PUBLISHED_NOTEBOOK_METHOD_CONCORDANCE__RAW_REFIT_PENDING",
       "receipt": "data/tesla-sweep/results/TOPA-HUNT-005B-J1832-RADIO-XRAY-PHASE-REPLAY-2026-08-23-v1.0.json",
-      "summary": "Cross-correlation and Gaussian pulse-center estimators both give a relative radio-Xray offset of about five percent of the 44.2706-minute cycle, roughly 135-146 seconds; internal agreement is not independent replication."
+      "summary": "Two published folded-product estimators agree on a relative offset of about 0.05 cycle, roughly 135-146 seconds."
     },
     {
       "id": "TOPA-TESLA-HUNT-005C1",
-      "gate": "J1832_SAFE_DYNAMIC_SPECTRUM_FIRST_ROUTE",
-      "result": "BLOCKED_NUMERIC_ARRAY_REPLAY__UNSAFE_PICKLE_EXECUTION_REFUSED",
+      "gate": "FIRST_DYNAMIC_SPECTRUM_ROUTE",
+      "result": "BLOCKED_UNSAFE_PICKLE_ROUTE_REFUSED",
       "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C1-J1832-DYNAMIC-SPECTRUM-SAFE-PASS-001-2026-08-23-v1.0.json"
     },
     {
       "id": "TOPA-TESLA-HUNT-005C2",
-      "gate": "J1832_SAFE_NONPICKLE_ARRAY_ROUTE_SEARCH",
-      "result": "SAFE_NONPICKLE_ROUTE_FOUND__BYTE_ACQUISITION_PENDING_ACTIONS_RUN",
-      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C2-J1832-SAFE-NPY-ROUTE-FOUND-2026-08-23-v1.0.json",
-      "summary": "Official Zenodo dataset exposes SB55237_CRACO_filterbank.npy, 56.6 MB, published MD5 41fca6b1dccc464e65e948ed6c82695e. A fail-closed downloader/header verifier using np.load(..., allow_pickle=False) is committed and an Actions workflow is armed."
-    }
-  ],
-  "frozen_preregistrations": [
-    {
-      "id": "TOPA-TESLA-HUNT-005C",
-      "gate": "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY",
-      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C-J1832-SAFE-DYNAMIC-SPECTRUM-PREREG-2026-08-23-v1.0.json"
+      "gate": "SAFE_CRACO_NPY_ACQUISITION",
+      "result": "PASS",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C2-J1832-CRACO-SAFE-NPY-ACQUISITION-RUN-001.json",
+      "summary": "56,623,232-byte first-party NPY downloaded in Actions; published MD5 matched; shape 49152x288 float32; object dtype absent; loaded with allow_pickle=false."
     },
     {
-      "id": "TOPA-TESLA-HUNT-005D",
-      "gate": "J1832_BINARY_VS_ROTATION_MODEL_DISCRIMINATION",
-      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005D-J1832-BINARY-VS-ROTATION-PREREG-2026-08-23-v1.0.json"
+      "id": "TOPA-TESLA-HUNT-005C3",
+      "gate": "SAFE_NUMERIC_CRACO_MORPHOLOGY_AND_DM_REPLAY",
+      "result": "PASS_CONTROL_COMPARISON_PENDING",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C3-J1832-CRACO-NUMERIC-MORPHOLOGY-RUN-001.json",
+      "summary": "Frozen DM grid peaks at 451 pc cm-3 with ascending frequency orientation, inside the published 458 +/- 14 interval. The event is broadband under the frozen metric, with 23 prominent subcomponents over about 67.4 s and a strongest local component FWHM about 1.55 s."
+    },
+    {
+      "id": "TOPA-TESLA-HUNT-005C3A",
+      "gate": "MORPHOLOGY_METRIC_SEMANTICS_REPAIR",
+      "result": "PASS_NO_RETUNING",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005C3A-J1832-CRACO-MORPHOLOGY-INTERPRETATION-REPAIR-2026-08-23-v1.0.json",
+      "summary": "The 1.55-s number is frozen as strongest local-component FWHM, not total pulse duration."
+    },
+    {
+      "id": "TOPA-TESLA-HUNT-005D1",
+      "gate": "BINARY_VS_ROTATION_WITH_2026_EVIDENCE",
+      "result": "ROTATION_YOUNG_NEUTRON_STAR_ORIGIN_FAVORED__MECHANISM_OPEN",
+      "receipt": "data/tesla-sweep/results/TOPA-HUNT-005D1-J1832-BINARY-VS-ROTATION-RESULT-2026-08-23-v1.0.json",
+      "summary": "2026 DART/FAST/SNR evidence strongly shifts the origin layer toward a young neutron star while leaving fallback braking and ultralong coherent radio/Xray emission physics open."
     }
   ],
   "active_replay_queue": [
-    "VERIFY_TOPA_HUNT_005C2_ACTIONS_RECEIPT",
-    "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLAY_ON_VERIFIED_NPY",
-    "RECONCILE_DISCOVERY_DYNAMIC_SPECTRUM_DM_458_PLUSMINUS14_WITH_TIMING_MODEL_DM_430_BEFORE_RESIDUAL_DISPERSION_SCORING",
-    "J1832_BINARY_VS_ROTATION_MODEL_DISCRIMINATION",
-    "LPT_CLASS_CONTROL_MATRIX_WITH_J1935_J1755_J1839_0756_GPM_J1839_10",
-    "J1832_INDEPENDENT_RADIO_XRAY_PROFILE_REFIT_FROM_ZENODO_CHANDRA_DATA",
+    "TOPA_HUNT_005C4_LPT_FRB_PULSAR_RFI_CONTROL_MATRIX",
+    "J1832_CROSS_TELESCOPE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLICATION",
+    "J1832_INDEPENDENT_CHANDRA_EVENT_LEVEL_PHASE_REFIT_FROM_ZENODO",
+    "J1832_TEST_SNR_ASSOCIATION_WITH_DIRECT_DISTANCE_ASTROMETRY_WHEN_AVAILABLE",
+    "J1832_FALLBACK_BRAKING_PREDICTIONS_VS_PERIOD_DERIVATIVE_AND_SNR_AGE",
+    "J1832_POLARIZATION_GEOMETRY_AND_MODE_CHANGE_REPLAY",
     "FKT230303_NUMERIC_FIELD_BENCHMARK_WHEN_PUBLIC_GRID_BYTES_ARE_RETRIEVED"
   ],
   "hunt_rules": [
     "EXISTENCE_BEFORE_INTERPRETATION",
     "MULTIMODAL_CONVERGENCE_BEFORE_ORIGIN",
     "INTERNAL_ESTIMATOR_AGREEMENT_IS_NOT_INDEPENDENT_REPLICATION",
-    "A_BLOCKED_UNSAFE_ROUTE_TRIGGERS_A_SEARCH_FOR_A_SAFER_REPRESENTATION_NOT_A_WEAKER_GATE",
-    "RESOLVED_CASES_BECOME_CONTROLS_INSTEAD_OF_STAYING_MYSTERIES",
-    "FAILED_BLOCKED_OR_ORDINARY_EXPLANATIONS_ARE_RETAINED_AS_TRAINING_MEMORY",
+    "SAFE_REPRESENTATION_SEARCH_OUTRANKS_WEAKENING_A_SECURITY_GATE",
+    "A_NEW_NATURAL_ORIGIN_PRIOR_MUST_DEMOTE_MYSTERY_STATUS",
+    "ORIGIN_RESOLUTION_DOES_NOT_AUTOMATICALLY_RESOLVE_EMISSION_MECHANISM",
+    "FAILED_BLOCKED_OR_ORDINARY_EXPLANATIONS_REMAIN_VISIBLE",
     "NO_MESSAGE_OR_ETI_PROMOTION_FROM_PERIODICITY",
     "UNRESOLVED_IS_AN_ALLOWED_FINAL_STATE"
   ],
   "current_counts": {
-    "high_interest_unresolved_astrophysical": 1,
+    "natural_origin_favored_targets": 1,
+    "high_interest_unresolved_emission_mechanisms": 1,
     "secondary_model_discriminators": 2,
     "natural_or_partially_resolved_controls": 2,
     "repeating_unexplained_technosignatures": 0,
