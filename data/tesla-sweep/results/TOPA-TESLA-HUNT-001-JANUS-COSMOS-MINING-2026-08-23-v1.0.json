@@ -1,0 +1,165 @@
+{
+  "schema": "JANUS_TOPA_TESLA_HUNT_RESULT",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-001",
+  "run_local": "2026-08-23T16:38:00+03:00",
+  "status": "COMPLETE_WITH_METHOD_ESCALATIONS",
+  "scope": "Repository-level method and evidence audit across janus-tesla-sweep, janus-echo-cousteau and legacy-cosmos-pre-osiris-2026-08-19.",
+  "signal_candidate_count": 0,
+  "repeating_unexplained_count": 0,
+  "method_findings_count": 11,
+  "boundary": "This hunt inspected preserved repository methods, receipts and prior results. It did not perform a new raw-radio blind survey and therefore cannot promote a new physical signal candidate.",
+  "topa_summary": "The most valuable overlooked material is not a hidden message but an existing immune system against false messages: realistic nulls, power gates, instrument-response correction, uncertainty-aware frequency language, matched controls and strict replication.",
+  "findings": [
+    {
+      "id": "TOPA-HUNT-001_DESTRUCTIVE_NULL_TRAP",
+      "priority": 1,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "docs/PROJECT_AUDIT_2026-08-14.md",
+      "observation": "The legacy seven-galaxy image gate produced 7/7 cross-filter candidates against pixel-permuted images, but the audit concluded that the null destroyed ordinary spatial organization. A later morphology-preserving pilot left only NGC1425 and NGC1637 as historical focus targets and still lacked sufficient statistical power.",
+      "what_topa_noticed": "Tesla Sweep can repeat exactly this failure if it compares real spectrograms only against white noise, random pixels or overly destructive shuffles. Real RFI and natural emissions have structured morphology too.",
+      "tesla_transfer": "Build morphology-preserving spectrogram nulls that retain local noise envelope, occupancy, bandwidth and short-range correlation while disrupting the candidate-specific trajectory. Pair at least two materially different null families.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-002_POWER_AND_MULTIPLE_TESTING_GATE",
+      "priority": 1,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "docs/PROJECT_AUDIT_2026-08-14.md",
+      "observation": "With 14 target/filter tests and two primary null models, canonical alpha was 0.05/28 ≈ 0.0017857. The earlier 256-null pilot had minimum possible empirical p = 1/257 ≈ 0.003891 and therefore could not satisfy the gate.",
+      "what_topa_noticed": "Tesla Sweep currently has many morphology families and can silently create a much larger multiple-testing family than the old Cosmos image search.",
+      "tesla_transfer": "Before blind scoring, freeze the number of target × morphology × band × null-model tests, calculate corrected alpha, then choose enough null realizations that empirical p-value resolution can actually cross it. Underpowered runs fail closed.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-003_SEMANTICS_AFTER_PHYSICS",
+      "priority": 1,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "docs/PROJECT_AUDIT_2026-08-14.md",
+      "observation": "Legacy Cosmos explicitly moved OCR, face-like, semantic and cipher-like exploration to a post-gate lane with affects_blind_gate=false.",
+      "what_topa_noticed": "Tesla Number Gate is especially vulnerable to semantic feedback: once an analyst sees 1-2-3-4, primes, symbols or a putative word, thresholds can unconsciously move toward that pattern.",
+      "tesla_transfer": "Message, cipher, prime, symbol and low-entropy interpretation may annotate an already physically admitted candidate but must never increase its blind admission score.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-004_MULTISCALE_ORIENTATION_FOR_SPECTROGRAMS",
+      "priority": 2,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "experiments/fractalgpt/run_search.py",
+      "observation": "The blind morphology preflight used fixed multiscale and multi-orientation non-semantic trajectories at scales 8, 16 and 32 and orientations every 30 degrees from 0 to 150 degrees.",
+      "what_topa_noticed": "The same abstraction maps naturally onto time-frequency data without assigning meaning: orientation becomes drift/chirp slope and scale becomes duration/linewidth/coherence size.",
+      "tesla_transfer": "Freeze a spectrogram feature bank before blind fields: several drift slopes, widths, durations, curvature/chirp measures, burst spacing and comb statistics. Do not tune the bank on a candidate later.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-005_FREQUENCY_EXACTNESS_NEEDS_UNCERTAINTY",
+      "priority": 1,
+      "source_branch": "janus-echo-cousteau",
+      "source_path": "data/cousteau/JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1.json",
+      "observation": "Cousteau had to retract overprecise language around 520.408163 Hz because it was model-derived rather than measured. A reported nominal 520 Hz did not establish sub-Hz exactness, and an engineered control showed a model-to-measurement shift.",
+      "what_topa_noticed": "The MLc4/MLc5 spacing of 4.0011 MHz is a useful fingerprint clue, but calling it a numerical code or nearly exact integer relation without channel width, fit uncertainty, clock accuracy and backend information would repeat the same mistake.",
+      "tesla_transfer": "Add UNCERTAINTY_AWARE_INTEGER_SPACING. Store channel resolution, line-fit uncertainty, time standard and frequency calibration. Integer/rational proximity is scored only after uncertainty is propagated.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-006_INSTRUMENT_RESPONSE_IS_PART_OF_THE_OBSERVATION",
+      "priority": 1,
+      "source_branch": "janus-echo-cousteau",
+      "source_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json",
+      "observation": "The HA10 protocol treated instrument response, passband edge behavior and deconvolution noise amplification as first-class gates. It explicitly forbade treating instrument response as the ocean spectrum.",
+      "what_topa_noticed": "Tesla Sweep currently foregrounds sky/RFI classification, but a strange frequency or drift can also be a backend, bandpass, coarse-channel-edge, clock, quantization or calibration artifact.",
+      "tesla_transfer": "For every raw-radio candidate, archive frontend/backend identity, bandpass, channelization, gain state, time/frequency standard, barycentric processing and known digital spurs before morphology interpretation.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-007_MATCHED_NEIGHBOR_CONTROLS",
+      "priority": 1,
+      "source_branch": "janus-echo-cousteau",
+      "source_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json",
+      "observation": "Cousteau froze matched noise windows plus neighboring frequency controls before FFT inspection and required target performance above those controls.",
+      "what_topa_noticed": "ON/OFF sky cadence alone does not answer whether a feature is peculiar to one narrow frequency neighborhood, one time window or one backend state.",
+      "tesla_transfer": "Add matched nearby-time, adjacent-frequency, OFF-target and where available other-beam/backend controls to each candidate receipt. Freeze them before inspecting the candidate morphology.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-008_CROSS_DOMAIN_ADVERSARIAL_LIBRARY",
+      "priority": 3,
+      "source_branch": "janus-echo-cousteau",
+      "source_paths": [
+        "data/cousteau/JANUS-ECHO-COUSTEAU-GLOBAL-OCEAN-ACOUSTIC-ADVERSARIAL-CORPUS-2026-08-20-v1.0.json",
+        "data/cousteau/JANUS-ECHO-COUSTEAU-119HZ-WAVEFORM-ACCESS-AND-TRIBRANCH-FINGERPRINT-RUN-001-2026-08-21-v1.0.json"
+      ],
+      "observation": "Cousteau already maintains adversarial signal families and full-fingerprint comparison rather than single-frequency matching.",
+      "what_topa_noticed": "Periodic, chirped, harmonic and comb-like structure is common outside radio SETI. Cross-domain examples can expose morphology detectors that mistake generic signal physics for communication.",
+      "tesla_transfer": "Import cross-domain signals only as negative morphology controls. Do not infer a physical causal link between underwater acoustics and astronomical radio data from shape similarity.",
+      "status": "NEGATIVE_CONTROL_IMPORT"
+    },
+    {
+      "id": "TOPA-HUNT-009_HISTORICAL_TARGET_NO_PRIVILEGE",
+      "priority": 1,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "docs/PROJECT_AUDIT_2026-08-14.md",
+      "observation": "Historical focus targets NGC1425 and NGC1637 were explicitly denied special thresholds, feature weights and admission shortcuts.",
+      "what_topa_noticed": "Tesla 1899 is emotionally and historically attractive enough to bias a search even when no raw waveform survives.",
+      "tesla_transfer": "Tesla's report may define morphology probes but must never alter thresholds, frequency regions, nulls or candidate admission after blind scoring begins.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-010_LOCALIZED_INDEPENDENT_REPLICATION",
+      "priority": 1,
+      "source_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+      "source_path": "docs/PROJECT_AUDIT_2026-08-14.md",
+      "observation": "The Cosmos audit noted that two image filters passing did not prove that the same localized sky structure persisted; WCS-aware localization and an independent dataset were required.",
+      "what_topa_noticed": "Likewise, the same radio morphology recurring at similar frequency is not enough if it does not track one celestial coordinate or physically predicted moving-source trajectory.",
+      "tesla_transfer": "Promote only after localization: same celestial target/track, physically consistent Doppler behavior, matched OFF absence and preferably an independent telescope/backend/site.",
+      "status": "METHOD_TRANSFER_NOW"
+    },
+    {
+      "id": "TOPA-HUNT-011_FULL_FINGERPRINT_OUTRANKS_SINGLE_NUMBER",
+      "priority": 1,
+      "source_branch": "janus-echo-cousteau",
+      "source_path": "data/cousteau/JANUS-ECHO-COUSTEAU-EXACT-FREQUENCY-MATCH-RUN-001-2026-08-21-v1.1.json",
+      "observation": "Cousteau froze the rule FULL_FINGERPRINT_OUTRANKS_SINGLE_FREQUENCY after nominal frequency matches proved non-unique.",
+      "what_topa_noticed": "Tesla Sweep should not rank a candidate by 1-2-3-4, prime grouping, a 4 MHz spacing or one narrow carrier in isolation.",
+      "tesla_transfer": "Represent each candidate as a physical fingerprint vector: center frequency with uncertainty, linewidth, drift and curvature, duration, burst cadence, comb/sideband spacing, polarization if available, sky localization, recurrence pattern, OFF behavior, instrument provenance and cross-target family similarity.",
+      "status": "METHOD_TRANSFER_NOW"
+    }
+  ],
+  "first_hunt_priority_order": [
+    "TOPA-HUNT-001_DESTRUCTIVE_NULL_TRAP",
+    "TOPA-HUNT-006_INSTRUMENT_RESPONSE_IS_PART_OF_THE_OBSERVATION",
+    "TOPA-HUNT-005_FREQUENCY_EXACTNESS_NEEDS_UNCERTAINTY",
+    "TOPA-HUNT-002_POWER_AND_MULTIPLE_TESTING_GATE",
+    "TOPA-HUNT-007_MATCHED_NEIGHBOR_CONTROLS",
+    "TOPA-HUNT-011_FULL_FINGERPRINT_OUTRANKS_SINGLE_NUMBER",
+    "TOPA-HUNT-010_LOCALIZED_INDEPENDENT_REPLICATION",
+    "TOPA-HUNT-003_SEMANTICS_AFTER_PHYSICS",
+    "TOPA-HUNT-004_MULTISCALE_ORIENTATION_FOR_SPECTROGRAMS",
+    "TOPA-HUNT-009_HISTORICAL_TARGET_NO_PRIVILEGE",
+    "TOPA-HUNT-008_CROSS_DOMAIN_ADVERSARIAL_LIBRARY"
+  ],
+  "new_next_actions": [
+    {
+      "priority": 1,
+      "action": "Freeze Tesla Sweep statistical family and realistic spectrogram null models before opening blind fields."
+    },
+    {
+      "priority": 2,
+      "action": "For Ma Top-8 raw arrays, recover frequency-bin width, time resolution, backend/header metadata and compute uncertainty-aware fingerprint metrics before testing integer spacing."
+    },
+    {
+      "priority": 3,
+      "action": "Build candidate-local matched controls: adjacent frequency windows, nearby times, OFF target scans and cross-target morphology family search."
+    },
+    {
+      "priority": 4,
+      "action": "Adapt frozen multiscale/orientation morphology features to spectrogram drift/chirp/width/duration while keeping Tesla Number semantics post-gate only."
+    },
+    {
+      "priority": 5,
+      "action": "Replay known controls Voyager, Jupiter, Solar, FRB/pulsars, BLC1 and RFI families through the same physical fingerprint engine before blind scoring."
+    }
+  ],
+  "current_verdict": "TOPA_FOUND_OVERLOOKED_METHODS_AND_BLIND_SPOTS__NO_NEW_UNEXPLAINED_PHYSICAL_SIGNAL_YET",
+  "claim_ceiling": "These findings improve the search protocol. They are not evidence of extraterrestrial intelligence, nonhuman communication, unknown physics, or a causal link between Tesla's 1899 report and any modern signal."
+}
