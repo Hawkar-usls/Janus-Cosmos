@@ -1,0 +1,89 @@
+{
+  "schema": "JANUS_TOPA_TRUE_POST2020_IN_DOMAIN_VENT_SEARCH",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-004-VENT-HOLDOUT-PASS1",
+  "created_local": "2026-08-23T17:04:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "NEGATIVE_FIRST_PASS__NO_CLEAN_HYDROACOUSTIC_HOLDOUT_ADMITTED",
+  "question": "Is there a genuinely new Mid-Atlantic Ridge hydrothermal field, independently confirmed after 2020-03-25, inside the approximate 20N-to-10S 2011-2015 hydrophone domain, whose location was not publicly knowable at the InterRidge v3.4 cutoff?",
+  "frozen_admission_rules": [
+    "FIELD_LOCATION_NOT_PUBLICLY_KNOWABLE_BEFORE_2020_03_25",
+    "INDEPENDENT_POST_CUTOFF_DISCOVERY_OR_CONFIRMATION",
+    "LATITUDE_INSIDE_APPROX_20N_TO_10S_HYDROPHONE_DOMAIN",
+    "NO_RETROACTIVE_RECENTERING_TO_A_NEARBY_FIELD",
+    "NO_PUBLICATION_DATE_SUBSTITUTION_FOR_DISCOVERY_DATE",
+    "NO_ACTIVITY_STATUS_UPDATE_MASQUERADING_AS_NEW_LOCATION",
+    "NO_SENSOR_RATE_VALIDATION_OUTSIDE_SENSOR_DOMAIN"
+  ],
+  "screened_cases": [
+    {
+      "id": "KORALOVOE_13N07",
+      "domain": "PASS",
+      "time_independence": "FAIL",
+      "evidence": "Rosgeologia public announcement dated 2020-02-07 described Koralovoe and Molodezhnoe as newly discovered fields; first-stage search work occurred in December 2019. This predates the 2020-03-25 InterRidge v3.4 completion cutoff.",
+      "result": "REJECT_AS_OUT_OF_TIME_HOLDOUT"
+    },
+    {
+      "id": "MOLODEZHNOE_13N09",
+      "domain": "PASS",
+      "time_independence": "FAIL",
+      "evidence": "Same public pre-cutoff discovery evidence as Koralovoe.",
+      "result": "REJECT_AS_OUT_OF_TIME_HOLDOUT"
+    },
+    {
+      "id": "PUY_DES_FOLLES_20N30",
+      "domain": "EDGE_OUTSIDE_APPROX_20N_NETWORK_LIMIT",
+      "time_independence": "FAIL_FOR_LOCATION",
+      "evidence": "Puy des Folles already appears in InterRidge v3.4 at 20.5083N, -45.6417 with inactive-vent references and pre-2020 history. The 2023 expedition established spectacular active high-temperature venting but did not create a new location unknown to the cutoff inventory.",
+      "result": "ACTIVITY_STATUS_AND_GROUND_TRUTH_CONTROL_ONLY"
+    },
+    {
+      "id": "FALKOR_EMARK_2023",
+      "domain": "FAIL_HYDROACOUSTIC_LATITUDE_DOMAIN",
+      "time_independence": "PASS_AS_2023_NEW_ACTIVE_FIELD",
+      "approx_lat": 23.47,
+      "result": "ELIGIBLE_FOR_SPREADING_STYLE_OR_PRE_DISCOVERY_ISC_HOLDOUT__NOT_HYDROACOUSTIC_RATE_HOLDOUT"
+    },
+    {
+      "id": "HYDRA_GRAPPE_DEUX_2023",
+      "domain": "FAIL_HYDROACOUSTIC_LATITUDE_DOMAIN",
+      "time_independence": "PASS_AS_2023_NEW_ACTIVE_FIELD",
+      "approx_lat": 24.96,
+      "result": "ELIGIBLE_FOR_SPREADING_STYLE_OR_PRE_DISCOVERY_ISC_HOLDOUT__NOT_HYDROACOUSTIC_RATE_HOLDOUT"
+    },
+    {
+      "id": "DEYIN_1_15S",
+      "domain": "FAIL_LATITUDE_DOMAIN",
+      "time_independence": "FAIL_DISCOVERED_2011",
+      "result": "REJECT"
+    },
+    {
+      "id": "PETERBURGSKOE_19N52",
+      "domain": "PASS_NEAR_NORTHERN_EDGE",
+      "time_independence": "FAIL_DISCOVERED_2010",
+      "result": "REJECT"
+    }
+  ],
+  "search_observation": "The first literature sweep after applying both domain and information-cutoff gates did not yield a clean post-2020 vent-location holdout inside the hydrophone network. This negative result is retained rather than relaxing the rules.",
+  "positive_side_result": {
+    "id": "2023_FALKOR_MULTISENSOR_GROUND_TRUTH",
+    "status": "KEEP_FOR_OTHER_VALIDATION",
+    "reason": "Although the new northern vent fields cannot validate the 2011-2015 hydroacoustic rate, MGDS provides exceptionally rich raw and processed AUV data for Puy des Folles, EMARK and Hydra: 400 kHz multibeam/backscatter, 1 m grids, 0.5 m chimney grids at Puy, CTD, sidescan, 1-6 kHz CHIRP, navigation and processing scripts."
+  },
+  "next_search_strategy": [
+    "Inspect expedition reports and vent inventories for 2021-2026 discoveries specifically between 20N and 10S, including fields initially reported as plume-only then visually confirmed later.",
+    "Separate truly new field locations from new measurements at old field coordinates.",
+    "If no clean post-2020 in-domain field exists, do not force this holdout; use an independent temporal earthquake/vent inventory split or a geography-separated holdout instead.",
+    "Recover 2022 Table S1 before any later-site segment scoring."
+  ],
+  "sources": [
+    "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022JB024008",
+    "https://doi.pangaea.de/10.1594/PANGAEA.917894",
+    "https://rusgeology.ru/press/news/rosgeologiya-otkryla-novye-zalezhi-polimetallicheskikh-sulfidnykh-rud-na-dne-atlanticheskogo-okeana/",
+    "https://marineregions.org/gazetteer.php?id=65288&p=details",
+    "https://oceanexplorer.noaa.gov/expedition/23lost-cities/",
+    "https://www.marine-geo.org/tools/files/32240"
+  ],
+  "topa_verdict": "NO_CLEAN_POST2020_IN_DOMAIN_VENT_HOLDOUT_FOUND_IN_PASS1__KEEP_SEARCH_RULES_FROZEN",
+  "claim_ceiling": "NEGATIVE_HOLDOUT_SEARCH_RESULT__NO_VENT_PREDICTION_CLAIM"
+}
