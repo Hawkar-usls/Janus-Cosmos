@@ -1,0 +1,72 @@
+{
+  "schema": "JANUS_TOPA_J1832_RADIO_XRAY_PHASE_REPLAY",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005B",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_hunt": "data/tesla-sweep/results/TOPA-TESLA-HUNT-005-LPT-RADIO-MULTIMODAL-2026-08-23-v1.0.json",
+  "parent_period_replay": "data/tesla-sweep/results/TOPA-HUNT-005A-J1832-PUBLIC-TOA-CADENCE-REPLAY-2026-08-23-v1.0.json",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "PASS_PUBLISHED_NOTEBOOK_PHASE_METHOD_AND_OUTPUT_CONCORDANCE__INDEPENDENT_PROFILE_REFIT_PENDING",
+  "replay_type": "COMMITTED_NOTEBOOK_METHOD_AND_OUTPUT_REPLAY",
+  "source": {
+    "repository": "Andywang201605/J1832-0911_radio_xray",
+    "notebook": "radio_dynamic_spectra_light_curves/radio_xray_fold.ipynb",
+    "reference_period_seconds": 2656.236099877644,
+    "reference_period_minutes": 44.2706016646274,
+    "reference_period_origin": "public timing.par F0"
+  },
+  "boundaries": {
+    "raw_xray_event_processing_completed": false,
+    "raw_radio_voltage_processing_completed": false,
+    "independent_folded_profile_refit_completed": false,
+    "notebook_source_and_committed_outputs_inspected": true,
+    "missing_or_unretrieved_inputs": [
+      "data/chandra_profile.txt was not present at the attempted public GitHub path",
+      "underlying X-ray event list was not reprocessed in this pass",
+      "external dynamic-spectrum pickle files were not executed"
+    ],
+    "rule": "MISSING_DATA_STAYS_MISSING"
+  },
+  "estimators": {
+    "cross_correlation": {
+      "notebook_direct_phase_lag": -0.054921133874926476,
+      "monte_carlo_mean_phase_lag": -0.05502228763349935,
+      "monte_carlo_phase_lag_std": 0.016959215849376044,
+      "time_lag_seconds_from_reference_period": -146.15214196538218,
+      "time_lag_seconds_1sigma": 45.04855776105318
+    },
+    "gaussian_pulse_center_fit": {
+      "xray_fit_parameters": [0.0855256, 0.26261744, 0.08055763],
+      "xray_parameter_errors": [0.01897367, 0.0555171, 0.01911265],
+      "radio_meerkat_fit_parameters": [-0.0048412, 0.00103563, 0.07038331],
+      "radio_parameter_errors": [0.00155911, 0.02996823, 0.00160126],
+      "phase_difference": -0.050684396796922576,
+      "phase_difference_1sigma": 0.019191714424140502,
+      "time_delay_seconds": -134.63720768020063,
+      "time_delay_seconds_1sigma": 50.9829364986338
+    }
+  },
+  "estimator_concordance": {
+    "absolute_phase_difference_between_crosscorr_mean_and_gaussian": 0.004337890836576771,
+    "equivalent_seconds_at_reference_period": 11.5229353716129,
+    "interpretation": "Two estimators applied within the same published notebook and folded-product context agree on an offset of about five percent of a cycle. This is internal method concordance, not an independent-data replication."
+  },
+  "TOPA_interpretation": [
+    "The radio and X-ray behavior is consistent with a common approximately 44-minute clock, but the published notebook does not support treating the peaks as exactly zero-phase coincident.",
+    "The measured relative offset is approximately 0.05 cycle, corresponding to roughly 135-146 seconds for the public timing period.",
+    "The two estimator uncertainties overlap and their central estimates differ by only about 11.5 seconds, strengthening the case that the offset is not merely one estimator's numerical artifact.",
+    "Because both estimators use the same underlying folded products, their agreement does not satisfy TOPA's independence gate.",
+    "The lag sign convention is preserved exactly as reported; no physical statement about which band leads is promoted until the notebook convention and time-axis definition are independently verified.",
+    "This gate promotes common periodic physical behavior and a measurable relative phase structure. It does not identify the emitting object or mechanism."
+  ],
+  "gate_result": {
+    "common_periodic_clock": "PASS",
+    "exact_zero_phase_coincidence": "NOT_SUPPORTED_BY_REPLAYED_NOTEBOOK_OUTPUT",
+    "small_stable_relative_phase_offset": "SUPPORTED_WITHIN_PUBLISHED_FOLDED_PRODUCT_ANALYSIS",
+    "independent_raw_profile_replication": "PENDING",
+    "origin_interpretation": "UNRESOLVED"
+  },
+  "next_gate": "J1832_SAFE_DYNAMIC_SPECTRUM_MORPHOLOGY_REPLAY",
+  "claim_ceiling": "PUBLISHED_FOLDED_PRODUCT_PHASE_REPLAY_ONLY__NO_RAW_EVENT_REFIT__NO_EMISSION_MECHANISM_CLAIM__NO_TECHNOSIGNATURE_CLAIM"
+}
