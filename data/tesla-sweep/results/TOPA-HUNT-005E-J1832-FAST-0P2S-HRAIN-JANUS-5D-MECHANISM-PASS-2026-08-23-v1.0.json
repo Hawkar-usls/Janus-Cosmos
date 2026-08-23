@@ -1,0 +1,209 @@
+{
+  "schema": "JANUS_TOPA_J1832_FAST_HRAIN_FULL_JANUS_5D_MECHANISM_PASS",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005E",
+  "created_local": "2026-08-23T22:50:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "target": "DART_ASKAP_J1832_MINUS_0911",
+  "input_capsule": "data/tesla-sweep/inputs/J1832-FAST-0P2S-PULSE-PUBLISHED-INGEST-2026-08-23-v1.0.json",
+  "parent_receipts": [
+    "data/tesla-sweep/results/TOPA-HUNT-005B-J1832-RADIO-XRAY-PHASE-REPLAY-2026-08-23-v1.0.json",
+    "data/tesla-sweep/results/TOPA-HUNT-005C3-J1832-CRACO-NUMERIC-MORPHOLOGY-RUN-001.json",
+    "data/tesla-sweep/results/TOPA-HUNT-005C3A-J1832-CRACO-MORPHOLOGY-INTERPRETATION-REPAIR-2026-08-23-v1.0.json",
+    "data/tesla-sweep/results/TOPA-HUNT-005D1-J1832-BINARY-VS-ROTATION-RESULT-2026-08-23-v1.0.json"
+  ],
+  "execution_boundary": {
+    "mode": "PROTOCOL_LEVEL_BOUNDED_JANUS_PASS_OVER_VERIFIED_REPOSITORY_CONTRACTS_AND_PUBLIC_EVIDENCE",
+    "live_HRain_browser_runtime_executed": false,
+    "live_DemiHead_runtime_executed": false,
+    "raw_FAST_timeseries_processed": false,
+    "software_consensus_is_independent_evidence": false,
+    "rule": "JANUS_ROLE_PASS_OR_AGREEMENT_CANNOT_CREATE_A_NEW_EVIDENCE_ROOT"
+  },
+  "question_freeze": "What natural mechanism can make a probably young neutron star rotate at P≈2656.23 s and still generate broadband coherent radio, intermittent X-rays, mode switching, and a phase-anchored 0.2-s highly linearly polarized pulse?",
+  "JANUS_council_roles": {
+    "GoldPrompt": {
+      "role": "INTENT_ANCHOR",
+      "output": "The target is mechanism discrimination, not sender identity, message decoding or technosignature scoring."
+    },
+    "HRain": {
+      "role": "STRUCTURAL_CONTEXT",
+      "output": "Split one apparent mystery into linked clocks and energy/plasma nodes: evolutionary braking -> present rotation clock -> magnetospheric charge supply -> coherent radio microphysics -> X-ray dissipation -> observed modes."
+    },
+    "iNaiHR": {
+      "role": "ASSOCIATIVE_CONTEXT_CANDIDATE_GENERATION",
+      "output": [
+        "fallback-disc braking plus magnetar-like twist-driven pair cascades",
+        "fallback-braked neutron star plus residual rotation-powered multipolar/RICS pair creation",
+        "binary/orbital modulation",
+        "magnetic white-dwarf coherent emission",
+        "precessing/accretion jet alternatives"
+      ],
+      "authority": "CANDIDATES_ONLY__ASSOCIATION_IS_NOT_EVIDENCE"
+    },
+    "DemiHead": {
+      "role": "BIND_COMPARE_PRESERVE_DISAGREEMENT",
+      "output": "Preserve the split between origin/evolution and present emission engine; no single hypothesis may win merely because it explains the 44-minute clock."
+    },
+    "Janus_Cosmos": {
+      "role": "NUMERIC_AND_FALSIFICATION_PROVIDER",
+      "output": [
+        "0.2 s is 7.529e-5 of one rotation, about 0.0271 degrees of rotational phase if interpreted geometrically",
+        "0.2 s spans about 1020 samples at the published 196 microsecond cadence",
+        "simple c*dt variability scale is about 5.996e4 km, much smaller than the approximately 1.267e8 km light-cylinder radius",
+        "prior CRACO safe replay recovered a dispersed broadband multi-component event, not a narrowband carrier"
+      ]
+    },
+    "Fast_CAT_SHAiTan": {
+      "role": "TEMPORAL_MULTISCALE_STRESS_TEST",
+      "output": "Do not collapse 0.2 s, 1.55 s local CRACO components, 40-250 s emission windows and 2656 s recurrence into one timescale; they likely probe different layers of the mechanism."
+    },
+    "AIFC": {
+      "role": "INDEPENDENCE_AND_WITNESS_ACCOUNTING",
+      "output": "FAST adds an independent telescope and frequency regime, but the present pass still uses published products; raw FAST microstructure remains SOURCE_NEEDED."
+    },
+    "Janus_Fundamentum": {
+      "role": "FALSIFICATION_AND_COMPETING_MODEL_ATTACK",
+      "output": "A mechanism must explain slow spin, coherent plasma supply beyond the ordinary deathline, mode switching/nulling, polarization geometry, radio/X-ray coupling and energy budget without using one observation twice as independent evidence."
+    },
+    "TOPA": {
+      "role": "MUNDANE_FIRST_UPDATE_AND_UNRESOLVED_TERMINAL",
+      "output": "Prefer a natural compact-object mechanism when it explains the evidence; preserve the exact remaining mechanism gap instead of promoting mystery."
+    },
+    "Aura": {
+      "role": "HEURISTIC_ONLY",
+      "output": "May suggest metaphors or candidate relations but contributes zero evidence authority to the physical conclusion."
+    },
+    "Genesis": {
+      "role": "CLAIM_CEILING_AND_FALLIBILITY_BOUNDARY",
+      "output": "Judgment is revisable; no protocol role becomes an oracle and no authority grows from agreement."
+    },
+    "Meta_Registry": {
+      "role": "LINEAGE_MEMORY",
+      "output": "Preserve inputs, corrections, failed alternatives, source-needed gates and future supersession rather than rewriting history."
+    }
+  },
+  "HRain_structural_graph": {
+    "nodes": [
+      {"id":"N1_BIRTH_AND_BRAKING","timescale":"3e4_to_2e5_year_context_if_SNR_association_is_real","question":"How did a young neutron star reach 2656 s?"},
+      {"id":"N2_ROTATION_CLOCK","timescale":"2656.23_s","question":"What creates the stable 44.27-minute phase reference?"},
+      {"id":"N3_MAGNETOSPHERIC_ENERGY_AND_CHARGE","timescale":"state_dependent","question":"What supplies accelerating voltage and pairs when ordinary rotation-powered conditions are stressed?"},
+      {"id":"N4_RADIO_ACTIVE_WINDOW","timescale":"40_to_250_s","question":"Why do broad and narrow emission modes occupy only part of the cycle?"},
+      {"id":"N5_COHERENT_SUBSTRUCTURE","timescale":"0.2_s_FAST_and_second_scale_CRACO_components","question":"What creates sharp broadband coherent components during active and even nominally quiet states?"},
+      {"id":"N6_XRAY_DISSIPATION","timescale":"variable_and_rotation_phase_linked","question":"Can the same magnetic system naturally generate X-rays without requiring radio photons and X-rays to come from the same altitude?"}
+    ],
+    "edges": [
+      "FALLBACK_TORQUE_CAN_SET_SLOW_SPIN_WITHOUT_POWERING_CURRENT_RADIO",
+      "ROTATION_CAN_SET_CLOCK_WITHOUT_BEING_DOMINANT_ENERGY_SOURCE",
+      "MAGNETIC_TWIST_CAN_SUPPLY_CURRENT_AND_CHARGE_STARVED_GAPS",
+      "PAIR_DISCHARGE_CAN_BE_INTERMITTENT_AND_CREATE_COHERENT_BROADBAND_RADIO",
+      "RETURN_CURRENT_OR_TWIST_DISSIPATION_CAN_COEXIST_WITH_XRAY_HEATING",
+      "DIFFERENT_EMISSION_ALTITUDES_CAN_ALLOW_A_NONZERO_RADIO_XRAY_PHASE_OFFSET"
+    ]
+  },
+  "recursive_5D_micro_passes": [
+    {
+      "anchor": "N1_BIRTH_AND_BRAKING",
+      "D1_FORWARD_BACK": "A 2656-s clock in a possibly 3e4-2e5 yr object is difficult to obtain from ordinary isolated dipole evolution alone; fallback-disc torques are a concrete published route that can populate ultra-long ejector periods.",
+      "D2_MATCHED_CONTROL": "Other LPTs need not share an SNR association, so the fallback route is source-specific evidence, not a universal LPT rule.",
+      "D3_ASCEND_DIVE": "Separate SPIN_EVOLUTION from PRESENT_EMISSION_POWER.",
+      "D4_EXPAND_CONTRACT": "Retain fallback braking; reject the shortcut 'fallback disk itself must be the present radio engine'.",
+      "D5_CLAIM_SOURCE": "Current evidence favors rather than proves the SNR/fallback history; direct VLBI distance/proper-motion remains decisive.",
+      "LOCAL_DELTA": "The slow clock and the current radio engine are allowed to have different causes."
+    },
+    {
+      "anchor": "N3_MAGNETOSPHERIC_ENERGY_AND_CHARGE",
+      "D1_FORWARD_BACK": "If rotation alone cannot sustain ordinary polar-cap pair production at P≈2656 s, an additional magnetic free-energy/current source is required before coherent emission can persist.",
+      "D2_MATCHED_CONTROL": "Ultra-long magnetar theory provides a matched physical class in which mild local twists create charge-starved gaps and pair cascades beyond standard curvature deathlines.",
+      "D3_ASCEND_DIVE": "Abstract requirement = create E_parallel plus pair plasma; concrete candidate = crustal plastic/thermoelectric twist driving RICS or curvature-photon cascades.",
+      "D4_EXPAND_CONTRACT": "Keep both RICS and curvature channels as microphysical alternatives; do not choose one from current data.",
+      "D5_CLAIM_SOURCE": "Cooper & Wadiasingh 2024 predicts twist-initiated pair cascades and X-ray/UV counterparts for magnetar-strength fields; applying it specifically to J1832 is a synthesis, not a demonstrated fit.",
+      "LOCAL_DELTA": "Magnetic free energy can power present emission while rotation supplies phase geometry."
+    },
+    {
+      "anchor": "N5_COHERENT_SUBSTRUCTURE",
+      "D1_FORWARD_BACK": "The 0.2-s pulse appears during a DART-quiet interval yet at the predicted rotational phase, implying the phase clock survives when the bright emission state does not.",
+      "D2_MATCHED_CONTROL": "Dwarf-pulse/nulling pulsar phenomenology and other LPT sub-second modes show that short coherent components are not unique to engineered signals.",
+      "D3_ASCEND_DIVE": "Long emission window and short discharge are different hierarchy levels: magnetospheric state envelope versus local pair discharge/coherent bunching episode.",
+      "D4_EXPAND_CONTRACT": "Near-surface fragile spark-gap/pair-raindrop interpretation remains attractive but not uniquely demonstrated by the 0.2-s width.",
+      "D5_CLAIM_SOURCE": "FAST raw time-frequency/Stokes data are not publicly retrieved here; published width, DM, RM, polarization and phase are admissible, finer microstructure is not.",
+      "LOCAL_DELTA": "The pulse is evidence for intermittent phase-anchored plasma discharge, not evidence for a message."
+    },
+    {
+      "anchor": "N6_XRAY_DISSIPATION",
+      "D1_FORWARD_BACK": "The common 44-minute clock requires a common geometric or rotational regulator, but the previously replayed approximately 0.05-cycle radio/X-ray offset argues against requiring identical emission zones.",
+      "D2_MATCHED_CONTROL": "Twisted magnetosphere models generically allow nonthermal/thermal X-ray or UV counterparts from dissipation and particle return currents while coherent radio is produced by pair plasma.",
+      "D3_ASCEND_DIVE": "Shared engine does not mean co-spatial photons.",
+      "D4_EXPAND_CONTRACT": "Retain hotspot/return-current and magnetospheric nonthermal X-ray branches; defer exact X-ray mechanism to event-level phase spectroscopy.",
+      "D5_CLAIM_SOURCE": "Current phase result is a published folded-product replay, not an independent Chandra event-level refit.",
+      "LOCAL_DELTA": "A magnetically powered, rotation-gated multi-zone magnetosphere naturally accommodates common period plus nonzero phase offset."
+    }
+  ],
+  "Fundamentum_competing_hypothesis_matrix": [
+    {
+      "hypothesis": "FALLBACK_BRAKED_YOUNG_NS_PLUS_MAGNETAR_LIKE_TWIST_DRIVEN_PAIR_CASCADES",
+      "slow_spin": "STRONG_FIT_IN_EVOLUTIONARY_MODELS",
+      "broadband_coherent_radio": "STRONG_THEORETICAL_FIT",
+      "0p2s_quiescent_phase_locked_pulse": "GOOD_QUALITATIVE_FIT_TO_INTERMITTENT_PAIR_DISCHARGE",
+      "variable_Xray": "GOOD_QUALITATIVE_FIT_TO_TWIST_DISSIPATION_RETURN_CURRENTS",
+      "polarization": "COMPATIBLE_WITH_ORDERED_STRONG_FIELD",
+      "main_stress": "Requires source-specific field/twist/thermal parameters and direct tests; SNR association and fallback history remain not geometrically proven.",
+      "state": "CURRENT_BEST_NATURAL_COMPOSITE__NOT_PROVEN"
+    },
+    {
+      "hypothesis": "FALLBACK_BRAKED_NS_PLUS_ORDINARY_ROTATION_POWERED_POLAR_CAP",
+      "slow_spin": "FALLBACK_CAN_HELP",
+      "radio": "STRESSED_BY_ULTRALONG_PERIOD_DEATHLINE_AND_ENERGY_BUDGET",
+      "Xray": "NOT_NATURALLY_COMPLETE_WITHOUT_EXTRA_PHYSICS",
+      "state": "RETAIN_AS_STRESSED_CONTROL"
+    },
+    {
+      "hypothesis": "FORTY_FOUR_MINUTE_BINARY_ORBIT",
+      "clock": "CAN_CREATE_PERIODICITY",
+      "independent_companion_or_orbital_delay": "NOT_ESTABLISHED",
+      "polarized_phase_locked_dwarf_pulse": "POORER_NATURAL_FIT_THAN_ROTATING_MAGNETOSPHERE",
+      "state": "DISFAVORED_NOT_LOGICALLY_EXCLUDED"
+    },
+    {
+      "hypothesis": "MAGNETIC_WHITE_DWARF_OR_WD_BINARY",
+      "coherent_radio": "POSSIBLE_IN_CLASS",
+      "SNR_youth_context": "POOR_FIT_IF_ASSOCIATION_CONFIRMED",
+      "optical_constraints": "STRESSED",
+      "compact_phase_locked_highly_polarized_substructure": "REQUIRES_EXTREME_CONFIGURATION",
+      "state": "STRONGLY_DEMOTED_NOT_ZERO"
+    },
+    {
+      "hypothesis": "PRECESSING_OR_ACCRETION_JET",
+      "periodicity": "POSSIBLE_IN_PRINCIPLE",
+      "stable_magnetic_phase_geometry_and_SNR_context": "POORER_FIT",
+      "state": "SECONDARY_ALTERNATIVE_CONTROL"
+    }
+  ],
+  "convergence": {
+    "HRain_structural_survivor": "DECOUPLE_SPIN_BRAKING_FROM_EMISSION_POWER",
+    "iNaiHR_surviving_association_after_contraction": "FALLBACK_BRAKING_PLUS_MAGNETAR_TWIST_PAIR_CASCADE",
+    "DemiHead_disagreement_preserved": [
+      "RICS versus curvature-photon cascade not resolved",
+      "fallback disc historical role favored but not directly observed now",
+      "exact X-ray production zone not resolved",
+      "SNR physical association not yet model-independently locked"
+    ],
+    "TOPA_update": "MYSTERY_NARROWED_FROM_OBJECT_ORIGIN_TO_MAGNETOSPHERIC_EMISSION_MICROPHYSICS",
+    "result": "CURRENT_BEST_NATURAL_COMPOSITE__FALLBACK_BRAKING_SETS_THE_CLOCK__MAGNETIC_TWIST_PAIR_DISCHARGES_SUPPLY_PRESENT_COHERENT_PLASMA_AND_XRAY_DISSIPATION__NOT_PROVEN"
+  },
+  "core_insight": "The 44-minute rotation need not pay the full energetic bill. Rotation can be the clock and beam geometry while magnetic free energy supplies the voltage, pairs and dissipation. Fallback material can explain how the clock became slow; local magnetospheric twists can explain why the radio engine is not dead.",
+  "next_falsification_gates": [
+    "ACQUIRE_FAST_MJD60559_RAW_OR_CALIBRATED_PSFRITS_FILTERBANK_STOKES_PRODUCT_AND_REPLAY_0P2S_PULSE",
+    "MEASURE_FREQUENCY_RESOLVED_FULL_STOKES_PA_RM_AND_SEARCH_FOR_SUB_0P2S_STRUCTURE",
+    "TEST_RADIO_XRAY_PHASE_OFFSET_STABILITY_ACROSS_MULTIPLE_EPOCHS_WITH_EVENT_LEVEL_XRAY_DATA",
+    "FIT_FALLBACK_DISC_TORQUE_EVOLUTION_TO_P_PDOT_LIMIT_AND_SNR_AGE_WITH_PRIOR_FROZEN_PARAMETER_RANGES",
+    "SEARCH_FOR_DIRECT_IR_SUBMM_FALLBACK_DISC_CONSTRAINTS_WITH_MATCHED_FIELD_CONTROLS",
+    "TEST_TWIST_CASCADE_PREDICTIONS_FOR_XRAY_UV_ACTIVITY_AND_PAIR_DISCHARGE_MODE_SWITCHING",
+    "COMPARE_FAST_DWARF_PULSE_TO_SUBSECOND_LPT_AND_NULLING_PULSAR_CONTROLS_USING_THE_SAME_FEATURE_VECTOR",
+    "PURSUE_VLBI_DISTANCE_AND_PROPER_MOTION_TO_LOCK_OR_BREAK_THE_SNR_ASSOCIATION"
+  ],
+  "technosignature_status": "NOT_ADMITTED",
+  "ETI_status": "NOT_ADMITTED",
+  "unknown_physics_status": "NOT_REQUIRED_BY_CURRENT_EVIDENCE",
+  "claim_ceiling": "COMPOSITE_NATURAL_MECHANISM_HYPOTHESIS_FAVORED_BY_PROTOCOL_LEVEL_SYNTHESIS__NOT_A_LIVE_MULTIAGENT_RUNTIME_RESULT__NOT_RAW_FAST_REPLAY__NOT_MECHANISM_PROOF"
+}
