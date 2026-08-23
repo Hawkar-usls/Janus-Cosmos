@@ -1,0 +1,58 @@
+{
+  "schema": "JANUS_TOPA_J1832_BINARY_VS_ROTATION_PREREG",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005D",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "FROZEN_BEFORE_MODEL_DISCRIMINATION",
+  "purpose": "Discriminate whether the approximately 44-minute coherent clock is more naturally interpreted as rotation/spin or binary/orbital modulation without allowing the favored model to redefine the test after inspection.",
+  "known_before_test": {
+    "period_seconds": 2656.236099877644,
+    "period_minutes": 44.2706016646274,
+    "public_timing_model_has_binary_parameters": false,
+    "public_timing_NTOA": 42,
+    "public_DM_pc_cm3": 430.0,
+    "radio_xray_relative_phase_offset_from_published_folded_analysis": "about 0.05 cycle",
+    "multi_radio_instrument_periodicity": true
+  },
+  "rotation_spin_hypothesis_predictions": [
+    "A single coherent phase model should describe radio recurrence across epochs after barycentric and propagation corrections.",
+    "Pulse profile and polarization geometry should show repeatable rotational structure rather than eclipse-like orbital windows.",
+    "No companion radial-velocity, ellipsoidal, eclipse or orbital-heating signature is required.",
+    "Any radio-Xray phase offset should remain tied to rotational phase within uncertainties if both arise from a stable magnetospheric geometry.",
+    "The model must confront the difficulty of sustaining coherent radio emission at such a long rotation period rather than hiding it."
+  ],
+  "binary_orbital_hypothesis_predictions": [
+    "Independent evidence should appear for a companion or orbital modulation: radial velocity, periodic optical/IR variation, eclipses, heating, accretion geometry, or timing delays.",
+    "The approximately 44-minute clock may remain coherent while pulse visibility or spectrum changes with orbital geometry.",
+    "A physically plausible component-density/Roche-lobe configuration must exist at the inferred orbital period.",
+    "Radio and Xray relative phase should have a stable orbital interpretation, or model-specific phase drift should be predicted quantitatively.",
+    "If orbital timing delays are measurable, adding binary parameters should improve timing residuals without unjustified extra freedom."
+  ],
+  "discriminating_observables": [
+    "multi_epoch phase residuals",
+    "polarization position-angle repeatability",
+    "pulse-profile stability and substructure",
+    "radial-velocity constraints",
+    "optical/IR companion constraints",
+    "eclipse or absorption signatures",
+    "radio-Xray phase stability across epochs",
+    "timing-model evidence for orbital delays",
+    "energy-budget consistency for neutron-star, magnetar and white-dwarf parameter spaces"
+  ],
+  "scoring_rules": [
+    "NO_MODEL_WINS_FROM_PERIODICITY_ALONE",
+    "NO_BINARY_PROMOTION_WITHOUT_INDEPENDENT_COMPANION_OR_ORBITAL_EVIDENCE",
+    "NO_ROTATION_PROMOTION_WITHOUT_PHASE_AND_GEOMETRY_CONSISTENCY",
+    "MODEL_COMPLEXITY_PENALTY_REQUIRED",
+    "A_MODEL_CAN_BE_BEST_AVAILABLE_AND_STILL_INCOMPLETE",
+    "UNRESOLVED_IS_ALLOWED"
+  ],
+  "current_state_before_discrimination": {
+    "rotation": "PLAUSIBLE_BUT_PHYSICALLY_STRESSED",
+    "binary": "PLAUSIBLE_CLASS_OF_ALTERNATIVES_BUT_NOT_ESTABLISHED_FROM_CURRENT_PUBLIC_TIMING_TEXT",
+    "winner": "NONE"
+  },
+  "claim_ceiling": "MODEL_DISCRIMINATION_PREREG_ONLY__NO_OBJECT_CLASSIFICATION_WINNER_YET"
+}
