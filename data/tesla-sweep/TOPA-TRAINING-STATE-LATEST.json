@@ -1,0 +1,33 @@
+{
+  "schema": "JANUS_TOPA_TRAINING_STATE_POINTER",
+  "version": "1.0",
+  "updated_local": "2026-08-23T21:27:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "TRAINING_ACTIVE",
+  "latest_completed_training": {
+    "id": "TOPA-TRAINING-GROUND-001",
+    "ground": "FKt230303 Mid-Atlantic Ridge hydrothermal search",
+    "result": "PASS_EVIDENCE_DISCIPLINE__RAW_PIXEL_STAGE_PENDING",
+    "prereg": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-PREREG-2026-08-23-v1.0.json",
+    "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-FKt230303-EVIDENCE-LADDER-RESULT-2026-08-23-v1.0.json"
+  },
+  "lessons_promoted_to_active_memory": [
+    "SHAPE_IS_NOT_PROCESS",
+    "PLUME_IS_NOT_EXACT_SOURCE",
+    "MULTIMODAL_CONVERGENCE_OUTRANKS_SINGLE_MODALITY",
+    "GROUND_TRUTH_REQUIRES_LOCALIZED_DIRECT_OR_INDEPENDENT_REPLICATION",
+    "NEGATIVE_OBJECTIVE_RESULTS_PERSIST_NEXT_TO_POSITIVE_DISCOVERIES",
+    "MISSING_INTERMEDIATE_EVIDENCE_IS_NOT_BACKFILLED",
+    "SOURCE_DEFINITION_MISMATCHES_ARE_PRESERVED",
+    "EXPECTED_HYPOTHESIS_MUST_NOT_CENSOR_AN_UNEXPECTED_ORDINARY_PHYSICAL_RESULT"
+  ],
+  "transfer_to_signal_hunting": {
+    "spectrogram_shape": "MORPHOLOGY_CANDIDATE_ONLY",
+    "multi_instrument_detection": "PROMOTES_ONLY_IF_DEPENDENCIES_AND_LOCALIZATION_ARE_PHYSICALLY_CONSISTENT",
+    "message_like_order": "NEVER_ORIGIN_PROOF",
+    "independent_replication": "GROUND_TRUTH_ANALOGUE_FOR_SIGNAL_EXISTENCE_AND_LOCALIZATION__NOT_INTELLIGENCE_PROOF"
+  },
+  "next_training_gate": "FKT230303_PIXEL_LEVEL_BLIND_MORPHOLOGY_BENCHMARK_V1",
+  "raw_pixel_status": "WAITING_FOR_DIRECT_PUBLIC_GRID_BYTES_AND_FROZEN_MATCHED_CONTROL_TILES",
+  "rule": "Do not claim pixel-level performance until actual bathymetry/backscatter/sidescan arrays are ingested and scored blind."
+}
