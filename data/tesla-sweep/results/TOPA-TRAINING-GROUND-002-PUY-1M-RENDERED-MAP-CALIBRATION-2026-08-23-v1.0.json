@@ -1,0 +1,148 @@
+{
+  "schema": "JANUS_TOPA_TRAINING_GROUND_RENDERED_MAP_CALIBRATION",
+  "version": "1.0",
+  "training_id": "TOPA-TRAINING-GROUND-002",
+  "created_local": "2026-08-23T21:49:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "training_ground": "Puy des Folles official 1 m rendered bathymetry plus FKt230303 ground truth",
+  "status": "PASS_MORPHOLOGY_CONFOUNDER_CALIBRATION__STRICT_PIXEL_SCORE_NOT_CLAIMED",
+  "mode": "IMAGE_LEVEL_CALIBRATION_WITH_KNOWN_GROUND_TRUTH",
+  "raw_numeric_grid_ingested": false,
+  "blindness_boundary": {
+    "full_investigator_blind": false,
+    "reason": "The official NOAA rendered 1 m map and published ROV/vent ground-truth information were reviewed before this calibration receipt was frozen. This run must not be reported as a pristine blind holdout.",
+    "allowed_claim": "Calibration of morphology confounders and evidence ceilings only.",
+    "forbidden_claims": [
+      "pixel-level sensitivity",
+      "pixel-level specificity",
+      "blind vent localization accuracy",
+      "new vent discovery"
+    ]
+  },
+  "public_inputs": [
+    {
+      "id": "NOAA_PUY_1M_RENDERED_MAP",
+      "source": "NOAA Ocean Exploration",
+      "url": "https://oceanexplorer.noaa.gov/wp-content/uploads/2023/05/puy-des-folles-seamount-hires.png",
+      "description": "Official rendered overview based on 1 m AUV bathymetry over the summit of Puy des Folles."
+    },
+    {
+      "id": "MGDS_FKT230303_NETCDF",
+      "source": "Marine Geoscience Data System",
+      "url": "https://www.marine-geo.org/tools/files/32239",
+      "description": "Processed gridded AUV bathymetry: 1 m grids across Puy des Folles, EMARK/Falkor EMARK and Hydra, plus 0.5 m grids over three Puy chimney fields."
+    },
+    {
+      "id": "MGDS_FKT230303_ASCII",
+      "source": "Marine Geoscience Data System",
+      "url": "https://www.marine-geo.org/tools/files/32240",
+      "description": "ESRI ASCII representation of the processed gridded bathymetry."
+    },
+    {
+      "id": "MGDS_FKT230303_MAPS",
+      "source": "Marine Geoscience Data System",
+      "url": "https://www.marine-geo.org/tools/files/32231",
+      "description": "Bathymetry/navigation rendered maps."
+    }
+  ],
+  "published_morphology_ground_truth": {
+    "Puy_des_Folles": {
+      "setting": "heavily faulted on-axis volcanic edifice",
+      "reported_features": [
+        "approximately 1 km wide graben/fault-block complex on western summit",
+        "parallel and oblique normal faults on eastern summit",
+        "scarps and talus slopes",
+        "lava channels",
+        "hundreds of circular and elliptical pits",
+        "multiple chimney clusters, with structures up to roughly 24 m",
+        "active high-temperature black smokers confirmed by ROV"
+      ]
+    }
+  },
+  "visual_calibration_observations": [
+    {
+      "feature": "LONG_LINEAR_FAULT_LINEAMENTS",
+      "lesson": "Long, regular, repeated linear structure can be entirely geological; linearity is not engineering evidence."
+    },
+    {
+      "feature": "GRABEN_AND_FAULT_BLOCKS",
+      "lesson": "Parallel boundaries and rectilinear-looking blocks can arise naturally from extensional tectonics."
+    },
+    {
+      "feature": "CIRCULAR_ELLIPTICAL_PITS",
+      "lesson": "Repeated round depressions are a strong false-positive family for crater/shaft/constructed-hole interpretations."
+    },
+    {
+      "feature": "SCALLOPED_SCARPS_AND_TALUS",
+      "lesson": "Abrupt edges and faceted relief can be ordinary mass wasting and fault morphology."
+    },
+    {
+      "feature": "LOCAL_POSITIVE_RELIEF_CHIMNEY_CANDIDATES",
+      "lesson": "Small pinnacles can nominate targets but cannot establish active hydrothermal venting without independent process evidence."
+    }
+  ],
+  "ROV_ground_truth_anchors": [
+    {
+      "id": "PUY_GENERIC_PRE2023_FIELD",
+      "lat_deg": 20.5083,
+      "lon_deg": -45.6417,
+      "role": "historical vent-field reference only, not an exact active-smoker label"
+    },
+    {
+      "id": "S0500_NW_CHIMNEY_GROUP_START",
+      "lat_deg_approx": 20.5155573,
+      "lon_deg_approx": -45.6511711,
+      "reported_context": "NW chimney group approximately 140 x 100 m; about 10 spires roughly 5-12 m high were mapped as targets; ROV used the AUV map for ground truth."
+    },
+    {
+      "id": "S0501_LARGE_ACTIVE_CHIMNEY_START",
+      "lat_deg_approx": 20.5111,
+      "lon_deg_approx": -45.6360,
+      "reported_context": "Dive began at a large active chimney and continued through additional mapped waypoints searching for active structures."
+    },
+    {
+      "id": "S0502_PUY_START",
+      "lat_deg_approx": 20.5029,
+      "lon_deg_approx": -45.6375,
+      "reported_context": "Additional Puy ROV ground-truth dive."
+    },
+    {
+      "id": "S0495_FALKOR_EMARK_TARGET",
+      "lat_deg_approx": 23.473445,
+      "lon_deg_approx": -44.986672,
+      "reported_context": "A chimney identified from preliminary AUV data; plume results plus bathymetry strongly indicated an active hydrothermal target before ROV verification."
+    },
+    {
+      "id": "S0498_HYDRA_ACTIVE_VENT",
+      "lat_deg": 24.95984,
+      "lon_deg": -45.5749,
+      "reported_context": "Return sampling dive to the active vent found during the preceding Hydra exploration dive."
+    }
+  ],
+  "TOPA_calibration_result": {
+    "morphology_candidate_generation": "AUTHORIZED",
+    "activity_confirmation_from_shape": "FORBIDDEN",
+    "engineered_origin_from_regularity": "FORBIDDEN",
+    "strict_numeric_performance": "NOT_MEASURED",
+    "result": "MORPHOLOGY_CAN_BE_HIGH_RECALL_CANDIDATE_GENERATOR__SPECIFICITY_REQUIRES_MATCHED_NONVENT_CONTROLS_AND_RAW_ARRAY_SCORING"
+  },
+  "transfer_to_tesla_sweep": [
+    {
+      "terrain_lesson": "fault lineaments, pits and pinnacles can look deliberate",
+      "signal_lesson": "lines, combs, pulse trains and number-like cadences can look deliberate",
+      "rule": "MORPHOLOGY_CAN_NOMINATE__NEVER_IDENTIFY_ORIGIN"
+    },
+    {
+      "terrain_lesson": "plume plus map convergence raises confidence",
+      "signal_lesson": "independent antennas/instruments plus physically consistent timing, Doppler or dispersion raise confidence",
+      "rule": "INDEPENDENT_PHYSICS_BEATS_PATTERN_BEAUTY"
+    },
+    {
+      "terrain_lesson": "ROV localized ground truth resolves the source",
+      "signal_lesson": "independent source-localizing replication is the closest signal analogue",
+      "rule": "SOURCE_LOCALIZATION_REQUIRED_BEFORE_ORIGIN_INTERPRETATION"
+    }
+  ],
+  "next_gate": "FKT230303_LABEL_BLIND_NUMERIC_BATHYMETRY_BENCHMARK_V1",
+  "claim_ceiling": "RENDERED_MAP_MORPHOLOGY_CALIBRATION_ONLY__NO_RAW_PIXEL_ACCURACY__NO_NEW_VENT_DISCOVERY__NO_UNKNOWN_PHYSICS"
+}
