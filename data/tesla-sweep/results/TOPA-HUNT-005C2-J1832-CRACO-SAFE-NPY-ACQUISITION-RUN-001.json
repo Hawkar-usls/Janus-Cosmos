@@ -1,0 +1,51 @@
+{
+  "schema": "JANUS_TOPA_J1832_CRACO_SAFE_NPY_ACQUISITION",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C2",
+  "source": {
+    "zenodo_record": "10.5281/zenodo.15228816",
+    "filename": "SB55237_CRACO_filterbank.npy",
+    "url": "https://zenodo.org/records/15228816/files/SB55237_CRACO_filterbank.npy?download=1",
+    "published_md5": "41fca6b1dccc464e65e948ed6c82695e",
+    "author_readme_says_numpy_load_directly": true
+  },
+  "security_rules": {
+    "external_pickle_execution": false,
+    "numpy_allow_pickle": false,
+    "reject_object_dtype": true,
+    "classification_ceiling": "SAFE_ARRAY_PROVENANCE_ONLY"
+  },
+  "status": "PASS_SAFE_NONPICKLE_ARRAY_ACQUISITION__READY_FOR_FROZEN_MORPHOLOGY_GATE",
+  "downloaded_bytes": 56623232,
+  "computed_md5": "41fca6b1dccc464e65e948ed6c82695e",
+  "md5_match": true,
+  "npy_header": {
+    "version": [
+      1,
+      0
+    ],
+    "shape": [
+      49152,
+      288
+    ],
+    "fortran_order": false,
+    "dtype": "float32",
+    "dtype_has_object": false
+  },
+  "array_loaded_safely": true,
+  "sampled_health": {
+    "size": 14155776,
+    "sample_size": 1000000,
+    "finite_fraction_sample": 1.0,
+    "sample_min": -2.054682970046997,
+    "sample_max": 4.1005120277404785,
+    "sample_median": 0.0804508700966835,
+    "sample_p01": -0.7986319726705551,
+    "sample_p99": 1.025170965194702
+  },
+  "axis_semantics": "NOT_INFERRED_FROM_SHAPE_ALONE",
+  "raw_telescope_voltage_processing_completed": false,
+  "author_exported_filterbank_array_processing_completed": true,
+  "morphology_scoring_completed": false,
+  "next_gate": "TOPA-HUNT-005C3-J1832-CRACO-MORPHOLOGY-WITH-METADATA"
+}
