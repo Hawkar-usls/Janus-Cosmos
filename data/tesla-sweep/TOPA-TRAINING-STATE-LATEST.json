@@ -1,33 +1,57 @@
 {
   "schema": "JANUS_TOPA_TRAINING_STATE_POINTER",
-  "version": "1.0",
-  "updated_local": "2026-08-23T21:27:00+03:00",
+  "version": "1.1",
+  "updated_local": "2026-08-23T21:49:00+03:00",
   "branch": "janus-tesla-sweep",
-  "status": "TRAINING_ACTIVE",
-  "latest_completed_training": {
-    "id": "TOPA-TRAINING-GROUND-001",
-    "ground": "FKt230303 Mid-Atlantic Ridge hydrothermal search",
-    "result": "PASS_EVIDENCE_DISCIPLINE__RAW_PIXEL_STAGE_PENDING",
-    "prereg": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-PREREG-2026-08-23-v1.0.json",
-    "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-FKt230303-EVIDENCE-LADDER-RESULT-2026-08-23-v1.0.json"
+  "status": "TRAINING_ACTIVE__FIELD_GRID_GATE_ARMED",
+  "completed_trainings": [
+    {
+      "id": "TOPA-TRAINING-GROUND-001",
+      "ground": "FKt230303 evidence ladder",
+      "result": "PASS_EVIDENCE_DISCIPLINE__RAW_PIXEL_STAGE_PENDING",
+      "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-001-FKt230303-EVIDENCE-LADDER-RESULT-2026-08-23-v1.0.json"
+    },
+    {
+      "id": "TOPA-TRAINING-GROUND-002",
+      "ground": "Puy des Folles official rendered 1 m bathymetry and published ground truth",
+      "result": "PASS_MORPHOLOGY_CONFOUNDER_CALIBRATION__STRICT_PIXEL_SCORE_NOT_CLAIMED",
+      "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-002-PUY-1M-RENDERED-MAP-CALIBRATION-2026-08-23-v1.0.json"
+    },
+    {
+      "id": "TOPA-TRAINING-GROUND-003A",
+      "ground": "synthetic fault/graben/pit adversarial terrain",
+      "result": "FAIL_SPECIFICITY__FAULT_LINEATION_DOMINATED_V1_0",
+      "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-003A-SYNTHETIC-CONFOUNDER-ENGINE-QA-2026-08-23-v1.0.json"
+    },
+    {
+      "id": "TOPA-TRAINING-GROUND-003B",
+      "ground": "same synthetic adversarial terrain after frozen lineation repair",
+      "result": "PASS_SYNTHETIC_REPAIR__FIELD_GENERALIZATION_UNTESTED",
+      "receipt": "data/tesla-sweep/results/TOPA-TRAINING-GROUND-003B-SYNTHETIC-LINEATION-REPAIR-2026-08-23-v1.1.json"
+    }
+  ],
+  "active_engine": {
+    "feature_engine": "workspace/tesla_sweep/topa_bathymetry_benchmark.py",
+    "frozen_field_scoring_wrapper": "workspace/tesla_sweep/topa_bathymetry_benchmark_v1_1.py",
+    "metric_rule": "FROZEN_GENERIC_MORPHOLOGY_V1_1_AFTER_SYNTHETIC_QA",
+    "lineation_penalty": 2.0,
+    "classification_ceiling": "MORPHOLOGICAL_CANDIDATE_ONLY"
   },
-  "lessons_promoted_to_active_memory": [
-    "SHAPE_IS_NOT_PROCESS",
-    "PLUME_IS_NOT_EXACT_SOURCE",
-    "MULTIMODAL_CONVERGENCE_OUTRANKS_SINGLE_MODALITY",
-    "GROUND_TRUTH_REQUIRES_LOCALIZED_DIRECT_OR_INDEPENDENT_REPLICATION",
-    "NEGATIVE_OBJECTIVE_RESULTS_PERSIST_NEXT_TO_POSITIVE_DISCOVERIES",
-    "MISSING_INTERMEDIATE_EVIDENCE_IS_NOT_BACKFILLED",
-    "SOURCE_DEFINITION_MISMATCHES_ARE_PRESERVED",
-    "EXPECTED_HYPOTHESIS_MUST_NOT_CENSOR_AN_UNEXPECTED_ORDINARY_PHYSICAL_RESULT"
+  "new_lessons_promoted_to_active_memory": [
+    "HIGH_RELIEF_PLUS_REGULARITY_CAN_BE_A_FAULT_GRABEN_FALSE_POSITIVE",
+    "ORIENTATION_ANISOTROPY_IS_AN_EXPLICIT_GEOLOGICAL_CONFOUNDER",
+    "A_DETECTOR_CAN_HAVE_HIGH_STRUCTURE_SENSITIVITY_AND_LOW_CLASS_SPECIFICITY",
+    "CONFOUNDER_FAILURES_ARE_TRAINING_DATA_NOT_EMBARRASSMENTS",
+    "REPAIR_PARAMETERS_MUST_FREEZE_BEFORE_REAL_FIELD_SCORING",
+    "INVESTIGATOR_PRIOR_EXPOSURE_MUST_BE_RECORDED_SEPARATELY_FROM_ALGORITHMIC_LABEL_BLINDNESS"
   ],
   "transfer_to_signal_hunting": {
-    "spectrogram_shape": "MORPHOLOGY_CANDIDATE_ONLY",
-    "multi_instrument_detection": "PROMOTES_ONLY_IF_DEPENDENCIES_AND_LOCALIZATION_ARE_PHYSICALLY_CONSISTENT",
-    "message_like_order": "NEVER_ORIGIN_PROOF",
-    "independent_replication": "GROUND_TRUTH_ANALOGUE_FOR_SIGNAL_EXISTENCE_AND_LOCALIZATION__NOT_INTELLIGENCE_PROOF"
+    "terrain_fault_lineation": "spectrogram comb/line family from backend, clock or transmitter",
+    "terrain_pit_family": "repeating burst family that remains a candidate even after one confounder is suppressed",
+    "rule": "REMOVING_ONE_FALSE_POSITIVE_FAMILY_DOES_NOT_AUTHORIZE_THE_REMAINDER_AS_UNKNOWN"
   },
-  "next_training_gate": "FKT230303_PIXEL_LEVEL_BLIND_MORPHOLOGY_BENCHMARK_V1",
-  "raw_pixel_status": "WAITING_FOR_DIRECT_PUBLIC_GRID_BYTES_AND_FROZEN_MATCHED_CONTROL_TILES",
-  "rule": "Do not claim pixel-level performance until actual bathymetry/backscatter/sidescan arrays are ingested and scored blind."
+  "next_training_gate": "FKT230303_LABEL_BLIND_NUMERIC_BATHYMETRY_BENCHMARK_V1_1",
+  "raw_field_grid_status": "PUBLIC_PRODUCTS_IDENTIFIED__BINARY_OR_ASCII_BYTES_NOT_INGESTED_IN_THIS_EXECUTION_ENVIRONMENT",
+  "strict_boundary": "Do not claim FKt230303 numeric sensitivity/specificity until the actual MGDS grids are ingested. Puy was already visually/ground-truth reviewed, so the first numeric run will be algorithmically label-blind but not fully investigator-blind.",
+  "rule": "Keep every failed training round. Do not erase v1.0 when v1.1 improves it."
 }
