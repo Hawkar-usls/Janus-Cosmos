@@ -1,0 +1,44 @@
+{
+  "schema": "JANUS_TOPA_J1832_SAFE_NPY_ROUTE_FOUND",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C2",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "SAFE_NONPICKLE_ROUTE_FOUND__BYTE_ACQUISITION_PENDING_ACTIONS_RUN",
+  "source": {
+    "zenodo_doi": "10.5281/zenodo.15228816",
+    "record_title": "Detection of X-ray Emission from a Bright Long-Period Radio Transient",
+    "filename": "SB55237_CRACO_filterbank.npy",
+    "size_reported": "56.6 MB",
+    "published_md5": "41fca6b1dccc464e65e948ed6c82695e",
+    "author_readme_statement": "The file is filterbank data and can be loaded with numpy.load directly.",
+    "context_metadata": {
+      "CRACO_time_resolution_ms_reported_in_paper": 13.824,
+      "CRACO_frequency_resolution_MHz_reported_in_paper": 1.0,
+      "discovery_dynamic_spectrum_DM_pc_cm3_reported": "458 +/- 14",
+      "timing_model_DM_pc_cm3": 430.0,
+      "note": "The differing DM values must be preserved rather than silently forced to equality; they come from different analysis contexts and need reconciliation before a residual-dispersion test."
+    }
+  },
+  "important_upgrade_from_005C1": "The first safety pass saw only pickle-based repository products and correctly refused them. A subsequent source-level search found an author-exported standalone .npy CRACO filterbank in the official Zenodo dataset, providing a non-pickle route. The earlier blocked receipt remains valid for that earlier route and is not deleted.",
+  "safe_loading_contract": [
+    "VERIFY_PUBLISHED_MD5_BEFORE_LOAD",
+    "READ_NPY_HEADER_BEFORE_ARRAY_ACCESS",
+    "REJECT_OBJECT_DTYPE",
+    "NP_LOAD_ALLOW_PICKLE_FALSE_ONLY",
+    "RECORD_SHAPE_DTYPE_AND_AXIS_METADATA_BEFORE_MORPHOLOGY",
+    "DO_NOT_INFER_AXIS_SEMANTICS_FROM_SHAPE_ALONE"
+  ],
+  "execution": {
+    "script": "workspace/tesla_sweep/topa_j1832_craco_safe_replay.py",
+    "workflow": ".github/workflows/topa-j1832-craco-safe-replay.yml",
+    "expected_run_receipt": "data/tesla-sweep/results/TOPA-HUNT-005C2-J1832-CRACO-SAFE-NPY-ACQUISITION-RUN-001.json",
+    "current_environment_direct_download_attempt": "FAILED_DNS_OR_CACHE_ROUTE",
+    "github_actions_route": "ARMED_BY_PUSH",
+    "run_receipt_seen_at_freeze_time": false
+  },
+  "TOPA_interpretation": "A blocked unsafe route should trigger a search for a safer representation, not pressure to weaken the safety gate. Here that search produced a first-party NumPy filterbank product with published checksum.",
+  "next_gate": "VERIFY_ACTIONS_RECEIPT_THEN_FREEZE_TIME_FREQUENCY_AXIS_SEMANTICS_AND_RUN_MORPHOLOGY_V1",
+  "claim_ceiling": "SAFE_DATA_ROUTE_DISCOVERY_ONLY__NO_NUMERIC_MORPHOLOGY_RESULT_YET__NO_ORIGIN_CLAIM"
+}
