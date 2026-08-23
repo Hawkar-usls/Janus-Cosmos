@@ -1,0 +1,37 @@
+{
+  "schema": "JANUS_TOPA_J1832_CRACO_MORPHOLOGY_INTERPRETATION_REPAIR",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005C3A",
+  "created_local": "2026-08-23T22:19:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_run": "data/tesla-sweep/results/TOPA-HUNT-005C3-J1832-CRACO-NUMERIC-MORPHOLOGY-RUN-001.json",
+  "status": "PASS_WITH_METRIC_SEMANTICS_REPAIR__NO_SCORE_RETUNING",
+  "reason": "The first numeric receipt labels a 1.548288-second half-maximum width around the strongest dedispersed peak as pulse_FWHM. Because the same run detects 23 prominent subpeaks spanning 67.405824 seconds, that width must be interpreted as the strongest local component width, not the duration of the full approximately two-minute radio pulse reported at coarser resolution.",
+  "frozen_numeric_observations_unchanged": {
+    "best_DM_pc_cm3": 451.0,
+    "published_discovery_DM_pc_cm3": "458 +/- 14",
+    "difference_best_to_published_center_pc_cm3": -7.0,
+    "best_DM_inside_published_1sigma_interval": true,
+    "best_DM_score": 62.28845179654009,
+    "score_at_timing_model_DM_430": 60.72115916619485,
+    "best_score_improvement_over_DM430_percent": 2.581130946554433,
+    "best_ascending_orientation_score": 62.28845179654009,
+    "best_descending_orientation_score": 41.36612425437995,
+    "ascending_score_advantage_percent": 50.578409070907426,
+    "strongest_local_component_FWHM_seconds": 1.5482879999999999,
+    "prominent_subpeak_count": 23,
+    "prominent_subpeak_span_seconds": 67.405824,
+    "onpulse_frequency_channel_occupancy_fraction_z_gt_3": 1.0,
+    "spectral_patchiness_coefficient": 0.09880677153677718
+  },
+  "TOPA_interpretation": [
+    "The independently replayed grid maximum at DM 451 pc cm-3 falls inside the published discovery-spectrum interval 458 +/- 14 pc cm-3 without tuning the search window to that value.",
+    "The large preference for one frequency-axis orientation over the reversed orientation is consistent with a directional cold-plasma sweep rather than an arbitrary symmetric texture, but it is not by itself a source-origin proof.",
+    "The filterbank is not a single smooth pulse. It contains a complex train of at least 23 prominent components over roughly 67 seconds, with the strongest local component having a roughly 1.55-second half-maximum width under the frozen smoothing/threshold rule.",
+    "All 288 channels pass the fixed on-pulse z>3 occupancy rule after the chosen dedispersion, making this event broadband under this replay metric rather than a narrowband-carrier morphology.",
+    "The 1.55-second width does not contradict published sub-second variability or approximately two-minute envelope duration because these describe different temporal scales and extraction definitions."
+  ],
+  "important_lesson_for_tesla_sweep": "A genuinely ordered astrophysical source can contain a stable long clock plus broadband dispersed substructure on second and sub-second scales. Clock-like recurrence must therefore be separated from the morphology of the information-bearing waveform before any message analogy is entertained.",
+  "next_gate": "TOPA-HUNT-005C4-LPT-FRB-PULSAR-RFI-CONTROL-MATRIX",
+  "claim_ceiling": "INTERPRETATION_REPAIR_OF_SINGLE_AUTHOR_EXPORTED_FILTERBANK__NO_CROSS_TELESCOPE_MORPHOLOGY_REPLICATION__NO_ORIGIN_CLAIM"
+}
