@@ -1,0 +1,66 @@
+{
+  "schema": "JANUS_TESLA_SWEEP_SEED_CORPUS",
+  "version": "1.0",
+  "created_utc": "2026-08-23T13:09:00Z",
+  "status": "QUEUE_INITIALIZED",
+  "rule": "Entries are not candidates merely because they are in this corpus; each is a calibration, control, historical reference, or unresolved test case.",
+  "entries": [
+    {
+      "id": "TS-HIST-0001",
+      "name": "Tesla Colorado Springs historical signal report",
+      "class": "HISTORICAL_REFERENCE",
+      "raw_data": false,
+      "queue_status": "MORPHOLOGY_ONLY",
+      "purpose": "Seed temporal and numerical-pattern tests without granting historical claims evidentiary authority."
+    },
+    {
+      "id": "TS-CTRL-0001",
+      "name": "Voyager narrowband carrier",
+      "class": "KNOWN_ARTIFICIAL_DEEP_SPACE_CONTROL",
+      "queue_status": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "TS-CTRL-0002",
+      "name": "Jupiter radio bursts",
+      "class": "KNOWN_NATURAL_PLANETARY_CONTROL",
+      "queue_status": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "TS-CTRL-0003",
+      "name": "Solar radio bursts",
+      "class": "KNOWN_NATURAL_SOLAR_CONTROL",
+      "queue_status": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "TS-CTRL-0004",
+      "name": "FRB and pulsar public examples",
+      "class": "KNOWN_NATURAL_TRANSIENT_CONTROL",
+      "queue_status": "QUEUED_FOR_OPEN_DATA_INGEST"
+    },
+    {
+      "id": "TS-RFI-0001",
+      "name": "Breakthrough Listen known/rejected RFI examples",
+      "class": "KNOWN_OR_LIKELY_RFI_CONTROL",
+      "queue_status": "QUEUED_FOR_REPLAY"
+    },
+    {
+      "id": "TS-RFI-0002",
+      "name": "BLC1 / Proxima Centauri case",
+      "class": "RFI_FALSE_POSITIVE_CONTROL",
+      "queue_status": "QUEUED_FOR_REPLAY"
+    },
+    {
+      "id": "TS-UNRES-0001",
+      "name": "Published machine-learning SETI candidates with open observations",
+      "class": "UNRESOLVED_OR_NONREPEATING_TEST_SET",
+      "queue_status": "QUEUED_FOR_RAW_RECHECK"
+    },
+    {
+      "id": "TS-BLIND-0001",
+      "name": "Blind Breakthrough Listen fields",
+      "class": "BLIND_HOLDOUT",
+      "queue_status": "LOCK_BEFORE_SCORING"
+    }
+  ],
+  "next_action": "Resolve exact open-data files, checksums, timestamps, telescope/instrument metadata and license/provenance for each queued entry, then freeze the corpus before blind scoring."
+}
