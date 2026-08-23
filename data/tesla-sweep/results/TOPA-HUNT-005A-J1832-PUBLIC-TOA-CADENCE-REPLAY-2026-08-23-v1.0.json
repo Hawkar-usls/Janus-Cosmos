@@ -1,0 +1,50 @@
+{
+  "schema": "JANUS_TOPA_J1832_PUBLIC_TOA_CADENCE_REPLAY",
+  "version": "1.0",
+  "hunt_id": "TOPA-TESLA-HUNT-005A",
+  "created_local": "2026-08-23T22:08:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "parent_hunt": "data/tesla-sweep/results/TOPA-TESLA-HUNT-005-LPT-RADIO-MULTIMODAL-2026-08-23-v1.0.json",
+  "target": "ASKAP_J1832_MINUS_0911",
+  "status": "PASS_PUBLIC_TOA_CADENCE_REPLAY__FULL_BARYCENTRIC_TIMING_FIT_NOT_REIMPLEMENTED",
+  "purpose": "Verify from public text TOAs, without dynamic-spectrum pickle execution, that the approximately 44-minute cadence is independently visible in separate telescope epochs before any deeper morphology interpretation.",
+  "source": {
+    "repository": "Andywang201605/J1832-0911_radio_xray",
+    "tim_file": "data/J1832-0911.timing.tim",
+    "par_file": "data/J1832-0911.timing.par",
+    "public_fit_F0_hz": 0.00037647255831138794,
+    "public_fit_period_seconds_derived": 2656.236099877644,
+    "public_fit_period_minutes_derived": 44.2706016646274,
+    "NTOA_in_par": 42
+  },
+  "simple_cadence_replay": {
+    "method": "Within each dense same-instrument observing sequence, compute consecutive MJD differences and convert days to seconds. This is a deliberately simple cadence sanity check, not a replacement for PINT, barycentric corrections, dispersion treatment or pulse-phase modeling.",
+    "ASKAP_epoch3": {
+      "first_mjd": 60343.90413098838,
+      "last_mjd": 60344.211308859056,
+      "consecutive_intervals": 10,
+      "mean_interval_seconds": 2654.016802611295,
+      "mean_interval_minutes": 44.23361337685492,
+      "difference_from_public_fit_seconds": -2.2192972663488035,
+      "absolute_fractional_difference_percent": 0.08355045195158038
+    },
+    "ATCA_epoch_o1": {
+      "first_mjd": 60304.98357074992,
+      "last_mjd": 60305.19862140842,
+      "consecutive_intervals": 7,
+      "mean_interval_seconds": 2654.339556279592,
+      "mean_interval_minutes": 44.23899260465987,
+      "difference_from_public_fit_seconds": -1.8965435980517213,
+      "absolute_fractional_difference_percent": 0.07139966203076162
+    },
+    "cross_instrument_mean_interval_difference_seconds": 0.3227536682970822
+  },
+  "TOPA_interpretation": [
+    "The long-period cadence is directly recoverable from public TOA sequences at two independent radio facilities without relying on a visual pattern claim.",
+    "The simple interval averages differ slightly from the fitted ephemeris because TOAs are not an ideal clock and the public timing model includes barycentric/dispersion/timing treatment absent from this sanity replay.",
+    "Agreement at the sub-0.1-percent level is sufficient for the present gate: the approximately 44-minute recurrence is real and instrument-independent.",
+    "This promotes periodicity/existence only. It does not identify the compact object, emission mechanism, intelligence, or message content."
+  ],
+  "next_gate": "J1832_RADIO_XRAY_PHASE_REPLAY_FROM_PUBLIC_FOLDED_PRODUCTS",
+  "claim_ceiling": "PUBLIC_TOA_CADENCE_REPRODUCTION_ONLY__NO_FULL_TIMING_SOLUTION__NO_ORIGIN_CLAIM__NO_ETI_CLAIM"
+}
