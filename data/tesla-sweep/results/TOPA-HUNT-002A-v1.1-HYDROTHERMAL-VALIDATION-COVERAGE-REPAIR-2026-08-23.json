@@ -1,0 +1,89 @@
+{
+  "schema": "JANUS_TOPA_HYDROTHERMAL_VALIDATION_COVERAGE_REPAIR",
+  "version": "1.1",
+  "created_local": "2026-08-23T17:04:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "status": "FROZEN_CORRECTION__SUPERSEDES_EVENT_RATE_PORTION_OF_002A_V1_0",
+  "supersedes": "data/tesla-sweep/results/TOPA-HUNT-002A-POST2020-HYDROTHERMAL-OUT-OF-TIME-VALIDATION-LEAD-2026-08-23-v1.0.json",
+  "reason_for_repair": "TOPA rechecked geographic and temporal provenance before scoring. Two hidden leakage problems were found: the 2011-2015 hydrophone network covered approximately 20N to 10S, while the clean 2023 Falkor EMARK and Hydra/Grappe Deux discoveries are north of 20N; and the apparently attractive Koralovoe/Molodezhnoe 13N fields were publicly announced before the InterRidge v3.4 cutoff, so they are not post-cutoff holdouts.",
+  "source_study": {
+    "citation": "Parnell-Turner, Smith & Dziak 2022, DOI 10.1029/2022JB024008",
+    "hydrophone_network_coverage": "approximately 20N to 10S",
+    "recording_period": "2011-08-10 to 2015-01-13",
+    "segment_framework": "169 second-order MAR segments from approximately 35N to 40S",
+    "reported_spreading_style_relation": {
+      "hydroacoustic_mean_events_per_year_per_km_asymmetric": 0.224,
+      "hydroacoustic_mean_events_per_year_per_km_symmetric": 0.094,
+      "isc_mean_events_per_year_per_km_asymmetric": 0.031,
+      "isc_mean_events_per_year_per_km_symmetric": 0.017,
+      "all_known_vents_on_asymmetric_segments_fraction": 0.74,
+      "active_confirmed_vents_on_asymmetric_segments": "8 of 10",
+      "mean_vent_occurrence_per_100km_asymmetric": 0.97,
+      "mean_vent_occurrence_per_100km_symmetric": 0.48
+    }
+  },
+  "vent_inventory_cutoff": {
+    "dataset": "InterRidge Global Database of Active Submarine Hydrothermal Vent Fields v3.4",
+    "doi": "10.1594/PANGAEA.917894",
+    "completed": "2020-03-25",
+    "field_count": 721
+  },
+  "target_reclassification": [
+    {
+      "id": "PUY_DES_FOLLES_ACTIVE_2023",
+      "approx_lat": 20.5,
+      "status": "HYDROACOUSTIC_EDGE_OR_OUTSIDE__NOT_CLEAN_HYDROACOUSTIC_RATE_HOLDOUT",
+      "note": "2023 documented active black smokers at a site with earlier inactive sulfide knowledge; useful as activity-status/morphology control, not a clean new-location hydroacoustic test."
+    },
+    {
+      "id": "FALKOR_EMARK_2023",
+      "approx_lat": 23.47,
+      "status": "OUTSIDE_2011_2015_HYDROPHONE_NETWORK_LATITUDE_DOMAIN",
+      "allowed_validation": ["FROZEN_2022_SPREADING_STYLE", "PRE_2023_ISC_SEISMICITY_IF_RECOVERABLE_WITHOUT_POSTHOC_TUNING"]
+    },
+    {
+      "id": "HYDRA_GRAPPE_DEUX_2023",
+      "approx_lat": 24.96,
+      "status": "OUTSIDE_2011_2015_HYDROPHONE_NETWORK_LATITUDE_DOMAIN",
+      "allowed_validation": ["FROZEN_2022_SPREADING_STYLE", "PRE_2023_ISC_SEISMICITY_IF_RECOVERABLE_WITHOUT_POSTHOC_TUNING"]
+    },
+    {
+      "id": "KORALOVOE_13N07",
+      "approx_lat": 13.1167,
+      "approx_lon": -44.9,
+      "status": "INSIDE_HYDROPHONE_DOMAIN_BUT_NOT_POST_CUTOFF",
+      "reason": "Rosgeologia publicly announced Koralovoe and Molodezhnoe on 2020-02-07, before InterRidge v3.4 completion on 2020-03-25. Later papers describe discovery during Cruise 41 in late 2019/2019-2020. Therefore the location was knowable before the frozen vent inventory cutoff even if omitted from that release."
+    },
+    {
+      "id": "MOLODEZHNOE_13N09",
+      "approx_lat": 13.15,
+      "approx_lon": -44.8667,
+      "status": "INSIDE_HYDROPHONE_DOMAIN_BUT_NOT_POST_CUTOFF",
+      "reason": "Same temporal-leakage boundary as Koralovoe."
+    }
+  ],
+  "important_method_lesson": "OUT_OF_TIME_VALIDATION_REQUIRES_BOTH_INFORMATION_CUTOFF_AND_SENSOR_DOMAIN_MATCH. A later publication date does not make a field a future holdout if the discovery was already public before the cutoff, and a later discovery cannot validate a sensor-derived predictor where that sensor network did not cover the location.",
+  "repaired_validation_lanes": [
+    {
+      "lane": "2023_NORTH_MAR_SPREADING_STYLE_HOLDOUT",
+      "targets": ["PUY_DES_FOLLES_ACTIVE_2023", "FALKOR_EMARK_2023", "HYDRA_GRAPPE_DEUX_2023"],
+      "inputs_allowed": ["2022 frozen segment boundaries", "2022 frozen symmetric/asymmetric/unassigned label", "pre-2023 ISC event history only if the metric is recoverable for the target segments"],
+      "inputs_forbidden": ["2011-2015 hydroacoustic rate where target lies outside network domain", "2023 AUV bathymetry", "2023 plume chemistry", "2023 ROV imagery", "post-discovery manual relabeling"]
+    },
+    {
+      "lane": "FIND_TRUE_POST_2020_IN_DOMAIN_DISCOVERIES",
+      "domain": "approximately 20N to 10S",
+      "requirement": "Discovery/location must be demonstrably unavailable before 2020-03-25 and independently confirmed after that date.",
+      "status": "SEARCH_OPEN__NO_CLEAN_TARGET_ADMITTED_YET"
+    }
+  ],
+  "source_urls": [
+    "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022JB024008",
+    "https://doi.pangaea.de/10.1594/PANGAEA.917894",
+    "https://rusgeology.ru/press/news/rosgeologiya-otkryla-novye-zalezhi-polimetallicheskikh-sulfidnykh-rud-na-dne-atlanticheskogo-okeana/",
+    "https://www.mdpi.com/2075-163X/11/7/726",
+    "https://oceanexplorer.noaa.gov/expedition/23lost-cities/"
+  ],
+  "current_topa_verdict": "GOOD_HYPOTHESIS__BAD_FIRST_HOLDOUT_DESIGN__REPAIRED_BEFORE_SCORING",
+  "claim_ceiling": "VALIDATION_DESIGN_AND_PROVENANCE_CORRECTION_ONLY__NO_VENT_PREDICTION_CLAIM__NO_UNKNOWN_PHYSICS"
+}
