@@ -1,0 +1,137 @@
+{
+  "schema": "JANUS_COSMOS_TESLA_SWEEP_BRANCH_MANIFEST",
+  "version": "1.0",
+  "created_utc": "2026-08-23T13:09:00Z",
+  "branch": "janus-tesla-sweep",
+  "parent_branch": "janus-echo-cousteau",
+  "project": "JANUS COSMOS",
+  "node": "TESLA SWEEP",
+  "status": "ACTIVE_RESEARCH_BRANCH",
+  "mission": "Blindly collect and test unusual signals available in open data, without restricting the search to Nikola Tesla's reported 1-2-3-4 interpretation.",
+  "principle": "PATTERN_IS_NOT_PROOF",
+  "historical_firewall": {
+    "tesla_report": "HISTORICAL_SIGNAL_REPORT",
+    "raw_1899_waveform_available": false,
+    "rule": "Historical descriptions may seed morphology tests but may not receive evidentiary authority over modern measurements."
+  },
+  "scope": {
+    "domains": [
+      "radio_astronomy",
+      "SETI_open_data",
+      "planetary_radio",
+      "solar_radio",
+      "FRB_and_transients",
+      "deep_space_spacecraft_carriers",
+      "terrestrial_RFI_controls"
+    ],
+    "signal_morphologies": [
+      "narrowband_carrier",
+      "doppler_drift",
+      "periodic_pulse_train",
+      "burst_grouping",
+      "frequency_comb",
+      "chirp",
+      "dispersion",
+      "broadband_transient",
+      "low_entropy_sequence",
+      "arithmetic_interval_structure",
+      "geometric_interval_structure",
+      "prime_like_grouping",
+      "symbol_like_repetition"
+    ]
+  },
+  "tesla_number_gate": {
+    "enabled": true,
+    "not_limited_to_literal_1234": true,
+    "tests": [
+      "T_2T_3T_4T_interval_relations",
+      "1_2_3_4_pulse_group_sizes",
+      "integer_ratio_frequency_spacing",
+      "repeating_symbol_like_blocks",
+      "low_entropy_nonrandom_sequences"
+    ],
+    "admission_rule": "A numerical pattern can advance only if it survives OFF-source, RFI, timing, instrumental and repeatability controls."
+  },
+  "falsification_pipeline": [
+    "INGEST_RAW_OR_HIGH_FIDELITY_DATA",
+    "VERIFY_TIME_FREQUENCY_METADATA",
+    "ON_SOURCE_TEST",
+    "OFF_SOURCE_TEST",
+    "REPEAT_TEST",
+    "MULTI_SITE_OR_MULTI_INSTRUMENT_TEST_WHERE_POSSIBLE",
+    "KNOWN_RFI_BAND_TEST",
+    "EPHEMERIS_AND_SATELLITE_TEST",
+    "DOPPLER_MODEL_TEST",
+    "DISPERSION_TEST",
+    "PERIODICITY_AND_SEQUENCE_TEST",
+    "NATURAL_SOURCE_CONTROL",
+    "INSTRUMENTAL_CONTROL",
+    "BLIND_REPLAY",
+    "CLASSIFY"
+  ],
+  "classification_states": [
+    "KNOWN_NATURAL",
+    "KNOWN_ARTIFICIAL",
+    "LIKELY_RFI",
+    "INSTRUMENTAL",
+    "UNCONFIRMED_NONREPEATING",
+    "REPEATING_UNEXPLAINED",
+    "CANDIDATE_REQUIRES_INDEPENDENT_REPLICATION",
+    "REJECTED"
+  ],
+  "positive_controls": [
+    {
+      "class": "KNOWN_ARTIFICIAL_DEEP_SPACE",
+      "example": "Voyager carrier",
+      "purpose": "Confirm that the pipeline can recognize an artificial narrowband signal arriving from deep space without interpreting it as unknown intelligence."
+    },
+    {
+      "class": "KNOWN_NATURAL_PLANETARY",
+      "example": "Jupiter radio bursts",
+      "purpose": "Validate natural burst morphology handling."
+    },
+    {
+      "class": "KNOWN_NATURAL_TRANSIENT",
+      "example": "FRB / pulsar-like public data",
+      "purpose": "Validate dispersion, pulse and repetition handling."
+    }
+  ],
+  "negative_controls": [
+    "known_satellite_bands",
+    "known_ground_RFI",
+    "off_source_observations",
+    "instrumental_spurs",
+    "time_shifted_and_scrambled_controls"
+  ],
+  "seed_open_corpora": [
+    "Breakthrough Listen public observations",
+    "Radio JOVE public observations",
+    "e-CALLISTO public solar radio observations",
+    "public FRB/pulsar archives",
+    "public spacecraft radio examples where raw or high-fidelity data are available"
+  ],
+  "data_policy": {
+    "prefer_raw": true,
+    "preserve_original_files": true,
+    "store_checksums": true,
+    "record_provenance": true,
+    "no_candidate_label_without_replayable_evidence": true,
+    "no_ETI_claim_without_independent_replication": true
+  },
+  "branch_layout": {
+    "root": "data/tesla-sweep/",
+    "incoming": "data/tesla-sweep/incoming/",
+    "controls": "data/tesla-sweep/controls/",
+    "candidates": "data/tesla-sweep/candidates/",
+    "receipts": "data/tesla-sweep/receipts/",
+    "runs": "data/tesla-sweep/runs/"
+  },
+  "first_gate": "TESLA_SWEEP_OPEN_SIGNAL_CORPUS_GATE",
+  "first_gate_goal": "Build a provenance-preserving corpus of known natural, known artificial, known RFI and unresolved public signals before blind scoring.",
+  "scientific_boundary": "TESLA SWEEP searches for unexplained signal structure. It does not assume extraterrestrial origin, intelligence, or a connection to Tesla's historical observations.",
+  "janus_relation": {
+    "cousteau": "Shares measurement-first, provenance-first and falsification-first discipline.",
+    "cosmos": "Shares astronomical data handling and blind-candidate logic.",
+    "tesla_sweep": "Adds generalized signal morphology, temporal structure and communication-pattern testing across open signal archives."
+  }
+}
