@@ -1,0 +1,101 @@
+{
+  "schema": "JANUS_TOPA_TRAINING_GROUND_PREREG",
+  "version": "1.0",
+  "training_id": "TOPA-TRAINING-GROUND-001",
+  "created_local": "2026-08-23T21:27:00+03:00",
+  "branch": "janus-tesla-sweep",
+  "training_ground": "FKt230303 Mid-Atlantic Ridge hydrothermal search",
+  "mission": "Train TOPA to separate geological morphology, water-column hydrothermal evidence, engineered acquisition artifacts and confirmed active vent ground truth using a real multimodal exploration campaign.",
+  "mode": "EVIDENCE_LADDER_TRAINING_WITH_PUBLISHED_GROUND_TRUTH",
+  "not_machine_learning_weight_update": true,
+  "raw_raster_training_completed": false,
+  "raw_raster_boundary": "The public MGDS archive exposes 1 m bathymetry, 0.5 m chimney-field bathymetry, backscatter, sidescan, CTD, CHIRP and processing documentation, but raw/processed raster file bytes were not ingested into the current execution environment in this pass. This run therefore trains evidence hierarchy and classification discipline, not pixel-level morphology weights.",
+  "ground_truth_sources": [
+    {
+      "source": "MGDS FKt230303",
+      "cruise_doi": "10.7284/910056",
+      "public_assets": [
+        "Reson SeaBat T50-S 400 kHz multibeam",
+        "1 m processed bathymetry grids",
+        "0.5 m bathymetry over three Puy des Folles chimney fields",
+        "110 kHz processed sidescan",
+        "1-6 kHz CHIRP sub-bottom profiles",
+        "processed CTD data",
+        "AUV mission notes and processing scripts"
+      ]
+    },
+    {
+      "source": "Schmidt Ocean Institute expedition reports",
+      "ground_truth": "Three active hydrothermal vent fields were discovered/confirmed during the 2023 expedition using a nested workflow of ship multibeam, water-column/plume sensing, AUV mapping and ROV inspection."
+    },
+    {
+      "source": "AGU Puy des Folles mapping abstract",
+      "ground_truth": "Puy des Folles is a heavily faulted on-axis volcano with a nearly level summit platform, grabens, fault blocks, pits and multiple chimney clusters including active high-temperature black smokers."
+    }
+  ],
+  "sites": [
+    {
+      "id": "PUY_DES_FOLLES",
+      "role": "POSITIVE_ACTIVE_VENT_GROUND_TRUTH_WITH_COMPLEX_MORPHOLOGY",
+      "approx_location": "20.5 N, 45.6 W",
+      "known_context": "On-axis volcanic structure; active high-temperature vents confirmed in 2023; prior work emphasized inactive sulfides and water-column anomalies."
+    },
+    {
+      "id": "EMARK_MASSIF",
+      "role": "GEOLOGIC_BACKGROUND_AND_SEARCH_TERRAIN",
+      "known_context": "Oceanic core complex / detachment setting surveyed before the Falkor EMARK vent-focused missions."
+    },
+    {
+      "id": "FALKOR_EMARK_VENTS",
+      "role": "POSITIVE_ACTIVE_VENT_GROUND_TRUTH_OFF_AXIS",
+      "approx_location": "23.47 N, 44.99 W",
+      "known_context": "High-temperature black-smoker field in an off-axis oceanic-core-complex / detachment setting."
+    },
+    {
+      "id": "HYDRA_GRAPPE_DEUX",
+      "role": "POSITIVE_ACTIVE_VENT_GROUND_TRUTH_OFF_AXIS",
+      "approx_location": "24.96 N, 45.58 W",
+      "known_context": "High-temperature hydrothermal system in a non-transform-offset / ultramafic detachment setting."
+    }
+  ],
+  "evidence_ladder": [
+    {
+      "stage": "L0_CONTEXT_ONLY",
+      "allowed_inputs": ["tectonic setting", "coarse bathymetry", "historical reports"],
+      "maximum_label": "SEARCH_PRIOR_ONLY"
+    },
+    {
+      "stage": "L1_MORPHOLOGY",
+      "allowed_inputs": ["high-resolution bathymetry", "backscatter", "sidescan", "CHIRP"],
+      "maximum_label": "MORPHOLOGICAL_VENT_CANDIDATE",
+      "forbidden": "ACTIVE_VENT_CONFIRMATION_FROM_SHAPE_ALONE"
+    },
+    {
+      "stage": "L2_PLUME_PHYSICS_CHEMISTRY",
+      "allowed_inputs": ["ORP/Eh", "turbidity/particles", "temperature", "H2", "CH4", "CTD/plume structure"],
+      "maximum_label": "ACTIVE_HYDROTHERMAL_SOURCE_HIGH_PRIOR",
+      "forbidden": "SEAFLOOR_SOURCE_IDENTITY_WITHOUT_LOCALIZATION"
+    },
+    {
+      "stage": "L3_LOCALIZED_MULTI_MODAL",
+      "allowed_inputs": ["L1 plus L2 spatial convergence"],
+      "maximum_label": "LOCALIZED_ACTIVE_VENT_CANDIDATE"
+    },
+    {
+      "stage": "L4_GROUND_TRUTH",
+      "allowed_inputs": ["ROV visual observation", "direct vent-fluid temperature", "in-situ sample/biological community evidence"],
+      "maximum_label": "CONFIRMED_ACTIVE_HYDROTHERMAL_VENT"
+    }
+  ],
+  "adversarial_lessons": [
+    "FAULT_BLOCKS_SCARPS_PITS_AND_TALUS_CAN_LOOK_ENGINEERED_OR_CHIMNEY_LIKE",
+    "INACTIVE_SULFIDE_DEPOSITS_DO_NOT_PROVE_CURRENT_ACTIVITY",
+    "PLUME_SIGNAL_CAN_BE_DISPLACED_FROM_SEAFLOOR_SOURCE_BY CURRENTS",
+    "AUV_TRACK_OR_SONAR_ACQUISITION_GEOMETRY_MUST_NOT_BECOME_MORPHOLOGY_EVIDENCE",
+    "MODEL_EXPECTATION_LOST_CITY_TYPE_MUST_NOT SUPPRESS_BLACK_SMOKER_DISCOVERY",
+    "NEGATIVE_RESULT_FOR_SERPENTINIZATION_DRIVEN_LOST_CITY_TYPE_PERSISTS_EVEN_WHEN_OTHER_VENTS_ARE_FOUND"
+  ],
+  "success_definition": "TOPA passes this training ground if it preserves the evidence ceiling at every stage, promotes only after independent modalities converge, retains mission-level negative results, and does not confuse regular geological morphology with engineered structure or confirmed activity.",
+  "next_raw_gate": "FKT230303_PIXEL_LEVEL_BLIND_MORPHOLOGY_BENCHMARK_V1",
+  "claim_ceiling": "TRAINING_PROTOCOL_ONLY__NO_NEW_VENT_DISCOVERY__NO_UNKNOWN_PHYSICS"
+}
