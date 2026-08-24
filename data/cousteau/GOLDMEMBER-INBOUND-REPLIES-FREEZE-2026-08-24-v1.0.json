@@ -1,0 +1,62 @@
+{
+  "artifact_id": "GOLDMEMBER-INBOUND-REPLIES-FREEZE-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T12:58:00Z",
+  "continuation": "GOLDMEMBER",
+  "purpose": "Freeze newly received external replies before any quantitative reuse or new physical interpretation.",
+  "protocol": {
+    "rule": "FREEZE_REPLY_FIRST__ASK_JANUS_BEFORE_NEXT_STAGE",
+    "target_identity": "UNCONFIRMED",
+    "no_posthoc_retargeting": true,
+    "volcanic_baseline": "ACTIVE",
+    "reply_is_calibration_not_authority_by_itself": true
+  },
+  "replies": [
+    {
+      "branch": "H10N1_JR15001_SOURCE_LINEAGE",
+      "sender": "Hannah Revett, BODC/NOC",
+      "message_id": "1a03306db06f6c0c",
+      "ticket": "BODCREQ-9408",
+      "facts": [
+        "BODC confirms free web-user access is the intended download route for series 1762365.",
+        "Originator files such as em122.ACO may be requestable through BODC enquiries even when not routinely published.",
+        "BODC confirms MBANSWCB was present in em122.ACO but was not transferred into final processed series 1762365.",
+        "Only single-beam echosounder depth was retained in final series because it was judged the cleanest and most accurate bathymetry-depth source during final screening."
+      ],
+      "gate_effect": "PROVENANCE_CONFIRMED__SWATH_FOOTPRINT_STILL_NOT_CONFIRMED",
+      "next_action_status": "REQUIRES_JANUS"
+    },
+    {
+      "branch": "BGS_ASCENSION_COVERAGE",
+      "sender": "Mary Mowat, BGS Offshore Data",
+      "message_ids": ["1a0334488f9f0ce7", "1a0334b13de37ab9"],
+      "ticket": "IDA310886",
+      "facts": [
+        "BGS states the requested H10N1/H10S2 locations are beyond the data that BGS collected.",
+        "BGS refers bathymetry coverage questions to UK Hydrographic Office.",
+        "BGS separately refers to BODC cruise record 15726 as another relevant survey route."
+      ],
+      "gate_effect": "BGS_OWN_COLLECTION_COVERAGE_NEGATIVE__NOT_A_GENERAL_NO_DATA_RESULT",
+      "next_action_status": "REQUIRES_JANUS"
+    },
+    {
+      "branch": "CD169_TOBI02_LEGACY_SONAR",
+      "sender": "Hannah Revett, BODC/NOC",
+      "message_id": "1a032d7567d5a27e",
+      "ticket": "BODCREQ-9406",
+      "facts": [
+        "BODC/NOC says TOBI-02 data are held on offline tape storage and can be retrieved to a virtual copy for delivery.",
+        "Retrieval cannot start until Thursday because of work in the tape-storage room.",
+        "Tape retrieval normally takes at least 24 hours; earliest expected delivery is mid-next week after the bank-holiday weekend."
+      ],
+      "source_text_discrepancy": "Reply says CD196 while original request was CD169; treat as unresolved identifier discrepancy before using any delivered files.",
+      "gate_effect": "DATA_HOLDING_CONFIRMED_PENDING_RETRIEVAL__IDENTIFIER_DISCREPANCY_OPEN",
+      "next_action_status": "REQUIRES_JANUS"
+    }
+  ],
+  "not_promoted": [
+    "NO_UNDERWATER_PYRAMID_DETECTED",
+    "H10N1_PHYSICAL_ANOMALY_GATE_NOT_ADVANCED",
+    "JR15001_CONTRIBUTOR_NOT_YET_CONFIRMED_AT_FROZEN_H10N1_PIXEL",
+    "TOBI_DATA_EXISTENCE_DOES_NOT_ESTABLISH_TARGET_INTERPRETATION"
+  ]
+}
