@@ -1,0 +1,112 @@
+{
+  "schema": "janus.cosmos.love_edem.coordinate_resolver.receipt.v1",
+  "experiment_id": "LOVE-EDEM-COORDINATE-RESOLVER-v1",
+  "run": {
+    "workflow": "LOVE EDEM Coordinate Resolver",
+    "run_id": 32282415991,
+    "job_id": 96164016328,
+    "conclusion": "success",
+    "artifact_id": 9376370033,
+    "artifact_name": "love-edem-coordinate-resolver",
+    "artifact_sha256": "efa5f0bcb85938a6d45394efd35d7e5b0f7ab9cd0fe935b851bfdce4c04fd00d"
+  },
+  "mode": "WHAT_IS_AT_THESE_COORDINATES",
+  "anomaly_scoring_used": false,
+  "legacy_janus_v21_morphology_role": "DIAGNOSTIC_ONLY",
+  "primary_channel": "PRECISE_CATALOG_OBJECT_RESOLVER",
+  "secondary_channel": "SKYVIEW_BYPASS_CALIBRATION",
+  "calibration": {
+    "same_source_positional_tolerance_arcsec": 1.0,
+    "skyview_surveys": ["DSS2 Red", "2MASS-J", "WISE 3.4"],
+    "LOVE": {
+      "allwise_primary_vs_secondary_delta_arcsec": 0.0,
+      "twomass_primary_vs_secondary_delta_arcsec": 0.0,
+      "fits_wcs_checks": 3,
+      "fits_wcs_center_residual_arcsec_max": 2.289999370653732e-11
+    },
+    "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {
+      "allwise_primary_vs_secondary_delta_arcsec": 0.0,
+      "fits_wcs_checks": 3,
+      "fits_wcs_center_residual_arcsec_max": 0.0
+    },
+    "interpretation": "The SkyView/open-sky bypass independently resolves the same requested sky centers and reproduces overlapping catalog neighbors where the service succeeded. It is retained as a calibration/cross-check channel, not an anomaly detector."
+  },
+  "targets": {
+    "LOVE": {
+      "center_icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+      "radius_arcsec": 30.0,
+      "simbad_count": 0,
+      "allwise_count": 5,
+      "nearest_allwise": {
+        "designation": "J133711.05-364649.7",
+        "separation_arcsec": 20.289587649207107,
+        "W1": 15.974,
+        "W2": 16.186,
+        "W3": 12.412,
+        "W4": 9.145,
+        "snr": {"W1": 19.4, "W2": 5.8, "W3": 0.8, "W4": -0.4}
+      },
+      "twomass_psc_count": 1,
+      "nearest_twomass": {
+        "designation": "13371100-3646446",
+        "separation_arcsec": 23.032148764332643,
+        "J": 15.697,
+        "H": 14.961,
+        "Ks": 15.042
+      },
+      "sdss_dr17_count": 0,
+      "panstarrs_status": "OUTSIDE_PS1_3PI_DEC_COVERAGE",
+      "gaia_dr3_status": "SERVICE_QUERY_ERROR"
+    },
+    "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {
+      "center_icrs": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318},
+      "radius_arcsec": 30.0,
+      "simbad_count": 0,
+      "allwise_count": 5,
+      "nearest_allwise": {
+        "designation": "J091653.98+301546.0",
+        "separation_arcsec": 9.021198661597598,
+        "W1": 17.574,
+        "W2": 16.917,
+        "W3": 12.592,
+        "W4": 9.014,
+        "snr": {"W1": 5.5, "W2": 0.8, "W3": -0.7, "W4": -0.6},
+        "ph_qual": "BUUU"
+      },
+      "twomass_psc_count": 0,
+      "sdss_dr17_count": 15,
+      "nearest_sdss": {
+        "objid": 1237664320537363072,
+        "ra_deg": 139.222680832912,
+        "dec_deg": 30.2569178151199,
+        "separation_arcsec": 13.24525762834276,
+        "u": 25.63188,
+        "g": 23.04796,
+        "r": 22.63702,
+        "i": 20.89185,
+        "z": 19.9841
+      },
+      "panstarrs_count_primary": 5,
+      "nearest_panstarrs": {
+        "objID": 144301392226548847,
+        "ra_deg": 139.22269411,
+        "dec_deg": 30.25687634,
+        "separation_arcsec": 13.372644968576678,
+        "imag": 21.793,
+        "zmag": 21.1874
+      },
+      "nearest_allwise_to_nearest_available_sdss_crossmatch_arcsec": 12.503927725385733,
+      "gaia_dr3_status": "SERVICE_QUERY_ERROR",
+      "panstarrs_secondary_status": "SERVICE_QUERY_ERROR"
+    }
+  },
+  "firewall": {
+    "query_error_is_not_zero_sources": true,
+    "catalog_proximity_is_not_identity": true,
+    "anomaly_gate_required": false,
+    "edem_identity_confirmed": false,
+    "love_candidate_activated": false,
+    "claim_ceiling": "Coordinate-neighborhood characterization and cross-service calibration only."
+  },
+  "next_gate": "GAIA_DR3_MIRROR_OR_VIZIER_FALLBACK_PLUS_SOURCE_CLUSTERING_AND_CLASSIFICATION"
+}

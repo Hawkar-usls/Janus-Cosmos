@@ -1,0 +1,69 @@
+{
+  "schema": "janus.cosmos.love.multieye.receipt.v2",
+  "experiment_id": "LOVE-G1-007-MULTIEYE-v2",
+  "run_id": 32268408005,
+  "job_id": 96118527811,
+  "run_conclusion": "success",
+  "head_sha": "0018a0cc22bfe1188a4e5fd027e174be49cf8e3e",
+  "artifact": {
+    "id": 9371334854,
+    "name": "love-g1-007-multieye-real-archive",
+    "sha256": "fe5fc1f241d15f334a43a939be91b4c6cc62d622e00c01663e03ee26a6ea1b7a",
+    "size_bytes": 5865
+  },
+  "blind_label": "TARGET_A",
+  "mapped_lave_point": {
+    "ra_deg": 204.30267916666668,
+    "dec_deg": -36.78240527777778,
+    "distance_pc": 35.119084119255824,
+    "parallax_mas": 28.47454667679386
+  },
+  "results": {
+    "gaia_ranked_source_count": 20,
+    "gaia_k_like_count": 1,
+    "known_planets_in_control_volume": 3,
+    "hst_wcs_bound_fits": 0,
+    "luci_wcs_bound_fits": 0,
+    "tess_timeseries_available_sources": 7
+  },
+  "nearest_gaia_source": {
+    "source_id": "6163733512389228672",
+    "distance_from_target_point_pc": 0.8265349506548286,
+    "distance_pc": 35.29214056502078,
+    "ra_deg": 205.44435449483456,
+    "dec_deg": -35.842229704933814,
+    "teff_k": 3195.427734375,
+    "k_like": false,
+    "tess_tic_id": "102039892",
+    "tess_observation_count": 4
+  },
+  "k_like_focus_source": {
+    "rank": 3,
+    "source_id": "6164379784707817216",
+    "distance_from_target_point_pc": 1.1161699631047979,
+    "distance_pc": 34.07113304338565,
+    "ra_deg": 203.57787994990835,
+    "dec_deg": -36.523695896498836,
+    "teff_k": 4635.04833984375,
+    "bp_rp": 1.242990493774414,
+    "ruwe": 1.0550144910812378,
+    "phot_g_mean_mag": 9.084383964538574,
+    "tess_tic_id": "165636116",
+    "tess_observation_count": 2
+  },
+  "known_planet_firewall": [
+    "TOI-4336 A b",
+    "TOI-4336 A c",
+    "HD 117207 b"
+  ],
+  "luci_schema_coordinate_binding": [
+    {"table": "lbt.luci", "ra": "crval1", "dec": "crval2"},
+    {"table": "lbt.lbt", "ra": "ra", "dec": "dec"}
+  ],
+  "love_gate": {
+    "reserved_codename": "Love",
+    "candidate_activated": false,
+    "next_gate": "DOWNLOAD_AND_BLIND_SEARCH_THE_7_AVAILABLE_TESS_TIMESERIES_WITH_REPEATABILITY_CONTROLS"
+  },
+  "claim_ceiling": "TARGETED_REAL_SKY_MULTI_ARCHIVE_SEARCH_ONLY__NO_EXOPLANET_DISCOVERY_UNTIL_SIGNAL_AND_REPLICATION_GATES_PASS"
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.edem.giza_reverse_spear.prereg.v1",
+  "experiment_id": "EDEM-GIZA-REVERSE-SPEAR-v1",
+  "date_utc": "2026-08-19",
+  "parent_registry_artifact": "JANUS-SPEAR-OF-OSIRIS-EDAN-LOVE-PYRAMID-REVERSAL-2026-08-19-v1.0",
+  "analysis_label": "UPSTREAM_TARGET_B",
+  "semantic_alias": "Edan/Edem",
+  "semantic_alias_is_not_astronomical_evidence": true,
+  "observer": {
+    "name": "GIZA_GREAT_PYRAMID_APPROX_CENTER",
+    "latitude_deg": 29.9792345,
+    "longitude_deg_east": 31.1342019,
+    "height_m": 60.0,
+    "all_local_geometry_is_computed_from_giza": true
+  },
+  "love_target": {
+    "analysis_label": "TARGET_A",
+    "ra_deg_icrs": 204.30267916666667,
+    "dec_deg_icrs": -36.78240527777778,
+    "distance_pc": 35.119084119255824,
+    "use_finite_distance_topocentric_projection_from_giza": true
+  },
+  "khufu_faces": {
+    "face_normal_altitude_deg": 38.16,
+    "outward_normal_azimuth_deg": {
+      "NORTH": 359.94,
+      "EAST": 89.9433333333,
+      "SOUTH": 179.9916666667,
+      "WEST": 269.9383333333
+    }
+  },
+  "time_window": {
+    "start_utc": "2026-01-01T00:00:00Z",
+    "stop_utc": "2026-02-01T00:00:00Z",
+    "coarse_step_seconds": 60,
+    "refine_half_window_seconds": 180,
+    "refine_step_seconds": 1
+  },
+  "reverse_spear_geometry": {
+    "vector_convention": "source vectors point from the Giza interaction point toward the sky source",
+    "upstream_direction_rule": "s_edem = 2*dot(s_love,n_face)*n_face - s_love",
+    "meaning": "For each fixed Khufu face normal, derive the reciprocal sky direction that would specularly couple to the fixed Love direction at Giza.",
+    "selector": "Among physically visible/front-side solutions, choose the time/face whose derived upstream direction is closest to the Moon direction, matching the already-preregistered Echo-Moon reciprocal gate.",
+    "visibility_required": ["Love altitude > 0 deg", "Moon altitude > 0 deg", "derived upstream altitude > 0 deg", "Love and Moon on outward hemisphere of tested face"],
+    "primary_gate_deg": 0.25,
+    "strong_gate_deg": 0.10,
+    "exact_center_gate_deg": 0.05
+  },
+  "output_policy": {
+    "return_icrs_ra_dec_for_best_geometry_direction": true,
+    "coordinate_name": "EDEM_GEOMETRY_DIRECTION_CANDIDATE",
+    "do_not_claim_physical_eden_identity": true,
+    "do_not_shift_archive_catalog_coordinates_into_altaz": true,
+    "giza_is_observer_frame_for_geometry_not_a_replacement_for_icrs": true
+  },
+  "claim_ceiling": "GIZA_TOPOCENTRIC_RECIPROCAL_DIRECTION_ONLY__NOT_AN_IDENTIFIED_EDEN_OBJECT__NOT_A_HISTORICAL_DEVICE_CLAIM"
+}

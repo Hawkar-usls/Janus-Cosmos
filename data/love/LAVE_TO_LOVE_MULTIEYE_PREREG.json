@@ -1,0 +1,76 @@
+{
+  "schema": "janus.cosmos.love.multieye.prereg.v2",
+  "experiment_id": "LOVE-G1-007-MULTIEYE-v2",
+  "date_utc": "2026-08-19",
+  "origin": {
+    "screen_label": "G1/007 Lave",
+    "phonetic_observation": "Lave ~ Love",
+    "phonetic_observation_affects_scientific_gate": false,
+    "source_system": "Elite Dangerous / EDSM Lave",
+    "edsm_icrs": {
+      "ra_deg": 204.30267916666667,
+      "dec_deg": -36.78240527777778,
+      "ra_hms": "13:37:12.643",
+      "dec_dms": "-36:46:56.659"
+    },
+    "target_distance_pc": 35.119084119255824,
+    "target_parallax_mas": 28.47454667679386
+  },
+  "blind_identity_firewall": {
+    "analysis_label": "TARGET_A",
+    "reserved_post_gate_codename": "Love",
+    "name_is_hidden_from_scoring": true,
+    "phonetic_match_is_not_evidence": true,
+    "known_catalog_object_is_not_our_discovery": true,
+    "codename_activation_requires": [
+      "new repeatable planetary signal",
+      "instrumental and eclipsing-binary controls",
+      "independent archival or new-observation replication"
+    ]
+  },
+  "gaia": {
+    "angular_radius_deg": 5.0,
+    "parallax_min_mas": 23.0,
+    "parallax_max_mas": 36.0,
+    "parallax_over_error_min": 10.0,
+    "ruwe_max_preferred": 1.4,
+    "k_like_temperature_k": [3900, 5200],
+    "k_like_bp_rp_fallback": [0.8, 1.7],
+    "top_sources": 20,
+    "archive_probe_sources": 12
+  },
+  "hst_mast": {
+    "query_radius_arcsec": 45.0,
+    "max_downloads_per_source": 2,
+    "accepted_product_suffixes": [".fits", ".fits.gz"],
+    "require_public_science": true,
+    "download_real_fits": true,
+    "wcs_containment_required_for_admission": true
+  },
+  "luci_lbt": {
+    "query_radius_arcsec": 45.0,
+    "max_downloads_per_source": 2,
+    "require_free_policy": true,
+    "require_science": true,
+    "require_imaging_mirror": true,
+    "download_real_fits": true,
+    "verify_with_existing_luci_fits_provenance_gate": true,
+    "wcs_containment_required_for_admission": true
+  },
+  "tess": {
+    "probe_top_sources": 12,
+    "download_lightcurves": false,
+    "next_gate": "BLS_TRANSIT_SEARCH_AFTER_ARCHIVE_COVERAGE_RESOLUTION"
+  },
+  "discovery_gate": {
+    "candidate_codename": "Love",
+    "candidate_activated_initially": false,
+    "minimum_evidence": [
+      "previously uncatalogued repeatable transit/RV/astrometric signal",
+      "same-source coordinate binding",
+      "artifact and eclipsing-binary rejection",
+      "independent replication"
+    ]
+  },
+  "claim_ceiling": "TARGETED_REAL_SKY_MULTI_ARCHIVE_SEARCH_ONLY__NO_EXOPLANET_DISCOVERY_UNTIL_SIGNAL_AND_REPLICATION_GATES_PASS"
+}

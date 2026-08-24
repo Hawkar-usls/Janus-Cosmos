@@ -1,0 +1,55 @@
+{
+  "schema": "janus.cosmos.love.giza_frame.prereg.v1",
+  "experiment_id": "LOVE-G1-007-GIZA-FRAME-v1",
+  "date_utc": "2026-08-19",
+  "scientific_role": "COORDINATE_FRAME_CORRECTION_AND_PYRAMID_GEOMETRY_ONLY",
+  "target": {
+    "analysis_label": "TARGET_A",
+    "ra_deg_icrs": 204.30267916666667,
+    "dec_deg_icrs": -36.78240527777778,
+    "distance_pc": 35.119084119255824,
+    "parallax_mas": 28.47454667679386,
+    "reserved_post_gate_codename": "Love",
+    "name_hidden_from_scoring": true
+  },
+  "observer": {
+    "frame_name": "GIZA_GREAT_PYRAMID_APPROX_CENTER",
+    "latitude_deg": 29.9792345,
+    "longitude_deg_east": 31.1342019,
+    "height_m": 60.0,
+    "precision_class": "APPROXIMATE_PUBLIC_GEODETIC_ANCHOR_NOT_SURVEY_GRADE",
+    "replacement_rule": "A later survey-grade coordinate may replace this anchor only in a new preregistered version; never tune it on an alignment result."
+  },
+  "time_window": {
+    "start_utc": "2026-08-19T00:00:00Z",
+    "stop_utc": "2026-08-20T00:00:00Z",
+    "step_seconds": 60
+  },
+  "atmosphere": {
+    "pressure_hpa": 0.0,
+    "reason": "Vacuum apparent geometry first; atmospheric refraction is not allowed to create an alignment."
+  },
+  "pyramid_idealized_geometry": {
+    "face_inclination_deg_above_horizontal": 51.84,
+    "face_outward_azimuths_deg": {
+      "NORTH": 0.0,
+      "EAST": 90.0,
+      "SOUTH": 180.0,
+      "WEST": 270.0
+    },
+    "face_outward_normal_altitude_deg": 38.16,
+    "note": "Ideal cardinal faces only. Survey-grade face azimuths and local horizon masks belong in a later gate."
+  },
+  "frame_policy": {
+    "archive_query_frame": "ICRS",
+    "archive_coordinates_must_not_be_shifted_to_giza_altaz": true,
+    "pyramid_geometry_frame": "TOPOCENTRIC_ALTAZ_AT_GIZA",
+    "reason": "HST/LUCI/TESS/Gaia archives are astrometrically tied to celestial frames; Giza is the physical receiver frame, not a replacement catalog frame."
+  },
+  "admission": {
+    "love_candidate_activation_allowed": false,
+    "historical_mechanism_claim_allowed": false,
+    "geometry_claim_ceiling": "TOPOCENTRIC_DIRECTION_AND_IDEAL_FACE_ALIGNMENT_ONLY",
+    "next_gate": "JANUS_REVERSE_SPEAR_INBOUND_GEOMETRY_GATE_V1__MOON_AND_SURVEY_GEOMETRY"
+  }
+}
