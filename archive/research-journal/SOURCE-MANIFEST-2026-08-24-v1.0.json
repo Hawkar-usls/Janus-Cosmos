@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-COSMOS-COUSTEAU-LOVE-EDEM-SOURCE-MANIFEST-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T16:52:00Z",
+  "purpose": "Append-only provenance manifest for the consolidated JANUS Cosmos research archive. Source research artifacts are reused by Git blob SHA and are not rewritten by this archive layer.",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "archive_branch": "archive/cousteau-love-edem-journal-20260824",
+  "base": {
+    "branch": "janus-echo-cousteau",
+    "commit": "99aaf0da9294abe26be239cc6e6fef0523d0d6fc",
+    "root_tree": "cfbf39616d07bad6321dd9fc02727172d4880a17",
+    "data_tree": "ee46c7d8507169637ec4fba36093b50c085de005",
+    "cousteau_tree": "54f127cd09826b91b8f741b6e19431f6cfe34691",
+    "later_love_tree": "3586a04653c009dd60827bde75d34ad034c3991f"
+  },
+  "imported_legacy_love_source": {
+    "branch": "research/love-g1-007-multieye-v2",
+    "tree": "18d20fc52d047c2850ea758ede63e910e1bf9f9d",
+    "union_love_tree": "e7f4367437227124c7f09285e84be1b3c59173d6",
+    "import_mode": "REUSE_EXISTING_BLOB_SHA__NO_CONTENT_REWRITE",
+    "files": [
+      {"path":"EDEM-GIZA-REVERSE-SPEAR-v1-RUN-001-RECEIPT.json","blob":"02d0f95d978a5252d710ae4b83a23ec4c0652b49"},
+      {"path":"EDEM-ZAPORIZHZHIA-REVERSE-SPEAR-v1-RUN-001-RECEIPT.json","blob":"ff57721dc1acdac05e82bea7fdb04e686b2b481a"},
+      {"path":"EDEM_GIZA_REVERSE_SPEAR_PREREG.json","blob":"2d6f7d140eb1b0f355dbf27fb2e18e2f36c98929"},
+      {"path":"EDEM_ZAPORIZHZHIA_REVERSE_SPEAR_PREREG.json","blob":"7df19255042af80eef9ea3fa11baaa257bf62cb7"},
+      {"path":"LAVE_TO_LOVE_GIZA_FRAME_PREREG.json","blob":"edf362a00fc44606a6a40f6c5c19c6c2ca0db5be"},
+      {"path":"LAVE_TO_LOVE_MULTIEYE_PREREG.json","blob":"38d2b78312b4c5410b92c1a5073f6cf9b73897aa"},
+      {"path":"LAVE_TO_LOVE_TESS_BLS_PREREG.json","blob":"ff03477550a1a5c3e3ef6243ea6e9bf8e13c4cd5"},
+      {"path":"LOVE-EDEM-CENTER-OBJECT-PROBE-v1-RUN-001-RECEIPT.json","blob":"1e103b56462755f080dfa7b7c7e04a6578130d0b"},
+      {"path":"LOVE-EDEM-COORDINATE-RESOLVER-v1-RUN-001-RECEIPT.json","blob":"058d279597070fc755e23fe32de81fc4875ca55e"},
+      {"path":"LOVE-EDEM-GAIA-MIRROR-CLUSTER-v1-RUN-001-RECEIPT.json","blob":"d887f082ff2e38d196274e221929329be3235f1c"},
+      {"path":"LOVE-EDEM-HST-DIRECT-v1-RUN-001-RECEIPT.json","blob":"5c093cce480cbe1ebc1b90ead05fa6c6995a7589"},
+      {"path":"LOVE-EDEM-HST-ZAPORIZHZHIA-v1-RUN-001-RECEIPT.json","blob":"526a2d51b3428ea05e0f1b0af1ad620921f2d6ee"},
+      {"path":"LOVE-EDEM-LEGACY-V21-REPLAY-v1-RUN-001-RECEIPT.json","blob":"d0238a3de9c5505ff87f579dc633fb64ba5e7974"},
+      {"path":"LOVE-EDEM-OPEN-SKY-SCAN-v1-RUN-001-RECEIPT.json","blob":"d42557bc1dfb034041816a82cc3acb88889858ea"},
+      {"path":"LOVE-EDEM-ORION-BELT-ICRS-GEOMETRY-v1-RUN-001-RECEIPT.json","blob":"ee5efd01ea60024215c7fe7c101767c7d8c72705"},
+      {"path":"LOVE-G1-007-MULTIEYE-v2-RUN-001-RECEIPT.json","blob":"c4e3015cb26ae3f0a1c774304ba9012ff5eaa3a4"},
+      {"path":"LOVE-G1-007-TESS-BLS-v1-RUN-001-RAW-RECEIPT.json","blob":"3b53768893e5a35b3f0619317ba5ab8418946009"},
+      {"path":"LOVE-G1-007-TOI-UNBLIND-v1-RUN-001-RECEIPT.json","blob":"8b8e8d5bea37bc5ebb1e4649e7aa833e4deed8b7"},
+      {"path":"LOVE_EDEM_COORDINATE_RESOLVER_PREREG.json","blob":"6e406f606814948de8dff05dfbb06f0b90683b73"},
+      {"path":"LOVE_EDEM_GAIA_MIRROR_CLUSTER_PREREG.json","blob":"77160a9a258668a1ac968e880a92c1e2ebf112ec"},
+      {"path":"LOVE_EDEM_HST_DIRECT_PREREG.json","blob":"f5abd0cde7ea6c8772e838aec52f0bcc16b56bc4"},
+      {"path":"LOVE_EDEM_HST_ZAPORIZHZHIA_PREREG.json","blob":"fc13976cbfb2e6f5de27d05070a82130c1f73286"},
+      {"path":"LOVE_EDEM_LEGACY_V21_REPLAY_PREREG.json","blob":"88ec9d5abb1d7bf5c937849ad80b1d779937b8dc"},
+      {"path":"LOVE_EDEM_PHYSICAL_SOURCE_IDENTIFICATION_PREREG.json","blob":"d87884a86582d479e0b429f0eaeb095c5e83176f"}
+    ]
+  },
+  "consolidated_layout": {
+    "data/cousteau": "Full current Cousteau/HA10/GOLDMEMBER append-only tree inherited from janus-echo-cousteau@99aaf0da9294abe26be239cc6e6fef0523d0d6fc.",
+    "data/love": "Union of the current later Love-EDEM tree and exact legacy Love/Lave/EDEM preregistration and receipt blobs.",
+    "archive/research-journal": "Human/machine-readable reconstruction of project chronology, evidence state, open gates, and source provenance."
+  },
+  "integrity_rules": [
+    "SOURCE_ARTIFACTS_ARE_NOT_REWRITTEN_BY_THE_JOURNAL",
+    "NEGATIVE_RESULTS_REMAIN_NEGATIVE",
+    "TECHNICAL_FAILURE_IS_NOT_SCIENTIFIC_NEGATIVE",
+    "CORRECTIONS_MUST_BE_NEW_CHILD_ARTIFACTS",
+    "ARCHIVE_SUMMARY_HAS_ZERO_AUTHORITY_TO_PROMOTE_A_CLAIM",
+    "METAPHOR_NEVER_OVERRIDES_PHYSICAL_DATA"
+  ]
+}
