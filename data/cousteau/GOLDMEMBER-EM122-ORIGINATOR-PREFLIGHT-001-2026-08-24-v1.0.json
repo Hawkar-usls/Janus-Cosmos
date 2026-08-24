@@ -1,0 +1,72 @@
+{
+  "artifact_id": "GOLDMEMBER-EM122-ORIGINATOR-PREFLIGHT-001-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T17:56:00Z",
+  "authorized_by": "GOLDMEMBER-AFTER-EM122-ACCESS-COUNCIL-RUN-012-2026-08-24-v1.0",
+  "status": "PREFLIGHT_COMPLETE__PRIMARY_BYTES_NOT_YET_INGESTED",
+  "custodian_reply": "GOLDMEMBER-BODC-EM122-ACCESS-REPLY-FREEZE-2026-08-24-v1.0",
+  "official_public_metadata": {
+    "source": "BODC series 1762365 processing/data-quality documentation",
+    "cruise": "JR15001 (AMT25, JR864)",
+    "originator_file": "em122.ACO",
+    "format": "ASCII (.ACO)",
+    "nominal_interval": "~1 sec",
+    "file_start": "2015-09-25T14:45:47",
+    "file_end": "2015-11-02T15:43:57",
+    "common_first_four_columns": [
+      "Year (yyyy)",
+      "Julian day.day fraction",
+      "Julian day",
+      "day fraction"
+    ],
+    "originator_parameter": "depth",
+    "originator_units": "meters",
+    "bodc_mapping": "MBANSWCB",
+    "bodc_description": "multi-beam depth by echo-sounder",
+    "final_series_transfer": "NOT_TRANSFERRED_TO_FINAL_SERIES",
+    "navigation_originator_file": "seatex-gga.ACO",
+    "navigation_parameters": ["lat", "lon"],
+    "navigation_reference": "WGS84 Seatex Seapath 320+ GPS"
+  },
+  "ascension_multibeam_context": {
+    "survey_dates": "2015-10-14 through 2015-10-18",
+    "survey_b_start": "2015-10-14T10:12:45",
+    "survey_b_end": "2015-10-15T17:33:45",
+    "survey_b_raw_lines": "0000-0039 (40 files)",
+    "survey_c_start": "2015-10-16T13:56:30",
+    "survey_c_end": "2015-10-18T09:59:01",
+    "survey_c_raw_lines": "0000-0022 (23 files; cruise report notes additional collection continued)",
+    "published_scope": "near-complete high-resolution Ascension shelf coverage from about 100 m depth to 6 nautical miles from shore; BODC summary describes multibeam mapping in roughly 100-1100 m depth range",
+    "processing_note": "Cruise report states there was insufficient time for full MB-System processing aboard ship; preliminary work used raw data with limited editing in Fledermaus/ArcGIS."
+  },
+  "scientific_interpretation": {
+    "what_em122_aco_can_directly_test": [
+      "whether EM122 centre-beam depth was being logged at specific timestamps",
+      "centre-beam depth time series once primary bytes are ingested"
+    ],
+    "what_em122_aco_cannot_by_itself_prove": [
+      "full two-dimensional swath footprint",
+      "off-track beam coverage at H10N1",
+      "target morphology or identity"
+    ],
+    "required_for_geolocation": "time-match em122.ACO to seatex-gga.ACO or an equivalently authoritative machine-readable navigation series",
+    "future_boolean_gate": "H10N1_IN_OUT can be strong if the centre-beam track passes sufficiently close to H10N1 or sufficiently far outside any defensible swath; intermediate off-track cases require real swath/ping/beam bounds."
+  },
+  "connector_access_attempt": {
+    "sharepoint_connection": "PRESENT",
+    "noc_site_resolution": "BLOCKED_AT_CONNECTOR_LAYER",
+    "observed_errors": [
+      "Microsoft Graph site/search endpoint reports current connection as MSA and does not support the organizational SharePoint API path",
+      "direct folder sharing-link resolution returns invalid shares key"
+    ],
+    "classification": "TECHNICAL_ACCESS_BLOCK__NOT_A_SCIENTIFIC_NEGATIVE",
+    "raw_bytes_downloaded": false,
+    "sha256_computed": false
+  },
+  "next_minimal_requirement": "Obtain an exact file-level SharePoint link for em122.ACO that the connector can resolve, or ingest the custodian-supplied file bytes directly; then hash before parsing.",
+  "hard_boundaries": [
+    "NO_MORPHOLOGY_SCORING",
+    "NO_TARGET_IDENTITY_PROMOTION",
+    "NO_CLAIM_THAT_SHAREPOINT_CONNECTOR_FAILURE_MEANS_DATA_UNAVAILABLE",
+    "NEGATIVE_RESULTS_REMAIN_VALID_WHEN_SCIENTIFIC_GATES_ARE_ACTUALLY_TESTED"
+  ]
+}
