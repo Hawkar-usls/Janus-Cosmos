@@ -1,0 +1,130 @@
+{
+  "artifact_id": "GOLDMEMBER-CD169-LINE19-SYNTHETIC-GEOMETRY-MODULATION-RUN-001-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T16:39:00Z",
+  "authorized_by": "GOLDMEMBER-SYNTHETIC-PREDICTION-COUNCIL-RUN-011-2026-08-24-v1.0",
+  "status": "FROZEN_PRE_PRIMARY_BYTES",
+  "purpose": "Freeze a synthetic navigation/viewing-geometry modulation before receipt of BODC/NOC TOBI primary bytes, so later tape navigation can be compared without retuning. This is a calibration layer, not an independent morphology prediction.",
+  "frozen_target": {
+    "cruise": "CD169",
+    "julian_day": 59,
+    "date": "2005-02-28",
+    "operation": "TOB-02",
+    "science_log_line": 19,
+    "window_utc": "01:00-01:29",
+    "target_lat": -3.865418,
+    "target_lon": -12.14244
+  },
+  "public_log_inputs": {
+    "source": "NOC Southampton Cruise Report No. 6 — RRS Charles Darwin Cruise 169",
+    "url": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+    "at_01_00": {
+      "tobi_lat": -3.869,
+      "tobi_lon": -12.145,
+      "line": 19,
+      "wire_out_m": 6728,
+      "altitude_m": 563,
+      "tobi_depth_m": 3338,
+      "heading_deg": 26.0
+    },
+    "at_01_29": {
+      "tobi_lat": -3.855,
+      "tobi_lon": -12.135,
+      "line": 19,
+      "wire_out_m": 6821,
+      "altitude_m": 510,
+      "tobi_depth_m": 3308,
+      "heading_deg": 11.6
+    },
+    "instrument_context_from_same_report": {
+      "sidescan": "30 kHz TOBI sidescan",
+      "survey_mode": "single-pass approximately six-kilometre swath",
+      "phase_bathymetry": "phase-difference sonar collected continuously for post-cruise interferometric bathymetry",
+      "chirp": "chirp seismic profiler acquired",
+      "magnetometer": "three-component magnetometer acquired"
+    }
+  },
+  "deterministic_interpolation": {
+    "method": "local tangent-plane linear interpolation between the two published TOBI positions",
+    "segment_length_m": 1911.600709,
+    "fraction_from_01_00": 0.255905260,
+    "closest_approach_time_after_01_00_s": 445.275152,
+    "closest_approach_time_utc": "01:07:25.275",
+    "closest_approach_cross_track_m": 0.129067,
+    "interpolated_altitude_m": 549.437021,
+    "interpolated_tobi_depth_m": 3330.322842,
+    "interpolated_heading_deg": 22.314964,
+    "interpolated_seafloor_depth_from_vehicle_depth_plus_altitude_m": 3879.759863,
+    "classification": "LOG_DERIVED_CALIBRATION_ANCHOR__NOT_INDEPENDENT_PREDICTIVE_EVIDENCE"
+  },
+  "monte_carlo_modulation": {
+    "random_seed": 20260824,
+    "samples": 200000,
+    "model": "Each published endpoint latitude and longitude is independently perturbed uniformly within +/-0.0005 degree, representing only rounding/quantization of the 0.001-degree published decimal positions. This is NOT a complete navigation-error model.",
+    "all_simulated_closest_points_inside_segment": true,
+    "closest_approach_time_after_01_00_s": {
+      "median": 445.794155,
+      "p05": 406.666150,
+      "p95": 482.554131,
+      "p025": 400.900512,
+      "p975": 488.037077,
+      "p005": 391.942626,
+      "p995": 497.140976
+    },
+    "closest_approach_time_utc": {
+      "median": "01:07:25.794",
+      "central_90pct": ["01:06:46.666", "01:08:02.554"],
+      "central_95pct": ["01:06:40.901", "01:08:08.037"],
+      "central_99pct": ["01:06:31.943", "01:08:17.141"]
+    },
+    "absolute_cross_track_m": {
+      "median": 18.263579,
+      "p95": 47.769947,
+      "p975": 52.644304,
+      "p995": 60.852179
+    },
+    "signed_cross_track_m": {
+      "p025": -48.035014,
+      "median": -0.032291,
+      "p975": 47.460365
+    },
+    "interpolated_state_at_simulated_closest_approach": {
+      "altitude_m_central95": [548.134503, 550.788663],
+      "altitude_m_median": 549.421213,
+      "tobi_depth_m_central95": [3329.585568, 3331.087922],
+      "tobi_depth_m_median": 3330.313893,
+      "heading_deg_central95": [21.961072, 22.682203],
+      "heading_deg_median": 22.310669,
+      "vehicle_depth_plus_altitude_m_central95": [3877.720070, 3881.876585],
+      "vehicle_depth_plus_altitude_m_median": 3879.735106
+    },
+    "viewing_geometry": {
+      "interpretation": "Under the published-position rounding-only ensemble, the frozen coordinate remains very close to the interpolated TOBI centerline. At the 97.5th percentile absolute cross-track distance and nominal interpolated altitude, the horizontal offset corresponds to about 5.47 degrees off nadir; at the 99.5th percentile it is about 6.32 degrees off nadir.",
+      "off_nadir_deg_at_cross_track_p975": 5.473087,
+      "off_nadir_deg_at_cross_track_p995": 6.319962,
+      "warning": "Near-nadir geometry does not guarantee useful sidescan imaging at the exact point. Nadir-gap/beam-footprint behavior must be determined from the actual TOBI product and metadata; no nadir-gap width is assumed here."
+    }
+  },
+  "later_real_data_scoring_contract": {
+    "calibration_scores": [
+      "absolute error between real closest-approach time and frozen 01:07:25.275 calibration anchor",
+      "real cross-track distance of frozen coordinate to recovered TOBI navigation",
+      "whether recovered line/tow identity is CD169/JD059/TOB-02/line19",
+      "real vehicle altitude/depth/heading at closest approach versus frozen modulation envelope"
+    ],
+    "unknown_signal_or_morphology_scores": [
+      "MUST be frozen in a separate artifact before any target-interval TOBI image/trace content is inspected",
+      "must use the same fixed window and same metric definitions on synthetic and real data",
+      "must report negative/contradictory outcomes without retuning"
+    ],
+    "reporting_rule": "Do not collapse calibration and morphology into one score. A navigation match validates registration/model geometry only; it does not validate a seafloor anomaly hypothesis."
+  },
+  "hard_boundaries": [
+    "NO_REAL_TOBI_PIXEL_OR_TRACE_CONTENT_USED_IN_THIS_RUN",
+    "NO_RETUNING_AFTER_PRIMARY_BYTES",
+    "NO_WINDOW_MOVEMENT",
+    "NO_CHERRY_PICKED_PINGS",
+    "LOG_DERIVED_01_07_25_IS_NOT_COUNTED_AS_AN_INDEPENDENT_PREDICTION",
+    "TARGET_IDENTITY_UNCONFIRMED",
+    "VOLCANIC_BASELINE_ACTIVE"
+  ]
+}
