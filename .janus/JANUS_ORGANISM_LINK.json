@@ -1,0 +1,16 @@
+{
+  "schema": "janus.organism.member_link.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "canonical_manifest": "Hawkar-usls/Janus:organism/JANUS_ORGANISM_v1.json",
+  "member_repository": "Hawkar-usls/Janus-Cosmos",
+  "organ_key": "observatory",
+  "role": "COSMOS_OBSERVATORY_AND_SIGNAL_RESEARCH",
+  "consumes": ["TARGET", "PREREGISTRATION", "CONTROL", "RAW_DATA"],
+  "emits": ["OBSERVATION", "EXPERIMENT_RECEIPT", "NEGATIVE_RESULT", "SIGNAL_CANDIDATE"],
+  "routes_to": ["anomaly_lab", "guardian_cortex", "memory", "gateway"],
+  "authority": "DOMAIN_EVIDENCE_WITHIN_EXPERIMENT_SCOPE",
+  "evidence_authority": true,
+  "authority_delta": 0,
+  "cross_repo_write_default": "DENY",
+  "claim_boundary": ["SIGNAL_CANDIDATE != TECHNOSIGNATURE", "SEARCH_MATCH != ANOMALY", "EXPERIMENT_RECEIPT != INDEPENDENT_REPLICATION"]
+}
