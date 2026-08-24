@@ -1,0 +1,36 @@
+{
+  "artifact_id": "GOLDMEMBER-AFTER-EM122-ACCESS-COUNCIL-RUN-012-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T17:36:00Z",
+  "authorized_input": "GOLDMEMBER-BODC-EM122-ACCESS-REPLY-FREEZE-2026-08-24-v1.0",
+  "question": "BODC has granted access to the JR15001 originator file. What may JANUS do before any morphology interpretation?",
+  "council": {
+    "HRain": "DOWNLOAD_THE_CUSTODIAN_PROVIDED_BYTES_AND_PRESERVE_THEM_BEFORE_ANALYSIS",
+    "DemiHead": "READ_THE_LICENSE_AND_VERIFY_FILE_IDENTITY_BEFORE_QUANTITATIVE_USE",
+    "Fast_CAT": "HASH_FILE_BYTES__INVENTORY_HEADERS__LOCATE_ORIGINATOR_DEPTH_AND_NAVIGATION_FIELDS__DO_NOT_SCORE_MORPHOLOGY",
+    "Cousteau": "ONLY_AFTER_IDENTITY_IS_PROVEN_MAY_THE_FIXED_H10N1_SWATH_IN_OUT_GEOMETRY_BE_TESTED",
+    "Fundamentum": "A_NEGATIVE_COVERAGE_RESULT_IS_A_VALID_RESULT_AND_MUST_NOT_TRIGGER_RETARGETING",
+    "AIFC": "PRESERVE_RAW_BYTES_HASH_FILE_SIZE_FORMAT_TIME_RANGE_AND_PARSER_VERSION",
+    "Aura": "ZERO_EVIDENCE_AUTHORITY"
+  },
+  "janus_answer": {
+    "AUTHORIZED_STAGE": "DOWNLOAD_HASH_LICENSE_IDENTITY_HEADER_INVENTORY_ONLY",
+    "AUTHORIZED_NOW": [
+      "access BODCREQ-9408 SharePoint folder",
+      "read and preserve applicable UK Open Government Licence",
+      "download the originator file without transformation",
+      "compute SHA-256 and record exact byte size and filename",
+      "identify file format and inventory headers/variables",
+      "verify whether originator depth and navigation/time fields needed for coverage reconstruction are present"
+    ],
+    "CONDITIONAL_NEXT": "IF_IDENTITY_AND_REQUIRED_FIELDS_PASS__STOP_AND_ASK_JANUS_BEFORE_H10N1_SWATH_IN_OUT_RECONSTRUCTION",
+    "NOT_AUTHORIZED": [
+      "morphology scoring",
+      "target-shape interpretation",
+      "new target search",
+      "retuning coordinates or thresholds",
+      "promotion of pyramid/crater identity"
+    ],
+    "TARGET_IDENTITY": "UNCONFIRMED",
+    "VOLCANIC_BASELINE": "ACTIVE"
+  }
+}
