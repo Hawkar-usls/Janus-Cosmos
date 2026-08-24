@@ -1,0 +1,172 @@
+{
+  "artifact_id": "JANUS-COUSTEAU-ROUTE-AND-ARCHIVE-REQUEST-AUDIT-2026-08-24-v1.0",
+  "created_at_local": "2026-08-24T20:21:00+03:00",
+  "project": "JANUS_ECHO_COUSTEAU",
+  "audit_class": "FULL_ROUTE_AND_CUSTODIAN_REQUEST_SANITY_CHECK",
+  "status": "PASS_WITH_TWO_LANE_SEPARATION_REPAIR_AND_ONE_REQUEST_SCOPE_REFINEMENT",
+  "overall_verdict": "THE_PROJECT_HAS_NOT_TAKEN_A_FATAL_WRONG_TURN. THE_MAJOR_EARLY_MISSTEPS_WERE_DETECTED_AND_CORRECTED. CURRENT_EXTERNAL_DATA_ACQUISITION_IS_MOSTLY_WELL_TARGETED. THE_MAIN_REMAINING_RISK_IS_NARRATIVE_LANE_MERGE: HA10_ASCENSION_CALIBRATION_MUST_NOT_BE_CONFUSED_WITH_THE_ORIGINAL_LOVE_EDEM_OCEAN_LOCUS. JR15001_EM122_ACO_IS_A_GOOD_NEXT_FILE_BUT_THE_GATE_IS_EXACT_SWATH_COVERAGE, NOT_THE_FILENAME_ITSELF.",
+  "route_audit": [
+    {
+      "stage": "OSIRIS_SPEAR_TO_LOVE_EDEM",
+      "verdict": "VALID_AS_INTERPRETIVE_HYPOTHESIS_GENERATOR_ONLY",
+      "risk": "semantic route could be mistaken for physical evidence",
+      "repair_state": "ALREADY_FIREWALLED__EVIDENCE_AUTHORITY_ZERO_UNTIL_REAL_MEASUREMENT"
+    },
+    {
+      "stage": "KAMIL_REAL_IMPACT_MELT_TEST",
+      "verdict": "CORRECT_AND_HIGH_VALUE",
+      "reason": "Independent impact direction and melt geology provided a hard real-world falsification gate.",
+      "result": "NEGATIVE_FOR_LOVE_EDEM_DIRECTIONAL_CAUSAL_LINK"
+    },
+    {
+      "stage": "KAMIL_VIRTUAL_PYRAMID_FREE_AZIMUTH",
+      "verdict": "TEMPORARY_WRONG_DEGREE_OF_FREEDOM__CORRECTLY_CAUGHT",
+      "reason": "44.5-degree EDEM accessibility depended on freely rotating azimuth.",
+      "repair_state": "SUPERSEDED_BY_RIGID_ORIENTATION_NULL_AND_RANDOM_SKY_CONTROL"
+    },
+    {
+      "stage": "LOVE_EDEM_LEGACY_EARTH_POINT",
+      "verdict": "INITIAL_OVERCOMMITMENT_TO_ONE_LONGITUDE__CORRECTLY_REPAIRED",
+      "reason": "With unconstrained sidereal phase, only the bisector latitude is intrinsic; longitude is time-dependent.",
+      "repair_state": "FULL_LATITUDE_CIRCLE_MODEL_ACTIVE__LEGACY_POINT_PRESERVED_ONLY_AS_HISTORICAL_TIMESTAMP_SPECIFIC_TEST"
+    },
+    {
+      "stage": "COUSTEAU_TRANSFORMED_ECHO_AND_TITANIC_LADDER",
+      "verdict": "CORRECT_DIRECTION",
+      "reason": "Known-target and natural-control calibration before unknown-field interpretation is methodologically sound.",
+      "remaining_gap": "Strongest full complex target-return/transfer-function Titanic validation is not yet closed."
+    },
+    {
+      "stage": "520_CLASS_AND_119HZ",
+      "verdict": "USEFUL_BRANCHES_THAT_COULD_HAVE_BECOME_A_WRONG_TURN__BUT_WERE_CORRECTLY_DOWNGRADED",
+      "reason": "520 is non-specific under natural controls; 119 is deep in HA10 response rolloff and confirmatory result is negative.",
+      "repair_state": "DO_NOT_COUNT_AS_TARGET_KEYS_OR_MULTIPLE_SUPPORT"
+    },
+    {
+      "stage": "TPHASE_AND_CELESTIAL_CROSSMATCH",
+      "verdict": "CORRECTLY_FALSIFIED",
+      "reason": "Legacy anchor does not survive spatial/error-aware controls and best date-location-cosmos match fails look-elsewhere.",
+      "repair_state": "NEGATIVE_IMMUTABLE"
+    },
+    {
+      "stage": "MAR_MINUS_11_79",
+      "verdict": "VALID_EXPLORATORY_DISCRIMINATING_POINT_ONLY",
+      "risk": "post-hoc longitude found after 360-degree scan could be narrated as localization",
+      "repair_state": "NO_RETARGET_AS_OBJECT_LOCATION"
+    },
+    {
+      "stage": "TOBI_CD169_LINE19",
+      "verdict": "CORRECT_AND_CURRENTLY_ONE_OF_THE_BEST_DIRECT_ORIGINAL_LOCUS_DATA_LANES",
+      "reason": "Independent real high-resolution marine survey crosses the already-frozen intrinsic latitude and offers sidescan, interferometric bathymetry, chirp and magnetics.",
+      "dependency_warning": "The dataset is independent but the selected crossing is defined using the project latitude, so the crossing itself is not independent celestial corroboration.",
+      "current_synthetic_run": "METHOD_CORRECT_AS_CALIBRATION_ONLY__PUBLIC_LOG_DERIVED_01_07_25_NOT_AN_INDEPENDENT_PREDICTION"
+    },
+    {
+      "stage": "HA10_H10N1_ASCENSION",
+      "verdict": "CORRECT_AS_CALIBRATION_AND_PROVENANCE_LANE__POTENTIAL_MISSION_DRIFT_IF_MERGED_WITH_ORIGINAL_TARGET",
+      "reason": "HA10 offers real public waveform and bathymetry data and a strong survey provenance problem, but it was prioritized for data quality/testability, not because original LOVE/EDEM geometry localized a target there.",
+      "required_repair": "KEEP_HA10_CALIBRATION_LANE_AND_ORIGINAL_LOVE_EDEM_OCEAN_LOCUS_LANE_EXPLICITLY_SEPARATE"
+    },
+    {
+      "stage": "H10N1_BLIND_MORPHOLOGY",
+      "verdict": "CORRECTLY_RUN_AND_CORRECTLY_NOT_PROMOTED",
+      "result": "2KM_PRIMARY_NOT_SIGNIFICANT_ENOUGH_TO_ADVANCE_GATE__1KM_LOCAL_WATCHLIST_ONLY",
+      "next_requirement": "INDEPENDENT_SOURCE_LINEAGE_OR_DIRECT_SWATH_REPLICATION_BEFORE_PROMOTION"
+    }
+  ],
+  "archive_request_audit": [
+    {
+      "lane": "BODC_CD169_TOBI",
+      "verdict": "EXCELLENT_TARGETING",
+      "why": [
+        "exact cruise/tow/JD/science-log line/time window specified",
+        "requested real primary/near-primary survey products rather than interpretation",
+        "multiple independent sensor channels identified",
+        "custodian's CD196 discrepancy was caught before accepting bytes",
+        "waiting for offline-tape retrieval rather than substituting a proxy"
+      ],
+      "next_delivery_checklist": [
+        "file manifest and original filenames",
+        "checksums if custodian can provide them; otherwise compute locally immediately",
+        "TOBI/towfish navigation and timestamp basis",
+        "sidescan raw or closest-to-raw plus processed sonogram/mosaic if available",
+        "phase-difference/interferometric bathymetry and processing metadata",
+        "chirp sub-bottom data and time/navigation linkage",
+        "magnetometer data and time/navigation linkage",
+        "instrument/acquisition notes relevant to swath geometry and nadir gap",
+        "CTD/SSP or cruise sound-speed context if available"
+      ],
+      "do_not_do": "Do not ask Hannah to interpret whether any feature is artificial, crater-like or anomalous."
+    },
+    {
+      "lane": "BODC_JR15001_SERIES_1762365",
+      "verdict": "CORRECT_WITH_SCOPE_REFINEMENT",
+      "current_strength": "BODC confirmed MBANSWCB existed in em122.ACO and was not transferred to the final processed series; originator-file route is real.",
+      "scope_risk": "em122.ACO may establish multibeam-depth provenance but may still be insufficient to reconstruct the exact H10N1 swath footprint or ping/beam intersection.",
+      "frozen_scientific_question": "DID_JR15001_EM122_INSONIFY_THE_H10N1_FROZEN_CELL_AND_CAN_THE_BOOLEAN_BE_REPRODUCED",
+      "request_rule": "Get em122.ACO first if that is the available originator artifact, but do not stop there merely because the filename was requested. If it lacks swath geometry, request the minimum raw/processed measurement chain that closes the boolean: raw Kongsberg EM122 datagrams or equivalent, processed XYZ/grid with line/ping identity, or explicit ping/beam footprint/bounding geometry.",
+      "do_not_do": "Do not infer swath intersection from centerline navigation alone."
+    },
+    {
+      "lane": "UKHO_HI1751",
+      "verdict": "SCIENTIFIC_QUESTION_EXCELLENT__ROUTING_CAN_BE_HARDENED_IF_SILENT",
+      "current_request": "Exact frozen-coordinate coverage boolean/shareable geometry is the right question.",
+      "routing_note": "Existing message went to BathyQueries@UKHO.gov.uk. BGS independently referred the project to customerservices@ukho.gov.uk, and current public UKHO guidance uses Customer Services for bathymetry enquiries and research@ukho.gov.uk for archive research.",
+      "next_rule": "Do not duplicate immediately. If the current thread remains unanswered after a reasonable business interval, forward the same thread to the public Customer Services address; use Archive Research only if catalogue/record research rather than a current data query is needed.",
+      "do_not_do": "Do not create multiple differently worded HI1751 requests that destroy anti-duplication traceability."
+    },
+    {
+      "lane": "FUGRO_P2548",
+      "verdict": "CORRECT_SUCCESSOR_CUSTODIAN_ROUTE",
+      "reason": "Fugro publicly records its 2003 acquisition of Thales Geosolutions, so a 2002 Thales GeoSolutions (Pacific) report is a rational historical archive enquiry.",
+      "current_state": "Marco requested identity/project verification; truthful independent-project response was sent; wait.",
+      "do_not_do": "Do not claim institutional affiliation that does not exist and do not lead with the target hypothesis."
+    },
+    {
+      "lane": "NAVFAC_P2548",
+      "verdict": "VERY_STRONG_RECORDS_ROUTE",
+      "reason": "The report chain names NFESC; current NAVFAC EXWC explicitly identifies NFESC as a predecessor and retains an Oceans Technical Department.",
+      "current_state": "NAVFAC records/FOIA enquiry sent; wait.",
+      "future_escalation_if_needed": "If generic records handling cannot locate it, route the same exact bibliographic request to NAVFAC EXWC/Oceans or its records/archive channel as a successor-organizational holding query rather than opening a new speculative search.",
+      "do_not_do": "Do not treat lack of a FOIA hit as evidence the survey/report never existed."
+    },
+    {
+      "lane": "CTBTO_P2548",
+      "verdict": "PLAUSIBLE_SECONDARY_HOLDING_ROUTE",
+      "reason": "CTBTO documents HA10 as an IMS hydroacoustic station and the 2004 offshore deployment, so it is reasonable to ask whether installation-era documentation entered programme archives.",
+      "limitation": "CTBTO is not proven custodian of the 2002 contractor report; keep it as holding candidate, not primary lineage authority."
+    },
+    {
+      "lane": "BGS_MODERN_ASCENSION",
+      "verdict": "CORRECTLY_CLOSED",
+      "result": "BGS states requested locations are beyond BGS-collected data and points to UKHO/BODC.",
+      "rule": "No more BGS chasing unless they volunteer a new specific holding/reference."
+    }
+  ],
+  "where_we_almost_left_the_road": [
+    "Treating free-azimuth Kamil geometry as if fixed architecture supported EDEM.",
+    "Treating the legacy 3.854924E longitude as intrinsically fixed by LOVE/EDEM.",
+    "Allowing 520-class or 119-Hz frequency proximity to behave like identity keys.",
+    "Potentially counting a full-360 MAR closest longitude as a discovered location.",
+    "Potentially counting the TOBI latitude crossing as independent spatial confirmation when the latitude selected it.",
+    "Allowing the rich HA10 data lane to replace rather than calibrate the original Cousteau question.",
+    "Risking a file-name-driven JR15001 request instead of a measurement-question-driven exact swath gate."
+  ],
+  "why_the_project_is_still_on_course": [
+    "Each major attractive false lead was eventually subjected to a stronger control and downgraded rather than hidden.",
+    "Coordinates/windows have repeatedly been frozen and no-retarget rules preserved.",
+    "Negative results remain in the record.",
+    "Current best next steps are primary-byte and provenance acquisition, not new semantic target invention.",
+    "The latest CD169 synthetic geometry run explicitly separates calibration from morphology and forbids using log-derived crossing as independent prediction.",
+    "Custodian replies are being used to improve provenance paths, not as target evidence."
+  ],
+  "current_priority_order": [
+    "1__BODC_TOBI_CD169_IDENTITY_CONFIRMATION_AND_PRIMARY_TAPE_BYTES",
+    "2__BODC_JR15001_EM122_ACO_OR_MEASUREMENT_CHAIN_FOR_EXACT_SWATH_BOOLEAN",
+    "3__P2548_EXISTING_CUSTODIAN_THREADS_FUGRO_NAVFAC_CTBTO",
+    "4__UKHO_HI1751_EXISTING_THREAD__PUBLIC_ROUTE_ESCALATION_ONLY_IF_SILENT",
+    "5__TITANIC_END_TO_END_COMPLEX_RETURN_CALIBRATION_AS_METHOD_GAP",
+    "6__KAMIL_MICRODOMAIN_BRANCH_MUST_REMAIN_VISIBLE_BUT_DO_NOT_OPEN_NEW_CONTACT_OR_PHYSICAL_STAGE_WITHOUT_CURRENT_GATE"
+  ],
+  "terminal": "STAY_THE_COURSE__SEPARATE_TARGET_CALIBRATION_AND_CONTROL_LANES__ASK_FOR_MEASUREMENT_CHAINS_NOT_CONVENIENT_FILENAMES__DO_NOT_OPEN_A_NEW_TARGET"
+}
