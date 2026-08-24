@@ -1,0 +1,23 @@
+{
+  "schema": "janus.project_continuity.current_authority_pointer.v1_0",
+  "artifact_id": "JANUS-COUSTEAU-CURRENT-AUTHORITY",
+  "updated_at_local": "2026-08-24T20:21:00+03:00",
+  "project_id": "JANUS_ECHO_COUSTEAU",
+  "status": "CURRENT",
+  "purpose": "Stable entry point for future JANUS/HRain/iNaiHR sessions. Load the origin chain and continuity ledger before acting on the newest individual result.",
+  "canonical_protocol": "janus-meta-registry:data/JANUS-PROJECT-CONTINUITY-LEDGER-HRAIN-INAIHR-PROTOCOL-2026-08-24-v1.0.json",
+  "current_ledger": "data/cousteau/JANUS-COUSTEAU-PROJECT-CONTINUITY-LEDGER-BOOTSTRAP-2026-08-24-v1.0.json",
+  "current_route_audit": "data/cousteau/JANUS-COUSTEAU-ROUTE-AND-ARCHIVE-REQUEST-AUDIT-2026-08-24-v1.0.json",
+  "required_before_next_stage": [
+    "READ_PROJECT_ORIGIN",
+    "READ_IMMUTABLE_NEGATIVE_REGISTER",
+    "READ_SUPERSEDED_REGISTER",
+    "READ_LANE_REGISTRY",
+    "READ_SELECTION_DEPENDENCY_REGISTER",
+    "READ_EXTERNAL_CONTACT_LEDGER",
+    "READ_NEXT_ALLOWED_AND_FORBIDDEN_ACTIONS",
+    "RUN_PRE_STAGE_HOLE_CHECK"
+  ],
+  "current_terminal": "STAY_THE_COURSE__WAIT_FOR_PRIMARY_BYTES_AND_EXISTING_CUSTODIAN_THREADS__SEPARATE_ORIGINAL_TARGET_LANE_FROM_HA10_CALIBRATION_LANE__NO_NEW_TARGET_SEARCH",
+  "claim_ceiling": "NO_UNDERWATER_PYRAMID_DETECTED__TARGET_IDENTITY_UNCONFIRMED__VOLCANIC_TECTONIC_BASELINE_ACTIVE"
+}
