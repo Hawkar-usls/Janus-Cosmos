@@ -1,0 +1,70 @@
+{
+  "title": "GOLDMEMBER — CD169/CD196 identity reconciliation",
+  "version": "1.0",
+  "date": "2026-08-24",
+  "status": "PUBLIC_IDENTITY_RECONCILIATION_COMPLETE__CUSTODIAN_CONFIRMATION_PENDING",
+  "scope": "Resolve the cruise identifier conflict before any offline-tape TOBI bytes are admitted, and freeze a synthetic-vs-real comparison contract before primary data arrival.",
+  "frozen_requested_target": {
+    "vessel": "RRS Charles Darwin",
+    "cruise": "CD169",
+    "date": "2005-02-28",
+    "julian_day": "JD059",
+    "instrument": "TOBI-02",
+    "science_log_line": 19,
+    "time_window_utc": "01:00-01:29",
+    "interpolated_crossing": {
+      "time_utc": "01:07:25",
+      "lat": -3.865418,
+      "lon": -12.14244
+    }
+  },
+  "public_evidence": [
+    {
+      "source": "BODC/NOC cruise report CD169",
+      "url": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+      "finding": "RRS Charles Darwin Cruise 169 ran 17 Feb-19 Mar 2005 and explicitly used TOBI deep-tow sidescan on the southern Mid-Atlantic Ridge. JD059 is within the cruise narrative and TOBI operations."
+    },
+    {
+      "source": "BGS/NERC report for CD180",
+      "url": "https://nora.nerc.ac.uk/id/eprint/7301/",
+      "finding": "CD180 (20 May-9 Jun 2006) is documented as the last scientific cruise for NERC of RRS Charles Darwin."
+    },
+    {
+      "source": "NOC vessel history",
+      "url": "https://www.noc.ac.uk/who-we-are/our-history",
+      "finding": "RRS James Cook replaced the ageing RRS Charles Darwin after its 2006 retirement."
+    }
+  ],
+  "identity_assessment": {
+    "CD169": "STRONGLY_CONFIRMED_AS_THE_REQUESTED_RRS_CHARLES_DARWIN_TO_BI_CRUISE",
+    "CD196_as_RRS_Charles_Darwin_cruise": "INCOMPATIBLE_WITH_PUBLIC_CRUISE_SEQUENCE_AND_VESSEL_SERVICE_HISTORY",
+    "Hannah_reply_CD196": "PROBABLE_TYPO_OR_OTHER_INTERNAL_IDENTIFIER__NOT_CORRECTED_WITHOUT_CUSTODIAN_CONFIRMATION"
+  },
+  "hard_boundary": "Do not tell the custodian their identifier is wrong as a settled fact. Ask for confirmation because the public record strongly indicates CD169 while the reply says CD196.",
+  "synthetic_vs_real_preregistration": {
+    "rule": "FREEZE_SYNTHETIC_EXPECTATION_BEFORE_REAL_TOBI_BYTES",
+    "no_retuning_after_primary_bytes": true,
+    "comparison_order": [
+      "custodian confirms correct archive identity",
+      "receive and hash original bytes/file manifest",
+      "verify cruise/date/JD/time/navigation identity",
+      "extract only the frozen 01:00-01:29 UTC window",
+      "run the already-frozen synthetic expectation and same metrics",
+      "score agreement/disagreement without parameter changes",
+      "preserve a null or contradiction as a valid negative result"
+    ],
+    "forbidden": [
+      "tuning synthetic parameters after seeing real sonar",
+      "moving the target window after inspection",
+      "selecting only visually interesting pings",
+      "treating qualitative resemblance as confirmation",
+      "promoting a historical/archaeological identity from morphology alone"
+    ]
+  },
+  "current_gate": {
+    "archive_identity": "WAITING_FOR_HANNAH_CONFIRMATION_CD169_VS_CD196",
+    "real_tobi_bytes": "NOT_YET_ADMITTED",
+    "synthetic_comparison": "MAY_BE_PREREGISTERED_BUT_NOT_RETUNED_AFTER_DATA_ARRIVAL"
+  },
+  "claim_ceiling": "Public evidence strongly supports CD169 as the requested cruise and makes CD196 implausible as an RRS Charles Darwin cruise number; final reconciliation remains with BODC/NOC custodian confirmation."
+}
