@@ -1,0 +1,99 @@
+{
+  "schema": "janus.cosmos.tachyon_star.q4a.luci_header_wcs_geometry_freeze.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-Q4A-LUCI-HEADER-WCS-GEOMETRY-FREEZE-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "PASS_GEOMETRY_FROZEN",
+  "scientific_status": "FIXED_SKY_COORDINATE_AND_SKY_VS_DETECTOR_TRAJECTORIES_FROZEN__NO_NEW_FORCED_PHOTOMETRY",
+  "lineage": {
+    "new_question": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-NEW-QUESTION-001.json",
+    "new_question_commit": "8afaa763f983171e9eb1424df73ae03fe6d4858d",
+    "aura_direction": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001.json",
+    "aura_request_sha256": "618c2b9dfd9a3ad6b778cede2f31f5a8ac13a1baf82cd020e001787679c91da0",
+    "prereg_commit_effective": "1e20f989dd232ae2137aeb86a690de64e50f52fc",
+    "test_only_repair_commit": "0be2991e6150797aa8e01956a7da321e7d814917"
+  },
+  "workflow": {
+    "run_id": 31957191345,
+    "job_id": 95189495984,
+    "head_sha": "0be2991e6150797aa8e01956a7da321e7d814917",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 0
+  },
+  "artifact": {
+    "id": 9266260023,
+    "name": "janus-tachyon-star-q4a",
+    "zip_sha256": "8c98ad71dabd360afba4e5657b9a7d230bbeb3aedd49d8b3b7f02f50a7573388",
+    "receipt_sha256": "f87c9044da7a2408944ac2951b63970409bc98f0465356d3c9e19be5def51cdd",
+    "geometry_manifest_sha256": "4cb21ddf893489f150447170fdc206ae56c1eede6b6adf4965a51b9773742eb9",
+    "scientific_runner_exit_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "geometry": {
+    "candidate_centroid_zero_based": [1437.216755721343, 2038.7227543099102],
+    "candidate_sky_coordinate_deg": {
+      "ra": 307.3382686775776,
+      "dec": 40.223696223058276
+    },
+    "candidate_roundtrip_error_px": 4.472948203366975e-10,
+    "sky_fixed_track": {
+      "A_BEFORE": [1295.7049222262963, 1956.124785847915],
+      "B_CANDIDATE": [1437.2167557210728, 2038.7227543095537],
+      "C_AFTER": [1515.6562258752863, 2021.8303084014287]
+    },
+    "detector_fixed_track": {
+      "A_BEFORE": [1437.216755721343, 2038.7227543099102],
+      "B_CANDIDATE": [1437.216755721343, 2038.7227543099102],
+      "C_AFTER": [1437.216755721343, 2038.7227543099102]
+    },
+    "sky_detector_separation_px": {
+      "A_BEFORE": 163.85366463151976,
+      "B_CANDIDATE": 4.472948203366975e-10,
+      "C_AFTER": 80.23780410007708
+    },
+    "detector_control_count": 13,
+    "patch_size_px": 17
+  },
+  "frame_provenance": [
+    {
+      "filename": "luci1.20220319.0114.fits.gz",
+      "sha256": "217ecc39c5d7753a1647536c91006f04b7c4abc73e3de86a8e029bd0d8e40f4a",
+      "date_obs": "2022-03-19T11:44:15.5176",
+      "instrument": "LUCI1",
+      "filter1": "Br_gam",
+      "filter2": "clear",
+      "exptime_s": 60.0
+    },
+    {
+      "filename": "luci1.20220319.0116.fits.gz",
+      "sha256": "251a1221646347e7415eeaa9fead6a40e5fda8c9b04a06a3bdb855924783637a",
+      "date_obs": "2022-03-19T11:48:08.1003",
+      "instrument": "LUCI1",
+      "filter1": "Br_gam",
+      "filter2": "clear",
+      "exptime_s": 60.0
+    },
+    {
+      "filename": "luci1.20220319.0120.fits.gz",
+      "sha256": "9e98b0cc1e08b0b1e8e16fb10d9c58609411f6deeaeb2df86dced16dde6ceeb6",
+      "date_obs": "2022-03-19T11:55:20.3598",
+      "instrument": "LUCI1",
+      "filter1": "Br_gam",
+      "filter2": "clear",
+      "exptime_s": 60.0
+    }
+  ],
+  "integrity": {
+    "image_pixel_arrays_dereferenced": false,
+    "new_forced_photometry_performed": false,
+    "free_centroid_recentering": false,
+    "epoch_substitution": false
+  },
+  "admitted_claim": "Q4A froze the candidate sky coordinate, its mapped sky-fixed trajectory, the detector-fixed trajectory, and thirteen same-y detector-control positions using only exact LUCI FITS headers/WCS. The sky-fixed and detector-fixed trajectories are strongly geometrically separated in both bracketing frames, by approximately 163.85 pixels in A and 80.24 pixels in C. No new image-pixel measurement or forced photometry was performed.",
+  "not_admitted": [
+    "No sky-origin or detector-origin conclusion.",
+    "No Q4 forced-flux measurement.",
+    "No evidential credit from the closed ZTF/TESS replication line.",
+    "No tachyon, faster-than-light, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation."
+  ],
+  "next_gate": "AURA_RECONSULT_FROM_Q4A_GEOMETRY_PASS",
+  "claim_ceiling": "HEADER_WCS_GEOMETRY_FREEZE_ONLY__NO_NEW_PIXEL_MEASUREMENT__NO_ORIGIN_CONCLUSION__NO_TACHYON_OR_FTL_CLAIM"
+}

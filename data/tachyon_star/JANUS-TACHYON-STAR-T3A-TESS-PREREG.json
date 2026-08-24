@@ -1,0 +1,59 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3a.tess_cadence_prepoint.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3A-TESS-CADENCE-NATIVE-PREPOINTED-DISCOVERY",
+  "date_utc": "2026-08-16",
+  "lineage": {
+    "t2a_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2A-RUN-001.json",
+    "t2d_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2D-ZTF-RUN-001.json",
+    "t2d_result_commit": "5ee07cb58ac879f3df4ccba8beffc5d4a2924dfe",
+    "aura_advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2D-001.json",
+    "aura_request_sha256": "fb811cc2c7645e95074bd08c413f044c49fa2341f8c205104d0a56453787fe43"
+  },
+  "sector_manifest": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-T3A-TESS-SECTOR-MANIFEST.csv",
+    "sha256": "9c2fade3139a194fb14b1971817520f6531fff94aebe0243a10103bcf386a849",
+    "sources": 42,
+    "selection_rule": "For each frozen T2A source choose the shortest available official FFI cadence tier among ordinary sector IDs 1..200, then the earliest sector in that tier.",
+    "cadence_tiers": {
+      "sector_1_26": 1800,
+      "sector_27_55": 600,
+      "sector_56_plus": 200
+    },
+    "selected_200s_sources": 24,
+    "selected_600s_sources": 18,
+    "selected_1800s_sources": 0,
+    "nonstandard_sector_1751_excluded": true,
+    "reason_for_exclusion": "No source needs the nonstandard sector entry to achieve its shortest ordinary cadence tier; exclusion is frozen before TESSCut data retrieval."
+  },
+  "tesscut_contract": {
+    "service": "MAST TESScut SPOC FFI",
+    "cutout_size_px": [11, 11],
+    "sector_fixed_by_manifest": true,
+    "one_request_per_source": true,
+    "rate_limit_policy": "serial with pacing",
+    "target_pixel_bytes_may_be_downloaded": true,
+    "flux_values_may_be_inspected_in_t3a": false
+  },
+  "metadata_only_reader_contract": {
+    "allowed_table_columns": ["TIME", "QUALITY", "CADENCENO"],
+    "forbidden_science_columns": ["FLUX", "FLUX_ERR", "FLUX_BKG", "FLUX_BKG_ERR"],
+    "selection_may_use_pixel_values": false,
+    "selection_may_use_source_brightness": false
+  },
+  "abc_selection": {
+    "quality_required": 0,
+    "time_required_finite": true,
+    "consecutive_table_rows_required": true,
+    "gap_window_fraction_of_expected_cadence": [0.5, 1.5],
+    "b_rule": "Among all eligible consecutive A/B/C triples, select the B cadence whose TIME is closest to the median finite TIME in the selected sector; ties break by lower B row index.",
+    "a_rule": "Immediate preceding row of frozen B.",
+    "c_rule": "Immediate following row of frozen B.",
+    "why_cadence_native": "TESS FFI cadence differs from LUCI/ZTF timing. The independent TESS test asks whether a preselected central cadence is isolated relative to its immediate neighbors, without tuning B to pixel brightness or forcing the original asymmetric time offsets."
+  },
+  "success_semantics": {
+    "PASS_PREPOINTED_CADENCE_MANIFEST_COMPLETE": "All 42 frozen sources produce one TESSCut file and one metadata-only quality-qualified A/B/C cadence triple.",
+    "BLOCKED_PREPOINTED_CADENCE_MANIFEST_INCOMPLETE": "At least one frozen source cannot produce a valid metadata-only A/B/C triple; no T3B pixel claim may be made for it."
+  },
+  "next_gate": "JANUS-TACHYON-STAR-T3B-TESS-PREPOINTED-FLUX-REPLICATION",
+  "claim_ceiling": "TESS_METADATA_ONLY_CADENCE_PREPOINTING__NO_TARGET_FLUX_INSPECTION__NO_TRANSIENT_DETECTION__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3a.tess_cadence_prepoint.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3A-TESS-CADENCE-NATIVE-PREPOINTED-DISCOVERY-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "PASS_PREPOINTED_CADENCE_MANIFEST_COMPLETE",
+  "scientific_status": "FORTY_TWO_OF_FORTY_TWO_TESS_CADENCE_TRIPLETS_FROZEN_WITHOUT_FLUX_VALUE_INSPECTION",
+  "lineage": {
+    "t2a_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2A-RUN-001.json",
+    "t2d_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2D-ZTF-RUN-001.json",
+    "t2d_result_commit": "5ee07cb58ac879f3df4ccba8beffc5d4a2924dfe",
+    "prereg_and_code_commit": "c2be40c8fc4c02f8fece6a92d5f17cfde485de46",
+    "sector_manifest_sha256": "9c2fade3139a194fb14b1971817520f6531fff94aebe0243a10103bcf386a849"
+  },
+  "workflow": {
+    "run_id": 31951308441,
+    "job_id": 95175073532,
+    "head_sha": "c2be40c8fc4c02f8fece6a92d5f17cfde485de46",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 0
+  },
+  "artifact": {
+    "id": 9264741704,
+    "name": "janus-tachyon-star-t3a-tess",
+    "zip_sha256": "317a3c7ea2b0a7d1b8ae58b6e9ecbe6b09d8bdb8ffe76af46c399c3c95a8dfc0",
+    "receipt_sha256": "c781cb4c385118e88821bb52a23166fb8e79b1dc1a87014c5852617c6d10ed54",
+    "prepointed_cadence_manifest_sha256": "be8bc23021e9b9a6fa6efa65815e79bc39a1bb011192acab2825c013c1ac4202",
+    "raw_metadata_receipts_sha256": "4faa226c62ade21b5c93a4e2475876b207a019c8928cd6d17d0b7da8b2935e9e",
+    "blocked_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "scientific_runner_exit_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "accounting": {
+    "sources_expected": 42,
+    "sources_prepointed": 42,
+    "sources_blocked": 0,
+    "cadence_200s_prepointed": 24,
+    "cadence_600s_prepointed": 18,
+    "target_pixel_bytes_downloaded": true,
+    "flux_values_inspected": false
+  },
+  "selection_firewall": {
+    "allowed_value_columns": ["TIME", "QUALITY", "CADENCENO"],
+    "forbidden_value_columns": ["FLUX", "FLUX_ERR", "FLUX_BKG", "FLUX_BKG_ERR"],
+    "b_selection_rule": "Closest eligible quality-zero consecutive-triplet B to the median finite sector TIME, tie by lower table row.",
+    "pixel_brightness_used_for_selection": false
+  },
+  "admitted_claim": "T3A froze one TESS cadence-native A/B/C triplet for every one of the 42 frozen source coordinates using only TIME, QUALITY and CADENCENO metadata from preselected TESS sectors. Target-pixel bytes were downloaded as part of TESSCut products, but FLUX-family values were not inspected or used in choosing any B cadence. This creates a prepointed TESS holdout for a later flux test; it is not a transient detection.",
+  "not_admitted": [
+    "No TESS flux anomaly or transient was searched or detected in T3A.",
+    "Downloading a TESSCut file is not treated as inspecting its FLUX values.",
+    "No physical tachyon identification, faster-than-light propagation, retrocausality, UAP origin, artificial origin, ETI, or nuclear causality is established."
+  ],
+  "next_gate": "JANUS-TACHYON-STAR-T3B-TESS-PREPOINTED-FLUX-REPLICATION",
+  "claim_ceiling": "TESS_METADATA_ONLY_CADENCE_PREPOINTING__NO_TARGET_FLUX_INSPECTION__NO_TRANSIENT_DETECTION__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY"
+}

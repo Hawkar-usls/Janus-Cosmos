@@ -1,0 +1,120 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2c.ztf_native_sensitivity_recovery.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2C-ZTF-NATIVE-SENSITIVITY-RECOVERY-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "BLOCKED_RECOVERY_INCOMPLETE",
+  "scientific_status": "ZERO_ISOLATED_B_CANDIDATES__THREE_OF_EIGHT_UNRESOLVED_RECOVERED_AS_QUALIFIED_NULL__COMBINED_23_OF_28_QUALIFIED_NULL__FIVE_REMAIN_UNRESOLVED",
+  "lineage": {
+    "parent_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-RUN-001.json",
+    "parent_result_commit": "7971f48275dddcd4ae1b2d13962ac0ae7a40efb5",
+    "aura_advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json",
+    "aura_request_sha256": "2c5abb92bbe2a89d9db877c8dfdec2b0d74bb1dcc74fcf0077326a191659eee2",
+    "prereg_and_code_commit": "ad9d24e25779e6561c5ce32b3447fa733be322c5",
+    "parent_manifest_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+    "parent_manifest_sha256": "f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb"
+  },
+  "workflow": {
+    "run_id": 31950568432,
+    "job_id": 95173278716,
+    "head_sha": "ad9d24e25779e6561c5ce32b3447fa733be322c5",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 3
+  },
+  "artifact": {
+    "id": 9264538592,
+    "name": "janus-tachyon-star-t2c-ztf",
+    "zip_sha256": "83d3e066033735735ad951f834d921f04d095d9ec68c5fdd70b36abc20af7cc2",
+    "receipt_sha256": "aed0f307fa92ecfe9af4ee257f72b32f47b072a45230fae7faccfac9962ab1be",
+    "events_sha256": "82b8910048a1de299850308afd6e317cf35d873bc20c07d2aa4ac2b516911cf2",
+    "scientific_runner_exit_file_sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2"
+  },
+  "accounting": {
+    "parent_qualified_null_trials_immutable": 20,
+    "parent_qualified_null_trials_reopened": 0,
+    "targeted_unresolved_trials": 8,
+    "recovered_no_isolated_b_event": 3,
+    "recovery_candidates": 0,
+    "recovery_nonisolated": 0,
+    "recovery_unresolved": 5,
+    "combined_qualified_null_trials_out_of_28": 23
+  },
+  "recovered_null_trials": [
+    {
+      "trial_id": "TS-T2B-ZTF-17",
+      "src_id": "tile_RA193.420_DECp31.903:1206",
+      "result": "A_B_C_QUALIFIED_ABSENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-27",
+      "src_id": "tile_RA214.811_DECp53.168:1436",
+      "result": "A_B_C_QUALIFIED_ABSENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-40",
+      "src_id": "tile_RA65.091_DECp15.163:1317",
+      "result": "A_B_C_QUALIFIED_ABSENCE"
+    }
+  ],
+  "remaining_unresolved_trials": [
+    {
+      "trial_id": "TS-T2B-ZTF-03",
+      "src_id": "tile_RA124.680_DECp26.727:572",
+      "epoch_status": {
+        "a": "QUALIFIED_ABSENCE",
+        "b": "BLOCKED_LOCAL_NATIVE_SENSITIVITY",
+        "c": "BLOCKED_LOCAL_NATIVE_SENSITIVITY"
+      },
+      "interpretation": "Expanded ZTF context supplied native PSF references and a clean mask, but the unchanged local detector failed the preregistered all-six SNR8/SNR12 injection recovery at B and C."
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-09",
+      "src_id": "tile_RA171.876_DECp42.079:866",
+      "epoch_status": {
+        "a": "QUALIFIED_ABSENCE",
+        "b": "BLOCKED_LOCAL_NATIVE_SENSITIVITY",
+        "c": "QUALIFIED_ABSENCE"
+      },
+      "interpretation": "Only B remains sensitivity-blocked under the preregistered local native gate."
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-10",
+      "src_id": "tile_RA174.051_DECp31.978:659",
+      "epoch_status": {
+        "a": "BLOCKED_LOCAL_NATIVE_SENSITIVITY",
+        "b": "BLOCKED_LOCAL_NATIVE_SENSITIVITY",
+        "c": "BLOCKED_LOCAL_NATIVE_SENSITIVITY"
+      },
+      "interpretation": "All three epochs have native PSF references and clean masks but do not satisfy the frozen local sensitivity contract."
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-16",
+      "src_id": "tile_RA188.616_DECp45.284:633",
+      "epoch_status": {
+        "a": "QUALIFIED_ABSENCE",
+        "b": "BLOCKED_PIXEL_REPLAY_ERROR",
+        "c": "QUALIFIED_ABSENCE"
+      },
+      "interpretation": "The exact frozen B science product returned HTTP 404 both as a 360-arcsec cutout and as the same-product full-frame URL. No alternate epoch was substituted."
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-39",
+      "src_id": "tile_RA41.145_DECp27.430:1698",
+      "epoch_status": {
+        "a": "BLOCKED_PIXEL_REPLAY_ERROR",
+        "b": "BLOCKED_PIXEL_REPLAY_ERROR",
+        "c": "BLOCKED_TARGET_MASK"
+      },
+      "interpretation": "The exact frozen A and B science products returned HTTP 404 in both preregistered retrieval modes; C was retrievable and locally sensitivity-qualified but the frozen target aperture is nonzero in the mask."
+    }
+  ],
+  "admitted_claim": "Aura-guided T2C recovered three of the eight previously unresolved ZTF source trials as fully sensitivity-qualified A/B/C absences without reopening any of the twenty parent qualified null trials. The combined prepointed ZTF evidence is therefore 23 of 28 quality-admissible trials with fully qualified A/B/C absence, zero isolated-B candidates, zero nonisolated source patterns, and five unresolved trials. The remaining five are not counted as negative.",
+  "not_admitted": [
+    "An all-28 negative result.",
+    "Retrospective weakening of SNR8/SNR12 or mask requirements.",
+    "Replacing missing exact ZTF products with neighboring exposures.",
+    "A global rejection of short-lived optical transients.",
+    "Physical tachyon identification or exclusion, faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "next_gate": "AURA_RECONSULT_FROM_23_OF_28_QUALIFIED_NULL_AND_FIVE_UNRESOLVED",
+  "claim_ceiling": "TARGETED_ZTF_NATIVE_SENSITIVITY_RECOVERY_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

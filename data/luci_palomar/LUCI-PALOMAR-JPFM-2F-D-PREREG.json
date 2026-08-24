@@ -1,0 +1,63 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_d.prereg.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-D-EXHAUSTIVE-COVERAGE",
+  "date_utc": "2026-08-15",
+  "branch": "research/luci-only-v1",
+  "parent_result": "data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-RUN-001.json",
+  "parent_artifact_sha256": "2d7b8d4e233908b94a89c9b7dfb4e8c91c3e146a92e1fb3982434f3b213e4f71",
+  "question": "Does the public FREE SCIENCE LUCI/LUCIFER imaging archive contain any exact FITS-WCS footprint overlap with any member of the complete frozen POSS-I S0 candidate population?",
+  "frozen_input": {
+    "poss_commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "stage_s0_path": "results/s0-642-20260814/stage_S0.csv.gz",
+    "stage_s0_gzip_sha256": "f19cf987756c62a68f55a472992d860e73ae63b3a4664189092b0e1fda77f7bb",
+    "stage_s0_csv_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0",
+    "expected_source_count": 122820
+  },
+  "archive_scope": {
+    "tap": "https://archive.lbto.org/tap/sync",
+    "tables": [
+      "lbt.luci",
+      "lbt.lbt"
+    ],
+    "policy": "FREE",
+    "imagetyp": "SCIENCE",
+    "gratname": "Mirror/mirror",
+    "strategy": "archive-first: enumerate and freeze the complete matching LUCI inventory before spatial crossmatch to Palomar coordinates"
+  },
+  "freeze_order": [
+    "verify fixed POSS-I S0 bytes",
+    "freeze all 122820 src_id,RA,Dec rows and SHA256",
+    "enumerate LUCI public imaging archive independently and freeze inventory SHA256",
+    "offline 3D unit-vector spatial crossmatch using frame half-diagonals; freeze coarse-pair SHA256",
+    "archive-metadata WCS preflight; freeze metadata-WCS-pair SHA256",
+    "only after all prior freezes may candidate FITS be downloaded",
+    "exact FITS WCS containment",
+    "per-overlap-frame R1 injection-recovery",
+    "local R1 IR source/no-source test",
+    "PSF morphology against same-frame SNR-matched local controls"
+  ],
+  "exact_chain": {
+    "max_candidate_fits_files_before_fail_closed_block": 250,
+    "overlap_frame_gate": {
+      "minimum_all_star_recovery_fraction": 0.8,
+      "minimum_star_recovery_fraction_snr_ge_8": 0.9,
+      "maximum_hot_pixel_acceptance_fraction": 0.05
+    },
+    "counterpart_search_radius_px": 2.5,
+    "matched_local_controls": {
+      "radius_px": 300.0,
+      "peak_snr_ratio_min": 0.5,
+      "peak_snr_ratio_max": 2.0,
+      "min_controls_for_morphology": 8,
+      "max_controls": 20
+    }
+  },
+  "decision_rules": {
+    "no_exact_overlap": "PASS coverage audit; no IR counterpart test instantiated and no source-level claim",
+    "exact_overlap_and_all_overlap_frames_pass_r1": "execute source/no-source and matched morphology chain",
+    "any_overlap_frame_fails_r1": "BLOCKED for scientific interpretation of affected exact-overlap set",
+    "candidate_file_cap_exceeded": "BLOCKED before any FITS pixel inspection; preserve frozen overlap sets for staged replay"
+  },
+  "firewall": "No temporal, UAP, artificial-origin, ETI, or event labels are used in archive enumeration, spatial matching, source extraction, or morphology scoring.",
+  "claim_ceiling": "INDEPENDENT_NEAR_IR_COUNTERPART_TEST_ONLY__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY"
+}

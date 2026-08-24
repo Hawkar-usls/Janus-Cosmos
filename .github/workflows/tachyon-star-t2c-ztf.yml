@@ -1,0 +1,61 @@
+name: JANUS TACHYON STAR T2C ZTF Native Sensitivity Recovery
+
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'experiments/luci/run_tachyon_star_t2c_ztf.py'
+      - 'tests/test_tachyon_star_t2c_ztf.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv'
+      - '.github/workflows/tachyon-star-t2c-ztf.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_tachyon_star_t2c_ztf.py'
+      - 'tests/test_tachyon_star_t2c_ztf.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json'
+      - '.github/workflows/tachyon-star-t2c-ztf.yml'
+  workflow_dispatch:
+
+jobs:
+  recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify frozen parent manifest and T2C prereg before targeted pixel replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          p=data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv
+          echo 'f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb  '"$p" | sha256sum -c -
+          test "$(git hash-object "$p")" = '902ac74624b8c30c365544555f5071c78ec4cae2'
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-PREREG.json
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json
+      - name: Run T2C strict unit tests
+        run: python -m unittest tests/test_tachyon_star_t2c_ztf.py -v
+      - name: Execute targeted eight-trial ZTF-native recovery
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_t2c_ztf
+          set +e
+          python -m experiments.luci.run_tachyon_star_t2c_ztf \
+            --output-dir results/tachyon_star_t2c_ztf \
+            --cache-dir .cache/tachyon_star_t2c_ztf
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_t2c_ztf/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_t2c_ztf/receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-t2c-ztf
+          path: results/tachyon_star_t2c_ztf/
+          if-no-files-found: error
+          compression-level: 6

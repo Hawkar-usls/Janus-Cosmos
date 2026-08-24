@@ -1,0 +1,79 @@
+name: LUCI Palomar JPFM 2F-C R1
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'janus_cosmos/luci_psf_r1.py'
+      - 'experiments/luci/run_palomar_2f_c_r1.py'
+      - 'tests/test_luci_palomar_2f_c_r1.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-RUN-001.json'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-PREREG.json'
+      - '.github/workflows/luci-palomar-2f-c-r1.yml'
+  pull_request:
+    paths:
+      - 'janus_cosmos/luci_psf_r1.py'
+      - 'experiments/luci/run_palomar_2f_c_r1.py'
+      - 'tests/test_luci_palomar_2f_c_r1.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-PREREG.json'
+      - '.github/workflows/luci-palomar-2f-c-r1.yml'
+
+jobs:
+  luci-palomar-2f-c-r1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests for local PSF-relative recovery repair
+        run: python -m unittest tests/test_luci_palomar_2f_c_r1.py -v
+      - name: Build same preregistered validation manifests
+        run: |
+          mkdir -p data/runtime/luci/2f_c_r1
+          python experiments/luci/build_luci_archive_manifest.py --target 'HIP 65599' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c_r1/hip65599.json
+          python experiments/luci/build_luci_archive_manifest.py --target '0848-0021928' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c_r1/0848-0021928.json
+          python experiments/luci/build_luci_archive_manifest.py --target '3C 294' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c_r1/3c294.json
+      - name: Execute R1 with frozen corpus SHA assertion
+        shell: bash
+        run: |
+          set +e
+          python -m experiments.luci.run_palomar_2f_c_r1 \
+            --validation-manifest data/runtime/luci/2f_c_r1/hip65599.json \
+            --validation-manifest data/runtime/luci/2f_c_r1/0848-0021928.json \
+            --validation-manifest data/runtime/luci/2f_c_r1/3c294.json \
+            --output-dir results/luci_palomar_2f_c_r1 \
+            --cache-dir .cache/luci_palomar_2f_c_r1
+          rc=$?
+          set -e
+          echo "$rc" > results/luci_palomar_2f_c_r1/scientific_runner_exit_code.txt
+          test -s results/luci_palomar_2f_c_r1/receipt.json
+          test -s results/luci_palomar_2f_c_r1/frozen_palomar_640.csv
+      - name: Print admitted interpretation
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/luci_palomar_2f_c_r1/receipt.json', encoding='utf-8'))
+          print(json.dumps({
+              'status': d['status'],
+              'scientific_status': d['scientific_status'],
+              'corpus_n': d['frozen_palomar_corpus']['sample_n'],
+              'corpus_sha256': d['frozen_palomar_corpus']['sha256'],
+              'validation_pass_fraction': d['validation_injection_recovery']['pass_fraction'],
+              'conservative_overlap_pairs': d['archive_overlap_preflight']['conservative_overlap_pairs'],
+              'exact_wcs_overlap_pairs': d['exact_wcs_overlap_pair_count'],
+              'admitted_ir_counterparts': d['admitted_ir_counterpart_count'],
+              'claim_ceiling': d['claim_ceiling'],
+          }, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-palomar-jpfm-2f-c-r1
+          path: |
+            data/runtime/luci/2f_c_r1/
+            results/luci_palomar_2f_c_r1/
+          if-no-files-found: error

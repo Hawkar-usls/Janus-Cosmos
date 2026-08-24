@@ -1,0 +1,85 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_d.result.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-D-RUN-001",
+  "date_utc": "2026-08-15",
+  "branch": "research/luci-only-v1",
+  "workflow": {
+    "run_id": 31888129868,
+    "head_sha": "0783fd2f4bb65d389219ee00a039408da1d12e01",
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 9247843315,
+    "name": "luci-palomar-jpfm-2f-d",
+    "sha256": "1240a600dfb0189243dfb3188ab53dcc8ad6f7b270236c56756b49c2e4fc6184",
+    "size_bytes": 6465706
+  },
+  "parent_r1": {
+    "path": "data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-R1-RUN-001.json",
+    "artifact_sha256": "2d7b8d4e233908b94a89c9b7dfb4e8c91c3e146a92e1fb3982434f3b213e4f71",
+    "real_luci_validation_frames_passed": 6,
+    "validation_pass_fraction": 1.0
+  },
+  "frozen_full_poss_s0": {
+    "sample_n": 122820,
+    "sha256": "18e17c11d6a4607d9f78cafb3e96b344b006812cea89d40cec6483d990080389",
+    "poss_commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "stage_s0_gzip_sha256": "f19cf987756c62a68f55a472992d860e73ae63b3a4664189092b0e1fda77f7bb",
+    "stage_s0_csv_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0"
+  },
+  "frozen_luci_public_imaging_inventory": {
+    "row_count": 201800,
+    "valid_geometry_frames": 94370,
+    "sha256": "bcfaea3c8e5882b851fde2d78b651b1b74ad6c0387dbecd3994d6f73a28f0446",
+    "scope": "FREE + SCIENCE + Mirror/mirror, archive-first enumeration independent of Palomar coordinates"
+  },
+  "frozen_overlap_sets": {
+    "coarse": {
+      "pair_count": 1752,
+      "unique_palomar_sources": 107,
+      "unique_luci_files": 1535,
+      "sha256": "669f3287410108c8aaa6044dc1b6a48ce400a914abb3f2f42889301e56b55025"
+    },
+    "metadata_wcs": {
+      "pair_count": 918,
+      "unique_palomar_sources": 64,
+      "unique_luci_files": 798,
+      "sha256": "aa57e64deca11bb2afd09364fa8b72837e92fc3c2187357c5041b273023754c6",
+      "committed_replay_path": "data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-METADATA-WCS-PAIRS.csv"
+    }
+  },
+  "preregistered_cap": {
+    "max_candidate_fits_files_before_pixel_inspection": 250,
+    "observed_metadata_wcs_unique_files": 798,
+    "cap_exceeded": true,
+    "action": "FAIL_CLOSED_BEFORE_PIXEL_INSPECTION"
+  },
+  "post_run_exposure_configuration_audit": {
+    "role": "diagnostic only; does not rewrite RUN-001",
+    "classification_rule": "literal case-insensitive archive filters string: contains blind -> blind; contains PV lens -> PV_lens; otherwise sky_candidate",
+    "blind": {"pairs": 319, "unique_sources": 23, "unique_files": 317},
+    "pv_lens": {"pairs": 156, "unique_sources": 17, "unique_files": 78},
+    "sky_candidate": {"pairs": 443, "unique_sources": 42, "unique_files": 403},
+    "next_stage_rule": "exclude blind and PV lens from counterpart inference before any image-pixel inspection"
+  },
+  "exact_fits_wcs": {
+    "executed": false,
+    "pair_count": 0,
+    "reason": "preregistered FITS-file cap exceeded"
+  },
+  "pixel_inspection": {"executed": false},
+  "status": "BLOCKED",
+  "scientific_status": "EXHAUSTIVE_COVERAGE_FROZEN__FITS_DOWNLOAD_CAP_EXCEEDED__NO_PIXEL_INSPECTION",
+  "admitted_claim": "The complete frozen 122820-source POSS-I S0 population was archive-first crossmatched against a frozen 201800-row public LUCI imaging inventory. The frozen pre-pixel result contains 1752 coarse pairs and 918 archive-metadata-WCS pairs spanning 64 Palomar sources. Because these pairs involve 798 LUCI files, the preregistered 250-file cap blocked all FITS pixel inspection.",
+  "not_admitted": [
+    "The 918 metadata-WCS pairs are not yet exact FITS-WCS confirmations.",
+    "No LUCI IR counterpart or no-counterpart result is admitted.",
+    "No Palomar source is confirmed or refuted by LUCI.",
+    "No anomaly, UAP-origin, artificial-origin, ETI, or causal claim is admitted."
+  ],
+  "next_gate": {
+    "name": "LUCI-PALOMAR-JPFM-2F-E-STAGED-EXACT-WCS",
+    "goal": "Use the already-frozen metadata-WCS pair set for deterministic staged header/WCS replay, freeze exact FITS-WCS overlaps before any pixel scoring, then run representative exact-overlap frames through the validated R1 source gate and matched local controls."
+  },
+  "claim_ceiling": "INDEPENDENT_NEAR_IR_COUNTERPART_TEST_ONLY__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY"
+}

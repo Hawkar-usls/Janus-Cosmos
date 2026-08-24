@@ -1,0 +1,76 @@
+name: JANUS TACHYON STAR Q4B LUCI Fixed Coordinate Forced Photometry
+
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4b.py'
+      - 'tests/test_tachyon_star_q4b.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4B-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001.json'
+      - '.github/workflows/tachyon-star-q4b.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4b.py'
+      - 'tests/test_tachyon_star_q4b.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4B-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001.json'
+      - '.github/workflows/tachyon-star-q4b.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  forced_photometry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Retrieve and verify frozen Q4A geometry before any new pixel read
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p parent_q4a
+          gh run download 31957191345 -n janus-tachyon-star-q4a -D parent_q4a
+          echo '4cb21ddf893489f150447170fdc206ae56c1eede6b6adf4965a51b9773742eb9  parent_q4a/q4a_geometry_manifest.json' | sha256sum -c -
+          echo 'f87c9044da7a2408944ac2951b63970409bc98f0465356d3c9e19be5def51cdd  parent_q4a/receipt.json' | sha256sum -c -
+          python - <<'PY'
+          import json
+          g=json.load(open('parent_q4a/q4a_geometry_manifest.json'))
+          assert g['image_pixel_arrays_dereferenced'] is False
+          assert g['new_forced_photometry_performed'] is False
+          assert len(g['detector_controls']) == 13
+          PY
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-Q4B-PREREG.json
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001.json
+      - name: Run Q4B synthetic and classification tests
+        run: python -m unittest tests/test_tachyon_star_q4b.py -v
+      - name: Execute first Q4 forced photometry on the frozen three-frame geometry
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_q4b
+          set +e
+          python -m experiments.luci.run_tachyon_star_q4b \
+            --geometry-manifest parent_q4a/q4a_geometry_manifest.json \
+            --output-dir results/tachyon_star_q4b \
+            --cache-dir .cache/tachyon_star_q4b
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_q4b/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_q4b/receipt.json
+          test -s results/tachyon_star_q4b/measurements.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-q4b
+          path: results/tachyon_star_q4b/
+          if-no-files-found: error
+          compression-level: 6
