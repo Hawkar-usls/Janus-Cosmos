@@ -1,0 +1,332 @@
+{
+  "artifact_id": "JANUS-COSMOS-COUSTEAU-LOVE-EDEM-RESEARCH-JOURNAL-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T16:54:00Z",
+  "document_class": "APPEND_ONLY_RESEARCH_HISTORY_AND_STATE_JOURNAL",
+  "authority": "INDEX_AND_MEMORY_ONLY__ZERO_AUTHORITY_TO_PROMOTE_SCIENTIFIC_CLAIMS",
+  "scope": [
+    "Lave to Love real-sky search",
+    "Love-EDEM coordinate/source work",
+    "Love-EDEM celestial geometry and Earth-locus bridge",
+    "frozen Atlantic/Africa seafloor point work",
+    "Cousteau acoustic and hydroacoustic development",
+    "HA10 Ascension bathymetry and blind morphology",
+    "Southern Seamount / P2548 archival lineage",
+    "JR15001 / BODC provenance",
+    "TOBI CD169 primary-data acquisition and synthetic-before-real preregistration"
+  ],
+  "status_legend": {
+    "SUCCESS": "A defined acquisition, calculation, control, or gate completed as specified. Does not automatically validate a larger hypothesis.",
+    "NEGATIVE": "A scientific test produced a negative result. Must remain preserved.",
+    "BLOCKED": "Scientific question cannot yet be answered because required data/provenance are missing.",
+    "TECHNICAL_FAILURE": "Execution/service/access failed; must not be interpreted as a scientific negative.",
+    "WAITING_EXTERNAL": "Request is with an external data custodian or collaborator.",
+    "WATCHLIST": "Interesting but insufficient secondary/local result retained for independent replication."
+  },
+  "epistemic_firewall": [
+    "METAPHOR != PHYSICS",
+    "RAW_PHYSICAL_DATA_OUTRANKS_NARRATIVE",
+    "MAP_KNOWLEDGE != TERRAIN_EXPERIENCE_CLAIM",
+    "COORDINATE_GEOMETRY != PHYSICAL_ASSOCIATION",
+    "CATALOG_PROXIMITY != IDENTITY",
+    "TECHNICAL_FAILURE != SCIENTIFIC_NEGATIVE",
+    "REFERRAL != LOCAL_MEASUREMENT",
+    "HYDROPHONE_SENSOR_DEPTH != SEAFLOOR_DEPTH",
+    "NO_RETARGETING_OR_POSTHOC_RECENTERING",
+    "NEGATIVE_RESULTS_ARE_IMMUTABLE_HISTORY",
+    "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE"
+  ],
+  "chronology": [
+    {
+      "date": "2026-08-19",
+      "lane": "LOVE",
+      "status": "SUCCESS",
+      "event": "Lave was mapped into a blind real-sky target called TARGET_A and searched across Gaia/HST/LUCI/TESS infrastructure.",
+      "results": {
+        "mapped_icrs": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+        "mapped_distance_pc": 35.119084119255824,
+        "gaia_ranked_sources": 20,
+        "gaia_k_like_sources": 1,
+        "known_planets_in_control_volume": 3,
+        "hst_wcs_bound_fits": 0,
+        "luci_wcs_bound_fits": 0,
+        "tess_sources_with_timeseries": 7
+      },
+      "meaning": "The sky location was converted into a reproducible observational search. No Love candidate was activated."
+    },
+    {
+      "date": "2026-08-19",
+      "lane": "LOVE_TESS",
+      "status": "SUCCESS",
+      "event": "Blind BLS search over 7 TESS sources recovered one repeated transit-like signal before catalog unblinding.",
+      "results": {
+        "blind_label": "TARGET_A_R2",
+        "tic_id": "165827520",
+        "gaia_source_id": "6163541785049288960",
+        "repeat_sectors": [64, 102],
+        "combined_period_days": 7.749085302234917,
+        "depth_ppm": 3018.173824954684,
+        "depth_snr": 17.50909959900578,
+        "screening_power_sde": 8.196515874842847
+      },
+      "firewall": "The in-run catalog query timed out, therefore the hit was fail-closed rather than admitted as novel."
+    },
+    {
+      "date": "2026-08-19",
+      "lane": "LOVE_TESS_UNBLIND",
+      "status": "NEGATIVE",
+      "event": "Authoritative NASA Exoplanet Archive unblind showed that the blind repeat was already catalogued.",
+      "results": {
+        "toi": "3494.01",
+        "catalog_period_days": 7.748612,
+        "blind_vs_catalog_period_delta_percent": 0.006108033028225791,
+        "classification": "KNOWN_TESS_PROJECT_SIGNAL_REDISCOVERED"
+      },
+      "meaning": "Not a new planet discovery. It is retained as a strong positive-control demonstration that the blind pipeline recovered a real known TESS signal without tuning on its identity. Love remained sealed."
+    },
+    {
+      "date": "2026-08-20",
+      "lane": "LOVE_EDEM_SOURCE_RESOLUTION",
+      "status": "SUCCESS",
+      "event": "LOVE and EDEM candidate sky centers were characterized using multiple catalogs and a Gaia mirror after direct Gaia service failure.",
+      "frozen_centers": {
+        "LOVE": {"ra_deg": 204.30267916666668, "dec_deg": -36.78240527777778},
+        "EDEM_ZAPORIZHZHIA_DIRECTION_CANDIDATE": {"ra_deg": 139.22409686590188, "dec_deg": 30.26038779947318}
+      },
+      "results": {
+        "LOVE": "Two Gaia DR3 sources within 30 arcsec; a Gaia+AllWISE+2MASS group lies about 23.13 arcsec from center; the nearest separate AllWISE-only detection is about 20.29 arcsec.",
+        "EDEM": "Nearest AllWISE detection is about 9.02 arcsec and remains separate under frozen matching rules from the Gaia-linked optical/IR group at about 20.76 arcsec; a consistent SDSS+Pan-STARRS source group lies about 13.31 arcsec away."
+      },
+      "meaning": "The centers are not empty sky, but no catalog neighbor is admitted as the semantic identity of LOVE or EDEM. EDEM identity remains unconfirmed."
+    },
+    {
+      "date": "2026-08-20",
+      "lane": "LOVE_EDEM_GEOMETRY",
+      "status": "SUCCESS",
+      "event": "Deterministic spherical geometry of LOVE, EDEM, and the Orion Belt was calculated without anomaly scoring.",
+      "results": {
+        "love_edem_separation_deg": 90.586788289,
+        "love_orion_belt_great_circle_cross_track_deg": 3.963705383,
+        "edem_orion_belt_great_circle_cross_track_deg": 56.77514367,
+        "direct_sqrt_pi_coordinate_relation_found": false
+      },
+      "meaning": "LOVE-EDEM is near a quarter-circle separation. LOVE is geometrically near an extension of the Orion Belt fitted great circle, but the relation was found post hoc and is not evidence of a physical association."
+    },
+    {
+      "date": "2026-08-20",
+      "lane": "LOVE_EDEM_EARTH_LOCUS",
+      "status": "SUCCESS",
+      "event": "The normalized LOVE-EDEM celestial bisector was mapped to a deterministic Earth-locus model with the bisector forced to local zenith.",
+      "results": {
+        "bisector_ra_deg": 170.38390326101873,
+        "bisector_dec_deg": -3.8654180644718967,
+        "intrinsic_latitude_deg": -3.8654180644718967,
+        "longitude_without_time": "DEGENERATE",
+        "inherited_frozen_time_utc": "2026-01-10T03:47:22Z",
+        "frozen_time_solution_lon_east_deg": 3.854924373538978,
+        "frozen_seafloor_search_point": {"lat": -3.8654180644718967, "lon": 3.854924373538978}
+      },
+      "meaning": "This created a frozen geographic search point, not evidence of an ancient relay or artificial structure. The Kamil rigid-gate negative was not reversed."
+    },
+    {
+      "date": "2026-08-20",
+      "lane": "LOVE_EDEM_SEAFLOOR_PROVENANCE",
+      "status": "BLOCKED",
+      "event": "GEBCO/GMRT and regional Congo/Angola Basin survey infrastructure were audited at the frozen Earth-locus point.",
+      "results": {
+        "global_bathymetry": "AVAILABLE",
+        "regional_multibeam_seismic_survey_families": "CONFIRMED",
+        "gebco_exact_tid_cell": "UNRESOLVED_RETRIEVAL_BLOCKED",
+        "gmrt_exact_curated_swath_intersection": "UNRESOLVED_RETRIEVAL_BLOCKED",
+        "morphology_inspection": "NOT_AUTHORIZED"
+      },
+      "meaning": "Existing survey infrastructure is not proof that a direct sounding crosses the point. No recentering to nearby interesting morphology is permitted."
+    },
+    {
+      "date": "2026-08-20",
+      "lane": "UNDERWATER_REVERSE_ACOUSTIC_MODEL",
+      "status": "BLOCKED",
+      "event": "Reverse-acoustic operator audit passed logically but empirical identifiability did not.",
+      "results": {
+        "logical_reversibility": "PASS",
+        "unique_geometry_recovery_from_spectrum": "NOT_ADMITTED",
+        "119_hz_allowed_as_blind_key": false,
+        "520_hz_allowed_as_blind_key": false,
+        "field_detection": "NO_TARGET_DETECTED"
+      },
+      "meaning": "No underwater pyramid was detected. A blind reference library and held-out forward replay are required before any class/state/scale recovery claim."
+    },
+    {
+      "date": "2026-08-20_to_2026-08-21",
+      "lane": "COUSTEAU_METHOD_BUILD",
+      "status": "SUCCESS",
+      "event": "Cousteau expanded into reference controls, Atlantic-wide searches, raw-data harvesting, frequency-neighborhood checks, reverse-assumption audits, T-phase catalogs, and 5D spiral/tranception-reverse passes.",
+      "preserved_artifact_families": [
+        "blind reference library preregistration",
+        "Titanic known-target calibration",
+        "global ocean acoustic adversarial corpus",
+        "historical military acoustic corpus",
+        "Atlantic-wide influence-zone protocol and run",
+        "117-121 Hz waveform access/bandpass gates",
+        "T-phase blind cluster and error-aware-distance runs",
+        "5D spiral turns and deep-analysis receipts"
+      ],
+      "meaning": "This stage strengthened controls and falsification infrastructure; it did not establish a physical artificial target."
+    },
+    {
+      "date": "2026-08-22",
+      "lane": "HA10_119HZ",
+      "status": "NEGATIVE",
+      "event": "The predeclared response-corrected HA10 confirmatory 119-Hz test remained negative.",
+      "result": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+      "frozen_result_blob": "eb8b48fb7f043160c057f9df6264a781412ed854",
+      "meaning": "Later controls may validate pipeline sensitivity but may not rescue or reinterpret the frozen 119-Hz negative."
+    },
+    {
+      "date": "2026-08-22",
+      "lane": "HA10_H10N1_PRIMARY_BATHYMETRY",
+      "status": "SUCCESS",
+      "event": "Native BAS Ascension bathymetry was recovered and H10N1 was read directly from the native grid.",
+      "dataset": {
+        "id": "GB/NERC/BAS/PDC/01236",
+        "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+        "grid_spacing_deg": 0.0005
+      },
+      "native_files": [
+        {"name":"Ascension_20190912_nc.grd","bytes":2397621,"sha256":"b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81"},
+        {"name":"Ascension_20190912_ascii.asc","bytes":6333299,"sha256":"76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a"}
+      ],
+      "H10N1": {
+        "frozen_coordinate": {"lat": -7.845673, "lon": -14.480230},
+        "nearest_native_cell": {"lat": -7.8455, "lon": -14.48},
+        "topography_m": -1927.934326171875
+      },
+      "meaning": "This is seafloor elevation from the BAS grid, not hydrophone sensor depth."
+    },
+    {
+      "date": "2026-08-22",
+      "lane": "H10N1_BLIND_MORPHOLOGY",
+      "status": "WATCHLIST",
+      "event": "Blind controls were frozen before generic morphology scoring at primary 2-km and secondary 1-km radii.",
+      "results": {
+        "primary_2km": {"aggregate": 1.27026138, "empirical_p": 0.19047619047619047, "rank": "4/21"},
+        "secondary_1km": {"aggregate": 1.20033627, "empirical_p": 0.047619047619047616, "rank": "1/21"}
+      },
+      "decision": "PHYSICAL_ANOMALY_GATE_NOT_ADVANCED__SECONDARY_LOCAL_MORPHOLOGY_WATCHLIST_OPEN",
+      "meaning": "The local 1-km score did not reproduce at the preregistered primary 2-km scale. No pyramidality or crater score was computed."
+    },
+    {
+      "date": "2026-08-22",
+      "lane": "H10N1_SOURCE_LINEAGE",
+      "status": "BLOCKED",
+      "event": "BAS compilation lineage was traced to JR53-AMT11, JR287, JR15001 and JR16-NG, but per-cell contributor identity could not be read from the composite.",
+      "decision": "REQUIRE_INDEPENDENT_TRACKLINE_OR_SOUNDING_FOOTPRINT_BEFORE_PROMOTION",
+      "meaning": "Cruise proximity is not swath intersection."
+    },
+    {
+      "date": "2026-08-22",
+      "lane": "P2548_2002_SURVEY",
+      "status": "BLOCKED",
+      "event": "The 2002 Thales GeoSolutions Pacific HDAS survey measurement chain and report citation P2548 were reconstructed, but primary report bytes were not recovered publicly.",
+      "report": "Survey Report for HDAS Installation at Ascension Island, Report P2548, August 2002",
+      "known_measurement_classes": ["multibeam bathymetry", "multibeam backscatter", "shallow sub-bottom offshore", "single-beam/sidescan/sub-bottom inshore"],
+      "important_unknowns": ["navigation method/CRS/accuracy", "motion/heading corrections", "sound-speed method", "vertical datum", "multibeam model and survey geometry", "grid resolution and uncertainty", "backscatter calibration", "sub-bottom model/resolution/penetration"],
+      "meaning": "Published descriptions support broad route/site mapping but not fine artificial-structure classification."
+    },
+    {
+      "date": "2026-08-22_to_2026-08-24",
+      "lane": "P2548_CUSTODIANS",
+      "status": "WAITING_EXTERNAL",
+      "event": "Custodian requests were opened with Fugro, CTBTO and NAVFAC after the public-locator path was exhausted.",
+      "state": {
+        "Fugro": "Marco Gilissen requested identity/project verification; a substantive truthful reply explaining independent JANUS research and public GitHub work has already been sent; waiting.",
+        "CTBTO": "waiting",
+        "NAVFAC": "waiting"
+      }
+    },
+    {
+      "date": "2026-08-24",
+      "lane": "BGS_MODERN_COVERAGE",
+      "status": "NEGATIVE",
+      "event": "BGS Marine Data stated that the requested H10N1/H10S2 locations are beyond the data collected by BGS and referred the project to UKHO and BODC.",
+      "classification": "INSTITUTIONAL_NEGATIVE_FOR_BGS_OWN_COLLECTION_ONLY",
+      "meaning": "This does not mean no modern data exist. BODC cruise referral 15726 resolves to the already-known JR15001/AMT25/JR864 lineage."
+    },
+    {
+      "date": "2026-08-24",
+      "lane": "JR15001_BODC",
+      "status": "WAITING_EXTERNAL",
+      "event": "BODC/NOC confirmed critical JR15001 provenance and the project requested the originator EM122 file.",
+      "confirmed_by_custodian": [
+        "Free BODC web-user access is the intended route for final series 1762365.",
+        "Originator files can be requested separately.",
+        "The multibeam depth channel MBANSWCB was present in em122.ACO.",
+        "MBANSWCB was not transferred into final processed series 1762365; the retained single-beam depth was judged cleaner/more accurate during final screening."
+      ],
+      "requested": ["em122.ACO", "associated originator navigation/metadata needed for reproducible swath provenance"],
+      "killer_gate": "HASH_BYTES -> VERIFY_IDENTITY/NAV -> RECONSTRUCT_ACTUAL_EM122_SWATH -> BOOLEAN_H10N1_IN_OR_OUT -> STOP_AND_ASK_JANUS",
+      "current_swath_intersection": "NOT_CONFIRMED"
+    },
+    {
+      "date": "2026-08-24",
+      "lane": "TOBI_CD169",
+      "status": "WAITING_EXTERNAL",
+      "event": "BODC/NOC reported offline TOBI tape storage but wrote CD196 while the frozen request is RRS Charles Darwin CD169, JD059, 2005-02-28, TOBI-02, science-log line 19, 01:00-01:29 UTC.",
+      "identity_state": "PUBLIC_RECORD_STRONGLY_SUPPORTS_CD169__CUSTODIAN_CONFIRMATION_PENDING",
+      "outbound_state": "Reply sent accepting mid-next-week retrieval timing and politely requesting CD169/CD196 clarification before retrieval is treated as the requested dataset.",
+      "acceptance_rule": "If CD196 is a typo preserve the correction; if it is genuinely another dataset stop and reconcile lineage. Hash bytes before content analysis."
+    },
+    {
+      "date": "2026-08-24",
+      "lane": "TOBI_SYNTHETIC_BEFORE_REAL",
+      "status": "SUCCESS",
+      "event": "JANUS authorized synthetic-only preregistration before primary TOBI bytes, and a 200,000-sample geometry modulation was frozen.",
+      "results": {
+        "nominal_log_derived_closest_approach_utc": "01:07:25.275",
+        "central_95pct_time_envelope_utc": ["01:06:40.901", "01:08:08.037"],
+        "median_absolute_cross_track_m": 18.263579,
+        "p97_5_absolute_cross_track_m": 52.644304,
+        "p99_5_absolute_cross_track_m": 60.852179,
+        "nominal_interpolated_altitude_m": 549.437021
+      },
+      "critical_boundary": "01:07:25 is derived from public log interpolation and is CALIBRATION_ONLY, not independent predictive evidence. No real TOBI pixels/traces were used and no retuning after primary bytes is allowed."
+    }
+  ],
+  "current_fixed_coordinates": {
+    "HA10": {
+      "H10N1": [-7.845673, -14.480230],
+      "H10N2": [-7.827790, -14.487480],
+      "H10N3": [-7.840930, -14.501680],
+      "H10S1": [-8.941177, -14.648430],
+      "H10S2": [-8.959100, -14.645310],
+      "H10S3": [-8.952740, -14.662900]
+    },
+    "LOVE_EDEM_EARTH_LOCUS_FROZEN_TIME_SOLUTION": [-3.8654180644718967, 3.854924373538978],
+    "TOBI_LINE19_INTERPOLATED_POINT_CALIBRATION_ONLY": [-3.865418, -12.14244]
+  },
+  "instrument_health_constraints": {
+    "HA10_sample_rate_hz": 250,
+    "H10S1": "Strong electronic noise; out of IDC operations since September 2013.",
+    "H10S2_H10S3": "Intermittent cross-talk risk from H10S1 must be rejected/controlled in acoustic work.",
+    "sensor_depth_rule": "Hydrophone sensor depth is not seafloor/anchor bathymetry."
+  },
+  "current_claim_ceiling": {
+    "LOVE": "KNOWN_TOI_REDISCOVERY_POSITIVE_CONTROL_ONLY__NO_NEW_EXOPLANET_DISCOVERY__LOVE_SEALED",
+    "EDEM": "SOURCE_NEIGHBORHOOD_CHARACTERIZED__IDENTITY_UNCONFIRMED",
+    "LOVE_EDEM_GEOMETRY": "DETERMINISTIC_GEOMETRY_ONLY__NO_PHYSICAL_RELAY",
+    "AFRICA_FROZEN_POINT": "DATA_PROVENANCE/REGIONAL_CONTEXT_ONLY__NO_ARTIFICIAL_SEAFLOOR_TARGET",
+    "HA10_119HZ": "NEGATIVE_CONFIRMATORY_RESULT_PRESERVED",
+    "H10N1": "PRIMARY_2KM_ANOMALY_GATE_NOT_ADVANCED__LOCAL_1KM_WATCHLIST_ONLY",
+    "SOUTHERN_SEAMOUNT": "KNOWN_VOLCANIC_SYSTEM__WISHBONE_COORDINATES_UNRESOLVED",
+    "OVERALL": "TARGET_IDENTITY_UNCONFIRMED__NO_UNDERWATER_PYRAMID_DETECTED__VOLCANIC_BASELINE_ACTIVE"
+  },
+  "open_gates": [
+    "BODC JR15001 em122.ACO + originator navigation -> exact EM122 swath H10N1 IN/OUT",
+    "BODC TOBI CD169/CD196 identifier reconciliation -> retrieve tape -> hash/verify -> JANUS before quantitative use",
+    "UKHO HI1751 exact H10N1 coverage response",
+    "Fugro / CTBTO / NAVFAC P2548 archival responses",
+    "BAS/PDC / EarthScope / Ascension Government external responses where still pending",
+    "Independent source-lineage replication before any H10N1 morphology promotion",
+    "Separate truly independent TOBI morphology/signal prediction must be frozen before target-interval image/trace inspection"
+  ],
+  "journal_update_rule": "Future milestones append a new version or child receipt. Never edit this journal to make old uncertainty, negative results, technical failures, or waiting states disappear."
+}
