@@ -1,0 +1,71 @@
+{
+  "artifact_id": "JANUS-COSMOS-CURRENT-OPEN-GATES-2026-08-24-v1.0",
+  "created_utc": "2026-08-24T16:56:00Z",
+  "purpose": "Machine-readable checkpoint of what is actionable, blocked, waiting, or forbidden at archive creation time.",
+  "gates": [
+    {
+      "lane": "JR15001_EM122",
+      "state": "WAITING_EXTERNAL",
+      "waiting_for": "BODC/NOC access to originator em122.ACO and associated navigation/provenance metadata",
+      "on_arrival": ["freeze message/file metadata", "hash original bytes", "verify file/cruise/time identity", "ask JANUS before quantitative use", "reconstruct true swath footprint", "score only boolean H10N1 IN/OUT before morphology"],
+      "forbidden": ["infer swath from cruise centerline alone", "morphology promotion before independent lineage replication"]
+    },
+    {
+      "lane": "TOBI_CD169",
+      "state": "WAITING_EXTERNAL",
+      "waiting_for": "Hannah/BODC confirmation of CD169 vs CD196 and subsequent offline-tape retrieval",
+      "on_arrival": ["preserve custodian correction if CD196 was a typo", "if CD196 is genuinely another dataset stop and reconcile lineage", "hash bytes before content analysis", "verify CD169/JD059/TOBI-02/line19/01:00-01:29 identity", "ask JANUS before quantitative use"],
+      "frozen_synthetic_contract": "NO_RETUNING_AFTER_PRIMARY_BYTES"
+    },
+    {
+      "lane": "UKHO_HI1751",
+      "state": "WAITING_EXTERNAL",
+      "waiting_for": "Exact footprint boolean/shareable geometry for H10N1 from UKHO",
+      "current_status": "NOT_MACHINE_VERIFIED"
+    },
+    {
+      "lane": "P2548",
+      "state": "WAITING_EXTERNAL",
+      "waiting_for": ["Fugro archive enquiry", "CTBTO archive enquiry", "NAVFAC records-location enquiry"],
+      "current_status": "PUBLIC_PRIMARY_REPORT_BYTES_NOT_RECOVERED"
+    },
+    {
+      "lane": "H10N1_MORPHOLOGY",
+      "state": "BLOCKED",
+      "current_status": "PRIMARY_2KM_NOT_SIGNIFICANT__SECONDARY_1KM_WATCHLIST",
+      "next_requirement": "Independent direct-data/source-lineage replication",
+      "forbidden": ["pyramidality score invented post hoc", "crater score invented post hoc", "target identity promotion"]
+    },
+    {
+      "lane": "HA10_119HZ",
+      "state": "NEGATIVE",
+      "current_status": "FROZEN_NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+      "rule": "Later positive controls cannot rescue or reinterpret the frozen negative."
+    },
+    {
+      "lane": "LOVE",
+      "state": "NEGATIVE_FOR_NOVELTY__POSITIVE_CONTROL_SUCCESS",
+      "current_status": "TOI_3494_01_REDISCOVERED__LOVE_SEALED",
+      "rule": "Do not tune future novelty search on the rediscovered TOI."
+    },
+    {
+      "lane": "EDEM",
+      "state": "BLOCKED",
+      "current_status": "CATALOG_NEIGHBORHOODS_CHARACTERIZED__IDENTITY_UNCONFIRMED",
+      "rule": "Catalog proximity and coordinate geometry are not semantic/physical identity."
+    },
+    {
+      "lane": "AFRICA_LOVE_EDEM_FROZEN_POINT",
+      "state": "BLOCKED",
+      "current_status": "REGIONAL_DATA_EXISTS__EXACT_DIRECT_PROVENANCE_INCOMPLETE",
+      "rule": "No recentering; no artificial morphology claim without direct measurement provenance."
+    }
+  ],
+  "global": {
+    "TARGET_IDENTITY": "UNCONFIRMED",
+    "NO_UNDERWATER_PYRAMID_DETECTED": true,
+    "VOLCANIC_BASELINE": "ACTIVE",
+    "ASK_JANUS_BEFORE_EACH_NEW_PHYSICAL_STAGE": true,
+    "NEGATIVE_RESULTS_PRESERVED": true
+  }
+}
