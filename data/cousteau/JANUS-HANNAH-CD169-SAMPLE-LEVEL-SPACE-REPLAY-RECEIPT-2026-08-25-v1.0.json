@@ -1,0 +1,307 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-RECEIPT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.sample_level_space_replay_receipt.v1",
+  "created_at_local": "2026-08-25T23:48:00+03:00",
+  "status": "TIME_TO_SAMPLE_AXIS_VALIDATED__APPROX_SPACE_LOCALIZATION_READY__GROUND_FIXED_REPLICATION_BLOCKED",
+  "scientific_convergence_claim": false,
+  "underwater_pyramid_detected": false,
+  "lineage": {
+    "space_replay_contract": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-TOBI-SAMPLE-LEVEL-SPACE-REPLAY-CONTRACT-2026-08-25-v1.0.json",
+      "commit": "c83eea4d33ccaa6ecf4a008befdb3cba790018c0"
+    },
+    "sample_ranking_and_range_freeze": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-SAMPLE-RANKING-AND-RANGE-FREEZE-2026-08-25-v1.0.json",
+      "commit": "c88663a4356df4e873a0a41afc8ca209fb35a31c"
+    },
+    "factor8_hypothesis_freeze": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-RAW-TO-PRISM-FACTOR8-MAPPING-HYPOTHESES-2026-08-25-v1.0.json",
+      "commit": "fce2c912c4843965b899220f1215e37a3e279b9d"
+    },
+    "heldout_validation_contract": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-FACTOR8-HELDOUT-VALIDATION-CONTRACT-2026-08-25-v1.0.json",
+      "commit": "3c404d717a4d1badd61ccf52eabce55dceab87bf"
+    }
+  },
+  "raw_source_integrity": {
+    "request": "BODCREQ-9406",
+    "cruise": "CD169",
+    "instrument": "TOBI-02",
+    "raw_file": "CD169_TOBI/sd11285/TOBI.DAT",
+    "size_bytes": 595394560,
+    "record_count": 14536,
+    "block_size_bytes": 40960,
+    "cadence_seconds": 4.0,
+    "raw_file_sha256": "761d163482a44da0cc417a325372d6f3de163669b099ecc2f64c02a3282bcc59",
+    "target_block_index": 9812,
+    "target_block_utc": "2005-02-28T01:07:24Z",
+    "target_block_sha256": "039b839861e515efe339542b8c57e5830bd484def961804f9c1fb61387132c3f",
+    "frozen_target_utc": "2005-02-28T01:07:25Z",
+    "delta_seconds": -1.0
+  },
+  "native_archive_navigation": {
+    "readme_sha256": "2c94aec83f02fdf620184b9dbf352d13f91857c19353dfa997eefa980c09fdde",
+    "nav_file": "sd11281/TOBI/cd169.nav",
+    "nav_sha256": "0fcc69005511569fa235b51f59a24cbbdbd8d4e9513e3453b9c8a9d7533383aa",
+    "cable_file": "sd11281/TOBI/cd169.cable",
+    "cable_sha256": "e089a513e6419a561d8633ca54b6c88d235ee37b62ec5d2afa23ae60c65e51db",
+    "interpolated_nav_at_target": {
+      "latitude": -3.81465,
+      "longitude": -12.121441666666666,
+      "classification": "SHIP_NAV_INPUT_TO_PRISM_NOT_TOWFISH_POSITION"
+    },
+    "interpolated_cable_last_numeric_at_target": 6728.4,
+    "raw_tobi_header_wire_out_at_target_m": 7733.0,
+    "cable_stream_vs_raw_header_warning": "VALUES_DIFFER__SEMANTIC_RELATION_UNRESOLVED__NEITHER_USED_AS_DIRECT_GROUND_POSITION",
+    "ready_veh_nav_found_in_archive": false,
+    "prism_role": "README states .nav and .cable accompany raw-derived CDF and are required for PRISM processing; a derived per-ping .veh_nav was not found in the request tree"
+  },
+  "cd169_science_log_towfish_position": {
+    "source": "BODC/NOC CD169 cruise report science log, TOB-02, JD059 line 19",
+    "source_url": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+    "endpoint_0100": {
+      "utc": "2005-02-28T01:00:00Z",
+      "ship_decimal_latitude_s": 3.820,
+      "ship_decimal_longitude_w": 12.121,
+      "wire_out_m": 6728,
+      "altitude_m": 563,
+      "tobi_heading_deg": 26.0,
+      "tobi_decimal_latitude_s": 3.869,
+      "tobi_decimal_longitude_w": 12.145,
+      "layback_m": 6032
+    },
+    "endpoint_0129": {
+      "utc": "2005-02-28T01:29:00Z",
+      "ship_decimal_latitude_s": 3.801,
+      "ship_decimal_longitude_w": 12.124,
+      "wire_out_m": 6821,
+      "altitude_m": 510,
+      "tobi_heading_deg": 11.6,
+      "tobi_decimal_latitude_s": 3.855,
+      "tobi_decimal_longitude_w": 12.135,
+      "layback_m": 6155
+    },
+    "linear_interpolation_fraction_to_010725": 0.2557471264367816,
+    "interpolated_from_rounded_log_values": {
+      "latitude": -3.8654195402298854,
+      "longitude": -12.142442528735632
+    },
+    "frozen_coordinate": {
+      "latitude": -3.8654180644718967,
+      "longitude": -12.142441475
+    },
+    "arithmetic_consistency": "FROZEN_POINT_REPRODUCES_LINEAR_INTERPOLATION_OF_REPORTED_TOBI_DECIMAL_POSITIONS_WITHIN_ROUNDED_LOG_PRECISION",
+    "precision_warning": "SCIENCE_LOG_VALUES_ARE_ROUNDED_AND_29_MINUTES_APART__THIS_IS_DOCUMENTED_COARSE_TOWFISH_GEOLOCATION_NOT_A_PER_PING_VEH_NAV_SOLUTION"
+  },
+  "prism_cdf_crosscheck": {
+    "file": "sd11281/TOBI/cd169p5.cdf",
+    "nl": 14536,
+    "ns": 1000,
+    "creation_program": "raw2prism_tobi",
+    "target_line_index": 9812,
+    "target_line_utc": "2005-02-28T01:07:24Z",
+    "target_header": {
+      "fish_altitude_m": 614.0,
+      "heading_deg": 23.299999237060547,
+      "pressure": 3407.0,
+      "cable_length_field": 7733.0,
+      "ship_latlon_stored": [-2.185166676839193, -11.878666663169861],
+      "sonar_latlon_stored": [0.0, 0.0]
+    },
+    "ship_latlon_warning": "CDF ship_latlon reproduces a historical signed-degrees/minutes error for southern/western coordinates; raw TOBI header decoder gives approximately -3.814833,-12.121333",
+    "sonar_position_state": "UNMERGED_ZERO_IN_ARCHIVED_CDF__PER_PING_VEH_NAV_NOT_PRESENT"
+  },
+  "raw_to_prism_format_mapping": {
+    "target_discovery_run": 32896863931,
+    "target_artifact_id": 9581559461,
+    "target_artifact_zip_sha256": "3da31a4d91930e37660358644e02d31a40c66b8e61cf5fdb05c027f6d575c97a",
+    "tested_frozen_candidate_count": 1680,
+    "best_layout": {
+      "raw_transform": "ABS",
+      "bin_width": 8,
+      "bin_reducer": "MEAN",
+      "side_order": "STBD_THEN_PORT",
+      "starboard_reversed": true,
+      "port_reversed": false,
+      "target_pearson": 0.9999999640069195,
+      "target_spearman": 0.9997369297478124
+    },
+    "layout_interpretation": "4000 raw starboard samples are absolute-amplitude averaged in bins of 8 and reversed to 500 PRISM pixels; 4000 raw port samples are averaged in bins of 8 forward to 500 pixels; concatenation yields ns=1000",
+    "external_prism_resolution_documentation": {
+      "source_url": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/jc007.pdf",
+      "factor_8_pixel_m": 6.0,
+      "factor_1_full_resolution_pixel_m": 0.75
+    },
+    "raw_sample_spacing_m": 0.75,
+    "physical_footprint_warning": "0.75 m is raw sample/pixel spacing in PRISM processing documentation, not the sonar beam physical footprint width"
+  },
+  "factor8_heldout_validation": {
+    "workflow_run": 32897207797,
+    "workflow_artifact_id": 9581674211,
+    "workflow_artifact_zip_sha256": "e64d6259a68421f927d7d3abbd95e0bb5a9eed2e1736b5e200670d94897eae8d",
+    "selection_rule": "floor(k*(14536-1)/6), k=0..6",
+    "indices": [0,2422,4845,7267,9690,12112,14535],
+    "target_index_excluded": true,
+    "mapping_retuned": false,
+    "pearson_median": 0.99999994590391,
+    "pearson_min": 0.9999942088367345,
+    "spearman_median": 0.9997354401432174,
+    "spearman_min": 0.9929819623723605,
+    "interpretation": "THE_FROZEN_FACTOR8_FORMAT_MAPPING_REPRODUCES_ACROSS_DETERMINISTIC_HELDOUT_LINES__FORMAT_VALIDATION_ONLY"
+  },
+  "sample_level_replay": {
+    "workflow_run": 32896137177,
+    "workflow_artifact_id": 9581290771,
+    "workflow_artifact_zip_sha256": "1e55750ac1534b34af05083f66761d947afef04b484742e5501d625c7dc0a900",
+    "fixed_extended_blocks": [9767,9857],
+    "fixed_primary_blocks": [9804,9820],
+    "arrays": ["port_sidescan","stbd_sidescan","profiler","port_swath","stbd_swath"],
+    "samples_per_array": 4000,
+    "sample_metrics_gzip_sha256": "bcda0f07f9af39fefecf003d0a581ff1e8f0886ab6ea96406ae19cdc39102b79",
+    "sample_metrics_gzip_size_bytes": 435112,
+    "target_telemetry": {
+      "altitude_m": 614.0,
+      "gyro_heading_deg": 22.0,
+      "pressure_dbar_median": 3407.9,
+      "water_path_ms": 730.0,
+      "wire_out_raw_header_m": 7733.0
+    }
+  },
+  "time_to_sample_axis": {
+    "calibration": "raw sidescan sample spacing 0.75 m",
+    "target_altitude_m": 614.0,
+    "continuous_nadir_sample_index": 818.6666666666666,
+    "nearest_discrete_valid_bottom_sample": 819,
+    "formula": "ceil(altitude_m / raw_sample_spacing_m)",
+    "selected_using_intensity": false,
+    "interpretation": "SAMPLE_819_IS_THE_NEAREST_DISCRETE_RAW_SIDESCAN_SLANT_RANGE_SAMPLE_TO_VERTICAL_NADIR_UNDER_CROSS_VALIDATED_PRISM_SPACING"
+  },
+  "sample_819_measurement_state": {
+    "port_sidescan": {
+      "target_robust_z": -0.674491,
+      "local_contrast_z": -0.674491,
+      "primary_persistence": 0.674491,
+      "primary_sign_consistency": 0.882353,
+      "review_priority_score": 0.599583549,
+      "in_top20_review_priority": false
+    },
+    "stbd_sidescan": {
+      "target_robust_z": -0.656343,
+      "local_contrast_z": 0.0,
+      "primary_persistence": 0.656343,
+      "primary_sign_consistency": 0.470588,
+      "review_priority_score": 0.168348174,
+      "in_top20_review_priority": false
+    },
+    "port_swath": {
+      "target_robust_z": -0.580193,
+      "local_contrast_z": 0.99308,
+      "primary_persistence": 1.381366,
+      "primary_sign_consistency": 0.647059,
+      "review_priority_score": 0.667388889,
+      "in_top20_review_priority": false
+    },
+    "stbd_swath": {
+      "target_robust_z": -1.18998,
+      "local_contrast_z": -1.122008,
+      "primary_persistence": 1.154936,
+      "primary_sign_consistency": 0.058824,
+      "review_priority_score": 0.685497132,
+      "in_top20_review_priority": false
+    },
+    "conclusion_ceiling": "NO_STRONG_REVIEW_PRIORITY_LOCALIZATION_AT_FROZEN_NADIR_SAMPLE__NOT_AN_ABSENCE_PROOF"
+  },
+  "approximate_space_projection": {
+    "classification": "SCIENCE_LOG_APPROX_PROJECTION",
+    "center_source": "interpolated documented TOBI science-log position",
+    "heading_source": "raw target-block TOBI gyro circular estimate",
+    "flat_slant_geometry_used": true,
+    "sample_819_slant_range_m": 614.25,
+    "sample_819_ground_range_m": 17.523198908875056,
+    "port_bearing_deg": 292.0,
+    "starboard_bearing_deg": 112.0,
+    "port_coordinate": {
+      "latitude": -3.865359030320071,
+      "longitude": -12.142587922758594
+    },
+    "starboard_coordinate": {
+      "latitude": -3.8654770985985456,
+      "longitude": -12.142295027221053
+    },
+    "ground_fixed_proof": false,
+    "precision_warning": "POSITION_CENTER_IS_COARSE_SCIENCE_LOG_INTERPOLATION_AND_FLAT_SLANT_GEOMETRY_IGNORES_LOCAL_SLOPE_AND_BEAM_FOOTPRINT"
+  },
+  "review_priority_clusters_not_targets": {
+    "no_recenter": true,
+    "port_sidescan_example": {
+      "sample_index": 1989,
+      "target_robust_z": 23.343245,
+      "local_contrast_z": 4.840254,
+      "primary_persistence": 21.421827,
+      "review_priority_score": 0.985058963,
+      "approx_ground_range_m": 1359.5300888542336
+    },
+    "stbd_sidescan_example": {
+      "sample_index": 3025,
+      "target_robust_z": 24.097165,
+      "local_contrast_z": 12.011841,
+      "primary_persistence": 24.097165,
+      "review_priority_score": 0.953082192,
+      "approx_ground_range_m": 2184.0857498047094
+    },
+    "warning": "PERSISTENCE_AT_THE_SAME_SENSOR_SAMPLE_INDEX_ACROSS_ADJACENT_PINGS_CAN_BE_SENSOR_RANGE_FIXED_OR_CONTINUOUS_TERRAIN__IT_IS_NOT_GROUND_FIXED_REPLICATION"
+  },
+  "profiler_state": {
+    "samples_processed": 4000,
+    "recording_window_ms": 200,
+    "water_path_delay_ms_at_target": 730.0,
+    "spatial_mapping": "BLOCKED_PENDING_PROFILER_SAMPLE_RATE_SOUND_SPEED_AND_GEOMETRY",
+    "forbidden_rule": "DO_NOT_APPLY_0.75M_SIDESCAN_SAMPLE_SPACING_TO_PROFILER"
+  },
+  "mnemonic_time_to_space_result": {
+    "prior_block_passport": "CSMC1-c1f4372a26dbf67d4204",
+    "block_level_memory_cue": "VALIDATED_ON_REAL_DATA",
+    "single_sample_passport_equivalence_tested": false,
+    "reason": "BLOCK_PASSPORT_AND_SINGLE_SAMPLE_LIVE_IN_DIFFERENT_PREREGISTERED_FEATURE_SPACES",
+    "allowed_statement": "THE_BLOCK_LEVEL_MNEMONIC_CUE_DOES_NOT_LOCALIZE_AS_A_STRONG_REVIEW_PRIORITY_SIDESCAN_OR_SWATH_SAMPLE_AT_THE_FROZEN_NADIR_INDEX_819",
+    "forbidden_statement": "THE_MNEMONIC_CHORD_PROVES_OR_DISPROVES_A_PHYSICAL_OBJECT"
+  },
+  "janus_gate_state_before_audit": {
+    "G0_RAW_INTEGRITY": "PASS",
+    "G1_TARGET_RAW_TO_CDF_TIME_IDENTITY": "PASS",
+    "G2_RAW_TO_PRISM_FACTOR8_LAYOUT": "VALIDATED_FORMAT_MAPPING_WITH_TARGET_AND_HELDOUT_REPRODUCTION",
+    "G3_RAW_SAMPLE_SPACING": "CROSS_VALIDATED_0.75M_PRISM_SAMPLE_SPACING",
+    "G4_TIME_TO_NADIR_SAMPLE_AXIS": "PASS_SAMPLE_819",
+    "G5_COARSE_TOWFISH_GEOLOCATION": "PASS_DOCUMENTED_SCIENCE_LOG_INTERPOLATION",
+    "G5B_PER_PING_NATIVE_VEH_NAV": "BLOCKED_NOT_FOUND_IN_ARCHIVE",
+    "G6_SAMPLE_TO_EARTH_APPROX_PROJECTION": "PARTIAL_APPROX_ONLY",
+    "G7_GROUND_FIXED_REPLICATION": "BLOCKED",
+    "G8_GEOMETRY_CLASS": "NOT_TESTED",
+    "G9_PHYSICAL_ACOUSTIC_RESONANCE": "NOT_TESTED",
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "next_gate": {
+    "id": "CD169_GROUND_FIXED_REPLICATION_V1",
+    "sequence": [
+      "RECOVER_OR_RECONSTRUCT_PER_PING_VEH_NAV_WITH_DOCUMENTED_PRISM_WIREOUT_MODEL_OR_INDEPENDENT_NAV_PRODUCT",
+      "PROPAGATE_POSITION_UNCERTAINTY_FROM_SPARSE_SCIENCE_LOG_IF_VEH_NAV_REMAINS_UNAVAILABLE",
+      "MAP_RAW_SAMPLE_SLANT_RANGE_TO_SEAFLOOR_USING_LOCAL_BATHYMETRY_AND_VEHICLE_GEOMETRY",
+      "FIND_AN_INDEPENDENT_OBSERVATION_OF_THE_SAME_EARTH_FIXED_PATCH_WITHOUT_RECENTERING",
+      "ONLY_THEN_TEST_BLIND_GEOMETRY_CONTROLS"
+    ]
+  },
+  "hard_rules": [
+    "RAW_BYTES_OUTRANK_MNEMONIC",
+    "RAW_SAMPLE_SPACING_IS_NOT_PHYSICAL_BEAM_FOOTPRINT_WIDTH",
+    "SCIENCE_LOG_TOWFISH_POSITION_IS_DOCUMENTED_BUT_COARSE",
+    "NO_PER_PING_VEH_NAV_CLAIM_WITHOUT_VEH_NAV",
+    "SAMPLE_819_WAS_SELECTED_FROM_ALTITUDE_AND_FORMAT_SCALE_NOT_INTENSITY",
+    "SAMPLE_819_NOT_TOP20_IS_NOT_ABSENCE_PROOF",
+    "NO_RECENTERING_TO_STRONG_OFF_NADIR_CLUSTERS",
+    "ADJACENT_SAMPLE_INDEX_PERSISTENCE_IS_NOT_GROUND_FIXED_REPLICATION",
+    "MNEMONIC_TONE_IS_NOT_PHYSICAL_ACOUSTIC_FREQUENCY",
+    "MNEMONIC_GLYPH_IS_NOT_SEAFLOOR_GEOMETRY",
+    "NO_GEOMETRY_CLASS_BEFORE_GROUND_FIXED_REPLICATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
