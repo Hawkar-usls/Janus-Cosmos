@@ -1,0 +1,82 @@
+{
+  "authority": {
+    "association_is_evidence": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "may_change_calibration": false,
+    "may_change_raw_data": false,
+    "may_change_scientific_verdict": false,
+    "may_reorder_review_priority": true,
+    "memory_equals_truth": false,
+    "mnemonic_similarity_is_scientific_similarity": false
+  },
+  "canonicalization": "UTF8_JSON_SORT_KEYS_COMPACT_ENSURE_ASCII_FALSE_ALLOW_NAN_FALSE",
+  "epistemic_states": [
+    "OBSERVED",
+    "UNKNOWN",
+    "STALE",
+    "CONTAMINATED",
+    "BLOCKED"
+  ],
+  "forbidden_semantic_influence": [
+    "verdict",
+    "hypothesis",
+    "interpretation",
+    "claim",
+    "pyramid",
+    "target",
+    "candidate",
+    "anomaly",
+    "h0",
+    "h1",
+    "h2",
+    "artificial",
+    "natural",
+    "control_label",
+    "class_label",
+    "expected",
+    "prediction",
+    "story"
+  ],
+  "hash_algorithm": "SHA256",
+  "laws": [
+    "RAW_BYTES_OUTRANK_MNEMONIC_MAPPING",
+    "UNKNOWN_NE_ZERO",
+    "STALE_NE_CURRENT",
+    "CONTAMINATED_NE_CONFIRMED",
+    "BLOCKED_NE_MEASURED",
+    "SENSORY_MATCH_NE_SCIENTIFIC_CONVERGENCE",
+    "DEMIHEAD_MUST_PRESERVE_COUSTEAU_MEASUREMENT_FINGERPRINT_BIT_EXACT",
+    "DISAGREEMENT_MUST_BE_PRESERVED",
+    "NO_LABEL_LEAKAGE_INTO_MEASUREMENT_FINGERPRINT",
+    "NEGATIVE_AND_INCONCLUSIVE_RESULTS_ARE_FIRST_CLASS"
+  ],
+  "measurement_fingerprint_requirements": {
+    "blake2b_256": "LOWERCASE_HEX_64_OR_NULL_IF_BLOCKED",
+    "embedding_dims": 16,
+    "mutation_after_export": "FORBIDDEN",
+    "sha256": "LOWERCASE_HEX_64_OR_NULL_IF_BLOCKED"
+  },
+  "producer_roles": [
+    "COUSTEAU_MEASUREMENT_SENSORY_CORE",
+    "DEMIHEAD_ASSOCIATIVE_MEMORY_CORE"
+  ],
+  "protocol_id": "JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE",
+  "protocol_version": "1.0.0",
+  "required_packet_fields": [
+    "schema",
+    "protocol_id",
+    "protocol_version",
+    "contract_sha256",
+    "event_id",
+    "producer",
+    "source_identity",
+    "context",
+    "measurement_fingerprint",
+    "sensory_digest",
+    "epistemic_state",
+    "authority",
+    "packet_sha256"
+  ],
+  "schema": "janus.synesthesia.handshake.contract.v1"
+}
