@@ -2,6 +2,7 @@
   "artifact_id": "JANUS-HANNAH-CD169-SAMPLE-RANKING-AND-RANGE-FREEZE-2026-08-25-v1.0",
   "schema": "janus.cosmos.cousteau.cd169_sample_ranking_range_freeze.v1",
   "status": "FROZEN_BEFORE_SAMPLE_LEVEL_VALUES_INSPECTED",
+  "clarification_timing": "PERCENTILE_ECDF_DEFINITION_ADDED_BEFORE_ANY_SAMPLE_LEVEL_VALUE_RUN",
   "parent_contract": "data/cousteau/JANUS-HANNAH-CD169-TOBI-SAMPLE-LEVEL-SPACE-REPLAY-CONTRACT-2026-08-25-v1.0.json",
   "target_block_index": 9812,
   "primary_block_indices": [9804,9805,9806,9807,9808,9809,9810,9811,9812,9813,9814,9815,9816,9817,9818,9819,9820],
@@ -39,12 +40,13 @@
   },
   "ranking": {
     "within_each_array_only": true,
+    "percentile_definition": "ECDF(value)=count(all_4000_finite_component_values <= value)/count(all_4000_finite_component_values); equal values receive identical ECDF",
     "components": [
-      "percentile_rank(abs(target_robust_z))",
-      "percentile_rank(abs(fixed_local_contrast_z))",
-      "percentile_rank(primary_persistence)"
+      "ECDF(abs(target_robust_z))",
+      "ECDF(abs(fixed_local_contrast_z))",
+      "ECDF(primary_persistence)"
     ],
-    "composite": "arithmetic_mean_of_three_component_percentile_ranks",
+    "composite": "arithmetic_mean_of_three_component_ECDF_values_when_all_three_are_finite",
     "top_k_per_array": 20,
     "ties": "lower_sample_index_first",
     "purpose": "REVIEW_PRIORITY_ONLY",
