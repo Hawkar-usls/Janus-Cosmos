@@ -1,0 +1,44 @@
+name: Cousteau Synesthetic Memory Core
+
+on:
+  push:
+    branches:
+      - feature/cousteau-synesthetic-memory-core-20260825
+    paths:
+      - 'workspace/cousteau_synesthetic_memory_core.py'
+      - 'workspace/cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/test_cousteau_synesthetic_memory_core.py'
+      - 'workspace/test_cousteau_synesthetic_semantic_overlay.py'
+      - 'data/cousteau/JANUS-HANNAH-COUSTEAU-SYNESTHETIC-MEMORY-CORE-CONTRACT-2026-08-25-v1.0.json'
+      - '.github/workflows/cousteau-synesthetic-memory-core.yml'
+  pull_request:
+    branches:
+      - janus-echo-cousteau
+    paths:
+      - 'workspace/cousteau_synesthetic_memory_core.py'
+      - 'workspace/cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/test_cousteau_synesthetic_memory_core.py'
+      - 'workspace/test_cousteau_synesthetic_semantic_overlay.py'
+      - 'data/cousteau/JANUS-HANNAH-COUSTEAU-SYNESTHETIC-MEMORY-CORE-CONTRACT-2026-08-25-v1.0.json'
+      - '.github/workflows/cousteau-synesthetic-memory-core.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Core self-test
+        run: python workspace/cousteau_synesthetic_memory_core.py self-test
+      - name: Core regression tests
+        run: python workspace/test_cousteau_synesthetic_memory_core.py
+      - name: Cousteau semantic overlay tests
+        run: python workspace/test_cousteau_synesthetic_semantic_overlay.py

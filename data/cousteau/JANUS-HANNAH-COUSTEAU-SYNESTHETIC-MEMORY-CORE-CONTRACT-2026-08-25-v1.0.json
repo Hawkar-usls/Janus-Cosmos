@@ -1,0 +1,175 @@
+{
+  "artifact_id": "JANUS-HANNAH-COUSTEAU-SYNESTHETIC-MEMORY-CORE-CONTRACT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.synesthetic_memory_core.contract.v1",
+  "created_at_local": "2026-08-25T22:21:00+03:00",
+  "status": "IMPLEMENTED_ON_FEATURE_BRANCH__RAW_MEASUREMENT_USE_BLOCKED_UNTIL_BYTES_AVAILABLE",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "base_branch": "janus-echo-cousteau",
+  "implementation_branch": "feature/cousteau-synesthetic-memory-core-20260825",
+  "core": {
+    "id": "JANUS_COUSTEAU_SYNESTHETIC_MEMORY_CORE",
+    "version": "1.0.0",
+    "entrypoint": "workspace/cousteau_synesthetic_memory_core.py",
+    "test_entrypoint": "workspace/test_cousteau_synesthetic_memory_core.py",
+    "mapping_seed": "JANUS_COUSTEAU_SYNESTHESIA_V1__MEASUREMENT_NOT_STORY",
+    "runtime": "PYTHON_STANDARD_LIBRARY_ONLY"
+  },
+  "parent_protocol": "data/cousteau/JANUS-HANNAH-BODC-BIDIRECTIONAL-CONVERGENCE-TO-CENTER-2026-08-25-v1.0.json",
+  "current_measurement_receipt": "data/cousteau/JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-000-ACQUISITION-BLOCKED-2026-08-25-v0.1.json",
+  "purpose": "Create stable deterministic cross-modal mnemonic passports for Hannah/BODC measurement episodes so HEAD and TAIL temporal fronts, multiscale windows, survey lines, pings, beams and footprints can be recognized and retrieved consistently without giving the mnemonic layer any scientific verdict authority.",
+  "biological_claim_boundary": {
+    "claims_human_qualia": false,
+    "claims_biological_synesthesia": false,
+    "implemented_as": "DETERMINISTIC_CROSS_MODAL_MNEMONIC_MAPPING"
+  },
+  "authority_firewall": {
+    "MEMORY_NE_TRUTH": true,
+    "MNEMONIC_SIMILARITY_NE_SCIENTIFIC_SIMILARITY": true,
+    "SENSORY_PASSPORT_NE_CERTIFICATE": true,
+    "SYNESTHETIC_CORE_MAY_CHANGE_VERDICT": false,
+    "SYNESTHETIC_CORE_MAY_CHANGE_RAW_DATA": false,
+    "SYNESTHETIC_CORE_MAY_CHANGE_CALIBRATION": false,
+    "SYNESTHETIC_CORE_MAY_REORDER_REVIEW_PRIORITY": true,
+    "RAW_BYTES_OUTRANK_MNEMONIC_MAPPING": true
+  },
+  "anti_leakage": {
+    "forbidden_from_measurement_fingerprint": [
+      "verdict",
+      "hypothesis",
+      "interpretation",
+      "claim",
+      "pyramid",
+      "target",
+      "candidate",
+      "anomaly",
+      "H0",
+      "H1",
+      "H2",
+      "artificial",
+      "natural",
+      "control_label",
+      "class_label",
+      "expected",
+      "prediction",
+      "story"
+    ],
+    "reason": "A target/template/verdict-derived sensory mapping would manufacture apparent convergence and confirmation bias.",
+    "required_negative_control": "Changing only forbidden labels must leave measurement_fingerprint.sha256 and embedding unchanged."
+  },
+  "measurement_feature_basis": [
+    "em122_depth",
+    "ea600_depth",
+    "em122_minus_ea600",
+    "latitude",
+    "longitude",
+    "heading",
+    "speed",
+    "course",
+    "turn_rate",
+    "delta_depth_dt",
+    "delta2_depth_dt2",
+    "rolling_depth_median",
+    "rolling_depth_MAD",
+    "depth_local_range",
+    "depth_local_slope",
+    "timestamp_cadence",
+    "cadence_jitter",
+    "missing_fraction",
+    "null_run_length",
+    "identical_value_run_length",
+    "outlier_score",
+    "all_status_channels_when_numeric_or_boolean",
+    "all_acquisition_channels_when_numeric_or_boolean"
+  ],
+  "multiscale_lattice": {
+    "time_scales": ["1s", "10s", "60s", "300s", "1800s", "7200s"],
+    "space_scales": ["line", "ping", "beam", "footprint"],
+    "directions": ["HEAD_FORWARD", "TAIL_REVERSE", "CENTER", "SPACE_REPLAY"],
+    "rule": "Direction and scale are overlays/context and do not alter the underlying measurement fingerprint for identical measurements."
+  },
+  "sensory_passport": {
+    "identity": ["passport_id", "passport_sha256", "collision_guard_blake2b_256"],
+    "measurement": ["normalized_feature_map", "16D_deterministic_embedding", "units"],
+    "visual": ["stable_RGB_HEX", "mnemonic_glyph", "rotation"],
+    "auditory": ["stable_tone", "timbre", "rhythm_BPM", "8_step_pattern"],
+    "tactile_metaphor": ["texture", "roughness"],
+    "epistemic_overlay": ["completeness", "fog", "missingness"],
+    "direction_overlay": "HEAD/Tail/Center/Space context only",
+    "reversibility_boundary": "Passport is not an encoding from which raw data can be reconstructed; exact source pointers and hashes are mandatory."
+  },
+  "cousteau_semantic_intent": {
+    "depth": "lower/deeper register cue",
+    "EM122_vs_EA600_disagreement": "beating/dissonance cue",
+    "cadence_and_jitter": "rhythmic stability cue",
+    "MAD_range_slope_outlier": "texture/roughness cue",
+    "missingness": "fog/gap overlay",
+    "heading_course": "circularly normalized so 359 degrees and 1 degree remain close",
+    "latitude_longitude": "stable spatial contribution without recentering",
+    "glyph_warning": "Mnemonic glyph is NOT a seabed-shape classifier."
+  },
+  "cross_front_use": {
+    "HEAD": "Generate passports while moving from FIRST_VALID_EM122_RECORD forward.",
+    "TAIL": "Generate passports while moving from LAST_VALID_EM122_RECORD backward.",
+    "ranking": "Rank HEAD x TAIL passport pairs by common measured-feature similarity multiplied by feature overlap.",
+    "allowed_output": "REVIEW_PRIORITY",
+    "forbidden_output": "SCIENTIFIC_CONVERGENCE_CLAIM",
+    "promotion_gate": "A high mnemonic/retrieval score only nominates a window for the frozen TIME -> SPACE -> GROUND_FIXED_REPLICATION pipeline."
+  },
+  "time_to_space_rule": {
+    "TIME": "A recurring sensory signature may nominate exact line/timestamp windows.",
+    "SPACE": "Re-encode measured ping/beam/footprint features at the nominated ground coordinates.",
+    "required": "Independent spatial support and repeat-pass persistence remain external gates.",
+    "forbidden": "Never infer point morphology from a temporal sensory match alone."
+  },
+  "blocked_behavior": {
+    "current_state": "RAW_BYTES_NOT_MOUNTED",
+    "passport_status": "BLOCKED_NULL",
+    "color": "#808080",
+    "audio": "SILENCE",
+    "texture": "fog",
+    "measurement_fingerprint": null,
+    "measurement_claims_allowed": false,
+    "hard_rule": "NO_RAW_BYTES_OR_MEASUREMENTS__NO_SYNTHETIC_SENSORY_MEASUREMENT"
+  },
+  "source_hash_semantics": {
+    "raw_file_bytes": "RAW_BYTES_SHA256",
+    "in_memory_JSON_without_raw_bytes": "CANONICAL_JSON_SHA256_NOT_RAW_FILE_HASH",
+    "rule": "Never label a canonical-object digest as a raw-file hash."
+  },
+  "collision_control": {
+    "primary": "SHA256",
+    "secondary": "BLAKE2b-256",
+    "short_passport_id_is_authority": false,
+    "full_digest_and_source_pointer_required_for_identity": true
+  },
+  "frozen_test_gates": [
+    "SELF_TEST_PASS",
+    "FORBIDDEN_LABEL_LEAKAGE_REJECT",
+    "MEASUREMENT_CHANGE_CHANGES_FINGERPRINT",
+    "DIRECTION_OVERLAY_DOES_NOT_CHANGE_MEASUREMENT_FINGERPRINT",
+    "BLOCKED_INPUT_HAS_NO_MEASUREMENT_FINGERPRINT",
+    "SELF_SIMILARITY_EQUALS_ONE",
+    "359_TO_1_DEGREE_HEADING_WRAP_REMAINS_CLOSE",
+    "RAW_BYTE_HASH_KIND_IS_EXPLICIT",
+    "CROSS_FRONT_RANKING_NE_SCIENTIFIC_CLAIM"
+  ],
+  "integration_sequence_after_raw_unblock": [
+    "RAW_HASHES",
+    "HEAD_TAIL_MIRROR",
+    "WINDOW_FEATURE_EXTRACTION_1S_10S_60S_300S_1800S_7200S",
+    "SYNESTHETIC_PASSPORTS_HEAD_AND_TAIL",
+    "CROSS_FRONT_REVIEW_PRIORITY",
+    "TWO_FRONTS",
+    "ASCENSION_CONVERGENCE",
+    "0012_0017_0022",
+    "0037_CONTROL",
+    "EA600_H0_H1_H2",
+    "PING_BEAM_GEOMETRY",
+    "SPACE_REPLAY_PASSPORTS",
+    "GROUND_FIXED_REPLICATION",
+    "BLIND_SYNTHETIC_REPLAY",
+    "ECHO_PYRAMID"
+  ],
+  "claim_ceiling": "NO_UNDERWATER_PYRAMID_DETECTED_YET",
+  "next_gate": "RUN_CORE_ON_MEASUREMENT_RECEIPT_001_ONLY_AFTER_ORIGINAL_BODC_BYTES_ARE_AVAILABLE"
+}
