@@ -1,4 +1,64 @@
-# JANUS COSMOS — OSIRIS / S𓂸ḥ
+# JANUS COSMOS — SPACE · EARTH · OCEAN · OSIRIS / S𓂸ḥ
+
+**Janus-Cosmos is the planetary-scale observation and falsification domain of JANUS. It is not limited to outer space.**
+
+Its scope includes:
+
+- outer space and astronomical observations;
+- near-Earth and atmospheric phenomena;
+- Earth-surface and geophysical data;
+- oceans and seas;
+- seafloor bathymetry, multibeam, sidescan and hydroacoustics;
+- navigation, sound-speed and instrument-calibration problems;
+- cross-domain cases where a signal can only be understood by joining sky, atmosphere, land, ocean and instrument state.
+
+The core rule is simple:
+
+```text
+RAW DATA > STORY
+MEASUREMENT > INTERPRETATION
+REPLICATION > PRETTY PATTERN
+NEGATIVE RESULT = FIRST-CLASS RESULT
+```
+
+Janus-Cosmos therefore keeps positive, negative, ambiguous and blocked results; freezes coordinates and hypotheses before unblinding where possible; separates instrument artefacts from physical features; and requires independent replication before strong claims.
+
+In short:
+
+```text
+COSMOS = SPACE + EARTH + OCEAN + ATMOSPHERE + THEIR COUPLINGS
+```
+
+## Ocean / Cousteau domain
+
+The ocean branch lives on `janus-echo-cousteau` and extends JANUS into marine observation and calibration: multibeam, sidescan, bathymetry, hydroacoustics, navigation, sound-speed profiles, seafloor morphology, instrument-failure controls, synthetic replay and blind target discrimination.
+
+The current Hannah/BODC lane uses a deliberately bidirectional analysis:
+
+```text
+START → changes → target interval ← changes ← EOF
+```
+
+followed by:
+
+```text
+TIME convergence
+→ exact survey line / timestamp
+→ SPACE convergence
+→ ping / beam / footprint
+→ fixed seafloor coordinate
+→ independent repeat-pass test
+→ artefact-vs-relief test
+→ EA600 H0/H1/H2
+→ blind synthetic replay
+→ Echo-Pyramid comparison
+```
+
+A critical retained hypothesis is `H2_REAL_TERRAIN_TRIGGERED_FAILURE`: a single-beam bottom tracker can genuinely fail because real steep or rough terrain causes loss of bottom. Therefore an instrument failure is neither automatically discarded as noise nor promoted to morphology; it must be compared with independently georeferenced EM122/TOBI morphology and repeated passes.
+
+Bathymetric geometry and acoustic resonance remain separate gates. EM122/TOBI can support morphology. A resonance claim requires suitable raw/complex acoustic data with phase, Q/linewidth, decay/ringdown, multi-aspect response, instrument response and environmental correction.
+
+## OSIRIS / S𓂸ḥ computational domain
 
 Dedicated proof-carrying SAT/complexity superproject for **OSIRIS** and the modern JANUS gate alias **S𓂸ḥ**.
 
@@ -116,9 +176,10 @@ or:
 - `experiments/direct` — convenience symlink into the inherited canonical experiment directory.
 - `workspace/` — native OSIRIS v3+ development and spiral runtime.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
-- `docs/` — architecture, provenance, lineage and scientific boundaries.
+- `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
+- `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
 - `archive/` — pointer to the preserved pre-OSIRIS astronomy repository state.
-- `run_osiris.py` — single canonical entrypoint.
+- `run_osiris.py` — single canonical OSIRIS entrypoint.
 
 ## Historical/source firewall
 
@@ -131,6 +192,8 @@ ANCIENT_TEXT != MODERN_ALGORITHM
 STRUCTURAL_PARALLEL != HISTORICAL_INTENT
 PT_NUMBER_ORDER != PHYSICAL_WALL_ORDER
 ```
+
+The same firewall applies across Janus-Cosmos: an unusual sonar, astronomical or geophysical pattern is not promoted to an exotic explanation until ordinary instrument, propagation, biological, geological and processing controls have been tested.
 
 ## Current canonical source pins
 
