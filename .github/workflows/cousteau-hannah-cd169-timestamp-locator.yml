@@ -3,7 +3,7 @@ on:
   push:
     branches: [janus-echo-cousteau]
     paths:
-      - 'workspace/hannah_bodc_9406_tobi_timestamp_locator.py'
+      - 'workspace/hannah_bodc_9406_tobi_timestamp_locator_v3.py'
       - '.github/workflows/cousteau-hannah-cd169-timestamp-locator.yml'
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
       - name: Locate target timestamp in real TOBI blocks
         id: locator
         continue-on-error: true
-        run: python workspace/hannah_bodc_9406_tobi_timestamp_locator.py --output out/CD169-TOBI-TIMESTAMP-LOCATOR.json
+        run: python workspace/hannah_bodc_9406_tobi_timestamp_locator_v3.py --output out/CD169-TOBI-TIMESTAMP-LOCATOR.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
