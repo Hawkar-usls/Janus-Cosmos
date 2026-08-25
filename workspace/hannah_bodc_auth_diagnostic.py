@@ -2,8 +2,8 @@
 """Non-secret transport diagnostic for Hannah/BODC archive access.
 
 No requester credentials are used. The diagnostic records public SSH auth
-methods and tests conventional anonymous FTP/FTPS using an invalid generic
-contact address. It never attempts to infer or brute-force credentials.
+methods and tests conventional anonymous FTP using an invalid generic contact
+address. It never attempts to infer or brute-force credentials.
 """
 from __future__ import annotations
 
@@ -11,7 +11,6 @@ import ftplib
 import hashlib
 import json
 import socket
-import ssl
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -19,11 +18,11 @@ import paramiko
 
 HOST = "livftp.noc.ac.uk"
 GENERIC_ANON = "janus-probe@example.invalid"
-REMOTE = "/bodc/bodc/data/BODCREQ-9408"
+REQUESTS = ("BODCREQ-9408", "BODCREQ-9406")
 
 
 def ssh_diag() -> dict:
-    out = {"port": 22, "reachable": False, "allowed_auth_methods": [], "interactive_prompts": []}
+    out = {"port": 22, "reachable": False, "allowed_auth_methods": []}
     sock = socket.create_connection((HOST, 22), timeout=15)
     t = paramiko.Transport(sock)
     try:
@@ -42,59 +41,72 @@ def ssh_diag() -> dict:
             out["allowed_auth_methods"] = sorted(exc.allowed_types)
         except paramiko.AuthenticationException:
             out["none_auth_succeeded"] = False
-
-        if "keyboard-interactive" in out["allowed_auth_methods"]:
-            seen = []
-            def handler(title, instructions, prompts):
-                seen.append({
-                    "title": title,
-                    "instructions": instructions,
-                    "prompts": [{"prompt": p, "echo": bool(e)} for p, e in prompts],
-                })
-                return [""] * len(prompts)
-            try:
-                t.auth_interactive("anonymous", handler)
-                out["empty_interactive_succeeded"] = True
-            except Exception as exc:
-                out["empty_interactive_succeeded"] = False
-                out["interactive_failure_type"] = type(exc).__name__
-            out["interactive_prompts"] = seen
     finally:
         t.close()
     return out
 
 
-def ftp_diag(tls: bool) -> dict:
-    out = {"port": 21, "tls": tls, "reachable": False, "anonymous_generic_login": False}
-    cls = ftplib.FTP_TLS if tls else ftplib.FTP
-    ftp = cls(timeout=20)
+def safe_nlst(ftp: ftplib.FTP, path: str | None = None) -> list[str]:
     try:
-        banner = ftp.connect(HOST, 21, timeout=20)
+        return sorted(ftp.nlst(path)) if path else sorted(ftp.nlst())
+    except Exception:
+        return []
+
+
+def ftp_plain_diag() -> dict:
+    out = {"port": 21, "tls": False, "reachable": False, "anonymous_generic_login": False}
+    ftp = ftplib.FTP(timeout=20)
+    try:
+        out["banner"] = ftp.connect(HOST, 21, timeout=20)
         out["reachable"] = True
-        out["banner"] = banner
-        if tls:
-            ftp.auth()
-            ftp.prot_p()
-        try:
-            reply = ftp.login("anonymous", GENERIC_ANON)
-            out["anonymous_generic_login"] = True
-            out["login_reply"] = reply
-            try:
-                ftp.cwd(REMOTE)
-                out["request_path_accessible"] = True
-                names = ftp.nlst()
-                out["request_listing_names"] = sorted(names)[:100]
-                out["request_listing_truncated"] = len(names) > 100
-            except Exception as exc:
-                out["request_path_accessible"] = False
-                out["path_failure_type"] = type(exc).__name__
-                out["path_failure"] = str(exc)
-        except Exception as exc:
-            out["login_failure_type"] = type(exc).__name__
-            out["login_failure"] = str(exc)
+        out["login_reply"] = ftp.login("anonymous", GENERIC_ANON)
+        out["anonymous_generic_login"] = True
+        out["pwd_after_login"] = ftp.pwd()
+        root_names = safe_nlst(ftp)
+        out["root_listing_names"] = root_names[:200]
+        out["root_listing_truncated"] = len(root_names) > 200
+
+        candidate_templates = [
+            "/{req}",
+            "{req}",
+            "/data/{req}",
+            "data/{req}",
+            "/bodc/data/{req}",
+            "bodc/data/{req}",
+            "/bodc/bodc/data/{req}",
+            "bodc/bodc/data/{req}",
+        ]
+        located = {}
+        for req in REQUESTS:
+            trials = []
+            found = None
+            for template in candidate_templates:
+                candidate = template.format(req=req)
+                try:
+                    original = ftp.pwd()
+                    ftp.cwd(candidate)
+                    found = ftp.pwd()
+                    names = safe_nlst(ftp)
+                    trials.append({"candidate": candidate, "ok": True, "resolved_pwd": found})
+                    located[req] = {
+                        "resolved_path": found,
+                        "listing_names": names[:200],
+                        "listing_truncated": len(names) > 200,
+                    }
+                    ftp.cwd(original)
+                    break
+                except Exception as exc:
+                    trials.append({"candidate": candidate, "ok": False, "failure": str(exc)})
+                    try:
+                        ftp.cwd(out["pwd_after_login"])
+                    except Exception:
+                        pass
+            if found is None:
+                located[req] = {"resolved_path": None, "trials": trials}
+        out["requests"] = located
     except Exception as exc:
-        out["connection_failure_type"] = type(exc).__name__
-        out["connection_failure"] = str(exc)
+        out["failure_type"] = type(exc).__name__
+        out["failure"] = str(exc)
     finally:
         try:
             ftp.quit()
@@ -112,7 +124,7 @@ def main() -> int:
     ap.add_argument("--output", required=True, type=Path)
     args = ap.parse_args()
     result = {
-        "schema": "janus.cosmos.cousteau.hannah_bodc.auth_transport_diagnostic.v1",
+        "schema": "janus.cosmos.cousteau.hannah_bodc.auth_transport_diagnostic.v2",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "uses_requester_credentials": False,
         "bruteforce": False,
@@ -122,8 +134,7 @@ def main() -> int:
         result["ssh_sftp"] = ssh_diag()
     except Exception as exc:
         result["ssh_sftp"] = {"reachable": False, "failure_type": type(exc).__name__, "failure": str(exc)}
-    result["ftp_plain"] = ftp_diag(False)
-    result["ftp_tls"] = ftp_diag(True)
+    result["ftp_plain"] = ftp_plain_diag()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, sort_keys=True))
