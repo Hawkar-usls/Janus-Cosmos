@@ -1,0 +1,31 @@
+name: Cousteau Hannah CD169 Real Inventory
+
+on:
+  push:
+    branches:
+      - janus-echo-cousteau
+    paths:
+      - 'workspace/hannah_bodc_9406_inventory.py'
+      - '.github/workflows/cousteau-hannah-cd169-real-inventory.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inventory real BODCREQ-9406 CD169_TOBI archive
+        run: |
+          python workspace/hannah_bodc_9406_inventory.py \
+            --output out/JANUS-HANNAH-BODC-9406-CD169-TOBI-REAL-INVENTORY.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hannah-bodc-9406-cd169-real-inventory
+          path: out/JANUS-HANNAH-BODC-9406-CD169-TOBI-REAL-INVENTORY.json
+          retention-days: 7
