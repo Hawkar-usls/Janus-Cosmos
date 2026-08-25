@@ -16,9 +16,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python workspace/hannah_bodc_9406_tobi_timestamp_locator.py --output out/CD169-TOBI-TIMESTAMP-LOCATOR.json
+      - name: Locate target timestamp in real TOBI blocks
+        id: locator
+        continue-on-error: true
+        run: python workspace/hannah_bodc_9406_tobi_timestamp_locator.py --output out/CD169-TOBI-TIMESTAMP-LOCATOR.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: hannah-cd169-tobi-timestamp-locator
           path: out/CD169-TOBI-TIMESTAMP-LOCATOR.json
+          if-no-files-found: error
           retention-days: 7
+      - name: Propagate locator failure after artifact preservation
+        if: steps.locator.outcome == 'failure'
+        run: exit 1
