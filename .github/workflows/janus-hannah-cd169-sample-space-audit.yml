@@ -1,0 +1,28 @@
+name: JANUS Hannah CD169 Sample Space Audit
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/janus_hannah_cd169_sample_space_audit.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-RECEIPT-2026-08-25-v1.0.json'
+      - '.github/workflows/janus-hannah-cd169-sample-space-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run JANUS sample-space gate audit
+        run: |
+          python workspace/janus_hannah_cd169_sample_space_audit.py \
+            data/cousteau/JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-RECEIPT-2026-08-25-v1.0.json \
+            --output out/JANUS-HANNAH-CD169-SAMPLE-SPACE-AUDIT-RUN-001-2026-08-25-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: janus-hannah-cd169-sample-space-audit
+          path: out/JANUS-HANNAH-CD169-SAMPLE-SPACE-AUDIT-RUN-001-2026-08-25-v1.0.json
+          retention-days: 7
