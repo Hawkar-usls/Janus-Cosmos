@@ -1,0 +1,74 @@
+{
+  "artifact_id": "JANUS-HANNAH-BODC-SYNESTHETIC-INSTRUMENT-REGISTRATION-RECEIPT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.synesthetic_instrument_registration.v1",
+  "date": "2026-08-25",
+  "status": "IMPLEMENTED_TESTED_ARMED_BUT_RAW_MEASUREMENT_BLOCKED",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "branch": "janus-echo-cousteau",
+  "pull_request": 13,
+  "merge_commit": "df4791d1a8f7778a97f8067da05cf780472ffbbc",
+  "verified_ci": {
+    "workflow": "Cousteau Synesthetic Memory Core",
+    "run_id": 32890340211,
+    "head_sha": "8a693ba3308d335ef3d3b2f1de7b69e02af7236c",
+    "status": "completed",
+    "conclusion": "success",
+    "python_matrix": ["3.11", "3.12"]
+  },
+  "implementation": {
+    "core": "workspace/cousteau_synesthetic_memory_core.py",
+    "semantic_overlay": "workspace/cousteau_synesthetic_semantic_overlay.py",
+    "contract": "data/cousteau/JANUS-HANNAH-COUSTEAU-SYNESTHETIC-MEMORY-CORE-CONTRACT-2026-08-25-v1.0.json"
+  },
+  "scientific_role": "DETERMINISTIC_CROSS_MODAL_MNEMONIC_SIDECAR_FOR_MEMORY_RETRIEVAL_COMPARISON_AND_REVIEW_PRIORITY_ONLY",
+  "authority_firewall": {
+    "may_modify_raw_measurement": false,
+    "may_modify_calibration": false,
+    "may_modify_H0_H1_H2": false,
+    "may_emit_scientific_convergence_claim": false,
+    "may_reorder_review_priority": true,
+    "mnemonic_match_is_not_scientific_match": true
+  },
+  "pipeline_insertion": {
+    "before": "RAW_BYTES -> RAW_SHA256 -> HEAD_TAIL_WINDOWS -> MEASUREMENT_FEATURES",
+    "sidecar": "MEASUREMENT_FEATURES -> SENSORY_PASSPORTS -> HEADxTAIL_RETRIEVAL_PRIORITY",
+    "after": "TWO_FRONTS -> TIME_CONVERGENCE -> 0012_0017_0022 -> 0037_CONTROL -> EA600_H0_H1_H2 -> PING_BEAM_FOOTPRINT -> SPACE_REPLAY -> GROUND_FIXED_REPLICATION -> BLIND_SYNTHETIC_REPLAY -> ECHO_PYRAMID"
+  },
+  "sensory_channels": [
+    "stable_color_RGB_HEX",
+    "tone_and_timbre",
+    "BPM_and_8_step_rhythm",
+    "texture_and_roughness",
+    "mnemonic_glyph_not_shape_classifier",
+    "depth_register",
+    "EM122_EA600_beating",
+    "cadence_jitter_pulse",
+    "missingness_fog",
+    "HEAD_FORWARD_TAIL_REVERSE_direction_overlay"
+  ],
+  "anti_leakage": {
+    "forbidden_from_fingerprint": ["H0", "H1", "H2", "pyramid", "target", "candidate", "anomaly", "verdict", "prediction", "interpretation", "story", "expected", "class_label", "control_label"],
+    "required_invariance": "Changing only forbidden labels must not change the measurement fingerprint or sensory passport."
+  },
+  "navigation_rule": "Circular heading/course normalization keeps 359 degrees and 1 degree adjacent via periodic encoding.",
+  "current_measurement_state": {
+    "parent_receipt": "data/cousteau/JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-000-ACQUISITION-BLOCKED-2026-08-25-v0.1.json",
+    "raw_bytes_mounted": false,
+    "passport_status": "BLOCKED_NULL",
+    "color": "#808080",
+    "audio": "SILENCE",
+    "texture": "fog",
+    "measurement_fingerprint": null,
+    "measurement_claims": false
+  },
+  "next_measurement_receipt": "JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-001-RAW-HASH-EDGE-MIRROR-AND-SENSORY-PASSPORTS",
+  "hard_rules": [
+    "MEASUREMENT_BEFORE_MNEMONIC",
+    "RAW_BYTES_OUTRANK_SENSORY_PASSPORT",
+    "SENSORY_PASSPORT_NE_SCIENTIFIC_VERDICT",
+    "TIME_MATCH_ONLY_NOMINATES_SPACE_CHECK",
+    "SPACE_REPLAY_MUST_USE_MEASURED_PING_BEAM_FOOTPRINT_FEATURES",
+    "GROUND_FIXED_REPLICATION_REMAINS_EXTERNAL_GATE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
