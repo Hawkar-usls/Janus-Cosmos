@@ -1,0 +1,24 @@
+name: Cousteau Hannah CD169 Format Probe
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_bodc_9406_format_probe.py'
+      - '.github/workflows/cousteau-hannah-cd169-format-probe.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python workspace/hannah_bodc_9406_format_probe.py --output out/CD169-TOBI-FORMAT.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hannah-cd169-tobi-format
+          path: out/CD169-TOBI-FORMAT.json
+          retention-days: 7
