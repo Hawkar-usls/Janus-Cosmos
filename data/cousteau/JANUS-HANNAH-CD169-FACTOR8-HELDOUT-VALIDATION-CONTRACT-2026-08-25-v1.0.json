@@ -1,0 +1,33 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-FACTOR8-HELDOUT-VALIDATION-CONTRACT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.cd169.factor8_heldout_validation.contract.v1",
+  "status": "FROZEN_BEFORE_HELDOUT_VALUES_INSPECTED",
+  "source_file": "CD169_TOBI/sd11285/TOBI.DAT",
+  "prism_file": "sd11281/TOBI/cd169p5.cdf",
+  "record_count": 14536,
+  "selection_rule": "floor(k*(record_count-1)/6) for k=0..6",
+  "heldout_indices": [0,2422,4845,7267,9690,12112,14535],
+  "target_index_excluded": 9812,
+  "mapping_frozen_from_prior_target_format_test": {
+    "raw_transform": "ABS",
+    "bin_width": 8,
+    "bin_reducer": "MEAN",
+    "starboard_orientation": "REVERSED",
+    "port_orientation": "FORWARD",
+    "side_order": "STBD_THEN_PORT",
+    "raw_samples_per_side": 4000,
+    "prism_samples_per_side": 500,
+    "prism_total_ns": 1000
+  },
+  "metrics": ["pearson","spearman"],
+  "acceptance_threshold": null,
+  "interpretation": "FORMAT_REPRODUCIBILITY_ONLY_NOT_SCIENTIFIC_TARGET_EVIDENCE",
+  "hard_rules": [
+    "HELDOUT_INDICES_SELECTED_FROM_CHRONOLOGY_ONLY",
+    "TARGET_INDEX_NOT_IN_HELDOUT_SET",
+    "NO_LAYOUT_RETUNING_ON_HELDOUT",
+    "NO_MORPHOLOGY_CLASSIFICATION",
+    "NO_ANOMALY_THRESHOLD",
+    "NO_TARGET_CLAIM"
+  ]
+}
