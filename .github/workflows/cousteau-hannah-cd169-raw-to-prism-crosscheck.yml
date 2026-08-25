@@ -1,0 +1,35 @@
+name: Cousteau Hannah CD169 Raw To PRISM Crosscheck
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_raw_to_prism_target_crosscheck.py'
+      - '.github/workflows/cousteau-hannah-cd169-raw-to-prism-crosscheck.yml'
+permissions:
+  contents: read
+jobs:
+  crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check netCDF4==1.7.4
+      - name: Compare fixed raw target line with PRISM p5 line
+        id: x
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_raw_to_prism_target_crosscheck.py \
+            --output out/JANUS-HANNAH-CD169-RAW-TO-PRISM-TARGET-CROSSCHECK.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-raw-to-prism-target-crosscheck
+          path: out/JANUS-HANNAH-CD169-RAW-TO-PRISM-TARGET-CROSSCHECK.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate failure
+        if: steps.x.outcome == 'failure'
+        run: exit 1
