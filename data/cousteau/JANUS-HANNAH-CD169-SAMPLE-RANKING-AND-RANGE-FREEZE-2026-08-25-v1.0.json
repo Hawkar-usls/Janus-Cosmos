@@ -1,0 +1,79 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-SAMPLE-RANKING-AND-RANGE-FREEZE-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.cd169_sample_ranking_range_freeze.v1",
+  "status": "FROZEN_BEFORE_SAMPLE_LEVEL_VALUES_INSPECTED",
+  "parent_contract": "data/cousteau/JANUS-HANNAH-CD169-TOBI-SAMPLE-LEVEL-SPACE-REPLAY-CONTRACT-2026-08-25-v1.0.json",
+  "target_block_index": 9812,
+  "primary_block_indices": [9804,9805,9806,9807,9808,9809,9810,9811,9812,9813,9814,9815,9816,9817,9818,9819,9820],
+  "extended_block_start": 9767,
+  "extended_block_end": 9857,
+  "array_length": 4000,
+  "external_prism_calibration": {
+    "raw_tobi_full_resolution_m_per_pixel": 0.75,
+    "factor4_resolution_m_per_pixel": 3.0,
+    "source_basis": [
+      "BODC/NOC JC007 TOBI PRISM processing report: raw2prism_tobi factor 1 gives 0.75 m/pixel; factor 4 gives 3 m/pixel",
+      "BODC/NOC JC024 processing report: raw TOBI imported to PRISM NetCDF; across-track subsample factor 4 gives 3 m pixel"
+    ],
+    "role_for_cd169": "CALIBRATION_HYPOTHESIS_TO_BE_CROSS_CHECKED_AGAINST_CD169_CDF_METADATA",
+    "raw_index_to_slant_range_candidate": "slant_range_m = sample_index * 0.75",
+    "may_pass_sample_to_ground_gate_alone": false
+  },
+  "target_vehicle_position": {
+    "source": "FROZEN_SCIENCE_LOG_INTERPOLATION",
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475,
+    "role": "APPROXIMATE_TOWFISH_CENTER_FOR_SPATIAL_REPLAY_NOT_NATIVE_VEH_NAV",
+    "may_pass_G5": false
+  },
+  "nadir_sample_rule": {
+    "formula": "continuous_nadir_index = vehicle_altitude_m / 0.75",
+    "discrete_nearest_valid_bottom_sample": "ceil(continuous_nadir_index)",
+    "rule": "do not choose nadir sample from intensity peak"
+  },
+  "sample_metrics": {
+    "target_robust_z": "(x - median(array_target_block)) / (1.4826 * MAD(array_target_block)); NULL if MAD=0",
+    "fixed_local_contrast_z": "(x - median(neighbors sample_index-20..sample_index+20 excluding x)) / (1.4826 * MAD(neighbors)); NULL if neighborhood MAD=0",
+    "primary_persistence": "median(abs(robust_z_at_same_index)) across fixed 17 primary blocks",
+    "primary_sign_consistency": "abs(mean(sign(robust_z_at_same_index))) across non-null values"
+  },
+  "ranking": {
+    "within_each_array_only": true,
+    "components": [
+      "percentile_rank(abs(target_robust_z))",
+      "percentile_rank(abs(fixed_local_contrast_z))",
+      "percentile_rank(primary_persistence)"
+    ],
+    "composite": "arithmetic_mean_of_three_component_percentile_ranks",
+    "top_k_per_array": 20,
+    "ties": "lower_sample_index_first",
+    "purpose": "REVIEW_PRIORITY_ONLY",
+    "scientific_anomaly_threshold": null,
+    "geometry_threshold": null
+  },
+  "space_projection_if_used": {
+    "ground_range_candidate": "sqrt(max(0, slant_range_m^2 - altitude_m^2))",
+    "port_bearing": "vehicle_heading_deg - 90",
+    "starboard_bearing": "vehicle_heading_deg + 90",
+    "vehicle_heading_source": "raw TOBI gyro circular estimate at same block",
+    "earth_fixed_position_source": "frozen science-log interpolation until .veh_nav is independently recovered/reconstructed",
+    "classification": "SCIENCE_LOG_APPROX_PROJECTION",
+    "ground_fixed_proof": false
+  },
+  "profiler_rule": {
+    "analyze_all_4000_samples": true,
+    "do_not_map_profiler_sample_index_with_0.75m_sidescan_rule": true,
+    "timing_context": "200 ms recording window begins after water_path milliseconds",
+    "spatial_fusion_with_sidescan": "BLOCKED_PENDING_PROFILER_SAMPLE_RATE_AND_SOUND_SPEED_MODEL"
+  },
+  "hard_rules": [
+    "ALL_4000_SAMPLES_ARE_EVALUATED",
+    "TOP_K_IS_REVIEW_PRIORITY_NOT_DETECTION",
+    "NO_PEAK_RECENTERING",
+    "NO_INTENSITY_SELECTED_NADIR",
+    "0.75M_RULE_IS_EXTERNAL_PRISM_CALIBRATION_PENDING_CD169_CDF_CROSSCHECK",
+    "FROZEN_SCIENCE_LOG_POSITION_IS_APPROX_NOT_NATIVE_VEH_NAV",
+    "NO_GROUND_FIXED_REPLICATION_CLAIM_FROM_ADJACENT_PINGS_ALONE",
+    "NO_GEOMETRY_CLASS_BEFORE_G5_G6_G7"
+  ]
+}
