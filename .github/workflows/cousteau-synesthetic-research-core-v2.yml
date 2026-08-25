@@ -1,0 +1,75 @@
+name: Cousteau Synesthetic Research Core v2
+
+on:
+  pull_request:
+    paths:
+      - '.janus/JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE_V1.json'
+      - 'workspace/cousteau_synesthetic_memory_core.py'
+      - 'workspace/cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/cousteau_synesthetic_research_core.py'
+      - 'workspace/test_cousteau_synesthetic_memory_core.py'
+      - 'workspace/test_cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/test_cousteau_synesthetic_research_core.py'
+      - 'data/cousteau/JANUS-COUSTEAU-SYNESTHETIC-RESEARCH-CORE-v2.0.json'
+      - '.github/workflows/cousteau-synesthetic-research-core-v2.yml'
+  push:
+    branches:
+      - janus-echo-cousteau
+    paths:
+      - '.janus/JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE_V1.json'
+      - 'workspace/cousteau_synesthetic_memory_core.py'
+      - 'workspace/cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/cousteau_synesthetic_research_core.py'
+      - 'workspace/test_cousteau_synesthetic_memory_core.py'
+      - 'workspace/test_cousteau_synesthetic_semantic_overlay.py'
+      - 'workspace/test_cousteau_synesthetic_research_core.py'
+      - 'data/cousteau/JANUS-COUSTEAU-SYNESTHETIC-RESEARCH-CORE-v2.0.json'
+      - '.github/workflows/cousteau-synesthetic-research-core-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research-core:
+    name: research-core (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile synesthetic research modules
+        run: |
+          python -m py_compile \
+            workspace/cousteau_synesthetic_memory_core.py \
+            workspace/cousteau_synesthetic_semantic_overlay.py \
+            workspace/cousteau_synesthetic_research_core.py
+      - name: Verify shared handshake contract digest
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          p = pathlib.Path('.janus/JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE_V1.json')
+          obj = json.loads(p.read_text(encoding='utf-8'))
+          raw = json.dumps(obj, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+          got = hashlib.sha256(raw).hexdigest()
+          want = '3aec527be027fc280fc9a8ace1255c9a3a7da73fc884d9b4856694a1f1530306'
+          assert got == want, (got, want)
+          print('contract_sha256', got)
+          PY
+      - name: Frozen v1 core self-test
+        run: python workspace/cousteau_synesthetic_memory_core.py --self-test
+      - name: Frozen v1 core regression
+        run: python workspace/test_cousteau_synesthetic_memory_core.py
+      - name: Frozen v1 Cousteau semantic regression
+        run: python workspace/test_cousteau_synesthetic_semantic_overlay.py
+      - name: Research v2 self-test
+        run: python workspace/cousteau_synesthetic_research_core.py
+      - name: Research v2 regression
+        run: |
+          cd workspace
+          python -m unittest -v test_cousteau_synesthetic_research_core.py
