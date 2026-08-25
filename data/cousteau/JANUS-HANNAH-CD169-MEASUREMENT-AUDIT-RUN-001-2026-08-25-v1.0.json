@@ -1,0 +1,124 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-MEASUREMENT-AUDIT-RUN-001-2026-08-25-v1.0",
+  "audit_status": "PASS_TO_SPACE_GATE",
+  "gates": {
+    "G0_RAW_FILE_INTEGRITY": {
+      "evidence": {
+        "sha256": "761d163482a44da0cc417a325372d6f3de163669b099ecc2f64c02a3282bcc59",
+        "size_bytes": 595394560,
+        "size_matches_server": true,
+        "size_mod_block": 0
+      },
+      "failure": null,
+      "state": "PASS"
+    },
+    "G1_FORMAT_AND_CADENCE": {
+      "evidence": {
+        "block_size_bytes": 40960,
+        "declared_cadence_seconds": 4,
+        "measured_whole_file_cadence_mad_seconds": 0.0,
+        "measured_whole_file_cadence_median_seconds": 4.0,
+        "timestamp_encoding": "DOS_IBM_PC_PACKED_DATE_TIME_16BIT_LITTLE_ENDIAN__VALIDATED_BY_MONOTONIC_REAL_4S_SEQUENCE"
+      },
+      "failure": null,
+      "state": "PASS"
+    },
+    "G2_NEAREST_SAMPLE_TIME_ALIGNMENT": {
+      "evidence": {
+        "delta_seconds": -1.0,
+        "mathematical_bound": "abs(delta)<=cadence/2=2s",
+        "nearest_real_utc": "2005-02-28T01:07:24Z",
+        "raw_block_sha256": "039b839861e515efe339542b8c57e5830bd484def961804f9c1fb61387132c3f",
+        "target_utc": "2005-02-28T01:07:25Z"
+      },
+      "failure": null,
+      "state": "PASS"
+    },
+    "G3_REAL_DATA_MNEMONIC_INVARIANTS": {
+      "evidence": {
+        "all_pass": true,
+        "direction_does_change_context_passport": true,
+        "direction_does_not_change_measurement_fingerprint": true,
+        "forbidden_label_invariance": true,
+        "raw_target_block_hash_present": true,
+        "same_input_same_passport": true
+      },
+      "failure": null,
+      "state": "PASS"
+    },
+    "G4_LOCAL_MIRROR_MEMORY_TRAJECTORY": {
+      "forbidden_interpretation": "No preregistered threshold exists here for anomaly, morphology, artificial origin, or target presence.",
+      "interpretation": "The local PRE/POST measurement vector is most similar at the shortest tested scale and diverges gradually as wider temporal context is included.",
+      "monotonic_decrease_with_window_width": true,
+      "similarities": {
+        "1800s": 0.973689,
+        "300s": 0.986715,
+        "60s": 0.997961,
+        "7200s": 0.945113
+      },
+      "state": "OBSERVED_NOT_A_SCIENTIFIC_GATE"
+    },
+    "G5_NATIVE_TOWFISH_GEOLOCATION": {
+      "current": false,
+      "required": "native towfish navigation or validated layback/cable solution at target time",
+      "state": "BLOCKED"
+    },
+    "G6_SAMPLE_TO_GROUND_FOOTPRINT": {
+      "current": false,
+      "required": "map TOBI port/stbd sample range and vehicle geometry to Earth-fixed footprint",
+      "state": "BLOCKED"
+    },
+    "G7_GROUND_FIXED_REPLICATION": {
+      "current": false,
+      "state": "BLOCKED"
+    },
+    "G8_GEOMETRY_CLASS": {
+      "current": "NOT_TESTED",
+      "reason": "G5/G6/G7 must pass before blind geometry-control comparison.",
+      "state": "BLOCKED"
+    },
+    "G9_ACOUSTIC_RESONANCE": {
+      "current": "NOT_TESTED",
+      "reason": "Mnemonic audio frequency is synthetic memory output, not measured sonar frequency; suitable physical spectral/phase data are required.",
+      "state": "BLOCKED"
+    }
+  },
+  "hard_rules": [
+    "MNEMONIC_AUDIO_FREQUENCY_IS_NOT_PHYSICAL_ACOUSTIC_FREQUENCY",
+    "MNEMONIC_GLYPH_IS_NOT_SEAFLOOR_GEOMETRY",
+    "HIGH_LOCAL_MIRROR_SIMILARITY_IS_NOT_TARGET_PROOF",
+    "SHIP_GPS_IS_NOT_TOWFISH_POSITION",
+    "NO_POINT_FEATURE_WITHOUT_SAMPLE_TO_GROUND_FOOTPRINT",
+    "NO_GEOMETRY_CLASS_BEFORE_GROUND_FIXED_REPLICATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "janus_state": {
+    "ACOUSTIC_RESONANCE": "NOT_TESTED",
+    "GROUND_FIXED_FEATURE": "NOT_ESTABLISHED",
+    "LOCAL_MIRROR": "MEASURED",
+    "PYRAMID_LIKE_GEOMETRY": "NOT_TESTED",
+    "SPACE_PROOF": "BLOCKED_PENDING_NATIVE_TOWFISH_NAV_AND_SAMPLE_FOOTPRINT",
+    "TARGET_RAW_BLOCK": "LOCATED_AND_HASHED",
+    "TIME_MEMORY_CUE_ON_REAL_DATA": "VALIDATED",
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "next_action": {
+    "id": "CD169_TOBI_SAMPLE_LEVEL_SPACE_REPLAY_V1",
+    "sequence": [
+      "EXTRACT_4S_BLOCK_SERIES_AROUND_TARGET",
+      "COMPARE_PORT_STBD_SIDESCAN_SWATH_PROFILER_AT_SAMPLE_LEVEL",
+      "RECOVER_CDF_OR_CD169_NAV_AND_CABLE_TOWFISH_SOLUTION",
+      "MAP_SAMPLE_RANGE_AND_SIDE_TO_GROUND_FOOTPRINT",
+      "TEST_PERSISTENCE_ACROSS_ADJACENT_BLOCKS_AND_CROSSING_DATA",
+      "ONLY_THEN_COMPARE_BLINDLY_TO_GEOMETRY_CONTROLS"
+    ]
+  },
+  "posthoc_morphology_threshold_added": false,
+  "schema": "janus.cosmos.cousteau.hannah_cd169.measurement_audit.v1",
+  "scientific_convergence_claim": false,
+  "source_artifact_id": "JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-001-REAL-CD169-TOBI-SENSORY-PASSPORTS-2026-08-25-v1.0",
+  "source_receipt": "data/cousteau/JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-001-REAL-CD169-TOBI-SENSORY-PASSPORTS-2026-08-25-v1.0.json",
+  "workflow_run": 32894345705,
+  "workflow_artifact_id": 9580622441,
+  "workflow_artifact_zip_sha256": "771fef117ba5eb8336c9f403ac8811942cbe8f3481dcdcc38bda48fc1f3f0779"
+}
