@@ -1,0 +1,24 @@
+name: Cousteau Hannah CD169 Timestamp Locator
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_bodc_9406_tobi_timestamp_locator.py'
+      - '.github/workflows/cousteau-hannah-cd169-timestamp-locator.yml'
+permissions:
+  contents: read
+jobs:
+  locate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python workspace/hannah_bodc_9406_tobi_timestamp_locator.py --output out/CD169-TOBI-TIMESTAMP-LOCATOR.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hannah-cd169-tobi-timestamp-locator
+          path: out/CD169-TOBI-TIMESTAMP-LOCATOR.json
+          retention-days: 7
