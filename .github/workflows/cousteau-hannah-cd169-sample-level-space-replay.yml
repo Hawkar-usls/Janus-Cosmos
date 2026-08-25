@@ -1,0 +1,38 @@
+name: Cousteau Hannah CD169 Sample Level Space Replay
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_sample_level_space_replay.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-SAMPLE-RANKING-AND-RANGE-FREEZE-2026-08-25-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-sample-level-space-replay.yml'
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Process all 4000 samples in fixed real TOBI block windows
+        id: replay
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_sample_level_space_replay.py \
+            --summary out/JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-SUMMARY.json \
+            --metrics out/JANUS-HANNAH-CD169-SAMPLE-METRICS.json.gz
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-sample-level-space-replay
+          path: |
+            out/JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-SUMMARY.json
+            out/JANUS-HANNAH-CD169-SAMPLE-METRICS.json.gz
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate replay failure after artifact preservation
+        if: steps.replay.outcome == 'failure'
+        run: exit 1
