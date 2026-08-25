@@ -1,0 +1,132 @@
+name: Cousteau HA10 N1-S2 Independent Scalar Collapse Holdout
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-independent-scalar-collapse-holdout.yml"
+      - "workspace/cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py"
+      - "tests/test_cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json"
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-independent-scalar-collapse-holdout.yml"
+      - "workspace/cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py"
+      - "tests/test_cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: read
+
+jobs:
+  independent-scalar-collapse-holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind preregistration and immutable upstream evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-PROTOCOL-2026-08-22-v1.0.json)" = "c642837c2f1efa77699c76260fe6f158f8fb3d1c"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "45f2901adde866df610a563f27c50177d32be414"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = "244169a1331a16529e2a963585a5659dae109c66"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control_v2.py)" = "c3d37fe4f5a75514390862be4c1d2870c4c01fe9"
+          test "$(git hash-object workspace/cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py)" = "5e1e6ea9886ce4c45bdf4f1a3fbb9155395fdc7f"
+          test "$(git hash-object tests/test_cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py)" = "62caa9b6f449f915631771b08046c7b49a7fb25c"
+          echo "SCALAR_COLLAPSE_HOLDOUT_PREREGISTRATION=PASS"
+          echo "TEMPORAL_STABILITY_BINDING=PASS"
+          echo "FROZEN_SCALAR_BINDING=PASS"
+          echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install same frozen direct scientific stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
+          mkdir -p artifacts/ha10-independent-scalar-collapse-holdout
+          python -m pip freeze | sort > artifacts/ha10-independent-scalar-collapse-holdout/python-environment.txt
+
+      - name: Compile and test frozen collapse semantics before holdout data download
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            workspace/cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py \
+            tests/test_cousteau_ha10_n1_s2_independent_scalar_collapse_holdout.py
+          python -m unittest tests.test_cousteau_ha10_n1_s2_independent_scalar_collapse_holdout -v
+
+      - name: Execute independent frozen 18:00 UTC holdout
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m workspace.cousteau_ha10_n1_s2_independent_scalar_collapse_holdout \
+            --output "artifacts/ha10-independent-scalar-collapse-holdout/run-${GITHUB_RUN_ID}.json"
+
+      - name: Validate non-promotional holdout boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/ha10-independent-scalar-collapse-holdout').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['status']=='DIAGNOSTIC_RUN_COMPLETE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_SCALAR_COLLAPSE_HOLDOUT'
+          assert r['temporal_stability_verdict']=='TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET'
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frozen_scalar']['source_value_db']==12.616188132659623
+          assert r['frozen_scalar']['holdout_refit_allowed'] is False
+          assert r['frozen_scalar']['alternate_scalar_search_allowed'] is False
+          assert r['frequency_contract']['broadband_hz']==[10.0,80.0]
+          assert r['frequency_contract']['fixed_subbands_hz']=={'low':[10.0,30.0],'mid':[30.0,55.0],'high':[55.0,80.0]}
+          assert r['frequency_contract']['best_subband_selection_allowed'] is False
+          assert r['frequency_contract']['whole_spectrum_peak_search_allowed'] is False
+          assert r['frequency_contract']['119hz_or_117_121hz_bins_may_be_used'] is False
+          assert r['summary']['verdict'] in {
+              'SCALAR_COLLAPSE_HOLDOUT_PASS',
+              'SCALAR_COLLAPSE_HOLDOUT_FAIL',
+              'BLOCKED_SCALAR_COLLAPSE_HOLDOUT_DATA_ACCESS',
+          }
+          print('SCALAR_COLLAPSE_HOLDOUT_RECEIPT_VALID=TRUE')
+          print('SCALAR_COLLAPSE_HOLDOUT_VERDICT=' + r['summary']['verdict'])
+          print('COMPLETE_PAIRED_WINDOWS=' + str(r['summary']['complete_paired_windows']))
+          print('AUTHORITY_DELTA_FOR_119HZ=0')
+          PY
+
+      - name: Prove source tree is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/cousteau workspace tests
+          echo "SOURCE_WRITEBACK=FALSE"
+
+      - name: Upload holdout evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-independent-scalar-collapse-holdout-${{ github.run_id }}
+          path: artifacts/ha10-independent-scalar-collapse-holdout/
+          if-no-files-found: error
+          retention-days: 30

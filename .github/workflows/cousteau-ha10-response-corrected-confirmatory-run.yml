@@ -1,45 +1,92 @@
-name: Cousteau HA10 Response Corrected Confirmatory Run
+name: Cousteau HA10 Response Corrected Confirmatory Replay
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-response-corrected-confirmatory-run.yml"
+      - "workspace/cousteau_ha10_response_corrected_confirmatory_run.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json"
   push:
     branches: [janus-echo-cousteau]
     paths:
       - ".github/workflows/cousteau-ha10-response-corrected-confirmatory-run.yml"
       - "workspace/cousteau_ha10_response_corrected_confirmatory_run.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json"
       - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  confirmatory:
+  replay-only:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
         with:
-          ref: janus-echo-cousteau
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Verify immutable scientific inputs and canonical negative receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PREDECLARED-RESPONSE-CORRECTED-CONFIRMATORY-PROTOCOL-2026-08-22-v1.0.json)" = "26f146264f60d9a5ab71587e8c71f4d327cd1700"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-WINDOW-FREEZE-2026-08-22-v1.0.json)" = "f5fbc4b155d514094867b88bb33af71d3b458f76"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          echo "CANONICAL_HA10_NEGATIVE_RECEIPT_IMMUTABLE=PASS"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install scientific stack
-        run: python -m pip install numpy scipy requests obspy
-      - name: Run frozen confirmatory spectral gate
-        id: run
-        continue-on-error: true
-        run: python workspace/cousteau_ha10_response_corrected_confirmatory_run.py
-      - name: Show result
-        if: always()
-        run: cat data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json
-      - name: Freeze result
-        if: always()
+
+      - name: Install scientific stack and record environment
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json
-          git commit -m "Cousteau: freeze HA10 response-corrected confirmatory run ${{ github.run_number }}" || true
-          git push origin HEAD:janus-echo-cousteau
-      - name: Enforce execution
-        if: steps.run.outcome != 'success'
-        run: exit 1
+          python -m pip install numpy scipy requests obspy
+          mkdir -p artifacts/ha10-confirmatory-replay
+          python -m pip freeze | sort > artifacts/ha10-confirmatory-replay/python-environment.txt
+
+      - name: Replay frozen confirmatory analysis without repository authority
+        id: run
+        shell: bash
+        run: |
+          set -euo pipefail
+          canonical="data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json"
+          cp "$canonical" artifacts/ha10-confirmatory-replay/canonical-run-001-before.json
+          python workspace/cousteau_ha10_response_corrected_confirmatory_run.py
+          cp "$canonical" artifacts/ha10-confirmatory-replay/replay-${GITHUB_RUN_ID}.json
+          git checkout -- "$canonical"
+          test "$(git hash-object "$canonical")" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          git diff --exit-code -- "$canonical"
+          echo "REPLAY_HAS_ZERO_CANONICAL_WRITE_AUTHORITY=PASS"
+
+      - name: Assert replay cannot promote or erase frozen negative
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          frozen = json.loads(Path('data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json').read_text())
+          replay = json.loads(next(Path('artifacts/ha10-confirmatory-replay').glob('replay-*.json')).read_text())
+          assert frozen['summary']['verdict'] == 'NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert frozen['summary']['target_identity'] == 'UNCONFIRMED'
+          assert replay['summary']['target_identity'] == 'UNCONFIRMED'
+          print('FROZEN_NEGATIVE_STILL_AUTHORITATIVE=TRUE')
+          print('REPLAY_AUTHORITY_DELTA=0')
+          PY
+
+      - name: Upload non-authoritative replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-confirmatory-replay-${{ github.run_id }}
+          path: artifacts/ha10-confirmatory-replay/
+          if-no-files-found: error
+          retention-days: 30

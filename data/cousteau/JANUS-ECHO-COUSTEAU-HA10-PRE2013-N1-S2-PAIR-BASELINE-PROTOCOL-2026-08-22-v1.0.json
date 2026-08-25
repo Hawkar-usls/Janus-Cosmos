@@ -1,0 +1,67 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PRE2013-N1-S2-PAIR-BASELINE-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_PRE2013_N1_S2_PAIR_BASELINE_V1",
+  "status": "PREREGISTERED_BEFORE_PRE2013_PAIR_WAVEFORM_VALUE_INSPECTION",
+  "date": "2026-08-22",
+  "purpose": "Use only H10N1 and H10S2 to test whether the later approximately 12-13 dB broadband S2-over-N1 offset is observable anywhere in the public EarthScope archive before the documented 2013-07-19 H10S fault anchor, without requiring all six HA10 channels to be simultaneously available.",
+  "why_pair_only": "The six-channel archive-wide value-blind gate found its earliest simultaneous all-six probe only on 2014-12-12, which is after the 2013 fault anchor. The scientific question about preexistence of the S2/N1 offset does not logically require N2/N3/S1/S3; those channels are required only for the stronger crosstalk morphology discriminator.",
+  "channels": ["IM.H10N1..EDH", "IM.H10S2..EDH"],
+  "discovery_contract": {
+    "scan_start_utc": "2004-09-14T00:00:00Z",
+    "scan_end_utc_exclusive": "2013-07-19T00:00:00Z",
+    "probe_clock_utc_each_day": "12:00:00Z",
+    "daily_probe_duration_s": 1,
+    "transport_partition": "DETERMINISTIC_CALENDAR_MONTH_CHUNKS",
+    "selection_uses_waveform_sample_values": false,
+    "allowed_probe_information": ["HTTP status", "returned station/channel identifiers", "miniSEED header times", "sampling rate", "sample count", "payload bytes", "SHA256"],
+    "forbidden_during_discovery": ["waveform amplitudes", "FFT", "PSD", "coherence", "correlation", "event selection", "manual date preference"],
+    "earliest_probe_day_rule": "Choose the chronologically earliest daily 12:00 UTC one-second probe before 2013-07-19 for which both H10N1 and H10S2 are returned on the same date. No failed transport chunk may be skipped.",
+    "full_window_freeze_rule": "From the earliest pair date move strictly forward by UTC day, never crossing 2013-07-19, and freeze the first 20 12:00-12:10 UTC windows complete on both channels using headers only.",
+    "target_window_count": 20,
+    "minimum_complete_windows_for_analysis": 15,
+    "if_no_pair": "NO_PRE2013_SIMULTANEOUS_N1_S2_PAIR_FOUND_IN_PUBLIC_DATSELECT_SCAN",
+    "if_insufficient_windows": "BLOCKED_PRE2013_N1_S2_PAIR_COMPLETENESS"
+  },
+  "spectral_contract": {
+    "primary_domain": "RAW_COUNTS",
+    "secondary_domain": "PUBLIC_STATIONXML_RESPONSE_CORRECTED_POWER_ONLY",
+    "primary_band_hz": [10.0, 80.0],
+    "welch_window": "hann",
+    "welch_nperseg": 8192,
+    "welch_noverlap": 4096,
+    "welch_scaling": "density",
+    "119hz_excluded": true,
+    "whole_spectrum_peak_search_allowed": false,
+    "frequency_retuning_allowed": false
+  },
+  "frozen_later_reference": {
+    "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "git_blob_sha1": "45f2901adde866df610a563f27c50177d32be414",
+    "reference_raw_median_s2_minus_n1_db": 12.479728560324869,
+    "reference_corrected_median_s2_minus_n1_db": 12.616188132659623
+  },
+  "predeclared_classification": {
+    "large_offset_floor_db": 6.0,
+    "maximum_abs_difference_from_2014_reference_for_similar_db": 3.0,
+    "PRE2013_LARGE_OFFSET_SIMILAR_TO_2014": "pre-2013 raw median >=6 dB and within 3 dB of the frozen 2014 raw median",
+    "PRE2013_OFFSET_MATERIALLY_LOWER_THAN_2014": "pre-2013 raw median <6 dB while frozen 2014 median >=6 dB",
+    "PRE2013_OFFSET_DIFFERENT_OR_MIXED": "any other complete-data outcome"
+  },
+  "interpretation_firewall": {
+    "pre2013_large_offset_proves_seafloor": false,
+    "pre2013_large_offset_proves_instrument_fault": false,
+    "pre2013_lower_offset_proves_2013_fault_caused_full_later_offset": false,
+    "no_public_pair_found_means_no_physical_pre2013_signal": false,
+    "public_response_correction_is_full_end_to_end_chain": false,
+    "pair_only_gate_can_diagnose_crosstalk_topology": false,
+    "bathymetry_lane_remains_independent": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED"
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED"
+  }
+}

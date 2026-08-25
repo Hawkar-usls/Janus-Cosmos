@@ -1,0 +1,84 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-RUN-001-SUMMARY-2026-08-22-v1.1",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_PREREGISTERED_PUBLIC_RECOVERY_EXECUTION",
+  "date": "2026-08-22",
+  "lineage": {
+    "supersedes_for_gate_execution_authority": "JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-RUN-001-SUMMARY-2026-08-22-v1.0",
+    "reason": "v1.0 was an explicitly post-selection manual provenance synthesis. v1.1 binds the independently preregistered runner and exact GitHub Actions receipt. v1.0 remains preserved and is not silently rewritten."
+  },
+  "source": {
+    "github_actions_run_id": 32577304554,
+    "head_sha": "5ccecfab44807702374892aa33cc3305adcee387",
+    "artifact_id": 9476884702,
+    "artifact_name": "cousteau-ha10-calibration-public-recovery-32577304554",
+    "artifact_zip_sha256": "6119785cbbc24747e27e1c870617973d6349d3683c44d1e9c3d2df0d6b21b2ee",
+    "receipt_member": "cousteau-calibration-public-recovery/run-32577304554.json",
+    "receipt_bytes": 203127,
+    "receipt_sha256": "5635acba03292d60512c635f6eea64648f91b7c19572c1bea65ec1c199d7607a",
+    "python_environment_sha256": "5c54a6d1bf1ac62dd648a5f21fefe66d18f22ba75660d4206b925cf889a828c1"
+  },
+  "frozen_contract": {
+    "gate_id": "COUSTEAU_HA10_CALIBRATION_SEQUENCE_PUBLIC_RECOVERY_V1",
+    "protocol_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0.json",
+    "protocol_git_blob_sha1": "44d14209974c31c010b1f6a9ba502ea558013a57",
+    "protocol_status": "PREREGISTERED_BEFORE_GATE_ACQUISITION",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854"
+  },
+  "result": {
+    "verdict": "PUBLISHED_H10S_CALIBRATION_RESULTS_RECOVERED__RAW_SEQUENCE_PUBLIC_ACCESS_NOT_FOUND",
+    "resource_count": 60,
+    "raw_sequence_bytes_recovered": false,
+    "machine_readable_numeric_or_flag_table_recovered": false,
+    "derived_public_calibration_material_recovered": true,
+    "controlled_access_pointer_recovered_by_frozen_classifier": false,
+    "evidence_class_counts": {
+      "PUBLISHED_DERIVED_CALIBRATION_FIGURE_OR_PRESENTATION": 3,
+      "ABSTRACT_OR_DESCRIPTIVE_TEXT_ONLY": 12,
+      "FETCHED_OTHER": 42,
+      "FETCH_FAILED_OR_REJECTED": 3
+    }
+  },
+  "historical_fact_flags_recovered": {
+    "sequence_rbc_cw": true,
+    "stored_at_idc": true,
+    "flag_start_end_table_description": true,
+    "earliest_calibration_responses_2013": true,
+    "fault_20130719": true,
+    "crosstalk": true,
+    "h10s1_08396_db": true,
+    "h10s23_large_differences": true
+  },
+  "interpretation": {
+    "supported": [
+      "Public authoritative/author-associated material recovers the existence, structure and processing provenance of deployed H10/IMS hydroacoustic calibration sequences.",
+      "The public material recovers derived H10S fault-era calibration results and the 2013 cross-talk chronology.",
+      "The frozen public crawl did not recover actual H10S calibration-sequence sample bytes, a machine-readable numeric H10S transfer-function table, or an actual calibration start/end timestamp table.",
+      "The deployed UWS digitizer calibration is not the same object as a full hydrophone+preamp+riser end-to-end calibration."
+    ],
+    "not_supported": [
+      "THE_RAW_CALIBRATION_SEQUENCE_DOES_NOT_EXIST",
+      "THE_RAW_CALIBRATION_SEQUENCE_IS_UNAVAILABLE_TO_THE_CUSTODIAN",
+      "RISER_FAILURE_IS_PROVEN",
+      "THE_2013_CALIBRATION_CHANGE_EXPLAINS_THE_FULL_2014_2015_12_13DB_S2_N1_OFFSET",
+      "CALIBRATION_ERASED_A_PHYSICAL_SEAFLOOR_STRUCTURE",
+      "119HZ_TARGET_VALIDATED"
+    ],
+    "key_bridge": "The authoritative fault-era calibration history lives in a provenance lane distinct from EarthScope public StationXML. Public StationXML is static across 2013, while CTBTO-derived calibration material records a fault-era H10S change; therefore public StationXML correction cannot be treated as a complete historical correction of the south-triplet physical measurement chain."
+  },
+  "whole_picture_update": {
+    "instrument_lane": "Strengthened: a documented H10S fault/cross-talk history and derived calibration changes are real, but their underlying calibration samples remain unrecovered publicly in this gate and deployed calibration excludes parts of the analogue sensing/riser path.",
+    "persistent_baseline_lane": "Still live: later H10S2/H10N1 broadband scale offset is much larger as an observed cross-station effect than anything this gate can identify one-to-one, and public response correction does not collapse it.",
+    "older_electronics_watchlist": "Separate literature reports H10 data-logger electronic artefacts before 2013, so an early baseline must not be assumed instrument-clean merely because it predates the 2013 H10S1 event.",
+    "physical_geometry_lane": "Unchanged and independent: exact native bathymetry/backscatter/swath evidence is still needed for any claim about a persistent seabed structure."
+  },
+  "next_step_request_to_janus": "Consume this exact preregistered receipt, not the earlier manual synthesis, and choose one new evidence gate. Do not repeat the archive-blocked 2013 public waveform gate or this completed public calibration-recovery gate without changed access. Prefer earliest simultaneous six-channel waveform availability, exact native bathymetry/swath intersection, or authoritative custodian recovery of protected calibration/raw holdings.",
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_CALIBRATION_PUBLIC_RECOVERY",
+    "bathymetry_lane_remains_independent": true,
+    "source_writeback_during_execution": false
+  }
+}

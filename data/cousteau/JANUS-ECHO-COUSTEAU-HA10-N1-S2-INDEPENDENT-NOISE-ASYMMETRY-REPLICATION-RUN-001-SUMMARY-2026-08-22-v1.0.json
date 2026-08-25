@@ -1,0 +1,103 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_INDEPENDENT_NOISE_ASYMMETRY_REPLICATION",
+  "source": {
+    "github_actions_run_id": 32568639252,
+    "head_sha": "b4d56a933d42be128bd62b2b7feec76c56365cf1",
+    "artifact_id": 9474748392,
+    "artifact_name": "cousteau-ha10-independent-noise-replication-32568639252",
+    "artifact_zip_sha256": "1acc2ebee73587264e0c6d9b23ab4ed1ed07a033526f4cb494910520f09eb531",
+    "run_receipt_member": "run-32568639252.json",
+    "run_receipt_sha256": "ee8b42bf3e783fe0baedf55c30ec0cc5e5142b2c451502efbab1f29525902909",
+    "run_receipt_bytes": 40493,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "frozen_window_count": 20,
+    "window_duration_s": 600,
+    "band_hz": [10.0, 80.0],
+    "large_asymmetry_effect_size_threshold_db": 6.0,
+    "minimum_complete_paired_windows": 15,
+    "window_replacement_allowed": false,
+    "frequency_retuning_allowed": false,
+    "threshold_retuning_allowed": false
+  },
+  "result": {
+    "complete_paired_windows": 16,
+    "blocked_station_windows": 5,
+    "verdict": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "median_per_window_raw_s2_minus_n1_db": 13.313495448244304,
+    "median_per_window_corrected_s2_minus_n1_db": 13.449353740461344,
+    "complete_pairs_meeting_6db_raw_threshold": 16,
+    "complete_pairs_meeting_6db_corrected_threshold": 16,
+    "complete_pairs_meeting_both_6db_thresholds": 16,
+    "minimum_per_window_raw_s2_minus_n1_db": 8.802924073176452,
+    "maximum_per_window_raw_s2_minus_n1_db": 15.56055174804235,
+    "minimum_per_window_corrected_s2_minus_n1_db": 8.914814084748198,
+    "maximum_per_window_corrected_s2_minus_n1_db": 15.723296944276727
+  },
+  "station_aggregate": {
+    "IM.H10N1..EDH": {
+      "median_raw_10_80hz_integrated_power": 16158.819198077883,
+      "median_response_corrected_10_80hz_integrated_power_pa2": 0.0036326789288481038
+    },
+    "IM.H10S2..EDH": {
+      "median_raw_10_80hz_integrated_power": 346346.45674127963,
+      "median_response_corrected_10_80hz_integrated_power_pa2": 0.08014297513990207
+    }
+  },
+  "response_correction_postrun_diagnostic": {
+    "definition": "per-window corrected S2-minus-N1 dB minus raw S2-minus-N1 dB",
+    "median_delta_db": 0.12866973750201538,
+    "minimum_delta_db": 0.013946846916356392,
+    "maximum_delta_db": 0.19922673875186447,
+    "interpretation": "The documented StationXML response correction changes the observed station-power ratio by only about 0.13 dB at the median, while the replicated station offset is about 13.4 dB. Therefore the currently applied documented response correction does not materially remove the baseline-power asymmetry. This does not identify the physical cause and does not exclude a calibration error not represented in the metadata."
+  },
+  "data_access_notes": [
+    {
+      "date": "2014-12-12",
+      "station": "IM.H10S2..EDH",
+      "status": "INCOMPLETE_WINDOW"
+    },
+    {
+      "date": "2014-12-15",
+      "station": "IM.H10N1..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10N1..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10S2..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-26",
+      "station": "IM.H10N1..EDH",
+      "status": "GAPS_PRESENT_INTERPOLATION_FORBIDDEN"
+    }
+  ],
+  "interpretation": {
+    "supported": "A large H10S2-over-H10N1 10-80 Hz baseline-power asymmetry replicates on an independent frozen time sample. All 16 complete paired windows exceed the preregistered 6 dB effect-size threshold in both raw and response-corrected power.",
+    "not_supported": [
+      "SENSOR_MALFUNCTION_IDENTIFIED",
+      "CALIBRATION_ERROR_PROVEN",
+      "ENVIRONMENTAL_SOURCE_IDENTIFIED",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_SPECTRAL_SHAPE_VS_SCALE_DIAGNOSTIC_V1"
+  },
+  "authority": {
+    "positive_control_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_NOISE_REPLICATION",
+    "source_writeback_during_replication": false
+  },
+  "claim_ceiling": "This append-only result establishes only a replicated station-baseline asymmetry within the frozen 10-80 Hz HA10 measurement path. It does not identify whether the cause is environmental, sensor-related, metadata/calibration-related, deployment-related, or another mechanism, and it has zero authority to promote the frozen 119-Hz target claim."
+}

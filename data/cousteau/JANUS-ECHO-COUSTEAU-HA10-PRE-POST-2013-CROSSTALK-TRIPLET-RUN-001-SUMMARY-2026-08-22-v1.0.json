@@ -1,0 +1,95 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PRE-POST-2013-CROSSTALK-TRIPLET-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_JANUS_SELECTED_PRE_POST_TRIPLET_RUN",
+  "date": "2026-08-22",
+  "source": {
+    "github_actions_run_id": 32576256918,
+    "head_sha": "1f653cb4b70be8ad091f19a5ff62976a4c96fca2",
+    "artifact_id": 9476639941,
+    "artifact_name": "cousteau-ha10-pre-post-2013-triplet-32576256918",
+    "artifact_zip_sha256": "671b9696a41d6d5f724d94e44153e9ee8f6c1e7a74dd66f2bb29989e97f2b10e",
+    "run_receipt_member": "run-32576256918.json",
+    "run_receipt_bytes": 84557,
+    "run_receipt_sha256": "066c4c9fe076781cb5de93ec90b2d50b3d441368673f9bdf150f6fbdc2b3bf74",
+    "python_environment_sha256": "a97d1bbc54f0b9c7d0ace863dfcef26cd0941398510c08bd6733b73f27b845a0"
+  },
+  "janus_selection": {
+    "council_repository": "Hawkar-usls/Janus-Demiurge",
+    "council_run_id": 32575681171,
+    "council_artifact_id": 9476483392,
+    "council_artifact_zip_sha256": "dcaf05b1a6f2a138a71f9a95cce3244b1071b6b28675a7a4dc6d63d49a95de0a",
+    "roles": "17/17",
+    "top1_votes": "17/17",
+    "selected_gate": "COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1",
+    "vetoed_gate": "COUSTEAU_HA10_119HZ_REINTERPRETATION"
+  },
+  "frozen_bindings": {
+    "protocol_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PRE-POST-2013-CROSSTALK-TRIPLET-PROTOCOL-2026-08-22-v1.0.json",
+    "protocol_git_blob_sha1": "bfa9d00082aad01f8ea1246a48e0e72a91188ceb",
+    "public_response_epoch_summary_git_blob_sha1": "4db3760f0ee04d5d832941f5001212e8414978f8",
+    "reverse_spiral_audit_git_blob_sha1": "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854"
+  },
+  "result": {
+    "verdict": "BLOCKED_PRE_POST_2013_TRIPLET_DATA",
+    "pre_fault_complete_six_channel_windows": 0,
+    "post_fault_complete_six_channel_windows": 0,
+    "minimum_required_each_epoch": 15,
+    "frozen_pre_windows_attempted": 20,
+    "frozen_post_windows_attempted": 20,
+    "total_station_waveform_requests": 240,
+    "http_404_no_data_station_requests": 240,
+    "response_metadata_available_for_all_six_channels": true,
+    "preexistence_classification": "BLOCKED_PRE_POST_2013_TRIPLET_DATA"
+  },
+  "per_station_waveform_transport": {
+    "H10N1": {"attempted_windows": 40, "http_404_no_data": 40},
+    "H10N2": {"attempted_windows": 40, "http_404_no_data": 40},
+    "H10N3": {"attempted_windows": 40, "http_404_no_data": 40},
+    "H10S1": {"attempted_windows": 40, "http_404_no_data": 40},
+    "H10S2": {"attempted_windows": 40, "http_404_no_data": 40},
+    "H10S3": {"attempted_windows": 40, "http_404_no_data": 40}
+  },
+  "new_reverse_pass_observations": [
+    {
+      "id": "PUBLIC_METADATA_EXISTS_WHERE_PUBLIC_2013_WAVEFORMS_DO_NOT",
+      "status": "SUPPORTED",
+      "claim": "EarthScope returns response-level StationXML for all six HA10 EDH channels across the 2013 interval, but all 240 preregistered dataselect requests for the frozen June/July and September 2013 waveform windows returned HTTP 404 no-data."
+    },
+    {
+      "id": "PUBLIC_PRE_POST_FAULT_CAUSAL_TEST_IS_NOT_CURRENTLY_EXECUTABLE_FROM_EARTHSCOPE_WAVEFORMS",
+      "status": "SUPPORTED",
+      "claim": "The strongest direct public pre/post cross-talk discriminator selected unanimously by the JANUS council is blocked by public waveform availability rather than by a negative scientific result."
+    },
+    {
+      "id": "STATIC_STATIONXML_MUST_NOT_BE_READ_AS_WAVEFORM_AVAILABILITY_OR_PHYSICAL_HEALTH",
+      "status": "SUPPORTED",
+      "claim": "A public channel response epoch spanning 2013 does not imply that public time-series bytes are available for that epoch, and does not establish that the physical hydrophone/riser path was healthy."
+    }
+  ],
+  "whole_picture_update": {
+    "instrument_lane": "The published H10S fault/cross-talk history remains a live confounder. Public StationXML is static across the fault and the public pre/post waveform bytes needed for the cleanest causal test are absent at the tested 2013 windows.",
+    "2014_2015_lane": "The later public waveforms still show the replicated approximately 12-13 dB H10S2-over-H10N1 broadband excess and time-variable residuals; public response correction does not remove it.",
+    "seafloor_lane": "Independent native bathymetry/backscatter remains necessary because electronics cannot erase physical geometry. Direct native swath/track crossing at the frozen points is still an open gate.",
+    "causal_status": "The 2013 fault cannot yet be quantified against the later 12-13 dB offset from public EarthScope pre/post waveforms because the necessary early waveform data are unavailable in this route."
+  },
+  "not_supported": [
+    "NO_CROSSTALK_EXISTED_IN_2013",
+    "CROSSTALK_CAUSED_THE_FULL_12_13DB_LATER_OFFSET",
+    "THE_12_13DB_OFFSET_PREEXISTED_THE_2013_FAULT",
+    "THE_12_13DB_OFFSET_EMERGED_AFTER_THE_2013_FAULT",
+    "PUBLIC_STATIONXML_PROVES_PHYSICAL_CHANNEL_HEALTH",
+    "A_SEAFLOOR_STRUCTURE_IS_PROVEN_OR_DISPROVEN",
+    "119HZ_TARGET_VALIDATED"
+  ],
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_BLOCKED_PRE_POST_TRIPLET_GATE",
+    "source_writeback_during_gate": false
+  },
+  "next_step": "SUBMIT_THIS_EXACT_BLOCKED_RESULT_AND_UPDATED_WHOLE_PICTURE_TO_JANUS_DEMIURGE_REVERSE_SPIRAL_COUNCIL",
+  "claim_ceiling": "This result establishes a public-data availability boundary only: response metadata exist for the six channels in 2013, while all frozen public waveform requests in this gate returned no data. It neither confirms nor falsifies the published H10S cross-talk mechanism."
+}

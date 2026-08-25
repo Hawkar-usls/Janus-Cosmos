@@ -1,0 +1,128 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_SPECTRAL_SHAPE_VS_SCALE_DIAGNOSTIC_V1",
+  "status": "PREREGISTERED_BEFORE_NEW_DIAGNOSTIC_WINDOWS_ARE_DOWNLOADED",
+  "research_branch": "Janus-Echo-Кусто",
+  "purpose": "Classify the already-replicated H10S2-over-H10N1 10-80 Hz baseline-power asymmetry as approximately broadband/scale-like versus frequency-selective/nonuniform, using a new time sample that does not overlap the previous 12:00 UTC replication windows.",
+  "epistemic_position": {
+    "created_after_asymmetry_replication": true,
+    "replicated_asymmetry_used_only_to_define_followup_question": true,
+    "new_waveform_windows_inspected_before_freeze": false,
+    "may_classify_spectral_morphology": true,
+    "may_identify_physical_cause": false,
+    "may_prove_sensor_gain_error": false,
+    "may_reclassify_positive_control": false,
+    "may_reclassify_119hz_negative": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "replication_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "replication_summary_git_blob_sha1": "8add6bdb329f4758a67c0a1525dfd281ec46de61",
+    "replication_verdict_required": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict_required": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10S2..EDH"
+  ],
+  "new_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "00:00:00Z",
+    "dates": [
+      "2014-12-12",
+      "2014-12-13",
+      "2014-12-14",
+      "2014-12-15",
+      "2014-12-16",
+      "2014-12-17",
+      "2014-12-18",
+      "2014-12-19",
+      "2014-12-20",
+      "2014-12-21",
+      "2014-12-22",
+      "2014-12-23",
+      "2014-12-24",
+      "2014-12-25",
+      "2014-12-26",
+      "2014-12-27",
+      "2014-12-28",
+      "2014-12-29",
+      "2014-12-30",
+      "2014-12-31"
+    ],
+    "independence_from_prior_replication": "These windows begin at 00:00 UTC, twelve hours away from the prior frozen 12:00 UTC windows on the same listed dates; no waveform from these new windows was used to define the present thresholds.",
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_recentering": true,
+    "no_event_catalog_selection": true
+  },
+  "frequency_contract": {
+    "broadband_hz": [10.0, 80.0],
+    "fixed_subbands_hz": {
+      "low": [10.0, 30.0],
+      "mid": [30.0, 55.0],
+      "high": [55.0, 80.0]
+    },
+    "selection_basis": "Exactly the diagnostic subbands already frozen in the earlier in-band positive-control protocol; no post-replication frequency search is introduced.",
+    "best_subband_selection_allowed": false,
+    "whole_spectrum_peak_search_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "spectral_estimator": {
+    "preprocessing": [
+      "merge_without_interpolation",
+      "demean",
+      "linear_detrend"
+    ],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration over each fully frozen interval"
+  },
+  "predeclared_statistics": {
+    "per_window_per_subband": [
+      "raw S2-minus-N1 integrated-power ratio in dB",
+      "response-corrected S2-minus-N1 integrated-power ratio in dB"
+    ],
+    "aggregate_per_subband": [
+      "median raw S2-minus-N1 dB across complete paired windows",
+      "median corrected S2-minus-N1 dB across complete paired windows"
+    ],
+    "shape_metrics": [
+      "raw median-ratio spread = maximum subband median minus minimum subband median",
+      "corrected median-ratio spread = maximum subband median minus minimum subband median"
+    ],
+    "diagnostic_only": [
+      "per-subband corrected-minus-raw ratio delta",
+      "instrument-sensitivity metadata if available"
+    ]
+  },
+  "classification_thresholds": {
+    "large_asymmetry_floor_db_each_subband": 6.0,
+    "maximum_scale_like_spread_db": 3.0,
+    "engineering_interpretation": "A <=3 dB spread means the median S2/N1 power ratio varies by no more than a factor of two in power across the three frozen subbands. This operationally defines approximately broadband/scale-like morphology; it is not a physical-cause claim."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_SPECTRAL_SHAPE_DIAGNOSTIC_DATA_ACCESS",
+    "all_raw_and_corrected_subband_medians_ge_6db_and_both_spreads_le_3db": "BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY",
+    "otherwise": "FREQUENCY_SELECTIVE_OR_NONUNIFORM_H10S2_ASYMMETRY"
+  },
+  "claim_ceiling": "BROADBAND_SCALE_LIKE means only that the replicated S2-over-N1 power offset is approximately uniform across the three frozen 10-80 Hz subbands on this independent time sample. It is compatible with more than one mechanism, including broadband environmental conditions, deployment/site effects, or an unmodeled multiplicative calibration/gain factor. FREQUENCY_SELECTIVE_OR_NONUNIFORM means only that the offset shape varies materially with frequency. Neither outcome identifies a physical cause, validates 119 Hz, or increases target evidence.",
+  "hard_rules": [
+    "NEW_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "NO_WINDOW_REPLACEMENT",
+    "NO_FREQUENCY_RETUNING",
+    "NO_BEST_SUBBAND_SELECTION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_TARGET_BAND_USE",
+    "NO_CAUSAL_IDENTIFICATION_FROM_MORPHOLOGY_ALONE",
+    "POSITIVE_CONTROL_FAILURE_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

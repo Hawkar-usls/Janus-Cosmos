@@ -1,0 +1,127 @@
+name: Cousteau HA10 N1-S2 Temporal Scale Stability Diagnostic
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-temporal-scale-stability-diagnostic.yml"
+      - "workspace/cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py"
+      - "tests/test_cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json"
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - ".github/workflows/cousteau-ha10-n1-s2-temporal-scale-stability-diagnostic.yml"
+      - "workspace/cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py"
+      - "tests/test_cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py"
+      - "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json"
+
+permissions:
+  contents: read
+
+jobs:
+  temporal-scale-stability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Bind preregistration and immutable upstream evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-PROTOCOL-2026-08-22-v1.0.json)" = "bd7df63f62b16428e30b3cb37ee76cc556e9917b"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json)" = "26c7b3cf8a5e0707b5ca254ee9ae9d35c064c18b"
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = "eb8b48fb7f043160c057f9df6264a781412ed854"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = "244169a1331a16529e2a963585a5659dae109c66"
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control_v2.py)" = "c3d37fe4f5a75514390862be4c1d2870c4c01fe9"
+          test "$(git hash-object workspace/cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py)" = "5ea5387e78c102b84f08c0caa569b5790ec0c68c"
+          test "$(git hash-object tests/test_cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py)" = "759efb5f3cdc43bf5fd8eb5644e38111fac12cb2"
+          echo "TEMPORAL_STABILITY_PREREGISTRATION=PASS"
+          echo "SCALE_LIKE_SHAPE_BINDING=PASS"
+          echo "FROZEN_119HZ_NEGATIVE_BINDING=PASS"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install same frozen direct scientific stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.3.5" \
+            "scipy==1.18.1" \
+            "requests==2.34.2" \
+            "obspy==1.5.0"
+          mkdir -p artifacts/ha10-temporal-scale-stability
+          python -m pip freeze | sort > artifacts/ha10-temporal-scale-stability/python-environment.txt
+
+      - name: Compile and test frozen stability semantics before data download
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            workspace/cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py \
+            tests/test_cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic.py
+          python -m unittest tests.test_cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic -v
+
+      - name: Execute new frozen-window stability diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m workspace.cousteau_ha10_n1_s2_temporal_scale_stability_diagnostic \
+            --output "artifacts/ha10-temporal-scale-stability/run-${GITHUB_RUN_ID}.json"
+
+      - name: Validate non-promotional diagnostic boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths=list(Path('artifacts/ha10-temporal-scale-stability').glob('run-*.json'))
+          assert len(paths)==1, paths
+          r=json.loads(paths[0].read_text(encoding='utf-8'))
+          assert r['status']=='DIAGNOSTIC_RUN_COMPLETE'
+          assert r['authority_delta_for_119hz']==0
+          assert r['target_identity']=='UNCONFIRMED'
+          assert r['target_evidence_delta']=='NONE_FROM_TEMPORAL_STABILITY_DIAGNOSTIC'
+          assert r['shape_verdict']=='BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY'
+          assert r['frozen_119hz_verdict']=='NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['frequency_band_hz']==[10.0,80.0]
+          assert r['classification_thresholds']['large_asymmetry_floor_db']==6.0
+          assert r['classification_thresholds']['maximum_stable_iqr_db']==3.0
+          assert r['classification_thresholds']['minimum_fraction_windows_above_floor']==0.8
+          assert r['summary']['verdict'] in {
+              'TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET',
+              'TEMPORALLY_VARIABLE_H10S2_SCALE_OFFSET',
+              'BLOCKED_TEMPORAL_SCALE_STABILITY_DATA_ACCESS',
+          }
+          print('TEMPORAL_STABILITY_RECEIPT_VALID=TRUE')
+          print('TEMPORAL_STABILITY_VERDICT=' + r['summary']['verdict'])
+          print('COMPLETE_PAIRED_WINDOWS=' + str(r['summary']['complete_paired_windows']))
+          print('AUTHORITY_DELTA_FOR_119HZ=0')
+          PY
+
+      - name: Prove source tree is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/cousteau workspace tests
+          echo "SOURCE_WRITEBACK=FALSE"
+
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-temporal-scale-stability-${{ github.run_id }}
+          path: artifacts/ha10-temporal-scale-stability/
+          if-no-files-found: error
+          retention-days: 30

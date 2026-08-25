@@ -1,0 +1,149 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_PREREGISTERED_SCALAR_COLLAPSE_HOLDOUT",
+  "source": {
+    "github_actions_run_id": 32571625300,
+    "head_sha": "d61e1431dcad575b99a464d9240173f72df48ec1",
+    "artifact_id": 9475466307,
+    "artifact_name": "cousteau-ha10-independent-scalar-collapse-holdout-32571625300",
+    "artifact_zip_sha256": "e62e2ab26a45acfd23c46c558d5a308aa2d338ebca0674764f41c7992753f1cc",
+    "run_receipt_member": "run-32571625300.json",
+    "run_receipt_sha256": "87e48968d4049f57d561f8a515619430e370b723c7bce7c49d9b90593a2d14cd",
+    "run_receipt_bytes": 109004,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "protocol_git_blob_sha1": "c642837c2f1efa77699c76260fe6f158f8fb3d1c",
+    "upstream_temporal_summary_git_blob_sha1": "45f2901adde866df610a563f27c50177d32be414",
+    "new_holdout_window_count": 20,
+    "window_duration_s": 600,
+    "window_start_time_utc": "18:00:00Z",
+    "broadband_hz": [10.0, 80.0],
+    "fixed_subbands_hz": {
+      "low": [10.0, 30.0],
+      "mid": [30.0, 55.0],
+      "high": [55.0, 80.0]
+    },
+    "minimum_complete_paired_windows": 15,
+    "frozen_scalar_db": 12.616188132659623,
+    "frozen_s2_waveform_amplitude_factor": 0.23398638800540034,
+    "maximum_absolute_broadband_residual_median_db": 2.0,
+    "maximum_broadband_residual_iqr_db": 3.0,
+    "window_absolute_residual_tolerance_db": 3.0,
+    "minimum_fraction_windows_within_tolerance": 0.8,
+    "maximum_absolute_fixed_subband_residual_median_db": 2.5,
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "window_replacement_allowed": false,
+    "frequency_retuning_allowed": false,
+    "threshold_retuning_allowed": false
+  },
+  "result": {
+    "complete_paired_windows": 17,
+    "blocked_station_windows": 5,
+    "verdict": "SCALAR_COLLAPSE_HOLDOUT_PASS",
+    "broadband_residual_statistics": {
+      "median_raw_residual_db": 0.3401492483320574,
+      "median_corrected_residual_db": 0.42020888275453494,
+      "raw_q25_residual_db": -1.0183691370948154,
+      "raw_q75_residual_db": 1.0649776446615835,
+      "corrected_q25_residual_db": -0.9192033440481353,
+      "corrected_q75_residual_db": 1.162324598449512,
+      "raw_residual_iqr_db": 2.083346781756399,
+      "corrected_residual_iqr_db": 2.0815279424976474,
+      "fraction_raw_windows_within_3db": 0.9411764705882353,
+      "fraction_corrected_windows_within_3db": 0.9411764705882353,
+      "fraction_both_windows_within_3db": 0.9411764705882353,
+      "raw_residual_min_db": -2.359428468322559,
+      "raw_residual_max_db": 3.9213106349865505,
+      "corrected_residual_min_db": -2.209323358659441,
+      "corrected_residual_max_db": 4.0688188190877845
+    },
+    "fixed_subband_residual_medians_db": {
+      "low": {
+        "raw": 0.22570516507981608,
+        "corrected": 0.32934637430334135
+      },
+      "mid": {
+        "raw": -0.26025304291044193,
+        "corrected": -0.1616197052549211
+      },
+      "high": {
+        "raw": 1.0085191904200048,
+        "corrected": 1.1033344407964165
+      }
+    },
+    "gate_checks": {
+      "minimum_complete_pairs": true,
+      "broadband_medians": true,
+      "broadband_iqrs": true,
+      "window_fractions": true,
+      "fixed_subbands": true
+    }
+  },
+  "data_access_notes": [
+    {
+      "date": "2014-12-15",
+      "station": "IM.H10N1..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10N1..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-16",
+      "station": "IM.H10S2..EDH",
+      "status": "HTTP_404_NO_DATA"
+    },
+    {
+      "date": "2014-12-17",
+      "station": "IM.H10N1..EDH",
+      "status": "GAPS_PRESENT_INTERPOLATION_FORBIDDEN"
+    },
+    {
+      "date": "2014-12-17",
+      "station": "IM.H10S2..EDH",
+      "status": "GAPS_PRESENT_INTERPOLATION_FORBIDDEN"
+    }
+  ],
+  "cross_gate_synthesis": {
+    "frozen_119hz_target": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "positive_control": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "independent_1200utc_asymmetry_replication": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "independent_0000utc_spectral_shape": "BROADBAND_SCALE_LIKE_H10S2_ASYMMETRY",
+    "independent_0600utc_temporal_stability": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "independent_1800utc_scalar_holdout": "SCALAR_COLLAPSE_HOLDOUT_PASS",
+    "synthesis": "A single 12.616188 dB offset frozen from the prior 06:00 UTC response-corrected median generalized to a new 18:00 UTC holdout without refitting. The holdout residual median was only +0.420 dB after response correction, corrected residual IQR was 2.082 dB, 16 of 17 complete paired windows were within ±3 dB in both raw and corrected power, and all three fixed subband residual medians remained within the preregistered ±2.5 dB gate. Across four non-overlapping time samples, the H10S2-over-H10N1 difference is therefore compactly described by a persistent broadband multiplicative station-path factor over this date block. This remains a descriptive measurement-path result, not a physical-cause identification."
+  },
+  "interpretation": {
+    "supported": [
+      "ONE_FROZEN_SCALAR_GENERALIZED_TO_AN_UNSEEN_1800UTC_HOLDOUT_WITHOUT_REFITTING",
+      "THE_HOLDOUT_BROADBAND_RESIDUAL_MEDIANS_ARE_CLOSE_TO_ZERO_RELATIVE_TO_PREDECLARED_TOLERANCES",
+      "THE_HOLDOUT_TEMPORAL_RESIDUAL_IQR_REMAINS_BELOW_THE_PREDECLARED_3DB_LIMIT",
+      "SIXTEEN_OF_SEVENTEEN_COMPLETE_HOLDOUT_PAIRS_ARE_WITHIN_PLUS_OR_MINUS_3DB_IN_BOTH_RAW_AND_CORRECTED_POWER",
+      "ALL_THREE_FIXED_SUBBAND_RESIDUAL_MEDIANS_PASS_THE_PREDECLARED_SCALAR_COLLAPSE_GATE",
+      "A_PERSISTENT_MULTIPLICATIVE_STATION_PATH_FACTOR_IS_NOW_A_COMPACT_EMPIRICAL_DESCRIPTION_OF_THE_OBSERVED_OFFSET_OVER_THIS_DATE_BLOCK"
+    ],
+    "not_supported": [
+      "SENSOR_GAIN_FAULT_PROVEN",
+      "CALIBRATION_ERROR_PROVEN",
+      "ENVIRONMENTAL_OR_SITE_CAUSE_RULED_OUT",
+      "DEPLOYMENT_FAULT_PROVEN",
+      "THE_MULTIPLICATIVE_FACTOR_IS_KNOWN_TO_BE_INSTRUMENTAL_RATHER_THAN_PHYSICAL",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_OUT_OF_MONTH_SCALAR_HOLDOUT_V1"
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_SCALAR_COLLAPSE_HOLDOUT",
+    "source_writeback_during_diagnostic": false
+  },
+  "claim_ceiling": "This append-only result establishes that one scalar offset frozen before the 18:00 UTC holdout approximately collapses the H10S2-over-H10N1 10-80 Hz power difference on the new sample in both time and fixed spectral subbands. It supports a persistent multiplicative station-path factor as a compact empirical model over this date block, but it does not identify whether that factor is caused by sensor gain, calibration, deployment, site acoustics, environmental noise, or another mechanism, and it has zero authority to validate or promote the frozen 119-Hz target claim."
+}

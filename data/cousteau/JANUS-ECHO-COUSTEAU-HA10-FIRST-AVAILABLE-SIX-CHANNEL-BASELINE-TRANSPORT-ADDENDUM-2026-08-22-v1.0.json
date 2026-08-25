@@ -1,0 +1,43 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-TRANSPORT-ADDENDUM-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_FIRST_AVAILABLE_SIX_CHANNEL_BASELINE_V1",
+  "status": "APPEND_ONLY_TRANSPORT_REPAIR_AFTER_INFRASTRUCTURE_FAILURE_BEFORE_SUCCESSFUL_ACQUISITION",
+  "date": "2026-08-22",
+  "parent_protocol": {
+    "path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-FIRST-AVAILABLE-SIX-CHANNEL-BASELINE-PROTOCOL-2026-08-22-v1.0.json",
+    "git_blob_sha1": "f040c5df715fb1cc3dca3d478be9334c5c09d271",
+    "scientific_contract_unchanged": true
+  },
+  "failed_execution": {
+    "github_actions_run_id": 32578915494,
+    "head_sha": "7200b5f01795c34e8d6a58de4496634b545a8765",
+    "failure_class": "EARTHSCOPE_DATASELECT_READ_TIMEOUT_DURING_VALUE_BLIND_DISCOVERY",
+    "timeout_s": 60,
+    "failed_step": "Execute JANUS-selected value-blind earliest six-channel gate",
+    "scientific_result_produced": false,
+    "canonical_receipt_produced": false,
+    "waveform_values_inspected_for_selection": false,
+    "note": "The original implementation submitted a full logical year of one-second six-channel selectors in one HTTP POST. EarthScope timed out before a result receipt existed."
+  },
+  "transport_only_repair": {
+    "logical_scan_order_unchanged": true,
+    "scan_start_unchanged": true,
+    "scan_end_unchanged": true,
+    "probe_clock_unchanged": true,
+    "probe_duration_unchanged": true,
+    "six_channel_set_unchanged": true,
+    "earliest_date_selection_rule_unchanged": true,
+    "waveform_value_blinding_unchanged": true,
+    "scientific_thresholds_unchanged": true,
+    "spectral_contract_unchanged": true,
+    "repair": "Partition each logical year into deterministic chronological calendar-month transport chunks. Complete each chunk before advancing. Do not skip a failed chunk. Choose the first all-six date only after every earlier chunk has been successfully classified from headers/no-data transport state.",
+    "reason": "Reduce server-side request size and read-timeout risk without changing which dates are eligible or how the earliest date is selected."
+  },
+  "epistemic_firewall": {
+    "transport_failure_is_not_scientific_negative": true,
+    "no_data_response_is_not_station_health_evidence": true,
+    "repair_cannot_retroactively_change_frozen_119hz_result": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED"
+  }
+}
