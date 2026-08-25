@@ -1,0 +1,159 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-TOBI-SYNESTHETIC-ADAPTER-CONTRACT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.tobi_synesthetic_adapter.contract.v1",
+  "created_at_local": "2026-08-25T23:08:00+03:00",
+  "status": "FROZEN_BEFORE_REAL_TOBI_SENSORY_SCORING",
+  "freeze_timing": "AFTER_REAL_ARCHIVE_FORMAT_METADATA_AND_TIMESTAMP_LOCATION__BEFORE_SENSORY_SCORING",
+  "parent_core": {
+    "id": "JANUS_COUSTEAU_SYNESTHETIC_MEMORY_CORE",
+    "version": "1.0.0",
+    "entrypoint": "workspace/cousteau_synesthetic_memory_core.py"
+  },
+  "real_source_format": {
+    "request": "BODCREQ-9406",
+    "cruise": "CD169",
+    "instrument": "TOBI",
+    "block_bytes": 40960,
+    "cadence_seconds": 4,
+    "format_authority": "BODC-provided README.doc inside CD169_TOBI archive",
+    "readme_sha256": "9d96d4d64b613bb075e2234ca101517fdc3d9913e43254630d6ae9cd555c6b7d"
+  },
+  "authority_firewall": {
+    "adapter_may_change_raw_measurement": false,
+    "adapter_may_fill_missing_measurements": false,
+    "adapter_may_emit_scientific_verdict": false,
+    "adapter_may_emit_geometry_class": false,
+    "adapter_may_use_target_or_hypothesis_labels_in_fingerprint": false,
+    "sensory_similarity_is_retrieval_priority_only": true,
+    "raw_bytes_out_rank_adapter": true
+  },
+  "forbidden_from_fingerprint": [
+    "H0",
+    "H1",
+    "H2",
+    "pyramid",
+    "target",
+    "candidate",
+    "anomaly",
+    "verdict",
+    "prediction",
+    "interpretation",
+    "story",
+    "line_importance",
+    "expected_result"
+  ],
+  "navigation_decode": {
+    "ship_position_role": "SHIP_GPS_NOT_TOWFISH_POSITION",
+    "degrees_minutes_rule": "SIGN_APPLIES_TO_WHOLE_COORDINATE__ABS_DEGREES_PLUS_ABS_MINUTES_DIV_60",
+    "towfish_geolocation_rule": "MUST_USE_TOWFISH_NAVIGATION_OR_LAYBACK_SOLUTION_BEFORE_GROUND_FIXED_CLAIM"
+  },
+  "timestamp_decode": {
+    "encoding": "DOS_IBM_PC_PACKED_DATE_TIME_16BIT_LITTLE_ENDIAN",
+    "date_bits": "year_since_1980_month_day",
+    "time_bits": "hour_minute_seconds_div_2",
+    "validation_rule": "REQUIRE_MONOTONIC_4_SECOND_SEQUENCE_IN_REAL_BLOCKS"
+  },
+  "measurement_channels": {
+    "direct_context": [
+      "latitude",
+      "longitude",
+      "heading"
+    ],
+    "namespaced_numeric": [
+      "tobi_altitude",
+      "tobi_wire_out",
+      "tobi_water_path",
+      "tobi_pressure",
+      "tobi_temperature",
+      "tobi_conductivity",
+      "tobi_roll",
+      "tobi_pitch",
+      "tobi_magnetic_x",
+      "tobi_magnetic_y",
+      "tobi_magnetic_z",
+      "tobi_lss",
+      "port_sidescan_mean",
+      "port_sidescan_std",
+      "port_sidescan_entropy",
+      "stbd_sidescan_mean",
+      "stbd_sidescan_std",
+      "stbd_sidescan_entropy",
+      "sidescan_port_stbd_asymmetry",
+      "profiler_mean",
+      "profiler_std",
+      "profiler_entropy",
+      "port_swath_mean",
+      "port_swath_std",
+      "stbd_swath_mean",
+      "stbd_swath_std",
+      "swath_port_stbd_asymmetry",
+      "block_missing_fraction",
+      "timestamp_cadence",
+      "cadence_jitter"
+    ]
+  },
+  "calibration_and_scaling": {
+    "conductivity": "reading / 1000 - 2",
+    "temperature_C": "reading / 2000 - 2",
+    "pressure_dbar": "reading / 10 - 5",
+    "roll_deg": "reading / 6.4",
+    "gyro_deg": "reading / 10 - 10.1",
+    "lss_volts": "reading * 5 / 524288",
+    "magnetometer_policy": "USE_RAW_AXIS_SUMMARIES_FOR_V1_UNLESS_FULL_ARCHIVE_MATRIX_CALIBRATION_IS_APPLIED",
+    "fixed_dimensionless_scales": {
+      "tobi_altitude": 1000.0,
+      "tobi_wire_out": 10000.0,
+      "tobi_water_path": 10000.0,
+      "tobi_pressure": 5000.0,
+      "tobi_temperature": 10.0,
+      "tobi_conductivity": 50.0,
+      "tobi_roll": 30.0,
+      "tobi_pitch_raw": 100.0,
+      "tobi_magnetic_axis_raw": 200000.0,
+      "tobi_lss_volts": 10.0,
+      "byte_intensity_mean": 255.0,
+      "byte_intensity_std": 128.0,
+      "byte_entropy_bits": 8.0
+    },
+    "rule": "SCALES_ARE_FIXED_FROM_SENSOR_RANGE_AND_FORMAT_CONTEXT_NOT_FITTED_TO_TARGET_VALUES"
+  },
+  "array_summary_policy": {
+    "port_sidescan": {"offset_hex": "0x0240", "samples": 4000},
+    "stbd_sidescan": {"offset_hex": "0x2180", "samples": 4000},
+    "profiler": {"offset_hex": "0x40C0", "samples": 4000},
+    "port_swath": {"offset_hex": "0x6000", "samples": 4000},
+    "stbd_swath": {"offset_hex": "0x7F40", "samples": 4000},
+    "statistics": ["mean", "population_std", "shannon_entropy_8bit"],
+    "asymmetry": "(port_mean - stbd_mean) / max(port_mean + stbd_mean, epsilon)",
+    "no_shape_label_from_single_block": true
+  },
+  "window_lattice": {
+    "exact_block": "one_real_4_second_block_nearest_frozen_time",
+    "centered_seconds": [60, 300, 1800, 7200],
+    "local_mirror": "PRE_FORWARD_VS_POST_REVERSE_AT_SAME_SCALE",
+    "directions": ["CENTER", "HEAD_FORWARD", "TAIL_REVERSE"],
+    "rule": "WINDOWS_ARE_TIME_DEFINED_NOT_DATA_SELECTED"
+  },
+  "core_adapter_rule": {
+    "standard_keys": ["latitude", "longitude", "heading", "timestamp_cadence", "cadence_jitter", "missing_fraction"],
+    "tobi_keys_are_passed_as": "acquisition_tobi_<name>_scaled",
+    "reason": "Core v1.0 explicitly permits numeric acquisition channels while preserving anti-label firewall.",
+    "semantic_overlay_extension": "TOBI pressure/altitude cues may be reported as mnemonic context but never relabeled as EM122 depth"
+  },
+  "pass_conditions": {
+    "real_bytes_required": true,
+    "real_block_sha256_required": true,
+    "same_input_same_passport": true,
+    "forbidden_label_invariance_required": true,
+    "direction_overlay_must_not_change_measurement_fingerprint": true
+  },
+  "hard_rules": [
+    "SHIP_GPS_IS_NOT_TOWFISH_POSITION",
+    "TOBI_ALTITUDE_IS_NOT_SEAFLOOR_DEPTH",
+    "TOBI_PRESSURE_IS_NOT_EM122_DEPTH",
+    "SINGLE_SIDESCAN_TEXTURE_IS_NOT_GEOMETRY_PROOF",
+    "MNEMONIC_MATCH_IS_NOT_SCIENTIFIC_CONVERGENCE",
+    "NO_RECENTERING",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
