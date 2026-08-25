@@ -1,0 +1,145 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-TOBI-SAMPLE-LEVEL-SPACE-REPLAY-CONTRACT-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.tobi_sample_level_space_replay.contract.v1",
+  "created_at_local": "2026-08-25T23:24:00+03:00",
+  "status": "FROZEN_BEFORE_SAMPLE_LEVEL_RESULT_INSPECTION",
+  "source": {
+    "request": "BODCREQ-9406",
+    "cruise": "CD169",
+    "instrument": "TOBI-02",
+    "raw_file": "CD169_TOBI/sd11285/TOBI.DAT",
+    "raw_file_sha256": "761d163482a44da0cc417a325372d6f3de163669b099ecc2f64c02a3282bcc59",
+    "block_bytes": 40960,
+    "samples_per_array_per_block": 4000,
+    "array_encoding": "signed_int16_little_endian",
+    "cadence_seconds": 4
+  },
+  "frozen_target": {
+    "target_utc": "2005-02-28T01:07:25Z",
+    "nearest_real_block_utc": "2005-02-28T01:07:24Z",
+    "nearest_real_block_index": 9812,
+    "nearest_real_block_sha256": "039b839861e515efe339542b8c57e5830bd484def961804f9c1fb61387132c3f",
+    "ground_coordinate_approx": {
+      "latitude": -3.8654180644718967,
+      "longitude": -12.142441475
+    },
+    "no_recenter": true
+  },
+  "arrays": [
+    "port_sidescan",
+    "stbd_sidescan",
+    "profiler",
+    "port_swath",
+    "stbd_swath"
+  ],
+  "stage_order": [
+    "S0_ARCHIVE_AND_FORMAT_METADATA_ONLY",
+    "S1_RECOVER_NATIVE_NAV_OR_DOCUMENT_ABSENCE",
+    "S2_EXTRACT_TIME_DEFINED_SAMPLE_LEVEL_BLOCK_SERIES",
+    "S3_MAP_SAMPLE_INDEX_TO_SENSOR_RELATIVE_RANGE_ONLY_IF_FORMAT_GEOMETRY_SUPPORTS_IT",
+    "S4_MAP_SENSOR_RELATIVE_SAMPLE_TO_EARTH_FIXED_FOOTPRINT_ONLY_WITH_VALIDATED_TOWFISH_NAV_GEOMETRY",
+    "S5_TEST_ADJACENT_BLOCK_PERSISTENCE",
+    "S6_TEST_GROUND_FIXED_REPLICATION_OR_DECLARE_BLOCKED",
+    "S7_ONLY_AFTER_G5_G6_G7_COMPARE_BLINDLY_WITH_GEOMETRY_CONTROLS"
+  ],
+  "time_windows": {
+    "primary_blocks": {
+      "start_index": 9804,
+      "end_index": 9820,
+      "count": 17,
+      "nominal_span_seconds": 64,
+      "definition": "8 blocks before + target block + 8 blocks after; selected solely from frozen time"
+    },
+    "extended_blocks": {
+      "start_index": 9767,
+      "end_index": 9857,
+      "count": 91,
+      "nominal_span_seconds": 360,
+      "definition": "approximately +/-180 s around frozen target; selected solely from frozen time"
+    }
+  },
+  "sample_level_metrics_allowed_before_ground_mapping": [
+    "raw_int16_value",
+    "within_block_robust_z_using_median_MAD",
+    "local_sample_contrast_against_fixed_neighborhood",
+    "adjacent_block_same_sample_index_persistence",
+    "port_stbd_index_mirror_comparison",
+    "cross_array_same_index_association"
+  ],
+  "fixed_sample_neighborhood": {
+    "half_width_samples": 20,
+    "rule": "local contrast uses exactly +/-20 samples excluding center; no adaptive neighborhood selection"
+  },
+  "robust_z_policy": {
+    "center": "array_median_per_block",
+    "scale": "1.4826 * MAD_per_block",
+    "zero_MAD_rule": "ROBUST_Z_NULL_NOT_INFINITY"
+  },
+  "candidate_ranking_policy": {
+    "purpose": "REVIEW_PRIORITY_ONLY",
+    "may_rank_before_ground_mapping": true,
+    "may_create_scientific_target_claim": false,
+    "score_components": [
+      "absolute_robust_z",
+      "absolute_fixed_neighborhood_contrast",
+      "adjacent_block_persistence"
+    ],
+    "posthoc_thresholds_for_anomaly_or_geometry": false
+  },
+  "navigation_gate": {
+    "native_towfish_nav_preferred": true,
+    "accepted_native_sources": [
+      "archived_towfish_navigation_file",
+      "archived_processed_navigation_product",
+      "documented_TO​BI_navigation_solution_with_time_and_coordinates"
+    ],
+    "ship_GPS_is_native_towfish_nav": false,
+    "cable_layback_estimate": {
+      "allowed": true,
+      "state": "APPROX_ONLY",
+      "may_pass_G5": false,
+      "required_inputs": [
+        "ship_position",
+        "wire_out",
+        "towfish_depth_or_pressure",
+        "tow_direction_or_track",
+        "documented_or_explicit_model_assumptions"
+      ]
+    }
+  },
+  "sample_to_ground_gate": {
+    "requires_documented_sample_geometry": true,
+    "requires_towfish_position": true,
+    "requires_heading_or_track": true,
+    "requires_altitude_or_slant_range_geometry_if_used": true,
+    "forbid_invented_sample_spacing": true,
+    "forbid_assuming_sample_index_equals_ground_range_without_documentation": true
+  },
+  "replication_gate": {
+    "adjacent_time_persistence_is_not_ground_fixed_replication": true,
+    "ground_fixed_replication_requires": [
+      "same_Earth_fixed_patch_observed_in_more_than_one_independent_ping_or crossing geometry",
+      "consistent sample-to-ground mapping",
+      "no recentering on the strongest sample"
+    ]
+  },
+  "mnemonic_role": {
+    "allowed": "retrieval cue and comparison label after measurement extraction",
+    "may_change_measurement_values": false,
+    "may_select_target_sample": false,
+    "may_define_geometry": false,
+    "mnemonic_tone_is_physical_frequency": false,
+    "mnemonic_glyph_is_geometry_class": false
+  },
+  "hard_rules": [
+    "RAW_BYTES_OUTRANK_MNEMONIC",
+    "TIME_SELECTION_PRECEDES_SAMPLE_INSPECTION",
+    "NO_ADAPTIVE_RECENTERING",
+    "SHIP_GPS_IS_NOT_TOWFISH_POSITION",
+    "LAYBACK_ONLY_IS_APPROX_AND_CANNOT_PASS_G5",
+    "NO_SAMPLE_TO_GROUND_WITHOUT_DOCUMENTED_GEOMETRY",
+    "NO_GEOMETRY_CLASS_BEFORE_G5_G6_G7",
+    "NO_POSTHOC_ANOMALY_THRESHOLD",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
