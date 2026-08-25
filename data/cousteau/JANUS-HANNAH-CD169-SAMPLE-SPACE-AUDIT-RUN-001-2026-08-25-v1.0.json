@@ -1,0 +1,203 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-SAMPLE-SPACE-AUDIT-RUN-001-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.sample_space_audit.v1",
+  "source_receipt": "data/cousteau/JANUS-HANNAH-CD169-SAMPLE-LEVEL-SPACE-REPLAY-RECEIPT-2026-08-25-v1.0.json",
+  "source_receipt_commit": "b97590f3694e1c1f1ccb7470cab9cfd8f369e1f9",
+  "workflow_run": 32897501310,
+  "workflow_artifact_id": 9581762247,
+  "workflow_artifact_zip_sha256": "afe3c61f3b9b19e3cf5978aa9e14d3229e43089369eede9da6527fe5dba935c7",
+  "audit_status": "PASS_TIME_TO_SAMPLE_AXIS__HOLD_AT_GROUND_FIXED_REPLICATION",
+  "gates": {
+    "G0_RAW_INTEGRITY": {
+      "state": "PASS",
+      "evidence": {
+        "raw_file_sha256": "761d163482a44da0cc417a325372d6f3de163669b099ecc2f64c02a3282bcc59",
+        "target_block_sha256": "039b839861e515efe339542b8c57e5830bd484def961804f9c1fb61387132c3f",
+        "record_count": 14536,
+        "block_size_bytes": 40960
+      }
+    },
+    "G1_RAW_CDF_TIME_IDENTITY": {
+      "state": "PASS",
+      "evidence": {
+        "raw_index": 9812,
+        "raw_utc": "2005-02-28T01:07:24Z",
+        "cdf_index": 9812,
+        "cdf_utc": "2005-02-28T01:07:24Z",
+        "cdf_nl": 14536,
+        "raw_record_count": 14536
+      }
+    },
+    "G2_RAW_TO_PRISM_LAYOUT": {
+      "state": "VALIDATED_FORMAT_MAPPING",
+      "evidence": {
+        "frozen_layout": {
+          "raw_transform": "ABS",
+          "bin_width": 8,
+          "bin_reducer": "MEAN",
+          "side_order": "STBD_THEN_PORT",
+          "starboard_reversed": true,
+          "port_reversed": false,
+          "target_pearson": 0.9999999640069195,
+          "target_spearman": 0.9997369297478124
+        },
+        "heldout_indices": [0,2422,4845,7267,9690,12112,14535],
+        "mapping_retuned": false,
+        "target_excluded": true,
+        "heldout_observed_correlations": {
+          "pearson_median": 0.99999994590391,
+          "pearson_min": 0.9999942088367345,
+          "spearman_median": 0.9997354401432174,
+          "spearman_min": 0.9929819623723605
+        },
+        "acceptance_threshold_used": null,
+        "interpretation": "identity-level reproduction is a format-layout observation; no scientific anomaly threshold is inferred"
+      }
+    },
+    "G3_RAW_SAMPLE_SPACING": {
+      "state": "CROSS_VALIDATED_FORMAT_SCALE",
+      "evidence": {
+        "cdf_ns": 1000,
+        "factor8_pixel_m": 6.0,
+        "full_resolution_pixel_m": 0.75,
+        "raw_sample_spacing_m": 0.75,
+        "physical_footprint_claim": false
+      }
+    },
+    "G4_TIME_TO_SAMPLE_AXIS": {
+      "state": "PASS_SAMPLE_819",
+      "evidence": {
+        "altitude_m": 614.0,
+        "spacing_m": 0.75,
+        "calculated_index": 819,
+        "stored_index": 819,
+        "selected_using_intensity": false
+      }
+    },
+    "G5_COARSE_TOWFISH_GEOLOCATION": {
+      "state": "PASS_DOCUMENTED_COARSE_INTERPOLATION",
+      "evidence": {
+        "recomputed_latitude": -3.8654195402298854,
+        "recomputed_longitude": -12.142442528735632,
+        "frozen_latitude": -3.8654180644718967,
+        "frozen_longitude": -12.142441475,
+        "absolute_delta_deg": {
+          "latitude": 1.4757579887003658e-06,
+          "longitude": 1.0537356320838853e-06
+        },
+        "source_reporting_resolution_deg": 0.001,
+        "per_ping_veh_nav": false
+      }
+    },
+    "G5B_PER_PING_VEH_NAV": {
+      "state": "BLOCKED",
+      "failure": "PER_PING_VEH_NAV_NOT_ARCHIVED_OR_NOT_FOUND",
+      "evidence": {
+        "ready_veh_nav_found_in_archive": false,
+        "cdf_sonar_latlon": [0.0,0.0]
+      }
+    },
+    "G6_SAMPLE_TO_APPROX_SPACE": {
+      "state": "PARTIAL_APPROX",
+      "evidence": {
+        "sample_index": 819,
+        "slant_range_m": 614.25,
+        "ground_range_m": 17.523198908875056,
+        "center_source": "interpolated documented TOBI science-log position",
+        "flat_slant_geometry_used": true,
+        "ground_fixed_proof": false
+      }
+    },
+    "G6B_FROZEN_NADIR_SAMPLE_REVIEW_STATE": {
+      "state": "OBSERVED_NOT_STRONG_TOP20_LOCALIZATION",
+      "evidence": {
+        "sample_index": 819,
+        "port_sidescan": {
+          "target_robust_z": -0.674491,
+          "local_contrast_z": -0.674491,
+          "primary_persistence": 0.674491,
+          "review_priority_score": 0.599583549,
+          "in_top20_review_priority": false
+        },
+        "stbd_sidescan": {
+          "target_robust_z": -0.656343,
+          "local_contrast_z": 0.0,
+          "primary_persistence": 0.656343,
+          "review_priority_score": 0.168348174,
+          "in_top20_review_priority": false
+        },
+        "port_swath": {
+          "target_robust_z": -0.580193,
+          "local_contrast_z": 0.99308,
+          "primary_persistence": 1.381366,
+          "review_priority_score": 0.667388889,
+          "in_top20_review_priority": false
+        },
+        "stbd_swath": {
+          "target_robust_z": -1.18998,
+          "local_contrast_z": -1.122008,
+          "primary_persistence": 1.154936,
+          "review_priority_score": 0.685497132,
+          "in_top20_review_priority": false
+        },
+        "single_sample_passport_equivalence_tested": false,
+        "scientific_absence_claim": false
+      }
+    },
+    "G7_GROUND_FIXED_REPLICATION": {
+      "state": "BLOCKED",
+      "failure": "NO_INDEPENDENT_EARTH_FIXED_REOBSERVATION_WITH_VALIDATED_PER_PING_FOOTPRINT"
+    },
+    "G8_GEOMETRY_CLASS": {
+      "state": "BLOCKED_NOT_TESTED",
+      "failure": "REQUIRES_GROUND_FIXED_REPLICATION"
+    },
+    "G9_PHYSICAL_ACOUSTIC_RESONANCE": {
+      "state": "BLOCKED_NOT_TESTED",
+      "failure": "NO_SUITABLE_PHYSICAL_SPECTRAL_PHASE_TEST_PERFORMED",
+      "evidence": {
+        "mnemonic_tone_is_physical_frequency": false
+      }
+    }
+  },
+  "janus_state": {
+    "TIME_TO_RAW_SAMPLE_AXIS": "VALIDATED",
+    "NEAREST_FROZEN_NADIR_SAMPLE": 819,
+    "COARSE_TOWFISH_POSITION": "DOCUMENTED_SCIENCE_LOG_INTERPOLATION",
+    "PER_PING_VEH_NAV": "BLOCKED",
+    "APPROX_SPACE_PROJECTION": "AVAILABLE_NOT_GROUND_FIXED",
+    "FROZEN_NADIR_SAMPLE_STRONG_LOCALIZATION": "NOT_OBSERVED_TOP20",
+    "GROUND_FIXED_REPLICATION": "BLOCKED",
+    "PYRAMID_LIKE_GEOMETRY": "NOT_TESTED",
+    "ACOUSTIC_RESONANCE": "NOT_TESTED",
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "posthoc_scientific_threshold_added": false,
+  "recentered": false,
+  "scientific_absence_claim": false,
+  "scientific_convergence_claim": false,
+  "next_gate": {
+    "id": "CD169_GROUND_FIXED_REPLICATION_V1",
+    "sequence": [
+      "RECOVER_OR_RECONSTRUCT_PER_PING_VEH_NAV_WITH_DOCUMENTED_PRISM_WIREOUT_MODEL_OR_INDEPENDENT_NAV_PRODUCT",
+      "PROPAGATE_POSITION_UNCERTAINTY_FROM_SPARSE_SCIENCE_LOG_IF_VEH_NAV_REMAINS_UNAVAILABLE",
+      "MAP_RAW_SAMPLE_SLANT_RANGE_TO_SEAFLOOR_USING_LOCAL_BATHYMETRY_AND_VEHICLE_GEOMETRY",
+      "FIND_AN_INDEPENDENT_OBSERVATION_OF_THE_SAME_EARTH_FIXED_PATCH_WITHOUT_RECENTERING",
+      "ONLY_THEN_TEST_BLIND_GEOMETRY_CONTROLS"
+    ]
+  },
+  "hard_rules": [
+    "RAW_BYTES_OUTRANK_MNEMONIC",
+    "RAW_SAMPLE_SPACING_IS_NOT_PHYSICAL_BEAM_FOOTPRINT_WIDTH",
+    "SCIENCE_LOG_TOWFISH_POSITION_IS_DOCUMENTED_BUT_COARSE",
+    "NO_PER_PING_VEH_NAV_CLAIM_WITHOUT_VEH_NAV",
+    "SAMPLE_819_WAS_SELECTED_FROM_ALTITUDE_AND_FORMAT_SCALE_NOT_INTENSITY",
+    "SAMPLE_819_NOT_TOP20_IS_NOT_ABSENCE_PROOF",
+    "NO_RECENTERING_TO_STRONG_OFF_NADIR_CLUSTERS",
+    "ADJACENT_SAMPLE_INDEX_PERSISTENCE_IS_NOT_GROUND_FIXED_REPLICATION",
+    "MNEMONIC_TONE_IS_NOT_PHYSICAL_ACOUSTIC_FREQUENCY",
+    "MNEMONIC_GLYPH_IS_NOT_SEAFLOOR_GEOMETRY",
+    "NO_GEOMETRY_CLASS_BEFORE_GROUND_FIXED_REPLICATION",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
