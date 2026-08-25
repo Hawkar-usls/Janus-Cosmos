@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-000-ACQUISITION-BLOCKED-2026-08-25-v0.1",
+  "schema": "janus.cosmos.cousteau.hannah_bodc.measurement_receipt.premeasurement.v0_1",
+  "date": "2026-08-25",
+  "status": "BLOCKED_RAW_BYTES_NOT_MOUNTED",
+  "parent_protocol": "data/cousteau/JANUS-HANNAH-BODC-BIDIRECTIONAL-CONVERGENCE-TO-CENTER-2026-08-25-v1.0.json",
+  "meta_registry_receipt_commit": "bc965f6fe7d997bf693a045365f26be684aa300e",
+  "measurement_claims_allowed": false,
+  "reason": {
+    "bodc_access_granted": true,
+    "raw_bytes_present_in_branch": false,
+    "connected_execution_device_available": false,
+    "consequence": "NO_SHA256_NO_HEAD_TAIL_VALUES_NO_MEASURED_CONVERGENCE_MAY_BE_CLAIMED"
+  },
+  "frozen_pipeline": "RAW_HASHES -> HEAD_TAIL_MIRROR -> TWO_FRONTS -> ASCENSION_CONVERGENCE -> 0012_0017_0022 -> 0037_CONTROL -> EA600_H0_H1_H2 -> PING_BEAM_GEOMETRY -> GROUND_FIXED_REPLICATION -> BLIND_SYNTHETIC_REPLAY -> ECHO_PYRAMID",
+  "edge_windows_seconds": [7200, 1800, 300, 60],
+  "priority_eof": "2015-11-02T15:43:57Z",
+  "target_window": ["2015-10-14", "2015-10-18"],
+  "smile_watchlist": ["jr15001_b_0012", "jr15001_b_0017", "jr15001_b_0022"],
+  "bad_control": "jr15001_b_0037",
+  "ea600_hypotheses": {
+    "H0": "INSTRUMENT_ONLY",
+    "H1": "REAL_MORPHOLOGY",
+    "H2": "REAL_TERRAIN_TRIGGERED_FAILURE"
+  },
+  "unblock_requires": "ORIGINAL_BODC_FILES_AVAILABLE_TO_AN_EXECUTION_ENVIRONMENT_OR_ATTACHED_TO_CHAT",
+  "next_receipt": "JANUS-HANNAH-BODC-MEASUREMENT-RECEIPT-001-RAW-HASH-AND-EDGE-MIRROR",
+  "hard_rules": [
+    "RAW_BYTES_OUTRANK_INTERPRETATION",
+    "NO_FAKE_HASHES",
+    "NO_MEASUREMENT_RECEIPT_WITHOUT_MEASUREMENT",
+    "NO_POINT_MORPHOLOGY_FROM_EM122_ACO_ALONE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
