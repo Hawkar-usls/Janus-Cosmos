@@ -62,7 +62,7 @@ jobs:
           print('contract_sha256', got)
           PY
       - name: Frozen v1 core self-test
-        run: python workspace/cousteau_synesthetic_memory_core.py --self-test
+        run: python workspace/cousteau_synesthetic_memory_core.py self-test
       - name: Frozen v1 core regression
         run: python workspace/test_cousteau_synesthetic_memory_core.py
       - name: Frozen v1 Cousteau semantic regression
