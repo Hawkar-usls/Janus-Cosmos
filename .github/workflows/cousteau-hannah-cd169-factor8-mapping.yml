@@ -1,0 +1,36 @@
+name: Cousteau Hannah CD169 Factor8 Mapping
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_factor8_prism_mapping_test.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-RAW-TO-PRISM-FACTOR8-MAPPING-HYPOTHESES-2026-08-25-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-factor8-mapping.yml'
+permissions:
+  contents: read
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check netCDF4==1.7.4
+      - name: Test frozen factor-8 format mapping hypotheses
+        id: m
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_factor8_prism_mapping_test.py \
+            --output out/JANUS-HANNAH-CD169-FACTOR8-MAPPING-TEST.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-factor8-mapping-test
+          path: out/JANUS-HANNAH-CD169-FACTOR8-MAPPING-TEST.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate failure
+        if: steps.m.outcome == 'failure'
+        run: exit 1
