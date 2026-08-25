@@ -1,0 +1,32 @@
+name: Cleanup BODC Probe Logs
+
+on:
+  push:
+    branches:
+      - janus-echo-cousteau
+    paths:
+      - '.github/workflows/cleanup-bodc-probe-logs.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete logs from superseded BODC probe runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for run_id in 32891589912 32891751732; do
+            code="$(curl -sS -o /dev/null -w '%{http_code}' \
+              -X DELETE \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H 'Accept: application/vnd.github+json' \
+              -H 'X-GitHub-Api-Version: 2022-11-28' \
+              "https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/runs/${run_id}/logs")"
+            echo "delete logs for run ${run_id}: HTTP ${code}"
+          done
