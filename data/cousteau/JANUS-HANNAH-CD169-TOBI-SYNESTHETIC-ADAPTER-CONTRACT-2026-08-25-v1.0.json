@@ -4,6 +4,11 @@
   "created_at_local": "2026-08-25T23:08:00+03:00",
   "status": "FROZEN_BEFORE_REAL_TOBI_SENSORY_SCORING",
   "freeze_timing": "AFTER_REAL_ARCHIVE_FORMAT_METADATA_AND_TIMESTAMP_LOCATION__BEFORE_SENSORY_SCORING",
+  "pre_scoring_correction": {
+    "reason": "README C declaration and adjacent offsets prove each sonar array is 4000 x 16-bit int, not 4000 bytes",
+    "applied_before_any_sensory_passport_scoring": true,
+    "previous_contract_commit": "0c21cc61ba7cff072bdbfdac50237be09009ef26"
+  },
   "parent_core": {
     "id": "JANUS_COUSTEAU_SYNESTHETIC_MEMORY_CORE",
     "version": "1.0.0",
@@ -15,6 +20,8 @@
     "instrument": "TOBI",
     "block_bytes": 40960,
     "cadence_seconds": 4,
+    "c_int_width_bytes_from_offsets": 2,
+    "byte_order": "little_endian",
     "format_authority": "BODC-provided README.doc inside CD169_TOBI archive",
     "readme_sha256": "9d96d4d64b613bb075e2234ca101517fdc3d9913e43254630d6ae9cd555c6b7d"
   },
@@ -28,19 +35,8 @@
     "raw_bytes_out_rank_adapter": true
   },
   "forbidden_from_fingerprint": [
-    "H0",
-    "H1",
-    "H2",
-    "pyramid",
-    "target",
-    "candidate",
-    "anomaly",
-    "verdict",
-    "prediction",
-    "interpretation",
-    "story",
-    "line_importance",
-    "expected_result"
+    "H0", "H1", "H2", "pyramid", "target", "candidate", "anomaly", "verdict",
+    "prediction", "interpretation", "story", "line_importance", "expected_result"
   ],
   "navigation_decode": {
     "ship_position_role": "SHIP_GPS_NOT_TOWFISH_POSITION",
@@ -54,42 +50,17 @@
     "validation_rule": "REQUIRE_MONOTONIC_4_SECOND_SEQUENCE_IN_REAL_BLOCKS"
   },
   "measurement_channels": {
-    "direct_context": [
-      "latitude",
-      "longitude",
-      "heading"
-    ],
+    "direct_context": ["latitude", "longitude", "heading"],
     "namespaced_numeric": [
-      "tobi_altitude",
-      "tobi_wire_out",
-      "tobi_water_path",
-      "tobi_pressure",
-      "tobi_temperature",
-      "tobi_conductivity",
-      "tobi_roll",
-      "tobi_pitch",
-      "tobi_magnetic_x",
-      "tobi_magnetic_y",
-      "tobi_magnetic_z",
-      "tobi_lss",
-      "port_sidescan_mean",
-      "port_sidescan_std",
-      "port_sidescan_entropy",
-      "stbd_sidescan_mean",
-      "stbd_sidescan_std",
-      "stbd_sidescan_entropy",
-      "sidescan_port_stbd_asymmetry",
-      "profiler_mean",
-      "profiler_std",
-      "profiler_entropy",
-      "port_swath_mean",
-      "port_swath_std",
-      "stbd_swath_mean",
-      "stbd_swath_std",
-      "swath_port_stbd_asymmetry",
-      "block_missing_fraction",
-      "timestamp_cadence",
-      "cadence_jitter"
+      "tobi_altitude", "tobi_wire_out", "tobi_water_path", "tobi_pressure",
+      "tobi_temperature", "tobi_conductivity", "tobi_roll", "tobi_pitch_raw",
+      "tobi_magnetic_x_raw", "tobi_magnetic_y_raw", "tobi_magnetic_z_raw", "tobi_lss",
+      "port_sidescan_mean", "port_sidescan_std", "port_sidescan_entropy8",
+      "stbd_sidescan_mean", "stbd_sidescan_std", "stbd_sidescan_entropy8",
+      "sidescan_port_stbd_asymmetry", "profiler_mean", "profiler_std", "profiler_entropy8",
+      "port_swath_mean", "port_swath_std", "port_swath_entropy8",
+      "stbd_swath_mean", "stbd_swath_std", "stbd_swath_entropy8",
+      "swath_port_stbd_asymmetry", "block_missing_fraction", "timestamp_cadence", "cadence_jitter"
     ]
   },
   "calibration_and_scaling": {
@@ -111,20 +82,24 @@
       "tobi_pitch_raw": 100.0,
       "tobi_magnetic_axis_raw": 200000.0,
       "tobi_lss_volts": 10.0,
-      "byte_intensity_mean": 255.0,
-      "byte_intensity_std": 128.0,
-      "byte_entropy_bits": 8.0
+      "sonar_int16_mean": 32768.0,
+      "sonar_int16_std": 32768.0,
+      "sonar_entropy8_bits": 8.0
     },
     "rule": "SCALES_ARE_FIXED_FROM_SENSOR_RANGE_AND_FORMAT_CONTEXT_NOT_FITTED_TO_TARGET_VALUES"
   },
   "array_summary_policy": {
-    "port_sidescan": {"offset_hex": "0x0240", "samples": 4000},
-    "stbd_sidescan": {"offset_hex": "0x2180", "samples": 4000},
-    "profiler": {"offset_hex": "0x40C0", "samples": 4000},
-    "port_swath": {"offset_hex": "0x6000", "samples": 4000},
-    "stbd_swath": {"offset_hex": "0x7F40", "samples": 4000},
-    "statistics": ["mean", "population_std", "shannon_entropy_8bit"],
-    "asymmetry": "(port_mean - stbd_mean) / max(port_mean + stbd_mean, epsilon)",
+    "sample_type": "signed_int16_little_endian",
+    "samples_per_array": 4000,
+    "bytes_per_array": 8000,
+    "port_sidescan": {"offset_hex": "0x0240"},
+    "stbd_sidescan": {"offset_hex": "0x2180"},
+    "profiler": {"offset_hex": "0x40C0"},
+    "port_swath": {"offset_hex": "0x6000"},
+    "stbd_swath": {"offset_hex": "0x7F40"},
+    "statistics": ["mean", "population_std", "shannon_entropy_of_high_byte_256_bins"],
+    "entropy_quantization": "((sample + 32768) >> 8) into 256 fixed bins",
+    "asymmetry": "(port_mean - stbd_mean) / max(abs(port_mean) + abs(stbd_mean), epsilon)",
     "no_shape_label_from_single_block": true
   },
   "window_lattice": {
