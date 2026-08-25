@@ -1,0 +1,38 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-RAW-TO-PRISM-FACTOR8-MAPPING-HYPOTHESES-2026-08-25-v1.0",
+  "schema": "janus.cosmos.cousteau.cd169.raw_to_prism_factor8_hypotheses.v1",
+  "status": "FROZEN_AFTER_CDF_DIMENSION_DISCOVERY_BEFORE_FACTOR8_CORRELATION_RUN",
+  "basis_only": {
+    "raw_port_samples": 4000,
+    "raw_stbd_samples": 4000,
+    "raw_total_sidescan_samples": 8000,
+    "cdf_ns": 1000,
+    "dimensional_ratio_raw_total_over_cdf": 8,
+    "external_prism_documentation": "PRISM raw2prism_tobi factor 8 is the standard recommendation and corresponds to 6 m/pixel when full resolution is 0.75 m/pixel"
+  },
+  "hypotheses": {
+    "factor": 8,
+    "per_side_output_samples": 500,
+    "side_orders": ["PORT_THEN_STBD", "STBD_THEN_PORT"],
+    "port_orientation": ["FORWARD", "REVERSE"],
+    "stbd_orientation": ["FORWARD", "REVERSE"],
+    "bin_reducers": ["MEAN", "MEDIAN", "SUM", "RMS", "MAX", "MIN"],
+    "decimation_phases": [0,1,2,3,4,5,6,7],
+    "signal_transforms": ["SIGNED", "ABS", "POSITIVE_ONLY"]
+  },
+  "ranking": {
+    "primary": "ABS_SPEARMAN",
+    "secondary": "ABS_PEARSON",
+    "purpose": "FORMAT_MAPPING_ONLY",
+    "acceptance_threshold": null,
+    "morphology_claim": false,
+    "target_claim": false
+  },
+  "hard_rules": [
+    "CDF_DIMENSION_MAY_IDENTIFY_SUBSAMPLING_BUT_NOT_SEAFLOOR_GEOMETRY",
+    "CORRELATION_IS_USED_ONLY_TO_RECOVER_DATA_LAYOUT",
+    "NO_SAMPLE_RECENTERING",
+    "NO_ANOMALY_THRESHOLD",
+    "NO_GEOMETRY_CLASS"
+  ]
+}
