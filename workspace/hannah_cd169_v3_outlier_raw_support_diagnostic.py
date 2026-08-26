@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, math, statistics
+import argparse, hashlib, math, statistics
 from datetime import datetime, timezone
 from pathlib import Path
 import json
@@ -35,44 +35,56 @@ def bearing_deg(a,b):
 
 def adiff(a,b):return abs((a-b+180)%360-180)
 
-def stats(xs):
-    return {'n':len(xs),'median':statistics.median(xs) if xs else None,'max':max(xs) if xs else None}
+def stats(xs):return {'n':len(xs),'median':statistics.median(xs) if xs else None,'max':max(xs) if xs else None}
 
 def normalize_locator_header(h,d):
-    gyro=h.get('gyro_raw') or []
-    pressure=h.get('pressure_raw') or []
+    gyro=h.get('gyro_raw') or [];pressure=h.get('pressure_raw') or []
     heading=v1.circ_mean([(float(x)/10.0)-10.1 for x in gyro]) if gyro else None
     press=float(statistics.median([(float(x)/10.0)-5.0 for x in pressure])) if pressure else None
-    return {
-      'utc':d,
-      'index':h.get('record_index'),
-      'heading_deg':heading,
-      'pressure_m_equiv':press,
-      'altitude_m':float(h.get('altitude_raw')) if h.get('altitude_raw') is not None else None,
-      'altitude_raw':h.get('altitude_raw'),
-      'block_sha256':h.get('block_sha256')
-    }
+    return {'utc':d,'index':h.get('record_index'),'heading_deg':heading,'pressure_m_equiv':press,'altitude_m':float(h.get('altitude_raw')) if h.get('altitude_raw') is not None else None,'altitude_raw':h.get('altitude_raw'),'block_sha256':h.get('block_sha256')}
 
-def actual_raw_header(files, starts, target):
+def rest_capture(path,start_index,count):
+    """Read a bounded block window using standard FTP REST byte offset."""
+    f=loc.ftp();buf=bytearray();want=count*loc.BLOCK
+    try:
+        sock=f.transfercmd('RETR '+path,rest=start_index*loc.BLOCK)
+        try:
+            while len(buf)<want:
+                b=sock.recv(min(1024*1024,want-len(buf)))
+                if not b:break
+                buf.extend(b)
+        finally:
+            try:sock.close()
+            except Exception:pass
+    finally:
+        try:f.close()
+        except Exception:pass
+    blocks=[]
+    for j in range(len(buf)//loc.BLOCK):
+        bb=bytes(buf[j*loc.BLOCK:(j+1)*loc.BLOCK]);h=loc.parse(bb);h['record_index']=start_index+j;h['block_sha256']=hashlib.sha256(bb).hexdigest();blocks.append(h)
+    return {'captured_bytes':len(buf),'blocks':blocks,'transport':'FTP_REST_BYTE_OFFSET'}
+
+def actual_raw_header(files,starts,target):
     candidates=[]
     for i,(st,e) in enumerate(starts):
-        nxt=starts[i+1][0] if i+1<len(starts) else None
-        est_end=st.timestamp()+4*e['record_count']
-        if st<=target and ((nxt and target<nxt) or (nxt is None and target.timestamp()<est_end+3600)):
-            candidates.append((st,e))
+        nxt=starts[i+1][0] if i+1<len(starts) else None;est_end=st.timestamp()+4*e['record_count']
+        if st<=target and ((nxt and target<nxt) or (nxt is None and target.timestamp()<est_end+3600)):candidates.append((st,e))
     near=sorted(starts,key=lambda x:abs((x[0]-target).total_seconds()))[:2]
-    by={e['relative_path']:(st,e) for st,e in candidates+near}
-    best=None;attempts=[]
+    by={e['relative_path']:(st,e) for st,e in candidates+near};best=None;attempts=[]
     for st,e in by.values():
         idx=max(0,min(e['record_count']-1,int(round((target-st).total_seconds()/4))))
         for _ in range(2):
-            s=max(0,idx-5);run=loc.stream_capture(e['path'],s,11);vals=[]
+            s=max(0,idx-5)
+            try:run=rest_capture(e['path'],s,11)
+            except Exception as ex:
+                attempts.append({'relative_path':e['relative_path'],'estimated_index':idx,'rest_error':f'{type(ex).__name__}: {ex}'});break
+            vals=[]
             for rawh in run['blocks']:
                 d=loc.dt_of(rawh)
                 if d:vals.append((abs((d-target).total_seconds()),d,rawh))
             if not vals:break
             vals.sort(key=lambda x:x[0]);delta,d,rawh=vals[0]
-            attempts.append({'relative_path':e['relative_path'],'estimated_index':idx,'nearest_index':rawh['record_index'],'nearest_utc':iso(d),'abs_delta_s':delta})
+            attempts.append({'relative_path':e['relative_path'],'estimated_index':idx,'nearest_index':rawh['record_index'],'nearest_utc':iso(d),'abs_delta_s':delta,'transport':run['transport']})
             h=normalize_locator_header(rawh,d)
             if best is None or delta<best[0]:best=(delta,d,h,e)
             signed=(d-target).total_seconds()
@@ -82,44 +94,34 @@ def actual_raw_header(files, starts, target):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--output',required=True,type=Path);a=ap.parse_args()
-    out={'schema':'janus.cosmos.cousteau.hannah_cd169.v3_outlier_raw_support_diagnostic.run.v1','contract':'JANUS-HANNAH-CD169-V3-OUTLIER-AND-RAW-SUPPORT-DIAGNOSTIC-CONTRACT-2026-08-26-v1.0','status':'STARTED','role':'DIAGNOSTIC_ONLY_NOT_PROMOTION_GATE','image_or_intensity_read':False,'model_retuned':False,'outliers_dropped':False}
+    out={'schema':'janus.cosmos.cousteau.hannah_cd169.v3_outlier_raw_support_diagnostic.run.v1','contract':'JANUS-HANNAH-CD169-V3-OUTLIER-AND-RAW-SUPPORT-DIAGNOSTIC-CONTRACT-2026-08-26-v1.0','status':'STARTED','role':'DIAGNOSTIC_ONLY_NOT_PROMOTION_GATE','image_or_intensity_read':False,'model_retuned':False,'outliers_dropped':False,'raw_window_transport':'FTP_REST_BYTE_OFFSET'}
     try:
         files=loc.data_files();starts=[];file_rows=[]
         for e in files:
-            h=loc.first_valid(e['path']);d=loc.dt_of(h)
-            file_rows.append({'relative_path':e['relative_path'],'size_bytes':e['size_bytes'],'record_count':e['record_count'],'first_valid':loc.compact(h)})
+            h=loc.first_valid(e['path']);d=loc.dt_of(h);file_rows.append({'relative_path':e['relative_path'],'size_bytes':e['size_bytes'],'record_count':e['record_count'],'first_valid':loc.compact(h)})
             if d:starts.append((d,e))
         starts.sort(key=lambda x:x[0]);out['raw_file_chronology']=file_rows
-        nr=v1.get(v1.NAV);cr=v1.get(v1.CABLE);nav=v1.parse_nav(nr);cable=v1.parse_cable(cr);v1.add_arc(nav)
-        rows=[]
+        nr=v1.get(v1.NAV);cr=v1.get(v1.CABLE);nav=v1.parse_nav(nr);cable=v1.parse_cable(cr);v1.add_arc(nav);rows=[]
         for tim,slat,slon,tlat,tlon,logged_lay in SCIENCE:
-            hh,mm,ss=map(int,tim.split(':'));t=datetime(2005,2,28,hh,mm,ss,tzinfo=timezone.utc)
-            best,attempts=actual_raw_header(files,starts,t)
+            hh,mm,ss=map(int,tim.split(':'));t=datetime(2005,2,28,hh,mm,ss,tzinfo=timezone.utc);best,attempts=actual_raw_header(files,starts,t)
             row={'anchor_utc':iso(t),'science_log_ship':{'lat':slat,'lon':slon},'science_log_tobi':{'lat':tlat,'lon':tlon,'layback_m':logged_lay},'raw_search_attempts':attempts}
             ext=v1.ship_state(nav,t);row['external_cd169_nav_ship']={'lat':ext['lat'],'lon':ext['lon']};row['external_ship_vs_science_log_ship_m']=v1.hav_m((ext['lat'],ext['lon']),(slat,slon))
-            logged_b=bearing_deg((slat,slon),(tlat,tlon));logged_d=v1.hav_m((slat,slon),(tlat,tlon));row['science_log_ship_to_tobi']={'distance_m':logged_d,'bearing_deg':logged_b}
-            tags=[]
+            logged_b=bearing_deg((slat,slon),(tlat,tlon));logged_d=v1.hav_m((slat,slon),(tlat,tlon));row['science_log_ship_to_tobi']={'distance_m':logged_d,'bearing_deg':logged_b};tags=[]
             if row['external_ship_vs_science_log_ship_m']>=1000:tags.append('SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE')
             if best:
                 delta,d,h,e=best;row['raw_support']={'relative_path':e['relative_path'],'record_index':h['index'],'utc':iso(d),'delta_s':(d-t).total_seconds(),'abs_delta_s':delta,'block_sha256':h.get('block_sha256')}
                 if delta<=10:tags.append('RAW_TIME_SUPPORT_GOOD')
                 elif delta>60:tags.append('RAW_TIME_SUPPORT_BOUNDARY')
                 rec=v2.reconstruct_v2(nav,cable,h);rb=(h['heading_deg']+180)%360 if h.get('heading_deg') is not None else None
-                row['raw_header']={'heading_deg':h.get('heading_deg'),'pressure_m_equiv':h.get('pressure_m_equiv'),'altitude_raw':h.get('altitude_raw')}
-                row['reciprocal_raw_heading_deg']=rb;row['bearing_mismatch_deg']=None if rb is None else adiff(rb,logged_b)
+                row['raw_header']={'heading_deg':h.get('heading_deg'),'pressure_m_equiv':h.get('pressure_m_equiv'),'altitude_raw':h.get('altitude_raw')};row['reciprocal_raw_heading_deg']=rb;row['bearing_mismatch_deg']=None if rb is None else adiff(rb,logged_b)
                 if row['external_ship_vs_science_log_ship_m']<=250 and row['bearing_mismatch_deg'] is not None and row['bearing_mismatch_deg']>=20:tags.append('HEADING_OR_TOW_DYNAMICS_CANDIDATE')
                 if rec.get('valid'):
                     row['v2_vehicle']=rec['vehicle'];row['v2_residual_to_science_log_tobi_m']=v1.hav_m((rec['vehicle']['lat'],rec['vehicle']['lon']),(tlat,tlon));row['v2_horizontal_layback_m']=rec['horizontal_layback_m'];row['v2_layback_delta_vs_science_log_m']=rec['horizontal_layback_m']-logged_lay
             else:row['raw_support']=None;tags.append('RAW_SUPPORT_NOT_LOCATED')
             row['diagnostic_tags']=tags;rows.append(row)
-        out['anchors']=rows
-        key={r['anchor_utc'][11:19]:r for r in rows}
-        out['focused_diagnostics']={'00:15':key.get('00:15:00'),'05:30':key.get('05:30:00'),'06:31':key.get('06:31:00')}
+        out['anchors']=rows;key={r['anchor_utc'][11:19]:r for r in rows};out['focused_diagnostics']={'00:15':key.get('00:15:00'),'05:30':key.get('05:30:00'),'06:31':key.get('06:31:00')}
         good=[r['raw_support']['abs_delta_s'] for r in rows if r.get('raw_support')]
-        out['summary']={'raw_files_found':len(files),'anchors':len(rows),'raw_support_abs_delta_s':stats(good),'anchors_with_good_raw_support':sum('RAW_TIME_SUPPORT_GOOD' in r['diagnostic_tags'] for r in rows),'ship_source_disagreement_candidates':[r['anchor_utc'] for r in rows if 'SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE' in r['diagnostic_tags']],'heading_or_tow_dynamics_candidates':[r['anchor_utc'] for r in rows if 'HEADING_OR_TOW_DYNAMICS_CANDIDATE' in r['diagnostic_tags']]}
-        out['status']='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_READY'
-    except Exception as e:
-        out['status']='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_FAILED';out['error_type']=type(e).__name__;out['error']=str(e)
-    a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
-    print(json.dumps({'status':out['status'],'summary':out.get('summary'),'focused':out.get('focused_diagnostics')},indent=2));return 0 if out['status']=='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_READY' else 2
+        out['summary']={'raw_files_found':len(files),'anchors':len(rows),'raw_support_abs_delta_s':stats(good),'anchors_with_good_raw_support':sum('RAW_TIME_SUPPORT_GOOD' in r['diagnostic_tags'] for r in rows),'ship_source_disagreement_candidates':[r['anchor_utc'] for r in rows if 'SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE' in r['diagnostic_tags']],'heading_or_tow_dynamics_candidates':[r['anchor_utc'] for r in rows if 'HEADING_OR_TOW_DYNAMICS_CANDIDATE' in r['diagnostic_tags']]};out['status']='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_READY'
+    except Exception as e:out['status']='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_FAILED';out['error_type']=type(e).__name__;out['error']=str(e)
+    a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8');print(json.dumps({'status':out['status'],'summary':out.get('summary'),'focused':out.get('focused_diagnostics')},indent=2));return 0 if out['status']=='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_READY' else 2
 if __name__=='__main__':raise SystemExit(main())
