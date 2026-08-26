@@ -38,34 +38,46 @@ def adiff(a,b):return abs((a-b+180)%360-180)
 def stats(xs):
     return {'n':len(xs),'median':statistics.median(xs) if xs else None,'max':max(xs) if xs else None}
 
+def normalize_locator_header(h,d):
+    gyro=h.get('gyro_raw') or []
+    pressure=h.get('pressure_raw') or []
+    heading=v1.circ_mean([(float(x)/10.0)-10.1 for x in gyro]) if gyro else None
+    press=float(statistics.median([(float(x)/10.0)-5.0 for x in pressure])) if pressure else None
+    return {
+      'utc':d,
+      'index':h.get('record_index'),
+      'heading_deg':heading,
+      'pressure_m_equiv':press,
+      'altitude_m':float(h.get('altitude_raw')) if h.get('altitude_raw') is not None else None,
+      'altitude_raw':h.get('altitude_raw'),
+      'block_sha256':h.get('block_sha256')
+    }
+
 def actual_raw_header(files, starts, target):
-    # Search chronologically plausible file(s), then correct index from observed timestamps.
     candidates=[]
     for i,(st,e) in enumerate(starts):
         nxt=starts[i+1][0] if i+1<len(starts) else None
         est_end=st.timestamp()+4*e['record_count']
         if st<=target and ((nxt and target<nxt) or (nxt is None and target.timestamp()<est_end+3600)):
             candidates.append((st,e))
-    # Also include nearest starting file on either side as robust support audit.
     near=sorted(starts,key=lambda x:abs((x[0]-target).total_seconds()))[:2]
     by={e['relative_path']:(st,e) for st,e in candidates+near}
-    best=None
-    attempts=[]
+    best=None;attempts=[]
     for st,e in by.values():
         idx=max(0,min(e['record_count']-1,int(round((target-st).total_seconds()/4))))
         for _ in range(2):
-            s=max(0,idx-5);run=loc.stream_capture(e['path'],s,11)
-            vals=[]
-            for h in run['blocks']:
-                d=loc.dt_of(h)
-                if d:vals.append((abs((d-target).total_seconds()),d,h))
+            s=max(0,idx-5);run=loc.stream_capture(e['path'],s,11);vals=[]
+            for rawh in run['blocks']:
+                d=loc.dt_of(rawh)
+                if d:vals.append((abs((d-target).total_seconds()),d,rawh))
             if not vals:break
-            vals.sort(key=lambda x:x[0]);delta,d,h=vals[0]
-            attempts.append({'relative_path':e['relative_path'],'estimated_index':idx,'nearest_index':h['record_index'],'nearest_utc':iso(d),'abs_delta_s':delta})
+            vals.sort(key=lambda x:x[0]);delta,d,rawh=vals[0]
+            attempts.append({'relative_path':e['relative_path'],'estimated_index':idx,'nearest_index':rawh['record_index'],'nearest_utc':iso(d),'abs_delta_s':delta})
+            h=normalize_locator_header(rawh,d)
             if best is None or delta<best[0]:best=(delta,d,h,e)
             signed=(d-target).total_seconds()
             if abs(signed)<=8:break
-            idx=max(0,min(e['record_count']-1,h['record_index']-int(round(signed/4))))
+            idx=max(0,min(e['record_count']-1,rawh['record_index']-int(round(signed/4))))
     return best,attempts
 
 def main():
@@ -89,7 +101,7 @@ def main():
             tags=[]
             if row['external_ship_vs_science_log_ship_m']>=1000:tags.append('SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE')
             if best:
-                delta,d,h,e=best;row['raw_support']={'relative_path':e['relative_path'],'record_index':h['record_index'],'utc':iso(d),'delta_s':(d-t).total_seconds(),'abs_delta_s':delta}
+                delta,d,h,e=best;row['raw_support']={'relative_path':e['relative_path'],'record_index':h['index'],'utc':iso(d),'delta_s':(d-t).total_seconds(),'abs_delta_s':delta,'block_sha256':h.get('block_sha256')}
                 if delta<=10:tags.append('RAW_TIME_SUPPORT_GOOD')
                 elif delta>60:tags.append('RAW_TIME_SUPPORT_BOUNDARY')
                 rec=v2.reconstruct_v2(nav,cable,h);rb=(h['heading_deg']+180)%360 if h.get('heading_deg') is not None else None
@@ -102,11 +114,7 @@ def main():
             row['diagnostic_tags']=tags;rows.append(row)
         out['anchors']=rows
         key={r['anchor_utc'][11:19]:r for r in rows}
-        out['focused_diagnostics']={
-          '00:15':key.get('00:15:00'),
-          '05:30':key.get('05:30:00'),
-          '06:31':key.get('06:31:00')
-        }
+        out['focused_diagnostics']={'00:15':key.get('00:15:00'),'05:30':key.get('05:30:00'),'06:31':key.get('06:31:00')}
         good=[r['raw_support']['abs_delta_s'] for r in rows if r.get('raw_support')]
         out['summary']={'raw_files_found':len(files),'anchors':len(rows),'raw_support_abs_delta_s':stats(good),'anchors_with_good_raw_support':sum('RAW_TIME_SUPPORT_GOOD' in r['diagnostic_tags'] for r in rows),'ship_source_disagreement_candidates':[r['anchor_utc'] for r in rows if 'SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE' in r['diagnostic_tags']],'heading_or_tow_dynamics_candidates':[r['anchor_utc'] for r in rows if 'HEADING_OR_TOW_DYNAMICS_CANDIDATE' in r['diagnostic_tags']]}
         out['status']='V3_OUTLIER_RAW_SUPPORT_DIAGNOSTIC_READY'
