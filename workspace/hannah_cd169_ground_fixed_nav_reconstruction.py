@@ -111,7 +111,7 @@ def point_at_arc(nav,arc):
     if j<=0:return {'lat':nav[0]['lat'],'lon':nav[0]['lon']}
     if j>=len(nav):return {'lat':nav[-1]['lat'],'lon':nav[-1]['lon']}
     a,b=nav[j-1],nav[j]; den=b['arc_m']-a['arc_m'];f=0 if den<=0 else (arc-a['arc_m'])/den
-    return {'lat':a['lat']+f*(b['lat']-a['lat']),'lon':a['lon']+f*(b['lon']-a['lon']}
+    return {'lat':a['lat']+f*(b['lat']-a['lat']),'lon':a['lon']+f*(b['lon']-a['lon'])}
 
 def reconstruct(nav,cable,h):
     c=interp_rows(cable,h['utc'],'cable_m');p=h['pressure_m_equiv'];total=c+UMBILICAL_M
