@@ -1,0 +1,36 @@
+name: Cousteau S47.3 E47.9 Nearest Track Geometry
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/cousteau_s47p3000_e47p9000_nearest_track_geometry.py'
+      - 'data/cousteau/JANUS-COUSTEAU-S47P3000-E47P9000-NEAREST-TRACK-GEOMETRY-FOLLOWUP-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-s47p3000-e47p9000-nearest-track.yml'
+permissions:
+  contents: read
+jobs:
+  nearest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests
+      - name: Calculate frozen point to ANTAC23 polyline distance
+        id: probe
+        continue-on-error: true
+        run: |
+          python workspace/cousteau_s47p3000_e47p9000_nearest_track_geometry.py \
+            --output out/JANUS-COUSTEAU-S47P3000-E47P9000-ANTAC23-NEAREST-GEOMETRY-RUN-001-2026-08-26-v1.0.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cousteau-s47p3000-e47p9000-antac23-nearest-geometry
+          path: out/JANUS-COUSTEAU-S47P3000-E47P9000-ANTAC23-NEAREST-GEOMETRY-RUN-001-2026-08-26-v1.0.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate failure after receipt preservation
+        if: steps.probe.outcome == 'failure'
+        run: exit 1
