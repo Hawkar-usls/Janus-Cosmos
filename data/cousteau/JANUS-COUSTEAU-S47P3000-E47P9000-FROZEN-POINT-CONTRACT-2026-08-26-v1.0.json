@@ -1,0 +1,80 @@
+{
+  "artifact_id": "JANUS-COUSTEAU-S47P3000-E47P9000-FROZEN-POINT-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.frozen_ocean_point_public_data_preflight.contract.v1",
+  "date": "2026-08-26",
+  "status": "FROZEN_BEFORE_PUBLIC_POINT_RESULTS",
+  "frozen_point": {
+    "latitude_deg": -47.3,
+    "longitude_deg_east": 47.9,
+    "source": "USER_SUPPLIED_COORDINATE",
+    "no_recenter": true
+  },
+  "purpose": "Check the supplied ocean coordinate through the Cousteau public-data lane without importing a morphology, anomaly, pyramid, target, or resonance hypothesis into measurement selection.",
+  "gates": {
+    "G0_COORDINATE_FREEZE": "PASS",
+    "G1_GLOBAL_BATHYMETRY_CONTEXT": "PENDING_GMRT_POINT_AND_LOCAL_CONTEXT",
+    "G2_NCEI_TRACKLINE_COVERAGE": "PENDING",
+    "G3_NCEI_MULTIBEAM_COVERAGE": "PENDING",
+    "G4_HIGH_RESOLUTION_LOCAL_DATA": "PENDING",
+    "G5_RAW_OR_PROCESSED_LOCAL_DATA_FETCH": "BLOCKED_UNTIL_G2_OR_G3_OR_G4_ADMITS_A_LOCAL_DATASET",
+    "G6_MORPHOLOGY": "BLOCKED",
+    "G7_ACOUSTIC_RESONANCE": "BLOCKED"
+  },
+  "pre_registered_sources": [
+    {
+      "id": "GMRT_POINTSERVER",
+      "endpoint": "https://www.gmrt.org/services/PointServer",
+      "role": "highest-resolution GMRT synthesis value available at exact point",
+      "authority_ceiling": "BATHYMETRY_CONTEXT_ONLY"
+    },
+    {
+      "id": "NOAA_NCEI_TRACKLINE_ARCGIS",
+      "endpoint": "https://gis.ngdc.noaa.gov/arcgis/rest/services/web_mercator/trackline_combined_dynamic/MapServer",
+      "buffers_km": [0,1,5,10,25,50],
+      "modalities": ["BATHYMETRY","GRAVITY","MAGNETICS","MULTI_CHANNEL_SEISMICS","SEISMIC_REFRACTION","SIDE_SCAN_SONAR","SINGLE_CHANNEL_SEISMICS","SUBBOTTOM_PROFILE"],
+      "authority_ceiling": "TRACKLINE_PROVENANCE_ONLY"
+    },
+    {
+      "id": "NOAA_NCEI_MULTIBEAM_DYNAMIC",
+      "endpoint": "https://gis.ngdc.noaa.gov/arcgis/rest/services/web_mercator/multibeam_dynamic/FeatureServer/0",
+      "buffers_km": [0,1,5,10,25,50],
+      "authority_ceiling": "MULTIBEAM_SURVEY_LINE_PROVENANCE_ONLY_UNLESS_SWATH_OR_FILE_GEOMETRY_IS_RECOVERED"
+    },
+    {
+      "id": "NOAA_NCEI_MULTIBEAM_DATASETS",
+      "endpoint": "https://gis.ngdc.noaa.gov/arcgis/rest/services/multibeam_datasets/MapServer",
+      "layers": [0,1,2],
+      "buffers_km": [0,1,5,10,25,50],
+      "authority_ceiling": "DATASET_GEOMETRY_PROVENANCE"
+    }
+  ],
+  "coverage_tiers": {
+    "TIER_A_EXACT_LOCAL": "authoritative measured track/swath/file/dataset geometry directly intersects frozen point",
+    "TIER_B_NEAR_LOCAL": "authoritative measured geometry lies within preregistered radius but exact frozen-point intersection is not proven",
+    "TIER_C_REGIONAL": "regional survey or global/interpolated grid context only"
+  },
+  "decision_rules": {
+    "if_exact_measured_geometry": "ADMIT_LOCAL_DATASET_AND_FETCH_RAWEST_AVAILABLE_PRODUCT_WITH_NAVIGATION",
+    "if_only_nearby_geometry": "RETAIN_AS_NEAR_LOCAL_CONTROL__DO_NOT_MOVE_POINT",
+    "if_no_queried_local_geometry": "PUBLIC_LOCAL_MEASURED_COVERAGE_NOT_FOUND_IN_QUERIED_INDEXES__NOT_ARCHIVE_ABSENCE",
+    "if_only_global_grid": "REPORT_DEPTH_CONTEXT_ONLY__NO_LOCAL_ACOUSTIC_OR_MORPHOLOGY_CLAIM"
+  },
+  "synesthetic_firewall": {
+    "enabled": true,
+    "rule": "MEASUREMENT -> SENSORY PASSPORT -> MEMORY/RETRIEVAL ONLY",
+    "verdict_authority": false,
+    "forbidden_inputs": ["anomaly","target","pyramid","candidate","verdict","prediction","interpretation"]
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_SHAPE_HYPOTHESIS_BEFORE_LOCAL_DATA_ADMISSION",
+    "NO_LOCAL_DATA_CLAIM_FROM_GLOBAL_INTERPOLATED_BATHYMETRY",
+    "TRACKLINE_CENTERLINE_NE_SWATH_FOOTPRINT",
+    "NEARBY_COVERAGE_NE_EXACT_POINT_COVERAGE",
+    "SEARCH_FAILURE_NE_ARCHIVE_ABSENCE",
+    "NEGATIVE_RESULTS_ARE_FIRST_CLASS",
+    "MNEMONIC_OUTPUT_NE_SCIENTIFIC_VERDICT",
+    "NO_UNDERWATER_STRUCTURE_CLAIM_FROM_PREFLIGHT"
+  ],
+  "next_gate": "COUSTEAU_S47P3000_E47P9000_PUBLIC_OCEAN_DATA_PREFLIGHT_RUN_001"
+}
