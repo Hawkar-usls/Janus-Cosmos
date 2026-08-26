@@ -1,0 +1,81 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-V3-PROCESS-JOURNAL-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.v3_process_journal.v1",
+  "date": "2026-08-26",
+  "status": "ACTIVE",
+  "contract": {
+    "path": "data/cousteau/JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-RECOVERY-V3-CONTRACT-2026-08-26-v1.0.json",
+    "commit": "bd53f8950dbb10da2c220dd37f230af42cf5b385"
+  },
+  "correction_recorded": {
+    "state": "DONE",
+    "corrected_scientific_boundary": "Earth-fixed coordinate is independently anchored by EM12; the unresolved link is frozen Earth-cell -> defensible TOBI feature replication, not mnemonic/time -> coordinate."
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "Freeze V3 before additional vehicle-navigation inspection",
+      "result": "PASS",
+      "details": "No V4 model, no recentering, no intensity-based selection, no post-hoc fitting."
+    },
+    {
+      "step": 2,
+      "action": "Cross-repository exact-string search for veh_nav / wireout / PRISM",
+      "result": "PARTIAL",
+      "details": {
+        "veh_nav": "Existing JANUS metadata/receipts found; no independent original CD169 .veh_nav bytes found in repository search.",
+        "wireout": "No exact source implementation found in user repositories during first pass.",
+        "PRISM": "Many JANUS references found, including an unrelated memory_graph_service_prism.py source-debt record. That record explicitly warns SAME_NAME_PRISM_NE_COMPONENT_IDENTITY and is treated as negative identity evidence, not sonar-processing code."
+      }
+    },
+    {
+      "step": 3,
+      "action": "Public-source recovery pass for historical NOC PRISM/TOBI navigation semantics",
+      "result": "STRONG_PARTIAL",
+      "details": [
+        "JC007 cruise processing report states that checked .nav and .cable files are passed to wireout, which dynamically models TOBI position and produces a .veh_nav file; mrgnav_inertia then correlates .veh_nav with imagery headers to calculate each ping position.",
+        "JC007 example processing uses mrgnav_inertia with a 200 m umbilical and navfile.veh_nav, and explicitly says cable values are taken from the cable file rather than TOBI header when -t is omitted.",
+        "JC024 report states wireout assumes cable drag and viscosity plus sidescan/towed-body effects and a depth value related to cable length, giving an initial TOBI-position estimate.",
+        "A historical PRISM processing report explains assumptions including straight cable, cable-value correctness, zero cable at depressor water-entry, an inertial navigation algorithm, a nominal 200 m umbilical plus a cruise/platform GPS-to-water-entry offset. These are generic historical semantics and are not yet CD169-specific configuration.",
+        "JR63 report independently warns that PRISM wireout navigation can behave poorly in turns and may push the vehicle outward, making V2 turn/outlier diagnostics scientifically relevant rather than removable noise."
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Re-inspect already preserved BODCREQ-9406 archive inventory without sonar feature selection",
+      "result": "NEW_V3_LEAD",
+      "details": {
+        "processed_prism_cdf_files_present": 11,
+        "paths": "CD169_TOBI/sd11281/TOBI/cd169p1.cdf ... cd169p11.cdf",
+        "importance": "These processed PRISM CDFs are a stronger V3 lead than constructing another navigation model. Their metadata/header/navigation variables may contain already-merged vehicle positions or enough provenance to identify the exact processing state."
+      }
+    },
+    {
+      "step": 5,
+      "action": "Audit V2 held-out support boundary",
+      "result": "ISSUE_FOUND",
+      "details": "The 06:31 science-log anchor was compared to nearest raw ping at 06:22:16 in V2. This is outside ordinary near-time support and must be separated from navigation residual statistics in V3 diagnostics; it is not to be silently dropped, but classified as TIME_SUPPORT_BOUNDARY."
+    }
+  ],
+  "current_leads_ranked": [
+    "Inspect cd169p*.cdf navigation metadata/headers and determine ship-vs-vehicle semantics",
+    "Search BODCREQ-9406 filenames/readmes for native .veh_nav, commands.cfg, wireout output, PRISM navigation products",
+    "Recover CD169-specific commands/configuration from archive or CD169 report/materials",
+    "Diagnose 00:15 and 05:30 residuals against turn geometry, raw gyro continuity, science-log source and PRISM known turn behavior",
+    "Only after native/calibrated navigation authority passes: remap frozen Earth-cell and re-test geometry-selected raw sample"
+  ],
+  "cross_repo_assistance": {
+    "allowed": true,
+    "repos_are_one_organism": true,
+    "first_pass_result": "No exact sonar PRISM wireout source recovered from other repos yet; janus-meta-registry provided prior provenance receipts and a useful same-name identity guard."
+  },
+  "scientific_state": {
+    "EARTH_CELL_IN_INDEPENDENT_EM12": "ANCHORED",
+    "TOBI_HISTORICAL_NAV_V2": "HELDOUT_DOMINANCE_PASS_WITH_V3_SUPPORT_AUDIT_PENDING",
+    "NATIVE_VEH_NAV": "BLOCKED",
+    "CALIBRATED_PROCESSED_VEH_NAV": "INVESTIGATING_CDF",
+    "GROUND_FIXED_TOBI_FEATURE_REPLICATION": "NOT_ESTABLISHED",
+    "PROMOTE_TO_GEOMETRY_TEST": false,
+    "UNDERWATER_PYRAMID_DETECTED": false
+  }
+}
