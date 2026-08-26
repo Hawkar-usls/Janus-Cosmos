@@ -1,0 +1,63 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-V3B-CDF-VEHICLE-NAV-SEMANTICS-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.v3b_cdf_vehicle_nav_semantics.contract.v1",
+  "date": "2026-08-26",
+  "status": "FROZEN_BEFORE_CDF_LATLON_VALUE_INSPECTION",
+  "parent_gate": "CD169_NATIVE_OR_CALIBRATED_VEH_NAV_RECOVERY_V3",
+  "archive_metadata_already_observed": {
+    "cdf_files": 11,
+    "latlon_global_attribute": "sonar position: lat/lon signed decimal degrees",
+    "ship_latlon_global_attribute": "ship position: lat/lon signed decimal degrees",
+    "creation_programs_seen": ["raw2prism_tobi", "hdredit"]
+  },
+  "question": "Does archived PRISM CDF latlon provide a defensible per-ping sonar/vehicle-navigation product distinct from ship_latlon, and where does it place the already frozen Earth-cell at the target ping?",
+  "allowed_reads": [
+    "date",
+    "time",
+    "seconds",
+    "latlon",
+    "ship_latlon",
+    "ss_attributes",
+    "ss_attributes_tobi",
+    "depths",
+    "global metadata"
+  ],
+  "forbidden_reads": [
+    "image/intensity/backscatter arrays",
+    "sample amplitudes",
+    "any feature ranking used to choose ping or coordinate"
+  ],
+  "semantic_tests": {
+    "S1_DIRECT_METADATA": "The CDF must self-describe latlon as sonar position and ship_latlon as ship position.",
+    "S2_SHIP_CONTROL": "At matched times, ship_latlon must track independent cd169.nav materially better than latlon does. Frozen dominance rule: median(ship_latlon-to-cd169.nav) < median(latlon-to-cd169.nav).",
+    "S3_SEPARATION": "latlon and ship_latlon must not be numerically identical over the target/anchor interval; report per-row separation without fitting.",
+    "S4_HISTORICAL_TOBI_CHECK": "At science-log TOBI anchors, report latlon-to-log and ship_latlon-to-log residuals. The log is a historical consistency check, not independent absolute ground truth.",
+    "S5_NO_FIT": "No offsets, yaw corrections, current terms, temporal shifts or coordinate translations may be fitted."
+  },
+  "target_rule": {
+    "frozen_utc": "2005-02-28T01:07:25Z",
+    "frozen_latitude": -3.8654180644718967,
+    "frozen_longitude": -12.142441475,
+    "row_selection": "nearest archived CDF timestamp to frozen UTC, chosen by time only",
+    "mapping": "Use archived CDF sonar position plus CDF header heading/fish_altitude if valid; otherwise use already frozen raw-header heading/altitude. Convert Earth-cell offset to cross-track/slant range and 0.75 m raw sample axis without intensity inspection.",
+    "material_sample_shift_rule": "Report exact geometry-selected raw sample. Do not define a new threshold after seeing it. Compare descriptively with prior 819 and V2 821; any later feature read must use only this geometry-selected sample."
+  },
+  "promotion": {
+    "G3B_PASS_IF": [
+      "S1 direct archived semantics pass",
+      "S2 ship control dominance pass",
+      "target has finite per-ping latlon and timestamp",
+      "no fitting/recentering/intensity selection occurred"
+    ],
+    "authority_if_pass": "ARCHIVED_PRISM_CDF_CALIBRATED_SONAR_NAVIGATION_PRODUCT; not the original intermediate .veh_nav bytes",
+    "native_veh_nav_state_if_pass": "STILL_NOT_RECOVERED"
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_POSTHOC_NAV_FIT",
+    "NO_INTENSITY_READ_BEFORE_GEOMETRY_FREEZE",
+    "CDF_LATLON_NE_NATIVE_VEH_NAV_BYTES",
+    "SCIENCE_LOG_CHECK_NE_INDEPENDENT_ABSOLUTE_GROUND_TRUTH",
+    "NO_GEOMETRY_OR_OBJECT_CLASSIFICATION_FROM_NAVIGATION_ALONE"
+  ]
+}
