@@ -1,0 +1,39 @@
+name: Cousteau Hannah CD169 V2 Support Corrected Audit V3
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_v2_support_corrected_audit_v3.py'
+      - '.github/workflows/cousteau-hannah-cd169-v2-support-corrected-audit-v3.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install NetCDF reader
+        run: python -m pip install --disable-pip-version-check netCDF4 numpy
+      - name: Syntax check
+        run: python -m py_compile workspace/hannah_cd169_v2_support_corrected_audit_v3.py workspace/hannah_cd169_ground_fixed_nav_reconstruction.py workspace/hannah_cd169_veh_nav_directional_repair_v2.py
+      - name: Audit unchanged V2 with correct cross-file header support
+        id: audit
+        continue-on-error: true
+        working-directory: workspace
+        run: |
+          python hannah_cd169_v2_support_corrected_audit_v3.py \
+            --output ../out/JANUS-HANNAH-CD169-V2-SUPPORT-CORRECTED-AUDIT-V3-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-v2-support-corrected-audit-v3
+          path: out/JANUS-HANNAH-CD169-V2-SUPPORT-CORRECTED-AUDIT-V3-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate execution failure after receipt preservation
+        if: steps.audit.outcome == 'failure'
+        run: exit 1
