@@ -1,0 +1,71 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-VEH-NAV-DIRECTIONAL-REPAIR-V2-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.veh_nav_directional_repair_v2.contract.v1",
+  "status": "FROZEN_AFTER_V1_FAILURE_AND_TARGET_REGION_GEOMETRY_INSPECTION__BEFORE_HELDOUT_ANCHOR_RESIDUALS_OR_V2_MAPPED_SAMPLE_VALUES",
+  "provenance": {
+    "v1_contract_commit": "6a58c20b25a16fc20256275d0d807d8c61e17e04",
+    "v1_result": "LAYBACK_MAGNITUDE_REPRODUCED_BUT_WALKBACK_ALONG_SHIP_TRACK_HAS_LARGE_DIRECTIONAL_POSITION_RESIDUALS",
+    "v1_all_anchor_residual_median_m": 885.3115032561124,
+    "v1_all_anchor_residual_p90_m": 2675.2096508509367,
+    "v1_abs_layback_delta_median_m": 12.149614308085802,
+    "hypothesis_generation_note": "V2 was proposed after observing V1 directional failure and the target-region ship/frozen geometry. Therefore target-period anchors are discovery data and cannot validate V2."
+  },
+  "fixed_model": {
+    "name": "RECIPROCAL_TOBI_GYRO_LAYBACK_V2",
+    "ship_position": "time-interpolated archived PRISM input cd169.nav",
+    "external_cable": "time-interpolated archived PRISM input cd169.cable final numeric field",
+    "umbilical_m": 200.0,
+    "depth_term": "per-ping raw TOBI median pressure_raw/10-5 used as metre-equivalent vertical term",
+    "horizontal_layback_formula": "sqrt(max(0,(external_cable_m + 200.0)^2 - pressure_m_equiv^2))",
+    "layback_bearing_formula": "(raw_tobi_circular_gyro_heading_deg + 180.0) mod 360",
+    "vehicle_position_formula": "geodesic destination from interpolated ship position along layback_bearing by horizontal_layback_m",
+    "gyro_transform": "circular mean of eight samples after raw/10 - 10.1 deg calibration already used in prior frozen target parser",
+    "extra_heading_offset_deg": 0.0,
+    "extra_position_offset_m": 0.0,
+    "current_drift_correction": false,
+    "heading_smoothing": false,
+    "posthoc_parameter_tuning": false,
+    "native_PRISM_wireout_equivalence_claim": false
+  },
+  "discovery_region_excluded_from_validation": {
+    "anchors_utc": ["2005-02-28T01:00:00Z","2005-02-28T01:29:00Z"],
+    "frozen_target_utc": "2005-02-28T01:07:25Z",
+    "reason": "target-period geometry influenced V2 hypothesis generation"
+  },
+  "heldout_science_log_anchors": [
+    "2005-02-28T00:00:00Z","2005-02-28T00:15:00Z","2005-02-28T00:29:00Z",
+    "2005-02-28T02:00:00Z","2005-02-28T02:30:00Z","2005-02-28T03:00:00Z",
+    "2005-02-28T03:30:00Z","2005-02-28T04:00:00Z","2005-02-28T04:30:00Z",
+    "2005-02-28T05:00:00Z","2005-02-28T05:30:00Z","2005-02-28T06:00:00Z","2005-02-28T06:31:00Z"
+  ],
+  "validation": {
+    "science_log_role": "HISTORICAL_NAVIGATION_MODEL_OUTPUT_NOT_INDEPENDENT_ABSOLUTE_GROUND_TRUTH",
+    "compare_v1_and_v2_on_exact_same_13_heldout_anchors": true,
+    "directional_repair_dominance_pass": "V2 heldout residual median < V1 heldout residual median AND V2 heldout residual p90 < V1 heldout residual p90",
+    "absolute_accuracy_threshold_m": null,
+    "forbidden": ["fit gyro offset","fit cable multiplier","fit current vector","fit position translation","drop bad heldout anchors after seeing residuals"]
+  },
+  "target_mapping_after_validation_metrics_are_computed": {
+    "frozen_coordinate": {"latitude": -3.8654180644718967,"longitude": -12.142441475},
+    "raw_sample_spacing_m": 0.75,
+    "cross_track_formula": "project target minus reconstructed vehicle into raw TOBI heading frame",
+    "sample_index_formula": "round(sqrt(raw_altitude_m^2 + cross_track_m^2)/0.75)",
+    "side_from_cross_track_sign": true,
+    "intensity_used_for_mapping": false,
+    "read_mapped_sample_value_only_after_geometry_is_frozen": true
+  },
+  "interpretation_ceiling": {
+    "if_dominance_pass": "HELDOUT_REPRODUCTION_OF_HISTORICAL_TOBI_NAVIGATION_IMPROVED__NOT_NATIVE_VEH_NAV_AND_NOT_ABSOLUTE_GROUND_TRUTH",
+    "if_fail": "RECIPROCAL_HEADING_MODEL_REJECTED_OR_INSUFFICIENT",
+    "em12_state": "independent Earth-fixed EM12 bathymetry already covers frozen cell in two processed line groups; it does not retroactively validate V2 navigation"
+  },
+  "hard_rules": [
+    "TARGET_REGION_IS_DISCOVERY_NOT_VALIDATION",
+    "NO_PARAMETER_RETUNING_AFTER_HELDOUT_RESIDUALS",
+    "NO_INTENSITY_BASED_NAVIGATION",
+    "NO_NATIVE_VEH_NAV_CLAIM",
+    "SCIENCE_LOG_NAV_IS_NOT_INDEPENDENT_GROUND_TRUTH",
+    "EM12_IS_INDEPENDENT_BATHYMETRY_NOT_A_TOBI_NAV_LABEL",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
