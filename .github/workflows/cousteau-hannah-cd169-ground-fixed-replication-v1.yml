@@ -1,0 +1,46 @@
+name: Cousteau Hannah CD169 Ground Fixed Replication V1
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_ground_fixed_nav_reconstruction.py'
+      - 'workspace/hannah_bodc_9406_space_archive_scout.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-ground-fixed-replication-v1.yml'
+permissions:
+  contents: read
+jobs:
+  ground-fixed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax check frozen reconstruction before network run
+        run: python -m py_compile workspace/hannah_cd169_ground_fixed_nav_reconstruction.py workspace/hannah_bodc_9406_space_archive_scout.py
+      - name: Reconstruct historical wireout-track navigation and map frozen cell
+        id: nav
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_ground_fixed_nav_reconstruction.py \
+            --output out/JANUS-HANNAH-CD169-GROUND-FIXED-NAV-RECONSTRUCTION-RUN-001.json
+      - name: Metadata-only independent-observation archive search
+        id: scout
+        continue-on-error: true
+        run: |
+          python workspace/hannah_bodc_9406_space_archive_scout.py \
+            --output out/JANUS-HANNAH-CD169-G7B-ARCHIVE-SCOUT-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-ground-fixed-replication-v1
+          path: |
+            out/JANUS-HANNAH-CD169-GROUND-FIXED-NAV-RECONSTRUCTION-RUN-001.json
+            out/JANUS-HANNAH-CD169-G7B-ARCHIVE-SCOUT-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate scientific pipeline execution failure after receipts
+        if: steps.nav.outcome == 'failure' || steps.scout.outcome == 'failure'
+        run: exit 1
