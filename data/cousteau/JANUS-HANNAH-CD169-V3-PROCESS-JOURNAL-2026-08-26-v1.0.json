@@ -21,7 +21,7 @@
     {
       "step": 2,
       "action": "Cross-repository exact-string search for veh_nav / wireout / PRISM",
-      "result": "PARTIAL",
+      "result": "PARTIAL_NEGATIVE",
       "details": {
         "veh_nav": "Existing JANUS metadata/receipts found; no independent original CD169 .veh_nav bytes found in repository search.",
         "wireout": "No exact source implementation found in user repositories during first pass.",
@@ -33,47 +33,139 @@
       "action": "Public-source recovery pass for historical NOC PRISM/TOBI navigation semantics",
       "result": "STRONG_PARTIAL",
       "details": [
-        "JC007 cruise processing report states that checked .nav and .cable files are passed to wireout, which dynamically models TOBI position and produces a .veh_nav file; mrgnav_inertia then correlates .veh_nav with imagery headers to calculate each ping position.",
-        "JC007 example processing uses mrgnav_inertia with a 200 m umbilical and navfile.veh_nav, and explicitly says cable values are taken from the cable file rather than TOBI header when -t is omitted.",
-        "JC024 report states wireout assumes cable drag and viscosity plus sidescan/towed-body effects and a depth value related to cable length, giving an initial TOBI-position estimate.",
-        "A historical PRISM processing report explains assumptions including straight cable, cable-value correctness, zero cable at depressor water-entry, an inertial navigation algorithm, a nominal 200 m umbilical plus a cruise/platform GPS-to-water-entry offset. These are generic historical semantics and are not yet CD169-specific configuration.",
-        "JR63 report independently warns that PRISM wireout navigation can behave poorly in turns and may push the vehicle outward, making V2 turn/outlier diagnostics scientifically relevant rather than removable noise."
+        "JC007 processing report states that checked .nav and .cable files are passed to wireout, which dynamically models TOBI position and produces a .veh_nav file; mrgnav_inertia then correlates .veh_nav with imagery headers to calculate each ping position.",
+        "JC007 documents one example with mrgnav_inertia using a 200 m umbilical, while other cruises use materially different -u values. Therefore 200 m remains historical/contextual for CD169 unless CD169-specific provenance is recovered.",
+        "JC024 describes wireout as a physical towed-body estimate using cable drag, viscosity, sidescan/towed-body effects and a depth term related to cable length.",
+        "Historical reports show cruise/platform-specific umbilical/GPS-to-water-entry configuration varies (examples include 0, 147, 172, 182, 202 in different contexts), so generic configuration transfer to CD169 is forbidden.",
+        "JR63 independently documents weak/incorrect PRISM navigation behavior in turns and a western-longitude processing problem; this is contextual support for diagnostics, not CD169-specific calibration."
       ]
     },
     {
       "step": 4,
-      "action": "Re-inspect already preserved BODCREQ-9406 archive inventory without sonar feature selection",
-      "result": "NEW_V3_LEAD",
+      "action": "Re-inspect preserved BODCREQ-9406 archive inventory without sonar feature selection",
+      "result": "CDF_LEAD_FOUND",
       "details": {
         "processed_prism_cdf_files_present": 11,
         "paths": "CD169_TOBI/sd11281/TOBI/cd169p1.cdf ... cd169p11.cdf",
-        "importance": "These processed PRISM CDFs are a stronger V3 lead than constructing another navigation model. Their metadata/header/navigation variables may contain already-merged vehicle positions or enough provenance to identify the exact processing state."
+        "importance": "Archive contains raw2prism-era CDF products plus cd169.nav/cd169.cable, allowing a navigation-stage provenance test without inventing V4."
       }
     },
     {
       "step": 5,
-      "action": "Audit V2 held-out support boundary",
-      "result": "ISSUE_FOUND",
-      "details": "The 06:31 science-log anchor was compared to nearest raw ping at 06:22:16 in V2. This is outside ordinary near-time support and must be separated from navigation residual statistics in V3 diagnostics; it is not to be silently dropped, but classified as TIME_SUPPORT_BOUNDARY."
+      "action": "Archive-native vehicle-navigation scout across all BODCREQ-9406 entries and small text files",
+      "result": "NEGATIVE_CURRENT_ARCHIVE",
+      "details": {
+        "workflow_run": 32962867609,
+        "artifact_id": 9604613480,
+        "artifact_zip_sha256": "51bd33706290dc3425cd684ba2e6172375c1feac69ab844cb633d73ef8b9671c",
+        "entries_scanned": 96,
+        "native_veh_nav_filename_found": false,
+        "commands_cfg_filename_found": false,
+        "wireout_text_found": false,
+        "only_relevant_small_text_hit": "CD169_TOBI/sd11281/README.txt",
+        "interpretation": "No native .veh_nav or CD169 commands.cfg is present in the currently exposed BODCREQ-9406 tree under the tested existence/text search. This does not prove the files never existed or are absent from offline/originator holdings."
+      }
+    },
+    {
+      "step": 6,
+      "action": "Inspect metadata/header variables of all 11 archived cd169p*.cdf without reading imagery/intensity",
+      "result": "NAVIGATION_STAGE_CLUE",
+      "details": {
+        "workflow_run": 32962802705,
+        "artifact_id": 9604533720,
+        "artifact_zip_sha256": "a1349dcde55749e4844ff59ae8f4feb1a4071de0f8628d2822cd3dab8a40baee",
+        "cdf_files_opened": 11,
+        "candidate_variables": ["date", "depths", "latlon", "seconds", "ship_latlon", "time"],
+        "global_latlon_semantics": "sonar position: lat/lon signed decimal degrees",
+        "global_ship_latlon_semantics": "ship position: lat/lon signed decimal degrees",
+        "creation_programs_observed": ["raw2prism_tobi", "hdredit"],
+        "image_or_intensity_arrays_read": false
+      }
+    },
+    {
+      "step": 7,
+      "action": "Run frozen V3B relative-semantics gate on CDF latlon vs ship_latlon",
+      "result": "FORMAL_PASS_LATER_REJECTED",
+      "details": {
+        "workflow_run": 32963174028,
+        "artifact_id": 9604686117,
+        "artifact_zip_sha256": "17f2a7cf6505ba6cfce7f5d90d3e24ce3a5fe277ddec5cf16d03073f48a7061f",
+        "formal_output": "V3B_CDF_CALIBRATED_SONAR_NAV_PASS",
+        "scientific_disposition": "REJECTED_FALSE_POSITIVE",
+        "reason": "The frozen criterion used relative ship-vs-sonar dominance but lacked an absolute physical sanity requirement. Target latlon was 0,0 and ship_latlon was also physically wrong. Preserving this failed checker is part of the audit trail rather than deleting it."
+      }
+    },
+    {
+      "step": 8,
+      "action": "Post-run CDF navigation-stage and signed-degree conversion diagnostic",
+      "result": "CDF_PRE_MRGNAV_STAGE_DIAGNOSED",
+      "details": {
+        "workflow_run": 32963449426,
+        "artifact_id": 9604777643,
+        "artifact_zip_sha256": "bc87741de6d061c82bb477b1c6f85e9ef923085d590fcf150d4b008a5e5291f7",
+        "cdf_rows_total": 102040,
+        "latlon_exact_zero_zero_rows": 102040,
+        "latlon_valid_nonzero_rows": 0,
+        "vehicle_coordinate_channel_state": "UNPOPULATED_ZERO_ZERO",
+        "ship_latlon_bug_hypothesis": "For negative signed degree D, raw2prism appears to have used D + minutes/60 instead of D - minutes/60. Deterministic inverse on observed x is corrected = 2*floor(x)-x.",
+        "ship_latlon_raw_to_external_cd169_nav_median_m": 132494.4062619384,
+        "ship_latlon_signbug_inverse_to_external_cd169_nav_median_m": 25.214989701944923,
+        "ship_latlon_signbug_inverse_p90_m": 49.88677699086194,
+        "median_improvement_factor": 5254.588949989483,
+        "parameters_fitted": false,
+        "target_row": {
+          "file": "cd169p5.cdf",
+          "row_index": 9812,
+          "utc": "2005-02-28T01:07:24Z",
+          "latlon": [0.0, 0.0],
+          "raw_ship_latlon": [-2.185166676839193, -11.878666663169861],
+          "deterministically_corrected_ship_latlon": [-3.814833323160807, -12.121333336830139],
+          "external_cd169_nav": [-3.81466, -12.12144],
+          "corrected_ship_residual_m": 22.615994490468502,
+          "cdf_tobi_header_pressure_and_cable": [3407.0, 7733.0],
+          "external_cable_m": 6728.4
+        },
+        "scientific_disposition": {
+          "G3B_CALIBRATED_NAV_PRODUCT": "FAIL_CDF_NOT_CALIBRATED_VEHICLE_NAV",
+          "cdf_stage": "PRE_MRGNAV_OR_NAVIGATION_NOT_MERGED",
+          "native_veh_nav_recovered": false
+        }
+      }
+    },
+    {
+      "step": 9,
+      "action": "Open V3 outlier/raw-file support diagnostic with explicit non-promotion contract",
+      "result": "RUNNING",
+      "details": {
+        "contract": "data/cousteau/JANUS-HANNAH-CD169-V3-OUTLIER-AND-RAW-SUPPORT-DIAGNOSTIC-CONTRACT-2026-08-26-v1.0.json",
+        "contract_commit": "19d640554908645a285be3a3a39a3509c44285cc",
+        "goals": [
+          "search every archived TOBI.DAT/TOBIA.DAT file for actual support at 06:31 instead of reusing sd11285 boundary",
+          "quantify 00:15 external ship-nav vs science-log ship-nav disagreement",
+          "quantify 05:30 reciprocal-heading vs logged tow-vector mismatch while preserving the outlier"
+        ]
+      }
     }
   ],
   "current_leads_ranked": [
-    "Inspect cd169p*.cdf navigation metadata/headers and determine ship-vs-vehicle semantics",
-    "Search BODCREQ-9406 filenames/readmes for native .veh_nav, commands.cfg, wireout output, PRISM navigation products",
-    "Recover CD169-specific commands/configuration from archive or CD169 report/materials",
-    "Diagnose 00:15 and 05:30 residuals against turn geometry, raw gyro continuity, science-log source and PRISM known turn behavior",
-    "Only after native/calibrated navigation authority passes: remap frozen Earth-cell and re-test geometry-selected raw sample"
+    "Recover the actual intermediate CD169 .veh_nav from originator/offline holdings if available; current BODCREQ-9406 archive exposure is negative for the filename.",
+    "Recover CD169-specific PRISM commands/configuration and exact wireout source/manual semantics; generic later-cruise -u values are not transferable.",
+    "Complete all-raw-file support and source-disagreement diagnostics for 00:15, 05:30 and 06:31 without deleting any anchor.",
+    "Use the deterministic raw2prism western-coordinate defect only as provenance/format diagnosis; do not turn the empty CDF latlon channel into reconstructed TOBI navigation.",
+    "Only after G3A native .veh_nav, a genuinely calibrated independent vehicle-nav product, or defensible exact CD169 wireout reproduction passes: remap the already frozen Earth-cell and inspect only the geometry-selected raw sample."
   ],
   "cross_repo_assistance": {
     "allowed": true,
     "repos_are_one_organism": true,
-    "first_pass_result": "No exact sonar PRISM wireout source recovered from other repos yet; janus-meta-registry provided prior provenance receipts and a useful same-name identity guard."
+    "first_pass_result": "No exact sonar PRISM wireout source or original CD169 .veh_nav recovered from the user's other repositories. janus-meta-registry contributed prior provenance receipts and the explicit SAME_NAME_PRISM_NE_COMPONENT_IDENTITY guard."
   },
   "scientific_state": {
     "EARTH_CELL_IN_INDEPENDENT_EM12": "ANCHORED",
-    "TOBI_HISTORICAL_NAV_V2": "HELDOUT_DOMINANCE_PASS_WITH_V3_SUPPORT_AUDIT_PENDING",
-    "NATIVE_VEH_NAV": "BLOCKED",
-    "CALIBRATED_PROCESSED_VEH_NAV": "INVESTIGATING_CDF",
+    "TOBI_HISTORICAL_NAV_V2": "HELDOUT_DOMINANCE_PASS_WITH_OUTLIER_SOURCE_AUDIT_ACTIVE",
+    "NATIVE_VEH_NAV": "BLOCKED_CURRENT_ARCHIVE_NEGATIVE",
+    "CALIBRATED_PROCESSED_VEH_NAV": "CDF_CANDIDATE_REJECTED_PRE_MRGNAV",
+    "CDF_LATLON": "UNPOPULATED_ZERO_ZERO_102040_OF_102040",
+    "RAW2PRISM_WESTERN_COORDINATE_SIGN_BUG": "STRONGLY_SUPPORTED_BY_NO_FIT_INVERSE",
     "GROUND_FIXED_TOBI_FEATURE_REPLICATION": "NOT_ESTABLISHED",
     "PROMOTE_TO_GEOMETRY_TEST": false,
     "UNDERWATER_PYRAMID_DETECTED": false
