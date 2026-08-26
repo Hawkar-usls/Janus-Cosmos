@@ -1,0 +1,52 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-V3-OUTLIER-AND-RAW-SUPPORT-DIAGNOSTIC-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.v3_outlier_raw_support_diagnostic.contract.v1",
+  "date": "2026-08-26",
+  "status": "FROZEN_BEFORE_FULL_RAW_FILE_SUPPORT_AUDIT",
+  "parent_gate": "CD169_NATIVE_OR_CALIBRATED_VEH_NAV_RECOVERY_V3",
+  "role": "DIAGNOSTIC_ONLY_NOT_A_PROMOTION_GATE",
+  "questions": [
+    "Which archived TOBI.DAT/TOBIA.DAT file actually supports each science-log anchor, including 06:31 UTC?",
+    "At 00:15, is the large V2 residual dominated by disagreement between archived cd169.nav ship position and the ship position written in the science log?",
+    "At 05:30, does ship navigation remain consistent while raw TOBI heading/reciprocal-layback direction disagrees with the logged ship-to-TOBI vector, consistent with a turn/inertial/catenary diagnostic case?"
+  ],
+  "frozen_inputs": {
+    "raw_record_size_bytes": 40960,
+    "nominal_raw_cadence_seconds": 4,
+    "external_ship_nav": "sd11281/TOBI/cd169.nav",
+    "external_cable": "sd11281/TOBI/cd169.cable",
+    "science_log_source": "official CD169 cruise report TOBI science log line 19",
+    "v2_model": "external cable + 200 m, raw pressure vertical term, reciprocal raw TOBI gyro heading; no fitted parameters"
+  },
+  "anchors_of_interest": [
+    "2005-02-28T00:15:00Z",
+    "2005-02-28T05:30:00Z",
+    "2005-02-28T06:31:00Z"
+  ],
+  "diagnostic_outputs": [
+    "actual raw file and nearest raw ping timestamp for every science-log anchor",
+    "raw-file time-support gap in seconds",
+    "external cd169.nav ship position versus science-log ship position residual",
+    "science-log ship-to-TOBI distance and bearing",
+    "raw TOBI gyro heading and reciprocal bearing",
+    "absolute circular bearing mismatch",
+    "V2 reconstructed vehicle residual to logged TOBI position",
+    "descriptive evidence tags only"
+  ],
+  "descriptive_tags": {
+    "SHIP_NAV_SOURCE_DISAGREEMENT_CANDIDATE": "external ship nav vs science-log ship residual >= 1000 m",
+    "HEADING_OR_TOW_DYNAMICS_CANDIDATE": "ship-source residual <= 250 m AND reciprocal-heading vs logged tow-vector bearing mismatch >= 20 deg",
+    "RAW_TIME_SUPPORT_GOOD": "nearest real raw ping within 10 s of anchor",
+    "RAW_TIME_SUPPORT_BOUNDARY": "nearest real raw ping more than 60 s from anchor"
+  },
+  "interpretation_boundary": "Tags are diagnostics selected after prior residual inspection and therefore may explain mechanisms but may not be used as a blinded model-validation pass.",
+  "hard_rules": [
+    "NO_OUTLIER_DELETION",
+    "NO_MODEL_RETUNING",
+    "NO_TEMPORAL_SHIFT_FITTING",
+    "NO_INTENSITY_OR_IMAGE_READ",
+    "NO_RECENTERING",
+    "06_31_MUST_BE_SEARCHED_ACROSS_ALL_RAW_FILES_NOT_ONLY_SD11285",
+    "DIAGNOSTIC_EXPLANATION_NE_NATIVE_VEH_NAV_RECOVERY"
+  ]
+}
