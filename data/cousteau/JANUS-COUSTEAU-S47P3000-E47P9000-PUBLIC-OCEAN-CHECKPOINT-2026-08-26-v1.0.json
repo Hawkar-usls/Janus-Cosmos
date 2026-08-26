@@ -1,0 +1,159 @@
+{
+  "artifact_id": "JANUS-COUSTEAU-S47P3000-E47P9000-PUBLIC-OCEAN-CHECKPOINT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.frozen_ocean_point_public_checkpoint.v1",
+  "date": "2026-08-26",
+  "status": "GLOBAL_DEPTH_CONTEXT_PASS__NO_LOCAL_HIGHRES_OR_MULTIBEAM__REGIONAL_SINGLEBEAM_ONLY",
+  "frozen_point": {
+    "latitude": -47.3,
+    "longitude": 47.9,
+    "recentered": false
+  },
+  "contract": {
+    "path": "data/cousteau/JANUS-COUSTEAU-S47P3000-E47P9000-FROZEN-POINT-CONTRACT-2026-08-26-v1.0.json",
+    "commit": "7a744225152c39397c5d4323f41d0d2b826901f8"
+  },
+  "process_audit": {
+    "run_001": {
+      "workflow_run": 33008384500,
+      "artifact_id": 9621492948,
+      "artifact_zip_sha256": "2b677d3e5f2f88458505b879ef57477ae27ba6a0ed50119f32d27aab98eeb419",
+      "disposition": "RETAINED_WITH_TWO_HARNESS_DEFECTS",
+      "defects": [
+        "GMRT PointServer returned elevation as a numeric string and RUN-001 extractor treated it as null.",
+        "G3 multibeam summary accidentally inherited a generic nearby trackline hit; raw multibeam counts were nevertheless zero."
+      ]
+    },
+    "run_002": {
+      "workflow_run": 33008728554,
+      "artifact_id": 9621622753,
+      "artifact_zip_sha256": "c84f342143e47ad199af9a3f14668b9bce521403e83722dc6b57f356b8385a1d",
+      "code_commit": "fce1de617b6aecc31d74bbdacf0164d7d5695d8f",
+      "disposition": "CANONICAL_CORRECTED_PREFLIGHT",
+      "coordinate_changed": false,
+      "source_selection_changed": false
+    },
+    "nearest_track_followup": {
+      "contract_path": "data/cousteau/JANUS-COUSTEAU-S47P3000-E47P9000-NEAREST-TRACK-GEOMETRY-FOLLOWUP-CONTRACT-2026-08-26-v1.0.json",
+      "contract_commit": "eae44be948c83547da1d5356c39e02619f9f9e07",
+      "workflow_run": 33008990553,
+      "artifact_id": 9621716454,
+      "artifact_zip_sha256": "84128cedb123f36510b8fff42c579897940fd1e02b4e2b9df8064831a9224ae1",
+      "bathymetry_values_read": false
+    }
+  },
+  "gmrt": {
+    "pointserver_url": "https://www.gmrt.org/services/PointServer",
+    "exact_elevation_m": -3439.0,
+    "interpretation": "Approximate water depth context is 3439 m below sea level. PointServer returns the highest-resolution value available in the GMRT synthesis, but the separate high-resolution mask establishes that this location is not covered by GMRT curated high-resolution ocean data in the tested local window.",
+    "fixed_neighborhood_offsets_deg": 0.05,
+    "fixed_neighborhood_elevations_m": [
+      {"latitude": -47.35, "longitude": 47.85, "elevation_m": -3453.0},
+      {"latitude": -47.35, "longitude": 47.9, "elevation_m": -3437.0},
+      {"latitude": -47.35, "longitude": 47.95, "elevation_m": -3407.0},
+      {"latitude": -47.3, "longitude": 47.85, "elevation_m": -3470.0},
+      {"latitude": -47.3, "longitude": 47.9, "elevation_m": -3439.0},
+      {"latitude": -47.3, "longitude": 47.95, "elevation_m": -3410.0},
+      {"latitude": -47.25, "longitude": 47.85, "elevation_m": -3430.0},
+      {"latitude": -47.25, "longitude": 47.9, "elevation_m": -3468.0},
+      {"latitude": -47.25, "longitude": 47.95, "elevation_m": -3470.0}
+    ],
+    "neighborhood_min_elevation_m": -3470.0,
+    "neighborhood_max_elevation_m": -3407.0,
+    "neighborhood_range_m": 63.0,
+    "neighborhood_authority": "GLOBAL_SYNTHESIS_CONTEXT_ONLY_NOT_LOCAL_MORPHOLOGY",
+    "high_resolution_topo_mask": {
+      "window": {"south": -47.35, "north": -47.25, "west": 47.85, "east": 47.95},
+      "format": "ArcASCII",
+      "grid_cells": 33306,
+      "valid_high_resolution_cells": 0,
+      "valid_fraction": 0.0,
+      "exact_point_high_resolution_cell": false,
+      "nearest_valid_high_resolution_cell": null,
+      "interpretation": "No GMRT curated high-resolution ocean bathymetry is present anywhere in the tested 0.1 x 0.1 degree local window."
+    }
+  },
+  "ncei_trackline": {
+    "exact_point_modalities": [],
+    "within_1km_modalities": [],
+    "within_5km_modalities": [],
+    "within_10km_modalities": [],
+    "within_25km_modalities": ["BATHYMETRY"],
+    "within_50km_modalities": ["BATHYMETRY", "GRAVITY", "MAGNETICS", "SINGLE_CHANNEL_SEISMICS"],
+    "nearest_bathymetry_survey": {
+      "survey_id": "ANTAC23",
+      "survey_type": "Bathymetry",
+      "instrument_source": "Japan Oceanographic Data Center (JODC)",
+      "country": "Japan",
+      "platform": "Fuji",
+      "survey_year": 1981,
+      "nearest_centerline_distance_km": 24.630277522724363,
+      "nearest_centerline_latitude": -47.305360276230594,
+      "nearest_centerline_longitude": 48.22654790973711,
+      "geometry_segments_evaluated": 192,
+      "tier": "TIER_C_REGIONAL_TRACKLINE_CONTEXT_ONLY",
+      "point_coverage_claim": false,
+      "z_values_read_in_geometry_followup": false
+    },
+    "bathymetry_surveys_within_50km": [
+      {"survey_id": "ANTAC23", "platform": "Fuji", "survey_year": 1981},
+      {"survey_id": "MD34", "platform": "Marion Dufresne", "survey_year": 1983},
+      {"survey_id": "JARE28L3", "platform": "Shirase", "survey_year": 1987},
+      {"survey_id": "RC1704", "platform": "Robert D. Conrad", "survey_year": 1974}
+    ],
+    "regional_geophysics_within_50km": {
+      "gravity": ["JARE28L3", "RC1704"],
+      "magnetics": ["RC1704"],
+      "single_channel_seismics": ["RC1704"]
+    },
+    "authority": "NEARBY_OR_REGIONAL_TRACKLINE_PROVENANCE_ONLY"
+  },
+  "ncei_multibeam": {
+    "dynamic_centerline_exact_count": 0,
+    "dynamic_centerline_positive_hit_within_50km": false,
+    "dataset_product_hit_within_50km": false,
+    "dataset_processed_hit_within_50km": false,
+    "dataset_raw_hit_within_50km": false,
+    "canonical_gate": "NO_HIT_WITHIN_50KM_IN_QUERIED_NCEI_SERVICES",
+    "absence_boundary": "This is a negative result for the queried NCEI indexes, not proof that no bathymetric measurement exists in any repository."
+  },
+  "janus_gate_state": {
+    "G0_COORDINATE_FREEZE": "PASS",
+    "G1_GLOBAL_BATHYMETRY_CONTEXT": "PASS_DEPTH_APPROX_3439M",
+    "G2_LOCAL_TRACKLINE": "NO_EXACT_OR_WITHIN_10KM__ANTAC23_AT_24P63KM_REGIONAL_ONLY",
+    "G3_LOCAL_MULTIBEAM": "NO_HIT_WITHIN_50KM_IN_QUERIED_NCEI_INDEXES__NO_GMRT_HIGHRES_MASK_IN_LOCAL_WINDOW",
+    "G4_LOCAL_HIGH_RESOLUTION_DATA": "NOT_ADMITTED",
+    "G5_LOCAL_DATA_FETCH": "HOLD",
+    "G6_MORPHOLOGY": "BLOCKED_NOT_TESTED",
+    "G7_SYNESTHETIC_SCIENTIFIC_VERDICT": "FORBIDDEN",
+    "G8_ACOUSTIC_RESONANCE": "BLOCKED_NOT_TESTED",
+    "UNDERWATER_STRUCTURE_DETECTED": false
+  },
+  "scientific_readout": {
+    "allowed": [
+      "The frozen point has a GMRT synthesis elevation of approximately -3439 m.",
+      "No GMRT curated high-resolution bathymetry occurs in the tested local 0.1 x 0.1 degree window.",
+      "No NCEI multibeam survey/dataset hit was found within 50 km in the queried services.",
+      "The nearest discovered NCEI single-beam bathymetry centerline is ANTAC23 at approximately 24.63 km, so it is regional context rather than a measurement at the frozen point."
+    ],
+    "forbidden": [
+      "Classifying the frozen point morphology from the low-resolution/global synthesis.",
+      "Calling ANTAC23 a measurement of the frozen point.",
+      "Inferring an artificial structure, anomaly, pyramid-like form, or acoustic resonance from this preflight."
+    ]
+  },
+  "next_gate": {
+    "id": "S47P3000_E47P9000_EXTERNAL_ARCHIVE_EXPANSION_OPTIONAL_V1",
+    "state": "OPTIONAL_NOT_REQUIRED_FOR_CURRENT_NEGATIVE_LOCAL_COVERAGE_RESULT",
+    "candidate_sources": ["IHO_DCDB", "other institutional bathymetry repositories", "cruise-specific archives discovered by provenance search"],
+    "rule": "Only a measured geometry/data product intersecting the unchanged frozen point can reopen local morphology analysis."
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_LOCAL_MORPHOLOGY_FROM_GLOBAL_GRID",
+    "SINGLEBEAM_TRACKLINE_NE_MULTIBEAM_SWATH",
+    "24P63KM_NEARBY_TRACK_NE_POINT_MEASUREMENT",
+    "SEARCH_FAILURE_NE_GLOBAL_ARCHIVE_ABSENCE",
+    "NEGATIVE_RESULTS_ARE_FIRST_CLASS",
+    "MNEMONIC_OUTPUT_NE_SCIENTIFIC_VERDICT"
+  ]
+}
