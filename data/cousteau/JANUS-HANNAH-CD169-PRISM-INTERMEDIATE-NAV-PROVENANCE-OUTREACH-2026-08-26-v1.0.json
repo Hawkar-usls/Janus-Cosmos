@@ -1,0 +1,59 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-PRISM-INTERMEDIATE-NAV-PROVENANCE-OUTREACH-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.prism_intermediate_nav_provenance_outreach.v1",
+  "date": "2026-08-26",
+  "status": "SENT_WAITING_FOR_BODC_RESPONSE",
+  "parent_gate": "CD169_NATIVE_OR_CALIBRATED_VEH_NAV_RECOVERY_V3",
+  "parent_debt": "CD169_PRISM_INTERMEDIATE_NAV_PROVENANCE_DEBT",
+  "thread": {
+    "request_id": "BODCREQ-9406",
+    "cruise": "CD169",
+    "instrument": "TOBI-02",
+    "gmail_thread_id": "1a032d7567d5a27e",
+    "reply_message_id": "1a03e97d2bd971b1",
+    "recipient_role": "BODC Requests Team / Hannah Revett",
+    "cc_role": "BODC general requests mailbox"
+  },
+  "scientific_boundary": "The Earth-fixed target cell is independently anchored by EM12. The unresolved link is frozen Earth-cell -> defensible TOBI feature replication at that same cell. This outreach seeks historical vehicle-navigation provenance only; it does not seek a new fitted navigation solution.",
+  "requested_items": [
+    "CD169 PRISM-derived *.veh_nav / navfile.veh_nav or equivalent intermediate TOBI vehicle-navigation output",
+    "CD169 commands.cfg, shell scripts, processing logs, history files, or README material containing wireout and/or mrgnav_inertia invocation",
+    "exact PRISM version used for CD169 and corresponding manual/source/binary provenance if available",
+    "original processing-directory file listing/inventory if the intermediate files no longer survive"
+  ],
+  "why_requested": [
+    "The exposed archive contains cd169.nav and cd169.cable plus raw2prism-era CDF products.",
+    "All 102040 archived CDF latlon rows are zero-zero despite metadata describing latlon as sonar position, consistent with a pre-mrgnav or navigation-not-merged stage.",
+    "Cruise/platform-specific wireout and mrgnav_inertia parameters vary historically, so parameters from another cruise must not be transferred to CD169 without provenance.",
+    "Authoritative historical processing provenance is required before remapping the frozen-cell raw sample or promoting a ground-fixed TOBI feature claim."
+  ],
+  "explicit_non_request": [
+    "Do not require modern reprocessing as a substitute for historical provenance.",
+    "Do not fit a new V4 navigation model inside V3.",
+    "Do not recenter the frozen Earth-cell to a stronger sonar sample."
+  ],
+  "current_gate_state": {
+    "G3A_NATIVE_VEH_NAV": "BLOCKED_CURRENT_ARCHIVE_NEGATIVE",
+    "G3B_CALIBRATED_NAV_PRODUCT": "FAIL_CDF_PRE_MRGNAV",
+    "G3C_EXACT_WIREOUT_REPRODUCTION": "BLOCKED_SOURCE_CONFIG_NOT_RECOVERED",
+    "G3D_OUTLIER_DIAGNOSTICS": "PASS_DIAGNOSTIC",
+    "G3E_FOOTPRINT_RETEST": "BLOCKED",
+    "PRIOR_V2_FROZEN_CELL_SAMPLE": 821,
+    "V3_AUTHORITY_TO_REMAP_SAMPLE": false,
+    "GROUND_FIXED_TOBI_FEATURE_REPLICATION": "NOT_ESTABLISHED"
+  },
+  "response_handling_gate": {
+    "if_native_veh_nav_received": "HASH_ORIGINAL_BYTES -> verify time coverage -> compare against science-log anchors without tuning -> remap frozen cell geometrically -> inspect only resulting sample",
+    "if_commands_or_exact_wireout_config_received": "HASH_OR_CAPTURE_PROVENANCE -> reproduce exact historical chain without fitting -> held-out anchor validation -> remap only after pass",
+    "if_only_directory_listing_received": "Use as provenance evidence to identify original intermediate filenames/stages; do not treat listing alone as vehicle coordinates",
+    "if_no_intermediate_provenance_exists": "Keep G3A/G3C blocked and preserve V2 sample 821 as approximate only"
+  },
+  "process_integrity": {
+    "recentered": false,
+    "posthoc_nav_fit": false,
+    "outliers_dropped": false,
+    "new_sample_inspected": false,
+    "V4_navigation_model_created": false
+  },
+  "public_attribution": "British Oceanographic Data Centre (BODC) Requests Team / National Oceanography Centre — primary-data access and provenance assistance"
+}
