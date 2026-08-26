@@ -1,0 +1,211 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-RECEIPT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.ground_fixed_replication.receipt.v1",
+  "status": "EARTH_CELL_ANCHORED_BY_INDEPENDENT_EM12__TOBI_HISTORICAL_NAV_V2_IMPROVED__GROUND_FIXED_FEATURE_REPLICATION_NOT_ESTABLISHED",
+  "frozen_target": {
+    "utc": "2005-02-28T01:07:25Z",
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475,
+    "raw_ping_index": 9812,
+    "raw_ping_utc": "2005-02-28T01:07:24Z",
+    "raw_sample_spacing_m": 0.75
+  },
+  "contracts": {
+    "ground_fixed_v1": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-CONTRACT-2026-08-26-v1.0.json",
+      "commit": "6a58c20b25a16fc20256275d0d807d8c61e17e04"
+    },
+    "em12_coverage": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-G7B-EM12-COVERAGE-CONTRACT-2026-08-26-v1.0.json",
+      "commit": "d5ea124eb0ff9957b889237fe717290d271a52de"
+    },
+    "veh_nav_v2": {
+      "path": "data/cousteau/JANUS-HANNAH-CD169-VEH-NAV-DIRECTIONAL-REPAIR-V2-CONTRACT-2026-08-26-v1.0.json",
+      "commit": "1439d196573d0b2a57dec3f337f707283f510769"
+    }
+  },
+  "v1_wireout_track_result": {
+    "workflow_run": 32960511770,
+    "workflow_artifact_id": 9603732996,
+    "workflow_artifact_zip_sha256": "eb3947d05f2ce6ef9dc77ad7e02f790e64f6cc3250591e1358695145a8331ed7",
+    "model": "horizontal layback magnitude + walk backward along historical ship track",
+    "all_anchor_residual_median_m": 885.3115032561124,
+    "all_anchor_residual_p90_m": 2675.2096508509367,
+    "all_anchor_residual_max_m": 4613.720339983608,
+    "abs_layback_delta_median_m": 12.149614308085802,
+    "abs_layback_delta_p90_m": 16.870680913222895,
+    "result": "LAYBACK_MAGNITUDE_REPRODUCED__DIRECTIONAL_POSITION_MODEL_INSUFFICIENT",
+    "parameter_retuning_after_result": false
+  },
+  "veh_nav_directional_repair_v2": {
+    "workflow_run": 32961323708,
+    "workflow_artifact_id": 9603984167,
+    "workflow_artifact_zip_sha256": "6614523f969061f7c56722bcadf8dca1ee20a0a53e23d22e5953fd665f20f926",
+    "model": "same frozen horizontal layback magnitude projected from ship on reciprocal raw TOBI gyro heading",
+    "discovery_region_excluded_from_validation": ["2005-02-28T01:00:00Z","2005-02-28T01:29:00Z","target epoch"],
+    "heldout_n": 13,
+    "v1_same_heldout": {
+      "median_residual_m": 834.9755959722695,
+      "p90_residual_m": 2670.065700626157,
+      "max_residual_m": 4613.720339983608
+    },
+    "v2_heldout": {
+      "median_residual_m": 116.23842045021642,
+      "p90_residual_m": 1695.6104609129748,
+      "max_residual_m": 4147.310164134658
+    },
+    "frozen_dominance_rule": "V2 median < V1 median AND V2 p90 < V1 p90",
+    "directional_repair_dominance_pass": true,
+    "parameters_tuned_after_heldout_results": false,
+    "notable_heldout_examples_m": {
+      "2005-02-28T00:29:00Z": 60.26966800846867,
+      "2005-02-28T02:30:00Z": 81.84941850548277,
+      "2005-02-28T04:30:00Z": 33.9462784770174,
+      "2005-02-28T06:00:00Z": 9.360930129870065,
+      "outlier_2005-02-28T00:15:00Z": 1963.0224217450086,
+      "outlier_2005-02-28T05:30:00Z": 4147.310164134658
+    },
+    "interpretation": "HELDOUT_REPRODUCTION_OF_HISTORICAL_TOBI_NAVIGATION_IMPROVED__NOT_NATIVE_VEH_NAV_AND_NOT_ABSOLUTE_GROUND_TRUTH"
+  },
+  "v2_target_mapping": {
+    "ship_position": {"latitude": -3.81466,"longitude": -12.12144},
+    "raw_tobi_heading_deg": 22.0,
+    "layback_bearing_deg": 202.0,
+    "external_cable_m": 6728.4,
+    "pressure_m_equiv": 3407.9,
+    "horizontal_layback_m": 6032.324937368675,
+    "reconstructed_vehicle": {"latitude": -3.8649594146460964,"longitude": -12.14180870234793},
+    "distance_reconstructed_vehicle_to_frozen_coordinate_m": 86.77074961629816,
+    "target_offset_in_vehicle_heading_frame_m": {
+      "east": -70.20116339414389,
+      "north": -50.999604071856005,
+      "along_track": -73.58382815763754,
+      "cross_track": -45.98459732393694
+    },
+    "slant_range_m": 615.7195653794384,
+    "side": "port",
+    "mapped_raw_sample_index": 821,
+    "mapping_used_intensity": false,
+    "mapped_measurements_after_geometry_freeze": {
+      "port_sidescan": {
+        "raw_signed": 0,
+        "abs_amplitude": 0,
+        "local_z": -0.6744907594765952,
+        "review_priority_score_from_prior_sample_metrics": 0.511000215,
+        "review_priority_rank": 1522,
+        "review_priority_population": 3098
+      },
+      "port_swath": {
+        "raw_signed": 1063,
+        "abs_amplitude": 1063,
+        "local_z": -0.5252551703143271,
+        "target_robust_z_from_prior_sample_metrics": -2.377089,
+        "review_priority_score_from_prior_sample_metrics": 0.709348815,
+        "review_priority_rank": 677,
+        "review_priority_population": 3951
+      }
+    },
+    "feature_state": "NO_STRONG_REVIEW_PRIORITY_LOCALIZATION_AT_V2_MAPPED_FROZEN_CELL_SAMPLE"
+  },
+  "independent_em12_ground_cell": {
+    "workflow_run": 32960911861,
+    "workflow_artifact_id": 9603850076,
+    "workflow_artifact_zip_sha256": "86b4f4b7b8ea9059707292252294cd24e058c41832644ae9e222904a02bb058b",
+    "candidate_processed_xyz_files": 24,
+    "phase_A_depth_values_used_for_file_selection": false,
+    "frozen_coverage_pass_rule": "nearest XY sounding <= 250 m",
+    "coverage_pass": true,
+    "winning_files_geometry_only": [
+      {
+        "file": "B1-81-1_Acceptl28-33.xyz.ascii",
+        "sha256": "0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0",
+        "nearest_distance_m": 52.17465899468013,
+        "nearest_coordinate": {"latitude": -3.8652079,"longitude": -12.142021},
+        "nearest_depth_field3_m": 3913.79,
+        "local_250m_n": 64,
+        "local_depth_median_m": 3917.2200000000003,
+        "local_depth_mad_m": 26.760000000000446,
+        "local_p05_p95_relief_m": 108.54999999999973,
+        "local_plane": {
+          "target_intercept_m": 3912.048981738401,
+          "east_slope_per_m": 0.20030925055843124,
+          "north_slope_per_m": -0.13852902713935686,
+          "slope_magnitude": 0.24354483615847217,
+          "residual_mad_m": 5.400583531702296
+        }
+      },
+      {
+        "file": "B1-81-1_Acceptl15-22.xyz.ascii",
+        "sha256": "ad2e4d60401f7ffaa5e14b3e43aa0e45da9d320c6b34fa7f3b873f4024be6007",
+        "nearest_distance_m": 124.71073864466568,
+        "nearest_coordinate": {"latitude": -3.866377,"longitude": -12.1418585},
+        "nearest_depth_field3_m": 3935.44,
+        "local_250m_n": 11,
+        "local_depth_median_m": 3906.73,
+        "local_depth_mad_m": 41.13999999999987,
+        "local_p05_p95_relief_m": 102.76999999999953,
+        "local_plane": {
+          "target_intercept_m": 3905.9014725980323,
+          "east_slope_per_m": 0.26353697629756223,
+          "north_slope_per_m": -0.12264872829439986,
+          "slope_magnitude": 0.29067928792450176,
+          "residual_mad_m": 4.655789493028351
+        }
+      }
+    ],
+    "descriptive_cross_line_comparison_not_preregistered_as_pass_threshold": {
+      "target_plane_intercept_difference_m": 6.147509140368584,
+      "local_depth_median_difference_m": 10.490000000000236,
+      "slope_vector_difference": 0.0651914809890672,
+      "slope_direction_difference_deg_approx": 9.70977372798252,
+      "published_EM12_nominal_vertical_accuracy_context": "approximately 0.25 percent of water depth; at ~3910 m this is ~9.8 m. This specification was used only as post-observation context and is NOT a retroactive preregistered pass criterion."
+    },
+    "scientific_role": "INDEPENDENT_EARTH_FIXED_BATHYMETRY_AND_LOCAL_TERRAIN_CONSTRAINT"
+  },
+  "janus_gate_state": {
+    "G0_RAW_INTEGRITY": "PASS_PREVIOUSLY",
+    "G5_V1_WIREOUT_MAGNITUDE": "PASS_MAGNITUDE_ONLY",
+    "G5_V1_DIRECTION": "FAIL_OR_INSUFFICIENT",
+    "G5_V2_HELDOUT_DIRECTIONAL_REPAIR": "PASS_DOMINANCE_RELATIVE_TO_V1",
+    "G5_NATIVE_PER_PING_VEH_NAV": "NOT_RECOVERED",
+    "G6_V2_TARGET_SAMPLE_MAPPING": "APPROX_SAMPLE_821",
+    "G7B_INDEPENDENT_EM12_LOCAL_COVERAGE": "PASS",
+    "G7B_INDEPENDENT_BATHYMETRY": "READY",
+    "G7B_CROSS_LINE_SURFACE_CONSISTENCY": "DESCRIPTIVE_ONLY_NOT_PREREGISTERED_AS_FEATURE_PASS",
+    "G7_GROUND_FIXED_FEATURE_REPLICATION": "NOT_ESTABLISHED",
+    "G8_GEOMETRY_CLASS": "NOT_TESTED",
+    "G9_PHYSICAL_ACOUSTIC_RESONANCE": "NOT_TESTED",
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "killer_gate_result": {
+    "earth_fixed_cell_exists_in_independent_instrument_data": true,
+    "independent_EM12_line_groups_cover_cell": 2,
+    "tobi_per_ping_historical_nav_reproduction_improved": true,
+    "tobi_absolute_nav_proven": false,
+    "strong_tobi_feature_at_frozen_cell": false,
+    "same_structure_replicated_at_same_Earth_location": false,
+    "promotion_to_ground_fixed_geometry_feature_test": false,
+    "classification": "PARTIAL_PASS_EARTH_CELL_ANCHORED__FEATURE_REPLICATION_HOLD"
+  },
+  "next_gate": {
+    "id": "CD169_NATIVE_OR_CALIBRATED_VEH_NAV_RECOVERY_V3",
+    "actions": [
+      "recover native PRISM wireout-derived .veh_nav if it exists outside current archive or recover the exact wireout algorithm/configuration",
+      "audit the two large V2 heldout residual outliers without dropping them or fitting parameters",
+      "use independent EM12 bathymetry as terrain constraint, not as a TOBI navigation label",
+      "if a defensible per-ping TOBI footprint is obtained, remap the already-frozen target without recentering and retest the same Earth cell",
+      "do not promote off-target strong TOBI samples to the frozen target"
+    ]
+  },
+  "public_attribution": "British Oceanographic Data Centre (BODC) Requests Team / National Oceanography Centre — primary-data access and provenance assistance",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_POSTHOC_NAV_PARAMETER_FITTING",
+    "NO_DROPPING_HELDOUT_OUTLIERS_AFTER_INSPECTION",
+    "EM12_COVERAGE_PASS_IS_NOT_A_TOBI_FEATURE_PASS",
+    "V2_HISTORICAL_NAV_REPRODUCTION_IS_NOT_NATIVE_VEH_NAV",
+    "SAMPLE_821_IS_GEOMETRY_SELECTED_NOT_INTENSITY_SELECTED",
+    "NO_GEOMETRY_CLASS_WITHOUT_REPLICATED_FEATURE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
