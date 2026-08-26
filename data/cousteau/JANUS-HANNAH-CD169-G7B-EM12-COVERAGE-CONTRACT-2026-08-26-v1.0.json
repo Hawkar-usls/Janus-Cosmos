@@ -1,0 +1,83 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-G7B-EM12-COVERAGE-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.g7b_em12_coverage.contract.v1",
+  "status": "FROZEN_AFTER_FILENAME_ONLY_ARCHIVE_DISCOVERY_BEFORE_ANY_EM12_XYZ_COORDINATE_OR_DEPTH_VALUES_ARE_READ",
+  "frozen_target": {
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475,
+    "utc_reference": "2005-02-28T01:07:25Z"
+  },
+  "independent_observation": {
+    "instrument": "Simrad EM12 shipborne multibeam",
+    "archive_root": "BODCREQ-9406/CD169_TOBI/sd11281/EM12",
+    "candidate_pattern": "*.xyz.ascii",
+    "discovery_basis": "filenames and file sizes only from metadata scout; no XYZ coordinate/depth values inspected before this contract",
+    "platform_independence_from_tobi": true,
+    "modality": "bathymetry",
+    "same_pass_tobi": false
+  },
+  "phase_A_xy_only": {
+    "read_depth_column": false,
+    "parser": "for each non-comment line with >=3 finite numeric fields, field_1=longitude_deg and field_2=latitude_deg; field_3 is deliberately ignored during coverage phase",
+    "integrity": "compute SHA256 over complete source bytes while streaming",
+    "per_file_outputs": [
+      "parsed_xy_count",
+      "longitude_min_max",
+      "latitude_min_max",
+      "nearest_xy_geodesic_distance_m_to_frozen_target",
+      "nearest_xy_line_number",
+      "count_xy_within_50m",
+      "count_xy_within_250m",
+      "count_xy_within_1000m"
+    ],
+    "coverage_classes_frozen_before_values": {
+      "EXACT_LOCAL": "nearest_xy_distance_m <= 50",
+      "LOCAL_PATCH": "50 < nearest_xy_distance_m <= 250",
+      "CORRIDOR_ONLY": "250 < nearest_xy_distance_m <= 1000",
+      "NOT_LOCAL": "nearest_xy_distance_m > 1000"
+    },
+    "G7B_COVERAGE_PASS": "at least one processed EM12 sounding XY is within 250 m of frozen target",
+    "selection_rule": "winning source file(s) are all files with at least one XY within 250 m; no choice based on depth/morphology"
+  },
+  "phase_B_depth_only_if_phase_A_passes": {
+    "allowed": true,
+    "trigger": "G7B_COVERAGE_PASS",
+    "depth_parser": "field_3 from only the geometry-selected winning source file(s)",
+    "local_radius_m": 250,
+    "control_annulus_m": [500,1500],
+    "predefined_outputs": [
+      "local_n",
+      "nearest_sounding_depth",
+      "local_depth_median",
+      "local_depth_mad",
+      "local_depth_p05_p95_relief",
+      "local_min_max_depth",
+      "local_linear_plane_fit_coefficients",
+      "local_plane_residual_median",
+      "local_plane_residual_mad",
+      "local_plane_residual_p05_p95_span",
+      "control_annulus_n",
+      "control_depth_median",
+      "control_depth_mad"
+    ],
+    "geometry_classification": false,
+    "pyramid_test": false,
+    "anomaly_threshold": null,
+    "scientific_role": "INDEPENDENT_EARTH_FIXED_BATHYMETRY_AND_LOCAL_TERRAIN_CONSTRAINT_ONLY"
+  },
+  "relationship_to_tobi": {
+    "tobi_per_ping_navigation_state": "WIREOUT_TRACK_DIRECTIONAL_MODEL_FAILED_TO_REPRODUCE_HISTORICAL_TOBI_POSITIONS_WITH_GROUND_FIXED_PRECISION",
+    "em12_may_repair_tobi_navigation": false,
+    "em12_can_supply_local_bathymetry": true,
+    "ground_fixed_feature_convergence_requires": "a separately defensible TOBI footprint or another independent spatial observation; EM12 coverage alone cannot validate a TOBI intensity feature"
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_DEPTH_BASED_FILE_SELECTION",
+    "NO_DEPTH_VALUES_BEFORE_XY_COVERAGE_CLASS_IS_FROZEN",
+    "NO_POSTHOC_COVERAGE_THRESHOLD",
+    "NO_GEOMETRY_CLASS_FROM_RELIEF_ALONE",
+    "EM12_BATHYMETRY_DOES_NOT_RETROACTIVELY_VALIDATE_THE_FAILED_SIMPLE_TOBI_DIRECTIONAL_NAV_MODEL",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
