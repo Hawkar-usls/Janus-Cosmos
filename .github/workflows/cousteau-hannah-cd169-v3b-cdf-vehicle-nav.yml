@@ -1,0 +1,39 @@
+name: Cousteau Hannah CD169 V3B CDF Vehicle Nav
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_cdf_vehicle_nav_semantics_v3b.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-V3B-CDF-VEHICLE-NAV-SEMANTICS-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-v3b-cdf-vehicle-nav.yml'
+permissions:
+  contents: read
+jobs:
+  v3b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install NetCDF reader
+        run: python -m pip install --disable-pip-version-check netCDF4 numpy
+      - name: Syntax check
+        run: python -m py_compile workspace/hannah_cd169_cdf_vehicle_nav_semantics_v3b.py
+      - name: Run frozen CDF vehicle-navigation semantics gate
+        id: v3b
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_cdf_vehicle_nav_semantics_v3b.py \
+            --output out/JANUS-HANNAH-CD169-V3B-CDF-VEHICLE-NAV-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-v3b-cdf-vehicle-nav
+          path: out/JANUS-HANNAH-CD169-V3B-CDF-VEHICLE-NAV-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate scientific execution failure after receipt
+        if: steps.v3b.outcome == 'failure'
+        run: exit 1
