@@ -1,0 +1,37 @@
+name: Cousteau Hannah CD169 Veh Nav Repair V2
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_veh_nav_directional_repair_v2.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-VEH-NAV-DIRECTIONAL-REPAIR-V2-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-veh-nav-repair-v2.yml'
+permissions:
+  contents: read
+jobs:
+  v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax check
+        run: python -m py_compile workspace/hannah_cd169_ground_fixed_nav_reconstruction.py workspace/hannah_cd169_veh_nav_directional_repair_v2.py
+      - name: Run frozen V2 and held-out science-log reproduction test
+        id: v2
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_veh_nav_directional_repair_v2.py \
+            --output out/JANUS-HANNAH-CD169-VEH-NAV-DIRECTIONAL-REPAIR-V2-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-veh-nav-repair-v2
+          path: out/JANUS-HANNAH-CD169-VEH-NAV-DIRECTIONAL-REPAIR-V2-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate execution failure after receipt
+        if: steps.v2.outcome == 'failure'
+        run: exit 1
