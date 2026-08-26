@@ -1,0 +1,38 @@
+name: Cousteau Hannah CD169 V3 Outlier Raw Support
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_v3_outlier_raw_support_diagnostic.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-V3-OUTLIER-AND-RAW-SUPPORT-DIAGNOSTIC-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-hannah-cd169-v3-outlier-raw-support.yml'
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax check
+        run: python -m py_compile workspace/hannah_cd169_v3_outlier_raw_support_diagnostic.py
+      - name: Run outlier and raw-file support diagnostic
+        id: diag
+        continue-on-error: true
+        working-directory: workspace
+        run: |
+          python hannah_cd169_v3_outlier_raw_support_diagnostic.py \
+            --output ../out/JANUS-HANNAH-CD169-V3-OUTLIER-RAW-SUPPORT-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-v3-outlier-raw-support
+          path: out/JANUS-HANNAH-CD169-V3-OUTLIER-RAW-SUPPORT-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate execution failure after receipt preservation
+        if: steps.diag.outcome == 'failure'
+        run: exit 1
