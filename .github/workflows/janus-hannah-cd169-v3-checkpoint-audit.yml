@@ -1,0 +1,28 @@
+name: JANUS Hannah CD169 V3 Checkpoint Audit
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/janus_hannah_cd169_v3_checkpoint_audit.py'
+      - 'data/cousteau/JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-V3-CHECKPOINT-2026-08-26-v1.0.json'
+      - '.github/workflows/janus-hannah-cd169-v3-checkpoint-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit frozen V3 checkpoint invariants
+        run: |
+          python workspace/janus_hannah_cd169_v3_checkpoint_audit.py \
+            data/cousteau/JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-V3-CHECKPOINT-2026-08-26-v1.0.json \
+            --output out/JANUS-HANNAH-CD169-V3-CHECKPOINT-AUDIT-RUN-001-2026-08-26-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: janus-hannah-cd169-v3-checkpoint-audit
+          path: out/JANUS-HANNAH-CD169-V3-CHECKPOINT-AUDIT-RUN-001-2026-08-26-v1.0.json
+          retention-days: 7
