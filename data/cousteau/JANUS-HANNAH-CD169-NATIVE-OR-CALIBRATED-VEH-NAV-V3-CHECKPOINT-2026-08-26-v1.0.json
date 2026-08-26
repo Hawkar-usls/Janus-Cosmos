@@ -1,0 +1,194 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-V3-CHECKPOINT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.native_or_calibrated_veh_nav_v3.checkpoint.v1",
+  "date": "2026-08-26",
+  "status": "PARTIAL_PASS_PROVENANCE_DIAGNOSTICS__NATIVE_OR_EXACT_WIREOUT_BLOCKED",
+  "contract": {
+    "path": "data/cousteau/JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-RECOVERY-V3-CONTRACT-2026-08-26-v1.0.json",
+    "commit": "bd53f8950dbb10da2c220dd37f230af42cf5b385"
+  },
+  "process_journal": {
+    "path": "data/cousteau/JANUS-HANNAH-CD169-V3-PROCESS-JOURNAL-2026-08-26-v1.0.json",
+    "commit": "7af3d8680b1ac6ad2e8b7d7253a52fc4b8c02624"
+  },
+  "scientific_boundary_correction": {
+    "canonical_wording": "The mnemonic/time -> frozen-coordinate branch is not the failed link. The Earth-fixed coordinate is independently anchored by EM12. The unresolved link is frozen Earth-cell -> defensible TOBI feature replication at that same cell.",
+    "earth_cell_recentered": false
+  },
+  "frozen_target": {
+    "utc": "2005-02-28T01:07:25Z",
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475
+  },
+  "independent_earth_fixed_anchor": {
+    "state": "PASS",
+    "instrument": "shipborne EM12",
+    "independent_processed_line_groups": 2,
+    "line_groups": [
+      {
+        "file": "B1-81-1_Acceptl28-33.xyz.ascii",
+        "nearest_sounding_distance_m": 52.17465899468013,
+        "nearest_depth_m": 3913.79,
+        "local_250m_depth_median_m": 3917.2200000000003
+      },
+      {
+        "file": "B1-81-1_Acceptl15-22.xyz.ascii",
+        "nearest_sounding_distance_m": 124.71073864466568,
+        "nearest_depth_m": 3935.44,
+        "local_250m_depth_median_m": 3906.73
+      }
+    ],
+    "authority": "INDEPENDENT_EARTH_FIXED_BATHYMETRY_AND_LOCAL_TERRAIN_CONSTRAINT"
+  },
+  "v3_gates": {
+    "G3A_NATIVE_VEH_NAV": {
+      "state": "BLOCKED_CURRENT_ARCHIVE_NEGATIVE",
+      "evidence": {
+        "BODCREQ_9406_entries_scanned": 96,
+        "native_veh_nav_filename_found": false,
+        "commands_cfg_filename_found": false,
+        "wireout_text_found": false,
+        "workflow_run": 32962867609,
+        "artifact_id": 9604613480,
+        "artifact_zip_sha256": "51bd33706290dc3425cd684ba2e6172375c1feac69ab844cb633d73ef8b9671c"
+      },
+      "boundary": "Negative only for currently exposed BODCREQ-9406 archive; does not prove intermediate files are absent from originator/offline holdings."
+    },
+    "G3B_CALIBRATED_NAV_PRODUCT": {
+      "state": "FAIL_CDF_PRE_MRGNAV",
+      "evidence": {
+        "cdf_files_opened": 11,
+        "cdf_rows_total": 102040,
+        "latlon_exact_zero_zero_rows": 102040,
+        "latlon_valid_nonzero_rows": 0,
+        "global_latlon_semantics": "sonar position: lat/lon signed decimal degrees",
+        "global_ship_latlon_semantics": "ship position: lat/lon signed decimal degrees",
+        "diagnosed_stage": "PRE_MRGNAV_OR_NAVIGATION_NOT_MERGED",
+        "formal_v3b_pass_disposition": "REJECTED_FALSE_POSITIVE_UNDER_SPECIFIED_ABSOLUTE_SANITY",
+        "raw_ship_latlon_to_external_nav_median_m": 132494.4062619384,
+        "deterministic_signbug_inverse_to_external_nav_median_m": 25.214989701944923,
+        "deterministic_signbug_inverse_p90_m": 49.88677699086194,
+        "parameters_fitted": false,
+        "target_corrected_ship_residual_m": 22.615994490468502
+      },
+      "interpretation": "The archived CDFs preserve a raw2prism-era header stage but do not contain merged per-ping vehicle coordinates. The deterministic western-coordinate defect is provenance/format evidence, not reconstructed vehicle navigation."
+    },
+    "G3C_EXACT_WIREOUT_REPRODUCTION": {
+      "state": "BLOCKED_SOURCE_CONFIG_NOT_RECOVERED",
+      "evidence": {
+        "public_semantics_recovered": true,
+        "exact_wireout_source_recovered": false,
+        "CD169_specific_commands_cfg_recovered": false,
+        "CD169_specific_wireout_parameters_recovered": false,
+        "generic_parameter_transfer_forbidden": true
+      },
+      "known_semantics": "Historical PRISM documentation shows .nav + .cable -> wireout -> .veh_nav -> mrgnav_inertia per-ping merge, but cruise/platform-specific parameters vary and cannot be silently transferred to CD169."
+    },
+    "G3D_OUTLIER_DIAGNOSTICS": {
+      "state": "PASS_DIAGNOSTIC",
+      "authority": "POSTHOC_DIAGNOSTIC_NOT_BLINDED_MODEL_VALIDATION",
+      "cases": {
+        "00:15": {
+          "classification": "SHIP_NAV_SOURCE_DISAGREEMENT_DOMINANT_CANDIDATE",
+          "external_nav_vs_science_log_ship_m": 1866.1099301244838,
+          "reciprocal_heading_vs_logged_tow_bearing_mismatch_deg": 0.8319755581858601
+        },
+        "05:30": {
+          "classification": "HEADING_OR_TOW_DYNAMICS_DOMINANT_CANDIDATE",
+          "external_nav_vs_science_log_ship_m": 56.588855492285795,
+          "reciprocal_heading_vs_logged_tow_bearing_mismatch_deg": 36.60612978938809
+        },
+        "06:31": {
+          "classification": "RAW_SUPPORT_CONFIRMED_IN_SD11286",
+          "raw_file": "sd11286/TOBI.DAT",
+          "record_index": 129,
+          "utc": "2005-02-28T06:31:00Z",
+          "raw_heading_deg": 356.72500002379826,
+          "raw_block_sha256": "f2979fbcc66bad50e910037bc655b1c2542b44bee6704543de1180a8ea5d6197"
+        }
+      }
+    },
+    "G3E_FOOTPRINT_RETEST": {
+      "state": "BLOCKED",
+      "precondition": "Requires G3A or genuinely calibrated G3B or defensible exact CD169 G3C pass.",
+      "reason": "V3 diagnostics improved provenance and evaluation quality but did not recover authoritative vehicle navigation."
+    }
+  },
+  "v2_support_corrected_audit": {
+    "model": "UNCHANGED_V2_RECIPROCAL_RAW_TOBI_GYRO_LAYBACK",
+    "model_parameters_changed": false,
+    "image_or_intensity_read": false,
+    "heldout_n": 13,
+    "v1_comparator_median_m": 834.9755959722695,
+    "v1_comparator_p90_m": 2670.065700626157,
+    "v2_support_corrected_median_m": 165.94219431265185,
+    "v2_support_corrected_p90_m": 1525.7401049064931,
+    "v2_support_corrected_max_m": 4011.498119163924,
+    "frozen_relative_dominance_rule": "V2 median < V1 median AND V2 p90 < V1 p90",
+    "relative_dominance_pass": true,
+    "06_31_old_header_utc": "2005-02-28T06:22:16Z",
+    "06_31_correct_header_utc": "2005-02-28T06:31:00Z",
+    "06_31_correct_residual_m": 178.38911890649652,
+    "old_v2_aggregate_disposition": "SUPERSEDED_FOR_SUPPORT_CORRECTED_EVALUATION",
+    "authority": "HISTORICAL_NAVIGATION_MODEL_REPRODUCTION_NOT_NATIVE_GROUND_TRUTH",
+    "workflow_run": 32964512682,
+    "artifact_id": 9605158813,
+    "artifact_zip_sha256": "2e81fc3d987b0cf9824573d7773d622ea25f5ef2c4b69d736ac738a9b6b4dd47"
+  },
+  "frozen_cell_feature_state": {
+    "prior_v2_geometry_selected_side": "port",
+    "prior_v2_geometry_selected_raw_sample": 821,
+    "prior_v2_vehicle_to_frozen_distance_m": 86.77074961629816,
+    "prior_v2_port_sidescan_local_z": -0.6744907594765952,
+    "prior_v2_port_swath_local_z": -0.5252551703143271,
+    "strong_tobi_feature_at_frozen_cell": false,
+    "v3_authority_to_remap_sample": false,
+    "ground_fixed_tobi_feature_replication": "NOT_ESTABLISHED",
+    "rule": "Sample 821 remains an approximate V2 geometry result. V3 may not move it or inspect a different sample until authoritative native/calibrated/exact-wireout navigation passes."
+  },
+  "process_integrity": {
+    "recentered": false,
+    "posthoc_nav_fit": false,
+    "outliers_dropped": false,
+    "false_positive_gate_receipt_deleted": false,
+    "failed_execution_receipt_deleted": false,
+    "V4_navigation_model_created": false
+  },
+  "janus_state": {
+    "EARTH_CELL_IN_INDEPENDENT_EM12": "ANCHORED",
+    "TOBI_HISTORICAL_NAV_V2": "SUPPORT_CORRECTED_HELDOUT_DOMINANCE_PASS",
+    "NATIVE_VEH_NAV": "BLOCKED_CURRENT_ARCHIVE_NEGATIVE",
+    "CALIBRATED_PROCESSED_VEH_NAV": "CDF_PRE_MRGNAV_FAIL",
+    "EXACT_CD169_WIREOUT_SOURCE_CONFIG": "BLOCKED_NOT_RECOVERED",
+    "V3_OUTLIER_DIAGNOSTICS": "PASS_DIAGNOSTIC",
+    "PRIOR_V2_FROZEN_CELL_SAMPLE": 821,
+    "GROUND_FIXED_TOBI_FEATURE_REPLICATION": "NOT_ESTABLISHED",
+    "PROMOTE_TO_GEOMETRY_TEST": false,
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "next_data_debt": {
+    "id": "CD169_PRISM_INTERMEDIATE_NAV_PROVENANCE_DEBT",
+    "needed_items": [
+      "CD169 PRISM-derived navfile.veh_nav or equivalent intermediate vehicle-navigation output",
+      "CD169 commands.cfg or exact wireout and mrgnav_inertia command lines/parameters",
+      "exact PRISM version/manual/source semantics used for CD169 if intermediate .veh_nav no longer exists",
+      "originator/offline processing directory inventory beyond the currently exposed CD-ROM archive if available"
+    ],
+    "communication_status": "NOT_SENT_IN_THIS_CHECKPOINT"
+  },
+  "public_attribution": "British Oceanographic Data Centre (BODC) Requests Team / National Oceanography Centre — primary-data access and provenance assistance",
+  "hard_rules": [
+    "NO_V4_NAV_MODEL_IN_THIS_GATE",
+    "NO_RECENTERING",
+    "NO_INTENSITY_BASED_PING_OR_SAMPLE_SELECTION",
+    "NO_POSTHOC_NAV_PARAMETER_FITTING",
+    "NO_DROPPING_V2_OUTLIERS",
+    "NO_GENERIC_PRISM_PARAMETER_TRANSFER_TO_CD169_WITHOUT_PROVENANCE",
+    "CDF_LATLON_ZERO_CHANNEL_NE_CALIBRATED_VEH_NAV",
+    "RAW2PRISM_SIGN_BUG_DIAGNOSIS_NE_VEHICLE_NAVIGATION",
+    "SUPPORT_CORRECTION_NE_MODEL_TUNING",
+    "EM12_TERRAIN_MAY_CONSTRAIN_BUT_MUST_NOT_LABEL_TOBI_NAVIGATION",
+    "NO_GEOMETRY_CLASS_WITHOUT_REPLICATED_TOBI_FEATURE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
