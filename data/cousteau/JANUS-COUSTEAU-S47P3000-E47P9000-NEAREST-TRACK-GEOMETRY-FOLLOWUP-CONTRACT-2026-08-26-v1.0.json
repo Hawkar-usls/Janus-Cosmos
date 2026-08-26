@@ -1,0 +1,29 @@
+{
+  "artifact_id": "JANUS-COUSTEAU-S47P3000-E47P9000-NEAREST-TRACK-GEOMETRY-FOLLOWUP-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.nearest_track_geometry.followup.contract.v1",
+  "date": "2026-08-26",
+  "status": "FROZEN_AFTER_PREFLIGHT_RUN002_BEFORE_TRACK_GEOMETRY_INSPECTION",
+  "frozen_point": {"latitude": -47.3, "longitude": 47.9, "no_recenter": true},
+  "parent_observation": {
+    "NCEI_BATHYMETRY_10KM": 0,
+    "NCEI_BATHYMETRY_25KM": 1,
+    "discovered_survey_id": "ANTAC23",
+    "survey_type": "Bathymetry",
+    "platform": "Fuji",
+    "survey_year": 1981
+  },
+  "allowed_operation": "Fetch authoritative ArcGIS polyline geometry for ANTAC23 and calculate minimum point-to-polyline distance and nearest point only.",
+  "forbidden_operations": [
+    "READ_OR_RANK_BATHYMETRY_Z_VALUES",
+    "MOVE_FROZEN_COORDINATE",
+    "SELECT_A_DIFFERENT_TRACK_BECAUSE_IT_LOOKS_INTERESTING",
+    "MORPHOLOGY_CLASSIFICATION",
+    "ANOMALY_OR_STRUCTURE_CLAIM"
+  ],
+  "decision_rule": {
+    "distance_le_1km": "TIER_B_VERY_NEAR_SINGLEBEAM_CONTROL_NOT_EXACT_POINT_MEASUREMENT",
+    "distance_gt_1km_le_10km": "TIER_B_NEAR_SINGLEBEAM_CONTROL",
+    "distance_gt_10km": "TIER_C_REGIONAL_TRACKLINE_CONTEXT_ONLY"
+  },
+  "next_gate": "S47P3000_E47P9000_ANTAC23_NEAREST_GEOMETRY_RUN001"
+}
