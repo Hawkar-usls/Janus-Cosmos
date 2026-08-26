@@ -1,0 +1,93 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.ground_fixed_replication.contract.v1",
+  "status": "FROZEN_BEFORE_RECONSTRUCTED_VEHICLE_NAV_RESIDUALS_OR_TARGET_SAMPLE_VALUES_ARE_INSPECTED",
+  "frozen_target": {
+    "utc": "2005-02-28T01:07:25Z",
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475,
+    "raw_file": "BODCREQ-9406/CD169_TOBI/sd11285/TOBI.DAT",
+    "raw_block_index": 9812,
+    "raw_sample_spacing_m": 0.75
+  },
+  "navigation_reconstruction": {
+    "name": "INDEPENDENT_WIREOUT_TRACK_RECONSTRUCTION_V1",
+    "inputs": [
+      "per-ping raw TOBI ship GPS decoded from TOBI.DAT",
+      "external cd169.cable interpolated in time",
+      "raw TOBI pressure per ping",
+      "fixed 200 m TOBI umbilical documented in PRISM TOBI processing"
+    ],
+    "fixed_formula": "horizontal_layback_m = sqrt(max(0,(external_cable_m + 200.0)^2 - pressure_m_equivalent^2))",
+    "vehicle_position_rule": "walk backward along the observed ship ground track by horizontal_layback_m; interpolate within the bracketing ship-track segment",
+    "gps_to_stern_extra_offset_m": 0.0,
+    "model_retuning_after_validation": false,
+    "exact_PRISM_wireout_equivalence_claim": false,
+    "allowed_class": "INDEPENDENT_RECONSTRUCTION_OF_HISTORICAL_LAYBACK_NAVIGATION",
+    "forbidden_class": "EXACT_NATIVE_VEH_NAV_UNLESS_BYTE_IDENTICAL_NATIVE_PRODUCT_IS_RECOVERED"
+  },
+  "historical_validation": {
+    "source": "CD169 cruise-report science log TOB-02 line 19",
+    "role": "HISTORICAL_MODEL_REPRODUCTION_CHECK_NOT_INDEPENDENT_ABSOLUTE_GROUND_TRUTH",
+    "anchors": [
+      {"jd":59,"time":"00:00:00","tobi_lat":-3.907,"tobi_lon":-12.153,"layback_m":6481},
+      {"jd":59,"time":"00:15:00","tobi_lat":-3.895,"tobi_lon":-12.167,"layback_m":6277},
+      {"jd":59,"time":"00:29:00","tobi_lat":-3.886,"tobi_lon":-12.151,"layback_m":6262},
+      {"jd":59,"time":"01:00:00","tobi_lat":-3.869,"tobi_lon":-12.145,"layback_m":6032},
+      {"jd":59,"time":"01:29:00","tobi_lat":-3.855,"tobi_lon":-12.135,"layback_m":6155},
+      {"jd":59,"time":"02:00:00","tobi_lat":-3.835,"tobi_lon":-12.128,"layback_m":6050},
+      {"jd":59,"time":"02:30:00","tobi_lat":-3.814,"tobi_lon":-12.128,"layback_m":6016},
+      {"jd":59,"time":"03:00:00","tobi_lat":-3.795,"tobi_lon":-12.131,"layback_m":6112},
+      {"jd":59,"time":"03:30:00","tobi_lat":-3.774,"tobi_lon":-12.134,"layback_m":6314},
+      {"jd":59,"time":"04:00:00","tobi_lat":-3.752,"tobi_lon":-12.136,"layback_m":6308},
+      {"jd":59,"time":"04:30:00","tobi_lat":-3.734,"tobi_lon":-12.140,"layback_m":6634},
+      {"jd":59,"time":"05:00:00","tobi_lat":-3.715,"tobi_lon":-12.146,"layback_m":6586},
+      {"jd":59,"time":"05:30:00","tobi_lat":-3.683,"tobi_lon":-12.181,"layback_m":6304},
+      {"jd":59,"time":"06:00:00","tobi_lat":-3.670,"tobi_lon":-12.151,"layback_m":6110},
+      {"jd":59,"time":"06:31:00","tobi_lat":-3.649,"tobi_lon":-12.154,"layback_m":6200}
+    ],
+    "acceptance_threshold_m": null,
+    "report": ["per-anchor geodesic residual_m","median residual_m","p90 residual_m","max residual_m","per-anchor reconstructed_layback_m minus logged_layback_m"],
+    "hard_rule": "NO_THRESHOLD_WILL_BE_INVENTED_AFTER_SEEING_RESIDUALS"
+  },
+  "target_mapping": {
+    "position_center": "reconstructed per-ping vehicle navigation if produced",
+    "heading": "raw TOBI gyro",
+    "altitude": "raw TOBI altitude",
+    "slant_to_sample_rule": "sample_index = round(sqrt(altitude_m^2 + cross_track_ground_range_m^2)/0.75)",
+    "rounding": "nearest_integer_half_to_even_python_round",
+    "side_rule": "sign of target cross-track coordinate in vehicle heading frame",
+    "along_track_rule": "report signed miss; do not select pings by intensity",
+    "sample_value_use": "ONLY_AFTER_ALL_NAVIGATION_AND_SAMPLE_INDICES_ARE_FROZEN"
+  },
+  "replication_tiers": {
+    "G7A_SAME_LINE_MULTIPING": {
+      "selection": "choose the nearest reconstructed ping before and nearest reconstructed ping after frozen target UTC; additionally report the two smallest absolute along-track misses in the fixed +/-5 minute window, selected from geometry only",
+      "authority": "INTERNAL_SAME_PASS_REPLICATION_ONLY",
+      "cannot_close": "INDEPENDENT_CROSSING"
+    },
+    "G7B_INDEPENDENT_MODALITY_OR_CROSSING": {
+      "priority": [
+        "CD169 pre-TOBI shipborne EM12/swath bathymetry covering frozen coordinate",
+        "another TOBI line/deployment with footprint overlap",
+        "another independently navigated bathymetric or sidescan survey"
+      ],
+      "required_for": "GROUND_FIXED_FEATURE_TEST_WITH_INDEPENDENT_OBSERVATION"
+    }
+  },
+  "archive_search": {
+    "search_before_target_values": true,
+    "terms": ["EM12","EM120","swath","bath","bathy","grd","grid","xyz","depth","processed","mosaic","nav"],
+    "coverage_rule": "coverage must contain the frozen coordinate based on file metadata/navigation, not on visible morphology"
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_INTENSITY_BASED_PING_SELECTION",
+    "NO_POSTHOC_NAVIGATION_PARAMETER_FITTING",
+    "SCIENCE_LOG_TOBI_POSITIONS_ARE_MODEL_OUTPUTS_NOT_INDEPENDENT_GROUND_TRUTH",
+    "RAW_0.75M_SAMPLE_SPACING_IS_NOT_ABSOLUTE_POSITION_ACCURACY",
+    "SAME_PASS_ADJACENT_PINGS_DO_NOT_COUNT_AS_INDEPENDENT_CROSSING",
+    "NO_GEOMETRY_CLASS_BEFORE_G7B",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
