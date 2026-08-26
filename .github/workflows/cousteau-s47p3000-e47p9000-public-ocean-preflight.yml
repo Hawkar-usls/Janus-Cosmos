@@ -1,0 +1,36 @@
+name: Cousteau S47.3 E47.9 Public Ocean Preflight
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/cousteau_s47p3000_e47p9000_public_ocean_preflight.py'
+      - 'data/cousteau/JANUS-COUSTEAU-S47P3000-E47P9000-FROZEN-POINT-CONTRACT-2026-08-26-v1.0.json'
+      - '.github/workflows/cousteau-s47p3000-e47p9000-public-ocean-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests netCDF4 numpy
+      - name: Query GMRT and NCEI against the frozen coordinate
+        id: run
+        continue-on-error: true
+        run: |
+          python workspace/cousteau_s47p3000_e47p9000_public_ocean_preflight.py \
+            --output out/JANUS-COUSTEAU-S47P3000-E47P9000-PUBLIC-OCEAN-DATA-PREFLIGHT-RUN-001-2026-08-26-v1.0.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cousteau-s47p3000-e47p9000-public-ocean-preflight
+          path: out/JANUS-COUSTEAU-S47P3000-E47P9000-PUBLIC-OCEAN-DATA-PREFLIGHT-RUN-001-2026-08-26-v1.0.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate scientific harness failure after receipt preservation
+        if: steps.run.outcome == 'failure'
+        run: exit 1
