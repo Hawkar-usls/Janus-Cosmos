@@ -1,0 +1,133 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-AUDIT-RUN-001-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.ground_fixed_replication.audit.v1",
+  "source_receipt": "data/cousteau/JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-RECEIPT-2026-08-26-v1.0.json",
+  "source_receipt_commit": "b6fb6c0cce04155f93b28f405f2605de09a6b2aa",
+  "workflow_run": 32961669428,
+  "workflow_artifact_id": 9604084904,
+  "workflow_artifact_zip_sha256": "97cc6bf8b9e075eb087797bb41ff64cc674ea9023ff4807d4cb3b6b12f735dda",
+  "audit_status": "PASS_EARTH_CELL_ANCHORED__HOLD_GROUND_FIXED_FEATURE_REPLICATION",
+  "gates": {
+    "G5A_LAYBACK_MAGNITUDE_INFORMATION": {
+      "state": "INFORMATIVE_PASS",
+      "evidence": {
+        "v1_abs_layback_delta_median_m": 12.149614308085802,
+        "v1_abs_layback_delta_p90_m": 16.870680913222895,
+        "v1_position_residual_median_m": 885.3115032561124,
+        "interpretation": "layback magnitude reproduced while V1 direction was insufficient"
+      }
+    },
+    "G5B_V2_HELDOUT_DIRECTIONAL_REPAIR": {
+      "state": "PASS_DOMINANCE",
+      "evidence": {
+        "heldout_n": 13,
+        "v1_median_residual_m": 834.9755959722695,
+        "v1_p90_residual_m": 2670.065700626157,
+        "v1_max_residual_m": 4613.720339983608,
+        "v2_median_residual_m": 116.23842045021642,
+        "v2_p90_residual_m": 1695.6104609129748,
+        "v2_max_residual_m": 4147.310164134658,
+        "frozen_rule": "V2 median < V1 median AND V2 p90 < V1 p90",
+        "parameters_tuned_after_results": false,
+        "interpretation": "historical TOBI navigation reproduction improved; not native veh_nav and not absolute ground truth"
+      }
+    },
+    "G5C_NATIVE_VEH_NAV": {
+      "state": "BLOCKED",
+      "failure": "NATIVE_WIREOUT_DERIVED_VEH_NAV_NOT_RECOVERED"
+    },
+    "G6_V2_TARGET_MAPPING": {
+      "state": "APPROX_PASS_SAMPLE_821",
+      "evidence": {
+        "reconstructed_vehicle_to_frozen_distance_m": 86.77074961629816,
+        "mapped_side": "port",
+        "mapped_raw_sample_index": 821,
+        "mapping_used_intensity": false,
+        "port_sidescan_local_z": -0.6744907594765952,
+        "port_swath_local_z": -0.5252551703143271,
+        "strong_feature_at_mapped_cell": false,
+        "absolute_ground_truth": false
+      }
+    },
+    "G7B_EM12_LOCAL_COVERAGE": {
+      "state": "PASS",
+      "evidence": {
+        "processed_candidate_files": 24,
+        "depth_based_file_selection": false,
+        "frozen_coverage_rule": "nearest sounding <= 250 m",
+        "winning_line_groups": [
+          {
+            "file": "B1-81-1_Acceptl28-33.xyz.ascii",
+            "nearest_distance_m": 52.17465899468013,
+            "nearest_depth_m": 3913.79,
+            "local_250m_n": 64,
+            "local_depth_median_m": 3917.2200000000003
+          },
+          {
+            "file": "B1-81-1_Acceptl15-22.xyz.ascii",
+            "nearest_distance_m": 124.71073864466568,
+            "nearest_depth_m": 3935.44,
+            "local_250m_n": 11,
+            "local_depth_median_m": 3906.73
+          }
+        ]
+      }
+    },
+    "G7B_EM12_MULTILINE_BATHYMETRY": {
+      "state": "PASS_INDEPENDENT_LINE_GROUP_COVERAGE",
+      "evidence": {
+        "independent_line_groups": 2,
+        "surface_consistency_authority": "DESCRIPTIVE_ONLY_NOT_PREREGISTERED_AS_FEATURE_PASS"
+      }
+    },
+    "G7_GROUND_FIXED_FEATURE_REPLICATION": {
+      "state": "HOLD_NOT_ESTABLISHED",
+      "failure": "NO_STRONG_GEOMETRY_SELECTED_TOBI_FEATURE_AT_FROZEN_CELL_TO_REPLICATE",
+      "evidence": {
+        "earth_cell_anchored_by_independent_em12": true,
+        "strong_tobi_feature_at_frozen_cell": false,
+        "same_structure_replicated_at_same_earth_location": false
+      }
+    },
+    "G8_PROMOTION_TO_GEOMETRY_TEST": {
+      "state": "BLOCKED",
+      "failure": "REQUIRES_DEFENSIBLE_GROUND_FIXED_TOBI_FEATURE_REPLICATION"
+    }
+  },
+  "janus_state": {
+    "EARTH_CELL_IN_INDEPENDENT_EM12": "ANCHORED",
+    "EM12_INDEPENDENT_LINE_GROUPS": 2,
+    "TOBI_HISTORICAL_NAV_V2": "HELDOUT_DOMINANCE_PASS",
+    "NATIVE_VEH_NAV": "BLOCKED",
+    "V2_FROZEN_CELL_SAMPLE": 821,
+    "TOBI_STRONG_FEATURE_AT_FROZEN_CELL": false,
+    "GROUND_FIXED_FEATURE_REPLICATION": "NOT_ESTABLISHED",
+    "PROMOTE_TO_GEOMETRY_TEST": false,
+    "UNDERWATER_PYRAMID_DETECTED": false
+  },
+  "killer_gate_classification": "PARTIAL_PASS_EARTH_CELL_ANCHORED__FEATURE_REPLICATION_HOLD",
+  "posthoc_nav_fit": false,
+  "recentered": false,
+  "scientific_convergence_claim": false,
+  "next_gate": {
+    "id": "CD169_NATIVE_OR_CALIBRATED_VEH_NAV_RECOVERY_V3",
+    "actions": [
+      "recover native PRISM wireout-derived .veh_nav if it exists outside the current archive or recover the exact wireout algorithm/configuration",
+      "audit the large V2 heldout residual outliers without dropping them or fitting parameters",
+      "use independent EM12 bathymetry as terrain constraint, not as TOBI navigation label",
+      "if a defensible per-ping TOBI footprint is obtained, remap the already frozen target without recentering and retest the same Earth cell",
+      "do not promote off-target strong TOBI samples to the frozen target"
+    ]
+  },
+  "public_attribution": "British Oceanographic Data Centre (BODC) Requests Team / National Oceanography Centre — primary-data access and provenance assistance",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_POSTHOC_NAV_PARAMETER_FITTING",
+    "NO_DROPPING_HELDOUT_OUTLIERS_AFTER_INSPECTION",
+    "EM12_COVERAGE_PASS_IS_NOT_A_TOBI_FEATURE_PASS",
+    "V2_HISTORICAL_NAV_REPRODUCTION_IS_NOT_NATIVE_VEH_NAV",
+    "SAMPLE_821_IS_GEOMETRY_SELECTED_NOT_INTENSITY_SELECTED",
+    "NO_GEOMETRY_CLASS_WITHOUT_REPLICATED_FEATURE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
