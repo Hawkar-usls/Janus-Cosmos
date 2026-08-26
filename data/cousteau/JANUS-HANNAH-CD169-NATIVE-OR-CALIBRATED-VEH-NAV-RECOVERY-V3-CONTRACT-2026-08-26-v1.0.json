@@ -1,0 +1,108 @@
+{
+  "artifact_id": "JANUS-HANNAH-CD169-NATIVE-OR-CALIBRATED-VEH-NAV-RECOVERY-V3-CONTRACT-2026-08-26-v1.0",
+  "schema": "janus.cosmos.cousteau.hannah_cd169.native_or_calibrated_veh_nav_recovery_v3.contract.v1",
+  "date": "2026-08-26",
+  "status": "FROZEN_BEFORE_V3_DATA_INSPECTION",
+  "correction_to_prior_wording": {
+    "superseded_wording": "mnemonic/time feature -> frozen coordinate -> sonar feature пока не проходит ground-fixed replication",
+    "corrected_wording": "The mnemonic/time -> frozen-coordinate branch is not the failed link. The Earth-fixed coordinate is independently anchored by EM12. The unresolved/failing link is frozen Earth-cell -> defensible TOBI feature replication at that same cell.",
+    "scope": "This V3 contract addresses vehicle navigation / footprint provenance only. It does not re-open or move the frozen coordinate."
+  },
+  "frozen_target": {
+    "utc": "2005-02-28T01:07:25Z",
+    "latitude": -3.8654180644718967,
+    "longitude": -12.142441475,
+    "recenter_allowed": false
+  },
+  "pre_v3_state": {
+    "earth_cell_independently_anchored_by_em12": true,
+    "independent_em12_line_groups": 2,
+    "v2_historical_navigation_heldout_dominance": "PASS",
+    "v2_target_geometry_selected_sample": 821,
+    "v2_target_side": "port",
+    "v2_target_strong_feature": false,
+    "native_prism_veh_nav_recovered": false,
+    "ground_fixed_tobi_feature_replication": "NOT_ESTABLISHED"
+  },
+  "v3_primary_question": "Can CD169 per-ping TOBI position be recovered from an authentic PRISM-derived .veh_nav, an independently archived/calibrated vehicle-navigation product, or the exact PRISM wireout algorithm plus CD169-specific configuration/provenance?",
+  "allowed_evidence_lanes": [
+    {
+      "id": "V3_A_NATIVE_ARCHIVE",
+      "priority": 1,
+      "goal": "Recover an actual .veh_nav or equivalent archived vehicle-navigation file and hash the original bytes before interpretation."
+    },
+    {
+      "id": "V3_B_PROCESSED_PRISM_CDF",
+      "priority": 2,
+      "goal": "Inspect CD169 processed PRISM CDF metadata/navigation variables only, determine whether they contain vehicle positions already merged by PRISM, and establish exact provenance before using them as a calibrated navigation product."
+    },
+    {
+      "id": "V3_C_WIREOUT_ALGORITHM_CONFIG",
+      "priority": 3,
+      "goal": "Recover exact wireout algorithm/source/manual semantics and CD169-specific parameters/configuration. Generic later-cruise assumptions may constrain the search but may not be silently transferred to CD169."
+    },
+    {
+      "id": "V3_D_OUTLIER_DIAGNOSTICS",
+      "priority": 4,
+      "goal": "Explain the two large V2 held-out residuals without deleting them or fitting parameters; separately audit any anchor outside actual raw time support."
+    },
+    {
+      "id": "V3_E_CROSS_REPOSITORY_ASSIST",
+      "priority": 5,
+      "goal": "Search the user's other JANUS repositories for exact historical bytes, provenance, prior source-recovery methods, or non-mutating diagnostic organs. Same-name PRISM components are not assumed identical."
+    }
+  ],
+  "acceptance_gates": {
+    "G3A_NATIVE_VEH_NAV": {
+      "pass_if": "An authentic CD169 .veh_nav or equivalent vehicle-navigation artifact is recovered with original-byte SHA-256 and provenance tying it to CD169/PRISM processing.",
+      "otherwise": "BLOCKED"
+    },
+    "G3B_CALIBRATED_NAV_PRODUCT": {
+      "pass_if": "A processed CD169 product contains per-ping vehicle coordinates and provenance establishes that those coordinates are vehicle navigation rather than ship navigation or an unmerged header field.",
+      "otherwise": "BLOCKED"
+    },
+    "G3C_EXACT_WIREOUT_REPRODUCTION": {
+      "pass_if": "The exact wireout algorithm/semantics plus CD169-specific configuration are recovered sufficiently to reproduce the archived navigation without fitting to the frozen target or sonar intensity.",
+      "otherwise": "PARTIAL_OR_BLOCKED"
+    },
+    "G3D_OUTLIER_DIAGNOSTICS": {
+      "pass_if": "Outliers are classified by time support / turn geometry / source disagreement / sensor-quality evidence without deleting observations or tuning parameters.",
+      "otherwise": "OPEN"
+    },
+    "G3E_FOOTPRINT_RETEST": {
+      "precondition": "G3A or G3B or defensible G3C PASS",
+      "rule": "Map the already frozen Earth-cell using navigation only. If the resulting raw sample remains approximately 819-821, re-evaluate the already negative frozen-cell result as a stronger navigation-robust negative. If it shifts materially, inspect only the newly geometry-selected sample. No intensity-based recentering is allowed."
+    }
+  },
+  "v2_outlier_watchlist": [
+    {
+      "anchor_utc": "2005-02-28T00:15:00Z",
+      "v2_residual_m_approx": 1963.0,
+      "treatment": "KEEP_AND_DIAGNOSE"
+    },
+    {
+      "anchor_utc": "2005-02-28T05:30:00Z",
+      "v2_residual_m_approx": 4147.3,
+      "treatment": "KEEP_AND_DIAGNOSE"
+    },
+    {
+      "anchor_utc": "2005-02-28T06:31:00Z",
+      "note": "V2 used nearest raw ping at 06:22:16Z; this anchor appears outside actual raw time support and must be audited separately rather than interpreted as an ordinary navigation residual.",
+      "treatment": "TIME_SUPPORT_AUDIT"
+    }
+  ],
+  "hard_rules": [
+    "NO_V4_NAV_MODEL_IN_THIS_GATE",
+    "NO_RECENTERING",
+    "NO_INTENSITY_BASED_PING_OR_SAMPLE_SELECTION",
+    "NO_POSTHOC_NAV_PARAMETER_FITTING",
+    "NO_DROPPING_V2_OUTLIERS",
+    "NO_GENERIC_PRISM_PARAMETER_TRANSFER_TO_CD169_WITHOUT_PROVENANCE",
+    "SAME_NAME_PRISM_NE_COMPONENT_IDENTITY",
+    "PROCESSED_CDF_COORDINATE_NE_VEHICLE_COORDINATE_UNTIL_SEMANTICS_PROVEN",
+    "EM12_TERRAIN_MAY_CONSTRAIN_BUT_MUST_NOT_LABEL_TOBI_NAVIGATION",
+    "NO_GEOMETRY_CLASS_WITHOUT_REPLICATED_TOBI_FEATURE",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ],
+  "process_journal_path": "data/cousteau/JANUS-HANNAH-CD169-V3-PROCESS-JOURNAL-2026-08-26-v1.0.json"
+}
