@@ -1,0 +1,38 @@
+name: Cousteau Hannah CD169 CDF Nav Stage Diagnostic V3
+on:
+  push:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/hannah_cd169_cdf_navigation_stage_diagnostic_v3.py'
+      - '.github/workflows/cousteau-hannah-cd169-cdf-nav-stage-diagnostic-v3.yml'
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install NetCDF reader
+        run: python -m pip install --disable-pip-version-check netCDF4 numpy
+      - name: Syntax check
+        run: python -m py_compile workspace/hannah_cd169_cdf_navigation_stage_diagnostic_v3.py
+      - name: Diagnose CDF navigation stage and signed-degree conversion
+        id: diag
+        continue-on-error: true
+        run: |
+          python workspace/hannah_cd169_cdf_navigation_stage_diagnostic_v3.py \
+            --output out/JANUS-HANNAH-CD169-CDF-NAV-STAGE-DIAGNOSTIC-V3-RUN-001.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hannah-cd169-cdf-nav-stage-diagnostic-v3
+          path: out/JANUS-HANNAH-CD169-CDF-NAV-STAGE-DIAGNOSTIC-V3-RUN-001.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Propagate execution failure after receipt preservation
+        if: steps.diag.outcome == 'failure'
+        run: exit 1
