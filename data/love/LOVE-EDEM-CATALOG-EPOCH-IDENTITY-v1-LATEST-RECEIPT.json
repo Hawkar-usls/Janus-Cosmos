@@ -1,0 +1,630 @@
+{
+  "archive_search_bridge": {
+    "catalog_values_must_come_from_primary_catalog_or_archive": true,
+    "lineage": "TOPA tools/topa_arxiv_gateway.py",
+    "role": "DISCOVERY_AND_PROVENANCE_INDEX_ONLY",
+    "search_rank_is_truth": false
+  },
+  "claim_ceiling": "CROSS_CATALOG_COMPATIBILITY_OF_ALREADY_GROUPED_STELLAR_DETECTIONS_ONLY__NOT_LOVE_EDEM_IDENTITY",
+  "epistemic_firewall": {
+    "catalog_agreement_is_anomaly": false,
+    "catalog_agreement_is_love_edem_identity": false,
+    "mahalanobis_pass_is_identity_proof": false,
+    "missing_covariance_may_be_zeroed": false,
+    "missing_epoch_may_use_release_year": false,
+    "negative_result_is_valid": true
+  },
+  "experiment": "LOVE_EDEM_CATALOG_EPOCH_IDENTITY_GEN3",
+  "formula": "RESPICIENS_ET_PROSPICIENS_GEN3",
+  "groups": {
+    "EDEM_GAIA_WISE_SDSS_PS1": {
+      "catalog_epoch_audit": {
+        "ALLWISE": {
+          "covariance_status": "MEASURED_FULL_2D_COVARIANCE_FROM_ALLWISE_PM_COSIGMA",
+          "epoch_jyear": 2010.5557837097879,
+          "epoch_mjd": 55400.0,
+          "epoch_status": "EXACT_CATALOG_REFERENCE_EPOCH_MJD_55400",
+          "position_semantics": "ALLWISE_MOTION_FIT_POSITION_AT_STANDARD_REFERENCE_EPOCH",
+          "source_id": "J091652.31+301545.8",
+          "status": "EPOCH_AND_POSITION_COVARIANCE_RESOLVED"
+        },
+        "PANSTARRS_DR1": {
+          "covariance_status": "CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_RA_DEC_CORRELATION__20MAS_SYSTEMATIC_FLOOR",
+          "epoch_jyear": 2012.7700329556194,
+          "epoch_mjd": 56208.75453704,
+          "epoch_status": "EXACT_WEIGHTED_MEAN_EPOCH_MJD_FROM_PS1_EPOCH",
+          "position_semantics": "PS1_WEIGHTED_MEAN_SINGLE_EPOCH_DETECTION_POSITION_AT_EPOCHMEAN",
+          "source_id": "144311392180445928",
+          "status": "EPOCH_AND_POSITION_COVARIANCE_RESOLVED"
+        },
+        "SDSS_DR16": {
+          "covariance_status": "CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_SDSS_RA_DEC_CORRELATION",
+          "epoch_jyear": 2004.0792824093087,
+          "epoch_mjd": 53034.4579,
+          "epoch_status": "EXACT_R_BAND_FIELD_EPOCH_MJD_R_CROSSCHECKED_SKYSERVER_VIZIER",
+          "position_semantics": "SDSS_DR16_CATALOG_POSITION_WITH_R_BAND_FIELD_EPOCH",
+          "source_id": "1237664320537362761",
+          "status": "EPOCH_AND_POSITION_COVARIANCE_RESOLVED"
+        }
+      },
+      "gaia_source_id": "699051350998534656",
+      "identity_test": {
+        "catalog_order": [
+          "ALLWISE",
+          "PANSTARRS_DR1",
+          "SDSS_DR16"
+        ],
+        "claim_ceiling": "INDEPENDENT_CATALOG_COMPATIBILITY_WITH_A_GAIA_STELLAR_WORLDLINE_ONLY__NOT_LOVE_EDEM_IDENTITY_OR_ANOMALY",
+        "common_epoch_jyear": 2016.0,
+        "epistemic_firewall": {
+          "common_epoch_transport_is_independent_motion_measurement": false,
+          "compatibility_is_identity_proof": false,
+          "cross_catalog_agreement_is_love_edem_identity": false,
+          "i_do_not_know_is_valid": true,
+          "missing_covariance_replaced_with_zero": false,
+          "negative_result_is_valid": true,
+          "release_year_is_observation_epoch": false,
+          "shared_gaia_uncertainty_double_counted": false
+        },
+        "formula": "RESPICIENS_ET_PROSPICIENS_GEN3",
+        "gaia_source": {
+          "catalog": "GAIA_DR3",
+          "dec_deg": 30.26276387854,
+          "parallax_mas": 0.7325,
+          "pmdec_masyr": -8.028,
+          "pmra_masyr": 2.124,
+          "ra_deg": 139.21802643661,
+          "reference_epoch_jyear": 2016.0,
+          "source_id": "699051350998534656"
+        },
+        "input_sha256": "46ba96d2b5666a44e81807928cca724fe2f78574bb588c3d460ce978dbff5ed1",
+        "joint_gls": {
+          "block_covariance_mas2": [
+            [
+              51305.95990681368,
+              -385.1672568052296,
+              2.2862397654412487,
+              -0.6487769149777511,
+              7.874018648305042,
+              -2.0557817080982193
+            ],
+            [
+              -385.1672568052296,
+              61953.11527947536,
+              -0.665331732166914,
+              1.1807742941067365,
+              -2.0073601967183907,
+              4.0243989725796805
+            ],
+            [
+              2.286239765441249,
+              -0.665331732166914,
+              841.919390176774,
+              -0.42768948384655286,
+              4.821705228009486,
+              -1.360416232339177
+            ],
+            [
+              -0.6487769149777511,
+              1.1807742941067365,
+              -0.4276894838465529,
+              841.2363276305956,
+              -1.2954399037701856,
+              2.4807451079805944
+            ],
+            [
+              7.874018648305042,
+              -2.0073601967183907,
+              4.821705228009486,
+              -1.2954399037701856,
+              1529.8017903854884,
+              -4.089669905888047
+            ],
+            [
+              -2.0557817080982193,
+              4.02439897257968,
+              -1.360416232339177,
+              2.4807451079805944,
+              -4.089669905888047,
+              1521.539462613399
+            ]
+          ],
+          "catalogs_using_conservative_covariance_upper_bound": [
+            "PANSTARRS_DR1",
+            "SDSS_DR16"
+          ],
+          "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+          "dof": 6,
+          "mahalanobis_chi2": 13.871810968388479,
+          "residual_vector_east_north_mas": [
+            -172.31608004049517,
+            -108.06891237628138,
+            9.265231791359476,
+            -13.108919426607947,
+            101.69710059042782,
+            95.53773517763223
+          ],
+          "shared_gaia_cross_epoch_covariance_included": true,
+          "tail_alpha_preregistered": 0.0027,
+          "tail_probability": 0.03110134923076163
+        },
+        "pairwise": {
+          "ALLWISE": {
+            "catalog_covariance_status": "MEASURED_FULL_2D_COVARIANCE_FROM_ALLWISE_PM_COSIGMA",
+            "catalog_epoch_jyear": 2010.5557837097879,
+            "catalog_epoch_mjd": 55400.0,
+            "catalog_position_covariance_mas2": [
+              [
+                51302.25,
+                -384.1599999999999
+              ],
+              [
+                -384.1599999999999,
+                61951.21000000001
+              ]
+            ],
+            "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+            "dof": 2,
+            "epoch_status": "EXACT_CATALOG_REFERENCE_EPOCH_MJD_55400",
+            "gaia_prediction_covariance_mas2": [
+              [
+                3.7099068136810343,
+                -1.007256805229678
+              ],
+              [
+                -1.007256805229678,
+                1.9052794753548092
+              ]
+            ],
+            "mahalanobis_chi2": 0.7718012606857378,
+            "position_semantics": "ALLWISE_MOTION_FIT_POSITION_AT_STANDARD_REFERENCE_EPOCH",
+            "provenance": {
+              "catalog_id": "II/328/allwise",
+              "query_mode": "EXACT_CONSTRAINT:AllWISE",
+              "raw_epoch_evidence": {
+                "DE_pm": 30.262746,
+                "RA_pm": 139.2179673,
+                "reference_mjd": 55400.0
+              },
+              "raw_uncertainty": {
+                "cosig_pm_arcsec": -0.0196,
+                "e_DE_pm_arcsec": 0.2489,
+                "e_RA_pm_arcsec": 0.2265
+              },
+              "stationary_position_not_used": true
+            },
+            "residual_east_north_mas": [
+              -172.31608004049517,
+              -108.06891237628138
+            ],
+            "residual_norm_mas": 203.40039641729982,
+            "source_id": "J091652.31+301545.8",
+            "tail_alpha_preregistered": 0.0027,
+            "tail_probability": 0.6798380776006357,
+            "total_covariance_mas2": [
+              [
+                51305.95990681368,
+                -385.1672568052296
+              ],
+              [
+                -385.1672568052296,
+                61953.11527947536
+              ]
+            ],
+            "transported_to_common_epoch": {
+              "common_epoch_jyear": 2016.0,
+              "transport_is_conditional_on_gaia_identity_hypothesis": true,
+              "x_east_mas_relative_to_gaia_ref_position": -172.31608004049517,
+              "y_north_mas_relative_to_gaia_ref_position": -108.06891237628138
+            }
+          },
+          "PANSTARRS_DR1": {
+            "catalog_covariance_status": "CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_RA_DEC_CORRELATION__20MAS_SYSTEMATIC_FLOOR",
+            "catalog_epoch_jyear": 2012.7700329556194,
+            "catalog_epoch_mjd": 56208.75453704,
+            "catalog_position_covariance_mas2": [
+              [
+                840.5,
+                0.0
+              ],
+              [
+                0.0,
+                840.5
+              ]
+            ],
+            "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+            "dof": 2,
+            "epoch_status": "EXACT_WEIGHTED_MEAN_EPOCH_MJD_FROM_PS1_EPOCH",
+            "gaia_prediction_covariance_mas2": [
+              [
+                1.419390176773952,
+                -0.42768948384655286
+              ],
+              [
+                -0.4276894838465529,
+                0.7363276305956505
+              ]
+            ],
+            "mahalanobis_chi2": 0.306091523654193,
+            "position_semantics": "PS1_WEIGHTED_MEAN_SINGLE_EPOCH_DETECTION_POSITION_AT_EPOCHMEAN",
+            "provenance": {
+              "catalog_id": "II/349/ps1",
+              "query_mode": "EXACT_CONSTRAINT:objID",
+              "raw_epoch_field": "Epoch",
+              "raw_epoch_mjd": 56208.75453704,
+              "raw_statistical_errors_arcsec": {
+                "dec": 0.0045,
+                "ra": 0.0045
+              },
+              "systematic_floor_mas": 20.0,
+              "unknown_correlation_policy": "TRACE_TIMES_IDENTITY_UPPER_BOUND_NOT_ZERO_CORRELATION"
+            },
+            "residual_east_north_mas": [
+              9.265231791359476,
+              -13.108919426607947
+            ],
+            "residual_norm_mas": 16.052672322106297,
+            "source_id": "144311392180445928",
+            "tail_alpha_preregistered": 0.0027,
+            "tail_probability": 0.8580904531259481,
+            "total_covariance_mas2": [
+              [
+                841.919390176774,
+                -0.42768948384655286
+              ],
+              [
+                -0.4276894838465529,
+                841.2363276305956
+              ]
+            ],
+            "transported_to_common_epoch": {
+              "common_epoch_jyear": 2016.0,
+              "transport_is_conditional_on_gaia_identity_hypothesis": true,
+              "x_east_mas_relative_to_gaia_ref_position": 9.265231791359476,
+              "y_north_mas_relative_to_gaia_ref_position": -13.108919426607947
+            }
+          },
+          "SDSS_DR16": {
+            "catalog_covariance_status": "CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_SDSS_RA_DEC_CORRELATION",
+            "catalog_epoch_jyear": 2004.0792824093087,
+            "catalog_epoch_mjd": 53034.4579,
+            "catalog_position_covariance_mas2": [
+              [
+                1513.0,
+                0.0
+              ],
+              [
+                0.0,
+                1513.0
+              ]
+            ],
+            "compatibility_status": "REJECTED_AT_PREREGISTERED_TAIL",
+            "dof": 2,
+            "epoch_status": "EXACT_R_BAND_FIELD_EPOCH_MJD_R_CROSSCHECKED_SKYSERVER_VIZIER",
+            "gaia_prediction_covariance_mas2": [
+              [
+                16.8017903854884,
+                -4.089669905888047
+              ],
+              [
+                -4.089669905888047,
+                8.539462613399081
+              ]
+            ],
+            "mahalanobis_chi2": 12.793614179900555,
+            "position_semantics": "SDSS_DR16_CATALOG_POSITION_WITH_R_BAND_FIELD_EPOCH",
+            "provenance": {
+              "band_mjd": {
+                "g": 53034.46116856,
+                "i": 53034.45868077,
+                "r": 53034.4578515,
+                "u": 53034.45951003,
+                "z": 53034.4603393
+              },
+              "catalog_id": "V/154/sdss16",
+              "field_id": "1237664320537362432",
+              "query_mode": "EXACT_OBJID_SKYSERVER_FIELD_PLUS_EXACT_OBJID_VIZIER_DR16",
+              "query_receipts": [
+                {
+                  "endpoint": "https://skyserver.sdss.org/dr16/SkyServerWS/SearchTools/SqlSearch",
+                  "http_status": 200,
+                  "label": "PHOTOOBJ_EXACT_ID",
+                  "request_url": "https://skyserver.sdss.org/dr16/SkyServerWS/SearchTools/SqlSearch?cmd=SELECT+TOP+1+objID%2Cra%2Cdec%2CfieldID%2Crun%2Crerun%2Ccamcol%2Cfield+FROM+PhotoObjAll+WHERE+objID%3D1237664320537362761&format=csv",
+                  "sql": "SELECT TOP 1 objID,ra,dec,fieldID,run,rerun,camcol,field FROM PhotoObjAll WHERE objID=1237664320537362761"
+                },
+                {
+                  "endpoint": "https://skyserver.sdss.org/dr16/SkyServerWS/SearchTools/SqlSearch",
+                  "http_status": 200,
+                  "label": "FIELD_EXACT_FIELDID",
+                  "request_url": "https://skyserver.sdss.org/dr16/SkyServerWS/SearchTools/SqlSearch?cmd=SELECT+TOP+1+fieldID%2Cmjd_u%2Cmjd_g%2Cmjd_r%2Cmjd_i%2Cmjd_z+FROM+%5BField%5D+WHERE+fieldID%3D1237664320537362432&format=csv",
+                  "sql": "SELECT TOP 1 fieldID,mjd_u,mjd_g,mjd_r,mjd_i,mjd_z FROM [Field] WHERE fieldID=1237664320537362432"
+                }
+              ],
+              "raw_statistical_errors_arcsec": {
+                "dec": 0.027,
+                "ra": 0.028
+              },
+              "unknown_correlation_policy": "TRACE_TIMES_IDENTITY_UPPER_BOUND_NOT_ZERO_CORRELATION",
+              "vizier_mean_MJD": 53034.4595,
+              "vizier_query_mode": "EXACT_CONSTRAINT:objID",
+              "vizier_rMJD": 53034.4579
+            },
+            "residual_east_north_mas": [
+              101.69710059042782,
+              95.53773517763223
+            ],
+            "residual_norm_mas": 139.53407867388879,
+            "source_id": "1237664320537362761",
+            "tail_alpha_preregistered": 0.0027,
+            "tail_probability": 0.0016668709546288302,
+            "total_covariance_mas2": [
+              [
+                1529.8017903854884,
+                -4.089669905888047
+              ],
+              [
+                -4.089669905888047,
+                1521.539462613399
+              ]
+            ],
+            "transported_to_common_epoch": {
+              "common_epoch_jyear": 2016.0,
+              "transport_is_conditional_on_gaia_identity_hypothesis": true,
+              "x_east_mas_relative_to_gaia_ref_position": 101.69710059042782,
+              "y_north_mas_relative_to_gaia_ref_position": 95.53773517763223
+            }
+          }
+        },
+        "result_sha256": "b49670dbdc7a731fcb90853b55a5c7ac1471b88d1a2a938a7209ba5feff17888",
+        "schema": "janus.cosmos.catalog-epoch-identity.v1"
+      },
+      "status": "EVALUATED",
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "LOVE_GAIA_WISE_2MASS": {
+      "catalog_epoch_audit": {
+        "2MASS_PSC": {
+          "covariance_status": "MEASURED_FULL_2D_ERROR_ELLIPSE",
+          "epoch_jyear": 1999.2844183436002,
+          "epoch_mjd": 51283.13379999995,
+          "epoch_status": "EXACT_OBSERVATION_EPOCH_FROM_2MASS_JD",
+          "position_semantics": "2MASS_PSC_POSITION_AT_SCAN_OBSERVATION_EPOCH",
+          "source_id": "13371100-3646446",
+          "status": "EPOCH_AND_POSITION_COVARIANCE_RESOLVED"
+        },
+        "ALLWISE": {
+          "covariance_status": "MEASURED_FULL_2D_COVARIANCE_FROM_ALLWISE_PM_COSIGMA",
+          "epoch_jyear": 2010.5557837097879,
+          "epoch_mjd": 55400.0,
+          "epoch_status": "EXACT_CATALOG_REFERENCE_EPOCH_MJD_55400",
+          "position_semantics": "ALLWISE_MOTION_FIT_POSITION_AT_STANDARD_REFERENCE_EPOCH",
+          "source_id": "J133710.98-364644.9",
+          "status": "EPOCH_AND_POSITION_COVARIANCE_RESOLVED"
+        }
+      },
+      "gaia_source_id": "6163586620213012352",
+      "identity_test": {
+        "catalog_order": [
+          "ALLWISE",
+          "2MASS_PSC"
+        ],
+        "claim_ceiling": "INDEPENDENT_CATALOG_COMPATIBILITY_WITH_A_GAIA_STELLAR_WORLDLINE_ONLY__NOT_LOVE_EDEM_IDENTITY_OR_ANOMALY",
+        "common_epoch_jyear": 2016.0,
+        "epistemic_firewall": {
+          "common_epoch_transport_is_independent_motion_measurement": false,
+          "compatibility_is_identity_proof": false,
+          "cross_catalog_agreement_is_love_edem_identity": false,
+          "i_do_not_know_is_valid": true,
+          "missing_covariance_replaced_with_zero": false,
+          "negative_result_is_valid": true,
+          "release_year_is_observation_epoch": false,
+          "shared_gaia_uncertainty_double_counted": false
+        },
+        "formula": "RESPICIENS_ET_PROSPICIENS_GEN3",
+        "gaia_source": {
+          "catalog": "GAIA_DR3",
+          "dec_deg": -36.77911588007,
+          "parallax_mas": 0.7101,
+          "pmdec_masyr": -4.695,
+          "pmra_masyr": -14.675,
+          "ra_deg": 204.29573215827,
+          "reference_epoch_jyear": 2016.0,
+          "source_id": "6163586620213012352"
+        },
+        "input_sha256": "167ac9a56ca24c909469af77340ff87bf20f04c67b6d58171e0de3795c78fef8",
+        "joint_gls": {
+          "block_covariance_mas2": [
+            [
+              5373.398163165128,
+              18.525116649634704,
+              1.4866207211434412,
+              0.10226359818875737
+            ],
+            [
+              18.525116649634704,
+              6146.7732924547945,
+              0.09431199964486368,
+              0.6162454858659386
+            ],
+            [
+              1.4866207211434412,
+              0.09431199964486368,
+              6404.38683607368,
+              0.2772503725132084
+            ],
+            [
+              0.10226359818875737,
+              0.6162454858659387,
+              0.27725037251320833,
+              6401.791846178734
+            ]
+          ],
+          "catalogs_using_conservative_covariance_upper_bound": [],
+          "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+          "dof": 4,
+          "mahalanobis_chi2": 7.12238485270556,
+          "residual_vector_east_north_mas": [
+            60.072261603626046,
+            -135.07234347883963,
+            126.2035025460124,
+            79.48859613200304
+          ],
+          "shared_gaia_cross_epoch_covariance_included": true,
+          "tail_alpha_preregistered": 0.0027,
+          "tail_probability": 0.1295603685566598
+        },
+        "pairwise": {
+          "2MASS_PSC": {
+            "catalog_covariance_status": "MEASURED_FULL_2D_ERROR_ELLIPSE",
+            "catalog_epoch_jyear": 1999.2844183436002,
+            "catalog_epoch_mjd": 51283.13379999995,
+            "catalog_position_covariance_mas2": [
+              [
+                6399.999713897708,
+                0.0
+              ],
+              [
+                0.0,
+                6399.999713897708
+              ]
+            ],
+            "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+            "dof": 2,
+            "epoch_status": "EXACT_OBSERVATION_EPOCH_FROM_2MASS_JD",
+            "gaia_prediction_covariance_mas2": [
+              [
+                4.38712217597167,
+                0.2772503725132084
+              ],
+              [
+                0.27725037251320833,
+                1.7921322810257443
+              ]
+            ],
+            "mahalanobis_chi2": 3.4737834969512464,
+            "position_semantics": "2MASS_PSC_POSITION_AT_SCAN_OBSERVATION_EPOCH",
+            "provenance": {
+              "catalog_id": "II/246/out",
+              "date_precision_contract": "2MASS_JDATE_DOCUMENTED_TO_APPROX_PLUS_MINUS_30_SECONDS",
+              "interpreted_mjd": 51283.13379999995,
+              "query_mode": "EXACT_CONSTRAINT:2MASS",
+              "raw_epoch_field": "JD",
+              "raw_epoch_value": 2451283.6338,
+              "raw_error_ellipse": {
+                "major_arcsec": 0.07999999821186066,
+                "minor_arcsec": 0.07999999821186066,
+                "pa_deg_east_of_north": 17.0
+              }
+            },
+            "residual_east_north_mas": [
+              126.2035025460124,
+              79.48859613200304
+            ],
+            "residual_norm_mas": 149.15012896379957,
+            "source_id": "13371100-3646446",
+            "tail_alpha_preregistered": 0.0027,
+            "tail_probability": 0.17606681092018667,
+            "total_covariance_mas2": [
+              [
+                6404.38683607368,
+                0.2772503725132084
+              ],
+              [
+                0.27725037251320833,
+                6401.791846178734
+              ]
+            ],
+            "transported_to_common_epoch": {
+              "common_epoch_jyear": 2016.0,
+              "transport_is_conditional_on_gaia_identity_hypothesis": true,
+              "x_east_mas_relative_to_gaia_ref_position": 126.2035025460124,
+              "y_north_mas_relative_to_gaia_ref_position": 79.48859613200304
+            }
+          },
+          "ALLWISE": {
+            "catalog_covariance_status": "MEASURED_FULL_2D_COVARIANCE_FROM_ALLWISE_PM_COSIGMA",
+            "catalog_epoch_jyear": 2010.5557837097879,
+            "catalog_epoch_mjd": 55400.0,
+            "catalog_position_covariance_mas2": [
+              [
+                5372.889999999999,
+                18.49
+              ],
+              [
+                18.49,
+                6146.559999999999
+              ]
+            ],
+            "compatibility_status": "NOT_REJECTED_AT_PREREGISTERED_TAIL",
+            "dof": 2,
+            "epoch_status": "EXACT_CATALOG_REFERENCE_EPOCH_MJD_55400",
+            "gaia_prediction_covariance_mas2": [
+              [
+                0.5081631651278586,
+                0.03511664963470429
+              ],
+              [
+                0.03511664963470429,
+                0.213292454795939
+              ]
+            ],
+            "mahalanobis_chi2": 3.648870547935471,
+            "position_semantics": "ALLWISE_MOTION_FIT_POSITION_AT_STANDARD_REFERENCE_EPOCH",
+            "provenance": {
+              "catalog_id": "II/328/allwise",
+              "query_mode": "EXACT_CONSTRAINT:AllWISE",
+              "raw_epoch_evidence": {
+                "DE_pm": -36.7791463,
+                "RA_pm": 204.2957807,
+                "reference_mjd": 55400.0
+              },
+              "raw_uncertainty": {
+                "cosig_pm_arcsec": 0.0043,
+                "e_DE_pm_arcsec": 0.0784,
+                "e_RA_pm_arcsec": 0.0733
+              },
+              "stationary_position_not_used": true
+            },
+            "residual_east_north_mas": [
+              60.072261603626046,
+              -135.07234347883963
+            ],
+            "residual_norm_mas": 147.82832809390803,
+            "source_id": "J133710.98-364644.9",
+            "tail_alpha_preregistered": 0.0027,
+            "tail_probability": 0.16130871364251922,
+            "total_covariance_mas2": [
+              [
+                5373.398163165128,
+                18.525116649634704
+              ],
+              [
+                18.525116649634704,
+                6146.7732924547945
+              ]
+            ],
+            "transported_to_common_epoch": {
+              "common_epoch_jyear": 2016.0,
+              "transport_is_conditional_on_gaia_identity_hypothesis": true,
+              "x_east_mas_relative_to_gaia_ref_position": 60.072261603626046,
+              "y_north_mas_relative_to_gaia_ref_position": -135.07234347883963
+            }
+          }
+        },
+        "result_sha256": "bba645189308b72ee23aaa875f5cd7d5b670dacf23263a5ae9b18a51042c11f2",
+        "schema": "janus.cosmos.catalog-epoch-identity.v1"
+      },
+      "status": "EVALUATED",
+      "target": "LOVE"
+    }
+  },
+  "run_time_utc": "2026-08-27T07:24:38.506484+00:00",
+  "schema": "janus.cosmos.love-edem.catalog-epoch-identity.v1",
+  "summary": {
+    "all_required_epochs_resolved": true,
+    "release_year_substitutions": 0,
+    "required_external_catalog_measurements": 5,
+    "resolved_external_catalog_measurements": 5,
+    "simulation_count_increased": false
+  }
+}
