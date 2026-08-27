@@ -1,0 +1,72 @@
+name: Cousteau KUSTO Frozen Point Morphology Gen4
+
+on:
+  pull_request:
+    branches: [janus-echo-cousteau]
+    paths:
+      - 'workspace/kusto_frozen_point_morphology_gen4.py'
+      - 'data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-CONTRACT-v1.0.json'
+      - '.github/workflows/cousteau-kusto-frozen-point-morphology-gen4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gen4-morphology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install scientific runtime
+        run: python -m pip install --disable-pip-version-check numpy xarray netCDF4 requests pillow
+
+      - name: Deterministic engine self-test
+        run: python workspace/kusto_frozen_point_morphology_gen4.py --self-test
+
+      - name: Live frozen-point gate
+        run: |
+          python workspace/kusto_frozen_point_morphology_gen4.py \
+            --live \
+            --out data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LATEST-RECEIPT.json
+
+      - name: Verify scientific firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LATEST-RECEIPT.json')
+          r = json.loads(p.read_text())
+          assert r['frozen_target']['latitude_deg'] == -3.865418
+          assert r['frozen_target']['longitude_deg'] == 3.854924
+          assert r['frozen_target']['no_recentering'] is True
+          assert r['simulation_count_increased'] is False
+          assert r['underwater_pyramid_detected'] is False
+          assert r['claim_ceiling'] == 'MORPHOLOGY_ONLY__NOT_PYRAMID_IDENTITY__NOT_ANOMALY_PROOF'
+          assert r['decision'] in {
+              'DATA_SOURCE_UNAVAILABLE',
+              'NO_DIRECT_COVERAGE',
+              'RESOLUTION_INSUFFICIENT',
+              'CONTROL_POWER_INSUFFICIENT',
+              'NO_PREREGISTERED_MORPHOLOGY_SIGNAL',
+              'MORPHOLOGY_SIGNAL_REQUIRES_INDEPENDENT_REPLICATION',
+          }
+          print(json.dumps({
+              'decision': r['decision'],
+              'gmrt': r.get('gmrt_topo_mask', {}),
+              'gebco_tid_wms': r.get('gebco_2026_tid_wms', {}),
+              'result_sha256': r.get('result_sha256'),
+          }, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload Gen4 receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: kusto-frozen-point-morphology-gen4
+          path: data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LATEST-RECEIPT.json
+          retention-days: 30
