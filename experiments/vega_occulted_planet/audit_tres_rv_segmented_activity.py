@@ -14,6 +14,7 @@ ROTATION_D = 0.676
 CANDIDATE_D = 2.43
 LONG_CONTROL_D = 196.4
 CHUNK_DAYS = [90.0, 180.0, 360.0]
+MIN_POINTS_PER_ACTIVITY_SEGMENT = 8
 
 
 def parse_rows(path: Path) -> list[tuple[float, float, float]]:
@@ -65,33 +66,83 @@ def solve_linear(a: list[list[float]], b: list[float]) -> list[float]:
     return [m[i][n] for i in range(n)]
 
 
-def chunk_index(t: float, t0: float, chunk_days: float) -> int:
+def base_bin(t: float, t0: float, chunk_days: float) -> int:
     return int(math.floor((t - t0) / chunk_days))
 
 
-def active_chunks(rows: list[tuple[float, float, float]], chunk_days: float) -> list[int]:
+def build_segments(
+    rows: list[tuple[float, float, float]],
+    chunk_days: float,
+    min_points: int = MIN_POINTS_PER_ACTIVITY_SEGMENT,
+) -> tuple[dict[int, int], list[dict]]:
+    """Merge sparse adjacent nominal time bins before fitting local activity.
+
+    A free offset + sin/cos activity model needs enough observations in each
+    segment. The raw TRES cadence contains a few 90/180-day bins with only
+    1-5 points, so treating every occupied bin as three free parameters makes
+    the normal matrix singular. This deterministic pre-registered merge keeps
+    the nominal activity timescale while forbidding underdetermined segments.
+    """
     t0 = rows[0][0]
-    return sorted({chunk_index(t, t0, chunk_days) for t, _, _ in rows})
+    counts: dict[int, int] = {}
+    for t, _, _ in rows:
+        b = base_bin(t, t0, chunk_days)
+        counts[b] = counts.get(b, 0) + 1
+
+    groups: list[list[int]] = []
+    current: list[int] = []
+    current_n = 0
+    for b in sorted(counts):
+        current.append(b)
+        current_n += counts[b]
+        if current_n >= min_points:
+            groups.append(current)
+            current = []
+            current_n = 0
+    if current:
+        if groups:
+            groups[-1].extend(current)
+        else:
+            groups.append(current)
+
+    mapping: dict[int, int] = {}
+    diagnostics: list[dict] = []
+    for slot, bins in enumerate(groups):
+        n = sum(counts[b] for b in bins)
+        if n < min_points:
+            raise RuntimeError(f"activity segment {slot} has only {n} points")
+        for b in bins:
+            mapping[b] = slot
+        diagnostics.append(
+            {
+                "slot": slot,
+                "base_bins": bins,
+                "points": n,
+                "approx_start_days_from_first_epoch": bins[0] * chunk_days,
+                "approx_end_days_from_first_epoch": (bins[-1] + 1) * chunk_days,
+            }
+        )
+    return mapping, diagnostics
 
 
 def design_row(
     t: float,
     t0: float,
     chunk_days: float,
-    chunk_to_slot: dict[int, int],
+    bin_to_segment: dict[int, int],
+    n_segments: int,
     global_periods: list[float],
 ) -> list[float]:
-    # Each activity chunk gets its own offset + sin/cos at the stellar rotation period.
-    n_local = 3 * len(chunk_to_slot)
+    n_local = 3 * n_segments
     x = [0.0] * (n_local + 2 * len(global_periods))
-    c = chunk_index(t, t0, chunk_days)
-    slot = chunk_to_slot[c]
-    base = 3 * slot
+    b = base_bin(t, t0, chunk_days)
+    slot = bin_to_segment[b]
+    local = 3 * slot
     dt = t - t0
-    x[base] = 1.0
+    x[local] = 1.0
     rot_phase = 2.0 * math.pi * dt / ROTATION_D
-    x[base + 1] = math.sin(rot_phase)
-    x[base + 2] = math.cos(rot_phase)
+    x[local + 1] = math.sin(rot_phase)
+    x[local + 2] = math.cos(rot_phase)
     pos = n_local
     for p in global_periods:
         phase = 2.0 * math.pi * dt / p
@@ -107,15 +158,15 @@ def fit(
     global_periods: list[float],
 ) -> dict:
     t0 = rows[0][0]
-    chunks = active_chunks(rows, chunk_days)
-    chunk_to_slot = {c: i for i, c in enumerate(chunks)}
-    k = 3 * len(chunks) + 2 * len(global_periods)
+    bin_to_segment, segment_diag = build_segments(rows, chunk_days)
+    n_segments = len(segment_diag)
+    k = 3 * n_segments + 2 * len(global_periods)
     ata = [[0.0 for _ in range(k)] for _ in range(k)]
     aty = [0.0 for _ in range(k)]
     design: list[tuple[list[float], float, float]] = []
 
     for t, y, err in rows:
-        x = design_row(t, t0, chunk_days, chunk_to_slot, global_periods)
+        x = design_row(t, t0, chunk_days, bin_to_segment, n_segments, global_periods)
         design.append((x, y, err))
         w = 1.0 / (err * err)
         for i in range(k):
@@ -144,7 +195,7 @@ def fit(
 
     n = len(rows)
     bic = chi2 + k * math.log(n)
-    n_local = 3 * len(chunks)
+    n_local = 3 * n_segments
     amps: dict[str, float] = {}
     pos = n_local
     for p in global_periods:
@@ -153,7 +204,9 @@ def fit(
 
     return {
         "chunk_days": chunk_days,
-        "activity_chunks": len(chunks),
+        "activity_segments": n_segments,
+        "minimum_points_per_segment": MIN_POINTS_PER_ACTIVITY_SEGMENT,
+        "segment_diagnostics": segment_diag,
         "n": n,
         "k": k,
         "chi2": chi2,
@@ -169,6 +222,7 @@ def classify(results: list[dict]) -> dict:
     cand_strong = sum(v >= 10.0 for v in cand_deltas)
     ctrl_strong = sum(v >= 10.0 for v in ctrl_deltas)
     candidate_beats_control = sum((c - l) >= 10.0 for c, l in zip(cand_deltas, ctrl_deltas))
+    candidate_higher_all = all(c > l for c, l in zip(cand_deltas, ctrl_deltas))
 
     if cand_strong == 0:
         status = "ACTIVITY_FLEXIBILITY_ABSORBS_2P43_CANDIDATE"
@@ -186,6 +240,7 @@ def classify(results: list[dict]) -> dict:
         "candidate_strong_chunk_scales": cand_strong,
         "long_control_strong_chunk_scales": ctrl_strong,
         "candidate_beats_control_by_delta_bic_10_chunk_scales": candidate_beats_control,
+        "candidate_delta_bic_higher_than_control_at_all_chunk_scales": candidate_higher_all,
         "rule": "This is a specificity diagnostic, not a planet confirmation. The 196.4-day signal is used as a preregistered negative-control-like comparator because Hurt et al. 2021 explicitly judged it not good evidence for a planet after more complete analysis."
     }
 
@@ -203,31 +258,33 @@ def main() -> int:
         candidate = fit(rows, chunk_days, [CANDIDATE_D])
         control = fit(rows, chunk_days, [LONG_CONTROL_D])
         both = fit(rows, chunk_days, [CANDIDATE_D, LONG_CONTROL_D])
-        row = {
-            "chunk_days": chunk_days,
-            "activity_only": base,
-            "activity_plus_2p43": candidate,
-            "activity_plus_196p4": control,
-            "activity_plus_both": both,
-            "delta_bic_candidate": base["bic"] - candidate["bic"],
-            "delta_bic_long_control": base["bic"] - control["bic"],
-            "candidate_amplitude_m_s": candidate["global_period_amplitudes_m_s"][str(CANDIDATE_D)],
-            "long_control_amplitude_m_s": control["global_period_amplitudes_m_s"][str(LONG_CONTROL_D)],
-        }
-        scales.append(row)
+        scales.append(
+            {
+                "chunk_days": chunk_days,
+                "activity_only": base,
+                "activity_plus_2p43": candidate,
+                "activity_plus_196p4": control,
+                "activity_plus_both": both,
+                "delta_bic_candidate": base["bic"] - candidate["bic"],
+                "delta_bic_long_control": base["bic"] - control["bic"],
+                "candidate_amplitude_m_s": candidate["global_period_amplitudes_m_s"][str(CANDIDATE_D)],
+                "long_control_amplitude_m_s": control["global_period_amplitudes_m_s"][str(LONG_CONTROL_D)],
+            }
+        )
 
     specificity = classify(scales)
     report = {
-        "schema": "janus.cosmos.vega.tres_rv_segmented_activity_audit.v1.2",
+        "schema": "janus.cosmos.vega.tres_rv_segmented_activity_audit.v1.2.1",
         "source": "VizieR J/AJ/161/157/table2 / Hurt et al. 2021",
         "row_count": len(rows),
         "stellar_rotation_period_days": ROTATION_D,
         "candidate_period_days": CANDIDATE_D,
         "negative_control_period_days": LONG_CONTROL_D,
         "activity_model": {
-            "type": "piecewise_local_offset_plus_rotation_sinusoid",
-            "chunk_days": CHUNK_DAYS,
-            "description": "Each frozen time chunk has its own offset and independent sin/cos coefficients at Vega's 0.676-day stellar rotation period. Candidate/control periods remain global across all chunks.",
+            "type": "piecewise_local_offset_plus_rotation_sinusoid_with_sparse_bin_merge",
+            "nominal_chunk_days": CHUNK_DAYS,
+            "minimum_points_per_activity_segment": MIN_POINTS_PER_ACTIVITY_SEGMENT,
+            "description": "Nominal fixed time bins are deterministically merged forward when sparse; each resulting segment has its own offset and independent sin/cos coefficients at Vega's 0.676-day stellar rotation period. Candidate/control periods remain global across all segments.",
             "not_equivalent_to": "The quasi-periodic Gaussian-process activity model used in Hurt et al. 2021."
         },
         "scales": scales,
@@ -240,6 +297,7 @@ def main() -> int:
     for r in scales:
         print(
             "chunk_days =", r["chunk_days"],
+            "segments =", r["activity_only"]["activity_segments"],
             "delta_BIC_2p43 =", r["delta_bic_candidate"],
             "delta_BIC_196p4 =", r["delta_bic_long_control"],
             "amp_2p43 =", r["candidate_amplitude_m_s"],
