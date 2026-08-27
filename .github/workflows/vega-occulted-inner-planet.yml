@@ -1,0 +1,56 @@
+name: Janus Cosmos Vega Occulted Inner Planet
+
+on:
+  push:
+    branches:
+      - research/vega-occulted-inner-planet-v1
+    paths:
+      - 'experiments/vega_occulted_planet/**'
+      - '.github/workflows/vega-occulted-inner-planet.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  vega-occulted-planet-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python version
+        run: python --version
+      - name: Run deterministic self-test
+        run: python experiments/vega_occulted_planet/run_vega_occulted_planet.py --self-test
+      - name: Validate receipt and queues
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('experiments/vega_occulted_planet/output')
+          receipt = json.loads((root/'vega_occulted_planet_receipt.json').read_text())
+          topa = json.loads((root/'topa_queue.json').read_text())
+          spider = json.loads((root/'spider_queue.json').read_text())
+          assert receipt['verdict'] in {
+              'H1_NOT_EXCLUDED_BY_ENCODED_CONSTRAINTS',
+              'H1_EXCLUDED_BY_ENCODED_CONSTRAINTS'
+          }
+          assert receipt['claim_ceiling'] == 'NOT_EXCLUDED_BY_ENCODED_CONSTRAINTS_ONLY'
+          assert receipt['grid']['total_cells'] == 220 * 240
+          assert topa['receipt_hash'] == receipt['freeze_sha256']
+          assert spider['receipt_hash'] == receipt['freeze_sha256']
+          print('VEGA H1 RECEIPT VALID')
+          print('verdict =', receipt['verdict'])
+          print('admissible_cells =', receipt['grid']['admissible_cells'])
+          print('freeze_sha256 =', receipt['freeze_sha256'])
+          PY
+      - name: Upload Vega hypothesis receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-cosmos-vega-occulted-inner-planet-v1
+          path: |
+            experiments/vega_occulted_planet/output/vega_occulted_planet_receipt.json
+            experiments/vega_occulted_planet/output/topa_queue.json
+            experiments/vega_occulted_planet/output/spider_queue.json
+            experiments/vega_occulted_planet/manifest.json
+            experiments/vega_occulted_planet/topa_spider_contract.json
