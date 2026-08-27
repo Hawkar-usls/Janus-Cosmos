@@ -15,12 +15,15 @@ permissions:
 jobs:
   vega-live-evidence:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
       - name: Python version
         run: python --version
+
+      - name: Install quasi-periodic GP dependencies
+        run: python -m pip install --disable-pip-version-check -r experiments/vega_occulted_planet/requirements_gp.txt
 
       - name: Preserve frozen v1 baseline
         run: python experiments/vega_occulted_planet/run_vega_occulted_planet.py --self-test
@@ -37,51 +40,80 @@ jobs:
       - name: Run segmented stellar-activity specificity audit
         run: python experiments/vega_occulted_planet/audit_tres_rv_segmented_activity.py
 
-      - name: Build evidence-aware v1.1 receipt and TOPA/Spider queues
+      - name: Run Hurt-like quasi-periodic GP specificity audit
+        run: python experiments/vega_occulted_planet/audit_tres_rv_quasiperiodic_activity.py
+
+      - name: Prepare 3-5 au shepherd analytic screen and recovery manifest
+        run: python experiments/vega_occulted_planet/prepare_vega_3to5au_shepherd_grid.py
+
+      - name: Build evidence-aware v1.1 baseline receipt
         run: python experiments/vega_occulted_planet/run_vega_occulted_planet_v1_1.py
 
-      - name: Validate claim firewall
+      - name: Build v1.2 activity and shepherd receipt
+        run: python experiments/vega_occulted_planet/run_vega_occulted_planet_v1_2.py
+
+      - name: Validate v1.2 claim firewall
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           root = Path('experiments/vega_occulted_planet/output')
-          r = json.loads((root/'vega_occulted_planet_receipt_v1_1.json').read_text())
+          r1 = json.loads((root/'vega_occulted_planet_receipt_v1_1.json').read_text())
+          r2 = json.loads((root/'vega_occulted_planet_receipt_v1_2.json').read_text())
           rv = json.loads((root/'vega_tres_rv_audit.json').read_text())
           seg = json.loads((root/'vega_tres_rv_segmented_activity_audit.json').read_text())
+          qp = json.loads((root/'vega_tres_rv_quasiperiodic_activity_audit.json').read_text())
+          shepherd = json.loads((root/'vega_3to5au_shepherd_analytic_grid.json').read_text())
+          manifest = json.loads((root/'vega_3to5au_injection_recovery_manifest.json').read_text())
           p = json.loads((root/'vega_tres_rv_provenance.json').read_text())
-          topa = json.loads((root/'topa_queue_v1_1.json').read_text())
-          spider = json.loads((root/'spider_queue_v1_1.json').read_text())
+          topa = json.loads((root/'topa_queue_v1_2.json').read_text())
+          spider = json.loads((root/'spider_queue_v1_2.json').read_text())
           assert p['status'] == 'PASS'
           assert p['parsed_rows'] == 1524
+          assert len(p['canonical_rows_sha256']) == 64
           assert rv['row_count'] == 1524
           assert rv['interpretation']['status'] == 'DIAGNOSTIC_ONLY_NO_CONFIRMATION'
           assert seg['row_count'] == 1524
           assert seg['claim_ceiling'] == 'ACTIVITY_SPECIFICITY_DIAGNOSTIC_ONLY_NO_PLANET_CONFIRMATION'
-          assert r['verdict'] == 'TWO_OPEN_INNER_PLANET_SUBHYPOTHESES'
-          assert r['claim_ceiling'] == 'H1A_UNCONFIRMED_AND_H1B_NOT_EXCLUDED_ONLY'
-          assert topa['receipt_hash'] == r['freeze_sha256']
-          assert spider['receipt_hash'] == r['freeze_sha256']
-          print('VEGA LIVE EVIDENCE FIREWALL PASS')
-          print('v1.1 freeze =', r['freeze_sha256'])
-          print('TRES payload sha256 =', p['sha256'])
-          print('delta_BIC fixed 2.43 d =', rv['diagnostics']['delta_bic_rotation_to_rotation_plus_2p43'])
+          assert qp['row_count'] == 1524
+          assert qp['model']['relationship_to_hurt_2021'] == 'SCALABLE_HURT_LIKE_APPROXIMATION_NOT_EXACT_REIMPLEMENTATION'
+          assert qp['claim_ceiling'] == 'ACTIVITY_AWARE_DIAGNOSTIC_ONLY_NO_PLANET_CONFIRMATION'
+          assert shepherd['claim_ceiling'] == 'ANALYTIC_SCREEN_ONLY_NOT_A_DISK_PLANET_DETECTION'
+          assert manifest['claim_firewall'].startswith('This manifest pre-registers')
+          assert r1['claim_ceiling'] == 'H1A_UNCONFIRMED_AND_H1B_NOT_EXCLUDED_ONLY'
+          assert r2['verdict'] == 'TWO_OPEN_INNER_PLANET_SUBHYPOTHESES_ACTIVITY_AUDITED'
+          assert r2['claim_ceiling'] == 'H1A_UNCONFIRMED_AND_H1B_ANALYTIC_FEASIBILITY_ONLY'
+          assert topa['receipt_hash'] == r2['freeze_sha256']
+          assert spider['receipt_hash'] == r2['freeze_sha256']
+          print('VEGA v1.2 CLAIM FIREWALL PASS')
+          print('v1.2 freeze =', r2['freeze_sha256'])
+          print('canonical TRES rows =', p['canonical_rows_sha256'])
+          print('fixed dBIC 2.43 =', rv['diagnostics']['delta_bic_rotation_to_rotation_plus_2p43'])
           print('segmented specificity =', seg['specificity']['status'])
-          for q in seg['scales']:
-              print('chunk', q['chunk_days'], 'dBIC_2p43=', q['delta_bic_candidate'], 'dBIC_196p4=', q['delta_bic_long_control'])
+          print('quasi-periodic specificity =', qp['specificity']['status'])
+          print('QP dBIC 2.43 =', qp['specificity']['delta_bic_candidate_vs_activity'])
+          print('QP dBIC 196.4 =', qp['specificity']['delta_bic_control_vs_activity'])
+          print('QP dBIC candidate over control =', qp['specificity']['delta_bic_candidate_over_control'])
+          print('QP coherence proxy days =', qp['models']['quasiperiodic_activity_only']['activity_hyperparameters']['coherence_timescale_proxy_days'])
+          print('3-5 au analytic status =', shepherd['summary']['status'])
+          print('3-5 au feasible rows =', shepherd['summary']['analytic_feasible_neptune_like_pole_on_rows'])
           PY
 
       - name: Upload Vega live evidence receipt
         uses: actions/upload-artifact@v4
         with:
-          name: janus-cosmos-vega-live-evidence-v1-2
+          name: janus-cosmos-vega-live-evidence-v1-3
           path: |
             experiments/vega_occulted_planet/evidence_snapshot_v1_1.json
             experiments/vega_occulted_planet/output/vega_occulted_planet_receipt.json
             experiments/vega_occulted_planet/output/vega_occulted_planet_receipt_v1_1.json
+            experiments/vega_occulted_planet/output/vega_occulted_planet_receipt_v1_2.json
             experiments/vega_occulted_planet/output/vega_tres_rv_provenance.json
             experiments/vega_occulted_planet/output/vega_tres_rv_audit.json
             experiments/vega_occulted_planet/output/vega_tres_rv_segmented_activity_audit.json
-            experiments/vega_occulted_planet/output/topa_queue_v1_1.json
-            experiments/vega_occulted_planet/output/spider_queue_v1_1.json
+            experiments/vega_occulted_planet/output/vega_tres_rv_quasiperiodic_activity_audit.json
+            experiments/vega_occulted_planet/output/vega_3to5au_shepherd_analytic_grid.json
+            experiments/vega_occulted_planet/output/vega_3to5au_injection_recovery_manifest.json
+            experiments/vega_occulted_planet/output/topa_queue_v1_2.json
+            experiments/vega_occulted_planet/output/spider_queue_v1_2.json
             experiments/vega_occulted_planet/output/data/vega_tres_rv.tsv
