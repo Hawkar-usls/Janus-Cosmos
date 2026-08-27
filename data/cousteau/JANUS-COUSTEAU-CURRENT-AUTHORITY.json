@@ -1,13 +1,26 @@
 {
   "schema": "janus.project_continuity.current_authority_pointer.v1_0",
   "artifact_id": "JANUS-COUSTEAU-CURRENT-AUTHORITY",
-  "updated_at_local": "2026-08-24T20:21:00+03:00",
+  "updated_at_local": "2026-08-27T12:03:00+03:00",
   "project_id": "JANUS_ECHO_COUSTEAU",
   "status": "CURRENT",
   "purpose": "Stable entry point for future JANUS/HRain/iNaiHR sessions. Load the origin chain and continuity ledger before acting on the newest individual result.",
   "canonical_protocol": "janus-meta-registry:data/JANUS-PROJECT-CONTINUITY-LEDGER-HRAIN-INAIHR-PROTOCOL-2026-08-24-v1.0.json",
   "current_ledger": "data/cousteau/JANUS-COUSTEAU-PROJECT-CONTINUITY-LEDGER-BOOTSTRAP-2026-08-24-v1.0.json",
   "current_route_audit": "data/cousteau/JANUS-COUSTEAU-ROUTE-AND-ARCHIVE-REQUEST-AUDIT-2026-08-24-v1.0.json",
+  "current_gen4_frozen_point_contract": "data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-CONTRACT-v1.0.json",
+  "current_gen4_frozen_point_receipt": "data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LATEST-RECEIPT.json",
+  "gen4_frozen_point_state": {
+    "target": {"latitude_deg": -3.865418, "longitude_deg": 3.854924},
+    "decision": "NO_DIRECT_COVERAGE",
+    "gmrt_topo_mask_http_200": true,
+    "gmrt_topo_mask_finite_fraction": 0.0,
+    "gmrt_grid_resolution_m": 61.05182369643306,
+    "gebco_2026_measured_mask_present": false,
+    "morphology_executed": false,
+    "reason": "Direct-data admission gate failed before morphology: GMRT topo-mask contained no finite high-resolution cells in the requested window and GEBCO measured-mask independently did not mark the frozen point.",
+    "interpretation_ceiling": "PUBLIC_DIRECT_RESOLVING_COVERAGE_NOT_PRESENT_IN_THE_QUERIED_GMRT_GEBCO_LAYERS__NOT_ARCHIVE_ABSENCE__NOT_PYRAMID_EXCLUSION"
+  },
   "required_before_next_stage": [
     "READ_PROJECT_ORIGIN",
     "READ_IMMUTABLE_NEGATIVE_REGISTER",
@@ -16,8 +29,9 @@
     "READ_SELECTION_DEPENDENCY_REGISTER",
     "READ_EXTERNAL_CONTACT_LEDGER",
     "READ_NEXT_ALLOWED_AND_FORBIDDEN_ACTIONS",
+    "READ_GEN4_FROZEN_POINT_RECEIPT",
     "RUN_PRE_STAGE_HOLE_CHECK"
   ],
-  "current_terminal": "STAY_THE_COURSE__WAIT_FOR_PRIMARY_BYTES_AND_EXISTING_CUSTODIAN_THREADS__SEPARATE_ORIGINAL_TARGET_LANE_FROM_HA10_CALIBRATION_LANE__NO_NEW_TARGET_SEARCH",
-  "claim_ceiling": "NO_UNDERWATER_PYRAMID_DETECTED__TARGET_IDENTITY_UNCONFIRMED__VOLCANIC_TECTONIC_BASELINE_ACTIVE"
+  "current_terminal": "STAY_THE_COURSE__WAIT_FOR_PRIMARY_BYTES_OR_NEW_DIRECT_SWATH_COVERAGE__SEPARATE_ORIGINAL_TARGET_LANE_FROM_HA10_CALIBRATION_LANE__NO_NEW_TARGET_SEARCH__NO_MORPHOLOGY_FROM_INTERPOLATED_BATHYMETRY",
+  "claim_ceiling": "NO_UNDERWATER_PYRAMID_DETECTED__TARGET_IDENTITY_UNCONFIRMED__DIRECT_RESOLVING_PUBLIC_COVERAGE_NOT_PRESENT_IN_QUERIED_GMRT_GEBCO_LAYERS__VOLCANIC_TECTONIC_BASELINE_ACTIVE"
 }
