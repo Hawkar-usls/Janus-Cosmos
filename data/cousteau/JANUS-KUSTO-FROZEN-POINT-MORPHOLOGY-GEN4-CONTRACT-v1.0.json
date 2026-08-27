@@ -1,0 +1,83 @@
+{
+  "schema": "janus.cousteau.kusto_frozen_point_morphology_gate.v1",
+  "artifact_id": "JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-CONTRACT-v1.0",
+  "generation": 4,
+  "purpose": "Preregister a morphology-only test at the historical frozen KUSTO target before inspecting live high-resolution seabed data.",
+  "frozen_target": {
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "historical_blind_target": true,
+    "no_recentering": true,
+    "longitude_route_invariant": false
+  },
+  "source_policy": {
+    "gmrt_primary": {
+      "service": "GMRT GridServer",
+      "required_layer": "topo-mask",
+      "reason": "Masked ocean grids contain curated high-resolution data and NaN where such data do not exist.",
+      "admission": "Morphology may run only on finite masked cells at the frozen target."
+    },
+    "gebco_provenance": {
+      "release": "GEBCO_2026",
+      "tid_direct_codes": [10, 11, 12, 13, 14, 15, 16, 17],
+      "wms_measured_mask_layer": "gebco_latest_tid",
+      "role": "Independent provenance/coverage indicator only; never a substitute for resolving sonar morphology.",
+      "exact_tid_rule": "A WMS measured-mask hit is not an exact TID code. Exact modality claims require TID NetCDF or equivalent authoritative source metadata."
+    },
+    "global_interpolated_bathymetry": "CONTEXT_ONLY_NOT_MORPHOLOGY_EVIDENCE"
+  },
+  "preregistered_scale_bands_m": [
+    {"id": "BASE_0P5_1KM", "min": 500, "max": 1000, "evaluation_width": 750},
+    {"id": "BASE_1_2KM", "min": 1000, "max": 2000, "evaluation_width": 1500},
+    {"id": "BASE_2_4KM", "min": 2000, "max": 4000, "evaluation_width": 3000},
+    {"id": "BASE_4_8KM", "min": 4000, "max": 8000, "evaluation_width": 6000}
+  ],
+  "resolution_gate": {
+    "minimum_independent_samples_across_base": 8,
+    "rule": "grid_resolution_m <= scale_band.min_m / 8",
+    "failure": "RESOLUTION_INSUFFICIENT"
+  },
+  "coverage_gate": {
+    "minimum_finite_fraction_within_test_radius": 0.8,
+    "target_center_must_be_finite": true,
+    "failure": "NO_DIRECT_COVERAGE"
+  },
+  "metrics": {
+    "prominence_snr": "fixed-center inner elevation minus outer annulus median, divided by robust outer-annulus noise",
+    "radial_monotonicity": "fraction of preregistered radial transitions whose median elevation does not increase away from the fixed center",
+    "fourfold_power_ratio": "k=4 azimuthal harmonic power divided by summed k=1..8 harmonic power",
+    "orientation_stability_deg": "modulo-90-degree phase disagreement of k=4 harmonic between inner and outer annuli",
+    "composite_score": "0.40*prominence_component + 0.25*radial_monotonicity + 0.20*fourfold_power_ratio + 0.15*orientation_component"
+  },
+  "hard_metric_floors": {
+    "prominence_snr_min": 3.0,
+    "radial_monotonicity_min": 0.66,
+    "fourfold_power_ratio_min": 0.20,
+    "orientation_stability_deg_max": 20.0
+  },
+  "blind_controls": {
+    "construction": "64 deterministic positions: 16 fixed azimuths on each of four rings at 10, 20, 30 and 40 km from the frozen point; no bathymetry-dependent selection.",
+    "minimum_valid_controls_per_scale": 20,
+    "empirical_tail_alpha": 0.05,
+    "p_value": "(1 + number_of_valid_controls_with_score_ge_target) / (1 + number_of_valid_controls)"
+  },
+  "decision_states": [
+    "DATA_SOURCE_UNAVAILABLE",
+    "NO_DIRECT_COVERAGE",
+    "RESOLUTION_INSUFFICIENT",
+    "CONTROL_POWER_INSUFFICIENT",
+    "NO_PREREGISTERED_MORPHOLOGY_SIGNAL",
+    "MORPHOLOGY_SIGNAL_REQUIRES_INDEPENDENT_REPLICATION"
+  ],
+  "independent_replication_rule": "No morphology signal may be promoted to object identity without a second independently acquired resolving dataset with provenance and navigation/geometry sufficient to place the same feature on the seabed.",
+  "claim_ceiling": "MORPHOLOGY_ONLY__NOT_PYRAMID_IDENTITY__NOT_ANOMALY_PROOF",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_POST_HOC_SCALE_SELECTION",
+    "NO_UNMASKED_GMRT_AS_DIRECT_COVERAGE",
+    "GEBCO_INTERPOLATION_IS_NOT_SONAR",
+    "WMS_TID_MASK_IS_NOT_EXACT_TID_CODE",
+    "NEGATIVE_AND_INSUFFICIENT_RESULTS_ARE_FIRST_CLASS",
+    "PYRAMID_DETECTED_REMAINS_FALSE_UNLESS_INDEPENDENT_RESOLVING_REPLICATION_EXISTS"
+  ]
+}
