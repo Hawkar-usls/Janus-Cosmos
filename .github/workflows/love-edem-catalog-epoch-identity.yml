@@ -1,0 +1,104 @@
+name: LOVE EDEM Catalog Epoch Identity Gen3
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/love-edem-catalog-epoch-identity.yml"
+      - "workspace/janus_catalog_epoch_identity.py"
+      - "workspace/love_edem_catalog_epoch_identity.py"
+      - "workspace/janus_archiv_search.py"
+      - "workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/love-edem-catalog-epoch-identity.yml"
+      - "workspace/janus_catalog_epoch_identity.py"
+      - "workspace/love_edem_catalog_epoch_identity.py"
+      - "workspace/janus_archiv_search.py"
+      - "workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json"
+
+permissions:
+  contents: write
+
+jobs:
+  catalog-epoch-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install astronomy dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy>=2.0" "astropy>=7.0" "astroquery>=0.4.11" "requests>=2.31"
+      - name: Kernel self-test
+        run: python workspace/janus_catalog_epoch_identity.py --self-test
+      - name: Target runner self-test
+        run: python workspace/love_edem_catalog_epoch_identity.py --self-test
+      - name: Archiv search self-test
+        run: python workspace/janus_archiv_search.py --self-test
+      - name: Resolve frozen source epochs and run Gen3 GLS gate
+        run: |
+          python workspace/love_edem_catalog_epoch_identity.py \
+            --output data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json
+      - name: Show epoch resolution audit before assertions
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json',encoding='utf-8'))
+          print(json.dumps({'summary':d['summary'],'audit':{k:v.get('catalog_epoch_audit') for k,v in d['groups'].items()}},indent=2))
+          PY
+      - name: Verify provenance completeness without outcome tuning
+        run: |
+          python - <<'PY'
+          import json, math
+          p='data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json'
+          d=json.load(open(p,encoding='utf-8')); s=d['summary']
+          assert s['required_external_catalog_measurements']==5
+          assert s['resolved_external_catalog_measurements']==5
+          assert s['all_required_epochs_resolved'] is True
+          assert s['release_year_substitutions']==0
+          assert s['simulation_count_increased'] is False
+          expected={'LOVE_GAIA_WISE_2MASS': {'ALLWISE','2MASS_PSC'},'EDEM_GAIA_WISE_SDSS_PS1': {'ALLWISE','PANSTARRS_DR1','SDSS_DR16'}}
+          for group_name,catalogs in expected.items():
+              g=d['groups'][group_name]; assert g['status']=='EVALUATED'; assert set(g['catalog_epoch_audit'])==catalogs
+              for c in catalogs:
+                  a=g['catalog_epoch_audit'][c]; assert a['status']=='EPOCH_AND_POSITION_COVARIANCE_RESOLVED'; assert 'RELEASE_YEAR' not in a['epoch_status']
+              ident=g['identity_test']; assert set(ident['pairwise'])==catalogs
+              for c,x in ident['pairwise'].items(): assert math.isfinite(x['mahalanobis_chi2']) and 0.0<=x['tail_probability']<=1.0
+              j=ident['joint_gls']; assert j['shared_gaia_cross_epoch_covariance_included'] is True; assert math.isfinite(j['mahalanobis_chi2']); assert 0.0<=j['tail_probability']<=1.0
+              assert j['compatibility_status'] in {'NOT_REJECTED_AT_PREREGISTERED_TAIL','REJECTED_AT_PREREGISTERED_TAIL'}
+              assert ident['epistemic_firewall']['compatibility_is_identity_proof'] is False
+          print('LOVE_EDEM_CATALOG_EPOCH_IDENTITY_PROVENANCE_GATE=PASS')
+          PY
+      - name: Show compact scientific result
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          p='data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json'
+          if not os.path.exists(p): raise SystemExit(0)
+          d=json.load(open(p,encoding='utf-8'))
+          print(json.dumps({'summary':d['summary'],'groups':{k:{'epochs':v.get('catalog_epoch_audit'),'pairwise':{c:{'residual_norm_mas':x['residual_norm_mas'],'chi2':x['mahalanobis_chi2'],'p':x['tail_probability'],'status':x['compatibility_status'],'covariance':x['catalog_covariance_status']} for c,x in v.get('identity_test',{}).get('pairwise',{}).items()},'joint':v.get('identity_test',{}).get('joint_gls',{})} for k,v in d['groups'].items()}},indent=2))
+          PY
+      - name: Upload frozen receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: love-edem-catalog-epoch-identity-${{ github.run_number }}
+          path: data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Persist canonical receipt on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json
+          git commit -m "cosmos: freeze LOVE EDEM catalog epoch identity run ${{ github.run_number }}"
+          git push
