@@ -1,0 +1,417 @@
+{
+  "claim_ceiling": "GAIA_STELLAR_WORLDLINE_ROBUSTNESS_IN_1900_2100_ONLY__NOT_LOVE_EDEM_IDENTITY",
+  "epistemic_firewall": {
+    "i_do_not_know_is_valid": true,
+    "missing_covariance_may_be_replaced_with_zero": false,
+    "nearest_wise_only_source_may_be_assigned_gaia_motion": false,
+    "negative_result_is_valid": true,
+    "propagated_worldline_is_observation": false,
+    "release_year_is_observation_epoch": false,
+    "simulation_is_evidence": false
+  },
+  "epoch_window_jyear": [
+    1900.0,
+    2100.0
+  ],
+  "experiment": "LOVE_EDEM_EPOCH_AWARE_WORLDLINES",
+  "formula": "RESPICIENS_ET_PROSPICIENS",
+  "gaia_groups": {
+    "EDEM_GAIA_WISE_SDSS_PS1": {
+      "astrometry_source": "LIVE_VIZIER_GAIA_DR3_EXACT_SOURCE_ID",
+      "cross_catalog_epoch_audit": {
+        "catalogs": {
+          "ALLWISE": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "J091652.31+301545.8"
+          },
+          "GAIA_DR3": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "699051350998534656"
+          },
+          "PANSTARRS_DR1": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "144311392180445928"
+          },
+          "SDSS_DR16": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "SDSS J091652.33+301546.1"
+          }
+        },
+        "rule": "CATALOG_RELEASE_YEAR_MUST_NOT_BE_SUBSTITUTED_FOR_OBSERVATION_EPOCH",
+        "status": "BLOCKED_MISSING_PER_DETECTION_EPOCH"
+      },
+      "live_query_error": null,
+      "status": "WORLDLINE_EVALUATED",
+      "target": "EDEM_SEARCH_CENTER_ZP",
+      "worldline": {
+        "claim_ceiling": "BOUNDED_EPOCH_LINEAR_ASTROMETRIC_ROBUSTNESS_ONLY__NOT_OBJECT_IDENTITY",
+        "covariance_matrix_native_units": [
+          [
+            0.07524049,
+            -0.015657524025,
+            -0.046089311721661086,
+            -0.024662752787308694,
+            0.02771779470283866
+          ],
+          [
+            -0.015657524025,
+            0.035607690000000004,
+            0.014468411904611888,
+            0.02024130251464963,
+            -0.016222217708334628
+          ],
+          [
+            -0.046089311721661086,
+            0.014468411904611888,
+            0.13068224638009074,
+            0.07214506275490533,
+            -0.03320294206335058
+          ],
+          [
+            -0.024662752787308694,
+            0.02024130251464963,
+            0.07214506275490533,
+            0.11356900835609451,
+            -0.024646158144525976
+          ],
+          [
+            0.02771779470283866,
+            -0.016222217708334628,
+            -0.03320294206335058,
+            -0.024646158144525976,
+            0.05712099646711355
+          ]
+        ],
+        "covariance_parameter_order": [
+          "ra_offset_mas",
+          "dec_offset_mas",
+          "parallax_mas",
+          "pmra_masyr",
+          "pmdec_masyr"
+        ],
+        "covariance_parameter_units": [
+          "mas",
+          "mas",
+          "mas",
+          "mas/yr",
+          "mas/yr"
+        ],
+        "covariance_status": "FULL_CATALOG_COVARIANCE",
+        "epistemic_firewall": {
+          "catalog_covariance_must_not_be_invented": true,
+          "missing_catalog_epoch_blocks_cross_catalog_epoch_match": true,
+          "negative_result_is_valid": true,
+          "propagation_is_observation": false,
+          "worldline_is_identity_proof": false
+        },
+        "epoch_window_jyear": [
+          1900.0,
+          2100.0
+        ],
+        "formula": "RESPICIENS_ET_PROSPICIENS",
+        "gate_counts_after_conservative_parallax_envelope": {
+          "1.5": 0,
+          "3.0": 0
+        },
+        "gate_fractions_after_conservative_parallax_envelope": {
+          "1.5": 0.0,
+          "3.0": 0.0
+        },
+        "input_sha256": "dc602e89e464e7cf69ff90426cb5b14aceb5d72d68ccb4ed16fc3a9555acb3b8",
+        "measurement_uncertainty": {
+          "correlations": {
+            "dec_parallax": 0.2121,
+            "dec_pmdec": -0.3597,
+            "dec_pmra": 0.3183,
+            "parallax_pmdec": -0.3843,
+            "parallax_pmra": 0.5922,
+            "pmra_pmdec": -0.306,
+            "ra_dec": -0.3025,
+            "ra_parallax": -0.4648,
+            "ra_pmdec": 0.4228,
+            "ra_pmra": -0.2668
+          },
+          "dec_error_mas": 0.1887,
+          "parallax_error_mas": 0.36149999499320984,
+          "pmdec_error_masyr": 0.23899999260902405,
+          "pmra_error_masyr": 0.3370000123977661,
+          "ra_error_mas": 0.2743
+        },
+        "nominal": {
+          "closest_epoch_in_window_jyear": 2100.0,
+          "minimum_linear_separation_in_window_arcsec": 20.289945835482463,
+          "separation_at_ref_epoch_arcsec": 20.723597486142392,
+          "unconstrained_linear_closest_approach_arcsec": 16.060143351345772,
+          "unconstrained_linear_closest_epoch_jyear": 3593.185122419057
+        },
+        "parallax_policy": {
+          "meaning": "A zero hit after subtracting the full sampled parallax amplitude excludes rescue by annual parallax within this linearized model.",
+          "mode": "CONSERVATIVE_AMPLITUDE_ENVELOPE",
+          "observer_specific_parallax_factors_used": false
+        },
+        "result_sha256": "a3c45d8a3a78d5642d0c6f98e3cc76215de8e56da87c60308443a6adf6cde99d",
+        "sampled_closest_epoch_jyear": {
+          "max": 2100.0,
+          "mean": 2100.0,
+          "min": 2100.0,
+          "q05": 2100.0,
+          "q50": 2100.0,
+          "q95": 2100.0,
+          "std": 0.0
+        },
+        "sampled_minimum_linear_separation_arcsec": {
+          "max": 20.39975250452963,
+          "mean": 20.290640664697115,
+          "min": 20.18703243099566,
+          "q05": 20.242622967658384,
+          "q50": 20.29066869672811,
+          "q95": 20.338530721405718,
+          "std": 0.02921210677243316
+        },
+        "sampled_parallax_envelope_lower_bound_arcsec": {
+          "max": 20.399745975019755,
+          "mean": 20.28991082090363,
+          "min": 20.18564711438429,
+          "q05": 20.241601942811585,
+          "q50": 20.289937100589533,
+          "q95": 20.338158413907948,
+          "std": 0.029424727848316814
+        },
+        "samples": 8192,
+        "schema": "janus.cosmos.astrometric-worldlines.v1",
+        "seed": 26017,
+        "source": {
+          "catalog": "GAIA_DR3",
+          "dec_deg": 30.26276387854,
+          "parallax_mas": 0.7325,
+          "pmdec_masyr": -8.028,
+          "pmra_masyr": 2.124,
+          "ra_deg": 139.21802643661,
+          "ref_epoch_jyear": 2016.0,
+          "source_id": "699051350998534656"
+        },
+        "target": {
+          "dec_deg": 30.26038779947318,
+          "frame": "ICRS",
+          "ra_deg": 139.22409686590188
+        }
+      }
+    },
+    "LOVE_GAIA_WISE_2MASS": {
+      "astrometry_source": "LIVE_VIZIER_GAIA_DR3_EXACT_SOURCE_ID",
+      "cross_catalog_epoch_audit": {
+        "catalogs": {
+          "2MASS_PSC": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "13371100-3646446"
+          },
+          "ALLWISE": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "J133710.98-364644.9"
+          },
+          "GAIA_DR3": {
+            "epoch_fields_in_frozen_receipt": {},
+            "has_exact_observation_epoch": false,
+            "source_id": "6163586620213012352"
+          }
+        },
+        "rule": "CATALOG_RELEASE_YEAR_MUST_NOT_BE_SUBSTITUTED_FOR_OBSERVATION_EPOCH",
+        "status": "BLOCKED_MISSING_PER_DETECTION_EPOCH"
+      },
+      "live_query_error": null,
+      "status": "WORLDLINE_EVALUATED",
+      "target": "LOVE",
+      "worldline": {
+        "claim_ceiling": "BOUNDED_EPOCH_LINEAR_ASTROMETRIC_ROBUSTNESS_ONLY__NOT_OBJECT_IDENTITY",
+        "covariance_matrix_native_units": [
+          [
+            0.01136356,
+            0.0011059963200000002,
+            -0.003720285717585981,
+            -0.004443589142739325,
+            -0.0009952815805350243
+          ],
+          [
+            0.0011059963200000002,
+            0.0043560000000000005,
+            -0.0007430214166939259,
+            -0.00028981260800510646,
+            -0.0026275392542123794
+          ],
+          [
+            -0.003720285717585981,
+            -0.0007430214166939259,
+            0.01194649053681851,
+            0.0005054906653196672,
+            0.0021296450117877005
+          ],
+          [
+            -0.004443589142739325,
+            -0.00028981260800510646,
+            0.0005054906653196672,
+            0.01512900083577634,
+            0.0009114300439801818
+          ],
+          [
+            -0.0009952815805350243,
+            -0.0026275392542123794,
+            0.0021296450117877005,
+            0.0009114300439801818,
+            0.006084000251054766
+          ]
+        ],
+        "covariance_parameter_order": [
+          "ra_offset_mas",
+          "dec_offset_mas",
+          "parallax_mas",
+          "pmra_masyr",
+          "pmdec_masyr"
+        ],
+        "covariance_parameter_units": [
+          "mas",
+          "mas",
+          "mas",
+          "mas/yr",
+          "mas/yr"
+        ],
+        "covariance_status": "FULL_CATALOG_COVARIANCE",
+        "epistemic_firewall": {
+          "catalog_covariance_must_not_be_invented": true,
+          "missing_catalog_epoch_blocks_cross_catalog_epoch_match": true,
+          "negative_result_is_valid": true,
+          "propagation_is_observation": false,
+          "worldline_is_identity_proof": false
+        },
+        "epoch_window_jyear": [
+          1900.0,
+          2100.0
+        ],
+        "formula": "RESPICIENS_ET_PROSPICIENS",
+        "gate_counts_after_conservative_parallax_envelope": {
+          "1.5": 0,
+          "3.0": 0
+        },
+        "gate_fractions_after_conservative_parallax_envelope": {
+          "1.5": 0.0,
+          "3.0": 0.0
+        },
+        "input_sha256": "5a558b125fa3a2abbdbd806e8e34484460f2a74fe0983ad301c4bfef13c82245",
+        "measurement_uncertainty": {
+          "correlations": {
+            "dec_parallax": -0.103,
+            "dec_pmdec": -0.5104,
+            "dec_pmra": -0.0357,
+            "parallax_pmdec": 0.2498,
+            "parallax_pmra": 0.0376,
+            "pmra_pmdec": 0.095,
+            "ra_dec": 0.1572,
+            "ra_parallax": -0.3193,
+            "ra_pmdec": -0.1197,
+            "ra_pmra": -0.3389
+          },
+          "dec_error_mas": 0.066,
+          "parallax_error_mas": 0.10930000245571136,
+          "pmdec_error_masyr": 0.07800000160932541,
+          "pmra_error_masyr": 0.12300000339746475,
+          "ra_error_mas": 0.1066
+        },
+        "nominal": {
+          "closest_epoch_in_window_jyear": 1900.0,
+          "minimum_linear_separation_in_window_arcsec": 22.121004620404705,
+          "separation_at_ref_epoch_arcsec": 23.268882349376284,
+          "unconstrained_linear_closest_approach_arcsec": 17.382231860324506,
+          "unconstrained_linear_closest_epoch_jyear": 1012.0057400112005
+        },
+        "parallax_policy": {
+          "meaning": "A zero hit after subtracting the full sampled parallax amplitude excludes rescue by annual parallax within this linearized model.",
+          "mode": "CONSERVATIVE_AMPLITUDE_ENVELOPE",
+          "observer_specific_parallax_factors_used": false
+        },
+        "result_sha256": "1ae57f44362fafe22ad2bee1d7f148df6094128490a01acb5f7b228717b02547",
+        "sampled_closest_epoch_jyear": {
+          "max": 1900.0,
+          "mean": 1900.0,
+          "min": 1900.0,
+          "q05": 1900.0,
+          "q50": 1900.0,
+          "q95": 1900.0,
+          "std": 0.0
+        },
+        "sampled_minimum_linear_separation_arcsec": {
+          "max": 22.16428441170164,
+          "mean": 22.12104199551168,
+          "min": 22.063991256602687,
+          "q05": 22.100840463059136,
+          "q50": 22.120875126328905,
+          "q95": 22.141513874405064,
+          "std": 0.012432757431791352
+        },
+        "sampled_parallax_envelope_lower_bound_arcsec": {
+          "max": 22.16374802144064,
+          "mean": 22.12033100550298,
+          "min": 22.063110724360087,
+          "q05": 22.100138586768427,
+          "q50": 22.120150709282377,
+          "q95": 22.140879230633146,
+          "std": 0.012440943769705583
+        },
+        "samples": 8192,
+        "schema": "janus.cosmos.astrometric-worldlines.v1",
+        "seed": 26016,
+        "source": {
+          "catalog": "GAIA_DR3",
+          "dec_deg": -36.77911588007,
+          "parallax_mas": 0.7101,
+          "pmdec_masyr": -4.695,
+          "pmra_masyr": -14.675,
+          "ra_deg": 204.29573215827,
+          "ref_epoch_jyear": 2016.0,
+          "source_id": "6163586620213012352"
+        },
+        "target": {
+          "dec_deg": -36.78240527777778,
+          "frame": "ICRS",
+          "ra_deg": 204.30267916666668
+        }
+      }
+    }
+  },
+  "gaia_reference_epoch_jyear": 2016.0,
+  "input_experiment_id": "LOVE-EDEM-SOURCE-CLASSIFICATION-v1",
+  "live_vizier_requested": true,
+  "nearest_non_gaia_groups": {
+    "EDEM_NEAREST_WISE_ONLY": {
+      "offset_from_frozen_target_center_arcsec": 9.021198661597598,
+      "reason": "Nearest source group has no Gaia counterpart within the frozen classification radius; do not invent proper motion/parallax.",
+      "status": "NO_GAIA_5P_WORLDLINE_AVAILABLE",
+      "target": "EDEM_SEARCH_CENTER_ZP"
+    },
+    "LOVE_NEAREST_WISE_ONLY": {
+      "offset_from_frozen_target_center_arcsec": 20.289587649207107,
+      "reason": "Nearest source group has no Gaia counterpart within the frozen classification radius; do not invent proper motion/parallax.",
+      "status": "NO_GAIA_5P_WORLDLINE_AVAILABLE",
+      "target": "LOVE"
+    }
+  },
+  "orbital_bridge": {
+    "do_not_mix": true,
+    "solar_system_or_cartesian_moving_object_state": "USE_JANUS_CELESTIAL_DYNAMICS",
+    "stellar_catalog_sources": "USE_ASTROMETRIC_WORLDLINE_LAYER"
+  },
+  "run_time_utc": "2026-08-27T06:27:14.667665+00:00",
+  "samples_per_gaia_group": 8192,
+  "schema": "janus.cosmos.love-edem.epoch-worldlines.v1",
+  "seed_base": 26016,
+  "summary": {
+    "all_evaluated_gaia_worldlines_have_full_catalog_covariance": true,
+    "all_evaluated_gaia_worldlines_zero_hits_at_3arcsec": true,
+    "evaluated_gaia_worldline_count": 2,
+    "independent_catalog_epoch_crossmatch": "BLOCKED_UNTIL_PER_DETECTION_EPOCHS_ARE_FROZEN"
+  }
+}
