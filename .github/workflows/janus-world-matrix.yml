@@ -4,12 +4,18 @@ on:
   push:
     paths:
       - 'workspace/janus_world_matrix.py'
+      - 'workspace/janus_celestial_dynamics.py'
+      - 'workspace/love_edem_world_matrix_test.py'
       - 'workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json'
+      - 'data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json'
       - '.github/workflows/janus-world-matrix.yml'
   pull_request:
     paths:
       - 'workspace/janus_world_matrix.py'
+      - 'workspace/janus_celestial_dynamics.py'
+      - 'workspace/love_edem_world_matrix_test.py'
       - 'workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json'
+      - 'data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json'
       - '.github/workflows/janus-world-matrix.yml'
 
 jobs:
@@ -20,9 +26,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run neutral world-matrix self-test
+      - name: Run World Matrix self-test
         run: python workspace/janus_world_matrix.py --self-test
       - name: Smoke test sky preset
-        run: python workspace/janus_world_matrix.py --preset sky --samples 32 --seed 424242 --output /tmp/janus-sky-worlds.json
-      - name: Smoke test planet preset
-        run: python workspace/janus_world_matrix.py --preset planet --samples 32 --seed 424242 --output /tmp/janus-planet-worlds.json
+        run: python workspace/janus_world_matrix.py --preset sky --samples 64 --seed 424242 --sampling latin_hypercube --output /tmp/janus-sky-worlds.json
+      - name: Smoke test planet-surface preset
+        run: python workspace/janus_world_matrix.py --preset planet --samples 64 --seed 424242 --sampling latin_hypercube --output /tmp/janus-planet-worlds.json
+      - name: Run celestial dynamics self-test
+        run: python workspace/janus_celestial_dynamics.py --self-test
+      - name: Run LOVE--EDEM deterministic robustness test
+        run: python workspace/love_edem_world_matrix_test.py --samples 8192 --seed 16016 --sigma-arcsec 0.7 --output /tmp/love-edem-world-matrix.json
+      - name: Verify LOVE--EDEM gates remain unpromoted
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/love-edem-world-matrix.json'))
+          for name in ('LOVE','EDEM_SEARCH_CENTER_ZP'):
+              t=r['targets'][name]
+              assert t['gate_counts']['1.5']==0
+              assert t['gate_counts']['3.0']==0
+              assert t['exact_counterpart_promoted'] is False
+              assert t['all_catalog_sources_excluded_from_gate_by_triangle_bound']['3.0'] is True
+          print('LOVE_EDEM_GATE_ASSERTIONS=PASS')
+          PY

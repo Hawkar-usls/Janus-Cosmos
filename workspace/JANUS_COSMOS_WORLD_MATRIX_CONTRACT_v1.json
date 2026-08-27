@@ -4,24 +4,24 @@
   "mechanic": "JANUS_WORLD_MATRIX",
   "latin_key": "APERIATUR_PORTA",
   "formula_name": "RESPICIENS_ET_PROSPICIENS",
-  "version": "1.0.0",
-  "purpose": "Expand uncertainty in astronomical, planetary and sensor parameters into an ensemble of plausible observational worlds before interpretation, then summarize that ensemble with reproducible statistics.",
-  "source_concept": {
-    "accepted": [
-      "MONTE_CARLO_FUTURE_STATE_FAN",
-      "STOCHASTIC_ENVIRONMENT_MATRIX",
-      "RESPICIENS_CURRENT_PRIORS",
-      "PROSPICIENS_ALTERNATIVE_OBSERVATIONAL_WORLDS"
-    ],
-    "explicitly_not_inherited": [
-      "WEAPON_BALLISTICS",
-      "PROJECTILE_TRAJECTORY_OPTIMIZATION",
-      "AIMING_ASSISTANCE",
-      "FIRING_SOLUTIONS",
-      "HARM_OPTIMIZATION"
-    ]
+  "version": "1.1.0",
+  "purpose": "Expand frozen astronomical, planetary, environmental and sensor uncertainties into reproducible ensembles before interpretation, while preserving provenance and a strict model-versus-observation boundary.",
+  "architecture": [
+    "FROZEN_INPUT_OR_PRIOR_STATE",
+    "DETERMINISTIC_UNCERTAINTY_DESIGN",
+    "MULTI_WORLD_ENSEMBLE",
+    "PHYSICS_OR_OBSERVATION_KERNEL",
+    "SUMMARY_AND_TRAJECTORY_ENVELOPE",
+    "OBSERVED_DATA_OR_EPHEMERIS_COMPARISON",
+    "NULL_CONTROL_AND_CLAIM_CEILING"
+  ],
+  "sampling": {
+    "default": "DETERMINISTIC_LATIN_HYPERCUBE",
+    "optional": "MONTE_CARLO",
+    "seed_required_for_frozen_runs": true,
+    "raw_parameter_draws_preserved": true,
+    "reason": "Stratified marginal coverage is more efficient and reviewable than independent random draws for the same scenario count."
   },
-  "runtime_module": "workspace/janus_world_matrix.py",
   "presets": {
     "sky": [
       "ra_offset_arcsec",
@@ -31,7 +31,7 @@
       "sensor_noise_sigma",
       "photometric_zero_point_offset_mag"
     ],
-    "planet": [
+    "planet_surface": [
       "latitude_offset_km",
       "longitude_offset_km",
       "local_time_offset_s",
@@ -40,11 +40,29 @@
       "sensor_noise_sigma"
     ]
   },
+  "celestial_trajectory_layer": {
+    "module": "workspace/janus_celestial_dynamics.py",
+    "terminology": "CELESTIAL_TRAJECTORY_OR_ORBITAL_DYNAMICS",
+    "state": "CARTESIAN_POSITION_AND_VELOCITY",
+    "baseline_kernel": "TWO_BODY_GRAVITY",
+    "integrator": "VELOCITY_VERLET",
+    "uncertainty_cloud": "JANUS_WORLD_MATRIX_LATIN_HYPERCUBE",
+    "validation_required": "TRUSTED_EPHEMERIS_OR_INDEPENDENT_OBSERVATION",
+    "known_scope_limits": [
+      "NO_N_BODY_PERTURBATIONS_V1",
+      "NO_J2_V1",
+      "NO_GENERAL_RELATIVITY_V1",
+      "NO_NON_GRAVITATIONAL_FORCES_V1"
+    ]
+  },
   "outputs": [
     "WORLD_MATRIX",
+    "RAW_PARAMETER_DRAWS",
     "QUANTILE_ENVELOPES",
     "MEAN_AND_STD",
     "COVARIANCE_MATRIX",
+    "INPUT_SHA256",
+    "RESULT_SHA256",
     "DETERMINISTIC_SEED",
     "EPISTEMIC_STATUS"
   ],
@@ -53,29 +71,48 @@
     "SIMULATION_IS_NOT_DISCOVERY": true,
     "OBSERVED_DATA_COMPARISON_REQUIRED": true,
     "NULL_OR_CONTROL_REQUIRED": true,
+    "RAW_INPUTS_AND_PARAMETERS_ARE_IMMUTABLE": true,
     "PRIORS_SHOULD_BE_FROZEN_BEFORE_RESULT_INSPECTION": true,
     "POST_HOC_PRIOR_TUNING_MUST_NOT_BE_PRESENTED_AS_CONFIRMATION": true,
+    "FAILED_PREDICTIONS_REMAIN_SEARCHABLE": true,
+    "SIMULATION_TO_REALITY_GAP_MUST_BE_RECORDED": true,
+    "UNCALIBRATED_CONFIDENCE_FORBIDDEN": true,
+    "I_DO_NOT_KNOW_IS_VALID_OUTPUT": true,
     "NEGATIVE_RESULT_IS_VALID_OUTPUT": true
   },
-  "reproducibility": {
-    "deterministic_seed_supported": true,
-    "seed_can_be_explicit": true,
-    "seed_can_be_derived_from_canonicalized_input": true,
-    "standard_library_only": true
+  "learned_residual_policy": {
+    "allowed_as_future_extension": true,
+    "must_be_separate_sidecar": true,
+    "may_replace_physics_baseline": false,
+    "training_data_hash_required": true,
+    "independent_validation_required": true
   },
-  "domain_boundary": {
-    "astronomy": true,
-    "planetary_science": true,
-    "remote_sensing": true,
-    "sensor_uncertainty": true,
-    "environment_uncertainty": true,
-    "weapon_domain": false,
-    "aiming_or_harm_optimization": false
+  "known_debts": {
+    "cross_dimension_input_correlations": "NOT_IMPLEMENTED_V1_1",
+    "posterior_update": "REQUIRES_SEPARATE_HOLDOUT_OR_VALIDATION_GATE",
+    "real_object_orbits": "TWO_BODY_BASELINE_ONLY_UNTIL_EPHEMERIS_VALIDATION"
+  },
+  "love_edem_validation": {
+    "script": "workspace/love_edem_world_matrix_test.py",
+    "input": "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json",
+    "question": "Do frozen nearest-neighbour distances become exact positional counterparts under a preregistered sub-arcsecond center-jitter stress model?",
+    "default_samples_per_target": 8192,
+    "default_sigma_arcsec_each_coordinate": 0.7,
+    "gates_arcsec": [
+      1.5,
+      3.0
+    ],
+    "claim_ceiling": "ROBUSTNESS_TO_ASSUMED_SUB_ARCSECOND_CENTER_JITTER_ONLY__NOT_ANOMALY_EVIDENCE"
   },
   "helios_bridge": {
     "repository": "Hawkar-usls/Janus-HELIOS",
     "shared_semantic_key": "RESPICIENS_ET_PROSPICIENS",
     "shared_world_matrix_concept": true,
-    "role_difference": "COSMOS uses the matrix for scientific uncertainty exploration; HELIOS uses an abstract presentation-only world-state mechanic with no effect on RNG, payout, RTP or compute routing."
+    "role_difference": "COSMOS uses the matrix for scientific uncertainty and trajectory exploration; HELIOS uses an abstract presentation-only world state."
+  },
+  "lineage": {
+    "inspiration": "M2R-style backward/forward fan of possible worlds",
+    "retained": "UNCERTAINTY_FAN_AND_PREDICTIVE_WORLD_MODEL",
+    "renamed_physics_for_planets": "CELESTIAL_MECHANICS_AND_ORBITAL_DYNAMICS"
   }
 }
