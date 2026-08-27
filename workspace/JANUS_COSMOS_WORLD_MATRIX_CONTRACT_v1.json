@@ -1,0 +1,81 @@
+{
+  "schema": "janus.cosmos.world-matrix.contract.v1",
+  "project": "Janus-Cosmos",
+  "mechanic": "JANUS_WORLD_MATRIX",
+  "latin_key": "APERIATUR_PORTA",
+  "formula_name": "RESPICIENS_ET_PROSPICIENS",
+  "version": "1.0.0",
+  "purpose": "Expand uncertainty in astronomical, planetary and sensor parameters into an ensemble of plausible observational worlds before interpretation, then summarize that ensemble with reproducible statistics.",
+  "source_concept": {
+    "accepted": [
+      "MONTE_CARLO_FUTURE_STATE_FAN",
+      "STOCHASTIC_ENVIRONMENT_MATRIX",
+      "RESPICIENS_CURRENT_PRIORS",
+      "PROSPICIENS_ALTERNATIVE_OBSERVATIONAL_WORLDS"
+    ],
+    "explicitly_not_inherited": [
+      "WEAPON_BALLISTICS",
+      "PROJECTILE_TRAJECTORY_OPTIMIZATION",
+      "AIMING_ASSISTANCE",
+      "FIRING_SOLUTIONS",
+      "HARM_OPTIMIZATION"
+    ]
+  },
+  "runtime_module": "workspace/janus_world_matrix.py",
+  "presets": {
+    "sky": [
+      "ra_offset_arcsec",
+      "dec_offset_arcsec",
+      "time_offset_s",
+      "seeing_arcsec",
+      "sensor_noise_sigma",
+      "photometric_zero_point_offset_mag"
+    ],
+    "planet": [
+      "latitude_offset_km",
+      "longitude_offset_km",
+      "local_time_offset_s",
+      "terrain_height_error_m",
+      "albedo_noise_fraction",
+      "sensor_noise_sigma"
+    ]
+  },
+  "outputs": [
+    "WORLD_MATRIX",
+    "QUANTILE_ENVELOPES",
+    "MEAN_AND_STD",
+    "COVARIANCE_MATRIX",
+    "DETERMINISTIC_SEED",
+    "EPISTEMIC_STATUS"
+  ],
+  "epistemic_firewall": {
+    "SIMULATION_IS_NOT_EVIDENCE": true,
+    "SIMULATION_IS_NOT_DISCOVERY": true,
+    "OBSERVED_DATA_COMPARISON_REQUIRED": true,
+    "NULL_OR_CONTROL_REQUIRED": true,
+    "PRIORS_SHOULD_BE_FROZEN_BEFORE_RESULT_INSPECTION": true,
+    "POST_HOC_PRIOR_TUNING_MUST_NOT_BE_PRESENTED_AS_CONFIRMATION": true,
+    "NEGATIVE_RESULT_IS_VALID_OUTPUT": true
+  },
+  "reproducibility": {
+    "deterministic_seed_supported": true,
+    "seed_can_be_explicit": true,
+    "seed_can_be_derived_from_canonicalized_input": true,
+    "standard_library_only": true
+  },
+  "domain_boundary": {
+    "astronomy": true,
+    "planetary_science": true,
+    "remote_sensing": true,
+    "sensor_uncertainty": true,
+    "environment_uncertainty": true,
+    "weapon_domain": false,
+    "aiming_or_harm_optimization": false
+  },
+  "helios_bridge": {
+    "repository": "Hawkar-usls/Janus-HELIOS",
+    "shared_semantic_key": "RESPICIENS_ET_PROSPICIENS",
+    "shared_world_matrix_concept": true,
+    "role_difference": "COSMOS uses the matrix for scientific uncertainty exploration; HELIOS uses an abstract presentation-only world-state mechanic with no effect on RNG, payout, RTP or compute routing."
+  }
+}
