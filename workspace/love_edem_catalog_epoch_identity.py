@@ -6,19 +6,13 @@ already-frozen source IDs, then asks whether those independent detections are
 compatible with the corresponding Gaia DR3 stellar worldline.
 """
 from __future__ import annotations
-
-import argparse, csv, io, json, math
-from datetime import datetime, timezone
+import argparse,csv,io,json,math
+from datetime import datetime,timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable
+from typing import Any,Dict,Iterable
 import requests
-
-from janus_catalog_epoch_identity import (
-    CatalogMeasurement, conservative_unknown_corr_bound_mas2,
-    covariance_from_cosigma_mas2, covariance_from_sigmas_corr_mas2,
-    ellipse_covariance_mas2, evaluate_identity, jd_to_mjd,
-)
-from love_edem_epoch_worldline_test import query_gaia_live, state_from_features
+from janus_catalog_epoch_identity import CatalogMeasurement,conservative_unknown_corr_bound_mas2,covariance_from_cosigma_mas2,ellipse_covariance_mas2,evaluate_identity,jd_to_mjd
+from love_edem_epoch_worldline_test import query_gaia_live,state_from_features
 
 SCHEMA="janus.cosmos.love-edem.catalog-epoch-identity.v1"
 SDSS_SQL_ENDPOINT="https://skyserver.sdss.org/dr16/SkyServerWS/SearchTools/SqlSearch"
@@ -31,6 +25,7 @@ CATALOG_META={
  "ALLWISE":{"vizier":"II/328/allwise","id_columns":["AllWISE"],"constraint_names":["AllWISE"]},
  "2MASS_PSC":{"vizier":"II/246/out","id_columns":["2MASS","_2MASS"],"constraint_names":["2MASS","_2MASS"]},
  "PANSTARRS_DR1":{"vizier":"II/349/ps1","id_columns":["objID"],"constraint_names":["objID"]},
+ "SDSS_DR16":{"vizier":"V/154/sdss16","id_columns":["objID"],"constraint_names":["objID"]},
 }
 
 def _jsonable(v:Any)->Any:
@@ -72,8 +67,7 @@ def query_vizier_exact(catalog_key:str,source_id:str,center:list[float])->Dict[s
  cfg=CATALOG_META[catalog_key];viz=Vizier(columns=["**"],row_limit=100);errors=[]
  for constraint in cfg["constraint_names"]:
   try:
-   tables=viz.query_constraints(catalog=cfg["vizier"],**{constraint:str(source_id)})
-   for table in tables:
+   for table in viz.query_constraints(catalog=cfg["vizier"],**{constraint:str(source_id)}):
     for row in table:
      snap={n:_jsonable(row[n]) for n in table.colnames}
      if _id_matches(snap,source_id,cfg["id_columns"]):snap["_janus_query_mode"]=f"EXACT_CONSTRAINT:{constraint}";return snap
@@ -83,8 +77,7 @@ def query_vizier_exact(catalog_key:str,source_id:str,center:list[float])->Dict[s
   for table in viz.query_region(c,radius=2*u.arcsec,catalog=cfg["vizier"]):
    for row in table:
     snap={n:_jsonable(row[n]) for n in table.colnames}
-    if _id_matches(snap,source_id,cfg["id_columns"]):
-     snap["_janus_query_mode"]="POSITION_RECOVERY_WITH_EXACT_ID_ACCEPTANCE";snap["_janus_constraint_errors"]=errors;return snap
+    if _id_matches(snap,source_id,cfg["id_columns"]):snap["_janus_query_mode"]="POSITION_RECOVERY_WITH_EXACT_ID_ACCEPTANCE";snap["_janus_constraint_errors"]=errors;return snap
  except Exception as exc:errors.append(f"region:{type(exc).__name__}:{exc}")
  raise RuntimeError(f"EXACT_SOURCE_NOT_RETURNED:{catalog_key}:{source_id}:{errors}")
 
@@ -107,46 +100,33 @@ def ps1_measurement(source_id:str,row:Dict[str,Any])->CatalogMeasurement:
  return CatalogMeasurement("PANSTARRS_DR1",source_id,ra,dec,epoch,cov.tolist(),"CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_RA_DEC_CORRELATION__20MAS_SYSTEMATIC_FLOOR","EXACT_WEIGHTED_MEAN_EPOCH_MJD_FROM_PS1_EPOCH","PS1_WEIGHTED_MEAN_SINGLE_EPOCH_DETECTION_POSITION_AT_EPOCHMEAN",{"catalog_id":"II/349/ps1","query_mode":row.get("_janus_query_mode"),"raw_epoch_field":"Epoch","raw_epoch_mjd":epoch,"raw_statistical_errors_arcsec":{"ra":era,"dec":edec},"systematic_floor_mas":PS1_SYSTEMATIC_FLOOR_MAS,"unknown_correlation_policy":"TRACE_TIMES_IDENTITY_UPPER_BOUND_NOT_ZERO_CORRELATION"})
 
 def _sdss_sql(sql:str,label:str)->tuple[Dict[str,Any],Dict[str,Any]]:
- resp=requests.get(SDSS_SQL_ENDPOINT,params={"cmd":sql,"format":"csv"},timeout=45)
- meta={"label":label,"endpoint":SDSS_SQL_ENDPOINT,"request_url":resp.url,"http_status":resp.status_code,"sql":sql}
- resp.raise_for_status();text=resp.text.strip()
- lines=[line for line in text.splitlines() if line.strip() and not line.lstrip().startswith("#")]
- rows=list(csv.DictReader(io.StringIO("\n".join(lines)))) if lines else []
+ resp=requests.get(SDSS_SQL_ENDPOINT,params={"cmd":sql,"format":"csv"},timeout=45);meta={"label":label,"endpoint":SDSS_SQL_ENDPOINT,"request_url":resp.url,"http_status":resp.status_code,"sql":sql};resp.raise_for_status();text=resp.text.strip();lines=[x for x in text.splitlines() if x.strip() and not x.lstrip().startswith("#")];rows=list(csv.DictReader(io.StringIO("\n".join(lines)))) if lines else []
  if not rows:raise RuntimeError(f"SDSS_NO_ROW:{label}:{text[:500]}")
  return rows[0],meta
 
-def query_sdss_exact(objid:str)->Dict[str,Any]:
- oid=int(objid);attempts=[]
- obj_sql=f"SELECT TOP 1 objID,ra,dec,fieldID,run,rerun,camcol,field FROM PhotoObjAll WHERE objID={oid}"
- obj,objmeta=_sdss_sql(obj_sql,"PHOTOOBJ_EXACT_ID");attempts.append(objmeta)
+def query_sdss_exact(objid:str,center:list[float])->Dict[str,Any]:
+ oid=int(objid);receipts=[]
+ obj,objmeta=_sdss_sql(f"SELECT TOP 1 objID,ra,dec,fieldID,run,rerun,camcol,field FROM PhotoObjAll WHERE objID={oid}","PHOTOOBJ_EXACT_ID");receipts.append(objmeta)
  if str(_get(obj,"objID")).strip()!=str(objid):raise RuntimeError("SDSS_OBJID_MISMATCH")
  fieldid=str(_get(obj,"fieldID")).strip()
- if not fieldid:raise RuntimeError("SDSS_FIELDID_MISSING")
- err=None
- for table in ("PhotoObjAll","PhotoAuxAll"):
-  sql=f"SELECT TOP 1 objID,raErr,decErr,raDecCorr FROM {table} WHERE objID={oid}"
-  try:
-   err,m=_sdss_sql(sql,f"ASTROMETRIC_ERRORS_{table.upper()}");attempts.append(m);break
-  except Exception as exc:attempts.append({"label":f"ASTROMETRIC_ERRORS_{table.upper()}","status":"FAILED","error":f"{type(exc).__name__}:{exc}","sql":sql})
- if err is None:raise RuntimeError(f"SDSS_ASTROMETRIC_ERRORS_UNRESOLVED:{attempts}")
- field_sql=f"SELECT TOP 1 fieldID,mjd_u,mjd_g,mjd_r,mjd_i,mjd_z FROM [Field] WHERE fieldID={int(fieldid)}"
- field,fieldmeta=_sdss_sql(field_sql,"FIELD_EXACT_FIELDID");attempts.append(fieldmeta)
- out={**obj,**err,**field};out["_janus_query_mode"]="SPLIT_EXACT_OBJID_THEN_EXACT_FIELDID";out["_janus_endpoint"]=SDSS_SQL_ENDPOINT;out["_janus_query_receipts"]=attempts
- return out
+ field,fieldmeta=_sdss_sql(f"SELECT TOP 1 fieldID,mjd_u,mjd_g,mjd_r,mjd_i,mjd_z FROM [Field] WHERE fieldID={int(fieldid)}","FIELD_EXACT_FIELDID");receipts.append(fieldmeta)
+ vr=query_vizier_exact("SDSS_DR16",objid,center)
+ vra,vdec=_float(vr,"RA_ICRS","RAdeg"),_float(vr,"DE_ICRS","DEdeg");era,edec=_float(vr,"e_RA_ICRS","e_RAdeg"),_float(vr,"e_DE_ICRS","e_DEdeg");rmjd=_float(vr,"rMJD");mean_mjd=_float(vr,"MJD");sky_r=_float(field,"mjd_r")
+ if None in (vra,vdec,era,edec,rmjd,sky_r):raise ValueError(f"SDSS_VIZIER_POSITION_ERROR_OR_RMJD_INCOMPLETE:{sorted(vr.keys())}")
+ if abs(rmjd-sky_r)>0.001:raise ValueError(f"SDSS_RMJD_CROSSCHECK_FAILED:VIZIER={rmjd}:SKYSERVER={sky_r}")
+ if str(_get(vr,"fieldID")).strip() not in ("",fieldid):raise ValueError("SDSS_FIELDID_CROSSCHECK_FAILED")
+ out={**obj,**field,"RA_catalog":vra,"DE_catalog":vdec,"e_RA_catalog":era,"e_DE_catalog":edec,"rMJD_catalog":rmjd,"MJD_catalog_mean":mean_mjd,"_janus_query_mode":"EXACT_OBJID_SKYSERVER_FIELD_PLUS_EXACT_OBJID_VIZIER_DR16","_janus_query_receipts":receipts,"_janus_vizier_query_mode":vr.get("_janus_query_mode")};return out
 
 def sdss_measurement(source_id:str,row:Dict[str,Any])->CatalogMeasurement:
- ra,dec=_float(row,"ra"),_float(row,"dec");era,edec,rho=_float(row,"raErr"),_float(row,"decErr"),_float(row,"raDecCorr");mjdr=_float(row,"mjd_r")
- if None in (ra,dec,era,edec,rho,mjdr):raise ValueError("SDSS_RBAND_POSITION_EPOCH_OR_COVARIANCE_INCOMPLETE")
- cov=covariance_from_sigmas_corr_mas2(era,edec,rho)
- return CatalogMeasurement("SDSS_DR16",source_id,ra,dec,mjdr,cov.tolist(),"MEASURED_FULL_2D_COVARIANCE_FROM_RAERR_DECERR_RADEC_CORR","EXACT_R_BAND_FIELD_EPOCH_MJD_R","SDSS_PHOTOOBJ_FINAL_RA_DEC_ARE_R_BAND_ASTROMETRY",{"query_mode":row.get("_janus_query_mode"),"endpoint":row.get("_janus_endpoint"),"field_id":_get(row,"fieldID"),"band_mjd":{b:_float(row,f"mjd_{b}") for b in "ugriz"},"raw_uncertainty":{"raErr_arcsec":era,"decErr_arcsec":edec,"raDecCorr":rho},"query_receipts":row.get("_janus_query_receipts",[])})
+ ra,dec=_float(row,"RA_catalog"),_float(row,"DE_catalog");era,edec=_float(row,"e_RA_catalog"),_float(row,"e_DE_catalog");mjdr=_float(row,"rMJD_catalog")
+ if None in (ra,dec,era,edec,mjdr):raise ValueError("SDSS_RBAND_POSITION_EPOCH_OR_ERRORS_INCOMPLETE")
+ cov=conservative_unknown_corr_bound_mas2(era,edec,0.0)
+ return CatalogMeasurement("SDSS_DR16",source_id,ra,dec,mjdr,cov.tolist(),"CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND__UNKNOWN_SDSS_RA_DEC_CORRELATION","EXACT_R_BAND_FIELD_EPOCH_MJD_R_CROSSCHECKED_SKYSERVER_VIZIER","SDSS_DR16_CATALOG_POSITION_WITH_R_BAND_FIELD_EPOCH",{"catalog_id":"V/154/sdss16","query_mode":row.get("_janus_query_mode"),"vizier_query_mode":row.get("_janus_vizier_query_mode"),"field_id":_get(row,"fieldID"),"band_mjd":{b:_float(row,f"mjd_{b}") for b in "ugriz"},"vizier_rMJD":mjdr,"vizier_mean_MJD":_float(row,"MJD_catalog_mean"),"raw_statistical_errors_arcsec":{"ra":era,"dec":edec},"unknown_correlation_policy":"TRACE_TIMES_IDENTITY_UPPER_BOUND_NOT_ZERO_CORRELATION","query_receipts":row.get("_janus_query_receipts",[])})
 
 def _resolve_measurement(catalog:str,source_id:str,center:list[float])->CatalogMeasurement:
- if catalog=="SDSS_DR16":return sdss_measurement(source_id,query_sdss_exact(source_id))
+ if catalog=="SDSS_DR16":return sdss_measurement(source_id,query_sdss_exact(source_id,center))
  row=query_vizier_exact(catalog,source_id,center)
- if catalog=="ALLWISE":return allwise_measurement(source_id,row)
- if catalog=="2MASS_PSC":return twomass_measurement(source_id,row)
- if catalog=="PANSTARRS_DR1":return ps1_measurement(source_id,row)
- raise KeyError(catalog)
+ return allwise_measurement(source_id,row) if catalog=="ALLWISE" else twomass_measurement(source_id,row) if catalog=="2MASS_PSC" else ps1_measurement(source_id,row) if catalog=="PANSTARRS_DR1" else (_ for _ in ()).throw(KeyError(catalog))
 
 def run()->Dict[str,Any]:
  groups={};resolved=0;required=sum(len(g["catalogs"]) for g in GROUPS.values())
@@ -156,23 +136,16 @@ def run()->Dict[str,Any]:
   measurements=[];audit={}
   for catalog,source_id in cfg["catalogs"].items():
    try:
-    m=_resolve_measurement(catalog,source_id,cfg["center"]);measurements.append(m);resolved+=1
-    audit[catalog]={"source_id":source_id,"status":"EPOCH_AND_POSITION_COVARIANCE_RESOLVED","epoch_mjd":m.epoch_mjd,"epoch_jyear":m.epoch_jyear,"epoch_status":m.epoch_status,"covariance_status":m.covariance_status,"position_semantics":m.position_semantics}
+    m=_resolve_measurement(catalog,source_id,cfg["center"]);measurements.append(m);resolved+=1;audit[catalog]={"source_id":source_id,"status":"EPOCH_AND_POSITION_COVARIANCE_RESOLVED","epoch_mjd":m.epoch_mjd,"epoch_jyear":m.epoch_jyear,"epoch_status":m.epoch_status,"covariance_status":m.covariance_status,"position_semantics":m.position_semantics}
    except Exception as exc:audit[catalog]={"source_id":source_id,"status":"BLOCKED","reason":f"{type(exc).__name__}:{exc}"}
-  identity=evaluate_identity(state,measurements) if measurements else {"status":"I_DO_NOT_KNOW","reason":"NO_EXTERNAL_MEASUREMENTS_RESOLVED"}
-  groups[group_name]={"status":"EVALUATED" if measurements else "I_DO_NOT_KNOW","target":cfg["target"],"gaia_source_id":cfg["gaia_source_id"],"catalog_epoch_audit":audit,"identity_test":identity}
+  groups[group_name]={"status":"EVALUATED" if measurements else "I_DO_NOT_KNOW","target":cfg["target"],"gaia_source_id":cfg["gaia_source_id"],"catalog_epoch_audit":audit,"identity_test":evaluate_identity(state,measurements) if measurements else {"status":"I_DO_NOT_KNOW","reason":"NO_EXTERNAL_MEASUREMENTS_RESOLVED"}}
  return {"schema":SCHEMA,"experiment":"LOVE_EDEM_CATALOG_EPOCH_IDENTITY_GEN3","formula":"RESPICIENS_ET_PROSPICIENS_GEN3","run_time_utc":datetime.now(timezone.utc).isoformat(),"groups":groups,"summary":{"required_external_catalog_measurements":required,"resolved_external_catalog_measurements":resolved,"all_required_epochs_resolved":resolved==required,"release_year_substitutions":0,"simulation_count_increased":False},"archive_search_bridge":{"lineage":"TOPA tools/topa_arxiv_gateway.py","role":"DISCOVERY_AND_PROVENANCE_INDEX_ONLY","catalog_values_must_come_from_primary_catalog_or_archive":True,"search_rank_is_truth":False},"epistemic_firewall":{"catalog_agreement_is_love_edem_identity":False,"catalog_agreement_is_anomaly":False,"missing_epoch_may_use_release_year":False,"missing_covariance_may_be_zeroed":False,"mahalanobis_pass_is_identity_proof":False,"negative_result_is_valid":True},"claim_ceiling":"CROSS_CATALOG_COMPATIBILITY_OF_ALREADY_GROUPED_STELLAR_DETECTIONS_ONLY__NOT_LOVE_EDEM_IDENTITY"}
 
 def self_test()->None:
- a=allwise_measurement("W",{"RA_pm":10.0,"DE_pm":20.0,"e_RA_pm":.1,"e_DE_pm":.2,"cosig_pm":.01});t=twomass_measurement("T",{"RAJ2000":10.0,"DEJ2000":20.0,"errMaj":.2,"errMin":.1,"errPA":30.0,"JD":2451545.0});p=ps1_measurement("P",{"RAJ2000":10.0,"DEJ2000":20.0,"e_RAJ2000":.01,"e_DEJ2000":.02,"Epoch":56000.0})
- assert a.epoch_mjd==55400.0 and abs(t.epoch_mjd-51544.5)<1e-9 and p.epoch_mjd==56000.0 and "CONSERVATIVE" in p.covariance_status
- print("LOVE_EDEM_CATALOG_EPOCH_IDENTITY_SELF_TEST=PASS")
+ a=allwise_measurement("W",{"RA_pm":10.0,"DE_pm":20.0,"e_RA_pm":.1,"e_DE_pm":.2,"cosig_pm":.01});t=twomass_measurement("T",{"RAJ2000":10.0,"DEJ2000":20.0,"errMaj":.2,"errMin":.1,"errPA":30.0,"JD":2451545.0});p=ps1_measurement("P",{"RAJ2000":10.0,"DEJ2000":20.0,"e_RAJ2000":.01,"e_DEJ2000":.02,"Epoch":56000.0});assert a.epoch_mjd==55400.0 and abs(t.epoch_mjd-51544.5)<1e-9 and p.epoch_mjd==56000.0 and "CONSERVATIVE" in p.covariance_status;print("LOVE_EDEM_CATALOG_EPOCH_IDENTITY_SELF_TEST=PASS")
 
 def main()->int:
  p=argparse.ArgumentParser();p.add_argument("--output");p.add_argument("--self-test",action="store_true");a=p.parse_args()
  if a.self_test:self_test();return 0
- out=run();text=json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)
- if a.output:Path(a.output).write_text(text+"\n",encoding="utf-8")
- else:print(text)
- return 0
+ out=run();text=json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True);Path(a.output).write_text(text+"\n",encoding="utf-8") if a.output else print(text);return 0
 if __name__=="__main__":raise SystemExit(main())
