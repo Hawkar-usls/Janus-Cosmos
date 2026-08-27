@@ -15,7 +15,7 @@ permissions:
 jobs:
   vega-live-evidence:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -34,6 +34,9 @@ jobs:
       - name: Audit fixed published RV periods
         run: python experiments/vega_occulted_planet/audit_tres_rv.py
 
+      - name: Run segmented stellar-activity specificity audit
+        run: python experiments/vega_occulted_planet/audit_tres_rv_segmented_activity.py
+
       - name: Build evidence-aware v1.1 receipt and TOPA/Spider queues
         run: python experiments/vega_occulted_planet/run_vega_occulted_planet_v1_1.py
 
@@ -45,6 +48,7 @@ jobs:
           root = Path('experiments/vega_occulted_planet/output')
           r = json.loads((root/'vega_occulted_planet_receipt_v1_1.json').read_text())
           rv = json.loads((root/'vega_tres_rv_audit.json').read_text())
+          seg = json.loads((root/'vega_tres_rv_segmented_activity_audit.json').read_text())
           p = json.loads((root/'vega_tres_rv_provenance.json').read_text())
           topa = json.loads((root/'topa_queue_v1_1.json').read_text())
           spider = json.loads((root/'spider_queue_v1_1.json').read_text())
@@ -52,6 +56,8 @@ jobs:
           assert p['parsed_rows'] == 1524
           assert rv['row_count'] == 1524
           assert rv['interpretation']['status'] == 'DIAGNOSTIC_ONLY_NO_CONFIRMATION'
+          assert seg['row_count'] == 1524
+          assert seg['claim_ceiling'] == 'ACTIVITY_SPECIFICITY_DIAGNOSTIC_ONLY_NO_PLANET_CONFIRMATION'
           assert r['verdict'] == 'TWO_OPEN_INNER_PLANET_SUBHYPOTHESES'
           assert r['claim_ceiling'] == 'H1A_UNCONFIRMED_AND_H1B_NOT_EXCLUDED_ONLY'
           assert topa['receipt_hash'] == r['freeze_sha256']
@@ -60,18 +66,22 @@ jobs:
           print('v1.1 freeze =', r['freeze_sha256'])
           print('TRES payload sha256 =', p['sha256'])
           print('delta_BIC fixed 2.43 d =', rv['diagnostics']['delta_bic_rotation_to_rotation_plus_2p43'])
+          print('segmented specificity =', seg['specificity']['status'])
+          for q in seg['scales']:
+              print('chunk', q['chunk_days'], 'dBIC_2p43=', q['delta_bic_candidate'], 'dBIC_196p4=', q['delta_bic_long_control'])
           PY
 
       - name: Upload Vega live evidence receipt
         uses: actions/upload-artifact@v4
         with:
-          name: janus-cosmos-vega-live-evidence-v1-1
+          name: janus-cosmos-vega-live-evidence-v1-2
           path: |
             experiments/vega_occulted_planet/evidence_snapshot_v1_1.json
             experiments/vega_occulted_planet/output/vega_occulted_planet_receipt.json
             experiments/vega_occulted_planet/output/vega_occulted_planet_receipt_v1_1.json
             experiments/vega_occulted_planet/output/vega_tres_rv_provenance.json
             experiments/vega_occulted_planet/output/vega_tres_rv_audit.json
+            experiments/vega_occulted_planet/output/vega_tres_rv_segmented_activity_audit.json
             experiments/vega_occulted_planet/output/topa_queue_v1_1.json
             experiments/vega_occulted_planet/output/spider_queue_v1_1.json
             experiments/vega_occulted_planet/output/data/vega_tres_rv.tsv
