@@ -258,6 +258,18 @@ def evaluate_worldline(
         "samples": samples,
         "seed": seed,
         "covariance_status": cov_status,
+        "covariance_parameter_order": [
+            "ra_offset_mas", "dec_offset_mas", "parallax_mas", "pmra_masyr", "pmdec_masyr"
+        ],
+        "covariance_parameter_units": ["mas", "mas", "mas", "mas/yr", "mas/yr"],
+        "measurement_uncertainty": {
+            "ra_error_mas": state.ra_error_mas,
+            "dec_error_mas": state.dec_error_mas,
+            "parallax_error_mas": state.parallax_error_mas,
+            "pmra_error_masyr": state.pmra_error_masyr,
+            "pmdec_error_masyr": state.pmdec_error_masyr,
+            "correlations": dict(state.correlations or {}),
+        },
         "covariance_matrix_native_units": cov,
         "nominal": {
             "separation_at_ref_epoch_arcsec": math.hypot(x_nom, y_nom) / 1000.0,
@@ -308,6 +320,8 @@ def self_test() -> None:
     b = evaluate_worldline(s, 10.0, 20.0, samples=128, seed=42, epoch_start=2000, epoch_end=2030)
     assert a["result_sha256"] == b["result_sha256"]
     assert a["covariance_status"] == "FULL_CATALOG_COVARIANCE"
+    assert a["covariance_parameter_units"] == ["mas", "mas", "mas", "mas/yr", "mas/yr"]
+    assert len(a["measurement_uncertainty"]["correlations"]) == 10
     assert a["epistemic_firewall"]["propagation_is_observation"] is False
     assert a["sampled_parallax_envelope_lower_bound_arcsec"]["min"] >= 0.0
     print("JANUS_ASTROMETRIC_WORLDLINES_SELF_TEST=PASS")
