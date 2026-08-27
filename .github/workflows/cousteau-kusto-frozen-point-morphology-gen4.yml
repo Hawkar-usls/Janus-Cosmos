@@ -5,6 +5,7 @@ on:
     branches: [janus-echo-cousteau]
     paths:
       - 'workspace/kusto_frozen_point_morphology_gen4.py'
+      - 'workspace/kusto_frozen_point_morphology_gen4_iofix.py'
       - 'data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-CONTRACT-v1.0.json'
       - '.github/workflows/cousteau-kusto-frozen-point-morphology-gen4.yml'
   workflow_dispatch:
@@ -31,7 +32,7 @@ jobs:
 
       - name: Live frozen-point gate
         run: |
-          python workspace/kusto_frozen_point_morphology_gen4.py \
+          python workspace/kusto_frozen_point_morphology_gen4_iofix.py \
             --live \
             --out data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LATEST-RECEIPT.json
 
@@ -60,6 +61,7 @@ jobs:
               'decision': r['decision'],
               'gmrt': r.get('gmrt_topo_mask', {}),
               'gebco_tid_wms': r.get('gebco_2026_tid_wms', {}),
+              'scale_results': r.get('scale_results', []),
               'result_sha256': r.get('result_sha256'),
           }, indent=2, sort_keys=True))
           PY
