@@ -4,15 +4,18 @@
   "mechanic": "JANUS_WORLD_MATRIX",
   "latin_key": "APERIATUR_PORTA",
   "formula_name": "RESPICIENS_ET_PROSPICIENS",
-  "version": "1.2.0",
-  "purpose": "Expand frozen astronomical, planetary, environmental and sensor uncertainties into reproducible ensembles before interpretation, while preserving provenance, epoch semantics and a strict model-versus-observation boundary.",
+  "version": "1.3.0",
+  "purpose": "Expand frozen astronomical, planetary, environmental and sensor uncertainties into reproducible ensembles and epoch-normalized physical-worldline tests while preserving provenance and a strict model-versus-observation boundary.",
   "architecture": [
     "FROZEN_INPUT_OR_PRIOR_STATE",
     "REFERENCE_EPOCH_AND_FRAME",
     "DETERMINISTIC_UNCERTAINTY_DESIGN",
     "MULTI_WORLD_ENSEMBLE",
     "DOMAIN_SPECIFIC_PROPAGATOR",
-    "SUMMARY_AND_TRAJECTORY_ENVELOPE",
+    "EXACT_OR_REFERENCE_CATALOG_EPOCH_RESOLUTION",
+    "COMMON_EPOCH_CONDITIONAL_TRANSPORT",
+    "RESIDUAL_VECTOR_AND_JOINT_BLOCK_COVARIANCE",
+    "MAHALANOBIS_GLS_COMPATIBILITY_GATE",
     "OBSERVED_DATA_OR_EPHEMERIS_COMPARISON",
     "NULL_CONTROL_AND_CLAIM_CEILING"
   ],
@@ -21,45 +24,46 @@
     "optional": "MONTE_CARLO_OR_CATALOG_COVARIANCE_GAUSSIAN",
     "seed_required_for_frozen_runs": true,
     "raw_parameter_draws_preserved": true,
-    "reason": "Use stratified uncertainty designs for independent priors and the measured covariance matrix when a catalog supplies correlated astrometric parameters."
-  },
-  "presets": {
-    "sky": [
-      "ra_offset_arcsec",
-      "dec_offset_arcsec",
-      "time_offset_s",
-      "seeing_arcsec",
-      "sensor_noise_sigma",
-      "photometric_zero_point_offset_mag"
-    ],
-    "planet_surface": [
-      "latitude_offset_km",
-      "longitude_offset_km",
-      "local_time_offset_s",
-      "terrain_height_error_m",
-      "albedo_noise_fraction",
-      "sensor_noise_sigma"
-    ]
+    "reason": "Use stratified uncertainty designs for independent priors and measured covariance matrices where a catalog supplies correlated astrometric parameters. Gen3 does not increase the LOVE/EDEM simulation count; it adds real epoch/covariance information."
   },
   "astrometric_worldline_layer": {
     "module": "workspace/janus_astrometric_worldlines.py",
     "runner": "workspace/love_edem_epoch_worldline_test.py",
     "scope": "STELLAR_AND_CATALOG_ASTROMETRY",
-    "state": [
-      "ra",
-      "dec",
-      "parallax",
-      "pmra",
-      "pmdec",
-      "reference_epoch"
-    ],
+    "state": ["ra", "dec", "parallax", "pmra", "pmdec", "reference_epoch"],
     "uncertainty": "CATALOG_5X5_ASTROMETRIC_COVARIANCE_WHEN_AVAILABLE",
     "gaia_dr3_reference_epoch_jyear": 2016.0,
     "baseline_propagation": "LINEAR_TANGENT_PLANE_PROPER_MOTION_OVER_BOUNDED_EPOCH_WINDOW",
     "parallax_policy": "CONSERVATIVE_FULL_AMPLITUDE_ENVELOPE_UNTIL_OBSERVER_SPECIFIC_PARALLAX_FACTORS_ARE_FROZEN",
-    "cross_catalog_epoch_rule": "EXACT_PER_DETECTION_OBSERVATION_EPOCH_REQUIRED",
-    "forbidden_substitution": "CATALOG_RELEASE_YEAR_IS_NOT_OBSERVATION_EPOCH",
-    "validation_required": "INDEPENDENT_CATALOG_POSITION_AT_ITS_RECORDED_EPOCH_OR_TRUSTED_ASTROMETRIC_SERVICE"
+    "forbidden_substitution": "CATALOG_RELEASE_YEAR_IS_NOT_OBSERVATION_EPOCH"
+  },
+  "catalog_epoch_identity_layer": {
+    "generation": 3,
+    "kernel": "workspace/janus_catalog_epoch_identity.py",
+    "runner": "workspace/love_edem_catalog_epoch_identity.py",
+    "question": "Do independently rooted catalog detections already grouped with a Gaia star remain statistically compatible with the same Gaia physical worldline when evaluated at the catalog position epoch?",
+    "common_epoch_jyear": 2016.0,
+    "common_epoch_transport_semantics": "CONDITIONAL_ON_TESTED_GAIA_IDENTITY_HYPOTHESIS_NOT_AN_INDEPENDENT_EXTERNAL_PROPER_MOTION",
+    "residual_coordinates": "LOCAL_TANGENT_PLANE_EAST_NORTH_MAS",
+    "statistic": "JOINT_GLS_MAHALANOBIS_CHI2",
+    "tail_alpha_preregistered": 0.0027,
+    "shared_gaia_uncertainty": "OFF_DIAGONAL_CROSS_EPOCH_BLOCKS_REQUIRED",
+    "naive_sum_of_pairwise_chi2": "FORBIDDEN_BECAUSE_SHARED_GAIA_COVARIANCE_WOULD_BE_DOUBLE_COUNTED",
+    "catalog_epoch_sources": {
+      "GAIA_DR3": "REFERENCE_EPOCH_J2016_0",
+      "ALLWISE": "MOTION_FIT_RA_PM_DE_PM_STANDARD_REFERENCE_EPOCH_MJD_55400_WHEN_AVAILABLE",
+      "2MASS_PSC": "SOURCE_JD_OBSERVATION_EPOCH",
+      "PANSTARRS_DR1": "EPOCH_WEIGHTED_MEAN_MJD_FOR_RA_MEAN_DEC_MEAN",
+      "SDSS_DR16": "FIELD_MJD_R_FOR_R_BAND_FINAL_RA_DEC"
+    },
+    "catalog_covariance_policy": {
+      "GAIA_DR3": "FULL_5X5_MEASURED_COVARIANCE",
+      "ALLWISE": "FULL_2D_FROM_E_RA_PM_E_DE_PM_COSIG_PM",
+      "2MASS_PSC": "FULL_2D_FROM_ERROR_ELLIPSE",
+      "PANSTARRS_DR1": "UNKNOWN_RA_DEC_CORRELATION_MUST_NOT_BE_ZEROED; USE_CONSERVATIVE_TRACE_ISOTROPIC_UPPER_BOUND_WITH_OFFICIAL_20_MAS_SYSTEMATIC_FLOOR",
+      "SDSS_DR16": "FULL_2D_FROM_RAERR_DECERR_RADEC_CORR"
+    },
+    "claim_ceiling": "INDEPENDENT_CATALOG_COMPATIBILITY_WITH_A_GAIA_STELLAR_WORLDLINE_ONLY__NOT_LOVE_EDEM_IDENTITY_OR_ANOMALY"
   },
   "celestial_trajectory_layer": {
     "module": "workspace/janus_celestial_dynamics.py",
@@ -70,82 +74,63 @@
     "integrator": "VELOCITY_VERLET",
     "uncertainty_cloud": "JANUS_WORLD_MATRIX_LATIN_HYPERCUBE",
     "validation_required": "TRUSTED_EPHEMERIS_OR_INDEPENDENT_OBSERVATION",
-    "known_scope_limits": [
-      "NO_N_BODY_PERTURBATIONS_V1",
-      "NO_J2_V1",
-      "NO_GENERAL_RELATIVITY_V1",
-      "NO_NON_GRAVITATIONAL_FORCES_V1"
-    ]
+    "known_scope_limits": ["NO_N_BODY_PERTURBATIONS_V1", "NO_J2_V1", "NO_GENERAL_RELATIVITY_V1", "NO_NON_GRAVITATIONAL_FORCES_V1"]
   },
   "propagator_routing": {
-    "gaia_or_stellar_catalog_source": "ASTROMETRIC_WORLDLINE_LAYER",
+    "gaia_or_stellar_catalog_source": "ASTROMETRIC_WORLDLINE_LAYER_AND_CATALOG_EPOCH_IDENTITY_LAYER",
     "planet_minor_planet_comet_or_cartesian_orbit_state": "CELESTIAL_TRAJECTORY_LAYER",
     "mixing_without_state_conversion": "FORBIDDEN"
   },
+  "archiv_search_bridge": {
+    "module": "workspace/janus_archiv_search.py",
+    "lineage": "Hawkar-usls/TOPA tools/topa_arxiv_gateway.py",
+    "retained_pattern": ["APPEND_ONLY_JSONL_CORPUS", "SHA256_RECORD_SEAL", "LOCAL_SQLITE_FTS5_SEARCH", "QUERY_AND_SOURCE_PROVENANCE"],
+    "role": "DISCOVERY_AND_PROVENANCE_INDEX_ONLY",
+    "search_rank_is_truth": false,
+    "primary_catalog_value_required_for_scientific_gate": true
+  },
   "outputs": [
-    "WORLD_MATRIX",
-    "RAW_PARAMETER_DRAWS",
-    "QUANTILE_ENVELOPES",
-    "MEAN_AND_STD",
-    "COVARIANCE_MATRIX",
-    "REFERENCE_EPOCH",
-    "TRAJECTORY_OR_WORLDLINE_ENVELOPE",
-    "INPUT_SHA256",
-    "RESULT_SHA256",
-    "DETERMINISTIC_SEED",
-    "EPISTEMIC_STATUS"
+    "WORLD_MATRIX", "RAW_PARAMETER_DRAWS", "QUANTILE_ENVELOPES", "MEAN_AND_STD",
+    "COVARIANCE_MATRIX", "REFERENCE_EPOCH", "TRAJECTORY_OR_WORLDLINE_ENVELOPE",
+    "CATALOG_EPOCH_AUDIT", "PAIRWISE_RESIDUALS", "JOINT_BLOCK_COVARIANCE",
+    "MAHALANOBIS_CHI2_AND_TAIL_PROBABILITY", "INPUT_SHA256", "RESULT_SHA256",
+    "DETERMINISTIC_SEED", "EPISTEMIC_STATUS"
   ],
   "epistemic_firewall": {
     "SIMULATION_IS_NOT_EVIDENCE": true,
     "SIMULATION_IS_NOT_DISCOVERY": true,
     "PROPAGATED_WORLDLINE_IS_NOT_OBSERVATION": true,
+    "CATALOG_COMPATIBILITY_IS_NOT_IDENTITY_PROOF": true,
+    "CATALOG_COMPATIBILITY_IS_NOT_LOVE_EDEM_IDENTITY": true,
     "OBSERVED_DATA_COMPARISON_REQUIRED": true,
     "NULL_OR_CONTROL_REQUIRED": true,
     "RAW_INPUTS_AND_PARAMETERS_ARE_IMMUTABLE": true,
     "PRIORS_SHOULD_BE_FROZEN_BEFORE_RESULT_INSPECTION": true,
     "POST_HOC_PRIOR_TUNING_MUST_NOT_BE_PRESENTED_AS_CONFIRMATION": true,
     "CATALOG_COVARIANCE_MUST_NOT_BE_INVENTED": true,
+    "MISSING_RA_DEC_CORRELATION_MUST_NOT_BE_SILENTLY_ZEROED": true,
     "MISSING_OBSERVATION_EPOCH_MUST_NOT_BE_INFERRED_FROM_RELEASE_YEAR": true,
+    "SHARED_GAIA_UNCERTAINTY_MUST_NOT_BE_DOUBLE_COUNTED": true,
     "FAILED_PREDICTIONS_REMAIN_SEARCHABLE": true,
     "SIMULATION_TO_REALITY_GAP_MUST_BE_RECORDED": true,
     "UNCALIBRATED_CONFIDENCE_FORBIDDEN": true,
     "I_DO_NOT_KNOW_IS_VALID_OUTPUT": true,
     "NEGATIVE_RESULT_IS_VALID_OUTPUT": true
   },
-  "learned_residual_policy": {
-    "allowed_as_future_extension": true,
-    "must_be_separate_sidecar": true,
-    "may_replace_physics_baseline": false,
-    "training_data_hash_required": true,
-    "independent_validation_required": true
-  },
   "known_debts": {
-    "generic_cross_dimension_prior_correlations": "ONLY_SOURCE_SPECIFIC_ASTROMETRIC_COVARIANCE_IMPLEMENTED_V1_2",
-    "observer_specific_parallax_factors": "PENDING_EXACT_OBSERVER_TIME_EPHEMERIS",
-    "perspective_acceleration_and_radial_velocity": "NOT_USED_IN_V1_2_BOUNDED_WORLDLINE_GATE",
-    "independent_catalog_observation_epochs": "MUST_BE_ADDED_BEFORE_EPOCH_CORRECTED_CROSS_CATALOG_RESIDUAL_TEST",
+    "observer_specific_parallax_factors": "NOT_APPLIED_TO_EXTERNAL_REFERENCE_FRAME_CATALOG_POSITIONS_WITHOUT_EXPLICIT_APPARENT_POSITION_SEMANTICS",
+    "perspective_acceleration_and_radial_velocity": "NOT_USED_IN_V1_3_SHORT_BASELINE_CATALOG_IDENTITY_GATE",
+    "panstarrs_ra_dec_correlation": "NOT_EXPOSED_IN_FROZEN_VIZIER_MEAN_TABLE; CONSERVATIVE_COVARIANCE_UPPER_BOUND_USED",
     "posterior_update": "REQUIRES_SEPARATE_HOLDOUT_OR_VALIDATION_GATE",
     "real_object_orbits": "TWO_BODY_BASELINE_ONLY_UNTIL_EPHEMERIS_VALIDATION"
   },
   "love_edem_validation": {
     "positional_stress_script": "workspace/love_edem_world_matrix_test.py",
     "epoch_worldline_script": "workspace/love_edem_epoch_worldline_test.py",
-    "inputs": [
-      "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json",
-      "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json"
-    ],
-    "worldline_question": "Can the already-identified Gaia stellar groups pass through the frozen LOVE or EDEM direction during the bounded modern-survey epoch window after measured astrometric uncertainty and a conservative parallax envelope are included?",
-    "epoch_window_jyear": [
-      1900.0,
-      2100.0
-    ],
-    "default_samples_per_gaia_group": 8192,
-    "gates_arcsec": [
-      1.5,
-      3.0
-    ],
+    "catalog_epoch_identity_script": "workspace/love_edem_catalog_epoch_identity.py",
+    "frozen_source_classification": "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json",
     "nearest_wise_only_rule": "DO_NOT_ASSIGN_GAIA_PROPER_MOTION_OR_PARALLAX_TO_A_SOURCE_WITHOUT_A_FROZEN_GAIA_COUNTERPART",
-    "claim_ceiling": "GAIA_STELLAR_WORLDLINE_ROBUSTNESS_IN_1900_2100_ONLY__NOT_LOVE_EDEM_IDENTITY"
+    "simulation_count_increase_for_gen3": false
   },
   "helios_bridge": {
     "repository": "Hawkar-usls/Janus-HELIOS",
@@ -157,6 +142,7 @@
     "inspiration": "M2R-style backward/forward fan of possible worlds",
     "retained": "UNCERTAINTY_FAN_AND_PREDICTIVE_WORLD_MODEL",
     "renamed_physics_for_planets": "CELESTIAL_MECHANICS_AND_ORBITAL_DYNAMICS",
-    "renamed_motion_for_stars": "EPOCH_AWARE_ASTROMETRIC_WORLDLINES"
+    "renamed_motion_for_stars": "EPOCH_AWARE_ASTROMETRIC_WORLDLINES",
+    "generation_3": "CATALOG_EPOCH_NORMALIZED_JOINT_GLS_IDENTITY_COMPATIBILITY"
   }
 }
