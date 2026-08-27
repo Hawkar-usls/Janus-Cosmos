@@ -101,4 +101,15 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/love/LOVE-EDEM-CATALOG-EPOCH-IDENTITY-v1-LATEST-RECEIPT.json
           git commit -m "cosmos: freeze LOVE EDEM catalog epoch identity run ${{ github.run_number }}"
-          git push
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo "GEN3_RECEIPT_PERSIST=PASS attempt=${attempt}"
+              exit 0
+            fi
+            echo "Concurrent main update detected; retrying receipt persistence (${attempt}/4)"
+            sleep 2
+          done
+          echo "GEN3_RECEIPT_PERSIST=FAIL"
+          exit 1
