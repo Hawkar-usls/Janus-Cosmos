@@ -1,0 +1,55 @@
+{
+  "schema": "janus.cosmos.vega_occulted_planet.manifest.v1",
+  "version": "1.0.0",
+  "status": "FROZEN_HYPOTHESIS_ARM",
+  "target": {
+    "name": "Vega",
+    "aliases": ["Alpha Lyrae", "HIP 91262"],
+    "distance_pc_reference": 7.7
+  },
+  "hypothesis": {
+    "id": "H1_OCCULTED_UNRESOLVED_INNER_PLANET",
+    "statement": "A low/moderate-mass planet on an inner orbit may remain unresolved or projected close to Vega while remaining compatible with the smooth debris disk.",
+    "claim_ceiling": "NOT_EXCLUDED_BY_ENCODED_CONSTRAINTS_ONLY"
+  },
+  "published_constraints": {
+    "miri": {
+      "outer_belt_au": [80.0, 170.0],
+      "shallow_gap_center_au": 60.0,
+      "warm_disk_inner_edge_au": [3.0, 5.0],
+      "saturn_mass_or_larger_outside_10_au_disfavored": true,
+      "outer_belt_shepherd_example_max_earth_masses": 6.0,
+      "reference_doi": "10.3847/1538-4357/ad8cde"
+    },
+    "nircam": {
+      "contrast_mass_limits": [
+        {"separation_au": 7.7, "max_jupiter_masses": 3.0},
+        {"separation_au": 15.0, "max_jupiter_masses": 2.0},
+        {"separation_au": 38.0, "max_jupiter_masses": 0.5}
+      ],
+      "reference_doi": "10.3847/1538-3881/ad890d"
+    }
+  },
+  "grid": {
+    "semi_major_axis_au": {"min": 0.2, "max": 100.0, "steps": 220, "spacing": "log"},
+    "mass_earth": {"min": 0.5, "max": 1200.0, "steps": 240, "spacing": "log"}
+  },
+  "frozen_rules": {
+    "jupiter_mass_in_earth_masses": 317.83,
+    "saturn_mass_in_earth_masses": 95.16,
+    "reject_if_mass_ge_saturn_and_a_ge_10_au": true,
+    "direct_imaging_interpolation": "log-separation linear in mass limit between encoded NIRCam anchors; below the innermost anchor direct imaging does not reject a cell",
+    "outer_belt_shepherd_rule": "For 70 <= a <= 100 au, cells above 6 Earth masses are marked dynamically disfavored under the shepherding interpretation, not universally impossible.",
+    "no_post_hoc_tuning": true
+  },
+  "topa": {
+    "enabled": true,
+    "mode": "hypothesis_test_ranking_only",
+    "forbidden": ["promote_missing_data_to_evidence", "semantic_pattern_claims", "post_hoc_gate_changes"]
+  },
+  "spider": {
+    "enabled": true,
+    "mode": "data_acquisition_queue",
+    "required_provenance": true
+  }
+}
