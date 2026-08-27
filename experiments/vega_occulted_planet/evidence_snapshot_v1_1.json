@@ -1,0 +1,111 @@
+{
+  "schema": "janus.cosmos.vega_occulted_planet.evidence_snapshot.v1.1",
+  "version": "1.1.0",
+  "frozen_utc_date": "2026-08-28",
+  "target": "Vega / Alpha Lyrae / HIP 91262",
+  "claim_rule": "Published constraints are encoded only at the strength supported by the cited source. A candidate signal is not a confirmed planet. Missing astrometry is not evidence.",
+  "sources": [
+    {
+      "id": "HURT_2021_TRES",
+      "kind": "radial_velocity_and_tess",
+      "citation": "Hurt et al. 2021, AJ 161, 157",
+      "doi": "10.3847/1538-3881/abdec8",
+      "arxiv": "2101.08801",
+      "machine_readable_catalog": "VizieR J/AJ/161/157/table2",
+      "catalog_doi": "10.26093/cds/vizier.51610157",
+      "encoded_facts": {
+        "tres_spectra": 1524,
+        "timespan_years": 10,
+        "stellar_rotation_period_days": 0.676,
+        "stellar_rotation_rv_semiamplitude_m_s_approx": 10.0,
+        "candidate_2p43d": {
+          "period_days": 2.43,
+          "rv_semiamplitude_m_s": 6.0,
+          "minimum_mass_earth_approx": 20.0,
+          "status": "UNCONFIRMED_CANDIDATE",
+          "paper_statement": "Further observations and activity modeling are required to confirm or refute the candidate."
+        },
+        "candidate_196p4d": {
+          "period_days": 196.4,
+          "semi_major_axis_au_approx": 0.853,
+          "minimum_mass_jupiter_approx": 0.252,
+          "status": "NOT_GOOD_EVIDENCE_FOR_PLANET"
+        },
+        "rv_detection_summary_isotropic": {
+          "sub_saturn_sensitivity_near_0p1_au": true,
+          "jupiter_sensitivity_near_1_au": true,
+          "mass_jupiter_approx_at_10_au": 5.0,
+          "mass_jupiter_approx_at_15_au": 13.0
+        },
+        "rv_detection_summary_well_aligned": {
+          "sensitivity_substantially_weaker": true,
+          "mass_limits_increase_factor_approx": 8.0,
+          "note": "Vega is viewed nearly pole-on; aligned planets produce weak line-of-sight RV signals."
+        },
+        "tess": {
+          "no_transiting_planet_detected": true,
+          "most_planets_radius_gt_3_earth_period_0p5_to_15d_disfavored_if_transiting": true,
+          "geometry_note": "Pole-on system orientation makes transits intrinsically unlikely for coplanar planets."
+        },
+        "gaia_astrometry": {
+          "hard_constraint_encoded": false,
+          "reason": "The paper explicitly notes that Vega is far beyond the bright limit for standard Gaia processing and does not quantify a reliable Gaia precision for Vega."
+        }
+      }
+    },
+    {
+      "id": "BEICHMAN_2025_NIRCAM",
+      "kind": "jwst_nircam_direct_imaging",
+      "citation": "Beichman et al. 2025, AJ 169, 17",
+      "doi": "10.3847/1538-3881/ad890d",
+      "arxiv": "2410.16551",
+      "encoded_facts": {
+        "f444w_contrast": [
+          {"separation_arcsec": 1.0, "separation_au": 7.7, "contrast": 3e-7, "mass_limit_jupiter_approx": 3.0},
+          {"separation_arcsec": 2.0, "separation_au": 15.0, "contrast": 1e-7, "mass_limit_jupiter_approx": 2.0},
+          {"separation_arcsec": 5.0, "separation_au": 38.0, "contrast": 3e-8, "mass_limit_jupiter_approx": 0.5}
+        ],
+        "system_age_assumption_myr": 700,
+        "planet_candidates_confirmed": 0,
+        "two_sources_near_48_au": "LIKELY_EXTRAGALACTIC_OR_EXTENDED_BACKGROUND_SOURCES",
+        "note": "Mass limits are evolutionary-model dependent."
+      }
+    },
+    {
+      "id": "SU_2024_MIRI",
+      "kind": "jwst_miri_disk_dynamics",
+      "citation": "Su et al. 2024, ApJ 977, 277",
+      "doi": "10.3847/1538-4357/ad8cde",
+      "arxiv": "2410.23636",
+      "encoded_facts": {
+        "disk_morphology": "REMARKABLY_SYMMETRIC_SMOOTH_CENTERED",
+        "outer_belt_au": [80.0, 170.0],
+        "shallow_gap_center_au": 60.0,
+        "warm_disk_inner_edge_au": [3.0, 5.0],
+        "saturn_mass_or_larger_outside_10_au_disfavored_under_embedded_disk_assumption": true,
+        "outer_belt_inner_edge_shepherd_example_max_earth_masses": 6.0,
+        "pr_drag_consistent_with_inner_dust": true,
+        "inner_gap_possible_neptune_size_shepherd": true
+      }
+    }
+  ],
+  "hypothesis_partition": {
+    "H1A_2P43D_RV_CANDIDATE": {
+      "status": "OPEN_UNCONFIRMED",
+      "observed_proxy": "P=2.43 d, K~6 m/s, m*sin(i)~20 Earth masses",
+      "aligned_mass_note": "If aligned near Vega's ~6.5 degree spin inclination, 20 Earth masses / sin(6.5 deg) is approximately 177 Earth masses (~0.56 Jupiter masses).",
+      "next_discriminant": "Independent or extended RV series with activity-aware modeling and cadence resolving both 0.676 d rotation and 2.43 d candidate."
+    },
+    "H1B_3_TO_5_AU_NEPTUNE_SHEPHERD": {
+      "status": "NOT_EXCLUDED_BY_PUBLISHED_SUMMARY",
+      "reason": "NIRCam anchors begin near 7.7 au, while published RV sensitivity for pole-on/well-aligned orbits is substantially weaker; MIRI explicitly notes a possible modest/Neptune-size shepherd near the warm-disk inner edge.",
+      "next_discriminant": "Joint RV + disk-dynamical injection/recovery targeted at 3-5 au and low/moderate masses."
+    }
+  },
+  "topa_priority": [
+    "Reproduce the public TRES time-series ingest and audit the 2.43 d signal without promoting it to a detection.",
+    "Keep 3-5 au Neptune-class shepherd as a separate hypothesis from the 2.43 d RV candidate.",
+    "Do not encode Gaia as a hard exclusion until a Vega-specific astrometric precision/proper-motion anomaly product with provenance is obtained.",
+    "Use new observations to shrink the surviving mass-orbit envelope before adding new hypotheses."
+  ]
+}
