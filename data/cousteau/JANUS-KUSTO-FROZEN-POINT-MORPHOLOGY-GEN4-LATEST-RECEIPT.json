@@ -1,0 +1,101 @@
+{
+  "artifact_id": "JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-LIVE-RECEIPT",
+  "claim_ceiling": "MORPHOLOGY_ONLY__NOT_PYRAMID_IDENTITY__NOT_ANOMALY_PROOF",
+  "contract_path": "data/cousteau/JANUS-KUSTO-FROZEN-POINT-MORPHOLOGY-GEN4-CONTRACT-v1.0.json",
+  "contract_sha256": "0d593429b2dd53005ed76c4e87bf016fdc201262380fb1932f1a64eb3cfe5cf9",
+  "decision": "NO_DIRECT_COVERAGE",
+  "frozen_target": {
+    "latitude_deg": -3.865418,
+    "longitude_deg": 3.854924,
+    "no_recentering": true
+  },
+  "gebco_2026_tid_wms": {
+    "central_dark_fraction": 0.0,
+    "central_opaque_fraction": 0.0,
+    "http_status": 200,
+    "interpretation": "MEASURED_MASK_ONLY__NOT_EXACT_TID_CODE",
+    "measured_mask_present": false,
+    "payload_sha256": "65ea096b8094f6c94b22cd54abdec416f873586d3a21b16126ad6bd017324506",
+    "request_url": "https://wms.gebco.net/mapserv?service=WMS&version=1.3.0&request=GetMap&layers=gebco_latest_tid&crs=EPSG%3A4326&bbox=-3.877918%2C3.842424%2C-3.852918%2C3.867424&width=96&height=96&format=image%2Fpng&transparent=TRUE"
+  },
+  "generation": 4,
+  "gmrt_topo_mask": {
+    "attrs": {
+      "Conventions": "COARDS,CF-1.6",
+      "GMT_version": "4.5.7",
+      "history": "Projection: Cylindrical Equidistant\nExtracted from the Global Multi-Resolution Topgraphy (GMRT) Synthesis v4\nhttps://www.gmrt.org\nCreated with GMRT GridServer\nhttps://www.gmrt.org/services/gridserverinfo.php",
+      "title": "GMRT Grid"
+    },
+    "finite_fraction_entire_request": 0.0,
+    "grid_dx_m": 61.05182369643306,
+    "grid_dy_m": 60.644185446320286,
+    "grid_resolution_m": 61.05182369643306,
+    "http_status": 200,
+    "payload_sha256": "6da5cb5551cca3644bb3ecc0ddb6ed1cc6381d7eee8a9805376c316b52494826",
+    "request_url": "https://www.gmrt.org/services/GridServer?west=3.44076256&east=4.26908544&south=-4.28140898&north=-3.44942702&layer=topo-mask&format=coards&resolution=max",
+    "variable": "altitude"
+  },
+  "interpretation": {
+    "insufficient_means": "data coverage, resolution, or control power does not permit the morphology question to be answered",
+    "negative_signal_means": "no preregistered morphology signal in admitted direct GMRT data at resolvable scales",
+    "never_means": "proof of a pyramid, artificial structure, anomaly, or LOVE/EDEM identity",
+    "positive_signal_means": "target morphology is unusual versus preregistered local blind controls at at least one resolvable scale; independent resolving replication still required"
+  },
+  "result_sha256": "0788ca8c434a6a71de52b1df57b6cb7e76be549a6eb85e869e24b12c0bd74a58",
+  "scale_results": [
+    {
+      "reason": "NO_DIRECT_COVERAGE",
+      "resolvable": true,
+      "scale_id": "BASE_0P5_1KM",
+      "target": {
+        "admissible": false,
+        "center_finite": false,
+        "finite_fraction": 0.0,
+        "reason": "NO_DIRECT_COVERAGE"
+      }
+    },
+    {
+      "reason": "NO_DIRECT_COVERAGE",
+      "resolvable": true,
+      "scale_id": "BASE_1_2KM",
+      "target": {
+        "admissible": false,
+        "center_finite": false,
+        "finite_fraction": 0.0,
+        "reason": "NO_DIRECT_COVERAGE"
+      }
+    },
+    {
+      "reason": "NO_DIRECT_COVERAGE",
+      "resolvable": true,
+      "scale_id": "BASE_2_4KM",
+      "target": {
+        "admissible": false,
+        "center_finite": false,
+        "finite_fraction": 0.0,
+        "reason": "NO_DIRECT_COVERAGE"
+      }
+    },
+    {
+      "reason": "NO_DIRECT_COVERAGE",
+      "resolvable": true,
+      "scale_id": "BASE_4_8KM",
+      "target": {
+        "admissible": false,
+        "center_finite": false,
+        "finite_fraction": 0.0,
+        "reason": "NO_DIRECT_COVERAGE"
+      }
+    }
+  ],
+  "schema": "janus.cousteau.kusto_frozen_point_morphology_receipt.v1",
+  "simulation_count_increased": false,
+  "underwater_pyramid_detected": false,
+  "workflow_provenance": {
+    "github_actions_run_id": 33056598188,
+    "github_actions_run_number": 4,
+    "artifact_id": 9639868898,
+    "artifact_zip_sha256": "93fa5a809da6cd24a933ee01f5823ee2c599e516df7fc2cc02535850f6071ecd",
+    "scientific_firewall": "PASS"
+  }
+}
