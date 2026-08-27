@@ -1,0 +1,22 @@
+{
+  "schema": "janus.cosmos.vega.topa_spider_contract.v1",
+  "topa": {
+    "input": ["manifest.json", "output/vega_occulted_planet_receipt.json"],
+    "output": "output/topa_queue.json",
+    "authority": "rank_discriminating_tests_only",
+    "must_not": [
+      "change frozen constraints after seeing the result",
+      "treat admissible cells as detections",
+      "promote missing observations to positive evidence"
+    ]
+  },
+  "spider": {
+    "input": "output/spider_queue.json",
+    "authority": "retrieve and record public observational evidence with provenance",
+    "required_metadata": ["source", "instrument", "epoch", "product_id", "calibration_level", "checksum_or_stable_id"],
+    "negative_result_policy": "first_class_result"
+  },
+  "handoff": {
+    "rule": "Spider evidence may update a future manifest version only through an explicit new freeze. It never mutates the current v1 gate in place."
+  }
+}
