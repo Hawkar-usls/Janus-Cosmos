@@ -1,0 +1,111 @@
+name: LOVE EDEM Epoch Worldlines
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/love-edem-epoch-worldlines.yml"
+      - "workspace/janus_astrometric_worldlines.py"
+      - "workspace/love_edem_epoch_worldline_test.py"
+      - "workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json"
+      - "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/love-edem-epoch-worldlines.yml"
+      - "workspace/janus_astrometric_worldlines.py"
+      - "workspace/love_edem_epoch_worldline_test.py"
+      - "workspace/JANUS_COSMOS_WORLD_MATRIX_CONTRACT_v1.json"
+      - "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json"
+
+permissions:
+  contents: write
+
+jobs:
+  epoch-worldlines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run astrometric kernel self-test
+        run: python workspace/janus_astrometric_worldlines.py --self-test
+
+      - name: Run target runner epistemic self-test
+        run: python workspace/love_edem_epoch_worldline_test.py --self-test
+
+      - name: Install Gaia query dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "astropy>=7.0" "astroquery>=0.4.11"
+
+      - name: Query exact Gaia sources and run 8192-world epoch gate
+        run: |
+          python workspace/love_edem_epoch_worldline_test.py \
+            --live-vizier \
+            --samples 8192 \
+            --seed 26016 \
+            --output data/love/LOVE-EDEM-EPOCH-WORLDLINES-v1-LATEST-RECEIPT.json
+
+      - name: Verify covariance and no 3 arcsec promotion
+        run: |
+          python - <<'PY'
+          import json
+          p='data/love/LOVE-EDEM-EPOCH-WORLDLINES-v1-LATEST-RECEIPT.json'
+          d=json.load(open(p,encoding='utf-8'))
+          assert d['summary']['evaluated_gaia_worldline_count']==2
+          assert d['summary']['all_evaluated_gaia_worldlines_zero_hits_at_3arcsec'] is True
+          assert d['summary']['all_evaluated_gaia_worldlines_have_full_catalog_covariance'] is True
+          assert d['summary']['independent_catalog_epoch_crossmatch']=='BLOCKED_UNTIL_PER_DETECTION_EPOCHS_ARE_FROZEN'
+          for g in d['gaia_groups'].values():
+              assert g['worldline']['gate_counts_after_conservative_parallax_envelope']['3.0']==0
+              assert g['worldline']['epistemic_firewall']['propagation_is_observation'] is False
+          print('LOVE_EDEM_EPOCH_WORLDLINE_GATE=PASS')
+          PY
+
+      - name: Show compact result
+        run: |
+          python - <<'PY'
+          import json
+          p='data/love/LOVE-EDEM-EPOCH-WORLDLINES-v1-LATEST-RECEIPT.json'
+          d=json.load(open(p,encoding='utf-8'))
+          print(json.dumps({
+            'summary':d['summary'],
+            'groups':{
+              k:{
+                'covariance_status':v['worldline']['covariance_status'],
+                'nominal':v['worldline']['nominal'],
+                'sampled_min':v['worldline']['sampled_parallax_envelope_lower_bound_arcsec'],
+                'gate_counts':v['worldline']['gate_counts_after_conservative_parallax_envelope'],
+                'cross_catalog_epoch':v['cross_catalog_epoch_audit']['status'],
+              } for k,v in d['gaia_groups'].items()
+            }
+          },indent=2))
+          PY
+
+      - name: Upload frozen receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: love-edem-epoch-worldlines-${{ github.run_number }}
+          path: data/love/LOVE-EDEM-EPOCH-WORLDLINES-v1-LATEST-RECEIPT.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Persist receipt on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/love/LOVE-EDEM-EPOCH-WORLDLINES-v1-LATEST-RECEIPT.json
+          if git diff --cached --quiet; then
+            echo "receipt unchanged"
+          else
+            git commit -m "cosmos: freeze LOVE EDEM epoch worldline run ${{ github.run_number }}"
+            git push
+          fi

@@ -4,23 +4,24 @@
   "mechanic": "JANUS_WORLD_MATRIX",
   "latin_key": "APERIATUR_PORTA",
   "formula_name": "RESPICIENS_ET_PROSPICIENS",
-  "version": "1.1.0",
-  "purpose": "Expand frozen astronomical, planetary, environmental and sensor uncertainties into reproducible ensembles before interpretation, while preserving provenance and a strict model-versus-observation boundary.",
+  "version": "1.2.0",
+  "purpose": "Expand frozen astronomical, planetary, environmental and sensor uncertainties into reproducible ensembles before interpretation, while preserving provenance, epoch semantics and a strict model-versus-observation boundary.",
   "architecture": [
     "FROZEN_INPUT_OR_PRIOR_STATE",
+    "REFERENCE_EPOCH_AND_FRAME",
     "DETERMINISTIC_UNCERTAINTY_DESIGN",
     "MULTI_WORLD_ENSEMBLE",
-    "PHYSICS_OR_OBSERVATION_KERNEL",
+    "DOMAIN_SPECIFIC_PROPAGATOR",
     "SUMMARY_AND_TRAJECTORY_ENVELOPE",
     "OBSERVED_DATA_OR_EPHEMERIS_COMPARISON",
     "NULL_CONTROL_AND_CLAIM_CEILING"
   ],
   "sampling": {
     "default": "DETERMINISTIC_LATIN_HYPERCUBE",
-    "optional": "MONTE_CARLO",
+    "optional": "MONTE_CARLO_OR_CATALOG_COVARIANCE_GAUSSIAN",
     "seed_required_for_frozen_runs": true,
     "raw_parameter_draws_preserved": true,
-    "reason": "Stratified marginal coverage is more efficient and reviewable than independent random draws for the same scenario count."
+    "reason": "Use stratified uncertainty designs for independent priors and the measured covariance matrix when a catalog supplies correlated astrometric parameters."
   },
   "presets": {
     "sky": [
@@ -40,9 +41,30 @@
       "sensor_noise_sigma"
     ]
   },
+  "astrometric_worldline_layer": {
+    "module": "workspace/janus_astrometric_worldlines.py",
+    "runner": "workspace/love_edem_epoch_worldline_test.py",
+    "scope": "STELLAR_AND_CATALOG_ASTROMETRY",
+    "state": [
+      "ra",
+      "dec",
+      "parallax",
+      "pmra",
+      "pmdec",
+      "reference_epoch"
+    ],
+    "uncertainty": "CATALOG_5X5_ASTROMETRIC_COVARIANCE_WHEN_AVAILABLE",
+    "gaia_dr3_reference_epoch_jyear": 2016.0,
+    "baseline_propagation": "LINEAR_TANGENT_PLANE_PROPER_MOTION_OVER_BOUNDED_EPOCH_WINDOW",
+    "parallax_policy": "CONSERVATIVE_FULL_AMPLITUDE_ENVELOPE_UNTIL_OBSERVER_SPECIFIC_PARALLAX_FACTORS_ARE_FROZEN",
+    "cross_catalog_epoch_rule": "EXACT_PER_DETECTION_OBSERVATION_EPOCH_REQUIRED",
+    "forbidden_substitution": "CATALOG_RELEASE_YEAR_IS_NOT_OBSERVATION_EPOCH",
+    "validation_required": "INDEPENDENT_CATALOG_POSITION_AT_ITS_RECORDED_EPOCH_OR_TRUSTED_ASTROMETRIC_SERVICE"
+  },
   "celestial_trajectory_layer": {
     "module": "workspace/janus_celestial_dynamics.py",
     "terminology": "CELESTIAL_TRAJECTORY_OR_ORBITAL_DYNAMICS",
+    "scope": "SOLAR_SYSTEM_OR_CARTESIAN_MOVING_OBJECT_STATE",
     "state": "CARTESIAN_POSITION_AND_VELOCITY",
     "baseline_kernel": "TWO_BODY_GRAVITY",
     "integrator": "VELOCITY_VERLET",
@@ -55,12 +77,19 @@
       "NO_NON_GRAVITATIONAL_FORCES_V1"
     ]
   },
+  "propagator_routing": {
+    "gaia_or_stellar_catalog_source": "ASTROMETRIC_WORLDLINE_LAYER",
+    "planet_minor_planet_comet_or_cartesian_orbit_state": "CELESTIAL_TRAJECTORY_LAYER",
+    "mixing_without_state_conversion": "FORBIDDEN"
+  },
   "outputs": [
     "WORLD_MATRIX",
     "RAW_PARAMETER_DRAWS",
     "QUANTILE_ENVELOPES",
     "MEAN_AND_STD",
     "COVARIANCE_MATRIX",
+    "REFERENCE_EPOCH",
+    "TRAJECTORY_OR_WORLDLINE_ENVELOPE",
     "INPUT_SHA256",
     "RESULT_SHA256",
     "DETERMINISTIC_SEED",
@@ -69,11 +98,14 @@
   "epistemic_firewall": {
     "SIMULATION_IS_NOT_EVIDENCE": true,
     "SIMULATION_IS_NOT_DISCOVERY": true,
+    "PROPAGATED_WORLDLINE_IS_NOT_OBSERVATION": true,
     "OBSERVED_DATA_COMPARISON_REQUIRED": true,
     "NULL_OR_CONTROL_REQUIRED": true,
     "RAW_INPUTS_AND_PARAMETERS_ARE_IMMUTABLE": true,
     "PRIORS_SHOULD_BE_FROZEN_BEFORE_RESULT_INSPECTION": true,
     "POST_HOC_PRIOR_TUNING_MUST_NOT_BE_PRESENTED_AS_CONFIRMATION": true,
+    "CATALOG_COVARIANCE_MUST_NOT_BE_INVENTED": true,
+    "MISSING_OBSERVATION_EPOCH_MUST_NOT_BE_INFERRED_FROM_RELEASE_YEAR": true,
     "FAILED_PREDICTIONS_REMAIN_SEARCHABLE": true,
     "SIMULATION_TO_REALITY_GAP_MUST_BE_RECORDED": true,
     "UNCALIBRATED_CONFIDENCE_FORBIDDEN": true,
@@ -88,31 +120,43 @@
     "independent_validation_required": true
   },
   "known_debts": {
-    "cross_dimension_input_correlations": "NOT_IMPLEMENTED_V1_1",
+    "generic_cross_dimension_prior_correlations": "ONLY_SOURCE_SPECIFIC_ASTROMETRIC_COVARIANCE_IMPLEMENTED_V1_2",
+    "observer_specific_parallax_factors": "PENDING_EXACT_OBSERVER_TIME_EPHEMERIS",
+    "perspective_acceleration_and_radial_velocity": "NOT_USED_IN_V1_2_BOUNDED_WORLDLINE_GATE",
+    "independent_catalog_observation_epochs": "MUST_BE_ADDED_BEFORE_EPOCH_CORRECTED_CROSS_CATALOG_RESIDUAL_TEST",
     "posterior_update": "REQUIRES_SEPARATE_HOLDOUT_OR_VALIDATION_GATE",
     "real_object_orbits": "TWO_BODY_BASELINE_ONLY_UNTIL_EPHEMERIS_VALIDATION"
   },
   "love_edem_validation": {
-    "script": "workspace/love_edem_world_matrix_test.py",
-    "input": "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json",
-    "question": "Do frozen nearest-neighbour distances become exact positional counterparts under a preregistered sub-arcsecond center-jitter stress model?",
-    "default_samples_per_target": 8192,
-    "default_sigma_arcsec_each_coordinate": 0.7,
+    "positional_stress_script": "workspace/love_edem_world_matrix_test.py",
+    "epoch_worldline_script": "workspace/love_edem_epoch_worldline_test.py",
+    "inputs": [
+      "data/love/LOVE-EDEM-CATALOG-CROSSCHECK-v1-LATEST-SUMMARY.json",
+      "data/love/LOVE-EDEM-SOURCE-CLASSIFICATION-v1-LATEST-RECEIPT.json"
+    ],
+    "worldline_question": "Can the already-identified Gaia stellar groups pass through the frozen LOVE or EDEM direction during the bounded modern-survey epoch window after measured astrometric uncertainty and a conservative parallax envelope are included?",
+    "epoch_window_jyear": [
+      1900.0,
+      2100.0
+    ],
+    "default_samples_per_gaia_group": 8192,
     "gates_arcsec": [
       1.5,
       3.0
     ],
-    "claim_ceiling": "ROBUSTNESS_TO_ASSUMED_SUB_ARCSECOND_CENTER_JITTER_ONLY__NOT_ANOMALY_EVIDENCE"
+    "nearest_wise_only_rule": "DO_NOT_ASSIGN_GAIA_PROPER_MOTION_OR_PARALLAX_TO_A_SOURCE_WITHOUT_A_FROZEN_GAIA_COUNTERPART",
+    "claim_ceiling": "GAIA_STELLAR_WORLDLINE_ROBUSTNESS_IN_1900_2100_ONLY__NOT_LOVE_EDEM_IDENTITY"
   },
   "helios_bridge": {
     "repository": "Hawkar-usls/Janus-HELIOS",
     "shared_semantic_key": "RESPICIENS_ET_PROSPICIENS",
     "shared_world_matrix_concept": true,
-    "role_difference": "COSMOS uses the matrix for scientific uncertainty and trajectory exploration; HELIOS uses an abstract presentation-only world state."
+    "role_difference": "COSMOS uses the matrix for scientific uncertainty and trajectory/worldline exploration; HELIOS uses an abstract presentation-only world state."
   },
   "lineage": {
     "inspiration": "M2R-style backward/forward fan of possible worlds",
     "retained": "UNCERTAINTY_FAN_AND_PREDICTIVE_WORLD_MODEL",
-    "renamed_physics_for_planets": "CELESTIAL_MECHANICS_AND_ORBITAL_DYNAMICS"
+    "renamed_physics_for_planets": "CELESTIAL_MECHANICS_AND_ORBITAL_DYNAMICS",
+    "renamed_motion_for_stars": "EPOCH_AWARE_ASTROMETRIC_WORLDLINES"
   }
 }
