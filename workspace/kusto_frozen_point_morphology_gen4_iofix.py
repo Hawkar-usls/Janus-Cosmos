@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """File-backed I/O shim for the Gen4 GMRT live pass.
 
-netCDF4 does not accept BytesIO through xarray.  Keep the scientific contract
+netCDF4 does not accept BytesIO through xarray. Keep the scientific contract
 and metrics unchanged; only materialize the HTTP payload to a temporary file
 before parsing it.
 """
@@ -13,7 +13,7 @@ import numpy as np
 import requests
 import xarray as xr
 
-import workspace.kusto_frozen_point_morphology_gen4 as core
+import kusto_frozen_point_morphology_gen4 as core
 
 
 def fetch_gmrt_mask(halfwidth_km: float = 46.0):
