@@ -31,6 +31,13 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def canonical_rows_sha256(rows: list[tuple[int, float, float, float]]) -> str:
+    # VizieR response comments/metadata can change while the numeric table is identical.
+    # Freeze the parsed scientific rows separately from the raw transport payload.
+    payload = json.dumps(rows, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
 def build_url(endpoint: str) -> str:
     return endpoint + "?" + urllib.parse.urlencode(PARAMS)
 
@@ -56,7 +63,6 @@ def parse_rows(text: str) -> list[tuple[int, float, float, float]]:
             rv = float(parts[2].strip())
             erv = float(parts[3].strip())
         except ValueError:
-            # Unit/separator rows are intentionally skipped.
             continue
         if erv <= 0:
             continue
@@ -73,7 +79,7 @@ def fetch(timeout: int = 60) -> dict:
         try:
             req = urllib.request.Request(
                 url,
-                headers={"User-Agent": "Janus-Cosmos-Vega-Spider/1.1"},
+                headers={"User-Agent": "Janus-Cosmos-Vega-Spider/1.2"},
             )
             with urllib.request.urlopen(req, timeout=timeout) as response:
                 payload = response.read()
@@ -85,8 +91,10 @@ def fetch(timeout: int = 60) -> dict:
                     f"VizieR row-count drift: got {len(rows)}, expected {EXPECTED_ROWS}"
                 )
             TSV.write_bytes(payload)
+            transport_hash = sha256_bytes(payload)
+            science_hash = canonical_rows_sha256(rows)
             provenance = {
-                "schema": "janus.cosmos.vega.spider.tres_rv_provenance.v1.1",
+                "schema": "janus.cosmos.vega.spider.tres_rv_provenance.v1.2",
                 "source": "VizieR J/AJ/161/157/table2",
                 "catalog_doi": "10.26093/cds/vizier.51610157",
                 "paper_doi": "10.3847/1538-3881/abdec8",
@@ -94,7 +102,10 @@ def fetch(timeout: int = 60) -> dict:
                 "endpoint": endpoint,
                 "content_type": content_type,
                 "bytes": len(payload),
-                "sha256": sha256_bytes(payload),
+                "sha256": transport_hash,
+                "transport_payload_sha256": transport_hash,
+                "canonical_rows_sha256": science_hash,
+                "canonicalization": "JSON array of parsed (Seq,BJD,RVel,e_RVel) rows with compact separators",
                 "parsed_rows": len(rows),
                 "expected_rows": EXPECTED_ROWS,
                 "first_bjd": min(r[1] for r in rows),
@@ -107,7 +118,7 @@ def fetch(timeout: int = 60) -> dict:
             errors.append({"endpoint": endpoint, "error": f"{type(exc).__name__}: {exc}"})
             time.sleep(2)
     failure = {
-        "schema": "janus.cosmos.vega.spider.tres_rv_provenance.v1.1",
+        "schema": "janus.cosmos.vega.spider.tres_rv_provenance.v1.2",
         "status": "FAIL",
         "errors": errors,
     }
@@ -125,12 +136,15 @@ def main() -> int:
             assert "J%2FAJ%2F161%2F157%2Ftable2" in url
             assert "-out.max=2000" in url
             print(url)
+        sample = [(1, 2450000.0, 1.0, 2.0), (2, 2450001.0, -1.0, 2.5)]
+        assert canonical_rows_sha256(sample) == canonical_rows_sha256(list(sample))
         print("VEGA TRES SPIDER DRY-RUN PASS")
         return 0
     provenance = fetch()
     print("VEGA TRES SPIDER FETCH PASS")
     print("rows =", provenance["parsed_rows"])
-    print("sha256 =", provenance["sha256"])
+    print("transport_sha256 =", provenance["transport_payload_sha256"])
+    print("canonical_rows_sha256 =", provenance["canonical_rows_sha256"])
     return 0
 
 
