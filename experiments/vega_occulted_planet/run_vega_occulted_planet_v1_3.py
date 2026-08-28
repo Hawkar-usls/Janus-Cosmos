@@ -27,6 +27,12 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def q(value: Any, digits: int) -> float | None:
+    if value is None:
+        return None
+    return round(float(value), digits)
+
+
 def build() -> dict:
     parent = load(PARENT)
     prov = load(MIRI_PROV)
@@ -43,10 +49,16 @@ def build() -> dict:
     }
 
     receipt = {
-        "schema": "janus.cosmos.vega_occulted_planet.receipt.v1.3",
-        "version": "1.3.0",
+        "schema": "janus.cosmos.vega_occulted_planet.receipt.v1.3.1",
+        "version": "1.3.1",
         "target": "Vega",
         "parent_v1_2_freeze_sha256": parent["freeze_sha256"],
+        "freeze_numeric_policy": {
+            "pixel_scale_arcsec_decimals": 6,
+            "diffraction_arcsec_decimals": 6,
+            "finite_support_fraction_decimals": 3,
+            "raw_values_location": "vega_miri_resolvability_gate.json",
+        },
         "H1A_2P43D_RV_CANDIDATE": parent["H1A_2P43D_RV_CANDIDATE"],
         "H1B_3_TO_5_AU_NEPTUNE_SHEPHERD": {
             **parent["H1B_3_TO_5_AU_NEPTUNE_SHEPHERD"],
@@ -60,15 +72,21 @@ def build() -> dict:
         },
         "real_data_gate": {
             "miri_provenance_status": prov["status"],
-            "target_edge_au": gate["target_warm_disk_inner_edge_au"],
-            "target_edge_arcsec": gate["target_warm_disk_inner_edge_arcsec"],
+            "target_edge_au": [q(x, 3) for x in gate["target_warm_disk_inner_edge_au"]],
+            "target_edge_arcsec": [q(x, 6) for x in gate["target_warm_disk_inner_edge_arcsec"]],
             "filters": [
                 {
                     "filter": f["filter"],
-                    "pixel_scale_arcsec": f["pixel_scale_arcsec"],
-                    "diffraction_fwhm_proxy_arcsec": f["diffraction"]["fwhm_proxy_1p03_lambda_over_D_arcsec"],
-                    "diffraction_rayleigh_arcsec": f["diffraction"]["rayleigh_1p22_lambda_over_D_arcsec"],
-                    "finite_support_fraction_3_to_5_au": f["finite_support_fraction_3_to_5_au"],
+                    "pixel_scale_arcsec": q(f["pixel_scale_arcsec"], 6),
+                    "diffraction_fwhm_proxy_arcsec": q(
+                        f["diffraction"]["fwhm_proxy_1p03_lambda_over_D_arcsec"], 6
+                    ),
+                    "diffraction_rayleigh_arcsec": q(
+                        f["diffraction"]["rayleigh_1p22_lambda_over_D_arcsec"], 6
+                    ),
+                    "finite_support_fraction_3_to_5_au": q(
+                        f["finite_support_fraction_3_to_5_au"], 3
+                    ),
                     "resolvability": f["resolvability"],
                 }
                 for f in gate["filters"]
@@ -92,7 +110,7 @@ def build() -> dict:
     receipt["freeze_sha256"] = canonical_hash(receipt)
 
     topa = {
-        "schema": "janus.cosmos.topa_queue.vega.v1.3",
+        "schema": "janus.cosmos.topa_queue.vega.v1.3.1",
         "receipt_hash": receipt["freeze_sha256"],
         "ranked_tests": [
             {
@@ -115,7 +133,7 @@ def build() -> dict:
         ],
     }
     spider = {
-        "schema": "janus.cosmos.spider_queue.vega.v1.3",
+        "schema": "janus.cosmos.spider_queue.vega.v1.3.1",
         "receipt_hash": receipt["freeze_sha256"],
         "requests": [
             {
@@ -147,7 +165,7 @@ def main() -> int:
     r2 = build()
     assert r1["freeze_sha256"] == r2["freeze_sha256"]
     assert r1["claim_ceiling"] == "NO_PLANET_DETECTION_H1A_ACTIVITY_COMPATIBLE_H1B_PROFILE_SED_TEST_PENDING"
-    print("VEGA EVIDENCE SYNTHESIS v1.3 PASS")
+    print("VEGA EVIDENCE SYNTHESIS v1.3.1 PASS")
     print("verdict =", r1["verdict"])
     print("H1A_status =", r1["H1A_2P43D_RV_CANDIDATE"]["status"])
     print("H1B_status =", r1["H1B_3_TO_5_AU_NEPTUNE_SHEPHERD"]["status"])
