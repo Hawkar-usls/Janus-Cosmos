@@ -51,19 +51,40 @@ def build() -> dict:
         else "NO_FROZEN_GRID_EDGE_MATCH_REAL_IMAGE_RECOVERY_STILL_REQUIRED"
     )
 
+    # Optimizer outputs can drift at the 1e-6 level (and the derived coherence
+    # proxy by a small fraction of a day) across scipy/cpu runs while leaving
+    # the scientific classification unchanged. Raw values remain in the QP
+    # report; only scientifically meaningful quantized summaries enter the
+    # evidence receipt hash so freeze_sha256 is reproducible.
+    qp_summary = {
+        "delta_bic_candidate_vs_activity": round(float(qps["delta_bic_candidate_vs_activity"]), 3),
+        "delta_bic_control_vs_activity": round(float(qps["delta_bic_control_vs_activity"]), 3),
+        "delta_bic_candidate_over_control": round(float(qps["delta_bic_candidate_over_control"]), 3),
+        "candidate_amplitude_m_s": round(
+            float(qp["models"]["quasiperiodic_activity_plus_2p43"]["global_period_amplitudes_m_s"]["2.43"]),
+            2,
+        ),
+        "activity_coherence_proxy_days": int(
+            round(float(qp["models"]["quasiperiodic_activity_only"]["activity_hyperparameters"]["coherence_timescale_proxy_days"]))
+        ),
+    }
+
     receipt = {
-        "schema": "janus.cosmos.vega_occulted_planet.receipt.v1.2",
-        "version": "1.2.0",
+        "schema": "janus.cosmos.vega_occulted_planet.receipt.v1.2.1",
+        "version": "1.2.1",
         "target": "Vega",
         "parent_v1_1_freeze_sha256": parent["freeze_sha256"],
+        "freeze_numeric_policy": {
+            "purpose": "Prevent insignificant optimizer/platform microdrift from changing the evidence hash.",
+            "delta_bic_decimals": 3,
+            "rv_amplitude_decimals": 2,
+            "coherence_proxy_days_resolution": 1,
+            "raw_values_location": "vega_tres_rv_quasiperiodic_activity_audit.json",
+        },
         "H1A_2P43D_RV_CANDIDATE": {
             "status": h1a_status,
             "quasiperiodic_specificity_status": qps["status"],
-            "delta_bic_candidate_vs_activity": qps["delta_bic_candidate_vs_activity"],
-            "delta_bic_control_vs_activity": qps["delta_bic_control_vs_activity"],
-            "delta_bic_candidate_over_control": qps["delta_bic_candidate_over_control"],
-            "candidate_amplitude_m_s": qp["models"]["quasiperiodic_activity_plus_2p43"]["global_period_amplitudes_m_s"]["2.43"],
-            "activity_coherence_proxy_days": qp["models"]["quasiperiodic_activity_only"]["activity_hyperparameters"]["coherence_timescale_proxy_days"],
+            **qp_summary,
             "model_relation_to_hurt_2021": qp["model"]["relationship_to_hurt_2021"],
             "claim": "The 2.43-day candidate remains unconfirmed regardless of model preference in this audit.",
         },
@@ -73,8 +94,8 @@ def build() -> dict:
             "injection_recovery_manifest_freeze_sha256": manifest["freeze_sha256"],
             "analytic_feasible_neptune_like_pole_on_rows": shepherd["summary"]["analytic_feasible_neptune_like_pole_on_rows"],
             "rv_k_range_m_s_among_feasible": [
-                shepherd["summary"]["minimum_rv_k_m_s_among_feasible"],
-                shepherd["summary"]["maximum_rv_k_m_s_among_feasible"],
+                round(float(shepherd["summary"]["minimum_rv_k_m_s_among_feasible"]), 6),
+                round(float(shepherd["summary"]["maximum_rv_k_m_s_among_feasible"]), 6),
             ],
             "claim": "Analytic chaotic-zone/RV feasibility is not image-domain recovery and is not evidence of a planet.",
         },
@@ -95,7 +116,7 @@ def build() -> dict:
     receipt["freeze_sha256"] = canonical_hash(receipt)
 
     topa = {
-        "schema": "janus.cosmos.topa_queue.vega.v1.2",
+        "schema": "janus.cosmos.topa_queue.vega.v1.2.1",
         "receipt_hash": receipt["freeze_sha256"],
         "ranked_tests": [
             {
@@ -117,7 +138,7 @@ def build() -> dict:
     }
 
     spider = {
-        "schema": "janus.cosmos.spider_queue.vega.v1.2",
+        "schema": "janus.cosmos.spider_queue.vega.v1.2.1",
         "receipt_hash": receipt["freeze_sha256"],
         "requests": [
             {
@@ -153,9 +174,10 @@ def main() -> int:
     assert r1["freeze_sha256"] == r2["freeze_sha256"]
     assert r1["claim_ceiling"] == "H1A_UNCONFIRMED_AND_H1B_ANALYTIC_FEASIBILITY_ONLY"
     assert r1["verdict"] == "TWO_OPEN_INNER_PLANET_SUBHYPOTHESES_ACTIVITY_AUDITED"
-    print("VEGA EVIDENCE SYNTHESIS v1.2 PASS")
+    print("VEGA EVIDENCE SYNTHESIS v1.2.1 PASS")
     print("H1A_status =", r1["H1A_2P43D_RV_CANDIDATE"]["status"])
     print("H1B_status =", r1["H1B_3_TO_5_AU_NEPTUNE_SHEPHERD"]["status"])
+    print("quantized_QP =", r1["H1A_2P43D_RV_CANDIDATE"])
     print("freeze_sha256 =", r1["freeze_sha256"])
     return 0
 
