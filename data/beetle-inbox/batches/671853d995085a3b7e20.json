@@ -1,0 +1,1759 @@
+{
+  "batch_id": "671853d995085a3b7e20",
+  "claim_ceiling": "DISCOVERY_MEMORY_ONLY__TARGET_REPO_MUST_VERIFY_INDEPENDENTLY",
+  "created_at": "2026-09-11T03:40:26.726964Z",
+  "items": [
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "f2d42fa3b6543a7cb16392c6",
+      "context_id": "b120b81f6d0a5b7451902cb3",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.582453Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2024-06-14T14:08:48Z",
+      "source_updated": "2024-06-14T14:08:48Z",
+      "summary": "Property-based testing (PBT) is a technique for validating code against an executable specification by automatically generating test-data. We present a proof-theoretical reconstruction of this style of testing for relational specifications and employ the Foundational Proof Certificate framework to describe test generators. We do this by encoding certain kinds of ``proof outlines'' as proof certificates that can describe various common generation strategies in the PBT literature, ranging from random to exhaustive, including their combination. We also address the shrinking of counterexamples as a first step toward their explanation. Once generation is accomplished, the testing phase is a standard logic programming search. After illustrating our techniques on simple, first-order (algebraic) data structures, we lift it to data structures containing bindings by using the $λ$-tree syntax approach to encode bindings. The $λ$Prolog programming language can perform both generating and checking of tests using this approach to syntax. We then further extend PBT to specifications in a fragment of linear logic. Under consideration in Theory and Practice of Logic Programming (TPLP).",
+      "tags": [
+        "cs.LO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Property-Based Testing by Elaborating Proof Outlines",
+      "url": "https://arxiv.org/abs/2406.10053v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "fe0e041b4bfd0e8306c1b5f4",
+      "context_id": "07a4fd769f233651e6960be5",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.583589Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "zenodo",
+      "source_published": "2026-09-11",
+      "source_updated": null,
+      "summary": "This paper proposes Temporal Information Retrieval for Historical Forensics (TIRHF), an experimental research program investigating whether advanced physics, quantum information processing, artificial intelligence, and related technologies could eventually recover otherwise inaccessible information about past events. It presents a DARPA-style research framework, controlled experimental pathway, and conceptual National Agency for Historical and Victim Evidence (NAHVE) designed to support evidence recovery for unresolved historical and contemporary cases. The proposal emphasizes falsifiability, independent replication, evidentiary integrity, privacy, civil liberties, and victim-centered investigation. &nbsp;",
+      "tags": [
+        "Temporal Information Retrieval",
+        "Historical Forensics"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Temporal Information Retrieval for Historical Forensics A DARPA-Style Research Proposal and Business Plan for a Federal Victim-Evidence Intelligence Agency",
+      "url": "https://zenodo.org/records/22699869"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "7cbad3b0e63b0d7f8ffca9fc",
+      "context_id": "68ad9cf9d6cafbd75758c04b",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.583686Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-05-25T08:12:26Z",
+      "source_updated": "2026-05-27T19:06:07Z",
+      "summary": "Automated theorem proving systems built on Lean 4 increasingly rely on parallel tactic search over partially specified proofs, such as those generated by Draft-Sketch-Prove (DSP) pipelines. In current systems, each search branch reconstructs a proof state by re-running elaboration, leading to substantial per-branch overhead. In Lean 4 with Mathlib, this cost has two components: (1) import loading, which deserializes pre-compiled libraries (~60 s per branch); and (2) theorem-body elaboration, which re-checks the theorem context up to the target goal (estimated 18-735 s depending on proof complexity). Together, these account for >99% of per-branch wall time, making portfolio-based search impractical at scale. We observe that this overhead arises from a mismatch between the structure of proof search and its execution model: branching is implemented via repeated reconstruction of proof states rather than direct reuse. To address this, we introduce proof-state snapshotting, which captures the elaborated proof state once and reuses it across branches via a small extension to the Lean 4 language server. Across 48 miniF2F-v2 problems (45 prove-phase benchmarks and 3 full end-to-end runs), our approach achieves a 5.6-50x wall-time speedup over the standard fallback (average 14x, median 9.7x). Speedup increases with the number of proof branches. Our method is orthogonal to import-level caching (e.g., Kimina Lean Server), which avoids import loading but not theorem-body elaboration. The patched Lean binary and the Snapshot-DSP pipeline will be released as open source upon publication.",
+      "tags": [
+        "cs.LO",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Keep the Proof State Live: Snapshotting for Efficient Tactic Search in Lean 4",
+      "url": "https://arxiv.org/abs/2605.25556v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "d1caec534265e9b17e14f39d",
+      "context_id": "4a73f4253cdf655aad1cdd96",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.584268Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2026-09-10T17:42:52Z",
+      "source_updated": "2026-09-10T17:42:52Z",
+      "summary": "Mechanistic corrosion models are routinely fitted with four to six parameters to a few measurements and extrapolated across service lifetimes, yet whether the data determine them is rarely tested. We identify a reduced point defect model for the duplex oxide on Nb-stabilized AISI 347 in simulated boiling-water-reactor water from published depth profiles at three exposure times, by differentiable inversion graded against a closed-form reference. Profile likelihood, a 1000-member bootstrap and a prior-relaxation test agree that one of the five parameters is undetermined and a second only weakly so, and that 95% of the fit statistic rests on three chromium points. The kinetics track an empirical power law over the calibration window but diverge from it by a factor of 3.5 to 6.3 at ten years, outside the propagated uncertainty band. That separation, not the thickness it brackets, is what these data determine; an exposure near 3000 hours would resolve it.",
+      "tags": [
+        "cond-mat.mtrl-sci"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Sparse data limit what a mechanistic corrosion model can predict",
+      "url": "https://arxiv.org/abs/2609.11869v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "03c0446e81ac963b7c025b13",
+      "context_id": "d3abe6948ee30b2eec3436ed",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse",
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.584312Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 8.6667,
+      "source": "arxiv",
+      "source_published": "2026-09-10T14:46:51Z",
+      "source_updated": "2026-09-10T14:46:51Z",
+      "summary": "One significant benefit of reactive element (RE) additions is the colossal improvement in oxide-scale retention during high-temperature oxidation. Selecting optimal RE dopants in high-entropy alloys remains empirical because the relevant thermodynamic landscape is inaccessible to first-principles at the required compositional resolution. Here we apply the macroscopic atom model, coupled with McLean isotherm and Guttmann models, to screen adhesion across nine CoCrFeMnNiAl sub-families at \\ce{Cr2O3} and \\ce{Al2O3} interfaces, ranking five REs (Hf, Y, Zr, La, Ti) for segregation, adhesion enhancement, and sulfur displacement. The screening reveals an oxide-dependent ranking inversion, with Hf dominating at \\ce{Cr2O3} and La dominating at \\ce{Al2O3}, driven by the interplay between RE--O and RE--matrix interaction enthalpies. Mn-containing alloys exhibit intrinsic sulfur resistance, consistent with their experimentally observed oxidation characteristics. A sulfur immunity phase diagram identifies compositions with Al~+~Mn~$\\gtrsim$~25~at\\% as thermodynamically immune to S-induced adhesion loss. All crossover concentrations collapse onto a universal exponential governed by the segregation enthalpy difference, providing a transferable design rule. Inverse design identifies \\ce{Co16Cr16Fe16Ni16Al35} as the optimal S-immune composition with $W_\\text{sep} = 5.95$~J/m$^2$ without RE doping.",
+      "tags": [
+        "cond-mat.mtrl-sci"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "High-throughput thermodynamic screening of oxide-scale adhesion across the CoCrFeMnNiAl high-entropy alloys",
+      "url": "https://arxiv.org/abs/2609.11640v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "6d43e3eb3112ad3fea49362a",
+      "context_id": "6ebaad9fb144c3e45dcef247",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse",
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.584355Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 8.875,
+      "source": "arxiv",
+      "source_published": "2026-09-10T14:40:32Z",
+      "source_updated": "2026-09-10T14:40:32Z",
+      "summary": "In this work, we develop an inverse Physics-Informed Neural Network (PINN) framework to infer the dependence of the scrape-off layer (SOL) perpendicular heat conductivity on plasma density and temperature, $κ_\\perp(n,T)$. The method combines radial profile measurements of electron density and temperature with the residual of a reduced one-dimensional SOL transport equation, so that the inferred conductivity is constrained by both the measurements and the underlying transport model. Three neural networks are trained simultaneously: two reconstruct the temperature and density profiles as functions of the radial coordinate and transported power, while a third represents the effective conductivity as a function of the local density and temperature. The framework is first validated using synthetic data generated from a prescribed conductivity function, allowing the inferred $κ_\\perp(n,T)$ to be compared directly with the ground truth. The model recovers the imposed functional dependence with errors below $10~\\%$ in the data-constrained region. Bootstrap resampling is shown to provide a practical indicator of prediction reliability and consistency. A scan in the number of plasma profiles used for training and the number of radial measurement positions per profile identifies a practical trade-off between reconstruction accuracy and data availability. Finally, the method is applied to an experimental dataset from the TJ-II stellarator obtained with the helium-beam diagnostic. This exploratory application provides an initial estimate of the effective SOL conductivity and illustrates the potential of inverse PINNs for extracting transport information from plasma edge measurements.",
+      "tags": [
+        "physics.plasm-ph",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Physics-Informed Neural Networks to Infer the Perpendicular Energy Conductivity in the Scrape-Off Layer of Stellarator Devices",
+      "url": "https://arxiv.org/abs/2609.11628v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "fce238d2641da8e08b1a061e",
+      "context_id": "a1748dbfddee40c72941339e",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.584518Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "arxiv",
+      "source_published": "2025-09-19T10:46:59Z",
+      "source_updated": "2025-09-19T10:46:59Z",
+      "summary": "Routing-driven timely data collection in Underwater Acoustic Sensor Networks (UASNs) is crucial for marine environmental monitoring, disaster warning and underwater resource exploration, etc. However, harsh underwater conditions, including high delays, limited bandwidth, and dynamic topologies - make efficient routing decisions challenging in UASNs. In this paper, we propose a smart interrupted routing scheme for UASNs to address dynamic underwater challenges. We first model underwater noise influences from real underwater routing features, e.g., turbulence and storms. We then propose a Software-Defined Networking (SDN)-based Interrupted Software-defined UASNs Reinforcement Learning (ISURL) framework which ensures adaptive routing through dynamically failure handling (e.g., energy depletion of sensor nodes or link instability) and real-time interrupted recovery. Based on ISURL, we propose MA-MAPPO algorithm, integrating multi-head attention mask mechanism with MAPPO to filter out infeasible actions and streamline training. Furthermore, to support interrupted data routing in UASNs, we introduce MA-MAPPO_i, MA-MAPPO with interrupted policy, to enable smart interrupted routing decision in UASNs. The evaluations demonstrate that our proposed routing scheme achieves exact underwater data routing decision with faster convergence speed and lower routing delays than existing approaches.",
+      "tags": [
+        "cs.NI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Smart Interrupted Routing Based on Multi-head Attention Mask Mechanism-Driven MARL in Software-defined UASNs",
+      "url": "https://arxiv.org/abs/2509.15856v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "6355602f7d6a4ec4c79e4fed",
+      "context_id": "55c9da100dfa29800521820a",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "bidirectional"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.585396Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.5417,
+      "source": "arxiv",
+      "source_published": "2026-06-08T11:13:05Z",
+      "source_updated": "2026-06-08T11:13:05Z",
+      "summary": "Modulation recognition systems rely on heterogeneous signal representations. 2D signal-image modalities such as time-frequency and cyclostationary maps capture structural patterns, while 1D statistical descriptors such as higher-order power spectra encode complementary cues. Under distribution shift, these modalities degrade unevenly, making robust fusion a central challenge for practical deployment. Progress is further limited by the lack of a unified evaluation protocol that systematically separates different shift types. This paper addresses both challenges through a joint benchmark-and-model study in underwater acoustic modulation recognition. UAMR-ShiftBench is the first benchmark to jointly cover in-distribution, low-SNR, unseen-environment, unseen-communication-parameter, and measured sea-trial evaluation under a single matched protocol, with two independent real-world subsets collected during two sea-trial campaigns conducted in March and November in the South China Sea. SCP-TriCA fuses STFT, cyclostationary, and P2/P4 (second- and fourth-order power spectra) modalities hierarchically: the two 2D modalities are first aligned through bidirectional cross-attention, and the 1D statistical modality is then incorporated through a sample-adaptive selective gate. On UAMR-ShiftBench, SCP-TriCA achieves 95.33% in-distribution accuracy and 74.59% simulated OOD average, outperforming the strongest baseline by 5.12 percentage points, and reaches 91.14% and 94.86% on the two sea-trial subsets, exceeding the best baseline by 15.71 and 23.00 percentage points respectively. Ablation results confirm that the gains stem from modality complementarity and the hierarchical fusion design. Code and models are available at https://github.com/ronglaiqian/UAMR-ShiftBench.",
+      "tags": [
+        "eess.AS",
+        "cs.AI",
+        "cs.SD"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Heterogeneous 2D/1D Signal Representation Fusion for Underwater Acoustic Modulation Recognition Under Distribution Shift",
+      "url": "https://arxiv.org/abs/2606.23702v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "7910b76d203eaec1afa120a5",
+      "context_id": "49bce4729002682b8b71ce96",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.585791Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "zenodo",
+      "source_published": "2026-09-11",
+      "source_updated": null,
+      "summary": "This repository contains code and data for fracture network characterization using tracer test data, based on the CMAM (Covariance Matrix Adaptation Metropolis) algorithm integrated with a pre-trained WGAN-GP deep generative model. The workflow combines generative modeling, forward simulation via GEOS , and Bayesian-style inversion to infer fracture properties from observational data. Two cases are provided: a synthetic benchmark case and a real-field application at the Soultz-sous-For&ecirc;ts geothermal site in France. Repository Structure SyntheticCase/ A hypothetical 2D case for validating the inversion methodology. Reference/ : Input files for generating reference breakthrough curves and thermal simulation. TracerTransport/ :&nbsp; Base XML files for inert and sorptive tracer simulations ( TracerInert.xml , TracerSorptive.xml ) and fracture model template ( FractureInfo.xml ). ThermalSimulation/ : Input files for thermal-hydraulic simulations, in which the water density is evaluated using the IAPWS formulation and the dynamic viscosity is described by a temperature-dependent relationship ( THSimu.xml , FractureInfo.xml ). Inversion/ : Core inversion workflow for the synthetic case. CMAM.py : Main inversion script using the CMAM algorithm; supports multi-core parallelism. Generation.py : Reads latent parameters from CMAM and reconstructs fracture networks using a pre-trained WGAN-GP generator. TracerModeling.py : Writes generated fracture networks to FractureInfo.xml , calls GEOS for forward simulation, and returns results to the inversion. utils.py : Utility functions for the WGAN-GP model. run.py : Launcher script that runs `CMAM.py` as a background process. FlowTracerInert.xml / FlowTracerSorptive.xml : GEOS base configuration files for inert and sorptive tracer transport. FractureInfo.xml : Dynamically updated fracture model file. InertData.txt , SorptiveData.txt , PressureData.txt : Observational data for inversion. SoultzCase/ Real-field application at the Soultz-sous-For&ecirc;ts geothermal site (France).&nbsp; Inversion/ &ndash; Core inversion workflow for the Soultz case. Structure is similar to SyntheticCase/Inversion/ , with site-specific data: CMAM.py , Generation.py , run.py , utils.py , TracerModeling.py , FractureInfo.xml : Same functionality as in the synthetic case. FlowTracer.xml : GEOS base configuration for simulating the 2005 fluorescein tracer circulation experiment. SoultzModel.vtu : 3D mesh model of the Soultz site, including well locations (GPK2&ndash;GPK4) and major fault zones (FZ4770, FZ4710). Model source:&nbsp; Geoenergy Modeling III . Flow.txt : Monitored production flow rates at GPK2 and GPK4. TBC.txt : Monitored tracer concentration data at GPK2 and GPK4. ThermalSimulation/ &ndash; Input files and data for thermal-hydraulic simulations at the Soultz site. It contains data files for two case studies: Cuenot.xml , corresponding to the July&ndash;August 2008 short-term circulation test, and Baujard.xml , corresponding to the three-year commercial circulation test (2016&ndash;2019), together with supporting data compiled from published literature. The subfolder table/ stores the tabulated initial fields (initial pressure and temperature), which are assigned to the model via GEOS `TableFunction` objects with linear interpolation. GEOS_src/ Source code of the in-house developments implemented on top of the GEOS simulator: constitutive_fluid/ &ndash; Implementation of the IAPWS-based fluid property models used in the simulations (water density from the IAPWS formulation). fluidFlow-SoluteTransport/ &ndash; Implementation of the solute transport solver, discretized and solved using an implicit finite-volume method (FVM). Workflow The inversion workflow relies on a pre-trained WGAN-GP model that provides a robust mapping from a low-dimensional latent space to geologically realistic discrete fracture network (DFN) realizations. Latent parameter proposal : At each iteration, the CMAM algorithm propose",
+      "tags": [
+        "Fracture network characterization",
+        "Generative adversarial network",
+        "Adaptive inversion",
+        "Behavioral model"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Fracture network characterization via deep generative model and Bayesian inversion",
+      "url": "https://zenodo.org/records/22699772"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "2289437ef5e09a39750a8e41",
+      "context_id": "e03df8bc5932f71a45d5021e",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586185Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-08T21:15:52Z",
+      "source_updated": "2026-09-08T21:15:52Z",
+      "summary": "Quantum state tomography is a fundamental technique for estimating the state of a quantum system from measured data and plays a crucial role in evaluating the performance of quantum devices. However, standard estimation methods become computationally prohibitive as the system size increases due to the exponential growth of the density matrix, describing a quantum state, with the number of qubits. We propose a low-rank tensor-network framework for mixed-state quantum state tomography based on a block tensor train (Block-TT) factorization. Specifically, the density matrix is represented as the contraction of a Block-TT with its Hermitian transpose, yielding a TT analogue of the Burer-Monteiro factorization. This parameterization guarantees Hermiticity and positive semidefiniteness by construction while compressing the number of optimization variables from exponential to linear in the number of qubits. Building on this representation, we develop single-site and two-site density matrix renormalization group (DMRG) algorithms for estimating quantum states from compressed measurements. The resulting methods operate directly on the compressed parameterization, support adaptive rank refinement, and exploit efficient tensor-network contractions for expectation-value evaluation. The framework is applicable to a broad class of low-rank quantum states, including pure states, nearly pure states, and ground states that admit accurate tensor-network approximations. Numerical experiments demonstrate accurate state reconstruction from limited measurements together with substantial reductions in memory requirements and computational cost compared with conventional low-rank tomography methods.",
+      "tags": [
+        "quant-ph",
+        "cs.LG",
+        "eess.SP",
+        "math.NA",
+        "math.OC"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A Block Tensor Train Burer-Monteiro Framework for Low-Rank Quantum State Tomography",
+      "url": "https://arxiv.org/abs/2609.09457v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "573249d31e128bae003719e7",
+      "context_id": "b860cede6bbc81ac15b8f41f",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586258Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-08T20:17:48Z",
+      "source_updated": "2026-09-08T20:17:48Z",
+      "summary": "World Action Models (WAMs) couple predictive world modeling with action generation, allowing anticipated future states to guide agent behavior. Although WAMs are rapidly advancing embodied AI, general-purpose counterparts remain largely unexplored in games. Existing game-oriented approaches often combine action-conditioned world models with external policies and reward functions to realize WAM-like decision-making, yet they operate mainly in 2D visual observation space and do not instantiate persistent 3D geometry. Extending this paradigm to 3D games introduces a distinct challenge. In autonomous driving and robotics, the physical environment exists independently of the model, providing a persistent 3D world in which selected actions can be executed. Games have no such external substrate; the virtual world itself must be instantiated. Most playable games require a persistent and navigable space, while 3D games additionally require explicit geometry that supports movement and interaction. Action-conditioned video rollouts provide visual observations but not this spatial representation. We present \\textsc{Valerant}, a training-free framework that transforms a pretrained action-conditioned world model into a WAM for exploring and constructing 3D game maps. By coupling predictive visual rollouts with SLAM-based spatial reconstruction and exploration-driven action selection, \\textsc{Valerant} progressively transforms a single image into a persistent 3D game map. This framework extends WAM-based interaction beyond 2D visual simulation and offers a new approach to reducing manual effort in 3D game-map creation.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration",
+      "url": "https://arxiv.org/abs/2609.09418v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "4557dccb19a7f0ca3822c19c",
+      "context_id": "afea1fa02c5022683d787d60",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586386Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-09-07T16:05:24Z",
+      "source_updated": "2026-09-07T16:05:24Z",
+      "summary": "Associative Recall (AR) is the cognitive ability to learn and retrieve links between items in memory. In NLP, AR is used as a benchmark for evaluating the in-context memory capacity of architectures such as Mamba, and has been found to strongly correlate with language modeling performance. This paper explores AR from the perspective of mechanistic interpretability, aiming to reverse-engineer the exact internal algorithm used by Mamba to perform recall. Our key insight is that Mamba performs recall by implicitly learning linear hash functions, and we identify the low-level circuit that enables this behavior. Building on these findings and inspired by theoretical tools in similarity-preserving hashing, such as the Johnson-Lindenstrauss lemma, we develop a theoretical framework for analyzing AR, which we term Recall Scaling Laws. Given the vocabulary size and the number of facts in context, this framework allows us to (1) predict the embedding and state dimensions required for Mamba to achieve perfect recall, (2) predict recall success probability given the model dimensions, and (3) analyze multi-layer models and multi-head SSM patterns. Empirical results show that our theoretical findings are accurate and predictive, offering insights into how AR capacity scales with vocabulary, state, embedding size, and architecture.",
+      "tags": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On the Recall Scaling Laws in Mamba: A Theoretical and Mechanistic Study via Hashing",
+      "url": "https://arxiv.org/abs/2609.07681v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "9fadb5a528c0a22d7106fb9d",
+      "context_id": "aed6852e3cbe0a9f3853212f",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586531Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-06T21:20:36Z",
+      "source_updated": "2026-09-06T21:20:36Z",
+      "summary": "Embodied artificial intelligence has historically very much relied on visual perception, leading to a proliferation of multiple vision-centric world models. However, this reliance fails to capture spatial understanding in its entirety and can even present vulnerabilities in environments with visual occlusions, low-light conditions, or blackouts-scenarios, where acoustic information becomes a critical alternative for spatial awareness and navigation. Despite its potential, research into realistic spatial audio and particularly the development of audio-centric world models remains sparse. In this technical report, we introduce BinauralVAE: a flexible, open-source pipeline (https://github.com/Luizerko/BinauralVAE) that explores multiple models for spatialized audio reconstruction, progressing from fundamental baselines to advanced, mathematically grounded architectures. Our approach evaluates various Variational Autoencoder architectures -- including complex-valued variants -- to learn robust latent representations of binaural signals. Developed alongside AudioWorldSim, our methodology leverages realistic acoustic data captured as a simulated robot navigates an environment. This pipeline establishes a foundation for state representation in a future audio-based world model, designed to map the direct causal connection between navigational actions and their resulting acoustic consequences, and helping to enable sound as an essential complementary modality for spatial knowledge acquisition.",
+      "tags": [
+        "cs.SD",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "BinauralVAE: Spatial Audio Reconstruction For World Models",
+      "url": "https://arxiv.org/abs/2609.06837v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "5f05727d1b1ad78fb03b05c8",
+      "context_id": "7b8783b8b54223338b799e03",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586653Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-05T16:03:41Z",
+      "source_updated": "2026-09-05T16:03:41Z",
+      "summary": "Large language models (LLMs) have achieved remarkable progress, yet their massive storage and memory-bandwidth demands still hinder efficient deployment. Weight binarization is a promising solution, but existing binarization-based post-training quantization (PTQ) methods usually far exceed the nominal 1-bit storage target due to hidden overhead. To address this gap, we propose All for 1-Bit (AF1), a genuine 1-bit PTQ framework for LLMs. AF1 comprises two complementary components: (1) Null-space-Aware Binary Factorization (NABF) for improving binary reconstruction through Hessian-aware surrogate reparameterization, null-space-aware binary factorization, and scale-only global reconstruction; and (2) Hierarchical Shapley Allocation (HiSA) for assigning structural capacity using hierarchical Shapley sensitivity. Together, they preserve model accuracy under a strict 1.0-BPW budget in the PTQ setting. Experiments on LLaMA, Qwen, and Gemma families show that AF1 consistently outperforms existing binarization-based PTQ methods in perplexity and zero-shot accuracy. Compared with BF16, AF1 achieves an average 2.5 times inference speedup and over 90% memory reduction across evaluated models, providing a practical path toward deployable genuine 1-bit compression for LLMs. The code for reproducibility is available at https://github.com/Kishon-zzx/AF1.",
+      "tags": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "All for 1-Bit: Towards Genuine 1-Bit Post-Training Quantization for LLMs",
+      "url": "https://arxiv.org/abs/2609.06161v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "5065f5714b873e37b6409e2c",
+      "context_id": "6d75e47cab72835622e9a0ad",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586771Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-05T13:39:08Z",
+      "source_updated": "2026-09-05T13:39:08Z",
+      "summary": "Connectomes, graph-level maps of neurons and their synaptic connections, provide a structural basis for understanding how brain circuits support function and computation. However, mapping connectome structure to computation remains difficult because these graphs are high-dimensional, sparse, and sensitive to local structural variation. Existing approaches often depend on hand-crafted structural descriptors or task-specific predictors, which limits their ability to represent connectomes in a form that is both generative and functionally meaningful. We propose a conditional generative latent framework that encodes connectome graphs into a compact structural space while using available node-level conditions to guide reconstruction and generation. From this space, the model can reconstruct observed connectivity with a mean edge-reconstruction AUC up to 0.910 and generate new candidate connectomes, enabling a unified analysis of graph structure and computational behavior. Using connectome-derived graphs as recurrent computational substrates, we found that the learned latent space captures functional variation across reservoir-computing experiments, with cross-validated $R^2$ values up to approximately 0.87. Interpretability analysis further revealed task-specific structural mechanisms: in our examples, memory performance is associated with reciprocal recurrent connectivity, whereas prediction and classification are more strongly associated with spectral properties of the recurrent network. These findings suggest an AI-for-science approach to linking neural connectivity to computation and provide a generative and interpretable basis for studying how distinct structural mechanisms shape computational capacity.",
+      "tags": [
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Connectome-to-Function: Conditional Generative Latent Representations for Reservoir Computing",
+      "url": "https://arxiv.org/abs/2609.06093v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "9f8b985df3f22a7f8084a960",
+      "context_id": "67aa1739f141830b62e97edc",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.586974Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2026-07-03T17:50:02Z",
+      "source_updated": "2026-07-03T17:50:02Z",
+      "summary": "The split-step-Padé (SSP) method is widely used to model wave phenomena in various applications, including radio physics, optics and acoustics. In this method, the propagator of the one-way counterpart of the Helmholtz equation is computed through its Padé approximant and a finite-difference discretization of the transverse operator. This work develops and validates numerically a spectral counterpart of the SSP method. A key challenge in practical applications is inverting the transverse operator in the presence of perfectly matched layers (PMLs), which are commonly used to truncate the computational domain. Such inversion can be accomplished using Krylov subspace methods, which converge rapidly, provided that a suitable preconditioner is used. We also study the analytical properties of the spectral SSP marching scheme under periodicity conditions in the transverse variable. We validate the newly developed spectral SSP method numerically in two realistic test scenarios from radio physics and underwater acoustics.",
+      "tags": [
+        "math.NA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A perfectly matched layer approach for the spectral split-step Padé method",
+      "url": "https://arxiv.org/abs/2607.03521v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "9c2e693b1bcfd27ff78a94e2",
+      "context_id": "365abf1a0279001bb5666350",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587040Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-04-19T21:12:06Z",
+      "source_updated": "2026-04-19T21:12:06Z",
+      "summary": "Advances in computational methods have made full-wave simulations in large disordered media increasingly feasible, but the resulting field data, scaling with the cube of the ratio of system size to wavelength, creates a severe storage and post-processing bottleneck. Generic compression methods are sample-specific and preclude operations on compressed data. We introduce OSCAR (On-Shell Compression And Reconstruction), a physics-based lossy compression scheme for weakly scattering media. OSCAR exploits the universal confinement of the Fourier representation of wave fields to a thin dispersion shell, a direct consequence of wave propagation when the scattering mean free path significantly exceeds the wavelength. The resulting compression ratio reflects two distinct scale separations: on-shell confinement due to weak scattering, and the excess Fourier-space volume introduced by sub-wavelength discretization of the scatterers. Crucially, second-order quantities such as intensity, correlations, and (optical) sensitivity can be computed via convolution entirely in compressed space and remain accurate even when individual field reconstruction incurs appreciable error, because coherent interference between independently compressed fields is preserved. Numerical simulations of electromagnetic waves in 2D and 3D confirm compression ratios up to ${\\sim}380\\times$ with sub-percent field error, enabling routine ensemble studies at scales relevant to biomedical optics, seismology, and underwater acoustics.",
+      "tags": [
+        "physics.optics",
+        "cond-mat.dis-nn"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Universal compression of wave fields in weakly scattering media",
+      "url": "https://arxiv.org/abs/2604.17617v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "c9095d4b43e42d8fe03b3c12",
+      "context_id": "fa4c36e2cbdd5b60c05975d2",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587091Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-03-11T09:40:45Z",
+      "source_updated": "2026-03-11T09:40:45Z",
+      "summary": "Accurate estimation of the sound speed profile (SSP) is essential for underwater acoustic communication, sonar performance, and navigation, as the acoustic wave propagation depends strongly on the SSP. This work considers SSP estimation in a region of interest using an autonomous underwater vehicle (AUV) equipped with a conductivity-temperature-depth (CTD) sensor and an acoustic receiver measuring transmission loss (TL) from a sonar transmitter. The SSP is modeled using a linear basis-function expansion and is sequentially estimated with an unscented Kalman filter that fuses local CTD measurements with TL measurements. A receding-horizon path planning scheme is also employed to select future AUV positions by minimizing the predicted total sound speed variance. Simulations using the Bellhop acoustic wave propagation solver show that CTD measurements provide accurate local SSP estimates, whereas TL measurements are seen to capture the global characteristics of the SSP, with their joint use improving the reconstruction of both local variations and large-scale SSP behavior. The results also indicate that the proposed path planning strategy reduces the estimation uncertainty compared to constant-velocity motion, thereby enabling improved environmental characterization for underwater acoustic systems.",
+      "tags": [
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Path Planning for Sound Speed Profile Estimation",
+      "url": "https://arxiv.org/abs/2603.10585v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "c818aaf870ec9d4d33b3bcbb",
+      "context_id": "5036094d0687444c550bba61",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion",
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587241Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 8.9583,
+      "source": "arxiv",
+      "source_published": "2026-02-02T10:13:18Z",
+      "source_updated": "2026-02-02T10:13:18Z",
+      "summary": "In marine towed-streamer seismic acquisition, the nearest hydrophone is often two hundred meter away from the source resulting in missing near-offset traces, which degrades critical processing workflows such as surface-related multiple elimination, velocity analysis, and full-waveform inversion. Existing reconstruction methods, like transform-domain interpolation, often produce kinematic inconsistencies and amplitude distortions, while supervised deep learning approaches require complete ground-truth near-offset data that are unavailable in realistic acquisition scenarios. To address these limitations, we propose a self-supervised diffusion-based framework that reconstructs missing near-offset traces without requiring near-offset reference data. Our method leverages overlapping patch extraction with single-trace shifts from the available far-offset section to train a conditional diffusion model, which learns offset-dependent statistical patterns governing event curvature, amplitude variation, and wavelet characteristics. At inference, we perform trace-by-trace recursive extrapolation from the nearest recorded offset toward zero offset, progressively propagating learned prior information from far to near offsets. The generative formulation further provides uncertainty estimates via ensemble sampling, quantifying prediction confidence where validation data are absent. Controlled validation experiments on synthetic and field datasets show substantial performance gains over conventional parabolic Radon transform baselines. Operational deployment on actual near-offset gaps demonstrates practical viability where ground-truth validation is impossible. Notably, the reconstructed waveforms preserve realistic amplitude-versus-offset trends despite training exclusively on far-offset observations, and uncertainty maps accurately identify challenging extrapolation regions.",
+      "tags": [
+        "physics.geo-ph",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Propagating the prior from far to near offset: A self-supervised diffusion framework for progressively recovering near-offsets of towed-streamer data",
+      "url": "https://arxiv.org/abs/2602.01909v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "97cb7fd15e181c21a23b4cc8",
+      "context_id": "402a0bfc9e4cba40e5f4261f",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587291Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2025-10-02T20:39:29Z",
+      "source_updated": "2025-10-02T20:39:29Z",
+      "summary": "Sonar images are relevant for advancing underwater exploration, autonomous navigation, and ecosystem monitoring. However, the progress depends on data availability. The scarcity of publicly available, well-annotated sonar image datasets creates a significant bottleneck for the development of robust machine learning models. This paper presents a comprehensive and concise review of the current landscape of sonar image datasets, seeking not only to catalog existing resources but also to contextualize them, identify gaps, and provide a clear roadmap, serving as a base guide for researchers of any kind who wish to start or advance in the field of underwater acoustic data analysis. We mapped publicly accessible datasets across various sonar modalities, including Side Scan Sonar (SSS), Forward-Looking Sonar (FLS), Synthetic Aperture Sonar (SAS), Multibeam Echo Sounder (MBES), and Dual-Frequency Identification Sonar (DIDSON). An analysis was conducted on applications such as classification, detection, segmentation, and 3D reconstruction. This work focuses on state-of-the-art advancements, incorporating newly released datasets. The findings are synthesized into a master table and a chronological timeline, offering a clear and accessible comparison of characteristics, sizes, and annotation details datasets.",
+      "tags": [
+        "cs.CV"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Sonar Image Datasets: A Comprehensive Survey of Resources, Challenges, and Applications",
+      "url": "https://arxiv.org/abs/2510.03353v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "4048bbb1f6dbc48792b45b5d",
+      "context_id": "022292819c4c02bda96bbb0a",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587412Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2025-08-10T03:12:08Z",
+      "source_updated": "2025-08-13T10:35:30Z",
+      "summary": "Based on the normal mode and ray theory, this article discusses the characteristics of surface sound source and reception at the surface layer, and explores depth estimation methods based on normal modes and rays, and proposes a depth estimation method based on the upper limit of modal frequency. Data verification is conducted to discuss the applicability and limitations of different methods. For the surface refracted normal mode waveguide, modes can be separated through warping transformation. Based on the characteristics of normal mode amplitude variation with frequency and number, the sound source depth can be estimated by matching amplitude information. Based on the spatial variation characteristics of eigenfunctions with frequency, a sound source depth estimation method matching the cutoff frequency of normal modes is proposed. For the deep Arctic sea, the sound ray arrival structure at the receiving end is obtained through the analysis of deep inversion sound ray trajectories, and the sound source depth can be estimated by matching the time difference of ray arrivals. Experimental data is used to verify the sound field patterns and the effectiveness of the sound source depth estimation method.",
+      "tags": [
+        "cs.SD",
+        "eess.AS",
+        "math.NA",
+        "physics.ao-ph",
+        "physics.app-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Acoustic source depth estimation method based on a single hydrophone in Arctic underwater",
+      "url": "https://arxiv.org/abs/2508.07157v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "e97c33857a471d860ce02090",
+      "context_id": "81c82f7afcd2ea4c2159a2fd",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587544Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2025-08-10T03:01:10Z",
+      "source_updated": "2025-08-13T10:33:43Z",
+      "summary": "For the unique dual-channel sound speed profiles of the Canadian Basin and the Chukchi Plateau in the Arctic, based on the propagation characteristics of refracted normal modes under dual-channel sound speed profiles, an inversion method using refracted normal modes for dual-channel sound speed profiles is proposed. This method proposes a dual-parameter representation method for dual-channel sound speed profiles, tailored to the characteristics of dual-channel sound speed profiles. A dispersion structure extraction method is proposed for the dispersion structure characteristics of refracted normal modes under dual-channel sound speed profiles. Combining the parameter representation method of sound speed profiles and the dispersion structure extraction method, an inversion method for dual-channel sound speed profiles is proposed. For the common horizontal variation of sound speed profiles in long-distance acoustic propagation, a method for inverting horizontally varying dual-channel sound speed profiles is proposed. Finally, this article verifies the effectiveness of the dual-channel sound speed profile inversion method using the Arctic low-frequency long-range acoustic propagation experiment. Compared with previous sound speed profile inversion methods, the method proposed in this article has the advantages of fewer inversion parameters and faster inversion speed. It can be implemented using only a single hydrophone passively receiving random air gun signals, and it also solves the inversion problem of horizontal variation of sound speed profiles. It has significant advantages such as low cost, easy deployment, and fast computation speed.",
+      "tags": [
+        "cs.SD",
+        "eess.AS",
+        "math.NA",
+        "physics.ao-ph",
+        "physics.app-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Inversion of Arctic dual-channel sound speed profile based on random airgun signal",
+      "url": "https://arxiv.org/abs/2508.07152v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "678c5faaaaeb1317fa5dac88",
+      "context_id": "bfbf095491d50105d1cd3c53",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587706Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2025-06-13T10:00:27Z",
+      "source_updated": "2025-06-13T10:00:27Z",
+      "summary": "Reconstructing physical field tensors from \\textit{in situ} observations, such as radio maps and ocean sound speed fields, is crucial for enabling environment-aware decision making in various applications, e.g., wireless communications and underwater acoustics. Field data reconstruction is often challenging, due to the limited and noisy nature of the observations, necessitating the incorporation of prior information to aid the reconstruction process. Deep neural network-based data-driven structural constraints (e.g., ``deeply learned priors'') have showed promising performance. However, this family of techniques faces challenges such as model mismatches between training and testing phases. This work introduces FieldFormer, a self-supervised neural prior learned solely from the limited {\\it in situ} observations without the need of offline training. Specifically, the proposed framework starts with modeling the fields of interest using the tensor Tucker model of a high multilinear rank, which ensures a universal approximation property for all fields. In the sequel, an attention mechanism is incorporated to learn the sparsity pattern that underlies the core tensor in order to reduce the solution space. In this way, a ``complexity-adaptive'' neural representation, grounded in the Tucker decomposition, is obtained that can flexibly represent various types of fields. A theoretical analysis is provided to support the recoverability of the proposed design. Moreover, extensive experiments, using various physical field tensors, demonstrate the superiority of the proposed approach compared to state-of-the-art baselines.",
+      "tags": [
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "FieldFormer: Self-supervised Reconstruction of Physical Fields via Tensor Attention Prior",
+      "url": "https://arxiv.org/abs/2506.11629v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "5bcc51cc932770b1b0b3a37a",
+      "context_id": "6ab57c1cdc5f4de50db7cb47",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587786Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2025-05-02T20:03:04Z",
+      "source_updated": "2025-08-27T19:40:34Z",
+      "summary": "Passive acoustics is a versatile tool for maritime situational awareness, enabling applications such as source detection and localization, marine mammal tracking, and geoacoustic inversion. This study focuses on estimating the range between an acoustic receiver and a transiting ship in an acoustically range-independent shallow water environment. Here, acoustic propagation can be modeled by a set of modes that are determined by the shallow water waveguide and seabed characteristics. These modes are dispersive, with phase and group velocities varying with frequency, and their interference produces striation patterns that depend on range and frequency in single-hydrophone spectrograms. These striation patterns can often be characterized by the waveguide invariant (WI), a single parameter describing the waveguide's properties. This paper presents a statistical model and corresponding WI-based range estimation approach using a single hydrophone, leveraging broadband and tonal sounds from a transiting ship. Using data from the Seabed Characterization Experiment 2017 (SBCEX17), the method was evaluated on two commercial ships under different environmental conditions and frequency bands. Range estimation errors remained below 4 % up to 62 km in the best case, with robust performance demonstrated in the 40-60 Hz band.",
+      "tags": [
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Statistical Model and Estimation Method for Ranging a Moving Ship Using a Single Acoustic Receiver in Shallow Water",
+      "url": "https://arxiv.org/abs/2505.01562v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "3ea28895e1650e8126decc5e",
+      "context_id": "08c632d6f7ab68ac020cd93d",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587864Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "zenodo",
+      "source_published": "2026-09-11",
+      "source_updated": null,
+      "summary": "This review examines the astronomical heritage and cultural syncretism of the Afar people of Ethiopia, situated at the historic African-Islamic crossroads. Synthesising oral traditions, linguistic evidence, historical texts, and archaeological observations, the reviewed scholarship demonstrates that the Afar developed sophisticated celestial knowledge systems long preceding Islam, centred on lunar worship, a supreme sky deity (Waako), and intermediary spirits (Ayyana). The study reveals that Afar astronomical traditions, particularly the 28 lunar mansions (mafgadōdi), represent a unique synthesis of indigenous Cushitic cosmology and Islamic astronomical knowledge, mediated through centuries of Red Sea trade and cultural exchange (Morin, 1988). Linguistic analysis shows that key religious and astronomical terms, including Alsa (moon), Waako (supreme deity), Yalla (God), and Ayyana (intermediary spirits), remain embedded in contemporary Afar vocabulary, demonstrating remarkable cultural continuity despite profound religious transformation. Mathematical reconstruction of the Afar calendar reveals sophisticated celestial coordinate mapping, with the 28 mansions systematically partitioned across the celestial sphere into \"white\" (northern) and \"red\" (southern) hemisphere divisions. Comparative analysis demonstrates that Cushitic calendrical systems, including the Borana Oromo calendar (r=0.889, RMSE = 3.3 days), exhibit remarkable predictive skill for seasonal forecasting. The Afar new year is determined by the first rainfall (Konayto) observed after the Ethiopian New Year, reflecting the integration of lunar astronomical observation, seasonal ecological indicators, and Ethiopian calendrical influence. The findings challenge conventional models of Islamization that emphasize rupture and replacement, instead revealing a pattern of layered adaptation where pre-Islamic celestial worship persisted within an Islamic framework. This research contributes significantly to understanding cultural syncretism, the transmission of astronomical knowledge across cultural boundaries, and the historical dynamics of the Horn of Africa.",
+      "tags": [
+        "Afar people; ethnoastronomy; cultural syncretism; lunar mansions; Islamic–African crossroads; linguistic evidence; Red Sea trade"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Astronomical Heritage and Cultural Syncretism among the Afar of Ethiopia: Linguistic Evidence from the African–Islamic Crossroads",
+      "url": "https://zenodo.org/records/22700437"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "ac5553f95e205b0d16f173d4",
+      "context_id": "15522fe47dd03f26cfc3be26",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587916Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "zenodo",
+      "source_published": "2025-04-26",
+      "source_updated": null,
+      "summary": "Structure and Derivation of Physical Constants through Wave Confinement Richard J. Reyes Original: April 26, 2025 Revised: September 10, 2026 This work investigates whether fundamental physical constants and scales can arise from the geometry and dynamics of confined oscillatory fields governed by curvature feedback within Wave Confinement Theory (WCT) . WCT treats oscillatory energy, confinement geometry, curvature, coherence, and information as coupled components of a nonlinear field system. The central proposal is that quantities normally treated as externally specified constants may instead be related to stable geometric or dynamical features of confined wave configurations. The September 2026 revision performs a full consistency sweep of the original derivations. It distinguishes four conceptually different classes of result: algebraic or dimensional identities, domain-local resonance quantities, numerical simulation outputs, and open eigenvalue or dynamical predictions. In particular, standard Planck relations and the reconstruction of ℏ are now explicitly identified as self-consistency identities when their measured inputs are already used, rather than independent predictions. A principal numerical scale investigated in the work is the WCT vacuum coherence length &xi;_sim = 85.4 &mu;m. An independent cosmological-density relation, &rho;&xi; = C&xi; ℏc / &xi;⁴, gives &xi;&Lambda; = 87.78 &mu;m for unit geometric coefficient C&xi;=1C_\\xi=1 when the observed cosmological constant is used. The simulation value differs by approximately 2.72% , and exact agreement corresponds to the order-unity coefficient C&xi; &asymp; 0.8957 . This is treated as a cross-domain consistency relation rather than a parameter-free determination of the cosmological constant. The same relation can be inverted as a partial cross-domain test of Newton's gravitational constant. With C&xi;=1C_\\xi=1 , &xi; = 85.4 &mu;m, and the observed cosmological constant, the calculation gives G&xi; &asymp; 5.9783 &times; 10⁻&sup1;&sup1; m&sup3; kg⁻&sup1; s⁻&sup2;, approximately 10.43% below the measured Newtonian value. Propagating this value through the standard Planck relations produces Planck length and time estimates about 5.36% below their standard values and a Planck energy about 5.66% above the standard value. Because &Lambda;, ℏ, and c remain external inputs, this is presented as a cross-domain numerical consistency test rather than a complete first-principles derivation . The revised work also formulates the fine-structure constant as a WCT+electromagnetic geometric eigenvalue problem rather than obtaining &alpha;&alpha; by substituting the measured charge into the standard electromagnetic identity. Numerical closure of this shape-eigenvalue problem remains open. WCT additionally defines a family of structural quantities associated with confinement: Vacuum coherence scale: &xi; &asymp; 85.4 &mu;m Entropy-curvature ratio: &sigma; &asymp; 0.0806 Resonance confinement strength: analytic lock target &rho; = 1, with regime-dependent numerical values Topological resonance parameter: &beta; &asymp; 0.01&ndash;0.1 Phase-coherence distortion scale: &gamma; &asymp; 10⁻&sup1;&sup2;⁰ Nonlinear curvature-feedback coefficient: &theta; &asymp; 10⁻&sup1;&sup2;⁰ in the stated phenomenological normalization Phase-speed curvature correction coefficient: &zeta; ~ 10⁻&sup2; These quantities are not all asserted to be universal constants. Several are simulation-dependent descriptors whose values depend on numerical regime, geometry, normalization, boundary conditions, and physical-unit mapping. The numerical simulations exhibit reproducible confinement behavior, Fourier-selected coherence structure, entropy evolution, and resonance stabilization. Importantly, the revised analysis recognizes that the frequently obtained Shannon entropy value near 13.862 is extremely close to the discrete entropy ceiling Smax⁡=ln⁡(10242)=13.8629436S_{\\max}=\\ln(1024^2)=13.8629436 , and therefore ",
+      "tags": [
+        "wave confinement",
+        "fundamental constants",
+        "gravitational constant",
+        "speed of light",
+        "planck constant",
+        "fine-structure constant",
+        "cosmological constant",
+        "emergent mass",
+        "curvature feedback",
+        "unified field theory",
+        "entropy-stabilized fields",
+        "effective metric",
+        "informational geometry"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Structure and Derivation of Physical Constants through Wave Confinement",
+      "url": "https://zenodo.org/records/22699826"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "a4d4ba0140d62df67f9165cf",
+      "context_id": "df35098f831e1e464e9ffddf",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.587996Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "zenodo",
+      "source_published": "2026-09-11",
+      "source_updated": null,
+      "summary": "This dataset supports the study \"Network Centrality and Post-Disaster Restoration Duration: Evidence from Road Infrastructure in Aceh, Indonesia\" (Wulansari et al., submitted to Forum Geografi). It documents road and bridge restoration following the November 2025 flood and landslide event in Bener Meriah Regency, Aceh Province, Indonesia. The dataset contains three files: asset_level_data &mdash; Restoration records for 26 damaged road and bridge assets, including road classification, construction type, disruption date, restoration date, restoration duration, and network centrality measures (degree, betweenness, closeness). road_network_graph &mdash; The road network graph used for centrality computation, derived from OpenStreetMap and institutional road data, covering the affected area of Bener Meriah Regency. news_source_list &mdash; A list of 313 online news article titles, publication dates, and URLs used to reconstruct the disruption and restoration timeline via digital-trace analysis. Sentiment-labeled content from 3,351 X (Twitter) posts also informed the study's timeline reconstruction, but individual post-level data is not included here: post identifiers were not retained during data collection, and redistribution of post content is restricted by the platform's terms of service. Aggregate characteristics of this corpus are reported in the associated manuscript.",
+      "tags": [],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Network Centrality and Post-Disaster Restoration Duration: Evidence from Road Infrastructure in Aceh, Indonesia",
+      "url": "https://zenodo.org/records/22699838"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "26befc964042e040670c61e1",
+      "context_id": "a410f7c8476f4acf60acdc20",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.588386Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-09-04T05:29:31Z",
+      "source_updated": "2026-09-04T05:29:31Z",
+      "summary": "Large language model (LLM)-based multi-agent systems have experienced rapid growth in recent years. Despite their promise, such systems remain fragile, frequently exhibiting reasoning and coordination errors that can lead to system-level failures. Failure attribution in such systems relies on tracing natural language interactions among agents to identify the decisive error, which refers to the earliest action whose correction can reverse system failure. There are two key challenges: 1) Shallow attribution: Existing methods often capture only minor deviations, such as incomplete retrievals or formatting errors, which verification mechanisms can correct, while missing the decisive cause of system failure. 2) Contextual degradation: As the length of the system traces increases, the model's reasoning ability rapidly deteriorates. To address these challenges, we propose DCFA, a training-free framework for failure attribution. DCFA integrates a global module that constructs structured causal-inspired dependency graphs from system traces to identify the initial decisive error, and a local module that applies local counterfactual-inspired reasoning to refine causal-inspired attribution. Experiments on the Who&When benchmark across six LLMs show that DCFA improves step-level accuracy by up to 8.27% over state-of-the-art baselines.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "DCFA: Dual-view Causal-inspired Attribution for Failure Reasoning in LLM-based Multi-agent Systems",
+      "url": "https://arxiv.org/abs/2609.04749v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "0c0226f543caedf875311d15",
+      "context_id": "72212cf0a52f49b2991785ac",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.588744Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "arxiv",
+      "source_published": "2026-08-30T07:13:10Z",
+      "source_updated": "2026-08-30T07:13:10Z",
+      "summary": "Across industries, machine-learning systems support applications ranging from prediction and anomaly detection to forecasting, optimization, and scheduling, yet operationalizing these systems requires coordinating application development, model pipelines, cloud infrastructure, security, deployment, monitoring, retraining, recovery, and rollback. We present an evidence-gated multi-agent framework for transforming a natural-language MLOps cloud engineering task into a verified repository and operational cloud deployment. The framework combines graph engineering, loop engineering, and agent harness engineering. A stateful Graph Orchestrator coordinates specialized agents for repository generation, review, execution, verification, release, and monitoring while governing workflow dependencies, evidence gates, retry bounds, recovery paths, and termination. Consequential lifecycle transitions proceed only when their required predicates are supported by verifiable execution or runtime evidence. Verification failures activate bounded reflection, repair, and re-verification, while runtime evidence of failure, drift, degradation, or policy violation can trigger bounded adaptation, recovery, or rollback. Agent harness engineering constrains repository generation, review, and repair, artifact execution, and cloud operations through controlled capabilities and isolated execution environments. We realize the framework on Google Cloud Platform and evaluate repository completeness, controlled execution, evidence-gated transitions, cloud promotion, and bounded recovery. Our experimental results show that the framework prevents unsupported lifecycle transitions and drives each run toward either a verified operational deployment or an auditable terminal failure.",
+      "tags": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Forward-Deployed Full-Stack Engineering for Autonomous Cloud MLOps",
+      "url": "https://arxiv.org/abs/2608.29615v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "7ff2aefa2f79c318ec2f55f4",
+      "context_id": "a334f61b84d0c16da8c9d8a1",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.589370Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "arxiv",
+      "source_published": "2026-09-08T14:25:11Z",
+      "source_updated": "2026-09-09T12:40:17Z",
+      "summary": "Multi-agent traffic simulation seeks diverse, coordinated, and physically realistic futures from maps and observed history. Long-horizon closed-loop generation must reconcile multiple decision time scales while its context evolves with generated states. Existing methods often unfold long futures from an initial scene and resolve intent, interaction, and motion monolithically, weakening cross-scale consistency and adaptation. Multimodal rollout poses a further consistency problem: independently reselecting modes across agents or commits can stitch together incompatible futures instead of preserving a coherent joint branch. We present Hi-FLoop, a branch-consistent multi-timescale state-feedback framework. Eight scene-level Worlds represent joint hypotheses; all agents share one selected World identity throughout all 16 commits of an 8-second rollout, while Goal, Preview, and Control states adapt within that branch. An 8-second Goal anchors intent, a 2-second Preview coordinates interactions, and 1-second Control produces physical motion. Every 0.5-second commit feeds back only its executed prefix as new facts, while unexecuted hypotheses never enter factual memory. Joint Preview Interaction induces a sparse directed future graph and uses conflict probabilities and signed arrival-time differences to refine interaction-aware motion. For generated-state recovery, a prefix-frozen A-to-B cascade transfers typed physical state and the branch index--but no latent state--from a frozen prefix model to an independently parameterized recovery model. On the full H-D public-validation split of 955 scenarios, the S2.1 cascade obtains an 8-second scene-joint ADE-at-joint-minFDE@8/joint-minFDE@8 of 2.048/6.384 m when one World must explain all evaluated agents. Agent-centric oracle-minADE@8 is 0.526 m at 6 seconds and 0.875 m at 8 seconds.",
+      "tags": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling",
+      "url": "https://arxiv.org/abs/2609.08796v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "ed47f0fe6410dbef003fc577",
+      "context_id": "4b626f18543a795d43a2d0f1",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "bidirectional",
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.589647Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 6.125,
+      "source": "arxiv",
+      "source_published": "2026-08-27T13:40:11Z",
+      "source_updated": "2026-08-27T13:40:11Z",
+      "summary": "Internet memes are a pervasive form of multimodal online communication; however, such communication often involves users from diverse linguistic and cultural backgrounds. Therefore, adapting memes across cultures and languages is a central challenge for enabling mutual understanding in online communication. Unlike ordinary translation or standalone text rewriting, cross-cultural meme transcreation must jointly preserve communicative intent, adapt culture-dependent meaning for the target audience, and maintain coherence between text and image. In this work, we first provide an explicit task analysis of cross-cultural meme transcreation and identify three core challenges: culture-specific knowledge understanding, intent and tone preservation, and multimodal consistency. Based on this analysis, we propose a multi-agent framework with specialized agents that are coordinated to address these challenges through cultural adaptation, target text rewriting, revision, and conditional visual adjustment. The framework strengthens target text adaptation with coordinated feedback to handle difficult cases that require deeper cultural or visual intervention. We evaluate the framework on bidirectional Chinese-English meme transcreation using both human evaluation and LLM-as-a-Judge. Our method consistently outperforms all baselines across both evaluation settings. In human evaluation, it achieves the best performance on all four dimensions and delivers a 33.1% average improvement over the strongest baseline, while in LLM-as-a-Judge, it attains the highest Top-1 ranking rate (60% versus 26% for the second-best baseline). Further analysis indicates that each component contributes to the performance. Our error analysis suggests that the remaining bottlenecks lie in humor reconstruction and image-text alignment rather than simple cultural knowledge gaps, pointing to future work on humor transfer.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "TransMeme: A Multi-Agent Framework for Cross-Cultural Meme Transcreation",
+      "url": "https://arxiv.org/abs/2608.27127v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "6a248c709011b837d583bc9b",
+      "context_id": "1ea3205c4fef64eb5e39addf",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.589792Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.375,
+      "source": "arxiv",
+      "source_published": "2026-08-19T02:58:12Z",
+      "source_updated": "2026-08-19T02:58:12Z",
+      "summary": "Methane field monitoring requires the integration of sampling design, meteorological interpretation, sensor processing, plume analysis, visualization, and reporting, but these steps are often distributed across separate expert-driven workflows. We developed a locally deployable, tool-grounded large language model (LLM) multi-agent framework for our low-cost methane sensing and field-monitoring campaigns. The framework uses LLM agents as workflow coordinators that link field measurements, meteorological data, deterministic sensor-processing routines, Gaussian plume inversion, and report generation, rather than directly estimating methane concentrations or emissions. Extensive field deployments across diverse real-world environments (e.g., wastewater treatment facilities, landfills, and oil and gas sites) demonstrate that our framework can achieve 92.0\\% accuracy in workflow routing and parameter extraction, 85.0\\% success in emission-rate estimation and plume prediction, and 95.0\\% success in generating editable reports under practical operating conditions. Compared with manual and general-purpose LLM-assisted workflows, it reduced workflow time from hours-level to minutes-level, lowered manual coordination and prompt-engineering requirements, and retained traceable plume-based outputs. In addition, most processing can be performed locally, reducing exposure of sensitive facility and field data to cloud services. These results indicate that tool-grounded LLM coordination can reduce the time, labor, usability, and data-security barriers of methane field monitoring.",
+      "tags": [
+        "cs.MA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A Locally Deployable Tool-Grounded LLM Multi-agent Framework for Automating Methane Emission Analysis and Reporting",
+      "url": "https://arxiv.org/abs/2608.18473v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "b0d8aa7a29b35a4cdb4a0954",
+      "context_id": "7a4ce1b18c0b8f2f2d08290f",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.589972Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-08-12T14:15:35Z",
+      "source_updated": "2026-08-12T14:15:35Z",
+      "summary": "Multi-AUV ad-hoc network-based target tracking requires networked autonomous underwater vehicles (AUVs) to cooperatively track maneuvering targets under constrained acoustic communication, dynamic topology, and uncertain ocean disturbances. Although multi-agent reinforcement learning (MARL) enables decentralized coordination through centralized training, existing methods suffer from high-dimensional joint state-action modeling, noise-sensitive policy generation, leading to unstable training and degraded tracking. To address these issues, we propose VGG-MADiffRL, a value-gradient-guided multi-agent diffusion RL algorithm, and MDCA, a diffusion?based hierarchical control architecture. Leveraging underwater mission characteristics, we model sonar detection mechanisms and ocean current disturbances, formulating cooperative tracking for multi-AUV ad-hoc networks as an MDP. The proposed MDCA constitutes a three-tier closed-loop control framework: a global intelligent control layer, a local online training layer, and a physical action execution layer. This structure enables synergistic optimization across task allocation, local decision processes, and execution feedback. Within MDCA, the local online training layer is the policy learning framework; VGG-MADiffRL builds on diffusion policies and incorporates value gradients to guide action generation in the reverse denoising process, steering the generated actions towards higher expected returns. It employs twin value networks with joint optimization and soft target updates to mitigate overestimation and training oscillations, promoting more stable convergence. Experimental results show that VGG-MADiffRL consistently achieves faster convergence, higher tracking accuracy, and smoother training dynamics in cooperative tracking scenarios, validating its effectiveness and practical engineering value in dynamic underwater settings.",
+      "tags": [
+        "cs.LG",
+        "cs.MA",
+        "cs.NI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Multi-AUV Ad-hoc network-based Target Tracking: A Value Gradient Guidance Multi-Agent Diffusion Reinforcement Learning Approach",
+      "url": "https://arxiv.org/abs/2608.12436v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "0f5be329b26b8abc7404f3cb",
+      "context_id": "d3182794079c68a10a444796",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.590242Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-09-10T10:39:21Z",
+      "source_updated": "2026-09-10T10:39:21Z",
+      "summary": "Determinism and numerical reproducibility are increasingly required of GPU kernels in machine learning systems, yet deterministic implementations of the same kernel can still differ bit for bit. Floating-point reduction order is the primary cause, alongside partial-sum precision, fused multiply-add operations, and rounding placement. These choices may be hand-coded, selected by a block-level language such as Triton, or hidden inside a closed-source library such as cuBLAS or rocBLAS. A tile shape chosen for performance therefore also determines the arithmetic, potentially breaking batch invariance. Preserving a fixed order can cost up to 20 percent, while an autotuner cannot identify which configurations are bitwise equivalent. We characterize the factors determining the bitwise behavior of reductions and general matrix multiplication (GEMM). First, we introduce a descriptor of GEMM reduction order, including the partitioning of K in split-K GEMM. Using it, we perform the first black-box reconstruction of a closed-source library's arithmetic for bit-level correctness. Our family of Triton GEMMs matches NVIDIA cuBLAS in all tested cases on Blackwell and Hopper. For realistic LLM shapes with fused epilogues, it matches or exceeds torch.compile performance. Second, we enforce balanced-tree reduction during Triton lowering and introduce a data-layout optimization that brings 19 of 27 kernels on GB300 and H100 within 10 percent of free-order performance. Third, we develop sound static checkers for bitwise equivalence between compiled GPU kernels, including the first checker spanning NVIDIA PTX and AMD GCN. Integrated into Triton's autotuner, the checker restricts search to a single bit-equivalence class.",
+      "tags": [
+        "cs.DC",
+        "cs.PF",
+        "cs.PL"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Taming Bitwise Behavior in GPU Kernels with Tensor Core: Black-Box Reconstruction, Compiler Enforcement, and Static Verification",
+      "url": "https://arxiv.org/abs/2609.11356v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "955c2016caee386d2a9533dd",
+      "context_id": "9f1e8cb7f98b9bcf06ad4bcf",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.590338Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-09-10T09:05:33Z",
+      "source_updated": "2026-09-10T09:05:33Z",
+      "summary": "We study early stopping for a continuous-time model of stochastic gradient descent (SGD) in ill-posed linear inverse problems. We consider an a posteriori stopping rule based on the discrepancy principle, which stops the dynamics once the residual reaches the noise level. Unlike deterministic gradient flow, the stochastic dynamics exhibits persistent multiplicative fluctuations whose amplitude scales with the residual itself. Under a source condition on the initial error and a polynomial bound on the spectrum of the empirical covariance operator, we prove that, with high probability, the error at this random stopping time achieves the minimax rate over the corresponding source class, up to a logarithmic factor. Our results therefore establish the discrepancy principle as an adaptive regularization strategy for continuous-time SGD that is minimax-optimal up to a logarithmic factor, despite the persistent fluctuations induced by stochastic sampling. To our knowledge, this is the first convergence-rate result for a continuous-time model of stochastic gradient descent in inverse problems under an a posteriori stopping rule: existing analyses, including those of variance-reduced variants, bound the stopping time but do not quantify the error attained there.",
+      "tags": [
+        "math.NA",
+        "math.OC",
+        "math.ST"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Minimax-Optimal Early Stopping for Continuous-Time SGD via the Discrepancy Principle",
+      "url": "https://arxiv.org/abs/2609.11273v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "f96d30d231a998381b38a427",
+      "context_id": "a2500fb3262ccd3763782b66",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.590451Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "zenodo",
+      "source_published": "2026-09-01",
+      "source_updated": null,
+      "summary": "Postoperative pain is a common clinical problem that may compromise physiological stability and delay recovery, potentially reducing oxygenation, increasing infection risk, and prolonging hospitalization. This study aimed to examine the correlation between postoperative pain intensity and oxygen saturation levels. This study employed a quantitative correlational analytic design with a cross-sectional approach using retrospective medical record data. Data were collected at a single time point, with both postoperative pain intensity and oxygen saturation (SpO₂) measured simultaneously at approximately 12 hours after surgery when patients were clinically stable in the postoperative ward. A total of 208 eligible patients were included using total sampling. Data were analyzed descriptively and using the Chi-square test, with statistical significance set at p &lt; 0.05. The results showed that 74% of patients experienced severe pain and 26% mild pain, while 49.5% presented with reduced oxygen saturation. A statistically significant association was identified between pain intensity and oxygen saturation(p &lt; 0.001). Patients with low oxygen saturation were 25.5 times more likely to report severe pain (OR = 25.505; 95% CI: 6.379&ndash;101.979). In conclusion, postoperative pain intensity is significantly associated with oxygen saturation levels. These findings support the integration of subjective pain assessment with objective physiological monitoring, and future prospective studies are recommended to clarify causal relationships.",
+      "tags": [
+        "Oxygen saturation",
+        "Pain assessment",
+        "Postoperative monitoring",
+        "Postoperative-pain",
+        "Pulse oximetry"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Association between postoperative pain severity and oxygen saturation: a retrospective cross-sectional study in surgical patients",
+      "url": "https://zenodo.org/records/22700088"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "c38ff7b9eb17b1c455f9c049",
+      "context_id": "c071e3d9ad50593f3663ac77",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.591580Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "arxiv",
+      "source_published": "2026-09-04T16:44:17Z",
+      "source_updated": "2026-09-04T16:44:17Z",
+      "summary": "Model upgrades are routine; memory migrations are not. An agent can keep the same memory store and still forget: a new model may interpret old notes differently, mixed embedding versions may break retrieval, and repair may fail without the original evidence. We compare memory as the same history is preserved verbatim for long-context reading (LC-RAW), divided into chunks for retrieval-augmented generation (RAG), compressed by a model into natural-language notes (NOTES), or normalized into a fixed-schema knowledge graph (KG-fixed). The study uses 48 synthetic histories with randomized answer codes, exact scoring, and two open-weight models with sub 10 billion parameters. Our measurements show that fixed-schema structures transfer reliably, with KG-fixed accuracy changing by only $+0.0004 \\pm 0.0020$ following a writer swap. Conversely, compressed NOTES exhibit high model coupling, with accuracy shifting asymmetrically by $+9.91$ or $-13.28$ percentage points depending on the specific migration direction. In RAG systems, partial embedding migrations using a 50/50 mixed index capture only a 4.96-point accuracy improvement, forfeiting the majority of the 11.90-point gain achieved through full re-embedding. Diagnostic decomposition attributes 80% ($0.467 \\pm 0.014$) of the NOTES accuracy deficit to information lost during initial construction, whereas retrieval failures drive 81% ($0.364 \\pm 0.012$) of the RAG deficit. Finally, store-only repair of NOTES fails to reach a 90% performance recovery target in all 48 test cases, whereas retaining the raw source history enables successful recovery in 34 of 48 cases for one tested direction. These findings highlight the necessity of direction-specific migration testing, strict embedding space isolation, and the retention of source histories for memory repair.",
+      "tags": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Does Your Agent's Memory Survive a Model Upgrade? A Controlled Study of Memory Portability",
+      "url": "https://arxiv.org/abs/2609.05339v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "adf31e66a17f1abe139b70fc",
+      "context_id": "26d1ebd8ad0d7db35925436a",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.591654Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-04-01T15:51:54Z",
+      "source_updated": "2026-04-01T15:51:54Z",
+      "summary": "We study the complexity of inverse cellular automata on configurations of bounded size. Deciding injectivity in this setting is co-NP-complete by a theorem of Durand. We give a simpler proof of this theorem by a direct reduction from UNSAT to this problem, avoiding more complicated intermediate constructions. We also show that one direction of the reduction can be formalized in the weak theory of bounded arithmetic $V^0$. Durand's coNP-completeness result allows one to view inverse cellular automata acting on bounded size configurations as propositional proofs, cf. Cavagnetto, and we prove lower bounds on their size. The proof uses known lower bounds for bounded-depth Frege systems together with the Paris--Wilkie translation of arithmetic proofs into propositional proofs, which allows us to transfer proof complexity lower bounds to our setting.",
+      "tags": [
+        "math.LO",
+        "cs.DM",
+        "cs.LO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Lower Bounds on Inverse Cellular Automata via Proof Complexity",
+      "url": "https://arxiv.org/abs/2604.01041v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "c87da527346488cfd02e8f86",
+      "context_id": "f28c07a9c358f01af6b83ecc",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "recovery"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.591765Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.3333,
+      "source": "arxiv",
+      "source_published": "2026-01-19T18:15:12Z",
+      "source_updated": "2026-05-02T21:26:30Z",
+      "summary": "Semi-Private Function Evaluation (SPFE) enables joint computation while protecting both input data and the function itself. A practical instantiation is gate-hiding garbled circuits, which conceal gate functionalities while revealing circuit topology. Existing security definitions intentionally exclude leakage through topology, leaving its concrete impact on function privacy largely unexplored. We present a SAT-based function-recovery attack that reconstructs hidden gate operations from a circuit's public topology under two attacker knowledge models. Our approach combines topology-preserving simplification theorems with a decomposition of the recovery task into smaller SAT queries, thereby reducing the candidate gate-type assignment space and improving recovery performance. We evaluate the attack on ISCAS benchmarks, representative secure computation circuits, and fault-tolerant sensor fusion circuits under a 24-hour recovery budget. Compared to a baseline attack, the optimized version substantially reduces recovery time and, in some cases, completes recovery within the evaluation budget where the baseline does not. Our results show that revealing circuit topology can materially assist recovery of hidden gate functionality, identifying topology as a security-relevant leakage channel in gate-hiding garbled circuits.",
+      "tags": [
+        "cs.CR",
+        "cs.LO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Function Recovery Attacks in Gate-Hiding Garbled Circuits using SAT Solving",
+      "url": "https://arxiv.org/abs/2601.13271v4"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "f3895651d21e7d1356a67586",
+      "context_id": "89d163608e2b467e5045f1fe",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.591893Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2022-12-05T16:44:47Z",
+      "source_updated": "2024-10-24T06:43:53Z",
+      "summary": "MD4 and MD5 are fundamental cryptographic hash functions proposed in the early 1990s. MD4 consists of 48 steps and produces a 128-bit hash given a message of arbitrary finite size. MD5 is a more secure 64-step extension of MD4. Both MD4 and MD5 are vulnerable to practical collision attacks, yet it is still not realistic to invert them, i.e., to find a message given a hash. In 2007, the 39-step version of MD4 was inverted by reducing to SAT and applying a CDCL solver along with the so-called Dobbertin's constraints. As for MD5, in 2012 its 28-step version was inverted via a CDCL solver for one specified hash without adding any extra constraints. In this study, Cube-and-Conquer (a combination of CDCL and lookahead) is applied to invert step-reduced versions of MD4 and MD5. For this purpose, two algorithms are proposed. The first one generates inverse problems for MD4 by gradually modifying the Dobbertin's constraints. The second algorithm tries the cubing phase of Cube-and-Conquer with different cutoff thresholds to find the one with the minimum runtime estimate of the conquer phase. This algorithm operates in two modes: (i) estimating the hardness of a given propositional Boolean formula; (ii) incomplete SAT solving of a given satisfiable propositional Boolean formula. While the first algorithm is focused on inverting step-reduced MD4, the second one is not area-specific and is therefore applicable to a variety of classes of hard SAT instances. In this study, 40-, 41-, 42-, and 43-step MD4 are inverted for the first time via the first algorithm and the estimating mode of the second algorithm. Also, 28-step MD5 is inverted for four hashes via the incomplete SAT solving mode of the second algorithm. For three hashes out of them, it is done for the first time.",
+      "tags": [
+        "cs.CR",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Inverting Cryptographic Hash Functions via Cube-and-Conquer",
+      "url": "https://arxiv.org/abs/2212.02405v3"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "abc6b4188cd2a270417d115e",
+      "context_id": "c783d357c96fdcfb6b7cc834",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592082Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2019-03-29T20:53:37Z",
+      "source_updated": "2023-05-17T13:39:24Z",
+      "summary": "Modern advances in general-purpose computer algebra systems offer solutions to a variety of problems, which in the past required substantial time investments by trained mathematicians. An excellent example of such development are the Clifford algebras. The main objective of the paper is to demonstrate an utterly algorithmic construction of a Clifford algebra matrix algebra representation of a non-degenerate signature (p, q). While this is not the most economical way of implementation, it offers a transparent mechanism of translation between a Clifford algebra and its faithful real-valued matrix representation and can be used for automated proof checking. This representation is used to derive an algorithm for the computation of an arbitrary multivector inverse as a proof certificate. The proposed algorithm is a mapping of the Faddeev--LeVerrier--Souriau algorithm for computation of the characteristic polynomial of matrices.",
+      "tags": [
+        "math.RA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A Symbolic Algorithm for Computation of Non-degenerate Clifford Algebra Matrix Representations",
+      "url": "https://arxiv.org/abs/1904.00084v2"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "6fb6818b9f3c3a002ade832c",
+      "context_id": "46bcf31f1b5e342d9f7a4dd3",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reverse"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592208Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2018-07-26T17:12:28Z",
+      "source_updated": "2020-01-03T14:07:50Z",
+      "summary": "We study the logical complexity of proofs in cyclic arithmetic ($\\mathsf{CA}$), as introduced in Simpson '17, in terms of quantifier alternations of formulae occurring. Writing $CΣ_n$ for (the logical consequences of) cyclic proofs containing only $Σ_n$ formulae, our main result is that $IΣ_{n+1}$ and $CΣ_n$ prove the same $Π_{n+1}$ theorems, for all $n\\geq 0$. Furthermore, due to the 'uniformity' of our method, we also show that $\\mathsf{CA}$ and Peano Arithmetic ($\\mathsf{PA}$) proofs of the same theorem differ only exponentially in size. The inclusion $IΣ_{n+1} \\subseteq CΣ_n$ is obtained by proof theoretic techniques, relying on normal forms and structural manipulations of $\\mathsf{PA}$ proofs. It improves upon the natural result that $IΣ_n$ is contained in $CΣ_n$. The converse inclusion, $CΣ_n \\subseteq IΣ_{n+1}$, is obtained by calibrating the approach of Simpson '17 with recent results on the reverse mathematics of Büchi's theorem in Kołodziejczyk, Michalewski, Pradic & Skrzypczak '16 (KMPS'16), and specialising to the case of cyclic proofs. These results improve upon the bounds on proof complexity and logical complexity implicit in Simpson '17 and also an alternative approach due to Berardi & Tatsuta '17. The uniformity of our method also allows us to recover a metamathematical account of fragments of $\\mathsf{CA}$; in particular we show that, for $n\\geq 0$, the consistency of $CΣ_n$ is provable in $IΣ_{n+2}$ but not $IΣ_{n+1}$. As a result, we show that certain versions of McNaughton's theorem (the determinisation of $ω$-word automata) are not provable in $\\mathsf{RCA}_0$, partially resolving an open problem from KMPS '16.",
+      "tags": [
+        "cs.LO",
+        "math.LO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On the logical complexity of cyclic arithmetic",
+      "url": "https://arxiv.org/abs/1807.10248v6"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "c4036fb7d96b21413948f9a0",
+      "context_id": "75b6dc6946e88260b4601f9b",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "reconstruction",
+        "solar wind"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592836Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 15.0,
+      "source": "arxiv",
+      "source_published": "2026-09-09T15:54:36Z",
+      "source_updated": "2026-09-09T15:54:36Z",
+      "summary": "The magnetic fields that make up the internal structure of coronal mass ejections (CMEs) are thought to be organised in a flux rope configuration, consisting of twisted magnetic fields that wind about a central axis. Remote-sensing observations of CMEs show a wide range of morphologies, dynamics, and evolution, including rotation, non-uniform expansion, deflection, and interaction with the ambient solar wind. In-situ measurements, however, typically consist of a single 1D spacecraft trajectory through a large 3D structure (or few at best), restricting our ability to determine how CME magnetic structure varies in space and time. In this work, we analyse the magnetic configuration of two idealised CMEs during their early evolution in the range 1-30 $R_{\\odot}$ using the Magnetohydrodynamic Algorithm Outside a Sphere code. The initial flux ropes differ only in their orientation with respect to the global dipole and erupt from a bipolar active region below the streamer belt in a simplified coronal environment. We deploy a fleet of synthetic spacecraft throughout the CMEs' paths at different combinations of latitudes, longitudes, and heliocentric distances. We identify and examine flux rope signatures in the synthetic in-situ profiles to characterise radial variations as well as latitudinal/longitudinal ones. We find that, even in a simplified CME erupting under solar minimum-like conditions, the sampling location significantly affects the global structure that would be deduced from common flux rope reconstruction and analysis techniques used for in-situ measurements. Additionally, we consider possible in-situ signatures that may serve as indicators of the source region's topology.",
+      "tags": [
+        "astro-ph.SR",
+        "physics.space-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On the 3D Magnetic Structure of Coronal Mass Ejections Through the Solar Corona",
+      "url": "https://arxiv.org/abs/2609.10360v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "17fca744e3efedecf8e0a4d1",
+      "context_id": "4afc996a1bafb11ccd396a56",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "inversion"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592884Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 10.375,
+      "source": "arxiv",
+      "source_published": "2026-09-08T22:21:06Z",
+      "source_updated": "2026-09-08T22:21:06Z",
+      "summary": "In the second half of 2017, as Solar Cycle 24 approached its minimum, a pronounced and rigidity-dependent depression in the galactic cosmic ray (GCR) proton flux was observed using AMS-02. This event was driven by a sequence of strong coronal mass ejections (CMEs). In this work, we model the modulation of GCR protons during this period using a steady-state Parker transport framework with parameters constrained by AMS-02 observations. Treating the event as a purely long-term modulation interval yields excellent agreement with the observed proton intensities, but implies an inferred rigidity dependence of particle mean free paths that is inconsistent with basic turbulence theory, corresponding to an effective inversion of the scattering regime. We argue that this behaviour arises from the ability of highly flexible transport parameterizations to reproduce integrated modulation signatures through correlated adjustments of diffusion coefficients during transient events. To address this inconsistency, we relax the commonly adopted assumption of a time-independent ratio of perpendicular to parallel diffusion coefficients and introduce a physically motivated reduction of this ratio during the CME-dominated interval. This modification preserves the quality of the spectral fits whilst restoring the expected rigidity ordering of mean free paths. Our results indicate that allowing the perpendicular-to-parallel diffusion ratio to vary in time provides an effective means of constraining transport solutions during the 2017 depression and may help to resolve similar inconsistencies reported in other GCR modulation studies.",
+      "tags": [
+        "astro-ph.SR",
+        "astro-ph.HE",
+        "physics.space-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On modelling the 2017 galactic cosmic ray depression",
+      "url": "https://arxiv.org/abs/2609.10622v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "e5d1f2f44e7498767258ba5e",
+      "context_id": "a918de064aad822ecf5bc7cc",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "solar wind"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592891Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.4167,
+      "source": "arxiv",
+      "source_published": "2026-08-31T20:08:42Z",
+      "source_updated": "2026-08-31T20:08:42Z",
+      "summary": "The early evolution of fast polar coronal hole (PCH) solar wind remains largely unconstrained by in situ measurements. In March 2025, Parker Solar Probe (Parker) at its closest approach of 9.86 Solar Radii ($R_\\odot$) measured outflow from a large equatorial coronal hole (ECH) which was also measured at 1\\,au and at intermediate distances by Solar Orbiter (also near its perihelion). At 1\\,au the stream properties are consistent with PCH properties established by Ulysses. The stream was measured by Parker substantially below the Alfvén surface, with proton temperatures in excess of 2\\,MK and a speed at $\\sim$10\\,$R_\\odot$ which was only $\\sim$60\\% of its asymptotic value. The Solar Orbiter data indicates that the acceleration is largely complete by 60~$R_{\\odot}$. Spherically-polarized fluctuations in the stream are observed to develop from near-transverse and small-angle at Parker to full reversal ``switchbacks'' at Solar Orbiter. Comparison of the implied acceleration profile to historical doppler-dimming measurements suggests that the stream's low coronal acceleration is similar to that of PCH flows. Consistent with previous work, this acceleration requires significantly more energy than can be provided by the observed thermal pressure gradients, with a significant contribution likely from the abundant Alfvénic fluctuation energy observed at Parker. These observations provide unique constraints on models of the radial evolution of the fastest solar wind, and indicate that these wind streams experience gradual, steady acceleration over their first few tens of solar radii of evolution.",
+      "tags": [
+        "astro-ph.SR",
+        "physics.space-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Direct Measurement of Polar Coronal Hole-like Solar Wind in its Acceleration Phase",
+      "url": "https://arxiv.org/abs/2609.00318v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "e654de59f2ceda5849d0e504",
+      "context_id": "168efddd6aa5dafe2adba56d",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction",
+        "space weather"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592940Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 9.125,
+      "source": "arxiv",
+      "source_published": "2026-08-25T15:54:27Z",
+      "source_updated": "2026-08-25T15:54:27Z",
+      "summary": "Geomagnetic indices quantify the disturbances of the Earth's magnetic field. They form an important space weather and space climate record that tracks solar-terrestrial effects on the Earth. Although geomagnetic activity has its origins in the photospheric magnetic fields, the two have so far not been directly related. We develop a photospheric index of geomagnetic activity (PIGA) that measures the geoeffectiveness of the Sun based on photospheric magnetic field as presented in synoptic magnetograms. We construct the PIGA from synoptic magnetograms of Wilcox Solar Observatory by relating the equatorial and axial dipole components of the photospheric magnetic field to the geomagnetic Kp index by means of linear regression. PIGA captures well the evolution of the geomagnetic activity over the past 50 years at the resolution of solar rotation, having linear correlation of 0.71 with the geomagnetic Kp index. PIGA makes it straightforward to measure the geoeffectiveness of the Sun using the dominant structure of the global solar magnetic field. PIGA can for example be used to study the geoeffectiveness of the Sun using historical simulations or the predicted solar magnetic field. PIGA also allows to use observed geomagnetic activity as an additional constraint for the early magnetic field reconstructions of the solar magnetic field.",
+      "tags": [
+        "astro-ph.SR",
+        "physics.space-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Photospheric index of geomagnetic activity",
+      "url": "https://arxiv.org/abs/2608.24752v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "f4dff68e2c3e06e79449f5a1",
+      "context_id": "a1c8a53ad57479e55833ce07",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction",
+        "solar wind"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.592987Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 9.0,
+      "source": "arxiv",
+      "source_published": "2026-08-24T04:11:59Z",
+      "source_updated": "2026-08-24T04:11:59Z",
+      "summary": "The Solar wind is a continuous flow of charged particles emanating from the solar surface and governed by complex, interacting magnetohydrodynamic processes. Accurate specification of inner-boundary conditions is essential for heliospheric modeling and solar-wind prediction. In many practical applications, only a subset of interacting multi-field variables is directly available, but for a comprehensive view of solar wind prediction and downstream magnetohydrodynamic simulations, a more complete boundary state is required. In this work, we study the problem of learning the multi-field multi-scale solar magnetohydrodynamic state at 30 solar radii ($R_\\odot$) using operator learning. Specifically, given the radial velocity and radial magnetic field, we aim to reconstruct the non-radial velocity and magnetic field components, radial and non-radial current density, thermodynamic density, and pressure components. This mapping is highly nonlinear, spatially coupled, and multi-scale, making it a challenging task for data-driven scientific machine learning. To address this problem, we employ a Local Neural Operator (LocalNO) that learns mappings between input and output function spaces while retaining locality and resolution-awareness. Unlike conventional regression models and autoencoder models, neural operators are better suited for learning structured field-to-field transformations arising from physical systems. The resulting predictions along with inputs are intended to serve as boundary condition variables for future inner-heliospheric modeling pipelines.",
+      "tags": [
+        "cs.LG",
+        "astro-ph.IM",
+        "astro-ph.SR",
+        "cs.CV"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Neural Operator based Multi-Field Reconstruction of Inner Solar Boundary State",
+      "url": "https://arxiv.org/abs/2608.22782v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "4f9a8a2e59c550885792aff2",
+      "context_id": "8a49fe6bfb8dd18abcdda566",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "space weather"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.593073Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 10.5417,
+      "source": "arxiv",
+      "source_published": "2026-08-21T09:26:49Z",
+      "source_updated": "2026-08-21T09:26:49Z",
+      "summary": "Coronal mass ejections (CMEs) are among the primary drivers of space weather disturbances at Earth, yet their early propagation in the low corona remains poorly constrained owing to occultation and projection effects inherent to coronagraph observations. Coronal dimmings offer an alternative diagnostic to infer CME propagation direction directly from the low corona. We present the DIRECD CME Direction Catalog, a unified dataset of three-dimensional CME propagation directions derived via the DIRECD (Dimming Inferred Estimation of CME Direction) method, which reconstructs CME cone geometry from SDO/AIA 211 Å coronal dimming observations. The catalog comprises 64 events spanning 2010-2026, combining 31 Solar Cycle 25 (2021-2026) events with 33 events from prior studies. For each event we report the 3D propagation direction, 2D inclination angles, angular width, and cone height. Statistical analysis reveals a systematic asymmetry in low-coronal CME propagation: meridional inclinations exhibit a systematic tendency toward latitude-dependent deflection, with poleward deflections more pronounced at higher source latitudes, while equatorial inclinations show no significant dependence on source longitude. This is consistent with low-coronal CME trajectories being governed primarily by local active-region magnetic topology, with the large-scale coronal field and heliospheric current sheet assuming a progressively dominant role at greater heliocentric distances. Incorporating DIRECD-derived propagation directions into CME arrival forecasts improves predictions of geomagnetic storm intensity, raising the correlation with observed storm strength from r = 0.58 to r = 0.70 when combined with CME speed. The DIRECD software, catalog, and all associated data products are publicly available to support space weather research.",
+      "tags": [
+        "astro-ph.SR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "The DIRECD coronal mass ejection direction catalog: three-dimensional propagation inferred from coronal dimmings",
+      "url": "https://arxiv.org/abs/2608.20908v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "9f60f53bc2d7f3158ebbe2f1",
+      "context_id": "f864d510671cb4b361a8fb3c",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "inversion",
+        "space weather"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.593121Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 14.9167,
+      "source": "arxiv",
+      "source_published": "2026-08-11T15:57:04Z",
+      "source_updated": "2026-08-11T15:57:04Z",
+      "summary": "M dwarfs are among the most promising host stars in the search for habitable exoplanets. However, their active atmospheres drive intense magnetic activity, including energetic flares and possibly coronal mass ejections (CMEs), which may pose serious threats to planetary habitability. In this study, we perform three-dimensional magnetohydrodynamic (MHD) simulations of CMEs on a fully convective M dwarf with a rotation period of 30 days, corresponding to the moderate-rotation regime. The magnetic topology driving our simulations is adopted from an exploratory global dynamo simulation of a fully convective low-mass star exhibiting a single-hemisphere magnetic configuration, which is not yet observationally confirmed. The large-scale magnetic field is mostly restricted to a single hemisphere and characterized by high-latitude polarity inversion lines (PILs), with the implication that most CMEs should originate from high latitudes. We find that these high-latitude CMEs propagate radially and away from the equatorial plane, producing only weak and spatially limited disturbances along the equatorial orbits of exoplanets. Moreover, low-latitude CMEs experience stronger drag within the dense and slow stellar wind near the equator, which significantly reduces both their propagation speeds and their overall impact on exoplanets. The resulting dynamic pressure enhancements on equatorial exoplanets caused by these CMEs are within two orders of magnitude above the quiescent conditions, much lower than those reported in previous M-dwarf CME simulations. These results indicate that, if such magnetic topologies indeed exist on M dwarfs, they may produce a relatively benign CME environment, which could be favorable for planetary habitability at face value.",
+      "tags": [
+        "astro-ph.SR",
+        "astro-ph.EP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Intense but Harmless: Exo-Space Weather Around an M Dwarf with a Single-Hemisphere Dynamo",
+      "url": "https://arxiv.org/abs/2608.11087v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "d8610c7d97df63f8439057b4",
+      "context_id": "6a3f60685de810e856d84a2e",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "solar wind",
+        "space weather"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.593170Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 14.9583,
+      "source": "arxiv",
+      "source_published": "2026-08-09T08:05:27Z",
+      "source_updated": "2026-08-09T08:05:27Z",
+      "summary": "We implement a novel approach to performing Sun-to-Earth coronal mass ejection (CME) simulations and test it on three geo-effective space weather events. Using a vector magnetogram observed prior to the CME as the boundary condition, we reconstruct non-linear force free field (NLFFF) solutions in solar active regions with an established magneto-frictional method. We find a pre-eruption solar corona containing the NLFFF in the AWSoM model, which then spontaneously erupts. We apply STITCH, a photospheric driving method, when needed, to increase the strength of the CME shock. The eruptions successfully produce magnetic flux ropes (MFRs) that propagate to 1 au in the full MHD simulation. The synthetic white light images of the simulated CMEs share a striking resemblance in shape to observations. The interplanetary MFRs (IMFRs) arrive at 1 au with a 1.5- to 9-hour error. A comparison of simulated solar wind plasma with in-situ measurements shows that IMFR crossing can reproduce a southward $B_z$ and often its magnitudes, which determine the geo-effectiveness of the event.",
+      "tags": [
+        "astro-ph.SR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Sun-to-Earth Coronal Mass Ejection Simulations From a Vector Magnetogram",
+      "url": "https://arxiv.org/abs/2608.08562v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "27c9e3513554899318d3e8f8",
+      "context_id": "ac0fa2991782ac8875e8efa0",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "reconstruction",
+        "solar wind"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.593253Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 9.0,
+      "source": "arxiv",
+      "source_published": "2026-08-06T17:38:25Z",
+      "source_updated": "2026-08-06T17:38:25Z",
+      "summary": "We present a framework for decomposing solar-wind velocity distribution functions (VDFs) using orthogonal polynomial bases. We aim to establish a practical procedure for applying polynomial decompositions to in-situ spacecraft VDFs and to clarify how the resulting spectra of expansion-coefficient power can be used for noise reduction, VDF reconstruction, and diagnostics of velocity-space structure. The method represents measured VDF structure with Hermite-Hermite and Hermite-Laguerre expansions, providing a nonparametric description of departures from Maxwellians, such as anisotropy, skewness, beams, and suprathermal tails. Expansion coefficients are estimated by Gaussian-weighted quadrature after interpolation of measured distributions onto polynomial nodes. We demonstrate several applications of polynomial decomposition to Solar Orbiter, Parker Solar Probe, and Magnetospheric Multiscale 1 measurements, including noise identification through high-order spectral flattening, noise-reduced VDF reconstruction, and characterization of VDF-structure variations under different plasma conditions, e.g., turbulent solar-wind streams and shocks. For instance, noise-reduced reconstructed VDFs can provide smoother estimates of distinct ion populations and VDF gradients. Examples from solar-wind streams and collisionless-shock crossings further show that the resulting spectra respond to changes in parallel and perpendicular VDF structure, illustrating their potential for comparing kinetic modifications under different plasma conditions. Overall, orthogonal-polynomial decomposition provides a bridge between measured particle distributions and kinetic plasma physics by converting complex VDF morphology into quantitative velocity-space spectra.",
+      "tags": [
+        "astro-ph.SR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Decomposition of Solar Wind Velocity Distribution Functions with Orthogonal Polynomials",
+      "url": "https://arxiv.org/abs/2608.06324v1"
+    },
+    {
+      "base_direction_id": "solar_helios",
+      "candidate_id": "96807cd97c40ac9e2c023186",
+      "context_id": "9921db944cd04d3384cb73bf",
+      "direction_id": "solar_helios::REVERSE",
+      "direction_title": "Solar / heliophysics / space weather reproducible data [REVERSE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "cme",
+        "coronal mass ejection",
+        "reconstruction"
+      ],
+      "mirror_lens": "REVERSE",
+      "routed_at": "2026-09-11T03:40:26.593302Z",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 10.5833,
+      "source": "arxiv",
+      "source_published": "2026-07-30T16:46:31Z",
+      "source_updated": "2026-07-30T16:46:31Z",
+      "summary": "Coronal mass ejections (CMEs) are inherently three-dimensional (3D), but traditional white-light coronagraphs provide only two-dimensional (2D) projections. While the Polarization Ratio Technique (PRT) utilizes Thomson scattering to infer proxy 3D plasma locations, its results are typically limited to 2D topographical maps, hindering geometric interpretation. To address this, we introduce PRICM3 (Polarization Ratio Integrated CME Mapper in 3D), a framework that converts PRT-derived maps into explicit 3D point-cloud reconstructions. This tool enables intuitive visualization, multi-viewpoint comparison, and direct validation against geometric models such as the Graduated Cylindrical Shell (GCS). As a proof-of-concept, we analyzed a limb CME observed on 28 October 2021 using data from Solar Orbiter/Metis, SOHO/LASCO, and STEREO-A/COR2. The independent reconstructions converged into a consistent 3D volume that aligned remarkably well with the corresponding GCS geometry. These results prove that the 3D information embedded in PRT topographical maps can be successfully recovered through spatial reconstruction. PRICM3 offers a powerful, intuitive method for interpreting polarimetric coronagraph observations, providing a vital tool for current and future solar missions such as Proba-3/ASPIICS and PUNCH.",
+      "tags": [
+        "astro-ph.SR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "PRICM3: A novel Polarization Ratio framework for three-dimensional CME reconstruction",
+      "url": "https://arxiv.org/abs/2607.28506v1"
+    }
+  ],
+  "schema": "janus.beetle.repo_memory_batch.v1",
+  "target_repository": "Hawkar-usls/Janus-Cosmos"
+}
