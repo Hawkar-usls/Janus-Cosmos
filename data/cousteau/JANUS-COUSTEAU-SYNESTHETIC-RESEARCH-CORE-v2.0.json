@@ -1,0 +1,124 @@
+{
+  "artifact_id": "JANUS-COUSTEAU-SYNESTHETIC-RESEARCH-CORE-2026-08-25-v2.0",
+  "schema": "janus.cosmos.cousteau.synesthetic_research_core.contract.v2",
+  "status": "IMPLEMENTED_CANDIDATE__CI_REQUIRED_BEFORE_PROMOTION",
+  "created_at_local": "2026-08-25T23:00:00+03:00",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "target_branch": "janus-echo-cousteau",
+  "core": {
+    "id": "JANUS_COUSTEAU_SYNESTHETIC_RESEARCH_CORE",
+    "version": "2.0.0",
+    "entrypoint": "workspace/cousteau_synesthetic_research_core.py",
+    "base_core": "workspace/cousteau_synesthetic_memory_core.py",
+    "semantic_overlay": "workspace/cousteau_synesthetic_semantic_overlay.py",
+    "runtime": "PYTHON_STANDARD_LIBRARY_ONLY"
+  },
+  "shared_handshake": {
+    "protocol_id": "JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE",
+    "protocol_version": "1.0.0",
+    "contract_path": ".janus/JANUS_SYNAESTHETIC_RESEARCH_HANDSHAKE_V1.json",
+    "contract_sha256": "3aec527be027fc280fc9a8ace1255c9a3a7da73fc884d9b4856694a1f1530306",
+    "consumer_role": "DEMIHEAD_ASSOCIATIVE_MEMORY_CORE",
+    "producer_role": "COUSTEAU_MEASUREMENT_SENSORY_CORE"
+  },
+  "research_upgrades": [
+    "RAW_OR_DERIVED_WINDOW_PROVENANCE_BINDING",
+    "EXPLICIT_OBSERVED_UNKNOWN_STALE_CONTAMINATED_BLOCKED_STATES",
+    "RETRIEVAL_QUALITY_SEPARATE_FROM_TRUTH_CONFIDENCE",
+    "MULTISCALE_PACKET_CHAIN_BINDING",
+    "QUALITY_ADJUSTED_REVIEW_PRIORITY",
+    "COUSTEAU_TO_DEMIHEAD_IMMUTABLE_HANDSHAKE",
+    "PACKET_TAMPER_DETECTION",
+    "BIT_EXACT_MEASUREMENT_FINGERPRINT_EXPORT",
+    "FAIL_CLOSED_HANNAH_PROFILE_WITHOUT_RAW_PROVENANCE"
+  ],
+  "hannah_bodc_policy": {
+    "profile": "HANNAH_BODC",
+    "raw_provenance_required": true,
+    "accepted_source_binding": [
+      "RAW_BYTES_VERIFIED_THIS_CALL",
+      "RAW_SHA_BOUND_DERIVED_WINDOW"
+    ],
+    "without_source_binding": "BLOCKED",
+    "current_real_data_state": "DO_NOT_INFER_FROM_THIS_CONTRACT__FOLLOW_LATEST_MEASUREMENT_RECEIPT"
+  },
+  "epistemic_states": {
+    "OBSERVED": "current measured value or derived metric within the bound measurement window",
+    "UNKNOWN": "not observed and never zero-filled",
+    "STALE": "known historical value not admissible as current",
+    "CONTAMINATED": "value retained for audit but not treated as clean observation",
+    "BLOCKED": "required source/provenance or measurement material absent"
+  },
+  "authority_firewall": {
+    "MEMORY_EQUALS_TRUTH": false,
+    "MNEMONIC_SIMILARITY_IS_SCIENTIFIC_SIMILARITY": false,
+    "ASSOCIATION_IS_EVIDENCE": false,
+    "MAY_CHANGE_RAW_DATA": false,
+    "MAY_CHANGE_CALIBRATION": false,
+    "MAY_CHANGE_SCIENTIFIC_VERDICT": false,
+    "MAY_REORDER_REVIEW_PRIORITY": true,
+    "AUTHORITY_DELTA": 0,
+    "MASS_EFFECT_BUDGET_DELTA": 0
+  },
+  "anti_leakage": {
+    "forbidden_from_measurement_influence": [
+      "verdict",
+      "hypothesis",
+      "interpretation",
+      "claim",
+      "pyramid",
+      "target",
+      "candidate",
+      "anomaly",
+      "h0",
+      "h1",
+      "h2",
+      "artificial",
+      "natural",
+      "control_label",
+      "class_label",
+      "expected",
+      "prediction",
+      "story"
+    ],
+    "epistemic_state_keys_must_be_measurement_fields": true
+  },
+  "multiscale_scope": [
+    "1s",
+    "10s",
+    "60s",
+    "300s",
+    "1800s",
+    "7200s",
+    "line",
+    "ping",
+    "beam",
+    "footprint"
+  ],
+  "pipeline_binding": "RAW_HASHES -> HEAD_TAIL_MIRROR -> TWO_FRONTS -> TIME_CONVERGENCE -> 0012_0017_0022 -> 0037_CONTROL -> EA600_H0_H1_H2 -> PING_BEAM_GEOMETRY -> GROUND_FIXED_REPLICATION -> BLIND_SYNTHETIC_REPLAY",
+  "research_gate": {
+    "required_before_promotion": [
+      "V1_CORE_REGRESSION_PASS",
+      "V1_SEMANTIC_REGRESSION_PASS",
+      "V2_COMPILE_PASS",
+      "V2_SELF_TEST_PASS",
+      "V2_REGRESSION_PASS",
+      "PYTHON_3_11_PASS",
+      "PYTHON_3_12_PASS",
+      "HANDSHAKE_CONTRACT_HASH_PASS"
+    ],
+    "cross_core_gate": "DEMIHEAD_MUST_ACCEPT_PACKET_AND_PRESERVE_MEASUREMENT_FINGERPRINT_BIT_EXACT"
+  },
+  "hard_rules": [
+    "RAW_BYTES_OUTRANK_MNEMONIC_MAPPING",
+    "UNKNOWN_NE_ZERO",
+    "STALE_NE_CURRENT",
+    "CONTAMINATED_NE_CONFIRMED",
+    "BLOCKED_NE_MEASURED",
+    "SENSORY_MATCH_NE_SCIENTIFIC_CONVERGENCE",
+    "NO_LABEL_LEAKAGE_INTO_MEASUREMENT_FINGERPRINT",
+    "DISAGREEMENT_MUST_BE_PRESERVED",
+    "NEGATIVE_AND_INCONCLUSIVE_RESULTS_ARE_FIRST_CLASS",
+    "NO_UNDERWATER_PYRAMID_DETECTED_YET"
+  ]
+}
