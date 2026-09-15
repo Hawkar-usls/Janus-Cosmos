@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2c.ztf_native_sensitivity_recovery.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2C-ZTF-NATIVE-SENSITIVITY-RECOVERY",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-RUN-001.json",
+    "result_commit": "7971f48275dddcd4ae1b2d13962ac0ae7a40efb5",
+    "manifest_path": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv",
+    "manifest_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+    "manifest_sha256": "f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb",
+    "qualified_null_trials_immutable": 20,
+    "qualified_null_trials_reopened": 0
+  },
+  "aura_advisory": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001.json",
+    "request_sha256": "2c5abb92bbe2a89d9db877c8dfdec2b0d74bb1dcc74fcf0077326a191659eee2",
+    "cards": ["THRESHOLD", "MIRROR", "FORK"],
+    "authority_delta": 0,
+    "evidence_upgrade": false
+  },
+  "frozen_unresolved_trial_ids": [
+    "TS-T2B-ZTF-03",
+    "TS-T2B-ZTF-09",
+    "TS-T2B-ZTF-10",
+    "TS-T2B-ZTF-16",
+    "TS-T2B-ZTF-17",
+    "TS-T2B-ZTF-27",
+    "TS-T2B-ZTF-39",
+    "TS-T2B-ZTF-40"
+  ],
+  "immutable_selection": {
+    "coordinates": "UNCHANGED_FROM_T2B_MANIFEST",
+    "abc_times": "UNCHANGED_FROM_T2B_MANIFEST",
+    "field_ccdid_qid_filter_exptime": "UNCHANGED_FROM_T2B_MANIFEST",
+    "metadata_quality_status": "UNCHANGED",
+    "replacement_epochs_allowed": false,
+    "alternative_neighboring_sequences_allowed": false
+  },
+  "retrieval_contract": {
+    "preferred_product": "THE_SAME_FROZEN_ZTF_PRODUCT_AS_T2B",
+    "preferred_cutout_size_arcsec": 360,
+    "reason": "Provide ZTF-local PSF context without changing sky coordinate or epoch.",
+    "on_cutout_http_failure": "TRY_THE_SAME_PRODUCT_FULL_FRAME_WITH_QUERY_REMOVED",
+    "different_exposure_fallback_allowed": false,
+    "different_filter_fallback_allowed": false,
+    "different_field_or_quadrant_fallback_allowed": false
+  },
+  "ztf_local_sensitivity_gate": {
+    "global_random_clean_position_gate_used": false,
+    "native_psf_estimator": "estimate_native_psf_fwhm on the expanded same-epoch science frame",
+    "minimum_native_psf_reference_behavior": "If no native PSF estimate can be formed, the epoch remains BLOCKED_NATIVE_PSF_REFERENCE.",
+    "target_measurement": "measure_psf_at at the frozen WCS coordinate before any injection",
+    "target_mask": {
+      "radius_px": 3.0,
+      "require_all_zero": true
+    },
+    "edge_gate": {
+      "minimum_gaussian_retained_fraction": 0.995,
+      "measurement_window_radius_px": 6,
+      "reason": "Allow an edge-aware local gate only when the modeled PSF is effectively contained and the unchanged detector can measure it."
+    },
+    "local_injection": {
+      "fwhm_ratios_to_native": [0.8, 1.0, 1.2],
+      "snr_grid": [8.0, 12.0],
+      "required_recovery": "ALL_SIX",
+      "centroid": "EXACT_FROZEN_WCS_COORDINATE"
+    },
+    "hot_pixel_control": {
+      "snr": 12.0,
+      "centroid": "NEAREST_PIXEL_TO_FROZEN_WCS_COORDINATE",
+      "required": "NOT_ACCEPTED_AS_PSF_SOURCE"
+    }
+  },
+  "trial_classification": {
+    "ISOLATED_B_L0": "A QUALIFIED_ABSENCE, B SOURCE_PRESENT, C QUALIFIED_ABSENCE",
+    "NO_ISOLATED_B_EVENT": "A/B/C all QUALIFIED_ABSENCE",
+    "NON_ISOLATED_SOURCE_PATTERN": "SOURCE_PRESENT in A or C",
+    "UNRESOLVED_TRIAL": "Anything else"
+  },
+  "scientific_success": {
+    "PASS_ALL_28_NULL": "All eight formerly unresolved trials become NO_ISOLATED_B_EVENT, zero candidates, zero nonisolated patterns; combined parent+recovery qualified null count becomes 28/28.",
+    "CANDIDATE_REQUIRES_ADJUDICATION": "At least one recovered trial becomes ISOLATED_B_L0.",
+    "BLOCKED_RECOVERY_INCOMPLETE": "At least one of the eight remains unresolved or becomes nonisolated."
+  },
+  "not_admitted": [
+    "No weakening or retrospective reinterpretation of the twenty parent qualified null trials.",
+    "No replacement of a frozen A/B/C epoch with a more favorable exposure.",
+    "No global rejection of optical transients.",
+    "No physical tachyon identification, faster-than-light propagation, retrocausality, UAP origin, artificial origin, ETI, or nuclear causality claim."
+  ],
+  "claim_ceiling": "TARGETED_ZTF_NATIVE_SENSITIVITY_RECOVERY_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

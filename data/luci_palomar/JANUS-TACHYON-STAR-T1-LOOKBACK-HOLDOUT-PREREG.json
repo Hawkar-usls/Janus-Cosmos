@@ -1,0 +1,91 @@
+{
+  "analysis": {
+    "denominator": "only trials with A, B, and C all sensitivity-adjudicable under the frozen contract",
+    "exploratory_endpoint": "all 24 metadata-eligible triples, reported separately with source-cluster dependence; cannot promote the primary claim",
+    "no_coordinate_reselection_after_pixels": true,
+    "no_retiming_after_pixels": true,
+    "no_threshold_relaxation_after_pixels": true,
+    "primary_endpoint": "number of source-level sealed trials satisfying the isolated A-B-C event class",
+    "secondary_endpoint": "dual-instrument same-filter coincidence status for any B candidate when a paired witness exists"
+  },
+  "artifact_id": "JANUS-TACHYON-STAR-T1-LOOKBACK-HOLDOUT-PREREG-v1.0",
+  "branch": "research/luci-only-v1",
+  "claim_ceiling": "PREREGISTERED_LUCI_HOLDOUT_ISOLATED_TRANSIENT_MOTIF_TEST_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY__NO_NUCLEAR_CAUSALITY__NO_UAP_ORIGIN_CLAIM",
+  "date_utc": "2026-08-16",
+  "eligibility_rule": {
+    "consecutive_within_metadata_group": true,
+    "delta_post_seconds_range_inclusive": [120.0, 480.0],
+    "delta_pre_seconds_range_inclusive": [120.0, 480.0],
+    "eligible_sources": 9,
+    "eligible_triples": 24,
+    "same_filter_string": true,
+    "same_instrument": true,
+    "same_src_id": true
+  },
+  "frozen_parents": {
+    "exact_wcs_csv_sha256": "53cb2d94566eabb35b431f027d5958362f0e3fcd0640efb61593eb06c0068c22",
+    "representatives_csv_sha256": "b5d81da2ddb4a0bf21370184641b1616693af300458b00117494b5f84f4df52b",
+    "two_f_e_artifact_id": 9248259268,
+    "two_f_e_zip_sha256": "87ce38fe9c6d0977a009efbd2df67c668656a4a82889128bbcf962d666aecff7",
+    "two_f_f_artifact_id": 9254802834,
+    "two_f_f_recovery_manifest_sha256": "2b17a8eb70ad0b7d43a7e425112942206eb189f9bcb68ed50c09dbfb236decaa",
+    "two_f_f_zip_sha256": "6042a1ec6209ea803a5d74e17d5285fe0c72be561310ec15a71012133dd5a0d8"
+  },
+  "holdout_construction": {
+    "exclude_files_in_two_f_e_temporal_representatives": 92,
+    "exclude_files_in_two_f_f_targeted_recovery": 100,
+    "legacy_pixel_audit": "The selected filenames do not occur in the locally preserved 2F-C or 2F-C-R1 runtime artifacts; 2F-D/2F-E metadata mention does not count as pixel inspection.",
+    "pixel_blind_definition": "No target-pixel inspection by the 2F-E representative pixel stage or the 2F-F targeted recovery stage. Presence in earlier exact-WCS metadata manifests is allowed and expected.",
+    "remaining_metadata_rows": 239,
+    "remaining_sources": 24,
+    "remaining_unique_files": 211,
+    "start_exact_wcs_pairs": 443,
+    "start_sources": 42,
+    "start_unique_files": 403
+  },
+  "interpretation_gates": {
+    "dual_instrument_same_filter_event": "High-priority sky-origin transient candidate, still not a tachyon identification.",
+    "one_or_more_primary_events": "Replicated isolated one-exposure point-source motif candidate within a LUCI/Palomar holdout; requires artifact, moving-object, atmosphere and cross-instrument adjudication.",
+    "physical_tachyon_identity": "NOT_ADMITTED_BY_THIS_EXPERIMENT",
+    "zero_primary_events": "Negative result for this 9-source metadata-selected LUCI holdout only."
+  },
+  "lineage_note": "This experiment transfers the preregistration/observer-separation architecture of JANUS Tahyon Traveler to astronomy: metadata target selection is T_target; first pixel read is the observation/materialization boundary. It does not transfer the distributed-system timing anomalies as evidence for astrophysical retrocausality.",
+  "paired_instrument_control": {
+    "available_for_trials": 6,
+    "definition": "For the sealed B time, locate an untouched exposure of the other LUCI instrument at the same src_id and exact same filter string, with |DATE-OBS difference| <= 10 seconds, using metadata only.",
+    "possible_classes": ["DUAL_INSTRUMENT_COINCIDENCE_CANDIDATE", "PRIMARY_ONLY_WITH_PAIRED_SENSITIVE_ABSENCE", "PAIRED_BLOCKED_OR_NONOVERLAPPING"],
+    "use": "If the primary B is a candidate, the paired B is an independent same-filter detector witness. It adjudicates sky-origin only when the actual exposure intervals overlap by at least 50 percent of the shorter exposure; otherwise it is contextual only."
+  },
+  "pixel_test_contract": {
+    "A_requirement": "sensitivity-qualified no-counterpart",
+    "B_event_requirement": "R1-compatible candidate at the frozen exact sky coordinate",
+    "C_requirement": "sensitivity-qualified no-counterpart",
+    "blocked_policy": "Any failed frame/sensitivity/HDU-binding gate is UNRESOLVED, never silently counted as absence.",
+    "detector": "unchanged janus_cosmos.luci_psf_r1.measure_psf_at",
+    "frame_gate": "unchanged psf_relative_injection_recovery_gate",
+    "isolated_event_class": "A_QUALIFIED_ABSENCE__B_CANDIDATE__C_QUALIFIED_ABSENCE",
+    "local_sensitivity": "unchanged SNR 8 and 12 local injection contract inherited from 2F-F; edge-aware repair only under its already-frozen >=0.995 modeled PSF-retention rule"
+  },
+  "primary_selection_rule": {
+    "choose": "minimum score per src_id using metadata only",
+    "manifest_path": "data/luci_palomar/JANUS-TACHYON-STAR-T1-LOOKBACK-HOLDOUT-MANIFEST.csv",
+    "manifest_sha256": "334fe0cacd0b056214d991be5256e05ab678fe5edb072d46a26ad07d4ae803b7",
+    "score": "abs(delta_pre-232.5827)+abs(delta_post-432.2595)",
+    "selected_trials": 9,
+    "tie_break_order": ["b_date_obs", "instrument", "filters", "b_file"],
+    "unit": "one sealed A-B-C trial per eligible source"
+  },
+  "purpose": "Test a metadata-frozen isolated A->B->C transient motif at previously uninspected LUCI exact-overlap frames for frozen Palomar source coordinates. Timing and coordinates are sealed before target pixels are read.",
+  "schema": "janus.cosmos.tachyon_star.lookback_holdout.prereg.v1",
+  "status": "PREREGISTERED_PIXEL_BLIND",
+  "training_signature": {
+    "candidate_date_obs": "2022-03-19T11:48:08.1003",
+    "candidate_filter": "Br_gam clear",
+    "candidate_instrument": "LUCI1",
+    "delta_post_seconds": 432.2595,
+    "delta_pre_seconds": 232.5827,
+    "nickname": "TACHYON-STAR-001",
+    "source": "LUCI-PALOMAR-JPFM-2F-F-RUN-001::tile_RA307.409_DECp40.547:701",
+    "status": "ONE_EXPOSURE_MARGINAL_NEAR_IR_POINT_SOURCE_CANDIDATE_NOT_PHYSICAL_IDENTITY"
+  }
+}

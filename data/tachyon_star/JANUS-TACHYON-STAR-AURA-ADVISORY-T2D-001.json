@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-ADVISORY-T2D-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "source_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_sha256": "fb811cc2c7645e95074bd08c413f044c49fa2341f8c205104d0a56453787fe43"
+  },
+  "request": {
+    "state": "23_OF_28_QUALIFIED_NULL__FIVE_UNRESOLVED__ZERO_ISOLATED_B_CANDIDATES",
+    "question": "Should the next gate spend effort on the five residual ZTF limitations, freeze ZTF and move to independent TESS cadence-native replication, or take another reversible route with higher information gain?",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "no_epoch_replacement": true,
+      "no_missing_data_as_negative": true
+    }
+  },
+  "response": {
+    "status": "HEURISTIC_ONLY",
+    "cards": [
+      {
+        "id": "THRESHOLD",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?"
+      },
+      {
+        "id": "THREAD",
+        "lens": "Trace provenance: source, transformation, receipt, and present claim.",
+        "question": "Where is the first point where lineage becomes uncertain?"
+      },
+      {
+        "id": "LANTERN",
+        "lens": "Look for the missing piece of information with the highest value.",
+        "question": "What single observation would most reduce uncertainty?"
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "evidence_upgrade": false,
+    "prediction_claim": false
+  },
+  "janus_interpretation": {
+    "threshold": "Do not open a large new TESS pixel arm until the smallest residual ZTF uncertainties are characterized.",
+    "thread": "Audit the exact product lineage for the two trials whose frozen products return HTTP 404 rather than substituting neighboring epochs.",
+    "lantern": "For the three sensitivity-blocked trials, measure a preregistered recovery curve to determine the smallest SNR at which the unchanged detector reliably recovers all frozen PSF-ratio injections; do not retroactively convert that bound into a T2C pass."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-T2D-ZTF-RESIDUAL-FORENSICS",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}

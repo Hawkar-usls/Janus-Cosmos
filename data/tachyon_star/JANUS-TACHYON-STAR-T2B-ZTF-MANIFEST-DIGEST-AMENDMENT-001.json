@@ -1,0 +1,25 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2b.manifest_digest_amendment.v1",
+  "amendment_id": "JANUS-TACHYON-STAR-T2B-ZTF-MANIFEST-DIGEST-AMENDMENT-001",
+  "created_on": "2026-08-16",
+  "status": "PRE_PIXEL_INTEGRITY_REPAIR",
+  "affected_prereg": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREREG.json",
+  "affected_manifest": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv",
+  "original_prereg_commit": "c6534ec4ab45ebc9104ed0f270490f4bd624f9d1",
+  "original_declared_sha256": "86665d8468ee7cee6f30afb6cdbb074d4b80185480f6e1b1ef34cb217d5b9229",
+  "authoritative_frozen_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+  "first_t2b_attempt": {
+    "workflow_run_id": 31943599845,
+    "job_id": 95156227960,
+    "outcome": "STOPPED_AT_MANIFEST_SHA_GATE_BEFORE_UNIT_TESTS_AND_BEFORE_EXTERNAL_PIXEL_ACCESS",
+    "external_target_pixels_opened": false
+  },
+  "diagnosis": "The preregistered SHA-256 was calculated from a local serialization that was byte-different from the exact UTF-8 blob committed to GitHub, while the 41-row scientific manifest content itself remained unchanged. The Git tree already froze the exact manifest blob before any T2B pixel access.",
+  "repair_rule": "Do not rewrite or reselect any manifest row. Before any external pixel access, require git hash-object of the checked-out manifest to equal the authoritative frozen Git blob SHA-1 above, print the actual checked-out SHA-256 into the immutable GitHub Actions log, and have the scientific receipt record that actual SHA-256. A later append-only result certificate will freeze the observed SHA-256 without altering the preregistered rows.",
+  "scientific_selection_changed": false,
+  "timing_selection_changed": false,
+  "coordinate_selection_changed": false,
+  "quality_gate_changed": false,
+  "detector_threshold_changed": false,
+  "claim_ceiling": "INTEGRITY_REPAIR_ONLY__NO_SCIENTIFIC_RESULT__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY"
+}

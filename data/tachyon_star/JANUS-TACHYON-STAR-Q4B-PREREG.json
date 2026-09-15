@@ -1,0 +1,97 @@
+{
+  "schema": "janus.cosmos.tachyon_star.q4b.luci_fixed_coordinate_forced_photometry.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-Q4B-LUCI-FIXED-COORDINATE-FORCED-PHOTOMETRY",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-Q4A-RUN-001.json",
+    "result_commit": "acd214cd5c79c58e4637d28980c4e727f93926ea",
+    "workflow_run_id": 31957191345,
+    "artifact_id": 9266260023,
+    "artifact_zip_sha256": "8c98ad71dabd360afba4e5657b9a7d230bbeb3aedd49d8b3b7f02f50a7573388",
+    "geometry_manifest_sha256": "4cb21ddf893489f150447170fdc206ae56c1eede6b6adf4965a51b9773742eb9",
+    "receipt_sha256": "f87c9044da7a2408944ac2951b63970409bc98f0465356d3c9e19be5def51cdd"
+  },
+  "aura_advisory": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001.json",
+    "request_sha256": "d8ef6de8a3a0ee18cc6438452e09675bcf02b451bff7f5909c8ba27c5e475987",
+    "cards": ["MIRROR", "THRESHOLD", "CAT"],
+    "authority_delta": 0,
+    "evidence_upgrade": false
+  },
+  "scientific_question": "Does fixed-coordinate forced photometry across the exact LUCI1 Br-gamma sequence favor a persistent sky-fixed contribution, a detector-fixed persistent contribution, or leave the one-frame excess origin indeterminate?",
+  "immutable_inputs": {
+    "frames": [
+      "luci1.20220319.0114.fits.gz",
+      "luci1.20220319.0116.fits.gz",
+      "luci1.20220319.0120.fits.gz"
+    ],
+    "frame_sha256": {
+      "luci1.20220319.0114.fits.gz": "217ecc39c5d7753a1647536c91006f04b7c4abc73e3de86a8e029bd0d8e40f4a",
+      "luci1.20220319.0116.fits.gz": "251a1221646347e7415eeaa9fead6a40e5fda8c9b04a06a3bdb855924783637a",
+      "luci1.20220319.0120.fits.gz": "9e98b0cc1e08b0b1e8e16fb10d9c58609411f6deeaeb2df86dced16dde6ceeb6"
+    },
+    "geometry_source": "Q4A frozen geometry manifest only",
+    "sky_fixed_track": "UNCHANGED_FROM_Q4A",
+    "detector_fixed_track": "UNCHANGED_FROM_Q4A",
+    "detector_controls": "UNCHANGED_FROM_Q4A",
+    "replacement_epoch_allowed": false,
+    "recenter_allowed": false,
+    "control_replacement_or_removal_allowed": false
+  },
+  "forced_fit": {
+    "patch_size_px": 17,
+    "patch_center_index_rule": "round fixed subpixel x and y to nearest integer; use exactly +/-8 pixels around that integer center; Gaussian template remains centered at the original subpixel coordinate.",
+    "model": "image = amplitude * fixed circular Gaussian + b0 + bx*(x-x0) + by*(y-y0) + residual",
+    "gaussian_peak_normalization": 1.0,
+    "gaussian_fwhm_px_by_frame": {
+      "luci1.20220319.0114.fits.gz": 6.026402,
+      "luci1.20220319.0116.fits.gz": 6.0313418764,
+      "luci1.20220319.0120.fits.gz": 5.945551
+    },
+    "free_centroid": false,
+    "free_fwhm": false,
+    "fit_method": "ordinary least squares on finite patch pixels",
+    "minimum_finite_pixels": 250,
+    "fit_condition_number_max": 100000000.0,
+    "residual_sigma": "1.4826*MAD of fit residuals around their median; fallback sample standard deviation if MAD is nonpositive",
+    "amplitude_sigma": "residual_sigma * sqrt((X^T X)^-1[amplitude,amplitude])",
+    "forced_z": "amplitude / amplitude_sigma",
+    "background_only_comparison": "Also record plane-only residual SSE and Gaussian-plus-plane residual SSE; not a separate discovery criterion."
+  },
+  "tracks": {
+    "SKY_FIXED": "Use Q4A-mapped sky-track x/y in A, B, C.",
+    "DETECTOR_FIXED": "Use frozen candidate detector x/y in A, B, C.",
+    "DETECTOR_CONTROLS": "Use all 13 Q4A same-y fixed detector-control positions in A, B, C."
+  },
+  "derived_metrics": {
+    "B_fixed_excess_confirmed": "B SKY_FIXED forced_z >= 3 and amplitude > 0.",
+    "constant_flux_compatibility": "For A and C separately, abs(B_amp - X_amp)/sqrt(B_sigma^2 + X_sigma^2) <= 3.",
+    "sky_persistence_compatible": "Both A_SKY and C_SKY are constant-flux compatible with B.",
+    "detector_persistence_compatible": "Both A_DETECTOR and C_DETECTOR are constant-flux compatible with B.",
+    "B_equivalent_detectability": "For each A/C track position, B_amp divided by that epoch's forced-fit amplitude_sigma.",
+    "temporal_contrast": "amp_B - 0.5*(amp_A + amp_C)",
+    "control_temporal_contrast": "Same formula at each frozen detector-control position.",
+    "empirical_one_sided_rank_p": "(1 + number of control temporal contrasts >= target temporal contrast)/(13+1). Minimum possible p is 1/14 and cannot establish conventional significance by itself."
+  },
+  "classification": {
+    "B_FIXED_EXCESS_NOT_CONFIRMED": "B fixed forced_z < 3 or B amplitude <= 0.",
+    "EVIDENCE_FAVORS_SKY_FIXED_PERSISTENCE": "B fixed excess confirmed; sky persistence compatible; detector persistence incompatible.",
+    "EVIDENCE_FAVORS_DETECTOR_FIXED_PERSISTENCE": "B fixed excess confirmed; detector persistence compatible; sky persistence incompatible.",
+    "TRACKS_NOT_DISCRIMINATED": "B fixed excess confirmed and both persistence tracks are compatible.",
+    "ONE_FRAME_EXCESS_ORIGIN_INDETERMINATE": "B fixed excess confirmed and neither persistence track is compatible.",
+    "BLOCKED_MEASUREMENT": "Any exact frame hash, geometry binding, required target/control fit, finite-pixel, or numerical-stability gate fails."
+  },
+  "interpretation_limits": {
+    "one_frame_sky_transient": "If neither persistence track is compatible, a one-frame sky transient and a one-frame detector/cosmic-ray/background event remain competing explanations; Q4B must report INDETERMINATE unless additional artifact-specific evidence is present.",
+    "control_rank": "The 13-control empirical rank is descriptive and cannot alone establish astrophysical origin.",
+    "closed_external_replication": "ZTF/TESS non-replication contributes zero evidential weight to Q4B."
+  },
+  "not_admitted": [
+    "No tachyon, faster-than-light, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation.",
+    "No free centroid or PSF-width optimization after pixel inspection.",
+    "No extra LUCI epoch selected after seeing Q4B results.",
+    "No control removal because a control is inconvenient.",
+    "No claim that persistence failure proves detector artifact; a one-frame sky transient remains possible."
+  ],
+  "claim_ceiling": "THREE_FRAME_FIXED_COORDINATE_ORIGIN_ADJUDICATION_ONLY__NO_TACHYON_OR_FTL_OR_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

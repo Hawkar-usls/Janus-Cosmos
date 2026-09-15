@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3c.tess_residual_sensitivity_bound.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3C-TESS-RESIDUAL-SENSITIVITY-BOUND",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-T3B-TESS-RUN-001.json",
+    "result_commit": "03ed7a8b69bd811f9a0e74f9d2627b07d6f84b08",
+    "workflow_run_id": 31951674363,
+    "artifact_id": 9264860453,
+    "trial_results_sha256": "25763a6ad7db994717e0e698cc2fa1612672baf63e3f8d7b0aa61be6ace45162",
+    "qualified_null_trials_immutable": 40,
+    "candidate_trials": 0,
+    "unresolved_trials": 2
+  },
+  "aura_advisory": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json",
+    "request_sha256": "e70c13176addc8e9a80c1ac84c371fd8549bacd6fe7c2516c63b17d7671fd727",
+    "cards": ["LANTERN", "THRESHOLD", "ANCHOR"],
+    "authority_delta": 0,
+    "evidence_upgrade": false
+  },
+  "frozen_targets": ["TS-T3B-TESS-15", "TS-T3B-TESS-39"],
+  "no_new_pixel_read": true,
+  "no_parent_trial_reclassification": true,
+  "analytic_contract": {
+    "candidate_thresholds": {
+      "contrast_z_min": 8.0,
+      "b_minus_a_sigma_min": 4.0,
+      "b_minus_c_sigma_min": 4.0
+    },
+    "injection_model": "Adding x times the frozen robust sigma to scalar F_B increases contrast_z, b_minus_a_sigma and b_minus_c_sigma by exactly x because the frozen control distribution excludes the B neighborhood.",
+    "required_injected_snr_exact": "max(0, 8-raw_contrast_z, 4-raw_b_minus_a_sigma, 4-raw_b_minus_c_sigma)",
+    "integer_grid_bound": "ceil(required_injected_snr_exact)",
+    "verification": "The analytic result must be consistent with recorded T3B +10sigma failure and +12sigma success for both targets."
+  },
+  "success_semantics": {
+    "PASS_RESIDUAL_SENSITIVITY_CHARACTERIZED": "Both exact required injection SNR values are finite, consistent with the recorded injection bracket, and no T3B trial is reclassified.",
+    "BLOCKED_ANALYTIC_INCONSISTENCY": "Any target has missing/nonfinite metrics or the analytic floor contradicts the frozen injection outcomes."
+  },
+  "line_closure_rule": "After successful T3C characterization, freeze the external ZTF+TESS replication line as no preregistered isolated-B replication detected, with explicit unresolved sensitivity/archive limitations; do not continue optimizing this motif without a new independent preregistration.",
+  "claim_ceiling": "TESS_RESIDUAL_SENSITIVITY_CHARACTERIZATION_ONLY__NO_PARENT_NEGATIVE_UPGRADE__NO_NEW_PIXEL_READ__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY"
+}

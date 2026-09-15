@@ -1,0 +1,66 @@
+name: JANUS TACHYON STAR T3C TESS Residual Sensitivity Bound
+
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'experiments/luci/run_tachyon_star_t3c_tess.py'
+      - 'tests/test_tachyon_star_t3c_tess.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T3C-TESS-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json'
+      - '.github/workflows/tachyon-star-t3c-tess.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_tachyon_star_t3c_tess.py'
+      - 'tests/test_tachyon_star_t3c_tess.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-T3C-TESS-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json'
+      - '.github/workflows/tachyon-star-t3c-tess.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  bound:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retrieve and verify frozen T3B trial results without new TESS access
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p parent_t3b
+          gh run download 31951674363 -n janus-tachyon-star-t3b-tess -D parent_t3b
+          echo '25763a6ad7db994717e0e698cc2fa1612672baf63e3f8d7b0aa61be6ace45162  parent_t3b/trial_results.json' | sha256sum -c -
+          echo '9ee08092645cb8e81d67e797472b5a101c09d22caa58097cc9b2ea9c96a45e1f  parent_t3b/receipt.json' | sha256sum -c -
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-T3C-TESS-PREREG.json
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json
+      - name: Run T3C analytic unit tests
+        run: python -m unittest tests/test_tachyon_star_t3c_tess.py -v
+      - name: Compute frozen residual sensitivity bounds
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_t3c_tess
+          set +e
+          python -m experiments.luci.run_tachyon_star_t3c_tess \
+            --trial-results parent_t3b/trial_results.json \
+            --output-dir results/tachyon_star_t3c_tess
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_t3c_tess/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_t3c_tess/receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-t3c-tess
+          path: results/tachyon_star_t3c_tess/
+          if-no-files-found: error
+          compression-level: 6

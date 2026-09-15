@@ -1,0 +1,74 @@
+name: JANUS TACHYON STAR Q4C LUCI Dense Same-Y Edge Residual
+
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4c.py'
+      - 'tests/test_tachyon_star_q4c.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4C-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001.json'
+      - '.github/workflows/tachyon-star-q4c.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4c.py'
+      - 'tests/test_tachyon_star_q4c.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4C-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001.json'
+      - '.github/workflows/tachyon-star-q4c.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  residual:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify frozen Q4B evidence and Q4C prereg before dense pixel replay
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p parent_q4b
+          gh run download 31957495791 -n janus-tachyon-star-q4b -D parent_q4b
+          echo '3814c5653a529b355fcffed7153e584e6eb4e05170284ebc04298f50a4f9a64b  parent_q4b/receipt.json' | sha256sum -c -
+          echo '0d6375bb0f58f77b4aa986e1cb675faecbc0a2e47ba6ed496eb4922f8da90912  parent_q4b/measurements.json' | sha256sum -c -
+          python - <<'PY'
+          import json
+          r=json.load(open('parent_q4b/receipt.json'))
+          assert r['status'] == 'EVIDENCE_FAVORS_DETECTOR_FIXED_PERSISTENCE'
+          assert r['control_count'] == 13
+          PY
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-Q4C-PREREG.json
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001.json
+      - name: Run Q4C dense-control and sensitivity tests
+        run: python -m unittest tests/test_tachyon_star_q4c.py -v
+      - name: Execute dense same-y residual adjudication
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_q4c
+          set +e
+          python -m experiments.luci.run_tachyon_star_q4c \
+            --output-dir results/tachyon_star_q4c \
+            --cache-dir .cache/tachyon_star_q4c
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_q4c/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_q4c/receipt.json
+          test -s results/tachyon_star_q4c/measurements.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-q4c
+          path: results/tachyon_star_q4c/
+          if-no-files-found: error
+          compression-level: 6

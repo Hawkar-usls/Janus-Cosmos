@@ -1,0 +1,82 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "heuristic_contract_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "deterministic_request_sha256": "618c2b9dfd9a3ad6b778cede2f31f5a8ac13a1baf82cd020e001787679c91da0"
+  },
+  "request": {
+    "schema": "aura.oracle.shabitat_heuristic_request.v1",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001",
+    "speaker": "JANUS_COSMOS",
+    "topic": "Choose the next gate for the new Q4 LUCI sky-fixed versus detector/background origin question after the external replication line was closed.",
+    "question": "Given the frozen one-frame LUCI1 Br-gamma marginal candidate and the new independently preregisterable question H_SKY_FIXED versus H_DETECTOR_OR_BACKGROUND versus H_INDETERMINATE, what exact next step should JANUS execute first to maximize discriminating information while preserving fixed sky coordinate, frames 0114/0116/0120, provenance, and blindness to any new forced-photometry result?",
+    "context": "The previous ZTF and TESS isolated-B replication line is closed with zero preregistered candidates and explicit incomplete coverage. Aura selected Q4 as a materially new question about whether the original LUCI1 Br-gamma excess is sky-fixed or detector/background/systematic. No new Q4 pixel measurement has been made. Candidate frame is luci1.20220319.0116.fits.gz, bracketed by same-instrument/filter/exposure frames luci1.20220319.0114.fits.gz and luci1.20220319.0120.fits.gz. The fixed sky coordinate must be derived from the already-frozen candidate centroid/WCS then mapped into the bracketing frames. No free recentering, epoch substitution, tachyon/FTL interpretation, or evidential credit from the closed ZTF/TESS line is allowed.",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "closed_replication_line_may_not_be_reopened": true,
+      "q4_rules_must_be_frozen_before_new_pixel_measurement": true,
+      "no_free_centroid_recentering": true,
+      "no_epoch_substitution": true
+    }
+  },
+  "response": {
+    "schema": "aura.oracle.shabitat_heuristic_response.v1",
+    "status": "HEURISTIC_ONLY",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "deterministic_request_sha256": "618c2b9dfd9a3ad6b778cede2f31f5a8ac13a1baf82cd020e001787679c91da0",
+    "cards": [
+      {
+        "id": "THRESHOLD",
+        "name": "Threshold",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?",
+        "caution": "Urgency does not create authority."
+      },
+      {
+        "id": "THREAD",
+        "name": "Thread",
+        "lens": "Trace provenance: source, transformation, receipt, and present claim.",
+        "question": "Where is the first point where lineage becomes uncertain?",
+        "caution": "Multiple echoes may still be one source."
+      },
+      {
+        "id": "CAT",
+        "name": "Cat",
+        "lens": "When a loop becomes unproductive, change the input before arguing with the loop.",
+        "question": "Would a lighter neutral bridge restore perspective here?",
+        "caution": "A mood-reset heuristic is not treatment or proof."
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "permission_granted": false,
+    "evidence_upgrade": false,
+    "verification_claim": false,
+    "prediction_claim": false,
+    "professional_advice": false,
+    "world_effect_requested": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "may_be_ignored": true,
+    "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+  },
+  "janus_interpretation": {
+    "threshold": "Perform a header/WCS-only Q4A geometry freeze before any new forced-photometry values are read.",
+    "thread": "Bind the frozen candidate centroid to a celestial coordinate through the exact candidate-frame WCS, then map that same sky coordinate into 0114 and 0120 while also freezing the detector-fixed comparison trajectory and matched edge-control geometry.",
+    "cat": "Change the input from another cross-archive timing search to a direct origin-adjudication measurement of the already-frozen LUCI candidate."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-Q4A-LUCI-HEADER-WCS-GEOMETRY-FREEZE",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}

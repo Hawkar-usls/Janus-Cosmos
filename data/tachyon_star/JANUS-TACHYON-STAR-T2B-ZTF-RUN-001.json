@@ -1,0 +1,136 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2b.ztf_prepointed.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-PIXEL-REPLICATION-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "BLOCKED_ADMISSIBLE_INCOMPLETE",
+  "scientific_status": "ZERO_ISOLATED_B_CANDIDATES__20_OF_28_QUALITY_ADMISSIBLE_TRIALS_FULLY_QUALIFIED_NULL__8_UNRESOLVED",
+  "lineage": {
+    "t2a_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2A-RUN-001.json",
+    "prepointed_manifest": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv",
+    "prepointed_prereg": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREREG.json",
+    "prereg_commit": "c6534ec4ab45ebc9104ed0f270490f4bd624f9d1",
+    "integrity_repair_commit": "bad441aeae02b7c531e56326b01c80e2bb796c5c",
+    "fail_closed_epoch_repair_commit": "a37af6e82febf459280a54aa3659eac5a522c8ae",
+    "manifest_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+    "manifest_sha256_observed_pre_pixel": "f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb"
+  },
+  "workflow": {
+    "run_id": 31943869964,
+    "job_id": 95156875744,
+    "head_sha": "a37af6e82febf459280a54aa3659eac5a522c8ae",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 3
+  },
+  "artifact": {
+    "id": 9262775730,
+    "name": "janus-tachyon-star-t2b-ztf",
+    "zip_sha256": "718acad8643676335cc5601ed8495f6c19353b1e792c9e715d41e1021f07d48d",
+    "receipt_sha256": "a5d67f8632dd6d51f37fcf58518ffe72cf205a8d44dda339592388125c42dcaa",
+    "events_sha256": "facf9bb316693369a3c7aec8e550ed329d0d75f16530e523d30b22fbbdc7b73c"
+  },
+  "frozen_trial_accounting": {
+    "source_trials_total": 41,
+    "metadata_quality_blocked_before_pixel_replay": 13,
+    "quality_admissible_trials": 28,
+    "unique_b_exposure_clusters_quality_admissible": 23,
+    "fully_qualified_no_isolated_b_event_trials": 20,
+    "fully_qualified_no_isolated_b_event_unique_b_clusters": 16,
+    "unresolved_trials": 8,
+    "isolated_b_candidates": 0,
+    "nonisolated_source_patterns": 0
+  },
+  "b_epoch_statuses_within_quality_admissible_trials": {
+    "QUALIFIED_ABSENCE": 20,
+    "BLOCKED_FRAME_SENSITIVITY": 5,
+    "BLOCKED_PIXEL_REPLAY_ERROR": 2,
+    "BLOCKED_TARGET_EDGE": 1,
+    "SOURCE_PRESENT": 0,
+    "SOURCE_PRESENT_MASK_BLOCKED": 0
+  },
+  "strongest_timing_matches": [
+    {
+      "trial_id": "TS-T2B-ZTF-36",
+      "src_id": "tile_RA349.516_DECp28.843:3264",
+      "delta_pre_s": 247.636,
+      "delta_post_s": 432.973,
+      "classification": "NO_ISOLATED_B_EVENT",
+      "a": "QUALIFIED_ABSENCE",
+      "b": "QUALIFIED_ABSENCE",
+      "c": "QUALIFIED_ABSENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-31",
+      "src_id": "tile_RA264.754_DECp26.740:2753",
+      "delta_pre_s": 227.606,
+      "delta_post_s": 420.852,
+      "classification": "NO_ISOLATED_B_EVENT",
+      "a": "QUALIFIED_ABSENCE",
+      "b": "QUALIFIED_ABSENCE",
+      "c": "QUALIFIED_ABSENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-30",
+      "src_id": "tile_RA218.700_DECp2.573:1103",
+      "delta_pre_s": 245.794,
+      "delta_post_s": 435.522,
+      "classification": "NO_ISOLATED_B_EVENT",
+      "a": "QUALIFIED_ABSENCE",
+      "b": "QUALIFIED_ABSENCE",
+      "c": "QUALIFIED_ABSENCE"
+    }
+  ],
+  "unresolved_trials": [
+    {
+      "trial_id": "TS-T2B-ZTF-03",
+      "src_id": "tile_RA124.680_DECp26.727:572",
+      "reason": "A_B_C_BLOCKED_TARGET_EDGE_IN_180_ARCSEC_CUTOUT"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-09",
+      "src_id": "tile_RA171.876_DECp42.079:866",
+      "reason": "A_B_C_LUCI_R1_CLEAN_BACKGROUND_PLACEMENT_FAIL_CLOSED"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-10",
+      "src_id": "tile_RA174.051_DECp31.978:659",
+      "reason": "A_B_C_INSUFFICIENT_NATIVE_PSF_REFERENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-16",
+      "src_id": "tile_RA188.616_DECp45.284:633",
+      "reason": "B_SCIENCE_CUTOUT_HTTP_404_WHILE_A_AND_C_WERE_QUALIFIED_ABSENCES"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-17",
+      "src_id": "tile_RA193.420_DECp31.903:1206",
+      "reason": "A_B_C_INSUFFICIENT_NATIVE_PSF_REFERENCE"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-27",
+      "src_id": "tile_RA214.811_DECp53.168:1436",
+      "reason": "B_LUCI_R1_CLEAN_BACKGROUND_PLACEMENT_35_OF_36_FAIL_CLOSED_WHILE_A_AND_C_WERE_QUALIFIED_ABSENCES"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-39",
+      "src_id": "tile_RA41.145_DECp27.430:1698",
+      "reason": "A_AND_B_SCIENCE_CUTOUT_HTTP_404_AND_C_TARGET_MASK_BLOCKED"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-40",
+      "src_id": "tile_RA65.091_DECp15.163:1317",
+      "reason": "A_B_C_INSUFFICIENT_NATIVE_PSF_REFERENCE"
+    }
+  ],
+  "admitted_claim": "In the preregistered non-nuclear ZTF prepointed replication, no isolated B event was detected in any of the 28 metadata-quality-admissible source trials. Twenty trials, spanning 16 unique B-exposure clusters, were fully sensitivity-qualified and showed A absent, B absent and C absent. Eight trials remain unresolved under the frozen gates and are not counted as negative. The three closest timing matches to the original LUCI motif all produced fully qualified A/B/C absences.",
+  "not_admitted": [
+    "An all-28 negative result.",
+    "A global rejection of short-lived optical transients.",
+    "Identification or exclusion of a physical tachyon particle.",
+    "Faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "next_gate": {
+    "name": "JANUS-TACHYON-STAR-T2C-ZTF-NATIVE-SENSITIVITY-RECOVERY",
+    "goal": "Resolve the eight frozen unresolved ZTF trials using a preregistered ZTF-native PSF/sensitivity procedure and product-path audit without changing coordinates, A/B/C times, metadata quality status, or the twenty frozen qualified null trials."
+  },
+  "claim_ceiling": "PREPOINTED_ZTF_ISOLATED_TRANSIENT_REPLICATION_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

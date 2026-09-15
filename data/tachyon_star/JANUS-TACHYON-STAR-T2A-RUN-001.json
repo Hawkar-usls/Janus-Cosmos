@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2a.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2A-EXTERNAL-METADATA-DISCOVERY-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "PASS_METADATA_COMPLETE",
+  "scientific_status": "EXTERNAL_NON_NUCLEAR_CORPUS_DISCOVERY_COMPLETE__TARGET_PIXELS_UNOPENED",
+  "source_universe": {
+    "sources": 42,
+    "sha256": "94dee39740c5a2c402832e8d6b1c6681521331fe11cee630402b95e873a0adcb",
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-T2-EXTERNAL-SOURCE-UNIVERSE.csv"
+  },
+  "tess": {
+    "coverage_rows": 170,
+    "sources_with_coverage": 42,
+    "sector_labels_unique": 49
+  },
+  "ztf": {
+    "metadata_rows": 89358,
+    "sources_with_metadata": 42,
+    "eligible_abc_triples": 6530,
+    "sources_with_eligible_abc_triples": 41,
+    "primary_sequences": 41,
+    "source_without_eligible_triple": "tile_RA122.762_DECp56.240:1372"
+  },
+  "timing_selection": {
+    "training_pre_seconds": 232.5827,
+    "training_post_seconds": 432.2595,
+    "eligible_gap_range_seconds": [30.0, 900.0],
+    "selection_uses_metadata_only": true
+  },
+  "transport_history": {
+    "r1_artifact_snapshot_retained_for_t2b_selection": {
+      "workflow_run_id": 31921427302,
+      "job_id": 95101776657,
+      "artifact_id": 9256495662,
+      "zip_sha256": "6a7a83fcaa2ccb12e2438456eaaca7a7f13f4918ab930d2012f49c2a3023c2a6",
+      "outcome": "SERIALIZATION_FAILURE_AFTER_ALL_RAW_METADATA_RESPONSES_SAVED",
+      "external_target_pixels_opened": false
+    },
+    "r2_canonical": {
+      "workflow_run_id": 31943294672,
+      "job_id": 95155451723,
+      "head_sha": "e5b9437458e97599af01009afaf3c5207270f9f1",
+      "github_actions_conclusion": "success",
+      "artifact_id": 9262634535,
+      "artifact_name": "janus-tachyon-star-t2a-metadata",
+      "artifact_zip_sha256": "5fd0619236436d9be04e8809bcb057606ee662490e5a5f97e3f67c40f0e2732e",
+      "raw_manifest_sha256": "f6496356f56ca746613b1d99d1588a5c9ee63b1fa6d54de5b3cc9b603985ff59",
+      "failures": 0
+    }
+  },
+  "admitted_claim": "The frozen 42-coordinate Palomar/LUCI source universe has complete TESS sector metadata coverage and complete ZTF science-metadata responses in T2A. Under the preregistered metadata-only timing filter, ZTF contains 6530 eligible A-B-C sequences across 41 of 42 sources. This establishes an external non-nuclear corpus on which prepointed pixel tests can be preregistered; it is not a transient detection.",
+  "not_admitted": [
+    "No target-pixel signal was searched or detected by T2A.",
+    "TESS coverage is not evidence of a transient.",
+    "ZTF timing compatibility is not evidence of a transient.",
+    "No physical tachyon, faster-than-light propagation, retrocausality, UAP origin, artificial origin, ETI, or nuclear causality is established."
+  ],
+  "external_target_pixels_opened": false,
+  "next_gate": "JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-PIXEL-REPLICATION",
+  "claim_ceiling": "EXTERNAL_ARCHIVE_METADATA_DISCOVERY_ONLY__NO_TRANSIENT_DETECTION__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY__NO_NUCLEAR_CAUSALITY"
+}

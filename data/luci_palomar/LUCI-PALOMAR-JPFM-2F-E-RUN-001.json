@@ -1,0 +1,114 @@
+{
+  "admitted_claim": "All 443 exposure-admissible metadata-WCS pairs were confirmed by exact FITS WCS. The HDU-binding self-audit passed: the exact WCS solution and pixel analysis use HDU 0 with matching 2048x2048 dimensions for every pixel-replayed representative. Among 103 preregistered temporal representative pairs spanning 42 sources, no R1-compatible near-IR point-source counterpart was detected. Ninety-two pair-level no-counterpart results passed both the overlap-frame R1 gate and local coordinate injection sensitivity; 10 pairs remain blocked by local sensitivity and 1 pair is blocked by the overlap-frame R1 gate. At source level, 39/42 sources have at least one sensitivity-qualified no-counterpart representative, while 3/42 remain unresolved.",
+  "artifact": {
+    "events_sha256": "28e3c718879c385967172abc82494a0208b18b52ab43350e0dd228f747ec0a4a",
+    "id": 9248259268,
+    "name": "luci-palomar-jpfm-2f-e",
+    "receipt_sha256": "1aad9b4e87d7ab31f3c429ac20322dce11626d1479babbf88006840628603a9c",
+    "zip_sha256": "87ce38feb728b5cad8824588ff9293431649382847cc59363d4927781e3cf657"
+  },
+  "branch": "research/luci-only-v1",
+  "claim_ceiling": "REPRESENTATIVE_EXACT_OVERLAP_NEAR_IR_COUNTERPART_TEST_ONLY__NOT_FULL_ARCHIVE_PHOTOMETRIC_COMPLETENESS__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY",
+  "date_utc": "2026-08-15",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-E-RUN-001",
+  "frozen_exact_fits_wcs": {
+    "pair_count": 443,
+    "path": "results/luci_palomar_2f_e/frozen_exact_fits_wcs_pairs.csv",
+    "sha256": "53cb2d94566eabb35b431f027d5958362f0e3fcd0640efb61593eb06c0068c22",
+    "unique_files": 403,
+    "unique_sources": 42
+  },
+  "frozen_exposure_admissible_set": {
+    "pair_count": 443,
+    "path": "results/luci_palomar_2f_e/frozen_exposure_admissible_pairs.csv",
+    "rule": "exclude any archive filters string containing blind or PV lens, case-insensitive",
+    "sha256": "37f15f6a5b4537d27f16e65730e851e2f57d5533737557f6f0c3379e3530793c",
+    "unique_files": 403,
+    "unique_sources": 42
+  },
+  "frozen_temporal_representatives": {
+    "pair_count": 103,
+    "path": "results/luci_palomar_2f_e/frozen_temporal_representatives.csv",
+    "rule": "per exact-overlap source: prefer standard broad-band archive configurations matching clear z/J/H/K/Ks when available; otherwise use any exposure-admissible exact overlap; select deterministic earliest, median and latest unique files",
+    "selection_before_pixel_access": true,
+    "sha256": "b5d81da2ddb4a0bf21370184641b1616693af300458b00117494b5f84f4df52b",
+    "unique_files": 92,
+    "unique_sources": 42
+  },
+  "hdu_binding_self_audit": {
+    "admission": "The specific feared WCS-HDU versus image-HDU mismatch did not occur in RUN-001.",
+    "exact_dimension_distribution": {
+      "2048x2048": 443
+    },
+    "exact_hdu_distribution": {
+      "0": 443
+    },
+    "exact_pair_count": 443,
+    "hdu_mismatch_count": 0,
+    "pixel_native_shape_distribution": {
+      "2048x2048": 103
+    },
+    "pixel_replayed_pair_count": 103,
+    "pixel_selected_hdu_distribution": {
+      "0": 103
+    },
+    "scope": "all 443 exact-WCS pairs for WCS HDU/dimensions and all 103 pixel-replayed representative pairs for WCS-to-image HDU/dimension binding",
+    "shape_mismatch_count": 0,
+    "status": "PASS"
+  },
+  "next_gate": {
+    "goal": "Preregister a follow-up restricted to the frozen blocked source/pair set, using additional exact-overlap exposures and/or sensitivity-preserving stacking without changing the admitted 2F-E results, to resolve the 3 fully blocked sources and characterize the 5 mixed sources.",
+    "name": "LUCI-PALOMAR-JPFM-2F-F-UNRESOLVED-SENSITIVITY-RECOVERY"
+  },
+  "not_admitted": [
+    "RUN-001 is not a global scientific PASS; the preregistered runner returned exit code 3 and status BLOCKED because one representative frame failed the overlap-frame R1 gate.",
+    "The 10 local-sensitivity-blocked pairs are not evidence of absence.",
+    "The 3 sources with all selected representatives blocked remain unresolved.",
+    "This representative test is not a full archive photometric-completeness analysis.",
+    "No anomaly, UAP-origin, artificial-origin, ETI, or causal claim is admitted."
+  ],
+  "parent": {
+    "artifact_id": 9247843315,
+    "artifact_zip_sha256": "1240a600dfb0189243dfb3188ab53dcc8ad6f7b270236c56756b49c2e4fc6184",
+    "metadata_wcs_sha256": "aa57e64deca11bb2afd09364fa8b72837e92fc3c2187357c5041b273023754c6",
+    "workflow_run_id": 31888129868
+  },
+  "pixel_outcome": {
+    "counterpart_present_pair_count": 0,
+    "local_sensitivity_block_pair_count": 10,
+    "overlap_frame_r1_gate_fail_pair_count": 1,
+    "qualified_no_counterpart_pair_count": 92,
+    "representative_pair_count": 103,
+    "source_level": {
+      "all_representatives_blocked": 3,
+      "all_representatives_qualified_absence": 34,
+      "mixed_qualified_absence_and_blocked": 5,
+      "mixed_source_ids": [
+        "tile_RA188.616_DECp45.284:633",
+        "tile_RA264.754_DECp26.740:2753",
+        "tile_RA307.409_DECp40.547:701",
+        "tile_RA41.145_DECp27.430:1698",
+        "tile_RA65.091_DECp15.163:1317"
+      ],
+      "sources_with_at_least_one_qualified_no_counterpart_representative": 39,
+      "unresolved_all_representatives_blocked_source_ids": [
+        "tile_RA122.762_DECp56.240:1372",
+        "tile_RA160.223_DECp32.041:1277",
+        "tile_RA217.768_DECp44.372:762"
+      ]
+    },
+    "unique_files": 92,
+    "unique_sources": 42
+  },
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_e.result.v1",
+  "scientific_status": "HDU_BINDING_AUDIT_PASS__PAIR_LEVEL_QUALIFIED_ABSENCES_EXIST__GLOBAL_2F_E_REMAINS_BLOCKED",
+  "status": "BLOCKED",
+  "workflow": {
+    "github_actions_conclusion": "success",
+    "head_sha": "d8e838191f556bbc21ffccb0cc7021bf1062224c",
+    "job_id": 95021627157,
+    "run_id": 31888701410,
+    "scientific_runner_exit_code": 3,
+    "transport_semantics": "GitHub Actions job intentionally preserves and uploads scientific artifacts even when the scientific runner returns nonzero; workflow success is not scientific PASS."
+  }
+}

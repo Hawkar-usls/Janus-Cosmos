@@ -1,0 +1,58 @@
+name: JANUS TACHYON STAR Q4A LUCI Header WCS Geometry Freeze
+
+on:
+  push:
+    branches: [research/luci-only-v1]
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4a.py'
+      - 'tests/test_tachyon_star_q4a.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4A-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001.json'
+      - '.github/workflows/tachyon-star-q4a.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_tachyon_star_q4a.py'
+      - 'tests/test_tachyon_star_q4a.py'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-Q4A-PREREG.json'
+      - 'data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001.json'
+      - '.github/workflows/tachyon-star-q4a.yml'
+  workflow_dispatch:
+
+jobs:
+  geometry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify Q4A prereg and Aura advisory before any LUCI retrieval
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-Q4A-PREREG.json
+          test -s data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4-DIRECTION-001.json
+      - name: Run Q4A header-only firewall tests
+        run: python -m unittest tests/test_tachyon_star_q4a.py -v
+      - name: Freeze exact LUCI WCS geometry without image-pixel dereference
+        shell: bash
+        run: |
+          mkdir -p results/tachyon_star_q4a
+          set +e
+          python -m experiments.luci.run_tachyon_star_q4a \
+            --output-dir results/tachyon_star_q4a \
+            --cache-dir .cache/tachyon_star_q4a
+          rc=$?
+          set -e
+          echo "$rc" > results/tachyon_star_q4a/scientific_runner_exit_code.txt
+          test -s results/tachyon_star_q4a/receipt.json
+          test -s results/tachyon_star_q4a/q4a_geometry_manifest.json || test "$rc" -ne 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-tachyon-star-q4a
+          path: results/tachyon_star_q4a/
+          if-no-files-found: error
+          compression-level: 6

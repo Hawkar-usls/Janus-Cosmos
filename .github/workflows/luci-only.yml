@@ -1,0 +1,102 @@
+name: LUCI-only infrared branch
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+  pull_request:
+    paths:
+      - 'janus_cosmos/luci.py'
+      - 'janus_cosmos/luci_pipeline.py'
+      - 'experiments/luci/**'
+      - 'tests/test_luci_only.py'
+      - '.github/workflows/luci-only.yml'
+  workflow_dispatch:
+    inputs:
+      run_live_manifest:
+        description: 'Build a broader live LUCI manifest from the official LBT TAP archive'
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  unit-and-binding-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt pytest
+      - name: Compile
+        run: python -m py_compile janus_cosmos/*.py experiments/luci/*.py
+      - name: Test canonical plus LUCI isolation
+        run: python -m pytest -q
+
+  official-archive-tap-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Query official LBT TAP schema
+        run: python experiments/luci/build_luci_archive_manifest.py --metadata-only
+      - name: Inspect LUCI/LBT archive relations and sample rows
+        run: python experiments/luci/inspect_lbt_archive.py
+
+  live-luci-full-null-gate:
+    needs: [unit-and-binding-tests, official-archive-tap-preflight]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Build deterministic J+Ks LUCI2 manifest
+        run: >-
+          python experiments/luci/build_luci_archive_manifest.py
+          --target 'HIP 65599'
+          --filters J,Ks
+          --limit 2000
+          --max-targets 1
+          --output data/runtime/luci/luci_full_manifest.json
+      - name: Run 1024-null JANUS gate against real LUCI J+Ks FITS
+        run: >-
+          python -m janus_cosmos.luci_pipeline
+          --manifest data/runtime/luci/luci_full_manifest.json
+          --output-dir results/luci_real_fits_full
+          --cache-dir .cache/janus_cosmos_luci
+          --nulls 1024
+          --seeds 20260815,20260816,20260817,20260818
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-real-fits-full-1024
+          path: |
+            data/runtime/luci/luci_full_manifest.json
+            results/luci_real_fits_full/
+          if-no-files-found: warn
+
+  live-luci-manifest:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_live_manifest }}
+    needs: [unit-and-binding-tests, official-archive-tap-preflight]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Build public LUCI multi-band manifest
+        run: python experiments/luci/build_luci_archive_manifest.py --limit 5000 --max-targets 5
+      - uses: actions/upload-artifact@v4
+        with:
+          name: luci-archive-manifest
+          path: data/runtime/luci/luci_archive_manifest.json
