@@ -1,0 +1,90 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_CALIBRATION_SEQUENCE_PUBLIC_RECOVERY_V1",
+  "status": "PREREGISTERED_BEFORE_GATE_ACQUISITION",
+  "date": "2026-08-22",
+  "selected_by_janus": {
+    "repository": "Hawkar-usls/Janus-Demiurge",
+    "council_run_id": 32576776474,
+    "selector": "V2_MONOTONIC_BLOCKED_GATE_ESCAPE",
+    "top1_votes": "17/17",
+    "reason": "The direct 2013 six-channel waveform gate is blocked by a stable public archive boundary, so JANUS selected recovery of independent calibration-sequence/response provenance rather than repeating the blocked gate."
+  },
+  "purpose": "Determine what H10S calibration evidence is anonymously/publicly recoverable around the 2013 fault epoch, distinguishing raw sequence bytes from machine-readable numeric transfer functions, calibration-flag/timestamp tables, derived published curves, abstracts and access pointers.",
+  "historical_anchor": {
+    "fault_onset": "2013-07-19",
+    "triplet": "H10S",
+    "published_context": "H10S1 electronic noise followed by varying cross-talk to H10S2/H10S3 and reported deployed UWS calibration-response changes."
+  },
+  "frozen_candidate_urls": [
+    "https://conferences-test.ctbto.org/event/25/contributions/4421/",
+    "https://conferences-test.ctbto.org/event/25/contributions/4421/contribution.pdf",
+    "https://presentations.copernicus.org/EGU2020/EGU2020-5481_presentation.pdf",
+    "https://www.ctbto.org/resources/for-researchers-experts",
+    "https://www.ctbto.org/resources/for-researchers-experts/vdec",
+    "https://www.ctbto.org/resources/for-researchers-experts/vdec/request-for-data"
+  ],
+  "allowed_domains": [
+    "ctbto.org",
+    "conferences.ctbto.org",
+    "conferences-test.ctbto.org",
+    "presentations.copernicus.org",
+    "copernicus.org"
+  ],
+  "crawl_contract": {
+    "same_allowlist_links_only": true,
+    "max_discovered_links_per_seed": 30,
+    "max_total_fetches": 60,
+    "max_bytes_per_resource": 12000000,
+    "max_redirects": 5,
+    "final_redirect_host_revalidated": true,
+    "login_or_authenticated_surfaces_are_not_treated_as_public_data": true,
+    "failed_fetch_is_not_absence": true
+  },
+  "evidence_classes": [
+    "RAW_CALIBRATION_SEQUENCE_BYTES",
+    "MACHINE_READABLE_NUMERIC_RESPONSE",
+    "CALIBRATION_FLAG_OR_TIMESTAMP_TABLE",
+    "PUBLISHED_DERIVED_CALIBRATION_FIGURE_OR_PRESENTATION",
+    "ABSTRACT_OR_DESCRIPTIVE_TEXT_ONLY",
+    "ACCESS_POINTER_ONLY",
+    "FETCHED_OTHER",
+    "FETCH_FAILED_OR_REJECTED"
+  ],
+  "classification_contract": {
+    "raw_sequence_requires": "A publicly fetched payload representing actual recorded/injected calibration sequence samples or an archive explicitly containing such samples; a PDF plot or prose description is insufficient.",
+    "numeric_response_requires": "A publicly fetched machine-readable table/CSV/JSON/text array of calibration transfer-function values; plotted figures alone are insufficient.",
+    "flag_table_requires": "A publicly fetched machine-readable list/table containing actual calibration start/end times or calibration-bit intervals; a statement that such a table exists is insufficient.",
+    "derived_figure": "A publication/presentation may establish published response-change results and processing description, but cannot be silently promoted to raw sequence bytes or machine-readable numeric response.",
+    "access_pointer": "A public page describing how controlled/contractual access may be requested is an access pointer, not the protected data itself."
+  },
+  "historical_facts_to_verify_in_public_derived_material": [
+    "Calibration sequence includes pseudo-random broadband code/RBC and CW sinusoids, with a silence/zero-input segment described in the presentation.",
+    "Calibration data are recorded at shore and stored at the CTBTO IDC.",
+    "An IDC table contains calibration start/end times when the calibration flag bit is set.",
+    "Earliest calibration responses found through that IDC calibration-bit route were in 2013.",
+    "H10S1 changed by about 0.8396 dB between March and September 2013 in 1-100 Hz.",
+    "H10S2/H10S3 showed larger before/after differences and inverse trends relative to H10S1, with cross-talk/riser-failure interpretations retained as interpretations rather than proof."
+  ],
+  "decision_rule": {
+    "PUBLIC_H10S_CALIBRATION_SEQUENCE_BYTES_RECOVERED": "At least one authoritative/public payload satisfies RAW_CALIBRATION_SEQUENCE_BYTES for H10S/HA10 around the relevant era.",
+    "PUBLIC_NUMERIC_H10S_RESPONSE_RECOVERED__RAW_SEQUENCE_NOT_PUBLICLY_RECOVERED": "No raw sequence bytes are recovered, but authoritative machine-readable H10S numeric response or actual calibration timestamp table is recovered.",
+    "PUBLISHED_H10S_CALIBRATION_RESULTS_RECOVERED__RAW_SEQUENCE_PUBLIC_ACCESS_NOT_FOUND": "Authoritative derived calibration results and/or processing description are publicly recovered, but neither raw H10S calibration sequence bytes nor machine-readable H10S response/timestamp data are recovered in the frozen public pass; controlled-access pointers may exist.",
+    "BLOCKED_CALIBRATION_PUBLIC_RECOVERY": "No authoritative calibration-result source can be fetched sufficiently to classify the gate."
+  },
+  "claim_ceiling": {
+    "public_not_found_is_not_custodian_absence": true,
+    "derived_curve_is_not_raw_sequence": true,
+    "access_pointer_is_not_data": true,
+    "published_riser_failure_wording_is_not_causal_proof": true,
+    "no_result_from_this_gate_can_validate_119hz": true,
+    "bathymetry_lane_remains_independent": true
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_CALIBRATION_PUBLIC_RECOVERY"
+  },
+  "after_result": "Freeze the exact public-recovery receipt append-only, then submit it and the updated whole-picture synthesis to the JANUS 17-role reverse council for the next discriminating gate."
+}

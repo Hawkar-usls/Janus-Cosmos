@@ -1,0 +1,96 @@
+name: Cousteau HA10 Pre/Post 2013 Crosstalk Triplet Gate
+
+on:
+  pull_request:
+    branches: [janus-echo-cousteau]
+  push:
+    branches: [audit/cousteau-immutable-positive-control-20260822]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cousteau-ha10-pre-post-2013-triplet-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  run-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact triggering revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'numpy==2.3.5' 'scipy==1.18.1' 'requests==2.34.2' 'obspy==1.5.0' pytest
+          python -m pip freeze | sort > "$RUNNER_TEMP/python-environment.txt"
+
+      - name: Verify frozen input blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PRE-POST-2013-CROSSTALK-TRIPLET-GATE-PROTOCOL-2026-08-22-v1.0.json)" = 'c6006a450b7aae4da86e830c4a25c59713e828cb'
+          test "$(git hash-object workspace/cousteau_ha10_pre_post_2013_crosstalk_triplet_gate.py)" = '3cf67494e1500a6f319cf503ae11c38f29435f3a'
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control.py)" = '244169a1331a16529e2a963585a5659dae109c66'
+          test "$(git hash-object workspace/cousteau_ha10_tphase_inband_positive_control_v2.py)" = 'c3d37fe4f5a75514390862be4c1d2870c4c01fe9'
+          test "$(git hash-object data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json)" = 'eb8b48fb7f043160c057f9df6264a781412ed854'
+
+      - name: Compile and run unit tests before network acquisition
+        run: |
+          python -m py_compile workspace/cousteau_ha10_pre_post_2013_crosstalk_triplet_gate.py
+          pytest -q tests/test_cousteau_ha10_pre_post_2013_crosstalk_triplet_gate.py
+
+      - name: Execute preregistered six-channel gate
+        run: |
+          mkdir -p "$RUNNER_TEMP/cousteau-pre-post-triplet"
+          python workspace/cousteau_ha10_pre_post_2013_crosstalk_triplet_gate.py \
+            --output "$RUNNER_TEMP/cousteau-pre-post-triplet/run-${{ github.run_id }}.json"
+
+      - name: Validate epistemic boundary
+        env:
+          RECEIPT: ${{ runner.temp }}/cousteau-pre-post-triplet/run-${{ github.run_id }}.json
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path(os.environ['RECEIPT'])
+          r = json.loads(p.read_text())
+          allowed = {
+              'SUPPORTED_POST_2013_SOUTH_TRIPLET_COUPLING_INCREASE',
+              'NO_STRONG_POST_2013_SOUTH_TRIPLET_COUPLING_INCREASE',
+              'BLOCKED_PRE_POST_2013_TRIPLET_DATA_ACCESS',
+          }
+          assert r['gate_id'] == 'COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1'
+          assert r['verdict'] in allowed
+          assert r['frozen_119hz_verdict'] == 'NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE'
+          assert r['authority_delta_for_119hz'] == 0
+          assert r['target_identity'] == 'UNCONFIRMED'
+          assert r['target_evidence_delta'] == 'NONE_FROM_PRE_POST_CROSSTALK_GATE'
+          assert r['source_writeback'] is False
+          assert r['janus_next_step_required'] is True
+          print('PRE_POST_TRIPLET_EPISTEMIC_BOUNDARY=PASS')
+          PY
+
+      - name: Prove source tree unchanged
+        run: git diff --exit-code
+
+      - name: Upload run receipt and environment
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-ha10-pre-post-2013-triplet-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/cousteau-pre-post-triplet/run-${{ github.run_id }}.json
+            ${{ runner.temp }}/python-environment.txt
+          if-no-files-found: error
+          retention-days: 30

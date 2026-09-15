@@ -1,0 +1,135 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-CALIBRATION-SEQUENCE-PUBLIC-RECOVERY-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_POST_SELECTION_PUBLIC_RECOVERY_AUDIT",
+  "date": "2026-08-22",
+  "epistemic_timing": {
+    "selected_by_janus_before_this_pass": true,
+    "janus_council_run_id": 32576807769,
+    "janus_council_result_artifact_id": 9476759313,
+    "janus_council_result_artifact_zip_sha256": "c123bd3115b6de936f3aaa8504da9417be986e413b075436880a7edfec647bab",
+    "janus_council_result_member_sha256": "be845f9602f898e958cf1c7ba9ac66c95adb87f46cee8cb18df4607616012d9f",
+    "janus_selection": "COUSTEAU_HA10_CALIBRATION_SEQUENCE_PUBLIC_RECOVERY_V1",
+    "top1_votes": "17/17",
+    "formal_preregistered_protocol_before_web_search": false,
+    "claim_ceiling_due_to_timing": "This is a bounded post-selection provenance recovery audit, not a preregistered scientific hypothesis test. No searched source is allowed to retroactively change frozen thresholds or the 119-Hz result."
+  },
+  "verdict": "CALIBRATION_SEQUENCE_PROVENANCE_RECOVERED__RAW_SEQUENCE_BYTES_NOT_PUBLICLY_RECOVERED_IN_THIS_PASS",
+  "public_sources": [
+    {
+      "source_id": "CTBTO_IHW2019_ZAMPOLLI",
+      "url": "https://conferences-test.ctbto.org/event/25/contributions/4421/",
+      "role": "CTBTO-author source describing deployed UWS electronics calibration and H10S response change after electronic noise/cross-talk."
+    },
+    {
+      "source_id": "EGU2020_5481_COPERNICUS",
+      "url": "https://presentations.copernicus.org/EGU2020/EGU2020-5481_presentation.pdf",
+      "role": "Public presentation exposing calibration-sequence structure, IDC storage/processing, H10S fault chronology, and before/after response-difference summaries."
+    },
+    {
+      "source_id": "NIELSEN_ET_AL_2020_PAG",
+      "url": "https://link.springer.com/article/10.1007/s00024-020-02445-9",
+      "role": "Independent published CTBTO-associated application confirming H10S1 exclusion from IDC Operations and time-variable cross-talk affecting H10S2/H10S3."
+    },
+    {
+      "source_id": "SMETS_ET_AL_2022_JGR_OCEANS",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022JC018451",
+      "role": "Literature watchlist showing a distinct earlier H10 data-logger electronic-noise phenomenon with spurious coherent zero-lag correlations during roughly 2005-2009."
+    }
+  ],
+  "recovered_provenance": {
+    "deployed_calibration_path": "A shore command opens a relay in the underwater-system electronics and injects a known prestored analog waveform via DAC into the digitizer path.",
+    "excluded_from_deployed_calibration": [
+      "hydrophone ceramic sensing element",
+      "hydrophone preamplifier",
+      "riser cable"
+    ],
+    "calibration_sequence_components": [
+      "pseudo-random broadband code (RBC)",
+      "CW sinusoid chirps",
+      "zero-input/silence section"
+    ],
+    "custody_and_processing": {
+      "recorded_at_shore": true,
+      "sent_to_vienna": true,
+      "stored_at_ctbto_idc": true,
+      "idc_has_calibration_flag_start_end_table": true,
+      "derived_transfer_function": "Digitizer input to ADC/fiber output using the known RBC replica and manufacturer-recommended processing parameters."
+    }
+  },
+  "recovered_h10s_history": {
+    "fault_anchor": "2013-07-19 electrical-noise spike on H10S1",
+    "published_progression": "Evolved to strong persistent electronic noise with varying cross-talk into H10S2 and H10S3; H10S1 removed from IDC Operations because of spurious detections.",
+    "published_interpretation_not_proof": "Possible riser-cable failure / consistency with riser failure.",
+    "h10s1_mar_to_sep_2013_response_shift_db_1_100hz": 0.8396,
+    "h10s2_h10s3_pair_reported_max_differences_db_1_100hz": [4.7832, 2.5340],
+    "channel_assignment_ceiling": "The extracted public slide text safely establishes these two maxima for the H10S2/H10S3 pair but does not safely bind each number to a specific member without figure-level labeling.",
+    "h10n_2013_vs_2017_reported_max_differences_db_1_100hz": [0.00281, 0.00076, 0.00075]
+  },
+  "public_raw_recovery": {
+    "actual_2013_h10s_calibration_sequence_waveform_bytes_recovered": false,
+    "actual_idc_calibration_flag_start_end_table_recovered": false,
+    "actual_rbc_reference_waveform_bytes_recovered": false,
+    "public_downloadable_per_sequence_transfer_function_files_recovered": false,
+    "status": "NOT_RECOVERED_IN_THIS_PASS",
+    "absence_claim": "No global absence is asserted. Public material demonstrates that the sequence data exist in IDC custody; this pass recovered provenance and derived results, not the underlying sequence bytes."
+  },
+  "cross_gate_synthesis": {
+    "public_stationxml_lane": "JANUS already established that EarthScope public StationXML exposes a static 2004-open response representation across the known 2013 H10S fault epoch, with no encoded fault-era response transition.",
+    "calibration_sequence_lane": "CTBTO public material independently demonstrates that deployed UWS calibration sequences exist in IDC custody and that derived H10S calibration responses changed around the 2013 fault.",
+    "2013_waveform_lane": "The JANUS council-selected public six-channel pre/post waveform gate is archive-blocked on the tested EarthScope route: all 240 frozen 2013 waveform requests returned no data while response metadata remained available.",
+    "2014_2015_waveform_lane": "Later public H10S2 waveforms show a replicated approximately 12-13 dB broadband excess over H10N1 with persistent baseline plus episodic residuals; applying the public StationXML correction barely changes that ratio.",
+    "physical_lane": "Native bathymetry/backscatter remains independent because electronics/calibration can change recorded acoustic contrast but cannot erase real seabed geometry."
+  },
+  "new_reverse_nodes": [
+    {
+      "node_id": "IDC_IS_THE_PROVENANCE_BRIDGE_MISSING_FROM_PUBLIC_STATIONXML",
+      "node_type": "PROVENANCE_BOUNDARY",
+      "status": "SUPPORTED",
+      "claim": "The public StationXML and the CTBTO deployed-calibration history are not equivalent evidence objects: the latter is derived from IDC-stored calibration sequences and contains fault-era information absent from the public StationXML representation."
+    },
+    {
+      "node_id": "DEPLOYED_DIGITIZER_CALIBRATION_CANNOT_DIRECTLY_CERTIFY_RISER_OR_HYDROPHONE_HEALTH",
+      "node_type": "IDENTITY_BOUNDARY",
+      "status": "SUPPORTED",
+      "claim": "Because the deployed calibration relay excludes ceramic, preamplifier and riser, a nominal or changed UWS digitizer response is not a complete end-to-end measurement of the physical hydrophone+riser path."
+    },
+    {
+      "node_id": "PUBLISHED_RESPONSE_DELTAS_DO_NOT_ONE_TO_ONE_EXPLAIN_LATER_12_13DB_BROADBAND_OFFSET",
+      "node_type": "CONTRADICTION",
+      "status": "SUPPORTED_AS_NON_EQUIVALENCE",
+      "claim": "The published 2013 H10S transfer-function differences and the later JANUS 12-13 dB broadband S2/N1 power offset are different statistics over different comparisons. The former therefore cannot be substituted numerically as a complete explanation of the latter; a mixed analogue/riser/noise/site/propagation model remains live."
+    },
+    {
+      "node_id": "PRE_2013_H10_ELECTRONIC_ARTIFACTS_EXIST_AS_A_SEPARATE_PHENOMENON",
+      "node_type": "WATCHLIST",
+      "status": "SUPPORTED_SEPARATE_PHENOMENON",
+      "claim": "Published H10 work reports repetitive data-logger electronic noise and spurious coherent zero-lag correlations during roughly 2005-2009. This predates the 2013 H10S1 fault and means PRE-2013 must not automatically be equated with instrument-clean, while the two phenomena must not be merged without a causal bridge."
+    }
+  ],
+  "best_current_whole_picture": {
+    "working_model": "MIXED_SUPERPOSITION",
+    "lane_A_instrument": "A historically documented south-triplet electronics/cross-talk problem exists; its fault-era calibration history is present in CTBTO/IDC provenance but absent from public StationXML, and deployed calibration is not full-chain.",
+    "lane_B_persistent_path_site": "A persistent south-vs-north site/trunk/propagation/seabed contribution remains viable because the later 12-13 dB baseline is not reduced by public response correction and the exact 2013 causal comparison is inaccessible through the tested public waveform route.",
+    "lane_C_time_variable_residual": "January failures of a fixed scalar and documented variable cross-talk both support retaining an episodic residual process on top of the baseline, without equating those two observations causally.",
+    "current_economical_expression": "OBSERVED_H10S2 = PERSISTENT_SITE_OR_PATH_BASELINE + POSSIBLE_UNREPRESENTED_INSTRUMENT_CHAIN_EFFECT + EPISODIC_RESIDUALS",
+    "cause_status": "UNRESOLVED"
+  },
+  "rejected_or_not_supported": [
+    "PUBLIC_STATIONXML_EQUALS_THE_AUTHORITATIVE_FAULT_ERA_CALIBRATION_HISTORY",
+    "RAW_2013_CALIBRATION_SEQUENCE_BYTES_WERE_PUBLICLY_RECOVERED_IN_THIS_PASS",
+    "RISER_FAILURE_IS_PROVEN",
+    "THE_PUBLISHED_2013_CALIBRATION_RESPONSE_CHANGE_ALONE_EXPLAINS_THE_FULL_LATER_12_13DB_OFFSET",
+    "PRE_2013_H10_DATA_ARE_AUTOMATICALLY_INSTRUMENT_CLEAN",
+    "CALIBRATION_ERASED_OR_NORMALIZED_A_SEAFLOOR_STRUCTURE",
+    "A_SEAFLOOR_STRUCTURE_IS_PROVEN_OR_DISPROVEN",
+    "119HZ_TARGET_VALIDATED"
+  ],
+  "next_step_request_to_janus": "Run all 17 reverse lenses on this exact provenance-recovery result. Choose exactly one next gate. The direct 2013 public waveform gate remains nonrepeatable until access changes. Prefer a discriminator that can now separate persistent baseline/site physics from instrument contamination: earliest simultaneously available six-channel waveform baseline, exact native bathymetry/swath geometry, or authoritative custodian recovery of IDC calibration/raw records. Preserve the independent physical lane and veto any 119-Hz reinterpretation.",
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "bathymetry_lane_remains_independent": true
+  }
+}

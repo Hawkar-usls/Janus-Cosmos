@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.0",
+  "status": "PREREGISTERED_BEFORE_PUBLIC_STATIONXML_EPOCH_AUDIT_EXECUTION",
+  "date": "2026-08-22",
+  "gate_id": "COUSTEAU_HA10_PUBLIC_RESPONSE_EPOCH_AUDIT_V1",
+  "purpose": "Determine whether the public EarthScope StationXML response metadata itself encodes a response-epoch transition around the documented 2013-07-19 H10S electronic-noise/cross-talk onset, and whether the response representation available to JANUS could by itself encode a return of the H10S transfer curve toward a nominal state.",
+  "upstream_bindings": {
+    "reverse_spiral_audit_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0.json",
+    "reverse_spiral_audit_git_blob_sha1": "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "authoritative_historical_anchor": {
+    "source": "EGU2020-5481 / CTBTO hydroacoustic UWS calibration analysis",
+    "fault_onset_utc_date": "2013-07-19",
+    "historical_claim_used_only_as_anchor": "H10S1 electrical noise began 2013-07-19 and evolved to strong persistent noise with cross-talk to H10S2/H10S3; published UWS digitizer calibration responses changed around that epoch.",
+    "important_identity_boundary": "The published deployed UWS calibration excludes the hydrophone ceramic, preamplifier and riser cable; public StationXML response metadata is therefore not assumed a priori to encode every analogue-path failure mode."
+  },
+  "public_metadata_contract": {
+    "service": "https://service.earthscope.org/fdsnws/station/1/query",
+    "network": "IM",
+    "location": "--",
+    "channel": "EDH",
+    "stations": ["H10N1", "H10N2", "H10N3", "H10S1", "H10S2", "H10S3"],
+    "query_start_utc": "2013-01-01T00:00:00Z",
+    "query_end_utc": "2018-01-01T00:00:00Z",
+    "level": "response",
+    "format": "xml",
+    "nodata": 404,
+    "no_authenticated_sources": true
+  },
+  "frozen_anchor_times_utc": {
+    "PRE_MAR_2013": "2013-03-15T12:00:00Z",
+    "PRE_FAULT_DAY": "2013-07-18T12:00:00Z",
+    "POST_SEP_2013": "2013-09-15T12:00:00Z",
+    "JANUS_2014_REFERENCE": "2014-12-15T12:00:00Z",
+    "LATE_2017_REFERENCE": "2017-06-15T12:00:00Z"
+  },
+  "frequency_probe_contract": {
+    "frequencies_hz": [1.0, 10.0, 30.0, 55.0, 80.0, 100.0],
+    "output": "DEF",
+    "target_119hz_excluded": true,
+    "whole_spectrum_peak_search_allowed": false,
+    "frequency_retuning_allowed": false
+  },
+  "response_fingerprint_contract": {
+    "record_channel_epoch_start_end": true,
+    "record_instrument_sensitivity_value_frequency_units": true,
+    "record_response_stage_count": true,
+    "record_canonical_response_repr_sha256": true,
+    "evaluate_fixed_frequency_complex_response": true,
+    "compare_pre_fault_to_post_sep_2013": true,
+    "compare_pre_fault_to_janus_2014": true,
+    "compare_north_and_south_triplets_separately": true,
+    "fault_epoch_boundary_window_days": 120,
+    "numerical_curve_change_floor_db": 0.05
+  },
+  "verdict_rules": {
+    "PUBLIC_STATIONXML_ENCODES_FAULT_ERA_RESPONSE_CHANGE": "At least one H10S channel has a public metadata epoch/fingerprint transition within +/-120 days of 2013-07-19 and the fixed-frequency response differs pre/post by at least 0.05 dB while H10N remains comparatively stable.",
+    "PUBLIC_STATIONXML_DOES_NOT_ENCODE_KNOWN_FAULT_ERA_CHANGE": "All three H10S channels expose the same effective public response fingerprint across PRE_FAULT_DAY and POST_SEP_2013 (or no public epoch boundary near the fault), despite the independently documented CTBTO UWS calibration-response change.",
+    "MIXED_OR_PARTIAL_PUBLIC_RESPONSE_EPOCH_ENCODING": "Some but not all relevant H10S public response fingerprints/epochs change near the fault, or numerical changes exist without a clean epoch-boundary interpretation.",
+    "BLOCKED_PUBLIC_RESPONSE_EPOCH_AUDIT": "Public metadata cannot resolve valid responses at enough frozen anchors to perform the declared comparison."
+  },
+  "interpretation_firewall": {
+    "public_stationxml_equals_ctbto_internal_calibration_database": false,
+    "absence_of_public_epoch_change_proves_no_hardware_change": false,
+    "presence_of_epoch_change_proves_fault_cause": false,
+    "stationxml_response_correction_can_erase_physical_seabed_geometry": false,
+    "this_gate_can_promote_119hz": false,
+    "target_identity": "UNCONFIRMED",
+    "authority_delta_for_119hz": 0
+  },
+  "claim_ceiling": "This gate can establish only what the public EarthScope response representation does or does not encode across the known H10S fault epoch. If the public fingerprint is unchanged, it means JANUS response correction based on that metadata cannot explicitly compensate a time-varying calibration change that is absent from the metadata; it does not by itself identify cross-talk, riser failure, sensor gain error, or any seabed structure.",
+  "next_step_rule": "After freezing this result, submit the exact result plus the upstream reverse-spinal audit to the JANUS/Demiurge reverse council; the council must choose the next discriminator without changing this gate's thresholds or verdict."
+}

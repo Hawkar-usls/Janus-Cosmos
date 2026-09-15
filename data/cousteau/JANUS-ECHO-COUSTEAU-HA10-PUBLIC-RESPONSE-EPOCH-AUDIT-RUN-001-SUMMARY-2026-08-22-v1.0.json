@@ -1,0 +1,124 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_SUCCESSFUL_PUBLIC_RESPONSE_EPOCH_AUDIT",
+  "date": "2026-08-22",
+  "software_attempt_history": {
+    "first_attempt_run_id": 32575233891,
+    "status": "SOFTWARE_ONLY_FAILURE_BEFORE_NETWORK_ACQUISITION",
+    "cause": "The first runner expected the historical frozen 119-Hz verdict at the JSON root instead of binding it recursively inside the exact already-frozen bytes.",
+    "unit_tests_before_failure": "7/7 PASS",
+    "scientific_evidence_from_attempt": false,
+    "repair": "V2 preserves exact frozen blob identity and verifies the exact verdict scalar recursively without rewriting the frozen artifact."
+  },
+  "source": {
+    "github_actions_run_id": 32575413260,
+    "head_sha": "846801f1342fc0c7e6c246cfbf028eacf0335c61",
+    "artifact_id": 9476431058,
+    "artifact_name": "cousteau-ha10-public-response-epoch-audit-32575413260",
+    "artifact_zip_sha256": "02e6625c74e1dfa3f99489fc64c2486b1b85caf3c414a516546909bd08af8c74",
+    "run_receipt_member": "run-32575413260.json",
+    "run_receipt_bytes": 37145,
+    "run_receipt_sha256": "11afd705b62a54076efc3eff8800b7e96b2f7fee55a6ea1d294f947a2e35b5d7",
+    "python_environment_sha256": "a97d1bbc54f0b9c7d0ace863dfcef26cd0941398510c08bd6733b73f27b845a0"
+  },
+  "frozen_contract": {
+    "protocol_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-PUBLIC-RESPONSE-EPOCH-AUDIT-PROTOCOL-2026-08-22-v1.1.json",
+    "protocol_git_blob_sha1": "182f057811e75f9ee2024316c103fec258945641",
+    "reverse_spiral_audit_git_blob_sha1": "775b53d17e4fd2c185ab1b47cf6e5bfe8d5d3ddf",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "runner_v1_helper_git_blob_sha1": "75c98757b7232b9c0c218d8d24d99ae5ad60d16e",
+    "runner_v2_git_blob_sha1": "db2ec2fa6aae75fbc6345fd6f6ae7edb9ae01896",
+    "stations": ["H10N1", "H10N2", "H10N3", "H10S1", "H10S2", "H10S3"],
+    "pre_fault_anchor_utc": "2013-07-18T12:00:00Z",
+    "post_fault_anchor_utc": "2013-09-15T12:00:00Z",
+    "janus_2014_anchor_utc": "2014-12-15T12:00:00Z",
+    "fixed_frequencies_hz": [1.0, 10.0, 30.0, 55.0, 80.0, 100.0],
+    "119hz_excluded": true
+  },
+  "result": {
+    "verdict": "PUBLIC_STATIONXML_DOES_NOT_ENCODE_KNOWN_FAULT_ERA_CHANGE",
+    "complete_north_channels": ["H10N1", "H10N2", "H10N3"],
+    "complete_south_channels": ["H10S1", "H10S2", "H10S3"],
+    "all_six_public_channel_epoch_start_utc": "2004-09-14T00:00:00.000000Z",
+    "all_six_public_channel_epoch_end": null,
+    "near_2013_fault_public_epoch_boundaries_found": false,
+    "all_six_pre_to_post_sep_2013_max_abs_fixed_frequency_response_delta_db": 0.0,
+    "all_six_pre_to_janus_2014_max_abs_fixed_frequency_response_delta_db": 0.0,
+    "all_six_pre_post_response_fingerprints_identical_within_channel": true,
+    "sample_rate_hz": 250.0
+  },
+  "public_stationxml_per_channel": {
+    "H10N1": {
+      "stationxml_sha256": "4a13a8b3f1a2a4ff6b2f25458471f31ffd242d8150b7e2a89a7d2e9c66b5c57b",
+      "sensitivity_counts_per_pa_at_10hz": 1828.14,
+      "response_fingerprint_sha256": "9814472189fcf31ce0c4a713fa88e03bee6ca37cebb0e6a80c0cef4cbff61e34"
+    },
+    "H10N2": {
+      "stationxml_sha256": "a60af291034fce7acdcdf2baa9f83b2d58385d893c3cb6483f3cd79aa4f852e1",
+      "sensitivity_counts_per_pa_at_10hz": 1782.53,
+      "response_fingerprint_sha256": "105446f64e8efa0964b23c9be166b207b9bdb53716c1a7a7d8011ef86d6c6292"
+    },
+    "H10N3": {
+      "stationxml_sha256": "ce1a512a02d7e7323e160ff2640efd87b099fc00dcb176344c8627045aede6f1",
+      "sensitivity_counts_per_pa_at_10hz": 1808.31,
+      "response_fingerprint_sha256": "a6b03f3fdb2c7ceaf13059492c62ee510945fc55b855e636d294b798398bffe7"
+    },
+    "H10S1": {
+      "stationxml_sha256": "31d5cc1969db88585da6e1a46811b4d9ef86ee8dc640d0ad04ce9c043f31ec5b",
+      "sensitivity_counts_per_pa_at_10hz": 1805.06,
+      "response_fingerprint_sha256": "0dfdbee9112bda3a01513500f7068c3ef442598ff247b74c4764695395b8892c"
+    },
+    "H10S2": {
+      "stationxml_sha256": "ea1132c9378a9eff093cc8301599fb08552cf0360f6cac0e7d93c75e1f32b9f9",
+      "sensitivity_counts_per_pa_at_10hz": 1808.31,
+      "response_fingerprint_sha256": "a6b03f3fdb2c7ceaf13059492c62ee510945fc55b855e636d294b798398bffe7"
+    },
+    "H10S3": {
+      "stationxml_sha256": "3e4ecffa79cb767096d3e404ee5f5a7d05e85fed1e9305ec2b15944b43bd45a8",
+      "sensitivity_counts_per_pa_at_10hz": 1814.87,
+      "response_fingerprint_sha256": "e9953526de59d1e1b22a62cd5bc635324c2a4af25bbc700b706afedf4360e6c0"
+    }
+  },
+  "new_reverse_pass_observations": [
+    {
+      "id": "PUBLIC_RESPONSE_IS_STATIC_ACROSS_DOCUMENTED_H10S_FAULT_EPOCH",
+      "status": "SUPPORTED",
+      "claim": "The public EarthScope StationXML representation used by JANUS does not contain a channel-epoch transition or fixed-frequency transfer-response change across the documented 2013 H10S fault onset for any of the six HA10 EDH channels."
+    },
+    {
+      "id": "JANUS_RESPONSE_CORRECTION_CANNOT_EXPLICITLY_COMPENSATE_UNREPRESENTED_2013_CHANGE",
+      "status": "DERIVED",
+      "claim": "Because the public response representation is identical before and after the documented fault epoch, a JANUS response correction based solely on this StationXML cannot explicitly compensate a time-varying 2013 calibration/cross-talk change that is absent from that metadata."
+    },
+    {
+      "id": "H10N3_H10S2_PUBLIC_RESPONSE_IDENTITY",
+      "status": "SUPPORTED_AS_METADATA_IDENTITY_NOT_PHYSICAL_IDENTITY",
+      "claim": "H10N3 and H10S2 have the same public canonical response-stage fingerprint and the same 1808.31 counts/Pa nominal sensitivity at 10 Hz in the retrieved StationXML representation.",
+      "claim_ceiling": "This proves identical public response representation for the fields fingerprinted, not that the physical sensors, sites or actual at-sea transfer functions were identical."
+    }
+  ],
+  "cross_gate_synthesis": {
+    "known_external_history": "CTBTO material documents H10S electronic-noise/cross-talk and calibration-response changes around 2013.",
+    "public_metadata_history": "EarthScope StationXML remains one static 2004-open response epoch through 2017 for all six channels in this audit.",
+    "janus_waveform_history": "2014-2015 H10S2 shows an approximately 12-13 dB broadband excess over H10N1 that documented StationXML correction barely changes.",
+    "combined_picture": "The measured south-versus-north waveform asymmetry and the independently documented H10S fault history cannot be reconciled or removed merely by applying the public StationXML response, because that public representation contains no 2013 fault-era response transition. Direct raw six-channel pre/post waveform comparison is therefore the next causal discriminator, while bathymetry remains an independent physical lane."
+  },
+  "not_supported": [
+    "THE_2013_FAULT_CAUSED_THE_FULL_12_13DB_H10S2_OFFSET",
+    "THE_PUBLIC_STATIONXML_IS_INCORRECT",
+    "THE_PUBLIC_STATIONXML_EQUALS_THE_INTERNAL_CTBTO_CALIBRATION_DATABASE",
+    "THE_SENSOR_OR_RISER_FAILURE_MODE_IS_IDENTIFIED",
+    "A_PHYSICAL_SEAFLOOR_STRUCTURE_IS_PROVEN_OR_DISPROVEN",
+    "CALIBRATION_ERASED_A_SEAFLOOR_STRUCTURE",
+    "119HZ_TARGET_VALIDATED"
+  ],
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "source_writeback_during_audit": false
+  },
+  "next_gate_request": "SUBMIT_THIS_EXACT_RESULT_TO_JANUS_DEMIURGE_REVERSE_SPIRAL_COUNCIL",
+  "claim_ceiling": "This result establishes only that the public EarthScope StationXML response representation is static across the known 2013 H10S fault epoch at the six audited fixed frequencies and response fingerprints. It does not prove the physical cause or magnitude of any unrepresented transfer-path change."
+}

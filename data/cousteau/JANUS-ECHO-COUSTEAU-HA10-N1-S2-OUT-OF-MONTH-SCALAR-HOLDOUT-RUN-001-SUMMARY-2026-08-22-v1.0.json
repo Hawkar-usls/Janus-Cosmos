@@ -1,0 +1,117 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-OUT-OF-MONTH-SCALAR-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_SUMMARY_OF_FIRST_PREREGISTERED_OUT_OF_MONTH_SCALAR_HOLDOUT",
+  "source": {
+    "github_actions_run_id": 32572635242,
+    "head_sha": "45a4a6d6956609b211fd76e82182fe08329ccb57",
+    "artifact_id": 9475732665,
+    "artifact_name": "cousteau-ha10-out-of-month-scalar-holdout-32572635242",
+    "artifact_zip_sha256": "b67fe1ac243a5e5d823b522740d5d908edd8e1435a49984146d8370135abfb91",
+    "run_receipt_member": "run-32572635242.json",
+    "run_receipt_sha256": "d335451bbb0c8e35c0d789b22951755dcd9060d2d487393f98b8c104ca2d4554",
+    "run_receipt_bytes": 114308,
+    "python_environment_sha256": "347d06ea1af8bc09e5d4883d5b046cf2865287920aa28ced18a902d021e88f9a"
+  },
+  "frozen_contract": {
+    "protocol_git_blob_sha1": "594786129fc8961fc47a65f0ded3046552137d99",
+    "prior_scalar_holdout_summary_git_blob_sha1": "6b2c075396b3fc60df3fafe41024a72c86a3afff",
+    "january_window_count": 20,
+    "window_duration_s": 600,
+    "window_start_time_utc": "18:00:00Z",
+    "date_block": ["2015-01-01", "2015-01-20"],
+    "minimum_complete_paired_windows": 15,
+    "frozen_scalar_db": 12.616188132659623,
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "window_replacement_allowed": false,
+    "posthoc_date_exclusion_allowed": false,
+    "thresholds_identical_to_prior_holdout": true
+  },
+  "result": {
+    "complete_paired_windows": 19,
+    "blocked_station_windows": 1,
+    "verdict": "OUT_OF_MONTH_SCALAR_HOLDOUT_FAIL",
+    "broadband_residual_statistics": {
+      "median_raw_residual_db": 0.21370025819085825,
+      "median_corrected_residual_db": 0.27669431701566616,
+      "raw_q25_residual_db": -1.1768724688850947,
+      "raw_q75_residual_db": 1.0968183026205498,
+      "corrected_q25_residual_db": -1.0438106123037496,
+      "corrected_q75_residual_db": 1.1839450234736564,
+      "raw_residual_iqr_db": 2.2736907715056445,
+      "corrected_residual_iqr_db": 2.227755635777406,
+      "fraction_raw_windows_within_3db": 0.5789473684210527,
+      "fraction_corrected_windows_within_3db": 0.5789473684210527,
+      "fraction_both_windows_within_3db": 0.5789473684210527,
+      "raw_residual_min_db": -12.18659702891563,
+      "raw_residual_max_db": 7.778715324546361,
+      "corrected_residual_min_db": -11.854604953729966,
+      "corrected_residual_max_db": 7.903190157685259
+    },
+    "fixed_subband_residual_medians_db": {
+      "low_10_30": {"raw": 0.6819152345095727, "corrected": 0.8170055072356561},
+      "mid_30_55": {"raw": -0.0717832659924067, "corrected": 0.014332244513180825},
+      "high_55_80": {"raw": 0.9859306028896846, "corrected": 1.0809722102199153}
+    },
+    "gate_checks": {
+      "minimum_complete_pairs": true,
+      "broadband_medians": true,
+      "broadband_iqrs": true,
+      "window_fractions": false,
+      "fixed_subbands": true
+    }
+  },
+  "data_access_notes": [
+    {
+      "date": "2015-01-02",
+      "station": "IM.H10N1..EDH",
+      "status": "GAPS_PRESENT_INTERPOLATION_FORBIDDEN"
+    }
+  ],
+  "strict_window_outliers_corrected_residual_abs_gt_3db": [
+    {"date": "2015-01-03", "corrected_residual_db": 3.710775},
+    {"date": "2015-01-04", "corrected_residual_db": -5.930147},
+    {"date": "2015-01-06", "corrected_residual_db": 4.477874},
+    {"date": "2015-01-08", "corrected_residual_db": 7.903190},
+    {"date": "2015-01-09", "corrected_residual_db": 6.924747},
+    {"date": "2015-01-12", "corrected_residual_db": -3.779001},
+    {"date": "2015-01-16", "corrected_residual_db": -3.355652},
+    {"date": "2015-01-20", "corrected_residual_db": -11.854605}
+  ],
+  "postrun_morphology_audit_nonconfirmatory": {
+    "status": "POSTHOC_DIAGNOSTIC_ONLY",
+    "observation": "The month-boundary holdout preserves a near-zero median residual and passing fixed-subband medians, but 8 of 19 complete windows exceed the predeclared plus-or-minus 3 dB tolerance. Several excursions are broadband across all fixed subbands, while others are strongly frequency-shaped. Therefore the one-scalar model remains useful for central tendency but is not sufficient as a per-window stationary model across this January sample.",
+    "examples": {
+      "broadband_positive_excursions": ["2015-01-06", "2015-01-08", "2015-01-09"],
+      "frequency_shaped_negative_excursions": ["2015-01-04", "2015-01-20"]
+    },
+    "not_an_admission_reanalysis": true
+  },
+  "interpretation": {
+    "supported": [
+      "THE_FROZEN_12_616188DB_SCALAR_REMAINS_CLOSE_TO_THE_JANUARY_CENTRAL_TENDENCY",
+      "JANUARY_BROADBAND_RESIDUAL_MEDIANS_ARE_NEAR_ZERO",
+      "JANUARY_FIXED_SUBBAND_RESIDUAL_MEDIANS_ALL_PASS_THE_UNCHANGED_PLUS_OR_MINUS_2_5DB_GATE",
+      "THE_HYPOTHESIS_THAT_THE_OFFSET_EXISTS_ONLY_INSIDE_DECEMBER_12_31_IS_WEAKENED_AT_THE_LEVEL_OF_CENTRAL_TENDENCY"
+    ],
+    "not_supported": [
+      "ONE_CONSTANT_SCALAR_EXPLAINS_AT_LEAST_80_PERCENT_OF_JANUARY_WINDOWS_WITHIN_PLUS_OR_MINUS_3DB",
+      "THE_STATION_PATH_FACTOR_IS_STRICTLY_STATIONARY_WINDOW_BY_WINDOW_ACROSS_THE_MONTH_BOUNDARY",
+      "SENSOR_GAIN_FAULT_PROVEN",
+      "CALIBRATION_ERROR_PROVEN",
+      "ENVIRONMENTAL_OR_SITE_CAUSE_RULED_OUT",
+      "119HZ_TARGET_VALIDATED",
+      "TARGET_SOURCE_IDENTIFIED"
+    ],
+    "next_gate": "COUSTEAU_HA10_N1_S2_JANUARY_0600UTC_SAME_SCALAR_HOLDOUT_V1"
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "frozen_119hz_negative_result_immutable": true,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_OUT_OF_MONTH_SCALAR_HOLDOUT",
+    "source_writeback_during_diagnostic": false
+  },
+  "claim_ceiling": "The January out-of-month holdout fails the predeclared full generalization rule because only 11 of 19 complete windows lie within plus-or-minus 3 dB after applying the unchanged scalar. The scalar nevertheless remains close to the January central tendency and all fixed-subband median gates pass. This weakens a December-only central-offset explanation but rejects a simple stationary one-scalar-per-window model for this January 18:00 UTC sample. No physical cause is identified and the frozen 119-Hz negative result remains unchanged."
+}

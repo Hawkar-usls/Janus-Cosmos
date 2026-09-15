@@ -1,0 +1,40 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-INDEPENDENCE-ADDENDUM-2026-08-22-v1.0",
+  "status": "POSTRUN_IMPLEMENTATION_CLARIFICATION__MONOTONIC_NON_PROMOTIONAL",
+  "applies_to_protocol": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-ARRIVAL-POSITIVE-CONTROL-PROTOCOL-2026-08-22-v1.0.json",
+  "protocol_git_blob_sha1": "d1800856076fc46cb04b5461bb1f2bf786af532e",
+  "reason": "The original protocol requires a minimum number of independent events but did not operationally define independence. Review found that some frozen 10-minute reception windows overlap, so counting every passing catalog row could count one broadband episode more than once.",
+  "clarification": {
+    "candidate_event": "An event whose fixed raw and response-corrected 10-80 Hz criteria pass on both H10N1 and H10S2.",
+    "events_conflict_when": "Their frozen event reception windows overlap on either H10N1 or H10S2. Touching endpoints without positive-duration overlap do not conflict.",
+    "independent_event_count": "Maximum cardinality subset of candidate events with no pairwise reception-window conflict on either station.",
+    "algorithm": "Exhaustive subset search is required because the frozen candidate set is at most eight events; choose maximum cardinality and break ties lexicographically by source_time_code list.",
+    "raw_candidate_pass_count_is_diagnostic_only": true,
+    "admission_uses_independent_event_count_only": true
+  },
+  "completed_run_32568063356_impact": {
+    "raw_candidate_events_passing_both_stations": 1,
+    "minimum_required": 3,
+    "original_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "corrected_independence_count_cannot_exceed_raw_candidate_count": true,
+    "verdict_can_change_from_fail_to_pass_due_to_this_clarification": false,
+    "historical_fail_is_monotonic_under_stricter_independence": true
+  },
+  "authority": {
+    "threshold_changed": false,
+    "frequency_band_changed": false,
+    "event_or_noise_windows_changed": false,
+    "station_requirement_changed": false,
+    "completed_fail_promoted": false,
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED"
+  },
+  "hard_rules": [
+    "NO_RETUNING_AFTER_RESULT",
+    "OVERLAPPING_RECEPTION_WINDOWS_CANNOT_COUNT_AS_INDEPENDENT",
+    "MAXIMUM_NONOVERLAPPING_SUBSET_REQUIRED",
+    "COMPLETED_FAIL_MONOTONIC",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

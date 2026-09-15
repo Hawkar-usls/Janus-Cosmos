@@ -1,0 +1,107 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-PRE-POST-2013-CROSSTALK-TRIPLET-GATE-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1",
+  "status": "PREREGISTERED_BEFORE_NEW_PRE_POST_2013_TRIPLET_WINDOWS_ARE_DOWNLOADED",
+  "date": "2026-08-22",
+  "purpose": "Test whether the known 2013 H10S1 electronic-noise/cross-talk epoch is visible directly in public HA10 waveform data as a change in south-triplet channel coupling and/or south-vs-north broadband scale, while keeping independent seabed geometry as a separate evidence lane.",
+  "historical_anchor": {
+    "fault_onset_utc_date": "2013-07-19",
+    "published_description": "Electrical noise appeared on H10S1 and evolved to strong persistent noise with varying cross-talk to H10S2 and H10S3; CTBTO material reports calibration-response changes around the same epoch.",
+    "source_refs": [
+      "https://conferences-test.ctbto.org/event/25/contributions/4421/",
+      "https://presentations.copernicus.org/EGU2020/EGU2020-5481_presentation.pdf"
+    ]
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10N2..EDH",
+    "IM.H10N3..EDH",
+    "IM.H10S1..EDH",
+    "IM.H10S2..EDH",
+    "IM.H10S3..EDH"
+  ],
+  "window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "06:00:00Z",
+    "pre_fault_dates": [
+      "2013-03-01","2013-03-02","2013-03-03","2013-03-04","2013-03-05",
+      "2013-03-06","2013-03-07","2013-03-08","2013-03-09","2013-03-10",
+      "2013-03-11","2013-03-12","2013-03-13","2013-03-14","2013-03-15",
+      "2013-03-16","2013-03-17","2013-03-18","2013-03-19","2013-03-20"
+    ],
+    "post_fault_dates": [
+      "2013-09-01","2013-09-02","2013-09-03","2013-09-04","2013-09-05",
+      "2013-09-06","2013-09-07","2013-09-08","2013-09-09","2013-09-10",
+      "2013-09-11","2013-09-12","2013-09-13","2013-09-14","2013-09-15",
+      "2013-09-16","2013-09-17","2013-09-18","2013-09-19","2013-09-20"
+    ],
+    "rationale": "March and September 2013 mirror the before/after months used in the published CTBTO calibration comparison while keeping all waveform windows frozen before retrieval.",
+    "minimum_complete_all_six_windows_per_epoch": 12,
+    "replacement_allowed": false,
+    "recentering_allowed": false,
+    "event_selection_allowed": false
+  },
+  "analysis_order": [
+    "RAW_COUNTS_FIRST",
+    "RESPONSE_CORRECTED_POWER_SECOND",
+    "CROSS_CHANNEL_COUPLING_DIAGNOSTIC_THIRD",
+    "JANUS_REVERSE_INTERPRETATION_LAST"
+  ],
+  "frequency_contract": {
+    "primary_band_hz": [10.0,80.0],
+    "119hz_or_117_121hz_bins_may_be_used": false,
+    "whole_spectrum_peak_search_allowed": false,
+    "frequency_retuning_allowed": false
+  },
+  "spectral_estimator": {
+    "welch_window": "hann",
+    "welch_nperseg_samples": 8192,
+    "welch_noverlap_samples": 4096,
+    "scaling": "density"
+  },
+  "primary_statistics": {
+    "broadband_power": [
+      "per-channel raw integrated 10-80 Hz power",
+      "per-channel response-corrected integrated 10-80 Hz power where response metadata are available",
+      "S2-minus-N1 and S3-minus-N1 dB medians pre vs post"
+    ],
+    "coupling": [
+      "median magnitude-squared coherence in 10-80 Hz for S1-S2 and S1-S3",
+      "same coherence for N1-N2 and N1-N3 as temporal/control reference",
+      "absolute zero-lag Pearson correlation after fixed 10-80 Hz band-pass for the same pairs"
+    ]
+  },
+  "predeclared_classification_thresholds": {
+    "minimum_epoch_complete_windows": 12,
+    "minimum_post_minus_pre_south_driver_coherence_increase": 0.10,
+    "minimum_coherence_difference_in_difference_vs_north": 0.10,
+    "minimum_post_minus_pre_south_driver_abs_correlation_increase": 0.10,
+    "minimum_abs_correlation_difference_in_difference_vs_north": 0.10
+  },
+  "decision_rule": {
+    "BLOCKED": "If either epoch has fewer than 12 windows complete on all six channels.",
+    "SUPPORTED_POST_2013_SOUTH_TRIPLET_COUPLING_INCREASE": "If all four preregistered coupling thresholds pass.",
+    "NO_STRONG_POST_2013_SOUTH_TRIPLET_COUPLING_INCREASE": "If data are sufficient but one or more coupling thresholds fail.",
+    "note": "The broadband S2/N1 and S3/N1 pre/post changes are reported independently and do not by themselves decide the coupling verdict."
+  },
+  "interpretation_firewall": {
+    "a_supported_coupling_change_means": "Public waveform data contain a south-triplet coupling change temporally consistent with the known fault epoch, strengthening cross-talk as a confounder.",
+    "a_supported_coupling_change_does_not_mean": [
+      "the full 12-13 dB S2/N1 offset is proven instrumental",
+      "riser failure is proven as the exact physical cause",
+      "any physical seafloor structure is absent"
+    ],
+    "a_negative_coupling_result_means": "This specific raw-waveform coupling signature was not strongly recovered under the frozen metric; it does not erase the published CTBTO fault history.",
+    "bathymetry_lane_independent": true
+  },
+  "janus_method": {
+    "pipeline": "OBSERVATION -> REVERSE_TO_2013_FAULT_BOUNDARY -> PRE_POST_DISCRIMINATOR -> NORTH_CONTROL -> RAW_THEN_CORRECTED -> HRAIN_INAIHR_REVIEW -> NEXT_GATE",
+    "after_result": "Return the receipt to Janus-Demiurge/Janus council and require the next gate to discriminate the strongest surviving sibling hypotheses rather than merely repeat the same statistic."
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta_from_this_gate": "NONE_UNLESS_INDEPENDENTLY_SUPPORTED_BY_A_SEPARATE_TARGET_GATE"
+  }
+}

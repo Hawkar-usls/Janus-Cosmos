@@ -1,0 +1,144 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_INDEPENDENT_SCALAR_COLLAPSE_HOLDOUT_V1",
+  "status": "PREREGISTERED_BEFORE_NEW_1800UTC_HOLDOUT_WINDOWS_ARE_DOWNLOADED",
+  "research_branch": "Janus-Echo-Кусто",
+  "purpose": "Test on a fourth non-overlapping time sample whether one scalar power offset frozen entirely from the prior 06:00 UTC stability result collapses H10S2 toward H10N1 simultaneously across time and across fixed 10-80 Hz subbands, without fitting or recentering on the holdout.",
+  "epistemic_position": {
+    "created_after_temporal_stability_classification": true,
+    "prior_results_used_only_to_freeze_scalar_and_followup_question": true,
+    "new_1800utc_waveforms_inspected_before_freeze": false,
+    "may_classify_scalar_collapse_generalization": true,
+    "may_identify_physical_cause": false,
+    "may_prove_gain_or_calibration_error": false,
+    "may_reclassify_positive_control": false,
+    "may_reclassify_119hz_negative": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "temporal_stability_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "temporal_stability_summary_git_blob_sha1": "45f2901adde866df610a563f27c50177d32be414",
+    "temporal_stability_verdict_required": "TEMPORALLY_STABLE_BROADBAND_H10S2_SCALE_OFFSET",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict_required": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "frozen_scalar": {
+    "definition": "Subtract this exact power-ratio offset from every holdout S2-minus-N1 dB ratio; equivalently multiply H10S2 waveform amplitude by the fixed amplitude factor before PSD estimation.",
+    "source_statistic": "prior 06:00 UTC response-corrected median S2-minus-N1 10-80 Hz power ratio",
+    "source_value_db": 12.616188132659623,
+    "s2_waveform_amplitude_factor": 0.23398638800540034,
+    "s2_power_factor": 0.05474962977181375,
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "recentering_allowed": false
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10S2..EDH"
+  ],
+  "holdout_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "18:00:00Z",
+    "dates": [
+      "2014-12-12",
+      "2014-12-13",
+      "2014-12-14",
+      "2014-12-15",
+      "2014-12-16",
+      "2014-12-17",
+      "2014-12-18",
+      "2014-12-19",
+      "2014-12-20",
+      "2014-12-21",
+      "2014-12-22",
+      "2014-12-23",
+      "2014-12-24",
+      "2014-12-25",
+      "2014-12-26",
+      "2014-12-27",
+      "2014-12-28",
+      "2014-12-29",
+      "2014-12-30",
+      "2014-12-31"
+    ],
+    "independence_from_prior_samples": "The 18:00 UTC holdout windows do not overlap the prior 00:00, 06:00, or 12:00 baseline samples.",
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_event_catalog_selection": true
+  },
+  "frequency_contract": {
+    "broadband_hz": [10.0, 80.0],
+    "fixed_subbands_hz": {
+      "low": [10.0, 30.0],
+      "mid": [30.0, 55.0],
+      "high": [55.0, 80.0]
+    },
+    "whole_spectrum_peak_search_allowed": false,
+    "best_subband_selection_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "spectral_estimator": {
+    "preprocessing": [
+      "merge_without_interpolation",
+      "demean",
+      "linear_detrend"
+    ],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration"
+  },
+  "predeclared_statistics": {
+    "per_complete_window": [
+      "uncollapsed raw and response-corrected S2-minus-N1 10-80 Hz power-ratio dB",
+      "collapsed raw and response-corrected residual dB after subtracting the one frozen scalar"
+    ],
+    "aggregate_broadband": [
+      "median collapsed raw residual dB",
+      "median collapsed corrected residual dB",
+      "raw and corrected residual IQR",
+      "fraction of complete windows with absolute raw residual <= 3 dB",
+      "fraction of complete windows with absolute corrected residual <= 3 dB",
+      "fraction with both absolute residuals <= 3 dB"
+    ],
+    "aggregate_fixed_subbands": [
+      "median collapsed raw residual dB in each frozen subband",
+      "median collapsed corrected residual dB in each frozen subband"
+    ]
+  },
+  "classification_thresholds": {
+    "maximum_absolute_broadband_residual_median_db": 2.0,
+    "maximum_broadband_residual_iqr_db": 3.0,
+    "window_absolute_residual_tolerance_db": 3.0,
+    "minimum_fraction_windows_within_tolerance": 0.8,
+    "maximum_absolute_fixed_subband_residual_median_db": 2.5,
+    "engineering_interpretation": "PASS requires the single frozen scalar to generalize without refitting: broadband residual medians near zero, limited temporal dispersion, at least 80% of paired windows within ±3 dB in both raw and corrected power, and all predeclared subband residual medians within ±2.5 dB. These are morphology/generalization criteria only, not causal-identification criteria."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_SCALAR_COLLAPSE_HOLDOUT_DATA_ACCESS",
+    "all_broadband_and_fixed_subband_generalization_gates_pass": "SCALAR_COLLAPSE_HOLDOUT_PASS",
+    "otherwise": "SCALAR_COLLAPSE_HOLDOUT_FAIL"
+  },
+  "claim_ceiling": "A PASS establishes only that one scalar offset frozen from the prior 06:00 UTC result predicts and approximately collapses the H10S2-over-H10N1 broadband power difference on a new 18:00 UTC holdout, including the three fixed subbands. This would support a persistent multiplicative station-path factor as a compact description, but would not identify sensor gain, calibration, site, deployment, or environmental cause. A FAIL means the one-scalar description does not generalize under these frozen tolerances; it does not erase earlier replicated asymmetry findings. Neither outcome validates 119 Hz or changes target identity.",
+  "hard_rules": [
+    "NEW_1800UTC_HOLDOUT_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "ONE_SCALAR_FROZEN_FROM_UPSTREAM_BEFORE_HOLDOUT",
+    "NO_HOLDOUT_REFIT",
+    "NO_ALTERNATE_SCALAR_SEARCH",
+    "NO_WINDOW_REPLACEMENT",
+    "NO_FREQUENCY_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_TARGET_BAND_USE",
+    "NO_CAUSAL_IDENTIFICATION_FROM_SCALAR_COLLAPSE_ALONE",
+    "PRIOR_POSITIVE_CONTROL_FAIL_IMMUTABLE",
+    "PRIOR_ASYMMETRY_REPLICATION_IMMUTABLE",
+    "PRIOR_SCALE_LIKE_CLASSIFICATION_IMMUTABLE",
+    "PRIOR_TEMPORAL_STABILITY_CLASSIFICATION_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

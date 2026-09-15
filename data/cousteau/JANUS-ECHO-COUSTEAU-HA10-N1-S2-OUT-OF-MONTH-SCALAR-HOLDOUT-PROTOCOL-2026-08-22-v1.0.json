@@ -1,0 +1,138 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-OUT-OF-MONTH-SCALAR-HOLDOUT-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_OUT_OF_MONTH_SCALAR_HOLDOUT_V1",
+  "status": "PREREGISTERED_BEFORE_JANUARY_HOLDOUT_WINDOWS_ARE_DOWNLOADED",
+  "research_branch": "Janus-Echo-Кусто",
+  "purpose": "Test whether the exact 12.616188132659623 dB scalar frozen before the prior 18:00 UTC holdout generalizes unchanged beyond the December 2014 date block, using a new January 2015 holdout with the same spectral and admission semantics and zero refitting.",
+  "epistemic_position": {
+    "created_after_within_december_scalar_holdout_pass": true,
+    "january_waveforms_inspected_before_freeze": false,
+    "may_test_out_of_month_generalization": true,
+    "may_identify_physical_cause": false,
+    "may_prove_gain_or_calibration_error": false,
+    "may_reclassify_positive_control": false,
+    "may_reclassify_119hz_negative": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "scalar_holdout_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "scalar_holdout_summary_git_blob_sha1": "6b2c075396b3fc60df3fafe41024a72c86a3afff",
+    "scalar_holdout_verdict_required": "SCALAR_COLLAPSE_HOLDOUT_PASS",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict_required": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "frozen_scalar": {
+    "source_value_db": 12.616188132659623,
+    "s2_waveform_amplitude_factor": 0.23398638800540034,
+    "s2_power_factor": 0.05474962977181375,
+    "definition": "Subtract the exact frozen power-ratio offset from every January S2-minus-N1 dB ratio; no estimate from January may modify it.",
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "recentering_allowed": false
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10S2..EDH"
+  ],
+  "holdout_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "18:00:00Z",
+    "dates": [
+      "2015-01-01",
+      "2015-01-02",
+      "2015-01-03",
+      "2015-01-04",
+      "2015-01-05",
+      "2015-01-06",
+      "2015-01-07",
+      "2015-01-08",
+      "2015-01-09",
+      "2015-01-10",
+      "2015-01-11",
+      "2015-01-12",
+      "2015-01-13",
+      "2015-01-14",
+      "2015-01-15",
+      "2015-01-16",
+      "2015-01-17",
+      "2015-01-18",
+      "2015-01-19",
+      "2015-01-20"
+    ],
+    "independence_from_prior_date_block": "All windows are in January 2015, outside the December 12-31 2014 block used by the prior 00:00/06:00/12:00/18:00 diagnostics.",
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_event_catalog_selection": true,
+    "no_posthoc_date_exclusion": true
+  },
+  "frequency_contract": {
+    "broadband_hz": [10.0, 80.0],
+    "fixed_subbands_hz": {
+      "low": [10.0, 30.0],
+      "mid": [30.0, 55.0],
+      "high": [55.0, 80.0]
+    },
+    "whole_spectrum_peak_search_allowed": false,
+    "best_subband_selection_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "spectral_estimator": {
+    "preprocessing": ["merge_without_interpolation", "demean", "linear_detrend"],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration"
+  },
+  "predeclared_statistics": {
+    "per_complete_window": [
+      "uncollapsed raw and response-corrected S2-minus-N1 broadband power-ratio dB",
+      "collapsed raw and response-corrected residual dB after subtracting the same frozen scalar"
+    ],
+    "aggregate_broadband": [
+      "median collapsed raw residual dB",
+      "median collapsed corrected residual dB",
+      "raw and corrected residual IQR",
+      "fraction of complete windows with absolute raw residual <= 3 dB",
+      "fraction of complete windows with absolute corrected residual <= 3 dB",
+      "fraction with both absolute residuals <= 3 dB"
+    ],
+    "aggregate_fixed_subbands": [
+      "median collapsed raw residual dB in each frozen subband",
+      "median collapsed corrected residual dB in each frozen subband"
+    ]
+  },
+  "classification_thresholds": {
+    "maximum_absolute_broadband_residual_median_db": 2.0,
+    "maximum_broadband_residual_iqr_db": 3.0,
+    "window_absolute_residual_tolerance_db": 3.0,
+    "minimum_fraction_windows_within_tolerance": 0.8,
+    "maximum_absolute_fixed_subband_residual_median_db": 2.5,
+    "threshold_source": "Identical to the already-completed December 18:00 scalar-collapse holdout; no relaxation or tightening after inspecting January data."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_OUT_OF_MONTH_SCALAR_HOLDOUT_DATA_ACCESS",
+    "all_broadband_and_fixed_subband_generalization_gates_pass": "OUT_OF_MONTH_SCALAR_HOLDOUT_PASS",
+    "otherwise": "OUT_OF_MONTH_SCALAR_HOLDOUT_FAIL"
+  },
+  "claim_ceiling": "A PASS establishes only that the same scalar offset learned entirely from the prior December block generalizes to this independently frozen January sample under the unchanged tolerances. This weakens the hypothesis that the offset was peculiar only to the December 12-31 block and supports a more persistent multiplicative station-path description across the month boundary. It still does not identify gain, calibration, deployment, site, or environmental cause. A FAIL does not erase the earlier within-December replications. Neither outcome validates 119 Hz or changes target identity.",
+  "hard_rules": [
+    "JANUARY_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "EXACT_SAME_SCALAR_AS_PRIOR_HOLDOUT",
+    "EXACT_SAME_THRESHOLDS_AS_PRIOR_HOLDOUT",
+    "NO_HOLDOUT_REFIT",
+    "NO_ALTERNATE_SCALAR_SEARCH",
+    "NO_WINDOW_REPLACEMENT",
+    "NO_POSTHOC_DATE_EXCLUSION",
+    "NO_FREQUENCY_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_TARGET_BAND_USE",
+    "NO_CAUSAL_IDENTIFICATION_FROM_GENERALIZATION_ALONE",
+    "PRIOR_RESULTS_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

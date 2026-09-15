@@ -1,0 +1,116 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-NOISE-ASYMMETRY-REPLICATION-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_INDEPENDENT_NOISE_ASYMMETRY_REPLICATION_V1",
+  "status": "PREREGISTERED_BEFORE_INDEPENDENT_NOISE_WINDOWS_ARE_DOWNLOADED",
+  "research_branch": "Janus-Echo-Кусто",
+  "purpose": "Test on independent UTC windows whether the large H10S2-versus-H10N1 10-80 Hz baseline-power difference observed post-run in the failed T-phase positive control replicates outside all event/noise windows used by that control.",
+  "epistemic_position": {
+    "created_after_positive_control_failure": true,
+    "positive_control_result_used_only_to_define_replication_question": true,
+    "independent_replication_windows_inspected_before_freeze": false,
+    "may_explain_measurement_path_asymmetry": true,
+    "may_reclassify_completed_positive_control": false,
+    "may_reclassify_119hz_negative": false,
+    "may_increase_target_evidence": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "positive_control_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "positive_control_summary_git_blob_sha1": "848c53633fe662e37df615626600953267119eff",
+    "positive_control_verdict_required": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854",
+    "frozen_119hz_verdict_required": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "channels": [
+    "IM.H10N1..EDH",
+    "IM.H10S2..EDH"
+  ],
+  "frequency_contract": {
+    "band_hz": [10.0, 80.0],
+    "selection_basis": "Exactly the same fixed interior passband used by the already-completed in-band positive control; no frequency retuning is permitted.",
+    "whole_spectrum_peak_search_allowed": false,
+    "diagnostic_subband_selection_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "independent_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "12:00:00Z",
+    "dates": [
+      "2014-12-12",
+      "2014-12-13",
+      "2014-12-14",
+      "2014-12-15",
+      "2014-12-16",
+      "2014-12-17",
+      "2014-12-18",
+      "2014-12-19",
+      "2014-12-20",
+      "2014-12-21",
+      "2014-12-22",
+      "2014-12-23",
+      "2014-12-24",
+      "2014-12-25",
+      "2014-12-26",
+      "2014-12-27",
+      "2014-12-28",
+      "2014-12-29",
+      "2014-12-30",
+      "2014-12-31"
+    ],
+    "selection_rule": "Exactly one 10-minute window beginning 12:00:00 UTC on each listed date, on both stations. Dates were frozen before any of these independent windows were downloaded by this gate.",
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_event_catalog_exclusion_or_recentering": true
+  },
+  "spectral_estimator": {
+    "preprocessing": [
+      "merge_without_interpolation",
+      "demean",
+      "linear_detrend"
+    ],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration over 10-80 Hz"
+  },
+  "predeclared_statistics": {
+    "per_window": [
+      "raw 10-80 Hz integrated power for H10N1 and H10S2",
+      "response-corrected 10-80 Hz integrated power for H10N1 and H10S2",
+      "S2-minus-N1 raw power ratio in dB",
+      "S2-minus-N1 corrected power ratio in dB"
+    ],
+    "aggregate": [
+      "median raw power per station over all complete paired windows",
+      "median corrected power per station over all complete paired windows",
+      "median of per-window S2-minus-N1 raw dB ratios",
+      "median of per-window S2-minus-N1 corrected dB ratios"
+    ]
+  },
+  "replication_threshold": {
+    "large_asymmetry_effect_size_db": 6.0,
+    "engineering_interpretation": "6 dB is approximately a fourfold power difference and is fixed here as a large station-baseline asymmetry effect size before these independent windows are downloaded.",
+    "required": "Both median per-window raw S2-minus-N1 dB and median per-window corrected S2-minus-N1 dB must be >= 6 dB, with at least 15 complete paired windows."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_INDEPENDENT_NOISE_REPLICATION_DATA_ACCESS",
+    "both_raw_and_corrected_median_ratio_ge_6db": "REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY",
+    "otherwise": "NOT_REPLICATED_LARGE_H10S2_BASELINE_POWER_ASYMMETRY"
+  },
+  "claim_ceiling": "A replicated asymmetry establishes only that H10S2 has a substantially higher 10-80 Hz baseline power than H10N1 across this independent frozen time sample. It does not identify the physical cause, prove sensor malfunction, validate or invalidate any 119-Hz target claim, or convert the failed cross-station positive control to PASS. A non-replication likewise does not erase the completed control result.",
+  "hard_rules": [
+    "INDEPENDENT_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "NO_WINDOW_REPLACEMENT",
+    "NO_FREQUENCY_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_TARGET_BAND_USE",
+    "NO_SOURCE_IDENTITY_INFERENCE",
+    "POSITIVE_CONTROL_FAILURE_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

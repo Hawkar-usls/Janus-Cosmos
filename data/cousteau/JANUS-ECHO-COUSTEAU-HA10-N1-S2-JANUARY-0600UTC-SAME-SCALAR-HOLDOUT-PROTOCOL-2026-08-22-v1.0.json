@@ -1,0 +1,92 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-N1-S2-JANUARY-0600UTC-SAME-SCALAR-HOLDOUT-PROTOCOL-2026-08-22-v1.0",
+  "gate_id": "COUSTEAU_HA10_N1_S2_JANUARY_0600UTC_SAME_SCALAR_HOLDOUT_V1",
+  "status": "PREREGISTERED_AFTER_JANUARY_1800_FAIL_BEFORE_JANUARY_0600_WINDOWS_ARE_DOWNLOADED",
+  "purpose": "Discriminate a daypart/regime dependence from a broader month-boundary failure by applying the exact unchanged 12.616188132659623 dB scalar and the exact prior holdout thresholds to a new January 2015 06:00 UTC sample. The prior January 18:00 FAIL remains immutable regardless of this outcome.",
+  "epistemic_position": {
+    "created_after_january_1800_holdout_fail": true,
+    "january_0600_waveforms_inspected_before_freeze": false,
+    "may_discriminate_daypart_dependence": true,
+    "may_identify_physical_cause": false,
+    "may_erase_prior_january_1800_fail": false,
+    "may_reclassify_119hz_negative": false,
+    "authority_delta_for_119hz": 0
+  },
+  "frozen_upstream": {
+    "january_1800_fail_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-OUT-OF-MONTH-SCALAR-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "january_1800_fail_summary_git_blob_sha1": "09ea4c580d93e88c152b81989a6316153e28d8f7",
+    "january_1800_verdict_required": "OUT_OF_MONTH_SCALAR_HOLDOUT_FAIL",
+    "prior_december_scalar_summary_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-N1-S2-INDEPENDENT-SCALAR-COLLAPSE-HOLDOUT-RUN-001-SUMMARY-2026-08-22-v1.0.json",
+    "prior_december_scalar_summary_git_blob_sha1": "6b2c075396b3fc60df3fafe41024a72c86a3afff",
+    "frozen_119hz_result_path": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0.json",
+    "frozen_119hz_result_git_blob_sha1": "eb8b48fb7f043160c057f9df6264a781412ed854"
+  },
+  "frozen_scalar": {
+    "source_value_db": 12.616188132659623,
+    "holdout_refit_allowed": false,
+    "alternate_scalar_search_allowed": false,
+    "recentering_allowed": false
+  },
+  "channels": ["IM.H10N1..EDH", "IM.H10S2..EDH"],
+  "holdout_window_contract": {
+    "window_duration_s": 600,
+    "window_start_time_utc_each_day": "06:00:00Z",
+    "dates": [
+      "2015-01-01","2015-01-02","2015-01-03","2015-01-04","2015-01-05",
+      "2015-01-06","2015-01-07","2015-01-08","2015-01-09","2015-01-10",
+      "2015-01-11","2015-01-12","2015-01-13","2015-01-14","2015-01-15",
+      "2015-01-16","2015-01-17","2015-01-18","2015-01-19","2015-01-20"
+    ],
+    "minimum_complete_paired_windows": 15,
+    "no_replacement_for_missing_windows": true,
+    "no_posthoc_date_exclusion": true,
+    "no_event_catalog_selection": true
+  },
+  "frequency_contract": {
+    "broadband_hz": [10.0,80.0],
+    "fixed_subbands_hz": {"low":[10.0,30.0],"mid":[30.0,55.0],"high":[55.0,80.0]},
+    "whole_spectrum_peak_search_allowed": false,
+    "best_subband_selection_allowed": false,
+    "119hz_or_117_121hz_bins_may_be_used": false
+  },
+  "spectral_estimator": {
+    "preprocessing": ["merge_without_interpolation","demean","linear_detrend"],
+    "welch_window": "hann",
+    "welch_nperseg_samples": 16384,
+    "welch_noverlap_samples": 8192,
+    "welch_scaling": "density",
+    "one_sided": true,
+    "response_correction": "PSD_DIVIDE_BY_ABS_RESPONSE_SQUARED",
+    "band_power": "trapezoidal integration"
+  },
+  "classification_thresholds": {
+    "maximum_absolute_broadband_residual_median_db": 2.0,
+    "maximum_broadband_residual_iqr_db": 3.0,
+    "window_absolute_residual_tolerance_db": 3.0,
+    "minimum_fraction_windows_within_tolerance": 0.8,
+    "maximum_absolute_fixed_subband_residual_median_db": 2.5,
+    "threshold_source": "Unchanged from both previous scalar-collapse holdouts."
+  },
+  "decision_logic": {
+    "fewer_than_15_complete_paired_windows": "BLOCKED_JANUARY_0600_SAME_SCALAR_DATA_ACCESS",
+    "all_generalization_gates_pass": "JANUARY_0600_SAME_SCALAR_PASS",
+    "otherwise": "JANUARY_0600_SAME_SCALAR_FAIL"
+  },
+  "cross_gate_interpretation": {
+    "january_0600_pass_with_january_1800_fail": "SUPPORTS_DAYPART_OR_REGIME_DEPENDENCE_OF_WINDOW_LEVEL_RESIDUAL_VARIABILITY",
+    "january_0600_fail_with_january_1800_fail": "SUPPORTS_BROADER_OUT_OF_MONTH_NONSTATIONARITY_BEYOND_ONE_DAYPART",
+    "either_outcome_identifies_physical_cause": false
+  },
+  "claim_ceiling": "This discriminator may show whether the strict January scalar-collapse failure is specific to the previously tested 18:00 UTC daypart or also appears at 06:00 UTC. It cannot erase the prior 18:00 FAIL, cannot establish sensor gain or calibration error, and cannot validate 119 Hz.",
+  "hard_rules": [
+    "JANUARY_0600_WINDOWS_FROZEN_BEFORE_DOWNLOAD",
+    "EXACT_SAME_12_616188132659623_DB_SCALAR",
+    "EXACT_SAME_THRESHOLDS",
+    "NO_REFIT",
+    "NO_DATE_REPLACEMENT",
+    "NO_POSTHOC_EXCLUSION",
+    "PRIOR_JANUARY_1800_FAIL_IMMUTABLE",
+    "119HZ_NEGATIVE_RESULT_IMMUTABLE",
+    "AUTHORITY_DELTA_FOR_119HZ_ZERO"
+  ]
+}

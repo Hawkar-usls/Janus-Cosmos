@@ -1,0 +1,227 @@
+{
+  "artifact_id": "JANUS-ECHO-COUSTEAU-HA10-REVERSE-SPIRAL-CALIBRATION-CROSSTALK-AUDIT-2026-08-22-v1.0",
+  "status": "FROZEN_APPEND_ONLY_REVERSE_SPIRAL_AUDIT",
+  "date": "2026-08-22",
+  "method": {
+    "protocol": "JANUS-DEEP-ANALYSIS-5D-TRANCEPTION-REVERSE-HRAIN-INAIHR-PROTOCOL-2026-08-21-v1.0",
+    "pipeline": "D1_FORWARD -> D2_REVERSE -> D3_TRANCEPTION -> D4_SCALE -> D5_TIME_IDENTITY_PROVENANCE -> iNAIHR_CHALLENGE -> HRAIN_REINTEGRATION",
+    "firewall": [
+      "FACT != INTERPRETATION",
+      "INTERPRETATION != HYPOTHESIS",
+      "HYPOTHESIS != CONFIRMATION",
+      "PATTERN_MATCH != INDEPENDENT_REPLICATION"
+    ]
+  },
+  "scope": {
+    "internal_sources": [
+      "JANUS-ECHO-COUSTEAU-HA10-RESPONSE-CORRECTED-CONFIRMATORY-RUN-001-2026-08-22-v1.0",
+      "JANUS-ECHO-COUSTEAU-HA10-TPHASE-INBAND-POSITIVE-CONTROL-RUN-001-SUMMARY-2026-08-22-v1.0",
+      "JANUS-ECHO-COUSTEAU-HA10-N1-S2-SPECTRAL-SHAPE-VS-SCALE-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0",
+      "JANUS-ECHO-COUSTEAU-HA10-N1-S2-TEMPORAL-SCALE-STABILITY-DIAGNOSTIC-RUN-001-SUMMARY-2026-08-22-v1.0",
+      "HA10-ASCENSION-MAIL-TRIAD-SCOUT-SWARM-RUN-001-2026-08-22-v1.0",
+      "Janus-Demiurge native cruise trackline gate PR12/latest scout summaries"
+    ],
+    "external_primary_or_authoritative_sources": [
+      "https://conferences-test.ctbto.org/event/25/contributions/4421/",
+      "https://presentations.copernicus.org/EGU2020/EGU2020-5481_presentation.pdf",
+      "https://www.ctbto.org/sites/default/files/2024-07/20240618-CTBTO%2025th%20Anniversary%20booklet%20Final%20LRes.pdf",
+      "https://conferences.ctbto.org/event/30/contributions/6037/"
+    ]
+  },
+  "frozen_scientific_state_before_reverse_pass": {
+    "119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "positive_control_verdict": "FAIL_HA10_INBAND_TPHASE_PIPELINE_CONTROL",
+    "target_identity": "UNCONFIRMED",
+    "authority_delta_for_119hz": 0,
+    "observed_measurement_path_morphology": "H10S2_OVER_H10N1_BROADBAND_SCALE_OFFSET_WITH_TIME_VARIABLE_RESIDUALS"
+  },
+  "reverse_spiral_nodes": [
+    {
+      "node_id": "RS1_TIME_ALIGNMENT_WITH_KNOWN_H10S_FAULT",
+      "node_type": "PROVENANCE_BOUNDARY",
+      "dimension_origin": ["D2_REVERSE_CAUSAL", "D5_TIME_IDENTITY_PROVENANCE"],
+      "status": "SUPPORTED",
+      "claim": "The principal JANUS HA10 waveform windows used for the 119-Hz confirmatory run, in-band positive control and December/January baseline diagnostics occur after the documented onset of the H10S electronic-noise/cross-talk fault.",
+      "evidence": {
+        "known_fault_onset": "2013-07-19 electrical-noise spike on H10S1; evolved to strong permanent noise with cross-talk to H10S2 and H10S3",
+        "operations_change": "H10S1 removed from IDC Operations after the fault because of high electronic noise/spurious detections",
+        "janus_response_metadata_interval": "2014-12-11 through 2015-01-13",
+        "janus_first_confirmatory_event": "2015-01-04",
+        "janus_baseline_sample_month": "2014-12",
+        "janus_followup_sample_month": "2015-01"
+      },
+      "implication": "POST_2013_H10S_CROSSTALK_IS_A_PREEXISTING_CONFOUNDER_FOR_H10S2_AND_MUST_BE_BOUND_TO_INTERPRETATION_OF_THE_S2_BASELINE_OFFSET"
+    },
+    {
+      "node_id": "RS2_H10S2_IS_NOT_AN_INDEPENDENT_CLEAN_REFERENCE_DURING_KNOWN_FAULT_EPOCH",
+      "node_type": "RETRACTION_OR_DOWNGRADE",
+      "dimension_origin": ["D2_REVERSE_CAUSAL", "D3_TRANCEPTION_LATERAL"],
+      "status": "DOWNGRADE_REQUIRED",
+      "claim": "During the known H10S1 fault epoch, H10S2 cannot be treated as an independently clean hydrophone without an explicit cross-talk control.",
+      "evidence": {
+        "ctbto": "Noise on H10S1 is documented to affect H10S2 and H10S3 through cross-talk, with varying periods of low and strong cross-talk.",
+        "janus": "H10S2 shows much higher broadband baseline power than H10N1 and substantially lower event-vs-noise SNR in the positive control."
+      },
+      "previous_overstrong_reading_to_avoid": "A persistent S2/N1 offset alone is not sufficient to label the effect as seafloor/site resonance or a clean station gain difference."
+    },
+    {
+      "node_id": "RS3_RAW_TO_CORRECTED_OFFSET_DOES_NOT_COLLAPSE",
+      "node_type": "EVIDENCE",
+      "dimension_origin": ["D1_FORWARD_CAUSAL", "D4_ABSTRACTION_SCALE"],
+      "status": "SUPPORTED",
+      "claim": "The documented StationXML response correction used by JANUS does not normalize the approximately 12-13 dB H10S2-over-H10N1 broadband baseline offset.",
+      "evidence": {
+        "positive_control_noise_offset_raw_db": 12.732894596815063,
+        "positive_control_noise_offset_corrected_db": 12.848305393187097,
+        "independent_0600_raw_median_db": 12.479728560324869,
+        "independent_0600_corrected_median_db": 12.616188132659623,
+        "stationxml_nominal_s2_over_n1_sensitivity_ratio_db": -0.09473134449147567,
+        "spectral_response_correction_ratio_delta_db_range": [0.09496910997046548, 0.1427254457843894]
+      },
+      "implication": "THE_12_13DB_OFFSET_WAS_NOT_CREATED_OR_REMOVED_BY_THE_DOCUMENTED_STATIONXML_CORRECTION_USED_IN_THE_JANUS_RUNS"
+    },
+    {
+      "node_id": "RS4_DEPLOYED_UWS_CALIBRATION_IS_NOT_FULL_CHAIN",
+      "node_type": "IDENTITY_BOUNDARY",
+      "dimension_origin": ["D4_ABSTRACTION_SCALE", "D5_TIME_IDENTITY_PROVENANCE"],
+      "status": "SUPPORTED",
+      "claim": "The routine post-deployment UWS calibration described by CTBTO measures digitizer electronics by injecting a known signal after switching out the hydrophone ceramic/analogue sensing path; it is not equivalent to a full at-sea end-to-end hydrophone+riser calibration.",
+      "evidence": {
+        "predeployment": "Full end-to-end calibration includes hydrophone sensing element/pre-amplifier and UWS digitizer electronics.",
+        "postdeployment": "Known waveform injection is used to measure UWS digitizer response; CTBTO 2025 explicitly describes current deployed calibration as excluding the analogue hydrophone/riser contribution and motivates full-chain in-situ calibration."
+      },
+      "implication": "A_RISER_HYDROPHONE_OR_ANALOG_PATH_PROBLEM_CAN_SURVIVE_A_NOMINAL_DIGITIZER_CALIBRATION_AND_STATIONXML_CORRECTION"
+    },
+    {
+      "node_id": "RS5_H10S_CALIBRATION_CURVE_CHANGED_AROUND_FAULT_ONSET",
+      "node_type": "EVIDENCE",
+      "dimension_origin": ["D2_REVERSE_CAUSAL", "D5_TIME_IDENTITY_PROVENANCE"],
+      "status": "SUPPORTED_WITH_CHANNEL_ASSIGNMENT_CEILING",
+      "claim": "CTBTO/EGU material documents calibration-response changes around the 2013 H10S fault onset: H10S1 shifted by 0.8396 dB between March and September 2013, while H10S2/H10S3 before-vs-after comparisons show differences up to 4.7832 dB and 2.5340 dB in 1-100 Hz, with inverse trends relative to H10S1 and interpretation consistent with riser failure/cross-talk.",
+      "claim_ceiling": "The text extraction does not safely assign which of the 4.7832 dB and 2.5340 dB maxima belongs specifically to H10S2 versus H10S3 without the figure-level channel labels; preserve both as the H10S2/H10S3 pair of reported maxima.",
+      "implication": "THERE_WAS_A_REAL_INSTRUMENT_RESPONSE_CHANGE_NEAR_THE_FAULT_EPOCH_BUT_THE_PUBLISHED_MAGNITUDE_ALONE_DOES_NOT_EXPLAIN_THE_FULL_12_13DB_BASELINE_POWER_OFFSET"
+    },
+    {
+      "node_id": "RS6_H10N_IS_A_CLEANER_TEMPORAL_REFERENCE_IN_PUBLISHED_CALIBRATION_HISTORY",
+      "node_type": "EVIDENCE",
+      "dimension_origin": ["D3_TRANCEPTION_LATERAL", "D5_TIME_IDENTITY_PROVENANCE"],
+      "status": "SUPPORTED",
+      "claim": "The same CTBTO calibration study reports extremely small H10N digitizer-response differences between 2013 and 2017 (maximum differences of only a few thousandths of a dB in 1-100 Hz), while H10S shows the documented fault epoch.",
+      "implication": "THE_NORTH_TRIPLET_IS_A_BETTER_REFERENCE_FOR_ELECTRONICS_STABILITY_THAN_THE_SOUTH_TRIPLET_DURING_THIS_EPOCH_BUT_SITE_AND_PROPAGATION_DIFFERENCES_REMAIN"
+    },
+    {
+      "node_id": "RS7_119HZ_IS_OUTSIDE_THE_DECLARED_1_100HZ_AMPLITUDE_CALIBRATION_REQUIREMENT",
+      "node_type": "PROVENANCE_BOUNDARY",
+      "dimension_origin": ["D4_ABSTRACTION_SCALE", "D5_TIME_IDENTITY_PROVENANCE"],
+      "status": "SUPPORTED",
+      "claim": "CTBTO material states the Treaty amplitude-calibration requirement for IMS hydrophone stations as 1-100 Hz. The JANUS 119-Hz target lies above this band and near the 125-Hz Nyquist limit of the 250-Hz data.",
+      "implication": "RESPONSE_CORRECTED_119HZ_AMPLITUDE_MUST_NOT_BE_DESCRIBED_AS_WITHIN_THE_GUARANTEED_1_100HZ_CALIBRATED_BAND; THIS_DOES_NOT_REVERSE_THE_FROZEN_NEGATIVE_RESULT"
+    },
+    {
+      "node_id": "RS8_SOUTH_TRIPLET_PHYSICAL_CHAIN_DIFFERS_STRONGLY_FROM_NORTH",
+      "node_type": "WATCHLIST",
+      "dimension_origin": ["D3_TRANCEPTION_LATERAL", "D4_ABSTRACTION_SCALE"],
+      "status": "SUPPORTED_AS_CONTEXT_NOT_CAUSE",
+      "claim": "CTBTO station history describes HA10 north and south triplets with very different trunk-cable lengths, approximately 20 km and 127 km respectively.",
+      "implication": "NORTH_SOUTH_COMPARISON_IS_NOT_A_PURE_SENSOR_A_B_TEST; DEPLOYMENT_AND_TRANSMISSION_CHAIN_DIFFERENCES_MUST_REMAIN_LIVE_COMPETING_CAUSES"
+    },
+    {
+      "node_id": "RS9_BATHYMETRY_AND_ACOUSTIC_CALIBRATION_MUST_REMAIN_SEPARATE_EVIDENCE_LANES",
+      "node_type": "BRIDGE",
+      "dimension_origin": ["D3_TRANCEPTION_LATERAL", "D4_ABSTRACTION_SCALE"],
+      "status": "SUPPORTED",
+      "claim": "A calibration or cross-talk effect can alter the recorded acoustic contrast but cannot erase a physical seabed structure from independent bathymetry/backscatter data.",
+      "evidence": {
+        "current_native_track_gate": "No exact public machine-readable cruise-track crossing has yet been admitted for the frozen HA10 points in the latest scout pass.",
+        "mail_gates": "BODC, BAS/PDC, BGS, UKHO, CTBTO/Fugro/NAVFAC requests remain active for native track, swath and historical survey provenance."
+      },
+      "implication": "SEAFLOOR_GEOMETRY_MUST_BE_TESTED_INDEPENDENTLY_OF_HYDROPHONE_RESPONSE_HISTORY"
+    }
+  ],
+  "spiral_synthesis": {
+    "A0_observation": "H10S2 is approximately 12-13 dB higher than H10N1 across 10-80 Hz in multiple 2014-2015 samples.",
+    "B0_reverse_parent": "Those samples occur after a documented 2013 H10S1 electronic-noise fault with time-variable cross-talk into H10S2/H10S3.",
+    "C0_countermodel": "The S2 excess can therefore arise from contaminated south-triplet measurement-path noise without requiring a seabed-resonance explanation.",
+    "ASCEND_1": "StationXML correction barely changes the S2/N1 ratio, so the correction we applied is not what flattened or created the 12-13 dB offset.",
+    "A1_identity_check": "Routine deployed digitizer calibration is not a full hydrophone+riser-chain calibration, so a riser/analogue fault can survive nominal response correction.",
+    "B1_historical_anchor": "Published H10S calibration-response changes and cross-talk are temporally upstream of every main JANUS S2 waveform test inspected in this pass.",
+    "C1_discriminator": "Compare all three H10S channels against all three H10N channels before and after 2013-07-19 using raw counts first, then response-corrected data, and test whether S1 noise predicts S2/S3 excess/coherence.",
+    "ASCEND_2": "Only after the triplet-crosstalk gate and independent bathymetry/swath gate should residual acoustic morphology be interpreted as a candidate site/seafloor effect."
+  },
+  "supported": [
+    "THE_H10S_CROSSTALK_FAULT_PREDATES_THE_JANUS_2014_2015_H10S2_ANALYSIS_WINDOWS",
+    "H10S2_WAS_AFFECTABLE_BY_H10S1_CROSSTALK_DURING_THE_RELEVANT_ERA",
+    "THE_DOCUMENTED_STATIONXML_CORRECTION_DOES_NOT_REMOVE_THE_12_13DB_S2_N1_OFFSET",
+    "POST_DEPLOYMENT_DIGITIZER_CALIBRATION_IS_NOT_EQUIVALENT_TO_FULL_CHAIN_HYDROPHONE_RISER_CALIBRATION",
+    "119HZ_IS_OUTSIDE_THE_DECLARED_1_100HZ_AMPLITUDE_CALIBRATION_REQUIREMENT"
+  ],
+  "derived": [
+    "KNOWN_H10S_CROSSTALK_IS_NOW_THE_HIGHEST_PRIORITY_INSTRUMENTAL_CONFOUNDER_FOR_THE_S2_BASELINE_EXCESS",
+    "THE_FAILED_S2_POSITIVE_CONTROL_CAN_BE_EXPLAINED_PARSIMONIOUSLY_BY_AN_ELEVATED_OR_CONTAMINATED_S2_BASELINE_BUT_THIS_MECHANISM_REQUIRES_DIRECT_TRIPLET_TESTING",
+    "A_PHYSICAL_SEAFLOOR_STRUCTURE_IF_PRESENT_MUST_SURVIVE_IN_INDEPENDENT_BATHYMETRY_EVEN_IF_ACOUSTIC_CONTRAST_IS_INSTRUMENT_CONTAMINATED"
+  ],
+  "rejected_or_downgraded": [
+    "H10S2_IS_A_CLEAN_INDEPENDENT_REFERENCE_DURING_2014_2015",
+    "THE_12_13DB_OFFSET_BY_ITSELF_SUPPORTS_A_SEAFLOOR_RESONANCE_CAUSE",
+    "STATIONXML_RESPONSE_CORRECTION_WAS_SHOWN_TO_HAVE_NORMALIZED_THE_OFFSET_TO_ORDINARY_BOTTOM",
+    "A_POST_DEPLOYMENT_DIGITIZER_CALIBRATION_PROVES_THE_HYDROPHONE_RISER_PATH_WAS_HEALTHY"
+  ],
+  "open_gates": [
+    {
+      "gate_id": "COUSTEAU_HA10_PRE_POST_2013_CROSSTALK_TRIPLET_GATE_V1",
+      "priority": 1,
+      "design": [
+        "Use H10S1/H10S2/H10S3 and H10N1/H10N2/H10N3.",
+        "Freeze pre-fault windows before 2013-07-19 and post-fault windows including exact existing 2014-12/2015-01 JANUS windows where archive coverage permits.",
+        "Analyze RAW COUNTS first; apply response correction only as a second lane.",
+        "Measure fixed-band PSD, pairwise coherence/correlation and coincident transient-noise coupling without post-hoc frequency selection.",
+        "Test whether H10S1 noise level/coincident spikes predict H10S2/H10S3 excess and whether this relation is absent/weaker pre-fault and in H10N.",
+        "No claim about seabed structure may be promoted from this gate alone."
+      ]
+    },
+    {
+      "gate_id": "COUSTEAU_HA10_H10S_CALIBRATION_TIMELINE_CUSTODIAN_GATE_V1",
+      "priority": 2,
+      "design": [
+        "Obtain authoritative pre/post-2013 H10S1/S2/S3 calibration sequence dates and transfer functions.",
+        "Ask whether StationXML response epochs incorporate any fault-era correction or only nominal/system response.",
+        "Ask for H10S1 crosstalk/noise maintenance history and any riser-cable intervention/replacement dates."
+      ]
+    },
+    {
+      "gate_id": "COUSTEAU_HA10_NATIVE_SWATH_STRUCTURE_GATE_V1",
+      "priority": 3,
+      "design": [
+        "Continue native BODC/BAS/BGS/UKHO/Thales provenance recovery.",
+        "Require an exact track/swath/coverage intersection before making local seabed-geometry claims.",
+        "Keep bathymetry/backscatter evidence independent from acoustic calibration evidence."
+      ]
+    }
+  ],
+  "mail_alignment": {
+    "earthscope_ticket": "DH-2635",
+    "existing_request_already_asks": [
+      "complete station/deployment metadata and station history",
+      "instrument response and calibration documentation",
+      "channel availability/gaps and archive notes",
+      "network/deployment technical reports"
+    ],
+    "new_specific_followup_questions_to_hold_for_human_reply_or_targeted_ctbto_contact": [
+      "Please provide the H10S1/H10S2/H10S3 calibration sequence timeline around 2013-07-19 and the following years.",
+      "Did any StationXML response epoch change because of the H10S1 electronic-noise/cross-talk fault?",
+      "Were H10S2/H10S3 data quality flags or operational exclusions applied during high-cross-talk periods?",
+      "Was the suspected H10S1 riser-cable failure ever repaired/replaced, and on what date?",
+      "Can the pre/post-fault UWS calibration transfer functions be shared numerically?"
+    ]
+  },
+  "authority": {
+    "frozen_119hz_verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "authority_delta_for_119hz": 0,
+    "target_identity": "UNCONFIRMED",
+    "target_evidence_delta": "NONE_FROM_REVERSE_SPIRAL_AUDIT",
+    "physical_seafloor_structure_status": "UNCONFIRMED_PENDING_NATIVE_SWATH_OR_EQUIVALENT_GEOMETRY_EVIDENCE",
+    "h10s_fault_causal_assignment": "UNCONFIRMED_PENDING_TRIPLET_CROSSTALK_GATE"
+  },
+  "canonical_invariant": "BEFORE_INTERPRETING_H10S2_AS_SEAFLOOR_OR_SITE_PHYSICS_BIND_EVERY_2014_2015_RESULT_TO_THE_KNOWN_POST_2013_H10S1_CROSSTALK_EPOCH_AND_RETEST_THE_FULL_TRIPLETS_RAW_FIRST",
+  "claim_ceiling": "This reverse pass establishes that a documented H10S fault/cross-talk epoch is temporally upstream of the JANUS H10S2 analyses and that the routine response correction used by JANUS does not remove the observed S2/N1 offset. It does not prove that cross-talk caused the full offset, does not prove or disprove a physical seabed structure, and does not promote the 119-Hz target."
+}
