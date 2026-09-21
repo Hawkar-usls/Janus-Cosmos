@@ -1,0 +1,53 @@
+{
+  "artifact_id": "JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.calibration.layer_matrix.v1",
+  "created_date": "2026-09-21",
+  "status": "FROZEN",
+  "layers": [
+    {
+      "layer": "NAVIGATION_TOWFISH",
+      "calibration_sources": ["BODC_CD169_TOBI_BODCREQ_9406"],
+      "calibration_products": ["native cd169.veh_nav", "commands.cfg", "raw TOBI heading/altitude/cable context"],
+      "learned_or_frozen": ["kilometre-scale sparse-log navigation error is physically possible", "cross-track error dominates frozen Line-19 straight interpolation", "CD169-specific mrgnav_inertia -u 236"],
+      "validation_requirement": "different unseen towfish survey with native per-ping vehicle navigation",
+      "forbidden_transfer": ["CD169 signed cross-track orientation", "CD169 target labels"]
+    },
+    {
+      "layer": "COVERAGE_AND_FOOTPRINT_LOGIC",
+      "calibration_sources": ["UKHO_HI1751_AUTHORITATIVE_COVERAGE_NEGATIVE", "BGS_ASCENSION_COVERAGE_REFERRAL_IDA310886", "BAS_PDC_JR15001_RAW_EM122_LINE_0019"],
+      "learned_or_frozen": ["compilation bbox does not imply survey footprint", "institution-specific absence is not global absence", "survey footprint does not imply exact ping/beam footprint"],
+      "validation_requirement": "unseen survey with authoritative footprint or ping/beam coverage truth",
+      "forbidden_transfer": ["using 1.5 km as a universal coverage margin"]
+    },
+    {
+      "layer": "MULTIBEAM_PROCESSING",
+      "calibration_sources": ["BAS_PDC_ASCENSION_COMPILATION_01236", "BAS_PDC_JR15001_RAW_EM122_LINE_0019", "BODC_JR15001_ORIGINATOR_EM122_BODCREQ_9408"],
+      "learned_or_frozen": ["cross-format parser invariance", "raw uncorrected != corrected bathymetry truth", "higher resolution != automatically cleaner/more accurate", "SVP state must be explicit"],
+      "validation_requirement": "unseen raw multibeam line plus independent corrected/processed reference",
+      "forbidden_transfer": ["inventing numeric SVP error from qualitative custodian wording", "ranking channels by resolution alone"]
+    },
+    {
+      "layer": "HYDROACOUSTIC_RESPONSE_AND_MISSINGNESS",
+      "calibration_sources": ["EARTHSCOPE_HA10_DH_2635"],
+      "learned_or_frozen": ["StationXML response epoch binding", "raw and corrected diagnostics must coexist", "availability-service absence != waveform absence", "event-catalog absence != event absence"],
+      "validation_requirement": "unseen hydroacoustic events/stations with independent event truth and complete response metadata",
+      "forbidden_transfer": ["retuning 119 Hz bands or thresholds on HA10 negative slice"]
+    },
+    {
+      "layer": "ARCHIVE_AND_CUSTODIAN_PROVENANCE",
+      "calibration_sources": ["FUGRO_P2548_ARCHIVE_ROUTE", "BGS_ASCENSION_COVERAGE_REFERRAL_IDA310886", "BODC_JR15001_ORIGINATOR_EM122_BODCREQ_9408", "BODC_CD169_TOBI_BODCREQ_9406"],
+      "learned_or_frozen": ["access failure != data absence", "public product != complete originator holding", "custodian reply scopes claims", "archive route must preserve identity corrections"],
+      "validation_requirement": "not a numeric predictive layer; audit by provenance completeness and contradiction handling",
+      "forbidden_transfer": ["helpfulness as scientific evidence", "silent substitution of proxy datasets"]
+    }
+  ],
+  "global_validation_firewall": {
+    "same_dataset_may_calibrate_multiple_layers": true,
+    "same_dataset_may_validate_a_layer_it_calibrated": false,
+    "cross_layer_reuse_requires_explicit_role": true,
+    "future_unseen_validation_dataset_must_be_frozen_before_results": true,
+    "v1_and_v2_must_be_scored_on_same_unseen_data": true,
+    "no_single_overall_score": true
+  },
+  "next_gate": "SYNTHETIC_FORWARD_MODEL_V2_MULTISOURCE_FREEZE"
+}
