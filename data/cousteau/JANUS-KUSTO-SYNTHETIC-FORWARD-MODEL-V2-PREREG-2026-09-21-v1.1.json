@@ -1,0 +1,52 @@
+{
+  "artifact_id": "JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-2026-09-21-v1.1",
+  "schema": "janus.cosmos.kusto.synthetic_forward_model_v2.prereg.v1_1",
+  "created_date": "2026-09-21",
+  "status": "PREREGISTERED_MULTISOURCE_CALIBRATION_ARCHITECTURE",
+  "supersedes_for_future_v2_implementation": "data/cousteau/JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-2026-09-21-v1.0.json",
+  "does_not_modify_historical_v1_0": true,
+  "calibration_registry": "data/cousteau/JANUS-KUSTO-EXTERNAL-REAL-DATA-CALIBRATION-REGISTRY-2026-09-21-v1.0.json",
+  "layer_matrix": "data/cousteau/JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-2026-09-21-v1.0.json",
+  "component_packs": [
+    "data/cousteau/JANUS-KUSTO-SYNTHETIC-NAVIGATION-V2-PARAMETER-PACK-2026-09-21-v0.1.json",
+    "data/cousteau/JANUS-KUSTO-COVERAGE-AND-PROVENANCE-CONTROL-PACK-2026-09-21-v1.0.json",
+    "data/cousteau/JANUS-KUSTO-MULTIBEAM-PROCESSING-CALIBRATION-PACK-2026-09-21-v1.0.json",
+    "data/cousteau/JANUS-KUSTO-HYDROACOUSTIC-INSTRUMENT-AWARENESS-CALIBRATION-PACK-2026-09-21-v1.0.json"
+  ],
+  "v2_architecture": {
+    "NAVIGATION": "empirical method-conditioned navigation nuisance from CD169, with unseen-survey validation required",
+    "COVERAGE": "hierarchical product->survey->raw-swath->ping/beam coverage booleans; no promotion between levels without evidence",
+    "MULTIBEAM_PROCESSING": "explicit processing state, SVP/SSP state, channel QC lineage, raw-vs-corrected separation",
+    "SONAR_GEOMETRY": "vehicle pose + altitude + local terrain -> side/cross-track/slant/sample distribution with propagated navigation uncertainty",
+    "HYDROACOUSTIC_INSTRUMENT": "response-epoch binding + raw/corrected parallel metrics + availability/missingness state",
+    "MORPHOLOGY": "remains downstream and blind; cannot feed back into navigation, coverage, response or processing calibration"
+  },
+  "new_hard_rules_from_multisource_audit": [
+    "VALID_GRID_CELL_NE_SPECIFIC_SURVEY_COVERAGE",
+    "SPECIFIC_SURVEY_COVERAGE_NE_PING_BEAM_INSONIFICATION",
+    "RAW_NE_CORRECTED",
+    "HIGH_RESOLUTION_NE_HIGHEST_ACCURACY",
+    "ACCESS_FAILURE_NE_DATA_ABSENCE",
+    "SERVICE_GAP_NE_SENSOR_GAP",
+    "EVENT_CATALOG_ABSENCE_NE_EVENT_ABSENCE",
+    "QUALITATIVE_UNCERTAINTY_NE_INVENTED_NUMERIC_PRIOR",
+    "CUSTODIAN_STATEMENT_SCOPE_MUST_BE_PRESERVED",
+    "CALIBRATION_DATA_NE_UNSEEN_VALIDATION"
+  ],
+  "unseen_validation_requirements": {
+    "navigation": "different towfish survey with native vehicle navigation",
+    "coverage": "different survey with authoritative footprint and preferably ping/beam geometry",
+    "multibeam_processing": "different raw multibeam acquisition with corrected/processed reference and usable sound-speed provenance",
+    "hydroacoustic": "different event/station set with response metadata and independent event truth",
+    "morphology": "known-target or strongly independently constrained geometry withheld until predictions are frozen"
+  },
+  "reporting": {
+    "v1_vs_v2_same_metric_required": true,
+    "tail_errors_required": true,
+    "negative_results_required": true,
+    "per_layer_metrics_required": true,
+    "single_vanity_score_forbidden": true
+  },
+  "claim_ceiling": "CALIBRATED_ARCHITECTURE_ONLY__NO_V2_PREDICTIVE_SKILL_CLAIM_UNTIL_UNSEEN_VALIDATION",
+  "next_action": "IMPLEMENT_LAYERED_V2_WITH_COMPONENT_TESTS_AND_FREEZE_BEFORE_ANY_UNSEEN_RESULT_INSPECTION"
+}
