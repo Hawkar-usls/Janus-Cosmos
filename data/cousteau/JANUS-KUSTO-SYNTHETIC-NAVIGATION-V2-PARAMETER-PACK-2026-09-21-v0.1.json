@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-SYNTHETIC-NAVIGATION-V2-PARAMETER-PACK-2026-09-21-v0.1",
+  "schema": "janus.cosmos.kusto.synthetic_navigation_v2.parameter_pack.v0_1",
+  "status": "CALIBRATED_PARAMETER_PACK__NOT_VALIDATED_ON_UNSEEN_REAL_DATA",
+  "source_calibration_receipt": "data/cousteau/JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-RECEIPT-2026-09-21-v1.0.json",
+  "source_role": "CALIBRATION_ONLY",
+  "models": {
+    "GENERIC_SPARSE_LOG_TO_NATIVE_RADIAL": {
+      "scope": "Orientation-agnostic uncertainty when only sparse science-log towfish coordinates are available and native per-ping navigation is unknown.",
+      "empirical_radius_m": [730.68703,2839.470585,1925.09789,1950.803977,1139.690712,447.395914,377.530861,480.318862,594.792983,542.16289,653.097543,1068.069238,4690.790112,853.449752,772.202441],
+      "summary_m": {"median":772.2024409436165,"p90":2484.003941983289,"p95":3394.866443380643,"max":4690.790112445272},
+      "future_sampling_rule": "bootstrap empirical radius; randomize bearing uniformly unless an external directional model was frozen independently",
+      "signed_direction_transfer_from_cd169_forbidden": true
+    },
+    "TWO_ENDPOINT_LINEAR_INTERPOLATION": {
+      "scope": "Method-conditioned nuisance for straight interpolation between sparse towfish endpoints, calibrated on CD169 Line 19.",
+      "empirical_along_m": [320.057873,321.350012,331.697418,342.044811,327.84295,338.190313,339.482387,343.391025,344.683071,339.536397,334.389702,335.681703,339.590244,334.443492,335.735448,330.58866,334.49712,320.295023,315.148174,300.94604,295.799152,290.652244,276.450053,271.303105,266.156137,251.95389,255.862141,250.715113,254.623321,258.531507],
+      "empirical_cross_m_signed_cd169": [1924.369798,1903.720132,1876.617126,1849.5141,1826.283143,1799.180076,1778.530319,1742.392633,1721.742835,1692.058426,1662.373988,1641.724128,1605.586305,1575.901787,1555.251864,1525.567295,1489.429358,1466.198071,1436.513417,1413.282077,1383.597367,1353.912629,1330.68121,1300.996417,1271.311595,1248.080096,1211.941867,1182.256961,1146.118671,1109.980351],
+      "summary_m": {"position_median":1576.0263359827777,"position_p90":1883.359595986189,"along_median":324.5964809349921,"cross_median":1540.4095792039368},
+      "future_sampling_rule": "bootstrap paired along/cross magnitudes; randomize cross-track sign by default for unseen surveys unless a signed directional calibration was frozen independently",
+      "cd169_signed_bias_may_be_used_outside_cd169": false
+    },
+    "ADVERSARIAL_REAL_TAILS": {
+      "scope": "Stress-test navigation with empirically observed large errors, not a probability forecast.",
+      "threshold_basis": "global sparse-log-to-native p90",
+      "tail_radius_m": [2839.470585,4690.790112],
+      "sampling_rule": "sample tail radius and randomize bearing",
+      "probability_interpretation_forbidden": true
+    }
+  },
+  "regimes": {
+    "IDEAL": "zero navigation perturbation",
+    "REALISTIC_CALIBRATED": "use method-appropriate empirical bootstrap",
+    "ADVERSARIAL_REAL_TAILS": "use observed upper-tail stress radii"
+  },
+  "firewall": {
+    "validated_on_unseen_real_data": false,
+    "cd169_can_validate_this_pack": false,
+    "sonar_intensity_used": false,
+    "morphology_labels_used": false,
+    "target_labels_used": false,
+    "parameter_pack_may_be_promoted_after_cd169_fit_only": false
+  },
+  "next_gate": "UNSEEN_REAL_SURVEY_NAVIGATION_VALIDATION_V1_VS_V2"
+}
