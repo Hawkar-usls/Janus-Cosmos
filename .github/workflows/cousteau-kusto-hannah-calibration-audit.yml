@@ -1,0 +1,26 @@
+name: Cousteau KUSTO Hannah calibration audit
+
+on:
+  push:
+    branches:
+      - feature/kusto-hannah-real-calibration-v1
+    paths:
+      - 'data/cousteau/JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-*.json'
+      - 'data/cousteau/JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-*.json'
+      - 'workspace/kusto_hannah_cd169_real_world_calibration.py'
+      - 'workspace/test_kusto_hannah_cd169_calibration_receipt.py'
+      - '.github/workflows/cousteau-kusto-hannah-calibration-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile calibration scorer
+        run: python -m py_compile workspace/kusto_hannah_cd169_real_world_calibration.py
+      - name: Audit calibration firewalls
+        run: python workspace/test_kusto_hannah_cd169_calibration_receipt.py
