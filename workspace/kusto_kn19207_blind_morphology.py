@@ -110,8 +110,16 @@ for ri,r in enumerate(recs):
 pts=np.asarray(pts,float)
 
 centers=[{"id":"TARGET","cx":0.0,"cy":0.0,"requested_offset_s":0,"record_time":TARGET_T,"record_index":None}]
+tmin=min(r["t"] for r in recs)
+tmax=max(r["t"] for r in recs)
 for off in OFFSETS:
-    idx=int(np.argmin([abs(r["t"]-(TARGET_T+off)) for r in recs]))
+    requested_t=TARGET_T+off
+    if requested_t < tmin or requested_t > tmax:
+        centers.append({"id":f"CONTROL_{off:+d}s","available":False,"requested_offset_s":off,
+                        "reason":"requested_offset_outside_source_file",
+                        "source_time_bounds":[tmin,tmax]})
+        continue
+    idx=int(np.argmin([abs(r["t"]-requested_t) for r in recs]))
     r=recs[idx]
     if BEAM_INDEX>=r["nb"] or r["flags"][BEAM_INDEX]!=0:
         centers.append({"id":f"CONTROL_{off:+d}s","available":False,"requested_offset_s":off,
@@ -152,7 +160,8 @@ out={
  "centers":centers,
  "target_ranks":ranks,
  "interpretation_ceiling":"BLIND_MORPHOLOGY_SCREEN_ONLY__NO_ARTIFICIALITY_OR_IDENTITY_CLAIM",
- "automatic_promotion":"FORBIDDEN__REQUIRES_POSTRUN_REVIEW_AGAINST_PREREG_WITHOUT_NEW_METRICS"
+ "automatic_promotion":"FORBIDDEN__REQUIRES_POSTRUN_REVIEW_AGAINST_PREREG_WITHOUT_NEW_METRICS",
+ "implementation_note":"v1.1 selection fix enforces prereg fallback: requested offsets outside file are unavailable, never clamped to endpoint"
 }
 p=OUT/"JANUS-KUSTO-KN19207-BLIND-LOCAL-MORPHOLOGY-RUN-2026-09-21-v1.0.json"
 p.write_text(json.dumps(out,indent=2),encoding="utf-8")
