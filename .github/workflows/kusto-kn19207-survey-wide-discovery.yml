@@ -1,0 +1,31 @@
+name: KUSTO KN192-07 Survey-Wide Blind Discovery
+
+on:
+  push:
+    branches:
+      - feature/kusto-open-seafloor-sweep-v1
+    paths:
+      - 'workspace/kusto_kn19207_survey_wide_discovery.py'
+      - '.github/workflows/kusto-kn19207-survey-wide-discovery.yml'
+  workflow_dispatch:
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install scientific stack
+        run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Run frozen survey-wide blind discovery
+        run: python workspace/kusto_kn19207_survey_wide_discovery.py
+      - name: Upload discovery receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: kusto-kn19207-survey-wide-discovery-v1
+          path: workspace/kusto_open_seafloor_out/JANUS-KUSTO-KN19207-SURVEY-WIDE-BLIND-DISCOVERY-RUN-2026-09-21-v1.0.json
+          retention-days: 30
