@@ -1,0 +1,121 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-SURVEY-WIDE-BLIND-DISCOVERY-RECEIPT-2026-09-21-v1.0",
+  "created_utc": "2026-09-21T11:24:00Z",
+  "status": "SEALED_EXPLORATORY_DISCOVERY__8_SPATIALLY_DISTINCT_FOLLOWUP_CANDIDATES",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-KN19207-SURVEY-WIDE-BLIND-DISCOVERY-PREREG-2026-09-21-v1.0.json",
+    "freeze_commit": "217b75a72198dac7c59286e10f527a37fa37e0eb"
+  },
+  "run": {
+    "github_actions_run_id": 35593735698,
+    "conclusion": "success",
+    "artifact_id": 10636290932,
+    "artifact_zip_sha256": "648c906d35ead2baafe82bae8fc864c196f33a790902bce8d31fcecf4621fb35"
+  },
+  "survey": {
+    "id": "KN192-07",
+    "platform": "Knorr",
+    "instrument": "SeaBeam 3012",
+    "fbt_files_processed": 342,
+    "good_beam_points": 6871514,
+    "raw_candidate_centers": 2858,
+    "candidate_centers_after_5km_frozen_target_exclusion": 2852
+  },
+  "look_elsewhere": {
+    "empirical_tail_each_side": 0.005,
+    "family_vote_cap": "ONE_VOTE_PER_FAMILY",
+    "followup_requires": "AT_LEAST_TWO_DISTINCT_FAMILIES_AT_SAME_RADIUS_WITH_AT_LEAST_ONE_STRUCTURAL_FAMILY",
+    "pre_dedup_followup_count": 8,
+    "spatially_deduplicated_followup_count": 8
+  },
+  "candidates": [
+    {
+      "id": "KN19207_CAND_001",
+      "lat": -4.20546708989972,
+      "lon": -14.871748111744372,
+      "radius_m": 1000,
+      "source_file": "sb20080105123445.xse.mb94.fbt",
+      "record_index": 130,
+      "family_votes": ["ROUGHNESS_FAMILY","CURVATURE_FAMILY","RADIAL_FAMILY"],
+      "directional_note": "LOW_TAIL_SMOOTH_ISOTROPIC_CONTROL_LIKE",
+      "metrics": {"plane_rmse_m":3.6238918534280606,"quadratic_rmse_m":3.269093188795667,"curvature_anisotropy":1.0035667947268367,"radial_r2":0.00024831174464479133,"m4":0.03525337218597975}
+    },
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462,
+      "radius_m": 1000,
+      "source_file": "sb20080106143036.xse.mb94.fbt",
+      "record_index": 150,
+      "family_votes": ["RADIAL_FAMILY","ANGULAR_FAMILY"],
+      "directional_note": "HIGH_RADIAL_AND_HIGH_M4__PRIMARY_STRUCTURAL_FOLLOWUP",
+      "metrics": {"n_good_beams":31087,"relief_m":338.091052159667,"plane_rmse_m":81.69312546572196,"quadratic_rmse_m":37.87333984167176,"curvature_anisotropy":2.757347933788418,"radial_r2":0.8151390410789084,"radial_percentile":0.9994738688179586,"m4":0.7313663017551347,"m4_percentile":0.9984216064538758}
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432,
+      "radius_m": 1000,
+      "source_file": "sb20080108085751.xse.mb94.fbt",
+      "record_index": 90,
+      "family_votes": ["RADIAL_FAMILY","ANGULAR_FAMILY"],
+      "directional_note": "LOW_RADIAL_HIGH_M4_MIXED_EXTREME",
+      "metrics": {"n_good_beams":41138,"relief_m":139.7784678310154,"radial_r2":0.00004787582238929833,"radial_percentile":0.000526131182041389,"m4":0.8136192162415816,"m4_percentile":0.9994738688179586}
+    },
+    {
+      "id": "KN19207_CAND_004",
+      "lat": -4.2399610081365955,
+      "lon": -15.26855667523257,
+      "radius_m": 1000,
+      "source_file": "sb20080105104616.xse.mb94.fbt",
+      "record_index": 30,
+      "family_votes": ["ROUGHNESS_FAMILY","ANGULAR_FAMILY"],
+      "directional_note": "LOW_TAIL_CONTROL_LIKE"
+    },
+    {
+      "id": "KN19207_CAND_005",
+      "lat": -4.099231435240242,
+      "lon": -12.332032012186781,
+      "radius_m": 1000,
+      "source_file": "sb20080107222414.xse.mb94.fbt",
+      "record_index": 30,
+      "family_votes": ["CURVATURE_FAMILY","RADIAL_FAMILY"],
+      "directional_note": "LOW_ISOTROPY_LOW_RADIAL"
+    },
+    {
+      "id": "KN19207_CAND_006",
+      "lat": -4.309010339378846,
+      "lon": -12.270140997573803,
+      "radius_m": 1000,
+      "source_file": "sb20080111093721.xse.mb94.fbt",
+      "record_index": 170,
+      "family_votes": ["CURVATURE_FAMILY","RADIAL_FAMILY"],
+      "directional_note": "LOW_ISOTROPY_LOW_RADIAL"
+    },
+    {
+      "id": "KN19207_CAND_007",
+      "lat": -4.119167753526161,
+      "lon": -14.356560209706116,
+      "radius_m": 500,
+      "source_file": "sb20080105153549.xse.mb94.fbt",
+      "record_index": 50,
+      "family_votes": ["ROUGHNESS_FAMILY","RADIAL_FAMILY"],
+      "directional_note": "LOW_TAIL_CONTROL_LIKE"
+    },
+    {
+      "id": "KN19207_CAND_008",
+      "lat": -4.3376789874153,
+      "lon": -12.319260730325983,
+      "radius_m": 1000,
+      "source_file": "sb20080111090600.xse.mb94.fbt",
+      "record_index": 170,
+      "family_votes": ["CURVATURE_FAMILY","ANGULAR_FAMILY"],
+      "directional_note": "HIGH_ANISOTROPY_LOW_M4_MIXED_EXTREME",
+      "metrics": {"n_good_beams":1423,"relief_m":290.4820048592983,"curvature_anisotropy":1593.5243635272595,"curvature_percentile":0.9980708523325149,"m4":0.011875172674699713,"m4_percentile":0.001929147667485093}
+    }
+  ],
+  "postrun_triage_note": "Directional labels summarize whether the already-frozen symmetric-tail triggers were high-tail or low-tail. They do not alter membership in the original set of eight candidates and are not a new statistical gate.",
+  "scientific_baseline": "SOUTHERN_MID_ATLANTIC_RIDGE_TECTONIC_VOLCANIC_HYDROTHERMAL_TERRAIN",
+  "claim_ceiling": "BLIND_SURVEY_WIDE_EXPLORATORY_DISCOVERY_ONLY__NO_NOVELTY__NO_ARTIFICIALITY__NO_OBJECT_IDENTITY",
+  "next_gate": "EXTERNAL_GEOLOGIC_IDENTITY_AND_INDEPENDENT_SURVEY_COVERAGE_AUDIT"
+}
