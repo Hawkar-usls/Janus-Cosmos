@@ -1,0 +1,80 @@
+{
+  "artifact_id": "JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-CORPUS-CONTRACT-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.hannah_cd169.real_world_calibration.contract.v1",
+  "created_date": "2026-09-21",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "parent_branch": "feature/kusto-frozen-point-morphology-gen4",
+  "status": "FROZEN_BEFORE_SYNTHETIC_FORWARD_MODEL_V2_FIT",
+  "purpose": "Use the originator-supplied CD169 native PRISM vehicle-navigation provenance as a real-world calibration corpus for future KUSTO synthetic forward models while preserving Synthetic-v1 as an immutable baseline and forbidding CD169 from serving as independent V2 validation.",
+  "source_policy": {
+    "raw_source_files": ["cd169.veh_nav", "commands.cfg"],
+    "raw_bytes_redistributed_to_repository": false,
+    "repository_stores": ["source hashes and sizes", "derived residual statistics", "calibration code", "scientific disposition"],
+    "reason": "Preserve provenance and reproducibility without republishing externally supplied source bytes."
+  },
+  "frozen_baselines": {
+    "synthetic_v1": "data/cousteau/GOLDMEMBER-CD169-LINE19-SYNTHETIC-GEOMETRY-MODULATION-RUN-001-2026-08-24-v1.0.json",
+    "synthetic_v1_status": "FROZEN_PRE_PRIMARY_BYTES",
+    "old_v2_ground_mapping": "data/cousteau/JANUS-HANNAH-CD169-GROUND-FIXED-REPLICATION-RECEIPT-2026-08-26-v1.0.json",
+    "old_v2_sample": 821,
+    "rule": "Neither historical artifact may be rewritten after native veh_nav inspection."
+  },
+  "calibration_questions": [
+    "How large is the error between sparse science-log TOBI positions and the native PRISM vehicle-navigation product?",
+    "How large and how directional is the error of the frozen Line-19 straight interpolation against native vehicle navigation?",
+    "Does the frozen Synthetic-v1 rounding-only Monte Carlo envelope contain the native navigation?",
+    "How far is the old V2 reconstructed target vehicle position from the native vehicle position at the same epoch?",
+    "Which real error components must be represented in future synthetic nuisance models?"
+  ],
+  "frozen_metrics": {
+    "global_anchor_position_residual": ["n", "min_m", "median_m", "mean_m", "p90_m", "p95_m", "max_m"],
+    "line19_position_residual": ["n", "min_m", "median_m", "mean_m", "p90_m", "p95_m", "max_m"],
+    "line19_error_frame": ["synthetic_frame_along_m", "synthetic_frame_cross_m"],
+    "target_geometry": ["native_closest_utc", "native_closest_distance_m", "relative_bearing_deg", "side", "time_shift_vs_synthetic_s"],
+    "provenance": ["veh_nav_sha256", "commands_cfg_sha256", "mrgnav_inertia_u_parameter_m"]
+  },
+  "synthetic_v2_allowed_use": {
+    "calibration_inputs": [
+      "native-vs-science-log residual distributions",
+      "native-vs-frozen-Line19 interpolation residual distributions",
+      "directional along/cross decomposition",
+      "CD169-specific mrgnav_inertia provenance",
+      "existing raw TOBI altitude/heading/cable context already frozen in KUSTO"
+    ],
+    "allowed_outputs": [
+      "realistic navigation nuisance priors",
+      "regime-conditioned navigation uncertainty",
+      "sample-to-ground uncertainty propagation",
+      "IDEAL / REALISTIC_CALIBRATED / ADVERSARIAL_REAL_TAILS synthetic regimes"
+    ],
+    "forbidden_outputs": [
+      "morphology truth label",
+      "target presence label",
+      "pyramid/artificial/natural label",
+      "scientific validation score on CD169 after fitting"
+    ]
+  },
+  "mandatory_epistemic_firewalls": {
+    "CD169_IS_CALIBRATION_AFTER_THIS_GATE": true,
+    "CD169_CANNOT_VALIDATE_SYNTHETIC_V2": true,
+    "UNSEEN_REAL_SURVEY_REQUIRED_FOR_VALIDATION": true,
+    "SYNTHETIC_V1_MUST_REMAIN_AVAILABLE_AS_BASELINE": true,
+    "NO_RETUNING_ON_FUTURE_UNSEEN_VALIDATION": true,
+    "NO_RECENTERING": true,
+    "NO_SONAR_INTENSITY_FOR_NAVIGATION_CALIBRATION": true,
+    "NO_MORPHOLOGY_PROMOTION_FROM_NAVIGATION_MATCH": true
+  },
+  "v2_freeze_sequence": [
+    "RUN_THIS_CALIBRATION_RECEIPT_FROM_ORIGINAL_HANNAH_BYTES",
+    "FREEZE_EMPIRICAL_ERROR_DISTRIBUTIONS",
+    "DEFINE_NUISANCE_FAMILIES_AND_REGIME_CONDITIONING",
+    "FREEZE_SYNTHETIC_FORWARD_MODEL_V2_CODE_AND_PARAMETERS",
+    "FREEZE_SCORING_METRICS_AND_FAILURE_CRITERIA",
+    "SELECT_AN_UNSEEN_REAL_SURVEY_WITHOUT_LOOKING_AT_TARGET_RESULTS",
+    "RUN_BLIND_VALIDATION_ON_UNSEEN_SURVEY",
+    "COMPARE_V1_VS_V2_ERRORS_WITHOUT_RETUNING"
+  ],
+  "promotion_rule": "Synthetic-v2 is methodologically improved only if a preregistered unseen-real validation shows lower error than Synthetic-v1 on the same metrics; CD169 fit quality alone cannot establish improvement.",
+  "next_gate": "SYNTHETIC_FORWARD_MODEL_V2_PREREG_AND_FREEZE",
+  "claim_ceiling": "REAL_WORLD_CALIBRATION_CORPUS_ONLY__NO_TARGET_OR_MORPHOLOGY_CLAIM"
+}
