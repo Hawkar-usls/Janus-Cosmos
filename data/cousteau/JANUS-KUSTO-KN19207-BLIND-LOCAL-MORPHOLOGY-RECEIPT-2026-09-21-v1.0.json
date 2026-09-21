@@ -1,0 +1,131 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-BLIND-LOCAL-MORPHOLOGY-RECEIPT-2026-09-21-v1.0",
+  "created_utc": "2026-09-21T11:20:00Z",
+  "status": "SEALED_NEGATIVE_NO_MORPHOLOGY_FOLLOWUP_FLAG",
+  "valid_run": {
+    "github_actions_run_id": 35593383489,
+    "head_sha": "06eba897a95c32623112ef5246ab8abd970bb38b",
+    "conclusion": "success"
+  },
+  "superseded_run": {
+    "github_actions_run_id": 35593250947,
+    "status": "PREREG_IMPLEMENTATION_DEVIATION__NOT_SCIENTIFICALLY_INTERPRETED",
+    "reason": "Requested +480s and +600s controls were outside the source-file time range but were incorrectly clamped to the final record. The frozen prereg required such controls to be unavailable, with no replacement.",
+    "repair_commit": "06eba897a95c32623112ef5246ab8abd970bb38b",
+    "scientific_data_discarded": false,
+    "scientific_interpretation_discarded": true
+  },
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-KN19207-BLIND-LOCAL-MORPHOLOGY-PREREG-2026-09-21-v1.0.json",
+    "freeze_commit": "ff6a97554321c41a98c473d3f9ec06765297da69",
+    "promotion_rule": "Target follow-up requires rank 1 or rank N on at least two predeclared structurally different metrics at the same radius."
+  },
+  "target": {
+    "id": "CD169_TOBI_LOCUS",
+    "lat": -3.865418,
+    "lon": -12.14244
+  },
+  "independent_open_measurement_chain": {
+    "survey": "KN192-07",
+    "platform": "Knorr",
+    "instrument": "SeaBeam 3012",
+    "ncei_footprint_exact_intersection": true,
+    "matching_file": "sb20080107081434.xse.mb94",
+    "fnv_exact_swath_gate": true,
+    "nearest_cross_swath_segment_m": 54.57230330496419,
+    "nearest_good_beam_m": 60.84874137729505,
+    "nearest_good_beam_depth_m": 3880.9489968568087,
+    "nearest_good_beam_index": 90,
+    "nearest_good_beam_epoch": 1199695295.051087,
+    "raw_gz_sha256": "7ef5240affa97163ba09eefc6d61baec96827654d6365c58da35e7ee2e70ad65",
+    "fbt_sha256": "e5f9fc98df1b649d83064e6d0e1dd0f4d7e571c491b68958764091e5303410f5",
+    "geBCO_2026_nearest_cell_elevation_m": -3868,
+    "geBCO_2026_tid": 11
+  },
+  "controls": {
+    "requested": 10,
+    "available": 8,
+    "available_offsets_s": [-600,-480,-360,-240,-120,120,240,360],
+    "unavailable_offsets_s": [480,600],
+    "unavailable_reason": "REQUESTED_OFFSET_OUTSIDE_SOURCE_FILE__NO_REPLACEMENT"
+  },
+  "target_metrics": {
+    "250m": {
+      "n_good_beams": 34,
+      "p05_p95_relief_m": 90.33149992674589,
+      "plane_rmse_m": 14.50371871208227,
+      "quadratic_rmse_m": 8.989427277156041,
+      "curvature_anisotropy": 5.947817465764649,
+      "radial_quadratic_r2": 0.2191457457869712
+    },
+    "500m": {
+      "n_good_beams": 124,
+      "p05_p95_relief_m": 252.21194190606457,
+      "plane_rmse_m": 23.27165871924765,
+      "quadratic_rmse_m": 16.48334806308391,
+      "curvature_anisotropy": 3.141365966412991,
+      "radial_quadratic_r2": 0.4160924133101045
+    },
+    "1000m": {
+      "n_good_beams": 537,
+      "p05_p95_relief_m": 372.73116917610196,
+      "plane_rmse_m": 37.479768448599884,
+      "quadratic_rmse_m": 25.75399397675536,
+      "curvature_anisotropy": 3.202289797165512,
+      "radial_quadratic_r2": 0.12622151074277643,
+      "angular_m4_normalized_amplitude": 0.2496381787953773
+    },
+    "2000m": {
+      "n_good_beams": 2113,
+      "p05_p95_relief_m": 514.6551917791367,
+      "plane_rmse_m": 73.14626707631989,
+      "quadratic_rmse_m": 57.66151434416164,
+      "curvature_anisotropy": 4.482436053074972,
+      "radial_quadratic_r2": 0.09432747199589875,
+      "angular_m4_normalized_amplitude": 0.12538529383716615
+    }
+  },
+  "target_rank_summary": {
+    "250m": {
+      "relief": "5/9",
+      "plane_rmse": "8/9",
+      "quadratic_rmse": "6/9",
+      "curvature_anisotropy": "6/9",
+      "radial_r2": "7/9",
+      "extreme_metric_count": 0
+    },
+    "500m": {
+      "relief": "8/9",
+      "plane_rmse": "7/9",
+      "quadratic_rmse": "6/9",
+      "curvature_anisotropy": "7/9",
+      "radial_r2": "9/9",
+      "extreme_metrics": ["radial_quadratic_r2"],
+      "extreme_metric_count": 1
+    },
+    "1000m": {
+      "relief": "9/9",
+      "plane_rmse": "4/9",
+      "quadratic_rmse": "5/9",
+      "curvature_anisotropy": "3/9",
+      "radial_r2": "5/9",
+      "angular_m4": "4/9",
+      "extreme_metrics": ["p05_p95_relief_m"],
+      "extreme_metric_count": 1
+    },
+    "2000m": {
+      "relief": "7/9",
+      "plane_rmse": "6/9",
+      "quadratic_rmse": "7/9",
+      "curvature_anisotropy": "3/9",
+      "radial_r2": "2/9",
+      "angular_m4": "2/9",
+      "extreme_metric_count": 0
+    }
+  },
+  "promotion_rule_pass": false,
+  "verdict": "NO_MORPHOLOGY_FOLLOWUP_FLAG",
+  "interpretation": "The frozen Earth-cell lies in rugged measured terrain and is locally notable on isolated predeclared metrics, but it is not jointly extreme on two structurally different metrics at any one preregistered spatial scale.",
+  "claim_ceiling": "INDEPENDENT_OPEN_BATHYMETRY_NEGATIVE_MORPHOLOGY_SCREEN__NO_OBJECT_IDENTITY__NO_ARTIFICIALITY",
+  "next": "OPEN_SEPARATE_SURVEY_WIDE_DISCOVERY_LANE_WITH_FIXED_GRID_AND_LOOK_ELSEWHERE_ACCOUNTING__DISCOVERED_CANDIDATES_MUST_NOT_BE_USED_AS_CONFIRMATION_OF_THE_FROZEN_CD169_TARGET"
+}
