@@ -1,0 +1,185 @@
+{
+  "artifact_id": "JANUS-KUSTO-EXTERNAL-REAL-DATA-CALIBRATION-REGISTRY-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.external_real_data_calibration.registry.v1",
+  "created_date": "2026-09-21",
+  "status": "MULTISOURCE_CALIBRATION_REGISTRY_FROZEN",
+  "scope": "KUSTO / Cousteau real-world methodology calibration inputs recovered from external custodians, data-service replies, delivered files and already-frozen public-data runs.",
+  "parent_branch": "feature/kusto-hannah-real-calibration-v1",
+  "global_rule": "Once an external dataset or answer is used to calibrate a model component, it is calibration-only for that component and cannot later serve as unseen validation of the same component.",
+  "sources": [
+    {
+      "id": "BODC_CD169_TOBI_BODCREQ_9406",
+      "provider": "BODC / National Oceanography Centre",
+      "custodian_contact": "Hannah Revett",
+      "roles": ["NAVIGATION_CALIBRATION", "RAW_TO_PRISM_FORMAT_CALIBRATION", "SAMPLE_GEOMETRY_CALIBRATION", "PROVENANCE_CALIBRATION"],
+      "delivered_or_exposed": [
+        "CD169 TOBI archive with raw/processed TOBI material",
+        "cd169.nav",
+        "cd169.cable",
+        "PRISM-era CDF products",
+        "originator-supplied cd169.veh_nav",
+        "originator-supplied commands.cfg"
+      ],
+      "key_provenance": {
+        "ticket": "BODCREQ-9406",
+        "final_attachment_message_id": "1a0c361b2ce0b0b4",
+        "veh_nav_sha256": "97bf10284202a2b78aa0a53f96e9394948dc24402ee4c7faf1188967702fa328",
+        "commands_cfg_sha256": "a56236dfee0bd487a30d82340fe93055a78f26ca5d7b9116d25e95e0e532af70",
+        "mrgnav_inertia_u_parameter_m": 236
+      },
+      "current_use": "CALIBRATION_ONLY",
+      "independent_validation_eligible_for_v2_navigation": false,
+      "existing_receipt": "data/cousteau/JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-RECEIPT-2026-09-21-v1.0.json"
+    },
+    {
+      "id": "BODC_JR15001_ORIGINATOR_EM122_BODCREQ_9408",
+      "provider": "BODC / National Oceanography Centre",
+      "custodian_contact": "Hannah Revett",
+      "roles": ["SOURCE_VS_DERIVED_PROCESSING_CALIBRATION", "CHANNEL_SEMANTICS_CALIBRATION", "QC_SELECTION_CALIBRATION", "MULTIBEAM_PROVENANCE"],
+      "delivered_or_exposed": [
+        "originator em122.ACO access route",
+        "UK Open Government Licence",
+        "BODC series 1762365 provenance and documentation"
+      ],
+      "key_provenance": {
+        "ticket": "BODCREQ-9408",
+        "reply_message_id": "1a03306db06f6c0c",
+        "share_message_id": "1a034d21aca79cf9",
+        "ftp_fallback_message_id": "1a0395081f8a5472",
+        "originator_file": "em122.ACO",
+        "originator_multibeam_channel": "MBANSWCB",
+        "originator_variable_header": "depth",
+        "final_series_retained_depth_source": "EA600 single-beam",
+        "reason_reported_by_custodian": "single-beam depth judged cleanest and most accurate during final screening"
+      },
+      "current_use": "CALIBRATION_AND_PROVENANCE_ONLY",
+      "independent_validation_eligible_for_v2_bathymetry_selection": false,
+      "important_rule": "Higher spatial resolution or multibeam origin does not automatically outrank a screened lower-resolution channel; quality-control lineage must be represented explicitly."
+    },
+    {
+      "id": "BAS_PDC_ASCENSION_COMPILATION_01236",
+      "provider": "UK Polar Data Centre / British Antarctic Survey",
+      "roles": ["GRID_INGESTION_CALIBRATION", "CROSS_FORMAT_INVARIANCE", "LOCAL_BATHYMETRY_REFERENCE"],
+      "dataset_id": "GB/NERC/BAS/PDC/01236",
+      "doi": "10.5285/afba710f-dab1-4a63-867b-520177388224",
+      "recovered_native_products": [
+        {
+          "name": "Ascension_20190912_nc.grd",
+          "sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81"
+        },
+        {
+          "name": "Ascension_20190912_ascii.asc",
+          "sha256": "76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a"
+        }
+      ],
+      "cross_format_fixed_cell_value_difference_m": 1.7187494449899532e-7,
+      "h10n1_native_grid_topography_m": -1927.934326171875,
+      "current_use": "CALIBRATION_ONLY",
+      "existing_receipt": "data/cousteau/JANUS-BAS-H10N1-PRIMARY-RECOVERY-RUN-001-2026-08-22-v1.0.json"
+    },
+    {
+      "id": "BAS_PDC_JR15001_RAW_EM122_LINE_0019",
+      "provider": "UK Polar Data Centre / British Antarctic Survey",
+      "custodian_contact": "Alice / PDC Service Desk",
+      "roles": ["RAW_MULTIBEAM_PROCESSING_CALIBRATION", "COVERAGE_TRUTH_CALIBRATION", "SOUND_SPEED_UNCERTAINTY_CALIBRATION"],
+      "provided_file": "0019_20151018_073226_JCR.zip",
+      "file_semantics": "raw uncorrected Kongsberg EM122 .all data",
+      "email_message_ids": ["1a048d9055b6626c", "1a0492fdd2d532ab"],
+      "custodian_facts": [
+        "Only JR15001 has soundings around the requested H10N1 area among the checked compilation sources.",
+        "There are no soundings around the secondary H10S2 point.",
+        "The raw data are uncorrected.",
+        "The last SVP had been updated about two days before the relevant line and was described as not very accurate."
+      ],
+      "direct_share_link_state_2026_09_21": "NOT_ACCESSIBLE_FROM_CURRENT_TOOL_SWEEP",
+      "current_use": "CALIBRATION_ONLY",
+      "independent_validation_eligible_for_v2_multibeam_processing": false,
+      "important_rule": "Raw .all geometry is primary acquisition evidence but uncorrected depth is not ground truth; sound-speed age and processing state must be represented as uncertainty."
+    },
+    {
+      "id": "UKHO_HI1751_AUTHORITATIVE_COVERAGE_NEGATIVE",
+      "provider": "UK Hydrographic Office",
+      "custodian_contact": "Luke Burton, Bathymetry Data Steward",
+      "roles": ["COVERAGE_CLASSIFIER_NEGATIVE_CONTROL", "SURVEY_IDENTITY_CALIBRATION"],
+      "email_message_id": "1a037d9dc86ee14c",
+      "attachment": "Screenshot 2026-08-24 203421.png",
+      "frozen_facts": {
+        "correct_survey_reference": "HI1751",
+        "fixed_point_intersects_HI1751": false,
+        "point_relation": "approximately 1.5 km northwest of HI1751 survey area"
+      },
+      "current_use": "CALIBRATION_CONTROL_ONLY",
+      "independent_validation_eligible_for_coverage_v2": false,
+      "important_rule": "Dataset bounding boxes, reported depth ranges, or nearby survey presence must never substitute for exact footprint intersection."
+    },
+    {
+      "id": "BGS_ASCENSION_COVERAGE_REFERRAL_IDA310886",
+      "provider": "British Geological Survey",
+      "custodian_contact": "Mary Mowat",
+      "roles": ["CUSTODIAN_ROUTING_CALIBRATION", "INSTITUTION_SCOPE_NEGATIVE_CONTROL"],
+      "email_message_ids": ["1a0334488f9f0ce7", "1a0334b13de37ab9"],
+      "frozen_facts": [
+        "Requested H10N1/H10S2 locations were beyond data collected by BGS.",
+        "BGS referred bathymetry coverage to UKHO.",
+        "BGS separately identified BODC cruise record 15726 as a relevant survey route."
+      ],
+      "current_use": "PROVENANCE_AND_ROUTING_CALIBRATION_ONLY",
+      "important_rule": "Institution-specific no-coverage is not a global no-data result."
+    },
+    {
+      "id": "EARTHSCOPE_HA10_DH_2635",
+      "provider": "EarthScope",
+      "custodian_contact": "Robert Weekly",
+      "roles": ["INSTRUMENT_METADATA_CALIBRATION", "RESPONSE_CORRECTION_CALIBRATION", "MISSINGNESS_SEMANTICS_CALIBRATION", "NEGATIVE_HYDROACOUSTIC_CONTROL"],
+      "email_message_ids": ["1a046356a5d345bc", "1a049155b5e09379"],
+      "custodian_facts": [
+        "StationXML is the most definitive EarthScope source for historical deployment locations and instrument responses.",
+        "H10 hydroacoustic stations are primarily maintained by CTBTO.",
+        "MUSTANG does not run on hydrophone channel data.",
+        "At the time of the reply EarthScope had no programmatic whole-history hydrophone gap analysis service.",
+        "EarthScope does not maintain a hydrophone event catalog.",
+        "A replacement availability service was under development and expected to provide better gap/outage/maintenance history."
+      ],
+      "already_frozen_real_waveform_control": {
+        "artifact": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-AUDIT-2026-08-22-v1.0.json",
+        "station_event_pairs": 16,
+        "per_station_event_pass_count": 0,
+        "raw_vs_response_corrected_snr_agreement_pass_count": 14,
+        "raw_vs_response_corrected_snr_agreement_total": 16,
+        "target_peak_center_pass_count": 3,
+        "target_sideband_contrast_pass_count": 0,
+        "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+      },
+      "current_use": "CALIBRATION_AND_NEGATIVE_CONTROL_ONLY",
+      "independent_validation_eligible_for_hydroacoustic_v2": false
+    },
+    {
+      "id": "FUGRO_P2548_ARCHIVE_ROUTE",
+      "provider": "Fugro",
+      "custodian_contact": "Marco Gilissen",
+      "roles": ["PROVENANCE_ROUTE_ONLY"],
+      "email_message_id": "1a0307a6165c809c",
+      "state": "Custodian requested identity/project verification before internal archive enquiries.",
+      "usable_numeric_calibration_data": false,
+      "current_use": "DO_NOT_USE_AS_CALIBRATION_DATA"
+    },
+    {
+      "id": "RMS_TITANIC_BLIND_BENCHMARK_REQUEST",
+      "provider": "RMS Titanic, Inc.",
+      "roles": ["DESIRED_UNSEEN_KNOWN_TARGET_BENCHMARK"],
+      "outbound_message_id": "1a01f9cdc5d6c2e0",
+      "reply_received_in_audited_thread": false,
+      "usable_numeric_calibration_data": false,
+      "current_use": "OPEN_METHOD_GAP_NOT_CALIBRATION"
+    }
+  ],
+  "cross_source_lessons": [
+    "Exact source lineage and processing state must be modeled separately from numeric measurements.",
+    "Compiled-grid coverage, survey footprint coverage, and raw-ping insonification are three different booleans.",
+    "Raw does not mean corrected, and higher resolution does not guarantee higher accuracy.",
+    "Instrument response correction and data availability/gap semantics are separate nuisance layers.",
+    "Custodian statements may calibrate provenance and coverage logic without being treated as target evidence.",
+    "Negative controls and noncoverage confirmations are first-class calibration assets."
+  ],
+  "claim_ceiling": "METHODOLOGY_CALIBRATION_REGISTRY_ONLY__NO_TARGET_IDENTITY_OR_MORPHOLOGY_PROMOTION"
+}
