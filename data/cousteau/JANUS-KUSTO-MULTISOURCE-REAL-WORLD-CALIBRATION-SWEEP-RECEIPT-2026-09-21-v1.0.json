@@ -1,0 +1,152 @@
+{
+  "artifact_id": "JANUS-KUSTO-MULTISOURCE-REAL-WORLD-CALIBRATION-SWEEP-RECEIPT-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.multisource_real_world_calibration.sweep_receipt.v1",
+  "created_date": "2026-09-21",
+  "status": "MULTISOURCE_CALIBRATION_SWEEP_COMPLETE__CI_PASS",
+  "branch": "feature/kusto-multisource-real-calibration-v1",
+  "parent": "feature/kusto-hannah-real-calibration-v1",
+  "scope": "External marine, bathymetric, sonar and hydroacoustic data/provenance supplied or clarified to JANUS through custodians, help desks, archival access routes and already-frozen real public datasets relevant to KUSTO/Cousteau calibration.",
+  "audit_sources": {
+    "gmail_threads_reviewed": [
+      "BODCREQ-9406 CD169 TOBI",
+      "BODCREQ-9408 JR15001 EM122",
+      "BGS IDA310886 Ascension coverage",
+      "UKHO HI1751 exact coverage",
+      "BAS/PDC request 3872 JR15001 raw EM122",
+      "EarthScope DH-2635 HA10",
+      "Fugro P2548 archive route",
+      "RMS Titanic benchmark request"
+    ],
+    "github_lineages_reviewed": [
+      "CD169 TOBI raw/PRISM/navigation lineage",
+      "JR15001 BODC track and EM122 provenance",
+      "BAS Ascension native grid recovery",
+      "HA10 response-corrected confirmatory lineage",
+      "UKHO/BGS exact-coverage lineage",
+      "P2548 archive/custodian lineage"
+    ]
+  },
+  "integrated_calibration_assets": [
+    {
+      "asset": "CD169 native vehicle navigation and processing provenance",
+      "state": "INTEGRATED_NUMERIC_CALIBRATION",
+      "uses": ["towfish navigation nuisance", "historical processing provenance", "sample geometry"],
+      "validation_reuse": "FORBIDDEN_FOR_NAVIGATION_V2"
+    },
+    {
+      "asset": "BAS Ascension 2000-2017 native NetCDF and ASCII grids",
+      "state": "INTEGRATED_NUMERIC_CALIBRATION",
+      "uses": ["cross-format parser invariance", "compiled bathymetry reference"],
+      "cross_format_fixed_cell_difference_m": 1.7187494449899532e-7,
+      "validation_reuse": "FORBIDDEN_FOR_GRID_INGESTION_COMPONENT"
+    },
+    {
+      "asset": "HA10 EarthScope public waveform + StationXML calibration lineage",
+      "state": "INTEGRATED_NUMERIC_NEGATIVE_CONTROL",
+      "uses": ["instrument response awareness", "raw-vs-corrected comparison", "negative hydroacoustic controls"],
+      "station_event_pairs": 16,
+      "station_event_passes": 0,
+      "validation_reuse": "FORBIDDEN_FOR_HYDROACOUSTIC_V2"
+    },
+    {
+      "asset": "UKHO HI1751 authoritative coverage determination",
+      "state": "INTEGRATED_CATEGORICAL_NEGATIVE_CONTROL",
+      "uses": ["survey footprint classifier", "survey identifier truth"],
+      "truth": "H10N1 does not intersect HI1751; point approximately 1.5 km northwest of survey area",
+      "validation_reuse": "FORBIDDEN_FOR_COVERAGE_V2"
+    },
+    {
+      "asset": "BGS institutional coverage answer",
+      "state": "INTEGRATED_SCOPE_CONTROL",
+      "uses": ["institution-specific negative semantics", "custodian routing"],
+      "truth": "requested points beyond BGS-collected data; referrals to UKHO and BODC",
+      "validation_reuse": "NOT_A_NUMERIC_VALIDATION_DATASET"
+    },
+    {
+      "asset": "BODC JR15001 originator/final-series processing facts",
+      "state": "INTEGRATED_PROCESSING_PROVENANCE_CALIBRATION",
+      "uses": ["raw-vs-screened semantics", "channel naming", "QC lineage"],
+      "truth": "originator em122.ACO contained multibeam depth; final series retained EA600 single-beam judged cleaner/more accurate",
+      "validation_reuse": "FORBIDDEN_FOR_BATHYMETRY_SELECTION_V2"
+    }
+  ],
+  "provided_but_bytes_not_reverified_this_pass": [
+    {
+      "asset": "BAS/PDC 0019_20151018_073226_JCR.zip",
+      "semantics": "raw uncorrected Kongsberg EM122 .all",
+      "custodian_facts": [
+        "JR15001 only checked source with soundings around H10N1",
+        "no soundings around H10S2",
+        "last SVP updated approximately two days earlier and described as not very accurate"
+      ],
+      "current_access_check": {
+        "external_sharepoint_fetch": "FAILED_TO_RESOLVE_IN_CONNECTED_SHAREPOINT",
+        "connected_onedrive_filename_search": "NO_RESULT"
+      },
+      "status": "PROVIDED_BY_CUSTODIAN__BYTES_NOT_REVERIFIED_THIS_PASS",
+      "rule": "Do not invent raw-file hash or numeric SVP error until bytes/reference comparison are available."
+    },
+    {
+      "asset": "BODC JR15001 em122.ACO",
+      "status": "ACCESS_GRANTED_AND_PROVENANCE_CONFIRMED__BYTES_NOT_REVERIFIED_THIS_PASS",
+      "rule": "Do not claim a current local hash or raw-to-processed residual without re-obtaining bytes."
+    }
+  ],
+  "provenance_only_or_pending": [
+    {
+      "asset": "Fugro / P2548",
+      "status": "PROVENANCE_ROUTE_ONLY",
+      "reason": "identity/project verification requested; no numeric survey data supplied in audited thread"
+    },
+    {
+      "asset": "RMS Titanic blind known-target benchmark",
+      "status": "OUTBOUND_REQUEST_ONLY__NO_REPLY_IN_AUDITED_THREAD",
+      "reason": "remains a desired future external benchmark, not calibration evidence"
+    },
+    {
+      "asset": "EarthScope future hydrophone availability replacement",
+      "status": "FUTURE_CALIBRATION_ROUTE",
+      "reason": "may later add gap/outage/maintenance history; not currently available in frozen calibration data"
+    }
+  ],
+  "methodological_repairs_now_frozen": [
+    "SPARSE_LOG_POSITION_ERROR_MUST_INCLUDE_TOWFISH_DYNAMICS_NOT_JUST_COORDINATE_ROUNDING",
+    "VALID_COMPILATION_CELL_NE_SPECIFIC_SURVEY_COVERAGE",
+    "SPECIFIC_SURVEY_COVERAGE_NE_RAW_SWATH_INSONIFICATION",
+    "RAW_SWATH_INSONIFICATION_NE_PING_BEAM_FOOTPRINT",
+    "RAW_NE_CORRECTED",
+    "HIGH_RESOLUTION_NE_HIGHEST_ACCURACY",
+    "SVP_QUALITY_STATE_MUST_BE_EXPLICIT",
+    "QUALITATIVE_SVP_WARNING_NE_NUMERIC_SIGMA",
+    "STATIONXML_RESPONSE_EPOCH_MUST_BIND_AMPLITUDE_ANALYSIS",
+    "SERVICE_UNAVAILABILITY_NE_SENSOR_DATA_GAP",
+    "EVENT_CATALOG_ABSENCE_NE_EVENT_ABSENCE",
+    "INSTITUTION_SPECIFIC_NO_DATA_NE_GLOBAL_NO_DATA",
+    "ACCESS_FAILURE_NE_DATA_ABSENCE",
+    "CUSTODIAN_HELPFULNESS_NE_TARGET_EVIDENCE",
+    "CALIBRATION_DATA_NE_UNSEEN_VALIDATION"
+  ],
+  "v2_calibration_layers": [
+    "NAVIGATION_TOWFISH",
+    "COVERAGE_AND_FOOTPRINT_LOGIC",
+    "MULTIBEAM_PROCESSING",
+    "SONAR_GEOMETRY",
+    "HYDROACOUSTIC_RESPONSE_AND_MISSINGNESS",
+    "ARCHIVE_AND_CUSTODIAN_PROVENANCE"
+  ],
+  "ci": {
+    "workflow_run": 35591316443,
+    "head_sha": "7950593df20f8329bbebc33ca36f438f801c038e",
+    "conclusion": "success",
+    "multisource_firewalls": {"passed": 20, "total": 20},
+    "hannah_firewalls": {"passed": 12, "total": 12},
+    "navigation_sampler_smoke": "PASS"
+  },
+  "next_scientific_work": [
+    "Implement layered Synthetic-v2 without morphology feedback.",
+    "If JR15001 raw .all bytes are recovered again, preregister raw-to-processed bathymetry/coverage residuals before inspecting morphology.",
+    "Freeze one or more genuinely unseen real surveys separately for navigation, coverage, multibeam-processing and hydroacoustic validation.",
+    "Run Synthetic-v1 and Synthetic-v2 on exactly the same unseen inputs and report per-layer errors and tails without retuning."
+  ],
+  "claim_ceiling": "CALIBRATION_ARCHITECTURE_IMPROVED__PREDICTIVE_IMPROVEMENT_NOT_YET_ESTABLISHED"
+}
