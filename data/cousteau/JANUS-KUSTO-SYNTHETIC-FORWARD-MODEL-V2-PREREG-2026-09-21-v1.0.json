@@ -1,0 +1,64 @@
+{
+  "artifact_id": "JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.synthetic_forward_model_v2.prereg.v1",
+  "created_date": "2026-09-21",
+  "status": "PREREGISTERED_NOT_YET_PROMOTED",
+  "parent_calibration_contract": "data/cousteau/JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-CORPUS-CONTRACT-2026-09-21-v1.0.json",
+  "objective": "Replace the rounding-only navigation uncertainty of Synthetic-v1 with a physically layered, empirically calibrated forward model while keeping calibration, prediction, and validation datasets disjoint.",
+  "model_layers": {
+    "NAVIGATION": {
+      "inputs": ["ship navigation", "cable/wire state", "heading", "vehicle depth/pressure", "time", "processing configuration"],
+      "outputs": ["towfish trajectory distribution", "position covariance or empirical error envelope"],
+      "required_nuisance_components": ["ship position error", "layback/cable geometry", "heading/turn dynamics", "current/vehicle motion", "processing parameter uncertainty"]
+    },
+    "GEOMETRY": {
+      "inputs": ["towfish trajectory", "altitude", "heading", "Earth-fixed target", "local terrain"],
+      "outputs": ["side", "along-track miss", "cross-track range", "slant range", "sample-index distribution"]
+    },
+    "SONAR": {
+      "status": "PHYSICS_LAYER_TO_BE_CALIBRATED_SEPARATELY_FROM_NAVIGATION",
+      "inputs": ["range", "grazing angle", "terrain slope/relief", "processing scale"],
+      "outputs": ["expected response distribution, not deterministic target label"]
+    },
+    "NUISANCE": {
+      "regimes": ["IDEAL", "REALISTIC_CALIBRATED", "ADVERSARIAL_REAL_TAILS"],
+      "rule": "All regimes and parameter extraction rules must be frozen before unseen validation results are inspected."
+    }
+  },
+  "calibration_dataset": {
+    "dataset": "Hannah/BODC CD169 originator-supplied veh_nav plus commands provenance",
+    "role": "CALIBRATION_ONLY",
+    "may_be_used_for_v2_blind_validation": false
+  },
+  "unseen_validation_contract": {
+    "required": true,
+    "dataset_identity": "TO_BE_SELECTED_BEFORE_RESULT_INSPECTION",
+    "required_independence": "Different real survey/cruise or otherwise genuinely unseen acquisition not used to fit V2 parameters.",
+    "same_metrics_for_v1_and_v2": true,
+    "retuning_after_unseen_results": false,
+    "primary_metrics": [
+      "vehicle-position geodesic residual_m",
+      "closest-approach time error_s",
+      "cross-track error_m",
+      "side classification correctness",
+      "sample-index error when ground truth permits"
+    ]
+  },
+  "success_rule": {
+    "overall_v2_winner_score_forbidden": true,
+    "required_reporting": "Report each preregistered metric for V1 and V2 separately, including negative results and tail errors.",
+    "methodological_improvement": "May be claimed only from unseen validation metrics, never from CD169 calibration fit."
+  },
+  "hard_rules": [
+    "CALIBRATION_NE_VALIDATION",
+    "NO_CD169_V2_VALIDATION_AFTER_FIT",
+    "NO_RETUNING_AFTER_UNSEEN_RESULTS",
+    "NO_RECENTERING",
+    "NO_TARGET_LABEL_IN_NAVIGATION_MODEL",
+    "NO_MORPHOLOGY_LABEL_IN_NAVIGATION_MODEL",
+    "NO_SINGLE_VANITY_SCORE",
+    "PRESERVE_SYNTHETIC_V1_BASELINE",
+    "NEGATIVE_RESULTS_MUST_BE_RETAINED"
+  ],
+  "next_action": "IMPLEMENT_V2_PARAMETER_EXTRACTION_FROM_CALIBRATION_RECEIPT_WITHOUT_USING_SONAR_INTENSITY"
+}
