@@ -1,0 +1,124 @@
+{
+  "artifact_id": "JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-RECEIPT-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.hannah_cd169.real_world_calibration.v1",
+  "created_date": "2026-09-21",
+  "status": "CALIBRATION_CORPUS_READY__SYNTHETIC_V1_NAVIGATION_GEOMETRY_FALSIFIED__V2_PREREG_READY",
+  "role": "CALIBRATION_ONLY_NOT_INDEPENDENT_VALIDATION",
+  "execution": {
+    "local_parser_py_compile": "PASS",
+    "sonar_intensity_read": false,
+    "recentered": false,
+    "posthoc_nav_fit": false
+  },
+  "source_integrity": {
+    "zip_sha256": "4de5b63e182147841bed1bf8647fcbf445bee6aaf4bd7b11ebbd76c1c763a2e6",
+    "veh_nav_sha256": "97bf10284202a2b78aa0a53f96e9394948dc24402ee4c7faf1188967702fa328",
+    "veh_nav_size_bytes": 3229125,
+    "veh_nav_rows_parsed": 40875,
+    "commands_cfg_sha256": "a56236dfee0bd487a30d82340fe93055a78f26ca5d7b9116d25e95e0e532af70",
+    "commands_cfg_size_bytes": 508,
+    "raw_source_bytes_redistributed": false
+  },
+  "native_processing_provenance": {
+    "mrgnav_inertia_found": true,
+    "u_parameter_m": 236.0,
+    "nav_argument": "navfile.veh_nav",
+    "commands_text_redistributed": false,
+    "interpretation": "CD169-specific processing provenance recovered; no cruise-external umbilical parameter is needed for calibration."
+  },
+  "frozen_baseline": {
+    "artifact": "data/cousteau/GOLDMEMBER-CD169-LINE19-SYNTHETIC-GEOMETRY-MODULATION-RUN-001-2026-08-24-v1.0.json",
+    "synthetic_closest_utc": "2005-02-28T01:07:25.275Z",
+    "synthetic_closest_cross_track_m": 0.129067,
+    "synthetic_rounding_only_mc_abs_cross_track_p995_m": 60.852179
+  },
+  "line19_synthetic_v1_vs_native": {
+    "window_utc": ["2005-02-28T01:00:00Z", "2005-02-28T01:29:00Z"],
+    "minute_count": 30,
+    "position_residual_m": {
+      "min": 1139.6907120099029,
+      "median": 1576.0263359827777,
+      "mean": 1565.3901251351444,
+      "p90": 1883.359595986189,
+      "p95": 1919.4261194763324,
+      "max": 1950.8039771430883
+    },
+    "synthetic_frame_along_m": {
+      "min": 250.7151125958332,
+      "median": 324.5964809349921,
+      "mean": 310.05461755995816,
+      "p90": 339.8357004941147,
+      "p95": 342.7852289331201,
+      "max": 344.68307073892163
+    },
+    "synthetic_frame_cross_m": {
+      "min": 1109.9803510018085,
+      "median": 1540.4095792039368,
+      "mean": 1534.1704679831776,
+      "p90": 1852.2244029631443,
+      "p95": 1891.5237791835834,
+      "max": 1924.3697981687762
+    },
+    "calibration_verdict": "FALSIFIED_AS_NATIVE_NAVIGATION_MODEL"
+  },
+  "science_log_anchor_vs_native": {
+    "anchor_count": 15,
+    "position_residual_m": {
+      "min": 377.53086142430266,
+      "median": 772.2024409436165,
+      "mean": 1271.0373860518596,
+      "p90": 2484.003941983289,
+      "p95": 3394.866443380643,
+      "max": 4690.790112445272
+    },
+    "role": "MEASURED_LOG_TO_NATIVE_ERROR_DISTRIBUTION_FOR_FUTURE_NUISANCE_MODEL"
+  },
+  "frozen_target_native_geometry": {
+    "target": {"latitude": -3.8654180644718967, "longitude": -12.142441475},
+    "native_closest_utc": "2005-02-28T01:13:00Z",
+    "native_closest_distance_m": 1725.2960023830676,
+    "closest_time_shift_vs_synthetic_s": 334.725,
+    "native_track_heading_deg": 14.005532483865693,
+    "bearing_native_vehicle_to_target_deg": 281.456360313368,
+    "relative_bearing_deg": -92.54917217049768,
+    "side": "PORT",
+    "native_at_synthetic_time": {
+      "utc": "2005-02-28T01:07:25Z",
+      "latitude": -3.87195,
+      "longitude": -12.127916666666668,
+      "distance_to_target_m": 1767.5326699992706
+    },
+    "old_v2_reconstructed_vehicle_to_native_at_synthetic_time_m": 1726.134922136287,
+    "old_v2_sample_821_target_mapping_disposition": "SUPERSEDED_BY_NATIVE_VEH_NAV"
+  },
+  "synthetic_v2_calibration_parameters": {
+    "position_error_must_not_be_rounding_only": true,
+    "global_science_log_to_native_error_median_m": 772.2024409436165,
+    "global_science_log_to_native_error_p90_m": 2484.003941983289,
+    "global_science_log_to_native_error_max_m": 4690.790112445272,
+    "line19_interpolation_to_native_error_median_m": 1576.0263359827777,
+    "line19_interpolation_to_native_error_p90_m": 1883.359595986189,
+    "line19_interpolation_cross_bias_median_m": 1540.4095792039368,
+    "line19_interpolation_along_bias_median_m": 324.5964809349921,
+    "required_future_nuisance_components": [
+      "ship_position_error",
+      "towfish_layback_and_cable_geometry_error",
+      "heading_and_turn_dynamics",
+      "current_and_vehicle_motion",
+      "native_processing_parameter_uncertainty",
+      "altitude_and_local_terrain_geometry",
+      "sample_to_ground_projection_error"
+    ],
+    "regimes_to_freeze": ["IDEAL", "REALISTIC_CALIBRATED", "ADVERSARIAL_REAL_TAILS"]
+  },
+  "epistemic_firewall": {
+    "cd169_may_validate_v2_after_calibration": false,
+    "unseen_real_survey_required_for_v2_validation": true,
+    "synthetic_v1_preserved_as_baseline": true,
+    "no_recenter": true,
+    "no_sonar_intensity_used_in_this_calibration": true,
+    "no_morphology_claim": true,
+    "underwater_pyramid_detected": false
+  },
+  "next_gate": "FREEZE_SYNTHETIC_FORWARD_MODEL_V2_PARAMETERS_AND_SCORING__THEN_VALIDATE_ON_UNSEEN_REAL_SURVEY"
+}
