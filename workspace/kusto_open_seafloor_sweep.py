@@ -232,6 +232,58 @@ def ncei(target):
         "warning":"TRACKLINE_PROXIMITY_IS_NOT_SWATH_COVERAGE"
     }
 
+
+def ncei_footprints(target):
+    lat,lon=target["lat"],target["lon"]
+    endpoint="https://gis.ngdc.noaa.gov/arcgis/rest/services/multibeam_footprints/MapServer/0/query"
+    exact_params={
+        "geometry":f"{lon},{lat}",
+        "geometryType":"esriGeometryPoint",
+        "inSR":"4326",
+        "outSR":"4326",
+        "spatialRel":"esriSpatialRelIntersects",
+        "outFields":"NCEI_ID,SURVEY_ID,PLATFORM,SOURCE,CHIEF_SCIENTIST,INSTRUMENT,START_TIME,END_TIME,SURVEY_YEAR,DOWNLOAD_URL,SURVEY_AND_VERSION",
+        "returnGeometry":"false",
+        "f":"json"
+    }
+    try:
+        exact=json.loads(request(endpoint,exact_params))
+        feats=[x.get("attributes",{}) for x in exact.get("features",[])]
+    except Exception as e:
+        feats=[]
+        exact={"error":repr(e)}
+    nearby_params={
+        "geometry":f"{lon-0.05},{lat-0.05},{lon+0.05},{lat+0.05}",
+        "geometryType":"esriGeometryEnvelope",
+        "inSR":"4326",
+        "outSR":"4326",
+        "spatialRel":"esriSpatialRelIntersects",
+        "outFields":"NCEI_ID,SURVEY_ID,PLATFORM,SOURCE,CHIEF_SCIENTIST,INSTRUMENT,START_TIME,END_TIME,SURVEY_YEAR,DOWNLOAD_URL,SURVEY_AND_VERSION",
+        "returnGeometry":"false",
+        "f":"json"
+    }
+    try:
+        near=json.loads(request(endpoint,nearby_params))
+        nearfeats=[x.get("attributes",{}) for x in near.get("features",[])]
+    except Exception as e:
+        nearfeats=[]
+        near={"error":repr(e)}
+    return {
+        "exact_point_intersection_count":len(feats),
+        "exact_point_intersections":feats,
+        "nearby_0p05deg_candidate_count":len(nearfeats),
+        "nearby_0p05deg_candidates":nearfeats,
+        "exact_query_url":endpoint+"?"+urlencode(exact_params),
+        "nearby_query_url":endpoint+"?"+urlencode(nearby_params),
+        "authority":"NCEI_MULTIBEAM_FOOTPRINT_POLYGON_LAYER",
+        "firewall":"FOOTPRINT_POLYGON_INTERSECTION_IS_SURVEY_COVERAGE_EVIDENCE__NOT_EXACT_PING_BEAM_IDENTITY"
+    }
+
+def parse_feature_value(fi):
+    txt=fi.get("response","") if isinstance(fi,dict) else ""
+    m=re.search(r"value_list\\s*=\\s*'([^']+)'",txt)
+    return None if not m else m.group(1)
+
 def gebco_feature_info(target, layer):
     lat,lon=target["lat"],target["lon"]
     pad=0.02
@@ -301,10 +353,12 @@ def main():
         gm=gmrt(t)
         nc=ncei(t)
         gb=gebco(t)
+        fp=ncei_footprints(t)
         out["targets"].append({
             **t,
             "gmrt":gm,
             "ncei":nc,
+            "ncei_multibeam_footprints":fp,
             "gebco_2026_wms":gb,
             "classification":classify(t,gm,nc)
         })
@@ -318,7 +372,10 @@ def main():
         if "stats" in m:
             print("GMRT mask:",json.dumps(m["stats"],ensure_ascii=False)[:3000])
         print("NCEI nearest:",json.dumps(t["ncei"].get("nearest_candidates",[])[:5],ensure_ascii=False)[:5000])
+        print("NCEI exact footprints:",json.dumps(t["ncei_multibeam_footprints"],ensure_ascii=False)[:8000])
+        print("GEBCO elevation:",json.dumps(t["gebco_2026_wms"]["grid_feature_info"],ensure_ascii=False)[:2000])
         print("GEBCO TID:",json.dumps(t["gebco_2026_wms"]["tid_feature_info"],ensure_ascii=False)[:2000])
+        print("GEBCO parsed:", {"elevation_value":parse_feature_value(t["gebco_2026_wms"]["grid_feature_info"]), "tid_value":parse_feature_value(t["gebco_2026_wms"]["tid_feature_info"])})
 
 if __name__=="__main__":
     main()
