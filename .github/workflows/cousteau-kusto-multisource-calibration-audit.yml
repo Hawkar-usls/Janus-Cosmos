@@ -1,0 +1,40 @@
+name: Cousteau KUSTO multisource calibration audit
+
+on:
+  push:
+    branches:
+      - feature/kusto-multisource-real-calibration-v1
+    paths:
+      - 'data/cousteau/JANUS-KUSTO-*.json'
+      - 'workspace/kusto_*.py'
+      - 'workspace/test_kusto_multisource_calibration.py'
+      - '.github/workflows/cousteau-kusto-multisource-calibration-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile KUSTO calibration tools
+        run: |
+          python -m py_compile workspace/kusto_hannah_cd169_real_world_calibration.py
+          python -m py_compile workspace/kusto_synthetic_navigation_nuisance_v2.py
+          python -m py_compile workspace/test_kusto_multisource_calibration.py
+      - name: Audit multisource calibration firewalls
+        run: python workspace/test_kusto_multisource_calibration.py
+      - name: Retain Hannah calibration firewalls
+        run: python workspace/test_kusto_hannah_cd169_calibration_receipt.py
+      - name: Smoke-test navigation v2 sampler
+        run: |
+          python workspace/kusto_synthetic_navigation_nuisance_v2.py             --pack data/cousteau/JANUS-KUSTO-SYNTHETIC-NAVIGATION-V2-PARAMETER-PACK-2026-09-21-v0.1.json             --regime REALISTIC_CALIBRATED             --method SPARSE_LOG_GENERIC             --n 10             --seed 20260921             --output /tmp/nav.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/nav.json'))
+          assert d['n']==10 and len(d['samples'])==10
+          assert all(x['radius_m']>0 for x in d['samples'])
+          print('multisource sampler smoke PASS')
+          PY
