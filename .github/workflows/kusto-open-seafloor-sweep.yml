@@ -23,7 +23,7 @@ jobs:
         run: pip install --disable-pip-version-check numpy xarray netCDF4 requests
       - name: Run KUSTO coverage-first open-seafloor sweep
         run: python workspace/kusto_open_seafloor_sweep.py
-      - name: Upload sweep products
+      - name: Scan KN192-07 MB-System FNV swath geometry\n        run: python workspace/kusto_kn19207_open_fvn_gate.py\n      - name: Upload sweep products
         uses: actions/upload-artifact@v4
         with:
           name: kusto-open-seafloor-sweep-v1
