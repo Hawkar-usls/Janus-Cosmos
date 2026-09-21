@@ -1,0 +1,53 @@
+{
+  "artifact_id": "JANUS-KUSTO-MULTIBEAM-PROCESSING-CALIBRATION-PACK-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.multibeam.processing_calibration.v1",
+  "created_date": "2026-09-21",
+  "status": "FROZEN_CALIBRATION_PACK",
+  "source_layers": [
+    "BAS_PDC_ASCENSION_COMPILATION_01236",
+    "BAS_PDC_JR15001_RAW_EM122_LINE_0019",
+    "BODC_JR15001_ORIGINATOR_EM122_BODCREQ_9408"
+  ],
+  "parser_invariance_control": {
+    "netcdf_sha256": "b2cf7fe990fd05760b4b98d2fb9aec45ce595c8056b7513a20c90a5abd75ed81",
+    "ascii_sha256": "76903760db2e3c5898ecd128eb98cde0a2b27f3856b2336624390ee4b995707a",
+    "h10n1_netcdf_topography_m": -1927.934326171875,
+    "h10n1_ascii_topography_m": -1927.934326,
+    "absolute_cross_format_difference_m": 1.7187494449899532e-7,
+    "required_behavior": "Independent parsers/representations of the same published grid must agree within source precision before morphology metrics are allowed."
+  },
+  "processing_state_controls": [
+    {
+      "state": "RAW_KONGSBERG_ALL",
+      "provider_fact": "uncorrected raw EM122 data",
+      "allowed_authority": ["acquisition timing", "raw navigation/datagram geometry", "coverage reconstruction subject to parser correctness"],
+      "forbidden_authority_without_correction": ["final bathymetric truth", "sub-meter morphology truth"]
+    },
+    {
+      "state": "ORIGINATOR_EM122_ACO",
+      "provider_fact": "multibeam depth existed under originator variable header depth",
+      "allowed_authority": ["originator processing provenance", "multibeam channel existence"],
+      "forbidden_assumption": "BODC P01 name must exist in originator file"
+    },
+    {
+      "state": "BODC_FINAL_SERIES_1762365",
+      "provider_fact": "single-beam EA600 depth retained after screening as cleaner/more accurate",
+      "allowed_authority": ["screened final-series depth channel", "QC provenance"],
+      "required_warning": "periods of large-scale noise are documented in final bathymetry and flags must be honored"
+    },
+    {
+      "state": "BAS_COMPILED_GRID",
+      "provider_fact": "processed compilation product with valid H10N1 cell",
+      "allowed_authority": ["compiled surface reference", "cross-format parser calibration"],
+      "forbidden_assumption": "valid cell proves any particular survey contributed or directly insonified the cell"
+    }
+  ],
+  "svp_rule": {
+    "custodian_observation": "Last SVP for relevant JR15001 raw line was updated about two days before and described as not very accurate.",
+    "numeric_uncertainty_not_provided": true,
+    "required_model_behavior": "Represent SVP recency/quality as an explicit uncertainty state; do not invent a numerical depth-error distribution from this email alone."
+  },
+  "future_numeric_gate": "If raw JR15001 .all bytes and the relevant corrected/compiled surface are simultaneously available, preregister a raw-to-processed residual comparison before inspecting target morphology.",
+  "reuse_policy": "All JR15001/BAS/BODC materials listed here are calibration-only for multibeam processing V2.",
+  "claim_ceiling": "MULTIBEAM_PROCESSING_CALIBRATION_ONLY"
+}
