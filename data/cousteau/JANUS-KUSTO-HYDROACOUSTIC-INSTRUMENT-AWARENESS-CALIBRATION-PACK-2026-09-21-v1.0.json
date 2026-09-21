@@ -1,0 +1,51 @@
+{
+  "artifact_id": "JANUS-KUSTO-HYDROACOUSTIC-INSTRUMENT-AWARENESS-CALIBRATION-PACK-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.hydroacoustic.instrument_awareness.calibration.v1",
+  "created_date": "2026-09-21",
+  "status": "FROZEN_CALIBRATION_PACK",
+  "source": {
+    "custodian": "EarthScope / DH-2635",
+    "primary_metadata_rule": "StationXML is authoritative for historical deployment coordinates and instrument response in the EarthScope holding.",
+    "primary_network_custodian_context": "CTBTO primarily maintains H10 hydroacoustic stations.",
+    "availability_gap_service_state": "No programmatic whole-history hydrophone-gap service was available at reply time; MUSTANG does not support hydrophone channels.",
+    "event_catalog_state": "EarthScope does not maintain a hydrophone event catalog."
+  },
+  "frozen_real_negative_control": {
+    "artifact": "data/cousteau/JANUS-ECHO-COUSTEAU-HA10-CONFIRMATORY-AUDIT-2026-08-22-v1.0.json",
+    "station_event_pairs": 16,
+    "station_event_passes": 0,
+    "raw_snr_db": {
+      "median": 0.04349033132739252,
+      "mean": 0.23017988828853933,
+      "min": -1.0644061299738723,
+      "max": 2.6219613503105315
+    },
+    "response_corrected_snr_db": {
+      "median": -0.1225811702839003,
+      "mean": 0.14087927349948987,
+      "min": -0.901318869720657,
+      "max": 2.598962269891996
+    },
+    "median_response_correction_shift_db": -0.1660715016112928,
+    "mean_response_correction_shift_db": -0.08930061478904947,
+    "raw_vs_corrected_snr_agreement": {
+      "passed": 14,
+      "total": 16,
+      "fraction": 0.875
+    },
+    "target_peak_center_pass_fraction": 0.1875,
+    "target_sideband_contrast_pass_fraction": 0.0,
+    "target_outperformed_controls_by_required_margin_fraction": 0.0,
+    "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+  },
+  "required_v2_behavior": [
+    "Always bind waveform epochs to the matching StationXML response epoch before amplitude-sensitive comparison.",
+    "Keep raw and response-corrected metrics side by side; response correction may not silently replace raw diagnostics.",
+    "Absence of an availability-service result is not evidence of waveform absence.",
+    "Do not infer event absence from EarthScope lacking an event catalog.",
+    "Treat station maintenance/gap history as an external instrument-awareness layer when the replacement availability service becomes available.",
+    "A narrow frequency peak without SNR, sideband and cross-station controls is insufficient."
+  ],
+  "reuse_policy": "HA10 frozen events become calibration/negative-control data for instrument-awareness model development and are not unseen validation for that model.",
+  "claim_ceiling": "INSTRUMENT_AWARENESS_CALIBRATION_ONLY__NEGATIVE_RESULT_PRESERVED"
+}
