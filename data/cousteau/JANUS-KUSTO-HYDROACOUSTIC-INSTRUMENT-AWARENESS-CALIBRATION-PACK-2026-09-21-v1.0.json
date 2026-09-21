@@ -26,17 +26,17 @@
       "min": -0.901318869720657,
       "max": 2.598962269891996
     },
-    "median_response_correction_shift_db": -0.1660715016112928,
-    "mean_response_correction_shift_db": -0.08930061478904947,
     "raw_vs_corrected_snr_agreement": {
       "passed": 14,
       "total": 16,
       "fraction": 0.875
     },
     "target_peak_center_pass_fraction": 0.1875,
-    "target_sideband_contrast_pass_fraction": 0.0,
-    "target_outperformed_controls_by_required_margin_fraction": 0.0,
-    "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE"
+    "target_sideband_contrast_pass_fraction": 0,
+    "target_outperformed_controls_by_required_margin_fraction": 0,
+    "verdict": "NEGATIVE_CONFIRMATORY_HA10_PUBLIC_SLICE",
+    "difference_of_medians_response_corrected_minus_raw_snr_db": -0.1660715016112928,
+    "difference_of_means_response_corrected_minus_raw_snr_db": -0.08930061478904947
   },
   "required_v2_behavior": [
     "Always bind waveform epochs to the matching StationXML response epoch before amplitude-sensitive comparison.",
