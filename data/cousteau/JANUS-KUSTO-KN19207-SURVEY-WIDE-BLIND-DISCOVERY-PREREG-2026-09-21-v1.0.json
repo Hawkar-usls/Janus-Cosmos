@@ -1,0 +1,61 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-SURVEY-WIDE-BLIND-DISCOVERY-PREREG-2026-09-21-v1.0",
+  "created_utc": "2026-09-21T11:21:00Z",
+  "status": "FROZEN_BEFORE_SURVEY_WIDE_DISCOVERY_EXECUTION",
+  "survey": {
+    "id": "KN192-07",
+    "platform": "Knorr",
+    "instrument": "SeaBeam 3012",
+    "source": "NOAA_NCEI_OPEN_MB_SYSTEM_GENERATED_FBT",
+    "scope": "ALL_DISCOVERABLE_FBT_FILES_IN_VERSION1_MB_GENERATED_DIRECTORY"
+  },
+  "separation_from_prior_target": {
+    "frozen_cd169_target": {"lat": -3.865418, "lon": -12.14244},
+    "exclude_candidate_centers_within_m": 5000,
+    "reason": "Discovery candidates must not recycle the already-inspected frozen target neighborhood."
+  },
+  "candidate_center_rule": {
+    "per_fbt_record_indices": "10,30,50,... until file end",
+    "beam_index": 90,
+    "require_beam_flag": 0,
+    "no_visual_selection": true,
+    "deduplicate_exact_time_file_pairs": true
+  },
+  "patch_radii_m": [500,1000],
+  "minimum_good_beams": {"500m": 100, "1000m": 300},
+  "metrics": {
+    "ROUGHNESS_FAMILY": ["p05_p95_relief_m","plane_rmse_m","quadratic_rmse_m"],
+    "CURVATURE_FAMILY": ["curvature_anisotropy_abs_eigenvalue_ratio"],
+    "RADIAL_FAMILY": ["radial_quadratic_r2_after_plane"],
+    "ANGULAR_FAMILY": ["angular_m4_normalized_amplitude_250_1000m"]
+  },
+  "look_elsewhere": {
+    "empirical_tail_fraction_each_metric": 0.005,
+    "extreme_definition": "value is at or beyond the empirical 0.5th or 99.5th percentile among all eligible candidate centers at the same radius",
+    "family_vote_rule": "At most one vote per metric family even if several correlated metrics in the family are extreme.",
+    "followup_flag_rule": "At least two distinct metric-family votes at the same radius, and at least one vote must come from CURVATURE_FAMILY, RADIAL_FAMILY, or ANGULAR_FAMILY.",
+    "no_p_value_claim": true,
+    "candidate_class": "EXPLORATORY_SURVEY_WIDE_FOLLOWUP_ONLY"
+  },
+  "spatial_deduplication": {
+    "after_scoring": true,
+    "suppression_radius_m": 2000,
+    "ordering": "descending family_vote_count, then descending maximum empirical tail extremeness; ties lexicographic source_file then record_index",
+    "keep_max_candidates": 50
+  },
+  "hard_rules": [
+    "NO_NEW_METRICS_AFTER_RESULTS",
+    "NO_THRESHOLD_RETUNING",
+    "NO_VISUAL_PICKING",
+    "NO_OLD_TARGET_AS_DISCOVERY_CONFIRMATION",
+    "NO_ARTIFICIALITY_OR_ARCHAEOLOGY_LABEL",
+    "FBT_IS_GENERATED_DERIVATIVE_NOT_INDEPENDENT_RAW_REPROCESSING",
+    "DISCOVERY_REQUIRES_INDEPENDENT_CONFIRMATION"
+  ],
+  "independent_confirmation_routes": [
+    "raw XSE reprocessing with frozen processing parameters",
+    "independent CD169 2005 bathymetry/TOBI where spatially overlapping",
+    "another independently acquired multibeam survey where available"
+  ],
+  "claim_ceiling": "BLIND_SURVEY_WIDE_EXPLORATORY_DISCOVERY_ONLY"
+}
