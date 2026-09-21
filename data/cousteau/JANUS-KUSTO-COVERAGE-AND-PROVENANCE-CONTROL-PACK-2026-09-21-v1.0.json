@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-KUSTO-COVERAGE-AND-PROVENANCE-CONTROL-PACK-2026-09-21-v1.0",
+  "schema": "janus.cosmos.kusto.coverage_provenance.control_pack.v1",
+  "created_date": "2026-09-21",
+  "status": "FROZEN_CALIBRATION_CONTROL_PACK",
+  "sources": [
+    "UKHO_HI1751_AUTHORITATIVE_COVERAGE_NEGATIVE",
+    "BGS_ASCENSION_COVERAGE_REFERRAL_IDA310886",
+    "BAS_PDC_ASCENSION_COMPILATION_01236",
+    "BAS_PDC_JR15001_RAW_EM122_LINE_0019",
+    "BODC_JR15001_ORIGINATOR_EM122_BODCREQ_9408"
+  ],
+  "frozen_cases": [
+    {
+      "case_id": "BOUNDING_BOX_NE_EXACT_SURVEY_COVERAGE",
+      "input_fact": "H10N1 is represented by a valid cell in the BAS Ascension compilation grid.",
+      "authoritative_counterfact": "UKHO states H10N1 does not intersect HI1751 and lies about 1.5 km northwest of the HI1751 survey area.",
+      "required_model_behavior": "Do not infer contribution by HI1751 from compilation bounding box, grid validity, nearby survey identifiers, or depth range.",
+      "expected_class": "NO_HI1751_INTERSECTION"
+    },
+    {
+      "case_id": "INSTITUTION_NO_DATA_NE_GLOBAL_NO_DATA",
+      "input_fact": "BGS states H10N1/H10S2 are beyond data collected by BGS.",
+      "authoritative_counterfact": "BGS independently routes to UKHO and BODC; BAS/PDC later identifies JR15001 soundings near H10N1.",
+      "required_model_behavior": "Scope a negative to the institution/holding explicitly named.",
+      "expected_class": "BGS_SCOPE_NEGATIVE_ONLY"
+    },
+    {
+      "case_id": "COMPILATION_CELL_NE_RAW_SOURCE_PROVENANCE",
+      "input_fact": "BAS compilation provides a valid H10N1 grid cell at -1927.934326171875 m.",
+      "custodian_fact": "BAS/PDC reports only JR15001 among checked source surveys has soundings around the H10N1 area.",
+      "required_model_behavior": "Track the contributing survey lineage separately from the compiled raster value.",
+      "expected_class": "JR15001_SOURCE_LINEAGE"
+    },
+    {
+      "case_id": "RAW_SWATH_NE_CORRECTED_DEPTH_TRUTH",
+      "input_fact": "BAS/PDC provided raw uncorrected Kongsberg EM122 .all data for JR15001 line 0019.",
+      "custodian_fact": "Last SVP was updated about two days earlier and described as not very accurate.",
+      "required_model_behavior": "Allow raw swath geometry to establish acquisition/coverage while withholding corrected-depth truth status.",
+      "expected_class": "RAW_GEOMETRY_VALID__DEPTH_ACCURACY_CONDITIONAL"
+    },
+    {
+      "case_id": "HIGH_RESOLUTION_NE_HIGHEST_QUALITY",
+      "input_fact": "JR15001 originator em122.ACO contained multibeam depth.",
+      "custodian_fact": "BODC retained EA600 single-beam depth in the final series because it was judged cleaner and more accurate during screening.",
+      "required_model_behavior": "Do not rank measurement channels by resolution or instrument class alone; retain QC provenance and channel-selection rationale.",
+      "expected_class": "QC_LINEAGE_REQUIRED"
+    }
+  ],
+  "coverage_boolean_hierarchy": [
+    "PRODUCT_BOUNDING_BOX_CONTAINS_POINT",
+    "COMPILED_GRID_HAS_VALID_CELL",
+    "SURVEY_FOOTPRINT_INTERSECTS_POINT",
+    "RAW_SWATH_INSONIFIES_POINT",
+    "PING_BEAM_FOOTPRINT_INTERSECTS_POINT"
+  ],
+  "rule": "A PASS at any earlier hierarchy level must not be promoted to a PASS at a later level without direct evidence.",
+  "reuse_policy": "All frozen cases are calibration/control examples and are excluded from unseen validation of the same coverage classifier.",
+  "claim_ceiling": "COVERAGE_AND_PROVENANCE_METHOD_CALIBRATION_ONLY"
+}
