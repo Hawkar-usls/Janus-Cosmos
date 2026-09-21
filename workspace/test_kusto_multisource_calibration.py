@@ -14,6 +14,8 @@ mb=load("JANUS-KUSTO-MULTIBEAM-PROCESSING-CALIBRATION-PACK-2026-09-21-v1.0.json"
 ha=load("JANUS-KUSTO-HYDROACOUSTIC-INSTRUMENT-AWARENESS-CALIBRATION-PACK-2026-09-21-v1.0.json")
 mx=load("JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-2026-09-21-v1.0.json")
 pre=load("JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-2026-09-21-v1.1.json")
+sweep=load("JANUS-KUSTO-MULTISOURCE-REAL-WORLD-CALIBRATION-SWEEP-RECEIPT-2026-09-21-v1.0.json")
+pending={x["asset"]:x for x in sweep["provided_but_bytes_not_reverified_this_pass"]}
 
 sources={x["id"]:x for x in reg["sources"]}
 cases={x["case_id"]:x for x in cov["frozen_cases"]}
@@ -38,7 +40,11 @@ checks={
  "same_unseen_data_v1_v2": mx["global_validation_firewall"]["v1_and_v2_must_be_scored_on_same_unseen_data"] is True,
  "no_single_score": mx["global_validation_firewall"]["no_single_overall_score"] is True,
  "v2_qualitative_uncertainty_guard": "QUALITATIVE_UNCERTAINTY_NE_INVENTED_NUMERIC_PRIOR" in pre["new_hard_rules_from_multisource_audit"],
- "v2_claim_ceiling_unseen": "NO_V2_PREDICTIVE_SKILL_CLAIM_UNTIL_UNSEEN_VALIDATION" in pre["claim_ceiling"]
+ "v2_claim_ceiling_unseen": "NO_V2_PREDICTIVE_SKILL_CLAIM_UNTIL_UNSEEN_VALIDATION" in pre["claim_ceiling"],
+ "sweep_receipt_complete": sweep["status"]=="MULTISOURCE_CALIBRATION_SWEEP_COMPLETE__CI_PASS",
+ "bas_raw_not_falsely_reverified": pending["BAS/PDC 0019_20151018_073226_JCR.zip"]["status"]=="PROVIDED_BY_CUSTODIAN__BYTES_NOT_REVERIFIED_THIS_PASS",
+ "bodc_aco_not_falsely_reverified": pending["BODC JR15001 em122.ACO"]["status"]=="ACCESS_GRANTED_AND_PROVENANCE_CONFIRMED__BYTES_NOT_REVERIFIED_THIS_PASS",
+ "sweep_claim_ceiling_calibration_only": sweep["claim_ceiling"]=="CALIBRATION_ARCHITECTURE_IMPROVED__PREDICTIVE_IMPROVEMENT_NOT_YET_ESTABLISHED"
 }
 failed=[k for k,v in checks.items() if not v]
 print(json.dumps({"passed":len(checks)-len(failed),"total":len(checks),"failed":failed,"checks":checks},indent=2))
