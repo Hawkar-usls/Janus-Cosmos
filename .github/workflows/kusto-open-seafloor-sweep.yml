@@ -1,0 +1,31 @@
+name: KUSTO Open Seafloor Sweep
+
+on:
+  push:
+    branches:
+      - feature/kusto-open-seafloor-sweep-v1
+    paths:
+      - 'workspace/kusto_open_seafloor_sweep.py'
+      - '.github/workflows/kusto-open-seafloor-sweep.yml'
+  workflow_dispatch:
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install scientific IO
+        run: pip install --disable-pip-version-check numpy xarray netCDF4 requests
+      - name: Run KUSTO coverage-first open-seafloor sweep
+        run: python workspace/kusto_open_seafloor_sweep.py
+      - name: Upload sweep products
+        uses: actions/upload-artifact@v4
+        with:
+          name: kusto-open-seafloor-sweep-v1
+          path: workspace/kusto_open_seafloor_out/
+          retention-days: 30
