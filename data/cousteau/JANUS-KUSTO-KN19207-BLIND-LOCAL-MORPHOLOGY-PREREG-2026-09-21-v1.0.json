@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-BLIND-LOCAL-MORPHOLOGY-PREREG-2026-09-21-v1.0",
+  "created_utc": "2026-09-21T11:16:00Z",
+  "status": "FROZEN_BEFORE_MORPHOLOGY_EXECUTION",
+  "target": {
+    "id": "CD169_TOBI_LOCUS",
+    "lat": -3.865418,
+    "lon": -12.14244
+  },
+  "source": {
+    "survey": "KN192-07",
+    "platform": "Knorr",
+    "instrument": "SeaBeam 3012",
+    "matched_file": "sb20080107081434.xse.mb94",
+    "fbt_sha256": "e5f9fc98df1b649d83064e6d0e1dd0f4d7e571c491b68958764091e5303410f5",
+    "raw_gz_sha256": "7ef5240affa97163ba09eefc6d61baec96827654d6365c58da35e7ee2e70ad65",
+    "target_reference_ping_epoch": 1199695295.051087,
+    "target_reference_beam_index": 90,
+    "nearest_good_beam_distance_m": 60.84874137729505
+  },
+  "controls": {
+    "selection_rule": "Same source file and same beam index as the target reference geometry; choose the record nearest each predeclared time offset from the target reference ping.",
+    "time_offsets_seconds": [-600,-480,-360,-240,-120,120,240,360,480,600],
+    "minimum_separation_from_target_seconds": 120,
+    "selection_is_morphology_blind": true,
+    "fallback": "If a requested offset is outside the source file or beam 90 is not good, mark that control unavailable; do not replace it post hoc."
+  },
+  "patch_radii_m": [250,500,1000,2000],
+  "metrics": [
+    "n_good_beams",
+    "depth_min_max_and_p05_p95_relief",
+    "best_fit_plane_rmse_m",
+    "best_fit_quadratic_rmse_m",
+    "quadratic_hessian_eigenvalues_per_m",
+    "quadratic_curvature_anisotropy_abs_eigenvalue_ratio",
+    "radial_quadratic_r2_after_plane_detrend",
+    "angular_m4_normalized_amplitude_in_annulus_250_to_1000m"
+  ],
+  "target_vs_controls": {
+    "report_all_raw_metrics": true,
+    "report_target_rank_among_available_controls_plus_target": true,
+    "promotion_rule": "No morphology promotion from any single metric. A target may only be flagged for follow-up if it is an extreme (rank 1 or last) on at least two predeclared structurally different metrics at the same radius, and the direction is physically interpretable before seeing the value.",
+    "identity_rule": "Even a morphology follow-up flag cannot establish artificiality, archaeology, or object identity."
+  },
+  "hard_rules": [
+    "NO_THRESHOLD_RETUNING_AFTER_RESULTS",
+    "NO_NEW_METRICS_AFTER_RESULTS_FOR_THIS_GATE",
+    "NO_CONTROL_REPLACEMENT_BASED_ON_SHAPE",
+    "NO_VISUAL_SELECTION",
+    "NO_TARGET_RECENTERING",
+    "NO_ARTIFICIALITY_CLAIM",
+    "RAW_XSE_NOT_REPROCESSED_IN_THIS_GATE",
+    "FBT_DERIVATIVE_LIMITATION_MUST_BE_REPORTED"
+  ],
+  "claim_ceiling": "BLIND_MORPHOLOGY_SCREEN_ONLY"
+}
