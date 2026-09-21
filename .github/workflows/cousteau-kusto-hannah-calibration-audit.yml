@@ -7,7 +7,9 @@ on:
     paths:
       - 'data/cousteau/JANUS-KUSTO-HANNAH-CD169-REAL-WORLD-CALIBRATION-*.json'
       - 'data/cousteau/JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-*.json'
+      - 'data/cousteau/JANUS-KUSTO-SYNTHETIC-NAVIGATION-V2-PARAMETER-PACK-*.json'
       - 'workspace/kusto_hannah_cd169_real_world_calibration.py'
+      - 'workspace/kusto_synthetic_navigation_nuisance_v2.py'
       - 'workspace/test_kusto_hannah_cd169_calibration_receipt.py'
       - '.github/workflows/cousteau-kusto-hannah-calibration-audit.yml'
   workflow_dispatch:
@@ -20,7 +22,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile calibration scorer
-        run: python -m py_compile workspace/kusto_hannah_cd169_real_world_calibration.py
+      - name: Compile calibration tools
+        run: |
+          python -m py_compile workspace/kusto_hannah_cd169_real_world_calibration.py
+          python -m py_compile workspace/kusto_synthetic_navigation_nuisance_v2.py
       - name: Audit calibration firewalls
         run: python workspace/test_kusto_hannah_cd169_calibration_receipt.py
+      - name: Smoke-test calibrated nuisance sampler
+        run: |
+          python workspace/kusto_synthetic_navigation_nuisance_v2.py             --pack data/cousteau/JANUS-KUSTO-SYNTHETIC-NAVIGATION-V2-PARAMETER-PACK-2026-09-21-v0.1.json             --regime REALISTIC_CALIBRATED             --method TWO_ENDPOINT_LINEAR_INTERPOLATION             --n 5             --seed 123             --output /tmp/kusto_nav_v2_sample.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/kusto_nav_v2_sample.json'))
+          assert d['n']==5
+          assert d['regime']=='REALISTIC_CALIBRATED'
+          assert all(x['radius_m']>1000 for x in d['samples'])
+          print('sampler smoke PASS')
+          PY
