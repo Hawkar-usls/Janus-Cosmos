@@ -1,0 +1,26 @@
+name: KUSTO CD169 sd11281 Archive Tree
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cd169_sd11281_tree.py'
+      - '.github/workflows/kusto-cd169-sd11281-tree.yml'
+  workflow_dispatch:
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inventory CD169 sd11281 archive tree
+        run: mkdir -p workspace/kusto_cross_survey_out && python workspace/kusto_cd169_sd11281_tree.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cd169-sd11281-tree-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-SD11281-ARCHIVE-TREE-INVENTORY-2026-09-22-v1.0.json
+          retention-days: 30
