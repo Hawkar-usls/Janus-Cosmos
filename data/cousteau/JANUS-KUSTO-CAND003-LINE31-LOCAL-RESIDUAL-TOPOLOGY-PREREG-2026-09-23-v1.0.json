@@ -1,0 +1,53 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-LOCAL-RESIDUAL-TOPOLOGY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:05:00Z",
+  "status":"FROZEN_BEFORE_LOCAL_RESIDUAL_TOPOLOGY_EXECUTION",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "line":31,
+  "parent_results":{
+    "line31_temporal_status":"FAIL_VS_BOTH_2008_LINEAGES",
+    "line18_temporal_status":"PASS_VS_BOTH_2008_LINEAGES",
+    "general_line31_edge_degradation":"FALSIFIED_BY_3_CENTER_PLUS_3_EDGE_HOLDOUTS"
+  },
+  "support":{
+    "radius_m":1000,
+    "2005_source":"B1-81-1_Acceptl28-33.xyz.ascii line31 geometry-attributed soundings",
+    "2005_thinning":"one sounding per target-centered 100m cell selected nearest cell center without depth",
+    "2008_match_radius_m":100,
+    "require_both_2008_lineages_at_each_retained_point":true,
+    "minimum_joint_points":30
+  },
+  "consensus":{
+    "per_support_coordinate":"median of KN192-07 and KNOX15RR median-good-beam depth estimates",
+    "detrending":"fit independent best-fit plane to 2005, KN192, KNOX15RR, and 2008 consensus on the same joint coordinates",
+    "error_field":"delta = residual_2005 - residual_2008_consensus"
+  },
+  "line31_coordinates":{
+    "cross_track_m":"Euclidean distance from support point to line31 1-minute navigation polyline",
+    "along_track_m":"LineString projection coordinate along line31 polyline"
+  },
+  "report_metrics":[
+    "joint_point_count",
+    "residual_2005_vs_consensus_pearson_spearman_sign",
+    "residual_KN192_vs_KNOX_pearson_spearman_sign",
+    "rmse_2005_minus_consensus_residual_m",
+    "rmse_KN192_minus_KNOX_residual_m",
+    "rmse_ratio_2005_error_over_2008_internal",
+    "pearson_and_spearman_delta_vs_cross_track",
+    "pearson_and_spearman_abs_delta_vs_cross_track",
+    "pearson_and_spearman_delta_vs_along_track",
+    "affine_delta_surface_R2",
+    "quadrant_median_delta_m",
+    "top_10_absolute_delta_coordinates"
+  ],
+  "interpretation":"Descriptive localization only. No new binary scientific threshold and no causal mechanism is declared from correlation alone.",
+  "hard_rules":[
+    "NO_RECENTERING",
+    "NO_MATCH_RADIUS_RETUNING",
+    "NO_CELL_DROPPING_AFTER_RESULTS",
+    "NO_OUTLIER_REMOVAL",
+    "BOTH_2008_LINEAGES_REQUIRED_PER_POINT",
+    "STRICT_PARENT_RESULTS_IMMUTABLE"
+  ],
+  "claim_ceiling":"LOCAL_SPATIAL_TOPOLOGY_OF_CAND003_LINE31_2005_VS_2008_DISCORDANCE"
+}
