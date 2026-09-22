@@ -1,0 +1,26 @@
+name: KUSTO CD169 EM12 Candidate Gate
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cd169_em12_candidate_gate.py'
+      - '.github/workflows/kusto-cd169-em12-candidate-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run XY-first CD169 EM12 candidate gate
+        run: mkdir -p workspace/kusto_cross_survey_out && python workspace/kusto_cd169_em12_candidate_gate.py --output workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-EM12-CAND002003-COVERAGE-DEPTH-RUN-2026-09-22-v1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cd169-em12-cand002003-v1
+          path: workspace/kusto_cross_survey_out/
+          retention-days: 30
