@@ -1,0 +1,65 @@
+{
+  "artifact_id":"JANUS-KUSTO-MAR4DEG02S-2005-TO-2008-TEMPORAL-CALIBRATION-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:33:00Z",
+  "status":"FROZEN_BEFORE_CD169_EM12_TEMPORAL_CALIBRATION_EXECUTION",
+  "target":{
+    "id":"MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "lat":-4.03,
+    "lon":-12.25,
+    "role":"approximate externally published natural hydrothermal/tectonic region coordinate selected before this temporal calibration"
+  },
+  "parent_positive_control":{
+    "receipt":"data/cousteau/JANUS-KUSTO-MAR-4DEG02S-KNOWN-POSITIVE-CALIBRATION-RECEIPT-2026-09-22-v1.0.json",
+    "2008_crosssurvey_pass":true,
+    "KN192_vs_KNOX_residual_pearson":0.7142918463108837,
+    "KN192_vs_KNOX_residual_spearman":0.7108293587519231,
+    "KN192_vs_KNOX_sign_concordance":0.7863247863247863
+  },
+  "lineages":[
+    {"id":"CD169_EM12_2005","instrument":"Simrad EM12","year":2005},
+    {"id":"KN192-07_2008","instrument":"SeaBeam 3012","year":2008},
+    {"id":"KNOX15RR_2008","instrument":"Kongsberg EM120","year":2008}
+  ],
+  "phase_A_support":{
+    "CD169_EM12_xy_first":true,
+    "support_max_nearest_sounding_m":100,
+    "minimum_2005_soundings_within_1000m":100
+  },
+  "strict_temporal_grid":{
+    "center":"frozen published-region coordinate",
+    "radius_m":1000,
+    "cell_m":100,
+    "per_cell":"median depth",
+    "minimum_common_cells":30,
+    "recenter":false,
+    "rotation":false
+  },
+  "strict_primary_gate":{
+    "residual_pearson_min":0.60,
+    "residual_spearman_min":0.60,
+    "residual_sign_concordance_min":0.65,
+    "all_required":true
+  },
+  "support_matched_secondary_if_2005_support_pass":{
+    "status":"PREDECLARED_SECONDARY_CALIBRATION",
+    "reference":"one CD169 2005 sounding per occupied 100m geometry-cell, nearest cell center; depth not used for selection",
+    "2008_estimator_radius_m":100,
+    "minimum_matched_support_points":50,
+    "same_primary_thresholds":true,
+    "interpretation":"secondary sensitivity only; does not overwrite strict result"
+  },
+  "diagnostic_logic":{
+    "if_strict_or_support_matched_passes":"2005 EM12 pipeline demonstrates at least some temporal sensitivity on an externally known natural region; CAND003 temporal FAIL becomes more candidate-specific.",
+    "if_both_fail":"2005 EM12 cannot pass the same temporal morphology gate even on the external known-positive region; treat CAND003 temporal FAIL primarily as a data-resolution/processing comparability limit, not evidence that morphology changed."
+  },
+  "hard_rules":[
+    "EXTERNAL_KNOWN_POSITIVE_NE_DISCOVERY",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_DEPTH_BASED_2005_SUPPORT_SELECTION",
+    "STRICT_RESULT_REPORTED_SEPARATELY_FROM_SUPPORT_MATCHED_SECONDARY",
+    "NO_EXACT_VENT_IDENTITY_CLAIM"
+  ],
+  "claim_ceiling":"TEMPORAL_PIPELINE_CALIBRATION_ON_EXTERNAL_KNOWN_NATURAL_REGION"
+}
