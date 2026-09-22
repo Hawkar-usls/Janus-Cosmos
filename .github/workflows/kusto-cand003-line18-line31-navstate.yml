@@ -1,0 +1,26 @@
+name: KUSTO CAND003 Line18-vs-Line31 Navstate
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cand003_line18_line31_navstate.py'
+      - '.github/workflows/kusto-cand003-line18-line31-navstate.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run frozen navigation-state diagnostic
+        run: python workspace/kusto_cand003_line18_line31_navstate.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cand003-line18-line31-navstate-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CAND003-CD169-EM12-LINE18-VS-LINE31-NAVSTATE-RUN-2026-09-22-v1.0.json
+          retention-days: 30
