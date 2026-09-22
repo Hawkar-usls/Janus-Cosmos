@@ -1,0 +1,70 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-LOCAL-RESIDUAL-TOPOLOGY-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:09:00Z",
+  "status":"SEALED_LOCALIZED_NONLINEAR_DISCORDANCE__NO_SIMPLE_CROSS_OR_ALONG_TRACK_WARP",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-LOCAL-RESIDUAL-TOPOLOGY-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"74e153da28eaaf9a1173d9da2f5919701ee7491f"
+  },
+  "run":{
+    "github_actions_run_id":35790502531,
+    "artifact_id":10721727561,
+    "artifact_zip_sha256":"2c7734ac439ef91813d3f426093048bba1e9911564eff6e63d9bb0c52e7bf311",
+    "conclusion":"success"
+  },
+  "support":{
+    "raw_line31_within_1000m":121,
+    "thinned_2005":63,
+    "joint_points_both_2008_lineages":63
+  },
+  "residual_reproducibility":{
+    "2005_vs_2008_consensus":{
+      "pearson":0.5128226806214137,
+      "spearman":0.6499135944700462,
+      "sign_concordance":0.746031746031746
+    },
+    "KN192_vs_KNOX":{
+      "pearson":0.8618787763302167,
+      "spearman":0.8845526113671276,
+      "sign_concordance":0.8571428571428571
+    },
+    "rmse_2005_minus_consensus_residual_m":29.50777399594363,
+    "rmse_KN192_minus_KNOX_residual_m":11.795618075808878,
+    "rmse_ratio_2005_error_over_2008_internal":2.5015877766049277
+  },
+  "spatial_topology":{
+    "delta_vs_cross_track":{"pearson":-0.0019080466510770651,"spearman":-0.2626248079877112},
+    "abs_delta_vs_cross_track":{"pearson":0.3605691394808248,"spearman":0.31326804915514594},
+    "delta_vs_along_track":{"pearson":0.004483417539173376,"spearman":-0.10222376901380571},
+    "abs_delta_vs_along_track":{"pearson":0.06882930099697407,"spearman":0.19842308016838037},
+    "affine_delta_surface_R2":4.440892098500626e-16
+  },
+  "largest_local_discordances":[
+    {
+      "lat":-4.0165853,"lon":-12.2985657,
+      "delta_residual_m":124.64879466221646,
+      "cross_track_m":5034.231112557729,
+      "along_track_relative_m":-69.13506727876302,
+      "z2005_m":4025.08,
+      "z2008_consensus_m":3914.742735503614
+    },
+    {
+      "lat":-4.0152462,"lon":-12.299318,
+      "delta_residual_m":115.21341380093054,
+      "cross_track_m":5199.65232345277,
+      "along_track_relative_m":-26.280129884362395,
+      "z2005_m":4036.31,
+      "z2008_consensus_m":3926.963589578867
+    }
+  ],
+  "interpretation":[
+    "The two independent 2008 lineages agree strongly with each other while the line31 2005 residual surface agrees substantially less well with their consensus.",
+    "The 2005-versus-consensus residual error is about 2.50 times the internal 2008 residual disagreement by RMSE.",
+    "Neither signed error nor absolute error exhibits a strong simple along-track or cross-track dependence, and an affine spatial error surface explains essentially none of the residual variance.",
+    "The largest discrepancies are spatially localized cells, including two positive residual excursions above 100 m.",
+    "This supports a localized/nonlinear discordance description but does not determine whether the cause is processing, beam-level acquisition, source-product contamination, or a genuine local 2005-versus-2008 difference."
+  ],
+  "strict_parent_results":"IMMUTABLE",
+  "next":"PREREGISTER_LEAVE_ONE_CELL_OUT_INFLUENCE_DIAGNOSTIC__NO_PROMOTION_FROM_POINT_REMOVAL",
+  "claim_ceiling":"LOCAL_SPATIAL_TOPOLOGY_OF_CAND003_LINE31_2005_VS_2008_DISCORDANCE"
+}
