@@ -1,0 +1,30 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-ABE-SM2000-SCOPE-AUDIT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:31:00Z",
+  "status":"SEALED_NONOVERLAP_FOR_CAND003",
+  "candidate":{
+    "id":"KN19207_CAND_003",
+    "lat":-4.015075679897318,
+    "lon":-12.29915403590432
+  },
+  "primary_source":{
+    "title":"RRS Charles Darwin Cruise 169 report",
+    "url":"https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+    "facts":[
+      "ABE was used during Leg 2 for plume mapping, detailed seafloor mapping, and hydrothermal field investigation.",
+      "ABE151 ran SM2000 bathymetry on 30 m spaced lines at ~50 m altitude.",
+      "CD169 science log places the first ABE deployment near 4deg48.41S, 12deg21.17W.",
+      "Published CD169 synthesis distinguishes a tectonically controlled hydrothermal region near 4deg02S from the separate ABE/volcanic hydrothermal region near 4deg48S."
+    ]
+  },
+  "geometry":{
+    "representative_abe_start_lat":-4.8068333333333335,
+    "representative_abe_start_lon":-12.352833333333333,
+    "great_circle_distance_to_CAND003_m":88240.46422218622
+  },
+  "verdict":"ABE_SM2000_2005_NOT_A_VALID_CAND003_TEMPORAL_REFERENCE",
+  "reason":"The documented ABE/SM2000 focus survey is ~88 km from CAND003 and belongs to the separate ~4deg48S volcanic hydrothermal area, not the ~4deg02S NTD candidate region.",
+  "anti_loop_rule":"Do not search for or substitute ABE150-155 SM2000 bathymetry as if it covered CAND003 unless a primary source later demonstrates a separate ABE acquisition at the frozen candidate coordinate.",
+  "remaining_2005_bathymetric_reference":"CD169 shipborne Simrad EM12",
+  "claim_ceiling":"SOURCE_SCOPE_AND_GEOMETRIC_NONOVERLAP_ONLY"
+}
