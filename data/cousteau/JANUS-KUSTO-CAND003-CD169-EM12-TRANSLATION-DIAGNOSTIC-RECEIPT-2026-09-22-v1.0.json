@@ -1,0 +1,37 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-TRANSLATION-DIAGNOSTIC-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:39:00Z",
+  "status":"SEALED_NO_CONSISTENT_TRANSLATIONAL_GEOREGISTRATION_SIGNATURE",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-CD169-EM12-TRANSLATION-DIAGNOSTIC-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"4f370b511fb4750d2e4969b8ff16d816b2969dcf"
+  },
+  "run":{
+    "github_actions_run_id":35761480419,
+    "artifact_id":10710895114,
+    "artifact_zip_sha256":"8f2caade63fcc2eda1711621ae6f4d74c6403ce3ad252d89a30bf1893c444332"
+  },
+  "KN192-07_2008":{
+    "zero_shift":{"pearson":0.4389913393723145,"spearman":0.5961099152132847,"sign":0.7087378640776699},
+    "best_shift_east_m":400,
+    "best_shift_north_m":-200,
+    "best_pearson":0.45736991472106947,
+    "best_spearman":0.4475135087642227,
+    "pearson_gain":0.018378575348754977
+  },
+  "KNOX15RR_2008":{
+    "zero_shift":{"pearson":0.4164585159648527,"spearman":0.5512783903703378,"sign":0.7184466019417476},
+    "best_shift_east_m":-200,
+    "best_shift_north_m":150,
+    "best_pearson":0.5050080780470759,
+    "best_spearman":0.5443961300756004,
+    "pearson_gain":0.0885495620822232
+  },
+  "best_shift_vector_difference_m":694.6221994724903,
+  "diagnostic_signature_pass":false,
+  "verdict":"NO_CONSISTENT_TRANSLATIONAL_GEOREGISTRATION_SIGNATURE",
+  "interpretation":"A single constant horizontal offset in the CD169 EM12 product is not supported as an explanation of the temporal mismatch. The best shifts are discordant between the two independent 2008 lineages and provide only small-to-moderate Pearson gains below the preregistered recovery threshold.",
+  "strict_temporal_fail":"IMMUTABLE",
+  "next":"RECOVER_OR_RECONSTRUCT_INDIVIDUAL_CD169_EM12_LINE_PROVENANCE_FOR_ACCEPTL28-33_AND_TEST_LINE_MIXING/PROCESSING_EFFECTS",
+  "claim_ceiling":"TRANSLATIONAL_GEOREGISTRATION_DIAGNOSTIC_NEGATIVE__NO_CAUSAL_DIAGNOSIS"
+}
