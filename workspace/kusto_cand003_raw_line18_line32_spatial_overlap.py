@@ -45,10 +45,13 @@ def digits(b,a,z):
     if len(x)!=(z-a) or not all(48<=q<=57 for q in x):return None
     return int(x.decode("ascii"))
 
-def parse_time(payload):
+def parse_time(payload,pos_mode=False):
     try:
         dd=digits(payload,0,2);mm=digits(payload,2,4);yy=digits(payload,4,6)
-        hh=digits(payload,6,8);mi=digits(payload,8,10);ss=digits(payload,10,12);cs=digits(payload,12,14)
+        if pos_mode:
+            hh=digits(payload,7,9);mi=digits(payload,9,11);ss=digits(payload,11,13);cs=digits(payload,13,15)
+        else:
+            hh=digits(payload,6,8);mi=digits(payload,8,10);ss=digits(payload,10,12);cs=digits(payload,12,14)
         if None in (dd,mm,yy,hh,mi,ss,cs):return None
         year=2000+yy if yy<80 else 1900+yy
         dt=datetime(year,mm,dd,hh,mi,ss,cs*10000,tzinfo=timezone.utc)
