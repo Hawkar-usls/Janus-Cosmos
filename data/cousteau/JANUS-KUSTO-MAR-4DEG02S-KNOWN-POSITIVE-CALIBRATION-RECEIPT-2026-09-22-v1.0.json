@@ -1,0 +1,68 @@
+{
+  "artifact_id":"JANUS-KUSTO-MAR-4DEG02S-KNOWN-POSITIVE-CALIBRATION-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T16:04:00Z",
+  "status":"SEALED_PASS_EXTERNAL_KNOWN_POSITIVE_REGION_CALIBRATION",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-MAR-4DEG02S-KNOWN-POSITIVE-CALIBRATION-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"c1a3a8cdde592602b5d95b4332c4b8839db43f4d"
+  },
+  "target":{
+    "id":"MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "lat":-4.03,
+    "lon":-12.25,
+    "role":"approximate externally published hydrothermal region coordinate; not an exact vent coordinate and not a JANUS discovery"
+  },
+  "exact_ncei_footprint":{
+    "run_id":35751422191,
+    "artifact_id":10705691396,
+    "artifact_zip_sha256":"6b1b919b4b7cdc761f03dffd7863dadad374bfe5a6f10009fbc32b943f74e8d6",
+    "survey_ids":["KN192-07","KNOX15RR"],
+    "pass":true
+  },
+  "beam_calibration":{
+    "authoritative_run_id":35751255823,
+    "head_sha":"beb84b8cd20e7ee5a652e489d1294ffb88fe2ac4",
+    "artifact_id":10705995138,
+    "artifact_zip_sha256":"333a9293282f2733abc0abedb9df5cfb8d5e540ead7878c91f4ebc02a54788fb",
+    "superseded_run":{
+      "run_id":35751150284,
+      "status":"IMPLEMENTATION_SYNTAX_FAIL",
+      "reason":"missing newline between CANDS and SURVEYS before scientific execution"
+    },
+    "KN192-07":{
+      "selected_fbt_count":37,
+      "nearest_good_beam_m":4.381723957036692,
+      "good_beams_within_1000m":12744,
+      "common_grid_plane_rmse_m":8.275437243514855,
+      "p05_p95_relief_m":67.17930499315207,
+      "plane_gradient_azimuth_deg":287.9475358254235,
+      "radial_r2":0.157516617113739
+    },
+    "KNOX15RR":{
+      "selected_fbt_count":1,
+      "nearest_good_beam_m":18.242900443234568,
+      "good_beams_within_1000m":260,
+      "common_grid_plane_rmse_m":10.784415869804738,
+      "p05_p95_relief_m":81.7381226546322,
+      "plane_gradient_azimuth_deg":285.63724723909314,
+      "radial_r2":0.10547769372186888
+    },
+    "common_grid_cells":234,
+    "residual_pearson":0.7142918463108837,
+    "residual_spearman":0.7108293587519231,
+    "residual_sign_concordance":0.7863247863247863,
+    "median_depth_offset_KNOX_minus_KN192_m":0.5655883887411619,
+    "plane_gradient_azimuth_difference_deg":2.31028858633033,
+    "primary_reproduction_gate_pass":true
+  },
+  "historical_CD169_geometry":{
+    "TOBI_vehicle_track_minimum_distance_to_approx_published_region_m":532.9,
+    "nominal_half_swath_m":3000,
+    "necessary_coverage_geometry_pass":true,
+    "pixel_or_depth_replication_available":false,
+    "warning":"coverage geometry alone is not a 2005 sonar/bathymetry morphology measurement at this frozen coordinate"
+  },
+  "verdict":"KNOWN_POSITIVE_PIPELINE_CALIBRATION_PASS",
+  "interpretation":"The externally selected ~4deg02S natural hydrothermal/tectonic region is directly measured by both independent 2008 multibeam lineages and its local bathymetric morphology passes the same fixed-grid cross-survey reproduction criterion. This validates pipeline sensitivity to persistent real seabed morphology but does not identify an exact vent.",
+  "claim_ceiling":"PIPELINE_CALIBRATION_ON_EXTERNAL_KNOWN_NATURAL_GEOLOGIC_REGION__NO_EXACT_VENT_IDENTITY__NO_NOVELTY__NO_ARTIFICIALITY"
+}
