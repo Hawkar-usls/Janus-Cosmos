@@ -1,0 +1,47 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-SD11281-ARCHIVE-PACKAGE-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:46:00Z",
+  "status":"SEALED_PROCESSED_EM12_DELIVERY__RAW_EM12_NOT_PRESENT",
+  "archive_root":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281",
+  "readme_probe":{
+    "run_id":35762260542,
+    "artifact_id":10710541368,
+    "artifact_zip_sha256":"aaf40191a330159284ba0daae9ad5c310728a688fbeb35b6f327eb49029789f0",
+    "readme_sha256":"2c94aec83f02fdf620184b9dbf352d13f91857c19353dfa997eefa980c09fdde",
+    "readme_statement":"The delivery contains CDF files generated from raw TOBI files, relevant .nav/.cable files for PRISM, processed ascii EM12 bathymetry files, and navigation products for both cruise legs."
+  },
+  "archive_tree":{
+    "corrected_run_id":35762036922,
+    "artifact_id":10710084336,
+    "artifact_zip_sha256":"8531629987db2ae06d37ca756c7269eb595c5d64c746f703ddd4f4b275607250",
+    "top_level":["EM12","Nav","README.txt","TOBI"],
+    "em12_product_count":24,
+    "raw_em12_line_files_found":false,
+    "em12_delivery_class":"PROCESSED_ASCII_BATHYMETRY_ONLY"
+  },
+  "navigation":{
+    "leg1_1min_file":"Nav/cd169leg1_1min.listit",
+    "sha256":"3b407b91f5b1d0509c8ac6cdd83beb0c98ca56cd69d962b4e553cf0f25a0424a",
+    "format":"YY JULIAN_DAY HH:MM:SS LAT FLAG LON FLAG",
+    "time_resolution_seconds":60
+  },
+  "external_cruise_report_context":{
+    "instrument":"Simrad EM12",
+    "raw_acquisition_existed_at_sea":true,
+    "raw_line_storage_context":"The cruise report describes raw EM12 acquisition copied to Mermaid on line-number changes under cruise ID CD169.",
+    "delivery_limitation":"Those raw per-line files are not present in the inspected sd11281 BODC delivery.",
+    "processing_context":"The cruise report states newly acquired EM12 data were processed and bathymetry was merged with existing data for some mapping products."
+  },
+  "authoritative_interpretation":[
+    "Acceptl*.xyz.ascii must be treated as processed bathymetry products, not raw beam records.",
+    "Filename line-group labels are useful provenance hints but do not prove point-level raw-line identity.",
+    "Any temporal mismatch diagnostic based on these XYZ products must preserve this product-lineage limitation."
+  ],
+  "anti_loop":[
+    "DO_NOT_SEARCH_SD11281_FOR_NONEXISTENT_RAW_EM12_SUBTREE_AGAIN_WITHOUT_NEW_ARCHIVE_EVIDENCE",
+    "DO_NOT_LABEL_ACCEPTL_XYZ_AS_RAW_EM12",
+    "DO_NOT_TREAT_PROCESSED_PRODUCT_MISMATCH_AS_SEAFLOOR_CHANGE"
+  ],
+  "claim_ceiling":"DELIVERY_CLASS_AND_ARCHIVE_CONTENT_PROVENANCE_ONLY",
+  "next":"CAND003_PRODUCT_DEMIX_DIAGNOSTIC_THEN_GEOMETRY_ONLY_LINE_ATTRIBUTION_IF_NEEDED"
+}
