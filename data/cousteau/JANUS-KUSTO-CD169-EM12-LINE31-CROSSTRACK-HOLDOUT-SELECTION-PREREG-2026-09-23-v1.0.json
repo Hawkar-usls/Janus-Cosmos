@@ -1,0 +1,50 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-SELECTION-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T21:59:00Z",
+  "status":"FROZEN_BEFORE_GEOMETRY_ONLY_HOLDOUT_SELECTION",
+  "source_product":{
+    "file":"B1-81-1_Acceptl28-33.xyz.ascii",
+    "sha256":"0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0",
+    "target_line":31,
+    "candidate_lines":[28,29,30,31,32,33]
+  },
+  "navigation":{
+    "file":"CD169_TOBI/Nav/cd169leg1_1min.listit",
+    "sha256":"3b407b91f5b1d0509c8ac6cdd83beb0c98ca56cd69d962b4e553cf0f25a0424a"
+  },
+  "selection_inputs":"XY geometry and 2008 FNV swath geometry only; no bathymetric depth values may be read during selection.",
+  "exclude_training_regions":[
+    {"id":"CAND003_FAIL","lat":-4.015075679897318,"lon":-12.29915403590432,"radius_m":2000},
+    {"id":"MAR4DEG02S_PASS","lat":-4.03,"lon":-12.25,"radius_m":2000}
+  ],
+  "coverage_requirement":{
+    "surveys":["KN192-07","KNOX15RR"],
+    "source":"generated FNV port-starboard swath endpoints",
+    "point_to_any_cross_swath_segment_max_m":100,
+    "both_surveys_required":true
+  },
+  "local_2005_support":{
+    "radius_m":1000,
+    "minimum_line31_attributed_soundings":100
+  },
+  "bands":{
+    "CENTER":{"empirical_cross_track_percentile_min":0.20,"max":0.40,"target_percentile":0.30},
+    "EDGE":{"empirical_cross_track_percentile_min":0.95,"max":0.99,"target_percentile":0.975}
+  },
+  "deterministic_selection":{
+    "max_per_band":3,
+    "minimum_distance_between_selected_holdouts_m":3000,
+    "candidate_points":"line31-attributed processed XYZ XY locations satisfying band, dual-survey coverage, exclusion, and local support",
+    "ordering":"ascending absolute percentile distance to band target, then latitude, then longitude",
+    "greedy_pick":"take first eligible point, then continue in fixed ordering while enforcing separation; no threshold relaxation"
+  },
+  "output":"Exact selected holdout coordinates and geometry metadata only. No depth comparison in this stage.",
+  "hard_rules":[
+    "NO_DEPTH_READ_DURING_SELECTION",
+    "NO_RELAXATION_IF_FEWER_THAN_3_PER_BAND",
+    "NO_RECENTERING_AFTER_SELECTION",
+    "NO_USE_OF_CAND003_OR_KNOWN_POSITIVE_AS_HOLDOUT",
+    "HOLDOUT_COORDINATES_MUST_BE_FROZEN_BEFORE_DEPTH_EXECUTION"
+  ],
+  "claim_ceiling":"GEOMETRY_ONLY_HOLDOUT_SELECTION"
+}
