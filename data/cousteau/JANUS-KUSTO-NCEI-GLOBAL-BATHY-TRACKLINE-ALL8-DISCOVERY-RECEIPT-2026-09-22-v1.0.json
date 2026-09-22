@@ -1,0 +1,79 @@
+{
+  "artifact_id": "JANUS-KUSTO-NCEI-GLOBAL-BATHY-TRACKLINE-ALL8-DISCOVERY-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_HISTORICAL_TRACKLINE_CLUES__NO_DIRECT_FROZEN_CELL_REPLICATION",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-NCEI-GLOBAL-BATHY-TRACKLINE-ALL8-DISCOVERY-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "ba191d48669c335c9b0af535d9f58fe34793de05"
+  },
+  "run": {
+    "github_actions_run_id": 35769438677,
+    "artifact_id": 10713183031,
+    "artifact_zip_sha256": "9e734a6de307b03aa289f7936ad0042e7040b7d02e90582a2f09370953094902",
+    "conclusion": "success"
+  },
+  "notable_clues": [
+    {
+      "candidate": "KN19207_CAND_008",
+      "survey": "EN081",
+      "platform": "Endeavor",
+      "year": 1981,
+      "min_trackline_distance_m": 304.1719998893184
+    },
+    {
+      "candidate": "KN19207_CAND_004",
+      "survey": "19950328",
+      "platform": "Euryalus",
+      "year": 1986,
+      "project": "PASSAGE SOUNDINGS",
+      "min_trackline_distance_m": 758.8236971449536
+    },
+    {
+      "candidate": "KN19207_CAND_006",
+      "survey": "79001311",
+      "platform": "Jean Charcot",
+      "year": 1979,
+      "project": "TRANSWAL - CH87",
+      "min_trackline_distance_m": 1962.792528125181
+    },
+    {
+      "candidate": "KN19207_CAND_006",
+      "survey": "EN081",
+      "platform": "Endeavor",
+      "year": 1981,
+      "min_trackline_distance_m": 1980.3001118636137
+    }
+  ],
+  "other_far_clues": [
+    {
+      "candidate": "KN19207_CAND_002",
+      "survey": "EN081",
+      "distance_m": 13388.101074925647
+    },
+    {
+      "candidate": "KN19207_CAND_003",
+      "survey": "EN081",
+      "distance_m": 11997.647986008953
+    },
+    {
+      "candidate": "KN19207_CAND_005",
+      "survey": "EN081",
+      "distance_m": 11297.911692729256
+    },
+    {
+      "candidate": "KN19207_CAND_007",
+      "survey": "AKU20",
+      "distance_m": 11729.887467965844
+    },
+    {
+      "candidate": "KN19207_CAND_007",
+      "survey": "19940013",
+      "distance_m": 13911.071563906391
+    }
+  ],
+  "direct_support_rule_m": 100,
+  "any_new_direct_support_pass": false,
+  "verdict": "NO_NEW_GLOBAL_TRACKLINE_SURVEY_WITH_DIRECT_LE100M_FROZEN_CELL_SUPPORT",
+  "interpretation": "Historical bathymetry surveys exist near several blind candidates, especially EN081 near CAND008, but trackline proximity does not establish swath coverage or local morphology at the frozen cells.",
+  "next_allowed": "Separate preregistered coarse regional depth control if scientifically useful; do not use these clues as cross-survey morphology confirmation.",
+  "claim_ceiling": "GLOBAL_BATHYMETRY_SURVEY_DISCOVERY_CLUES_ONLY"
+}
