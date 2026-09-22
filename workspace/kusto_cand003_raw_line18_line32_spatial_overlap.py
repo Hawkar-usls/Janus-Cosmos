@@ -155,7 +155,9 @@ def scan_raw_file(data):
                 xx,yy=xy(lon,lat)
                 if math.hypot(xx,yy)<=ANALYSIS_R:
                     pts.append((xx,yy,depth,across,bi,o["epoch"],lon,lat))
-    return np.asarray(pts,float)
+    npos=sum(1 for _,kind,_ in records if kind=="POS")
+    nbath=sum(1 for _,kind,_ in records if kind=="BATH")
+    return np.asarray(pts,float),{"position_records":npos,"bath_records":nbath}
 
 def grid_raw(pts):
     d={}
@@ -288,9 +290,18 @@ def pair_stats(ga,gb):
 get_zip()
 with zipfile.ZipFile(LOCAL,"r") as z:
     raw={}
+    raw_parse_counts={}
+    expected={
+      "LINE18_ERA":{"position_records":6867,"bath_records":533},
+      "LINE32_ERA":{"position_records":60275,"bath_records":4784}
+    }
     for lab,name in RAW_FILES.items():
-        raw[lab]=scan_raw_file(z.read(name))
-        print(lab,"raw points",len(raw[lab]))
+        pts,counts=scan_raw_file(z.read(name))
+        raw[lab]=pts
+        raw_parse_counts[lab]=counts
+        if counts!=expected[lab]:
+            raise RuntimeError(f"EMOLDRAW_SELFTEST_FAIL {lab}: {counts} != {expected[lab]}")
+        print(lab,"selftest",counts,"raw points",len(raw[lab]))
 gr={k:grid_raw(v) for k,v in raw.items()}
 common=sorted(set(gr["LINE18_ERA"])&set(gr["LINE32_ERA"]))
 if len(common)>=30:
@@ -344,6 +355,7 @@ out={
  "artifact_id":"JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-RUN-2026-09-23-v1.0",
  "prereg":"data/cousteau/JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-PREREG-2026-09-23-v1.0.json",
  "target_center":C,"analysis_radius_m":ANALYSIS_R,"cell_m":CELL,
+ "raw_parser_selftest":raw_parse_counts,
  "raw_point_counts":{k:int(len(v)) for k,v in raw.items()},
  "raw_grid_cell_counts":{k:len(v) for k,v in gr.items()},
  "raw_overlap":overlap,
