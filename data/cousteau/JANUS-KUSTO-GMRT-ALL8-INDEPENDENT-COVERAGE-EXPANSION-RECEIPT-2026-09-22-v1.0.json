@@ -1,0 +1,114 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-ALL8-INDEPENDENT-COVERAGE-EXPANSION-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_NO_ADDITIONAL_VALIDATED_GMRT_SURVEY_BEYOND_KNOX15RR_FOR_CAND002003",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-GMRT-ALL8-INDEPENDENT-COVERAGE-EXPANSION-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "78b6177198f75aa6cc40331eb20151a19e58d271"
+  },
+  "run": {
+    "github_actions_run_id": 35768789913,
+    "artifact_id": 10713391962,
+    "artifact_zip_sha256": "8163ddee3aea713ecffb5709bf30ccd97e8050f5313780db9f5772ec77e71022",
+    "conclusion": "success"
+  },
+  "source": {
+    "provider": "GMRT",
+    "product": "gmrt_swath_polygons",
+    "archive_sha256": "6acc532256336df42ac8389ef55d40ce90c720e89e8da97260b662ce209b59b0",
+    "record_count": 1638
+  },
+  "candidates": {
+    "KN19207_CAND_001": {
+      "exact_raw": [
+        "KN192-07"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ]
+    },
+    "KN19207_CAND_002": {
+      "exact_raw": [
+        "KN192-07",
+        "KNOX15RR"
+      ],
+      "validated_independent": [
+        "KN192-07",
+        "KNOX15RR"
+      ]
+    },
+    "KN19207_CAND_003": {
+      "exact_raw": [
+        "KN192-07",
+        "KNOX15RR",
+        "JC169"
+      ],
+      "validated_independent": [
+        "KN192-07",
+        "KNOX15RR"
+      ],
+      "rejected": [
+        "JC169"
+      ]
+    },
+    "KN19207_CAND_004": {
+      "exact_raw": [
+        "KN192-07"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ]
+    },
+    "KN19207_CAND_005": {
+      "exact_raw": [
+        "KN192-07",
+        "JC169"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ],
+      "rejected": [
+        "JC169"
+      ]
+    },
+    "KN19207_CAND_006": {
+      "exact_raw": [
+        "KN192-07",
+        "JC169"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ],
+      "rejected": [
+        "JC169"
+      ]
+    },
+    "KN19207_CAND_007": {
+      "exact_raw": [
+        "KN192-07"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ]
+    },
+    "KN19207_CAND_008": {
+      "exact_raw": [
+        "KN192-07",
+        "JC169"
+      ],
+      "validated_independent": [
+        "KN192-07"
+      ],
+      "rejected": [
+        "JC169"
+      ]
+    }
+  },
+  "jc169_disposition": {
+    "receipt": "data/cousteau/JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-RECEIPT-2026-09-22-v1.0.json",
+    "verdict": "FAIL_ACQUISITION_IDENTITY__DO_NOT_COUNT_JC169_AS_THIRD_SURVEY",
+    "reason": "Primary BODC JC169 record is an August 2018 English Channel/North Sea post-refit trials cruise and cannot have acquired the South Atlantic candidate cells represented by the GMRT polygon."
+  },
+  "verdict": "NO_NEW_VALIDATED_GMRT_ACQUISITION_LINEAGE_FOR_ANY_OF_THE_SIX_SINGLE_SURVEY_CANDIDATES",
+  "next": "SEARCH_NON_GMRT_OPEN_SOURCE_CATALOGS_FOR_DISTINCT_ACQUISITION_LINEAGES",
+  "claim_ceiling": "EXACT_EXTERNAL_SOURCE_COVERAGE_INVENTORY_ONLY"
+}
