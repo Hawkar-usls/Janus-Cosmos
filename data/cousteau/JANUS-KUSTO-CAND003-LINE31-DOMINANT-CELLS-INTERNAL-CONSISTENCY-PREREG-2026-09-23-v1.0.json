@@ -1,0 +1,44 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-INTERNAL-CONSISTENCY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:24:00Z",
+  "status":"FROZEN_BEFORE_DEPTH_DISTRIBUTION_INSPECTION",
+  "parent":{
+    "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+    "processed_product":"B1-81-1_Acceptl28-33.xyz.ascii",
+    "dominant_cells":[
+      {"id":"CELL_A","representative_lat":-4.0165853,"representative_lon":-12.2985657,"representative_depth_m":4025.08},
+      {"id":"CELL_B","representative_lat":-4.0152462,"representative_lon":-12.299318,"representative_depth_m":4036.31}
+    ],
+    "strict_temporal_fail":"IMMUTABLE",
+    "leave_two_cell_result":"STATISTICAL_SENSITIVITY_ONLY__NO_REMOVAL_AUTHORIZED"
+  },
+  "geometry":{
+    "projection":"same local approximation as frozen support-matched pipeline: x=lon*111320*cos(-4deg), y=lat*111320",
+    "grid_origin":"candidate-centered square [-1000,+1000]m",
+    "cell_size_m":100,
+    "cell_assignment":"floor((offset+1000)/100)",
+    "representative_selection":"nearest sounding to geometry-cell center; depth not used"
+  },
+  "tests":[
+    "Recover exact grid index of each frozen representative point.",
+    "Count every Acceptl28-33 sounding in that exact 100m cell.",
+    "Report cell depth median, mean, min, max, p10, p90, IQR, MAD and representative-minus-median.",
+    "Report horizontal distance from representative to cell center and spatial spread.",
+    "Report the same statistics for the eight immediately adjacent cells without selecting them by depth.",
+    "Geometry-only check whether Acceptl15-22 has any soundings in the same exact cell; only if support exists, report its depth distribution separately."
+  ],
+  "diagnostic_labels":{
+    "representative_consistent":"absolute representative-minus-cell-median <= 10m",
+    "representative_outlier_like":"absolute representative-minus-cell-median > 30m",
+    "intermediate":"otherwise"
+  },
+  "hard_rules":[
+    "NO_POINT_REMOVAL",
+    "NO_CHANGE_TO_STRICT_PARENT_FAIL",
+    "NO_CELL_SELECTION_BY_DEPTH",
+    "NO_NEW_NEIGHBORHOOD_AFTER_RESULTS",
+    "PASSING_LINE18_DEPTH_READ_ONLY_IF_SAME_GEOMETRIC_CELL_HAS_SUPPORT",
+    "NO_RAW_PING_PROVENANCE_CLAIM"
+  ],
+  "claim_ceiling":"PROCESSED_CELL_INTERNAL_CONSISTENCY_DIAGNOSTIC_ONLY"
+}
