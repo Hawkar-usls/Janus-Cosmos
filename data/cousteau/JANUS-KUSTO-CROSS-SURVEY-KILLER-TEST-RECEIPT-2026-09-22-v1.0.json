@@ -1,0 +1,159 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SURVEY-KILLER-TEST-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T16:24:00Z",
+  "status":"SEALED_2008_CROSS_SURVEY_PASS__STRICT_2005_TO_2008_TEMPORAL_FAIL",
+  "branch":"feature/kusto-cross-survey-validation-v1",
+  "master_prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CROSS-SURVEY-SEAFLOOR-VALIDATION-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"8a3bcdc9b5f07203f02eafdadba3292fb9b5f135"
+  },
+  "stage_A_exact_ncei_footprint":{
+    "run_id":35748302601,
+    "candidate_count":8,
+    "stage_B_eligible":["KN19207_CAND_002","KN19207_CAND_003"],
+    "independent_survey":"KNOX15RR",
+    "other_six":"NO_SECOND_EXACT_NCEI_MULTIBEAM_FOOTPRINT",
+    "nearby_only_not_counted":["KN19207_CAND_005","KN19207_CAND_006"]
+  },
+  "stage_B_independent_2008_replication":{
+    "receipt":"data/cousteau/JANUS-KUSTO-KN19207-VS-KNOX15RR-CROSS-SURVEY-RECEIPT-2026-09-22-v1.0.json",
+    "run_id":35749313340,
+    "lineages":[
+      {"survey":"KN192-07","platform":"Knorr","instrument":"SeaBeam 3012","acquisition":"2007-12-31_to_2008-01-17"},
+      {"survey":"KNOX15RR","platform":"Roger Revelle","instrument":"Kongsberg EM120","acquisition":"2008-03-20_to_2008-04-17"}
+    ],
+    "KN19207_CAND_002":{
+      "common_cells":220,
+      "pearson":0.9588200213674604,
+      "spearman":0.9632869950355849,
+      "sign_concordance":0.9,
+      "median_depth_offset_m":4.173485890030861,
+      "relief_A_m":289.48199969865345,
+      "relief_B_m":299.51490703538,
+      "gradient_azimuth_difference_deg":7.519765188873066,
+      "verdict":"PASS_CROSS_SURVEY_LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCTION"
+    },
+    "KN19207_CAND_003":{
+      "common_cells":210,
+      "pearson":0.8328504714200906,
+      "spearman":0.8439757299323275,
+      "sign_concordance":0.8476190476190476,
+      "median_depth_offset_m":23.26455288320767,
+      "relief_A_m":102.396369330585,
+      "relief_B_m":105.57195447146887,
+      "gradient_azimuth_difference_deg":8.59090644030789,
+      "verdict":"PASS_CROSS_SURVEY_LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCTION"
+    },
+    "overall":"PASS_TWO_OF_TWO_STAGE_B_ELIGIBLE_CANDIDATES",
+    "temporal_limitation":"Both independent multibeam surveys are 2008 acquisitions; this is not a three-year test."
+  },
+  "cd169_2005_tobi_lane":{
+    "receipt":"data/cousteau/JANUS-KUSTO-CD169-TOBI-VEHICLE-TRACK-COVERAGE-RECEIPT-2026-09-22-v1.0.json",
+    "KN19207_CAND_002":{"minimum_track_distance_m":6788.8,"nominal_half_swath_m":3000,"verdict":"NO_DIRECT_CD169_TOBI_COVERAGE"},
+    "KN19207_CAND_003":{"minimum_track_distance_m":6014.5,"nominal_half_swath_m":3000,"verdict":"NO_DIRECT_CD169_TOBI_COVERAGE"},
+    "consequence":"TOBI sidescan cannot provide the requested 2005-to-2008 replication at the frozen candidate centers."
+  },
+  "cd169_2005_em12_support_lane":{
+    "prereg":"data/cousteau/JANUS-KUSTO-CD169-EM12-X-2008-CAND002-003-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"65eb741be770102fd8c89c289a8122f9f076dce5",
+    "run_id":35753049871,
+    "artifact_id":10707371308,
+    "artifact_zip_sha256":"89ad0d7da97dae159de375e424b3b39e4c4b9f4877f8ed1df2f6a8d35f703419",
+    "KN19207_CAND_002":{
+      "nearest_2005_em12_sounding_m":532.4779987871962,
+      "support_threshold_m":100,
+      "support_pass":false,
+      "depth_read":false,
+      "verdict":"NO_DIRECT_2005_EM12_SUPPORT_FOR_STRICT_TEMPORAL_GATE"
+    },
+    "KN19207_CAND_003":{
+      "nearest_2005_em12_sounding_m":26.273475230470808,
+      "support_threshold_m":100,
+      "support_pass":true,
+      "n_within_1000m_phaseB":191,
+      "nearest_depth_m":4036.31,
+      "depth_median_1000m":3877.72,
+      "relief_1000m":126.61499999999978,
+      "plane_rmse_1000m":30.18584407659345,
+      "verdict":"ELIGIBLE_FOR_THREE_YEAR_DEPTH_COMPARISON"
+    }
+  },
+  "cand003_three_year_gate":{
+    "prereg":"data/cousteau/JANUS-KUSTO-CAND003-THREE-YEAR-TRIPLE-LINEAGE-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"dc6b37fefea693d08e59adc8aef14fc14885a08e",
+    "run_id":35753440881,
+    "artifact_id":10707417156,
+    "artifact_zip_sha256":"d137ae94737e1b289b7c223f043d6dd023f3811cba950f53d75971b70a400eab",
+    "support":{
+      "CD169_EM12_2005":{"nearest_m":26.30322527080892,"n1000":190},
+      "KN192-07_2008":{"nearest_m":0.02467484213411808,"n1000":41123},
+      "KNOX15RR_2008":{"nearest_m":70.03206619596835,"n1000":291}
+    },
+    "CD169_2005_vs_KN192_2008":{
+      "common_cells":101,
+      "pearson":0.4213847882422052,
+      "spearman":0.5701106581246359,
+      "sign_concordance":0.7128712871287128,
+      "median_depth_offset_m":29.600124980807323,
+      "relief_2005_m":144.89999999999964,
+      "relief_2008_m":119.95602697134018,
+      "gradient_azimuth_difference_deg":17.683424319863605,
+      "gate_pass":false
+    },
+    "CD169_2005_vs_KNOX15RR_2008":{
+      "common_cells":60,
+      "pearson":0.277104864096199,
+      "spearman":0.4368435676576828,
+      "sign_concordance":0.6166666666666667,
+      "median_depth_offset_m":52.278996840119135,
+      "relief_2005_m":139.7255,
+      "relief_2008_m":111.96135723531233,
+      "gradient_azimuth_difference_deg":11.9145654354827,
+      "gate_pass":false
+    },
+    "KN192_2008_vs_KNOX15RR_2008":{
+      "common_cells":210,
+      "pearson":0.8328504714200906,
+      "spearman":0.8439757299323275,
+      "sign_concordance":0.8476190476190476,
+      "gate_pass":true
+    },
+    "three_year_pass":false,
+    "triple_lineage_all_pairs_pass":false,
+    "authoritative_verdict":"FAIL_STRICT_2005_TO_2008_LOCAL_MORPHOLOGY_REPLICATION_AT_FROZEN_CAND003_CENTER"
+  },
+  "external_known_positive_calibration":{
+    "target":"approximate published MAR 4deg02S hydrothermal/tectonic region",
+    "receipt":"data/cousteau/JANUS-KUSTO-MAR-4DEG02S-KNOWN-POSITIVE-CALIBRATION-RECEIPT-2026-09-22-v1.0.json",
+    "KN192_vs_KNOX_exact_footprint":true,
+    "pearson":0.7142918463108837,
+    "spearman":0.7108293587519231,
+    "sign_concordance":0.7863247863247863,
+    "gate_pass":true,
+    "role":"POSITIVE_PIPELINE_CALIBRATION_ONLY__NOT_DISCOVERY"
+  },
+  "interpretation":{
+    "established":[
+      "CAND_002 and CAND_003 local bathymetric morphology is reproducible across two independent 2008 multibeam surveys.",
+      "The externally selected known natural ~4deg02S region also passes the same two-survey 2008 pipeline, supporting method sensitivity to persistent seabed morphology."
+    ],
+    "not_established":[
+      "Strict 2005-to-2008 local morphology replication at CAND_003 under the preregistered 100-m grid criterion.",
+      "Any 2005 direct support for CAND_002.",
+      "Hydrothermal identity of either blind candidate.",
+      "Novelty, artificiality, archaeology, or object identity."
+    ],
+    "important_limitation":"CD169 EM12 2005 is far sparser than the 2008 datasets and has known acquisition/processing limitations. This may motivate a new resolution-matched sensitivity analysis, but the strict temporal FAIL must remain immutable."
+  },
+  "next_allowed_gate":{
+    "name":"RESOLUTION_MATCHED_CROSS_YEAR_SENSITIVITY_V1",
+    "requirements":[
+      "new preregistration before execution",
+      "downsample 2008 lineages to CD169 2005 spatial support or use coarser cells justified by measured 2005 spacing",
+      "no recentering or threshold tuning",
+      "must be labeled sensitivity analysis and cannot replace the strict FAIL",
+      "parallel recovery of CD169 ABE/SM2000 bathymetry is preferred because it may provide denser 2005 local support"
+    ]
+  },
+  "claim_ceiling":"2008_INDEPENDENT_CROSS_SURVEY_MORPHOLOGY_REPLICATION_PASS__STRICT_2005_TO_2008_TEMPORAL_REPLICATION_FAIL"
+}
