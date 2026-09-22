@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-KUSTO-CANDIDATE-INDEPENDENT-SURVEY-COVERAGE-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T14:45:00Z",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "discovery_authority": "JANUS-KUSTO-KN19207-SURVEY-WIDE-BLIND-DISCOVERY-RECEIPT-2026-09-21-v1.0",
+  "candidates": [
+    [
+      "KN19207_CAND_001",
+      -4.20546708989972,
+      -14.871748111744372
+    ],
+    [
+      "KN19207_CAND_002",
+      -3.9727527956056825,
+      -12.272824298723462
+    ],
+    [
+      "KN19207_CAND_003",
+      -4.015075679897318,
+      -12.29915403590432
+    ],
+    [
+      "KN19207_CAND_004",
+      -4.2399610081365955,
+      -15.26855667523257
+    ],
+    [
+      "KN19207_CAND_005",
+      -4.099231435240242,
+      -12.332032012186781
+    ],
+    [
+      "KN19207_CAND_006",
+      -4.309010339378846,
+      -12.270140997573803
+    ],
+    [
+      "KN19207_CAND_007",
+      -4.119167753526161,
+      -14.356560209706116
+    ],
+    [
+      "KN19207_CAND_008",
+      -4.3376789874153,
+      -12.319260730325983
+    ]
+  ],
+  "exact_coverage_gate": {
+    "service": "NOAA_NCEI_MULTIBEAM_FOOTPRINT_POLYGON_LAYER",
+    "predicate": "esriSpatialRelIntersects(point,candidate_footprint)",
+    "independent_definition": "SURVEY_ID != KN192-07",
+    "pass": "AT_LEAST_ONE_INDEPENDENT_SURVEY_FOOTPRINT_CONTAINS_EXACT_CANDIDATE_POINT",
+    "nearby_tracklines": "DISCOVERY_ONLY_NOT_COVERAGE"
+  },
+  "lineage_requirements": [
+    "SURVEY_ID",
+    "NCEI_ID",
+    "PLATFORM",
+    "INSTRUMENT",
+    "SURVEY_YEAR",
+    "START_TIME",
+    "END_TIME",
+    "SOURCE",
+    "DOWNLOAD_URL",
+    "SURVEY_AND_VERSION"
+  ],
+  "hard_rules": [
+    "NO_CENTER_MOVEMENT",
+    "NO_BUFFER_SUBSTITUTION_FOR_POINT_INTERSECTION",
+    "KN192-07_IS_NOT_INDEPENDENT",
+    "TRACKLINE_NE_FOOTPRINT",
+    "NEARBY_SURVEY_NE_EXACT_COVERAGE",
+    "NULL_RESULT_IS_PRESERVED"
+  ],
+  "claim_ceiling": "INDEPENDENT_NCEI_MULTIBEAM_FOOTPRINT_COVERAGE_ONLY__NOT_MORPHOLOGY_REPLICATION"
+}
