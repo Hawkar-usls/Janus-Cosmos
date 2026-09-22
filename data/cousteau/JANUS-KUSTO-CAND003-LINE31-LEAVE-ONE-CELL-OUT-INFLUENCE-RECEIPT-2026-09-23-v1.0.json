@@ -1,0 +1,59 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-LEAVE-ONE-CELL-OUT-INFLUENCE-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:13:00Z",
+  "status":"SEALED_DISTRIBUTED_OR_MULTI_CELL_DISCORDANCE__NO_SINGLE_CELL_RECOVERY",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-LEAVE-ONE-CELL-OUT-INFLUENCE-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"c8b8ba58dae7a05d31ba833878fa13573e69e679"
+  },
+  "run":{
+    "github_actions_run_id":35790913357,
+    "artifact_id":10721568120,
+    "artifact_zip_sha256":"422a5e3a98810e1da498c1700c070ff1a546b853fdb55548e83bcd8f1512b1c7",
+    "conclusion":"success"
+  },
+  "full_sample":{
+    "n":63,
+    "pearson":0.5128226806214142,
+    "spearman":0.6499135944700462,
+    "sign_concordance":0.746031746031746,
+    "rmse_delta_m":29.507773995943623,
+    "original_three_metric_gate_pass":false
+  },
+  "leave_one_out":{
+    "runs":63,
+    "pearson_min":0.4927865474955502,
+    "pearson_median":0.5112987763588038,
+    "pearson_max":0.5851242639043607,
+    "jackknife_pearson_range":0.0923377164088105,
+    "runs_with_pearson_ge_0p60":0,
+    "runs_passing_original_three_metric_gate":0,
+    "diagnostic_label":"DISTRIBUTED_OR_MULTI_CELL_DISCORDANCE"
+  },
+  "most_positive_influence":{
+    "removed_lat":-4.0165853,
+    "removed_lon":-12.2985657,
+    "removed_raw_2005_minus_2008_consensus_m":110.33726449638607,
+    "pearson_after_removal":0.5851242639043607,
+    "spearman_after_removal":0.6884490443453954,
+    "sign_after_removal":0.7419354838709677,
+    "rmse_after_removal_m":24.977295688421506,
+    "three_metric_gate_pass":false
+  },
+  "second_large_positive_influence":{
+    "removed_lat":-4.0152462,
+    "removed_lon":-12.299318,
+    "removed_raw_2005_minus_2008_consensus_m":109.34641042113299,
+    "pearson_after_removal":0.5636641479809432,
+    "three_metric_gate_pass":false
+  },
+  "interpretation":[
+    "No single support cell is sufficient to explain the frozen line31 temporal FAIL.",
+    "The largest positive-discordance cell is influential but its removal still leaves Pearson below the preregistered 0.60 threshold.",
+    "The mismatch is therefore distributed across multiple cells or requires at least a multi-cell interaction to explain.",
+    "This diagnostic does not authorize removal of any point from the authoritative comparison."
+  ],
+  "strict_parent_fail":"IMMUTABLE",
+  "next":"EXHAUSTIVE_LEAVE_TWO_CELL_OUT_INFLUENCE_DIAGNOSTIC__ALL_1953_PAIRS",
+  "claim_ceiling":"POSTHOC_INFLUENCE_DIAGNOSTIC_OF_FROZEN_CAND003_LINE31_DISCORDANCE"
+}
