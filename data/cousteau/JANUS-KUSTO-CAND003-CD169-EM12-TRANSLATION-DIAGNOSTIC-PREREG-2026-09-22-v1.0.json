@@ -1,0 +1,46 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-TRANSLATION-DIAGNOSTIC-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:35:00Z",
+  "status":"FROZEN_BEFORE_SHIFT_SEARCH",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "parent_results":[
+    "STRICT_2005_TO_2008_TEMPORAL_FAIL",
+    "SUPPORT_MATCHED_TEMPORAL_FAIL"
+  ],
+  "purpose":"Diagnose whether one approximately constant horizontal georegistration offset in the CD169 EM12 2005 product could explain the cross-year residual mismatch.",
+  "reference_support":{
+    "selection":"same geometry-thinned CD169 EM12 2005 support used in support-matched sensitivity",
+    "cell_m":100,
+    "radius_from_target_m":1000
+  },
+  "shift_search":{
+    "apply_shift_to":"reported CD169 EM12 support coordinates only",
+    "east_m":[-500,500,50],
+    "north_m":[-500,500,50],
+    "2008_depth_estimator":"median good-beam depth within 100m of shifted 2005 support coordinate",
+    "minimum_matched_points":50,
+    "fit":"independent best-fit plane per lineage on identical matched support coordinates",
+    "selection_metric":"maximum residual Pearson correlation; ties by higher Spearman then smaller shift magnitude then east/north lexical order"
+  },
+  "diagnostic_signature":{
+    "all_required":[
+      "best Pearson >= 0.60 against KN192-07",
+      "best Pearson >= 0.60 against KNOX15RR",
+      "Pearson gain from zero shift >= 0.15 in both comparisons",
+      "best shift vectors for the two independent 2008 lineages differ by <= 100m"
+    ],
+    "positive_label":"CONSISTENT_TRANSLATIONAL_GEOREGISTRATION_SIGNATURE",
+    "negative_label":"NO_CONSISTENT_TRANSLATIONAL_GEOREGISTRATION_SIGNATURE"
+  },
+  "hard_rules":[
+    "DIAGNOSTIC_ONLY",
+    "DO_NOT_REPLACE_STRICT_TEMPORAL_FAIL",
+    "NO_ROTATION",
+    "NO_SCALE_OPTIMIZATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_SHIFT_RANGE_EXTENSION_AFTER_RESULTS",
+    "LOOK_ELSEWHERE_SEARCH_DOES_NOT_COUNT_AS_REPLICATION",
+    "NO_HYDROTHERMAL_IDENTITY_OR_ARTIFICIALITY_CLAIM"
+  ],
+  "claim_ceiling":"TRANSLATIONAL_GEOREGISTRATION_DIAGNOSTIC_ONLY"
+}
