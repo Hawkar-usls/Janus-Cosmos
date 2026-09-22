@@ -1,0 +1,80 @@
+{
+  "artifact_id": "JANUS-KUSTO-CAND003-MECHANISM-ELIMINATION-MATRIX-2026-09-22-v1.0",
+  "status": "FROZEN_DIAGNOSTIC_SUMMARY__STRICT_TEMPORAL_FAIL_PRESERVED",
+  "target": {
+    "id": "KN19207_CAND_003",
+    "lat": -4.015075679897318,
+    "lon": -12.29915403590432
+  },
+  "authoritative_parent": {
+    "strict_verdict": "FAIL_STRICT_2005_TO_2008_LOCAL_MORPHOLOGY_REPLICATION_AT_FROZEN_CAND003_CENTER",
+    "receipt": "data/cousteau/JANUS-KUSTO-CROSS-SURVEY-KILLER-TEST-RECEIPT-2026-09-22-v1.0.json",
+    "immutable": true
+  },
+  "established_positive_context": [
+    {
+      "statement": "CAND003 morphology is independently reproduced between KN192-07 and KNOX15RR 2008 surveys.",
+      "evidence": {
+        "pearson": 0.8328504714200906,
+        "spearman": 0.8439757299323275,
+        "sign": 0.8476190476190476
+      }
+    },
+    {
+      "statement": "The same 2005-to-2008 temporal pipeline passes on the externally selected natural MAR ~4deg02S calibration region.",
+      "evidence": {
+        "CD169_vs_KN192_pearson": 0.8599745639418475,
+        "CD169_vs_KNOX_pearson": 0.7883222288171902
+      }
+    }
+  ],
+  "falsified_simple_explanations": [
+    {
+      "hypothesis": "2005 temporal FAIL is only caused by denser 2008 sampling/support mismatch.",
+      "test": "support-matched sensitivity on 103 geometry-selected 2005 supports",
+      "result": "FALSIFIED",
+      "evidence": "Both 100m comparisons remain below Pearson/Spearman thresholds."
+    },
+    {
+      "hypothesis": "CD169 EM12 is globally incompatible with the 2008 surveys.",
+      "test": "external known-positive MAR ~4deg02S temporal calibration",
+      "result": "FALSIFIED",
+      "evidence": "CD169 2005 passes against both independent 2008 lineages."
+    },
+    {
+      "hypothesis": "Acceptl28-33 is globally lower-fidelity than Acceptl15-22.",
+      "test": "source-native acquisition-regime calibration on external known-positive region",
+      "result": "FALSIFIED",
+      "evidence": "Both product families pass against both 2008 lineages."
+    },
+    {
+      "hypothesis": "A single translational georegistration offset explains pooled CAND003 mismatch.",
+      "test": "441-shift translation diagnostic",
+      "result": "FALSIFIED",
+      "evidence": "No consistent translation fixes both 2008 comparisons; best-shift vectors differ by ~694.6m."
+    },
+    {
+      "hypothesis": "The failing line31 product fails simply because CAND003 sits at the swath edge while passing line18 is more central.",
+      "test": "geometry-only empirical cross-track percentile diagnostic",
+      "result": "FALSIFIED",
+      "evidence": "Both line18 and line31 target subsets have median empirical cross-track percentile ~0.9755."
+    }
+  ],
+  "unresolved_observation": {
+    "statement": "At CAND003, processed product Acceptl15-22 / geometry-attributed line18 passes temporal comparison against both 2008 lineages, while Acceptl28-33 / line31 fails both.",
+    "status": "LOCAL_PROCESSED_PRODUCT_SPLIT_UNEXPLAINED",
+    "cannot_promote_to": "raw-ping provenance, acquisition-quality ranking, geological change"
+  },
+  "next_admissible_routes": [
+    "Recover raw or more source-native CD169 EM12 line-level processing provenance if publicly available.",
+    "Find a genuinely distinct external multibeam acquisition covering CAND003.",
+    "Use natural-geology/source interpretation only after acquisition provenance is separated from processing artifacts."
+  ],
+  "forbidden_next_steps": [
+    "Further metric threshold tuning on CAND003",
+    "Recentering/rotation to force a temporal PASS",
+    "Selecting the passing 2005 product as authoritative solely because it correlates better",
+    "Calling the local split geological change without raw provenance"
+  ],
+  "claim_ceiling": "CAUSAL_DIAGNOSTIC_STATE_ONLY"
+}
