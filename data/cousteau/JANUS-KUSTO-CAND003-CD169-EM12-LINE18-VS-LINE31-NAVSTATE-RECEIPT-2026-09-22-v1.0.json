@@ -1,0 +1,52 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-LINE18-VS-LINE31-NAVSTATE-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T18:59:30Z",
+  "status":"SEALED_OPERATIONAL_NAVSTATE_DIFFERENCE_SUPPORTED__CAUSALITY_UNPROVEN",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-CD169-EM12-LINE18-VS-LINE31-NAVSTATE-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"1e8436d30ca44cbbd97a8c85287abf9ddef2fa37"
+  },
+  "run":{
+    "github_actions_run_id":35770745140,
+    "artifact_id":10714510161,
+    "artifact_zip_sha256":"221f9f0d3debf57ea9d487f67be5d065d223f89eb8c452b23a1215e28f3f2179",
+    "conclusion":"success"
+  },
+  "navigation":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281/Nav/cd169leg1_1min.listit",
+    "sha256":"3b407b91f5b1d0509c8ac6cdd83beb0c98ca56cd69d962b4e553cf0f25a0424a",
+    "parsed_rows":21338
+  },
+  "line18":{
+    "context":"planned swath survey / WP4-era line",
+    "nearest_target_utc":"2005-02-24T01:33:00Z",
+    "nearest_target_distance_m":6192.238029341648,
+    "median_speed_knots":9.150564495578037,
+    "speed_p10_knots":9.005983423930644,
+    "speed_p90_knots":9.261125439204914,
+    "circular_heading_std_deg":1.356430325128564,
+    "median_abs_heading_change_deg_per_min":0.9010108307108169,
+    "p95_abs_heading_change_deg_per_min":1.930126831889242
+  },
+  "line31":{
+    "context":"transit to TOBI 02 re-deployment",
+    "nearest_target_utc":"2005-02-26T21:19:00Z",
+    "nearest_target_distance_m":5194.97787800693,
+    "median_speed_knots":9.714394195783871,
+    "speed_p10_knots":5.518909881032264,
+    "speed_p90_knots":9.78346782556049,
+    "circular_heading_std_deg":24.57958764749991,
+    "median_abs_heading_change_deg_per_min":0.7545462920542718,
+    "p95_abs_heading_change_deg_per_min":25.388292391202125
+  },
+  "comparison":{
+    "median_speed_ratio_line31_over_line18":1.0616169308984493,
+    "heading_std_ratio_line31_over_line18":18.120788950343044,
+    "p95_heading_change_ratio_line31_over_line18":13.153691186506855,
+    "interpretation":"Median speed is similar, but line31 has a much broader low-speed tail and radically higher heading dispersion/upper-tail turning near the frozen target geometry."
+  },
+  "verdict":"OPERATIONAL_NAVSTATE_DIFFERENCE_SUPPORTED__HIGH_MANEUVER_VARIABILITY_ON_FAILING_LINE31",
+  "causality":"UNPROVEN",
+  "strict_temporal_parent_fail":"IMMUTABLE",
+  "claim_ceiling":"NAVIGATION_STATE_MECHANISM_DIAGNOSTIC_ONLY"
+}
