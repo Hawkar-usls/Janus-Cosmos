@@ -1,0 +1,49 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-SUPPORT-MATCHED-CROSSYEAR-SENSITIVITY-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T16:27:00Z",
+  "status":"FROZEN_AFTER_STRICT_TEMPORAL_FAIL_BEFORE_SUPPORT_MATCHED_EXECUTION",
+  "immutable_parent_result":{
+    "strict_gate":"FAIL_STRICT_2005_TO_2008_LOCAL_MORPHOLOGY_REPLICATION_AT_FROZEN_CAND003_CENTER",
+    "receipt":"data/cousteau/JANUS-KUSTO-CROSS-SURVEY-KILLER-TEST-RECEIPT-2026-09-22-v1.0.json",
+    "rule":"This sensitivity analysis cannot replace, relabel, or erase the strict FAIL."
+  },
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "lineages":["CD169_EM12_2005","KN192-07_SEABEAM3012_2008","KNOX15RR_EM120_2008"],
+  "support_matching":{
+    "radius_from_target_m":1000,
+    "reference_support":"CD169_EM12_2005 measured XYZ soundings only",
+    "spatial_thinning":"candidate-centered 100m square cells; select one 2005 sounding per occupied cell, the sounding nearest that cell center; depth is not used for selection",
+    "primary_2008_estimator":"median good-beam depth within 100m of each selected 2005 sounding coordinate",
+    "secondary_report_only_estimator_radii_m":[50,150],
+    "no_2008_point_or_center_movement":true,
+    "minimum_matched_support_points":50
+  },
+  "comparison":{
+    "fit":"independent best-fit plane to each lineage evaluated on identical matched 2005 support coordinates",
+    "metrics":["residual_pearson","residual_spearman","residual_sign_concordance","matched_point_count","median_depth_offset","relief_ratio"],
+    "primary_recovery_gate":{
+      "estimator_radius_m":100,
+      "pearson_min":0.60,
+      "spearman_min":0.60,
+      "sign_concordance_min":0.65,
+      "all_required":true
+    }
+  },
+  "verdicts":{
+    "pass":"SUPPORT_MATCHED_TEMPORAL_MORPHOLOGY_RECOVERY",
+    "fail":"SUPPORT_MATCHED_TEMPORAL_MORPHOLOGY_STILL_FAILS",
+    "insufficient":"INSUFFICIENT_MATCHED_SUPPORT"
+  },
+  "hard_rules":[
+    "STRICT_PARENT_FAIL_IMMUTABLE",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_DEPTH_BASED_2005_SUPPORT_SELECTION",
+    "NO_ESTIMATOR_RADIUS_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "SECONDARY_RADII_REPORT_ONLY",
+    "PASS_IS_SENSITIVITY_RECOVERY_NOT_REPLACEMENT_OF_STRICT_FAIL",
+    "NO_HYDROTHERMAL_IDENTITY_OR_ARTIFICIALITY_CLAIM"
+  ],
+  "claim_ceiling":"POSTHOC_PREREGISTERED_SUPPORT_MATCHED_SENSITIVITY_ONLY"
+}
