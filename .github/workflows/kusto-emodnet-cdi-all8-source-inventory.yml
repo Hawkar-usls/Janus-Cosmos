@@ -1,0 +1,24 @@
+name: KUSTO EMODnet CDI All8 Source Inventory
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_emodnet_cdi_all8_source_inventory.py'
+      - '.github/workflows/kusto-emodnet-cdi-all8-source-inventory.yml'
+  workflow_dispatch:
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_emodnet_cdi_all8_source_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-emodnet-cdi-all8-source-inventory-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-EMODNET-CDI-ALL8-SOURCE-INVENTORY-RUN-2026-09-22-v1.0.json
+          retention-days: 30
