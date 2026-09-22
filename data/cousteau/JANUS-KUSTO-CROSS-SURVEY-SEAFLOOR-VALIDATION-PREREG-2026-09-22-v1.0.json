@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-CROSS-SURVEY-SEAFLOOR-VALIDATION-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T15:35:00Z",
+  "status": "FROZEN_BEFORE_EXACT_FOOTPRINT_EXECUTION",
+  "purpose": "Test whether blind KN192-07 discovery candidates are covered by independent multibeam surveys, and where possible whether local morphology is reproducible across independent acquisition lineages.",
+  "candidates": [
+    {"id":"KN19207_CAND_001","lat":-4.20546708989972,"lon":-14.871748111744372},
+    {"id":"KN19207_CAND_002","lat":-3.9727527956056825,"lon":-12.272824298723462},
+    {"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+    {"id":"KN19207_CAND_004","lat":-4.2399610081365955,"lon":-15.26855667523257},
+    {"id":"KN19207_CAND_005","lat":-4.099231435240242,"lon":-12.332032012186781},
+    {"id":"KN19207_CAND_006","lat":-4.309010339378846,"lon":-12.270140997573803},
+    {"id":"KN19207_CAND_007","lat":-4.119167753526161,"lon":-14.356560209706116},
+    {"id":"KN19207_CAND_008","lat":-4.3376789874153,"lon":-12.319260730325983}
+  ],
+  "stage_A_exact_footprint": {
+    "source": "NOAA_NCEI_MULTIBEAM_FOOTPRINT_POLYGON_LAYER",
+    "query": "esriGeometryPoint / EPSG:4326 / esriSpatialRelIntersects",
+    "independence_definition": "Different SURVEY_ID and acquisition dates; KN192-07 is discovery lineage and is excluded from independent-confirmation count.",
+    "pass_for_stage_B": "At least one exact-footprint intersecting survey other than KN192-07."
+  },
+  "stage_B_cross_survey": {
+    "eligible_only_after_stage_A": true,
+    "comparison_center": "Frozen candidate Earth-cell, no recentering.",
+    "radii_m": [250,500,1000],
+    "minimum_common_support": "Each compared lineage must contain measured bathymetric support within 100 m of candidate and >=100 valid measured samples inside 1000 m, where the source format permits sample-level extraction.",
+    "metrics": [
+      "nearest_measured_depth_to_candidate",
+      "median_depth_250m_500m_1000m",
+      "p05_p95_relief_250m_500m_1000m",
+      "best_fit_plane_gradient_vector",
+      "plane_detrended_rmse",
+      "quadratic_hessian_eigenvalues",
+      "radial_quadratic_r2_after_plane"
+    ],
+    "reproducibility_rule": "A morphology family is cross-survey reproduced only if both lineages independently support the same signed/structural feature at the frozen center without spatial recentering; absolute depth offsets alone do not count.",
+    "no_same_processing_chain_rule": "A derivative generated from the same raw acquisition is not an independent survey."
+  },
+  "cd169_tobi_2005_special_lane": {
+    "region": "4deg02S Mid-Atlantic Ridge NTD",
+    "sources": ["CD169_TOPOGRAPHY_OR_INTERFEROMETRIC_BATHYMETRY_IF_AVAILABLE","CD169_TOBI_SIDESCAN","KN192-07_SEABEAM_3012"],
+    "sensor_firewall": "TOBI sidescan intensity is not depth. Cross-sensor reproduction may establish spatially persistent geomorphic boundaries/lineaments only when independently georeferenced; it cannot substitute echo intensity for bathymetric elevation.",
+    "target_candidates": ["KN19207_CAND_002","KN19207_CAND_003","KN19207_CAND_005"]
+  },
+  "hard_rules": [
+    "EXACT_FOOTPRINT_NE_TRACKLINE_PROXIMITY",
+    "DIFFERENT_CRUISE_REQUIRED_FOR_INDEPENDENCE",
+    "NO_RECENTERING",
+    "NO_VISUAL_PICKING",
+    "NO_CANDIDATE_DROPPING_AFTER_RESULTS",
+    "NO_ARTIFICIALITY_OR_ARCHAEOLOGY_CLAIM",
+    "CROSS_SENSOR_SIMILARITY_NE_BATHYMETRIC_REPLICATION",
+    "NEGATIVE_COVERAGE_RESULTS_PRESERVED"
+  ],
+  "claim_ceiling": "CROSS_SURVEY_SEAFLOOR_REPRODUCIBILITY_ONLY"
+}
