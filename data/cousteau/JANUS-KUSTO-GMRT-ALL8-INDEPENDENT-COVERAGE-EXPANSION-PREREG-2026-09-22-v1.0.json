@@ -1,0 +1,64 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-ALL8-INDEPENDENT-COVERAGE-EXPANSION-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:43:00Z",
+  "status": "FROZEN_BEFORE_ALL8_GMRT_SWATH_INTERSECTION_EXECUTION",
+  "candidates": [
+    {
+      "id": "KN19207_CAND_001",
+      "lat": -4.20546708989972,
+      "lon": -14.871748111744372
+    },
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432
+    },
+    {
+      "id": "KN19207_CAND_004",
+      "lat": -4.2399610081365955,
+      "lon": -15.26855667523257
+    },
+    {
+      "id": "KN19207_CAND_005",
+      "lat": -4.099231435240242,
+      "lon": -12.332032012186781
+    },
+    {
+      "id": "KN19207_CAND_006",
+      "lat": -4.309010339378846,
+      "lon": -12.270140997573803
+    },
+    {
+      "id": "KN19207_CAND_007",
+      "lat": -4.119167753526161,
+      "lon": -14.356560209706116
+    },
+    {
+      "id": "KN19207_CAND_008",
+      "lat": -4.3376789874153,
+      "lon": -12.319260730325983
+    }
+  ],
+  "source": "Official GMRT swath polygons aggregated by survey",
+  "independence": {
+    "discovery_lineage": "KN192-07",
+    "known_confirmation_lineage": "KNOX15RR",
+    "require_distinct_acquisition_identity": true,
+    "exact_point_in_polygon": true,
+    "metadata_anomaly_requires_primary_source_audit": true
+  },
+  "output": "All exact intersections per candidate, with survey IDs and raw attribution fields; no depth access.",
+  "next_if_new_validated_survey": "freeze candidate-specific cross-survey comparison before reading depth",
+  "hard_rules": [
+    "REPORT_ALL_INTERSECTIONS",
+    "NO_DEPTH_READ",
+    "NO_COMPILATION_AS_ACQUISITION",
+    "PRIMARY_AUDIT_FOR_METADATA_CONFLICTS"
+  ],
+  "claim_ceiling": "ALL8_EXTERNAL_SOURCE_COVERAGE_INVENTORY_ONLY"
+}
