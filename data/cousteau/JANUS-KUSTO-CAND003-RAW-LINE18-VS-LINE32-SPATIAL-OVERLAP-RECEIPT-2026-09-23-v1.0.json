@@ -1,0 +1,67 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T23:55:00Z",
+  "status":"SEALED_LOCAL_CELL_ONLY__NO_LINE32_WIDE_DEEP_BIAS",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"25e7f3c1f732579fa4472bfc2c8b5f4b001e506f"
+  },
+  "authoritative_run":{
+    "github_actions_run_id":35799375778,
+    "head_sha":"baf24c6556bd7e25570faf4cb7c2ea19767e1f35",
+    "artifact_id":10724109744,
+    "artifact_zip_sha256":"0abd2682435115c3e4ff4d2894c8aa37bb5cbdbcadf4229951dda08213498bfb",
+    "conclusion":"success"
+  },
+  "superseded_implementation_runs":[
+    {
+      "run_id":35798927371,
+      "status":"TECHNICAL_POSITION_TIMESTAMP_PARSE_FAIL__SCIENTIFIC_VERDICT_NONE",
+      "reason":"EMOLDRAW position datagrams were parsed with bathymetry timestamp byte offsets, producing zero navigation-supported raw points."
+    },
+    {
+      "run_id":35799167113,
+      "status":"TECHNICAL_POSITION_TIMESTAMP_BINDING_FAIL__SCIENTIFIC_VERDICT_NONE",
+      "reason":"parse_time acquired pos_mode but parse_pos still called the default bathymetry layout."
+    }
+  ],
+  "parser_selftest":{
+    "LINE18_ERA":{"position_records":6867,"bath_records":533,"matches_sealed_stage_A":true},
+    "LINE32_ERA":{"position_records":60275,"bath_records":4784,"matches_sealed_stage_A":true}
+  },
+  "raw_field":{
+    "analysis_radius_m":5000,
+    "cell_m":100,
+    "LINE18_ERA":{"raw_points":4348,"grid_cells":2461},
+    "LINE32_ERA":{"raw_points":17453,"grid_cells":3401},
+    "common_cells":2096,
+    "median_line32_minus_line18_depth_m":6.400000000000091,
+    "p10_p90_line32_minus_line18_depth_m":[-11.100000000000364,27.399999999999864],
+    "MAD_depth_difference_m":8.599999999999909,
+    "pearson_after_independent_plane":0.9377346554456808,
+    "spearman_after_independent_plane":0.9384476750333768,
+    "fraction_line32_deeper_than_line18":0.711354961832061,
+    "line18_median_abs_across_track_m":4247.25,
+    "line32_median_abs_across_track_m":4429.0
+  },
+  "independent_2008_tiebreaker":{
+    "LINE18_ERA":{
+      "vs_KN192":{"common_cells":2461,"median_signed_2008_minus_2005_m":15.926846069097337,"median_absolute_residual_m":19.156131190061387,"pearson_after_plane":0.9589863914765574,"spearman_after_plane":0.9539768175336482},
+      "vs_KNOX15RR":{"common_cells":1545,"median_signed_2008_minus_2005_m":27.829937611817513,"median_absolute_residual_m":27.895822842121106,"pearson_after_plane":0.9415674228300932,"spearman_after_plane":0.9294525247735865}
+    },
+    "LINE32_ERA":{
+      "vs_KN192":{"common_cells":3401,"median_signed_2008_minus_2005_m":4.966124936938286,"median_absolute_residual_m":15.541939002275285,"pearson_after_plane":0.896913872548469,"spearman_after_plane":0.9237199445101967},
+      "vs_KNOX15RR":{"common_cells":2120,"median_signed_2008_minus_2005_m":16.71987625718066,"median_absolute_residual_m":20.417500719725922,"pearson_after_plane":0.8457077342369598,"spearman_after_plane":0.8815896135074994}
+    }
+  },
+  "authoritative_verdict":"LOCAL_CELL_ONLY",
+  "interpretation":[
+    "The approximately 186-191 m raw depth discrepancy previously observed at CELL_A/B is not representative of line18-vs-line32 overlap as a whole.",
+    "Across 2096 common 100-m cells, the median line32-minus-line18 difference is only +6.4 m with strong residual morphology agreement.",
+    "A global or survey-line-wide line32 deep-bias hypothesis is falsified by this gate.",
+    "Both 2005 raw lineages reproduce the broader 2008 seabed field well; line32 has slightly lower median absolute depth residuals to both 2008 lineages across its supported field, so line18 cannot be promoted to absolute ground truth."
+  ],
+  "remaining_frontier":"LOCAL_EXTREME_OUTER_BEAM_CELL_DIAGNOSTIC",
+  "strict_2005_to_2008_temporal_fail":"IMMUTABLE",
+  "claim_ceiling":"RAW_EM12_LINEAGE_LEVEL_SPATIAL_DIAGNOSTIC__NO_ABSOLUTE_DEPTH_TRUTH__NO_OBJECT_IDENTITY"
+}
