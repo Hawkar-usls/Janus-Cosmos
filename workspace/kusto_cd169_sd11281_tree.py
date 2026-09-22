@@ -13,20 +13,36 @@ def conn():
 def mlsd(path):
     f=conn()
     try:
-        rows=[]
         try:
+            out=[]
             for name,facts in f.mlsd(path):
                 if name in (".",".."):continue
-                rows.append((name,facts))
-            return rows
+                typ=facts.get("type","unknown")
+                if typ=="unknown":
+                    full=path.rstrip("/")+"/"+name
+                    cur=f.pwd()
+                    try:
+                        f.cwd(full); typ="dir"; f.cwd(cur)
+                    except Exception:
+                        try:f.cwd(cur)
+                        except:pass
+                        typ="file"
+                    facts=dict(facts);facts["type"]=typ
+                out.append((name,facts))
+            return out
         except Exception:
-            out=[]
-            for p in f.nlst(path):
+            names=f.nlst(path);out=[]
+            for p in names:
                 name=p.rstrip("/").split("/")[-1]
+                cur=f.pwd()
                 try:
-                    size=f.size(p);typ="file"
-                except:
-                    size=None;typ="unknown"
+                    f.cwd(p);f.cwd(cur);typ="dir";size=None
+                except Exception:
+                    try:f.cwd(cur)
+                    except:pass
+                    typ="file"
+                    try:size=f.size(p)
+                    except:size=None
                 out.append((name,{"type":typ,"size":size}))
             return out
     finally:
@@ -56,7 +72,7 @@ for r in seen:
         interesting.append(r)
 
 out={
- "artifact_id":"JANUS-KUSTO-CD169-SD11281-ARCHIVE-TREE-INVENTORY-2026-09-22-v1.0",
+ "artifact_id":"JANUS-KUSTO-CD169-SD11281-ARCHIVE-TREE-INVENTORY-2026-09-22-v1.1",
  "root":ROOT,"max_depth":MAX_DEPTH,
  "entry_count":len(seen),
  "entries":seen,
@@ -65,4 +81,4 @@ out={
 }
 p=OUT/"JANUS-KUSTO-CD169-SD11281-ARCHIVE-TREE-INVENTORY-2026-09-22-v1.0.json"
 p.write_text(json.dumps(out,indent=2),encoding="utf-8")
-print(json.dumps({"entry_count":len(seen),"interesting_entries":interesting},indent=2))
+print(json.dumps({"entry_count":len(seen),"entries":seen,"interesting_entries":interesting},indent=2))
