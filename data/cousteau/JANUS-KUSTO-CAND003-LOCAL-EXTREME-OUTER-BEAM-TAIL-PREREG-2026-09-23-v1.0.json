@@ -1,0 +1,63 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LOCAL-EXTREME-OUTER-BEAM-TAIL-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T23:56:00Z",
+  "status":"FROZEN_BEFORE_FULL_COMMON_CELL_TAIL_INSPECTION",
+  "parent":{
+    "spatial_overlap_receipt":"data/cousteau/JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-RECEIPT-2026-09-23-v1.0.json",
+    "verdict":"LOCAL_CELL_ONLY",
+    "common_cell_count":2096
+  },
+  "fixed_cells":[
+    {"id":"CELL_A","lat":-4.0165853,"lon":-12.2985657},
+    {"id":"CELL_B","lat":-4.0152462,"lon":-12.299318}
+  ],
+  "grid":{
+    "center":{"lat":-4.015075679897318,"lon":-12.29915403590432},
+    "radius_m":5000,
+    "cell_m":100,
+    "cell_assignment":"same frozen grid as parent run"
+  },
+  "predeclared_metrics":[
+    "empirical_percentile_of_abs_line32_minus_line18_for_CELL_A_and_CELL_B",
+    "empirical_percentile_of_signed_line32_minus_line18_for_CELL_A_and_CELL_B",
+    "count_and_fraction_common_cells_with_abs_difference_ge_100m",
+    "count_and_fraction_common_cells_with_abs_difference_ge_150m",
+    "count_and_fraction_common_cells_with_abs_difference_ge_each_fixed_cell_abs_difference",
+    "spatial_distance_to_nearest_other_cell_with_abs_difference_ge_100m",
+    "connected_component_size_of_ge_100m_cells_under_8_neighbor_grid_adjacency"
+  ],
+  "outer_beam_hypothesis":{
+    "extreme_abs_across_threshold_m":5500,
+    "opposite_extreme_definition":"LINE18 median signed across-track >= +5500 m AND LINE32 median signed across-track <= -5500 m",
+    "comparisons":[
+      "sample_count",
+      "median_abs_depth_difference_m",
+      "p90_abs_depth_difference_m",
+      "fraction_abs_difference_ge_100m",
+      "fraction_abs_difference_ge_150m"
+    ],
+    "contrast_group":"all common cells not satisfying opposite_extreme_definition",
+    "no_formal_p_value_claim":true
+  },
+  "local_neighborhood":{
+    "radii_m":[250,500,1000],
+    "report":"distribution of absolute line18-vs-line32 depth differences around each fixed cell, using only parent common cells",
+    "no_recentering":true
+  },
+  "interpretation":{
+    "LOCAL_OUTER_BEAM_CROSSOVER_SUPPORTED":"both fixed cells lie at or above empirical 99th percentile of absolute inter-acquisition difference and the opposite-extreme group has materially larger tail differences than contrast; diagnostic association only",
+    "ISOLATED_LOCAL_OUTLIERS":"fixed cells are extreme but opposite-extreme group does not show broader elevation",
+    "NOT_EXTREME_IN_PARENT_FIELD":"either fixed cell is below empirical 95th percentile of absolute difference",
+    "INSUFFICIENT_OPPOSITE_EXTREME_SUPPORT":"opposite-extreme group has fewer than 20 cells"
+  },
+  "hard_rules":[
+    "NO_THRESHOLD_RETUNING",
+    "NO_NEW_CELL_SELECTION",
+    "NO_DEPTH_BASED_GRID_SHIFT",
+    "NO_RECENTERING",
+    "FULL_2096_CELL_DISTRIBUTION_REQUIRED",
+    "PARENT_LOCAL_CELL_ONLY_VERDICT_IMMUTABLE",
+    "NO_CAUSAL_REFRACTION_CLAIM"
+  ],
+  "claim_ceiling":"LOCAL_OUTER_BEAM_TAIL_DIAGNOSTIC_ONLY"
+}
