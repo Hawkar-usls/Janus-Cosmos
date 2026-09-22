@@ -1,0 +1,270 @@
+{
+  "artifact_id": "JANUS-KUSTO-CROSSSURVEY-KILLERTEST-RECEIPT-2026-09-22-v1.0",
+  "status": "PARTIAL_PASS__TWO_2008_CROSSSURVEY_REPLICATIONS__2005_TOBI_MORPHOLOGY_PENDING_DATA",
+  "ncei_exact_independent_coverage": {
+    "gate": "exact point intersection with NCEI multibeam footprint; KN192-07 excluded as discovery lineage",
+    "candidates": {
+      "KN19207_CAND_001": {
+        "independent_surveys": [],
+        "pass": false
+      },
+      "KN19207_CAND_002": {
+        "independent_surveys": [
+          "KNOX15RR"
+        ],
+        "pass": true
+      },
+      "KN19207_CAND_003": {
+        "independent_surveys": [
+          "KNOX15RR"
+        ],
+        "pass": true
+      },
+      "KN19207_CAND_004": {
+        "independent_surveys": [],
+        "pass": false
+      },
+      "KN19207_CAND_005": {
+        "independent_surveys": [],
+        "pass": false
+      },
+      "KN19207_CAND_006": {
+        "independent_surveys": [],
+        "pass": false
+      },
+      "KN19207_CAND_007": {
+        "independent_surveys": [],
+        "pass": false
+      },
+      "KN19207_CAND_008": {
+        "independent_surveys": [],
+        "pass": false
+      }
+    },
+    "github_actions_run_id": 35742703600,
+    "artifact_zip_sha256": "8d8966c744798065e4c397de7b738ffee943921a2d4ea6e742e8574799568665"
+  },
+  "kn19207_x_knox15rr": {
+    "prereg_commit": "b2defb256c393512026f0d8daae472e4bc4d6208",
+    "valid_run_id": 35743734812,
+    "repair_note": "prior run 35743455268 was infrastructure-only HTTP_429 failure before scientific comparison; no scientific verdict was taken from it",
+    "repair_commit": "d34225f5efad3802cf19c4fcc04ac6d108deaa73",
+    "artifact_id": 10701097210,
+    "artifact_zip_sha256": "f88364354acc892a2f8bab0c6258377faba8721b934bb39379f00d824a10a449",
+    "surveys": {
+      "KN192-07": {
+        "platform": "R/V Knorr",
+        "instrument": "SeaBeam 3012",
+        "role": "discovery"
+      },
+      "KNOX15RR": {
+        "platform": "R/V Roger Revelle",
+        "instrument": "Kongsberg EM120",
+        "role": "independent replication",
+        "cruise_dates": "2008-03-20/2008-04-17"
+      }
+    },
+    "candidates": {
+      "KN19207_CAND_002": {
+        "verdict": "PASS_CROSS_SURVEY_MORPHOLOGY_REPLICATION",
+        "nearest_good_beam_m": {
+          "KN192-07": 0.3419929007026212,
+          "KNOX15RR": 41.11070648327364
+        },
+        "radius_500m": {
+          "common_cells": 59,
+          "pearson_r": 0.8743958810157618,
+          "spearman_rho": 0.8534190531852719,
+          "best_shift_m": 100,
+          "best_shift_pearson_r": 0.8870633709252257,
+          "relief_m": {
+            "KN192-07": 176.4235761191694,
+            "KNOX15RR": 191.45585209134242
+          },
+          "plane_rmse_m": {
+            "KN192-07": 30.75283157639964,
+            "KNOX15RR": 29.961912698144687
+          },
+          "radial_r2": {
+            "KN192-07": 0.5106813881591262,
+            "KNOX15RR": 0.5281224467915737
+          },
+          "angular_m4": {
+            "KN192-07": 0.2668266604876431,
+            "KNOX15RR": 0.291512228003152
+          }
+        },
+        "radius_1000m": {
+          "common_cells": 220,
+          "pearson_r": 0.9588339872725147,
+          "spearman_rho": 0.9632779790716938,
+          "best_shift_m": 0,
+          "best_shift_pearson_r": 0.9588339872725148,
+          "relief_m": {
+            "KN192-07": 300.735706185922,
+            "KNOX15RR": 299.51490703538
+          },
+          "plane_rmse_m": {
+            "KN192-07": 69.43008457121746,
+            "KNOX15RR": 72.94016305716264
+          },
+          "radial_r2": {
+            "KN192-07": 0.6319663350562106,
+            "KNOX15RR": 0.5802460368897229
+          },
+          "angular_m4": {
+            "KN192-07": 0.1699878564101842,
+            "KNOX15RR": 0.13477243733184663
+          }
+        },
+        "prereg_all_requirements_pass": true
+      },
+      "KN19207_CAND_003": {
+        "verdict": "PASS_CROSS_SURVEY_MORPHOLOGY_REPLICATION",
+        "nearest_good_beam_m": {
+          "KN192-07": 0.023973232601491645,
+          "KNOX15RR": 69.99291148284574
+        },
+        "radius_500m": {
+          "common_cells": 52,
+          "pearson_r": 0.7115302105308493,
+          "spearman_rho": 0.7037479723384275,
+          "best_shift_m": 0,
+          "best_shift_pearson_r": 0.7115302105308531,
+          "relief_m": {
+            "KN192-07": 75.68162906467887,
+            "KNOX15RR": 75.75410971024621
+          },
+          "plane_rmse_m": {
+            "KN192-07": 10.7038527288115,
+            "KNOX15RR": 8.088158164913251
+          },
+          "radial_r2": {
+            "KN192-07": 0.01832383655100578,
+            "KNOX15RR": 0.06407027893940886
+          },
+          "angular_m4": {
+            "KN192-07": 0.7164301277827838,
+            "KNOX15RR": 0.44513200836625416
+          }
+        },
+        "radius_1000m": {
+          "common_cells": 210,
+          "pearson_r": 0.832866747516738,
+          "spearman_rho": 0.8438111651381793,
+          "best_shift_m": 100,
+          "best_shift_pearson_r": 0.8394987377182351,
+          "relief_m": {
+            "KN192-07": 102.13721568509936,
+            "KNOX15RR": 105.57195447146887
+          },
+          "plane_rmse_m": {
+            "KN192-07": 20.379704325546168,
+            "KNOX15RR": 21.131457257494194
+          },
+          "radial_r2": {
+            "KN192-07": 0.002370706013076984,
+            "KNOX15RR": 0.010566598260971616
+          },
+          "angular_m4": {
+            "KN192-07": 0.8788877046097793,
+            "KNOX15RR": 0.7572708016474756
+          }
+        },
+        "prereg_all_requirements_pass": true
+      }
+    },
+    "claim_ceiling": "CROSS_SURVEY_SEAFLOOR_MORPHOLOGY_REPLICATION_ONLY__FBT_GENERATED_DERIVATIVES_BOUND_TO_ARCHIVED_RAW__NOT_INDEPENDENT_RAW_REPROCESSING__NO_OBJECT_IDENTITY__NO_ARTIFICIALITY"
+  },
+  "cd169_2005": {
+    "source": "Hannah Revett email ZIP, independently decoded from RFC822 MIME",
+    "zip": {
+      "name": "OneDrive_1_21-09-2026.zip",
+      "bytes": 3229889,
+      "sha256": "4de5b63e182147841bed1bf8647fcbf445bee6aaf4bd7b11ebbd76c1c763a2e6"
+    },
+    "files": {
+      "cd169.veh_nav": {
+        "bytes": 3229125,
+        "sha256": "97bf10284202a2b78aa0a53f96e9394948dc24402ee4c7faf1188967702fa328",
+        "records": 40875
+      },
+      "commands.cfg": {
+        "bytes": 508,
+        "sha256": "a56236dfee0bd487a30d82340fe93055a78f26ca5d7b9116d25e95e0e532af70"
+      }
+    },
+    "processing_provenance": {
+      "nav_command": "mrgnav_inertia -i %1 -o %0 -u 236 -n navfile.veh_nav",
+      "usbl_command_comment": "# mrgnav_usbl -i %1 -o %0 -n navfile.veh_nav",
+      "track_heading": "tobtvg -i %1 -o %0 -h -l 20 # use track heading",
+      "slant_range": "tobslr -i %1 -o %0 -r 6.0 , res"
+    },
+    "authority_change": {
+      "old_science_log_interpolation": "HISTORICAL_LOCATOR_ONLY",
+      "vehicle_navigation": "AUTHORITATIVE_FOR_TOBI_GEOMETRY",
+      "old_target_to_vehicle_track_min_during_acquisition_m": 1727.0781324345105,
+      "example_2005_02_28_0107_vehicle_position": {
+        "lat": -3.8722,
+        "lon": -12.128
+      },
+      "note": "The earlier linearly interpolated science-log target is not a per-ping vehicle position."
+    },
+    "nominal_tobi_swath": {
+      "full_width_km": 6,
+      "source": "CD169 official cruise report",
+      "coverage_test_here": "candidate centerline distance <= 3 km during explicitly stated acquisition windows; geometry-only, not pixel/sample proof"
+    },
+    "acquisition_window_geometry": {
+      "FROZEN_TARGET": {
+        "min_vehicle_track_distance_m": 1727.0781324345105,
+        "nominal_swath_geometry_pass": true
+      },
+      "KN19207_CAND_001": {
+        "min_vehicle_track_distance_m": 276112.12948714726,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_002": {
+        "min_vehicle_track_distance_m": 6788.827588065333,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_003": {
+        "min_vehicle_track_distance_m": 6014.529249251232,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_004": {
+        "min_vehicle_track_distance_m": 319087.42103253404,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_005": {
+        "min_vehicle_track_distance_m": 4297.869183081442,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_006": {
+        "min_vehicle_track_distance_m": 1419.0681475653928,
+        "nominal_swath_geometry_pass": true
+      },
+      "KN19207_CAND_007": {
+        "min_vehicle_track_distance_m": 222139.92158122966,
+        "nominal_swath_geometry_pass": false
+      },
+      "KN19207_CAND_008": {
+        "min_vehicle_track_distance_m": 4410.0128750438835,
+        "nominal_swath_geometry_pass": false
+      }
+    },
+    "morphology_status": {
+      "KN19207_CAND_002": "NOT_COVERED_BY_NOMINAL_TOBI_SWATH__NO_2005_REPLICATION_TEST",
+      "KN19207_CAND_003": "NOT_COVERED_BY_NOMINAL_TOBI_SWATH__NO_2005_REPLICATION_TEST",
+      "KN19207_CAND_006": "GEOMETRICALLY_ELIGIBLE__2005_PHASE_BATHY_OR_SIDESCAN_SAMPLES_NOT_PRESENT_IN_CURRENT_ZIP",
+      "FROZEN_TARGET": "GEOMETRICALLY_ELIGIBLE__2005_PHASE_BATHY_OR_SIDESCAN_SAMPLES_NOT_PRESENT_IN_CURRENT_ZIP"
+    }
+  },
+  "killer_test_verdict": {
+    "CAND_002": "PASS_INDEPENDENT_2008_X_2008_MORPHOLOGY_REPLICATION__CD169_2005_NOT_SPATIALLY_COVERING",
+    "CAND_003": "PASS_INDEPENDENT_2008_X_2008_MORPHOLOGY_REPLICATION__CD169_2005_NOT_SPATIALLY_COVERING",
+    "CAND_006": "CD169_2005_NOMINAL_TOBI_SWATH_GEOMETRY_PASS__MORPHOLOGY_PENDING_SOURCE_SAMPLES",
+    "overall": "PARTIAL_PASS__CROSSSURVEY_REPLICATION_ESTABLISHED_FOR_002_AND_003__THREE_YEAR_2005_X_2008_REPLICATION_NOT_YET_ESTABLISHED"
+  },
+  "next_gate": "SOURCE_BOUND_CD169_TOBI_PHASE_BATHY_OR_SIDESCAN_SAMPLE_RECOVERY_FOR_CAND006_AND_FROZEN_TARGET__THEN_APPLY_PREDECLARED_FIXED_EARTH_GRID_COMPARISON_TO_KN19207"
+}
