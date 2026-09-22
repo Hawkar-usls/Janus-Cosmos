@@ -1,0 +1,31 @@
+name: KUSTO CAND002-003 KNOX15RR Cross-Survey Gate
+
+on:
+  push:
+    branches:
+      - feature/kusto-open-seafloor-sweep-v1
+    paths:
+      - 'workspace/kusto_cand002_003_kno15_crosssurvey.py'
+      - '.github/workflows/kusto-cand002-003-kno15-crosssurvey.yml'
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install stack
+        run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Run frozen cross-survey replication gate
+        run: python workspace/kusto_cand002_003_kno15_crosssurvey.py
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cand002-003-kno15-crosssurvey-v1
+          path: workspace/kusto_crosssurvey_out/JANUS-KUSTO-CAND002-003-KN19207-X-KNOX15RR-CROSSSURVEY-RUN-2026-09-22-v1.0.json
+          retention-days: 30
