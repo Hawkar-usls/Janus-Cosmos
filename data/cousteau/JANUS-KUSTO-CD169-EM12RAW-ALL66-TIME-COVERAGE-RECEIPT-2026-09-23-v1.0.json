@@ -1,0 +1,64 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12RAW-ALL66-TIME-COVERAGE-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:34:00Z",
+  "status":"SEALED_RAW_INTERVAL_MISSING_FROM_ACCESSIBLE_ARCHIVE_AT_GEOMETRY_PROJECTED_TIME",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CD169-EM12RAW-ALL66-TIME-COVERAGE-AUDIT-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"72b58463486a2639856b05753454cde6b8b8d34f"
+  },
+  "run":{
+    "github_actions_run_id":35792860636,
+    "head_sha":"c22e711b6f2b551ea69197267f06e902bfa74bf5",
+    "artifact_id":10722359194,
+    "artifact_zip_sha256":"6167534feb2ff0a2208034630300f77c3660d380b3c54d1224250f3b333f8344",
+    "conclusion":"success"
+  },
+  "source":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "bytes":714120689,
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "entries_scanned":66,
+    "format":"MBF_EMOLDRAW 51",
+    "parser_authority":"MB-System src/mbio/mbsys_simrad.h + src/mbio/mbr_emoldraw.c"
+  },
+  "frozen_geometry_projected_interval":{
+    "window_utc":["2005-02-26T21:16:00Z","2005-02-26T21:21:00Z"],
+    "CELL_A_projected_ship_utc":"2005-02-26T21:18:38.275325Z",
+    "CELL_B_projected_ship_utc":"2005-02-26T21:18:46.759834Z",
+    "binding_status":"GEOMETRY_INFERRED_FROM_PROCESSED_XYZ_TO_1MIN_SHIP_TRACK__NOT_RAW_PING_PROVENANCE"
+  },
+  "result":{
+    "entries_intersecting_window":[],
+    "bath_entries_intersecting_window":[],
+    "record_count_in_window":0,
+    "bath_record_count_in_window":0,
+    "last_preserved_record_before_window":{
+      "file":"0031_260205_191055_raw.all",
+      "type":"STOP",
+      "utc":"2005-02-26T20:06:53.620000Z"
+    },
+    "first_preserved_record_after_window":{
+      "file":"0032_270205_144041_raw.all",
+      "type":"EM12S_BATH",
+      "utc":"2005-02-27T14:40:23.260000Z"
+    },
+    "record_to_record_gap_s":66809.6400001049,
+    "record_to_record_gap_h":18.55823333336247,
+    "verdict":"RAW_INTERVAL_MISSING_FROM_ACCESSIBLE_ARCHIVE"
+  },
+  "superseded_parser_run":{
+    "github_actions_run_id":35792379449,
+    "status":"TECHNICAL_PARSER_MISMATCH__SCIENTIFIC_VERDICT_VOID",
+    "reason":"Modern Kongsberg ALL parser was incompatible with old Simrad MBF_EMOLDRAW format."
+  },
+  "interpretation":[
+    "The accessible 66-file raw EM12 archive contains no preserved raw record at the geometry-projected 21:16-21:21 UTC interval.",
+    "BODC README independently states that some corrupt raw EM12 files were omitted from the archive.",
+    "This does NOT yet prove that the two processed influential cells have no preserved raw-beam provenance, because their 21:18 time binding is geometry-inferred rather than an exact processed-to-raw ping identifier.",
+    "A geometry-first raw-beam coverage audit is therefore required before attributing the cells to the raw time gap."
+  ],
+  "strict_parent_temporal_fail":"IMMUTABLE",
+  "processed_cells_removed":false,
+  "next_gate":"ALL66_RAW_BEAM_GEOMETRY_COVERAGE_OF_FROZEN_CELL_A_AND_CELL_B",
+  "claim_ceiling":"COMPLETE_ACCESSIBLE_RAW_ARCHIVE_TIME_COVERAGE_AUDIT__NO_RAW_CELL_PROVENANCE_CONCLUSION_YET"
+}
