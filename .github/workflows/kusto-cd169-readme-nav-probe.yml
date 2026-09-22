@@ -1,0 +1,21 @@
+name: KUSTO CD169 README Nav Probe
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_cd169_readme_nav_probe.py'
+      - '.github/workflows/kusto-cd169-readme-nav-probe.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: mkdir -p workspace/kusto_cross_survey_out && python workspace/kusto_cd169_readme_nav_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cd169-readme-nav-probe-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-README-NAV-FORMAT-PROBE-2026-09-22-v1.0.json
+          retention-days: 30
