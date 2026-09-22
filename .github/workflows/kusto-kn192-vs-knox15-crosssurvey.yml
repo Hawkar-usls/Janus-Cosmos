@@ -1,0 +1,24 @@
+name: KUSTO KN192-07 vs KNOX15RR Beam Replication
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_kn192_vs_knox15_crosssurvey.py'
+      - '.github/workflows/kusto-kn192-vs-knox15-crosssurvey.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Run frozen beam-level cross-survey test
+        run: python workspace/kusto_kn192_vs_knox15_crosssurvey.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-kn192-vs-knox15-crosssurvey-v1
+          path: workspace/kusto_cross_survey_out/
+          retention-days: 30
