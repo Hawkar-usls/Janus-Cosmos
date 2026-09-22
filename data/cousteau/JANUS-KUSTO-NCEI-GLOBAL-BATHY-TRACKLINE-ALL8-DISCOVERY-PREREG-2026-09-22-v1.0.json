@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-KUSTO-NCEI-GLOBAL-BATHY-TRACKLINE-ALL8-DISCOVERY-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:51:00Z",
+  "status": "FROZEN_BEFORE_GLOBAL_BATHYMETRY_TRACKLINE_DISCOVERY",
+  "candidates": [
+    {
+      "id": "KN19207_CAND_001",
+      "lat": -4.20546708989972,
+      "lon": -14.871748111744372
+    },
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432
+    },
+    {
+      "id": "KN19207_CAND_004",
+      "lat": -4.2399610081365955,
+      "lon": -15.26855667523257
+    },
+    {
+      "id": "KN19207_CAND_005",
+      "lat": -4.099231435240242,
+      "lon": -12.332032012186781
+    },
+    {
+      "id": "KN19207_CAND_006",
+      "lat": -4.309010339378846,
+      "lon": -12.270140997573803
+    },
+    {
+      "id": "KN19207_CAND_007",
+      "lat": -4.119167753526161,
+      "lon": -14.356560209706116
+    },
+    {
+      "id": "KN19207_CAND_008",
+      "lat": -4.3376789874153,
+      "lon": -12.319260730325983
+    }
+  ],
+  "source": {
+    "endpoint": "NOAA/NCEI Marine Trackline Surveys: Bathymetry feature layer",
+    "semantics": "Global bathymetry trackline catalogue, broader than multibeam footprints."
+  },
+  "discovery_window_km": 15,
+  "outputs": [
+    "all survey IDs with trackline geometry within 15km",
+    "minimum point-to-polyline distance per survey and candidate",
+    "survey/platform/year/project/download URL"
+  ],
+  "promotion_firewall": "Trackline proximity alone can never establish swath coverage or morphology replication. Any new survey ID requires a second source-specific coverage audit before depth access.",
+  "hard_rules": [
+    "TRACKLINE_NE_SWATH",
+    "REPORT_ALL_NEW_SURVEY_IDS",
+    "NO_DEPTH_ACCESS",
+    "NO_NEAREST_ONLY_TRUNCATION"
+  ],
+  "claim_ceiling": "GLOBAL_BATHYMETRY_SURVEY_DISCOVERY_CLUES_ONLY"
+}
