@@ -1,0 +1,63 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-CAND002003-THIRD-SURVEY-COVERAGE-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_NO_VALIDATED_THIRD_INDEPENDENT_GMRT_SURVEY",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-GMRT-CAND002003-THIRD-SURVEY-COVERAGE-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "7ac23381e5fd351275ffe0780dbcd011a2f859c2"
+  },
+  "run": {
+    "github_actions_run_id": 35768013668,
+    "artifact_id": 10713076062,
+    "artifact_zip_sha256": "c5fbcee14cc8e5cf2ca6d54a597c910d653c9bf2e5d4a29d21acb7d8b205c551",
+    "gmrt_swath_zip_sha256": "6acc532256336df42ac8389ef55d40ce90c720e89e8da97260b662ce209b59b0"
+  },
+  "shapefile": {
+    "record_count": 1638,
+    "identity_fields": [
+      "CRUISE",
+      "ENTRY_ID",
+      "SURVEY_ID",
+      "VESSEL",
+      "START",
+      "STOP",
+      "YEAR",
+      "MAKE_ID",
+      "MODEL_ID",
+      "PROC_ORG"
+    ]
+  },
+  "targets": {
+    "KN19207_CAND_002": {
+      "exact_intersections": [
+        "KNOX15RR",
+        "KN192-07"
+      ],
+      "validated_independent_surveys": [
+        "KN192-07",
+        "KNOX15RR"
+      ],
+      "new_validated_independent_surveys": []
+    },
+    "KN19207_CAND_003": {
+      "exact_intersections_raw_gmrt": [
+        "KNOX15RR",
+        "KN192-07",
+        "JC169"
+      ],
+      "validated_independent_surveys": [
+        "KN192-07",
+        "KNOX15RR"
+      ],
+      "rejected_or_unresolved_intersections": [
+        {
+          "survey": "JC169",
+          "disposition": "REJECTED_AS_INDEPENDENT_CANDIDATE_ACQUISITION_AFTER_PRIMARY_BODC_IDENTITY_AUDIT"
+        }
+      ],
+      "new_validated_independent_surveys": []
+    }
+  },
+  "verdict": "NO_VALIDATED_THIRD_GMRT_SWATH_SURVEY_AT_CAND002_OR_CAND003",
+  "rule": "Compilation/source-attribution anomalies are not promoted to independent acquisition evidence.",
+  "claim_ceiling": "EXACT_GMRT_SOURCE_COVERAGE_INVENTORY_ONLY"
+}
