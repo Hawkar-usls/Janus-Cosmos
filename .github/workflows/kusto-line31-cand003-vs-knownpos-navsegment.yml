@@ -1,0 +1,26 @@
+name: KUSTO Line31 CAND003 vs KnownPos Nav Segment
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_line31_cand003_vs_knownpos_navsegment.py'
+      - '.github/workflows/kusto-line31-cand003-vs-knownpos-navsegment.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run frozen same-line nav-segment diagnostic
+        run: python workspace/kusto_line31_cand003_vs_knownpos_navsegment.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-line31-cand003-vs-knownpos-navsegment-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-LINE31-CAND003-VS-KNOWNPOS-NAVSEGMENT-RUN-2026-09-23-v1.0.json
+          retention-days: 30
