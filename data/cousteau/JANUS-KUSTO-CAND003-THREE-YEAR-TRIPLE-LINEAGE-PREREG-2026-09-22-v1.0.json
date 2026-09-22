@@ -1,0 +1,50 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-THREE-YEAR-TRIPLE-LINEAGE-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T16:19:00Z",
+  "status":"FROZEN_AFTER_2005_XY_SUPPORT_PASS_BEFORE_CROSS_YEAR_DEPTH_COMPARISON",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "support_basis":{
+    "CD169_EM12_2005_nearest_sounding_m":26.273475230470808,
+    "CD169_EM12_2005_n_within_1000m":191,
+    "phase_A_selection_used_depth":false,
+    "candidate_002_excluded_reason":"nearest CD169 EM12 sounding 532.478m > 100m support threshold"
+  },
+  "lineages":[
+    {"id":"CD169_EM12_2005","platform":"RRS Charles Darwin","instrument":"Simrad EM12","year":2005},
+    {"id":"KN192-07_2008","platform":"Knorr","instrument":"SeaBeam 3012","year":2008},
+    {"id":"KNOX15RR_2008","platform":"Roger Revelle","instrument":"Kongsberg EM120","year":2008}
+  ],
+  "grid":{
+    "center":"frozen CAND_003 coordinate",
+    "recenter":false,
+    "radius_m":1000,
+    "cell_m":100,
+    "per_cell":"median depth",
+    "minimum_common_cells_pairwise":30
+  },
+  "preprocessing":[
+    "good beams only for 2008 FBT",
+    "all geometrically selected CD169 XYZ soundings for 2005",
+    "independent best-fit plane per lineage on pairwise common cells",
+    "compare residuals in identical Earth-fixed cells",
+    "no rotation or shift optimization"
+  ],
+  "primary_pairwise_gate":{
+    "residual_pearson_min":0.60,
+    "residual_spearman_min":0.60,
+    "residual_sign_concordance_min":0.65,
+    "all_required":true
+  },
+  "three_year_pass_rule":"CD169_EM12_2005 must pass the primary pairwise gate against at least one independent 2008 lineage; report both 2008 comparisons separately. A stronger triple-lineage pass requires both.",
+  "hard_rules":[
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_GRID_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_CELL_DROPPING_AFTER_RESULTS",
+    "NO_ABSOLUTE_DEPTH_OFFSET_AS_REPLICATION",
+    "PASS_NE_HYDROTHERMAL_IDENTITY",
+    "PASS_NE_ARTIFICIALITY"
+  ],
+  "claim_ceiling":"THREE_YEAR_PERSISTENT_LOCAL_SEAFLOOR_MORPHOLOGY_REPRODUCIBILITY"
+}
