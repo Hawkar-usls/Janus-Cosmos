@@ -1,0 +1,26 @@
+name: KUSTO CAND003 Dominant Cells Internal Consistency
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cand003_dominant_cells_internal_consistency.py'
+      - '.github/workflows/kusto-cand003-dominant-cells-internal-consistency.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run frozen processed-cell internal consistency diagnostic
+        run: python workspace/kusto_cand003_dominant_cells_internal_consistency.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cand003-dominant-cells-internal-consistency-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-INTERNAL-CONSISTENCY-RUN-2026-09-23-v1.0.json
+          retention-days: 30
