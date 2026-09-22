@@ -1,0 +1,27 @@
+name: KUSTO CAND003 Support-Matched Sensitivity
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cand003_support_matched_sensitivity.py'
+      - '.github/workflows/kusto-cand003-support-matched-sensitivity.yml'
+  workflow_dispatch:
+
+jobs:
+  sensitivity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Run frozen support-matched temporal sensitivity
+        run: python workspace/kusto_cand003_support_matched_sensitivity.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cand003-support-matched-sensitivity-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CAND003-SUPPORT-MATCHED-CROSSYEAR-SENSITIVITY-RUN-2026-09-22-v1.0.json
+          retention-days: 30
