@@ -1,0 +1,111 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-VS-KNOX15RR-CROSS-SURVEY-RECEIPT-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T15:47:00Z",
+  "status": "SEALED_PASS_TWO_OF_TWO_STAGE_B_ELIGIBLE_CANDIDATES",
+  "master_prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-CROSS-SURVEY-SEAFLOOR-VALIDATION-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "8a3bcdc9b5f07203f02eafdadba3292fb9b5f135"
+  },
+  "operational_prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-KN19207-VS-KNOX15RR-OPERATIONAL-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "30285ec75a63af5dfb6d568edc1c3af24b5a88e5"
+  },
+  "execution": {
+    "authoritative_run_id": 35749313340,
+    "head_sha": "d744c91bcc9ca72ef764410b58d72541915478e3",
+    "conclusion": "success",
+    "artifact_id": 10703739439,
+    "artifact_zip_sha256": "2268ea020aa747029ce59ad123cc80255977bc1fcaf48780aee4daa1a047a04d"
+  },
+  "superseded_implementation_runs": [
+    {
+      "run_id":35748968109,
+      "status":"IMPLEMENTATION_SYNTAX_FAIL",
+      "reason":"Python SyntaxError in FNV inventory regex before scientific execution"
+    },
+    {
+      "run_id":35749212130,
+      "status":"IMPLEMENTATION_SELECTION_FAIL__NOT_SCIENTIFIC",
+      "reason":"Over-escaped suffix regex discovered zero FNV/FBT files in both lineages, contradicting frozen known-positive KN192-07 provenance"
+    }
+  ],
+  "stage_A_exact_footprint": {
+    "candidate_count": 8,
+    "stage_B_eligible": ["KN19207_CAND_002","KN19207_CAND_003"],
+    "independent_exact_survey": "KNOX15RR",
+    "other_six": "NO_SECOND_EXACT_NCEI_MULTIBEAM_FOOTPRINT",
+    "nearby_only_does_not_count": ["KN19207_CAND_005","KN19207_CAND_006"]
+  },
+  "lineages": {
+    "A": {
+      "survey":"KN192-07",
+      "platform":"Knorr",
+      "instrument":"SeaBeam 3012",
+      "selected_fbt_unique_count":70
+    },
+    "B": {
+      "survey":"KNOX15RR",
+      "platform":"Roger Revelle",
+      "instrument":"Kongsberg EM120",
+      "selected_fbt":"0189_20080331_074825_raw.all.mb56.fbt",
+      "fbt_sha256":"1ba3758f1a06388385990b9ff878ae3515e01223fa4ce8c837418702cd17840b",
+      "fbt_bytes":286183,
+      "records":199,
+      "good_beams":36108
+    }
+  },
+  "candidate_results": [
+    {
+      "id":"KN19207_CAND_002",
+      "lat":-3.9727527956056825,
+      "lon":-12.272824298723462,
+      "support_A":{"nearest_good_beam_m":0.3253604827914387,"n_1000m":31051},
+      "support_B":{"nearest_good_beam_m":41.109409725528934,"n_1000m":272},
+      "common_grid_cells":220,
+      "residual_pearson":0.9588200213674604,
+      "residual_spearman":0.9632869950355849,
+      "residual_sign_concordance":0.9,
+      "median_depth_offset_B_minus_A_m":4.173485890030861,
+      "relief_A_m":289.48199969865345,
+      "relief_B_m":299.51490703538,
+      "relief_ratio_B_over_A":1.0346581388382374,
+      "plane_gradient_magnitude_ratio_B_over_A":0.9908929145523885,
+      "plane_gradient_azimuth_difference_deg":7.519765188873066,
+      "plane_rmse_ratio_B_over_A":1.0674224230312714,
+      "radial_r2_A":0.662520593968691,
+      "radial_r2_B":0.5802460368897233,
+      "primary_reproduction_gate_pass":true,
+      "verdict":"LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCED_ACROSS_INDEPENDENT_SURVEYS"
+    },
+    {
+      "id":"KN19207_CAND_003",
+      "lat":-4.015075679897318,
+      "lon":-12.29915403590432,
+      "support_A":{"nearest_good_beam_m":0.02467484213411808,"n_1000m":41123},
+      "support_B":{"nearest_good_beam_m":70.03206619596835,"n_1000m":291},
+      "common_grid_cells":210,
+      "residual_pearson":0.8328504714200906,
+      "residual_spearman":0.8439757299323275,
+      "residual_sign_concordance":0.8476190476190476,
+      "median_depth_offset_B_minus_A_m":23.26455288320767,
+      "relief_A_m":102.396369330585,
+      "relief_B_m":105.57195447146887,
+      "relief_ratio_B_over_A":1.0310126732192189,
+      "plane_gradient_magnitude_ratio_B_over_A":1.024763311874927,
+      "plane_gradient_azimuth_difference_deg":8.59090644030789,
+      "plane_rmse_ratio_B_over_A":1.0597545518102318,
+      "radial_r2_A":0.008681284254752453,
+      "radial_r2_B":0.010566598260971727,
+      "primary_reproduction_gate_pass":true,
+      "verdict":"LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCED_ACROSS_INDEPENDENT_SURVEYS"
+    }
+  ],
+  "authoritative_verdict": {
+    "KN19207_CAND_002":"PASS_CROSS_SURVEY_LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCTION",
+    "KN19207_CAND_003":"PASS_CROSS_SURVEY_LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCTION",
+    "other_six":"NOT_TESTABLE_STAGE_B_NO_SECOND_EXACT_SURVEY"
+  },
+  "temporal_firewall": "This PASS is independent cross-survey replication but NOT the requested ~3-year temporal replication: KN192-07 and KNOX15RR were both acquired in 2008. The CD169 2005 lane remains separate and open.",
+  "claim_ceiling": "PERSISTENT_LOCAL_SEAFLOOR_MORPHOLOGY_REPRODUCED_ACROSS_TWO_INDEPENDENT_2008_MULTIBEAM_ACQUISITIONS__NO_NOVELTY__NO_HYDROTHERMAL_IDENTITY__NO_ARTIFICIALITY",
+  "next": "CD169_2005_EXACT_COVERAGE_AND_DATA_PRODUCT_RECOVERY_FOR_THREE_YEAR_CROSS_SURVEY_TEST"
+}
