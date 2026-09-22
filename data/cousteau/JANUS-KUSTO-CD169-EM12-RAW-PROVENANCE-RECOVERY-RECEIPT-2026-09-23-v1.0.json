@@ -1,0 +1,30 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-RAW-PROVENANCE-RECOVERY-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:26:00Z",
+  "status":"RAW_EM12_ARCHIVE_FOUND__TIME_LOCATOR_PENDING",
+  "prereg":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-RAW-PROVENANCE-RECOVERY-PREREG-2026-09-23-v1.0.json",
+  "run":{"github_actions_run_id":35791770671,"artifact_id":10722462059,"artifact_zip_sha256":"0e329ea0236ec9b98687008f0d9513cd8880d6cc3dc9b1ac50e39f9c72dc5e78","conclusion":"success"},
+  "accessible_archive_inventory":{"entry_count":96,"file_count":79,"directory_count":17},
+  "raw_em12":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "reported_size_bytes":714120689,
+    "readme_path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/README.txt",
+    "readme_sha256":"fe8d6d526257c5c6834444e93b1014b7c709e6e47cc87767bfa9a90506eb9296",
+    "readme_facts":[
+      "Archive contains a WinZip compressed file of 66 raw Kongsberg-Simrad EM12 files and ship navigation from CD169.",
+      "Some raw EM12 files were corrupt and could not be processed and are omitted, causing an incomplete numbering sequence."
+    ]
+  },
+  "processed_companion":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281/EM12",
+    "readme_fact":"This companion disc contains processed ASCII EM12 bathymetry, not raw EM12 pings."
+  },
+  "dominant_cell_time_bindings":{
+    "CELL_A":{"projected_ship_utc":"2005-02-26T21:18:38.275325Z","cross_track_m":5034.2311125577235},
+    "CELL_B":{"projected_ship_utc":"2005-02-26T21:18:46.759834Z","cross_track_m":5199.652323452784},
+    "common_ship_track_segment_utc":["2005-02-26T21:18:00Z","2005-02-26T21:19:00Z"]
+  },
+  "important_correction":"Earlier inference that the accessible BODC archive lacked raw shipborne EM12 was false when based only on sd11281. Full archive search found the separate sd11280 raw EM12 package.",
+  "next":"Freeze raw ZIP hash/directory, locate the exact raw entry covering 2005-02-26 21:18:38-21:18:47 UTC without inspecting depth, then preregister beam-level forensics.",
+  "claim_ceiling":"RAW_ARCHIVE_PROVENANCE_RECOVERY_ONLY__NO_RAW_BEAM_RESULT_YET"
+}
