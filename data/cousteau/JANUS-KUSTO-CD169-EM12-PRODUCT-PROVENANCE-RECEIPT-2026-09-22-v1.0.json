@@ -1,0 +1,63 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-PRODUCT-PROVENANCE-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:37:00Z",
+  "status":"SEALED_PARTIAL_PRODUCT_PROVENANCE__RAW_LINEAGE_NOT_FULLY_BOUND",
+  "run":{
+    "github_actions_run_id":35761386680,
+    "artifact_id":10709724777,
+    "artifact_zip_sha256":"597fef7cb03a78e30cfd843388fad35caf503b4a198800017d83a0aa9d2fa6d8"
+  },
+  "archive_root":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281/EM12",
+  "inventory_count":24,
+  "focus_products":[
+    {
+      "file":"B1-81-1_Acceptl28-33.xyz.ascii",
+      "sha256":"0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0",
+      "bytes":12137376,
+      "parsed_xyz_count":379293,
+      "first_line_is_numeric_xyz":true,
+      "observed_header_before_first_xyz":false,
+      "extent_lon":[-12.4314099,-12.0384018],
+      "extent_lat":[-4.6187583,-3.2902605],
+      "filename_line_group_binding":"28-33"
+    },
+    {
+      "file":"B1-81-1_Acceptl15-22.xyz.ascii",
+      "sha256":"ad2e4d60401f7ffaa5e14b3e43aa0e45da9d320c6b34fa7f3b873f4024be6007",
+      "bytes":4759328,
+      "parsed_xyz_count":148729,
+      "first_line_is_numeric_xyz":true,
+      "observed_header_before_first_xyz":false,
+      "extent_lon":[-12.4852057,-12.0634608],
+      "extent_lat":[-4.830253,-2.9193828],
+      "filename_line_group_binding":"15-22"
+    }
+  ],
+  "control_product":{
+    "file":"B1-81-1_Acceptl39.xyz.ascii",
+    "observed_metadata":[
+      "Neptune Ascii file from Kongsberg Simrad A/S",
+      "Survey name: CD169_39",
+      "Datum: WGS84",
+      "Coordinate system: Lat/Long",
+      "Latitude cell size: 400.00 meter",
+      "Longitude cell size: 400.00 meter",
+      "All accepted depths"
+    ],
+    "interpretation":"The archive contains heterogeneous exported products; a 400m Neptune grid observed for line 39 cannot be transferred to focus products 28-33 or 15-22."
+  },
+  "external_report_binding":{
+    "cruise":"CD169",
+    "instrument":"Simrad EM12",
+    "report_line_inventory":"CD169 report Appendix D lists EM12 line numbers including 28-33 in the relevant survey sequence.",
+    "processing_warning":"Cruise report states newly acquired EM12 data were processed and merged with existing bathymetry for some plots/products."
+  },
+  "verdict":"FOCUS_XYZ_PRODUCTS_ARE_DENSE_ACCEPTED_DEPTH_EXPORTS_ASSOCIATED_BY_FILENAME_WITH_CD169_LINE_GROUPS__BUT_POINT_LEVEL_RAW_ACQUISITION_LINEAGE_AND_ANY_MERGE_HISTORY_ARE_NOT_FULLY_PROVEN_BY_THE_FILES_THEMSELVES",
+  "anti_loop":[
+    "DO_NOT_ASSIGN_400M_NATIVE_GRID_TO_ACCEPTL28-33_FROM_ACCEPTL39_METADATA",
+    "DO_NOT_CALL_FOCUS_XYZ_RAW_BEAMS",
+    "DO_NOT_TREAT_FILENAME_LINE_GROUP_AS_POINT_LEVEL_RAW_PROVENANCE_CERTIFICATE"
+  ],
+  "next":"TRANSLATION_DIAGNOSTIC_THEN_RAW_OR_PROCESSING_PROVENANCE_RECOVERY_IF_TEMPORAL_MISMATCH_PERSISTS",
+  "claim_ceiling":"ARCHIVE_PRODUCT_CLASS_AND_PARTIAL_LINE_GROUP_PROVENANCE_ONLY"
+}
