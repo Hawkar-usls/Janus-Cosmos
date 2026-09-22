@@ -1,0 +1,25 @@
+name: KUSTO GMRT Third-Survey Coverage Audit
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_gmrt_third_survey_coverage.py'
+      - '.github/workflows/kusto-gmrt-third-survey-coverage.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests pyshp shapely
+      - name: Intersect official GMRT swath polygons
+        run: python workspace/kusto_gmrt_third_survey_coverage.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-gmrt-third-survey-coverage-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-GMRT-CAND002003-THIRD-SURVEY-COVERAGE-RUN-2026-09-22-v1.0.json
+          retention-days: 30
