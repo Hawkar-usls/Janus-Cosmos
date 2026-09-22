@@ -1,0 +1,27 @@
+name: KUSTO CD169 EM12 Raw ZIP Locator Stage A
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cd169_em12raw_zip_locator_stage_a.py'
+      - '.github/workflows/kusto-cd169-em12raw-zip-locator-stage-a.yml'
+  workflow_dispatch:
+
+jobs:
+  locate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download, hash, validate and list raw EM12 ZIP
+        run: python workspace/kusto_cd169_em12raw_zip_locator_stage_a.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cd169-em12raw-zip-locator-stage-a-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-EM12RAW-ZIP-TIME-LOCATOR-STAGE-A-2026-09-23-v1.0.json
+          retention-days: 30
