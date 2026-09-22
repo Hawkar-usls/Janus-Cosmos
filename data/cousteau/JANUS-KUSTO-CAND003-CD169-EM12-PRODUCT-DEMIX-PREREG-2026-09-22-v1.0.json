@@ -1,0 +1,56 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-PRODUCT-DEMIX-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:43:00Z",
+  "status":"FROZEN_BEFORE_PRODUCT_SEPARATED_DEPTH_COMPARISON",
+  "immutable_parent_results":[
+    "STRICT_2005_TO_2008_TEMPORAL_FAIL",
+    "SUPPORT_MATCHED_TEMPORAL_FAIL",
+    "NO_CONSISTENT_TRANSLATIONAL_GEOREGISTRATION_SIGNATURE"
+  ],
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "2005_products":[
+    {
+      "file":"B1-81-1_Acceptl28-33.xyz.ascii",
+      "selection_origin":"prior XY-only CD169 EM12 support gate; not chosen by depth or morphology",
+      "sha256":"0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0"
+    },
+    {
+      "file":"B1-81-1_Acceptl15-22.xyz.ascii",
+      "selection_origin":"prior XY-only CD169 EM12 support gate; not chosen by depth or morphology",
+      "sha256":"ad2e4d60401f7ffaa5e14b3e43aa0e45da9d320c6b34fa7f3b873f4024be6007"
+    }
+  ],
+  "comparison":{
+    "reference_radius_m":1000,
+    "geometry_thinning":"one 2005 sounding per candidate-centered 100m square cell, chosen nearest the cell center without using depth",
+    "2008_depth_estimator":"median good-beam depth within 100m of each retained 2005 support coordinate",
+    "minimum_matched_points_per_product":30,
+    "fit":"independent best-fit plane per lineage on identical matched support coordinates",
+    "metrics":["residual_pearson","residual_spearman","residual_sign_concordance","matched_point_count","median_depth_offset","relief_ratio"],
+    "pairwise_pass":{
+      "pearson_min":0.60,
+      "spearman_min":0.60,
+      "sign_concordance_min":0.65,
+      "all_required":true
+    }
+  },
+  "product_mixing_signature":{
+    "positive_if":[
+      "at least one 2005 product passes against BOTH KN192-07 and KNOX15RR under the frozen pairwise gate",
+      "the other product fails at least one of those two comparisons"
+    ],
+    "positive_label":"PRODUCT_MIXING_SIGNATURE_SUPPORTED",
+    "negative_label":"NO_PRODUCT_MIXING_SIGNATURE",
+    "insufficient_label":"INSUFFICIENT_PRODUCT_SPECIFIC_SUPPORT"
+  },
+  "hard_rules":[
+    "STRICT_PARENT_FAIL_IMMUTABLE",
+    "NO_PRODUCT_DROPPING_AFTER_RESULTS",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_DEPTH_BASED_SUPPORT_SELECTION",
+    "NO_HYDROTHERMAL_IDENTITY_OR_ARTIFICIALITY_CLAIM"
+  ],
+  "claim_ceiling":"PROCESSED_PRODUCT_DEMIX_DIAGNOSTIC_ONLY"
+}
