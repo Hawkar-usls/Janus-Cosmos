@@ -52,10 +52,29 @@ for x in links:
         probes.append({"url":u,"status":rr.status_code,"final_url":rr.url,"content_type":rr.headers.get("content-type"),"content_length":rr.headers.get("content-length"),"last_modified":rr.headers.get("last-modified"),"etag":rr.headers.get("etag")})
     except Exception as e:probes.append({"url":u,"error":repr(e)})
 
+bodc_url="https://www.bodc.ac.uk/resources/inventories/cruise_inventory/report/16976/"
+bodc={}
+try:
+    br=sess.get(bodc_url,timeout=120)
+    br.raise_for_status()
+    bs=BeautifulSoup(br.text,"html.parser")
+    bodc={
+      "url":bodc_url,
+      "status":br.status_code,
+      "bytes":len(br.content),
+      "sha256":hashlib.sha256(br.content).hexdigest(),
+      "title":bs.title.get_text(" ",strip=True) if bs.title else None,
+      "text":"\n".join(x.strip() for x in bs.get_text("\n").splitlines() if x.strip())[:80000],
+      "links":[{"text":" ".join(a.get_text(" ",strip=True).split()),"href":urljoin(br.url,a["href"])} for a in bs.find_all("a",href=True)]
+    }
+except Exception as e:
+    bodc={"url":bodc_url,"error":repr(e)}
+
 out={
- "artifact_id":"JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PROBE-2026-09-22-v1.0",
+ "artifact_id":"JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PROBE-2026-09-22-v1.1",
  "prereg":"data/cousteau/JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PREREG-2026-09-22-v1.0.json",
  "pages":pages,
+ "bodc_record":bodc,
  "candidate_links":links,
  "link_head_probes":probes,
  "depth_values_read":False,
@@ -64,6 +83,7 @@ out={
 p=OUT/"JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PROBE-2026-09-22-v1.0.json";p.write_text(json.dumps(out,indent=2,ensure_ascii=False))
 print(json.dumps({
  "pages":[{k:v for k,v in x.items() if k not in ["text_snippet"]} for x in pages],
+ "bodc_record":bodc,
  "candidate_links":links[:100],
  "link_head_probes":probes[:100]
 },indent=2,ensure_ascii=False))
