@@ -1,0 +1,27 @@
+name: KUSTO Line31 Cross-Track Holdout Depth Gate
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_line31_crosstrack_holdout_depth_gate.py'
+      - '.github/workflows/kusto-line31-crosstrack-holdout-depth-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy shapely requests
+      - name: Run frozen six-holdout depth gate
+        run: python workspace/kusto_line31_crosstrack_holdout_depth_gate.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-line31-crosstrack-holdout-depth-gate-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-DEPTH-GATE-RUN-2026-09-23-v1.0.json
+          retention-days: 30
