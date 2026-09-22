@@ -1,0 +1,63 @@
+{
+  "artifact_id": "JANUS-KUSTO-EMODNET-CDI-ALL8-SOURCE-INVENTORY-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:48:00Z",
+  "status": "FROZEN_BEFORE_EMODNET_CDI_CAPABILITIES_AND_POINT_METADATA_INSPECTION",
+  "candidates": [
+    {
+      "id": "KN19207_CAND_001",
+      "lat": -4.20546708989972,
+      "lon": -14.871748111744372
+    },
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432
+    },
+    {
+      "id": "KN19207_CAND_004",
+      "lat": -4.2399610081365955,
+      "lon": -15.26855667523257
+    },
+    {
+      "id": "KN19207_CAND_005",
+      "lat": -4.099231435240242,
+      "lon": -12.332032012186781
+    },
+    {
+      "id": "KN19207_CAND_006",
+      "lat": -4.309010339378846,
+      "lon": -12.270140997573803
+    },
+    {
+      "id": "KN19207_CAND_007",
+      "lat": -4.119167753526161,
+      "lon": -14.356560209706116
+    },
+    {
+      "id": "KN19207_CAND_008",
+      "lat": -4.3376789874153,
+      "lon": -12.319260730325983
+    }
+  ],
+  "sources": [
+    "EMODnet Bathymetry CDI WMS survey data discovery service",
+    "EMODnet Bathymetry WFS data products service only if source/survey vector features are exposed"
+  ],
+  "stage_A": "Fetch and hash GetCapabilities; identify layers whose title/name/abstract indicate survey, CDI, source reference, track or polygon metadata.",
+  "stage_B": "For candidate source layers only, request GetFeatureInfo at frozen points without accessing bathymetric depth values.",
+  "independence_rule": "Only explicit survey/CDI acquisition identities may become candidate lineages. DTM/source-grid identifiers and composite products do not count as independent surveys.",
+  "hard_rules": [
+    "CAPABILITIES_FAILURE_NE_NO_DATA",
+    "METADATA_ONLY_BEFORE_SURVEY_IDENTITY",
+    "NO_DEPTH_VALUES",
+    "NO_COMPOSITE_DTM_AS_ACQUISITION",
+    "REPORT_RAW_RESPONSES_AND_HASHES",
+    "PRIMARY_SOURCE_AUDIT_FOR_ANY_NEW_SURVEY_ID"
+  ],
+  "claim_ceiling": "EXTERNAL_SURVEY_METADATA_DISCOVERY_ONLY"
+}
