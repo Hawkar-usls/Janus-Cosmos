@@ -1,0 +1,48 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-CAND002003-THIRD-SURVEY-COVERAGE-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:34:00Z",
+  "status": "FROZEN_BEFORE_GMRT_SWATH_POLYGON_DOWNLOAD_AND_POINT_INTERSECTION",
+  "targets": [
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432
+    }
+  ],
+  "source": {
+    "provider": "GMRT / Lamont-Doherty Earth Observatory",
+    "product": "GMRT swath polygons",
+    "url": "https://www.gmrt.org/shapefiles/gmrt_swath_polygons.zip",
+    "semantics": "Curated multibeam coverage polygons aggregated by survey with attribution metadata."
+  },
+  "independence_rule": {
+    "already_known_discovery_and_confirmation_surveys": [
+      "KN192-07",
+      "KNOX15RR"
+    ],
+    "new_independent_survey_requires": "Distinct survey/cruise acquisition identity in GMRT attribution metadata, not merely a contributed grid or reprocessed derivative of KN192-07/KNOX15RR.",
+    "exact_point_in_polygon_required": true
+  },
+  "outputs": [
+    "archive_sha256",
+    "shapefile_schema",
+    "all_exact_intersecting_polygon_records_per_candidate",
+    "normalized_survey_or_cruise_ids",
+    "new_independent_survey_ids"
+  ],
+  "hard_rules": [
+    "POINT_IN_POLYGON_NE_NEARBY",
+    "GMRT_COMPILATION_NE_INDEPENDENT_ACQUISITION",
+    "REPROCESSED_SAME_CRUISE_NE_NEW_SURVEY",
+    "NO_DEPTH_READ_FOR_NEW_SURVEY_BEFORE_FOLLOWUP_PREREG",
+    "REPORT_ALL_INTERSECTIONS"
+  ],
+  "next_if_new_survey": "FREEZE_NEW_CROSS_SURVEY_DEPTH_COMPARISON_PREREG_BEFORE_READING_BATHYMETRY",
+  "next_if_none": "SEAL_NO_THIRD_GMRT_SWATH_SURVEY_AT_CAND002003",
+  "claim_ceiling": "EXACT_GMRT_SOURCE_COVERAGE_INVENTORY_ONLY"
+}
