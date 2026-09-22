@@ -1,0 +1,18 @@
+name: KUSTO KNOX15RR Data Probe
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_knox15rr_probe.py'
+      - '.github/workflows/kusto-knox15rr-probe.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_knox15rr_probe.py
