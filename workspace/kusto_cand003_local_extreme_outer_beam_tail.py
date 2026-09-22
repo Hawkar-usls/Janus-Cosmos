@@ -216,7 +216,14 @@ fixed={}
 for t in FIXED:
     k,x,y=target_key(t)
     r=next((q for q in rows if tuple(q["key"])==k),None)
-    if r is None: raise RuntimeError(f"{t['id']} not in parent common cells: {k}")
+    if r is None:
+        fixed[t["id"]]={
+          "coordinate":{"lat":t["lat"],"lon":t["lon"]},
+          "grid_key":[k[0],k[1]],
+          "status":"NOT_COMMON_GRID_CELL",
+          "substitute_cell_used":False
+        }
+        continue
     others100=[q for q in rows if q["abs_difference_m"]>=100 and tuple(q["key"])!=k]
     nearest100=min((math.hypot(q["x"]-r["x"],q["y"]-r["y"]) for q in others100),default=None)
     local={}
@@ -231,6 +238,7 @@ for t in FIXED:
     fixed[t["id"]]={
       "coordinate":{"lat":t["lat"],"lon":t["lon"]},
       "grid_key":[k[0],k[1]],"grid_center_xy_m":[r["x"],r["y"]],
+      "status":"AVAILABLE_COMMON_GRID_CELL",
       "line18_depth_m":r["line18_depth_m"],"line32_depth_m":r["line32_depth_m"],
       "signed_difference_m":r["signed_difference_m"],"abs_difference_m":r["abs_difference_m"],
       "abs_difference_midrank_percentile":midrank_percentile(absvals,r["abs_difference_m"]),
@@ -254,12 +262,30 @@ def grp(rr):
     }
 og=grp(opp); cg=grp(contrast)
 
+available=[v for v in fixed.values() if v.get("status")=="AVAILABLE_COMMON_GRID_CELL"]
+unavailable=[k for k,v in fixed.items() if v.get("status")!="AVAILABLE_COMMON_GRID_CELL"]
+if unavailable:
+    fixed_cell_joint_verdict="INSUFFICIENT_FIXED_CELL_SUPPORT"
+elif any(v["abs_difference_midrank_percentile"]<0.95 for v in available):
+    fixed_cell_joint_verdict="NOT_EXTREME_IN_PARENT_FIELD"
+elif all(v["abs_difference_midrank_percentile"]>=0.99 for v in available):
+    fixed_cell_joint_verdict="BOTH_FIXED_CELLS_GE99"
+else:
+    fixed_cell_joint_verdict="FIXED_CELLS_EXTREME_BUT_BELOW_JOINT_99_RULE"
+
 if og["n"]<20:
-    verdict="INSUFFICIENT_OPPOSITE_EXTREME_SUPPORT"
-elif any(fixed[x]["abs_difference_midrank_percentile"]<0.95 for x in fixed):
-    verdict="NOT_EXTREME_IN_PARENT_FIELD"
-elif all(fixed[x]["abs_difference_midrank_percentile"]>=0.99 for x in fixed) and og["median_abs_difference_m"]>cg["median_abs_difference_m"] and og["p90_abs_difference_m"]>cg["p90_abs_difference_m"]:
+    outer_group_verdict="INSUFFICIENT_OPPOSITE_EXTREME_SUPPORT"
+elif og["median_abs_difference_m"]>cg["median_abs_difference_m"] and og["p90_abs_difference_m"]>cg["p90_abs_difference_m"]:
+    outer_group_verdict="OPPOSITE_EXTREME_GROUP_HAS_ELEVATED_DIFFERENCE_TAIL"
+else:
+    outer_group_verdict="NO_BROAD_OPPOSITE_EXTREME_TAIL_ELEVATION"
+
+if fixed_cell_joint_verdict=="INSUFFICIENT_FIXED_CELL_SUPPORT":
+    verdict="INSUFFICIENT_FIXED_CELL_SUPPORT"
+elif fixed_cell_joint_verdict=="BOTH_FIXED_CELLS_GE99" and outer_group_verdict=="OPPOSITE_EXTREME_GROUP_HAS_ELEVATED_DIFFERENCE_TAIL":
     verdict="LOCAL_OUTER_BEAM_CROSSOVER_SUPPORTED"
+elif fixed_cell_joint_verdict=="NOT_EXTREME_IN_PARENT_FIELD":
+    verdict="NOT_EXTREME_IN_PARENT_FIELD"
 else:
     verdict="ISOLATED_LOCAL_OUTLIERS"
 
@@ -281,6 +307,10 @@ out={
  "opposite_extreme_group":og,
  "contrast_group":cg,
  "opposite_extreme_definition":"line18_signed_across>=+5500m AND line32_signed_across<=-5500m",
+ "fixed_cell_joint_verdict":fixed_cell_joint_verdict,
+ "outer_group_verdict":outer_group_verdict,
+ "unavailable_fixed_cells":unavailable,
+ "implementation_addendum":"data/cousteau/JANUS-KUSTO-CAND003-LOCAL-EXTREME-OUTER-BEAM-TAIL-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0.json",
  "authoritative_verdict":verdict,
  "claim_ceiling":"LOCAL_OUTER_BEAM_TAIL_DIAGNOSTIC_ONLY__NO_REFRACTION_CAUSALITY"
 }
