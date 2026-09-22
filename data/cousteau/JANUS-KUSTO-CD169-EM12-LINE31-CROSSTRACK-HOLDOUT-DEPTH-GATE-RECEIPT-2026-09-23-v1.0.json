@@ -1,0 +1,43 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-DEPTH-GATE-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:04:00Z",
+  "status":"SEALED_NO_SUPPORT_FOR_GENERAL_LINE31_EDGE_SPECIFIC_DEGRADATION",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-DEPTH-GATE-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"cd0cef74d67b6ae450d9ca7b42733396f6aa030e",
+    "selection_freeze_commit":"c53166f2edffa4a7817c6abd42f5313ea520f0d1"
+  },
+  "run":{
+    "github_actions_run_id":35790112964,
+    "artifact_id":10721064297,
+    "artifact_zip_sha256":"ea185235cb4e4f6dd336d1df0bb5db1f3cc6bc39b0cf78801c8626ffb0fe0586",
+    "conclusion":"success"
+  },
+  "aggregate":{
+    "CENTER":{"usable":3,"pass":3,"fail":0},
+    "EDGE":{"usable":3,"pass":3,"fail":0}
+  },
+  "holdouts":{
+    "CENTER_1":{"pass_both":true,"KN192_pearson":0.891021745569079,"KNOX_pearson":0.9032745641365718},
+    "CENTER_2":{"pass_both":true,"KN192_pearson":0.9648870864387054,"KNOX_pearson":0.864600864959506},
+    "CENTER_3":{"pass_both":true,"KN192_pearson":0.690847337315919,"KNOX_pearson":0.7685712060332501},
+    "EDGE_1":{"pass_both":true,"KN192_pearson":0.919916523745163,"KNOX_pearson":0.9316905936396939},
+    "EDGE_2":{"pass_both":true,"KN192_pearson":0.9712602987917529,"KNOX_pearson":0.9513110191358515},
+    "EDGE_3":{"pass_both":true,"KN192_pearson":0.8593444005370227,"KNOX_pearson":0.8430452190711462}
+  },
+  "verdict":"NO_SUPPORT_FOR_EDGE_SPECIFIC_DEGRADATION",
+  "interpretation":[
+    "Extreme line31 cross-track placement is not generally associated with temporal morphology failure.",
+    "All three frozen EDGE holdouts around the 97.5th empirical line31 cross-track percentile reproduce both independent 2008 lineages.",
+    "Therefore CAND003 line31 failure is a local exception rather than a generic outer-swath behavior.",
+    "The strict pooled CAND003 2005-to-2008 FAIL remains immutable; the line18 posthoc diagnostic PASS and line31 local FAIL remain separately preserved."
+  ],
+  "falsified_general_mechanisms":[
+    "GLOBAL_2005_EM12_INCOMPATIBILITY",
+    "GLOBAL_LINE31_DEFECT",
+    "HIGH_MANEUVER_NAVSTATE",
+    "GENERAL_LINE31_EXTREME_SWATH_EDGE_DEGRADATION"
+  ],
+  "next":"CAND003_LINE31_LOCAL_RESIDUAL_TOPOLOGY_DIAGNOSTIC",
+  "claim_ceiling":"HOLDOUT_REPLICATION_TEST_OF_LINE31_CROSSTRACK_DEPENDENT_TEMPORAL_REPRODUCIBILITY"
+}
