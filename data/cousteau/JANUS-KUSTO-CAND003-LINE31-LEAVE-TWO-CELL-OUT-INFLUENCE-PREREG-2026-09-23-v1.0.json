@@ -1,0 +1,39 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-LEAVE-TWO-CELL-OUT-INFLUENCE-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:14:00Z",
+  "status":"FROZEN_BEFORE_EXHAUSTIVE_PAIR_INFLUENCE_EXECUTION",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "parent":{
+    "strict_temporal_verdict":"FAIL_STRICT_2005_TO_2008_LOCAL_MORPHOLOGY_REPLICATION_AT_FROZEN_CAND003_CENTER",
+    "leave_one_out_verdict":"DISTRIBUTED_OR_MULTI_CELL_DISCORDANCE",
+    "leave_one_out_receipt":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-LEAVE-ONE-CELL-OUT-INFLUENCE-RECEIPT-2026-09-23-v1.0.json"
+  },
+  "support_reconstruction":"identical to the frozen leave-one-cell-out diagnostic: same 63 joint support cells, same 100m thinning/matching, both 2008 lineages required, same consensus and independent plane refits",
+  "analysis":{
+    "pairs":"all unordered pairs of distinct joint support cells; for n=63 this is exactly 1953 runs",
+    "for_each_pair":"remove exactly the two cells, refit both independent planes on remaining 61 points, recompute Pearson, Spearman, sign concordance and RMSE",
+    "report":[
+      "pearson_min_median_max",
+      "number_pairs_with_pearson_ge_0p60",
+      "number_pairs_passing_original_three_metric_gate",
+      "best_pair_by_pearson",
+      "top_20_pairs_by_pearson",
+      "frequency_each_cell_appears_in_passing_pairs",
+      "whether_the_two_largest_parent_residual_spikes_form_a_passing_pair"
+    ]
+  },
+  "diagnostic_labels":{
+    "TWO_CELL_SENSITIVE":"at least one pair passes the original three-metric gate",
+    "DISTRIBUTED_BEYOND_TWO_CELLS":"no pair passes the original three-metric gate",
+    "INSUFFICIENT":"joint support below 30"
+  },
+  "hard_rules":[
+    "ALL_1953_PAIRS_MUST_BE_EVALUATED",
+    "NO_PAIR_SELECTED_IN_ADVANCE_AS_AUTHORITY",
+    "STRICT_PARENT_FAIL_IMMUTABLE",
+    "PAIR_REMOVAL_CANNOT_PROMOTE_THE_SCIENTIFIC_VERDICT",
+    "NO_THRESHOLD_OR_SUPPORT_RETUNING",
+    "NO_RECENTERING"
+  ],
+  "claim_ceiling":"POSTHOC_EXHAUSTIVE_TWO_CELL_INFLUENCE_DIAGNOSTIC_ONLY"
+}
