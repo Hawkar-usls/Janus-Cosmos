@@ -1,0 +1,28 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-RAW-PROVENANCE-RECOVERY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:20:00Z",
+  "status":"FROZEN_BEFORE_ARCHIVE_WIDE_RAW_PROVENANCE_SEARCH",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "dominant_influence_cells":[
+    {"id":"CELL_A","lat":-4.0165853,"lon":-12.2985657,"z2005_m":4025.08,"zKN192_m":3903.7895286232233,"zKNOX_m":3925.6959423840044,"parent_delta_residual_m":124.64879466221646},
+    {"id":"CELL_B","lat":-4.0152462,"lon":-12.299318,"z2005_m":4036.31,"zKN192_m":3915.9501554071903,"zKNOX_m":3937.9770237505436,"parent_delta_residual_m":115.21341380093054}
+  ],
+  "line_context":{"geometry_inferred_line":31,"window_utc":["2005-02-26T19:11:00Z","2005-02-27T14:40:00Z"],"raw_ping_provenance_not_yet_established":true},
+  "search_scope":{
+    "root":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI",
+    "recursive":true,
+    "filename_terms":["EM12","em12","raw","RAW","all","ALL","dat","DAT","svp","SVP","neptune","Neptune","mermaid","Mermaid","line31","line_31","31"],
+    "extensions_of_interest":[".all",".raw",".dat",".bin",".mb",".xyz",".ascii",".nav",".svp",".txt",".log",".cfg",".conf",".lst",".list",".inf"],
+    "small_text_file_max_bytes":3000000,
+    "text_content_terms":["EM12","raw.all","line 31","line31","Acceptl28-33","Acceptl28","Acceptl31","Neptune","Mermaid","SVP","sound velocity","clock","processing"]
+  },
+  "selection_rule":"Inventory metadata and text content only; no bathymetric value filtering and no exclusion based on agreement with 2008.",
+  "success_conditions":[
+    "RAW_OR_NEAR_RAW_EM12_FILE_IDENTIFIED",
+    "LINE31_PROCESSING_OR_SVP_PROVENANCE_IDENTIFIED",
+    "SOURCE_FILE_MAPPING_TO_DOMINANT_CELLS_IDENTIFIED"
+  ],
+  "failure_condition":"NO_RAW_OR_LINE31_SPECIFIC_PROVENANCE_IN_ACCESSIBLE_BODC_ARCHIVE",
+  "hard_rules":["NO_CELL_REMOVAL","NO_REINTERPRETATION_OF_STRICT_FAIL","NO_RAW_PROVENANCE_INFERENCE_FROM_PROCESSED_FILENAME_ALONE"],
+  "claim_ceiling":"ARCHIVAL_PROVENANCE_RECOVERY_ONLY"
+}
