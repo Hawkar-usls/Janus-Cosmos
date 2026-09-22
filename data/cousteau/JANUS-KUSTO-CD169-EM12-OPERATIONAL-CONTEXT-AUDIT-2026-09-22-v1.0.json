@@ -1,0 +1,29 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-OPERATIONAL-CONTEXT-AUDIT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:56:00Z",
+  "status":"SEALED_SOURCE_CONTEXT",
+  "primary_source":{
+    "title":"RRS Charles Darwin Cruise 169, Cruise Report No. 6",
+    "url":"https://www.bodc.ac.uk/resources/inventories/cruise_inventory/reports/cd169.pdf",
+    "appendix":"Appendix D: Swath Survey Data List"
+  },
+  "dedicated_initial_swath_survey":{
+    "report_window_utc":["2005-02-23T17:37:00Z","2005-02-24T10:04:00Z"],
+    "appendix_line_span":"15 through 24",
+    "report_quality":"good overall; deterioration noted mainly in outer 5-10 beams on either side",
+    "report_processing":"new data processed and merged with existing data to generate bathymetry plots for TOBI navigation",
+    "focus_product_relation":"B1-81-1_Acceptl15-22.xyz.ascii lies within this dedicated survey line sequence"
+  },
+  "later_product_context":{
+    "focus_product":"B1-81-1_Acceptl28-33.xyz.ascii",
+    "line_span":"28 through 33",
+    "operational_context":[
+      "TOBI operations/recovery",
+      "transit to/from CTD",
+      "TOBI redeployment and subsequent survey"
+    ],
+    "warning":"This contextual distinction does not prove poorer bathymetry or explain the morphology mismatch by itself."
+  },
+  "calibration_rule":"Do not treat all processed EM12 Acceptl products as exchangeable calibration samples. Preserve line-group, acquisition-operation, SVP/time-status, and processing provenance as covariates.",
+  "claim_ceiling":"SOURCE_DOCUMENTED_OPERATIONAL_CONTEXT_ONLY"
+}
