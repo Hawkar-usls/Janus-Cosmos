@@ -1,0 +1,29 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-SELECTION-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:01:00Z",
+  "status":"FROZEN_SIX_HOLDOUTS_BEFORE_ANY_DEPTH_COMPARISON",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-SELECTION-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"bfd27a1cd0827efbb2b9a24e9c37e1bd2528c12b"
+  },
+  "run":{
+    "github_actions_run_id":35789825800,
+    "artifact_id":10720984309,
+    "artifact_zip_sha256":"10f7c56a5776d442ab00ff61623a22e9740a3e26ef7d5c6ebca895dc61fdee66",
+    "conclusion":"success"
+  },
+  "selection_used_depth":false,
+  "thresholds_relaxed":false,
+  "holdouts":{
+    "CENTER_1":{"lat":-4.0467114,"lon":-12.2704123,"cross_track_m":449.78152943961317,"percentile":0.30005224660397073,"local_line31_support":1203},
+    "CENTER_2":{"lat":-4.1151018,"lon":-12.2740956,"cross_track_m":449.99183646666245,"percentile":0.3000696621386277,"local_line31_support":1599},
+    "CENTER_3":{"lat":-4.0084801,"lon":-12.2137473,"cross_track_m":450.1652269741972,"percentile":0.30017415534656916,"local_line31_support":278},
+    "EDGE_1":{"lat":-3.9956817,"lon":-12.2701268,"cross_track_m":4576.71672382858,"percentile":0.9749912922326716,"local_line31_support":858},
+    "EDGE_2":{"lat":-4.1394583,"lon":-12.2434622,"cross_track_m":4577.046511152852,"percentile":0.9750087077673285,"local_line31_support":437},
+    "EDGE_3":{"lat":-4.110448,"lon":-12.2339197,"cross_track_m":4567.567260410609,"percentile":0.9746429815395332,"local_line31_support":210}
+  },
+  "dual_2008_coverage":"PASS_FOR_ALL_SIX_UNDER_FROZEN_FNV_DISTANCE_LE_100M_RULE",
+  "exclusion":"ALL_SIX_ARE_OUTSIDE_2KM_CAND003_AND_MAR4DEG02S_TRAINING_REGIONS",
+  "next":"DEPTH_VALIDATION_WITH_EXACT_COORDINATES_IMMUTABLE",
+  "claim_ceiling":"GEOMETRY_ONLY_HOLDOUT_SELECTION"
+}
