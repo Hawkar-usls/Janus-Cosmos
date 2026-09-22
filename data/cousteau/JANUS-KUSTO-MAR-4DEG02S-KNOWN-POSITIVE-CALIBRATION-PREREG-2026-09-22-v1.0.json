@@ -1,0 +1,47 @@
+{
+  "artifact_id":"JANUS-KUSTO-MAR-4DEG02S-KNOWN-POSITIVE-CALIBRATION-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T15:53:00Z",
+  "status":"FROZEN_BEFORE_NCEI_QUERY_AND_2008_BEAM_EXECUTION",
+  "calibration_target":{
+    "id":"MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "lat":-4.03,
+    "lon":-12.25,
+    "coordinate_role":"APPROXIMATE_PUBLISHED_HYDROTHERMAL_REGION_COORDINATE",
+    "selection_origin":"external literature/catalogue, not JANUS blind discovery"
+  },
+  "historical_context":{
+    "CD169_2005":"published high-temperature hydrothermal activity near 4deg02S in a non-transform discontinuity",
+    "CD169_TOBI_vehicle_track_minimum_distance_m_approx":532.9,
+    "nominal_TOBI_half_swath_m":3000,
+    "coverage_interpretation":"necessary geometry only until the 2005 sonar/bathymetry pixels are recovered"
+  },
+  "stage_A":{
+    "query":"exact NOAA NCEI multibeam polygon footprint intersection at frozen published coordinate",
+    "no_nearby_substitution":true
+  },
+  "stage_B_if_two_independent_2008_surveys":{
+    "lineages":["KN192-07","KNOX15RR"],
+    "center":"frozen published coordinate; no recentering",
+    "grid_cell_m":100,
+    "radius_m":1000,
+    "support_max_nearest_beam_m":100,
+    "minimum_good_beams_each_lineage":100,
+    "minimum_common_cells":30,
+    "primary_gate":{
+      "pearson_residual_min":0.60,
+      "spearman_residual_min":0.60,
+      "sign_concordance_min":0.65,
+      "all_required":true
+    }
+  },
+  "purpose":"Positive calibration: test whether the same pipeline independently recovers persistent measured morphology at a historically known natural hydrothermal/tectonic region.",
+  "hard_rules":[
+    "KNOWN_POSITIVE_NE_DISCOVERY",
+    "APPROXIMATE_PUBLISHED_COORDINATE_NE_EXACT_VENT_LOCATION",
+    "NO_RECENTERING",
+    "NO_THRESHOLD_RETUNING",
+    "PASS_NE_HYDROTHERMAL_IDENTITY_AT_EXACT_CELL",
+    "PASS_NE_ARTIFICIALITY"
+  ],
+  "claim_ceiling":"PIPELINE_CALIBRATION_ON_EXTERNAL_KNOWN_GEOLOGIC_REGION"
+}
