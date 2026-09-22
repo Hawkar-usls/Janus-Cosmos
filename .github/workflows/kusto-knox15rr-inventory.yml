@@ -1,0 +1,17 @@
+name: KUSTO KNOX15RR Inventory
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_knox15rr_inventory.py'
+      - '.github/workflows/kusto-knox15rr-inventory.yml'
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_knox15rr_inventory.py
