@@ -1,0 +1,24 @@
+name: KUSTO Global Bathymetry Trackline Discovery
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_ncei_global_bathy_trackline_all8.py'
+      - '.github/workflows/kusto-ncei-global-bathy-trackline-all8.yml'
+  workflow_dispatch:
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_ncei_global_bathy_trackline_all8.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-ncei-global-bathy-trackline-all8-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-NCEI-GLOBAL-BATHY-TRACKLINE-ALL8-DISCOVERY-RUN-2026-09-22-v1.0.json
+          retention-days: 30
