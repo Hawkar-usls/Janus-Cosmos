@@ -1,0 +1,79 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-DOMINANT-CELLS-RAW-DEPTH-STAGEB-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T00:02:00Z",
+  "status":"FROZEN_AFTER_RAW_GEOMETRY_PASS_BEFORE_RAW_DEPTH_READ",
+  "parent_geometry":{
+    "run_id":35793982714,
+    "artifact_id":10723725890,
+    "artifact_zip_sha256":"47b80060e7ad0e2934e26dbe68d8c431fc002dab59bcb28ee3af82b2c0231cec",
+    "CELL_A":{"geometry_support_le100m":true,"nearest_raw_beam_m":0.2843477030724789,"raw_beams_le100m":10},
+    "CELL_B":{"geometry_support_le100m":true,"nearest_raw_beam_m":0.3008198834934864,"raw_beams_le100m":2}
+  },
+  "cells":[
+    {
+      "id":"CELL_A","lat":-4.0165853,"lon":-12.2985657,
+      "processed_2005_depth_m":4025.08,
+      "KN192_2008_depth_m":3903.7895286232233,
+      "KNOX15RR_2008_depth_m":3925.6959423840044
+    },
+    {
+      "id":"CELL_B","lat":-4.0152462,"lon":-12.299318,
+      "processed_2005_depth_m":4036.31,
+      "KN192_2008_depth_m":3915.9501554071903,
+      "KNOX15RR_2008_depth_m":3937.9770237505436
+    }
+  ],
+  "raw_source":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "format":"MBF_EMOLDRAW_51",
+    "reader_authority":[
+      "MB-System src/mbio/mbr_emoldraw.c mbr_emoldraw_rd_em12bath",
+      "MB-System src/mbio/mbsys_simrad.c mbsys_simrad_extract"
+    ]
+  },
+  "selection":{
+    "reuse_stage_A_geometry_exactly":true,
+    "beam_radius_m":100,
+    "scan_all_66_raw_files":true,
+    "selection_fields":["beam earth position","distance to frozen cell"],
+    "forbidden_selection_fields":["raw depth","processed depth","2008 depth","quality byte"],
+    "include_all_nonzero_raw_bath_beams_selected_by_geometry":true,
+    "no_new_time_or_file_filter":true
+  },
+  "depth_semantics":{
+    "raw_bath_short_byte_order":"little_endian",
+    "bath_res_1_depth_m_per_unit":0.1,
+    "bath_res_2_depth_m_per_unit":0.2,
+    "MB_System_null_rule":"stored_bath == 0 => MB_FLAG_NULL; otherwise MB_FLAG_NONE",
+    "quality_byte":"report_only_no_filter"
+  },
+  "report_per_cell":[
+    "all_geometry_selected_raw_beams_with_depth",
+    "raw_depth_median_min_max",
+    "raw_depth_grouped_by_raw_file",
+    "nearest_geometry_beam_raw_depth",
+    "processed_minus_nearest_raw_depth",
+    "processed_minus_raw_median_depth",
+    "KN192_minus_raw_median_depth",
+    "KNOX15RR_minus_raw_median_depth",
+    "raw_median_distance_to_processed_depth",
+    "raw_median_distance_to_each_2008_depth"
+  ],
+  "predeclared_interpretation":{
+    "PROCESSING_SHIFT_SUPPORTED":"raw median is closer to both independent 2008 depths than to processed-2005 depth",
+    "RAW_ACQUISITION_SUPPORTS_PROCESSED":"raw median is closer to processed-2005 depth than to either independent 2008 depth",
+    "MIXED_OR_AMBIGUOUS":"neither relation holds, or raw selected beams split by acquisition file into materially different depth regimes",
+    "rule_note":"These are comparative diagnostics, not claims that any one depth is absolute ground truth."
+  },
+  "hard_rules":[
+    "NO_GEOMETRY_RESELECTION_AFTER_DEPTH",
+    "NO_QUALITY_THRESHOLD_INVENTION",
+    "NO_BEAM_REMOVAL_BASED_ON_DEPTH",
+    "REPORT_FILE_GROUPS_SEPARATELY",
+    "STRICT_2005_TO_2008_FAIL_IMMUTABLE",
+    "RAW_DEPTH_NE_CORRECTED_GROUND_TRUTH",
+    "NO_HYDROTHERMAL_OR_ARTIFICIALITY_CLAIM"
+  ],
+  "claim_ceiling":"RAW_EM12_DEPTH_PROVENANCE_DIAGNOSTIC_FOR_TWO_FROZEN_CELLS"
+}
