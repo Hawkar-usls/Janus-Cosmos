@@ -1,0 +1,74 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-DOMINANT-CELLS-ALL66-RAW-BEAM-GEOMETRY-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T23:33:00Z",
+  "status":"SEALED_PASS_PRESERVED_RAW_BEAM_GEOMETRY_SUPPORT_BOTH_CELLS",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-DOMINANT-CELLS-ALL66-RAW-BEAM-GEOMETRY-PREREG-2026-09-23-v1.0.json"
+  },
+  "authoritative_run":{
+    "github_actions_run_id":35793982714,
+    "head_sha":"59939417ae5105e35cb3e666fc2112d429267926",
+    "artifact_id":10723725890,
+    "artifact_zip_sha256":"47b80060e7ad0e2934e26dbe68d8c431fc002dab59bcb28ee3af82b2c0231cec",
+    "conclusion":"success"
+  },
+  "superseded_runs":[
+    {
+      "run_id":35793331880,
+      "status":"TECHNICAL_ENDIAN_MISMATCH__SCIENTIFIC_VERDICT_VOID"
+    },
+    {
+      "run_id":35793858851,
+      "status":"IMPLEMENTATION_SYNTAX_FAIL__SCIENTIFIC_VERDICT_NONE"
+    }
+  ],
+  "raw_source":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "entries":66,
+    "format":"MBF_EMOLDRAW_51"
+  },
+  "cells":{
+    "CELL_A":{
+      "lat":-4.0165853,"lon":-12.2985657,
+      "nearest_raw_beam_geometry_distance_m":0.2843477030724789,
+      "raw_beams_within_50m":2,
+      "raw_beams_within_100m":10,
+      "nearest_raw_file":"0032_270205_144041_raw.all",
+      "nearest_ping_utc":"2005-02-27T16:34:14.680000Z",
+      "nearest_ping_number":21395,
+      "nearest_beam_index":1,
+      "geometry_support_pass":true
+    },
+    "CELL_B":{
+      "lat":-4.0152462,"lon":-12.299318,
+      "nearest_raw_beam_geometry_distance_m":0.3008198834934864,
+      "raw_beams_within_50m":1,
+      "raw_beams_within_100m":2,
+      "nearest_raw_file":"0032_270205_144041_raw.all",
+      "nearest_ping_utc":"2005-02-27T16:34:14.680000Z",
+      "nearest_ping_number":21395,
+      "nearest_beam_index":0,
+      "geometry_support_pass":true
+    }
+  },
+  "additional_geometry_evidence":{
+    "line18_era_file":"0018_240205_000335_raw.all",
+    "CELL_A_has_line18_era_beams_within_100m":true,
+    "CELL_B_has_line18_era_beam_within_100m":true,
+    "meaning":"The frozen Earth-cells are crossed by preserved raw geometry from more than one acquisition time/file."
+  },
+  "provenance_correction":{
+    "previous_geometry_projected_line31_time_binding":"NOT_RAW_PING_PROVENANCE",
+    "all66_result":"The processed-cell to 21:18 UTC line31 binding must not be used as exact raw provenance for CELL_A/B.",
+    "global_line31_or_navstate_mechanism_status":"DOWNGRADED/FALSIFIED_AS_SUFFICIENT_EXPLANATION",
+    "reason":[
+      "same line31 reproduces known-positive morphology elsewhere",
+      "known-positive same-line window is more maneuver-variable than failing CAND003 window",
+      "preserved raw beams intersect CELL_A/B at acquisition times outside the projected line31 interval"
+    ]
+  },
+  "raw_depth_read":false,
+  "next_gate":"JANUS-KUSTO-CAND003-DOMINANT-CELLS-RAW-DEPTH-STAGEB",
+  "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY__NO_RAW_DEPTH_VERDICT"
+}
