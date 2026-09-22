@@ -1,0 +1,56 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-LINE-ATTRIBUTION-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:52:00Z",
+  "status":"FROZEN_BEFORE_LINE_ATTRIBUTION_OR_LINE_SPECIFIC_DEPTH_COMPARISON",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "sources":{
+    "navigation":{"file":"Nav/cd169leg1_1min.listit","sha256":"3b407b91f5b1d0509c8ac6cdd83beb0c98ca56cd69d962b4e553cf0f25a0424a","resolution_seconds":60},
+    "line_clock_authority":"CD169 Cruise Report Appendix D: Swath Survey Data List",
+    "processed_products":[
+      "B1-81-1_Acceptl15-22.xyz.ascii",
+      "B1-81-1_Acceptl28-33.xyz.ascii"
+    ]
+  },
+  "line_windows_utc":{
+    "15":{"start":"2005-02-23T17:37:00Z","end":"2005-02-23T19:37:00Z"},
+    "16":{"start":"2005-02-23T19:37:00Z","end":"2005-02-23T21:30:00Z"},
+    "17":{"start":"2005-02-23T21:30:00Z","end":"2005-02-24T00:02:00Z"},
+    "18":{"start":"2005-02-24T00:02:00Z","end":"2005-02-24T01:59:00Z"},
+    "19":{"start":"2005-02-24T01:59:00Z","end":"2005-02-24T04:11:00Z"},
+    "20":{"start":"2005-02-24T04:11:00Z","end":"2005-02-24T06:00:00Z"},
+    "21":{"start":"2005-02-24T06:00:00Z","end":"2005-02-24T06:25:00Z"},
+    "22":{"start":"2005-02-24T06:25:00Z","end":"2005-02-24T06:35:00Z"},
+    "28":{"start":"2005-02-25T07:30:00Z","end":"2005-02-25T21:10:00Z"},
+    "29":{"start":"2005-02-25T21:10:00Z","end":"2005-02-26T07:34:00Z"},
+    "30":{"start":"2005-02-26T08:22:00Z","end":"2005-02-26T09:35:00Z"},
+    "31":{"start":"2005-02-26T19:11:00Z","end":"2005-02-27T14:40:00Z"},
+    "32":{"start":"2005-02-27T14:40:00Z","end":"2005-02-28T07:31:00Z"},
+    "33":{"start":"2005-02-28T07:31:00Z","end":"2005-02-28T14:59:00Z"}
+  },
+  "attribution":{
+    "scope":"processed XYZ soundings within 1000m of frozen CAND003 only",
+    "candidate_lines":"only line numbers encoded by that product filename",
+    "rule":"assign each sounding to the line whose 1-minute ship-track polyline has the smallest horizontal distance to the sounding coordinate",
+    "depth_used_for_assignment":false,
+    "ambiguity":"do not discard ambiguous points; report nearest distance, second-nearest distance and gap. Attribution is inferred geometry, not raw ping provenance."
+  },
+  "line_specific_comparison":{
+    "geometry_thinning":"one attributed 2005 sounding per candidate-centered 100m square cell, selected nearest cell center without depth",
+    "minimum_thinned_support_points":30,
+    "2008_depth_estimator":"median good-beam depth within 100m of retained 2005 coordinate",
+    "comparators":["KN192-07_2008","KNOX15RR_2008"],
+    "gate":{"pearson_min":0.60,"spearman_min":0.60,"sign_concordance_min":0.65,"all_required":true},
+    "line_temporal_reproduction":"a line passes only if it passes against BOTH independent 2008 lineages"
+  },
+  "hard_rules":[
+    "NO_DEPTH_IN_LINE_ATTRIBUTION",
+    "NO_POSTHOC_LINE_SELECTION",
+    "REPORT_ALL_LINES_WITH_SUPPORT",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "INFERRED_LINE_ASSIGNMENT_NE_RAW_PROVENANCE",
+    "STRICT_TEMPORAL_PARENT_FAIL_IMMUTABLE"
+  ],
+  "claim_ceiling":"GEOMETRY_INFERRED_LINE_LEVEL_PROCESSED_PRODUCT_DIAGNOSTIC_ONLY"
+}
