@@ -69,7 +69,8 @@ def fetch(url,timeout=120):
 
 def list_files(base,ext):
     html=fetch(base,60).decode("latin1","replace")
-    return sorted(set(re.findall(r'href="([^"]+\'+ext+r')"',html,re.I)))
+    pattern = r'href="([^"]+\\.' + re.escape(ext) + r')"'
+    return sorted(set(re.findall(pattern, html, re.I)))
 
 def fetch_fnv(base,name):
     b=fetch(urljoin(base,name),90)
