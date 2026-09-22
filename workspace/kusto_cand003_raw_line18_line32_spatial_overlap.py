@@ -63,7 +63,7 @@ def af(b,a,z):
     except:return None
 
 def parse_pos(payload,offset):
-    tt=parse_time(payload)
+    tt=parse_time(payload,True)
     if tt is None:return None
     try:
         deg=digits(payload,16,18);minute=af(payload,18,25);hemi=chr(payload[25])
@@ -79,7 +79,7 @@ def parse_pos(payload,offset):
     except:return None
 
 def parse_bath(payload,offset,tname):
-    tt=parse_time(payload)
+    tt=parse_time(payload,False)
     if tt is None or len(payload)<BATH_SIZE:return None
     try:
         ping=struct.unpack_from("<H",payload,14)[0];res=payload[16]
