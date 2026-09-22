@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import concurrent.futures, hashlib, json, math, re, struct
+import concurrent.futures, hashlib, json, math, re, struct, time
 from pathlib import Path
 from urllib.parse import urljoin
 import numpy as np
@@ -28,7 +28,16 @@ UA={"User-Agent":"JANUS-KUSTO-crosssurvey-replication/1.0"}
 S=requests.Session(); S.headers.update(UA)
 
 def fetch(url,timeout=180):
-    r=S.get(url,timeout=timeout); r.raise_for_status(); return r.content
+    last=None
+    for attempt in range(7):
+        r=S.get(url,timeout=timeout)
+        if r.status_code == 429:
+            last=RuntimeError(f"HTTP 429 for {url}")
+            time.sleep(min(30,2**attempt))
+            continue
+        r.raise_for_status()
+        return r.content
+    raise last
 
 def listing(url,suffix):
     txt=fetch(url,90).decode("utf-8","replace")
@@ -61,20 +70,37 @@ def parse_fnv(txt,c):
         best=min(best,segdist0(a,b))
     return rows,best
 
-def choose_files(sid,c):
+FNV_CACHE={}
+def build_fnv_cache(sid):
+    if sid in FNV_CACHE:
+        return FNV_CACHE[sid]
     g=SURVEYS[sid]["generated"]
     names=listing(g,".fnv")
-    selected=[]
-    best=[]
+    rows=[]
     def one(n):
         b=fetch(urljoin(g,n),90)
-        rows,d=parse_fnv(b.decode("utf-8","replace"),c)
-        return n,d,hashlib.sha256(b).hexdigest(),len(rows)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
-        for n,d,h,nrows in ex.map(one,names):
-            best.append((d,n))
-            if d<=SELECT_PAD:
-                selected.append({"fnv":n,"min_cross_swath_distance_m":d,"fnv_sha256":h,"rows":nrows})
+        parsed,_=parse_fnv(b.decode("utf-8","replace"),CANDS[0])
+        return n,parsed,hashlib.sha256(b).hexdigest()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:
+        for k,(n,parsed,h) in enumerate(ex.map(one,names),1):
+            rows.append((n,parsed,h))
+            if k%50==0:
+                print(sid,"indexed FNV",k,"/",len(names))
+    FNV_CACHE[sid]=(names,rows)
+    return FNV_CACHE[sid]
+
+def choose_files(sid,c):
+    names,cache=build_fnv_cache(sid)
+    selected=[]; best=[]
+    for n,rows,h in cache:
+        d=1e99
+        for r in rows:
+            a=localxy(c["lat"],c["lon"],r["portlat"],r["portlon"])
+            b=localxy(c["lat"],c["lon"],r["stbdlat"],r["stbdlon"])
+            d=min(d,segdist0(a,b))
+        best.append((d,n))
+        if d<=SELECT_PAD:
+            selected.append({"fnv":n,"min_cross_swath_distance_m":d,"fnv_sha256":h,"rows":len(rows)})
     best.sort()
     selected.sort(key=lambda z:z["fnv"])
     return selected,best[:10],len(names)
