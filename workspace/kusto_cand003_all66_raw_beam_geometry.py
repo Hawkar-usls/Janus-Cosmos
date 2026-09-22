@@ -214,7 +214,9 @@ out={
    t["id"]:("PASS_PRESERVED_RAW_BEAM_GEOMETRY_SUPPORT" if state[t["id"]]["geometry_support_pass_le100m"] else "FAIL_NO_PRESERVED_RAW_BEAM_WITHIN_100M")
    for t in TARGETS
  },
- "supersedes_run_35793331880":"TECHNICAL_ENDIAN_MISMATCH__SCIENTIFIC_VERDICT_VOID",\n "binary_short_semantics":"little-endian, matching MB-System mb_get_binary_short(true) / mb_put_binary_short(true) for MBF_EMOLDRAW on byte-swapped hosts",\n "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY__DEPTH_NOT_READ"
+ "supersedes_run_35793331880":"TECHNICAL_ENDIAN_MISMATCH__SCIENTIFIC_VERDICT_VOID",
+ "binary_short_semantics":"little-endian, matching MB-System mb_get_binary_short(true) / mb_put_binary_short(true) for MBF_EMOLDRAW on byte-swapped hosts",
+ "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY__DEPTH_NOT_READ"
 }
 p=OUT/"JANUS-KUSTO-CAND003-DOMINANT-CELLS-ALL66-RAW-BEAM-GEOMETRY-RUN-2026-09-23-v1.0.json"
 p.write_text(json.dumps(out,indent=2))
