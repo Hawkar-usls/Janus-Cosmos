@@ -1,0 +1,73 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-TOBI-VEHICLE-TRACK-COVERAGE-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T15:50:00Z",
+  "status":"SEALED_GEOMETRY_NEGATIVE_FOR_DISCOVERY_CANDIDATES",
+  "source":{
+    "delivery":"BODC/NOC Hannah Revett email attachment",
+    "zip_sha256":"4de5b63e182147841bed1bf8647fcbf445bee6aaf4bd7b11ebbd76c1c763a2e6",
+    "veh_nav_sha256":"97bf10284202a2b78aa0a53f96e9394948dc24402ee4c7faf1188967702fa328",
+    "commands_cfg_sha256":"a56236dfee0bd487a30d82340fe93055a78f26ca5d7b9116d25e95e0e532af70",
+    "veh_nav_records":40875,
+    "commands_cfg_navigation_stage":"mrgnav_inertia -i %1 -o %0 -u 236 -n navfile.veh_nav"
+  },
+  "format_binding":{
+    "example_time_utc":"2005-02-28T01:00:00Z",
+    "veh_nav_row":"cd169 050228 0100 -3.8197 -12.1206 6728.4 172.75 -3.8767 -12.1292",
+    "science_log_ship_decimal_lat":-3.820,
+    "science_log_ship_decimal_lon":-12.121,
+    "science_log_wire_out_m":6728,
+    "inference":"first coordinate pair binds to ship position and field 6 to wire out; final coordinate pair is the historical wireout-derived TOBI vehicle position used by the PRISM navigation chain"
+  },
+  "acquisition_window":{
+    "start_utc":"2005-02-27T17:00:00Z",
+    "end_utc":"2005-02-28T15:00:00Z",
+    "rule":"Only vehicle-track segments inside the documented TOBI data-acquisition window count. Earlier deployment/descent geometry is excluded."
+  },
+  "swath_model":{
+    "nominal_total_30khz_swath_m":6000,
+    "nominal_half_swath_m":3000,
+    "role":"necessary geometric coverage condition only; not pixel/echo evidence"
+  },
+  "continuous_vehicle_track_results":[
+    {
+      "id":"KN19207_CAND_002",
+      "lat":-3.9727527956056825,
+      "lon":-12.272824298723462,
+      "minimum_track_distance_m":6788.8,
+      "closest_time_approx_utc":"2005-02-27T20:33:00Z",
+      "nominal_swath_necessary_condition_pass":false,
+      "verdict":"NO_DIRECT_CD169_TOBI_COVERAGE"
+    },
+    {
+      "id":"KN19207_CAND_003",
+      "lat":-4.015075679897318,
+      "lon":-12.29915403590432,
+      "minimum_track_distance_m":6014.5,
+      "closest_time_approx_utc":"2005-02-27T19:05:00Z",
+      "nominal_swath_necessary_condition_pass":false,
+      "verdict":"NO_DIRECT_CD169_TOBI_COVERAGE"
+    },
+    {
+      "id":"KN19207_CAND_005",
+      "lat":-4.099231435240242,
+      "lon":-12.332032012186781,
+      "minimum_track_distance_m":4297.9,
+      "closest_time_approx_utc":"2005-02-27T17:00:00Z",
+      "nominal_swath_necessary_condition_pass":false,
+      "verdict":"NO_DIRECT_CD169_TOBI_COVERAGE_DURING_DATA_ACQUISITION"
+    },
+    {
+      "id":"OLD_BODC_FROZEN_TARGET_CONTROL",
+      "lat":-3.865418,
+      "lon":-12.14244,
+      "minimum_track_distance_m":1727.1,
+      "closest_time_approx_utc":"2005-02-28T01:13:00Z",
+      "nominal_swath_necessary_condition_pass":true,
+      "verdict":"TOBI_SWATH_GEOMETRY_NECESSARY_CONDITION_PASS_ONLY"
+    }
+  ],
+  "critical_chronology_note":"CAND_005 approaches about 1.22 km during deployment/descent before documented data acquisition starts; that interval is excluded by preregistered chronology and cannot be used as TOBI imaging coverage.",
+  "claim_ceiling":"HISTORICAL_TOWFISH_TRACK_GEOMETRY_ONLY__NO_SONAR_PIXEL_IDENTITY__NO_BATHYMETRIC_REPLICATION",
+  "temporal_gate_effect":"CAND_002 and CAND_003 cannot obtain 2005-to-2008 replication from CD169 TOBI sidescan at their frozen centers because the 2005 vehicle track lies outside the nominal 3-km half-swath during acquisition.",
+  "next":"TEST_CD169_2005_SHIPBORNE_EM12_EXACT_MEASURED_SUPPORT_IF_PRIMARY_BATHYMETRY_CAN_BE_RECOVERED"
+}
