@@ -1,0 +1,27 @@
+name: KUSTO CD169 EM12 Acquisition-Regime Calibration
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_mar4deg02s_em12_acquisition_regime_calibration.py'
+      - '.github/workflows/kusto-mar4deg02s-em12-acquisition-regime-calibration.yml'
+  workflow_dispatch:
+
+jobs:
+  calibration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Run source-native product regime calibration
+        run: python workspace/kusto_mar4deg02s_em12_acquisition_regime_calibration.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-mar4deg02s-em12-acquisition-regime-calibration-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-MAR4DEG02S-CD169-EM12-ACQUISITION-REGIME-CALIBRATION-RUN-2026-09-22-v1.0.json
+          retention-days: 30
