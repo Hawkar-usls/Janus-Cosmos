@@ -1,0 +1,42 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-INTERNAL-CONSISTENCY-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:26:00Z",
+  "status":"SEALED_SINGLE_SOUNDING_DOMINANT_CELLS__NO_SAME_CELL_LINE18_SUPPORT",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-DOMINANT-CELLS-INTERNAL-CONSISTENCY-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"3e3a6bc2077611695830e9a810802fa15cde8240"
+  },
+  "run":{"github_actions_run_id":35792043741,"artifact_id":10721909064,"artifact_zip_sha256":"e954e4d264e4826159daad6a97aac73d6c0a36141c689ce8cd008fac360c8d9c","conclusion":"success"},
+  "product":{"file":"B1-81-1_Acceptl28-33.xyz.ascii","sha256":"0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0","parsed_xyz":379293},
+  "cells":{
+    "CELL_A":{
+      "lat":-4.0165853,"lon":-12.2985657,"depth_m":4025.08,
+      "grid_index":[10,8],"cell_center_offset_m":[50,-150],
+      "soundings_in_exact_100m_cell":1,
+      "representative_distance_to_cell_center_m":23.68474882592128,
+      "Acceptl15_22_same_cell_soundings":0,
+      "notable_adjacent_cells":[
+        {"relative_cell":[-1,1],"n":1,"depth_m":4036.31},
+        {"relative_cell":[1,1],"n":1,"depth_m":3913.14}
+      ]
+    },
+    "CELL_B":{
+      "lat":-4.0152462,"lon":-12.299318,"depth_m":4036.31,
+      "grid_index":[9,9],"cell_center_offset_m":[-50,-50],
+      "soundings_in_exact_100m_cell":1,
+      "representative_distance_to_cell_center_m":44.41652594067972,
+      "Acceptl15_22_same_cell_soundings":0,
+      "notable_adjacent_cells":[{"relative_cell":[1,-1],"n":1,"depth_m":4025.08}]
+    }
+  },
+  "interpretation":[
+    "Neither dominant influence cell is supported by a within-cell cluster of multiple processed 2005 soundings; each contains exactly one processed sounding.",
+    "The single-sounding result does not establish that either sounding is erroneous.",
+    "No exact-cell independent support from the passing Acceptl15-22 product exists for either cell.",
+    "A nearby processed line31 cell contains a 3913.14 m sounding, showing substantial local depth variability in the sparse processed product.",
+    "Raw-beam provenance is therefore the appropriate next discriminator."
+  ],
+  "strict_parent_fail":"IMMUTABLE",
+  "cells_removed":false,
+  "claim_ceiling":"PROCESSED_CELL_INTERNAL_CONSISTENCY_DIAGNOSTIC_ONLY"
+}
