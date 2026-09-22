@@ -1,0 +1,21 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LOCAL-EXTREME-OUTER-BEAM-TAIL-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T23:58:00Z",
+  "parent_prereg":"data/cousteau/JANUS-KUSTO-CAND003-LOCAL-EXTREME-OUTER-BEAM-TAIL-PREREG-2026-09-23-v1.0.json",
+  "status":"FROZEN_IMPLEMENTATION_SUPPORT_RULE__NO_SCIENTIFIC_THRESHOLD_CHANGE",
+  "reason":"A frozen fixed coordinate may map to a 100-m parent grid cell lacking both raw lineages even though each lineage has a raw beam within 100 m of the coordinate. Recentring to a neighboring common cell is forbidden.",
+  "rule":{
+    "if_fixed_coordinate_parent_grid_cell_is_not_common":"report NOT_COMMON_GRID_CELL and do not substitute any neighboring cell",
+    "joint_fixed_cell_verdict_if_any_fixed_cell_unavailable":"INSUFFICIENT_FIXED_CELL_SUPPORT",
+    "outer_extreme_group_analysis":"still execute on all 2096 parent common cells unchanged",
+    "available_fixed_cells":"still report their preregistered empirical tail metrics",
+    "no_recenter":true,
+    "no_grid_change":true,
+    "no_threshold_change":true
+  },
+  "first_workflow_run":{
+    "run_id":35799702092,
+    "status":"DEPENDENCY_FAIL_BEFORE_DATA_EXECUTION__SCIENTIFIC_RESULT_NONE",
+    "failure":"numpy not installed"
+  }
+}
