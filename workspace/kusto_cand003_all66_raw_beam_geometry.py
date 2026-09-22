@@ -74,9 +74,9 @@ def parse_bath_geometry(payload,offset,tname):
     if tt is None:return None
     if len(payload)<BATH_SIZE:return None
     try:
-        ping_number=struct.unpack_from(">H",payload,14)[0]
+        ping_number=struct.unpack_from("<H",payload,14)[0]
         bath_res=payload[16]
-        heading_raw=struct.unpack_from(">H",payload,20)[0]
+        heading_raw=struct.unpack_from("<H",payload,20)[0]
         heading_deg=0.1*heading_raw
         if bath_res==1: scale=0.2
         elif bath_res==2: scale=0.5
@@ -85,8 +85,8 @@ def parse_bath_geometry(payload,offset,tname):
         for i in range(81):
             base=32+11*i
             # Intentionally skip payload[base:base+2] raw depth.
-            across=struct.unpack_from(">h",payload,base+2)[0]*scale
-            along=struct.unpack_from(">h",payload,base+4)[0]*scale
+            across=struct.unpack_from("<h",payload,base+2)[0]*scale
+            along=struct.unpack_from("<h",payload,base+4)[0]*scale
             quality=payload[base+9]
             beams.append((i,across,along,quality))
         return {"offset":offset,"epoch":tt[0],"utc":tt[1],"type":tname,"ping_number":ping_number,
@@ -214,7 +214,7 @@ out={
    t["id"]:("PASS_PRESERVED_RAW_BEAM_GEOMETRY_SUPPORT" if state[t["id"]]["geometry_support_pass_le100m"] else "FAIL_NO_PRESERVED_RAW_BEAM_WITHIN_100M")
    for t in TARGETS
  },
- "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY__DEPTH_NOT_READ"
+ "supersedes_run_35793331880":"TECHNICAL_ENDIAN_MISMATCH__SCIENTIFIC_VERDICT_VOID",\n "binary_short_semantics":"little-endian, matching MB-System mb_get_binary_short(true) / mb_put_binary_short(true) for MBF_EMOLDRAW on byte-swapped hosts",\n "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY__DEPTH_NOT_READ"
 }
 p=OUT/"JANUS-KUSTO-CAND003-DOMINANT-CELLS-ALL66-RAW-BEAM-GEOMETRY-RUN-2026-09-23-v1.0.json"
 p.write_text(json.dumps(out,indent=2))
