@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import concurrent.futures, ftplib, hashlib, json, math, re, struct
+import concurrent.futures, ftplib, hashlib, json, math, re, struct, time
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -79,7 +79,22 @@ def load_cd169():
     return np.asarray(pts,float),{"files":file_rows,"selected_files":selected}
 
 def fetch(url,timeout=120):
-    r=requests.get(url,headers=UA,timeout=timeout);r.raise_for_status();return r.content
+    last=None
+    for attempt in range(7):
+        try:
+            r=requests.get(url,headers=UA,timeout=timeout)
+            if r.status_code==429:
+                time.sleep(min(2**attempt,32))
+                last=requests.exceptions.HTTPError(f"429 for {url}")
+                continue
+            r.raise_for_status()
+            return r.content
+        except (requests.exceptions.RequestException, requests.exceptions.HTTPError) as e:
+            last=e
+            if attempt==6:
+                raise
+            time.sleep(min(2**attempt,32))
+    raise last
 
 def list_files(base,ext):
     html=fetch(base,60).decode("latin1","replace")
@@ -141,7 +156,7 @@ def load_2008(label,base):
     names=list_files(base,"fnv"); selected=[]; fnv_manifest=[]
     def getfnv(n):
         b=fetch(urljoin(base,n),90);return n,hashlib.sha256(b).hexdigest(),parse_fnv(b.decode("utf-8","replace"))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
         for n,sha,rows in (f.result() for f in concurrent.futures.as_completed([ex.submit(getfnv,n) for n in names])):
             d=min_fnv(rows);fnv_manifest.append({"file":n,"sha256":sha,"min_cross_m":d})
             if d<=SELECT_R:selected.append(n[:-4]+".fbt")
@@ -149,7 +164,7 @@ def load_2008(label,base):
     parts=[];fbt_manifest=[]
     def getfbt(n):
         b=fetch(urljoin(base,n),180);pts,nrec=parse_fbt(b,n);return n,hashlib.sha256(b).hexdigest(),len(b),pts,nrec
-    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:
         for n,sha,size,pts,nrec in (f.result() for f in concurrent.futures.as_completed([ex.submit(getfbt,n) for n in selected])):
             parts.append(pts);fbt_manifest.append({"file":n,"sha256":sha,"bytes":size,"records":nrec,"good_beams":int(len(pts))})
     allpts=np.vstack(parts) if parts else np.empty((0,3))
