@@ -8,7 +8,8 @@ from scipy.stats import spearmanr
 
 CANDS=[
  {"id":"MAR_4DEG02S_PUBLISHED_REGION_CAL","lat":-4.03,"lon":-12.25},
-]SURVEYS={
+]
+SURVEYS={
  "KN192-07":{
    "platform":"Knorr","instrument":"SeaBeam 3012",
    "base":"https://data.ngdc.noaa.gov/platforms/ocean/ships/knorr/KN192-07/multibeam/data/version1/MB/generated/"
