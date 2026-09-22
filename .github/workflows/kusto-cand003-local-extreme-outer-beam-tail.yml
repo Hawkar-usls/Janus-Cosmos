@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install scientific stack
+        run: pip install --disable-pip-version-check numpy
       - name: Run frozen local outer-beam tail diagnostic
         run: python workspace/kusto_cand003_local_extreme_outer_beam_tail.py
       - uses: actions/upload-artifact@v4
