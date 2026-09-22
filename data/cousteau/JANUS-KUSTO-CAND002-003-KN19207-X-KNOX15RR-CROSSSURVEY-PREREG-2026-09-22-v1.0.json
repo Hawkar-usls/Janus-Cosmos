@@ -1,0 +1,107 @@
+{
+  "artifact_id": "JANUS-KUSTO-CAND002-003-KN19207-X-KNOX15RR-CROSSSURVEY-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T14:52:00Z",
+  "status": "FROZEN_BEFORE_KNOX15RR_BATHYMETRY_INSPECTION",
+  "candidates": [
+    {
+      "id": "KN19207_CAND_002",
+      "lat": -3.9727527956056825,
+      "lon": -12.272824298723462,
+      "discovery_radius_m": 1000
+    },
+    {
+      "id": "KN19207_CAND_003",
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432,
+      "discovery_radius_m": 1000
+    }
+  ],
+  "surveys": {
+    "discovery": {
+      "id": "KN192-07",
+      "platform": "Knorr",
+      "instrument": "SeaBeam 3012",
+      "acquisition": "2007-12-31/2008-01-17"
+    },
+    "replication": {
+      "id": "KNOX15RR",
+      "platform": "Roger Revelle",
+      "instrument": "Kongsberg EM120",
+      "acquisition": "2008-03-20/2008-04-17"
+    }
+  },
+  "independence_basis": [
+    "different_cruise_id",
+    "different_vessel",
+    "different_multibeam_system",
+    "different_acquisition_time"
+  ],
+  "source_policy": {
+    "preferred": "NOAA_NCEI_MB_SYSTEM_GENERATED_FBT_BOUND_TO_ARCHIVED_RAW_FILES",
+    "raw_hash_binding_required": true,
+    "warning": "FBT is a generated derivative; a PASS validates cross-survey morphology, not independent raw reprocessing."
+  },
+  "geometry": {
+    "radii_m": [
+      500,
+      1000
+    ],
+    "primary_radius_m": 1000,
+    "grid_cell_m": 100,
+    "grid_origin": "candidate_center_fixed_Earth_coordinates",
+    "per_cell_statistic": "median_depth",
+    "min_common_cells": {
+      "500": 20,
+      "1000": 80
+    },
+    "nearest_good_beam_max_m": 150
+  },
+  "preprocessing": [
+    "use_good_beams_only_flag_0",
+    "no_target_recenter",
+    "no_rotation",
+    "no_anisotropic_rescaling",
+    "independent_best_fit_plane_removed_from_each_survey_over_common_cells",
+    "comparison_only_on_common_finite_grid_cells"
+  ],
+  "metrics": [
+    "centered_residual_pearson_r",
+    "centered_residual_spearman_rho",
+    "common_cell_count",
+    "nearest_good_beam_distance_m_each_survey",
+    "best_integer_grid_shift_within_plusminus_300m_by_100m",
+    "best_shift_residual_pearson_r",
+    "centered_minus_best_shift_r",
+    "grid_p05_p95_relief_each_survey",
+    "grid_plane_rmse_each_survey",
+    "grid_radial_quadratic_r2_each_survey",
+    "grid_angular_m4_amplitude_each_survey"
+  ],
+  "replication_gate": {
+    "primary_radius_m": 1000,
+    "all_required": [
+      "nearest_good_beam_distance_m <= 150 for both surveys",
+      "common_cell_count >= 80",
+      "centered_residual_pearson_r >= 0.60",
+      "centered_residual_spearman_rho >= 0.55",
+      "best_shift_distance_m <= 200",
+      "centered_residual_pearson_r >= best_shift_residual_pearson_r - 0.10"
+    ],
+    "result_values": [
+      "PASS_CROSS_SURVEY_MORPHOLOGY_REPLICATION",
+      "FAIL_CROSS_SURVEY_MORPHOLOGY_REPLICATION",
+      "INSUFFICIENT_COMMON_COVERAGE"
+    ]
+  },
+  "hard_rules": [
+    "NO_THRESHOLD_RETUNING_AFTER_RESULTS",
+    "NO_CENTER_MOVEMENT",
+    "NO_ROTATION_OR_SCALE_OPTIMIZATION",
+    "NO_VISUAL_PICKING",
+    "NO_CD169_USED_IN_THIS_GATE",
+    "PASS_NE_OBJECT_IDENTITY",
+    "PASS_NE_ARTIFICIALITY",
+    "FAIL_DOES_NOT_INVALIDATE_ORIGINAL_BATHYMETRY"
+  ],
+  "claim_ceiling": "CROSS_SURVEY_SEAFLOOR_MORPHOLOGY_REPLICATION_ONLY"
+}
