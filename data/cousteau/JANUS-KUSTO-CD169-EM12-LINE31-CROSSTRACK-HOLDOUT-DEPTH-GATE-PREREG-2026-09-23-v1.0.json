@@ -1,0 +1,49 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-DEPTH-GATE-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:02:00Z",
+  "status":"FROZEN_AFTER_GEOMETRY_SELECTION_BEFORE_DEPTH_READ",
+  "selection_receipt":"data/cousteau/JANUS-KUSTO-CD169-EM12-LINE31-CROSSTRACK-HOLDOUT-SELECTION-RECEIPT-2026-09-23-v1.0.json",
+  "selection_freeze_commit":"c53166f2edffa4a7817c6abd42f5313ea520f0d1",
+  "line":31,
+  "holdouts":{
+    "CENTER_1":{"lat":-4.0467114,"lon":-12.2704123},
+    "CENTER_2":{"lat":-4.1151018,"lon":-12.2740956},
+    "CENTER_3":{"lat":-4.0084801,"lon":-12.2137473},
+    "EDGE_1":{"lat":-3.9956817,"lon":-12.2701268},
+    "EDGE_2":{"lat":-4.1394583,"lon":-12.2434622},
+    "EDGE_3":{"lat":-4.110448,"lon":-12.2339197}
+  },
+  "sources":{
+    "CD169_2005":{"file":"B1-81-1_Acceptl28-33.xyz.ascii","sha256":"0e8cac049b53dd6ba0e5013e8aaea2bfb48347db887edc3c4e3e9f697e96dcf0","line_assignment":"nearest 1-minute ship-track polyline among lines 28-33; geometry only"},
+    "KN192-07_2008":{"instrument":"SeaBeam 3012","good_beams_only":true},
+    "KNOX15RR_2008":{"instrument":"Kongsberg EM120","good_beams_only":true}
+  },
+  "local_comparison":{
+    "radius_m":1000,
+    "2005_geometry_thinning":"one line31-attributed sounding per target-centered 100m square cell; sounding nearest cell center; depth not used for thinning",
+    "minimum_2005_thinned_support":30,
+    "2008_estimator":"median good-beam depth within 100m of each retained 2005 coordinate",
+    "minimum_matched_points":30,
+    "fit":"independent best-fit plane per lineage on identical matched support coordinates",
+    "metrics":["residual_pearson","residual_spearman","residual_sign_concordance","median_depth_offset","relief_ratio"],
+    "gate":{"pearson_min":0.60,"spearman_min":0.60,"sign_concordance_min":0.65,"all_required":true},
+    "holdout_pass":"must pass against BOTH 2008 lineages"
+  },
+  "aggregate_gate":{
+    "usable_band_min":2,
+    "SUPPORT_EDGE_SPECIFIC_DEGRADATION":"at least 2 of 3 CENTER holdouts pass and at least 2 of 3 EDGE holdouts fail",
+    "NO_SUPPORT":"otherwise, provided at least 2 usable holdouts exist in each band",
+    "INSUFFICIENT":"fewer than 2 usable holdouts in either band"
+  },
+  "hard_rules":[
+    "EXACT_HOLDOUT_COORDINATES_IMMUTABLE",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_POINT_DROPPING_AFTER_DEPTH_RESULTS",
+    "NO_BAND_REASSIGNMENT",
+    "CAND003_AND_MAR4DEG02S_NOT_INCLUDED_IN_HOLDOUT_GATE",
+    "RESULT_IS_PROCESSING_REPRODUCIBILITY_DIAGNOSTIC_NOT_SEAFLOOR_IDENTITY"
+  ],
+  "claim_ceiling":"HOLDOUT_REPLICATION_OF_LINE31_CROSSTRACK_DEPENDENT_TEMPORAL_REPRODUCIBILITY"
+}
