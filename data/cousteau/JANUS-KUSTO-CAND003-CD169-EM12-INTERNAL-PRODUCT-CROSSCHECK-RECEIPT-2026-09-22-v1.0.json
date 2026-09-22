@@ -1,0 +1,25 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-INTERNAL-PRODUCT-CROSSCHECK-RECEIPT-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T17:51:00Z",
+  "status":"SEALED_INSUFFICIENT_COMMON_PRODUCT_SUPPORT",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-CD169-EM12-INTERNAL-PRODUCT-CROSSCHECK-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit":"29dfda5de18690c2ae80bfe308c6f3f8cdb9514a"
+  },
+  "run":{
+    "github_actions_run_id":35763066372,
+    "artifact_id":10711121133,
+    "artifact_zip_sha256":"4fcd54481e64c21055bc1c01e09e027cfadeabe15e68fb1206129a7cf2e71fce"
+  },
+  "support":{
+    "ACCEPTL15_22":{"points_within_1000m":69,"grid_cells":55},
+    "ACCEPTL28_33":{"points_within_1000m":122,"grid_cells":63},
+    "common_grid_cells":17,
+    "minimum_required":30
+  },
+  "verdict":"INSUFFICIENT_COMMON_PRODUCT_SUPPORT",
+  "interpretation":"The product-demix signature remains valid, but direct internal 2005 product concordance/discordance cannot be decided on the frozen 100m common-grid gate because overlap is too sparse.",
+  "strict_parent_fail":"IMMUTABLE",
+  "next":"GEOMETRY_ONLY_LINE_ATTRIBUTION_DIAGNOSTIC_FOR_BOTH_PRODUCTS",
+  "claim_ceiling":"INTERNAL_PROCESSED_PRODUCT_CROSSCHECK_INSUFFICIENT"
+}
