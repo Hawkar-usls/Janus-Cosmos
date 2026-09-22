@@ -1,0 +1,27 @@
+name: KUSTO Cross-Survey Exact Footprint Audit
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cross_survey_footprint_audit.py'
+      - '.github/workflows/kusto-cross-survey-footprint-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Query exact NCEI multibeam footprints
+        run: python workspace/kusto_cross_survey_footprint_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cross-survey-footprint-audit-v1
+          path: workspace/kusto_cross_survey_out/
+          retention-days: 30
