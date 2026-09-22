@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:40:00Z",
+  "status": "FROZEN_BEFORE_JC169_SOURCE_FILE_OR_ENTRY_INSPECTION",
+  "trigger": {
+    "candidate": "KN19207_CAND_003",
+    "gmrt_exact_swath_polygon_intersection": true,
+    "gmrt_record": {
+      "cruise": "JC169",
+      "vessel": "James Cook",
+      "start": "2018-08-02",
+      "stop": "2018-08-20",
+      "year_field": 2005,
+      "model_id": "EM12",
+      "processor": "org.seabed2030"
+    },
+    "contradiction": "RRS James Cook did not conduct scientific cruises in 2005; catalog date/vessel/year/instrument fields are internally inconsistent."
+  },
+  "allowed_identity_evidence": [
+    "GMRT Cruise Info fields and public notes",
+    "MGDS entry metadata",
+    "processed swath filenames and file timestamps",
+    "internal acquisition timestamps without reading bathymetric depth values",
+    "navigation extents/track metadata",
+    "checksums and file format",
+    "BODC/NOC cruise inventory"
+  ],
+  "forbidden_before_independence_verdict": [
+    "JC169 depth values",
+    "morphology metrics",
+    "correlation with CAND003",
+    "spatial recentering"
+  ],
+  "independence_pass_requires": [
+    "evidence that JC169 source swath files derive from a 2018 RRS James Cook acquisition lineage distinct from CD169-2005",
+    "source file/navigation timestamps incompatible with CD169-2005",
+    "no evidence files are renamed/reprocessed CD169 derivatives"
+  ],
+  "independence_fail_if": [
+    "source files/timestamps identify CD169 2005",
+    "GMRT entry is a metadata alias for CD169-derived bathymetry",
+    "source lineage remains materially ambiguous after available metadata checks"
+  ],
+  "claim_ceiling": "ACQUISITION_IDENTITY_AND_INDEPENDENCE_ONLY"
+}
