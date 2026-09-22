@@ -1,0 +1,38 @@
+{
+  "artifact_id":"JANUS-KUSTO-LINE31-CAND003-VS-KNOWNPOS-NAVSEGMENT-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T21:58:00Z",
+  "status":"FROZEN_BEFORE_SAME_LINE_NAVSEGMENT_EXECUTION",
+  "line":31,
+  "line_window_utc":["2005-02-26T19:11:00Z","2005-02-27T14:40:00Z"],
+  "targets":[
+    {"id":"CAND003_FAIL","lat":-4.015075679897318,"lon":-12.29915403590432,"temporal_result":"FAIL"},
+    {"id":"MAR4DEG02S_KNOWNPOS_PASS","lat":-4.03,"lon":-12.25,"temporal_result":"PASS"}
+  ],
+  "source_nav":"CD169_TOBI/Nav/cd169leg1_1min.listit",
+  "analysis":{
+    "nearest_track_point_per_target":true,
+    "window_minutes_each_side":30,
+    "metrics":[
+      "nearest_track_distance_m",
+      "median_derived_speed_knots",
+      "p10_p90_speed_knots",
+      "circular_heading_std_deg",
+      "median_abs_heading_change_deg_per_min",
+      "p95_abs_heading_change_deg_per_min",
+      "path_length_m",
+      "window_overlap_fraction_between_targets"
+    ],
+    "depth_used":false,
+    "processed_xyz_used":false
+  },
+  "mechanism_support_rule":"Navigation-state mechanism is supported only if the failing CAND003 segment shows materially greater instability than the passing known-positive segment on the same line31; no numeric threshold is used for causal promotion, and the result remains diagnostic.",
+  "hard_rules":[
+    "SAME_LINE_ONLY",
+    "NO_DEPTH",
+    "NO_PROCESSED_XYZ",
+    "NO_WINDOW_RETUNING",
+    "NO_CAUSALITY_CLAIM",
+    "KNOWN_POSITIVE_PASS_AND_CAND003_FAIL_REMAIN_IMMUTABLE"
+  ],
+  "claim_ceiling":"SAME_LINE_LOCATION_SPECIFIC_NAVSTATE_MECHANISM_DIAGNOSTIC_ONLY"
+}
