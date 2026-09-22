@@ -1,0 +1,50 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-LINE31-LEAVE-ONE-CELL-OUT-INFLUENCE-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:10:00Z",
+  "status":"FROZEN_BEFORE_INFLUENCE_EXECUTION",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "parent":{
+    "strict_temporal_verdict":"FAIL_STRICT_2005_TO_2008_LOCAL_MORPHOLOGY_REPLICATION_AT_FROZEN_CAND003_CENTER",
+    "line31_status":"FAIL_VS_BOTH_2008_LINEAGES",
+    "topology_receipt":"data/cousteau/JANUS-KUSTO-CAND003-LINE31-LOCAL-RESIDUAL-TOPOLOGY-RECEIPT-2026-09-23-v1.0.json"
+  },
+  "support_reconstruction":{
+    "radius_m":1000,
+    "2005_source":"B1-81-1_Acceptl28-33.xyz.ascii, geometry-attributed line31 only",
+    "2005_thinning":"one sounding per target-centered 100m cell selected nearest cell center without depth",
+    "2008_match_radius_m":100,
+    "require_both_2008_lineages_per_support_point":true,
+    "consensus":"median of KN192-07 and KNOX15RR median-good-beam depth estimates",
+    "detrending":"independent best-fit planes on identical joint support"
+  },
+  "analysis":{
+    "full_sample_metrics":["pearson","spearman","sign_concordance","rmse_delta"],
+    "leave_one_out":"for every joint support cell, remove exactly that one cell, refit both independent planes on the remaining points, and recompute all metrics",
+    "no_cell_is_selected_in_advance_for_removal":true,
+    "report":[
+      "minimum_and_maximum_leave_one_out_pearson",
+      "median_leave_one_out_pearson",
+      "number_of_leave_one_out_runs_with_pearson_ge_0p60",
+      "number_of_leave_one_out_runs_passing_original_three_metric_gate",
+      "most_influential_cell_by_positive_delta_pearson",
+      "least_influential_or_negative_effect_cell",
+      "top_10_influence_records",
+      "jackknife_pearson_range"
+    ]
+  },
+  "diagnostic_labels":{
+    "SINGLE_CELL_DOMINATED":"at least one leave-one-out run passes the original three-metric gate while the full sample fails it",
+    "DISTRIBUTED_OR_MULTI_CELL_DISCORDANCE":"no leave-one-out run passes the original three-metric gate",
+    "INSUFFICIENT":"joint support below 30"
+  },
+  "hard_rules":[
+    "STRICT_PARENT_FAIL_IMMUTABLE",
+    "NO_CELL_REMOVAL_MAY_PROMOTE_THE_SCIENTIFIC_VERDICT",
+    "NO_OUTLIER_THRESHOLD",
+    "NO_RETAINING_ONLY_FAVORABLE_LEAVE_ONE_OUT_RUNS",
+    "REPORT_ALL_LEAVE_ONE_OUT_RUNS",
+    "NO_MATCH_RADIUS_OR_GRID_RETUNING",
+    "NO_RECENTERING"
+  ],
+  "claim_ceiling":"POSTHOC_INFLUENCE_DIAGNOSTIC_OF_FROZEN_CAND003_LINE31_DISCORDANCE"
+}
