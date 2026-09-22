@@ -1,0 +1,33 @@
+{
+  "artifact_id": "JANUS-KUSTO-CAND003-CD169-EM12-EMPIRICAL-SWATH-EDGE-DIAGNOSTIC-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_NO_EMPIRICAL_SWATH_EDGE_MECHANISM",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-CAND003-CD169-EM12-EMPIRICAL-SWATH-EDGE-DIAGNOSTIC-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "f692644d4fd2fb0f3199b9614f7b53bc67968935"
+  },
+  "run": {
+    "github_actions_run_id": 35767298974,
+    "artifact_id": 10711919876,
+    "artifact_zip_sha256": "d09d96b57d5ccd916bf8d5fadc10f6fb03771f8417569cd9f41604650648022e",
+    "conclusion": "success"
+  },
+  "products": {
+    "Acceptl15-22_line18": {
+      "target_points": 69,
+      "median_cross_track_m": 5817.5943044778505,
+      "median_empirical_percentile": 0.9755102040816327,
+      "fraction_ge_0p95": 0.6666666666666666
+    },
+    "Acceptl28-33_line31": {
+      "target_points": 121,
+      "median_cross_track_m": 4599.345342456141,
+      "median_empirical_percentile": 0.9757749912922327,
+      "fraction_ge_0p95": 1
+    }
+  },
+  "median_percentile_gap_line31_minus_line18": 0.00026478721059997046,
+  "diagnostic_signature_pass": false,
+  "verdict": "NO_EMPIRICAL_SWATH_EDGE_MECHANISM",
+  "interpretation": "Both the passing line18 lineage and failing line31 lineage sample CAND003 at similarly extreme empirical cross-track positions. Edge-of-swath placement alone therefore does not distinguish the two outcomes.",
+  "claim_ceiling": "GEOMETRIC_MECHANISM_DIAGNOSTIC_ONLY"
+}
