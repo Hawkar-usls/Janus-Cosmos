@@ -1,0 +1,65 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-DOMINANT-CELLS-ALL66-RAW-BEAM-GEOMETRY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:36:00Z",
+  "status":"FROZEN_BEFORE_RAW_BEAM_GEOMETRY_SCAN",
+  "targets":[
+    {"id":"CELL_A","lat":-4.0165853,"lon":-12.2985657,"processed_depth_m":4025.08},
+    {"id":"CELL_B","lat":-4.0152462,"lon":-12.299318,"processed_depth_m":4036.31}
+  ],
+  "processed_depths_are_not_used_for_selection":true,
+  "source":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "entries":66,
+    "format":"MBF_EMOLDRAW 51"
+  },
+  "source_exact_geometry":{
+    "authority":[
+      "MB-System src/mbio/mbr_emoldraw.c",
+      "MB-System src/mbio/mbsys_simrad.c",
+      "MB-System src/mbio/mb_navint.c",
+      "MB-System src/mbio/mbsys_simrad.h"
+    ],
+    "nav":"Parse embedded EM_POS records; emulate mb_navint_add/mb_navint_interp in stream order. Between known fixes interpolate linearly; after latest available fix extrapolate with stored raw speed and line heading.",
+    "ping_heading":"0.1 degree * raw EM12 ping heading",
+    "offset_scales":{
+      "bath_res_1":{"across_m_per_unit":0.2,"along_m_per_unit":0.2},
+      "bath_res_2":{"across_m_per_unit":0.5,"along_m_per_unit":0.5}
+    },
+    "beam_offsets":"Use raw across-track and along-track shorts only; do not read raw depth shorts during Stage A.",
+    "earth_projection":"Apply heading rotation to across/along offsets and geodesic local-meter conversion at ping latitude."
+  },
+  "stage_A":{
+    "scan_all_66_entries":true,
+    "depth_bytes_read":false,
+    "report_per_cell":[
+      "nearest_raw_beam_geometry_distance_m",
+      "raw_filename",
+      "ping_utc",
+      "ping_number",
+      "beam_index",
+      "bath_res",
+      "ping_heading_deg",
+      "interpolated_or_extrapolated_nav",
+      "raw_across_m",
+      "raw_along_m"
+    ],
+    "distance_bands_m":[50,100,250,500,1000],
+    "geometry_support_pass_m":100
+  },
+  "stage_B":{
+    "not_authorized_until_stage_A_is_frozen":true,
+    "if_stage_A_pass":"Read depth only for preregistered geometry-selected raw ping/beam neighborhood and compare with processed 2005 and independent 2008 depths.",
+    "if_stage_A_fail":"Seal NO_PRESERVED_RAW_BEAM_GEOMETRY_SUPPORT; do not infer processed depth error."
+  },
+  "hard_rules":[
+    "NO_PROCESSED_DEPTH_IN_RAW_BEAM_SELECTION",
+    "NO_PROJECTED_TIME_FILTER",
+    "SCAN_ALL_66_RAW_FILES",
+    "NO_RECENTERING",
+    "NO_BEAM_DISTANCE_THRESHOLD_RETUNING",
+    "STRICT_TEMPORAL_FAIL_IMMUTABLE",
+    "STAGE_A_GEOMETRY_NE_STAGE_B_DEPTH"
+  ],
+  "claim_ceiling":"PRESERVED_RAW_EM12_BEAM_GEOMETRY_PROVENANCE_ONLY"
+}
