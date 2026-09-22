@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_INDEPENDENCE_FAIL__GMRT_JC169_POLYGON_NOT_VALID_AS_CAND003_ACQUISITION",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-GMRT-JC169-INDEPENDENCE-AUDIT-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "015295dd90329cce197bed6a86f6e1a306b779df"
+  },
+  "runs": [
+    {
+      "github_actions_run_id": 35768430592,
+      "artifact_id": 10712449046,
+      "artifact_zip_sha256": "492cfa31a83598b215585af173ae0576d7572e3ef599be51e71c27927d228252"
+    },
+    {
+      "github_actions_run_id": 35768566158,
+      "conclusion": "success"
+    }
+  ],
+  "gmrt_record": {
+    "cruise": "JC169",
+    "platform": "James Cook",
+    "gmrt_start": "2018-08-02",
+    "gmrt_stop": "2018-08-20",
+    "gmrt_year_field": "2005",
+    "device_make": "Kongsberg",
+    "device_model": "EM12",
+    "bounds": {
+      "west": -21.002238,
+      "east": -11.274369,
+      "south": -7.896333,
+      "north": 10.478498
+    },
+    "chief": "Dr. Andrew Henson",
+    "public_notes": "Refraction corrections made within transit files and extraneous files removed."
+  },
+  "primary_bodc_record": {
+    "url": "https://www.bodc.ac.uk/resources/inventories/cruise_inventory/report/16976/",
+    "sha256": "830b9229789b08befaf3e1d563e5d514fb7f21f6e54304e7ebdd48ac25bf5d3c",
+    "ship": "RRS James Cook",
+    "identifier": "JC169",
+    "cruise_period": "2018-08-02 to 2018-08-20",
+    "departure": "Amsterdam, Netherlands",
+    "return_port": "Southampton, United Kingdom",
+    "purpose": "Trials",
+    "objectives": "Post Refit Trials",
+    "chief_scientist": "Andrew Henson",
+    "sea_areas": [
+      "English Channel",
+      "North Sea"
+    ]
+  },
+  "independence_logic": {
+    "candidate": "KN19207_CAND_003",
+    "candidate_location": {
+      "lat": -4.015075679897318,
+      "lon": -12.29915403590432
+    },
+    "contradiction": "The primary BODC JC169 cruise identity is confined to English Channel/North Sea trials in August 2018, while the GMRT swath polygon attributed to JC169 spans the equatorial/South Atlantic and intersects CAND003. The GMRT year/device fields are also inconsistent with the primary cruise identity.",
+    "depth_values_read": false,
+    "can_count_as_independent_candidate_acquisition": false
+  },
+  "verdict": "FAIL_ACQUISITION_IDENTITY__DO_NOT_COUNT_JC169_AS_THIRD_SURVEY",
+  "interpretation": "The GMRT polygon record is not trustworthy as evidence that the actual JC169 cruise acquired bathymetry at CAND003. Its precise underlying misattribution/legacy source is not asserted here.",
+  "claim_ceiling": "ACQUISITION_IDENTITY_AND_INDEPENDENCE_ONLY"
+}
