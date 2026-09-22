@@ -1,0 +1,36 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-DOMINANT-CELLS-RAW-PROVENANCE-HUNT-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:18:00Z",
+  "status":"FROZEN_BEFORE_ARCHIVE_TREE_AND_TIME_BINDING",
+  "scope":{
+    "archive_root":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281",
+    "recursive_inventory":true,
+    "max_depth":8,
+    "no_file_content_required_except_small_text_metadata_and_navigation"
+  },
+  "frozen_cells":[
+    {"id":"DOMINANT_12","lat":-4.0165853,"lon":-12.2985657,"role":"appears_in_all_4_passing_leave_two_pairs"},
+    {"id":"DOMINANT_10","lat":-4.0152462,"lon":-12.299318,"role":"partner_in_best_leave_two_pair"}
+  ],
+  "line31":{
+    "window_utc":["2005-02-26T19:11:00Z","2005-02-27T14:40:00Z"],
+    "navigation":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11281/Nav/cd169leg1_1min.listit",
+    "time_binding":"project each frozen Earth coordinate to the nearest segment of the line31 1-minute ship track and linearly interpolate timestamp within that segment",
+    "warning":"projected ship-track time is not raw beam/ping provenance because the cells are cross-track soundings"
+  },
+  "archive_name_search":{
+    "tokens":["raw","mermaid","merlin","opu","em12","line31","line_31","cd169_31","svp","soundvelocity","sound_velocity","neptune","beam","swath","all","dat","bin","log","proc","process","history"],
+    "extensions":[".all",".raw",".dat",".bin",".log",".lst",".list",".txt",".cfg",".conf",".svp",".vel",".nav",".ascii",".xyz"]
+  },
+  "small_text_read":{
+    "max_bytes":2000000,
+    "patterns":["line 31","line31","CD169_31","Mermaid","OPU","Neptune","SVP","sound velocity","raw","EM12"]
+  },
+  "hard_rules":[
+    "NO_CLAIM_RAW_DATA_DO_NOT_EXIST_IF_NOT_PRESENT_IN_ACCESSIBLE_TREE",
+    "NO_CONFLATION_OF_TOBI_ORIGINATOR_UNPROCESSED_HOLDINGS_WITH_EM12_RAW",
+    "PROJECTED_SHIP_TIME_NE_RAW_PING_TIME",
+    "NO_NEW_SCIENTIFIC_VERDICT_FROM_PROVENANCE_DISCOVERY"
+  ],
+  "claim_ceiling":"ACCESSIBLE_ARCHIVE_RAW_PROVENANCE_DISCOVERY_AND_APPROXIMATE_LINE31_TIME_BINDING_ONLY"
+}
