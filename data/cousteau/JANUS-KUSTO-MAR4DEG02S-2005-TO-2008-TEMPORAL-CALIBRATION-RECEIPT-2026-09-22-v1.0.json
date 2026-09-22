@@ -1,0 +1,80 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAR4DEG02S-2005-TO-2008-TEMPORAL-CALIBRATION-RECEIPT-2026-09-22-v1.0",
+  "status": "SEALED_PASS_EXTERNAL_KNOWN_POSITIVE_THREE_YEAR_CALIBRATION",
+  "prereg": {
+    "path": "data/cousteau/JANUS-KUSTO-MAR4DEG02S-2005-TO-2008-TEMPORAL-CALIBRATION-PREREG-2026-09-22-v1.0.json",
+    "freeze_commit": "4b527f0c081b4de138e497d1b871a3c3936f58ea"
+  },
+  "run": {
+    "github_actions_run_id": 35766152329,
+    "artifact_id": 10712855124,
+    "artifact_zip_sha256": "4f02ae4aeef2ad4c00fa8628d46ecc45c38fa79b55cd1fd7e8f16ff4cb109d9b",
+    "conclusion": "success"
+  },
+  "target": {
+    "id": "MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "lat": -4.03,
+    "lon": -12.25,
+    "role": "external approximate known natural hydrothermal/tectonic region"
+  },
+  "support": {
+    "CD169_EM12_2005": {
+      "nearest_m": 24.353364032703112,
+      "n1000": 1919
+    },
+    "KN192-07_2008": {
+      "nearest_m": 4.381723957036692,
+      "n1000": 12744
+    },
+    "KNOX15RR_2008": {
+      "nearest_m": 18.242900443234568,
+      "n1000": 260
+    }
+  },
+  "strict_pairwise": {
+    "CD169_2005_vs_KN192_2008": {
+      "common_cells": 278,
+      "pearson": 0.8599745639418475,
+      "spearman": 0.8542736091783378,
+      "sign": 0.8489208633093526,
+      "median_depth_offset_m": -8.609493097066661,
+      "gradient_azimuth_difference_deg": 0.1406635554908462,
+      "pass": true
+    },
+    "CD169_2005_vs_KNOX15RR_2008": {
+      "common_cells": 203,
+      "pearson": 0.7883222288171902,
+      "spearman": 0.7804984062590554,
+      "sign": 0.8325123152709359,
+      "median_depth_offset_m": -7.685122912525912,
+      "gradient_azimuth_difference_deg": 1.6497174172700966,
+      "pass": true
+    },
+    "KN192_2008_vs_KNOX15RR_2008": {
+      "common_cells": 234,
+      "pearson": 0.7142918463108837,
+      "spearman": 0.7108293587519231,
+      "sign": 0.7863247863247863,
+      "pass": true
+    }
+  },
+  "support_matched_primary_100m": {
+    "KN192-07_2008": {
+      "matched": 290,
+      "pearson": 0.8923226242543583,
+      "spearman": 0.8865898196337567,
+      "sign": 0.8344827586206897,
+      "pass": true
+    },
+    "KNOX15RR_2008": {
+      "matched": 290,
+      "pearson": 0.8485181635015231,
+      "spearman": 0.835873238067942,
+      "sign": 0.8172413793103448,
+      "pass": true
+    }
+  },
+  "verdict": "KNOWN_POSITIVE_THREE_YEAR_TEMPORAL_PIPELINE_CALIBRATION_PASS",
+  "interpretation": "The temporal pipeline reproduces an externally selected known natural region across CD169 EM12 2005 and both independent 2008 multibeam surveys. Therefore pooled CAND003 failure cannot be attributed to a universal inability of the 2005 EM12 product family to reproduce 2008 morphology.",
+  "claim_ceiling": "TEMPORAL_PIPELINE_CALIBRATION_ON_EXTERNAL_KNOWN_NATURAL_REGION__NO_EXACT_VENT_IDENTITY"
+}
