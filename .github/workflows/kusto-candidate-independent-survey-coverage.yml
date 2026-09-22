@@ -1,0 +1,31 @@
+name: KUSTO Candidate Independent Survey Coverage
+
+on:
+  push:
+    branches:
+      - feature/kusto-open-seafloor-sweep-v1
+    paths:
+      - 'workspace/kusto_candidate_independent_survey_coverage.py'
+      - '.github/workflows/kusto-candidate-independent-survey-coverage.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requests
+        run: pip install --disable-pip-version-check requests
+      - name: Run exact NCEI footprint audit
+        run: python workspace/kusto_candidate_independent_survey_coverage.py
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: kusto-candidate-independent-survey-coverage-v1
+          path: workspace/kusto_crosssurvey_out/
+          retention-days: 30
