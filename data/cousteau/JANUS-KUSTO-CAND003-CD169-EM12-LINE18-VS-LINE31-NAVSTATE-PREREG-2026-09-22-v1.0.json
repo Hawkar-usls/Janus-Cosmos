@@ -1,0 +1,28 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-CD169-EM12-LINE18-VS-LINE31-NAVSTATE-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T18:57:00Z",
+  "status":"FROZEN_BEFORE_NAVIGATION_STATE_EXECUTION",
+  "target":{"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432},
+  "line18":{"start":"2005-02-24T00:02:00Z","end":"2005-02-24T01:59:00Z","source_context":"planned swath survey / WP4-era line"},
+  "line31":{"start":"2005-02-26T19:11:00Z","end":"2005-02-27T14:40:00Z","source_context":"transit to TOBI 02 re-deployment"},
+  "navigation_source":"CD169_TOBI/Nav/cd169leg1_1min.listit",
+  "analysis":{
+    "nearest_track_point_to_target":true,
+    "window_around_nearest_minutes":30,
+    "metrics":[
+      "nearest_ship_track_distance_m",
+      "median_derived_speed_knots",
+      "p10_p90_speed_knots",
+      "median_heading_deg",
+      "circular_heading_std_deg",
+      "median_abs_heading_change_deg_per_min",
+      "p95_abs_heading_change_deg_per_min",
+      "track_path_length_m_in_window"
+    ],
+    "depth_used":false,
+    "processed_xyz_used":false
+  },
+  "interpretation_rule":"This diagnostic may establish an operational/nav-state difference but cannot by itself prove that the difference caused the bathymetric mismatch.",
+  "hard_rules":["NO_DEPTH","NO_RETUNING","NO_POSTHOC_WINDOW_CHANGE","NO_CAUSALITY_CLAIM_FROM_ASSOCIATION"],
+  "claim_ceiling":"NAVIGATION_STATE_MECHANISM_DIAGNOSTIC_ONLY"
+}
