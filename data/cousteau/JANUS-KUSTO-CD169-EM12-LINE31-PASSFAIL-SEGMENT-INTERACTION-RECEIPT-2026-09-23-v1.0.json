@@ -1,0 +1,51 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-LINE31-PASSFAIL-SEGMENT-INTERACTION-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T21:58:00Z",
+  "status":"SEALED_STRONG_CROSS_TRACK_CONTRAST__NAVSTATE_CAUSE_NOT_SUPPORTED",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CD169-EM12-LINE31-PASSFAIL-SEGMENT-INTERACTION-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"6684737d941481b2e462ecf4fff569651a1a09c8"
+  },
+  "run":{
+    "github_actions_run_id":35789544895,
+    "artifact_id":10721825895,
+    "artifact_zip_sha256":"fea18c2de2c583c6ddaff2d66c534eae75702e2348cd4a5e3d523301e42d03bb",
+    "conclusion":"success"
+  },
+  "same_line":31,
+  "CAND003_FAIL":{
+    "median_cross_track_m":4599.345342456141,
+    "median_empirical_cross_track_percentile":0.9757749912922327,
+    "fraction_percentile_ge_0p95":1.0,
+    "nearest_ship_track_m":5194.97787800693,
+    "median_speed_knots":9.714394195783871,
+    "heading_std_deg":24.57958764749991,
+    "p95_turn_deg_per_min":25.388292391202125
+  },
+  "MAR4DEG02S_PASS":{
+    "median_cross_track_m":361.87977297214775,
+    "median_empirical_cross_track_percentile":0.26329676071055386,
+    "fraction_percentile_ge_0p95":0.0,
+    "nearest_ship_track_m":254.04509032634024,
+    "median_speed_knots":9.714394195783871,
+    "heading_std_deg":43.35256087234813,
+    "p95_turn_deg_per_min":61.70719690009313
+  },
+  "effect_sizes":{
+    "cross_track_distance_ratio_fail_over_pass":12.709594970399554,
+    "empirical_percentile_difference_fail_minus_pass":0.7124782305816788,
+    "nearest_ship_track_distance_ratio_fail_over_pass":20.449038677872444,
+    "heading_std_ratio_fail_over_pass":0.5669696819035593,
+    "p95_turn_rate_ratio_fail_over_pass":0.4114316265622464,
+    "median_speed_ratio_fail_over_pass":1.0
+  },
+  "interpretation":[
+    "A global line31 defect is already falsified by the known-positive line31 PASS.",
+    "A high-maneuver nav-state explanation is not supported: the PASS location has greater heading dispersion and upper-tail turn rate.",
+    "The strongest remaining descriptive contrast is cross-track geometry: CAND003 occupies the extreme outer tail of line31 soundings while the known-positive PASS lies near the inner quarter.",
+    "Cross-track edge alone is not sufficient because CAND003 line18 also occupies an extreme empirical edge and nevertheless reproduces both 2008 lineages.",
+    "Therefore the current mechanism candidate is an interaction between line31/local processing regime and extreme cross-track placement; causality remains unproven."
+  ],
+  "next":"GEOMETRY_ONLY_HOLDOUT_SELECTION_FOR_LINE31_CENTER_VS_EXTREME_EDGE__FREEZE_COORDINATES_BEFORE_DEPTH",
+  "claim_ceiling":"SAME_LINE31_LOCAL_SEGMENT_INTERACTION_DIAGNOSTIC_ONLY"
+}
