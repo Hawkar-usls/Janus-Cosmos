@@ -1,0 +1,61 @@
+{
+  "artifact_id": "JANUS-KUSTO-CD169-EM12-ACQUISITION-REGIME-CALIBRATION-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T18:22:00Z",
+  "status": "FROZEN_BEFORE_EXTERNAL_KNOWN_POSITIVE_PRODUCT_SPECIFIC_EXECUTION",
+  "calibration_target": {
+    "id": "MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "lat": -4.03,
+    "lon": -12.25,
+    "selection_origin": "external literature-known natural region"
+  },
+  "source_native_regimes": {
+    "DEDICATED_MAPPING": {
+      "processed_product": "B1-81-1_Acceptl15-22.xyz.ascii",
+      "source_lines": "15-22",
+      "source_basis": "Initial dedicated swath survey after regional SVP application; cruise report states survey intended to fill bathymetric gaps / locate ridge axis / provide TOBI roadmap and reports generally good data quality except outer 5-10 beams."
+    },
+    "LATER_OPERATIONAL_TOBI_TRANSIT": {
+      "processed_product": "B1-81-1_Acceptl28-33.xyz.ascii",
+      "source_lines": "28-33",
+      "source_basis": "Later operational acquisition during TOBI-era transits/redeployments; Appendix D includes line 31 transit to TOBI 02 re-deployment and line 32 TOBI survey 02."
+    }
+  },
+  "important_epistemic_note": "Regime labels are source-derived from cruise documentation. They do NOT predeclare that either product must pass or fail. Both products must be tested and reported.",
+  "comparison": {
+    "frozen_center": "MAR_4DEG02S_PUBLISHED_REGION_CAL",
+    "radius_m": 1000,
+    "geometry_thinning": "one 2005 sounding per 100m candidate-centered square cell chosen nearest cell center without using depth",
+    "comparators": [
+      "KN192-07_2008",
+      "KNOX15RR_2008"
+    ],
+    "depth_estimator": "median good-beam depth within 100m of each retained 2005 support coordinate",
+    "minimum_matched_points": 30,
+    "gate": {
+      "pearson_min": 0.6,
+      "spearman_min": 0.6,
+      "sign_concordance_min": 0.65,
+      "all_required": true
+    }
+  },
+  "calibration_question": "Does the source-native dedicated-mapping vs later-operational product distinction produce a reproducible difference in temporal morphology fidelity on the external known-positive region?",
+  "interpretation_rules": {
+    "dedicated_passes_both_later_fails_any": "SOURCE_NATIVE_ACQUISITION_REGIME_FIDELITY_DIFFERENCE_SUPPORTED",
+    "both_pass_both": "NO_GLOBAL_LATER_PRODUCT_FAILURE__CAND003_DIFFERENCE_IS_LOCATION_OR_SUPPORT_SPECIFIC",
+    "dedicated_fails": "NO_EVIDENCE_DEDICATED_MAPPING_PRODUCT_IS_GLOBALLY_MORE_RELIABLE",
+    "insufficient": "INSUFFICIENT_PRODUCT_SPECIFIC_SUPPORT"
+  },
+  "hard_rules": [
+    "KNOWN_POSITIVE_NE_DISCOVERY",
+    "SOURCE_REGIME_DEFINED_WITHOUT_TARGET_MORPHOLOGY",
+    "TEST_BOTH_PRODUCTS",
+    "NO_PRODUCT_DROPPING",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_DEPTH_BASED_SUPPORT_SELECTION",
+    "CAND003_STRICT_PARENT_FAIL_IMMUTABLE",
+    "PRODUCT_SPECIFIC_PASS_NE_RAW_PING_PROVENANCE"
+  ],
+  "claim_ceiling": "SOURCE_NATIVE_PROCESSED_PRODUCT_REGIME_CALIBRATION_ONLY"
+}
