@@ -1,0 +1,65 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12-X-2008-CAND002-003-PREREG-2026-09-22-v1.0",
+  "created_utc":"2026-09-22T15:40:00Z",
+  "status":"FROZEN_BEFORE_CD169_EM12_XYZ_COORDINATE_OR_DEPTH_INSPECTION_FOR_CANDIDATES",
+  "targets":[
+    {"id":"KN19207_CAND_002","lat":-3.9727527956056825,"lon":-12.272824298723462},
+    {"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432}
+  ],
+  "source":{
+    "cruise":"CD169",
+    "year":2005,
+    "instrument":"Simrad EM12 shipborne multibeam",
+    "archive_root":"BODCREQ-9406/CD169_TOBI/sd11281/EM12",
+    "file_pattern":"*.xyz.ascii",
+    "provider":"BODC/NOC archive",
+    "independence":"different cruise/year/platform acquisition from KN192-07 and KNOX15RR"
+  },
+  "phase_A_xy_only":{
+    "depth_column_read":false,
+    "selection":"all source files with at least one sounding XY within 1000 m of frozen candidate; report <=50, <=100, <=250, <=500, <=1000 m counts",
+    "local_support_pass":"nearest sounding <=100 m",
+    "no_depth_based_file_selection":true
+  },
+  "phase_B_only_after_A":{
+    "depth_allowed":true,
+    "radii_m":[250,500,1000],
+    "metrics":[
+      "nearest_good_sounding_depth",
+      "median_depth",
+      "p05_p95_relief",
+      "plane_gradient_vector",
+      "plane_detrended_rmse",
+      "quadratic_hessian_eigenvalues",
+      "radial_quadratic_r2"
+    ]
+  },
+  "stage_C_cross_year_if_phase_B_support":{
+    "comparison_lineages":[
+      "CD169_EM12_2005",
+      "KN192-07_SEABEAM3012_2008",
+      "KNOX15RR_EM120_2008"
+    ],
+    "primary_center":"frozen candidate coordinate; no recentering",
+    "common_grid_cell_m":100,
+    "radius_m":1000,
+    "minimum_common_cells_CD169_vs_each_2008":30,
+    "primary_gate":{
+      "pearson_residual_min":0.60,
+      "spearman_residual_min":0.60,
+      "residual_sign_concordance_min":0.65,
+      "all_required":true
+    }
+  },
+  "hard_rules":[
+    "XY_BEFORE_DEPTH",
+    "NO_DEPTH_BASED_FILE_SELECTION",
+    "NO_RECENTERING",
+    "NO_ROTATION",
+    "NO_THRESHOLD_RETUNING",
+    "NO_2008_MORPHOLOGY_USED_TO_SELECT_2005_FILE",
+    "TOBI_SIDESCAN_NOT_USED_AS_DEPTH",
+    "FAIL_PRESERVED"
+  ],
+  "claim_ceiling":"THREE_YEAR_CROSS_SURVEY_BATHYMETRIC_REPRODUCIBILITY_ONLY"
+}
