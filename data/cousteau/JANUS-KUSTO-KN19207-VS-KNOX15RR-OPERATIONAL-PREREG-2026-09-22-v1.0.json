@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-KUSTO-KN19207-VS-KNOX15RR-OPERATIONAL-PREREG-2026-09-22-v1.0",
+  "created_utc": "2026-09-22T15:40:00Z",
+  "status": "FROZEN_BEFORE_CROSS_SURVEY_BEAM_COMPARISON",
+  "eligible_candidates": [
+    {"id":"KN19207_CAND_002","lat":-3.9727527956056825,"lon":-12.272824298723462},
+    {"id":"KN19207_CAND_003","lat":-4.015075679897318,"lon":-12.29915403590432}
+  ],
+  "lineages": {
+    "A": {"survey":"KN192-07","platform":"Knorr","instrument":"SeaBeam 3012","acquisition":"2007-12-31_to_2008-01-17"},
+    "B": {"survey":"KNOX15RR","platform":"Roger Revelle","instrument":"Kongsberg EM120","acquisition":"2008-03-20_to_2008-04-17"}
+  },
+  "input_rule": "Use NCEI MB-System generated FBT files from each independent raw survey lineage; parse both with the same MBF_MBLDEOIH reader and the same beam-position transform.",
+  "support_gate": {
+    "nearest_good_beam_max_m_each_lineage": 100,
+    "minimum_good_beams_within_1000m_each_lineage": 100,
+    "failure_means": "NO_CROSS_SURVEY_MORPHOLOGY_TEST"
+  },
+  "common_grid": {
+    "center": "frozen_candidate_coordinate",
+    "recenter": false,
+    "radius_m": 1000,
+    "cell_size_m": 100,
+    "cell_statistic": "median_depth_of_good_beams",
+    "cell_valid_if": "at_least_one_good_beam_from_that_lineage",
+    "common_cell_minimum": 30
+  },
+  "detrending": {
+    "fit": "independent_best_fit_plane_per_lineage_using_only_common_cells",
+    "compare": "residuals_on_identical_common_Earth_cells"
+  },
+  "primary_reproduction_gate": {
+    "pearson_residual_correlation_min": 0.60,
+    "spearman_residual_correlation_min": 0.60,
+    "residual_sign_concordance_min": 0.65,
+    "all_three_required": true
+  },
+  "secondary_report_only": [
+    "median_depth_offset_B_minus_A",
+    "p05_p95_relief_ratio",
+    "plane_gradient_magnitude_ratio",
+    "plane_gradient_azimuth_difference_deg",
+    "plane_detrended_rmse_ratio",
+    "quadratic_hessian_eigenvalues_each_lineage",
+    "radial_quadratic_r2_each_lineage"
+  ],
+  "interpretation": {
+    "PASS": "LOCAL_BATHYMETRIC_MORPHOLOGY_REPRODUCED_ACROSS_INDEPENDENT_SURVEYS",
+    "FAIL": "NO_CROSS_SURVEY_MORPHOLOGY_REPLICATION_AT_FROZEN_CENTER",
+    "ceiling": "Does not establish novelty, hydrothermal identity, artificiality, or archaeology."
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_ROTATION_TO_MAXIMIZE_CORRELATION",
+    "NO_CELL_SIZE_RETUNING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_REMOVAL_OF_DISCORDANT_COMMON_CELLS",
+    "NO_ABSOLUTE_DEPTH_OFFSET_AS_REPLICATION"
+  ]
+}
