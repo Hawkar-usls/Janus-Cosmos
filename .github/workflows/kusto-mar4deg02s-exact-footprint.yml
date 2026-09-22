@@ -1,0 +1,22 @@
+name: KUSTO MAR 4deg02S Exact Footprint
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_mar4deg02s_exact_footprint.py'
+      - '.github/workflows/kusto-mar4deg02s-exact-footprint.yml'
+jobs:
+  footprint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: mkdir -p workspace/kusto_cross_survey_out && python workspace/kusto_mar4deg02s_exact_footprint.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-mar4deg02s-exact-footprint-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-MAR-4DEG02S-EXACT-NCEI-FOOTPRINT-2026-09-22-v1.0.json
+          retention-days: 30
