@@ -1,0 +1,47 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-EM12RAW-ZIP-TIME-LOCATOR-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T22:23:00Z",
+  "status":"FROZEN_BEFORE_RAW_ZIP_CONTENT_OR_BATHYMETRY_INSPECTION",
+  "source":{
+    "ftp_path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "reported_size_bytes":714120689,
+    "readme_path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/README.txt",
+    "readme_statement":"66 raw Kongsberg-Simrad EM12 files from CD169; some corrupt raw EM12 files were omitted, producing an incomplete numbering sequence"
+  },
+  "frozen_target_interval":{
+    "line_geometry_inferred":31,
+    "cell_A_projected_ship_utc":"2005-02-26T21:18:38.275325Z",
+    "cell_B_projected_ship_utc":"2005-02-26T21:18:46.759834Z",
+    "locator_window_utc":["2005-02-26T21:16:00Z","2005-02-26T21:21:00Z"],
+    "selection_reason":"geometry/time only; no depth or agreement with 2008"
+  },
+  "stage_0":{
+    "download_exact_zip":true,
+    "record_zip_sha256":true,
+    "verify_zip_integrity":"zipfile test / CRC",
+    "no_scientific_interpretation_if_corrupt":true
+  },
+  "stage_A_directory_only":{
+    "list_all_entries":true,
+    "record":["filename","compressed_size","uncompressed_size","CRC","zip_datetime"],
+    "extract_bathymetry":false
+  },
+  "stage_B_time_locator":{
+    "allowed_only_after_stage_A":true,
+    "selection":"Use filename-encoded time/date or raw-record timestamps only. No depth values, beam amplitudes, or morphology may be inspected for file selection.",
+    "report_gap_if_target_time_missing":true,
+    "report_if_omitted_corrupt_file_sequence_could_cover_target":true
+  },
+  "stage_C_future_beam_forensics":{
+    "not_authorized_by_this_prereg":true,
+    "requires_new_prereg_after_exact raw file and timestamp coverage are frozen"
+  },
+  "hard_rules":[
+    "TIME_GEOMETRY_BEFORE_DEPTH",
+    "NO_FILE_SELECTION_BY_BATHYMETRY",
+    "NO_RETARGETING",
+    "NO_REINTERPRETATION_OF_PARENT_TEMPORAL_FAIL",
+    "CORRUPT_OR_MISSING_RAW_INTERVAL_MUST_BE_PRESERVED_AS_NEGATIVE_ARCHIVAL_RESULT"
+  ],
+  "claim_ceiling":"RAW_ARCHIVE_FILE_AND_TIME_PROVENANCE_LOCATOR_ONLY"
+}
