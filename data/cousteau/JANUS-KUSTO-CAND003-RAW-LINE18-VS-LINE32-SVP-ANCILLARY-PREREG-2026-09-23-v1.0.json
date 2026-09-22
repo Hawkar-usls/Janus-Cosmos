@@ -1,0 +1,83 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SVP-ANCILLARY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-22T23:37:00Z",
+  "status":"FROZEN_BEFORE_SVP_OR_ANCILLARY_VALUE_INSPECTION",
+  "parent":{
+    "raw_depth_receipt":"data/cousteau/JANUS-KUSTO-CAND003-DOMINANT-CELLS-RAW-DEPTH-STAGEB-RECEIPT-2026-09-23-v1.0.json",
+    "raw_depth_result":"LINE18_AND_LINE32_RAW_ACQUISITIONS_DIFFER_BY_APPROX_186_TO_191_M_AT_FROZEN_CELLS"
+  },
+  "raw_source":{
+    "path":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "format":"MBF_EMOLDRAW_51"
+  },
+  "frozen_selected_acquisitions":[
+    {
+      "family":"LINE18_ERA",
+      "file":"0018_240205_000335_raw.all",
+      "selected_ping_numbers":[60720,60721,60722,60723,60724,60725],
+      "selected_beam_indices":[79,80],
+      "role":"shallower raw support"
+    },
+    {
+      "family":"LINE32_ERA",
+      "file":"0032_270205_144041_raw.all",
+      "selected_ping_numbers":[21395],
+      "selected_beam_indices":[0,1],
+      "role":"deeper raw support tracking processed Acceptl28-33"
+    }
+  ],
+  "source_exact_semantics":{
+    "EM_SVP_label":"0x029A",
+    "EM_SVP_size_bytes_after_label":419,
+    "svp_depth_unit_m":1.0,
+    "svp_velocity_unit_m_per_s":0.1,
+    "ping_sound_velocity_unit_m_per_s":0.1,
+    "roll_pitch_unit_deg":0.01,
+    "ping_heave_unit_m":0.01,
+    "beam_heave_unit_m":0.1,
+    "bath_quality_semantics":"number of good beams; negative if ping rejected",
+    "beam_quality":"report raw byte only; no invented threshold",
+    "travel_time_units":{
+      "bath_res_1_ms_per_unit":0.2,
+      "bath_res_2_ms_per_unit":0.8
+    }
+  },
+  "stage_A_ping_ancillary":{
+    "selection":"only frozen selected ping/beam identifiers; no new geometry or depth selection",
+    "report_ping_fields":[
+      "bath_res","bath_quality","keel_depth_m","heading_deg","roll_deg","pitch_deg",
+      "ping_heave_m","sound_velocity_m_per_s","bath_mode"
+    ],
+    "report_beam_fields":[
+      "beam_index","raw_depth_m","across_track_m","along_track_m",
+      "travel_time_ms","amplitude_db","quality_byte","beam_heave_m"
+    ]
+  },
+  "stage_B_svp":{
+    "scan_all_66_entries":true,
+    "inventory_all_preserved_EM_SVP_datagrams":true,
+    "selection_per_family":"latest preserved SVP datagram at or before each selected ping time; if none exists before a ping in the accessible archive, report NONE rather than borrowing a future profile",
+    "report":[
+      "svp_utc","svp_age_seconds_at_ping","svp_point_count","full_depth_velocity_profile",
+      "surface_or_first_velocity_m_per_s","deepest_profile_depth_m"
+    ],
+    "no_numeric_refraction_error_invention":true
+  },
+  "predeclared_diagnostic_logic":{
+    "SVP_OR_SOUNDVEL_DIFFERENCE_SUPPORTED":"line18-era and line32-era selected pings bind to different preserved SVP profiles or materially different recorded surface sound velocity; report exact difference without claiming it causes the 186-191m depth split",
+    "ATTITUDE_OR_MODE_DIFFERENCE_SUPPORTED":"selected families differ in bath mode/resolution or show materially different roll/pitch/heave fields; diagnostic association only",
+    "NO_OBVIOUS_ANCILLARY_DIFFERENCE":"profiles and recorded ancillary fields are similar; mechanism remains unresolved",
+    "MISSING_PROVENANCE":"required SVP or parameter provenance absent from accessible raw archive"
+  },
+  "hard_rules":[
+    "NO_NEW_BEAM_SELECTION",
+    "NO_DEPTH_BASED_EXCLUSION",
+    "NO_QUALITY_THRESHOLD_INVENTION",
+    "NO_FUTURE_SVP_BORROWING",
+    "NO_REFRACTION_ERROR_ESTIMATE_WITHOUT_PHYSICS_REPROCESSING",
+    "REPORT_ALL_SELECTED_PINGS",
+    "STRICT_TEMPORAL_FAIL_IMMUTABLE"
+  ],
+  "claim_ceiling":"RAW_EM12_SVP_AND_ANCILLARY_MECHANISM_DIAGNOSTIC_ONLY"
+}
