@@ -37,7 +37,7 @@ for p in PAGES:
         hrefs.add(u.rstrip(").,;"))
 
 # Exact selected site was frozen before this discovery.
-site=[u for u in hrefs if "puunua" in u.lower()]
+site=[u for u in hrefs if ("puunua" in u.lower() or "puunoa" in u.lower())]
 # Canonical data release routes may omit .zip in the terminal URL but carry name=<file>.zip.
 bathy=sorted({u for u in site if "bathy" in u.lower() and "backscatter" not in u.lower() and ".zip" in u.lower()})
 back=sorted({u for u in site if "backscatter" in u.lower() and ".zip" in u.lower()})
