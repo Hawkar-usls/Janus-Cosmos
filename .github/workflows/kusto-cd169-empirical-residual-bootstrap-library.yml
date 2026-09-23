@@ -1,0 +1,27 @@
+name: KUSTO CD169 Empirical Residual Bootstrap Library
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_cd169_empirical_residual_bootstrap_library.py'
+      - '.github/workflows/kusto-cd169-empirical-residual-bootstrap-library.yml'
+  workflow_dispatch:
+
+jobs:
+  library:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests
+      - name: Materialize frozen empirical residual vectors
+        run: python workspace/kusto_cd169_empirical_residual_bootstrap_library.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-cd169-empirical-residual-bootstrap-library-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-RUN-2026-09-23-v1.0.json
+          retention-days: 30
