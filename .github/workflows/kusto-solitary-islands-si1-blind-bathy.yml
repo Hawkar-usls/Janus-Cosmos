@@ -1,0 +1,30 @@
+name: KUSTO Solitary Islands SI1 Blind Bathymetry
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_solitary_islands_si1_blind_bathy.py'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI0-UNCHANGED-V2-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI0E-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-solitary-islands-si1-blind-bathy.yml'
+  workflow_dispatch:
+
+jobs:
+  si1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests rasterio affine
+      - name: Run Solitary Islands bathymetry-only blind discovery
+        run: python workspace/kusto_solitary_islands_si1_blind_bathy.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-solitary-islands-si1-blind-bathy-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOLITARY-ISLANDS-SI1-BLIND-BATHYMETRY-RUN-2026-09-24-v1.0.json
+          retention-days: 30
