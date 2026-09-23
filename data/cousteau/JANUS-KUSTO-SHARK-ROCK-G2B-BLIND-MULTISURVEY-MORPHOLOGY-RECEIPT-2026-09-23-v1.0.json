@@ -1,0 +1,30 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-G2B-BLIND-MULTISURVEY-MORPHOLOGY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_BLIND_CANDIDATE_GENERATION__NINE_TWO_SURVEY_PERSISTENT_CLUSTERS__TRUTH_STILL_HIDDEN",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35889677354,
+    "head_sha": "347cc37c1bf1c0bf0beab2e753630d41f841d054",
+    "conclusion": "success",
+    "artifact_id": 10764382862,
+    "artifact_zip_sha256": "5dbfe527154313c2625bb60fbdc819ed7b835ce52af3f37d151fce0072f795af",
+    "candidate_json_sha256": "459b43f016b18599376bf3ffb6a7872275523c9402234ac9fc01e2c73455e83d"
+  },
+  "truth_firewall": {
+    "shark_rock_coordinate_read_by_g2b": false,
+    "rov_interpretation_read_by_g2b": false,
+    "video_stills_read_by_g2b": false
+  },
+  "survey_results": {
+    "EX1203": {"occupied_grid_cells": 277936, "frozen_candidates": 100},
+    "EX1805": {"occupied_grid_cells": 946664, "frozen_candidates": 100},
+    "EX1903L2": {"occupied_grid_cells": 97820, "frozen_candidates": 100},
+    "EX2102": {"occupied_grid_cells": 102857, "frozen_candidates": 100}
+  },
+  "candidate_total": 400,
+  "persistent_cluster_count": 9,
+  "persistence_support_histogram": {"2": 9, "3": 0, "4": 0},
+  "interpretation": "The frozen blind detector generated morphology candidates in all four real survey epochs and produced nine same-radius clusters supported by two distinct surveys. No three- or four-survey persistent cluster was produced. This is a pre-truth morphology result only.",
+  "next_gate": "JANUS-KUSTO-SHARK-ROCK-G3-TRUTH-UNLOCK-SCORING-PREREG-2026-09-23-v1.0",
+  "claim_ceiling": "BLIND_MULTISURVEY_MORPHOLOGY_CANDIDATE_AND_TWO_SURVEY_PERSISTENCE_GENERATION_ONLY"
+}
