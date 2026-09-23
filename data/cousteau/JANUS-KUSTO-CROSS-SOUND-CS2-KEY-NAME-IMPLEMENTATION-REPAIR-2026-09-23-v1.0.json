@@ -1,0 +1,16 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS2-KEY-NAME-IMPLEMENTATION-REPAIR-2026-09-23-v1.0",
+  "parent_addendum":"JANUS-KUSTO-CROSS-SOUND-CS2-BACKSCATTER-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "failed_run":{
+    "github_actions_run_id":35904610657,
+    "head_sha":"d770f2c965064a5185a568da8ff3ff0fd398f25f",
+    "failure":"KeyError: method.permutation_iterations; frozen key is method.stratified_permutation_iterations",
+    "stage_reached":"CONFIG_PARSE_ONLY__NO_BACKSCATTER_DOWNLOAD__NO_SCORING"
+  },
+  "repair":"Change executor lookup from permutation_iterations to stratified_permutation_iterations.",
+  "scientific_parameters_changed":false,
+  "candidate_authority_changed":false,
+  "backscatter_values_read_before_failure":false,
+  "status":"IMPLEMENTATION_KEY_BINDING_REPAIR_ONLY",
+  "claim_ceiling":"EXECUTOR_REPAIR_PROVENANCE_ONLY"
+}
