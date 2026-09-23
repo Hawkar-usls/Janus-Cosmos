@@ -1,0 +1,30 @@
+name: KUSTO Shark Rock Eligibility Diagnostic
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_shark_rock_posthoc_eligibility.py'
+      - 'data/cousteau/JANUS-KUSTO-SHARK-ROCK-POSTHOC-G2B-ELIGIBILITY-DIAGNOSTIC-PREREG-2026-09-23-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SHARK-ROCK-G3-TRUTH-UNLOCK-SCORING-RECEIPT-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-shark-rock-eligibility-diagnostic.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests shapely
+      - name: Diagnose G2B truth-point eligibility
+        run: python workspace/kusto_shark_rock_posthoc_eligibility.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-shark-rock-eligibility-diagnostic-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SHARK-ROCK-POSTHOC-G2B-ELIGIBILITY-DIAGNOSTIC-RUN-2026-09-23-v1.0.json
+          retention-days: 30
