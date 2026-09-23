@@ -1,0 +1,26 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-GEOREF-RESOLUTION-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35893145745,
+    "head_sha": "3912dd626e61f281072001a7db0d13e221ffc8c3",
+    "failure": "Nominal 2 m metadata versus effective raster transform 2.0003717472 m caused an over-strict 1e-6 resolution assertion.",
+    "scientific_stage_reached": "INGEST_ONLY__NO_MORPHOLOGY_METRICS__NO_CANDIDATE_SELECTION"
+  },
+  "source_authority": {
+    "metadata_nominal_cell_m": 2.0,
+    "observed_effective_transform_cell_m": [2.0003717472,2.0003717472]
+  },
+  "repair": {
+    "nominal_resolution_relative_tolerance": 0.001,
+    "accept_rule": "Both effective x/y cell sizes must differ from nominal 2 m by no more than 0.1 percent.",
+    "geometry_rule": "Use the effective transform cell size for derivative scaling and for converting frozen physical radii/stride to integer pixels.",
+    "frozen_physical_radii_m": [8,16,32,64],
+    "frozen_physical_stride_m": 16,
+    "rounding": "nearest integer pixel as preregistered scale realization",
+    "no_threshold_or_candidate_rule_change": true
+  },
+  "epistemic_note": "The failed executor loaded raster values before the resolution assertion, so this is not described as a pre-value-read repair. It produced no morphology metrics, candidate outcomes, thresholds, or scientific verdict.",
+  "status": "IMPLEMENTATION_REPAIR_FROZEN_BEFORE_FIRST_SCIENTIFIC_RESULT",
+  "claim_ceiling": "FORMAT_AND_GEOREFERENCE_IMPLEMENTATION_REPAIR_ONLY"
+}
