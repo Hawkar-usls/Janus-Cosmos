@@ -1,0 +1,64 @@
+{
+  "artifact_id":"JANUS-KUSTO-UNSEEN-MULTIBEAM-PF0501-X-EX2105-SOURCE-INVENTORY-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T01:12:00Z",
+  "status":"FROZEN_BEFORE_UNSEEN_SOURCE_INVENTORY",
+  "purpose":"Identify an exact, morphology-blind overlap suitable for future v1-vs-v2 multibeam nuisance validation.",
+  "calibration_firewall":{
+    "PF0501_used_in_CD169_multibeam_calibration":false,
+    "EX2105_used_in_CD169_multibeam_calibration":false,
+    "candidate_selected_from_metadata_and_coverage_only":true,
+    "depth_inspection_forbidden_in_this_stage":true
+  },
+  "candidate_pair":{
+    "test_acquisition":{
+      "survey":"PF0501",
+      "platform":"Pathfinder",
+      "year":2005,
+      "instrument":"Simrad EM121",
+      "NCEI_report":"https://www.ngdc.noaa.gov/ships/pathfinder/PF0501_mb.html",
+      "public_raw_file_count_reported":141,
+      "reported_bounds":{"north":35.14623,"south":28.144133,"west":-76.973175,"east":-72.47391}
+    },
+    "independent_later_reference":{
+      "survey":"EX2105",
+      "platform":"NOAA Ship Okeanos Explorer",
+      "year":2021,
+      "instrument":"Kongsberg EM304",
+      "NCEI_report":"https://www.ngdc.noaa.gov/ships/okeanos_explorer/EX2105_mb.html",
+      "public_raw_file_count_reported":410,
+      "processed_products_reported":true,
+      "reported_bounds":{"north":40.777278111220774,"south":28.393567843814328,"west":-80.126488304259,"east":-71.43052480705907}
+    }
+  },
+  "stage_A_source_inventory":{
+    "inspect_only":[
+      "directory availability",
+      "filenames",
+      "file sizes where available",
+      "FNV/navigation footprint rows",
+      "track/footprint coordinate ranges"
+    ],
+    "forbidden":["bathymetric depth","backscatter intensity","morphology score","candidate feature selection"],
+    "generated_directory_candidates":[
+      "https://data.ngdc.noaa.gov/platforms/ocean/ships/pathfinder/PF0501/multibeam/data/version1/MB/generated/",
+      "https://data.ngdc.noaa.gov/platforms/ocean/ships/okeanos_explorer/EX2105/multibeam/data/version1/MB/generated/"
+    ]
+  },
+  "eligibility_gate":{
+    "PF0501_navigation_or_footprint_available":true,
+    "EX2105_navigation_or_footprint_available":true,
+    "exact_track_or_swath_overlap_required":true,
+    "bounding_box_overlap_alone_sufficient":false,
+    "minimum_overlap_samples_before_next_gate":100
+  },
+  "next_if_pass":"Freeze a deterministic overlap polygon/track subset from coverage only, then preregister V1-vs-V2 residual prediction/scoring before any depth values are read.",
+  "hard_rules":[
+    "UNSEEN_DATA_NE_CALIBRATION_DATA",
+    "NO_DEPTH_IN_STAGE_A",
+    "NO_MORPHOLOGY_IN_STAGE_A",
+    "NO_TARGET_RECENTERING",
+    "NO_CHERRY_PICKING_OVERLAP_BY_DEPTH",
+    "NO_USE_OF_PF0501_OWN_PROCESSED_PRODUCT_AS_INDEPENDENT_TRUTH_IF_EX2105_OVERLAP_EXISTS"
+  ],
+  "claim_ceiling":"UNSEEN_VALIDATION_SOURCE_AND_COVERAGE_INVENTORY_ONLY"
+}
