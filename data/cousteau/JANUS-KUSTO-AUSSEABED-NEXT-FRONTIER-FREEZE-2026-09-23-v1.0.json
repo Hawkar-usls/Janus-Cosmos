@@ -1,0 +1,40 @@
+{
+  "artifact_id": "JANUS-KUSTO-AUSSEABED-NEXT-FRONTIER-FREEZE-2026-09-23-v1.0",
+  "created_date": "2026-09-23",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_utility_ledger": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
+  "global_rule": "PAIRED_SUPPORT_DOMAIN_V2_IS_FROZEN_AND_MUST_NOT_CHANGE_FOR_NEW_UNSEEN_CROSSCHANNEL_CORPORA",
+  "tracks": [
+    {
+      "id": "AUSSEABED_SHELLHARBOUR_2017_V2",
+      "role": "UNSEEN_MARINE_CROSSCHANNEL_VALIDATION",
+      "region": "NEW_SOUTH_WALES_AUSTRALIA",
+      "sensor": "R2SONIC_2022_MULTIBEAM",
+      "published_products": ["2M_AND_5M_BATHYMETRY", "5M_BACKSCATTER"],
+      "survey_area_km2_approx": 60,
+      "source": "AUSSEABED_NSW_DPE",
+      "hard_rule": "NO_LANDFORM_CLASSIFICATION_OR_SEDIMENT_INTERPRETATION_READ_BEFORE_CANDIDATE_AND_BACKSCATTER_RESULT_FREEZE",
+      "next_gate": "SOURCE_FILE_BINDING_ONLY"
+    },
+    {
+      "id": "AUSSEABED_EX_HMAS_CANBERRA_2020",
+      "role": "HIDDEN_TRUTH_KNOWN_WRECK_LOCALIZATION",
+      "region": "BASS_STRAIT_VICTORIA_AUSTRALIA",
+      "sensor": "KONGSBERG_EM2040C",
+      "published_bathymetry_cell_m": 0.5,
+      "published_truth_object_length_m": 138.1,
+      "source": "GEOSCIENCE_AUSTRALIA_AND_PARKS_VICTORIA",
+      "discovery_rule": "Detector receives the full survey raster and generic native-resolution scale ladder only; official dive-site truth is withheld until candidate artifact is hashed.",
+      "scale_ladder_rule": "Use [4,8,16,32] native cells exactly => [2,4,8,16] metres at 0.5 m cell.",
+      "spatial_dedup_rule": "25 metres, obtained by scaling the 50 m v2 1-m-grid dedup rule by native cell size.",
+      "maximum_candidates": 100,
+      "next_gate": "BLIND_BATHYMETRY_CANDIDATE_FREEZE"
+    }
+  ],
+  "groundtruth_population_rule": {
+    "minimum_high_confidence_targets": 20,
+    "classes_must_include": ["ANTHROPOGENIC_WRECKS", "NATURAL_MORPHOLOGY", "DECEPTIVE_NATURAL_FALSE_ARTIFICIALITY_CONTROLS"],
+    "no_single_case_may_establish_population_utility": true
+  },
+  "claim_ceiling": "FRONTIER_AND_EXECUTION_ORDER_FREEZE_ONLY"
+}
