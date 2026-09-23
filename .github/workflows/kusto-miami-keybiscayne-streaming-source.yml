@@ -1,0 +1,29 @@
+name: KUSTO Miami Key Biscayne Streaming Source
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_miami_keybiscayne_streaming_source.py'
+      - 'data/cousteau/JANUS-KUSTO-MIAMI-KEYBISCAYNE-STREAMING-SOURCE-PREREG-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-miami-keybiscayne-streaming-source.yml'
+  workflow_dispatch:
+
+jobs:
+  source-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inspect remote ZIP metadata only
+        run: python workspace/kusto_miami_keybiscayne_streaming_source.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-miami-keybiscayne-streaming-source-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-MIAMI-KEYBISCAYNE-STREAMING-SOURCE-RUN-2026-09-23-v1.0.json
+          retention-days: 30
