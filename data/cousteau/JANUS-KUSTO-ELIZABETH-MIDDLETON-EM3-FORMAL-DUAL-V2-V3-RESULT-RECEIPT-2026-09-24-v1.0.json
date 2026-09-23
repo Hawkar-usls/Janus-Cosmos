@@ -40,7 +40,7 @@
     "method": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
     "internal_primary_pass_at_0_05": true,
     "study_scientific_promotion": true,
-    "meaning": "Third formal unseen marine v2 PASS and first PASS on the EM2040C independent sensor lineage."
+    "meaning": "Fourth formal unseen marine v2 PASS, fifth formal unseen cross-channel PASS overall, and an additional PASS on the Kongsberg EM2040C-family independent sensor lineage."
   },
   "v3": {
     "method": "PAIRED_SUPPORT_DOMAIN_V3_RELATIVE_MAD_GUARD",
@@ -51,7 +51,10 @@
   },
   "lineage": {
     "sensor": "KONGSBERG_EM2040C_HD_300_KHZ",
-    "regions": ["ELIZABETH","MIDDLETON"],
+    "regions": [
+      "ELIZABETH",
+      "MIDDLETON"
+    ],
     "representation_bridge": "FROZEN_EPSG4326_TO_EPSG32757_NEAREST_5M_WINDOWS",
     "backscatter_native_cell_m": 4
   },
@@ -67,5 +70,12 @@
     "GLOBAL_FALSE_DISCOVERY_RATE",
     "GENERAL_INDEPENDENT_SURVEY_REPEATABILITY"
   ],
-  "claim_ceiling": "FORMAL_UNSEEN_CROSSCHANNEL_PASS_ON_INDEPENDENT_EM2040C_SENSOR_LINEAGE__V3_NO_REGRESSION_CONFIRMED__V3_RESCUE_NOT_YET_CONFIRMED"
+  "claim_ceiling": "FORMAL_UNSEEN_CROSSCHANNEL_PASS_ON_INDEPENDENT_EM2040C_SENSOR_LINEAGE__V3_NO_REGRESSION_CONFIRMED__V3_RESCUE_NOT_YET_CONFIRMED",
+  "replication_significance": {
+    "formal_unseen_crosschannel_pass_number": 5,
+    "formal_unseen_marine_v2_pass_number": 4,
+    "independent_sensor_lineage": "KONGSBERG_EM2040C_HD_300_KHZ",
+    "geographic_lineage": "ELIZABETH_AND_MIDDLETON_REEFS_CORAL_SEA_AUSTRALIA"
+  },
+  "bookkeeping_correction": "Ordinal counts reconciled after verifying the already-sealed South-west Corner SWC3 formal PASS; no scientific result values changed."
 }
