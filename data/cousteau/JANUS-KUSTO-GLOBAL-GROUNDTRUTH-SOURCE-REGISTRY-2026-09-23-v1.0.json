@@ -3,7 +3,7 @@
   "schema": "janus.cosmos.kusto.global_groundtruth.source_registry.v1",
   "created_date": "2026-09-23",
   "prereg": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0.json",
-  "status": "GROUNDTRUTH_REGISTRY_REACHED_20_COUNT__EXECUTION_GATE_REMAINS_OPEN",
+  "status": "GLOBAL_SOURCE_WAVE_EXPANDED_WITH_AUSTRALIAN_MULTIMODAL_CORPORA",
   "sources": [
     {
       "id": "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
@@ -487,6 +487,54 @@
       "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
       "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
       "priority": 1
+    },
+    {
+      "id": "AUSSEABED_MV_NOONGAH_IN2024_V04",
+      "region": "NEW_SOUTH_WALES_AUSTRALIA",
+      "truth_class": "MULTIBEAM_AND_DROP_CAMERA_CONFIRMED_SHIPWRECK_IDENTITY_PROJECT",
+      "sensor": "KONGSBERG_EM710",
+      "survey_year": 2024,
+      "public_assets": [
+        "MULTIRESOLUTION_BATHYMETRY",
+        "DROP_CAMERA_FOOTAGE"
+      ],
+      "source_url": "https://researchdata.edu.au/in2024v04-east-australian-ausseabed-products/3652699",
+      "benchmark_role": "FUTURE_HIDDEN_TRUTH_KNOWN_WRECK_RECOVERY_AND_VISUAL_BINDING",
+      "status": "SOURCE_AUDIT_AND_EXACT_WRECK_SUBGRID_BINDING_REQUIRED",
+      "priority": 1
+    },
+    {
+      "id": "AUSSEABED_SOUTHWEST_CORNER_MARINE_PARK",
+      "region": "SOUTHWEST_AUSTRALIA",
+      "truth_class": "UNSEEN_MARINE_CROSSCHANNEL_PLUS_SEPARATE_IMAGERY_CORPUS",
+      "sensor": "KONGSBERG_EM2040C",
+      "survey_area_km2_approx": 330,
+      "published_backscatter_cell_m": 4,
+      "public_assets": [
+        "BATHYMETRY",
+        "BACKSCATTER",
+        "SEPARATE_UNDERWATER_IMAGERY_DEPLOYMENTS"
+      ],
+      "source_url": "https://researchdata.edu.au/south-west-corner-ga-4858/3430083",
+      "benchmark_role": "FUTURE_UNCHANGED_V2_CROSSCHANNEL_THEN_VISUAL_INTERPRETATION",
+      "status": "SOURCE_PAIR_BINDING_REQUIRED__IMAGERY_TRUTH_WITHHELD",
+      "priority": 1
+    },
+    {
+      "id": "AUSSEABED_SOLITARY_ISLANDS_MP_2022_23",
+      "region": "NEW_SOUTH_WALES_AUSTRALIA",
+      "truth_class": "UNSEEN_MARINE_MULTIMODAL_GROUNDTRUTH_CORPUS",
+      "public_assets": [
+        "BATHYMETRY",
+        "BACKSCATTER",
+        "TOWED_VIDEO",
+        "SEDIMENT_SURVEYS",
+        "POSTHOC_LANDFORM_MAP"
+      ],
+      "source_url": "https://researchdata.edu.au/solitary-islands-marine-temperate-east/3402360",
+      "benchmark_role": "FUTURE_UNCHANGED_V2_CROSSCHANNEL_THEN_VIDEO_SEDIMENT_GROUNDTRUTH",
+      "status": "SOURCE_PAIR_BINDING_REQUIRED__ALL_INTERPRETATION_LAYERS_WITHHELD",
+      "priority": 1
     }
   ],
   "first_execution_targets": [
@@ -504,5 +552,7 @@
     "registry_count_gate": "PASS_REGISTRY_COUNT_ONLY",
     "scientific_population_gate": "OPEN_UNTIL_EXACT_SURVEY_BINDING_AND_HIDDEN_TRUTH_EXECUTION",
     "note": "Reaching 20 registry entries is not a validation pass."
-  }
+  },
+  "high_confidence_target_population_goal": 20,
+  "current_registry_entry_count": 30
 }
