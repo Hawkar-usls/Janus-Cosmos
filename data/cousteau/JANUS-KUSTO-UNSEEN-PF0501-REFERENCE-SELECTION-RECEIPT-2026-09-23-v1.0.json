@@ -1,0 +1,37 @@
+{
+  "artifact_id":"JANUS-KUSTO-UNSEEN-PF0501-REFERENCE-SELECTION-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T07:09:00Z",
+  "status":"SEALED_RANK1_REFERENCE_SELECTED_BY_COVERAGE_ONLY",
+  "prereg":"data/cousteau/JANUS-KUSTO-UNSEEN-PF0501-REFERENCE-REPLACEMENT-SEARCH-PREREG-2026-09-23-v1.0.json",
+  "depth_values_read":false,
+  "geometry_rank":{
+    "run_id":35829916114,
+    "eligible_exact_intersection_surveys":35,
+    "selected_rank":1,
+    "survey_id":"RB1202",
+    "survey_year":2012,
+    "platform":"NOAA Ship RONALD H. BROWN (R104)",
+    "instrument":"Simrad EM122",
+    "exact_intersection_area_deg2":0.7719670694832452,
+    "exact_intersection_bounds":[-75.65795853270036,29.36333333300007,-72.80597025614584,33.274426285333156]
+  },
+  "route_gate":{
+    "run_id":35830126923,
+    "head_sha":"16104c5598e5fad8fd8ade6b9302a373684bb291",
+    "artifact_id":10736109264,
+    "artifact_zip_sha256":"e98d663c588efadb269239682755a29a9f0df2b2a3fce4d8e750892acf35741f",
+    "ncei_generated_root":"https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h._brown/RB1202/multibeam/data/version1/MB/generated/",
+    "fnv_count":110,
+    "fbt_count":110,
+    "pass":true
+  },
+  "selection_verdict":"RB1202_SELECTED__NO_LOWER_RANK_CANDIDATE_INSPECTED_FOR_DEPTH",
+  "calibration_firewall":{
+    "PF0501_used_in_CD169_calibration":false,
+    "RB1202_used_in_CD169_calibration":false,
+    "selection_used_depth":false,
+    "selection_used_morphology":false
+  },
+  "next":"FNV_EXACT_OVERLAP_FREEZE_WITH_EXISTING_100_ROW_MINIMUM",
+  "claim_ceiling":"UNSEEN_REFERENCE_SELECTION_BY_COVERAGE_ONLY"
+}
