@@ -1,0 +1,30 @@
+{
+  "artifact_id": "JANUS-KUSTO-EMODNET-FOUR-BASIN-SOURCE-FIRST-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_SOURCE_LAYER_QUERY",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "purpose": "Diversify KUSTO beyond NOAA/USGS/AusSeabed by discovering real EMODnet survey lineages in four European sea basins without reading bathymetric depth values.",
+  "fixed_probe_points": [
+    {"id":"NORTH_SEA","lat":56.0,"lon":3.0},
+    {"id":"BALTIC_SEA","lat":57.5,"lon":19.0},
+    {"id":"MEDITERRANEAN","lat":38.0,"lon":15.0},
+    {"id":"NE_ATLANTIC","lat":47.0,"lon":-8.0}
+  ],
+  "selection_rule": "Geographic basin probes frozen independently of anomaly morphology; no switching points after source outcomes.",
+  "services": {
+    "wms": "https://geo-service.maris.nl/emodnet_bathymetry/wms",
+    "wfs": "https://ows.emodnet-bathymetry.eu/wfs"
+  },
+  "allowed_reads": [
+    "OGC_CAPABILITIES",
+    "SOURCE_REFERENCE_OR_CDI_METADATA",
+    "SURVEY_IDENTITY",
+    "PROVENANCE_AND_QUALITY_METADATA"
+  ],
+  "forbidden_reads": [
+    "BATHYMETRIC_DEPTH_VALUES",
+    "ANOMALY_SCORES",
+    "COMPOSITE_DTM_AS_INDEPENDENT_SURVEY"
+  ],
+  "promotion_rule": "Only explicit acquisition-level survey/CDI identities can enter later cross-survey validation. Composite DTM/HR-DTM identities remain context-only.",
+  "claim_ceiling": "EUROPEAN_SURVEY_LINEAGE_DISCOVERY_ONLY"
+}
