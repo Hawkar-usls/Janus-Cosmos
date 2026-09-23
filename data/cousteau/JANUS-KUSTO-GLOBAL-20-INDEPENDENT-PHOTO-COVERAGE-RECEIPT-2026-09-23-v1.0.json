@@ -1,0 +1,70 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-20-INDEPENDENT-PHOTO-COVERAGE-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T15:04:00Z",
+  "status":"SEALED_NO_DIRECT_IMAGES__NEAR_AND_REGIONAL_COVERAGE_FOR_SUBSET",
+  "prereg":"data/cousteau/JANUS-KUSTO-GLOBAL-20-INDEPENDENT-PHOTO-COVERAGE-PREREG-2026-09-23-v1.0.json",
+  "run":{
+    "github_actions_run_id":35878646954,
+    "conclusion":"success",
+    "artifact_id":10759792011,
+    "artifact_zip_sha256":"27af677a6c8f38d55d2fb6c82d642ab18f5b48f68114f9a4ebdb676439d3ec06"
+  },
+  "source":{
+    "dataset":"NOAA NCEI ERDDAP deep_sea_corals",
+    "regional_rows_returned":21140,
+    "qualifying_georeferenced_image_records":1458
+  },
+  "counts":{
+    "DIRECT_IMAGE_SUPPORT":0,
+    "NEAR_IMAGE_COVERAGE":4,
+    "REGIONAL_IMAGE_COVERAGE":5,
+    "NO_IMAGE_COVERAGE":11
+  },
+  "cross_survey_persistent_candidates":{
+    "GLOBAL_R2_C004":{
+      "lon":-160.80757612237042,
+      "lat":22.68797161336687,
+      "radius_m":500,
+      "photo_class":"REGIONAL_IMAGE_COVERAGE",
+      "nearest_image_distance_m":14326.302799228248,
+      "nearest_visual_survey":"EX1708",
+      "vehicle":"Deep Discoverer ROV",
+      "qualifying_images_within_25km":55
+    },
+    "GLOBAL_R2_C005":{
+      "lon":-161.94240779911783,
+      "lat":23.283102766798418,
+      "radius_m":2000,
+      "photo_class":"NO_IMAGE_COVERAGE",
+      "nearest_image_distance_m":53555.244451511666,
+      "nearest_visual_survey":"EX1504L2",
+      "vehicle":"Deep Discoverer ROV",
+      "qualifying_images_within_25km":0
+    },
+    "GLOBAL_R2_C018":{
+      "lon":-161.8845819811944,
+      "lat":23.258399209486164,
+      "radius_m":1000,
+      "photo_class":"NO_IMAGE_COVERAGE",
+      "nearest_image_distance_m":58897.843390459784,
+      "nearest_visual_survey":"EX1504L2",
+      "vehicle":"Deep Discoverer ROV",
+      "qualifying_images_within_25km":0
+    }
+  },
+  "other_near_image_candidates":{
+    "GLOBAL_R2_C011":{"distance_m":4343.911155871746,"survey":"EX1708","vehicle":"Deep Discoverer ROV"},
+    "GLOBAL_R2_C013":{"distance_m":1538.9708974445227,"survey":"EX1706","vehicle":"Deep Discoverer ROV"},
+    "GLOBAL_R2_C019":{"distance_m":4478.580216923702,"survey":"EX1708","vehicle":"Deep Discoverer ROV"},
+    "GLOBAL_R2_C020":{"distance_m":3689.5123468762113,"survey":"KOK09-18","vehicle":"Pisces 4"}
+  },
+  "interpretation":"No independent georeferenced image record falls inside any frozen Stage1 candidate radius. Nearby or regional imagery is contextual only and is not direct visual confirmation of a candidate.",
+  "hard_rules_preserved":[
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_VISUAL_SIMILARITY_SCORE",
+    "PHOTO_ABSENCE_NE_FEATURE_ABSENCE",
+    "NEARBY_IMAGE_NE_DIRECT_CANDIDATE_IMAGE"
+  ],
+  "claim_ceiling":"INDEPENDENT_VISUAL_COVERAGE_AUDIT_ONLY"
+}
