@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-G2B-BLIND-MULTISURVEY-MORPHOLOGY-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_DEPTH_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_tile_prereg": "JANUS-KUSTO-SHARK-ROCK-BLIND-TILE-PREREG-2026-09-23-v1.0",
+  "parent_scale_receipt": "JANUS-KUSTO-SHARK-ROCK-G2A-SCALE-FREEZE-RECEIPT-2026-09-23-v1.0",
+  "blind_tile": {"lon_min": -79.25, "lon_max": -79.0, "lat_min": 31.5, "lat_max": 31.75},
+  "survey_ids": ["EX1203", "EX1805", "EX1903L2", "EX2102"],
+  "grid_m": 25,
+  "radii_m": [25, 75, 125, 275],
+  "sampling_stride_m": 50,
+  "depth_ingest": {
+    "source": "NCEI FBT derivatives paired to tile-intersecting FNV files",
+    "beam_flag_rule": "flags == 0 only",
+    "rasterization": "mean depth of all good soundings falling in each 25 m projected grid cell",
+    "minimum_soundings_per_cell": 1,
+    "projection": "local equirectangular meters around blind tile center",
+    "no_truth_coordinate": true
+  },
+  "validity": {
+    "center_must_have_complete_valid_neighborhood_at_current_radius": true,
+    "minimum_blind_sample_centers_per_survey": 500
+  },
+  "morphology_families": {
+    "RELIEF_ROUGHNESS": ["local_relief_m", "local_std_m"],
+    "CURVATURE": ["abs_laplacian"],
+    "RADIAL": ["abs_center_surround_dog"],
+    "LINEARITY": ["structure_tensor_anisotropy"],
+    "TERRACE_STEP": ["gradient_magnitude"],
+    "TOPOLOGIC": ["isolated_extremum_persistence"]
+  },
+  "selection": {
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in upper tail OR generic score in upper 0.5 percent",
+    "spatial_dedup_min_m": 100,
+    "maximum_candidates_per_survey": 100,
+    "no_cross_survey_information_during_within_survey_candidate_selection": true
+  },
+  "cross_survey_persistence": {
+    "same_frozen_radius_required": true,
+    "match_tolerance_m": 150,
+    "minimum_distinct_surveys_for_cluster": 2,
+    "cluster_center": "arithmetic mean of member projected coordinates",
+    "maximum_clusters_per_radius": 100,
+    "truth_coordinate_not_used": true
+  },
+  "truth_firewall": {
+    "shark_rock_coordinate_read": false,
+    "rov_interpretation_read": false,
+    "video_stills_read": false,
+    "no_recenter_after_truth": true,
+    "no_threshold_or_scale_retuning_after_truth": true
+  },
+  "next_gate": "G3_UNLOCK_ROV_TRUTH_AND_SCORE_FROZEN_CANDIDATES_AND_PERSISTENT_CLUSTERS",
+  "hard_rules": [
+    "NO_TRUTH_COORDINATE_IN_G2B",
+    "NO_ROV_LABEL_IN_G2B",
+    "NO_POSTHOC_SCALE_SELECTION",
+    "NO_POSTHOC_THRESHOLD_TUNING",
+    "KEEP_PER_SURVEY_CANDIDATE_LISTS_EVEN_IF_NO_PERSISTENT_CLUSTER",
+    "MORPHOLOGY_NE_ARTIFICIALITY"
+  ],
+  "claim_ceiling": "BLIND_MULTISURVEY_MORPHOLOGY_CANDIDATE_AND_PERSISTENCE_GENERATION_ONLY"
+}
