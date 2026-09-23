@@ -1,0 +1,44 @@
+name: KUSTO Publish CD169 Residual Library
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - '.github/workflows/kusto-publish-cd169-residual-library.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/kusto-cross-survey-validation-v1
+      - name: Download exact frozen library artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/kusto-lib
+          mkdir -p /tmp/kusto-lib
+          gh run download 35804320906 --repo "$GITHUB_REPOSITORY" \
+            -n kusto-cd169-empirical-residual-bootstrap-library-v1 \
+            -D /tmp/kusto-lib
+          test -f /tmp/kusto-lib/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-RUN-2026-09-23-v1.0.json
+          echo "6eb8d1140d4353f68ae106c5df53f1cf0a2332fc24e5ccbd29690ad63626e379  /tmp/kusto-lib/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-RUN-2026-09-23-v1.0.json" | sha256sum -c -
+      - name: Bind exact library into repository
+        run: |
+          set -euo pipefail
+          cp /tmp/kusto-lib/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-RUN-2026-09-23-v1.0.json \
+             data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json
+          git diff --cached --quiet && exit 0
+          git commit -m "KUSTO: bind exact CD169 empirical residual bootstrap library"
+          git push origin HEAD:feature/kusto-cross-survey-validation-v1
