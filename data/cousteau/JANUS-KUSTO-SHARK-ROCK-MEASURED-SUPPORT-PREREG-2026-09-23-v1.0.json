@@ -1,0 +1,47 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-MEASURED-SUPPORT-PREREG-2026-09-23-v1.0",
+  "schema": "janus.cosmos.kusto.shark_rock.measured_support.prereg.v1",
+  "parent_receipt": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-SOURCE-GATE-RECEIPT-2026-09-23-v1.0.json",
+  "target": {
+    "name": "SHARK_ROCK",
+    "lat": 31.59517078,
+    "lon": -79.10225958,
+    "truth_class": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK"
+  },
+  "survey_roles": [
+    {"survey_id": "EX1203", "role": "DISCOVERY_SOURCE_BINDING", "year": 2012, "instrument": "EM302"},
+    {"survey_id": "EX1805", "role": "HELDOUT_PRE_TRUTH_SOURCE_BINDING", "year": 2018, "instrument": "EM302"},
+    {"survey_id": "EX1903L2", "role": "GROUNDTRUTH_ERA_EXCLUDED_FROM_DISCOVERY_TUNING", "year": 2019, "instrument": "EM302"},
+    {"survey_id": "EX2102", "role": "HELDOUT_POST_TRUTH_DIFFERENT_INSTRUMENT_SOURCE_BINDING", "year": 2021, "instrument": "EM304"}
+  ],
+  "stage_question": "Does each frozen survey have actual FNV swath-line navigation support near the exact ROV-groundtruth location, beyond coarse footprint polygons?",
+  "inputs_allowed": [
+    "NCEI directory metadata",
+    "FNV navigation files",
+    "port and starboard swath edge coordinates",
+    "timestamps"
+  ],
+  "inputs_forbidden": [
+    "bathymetric depth values",
+    "FBT bathymetry",
+    "rendered bathymetry images",
+    "ROV imagery for detector tuning",
+    "candidate morphology scores"
+  ],
+  "frozen_support_tiers": {
+    "DIRECT_FNV_SWATH_LINE_SUPPORT": "minimum point-to-port-starboard ping segment distance <= 100 m",
+    "NEAR_FNV_SWATH_LINE_SUPPORT": "minimum distance >100 m and <=250 m",
+    "REGIONAL_FNV_SUPPORT_ONLY": "minimum distance >250 m and <=1000 m",
+    "NO_LOCAL_FNV_SUPPORT": "minimum distance >1000 m or no parseable FNV rows"
+  },
+  "report_only_counts_m": [25, 50, 100, 250, 500, 1000],
+  "hard_rules": [
+    "This gate tests navigation/swath support only.",
+    "FNV swath-line proximity is not itself a morphology detection.",
+    "No survey is dropped because it gives an inconvenient support result.",
+    "EX1903L2 remains groundtruth-era and cannot tune the detector.",
+    "After this gate, detector scales remain chosen from native resolution before truth scoring."
+  ],
+  "next_if_supported": "Freeze target-hidden search windows and native-resolution scale ladders, then run EX1203 discovery without reading ROV truth during scoring code.",
+  "claim_ceiling": "MEASURED_NAVIGATION_SUPPORT_BINDING_ONLY"
+}
