@@ -131,6 +131,7 @@ print(json.dumps({
  "status":out["status"],
  "usable_roles":out["usable_roles"],
  "usable_routes":[{"role":x["role"],"route_kind":x["route_kind"],"requested":x["requested"],"status":x.get("status"),"resolved":x.get("resolved"),"content_type":x.get("content_type"),"content_range":x.get("content_range"),"resource":x["resource"]} for x in usable],
+ "bathymetry_probe_summary":[{"route_kind":x["route_kind"],"requested":x["requested"],"status":x.get("status"),"resolved":x.get("resolved"),"content_type":x.get("content_type"),"content_range":x.get("content_range"),"error":x.get("error"),"resource":x["resource"]} for x in probes if x["role"]=="bathymetry"],
  "raster_values_read":False,
  "response_bodies_consumed":False
 },indent=2,ensure_ascii=False))
