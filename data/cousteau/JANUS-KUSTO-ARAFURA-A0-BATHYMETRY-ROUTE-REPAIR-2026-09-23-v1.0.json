@@ -1,0 +1,23 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-A0-BATHYMETRY-ROUTE-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "prior_run": {
+    "github_actions_run_id": 35918749412,
+    "artifact_id": 10776735782,
+    "artifact_zip_sha256": "8d5a9e8a20585402bb60faa52443da3784a9d94677fd725e061e44d124ea1319"
+  },
+  "finding": {
+    "ckan_resource_name": "Arafura Marine Park Bathymetry 2021 6m (tif) [77.9 MB]",
+    "ckan_resource_url": "https://ausseabed-public-warehouse-bathymetry.s3.ap-southeast-2.amazonaws.com/L3/76ae6a9a-2e41-4ec2-8af3-130f3b6292e4/Arafura_Marine_Park_Bathymetry_2021_6m_MSL_cog.tif",
+    "header_status": 404,
+    "backscatter_archive_status": 200
+  },
+  "repair": {
+    "method_v2_changed": false,
+    "selected_subarea_changed": false,
+    "raster_values_read": false,
+    "next_route": "Resolve current Arafura 2021 6m numeric bathymetry through AusSeabed WFS survey/product metadata. Do not substitute rendered WMS imagery."
+  },
+  "status": "SOURCE_ROUTE_REPAIR_ONLY__UNSEEN_STATUS_PRESERVED",
+  "claim_ceiling": "SOURCE_ROUTE_REPAIR_ONLY"
+}
