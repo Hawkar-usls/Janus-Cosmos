@@ -1,0 +1,26 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0B-ROUTE-MISBINDING-CORRECTION-2026-09-23-v1.0",
+  "status": "AUTHORITATIVE_CORRECTION__S0B_PASS_RETRACTED_AS_METADATA_ZIP_MISBINDING",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "s0b_run": {
+    "github_actions_run_id": 35919847427,
+    "artifact_id": 10776284003,
+    "artifact_zip_sha256": "a682b0903bc1f57c178c23ca202367c3cb030ee5a3c8a36ba3d96fb85af5c88d"
+  },
+  "problem": "The resolver treated any unique successful ZIP associated with the catalogue entry as the backscatter data route. The selected ZIP was explicitly named 'Download the metadata (pdf) [1.5 MB]' and is not the raster product.",
+  "actual_backscatter_resource_from_same_ckan_record": {
+    "package_id": "0271e929-1e20-4747-8d7f-dc5751a0f542",
+    "package_title": "Shellharbour Tharawal marine survey - backscatter (NSWENV20171130/GA4878)",
+    "resource_name": "Shellharbour Backscatter 2017 5m (tif) [5.83 MB]",
+    "format": "tif",
+    "url": "https://ausseabed-public-warehouse-bathymetry.s3.ap-southeast-2.amazonaws.com/L3/931d262f-07f4-4a08-8b8e-930474490b20/Shellharbour_Backscatter_2017_5m_Unknown_cog.tif"
+  },
+  "scientific_impact": {
+    "raster_values_read_before_correction": false,
+    "candidate_generation_started": false,
+    "v2_changed": false,
+    "unseen_status_preserved": true
+  },
+  "corrected_rule": "Data-route binding must use resource semantic identity (resource_name and format/product role), not file extension uniqueness.",
+  "claim_ceiling": "SOURCE_ROUTE_CORRECTION_ONLY"
+}
