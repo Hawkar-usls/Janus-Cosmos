@@ -1,0 +1,44 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC4-INDEPENDENT-IMAGERY-COVERAGE-RECEIPT-2026-09-24-v1.0",
+  "status": "NO_DIRECT_IMAGERY_INTERSECTION__NEAR_AND_REGIONAL_COVERAGE_PRESENT",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-INDEPENDENT-IMAGERY-PREREG-2026-09-24-v1.0",
+  "source": {
+    "dataset": "Benthic annotations of stereo-BRUV and drop camera imagery from the South-west Corner Marine Park",
+    "doi": "10.25959/6G5A-3G03",
+    "csv_sha256": "cebd3510f8984e5031667dbeb4c412a5b3ff252f92d4d5b78bffbb39fe2691d8",
+    "raw_rows": 727,
+    "georeferenced_rows": 727,
+    "unique_georeferenced_coordinates": 722,
+    "coordinate_columns": ["latitude","longitude"]
+  },
+  "run": {
+    "github_actions_run_id": 35925218320,
+    "head_sha": "6a19b7e335d0c15f1e8603e46936a0d15dae8626",
+    "artifact_id": 10778503754,
+    "artifact_zip_sha256": "1106e9adf6ef621507e83f1b184d88e99f3d2eca17bdd13079e6cfe1773ab36b",
+    "output_json_sha256": "6aa7ea1dccb0bd922cace0cb2137995fba5ead33ac2f3c668add1c9c943f7d44"
+  },
+  "coverage_counts": {
+    "DIRECT_IMAGE_SUPPORT": 0,
+    "NEAR_IMAGE_COVERAGE_WITHIN_1000M": 62,
+    "REGIONAL_IMAGE_COVERAGE_1000_TO_5000M": 37,
+    "NO_IMAGE_COVERAGE_WITHIN_5000M": 1
+  },
+  "nearest_candidate_to_imagery_record": {
+    "candidate_id": "SWC_BATHY_C085",
+    "blind_rank": 85,
+    "candidate_radius_m": 20,
+    "nearest_record_distance_m": 42.77833168802925,
+    "classification": "NEAR_IMAGE_COVERAGE_NOT_DIRECT"
+  },
+  "interpretation": "The independent BRUV/drop-camera annotation dataset provides broad local imagery coverage around most frozen KUSTO candidates, but no georeferenced imagery record falls inside any frozen candidate radius. Therefore this dataset supplies zero direct visual confirmations under the preregistered rule.",
+  "does_not_establish": [
+    "CANDIDATE_ABSENCE_IN_IMAGES",
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ],
+  "next_gate": "POSTHOC_READ_ONLY_INTERSECTION_OF_SWC2_SUPPORTED_CANDIDATES_WITH_IMAGERY_COVERAGE__THEN_OPTIONAL_AUV_TRACK_RECOVERY",
+  "claim_ceiling": "INDEPENDENT_IMAGERY_COVERAGE_NEGATIVE_FOR_DIRECT_INTERSECTION_ONLY"
+}
