@@ -1,0 +1,30 @@
+{
+  "artifact_id":"JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-CD169-MULTIBEAM-ADDENDUM-2026-09-23-v1.0",
+  "schema":"janus.cosmos.kusto.synthetic_forward_model_v2.multibeam_addendum.v1",
+  "status":"CALIBRATION_ADDENDUM__HISTORICAL_V2_PREREG_IMMUTABLE",
+  "parent":"data/cousteau/JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-PREREG-2026-09-21-v1.1.json",
+  "parent_modified":false,
+  "new_component_pack":"data/cousteau/JANUS-KUSTO-SYNTHETIC-MULTIBEAM-OUTER-BEAM-ERROR-PARAMETER-PACK-2026-09-23-v0.1.json",
+  "new_empirical_capability":{
+    "layer":"MULTIBEAM_PROCESSING",
+    "before":"explicit raw/corrected/SVP state without an authorized numeric depth-error distribution",
+    "after":"CD169-specific empirical nonparametric depth-error bootstrap conditioned on absolute cross-track bin",
+    "error_structure":"heteroscedastic heavy-tailed with increasing magnitude toward extreme beams",
+    "fixed_line_or_side_bias_forbidden":true
+  },
+  "execution_order":[
+    "1_NAVIGATION_NUISANCE",
+    "2_COVERAGE_AND_BEAM_GEOMETRY",
+    "3_MULTIBEAM_DEPTH_NUISANCE_FROM_FROZEN_ACROSS_TRACK_BIN",
+    "4_DOWNSTREAM_MORPHOLOGY_METRICS"
+  ],
+  "firewalls":[
+    "MORPHOLOGY_CANNOT_FEED_BACK_INTO_NOISE_SAMPLE",
+    "CD169_SIGNED_ERROR_NOT_TRANSFERABLE_TO_UNSEEN_SURVEY",
+    "CALIBRATION_NE_VALIDATION",
+    "TAIL_STRESS_NE_PROBABILITY_FORECAST",
+    "HISTORICAL_RESULTS_NOT_RECOMPUTED_OR_RELABELED"
+  ],
+  "promotion_gate":"Run v1-vs-v2 on a different preregistered multibeam survey with raw acquisition plus independent corrected/later reference surface.",
+  "claim_ceiling":"SYNTHETIC_V2_CALIBRATION_ARCHITECTURE_ADDENDUM_ONLY__NO_UNSEEN_SKILL_CLAIM"
+}
