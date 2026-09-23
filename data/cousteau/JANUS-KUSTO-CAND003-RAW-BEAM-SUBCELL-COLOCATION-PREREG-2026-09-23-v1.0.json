@@ -1,0 +1,55 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-RAW-BEAM-SUBCELL-COLOCATION-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T00:50:00Z",
+  "status":"FROZEN_BEFORE_SUBCELL_COLOCATION_EXECUTION",
+  "parents":[
+    "data/cousteau/JANUS-KUSTO-CAND003-DOMINANT-CELLS-RAW-DEPTH-STAGEB-RECEIPT-2026-09-23-v1.0.json",
+    "data/cousteau/JANUS-KUSTO-CAND003-RAW-LINE18-VS-LINE32-SPATIAL-OVERLAP-RECEIPT-2026-09-23-v1.0.json"
+  ],
+  "frozen_cells":[
+    {"id":"CELL_A","lat":-4.0165853,"lon":-12.2985657},
+    {"id":"CELL_B","lat":-4.0152462,"lon":-12.299318}
+  ],
+  "raw_selection":{
+    "source":"/bodc/bodc/data/BODCREQ-9406/CD169_TOBI/sd11280/EM12/EM12raw.zip",
+    "sha256":"060b65865312330e866f842959a89674b744ff44569dcb1fa13daa7b5b0cefb0",
+    "reuse_stageB_geometry_rule":"all non-null raw beams within 100m of each frozen cell",
+    "no_new_depth_based_selection":true,
+    "lineages_of_interest":["0018_240205_000335_raw.all","0032_270205_144041_raw.all"]
+  },
+  "independent_2008_surfaces":[
+    {"id":"KN192-07_2008","instrument":"SeaBeam 3012"},
+    {"id":"KNOX15RR_2008","instrument":"Kongsberg EM120"}
+  ],
+  "colocation":{
+    "query_center":"each raw beam's own reconstructed Earth-coordinate",
+    "fixed_estimator_radii_m":[25,50,100],
+    "estimator":"median good-beam depth within radius",
+    "minimum_2008_points_per_estimate":1,
+    "no_recenter":true
+  },
+  "predeclared_metrics":[
+    "raw_beam_to_raw_beam horizontal separation between closest opposite-lineage beam pair",
+    "raw depth difference for closest opposite-lineage beam pair",
+    "per raw beam: KN192 and KNOX median depth at 25/50/100m",
+    "per raw beam: raw-minus-2008 residuals",
+    "per lineage and radius: median absolute residual to each 2008 survey",
+    "per frozen cell: whether line18 and line32 residual ordering persists after beam-coordinate co-location"
+  ],
+  "interpretation":{
+    "SPATIAL_ALIASING_SUPPORTED":"At primary 50m radius, both raw lineages have comparable absolute residuals to both 2008 surfaces and their opposite-lineage raw depth difference is largely mirrored by the 2008 depth difference between their own beam coordinates.",
+    "LINE32_OUTER_BEAM_SYSTEMATIC_SUPPORTED":"At primary 50m radius, line18 agrees materially better with both independent 2008 surfaces than line32 at their respective beam coordinates, so sub-cell location alone does not explain the split.",
+    "MIXED_OR_INSUFFICIENT":"Otherwise, including insufficient 2008 support."
+  },
+  "primary_radius_m":50,
+  "hard_rules":[
+    "NO_RAW_BEAM_RESELECTION",
+    "NO_RECENTERING",
+    "NO_RADIUS_RETUNING",
+    "25M_AND_100M_ARE_SECONDARY_SENSITIVITY_ONLY",
+    "NO_2008_SURVEY_DROPPING_AFTER_RESULTS",
+    "NO_ABSOLUTE_GROUND_TRUTH_CLAIM",
+    "NO_REFRACTION_CAUSALITY_CLAIM"
+  ],
+  "claim_ceiling":"RAW_BEAM_SUBCELL_COLOCATION_DIAGNOSTIC_ONLY"
+}
