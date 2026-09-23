@@ -1,0 +1,48 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0D-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_RASTER_HEADER_GEOMETRY_BOUND__ZERO_BAND_READS",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "member_receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0B-ARCHIVE-MEMBER-RECEIPT-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35933452724,
+    "artifact_id": 10781139960,
+    "artifact_zip_sha256": "a52cd2fc8bb85f61e9b23e2f708c8143a6b0cb68271c41ed9eeec15d3c2a4862"
+  },
+  "bathymetry_header": {
+    "member": "Elizabeth_Middleton_Reef_Bathymetry_2020_5m_MSL_cog.tif",
+    "width": 275953,
+    "height": 261823,
+    "dtype": "float32",
+    "nodata": 3.4028234663852886e+38,
+    "crs": "EPSG:4326",
+    "transform": [0.000044915764205976074,0.0,146.76668374580115,0.0,-0.00004491576420597608,-29.398333361741777],
+    "bounds": [146.76668374580115,-41.15831349344305,159.16132362573285,-29.398333361741777]
+  },
+  "backscatter_headers": {
+    "crs": "EPSG:32757",
+    "nominal_cell_m": 4,
+    "tiles": [
+      {
+        "id": "ELIZABETH",
+        "member": "32Bit_Geotifs/bksct_elizabeth_clip_20200331.tif",
+        "width": 3370,
+        "height": 2793,
+        "bounds_m": [499950.0,6682680.0,513430.0,6693852.0]
+      },
+      {
+        "id": "MIDDLETON",
+        "member": "32Bit_Geotifs/bksct_middleton_clip_20200331.tif",
+        "width": 3341,
+        "height": 2879,
+        "bounds_m": [502238.0,6736358.0,515602.0,6747874.0]
+      }
+    ]
+  },
+  "scientific_state": {
+    "pixel_values_read": false,
+    "raster_band_read_calls": 0,
+    "groundtruth_assets_read": false
+  },
+  "next_gate": "EM0E_FREEZE_PAIRED_DOMAIN_AND_REPROJECTION",
+  "claim_ceiling": "HEADER_GEOMETRY_ONLY"
+}
