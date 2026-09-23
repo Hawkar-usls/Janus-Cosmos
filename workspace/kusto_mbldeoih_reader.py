@@ -78,7 +78,10 @@ def parse_records(data: bytes, *, emit_arrays=True):
                 sensor_depth_mm,altitude_mm=struct.unpack_from(">2i",h,p); p+=8
                 bx_i,bl_i,ss_type=struct.unpack_from(">3h",h,p)
             time_d=_old_time(year,day,minute,sec,msec)
-            lon=float(lon2u)/60.0 + float(lon2b)/600000.0
+            lon_native=float(lon2u)/60.0 + float(lon2b)/600000.0
+            # Legacy L-DEO files may encode longitude in 0..360. Normalize
+            # to the equivalent WGS84 -180..180 representation for geodesy.
+            lon=((lon_native + 180.0) % 360.0) - 180.0
             lat=float(lat2u)/60.0 + float(lat2b)/600000.0 - 90.0
             sensordepth=0.001*float(sensor_depth_mm)
             altitude=0.001*float(altitude_mm)
