@@ -1,0 +1,29 @@
+name: KUSTO Shark Rock G2A Scale Freeze
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_shark_rock_g2a_scale_freeze.py'
+      - 'data/cousteau/JANUS-KUSTO-SHARK-ROCK-BLIND-TILE-PREREG-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-shark-rock-g2a-scale-freeze.yml'
+  workflow_dispatch:
+
+jobs:
+  g2a:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests shapely
+      - name: Freeze blind sampling scales
+        run: python workspace/kusto_shark_rock_g2a_scale_freeze.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-shark-rock-g2a-scale-freeze-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SHARK-ROCK-G2A-SAMPLING-SCALE-FREEZE-RUN-2026-09-23-v1.0.json
+          retention-days: 30
