@@ -1,0 +1,43 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0-FINAL-PAIRED-SOURCE-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_CURRENT_PAIRED_SOURCE_ROUTES_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0",
+  "survey_identity": {
+    "survey_id": "NSWENV20171130",
+    "gaid": "4878",
+    "newgaid": "20170014S",
+    "platform": "RV Bombora",
+    "sensor": "R2Sonic 2022",
+    "start_date": "2017-05-25",
+    "end_date": "2017-11-30",
+    "sea_area": "Pacific Ocean"
+  },
+  "bathymetry": {
+    "resolution_m": 2,
+    "current_resource_name": "Shellharbour Bathymetry 2017 2m-5m (zip) [27.9 MB]",
+    "current_url": "https://files.ausseabed.gov.au/survey/Shellharbour%20Bathymetry%202017%202m%20-%205m.zip",
+    "route_run": 35920186016,
+    "route_artifact_id": 10776482961,
+    "route_artifact_zip_sha256": "c784eb890d25b70505f5b6d5cc8b89d050557a296235f823f99b04a4de712817"
+  },
+  "backscatter": {
+    "resolution_m": 5,
+    "current_resource_name": "Shellharbour Backscatter 2017 5m (tif) [5.83 MB]",
+    "current_url": "https://ausseabed-public-warehouse-bathymetry.s3.ap-southeast-2.amazonaws.com/L3/931d262f-07f4-4a08-8b8e-930474490b20/Shellharbour_Backscatter_2017_5m_Unknown_cog.tif",
+    "catalog_package_id": "0271e929-1e20-4747-8d7f-dc5751a0f542"
+  },
+  "audit_history": {
+    "stale_bathymetry_wfs_data_url_403": "https://seabed-producthouse-open.s3.ap-southeast-2.amazonaws.com/20170014S_NSWShellharbourTharawal02203_NSWENV20171130/L3/bathymetry/downloads/Shellharbour-Bathymetry-2m-5m-2017.zip",
+    "retracted_s0b_metadata_zip_misbinding": "JANUS-KUSTO-SHELLHARBOUR-S0B-ROUTE-MISBINDING-CORRECTION-2026-09-23-v1.0",
+    "endpoint_repair": "JANUS-KUSTO-SHELLHARBOUR-S0-ENDPOINT-REPAIR-2026-09-23-v1.0",
+    "layer_name_repair": "JANUS-KUSTO-SHELLHARBOUR-S0-LAYER-NAME-REPAIR-2026-09-23-v1.0"
+  },
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "landform_classification_read": false
+  },
+  "next_gate": "S0C_EXACT_2M_ARCHIVE_MEMBER_BINDING_THEN_S1",
+  "claim_ceiling": "PAIRED_SOURCE_ROUTE_BINDING_ONLY"
+}
