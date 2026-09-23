@@ -208,7 +208,7 @@ out={
  "next_gate":"M2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
  "claim_ceiling":"UNSEEN_BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
 }
-p=OUT/"JANUS-KUSTO-LAKE-SAMMAMISH-LS1-BLIND-BATHYMETRY-RUN-2026-09-23-v1.0.json"
+p=OUT/"JANUS-KUSTO-MAUI-PUUNUA-M1-BLIND-BATHYMETRY-RUN-2026-09-23-v1.0.json"
 raw=json.dumps(out,indent=2);p.write_text(raw)
 print(json.dumps({
  "artifact_id":out["artifact_id"],"shape":input_meta["shape"],"valid_cells":input_meta["valid_cells"],
