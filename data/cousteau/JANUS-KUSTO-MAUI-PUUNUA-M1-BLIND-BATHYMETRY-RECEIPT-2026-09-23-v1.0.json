@@ -1,0 +1,41 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAUI-PUUNUA-M1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_53_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-MAUI-PUUNUA-UNSEEN-DUALCHANNEL-V2-PREREG-2026-09-23-v1.0",
+  "source_receipt": "JANUS-KUSTO-MAUI-PUUNUA-M0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0",
+  "run": {
+    "github_actions_run_id": 35911932278,
+    "head_sha": "c0c2d7f8771b6870282d35f3489e307ece1964e7",
+    "conclusion": "success",
+    "artifact_id": 10773073012,
+    "artifact_zip_sha256": "a92d7bb45e870a0275ec6dcb403a98dbc7e5c04d831b7c7f6a8d6acffbd24c39",
+    "candidate_json_sha256": "7ce2bb61817ec30a9a5f20531f9255eaf90e62e3f03f970477335bf57b9e1d11"
+  },
+  "input": {
+    "raster_shape": [1991,1541],
+    "valid_cells": 1027401,
+    "native_cell_m": 1.0,
+    "radii_m": [4,8,16,32],
+    "sampling_stride_m": 8
+  },
+  "blind_execution": {
+    "sample_centers": 12335,
+    "pre_dedup_followup_total": 396,
+    "spatial_dedup_m": 50,
+    "frozen_candidate_count": 53
+  },
+  "truth_firewall": {
+    "backscatter_values_read": false,
+    "benthic_or_geologic_labels_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10773073012,
+    "artifact_zip_sha256": "a92d7bb45e870a0275ec6dcb403a98dbc7e5c04d831b7c7f6a8d6acffbd24c39",
+    "candidate_json_sha256": "7ce2bb61817ec30a9a5f20531f9255eaf90e62e3f03f970477335bf57b9e1d11"
+  },
+  "next_gate": "M2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_USING_BATHYMETRY_SUPPORT_DOMAIN",
+  "claim_ceiling": "UNSEEN_MARINE_BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
