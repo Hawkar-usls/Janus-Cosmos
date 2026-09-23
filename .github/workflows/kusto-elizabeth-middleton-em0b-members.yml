@@ -1,0 +1,29 @@
+name: KUSTO Elizabeth Middleton EM0B Member Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_elizabeth_middleton_em0b_member_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-SOURCE-TRANSPORT-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-elizabeth-middleton-em0b-members.yml'
+  workflow_dispatch:
+
+jobs:
+  em0b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inventory Elizabeth Middleton archives without pixel decode
+        run: python workspace/kusto_elizabeth_middleton_em0b_member_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-elizabeth-middleton-em0b-members-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0B-ARCHIVE-MEMBER-HASH-INVENTORY-2026-09-24-v1.0.json
+          retention-days: 30
