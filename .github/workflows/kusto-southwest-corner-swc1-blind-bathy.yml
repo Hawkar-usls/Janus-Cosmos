@@ -1,0 +1,30 @@
+name: KUSTO South-west Corner SWC1 Blind Bathymetry
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_southwest_corner_swc1_blind_bathy.py'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC0D-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-southwest-corner-swc1-blind-bathy.yml'
+  workflow_dispatch:
+
+jobs:
+  swc1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests rasterio affine
+      - name: Run unchanged-v2 South-west Corner bathymetry-only discovery
+        run: python workspace/kusto_southwest_corner_swc1_blind_bathy.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-southwest-corner-swc1-blind-bathy-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RUN-2026-09-24-v1.0.json
+          retention-days: 30
