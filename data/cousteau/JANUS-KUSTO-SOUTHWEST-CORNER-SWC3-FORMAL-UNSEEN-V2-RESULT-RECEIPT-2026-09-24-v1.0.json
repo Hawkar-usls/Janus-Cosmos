@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_WESTERN_AUSTRALIAN_MARINE_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "implementation_freeze": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10778168227,
+    "artifact_zip_sha256": "7bca6c5749f0974d0ba61b627baeb50c7a026c4984da8438ed29e835516bdb57",
+    "candidate_json_sha256": "c5799ab063dc49f2a16af93fdef373a782611dba6c98c0250583cccc5bbc09ef",
+    "frozen_candidate_count": 100
+  },
+  "swc2_run": {
+    "github_actions_run_id": 35924886498,
+    "head_sha": "a6b7d16eb82379c99070a98f3617afaec40ed6f1",
+    "conclusion": "success",
+    "artifact_id": 10779120528,
+    "artifact_zip_sha256": "a3ae4db4e153bb7a455998d4f21b7766b42ccb9e365da6490d5d71cd8a5f747b",
+    "output_json_sha256": "68e5cdce48270443cb94ed299454eb6eadd672f4a8283316feb2ec67bcd85c4d"
+  },
+  "primary_result": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 61,
+    "blocked_strata": [],
+    "candidate_support_count": 6,
+    "candidate_support_fraction": 0.09836065573770492,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 1.9672131147540983,
+    "candidate_mean_aggregate_score": 1.217657983129854,
+    "control_mean_aggregate_score": 0.7694925437175041,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 0.00011775398173653382,
+    "primary_pass": true,
+    "scientific_promotion": true
+  },
+  "replication_significance": {
+    "formal_unseen_crosschannel_pass_number": 4,
+    "formal_unseen_marine_pass_number": 3,
+    "paired_support_domain_v2_marine_pass_number": 3,
+    "new_geographic_lineage": "WESTERN_AUSTRALIA_SOUTHWEST_MARINE_PARK_NETWORK",
+    "new_sensor_lineage": "KONGSBERG_EM2040C"
+  },
+  "meaning": "With paired-support-domain v2 unchanged, bathymetry-only frozen KUSTO candidates on the genuinely unseen South-west Corner Marine Park corpus were significantly enriched for held-out acoustic-backscatter structure relative to eligible same-radius controls.",
+  "effect_size_note": "The enrichment magnitude is smaller than the prior Maui and Shellharbour marine passes; this heterogeneity is preserved rather than normalized away.",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "ARCHAEOLOGICAL_OR_WRECK_CLASSIFICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "GENERAL_CROSS_SURVEY_REPEATABILITY",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ],
+  "next_gate": "SWC3_INDEPENDENT_IMAGERY_SOURCE_BINDING_AND_TRACK_INTERSECTION",
+  "claim_ceiling": "PREREGISTERED_UNSEEN_WESTERN_AUSTRALIAN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION"
+}
