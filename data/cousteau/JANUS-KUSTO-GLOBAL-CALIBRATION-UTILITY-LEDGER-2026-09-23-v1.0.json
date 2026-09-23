@@ -1,0 +1,83 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
+  "status": "TWO_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__MULTIPLE_FAILURE_MODES_PRESERVED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
+  "formal_unseen_passes": [
+    {
+      "dataset": "USGS_LAKE_SAMMAMISH_2021",
+      "environment": "INLAND_LAKE",
+      "method_generation": "PAIRED_CHANNEL_V1_WITH_PREREGISTERED_ZERO_MAD_RULE",
+      "receipt": "JANUS-KUSTO-LAKE-SAMMAMISH-LS3-FORMAL-UNSEEN-RESULT-RECEIPT-2026-09-23-v1.0",
+      "scorable_candidates": 98,
+      "support_fraction": 0.24489795918367346,
+      "nominal_control_tail": 0.05,
+      "enrichment_ratio": 4.897959183673469,
+      "permutation_p": 0.0001999600079984003,
+      "claim": "UNSEEN_SAME_SURVEY_CROSSCHANNEL_ENRICHMENT_PASS"
+    },
+    {
+      "dataset": "USGS_MAUI_PUUNOA_2013",
+      "environment": "MARINE_CORAL_REEF",
+      "method_generation": "PAIRED_SUPPORT_DOMAIN_V2",
+      "receipt": "JANUS-KUSTO-MAUI-PUUNUA-M3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-23-v1.0",
+      "scorable_candidates": 47,
+      "support_fraction": 0.48936170212765956,
+      "nominal_control_tail": 0.05,
+      "enrichment_ratio": 9.787234042553191,
+      "permutation_p": 0.0001999600079984003,
+      "claim": "UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_ENRICHMENT_PASS"
+    }
+  ],
+  "nonpromotion_evidence": [
+    {
+      "dataset": "USGS_LAKE_CRESCENT_2016",
+      "state": "POSTHOC_ROBUSTNESS_SUPPORT_ONLY",
+      "finding": "Bathymetry candidates retained backscatter enrichment after excluding a zero-MAD metric, but the correction was posthoc and cannot validate the method."
+    },
+    {
+      "dataset": "USGS_LAKE_CHELAN",
+      "state": "UNSEEN_SIGNAL_PRESENT__PRIMARY_BLOCKED",
+      "finding": "Cross-channel enrichment transferred without the zero-MAD pathology, but a frozen tile-radius stratum lacked scoreable backscatter coverage, so the preregistered primary test was blocked."
+    },
+    {
+      "dataset": "USGS_CROSS_SOUND_ALASKA",
+      "state": "FORMAL_PRIMARY_BLOCKED",
+      "finding": "Blind bathymetry candidates were frozen, but backscatter controls were degenerate because native nodata metadata did not define a usable acquisition support domain. This failure motivated paired-support-domain v2; Cross Sound is calibration-only for that change."
+    },
+    {
+      "dataset": "NOAA_SHARK_ROCK",
+      "state": "CASE_LEVEL_SINGLE_SURVEY_RECOVERY_ONLY",
+      "finding": "The blind detector recovered the ROV-confirmed natural rock feature in EX1903L2 within about 18 m, but missed it under frozen selection in EX1203 and EX1805 despite local soundings; no cross-survey recovery was established."
+    },
+    {
+      "dataset": "MIAMI_KEY_BISCAYNE_POCKMARKS",
+      "state": "ACCESS_CAPABILITY_BLOCKED",
+      "finding": "ScienceBase did not support byte-range acquisition for 0.6-0.8 GB archives; no numeric detector result was taken."
+    }
+  ],
+  "utility_now_supported": [
+    "KUSTO can generate bathymetric morphology candidates that are statistically enriched for independently held-out acoustic-backscatter structure on at least two genuinely unseen real datasets.",
+    "The enrichment result has replicated across an inland-lake corpus and a marine coral-reef corpus.",
+    "The pipeline can preserve blocked and negative outcomes and has exposed concrete portability failures involving zero-MAD statistics, coverage strata, support-domain semantics, and extreme-tail selection.",
+    "KUSTO can be used as a prioritization layer for where additional independent sonar, imagery, ROV, or survey replay is worth spending effort."
+  ],
+  "not_yet_supported": [
+    "GLOBAL_ANOMALY_DETECTION_ACCURACY",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "OBJECT_IDENTITY_CLASSIFICATION",
+    "ARTIFICIALITY_CLASSIFICATION",
+    "ARCHAEOLOGICAL_OR_SHIPWRECK_IDENTIFICATION_FROM_MORPHOLOGY",
+    "GENERAL_CROSS_SURVEY_REPEATABILITY",
+    "DIRECT_VISUAL_CONFIRMATION_RATE",
+    "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
+  ],
+  "next_required_expansion": [
+    "Run paired-support-domain v2 unchanged on additional unseen marine datasets from different instruments and regions.",
+    "Build a >=20 target known-object benchmark with hidden truth for localization and target-versus-control enrichment.",
+    "Continue independent-survey replay separately from same-survey cross-channel validation.",
+    "Bind candidate locations to ROV/still/video tracks only after frozen candidate generation.",
+    "Expand beyond NOAA/USGS to EMODnet and AusSeabed source-resolved products without using composite grids as independent validation of their source surveys."
+  ],
+  "claim_ceiling": "REPLICATED_UNSEEN_CROSSCHANNEL_ANOMALY_ENRICHMENT_ON_TWO_REAL_DATASETS__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY"
+}
