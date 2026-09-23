@@ -1,0 +1,61 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS3-FORMAL-UNSEEN-VALIDATION-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "ls1_candidate_authority": {
+    "receipt": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10770041206,
+    "artifact_zip_sha256": "24b516474b3851958b5d7f3f0da816e7416df400b0dcde73c9c26b8f791966bd",
+    "candidate_json_sha256": "7dddb0b6204060ebe2963757aee83c5ee8751f87917231ee47f415ddb84d1b07",
+    "frozen_candidates": 100
+  },
+  "ls2_run": {
+    "github_actions_run_id": 35902979311,
+    "head_sha": "52e579704fdf5c052d931aaefafc233079e397ab",
+    "conclusion": "success",
+    "artifact_id": 10769903096,
+    "artifact_zip_sha256": "e81e4d20b0dab72809258766205587b4a7267619c55ad2bb24dbbe2b3a694534",
+    "output_json_sha256": "cdad49fdd4535ff837bf558b5b48cfe8bde3ec5fec5200e8494cde69aa3714ff"
+  },
+  "coverage": {
+    "frozen_candidate_count": 100,
+    "scorable_candidate_count": 98,
+    "blocked_strata": 0
+  },
+  "primary_statistics": {
+    "candidate_support_count": 24,
+    "candidate_support_fraction": 0.24489795918367346,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 4.897959183673469,
+    "candidate_mean_aggregate_score": 3.0680656706628153,
+    "control_mean_aggregate_score": 1.0241408661997309,
+    "stratified_permutation_iterations": 5000,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 4.081981058328846e-27
+  },
+  "promotion_requirements": {
+    "no_coverage_blocked_stratum": true,
+    "minimum_active_metric_rule": true,
+    "permutation_p_below_0_05": true,
+    "candidate_mean_above_control_mean": true,
+    "support_enrichment_above_1": true,
+    "all_preregistered_requirements_pass": true
+  },
+  "truth_firewall": {
+    "landslide_or_fault_labels_read_before_validation": false,
+    "candidate_coordinates_changed": false,
+    "candidate_radii_changed": false,
+    "thresholds_changed_after_ls1": false,
+    "zero_mad_rule_changed_after_backscatter": false
+  },
+  "scientific_interpretation": "On a genuinely unseen paired Lake Sammamish dataset, bathymetry-selected KUSTO candidates were significantly enriched for independently computed backscatter anomaly evidence relative to matched same-radius controls under the fully preregistered dual-channel protocol.",
+  "does_not_establish": [
+    "object identity",
+    "artificiality",
+    "independent survey replication",
+    "global ocean-wide precision or recall"
+  ],
+  "next_requirement": "Replicate on additional unseen paired datasets from different geographic regions and sensor families, then add independent-survey or direct-visual ground truth where available.",
+  "claim_ceiling": "PREREGISTERED_UNSEEN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION_PASS__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
