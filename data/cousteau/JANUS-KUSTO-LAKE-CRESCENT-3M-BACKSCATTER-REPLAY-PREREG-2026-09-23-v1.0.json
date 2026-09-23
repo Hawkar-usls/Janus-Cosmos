@@ -1,0 +1,69 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-REPLAY-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_BACKSCATTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "candidate_authority": {
+    "artifact_id": 10763811319,
+    "artifact_zip_sha256": "ea628a47487db03aa527fc60d87d76ecaeb82fc45fcc7f3ebc2efcf865addd25",
+    "candidate_json_sha256": "157239fa49fc12906a5720792b86e84f2716b0b45891afc35071963a03f23066",
+    "frozen_candidate_count": 100
+  },
+  "backscatter_input": {
+    "sciencebase_item_id": "5eea74d882ce3bd58d8572dd",
+    "filename": "LakeCrescent_backscatter_3m_UTM10_NAD83.zip",
+    "native_cell_m": 3,
+    "format": "GeoTIFF"
+  },
+  "candidate_rules": {
+    "coordinates": "IMMUTABLE_FROM_CANDIDATE_ARTIFACT",
+    "radii": "IMMUTABLE_FROM_CANDIDATE_ARTIFACT",
+    "no_recentering": true,
+    "minimum_patch_valid_fraction": 0.80
+  },
+  "backscatter_metrics": [
+    "disk_standard_deviation",
+    "absolute_center_vs_annulus_contrast_over_annulus_sd",
+    "disk_q95_minus_q05_range",
+    "median_first_difference_edge_energy"
+  ],
+  "control_design": {
+    "rng_seed": 260923,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "radius_matched": true,
+    "minimum_distance_from_any_frozen_candidate_m": 200,
+    "same_raster_validity_rules": true
+  },
+  "score": {
+    "per_radius_control_reference": true,
+    "metric_transform": "positive robust z using control median and 1.4826*MAD",
+    "aggregate": "0.5 * max(metric_robust_z) + 0.5 * mean(metric_robust_z)",
+    "candidate_support_threshold": "same-radius control aggregate-score q95"
+  },
+  "population_test": {
+    "primary": "radius-matched permutation test of mean aggregate score",
+    "iterations": 5000,
+    "alpha": 0.05,
+    "secondary": [
+      "candidate_fraction_above_same-radius_control_q95",
+      "support_enrichment_ratio_vs_control_tail",
+      "Mann-Whitney-U one-sided candidate scores > controls"
+    ]
+  },
+  "truth_firewall": {
+    "geologic_feature_labels_read": false,
+    "landslide_or_fault_coordinates_read": false,
+    "bathymetry_reoptimized_after_backscatter": false
+  },
+  "interpretation": {
+    "pass": "Frozen bathymetric anomalies are enriched for independent acoustic-backscatter anomaly at the same coordinates within this survey product pair.",
+    "nonpass": "No demonstrated cross-channel enrichment; bathymetry candidates remain bathymetry-only.",
+    "forbidden_claims": [
+      "independent survey replication",
+      "object identity",
+      "artificiality",
+      "landslide or fault classification"
+    ]
+  },
+  "claim_ceiling": "SAME-SURVEY_CROSS_CHANNEL_ANOMALY_ENRICHMENT_ONLY"
+}
