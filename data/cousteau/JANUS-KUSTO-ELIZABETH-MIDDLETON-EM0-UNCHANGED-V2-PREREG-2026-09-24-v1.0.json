@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_ELIZABETH_MIDDLETON_RASTER_OR_GROUNDTRUTH_READ",
+  "created_date": "2026-09-24",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_utility_ledger": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
+  "dataset": {
+    "id": "AUSSEABED_ELIZABETH_MIDDLETON_REEFS_GA4848",
+    "region": "LORD_HOWE_MARINE_PARK_CORAL_SEA_AUSTRALIA",
+    "survey_id": "GA4848",
+    "survey_period": "2020-01-31/2020-02-06",
+    "platform": "TV Bluefin",
+    "sensor": "KONGSBERG_EM2040C_HD_300_KHZ",
+    "published_bathymetry_cell_m": 5,
+    "published_bathymetry_area_km2_including_transit": 312,
+    "separate_groundtruth_assets_exist": true,
+    "groundtruth_assets_withheld": ["AUV_SIRIUS_IMAGERY","SEDIMENT_GRABS","BRUV_IMAGERY"]
+  },
+  "method": {
+    "generation": "PAIRED_SUPPORT_DOMAIN_V2",
+    "scientific_method_changed": false,
+    "native_scale_rule": "4_8_16_32_BATHYMETRY_CELLS",
+    "radii_m": [20,40,80,160],
+    "sampling_stride_m": 40,
+    "tail_quantile": 0.995,
+    "spatial_dedup_m": 250,
+    "maximum_candidates": 100,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "execution_order": [
+    "EM0_RESOLVE_CURRENT_BATHYMETRY_AND_BACKSCATTER_RESOURCES_METADATA_ONLY",
+    "EM1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "EM2_FROZEN_CANDIDATE_HELDOUT_BACKSCATTER_REPLAY_V2",
+    "EM3_ONLY_AFTER_EM2_OPTIONAL_AUV_SEDIMENT_BRUV_GROUNDTRUTH_BINDING"
+  ],
+  "truth_firewall": {
+    "auv_imagery_read_before_em2": false,
+    "sediment_labels_read_before_em2": false,
+    "bruv_imagery_read_before_em2": false,
+    "no_posthoc_scale_selection": true,
+    "no_candidate_recentering": true,
+    "no_threshold_retuning": true
+  },
+  "claim_ceiling": "UNCHANGED_V2_INDEPENDENT_SENSOR_LINEAGE_PREREGISTRATION_ONLY"
+}
