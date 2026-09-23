@@ -1,0 +1,84 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-MEASURED-SUPPORT-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_THREE_DIRECT_FNV_SURVEYS__EX2102_REGIONAL_ONLY",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "data/cousteau/JANUS-KUSTO-SHARK-ROCK-MEASURED-SUPPORT-PREREG-2026-09-23-v1.0.json",
+  "run": {
+    "github_actions_run_id": 35886327706,
+    "head_sha": "03e4f0c67ad3fcf5da91524882da9d88fd07b190",
+    "conclusion": "success",
+    "artifact_id": 10762896794,
+    "artifact_zip_sha256": "e31fb9500e7a5713f4cf9a7719894b5fbb59f1ad08850816a797e870a30062f3"
+  },
+  "target": {
+    "name": "SHARK_ROCK",
+    "lat": 31.59517078,
+    "lon": -79.10225958,
+    "independent_rov_truth": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK"
+  },
+  "scientific_state": {
+    "depth_values_read": false,
+    "detector_run": false,
+    "truth_scoring_run": false
+  },
+  "survey_results": [
+    {
+      "survey_id": "EX1203",
+      "year": 2012,
+      "instrument": "EM302",
+      "role": "DISCOVERY_SOURCE_BINDING",
+      "fnv_file_count": 313,
+      "parseable_fnv_file_count": 313,
+      "min_swath_line_distance_m": 1.0653039931843404,
+      "rows_within_m": {"25": 7, "50": 12, "100": 22, "250": 58, "500": 123, "1000": 256},
+      "support_tier": "DIRECT_FNV_SWATH_LINE_SUPPORT",
+      "nearest_file": "0263_20120518_195647_EX1203_MB.all.mb58.fnv"
+    },
+    {
+      "survey_id": "EX1805",
+      "year": 2018,
+      "instrument": "EM302",
+      "role": "HELDOUT_PRE_TRUTH_SOURCE_BINDING",
+      "fnv_file_count": 1663,
+      "parseable_fnv_file_count": 1663,
+      "min_swath_line_distance_m": 0.8105614530637205,
+      "rows_within_m": {"25": 34, "50": 71, "100": 140, "250": 350, "500": 714, "1000": 2183},
+      "support_tier": "DIRECT_FNV_SWATH_LINE_SUPPORT",
+      "nearest_file": "0750_20180605_024124_EX1805_MB.all.mb58.fnv"
+    },
+    {
+      "survey_id": "EX1903L2",
+      "year": 2019,
+      "instrument": "EM302",
+      "role": "GROUNDTRUTH_ERA_EXCLUDED_FROM_DISCOVERY_TUNING",
+      "fnv_file_count": 860,
+      "parseable_fnv_file_count": 854,
+      "min_swath_line_distance_m": 0.0024529640680597013,
+      "rows_within_m": {"25": 68, "50": 136, "100": 278, "250": 703, "500": 1310, "1000": 2280},
+      "support_tier": "DIRECT_FNV_SWATH_LINE_SUPPORT",
+      "nearest_file": "0141_20190628_085308_EX1903L2_MB.all.mb58.fnv"
+    },
+    {
+      "survey_id": "EX2102",
+      "year": 2021,
+      "instrument": "EM304",
+      "role": "POST_TRUTH_REGIONAL_CONTROL_ONLY",
+      "fnv_file_count": 696,
+      "parseable_fnv_file_count": 696,
+      "min_swath_line_distance_m": 649.2265105719935,
+      "rows_within_m": {"25": 0, "50": 0, "100": 0, "250": 0, "500": 0, "1000": 233},
+      "support_tier": "REGIONAL_FNV_SUPPORT_ONLY",
+      "nearest_file": "0109_20210519_061755_EX2102_MB_EM304.gsf.mb121.fnv"
+    }
+  ],
+  "interpretation": "EX1203, EX1805 and EX1903L2 have measured FNV swath-line support essentially through the ROV-groundtruth location. EX2102 footprint overlap does not imply direct measured support; its nearest FNV swath line is approximately 649 m away and it is excluded from direct target replication claims.",
+  "next_gate": "SHARK_ROCK_TARGET_HIDDEN_EX1203_DISCOVERY__EX1805_HELDOUT_REPLAY__EX1903L2_TRUTH_UNLOCK",
+  "hard_rules_preserved": [
+    "NO_DEPTH_VALUES_READ_IN_SUPPORT_GATE",
+    "FNV_SUPPORT_NE_MORPHOLOGY_DETECTION",
+    "EX1903L2_TRUTH_ERA_CANNOT_TUNE_DISCOVERY",
+    "EX2102_REGIONAL_SUPPORT_CANNOT_BE_PROMOTED_TO_DIRECT_REPLICATION",
+    "NO_POSTHOC_SCALE_OR_THRESHOLD_SELECTION"
+  ],
+  "claim_ceiling": "MEASURED_NAVIGATION_SUPPORT_BINDING_ONLY"
+}
