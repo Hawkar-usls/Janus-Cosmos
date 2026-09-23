@@ -1,0 +1,110 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_ARAFURA_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_frontier": "JANUS-KUSTO-BROAD-FRONTIER-CHECKPOINT-2026-09-23-v1.0",
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+  "calibration_exclusions": [
+    "Lake Crescent",
+    "Lake Chelan",
+    "Cross Sound Alaska",
+    "Lake Sammamish",
+    "Maui Puunoa",
+    "Shellharbour Tharawal"
+  ],
+  "dataset": {
+    "title": "Arafura Marine Park survey SOL7491/GA0366",
+    "collection_dates": ["2020-11-02","2020-11-15"],
+    "platform": "RV Solander",
+    "sensor": "Kongsberg EM2040C Dual Head",
+    "named_subareas": ["Money Shoal","Pillar Bank"],
+    "selected_subarea": "Money Shoal",
+    "selection_rule": "Lexicographically first named survey subarea in public metadata, frozen before raster values or morphology outcomes.",
+    "bathymetry": {
+      "public_dataset": "https://data.gov.au/data/dataset/47e1ed7e-9182-4f3a-b8a3-779f7bbc774e",
+      "native_cell_m": 6,
+      "format": "32-bit GeoTIFF"
+    },
+    "backscatter": {
+      "ga_dataset_id": 145286,
+      "public_dataset": "https://researchdata.edu.au/arafura-marine-park-backscatter-sol7491ga0366/3413244/",
+      "direct_archive": "https://d28rz98at9flks.cloudfront.net/145286/145286_00_0.zip",
+      "format": "two 32-bit GeoTIFF mosaics, one per named survey area"
+    },
+    "later_groundtruth_channels": [
+      "SEABED_SAMPLES",
+      "UNDERWATER_IMAGERY",
+      "TOWED_VIDEO",
+      "DIGITAL_STILLS",
+      "BRUVS"
+    ]
+  },
+  "bathymetry_discovery": {
+    "native_cell_m": 6,
+    "radii_m": [24,48,96,192],
+    "sampling_stride_m": 48,
+    "spatial_dedup_m": 300,
+    "maximum_candidates": 100,
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in upper tail OR generic score in upper 0.5 percent"
+  },
+  "paired_support_domain_v2": {
+    "rule": "Backscatter controls are eligible only where the independently defined bathymetry-valid support mask covers the patch; backscatter anomaly values may not define the support domain.",
+    "bathymetry_support_patch_min_fraction": 0.8,
+    "backscatter_native_valid_patch_min_fraction": 0.8,
+    "value_based_nodata_inference_forbidden": true,
+    "candidate_and_control_support_rule_identical_within_radius": true
+  },
+  "backscatter_replay": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 600,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95"
+  },
+  "primary_test": {
+    "stratified_permutation_iterations": 5000,
+    "alpha": 0.05,
+    "promotion_requires_all": [
+      "no coverage-blocked frozen radius stratum",
+      "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+      "permutation p < 0.05",
+      "candidate mean aggregate score > control mean aggregate score",
+      "support fraction / 0.05 > 1"
+    ]
+  },
+  "execution_order": [
+    "A0_SOURCE_BINDING_NO_RASTER_VALUES",
+    "A1_MONEY_SHOAL_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "A2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+    "A3_SEAL_UNSEEN_V2_RESULT",
+    "A4_ONLY_AFTER_A3_BIND_SEABED_SAMPLES_AND_UNDERWATER_IMAGERY"
+  ],
+  "hard_rules": [
+    "V2_METHOD_UNCHANGED",
+    "NO_SUBAREA_SWITCH_AFTER_OUTCOME",
+    "NO_CANDIDATE_RECENTER",
+    "NO_RADIUS_THRESHOLD_OR_SUPPORT_RULE_CHANGE_AFTER_A1",
+    "NO_POST_SURVEY_SEABED_FEATURE_INTERPRETATION_READ_BEFORE_A3",
+    "NO_UNDERWATER_IMAGERY_OR_SAMPLE_LABELS_READ_BEFORE_A3"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION_ONLY__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
