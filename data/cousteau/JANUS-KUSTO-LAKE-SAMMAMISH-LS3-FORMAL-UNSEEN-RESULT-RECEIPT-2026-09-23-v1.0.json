@@ -1,0 +1,44 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS3-FORMAL-UNSEEN-RESULT-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10770041206,
+    "artifact_zip_sha256": "24b516474b3851958b5d7f3f0da816e7416df400b0dcde73c9c26b8f791966bd",
+    "candidate_json_sha256": "7dddb0b6204060ebe2963757aee83c5ee8751f87917231ee47f415ddb84d1b07",
+    "frozen_candidate_count": 100
+  },
+  "ls2_run": {
+    "github_actions_run_id": 35902979311,
+    "head_sha": "52e579704fdf5c052d931aaefafc233079e397ab",
+    "conclusion": "success",
+    "artifact_id": 10769903096,
+    "artifact_zip_sha256": "e81e4d20b0dab72809258766205587b4a7267619c55ad2bb24dbbe2b3a694534",
+    "output_json_sha256": "cdad49fdd4535ff837bf558b5b48cfe8bde3ec5fec5200e8494cde69aa3714ff"
+  },
+  "primary_result": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 98,
+    "blocked_strata": [],
+    "candidate_support_count": 24,
+    "candidate_support_fraction": 0.24489795918367346,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 4.897959183673469,
+    "candidate_mean_aggregate_score": 3.0680656706628153,
+    "control_mean_aggregate_score": 1.0241408661997309,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 4.081981058328846e-27,
+    "primary_pass": true,
+    "scientific_promotion": true
+  },
+  "meaning": "On a genuinely unseen Lake Sammamish corpus, bathymetry-only frozen KUSTO candidates were enriched for independently held-out acoustic-backscatter structure under the preregistered cross-channel test.",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "INDEPENDENT_SURVEY_REPLICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_SAME_SURVEY_CROSSCHANNEL_VALIDATION"
+}
