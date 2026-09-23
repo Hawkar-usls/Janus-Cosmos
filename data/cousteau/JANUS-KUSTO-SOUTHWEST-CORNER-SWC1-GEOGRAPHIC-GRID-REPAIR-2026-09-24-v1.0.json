@@ -1,0 +1,30 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-GEOGRAPHIC-GRID-REPAIR-2026-09-24-v1.0",
+  "status": "FROZEN_IMPLEMENTATION_GEOREF_REPAIR_BEFORE_CANDIDATE_GENERATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35924127792,
+    "failure": "EXECUTOR_EXPECTED_METRIC_AFFINE_UNITS_BUT_SOURCE_GEOTIFF_AFFINE_IS_GEOGRAPHIC_DEGREES",
+    "observed_affine_pixel_degrees": [0.000044915764205975607, 0.000044915764205975823],
+    "candidate_generation_started": false,
+    "candidate_artifact_created": false,
+    "backscatter_values_read": false,
+    "underwater_imagery_read": false
+  },
+  "repair": {
+    "published_native_cell_m_remains": 5,
+    "radii_m_remain": [20,40,80,160],
+    "sampling_stride_m_remains": 40,
+    "dedup_m_remains": 250,
+    "filter_pixel_radii_remain": [4,8,16,32],
+    "metric_candidate_crs": "EPSG:32750",
+    "metric_crs_reason": "Mechanical UTM zone for published GA-4858 extent near 114.7E to 115.0E and 34S; no morphology values used.",
+    "pixel_geometry_rule": "Use frozen published 5 m nominal cell for detector scale-to-pixel conversion; use source affine only for pixel-to-geographic location; transform candidate locations to EPSG:32750 for metric dedup and downstream distances.",
+    "geodesic_cell_size_recording": "Record center-point east/north geodesic pixel dimensions diagnostically; do not use them to retune frozen radii."
+  },
+  "scientific_method_changed": false,
+  "thresholds_changed": false,
+  "scale_ladder_changed": false,
+  "claim_ceiling": "IMPLEMENTATION_GEOREFERENCE_REPAIR_ONLY"
+}
