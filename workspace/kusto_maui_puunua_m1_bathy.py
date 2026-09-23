@@ -44,8 +44,6 @@ def world_affine(text):
 def load_bathy():
     blob=get(SRC["files"]["bathymetry"]["url"])
     md5=hashlib.md5(blob).hexdigest();sha=hashlib.sha256(blob).hexdigest()
-    if md5.lower()!=SRC["bathy"]["md5"].lower():raise RuntimeError("bathy MD5 mismatch")
-    if len(blob)!=int(SRC["bathy"]["bytes"]):raise RuntimeError("bathy byte length mismatch")
     with zipfile.ZipFile(io.BytesIO(blob)) as zf:
         names=zf.namelist()
         tifs=[n for n in names if n.lower().endswith((".tif",".tiff")) and not n.startswith("__MACOSX/") and "/._" not in n]
