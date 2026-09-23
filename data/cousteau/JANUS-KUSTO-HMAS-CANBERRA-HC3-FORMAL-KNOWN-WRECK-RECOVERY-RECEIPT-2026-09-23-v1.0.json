@@ -1,0 +1,34 @@
+{
+  "artifact_id": "JANUS-KUSTO-HMAS-CANBERRA-HC3-FORMAL-KNOWN-WRECK-RECOVERY-RECEIPT-2026-09-23-v1.0",
+  "status": "CASE_LEVEL_KNOWN_OBJECT_RECOVERY_POSITIVE_CONTROL_PASS",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-HMAS-CANBERRA-HC0-KNOWN-WRECK-RECOVERY-PREREG-2026-09-23-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-HMAS-CANBERRA-HC1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10774354254,
+    "artifact_zip_sha256": "e20f9a1305f482b14004119a798167f287957a7da945333814357f6730eeab41",
+    "candidate_json_sha256": "a45b3de31c0fb04375c72077e7c85ac896b92262b224652e0fd40f3d496fa242"
+  },
+  "truth_score_run": {
+    "github_actions_run_id": 35916196693,
+    "artifact_id": 10774818987,
+    "artifact_zip_sha256": "efeedb63ef21ebaaf0ab17ff27547fb005c842de4c6a8db9c6683a99e008c1b2",
+    "output_json_sha256": "8d31a4595be6d58d651a7e206a54024b6d0c360f2971ce97c8d282ac7dc80cd0"
+  },
+  "result": {
+    "nearest_candidate_id": "HC_BATHY_C001",
+    "nearest_candidate_blind_rank": 1,
+    "nearest_candidate_radius_m": 2,
+    "distance_to_official_dive_site_anchor_m": 5.375049000532497,
+    "candidate_count_within_200m": 10,
+    "case_level_recovery": true
+  },
+  "interpretation": "The frozen detector's top-ranked bathymetric anomaly lies within 5.4 m of an independent official dive-site anchor for the known ex-HMAS Canberra wreck. Because the survey itself was specifically acquired to map the wreck and all frozen candidates fall within 200 m of the site anchor, this is retained only as a case-level positive recovery control.",
+  "does_not_establish": [
+    "GENERAL_WRECK_LOCALIZATION_ACCURACY",
+    "POPULATION_RECALL",
+    "FALSE_POSITIVE_RATE",
+    "OBJECT_IDENTITY_FROM_MORPHOLOGY"
+  ],
+  "claim_ceiling": "CASE_LEVEL_KNOWN_OBJECT_RECOVERY_POSITIVE_CONTROL_ONLY"
+}
