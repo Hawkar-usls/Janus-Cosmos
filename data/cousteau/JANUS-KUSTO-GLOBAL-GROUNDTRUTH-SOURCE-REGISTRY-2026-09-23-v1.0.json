@@ -3,7 +3,7 @@
   "schema": "janus.cosmos.kusto.global_groundtruth.source_registry.v1",
   "created_date": "2026-09-23",
   "prereg": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0.json",
-  "status": "GROUNDTRUTH_EXPANSION_WAVE_ACTIVE",
+  "status": "GROUNDTRUTH_REGISTRY_REACHED_20_COUNT__EXECUTION_GATE_REMAINS_OPEN",
   "sources": [
     {
       "id": "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
@@ -336,6 +336,157 @@
       "benchmark_role": "VISUALLY_CONFIRMED_ANTHROPOGENIC_OBJECT_CONTROL_WITH_NONDEFINITIVE_IDENTITY",
       "source_binding_status": "ENERGY_COMPANY_DISCOVERY_DATA_OR_LATER_MAPPING_BINDING_OPEN",
       "priority": 2
+    },
+    {
+      "id": "NOAA_MONITOR_BLUEFIELDS",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_FREIGHTER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "SIDESCAN_SONAR",
+        "HIGH_RESOLUTION_MULTIBEAM"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/bluefields.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_U576",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TYPE_VIIC_U_BOAT_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "MULTIBEAM_SURVEYS",
+        "TARGETED_HIGH_RESOLUTION_ACOUSTIC_IMAGERY"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/u-576.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_DIXIE_ARROW",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TANKER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO",
+        "FULL_SITE_PLAN"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/dixie_arrow.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_EM_CLARK",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TANKER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO",
+        "PHOTOMOSAIC"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/clark.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_U701",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TYPE_VIIC_U_BOAT_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO",
+        "SITE_PLAN",
+        "3D_VIDEO"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/u-701.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_U85",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TYPE_VIIB_U_BOAT_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO",
+        "PHOTOMOSAIC",
+        "PHOTOGRAMMETRY"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/u-85.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_ATLAS",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "IDENTIFIED_TANKER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/atlas.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_CARIBSEA",
+      "region": "NORTHWEST_ATLANTIC_CAPE_LOOKOUT",
+      "truth_class": "IDENTIFIED_FREIGHTER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO",
+        "FULL_SITE_PLAN"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/caribsea.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_MONITOR_ARIO",
+      "region": "NORTHWEST_ATLANTIC_CAPE_LOOKOUT",
+      "truth_class": "IDENTIFIED_TANKER_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "HIGH_RESOLUTION_MULTIBEAM",
+        "STILL_VIDEO"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/ario.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_MULTIBEAM_PRODUCT_AND_FROZEN_SEARCH_WINDOW_BINDING_OPEN",
+      "priority": 1
     }
   ],
   "first_execution_targets": [
@@ -346,5 +497,12 @@
   ],
   "reason_for_first_execution_targets": "Together they provide anthropogenic positive, natural false-artificiality control, natural morphologic positive, and bathymetry/backscatter cross-channel control across ocean and inland settings.",
   "claim_ceiling": "SOURCE_BINDING_AND_BENCHMARK_ROLE_FREEZE_ONLY",
-  "groundtruth_target_count_current": 11
+  "groundtruth_target_count_current": 20,
+  "groundtruth_population_gate": {
+    "minimum_targets": 20,
+    "current_registry_targets": 20,
+    "registry_count_gate": "PASS_REGISTRY_COUNT_ONLY",
+    "scientific_population_gate": "OPEN_UNTIL_EXACT_SURVEY_BINDING_AND_HIDDEN_TRUTH_EXECUTION",
+    "note": "Reaching 20 registry entries is not a validation pass."
+  }
 }
