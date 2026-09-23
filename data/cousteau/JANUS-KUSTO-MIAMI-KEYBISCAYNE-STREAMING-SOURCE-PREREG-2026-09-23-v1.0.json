@@ -1,0 +1,46 @@
+{
+  "artifact_id": "JANUS-KUSTO-MIAMI-KEYBISCAYNE-STREAMING-SOURCE-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_NUMERIC_BATHYMETRY_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_source_receipt": "JANUS-KUSTO-USGS-NATURAL-CONTROLS-SOURCE-GATE-RECEIPT-2026-09-23-v1.0",
+  "dataset": {
+    "sciencebase_item_id": "5a96f5cee4b06990606c4ff0",
+    "doi": "10.5066/F72J6B4Z",
+    "sensor": "Bluefin B12 AUV / Imagenex MBDelta multibeam",
+    "archives": [
+      {
+        "id": "MIAMI_POCKMARK",
+        "name": "MBDelta_Multibeam_bathymetry_data_for_Miami_Pockmark.zip",
+        "expected_bytes": 624491811,
+        "expected_md5": "a826b6fac70d6b309df1060941bcf8e3"
+      },
+      {
+        "id": "KEY_BISCAYNE_POCKMARK",
+        "name": "MBDelta_Multibeam_bathymetry_data_for_KeyBiscayne_Pockmark.zip",
+        "expected_bytes": 804076038,
+        "expected_md5": "635c567bb4b02c138aa302ab25631d53"
+      }
+    ]
+  },
+  "stage": "REMOTE_ARCHIVE_STRUCTURE_ONLY",
+  "allowed_reads": [
+    "HTTP response headers",
+    "ZIP end-of-central-directory tail bytes",
+    "ZIP central directory metadata",
+    "member names, compressed sizes, uncompressed sizes, methods and CRC"
+  ],
+  "forbidden_reads": [
+    "bathymetry member payload bytes",
+    "numeric sounding values",
+    "pockmark truth coordinates",
+    "published target outlines"
+  ],
+  "range_safety": {
+    "tail_probe_bytes": 131072,
+    "if_server_returns_200_for_range": "DO_NOT_CONSUME_FULL_BODY; classify RANGE_UNSUPPORTED",
+    "maximum_nonpayload_metadata_bytes": 8388608
+  },
+  "purpose": "Determine whether the two 0.6-0.8 GB public AUV archives can be inspected and selectively extracted without downloading full archives, enabling a blind natural-morphology benchmark in a new ocean region and sensor family.",
+  "next_gate": "FREEZE_MEMBER_SELECTION_AND_NATIVE_RESOLUTION_FROM_ARCHIVE_METADATA_BEFORE_NUMERIC_READ",
+  "claim_ceiling": "REMOTE_ARCHIVE_STRUCTURE_AND_ACCESS_CAPABILITY_ONLY"
+}
