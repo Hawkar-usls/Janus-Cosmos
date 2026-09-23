@@ -1,0 +1,46 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAUI-PUUNUA-M3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_MARINE_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-MAUI-PUUNUA-UNSEEN-DUALCHANNEL-V2-PREREG-2026-09-23-v1.0",
+  "implementation_addendum": "JANUS-KUSTO-MAUI-PUUNUA-M2-PAIRED-SUPPORT-DOMAIN-V2-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-MAUI-PUUNUA-M1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10773073012,
+    "artifact_zip_sha256": "a92d7bb45e870a0275ec6dcb403a98dbc7e5c04d831b7c7f6a8d6acffbd24c39",
+    "candidate_json_sha256": "7ce2bb61817ec30a9a5f20531f9255eaf90e62e3f03f970477335bf57b9e1d11",
+    "frozen_candidate_count": 53
+  },
+  "m2_run": {
+    "github_actions_run_id": 35912295360,
+    "head_sha": "fb9af45a61e97fc01be9c8d4acc229b2f0f829f1",
+    "conclusion": "success",
+    "artifact_id": 10773117838,
+    "artifact_zip_sha256": "db5163d6327cd03114cc6870050464bf19969000b7f6ab252f9629e9f8ffeff0",
+    "output_json_sha256": "5a75ef1cd1e9dc1b75cb0a0e1a91f3daaa2b76e5f155f2eda0df1655bc3ae476"
+  },
+  "primary_result": {
+    "frozen_candidates": 53,
+    "scorable_candidates": 47,
+    "blocked_strata": [],
+    "candidate_support_count": 23,
+    "candidate_support_fraction": 0.48936170212765956,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 9.787234042553191,
+    "candidate_mean_aggregate_score": 3.11995342341545,
+    "control_mean_aggregate_score": 0.8427653708026664,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 9.938545625989635e-16,
+    "primary_pass": true,
+    "scientific_promotion": true
+  },
+  "meaning": "On a genuinely unseen marine Puunoa Point corpus, bathymetry-only frozen KUSTO candidates were strongly enriched for independently held-out acoustic-backscatter structure under a preregistered support-domain v2 rule.",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "SHIPWRECK_OR_ARCHAEOLOGICAL_IDENTITY",
+    "INDEPENDENT_SURVEY_REPLICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION"
+}
