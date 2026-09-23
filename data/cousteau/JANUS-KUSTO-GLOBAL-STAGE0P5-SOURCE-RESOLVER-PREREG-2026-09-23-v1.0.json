@@ -1,0 +1,28 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-STAGE0P5-SOURCE-RESOLVER-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T13:45:30Z",
+  "status":"FROZEN_BEFORE_STAGE0_REGION_LIST_IS_AVAILABLE",
+  "parent":"data/cousteau/JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-EXECUTOR-PREREG-2026-09-23-v1.0.json",
+  "input":"first up to 100 frozen stage1_regions in exact Stage0 order",
+  "depth_read":false,
+  "per_survey_resolution_order":[
+    "READY_FNV_FBT",
+    "READY_GENERATED_BATHY_OTHER",
+    "RAW_KMALL",
+    "RAW_ALL_OR_EMOLDRAW",
+    "GRID_ONLY",
+    "DOWNLOAD_ROUTE_PRESENT_UNRESOLVED",
+    "UNAVAILABLE"
+  ],
+  "probe_rule":"Use only Stage0 survey metadata/download_url and deterministic known NCEI route conventions; directory listing, filenames, extensions, sizes and headers are allowed; bathymetric sample values are forbidden.",
+  "region_stage1_ready_rule":"both frozen surveys resolve to a measured bathymetry path readable by an already source-validated parser; otherwise preserve region but do not substitute another pair.",
+  "hard_rules":[
+    "NO_DEPTH",
+    "NO_REGION_SUBSTITUTION",
+    "NO_PAIR_SUBSTITUTION",
+    "NO_KNOWN_FEATURE_LOOKUP",
+    "NO_VISUAL_INSPECTION",
+    "NO_SOURCE_PRIORITY_RETUNING"
+  ],
+  "claim_ceiling":"GLOBAL_STAGE0P5_SOURCE_ROUTING_ONLY"
+}
