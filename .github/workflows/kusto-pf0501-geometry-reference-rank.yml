@@ -1,0 +1,22 @@
+name: KUSTO PF0501 Geometry-Only Reference Rank
+on:
+  push:
+    branches: [feature/kusto-cross-survey-validation-v1]
+    paths:
+      - 'workspace/kusto_pf0501_geometry_reference_rank.py'
+      - '.github/workflows/kusto-pf0501-geometry-reference-rank.yml'
+  workflow_dispatch:
+jobs:
+  rank:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install --disable-pip-version-check requests shapely
+      - run: python workspace/kusto_pf0501_geometry_reference_rank.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-pf0501-geometry-reference-rank-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-UNSEEN-PF0501-REFERENCE-GEOMETRY-RANK-2026-09-23-v1.0.json
+          retention-days: 30
