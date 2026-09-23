@@ -1,0 +1,34 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CHELAN-LC1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_452_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_AND_LABELS_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35891679355,
+    "head_sha": "e1ab19c3d939f8241de16f25dd8f5e8e6ea488dd",
+    "conclusion": "success",
+    "artifact_id": 10765536530,
+    "artifact_zip_sha256": "57b9213e4ebc6b2793a5fd7411b58eabd4f5872a909988973d7a985c23c8de9a",
+    "candidate_json_sha256": "398385391587429af96b36af8581dfd13252092f3b6b7b7a7cc1d2ce95c0ffb3"
+  },
+  "tiles": {
+    "A": {"valid_cells":2759691,"sample_centers":35082,"pre_dedup_followups":1409,"frozen_candidates":100,"bathy_zip_sha256":"c6b0c35eb92e61512724eef79df07c40d1778c3b6bd63f3f8113f6424e5bd112"},
+    "B": {"valid_cells":3140945,"sample_centers":41680,"pre_dedup_followups":1349,"frozen_candidates":100,"bathy_zip_sha256":"7453c1bc9a0694223ae3489224e72783e83c40ec877d31372925a0186f254d1a"},
+    "C": {"valid_cells":3592299,"sample_centers":46601,"pre_dedup_followups":1460,"frozen_candidates":100,"bathy_zip_sha256":"aee4b72c4ef98a898a6df3d38eef5edb8290f9f32a1053c3f79b4160a4ce8bf6"},
+    "D": {"valid_cells":1412418,"sample_centers":17791,"pre_dedup_followups":558,"frozen_candidates":52,"bathy_zip_sha256":"a34d6945adba137cfe2f8d7a9bbd972d0bf56db974780ac8e170bf58807afd53"},
+    "E": {"valid_cells":2868876,"sample_centers":39317,"pre_dedup_followups":1633,"frozen_candidates":100,"bathy_zip_sha256":"95532da4ec23d7a1e2eea044a4adc62dafbf71572bba98859bfc2b855e2122f3"}
+  },
+  "totals": {
+    "valid_cells": 13774229,
+    "sample_centers": 180471,
+    "pre_dedup_followups": 6409,
+    "frozen_candidates": 452
+  },
+  "truth_firewall": {
+    "backscatter_zip_downloaded": false,
+    "backscatter_values_read": false,
+    "mass_transport_deposit_labels_read": false,
+    "delta_labels_read": false
+  },
+  "next_gate": "LC2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY",
+  "claim_ceiling": "UNSEEN_BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
