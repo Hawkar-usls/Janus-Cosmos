@@ -1,0 +1,30 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S2-BACKSCATTER-ROUTE-REPAIR-2026-09-23-v1.0",
+  "status": "SOURCE_ROUTE_REPAIR_BEFORE_ANY_BACKSCATTER_VALUE_READ",
+  "failed_run": {
+    "github_actions_run_id": 35920924449,
+    "failure": "HTTP_404_ON_CKAN_DIRECT_BACKSCATTER_COG_URL",
+    "backscatter_values_read": false,
+    "scientific_scoring_started": false
+  },
+  "frozen_current_archive": {
+    "url": "https://files.ausseabed.gov.au/survey/Shellharbour%20Bathymetry%202017%202m%20-%205m.zip",
+    "sha256": "de16b7c26a2313faf343286381951ab000ee6e3e71df66152595a61a136b37a8",
+    "bytes": 29350742
+  },
+  "heldout_member": {
+    "name": "Shellharbour_Backscatter_2017_5m_Unknown_cog.tif",
+    "uncompressed_bytes": 6116845,
+    "crc32": 3346380113,
+    "resolution_m": 5
+  },
+  "repair": {
+    "dataset_changed": false,
+    "survey_changed": false,
+    "channel_changed": false,
+    "v2_changed": false,
+    "candidate_authority_changed": false,
+    "action": "Read the pre-inventoried held-out backscatter member from the already frozen current AusSeabed archive during S2."
+  },
+  "claim_ceiling": "SOURCE_TRANSPORT_REPAIR_ONLY"
+}
