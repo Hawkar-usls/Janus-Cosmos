@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-POSTHOC-G2B-ELIGIBILITY-DIAGNOSTIC-PREREG-2026-09-23-v1.0",
+  "status": "POSTHOC_DIAGNOSTIC_FROZEN_AFTER_G3__NO_SCIENTIFIC_PROMOTION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_g3_receipt": "JANUS-KUSTO-SHARK-ROCK-G3-TRUTH-UNLOCK-SCORING-RECEIPT-2026-09-23-v1.0",
+  "question": "For each frozen survey, was the ROV truth location actually eligible to be sampled by the G2B 25 m raster + 50 m stride + complete-neighborhood validity rule at each frozen radius, or was the G3 miss caused by local measured-support gaps?",
+  "truth_coordinate": {"lat": 31.59517078, "lon": -79.10225958},
+  "frozen_g2b_geometry": {
+    "tile": {"lon_min": -79.25, "lon_max": -79.0, "lat_min": 31.5, "lat_max": 31.75},
+    "grid_m": 25,
+    "sampling_stride_m": 50,
+    "radii_m": [25,75,125,275],
+    "validity_rule": "same as G2B: raster cell occupied by >=1 good sounding; candidate center requires distance-transform to nearest unoccupied cell >= radius_px"
+  },
+  "diagnostic_outputs": [
+    "minimum_good_sounding_distance_to_truth_m",
+    "occupied_25m_truth_cell",
+    "occupied_cells_within_25_75_125_275m",
+    "nearest_G2B_sample_center_distance_m_per_radius",
+    "nearest_eligible_G2B_sample_center_distance_m_per_radius"
+  ],
+  "classification_rule": {
+    "coverage_limited": "nearest eligible G2B sample center > frozen radius + 17.67766952966369 m",
+    "detector_selection_miss": "an eligible G2B sample center exists within frozen radius + 17.67766952966369 m but no frozen candidate patch supported truth in G3",
+    "recovered": "G3 already has a frozen candidate patch supporting truth"
+  },
+  "hard_rules": [
+    "NO_CHANGE_TO_G2B_OR_G3_RESULTS",
+    "NO_THRESHOLD_RETUNING",
+    "NO_NEW_CANDIDATES",
+    "DIAGNOSTIC_CANNOT_PROMOTE_SCIENTIFIC_CLAIM",
+    "ANY_FUTURE_ALGORITHM_CHANGE_USING_THIS_DIAGNOSTIC_MUST_BE_VALIDATED_ON_UNSEEN_DATA"
+  ],
+  "claim_ceiling": "POSTHOC_FAILURE_MODE_DIAGNOSTIC_ONLY"
+}
