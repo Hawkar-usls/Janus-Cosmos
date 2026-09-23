@@ -1,0 +1,49 @@
+{
+  "artifact_id":"JANUS-KUSTO-CAND003-EXTREME-BEAM-VS-2008-RESIDUAL-STRATIFICATION-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T00:56:00Z",
+  "status":"SEALED_GENERIC_EXTREME_BEAM_DEGRADATION_SUPPORTED__LINE32_SPECIFIC_DEEP_BIAS_FALSIFIED",
+  "prereg":{
+    "path":"data/cousteau/JANUS-KUSTO-CAND003-EXTREME-BEAM-VS-2008-RESIDUAL-STRATIFICATION-PREREG-2026-09-23-v1.0.json",
+    "freeze_commit":"fe4416c406a4d999dd5838bef178830212e5fb77"
+  },
+  "run":{
+    "github_actions_run_id":35803814049,
+    "head_sha":"81dbef70120d19b50e165d0321f69b7c419e5898",
+    "artifact_id":10726164361,
+    "artifact_zip_sha256":"d98f51c37ca59d575d698f1984c29081d34941c64f2900fe6ece767240b02d5d",
+    "conclusion":"success"
+  },
+  "primary_KN192":{
+    "LINE18":{
+      "INNER":{"n":535,"median_signed_m":7.040185749530792,"median_abs_m":8.37583467513332,"p90_abs_m":22.767498756647186,"frac_abs_ge100":0.0},
+      "MID":{"n":798,"median_signed_m":-13.1221142411232,"median_abs_m":15.670056498050599,"p90_abs_m":31.144910164475142,"frac_abs_ge100":0.0},
+      "OUTER":{"n":620,"median_signed_m":-25.992170959710847,"median_abs_m":26.643662208318347,"p90_abs_m":50.75602300152155,"frac_abs_ge100":0.0},
+      "EXTREME":{"n":508,"median_signed_m":-38.984916326403436,"median_abs_m":38.984916326403436,"p90_abs_m":63.96559723034493,"frac_abs_ge100":0.0}
+    },
+    "LINE32":{
+      "INNER":{"n":767,"median_signed_m":10.642094141245252,"median_abs_m":10.820063364506495,"p90_abs_m":23.983563412427785,"frac_abs_ge100":0.001303780964797914},
+      "MID":{"n":1077,"median_signed_m":-3.41317617893219,"median_abs_m":10.779199290275756,"p90_abs_m":28.640569510459862,"frac_abs_ge100":0.0},
+      "OUTER":{"n":825,"median_signed_m":-15.7999655365943,"median_abs_m":18.607008299230984,"p90_abs_m":41.26973761916161,"frac_abs_ge100":0.0012121212121212121},
+      "EXTREME":{"n":732,"median_signed_m":-31.419491107761587,"median_abs_m":34.8936720818283,"p90_abs_m":59.83992766559103,"frac_abs_ge100":0.02185792349726776,"frac_raw_deeper_by_ge100":0.020491803278688523}
+    }
+  },
+  "confirmatory_KNOX":{
+    "LINE18_EXTREME":{"n":286,"median_signed_m":-44.574851779043456,"median_abs_m":44.574851779043456,"p90_abs_m":77.73094300895923,"frac_abs_ge100":0.01048951048951049},
+    "LINE32_EXTREME":{"n":421,"median_signed_m":-30.732051286697242,"median_abs_m":36.681850984096855,"p90_abs_m":73.34988886594783,"frac_abs_ge100":0.014251781472684086,"frac_raw_deeper_by_ge100":0.007125890736342043}
+  },
+  "interpretation":{
+    "EXTREME_LINE32_PORT_SYSTEMATIC_SUPPORTED":false,
+    "BOTH_EXTREMES_DEGRADE":true,
+    "reason":[
+      "Both lineages show monotonic or near-monotonic growth of absolute residual toward extreme across-track ranges against both independent 2008 surveys.",
+      "Extreme line32 residuals are not uniquely large; line18 extreme median absolute residual is comparable or larger.",
+      "The population median signed residual in both extreme lineages is negative (raw 2005 shallower than 2008), so the approximately +186 to +199 m deep residual at CAND003 cells is a rare opposite-direction tail event, not the central line32 behavior.",
+      "Extreme line32 has a heavier >=100 m tail than its non-extreme cells, but rare >=100 m tails also occur in the independent KNOX comparison and in line18 extreme cells."
+    ],
+    "CAND003_CELL_A_B":"RARE_LOCAL_POSITIVE_DEEP_OUTLIERS_WITHIN_GENERIC_EXTREME_BEAM_HEAVY_TAIL",
+    "refraction_or_outer_beam_physics":"SUPPORTED_AS_MECHANISM_CLASS_ONLY__CAUSAL_COMPONENT_UNRESOLVED"
+  },
+  "calibration_consequence":"Future synthetic CD169-like bathymetry should use across-track-dependent heteroscedastic heavy-tailed error, not uniform Gaussian error and not a fixed line32 deep bias.",
+  "strict_parent_results":"IMMUTABLE",
+  "claim_ceiling":"EXTREME_OUTER_BEAM_RESIDUAL_STRATIFICATION_DIAGNOSTIC_ONLY"
+}
