@@ -1,0 +1,96 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-BLIND-ANOMALY-HUNT-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T12:00:00Z",
+  "status":"FROZEN_BEFORE_GLOBAL_OPPORTUNITY_MAP_AND_MORPHOLOGY",
+  "purpose":"Blindly discover persistent seafloor anomalies of any morphology in open bathymetric data while explicitly modeling survey/instrument failure modes and requiring independent replication before novelty promotion.",
+  "parent_calibration":{
+    "branch":"feature/kusto-cross-survey-validation-v1",
+    "calibration_state":"CD169_REAL_RESIDUAL_LIBRARY_AND_SYNTHETIC_NUISANCE_V2_AVAILABLE",
+    "unseen_validation_state":"IN_PROGRESS_NOT_YET_PROMOTED_TO_VALIDATED",
+    "rule":"Global discovery may begin as exploratory opportunity mapping and blind candidate generation, but no anomaly may be promoted as externally validated until the frozen unseen-validation lane is resolved."
+  },
+  "stage_0_opportunity_map":{
+    "depth_read":false,
+    "primary_source":"NOAA_NCEI_MULTIBEAM_FOOTPRINT_POLYGONS",
+    "secondary_sources":["GEBCO_2026_TID","EMODNET_BATHYMETRY_SOURCE_AND_QUALITY","GMRT_HIGH_RES_TOPO_MASK"],
+    "eligible_pair_definition":[
+      "two different SURVEY_ID values",
+      "non-empty exact footprint intersection",
+      "both surveys have downloadable/archive routes",
+      "prefer different platforms and/or instruments",
+      "prefer acquisition separation >= 365 days",
+      "no morphology or depth used in ranking"
+    ],
+    "opportunity_score_components":[
+      "overlap_area",
+      "year_separation",
+      "different_platform_bonus",
+      "different_instrument_bonus",
+      "raw_or_beam_level_downloadability",
+      "third_independent_survey_bonus"
+    ],
+    "forbidden_components":["depth","relief","visual shape","known anomaly location","candidate morphology"]
+  },
+  "anomaly_taxonomy":{
+    "generic_unclassified_outlier":true,
+    "classes":[
+      "ISOLATED_MOUND",
+      "ISOLATED_DEPRESSION",
+      "RING_OR_CRATER",
+      "RADIAL_ORGANIZATION",
+      "M4_OR_RECTILINEAR_ORGANIZATION",
+      "LINEAMENT_OR_GRID",
+      "TERRACE_OR_STEP",
+      "RIDGE_BREAK_OR_OFFSET",
+      "POCKMARK_OR_VENT_FIELD",
+      "SCOUR_OR_CHANNEL",
+      "LANDSLIDE_OR_SCAR",
+      "WRECK_LIKE_ELONGATED_OBJECT",
+      "REPEATING_PATTERN",
+      "LOCAL_ROUGHNESS_EXTREME",
+      "LOCAL_CURVATURE_EXTREME",
+      "UNCLASSIFIED_PERSISTENT_STRUCTURE"
+    ],
+    "rule":"Taxonomy is descriptive only. No class implies artificiality or archaeology."
+  },
+  "blind_discovery":{
+    "coverage_first":true,
+    "instrument_nuisance_first":true,
+    "candidate_centers":"mechanically generated over measured support only",
+    "multi_scale_radii_m":[100,250,500,1000,2000],
+    "metric_families":{
+      "RELIEF_ROUGHNESS":["p05_p95_relief","plane_rmse","quadratic_rmse"],
+      "CURVATURE":["hessian_eigenvalues","curvature_anisotropy"],
+      "RADIAL":["radial_r2","annular_contrast"],
+      "ANGULAR":["m2","m3","m4","m5","m6_amplitudes"],
+      "LINEARITY":["structure_tensor_anisotropy","dominant_lineament_strength"],
+      "TERRACE_STEP":["piecewise_plane_improvement","slope_break_strength"],
+      "TOPOLOGIC":["closed_contour_count","isolated_extremum_persistence"],
+      "GENERIC":["robust_multivariate_outlier_score"]
+    },
+    "look_elsewhere":"empirical within-survey tails plus spatial deduplication; no p-value claim unless dependence model is validated",
+    "candidate_requirement":"At least two structurally different metric-family votes at the same scale OR an extreme generic multivariate score, followed by independent survey replication."
+  },
+  "promotion_ladder":[
+    "DISCOVERY_ONLY",
+    "INSTRUMENT_ARTIFACT_DISFAVORED",
+    "CROSS_SURVEY_PERSISTENT",
+    "KNOWN_NATURAL_FEATURE",
+    "UNEXPLAINED_PERSISTENT_ANOMALY"
+  ],
+  "promotion_firewalls":[
+    "ANOMALY_NE_ARTIFICIAL",
+    "RECTILINEAR_NE_ARCHAEOLOGICAL",
+    "PERSISTENT_NE_NOVEL",
+    "CATALOG_ABSENCE_NE_PROOF_OF_UNKNOWN",
+    "GLOBAL_GRID_NE_MEASURED_SUPPORT",
+    "TRACKLINE_NE_SWATH",
+    "FOOTPRINT_NE_BEAM",
+    "SAME_RAW_ACQUISITION_DERIVATIVES_NE_INDEPENDENT_REPLICATION",
+    "NO_RECENTERING_AFTER_DISCOVERY",
+    "NO_METRIC_RETUNING_AFTER_CANDIDATE_VIEW",
+    "OUTER_SWATH_HEAVY_TAIL_MUST_BE_MODELED"
+  ],
+  "initial_execution_authorization":"STAGE_0_GLOBAL_NCEI_EXACT_FOOTPRINT_OVERLAP_INVENTORY_ONLY",
+  "claim_ceiling":"GLOBAL_EXPLORATORY_ANOMALY_DISCOVERY_FRAMEWORK__NO_OBJECT_IDENTITY__NO_ARTIFICIALITY"
+}
