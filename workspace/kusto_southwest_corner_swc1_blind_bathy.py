@@ -10,6 +10,7 @@ import rasterio
 from affine import Affine
 from rasterio.io import MemoryFile
 from scipy import ndimage
+from pyproj import CRS, Geod, Transformer
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"workspace"/"kusto_global_groundtruth_out"; OUT.mkdir(parents=True,exist_ok=True)
@@ -72,13 +73,16 @@ def load_bathy():
     res=(abs(float(transform.a)),abs(float(transform.e)))
     if transform.is_identity:
         raise RuntimeError("embedded transform is identity")
-    if max(abs(res[0]-CELL),abs(res[1]-CELL))/CELL>0.001:
-        raise RuntimeError(f"effective resolution outside frozen 0.1% nominal tolerance: {res}")
+    if crs is None:
+        raise RuntimeError("source CRS missing")
+    src_crs=CRS.from_user_input(crs)
+    if not src_crs.is_geographic:
+        raise RuntimeError(f"SWC1 georef repair expected geographic source CRS, got {crs}")
     return blob,z,valid,transform,{
       "zip_sha256":sha,"zip_members":names,
       "tif_name":member,"tfw_name":None,
       "shape":list(z.shape),"dtype":dtype,"nodata":nodata,"crs":crs,
-      "resolution_m":list(res),"georef_source":"EMBEDDED_TRANSFORM",
+      "affine_pixel_units":list(res),"georef_source":"EMBEDDED_TRANSFORM",
       "embedded_transform":list(transform)[:6],"effective_transform":list(transform)[:6],
       "world_file_values":None,
       "backscatter_archive_downloaded":False,
@@ -90,13 +94,36 @@ def robust(v):
     scale=max(1e-12,1.4826*mad)
     return np.abs((v-med)/scale),med,mad
 
-def xy(transform,row,col):
-    x,y=rasterio.transform.xy(transform,row,col,offset="center")
-    return float(x),float(y)
-
 blob,z,valid,transform,input_meta=load_bathy()
-CELL_EFF=float(sum(input_meta["resolution_m"])/2.0)
+SOURCE_CRS=CRS.from_user_input(input_meta["crs"])
+TO_WGS84=Transformer.from_crs(SOURCE_CRS,"EPSG:4326",always_xy=True)
+METRIC_CRS=CRS.from_user_input("EPSG:32750")
+TO_METRIC=Transformer.from_crs(SOURCE_CRS,METRIC_CRS,always_xy=True)
+GEOD=Geod(ellps="WGS84")
+
+def xy(transform,row,col):
+    sx,sy=rasterio.transform.xy(transform,row,col,offset="center")
+    mx,my=TO_METRIC.transform(float(sx),float(sy))
+    lon,lat=TO_WGS84.transform(float(sx),float(sy))
+    return float(mx),float(my),float(lon),float(lat)
+
+CELL_EFF=CELL
+input_meta["published_nominal_cell_m"]=CELL
 input_meta["effective_cell_for_geometry_m"]=CELL_EFF
+input_meta["metric_candidate_crs"]=METRIC_CRS.to_string()
+
+# Diagnostic only: record true centre-pixel geodesic dimensions, without retuning the frozen scale ladder.
+crow=z.shape[0]//2; ccol=z.shape[1]//2
+sx0,sy0=rasterio.transform.xy(transform,crow,ccol,offset="center")
+sxe,sye=rasterio.transform.xy(transform,crow,ccol+1,offset="center")
+sxn,syn=rasterio.transform.xy(transform,crow+1,ccol,offset="center")
+lon0,lat0=TO_WGS84.transform(float(sx0),float(sy0))
+lone,late=TO_WGS84.transform(float(sxe),float(sye))
+lonn,latn=TO_WGS84.transform(float(sxn),float(syn))
+_,_,east_m=GEOD.inv(lon0,lat0,lone,late)
+_,_,north_m=GEOD.inv(lon0,lat0,lonn,latn)
+input_meta["diagnostic_center_pixel_geodesic_m"]={"east_west":abs(float(east_m)),"north_south":abs(float(north_m))}
+input_meta["diagnostic_used_for_scale_retuning"]=False
 nrows,ncols=z.shape
 if not np.any(valid):raise RuntimeError("no valid bathymetry cells")
 input_meta["zip_bytes"]=len(blob);input_meta["valid_cells"]=int(np.sum(valid))
@@ -183,9 +210,9 @@ for radius in RADII:
             ex=[k for k in keys if vals[k][i]>=thresholds[k]["q995"]]
             if ex:votes.append(fam);detail[fam]=ex
         if len(votes)>=2 or generic[i]>=gq:
-            row=int(sr[i]);col=int(sc[i]);x,y=xy(transform,row,col)
+            row=int(sr[i]);col=int(sc[i]);x,y,lon,lat=xy(transform,row,col)
             all_flags.append({
-              "row":row,"col":col,"x_m":x,"y_m":y,"radius_m":radius,
+              "row":row,"col":col,"x_m":x,"y_m":y,"lon":lon,"lat":lat,"radius_m":radius,
               "family_votes":votes,"extreme_metrics_by_family":detail,
               "generic_robust_score":float(generic[i]),
               "metrics":{k:float(vals[k][i]) for k in vals}
