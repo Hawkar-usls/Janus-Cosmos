@@ -145,6 +145,7 @@ p.write_text(json.dumps(out,indent=2))
 print(json.dumps({
  "artifact_id":out["artifact_id"],"status":status,"items_inspected":len(items),
  "files_seen":len(files),
+ "file_inventory":[{"item_id":r["item_id"],"item_title":r["item_title"],"name":r["name"],"size":r["size"],"contentType":r["contentType"],"url":r["url"]} for r in files],
  "bathymetry":bsel,"backscatter":ksel,
  "raster_values_read":False
 },indent=2))
