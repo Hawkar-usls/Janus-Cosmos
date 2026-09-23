@@ -43,7 +43,7 @@ def download():
 def read_asc_from_zip(blob):
     with zipfile.ZipFile(io.BytesIO(blob)) as zf:
         names=zf.namelist()
-        asc=[n for n in names if n.lower().endswith(".asc")]
+        asc=[n for n in names if n.lower().endswith(".asc") and not n.startswith("__MACOSX/") and "/._" not in n and not n.startswith("._")]
         if len(asc)!=1:
             raise RuntimeError(f"Expected exactly one ASC raster, found {asc}")
         with zf.open(asc[0]) as f:
