@@ -1,0 +1,24 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS0-SCIENCEBASE-ITEM-DOWNLOAD-ROUTE-REPAIR-2026-09-23-v1.0",
+  "parent_prereg":"JANUS-KUSTO-CROSS-SOUND-ALASKA-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "failed_source_runs":[35903486644,35903769071],
+  "failure_class":"SCIENCEBASE_FILES_ARRAY_EXPOSES_QUICKVIEW_AND_METADATA_BUT_NOT_PRIMARY_GEOTIFF_PAYLOAD",
+  "scientific_stage_reached":"SOURCE_METADATA_ONLY__NO_RASTER_VALUES_READ",
+  "authoritative_child_items":{
+    "bathymetry":{
+      "item_id":"5abc0e9ce4b081f61abd5c61",
+      "title":"Multibeam bathymetry data collected in 2015 near Cross Sound, southeast Alaska, during field activity 2015-629-FA"
+    },
+    "backscatter":{
+      "item_id":"5abc0ef6e4b081f61abd5c66",
+      "title":"Multibeam acoustic-backscatter data collected in 2015 near Cross Sound, southeast Alaska, during field activity 2015-629-FA"
+    }
+  },
+  "repair_rule":"Probe only item-level ScienceBase download endpoints with HEAD / streamed metadata requests. Do not consume numeric payload. Bind a product only if the child item identity is exact and the endpoint resolves as a downloadable payload distinct from quick-view/metadata attachments.",
+  "no_scientific_change":true,
+  "radii_changed":false,
+  "thresholds_changed":false,
+  "raster_values_read":false,
+  "status":"SOURCE_INTERFACE_REPAIR_FROZEN",
+  "claim_ceiling":"SOURCE_ROUTE_PROVENANCE_ONLY"
+}
