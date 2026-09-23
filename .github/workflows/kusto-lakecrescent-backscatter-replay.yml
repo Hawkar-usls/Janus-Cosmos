@@ -1,0 +1,36 @@
+name: KUSTO Lake Crescent Backscatter Replay
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_lakecrescent_backscatter_replay.py'
+      - 'data/cousteau/JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-REPLAY-PREREG-2026-09-23-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-VALIDITY-ADDENDUM-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-lakecrescent-backscatter-replay.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests rasterio
+      - name: Run frozen-candidate backscatter replay
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python workspace/kusto_lakecrescent_backscatter_replay.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-lakecrescent-backscatter-replay-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-REPLAY-RUN-2026-09-23-v1.0.json
+          retention-days: 30
