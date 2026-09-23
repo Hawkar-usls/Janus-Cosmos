@@ -21,6 +21,7 @@ SRC = json.loads((ROOT / "data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-FINAL-PAIRED
 CAND_AUTH = json.loads((ROOT / "data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0.json").read_text())
 IMP = json.loads((ROOT / "data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-23-v1.0.json").read_text())
 MEM = json.loads((ROOT / "data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0C-EXACT-MEMBER-BINDING-RECEIPT-2026-09-23-v1.0.json").read_text())
+REP = json.loads((ROOT / "data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S2-BACKSCATTER-ROUTE-REPAIR-2026-09-23-v1.0.json").read_text())
 
 UA = {"User-Agent": "JANUS-KUSTO-Shellharbour-S2-support-domain-v2/1.0"}
 ARTIFACT_ID = int(CAND_AUTH["run"]["artifact_id"])
@@ -143,10 +144,27 @@ def load_raster(kind):
         r["transport_archive_contains_heldout_backscatter_member"] = True
         return r
     if kind == "backscatter":
-        source_url = SRC["backscatter"]["current_url"]
-        tif = get(source_url).content
-        sha = hashlib.sha256(tif).hexdigest()
-        return _decode_tif(tif, kind, 5.0, source_url, sha, [], source_url.rsplit("/",1)[-1])
+        source_url = REP["frozen_current_archive"]["url"]
+        archive = get(source_url).content
+        archive_sha = hashlib.sha256(archive).hexdigest()
+        if archive_sha.lower() != REP["frozen_current_archive"]["sha256"].lower():
+            raise RuntimeError("backscatter transport archive SHA mismatch")
+        if len(archive) != int(REP["frozen_current_archive"]["bytes"]):
+            raise RuntimeError("backscatter transport archive byte length mismatch")
+        member = REP["heldout_member"]["name"]
+        with zipfile.ZipFile(io.BytesIO(archive)) as zf:
+            names = zf.namelist()
+            if member not in names:
+                raise RuntimeError("frozen held-out backscatter member missing")
+            zi = zf.getinfo(member)
+            if int(zi.file_size) != int(REP["heldout_member"]["uncompressed_bytes"]):
+                raise RuntimeError("held-out backscatter member size mismatch")
+            if int(zi.CRC) != int(REP["heldout_member"]["crc32"]):
+                raise RuntimeError("held-out backscatter member CRC mismatch")
+            tif = zf.read(member)
+        r = _decode_tif(tif, kind, 5.0, source_url + "#" + member, archive_sha, names, member)
+        r["transport_archive_bytes"] = len(archive)
+        return r
     raise RuntimeError(f"unknown raster kind {kind}")
 
 def patch_geometry(radius_m, cell_m):
