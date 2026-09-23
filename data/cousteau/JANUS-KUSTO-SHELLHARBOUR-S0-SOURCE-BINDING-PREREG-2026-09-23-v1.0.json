@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_SHELLHARBOUR_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_frontier": "JANUS-KUSTO-AUSSEABED-NEXT-FRONTIER-FREEZE-2026-09-23-v1.0",
+  "dataset": {
+    "id": "AUSSEABED_SHELLHARBOUR_2017",
+    "region": "NEW_SOUTH_WALES_AUSTRALIA",
+    "survey_year": 2017,
+    "sensor": "R2SONIC_2022_MULTIBEAM",
+    "published_products": ["2M_BATHYMETRY", "5M_BATHYMETRY", "5M_BACKSCATTER"]
+  },
+  "source_resolution": {
+    "wfs": "https://warehouse.aussabed.gov.au/geoserver/ows",
+    "required_feature_titles": [
+      "Shellharbour Bathymetry 2m 2017 2m L0 Coverage",
+      "Shellharbour Backscatter 2017 5m L0 Coverage"
+    ],
+    "metadata_only": true,
+    "raster_values_read": false
+  },
+  "v2_method": {
+    "generation": "PAIRED_SUPPORT_DOMAIN_V2",
+    "method_changed": false,
+    "bathymetry_discovery_native_cell_m": 2,
+    "radii_m": [8,16,32,64],
+    "sampling_stride_m": 16,
+    "spatial_dedup_m": 100,
+    "maximum_candidates": 100,
+    "backscatter_resolution_m": 5,
+    "support_domain_rule": "unchanged from Maui Puunoa v2; bathymetry-valid support plus native backscatter mask only"
+  },
+  "truth_firewall": {
+    "shellharbour_landform_classification_read_by_detector": false,
+    "sediment_interpretations_read_by_detector": false,
+    "grab_or_video_groundtruth_read_by_detector": false
+  },
+  "execution_order": [
+    "S0_RESOLVE_EXACT_AUSSEABED_SURVEY_PRODUCTS_WITHOUT_RASTER_VALUES",
+    "S1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "S2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+    "S3_ONLY_AFTER_RESULT_OPTIONAL_LANDFORM_AND_GROUNDTRUTH_INTERPRETATION"
+  ],
+  "claim_ceiling": "SOURCE_BINDING_AND_UNCHANGED_V2_PREREG_ONLY"
+}
