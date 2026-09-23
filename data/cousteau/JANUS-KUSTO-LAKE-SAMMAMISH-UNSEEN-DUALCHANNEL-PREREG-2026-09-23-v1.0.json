@@ -1,0 +1,102 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_LAKE_SAMMAMISH_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "dataset": {
+    "title": "Bathymetry and acoustic-backscatter data for Lake Sammamish, Washington collected during USGS field activity 2021-656-FA",
+    "doi": "10.5066/P1YKDHGC",
+    "publication_date": "2025-09-17",
+    "collection_dates": ["2021-11-08","2021-11-12"],
+    "native_cell_m": 2,
+    "sensor": "SWATHplus-M 234-kHz interferometric side-scan sonar",
+    "navigation": "Applanix POS-MV / post-processed SBET",
+    "horizontal_reference": "UTM Zone 10 NAD83(2011)",
+    "vertical_reference_bathymetry": "NAVD88",
+    "source_page": "https://cmgds.marine.usgs.gov/data-releases/datarelease/10.5066-P1YKDHGC/",
+    "files": {
+      "bathy": {
+        "name": "LakeSammamish_USGS_2021_2m_bathymetry_UTM10_NAD83_NAVD88.zip",
+        "expected_md5": "ea7dda3d2f13ac20f57bcbbbb84251e4"
+      },
+      "backscatter": {
+        "name": "LakeSammamish_USGS_2021_2m_backscatter_UTM10_NAD83.zip",
+        "expected_md5": "affe7d28cbc649214031916e6f82bc0e"
+      }
+    }
+  },
+  "transfer_rule": {
+    "origin": "Lake Crescent calibration plus Lake Chelan preregistered unseen test",
+    "native_scale_multipliers": [4,8,16,32],
+    "radii_m": [8,16,32,64],
+    "sampling_stride_cells": 8,
+    "sampling_stride_m": 16,
+    "reason": "Preserve the frozen 4/8/16/32-cell morphology ladder and 8-cell sampling stride when native cell size changes from 3 m to 2 m.",
+    "spatial_dedup_m": 100,
+    "maximum_candidates": 100
+  },
+  "bathymetry_discovery": {
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in upper tail OR generic score in upper 0.5 percent",
+    "common_center_validity": "candidate sample centers must have complete valid bathymetry support through maximum frozen radius 64 m"
+  },
+  "backscatter_replay": {
+    "minimum_patch_valid_fraction": 0.80,
+    "patch_geometry": "candidate disk radius r plus annulus 1.25r < distance <= 2r",
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 200,
+    "control_rng_seed": 260923,
+    "standardization_stratum": "radius",
+    "zero_mad_rule": "exclude metric when same-radius control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius control aggregate-score q95"
+  },
+  "primary_test": {
+    "stratified_permutation": "preserve frozen candidate count by radius",
+    "iterations": 5000,
+    "alpha": 0.05,
+    "promotion_requires_all": [
+      "no coverage-blocked frozen radius stratum",
+      "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+      "permutation p < 0.05",
+      "candidate mean aggregate score > control mean aggregate score",
+      "support fraction / 0.05 > 1"
+    ],
+    "secondary": "one-sided Mann-Whitney candidate aggregate scores > controls"
+  },
+  "ingest_rules": {
+    "native_mask_and_finite_only": true,
+    "honor_explicit_nodata": true,
+    "no_value_sign_or_distribution_based_nodata": true,
+    "georef": "embedded non-identity 2 m transform else exactly one source world file with standard pixel-center to raster-corner conversion"
+  },
+  "truth_firewall": {
+    "landslide_or_fault_labels_read_before_dualchannel_freeze": false,
+    "no_candidate_recenter": true,
+    "no_radius_or_threshold_change_after_bathymetry_result": true,
+    "no_zero_mad_rule_change_after_backscatter_result": true
+  },
+  "execution_order": [
+    "LS0_SOURCE_BINDING_NO_RASTER_VALUES",
+    "LS1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "LS2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY",
+    "LS3_SEAL_FORMAL_UNSEEN_RESULT"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION_ONLY__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
