@@ -1,0 +1,35 @@
+name: KUSTO South-west Corner SWC3 Independent Imagery Audit
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_southwest_corner_swc3_imagery_audit.py'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-INDEPENDENT-IMAGERY-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-southwest-corner-swc3-imagery-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  swc3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Score frozen candidates against independent imagery records
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python workspace/kusto_southwest_corner_swc3_imagery_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-southwest-corner-swc3-imagery-audit-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-INDEPENDENT-IMAGERY-COVERAGE-RUN-2026-09-24-v1.0.json
+          retention-days: 30
