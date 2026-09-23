@@ -1,0 +1,111 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAUI-PUUNUA-UNSEEN-DUALCHANNEL-V2-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_PUUNUA_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2",
+  "calibration_inputs_used_to_define_v2": [
+    "USGS_LAKE_CRESCENT_2016_ZERO_MAD_DIAGNOSTIC",
+    "USGS_LAKE_CHELAN_2023_COVERAGE_BLOCK",
+    "USGS_CROSS_SOUND_2015_CONTROL_SUPPORT_DEGENERACY"
+  ],
+  "validation_exclusions": [
+    "Lake Crescent, Lake Chelan, and Cross Sound are calibration-only for this v2 method and cannot validate it."
+  ],
+  "dataset": {
+    "title": "Swath bathymetry and acoustic-backscatter data collected in 2013 offshore Maui and Kahoolawe, Hawaii, during field activity A-01-13-HW",
+    "doi": "10.5066/P9XJLL6C",
+    "selected_site": "PUUNUA_POINT",
+    "selection_rule": "Site identity frozen before any raster values are accessed; no switching among Puunua Point, Olowalu, or Kuia Shoal after outcomes.",
+    "collection_year": 2013,
+    "sensor": "SEA 234-kHz interferometric SWATHplus-M bathymetric sidescan sonar",
+    "platform": "USGS vessel Alyce C",
+    "native_cell_m": 1,
+    "crs": "UTM Zone 4 WGS84",
+    "source_landing": "https://doi.org/10.5066/P9XJLL6C"
+  },
+  "scientific_goal": "First unseen validation of KUSTO paired-support-domain v2 in a marine coral-reef setting after Cross Sound exposed control-domain degeneracy.",
+  "bathymetry_discovery": {
+    "radii_m": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "sampling_stride_m": 8,
+    "spatial_dedup_m": 50,
+    "maximum_candidates": 100,
+    "families": {
+      "RELIEF_ROUGHNESS": [
+        "local_relief_m",
+        "local_std_m"
+      ],
+      "CURVATURE": [
+        "abs_laplacian"
+      ],
+      "RADIAL": [
+        "abs_center_surround_dog"
+      ],
+      "LINEARITY": [
+        "structure_tensor_anisotropy"
+      ],
+      "TERRACE_STEP": [
+        "gradient_magnitude"
+      ],
+      "TOPOLOGIC": [
+        "isolated_extremum_persistence"
+      ]
+    },
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in upper tail OR generic score in upper 0.5 percent",
+    "candidate_support": "complete valid bathymetry support through maximum frozen radius 32 m"
+  },
+  "paired_support_domain_v2": {
+    "rule": "Backscatter controls are eligible only where an independently defined bathymetry-valid support mask covers the control patch; backscatter anomaly values may not define the control-support mask.",
+    "bathymetry_support_patch_min_fraction": 0.8,
+    "backscatter_native_valid_patch_min_fraction": 0.8,
+    "value_based_zero_or_distribution_nodata_inference_forbidden": true,
+    "candidate_and_control_support_rule_must_be_identical_within_radius": true
+  },
+  "backscatter_replay": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95"
+  },
+  "primary_test": {
+    "stratified_permutation_iterations": 5000,
+    "alpha": 0.05,
+    "promotion_requires_all": [
+      "no coverage-blocked frozen radius stratum",
+      "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+      "permutation p < 0.05",
+      "candidate mean aggregate score > control mean aggregate score",
+      "support fraction / 0.05 > 1"
+    ],
+    "secondary": "one-sided Mann-Whitney candidate aggregate scores > eligible controls"
+  },
+  "execution_order": [
+    "M0_SOURCE_BINDING_NO_RASTER_VALUES",
+    "M1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "M2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_USING_BATHYMETRY_SUPPORT_DOMAIN",
+    "M3_SEAL_UNSEEN_V2_RESULT"
+  ],
+  "truth_firewall": {
+    "no_benthic_or_geologic_feature_labels_for_candidate_selection": true,
+    "no_site_switch_after_outcome": true,
+    "no_candidate_recenter": true,
+    "no_radius_threshold_or_support_rule_change_after_M1": true
+  },
+  "claim_ceiling": "PREREGISTERED_UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION_ONLY__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
