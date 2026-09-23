@@ -1,0 +1,33 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-ROLE-CHRONOLOGY-ADDENDUM-2026-09-23-v1.0",
+  "status": "FROZEN_ROLE_CONFLICT_RESOLVED_BY_EARLIER_AUTHORITY",
+  "earlier_authority": {
+    "artifact": "JANUS-KUSTO-SHARK-ROCK-MEASURED-SUPPORT-RECEIPT-2026-09-23-v1.0",
+    "commit": "f7e95104094b36edefdf7b2ce354dd1342c0cb36",
+    "committed_utc": "2026-09-23T16:11:43Z",
+    "roles": {
+      "EX1203": "DISCOVERY_SOURCE",
+      "EX1805": "HELDOUT_PRE_TRUTH_REPLAY",
+      "EX1903L2": "GROUNDTRUTH_ERA_EXCLUDED_FROM_DISCOVERY_TUNING",
+      "EX2102": "REGIONAL_CONTROL_ONLY"
+    }
+  },
+  "later_prereg": {
+    "artifact": "JANUS-KUSTO-SHARK-ROCK-BLIND-TILE-PREREG-2026-09-23-v1.0",
+    "commit": "bbf4ef66a3c1a8fa4f3b62cb30ca0cc66b430300",
+    "committed_utc": "2026-09-23T16:16:08Z",
+    "conflict": "Later prereg assigned EX1903L2 a possible blind-bathymetry role and described EX1203/EX1805 as replay surveys."
+  },
+  "resolution": {
+    "rule": "Earlier frozen scientific role assignment controls; later source-inventory work may inventory all surveys but cannot change discovery/heldout/truth roles.",
+    "g1_source_inventory_validity": "UNAFFECTED_IF_NAVIGATION_AND_METADATA_ONLY",
+    "g2_and_later_roles": {
+      "EX1203": "DISCOVERY",
+      "EX1805": "HELDOUT_REPLAY",
+      "EX1903L2": "TRUTH_EPOCH__NO_DISCOVERY_TUNING",
+      "EX2102": "REGIONAL_CONTROL__NO_DIRECT_REPLICATION_CLAIM"
+    }
+  },
+  "hard_rule": "NO_RETROACTIVE_ROLE_REASSIGNMENT_AFTER_SUPPORT_RESULTS",
+  "claim_ceiling": "GOVERNANCE_RECONCILIATION_ONLY"
+}
