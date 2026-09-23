@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import concurrent.futures, json, math, re, struct, time
+import concurrent.futures, json, math, re, struct, time, os
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -255,7 +255,13 @@ def empirical_rank(vals):
     return ranks
 
 regions_out=[]
-for reg in STAGE0["stage1_regions"]:
+rank_filter=os.environ.get("KUSTO_REGION_RANK")
+selected_regions=STAGE0["stage1_regions"]
+if rank_filter:
+    selected_regions=[r for r in selected_regions if str(r["rank"])==str(rank_filter)]
+    if len(selected_regions)!=1:
+        raise RuntimeError(f"Frozen region rank {rank_filter} not found exactly once")
+for reg in selected_regions:
     rank=reg["rank"]; A=reg["survey_a"]; B=reg["survey_b"]
     sidA=A["survey_id"];sidB=B["survey_id"]
     print("REGION",rank,sidA,sidB,flush=True)
@@ -401,7 +407,8 @@ out={
  "heldout_survey_depth_read":False,
  "claim_ceiling":"GLOBAL_STAGE1_BLIND_MORPHOLOGY_CANDIDATE_GENERATION_ONLY__NO_CROSS_SURVEY_PERSISTENCE_YET"
 }
-p=OUT/"JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RUN-2026-09-23-v1.0.json"
+suffix=f"-RANK{rank_filter}" if rank_filter else ""
+p=OUT/f"JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RUN-2026-09-23-v1.0{suffix}.json"
 p.write_text(json.dumps(out,indent=2))
 print(json.dumps({
  "artifact_id":out["artifact_id"],
