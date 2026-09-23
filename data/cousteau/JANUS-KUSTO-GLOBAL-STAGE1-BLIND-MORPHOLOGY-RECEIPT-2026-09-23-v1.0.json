@@ -1,0 +1,296 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RECEIPT-2026-09-23-v1.0",
+  "created_utc": "2026-09-23T14:43:00Z",
+  "status": "SEALED_REGION1_NO_COMMON_SUPPORT__REGION2_20_BLIND_CANDIDATES",
+  "run": {
+    "github_actions_run_id": 35874355196,
+    "head_sha": "97e50b2444b085b00bc4e8773981afef71d2d1b9",
+    "artifact_id": 10757541547,
+    "artifact_zip_sha256": "c9d6781d5104d171fa1a01c603d96cd1c616b1cee763ffb904a87b1f8445832b",
+    "conclusion": "success"
+  },
+  "region1": {
+    "pair": [
+      "EW9506",
+      "RR1612"
+    ],
+    "common_support_center_count": 0,
+    "discovery_good_beam_points_in_overlap": 0,
+    "verdict": "NO_COMMON_MEASURED_FNV_SUPPORT__STAGE1_BLOCKED"
+  },
+  "region2": {
+    "pair": [
+      "FK140307",
+      "ZHNG09RR"
+    ],
+    "discovery_survey": "FK140307",
+    "heldout_survey": "ZHNG09RR",
+    "common_support_center_count": 9098,
+    "discovery_good_beam_points_in_overlap": 5614244,
+    "pre_dedup_followup_count": 1058,
+    "spatially_deduplicated_followup_count": 20,
+    "nuisance_suppressed_count": 0,
+    "candidates": [
+      {
+        "id": "GLOBAL_R2_C001",
+        "lon": -161.87494434487382,
+        "lat": 23.235941430111392,
+        "radius_m": 250,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "LINEARITY",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C002",
+        "lon": -161.67496339122195,
+        "lat": 23.114669421487605,
+        "radius_m": 1000,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C003",
+        "lon": -161.73760802730567,
+        "lat": 23.182042759611928,
+        "radius_m": 2000,
+        "family_votes": [
+          "CURVATURE",
+          "RADIAL",
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C004",
+        "lon": -160.80757612237042,
+        "lat": 22.68797161336687,
+        "radius_m": 500,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "RADIAL",
+          "ANGULAR",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C005",
+        "lon": -161.94240779911783,
+        "lat": 23.283102766798418,
+        "radius_m": 2000,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": true
+      },
+      {
+        "id": "GLOBAL_R2_C006",
+        "lon": -160.88226780385486,
+        "lat": 22.674496945742003,
+        "radius_m": 250,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": true
+      },
+      {
+        "id": "GLOBAL_R2_C007",
+        "lon": -161.68701043662264,
+        "lat": 23.134881422924902,
+        "radius_m": 250,
+        "family_votes": [
+          "RADIAL",
+          "LINEARITY",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C008",
+        "lon": -161.91108548107596,
+        "lat": 23.206746316924182,
+        "radius_m": 500,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C009",
+        "lon": -161.71351393650423,
+        "lat": 23.14386453467481,
+        "radius_m": 250,
+        "family_votes": [
+          "CURVATURE",
+          "RADIAL",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C010",
+        "lon": -157.95242636240087,
+        "lat": 21.246182177506288,
+        "radius_m": 250,
+        "family_votes": [
+          "ANGULAR",
+          "LINEARITY",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C011",
+        "lon": -160.94250303085843,
+        "lat": 22.712675170679123,
+        "radius_m": 250,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C012",
+        "lon": -160.4919435328717,
+        "lat": 22.519538268056056,
+        "radius_m": 250,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C013",
+        "lon": -158.08494386180874,
+        "lat": 21.24169062163133,
+        "radius_m": 250,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C014",
+        "lon": -161.6846010275425,
+        "lat": 23.08996586417535,
+        "radius_m": 250,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "ANGULAR",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C015",
+        "lon": -160.4317083058681,
+        "lat": 22.479114265181458,
+        "radius_m": 250,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": true
+      },
+      {
+        "id": "GLOBAL_R2_C016",
+        "lon": -160.2750967156588,
+        "lat": 22.389283147682356,
+        "radius_m": 500,
+        "family_votes": [
+          "CURVATURE",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": true
+      },
+      {
+        "id": "GLOBAL_R2_C017",
+        "lon": -160.3521978062234,
+        "lat": 22.429707150556954,
+        "radius_m": 500,
+        "family_votes": [
+          "CURVATURE",
+          "ANGULAR",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": true
+      },
+      {
+        "id": "GLOBAL_R2_C018",
+        "lon": -161.8845819811944,
+        "lat": 23.258399209486164,
+        "radius_m": 1000,
+        "family_votes": [
+          "RELIEF_ROUGHNESS",
+          "CURVATURE",
+          "ANGULAR"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C019",
+        "lon": -160.91359012189673,
+        "lat": 22.712675170679123,
+        "radius_m": 250,
+        "family_votes": [
+          "LINEARITY",
+          "TERRACE_STEP",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      },
+      {
+        "id": "GLOBAL_R2_C020",
+        "lon": -158.19095786133502,
+        "lat": 21.275377290693495,
+        "radius_m": 250,
+        "family_votes": [
+          "ANGULAR",
+          "LINEARITY",
+          "TOPOLOGIC"
+        ],
+        "generic_extreme": false
+      }
+    ]
+  },
+  "heldout_survey_depth_read": false,
+  "claim_ceiling": "GLOBAL_STAGE1_BLIND_MORPHOLOGY_CANDIDATE_GENERATION_ONLY__NO_CROSS_SURVEY_PERSISTENCE_YET"
+}
