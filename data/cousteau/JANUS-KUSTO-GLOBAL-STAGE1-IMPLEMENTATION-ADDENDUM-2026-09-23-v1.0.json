@@ -1,0 +1,28 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-STAGE1-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "status":"FROZEN_BEFORE_ANY_STAGE1_DEPTH_READ",
+  "parent":"data/cousteau/JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-EXECUTOR-PREREG-2026-09-23-v1.0.json",
+  "discovery_lineage_rule":"For each frozen pair, survey_a is discovery lineage and survey_b is held out for later independent replay. Stage1 does not inspect survey_b depth.",
+  "common_support_rule":"Candidate centers are a 250m local Cartesian grid retained only where FNV swath geometry from both surveys intersects the 250m center cell.",
+  "outer_swath_nuisance_rule":{
+    "calibration_boundary_abs_across_m":5500,
+    "patch_is_nuisance_dominated_if_extreme_beam_fraction_gt":0.50,
+    "promotion_suppressed_when_dominated":true,
+    "candidate_preserved_in_receipt":true
+  },
+  "deterministic_patch_cap":{
+    "max_points_per_metric_patch":5000,
+    "selection":"geometry-only: sort patch points by polar angle then radial distance around candidate and take evenly spaced indices across that ordering",
+    "depth_not_used_for_subsampling":true
+  },
+  "metric_implementation":{
+    "angular":"normalized Fourier amplitudes m=2..6 of plane residuals",
+    "linearity":"2D covariance eigenvalue anisotropy of high-absolute-residual points above patch median absolute residual",
+    "terrace_step":"maximum adjacent radial-annulus median-depth jump divided by plane residual MAD",
+    "topologic":"counts/persistence of local radial-profile extrema after 50m radial binning; descriptive approximation only",
+    "generic":"robust standardized max/mean score across implemented metric families, ranked empirically within region"
+  },
+  "generic_extreme_rule":"upper 0.5% empirical tail only",
+  "hard_rules":["NO_DEPTH_BEFORE_THIS_ADDENDUM","SURVEY_B_DEPTH_HELD_OUT","NO_POSTRUN_METRIC_CHANGE","NO_POSTRUN_NUISANCE_THRESHOLD_CHANGE"],
+  "claim_ceiling":"STAGE1_IMPLEMENTATION_BINDING_ONLY"
+}
