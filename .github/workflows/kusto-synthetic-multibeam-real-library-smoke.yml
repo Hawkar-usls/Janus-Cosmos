@@ -1,0 +1,63 @@
+name: KUSTO Synthetic Multibeam Real-Library Smoke
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - '.github/workflows/kusto-synthetic-multibeam-real-library-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generic unseen calibrated sample across all bins
+        run: |
+          python workspace/kusto_synthetic_multibeam_nuisance_v2.py \
+            --library data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json \
+            --regime GENERIC_UNSEEN_CALIBRATED \
+            --lineage LINE32_ERA \
+            --reference KN192-07_2008 \
+            --across-m 1000 3500 5000 6000 \
+            --seed 20260923 \
+            --output /tmp/generic.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/generic.json'))
+          assert [x['bin'] for x in d['samples']]==['INNER','MID','OUTER','EXTREME']
+          assert d['firewall']['generic_unseen_signed_direction_inherited_from_cd169'] is False
+          print(json.dumps(d,indent=2))
+          PY
+      - name: CD169 replay sample
+        run: |
+          python workspace/kusto_synthetic_multibeam_nuisance_v2.py \
+            --library data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json \
+            --regime CD169_REPLAY \
+            --lineage LINE18_ERA \
+            --reference KNOX15RR_2008 \
+            --across-m 6000 6000 6000 \
+            --seed 7 \
+            --output /tmp/replay.json
+          cat /tmp/replay.json
+      - name: Empirical adversarial real tail
+        run: |
+          python workspace/kusto_synthetic_multibeam_nuisance_v2.py \
+            --library data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json \
+            --regime ADVERSARIAL_REAL_TAILS \
+            --lineage LINE32_ERA \
+            --reference KN192-07_2008 \
+            --across-m 6000 6000 6000 6000 \
+            --seed 11 \
+            --output /tmp/tail.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/tail.json'))
+          assert all(abs(x['depth_error_m'])>=100 for x in d['samples'])
+          assert d['firewall']['adversarial_tail_probability_forecast'] is False
+          print(json.dumps(d,indent=2))
+          PY
