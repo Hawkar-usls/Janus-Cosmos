@@ -2,9 +2,10 @@ name: KUSTO EMODnet CDI All8 Source Inventory
 on:
   push:
     branches:
-      - feature/kusto-cross-survey-validation-v1
+      - feature/kusto-global-groundtruth-calibration-v1
     paths:
       - 'workspace/kusto_emodnet_cdi_all8_source_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-EMODNET-CDI-ALL8-SOURCE-INVENTORY-PREREG-2026-09-22-v1.0.json'
       - '.github/workflows/kusto-emodnet-cdi-all8-source-inventory.yml'
   workflow_dispatch:
 jobs:
