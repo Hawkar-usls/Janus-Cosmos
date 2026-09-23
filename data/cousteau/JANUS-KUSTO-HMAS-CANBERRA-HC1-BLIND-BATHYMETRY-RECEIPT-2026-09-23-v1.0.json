@@ -1,0 +1,23 @@
+{
+  "artifact_id": "JANUS-KUSTO-HMAS-CANBERRA-HC1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_10_BLIND_CANDIDATES_FROZEN__TRUTH_ANCHOR_UNREAD",
+  "prereg": "JANUS-KUSTO-HMAS-CANBERRA-HC0-KNOWN-WRECK-RECOVERY-PREREG-2026-09-23-v1.0",
+  "run": {
+    "github_actions_run_id": 35915959745,
+    "artifact_id": 10774354254,
+    "artifact_zip_sha256": "e20f9a1305f482b14004119a798167f287957a7da945333814357f6730eeab41",
+    "candidate_json_sha256": "a45b3de31c0fb04375c72077e7c85ac896b92262b224652e0fd40f3d496fa242"
+  },
+  "blind_execution": {
+    "sample_centers": 1854,
+    "pre_dedup_followup_total": 84,
+    "frozen_candidate_count": 10
+  },
+  "truth_firewall": {
+    "official_dive_site_anchor_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "next_gate": "HC2_TRUTH_UNLOCK_CASE_LEVEL_RECOVERY_SCORE",
+  "claim_ceiling": "BLIND_KNOWN_OBJECT_POSITIVE_CONTROL_CANDIDATE_GENERATION_ONLY"
+}
