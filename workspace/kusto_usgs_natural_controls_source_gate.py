@@ -10,7 +10,7 @@ OUT.mkdir(parents=True,exist_ok=True)
 UA={"User-Agent":"JANUS-KUSTO-USGS-natural-controls-source-gate/1.1"}
 DATASETS=[
  {"id":"USGS_MIAMI_KEY_BISCAYNE_POCKMARKS","sciencebase_id":"5a96f5cee4b06990606c4ff0","doi":"10.5066/F72J6B4Z"},
- {"id":"USGS_LAKE_CRESCENT_2016","sciencebase_id":"586d3165e4b0f5ce109faa51","doi":"10.5066/F7B56GW5"}
+ {"id":"USGS_LAKE_CRESCENT_2016","sciencebase_id":"586d3165e4b0f5ce109faa51","doi":"10.5066/F7B56GW5","known_child_item_ids":["5eea74cb82ce3bd58d8572af","5eea74d882ce3bd58d8572dd"]}
 ]
 
 def getj(url,params=None):
@@ -101,7 +101,7 @@ for ds in DATASETS:
    **ds,
    "sciencebase_api":root_url,
    "title":root.get("title"),
-   "root_hasChildren":root.get("hasChildren"),
+   "root_hasChildren":root.get("hasChildren"),\n   "explicit_child_ids_from_independent_usgs_metadata":explicit_children,
    "items_traversed":len(items),
    "child_query_audit":query_audit,
    "item_summaries":item_summaries,
@@ -123,14 +123,14 @@ out={
  "datasets":outsets,
  "hard_rules":[
   "ScienceBase metadata/file inventory only; no raster values read.",
-  "Parent item with zero files is not treated as data absence; declared child items are traversed.",
+  "Parent item with zero files is not treated as data absence; declared child items are traversed.",\n  "Legacy child IDs may be bound from independent USGS metadata that explicitly cites the same DOI; such bindings are recorded separately.",
   "File-name role classification is routing metadata, not scientific classification.",
   "Processed products may calibrate detection but cannot independently validate their own processing lineage."
  ],
  "next_gate":"FREEZE_NUMERIC_PRODUCTS_AND_NATIVE_RESOLUTION_BEFORE_BLIND_DETECTION",
  "claim_ceiling":"SOURCE_BINDING_ONLY"
 }
-p=OUT/"JANUS-KUSTO-USGS-NATURAL-CONTROLS-SOURCE-GATE-RUN-2026-09-23-v1.1.json"
+p=OUT/"JANUS-KUSTO-USGS-NATURAL-CONTROLS-SOURCE-GATE-RUN-2026-09-23-v1.2.json"
 p.write_text(json.dumps(out,indent=2))
 print(json.dumps({
  "artifact_id":out["artifact_id"],
