@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_AUSTRALIAN_MARINE_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0",
+  "implementation_freeze": "JANUS-KUSTO-SHELLHARBOUR-S2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-23-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-SHELLHARBOUR-S1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10777460402,
+    "artifact_zip_sha256": "f35201dd5cfd92c9001e3e77bae6aa494b1ebdd93e67000689ad155676940407",
+    "candidate_json_sha256": "ed7447d476b964148d5d692e7f3d0798cd8b2895bdb58ee543fbab4a7f503bc3",
+    "frozen_candidate_count": 100
+  },
+  "source_route_audit": {
+    "paired_source_receipt": "JANUS-KUSTO-SHELLHARBOUR-S0-FINAL-PAIRED-SOURCE-RECEIPT-2026-09-23-v1.0",
+    "exact_member_receipt": "JANUS-KUSTO-SHELLHARBOUR-S0C-EXACT-MEMBER-BINDING-RECEIPT-2026-09-23-v1.0",
+    "backscatter_transport_repair": "JANUS-KUSTO-SHELLHARBOUR-S2-BACKSCATTER-ROUTE-REPAIR-2026-09-23-v1.0",
+    "transport_repairs_changed_scientific_method": false
+  },
+  "s2_run": {
+    "github_actions_run_id": 35921077447,
+    "head_sha": "20e7f2fe7552e092d56d2cb6776a7d64e02938ef",
+    "conclusion": "success",
+    "artifact_id": 10776888064,
+    "artifact_zip_sha256": "9bb8b1fb4700587bdc92641c52e9eecdfdd89311ed63196164397e28b29bf813",
+    "output_json_sha256": "f7bbca32b9b4c38c75181b082e97239c1f180f0b504d42243300ed6e53dff50a"
+  },
+  "primary_result": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 99,
+    "blocked_strata": [],
+    "candidate_support_count": 21,
+    "candidate_support_fraction": 0.21212121212121213,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 4.242424242424242,
+    "candidate_mean_aggregate_score": 2.6475977034852987,
+    "control_mean_aggregate_score": 1.104730555581381,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 3.6522621598029263e-22,
+    "primary_pass": true,
+    "scientific_promotion": true
+  },
+  "replication_significance": {
+    "formal_unseen_crosschannel_pass_number": 3,
+    "formal_unseen_marine_pass_number": 2,
+    "paired_support_domain_v2_marine_pass_number": 2,
+    "new_geographic_lineage": "AUSTRALIA_NEW_SOUTH_WALES_PACIFIC",
+    "new_platform_sensor_lineage": "RV_BOMBORA__R2SONIC_2022"
+  },
+  "meaning": "With v2 unchanged, bathymetry-only frozen KUSTO candidates on the genuinely unseen Shellharbour/Tharawal Australian marine corpus were significantly enriched for held-out acoustic-backscatter structure relative to same-radius eligible controls.",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "ARCHAEOLOGICAL_OR_WRECK_CLASSIFICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "GENERAL_CROSS_SURVEY_REPEATABILITY",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_AUSTRALIAN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION"
+}
