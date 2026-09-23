@@ -1,0 +1,21 @@
+name: KUSTO Synthetic Multibeam Nuisance Selftest
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_synthetic_multibeam_nuisance_v2.py'
+      - 'workspace/test_kusto_synthetic_multibeam_nuisance_v2.py'
+      - '.github/workflows/kusto-synthetic-multibeam-nuisance-selftest.yml'
+  workflow_dispatch:
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python workspace/test_kusto_synthetic_multibeam_nuisance_v2.py
