@@ -94,6 +94,16 @@
       "dataset": "EMODNET_KN19207_ALL8",
       "state": "SOURCE_LINEAGE_NEGATIVE_0_OF_8_LOCAL_WINDOWS",
       "finding": "Direct WFS source_references queries returned 0/8 local source-reference hits. This does not imply no bathymetric data exists; it only blocks using current EMODnet source_references as independent lineage for these frozen Atlantic points."
+    },
+    {
+      "dataset": "AUSSEABED_SOUTHWEST_CORNER_IMAGERY",
+      "state": "INDEPENDENT_IMAGERY_COVERAGE__ZERO_DIRECT_INTERSECTIONS",
+      "finding": "Independent IMAS/UWA BRUV/drop-camera annotations provided 727 georeferenced rows (722 unique coordinates). Under the preregistered frozen-radius rule: 0/100 direct image-record intersections, 62 near within 1 km, 37 regional within 1-5 km, and 1 with no image record within 5 km. All six SWC2 acoustic-supported candidates had only NEAR_IMAGE_COVERAGE; none had direct visual support."
+    },
+    {
+      "dataset": "AUSSEABED_SOUTHWEST_CORNER_AUV_TRACK",
+      "state": "PUBLIC_TRACK_NOT_RECOVERED",
+      "finding": "The public mac-swc repository contains AUV analysis/model references but no recovered exact Nimbus/USBL navigation track in tree/code search. Report figures or predictions are not substituted for a real georeferenced track."
     }
   ],
   "utility_now_supported": [
@@ -115,8 +125,8 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "Open South-west Corner independent imagery only now, after the SWC2 candidate and acoustic result are immutable; quantify actual imagery-track intersection before interpreting frames.",
-    "Run paired-support-domain v2 unchanged on additional unseen marine datasets from different instruments, owners, and ocean regions, with Solitary Islands as a high-priority multimodal corpus.",
+    "For South-west Corner, search a primary AUV Nimbus/SQUIDLE+/IMOS source for exact frame/track coordinates. Do not promote near BRUV/drop-camera records to direct support.",
+    "Run paired-support-domain v2 unchanged on Solitary Islands as the next unseen multimodal marine corpus; freeze bathymetry candidates before backscatter, towed-video, still-image, or sediment truth is read.",
     "Build a >=20 high-confidence known-object/natural-control benchmark with hidden truth; registry entries alone do not count as validated targets.",
     "Continue independent-survey replay separately from same-survey cross-channel validation.",
     "Seek source-resolved European corpora beyond the current EMODnet 0/8 local source-reference result; do not count composite DTM layers as independent surveys."
