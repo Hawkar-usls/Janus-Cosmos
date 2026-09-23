@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-REEF-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_GA4848_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+  "dataset": {
+    "survey": "GA4848",
+    "collection_dates": ["2020-01-31","2020-02-06"],
+    "platform": "TV Bluefin",
+    "sensor": "Kongsberg EM2040C HD 300 kHz",
+    "named_subareas": ["Elizabeth Reef","Middleton Reef"],
+    "selected_subarea": "Elizabeth Reef",
+    "selection_rule": "Lexicographically first named reef in public survey metadata, frozen before raster values.",
+    "bathymetry": {
+      "ga_dataset_id": 144415,
+      "doi": "10.26186/144415",
+      "direct_archive": "https://files.ausseabed.gov.au/survey/Elizabeth%20Middleton%20Reef%20Bathymetry%202020%205m.zip",
+      "native_cell_m": 5,
+      "format": "two 32-bit GeoTIFF grids"
+    },
+    "backscatter": {
+      "ga_dataset_id": 144416,
+      "metadata_pid": "https://pid.geoscience.gov.au/dataset/ga/144416"
+    },
+    "later_truth_channels": ["AUV_SIRIUS_SEABED_IMAGERY","SEDIMENT_GRABS","BRUV"]
+  },
+  "bathymetry_discovery": {
+    "native_cell_m": 5,
+    "radii_m": [20,40,80,160],
+    "sampling_stride_m": 40,
+    "spatial_dedup_m": 250,
+    "maximum_candidates": 100,
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)"
+  },
+  "paired_support_domain_v2": {
+    "bathymetry_support_patch_min_fraction": 0.8,
+    "backscatter_native_valid_patch_min_fraction": 0.8,
+    "value_based_nodata_inference_forbidden": true,
+    "candidate_and_control_support_rule_identical_within_radius": true
+  },
+  "backscatter_replay": {
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 500,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "stratified_permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "execution_order": [
+    "E0_SOURCE_BINDING_NO_RASTER_VALUES",
+    "E1_ELIZABETH_REEF_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "E2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+    "E3_SEAL_UNSEEN_RESULT",
+    "E4_ONLY_AFTER_E3_BIND_AUV_BRUV_AND_SEDIMENT_TRUTH"
+  ],
+  "hard_rules": [
+    "V2_METHOD_UNCHANGED",
+    "NO_REEF_SWITCH_AFTER_OUTCOME",
+    "NO_POSTHOC_RADIUS_OR_THRESHOLD_CHANGE",
+    "NO_AUV_BRUV_OR_SEDIMENT_LABEL_READ_BEFORE_E3"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION_ONLY"
+}
