@@ -1,0 +1,36 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM4-AUV-EXPORT-ACCESS-BLOCK-2026-09-24-v1.0",
+  "status": "AUV_COORDINATE_EXPORT_ACCESS_BLOCKED__NO_COVERAGE_VERDICT",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM4-AUV-COORDINATE-COVERAGE-PREREG-2026-09-24-v1.0",
+  "acoustic_result": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM3-FORMAL-DUAL-V2-V3-RESULT-RECEIPT-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10781992017,
+    "candidate_json_sha256": "06c37362ea2cbaa316c4100cd4c361467c680732bd652b4c4dbf459102c04576"
+  },
+  "failed_run": {
+    "github_actions_run_id": 35934486310,
+    "head_sha": "3d04821923c41486e2f659cb36c59a752e1385ac",
+    "failure_class": "HTTP_401_UNAUTHORIZED_ON_PUBLISHED_SQUIDLE_NOLOGIN_EXPORT",
+    "failure_stage": "BEFORE_AUV_COORDINATE_CSV_INGEST_AND_BEFORE_ANY_SPATIAL_COVERAGE_SCORING"
+  },
+  "scientific_state": {
+    "auv_coordinates_read": false,
+    "auv_labels_read": false,
+    "image_content_read": false,
+    "coverage_intersections_computed": false,
+    "no_direct_coverage_claim_allowed": true,
+    "candidate_coordinates_changed": false,
+    "candidate_radii_changed": false,
+    "acoustic_results_changed": false
+  },
+  "source_policy": {
+    "dataset_doi": "10.25959/6WJ9-VY51",
+    "published_export_route_exists_in_source_metadata": true,
+    "live_export_currently_requires_or_rejects_unauthenticated_access": true,
+    "next_allowed_action": "RESOLVE_AN_ALTERNATE_AUTHORITATIVE_PUBLIC_STATIC_SNAPSHOT_OR_PUBLIC_CAMPAIGN_MEDIA_POSE_ROUTE_WITHOUT_LABELS"
+  },
+  "hard_rule": "DO_NOT_TREAT_401_OR_MISSING_EXPORT_ROWS_AS_AUV_TRACK_ABSENCE_OR_ZERO_VISUAL_COVERAGE",
+  "claim_ceiling": "SOURCE_ACCESS_BLOCK_ONLY__NO_AUV_COVERAGE_RESULT"
+}
