@@ -1,0 +1,35 @@
+name: KUSTO Global Stage1 Blind Morphology Sharded
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-blind-anomaly-hunt-v1
+    paths:
+      - 'workspace/kusto_global_stage1_blind_morphology.py'
+      - '.github/workflows/kusto-global-stage1-blind-morphology-sharded.yml'
+      - 'data/cousteau/JANUS-KUSTO-GLOBAL-STAGE1-EXECUTION-SHARDING-ADDENDUM-2026-09-23-v1.0.json'
+  workflow_dispatch:
+
+jobs:
+  stage1:
+    strategy:
+      fail-fast: false
+      matrix:
+        region_rank: [1, 2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      KUSTO_REGION_RANK: ${{ matrix.region_rank }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests shapely
+      - name: Run frozen Stage1 region shard
+        run: python workspace/kusto_global_stage1_blind_morphology.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-global-stage1-rank-${{ matrix.region_rank }}
+          path: workspace/kusto_global_anomaly_out/JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RUN-2026-09-23-v1.0-RANK${{ matrix.region_rank }}.json
+          retention-days: 30
