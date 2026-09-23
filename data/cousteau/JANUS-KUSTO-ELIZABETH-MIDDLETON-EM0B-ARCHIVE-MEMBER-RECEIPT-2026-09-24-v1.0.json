@@ -1,0 +1,48 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0B-ARCHIVE-MEMBER-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_ARCHIVE_HASHES_AND_TIF_MEMBERS_BOUND__NO_PIXEL_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "source_transport_receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-SOURCE-TRANSPORT-RECEIPT-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35933046225,
+    "artifact_id": 10781991025,
+    "artifact_zip_sha256": "59fb4abb67056fe2f03eb2f020ffe30aa94c55fe0fae27c5a1bec74ad1c74224"
+  },
+  "bathymetry_archive": {
+    "url": "https://files.ausseabed.gov.au/survey/Elizabeth%20Middleton%20Reef%20Bathymetry%202020%205m.zip",
+    "sha256": "ae5547ec3cd362ad01132c21fdddb7ee8d8f6ec334adb0d637579ac901b516c1",
+    "bytes": 71699530,
+    "tif_members": [
+      {
+        "name": "Elizabeth_Middleton_Reef_Bathymetry_2020_5m_MSL_cog.tif",
+        "uncompressed_bytes": 475061819,
+        "crc32": 1901413558
+      }
+    ]
+  },
+  "backscatter_archive": {
+    "url": "https://d28rz98at9flks.cloudfront.net/144416/144416_00_0.zip",
+    "sha256": "ca75ca36d8db5a327d2782a2d9dab851be245925f5f6536d40aee42b0d228ec9",
+    "bytes": 14401549,
+    "tif_members": [
+      {
+        "name": "32Bit_Geotifs/bksct_elizabeth_clip_20200331.tif",
+        "uncompressed_bytes": 3282021,
+        "crc32": 293533635
+      },
+      {
+        "name": "32Bit_Geotifs/bksct_middleton_clip_20200331.tif",
+        "uncompressed_bytes": 8380931,
+        "crc32": 2157690550
+      }
+    ]
+  },
+  "truth_firewall": {
+    "raster_values_read": false,
+    "auv_imagery_read": false,
+    "sediment_labels_read": false,
+    "bruv_imagery_read": false
+  },
+  "next_gate": "EM0D_RASTER_HEADER_GEOMETRY_ONLY",
+  "claim_ceiling": "ARCHIVE_HASH_MEMBER_BINDING_ONLY"
+}
