@@ -1,0 +1,39 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_100_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "source_split_receipt": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0E-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35932452897,
+    "head_sha": "433db6aeb0cbfd08b3b82ca8b42c2f8d55e6c196",
+    "artifact_id": 10781646909,
+    "artifact_zip_sha256": "564379ef4b10bfe65b0b5d6f538409b22ecd34b2a3f099eeebbddf7effef9c97",
+    "candidate_json_sha256": "ae4874ce68e67808f29663378cb8c4c4dd82f956eb5d8074f0f25c13ad34c01b"
+  },
+  "blind_execution": {
+    "raster_shape": [13312,3584],
+    "valid_cells": 5675992,
+    "sample_centers": 74998,
+    "radii_m": [20,40,80,160],
+    "pre_dedup_followup_total": 2475,
+    "spatial_dedup_m": 250,
+    "frozen_candidate_count": 100
+  },
+  "truth_firewall": {
+    "backscatter_member_decompressed": false,
+    "backscatter_values_read": false,
+    "towed_video_or_stills_read": false,
+    "sediment_labels_read": false,
+    "landform_or_substrate_classification_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10781646909,
+    "artifact_zip_sha256": "564379ef4b10bfe65b0b5d6f538409b22ecd34b2a3f099eeebbddf7effef9c97",
+    "candidate_json_sha256": "ae4874ce68e67808f29663378cb8c4c4dd82f956eb5d8074f0f25c13ad34c01b"
+  },
+  "next_gate": "SI2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+  "claim_ceiling": "UNSEEN_SOLITARY_ISLANDS_BLIND_BATHYMETRIC_CANDIDATE_GENERATION_ONLY"
+}
