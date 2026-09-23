@@ -34,7 +34,7 @@ CONTROLS_PER=int(IMP["method"]["controls_per_candidate"])
 MIN_CONTROLS=int(IMP["method"]["minimum_controls_per_radius"])
 MIN_DIST=float(IMP["method"]["minimum_distance_from_any_frozen_candidate_m"])
 MIN_ACTIVE=int(IMP["method"]["minimum_active_metrics_per_stratum"])
-ITERS=int(IMP["method"]["permutation_iterations"])
+ITERS=int(IMP["method"]["stratified_permutation_iterations"])
 ALPHA=float(IMP["method"]["alpha"])
 
 def get(url,headers=None,timeout=180):
