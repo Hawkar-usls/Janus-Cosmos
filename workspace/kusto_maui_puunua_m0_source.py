@@ -40,7 +40,10 @@ for p in PAGES:
 site=[u for u in hrefs if ("puunua" in u.lower() or "puunoa" in u.lower())]
 # Canonical data release routes may omit .zip in the terminal URL but carry name=<file>.zip.
 bathy=sorted({u for u in site if "bathy" in u.lower() and "backscatter" not in u.lower() and ".zip" in u.lower()})
-back_all=sorted({u for u in site if "backscatter" in u.lower() and ".zip" in u.lower()})\n# Prefer the unique direct media ZIP as canonical file identity; retain landing/download aliases as provenance.\nback_media=[u for u in back_all if "/data-releases/media/" in u.lower()]\nback=back_media if len(back_media)==1 else back_all
+back_all=sorted({u for u in site if "backscatter" in u.lower() and ".zip" in u.lower()})
+# Prefer the unique direct media ZIP as canonical file identity; retain landing/download aliases as provenance.
+back_media=[u for u in back_all if "/data-releases/media/" in u.lower()]
+back=back_media if len(back_media)==1 else back_all
 
 # If landing did not expose bathy, probe the deterministic paired naming pattern derived only from
 # the published backscatter filename. HEAD/stream headers only: no ZIP body is read here.
@@ -62,7 +65,8 @@ out={
  "prereg":PRE["artifact_id"],"status":status,
  "pages_read":page_meta,
  "selected_site":"PUUNUA_POINT",
- "candidate_urls":{"bathymetry":bathy,"backscatter":back},\n "backscatter_all_routes":back_all,
+ "candidate_urls":{"bathymetry":bathy,"backscatter":back},
+ "backscatter_all_routes":back_all,
  "site_related_urls":sorted(site),
  "header_only_pair_probes":probes,
  "raster_values_read":False,"numeric_zip_body_read":False,
