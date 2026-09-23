@@ -1,0 +1,53 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_SHELLHARBOUR_BACKSCATTER_VALUE_READ",
+  "parent_prereg": "JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0",
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2",
+  "method_changed_from_maui": false,
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-SHELLHARBOUR-S1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10777460402,
+    "artifact_zip_sha256": "f35201dd5cfd92c9001e3e77bae6aa494b1ebdd93e67000689ad155676940407",
+    "candidate_json_sha256": "ed7447d476b964148d5d692e7f3d0798cd8b2895bdb58ee543fbab4a7f503bc3",
+    "frozen_candidate_count": 100
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "support_patch_geometry": "disk radius r plus annulus 1.25r < d <= 2r",
+    "backscatter_value_based_support_inference_used": false
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "native_grids": {
+    "bathymetry_cell_m": 2,
+    "backscatter_cell_m": 5,
+    "candidate_radii_m": [8,16,32,64]
+  },
+  "hard_rules": [
+    "VERIFY_CANDIDATE_ARTIFACT_AND_JSON_HASHES_BEFORE_BACKSCATTER_READ",
+    "NO_CANDIDATE_COORDINATE_CHANGE",
+    "NO_CANDIDATE_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_LANDFORM_OR_SEDIMENT_LABEL_READ",
+    "COVERAGE_OR_DEGENERATE_RADIUS_BLOCKS_PRIMARY_PROMOTION"
+  ],
+  "claim_ceiling": "UNCHANGED_V2_EXECUTION_FREEZE_ONLY"
+}
