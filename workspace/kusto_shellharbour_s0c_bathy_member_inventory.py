@@ -6,8 +6,8 @@ import requests
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"workspace"/"kusto_global_groundtruth_out";OUT.mkdir(parents=True,exist_ok=True)
-REC=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0.json").read_text())
-URL=REC["pair_identity"]["bathymetry_product"]["data_url"]
+REC=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-FINAL-PAIRED-SOURCE-RECEIPT-2026-09-23-v1.0.json").read_text())
+URL=REC["bathymetry"]["current_url"]
 UA={"User-Agent":"JANUS-KUSTO-Shellharbour-S0C-bathy-members/1.0"}
 r=requests.get(URL,headers=UA,timeout=180,allow_redirects=True);r.raise_for_status()
 blob=r.content
