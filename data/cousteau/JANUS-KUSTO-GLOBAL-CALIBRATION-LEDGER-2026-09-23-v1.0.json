@@ -1,0 +1,99 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-LEDGER-2026-09-23-v1.0",
+  "status": "ACTIVE__FIRST_FORMAL_UNSEEN_CROSSCHANNEL_PASS_ESTABLISHED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "benchmarks": [
+    {
+      "id": "NOAA_EX1903L2_SHARK_ROCK",
+      "domain": "OPEN_OCEAN_MULTISURVEY",
+      "truth": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK",
+      "result": "CASE_LEVEL_BLIND_RECOVERY_IN_EX1903L2_ONLY__NO_CROSS_SURVEY_RECOVERY",
+      "detail": {
+        "EX1903L2_nearest_candidate_m": 17.997769244929092,
+        "direct_measured_support_surveys": ["EX1203","EX1805","EX1903L2"],
+        "EX1203_class": "DETECTOR_SELECTION_MISS",
+        "EX1805_class": "DETECTOR_SELECTION_MISS",
+        "EX2102_class": "COVERAGE_OR_VALIDITY_LIMITED"
+      },
+      "promotion": false,
+      "current_role": "CALIBRATION_ONLY_FOR_CROSSSURVEY_SELECTION_CHANGES"
+    },
+    {
+      "id": "USGS_LAKE_CRESCENT_2016",
+      "domain": "INLAND_DUALCHANNEL_NATURAL_MORPHOLOGY",
+      "result": "POSTHOC_BACKSCATTER_ROBUSTNESS_SIGNAL",
+      "detail": {
+        "support_enrichment_ratio": 3.4,
+        "radius_matched_permutation_p": 0.0001999600079984003,
+        "primary_failure": "ZERO_MAD_METRIC_DEGENERACY"
+      },
+      "promotion": false,
+      "current_role": "CALIBRATION_ONLY_FOR_ZERO_MAD_HANDLING"
+    },
+    {
+      "id": "USGS_LAKE_CHELAN_2023",
+      "domain": "INLAND_UNSEEN_DUALCHANNEL",
+      "result": "UNSEEN_CROSSCHANNEL_SIGNAL_PRESENT__PRIMARY_BLOCKED_BY_COVERAGE",
+      "detail": {
+        "frozen_candidates": 452,
+        "scorable_candidates": 429,
+        "support_enrichment_ratio": 4.242424242424242,
+        "mann_whitney_one_sided_p": 5.65125167622128e-70,
+        "blocked_stratum": "C|96"
+      },
+      "promotion": false,
+      "current_role": "CALIBRATION_ONLY_FOR_COVERAGE_HANDLING"
+    },
+    {
+      "id": "USGS_LAKE_SAMMAMISH_2021",
+      "domain": "INLAND_PREREGISTERED_UNSEEN_DUALCHANNEL",
+      "result": "PASS_PREREGISTERED_UNSEEN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION",
+      "detail": {
+        "frozen_candidates": 100,
+        "scorable_candidates": 98,
+        "blocked_strata": 0,
+        "support_count": 24,
+        "support_fraction": 0.24489795918367346,
+        "support_enrichment_ratio": 4.897959183673469,
+        "candidate_mean_score": 3.0680656706628153,
+        "control_mean_score": 1.0241408661997309,
+        "stratified_permutation_p": 0.0001999600079984003,
+        "mann_whitney_one_sided_p": 4.081981058328846e-27
+      },
+      "promotion": true,
+      "claim_ceiling": "UNSEEN_SAME_SURVEY_CROSSCHANNEL_ENRICHMENT__NO_INDEPENDENT_SURVEY_REPLICATION"
+    },
+    {
+      "id": "USGS_MIAMI_KEY_BISCAYNE_POCKMARKS",
+      "domain": "OPEN_OCEAN_AUV_NATURAL_MORPHOLOGY",
+      "result": "ACCESS_STREAMING_NEGATIVE_ONLY",
+      "detail": {
+        "miami_archive_bytes": 624491811,
+        "key_biscayne_archive_bytes": 804076038,
+        "range_requests_supported": false
+      },
+      "promotion": false,
+      "current_role": "OPEN_SOURCE_ACCESS_PROBLEM__NO_DETECTOR_RESULT"
+    }
+  ],
+  "validated_utility_now": [
+    "KUSTO bathymetry-selected anomaly candidates can be enriched for independently computed acoustic-backscatter anomaly evidence on at least one genuinely unseen paired dataset under preregistered rules."
+  ],
+  "not_yet_validated": [
+    "global ocean-wide recall",
+    "global precision",
+    "artificial-object classification",
+    "independent-survey replication of detector hits",
+    "multi-sensor generalization outside the tested paired-data settings",
+    "direct visual confirmation rate"
+  ],
+  "next_unseen_target": {
+    "id": "USGS_CROSS_SOUND_2015",
+    "domain": "OPEN_OCEAN_ALASKA",
+    "sensor": "RESON_7111",
+    "native_cell_m": 10,
+    "goal": "SECOND_FORMAL_UNSEEN_CROSSCHANNEL_REPLICATION_IN_DIFFERENT_GEOGRAPHY_AND_SENSOR"
+  },
+  "hard_rule": "NO_SINGLE_OVERALL_SCORE__EACH_CLAIM_REQUIRES_ITS_OWN_INDEPENDENT_VALIDATION",
+  "claim_ceiling": "CALIBRATION_AND_VALIDATION_LEDGER_ONLY"
+}
