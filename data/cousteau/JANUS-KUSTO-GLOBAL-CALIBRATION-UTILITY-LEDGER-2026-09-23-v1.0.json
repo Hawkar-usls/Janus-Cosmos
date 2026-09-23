@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "FOUR_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__THREE_MARINE_V2_PASSES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_PASS",
+  "status": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_PASS",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -129,10 +129,10 @@
     }
   ],
   "utility_now_supported": [
-    "KUSTO has four formal unseen cross-channel PASSes on real datasets, including three marine paired-support-domain-v2 PASSes.",
-    "The marine v2 result now spans R2Sonic 2022 and Kongsberg EM2040C HD sensor lineages and multiple Australian/US geographic lineages.",
-    "A fourth marine corpus, Solitary Islands, remains an immutable formal v2 FAIL despite strong q95 support because of a diagnosed near-zero-MAD control-tail instability.",
-    "The calibration-derived v3 relative-MAD guard has passed its first unseen well-conditioned corpus without changing any score relative to v2; this supports no-regression but does not yet prove rescue efficacy.",
+    "KUSTO has five formal unseen cross-channel PASSes on real datasets, including four marine paired-support-domain-v2 PASSes.",
+    "Marine v2 replication spans Maui/Puunoa, Shellharbour/Tharawal, South-west Corner Marine Park, and Elizabeth/Middleton Reefs, across R2Sonic 2022 and Kongsberg EM2040C-family sensor lineages.",
+    "A separate genuinely unseen marine corpus, Solitary Islands, remains an immutable formal v2 FAIL despite strong q95 candidate support because of a diagnosed near-zero-MAD control-tail instability.",
+    "The calibration-derived v3 relative-MAD guard passed its first unseen well-conditioned corpus with identical scores to v2 because the guard did not activate; this supports no-regression, not rescue efficacy.",
     "KUSTO remains an evidence-ranked anomaly-prioritization layer, not an object-identity or artificiality classifier."
   ],
   "not_yet_supported": [
@@ -152,7 +152,7 @@
     "Continue independent-survey replay separately from same-survey cross-channel validation.",
     "Keep South-west Corner access-blocked until an authoritative bathymetry transport route becomes available."
   ],
-  "claim_ceiling": "FOUR_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__THREE_MARINE_V2_PASSES_ACROSS_TWO_SENSOR_LINEAGES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_ONLY__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
+  "claim_ceiling": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES_ACROSS_MULTIPLE_GEOGRAPHIC_AND_TWO_SENSOR_LINEAGES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_ONLY__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
   "successor_methods": {
     "paired_support_domain_v3_relative_mad_guard": {
       "calibration_source": "AUSSEABED_SOLITARY_ISLANDS_2022_FORMAL_V2_FAIL",
