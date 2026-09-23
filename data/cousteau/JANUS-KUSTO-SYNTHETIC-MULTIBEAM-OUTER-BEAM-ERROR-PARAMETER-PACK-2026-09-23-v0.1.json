@@ -1,0 +1,72 @@
+{
+  "artifact_id":"JANUS-KUSTO-SYNTHETIC-MULTIBEAM-OUTER-BEAM-ERROR-PARAMETER-PACK-2026-09-23-v0.1",
+  "schema":"janus.cosmos.kusto.synthetic_multibeam_outer_beam_error.parameter_pack.v0_1",
+  "status":"CD169_EMPIRICAL_CALIBRATION_ONLY__NOT_UNSEEN_VALIDATED",
+  "created_date":"2026-09-23",
+  "source_library":{
+    "repo_path":"data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json",
+    "source_workflow_run_id":35804320906,
+    "source_artifact_id":10727525929,
+    "source_artifact_zip_sha256":"252243c5e50d9b1135c3e68c93779a77179818d114c638da9c0fc2bd1158ff68",
+    "source_library_json_sha256":"6eb8d1140d4353f68ae106c5df53f1cf0a2332fc24e5ccbd29690ad63626e379",
+    "prereg":"data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-PREREG-2026-09-23-v1.0.json"
+  },
+  "empirical_bins_abs_across_track_m":[
+    {"id":"INNER","min":0,"max":3000},
+    {"id":"MID","min":3000,"max":4500},
+    {"id":"OUTER","min":4500,"max":5500},
+    {"id":"EXTREME","min":5500,"max":null}
+  ],
+  "cross_channel_summary_envelope_m":{
+    "INNER":{"median_absolute_residual_range":[8.37583467513332,10.820063364506495],"p90_absolute_residual_range":[22.767498756647186,27.256578303456276]},
+    "MID":{"median_absolute_residual_range":[10.779199290275756,28.066941032409204],"p90_absolute_residual_range":[28.640569510459862,53.5529471059142]},
+    "OUTER":{"median_absolute_residual_range":[18.607008299230984,38.85488897860023],"p90_absolute_residual_range":[41.26973761916161,66.54488923728468]},
+    "EXTREME":{"median_absolute_residual_range":[34.8936720818283,44.574851779043456],"p90_absolute_residual_range":[59.83992766559103,77.73094300895923],"observed_fraction_abs_ge_100_range":[0.0,0.02185792349726776]}
+  },
+  "empirical_law":{
+    "finding":"DEPTH_ERROR_IS_ACROSS_TRACK_DEPENDENT_HETEROSCEDASTIC_AND_HEAVY_TAILED",
+    "generic_line32_fixed_deep_bias":false,
+    "generic_outer_beam_degradation":true,
+    "rare_positive_deep_outliers_exist":true,
+    "CAND003_example_raw_deep_outliers_m":[186.4,199.0],
+    "CAND003_role":"CALIBRATION_TAIL_EXAMPLE_ONLY__NOT_GENERIC_MEAN_BEHAVIOR"
+  },
+  "sampling_regimes":{
+    "IDEAL":{
+      "rule":"zero multibeam depth perturbation",
+      "role":"mechanism-free control"
+    },
+    "CD169_REPLAY":{
+      "rule":"select frozen abs-across bin and bootstrap full signed residual vector from an explicitly named CD169 lineage/reference channel",
+      "signed_direction_preserved":true,
+      "probability_scope":"empirical replay of this calibration corpus only"
+    },
+    "GENERIC_UNSEEN_CALIBRATED":{
+      "rule":"select frozen abs-across bin, bootstrap observed residual magnitude from an explicitly named calibration channel, randomize sign 50/50",
+      "reason":"CD169 signed directional bias is not authorized for transfer to an unseen survey",
+      "validated_predictive_probability":false
+    },
+    "ADVERSARIAL_REAL_TAILS":{
+      "rule":"bootstrap only empirically observed residual magnitudes >=100 m in a selected supported channel/bin and randomize sign",
+      "probability_forecast_forbidden":true,
+      "fallback_if_no_ge100_tail":"ERROR__DO_NOT_INVENT_TAIL"
+    }
+  },
+  "implementation":{
+    "sampler":"workspace/kusto_synthetic_multibeam_nuisance_v2.py",
+    "selftest":"workspace/test_kusto_synthetic_multibeam_nuisance_v2.py",
+    "selftest_run_id":35804455996,
+    "selftest_status":"PASS"
+  },
+  "integration_rules":[
+    "APPLY_DEPTH_NUISANCE_AFTER_GEOMETRY_AND_COVERAGE_STATE_ARE_DEFINED",
+    "DO_NOT_USE_TARGET_MORPHOLOGY_TO_SELECT_ERROR_BIN_OR_SAMPLE",
+    "KEEP_NAVIGATION_NUISANCE_AND_MULTIBEAM_DEPTH_NUISANCE_AS_SEPARATE_LAYERS",
+    "RAW_NE_CORRECTED",
+    "DO_NOT_TREAT_CD169_CALIBRATION_AS_UNSEEN_VALIDATION",
+    "REPORT_TAIL_ERRORS",
+    "PRESERVE_HISTORICAL_SYNTHETIC_RUNS"
+  ],
+  "next_validation":"UNSEEN_RAW_MULTIBEAM_SURVEY_WITH_INDEPENDENT_CORRECTED_OR_LATER_REFERENCE_SURFACE",
+  "claim_ceiling":"CD169_CALIBRATED_SYNTHETIC_MULTIBEAM_NUISANCE_ONLY__NO_UNSEEN_PREDICTIVE_SKILL"
+}
