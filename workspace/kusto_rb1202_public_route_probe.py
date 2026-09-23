@@ -5,9 +5,9 @@ from pathlib import Path
 OUT=Path("workspace/kusto_cross_survey_out");OUT.mkdir(parents=True,exist_ok=True)
 UA={"User-Agent":"JANUS-KUSTO-RB1202-route-probe/1.0"}
 ROOTS=[
- "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h_brown/RB1202/multibeam/data/version1/MB/",
- "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h_brown/RB1202/multibeam/data/version1/MB/generated/",
- "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h_brown/RB1202/multibeam/data/version2/MB/"
+ "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h._brown/RB1202/multibeam/data/version1/MB/",
+ "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h._brown/RB1202/multibeam/data/version1/MB/generated/",
+ "https://data.ngdc.noaa.gov/platforms/ocean/ships/ronald_h._brown/RB1202/multibeam/data/version2/MB/"
 ]
 def get(u):
     for i in range(4):
