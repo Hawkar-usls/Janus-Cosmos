@@ -1,0 +1,30 @@
+name: KUSTO EMODnet All8 E1 Source References
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_emodnet_all8_e1_source_references.py'
+      - 'data/cousteau/JANUS-KUSTO-EMODNET-CDI-ALL8-SOURCE-INVENTORY-PREREG-2026-09-22-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-EMODNET-ALL8-WMS-INFORMATIVE-FLAG-CORRECTION-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-emodnet-all8-e1-source-references.yml'
+  workflow_dispatch:
+
+jobs:
+  e1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Query explicit EMODnet source reference features
+        run: python workspace/kusto_emodnet_all8_e1_source_references.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-emodnet-all8-e1-source-references-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-EMODNET-ALL8-E1-DIRECT-SOURCE-REFERENCES-RUN-2026-09-23-v1.0.json
+          retention-days: 30
