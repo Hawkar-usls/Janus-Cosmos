@@ -1,0 +1,62 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0C-DUAL-METHOD-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_ELIZABETH_MIDDLETON_RASTER_PIXEL_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_prereg": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "calibration_basis_for_successor_only": "JANUS-KUSTO-SOLITARY-ISLANDS-SI4-POSTHOC-HEAVY-TAIL-DIAGNOSTIC-2026-09-24-v1.0",
+  "shared_discovery": {
+    "bathymetry_only": true,
+    "native_scale_rule": "4_8_16_32_BATHYMETRY_CELLS",
+    "radii_m": [20,40,80,160],
+    "sampling_stride_m": 40,
+    "tail_quantile": 0.995,
+    "spatial_dedup_m": 250,
+    "maximum_candidates": 100
+  },
+  "method_A_v2": {
+    "id": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+    "role": "ESTABLISHED_METHOD_REPLICATION",
+    "scientific_scoring_changed": false,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "metric_activation": "EXCLUDE_ONLY_IF_SAME_RADIUS_CONTROL_MAD_IS_EXACTLY_ZERO",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "internal_alpha": 0.05
+  },
+  "method_B_v3": {
+    "id": "PAIRED_SUPPORT_DOMAIN_V3_RELATIVE_MAD_GUARD",
+    "role": "CALIBRATION_DERIVED_SUCCESSOR_CONFIRMATION",
+    "all_v2_rules_inherited": true,
+    "only_scientific_change": "METRIC_DEGENERACY_GUARD",
+    "metric_activation": {
+      "rule": "A metric is active within a radius stratum only if MAD > 0 AND MAD/max(abs(median),1e-12) >= 0.01.",
+      "relative_mad_floor": 0.01,
+      "reason": "Prevents numerically nonzero but practically degenerate control distributions from producing unbounded robust-z amplification."
+    },
+    "minimum_active_metrics_per_stratum": 2,
+    "permutation_iterations": 5000,
+    "internal_alpha": 0.05
+  },
+  "study_multiplicity": {
+    "family": ["PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED","PAIRED_SUPPORT_DOMAIN_V3_RELATIVE_MAD_GUARD"],
+    "familywise_alpha": 0.05,
+    "procedure": "BONFERRONI",
+    "promotion_p_threshold_per_method": 0.025,
+    "note": "Method-internal calculations remain unchanged; this is a study-level promotion threshold because two confirmatory methods are evaluated on the same unseen corpus."
+  },
+  "hard_firewalls": [
+    "BOTH_METHODS_MUST_BE_FROZEN_BEFORE_ANY_EM_RASTER_PIXEL_READ",
+    "SHARED_CANDIDATE_SET_MUST_BE_HASHED_BEFORE_ANY_BACKSCATTER_PIXEL_READ",
+    "NO_METHOD_SELECTION_AFTER_SEEING_EM_RESULTS",
+    "SOLITARY_ISLANDS_CANNOT_VALIDATE_V3",
+    "AUV_IMAGERY_SEDIMENT_AND_BRUV_REMAIN_HIDDEN_UNTIL_BOTH_EM2_RESULTS_ARE_FROZEN"
+  ],
+  "claim_ceiling": "DUAL_METHOD_CONFIRMATORY_DESIGN_FREEZE_ONLY"
+}
