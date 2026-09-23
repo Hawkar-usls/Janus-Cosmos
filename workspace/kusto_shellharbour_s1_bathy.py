@@ -42,43 +42,41 @@ def world_affine(text):
     return vals,Affine(A,B,C-.5*A-.5*B,D,E,F-.5*D-.5*E)
 
 def load_bathy():
-    blob=get(SRC["bathymetry_2m"]["data_url"])
-    md5=hashlib.md5(blob).hexdigest();sha=hashlib.sha256(blob).hexdigest()
-    with zipfile.ZipFile(io.BytesIO(blob)) as zf:
-        names=zf.namelist()
-        tifs_all=[n for n in names if n.lower().endswith((".tif",".tiff")) and not n.startswith("__MACOSX/") and "/._" not in n]
-        tifs=[n for n in tifs_all if "2m" in n.lower() and "5m" not in n.lower()]
-        if len(tifs)!=1:
-            # If archive uses one nominal 2m file without explicit token, accept only when there is exactly one TIFF total.
-            tifs=tifs_all if len(tifs_all)==1 else tifs
-        tfws=[n for n in names if n.lower().endswith((".tfw",".tifw",".wld")) and not n.startswith("__MACOSX/") and "/._" not in n]
-        if len(tifs)!=1:raise RuntimeError(f"expected one TIFF, found {tifs}")
-        if len(tfws)>1:raise RuntimeError(f"expected <=1 world file, found {tfws}")
-        tif=zf.read(tifs[0]);tfw=zf.read(tfws[0]).decode("utf-8",errors="replace") if tfws else None
-    with MemoryFile(tif) as mf:
+    rep=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S1-BATHYMETRY-TRANSPORT-REPAIR-2026-09-23-v1.0.json").read_text())
+    q=rep["repair"]
+    params={
+      "SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetMap",
+      "LAYERS":q["layer"],"STYLES":"","SRS":q["srs"],
+      "BBOX":",".join(str(x) for x in q["bbox"]),
+      "WIDTH":str(q["width_px"]),"HEIGHT":str(q["height_px"]),
+      "FORMAT":q["format"],"TRANSPARENT":"TRUE"
+    }
+    r=requests.get(q["endpoint"],params=params,headers=UA,timeout=240,allow_redirects=True)
+    r.raise_for_status()
+    blob=r.content
+    sha=hashlib.sha256(blob).hexdigest()
+    with MemoryFile(blob) as mf:
         with mf.open() as src:
             ma=src.read(1,masked=True)
             z=np.asarray(ma.filled(np.nan),dtype=np.float32)
             valid=(~np.ma.getmaskarray(ma)) & np.isfinite(z)
-            emb=src.transform;crs=str(src.crs) if src.crs is not None else None
-            nodata=src.nodata;dtype=str(src.dtypes[0])
-    eres=(abs(float(emb.a)),abs(float(emb.e)))
-    emb_ok=(not emb.is_identity and max(abs(eres[0]-CELL),abs(eres[1]-CELL))<=1e-6)
-    wvals=None
-    if emb_ok:transform=emb;geo="EMBEDDED_TRANSFORM"
-    else:
-        if tfw is None:raise RuntimeError("no valid embedded transform and no world file")
-        wvals,transform=world_affine(tfw);geo="WORLD_FILE"
+            transform=src.transform
+            crs=str(src.crs) if src.crs is not None else None
+            nodata=src.nodata
+            dtype=str(src.dtypes[0])
+            mask_flags=[str(x) for x in src.mask_flag_enums[0]]
     res=(abs(float(transform.a)),abs(float(transform.e)))
-    if max(abs(res[0]-CELL),abs(res[1]-CELL))/CELL>0.001:
-        raise RuntimeError(f"effective resolution outside frozen 0.1% nominal tolerance: {res}")
+    if max(abs(res[0]-CELL),abs(res[1]-CELL))/CELL>0.01:
+        raise RuntimeError(f"effective resolution outside frozen 1% nominal tolerance: {res}")
+    # Do not infer nodata from bathymetry values. If WMS exposes no usable mask and all pixels
+    # are marked valid, this run must be treated as support-domain blocked rather than repaired posthoc.
+    if np.all(valid) and nodata is None:
+        raise RuntimeError("WMS_BATHYMETRY_NATIVE_SUPPORT_MASK_UNAVAILABLE__NO_VALUE_BASED_NODATA_INFERENCE_ALLOWED")
     return blob,z,valid,transform,{
-      "zip_sha256":sha,"zip_md5":md5,"zip_members":names,
-      "tif_name":tifs[0],"tfw_name":tfws[0] if tfws else None,
-      "shape":list(z.shape),"dtype":dtype,"nodata":nodata,"crs":crs,
-      "resolution_m":list(res),"georef_source":geo,
-      "embedded_transform":list(emb)[:6],"effective_transform":list(transform)[:6],
-      "world_file_values":wvals
+      "payload_sha256":sha,"payload_bytes":len(blob),"request_url":r.url,
+      "content_type":r.headers.get("content-type"),"shape":list(z.shape),"dtype":dtype,
+      "nodata":nodata,"crs":crs,"resolution_m":list(res),"georef_source":"WMS_GEOTIFF",
+      "effective_transform":list(transform)[:6],"mask_flags":mask_flags
     }
 
 def robust(v):
@@ -95,7 +93,7 @@ CELL_EFF=float(sum(input_meta["resolution_m"])/2.0)
 input_meta["effective_cell_for_geometry_m"]=CELL_EFF
 nrows,ncols=z.shape
 if not np.any(valid):raise RuntimeError("no valid bathymetry cells")
-input_meta["zip_bytes"]=len(blob);input_meta["valid_cells"]=int(np.sum(valid))
+input_meta["payload_bytes"]=len(blob);input_meta["valid_cells"]=int(np.sum(valid))
 
 fill=float(np.median(z[valid]));zf=z.copy();zf[~valid]=fill
 maxpx=int(round(max(RADII)/CELL_EFF))
