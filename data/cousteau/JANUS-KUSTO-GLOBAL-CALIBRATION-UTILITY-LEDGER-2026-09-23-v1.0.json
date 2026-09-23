@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "FOUR_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__THREE_MARINE_V2_PASSES__FAILURE_MODES_PRESERVED",
+  "status": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__FAILURE_MODES_PRESERVED",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -104,15 +104,18 @@
       "dataset": "AUSSEABED_SOUTHWEST_CORNER_AUV_TRACK",
       "state": "PUBLIC_TRACK_NOT_RECOVERED",
       "finding": "The public mac-swc repository contains AUV analysis/model references but no recovered exact Nimbus/USBL navigation track in tree/code search. Report figures or predictions are not substituted for a real georeferenced track."
+    },
+    {
+      "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022",
+      "state": "FORMAL_UNSEEN_V2_FAIL_WITH_SIGNAL",
+      "finding": "100/100 candidates were scorable and 40% exceeded same-radius control q95, but the frozen primary population test failed: candidate mean score 29.58 versus control mean 942.74 and stratified permutation p=0.19876. No scientific promotion; posthoc analysis may diagnose the heavy control tail only."
     }
   ],
   "utility_now_supported": [
-    "KUSTO can generate bathymetric morphology candidates that are statistically enriched for independently held-out acoustic-backscatter structure on four genuinely unseen real datasets.",
-    "The formal unseen enrichment result has replicated across one inland-lake corpus and three marine corpora.",
-    "Paired-support-domain v2 has replicated without scientific retuning on three unseen marine corpora spanning Hawaii, New South Wales, and Western Australia and at least two multibeam sensor lineages.",
-    "Observed effect sizes are heterogeneous and preserved as measured; South-west Corner is a weaker but still preregistered significant replication.",
-    "The pipeline preserves blocked, negative, source-route, and georeference failures and separates implementation repairs from scientific adaptation.",
-    "KUSTO can be used as an evidence-ranked prioritization layer for where additional independent sonar, imagery, ROV, or survey replay is worth spending effort."
+    "KUSTO has three formal unseen cross-channel PASSes on real datasets, including two marine paired-support-domain-v2 PASSes.",
+    "A fourth genuinely unseen marine corpus (Solitary Islands) produced strong cross-channel candidate support but formally failed the frozen v2 population gate, demonstrating that the method is not universally portable in its current form.",
+    "The pipeline preserves negative outcomes and distinguishes signal presence from preregistered validation success.",
+    "KUSTO remains supported as an evidence-ranked prioritization layer, not as an identity classifier or globally calibrated detector."
   ],
   "not_yet_supported": [
     "GLOBAL_ANOMALY_DETECTION_ACCURACY",
@@ -125,11 +128,11 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "For South-west Corner, search a primary AUV Nimbus/SQUIDLE+/IMOS source for exact frame/track coordinates. Do not promote near BRUV/drop-camera records to direct support.",
-    "Run paired-support-domain v2 unchanged on Solitary Islands as the next unseen multimodal marine corpus; freeze bathymetry candidates before backscatter, towed-video, still-image, or sediment truth is read.",
+    "Diagnose the Solitary Islands eligible-control heavy tail posthoc without changing or promoting the frozen result.",
+    "Run unchanged v2 on an independent sensor lineage such as Elizabeth and Middleton Reefs (EM2040C HD) to distinguish dataset-specific from sensor/general portability effects.",
     "Build a >=20 high-confidence known-object/natural-control benchmark with hidden truth; registry entries alone do not count as validated targets.",
-    "Continue independent-survey replay separately from same-survey cross-channel validation.",
-    "Seek source-resolved European corpora beyond the current EMODnet 0/8 local source-reference result; do not count composite DTM layers as independent surveys."
+    "Only after acoustic results are frozen, bind selected corpora to independent imagery/video/sediment ground truth.",
+    "Continue independent-survey replay separately from same-survey cross-channel validation."
   ],
-  "claim_ceiling": "REPLICATED_UNSEEN_CROSSCHANNEL_ANOMALY_ENRICHMENT_ON_FOUR_REAL_DATASETS__THREE_MARINE_V2_REPLICATIONS__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY"
+  "claim_ceiling": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES_PLUS_ONE_FORMAL_UNSEEN_MARINE_V2_FAIL__METHOD_USEFUL_BUT_NOT_UNIVERSALLY_PORTABLE__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY"
 }
