@@ -55,7 +55,8 @@
       "candidate support fraction / 0.05 > 1"
     ],
     "secondary": "one-sided Mann-Whitney candidate aggregate scores > pooled stratum-matched control aggregate scores",
-    "degenerate_stratum_rule": "If any tile x radius stratum containing one or more scoreable frozen candidates has fewer than 2 active nonzero-MAD metrics, the preregistered primary validation is BLOCKED and scientific promotion is false; do not silently drop that stratum."
+    "degenerate_stratum_rule": "If any tile x radius stratum containing one or more scoreable frozen candidates has fewer than 2 active nonzero-MAD metrics, the preregistered primary validation is BLOCKED and scientific promotion is false; do not silently drop that stratum.",
+    "coverage_stratum_rule": "If a tile x radius stratum contains frozen candidates but zero candidates satisfy the preregistered backscatter patch-validity rule, classify that stratum COVERAGE_BLOCKED and block scientific promotion; do not delete the stratum from the validation population."
   },
   "truth_firewall": {
     "mass_transport_deposit_polygons_read": false,
