@@ -1,0 +1,146 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-GROUNDTRUTH-SOURCE-REGISTRY-2026-09-23-v1.0",
+  "schema": "janus.cosmos.kusto.global_groundtruth.source_registry.v1",
+  "created_date": "2026-09-23",
+  "prereg": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0.json",
+  "status": "FIRST_GLOBAL_SOURCE_WAVE_FROZEN",
+  "sources": [
+    {
+      "id": "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
+      "region": "NORTHWEST_ATLANTIC",
+      "truth_class": "ROV_CONFIRMED_SHIPWRECK",
+      "discovery_sensor": "KONGSBERG_EM302_MULTIBEAM",
+      "discovery_year": 2011,
+      "later_truth": "2019 ROV imagery confirmed USS Baldwin",
+      "reported_geometry": {"length_m": 105.0, "width_m": 18.6, "proud_height_m": 16.65},
+      "published_grid_resolution_m": 8,
+      "mapping_report_grid_example_m": 5,
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/expedition-feature/technology-development-partnerships-ex1904-logs-july26/",
+        "https://oceanexplorer.noaa.gov/expedition-feature/technology-development-partnerships-ex1904-logs-july31/",
+        "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncei.oer%3AEX1106"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
+      "region": "NORTHWEST_ATLANTIC_SOUTHEAST_US_MARGIN",
+      "truth_coordinate": {"lat": 31.59517078, "lon": -79.10225958},
+      "truth_class": "NATURAL_ROCK_OUTCROPS",
+      "pre_dive_interpretation": "POTENTIAL_SHIPWRECK_FROM_HIGH_RESOLUTION_MAPPING",
+      "groundtruth": "ROV survey determined site was not a shipwreck",
+      "public_assets": ["MAPPING_PRODUCTS", "DIVE_TRACK_KML", "ROV_ANCILLARY", "CAMERA_SENSOR_DATA", "VIDEO", "STILLS"],
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/ex1903-dailyupdates-june28/",
+        "https://www.ncei.noaa.gov/waf/okeanos-rov-cruises/ex1903l2/"
+      ],
+      "benchmark_role": "HARD_NATURAL_FALSE_ARTIFICIALITY_CONTROL",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_USS_CONESTOGA",
+      "region": "NORTHEAST_PACIFIC_CALIFORNIA",
+      "truth_class": "ROV_CONFIRMED_SHIPWRECK",
+      "discovery_sensor": "NOAA_FUGRO_MULTIBEAM",
+      "discovery_year": 2009,
+      "reported_length_m": 52,
+      "reported_depth_m": 56.5,
+      "groundtruth_years": [2014, 2015],
+      "source_urls": [
+        "https://sanctuaries.noaa.gov/conestoga/",
+        "https://sanctuaries.noaa.gov/news/mar16/conestoga.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_EX1902_DIVE03_UNEXPECTED_WRECK",
+      "region": "GULF_OF_MEXICO",
+      "truth_class": "SONAR_DETECTED_VISUALLY_CONFIRMED_WRECK",
+      "discovery_sensor": "ROV_DEEP_DISCOVERER_SONAR",
+      "groundtruth": "Immediate direct ROV visual investigation",
+      "public_assets": ["DIVE_TRACK", "ROV_ANCILLARY", "CAMERA_SENSOR_DATA", "VIDEO", "STILLS"],
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/expedition/ex1902/",
+        "https://www.ncei.noaa.gov/waf/okeanos-rov-cruises/ex1902/"
+      ],
+      "benchmark_role": "SENSOR_TO_VISUAL_POSITIVE_CONTROL",
+      "priority": 2
+    },
+    {
+      "id": "NOAA_EX1904_MULTISENSOR_WRECK_SET",
+      "region": "NORTHWEST_ATLANTIC_US_EAST_COAST",
+      "truth_classes": ["KNOWN_WRECK", "PREVIOUSLY_UNIDENTIFIED_WRECK"],
+      "sensors": ["KATFISH_SAS", "BATHYMETRY", "REMUS600", "ROV", "LASER_SCANNER"],
+      "source_url": "https://oceanexplorer.noaa.gov/expedition/ex1904/",
+      "benchmark_role": "CROSS_SENSOR_OBJECT_PERSISTENCE",
+      "priority": 2
+    },
+    {
+      "id": "USGS_MIAMI_KEY_BISCAYNE_POCKMARKS",
+      "region": "WESTERN_ATLANTIC_FLORIDA",
+      "truth_class": "NATURAL_POCKMARK_SINKHOLE_MORPHOLOGY",
+      "doi": "10.5066/F72J6B4Z",
+      "sensor": "BLUEFIN_B12_AUV_IMAGENEX_MBDELTA",
+      "navigation": "INS_WAAS_DVL",
+      "license": "CC0",
+      "source_url": "https://www.usgs.gov/data/multibeam-sonar-bathymetric-data-miami-pockmark-and-key-biscayne-pockmark",
+      "benchmark_role": "NATURAL_MORPHOLOGY_POSITIVE_CONTROL",
+      "priority": 1
+    },
+    {
+      "id": "USGS_LAKE_CRESCENT_2016",
+      "region": "NORTH_AMERICA_INLAND_DEEP_LAKE",
+      "truth_classes": ["SUBMARINE_LANDSLIDE", "FAULT_RELATED_MORPHOLOGY"],
+      "doi": "10.5066/F7B56GW5",
+      "sensor": "RESON_7111_MULTIBEAM",
+      "products": ["BATHYMETRY_ASCII_RASTER", "BACKSCATTER_TIFF"],
+      "license": "CC0",
+      "source_url": "https://www.usgs.gov/data/multibeam-bathymetry-and-acoustic-backscatter-data-collected-2016-lake-crescent-olympic",
+      "benchmark_role": "NATURAL_GEOHAZARD_CONTROL_AND_CROSS_CHANNEL_TEST",
+      "priority": 1
+    },
+    {
+      "id": "EMODNET_BATHYMETRY_2024",
+      "region": "EUROPEAN_SEAS",
+      "resolution": "1/16 arc-minute base DTM; HR-DTMs up to 1/512 arc-minute in selected areas",
+      "provenance_layers": ["SOURCE_REFERENCES", "QUALITY_INDEX"],
+      "source_url": "https://emodnet.ec.europa.eu/en/bathymetry",
+      "benchmark_role": "GEOGRAPHIC_DIVERSIFICATION_AND_SOURCE_RESOLUTION",
+      "priority": 2
+    },
+    {
+      "id": "AUSSEABED",
+      "region": "AUSTRALIA_AND_ADJACENT_OCEAN",
+      "products": ["BATHYMETRY", "BACKSCATTER", "SIDESCAN", "SURVEY_LEVEL_DATA"],
+      "special_corpus": {
+        "MH370_PHASE2": "5 m bathymetry tiles plus sidescan/camera/final processed products",
+        "MH370_PHASE1": "76 m SC48 product plus processed/raw-supporting products"
+      },
+      "source_url": "https://ausseabed.gov.au/data",
+      "benchmark_role": "GEOGRAPHIC_DIVERSIFICATION_AND_MULTIMODAL_SEARCH_CORPUS",
+      "priority": 2
+    },
+    {
+      "id": "GEBCO_2026_TID",
+      "region": "GLOBAL",
+      "grid_interval_arcsec": 15,
+      "mapped_to_modern_standards_percent": 28.7,
+      "mapped_area_million_km2_approx": 104,
+      "source_types_include": ["SINGLEBEAM", "MULTIBEAM", "SEISMIC", "ISOLATED_SOUNDING", "ENC_SOUNDING"],
+      "source_url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid",
+      "benchmark_role": "COVERAGE_CONTEXT_ONLY",
+      "priority": 3,
+      "independent_validation_eligible": false
+    }
+  ],
+  "first_execution_targets": [
+    "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
+    "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
+    "USGS_MIAMI_KEY_BISCAYNE_POCKMARKS",
+    "USGS_LAKE_CRESCENT_2016"
+  ],
+  "reason_for_first_execution_targets": "Together they provide anthropogenic positive, natural false-artificiality control, natural morphologic positive, and bathymetry/backscatter cross-channel control across ocean and inland settings.",
+  "claim_ceiling": "SOURCE_BINDING_AND_BENCHMARK_ROLE_FREEZE_ONLY"
+}
