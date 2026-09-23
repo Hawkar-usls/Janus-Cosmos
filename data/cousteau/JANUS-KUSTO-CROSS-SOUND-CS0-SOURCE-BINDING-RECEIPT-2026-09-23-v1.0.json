@@ -1,0 +1,47 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0",
+  "status":"PASS_AUTHORITATIVE_CHILD_ITEM_BINDING__PAYLOAD_FORMAT_DEFERRED_TO_CS1",
+  "branch":"feature/kusto-global-groundtruth-calibration-v1",
+  "prereg":"JANUS-KUSTO-CROSS-SOUND-ALASKA-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "metadata_runs":{
+    "inventory_run":35903769071,
+    "inventory_artifact_id":10770097303,
+    "inventory_artifact_zip_sha256":"8149df20abf396f63f7ee2cf04b73821c574d4d77a937fd926721f1e5cba83c5",
+    "route_probe_run":35903915138,
+    "route_probe_artifact_id":10769943075,
+    "route_probe_artifact_zip_sha256":"f9e4b72cca0f8849b7cd71acfcb27c8316c298176e3682c32409f51189240b83"
+  },
+  "products":{
+    "bathymetry":{
+      "sciencebase_item_id":"5abc0e9ce4b081f61abd5c61",
+      "title":"Multibeam bathymetry data collected in 2015 near Cross Sound, southeast Alaska, during field activity 2015-629-FA",
+      "item_download_url":"https://www.sciencebase.gov/catalog/file/get/5abc0e9ce4b081f61abd5c61",
+      "expected_semantics":"10 m GeoTIFF bathymetry, UTM Zone 8 WGS84",
+      "quickview_seen":"CrossSound_2015_bathy_10m_UTM08_WGS84_QV.jpg",
+      "metadata_seen":"CrossSound_2015_bathy_10m_UTM08_WGS84_WGS84_metadata.xml"
+    },
+    "backscatter":{
+      "sciencebase_item_id":"5abc0ef6e4b081f61abd5c66",
+      "title":"Multibeam acoustic-backscatter data collected in 2015 near Cross Sound, southeast Alaska, during field activity 2015-629-FA",
+      "item_download_url":"https://www.sciencebase.gov/catalog/file/get/5abc0ef6e4b081f61abd5c66",
+      "expected_semantics":"10 m GeoTIFF acoustic backscatter, UTM Zone 8 WGS84",
+      "quickview_seen":"CrossSound_2015_backscatter_10m_UTM08_WGS84_QV.jpg",
+      "metadata_seen":"CrossSound_2015_backscatter_10m_UTM08_WGS84_metadata.xml"
+    }
+  },
+  "authority_basis":[
+    "Exact ScienceBase child item identities and titles recovered without numeric payload access.",
+    "USGS release metadata independently states bathymetry and acoustic-backscatter are supplied as 10 m GeoTIFFs from the 2015 Reson 7111 survey."
+  ],
+  "cs1_payload_acceptance_gate":[
+    "Download only the exact bathymetry child-item route.",
+    "Before morphology metrics, require a readable TIFF payload or archive containing exactly one non-quickview TIFF raster.",
+    "Require projected georeference and effective cell size within 0.1 percent of nominal 10 m.",
+    "Abort on HTML, empty, ambiguous multiple-raster, or non-10m payload.",
+    "Record payload SHA256 before metric generation."
+  ],
+  "raster_values_read_during_cs0":false,
+  "numeric_payload_read_during_cs0":false,
+  "claim_ceiling":"AUTHORITATIVE_SOURCE_IDENTITY_AND_DOWNLOAD_ROUTE_BINDING_ONLY",
+  "next_gate":"CS1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE"
+}
