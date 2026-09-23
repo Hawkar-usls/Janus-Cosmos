@@ -1,0 +1,41 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_100_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_AND_IMAGERY_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "source_binding": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0D-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0",
+  "georef_repair": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-GEOGRAPHIC-GRID-REPAIR-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35924361381,
+    "head_sha": "4310aa17831210213d11860f4d157083b1d120b4",
+    "artifact_id": 10778168227,
+    "artifact_zip_sha256": "7bca6c5749f0974d0ba61b627baeb50c7a026c4984da8438ed29e835516bdb57",
+    "candidate_json_sha256": "c5799ab063dc49f2a16af93fdef373a782611dba6c98c0250583cccc5bbc09ef"
+  },
+  "blind_execution": {
+    "raster_shape": [7114,6143],
+    "valid_cells": 16836713,
+    "sample_centers": 214947,
+    "radii_m": [20,40,80,160],
+    "filter_pixel_radii": [4,8,16,32],
+    "pre_dedup_followup_total": 6565,
+    "spatial_dedup_m": 250,
+    "frozen_candidate_count": 100,
+    "metric_candidate_crs": "EPSG:32750"
+  },
+  "truth_firewall": {
+    "backscatter_archive_downloaded": false,
+    "backscatter_values_read": false,
+    "underwater_imagery_read": false,
+    "benthic_interpretation_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10778168227,
+    "artifact_zip_sha256": "7bca6c5749f0974d0ba61b627baeb50c7a026c4984da8438ed29e835516bdb57",
+    "candidate_json_sha256": "c5799ab063dc49f2a16af93fdef373a782611dba6c98c0250583cccc5bbc09ef"
+  },
+  "next_gate": "SWC2_FROZEN_CANDIDATE_HELDOUT_BACKSCATTER_REPLAY_V2",
+  "claim_ceiling": "UNSEEN_WESTERN_AUSTRALIAN_MARINE_BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
