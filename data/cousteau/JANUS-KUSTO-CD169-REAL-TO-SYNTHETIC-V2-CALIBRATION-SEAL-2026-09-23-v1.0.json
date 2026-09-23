@@ -1,0 +1,83 @@
+{
+  "artifact_id":"JANUS-KUSTO-CD169-REAL-TO-SYNTHETIC-V2-CALIBRATION-SEAL-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T01:07:00Z",
+  "status":"SEALED_CD169_EMPIRICAL_MULTIBEAM_NUISANCE_LAYER_READY_FOR_FUTURE_V2__UNSEEN_VALIDATION_PENDING",
+  "branch":"feature/kusto-cross-survey-validation-v1",
+  "branch_head_before_seal":"85147fa35ba37ade9863290bdee6fb90ed18f3c8",
+  "empirical_authority":{
+    "subcell_colocation":{
+      "run_id":35803497931,
+      "artifact_id":10726619104,
+      "artifact_zip_sha256":"d84c37c8c6be9471ca596230b8b17d5825070d89d0e3a77ac96d2d1db5439277",
+      "verdict":"SPATIAL_ALIASING_FALSIFIED_CELL_A__STRONGLY_DISFAVORED_CELL_B"
+    },
+    "extreme_beam_stratification":{
+      "run_id":35803814049,
+      "artifact_id":10726164361,
+      "artifact_zip_sha256":"d98f51c37ca59d575d698f1984c29081d34941c64f2900fe6ece767240b02d5d",
+      "verdict":"GENERIC_EXTREME_BEAM_DEGRADATION_SUPPORTED__LINE32_SPECIFIC_DEEP_BIAS_FALSIFIED"
+    },
+    "residual_bootstrap_library":{
+      "prereg_commit":"4682e8d927cb5bede3f09932952d66fbe68d43a4",
+      "run_id":35804320906,
+      "artifact_id":10727525929,
+      "artifact_zip_sha256":"252243c5e50d9b1135c3e68c93779a77179818d114c638da9c0fc2bd1158ff68",
+      "library_json_sha256":"6eb8d1140d4353f68ae106c5df53f1cf0a2332fc24e5ccbd29690ad63626e379",
+      "repo_path":"data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json",
+      "repo_blob_sha":"9f20583bd66a7a7a985b5abd3c67a151a04b7482",
+      "bytes":616484,
+      "publisher_run_id":35804628105,
+      "publisher_status":"PASS_EXACT_SHA_BOUND"
+    }
+  },
+  "synthetic_assets":{
+    "parameter_pack":{
+      "path":"data/cousteau/JANUS-KUSTO-SYNTHETIC-MULTIBEAM-OUTER-BEAM-ERROR-PARAMETER-PACK-2026-09-23-v0.1.json",
+      "commit":"e6831dbbfaeb2dafbad4ac45645449057e68fe4d"
+    },
+    "forward_model_v2_addendum":{
+      "path":"data/cousteau/JANUS-KUSTO-SYNTHETIC-FORWARD-MODEL-V2-CD169-MULTIBEAM-ADDENDUM-2026-09-23-v1.0.json",
+      "commit":"31c37bd6a99a7e880921603591a6488c6479d68b"
+    },
+    "calibration_matrix_addendum":{
+      "path":"data/cousteau/JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-CD169-MULTIBEAM-ADDENDUM-2026-09-23-v1.0.json",
+      "commit":"85147fa35ba37ade9863290bdee6fb90ed18f3c8"
+    },
+    "sampler":{
+      "path":"workspace/kusto_synthetic_multibeam_nuisance_v2.py",
+      "commit":"145c1966388f819141eaabc47dec700134d7f139"
+    }
+  },
+  "verification":{
+    "toy_selftest_run_id":35804455996,
+    "toy_selftest":"PASS",
+    "real_library_smoke_run_id":35804754956,
+    "real_library_smoke":"PASS",
+    "tested_regimes":["GENERIC_UNSEEN_CALIBRATED","CD169_REPLAY","ADVERSARIAL_REAL_TAILS"],
+    "tested_bins":["INNER","MID","OUTER","EXTREME"]
+  },
+  "learned_error_law":{
+    "form":"ACROSS_TRACK_DEPENDENT_HETEROSCEDASTIC_HEAVY_TAILED",
+    "uniform_gaussian_model":"REJECTED_AS_EMPIRICALLY_INADEQUATE_FOR_CD169_LIKE_REPLAY",
+    "fixed_port_or_line32_deep_bias":"FALSIFIED",
+    "extreme_beam_absolute_error_growth":"SUPPORTED_IN_BOTH_2005_LINEAGES_AND_BOTH_2008_REFERENCES",
+    "rare_ge100m_events":"OBSERVED__FREQUENCY_NOT_TRANSFERABLE_AS_UNIVERSAL_PROBABILITY"
+  },
+  "historical_state":{
+    "old_synthetic_runs_modified":false,
+    "synthetic_forward_model_v2_parent_prereg_modified":false,
+    "strict_CAND003_2005_to_2008_fail":"IMMUTABLE"
+  },
+  "next_authorized_gate":{
+    "name":"UNSEEN_MULTIBEAM_V1_VS_V2_VALIDATION_SOURCE_INVENTORY",
+    "requirements":[
+      "different survey not used to calibrate this multibeam layer",
+      "raw multibeam acquisition publicly obtainable",
+      "independent corrected or later reference surface covering the same seabed",
+      "freeze survey, overlap footprint, metrics, bins and scoring before residual inspection",
+      "compare old/no-depth-nuisance baseline and new empirical V2 on identical unseen data",
+      "no target morphology labels used for calibration or survey selection"
+    ]
+  },
+  "claim_ceiling":"CD169_CALIBRATED_SYNTHETIC_MULTIBEAM_NUISANCE_LAYER_READY__NO_UNSEEN_PREDICTIVE_SKILL_YET"
+}
