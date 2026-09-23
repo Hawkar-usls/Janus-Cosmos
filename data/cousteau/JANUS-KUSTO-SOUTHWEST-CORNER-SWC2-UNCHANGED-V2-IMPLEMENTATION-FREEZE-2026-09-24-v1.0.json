@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_BACKSCATTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10778168227,
+    "artifact_zip_sha256": "7bca6c5749f0974d0ba61b627baeb50c7a026c4984da8438ed29e835516bdb57",
+    "candidate_json_sha256": "c5799ab063dc49f2a16af93fdef373a782611dba6c98c0250583cccc5bbc09ef",
+    "frozen_candidate_count": 100
+  },
+  "source_members": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0D-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0",
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2",
+  "scientific_method_changed_from_maui_and_shellharbour": false,
+  "native_grids": {
+    "bathymetry_nominal_cell_m": 5,
+    "backscatter_nominal_cell_m": 4,
+    "candidate_radii_m": [20,40,80,160]
+  },
+  "georeference_rule": {
+    "candidate_authoritative_location_fields": ["lon","lat","x_m","y_m"],
+    "metric_candidate_crs": "EPSG:32750",
+    "candidate_to_each_raster": "Transform frozen WGS84 lon/lat into each raster native CRS before row/column lookup.",
+    "control_locations": "Sample only bathymetry-valid raster cells, transform their native coordinates to WGS84 and then EPSG:32750 for frozen-candidate distance exclusion.",
+    "no_coordinate_recentering": true
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "support_patch_geometry": "disk radius r plus annulus 1.25r < d <= 2r",
+    "backscatter_value_based_support_inference_used": false
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 250,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "truth_firewall": {
+    "underwater_imagery_read": false,
+    "benthic_interpretation_read": false,
+    "candidate_coordinates_changed": false,
+    "candidate_radii_changed": false
+  },
+  "claim_ceiling": "UNCHANGED_V2_SWC2_EXECUTION_FREEZE_ONLY"
+}
