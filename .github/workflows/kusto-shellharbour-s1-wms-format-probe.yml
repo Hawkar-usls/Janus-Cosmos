@@ -1,0 +1,29 @@
+name: KUSTO Shellharbour S1 WMS Format Probe
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_shellharbour_s1_wms_format_probe.py'
+      - 'data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S1-WMS-FORMAT-PROBE-PREREG-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-shellharbour-s1-wms-format-probe.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests rasterio
+      - name: Probe WMS format without reading pixel values
+        run: python workspace/kusto_shellharbour_s1_wms_format_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-shellharbour-s1-wms-format-probe-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SHELLHARBOUR-S1-WMS-FORMAT-PROBE-RUN-2026-09-23-v1.0.json
+          retention-days: 30
