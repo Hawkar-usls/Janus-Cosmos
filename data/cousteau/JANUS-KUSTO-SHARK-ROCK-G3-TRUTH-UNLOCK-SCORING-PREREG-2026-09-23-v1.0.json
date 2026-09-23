@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-G3-TRUTH-UNLOCK-SCORING-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_WHILE_G2B_STILL_IN_PROGRESS__BEFORE_G2B_RESULT_INSPECTION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "g2b_run_in_progress_at_freeze": 35889677354,
+  "g2b_head_sha": "347cc37c1bf1c0bf0beab2e753630d41f841d054",
+  "truth": {
+    "benchmark_id": "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
+    "coordinate": {"lat": 31.59517078, "lon": -79.10225958},
+    "semantic_truth": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK",
+    "truth_source_role": "ROV_GROUNDTRUTH"
+  },
+  "scoring_geometry": {
+    "g2b_grid_m": 25.0,
+    "grid_center_uncertainty_m": 17.67766952966369,
+    "candidate_support_rule": "great_circle_or_local_metric center distance <= frozen candidate radius + grid_center_uncertainty_m",
+    "persistent_cluster_support_rule": "cluster-center distance <= frozen cluster radius + grid_center_uncertainty_m AND distinct_survey_count >= 2",
+    "no_extra_localization_tolerance": true
+  },
+  "reported_metrics": {
+    "per_survey": [
+      "nearest_candidate_distance_m",
+      "nearest_candidate_id",
+      "nearest_candidate_radius_m",
+      "nearest_candidate_blind_rank",
+      "nearest_candidate_rank_percentile",
+      "truth_supported_by_any_candidate_patch",
+      "best_supporting_candidate_rank_if_any"
+    ],
+    "cross_survey": [
+      "number_of_surveys_with_truth_supported",
+      "survey_ids_with_truth_supported",
+      "nearest_persistent_cluster_distance_m",
+      "nearest_persistent_cluster_id",
+      "nearest_persistent_cluster_distinct_survey_count",
+      "truth_supported_by_any_persistent_cluster"
+    ]
+  },
+  "predeclared_interpretation": {
+    "zero_surveys_support_truth": "BLIND_DETECTOR_DID_NOT_RECOVER_THIS_KNOWN_NATURAL_ANOMALY_AT_FROZEN_SCALES",
+    "one_survey_supports_truth": "SINGLE_SURVEY_CASE_LEVEL_RECOVERY_ONLY",
+    "two_or_more_surveys_support_truth_but_no_persistent_cluster_support": "MULTI_EPOCH_LOCAL_RECOVERY_WITHOUT_FROZEN_CLUSTER_MATCH",
+    "persistent_cluster_supports_truth": "BLIND_CROSS_SURVEY_PERSISTENT_MORPHOLOGY_RECOVERY_OF_ROV_CONFIRMED_NATURAL_FEATURE",
+    "semantic_constraint": "Even a morphology recovery is evidence of anomaly sensitivity and repeatability, not evidence of artificiality; here ground truth specifically requires rejection of shipwreck/artificial interpretation."
+  },
+  "hard_rules": [
+    "G2B_OUTPUT_IMMUTABLE_BEFORE_TRUTH_SCORING",
+    "NO_CANDIDATE_ADDITION_DELETION_OR_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_MATCH_TOLERANCE_CHANGE",
+    "NO_THRESHOLD_RETUNING",
+    "REPORT_FAILURE_IF_TRUTH_IS_NOT_SUPPORTED",
+    "NATURAL_GROUNDTRUTH_OVERRIDES_PRE_DIVE_SHIPWRECK_HYPOTHESIS"
+  ],
+  "claim_ceiling": "CASE_LEVEL_BLIND_RECOVERY_AND_CROSS_SURVEY_REPEATABILITY_ON_ONE_ROV_CONFIRMED_NATURAL_ANOMALY"
+}
