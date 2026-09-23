@@ -1,0 +1,28 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-LITERAL-NEWLINE-SYNTAX-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "prior_georef_repair": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-GEOREF-RESOLUTION-REPAIR-2026-09-23-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35893445669,
+    "head_sha": "087fbe7e2f0eae3b080e1198a6275332dda75fdc",
+    "failure": "Python SyntaxError caused by three literal backslash-n sequences inserted into the executor source.",
+    "scientific_stage_reached": "NONE__EXECUTOR_DID_NOT_START"
+  },
+  "repair": {
+    "commit": "f81375b7df24b7438602c30f99c0780262989017",
+    "change": "Replace exactly the three literal backslash-n sequences with real newline characters.",
+    "detector_logic_changed": false,
+    "thresholds_changed": false,
+    "radii_changed": false,
+    "sampling_changed": false,
+    "candidate_rule_changed": false,
+    "backscatter_read": false,
+    "truth_labels_read": false
+  },
+  "rerun": {
+    "github_actions_run_id": 35902532725,
+    "state_at_receipt_creation": "IN_PROGRESS"
+  },
+  "status": "IMPLEMENTATION_SYNTAX_REPAIR_ONLY__NO_SCIENTIFIC_ADAPTATION",
+  "claim_ceiling": "EXECUTOR_REPAIR_PROVENANCE_ONLY"
+}
