@@ -1,0 +1,34 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-BACKSCATTER-ROBUSTNESS-RECEIPT-2026-09-23-v1.0",
+  "status": "POSTHOC_ROBUSTNESS_SUPPORT__NO_SCIENTIFIC_PROMOTION",
+  "parent_primary_result": {
+    "github_actions_run_id": 35889030130,
+    "artifact_id": 10763697619,
+    "artifact_zip_sha256": "462e7eceb2833245ada3bc0ac4d6400684e4e94df4777976121d420f4e4594a7",
+    "classification": "STATISTICALLY_DEGENERATE__NO_PROMOTION",
+    "reason": "median_first_difference_edge_energy had same-radius control MAD=0 and inflated robust-z under the original 1e-12 floor"
+  },
+  "robustness_audit": {
+    "github_actions_run_id": 35889778093,
+    "head_sha": "02cd6a51cf0276bb6d3b728fd2ad982ddf250460",
+    "conclusion": "success",
+    "artifact_id": 10763614503,
+    "artifact_zip_sha256": "3845c6732b511ddedbad68801baca084d7a81033b4b53b47792ac9449ef90f5a",
+    "rule": "exclude same-radius metrics with exactly zero control MAD from standardized aggregate scoring",
+    "frozen_candidate_count": 100,
+    "scored_candidate_count": 100,
+    "support_count": 17,
+    "support_fraction": 0.17,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 3.4,
+    "candidate_mean_score": 1.8633270902957952,
+    "control_mean_score": 0.9739253644651443,
+    "radius_matched_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 2.847799165055868e-14,
+    "robustness_signal": true,
+    "scientific_promotion": false
+  },
+  "interpretation": "The frozen bathymetry candidates retain a cross-channel backscatter enrichment signal after removing the zero-MAD metric, but because this correction was defined after inspecting the degenerate primary result, it is diagnostic robustness support rather than preregistered confirmation.",
+  "next_requirement_for_promotion": "Replicate the frozen method on a genuinely unseen dual-channel dataset or survey with zero-MAD handling fixed before result inspection.",
+  "claim_ceiling": "POSTHOC_ROBUSTNESS_DIAGNOSTIC_ONLY"
+}
