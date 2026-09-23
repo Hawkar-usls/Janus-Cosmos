@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, math, time, requests
+import json, math, time, requests, concurrent.futures
 from pathlib import Path
 from collections import defaultdict
 from shapely.geometry import shape, Point
@@ -39,8 +39,8 @@ print("object ids",len(ids),flush=True)
 
 features=[]
 chunk=500
-for start in range(0,len(ids),chunk):
-    batch=ids[start:start+chunk]
+batches=[ids[start:start+chunk] for start in range(0,len(ids),chunk)]
+def fetch_batch(batch):
     d=get(QUERY,{
       "objectIds":",".join(map(str,batch)),
       "outFields":FIELDS,
@@ -48,8 +48,12 @@ for start in range(0,len(ids),chunk):
       "outSR":"4326",
       "f":"geojson"
     })
-    features.extend(d.get("features",[]))
-    if start%5000==0: print("fetched",min(start+chunk,len(ids)),"/",len(ids),flush=True)
+    return d.get("features",[])
+with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
+    futs=[ex.submit(fetch_batch,b) for b in batches]
+    for k,fut in enumerate(concurrent.futures.as_completed(futs),1):
+        features.extend(fut.result())
+        if k%10==0: print("fetched batches",k,"/",len(batches),flush=True)
 
 by_survey=defaultdict(list)
 attrs={}
@@ -202,6 +206,7 @@ for p in top_pairs:
 
 out={
  "artifact_id":"JANUS-KUSTO-GLOBAL-NCEI-MULTISURVEY-OPPORTUNITY-MAP-2026-09-23-v1.0",
+ "implementation":"v1.1_parallel_fetch_same_frozen_science",
  "prereg":"data/cousteau/JANUS-KUSTO-GLOBAL-BLIND-ANOMALY-HUNT-PREREG-2026-09-23-v1.0.json",
  "ranking_addendum":"data/cousteau/JANUS-KUSTO-GLOBAL-OPPORTUNITY-MAP-RANKING-ADDENDUM-2026-09-23-v1.0.json",
  "depth_values_read":False,
