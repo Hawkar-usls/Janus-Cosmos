@@ -1,0 +1,34 @@
+{
+  "artifact_id":"JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-CD169-MULTIBEAM-ADDENDUM-2026-09-23-v1.0",
+  "status":"ADDENDUM_ONLY__PARENT_MATRIX_IMMUTABLE",
+  "parent":"data/cousteau/JANUS-KUSTO-CALIBRATION-LAYER-MATRIX-2026-09-21-v1.0.json",
+  "parent_modified":false,
+  "layer":"MULTIBEAM_PROCESSING",
+  "new_calibration_sources":[
+    "BODC_CD169_RAW_EM12_SD11280",
+    "BODC_CD169_PROCESSED_EM12_SD11281",
+    "NCEI_KN192_07_SEABEAM_3012_2008",
+    "NCEI_KNOX15RR_EM120_2008"
+  ],
+  "new_empirical_findings":[
+    "CD169 raw EM12 depth residual magnitude is strongly across-track dependent.",
+    "Absolute residuals become materially larger toward OUTER and EXTREME beams in both independent 2008 comparisons and both tested CD169 raw lineages.",
+    "Residual distribution is heavy-tailed; >=100 m events are observed but rare and calibration-channel dependent.",
+    "A fixed line32/port deep bias is falsified: extreme-beam population medians are generally shallow relative to the 2008 references while rare positive deep outliers also exist.",
+    "CAND003 CELL_A/B are rare positive deep outliers within the extreme-beam heavy tail; their approximately 186-199 m raw split is not explained by sub-cell spatial separation.",
+    "For synthetic calibration, uniform Gaussian depth noise is empirically inadequate for CD169-like EM12 replay."
+  ],
+  "new_numeric_asset":{
+    "parameter_pack":"data/cousteau/JANUS-KUSTO-SYNTHETIC-MULTIBEAM-OUTER-BEAM-ERROR-PARAMETER-PACK-2026-09-23-v0.1.json",
+    "empirical_library":"data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json",
+    "sampler":"workspace/kusto_synthetic_multibeam_nuisance_v2.py"
+  },
+  "validation_requirement":"Different unseen raw multibeam survey with independent corrected or later reference surface; freeze target survey and scoring before result inspection.",
+  "forbidden_transfer":[
+    "CD169 signed residual direction",
+    "CD169 empirical tail frequency as a universal probability",
+    "CAND003 morphology labels",
+    "specific line18/line32 identity as a universal sensor state"
+  ],
+  "claim_ceiling":"MULTIBEAM_PROCESSING_CALIBRATION_ADDENDUM_ONLY__NO_UNSEEN_VALIDATION"
+}
