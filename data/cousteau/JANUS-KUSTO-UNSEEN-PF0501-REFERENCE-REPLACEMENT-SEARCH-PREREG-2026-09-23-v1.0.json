@@ -1,0 +1,37 @@
+{
+  "artifact_id":"JANUS-KUSTO-UNSEEN-PF0501-REFERENCE-REPLACEMENT-SEARCH-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T07:02:00Z",
+  "status":"FROZEN_BEFORE_REFERENCE_REPLACEMENT_DISCOVERY",
+  "purpose":"Find a fully independent NCEI multibeam reference with materially larger exact spatial overlap with PF0501, without reading bathymetric depth or morphology.",
+  "test_acquisition":{
+    "survey":"PF0501",
+    "platform":"Pathfinder",
+    "year":2005,
+    "instrument":"Simrad EM121"
+  },
+  "excluded_surveys":[
+    "PF0501","EX2105","CD169","KN192-07","KNOX15RR"
+  ],
+  "selection_pipeline":[
+    "Query NCEI multibeam footprint polygons intersecting PF0501 footprint.",
+    "Compute exact polygon intersection area with PF0501 in EPSG:4326.",
+    "Reject zero-area/touch-only intersections and excluded/calibration surveys.",
+    "Require acquisition year >= 2006 to preserve a later independent reference role.",
+    "Rank remaining surveys by descending exact intersection area; ties by SURVEY_ID lexical order.",
+    "For candidates in rank order, inspect public NCEI directory structure only for generated FNV and FBT availability.",
+    "Select the first candidate with both public FNV and FBT derivatives; no depth values may be read during selection."
+  ],
+  "minimum_future_FNV_overlap_rows_per_survey":100,
+  "depth_forbidden":true,
+  "morphology_forbidden":true,
+  "hard_rules":[
+    "NO_DEPTH_IN_REFERENCE_SEARCH",
+    "NO_MORPHOLOGY_IN_REFERENCE_SEARCH",
+    "NO_SELECTION_BY_RESIDUAL_OR_ERROR",
+    "NO_REUSE_OF_CD169_KN192_KNOX_CALIBRATION_LINEAGES",
+    "NO_RETURN_TO_EX2105_BY_LOWERING_SUPPORT_THRESHOLD",
+    "NO_BBOX_ONLY_SELECTION_WHEN_EXACT_POLYGON_IS_AVAILABLE"
+  ],
+  "next_if_candidate_found":"Freeze exact PF0501 x candidate footprint/FNV overlap before any depth.",
+  "claim_ceiling":"UNSEEN_REFERENCE_DISCOVERY_BY_COVERAGE_ONLY"
+}
