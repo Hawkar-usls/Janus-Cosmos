@@ -1,0 +1,36 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-SOURCE-PAIR-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_UNIQUE_PHYSICAL_BATHYMETRY_BACKSCATTER_RESOURCES_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "source_run": {
+    "github_actions_run_id": 35921516179,
+    "artifact_id": 10776604974,
+    "artifact_zip_sha256": "88a156e9f8f7a379cd8925a998a3b8e3eff81fb71bb92762379c0dda23d26acd"
+  },
+  "survey": {
+    "id": "GA-4858",
+    "sensor": "KONGSBERG_EM2040C",
+    "platform": "SANTOSHA",
+    "bathymetry_resolution_m": 5,
+    "backscatter_resolution_m": 4,
+    "area_km2_approx": 330
+  },
+  "physical_resources": {
+    "bathymetry_geotiff_zip": "https://d28rz98at9flks.cloudfront.net/145281/145281_00_0.zip",
+    "backscatter_geotiff_zip": "https://d28rz98at9flks.cloudfront.net/145282/145282_00_0.zip"
+  },
+  "catalog_deduplication": {
+    "multiple_ckan_package_records_observed": true,
+    "count_as_independent_surveys": false,
+    "deduplication_key": "PHYSICAL_RESOURCE_URL_PLUS_SURVEY_ID"
+  },
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "underwater_imagery_read": false,
+    "benthic_interpretation_read": false
+  },
+  "next_gate": "SWC0B_ARCHIVE_MEMBER_INVENTORY_ONLY",
+  "claim_ceiling": "SOURCE_PAIR_BINDING_ONLY"
+}
