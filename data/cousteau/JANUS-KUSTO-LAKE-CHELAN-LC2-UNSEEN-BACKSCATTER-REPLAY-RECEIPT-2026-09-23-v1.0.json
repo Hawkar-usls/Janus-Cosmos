@@ -1,0 +1,59 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CHELAN-LC2-UNSEEN-BACKSCATTER-REPLAY-RECEIPT-2026-09-23-v1.0",
+  "status": "UNSEEN_CROSS_CHANNEL_SIGNAL_PRESENT__PRIMARY_VALIDATION_BLOCKED_BY_C96_COVERAGE__NO_PROMOTION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35892499942,
+    "head_sha": "5ceef0522242f8fd0aa55738cdb0459018cebfb4",
+    "conclusion": "success",
+    "artifact_id": 10764863125,
+    "artifact_zip_sha256": "16d431a4f88d8c092ae147227f1e2ae64d283b717605696e8a82846cf0b7b089",
+    "output_json_sha256": "20eca933a742dc62281ee4c57be3d35adbba0d5b6a3b0f0c48a6105f168f8f19"
+  },
+  "candidate_authority": {
+    "artifact_id": 10765536530,
+    "artifact_zip_sha256": "57b9213e4ebc6b2793a5fd7411b58eabd4f5872a909988973d7a985c23c8de9a",
+    "candidate_json_sha256": "398385391587429af96b36af8581dfd13252092f3b6b7b7a7cc1d2ce95c0ffb3",
+    "frozen_candidate_count": 452
+  },
+  "coverage": {
+    "frozen_candidate_count": 452,
+    "scorable_candidate_count": 429,
+    "blocked_strata": [{"stratum":"C|96","reason":"COVERAGE_BLOCKED","frozen_candidates":4,"scored_candidates":0}],
+    "other_strata_scorable": 19
+  },
+  "zero_mad_audit": {
+    "scoreable_strata_with_any_zero_mad_metric": 0,
+    "scoreable_strata_with_all_four_metrics_active": 19,
+    "interpretation": "The Lake Crescent zero-MAD failure mode did not recur in scoreable Lake Chelan strata."
+  },
+  "descriptive_signal_on_scorable_strata": {
+    "candidate_support_count": 91,
+    "candidate_support_fraction": 0.21212121212121213,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 4.242424242424242,
+    "candidate_mean_aggregate_score": 2.620609059676864,
+    "control_mean_aggregate_score": 1.0911707352158713,
+    "mann_whitney_one_sided_p": 5.65125167622128e-70
+  },
+  "primary_validation": {
+    "stratified_permutation_iterations_planned": 5000,
+    "stratified_permutation_p": null,
+    "reason": "Predeclared coverage-stratum rule blocks the primary test when any frozen tile x radius stratum has candidates but zero scoreable candidate patches.",
+    "primary_pass": false,
+    "scientific_promotion": false
+  },
+  "truth_firewall": {
+    "mass_transport_deposit_labels_read": false,
+    "delta_locations_read": false,
+    "candidate_coordinates_changed": false,
+    "candidate_radii_changed": false
+  },
+  "interpretation": "A substantial preregistered bathymetry-to-backscatter enrichment signal transferred to the unseen Lake Chelan corpus and did so without the zero-MAD pathology seen in Lake Crescent. However, the frozen primary validation contract was not satisfied because stratum C|96 had no scoreable backscatter patches. The result is retained as strong unseen robustness evidence but not promoted to a formal validation PASS.",
+  "next_scientific_steps": [
+    "Use Lake Chelan as calibration-only for any coverage-handling change learned from this result.",
+    "Run the unchanged dual-channel method on another unseen paired bathymetry/backscatter corpus with complete preregistered strata.",
+    "After this LC2 freeze, author-labeled Lake Chelan MTD polygons may be unlocked for descriptive natural-morphology recall with no retuning."
+  ],
+  "claim_ceiling": "UNSEEN_SAME_SURVEY_CROSS_CHANNEL_ROBUSTNESS_SUPPORT__PRIMARY_VALIDATION_BLOCKED__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
