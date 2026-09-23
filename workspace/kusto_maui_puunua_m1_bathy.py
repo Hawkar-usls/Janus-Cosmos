@@ -70,7 +70,9 @@ def load_bathy():
     res=(abs(float(transform.a)),abs(float(transform.e)))
     if max(abs(res[0]-CELL),abs(res[1]-CELL))/CELL>0.001:
         raise RuntimeError(f"effective resolution outside frozen 0.1% nominal tolerance: {res}")
-    if list(z.shape)!=[int(SRC["files"]["bathymetry"]["published_rows"]),int(SRC["files"]["bathymetry"]["published_columns"])]:\n        raise RuntimeError(f"published raster shape mismatch: {z.shape}")\n    return blob,z,valid,transform,{
+    if list(z.shape)!=[int(SRC["files"]["bathymetry"]["published_rows"]),int(SRC["files"]["bathymetry"]["published_columns"])]:
+        raise RuntimeError(f"published raster shape mismatch: {z.shape}")
+    return blob,z,valid,transform,{
       "zip_sha256":sha,"zip_md5":md5,"zip_members":names,
       "tif_name":tifs[0],"tfw_name":tfws[0] if tfws else None,
       "shape":list(z.shape),"dtype":dtype,"nodata":nodata,"crs":crs,
