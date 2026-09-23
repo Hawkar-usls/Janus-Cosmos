@@ -1,0 +1,42 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0D-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_EXACT_BATHYMETRY_AND_HELDOUT_BACKSCATTER_MEMBERS_BOUND__NO_PIXEL_DECODE",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "route_receipt": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0C-CURRENT-ROUTE-RECOVERY-RECEIPT-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35923980878,
+    "artifact_id": 10777903175,
+    "artifact_zip_sha256": "581deaa1dce1a618d8906c72860304836d72859beb2d1fc93d9d7fd09a8145f8"
+  },
+  "bathymetry_archive": {
+    "url": "https://files.ausseabed.gov.au/survey/Southwest%20Corner%20Marine%20Park%20Bathymetry%202021%205m.zip",
+    "sha256": "45a5c059bb0eb24c4edfef4c80828fcab242adf898828b4c991562325e4df4da",
+    "bytes": 70136173,
+    "member": {
+      "name": "Southwest_Corner_Marine_Park_Bathymetry_2021_5m_MSL_cog.tif",
+      "uncompressed_bytes": 70569501,
+      "crc32": 964758914,
+      "published_resolution_m": 5
+    }
+  },
+  "backscatter_archive": {
+    "url": "https://d28rz98at9flks.cloudfront.net/145282/145282_00_0.zip",
+    "sha256": "f4f0e4aeb712acb3e0f7b68bff0c0749f4c8f1a62f3e149bbbe0e449035b8ed5",
+    "bytes": 46656102,
+    "member": {
+      "name": "32bit_geotif/ga-4858_bksct_04m_Grid_24-Mar-2021_182856.tif",
+      "uncompressed_bytes": 36292235,
+      "crc32": 418147923,
+      "published_resolution_m": 4
+    }
+  },
+  "truth_firewall": {
+    "raster_values_read": false,
+    "raster_members_decompressed": false,
+    "underwater_imagery_read": false,
+    "swc1_backscatter_archive_download_forbidden": true
+  },
+  "next_gate": "SWC1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "EXACT_SOURCE_MEMBER_BINDING_ONLY"
+}
