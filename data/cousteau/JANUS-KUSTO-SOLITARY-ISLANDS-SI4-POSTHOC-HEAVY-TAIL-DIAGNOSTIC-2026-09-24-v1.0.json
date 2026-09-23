@@ -1,0 +1,59 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI4-POSTHOC-HEAVY-TAIL-DIAGNOSTIC-2026-09-24-v1.0",
+  "status": "POSTHOC_DIAGNOSTIC_ONLY__CANNOT_PROMOTE_OR_REINTERPRET_SI3_FAIL",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "formal_parent": "JANUS-KUSTO-SOLITARY-ISLANDS-SI3-FORMAL-UNSEEN-V2-FAIL-RECEIPT-2026-09-24-v1.0",
+  "frozen_result_artifact": {
+    "github_artifact_id": 10781568156,
+    "artifact_zip_sha256": "b7c874b9897f17a67a68182b0202c6ff135c4e230003856cc4378797e24e3b66",
+    "output_json_sha256": "d9c525581c955cd48104d8400ad3c0b66256340391f94140e819facd36f9e759"
+  },
+  "diagnosis": {
+    "failure_class": "NEAR_ZERO_MAD_ROBUST_Z_EXPLOSION_IN_ACTIVE_METRIC",
+    "metric": "median_first_difference_edge_energy",
+    "critical_radius_m": 160,
+    "control_metric_median": 0.3899993896484375,
+    "control_metric_mad": 0.0000019073486328125,
+    "relative_mad_to_abs_median": 0.000004890645104060583,
+    "control_score_q95": 44204.47160403089,
+    "single_candidate_aggregate_score": 2210.2739004781997,
+    "single_candidate_metric_positive_robust_z": 3536.3550519357887,
+    "global_candidate_mean_score": 29.58273473523097,
+    "global_control_mean_score": 942.7371856567703,
+    "global_stratified_permutation_p": 0.19876024795040992
+  },
+  "comparison_strata": {
+    "20m": {
+      "edge_control_median": 0.3900032043457031,
+      "edge_control_mad": 0.19000244140625,
+      "control_score_q95": 3.2722625124851503,
+      "candidate_support_count": 24,
+      "candidate_count": 59
+    },
+    "40m": {
+      "edge_control_median": 0.3900012969970703,
+      "edge_control_mad": 0.010000228881835938,
+      "control_score_q95": 17.563470496364147,
+      "candidate_support_count": 13,
+      "candidate_count": 35
+    },
+    "80m": {
+      "edge_control_median": 0.3899993896484375,
+      "edge_control_mad": 0.010000228881835938,
+      "control_score_q95": 9.614134062340543,
+      "candidate_support_count": 3,
+      "candidate_count": 5
+    },
+    "160m": {
+      "edge_control_median": 0.3899993896484375,
+      "edge_control_mad": 0.0000019073486328125,
+      "control_score_q95": 44204.47160403089,
+      "candidate_support_count": 0,
+      "candidate_count": 1
+    }
+  },
+  "mechanistic_interpretation": "The exact-zero-MAD exclusion rule in v2 permits a numerically nonzero but practically degenerate control metric to remain active. Dividing by 1.4826*MAD then amplifies tiny quantized edge-energy differences by orders of magnitude. This explains the extreme control-score tail and the failed mean/permutation criterion without erasing the observed candidate q95 enrichment.",
+  "successor_design_constraint": "Any successor guard derived from this failure is calibration-derived from Solitary Islands and therefore MUST NOT be validated on Solitary Islands. It must be frozen before reading a new corpus.",
+  "truth_layers_read_for_diagnostic": false,
+  "claim_ceiling": "POSTHOC_FAILURE_MECHANISM_IDENTIFICATION_ONLY"
+}
