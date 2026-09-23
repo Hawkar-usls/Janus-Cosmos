@@ -1,0 +1,71 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM3-FORMAL-DUAL-V2-V3-RESULT-RECEIPT-2026-09-24-v1.0",
+  "status": "V2_FORMAL_UNSEEN_INDEPENDENT_SENSOR_PASS__V3_FORMAL_UNSEEN_NO_REGRESSION_PASS",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "dual_method_freeze": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0C-DUAL-METHOD-FREEZE-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10781992017,
+    "artifact_zip_sha256": "9ad0c7870c0a796063e30f1c8db8d94be94ef82b8800e0efa96bb1a4734c5d99",
+    "candidate_json_sha256": "06c37362ea2cbaa316c4100cd4c361467c680732bd652b4c4dbf459102c04576",
+    "frozen_candidate_count": 100
+  },
+  "run": {
+    "github_actions_run_id": 35934049810,
+    "head_sha": "18f3cfa2a5cda85a6ea5e078d0c23e8bbac34ca4",
+    "artifact_id": 10781624836,
+    "artifact_zip_sha256": "cfd79dfde4bc09697058edd5952a1f45204b1852532808d58d050e3aa7d68ea9",
+    "output_json_sha256": "55838ae2f0480c67cec4821a7b62708183fc3946e8f9e39d143c12df52a9af63"
+  },
+  "shared_result": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 97,
+    "blocked_strata": [],
+    "candidate_support_count": 24,
+    "candidate_support_fraction": 0.24742268041237114,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 4.948453608247423,
+    "candidate_mean_aggregate_score": 2.6200719062130147,
+    "control_mean_aggregate_score": 1.026668144511903,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 6.865232787345245e-22
+  },
+  "study_multiplicity": {
+    "familywise_alpha": 0.05,
+    "bonferroni_p_threshold_per_method": 0.025,
+    "v2_study_scientific_promotion": true,
+    "v3_study_scientific_promotion": true
+  },
+  "v2": {
+    "method": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+    "internal_primary_pass_at_0_05": true,
+    "study_scientific_promotion": true,
+    "meaning": "Third formal unseen marine v2 PASS and first PASS on the EM2040C independent sensor lineage."
+  },
+  "v3": {
+    "method": "PAIRED_SUPPORT_DOMAIN_V3_RELATIVE_MAD_GUARD",
+    "study_scientific_promotion": true,
+    "guard_activation_count": 0,
+    "minimum_observed_relative_mad_across_all_metrics_and_strata": 0.15671571683562358,
+    "meaning": "First unseen confirmatory v3 PASS on well-conditioned data. Because the relative-MAD guard never activated, this establishes no-regression/inertness on this corpus, not rescue efficacy for near-degenerate controls."
+  },
+  "lineage": {
+    "sensor": "KONGSBERG_EM2040C_HD_300_KHZ",
+    "regions": ["ELIZABETH","MIDDLETON"],
+    "representation_bridge": "FROZEN_EPSG4326_TO_EPSG32757_NEAREST_5M_WINDOWS",
+    "backscatter_native_cell_m": 4
+  },
+  "truth_firewall": {
+    "auv_imagery_read": false,
+    "sediment_labels_read": false,
+    "bruv_imagery_read": false
+  },
+  "does_not_establish": [
+    "V3_RESCUE_EFFICACY_ON_NEAR_DEGENERATE_DATA",
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "GENERAL_INDEPENDENT_SURVEY_REPEATABILITY"
+  ],
+  "claim_ceiling": "FORMAL_UNSEEN_CROSSCHANNEL_PASS_ON_INDEPENDENT_EM2040C_SENSOR_LINEAGE__V3_NO_REGRESSION_CONFIRMED__V3_RESCUE_NOT_YET_CONFIRMED"
+}
