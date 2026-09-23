@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --disable-pip-version-check numpy scipy requests rasterio affine
+      - run: pip install --disable-pip-version-check numpy scipy requests rasterio affine pyproj
       - name: Run unchanged-v2 South-west Corner bathymetry-only discovery
         run: python workspace/kusto_southwest_corner_swc1_blind_bathy.py
       - uses: actions/upload-artifact@v4
