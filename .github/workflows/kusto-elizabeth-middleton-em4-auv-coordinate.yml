@@ -1,0 +1,36 @@
+name: KUSTO Elizabeth Middleton EM4 AUV Coordinate Coverage
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_elizabeth_middleton_em4_auv_coordinate_coverage.py'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM4-AUV-COORDINATE-COVERAGE-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM3-FORMAL-DUAL-V2-V3-RESULT-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-elizabeth-middleton-em4-auv-coordinate.yml'
+  workflow_dispatch:
+
+jobs:
+  em4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy pandas requests pyproj
+      - name: Run coordinate-only AUV coverage audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python workspace/kusto_elizabeth_middleton_em4_auv_coordinate_coverage.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-elizabeth-middleton-em4-auv-coordinate-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ELIZABETH-MIDDLETON-EM4-AUV-COORDINATE-COVERAGE-RUN-2026-09-24-v1.0.json
+          retention-days: 30
