@@ -1,0 +1,51 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAUI-PUUNUA-M2-PAIRED-SUPPORT-DOMAIN-V2-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-MAUI-PUUNUA-UNSEEN-DUALCHANNEL-V2-PREREG-2026-09-23-v1.0",
+  "created_before_backscatter_value_read": true,
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-MAUI-PUUNUA-M1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id": 10773073012,
+    "artifact_zip_sha256": "a92d7bb45e870a0275ec6dcb403a98dbc7e5c04d831b7c7f6a8d6acffbd24c39",
+    "candidate_json_sha256": "7ce2bb61817ec30a9a5f20531f9255eaf90e62e3f03f970477335bf57b9e1d11",
+    "frozen_candidate_count": 53
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "support_patch_geometry": "disk radius r plus annulus 1.25r < d <= 2r",
+    "bathymetry_mask_source": "native masked/finite bathymetry raster only",
+    "backscatter_mask_source": "native masked/finite backscatter raster only",
+    "backscatter_values_for_support_domain": false,
+    "value_based_zero_or_distribution_nodata_inference": false
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "hard_rules": [
+    "VERIFY_CANDIDATE_ARTIFACT_AND_JSON_HASHES_BEFORE_BACKSCATTER_READ",
+    "BATHYMETRY_SUPPORT_DOMAIN_MUST_BE_EVALUATED_BEFORE_BACKSCATTER_METRICS",
+    "NO_CANDIDATE_COORDINATE_CHANGE",
+    "NO_CANDIDATE_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_LABEL_READ",
+    "COVERAGE_OR_DEGENERATE_RADIUS_BLOCKS_PRIMARY_PROMOTION"
+  ],
+  "status": "FROZEN_BEFORE_M2_EXECUTION",
+  "claim_ceiling": "IMPLEMENTATION_AND_SUPPORT_DOMAIN_FREEZE_ONLY"
+}
