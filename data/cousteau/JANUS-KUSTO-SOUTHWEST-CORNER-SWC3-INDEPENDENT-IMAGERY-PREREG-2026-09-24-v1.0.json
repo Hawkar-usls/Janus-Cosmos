@@ -1,0 +1,43 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-INDEPENDENT-IMAGERY-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_SWC2_RESULT__BEFORE_ANNOTATION_CSV_ROW_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_result": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10778168227,
+    "artifact_zip_sha256": "7bca6c5749f0974d0ba61b627baeb50c7a026c4984da8438ed29e835516bdb57",
+    "candidate_json_sha256": "c5799ab063dc49f2a16af93fdef373a782611dba6c98c0250583cccc5bbc09ef",
+    "frozen_candidate_count": 100
+  },
+  "swc2_authority": {
+    "run_id": 35924886498,
+    "artifact_id": 10779120528,
+    "artifact_zip_sha256": "a3ae4db4e153bb7a455998d4f21b7766b42ccb9e365da6490d5d71cd8a5f747b",
+    "output_json_sha256": "68e5cdce48270443cb94ed299454eb6eadd672f4a8283316feb2ec67bcd85c4d"
+  },
+  "independent_imagery_source": {
+    "dataset": "Benthic annotations of stereo-BRUV and drop camera imagery from the South-west Corner Marine Park",
+    "doi": "10.25959/6G5A-3G03",
+    "provider": "IMAS / University of Tasmania on behalf of University of Western Australia and NESP Marine and Coastal Hub Project 1.4",
+    "data_period": "2020-03-01/2021-03-31",
+    "direct_csv": "https://data.imas.utas.edu.au/attachments/eaa856a1-88ea-4399-8311-2c706e75e962/2020-2021_south-west_BOSS-BRUV.Habitat.csv",
+    "modalities": ["STEREO_BRUV", "PANORAMIC_DROP_CAMERA"]
+  },
+  "scoring": {
+    "coordinate_discovery_rule": "Identify latitude/longitude columns only from CSV schema and numeric domain; do not use annotation labels to choose or move candidate locations.",
+    "direct_image_support": "At least one georeferenced imagery/annotation record at great-circle distance <= frozen candidate radius_m.",
+    "near_image_coverage": "No direct record, but at least one georeferenced imagery/annotation record within 1000 m.",
+    "regional_image_coverage": "No record within 1000 m, but at least one within 5000 m.",
+    "no_image_coverage": "No georeferenced imagery/annotation record within 5000 m.",
+    "candidate_coordinates_changed": false,
+    "candidate_radii_changed": false
+  },
+  "interpretation_firewall": {
+    "direct_image_support_is_not_object_identity": true,
+    "annotation_label_may_describe_observed_benthos_or_substrate_but_must_not_reclassify_candidate_as_artificial": true,
+    "near_or_regional_record_is_not_visual_confirmation": true,
+    "prediction_maps_are_not_independent_visual_truth": true
+  },
+  "claim_ceiling": "INDEPENDENT_GEOGRAPHIC_IMAGERY_COVERAGE_AND_DIRECT_FRAME_SUPPORT_ONLY"
+}
