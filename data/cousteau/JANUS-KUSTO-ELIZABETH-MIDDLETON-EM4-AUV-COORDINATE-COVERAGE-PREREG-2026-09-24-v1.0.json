@@ -1,0 +1,55 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM4-AUV-COORDINATE-COVERAGE-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_EM2_ACOUSTIC_RESULTS__BEFORE_AUV_COORDINATE_EXPORT_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "acoustic_result": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM3-FORMAL-DUAL-V2-V3-RESULT-RECEIPT-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10781992017,
+    "candidate_json_sha256": "06c37362ea2cbaa316c4100cd4c361467c680732bd652b4c4dbf459102c04576"
+  },
+  "source": {
+    "doi": "10.25959/6WJ9-VY51",
+    "dataset": "BRUV and AUV annotation data for Elizabeth and Middleton reefs",
+    "service": "SQUIDLE_PLUS_ANNOTATION_EXPORT",
+    "published_usergroup_filter_id": 346,
+    "coordinate_only_columns": [
+      "point.media.key",
+      "point.media.timestamp_start",
+      "point.pose.timestamp",
+      "point.pose.lat",
+      "point.pose.lon",
+      "point.media.deployment.name",
+      "point.media.deployment.campaign.name"
+    ],
+    "labels_requested": false
+  },
+  "deduplication": {
+    "primary_key": "point.media.key + point.pose.timestamp",
+    "fallback_key": "deployment + rounded_lat_1e-7 + rounded_lon_1e-7 + media_timestamp",
+    "reason": "Annotation export may contain multiple annotations for one image/pose; coverage counts unique georeferenced media poses, not annotation rows."
+  },
+  "spatial_test": {
+    "candidate_coordinates": "TRANSFORM_FROZEN_EPSG32757_XY_TO_WGS84",
+    "distance": "WGS84_GEODESIC",
+    "direct_auv_annotation_coverage": "nearest_unique_georeferenced_media_pose_distance_m <= frozen_candidate_radius_m",
+    "near_coverage_descriptive_only": "nearest_distance_m <= 2*frozen_candidate_radius_m",
+    "no_track_miss_claim_from_annotation_absence": true
+  },
+  "reporting": {
+    "all_100_frozen_candidates": true,
+    "v2_crosschannel_supported_subset": true,
+    "direct_coverage_count": true,
+    "nearest_distance_distribution": true,
+    "unique_deployments_intersecting_each_candidate": true
+  },
+  "hard_rules": [
+    "NO_LABEL_NAME_OR_LINEAGE_READ_IN_EM4",
+    "NO_CANDIDATE_COORDINATE_OR_RADIUS_CHANGE",
+    "NO_IMAGE_CONTENT_INTERPRETATION_IN_EM4",
+    "ANNOTATION_ABSENCE_IS_NOT_AUV_TRACK_ABSENCE",
+    "ONLY_DIRECT_POINT_INSIDE_CANDIDATE_RADIUS_COUNTS_AS_DIRECT_AUV_ANNOTATION_COVERAGE"
+  ],
+  "next_gate_if_intersections_exist": "EM5_LABEL_AND_MEDIA_INTERPRETATION_ONLY_FOR_PREVIOUSLY_FROZEN_INTERSECTIONS",
+  "claim_ceiling": "DIRECT_GEOREFERENCED_AUV_ANNOTATION_COVERAGE_ONLY__NOT_VISUAL_OBJECT_CONFIRMATION"
+}
