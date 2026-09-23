@@ -1,0 +1,51 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-NCEI-MULTISURVEY-OPPORTUNITY-MAP-RECEIPT-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T13:53:30Z",
+  "status":"SEALED_STAGE0_DEPTH_BLIND_GLOBAL_OPPORTUNITY_MAP",
+  "branch":"feature/kusto-global-blind-anomaly-hunt-v1",
+  "prereg":{
+    "global":"data/cousteau/JANUS-KUSTO-GLOBAL-BLIND-ANOMALY-HUNT-PREREG-2026-09-23-v1.0.json",
+    "ranking":"data/cousteau/JANUS-KUSTO-GLOBAL-OPPORTUNITY-MAP-RANKING-ADDENDUM-2026-09-23-v1.0.json"
+  },
+  "run":{
+    "github_actions_run_id":35869167764,
+    "head_sha":"9bde7bda038ffd1ee8bd1fa5f0dd51ea7e6c986a",
+    "conclusion":"success",
+    "artifact_id":10755050720,
+    "artifact_zip_sha256":"9b98b93038771ab9900efbd1ffdf7bc8517eb25ea8a4bb786f5e02224cc4fc68"
+  },
+  "global_counts":{
+    "raw_feature_count":3885,
+    "dissolved_survey_count":3657,
+    "eligible_exact_overlap_pair_count":178428,
+    "top_pairs_considered_before_spatial_dedup":500,
+    "stage1_region_count":2
+  },
+  "stage1_regions":[
+    {
+      "rank":1,
+      "survey_a":{"survey_id":"EW9506","platform":"Maurice Ewing","instrument":"Atlas Hydrosweep DS","survey_year":1995,"download_url":"https://www.ngdc.noaa.gov/ships/maurice_ewing/EW9506_mb.html","ncei_id":"NEW598"},
+      "survey_b":{"survey_id":"RR1612","platform":"Roger Revelle","instrument":"Kongsberg EM122","survey_year":2016,"download_url":"https://www.ngdc.noaa.gov/ships/roger_revelle/RR1612_mb.html","ncei_id":"NEW2598"},
+      "overlap_area_km2":2.2324497831072807,
+      "overlap_point":{"lon":-157.89550025172494,"lat":21.261995971500056},
+      "different_instrument":true,
+      "different_platform":true,
+      "year_separation":21,
+      "independent_survey_count_at_overlap_point":220
+    },
+    {
+      "rank":2,
+      "survey_a":{"survey_id":"FK140307","platform":"Falkor","instrument":"Kongsberg EM302; EM710","survey_year":2014,"download_url":"https://www.ngdc.noaa.gov/ships/falkor/FK140307_mb.html","ncei_id":"NEW2295"},
+      "survey_b":{"survey_id":"ZHNG09RR","platform":"Roger Revelle","instrument":"Kongsberg EM120","survey_year":2005,"download_url":"https://www.ngdc.noaa.gov/ships/roger_revelle/ZHNG09RR_mb.html","ncei_id":"NEW1992"},
+      "overlap_area_km2":937.8234913939481,
+      "overlap_point":{"lon":-158.13273379133878,"lat":21.23754911783228},
+      "different_instrument":true,
+      "different_platform":true,
+      "year_separation":9,
+      "independent_survey_count_at_overlap_point":217
+    }
+  ],
+  "interpretation":"Frozen ranking concentrated the top-500 opportunity pairs in a survey-dense Hawaii region; the preregistered 5-km representative-point spatial deduplication therefore yielded two Stage-1 regions. This is preserved rather than broadened post hoc.",
+  "depth_values_read":false,
+  "claim_ceiling":"DEPTH_BLIND_GLOBAL_MULTI_SURVEY_OPPORTUNITY_RANKING_ONLY"
+}
