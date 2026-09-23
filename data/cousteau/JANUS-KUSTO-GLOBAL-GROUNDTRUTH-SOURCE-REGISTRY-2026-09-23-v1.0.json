@@ -3,7 +3,7 @@
   "schema": "janus.cosmos.kusto.global_groundtruth.source_registry.v1",
   "created_date": "2026-09-23",
   "prereg": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0.json",
-  "status": "SECOND_GLOBAL_SOURCE_WAVE_FROZEN_WITH_AUSSEABED",
+  "status": "GROUNDTRUTH_EXPANSION_WAVE_ACTIVE",
   "sources": [
     {
       "id": "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
@@ -221,6 +221,121 @@
       ],
       "benchmark_role": "UNSEEN_MARINE_PAIRED_SUPPORT_DOMAIN_V2",
       "priority": 1
+    },
+    {
+      "id": "NOAA_EX_USS_YP389",
+      "region": "NORTHWEST_ATLANTIC_CAPE_HATTERAS",
+      "truth_class": "POSITIVELY_IDENTIFIED_NAVAL_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "discovery_validation_chain": [
+        "MULTIBEAM_SONAR",
+        "ROV_STILLS_VIDEO",
+        "PHOTOMOSAIC",
+        "US_NAVY_CONFIRMATION"
+      ],
+      "source_urls": [
+        "https://monitor.noaa.gov/shipwrecks/yp_389.html",
+        "https://sanctuaries.noaa.gov/news/press/2009/pr090909.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "EXACT_SURVEY_RASTER_AND_COORDINATE_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_SS_CITY_OF_CHESTER",
+      "region": "NORTHEAST_PACIFIC_GOLDEN_GATE",
+      "truth_class": "IDENTIFIED_STEAMSHIP_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED_BY_HISTORICAL_LOCATION_AND_FOLLOWUP_SIDESCAN",
+      "discovery_validation_chain": [
+        "MULTIBEAM_SONAR",
+        "SIDESCAN_SONAR",
+        "3D_ECHOSCOPE_CHARACTERIZATION"
+      ],
+      "source_urls": [
+        "https://sanctuaries.noaa.gov/news/apr14/city-of-chester.html",
+        "https://sanctuaries.noaa.gov/shipwrecks/city-of-chester/"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "caveat": "Historical AWOIS coordinates included prior negative searches; benchmark must bind the later confirmed target location/survey, not obsolete coordinates.",
+      "source_binding_status": "CONFIRMED_TARGET_SURVEY_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_TBNMS_IRONTON",
+      "region": "LAKE_HURON_THUNDER_BAY",
+      "truth_class": "IDENTIFIED_SCHOONER_BARGE_WRECK",
+      "truth_level": "IDENTITY_CONFIRMED",
+      "published_length_ft": 190.9,
+      "source_urls": [
+        "https://thunderbay.noaa.gov/shipwrecks/ironton.html"
+      ],
+      "benchmark_role": "KNOWN_ANTHROPOGENIC_POSITIVE",
+      "source_binding_status": "SEARCH_MAPPING_AND_EXACT_SONAR_PRODUCT_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_EX1902_VERNON_BASIN_WRECK",
+      "region": "GULF_OF_MEXICO_FLORIDA_ESCARPMENT",
+      "truth_class": "VISUALLY_CONFIRMED_WOODEN_SHIPWRECK",
+      "truth_level": "OBJECT_CLASS_CONFIRMED_IDENTITY_UNKNOWN",
+      "expedition": "EX1902",
+      "rov_dive": "03",
+      "depth_m": 560,
+      "length_m_approx": 37.8,
+      "public_assets": [
+        "ROV_VIDEO",
+        "PHOTOGRAMMETRY",
+        "IMAGES"
+      ],
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/photogrammetry/vernon/"
+      ],
+      "benchmark_role": "VISUALLY_CONFIRMED_ANTHROPOGENIC_OBJECT_CONTROL",
+      "source_binding_status": "PRE_ROV_SONAR_OR_MAPPING_TRIGGER_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_BOEM_WRECK_SITE_15377",
+      "region": "GULF_OF_MEXICO",
+      "truth_class": "VISUALLY_CONFIRMED_WOODEN_SHIPWRECK",
+      "truth_level": "OBJECT_CLASS_CONFIRMED_IDENTITY_UNKNOWN",
+      "discovery_year": 2005,
+      "discovery_context": "OIL_AND_GAS_SURVEY",
+      "expedition": "EX1711",
+      "rov_dive": "07",
+      "depth_m": 700,
+      "length_m": 32,
+      "width_m": 10,
+      "public_assets": [
+        "ROV_VIDEO",
+        "PHOTOGRAMMETRY",
+        "IMAGES"
+      ],
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/photogrammetry/boem-15377/"
+      ],
+      "benchmark_role": "VISUALLY_CONFIRMED_ANTHROPOGENIC_OBJECT_CONTROL",
+      "source_binding_status": "ORIGINAL_DISCOVERY_SONAR_PRODUCT_BINDING_OPEN",
+      "priority": 1
+    },
+    {
+      "id": "NOAA_BOEM_SITE_15563_LIKELY_INDUSTRY",
+      "region": "NORTHERN_GULF_OF_MEXICO",
+      "truth_class": "VISUALLY_CONFIRMED_WOODEN_WRECK_LIKELY_WHALING_BRIG_INDUSTRY",
+      "truth_level": "OBJECT_CLASS_CONFIRMED_IDENTITY_LIKELY_NOT_DEFINITIVE",
+      "discovery_year": 2011,
+      "expedition": "EX2201",
+      "rov_dive": "02",
+      "depth_m": 1845,
+      "observed_length_m_approx": 22,
+      "observed_width_m_approx": 7,
+      "source_urls": [
+        "https://oceanexplorer.noaa.gov/photogrammetry/industry/",
+        "https://oceanexplorer.noaa.gov/expedition-feature/okeanos-ex2201-features-industry/"
+      ],
+      "benchmark_role": "VISUALLY_CONFIRMED_ANTHROPOGENIC_OBJECT_CONTROL_WITH_NONDEFINITIVE_IDENTITY",
+      "source_binding_status": "ENERGY_COMPANY_DISCOVERY_DATA_OR_LATER_MAPPING_BINDING_OPEN",
+      "priority": 2
     }
   ],
   "first_execution_targets": [
@@ -230,5 +345,6 @@
     "USGS_LAKE_CRESCENT_2016"
   ],
   "reason_for_first_execution_targets": "Together they provide anthropogenic positive, natural false-artificiality control, natural morphologic positive, and bathymetry/backscatter cross-channel control across ocean and inland settings.",
-  "claim_ceiling": "SOURCE_BINDING_AND_BENCHMARK_ROLE_FREEZE_ONLY"
+  "claim_ceiling": "SOURCE_BINDING_AND_BENCHMARK_ROLE_FREEZE_ONLY",
+  "groundtruth_target_count_current": 11
 }
