@@ -1,0 +1,27 @@
+name: KUSTO Global NCEI Opportunity Map
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-blind-anomaly-hunt-v1
+    paths:
+      - 'workspace/kusto_global_ncei_opportunity_map.py'
+      - '.github/workflows/kusto-global-ncei-opportunity-map.yml'
+  workflow_dispatch:
+
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests shapely pyproj numpy
+      - name: Build depth-blind global multisurvey opportunity map
+        run: python workspace/kusto_global_ncei_opportunity_map.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-global-ncei-opportunity-map-v1
+          path: workspace/kusto_global_anomaly_out/JANUS-KUSTO-GLOBAL-NCEI-MULTISURVEY-OPPORTUNITY-MAP-2026-09-23-v1.0.json
+          retention-days: 30
