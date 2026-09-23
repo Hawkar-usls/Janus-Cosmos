@@ -1,0 +1,93 @@
+{
+  "artifact_id": "JANUS-KUSTO-CROSS-SOUND-ALASKA-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_ANY_CROSS_SOUND_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "dataset": {
+    "title": "Multibeam bathymetry and acoustic-backscatter data collected in 2015 near Cross Sound, southeast Alaska, during field activity 2015-629-FA",
+    "doi": "10.5066/F7JH3KG6",
+    "release_parent_sciencebase_item": "5abbf417e4b081f61abd5bd2",
+    "known_bathymetry_sciencebase_item": "5abc0e9ce4b081f61abd5c61",
+    "collection_year": 2015,
+    "native_cell_m": 10,
+    "sensor": "Reson 7111 multibeam echosounder",
+    "platform": "ADFG R/V Solstice",
+    "horizontal_reference": "UTM Zone 8 WGS84",
+    "public_rights": "USGS public domain / source metadata"
+  },
+  "scientific_goal": "Second formal unseen bathymetry-to-backscatter validation in an open-ocean corpus with a different sensor, geography and native scale from Lake Sammamish.",
+  "method_transfer": {
+    "origin": "Lake Sammamish formal PASS method; no Cross Sound numeric outcomes were inspected before this freeze.",
+    "native_scale_multipliers": [4,8,16,32],
+    "radii_m": [40,80,160,320],
+    "sampling_stride_cells": 8,
+    "sampling_stride_m": 80,
+    "spatial_dedup_m": 400,
+    "maximum_candidates": 100,
+    "reason": "Preserve the frozen 4/8/16/32-cell morphology ladder and 8-cell sampling stride at 10-m native resolution."
+  },
+  "bathymetry_discovery": {
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "per_metric_upper_tail_quantile": 0.995,
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in upper tail OR generic score in upper 0.5 percent",
+    "common_center_validity": "candidate sample centers must have complete valid bathymetry support through maximum frozen radius 320 m"
+  },
+  "backscatter_replay": {
+    "minimum_patch_valid_fraction": 0.80,
+    "patch_geometry": "candidate disk radius r plus annulus 1.25r < distance <= 2r",
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 800,
+    "control_rng_seed": 260923,
+    "standardization_stratum": "radius",
+    "zero_mad_rule": "exclude metric when same-radius control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius control aggregate-score q95"
+  },
+  "primary_test": {
+    "stratified_permutation": "preserve frozen candidate count by radius",
+    "iterations": 5000,
+    "alpha": 0.05,
+    "promotion_requires_all": [
+      "no coverage-blocked frozen radius stratum",
+      "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+      "permutation p < 0.05",
+      "candidate mean aggregate score > control mean aggregate score",
+      "support fraction / 0.05 > 1"
+    ],
+    "secondary": "one-sided Mann-Whitney candidate aggregate scores > controls"
+  },
+  "source_gate": {
+    "allowed_reads": ["ScienceBase item metadata","file names","file sizes","checksums","MIME types","geospatial metadata"],
+    "forbidden_reads": ["bathymetry raster values","backscatter raster values"],
+    "required_products": ["10m bathymetry GeoTIFF package","10m acoustic-backscatter GeoTIFF package"],
+    "optional_products": ["navigation trackline shapefile"]
+  },
+  "truth_firewall": {
+    "no_geologic_fault_or_feature_labels_used_for_candidate_selection": true,
+    "no_candidate_recenter": true,
+    "no_radius_or_threshold_change_after_bathymetry_result": true,
+    "no_zero_mad_rule_change_after_backscatter_result": true
+  },
+  "execution_order": [
+    "CS0_SOURCE_BINDING_NO_RASTER_VALUES",
+    "CS1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+    "CS2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY",
+    "CS3_SEAL_SECOND_FORMAL_UNSEEN_RESULT"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_OPEN_OCEAN_SAME_SURVEY_CROSS_CHANNEL_VALIDATION_ONLY__NO_INDEPENDENT_SURVEY_REPLICATION"
+}
