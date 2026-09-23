@@ -88,8 +88,7 @@ def xy(transform,row,col):
     x,y=rasterio.transform.xy(transform,row,col,offset="center")
     return float(x),float(y)
 
-blob,z,valid,transform,input_meta=load_bathy()
-nrows,ncols=z.shape
+blob,z,valid,transform,input_meta=load_bathy()\nCELL_EFF=float(sum(input_meta["resolution_m"])/2.0)\ninput_meta["effective_cell_for_geometry_m"]=CELL_EFF\nnrows,ncols=z.shape
 if not np.any(valid):raise RuntimeError("no valid bathymetry cells")
 input_meta["zip_bytes"]=len(blob);input_meta["valid_cells"]=int(np.sum(valid))
 
