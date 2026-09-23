@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "TWO_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__MULTIPLE_FAILURE_MODES_PRESERVED",
+  "status": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__TWO_MARINE_V2_PASSES__FAILURE_MODES_PRESERVED",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -27,6 +27,21 @@
       "enrichment_ratio": 9.787234042553191,
       "permutation_p": 0.0001999600079984003,
       "claim": "UNSEEN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_ENRICHMENT_PASS"
+    },
+    {
+      "dataset": "AUSSEABED_SHELLHARBOUR_THARAWAL_2017",
+      "environment": "MARINE_COASTAL_SHELF_PACIFIC_AUSTRALIA",
+      "method_generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED_FROM_MAUI",
+      "receipt": "JANUS-KUSTO-SHELLHARBOUR-S3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-23-v1.0",
+      "scorable_candidates": 99,
+      "support_fraction": 0.21212121212121213,
+      "nominal_control_tail": 0.05,
+      "enrichment_ratio": 4.242424242424242,
+      "candidate_mean_aggregate_score": 2.6475977034852987,
+      "control_mean_aggregate_score": 1.104730555581381,
+      "permutation_p": 0.0001999600079984003,
+      "mann_whitney_one_sided_p": 3.6522621598029263e-22,
+      "claim": "UNSEEN_AUSTRALIAN_MARINE_SAME_SURVEY_CROSSCHANNEL_V2_ENRICHMENT_PASS"
     }
   ],
   "nonpromotion_evidence": [
@@ -54,13 +69,24 @@
       "dataset": "MIAMI_KEY_BISCAYNE_POCKMARKS",
       "state": "ACCESS_CAPABILITY_BLOCKED",
       "finding": "ScienceBase did not support byte-range acquisition for 0.6-0.8 GB archives; no numeric detector result was taken."
+    },
+    {
+      "dataset": "AUSSEABED_EX_HMAS_CANBERRA_2020",
+      "state": "CASE_LEVEL_KNOWN_WRECK_POSITIVE_CONTROL_PASS",
+      "finding": "With the official dive-site anchor withheld until after candidate freeze, blind rank-1 landed 5.375 m from the independent anchor. Because the survey was acquired specifically around the wreck and all 10 candidates were within 200 m, this remains case-level recovery only."
+    },
+    {
+      "dataset": "EMODNET_KN19207_ALL8",
+      "state": "SOURCE_LINEAGE_NEGATIVE_0_OF_8_LOCAL_WINDOWS",
+      "finding": "Direct WFS source_references queries returned 0/8 local source-reference hits. This does not imply no bathymetric data exists; it only blocks using current EMODnet source_references as independent lineage for these frozen Atlantic points."
     }
   ],
   "utility_now_supported": [
-    "KUSTO can generate bathymetric morphology candidates that are statistically enriched for independently held-out acoustic-backscatter structure on at least two genuinely unseen real datasets.",
-    "The enrichment result has replicated across an inland-lake corpus and a marine coral-reef corpus.",
-    "The pipeline can preserve blocked and negative outcomes and has exposed concrete portability failures involving zero-MAD statistics, coverage strata, support-domain semantics, and extreme-tail selection.",
-    "KUSTO can be used as a prioritization layer for where additional independent sonar, imagery, ROV, or survey replay is worth spending effort."
+    "KUSTO can generate bathymetric morphology candidates that are statistically enriched for independently held-out acoustic-backscatter structure on three genuinely unseen real datasets.",
+    "The formal unseen enrichment result has replicated across one inland-lake corpus and two marine corpora.",
+    "Paired-support-domain v2 has now replicated without scientific retuning on two unseen marine corpora from different geographic/data lineages: Maui/Puunoa and Shellharbour/Tharawal.",
+    "The pipeline preserves blocked, negative, and source-route failures and separates implementation repairs from scientific adaptation.",
+    "KUSTO can be used as an evidence-ranked prioritization layer for where additional independent sonar, imagery, ROV, or survey replay is worth spending effort."
   ],
   "not_yet_supported": [
     "GLOBAL_ANOMALY_DETECTION_ACCURACY",
@@ -73,11 +99,11 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "Run paired-support-domain v2 unchanged on additional unseen marine datasets from different instruments and regions.",
-    "Build a >=20 target known-object benchmark with hidden truth for localization and target-versus-control enrichment.",
+    "Run paired-support-domain v2 unchanged on additional unseen marine datasets from different instruments, owners, and ocean regions, with South-west Corner Marine Park and Solitary Islands as high-priority Australian corpora.",
+    "Build a >=20 high-confidence known-object/natural-control benchmark with hidden truth; registry entries alone do not count as validated targets.",
     "Continue independent-survey replay separately from same-survey cross-channel validation.",
-    "Bind candidate locations to ROV/still/video tracks only after frozen candidate generation.",
-    "Expand beyond NOAA/USGS to EMODnet and AusSeabed source-resolved products without using composite grids as independent validation of their source surveys."
+    "Bind frozen candidates to ROV/still/video/towed-video tracks only after candidate generation and cross-channel scoring.",
+    "Seek source-resolved European corpora beyond the current EMODnet 0/8 local source-reference result; do not count composite DTM layers as independent surveys."
   ],
-  "claim_ceiling": "REPLICATED_UNSEEN_CROSSCHANNEL_ANOMALY_ENRICHMENT_ON_TWO_REAL_DATASETS__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY"
+  "claim_ceiling": "REPLICATED_UNSEEN_CROSSCHANNEL_ANOMALY_ENRICHMENT_ON_THREE_REAL_DATASETS__TWO_MARINE_V2_REPLICATIONS__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY"
 }
