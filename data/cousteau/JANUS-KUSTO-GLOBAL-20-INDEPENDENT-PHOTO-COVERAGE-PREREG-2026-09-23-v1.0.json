@@ -1,0 +1,52 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-20-INDEPENDENT-PHOTO-COVERAGE-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T14:55:00Z",
+  "status":"FROZEN_BEFORE_VISUAL_ARCHIVE_QUERY",
+  "parent_stage1":"data/cousteau/JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RECEIPT-2026-09-23-v1.0.json",
+  "purpose":"Search independent georeferenced deep-submergence imagery for all 20 frozen Stage1 candidates without using imagery to move, resize, drop, or promote candidates.",
+  "allowed_visual_sources":[
+    "NOAA National Database for Deep-Sea Corals and Sponges",
+    "PMNM Deep-sea Data Portal",
+    "HURL Pisces IV/V and RCV-150 records",
+    "NOAA Okeanos Explorer / Deep Discoverer records",
+    "Ocean Exploration Trust Nautilus / Hercules / Argus records"
+  ],
+  "independence_rule":"Visual SurveyID must not be FK140307 or ZHNG09RR and must represent an imaging vehicle/visual observation archive independent of the Stage1 discovery and Stage2 heldout bathymetric lineages.",
+  "record_requirements":[
+    "finite latitude and longitude",
+    "non-empty ImageURL or HighlightImageURL",
+    "georeferenced observation record"
+  ],
+  "frozen_distance_classes":{
+    "DIRECT_IMAGE_SUPPORT":"image observation horizontal distance <= candidate frozen radius_m",
+    "NEAR_IMAGE_COVERAGE":"distance > frozen radius_m and <= 5000 m",
+    "REGIONAL_IMAGE_COVERAGE":"distance > 5000 m and <= 25000 m",
+    "NO_IMAGE_COVERAGE":"nearest qualifying image > 25000 m or no qualifying image"
+  },
+  "query_extent":{"lat_min":20.9,"lat_max":23.6,"lon_min":-162.6,"lon_max":-157.4},
+  "report_per_candidate":[
+    "nearest qualifying image record",
+    "distance_m",
+    "distance_class",
+    "SurveyID",
+    "EventID",
+    "VehicleName",
+    "ObservationDate",
+    "DepthInMeters",
+    "Locality",
+    "ImageURL",
+    "HighlightImageURL",
+    "all qualifying image records within 25 km"
+  ],
+  "hard_rules":[
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_CANDIDATE_DROPPING",
+    "NO_VISUAL_SIMILARITY_SCORE",
+    "NO_IMAGE_SELECTED_BY_APPEARANCE",
+    "NO_ARTIFICIALITY_CLAIM",
+    "PHOTO_ABSENCE_NE_FEATURE_ABSENCE",
+    "NEARBY_IMAGE_NE_DIRECT_CANDIDATE_IMAGE"
+  ],
+  "claim_ceiling":"INDEPENDENT_VISUAL_COVERAGE_AUDIT_ONLY"
+}
