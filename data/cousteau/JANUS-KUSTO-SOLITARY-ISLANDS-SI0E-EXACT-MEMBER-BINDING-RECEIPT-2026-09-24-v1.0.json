@@ -1,0 +1,38 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0E-EXACT-MEMBER-BINDING-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_EXACT_DISCOVERY_AND_HELDOUT_MEMBERS_FROZEN",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "transport_receipt": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0C-CURRENT-TRANSPORT-RECEIPT-2026-09-24-v1.0",
+  "member_inventory_run": {
+    "github_actions_run_id": 35932324663,
+    "artifact_id": 10781417376,
+    "artifact_zip_sha256": "68fdca3bb7afa1983f4aea6de90e944ab0d2bea9184beaa75ec2645cbe803587"
+  },
+  "source_archive": {
+    "url": "https://files.ausseabed.gov.au/survey/Solitary%20Islands%20Gumbaynggirr%20Yaegl%20MP%20Bathymetry%202022%205m.zip",
+    "sha256": "05d42ece33ab263370f4d40a75b477ac79a2b71f144fc6431351589fbb4b65e7",
+    "bytes": 18988969
+  },
+  "discovery_member": {
+    "name": "Solitary_Islands_Gumbaynggirr_Yaegl_MP_Bathymetry_2022_5m_MSL_cog.tif",
+    "uncompressed_bytes": 11502151,
+    "crc32": 3178407303,
+    "nominal_cell_m": 5
+  },
+  "heldout_member": {
+    "name": "Solitary_Islands_Gumbaynggirr_Yaegl_MP_Backscatter_2022_5m_MSL_cog.tif",
+    "uncompressed_bytes": 8713516,
+    "crc32": 377230115,
+    "nominal_cell_m": 5,
+    "si1_policy": "MUST_NOT_DECOMPRESS_OPEN_DECODE_HASH_SAMPLE_OR_INSPECT"
+  },
+  "truth_firewall": {
+    "raster_values_read_during_inventory": false,
+    "towed_video_or_stills_read": false,
+    "sediment_labels_read": false,
+    "landform_or_substrate_classification_read": false
+  },
+  "next_gate": "SI1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "EXACT_BLIND_SPLIT_MEMBER_BINDING_ONLY"
+}
