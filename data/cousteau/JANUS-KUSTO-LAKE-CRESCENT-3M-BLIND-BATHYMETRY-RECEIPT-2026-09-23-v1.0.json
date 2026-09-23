@@ -1,0 +1,49 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-3M-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_BLIND_CANDIDATE_FREEZE",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-LAKE-CRESCENT-3M-BLIND-BATHYMETRY-PREREG-2026-09-23-v1.0",
+  "run": {
+    "github_actions_run_id": 35887949814,
+    "head_sha": "004dea3b4ded39b975dc7d97d235ecd4a13a4eff",
+    "conclusion": "success",
+    "artifact_id": 10763811319,
+    "artifact_zip_sha256": "ea628a47487db03aa527fc60d87d76ecaeb82fc45fcc7f3ebc2efcf865addd25",
+    "candidate_json_sha256": "157239fa49fc12906a5720792b86e84f2716b0b45891afc35071963a03f23066"
+  },
+  "input": {
+    "bathymetry_zip_sha256": "0872d1cf218077fd2626e960685f24014e54fe3042870d2aeabbaabf98fb4ea1",
+    "raster_shape": [1758, 4382],
+    "native_cell_m": 3,
+    "valid_cells": 2167955
+  },
+  "blind_execution": {
+    "sample_centers": 27982,
+    "radii_m": [12, 24, 48, 96],
+    "pre_dedup_followups_by_radius": {"12": 285, "24": 247, "48": 246, "96": 249},
+    "pre_dedup_followup_total": 1027,
+    "spatial_dedup_m": 100,
+    "frozen_candidate_count": 100,
+    "candidate_radius_counts": {"12": 67, "24": 14, "48": 11, "96": 8},
+    "candidate_family_vote_counts": {"1": 11, "2": 53, "3": 25, "4": 11}
+  },
+  "truth_firewall": {
+    "backscatter_values_read": false,
+    "feature_labels_read": false,
+    "target_coordinates_read": false
+  },
+  "failed_attempt": {
+    "run_id": 35887819982,
+    "cause": "ZIP contained a real ASC plus __MACOSX resource-fork ASC entry",
+    "scientific_state_changed": false,
+    "depth_values_read_before_failure": false,
+    "repair": "Ignore __MACOSX/._ resource-fork entries only; detector and thresholds unchanged"
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10763811319,
+    "candidate_json_sha256": "157239fa49fc12906a5720792b86e84f2716b0b45891afc35071963a03f23066",
+    "rule": "Backscatter replay must verify this exact candidate JSON hash before reading backscatter values."
+  },
+  "next_gate": "LAKE_CRESCENT_3M_BACKSCATTER_REPLAY",
+  "claim_ceiling": "BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
