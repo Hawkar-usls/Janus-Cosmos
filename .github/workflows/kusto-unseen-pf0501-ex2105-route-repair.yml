@@ -1,0 +1,25 @@
+name: KUSTO Unseen PF0501 EX2105 Route Repair
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_unseen_pf0501_ex2105_route_repair.py'
+      - '.github/workflows/kusto-unseen-pf0501-ex2105-route-repair.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_unseen_pf0501_ex2105_route_repair.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-unseen-pf0501-ex2105-route-repair-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-UNSEEN-PF0501-EX2105-SOURCE-ROUTE-REPAIR-PROBE-2026-09-23-v1.0.json
