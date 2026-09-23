@@ -498,7 +498,9 @@ out = {
         "primary_pass": primary_pass,
         "scientific_promotion": primary_pass,
     },
-    "truth_firewall": {\n        "landform_or_sediment_labels_read": False,\n        "towed_video_or_stills_read": False,
+    "truth_firewall": {
+        "landform_or_sediment_labels_read": False,
+        "towed_video_or_stills_read": False,
         "candidate_coordinates_changed": False,
         "candidate_radii_changed": False,
     },
