@@ -1,0 +1,42 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-SOURCE-BINDING-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_PAIRED_SURVEY_PRODUCTS_BOUND__NO_RASTER_OR_GROUNDTRUTH_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35931903956,
+    "artifact_id": 10781412808,
+    "artifact_zip_sha256": "e53ad6065d16fb538156e5551bf17af92b705bc9c316792c79f59e18e7878da0"
+  },
+  "pair_identity": {
+    "newgaid": "20220017S",
+    "title": "Solitary Islands Gumbaynggirr Yaegl MP 2022",
+    "platform": "RV Bombora",
+    "sensor": "R2Sonic 2022",
+    "start_date": "2022-08-31",
+    "end_date": "2023-07-31",
+    "sea_area": "Pacific Ocean",
+    "collector": "New South Wales Survey Authority, Department of Planning Industry and Environment | Australian Marine Parks",
+    "bathymetry": {
+      "resolution_m": 5,
+      "area_km2": 141.989941042,
+      "data_url": "https://seabed-producthouse-open.s3.ap-southeast-2.amazonaws.com/20220017S_SolitaryIslandsGumbaynggirrYaeglMP/L3/bathymetry/downloads/SolitaryIslandsGumbaynggirrYaeglMP-Bathymetry-5m-2022.zip",
+      "meta_url": "https://pid.geoscience.gov.au/dataset/ga/149091"
+    },
+    "backscatter": {
+      "resolution_m": 5,
+      "area_km2": 141.089044904,
+      "data_url": "https://seabed-producthouse-open.s3.ap-southeast-2.amazonaws.com/20220017S_SolitaryIslandsGumbaynggirrYaeglMP/L3/backscatter/downloads/SolitaryIslandsGumbaynggirrYaeglMP-Backscatter-5m-2022.zip",
+      "meta_url": "https://pid.geoscience.gov.au/dataset/ga/149091"
+    }
+  },
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "towed_video_or_stills_read": false,
+    "sediment_labels_read": false,
+    "landform_or_substrate_classification_read": false
+  },
+  "next_gate": "SI0B_ARCHIVE_ROUTE_AND_MEMBER_INVENTORY_ONLY",
+  "claim_ceiling": "PAIRED_SOURCE_IDENTITY_ONLY"
+}
