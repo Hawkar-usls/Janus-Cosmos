@@ -1,0 +1,58 @@
+{
+  "artifact_id": "JANUS-KUSTO-CROSSSURVEY-CONSENSUS-V2-DESIGN-2026-09-23-v1.0",
+  "status": "CALIBRATION_DERIVED_DESIGN__UNSEEN_VALIDATION_REQUIRED",
+  "motivation_receipt": "JANUS-KUSTO-SHARK-ROCK-POSTHOC-G2B-ELIGIBILITY-DIAGNOSTIC-RECEIPT-2026-09-23-v1.0",
+  "problem": "The v1 pipeline truncates each survey independently to extreme-tail/top candidates before cross-survey reasoning, so moderate but spatially consistent morphology can be lost even when multiple surveys measure the same feature.",
+  "calibration_firewall": {
+    "Shark_Rock": "CALIBRATION_ONLY_FOR_V2",
+    "EX1203_EX1805_EX1903L2_EX2102_Shark_Rock_tile": "FORBIDDEN_AS_V2_PREDICTIVE_VALIDATION",
+    "future_claim_requires": "predeclared unseen multi-survey benchmark"
+  },
+  "v2_mechanism": {
+    "order": [
+      "compute frozen morphology metrics at every eligible center independently in each survey",
+      "convert each metric and existing generic robust score to within-survey empirical percentiles",
+      "align eligible centers on common Earth-fixed grid without using target labels",
+      "aggregate spatially aligned percentile evidence across surveys before any per-survey top-K truncation",
+      "only then spatially deduplicate and cap follow-up candidates"
+    ],
+    "per_survey_threshold_for_consensus": 0.95,
+    "rationale": "Two independent survey-local upper-5-percent events have nominal product-tail 0.0025, comparable to or stricter than the previous single-survey 0.005 extreme-tail gate, while allowing moderate repeatable evidence to survive.",
+    "family_evidence": "family percentile = maximum empirical percentile among frozen metrics belonging to that morphology family",
+    "generic_tail": "1 - empirical_percentile(generic_robust_score), floored at 1/(N_eligible+1)",
+    "cross_survey_candidate_rule": [
+      "at least two distinct surveys have generic percentile >= 0.95 at aligned support",
+      "OR at least two distinct surveys have the same structural family percentile >= 0.95"
+    ],
+    "ranking": {
+      "primary": "product of the two smallest survey-local generic tails; lower is stronger",
+      "secondary": "number of supporting distinct surveys",
+      "tertiary": "number of morphology families supported in at least two surveys"
+    },
+    "spatial_alignment": {
+      "same_frozen_radius_required": true,
+      "grid_or_match_tolerance": "must be fixed from survey sampling density before metric values are inspected",
+      "no_recenter_after_scoring": true
+    },
+    "nuisance_controls": [
+      "preserve beam-edge and coverage validity filters",
+      "track instrument/platform/year identity",
+      "do not count multiple products derived from the same acquisition as independent surveys",
+      "retain survey-local percentile values and raw family evidence for audit"
+    ]
+  },
+  "scientific_comparison": {
+    "baseline": "v1 independent extreme-tail/top-K then persistence",
+    "challenger": "v2 consensus-before-truncation",
+    "must_run_on_same_unseen_support": true,
+    "metrics": [
+      "known-target recall where independent truth exists",
+      "matched-control candidate rate",
+      "localization error",
+      "cross-survey persistence count",
+      "candidate burden per square kilometre"
+    ],
+    "no_threshold_retuning_between_baseline_and_challenger": true
+  },
+  "claim_ceiling": "ALGORITHM_DESIGN_FROM_CALIBRATION_ONLY__NO_PREDICTIVE_IMPROVEMENT_ESTABLISHED"
+}
