@@ -1,0 +1,21 @@
+{
+  "artifact_id":"JANUS-KUSTO-MBLDEOIH-PARSER-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T07:20:00Z",
+  "status":"IMPLEMENTATION_ONLY__NO_SCIENTIFIC_RULE_CHANGE",
+  "superseded_selftest_run":35831111132,
+  "superseded_artifact_id":10736403988,
+  "superseded_artifact_zip_sha256":"76d68387e700f45aa91534d53ceb322ddd858d09694d4231a0ee935c18e8db8a",
+  "observed":{
+    "PF0501_eof_exact":true,
+    "PF0501_version2_records":4056,
+    "PF0501_native_longitude_example_deg":285.74491666666665,
+    "RB1202_eof_exact":true,
+    "RB1202_version4_records":330
+  },
+  "repair":"Normalize physically equivalent legacy 0..360 longitude to -180..180 before WGS84 geodesy: ((lon+180)%360)-180.",
+  "example":"285.7449166667 deg == -74.2550833333 deg",
+  "depth_parser_changed":false,
+  "record_layout_changed":false,
+  "unseen_prereg_changed":false,
+  "scientific_result_from_superseded_selftest":"NONE"
+}
