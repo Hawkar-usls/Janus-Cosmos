@@ -1,0 +1,26 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-AUV-PUBLIC-TRACK-AVAILABILITY-AUDIT-2026-09-24-v1.0",
+  "status": "AUV_TRACK_NOT_RECOVERED_FROM_PUBLIC_MAC_SWC_REPO",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "public_repository": {
+    "repository": "UWA-Marine-Ecology-Group-projects/mac-swc",
+    "main_head": "358994b9705210bc7ed629352e312e982c535b99"
+  },
+  "searches": {
+    "recursive_tree_terms": ["AUV","Nimbus","nav","track","USBL","camera","imagery"],
+    "code_search_terms": ["Nimbus","AUV","USBL","autonomous underwater vehicle"]
+  },
+  "result": {
+    "nimbus_code_hits": 0,
+    "usbl_code_hits": 0,
+    "auv_hits": "ANALYSIS_SCRIPTS_AND_MODEL_REFERENCES_ONLY",
+    "exact_navigation_or_track_file_recovered": false
+  },
+  "known_context": {
+    "auv_platform_reported": "IMOS AUV Nimbus",
+    "public_report_describes_precisely_georeferenced_AUV_IMAGERY": true,
+    "note": "Existence of an AUV survey does not imply that an exact navigation track was recovered from this public GitHub repository."
+  },
+  "scientific_rule": "Do not reconstruct AUV tracks from report figures or model outputs. DIRECT_VISUAL_CONFIRMATION requires an actual georeferenced frame/track source.",
+  "claim_ceiling": "PUBLIC_REPOSITORY_TRACK_AVAILABILITY_AUDIT_ONLY"
+}
