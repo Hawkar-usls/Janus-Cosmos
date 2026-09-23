@@ -1,0 +1,54 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0E-PAIRED-DOMAIN-REPROJECTION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_RASTER_PIXEL_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "header_receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0D-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0",
+  "dual_method_freeze": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0C-DUAL-METHOD-FREEZE-2026-09-24-v1.0",
+  "paired_study_domain": {
+    "target_crs": "EPSG:32757",
+    "regions": [
+      {
+        "id": "ELIZABETH",
+        "core_bounds_m": [499950.0,6682680.0,513430.0,6693852.0]
+      },
+      {
+        "id": "MIDDLETON",
+        "core_bounds_m": [502238.0,6736358.0,515602.0,6747874.0]
+      }
+    ],
+    "domain_source": "BACKSCATTER_RASTER_HEADER_GEOMETRY_ONLY",
+    "heldout_backscatter_values_used_to_define_domain": false
+  },
+  "bathymetry_representation_bridge": {
+    "source_crs": "EPSG:4326",
+    "target_crs": "EPSG:32757",
+    "source_member": "Elizabeth_Middleton_Reef_Bathymetry_2020_5m_MSL_cog.tif",
+    "target_resolution_m": 5,
+    "resampling": "NEAREST",
+    "grid_alignment": "target bounds snapped outward to integer multiples of 5 metres",
+    "window_rule": "For each region, expand the backscatter-header core bounds by 2*max_candidate_radius = 320 m in EPSG:32757, transform that expanded rectangle to source CRS, read only the intersecting bathymetry window, and reproject to the snapped 5 m target grid.",
+    "candidate_center_domain": "UNEXPANDED_BACKSCATTER_HEADER_CORE_BOUNDS",
+    "representation_change_claim": "COORDINATE_AND_STORAGE_NORMALIZATION_ONLY__NO_INTERPOLATED_VALUE_CREATION"
+  },
+  "blind_discovery_pooling": {
+    "thresholds": "POOL_SAMPLED_BATHYMETRY_METRICS_FROM_BOTH_REGIONS_BY_RADIUS_BEFORE_THRESHOLDING",
+    "candidate_ranking": "GLOBAL_ACROSS_BOTH_REGIONS",
+    "spatial_dedup_m": 250,
+    "maximum_candidates_total": 100,
+    "region_identity_not_used_as_A_LABEL": true
+  },
+  "heldout_replay_pooling": {
+    "candidate_support": "Use the native 4 m backscatter tile corresponding to the candidate region.",
+    "controls": "Sample eligible controls across both paired regions and pool by physical radius exactly as one survey-level stratum.",
+    "backscatter_tiles_may_not_be_selected_or_dropped_after_results": true
+  },
+  "hard_rules": [
+    "NO_FULL_SPARSE_BATHYMETRY_RASTER_LOAD",
+    "NO_AUV_SEDIMENT_BRUV_GROUNDTRUTH_READ",
+    "NO_BACKSCATTER_PIXEL_READ_BEFORE_CANDIDATE_HASH_FREEZE",
+    "NO_REEF_SELECTION_AFTER_PIXEL_READ",
+    "NO_RESAMPLING_METHOD_CHANGE",
+    "NO_POSTHOC_REGION_STRATIFICATION_FOR_PROMOTION"
+  ],
+  "claim_ceiling": "PAIRED_DOMAIN_AND_REPRESENTATION_BRIDGE_FREEZE_ONLY"
+}
