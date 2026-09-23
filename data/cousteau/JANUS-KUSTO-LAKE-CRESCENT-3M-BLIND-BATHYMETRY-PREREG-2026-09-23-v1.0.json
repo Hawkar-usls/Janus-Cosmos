@@ -1,0 +1,53 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-3M-BLIND-BATHYMETRY-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_NUMERIC_DEPTH_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_source_receipt": "data/cousteau/JANUS-KUSTO-USGS-NATURAL-CONTROLS-SOURCE-GATE-RECEIPT-2026-09-23-v1.0.json",
+  "input": {
+    "sciencebase_item_id": "5eea74cb82ce3bd58d8572af",
+    "filename": "LakeCrescent_bathy_3m_UTM10_NAD83_NAVD88.zip",
+    "format": "ASCIIRaster",
+    "native_cell_m": 3
+  },
+  "truth_firewall": {
+    "backscatter_values_read_before_candidate_freeze": false,
+    "geologic_feature_labels_read_by_executor": false,
+    "landslide_or_fault_coordinates_supplied_to_executor": false,
+    "target_coordinate": null
+  },
+  "scale_freeze": {
+    "rule": "Native-cell multiples frozen before depth read.",
+    "radius_multipliers": [4, 8, 16, 32],
+    "radii_m": [12, 24, 48, 96],
+    "sampling_stride_m": 24
+  },
+  "morphology_families": {
+    "RELIEF_ROUGHNESS": ["local_relief_m", "local_std_m"],
+    "CURVATURE": ["abs_laplacian"],
+    "RADIAL": ["abs_center_surround_dog"],
+    "LINEARITY": ["structure_tensor_anisotropy"],
+    "TERRACE_STEP": ["gradient_magnitude"],
+    "TOPOLOGIC": ["isolated_extremum_persistence"]
+  },
+  "selection": {
+    "per_metric_upper_tail_quantile": 0.995,
+    "followup_rule": "at least two morphology families in the upper tail OR generic robust score in its upper 0.5 percent",
+    "generic_score": "0.5 * max(abs_robust_z) + 0.5 * mean(abs_robust_z)",
+    "spatial_dedup_min_m": 100,
+    "maximum_frozen_candidates": 100
+  },
+  "validity_mask": {
+    "rule": "Exclude nodata and cells whose maximum-scale neighborhood intersects nodata or raster border.",
+    "minimum_valid_edge_distance_m": 96
+  },
+  "next_gate": "Freeze candidate JSON before any backscatter values are read; then replay the frozen locations on the 3 m backscatter raster without moving coordinates or changing radii.",
+  "hard_rules": [
+    "NO_BACKSCATTER_READ_DURING_DISCOVERY",
+    "NO_FEATURE_LABELS_DURING_DISCOVERY",
+    "NO_POSTHOC_RADIUS_SELECTION",
+    "NO_RECENTERING_AFTER_BACKSCATTER_UNLOCK",
+    "DISCOVERY_ON_PROCESSED_BATHYMETRY_DOES_NOT_COUNT_AS_INDEPENDENT_PROCESSING_VALIDATION",
+    "MORPHOLOGY_DOES_NOT_ESTABLISH_CAUSE_OR_ARTIFICIALITY"
+  ],
+  "claim_ceiling": "BLIND_NATURAL_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
