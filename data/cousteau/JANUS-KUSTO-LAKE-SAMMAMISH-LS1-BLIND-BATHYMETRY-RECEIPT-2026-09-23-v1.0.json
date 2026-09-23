@@ -1,0 +1,62 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_100_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_AND_LABELS_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-LAKE-SAMMAMISH-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "implementation_repairs": [
+    "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-GEOREF-RESOLUTION-REPAIR-2026-09-23-v1.0",
+    "JANUS-KUSTO-LAKE-SAMMAMISH-LS1-LITERAL-NEWLINE-SYNTAX-REPAIR-2026-09-23-v1.0"
+  ],
+  "run": {
+    "github_actions_run_id": 35902532725,
+    "head_sha": "f81375b7df24b7438602c30f99c0780262989017",
+    "conclusion": "success",
+    "artifact_id": 10770041206,
+    "artifact_zip_sha256": "24b516474b3851958b5d7f3f0da816e7416df400b0dcde73c9c26b8f791966bd",
+    "candidate_json_sha256": "7dddb0b6204060ebe2963757aee83c5ee8751f87917231ee47f415ddb84d1b07"
+  },
+  "input": {
+    "raster_shape": [5380, 8710],
+    "valid_cells": 4635500,
+    "nominal_cell_m": 2,
+    "radii_m": [8,16,32,64],
+    "sampling_stride_m": 16
+  },
+  "blind_execution": {
+    "sample_centers": 64314,
+    "pre_dedup_followup_total": 2060,
+    "spatial_dedup_m": 100,
+    "frozen_candidate_count": 100
+  },
+  "truth_firewall": {
+    "backscatter_values_read": false,
+    "landslide_or_fault_labels_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "failed_attempts": [
+    {
+      "run_id": 35893145745,
+      "class": "GEOREFERENCE_TOLERANCE_IMPLEMENTATION_FAILURE",
+      "scientific_result": false
+    },
+    {
+      "run_id": 35893333314,
+      "class": "IMPLEMENTATION_FAILURE",
+      "scientific_result": false
+    },
+    {
+      "run_id": 35893445669,
+      "class": "LITERAL_NEWLINE_SYNTAX_FAILURE",
+      "scientific_result": false
+    }
+  ],
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10770041206,
+    "artifact_zip_sha256": "24b516474b3851958b5d7f3f0da816e7416df400b0dcde73c9c26b8f791966bd",
+    "candidate_json_sha256": "7dddb0b6204060ebe2963757aee83c5ee8751f87917231ee47f415ddb84d1b07",
+    "rule": "LS2 must verify both hashes before reading backscatter values."
+  },
+  "next_gate": "LS2_FROZEN_CANDIDATE_BACKSCATTER_REPLAY",
+  "claim_ceiling": "UNSEEN_BLIND_BATHYMETRIC_ANOMALY_CANDIDATE_GENERATION_ONLY"
+}
