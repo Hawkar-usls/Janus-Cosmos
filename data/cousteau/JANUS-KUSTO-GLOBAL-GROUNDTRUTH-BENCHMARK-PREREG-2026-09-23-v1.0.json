@@ -1,0 +1,165 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0",
+  "schema": "janus.cosmos.kusto.global_groundtruth_benchmark.prereg.v1",
+  "created_date": "2026-09-23",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_commit": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+  "purpose": "Measure where KUSTO is demonstrably useful for finding persistent seafloor anomalies on real data, across oceans, sensors, scales and target classes, without using benchmark truth to tune the detector.",
+  "scientific_question": "Does the frozen detector enrich independently known seafloor anomalies above spatially matched controls, localize them at the appropriate survey scale, and preserve detections across independent surveys or sensors?",
+  "hard_firewalls": [
+    "GROUND_TRUTH_LABELS_MUST_NOT_BE_READ_BY_DISCOVERY_STAGE",
+    "NO_THRESHOLD_RETUNING_AFTER_TRUTH_UNLOCK",
+    "NO_TARGET_COORDINATE_RECENTERING",
+    "NO_RADIUS_OR_SCALE_SELECTION_FROM_TARGET_OUTCOME",
+    "CALIBRATION_DATASET_CANNOT_VALIDATE_THE_COMPONENT_IT_CALIBRATED",
+    "COMPOSITE_GRID_CANNOT_COUNT_AS_INDEPENDENT_REPLICATION_OF_ITS_SOURCE_SURVEYS",
+    "CATALOG_ABSENCE_IS_NOT_FEATURE_ABSENCE",
+    "NEARBY_IMAGE_IS_NOT_DIRECT_VISUAL_CONFIRMATION",
+    "MORPHOLOGY_DOES_NOT_ESTABLISH_IDENTITY_OR_ARTIFICIALITY",
+    "REPORT_NEGATIVE_AND_AMBIGUOUS_CASES",
+    "NO_SINGLE_OVERALL_SCORE"
+  ],
+  "benchmark_families": [
+    {
+      "id": "ANTHROPOGENIC_KNOWN_TARGETS",
+      "role": "KNOWN_OBJECT_LOCALIZATION_AND_ANOMALY_ENRICHMENT",
+      "seed_cases": [
+        {
+          "id": "NOAA_USS_CONESTOGA",
+          "truth": "2009 NOAA/Fugro multibeam target, ROV-confirmed in 2014 and later identified as USS Conestoga",
+          "source_url": "https://sanctuaries.noaa.gov/conestoga/",
+          "status": "SOURCE_AND_SURVEY_BINDING_OPEN"
+        },
+        {
+          "id": "NOAA_EX1902_DIVE03_WRECK",
+          "truth": "ROV sonar discovery followed by direct visual investigation on 2019-05-16",
+          "source_url": "https://oceanexplorer.noaa.gov/expedition/ex1902/",
+          "status": "PUBLIC_TRACK_VIDEO_STILLS_AVAILABLE__SONAR_PRODUCT_BINDING_OPEN"
+        },
+        {
+          "id": "NOAA_EX1904_WRECK_SET",
+          "truth": "Multiple shipwreck targets imaged with SAS/multibeam/ROV during technology demonstration, including known and previously unidentified wrecks",
+          "source_url": "https://oceanexplorer.noaa.gov/expedition/ex1904/",
+          "status": "MULTISENSOR_BENCHMARK_SOURCE_AUDIT_OPEN"
+        }
+      ],
+      "population_gate": {
+        "minimum_high_confidence_targets": 20,
+        "minimum_independent_surveys": 3,
+        "minimum_sensor_or_platform_families": 2,
+        "note": "Seed cases are demonstrations only until this population gate is met."
+      },
+      "claim_ceiling_before_population_gate": "CASE_LEVEL_RECOVERY_ONLY",
+      "claim_ceiling_after_pass": "KNOWN_SEAFLOOR_OBJECT_ANOMALY_ENRICHMENT_AND_LOCALIZATION_ONLY"
+    },
+    {
+      "id": "NATURAL_MORPHOLOGY_CONTROLS",
+      "role": "SPECIFICITY_AND_NON_ARTIFICIAL_FALSE_POSITIVE_CONTROL",
+      "seed_datasets": [
+        {
+          "id": "USGS_MIAMI_KEY_BISCAYNE_POCKMARKS",
+          "doi": "10.5066/F72J6B4Z",
+          "sensor": "Bluefin B12 AUV / Imagenex MBDelta multibeam",
+          "status": "PUBLIC_CC0"
+        },
+        {
+          "id": "USGS_LAKE_CRESCENT_2016",
+          "doi": "10.5066/F7B56GW5",
+          "sensor": "Reson 7111 multibeam with bathymetry and acoustic backscatter",
+          "truth_classes": ["SUBMARINE_LANDSLIDE", "FAULT_RELATED_MORPHOLOGY"],
+          "status": "PUBLIC_CC0"
+        },
+        {
+          "id": "USGS_SOUTHERN_CASCADIA_INDIVIDUAL_SURVEYS",
+          "role": "FAULT_LANDSLIDE_COLD_SEEP_AND_SEDIMENT_TRANSPORT_CONTROLS",
+          "status": "SOURCE_SURVEY_DEMIX_REQUIRED_BEFORE_INDEPENDENCE_CLAIMS"
+        }
+      ],
+      "claim_ceiling_after_pass": "NATURAL_SEAFLOOR_ANOMALY_SENSITIVITY_AND_CLASS_CONFUSION_CHARACTERIZATION"
+    },
+    {
+      "id": "GLOBAL_CROSS_SURVEY_PERSISTENCE",
+      "role": "REPEATABILITY_WITHOUT_SEMANTIC_LABEL",
+      "source": "NOAA_NCEI_MULTIBEAM_ARCHIVE",
+      "selection": "DEPTH_BLIND_OVERLAP_REGIONS_STRATIFIED_BY_OCEAN_BASIN_DEPTH_REGIME_INSTRUMENT_PLATFORM_YEAR",
+      "existing_lineage": "feature/kusto-global-blind-anomaly-hunt-v1",
+      "claim_ceiling_after_pass": "CROSS_SURVEY_PERSISTENT_MORPHOLOGY_DETECTION_ONLY"
+    },
+    {
+      "id": "EUROPE_EMODNET",
+      "role": "GEOGRAPHIC_AND_SOURCE_DIVERSIFICATION",
+      "source_url": "https://emodnet.ec.europa.eu/en/emodnet-bathymetry-dtm-2024-release",
+      "rule": "Use DTM for opportunity/context; use source datasets or high-resolution products for independent validation where provenance permits.",
+      "status": "SOURCE_INVENTORY_OPEN"
+    },
+    {
+      "id": "AUSTRALIA_AUSSEABED",
+      "role": "GEOGRAPHIC_SENSOR_AND_SEARCH_CORPUS_DIVERSIFICATION",
+      "source_url": "https://ausseabed.gov.au/data",
+      "candidate_products": ["BATHYMETRY", "BACKSCATTER", "SIDESCAN", "MH370_PHASE1", "MH370_PHASE2"],
+      "status": "SOURCE_INVENTORY_OPEN"
+    },
+    {
+      "id": "GLOBAL_GEBCO_2026_TID",
+      "role": "GLOBAL_MEASUREMENT_COVERAGE_AND_SOURCE_TYPE_CONTEXT_ONLY",
+      "source_url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid",
+      "rule": "TID identifies source type; GEBCO grid is not local anomaly ground truth and cannot independently validate source surveys ingested into it.",
+      "status": "CONTEXT_ONLY"
+    }
+  ],
+  "multiscale_detector_freeze": {
+    "reason": "Existing 250 m global cells are too coarse to fairly test tens-of-metres wrecks and fine AUV morphology.",
+    "scale_rule": "Choose scale only from native survey resolution before truth unlock.",
+    "radius_multipliers_of_native_cell": [4, 8, 16, 32],
+    "minimum_radius_m": 10,
+    "maximum_radius_m": 2000,
+    "forbidden": "Selecting the best radius after inspecting target recovery."
+  },
+  "evaluation": {
+    "case_level_metrics": [
+      "candidate_rank_percentile_within_blind_search_region",
+      "truth_footprint_intersection_or_preregistered_point_tolerance",
+      "localization_error_m",
+      "cross_survey_or_cross_sensor_persistence",
+      "direct_visual_confirmation_if_camera_track_intersects_candidate"
+    ],
+    "population_metrics": [
+      "known_target_recall",
+      "catalog_match_fraction_not_true_precision",
+      "matched_control_candidate_rate",
+      "target_vs_matched_control_enrichment_ratio",
+      "spatial_permutation_p_value",
+      "false_discovery_behavior_on_independently_characterized_natural_controls"
+    ],
+    "statistics": {
+      "alpha": 0.05,
+      "multiple_testing": "BENJAMINI_HOCHBERG_WITHIN_BENCHMARK_FAMILY",
+      "minimum_population_n": 20,
+      "utility_promotion_requires": [
+        "target_enrichment_ratio_greater_than_1",
+        "corrected_significance_pass",
+        "effect_direction_replication_in_at_least_two_independent_survey_or_sensor_families",
+        "no_posthoc_threshold_change"
+      ]
+    }
+  },
+  "execution_stages": [
+    "G0_SOURCE_AND_PROVENANCE_INVENTORY",
+    "G1_FREEZE_TRUTH_MANIFEST_SEPARATELY_FROM_DISCOVERY_INPUTS",
+    "G2_TARGET_HIDDEN_MULTISCALE_DISCOVERY",
+    "G3_TRUTH_UNLOCK_AND_SCORE",
+    "G4_INDEPENDENT_SURVEY_SENSOR_OR_VISUAL_REPLAY",
+    "G5_CLAIM_LEDGER_WITH_EXACT_SUPPORTED_UTILITY"
+  ],
+  "claim_ledger_states": [
+    "NO_UTILITY_CLAIM",
+    "CASE_LEVEL_RECOVERY",
+    "CROSS_SURVEY_PERSISTENT_MORPHOLOGY",
+    "KNOWN_TARGET_ENRICHMENT",
+    "KNOWN_TARGET_LOCALIZATION",
+    "NATURAL_CONTROL_SPECIFICITY_CHARACTERIZED",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ],
+  "current_status": "PREREGISTERED__SOURCE_INVENTORY_AND_BENCHMARK_BINDING_NEXT",
+  "claim_ceiling": "METHOD_AND_BENCHMARK_DESIGN_ONLY__NO_NEW_PREDICTIVE_UTILITY_CLAIM_YET"
+}
