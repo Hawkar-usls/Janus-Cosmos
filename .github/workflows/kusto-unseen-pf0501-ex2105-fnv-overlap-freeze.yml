@@ -1,0 +1,27 @@
+name: KUSTO Unseen PF0501 x EX2105 FNV Overlap Freeze
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_unseen_pf0501_ex2105_fnv_overlap_freeze.py'
+      - '.github/workflows/kusto-unseen-pf0501-ex2105-fnv-overlap-freeze.yml'
+  workflow_dispatch:
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests shapely
+      - name: Freeze exact FNV overlap subset without depth
+        run: python workspace/kusto_unseen_pf0501_ex2105_fnv_overlap_freeze.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-unseen-pf0501-ex2105-fnv-overlap-freeze-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-UNSEEN-PF0501-X-EX2105-FNV-OVERLAP-FREEZE-2026-09-23-v1.0.json
+          retention-days: 30
