@@ -1,0 +1,79 @@
+{
+  "artifact_id": "JANUS-KUSTO-BROAD-FRONTIER-CHECKPOINT-2026-09-23-v1.0",
+  "created_date": "2026-09-23",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "frozen_global_rule": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED_FOR_NEW_UNSEEN_CORPORA",
+  "results": {
+    "HMAS_CANBERRA": {
+      "state": "CASE_LEVEL_KNOWN_OBJECT_RECOVERY_POSITIVE_CONTROL_PASS",
+      "blind_candidates": 10,
+      "nearest_candidate_id": "HC_BATHY_C001",
+      "nearest_candidate_blind_rank": 1,
+      "distance_to_official_dive_site_anchor_m": 5.375049000532497,
+      "claim_ceiling": "CASE_LEVEL_KNOWN_OBJECT_RECOVERY_POSITIVE_CONTROL_ONLY",
+      "formal_receipt": "JANUS-KUSTO-HMAS-CANBERRA-HC3-FORMAL-KNOWN-WRECK-RECOVERY-RECEIPT-2026-09-23-v1.0"
+    },
+    "SHELLHARBOUR_AUSSEABED": {
+      "state": "NUMERIC_ACCESS_BLOCKED__NO_SCIENTIFIC_RESULT",
+      "same_acquisition_bound": true,
+      "survey_id": "NSWENV20171130",
+      "sensor": "R2Sonic 2022",
+      "bathymetry_resolution_m": 2,
+      "backscatter_resolution_m": 5,
+      "failures_preserved": [
+        "Official S3 numeric bathymetry URL returned HTTP 403 from runner.",
+        "WCS capabilities/DescribeCoverage transport remained blocked.",
+        "WMS image/geotiff transport is available but returns a 4-band rendered visualization product; it is not accepted as numeric bathymetry."
+      ],
+      "backscatter_values_read": false,
+      "detector_candidate_generation_completed": false,
+      "method_v2_changed": false,
+      "next_use": "Keep source binding; do not promote or retune. Prefer another AusSeabed corpus with direct numeric paired products, or resume Shellharbour only if authoritative numeric access becomes available."
+    },
+    "EMODNET_FOUR_BASIN": {
+      "state": "SOURCE_LINEAGE_DISCOVERY_PASS__ACQUISITION_FILTER_OPEN",
+      "fixed_probe_counts": {
+        "NORTH_SEA": {"source_references": 12, "quality_index": 4},
+        "BALTIC_SEA": {"source_references": 21, "quality_index": 15},
+        "MEDITERRANEAN": {"source_references": 22, "quality_index": 7},
+        "NE_ATLANTIC": {"source_references": 41, "quality_index": 17}
+      },
+      "confirmed_wfs_layers": ["emodnet:source_references","emodnet:quality_index"],
+      "depth_values_requested": false,
+      "composite_dtm_counted_as_independent_survey": false,
+      "next_gate": "FILTER_REAL_CDI_SURVEYS_WITH_METADATA_URLS_AND_BIND_DOWNLOADABLE_PRIMARY_SURVEYS"
+    },
+    "GROUNDTRUTH_REGISTRY": {
+      "registry_target_count": 20,
+      "registry_count_gate": "PASS_REGISTRY_COUNT_ONLY",
+      "scientific_population_gate": "OPEN_UNTIL_EXACT_SURVEY_BINDING_AND_HIDDEN_TRUTH_EXECUTION",
+      "new_official_target_families_include": [
+        "ex-HMAS Canberra",
+        "ex-USS YP-389",
+        "SS City of Chester",
+        "Ironton",
+        "Vernon Basin wreck",
+        "BOEM Wreck Site 15377",
+        "BOEM Site 15563 / likely Industry",
+        "Bluefields",
+        "U-576",
+        "Dixie Arrow",
+        "E.M. Clark",
+        "U-701",
+        "U-85",
+        "Atlas",
+        "Caribsea",
+        "Ario"
+      ]
+    }
+  },
+  "authoritative_utility_claim": "KUSTO already has two formal unseen same-survey cross-channel validation passes (Lake Sammamish and Maui/Puunoa). The current frontier now tests transfer to new geographic/sensor lineages and known-object recovery without changing v2.",
+  "next_execution_order": [
+    "Select next unseen marine paired numeric corpus with direct authoritative bathymetry + backscatter access; v2 unchanged.",
+    "Filter EMODnet source_references to real acquisition-level CDI surveys and bind downloadable primary data where permitted.",
+    "Convert the 20-entry target registry into executed hidden-truth cases by exact survey/raster binding.",
+    "Run independent-survey replay separately from same-survey cross-channel validation.",
+    "Bind frozen candidates to ROV/photo/video tracks only after candidate generation."
+  ],
+  "claim_ceiling": "BROAD_FRONTIER_EXECUTION_CHECKPOINT__NO_NEW_GLOBAL_ACCURACY_CLAIM"
+}
