@@ -1,0 +1,14 @@
+{
+  "artifact_id": "JANUS-KUSTO-EMODNET-ALL8-WMS-INFORMATIVE-FLAG-CORRECTION-2026-09-23-v1.0",
+  "status": "AUTHORITATIVE_CORRECTION__EMPTY_WMS_TABLES_ARE_NOT_SOURCE_HITS",
+  "run_id": 35920085101,
+  "finding": {
+    "wms_capabilities_pass": true,
+    "wfs_capabilities_pass": true,
+    "emodnet_source_references_feature_type_present": true,
+    "legacy_wms_empty_table_responses_must_not_count_as_informative": true
+  },
+  "next_gate": "DIRECT_WFS_SOURCE_REFERENCES_BBOX_QUERY_AT_ALL_8_FROZEN_POINTS",
+  "depth_values_read": false,
+  "claim_ceiling": "SERVICE_CAPABILITY_AND_SCHEMA_DISCOVERY_ONLY"
+}
