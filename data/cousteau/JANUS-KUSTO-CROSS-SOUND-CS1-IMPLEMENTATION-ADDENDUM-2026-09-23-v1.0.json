@@ -1,0 +1,30 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS1-IMPLEMENTATION-ADDENDUM-2026-09-23-v1.0",
+  "parent_prereg":"JANUS-KUSTO-CROSS-SOUND-ALASKA-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "source_receipt":"JANUS-KUSTO-CROSS-SOUND-CS0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0",
+  "created_before_cross_sound_bathymetry_value_read":true,
+  "payload_gate":{
+    "accepted_container":["raw GeoTIFF","ZIP containing exactly one non-quickview TIFF"],
+    "reject":["HTML payload","empty payload","ambiguous multiple TIFF rasters","quickview-only archive"],
+    "sha256_before_metrics":true
+  },
+  "georef_gate":{
+    "nominal_cell_m":10.0,
+    "relative_resolution_tolerance":0.001,
+    "require_nonidentity_transform":true,
+    "geometry_uses_effective_transform_resolution":true
+  },
+  "frozen_method":{
+    "radii_m":[40,80,160,320],
+    "sampling_stride_m":80,
+    "spatial_dedup_m":400,
+    "maximum_candidates":100,
+    "tail_quantile":0.995,
+    "families":["RELIEF_ROUGHNESS","CURVATURE","RADIAL","LINEARITY","TERRACE_STEP","TOPOLOGIC"]
+  },
+  "backscatter_read":false,
+  "feature_labels_read":false,
+  "thresholds_changed":false,
+  "status":"FROZEN_BEFORE_CS1_EXECUTION",
+  "claim_ceiling":"INGEST_AND_GEOMETRY_IMPLEMENTATION_FREEZE_ONLY"
+}
