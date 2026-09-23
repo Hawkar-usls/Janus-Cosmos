@@ -1,0 +1,31 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0C-EXACT-MEMBER-BINDING-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_EXACT_2M_BATHYMETRY_MEMBER_BOUND",
+  "source_receipt": "JANUS-KUSTO-SHELLHARBOUR-S0-FINAL-PAIRED-SOURCE-RECEIPT-2026-09-23-v1.0",
+  "run": {
+    "github_actions_run_id": 35920322701,
+    "artifact_id": 10776807798,
+    "artifact_zip_sha256": "26863fbd81f52c9f3963d493a43b6e052330dc579bed5139ac11e9dee9e096b7"
+  },
+  "source_archive": {
+    "url": "https://files.ausseabed.gov.au/survey/Shellharbour%20Bathymetry%202017%202m%20-%205m.zip",
+    "sha256": "de16b7c26a2313faf343286381951ab000ee6e3e71df66152595a61a136b37a8",
+    "bytes": 29350742
+  },
+  "discovery_member": {
+    "name": "Shellharbour_Bathymetry_2m_2017_2m_MSL_cog.tif",
+    "uncompressed_bytes": 20100993,
+    "crc32": 3775986489
+  },
+  "heldout_member_also_present_in_transport_archive": {
+    "name": "Shellharbour_Backscatter_2017_5m_Unknown_cog.tif",
+    "policy": "S1 MUST NOT DECOMPRESS, OPEN, DECODE, HASH, SAMPLE, OR INSPECT THIS MEMBER"
+  },
+  "truth_firewall": {
+    "raster_values_read_during_member_inventory": false,
+    "s1_permitted_raster_member": "Shellharbour_Bathymetry_2m_2017_2m_MSL_cog.tif",
+    "backscatter_member_values_decoded": false
+  },
+  "next_gate": "S1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "EXACT_DISCOVERY_RASTER_MEMBER_BINDING_ONLY"
+}
