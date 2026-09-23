@@ -1,0 +1,40 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_100_BLIND_BATHYMETRY_CANDIDATES_FROZEN__BACKSCATTER_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "domain_freeze": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0E-PAIRED-DOMAIN-REPROJECTION-FREEZE-2026-09-24-v1.0",
+  "dual_method_freeze": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0C-DUAL-METHOD-FREEZE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35933791389,
+    "head_sha": "35b83d815752f03290d1001edd114c2ab4abd291",
+    "artifact_id": 10781992017,
+    "artifact_zip_sha256": "9ad0c7870c0a796063e30f1c8db8d94be94ef82b8800e0efa96bb1a4734c5d99",
+    "candidate_json_sha256": "06c37362ea2cbaa316c4100cd4c361467c680732bd652b4c4dbf459102c04576"
+  },
+  "blind_execution": {
+    "regions": {
+      "ELIZABETH": {"projected_shape":[2363,2824],"valid_cells":958380,"sample_centers":8468},
+      "MIDDLETON": {"projected_shape":[2432,2802],"valid_cells":2522672,"sample_centers":29797}
+    },
+    "threshold_pool": "BOTH_REGIONS",
+    "pre_dedup_followup_total": 1930,
+    "spatial_dedup_m": 250,
+    "frozen_candidate_count": 100
+  },
+  "truth_firewall": {
+    "backscatter_values_read": false,
+    "auv_imagery_read": false,
+    "sediment_labels_read": false,
+    "bruv_imagery_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10781992017,
+    "artifact_zip_sha256": "9ad0c7870c0a796063e30f1c8db8d94be94ef82b8800e0efa96bb1a4734c5d99",
+    "candidate_json_sha256": "06c37362ea2cbaa316c4100cd4c361467c680732bd652b4c4dbf459102c04576"
+  },
+  "next_gate": "EM2_DUAL_V2_V3_HELDOUT_BACKSCATTER_REPLAY",
+  "claim_ceiling": "UNSEEN_INDEPENDENT_SENSOR_LINEAGE_BLIND_BATHYMETRIC_CANDIDATE_GENERATION_ONLY"
+}
