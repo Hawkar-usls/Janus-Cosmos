@@ -1,0 +1,95 @@
+{
+  "artifact_id":"JANUS-KUSTO-FIRST-UNSEEN-ACROSS-TRACK-RESIDUAL-TRANSFER-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T07:12:00Z",
+  "status":"FROZEN_BEFORE_ANY_PF0501_OR_RB1202_FBT_DEPTH_READ",
+  "purpose":"Test whether CD169-derived across-track-conditioned residual-magnitude calibration transfers to fully unseen PF0501 x RB1202 data better than the same calibration with across-track information removed.",
+  "unseen_pair":{
+    "test":{"survey":"PF0501","year":2005,"instrument":"Simrad EM121"},
+    "reference":{"survey":"RB1202","year":2012,"instrument":"Simrad EM122"},
+    "selection_receipt":"data/cousteau/JANUS-KUSTO-UNSEEN-PF0501-REFERENCE-SELECTION-RECEIPT-2026-09-23-v1.0.json",
+    "coverage_receipt":"data/cousteau/JANUS-KUSTO-UNSEEN-PF0501-X-RB1202-FNV-OVERLAP-RECEIPT-2026-09-23-v1.0.json",
+    "neither_used_in_CD169_calibration":true
+  },
+  "depth_sources":{
+    "PF0501":"FBT counterparts only of the 18 frozen FNV files with exact-overlap rows",
+    "RB1202":"FBT counterparts only of the 26 frozen FNV files with exact-overlap rows",
+    "format":"NCEI-generated MB-System fast bathymetry (.fbt)",
+    "beam_filter":"MB_FLAG_NONE / flag==0 only",
+    "no_other_files":true
+  },
+  "spatial_support":{
+    "exact_polygon":"frozen PF0501 ∩ RB1202 NCEI footprint intersection",
+    "projection":"EPSG:32618 / WGS84 UTM zone 18N",
+    "grid_cell_m":100,
+    "per_cell_depth":"median of good beams",
+    "PF0501_cell_across_track":"median absolute across-track distance of contributing good PF0501 beams",
+    "common_cells_only":true,
+    "no_recenter":true,
+    "no_morphology_selection":true
+  },
+  "unseen_residual":{
+    "definition":"PF0501_100m_cell_median_depth - RB1202_100m_cell_median_depth",
+    "primary_quantity":"absolute residual magnitude",
+    "signed_direction":"REPORT_ONLY__NOT_USED_FOR_TRANSFER_VERDICT",
+    "global_vertical_debias":"NONE__primary matches frozen CD169 library residual semantics exactly"
+  },
+  "frozen_bins_abs_across_m":[
+    {"label":"INNER","min":0,"max":3000},
+    {"label":"MID","min":3000,"max":4500},
+    {"label":"OUTER","min":4500,"max":5500},
+    {"label":"EXTREME","min":5500,"max":null}
+  ],
+  "calibration_library":"data/cousteau/JANUS-KUSTO-CD169-EM12-EMPIRICAL-RESIDUAL-BOOTSTRAP-LIBRARY-2026-09-23-v1.0.json",
+  "calibration_channels":[
+    "LINE18_ERA x KN192-07_2008",
+    "LINE18_ERA x KNOX15RR_2008",
+    "LINE32_ERA x KN192-07_2008",
+    "LINE32_ERA x KNOX15RR_2008"
+  ],
+  "model_comparison":{
+    "V2":"For each calibration channel and unseen across-track bin, use that channel's empirical absolute-residual distribution from the same frozen bin.",
+    "BASELINE":"For the same calibration channel, pool empirical absolute residuals from all four across-track bins, removing across-track conditioning but changing no source data.",
+    "no_random_sampling_for_score":true
+  },
+  "bin_eligibility":{
+    "minimum_unseen_common_cells_per_bin":50,
+    "minimum_calibration_samples_per_channel_per_bin":30,
+    "shared_bin_set":"A bin is evaluated only if unseen n>=50 and all four calibration channels have n>=30.",
+    "minimum_shared_eligible_bins":3,
+    "must_include":"EXTREME",
+    "otherwise":"INSUFFICIENT_UNSEEN_BIN_SUPPORT"
+  },
+  "primary_metrics":{
+    "distribution_metric":"scipy.stats.wasserstein_distance on absolute residual magnitudes",
+    "tail_metric":"absolute error in fraction(|residual| >= 100m)",
+    "within_channel_aggregation":"weighted mean over shared eligible bins using unseen bin counts as weights",
+    "channel_pass":"V2 weighted Wasserstein < BASELINE weighted Wasserstein AND V2 weighted tail error < BASELINE weighted tail error"
+  },
+  "overall_verdict":{
+    "PASS_UNSEEN_TRANSFER":"at least 3 of 4 frozen calibration channels satisfy channel_pass",
+    "MIXED_UNSEEN_TRANSFER":"exactly 2 of 4 satisfy channel_pass",
+    "FAIL_UNSEEN_TRANSFER":"0 or 1 of 4 satisfy channel_pass",
+    "no_minimum_effect_size_claim":true,
+    "descriptive_not_universal_prediction":true
+  },
+  "secondary_report_only":[
+    "unseen per-bin n, median absolute residual, p90, p99, fraction >=50m, >=100m, >=150m",
+    "unseen EXTREME/non-EXTREME >=100m tail ratio",
+    "per-channel V2/BASELINE Wasserstein ratio",
+    "per-channel V2/BASELINE tail-error ratio",
+    "signed unseen medians by bin"
+  ],
+  "hard_rules":[
+    "NO_DEPTH_BEFORE_THIS_PREREG",
+    "NO_BIN_RETUNING",
+    "NO_GRID_RETUNING",
+    "NO_FILE_DROPPING_AFTER_DEPTH",
+    "NO_CELL_DROPPING_EXCEPT_FROZEN_COMMON_CELL_AND_BIN_SUPPORT_RULES",
+    "NO_REFERENCE_SURVEY_REPLACEMENT_AFTER_DEPTH",
+    "NO_CALIBRATION_CHANNEL_CHERRY_PICKING",
+    "NO_SIGN_TRANSFER",
+    "NO_HYDROTHERMAL_OBJECT_OR_ARTIFICIALITY_CLAIM",
+    "CALIBRATION_NE_UNIVERSAL_VALIDATION"
+  ],
+  "claim_ceiling":"FIRST_UNSEEN_TRANSFER_TEST_OF_CD169_ACROSS_TRACK_CONDITIONED_RESIDUAL_MAGNITUDE_MODEL"
+}
