@@ -1,0 +1,29 @@
+name: KUSTO Shellharbour S0B Backscatter Route
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_shellharbour_s0b_backscatter_route.py'
+      - 'data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-shellharbour-s0b-backscatter-route.yml'
+  workflow_dispatch:
+
+jobs:
+  s0b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Resolve Shellharbour backscatter direct route without raster values
+        run: python workspace/kusto_shellharbour_s0b_backscatter_route.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-shellharbour-s0b-backscatter-route-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SHELLHARBOUR-S0B-BACKSCATTER-ROUTE-RUN-2026-09-23-v1.0.json
+          retention-days: 30
