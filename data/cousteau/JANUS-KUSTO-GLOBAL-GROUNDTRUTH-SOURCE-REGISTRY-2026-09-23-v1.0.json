@@ -3,7 +3,7 @@
   "schema": "janus.cosmos.kusto.global_groundtruth.source_registry.v1",
   "created_date": "2026-09-23",
   "prereg": "data/cousteau/JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0.json",
-  "status": "FIRST_GLOBAL_SOURCE_WAVE_FROZEN",
+  "status": "SECOND_GLOBAL_SOURCE_WAVE_FROZEN_WITH_AUSSEABED",
   "sources": [
     {
       "id": "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
@@ -12,7 +12,11 @@
       "discovery_sensor": "KONGSBERG_EM302_MULTIBEAM",
       "discovery_year": 2011,
       "later_truth": "2019 ROV imagery confirmed USS Baldwin",
-      "reported_geometry": {"length_m": 105.0, "width_m": 18.6, "proud_height_m": 16.65},
+      "reported_geometry": {
+        "length_m": 105,
+        "width_m": 18.6,
+        "proud_height_m": 16.65
+      },
       "published_grid_resolution_m": 8,
       "mapping_report_grid_example_m": 5,
       "source_urls": [
@@ -26,11 +30,21 @@
     {
       "id": "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
       "region": "NORTHWEST_ATLANTIC_SOUTHEAST_US_MARGIN",
-      "truth_coordinate": {"lat": 31.59517078, "lon": -79.10225958},
+      "truth_coordinate": {
+        "lat": 31.59517078,
+        "lon": -79.10225958
+      },
       "truth_class": "NATURAL_ROCK_OUTCROPS",
       "pre_dive_interpretation": "POTENTIAL_SHIPWRECK_FROM_HIGH_RESOLUTION_MAPPING",
       "groundtruth": "ROV survey determined site was not a shipwreck",
-      "public_assets": ["MAPPING_PRODUCTS", "DIVE_TRACK_KML", "ROV_ANCILLARY", "CAMERA_SENSOR_DATA", "VIDEO", "STILLS"],
+      "public_assets": [
+        "MAPPING_PRODUCTS",
+        "DIVE_TRACK_KML",
+        "ROV_ANCILLARY",
+        "CAMERA_SENSOR_DATA",
+        "VIDEO",
+        "STILLS"
+      ],
       "source_urls": [
         "https://oceanexplorer.noaa.gov/ex1903-dailyupdates-june28/",
         "https://www.ncei.noaa.gov/waf/okeanos-rov-cruises/ex1903l2/"
@@ -46,7 +60,10 @@
       "discovery_year": 2009,
       "reported_length_m": 52,
       "reported_depth_m": 56.5,
-      "groundtruth_years": [2014, 2015],
+      "groundtruth_years": [
+        2014,
+        2015
+      ],
       "source_urls": [
         "https://sanctuaries.noaa.gov/conestoga/",
         "https://sanctuaries.noaa.gov/news/mar16/conestoga.html"
@@ -60,7 +77,13 @@
       "truth_class": "SONAR_DETECTED_VISUALLY_CONFIRMED_WRECK",
       "discovery_sensor": "ROV_DEEP_DISCOVERER_SONAR",
       "groundtruth": "Immediate direct ROV visual investigation",
-      "public_assets": ["DIVE_TRACK", "ROV_ANCILLARY", "CAMERA_SENSOR_DATA", "VIDEO", "STILLS"],
+      "public_assets": [
+        "DIVE_TRACK",
+        "ROV_ANCILLARY",
+        "CAMERA_SENSOR_DATA",
+        "VIDEO",
+        "STILLS"
+      ],
       "source_urls": [
         "https://oceanexplorer.noaa.gov/expedition/ex1902/",
         "https://www.ncei.noaa.gov/waf/okeanos-rov-cruises/ex1902/"
@@ -71,8 +94,17 @@
     {
       "id": "NOAA_EX1904_MULTISENSOR_WRECK_SET",
       "region": "NORTHWEST_ATLANTIC_US_EAST_COAST",
-      "truth_classes": ["KNOWN_WRECK", "PREVIOUSLY_UNIDENTIFIED_WRECK"],
-      "sensors": ["KATFISH_SAS", "BATHYMETRY", "REMUS600", "ROV", "LASER_SCANNER"],
+      "truth_classes": [
+        "KNOWN_WRECK",
+        "PREVIOUSLY_UNIDENTIFIED_WRECK"
+      ],
+      "sensors": [
+        "KATFISH_SAS",
+        "BATHYMETRY",
+        "REMUS600",
+        "ROV",
+        "LASER_SCANNER"
+      ],
       "source_url": "https://oceanexplorer.noaa.gov/expedition/ex1904/",
       "benchmark_role": "CROSS_SENSOR_OBJECT_PERSISTENCE",
       "priority": 2
@@ -92,10 +124,16 @@
     {
       "id": "USGS_LAKE_CRESCENT_2016",
       "region": "NORTH_AMERICA_INLAND_DEEP_LAKE",
-      "truth_classes": ["SUBMARINE_LANDSLIDE", "FAULT_RELATED_MORPHOLOGY"],
+      "truth_classes": [
+        "SUBMARINE_LANDSLIDE",
+        "FAULT_RELATED_MORPHOLOGY"
+      ],
       "doi": "10.5066/F7B56GW5",
       "sensor": "RESON_7111_MULTIBEAM",
-      "products": ["BATHYMETRY_ASCII_RASTER", "BACKSCATTER_TIFF"],
+      "products": [
+        "BATHYMETRY_ASCII_RASTER",
+        "BACKSCATTER_TIFF"
+      ],
       "license": "CC0",
       "source_url": "https://www.usgs.gov/data/multibeam-bathymetry-and-acoustic-backscatter-data-collected-2016-lake-crescent-olympic",
       "benchmark_role": "NATURAL_GEOHAZARD_CONTROL_AND_CROSS_CHANNEL_TEST",
@@ -105,7 +143,10 @@
       "id": "EMODNET_BATHYMETRY_2024",
       "region": "EUROPEAN_SEAS",
       "resolution": "1/16 arc-minute base DTM; HR-DTMs up to 1/512 arc-minute in selected areas",
-      "provenance_layers": ["SOURCE_REFERENCES", "QUALITY_INDEX"],
+      "provenance_layers": [
+        "SOURCE_REFERENCES",
+        "QUALITY_INDEX"
+      ],
       "source_url": "https://emodnet.ec.europa.eu/en/bathymetry",
       "benchmark_role": "GEOGRAPHIC_DIVERSIFICATION_AND_SOURCE_RESOLUTION",
       "priority": 2
@@ -113,7 +154,12 @@
     {
       "id": "AUSSEABED",
       "region": "AUSTRALIA_AND_ADJACENT_OCEAN",
-      "products": ["BATHYMETRY", "BACKSCATTER", "SIDESCAN", "SURVEY_LEVEL_DATA"],
+      "products": [
+        "BATHYMETRY",
+        "BACKSCATTER",
+        "SIDESCAN",
+        "SURVEY_LEVEL_DATA"
+      ],
       "special_corpus": {
         "MH370_PHASE2": "5 m bathymetry tiles plus sidescan/camera/final processed products",
         "MH370_PHASE1": "76 m SC48 product plus processed/raw-supporting products"
@@ -128,11 +174,53 @@
       "grid_interval_arcsec": 15,
       "mapped_to_modern_standards_percent": 28.7,
       "mapped_area_million_km2_approx": 104,
-      "source_types_include": ["SINGLEBEAM", "MULTIBEAM", "SEISMIC", "ISOLATED_SOUNDING", "ENC_SOUNDING"],
+      "source_types_include": [
+        "SINGLEBEAM",
+        "MULTIBEAM",
+        "SEISMIC",
+        "ISOLATED_SOUNDING",
+        "ENC_SOUNDING"
+      ],
       "source_url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid",
       "benchmark_role": "COVERAGE_CONTEXT_ONLY",
       "priority": 3,
       "independent_validation_eligible": false
+    },
+    {
+      "id": "AUSSEABED_EX_HMAS_CANBERRA_2020",
+      "region": "BASS_STRAIT_VICTORIA_AUSTRALIA",
+      "truth_class": "KNOWN_SCUTTLED_WARSHIP_ARTIFICIAL_REEF",
+      "sensor": "KONGSBERG_EM2040C",
+      "survey_year": 2020,
+      "published_bathymetry_cell_m": 0.5,
+      "published_object_length_m": 138.1,
+      "published_object_beam_m": 13.7,
+      "bathymetry_url": "https://files.ausseabed.gov.au/survey/HMAS%20Canberra%20Bathymetry%202020%200.5m.zip",
+      "source_urls": [
+        "https://researchdata.edu.au/hmas-canberra-bathymetry-survey-2020/3429330",
+        "https://www.parks.vic.gov.au/places-to-see/sites/ex-hmas-canberra-recreation-reserve"
+      ],
+      "benchmark_role": "HIDDEN_TRUTH_KNOWN_ANTHROPOGENIC_LOCALIZATION",
+      "priority": 1
+    },
+    {
+      "id": "AUSSEABED_SHELLHARBOUR_2017",
+      "region": "NEW_SOUTH_WALES_AUSTRALIA",
+      "truth_class": "UNSEEN_MARINE_CROSSCHANNEL_CORPUS",
+      "sensor": "R2SONIC_2022_MULTIBEAM",
+      "survey_year": 2017,
+      "published_products": [
+        "2M_AND_5M_BATHYMETRY",
+        "5M_BACKSCATTER",
+        "POSTHOC_SEABED_LANDFORM_CLASSIFICATION"
+      ],
+      "survey_area_km2_approx": 60,
+      "source_urls": [
+        "https://ausseabed.gov.au/resources/news/latest-news/shellharbour-tharawal-illawarra-south-multi-beam-data-now-available-on-ausseabed",
+        "https://www.data.nsw.gov.au/data/dataset/shellharbour-seabed-landforms-derived-from-mbes-data-2022"
+      ],
+      "benchmark_role": "UNSEEN_MARINE_PAIRED_SUPPORT_DOMAIN_V2",
+      "priority": 1
     }
   ],
   "first_execution_targets": [
