@@ -1,0 +1,40 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-POSTHOC-G2B-ELIGIBILITY-DIAGNOSTIC-RECEIPT-2026-09-23-v1.0",
+  "status": "DIAGNOSTIC_COMPLETE__TWO_SELECTION_MISSES__ONE_RECOVERY__ONE_COVERAGE_LIMIT",
+  "run": {
+    "github_actions_run_id": 35890937594,
+    "head_sha": "40db6331bab95d871340c878e697ad9446c9df9f",
+    "conclusion": "success",
+    "artifact_id": 10765197039,
+    "artifact_zip_sha256": "850563d176f8293509f69a6c9b7eba3ad496f3cc994818f13529c6092e1dcb56"
+  },
+  "classifications": {
+    "EX1203": "DETECTOR_SELECTION_MISS",
+    "EX1805": "DETECTOR_SELECTION_MISS",
+    "EX1903L2": "RECOVERED",
+    "EX2102": "COVERAGE_OR_VALIDITY_LIMITED"
+  },
+  "minimum_good_sounding_distance_m": {
+    "EX1203": 2.2005561274828405,
+    "EX1805": 1.8231837568129572,
+    "EX1903L2": 1.0256032109734672,
+    "EX2102": 653.6266212327142
+  },
+  "truth_cell_occupied": {
+    "EX1203": true,
+    "EX1805": true,
+    "EX1903L2": true,
+    "EX2102": false
+  },
+  "nearest_eligible_sample_center_m": {
+    "EX1203": {"25":18.013060455653292,"75":18.013060455653292,"125":34.07380765793995,"275":188.3601960932902},
+    "EX1805": {"25":18.013060455653292,"75":18.013060455653292,"125":18.013060455653292,"275":18.013060455653292},
+    "EX1903L2": {"25":18.013060455653292,"75":18.013060455653292,"125":18.013060455653292,"275":18.013060455653292},
+    "EX2102": {"25":657.1218066895943,"75":787.3024188084743,"125":849.8233155193757,"275":null}
+  },
+  "interpretation": "The lack of cross-survey Shark Rock recovery is not explained by missing measurements in EX1203 or EX1805. Both contain good soundings within a few metres of the truth and eligible frozen sample centers within about 18 m at small scales. Their failure is therefore a detector-selection miss under the frozen tail/candidate-cap logic. EX2102 is genuinely coverage/validity-limited locally.",
+  "development_implication": "Cross-survey KUSTO needs a mechanism that can reward moderate but spatially consistent evidence across surveys instead of requiring each survey location to independently survive an extreme-tail top-candidate bottleneck.",
+  "epistemic_firewall": "This diagnostic may motivate algorithm development, but Shark Rock is now calibration-only for any such change. Predictive improvement must be demonstrated on unseen data.",
+  "scientific_promotion": false,
+  "claim_ceiling": "POSTHOC_FAILURE_MODE_DIAGNOSTIC_ONLY"
+}
