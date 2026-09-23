@@ -1,0 +1,29 @@
+name: KUSTO Solitary Islands SI0D Member Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_solitary_islands_si0d_member_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI0C-CURRENT-TRANSPORT-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-solitary-islands-si0d-members.yml'
+  workflow_dispatch:
+
+jobs:
+  si0d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Hash current archive and inventory members without pixel decode
+        run: python workspace/kusto_solitary_islands_si0d_member_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-solitary-islands-si0d-members-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOLITARY-ISLANDS-SI0D-ARCHIVE-MEMBER-HASH-INVENTORY-2026-09-24-v1.0.json
+          retention-days: 30
