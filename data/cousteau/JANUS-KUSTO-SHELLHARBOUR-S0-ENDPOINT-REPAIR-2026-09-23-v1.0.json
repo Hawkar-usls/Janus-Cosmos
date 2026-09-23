@@ -1,0 +1,19 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0-ENDPOINT-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35916089866,
+    "failure_class": "DNS_NAME_RESOLUTION_ERROR_BEFORE_CAPABILITIES",
+    "raster_values_read": false
+  },
+  "repair": {
+    "old_endpoint": "https://warehouse.aussabed.gov.au/geoserver/ows",
+    "new_endpoint": "https://warehouse.ausseabed.gov.au/geoserver/ows",
+    "basis": "CURRENT_AUSSEABED_TECHNICAL_DOCUMENTATION_AND_RESEARCHDATA_RECORDS",
+    "method_v2_changed": false,
+    "selected_dataset_changed": false,
+    "thresholds_changed": false
+  },
+  "status": "SOURCE_ENDPOINT_REPAIR_ONLY__UNSEEN_STATUS_PRESERVED",
+  "claim_ceiling": "SOURCE_ROUTE_REPAIR_ONLY"
+}
