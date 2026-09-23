@@ -1,0 +1,17 @@
+{
+  "artifact_id": "JANUS-KUSTO-EMODNET-FOUR-BASIN-WFS-SOURCE-QUERY-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-EMODNET-FOUR-BASIN-SOURCE-FIRST-PREREG-2026-09-23-v1.0",
+  "prior_run": {
+    "github_actions_run_id": 35917595283,
+    "artifact_id": 10776325491,
+    "artifact_zip_sha256": "837333710e0d1ebc54abd5853fd8fa74388fcb148d125609230d2cd887772b3b"
+  },
+  "finding": "Current EMODnet source provenance layers are exposed as WFS feature types emodnet:source_references and emodnet:quality_index; WMS source candidate layer discovery returned none.",
+  "repair": {
+    "fixed_probe_points_changed": false,
+    "read_depth_values": false,
+    "query": "WFS GetFeature on emodnet:source_references and emodnet:quality_index using a small BBOX around each already-frozen point.",
+    "composite_dtm_independence_rule_changed": false
+  },
+  "status": "SOURCE_INTERFACE_REPAIR_ONLY"
+}
