@@ -1,0 +1,27 @@
+name: KUSTO Unseen PF0501 x EX2105 Source Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-cross-survey-validation-v1
+    paths:
+      - 'workspace/kusto_unseen_pf0501_ex2105_source_inventory.py'
+      - '.github/workflows/kusto-unseen-pf0501-ex2105-source-inventory.yml'
+  workflow_dispatch:
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Run frozen source-only inventory
+        run: python workspace/kusto_unseen_pf0501_ex2105_source_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-unseen-pf0501-ex2105-source-inventory-v1
+          path: workspace/kusto_cross_survey_out/JANUS-KUSTO-UNSEEN-MULTIBEAM-PF0501-X-EX2105-SOURCE-INVENTORY-RUN-2026-09-23-v1.0.json
+          retention-days: 30
