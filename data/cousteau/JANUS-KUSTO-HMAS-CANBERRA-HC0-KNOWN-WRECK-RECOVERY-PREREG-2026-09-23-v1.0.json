@@ -1,0 +1,50 @@
+{
+  "artifact_id": "JANUS-KUSTO-HMAS-CANBERRA-HC0-KNOWN-WRECK-RECOVERY-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_BATHYMETRY_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "dataset": {
+    "id": "AUSSEABED_EX_HMAS_CANBERRA_2020",
+    "source_url": "https://files.ausseabed.gov.au/survey/HMAS%20Canberra%20Bathymetry%202020%200.5m.zip",
+    "published_cell_m": 0.5,
+    "sensor": "KONGSBERG_EM2040C",
+    "survey_purpose": "MAP_EX_HMAS_CANBERRA_WRECK"
+  },
+  "discovery": {
+    "truth_visible": false,
+    "native_cell_m": 0.5,
+    "radii_m": [2,4,8,16],
+    "sampling_stride_m": 4,
+    "tail_quantile": 0.995,
+    "spatial_dedup_m": 25,
+    "maximum_candidates": 100,
+    "families": [
+      "RELIEF_ROUGHNESS",
+      "CURVATURE",
+      "RADIAL",
+      "LINEARITY",
+      "TERRACE_STEP",
+      "TOPOLOGIC"
+    ]
+  },
+  "truth_unlock": {
+    "authority": "PARKS_VICTORIA_DIVE_SITE_MOORING_BUOY_NO1_APPROXIMATE_WGS84",
+    "anchor_lat": -38.29993333333333,
+    "anchor_lon": 144.54318333333334,
+    "anchor_is_not_claimed_as_wreck_centroid": true,
+    "case_level_recovery_radius_m": 200,
+    "metrics": [
+      "nearest_candidate_distance_to_official_dive_site_anchor_m",
+      "nearest_candidate_blind_rank",
+      "candidate_count_within_200m"
+    ]
+  },
+  "hard_rules": [
+    "DISCOVERY_EXECUTOR_MUST_NOT_READ_TRUTH_ANCHOR",
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_MANUAL_CANDIDATE_INSERTION",
+    "TARGET_CENTRIC_SURVEY_CANNOT_SUPPORT_POPULATION_LOCALIZATION_CLAIM"
+  ],
+  "claim_ceiling": "CASE_LEVEL_KNOWN_OBJECT_RECOVERY_POSITIVE_CONTROL_ONLY"
+}
