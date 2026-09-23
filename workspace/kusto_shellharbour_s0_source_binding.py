@@ -33,12 +33,15 @@ for ft in root.iter():
         if row["name"]:fts.append(row)
 
 shell=[x for x in fts if "shellharbour" in (" ".join(x.values())).lower()]
-required_titles=PRE["source_resolution"]["required_feature_titles"]
+requirements={
+ "BATHYMETRY_2M":["shellharbour","bathymetry","2m","2017"],
+ "BACKSCATTER_5M":["shellharbour","backscatter","5m","2017"]
+}
 bindings={}
-for title in required_titles:
-    exact=[x for x in shell if x["title"].strip().lower()==title.strip().lower()]
+for role,tokens in requirements.items():
+    exact=[x for x in shell if all(t in (" ".join([x["name"],x["title"],x["abstract"]])).lower() for t in tokens)]
     if len(exact)!=1:
-        bindings[title]={"status":"NOT_UNIQUELY_RESOLVED","matches":exact}
+        bindings[role]={"status":"NOT_UNIQUELY_RESOLVED","tokens":tokens,"matches":exact}
         continue
     ft=exact[0]
     desc=get({"SERVICE":"WFS","REQUEST":"DescribeFeatureType","VERSION":"2.0.0","TYPENAMES":ft["name"]})
@@ -48,7 +51,7 @@ for title in required_titles:
         props=(fj.get("features") or [{}])[0].get("properties") or {}
     except Exception:
         fj=None;props={}
-    bindings[title]={
+    bindings[role]={
       "status":"RESOLVED",
       "feature_type":ft,
       "describe_url":desc.url,
