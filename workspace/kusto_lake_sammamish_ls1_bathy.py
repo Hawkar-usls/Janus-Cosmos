@@ -68,7 +68,8 @@ def load_bathy():
         if tfw is None:raise RuntimeError("no valid embedded transform and no world file")
         wvals,transform=world_affine(tfw);geo="WORLD_FILE"
     res=(abs(float(transform.a)),abs(float(transform.e)))
-    if max(abs(res[0]-CELL),abs(res[1]-CELL))>1e-6:raise RuntimeError(f"unexpected resolution {res}")
+    if max(abs(res[0]-CELL),abs(res[1]-CELL))/CELL>0.001:
+        raise RuntimeError(f"effective resolution outside frozen 0.1% nominal tolerance: {res}")
     return blob,z,valid,transform,{
       "zip_sha256":sha,"zip_md5_verified":md5,"zip_members":names,
       "tif_name":tifs[0],"tfw_name":tfws[0] if tfws else None,
@@ -93,7 +94,7 @@ if not np.any(valid):raise RuntimeError("no valid bathymetry cells")
 input_meta["zip_bytes"]=len(blob);input_meta["valid_cells"]=int(np.sum(valid))
 
 fill=float(np.median(z[valid]));zf=z.copy();zf[~valid]=fill
-maxpx=int(round(max(RADII)/CELL))
+maxpx=int(round(max(RADII)/CELL_EFF))
 rr,cc=np.indices(z.shape,dtype=np.int32)
 edge=np.minimum.reduce([rr,cc,nrows-1-rr,ncols-1-cc])
 del rr,cc;gc.collect()
@@ -102,7 +103,7 @@ else:dist=ndimage.distance_transform_edt(valid).astype(np.float32)
 inner=valid & (edge>=maxpx) & (dist>=maxpx)
 del edge,dist;gc.collect()
 
-step=max(1,int(round(STRIDE/CELL)))
+step=max(1,int(round(STRIDE/CELL_EFF)))
 rows=np.arange(maxpx,nrows-maxpx,step,dtype=np.int32)
 cols=np.arange(maxpx,ncols-maxpx,step,dtype=np.int32)
 R,C=np.meshgrid(rows,cols,indexing="ij")
@@ -115,7 +116,7 @@ all_flags=[];scale_summaries=[]
 
 for radius in RADII:
     print("LS1 radius",radius,flush=True)
-    rpx=max(1,int(round(radius/CELL)));size=2*rpx+1;sigma=max(1.0,rpx/3.0)
+    rpx=max(1,int(round(radius/CELL_EFF)));size=2*rpx+1;sigma=max(1.0,rpx/3.0)
     vals={}
 
     mean=ndimage.uniform_filter(zf,size=size,mode="nearest")
@@ -133,11 +134,11 @@ for radius in RADII:
     del zmax,zmin;gc.collect()
 
     smooth=ndimage.gaussian_filter(zf,sigma=sigma,mode="nearest",truncate=3.0)
-    lap=np.abs(ndimage.laplace(smooth,mode="nearest"))/(CELL*CELL)
+    lap=np.abs(ndimage.laplace(smooth,mode="nearest"))/(CELL_EFF*CELL_EFF)
     vals["abs_laplacian"]=lap[sr,sc].astype(np.float64)
     del lap;gc.collect()
 
-    gy,gx=np.gradient(smooth,CELL,CELL)
+    gy,gx=np.gradient(smooth,CELL_EFF,CELL_EFF)
     grad=np.hypot(gx,gy)
     vals["gradient_magnitude"]=grad[sr,sc].astype(np.float64)
     del grad,smooth;gc.collect()
