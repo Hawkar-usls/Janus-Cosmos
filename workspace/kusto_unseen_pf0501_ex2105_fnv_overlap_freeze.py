@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json,re,requests,time
+import json,re,requests,time,concurrent.futures
 from urllib.parse import urljoin
 from pathlib import Path
 from shapely.geometry import shape, LineString
@@ -67,18 +67,24 @@ survey={}
 for sid,root in ROOTS.items():
     files=collect_fnv(root)
     hits=[]; file_hits=[]
-    for k,u in enumerate(files,1):
+    def one(u):
         rr=parse_fnv(u)
-        if rr:
-            hits.extend(rr)
-            file_hits.append({
-              "fnv_url":u,
-              "fnv_file":u.rsplit("/",1)[-1],
-              "hit_rows":len(rr),
-              "epoch_min":min(x["epoch"] for x in rr),
-              "epoch_max":max(x["epoch"] for x in rr)
-            })
-        if k%50==0: print(sid,"scanned",k,"/",len(files),flush=True)
+        return u,rr
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
+        futs=[ex.submit(one,u) for u in files]
+        for k,fut in enumerate(concurrent.futures.as_completed(futs),1):
+            u,rr=fut.result()
+            if rr:
+                hits.extend(rr)
+                file_hits.append({
+                  "fnv_url":u,
+                  "fnv_file":u.rsplit("/",1)[-1],
+                  "hit_rows":len(rr),
+                  "epoch_min":min(x["epoch"] for x in rr),
+                  "epoch_max":max(x["epoch"] for x in rr)
+                })
+            if k%50==0: print(sid,"scanned",k,"/",len(files),flush=True)
+    file_hits.sort(key=lambda x:x["fnv_file"])
     survey[sid]={
       "fnv_files_discovered":len(files),
       "files_with_overlap_rows":len(file_hits),
@@ -91,6 +97,7 @@ for sid,root in ROOTS.items():
 
 out={
  "artifact_id":"JANUS-KUSTO-UNSEEN-PF0501-X-EX2105-FNV-OVERLAP-FREEZE-2026-09-23-v1.0",
+ "implementation":"v1.1_parallel_http_same_frozen_science",
  "parent_prereg":"data/cousteau/JANUS-KUSTO-UNSEEN-MULTIBEAM-PF0501-X-EX2105-SOURCE-INVENTORY-PREREG-2026-09-23-v1.0.json",
  "depth_values_read":False,
  "intersection_bounds":list(inter.bounds),
