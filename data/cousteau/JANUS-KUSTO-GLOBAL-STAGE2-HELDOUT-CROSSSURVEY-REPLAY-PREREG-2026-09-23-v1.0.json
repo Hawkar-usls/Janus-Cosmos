@@ -1,0 +1,173 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-STAGE2-HELDOUT-CROSSSURVEY-REPLAY-PREREG-2026-09-23-v1.0",
+  "created_utc": "2026-09-23T14:44:00Z",
+  "status": "FROZEN_BEFORE_ZHNG09RR_DEPTH_READ",
+  "parent_stage1_receipt": "data/cousteau/JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-RECEIPT-2026-09-23-v1.0.json",
+  "discovery_lineage": {
+    "survey_id": "FK140307",
+    "depth_already_used": true
+  },
+  "heldout_lineage": {
+    "survey_id": "ZHNG09RR",
+    "depth_already_used": false
+  },
+  "candidates": [
+    {
+      "id": "GLOBAL_R2_C001",
+      "lon": -161.87494434487382,
+      "lat": 23.235941430111392,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C002",
+      "lon": -161.67496339122195,
+      "lat": 23.114669421487605,
+      "radius_m": 1000
+    },
+    {
+      "id": "GLOBAL_R2_C003",
+      "lon": -161.73760802730567,
+      "lat": 23.182042759611928,
+      "radius_m": 2000
+    },
+    {
+      "id": "GLOBAL_R2_C004",
+      "lon": -160.80757612237042,
+      "lat": 22.68797161336687,
+      "radius_m": 500
+    },
+    {
+      "id": "GLOBAL_R2_C005",
+      "lon": -161.94240779911783,
+      "lat": 23.283102766798418,
+      "radius_m": 2000
+    },
+    {
+      "id": "GLOBAL_R2_C006",
+      "lon": -160.88226780385486,
+      "lat": 22.674496945742003,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C007",
+      "lon": -161.68701043662264,
+      "lat": 23.134881422924902,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C008",
+      "lon": -161.91108548107596,
+      "lat": 23.206746316924182,
+      "radius_m": 500
+    },
+    {
+      "id": "GLOBAL_R2_C009",
+      "lon": -161.71351393650423,
+      "lat": 23.14386453467481,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C010",
+      "lon": -157.95242636240087,
+      "lat": 21.246182177506288,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C011",
+      "lon": -160.94250303085843,
+      "lat": 22.712675170679123,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C012",
+      "lon": -160.4919435328717,
+      "lat": 22.519538268056056,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C013",
+      "lon": -158.08494386180874,
+      "lat": 21.24169062163133,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C014",
+      "lon": -161.6846010275425,
+      "lat": 23.08996586417535,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C015",
+      "lon": -160.4317083058681,
+      "lat": 22.479114265181458,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C016",
+      "lon": -160.2750967156588,
+      "lat": 22.389283147682356,
+      "radius_m": 500
+    },
+    {
+      "id": "GLOBAL_R2_C017",
+      "lon": -160.3521978062234,
+      "lat": 22.429707150556954,
+      "radius_m": 500
+    },
+    {
+      "id": "GLOBAL_R2_C018",
+      "lon": -161.8845819811944,
+      "lat": 23.258399209486164,
+      "radius_m": 1000
+    },
+    {
+      "id": "GLOBAL_R2_C019",
+      "lon": -160.91359012189673,
+      "lat": 22.712675170679123,
+      "radius_m": 250
+    },
+    {
+      "id": "GLOBAL_R2_C020",
+      "lon": -158.19095786133502,
+      "lat": 21.275377290693495,
+      "radius_m": 250
+    }
+  ],
+  "replay": {
+    "centers": "exact Stage1 frozen lon/lat",
+    "radii": "exact Stage1 frozen radius_m",
+    "recenter": false,
+    "rotation": false,
+    "scale_optimization": false,
+    "adaptive_cell_size_rule": "cell_m = max(25, radius_m/10)",
+    "per_cell": "median good-beam depth",
+    "comparison": "independent best-fit plane removed from each survey on identical common cells",
+    "minimum_common_cells": 30,
+    "minimum_good_beams_each_survey_within_radius": 100
+  },
+  "primary_pass_gate": {
+    "residual_pearson_min": 0.6,
+    "residual_spearman_min": 0.6,
+    "residual_sign_concordance_min": 0.65,
+    "all_required": true
+  },
+  "nuisance": {
+    "extreme_across_m": 5500,
+    "if_heldout_extreme_beam_fraction_gt_0p50": "NUISANCE_DOMINATED__NO_PROMOTION"
+  },
+  "verdicts": [
+    "CROSS_SURVEY_PERSISTENT",
+    "CROSS_SURVEY_FAIL",
+    "INSUFFICIENT_COMMON_SUPPORT",
+    "NUISANCE_DOMINATED__NO_PROMOTION"
+  ],
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_CANDIDATE_DROPPING",
+    "NO_THRESHOLD_RETUNING",
+    "NO_HELDOUT_REGION_WIDE_SELECTION",
+    "NO_KNOWN_FEATURE_LOOKUP_BEFORE_REPLAY",
+    "NO_ARTIFICIALITY_OR_ARCHAEOLOGY_CLAIM"
+  ],
+  "claim_ceiling": "CROSS_SURVEY_PERSISTENT_SEAFLOOR_MORPHOLOGY_ONLY"
+}
