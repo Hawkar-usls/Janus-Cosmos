@@ -1,0 +1,29 @@
+name: KUSTO Elizabeth Reef E0 Source
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_elizabeth_reef_e0_source.py'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-REEF-UNSEEN-V2-PREREG-2026-09-23-v1.0.json'
+      - '.github/workflows/kusto-elizabeth-reef-e0-source.yml'
+  workflow_dispatch:
+
+jobs:
+  e0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Resolve Elizabeth Reef paired sources without raster values
+        run: python workspace/kusto_elizabeth_reef_e0_source.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-elizabeth-reef-e0-source-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ELIZABETH-REEF-E0-SOURCE-BINDING-RUN-2026-09-23-v1.0.json
+          retention-days: 30
