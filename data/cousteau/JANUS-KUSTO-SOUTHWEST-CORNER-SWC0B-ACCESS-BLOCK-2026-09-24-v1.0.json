@@ -1,0 +1,21 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0B-ACCESS-BLOCK-2026-09-24-v1.0",
+  "status": "SOURCE_TRANSPORT_BLOCKED__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "source_pair_receipt": "JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-SOURCE-PAIR-RECEIPT-2026-09-24-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35921648234,
+    "failure": "HTTP_403_ON_CATALOG_CLOUDFRONT_BATHYMETRY_GEOTIFF_ZIP",
+    "failed_before_archive_member_inventory": true
+  },
+  "scientific_impact": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "candidate_generation_started": false,
+    "v2_changed": false,
+    "unseen_status_preserved": true
+  },
+  "rule": "Do not bypass, guess, or substitute a different product. Resolve a current authoritative route for GA-4858 before SWC1.",
+  "claim_ceiling": "SOURCE_ACCESS_BLOCK_ONLY"
+}
