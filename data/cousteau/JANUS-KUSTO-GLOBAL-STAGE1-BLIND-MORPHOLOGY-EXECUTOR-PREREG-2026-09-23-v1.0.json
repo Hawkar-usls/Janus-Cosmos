@@ -1,0 +1,58 @@
+{
+  "artifact_id":"JANUS-KUSTO-GLOBAL-STAGE1-BLIND-MORPHOLOGY-EXECUTOR-PREREG-2026-09-23-v1.0",
+  "created_utc":"2026-09-23T13:43:00Z",
+  "status":"FROZEN_BEFORE_STAGE0_REGION_LIST_IS_READ",
+  "parent":"data/cousteau/JANUS-KUSTO-GLOBAL-BLIND-ANOMALY-HUNT-PREREG-2026-09-23-v1.0.json",
+  "input_contract":{
+    "source":"JANUS-KUSTO-GLOBAL-NCEI-MULTISURVEY-OPPORTUNITY-MAP-2026-09-23-v1.0",
+    "consume_only_field":"stage1_regions",
+    "max_regions":100,
+    "region_order":"as emitted by frozen Stage0 ranking",
+    "no_region_substitution":true
+  },
+  "stage1_scope":{
+    "purpose":"coverage-bound blind morphology screening only",
+    "depth_sources":"only open measured bathymetry products associated with the frozen survey pair(s) for each region",
+    "candidate_centers":"mechanical regular grid clipped to common measured support",
+    "grid_spacing_m":250,
+    "radii_m":[250,500,1000,2000],
+    "minimum_measured_samples_per_patch":100
+  },
+  "metric_families":{
+    "RELIEF_ROUGHNESS":["p05_p95_relief","plane_rmse","quadratic_rmse"],
+    "CURVATURE":["hessian_eigenvalues","curvature_anisotropy"],
+    "RADIAL":["radial_r2","annular_contrast"],
+    "ANGULAR":["m2","m3","m4","m5","m6"],
+    "LINEARITY":["structure_tensor_anisotropy","dominant_lineament_strength"],
+    "TERRACE_STEP":["piecewise_plane_improvement","slope_break_strength"],
+    "TOPOLOGIC":["closed_contour_count","isolated_extremum_persistence"],
+    "GENERIC":["robust_multivariate_outlier_score"]
+  },
+  "instrument_nuisance":{
+    "model":"CD169 empirical calibrated nuisance V2",
+    "state":"CALIBRATED_NOT_YET_EXTERNALLY_VALIDATED",
+    "rule":"Candidates dominated by known outer-swath heavy-tail behavior are suppressed from promotion but preserved in receipts.",
+    "no_signed_bias_transfer_to_unseen_surveys":true
+  },
+  "discovery_rule":{
+    "per_survey_empirical_tail_fraction_each_side":0.005,
+    "one_vote_per_metric_family":true,
+    "followup":"two distinct structural-family votes at the same scale OR extreme generic multivariate score",
+    "spatial_dedup_radius_m":2000,
+    "max_candidates_per_region":20
+  },
+  "cross_survey_requirement":{
+    "stage1_candidate_is_not_persistent_yet":true,
+    "no_candidate_may_reach_CROSS_SURVEY_PERSISTENT_without_independent_replay":true
+  },
+  "hard_rules":[
+    "NO_VISUAL_SELECTION",
+    "NO_RECENTERING",
+    "NO_METRIC_RETUNING",
+    "NO_REGION_REORDERING_AFTER_STAGE0",
+    "NO_KNOWN_FEATURE_PROXIMITY_IN_SCORE",
+    "NO_ARTIFICIALITY_OR_ARCHAEOLOGY_CLASSIFICATION",
+    "FAILED_AND_ARTIFACT_LIKE_CANDIDATES_PRESERVED"
+  ],
+  "claim_ceiling":"GLOBAL_STAGE1_BLIND_MORPHOLOGY_CANDIDATE_GENERATION_ONLY"
+}
