@@ -1,0 +1,37 @@
+{
+  "artifact_id": "JANUS-KUSTO-MIAMI-KEYBISCAYNE-STREAMING-SOURCE-RECEIPT-2026-09-23-v1.0",
+  "status": "NEGATIVE_STREAMING_CAPABILITY__SCIENCEBASE_RANGE_UNSUPPORTED__NO_NUMERIC_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35890271906,
+    "head_sha": "a0d0f44718fe46603ab361ae02552579b9923069",
+    "conclusion": "success",
+    "artifact_id": 10764875374,
+    "artifact_zip_sha256": "52266475e326083ba6434aa42058cfb2ebf951c51de19fc8be6f7ac43bca239c"
+  },
+  "archives": {
+    "MIAMI_POCKMARK": {
+      "content_length_bytes": 624491811,
+      "range_request_status": 200,
+      "content_range": null,
+      "accept_ranges": null,
+      "verdict": "RANGE_UNSUPPORTED_OR_UNAVAILABLE"
+    },
+    "KEY_BISCAYNE_POCKMARK": {
+      "content_length_bytes": 804076038,
+      "range_request_status": 200,
+      "content_range": null,
+      "accept_ranges": null,
+      "verdict": "RANGE_UNSUPPORTED_OR_UNAVAILABLE"
+    }
+  },
+  "depth_values_read": false,
+  "numeric_member_payload_read": false,
+  "interpretation": "The ScienceBase endpoint ignored the requested byte range and advertised the full archive body. The preregistered source gate therefore refused to consume either 0.6-0.8 GB archive. This is an access/streaming limitation, not evidence about the seafloor or KUSTO detector.",
+  "next_options": [
+    "find an independently hosted smaller processed derivative or tiled subset with traceable provenance",
+    "use an archive/service that supports server-side spatial subsetting",
+    "perform an explicitly preregistered full-archive acquisition only if necessary and justified"
+  ],
+  "claim_ceiling": "ACCESS_CAPABILITY_NEGATIVE_ONLY__NO_SCIENTIFIC_DETECTOR_RESULT"
+}
