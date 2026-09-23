@@ -1,0 +1,56 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS3-POSTHOC-CONTROL-DEGENERACY-DIAGNOSTIC-2026-09-23-v1.0",
+  "status":"POSTHOC_DIAGNOSTIC_ONLY__FORMAL_BLOCKED_VERDICT_IMMUTABLE",
+  "formal_result":"JANUS-KUSTO-CROSS-SOUND-CS3-FORMAL-UNSEEN-RESULT-RECEIPT-2026-09-23-v1.0",
+  "source_artifact":{
+    "github_actions_run_id":35904716558,
+    "artifact_id":10771096045,
+    "artifact_zip_sha256":"8b75bddde0b81411e8ec7f0bfbfa3f81788b438fffdb0bf9d10439c271b9b8ee",
+    "output_json_sha256":"180743282dcc15887ab36e72b047b3042f42eeb19e3d177d78d3419045b267e2"
+  },
+  "observations":{
+    "backscatter_dtype":"uint8",
+    "embedded_nodata":null,
+    "valid_mask_fraction_under_executor":1.0,
+    "control_metric_medians_all_zero_all_radii":true,
+    "control_metric_mads_all_zero_all_radii":true,
+    "candidate_metrics_are_not_degenerate":true,
+    "candidate_metric_summaries":{
+      "40":{
+        "n":39,
+        "disk_standard_deviation":{"min":3.0332051026104865,"median":14.873701245980623,"max":95.12998625940344},
+        "center_annulus_contrast":{"min":0.0031013003347519037,"median":0.33905385358144213,"max":0.9161375646434051},
+        "q95_q05_range":{"min":6.8,"median":46.8,"max":242.0},
+        "edge_energy":{"min":2.0,"median":7.0,"max":56.0}
+      },
+      "80":{
+        "n":37,
+        "disk_standard_deviation":{"min":6.4583012454466955,"median":23.44402711083558,"max":80.7459345704219},
+        "center_annulus_contrast":{"min":0.019948259088941284,"median":0.1702506865364214,"max":0.9751869616485975},
+        "q95_q05_range":{"min":17.6,"median":73.6,"max":243.0},
+        "edge_energy":{"min":0.0,"median":7.0,"max":20.0}
+      },
+      "160":{
+        "n":21,
+        "disk_standard_deviation":{"min":10.363408018237479,"median":34.10677569372516,"max":68.37881829413082},
+        "center_annulus_contrast":{"min":0.006674604920542089,"median":0.2797946358650471,"max":0.7439107533012723},
+        "q95_q05_range":{"min":32.0,"median":95.0,"max":243.0},
+        "edge_energy":{"min":0.0,"median":8.0,"max":10.0}
+      },
+      "320":{
+        "n":3,
+        "disk_standard_deviation":{"min":27.14558306779925,"median":44.40032059039612,"max":60.83938412531634},
+        "center_annulus_contrast":{"min":0.04411697342062159,"median":0.5723974346944083,"max":0.5958994874628225},
+        "q95_q05_range":{"min":83.0,"median":199.0,"max":243.0},
+        "edge_energy":{"min":1.0,"median":5.0,"max":6.0}
+      }
+    }
+  },
+  "diagnosis":"The degeneracy is in the matched-control support domain, not in the frozen candidate backscatter patches. The current portability assumption that finite pixels plus embedded raster nodata define valid paired-channel support is falsified for this product.",
+  "future_method_requirement":{
+    "rule":"Before any future unseen paired-channel outcomes are read, freeze an eligible control domain derived from independent acquisition/support geometry (for example paired bathymetry support or an authoritative coverage mask), not from anomaly score outcomes and not from post-hoc value thresholds.",
+    "cross_sound_retest_for_promotion":false,
+    "cross_sound_role_after_diagnosis":"CALIBRATION_ONLY"
+  },
+  "claim_ceiling":"POSTHOC_METHOD_DIAGNOSTIC_ONLY"
+}
