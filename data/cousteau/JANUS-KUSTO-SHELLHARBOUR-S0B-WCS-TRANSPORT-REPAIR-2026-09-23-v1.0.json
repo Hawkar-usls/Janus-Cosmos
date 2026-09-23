@@ -1,0 +1,22 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHELLHARBOUR-S0B-WCS-TRANSPORT-REPAIR-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-SHELLHARBOUR-S0B-WCS-COVERAGE-RESOLUTION-PREREG-2026-09-23-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35916600123,
+    "failure_class": "CHUNKED_CAPABILITIES_RESPONSE_ENDED_PREMATURELY",
+    "getcoverage_called": false,
+    "raster_values_read": false
+  },
+  "repair": {
+    "skip_full_getcapabilities": true,
+    "basis": "Exact Shellharbour product layer IDs were already frozen by successful WFS run 35916434556.",
+    "coverage_ids_to_probe": {
+      "BATHYMETRY_2M": "ausseabed:NSW_Shellharbour_Tharawal_02203_Bathymetry__2m___2-5m_2017_L0_Coverage",
+      "BACKSCATTER_5M": "ausseabed:NSW_Shellharbour_Tharawal_02203_Backscatter_Wide__5m__5m_2017_L0_Coverage"
+    },
+    "request": "DescribeCoverage only",
+    "method_v2_changed": false,
+    "dataset_changed": false
+  },
+  "status": "TRANSPORT_REPAIR_ONLY__UNSEEN_STATUS_PRESERVED"
+}
