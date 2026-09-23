@@ -1,0 +1,23 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-SAMMAMISH-LS0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_BATHY_AND_BACKSCATTER_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35892901523,
+    "artifact_id": 10766020954,
+    "artifact_zip_sha256": "2f07dc5ea553823af578d85a6339b87704beff019d5fecee016cb43c9446eb91"
+  },
+  "bathy": {
+    "url": "https://cmgds.marine.usgs.gov/data-releases/media/2024/10.5066-P1YKDHGC/0c675d09dee24b5ea9b74feacdc3d85c/LakeSammamish_USGS_2021_2m_bathymetry_UTM10_NAD83_NAVD88.zip",
+    "bytes": 15072500,
+    "md5": "ea7dda3d2f13ac20f57bcbbbb84251e4"
+  },
+  "backscatter": {
+    "url": "https://cmgds.marine.usgs.gov/data-releases/media/2024/10.5066-P1YKDHGC/30e03565646145adae690f5a58379647/LakeSammamish_USGS_2021_2m_backscatter_UTM10_NAD83.zip",
+    "bytes": 15927861,
+    "md5": "affe7d28cbc649214031916e6f82bc0e"
+  },
+  "raster_values_read": false,
+  "next_gate": "LS1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "SOURCE_AND_FILE_IDENTITY_BINDING_ONLY"
+}
