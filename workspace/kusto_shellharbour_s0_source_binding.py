@@ -7,7 +7,8 @@ import requests
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"workspace"/"kusto_global_groundtruth_out";OUT.mkdir(parents=True,exist_ok=True)
 PRE=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-SOURCE-BINDING-PREREG-2026-09-23-v1.0.json").read_text())
-WFS=PRE["source_resolution"]["wfs"]
+REP=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-SHELLHARBOUR-S0-ENDPOINT-REPAIR-2026-09-23-v1.0.json").read_text())
+WFS=REP["repair"]["new_endpoint"]
 UA={"User-Agent":"JANUS-KUSTO-Shellharbour-S0-source/1.0"}
 S=requests.Session();S.headers.update(UA)
 
