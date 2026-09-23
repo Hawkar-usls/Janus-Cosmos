@@ -1,0 +1,14 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-VALIDITY-ADDENDUM-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-REPLAY-PREREG-2026-09-23-v1.0",
+  "status": "FROZEN_BEFORE_BACKSCATTER_VALUE_READ",
+  "reason": "The public metadata reports an intensity raster with minimum value 0 but does not provide a separate nodata value in the source summary. Freeze validity handling before execution rather than infer it after seeing candidate outcomes.",
+  "validity_rule": {
+    "valid_pixel": "native raster mask valid AND finite AND value > 0",
+    "patch_margin": "candidate/control center must be at least 2 * frozen radius from raster edge",
+    "minimum_valid_fraction": 0.80,
+    "no_distribution_based_nodata_inference": true
+  },
+  "hard_rule": "VALIDITY_MASK_CANNOT_CHANGE_AFTER_REPLAY_RESULTS",
+  "claim_ceiling": "GOVERNANCE_ONLY"
+}
