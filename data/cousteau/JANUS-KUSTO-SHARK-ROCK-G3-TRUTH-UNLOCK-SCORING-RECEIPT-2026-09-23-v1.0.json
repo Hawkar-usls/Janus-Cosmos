@@ -1,0 +1,39 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-G3-TRUTH-UNLOCK-SCORING-RECEIPT-2026-09-23-v1.0",
+  "status": "SINGLE_SURVEY_CASE_LEVEL_RECOVERY_ONLY__NO_CROSS_SURVEY_RECOVERY",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35890574659,
+    "head_sha": "745d7bd10ca324afb031563a3069f5c439055ff0",
+    "conclusion": "success",
+    "artifact_id": 10764577705,
+    "artifact_zip_sha256": "b87f7e08a18b14132235f8938b73b0dcd207060beed62fc5b2fbae2ec02323ae"
+  },
+  "g2b_authority": {
+    "artifact_id": 10764382862,
+    "artifact_zip_sha256": "5dbfe527154313c2625bb60fbdc819ed7b835ce52af3f37d151fce0072f795af",
+    "candidate_json_sha256": "459b43f016b18599376bf3ffb6a7872275523c9402234ac9fc01e2c73455e83d",
+    "candidate_total": 400,
+    "persistent_cluster_count": 9
+  },
+  "truth": {
+    "benchmark": "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
+    "semantic_truth": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK"
+  },
+  "per_survey": {
+    "EX1203": {"nearest_candidate_distance_m": 7339.894768000026, "nearest_blind_rank": 72, "truth_supported": false},
+    "EX1805": {"nearest_candidate_distance_m": 3198.501658326631, "nearest_blind_rank": 31, "truth_supported": false},
+    "EX1903L2": {"nearest_candidate_distance_m": 17.997769244929092, "nearest_blind_rank": 58, "truth_supported": true},
+    "EX2102": {"nearest_candidate_distance_m": 3503.1345824390646, "nearest_blind_rank": 80, "truth_supported": false}
+  },
+  "cross_survey": {
+    "supporting_survey_count": 1,
+    "supporting_surveys": ["EX1903L2"],
+    "nearest_persistent_cluster_distance_m": 5432.736338986725,
+    "truth_supported_by_persistent_cluster": false
+  },
+  "interpretation": "The frozen blind detector recovered the ROV-confirmed natural feature in the EX1903L2 survey at about 18 m center distance, but did not recover it in the other frozen survey candidate lists and produced no persistent cluster supporting the truth. Therefore this benchmark demonstrates one case-level recovery only, not cross-survey repeatability.",
+  "semantic_firewall": "ROV ground truth establishes natural rock outcrops; morphology cannot be promoted to shipwreck or artificial structure.",
+  "next_gate": "POSTHOC_TRUTH_POINT_ELIGIBILITY_AND_METRIC_RANK_DIAGNOSTIC__NO_PROMOTION",
+  "claim_ceiling": "CASE_LEVEL_BLIND_RECOVERY_IN_ONE_SURVEY_ONLY"
+}
