@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-KUSTO-MAUI-PUUNUA-M0-SOURCE-BINDING-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_EXACT_PUUNUA_PAIR_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-MAUI-PUUNUA-UNSEEN-DUALCHANNEL-V2-PREREG-2026-09-23-v1.0",
+  "source_repair": "JANUS-KUSTO-MAUI-PUUNUA-M0-SOURCE-BINDING-REPAIR-2026-09-23-v1.0",
+  "run": {
+    "github_actions_run_id": 35911425486,
+    "head_sha": "c504615aab27fdd40ba612656e1f09b79aceade6",
+    "conclusion": "success",
+    "artifact_id": 10773261869,
+    "artifact_zip_sha256": "100c7ce244797aff9c091fa8d89a078d1b8a7c8a62445d3a95ba9d9f92957994"
+  },
+  "selected_site": "PUUNUA_POINT__USGS_METADATA_SPELLING_PUUNOA",
+  "files": {
+    "bathymetry": {
+      "url": "https://cmgds.marine.usgs.gov/data-releases/media/2023/10.5066-P9XJLL6C/404376c775ec4e68856f636071789c06/PuunoaPt_1m_bathymetry_UTM04_WGS84_MLLW.zip",
+      "nominal_cell_m": 1.0,
+      "published_rows": 1991,
+      "published_columns": 1541
+    },
+    "backscatter": {
+      "url": "https://cmgds.marine.usgs.gov/data-releases/media/2023/10.5066-P9XJLL6C/7aa93991368d4555b4c0d0377d9d8ae5/PuunoaPt_1m_backscatter_UTM04_WGS84.zip",
+      "nominal_cell_m": 1.0
+    }
+  },
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "numeric_zip_body_read_in_source_binding": false,
+    "site_switched": false
+  },
+  "next_gate": "M1_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "SOURCE_FILE_BINDING_ONLY"
+}
