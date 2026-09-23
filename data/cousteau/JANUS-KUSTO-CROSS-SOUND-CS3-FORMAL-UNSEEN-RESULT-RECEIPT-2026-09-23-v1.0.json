@@ -1,0 +1,51 @@
+{
+  "artifact_id":"JANUS-KUSTO-CROSS-SOUND-CS3-FORMAL-UNSEEN-RESULT-RECEIPT-2026-09-23-v1.0",
+  "status":"FORMAL_PRIMARY_BLOCKED__ALL_RADIUS_STRATA_DEGENERATE_METRICS",
+  "branch":"feature/kusto-global-groundtruth-calibration-v1",
+  "prereg":"JANUS-KUSTO-CROSS-SOUND-ALASKA-UNSEEN-DUALCHANNEL-PREREG-2026-09-23-v1.0",
+  "candidate_authority":{
+    "receipt":"JANUS-KUSTO-CROSS-SOUND-CS1-BLIND-BATHYMETRY-RECEIPT-2026-09-23-v1.0",
+    "artifact_id":10769594982,
+    "artifact_zip_sha256":"195a808af4b27ddedae049f7efbd938a99b1bee7fd17bc40c574dcf522f306dc",
+    "candidate_json_sha256":"c952212b98ef9bfa055270189fb9d4629d8e539c1cb7991c50a516dc7eb58793",
+    "frozen_candidates":100
+  },
+  "cs2_run":{
+    "github_actions_run_id":35904716558,
+    "head_sha":"4149479182f543c691fc450e696aa7bc02b75f8a",
+    "conclusion":"success",
+    "artifact_id":10771096045,
+    "artifact_zip_sha256":"8b75bddde0b81411e8ec7f0bfbfa3f81788b438fffdb0bf9d10439c271b9b8ee",
+    "output_json_sha256":"180743282dcc15887ab36e72b047b3042f42eeb19e3d177d78d3419045b267e2"
+  },
+  "backscatter_input":{
+    "shape":[6741,5632],
+    "dtype":"uint8",
+    "embedded_nodata":null,
+    "valid_pixels_under_native_mask_rule":37965312,
+    "total_pixels":37965312,
+    "resolution_m":[10,10],
+    "crs":"EPSG:32608",
+    "payload_sha256":"e4143f046e076eb33f5084c484585dc848f20fe8221e4683edb2db8b73da3a90"
+  },
+  "primary_result":{
+    "scorable_candidates_after_stratum_admission":0,
+    "blocked_strata":{
+      "40":"DEGENERATE_METRICS_BLOCKED",
+      "80":"DEGENERATE_METRICS_BLOCKED",
+      "160":"DEGENERATE_METRICS_BLOCKED",
+      "320":"DEGENERATE_METRICS_BLOCKED"
+    },
+    "permutation_test_run":false,
+    "scientific_promotion":false
+  },
+  "control_degeneracy":{
+    "all_four_metrics_control_median_zero_at_all_radii":true,
+    "all_four_metrics_control_mad_zero_at_all_radii":true,
+    "active_metrics_per_radius":0
+  },
+  "interpretation":"The preregistered Cross Sound validation is blocked, not passed. The backscatter raster has no embedded nodata mask, while the current control sampler treated every finite raster pixel as valid. This produced a degenerate control population. No post-hoc support-mask repair may convert this run into a validation pass.",
+  "calibration_value":"Cross Sound exposes a previously hidden portability requirement: paired-channel validation must define the eligible control-support domain independently of backscatter anomaly values, rather than assuming the raster's embedded nodata metadata supplies a usable acquisition mask.",
+  "next_use":"CALIBRATION_ONLY_FOR_FUTURE_PAIRED_SUPPORT_DOMAIN_RULE",
+  "claim_ceiling":"FORMAL_BLOCKED_UNSEEN_OPEN_OCEAN_VALIDATION__NO_CROSSCHANNEL_PROMOTION"
+}
