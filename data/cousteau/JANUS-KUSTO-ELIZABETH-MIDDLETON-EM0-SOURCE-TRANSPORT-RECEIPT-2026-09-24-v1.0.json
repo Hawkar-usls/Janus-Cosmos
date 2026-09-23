@@ -1,0 +1,44 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-SOURCE-TRANSPORT-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_BATHYMETRY_AND_BACKSCATTER_CURRENT_ROUTES_BOUND__NO_BODIES_CONSUMED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EM0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 35932629001,
+    "artifact_id": 10782031048,
+    "artifact_zip_sha256": "236022699583af2bef659840aba4d5a7ab4111a570236283f1b12339fd08bc48"
+  },
+  "survey_identity": {
+    "survey_id": "GA4848",
+    "platform": "TV Bluefin",
+    "sensor": "KONGSBERG_EM2040C_HD_300_KHZ",
+    "bathymetry_nominal_cell_m": 5
+  },
+  "current_resources": {
+    "bathymetry": {
+      "resource_id": "d369bb99-0b3b-4b8b-8f7e-88fe19e8e5d5",
+      "resource_name": "Elizabeth Middleton Reef Bathymetry 2020 5m (zip) [68.3 MB]",
+      "url": "https://files.ausseabed.gov.au/survey/Elizabeth%20Middleton%20Reef%20Bathymetry%202020%205m.zip",
+      "range_status": 206,
+      "content_range": "bytes 0-0/71699530",
+      "declared_total_bytes": 71699530
+    },
+    "backscatter": {
+      "resource_id": "08ecbb1f-9035-42d7-85e3-b2eaeffa32d1",
+      "resource_name": "Download the geotifs [13.7 MB]",
+      "url": "https://d28rz98at9flks.cloudfront.net/144416/144416_00_0.zip",
+      "range_status": 206,
+      "content_range": "bytes 0-0/14401549",
+      "declared_total_bytes": 14401549
+    }
+  },
+  "truth_firewall": {
+    "response_bodies_consumed": false,
+    "raster_values_read": false,
+    "auv_imagery_read": false,
+    "sediment_labels_read": false,
+    "bruv_imagery_read": false
+  },
+  "next_gate": "EM0B_ARCHIVE_MEMBER_HASH_INVENTORY_ONLY",
+  "claim_ceiling": "SOURCE_TRANSPORT_BINDING_ONLY"
+}
