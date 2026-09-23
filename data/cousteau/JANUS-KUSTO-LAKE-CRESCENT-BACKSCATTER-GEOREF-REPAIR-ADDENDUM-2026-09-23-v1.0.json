@@ -1,0 +1,39 @@
+{
+  "artifact_id": "JANUS-KUSTO-LAKE-CRESCENT-BACKSCATTER-GEOREF-REPAIR-ADDENDUM-2026-09-23-v1.0",
+  "parent_prereg": "JANUS-KUSTO-LAKE-CRESCENT-3M-BACKSCATTER-REPLAY-PREREG-2026-09-23-v1.0",
+  "failed_run": {
+    "github_actions_run_id": 35888570709,
+    "head_sha": "0717c9560829007edd6d4f477a704b5f7c6c211d",
+    "failure": "Rasterio opened TIFF with identity transform and the executor stopped at Unexpected backscatter cell size (1.0, 1.0) before candidate scoring or population statistics."
+  },
+  "external_format_authority": {
+    "usgs_metadata": "https://cmgds.marine.usgs.gov/catalog/pcmsc/DataReleases/ScienceBase/DR_F7B56GW5/LakeCrescent_backscatter_3m_UTM10_NAD83.html",
+    "documented_zip_contents": ["TIFF image", "projection world file .tfw", "XML metadata"],
+    "documented_format": "geoTIFF with external projection world file",
+    "coordinate_system": "UTM Zone 10 / NAD83 as frozen in product identity"
+  },
+  "repair_only": {
+    "extract_tfw_from_existing_frozen_zip": true,
+    "world_file_order": ["A", "D", "B", "E", "C", "F"],
+    "convert_pixel_center_worldfile_to_raster_corner_affine": true,
+    "expected_absolute_cellsize_m": 3,
+    "fallback_crs_when_tiff_has_none": "EPSG:26910"
+  },
+  "immutable_from_parent": [
+    "candidate artifact and hashes",
+    "100 frozen bathymetry candidates",
+    "candidate coordinates",
+    "candidate radii",
+    "valid pixel rule",
+    "backscatter metrics",
+    "control RNG seed",
+    "control counts and exclusion distance",
+    "aggregate score",
+    "q95 support threshold",
+    "permutation test and alpha",
+    "claim ceiling"
+  ],
+  "epistemic_note": "The failed implementation loaded raster bytes before discovering missing embedded geotransform, so this repair is not described as occurring before first byte/value access. No candidate metrics, candidate outcomes, control outcomes, or population statistics were produced by the failed run. The repair is restricted to applying the externally documented world file.",
+  "status": "IMPLEMENTATION_REPAIR_FROZEN_BEFORE_FIRST_SCIENTIFIC_REPLAY_RESULT",
+  "claim_ceiling": "GOVERNANCE_AND_GEOREFERENCE_REPAIR_ONLY"
+}
