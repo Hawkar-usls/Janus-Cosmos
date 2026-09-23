@@ -1,0 +1,30 @@
+name: KUSTO South-west Corner SWC0C Route Recovery
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_southwest_corner_swc0c_route_recovery.py'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC0-UNCHANGED-V2-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOUTHWEST-CORNER-SWC0B-ACCESS-BLOCK-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-southwest-corner-swc0c-route-recovery.yml'
+  workflow_dispatch:
+
+jobs:
+  swc0c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Recover current authoritative GA-4858 data routes without raster bodies
+        run: python workspace/kusto_southwest_corner_swc0c_route_recovery.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-southwest-corner-swc0c-route-recovery-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOUTHWEST-CORNER-SWC0C-CURRENT-ROUTE-RECOVERY-2026-09-24-v1.0.json
+          retention-days: 30
