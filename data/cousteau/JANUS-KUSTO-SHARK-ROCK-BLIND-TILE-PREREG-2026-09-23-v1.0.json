@@ -1,0 +1,55 @@
+{
+  "artifact_id": "JANUS-KUSTO-SHARK-ROCK-BLIND-TILE-PREREG-2026-09-23-v1.0",
+  "schema": "janus.cosmos.kusto.blind_tile.prereg.v1",
+  "created_date": "2026-09-23",
+  "parent_benchmark": "JANUS-KUSTO-GLOBAL-GROUNDTRUTH-BENCHMARK-PREREG-2026-09-23-v1.0",
+  "benchmark_id": "NOAA_EX1903L2_DIVE07_SHARK_ROCK",
+  "truth_visible_to_detector": false,
+  "tile_rule": "Quarter-degree geographic tile containing the benchmark truth; tile edges are floor(lon/0.25)*0.25 and floor(lat/0.25)*0.25. Detector receives tile only, never the truth point.",
+  "blind_tile": {
+    "lon_min": -79.25,
+    "lon_max": -79.0,
+    "lat_min": 31.5,
+    "lat_max": 31.75
+  },
+  "survey_ids": ["EX1203", "EX1805", "EX1903L2", "EX2102"],
+  "survey_roles": {
+    "EX1903L2": "GROUNDTRUTH_EPOCH_BUT_BATHYMETRY_MAY_BE_USED_BLIND_WITH_ROV_TRUTH_WITHHELD",
+    "EX1203": "INDEPENDENT_EARLIER_REPLAY",
+    "EX1805": "INDEPENDENT_EARLIER_REPLAY",
+    "EX2102": "INDEPENDENT_LATER_REPLAY"
+  },
+  "stage_g1": {
+    "reads": ["survey metadata", "FNV/navigation geometry", "instrument names"],
+    "forbids": ["bathymetric depth", "ROV truth coordinate", "ROV interpretation", "video/stills"],
+    "outputs": ["tile-intersecting source files", "navigation support", "instrument/year lineage"]
+  },
+  "stage_g2_scale_freeze": {
+    "rule": "Infer characteristic along-track/across-track sampling only from blind survey data, then freeze a common physical radius ladder before truth unlock.",
+    "radius_multiplier_candidates": [4, 8, 16, 32],
+    "min_radius_m": 25,
+    "max_radius_m": 2000,
+    "no_best_radius_after_truth": true
+  },
+  "stage_g2_discovery": {
+    "candidate_cap_per_survey": 100,
+    "spatial_dedup_m": 100,
+    "morphology_families": ["RELIEF_ROUGHNESS", "CURVATURE", "RADIAL", "ANGULAR", "LINEARITY", "TERRACE_STEP", "TOPOLOGIC"],
+    "truth_read": false
+  },
+  "stage_g3_scoring": {
+    "truth_unlock_only_after_candidate_files_are_hashed": true,
+    "primary_case_metrics": ["nearest_candidate_distance_m", "candidate_rank_percentile", "cross_epoch_persistence_count"],
+    "semantic_rule": "Natural-rock truth can validate anomaly detection and false-artificiality rejection; it cannot validate anthropogenic classification."
+  },
+  "hard_rules": [
+    "NO_TRUTH_COORDINATE_IN_DETECTOR_INPUT",
+    "NO_RECENTERING",
+    "NO_POSTHOC_SCALE_SELECTION",
+    "NO_THRESHOLD_RETUNING",
+    "FOOTPRINT_INTERSECTION_NE_BEAM_COVERAGE",
+    "MORPHOLOGY_NE_ARTIFICIALITY"
+  ],
+  "status": "G1_SOURCE_INVENTORY_AUTHORIZED",
+  "claim_ceiling": "BLIND_BENCHMARK_DESIGN_ONLY"
+}
