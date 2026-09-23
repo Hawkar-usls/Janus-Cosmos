@@ -1,0 +1,83 @@
+{
+  "artifact_id": "JANUS-KUSTO-GLOBAL-GROUNDTRUTH-SOURCE-GATE-RECEIPT-2026-09-23-v1.0",
+  "status": "PASS_SOURCE_BINDING__SHARK_ROCK_MULTISURVEY_OPPORTUNITY",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 35885850088,
+    "head_sha": "f6b12667a50e8a8829bda06286d2e6d4189e97aa",
+    "conclusion": "success",
+    "artifact_id": 10762453603,
+    "artifact_zip_sha256": "8c4cfe9a94e0eccb0164d71e1a18f084643c293d3d94dcb1d390fc7ff06da85b"
+  },
+  "scientific_state": {
+    "depth_values_read": false,
+    "detector_run": false,
+    "truth_scoring_run": false
+  },
+  "shark_rock": {
+    "truth_coordinate": {"lat": 31.59517078, "lon": -79.10225958},
+    "rov_truth": "NATURAL_ROCK_OUTCROPS__NOT_SHIPWRECK",
+    "exact_ncei_multibeam_footprint_covering_survey_ids": [
+      "EX1203",
+      "EX1805",
+      "EX1903L2",
+      "EX2102"
+    ],
+    "footprint_feature_count": 6,
+    "survey_metadata": [
+      {
+        "survey_id": "EX1203",
+        "year": 2012,
+        "platform": "NOAA Ship OKEANOS EXPLORER (R337)",
+        "instrument": "Simrad EM302",
+        "ncei_id": "NEW1721"
+      },
+      {
+        "survey_id": "EX1805",
+        "year": 2018,
+        "platform": "NOAA Ship OKEANOS EXPLORER (R337)",
+        "instrument": "Kongsberg EM302",
+        "ncei_id": "NEW2655"
+      },
+      {
+        "survey_id": "EX1903L2",
+        "year": 2019,
+        "platform": "NOAA Ship OKEANOS EXPLORER (R337)",
+        "instrument": "Kongsberg EM302",
+        "ncei_id": "NEW2936"
+      },
+      {
+        "survey_id": "EX2102",
+        "year": 2021,
+        "platform": "NOAA Ship OKEANOS EXPLORER (R337)",
+        "instrument": "Kongsberg EM304",
+        "ncei_id": "NEW3558"
+      }
+    ],
+    "interpretation": "The ROV-groundtruthed natural target lies inside four NCEI multibeam survey footprints spanning 2012-2021. This creates a strong temporal cross-survey benchmark opportunity. Footprint overlap alone is not ping/beam insonification proof."
+  },
+  "authority_probe": {
+    "reachable": 13,
+    "total": 15,
+    "nonreachable": [
+      {
+        "source": "AusSeabed",
+        "http_status": 403,
+        "interpretation": "ACCESS_POLICY_OR_AUTOMATION_BLOCK__NOT_DATA_ABSENCE"
+      },
+      {
+        "source": "NCEI_EX1106_METADATA_LANDING_PAGE",
+        "http_status": 503,
+        "interpretation": "SERVICE_FAILURE__NOT_SURVEY_ABSENCE"
+      }
+    ]
+  },
+  "frozen_role_assignment_for_next_gate": {
+    "EX1203": "DISCOVERY_CANDIDATE",
+    "EX1805": "HELDOUT_PRE_TRUTH_REPLICATION_CANDIDATE",
+    "EX1903L2": "GROUNDTRUTH_ERA__DO_NOT_USE_TO_TUNE_DISCOVERY",
+    "EX2102": "HELDOUT_POST_TRUTH_DIFFERENT_INSTRUMENT_REPLICATION_CANDIDATE"
+  },
+  "next_gate": "SHARK_ROCK_FNV_MEASURED_SUPPORT_BINDING__NO_DEPTH_READ",
+  "claim_ceiling": "SOURCE_AND_FOOTPRINT_BINDING_ONLY__NO_MORPHOLOGY_UTILITY_PROMOTION"
+}
