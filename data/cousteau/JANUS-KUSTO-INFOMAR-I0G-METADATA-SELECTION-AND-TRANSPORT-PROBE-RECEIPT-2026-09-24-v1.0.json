@@ -1,0 +1,28 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0G-METADATA-SELECTION-AND-TRANSPORT-PROBE-RECEIPT-2026-09-24-v1.0",
+  "status": "SEALED_PASS__PAIRED_INFOMAR_ARCHIVES_RANGE_ACCESSIBLE",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "source_commit": "f6b51b01bdcdd90648515667fa30dc34f87dd461",
+  "github_actions_run_id": 36011320751,
+  "workflow_artifact_id": 10812517309,
+  "workflow_artifact_sha256": "e2cc66cab21f3a99344cf5ecad77e6686d89a2b71321a122ec0e62ddeddcb487",
+  "selection_rule_freeze": "JANUS-KUSTO-INFOMAR-I0F-SURVEY-SELECTION-RULE-FREEZE-2026-09-24-v1.0",
+  "eligible_row_count": 242,
+  "selected_row": {
+    "OBJECTID": 801,
+    "SURVEY_ID": "CB13_02",
+    "VESSELNAME": "Cosantoir Bradan",
+    "SURVEYYEAR": 2013,
+    "GRID_URL": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BY_CB13_02_DundalkBay_5m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+    "BS_URL": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BS_CB13_02_DundalkBay_1m_WGS84_LAT_TIFF_Inshore_Ireland.zip"
+  },
+  "transport": {
+    "bathymetry": {"status": 206, "archive_size_bytes": 9950717},
+    "backscatter": {"status": 206, "archive_size_bytes": 200011594}
+  },
+  "both_routes_usable": true,
+  "raster_pixels_read": false,
+  "archive_bodies_consumed": false,
+  "next_gate": "I0H_ARCHIVE_MEMBER_INVENTORY_ONLY",
+  "claim_ceiling": "INFOMAR_METADATA_SELECTION_AND_TRANSPORT_HEADERS_ONLY"
+}
