@@ -1,0 +1,39 @@
+name: KUSTO INFOMAR I1H CB13_03 Unchanged V2 Replay
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i1h_cb1303_support_domain_v2.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1H-CB13_03-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-25-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1G-CB13_03-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-25-v1.0.json'
+      - '.github/workflows/kusto-infomar-i1h-cb1303-support-domain-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  i1h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ensure Deflate64 extractor
+        run: which 7z || (sudo apt-get update && sudo apt-get install -y p7zip-full)
+      - run: pip install --disable-pip-version-check requests rasterio numpy scipy pyproj
+      - name: Run frozen CB13_03 paired-support-domain v2 replay
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python workspace/kusto_infomar_i1h_cb1303_support_domain_v2.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i1h-cb1303-support-domain-v2-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I1H-CB13_03-UNSEEN-BACKSCATTER-V2-RUN-2026-09-25-v1.0.json
+          retention-days: 30
