@@ -30,7 +30,7 @@ def dl(layer,path):
           r.raise_for_status()
           b=r.content
           # TIFF little/big endian magic
-          if b[:4] in (b"II*\\x00",b"MM\\x00*"):
+          if b[:4] in (b"II*"+bytes([0]), b"MM"+bytes([0])+b"*"):
             path.write_bytes(b)
             return {"url":r.url,"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest(),
                     "content_type":r.headers.get("content-type"),"attempts":attempts}
