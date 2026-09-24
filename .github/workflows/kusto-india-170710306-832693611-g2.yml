@@ -1,0 +1,24 @@
+name: KUSTO India Coordinate G2 GEBCO2026
+on:
+  push:
+    branches: [feature/kusto-global-groundtruth-calibration-v1]
+    paths:
+      - 'workspace/kusto_india_170710306_832693611_g2.py'
+      - 'data/cousteau/JANUS-KUSTO-INDIA-170710306N-832693611E-G2-GEBCO2026-PREREG-2026-09-25-v1.0.json'
+      - '.github/workflows/kusto-india-170710306-832693611-g2.yml'
+  workflow_dispatch:
+jobs:
+  g2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install --disable-pip-version-check requests rasterio numpy pyproj matplotlib
+      - run: python workspace/kusto_india_170710306_832693611_g2.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-india-170710306-832693611-g2-v1
+          path: workspace/kusto_global_groundtruth_out/india_g2/
+          retention-days: 30
