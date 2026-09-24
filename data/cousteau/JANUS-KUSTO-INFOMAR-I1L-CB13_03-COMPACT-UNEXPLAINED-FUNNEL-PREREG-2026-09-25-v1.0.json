@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1L-CB13_03-COMPACT-UNEXPLAINED-FUNNEL-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_BATCH_TARGET_CENTERED_MORPHOLOGY_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parents": [
+    "JANUS-KUSTO-INFOMAR-I1I-CB13_03-FORMAL-UNSEEN-V2-PASS-RECEIPT-2026-09-25-v1.0",
+    "JANUS-KUSTO-INFOMAR-I1J-CB13_03-EXTREME-UNEXPLAINED-TRIAGE-RECEIPT-2026-09-25-v1.0",
+    "JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-CHARACTERIZATION-RECEIPT-2026-09-25-v1.0"
+  ],
+  "candidate_pool": "All 35 cross-channel-supported CB13_03 candidates, preserving frozen aggregate-score descending order.",
+  "eligibility_before_morphology": [
+    "no GSI mapped wreck within 500 m",
+    "no NMS located wreck within 500 m",
+    "official FOLK_5 class is not Rock; Unclassified is allowed but remains uncertainty, not evidence of non-rock"
+  ],
+  "morphology_algorithm": "Exactly the I1K bathymetry source-value definitions and raster-line artefact checks applied identically to every eligible candidate.",
+  "compact_survivor_requires_all": [
+    "valid_fraction_100m >= 0.95",
+    "half_relief_component does not touch +/-100 m window",
+    "half_relief_equivalent_diameter_m >= 4",
+    "half_relief_equivalent_diameter_m <= 100",
+    "distance from frozen target to selected local extremum <= max(20 m, 2*frozen_radius)",
+    "not POSSIBLE_RASTER_LINE_ARTEFACT"
+  ],
+  "selection_rule": "Select the first compact survivor in frozen aggregate-score order. If none survives, report NO_COMPACT_UNEXPLAINED_SURVIVOR and do not hand-pick another.",
+  "c002_handling": "C002 remains in accounting but is a pre-existing BROAD_GEOLOGIC_RELIEF fail and cannot be selected.",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_MANUAL_VISUAL_SELECTION",
+    "NO_IDENTITY_FROM_SHAPE",
+    "NO_REORDERING_AFTER_RESULTS"
+  ],
+  "claim_ceiling": "POSTRESULT_COMPACT_UNEXPLAINED_TARGET_FUNNEL_ONLY"
+}
