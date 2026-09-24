@@ -1,0 +1,28 @@
+name: KUSTO INFOMAR I0E Survey-Leg Metadata
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0e_survey_leg_metadata.py'
+      - '.github/workflows/kusto-infomar-i0e-survey-leg-metadata.yml'
+  workflow_dispatch:
+
+jobs:
+  i0e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inventory INFOMAR survey-leg metadata rows
+        run: python workspace/kusto_infomar_i0e_survey_leg_metadata.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0e-survey-leg-metadata-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0E-SURVEY-LEG-FEATURE-METADATA-INVENTORY-2026-09-24-v1.0.json
+          retention-days: 30
