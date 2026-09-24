@@ -1,0 +1,36 @@
+name: KUSTO INFOMAR I1J CB13_03 Extreme Unexplained Triage
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i1j_cb1303_extreme_unexplained_triage.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1J-CB13_03-EXTREME-UNEXPLAINED-TRIAGE-PREREG-2026-09-25-v1.0.json'
+      - '.github/workflows/kusto-infomar-i1j-cb1303-extreme-unexplained-triage.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  i1j:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests pyproj
+      - name: Run frozen post-result extreme unexplained triage
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python workspace/kusto_infomar_i1j_cb1303_extreme_unexplained_triage.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i1j-cb1303-extreme-unexplained-triage-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I1J-CB13_03-EXTREME-UNEXPLAINED-TRIAGE-RUN-2026-09-25-v1.0.json
+          retention-days: 30
