@@ -28,7 +28,7 @@ raw=dl(f"https://api.github.com/repos/{REPO}/actions/artifacts/{ART}/zip")
 with zipfile.ZipFile(io.BytesIO(raw)) as z:
  n=[x for x in z.namelist() if x.endswith(".json")][0]; run=json.loads(z.read(n))
 cand={x["candidate_id"]:x for x in run["candidate_results"] if x.get("cross_channel_support")}
-TARGETS=["INFOMAR_CB13_03_C064","INFOMAR_CB13_03_C062","INFOMAR_CB13_03_C024","INFOMAR_CB13_03_C020","INFOMAR_CB13_03_C013","INFOMAR_CB13_03_C016","INFOMAR_CB13_03_C087","INFOMAR_CB13_03_C002"]
+TARGETS=[x["candidate_id"] for x in sorted(cand.values(), key=lambda q: float(q["aggregate_score"]), reverse=True)]
 to_utm=Transformer.from_crs("EPSG:4326","EPSG:32629",always_xy=True)
 with tempfile.TemporaryDirectory() as td:
  td=Path(td)
@@ -64,4 +64,4 @@ with tempfile.TemporaryDirectory() as td:
    png=OUT/f"{cid}.png"; fig.savefig(png,dpi=160,bbox_inches="tight"); plt.close(fig)
    manifest.append({"candidate_id":cid,"lat":lat,"lon":lon,"radius_m":c["radius_m"],"aggregate_score":c["aggregate_score"],"q95":c["same_stratum_control_q95"],"png":png.name})
  (OUT/"manifest.json").write_text(json.dumps({"status":"POSTHOC_VISUAL_CHARACTERIZATION_ONLY","targets":manifest},indent=2))
- print(json.dumps({"status":"PASS","targets":len(manifest),"out":str(OUT)},indent=2))
+ print(json.dumps({"status":"PASS","targets":len(manifest),"mode":"ALL_CROSS_CHANNEL_SUPPORTED","out":str(OUT)},indent=2))
