@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0K Blind Bathymetry
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0k_blind_bathymetry.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-CANDIDATE-GENERATION-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0k-blind-bathymetry.yml'
+  workflow_dispatch:
+
+jobs:
+  i0k:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests rasterio scipy pyproj "shapely>=2"
+      - name: Run frozen bathymetry-only blind discovery; held-out backscatter values remain unread
+        run: python workspace/kusto_infomar_i0k_blind_bathymetry.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0k-blind-bathymetry-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-RUN-2026-09-24-v1.0.json
+          retention-days: 30
