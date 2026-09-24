@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-G3-INTERPRETATION-CORRECTION-2026-09-25-v1.0",
+  "status": "SEALED_CORRECTION__NO_EXACT_NCEI_MULTIBEAM_CONFIRMED",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "corrects": "JANUS-KUSTO-INDIA-170710306N-832693611E-G3-NCEI-MULTIBEAM-COVERAGE-RUN-2026-09-25-v1.0",
+  "raw_evidence": {
+    "mosaic_footprint_features": [
+      {
+        "OBJECTID": 1,
+        "Name": "multibeam_mosaic_raw_overviews",
+        "Tag": "Dataset",
+        "CenterX": 8.526512829121202e-14,
+        "CenterY": 7.105427357601002e-14
+      },
+      {
+        "OBJECTID": 2,
+        "Name": "multibeam_mosaic_processed_overviews",
+        "Tag": "Dataset",
+        "CenterX": 8.526512829121202e-14,
+        "CenterY": 7.105427357601002e-14
+      }
+    ],
+    "mosaic_sample_count": 0,
+    "trackline_box_counts": [
+      {
+        "half_span_deg": 0.01,
+        "count": 0
+      },
+      {
+        "half_span_deg": 0.05,
+        "count": 0
+      },
+      {
+        "half_span_deg": 0.1,
+        "count": 0
+      },
+      {
+        "half_span_deg": 0.25,
+        "count": 0
+      },
+      {
+        "half_span_deg": 0.5,
+        "count": 2
+      }
+    ],
+    "first_tracks_at_half_span_0_5": [
+      {
+        "SURVEY_ID": "EQT190008",
+        "PLATFORM": "Fugro Equator",
+        "SURVEY_YEAR": 2019,
+        "SOURCE": "Fugro",
+        "INSTRUMENT": "Kongsberg EM302",
+        "NGDC_ID": "NEW3145"
+      },
+      {
+        "SURVEY_ID": "EQT190009",
+        "PLATFORM": "Fugro Equator",
+        "SURVEY_YEAR": 2019,
+        "SOURCE": "Fugro",
+        "INSTRUMENT": "Kongsberg EM302",
+        "NGDC_ID": "NEW3146"
+      }
+    ]
+  },
+  "corrected_interpretation": {
+    "exact_ncei_multibeam_at_target": "NOT_CONFIRMED",
+    "ncei_trackline_within_half_span_0_25_deg": false,
+    "ncei_tracks_present_within_half_span_0_5_deg": true,
+    "overview_mosaic_features_do_not_count_as_target_survey_coverage": true,
+    "scope": "NCEI_ARCHIVE_ONLY"
+  },
+  "claim_ceiling": "NO_EXACT_NCEI_MULTIBEAM_BINDING_AT_TARGET"
+}
