@@ -123,14 +123,9 @@
       "finding": "The public mac-swc repository contains AUV analysis/model references but no recovered exact Nimbus/USBL navigation track in tree/code search. Report figures or predictions are not substituted for a real georeferenced track."
     },
     {
-      "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022",
-      "state": "FORMAL_UNSEEN_V2_FAIL_WITH_SIGNAL",
-      "finding": "100/100 candidates were scorable and 40% exceeded same-radius control q95, but the frozen primary population test failed: candidate mean score 29.58 versus control mean 942.74 and stratified permutation p=0.19876. No scientific promotion; posthoc analysis may diagnose the heavy control tail only."
-    },
-    {
       "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022_23",
-      "state": "FORMAL_UNSEEN_V2_FAIL_WITH_STRONG_CROSSCHANNEL_SIGNAL",
-      "finding": "100/100 frozen candidates were scorable and 40/100 exceeded same-radius q95, but the preregistered population criterion failed: candidate mean 29.5827 vs control mean 942.7372, stratified permutation p=0.198760. Posthoc diagnosis identified near-zero-but-nonzero MAD in the 160 m edge-energy control metric as the heavy-tail mechanism. The formal FAIL is immutable."
+      "state": "FORMAL_UNSEEN_V2_FAIL_WITH_STRONG_CROSSCHANNEL_SIGNAL__POSTRESULT_TRUTH_COVERAGE_CHARACTERIZED",
+      "finding": "100/100 frozen candidates were scorable and 40/100 exceeded same-radius q95, but the preregistered population criterion failed: candidate mean 29.5827 vs control mean 942.7372, stratified permutation p=0.198760. Posthoc diagnosis identified near-zero-but-nonzero MAD in the 160 m edge-energy control metric as the heavy-tail mechanism. The formal FAIL is immutable. Subsequent withheld-truth characterization found actual towed-video observation points inside only 3/100 frozen candidate disks and sediment samples inside 0/100; this does not promote or reinterpret the FAIL."
     }
   ],
   "utility_now_supported": [
@@ -172,6 +167,9 @@
     "formal_unseen_marine_v2_passes": 4,
     "formal_unseen_v2_fails": 1,
     "v3_unseen_no_regression_passes": 1,
-    "v3_rescue_efficacy_confirmed": 0
+    "v3_rescue_efficacy_confirmed": 0,
+    "nonpromotion_solitary_formal_fail_entries": 1,
+    "solitary_postresult_video_covered_candidates": 3,
+    "solitary_postresult_sediment_covered_candidates": 0
   }
 }
