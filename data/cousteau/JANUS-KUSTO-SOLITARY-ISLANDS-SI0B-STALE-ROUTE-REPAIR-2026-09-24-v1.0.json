@@ -1,0 +1,25 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0B-STALE-ROUTE-REPAIR-2026-09-24-v1.0",
+  "status": "SOURCE_TRANSPORT_REPAIR_ONLY__UNSEEN_STATUS_PRESERVED",
+  "source_receipt": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-SOURCE-BINDING-RECEIPT-2026-09-24-v1.0",
+  "failed_member_inventory_run": {
+    "github_actions_run_id": 35932017546,
+    "artifact_id": 10781144588,
+    "artifact_zip_sha256": "c3ad7eb3a0e09ceb2132802e279d46298baf55173208cd64822043c5d7a9ae7c"
+  },
+  "observed_failure": {
+    "bathymetry_old_producthouse_status": 403,
+    "backscatter_old_producthouse_status": 403
+  },
+  "repair_rule": "Resolve current authoritative catalog resources by dataset identity NEWGAID=20220017S and product semantics. Do not guess filenames or switch surveys.",
+  "scientific_impact": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "towed_video_or_stills_read": false,
+    "sediment_labels_read": false,
+    "landform_or_substrate_classification_read": false,
+    "candidate_generation_started": false,
+    "v2_changed": false
+  },
+  "claim_ceiling": "SOURCE_ROUTE_REPAIR_ONLY"
+}
