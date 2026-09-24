@@ -1,0 +1,68 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1L-CB13_03-COMPACT-UNEXPLAINED-FUNNEL-RECEIPT-2026-09-25-v1.0",
+  "status": "SEALED_COMPACT_UNEXPLAINED_SURVIVOR_SELECTED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "run": {
+    "github_actions_run_id": 36066708407,
+    "artifact_id": 10836263431,
+    "artifact_zip_sha256": "618b7b03e77e0fce5e2207886e3e3a3f687d6f12e767c3219ba0124884cbb7e1",
+    "output_json_sha256": "a390833b1bfd75c7a3dc84896fb19d4acd41d71531b30e43c77131bfd9b286ac",
+    "conclusion": "success"
+  },
+  "pool": {
+    "cross_channel_supported": 35,
+    "eligible_nonrock_or_unclassified_no_near_wreck": 23,
+    "compact_survivor_ids": [
+      "INFOMAR_CB13_03_C028",
+      "INFOMAR_CB13_03_C056",
+      "INFOMAR_CB13_03_C087",
+      "INFOMAR_CB13_03_C018",
+      "INFOMAR_CB13_03_C013",
+      "INFOMAR_CB13_03_C008",
+      "INFOMAR_CB13_03_C038",
+      "INFOMAR_CB13_03_C059"
+    ]
+  },
+  "selected_target": {
+    "candidate_id": "INFOMAR_CB13_03_C028",
+    "blind_rank": 28,
+    "aggregate_score": 12.279553188364158,
+    "lon": -10.543715274603503,
+    "lat": 52.112809857693264,
+    "radius_m": 8.328149430643045,
+    "folk_classes": [
+      "Unclassified"
+    ],
+    "morphology": {
+      "native_relief_sign": "POSITIVE",
+      "disk_median": -19.126020431518555,
+      "annulus_median": -24.30466365814209,
+      "signed_disk_minus_annulus_median": 5.178643226623535,
+      "local_extremum_value": -14.367042541503906,
+      "local_extremum_distance_m": 4.164074715321528,
+      "half_relief_component_area_m2": 164.72542323041017,
+      "half_relief_equivalent_diameter_m": 14.482227828624795,
+      "principal_axis_span_m": [
+        25.027206801644834,
+        8.625449278983908
+      ],
+      "aspect_ratio": 2.901553993555346,
+      "component_touches_100m_window": false,
+      "possible_line_artefact": false,
+      "compact_survivor": true
+    }
+  },
+  "prior_truth_triage": {
+    "nearest_gsi_mapped_wreck_distance_m": 4532.6,
+    "nearest_nms_located_wreck_distance_m": 1719.3,
+    "official_substrate": "Unclassified"
+  },
+  "interpretation": "C028 is the first survivor under the frozen compact-unexplained funnel: a compact positive relief feature, cross-channel supported, not a raster-line artefact under the preregistered test, and with no official georeferenced wreck within 500 m.",
+  "does_not_establish": [
+    "ARTIFICIALITY",
+    "WRECK_IDENTITY",
+    "NATURAL_BOULDER_OR_PINNACLE_IDENTITY",
+    "ARCHAEOLOGICAL_SIGNIFICANCE"
+  ],
+  "next_gate": "I1M_C028_DETAILED_SOURCE_AND_INDEPENDENT_IDENTITY_CHARACTERIZATION"
+}
