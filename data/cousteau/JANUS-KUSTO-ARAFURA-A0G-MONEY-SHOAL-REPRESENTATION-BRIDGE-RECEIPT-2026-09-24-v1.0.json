@@ -1,0 +1,34 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-A0G-MONEY-SHOAL-REPRESENTATION-BRIDGE-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_HEADER_ONLY_MONEY_SHOAL_DOMAIN_AND_COORDINATE_BRIDGE_FROZEN",
+  "prereg": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "source_freeze": "JANUS-KUSTO-ARAFURA-A0E-EXACT-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36008948572,
+    "artifact_id": 10812030031,
+    "artifact_zip_sha256": "a00a5e84b5ca9d48827788a0db0753a30f5458d9c4bb25594c52445dd6368434"
+  },
+  "money_shoal_header_footprint_wgs84_bbox": [132.63852131802878,-10.389720345414759,132.80493852331688,-10.274229923974042],
+  "conservative_bathymetry_source_window": {
+    "row_start": 21439,
+    "row_stop": 23587,
+    "col_start": 35338,
+    "col_stop": 38431,
+    "height": 2148,
+    "width": 3093
+  },
+  "representation_rule": {
+    "morphology_grid": "ORIGINAL_BATHYMETRY_SOURCE_GRID_NO_RESAMPLING",
+    "nominal_cell_m": 6,
+    "candidate_domain": "BATHYMETRY_CELL_CENTER_INSIDE_HEADER_ONLY_MONEY_SHOAL_FOOTPRINT",
+    "metric_coordinate_bridge": "EPSG:4326_TO_EPSG:32753_FOR_DEDUP_AND_PAIRED_SCORING_ONLY",
+    "heldout_backscatter_values_used": false
+  },
+  "truth_firewall": {
+    "bathymetry_values_read_during_bridge": false,
+    "backscatter_values_read": false,
+    "seabed_samples_or_imagery_read": false
+  },
+  "next_gate": "A1_MONEY_SHOAL_BATHYMETRY_ONLY_BLIND_CANDIDATE_FREEZE",
+  "claim_ceiling": "HEADER_ONLY_SUBAREA_AND_COORDINATE_REPRESENTATION_BRIDGE"
+}
