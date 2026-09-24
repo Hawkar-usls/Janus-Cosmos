@@ -1,0 +1,38 @@
+name: KUSTO INFOMAR I1L CB13_03 Compact Unexplained Funnel
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i1l_cb1303_compact_unexplained_funnel.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1L-CB13_03-COMPACT-UNEXPLAINED-FUNNEL-IMPLEMENTATION-FREEZE-2026-09-25-v1.0.json'
+      - '.github/workflows/kusto-infomar-i1l-cb1303-compact-unexplained-funnel.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  i1l:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ensure Deflate64 extractor
+        run: which 7z || (sudo apt-get update && sudo apt-get install -y p7zip-full)
+      - run: pip install --disable-pip-version-check requests rasterio numpy scipy
+      - name: Run frozen compact-unexplained funnel
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python workspace/kusto_infomar_i1l_cb1303_compact_unexplained_funnel.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i1l-cb1303-compact-unexplained-funnel-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I1L-CB13_03-COMPACT-UNEXPLAINED-FUNNEL-RUN-2026-09-25-v1.0.json
+          retention-days: 30
