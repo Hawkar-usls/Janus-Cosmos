@@ -1,0 +1,40 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENTORY-RECEIPT-2026-09-24-v1.0",
+  "status": "SEALED_PASS__REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "github_actions_run_id": 36029142709,
+  "head_sha": "7859b2d63c609a01b6204c7c6b63d0bf59283f4b",
+  "workflow_artifact_id": 10821132587,
+  "workflow_artifact_sha256": "5f4936272589f2abe05798a8b932b4649d1a640842f5216835caacadfbcb12c5",
+  "survey_id": "CB13_02",
+  "bathymetry": {
+    "archive_size_bytes": 9950717,
+    "central_directory_sha256": "eeb6503d231d35100749fd1799e8a1fe320740dcc0ee70859c9f766314d266ce",
+    "member_count": 5,
+    "raster_member": {
+      "filename": "BY_CB13_02_DundalkBay_5m_U29N.tif",
+      "crc32": "d8a74f8a",
+      "compressed_size": 7257924,
+      "uncompressed_size": 145154529,
+      "local_header_offset": 117
+    }
+  },
+  "backscatter": {
+    "archive_size_bytes": 200011594,
+    "central_directory_sha256": "e8249b4cc242463924733ee76d8b8b57c7c3425ea496cb38b1b4d45e000768a1",
+    "member_count": 5,
+    "raster_member": {
+      "filename": "BS_CB13_02_DundalkBay_1m_WGS84.tif",
+      "crc32": "efcefbd6",
+      "compressed_size": 149888154,
+      "uncompressed_size": 1580261941,
+      "local_header_offset": 114
+    }
+  },
+  "range_bytes_consumed": {"bathymetry":65969,"backscatter":65974},
+  "archive_full_bodies_consumed": false,
+  "local_file_payload_bytes_consumed": 0,
+  "raster_pixels_read": false,
+  "next_gate": "I0I_PAIRED_RASTER_MEMBER_SELECTION_RULE_FREEZE",
+  "claim_ceiling": "INFOMAR_REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY"
+}
