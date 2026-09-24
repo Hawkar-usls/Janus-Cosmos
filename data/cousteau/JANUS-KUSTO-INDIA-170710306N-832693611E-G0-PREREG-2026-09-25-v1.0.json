@@ -1,0 +1,46 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-G0-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_REMOTE_BATHYMETRY_VALUES_READ",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611,
+    "source_string": "17.4.1571.8316.9.7",
+    "interpretation": "17°04′15.71″N, 83°16′09.7″E"
+  },
+  "box": {
+    "half_span_deg": 0.1,
+    "south": 16.9710306,
+    "north": 17.1710306,
+    "west": 83.1693611,
+    "east": 83.3693611
+  },
+  "source_order": [
+    "GMRT_V4_5_TOPO_MASK_MAX__HIGH_RES_ONLY",
+    "GMRT_V4_5_TOPO_MAX__FILLED_GLOBAL_CONTEXT"
+  ],
+  "metrics": {
+    "radii_m": [
+      250,
+      500,
+      1000,
+      2000,
+      5000
+    ],
+    "compute": [
+      "target_depth_m",
+      "valid_fraction",
+      "local_relief_m",
+      "target_minus_annulus_median_m",
+      "radial_profile",
+      "slope_proxy",
+      "isolated_extremum_rank"
+    ],
+    "no_object_identity_from_low_resolution": true
+  },
+  "hard_rules": [
+    "MASKED_HIGH_RESENCE_REQUIRED_FOR_SONAR_LEVEL_CLAIM",
+    "UNMASKED_GMRT_OR_GEBCO_ONLY_EQUALS_CONTEXT_NOT_OBJECT_CONFIRMATION",
+    "NO_RECENTERING_AFTER_VALUES_READ",
+    "NO_ARTIFICIALITY_CLAIM_FROM_BATHYMETRY_ALONE"
+  ]
+}
