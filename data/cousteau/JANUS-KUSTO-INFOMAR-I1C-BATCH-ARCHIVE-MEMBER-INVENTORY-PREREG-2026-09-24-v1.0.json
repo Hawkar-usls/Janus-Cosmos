@@ -1,0 +1,25 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1C-BATCH-ARCHIVE-MEMBER-INVENTORY-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_RANK_2_TO_5_ARCHIVE_LOCAL_FILE_PAYLOAD_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds_i1b": "JANUS-KUSTO-INFOMAR-I1B-PREOUTCOME-BATCH-METADATA-AND-TRANSPORT-RECEIPT-2026-09-24-v1.0",
+  "inventory_targets": ["CB13_03","CB13_05"],
+  "transport_blocked_preserved": ["CB14_01","CB14_02"],
+  "allowed_reads": [
+    "HTTP_RANGE_0_0_FOR_ARCHIVE_LENGTH",
+    "HTTP_RANGE_ZIP_EOCD_TAIL",
+    "HTTP_RANGE_ZIP_CENTRAL_DIRECTORY"
+  ],
+  "forbidden_reads": [
+    "LOCAL_FILE_DATA_PAYLOAD",
+    "GEOTIFF_IFD_OR_TILE_STRIP_PAYLOAD",
+    "RASTER_PIXEL_VALUES",
+    "BATHYMETRY_VALUES",
+    "BACKSCATTER_VALUES",
+    "GROUNDTRUTH_OR_OBJECT_LABELS"
+  ],
+  "member_selection_future_rule": "After inventory, select unique exact .tif member independently in each usable archive; .tif.ovr/.tif.xml/.tif.aux.xml do not count.",
+  "block_rule": "Any transport-blocked member remains blocked in batch accounting and is not replaced.",
+  "next_gate_on_pass": "I1D_BATCH_PAIRED_RASTER_MEMBER_AND_HEADER_GEOMETRY",
+  "claim_ceiling": "INFOMAR_BATCH_REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY"
+}
