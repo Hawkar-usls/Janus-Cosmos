@@ -1,0 +1,44 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENTORY-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ARCHIVE_DIRECTORY_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds_i0g_receipt": "data/cousteau/JANUS-KUSTO-INFOMAR-I0G-METADATA-SELECTION-AND-TRANSPORT-PROBE-RECEIPT-2026-09-24-v1.0.json",
+  "survey_id": "CB13_02",
+  "archives": {
+    "bathymetry": {
+      "url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BY_CB13_02_DundalkBay_5m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "expected_size_bytes": 9950717
+    },
+    "backscatter": {
+      "url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BS_CB13_02_DundalkBay_1m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "expected_size_bytes": 200011594
+    }
+  },
+  "allowed_reads": [
+    "HTTP_RANGE_0_0_FOR_ARCHIVE_LENGTH",
+    "HTTP_RANGE_ZIP_EOCD_TAIL",
+    "HTTP_RANGE_ZIP_CENTRAL_DIRECTORY"
+  ],
+  "forbidden_reads": [
+    "LOCAL_FILE_DATA_PAYLOAD",
+    "GEOTIFF_IFD_OR_TILE_STRIP_PAYLOAD",
+    "RASTER_PIXEL_VALUES",
+    "BATHYMETRY_VALUES",
+    "BACKSCATTER_VALUES",
+    "SHIPWRECK_GROUNDTRUTH_OR_OUTCOME_INFORMATION"
+  ],
+  "inventory_fields": [
+    "filename",
+    "compression_method",
+    "flags",
+    "crc32",
+    "compressed_size",
+    "uncompressed_size",
+    "central_directory_offset",
+    "filename_suffix"
+  ],
+  "decision_rule": "Inventory both frozen ZIP central directories only. PASS iff both archive lengths equal the frozen I0G sizes, EOCD and central-directory structures parse without consuming any local-file payload, and each archive has at least one member.",
+  "next_gate_on_pass": "I0I_PAIRED_RASTER_MEMBER_SELECTION_RULE_FREEZE",
+  "next_gate_on_fail": "INFOMAR_ARCHIVE_IDENTITY_OR_ZIP_STRUCTURE_REPAIR_ONLY",
+  "claim_ceiling": "INFOMAR_REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY"
+}
