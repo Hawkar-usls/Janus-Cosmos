@@ -1,0 +1,62 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1C-BATCH-ARCHIVE-MEMBER-INVENTORY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_2_UNIQUE_TIF_PAIRS__2_PRESERVED_TRANSPORT_BLOCKS",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-INFOMAR-I1C-BATCH-ARCHIVE-MEMBER-INVENTORY-PREREG-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36031900340,
+    "head_sha": "37fdad1a632184768c9005c9922807c95c9cac57",
+    "artifact_id": 10823760437,
+    "artifact_zip_sha256": "650c9ef43517d96f33508f39023566e982a999bccd8d81e32763a08e9515e5f9"
+  },
+  "batch": [
+    {
+      "rank": 2,
+      "SURVEY_ID": "CB13_03",
+      "inventory_state": "PASS_UNIQUE_EXACT_TIF_PAIR",
+      "bathymetry": {
+        "filename": "BY_CB13_03_Dingle_2m_U29N.tif",
+        "compression_method": 9,
+        "crc32": "1e2cc4ec",
+        "compressed_size": 90704023,
+        "uncompressed_size": 2122964187,
+        "local_header_offset": 113
+      },
+      "backscatter": {
+        "filename": "BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT.tif",
+        "compression_method": 9,
+        "crc32": "4502fce2",
+        "compressed_size": 71541251,
+        "uncompressed_size": 2775010886,
+        "local_header_offset": 125
+      }
+    },
+    {
+      "rank": 3,
+      "SURVEY_ID": "CB13_05",
+      "inventory_state": "PASS_UNIQUE_EXACT_TIF_PAIR",
+      "bathymetry": {
+        "filename": "BY_CB13_05_Clare_2m_U29N.tif",
+        "compression_method": 8,
+        "crc32": "9c47ff79",
+        "compressed_size": 27375407,
+        "uncompressed_size": 212746837,
+        "local_header_offset": 110
+      },
+      "backscatter": {
+        "filename": "BS_CB13_05_Clare_2m_WGS84.tif",
+        "compression_method": 8,
+        "crc32": "109f7622",
+        "compressed_size": 28543559,
+        "uncompressed_size": 123256501,
+        "local_header_offset": 107
+      }
+    },
+    {"rank":4,"SURVEY_ID":"CB14_01","inventory_state":"PRESERVED_TRANSPORT_BLOCK__NOT_REPLACED"},
+    {"rank":5,"SURVEY_ID":"CB14_02","inventory_state":"PRESERVED_TRANSPORT_BLOCK__NOT_REPLACED"}
+  ],
+  "local_file_payload_bytes_consumed": 0,
+  "raster_pixels_read": false,
+  "next_gate": "I1D_BATCH_PAIRED_RASTER_MEMBER_AND_HEADER_GEOMETRY",
+  "claim_ceiling": "INFOMAR_BATCH_REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY"
+}
