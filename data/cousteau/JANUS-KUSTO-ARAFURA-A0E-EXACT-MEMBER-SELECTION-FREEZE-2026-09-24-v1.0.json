@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-A0E-EXACT-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_ARAFURA_RASTER_PIXEL_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "method_invariant_correction": "JANUS-KUSTO-ARAFURA-A0-PREREG-METHOD-INVARIANT-CORRECTION-2026-09-24-v1.0",
+  "source_route_receipt": "JANUS-KUSTO-ARAFURA-A0C-CURRENT-ROUTE-RECEIPT-2026-09-24-v1.0",
+  "member_inventory_run": {
+    "github_actions_run_id": 36003022645,
+    "artifact_id": 10809311180,
+    "artifact_zip_sha256": "49f3fbbf9768c3b3edb1d68a7850e3a1a867fd563110d16a6dd55ff420d1b3a3"
+  },
+  "selected_subarea": "Money Shoal",
+  "bathymetry": {
+    "archive_url": "https://files.ausseabed.gov.au/survey/Arafura%20Marine%20Park%20Bathymetry%202021%206m.zip",
+    "archive_sha256": "b6bd03ef90580300956cb48da6cd9d9005a863e8375a4f12da4e661425e514a1",
+    "archive_bytes": 62699633,
+    "member": "Arafura_Marine_Park_Bathymetry_2021_6m_MSL_cog.tif",
+    "member_uncompressed_bytes": 81707862,
+    "member_crc32": 1769901506,
+    "nominal_cell_m": 6,
+    "note": "Single survey-level bathymetry COG contains both named survey areas; no bathymetry pixel or heldout pixel is used here to separate them."
+  },
+  "heldout_backscatter": {
+    "archive_url": "https://d28rz98at9flks.cloudfront.net/145286/145286_00_0.zip",
+    "archive_sha256": "007e5ab2cb5096423725023996b8e2d52dfa4a3f03ed5760a9f761fbaf846086",
+    "archive_bytes": 141334011,
+    "member": "32bit_geotif/GA0366_MoneyShoal_Backscatter_2m.tif",
+    "member_uncompressed_bytes": 232740751,
+    "member_crc32": 4264869780,
+    "nominal_cell_m": 2,
+    "selection_basis": "Member name matches the preregistered Money Shoal subarea; Pillar Bank member is not an allowed fallback."
+  },
+  "nonselected_backscatter_member": {
+    "member": "32bit_geotif/GA0366_PillarBank_backscatter_4m.tif",
+    "do_not_use_in_money_shoal_test": true
+  },
+  "next_gate": "A0F_RASTER_HEADER_GEOMETRY_ONLY",
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "seabed_samples_or_imagery_read": false
+  },
+  "claim_ceiling": "EXACT_MEMBER_SELECTION_PROVENANCE_ONLY"
+}
