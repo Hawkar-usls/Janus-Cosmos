@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0H Archive Member Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0h_archive_member_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENTORY-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0h-archive-member-inventory.yml'
+  workflow_dispatch:
+
+jobs:
+  i0h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inventory frozen INFOMAR ZIP central directories without file payload reads
+        run: python workspace/kusto_infomar_i0h_archive_member_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0h-archive-member-inventory-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENTORY-RECEIPT-2026-09-24-v1.0.json
+          retention-days: 30
