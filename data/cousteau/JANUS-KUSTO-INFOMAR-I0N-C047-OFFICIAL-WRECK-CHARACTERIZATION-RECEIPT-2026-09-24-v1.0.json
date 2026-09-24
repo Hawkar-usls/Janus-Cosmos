@@ -1,0 +1,43 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0N-C047-OFFICIAL-WRECK-CHARACTERIZATION-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_CHARACTERIZATION__NO_OFFICIAL_GSI_MI_MAPPED_SHIPWRECK_WITHIN_2KM",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "formal_parent": "JANUS-KUSTO-INFOMAR-I0M-FORMAL-UNSEEN-V2-FAIL-RECEIPT-2026-09-24-v1.0",
+  "prereg": "JANUS-KUSTO-INFOMAR-I0N-C047-POSTRESULT-INDEPENDENT-TRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36031170850,
+    "head_sha": "0deb22c66141f26e0b86e66a287469654160a61d",
+    "artifact_id": 10822325806,
+    "artifact_zip_sha256": "c0023afc2b64bc83cea22a0240743451500828b5e7b79e8e78d6eb90bab5e79e",
+    "conclusion": "success"
+  },
+  "target": {
+    "candidate_id": "INFOMAR_CB13_02_C047",
+    "blind_rank": 47,
+    "lon": -6.2746913414514935,
+    "lat": 53.93903515133843,
+    "radius_m": 86.78293780372135
+  },
+  "source": {
+    "authority": "GEOLOGICAL_SURVEY_IRELAND_AND_MARINE_INSTITUTE",
+    "service": "IE_GSI_MI_Shipwrecks_IE_Waters_WGS84_LAT/FeatureServer/0",
+    "role": "OFFICIAL_PUBLIC_MAPPED_SHIPWRECK_POINT_LAYER"
+  },
+  "result": {
+    "search_radius_m": 2000,
+    "matched_official_points_within_2km": 0,
+    "distance_class": "NONE"
+  },
+  "interpretation": "No publicly georeferenced mapped shipwreck point from the queried official GSI/Marine Institute layer lies within 2 km of frozen C047. This rules out a direct match to that official mapped-point layer, but does not establish absence of an unlocated/unmapped wreck, natural origin, object identity, or artificiality.",
+  "formal_parent_changed": false,
+  "promotion": false,
+  "does_not_establish": [
+    "NO_WRECK_EXISTS",
+    "NATURAL_ORIGIN",
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "REVERSAL_OF_I0M_FORMAL_FAIL"
+  ],
+  "next_scientific_frontier": "DETERMINISTIC_METADATA_ONLY_INFOMAR_MULTI_SURVEY_BATCH_FREEZE",
+  "claim_ceiling": "POSTRESULT_CASE_LEVEL_OFFICIAL_MAPPED_WRECK_PROXIMITY_NEGATIVE_ONLY"
+}
