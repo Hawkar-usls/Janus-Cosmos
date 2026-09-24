@@ -1,0 +1,48 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-G2-GEBCO2026-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_GEBCO2026_VALUES_READ",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "source": {
+    "elevation_cog": "https://data.source.coop/ausantarctic/gebco/GEBCO_2026.tif",
+    "authority": "GEBCO_2026 15 arc-second grid",
+    "tid_wms": "https://wms.gebco.net/mapserv?",
+    "tid_layer": "gebco_latest_tid_2"
+  },
+  "window": {
+    "half_span_deg": 0.1,
+    "south": 16.9710306,
+    "north": 17.1710306,
+    "west": 83.1693611,
+    "east": 83.3693611
+  },
+  "analysis": {
+    "native_resolution_expected_arcsec": 15,
+    "radii_m": [
+      500,
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "metrics": [
+      "target_depth_m",
+      "local_min_m",
+      "local_max_m",
+      "local_relief_m",
+      "target_minus_annulus_median_m",
+      "target_local_percentile",
+      "radial_median_profile"
+    ],
+    "morphology_only": true
+  },
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_SMALL_OBJECT_CLAIM_AT_15_ARCSEC",
+    "TID_11_REQUIRED_TO_DESCRIBE_TARGET_CELL_AS_MULTIBEAM_DERIVED",
+    "GEBCO_RELIEF_IS_CONTEXT_UNLESS_HIGHER_RES_SOURCE_IS_BOUND"
+  ],
+  "claim_ceiling": "GEBCO2026_15_ARCSECOND_REGIONAL_MORPHOLOGY_ONLY"
+}
