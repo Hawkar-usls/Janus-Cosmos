@@ -45,7 +45,7 @@ def dl(layer,path):
                         "content_type":r.headers.get("content-type"),"archive_member":tif[0],"attempts":attempts}
         except Exception as e:
           attempts.append({"error":repr(e)})
-    raise RuntimeError("GMRT did not return a GeoTIFF: "+json.dumps(attempts,indent=2))
+    if layer=="topo-mask" and attempts and all(int(x.get("bytes",-1))==0 for x in attempts if "bytes" in x):\n        return {"empty_response":True,"attempts":attempts}\n    raise RuntimeError("GMRT did not return a GeoTIFF: "+json.dumps(attempts,indent=2))
 
 def radius_stats(ds,arr,valid,radius):
     row,col=ds.index(LON,LAT)
@@ -101,7 +101,7 @@ with tempfile.TemporaryDirectory() as td:
     outputs={}
     for layer in ["topo-mask","topo"]:
         p=td/(layer.replace("-","_")+".tif")
-        outputs[layer]={"transport":dl(layer,p),"grid":inspect(p,layer)}
+        tr=dl(layer,p)\n        outputs[layer]={"transport":tr,"grid":None if tr.get("empty_response") else inspect(p,layer)}
     masked=outputs["topo-mask"]["grid"]
     unmasked=outputs["topo"]["grid"]
     if masked["target_valid"]:
