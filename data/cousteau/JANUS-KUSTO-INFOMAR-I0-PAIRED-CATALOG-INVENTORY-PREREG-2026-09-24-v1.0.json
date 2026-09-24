@@ -1,0 +1,23 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0-PAIRED-CATALOG-INVENTORY-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_INFOMAR_RASTER_PIXEL_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "purpose": "Identify source-resolved European/North-Atlantic paired bathymetry/backscatter survey rasters from official INFOMAR image-service catalogs.",
+  "sources": {
+    "bathymetry_catalog": "https://image.marine.ie/arcgis/rest/services/INFOMAR/AllSurvey/ImageServer",
+    "backscatter_catalog": "https://image.marine.ie/arcgis/rest/services/INFOMAR/AllSurvey_Backscatter/ImageServer"
+  },
+  "inventory_only": {
+    "query_fields": ["OBJECTID","Name","MinPS","MaxPS","Category","Tag","GroupName","ProductName","CenterX","CenterY","Shape"],
+    "pixel_values_read": false,
+    "export_image_forbidden": true,
+    "get_samples_forbidden": true
+  },
+  "future_selection_rule": "After inventory is frozen, choose the lexicographically first exact common normalized Name among catalog-primary entries that has nonempty geometry in both services and is not a merged/global overview. Selection must occur before any raster pixels are read.",
+  "hard_rules": [
+    "NO_SELECTION_BY_MORPHOLOGY_OR_BACKSCATTER_OUTCOME",
+    "NO_SEDIMENT_SHIPWRECK_OR_GROUNDTRUTH_LAYER_READ_BEFORE CROSSCHANNEL RESULT",
+    "COMPOSITE_OR_OVERVIEW_RASTERS_DO_NOT_COUNT_AS_INDEPENDENT_SURVEY_LINEAGES"
+  ],
+  "claim_ceiling": "EUROPEAN_PAIRED_SOURCE_CATALOG_INVENTORY_ONLY"
+}
