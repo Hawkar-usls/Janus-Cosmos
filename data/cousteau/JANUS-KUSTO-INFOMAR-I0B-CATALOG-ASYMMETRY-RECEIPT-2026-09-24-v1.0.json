@@ -1,0 +1,21 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0B-CATALOG-ASYMMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "SOURCE_SCHEMA_ASYMMETRY_CONFIRMED__NO_SCIENTIFIC_NEGATIVE",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "inventory_run": 36010267652,
+  "diagnostic_run": 36010438377,
+  "finding": {
+    "bathymetry_catalog_object_ids": 307,
+    "backscatter_catalog_object_ids": 5,
+    "backscatter_return_count": 5,
+    "backscatter_feature_queries_returned_rows": 0,
+    "interpretation": "The public backscatter ImageServer is not a per-survey catalog symmetric with the bathymetry mosaic. It cannot support exact survey pairing by Name through the tested query interface."
+  },
+  "next_gate": "I0C_OFFICIAL_INFOMAR_DOWNLOAD_PORTAL_UNDERLYING_SERVICE_DISCOVERY",
+  "scientific_state": {
+    "pixel_values_read": false,
+    "survey_selected": false,
+    "negative_data_claim": false
+  },
+  "claim_ceiling": "SOURCE_SERVICE_SCHEMA_DIAGNOSIS_ONLY"
+}
