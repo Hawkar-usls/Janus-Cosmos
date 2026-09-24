@@ -1,0 +1,33 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-G1-HIGHRES-EXTRACT-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_G1_VALUES_READ",
+  "parent": "JANUS-KUSTO-INDIA-170710306N-832693611E-G0-PREREG-2026-09-25-v1.0",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "box": {
+    "south": 16.9710306,
+    "north": 17.1710306,
+    "west": 83.1693611,
+    "east": 83.3693611
+  },
+  "source": "GMRT GridServer topo-mask resolution=max only",
+  "transport_policy": {
+    "max_attempts": 30,
+    "sleep_seconds": 1,
+    "accept_only_tiff_magic": true
+  },
+  "analysis": {
+    "radii_m": [
+      250,
+      500,
+      1000,
+      2000,
+      5000
+    ],
+    "no_recenter": true,
+    "no_artificiality_claim": true
+  },
+  "claim_ceiling": "HIGH_RES_BATHYMETRY_MORPHOLOGY_ONLY"
+}
