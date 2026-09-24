@@ -1,0 +1,29 @@
+name: KUSTO Arafura A0G Representation Bridge
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_arafura_a0g_domain_bridge.py'
+      - 'data/cousteau/JANUS-KUSTO-ARAFURA-A0E-EXACT-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-arafura-a0g-domain-bridge.yml'
+  workflow_dispatch:
+
+jobs:
+  a0g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests rasterio pyproj
+      - name: Freeze Money Shoal header-only representation bridge
+        run: python workspace/kusto_arafura_a0g_domain_bridge.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-arafura-a0g-domain-bridge-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ARAFURA-A0G-MONEY-SHOAL-REPRESENTATION-BRIDGE-RUN-2026-09-24-v1.0.json
+          retention-days: 30
