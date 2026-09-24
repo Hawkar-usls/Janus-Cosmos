@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-A3-FORMAL-UNSEEN-V2-RESULT-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_ARAFURA_MONEY_SHOAL_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "method_invariant_correction": "JANUS-KUSTO-ARAFURA-A0-PREREG-METHOD-INVARIANT-CORRECTION-2026-09-24-v1.0",
+  "representation_bridge": "JANUS-KUSTO-ARAFURA-A0G-MONEY-SHOAL-REPRESENTATION-BRIDGE-RECEIPT-2026-09-24-v1.0",
+  "implementation_freeze": "JANUS-KUSTO-ARAFURA-A2-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-24-v1.0",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-ARAFURA-A1-MONEY-SHOAL-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10812065534,
+    "artifact_zip_sha256": "80ca429d8028e8551a7df7c0d0e75e93735e4d4abff371ac78a764478bf82409",
+    "candidate_json_sha256": "683af9afd23bdbb64ece87ebb3a6f003af424edda664c007b640764aa67d0bab",
+    "frozen_candidate_count": 100
+  },
+  "a2_run": {
+    "github_actions_run_id": 36009776491,
+    "head_sha": "d570935f8499b10a1bfa283440af3686d28aafb9",
+    "conclusion": "success",
+    "artifact_id": 10811823317,
+    "artifact_zip_sha256": "9287cec339076d5dd63be388806b46826582fb79fb0712cea2a41399cf65084b",
+    "output_json_sha256": "4e5e20a29e9b95aadb011455e682ee0761c91ef8055c5616346bd744dbf68715"
+  },
+  "primary_result": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 99,
+    "blocked_strata": [],
+    "candidate_support_count": 25,
+    "candidate_support_fraction": 0.25252525252525254,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 5.05050505050505,
+    "candidate_mean_aggregate_score": 1.5635578194743815,
+    "control_mean_aggregate_score": 0.8423077638091699,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 2.2944360011576886e-09,
+    "primary_pass": true,
+    "scientific_promotion": true
+  },
+  "replication_significance": {
+    "formal_unseen_crosschannel_pass_number": 6,
+    "formal_unseen_marine_v2_pass_number": 5,
+    "new_geographic_lineage": "ARAFURA_SEA_NORTHERN_AUSTRALIA",
+    "new_platform_sensor_lineage": "RV_SOLANDER__KONGSBERG_EM2040C_DUAL_HEAD",
+    "representation_bridge_used": "SOURCE_GRID_MORPHOLOGY_PLUS_HEADER_ONLY_UTM_DOMAIN_AND_METRIC_COORDINATE_BRIDGE"
+  },
+  "meaning": "With unchanged paired-support-domain v2, bathymetry-only frozen Money Shoal candidates were significantly enriched for held-out 2 m backscatter structure relative to matched controls.",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "ARCHAEOLOGICAL_OR_WRECK_CLASSIFICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "GENERAL_CROSS_SURVEY_REPEATABILITY",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ],
+  "claim_ceiling": "PREREGISTERED_UNSEEN_ARAFURA_MONEY_SHOAL_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION"
+}
