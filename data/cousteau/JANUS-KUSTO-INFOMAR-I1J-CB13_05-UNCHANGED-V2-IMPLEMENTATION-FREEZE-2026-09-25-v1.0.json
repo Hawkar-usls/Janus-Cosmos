@@ -1,0 +1,102 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1J-CB13_05-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "status": "FROZEN_AFTER_100_CANDIDATES__BEFORE_FIRST_CB13_05_BACKSCATTER_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-INFOMAR-I1I-CB13_05-BLIND-BATHYMETRY-RECEIPT-2026-09-25-v1.0",
+    "github_artifact_id": 10837736851,
+    "artifact_zip_sha256": "6a50760a9f1655877ab26a31f2f850e6021e5ac280922d731820cd9433129f25",
+    "candidate_json_sha256": "2f661d2ac81bf7064eddc5acef868c82c2f52a06a6d8160707aa1c1e36c5e4b5",
+    "frozen_candidate_count": 100,
+    "radius_distribution": {
+      "4_cells": 62,
+      "8_cells": 22,
+      "16_cells": 7,
+      "32_cells": 9
+    }
+  },
+  "representation_bridge": "JANUS-KUSTO-INFOMAR-I1J-CB13_05-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-25-v1.0",
+  "inputs": {
+    "bathymetry": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_05/BY_CB13_05_Clare_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "archive_sha256": "c1d50956d2bdf7810fdf2ee974ecf674532152d3f9ed69a3d55088adbc0a99a4",
+      "archive_bytes": 36982234,
+      "member": "BY_CB13_05_Clare_2m_U29N.tif",
+      "member_crc32": "9c47ff79",
+      "member_sha256": "28e9579dcfb65249330398539b1a05bed14e5e1e448cc5b4f7dbc7010b08d573",
+      "member_bytes": 212746837,
+      "crs": "EPSG:32629",
+      "native_cell_m": 2.0285446098912496
+    },
+    "heldout_backscatter": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_05/BS_CB13_05_Clare_2m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "archive_sha256": "5720d8b1733319b1130a3c3d87b95e03cbd87eeed38a51baf764794a8291a7bd",
+      "archive_bytes": 38164114,
+      "member": "BS_CB13_05_Clare_2m_WGS84.tif",
+      "member_crc32": "109f7622",
+      "member_sha256": "7ed51b9d710a99c049c3cde14d1b16ee0d354fc72adb59aaa63b369239c46b5b",
+      "member_bytes": 123256501,
+      "crs": "EPSG:4326",
+      "explicit_nodata": 0,
+      "width": 5919,
+      "height": 5098,
+      "transform": [
+        0.000023271195709514964,
+        0,
+        -9.579961637596478,
+        0,
+        -0.000023271195709514988,
+        52.870655138336254
+      ],
+      "bounds": [
+        -9.579961637596478,
+        52.752018582609146,
+        -9.442219430191859,
+        52.870655138336254
+      ]
+    }
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.8,
+    "backscatter_native_mask_min_fraction": 0.8,
+    "support_patch_geometry": "physical disk radius r plus annulus 1.25r < d <= 2r on native grids",
+    "backscatter_value_based_support_inference_used": false,
+    "honor_explicit_backscatter_nodata": true
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "primary_pass_requires_all": [
+    "no coverage-blocked frozen radius stratum",
+    "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+    "stratified permutation p < 0.05",
+    "candidate mean aggregate score > control mean aggregate score",
+    "candidate support fraction / 0.05 > 1"
+  ],
+  "hard_rules": [
+    "VERIFY_CANDIDATE_ARTIFACT_AND_JSON_HASHES_BEFORE_BACKSCATTER_READ",
+    "NO_CANDIDATE_COORDINATE_CHANGE",
+    "NO_CANDIDATE_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_BACKSCATTER_RESAMPLING",
+    "NO_GROUNDTRUTH_OR_OBJECT_LABEL_READ",
+    "COVERAGE_OR_DEGENERATE_RADIUS_BLOCKS_PRIMARY_PROMOTION"
+  ],
+  "claim_ceiling": "UNCHANGED_V2_IMPLEMENTATION_FREEZE_ONLY"
+}
