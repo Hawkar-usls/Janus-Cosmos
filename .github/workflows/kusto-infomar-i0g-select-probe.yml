@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0G Select and Probe
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0g_select_and_probe.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0F-SURVEY-SELECTION-RULE-FREEZE-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0g-select-probe.yml'
+  workflow_dispatch:
+
+jobs:
+  i0g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Select frozen INFOMAR survey and probe paired routes
+        run: python workspace/kusto_infomar_i0g_select_and_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0g-select-probe-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0G-METADATA-SELECTION-AND-TRANSPORT-PROBE-2026-09-24-v1.0.json
+          retention-days: 30
