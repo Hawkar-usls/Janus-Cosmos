@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0C Portal Service Discovery
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0c_portal_service_discovery.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0B-CATALOG-ASYMMETRY-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0c-portal-discovery.yml'
+  workflow_dispatch:
+
+jobs:
+  i0c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Discover INFOMAR official download portal services
+        run: python workspace/kusto_infomar_i0c_portal_service_discovery.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0c-portal-discovery-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0C-DOWNLOAD-PORTAL-SERVICE-DISCOVERY-2026-09-24-v1.0.json
+          retention-days: 30
