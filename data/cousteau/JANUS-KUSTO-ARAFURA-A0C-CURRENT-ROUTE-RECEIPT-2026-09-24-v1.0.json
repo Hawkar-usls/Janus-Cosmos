@@ -1,0 +1,36 @@
+{
+  "artifact_id": "JANUS-KUSTO-ARAFURA-A0C-CURRENT-ROUTE-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_CURRENT_BATHYMETRY_AND_BACKSCATTER_ROUTES_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ARAFURA-MONEY-SHOAL-UNSEEN-V2-PREREG-2026-09-23-v1.0",
+  "method_invariant_correction": "JANUS-KUSTO-ARAFURA-A0-PREREG-METHOD-INVARIANT-CORRECTION-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36002642421,
+    "artifact_id": 10808907288,
+    "artifact_zip_sha256": "fa292873a107d0f6f18f517ab3674f10a05f882ba15be0617f9f559c95773491"
+  },
+  "selected_subarea": "Money Shoal",
+  "selection_rule": "Lexicographically first named survey subarea in public metadata, frozen before raster values or morphology outcomes.",
+  "current_resources": {
+    "bathymetry": {
+      "url": "https://files.ausseabed.gov.au/survey/Arafura%20Marine%20Park%20Bathymetry%202021%206m.zip",
+      "content_range_total_bytes": 62699633,
+      "catalog_resource_name": "Arafura Marine Park Bathymetry 2021 6m (zip) [59.7 MB]",
+      "catalog_metadata_modified": "2026-01-20T07:04:56.972835"
+    },
+    "backscatter": {
+      "url": "https://d28rz98at9flks.cloudfront.net/145286/145286_00_0.zip",
+      "content_range_total_bytes": 141334011,
+      "catalog_resource_name": "Download the geotifs [134.7 MB]",
+      "catalog_metadata_modified": "2026-03-16T01:15:20.326383"
+    }
+  },
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "seabed_samples_read": false,
+    "underwater_imagery_read": false
+  },
+  "next_gate": "A0D_ARCHIVE_MEMBER_IDENTITY_INVENTORY_ONLY",
+  "claim_ceiling": "CURRENT_SOURCE_ROUTE_BINDING_ONLY"
+}
