@@ -374,7 +374,7 @@ with tempfile.TemporaryDirectory(prefix="kusto_infomar_i1h_cb1303_") as td:
       ],
       "claim_ceiling":"PREREGISTERED_UNSEEN_INFOMAR_CB13_03_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION"
     }
-    p=OUT/"JANUS-KUSTO-INFOMAR-I0L-CB13_02-UNSEEN-BACKSCATTER-V2-RUN-2026-09-24-v1.0.json"
+    p=OUT/"JANUS-KUSTO-INFOMAR-I1H-CB13_03-UNSEEN-BACKSCATTER-V2-RUN-2026-09-25-v1.0.json"
     raw=json.dumps(out,indent=2); p.write_text(raw)
     print(json.dumps({
       "artifact_id":out["artifact_id"],"status":status,
