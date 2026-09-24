@@ -1,0 +1,107 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1H-CB13_03-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "status": "FROZEN_AFTER_100_CANDIDATES__BEFORE_FIRST_CB13_03_BACKSCATTER_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-INFOMAR-I1F-CB13_03-BLIND-BATHYMETRY-RECEIPT-2026-09-25-v1.0",
+    "github_artifact_id": 10831895076,
+    "artifact_zip_sha256": "f0bfb97faf0647fb071c7a044d87e0f3d1fb7cb0568107a7440d7f05829668c4",
+    "candidate_json_sha256": "f1a07f466f4b30e00c5ab4ebc04b480bccd05617cfb34cf552ca6002bc69d636",
+    "frozen_candidate_count": 100,
+    "radius_distribution": {
+      "4_cells": 81,
+      "8_cells": 18,
+      "16_cells": 1
+    }
+  },
+  "representation_bridge": "JANUS-KUSTO-INFOMAR-I1G-CB13_03-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-25-v1.0",
+  "inputs": {
+    "bathymetry": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BY_CB13_03_DingleBay_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "archive_sha256": "a498b9dce20752ed34af195a8a544176d5d25b40e506b1d28a77eaabba15c98a",
+      "archive_bytes": 122289603,
+      "member": "BY_CB13_03_Dingle_2m_U29N.tif",
+      "member_crc32": "1e2cc4ec",
+      "member_sha256": "d2820c7ac62a910acb8d87fbfa9cd83d72576d475efec75572b4c6765e1f5c10",
+      "member_bytes": 2122964187,
+      "crs": "EPSG:32629",
+      "native_cell_m": 2.082037357660761
+    },
+    "heldout_backscatter": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT_TIFF.zip",
+      "archive_sha256": "a92894da8a5b7172433000a45b1aff531a1778eb56a8e3379a1d724daf6b8bf3",
+      "archive_bytes": 96624179,
+      "member": "BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT.tif",
+      "member_crc32": "4502fce2",
+      "member_sha256": "8c99066aa90fcdadf4f3dd69a86f0ec934a1e15a9b28de17a5f712102c654fce",
+      "member_bytes": 2775010886,
+      "horizontal_crs": "EPSG:4326",
+      "compound_vertical": "LAT depth",
+      "explicit_nodata": 3.3999999521443642e+38,
+      "width": 29374,
+      "height": 23474,
+      "transform": [
+        0.00002383501676501231,
+        0,
+        -10.670234022847906,
+        0,
+        -0.000024950172583065948,
+        52.333131953952744
+      ],
+      "bounds": [
+        -10.670234022847906,
+        51.747451602737854,
+        -9.970104240392434,
+        52.333131953952744
+      ]
+    }
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.8,
+    "backscatter_native_mask_min_fraction": 0.8,
+    "support_patch_geometry": "physical disk radius r plus annulus 1.25r < d <= 2r on native grids",
+    "backscatter_value_based_support_inference_used": false,
+    "honor_explicit_backscatter_nodata": true
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "implementation_only_scaling": {
+    "full_raster_arrays_required": true,
+    "scientific_math_changed": false,
+    "repair_rule": "If runner memory is insufficient, permit a separately sealed implementation-only native-window read repair with identical formulas and masks."
+  },
+  "primary_pass_requires_all": [
+    "no coverage-blocked frozen radius stratum",
+    "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+    "stratified permutation p < 0.05",
+    "candidate mean aggregate score > control mean aggregate score",
+    "candidate support fraction / 0.05 > 1"
+  ],
+  "hard_rules": [
+    "VERIFY_CANDIDATE_ARTIFACT_AND_JSON_HASHES_BEFORE_BACKSCATTER_READ",
+    "NO_CANDIDATE_COORDINATE_CHANGE",
+    "NO_CANDIDATE_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_BACKSCATTER_RESAMPLING",
+    "NO_GROUNDTRUTH_OR_OBJECT_LABEL_READ",
+    "COVERAGE_OR_DEGENERATE_RADIUS_BLOCKS_PRIMARY_PROMOTION"
+  ],
+  "claim_ceiling": "UNCHANGED_V2_IMPLEMENTATION_FREEZE_ONLY"
+}
