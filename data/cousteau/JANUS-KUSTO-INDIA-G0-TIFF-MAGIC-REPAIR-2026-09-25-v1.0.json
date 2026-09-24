@@ -1,0 +1,8 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-G0-TIFF-MAGIC-REPAIR-2026-09-25-v1.0",
+  "status": "IMPLEMENTATION_ONLY__SCIENTIFIC_PREREG_UNCHANGED",
+  "failed_run_id": 36071249771,
+  "observation": "GMRT returned a valid little-endian TIFF signature 49 49 2A 00 and 563226 bytes, but the runner compared against a literal backslash-x sequence.",
+  "repair": "Compare TIFF magic using byte concatenation; no data-selection or metric changes.",
+  "scientific_changes": "NONE"
+}
