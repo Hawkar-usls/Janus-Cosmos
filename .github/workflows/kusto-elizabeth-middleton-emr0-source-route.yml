@@ -1,0 +1,29 @@
+name: KUSTO Elizabeth Middleton EMR0 Source Route
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_elizabeth_middleton_emr0_source_route.py'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0-UNCHANGED-V2-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-elizabeth-middleton-emr0-source-route.yml'
+  workflow_dispatch:
+
+jobs:
+  emr0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Resolve GA4848 bathymetry/backscatter routes without reading bodies
+        run: python workspace/kusto_elizabeth_middleton_emr0_source_route.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-elizabeth-middleton-emr0-source-route-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0-SOURCE-ROUTE-RUN-2026-09-24-v1.0.json
+          retention-days: 30
