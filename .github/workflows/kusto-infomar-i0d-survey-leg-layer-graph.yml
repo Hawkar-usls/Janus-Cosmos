@@ -1,0 +1,28 @@
+name: KUSTO INFOMAR I0D Survey-Leg Layer Graph
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0d_survey_leg_layer_graph.py'
+      - '.github/workflows/kusto-infomar-i0d-survey-leg-layer-graph.yml'
+  workflow_dispatch:
+
+jobs:
+  i0d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Resolve INFOMAR survey-leg webmap layer graph
+        run: python workspace/kusto_infomar_i0d_survey_leg_layer_graph.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0d-survey-leg-layer-graph-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0D-SURVEY-LEG-WEBMAP-LAYER-GRAPH-2026-09-24-v1.0.json
+          retention-days: 30
