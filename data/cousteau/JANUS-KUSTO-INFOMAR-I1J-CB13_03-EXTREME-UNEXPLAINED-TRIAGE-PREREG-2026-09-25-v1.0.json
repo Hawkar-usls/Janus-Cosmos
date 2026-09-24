@@ -1,0 +1,37 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1J-CB13_03-EXTREME-UNEXPLAINED-TRIAGE-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_EXTERNAL_TRUTH_LOOKUP_OF_SUPPORTED_CB13_03_CANDIDATES",
+  "formal_parent": "JANUS-KUSTO-INFOMAR-I1I-CB13_03-FORMAL-UNSEEN-V2-PASS-RECEIPT-2026-09-25-v1.0",
+  "formal_parent_immutable": true,
+  "purpose": "Select one externally least-trivially-explained target from the 35 cross-channel-supported frozen candidates without visual cherry-picking.",
+  "source_order": [
+    "OFFICIAL_GSI_MI_INFOMAR_MAPPED_SHIPWRECK_LAYER",
+    "OFFICIAL_NMS_WRECK_INVENTORY_LOCATED_RECORDS",
+    "OFFICIAL_GSI_MI_SEABED_SEDIMENT_CLASSIFICATION",
+    "OFFICIAL_GSI_MI_SEDIMENT_SAMPLES"
+  ],
+  "selection_rule": [
+    "Sort the 35 supported candidates by frozen aggregate_score descending.",
+    "For each candidate, query georeferenced GSI/MI and NMS wreck records and official seabed classification at the frozen coordinate.",
+    "PRIMARY shortlist eligibility: no georeferenced wreck record within 500 m in either official wreck source AND containing official FOLK_5 class is neither Rock nor missing/unclassified.",
+    "Select the first eligible candidate in frozen score order.",
+    "If primary shortlist is empty, FALLBACK: select the highest-score candidate with no georeferenced wreck record within 500 m regardless of substrate class.",
+    "Do not use imagery, names, historical narratives, or subjective shape impressions to choose the target."
+  ],
+  "distance_classes": {
+    "DIRECT": "distance <= frozen candidate radius",
+    "NEAR": "radius < distance <= 500 m",
+    "REGIONAL": "500 m < distance <= 2000 m",
+    "FAR": "2000 m < distance <= 5000 m",
+    "NONE": "no georeferenced match within 5000 m"
+  },
+  "hard_rules": [
+    "NO_CANDIDATE_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_RERANKING_AFTER_EXTERNAL_LABELS",
+    "NO_IDENTITY_FROM_SHAPE_ALONE",
+    "POSTRESULT_CHARACTERIZATION_CANNOT_CHANGE_FORMAL_PASS"
+  ],
+  "next_after_selection": "Independent visual/report/source hunt for the single frozen selected target.",
+  "claim_ceiling": "POSTRESULT_EXTERNAL_CHARACTERIZATION_AND_TARGET_SELECTION_ONLY"
+}
