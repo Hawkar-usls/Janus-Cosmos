@@ -1,0 +1,34 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0I-PAIRED-RASTER-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_I0H_DIRECTORY_INVENTORY__BEFORE_ANY_RASTER_MEMBER_PAYLOAD_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds_i0h_receipt": "JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENTORY-RECEIPT-2026-09-24-v1.0",
+  "survey_id": "CB13_02",
+  "selection_rule": "For each frozen archive independently, select the unique central-directory member whose filename ends exactly in .tif case-insensitively; do not treat .tif.ovr, .tif.xml or .tif.aux.xml as raster members. FAIL if zero or more than one exact .tif member exists.",
+  "selection_uses_only": ["I0H_FILENAME","I0H_SUFFIX","I0H_CRC32","I0H_COMPRESSED_SIZE","I0H_UNCOMPRESSED_SIZE","I0H_LOCAL_HEADER_OFFSET"],
+  "selection_forbids": ["RASTER_PIXEL_VALUES","RASTER_STATISTICS","MORPHOLOGY","BACKSCATTER_VALUES","GROUNDTRUTH","SHIPWRECK_OR_OBJECT_IDENTITY"],
+  "selected": {
+    "bathymetry": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BY_CB13_02_DundalkBay_5m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "member": "BY_CB13_02_DundalkBay_5m_U29N.tif",
+      "crc32": "d8a74f8a",
+      "compressed_size": 7257924,
+      "uncompressed_size": 145154529,
+      "local_header_offset": 117,
+      "portal_representation_label": "Bathymetry U29N GeoTIFF"
+    },
+    "heldout_backscatter": {
+      "archive_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_02/BS_CB13_02_DundalkBay_1m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "member": "BS_CB13_02_DundalkBay_1m_WGS84.tif",
+      "crc32": "efcefbd6",
+      "compressed_size": 149888154,
+      "uncompressed_size": 1580261941,
+      "local_header_offset": 114,
+      "portal_representation_label": "Backscatter WGS84 GeoTIFF"
+    }
+  },
+  "candidate_generation_channel": "BATHYMETRY_ONLY",
+  "heldout_validation_channel": "BACKSCATTER_ONLY",
+  "next_gate": "I0J_PAIRED_GRID_GEOMETRY_METADATA_ONLY",
+  "claim_ceiling": "INFOMAR_PAIRED_RASTER_MEMBER_IDENTITY_FREEZE_ONLY"
+}
