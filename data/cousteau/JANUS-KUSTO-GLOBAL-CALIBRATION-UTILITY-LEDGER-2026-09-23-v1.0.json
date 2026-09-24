@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "SIX_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FIVE_MARINE_V2_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__FAILURE_MODES_PRESERVED",
+  "status": "SIX_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FIVE_MARINE_V2_PASSES__TWO_FORMAL_UNSEEN_V2_FAILS__FAILURE_MODES_PRESERVED",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -142,13 +142,18 @@
       "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022_23",
       "state": "FORMAL_UNSEEN_V2_FAIL_WITH_STRONG_CROSSCHANNEL_SIGNAL__POSTRESULT_TRUTH_COVERAGE_CHARACTERIZED",
       "finding": "100/100 frozen candidates were scorable and 40/100 exceeded same-radius q95, but the preregistered population criterion failed: candidate mean 29.5827 vs control mean 942.7372, stratified permutation p=0.198760. Posthoc diagnosis identified near-zero-but-nonzero MAD in the 160 m edge-energy control metric as the heavy-tail mechanism. The formal FAIL is immutable. Subsequent withheld-truth characterization found actual towed-video observation points inside only 3/100 frozen candidate disks and sediment samples inside 0/100; this does not promote or reinterpret the FAIL."
+    },
+    {
+      "dataset": "INFOMAR_CB13_02_DUNDALK_BAY",
+      "state": "FORMAL_UNSEEN_V2_FAIL__FIRST_FROZEN_EUROPEAN_INFOMAR_TRANSFER",
+      "finding": "58 blind bathymetry candidates were frozen before held-out backscatter read; 49 were scorable with no blocked strata and no zero-MAD exclusions. Only 1/49 exceeded same-radius q95 (support fraction 0.020408, enrichment 0.408163), candidate mean aggregate score 2.26597 vs control 1.95393, stratified permutation p=0.198760. Formal FAIL is immutable. C047 is the sole case-level cross-channel-supported candidate and may only undergo separate post-result characterization."
     }
   ],
   "utility_now_supported": [
     "KUSTO has six formal unseen cross-channel enrichment PASSes on real datasets.",
     "Five formal unseen marine paired-support-domain v2 PASSes are preserved across Maui/Puunoa, Shellharbour/Tharawal, South-west Corner, Elizabeth/Middleton and Arafura/Money Shoal, spanning multiple geographic, sensor, grid-resolution and representation lineages.",
-    "The same frozen v2 retains one immutable formal unseen marine FAIL on Solitary Islands, demonstrating that the method is not being promoted by always-pass selection.",
-    "Arafura additionally shows that the method can survive a preregistered representation bridge from geographic 6 m bathymetry to projected 2 m held-out backscatter without resampling the discovery raster.",
+    "The same frozen v2 now retains two immutable formal unseen marine FAILes: Solitary Islands and INFOMAR CB13_02/Dundalk Bay. The European INFOMAR failure had no blocked strata or zero-MAD exclusions, so it is a distinct nonvalidation outcome rather than a transport/coverage failure.",
+    "Arafura additionally shows that the method can survive a preregistered representation bridge from geographic bathymetry to projected held-out backscatter without resampling the discovery raster; INFOMAR independently exercised the reverse projected-bathymetry/geographic-backscatter bridge without scientific promotion.",
     "KUSTO remains an evidence-ranked anomaly-prioritization layer; object identity, artificiality, global precision/recall and general independent-survey repeatability remain unestablished."
   ],
   "not_yet_supported": [
@@ -162,12 +167,12 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "Shift the next unchanged-v2 corpus outside Australia/US lineages, prioritizing a source-resolved European or North Atlantic paired bathymetry/backscatter survey.",
+    "Do not select a new European survey based on the CB13_02 outcome. Freeze a deterministic metadata-only multi-survey INFOMAR batch and execute every eligible member under unchanged v2, with batch-level accounting.",
     "Advance the >=20 high-confidence target benchmark from registered candidates to LEVEL_3 blind-evaluated targets.",
     "Keep v3 separate from v2; rescue efficacy for the relative-MAD guard remains unproven despite unseen no-regression on Elizabeth/Middleton.",
-    "After Arafura A3, only then bind Money Shoal seabed samples/underwater imagery to frozen candidates under a separate post-result characterization prereg."
+    "Continue post-result truth characterization only under frozen coordinates/radii; such characterization cannot promote failed formal runs."
   ],
-  "claim_ceiling": "SIX_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FIVE_MARINE_V2_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__V3_NO_REGRESSION_ONLY__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
+  "claim_ceiling": "SIX_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FIVE_MARINE_V2_PASSES__TWO_FORMAL_UNSEEN_V2_FAILS__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
   "successor_methods": {
     "paired_support_domain_v3_relative_mad_guard": {
       "calibration_source": "AUSSEABED_SOLITARY_ISLANDS_2022_FORMAL_V2_FAIL",
@@ -181,11 +186,12 @@
   "bookkeeping": {
     "formal_unseen_crosschannel_passes": 6,
     "formal_unseen_marine_v2_passes": 5,
-    "formal_unseen_v2_fails": 1,
+    "formal_unseen_v2_fails": 2,
     "v3_unseen_no_regression_passes": 1,
     "v3_rescue_efficacy_confirmed": 0,
     "nonpromotion_solitary_formal_fail_entries": 1,
     "solitary_postresult_video_covered_candidates": 3,
-    "solitary_postresult_sediment_covered_candidates": 0
+    "solitary_postresult_sediment_covered_candidates": 0,
+    "infomar_cb13_02_formal_v2_fail_entries": 1
   }
 }
