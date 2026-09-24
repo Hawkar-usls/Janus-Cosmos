@@ -1,0 +1,36 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1I-CB13_03-FORMAL-UNSEEN-V2-PASS-RECEIPT-2026-09-25-v1.0",
+  "status": "PASS_PREREGISTERED_UNSEEN_INFOMAR_CB13_03_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_freeze": "JANUS-KUSTO-INFOMAR-I1H-CB13_03-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "run": {
+    "github_actions_run_id": 36065027194,
+    "head_sha": "ed7155955b4bf8af30d21ea7e881d3b7cc13f51e",
+    "artifact_id": 10835674072,
+    "artifact_zip_sha256": "786823bb6f25a3b4b91c42bbac32528ca57097ad4e337f388c5b3411f866814d",
+    "conclusion": "success"
+  },
+  "population": {
+    "frozen_candidates": 100,
+    "scorable_candidates": 75,
+    "blocked_strata": [],
+    "candidate_support_count": 35,
+    "candidate_support_fraction": 0.4666666666666667,
+    "support_enrichment_ratio": 9.333333333333332,
+    "candidate_mean_aggregate_score": 4.419091108234865,
+    "control_mean_aggregate_score": 0.9941729942963418,
+    "stratified_permutation_p": 0.0001999600079984003,
+    "mann_whitney_one_sided_p": 8.040754553174547e-30,
+    "primary_pass": true
+  },
+  "scientific_method_changed": false,
+  "claim_ceiling": "PREREGISTERED_UNSEEN_INFOMAR_CB13_03_SAME_SURVEY_CROSSCHANNEL_V2_VALIDATION",
+  "does_not_establish": [
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "ARCHAEOLOGICAL_OR_WRECK_CLASSIFICATION",
+    "GLOBAL_FALSE_DISCOVERY_RATE",
+    "INDEPENDENT_SURVEY_REPLICATION",
+    "DIRECT_VISUAL_CONFIRMATION"
+  ]
+}
