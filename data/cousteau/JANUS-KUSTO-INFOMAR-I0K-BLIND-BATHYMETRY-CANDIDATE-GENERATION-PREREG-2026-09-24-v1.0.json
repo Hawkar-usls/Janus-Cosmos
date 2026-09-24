@@ -1,0 +1,52 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-CANDIDATE-GENERATION-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_FIRST_INFOMAR_BATHYMETRY_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds": {
+    "member_freeze": "JANUS-KUSTO-INFOMAR-I0I-PAIRED-RASTER-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0",
+    "geometry_receipt": "JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-RECEIPT-2026-09-24-v1.0",
+    "representation_bridge": "JANUS-KUSTO-INFOMAR-I0J-NATIVE-CELL-REPRESENTATION-BRIDGE-2026-09-24-v1.0"
+  },
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+  "bathymetry_discovery": {
+    "native_cell_m": 5.423933612732585,
+    "native_scale_multipliers": [4,8,16,32],
+    "radii_m": [21.69573445093034,43.39146890186068,86.78293780372135,173.5658756074427],
+    "sampling_stride_cells": 8,
+    "sampling_stride_m": 43.39146890186068,
+    "spatial_dedup_cells": 50,
+    "spatial_dedup_m": 271.19668063662925,
+    "maximum_candidates": 100,
+    "per_metric_upper_tail_quantile": 0.995,
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in per-metric upper 0.5 percent OR generic score in upper 0.5 percent",
+    "bathymetry_support_rule": "candidate sample centers require complete valid bathymetry support through the maximum frozen radius",
+    "heldout_geometry_rule": "candidate sample centers must lie inside the frozen backscatter header-footprint polygon after inward buffering by the maximum frozen radius; geometry only"
+  },
+  "input_identity": {
+    "bathymetry_archive_sha256": "912138ee6651db61b725e75203ab80bf039f2ee6902b684bb1a9c74d526190c9",
+    "bathymetry_member": "BY_CB13_02_DundalkBay_5m_U29N.tif",
+    "bathymetry_member_sha256": "c1d8cb913cdf257fac232b82587b3ed41f14e2f9bfffb1069e003b2d9d469027",
+    "bathymetry_member_crc32": "d8a74f8a",
+    "bathymetry_crs": "EPSG:32629"
+  },
+  "truth_firewall": {
+    "backscatter_archive_download_before_candidate_freeze": false,
+    "backscatter_member_open_before_candidate_freeze": false,
+    "backscatter_values_read_before_candidate_freeze": false,
+    "groundtruth_or_object_labels_read": false,
+    "no_posthoc_scale_selection": true,
+    "no_candidate_recentering": true,
+    "no_threshold_retuning": true
+  },
+  "next_gate_on_success": "I0L_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+  "claim_ceiling": "INFOMAR_BLIND_BATHYMETRIC_CANDIDATE_GENERATION_ONLY"
+}
