@@ -1,0 +1,73 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1B-PREOUTCOME-BATCH-METADATA-AND-TRANSPORT-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_MEMBERSHIP_REPRODUCED__2_PROSPECTIVE_TRANSPORT_USABLE__2_TRANSPORT_BLOCKED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "batch_freeze": "JANUS-KUSTO-INFOMAR-I1A-PREOUTCOME-FIRST-FIVE-BATCH-FREEZE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36031706387,
+    "head_sha": "367dfd0d488c01da84d06a64a604f347f9787795",
+    "artifact_id": 10822975978,
+    "artifact_zip_sha256": "e4d4e2b6c8bc013ecc7cb290c3477aa17838871ab8396033e43ab69ce607883c"
+  },
+  "eligible_row_count": 242,
+  "current_first_five_match_preoutcome_record": true,
+  "prospective": [
+    {
+      "rank": 2,
+      "SURVEY_ID": "CB13_03",
+      "OBJECTID": 674,
+      "bathymetry_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BY_CB13_03_DingleBay_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "bathymetry_status": 206,
+      "bathymetry_archive_size_bytes": 122289603,
+      "backscatter_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT_TIFF.zip",
+      "backscatter_status": 206,
+      "backscatter_archive_size_bytes": 96624179,
+      "batch_state": "TRANSPORT_USABLE"
+    },
+    {
+      "rank": 3,
+      "SURVEY_ID": "CB13_05",
+      "OBJECTID": 676,
+      "bathymetry_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_05/BY_CB13_05_Clare_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "bathymetry_status": 206,
+      "bathymetry_archive_size_bytes": 36982234,
+      "backscatter_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_05/BS_CB13_05_Clare_2m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "backscatter_status": 206,
+      "backscatter_archive_size_bytes": 38164114,
+      "batch_state": "TRANSPORT_USABLE"
+    },
+    {
+      "rank": 4,
+      "SURVEY_ID": "CB14_01",
+      "OBJECTID": 556,
+      "bathymetry_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2014/CB14_01/BY_CB14_01_LoughSwillySheephaven_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "bathymetry_status": 206,
+      "bathymetry_archive_size_bytes": 70890200,
+      "backscatter_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2014/CB14_01/BS_CB14_01_LoughSwillySheephaven_5m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "backscatter_status": 404,
+      "batch_state": "SOURCE_TRANSPORT_BLOCKED__BACKSCATTER_404"
+    },
+    {
+      "rank": 5,
+      "SURVEY_ID": "CB14_02",
+      "OBJECTID": 557,
+      "bathymetry_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2014/CB14_02/BY_CB14_02_DonegalBay_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "bathymetry_status": 206,
+      "bathymetry_archive_size_bytes": 85765260,
+      "backscatter_url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2014/CB14_02/BS_CB14_02_DonegalBay_5m_WGS84_LAT_TIFF_Inshore_Ireland.zip",
+      "backscatter_status": 404,
+      "batch_state": "SOURCE_TRANSPORT_BLOCKED__BACKSCATTER_404"
+    }
+  ],
+  "batch_accounting": {
+    "prospective_members": 4,
+    "transport_usable": 2,
+    "transport_blocked": 2,
+    "replacement_allowed": false
+  },
+  "archive_bodies_consumed": false,
+  "raster_pixels_read": false,
+  "groundtruth_read": false,
+  "next_gate": "I1C_BATCH_ARCHIVE_MEMBER_INVENTORY_ONLY",
+  "claim_ceiling": "INFOMAR_PREOUTCOME_BATCH_METADATA_AND_TRANSPORT_HEADERS_ONLY"
+}
