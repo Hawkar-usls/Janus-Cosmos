@@ -1,0 +1,51 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0C-EXACT-SOURCE-SELECTION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_GA4848_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "route_receipt": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0-SOURCE-ROUTE-RECEIPT-2026-09-24-v1.0",
+  "member_inventory_run": {
+    "github_actions_run_id": 36001087436,
+    "artifact_id": 10807943884,
+    "artifact_zip_sha256": "4670dbad646f3289c6ce8a06612d6ae33306f709c0bc6487b8d2ab7cdb4565a1"
+  },
+  "discovery_source": {
+    "selection_basis": "Newest catalog resource is explicitly the 5m MSL bathymetry product and contains one MSL COG; legacy archive contains separate ellipsoid and MSL versions. Selection is provenance-based before pixel read.",
+    "url": "https://files.ausseabed.gov.au/survey/Elizabeth%20Middleton%20Reef%20Bathymetry%202020%205m.zip",
+    "archive_sha256": "ae5547ec3cd362ad01132c21fdddb7ee8d8f6ec334adb0d637579ac901b516c1",
+    "archive_bytes": 71699530,
+    "member": "Elizabeth_Middleton_Reef_Bathymetry_2020_5m_MSL_cog.tif",
+    "member_uncompressed_bytes": 475061819,
+    "member_crc32": 1901413558,
+    "nominal_cell_m": 5
+  },
+  "heldout_backscatter_source": {
+    "url": "https://d28rz98at9flks.cloudfront.net/144416/144416_00_0.zip",
+    "archive_sha256": "ca75ca36d8db5a327d2782a2d9dab851be245925f5f6536d40aee42b0d228ec9",
+    "archive_bytes": 14401549,
+    "members": [
+      {
+        "name": "32Bit_Geotifs/bksct_elizabeth_clip_20200331.tif",
+        "uncompressed_bytes": 3282021,
+        "crc32": 293533635
+      },
+      {
+        "name": "32Bit_Geotifs/bksct_middleton_clip_20200331.tif",
+        "uncompressed_bytes": 8380931,
+        "crc32": 2157690550
+      }
+    ]
+  },
+  "legacy_bathymetry_archive_retained_as_provenance_only": {
+    "url": "https://d28rz98at9flks.cloudfront.net/144415/144415_00_0.zip",
+    "archive_sha256": "e53ba426079a055bf6c45410c3bf89e17bc87b7f925ca8535395bc49b1a50ad8",
+    "do_not_use_for_discovery": true
+  },
+  "next_gate": "EMR0D_RASTER_HEADER_ONLY_AUDIT",
+  "truth_firewall": {
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "auv_sediment_bruv_groundtruth_read": false
+  },
+  "claim_ceiling": "EXACT_SOURCE_SELECTION_PROVENANCE_ONLY"
+}
