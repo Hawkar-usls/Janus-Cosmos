@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_PASS",
+  "status": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__FAILURE_MODES_PRESERVED",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -126,14 +126,18 @@
       "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022",
       "state": "FORMAL_UNSEEN_V2_FAIL_WITH_SIGNAL",
       "finding": "100/100 candidates were scorable and 40% exceeded same-radius control q95, but the frozen primary population test failed: candidate mean score 29.58 versus control mean 942.74 and stratified permutation p=0.19876. No scientific promotion; posthoc analysis may diagnose the heavy control tail only."
+    },
+    {
+      "dataset": "AUSSEABED_SOLITARY_ISLANDS_2022_23",
+      "state": "FORMAL_UNSEEN_V2_FAIL_WITH_STRONG_CROSSCHANNEL_SIGNAL",
+      "finding": "100/100 frozen candidates were scorable and 40/100 exceeded same-radius q95, but the preregistered population criterion failed: candidate mean 29.5827 vs control mean 942.7372, stratified permutation p=0.198760. Posthoc diagnosis identified near-zero-but-nonzero MAD in the 160 m edge-energy control metric as the heavy-tail mechanism. The formal FAIL is immutable."
     }
   ],
   "utility_now_supported": [
-    "KUSTO has five formal unseen cross-channel PASSes on real datasets, including four marine paired-support-domain-v2 PASSes.",
-    "Marine v2 replication spans Maui/Puunoa, Shellharbour/Tharawal, South-west Corner Marine Park, and Elizabeth/Middleton Reefs, across R2Sonic 2022 and Kongsberg EM2040C-family sensor lineages.",
-    "A separate genuinely unseen marine corpus, Solitary Islands, remains an immutable formal v2 FAIL despite strong q95 candidate support because of a diagnosed near-zero-MAD control-tail instability.",
-    "The calibration-derived v3 relative-MAD guard passed its first unseen well-conditioned corpus with identical scores to v2 because the guard did not activate; this supports no-regression, not rescue efficacy.",
-    "KUSTO remains an evidence-ranked anomaly-prioritization layer, not an object-identity or artificiality classifier."
+    "KUSTO has three formal unseen cross-channel enrichment PASSes on real datasets, including two marine paired-support-domain v2 PASSes.",
+    "The same frozen v2 also has a formal unseen marine FAIL on Solitary Islands, demonstrating that the method is not being promoted by always-pass selection.",
+    "The Solitary Islands failure exposes a concrete portability weakness: exact-zero-MAD exclusion is insufficient when an active control metric has practically degenerate but numerically nonzero MAD.",
+    "KUSTO remains useful as an evidence-ranked prioritization layer, not an object-identity or artificiality classifier."
   ],
   "not_yet_supported": [
     "GLOBAL_ANOMALY_DETECTION_ACCURACY",
@@ -146,13 +150,12 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "Test v3 on a genuinely unseen corpus where the relative-MAD guard actually activates; do not use Solitary Islands for validation.",
-    "After acoustic results are frozen, bind Elizabeth/Middleton candidates to independent AUV imagery, sediment grabs, and BRUV where spatial support permits.",
-    "Build a >=20 high-confidence known-object/natural-control benchmark with hidden truth; registry entries alone do not count as validated targets.",
-    "Continue independent-survey replay separately from same-survey cross-channel validation.",
-    "Keep South-west Corner access-blocked until an authoritative bathymetry transport route becomes available."
+    "Continue unchanged v2 on additional unseen corpora chosen before outcome inspection; Elizabeth and Middleton Reefs GA4848 is next.",
+    "Keep any successor near-zero-MAD guard separate from v2 and validate it only on a future corpus, never on Solitary Islands.",
+    "After acoustic scoring, bind Solitary Islands frozen candidates to withheld towed-video, stills and sediment only for ground-truth characterization; this cannot promote the formal SI3 FAIL.",
+    "Advance the >=20 high-confidence target benchmark from registered candidates to LEVEL_3 blind-evaluated targets."
   ],
-  "claim_ceiling": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES_ACROSS_MULTIPLE_GEOGRAPHIC_AND_TWO_SENSOR_LINEAGES__ONE_FORMAL_MARINE_V2_FAIL__V3_NO_REGRESSION_ONLY__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
+  "claim_ceiling": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES_AND_ONE_FORMAL_UNSEEN_V2_FAIL__TWO_MARINE_V2_PASSES__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
   "successor_methods": {
     "paired_support_domain_v3_relative_mad_guard": {
       "calibration_source": "AUSSEABED_SOLITARY_ISLANDS_2022_FORMAL_V2_FAIL",
