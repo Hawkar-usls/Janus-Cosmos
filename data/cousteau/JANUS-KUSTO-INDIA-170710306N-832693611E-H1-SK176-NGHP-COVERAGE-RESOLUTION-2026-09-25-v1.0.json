@@ -1,0 +1,100 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-H1-SK176-NGHP-COVERAGE-RESOLUTION-2026-09-25-v1.0",
+  "status": "SEALED_NO_DIRECT_SK176_NGHP01_NGHP02_BINDING_AT_TARGET",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "source_findings": {
+    "SK176_MD161": {
+      "published_swath_study_box_approx": {
+        "lat_min": 15.6666667,
+        "lat_max": 16.3333333,
+        "lon_min": 81.6666667,
+        "lon_max": 82.3333333
+      },
+      "target_inside": false,
+      "approximate_distance_to_ne_corner_km": 129.1,
+      "source_note": "Published KG swath-bathymetry figure places SK176/MD161 coverage around 15°40′–16°20′N, 81°40′–82°20′E."
+    },
+    "NGHP01": {
+      "nearest_known_site": {
+        "site": "NGHP-01-16",
+        "lat": 16.59331,
+        "lon": 82.68345,
+        "approx_distance_km": 81.9
+      },
+      "target_bound_to_nghp01_site_or_swath": false
+    },
+    "NGHP02": {
+      "nearest_known_area_c_site": {
+        "site": "NGHP-02-07",
+        "lat": 16.6494,
+        "lon": 82.8545,
+        "approx_distance_km": 64.4
+      },
+      "other_area_c_sites": [
+        {
+          "site": "NGHP-02-08",
+          "lat": 16.5811,
+          "lon": 82.9242
+        },
+        {
+          "site": "NGHP-02-09",
+          "lat": 16.5691,
+          "lon": 82.9421
+        },
+        {
+          "site": "NGHP-02-05",
+          "lat": 16.2892,
+          "lon": 83.3048
+        }
+      ],
+      "area_b_cluster_examples": [
+        {
+          "site": "NGHP-02-16",
+          "lat": 17.4385,
+          "lon": 84.1977
+        },
+        {
+          "site": "NGHP-02-17",
+          "lat": 17.4295,
+          "lon": 84.1886
+        },
+        {
+          "site": "NGHP-02-22",
+          "lat": 17.432,
+          "lon": 84.2082
+        }
+      ],
+      "target_bound_to_listed_nghp02_site": false,
+      "note": "No listed NGHP-02 drill site is close enough to bind the target to the published survey areas; nearest listed site is ~64 km away."
+    },
+    "NCEI": {
+      "exact_target_multibeam": "NOT_CONFIRMED",
+      "no_trackline_intersection_within_half_span_deg": 0.25,
+      "tracks_first_seen_within_half_span_deg": 0.5,
+      "nearby_surveys": [
+        "EQT190008",
+        "EQT190009"
+      ],
+      "EQT190009_north_extent_deg": 16.9384742,
+      "target_lat_deg": 17.0710306,
+      "simple_north_gap_km": 14.74,
+      "caution": "Bounding-box gap is only a lower bound on distance to actual swath."
+    }
+  },
+  "scientific_interpretation": {
+    "result": "TARGET_REMAINS_UNRESOLVED_BY_DIRECT_PUBLIC_MULTIBEAM",
+    "positive_claim_allowed": false,
+    "negative_claim_allowed": "No direct binding found in SK176/NGHP-01/NGHP-02 listed sites or NCEI trackline coverage checked so far.",
+    "next_gate": "SEARCH_OTHER_PUBLIC_OR_INDIAN_SURVEY_ARCHIVES_FOR_SWATH_INTERSECTING_TARGET"
+  },
+  "hard_rules": [
+    "DO_NOT_USE_GEBCO_TID40_AS_DIRECT_SONAR",
+    "DO_NOT_TREAT_NEARBY_SURVEY_AS_TARGET_COVERAGE",
+    "NO_RECENTERING",
+    "ONLY_EXACT_OR_GEOMETRIC_SWATH_INTERSECTION_COUNTS"
+  ]
+}
