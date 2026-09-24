@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0N C047 Official Wreck Query
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0n_c047_official_wreck_query.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0N-C047-POSTRESULT-INDEPENDENT-TRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0n-c047-official-wreck-query.yml'
+  workflow_dispatch:
+
+jobs:
+  i0n:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests pyproj
+      - name: Query official GSI/MI mapped shipwreck layer around frozen C047
+        run: python workspace/kusto_infomar_i0n_c047_official_wreck_query.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0n-c047-official-wreck-query-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0N-C047-OFFICIAL-GSI-SHIPWRECK-SPATIAL-QUERY-2026-09-24-v1.0.json
+          retention-days: 30
