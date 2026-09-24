@@ -1,0 +1,29 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-PREREG-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_RASTER_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds_member_freeze": "JANUS-KUSTO-INFOMAR-I0I-PAIRED-RASTER-MEMBER-SELECTION-FREEZE-2026-09-24-v1.0",
+  "allowed_operations": [
+    "DOWNLOAD_FROZEN_ARCHIVE_BYTES_FOR_IDENTITY_HASH",
+    "VERIFY_FROZEN_ZIP_MEMBER_CRC_AND_UNCOMPRESSED_SIZE",
+    "STREAM_EXTRACT_FROZEN_TIFF_MEMBER_TO_LOCAL_DISK",
+    "OPEN_GEOTIFF_DATASET_HEADER",
+    "READ_WIDTH_HEIGHT_BAND_COUNT_DTYPE_NODATA_CRS_TRANSFORM_BOUNDS_RESOLUTION_BLOCK_SHAPES",
+    "TRANSFORM_DATASET_BOUNDS_BETWEEN_DECLARED_CRS"
+  ],
+  "forbidden_operations": [
+    "DATASET_READ",
+    "DATASET_SAMPLE",
+    "RASTER_PIXEL_ARRAY_MATERIALIZATION",
+    "RASTER_STATISTICS",
+    "HISTOGRAM",
+    "MORPHOLOGY",
+    "BACKSCATTER_VALUES",
+    "BATHYMETRY_VALUES",
+    "GROUNDTRUTH_OR_OBJECT_IDENTITY"
+  ],
+  "pass_rule": "PASS iff both frozen members verify against I0I identity fields, raster headers open, both are georeferenced, and transformed footprints have a non-empty intersection. No raster value may be read.",
+  "next_gate_on_pass": "I0K_BLIND_BATHYMETRY_CANDIDATE_GENERATION_FREEZE",
+  "next_gate_on_fail": "INFOMAR_GRID_GEOMETRY_OR_REPRESENTATION_REPAIR_ONLY",
+  "claim_ceiling": "INFOMAR_PAIRED_GRID_GEOMETRY_METADATA_ONLY"
+}
