@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-CHARACTERIZATION-RECEIPT-2026-09-25-v1.0",
+  "status": "SEALED_BROAD_GEOLOGIC_RELIEF__NOT_COMPACT_TARGET",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C002",
+    "lon": -10.613772738992706,
+    "lat": 52.12624933416862,
+    "radius_m": 8.328149430643045
+  },
+  "run": {
+    "github_actions_run_id": 36066259401,
+    "artifact_id": 10836178091,
+    "artifact_zip_sha256": "3f3a7babd8f2c684b7c25c3c37489df989e0250132193fc9e643fc50931d13f8",
+    "output_json_sha256": "8e9df35b2e70e9b32656cde9255acb79798e12a31e123a789a3a6fab5e28b39c",
+    "conclusion": "success"
+  },
+  "bathymetry": {
+    "center_value": -59.73093795776367,
+    "disk_median": -54.7264289855957,
+    "annulus_median": -49.60524940490723,
+    "signed_disk_minus_annulus_median": -5.121179580688477,
+    "local_extremum_value_within_50m": -68.57316589355469,
+    "local_extremum_distance_m": 36.42077902737218,
+    "half_relief_component_area_m2": 26030.9517499635,
+    "half_relief_equivalent_diameter_m": 182.05394023515808,
+    "component_touches_100m_window": true,
+    "preliminary_morphology_class": "BROAD_GEOLOGIC_RELIEF",
+    "line_artefact_check_pass": true
+  },
+  "backscatter": {
+    "disk_median": 216.96728515625,
+    "annulus_median": 217.64227294921875,
+    "valid_fraction_250m": 0.9985226322066179,
+    "line_artefact_check_pass": true
+  },
+  "interpretation": "C002 is a real cross-channel anomaly but its target-centred source morphology is part of broad relief extending beyond the +/-100 m characterization window. It is not promoted as a compact object. Regional geological context makes a natural bedrock/reef/channel explanation plausible, but exact geological identity is not established by this gate.",
+  "disposition": "NATURAL_GEOLOGIC_CONTEXT_PLAUSIBLE__COMPACT_OBJECT_HYPOTHESIS_NOT_SUPPORTED",
+  "does_not_establish": [
+    "EXACT_GEOLOGIC_UNIT",
+    "NO_ARTIFICIAL_MATERIAL_ANYWHERE",
+    "OBJECT_IDENTITY"
+  ],
+  "next_gate": "I1L_SUPPORTED_CANDIDATE_COMPACT_UNEXPLAINED_FUNNEL"
+}
