@@ -1,0 +1,8 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-G0-GMRT-RETRY-REPAIR-2026-09-25-v1.0",
+  "status": "IMPLEMENTATION_ONLY__SCIENTIFIC_PREREG_UNCHANGED",
+  "failed_run_id": 36071482357,
+  "observation": "Same GMRT frozen URL intermittently returned a valid GeoTIFF and zero-byte responses.",
+  "repair": "Use fixed transport retry policy: up to 6 attempts for resolution=max, then 6 for mresolution=100; accept only TIFF/ZIP-TIFF. Preserve null-safe result emission if a layer remains unavailable.",
+  "scientific_changes": "NONE"
+}
