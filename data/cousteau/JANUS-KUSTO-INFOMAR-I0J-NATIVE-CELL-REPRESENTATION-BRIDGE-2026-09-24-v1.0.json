@@ -1,0 +1,26 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0J-NATIVE-CELL-REPRESENTATION-BRIDGE-2026-09-24-v1.0",
+  "status": "FROZEN_FROM_I0J_HEADER_ONLY__BEFORE_BATHYMETRY_PIXEL_READ",
+  "binds_i0j_receipt": "JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-RECEIPT-2026-09-24-v1.0",
+  "portal_label": "Bathymetry U29N GeoTIFF nominal 5m",
+  "embedded_header_resolution_m": [5.42393361273257,5.423933612732599],
+  "effective_native_cell_m": 5.423933612732585,
+  "effective_native_cell_rule": "Arithmetic mean of absolute embedded affine x/y pixel sizes because the two axes agree to numerical precision; embedded geometry overrides rounded portal label for cell-based method scaling.",
+  "unchanged_v2_native_scale_rule": {
+    "radius_multipliers_cells": [4,8,16,32],
+    "sampling_stride_cells": 8,
+    "spatial_dedup_cells": 50,
+    "derived_radii_m": [21.69573445093034,43.39146890186068,86.78293780372135,173.5658756074427],
+    "derived_sampling_stride_m": 43.39146890186068,
+    "derived_spatial_dedup_m": 271.19668063662925
+  },
+  "heldout_domain_bridge": {
+    "backscatter_header_crs": "EPSG:4326",
+    "bathymetry_crs": "EPSG:32629",
+    "rule": "Densify the frozen backscatter header rectangle edges in EPSG:4326, transform those geometry points to EPSG:32629, construct the transformed polygon, then inward-buffer it by the maximum derived radius. This uses header geometry only and no backscatter values."
+  },
+  "scientific_method_changed": false,
+  "bathymetry_values_read": false,
+  "backscatter_values_read": false,
+  "claim_ceiling": "INFOMAR_HEADER_GEOMETRY_TO_UNCHANGED_NATIVE_CELL_SCALE_BRIDGE_ONLY"
+}
