@@ -112,8 +112,8 @@ def load_nms():
     rd=csv.DictReader(io.StringIO(text))
     fields=rd.fieldnames or []
     norms={f:normalize(f) for f in fields}
-    lat_candidates=[f for f,n in norms.items() if n in ("latitude","lat","latdd","ddlatitude") or "latitude" in n]
-    lon_candidates=[f for f,n in norms.items() if n in ("longitude","long","lon","londd","ddlongitude") or "longitude" in n]
+    lat_candidates=[f for f,n in norms.items() if n in ("latitude","lat","latdd","ddlatitude","ddlat") or "latitude" in n]
+    lon_candidates=[f for f,n in norms.items() if n in ("longitude","long","lon","londd","ddlongitude","ddlong") or "longitude" in n]
     if not lat_candidates or not lon_candidates:
         raise RuntimeError(f"NMS coordinate columns not found; fields={fields}")
     rows=[]; total=0
