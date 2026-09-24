@@ -1,0 +1,29 @@
+name: KUSTO Elizabeth Middleton EMR0B Member Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_elizabeth_middleton_emr0b_member_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0-SOURCE-ROUTE-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-elizabeth-middleton-emr0b-members.yml'
+  workflow_dispatch:
+
+jobs:
+  emr0b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inventory GA4848 archive members without pixel decode
+        run: python workspace/kusto_elizabeth_middleton_emr0b_member_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-elizabeth-middleton-emr0b-members-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0B-MEMBER-LEVEL-DISAMBIGUATION-2026-09-24-v1.0.json
+          retention-days: 30
