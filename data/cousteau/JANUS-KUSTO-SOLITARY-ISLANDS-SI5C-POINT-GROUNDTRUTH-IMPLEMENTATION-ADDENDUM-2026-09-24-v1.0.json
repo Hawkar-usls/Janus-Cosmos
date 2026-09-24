@@ -1,0 +1,30 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5C-POINT-GROUNDTRUTH-IMPLEMENTATION-ADDENDUM-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_SCHEMA_AUDIT__BEFORE_CANDIDATE_TO_TRUTH_DISTANCE_SCORING",
+  "parent_prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0",
+  "schema_audit": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5B-TRUTH-LAYER-SCHEMA-AUDIT-2026-09-24-v1.0",
+  "observed_truth_geometry": {
+    "towed_video": {
+      "feature_count": 13759,
+      "geometry": "POINT",
+      "crs": "EPSG:4326",
+      "fields": ["PrimarySub","TransectID","Latitude","Longitude","ImageDate","ImageTime"]
+    },
+    "sediment_samples": {
+      "feature_count": 47,
+      "geometry": "POINTZ",
+      "crs": "EPSG:7844"
+    }
+  },
+  "implementation_correction": {
+    "reason": "The published towed-video truth layer contains sampled georeferenced observation points rather than line-track geometry.",
+    "primary_video_coverage_rule": "A frozen candidate is video-covered iff at least one actual towed-video observation point lies inside its own frozen radius.",
+    "unique_transect_count": "Count distinct TransectID values among observation points inside the frozen candidate disk.",
+    "do_not_reconstruct_track_for_primary_coverage": true,
+    "nearest_video_distance": "Minimum planar distance after transformation into the candidate bathymetry CRS.",
+    "sediment_rule_unchanged": "A sediment sample covers a candidate iff its georeferenced point lies inside the frozen candidate radius."
+  },
+  "formal_si3_result_changed": false,
+  "promotion_rule": "NONE",
+  "claim_ceiling": "POSTRESULT_POINT_GROUNDTRUTH_CHARACTERIZATION_IMPLEMENTATION_ONLY"
+}
