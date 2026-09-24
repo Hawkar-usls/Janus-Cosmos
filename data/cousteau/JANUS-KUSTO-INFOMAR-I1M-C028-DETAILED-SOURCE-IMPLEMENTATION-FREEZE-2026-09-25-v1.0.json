@@ -1,0 +1,21 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1M-C028-DETAILED-SOURCE-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_C028_DETAILED_SOURCE_READ",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C028",
+    "x_m": 394292.8345864928,
+    "y_m": 5774709.36120484,
+    "lon": -10.543715274603503,
+    "lat": 52.112809857693264,
+    "radius_m": 8.328149430643045
+  },
+  "binds": [
+    "JANUS-KUSTO-INFOMAR-I1M-C028-DETAILED-CHARACTERIZATION-PREREG-2026-09-25-v1.0",
+    "JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-IMPLEMENTATION-FREEZE-2026-09-25-v1.0"
+  ],
+  "source_identity": "Same frozen CB13_03 bathymetry and held-out backscatter source archives/hashes as I1K.",
+  "numeric_definitions": "Identical I1K source-value and line-artefact definitions.",
+  "extra_rendering": "Add native bathymetry +/-50 m zoom; visualization only.",
+  "source_pixel_values_read_before_this_freeze_for_C028_detailed_gate": false,
+  "claim_ceiling": "POSTRESULT_C028_DETAILED_SOURCE_IMPLEMENTATION_FREEZE_ONLY"
+}
