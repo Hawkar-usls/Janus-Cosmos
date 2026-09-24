@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0L-UNCHANGED-V2-IMPLEMENTATION-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_58_CANDIDATES__BEFORE_FIRST_BACKSCATTER_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "github_artifact_id": 10820774615,
+    "artifact_zip_sha256": "fcd680ada03d7e238dbe2f048915849ea529f4e68aa984b6cba4865d2ef6d16c",
+    "candidate_json_sha256": "ebe4d940efcadab3c61ffa967f0c472b88cfcc75e46dd993593c62f871a7ca0d",
+    "frozen_candidate_count": 58,
+    "radius_distribution": {
+      "4_cells": 25,
+      "8_cells": 17,
+      "16_cells": 10,
+      "32_cells": 6
+    }
+  },
+  "representation_bridge": "JANUS-KUSTO-INFOMAR-I0L-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-24-v1.0",
+  "inputs": {
+    "bathymetry": {
+      "archive_sha256": "912138ee6651db61b725e75203ab80bf039f2ee6902b684bb1a9c74d526190c9",
+      "member_sha256": "c1d8cb913cdf257fac232b82587b3ed41f14e2f9bfffb1069e003b2d9d469027",
+      "crs": "EPSG:32629"
+    },
+    "heldout_backscatter": {
+      "archive_sha256": "7b6539857dcc0bfc1b3a8e1ec1546d7474af3690091acbb0e3b3fda85d314f28",
+      "member_sha256": "c891e584dcb297e56ce07aef8ac1a3fcd31b7b3be1e79cc86974b78e48468eb6",
+      "member_crc32": "efcefbd6",
+      "crs": "EPSG:4326",
+      "explicit_nodata": 0.0
+    }
+  },
+  "support_domain_v2": {
+    "candidate_and_control_rule_identical": true,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "support_patch_geometry": "physical disk radius r plus annulus 1.25r < d <= 2r on native grids",
+    "backscatter_value_based_support_inference_used": false,
+    "honor_explicit_backscatter_nodata": true
+  },
+  "scoring": {
+    "metrics": [
+      "disk_standard_deviation",
+      "absolute_center_vs_annulus_contrast_over_annulus_sd",
+      "disk_q95_minus_q05_range",
+      "median_first_difference_edge_energy"
+    ],
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "primary_pass_requires_all": [
+    "no coverage-blocked frozen radius stratum",
+    "no radius stratum with fewer than 2 active nonzero-MAD metrics",
+    "stratified permutation p < 0.05",
+    "candidate mean aggregate score > control mean aggregate score",
+    "candidate support fraction / 0.05 > 1"
+  ],
+  "hard_rules": [
+    "VERIFY_CANDIDATE_ARTIFACT_AND_JSON_HASHES_BEFORE_BACKSCATTER_READ",
+    "NO_CANDIDATE_COORDINATE_CHANGE",
+    "NO_CANDIDATE_RADIUS_CHANGE",
+    "NO_THRESHOLD_CHANGE",
+    "NO_BACKSCATTER_RESAMPLING",
+    "NO_GROUNDTRUTH_OR_OBJECT_LABEL_READ",
+    "COVERAGE_OR_DEGENERATE_RADIUS_BLOCKS_PRIMARY_PROMOTION"
+  ],
+  "claim_ceiling": "UNCHANGED_V2_IMPLEMENTATION_FREEZE_ONLY"
+}
