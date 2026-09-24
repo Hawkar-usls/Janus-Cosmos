@@ -1,0 +1,39 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5C-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_CHARACTERIZATION__SPARSE_VIDEO_COVERAGE__NO_SEDIMENT_CANDIDATE_INTERSECTION",
+  "formal_parent": "JANUS-KUSTO-SOLITARY-ISLANDS-SI3-FORMAL-UNSEEN-V2-FAIL-RECEIPT-2026-09-24-v1.0",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0",
+  "implementation_addendum": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5C-POINT-GROUNDTRUTH-IMPLEMENTATION-ADDENDUM-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36001333364,
+    "artifact_id": 10808476807,
+    "artifact_zip_sha256": "17e452087954e0833848c67b2a865c613ac7dd9513bbb90b023b62c3e3f848f6",
+    "output_json_sha256": "9235b20908b10d68f6c1564d14f7fbd73bbe2e7f4e6e864a3420f6b6cd19074f"
+  },
+  "result": {
+    "frozen_candidate_count": 100,
+    "video_observation_covered_candidates": 3,
+    "video_observation_coverage_fraction": 0.03,
+    "sediment_sample_covered_candidates": 0,
+    "sediment_sample_coverage_fraction": 0.0,
+    "nearest_video_observation_distance_m_min": 8.824062821470214,
+    "nearest_video_observation_distance_m_median": 585.0184345708401,
+    "nearest_video_observation_distance_m_q90": 1082.2658279455031,
+    "nearest_sediment_sample_distance_m_min": 101.26392115903525,
+    "nearest_sediment_sample_distance_m_median": 957.803282156092,
+    "video_primary_substrate_observations_inside_covered_candidate_disks": {
+      "Rock": 115,
+      "Sand": 76
+    }
+  },
+  "interpretation": "The published independent towed-video/sediment truth is spatially sparse relative to the 100 frozen anomaly candidates. Three candidates have actual georeferenced video observations inside their frozen disks; none has a sediment sample inside its disk. This characterizes ground-truth coverage and local substrate observations only.",
+  "formal_si3_result_changed": false,
+  "promotion": false,
+  "does_not_establish": [
+    "DIRECT_VISUAL_CONFIRMATION_OF_OBJECT_IDENTITY",
+    "GLOBAL_VIDEO_VALIDATION_RATE",
+    "SEDIMENT_ASSOCIATION",
+    "REVERSAL_OF_SI3_FORMAL_FAIL"
+  ],
+  "claim_ceiling": "POSTRESULT_GROUNDTRUTH_COVERAGE_AND_SUBSTRATE_CHARACTERIZATION_ONLY"
+}
