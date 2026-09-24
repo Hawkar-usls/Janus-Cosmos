@@ -95,7 +95,7 @@ def inspect(path,label):
         if inb:
             a=max(0,row-2); b=min(ds.height,row+3); c=max(0,col-2); d=min(ds.width,col+3)
             vals=np.where(valid[a:b,c:d],arr[a:b,c:d],np.nan)
-            result["target_5x5_m"]=vals.tolist()
+            result["target_5x5_m"]=[[None if not np.isfinite(x) else float(x) for x in rr] for rr in vals]
         return result
 
 with tempfile.TemporaryDirectory() as td:
