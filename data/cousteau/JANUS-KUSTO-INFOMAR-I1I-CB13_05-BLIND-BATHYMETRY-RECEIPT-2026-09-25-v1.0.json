@@ -1,0 +1,35 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1I-CB13_05-BLIND-BATHYMETRY-RECEIPT-2026-09-25-v1.0",
+  "status": "SEALED_100_BLIND_CB13_05_CANDIDATES__BACKSCATTER_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "freeze": "JANUS-KUSTO-INFOMAR-I1E-PER-SURVEY-NATIVE-CELL-BLIND-FREEZE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36069710476,
+    "head_sha": "7189946d7816c119ed00f7b610fbba8bdc94c272",
+    "artifact_id": 10837736851,
+    "artifact_zip_sha256": "6a50760a9f1655877ab26a31f2f850e6021e5ac280922d731820cd9433129f25",
+    "candidate_json_sha256": "2f661d2ac81bf7064eddc5acef868c82c2f52a06a6d8160707aa1c1e36c5e4b5"
+  },
+  "blind_execution": {
+    "SURVEY_ID": "CB13_05",
+    "rank": 3,
+    "sample_centers": 112704,
+    "pre_dedup_followup_total": 3791,
+    "frozen_candidate_count": 100,
+    "radius_distribution": {
+      "4_cells": 62,
+      "8_cells": 22,
+      "16_cells": 7,
+      "32_cells": 9
+    },
+    "candidate_coordinates_and_radii_frozen": true
+  },
+  "firewall": {
+    "backscatter_values_read": false,
+    "groundtruth_or_object_labels_read": false,
+    "candidate_recenter_allowed": false,
+    "candidate_radius_change_allowed": false
+  },
+  "next_gate": "I1J_CB13_05_UNCHANGED_V2_BACKSCATTER_REPLAY",
+  "claim_ceiling": "BLIND_BATHYMETRY_CANDIDATE_FREEZE_ONLY"
+}
