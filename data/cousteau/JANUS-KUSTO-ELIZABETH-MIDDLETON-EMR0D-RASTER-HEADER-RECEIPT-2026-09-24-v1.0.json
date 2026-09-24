@@ -1,0 +1,29 @@
+{
+  "artifact_id": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0D-RASTER-HEADER-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_HEADERS__DISCOVERY_COG_REQUIRES_SPARSE_SUPPORT_AND_METRIC_NORMALIZATION_BEFORE_V2",
+  "source_freeze": "JANUS-KUSTO-ELIZABETH-MIDDLETON-EMR0C-EXACT-SOURCE-SELECTION-FREEZE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36001514555,
+    "artifact_id": 10808600984,
+    "artifact_zip_sha256": "e0cdd1c993d9b8319b1bfb4c6fc7f96594a58c05707f5ca238cc24c086968cd4"
+  },
+  "bathymetry": {
+    "crs": "EPSG:4326",
+    "width": 275953,
+    "height": 261823,
+    "resolution_deg": [0.000044915764205976074,0.00004491576420597608],
+    "nodata": 3.4028234663852886e38,
+    "member_sha256": "b41870599aad74f9159085ed15ac516a64baa5786656c3925d29c4a66a9d3d2d"
+  },
+  "backscatter": {
+    "crs": "EPSG:32757",
+    "resolution_m": [4,4],
+    "tile_count": 2,
+    "tiles": ["ELIZABETH","MIDDLETON"]
+  },
+  "hard_rule": "Do not use held-out backscatter extents to crop/select the discovery bathymetry. Determine discovery support from bathymetry's own valid/nodata mask only.",
+  "numeric_depth_values_read": false,
+  "backscatter_values_read": false,
+  "next_gate": "EMR0E_DISCOVERY_BATHYMETRY_SUPPORT_MASK_COMPONENT_AUDIT",
+  "claim_ceiling": "SOURCE_GEOMETRY_AND_PREPROCESSING_REQUIREMENT_ONLY"
+}
