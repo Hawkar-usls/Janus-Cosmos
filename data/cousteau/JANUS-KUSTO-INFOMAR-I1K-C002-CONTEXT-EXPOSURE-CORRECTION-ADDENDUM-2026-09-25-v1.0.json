@@ -1,0 +1,14 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1K-C002-CONTEXT-EXPOSURE-CORRECTION-ADDENDUM-2026-09-25-v1.0",
+  "status": "EPISTEMIC_CORRECTION__TARGET_SELECTION_UNAFFECTED",
+  "corrects": "JANUS-KUSTO-INFOMAR-I1K-C002-TARGET-CENTERED-SOURCE-VALUE-CHARACTERIZATION-PREREG-2026-09-25-v1.0",
+  "correction": "Regional Blasket navigational/geologic/habitat context was consulted after I1J selected C002 and before I1K numeric source-value characterization was executed. Therefore I1K must not be described as blind to regional external context.",
+  "unaffected": [
+    "I1J target selection was already frozen and completed before this contextual lookup",
+    "C002 coordinates/radius and score remain unchanged",
+    "I1K numeric metrics, windows, morphology measures and artefact checks were frozen before target-centered source pixel values were read"
+  ],
+  "allowed_claim": "PRE-SPECIFIED_POSTRESULT_SOURCE_VALUE_CHARACTERIZATION__CONTEXT_NOT_BLIND",
+  "forbidden_claim": "BLIND_TO_EXTERNAL_CONTEXT",
+  "scientific_contract_changes": "NONE_TO_NUMERIC_CHARACTERIZATION"
+}
