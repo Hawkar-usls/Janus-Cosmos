@@ -1,0 +1,32 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1N-C028-NPWS-REEF-AND-COMMUNITY-POINT-QUERY-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_EXACT_NPWS_POINT_QUERY",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C028",
+    "lon": -10.543715274603503,
+    "lat": 52.112809857693264,
+    "radius_m": 8.328149430643045
+  },
+  "source": "NPWS Site Specific Conservation Objectives ArcGIS FeatureServer SSCO_SAC_Habitats",
+  "service": "https://services.arcgis.com/pMnvm7HXxTmNXxGi/ArcGIS/rest/services/SSCO_SAC_Habitats/FeatureServer",
+  "layers": {
+    "1170_Reefs": 43,
+    "Marine_Community_Types": 46
+  },
+  "query_rule": "Exact frozen WGS84 target point, esriSpatialRelIntersects, outFields=*, returnGeometry=true, outSR=4326.",
+  "interpretation_rule": {
+    "BOTH_HIT": "C028 is independently mapped by NPWS as reef and as a named marine community at the exact point; report exact attributes, noting NPWS habitat synthesis partly reviewed INFOMAR plus BioMar/2010 reef survey and is not fully instrument-lineage-independent.",
+    "REEF_ONLY": "Official NPWS reef polygon contains C028 but no marine-community polygon resolves the point.",
+    "COMMUNITY_ONLY": "Marine-community polygon contains C028 without a 1170 reef hit; inspect attributes before interpreting.",
+    "NONE": "No exact NPWS habitat polygon match; do not infer non-reef."
+  },
+  "no_buffer_for_primary": true,
+  "secondary_nearby_query_m": 50,
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_MANUAL_MAP_PLACEMENT",
+    "NO_ARTIFICIALITY_INFERENCE_FROM_REEF_STATUS"
+  ],
+  "claim_ceiling": "EXACT_OFFICIAL_NPWS_POINT_IN_POLYGON_CHARACTERIZATION_ONLY"
+}
