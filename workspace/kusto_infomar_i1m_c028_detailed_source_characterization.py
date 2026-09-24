@@ -244,7 +244,9 @@ with tempfile.TemporaryDirectory(prefix="kusto_i1k_") as td:
           "preliminary_morphology_class":morph
         }
         extent=[float(np.min(x250)),float(np.max(x250)),float(np.min(y250)),float(np.max(y250))]
-        render(a250,v250,extent,"C028 native bathymetry, ±250 m",OUT/"c028_bathymetry_native_250m.png","viridis",r)\n        extent50=[float(np.min(x50)),float(np.max(x50)),float(np.min(y50)),float(np.max(y50))]\n        render(a50,v50,extent50,"C028 native bathymetry, ±50 m",OUT/"c028_bathymetry_native_50m.png","viridis",r)
+        render(a250,v250,extent,"C028 native bathymetry, ±250 m",OUT/"c028_bathymetry_native_250m.png","viridis",r)
+        extent50=[float(np.min(x50)),float(np.max(x50)),float(np.min(y50)),float(np.max(y50))]
+        render(a50,v50,extent50,"C028 native bathymetry, ±50 m",OUT/"c028_bathymetry_native_50m.png","viridis",r)
         render_hillshade(a250,v250,dx,dy,extent,OUT/"c028_bathymetry_hillshade_250m.png",r)
 
     with rasterio.open(kp) as ds:
