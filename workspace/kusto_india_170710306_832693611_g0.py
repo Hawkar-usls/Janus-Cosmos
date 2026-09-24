@@ -8,15 +8,44 @@ LAT=17.0710306; LON=83.2693611
 S=16.9710306; N=17.1710306; W=83.1693611; E=83.3693611
 OUT=Path("workspace/kusto_global_groundtruth_out"); OUT.mkdir(parents=True,exist_ok=True)
 UA={"User-Agent":"JANUS-KUSTO-INDIA-G0/1.0","Accept-Encoding":"identity"}
-BASE="https://www.gmrt.org/services/GridServer"
+BASES=["https://www.gmrt.org/services/GridServer","http://www.gmrt.org/services/GridServer"]
 GEOD=Geod(ellps="WGS84")
 
 def dl(layer,path):
-    params={"north":N,"south":S,"west":W,"east":E,"layer":layer,"format":"geotiff","resolution":"max"}
-    r=requests.get(BASE,params=params,headers=UA,timeout=900)
-    r.raise_for_status()
-    path.write_bytes(r.content)
-    return {"url":r.url,"bytes":len(r.content),"sha256":hashlib.sha256(r.content).hexdigest(),"content_type":r.headers.get("content-type")}
+    attempts=[]
+    variants=[
+      {"resolution":"max"},
+      {"mresolution":"100"}
+    ]
+    for base in BASES:
+      for extra in variants:
+        params={"north":N,"south":S,"west":W,"east":E,"layer":layer,"format":"geotiff",**extra}
+        try:
+          r=requests.get(base,params=params,headers=UA,timeout=900,allow_redirects=True)
+          head=r.content[:160]
+          rec={"request_url":r.url,"status":r.status_code,"bytes":len(r.content),
+               "content_type":r.headers.get("content-type"),"first_bytes_hex":head[:32].hex(),
+               "first_text":head.decode("utf-8","replace")}
+          attempts.append(rec)
+          r.raise_for_status()
+          b=r.content
+          # TIFF little/big endian magic
+          if b[:4] in (b"II*\\x00",b"MM\\x00*"):
+            path.write_bytes(b)
+            return {"url":r.url,"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest(),
+                    "content_type":r.headers.get("content-type"),"attempts":attempts}
+          # Some services return ZIP containing a tif
+          if b[:2]==b"PK":
+            import io,zipfile
+            with zipfile.ZipFile(io.BytesIO(b)) as zf:
+              tif=[n for n in zf.namelist() if n.lower().endswith((".tif",".tiff"))]
+              if len(tif)==1:
+                raw=zf.read(tif[0]); path.write_bytes(raw)
+                return {"url":r.url,"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest(),
+                        "content_type":r.headers.get("content-type"),"archive_member":tif[0],"attempts":attempts}
+        except Exception as e:
+          attempts.append({"error":repr(e)})
+    raise RuntimeError("GMRT did not return a GeoTIFF: "+json.dumps(attempts,indent=2))
 
 def radius_stats(ds,arr,valid,radius):
     row,col=ds.index(LON,LAT)
