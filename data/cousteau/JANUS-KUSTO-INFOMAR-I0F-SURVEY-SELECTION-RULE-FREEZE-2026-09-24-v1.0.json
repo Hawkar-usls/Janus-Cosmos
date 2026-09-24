@@ -1,0 +1,29 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0F-SURVEY-SELECTION-RULE-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_AFTER_FEATURE_METADATA_INVENTORY__BEFORE_ANY_INFOMAR_SURVEY_FILE_DOWNLOAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "feature_service": "https://gsi.geodata.gov.ie/server/rest/services/Marine/IE_GSI_MI_Marine_Download_Seabed_Survey_Leg_Data_IE_Waters_WGS84/FeatureServer/0",
+  "eligibility": {
+    "SURVEY_ID_nonempty": true,
+    "GRID_URL_http": true,
+    "BS_URL_http": true,
+    "GRID_URL_must_contain_path_segment_SURVEY_ID": true,
+    "BS_URL_must_contain_path_segment_SURVEY_ID": true,
+    "forbid_Merged_in_either_URL": true,
+    "forbid_NA_or_empty": true,
+    "require_grid_url_zip": true,
+    "require_backscatter_url_zip": true
+  },
+  "selection_rule": "Among eligible rows, sort SURVEY_ID as an ordinal case-sensitive string ascending and select the first. Ties resolve by OBJECTID ascending.",
+  "selection_uses": ["SURVEY_ID","OBJECTID","GRID_URL","BS_URL"],
+  "selection_forbids": [
+    "GEOMETRY",
+    "RASTER_PIXEL_VALUES",
+    "MORPHOLOGY",
+    "BACKSCATTER_VALUES",
+    "SHIPWRECK_SEDIMENT_OR_GROUNDTRUTH_INFORMATION",
+    "SURVEY_OUTCOME"
+  ],
+  "next_gate": "I0G_EXECUTE_METADATA_ONLY_SELECTION_AND_HEADER_PROBE",
+  "claim_ceiling": "INFOMAR_METADATA_ONLY_SURVEY_SELECTION_RULE"
+}
