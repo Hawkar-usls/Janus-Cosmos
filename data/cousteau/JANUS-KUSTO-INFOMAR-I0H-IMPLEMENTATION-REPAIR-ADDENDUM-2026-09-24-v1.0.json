@@ -1,0 +1,16 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0H-IMPLEMENTATION-REPAIR-ADDENDUM-2026-09-24-v1.0",
+  "status": "IMPLEMENTATION_ONLY__PREREG_UNCHANGED",
+  "failed_run_id": 36028997024,
+  "failure": "EOCD_NOT_FOUND_BATHYMETRY",
+  "root_cause": "Python byte signatures were serialized with doubled backslashes, so the parser searched for literal characters \\x05 and \\x06 instead of ZIP signature bytes.",
+  "repair": [
+    "EOCD_SIG becomes bytes.fromhex('504b0506')",
+    "CD_SIG becomes bytes.fromhex('504b0102')"
+  ],
+  "scientific_contract_changes": "NONE",
+  "allowed_reads_changes": "NONE",
+  "forbidden_reads_changes": "NONE",
+  "selection_rule_changes": "NONE",
+  "claim_ceiling": "INFOMAR_REMOTE_ZIP_DIRECTORY_INVENTORY_ONLY"
+}
