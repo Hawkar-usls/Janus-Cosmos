@@ -1,0 +1,71 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1M-C028-DETAILED-CHARACTERIZATION-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_C028_DETAILED_RENDERING_AND_NEW_IDENTITY_LOOKUP",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C028",
+    "blind_rank": 28,
+    "aggregate_score": 12.279553188364158,
+    "lon": -10.543715274603503,
+    "lat": 52.112809857693264,
+    "radius_m": 8.328149430643045,
+    "folk_classes": [
+      "Unclassified"
+    ],
+    "morphology": {
+      "native_relief_sign": "POSITIVE",
+      "disk_median": -19.126020431518555,
+      "annulus_median": -24.30466365814209,
+      "signed_disk_minus_annulus_median": 5.178643226623535,
+      "local_extremum_value": -14.367042541503906,
+      "local_extremum_distance_m": 4.164074715321528,
+      "half_relief_component_area_m2": 164.72542323041017,
+      "half_relief_equivalent_diameter_m": 14.482227828624795,
+      "principal_axis_span_m": [
+        25.027206801644834,
+        8.625449278983908
+      ],
+      "aspect_ratio": 2.901553993555346,
+      "component_touches_100m_window": false,
+      "possible_line_artefact": false,
+      "compact_survivor": true
+    }
+  },
+  "phase_A_native_source": {
+    "purpose": "Render and numerically characterize the exact frozen C028 from original bathymetry and held-out backscatter.",
+    "windows_m": [
+      50,
+      100,
+      250
+    ],
+    "metrics": "Use identical I1K definitions plus center profiles through principal axes and local slope around half-relief component.",
+    "renderings": [
+      "native bathymetry +/-250m",
+      "bathymetry hillshade +/-250m",
+      "native backscatter +/-250m",
+      "bathymetry +/-50m zoom"
+    ],
+    "no_recenter": true
+  },
+  "phase_B_independent_identity": {
+    "starts_only_after_phase_A": true,
+    "source_priority": [
+      "official INFOMAR/GSI shipwreck and obstruction layers",
+      "official NMS Wreck Inventory",
+      "official navigational/hydrographic publications and charted rocks/shoals",
+      "INFOMAR Blue Scale / Marine Geoscience maps or reports",
+      "official habitat/geology datasets",
+      "independent ROV/diver/photo/video records with georeferenced or demonstrably matching site"
+    ],
+    "classes": [
+      "KNOWN_WRECK_OR_OBSTRUCTION",
+      "CHARTED_ROCK_OR_SHOAL",
+      "NATURAL_BEDROCK_PINNACLE_OR_REEF",
+      "ISOLATED_BOULDER",
+      "SURVEY_ARTEFACT",
+      "UNRESOLVED_COMPACT_FEATURE"
+    ],
+    "hard_rule": "Visual resemblance alone cannot establish artificiality or identity."
+  },
+  "claim_ceiling": "POSTRESULT_C028_DETAILED_CHARACTERIZATION_ONLY"
+}
