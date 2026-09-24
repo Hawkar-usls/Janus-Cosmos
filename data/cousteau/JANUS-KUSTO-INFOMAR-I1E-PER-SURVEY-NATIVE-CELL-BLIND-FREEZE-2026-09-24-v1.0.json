@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1E-PER-SURVEY-NATIVE-CELL-BLIND-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_CB13_03_OR_CB13_05_BATHYMETRY_PIXEL_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "binds": {
+    "batch_membership": "JANUS-KUSTO-INFOMAR-I1A-PREOUTCOME-FIRST-FIVE-BATCH-FREEZE-2026-09-24-v1.0",
+    "header_geometry": "JANUS-KUSTO-INFOMAR-I1D-BATCH-PAIRED-RASTER-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0"
+  },
+  "method_generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+  "execution_order": ["CB13_03","CB13_05"],
+  "survey_freezes": {
+    "CB13_03": {
+      "rank": 2,
+      "native_cell_m": 2.082037357660761,
+      "radii_cells": [4,8,16,32],
+      "radii_m": [8.328149430643045,16.65629886128609,33.31259772257218,66.62519544514436],
+      "sampling_stride_cells": 8,
+      "sampling_stride_m": 16.65629886128609,
+      "spatial_dedup_cells": 50,
+      "spatial_dedup_m": 104.10186788303805,
+      "wgs84_overlap_bounds": [-10.670234022847906,51.87851374179124,-9.970104240392434,52.22728417607299]
+    },
+    "CB13_05": {
+      "rank": 3,
+      "native_cell_m": 2.0285446098912496,
+      "radii_cells": [4,8,16,32],
+      "radii_m": [8.114178439564999,16.228356879129997,32.456713758259994,64.91342751651999],
+      "sampling_stride_cells": 8,
+      "sampling_stride_m": 16.228356879129997,
+      "spatial_dedup_cells": 50,
+      "spatial_dedup_m": 101.42723049456248,
+      "wgs84_overlap_bounds": [-9.579961637596478,52.752018582609146,-9.442219430191859,52.870655138336254]
+    }
+  },
+  "bathymetry_discovery": {
+    "tail_quantile": 0.995,
+    "maximum_candidates": 100,
+    "families": {
+      "RELIEF_ROUGHNESS": ["local_relief_m","local_std_m"],
+      "CURVATURE": ["abs_laplacian"],
+      "RADIAL": ["abs_center_surround_dog"],
+      "LINEARITY": ["structure_tensor_anisotropy"],
+      "TERRACE_STEP": ["gradient_magnitude"],
+      "TOPOLOGIC": ["isolated_extremum_persistence"]
+    },
+    "generic_score": "0.5*max(abs robust z)+0.5*mean(abs robust z)",
+    "followup_rule": "at least two morphology families in per-metric upper 0.5 percent OR generic score in upper 0.5 percent",
+    "common_center_validity": "sample center must satisfy the unchanged complete-valid-bathymetry support rule through radius 32 native cells and lie in heldout header geometry inward-buffered by maximum radius"
+  },
+  "implementation_equivalence": {
+    "full_array_or_chunked_disk_backed_execution": "EITHER_ALLOWED",
+    "requirement": "Chunking/memmap may change storage and evaluation order only. It must reproduce the same formulas, kernel sizes, scipy boundary mode, sample-center lattice, thresholds, ranking, and dedup rule as I0K."
+  },
+  "truth_firewall": {
+    "backscatter_values_read_before_candidate_freeze": false,
+    "groundtruth_or_object_labels_read": false,
+    "no_survey_replacement": true,
+    "no_reordering": true,
+    "no_posthoc_scale_selection": true,
+    "no_candidate_recentering": true,
+    "no_threshold_retuning": true
+  },
+  "next_gate": "I1F_CB13_03_BLIND_BATHYMETRY_EXECUTION",
+  "claim_ceiling": "INFOMAR_BATCH_NATIVE_CELL_BLIND_DISCOVERY_FREEZE_ONLY"
+}
