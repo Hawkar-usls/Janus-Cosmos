@@ -11,8 +11,8 @@ PR=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-INFOMAR-I0H-ARCHIVE-MEMBER-INVENT
 S=requests.Session()
 S.headers.update({"User-Agent":"JANUS-KUSTO-INFOMAR-I0H/1.0","Accept-Encoding":"identity"})
 
-EOCD_SIG=b"PK\\x05\\x06"
-CD_SIG=b"PK\\x01\\x02"
+EOCD_SIG=bytes.fromhex("504b0506")
+CD_SIG=bytes.fromhex("504b0102")
 
 def ranged(url,start,end):
     r=S.get(url,headers={"Range":f"bytes={start}-{end}"},timeout=180,allow_redirects=True)
