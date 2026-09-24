@@ -1,0 +1,65 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0M-FORMAL-UNSEEN-V2-FAIL-RECEIPT-2026-09-24-v1.0",
+  "status": "NO_PREREGISTERED_UNSEEN_INFOMAR_CB13_02_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "survey_id": "CB13_02",
+  "environment": "DUNDALK_BAY_IRELAND_EUROPEAN_COASTAL_MARINE",
+  "candidate_authority": {
+    "receipt": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+    "artifact_id": 10820774615,
+    "artifact_zip_sha256": "fcd680ada03d7e238dbe2f048915849ea529f4e68aa984b6cba4865d2ef6d16c",
+    "candidate_json_sha256": "ebe4d940efcadab3c61ffa967f0c472b88cfcc75e46dd993593c62f871a7ca0d",
+    "frozen_candidate_count": 58
+  },
+  "execution": {
+    "github_actions_run_id": 36030725020,
+    "head_sha": "0e26f316cd6b7e95978c34aa8b0adf4ba3f505b4",
+    "artifact_id": 10821595896,
+    "artifact_zip_sha256": "f98c973d26159d0fc904eea42c77d91e370cfada33238a37c34cf1b136af293e",
+    "output_json_sha256": "e2d05e1b05d091bb53f51bbd6c3bbbe93b4687c2c4afa5decd11b25f2d131c9e",
+    "conclusion": "success"
+  },
+  "primary_result": {
+    "frozen_candidates": 58,
+    "scorable_candidates": 49,
+    "blocked_strata": [],
+    "candidate_support_count": 1,
+    "candidate_support_fraction": 0.02040816326530612,
+    "nominal_control_tail_fraction": 0.05,
+    "support_enrichment_ratio": 0.4081632653061224,
+    "candidate_mean_aggregate_score": 2.265974534959531,
+    "control_mean_aggregate_score": 1.9539300717623385,
+    "stratified_permutation_p": 0.19876024795040992,
+    "mann_whitney_one_sided_p": 1.060575177536154e-07,
+    "primary_pass": false,
+    "scientific_promotion": false
+  },
+  "stratum_audit": {
+    "all_four_radius_strata_scorable": true,
+    "zero_mad_metrics_excluded": 0,
+    "coverage_blocked_strata": 0,
+    "interpretation": "This is not a coverage-blocked result and not the Solitary-Islands zero/near-zero-MAD failure mode. The preregistered q95 enrichment and stratified population criterion simply did not pass on this survey."
+  },
+  "single_crosschannel_supported_candidate": {
+    "candidate_id": "INFOMAR_CB13_02_C047",
+    "blind_rank": 47,
+    "lon": -6.2746913414514935,
+    "lat": 53.93903515133843,
+    "radius_m": 86.78293780372135,
+    "aggregate_score": 13.712677167576706,
+    "same_stratum_control_q95": 10.704282741974318,
+    "role": "POSTRESULT_CASE_LEVEL_CHARACTERIZATION_ONLY__CANNOT_REVERSE_FORMAL_FAIL"
+  },
+  "interpretation": "The unchanged v2 detector did not validate on the first frozen INFOMAR European survey. Only one of 49 scorable frozen candidates exceeded its same-radius q95, below the nominal 5% control-tail fraction, and the preregistered stratified permutation test was non-significant. The significant secondary Mann-Whitney result cannot override the failed primary gate.",
+  "posthoc_characterization_allowed": true,
+  "posthoc_characterization_may_promote_this_run": false,
+  "does_not_establish": [
+    "NO_USEFUL_SIGNAL_EXISTS",
+    "GLOBAL_FAILURE_OF_KUSTO",
+    "OBJECT_IDENTITY",
+    "ARTIFICIALITY",
+    "ARCHAEOLOGICAL_OR_WRECK_CLASSIFICATION",
+    "GENERAL_EUROPEAN_FAILURE"
+  ],
+  "claim_ceiling": "FORMAL_UNSEEN_INFOMAR_V2_FAIL__ONE_CASE_LEVEL_CROSSCHANNEL_SUPPORTED_CANDIDATE__NO_PROMOTION"
+}
