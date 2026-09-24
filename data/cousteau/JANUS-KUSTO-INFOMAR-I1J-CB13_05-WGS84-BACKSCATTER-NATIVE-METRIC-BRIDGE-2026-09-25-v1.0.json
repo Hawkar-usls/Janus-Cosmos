@@ -1,0 +1,59 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1J-CB13_05-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-25-v1.0",
+  "status": "FROZEN_FROM_I1D_HEADER_ONLY__BEFORE_FIRST_CB13_05_BACKSCATTER_PIXEL_VALUE_READ",
+  "binds": {
+    "geometry_receipt": "JANUS-KUSTO-INFOMAR-I1D-BATCH-PAIRED-RASTER-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0",
+    "candidate_receipt": "JANUS-KUSTO-INFOMAR-I1I-CB13_05-BLIND-BATHYMETRY-RECEIPT-2026-09-25-v1.0"
+  },
+  "solution": {
+    "resampling": false,
+    "native_values_preserved": true,
+    "metric_reference_crs": "EPSG:32629",
+    "reference_location_rule": "Use exact midpoint of frozen backscatter header bounds.",
+    "header_midpoint_lon_lat": [
+      -9.51109053389417,
+      52.8113368604727
+    ],
+    "native_degree_step": [
+      0.000023271195709514964,
+      0.000023271195709514988
+    ],
+    "reference_pixel_axis_metres": [
+      1.5685605673921519,
+      2.5886836735640384
+    ],
+    "edge_check_pixel_axis_metres": {
+      "bottom": [
+        1.5706948507076524,
+        2.5886577390328873
+      ],
+      "top": [
+        1.5664245857454067,
+        2.5887095912738944
+      ]
+    },
+    "maximum_relative_axis_scale_departure_from_midpoint": {
+      "x": 0.001361746362332994,
+      "y": 0.000010018424196012177
+    },
+    "patch_rule": "For each frozen radius r, construct one fixed native-grid mask using d=sqrt((dc*dx_m)^2+(dr*dy_m)^2), disk d<=r, annulus 1.25r<d<=2r. Reuse identical mask for every candidate and control in that radius stratum.",
+    "first_difference_rule": "Median absolute native first differences between adjacent valid pixels whose pair lies within the physical disk mask; no interpolation or resampling."
+  },
+  "unchanged_v2": {
+    "bathymetry_support_min_fraction": 0.8,
+    "backscatter_native_mask_min_fraction": 0.8,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "stratified_permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "backscatter_values_read": false,
+  "scientific_method_changed": false,
+  "claim_ceiling": "INFOMAR_NATIVE_WGS84_BACKSCATTER_PHYSICAL_GEOMETRY_BRIDGE_ONLY"
+}
