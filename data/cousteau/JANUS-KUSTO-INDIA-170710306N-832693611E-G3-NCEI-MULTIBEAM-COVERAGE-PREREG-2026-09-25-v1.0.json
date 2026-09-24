@@ -1,0 +1,22 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-G3-NCEI-MULTIBEAM-COVERAGE-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_NCEI_QUERY",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "services": {
+    "tracklines": "https://gis.ngdc.noaa.gov/arcgis/rest/services/web_mercator/multibeam_dynamic/MapServer/0/query",
+    "mosaic": "https://gis.ngdc.noaa.gov/arcgis/rest/services/multibeam_mosaic/ImageServer"
+  },
+  "queries": [
+    "mosaic footprint at exact target",
+    "mosaic sample at exact target",
+    "tracklines intersecting frozen boxes half-spans 0.01,0.05,0.1,0.25,0.5 degrees"
+  ],
+  "hard_rules": [
+    "NO_TRACK_WITHIN_QUERY_DOES_NOT_PROVE_NO_NON_NCEI_SURVEY",
+    "DIRECT_MULTIBEAM_CLAIM_REQUIRES_NCEI_FOOTPRINT_OR_TRACK_BINDING",
+    "NO_RECENTERING"
+  ]
+}
