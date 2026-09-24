@@ -12,12 +12,12 @@ from shapely import contains_xy
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"workspace"/"kusto_global_groundtruth_out"; OUT.mkdir(parents=True,exist_ok=True)
 FREEZE=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-INFOMAR-I1E-PER-SURVEY-NATIVE-CELL-BLIND-FREEZE-2026-09-24-v1.0.json").read_text())
-GEO=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-INFOMAR-I1D-BATCH-PAIRED-RASTER-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0.json").read_text())
+GEO=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-INFOMAR-I1D-BATCH-PAIRED-RASTER-HEADER-GEOMETRY-RECEIPT-2026-09-24-v1.0.json").read_text())\nBATCH=json.loads((ROOT/"data/cousteau/JANUS-KUSTO-INFOMAR-I1B-PREOUTCOME-BATCH-METADATA-AND-TRANSPORT-RECEIPT-2026-09-24-v1.0.json").read_text())
 
 SID="CB13_03"
 SREC=next(x for x in GEO["results"] if x["SURVEY_ID"]==SID)
 CFG=FREEZE["survey_freezes"][SID]
-BATH=SREC["bathymetry"]
+BATH=SREC["bathymetry"]\nBROW=next(x for x in BATCH["prospective"] if x["SURVEY_ID"]==SID)
 CELL=float(CFG["native_cell_m"]); MULT=[4,8,16,32]; RADII=list(map(float,CFG["radii_m"]))
 STRIDE_CELLS=8; DEDUP=float(CFG["spatial_dedup_m"]); TAIL=.995; MAX_CAND=100; MAXPX=32
 FAMILIES=FREEZE["bathymetry_discovery"]["families"]
@@ -68,7 +68,7 @@ def exact_median(mm_valid_values):
 
 with tempfile.TemporaryDirectory(prefix="kusto_i1f_cb1303_") as td0:
     td=Path(td0); zpath=td/"bathy.zip"; ex=td/"ex"; ex.mkdir()
-    asha,abytes=download(BATH["archive_url"],zpath,BATH["archive_bytes"])
+    asha,abytes=download(BROW["bathymetry_url"],zpath,BROW["bathymetry_archive_size_bytes"])
     if asha.lower()!=BATH["archive_sha256"].lower(): raise RuntimeError("archive SHA drift")
     tif=extract_7z(zpath,BATH["member"],ex)
     if tif.stat().st_size!=int(BATH["member_bytes"]): raise RuntimeError("member size drift")
