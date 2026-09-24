@@ -1,0 +1,38 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_58_BLIND_CB13_02_CANDIDATES_FROZEN__BACKSCATTER_UNREAD",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-CANDIDATE-GENERATION-PREREG-2026-09-24-v1.0",
+  "representation_bridge": "JANUS-KUSTO-INFOMAR-I0J-NATIVE-CELL-REPRESENTATION-BRIDGE-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36030095862,
+    "head_sha": "88c94f0574c518b30ada5d1daa1e2894f20be83f",
+    "artifact_id": 10820774615,
+    "artifact_zip_sha256": "fcd680ada03d7e238dbe2f048915849ea529f4e68aa984b6cba4865d2ef6d16c",
+    "candidate_json_sha256": "ebe4d940efcadab3c61ffa967f0c472b88cfcc75e46dd993593c62f871a7ca0d"
+  },
+  "blind_execution": {
+    "sample_centers": 21937,
+    "radii_cells": [4,8,16,32],
+    "radii_m": [21.69573445093034,43.39146890186068,86.78293780372135,173.5658756074427],
+    "sampling_stride_cells": 8,
+    "pre_dedup_followup_total": 667,
+    "spatial_dedup_m": 271.19668063662925,
+    "frozen_candidate_count": 58
+  },
+  "truth_firewall": {
+    "backscatter_archive_downloaded": false,
+    "backscatter_member_opened": false,
+    "backscatter_values_read": false,
+    "groundtruth_or_object_labels_read": false,
+    "candidate_coordinates_frozen": true,
+    "candidate_radii_frozen": true
+  },
+  "immutable_candidate_source_for_replay": {
+    "github_artifact_id": 10820774615,
+    "artifact_zip_sha256": "fcd680ada03d7e238dbe2f048915849ea529f4e68aa984b6cba4865d2ef6d16c",
+    "candidate_json_sha256": "ebe4d940efcadab3c61ffa967f0c472b88cfcc75e46dd993593c62f871a7ca0d"
+  },
+  "next_gate": "I0L_FROZEN_CANDIDATE_BACKSCATTER_REPLAY_V2",
+  "claim_ceiling": "INFOMAR_BLIND_BATHYMETRIC_CANDIDATE_GENERATION_ONLY"
+}
