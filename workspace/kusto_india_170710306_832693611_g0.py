@@ -45,7 +45,7 @@ def dl(layer,path):
                         "content_type":r.headers.get("content-type"),"archive_member":tif[0],"attempts":attempts}
         except Exception as e:
           attempts.append({"error":repr(e)})
-    if layer=="topo-mask" and attempts and all(int(x.get("bytes",-1))==0 for x in attempts if "bytes" in x):
+    if attempts and all(int(x.get("bytes",-1))==0 for x in attempts if "bytes" in x):
         return {"empty_response":True,"attempts":attempts}
     raise RuntimeError("GMRT did not return a GeoTIFF: "+json.dumps(attempts,indent=2))
 
@@ -126,7 +126,7 @@ with tempfile.TemporaryDirectory() as td:
       "coverage_verdict":coverage,
       "masked_target_valid":masked["target_valid"],
       "masked_valid_fraction":masked["valid_fraction"],
-      "unmasked_target_depth_m":unmasked["target_depth_m"],
-      "unmasked_radii":unmasked["radii"],
+      "unmasked_target_depth_m":None if unmasked is None else unmasked["target_depth_m"],
+      "unmasked_radii":None if unmasked is None else unmasked["radii"],
       "output_sha256":hashlib.sha256(raw.encode()).hexdigest()
     },indent=2))
