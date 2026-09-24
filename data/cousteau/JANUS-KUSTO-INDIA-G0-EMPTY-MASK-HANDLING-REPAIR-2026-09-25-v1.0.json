@@ -1,0 +1,8 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-G0-EMPTY-MASK-HANDLING-REPAIR-2026-09-25-v1.0",
+  "status": "IMPLEMENTATION_ONLY__SCIENTIFIC_PREREG_UNCHANGED",
+  "failed_run_id": 36071101099,
+  "observation": "GMRT topo-mask returned HTTP 200 application/octet-stream with zero-byte body for every frozen request variant.",
+  "repair": "Record empty topo-mask response without treating it as a raster, then continue to the already-preregistered unmasked topo source. Do not interpret empty mask as definitive absence of sonar; only as high-resolution coverage not demonstrated by this service response.",
+  "scientific_changes": "NONE"
+}
