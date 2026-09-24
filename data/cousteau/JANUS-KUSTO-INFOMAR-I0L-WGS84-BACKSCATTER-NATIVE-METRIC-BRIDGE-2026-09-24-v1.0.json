@@ -1,0 +1,45 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I0L-WGS84-BACKSCATTER-NATIVE-METRIC-BRIDGE-2026-09-24-v1.0",
+  "status": "FROZEN_FROM_I0J_HEADER_ONLY__BEFORE_FIRST_BACKSCATTER_PIXEL_VALUE_READ",
+  "binds": {
+    "geometry_receipt": "JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-RECEIPT-2026-09-24-v1.0",
+    "candidate_receipt": "JANUS-KUSTO-INFOMAR-I0K-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0"
+  },
+  "problem": "Held-out backscatter is a native EPSG:4326 grid, so x/y pixel spacings are anisotropic in metres.",
+  "solution": {
+    "resampling": false,
+    "native_values_preserved": true,
+    "metric_reference_crs": "EPSG:32629",
+    "reference_location_rule": "Use the exact midpoint of the frozen backscatter header bounds.",
+    "header_midpoint_lon_lat": [-6.1726764790401865,53.887631650283524],
+    "native_degree_step": [1.2154881523010257e-05,1.2154881523010118e-05],
+    "reference_pixel_axis_metres": [0.7992296855755379,1.3529056668934512],
+    "edge_check_pixel_axis_metres": {
+      "bottom": [0.8011714653973918,1.3528853740185471],
+      "top": [0.7972853669417995,1.3529259342912205]
+    },
+    "maximum_relative_axis_scale_departure_from_midpoint": {
+      "x": 0.0024327407612971803,
+      "y": 0.000014999475130155997
+    },
+    "patch_rule": "For each frozen radius r, construct one fixed native-grid mask using d=sqrt((dc*dx_m)^2+(dr*dy_m)^2), disk d<=r, annulus 1.25r<d<=2r. Reuse the identical mask for every candidate and every control in that radius stratum.",
+    "first_difference_rule": "Preserve the established metric definition: median absolute native first differences between adjacent valid pixels whose pair lies within the physical disk mask; do not interpolate or resample values."
+  },
+  "unchanged_v2": {
+    "bathymetry_support_min_fraction": 0.8,
+    "backscatter_native_mask_min_fraction": 0.8,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "stratified_permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "backscatter_values_read": false,
+  "scientific_method_changed": false,
+  "claim_ceiling": "INFOMAR_NATIVE_WGS84_BACKSCATTER_PHYSICAL_GEOMETRY_BRIDGE_ONLY"
+}
