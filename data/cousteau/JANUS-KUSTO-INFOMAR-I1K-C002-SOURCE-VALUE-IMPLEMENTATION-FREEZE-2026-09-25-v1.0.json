@@ -1,0 +1,42 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_I1K_TARGET_PIXEL_READ",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C002",
+    "x_m": 389529.133112165,
+    "y_m": 5776308.365895524,
+    "lon": -10.613772738992706,
+    "lat": 52.12624933416862,
+    "radius_m": 8.328149430643045
+  },
+  "definitions": {
+    "bathymetry_native_cell_m": 2.082037357660761,
+    "context_halfwidth_m": [
+      50,
+      100,
+      250
+    ],
+    "disk": "d <= frozen radius",
+    "annulus": "1.25*frozen radius < d <= 2*frozen radius",
+    "radial_profile": "median native bathymetry in 5 m radial bins [0,5),...,[95,100)",
+    "relief_sign": "sign(disk_median - annulus_median) in native source value convention",
+    "local_extremum": "within 50 m of target: max native value when relief_sign positive, min native value when negative",
+    "half_relief_threshold": "annulus_median + 0.5*(local_extremum_value-annulus_median)",
+    "half_relief_component": "8-connected threshold component containing local_extremum, evaluated in +/-100 m bathymetry window",
+    "component_axes": "PCA projection max-min spans of component pixel-center coordinates in metres; aspect=max(span1,span2)/min(span1,span2)",
+    "equivalent_diameter": "sqrt(4*component_area/pi)",
+    "boundary_touch": "half-relief component touches +/-100m characterization window boundary",
+    "raster_line_check": "at target row and column compare maximum absolute first-difference within +/-2 target pixels to distribution of maxima on 21 parallel profiles offsets -10..+10 pixels; record target percentile and median parallel-profile correlation",
+    "nodata_check": "report valid fraction for each +/-50/100/250 m window",
+    "preliminary_morphology_rule": [
+      "BROAD_GEOLOGIC_RELIEF if half-relief component touches +/-100m boundary",
+      "COMPACT_RELIEF otherwise when half-relief component is finite and coherent",
+      "POSSIBLE_RASTER_LINE_ARTEFACT only if target row or column first-difference statistic is >=99th percentile AND median parallel-profile gradient correlation >=0.90",
+      "UNRESOLVED if metrics cannot classify"
+    ]
+  },
+  "scientific_math_changed": false,
+  "context_blind": false,
+  "source_pixel_values_read_before_this_freeze": false,
+  "claim_ceiling": "POSTRESULT_SOURCE_VALUE_IMPLEMENTATION_FREEZE_ONLY"
+}
