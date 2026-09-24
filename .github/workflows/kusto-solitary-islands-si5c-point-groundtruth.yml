@@ -1,0 +1,36 @@
+name: KUSTO Solitary Islands SI5C Point Groundtruth
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_solitary_islands_si5c_point_groundtruth.py'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI5-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI5C-POINT-GROUNDTRUTH-IMPLEMENTATION-ADDENDUM-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI1-BLIND-BATHYMETRY-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-solitary-islands-si5c-point-groundtruth.yml'
+  workflow_dispatch:
+
+jobs:
+  si5c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests pyshp pyproj
+      - name: Spatially characterize frozen candidates against withheld video/sediment points
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python workspace/kusto_solitary_islands_si5c_point_groundtruth.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-solitary-islands-si5c-point-groundtruth-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOLITARY-ISLANDS-SI5C-FROZEN-CANDIDATE-POINT-GROUNDTRUTH-CHARACTERIZATION-2026-09-24-v1.0.json
+          retention-days: 30
