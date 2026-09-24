@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I0J Grid Geometry Metadata
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i0j_grid_geometry_metadata.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i0j-grid-geometry-metadata.yml'
+  workflow_dispatch:
+
+jobs:
+  i0j:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests rasterio
+      - name: Verify frozen INFOMAR members and read GeoTIFF geometry metadata only
+        run: python workspace/kusto_infomar_i0j_grid_geometry_metadata.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i0j-grid-geometry-metadata-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I0J-PAIRED-GRID-GEOMETRY-METADATA-RECEIPT-2026-09-24-v1.0.json
+          retention-days: 30
