@@ -1,0 +1,9 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1M-C028-NEWLINE-REPAIR-ADDENDUM-2026-09-25-v1.0",
+  "status": "IMPLEMENTATION_ONLY__SCIENTIFIC_FREEZE_UNCHANGED",
+  "failed_run_id": 36066919711,
+  "failure": "Literal backslash-n sequence in added visualization lines caused SyntaxError before source data were read.",
+  "source_pixel_values_read_in_failed_run": false,
+  "repair": "Replace literal backslash-n with actual source newlines only.",
+  "scientific_contract_changes": "NONE"
+}
