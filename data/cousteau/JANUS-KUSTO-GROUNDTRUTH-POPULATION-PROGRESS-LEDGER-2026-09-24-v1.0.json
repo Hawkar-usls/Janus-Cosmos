@@ -1,0 +1,56 @@
+{
+  "artifact_id": "JANUS-KUSTO-GROUNDTRUTH-POPULATION-PROGRESS-LEDGER-2026-09-24-v1.0",
+  "status": "TWENTY_CONCRETE_WRECK_OBJECT_CANDIDATES_REGISTERED__POPULATION_GATE_NOT_MET",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "parent_registry": "JANUS-KUSTO-GLOBAL-GROUNDTRUTH-SOURCE-REGISTRY-2026-09-23-v1.0",
+  "population_gate": {
+    "required_blind_evaluated_high_confidence_targets": 20,
+    "required_independent_surveys_min": 3,
+    "required_sensor_platform_families_min": 2,
+    "current_gate_state": "NOT_MET"
+  },
+  "counting_levels": {
+    "LEVEL_0_REGISTERED": "Named candidate with a source lead; does not count toward the >=20 population gate.",
+    "LEVEL_1_TRUTH_SOURCE_BOUND": "Independent authoritative identity/truth source exact enough to freeze truth; still does not count.",
+    "LEVEL_2_DISCOVERY_DATA_BOUND": "Usable sonar/bathymetry discovery corpus independently bound and separable from truth; still does not count.",
+    "LEVEL_3_BLIND_EVALUATED": "Candidate generation frozen before truth unlock and scored under the preregistered rule. Only this level counts toward n>=20."
+  },
+  "registered_concrete_wreck_object_candidate_count": 20,
+  "level3_blind_evaluated_wreck_positive_count": 1,
+  "level3_blind_evaluated_wreck_positive_ids": [
+    "AUSSEABED_EX_HMAS_CANBERRA_2020"
+  ],
+  "executed_nonwreck_hard_natural_control_ids": [
+    "NOAA_EX1903L2_DIVE07_SHARK_ROCK"
+  ],
+  "registered_wreck_object_queue": [
+    "NOAA_EX1106_BLOCK_CANYON_USS_BALDWIN",
+    "NOAA_USS_CONESTOGA",
+    "NOAA_EX1902_DIVE03_UNEXPECTED_WRECK",
+    "AUSSEABED_EX_HMAS_CANBERRA_2020",
+    "NOAA_EX_USS_YP389",
+    "NOAA_SS_CITY_OF_CHESTER",
+    "NOAA_TBNMS_IRONTON",
+    "NOAA_EX1902_VERNON_BASIN_WRECK",
+    "NOAA_BOEM_WRECK_SITE_15377",
+    "NOAA_BOEM_SITE_15563_LIKELY_INDUSTRY",
+    "NOAA_MONITOR_BLUEFIELDS",
+    "NOAA_MONITOR_U576",
+    "NOAA_MONITOR_DIXIE_ARROW",
+    "NOAA_MONITOR_EM_CLARK",
+    "NOAA_MONITOR_U701",
+    "NOAA_MONITOR_U85",
+    "NOAA_MONITOR_ATLAS",
+    "NOAA_MONITOR_CARIBSEA",
+    "NOAA_MONITOR_ARIO",
+    "AUSSEABED_MV_NOONGAH_IN2024_V04"
+  ],
+  "next_population_work": [
+    "Resolve exact discovery bathymetry/sonar corpus for each named wreck without using the truth coordinates inside detector inputs.",
+    "Freeze per-target truth manifest separately from discovery manifest.",
+    "Blind-run each target region and score localization only after candidate artifact hash is frozen.",
+    "Add natural morphology and deceptive-natural controls as separate classes; do not use only wreck positives.",
+    "Do not promote target/control enrichment until at least 20 LEVEL_3 targets satisfy the frozen population gate."
+  ],
+  "claim_ceiling": "POPULATION_PROGRESS_ACCOUNTING_ONLY__N20_NOT_YET_MET"
+}
