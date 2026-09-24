@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, math, hashlib, tempfile
+import json, math, hashlib, tempfile, time
 from pathlib import Path
 import numpy as np, requests, rasterio
 from pyproj import Geod
@@ -13,28 +13,26 @@ GEOD=Geod(ellps="WGS84")
 
 def dl(layer,path):
     attempts=[]
-    variants=[
-      {"resolution":"max"},
-      {"mresolution":"100"}
+    queries=[
+      {"base":"https://www.gmrt.org/services/GridServer","extra":{"resolution":"max"}},
+      {"base":"https://www.gmrt.org/services/GridServer","extra":{"mresolution":"100"}}
     ]
-    for base in BASES:
-      for extra in variants:
-        params={"north":N,"south":S,"west":W,"east":E,"layer":layer,"format":"geotiff",**extra}
+    for q in queries:
+      for retry in range(6):
+        params={"north":N,"south":S,"west":W,"east":E,"layer":layer,"format":"geotiff",**q["extra"]}
         try:
-          r=requests.get(base,params=params,headers=UA,timeout=900,allow_redirects=True)
+          r=requests.get(q["base"],params=params,headers=UA,timeout=900,allow_redirects=True)
           head=r.content[:160]
           rec={"request_url":r.url,"status":r.status_code,"bytes":len(r.content),
-               "content_type":r.headers.get("content-type"),"first_bytes_hex":head[:32].hex(),
-               "first_text":head.decode("utf-8","replace")}
+               "content_type":r.headers.get("content-type"),"retry":retry,
+               "first_bytes_hex":head[:32].hex(),"first_text":head.decode("utf-8","replace")}
           attempts.append(rec)
           r.raise_for_status()
           b=r.content
-          # TIFF little/big endian magic
           if b[:4] in (b"II*"+bytes([0]), b"MM"+bytes([0])+b"*"):
             path.write_bytes(b)
             return {"url":r.url,"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest(),
                     "content_type":r.headers.get("content-type"),"attempts":attempts}
-          # Some services return ZIP containing a tif
           if b[:2]==b"PK":
             import io,zipfile
             with zipfile.ZipFile(io.BytesIO(b)) as zf:
@@ -44,10 +42,9 @@ def dl(layer,path):
                 return {"url":r.url,"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest(),
                         "content_type":r.headers.get("content-type"),"archive_member":tif[0],"attempts":attempts}
         except Exception as e:
-          attempts.append({"error":repr(e)})
-    if attempts and all(int(x.get("bytes",-1))==0 for x in attempts if "bytes" in x):
-        return {"empty_response":True,"attempts":attempts}
-    raise RuntimeError("GMRT did not return a GeoTIFF: "+json.dumps(attempts,indent=2))
+          attempts.append({"retry":retry,"error":repr(e)})
+        time.sleep(1.0)
+    return {"empty_response":True,"attempts":attempts}
 
 def radius_stats(ds,arr,valid,radius):
     row,col=ds.index(LON,LAT)
@@ -107,12 +104,15 @@ with tempfile.TemporaryDirectory() as td:
         outputs[layer]={"transport":tr,"grid":None if tr.get("empty_response") else inspect(p,layer)}
     masked=outputs["topo-mask"]["grid"]
     unmasked=outputs["topo"]["grid"]
-    if masked["target_valid"]:
+    if masked is not None and masked["target_valid"]:
         coverage="HIGH_RES_GMRT_AT_TARGET"
         ceiling="HIGH_RES_BATHYMETRY_MORPHOLOGY_ONLY"
-    elif masked["valid_fraction"]>0:
+    elif masked is not None and masked["valid_fraction"]>0:
         coverage="HIGH_RES_GMRT_IN_BOX_BUT_NOT_AT_TARGET"
         ceiling="LOW_RES_TARGET_CONTEXT_PLUS_NEARBY_HIGH_RES_COVERAGE"
+    elif masked is None:
+        coverage="GMRT_TOPO_MASK_UNAVAILABLE_AFTER_FIXED_RETRIES"
+        ceiling="LOW_RES_GLOBAL_CONTEXT_ONLY" if unmasked is not None else "NO_BATHYMETRY_RESULT"
     else:
         coverage="NO_HIGH_RES_GMRT_IN_BOX"
         ceiling="LOW_RES_GLOBAL_CONTEXT_ONLY"
@@ -124,8 +124,8 @@ with tempfile.TemporaryDirectory() as td:
     (OUT/"JANUS-KUSTO-INDIA-170710306N-832693611E-G0-RUN-2026-09-25-v1.0.json").write_text(raw)
     print(json.dumps({
       "coverage_verdict":coverage,
-      "masked_target_valid":masked["target_valid"],
-      "masked_valid_fraction":masked["valid_fraction"],
+      "masked_target_valid":None if masked is None else masked["target_valid"],
+      "masked_valid_fraction":None if masked is None else masked["valid_fraction"],
       "unmasked_target_depth_m":None if unmasked is None else unmasked["target_depth_m"],
       "unmasked_radii":None if unmasked is None else unmasked["radii"],
       "output_sha256":hashlib.sha256(raw.encode()).hexdigest()
