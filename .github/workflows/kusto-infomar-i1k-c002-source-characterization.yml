@@ -1,0 +1,31 @@
+name: KUSTO INFOMAR I1K C002 Source Characterization
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i1k_c002_source_characterization.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-IMPLEMENTATION-FREEZE-2026-09-25-v1.0.json'
+      - '.github/workflows/kusto-infomar-i1k-c002-source-characterization.yml'
+  workflow_dispatch:
+
+jobs:
+  i1k:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ensure Deflate64 extractor
+        run: which 7z || (sudo apt-get update && sudo apt-get install -y p7zip-full)
+      - run: pip install --disable-pip-version-check requests rasterio numpy scipy matplotlib
+      - name: Run frozen C002 source-value characterization
+        run: python workspace/kusto_infomar_i1k_c002_source_characterization.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i1k-c002-source-characterization-v1
+          path: workspace/kusto_global_groundtruth_out/i1k_c002/
+          retention-days: 30
