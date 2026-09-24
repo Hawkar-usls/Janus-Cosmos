@@ -1,0 +1,89 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1K-C002-TARGET-CENTERED-SOURCE-VALUE-CHARACTERIZATION-PREREG-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_TARGET_CENTERED_SOURCE_VALUE_CHARACTERIZATION",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "target": {
+    "candidate_id": "INFOMAR_CB13_03_C002",
+    "blind_rank": 2,
+    "lon": -10.613772738992706,
+    "lat": 52.12624933416862,
+    "radius_m": 8.328149430643045,
+    "aggregate_score": 11.712281157905515,
+    "same_radius_control_q95": 3.5657438011166094,
+    "official_folk5": "Coarse sediment",
+    "nearest_gsi_mapped_wreck_within_5km": null,
+    "nearest_nms_located_wreck_within_5km": null,
+    "nearest_official_sediment_sample_within_2km": null,
+    "nms_located_records_searched": 17981
+  },
+  "source_authority": {
+    "bathymetry": {
+      "url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BY_CB13_03_DingleBay_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+      "archive_sha256": "a498b9dce20752ed34af195a8a544176d5d25b40e506b1d28a77eaabba15c98a",
+      "member": "BY_CB13_03_Dingle_2m_U29N.tif",
+      "member_sha256": "d2820c7ac62a910acb8d87fbfa9cd83d72576d475efec75572b4c6765e1f5c10"
+    },
+    "backscatter": {
+      "url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT_TIFF.zip",
+      "archive_sha256": "a92894da8a5b7172433000a45b1aff531a1778eb56a8e3379a1d724daf6b8bf3",
+      "member": "BS_CB13_03_Dingle_2m_Inshore_IE_WGS84_LAT.tif",
+      "member_sha256": "8c99066aa90fcdadf4f3dd69a86f0ec934a1e15a9b28de17a5f712102c654fce"
+    }
+  },
+  "frozen_characterization": {
+    "context_halfwidth_m": [
+      50,
+      100,
+      250
+    ],
+    "signed_bathymetry_metrics": [
+      "center_value",
+      "disk_median_within_frozen_radius",
+      "annulus_median_1.25r_to_2r",
+      "signed_disk_minus_annulus_median",
+      "disk_min_max_range",
+      "context_min_max_range",
+      "radial_median_profile_0_to_100m_in_5m_bins"
+    ],
+    "morphology_metrics": [
+      "local_peak_or_depression_sign",
+      "half_relief_footprint_area_and_equivalent_diameter",
+      "principal_axis_lengths_and_aspect_ratio",
+      "distance_from_target_to_local_extremum"
+    ],
+    "backscatter_metrics": [
+      "disk_median",
+      "annulus_median",
+      "signed_disk_minus_annulus_median",
+      "disk_q05_q95",
+      "context_q05_q95"
+    ],
+    "renderings": [
+      "native_bathymetry_250m_context_png",
+      "hillshade_bathymetry_250m_context_png",
+      "native_backscatter_250m_context_png"
+    ],
+    "display_rule": "PNG rendering may normalize values for visualization only; all reported numeric metrics use native source values."
+  },
+  "classification_rule": {
+    "NATURAL_PINNACLE_OR_BOULDER": "compact positive bathymetric relief with coherent footprint and no raster discontinuity; identity remains natural-hypothesis unless independently sourced",
+    "NATURAL_DEPRESSION": "compact negative relief with coherent footprint",
+    "LINEAR_OR_SURVEY_ARTEFACT": "feature aligned with raster/survey-line discontinuity or step repeating along row/column beyond local footprint",
+    "UNRESOLVED_OBJECT_LIKE": "compact coherent feature whose geometry is not explained by source artefact tests and lacks authoritative identity",
+    "BROAD_GEOLOGIC_RELIEF": "relief remains part of a larger continuous ridge/reef/escarpment at 100-250 m context"
+  },
+  "artefact_checks": [
+    "row_and_column_gradient_profiles_through_target",
+    "neighboring_parallel_profiles_plus_minus_10_pixels",
+    "edge_or_nodata_proximity",
+    "repetition_of_same_step_along_raster_row_or_column"
+  ],
+  "hard_rules": [
+    "NO_RECENTERING",
+    "NO_RADIUS_CHANGE",
+    "NO_EXTERNAL_IDENTITY_LOOKUP_BEFORE_NUMERIC_CHARACTERIZATION_COMPLETE",
+    "NO_SHAPE_ALONE_EQUALS_ARTIFICIAL",
+    "NO_THRESHOLD_RETUNING"
+  ],
+  "claim_ceiling": "POSTRESULT_NATIVE_SOURCE_VALUE_MORPHOLOGY_CHARACTERIZATION_ONLY"
+}
