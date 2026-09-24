@@ -1,0 +1,32 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1L-CB13_03-COMPACT-UNEXPLAINED-FUNNEL-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "status": "FROZEN_BEFORE_I1L_BATCH_BATHYMETRY_READ",
+  "formal_artifact": {
+    "id": 10835674072,
+    "sha256": "786823bb6f25a3b4b91c42bbac32528ca57097ad4e337f388c5b3411f866814d"
+  },
+  "triage_artifact": {
+    "id": 10836460466,
+    "sha256": "e735d7f4c1496d3559c63b900abad0f590f63a985aba1584868c5c44a3a20013"
+  },
+  "bathymetry_source": {
+    "url": "https://gsi.geodata.gov.ie/downloads/Marine/Data/Downloads/2013/CB13_03/BY_CB13_03_DingleBay_2m_U29N_LAT_TIFF_Inshore_Ireland.zip",
+    "archive_sha256": "a498b9dce20752ed34af195a8a544176d5d25b40e506b1d28a77eaabba15c98a",
+    "archive_bytes": 122289603,
+    "member": "BY_CB13_03_Dingle_2m_U29N.tif",
+    "member_sha256": "d2820c7ac62a910acb8d87fbfa9cd83d72576d475efec75572b4c6765e1f5c10",
+    "member_bytes": 2122964187
+  },
+  "morphology_definitions": "Bind exactly to JANUS-KUSTO-INFOMAR-I1K-C002-SOURCE-VALUE-IMPLEMENTATION-FREEZE-2026-09-25-v1.0",
+  "compact_requirements": {
+    "valid_fraction_100m_min": 0.95,
+    "equivalent_diameter_m_min": 4,
+    "equivalent_diameter_m_max": 100,
+    "extremum_distance_max_rule": "max(20m,2*frozen_radius)",
+    "component_must_not_touch_100m_window": true,
+    "line_artefact_must_be_false": true
+  },
+  "c002_preclassified": "BROAD_GEOLOGIC_RELIEF",
+  "source_pixel_values_read_before_this_freeze": false,
+  "claim_ceiling": "POSTRESULT_FUNNEL_IMPLEMENTATION_FREEZE_ONLY"
+}
