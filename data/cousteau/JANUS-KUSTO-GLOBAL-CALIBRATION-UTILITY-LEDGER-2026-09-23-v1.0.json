@@ -1,6 +1,6 @@
 {
   "artifact_id": "JANUS-KUSTO-GLOBAL-CALIBRATION-UTILITY-LEDGER-2026-09-23-v1.0",
-  "status": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__FAILURE_MODES_PRESERVED",
+  "status": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__FAILURE_MODES_PRESERVED",
   "branch": "feature/kusto-global-groundtruth-calibration-v1",
   "scope": "Current evidence for KUSTO usefulness on real bathymetry / acoustic-backscatter / cross-survey marine data. This ledger separates formal validation, robustness support, case-level recovery, and blocked tests.",
   "formal_unseen_passes": [
@@ -134,10 +134,11 @@
     }
   ],
   "utility_now_supported": [
-    "KUSTO has three formal unseen cross-channel enrichment PASSes on real datasets, including two marine paired-support-domain v2 PASSes.",
-    "The same frozen v2 also has a formal unseen marine FAIL on Solitary Islands, demonstrating that the method is not being promoted by always-pass selection.",
+    "KUSTO has five formal unseen cross-channel enrichment PASSes on real datasets.",
+    "Four formal unseen marine paired-support-domain v2 PASSes are preserved across Maui/Puunoa, Shellharbour/Tharawal, South-west Corner and Elizabeth/Middleton, spanning multiple geographic and sensor/data lineages.",
+    "The same frozen v2 also has one formal unseen marine FAIL on Solitary Islands, demonstrating that the method is not being promoted by always-pass selection.",
     "The Solitary Islands failure exposes a concrete portability weakness: exact-zero-MAD exclusion is insufficient when an active control metric has practically degenerate but numerically nonzero MAD.",
-    "KUSTO remains useful as an evidence-ranked prioritization layer, not an object-identity or artificiality classifier."
+    "KUSTO remains an evidence-ranked anomaly-prioritization layer; object identity, artificiality, global precision/recall and general independent-survey repeatability remain unestablished."
   ],
   "not_yet_supported": [
     "GLOBAL_ANOMALY_DETECTION_ACCURACY",
@@ -150,12 +151,12 @@
     "UTILITY_ACROSS_AT_LEAST_20_HIGH_CONFIDENCE_GROUNDTRUTH_TARGETS"
   ],
   "next_required_expansion": [
-    "Continue unchanged v2 on additional unseen corpora chosen before outcome inspection; Elizabeth and Middleton Reefs GA4848 is next.",
-    "Keep any successor near-zero-MAD guard separate from v2 and validate it only on a future corpus, never on Solitary Islands.",
-    "After acoustic scoring, bind Solitary Islands frozen candidates to withheld towed-video, stills and sediment only for ground-truth characterization; this cannot promote the formal SI3 FAIL.",
+    "Continue unchanged v2 on additional outcome-unseen corpora; Arafura Money Shoal SOL7491/GA0366 is the next active corpus.",
+    "Keep paired-support-domain v3 separate from v2: Elizabeth/Middleton confirms v3 no-regression/inertness on well-conditioned data because its guard did not activate; rescue efficacy remains unproven.",
+    "Preserve Solitary Islands SI3 as an immutable FAIL; its SI5 video/sediment work is post-result characterization only.",
     "Advance the >=20 high-confidence target benchmark from registered candidates to LEVEL_3 blind-evaluated targets."
   ],
-  "claim_ceiling": "THREE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES_AND_ONE_FORMAL_UNSEEN_V2_FAIL__TWO_MARINE_V2_PASSES__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
+  "claim_ceiling": "FIVE_FORMAL_UNSEEN_CROSSCHANNEL_PASSES__FOUR_MARINE_V2_PASSES__ONE_FORMAL_UNSEEN_V2_FAIL__V3_NO_REGRESSION_ONLY__NOT_OBJECT_IDENTITY__NOT_GLOBAL_ACCURACY",
   "successor_methods": {
     "paired_support_domain_v3_relative_mad_guard": {
       "calibration_source": "AUSSEABED_SOLITARY_ISLANDS_2022_FORMAL_V2_FAIL",
@@ -165,5 +166,12 @@
       "rescue_efficacy_established": false,
       "minimum_observed_relative_mad": 0.15671571683562358
     }
+  },
+  "bookkeeping": {
+    "formal_unseen_crosschannel_passes": 5,
+    "formal_unseen_marine_v2_passes": 4,
+    "formal_unseen_v2_fails": 1,
+    "v3_unseen_no_regression_passes": 1,
+    "v3_rescue_efficacy_confirmed": 0
   }
 }
