@@ -1,0 +1,55 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-CB13_03-C028-POSTHOC-CHARACTERIZATION-2026-09-25-v1.0",
+  "status": "LIKELY_NATURAL_STEEP_BEDROCK_PINNACLE_OR_REEF__NOT_OBJECT_IDENTIFIED",
+  "candidate_id": "INFOMAR_CB13_03_C028",
+  "coordinates_wgs84": {
+    "lat": 52.112809857693264,
+    "lon": -10.543715274603503
+  },
+  "frozen_radius_m": 8.328149430643045,
+  "blind_bathymetry": {
+    "family_votes": [
+      "RELIEF_ROUGHNESS",
+      "CURVATURE",
+      "RADIAL",
+      "TERRACE_STEP"
+    ],
+    "generic_robust_score": 54.83566665649414,
+    "local_relief_m": 15.06407356262207,
+    "local_std_m": 4.239402770996094,
+    "abs_center_surround_dog": 2.8065547943115234,
+    "structure_tensor_anisotropy": 0.8718288540840149,
+    "gradient_magnitude": 0.6822905540466309
+  },
+  "heldout_backscatter": {
+    "cross_channel_support": true,
+    "aggregate_score": 12.279553188364158,
+    "same_stratum_control_q95": 3.5657438011166094,
+    "disk_standard_deviation": 6.433935412646842,
+    "q95_minus_q05_range": 18.227563476562523,
+    "median_first_difference_edge_energy": 2.3139190673828125
+  },
+  "external_context": {
+    "survey": "CB13_03 Dingle Bay / Great Blasket sector",
+    "public_shipwreck_exact_coordinate_match_found_in_indexed_search": false,
+    "interpretation_evidence": [
+      "INFOMAR Dingle Bay 2013 explicitly surveyed the Great Blasket sector and reported complex/craggy seabed and chart discrepancies.",
+      "INFOMAR 2026 Blasket geoscience summary describes the archipelago as shaped by ancient volcanism, deformation and ongoing marine processes.",
+      "Published structural geology reports faulting at the northern end of Great Blasket.",
+      "Navigation references describe steep/irregular depths, reefs, awash and submerged rocks around Great Blasket."
+    ]
+  },
+  "scientific_interpretation": {
+    "leading_hypothesis": "STEEP_NATURAL_BEDROCK_PINNACLE_OR_REEF",
+    "alternatives": [
+      "WRECK_OR_DEBRIS",
+      "SURVEY_ARTEFACT",
+      "OTHER_GEOLOGIC_FEATURE"
+    ],
+    "artificiality_established": false,
+    "exact_object_identity_established": false,
+    "reason": "A ~15 m relief concentrated within an ~8.3 m frozen radius plus strong roughness/curvature and strong held-out backscatter is consistent with a sharp hard rocky pinnacle. The regional geology independently predicts steep faulted/rocky seabed here. No exact indexed wreck match was found, but wreck absence is not proven because public wreck inventories are incomplete."
+  },
+  "next_falsifier": "Acquire/inspect direct high-resolution bathymetric patch, independent imagery/ROV/diver record, or an exact official wreck/nautical feature match at the frozen coordinate.",
+  "claim_ceiling": "POSTHOC_LIKELY_NATURAL_GEOLOGIC_CLASSIFICATION_ONLY"
+}
