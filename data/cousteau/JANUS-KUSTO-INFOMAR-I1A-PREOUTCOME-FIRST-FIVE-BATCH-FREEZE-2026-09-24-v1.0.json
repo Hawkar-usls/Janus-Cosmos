@@ -1,0 +1,59 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1A-PREOUTCOME-FIRST-FIVE-BATCH-FREEZE-2026-09-24-v1.0",
+  "status": "FROZEN_BEFORE_ANY_RANK_2_TO_5_SURVEY_ARCHIVE_BODY_OR_RASTER_VALUE_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "origin_selection_rule": "JANUS-KUSTO-INFOMAR-I0F-SURVEY-SELECTION-RULE-FREEZE-2026-09-24-v1.0",
+  "preoutcome_authority": {
+    "github_actions_run_id": 36011320751,
+    "github_artifact_id": 10812517309,
+    "artifact_zip_sha256": "e2cc66cab21f3a99344cf5ecad77e6686d89a2b71321a122ec0e62ddeddcb487",
+    "recorded_field": "first_five_eligible_SURVEY_IDs",
+    "recorded_before_CB13_02_raster_values_or_outcome": true,
+    "first_five_eligible_SURVEY_IDs": [
+      "CB13_02",
+      "CB13_03",
+      "CB13_05",
+      "CB14_01",
+      "CB14_02"
+    ]
+  },
+  "batch_roles": {
+    "CB13_02": "HISTORICAL_RANK_1_ALREADY_EXECUTED_FORMAL_FAIL",
+    "CB13_03": "PROSPECTIVE_RANK_2",
+    "CB13_05": "PROSPECTIVE_RANK_3",
+    "CB14_01": "PROSPECTIVE_RANK_4",
+    "CB14_02": "PROSPECTIVE_RANK_5"
+  },
+  "membership_rule": "Use exactly the five SURVEY_IDs recorded by I0G before the rank-1 scientific outcome. No replacement is allowed for transport failure, coverage failure, scientific FAIL, or inconvenient representation.",
+  "prospective_execution_rule": "Execute ranks 2 through 5 in the recorded order under unchanged paired-support-domain v2. Each survey may stop only at an objectively preregistered source/transport/representation/coverage block; blocked surveys remain in batch accounting and are not replaced.",
+  "method": {
+    "generation": "PAIRED_SUPPORT_DOMAIN_V2_UNCHANGED",
+    "native_scale_rule": "4_8_16_32_BATHYMETRY_CELLS",
+    "sampling_stride_cells": 8,
+    "spatial_dedup_cells": 50,
+    "tail_quantile": 0.995,
+    "maximum_candidates": 100,
+    "bathymetry_support_min_fraction": 0.80,
+    "backscatter_native_mask_min_fraction": 0.80,
+    "controls_per_candidate": 20,
+    "minimum_controls_per_radius": 200,
+    "minimum_distance_from_any_frozen_candidate_m": 100,
+    "control_rng_seed": 260923,
+    "zero_mad_rule": "exclude metric when same-radius eligible-control MAD is exactly zero",
+    "minimum_active_metrics_per_stratum": 2,
+    "aggregate_score": "0.5*max(active positive robust z)+0.5*mean(active positive robust z)",
+    "support_threshold": "same-radius eligible-control aggregate-score q95",
+    "permutation_iterations": 5000,
+    "alpha": 0.05
+  },
+  "hard_firewalls": [
+    "NO_SURVEY_REPLACEMENT",
+    "NO_BATCH_MEMBER_REORDERING",
+    "NO_METHOD_RETUNING_BETWEEN_BATCH_MEMBERS",
+    "NO_CANDIDATE_RECENTERING",
+    "NO_TRUTH_OR_OBJECT_LABEL_USE_BEFORE_FORMAL_REPLAY",
+    "EVERY_BLOCK_OR_FAIL_REMAINS_IN_BATCH_DENOMINATOR"
+  ],
+  "next_gate": "I1B_REFRESH_METADATA_AND_RANGE_PROBE_PREOUTCOME_BATCH_MEMBERS",
+  "claim_ceiling": "PREOUTCOME_DETERMINISTIC_INFOMAR_BATCH_MEMBERSHIP_FREEZE_ONLY"
+}
