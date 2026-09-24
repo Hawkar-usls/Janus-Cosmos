@@ -1,0 +1,11 @@
+{
+  "artifact_id": "JANUS-KUSTO-INFOMAR-I1H-CB13_03-OUTPUT-PATH-REPAIR-ADDENDUM-2026-09-25-v1.0",
+  "status": "IMPLEMENTATION_ONLY__SCIENTIFIC_RESULT_UNCHANGED",
+  "original_success_run_id": 36064690125,
+  "original_result_status": "PASS_PREREGISTERED_UNSEEN_INFOMAR_CB13_03_PAIRED_SUPPORT_DOMAIN_V2_VALIDATION",
+  "issue": "Runner wrote the completed JSON under the historical CB13_02 filename, so the upload step could not find the new CB13_03 filename.",
+  "repair": "Change only the output filename to the already frozen CB13_03 artifact name and rerun the identical deterministic replay.",
+  "scoring_or_threshold_change": "NONE",
+  "candidate_change": "NONE",
+  "backscatter_reprocessing_method_change": "NONE"
+}
