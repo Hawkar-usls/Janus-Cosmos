@@ -1,0 +1,29 @@
+name: KUSTO INFOMAR I1C Batch ZIP Inventory
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_infomar_i1c_batch_archive_inventory.py'
+      - 'data/cousteau/JANUS-KUSTO-INFOMAR-I1C-BATCH-ARCHIVE-MEMBER-INVENTORY-PREREG-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-infomar-i1c-batch-archive-inventory.yml'
+  workflow_dispatch:
+
+jobs:
+  i1c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests
+      - name: Inventory prospective INFOMAR ZIP central directories only
+        run: python workspace/kusto_infomar_i1c_batch_archive_inventory.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-infomar-i1c-batch-archive-inventory-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-INFOMAR-I1C-BATCH-ARCHIVE-MEMBER-INVENTORY-RECEIPT-2026-09-24-v1.0.json
+          retention-days: 30
