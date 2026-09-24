@@ -1,0 +1,37 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0C-CURRENT-ROUTE-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_CURRENT_COMBINED_ACQUISITION_ROUTE_BOUND__NO_RASTER_VALUES_READ",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-UNCHANGED-V2-PREREG-2026-09-24-v1.0",
+  "source_receipt": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0-SOURCE-BINDING-RECEIPT-2026-09-24-v1.0",
+  "stale_route_repair": "JANUS-KUSTO-SOLITARY-ISLANDS-SI0B-STALE-ROUTE-REPAIR-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36000042873,
+    "artifact_id": 10806984539,
+    "artifact_zip_sha256": "9007c9f6db6d9a842adf29f23b72a830c91fade8d0a025995d5f2c8d0d769dc0"
+  },
+  "current_resource": {
+    "package_id": "7707992a-6ce0-43d1-8f74-bd1d7b8a486b",
+    "package_name": "solitary-islands-gumbaynggirr-yaegl-mp-bathymetry-and-backscatter-acquisition-20220017s",
+    "resource_id": "5c8af2d3-d4e2-4822-a351-bf9b85037bd3",
+    "resource_name": "Solitary Islands Gumbaynggirr Yaegl MP Bathymetry & Backscatter 2022 5m (zip) [18.1 MB]",
+    "url": "https://files.ausseabed.gov.au/survey/Solitary%20Islands%20Gumbaynggirr%20Yaegl%20MP%20Bathymetry%202022%205m.zip",
+    "range_probe_status": 206,
+    "content_range_total_bytes": 18988969
+  },
+  "pair_semantics": {
+    "same_current_resource_contains_bathymetry_and_backscatter": true,
+    "newgaid": "20220017S",
+    "native_cell_m": 5
+  },
+  "truth_firewall": {
+    "response_body_consumed_in_route_gate": false,
+    "bathymetry_values_read": false,
+    "backscatter_values_read": false,
+    "towed_video_or_stills_read": false,
+    "sediment_labels_read": false,
+    "landform_or_substrate_classification_read": false
+  },
+  "next_gate": "SI0D_ARCHIVE_MEMBER_NAME_SIZE_CRC_INVENTORY_ONLY",
+  "claim_ceiling": "CURRENT_COMBINED_SOURCE_ROUTE_BINDING_ONLY"
+}
