@@ -1,0 +1,30 @@
+name: KUSTO Solitary Islands SI5B Truth Schema
+
+on:
+  push:
+    branches:
+      - feature/kusto-global-groundtruth-calibration-v1
+    paths:
+      - 'workspace/kusto_solitary_islands_si5b_truth_schema.py'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI5-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0.json'
+      - 'data/cousteau/JANUS-KUSTO-SOLITARY-ISLANDS-SI5A-TRUTH-PACKAGE-INVENTORY-RECEIPT-2026-09-24-v1.0.json'
+      - '.github/workflows/kusto-solitary-islands-si5b-truth-schema.yml'
+  workflow_dispatch:
+
+jobs:
+  si5b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check requests pyshp pyproj
+      - name: Audit truth-layer schemas and CRS
+        run: python workspace/kusto_solitary_islands_si5b_truth_schema.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-solitary-islands-si5b-truth-schema-v1
+          path: workspace/kusto_global_groundtruth_out/JANUS-KUSTO-SOLITARY-ISLANDS-SI5B-TRUTH-LAYER-SCHEMA-AUDIT-2026-09-24-v1.0.json
+          retention-days: 30
