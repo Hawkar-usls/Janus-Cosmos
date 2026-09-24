@@ -1,0 +1,23 @@
+{
+  "artifact_id": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5A-TRUTH-PACKAGE-INVENTORY-RECEIPT-2026-09-24-v1.0",
+  "status": "PASS_POSTRESULT_TRUTH_GEOMETRY_FILES_FOUND",
+  "prereg": "JANUS-KUSTO-SOLITARY-ISLANDS-SI5-POSTRESULT-GROUNDTRUTH-CHARACTERIZATION-PREREG-2026-09-24-v1.0",
+  "run": {
+    "github_actions_run_id": 36000737623,
+    "artifact_id": 10808306854,
+    "artifact_zip_sha256": "27ffc7035d2d1370f40f4cc667fa7ed91130bf0e2a8928179b2359c63e47d4b1"
+  },
+  "truth_package": {
+    "zip_sha256": "a1ba78b6c623ae52d1825fc05159f19231e3f1cc350bdf9ab0d3a0bc769a47f7",
+    "zip_bytes": 10667577
+  },
+  "primary_truth_layers": {
+    "towed_video": "SIMP_TowedVideoSubClass/SIMP_TowedVideo_SubstrateClass.shp",
+    "sediment_samples": "SIMP_SedimentsMetadata/SIMP_Sediments_SamplesRetrieved.shp"
+  },
+  "secondary_posthoc_layer": "SIMP_SeabedClassified/SIMP_Geomorph_Ecosys_Substrates.shp",
+  "truth_file_contents_parsed_in_si5a": false,
+  "formal_si3_result_changed": false,
+  "next_gate": "SI5B_TRUTH_LAYER_SCHEMA_CRS_GEOMETRY_AUDIT",
+  "claim_ceiling": "POSTRESULT_TRUTH_PACKAGE_MEMBER_BINDING_ONLY"
+}
