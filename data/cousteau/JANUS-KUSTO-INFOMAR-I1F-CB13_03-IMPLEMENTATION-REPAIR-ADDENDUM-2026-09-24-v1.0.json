@@ -1,0 +1,12 @@
+{
+  "artifact_id":"JANUS-KUSTO-INFOMAR-I1F-CB13_03-IMPLEMENTATION-REPAIR-ADDENDUM-2026-09-24-v1.0",
+  "status":"IMPLEMENTATION_ONLY__SCIENTIFIC_FREEZE_UNCHANGED",
+  "failed_run_id":36035514829,
+  "failure":"KeyError archive_url before any raster pixel read",
+  "root_cause":"The sealed I1D receipt stores archive identity but not transport URL; the runner incorrectly expected archive_url there.",
+  "repair":"Read the already sealed bathymetry_url and archive size from I1B for CB13_03; keep all I1E scientific parameters unchanged.",
+  "bathymetry_values_read_in_failed_run":false,
+  "backscatter_values_read_in_failed_run":false,
+  "groundtruth_read_in_failed_run":false,
+  "scientific_contract_changes":"NONE"
+}
