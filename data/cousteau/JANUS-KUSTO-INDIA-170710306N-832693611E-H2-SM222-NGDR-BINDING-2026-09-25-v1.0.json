@@ -1,0 +1,88 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-H2-SM222-NGDR-BINDING-2026-09-25-v1.0",
+  "status": "SM222_OFFICIAL_SURVEY_REPORT_EXTENT_CONTAINS_TARGET__EXACT_RAW_SWATH_INTERSECTION_PENDING",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "head_before_write": "4eac88a664d7a7f61f9c686c7027c82805c754c4",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "official_ngdr_binding": {
+    "baseid": 5192,
+    "subid": 5837,
+    "baseline_accession_number": "SM222",
+    "base_upid": "MCS-SM222-2014",
+    "report_owner": "GSI",
+    "year_of_publishing": "2014",
+    "nho_chart_number": "31",
+    "project_title": "Progress Report On Multibeam Bathymetric Survey Of The Continental Slope Off Pudimadaka-Godavari, Andhra Pradesh Coast",
+    "report_file_server_path": "/srv/NGDR/Baseline_Data/MCS-SM222-2014/TEXT/20241206152733.206_SM-222.pdf",
+    "geographical_extent_dd": {
+      "polygon": [
+        [
+          81.55,
+          17.24
+        ],
+        [
+          83.97,
+          17.24
+        ],
+        [
+          83.97,
+          15.51
+        ],
+        [
+          81.55,
+          15.51
+        ],
+        [
+          81.55,
+          17.24
+        ]
+      ],
+      "target_inside": true
+    },
+    "evidence_runs": {
+      "catalog_query": 36129390967,
+      "boundary_query": 36129608312,
+      "wfs_query": 36129707882
+    }
+  },
+  "published_survey_methodology": {
+    "vessel": "R.V. Samudra Manthan",
+    "instrument": "Reson Seabat 7150 multibeam echo sounder",
+    "software": "PDS-2000",
+    "mapped_area_km2": 18000,
+    "line_km": 5245,
+    "transects": 21,
+    "transect_length_km": 240,
+    "spacing_m": [
+      500,
+      1000,
+      4000
+    ],
+    "stated_swath_overlap_percent": 80,
+    "survey_blocks": [
+      "Northern Block: Pudimadaka-Kakinada",
+      "Southern Block: Kakinada-Narsapuram"
+    ],
+    "water_depth_range_m": [
+      126,
+      2942
+    ]
+  },
+  "interpretation": {
+    "report_extent_intersection": true,
+    "published_multibeam_survey_area_binding": true,
+    "exact_raw_ping_or_beam_footprint_intersection": "NOT_YET_PROVEN",
+    "reason": "NGDR public WFS exposes the report extent rectangle and metadata, while the guest-access layer does not expose individual raw trackline/beam polygons. Published figures show the two mapped blocks but are insufficient for sub-kilometre point-in-swath proof.",
+    "current_target_state": "SM222_SURVEY_BOUND__RAW_SWATH_PIXEL_PENDING"
+  },
+  "next_gate": "OBTAIN_SM222_PDF_OR_RAW_GRID_TRACKLINE_DATA_AND_TEST_EXACT_TARGET_INTERSECTION_WITHOUT_RECENTERING",
+  "hard_rules": [
+    "NO_RECENTERING",
+    "REPORT_EXTENT_NE_RAW_SWATH_FOOTPRINT",
+    "DO_NOT_CLAIM_OBJECT_FROM_GEBCO_TID40",
+    "EXACT_SONAR_HIT_REQUIRES_RAW_GRID_TRACK_OR_BEAM_BINDING"
+  ]
+}
