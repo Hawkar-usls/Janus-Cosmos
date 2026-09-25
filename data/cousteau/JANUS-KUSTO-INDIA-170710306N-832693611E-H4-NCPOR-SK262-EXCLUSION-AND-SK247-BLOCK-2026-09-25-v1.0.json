@@ -1,0 +1,42 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-H4-NCPOR-SK262-EXCLUSION-AND-SK247-BLOCK-2026-09-25-v1.0",
+  "status": "SK262_EXCLUDED__SK247_PUBLIC_PDF_ENDPOINT_BLOCKED",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "sk262": {
+    "cruise": "SK-262",
+    "dates": "2009-08-25 to 2009-09-15",
+    "vessel": "O.R.V. Sagar Kanya",
+    "system": "SeaBeam 3012",
+    "report_statement": "The bathymetric multibeam survey block area selected near to west of Andaman region; continuation of earlier R.V. Akademik Boris Petrov ABP-019 cruise.",
+    "target_binding": false,
+    "verdict": "EXCLUDED_GEOGRAPHICALLY"
+  },
+  "sk247": {
+    "cruise": "SK-247",
+    "dates": "2008-06-16 to 2008-07-12",
+    "vessel": "O.R.V. Sagar Kanya",
+    "region": "Bay of Bengal",
+    "objective": "Survey and prepare a comprehensive topographic map for the survey area under Indian EEZ survey project.",
+    "report_catalogued": true,
+    "public_download_endpoint": "cruisdatadownload.jsp /CruiseSummary/SK247.pdf",
+    "endpoint_result": "timeout/bad-request during current audit",
+    "exact_survey_block_coordinates": "UNRESOLVED",
+    "target_binding": "UNRESOLVED"
+  },
+  "sm224_priority": {
+    "cruise": "SM-224",
+    "title": "Multibeam Bathymetric Survey in the continental slope off Visakhapatnam, Andhra Pradesh",
+    "fsp_code": "MGR/SR/M&CSD-EC-II/SM/2012/224",
+    "current_rank": "HIGHEST_PRIORITY_PUBLIC_LINEAGE",
+    "exact_geometry": "NGDR/report not publicly retrieved"
+  },
+  "next_gate": "H5_SM224_NGDR_EXACT_GEOMETRY_OR_SK247_REPORT_RECOVERY",
+  "hard_rules": [
+    "NO_TARGET_RECENTER",
+    "NO_SURVEY_TITLE_EQUALS_SWATH_HIT",
+    "ONLY_EXACT_TRACK_POLYGON_OR_RAW_RASTER_COUNTS"
+  ]
+}
