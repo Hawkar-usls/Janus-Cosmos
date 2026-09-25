@@ -1,0 +1,23 @@
+name: KUSTO NGDR SM222 Catalog Query
+on:
+  push:
+    branches: [feature/kusto-global-groundtruth-calibration-v1]
+    paths:
+      - 'workspace/kusto_ngdr_sm222_catalog.py'
+      - '.github/workflows/kusto-ngdr-sm222-catalog.yml'
+  workflow_dispatch:
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install --disable-pip-version-check requests
+      - run: python workspace/kusto_ngdr_sm222_catalog.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kusto-ngdr-sm222-catalog-v1
+          path: workspace/kusto_global_groundtruth_out/ngdr_sm222_catalog/
+          retention-days: 30
