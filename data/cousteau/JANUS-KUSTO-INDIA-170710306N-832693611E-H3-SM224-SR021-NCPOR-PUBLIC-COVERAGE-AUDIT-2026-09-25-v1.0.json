@@ -1,0 +1,60 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-H3-SM224-SR021-NCPOR-PUBLIC-COVERAGE-AUDIT-2026-09-25-v1.0",
+  "status": "SM224_EXACT_GEOMETRY_BLOCKED__SR021_EXCLUDED__SK247_SK262_REPORTS_PENDING",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "sm224": {
+    "authoritative_program": "GSI FS 2012-13",
+    "fsp_code": "MGR/SR/M&CSD-EC-II/SM/2012/224",
+    "title": "Multibeam Bathymetric Survey in the continental slope off Visakhapatnam, Andhra Pradesh",
+    "vessel": "R.V. Samudra Manthan",
+    "exact_swath_or_track_geometry_publicly_retrieved": false,
+    "ngdr_expected_authority": true,
+    "verdict": "HIGH_PRIORITY_PROBABLE_LINEAGE__NOT_EXACT_TARGET_BINDING"
+  },
+  "sr021": {
+    "title": "Swath bathymetric survey of the seabed off Pudimadaka to Gopalpur, within EEZ of Andhra Pradesh and Odisha",
+    "cruise": "SR-021",
+    "vessel": "R.V. Samudra Ratnakar",
+    "pudimadaka_reference": {
+      "lat": 17.49245,
+      "lon": 83.00307
+    },
+    "target_to_pudimadaka_km": 54.73,
+    "geographic_direction_from_pudimadaka": "south-southeast",
+    "published_survey_direction": "Pudimadaka northward toward Gopalpur",
+    "verdict": "EXCLUDED_AS_DIRECT_TARGET_BINDING"
+  },
+  "ncpor": {
+    "phase_ii_relevance": "Target GEBCO modeled depth ~395 m lies inside NCPOR shallow-water Phase II nominal 10-500 m regime.",
+    "sk247": {
+      "dates": "2008-06-16 to 2008-07-12",
+      "region": "Bay of Bengal",
+      "objective": "EEZ comprehensive topographic survey",
+      "pdf_catalogued": true,
+      "pdf_endpoint_status": "TIMEOUT",
+      "exact_target_binding": "UNRESOLVED"
+    },
+    "sk262": {
+      "dates": "2009-08-25 to 2009-09-15",
+      "region": "Bay of Bengal",
+      "objective": "collect multibeam bathymetric data and physical parameters",
+      "pdf_catalogued": true,
+      "pdf_endpoint_status": "TIMEOUT",
+      "exact_target_binding": "UNRESOLVED"
+    }
+  },
+  "open_evidence": {
+    "sm222_publication": "Existing Reson SeaBat 7150 MBES coverage off Pudimadaka-Narsapuram: 18,000 km2, 5,245 line-km, 21 coast-parallel transects, 80% overlap; exact target intersection still not promoted without machine-readable geometry.",
+    "historical_bathymetry": "1992 GSI paper documents pinnacles/ridges/terraces and dissected continental slope in broader Visakhapatnam-Kakinada EEZ; this is contextual, not target identity."
+  },
+  "next_gate": "H4_SK247_SK262_REPORT_RECOVERY_OR_SM224_NGDR_GEOMETRY",
+  "hard_rules": [
+    "TARGET_FIXED",
+    "NO_EXACT_SWATH_CLAIM_FROM_SURVEY_TITLE",
+    "NO_VISUAL_FIGURE_OVERLAP_PROMOTION",
+    "ONLY_MACHINE_READABLE_TRACK_OR_POLYGON_OR_RAW_RASTER_BINDING_COUNTS"
+  ]
+}
