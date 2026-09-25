@@ -1,0 +1,76 @@
+{
+  "artifact_id": "JANUS-KUSTO-INDIA-170710306N-832693611E-H2-SM222-SURVEY-SECTOR-BINDING-2026-09-25-v1.0",
+  "status": "PROBABLE_SM222_NORTHERN_BLOCK_BINDING__EXACT_SWATH_INTERSECTION_NOT_YET_PROVED",
+  "branch": "feature/kusto-global-groundtruth-calibration-v1",
+  "target": {
+    "lat": 17.0710306,
+    "lon": 83.2693611
+  },
+  "primary_publication": {
+    "title": "Morphology and structure of Godavari sub-aqueous delta and adjoining continental margin, East Coast of India",
+    "journal": "Indian Journal of Geosciences",
+    "volume": "69(3 & 4)",
+    "pages": "203-214",
+    "year": 2015,
+    "survey_summary": {
+      "instrument": "Reson SeaBat 7150 MBES",
+      "acquisition_software": "PDS-2000",
+      "vessel": "R.V. Samudra Manthan",
+      "mapped_area_km2": 18000,
+      "line_km": 5245,
+      "coast_parallel_transects": 21,
+      "nominal_transect_length_km": 240,
+      "spacing_m": [
+        500,
+        1000,
+        4000
+      ],
+      "overlap_percent": 80,
+      "bathymetry_range_m": [
+        126,
+        2942
+      ]
+    },
+    "northern_block": {
+      "coast_sector": "Pudimadaka-Kakinada",
+      "along_coast_extent_km": 92,
+      "continental_slope_width_average_km": 35,
+      "slope_extent_up_to_km_from_coast": 55,
+      "slope_depth_range_m": [
+        250,
+        2500
+      ],
+      "mapped_domains": [
+        "continental shelf",
+        "continental slope",
+        "continental rise",
+        "abyssal plain"
+      ]
+    }
+  },
+  "gsi_atlas_2022": {
+    "feature": "DELTA FAN",
+    "source_cruise": "SM-222",
+    "citation": "Ghosh et al. 2013",
+    "note": "GSI atlas explicitly attributes the Pudimadaka-Godavari swath bathymetry mosaic to cruise SM-222."
+  },
+  "ngdr": {
+    "official_status": "GSI offshore baseline bathymetry is stated by Ministry of Mines to be available through NGDR.",
+    "guest_map_gateway_reachable": true,
+    "raw_sm222_report_or_geometry_retrieved": false,
+    "authentication_note": "Portal documentation indicates registration/authentication may be required for data download/API access."
+  },
+  "interpretation": {
+    "target_sector_match": "YES_AT_REGIONAL/NORTHERN-BLOCK_LEVEL",
+    "exact_track_or_swath_polygon_intersection": "UNRESOLVED",
+    "direct_raw_depth_at_target": "UNRESOLVED",
+    "reason_for_not_promoting": "The public paper proves a large overlapping MBES programme in the correct coastal sector but does not expose machine-readable swath polygons or track coordinates for the exact target."
+  },
+  "next_gate": "H3_NGDR_SM222_REPORT_OR_LAYER_GEOMETRY_BIND",
+  "hard_rules": [
+    "DO_NOT_CALL_THIS_EXACT_SWATH_HIT_WITHOUT_TRACK_OR_POLYGON_GEOMETRY",
+    "DO_NOT_USE_FIGURE_VISUAL_OVERLAP_ALONE_AS_EXACT_BINDING",
+    "NO_RECENTERING",
+    "KEEP_TARGET_FIXED"
+  ]
+}
