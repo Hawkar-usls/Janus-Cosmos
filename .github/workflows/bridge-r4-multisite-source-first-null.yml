@@ -1,0 +1,111 @@
+name: JANUS Bridge R4 Multisite Source-First Null
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/earth/BRIDGE_R4_MULTISITE_SOURCE_FIRST_EVENT_LEDGER_1949_1957_v0.1.json'
+      - 'domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+      - 'domains/bridge/BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-PREREG-2026-09-28-v1.0.json'
+      - 'tools/build_bridge_r4_multisite_source_first_null.py'
+      - '.github/workflows/bridge-r4-multisite-source-first-null.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: janus-bridge-r4-multisite-source-first-null
+  cancel-in-progress: true
+
+jobs:
+  multisite-null:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build preregistered R4 multisite result
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/build_bridge_r4_multisite_source_first_null.py
+          python tools/build_bridge_r4_multisite_source_first_null.py \
+            --earth-ledger domains/earth/BRIDGE_R4_MULTISITE_SOURCE_FIRST_EVENT_LEDGER_1949_1957_v0.1.json \
+            --palomar-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json \
+            --prereg domains/bridge/BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-PREREG-2026-09-28-v1.0.json \
+            --out domains/bridge/BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-RESULT-2026-09-28-v1.0.json
+
+      - name: Validate frozen R4 contract
+        run: |
+          python - <<'PY'
+          import json
+          p='domains/bridge/BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-RESULT-2026-09-28-v1.0.json'
+          d=json.load(open(p,encoding='utf-8'))
+          ex=d['execution_contract']
+          assert ex['primary_holdout_site_n'] == 3, ex
+          assert ex['primary_holdout_event_date_n'] == 6, ex
+          assert ex['site_ids'] == ['LOS_ALAMOS','SANDIA_BASE','SAVANNAH_RIVER_PLANT'], ex
+          assert ex['radii_days'] == [0,1,3], ex
+          assert ex['palomar_observation_day_rows'] == 312, ex
+          assert ex['known_outcome_calibration_excluded_from_primary'] is True
+          assert d['calibration_reuse']['Oak_Ridge_in_primary_statistic'] is False
+
+          for r in (0,1,3):
+              key=f'radius_{r}_days'
+              act=d['actual_windows'][key]
+              assert 0 <= act['T_event_date_hits'] <= 6, act
+              assert 0 <= act['S_sites_with_at_least_one_hit'] <= 3, act
+
+              pn=d['primary_null'][key]
+              pprod=1
+              for sid in ex['site_ids']:
+                  x=pn['by_site'][sid]
+                  n=x['admissible_shift_count']
+                  assert n > 0
+                  assert sum(x['event_hit_histogram'].values()) == n
+                  assert sum(x['site_has_hit_histogram'].values()) == n
+                  assert x['shift_min_days'] <= 0 <= x['shift_max_days']
+                  pprod *= n
+              assert pn['aggregate_shift_vector_count'] == pprod
+              assert sum(pn['T_event_date_hit_histogram'].values()) == pprod
+              assert sum(pn['S_site_hit_histogram'].values()) == pprod
+
+              sn=d['seasonality_sensitivity_null'][key]
+              sprod=1
+              for sid in ex['site_ids']:
+                  x=sn['by_site'][sid]
+                  ys=x['admissible_year_offsets']
+                  assert 0 in ys and len(ys) == x['admissible_year_offset_count']
+                  assert sum(x['event_hit_histogram'].values()) == len(ys)
+                  assert sum(x['site_has_hit_histogram'].values()) == len(ys)
+                  sprod *= len(ys)
+              assert sn['aggregate_year_shift_vector_count'] == sprod
+              assert sum(sn['T_event_date_hit_histogram'].values()) == sprod
+              assert sum(sn['S_site_hit_histogram'].values()) == sprod
+
+          print('PASS BRIDGE R4 MULTISITE SOURCE-FIRST NULL', d['status'])
+          for r in (0,1,3):
+              key=f'radius_{r}_days'
+              a=d['actual_windows'][key]
+              pnull=d['primary_null'][key]
+              snull=d['seasonality_sensitivity_null'][key]
+              print('R',r,'T',a['T_event_date_hits'],'S',a['S_sites_with_at_least_one_hit'],
+                    'P_GE',pnull['fraction_shift_vectors_T_ge_actual'],
+                    'SEASON_GE',snull['fraction_year_shift_vectors_T_ge_actual'])
+          PY
+
+      - name: Commit result if changed
+        run: |
+          set -euo pipefail
+          TARGET='domains/bridge/BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-RESULT-2026-09-28-v1.0.json'
+          if [ -z "$(git status --porcelain -- "$TARGET")" ]; then
+            echo 'NO CHANGE: R4 multisite result already frozen.'
+            exit 0
+          fi
+          git config user.name 'JANUS Cosmos Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add "$TARGET"
+          git commit -m 'Freeze Bridge R4 multisite source-first null result'
+          git push origin HEAD:main
