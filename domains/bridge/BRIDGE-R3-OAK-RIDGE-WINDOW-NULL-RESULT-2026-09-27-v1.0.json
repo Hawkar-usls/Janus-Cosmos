@@ -1,0 +1,270 @@
+{
+  "schema": "janus.cosmos.bridge.oak_ridge_window_null_result.v1",
+  "artifact_id": "BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-RESULT-2026-09-27-v1.0",
+  "generated_at_utc": "2026-09-27T18:49:39.091402+00:00",
+  "status": "NO_PALOMAR_OBSERVATION_OPPORTUNITY_WITHIN_PREREGISTERED_PLUS_MINUS_1_OR_3_DAY_PRIMARY_WINDOWS",
+  "execution_contract": {
+    "prereg_artifact_id": "BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-PREREG-2026-09-27-v1.0",
+    "prereg_status": "FROZEN_BEFORE_WINDOW_MEMBERSHIP_AND_NULL_EVALUATION",
+    "exact_day_result_artifact_id": "BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0",
+    "exact_day_status": "NO_EXACT_DAY_PALOMAR_OBSERVATION_OPPORTUNITY_ON_FROZEN_PRIMARY_OAK_RIDGE_DATES",
+    "primary_n": 3,
+    "provisional_n": 1,
+    "window_radii_days": [
+      1,
+      3
+    ],
+    "palomar_study_window": [
+      "1949-11-19",
+      "1957-04-28"
+    ],
+    "palomar_observation_day_rows": 312,
+    "null_name": "RIGID_CLUSTER_TRANSLATION_EXHAUSTIVE",
+    "common_null_support_uses_widest_radius_days": 3,
+    "rigid_shift_min_days": -99,
+    "rigid_shift_max_days": 2320,
+    "feasible_rigid_translations": 2420,
+    "actual_shift_days": 0,
+    "pairwise_primary_date_gaps_days": [
+      228,
+      292,
+      64
+    ]
+  },
+  "source_hashes": {
+    "earth_ledger_sha256": "c9f304d87a930fef655ca99b80acf0b4d1f2858d5a766a36b0f0f79e0b035386",
+    "palomar_day_ledger_sha256": "4c719bfcf473dcc77e8c65572f3872fa5cb74713ee903869674c8202f36f9cc5",
+    "exact_day_result_sha256": "c51c2093fabf9837e6943e1f44dfb76f368eaeedae340cce601c56a49ba21867",
+    "prereg_sha256": "a52271af8ed4bf1ef63d09d1f3413cc816573356210d7eb014acdfc0601dfa34"
+  },
+  "primary_actual_windows": {
+    "plus_minus_1_day": {
+      "events_with_observation_opportunity": 0,
+      "unique_observation_opportunity_days": 0,
+      "event_rows": [
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-03-01-RADAR-REPORT",
+          "original_earth_date": "1950-03-01",
+          "translated_center_date": "1950-03-01",
+          "window_start": "1950-02-28",
+          "window_end": "1950-03-02",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        },
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-10-15-AEC-VISUAL",
+          "original_earth_date": "1950-10-15",
+          "translated_center_date": "1950-10-15",
+          "window_start": "1950-10-14",
+          "window_end": "1950-10-16",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        },
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-12-18-CONTROLLED-AREA",
+          "original_earth_date": "1950-12-18",
+          "translated_center_date": "1950-12-18",
+          "window_start": "1950-12-17",
+          "window_end": "1950-12-19",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        }
+      ],
+      "union_observation_opportunity_dates": []
+    },
+    "plus_minus_3_day": {
+      "events_with_observation_opportunity": 0,
+      "unique_observation_opportunity_days": 0,
+      "event_rows": [
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-03-01-RADAR-REPORT",
+          "original_earth_date": "1950-03-01",
+          "translated_center_date": "1950-03-01",
+          "window_start": "1950-02-26",
+          "window_end": "1950-03-04",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        },
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-10-15-AEC-VISUAL",
+          "original_earth_date": "1950-10-15",
+          "translated_center_date": "1950-10-15",
+          "window_start": "1950-10-12",
+          "window_end": "1950-10-18",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        },
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-12-18-CONTROLLED-AREA",
+          "original_earth_date": "1950-12-18",
+          "translated_center_date": "1950-12-18",
+          "window_start": "1950-12-15",
+          "window_end": "1950-12-21",
+          "observation_opportunity_dates": [],
+          "observation_opportunity_count": 0,
+          "window_hit": false
+        }
+      ],
+      "union_observation_opportunity_dates": []
+    }
+  },
+  "calendar_null": {
+    "plus_minus_1_day": {
+      "feasible_rigid_translations": 2420,
+      "event_hit_histogram": {
+        "0": 1157,
+        "1": 848,
+        "2": 352,
+        "3": 63
+      },
+      "unique_observation_day_histogram": {
+        "0": 1157,
+        "1": 539,
+        "2": 375,
+        "3": 205,
+        "4": 84,
+        "5": 47,
+        "6": 12,
+        "7": 1
+      },
+      "actual_event_hits": 0,
+      "actual_unique_observation_days": 0,
+      "fraction_translations_event_hits_ge_actual": 1.0,
+      "fraction_translations_event_hits_le_actual": 0.478099173553719,
+      "fraction_translations_with_zero_event_hits": 0.478099173553719,
+      "fraction_translations_unique_days_ge_actual": 1.0,
+      "fraction_translations_unique_days_le_actual": 0.478099173553719,
+      "max_event_hits_in_null": 3,
+      "translations_at_max_event_hits_n": 63,
+      "example_shifts_at_max_event_hits": [
+        110,
+        639,
+        640,
+        816,
+        817,
+        818,
+        882,
+        883,
+        909,
+        910,
+        1084,
+        1109,
+        1110,
+        1111,
+        1112,
+        1113,
+        1140,
+        1174,
+        1175,
+        1200
+      ],
+      "max_unique_observation_days_in_null": 7,
+      "translations_at_max_unique_days_n": 1,
+      "example_shifts_at_max_unique_days": [
+        1318
+      ]
+    },
+    "plus_minus_3_day": {
+      "feasible_rigid_translations": 2420,
+      "event_hit_histogram": {
+        "0": 706,
+        "1": 885,
+        "2": 618,
+        "3": 211
+      },
+      "unique_observation_day_histogram": {
+        "0": 706,
+        "1": 375,
+        "2": 351,
+        "3": 284,
+        "4": 226,
+        "5": 162,
+        "6": 120,
+        "7": 74,
+        "8": 66,
+        "9": 29,
+        "10": 16,
+        "11": 7,
+        "12": 2,
+        "13": 2
+      },
+      "actual_event_hits": 0,
+      "actual_unique_observation_days": 0,
+      "fraction_translations_event_hits_ge_actual": 1.0,
+      "fraction_translations_event_hits_le_actual": 0.29173553719008266,
+      "fraction_translations_with_zero_event_hits": 0.29173553719008266,
+      "fraction_translations_unique_days_ge_actual": 1.0,
+      "fraction_translations_unique_days_le_actual": 0.29173553719008266,
+      "max_event_hits_in_null": 3,
+      "translations_at_max_event_hits_n": 211,
+      "example_shifts_at_max_event_hits": [
+        108,
+        109,
+        110,
+        111,
+        112,
+        286,
+        287,
+        341,
+        342,
+        405,
+        584,
+        637,
+        638,
+        639,
+        640,
+        641,
+        642,
+        812,
+        814,
+        815
+      ],
+      "max_unique_observation_days_in_null": 13,
+      "translations_at_max_unique_days_n": 2,
+      "example_shifts_at_max_unique_days": [
+        1612,
+        1677
+      ]
+    }
+  },
+  "provisional_descriptive_only": {
+    "excluded_from_primary_null": true,
+    "rows_by_window": {
+      "plus_minus_1_day": [
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-10-16-AEC-PATROL",
+          "date": "1950-10-16",
+          "source_grade": "P1_PUBLIC_TRANSCRIPTION_BOUND_TO_FBI_AEC_LINEAGE__PRIMARY_PAGE_BIND_PENDING",
+          "window_start": "1950-10-15",
+          "window_end": "1950-10-17",
+          "observation_opportunity_dates": [],
+          "window_hit": false
+        }
+      ],
+      "plus_minus_3_day": [
+        {
+          "row_id": "EARTH-OAKRIDGE-1950-10-16-AEC-PATROL",
+          "date": "1950-10-16",
+          "source_grade": "P1_PUBLIC_TRANSCRIPTION_BOUND_TO_FBI_AEC_LINEAGE__PRIMARY_PAGE_BIND_PENDING",
+          "window_start": "1950-10-13",
+          "window_end": "1950-10-19",
+          "observation_opportunity_dates": [],
+          "window_hit": false
+        }
+      ]
+    }
+  },
+  "interpretation": {
+    "observation_opportunity_only": "A Palomar day inside a window means the POSS-I cohort supplied an observation opportunity near that Earth date. It does not establish that any candidate is related to the Earth event.",
+    "zero_window": "No Palomar observation-day row inside a preregistered window is window-negative for observation opportunity only. It is not an observed zero sky.",
+    "null": "The rigid-translation null moves the entire three-date Earth pattern together and exhaustively scores every feasible translation; pairwise Earth-date separations are therefore unchanged.",
+    "candidate_counts": "Candidate counts are intentionally not the primary R3 statistic because R3 asks whether Palomar was observing near the Earth dates, not whether detector candidates prove a common phenomenon."
+  },
+  "claim_ceiling": "THIS RESULT TESTS TEMPORAL OBSERVATION-OPPORTUNITY COINCIDENCE ONLY. IT DOES NOT ESTABLISH OR REFUTE UAP IDENTITY, NONHUMAN ORIGIN, NUCLEAR ATTRACTION, OR EARTH-SPACE CAUSAL COUPLING.",
+  "canonical_seal": "THE WHOLE EARTH DATE PATTERN MOVES; THE WINDOWS DO NOT. NO OBSERVATION OPPORTUNITY IS NEVER AN OBSERVED ZERO."
+}
