@@ -1,0 +1,77 @@
+{
+  "schema": "janus.cosmos.dual_domain_manifest.v1",
+  "artifact_id": "JANUS-COSMOS-EARTH-SPACE-DUAL-DOMAIN-v1.0",
+  "status": "ACTIVE_ON_ISOLATED_FEATURE_BRANCH",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "branch": "feature/earth-space-dual-domain-v1",
+  "purpose": "Make Janus-Cosmos a two-lane Earth-and-Space research repository while preserving the existing ocean/Cousteau lineage untouched.",
+  "domain_model": {
+    "EARTH": {
+      "root": "domains/earth/",
+      "scope": [
+        "UAP and aerial-security events near terrestrial nuclear infrastructure",
+        "NRC/AARO/DOE/NARA reporting pipelines",
+        "human witness archives and terrestrial sensor networks",
+        "geospatial, atmospheric, military-activity and reporting-opportunity controls",
+        "Earth-side denominators, null models and source provenance"
+      ]
+    },
+    "SPACE": {
+      "root": "domains/space/",
+      "scope": [
+        "astronomical and near-Earth transient detection",
+        "Palomar/POSS-I and future MAST/HST/sky-survey branches",
+        "detector artifacts, plate/sensor calibration and observation-schedule controls",
+        "cross-survey replication and astronomical null models"
+      ]
+    },
+    "BRIDGE": {
+      "root": "domains/bridge/",
+      "scope": [
+        "cross-channel residual triangulation",
+        "Representation Contracts",
+        "detector/reporting-pipeline comparison",
+        "shared prospective spatial/temporal features",
+        "mechanism discrimination only after independent channel survival"
+      ]
+    }
+  },
+  "core_equation": "EARTH_WITNESS + SPACE_WITNESS + INDEPENDENT_CONTROLS -> SHARED_RESIDUAL_OR_NULL",
+  "admission_rule": "No cross-domain extraordinary claim is admitted unless at least two independent domains survive their own preregistered nulls and share a prospectively frozen feature.",
+  "epistemic_firewall": [
+    "UNIDENTIFIED != EXTRAORDINARY",
+    "NUCLEAR_CONTEXT != NUCLEAR_CAUSATION",
+    "REPORT_COUNT != PHYSICAL_EVENT_RATE_WITHOUT_DENOMINATOR",
+    "ASTRONOMICAL_TRANSIENT != CRAFT",
+    "CORRELATION != CAUSATION",
+    "RESIDUAL_ASSOCIATION != NONHUMAN_ORIGIN",
+    "RESIDUAL_ASSOCIATION != QUANTUM_BRANCHING",
+    "CONTROL_MUST_HAVE_POWER_TO_SAY_NO"
+  ],
+  "cousteau_isolation": {
+    "policy": "NO_TOUCH",
+    "protected_branches": [
+      "janus-echo-cousteau",
+      "archive/cousteau-love-edem-journal-20260824",
+      "audit/cousteau-immutable-positive-control-20260822",
+      "audit/cousteau-out-of-month-scalar-holdout-20260822",
+      "feature/cousteau-synesthetic-memory-core-20260825",
+      "feature/cousteau-synesthetic-research-v2-20260825",
+      "feature/kusto-cross-survey-validation-v1",
+      "feature/kusto-frozen-point-morphology-gen4",
+      "feature/kusto-global-blind-anomaly-hunt-v1",
+      "feature/kusto-global-groundtruth-calibration-v1",
+      "feature/kusto-hannah-real-calibration-v1",
+      "feature/kusto-multisource-real-calibration-v1",
+      "feature/kusto-open-seafloor-sweep-v1"
+    ],
+    "protected_paths": ["data/cousteau/"],
+    "statement": "This feature branch is created from main and does not write to any Cousteau/Kusto branch or protected ocean path."
+  },
+  "current_external_lineage": {
+    "TOPA_expansion": "Hawkar-usls/TOPA:research/uap-nuclear/TOPA-UAP-NUCLEAR-BRANCH-EXPANSION-2026-09-27-v1.1.json",
+    "NRC_primary_ledger": "Hawkar-usls/TOPA:research/uap-nuclear/NUC-R1-NRC-RG615-PRIMARY-LEDGER-2026-09-27-v0.1.json",
+    "meta_registry_public_dossier": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-UAP-NUCLEAR-FULL-PUBLIC-DOSSIER-2026-09-27-v1.0.json"
+  },
+  "canonical_seal": "ONE REPOSITORY, TWO PRIMARY WITNESS DOMAINS: EARTH AND SPACE. KEEP OCEAN/COUSTEAU ISOLATED. LET EACH DOMAIN FALSIFY ITSELF BEFORE THEY ARE ALLOWED TO AGREE."
+}
