@@ -1,0 +1,176 @@
+{
+  "schema": "janus.cosmos.residual.data_recovery_result.v1",
+  "artifact_id": "RESIDUAL-R2-DATA-RECOVERY-RESULT-2026-09-28-v1.0",
+  "contract_artifact_id": "RESIDUAL-R2-DATA-RECOVERY-CONTRACT-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-RESULT-2026-09-28-v1.0",
+  "status": "ZERO_TOP3_GEOMETRY_ENABLING_RAW_DATASETS_RECOVERED_FROM_SEARCHED_PUBLIC_OFFICIAL_SOURCES",
+  "search_scope_note": "This result records what was recovered in the searched public official/archive surfaces. NOT_FOUND and NOT_RECOVERED are not claims that a record never existed, is destroyed, remains classified, or is concealed.",
+  "counts": {
+    "targets": 3,
+    "D0_contemporaneous_primary_report_or_authenticated_official_media_present": 3,
+    "D1_any_public_sensor_record_present": 1,
+    "D1_geometry_enabling_raw_sensor_dataset_recovered": 0,
+    "cases_reopening_R1_G3": 0,
+    "cases_reopening_R1_G6": 0
+  },
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "overall_state": [
+        "CONTEMPORANEOUS_REPORTS_ONLY",
+        "PUBLIC_ARCHIVE_SERIES_IDENTIFIED_NOT_FULLY_DIGITALLY_BOUND_IN_OFFICIAL_WEB_SURFACE",
+        "RAW_SENSOR_STREAM_NOT_RECOVERED"
+      ],
+      "data_inventory": {
+        "D0_CONTEMPORANEOUS_PRIMARY_REPORT": {
+          "state": "RECOVERED_AT_DOCUMENT_LINEAGE_LEVEL",
+          "details": "NARA holds Project Blue Book case files/OSI records. Public archive reproductions and later government-republished analysis identify a same-day 745th ACWRON/Duncanville TWX, E.T. Piwetz wing-intelligence summary and Major Lewis Chase Airborne Observer Data Sheet. These preserve timed reports and instrument descriptions but are reports, not raw sensor streams."
+        },
+        "D1_RAW_SENSOR_RECORD": {
+          "state": "NOT_RECOVERED",
+          "details": "No authenticated continuous ALA-6/APR-9/ALA-5 recording, radar-scope film/tape, or raw ground-radar plot was recovered in the searched official public web surfaces."
+        },
+        "D2_SENSOR_CALIBRATION_CONFIGURATION": {
+          "state": "PARTIAL_REPORTED_CONFIGURATION_ONLY",
+          "details": "Surviving documents/analyses describe receiver type, reported signal frequency/pulse characteristics and relative bearings. They do not supply a calibration package sufficient to turn all reported contacts into error-bounded physical coordinates."
+        },
+        "D3_PLATFORM_NAVIGATION_TIMEBASE": {
+          "state": "PARTIAL_REPORTED_TIMES_AND_POSITIONS",
+          "details": "Typed chronology contains times, locations/headings and aircraft state at selected points, but no complete synchronized navigation/attitude stream was recovered."
+        },
+        "D4_CROSS_SENSOR_SYNCHRONIZATION": {
+          "state": "PARTIAL_TYPED_CORRELATION_NOT_RAW_SYNCHRONIZATION",
+          "details": "The case file/reconstructions report visual, ELINT and ground-radar correlations. Publicly recovered material does not provide common-time raw recordings from the channels."
+        },
+        "D5_ENVIRONMENT_TRAFFIC_CONTROLS": {
+          "state": "PARTIAL",
+          "details": "Competing radar-source/aircraft/propagation hypotheses have been discussed historically, but R2 did not recover a complete contemporaneous environment/traffic dataset adequate to close them quantitatively."
+        }
+      },
+      "official_public_sources": [
+        "https://www.archives.gov/research/military/air-force/ufos",
+        "https://www.archives.gov/research/topics/uaps/rg-collections",
+        "https://www.war.gov/medialink/ufo/release_1/255_413270_ufo%27s_and_defense_what_should_we_prepare_for.pdf"
+      ],
+      "nonofficial_discovery_mirrors_not_promoted_to_official_byte_bind": [
+        "Public reproductions of the Project Blue Book RB-47 case file were used only to locate document names/content boundaries; they are not treated as a substitute for an official NARA byte-level case-file bind."
+      ],
+      "R1_gate_effect": {
+        "G3_CALIBRATED_MEASUREMENT": "REMAINS_FAIL_OR_INSUFFICIENT_PUBLIC_DATA",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "REMAINS_NOT_TESTABLE"
+      }
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "overall_state": [
+        "AUTHENTIC_OFFICIAL_SENSOR_VIDEO_RECOVERED",
+        "RAW_MULTI_SENSOR_TELEMETRY_NOT_RECOVERED",
+        "OFFICIAL_FOIA_SEARCH_FOR_KEY_RADAR_AUDIO_SONAR_REPORT_RECORDS_RETURNED_NO_RECORDS_LOCATED"
+      ],
+      "data_inventory": {
+        "D0_CONTEMPORANEOUS_PRIMARY_REPORT": {
+          "state": "PARTIAL",
+          "details": "DoD authenticated the November 2004 Navy video. Navy deck logs for the Nimitz period have been FOIA-recovered. Public official evidence does not include a contemporaneous complete incident investigation binding every channel."
+        },
+        "D1_RAW_SENSOR_RECORD": {
+          "state": "PARTIAL_VIDEO_ONLY",
+          "details": "The Navy/DoD FLIR1 video is an authentic sensor record. R2 did not recover USS Princeton AN/SPY-1 raw returns, E-2C AN/APS-145 returns, APG-73 raw radar data, air-defense-net audio, or equivalent continuous sensor tracks. A FY2023 Navy FOIA request explicitly seeking Princeton radar returns, E-2C radar returns, air-defense audio, sonar data and official exercise/UAP reports was closed as Full Denial - No Records Located."
+        },
+        "D2_SENSOR_CALIBRATION_CONFIGURATION": {
+          "state": "PARTIAL_VIDEO_OVERLAY_ONLY",
+          "details": "The released targeting-pod video contains sensor symbology/mode information, but no public complete calibration/range solution sufficient to derive extraordinary target kinematics independently."
+        },
+        "D3_PLATFORM_NAVIGATION_TIMEBASE": {
+          "state": "INSUFFICIENT_FOR_EXTRAORDINARY_KINEMATICS",
+          "details": "Public material does not bind a full synchronized platform navigation/attitude stream to the video and reported ship/E-2 radar tracks."
+        },
+        "D4_CROSS_SENSOR_SYNCHRONIZATION": {
+          "state": "NOT_RECOVERED",
+          "details": "No public continuous common-time raw track binds the multi-day Princeton radar reports, Fravor/Dietrich visual encounter, E-2 channel and later FLIR1 target as one continuous object."
+        },
+        "D5_ENVIRONMENT_TRAFFIC_CONTROLS": {
+          "state": "PARTIAL",
+          "details": "Training-area context and some deck/flight information are public, but not a complete synchronized airspace/environment denominator for the claimed target trajectory."
+        }
+      },
+      "official_public_sources": [
+        "https://www.defense.gov/News/Releases/release/article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/",
+        "https://www.navair.navy.mil/foia/",
+        "https://www.secnav.navy.mil/foia/readingroom/",
+        "https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf"
+      ],
+      "official_foia_findings": [
+        "NAVAIR internal FOIA correspondence in 2020 states that N2N6/ONI/NAVAIR were familiar with the released videos, but there was not a formal custody process for accompanying transfer documents and officials expected few/no responsive records in that search context.",
+        "FY2023 Department of the Navy FOIA log entry DON-NAVY-2023-012523 requested USS Princeton radar returns, E-2C radar returns, air-defense audio, USS Louisville sonar data and official reports for the November 2004 Nimitz CSG exercise; disposition: Full Denial - No Records Located.",
+        "Sworn 2023 congressional testimony by David Fravor states the relevant radar tape was never released and its whereabouts were unknown to him."
+      ],
+      "R1_gate_effect": {
+        "G3_CALIBRATED_MEASUREMENT": "REMAINS_FAIL_OR_INSUFFICIENT_PUBLIC_DATA",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "REMAINS_NOT_TESTABLE"
+      }
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "overall_state": [
+        "CONTEMPORANEOUS_DIA_JCS_MESSAGE_RECOVERED",
+        "RAW_RADAR_AVIONICS_GROUND_TRACK_DATA_NOT_RECOVERED"
+      ],
+      "data_inventory": {
+        "D0_CONTEMPORANEOUS_PRIMARY_REPORT": {
+          "state": "RECOVERED",
+          "details": "DIA Electronic Reading Room publishes the DoD/JCS message forwarding the 19 September 1976 Tehran incident report. It records visual observations, reported F-4 instrumentation/communications failures and a second F-4 radar lock."
+        },
+        "D1_RAW_SENSOR_RECORD": {
+          "state": "NOT_RECOVERED",
+          "details": "No public official F-4 radar tape/scope recording, ground-radar raw log, weapon-system telemetry or avionics data stream was found in the searched DIA/NARA official public surfaces."
+        },
+        "D2_SENSOR_CALIBRATION_CONFIGURATION": {
+          "state": "REPORTED_VALUES_ONLY",
+          "details": "The message reports lock range 27 NM, closure 150 NMPH, approximate maintained range 25 NM and return-size comparison, but supplies no radar mode/calibration/error model from which to reconstruct uncertainty."
+        },
+        "D3_PLATFORM_NAVIGATION_TIMEBASE": {
+          "state": "PARTIAL_NARRATIVE_TIMELINE",
+          "details": "Takeoff and event times/directions are narrated; no complete synchronized aircraft navigation/attitude stream was recovered."
+        },
+        "D4_CROSS_SENSOR_SYNCHRONIZATION": {
+          "state": "NARRATIVE_CORRELATION_ONLY",
+          "details": "The primary message correlates visual/radar/system effects in a common story, but R2 did not recover independent raw channel recordings on a common timebase."
+        },
+        "D5_ENVIRONMENT_TRAFFIC_CONTROLS": {
+          "state": "INCOMPLETE",
+          "details": "The primary message notes no helicopters airborne and contact with Mehrabad Tower, but a full air-traffic/weather/astronomy/radar-propagation control dataset was not recovered."
+        }
+      },
+      "official_public_sources": [
+        "https://www.dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/237664/",
+        "https://www.dia.mil/FOIA/",
+        "https://www.archives.gov/research/topics/uaps/rg-615"
+      ],
+      "foia_search_context": "DIA FOIA logs show multiple public requests concerning the 19 September 1976 F-4 interception. The searched electronic reading room surfaced the contemporaneous message but not geometry-enabling sensor records.",
+      "R1_gate_effect": {
+        "G3_CALIBRATED_MEASUREMENT": "REMAINS_FAIL_OR_INSUFFICIENT_PUBLIC_DATA",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "REMAINS_NOT_TESTABLE"
+      }
+    }
+  ],
+  "cross_case_result": {
+    "strongest_documentary_case_after_R2": "RB47_1957",
+    "strongest_modern_authenticated_sensor_artifact": "NIMITZ_2004_FLIR1",
+    "most_specific_contemporaneous_reported_radar_values": "TEHRAN_1976",
+    "geometry_enabling_public_raw_dataset": null,
+    "tier_A_activation": false,
+    "reason": "Every target preserves some serious evidence, but none supplies the public synchronized raw measurements plus calibration/geometry needed to calculate the extraordinary-performance claims with defensible uncertainty."
+  },
+  "new_archival_context": {
+    "NARA_RG615_state_2026_09_28": "NARA's rolling UAP collection publicly lists transfers from FAA, NRC, ODNI, OSD, NSA, State, FBI, Air Force and CBP. This creates a future discovery surface, but R2 did not find a geometry-enabling top-three dataset in the currently indexed public material.",
+    "future_rule": "A newly transferred official record may reopen only the corresponding data-class gate; it does not retroactively validate prior kinematic estimates."
+  },
+  "scientific_verdict": "R2 FAILS TO RECOVER THE MISSING MEASUREMENT LAYER. THE TOP THREE REMAIN LEGITIMATE DOCUMENTARY RESIDUALS OF DIFFERENT STRENGTH, BUT NONE IS CURRENTLY A PUBLICLY REPRODUCIBLE PHYSICAL ANOMALY.",
+  "next_gate": {
+    "id": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY",
+    "recommended_action": "Stop broad UAP browsing. Target only named archival objects whose recovery would change G3: RB-47 case-file primary bytes/raw radar or ELINT media; Nimitz Princeton/E-2/APG-73 raw records or custody disposition; Tehran F-4/ground-radar/maintenance records.",
+    "do_not_accept": ["new testimony", "new retellings", "uncalibrated screenshots", "derived acceleration estimates whose range/time assumptions are not primary measurements"],
+    "success_condition": "At least one recovered official primary artifact changes D1-D4 from missing/partial to geometry-enabling."
+  },
+  "canonical_seal": "R1 ASKED WHICH STORIES SURVIVE. R2 ASKED WHETHER THE MEASUREMENTS SURVIVE. THE STORIES DID; THE GEOMETRY-ENABLING RAW DATA DID NOT ARRIVE."
+}
