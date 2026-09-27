@@ -1,0 +1,116 @@
+{
+  "schema": "janus.cosmos.bridge.oak_ridge_exact_day_result.v1",
+  "artifact_id": "BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0",
+  "generated_at_utc": "2026-09-27T18:20:36.525488+00:00",
+  "status": "NO_EXACT_DAY_PALOMAR_OBSERVATION_OPPORTUNITY_ON_FROZEN_PRIMARY_OAK_RIDGE_DATES",
+  "execution_contract": {
+    "prereg_artifact_id": "BRIDGE-R2-OAK-RIDGE-EXACT-DAY-PREREG-2026-09-27-v1.0",
+    "prereg_status": "FROZEN_BEFORE_PALOMAR_DAY_MEMBERSHIP_LOOKUP",
+    "primary_join": "exact calendar date only",
+    "window_widening_used": false,
+    "palomar_day_rows": 312,
+    "palomar_day_ledger_status": "MATERIALIZED_SOURCE_BOUND_312_DAY_LEDGER"
+  },
+  "source_hashes": {
+    "earth_ledger_sha256": "c9f304d87a930fef655ca99b80acf0b4d1f2858d5a766a36b0f0f79e0b035386",
+    "palomar_day_ledger_sha256": "4c719bfcf473dcc77e8c65572f3872fa5cb74713ee903869674c8202f36f9cc5",
+    "prereg_sha256": "36b78be1ea859e9d8ae1bfa183c89830ee47635b15531d6b63746d8ed04fc3b7"
+  },
+  "primary_cohort": {
+    "n": 3,
+    "outcome_counts": {
+      "PALOMAR_NO_OBSERVATION_ROW": 3
+    },
+    "rows": [
+      {
+        "row_id": "EARTH-OAKRIDGE-1950-03-01-RADAR-REPORT",
+        "date": "1950-03-01",
+        "site": "Oak Ridge, Tennessee",
+        "source_grade": "P0_OFFICIAL_FBI_VAULT_MEMORANDUM",
+        "earth_bridge_eligible": true,
+        "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+        "palomar": null
+      },
+      {
+        "row_id": "EARTH-OAKRIDGE-1950-10-15-AEC-VISUAL",
+        "date": "1950-10-15",
+        "site": "Oak Ridge, Tennessee",
+        "source_grade": "P0_OFFICIAL_FBI_VAULT_REPRODUCTION_OF_OSI_AEC_REPORT",
+        "earth_bridge_eligible": true,
+        "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+        "palomar": null
+      },
+      {
+        "row_id": "EARTH-OAKRIDGE-1950-12-18-CONTROLLED-AREA",
+        "date": "1950-12-18",
+        "site": "Oak Ridge, Tennessee",
+        "source_grade": "P0_OFFICIAL_FBI_VAULT_AEC_MILITARY_REPORT",
+        "earth_bridge_eligible": true,
+        "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+        "palomar": null
+      }
+    ]
+  },
+  "provisional_excluded_from_primary": {
+    "n": 1,
+    "outcome_counts": {
+      "PALOMAR_NO_OBSERVATION_ROW": 1
+    },
+    "rows": [
+      {
+        "row_id": "EARTH-OAKRIDGE-1950-10-16-AEC-PATROL",
+        "date": "1950-10-16",
+        "site": "Oak Ridge, Tennessee",
+        "source_grade": "P1_PUBLIC_TRANSCRIPTION_BOUND_TO_FBI_AEC_LINEAGE__PRIMARY_PAGE_BIND_PENDING",
+        "earth_bridge_eligible": false,
+        "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+        "palomar": null
+      }
+    ]
+  },
+  "all_frozen_dates": [
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-03-01-RADAR-REPORT",
+      "date": "1950-03-01",
+      "site": "Oak Ridge, Tennessee",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_MEMORANDUM",
+      "earth_bridge_eligible": true,
+      "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+      "palomar": null
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-10-15-AEC-VISUAL",
+      "date": "1950-10-15",
+      "site": "Oak Ridge, Tennessee",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_REPRODUCTION_OF_OSI_AEC_REPORT",
+      "earth_bridge_eligible": true,
+      "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+      "palomar": null
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-10-16-AEC-PATROL",
+      "date": "1950-10-16",
+      "site": "Oak Ridge, Tennessee",
+      "source_grade": "P1_PUBLIC_TRANSCRIPTION_BOUND_TO_FBI_AEC_LINEAGE__PRIMARY_PAGE_BIND_PENDING",
+      "earth_bridge_eligible": false,
+      "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+      "palomar": null
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-12-18-CONTROLLED-AREA",
+      "date": "1950-12-18",
+      "site": "Oak Ridge, Tennessee",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_AEC_MILITARY_REPORT",
+      "earth_bridge_eligible": true,
+      "outcome": "PALOMAR_NO_OBSERVATION_ROW",
+      "palomar": null
+    }
+  ],
+  "interpretation": {
+    "if_no_observation": "PALOMAR_NO_OBSERVATION_ROW means POSS-I provides no exact-date observation opportunity for that frozen Earth date. It is not an observed zero and is not evidence that no sky phenomenon existed.",
+    "if_observed": "An exact-date Palomar observation would establish only observation opportunity and permit candidate-level comparison; it would not establish common cause or physical coupling.",
+    "secondary_windows": "PLUS/MINUS windows remain NOT_EXECUTED in this result. They may be tested only after this exact-day result is frozen under a new preregistration/null contract."
+  },
+  "claim_ceiling": "THIS RESULT TESTS TEMPORAL OBSERVATION OPPORTUNITY ONLY. IT DOES NOT ESTABLISH OR REFUTE UAP IDENTITY, NONHUMAN ORIGIN, NUCLEAR ATTRACTION, OR EARTH-SPACE CAUSAL COUPLING.",
+  "canonical_seal": "THE EARTH DATES WERE FROZEN FIRST. IF PALOMAR WAS NOT LOOKING, JANUS RECORDS NO OBSERVATION OPPORTUNITY — NEVER A ZERO SKY."
+}
