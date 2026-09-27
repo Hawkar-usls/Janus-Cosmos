@@ -1,0 +1,179 @@
+{
+  "schema": "janus.cosmos.earth.bridge_r4_1_second_holdout_event_ledger.v0.1",
+  "artifact_id": "BRIDGE-R4.1-SECOND-INDEPENDENT-HOLDOUT-EVENT-LEDGER-1949-1957-v0.1",
+  "status": "FROZEN_BEFORE_R4_1_PRIMARY_PALOMAR_MEMBERSHIP_LOOKUP",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "EARTH",
+  "purpose": "Freeze a second independent exact-day special-weapons-site aerial-event holdout inside the POSS-I study window before any Palomar observation-day membership lookup for the new primary dates. Preserve Hanford as an unopened future holdout until the primary federal byte/page binding is closed.",
+  "palomar_study_window": {
+    "start": "1949-11-19",
+    "end": "1957-04-28",
+    "use_in_this_artifact": "ELIGIBILITY_BOUND_ONLY__NO_R4_1_PRIMARY_OR_HANFORD_HOLDBACK_MEMBERSHIP_LOOKUP"
+  },
+  "primary_unit": "UNIQUE_SITE_DATE",
+  "same_site_same_day_reports_collapse_to_one_primary_unit": true,
+  "source_selection_firewall": {
+    "primary_dates_selected_without_Palomar_day_membership_lookup": true,
+    "Palomar_candidate_count_used_for_selection": false,
+    "all_R2_R3_R4_exposed_dates_excluded_from_R4_1_primary": true,
+    "all_R4_primary_sites_excluded_from_R4_1_primary": true,
+    "Hanford_1950_07_30_membership_lookup_forbidden_until_primary_byte_bind": true,
+    "out_of_study_window_events_excluded": true,
+    "same_site_same_day_report_multiplicity_cannot_inflate_primary_n": true,
+    "source_requirement": "Exact calendar day plus federal/official archival case lineage. Source limitations and whether the primary bytes are locally bound are explicit.",
+    "anti_cherry_pick_law": "FREEZE THE SECOND EARTH HOLDOUT BEFORE OPENING THE SKY CALENDAR; DO NOT SPEND HANFORD BLINDNESS BEFORE ITS BYTE BIND IS REAL."
+  },
+  "primary_holdout_sites": [
+    {
+      "site_id": "HOLLOMAN_WHITE_SANDS",
+      "site": "Holloman Air Force Base / White Sands test complex, New Mexico",
+      "strategic_context": "Air Materiel Command / guided-missile and pilotless-aircraft research and development; Holloman missile/test complex",
+      "context_authority": "U.S. Air Force historical material",
+      "context_urls": [
+        "https://www.holloman.af.mil/About/Fact-Sheets/Display/Article/317263/704th96th-test-group/",
+        "https://www.holloman.af.mil/News/Features/Display/Article/319147/a-closer-look-at-the-holloman-high-speed-test-track/"
+      ],
+      "source_bundle": {
+        "source_authority": "United States Air Force / Office of Special Investigations and Project Blue Book archival lineage",
+        "archive_lineage": "Project Blue Book case files, NARA microfilm publication T-1206; declassified USAF 17th District OSI records",
+        "official_release_discovery_url": "https://www.war.gov/UFO/",
+        "public_case_scan_reference": "Project Blue Book case 9613354 / Holloman AFB, January 1950",
+        "binding_state": "FEDERAL_ARCHIVAL_CASE_LINEAGE_IDENTIFIED__DAY_LEVEL_RECORD_TRANSCRIPTION_VERIFIED__PRIMARY_BYTES_NOT_MIRRORED_IN_REPO",
+        "source_grade": "P0_OFFICIAL_ARCHIVAL_LINEAGE__EXACT_DAY_RECORD_VERIFIED",
+        "limitations": "The repository does not claim that every historical observation remained unexplained; source-bound reporting dates are the selection unit. The 13 January case has astronomical/star-like characteristics discussed in later cataloging and is retained rather than selectively dropped."
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-1-HOLLOMAN-1950-01-13",
+          "row_kind": "EVENT_DATE",
+          "date": "1950-01-13",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_1",
+          "bridge_eligible": true,
+          "bridge_key": "1950-01-13",
+          "reported_summary": "A declassified 17th District OSI report records an unusual aerial phenomenon observed at Holloman AFB at 0605 on 13 January 1950. The record is source-bound as an exact-day reporting event; later cataloging notes star-like characteristics, so no anomalous-origin promotion is allowed.",
+          "classification_state": "DOCUMENTED_USAF_OSI_EXACT_DAY_REPORT__POTENTIAL_ASTRONOMICAL_EXPLANATION_NOT_EXCLUDED",
+          "claim_ceiling": "EXACT_DAY_OFFICIAL_REPORTING_EVENT_ONLY__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-1-HOLLOMAN-1950-08-31",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1950-08-31",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_1",
+          "bridge_eligible": true,
+          "bridge_key": "1950-08-31",
+          "reported_summary": "Project TWINKLE / Holloman records and historical summaries place a multi-observer optical/theodolite episode on 31 August 1950 in the context of V-2 launch no. 51 and subsequent tracking activity. R4.1 uses only the exact source date, not an origin interpretation.",
+          "classification_state": "DOCUMENTED_HOLLOMAN_PROJECT_TWINKLE_EXACT_DAY_EVENT_CLUSTER__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_TEST_RANGE_OBSERVATION_CLUSTER__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    },
+    {
+      "site_id": "WALKER_AFB_509TH",
+      "site": "Walker Air Force Base, Roswell, New Mexico",
+      "strategic_context": "509th Bombardment Wing / Strategic Air Command atomic-strike lineage and special-weapons delivery mission",
+      "context_authority": "U.S. Air Force / Air Force Historical Research Agency",
+      "context_urls": [
+        "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/434118/509-bomb-wing-acc/",
+        "https://www.dafhistory.af.mil/Sandbox/Fact-Sheets/Display/Article/434051/509-weapons-squadron-amc/"
+      ],
+      "source_bundle": {
+        "source_authority": "United States Air Force Project Blue Book archival lineage",
+        "archive_lineage": "Project Blue Book case files / NARA microfilm publication T-1206; later comprehensive catalogs preserve case dates and witness summaries",
+        "official_release_discovery_url": "https://www.war.gov/UFO/",
+        "binding_state": "FEDERAL_PROJECT_BLUE_BOOK_LINEAGE_IDENTIFIED__EXACT_DAY_ENTRIES_VERIFIED__PRIMARY_CASE_BYTES_NOT_MIRRORED_IN_REPO",
+        "source_grade": "P0_OFFICIAL_ARCHIVAL_LINEAGE__EXACT_DAY_ENTRY_VERIFIED",
+        "limitations": "The exact-day events are used as source-first reporting dates. Their presence at a nuclear-delivery base does not establish nuclear attraction or common origin."
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-1-WALKER-1952-06-16",
+          "row_kind": "EVENT_DATE",
+          "date": "1952-06-16",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_1",
+          "bridge_eligible": true,
+          "bridge_key": "1952-06-16",
+          "reported_summary": "Project Blue Book chronology records a Walker AFB observation on 16 June 1952 by USAF maintenance specialist S/Sgt. Sparks, who reported a formation of multiple grayish disc-like objects. R4.1 records only the exact-day federal case lineage.",
+          "classification_state": "DOCUMENTED_PROJECT_BLUE_BOOK_EXACT_DAY_CASE__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_USAF_REPORTING_EVENT__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-1-WALKER-1952-07-29",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-07-29",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_1",
+          "bridge_eligible": true,
+          "bridge_key": "1952-07-29",
+          "reported_summary": "Project Blue Book catalogs preserve a Walker AFB event on 29 July 1952 in which four weather observers, including the base weather officer, reported high-speed disc-like objects through a theodolite. R4.1 counts the site-date once.",
+          "classification_state": "DOCUMENTED_PROJECT_BLUE_BOOK_EXACT_DAY_MULTI_OBSERVER_CASE__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_USAF_MULTI_OBSERVER_REPORT__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    }
+  ],
+  "sealed_future_holdback": {
+    "site_id": "HANFORD_AEC_PLANT",
+    "site": "Hanford Atomic Energy Commission Plant, Washington",
+    "date": "1950-07-30",
+    "date_precision": "DAY_AS_SERIES_ONSET_IN_MEMORANDUM",
+    "cohort_role": "FROZEN_PENDING_PRIMARY_BYTE_BIND__DO_NOT_EVALUATE_R4_1",
+    "bridge_eligible": false,
+    "palomar_membership_lookup_forbidden": true,
+    "source_description": "A declassified U.S. Army memorandum for record dated 4 August 1950 states that since 30 July 1950 round objects had been sighted over the Hanford AEC Plant, that Air Force jets attempted interception, and that AEC investigation continued.",
+    "identified_document": {
+      "title": "Memorandum for Record — Subject: Flying Discs",
+      "document_date": "1950-08-04",
+      "author": "U. G. Carlan, Major, G3C, Survey Section",
+      "public_scan_mirror": "https://www.nicap.org/docs/hanford_let500804doc.pdf",
+      "binding_state": "PRIMARY_DOCUMENT_SCAN_IDENTIFIED_AND_TRANSCRIPTION_VERIFIED__OFFICIAL_FEDERAL_HOST_AND_REPOSITORY_BYTE_HASH_NOT_YET_BOUND"
+    },
+    "promotion_rule": "MAY_ENTER_ONLY_A_FUTURE_HOLDOUT_AFTER_PRIMARY_BYTE_OR_EQUIVALENT_OFFICIAL_PAGE_BIND; MUST NOT BE PALOMAR-LOOKED-UP AS PART_OF_R4_1."
+  },
+  "explicit_exclusions": [
+    {
+      "site": "Oak Ridge, Tennessee",
+      "reason": "R2/R3 Palomar outcomes already known; calibration only."
+    },
+    {
+      "site": "Los Alamos, New Mexico",
+      "reason": "R4 primary site already exposed."
+    },
+    {
+      "site": "Sandia Base, New Mexico",
+      "reason": "R4 primary site already exposed."
+    },
+    {
+      "site": "Savannah River Plant, South Carolina",
+      "reason": "R4 primary site already exposed."
+    }
+  ],
+  "row_counts": {
+    "primary_holdout_sites": 2,
+    "primary_holdout_unique_site_dates": 4,
+    "primary_holdout_dates_by_site": {
+      "HOLLOMAN_WHITE_SANDS": 2,
+      "WALKER_AFB_509TH": 2
+    },
+    "sealed_future_holdback_sites": 1,
+    "sealed_future_holdback_dates": 1
+  },
+  "frozen_primary_holdout_dates": [
+    {"site_id": "HOLLOMAN_WHITE_SANDS", "date": "1950-01-13"},
+    {"site_id": "HOLLOMAN_WHITE_SANDS", "date": "1950-08-31"},
+    {"site_id": "WALKER_AFB_509TH", "date": "1952-06-16"},
+    {"site_id": "WALKER_AFB_509TH", "date": "1952-07-29"}
+  ],
+  "next_gate": {
+    "id": "BRIDGE-R4.1-B-SECOND-HOLDOUT-NULL-PREREG",
+    "must_happen_before": "ANY_R4_1_PRIMARY_PALOMAR_DATE_MEMBERSHIP_EVALUATION",
+    "required_windows": ["EXACT_DAY", "PLUS_MINUS_1_DAY", "PLUS_MINUS_3_DAY"],
+    "required_primary_statistic": "NUMBER_OF_R4_1_PRIMARY_HOLDOUT_SITE_DATES_WITH_AT_LEAST_ONE_PALOMAR_OBSERVATION_OPPORTUNITY",
+    "required_site_balance_statistic": "NUMBER_OF_R4_1_PRIMARY_SITES_WITH_AT_LEAST_ONE_HIT",
+    "null_requirement": "Preserve each new site's internal date clustering; exclude every previously exposed site/date; never evaluate the sealed Hanford holdback."
+  },
+  "claim_ceiling": "THIS LEDGER ESTABLISHES ONLY A SECOND SOURCE-FIRST EARTH DATE COHORT. IT DOES NOT ESTABLISH PALOMAR COINCIDENCE, ANOMALOUS ORIGIN, NUCLEAR ATTRACTION, OR EARTH-SPACE CAUSAL COUPLING.",
+  "canonical_seal": "THE SECOND HOLDOUT IS NEW; HANFORD STAYS BLIND UNTIL ITS BYTE BIND IS REAL; THE SKY CALENDAR REMAINS CLOSED UNTIL PREREGISTRATION."
+}
