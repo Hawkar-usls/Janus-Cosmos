@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.residual.multisensor_falsification_prereg.v1",
+  "artifact_id": "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-PREREG-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_CASE_PROMOTION",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "purpose": "Test a fixed corpus of historically or officially prominent UAP cases against hard evidentiary gates. The target is not 'unidentified' status; the target is a reproducible residual that retains anomalous physical performance after source, identity, calibration, uncertainty and prosaic-control checks.",
+  "epistemic_firewall": [
+    "UNIDENTIFIED != ANOMALOUS_PHYSICS",
+    "MULTIPLE_WITNESSES != MULTIPLE_INDEPENDENT_SENSORS",
+    "RADAR_MENTION != CALIBRATED_RADAR_TELEMETRY",
+    "VIDEO_EXISTS != RANGE_IS_KNOWN",
+    "OFFICIAL_DOCUMENT != OFFICIAL_ENDORSEMENT_OF_EXTRAORDINARY_ORIGIN",
+    "NO_EXPLANATION != EXOTIC_EXPLANATION",
+    "KINEMATIC_CLAIM_REQUIRES_GEOMETRY_AND_UNCERTAINTY",
+    "MISSING_RAW_DATA CANNOT BE REPLACED BY TESTIMONY"
+  ],
+  "candidate_selection_rule": {
+    "frozen_before_promotion": true,
+    "basis": "Public cases with federal/official archival lineage and recurrent claims of multi-sensor or instrument-supported observation; selected as a stress-test corpus, not because any is assumed extraordinary.",
+    "no_posthoc_case_addition": "No additional case may enter RESIDUAL-R1 after this prereg without becoming a new stage.",
+    "no_winner_by_reputation": true
+  },
+  "frozen_candidate_corpus": [
+    {
+      "case_id": "WASHINGTON_1952",
+      "event_window": "1952-07-19_to_1952-07-27",
+      "label": "Washington National Airport / Andrews radar-visual event family",
+      "official_source_lineage": "USAF Project Blue Book / National Archives",
+      "source_anchor": "https://www.archives.gov/research/military/air-force/ufos",
+      "selection_reason": "Historically prominent radar and visual claims with official Blue Book case lineage."
+    },
+    {
+      "case_id": "RB47_1957",
+      "event_date": "1957-07-17",
+      "label": "USAF RB-47 radar/ELINT/visual case",
+      "official_source_lineage": "USAF Project Blue Book / federal archival and government-sponsored scientific-study lineage",
+      "source_anchor": "https://www.archives.gov/research/military/air-force/ufos",
+      "selection_reason": "Frequently cited as a multi-channel airborne case involving visual, electronic intelligence and radar claims."
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "event_date": "1976-09-19",
+      "label": "Tehran F-4 intercept",
+      "official_source_lineage": "Defense Intelligence Agency / DoD Joint Chiefs message",
+      "source_anchor": "https://www.dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/237664/",
+      "selection_reason": "Primary military message records visual observation, airborne radar lock and reported aircraft-system anomalies."
+    },
+    {
+      "case_id": "JAL1628_1986",
+      "event_date": "1986-11-17",
+      "label": "Japan Airlines Flight 1628 Alaska",
+      "official_source_lineage": "Federal Aviation Administration / National Archives RG 237",
+      "source_anchor": "https://www.archives.gov/research/topics/uaps/textual-and-microfilm",
+      "selection_reason": "FAA archival series contains crew interviews and radar-related material for a civil-aviation case."
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "event_date": "2004-11-14",
+      "label": "USS Nimitz / Tic Tac event",
+      "official_source_lineage": "Department of Defense released Navy video plus congressional sworn testimony",
+      "source_anchor": "https://www.defense.gov/News/Releases/release/article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/",
+      "selection_reason": "Claims combine shipborne radar, airborne visual observations and later targeting-pod imagery, but public raw radar availability must be tested rather than assumed."
+    },
+    {
+      "case_id": "AARO_PR036_2020",
+      "event_date": "2020-05-14",
+      "label": "AARO PR-036 / Range Fouler MR-38",
+      "official_source_lineage": "All-domain Anomaly Resolution Office / Department of War",
+      "source_anchor": "https://www.aaro.mil/UAP-Cases/Official-UAP-Imagery/",
+      "selection_reason": "Modern official IR footage plus accompanying Range Fouler narrative provides a control against over-promoting contemporary sensor imagery."
+    }
+  ],
+  "critical_gates": {
+    "G0_PRIMARY_SOURCE_BIND": "At least one primary official/federal source or authenticated official media artifact must be bound. Failure blocks promotion.",
+    "G1_INDEPENDENT_MODALITIES": "At least two physically independent contemporaneous observation channels must be demonstrated; two witnesses using the same modality do not suffice.",
+    "G2_SHARED_OBJECT_IDENTITY": "Evidence must support that the independent channels observed the same object/phenomenon within a defensible time-space association.",
+    "G3_CALIBRATED_MEASUREMENT": "Public data must contain enough calibrated geometry/telemetry to estimate at least one physical parameter (range, speed, acceleration, altitude, size, trajectory) with explicit uncertainty. Narrative estimates alone fail.",
+    "G4_ENVIRONMENT_CONTROLS": "Weather, astronomy, known aircraft/balloon traffic and relevant propagation conditions must be checked where applicable.",
+    "G5_SENSOR_ARTIFACT_CONTROLS": "Relevant sensor/optical/radar/IR artifact mechanisms and platform motion/parallax must be evaluated.",
+    "G6_ROBUST_ANOMALOUS_KINEMATICS": "At least one claimed performance feature must remain outside a conservative conventional envelope after uncertainty bounds and alternative geometries. If G3 fails, G6 is automatically NOT_TESTABLE.",
+    "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "The extraordinary-performance conclusion must not depend solely on retrospective testimony, anonymous secondary retellings, or assumptions imported from another sensor stream."
+  },
+  "promotion_rule": {
+    "tier_A_physical_residual": "PASS G0-G7",
+    "tier_B_unresolved_but_not_physical_anomaly": "PASS G0 and some observational gates, but G3/G6 fail or remain not testable",
+    "tier_C_prosaic_or_artifact_supported": "A specific ordinary explanation survives and accounts for the evidence at least as well as anomaly claim",
+    "insufficient_public_data": "Critical source/calibration/identity information is unavailable; must not be promoted to Tier A"
+  },
+  "stop_rule": "RESIDUAL-R1 ends after all six frozen cases receive gate states. If zero cases pass G0-G7, report ZERO_PUBLIC_TIER_A_RESIDUALS_IN_FROZEN_CORPUS and do not add cases post hoc. Any new corpus is a separately preregistered stage.",
+  "claim_ceiling": "A Tier A result would establish only a robust unexplained physical residual in public data. It would not establish extraterrestrial, nonhuman, adversary, time-travel, interdimensional or any other specific origin.",
+  "canonical_seal": "THE TARGET IS NOT A STORY THAT REMAINS UNEXPLAINED. THE TARGET IS A MEASUREMENT THAT REMAINS PHYSICALLY ANOMALOUS AFTER THE ERROR BARS WIN EVERY ARGUMENT THEY CAN."
+}
