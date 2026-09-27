@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.residual.pattern_registry_contract.v1",
+  "artifact_id": "RESIDUAL-PATTERN-REGISTRY-CONTRACT-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_PATTERN_INTERPRETATION_EXPANSION",
+  "parent_artifacts": [
+    "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-RESULT-2026-09-28-v1.0",
+    "RESIDUAL-R2-DATA-RECOVERY-RESULT-2026-09-28-v1.0"
+  ],
+  "purpose": "Track recurring reported features, measurement/evidence bottlenecks, contextual correlations, and discriminating tests across the frozen residual corpus without treating repetition as proof of common origin.",
+  "firewalls": {
+    "repetition_does_not_imply_common_cause": true,
+    "reported_pattern_is_not_physical_pattern_until_calibrated": true,
+    "evidence_pipeline_patterns_must_be_separate_from_object_patterns": true,
+    "resolved_or_prosaic_controls_remain_in_registry": true,
+    "missing_data_is_not_evidence_of_concealment": true,
+    "military_sensor_density_is_a_selection_effect_candidate": true,
+    "morphology_words_are_not_equivalent_to measured_geometry": true,
+    "new_case_may_not_be_added_only_because_it_matches_an_existing_pattern": true,
+    "hypothesis_scores_may_change_only from predeclared discriminants or stronger primary evidence": true
+  },
+  "layers": {
+    "PHENOMENON_REPORTED": "What witnesses or sensors reportedly showed before physical validation.",
+    "MEASUREMENT_VALIDATED": "Patterns that survive geometry, calibration, synchronization, and uncertainty controls.",
+    "EVIDENCE_PIPELINE": "Patterns in reporting, archiving, custody, classification, sensor availability, and selection effects.",
+    "CONTEXT": "Operational or environmental settings that can create either real correlations or observation/reporting bias."
+  },
+  "pattern_fields": [
+    "pattern_id",
+    "layer",
+    "name",
+    "definition",
+    "case_support",
+    "case_counterexamples",
+    "support_state",
+    "ordinary_explanations",
+    "nonordinary_hypotheses_not_excluded",
+    "discriminating_measurement",
+    "epistemic_ceiling"
+  ],
+  "fixed_seed_corpus": [
+    "WASHINGTON_1952",
+    "RB47_1957",
+    "TEHRAN_1976",
+    "JAL1628_1986",
+    "NIMITZ_2004",
+    "AARO_PR036_2020"
+  ],
+  "modern_control_context": {
+    "source": "AARO official imagery and reporting trends",
+    "use": "Calibrate how frequently apparently unusual imagery becomes ordinary after range, wind, flight-traffic, optical, parallax, or tracking controls. Do not merge modern control cases into historical case counts unless explicitly added by a future frozen registry revision."
+  },
+  "hypothesis_families": [
+    "H0_SENSOR_GEOMETRY_OR_ARTIFACT",
+    "H1_ATMOSPHERIC_ASTRONOMICAL_OR_PROPAGATION",
+    "H2_ORDINARY_OR_CLASSIFIED_HUMAN_PLATFORM",
+    "H3_REPORTING_SELECTION_AND_HIGH_SENSOR_DENSITY",
+    "H4_HETEROGENEOUS_MIXTURE_NO_SINGLE_CAUSE",
+    "H5_UNKNOWN_PHYSICAL_PLATFORM_OR_PHENOMENON"
+  ],
+  "promotion_rule": "No pattern may count as evidence for H5 unless it survives case-level G3 calibrated measurement and relevant G4/G5 controls in at least two independently sourced cases. Narrative repetition alone cannot promote H5.",
+  "canonical_seal": "COUNT PATTERNS, BUT COUNT THEIR FAILURE MODES TOO. COMMON WORDS ARE NOT COMMON PHYSICS."
+}
