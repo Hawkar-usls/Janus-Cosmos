@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.bridge.oak_ridge_exact_day_prereg.v1",
+  "artifact_id": "BRIDGE-R2-OAK-RIDGE-EXACT-DAY-PREREG-2026-09-27-v1.0",
+  "created_date": "2026-09-27",
+  "status": "FROZEN_BEFORE_PALOMAR_DAY_MEMBERSHIP_LOOKUP",
+  "purpose": "Test source-first historical nuclear-site aerial-event dates against the already frozen 312-row Palomar observation-day denominator without selecting dates from Palomar coverage.",
+  "independence_contract": {
+    "earth_dates_selected_from": "official/public federal records concerning Oak Ridge Atomic Energy Commission/security observations",
+    "palomar_membership_inspected_before_freeze": false,
+    "window_widening_before_primary_exact_day_result": false,
+    "primary_join": "exact calendar date only",
+    "primary_outcomes": [
+      "PALOMAR_OBSERVED_ON_EARTH_EVENT_DATE",
+      "PALOMAR_NO_OBSERVATION_ROW",
+      "BLOCKED_SOURCE_PRECISION",
+      "BLOCKED_SOURCE_AUTHORITY"
+    ],
+    "law": "NO_OBSERVATION != OBSERVED_ZERO != OBSERVED_POSITIVE"
+  },
+  "frozen_earth_targets": [
+    {
+      "date": "1950-03-01",
+      "site": "Oak Ridge, Tennessee",
+      "source": "FBI Vault UFO Part 8",
+      "pre_match_note": "Radar-reported object; source itself records substantial equipment/reliability concerns. Must remain a low-reliability control-quality event rather than a promoted anomaly."
+    },
+    {
+      "date": "1950-10-15",
+      "site": "Oak Ridge, Tennessee",
+      "source": "FBI Vault UFO Part 16 / OSI report reproduced in FBI files",
+      "pre_match_note": "AEC/security visual observation with contemporaneous investigation; origin not established."
+    },
+    {
+      "date": "1950-10-16",
+      "site": "Oak Ridge, Tennessee",
+      "source": "FBI Vault / AEC patrol incident-report lineage",
+      "pre_match_note": "AEC patrol visual-report date. Preserve separately from October 15."
+    },
+    {
+      "date": "1950-12-18",
+      "site": "Oak Ridge, Tennessee",
+      "source": "FBI Vault UFO Part 10",
+      "pre_match_note": "Controlled-area/Y-12 vicinity visual report with radar-log context; no unique origin established."
+    }
+  ],
+  "secondary_analysis": {
+    "allowed_only_after_primary_exact_day_result_is_saved": true,
+    "candidate_windows": ["plus_minus_1_day", "plus_minus_3_days"],
+    "status": "NOT_EXECUTED",
+    "multiplicity_rule": "Secondary windows are descriptive/exploratory unless separately preregistered with a null model before execution."
+  },
+  "claim_ceiling": "A temporal overlap would establish observation-opportunity coincidence only. It would not establish common cause, nuclear attraction, UAP identity, nonhuman origin, or causal coupling between terrestrial and photographic phenomena.",
+  "canonical_seal": "FREEZE THE EARTH DATES BEFORE ASKING WHETHER PALOMAR WAS LOOKING. OBSERVATION OPPORTUNITY COMES BEFORE INTERPRETATION."
+}
