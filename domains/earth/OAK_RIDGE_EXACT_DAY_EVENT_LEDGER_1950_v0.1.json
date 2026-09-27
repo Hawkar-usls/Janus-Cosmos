@@ -1,0 +1,97 @@
+{
+  "schema": "janus.cosmos.earth.oak_ridge_exact_day_event_ledger.v0.1",
+  "artifact_id": "JANUS-COSMOS-EARTH-OAK-RIDGE-EXACT-DAY-EVENT-LEDGER-1950-v0.1",
+  "status": "SOURCE_GRADED__EXACT_DATES_FROZEN_FOR_BRIDGE_R2",
+  "domain": "EARTH",
+  "purpose": "Materialize independently selected exact-day Atomic Energy Commission/Oak Ridge aerial-event records before querying the frozen Palomar 312-day observation denominator.",
+  "site": "Oak Ridge, Tennessee",
+  "nuclear_context": "Atomic Energy Commission controlled/vital-facility area",
+  "map_anchor": {
+    "lat": 35.9606,
+    "lon": -84.2022,
+    "coordinate_precision": "approximate public city/controlled-area centroid; visualization only",
+    "law": "MAP_ANCHOR != OBJECT_TRAJECTORY"
+  },
+  "rows": [
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-03-01-RADAR-REPORT",
+      "row_kind": "EVENT",
+      "date": "1950-03-01",
+      "date_precision": "DAY",
+      "site": "Oak Ridge, Tennessee",
+      "region": "Tennessee, USA",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_MEMORANDUM",
+      "source_authority": "Federal Bureau of Investigation Vault; memorandum to Atomic Energy Commission",
+      "source_url": "https://vault.fbi.gov/UFO/UFO%20Part%2008/",
+      "witness_channels": ["private_radar_report"],
+      "reported_summary": "A radio-station operator reported a radar object directly over Oak Ridge on March 1, 1950. The federal memorandum records that qualified persons examined the equipment and considered it not very reliable; the operator's radar theory and reliability were questioned.",
+      "classification_state": "UNRESOLVED_RADAR_REPORT__SOURCE_RECORD_CONTAINS_STRONG_RELIABILITY_WARNING",
+      "bridge_eligible": true,
+      "bridge_key": "1950-03-01",
+      "claim_ceiling": "DOCUMENTED_REPORTING_EVENT__NOT_HIGH_CONFIDENCE_ANOMALY"
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-10-15-AEC-VISUAL",
+      "row_kind": "EVENT",
+      "date": "1950-10-15",
+      "date_precision": "DAY",
+      "site": "Oak Ridge, Tennessee",
+      "region": "Tennessee, USA",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_REPRODUCTION_OF_OSI_AEC_REPORT",
+      "source_authority": "FBI Vault copy of Knoxville Detachment, 8th District OSI report drawing on AEC Security Division observations",
+      "source_url": "https://vault.fbi.gov/UFO/UFO%20Part%2016%20%28Final%29/at_download/file",
+      "witness_channels": ["AEC_security_visual", "OSI_followup"],
+      "reported_summary": "The OSI report states that on October 15, 1950 an AEC security patrol witness and another observer saw an aerial object in the Oak Ridge controlled-area context. The record documents the observation and investigation but does not establish a unique origin.",
+      "classification_state": "DOCUMENTED_AEC_SECURITY_VISUAL__ORIGIN_UNRESOLVED",
+      "bridge_eligible": true,
+      "bridge_key": "1950-10-15",
+      "claim_ceiling": "DOCUMENTED_NUCLEAR_SITE_AERIAL_OBSERVATION__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-10-16-AEC-PATROL",
+      "row_kind": "EVENT",
+      "date": "1950-10-16",
+      "date_precision": "DAY",
+      "site": "Oak Ridge, Tennessee",
+      "region": "Tennessee, USA",
+      "source_grade": "P1_PUBLIC_TRANSCRIPTION_BOUND_TO_FBI_AEC_LINEAGE__PRIMARY_PAGE_BIND_PENDING",
+      "source_authority": "AEC Patrol incident-report lineage; public transcription available; exact primary page bind pending",
+      "source_url": "https://vault.fbi.gov/UFO/UFO%20Part%2016%20%28Final%29/",
+      "witness_channels": ["AEC_security_patrol_visual"],
+      "reported_summary": "A separate October 16, 1950 AEC patrol visual report is preserved in the Oak Ridge record lineage. This row is frozen as a date target but remains lower authority until exact primary-page binding is completed.",
+      "classification_state": "DATE_TARGET_FROZEN__PRIMARY_PAGE_BIND_PENDING",
+      "bridge_eligible": false,
+      "bridge_blocker": "Exact primary-page binding pending; do not promote a temporal match as primary evidence.",
+      "bridge_key": "1950-10-16",
+      "claim_ceiling": "PROVISIONAL_EXACT_DATE_TARGET_ONLY"
+    },
+    {
+      "row_id": "EARTH-OAKRIDGE-1950-12-18-CONTROLLED-AREA",
+      "row_kind": "EVENT",
+      "date": "1950-12-18",
+      "date_precision": "DAY",
+      "site": "Oak Ridge, Tennessee",
+      "region": "Tennessee, USA",
+      "source_grade": "P0_OFFICIAL_FBI_VAULT_AEC_MILITARY_REPORT",
+      "source_authority": "FBI Vault reproduction of report concerning Oak Ridge controlled area / Y-12 vicinity",
+      "source_url": "https://vault.fbi.gov/UFO/UFO%20Part%2010/at_download/file",
+      "witness_channels": ["multi_person_visual", "radar_log_context"],
+      "reported_summary": "The record describes a bright circular light/object observed between approximately 03:20 and 03:30 on December 18, 1950 within the Oak Ridge controlled-area/Y-12 vicinity, with a radar-log section included in the report. No unique source identity is established by this ledger.",
+      "classification_state": "DOCUMENTED_CONTROLLED_AREA_OBSERVATION__ORIGIN_UNRESOLVED",
+      "bridge_eligible": true,
+      "bridge_key": "1950-12-18",
+      "claim_ceiling": "DOCUMENTED_NUCLEAR_SITE_AERIAL_OBSERVATION__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+    }
+  ],
+  "row_counts": {
+    "total": 4,
+    "primary_bridge_eligible": 3,
+    "provisional_primary_bind_pending": 1
+  },
+  "source_selection_firewall": {
+    "dates_selected_without_Palomar_day_membership_lookup": true,
+    "selection_basis": "official/public Oak Ridge AEC/security record chronology",
+    "Palomar_candidate_count_not_used_for_date_selection": true
+  },
+  "canonical_seal": "THE EARTH DATES COME FROM THE NUCLEAR-SITE RECORDS, NOT FROM THE PALOMAR CALENDAR. A MATCH MAY BE TESTED; IT MAY NOT BE MANUFACTURED."
+}
