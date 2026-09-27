@@ -1,0 +1,95 @@
+name: JANUS Bridge R4.2 Third Independent Holdout Null
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/earth/BRIDGE_R4_2_THIRD_HOLDOUT_EVENT_LEDGER_1949_1957_v0.1.json'
+      - 'domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+      - 'domains/bridge/BRIDGE-R4.2-THIRD-HOLDOUT-NULL-PREREG-2026-09-28-v1.0.json'
+      - 'tools/build_bridge_r4_2_third_holdout_null.py'
+      - '.github/workflows/bridge-r4-2-third-holdout-null.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: janus-bridge-r4-2-third-holdout-null
+  cancel-in-progress: true
+
+jobs:
+  third-holdout-null:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build preregistered R4.2 result
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/build_bridge_r4_2_third_holdout_null.py
+          python tools/build_bridge_r4_2_third_holdout_null.py \
+            --earth-ledger domains/earth/BRIDGE_R4_2_THIRD_HOLDOUT_EVENT_LEDGER_1949_1957_v0.1.json \
+            --palomar-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json \
+            --prereg domains/bridge/BRIDGE-R4.2-THIRD-HOLDOUT-NULL-PREREG-2026-09-28-v1.0.json \
+            --out domains/bridge/BRIDGE-R4.2-THIRD-HOLDOUT-NULL-RESULT-2026-09-28-v1.0.json
+
+      - name: Validate frozen R4.2 contract
+        run: |
+          python - <<'PY'
+          import json
+          p='domains/bridge/BRIDGE-R4.2-THIRD-HOLDOUT-NULL-RESULT-2026-09-28-v1.0.json'
+          d=json.load(open(p,encoding='utf-8'))
+          ex=d['execution_contract']
+          assert ex['primary_holdout_site_n'] == 3, ex
+          assert ex['primary_holdout_event_date_n'] == 4, ex
+          assert ex['site_ids'] == ['DAVIS_MONTHAN','BARKSDALE_AFB','LAKE_CHARLES_AFB'], ex
+          assert ex['radii_days'] == [0,1,3], ex
+          assert ex['palomar_observation_day_rows'] == 312, ex
+          assert ex['hanford_holdback_evaluated'] is False, ex
+          assert ex['offutt_holdback_evaluated'] is False, ex
+          assert d['sealed_holdbacks']['HANFORD_AEC_PLANT_1950_07_30_evaluated'] is False
+          assert d['sealed_holdbacks']['OFFUTT_AFB_1952_06_05_evaluated'] is False
+          for key in ('radius_0_days','radius_1_days','radius_3_days'):
+              pn=d['primary_null'][key]
+              sn=d['seasonality_sensitivity_null'][key]
+              assert sum(pn['T_event_date_hit_histogram'].values()) == pn['aggregate_shift_vector_count'], (key,pn)
+              assert sum(pn['S_site_hit_histogram'].values()) == pn['aggregate_shift_vector_count'], (key,pn)
+              assert sum(sn['T_event_date_hit_histogram'].values()) == sn['aggregate_year_shift_vector_count'], (key,sn)
+              assert sum(sn['S_site_hit_histogram'].values()) == sn['aggregate_year_shift_vector_count'], (key,sn)
+          gate=d['candidate_level_gate']
+          assert abs(gate['bonferroni_per_window_alpha'] - (0.05/3)) < 1e-15, gate
+          if gate['candidate_level_sky_analysis_open']:
+              assert any(v['pass'] for v in gate['windows'].values()), gate
+          else:
+              assert not any(v['pass'] for v in gate['windows'].values()), gate
+          print('PASS BRIDGE R4.2 THIRD HOLDOUT GATE', d['status'])
+          for key in ('radius_0_days','radius_1_days','radius_3_days'):
+              a=d['actual_windows'][key]
+              pn=d['primary_null'][key]
+              sn=d['seasonality_sensitivity_null'][key]
+              print(key, 'T',a['T_event_date_hits'],'S',a['S_sites_with_at_least_one_hit'],
+                    'rigid_T_p_ge',pn['fraction_shift_vectors_T_ge_actual'],
+                    'seasonal_T_p_ge',sn['fraction_year_shift_vectors_T_ge_actual'],
+                    'gate',gate['windows'][key]['pass'])
+          print('CANDIDATE_LEVEL_GATE', gate['decision'])
+          print('HANFORD_EVALUATED', ex['hanford_holdback_evaluated'])
+          print('OFFUTT_EVALUATED', ex['offutt_holdback_evaluated'])
+          PY
+
+      - name: Commit result if changed
+        run: |
+          set -euo pipefail
+          TARGET='domains/bridge/BRIDGE-R4.2-THIRD-HOLDOUT-NULL-RESULT-2026-09-28-v1.0.json'
+          if [ -z "$(git status --porcelain -- "$TARGET")" ]; then
+            echo 'NO CHANGE: R4.2 third-holdout result already frozen.'
+            exit 0
+          fi
+          git config user.name 'JANUS Cosmos Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add "$TARGET"
+          git commit -m 'Freeze Bridge R4.2 third holdout null result'
+          git push origin HEAD:main
