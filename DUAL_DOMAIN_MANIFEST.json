@@ -1,9 +1,11 @@
 {
   "schema": "janus.cosmos.dual_domain_manifest.v1",
   "artifact_id": "JANUS-COSMOS-EARTH-SPACE-DUAL-DOMAIN-v1.0",
-  "status": "ACTIVE_ON_ISOLATED_FEATURE_BRANCH",
+  "status": "ACTIVE_ON_MAIN",
   "repository": "Hawkar-usls/Janus-Cosmos",
-  "branch": "feature/earth-space-dual-domain-v1",
+  "branch": "main",
+  "origin_branch": "feature/earth-space-dual-domain-v1",
+  "merge_commit": "200d5c5934f8c2f6ed386ea3529003206db4b40c",
   "purpose": "Make Janus-Cosmos a two-lane Earth-and-Space research repository while preserving the existing ocean/Cousteau lineage untouched.",
   "domain_model": {
     "EARTH": {
@@ -66,7 +68,7 @@
       "feature/kusto-open-seafloor-sweep-v1"
     ],
     "protected_paths": ["data/cousteau/"],
-    "statement": "This feature branch is created from main and does not write to any Cousteau/Kusto branch or protected ocean path."
+    "statement": "The Earth-Space work was developed on an isolated feature branch, validated by CI, and merged to main without modifying any Cousteau/Kusto branch or protected ocean path."
   },
   "current_external_lineage": {
     "TOPA_expansion": "Hawkar-usls/TOPA:research/uap-nuclear/TOPA-UAP-NUCLEAR-BRANCH-EXPANSION-2026-09-27-v1.1.json",
