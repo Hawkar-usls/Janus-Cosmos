@@ -1,0 +1,133 @@
+{
+  "schema": "janus.cosmos.bridge.multisite_source_first_null_prereg.v1",
+  "artifact_id": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-PREREG-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_NEW_HOLDOUT_PALOMAR_MEMBERSHIP_EVALUATION",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "earth_cohort_artifact": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-EVENT-LEDGER-1949-1957-v0.1",
+  "earth_cohort_path": "domains/earth/BRIDGE_R4_MULTISITE_SOURCE_FIRST_EVENT_LEDGER_1949_1957_v0.1.json",
+  "earth_cohort_freeze_commit": "825761cf2c2f3016dc3a3302f190e1d60f8726ff",
+  "palomar_ledger_path": "domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json",
+  "palomar_study_window": ["1949-11-19", "1957-04-28"],
+  "blindness_contract": {
+    "new_primary_holdout_Palomar_membership_was_not_consulted_before_earth_cohort_freeze": true,
+    "new_primary_holdout_Palomar_membership_was_not_consulted_before_this_prereg_freeze": true,
+    "Oak_Ridge_known_outcome_rows_are_calibration_only": true,
+    "provisional_Hanford_Los_Alamos_candidates_cannot_be_promoted_after_membership_is_seen": true,
+    "post_hoc_window_widening_forbidden": true,
+    "candidate_count_cannot_define_primary_temporal_success": true
+  },
+  "frozen_primary_holdout": {
+    "unit": "UNIQUE_SITE_DATE",
+    "site_n": 3,
+    "event_date_n": 6,
+    "sites": {
+      "LOS_ALAMOS": ["1950-02-24", "1950-02-25"],
+      "SANDIA_BASE": ["1950-03-21", "1950-03-22"],
+      "SAVANNAH_RIVER_PLANT": ["1952-05-10", "1952-08-08"]
+    },
+    "same_site_same_day_report_multiplicity_collapses_to_one": true
+  },
+  "frozen_windows": {
+    "radii_days": [0, 1, 3],
+    "labels": {
+      "0": "EXACT_DAY",
+      "1": "PLUS_MINUS_1_DAY",
+      "3": "PLUS_MINUS_3_DAY"
+    },
+    "window_definition": "inclusive UTC calendar dates from earth_date-radius through earth_date+radius",
+    "observation_opportunity_hit": "At least one materialized Palomar observation-day row exists inside the frozen window.",
+    "law": "NO_OBSERVATION_OPPORTUNITY != OBSERVED_ZERO"
+  },
+  "primary_statistics": {
+    "T_r": "For each radius r in {0,1,3}, number of the six primary holdout site-dates with at least one Palomar observation opportunity in its window.",
+    "range": [0, 6],
+    "direction_of_interest": "upper_tail_only_for_excess_observation_opportunity",
+    "report_also": [
+      "lower_tail_fraction",
+      "zero_hit_fraction_when_defined",
+      "full exact null histogram"
+    ]
+  },
+  "secondary_statistics": {
+    "S_r": "For each radius, number of the three primary sites with at least one hit among that site's frozen event dates.",
+    "U_r_actual": "Number of unique Palomar observation days in the union of the six actual windows; descriptive only unless an exact preregistered null is implemented without changing the primary contract.",
+    "event_level_candidate_counts": "NOT_A_R4_PRIMARY_OR_SECONDARY_SUCCESS_STATISTIC"
+  },
+  "primary_null": {
+    "name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+    "description": "Each site's entire frozen date cluster is translated by its own integer-day shift. All dates within a site move together, preserving event count and all within-site pairwise day separations. Only shifts for which every translated plus/minus-3-day window remains inside the Palomar study window are admissible.",
+    "site_shift_independence": true,
+    "actual_shift_vector": {
+      "LOS_ALAMOS": 0,
+      "SANDIA_BASE": 0,
+      "SAVANNAH_RIVER_PLANT": 0
+    },
+    "exact_enumeration_contract": "For each site and radius, enumerate the full site-specific rigid-shift hit-count histogram. Because T_r is additive across independently shifted sites, obtain the exact aggregate T_r histogram by integer-count convolution of the three site histograms rather than Monte Carlo or explicit giant Cartesian expansion.",
+    "preserves": [
+      "site identity",
+      "number of frozen event dates per site",
+      "within-site date spacing and clustering",
+      "Palomar observation schedule and gaps",
+      "frozen window radii"
+    ],
+    "does_not_preserve": [
+      "calendar month or season"
+    ],
+    "required_outputs": [
+      "site-specific admissible shift ranges and counts",
+      "site-specific event-hit histograms for each radius",
+      "exact convolved aggregate T_r histogram",
+      "fraction of null shift vectors with T_r >= actual T_r",
+      "fraction with T_r <= actual T_r",
+      "maximum T_r and number of shift vectors reaching it"
+    ]
+  },
+  "seasonality_sensitivity_null": {
+    "name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+    "description": "Each site's cluster is translated only by an integer number of calendar years, keeping month/day fixed for every event and preserving within-site cluster geometry for this cohort. Only year shifts whose full plus/minus-3-day windows remain inside the study window are admissible.",
+    "actual_year_shift_vector": {
+      "LOS_ALAMOS": 0,
+      "SANDIA_BASE": 0,
+      "SAVANNAH_RIVER_PLANT": 0
+    },
+    "purpose": "Sensitivity control for seasonality/calendar-position effects in the Palomar observation schedule.",
+    "exact_enumeration_contract": "Enumerate every admissible integer-year shift per site and convolve the site-specific hit-count histograms exactly for T_r.",
+    "required_outputs": [
+      "admissible year offsets per site",
+      "site-specific event-hit histograms for each radius",
+      "exact convolved aggregate T_r histogram",
+      "fraction of null year-shift vectors with T_r >= actual T_r",
+      "fraction with T_r <= actual T_r"
+    ]
+  },
+  "site_balance_control": {
+    "statistic": "S_r",
+    "reason": "A temporal excess concentrated entirely in one site must remain distinguishable from an excess distributed across independently sourced sites.",
+    "inference_role": "SECONDARY_DIAGNOSTIC__NOT_A_REPLACEMENT_FOR_T_r"
+  },
+  "known_outcome_calibration": {
+    "site": "Oak Ridge, Tennessee",
+    "dates": ["1950-03-01", "1950-10-15", "1950-12-18"],
+    "known_R2_R3_status": "NO_OBSERVATION_OPPORTUNITY_AT_EXACT_OR_PLUS_MINUS_1_OR_PLUS_MINUS_3_PRIMARY_WINDOWS",
+    "primary_R4_contribution": 0,
+    "rule": "Do not append Oak Ridge to the six holdout event dates when computing T_r or its p-like null tail fractions."
+  },
+  "interpretation_contract": {
+    "temporal_hit_means_only": "Palomar had at least one materialized observation day inside the preregistered Earth-date window.",
+    "temporal_hit_does_not_mean": [
+      "the Earth event was imaged",
+      "a candidate on a Palomar plate corresponds to the Earth event",
+      "nuclear attraction",
+      "nonhuman origin",
+      "causation"
+    ],
+    "no_temporal_hit_means_only": "No materialized Palomar observation opportunity existed in that frozen temporal window.",
+    "next_stage_if_temporal_excess_survives": "A separately preregistered R5 plate/sky/candidate-level test; no candidate-level fishing is authorized by R4 alone."
+  },
+  "promotion_rule": {
+    "required": "Report all three radii and both null families regardless of direction. Do not select a favorable radius or null after execution.",
+    "strong_temporal_signal_language_allowed_only_if": "The upper-tail rarity is small under the primary null and the direction remains materially consistent under the seasonality sensitivity null; exact thresholds must be reported numerically rather than converted into an origin claim.",
+    "causal_or_origin_promotion": "FORBIDDEN"
+  },
+  "canonical_seal": "THE EARTH COHORT IS FROZEN BEFORE THE SKY CALENDAR IS OPENED. MOVE WHOLE SITE CLUSTERS, REPORT EVERY RADIUS AND BOTH NULLS, AND NEVER TURN OBSERVATION OPPORTUNITY INTO ORIGIN."
+}
