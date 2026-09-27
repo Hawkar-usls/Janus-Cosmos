@@ -1,0 +1,228 @@
+{
+  "schema": "janus.cosmos.earth.bridge_r4_multisite_source_first_event_ledger.v0.1",
+  "artifact_id": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-EVENT-LEDGER-1949-1957-v0.1",
+  "status": "FROZEN_BEFORE_NEW_HOLDOUT_PALOMAR_MEMBERSHIP_LOOKUP",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "EARTH",
+  "purpose": "Freeze an independently selected multisite exact-day nuclear/special-weapons aerial-event cohort inside the POSS-I study window before any Palomar observation-day membership lookup for the new holdout dates.",
+  "palomar_study_window": {
+    "start": "1949-11-19",
+    "end": "1957-04-28",
+    "use_in_this_artifact": "ELIGIBILITY_BOUND_ONLY__NO_NEW_HOLDOUT_DATE_MEMBERSHIP_LOOKUP"
+  },
+  "primary_unit": "UNIQUE_SITE_DATE",
+  "same_site_same_day_reports_collapse_to_one_primary_unit": true,
+  "cohort_roles": {
+    "HOLDOUT_PRIMARY_NEW": "Date was selected from independently sourced Earth records and its Palomar observation-day membership has not been consulted for R4 selection.",
+    "CALIBRATION_REUSE_KNOWN_OUTCOME": "Previously tested date retained only for calibration/context; excluded from the R4 primary significance statistic because its Palomar outcome is already known.",
+    "PROVISIONAL_NOT_PRIMARY": "Historically relevant candidate that is not primary-test eligible until its source/date binding meets the frozen evidence rule."
+  },
+  "source_selection_firewall": {
+    "new_holdout_dates_selected_without_Palomar_day_membership_lookup": true,
+    "Palomar_candidate_count_used_for_new_holdout_selection": false,
+    "known_Palomar_outcome_dates_excluded_from_primary_R4_statistic": true,
+    "out_of_study_window_events_excluded": true,
+    "same_site_same_day_report_multiplicity_cannot_inflate_primary_n": true,
+    "source_requirement": "Exact calendar day plus federal/official archival release lineage or stronger. Primary file URL/identifier and source limitations remain explicit.",
+    "anti_cherry_pick_law": "FREEZE THE EARTH COHORT BEFORE OPENING THE SKY CALENDAR."
+  },
+  "primary_holdout_sites": [
+    {
+      "site_id": "LOS_ALAMOS",
+      "site": "Los Alamos, New Mexico",
+      "nuclear_context": "Atomic Energy Commission / nuclear laboratory and security context",
+      "map_anchor_state": "BOUND_IN_SITE_COORDINATE_REGISTRY_v0.2__VISUALIZATION_ONLY",
+      "source_bundle": {
+        "document_id": "DOW-UAP-D017",
+        "document_title": "UAP Reported at Sandia Base, 1948-1950 / General Correspondence of Sandia Base",
+        "source_authority": "Department of War release of Armed Forces Special Weapons Program and U.S. Air Force records",
+        "official_release_url": "https://www.war.gov/UFO/?releaseDate=Release+02#records",
+        "official_asset_url": "https://www.war.gov/medialink/ufo/052226/release_02/documents/DOW-UAP-D017_General_Correspondence_Of_Sandia.pdf",
+        "release_date": "2026-05-22",
+        "exact_day_table_lineage": "17th District OSI Summary of Sightings of Unknown Aerial Phenomena",
+        "binding_state": "OFFICIAL_RELEASE_AND_ASSET_URL_BOUND__DAY_LEVEL_TABLE_TRANSCRIPTION_INDEPENDENTLY_VERIFIED__PRIMARY_ASSET_HASH_NOT_BOUND_IN_REPO",
+        "source_grade": "P0_OFFICIAL_RELEASE_LINEAGE__EXACT_DAY_TABLE_VERIFIED"
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-LOSALAMOS-1950-02-24",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1950-02-24",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1950-02-24",
+          "underlying_report_numbers": [176, 177, 178, 179],
+          "reported_summary": "The OSI summary table contains multiple Los Alamos observations on 24 February 1950, including silvery/white objects, maneuvering or rapid motion, and one entry described as saucer-shaped. R4 counts the site-date once regardless of report multiplicity.",
+          "classification_state": "DOCUMENTED_OFFICIAL_TABLE_EVENT_CLUSTER__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_SOURCE_BOUND_AERIAL_REPORT_CLUSTER__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-LOSALAMOS-1950-02-25",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1950-02-25",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1950-02-25",
+          "underlying_report_numbers": [180, 183, 184, 185, 186, 187],
+          "reported_summary": "The OSI summary table contains multiple Los Alamos observations on 25 February 1950. One row records 14 reliable observers and a round silver object with reported fast motion; other same-day rows are retained as source multiplicity but collapse to one site-date for R4.",
+          "classification_state": "DOCUMENTED_OFFICIAL_TABLE_EVENT_CLUSTER__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_SOURCE_BOUND_AERIAL_REPORT_CLUSTER__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    },
+    {
+      "site_id": "SANDIA_BASE",
+      "site": "Sandia Base, New Mexico",
+      "nuclear_context": "Armed Forces Special Weapons Program / nuclear weapons special-weapons installation context",
+      "map_anchor_state": "UNRESOLVED_PENDING_SEPARATE_COORDINATE_BIND__DO_NOT_INFER_FROM_REGIONAL_RELEASE_COORDINATE",
+      "source_bundle": {
+        "document_id": "DOW-UAP-D017",
+        "document_title": "UAP Reported at Sandia Base, 1948-1950 / General Correspondence of Sandia Base",
+        "source_authority": "Department of War release of Armed Forces Special Weapons Program and U.S. Air Force records",
+        "official_release_url": "https://www.war.gov/UFO/?releaseDate=Release+02#records",
+        "official_asset_url": "https://www.war.gov/medialink/ufo/052226/release_02/documents/DOW-UAP-D017_General_Correspondence_Of_Sandia.pdf",
+        "release_date": "2026-05-22",
+        "exact_day_table_lineage": "17th District OSI Summary of Sightings of Unknown Aerial Phenomena",
+        "binding_state": "OFFICIAL_RELEASE_AND_ASSET_URL_BOUND__DAY_LEVEL_TABLE_TRANSCRIPTION_INDEPENDENTLY_VERIFIED__PRIMARY_ASSET_HASH_NOT_BOUND_IN_REPO",
+        "source_grade": "P0_OFFICIAL_RELEASE_LINEAGE__EXACT_DAY_TABLE_VERIFIED"
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-SANDIA-1950-03-21",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1950-03-21",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1950-03-21",
+          "underlying_report_numbers": [200, 201, 202],
+          "reported_summary": "The OSI summary table records multiple Sandia Base observations on 21 March 1950, including round silver/white objects and reported motion from jet-like to excessive relative to jet flight. The date is counted once.",
+          "classification_state": "DOCUMENTED_OFFICIAL_TABLE_EVENT_CLUSTER__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_SOURCE_BOUND_AERIAL_REPORT_CLUSTER__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-SANDIA-1950-03-22",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1950-03-22",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1950-03-22",
+          "underlying_report_numbers": [205],
+          "reported_summary": "The OSI summary table records a Sandia Base observation on 22 March 1950 described as a round blue-centered/orange-exterior object crossing part of the sky before burning out. R4 records only that the official table contains an exact-day aerial observation; it does not promote interpretation.",
+          "classification_state": "DOCUMENTED_OFFICIAL_TABLE_EVENT__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_SOURCE_BOUND_AERIAL_REPORT__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    },
+    {
+      "site_id": "SAVANNAH_RIVER_PLANT",
+      "site": "Savannah River Plant, South Carolina",
+      "nuclear_context": "Atomic Energy Commission production site",
+      "map_anchor_state": "UNRESOLVED_PENDING_SEPARATE_COORDINATE_BIND",
+      "source_bundle": {
+        "source_authority": "Federal Bureau of Investigation records reporting Atomic Energy Commission / DuPont employee observations",
+        "official_fbi_vault_may_url": "https://vault.fbi.gov/UFO/UFO%20Part%2010/at_download/file",
+        "official_section_6_asset_url": "https://www.war.gov/medialink/ufo/release_1/65_hs1-834228961_62-hq-83894_section_6.pdf",
+        "official_section_7_asset_url": "https://www.war.gov/medialink/ufo/release_1/65_hs1-834228961_62-hq-83894_section_7.pdf",
+        "case_file": "FBI 62-HQ-83894",
+        "release_lineage": "FBI Vault and Department of War Release 01",
+        "binding_state": "FEDERAL_FILE_LINEAGE_AND_EXACT_DAY_TELETYPE_OR_MEMORANDUM_TEXT_VERIFIED",
+        "source_grade": "P0_OFFICIAL_FEDERAL_RECORD"
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-05-10",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-05-10",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1952-05-10",
+          "reported_summary": "An FBI record states that at about 22:45 on 10 May 1952 four DuPont employees at the Savannah River Plant saw four disk-shaped objects approaching the 400 Area, followed by additional reported objects at approximately 23:05, 23:10 and 23:25. R4 collapses all reports to one site-date.",
+          "classification_state": "DOCUMENTED_FBI_AEC_SITE_EVENT_CLUSTER__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_RECORD_AERIAL_REPORT_CLUSTER__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-08-08",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-08-08",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW",
+          "bridge_eligible": true,
+          "bridge_key": "1952-08-08",
+          "reported_summary": "An FBI Savannah urgent teletype records that the AEC Security Office reported two DuPont employees saw a blue light with an orange fringe shaped like a saucer over the Savannah River Plant 400 Area at approximately 21:30 on 8 August 1952.",
+          "classification_state": "DOCUMENTED_FBI_AEC_SECURITY_REPORT__ORIGIN_NOT_ESTABLISHED",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_RECORD_AERIAL_REPORT__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    }
+  ],
+  "calibration_reuse": {
+    "site": "Oak Ridge, Tennessee",
+    "source_artifact": "OAK_RIDGE_EXACT_DAY_EVENT_LEDGER_1950_v0.1.json",
+    "cohort_role": "CALIBRATION_REUSE_KNOWN_OUTCOME",
+    "exclude_from_primary_R4_statistic": true,
+    "reason": "R2/R3 already exposed the Palomar exact/plus-minus-1/plus-minus-3 outcomes for these dates; including them as holdout evidence would violate blindness.",
+    "dates": ["1950-03-01", "1950-10-15", "1950-12-18"]
+  },
+  "provisional_or_excluded_candidates": [
+    {
+      "site": "Hanford AEC Plant",
+      "candidate_dates": ["1950-07-30", "1952-12-10"],
+      "cohort_role": "PROVISIONAL_NOT_PRIMARY",
+      "bridge_eligible": false,
+      "reason": "Historically relevant exact-day/series-onset archival lineages were found, but a sufficiently strong direct federal primary-byte/page bind was not completed before this R4-A freeze. They may not be promoted after seeing Palomar membership."
+    },
+    {
+      "site": "Los Alamos, New Mexico",
+      "candidate_dates": ["1950-09-12"],
+      "cohort_role": "PROVISIONAL_NOT_PRIMARY",
+      "bridge_eligible": false,
+      "reason": "FBI-file lineage currently resolves through a media-clipping/reporting layer rather than the required direct official incident table/report binding."
+    },
+    {
+      "site": "Pantex Plant",
+      "cohort_role": "EXCLUDED",
+      "bridge_eligible": false,
+      "reason": "No qualifying 1949-1957 exact-day aerial-event record meeting the R4 source rule was frozen. The existing strong Pantex event is 2015 and outside the POSS-I study window."
+    },
+    {
+      "site": "Pilgrim Nuclear Power Station",
+      "cohort_role": "EXCLUDED",
+      "bridge_eligible": false,
+      "reason": "Known event lineage is 2015 and therefore outside the 1949-11-19 through 1957-04-28 POSS-I study window."
+    }
+  ],
+  "row_counts": {
+    "primary_holdout_sites": 3,
+    "primary_holdout_unique_site_dates": 6,
+    "primary_holdout_dates_by_site": {
+      "LOS_ALAMOS": 2,
+      "SANDIA_BASE": 2,
+      "SAVANNAH_RIVER_PLANT": 2
+    },
+    "calibration_reuse_sites": 1,
+    "calibration_reuse_dates": 3,
+    "provisional_candidate_dates_not_primary": 3
+  },
+  "frozen_primary_holdout_dates": [
+    {"site_id": "LOS_ALAMOS", "date": "1950-02-24"},
+    {"site_id": "LOS_ALAMOS", "date": "1950-02-25"},
+    {"site_id": "SANDIA_BASE", "date": "1950-03-21"},
+    {"site_id": "SANDIA_BASE", "date": "1950-03-22"},
+    {"site_id": "SAVANNAH_RIVER_PLANT", "date": "1952-05-10"},
+    {"site_id": "SAVANNAH_RIVER_PLANT", "date": "1952-08-08"}
+  ],
+  "next_gate": {
+    "id": "BRIDGE-R4-B-MULTISITE-NULL-PREREG",
+    "must_happen_before": "ANY_NEW_HOLDOUT_PALOMAR_DATE_MEMBERSHIP_EVALUATION",
+    "required_windows": ["EXACT_DAY", "PLUS_MINUS_1_DAY", "PLUS_MINUS_3_DAY"],
+    "required_primary_statistic": "NUMBER_OF_NEW_PRIMARY_HOLDOUT_SITE_DATES_WITH_AT_LEAST_ONE_PALOMAR_OBSERVATION_OPPORTUNITY",
+    "null_requirement": "Preserve each site's internal date clustering and prevent known-outcome Oak Ridge dates from contributing to holdout significance."
+  },
+  "claim_ceiling": "THIS LEDGER ESTABLISHES ONLY A SOURCE-FIRST EARTH DATE COHORT. IT DOES NOT ESTABLISH PALOMAR COINCIDENCE, ANOMALOUS ORIGIN, NUCLEAR ATTRACTION, OR CAUSATION.",
+  "canonical_seal": "FREEZE THE EARTH DATES BEFORE THE SKY CALENDAR. KNOWN OUTCOMES CALIBRATE; THEY DO NOT COUNT AS HOLDOUT EVIDENCE."
+}
