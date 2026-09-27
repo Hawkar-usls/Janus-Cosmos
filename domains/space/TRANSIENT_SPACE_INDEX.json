@@ -1,0 +1,78 @@
+{
+  "schema": "janus.cosmos.space.transient_index.v1",
+  "artifact_id": "JANUS-COSMOS-SPACE-TRANSIENT-INDEX-2026-09-27-v1.0",
+  "status": "ACTIVE_SPACE_DOMAIN",
+  "role": "Astronomical and near-Earth transient witness lane for independent comparison with terrestrial UAP/nuclear claims.",
+  "current_lineage": {
+    "legacy_astronomy_branch": "legacy-cosmos-pre-osiris-2026-08-19",
+    "palomar_open_reconstruction": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-POSS1-OPEN-PUBLIC-RECONSTRUCTION-RESULT-v1.0.json",
+    "palomar_schedule_control": "Hawkar-usls/janus-meta-registry:data/JANUS-PALOMAR-JPFM-2E-SCHEDULE-CONFOUND-DECOMPOSITION-RUN-001.json",
+    "palomar_public_dossier": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-UAP-NUCLEAR-FULL-PUBLIC-DOSSIER-2026-09-27-v1.0.json"
+  },
+  "active_source_graph": [
+    {
+      "id": "PALOMAR_POSS1_2025",
+      "url": "https://www.nature.com/articles/s41598-025-21620-3",
+      "role": "Published positive nuclear-test/transient association claim"
+    },
+    {
+      "id": "PALOMAR_CRITIQUE_2026",
+      "url": "https://www.cambridge.org/core/journals/publications-of-the-astronomical-society-of-australia/article/critical-evaluation-of-studies-alleging-evidence-for-technosignatures-in-the-poss1e-photographic-plates/A19B440ADE54BB11973C46D2BA13FB01",
+      "role": "Peer-reviewed counter-analysis emphasizing schedule/data-definition/artifact concerns"
+    },
+    {
+      "id": "PALOMAR_AUTHOR_RESPONSE_2026",
+      "url": "https://arxiv.org/abs/2602.15171",
+      "role": "Author response; preserved as part of the live methodological dispute, not as independent replication"
+    },
+    {
+      "id": "NASA_UAP_SENSOR_REPORT",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf",
+      "role": "Sensor-calibration and metadata discipline applicable to transient interpretation"
+    }
+  ],
+  "detector_machine": {
+    "formula": "SKY_EVENT_OR_DETECTOR_EVENT -> OPTICS -> EMULSION_OR_SENSOR -> SCAN_OR_PIPELINE -> CANDIDATE -> CROSS_EPOCH_TEST -> TRANSIENT_CLASS",
+    "law": "POINTLIKE_DETECTION != EXTERNAL_POINT_SOURCE",
+    "required_representation_contract": [
+      "what the detector preserves",
+      "known plate/sensor artifacts",
+      "observation schedule and exposure opportunity",
+      "cross-epoch recurrence logic",
+      "astrometric uncertainty",
+      "scan and candidate-selection pipeline",
+      "independent survey witness"
+    ]
+  },
+  "current_janus_control_result": {
+    "cohort": {
+      "plates": 640,
+      "observed_nights": 312,
+      "candidate_count": 122511
+    },
+    "key_result": "For the dense open S0 cohort, binary ANY_CANDIDATE is identical to PALOMAR_OBSERVED_NIGHT; conditional candidate-rate models do not show a robust positive nuclear enhancement.",
+    "interpretation": "The binary nuclear association in this open reconstruction is dominated by observation-schedule structure; this does not settle all morphology-specific transient questions."
+  },
+  "next_experiments": [
+    {
+      "id": "SPACE-R1",
+      "name": "PALOMAR_REPRODUCE_THEN_BREAK",
+      "status": "LINKED_TO_PREREGISTERED_NUC-R5",
+      "goal": "Reproduce the historical positive endpoint unchanged, then apply schedule, plate-quality, pseudo-event and morphology controls without post-hoc tuning."
+    },
+    {
+      "id": "SPACE-R2",
+      "name": "CROSS_SURVEY_REPLICATION",
+      "status": "DESIGN_TARGET",
+      "goal": "Test any surviving morphology/timing feature against an independent astronomical survey with its own detector contract."
+    },
+    {
+      "id": "SPACE-R3",
+      "name": "TRANSIENT_ARTIFACT_ATLAS",
+      "status": "DESIGN_TARGET",
+      "goal": "Build labeled positive controls for stars, defects, cosmic-ray-like marks, scan artifacts and genuine transient classes."
+    }
+  ],
+  "claim_ceiling": "SPACE_DOMAIN_CAN ESTABLISH DETECTOR-BOUND TRANSIENT STRUCTURE AND CROSS-SURVEY REPLICATION; IT CANNOT BY ITSELF IDENTIFY UAP ORIGIN OR LINK A TRANSIENT TO A TERRESTRIAL NUCLEAR EVENT CAUSALLY.",
+  "canonical_seal": "A POINT ON A PLATE IS A DETECTION SYMBOL. SOURCE IDENTITY REQUIRES AN INDEPENDENT WITNESS."
+}
