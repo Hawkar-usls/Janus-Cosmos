@@ -1,0 +1,99 @@
+{
+  "schema": "janus.cosmos.earth.uap_nuclear_index.v1",
+  "artifact_id": "JANUS-COSMOS-EARTH-UAP-NUCLEAR-INDEX-2026-09-27-v1.0",
+  "status": "ACTIVE_EARTH_DOMAIN",
+  "role": "Terrestrial witness lane for nuclear-site aerial events, reporting pipelines, human observations and geospatial controls.",
+  "source_graph": {
+    "primary_archives": [
+      {
+        "id": "NARA_RG615_NRC",
+        "url": "https://www.archives.gov/research/topics/uaps/rg-615",
+        "role": "Official UAP provenance and NRC discovery layer"
+      },
+      {
+        "id": "PURSUE_DOE",
+        "url": "https://www.war.gov/UFO/release/04/?agency=Department+of+Energy",
+        "role": "DOE primary incident and historical-document release layer"
+      },
+      {
+        "id": "PANTEX_2015",
+        "url": "https://www.energy.gov/sites/default/files/2026-09/5%20-%20%28UCNI%29%20NNSA-2015-009581%20-%20COR-NPO-20%20SS-992015-642025.pdf",
+        "role": "Primary multi-sensor nuclear-site security case"
+      }
+    ],
+    "official_modern_baseline": [
+      {
+        "id": "AARO_FY2024",
+        "url": "https://www.dni.gov/files/ODNI/documents/assessments/DOD-AARO-Consolidated-Annual-Report-on-UAP-Nov2024.pdf",
+        "fact": "18 nuclear-site UAS reports were categorized as UAS by reporting authorities."
+      },
+      {
+        "id": "AARO_FY2025",
+        "url": "https://www.aaro.mil/Congressional-Press-Products/",
+        "fact": "50 nuclear-site UAS incidents were reported; none were reported as UAP."
+      },
+      {
+        "id": "NRC_REPORTING_POLICY",
+        "url": "https://www.nrc.gov/regulations-legislation/fact-sheets-brochures/drones-and-nuclear-power-plant-security",
+        "fact": "2024 reporting-rule changes create a real classification/reporting changepoint."
+      }
+    ],
+    "research_layers": [
+      {
+        "id": "GEIPAN_FRANCE_2015",
+        "url": "https://www.cnes-geipan.fr/sites/default/files/2015-09-01_Spatial_Point_Pattern_Analysis_of_the_Unidentified.pdf",
+        "role": "Independent spatial association model with population/environment/nuclear-risk covariates"
+      },
+      {
+        "id": "SCU_ATOMIC_COMPLEX_590",
+        "url": "https://zenodo.org/records/7295958",
+        "role": "Open selected historical case corpus requiring denominator-aware reanalysis"
+      },
+      {
+        "id": "MEDINA_2023",
+        "url": "https://www.nature.com/articles/s41598-023-49527-x",
+        "role": "Opportunity-to-see, air-traffic and military-activity confound model"
+      }
+    ]
+  },
+  "reporting_pipeline_machine": {
+    "formula": "PHYSICAL_EVENT -> DETECTOR_OR_HUMAN -> LOCAL_CLASSIFICATION -> REPORTING_RULE -> NRC_OR_SECURITY_ARCHIVE -> AARO_OR_NARA -> ANALYST_COUNT",
+    "law": "ARCHIVE_COUNT != PHYSICAL_EVENT_RATE_UNLESS_PIPELINE_OPPORTUNITY_AND_POLICY_ARE_MODELED",
+    "key_control": "Treat the 2024 NRC reporting change as a changepoint rather than assuming stationary reporting."
+  },
+  "active_experiments": [
+    {
+      "id": "NUC-R1",
+      "name": "NRC_RG615_PRIMARY_LEDGER",
+      "status": "PARTIAL_EXECUTION",
+      "external_receipt": "Hawkar-usls/TOPA:research/uap-nuclear/NUC-R1-NRC-RG615-PRIMARY-LEDGER-2026-09-27-v0.1.json"
+    },
+    {
+      "id": "NUC-R2",
+      "name": "MODERN_POLICY_NORMALIZED_UAS_BASELINE",
+      "status": "DESIGN_READY"
+    },
+    {
+      "id": "NUC-R3",
+      "name": "PANTEX_MULTI_SENSOR_FORENSICS",
+      "status": "DESIGN_READY"
+    },
+    {
+      "id": "NUC-R4",
+      "name": "SCU_590_DENOMINATOR_REANALYSIS",
+      "status": "INPUT_ACQUISITION_OPEN"
+    }
+  ],
+  "mandatory_covariates": [
+    "population density",
+    "visibility and weather",
+    "air traffic",
+    "military activity",
+    "facility class",
+    "reporting-policy era",
+    "sensor/reporting opportunity",
+    "media/reporting intensity"
+  ],
+  "claim_ceiling": "EARTH_DOMAIN_CAN_ESTABLISH_SOURCE_BOUND_EVENTS_AND_CONTROLLED_ASSOCIATIONS; IT CANNOT BY ITSELF ESTABLISH NONHUMAN ORIGIN, NUCLEAR ATTRACTION, RETROCAUSALITY OR QUANTUM BRANCHING.",
+  "canonical_seal": "MODEL THE SKY-TO-ARCHIVE PIPELINE BEFORE TREATING A COUNT AS A PHYSICAL RATE."
+}

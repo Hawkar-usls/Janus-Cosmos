@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.bridge.earth_space_residual_triangulation.v1",
+  "artifact_id": "JANUS-COSMOS-EARTH-SPACE-RESIDUAL-TRIANGULATION-2026-09-27-v1.0",
+  "status": "DESIGN_READY__NOT_EXECUTED",
+  "purpose": "Define the only allowed path for promoting a signal from separate Earth and Space lanes into a shared cross-domain residual.",
+  "inputs": {
+    "earth": "domains/earth/UAP_NUCLEAR_EARTH_INDEX.json",
+    "space": "domains/space/TRANSIENT_SPACE_INDEX.json"
+  },
+  "representation_contract": {
+    "earth_invariant": "event/report rate or source-bounded event feature after reporting-opportunity and policy normalization",
+    "space_invariant": "transient morphology/timing rate after observation-opportunity, detector and artifact normalization",
+    "shared_candidate_invariant": "prospectively frozen spatial/temporal feature that can be independently measured in both domains",
+    "forbidden_shortcut": "A shared keyword, date coincidence, narrative resemblance or post-hoc bin choice cannot define the shared invariant."
+  },
+  "admission_pipeline": [
+    "1_FREEZE_EARTH_ENDPOINT_AND_NULL",
+    "2_FREEZE_SPACE_ENDPOINT_AND_NULL",
+    "3_RUN_EACH_DOMAIN_INDEPENDENTLY",
+    "4_REQUIRE_EARTH_SURVIVAL_WITHIN_ITS_OWN_CONTRACT",
+    "5_REQUIRE_SPACE_SURVIVAL_WITHIN_ITS_OWN_CONTRACT",
+    "6_UNBLIND_SHARED_FEATURE_ONLY_AFTER_INDEPENDENT_DOMAIN_RESULTS",
+    "7_TEST_SHARED_TIMING_OR_SPATIAL_STRUCTURE_WITH_MULTIPLICITY_CONTROL",
+    "8_PRESERVE_NULL_MISMATCH_BLOCKED_AND_COUNTEREXAMPLES",
+    "9_ONLY_THEN_OPEN_MECHANISM_DISCRIMINATION"
+  ],
+  "verdict_ladder": {
+    "NULL_BOTH": "No residual in either domain.",
+    "EARTH_ONLY": "Terrestrial/reporting/security residual only; no astronomical corroboration.",
+    "SPACE_ONLY": "Astronomical/detector residual only; no terrestrial corroboration.",
+    "BOTH_BUT_NONALIGNING": "Independent residuals exist but do not share the frozen feature.",
+    "SHARED_RESIDUAL": "At least two independent domains survive their own nulls and share the prospectively frozen feature.",
+    "BLOCKED": "One or both domains lack a valid denominator, detector contract or source binding."
+  },
+  "shared_residual_is_not": [
+    "proof of nonhuman origin",
+    "proof of nuclear attraction",
+    "proof of extraterrestrial technology",
+    "proof of retrocausality",
+    "proof of quantum branching"
+  ],
+  "mechanism_discrimination_if_shared_residual_exists": {
+    "candidate_families": [
+      "common reporting/selection artifact",
+      "common environmental/astronomical confound",
+      "human-made activity correlated with both domains",
+      "sensor/processing coupling",
+      "unknown physical mechanism"
+    ],
+    "rule": "Unknown physical mechanism is reached only after the ordinary common-cause families have been given tests with power to say no."
+  },
+  "canonical_equation": "VALID_EARTH_RESIDUAL ∩ VALID_SPACE_RESIDUAL ∩ FROZEN_SHARED_FEATURE = CROSS_DOMAIN_RESIDUAL_CANDIDATE",
+  "canonical_seal": "LET EARTH AND SPACE DISAGREE FREELY. AGREEMENT COUNTS ONLY AFTER EACH SIDE HAS SURVIVED ITS OWN FALSIFIERS."
+}

@@ -1,0 +1,54 @@
+name: JANUS Earth-Space Domain Isolation
+
+on:
+  push:
+    branches:
+      - feature/earth-space-dual-domain-v1
+  pull_request:
+    paths:
+      - 'DUAL_DOMAIN_MANIFEST.json'
+      - 'domains/earth/**'
+      - 'domains/space/**'
+      - 'domains/bridge/**'
+      - '.github/workflows/earth-space-domain-isolation.yml'
+
+jobs:
+  validate-earth-space:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate dual-domain JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths = [Path('DUAL_DOMAIN_MANIFEST.json')]
+          paths += list(Path('domains/earth').glob('*.json'))
+          paths += list(Path('domains/space').glob('*.json'))
+          paths += list(Path('domains/bridge').glob('*.json'))
+          for p in paths:
+              with p.open('r', encoding='utf-8') as f:
+                  json.load(f)
+              print('PASS JSON', p)
+          PY
+
+      - name: Enforce Cousteau-Kusto isolation
+        run: |
+          git fetch origin main --depth=1 || true
+          CHANGED="$(git diff --name-only origin/main...HEAD || true)"
+          printf '%s\n' "$CHANGED"
+          if printf '%s\n' "$CHANGED" | grep -E '^(data/cousteau/|archive/cousteau|.*cousteau.*|.*kusto.*)' -i; then
+            echo 'FAIL: Earth-Space branch touched protected Cousteau/Kusto content.'
+            exit 1
+          fi
+          echo 'PASS: no protected Cousteau/Kusto path modified.'
+
+      - name: Domain contract receipt
+        run: |
+          echo 'EARTH=domains/earth'
+          echo 'SPACE=domains/space'
+          echo 'BRIDGE=domains/bridge'
+          echo 'COUSTEAU_KUSTO=PROTECTED_NO_TOUCH'
