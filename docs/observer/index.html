@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#030713" />
   <meta name="description" content="JANUS COSMOS Observer — interactive Earth + Space evidence visualization." />
   <title>JANUS COSMOS Observer</title>
-  <link rel="preconnect" href="https://unpkg.com" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -15,25 +14,18 @@
 
   <header class="topbar glass">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
       <div>
         <h1>JANUS COSMOS <b>OBSERVER</b></h1>
         <p>EARTH · SPACE · EVIDENCE · CONNECTED</p>
       </div>
     </div>
-
     <nav class="mode-switch" aria-label="Observer mode">
       <button class="mode active" data-mode="earth">EARTH</button>
       <button class="mode" data-mode="space">SPACE</button>
       <button class="mode" data-mode="bridge">BRIDGE</button>
     </nav>
-
-    <div class="live-state">
-      <span class="pulse"></span>
-      <div><strong>LIVE DATA</strong><small id="clock">—</small></div>
-    </div>
+    <div class="live-state"><span class="pulse"></span><div><strong>LIVE DATA</strong><small id="clock">—</small></div></div>
   </header>
 
   <main>
@@ -43,7 +35,6 @@
           <div class="panel-title"><span>EARTH EVENTS</span><b id="earth-count">—</b></div>
           <div id="earth-list" class="event-list skeleton-list"></div>
         </section>
-
         <section class="panel glass compact">
           <div class="panel-title"><span>DATA CONTRACT</span><b>JANUS</b></div>
           <div class="laws">
@@ -56,58 +47,34 @@
 
       <section class="stage glass">
         <div class="stage-head">
-          <div>
-            <span class="eyebrow" id="stage-eyebrow">TERRESTRIAL WITNESS LANE</span>
-            <h2 id="stage-title">Interactive Earth</h2>
-          </div>
+          <div><span class="eyebrow" id="stage-eyebrow">TERRESTRIAL WITNESS LANE</span><h2 id="stage-title">Interactive Earth</h2></div>
           <div class="stage-stat"><span id="stage-big">—</span><small id="stage-small">loading source-bound rows</small></div>
         </div>
-
         <div class="viewport-wrap">
           <div id="earth-globe" class="globe-view active" aria-label="Interactive 3D Earth"></div>
           <div id="space-globe" class="globe-view" aria-label="Interactive celestial sphere"></div>
           <div id="bridge-view" class="bridge-view">
-            <div class="bridge-orbit orbit-a"></div>
-            <div class="bridge-orbit orbit-b"></div>
-            <div class="bridge-core">
-              <span>EARTH</span>
-              <i>↔</i>
-              <span>SPACE</span>
-            </div>
-            <div class="bridge-message">
-              <strong id="bridge-status">L2 EXACT-DAY JOIN: BLOCKED</strong>
-              <p id="bridge-reason">Waiting for the source-bound 312-row Palomar observation-day ledger.</p>
-            </div>
+            <div class="bridge-orbit orbit-a"></div><div class="bridge-orbit orbit-b"></div>
+            <div class="bridge-core"><span>EARTH</span><i>↔</i><span>SPACE</span></div>
+            <div class="bridge-message"><strong id="bridge-status">L2 EXACT-DAY JOIN: BLOCKED</strong><p id="bridge-reason">Waiting for the source-bound 312-row Palomar observation-day ledger.</p></div>
           </div>
-
-          <div class="hud hud-tl">
-            <span class="dot cyan"></span>
-            <div><b>ROTATE / ZOOM</b><small>drag · scroll · touch</small></div>
-          </div>
-          <div class="hud hud-br">
-            <div><b id="hud-source">SOURCE-BOUND</b><small id="hud-note">points are evidence locations, not causal links</small></div>
-          </div>
+          <div class="hud hud-tl"><span class="dot cyan"></span><div><b>ROTATE / ZOOM</b><small>drag · scroll · touch</small></div></div>
+          <div class="hud hud-br"><div><b id="hud-source">SOURCE-BOUND</b><small id="hud-note">points are evidence locations, not causal links</small></div></div>
         </div>
       </section>
 
       <aside class="rail right-rail">
         <section class="panel glass detail-panel">
           <div class="panel-title"><span>SELECTED WITNESS</span><b id="detail-grade">—</b></div>
-          <div id="detail" class="detail-empty">
-            <div class="reticle">◎</div>
-            <p>Hover or click an observation point.</p>
-          </div>
+          <div id="detail" class="detail-empty"><div class="reticle">◎</div><p>Hover or click an observation point.</p></div>
         </section>
-
         <section class="panel glass">
           <div class="panel-title"><span>SPACE LEDGER</span><b id="space-count">—</b></div>
           <div class="metric-grid">
-            <div><span>PLATES</span><b id="m-plates">—</b></div>
-            <div><span>TILES</span><b id="m-tiles">—</b></div>
-            <div><span>CANDIDATES</span><b id="m-candidates">—</b></div>
-            <div><span>OBS. DAYS</span><b id="m-days">—</b></div>
+            <div><span>PLATES</span><b id="m-plates">—</b></div><div><span>TILES</span><b id="m-tiles">—</b></div>
+            <div><span>CANDIDATES</span><b id="m-candidates">—</b></div><div><span>OBS. DAYS</span><b id="m-days">—</b></div>
           </div>
-          <div class="microcopy">Celestial markers are public POSS-I plate centers loaded from the upstream manifest. They are survey positions, not claimed anomalies.</div>
+          <div class="microcopy">Celestial markers are public POSS-I plate centers. They are survey positions, not claimed anomalies.</div>
         </section>
       </aside>
     </section>
@@ -116,34 +83,20 @@
       <section class="panel glass source-panel">
         <div class="panel-title"><span>OBSERVER FLOW</span><b id="load-state">CONNECTING</b></div>
         <div class="flow">
-          <div class="flow-node"><i>1</i><div><b>EARTH</b><span>NRC · DOE · AARO · events</span></div></div>
-          <div class="flow-line"></div>
-          <div class="flow-node"><i>2</i><div><b>SPACE</b><span>POSS-I · detector · schedule</span></div></div>
-          <div class="flow-line"></div>
+          <div class="flow-node"><i>1</i><div><b>EARTH</b><span>NRC · DOE · AARO · events</span></div></div><div class="flow-line"></div>
+          <div class="flow-node"><i>2</i><div><b>SPACE</b><span>POSS-I · detector · schedule</span></div></div><div class="flow-line"></div>
           <div class="flow-node"><i>3</i><div><b>BRIDGE</b><span>join only under contract</span></div></div>
         </div>
       </section>
-
       <section class="panel glass timeline-panel">
-        <div class="panel-title"><span>CURRENT GATES</span><b>v0.1</b></div>
-        <div class="gate-row">
-          <span class="gate ok">EARTH LEDGER</span>
-          <span class="gate ok">SPACE LEDGER</span>
-          <span class="gate warn">312-DAY TABLE</span>
-          <span class="gate locked">EXACT JOIN</span>
-        </div>
-        <p>Observer deliberately distinguishes a missing observation from an observed zero. Bridge unlocks only after both domains have compatible time and denominator rights.</p>
+        <div class="panel-title"><span>CURRENT GATES</span><b>v0.2</b></div>
+        <div class="gate-row"><span class="gate ok">EARTH LEDGER</span><span class="gate ok">SPACE LEDGER</span><span class="gate warn">312-DAY TABLE</span><span class="gate locked">EXACT JOIN</span></div>
+        <p>Observer distinguishes a missing observation from an observed zero. Bridge unlocks only after both domains have compatible time and denominator rights.</p>
       </section>
     </section>
   </main>
 
-  <footer>
-    <span>JANUS COSMOS OBSERVER · v0.1.0</span>
-    <span>OPEN DATA · OPEN SCIENCE · CONTROL MUST HAVE POWER TO SAY NO</span>
-  </footer>
-
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/globe.gl"></script>
+  <footer><span>JANUS COSMOS OBSERVER · v0.2.0 · SELF-CONTAINED RENDERER</span><span>OPEN DATA · OPEN SCIENCE · CONTROL MUST HAVE POWER TO SAY NO</span></footer>
   <script src="./app.js" defer></script>
 </body>
 </html>
