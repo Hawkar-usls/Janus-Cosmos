@@ -38,6 +38,25 @@
       ]
     }
   },
+  "active_ledgers": {
+    "earth": {
+      "path": "domains/earth/NUC_EVENT_LEDGER_v0.1.json",
+      "status": "ACTIVE_PARTIAL_LEDGER",
+      "rows": 7,
+      "exact_day_bridge_eligible_rows": 1
+    },
+    "space": {
+      "path": "domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json",
+      "status": "ACTIVE_PARTIAL_LEDGER__DAY_ROWS_PENDING",
+      "rows": 10,
+      "exact_day_rows": 0
+    },
+    "bridge_contract": {
+      "path": "domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json",
+      "status": "ACTIVE__EXACT_DAY_JOIN_BLOCKED",
+      "reason": "The 312-row Palomar observation-day table is not yet materialized in Janus-Cosmos."
+    }
+  },
   "core_equation": "EARTH_WITNESS + SPACE_WITNESS + INDEPENDENT_CONTROLS -> SHARED_RESIDUAL_OR_NULL",
   "admission_rule": "No cross-domain extraordinary claim is admitted unless at least two independent domains survive their own preregistered nulls and share a prospectively frozen feature.",
   "epistemic_firewall": [
@@ -68,12 +87,17 @@
       "feature/kusto-open-seafloor-sweep-v1"
     ],
     "protected_paths": ["data/cousteau/"],
-    "statement": "The Earth-Space work was developed on an isolated feature branch, validated by CI, and merged to main without modifying any Cousteau/Kusto branch or protected ocean path."
+    "statement": "The Earth-Space work was developed on an isolated feature branch, validated by CI, and merged to main without modifying any Cousteau/Kusto branch or protected ocean path. Current ledger additions also write only under domains/earth, domains/space, domains/bridge and this manifest."
   },
   "current_external_lineage": {
     "TOPA_expansion": "Hawkar-usls/TOPA:research/uap-nuclear/TOPA-UAP-NUCLEAR-BRANCH-EXPANSION-2026-09-27-v1.1.json",
     "NRC_primary_ledger": "Hawkar-usls/TOPA:research/uap-nuclear/NUC-R1-NRC-RG615-PRIMARY-LEDGER-2026-09-27-v0.1.json",
     "meta_registry_public_dossier": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-UAP-NUCLEAR-FULL-PUBLIC-DOSSIER-2026-09-27-v1.0.json"
+  },
+  "next_materialization_gate": {
+    "id": "BRIDGE-R1-PALOMAR-DAY-MATERIALIZATION",
+    "goal": "Materialize the 312 unique Palomar observation days with candidate, plate/tile opportunity and detector-state columns before any exact-day Earth-Space join.",
+    "current_status": "BLOCKED_ON_DAY_TABLE_ACQUISITION__NOT_A_NEGATIVE_RESULT"
   },
   "canonical_seal": "ONE REPOSITORY, TWO PRIMARY WITNESS DOMAINS: EARTH AND SPACE. KEEP OCEAN/COUSTEAU ISOLATED. LET EACH DOMAIN FALSIFY ITSELF BEFORE THEY ARE ALLOWED TO AGREE."
 }
