@@ -1,0 +1,170 @@
+{
+  "schema": "janus.cosmos.space.palomar_transient_ledger.v0.1",
+  "artifact_id": "JANUS-COSMOS-SPACE-PALOMAR-TRANSIENT-LEDGER-2026-09-27-v0.1",
+  "status": "ACTIVE_PARTIAL_LEDGER__PUBLIC_DATA_PRODUCT_BOUND__EVENT_DAY_ROWS_PENDING",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "SPACE",
+  "purpose": "Materialize the currently reproducible public POSS-I transient/data-product evidence as machine-readable rows for later day-level comparison with the EARTH ledger. This version is intentionally cohort/data-product level because the exact 312 observation-day table has not yet been materialized here.",
+  "representation_contract": {
+    "target_invariant": "detector-bound POSS-I transient/candidate structure and observation opportunity",
+    "must_preserve": [
+      "catalogue release identity and hashes",
+      "candidate and tile counts",
+      "plate/observation opportunity",
+      "astrometric and detector-control lineage",
+      "which results are preregistered versus post-hoc",
+      "whether a row describes a dataset, cohort, model result or detector control"
+    ],
+    "must_not_infer": [
+      "external astrophysical source identity from a point-like plate detection",
+      "UAP identity from a POSS-I candidate",
+      "nuclear causation from temporal association",
+      "cross-domain event identity without exact dates and independent controls"
+    ]
+  },
+  "rows": [
+    {
+      "row_id": "SPACE-DATASET-001-S0-642-20260814",
+      "row_kind": "PUBLIC_DATASET_RELEASE",
+      "upstream_repository": "jannefi/poss1-plate-slice",
+      "release_path": "results/s0-642-20260814",
+      "release_date": "2026-08-14",
+      "source_url": "https://github.com/jannefi/poss1-plate-slice/tree/main/results/s0-642-20260814",
+      "catalogue_rows": 122820,
+      "tile_rows": 31458,
+      "plate_count": 642,
+      "stage_columns": ["src_id", "tile_id", "object_id", "ra", "dec"],
+      "stage_uncompressed_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0",
+      "tile_manifest_uncompressed_sha256": "5dcb90dc5d98550e5a60246aced2b097922a267c69e81f27d45d16a288142a99",
+      "classification_state": "PUBLIC_REPRODUCIBLE_CANDIDATE_CATALOGUE",
+      "bridge_eligible": false,
+      "bridge_blocker": "Catalogue rows do not themselves carry the day-level join key in this compact Janus-Cosmos ledger."
+    },
+    {
+      "row_id": "SPACE-COHORT-001-JANUS-IN-WINDOW",
+      "row_kind": "ANALYSIS_COHORT",
+      "source_repository": "Hawkar-usls/janus-meta-registry",
+      "source_path": "registry/cosmology/JANUS-POSS1-OPEN-PUBLIC-RECONSTRUCTION-RESULT-v1.0.json",
+      "study_window": ["1949-11-19", "1957-04-28"],
+      "plates_in_window": 640,
+      "candidate_rows_on_in_window_plates": 122511,
+      "unique_observation_dates": 312,
+      "exposure_definition": "processed_tiles * FITS EXPOSURE minutes",
+      "exposure_boundary": "Processed tile-time denominator, not exact non-overlapping geometric sky area-time.",
+      "classification_state": "PUBLIC_OPEN_ANALYSIS_COHORT",
+      "bridge_eligible": "PENDING_312_DAY_MATERIALIZATION"
+    },
+    {
+      "row_id": "SPACE-RESULT-001-STRICT-PLUSMINUS1",
+      "row_kind": "PREREGISTERED_MODEL_RESULT",
+      "calendar": "strict open nuclear calendar",
+      "window": "plus_minus_1_day",
+      "IRR": 0.9292915705367555,
+      "IRR_95CI": [0.8239916815302433, 1.0480479869249424],
+      "p": 0.2320255020513916,
+      "likelihood_ratio_p": 0.3053530251014946,
+      "result": "NO_SIGNIFICANT_POSITIVE_ENHANCEMENT",
+      "source_path": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-POSS1-OPEN-PUBLIC-RECONSTRUCTION-RESULT-v1.0.json",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-RESULT-002-BROAD-PLUSMINUS1",
+      "row_kind": "PREREGISTERED_MODEL_RESULT",
+      "calendar": "broad open nuclear calendar",
+      "window": "plus_minus_1_day",
+      "IRR": 0.9432092331404573,
+      "IRR_95CI": [0.8445043024606571, 1.0534507105401696],
+      "p": 0.29987344685191564,
+      "likelihood_ratio_p": 0.38674001059850815,
+      "result": "NO_SIGNIFICANT_POSITIVE_ENHANCEMENT",
+      "source_path": "Hawkar-usls/janus-meta-registry:registry/cosmology/JANUS-POSS1-OPEN-PUBLIC-RECONSTRUCTION-RESULT-v1.0.json",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-CONTROL-001-JPFM2E-SCHEDULE-IDENTITY",
+      "row_kind": "OBSERVATION_SCHEDULE_CONTROL",
+      "source_path": "Hawkar-usls/janus-meta-registry:data/JANUS-PALOMAR-JPFM-2E-SCHEDULE-CONFOUND-DECOMPOSITION-RUN-001.json",
+      "observed_nights": 312,
+      "all_observed_nights_candidate_positive": true,
+      "binary_identity": "ANY_CANDIDATE == PALOMAR_OBSERVED_NIGHT in the dense S0 cohort",
+      "crude_rate_ratio_nuclear_vs_non_nuclear_observed_nights": 1.0118733658718984,
+      "opportunity_only_NB_nuclear_p": 0.7373617539852626,
+      "season_adjusted_NB_nuclear_p": 0.8228009538632833,
+      "month_year_adjusted_NB_nuclear_p": 0.8653764986983075,
+      "schedule_preserving_shift_empirical_p_upper": 0.08314937454010302,
+      "result": "BINARY_ASSOCIATION_IS_SCHEDULE_IDENTITY__NO_ROBUST_POSITIVE_RESIDUAL_RATE_SIGNAL",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-CONTROL-002-ASTROMETRY-REPAIR",
+      "row_kind": "DETECTOR_PIPELINE_CORRECTION",
+      "source_url": "https://github.com/jannefi/poss1-plate-slice/blob/main/results/s0-642-20260814/README.md",
+      "old_release_rows": 135066,
+      "rows_removed_on_8_repaired_tiles": 12273,
+      "rows_after_correct_astrometry_on_those_tiles": 30,
+      "new_release_rows": 122820,
+      "reported_failure": "approximately 11 arcsec astrometry defect on affected tiles allowed ordinary stars to evade catalogue vetoes",
+      "result": "DETECTOR_PIPELINE_ARTIFACT_CAN_CREATE_LARGE_FALSE_CANDIDATE_POPULATION",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-CONTROL-003-GALACTIC-PLANE-FIELD-DENSITY",
+      "row_kind": "SKY_POSITION_CONTROL",
+      "source_url": "https://github.com/jannefi/poss1-plate-slice/blob/main/results/s0-642-20260814/README.md",
+      "region": "RA 270-300 deg, Dec 5-25 deg",
+      "tiles": 801,
+      "mean_S0_rows_per_tile_region": 0.54,
+      "mean_S0_rows_per_tile_elsewhere": 4.23,
+      "ratio_down": 7.9,
+      "interpretation": "Candidate density is strongly field-dependent; sky position must be modeled before temporal/contextual interpretation.",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-CONTROL-004-ZERO-CANDIDATE-TILES",
+      "row_kind": "OBSERVATION_OPPORTUNITY_CONTROL",
+      "source_url": "https://github.com/jannefi/poss1-plate-slice/blob/main/results/s0-642-20260814/README.md",
+      "tiles_with_zero_candidate": 5394,
+      "important_boundary": "A tile absent from stage_S0.csv is not absent from the footprint; observation opportunity must come from the manifest, not from candidate-present rows.",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-CONTROL-005-SUPERCOSMOS-INDEPENDENT-DIGITIZATION",
+      "row_kind": "INDEPENDENT_DIGITIZATION_CONTROL",
+      "source_url": "https://github.com/jannefi/poss1-plate-slice",
+      "reported_rows_removed_if_applied": 49139,
+      "reported_fraction_percent": 40.0,
+      "interpretation": "An independent digitization of the same POSS-I E plates does not confirm two fifths of this candidate catalogue. This locates a major detector/digitization disagreement but does not by itself identify which representation is physically correct.",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "SPACE-LIMIT-001-DAY-LEDGER-NOT-YET-MATERIALIZED",
+      "row_kind": "MISSING_REQUIRED_TABLE",
+      "required_object": "312-row unique observation-day ledger with candidate count, tile/plate opportunity and frozen nuclear-window annotations",
+      "current_status": "NOT_YET_MATERIALIZED_IN_JANUS_COSMOS",
+      "reason": "The public upstream candidate and tile tables are shipped as compressed binary data products; their hashes and counts are bound, but this pass has not yet imported the day-level table into Janus-Cosmos.",
+      "scientific_effect": "Exact EARTH<->SPACE day joins remain BLOCKED rather than silently approximated.",
+      "bridge_eligible": false
+    }
+  ],
+  "row_counts": {
+    "PUBLIC_DATASET_RELEASE": 1,
+    "ANALYSIS_COHORT": 1,
+    "PREREGISTERED_MODEL_RESULT": 2,
+    "OBSERVATION_SCHEDULE_CONTROL": 1,
+    "DETECTOR_PIPELINE_CORRECTION": 1,
+    "SKY_POSITION_CONTROL": 1,
+    "OBSERVATION_OPPORTUNITY_CONTROL": 1,
+    "INDEPENDENT_DIGITIZATION_CONTROL": 1,
+    "MISSING_REQUIRED_TABLE": 1,
+    "total": 10,
+    "exact_day_rows_currently_materialized": 0
+  },
+  "next_actions": [
+    "Materialize the 312 unique observation dates from public plate/tile metadata and bind their source hashes.",
+    "For every observation day, record candidate_count, plate_count, tile_count, exposure opportunity and sky-position summaries.",
+    "Join nuclear-test windows only after the observation-day ledger is frozen.",
+    "Keep detector/artifact controls as first-class columns rather than post-hoc exclusions.",
+    "Only expose day rows to the EARTH bridge after this ledger is source-complete enough to distinguish NO_OBSERVATION from OBSERVED_ZERO."
+  ],
+  "canonical_seal": "THE SPACE LEDGER COUNTS THE DETECTOR AND ITS OPPORTUNITY BEFORE IT COUNTS A TRANSIENT. A POINT ON A PLATE IS NOT YET A SOURCE IN THE WORLD."
+}
