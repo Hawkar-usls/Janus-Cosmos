@@ -1,0 +1,165 @@
+{
+  "schema": "janus.cosmos.residual.multisensor_falsification_result.v1",
+  "artifact_id": "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-RESULT-2026-09-28-v1.0",
+  "prereg_artifact_id": "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-PREREG-2026-09-28-v1.0",
+  "status": "ZERO_PUBLIC_TIER_A_RESIDUALS_IN_FROZEN_CORPUS",
+  "result_summary": {
+    "frozen_cases": 6,
+    "tier_A_physical_residual": 0,
+    "tier_B_unresolved_or_measurement_insufficient": 4,
+    "tier_C_prosaic_or_artifact_supported": 2,
+    "critical_pattern": "ALL_SIX_FAIL_OR_CANNOT_PASS_G3_CALIBRATED_MEASUREMENT_AND_THEREFORE_CANNOT_PASS_G6_ROBUST_ANOMALOUS_KINEMATICS"
+  },
+  "cases": [
+    {
+      "case_id": "WASHINGTON_1952",
+      "classification": "TIER_C_PROSAIC_PROPAGATION_SUPPORTED",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS",
+        "G1_INDEPENDENT_MODALITIES": "FAIL_STRICT__MULTIPLE_RADARS_DO_NOT_SUPPLY_AN_INDEPENDENT_PHYSICAL_MODALITY_AND_VISUAL_SAME_OBJECT_BIND_IS_NOT_ESTABLISHED",
+        "G2_SHARED_OBJECT_IDENTITY": "FAIL_OR_NOT_BOUND",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL__NO_PUBLIC_RAW_CALIBRATED_RADAR_TRACK_SET_BOUND",
+        "G4_ENVIRONMENT_CONTROLS": "PROSAIC_CONTROL_SURVIVES__TEMPERATURE_INVERSION_ANOMALOUS_PROPAGATION",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "FAIL_ANOMALY_PROMOTION__RADAR_PROPAGATION_ARTIFACT_NOT_EXCLUDED",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "NOT_TESTABLE",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "FAIL_FOR_EXTRAORDINARY_PROMOTION"
+      },
+      "official_evidence": [
+        "https://www.cia.gov/resources/csi/static/cia-role-study-UFOs.pdf",
+        "https://www.archives.gov/research/military/air-force/ufos"
+      ],
+      "evidence_note": "CIA historical review states Washington National and Andrews radar scopes tracked blips on 19-20 July and again on 27 July 1952; interceptors found nothing, and a later Civil Aeronautics Administration investigation found such blips common under temperature-inversion conditions. This is sufficient to keep anomalous propagation alive as a competitive ordinary explanation.",
+      "claim_ceiling": "HISTORICALLY_REAL_RADAR_EVENT_FAMILY__NO_ROBUST_ANOMALOUS_PHYSICS"
+    },
+    {
+      "case_id": "RB47_1957",
+      "classification": "TIER_B_STRONG_MULTICHANNEL_REPORT__PUBLIC_MEASUREMENT_INSUFFICIENT",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS_ARCHIVAL_LINEAGE__DIRECT_OFFICIAL_WEB_CASE_BYTES_NOT_FULLY_BOUND",
+        "G1_INDEPENDENT_MODALITIES": "PASS_AT_REPORT_LEVEL__VISUAL_PLUS_ELINT_PLUS_GROUND_RADAR",
+        "G2_SHARED_OBJECT_IDENTITY": "PARTIAL__REPORTED_TIME_BEARING_CORRELATIONS_EXIST_BUT_RAW_SYNCHRONIZED_RECORDS_ARE_NOT_PUBLICLY_BOUND",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL__NO_COMPLETE_PUBLIC_RAW_ELINT_RADAR_AUDIO_OR_TRACK_DATASET_WITH_CALIBRATION_AND_ERROR_MODEL",
+        "G4_ENVIRONMENT_CONTROLS": "PARTIAL__HISTORICAL_REANALYSES_EXIST_BUT_COMPLETE_CORRECT_DATE_CONTROL_RECONSTRUCTION_IS_NOT_BOUND_HERE",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "PARTIAL__MULTIPLE_CHANNELS_REDUCE_SINGLE_SENSOR_FAILURE_RISK_BUT_SIGNAL_ORIGIN_AND_PROPAGATION_CANNOT_BE_RECONSTRUCTED_FROM_RAW_DATA",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "NOT_TESTABLE_UNDER_PREREG_BECAUSE_G3_FAILS",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "PARTIAL__EXTRAORDINARY_PERFORMANCE_REQUIRES_RECONSTRUCTION_BEYOND_SURVIVING_PUBLIC_MEASUREMENTS"
+      },
+      "official_evidence": [
+        "https://www.archives.gov/research/military/air-force/ufos",
+        "https://www.archives.gov/research/topics/uaps/textual-and-microfilm"
+      ],
+      "evidence_note": "The case has official Project Blue Book archival lineage and is unusually strong at the reported cross-channel level. It remains the strongest historical residual in this frozen corpus, but the public record available here does not provide a complete synchronized calibrated dataset sufficient for an independent error-bounded kinematic solution.",
+      "claim_ceiling": "STRONG_REPORTED_MULTICHANNEL_RESIDUAL__NOT_A_PUBLICLY_REPRODUCIBLE_KINEMATIC_ANOMALY"
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "classification": "TIER_B_OFFICIAL_MULTICHANNEL_REPORT__PUBLIC_MEASUREMENT_INSUFFICIENT",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS__DIA_DOD_JCS_MESSAGE",
+        "G1_INDEPENDENT_MODALITIES": "PASS_AT_REPORT_LEVEL__VISUAL_PLUS_AIRBORNE_RADAR_PLUS_REPORTED_AIRCRAFT_SYSTEM_EFFECTS",
+        "G2_SHARED_OBJECT_IDENTITY": "PASS_OR_STRONG_PARTIAL_AT_NARRATIVE_LEVEL",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL__MESSAGE_REPORTS_RADAR_RANGE_AND_CLOSURE_BUT_NO_RAW_RADAR_TAPE_CALIBRATION_OR_ERROR_MODEL_IS_PUBLICLY_BOUND",
+        "G4_ENVIRONMENT_CONTROLS": "INCOMPLETE_IN_BOUND_PRIMARY_RECORD",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "INCOMPLETE__INSTRUMENT_FAILURE_AND_RADAR_BEHAVIOR_CANNOT_BE_INDEPENDENTLY_REPLAYED",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "NOT_TESTABLE_UNDER_PREREG_BECAUSE_G3_FAILS",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "PARTIAL"
+      },
+      "official_evidence": [
+        "https://www.dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/237664/"
+      ],
+      "evidence_note": "The DIA message is contemporaneous and unusually detailed: it records visual observations, an F-4 radar lock reported at 27 nautical miles and reported instrument/communications anomalies. However, the message is a report of measurements rather than the raw radar and aircraft-system data required for independent reconstruction.",
+      "claim_ceiling": "OFFICIAL_MULTICHANNEL_UNRESOLVED_REPORT__NO_PUBLICLY_REPRODUCIBLE_ANOMALOUS_KINEMATICS"
+    },
+    {
+      "case_id": "JAL1628_1986",
+      "classification": "TIER_B_OFFICIAL_ARCHIVE_CASE__PUBLIC_MEASUREMENT_INSUFFICIENT",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS__FAA_NARA_RG237_SERIES",
+        "G1_INDEPENDENT_MODALITIES": "PARTIAL__CREW_VISUAL_PLUS_RADAR_RELATED_RECORDS_EXIST",
+        "G2_SHARED_OBJECT_IDENTITY": "PARTIAL__REQUIRES_EVENT_LEVEL_RECONSTRUCTION_ACROSS_INTERVIEWS_AND_RADAR_MATERIAL",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL_CURRENT_PUBLIC_BIND__NARA_DESCRIBES_SIMULATED_RADAR_IMAGERY_AND_INTERVIEW_NOTES_RATHER_THAN_A_BOUND_RAW_CALIBRATED_RADAR_DATASET",
+        "G4_ENVIRONMENT_CONTROLS": "INCOMPLETE_IN_CURRENT_BIND",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "INCOMPLETE_IN_CURRENT_BIND",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "NOT_TESTABLE_UNDER_PREREG_BECAUSE_G3_FAILS",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "PARTIAL"
+      },
+      "official_evidence": [
+        "https://www.archives.gov/research/topics/uaps/textual-and-microfilm",
+        "https://www.archives.gov/news/articles/do-records-show-proof-of-ufos"
+      ],
+      "evidence_note": "NARA explicitly identifies the FAA JAL 1628 series and says it includes crew interview notes and simulated radar imagery. That is strong provenance but not the raw calibrated radar stream needed for independent physics reconstruction.",
+      "claim_ceiling": "OFFICIAL_ARCHIVAL_UNRESOLVED_CASE__NO_PUBLIC_TIER_A_PHYSICAL_RESIDUAL"
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "classification": "TIER_B_AUTHENTIC_MEDIA_PLUS_MULTICHANNEL_TESTIMONY__PUBLIC_MEASUREMENT_INSUFFICIENT",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS__DOD_AUTHENTICATED_2004_NAVY_VIDEO_AND_GOVERNMENT_HEARING_RECORD",
+        "G1_INDEPENDENT_MODALITIES": "PASS_AT_REPORT_LEVEL__VISUAL_PLUS_SHIPBORNE_OR_AEW_RADAR_CLAIMS_PLUS_LATER_TARGETING_POD_VIDEO",
+        "G2_SHARED_OBJECT_IDENTITY": "PARTIAL__THE_LATER_VIDEO_AND_EARLIER_CLOSE_VISUAL_ENCOUNTER_ARE_NOT_PUBLICLY_LINKED_BY_A_CONTINUOUS_CALIBRATED_TRACK",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL__PUBLIC_RADAR_TAPES_ARE_NOT_AVAILABLE_AND_TARGETING_POD_VIDEO_ALONE_DOES_NOT_FIX_RANGE_FOR_THE_EXTRAORDINARY_SPEED_CLAIMS",
+        "G4_ENVIRONMENT_CONTROLS": "PARTIAL__CLEAR_WEATHER_IS_DOCUMENTED_IN_SWORN_TESTIMONY_BUT_FULL_AIRSPACE_ENVIRONMENTAL_CONTROLS_ARE_NOT_PUBLICLY_BOUND",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "PARTIAL__VIDEO_IS_AUTHENTIC_BUT_PLATFORM_MOTION_PARALLAX_AND_RANGE_DEGENERACY_REQUIRE_TELEMETRY",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "NOT_TESTABLE_UNDER_PREREG_BECAUSE_G3_FAILS",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "FAIL_FOR_TIER_A__THE_MOST_EXTREME_SPEED_CLAIM_DEPENDS_ON_CONTROLLER_REPORT_AND_UNRELEASED_RADAR_DATA"
+      },
+      "official_evidence": [
+        "https://www.defense.gov/News/Releases/release/article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/",
+        "https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf"
+      ],
+      "evidence_note": "DoD authenticated the November 2004 Navy video. In sworn congressional testimony, David Fravor described the visual encounter and radar cueing, but also stated that the relevant radar tape was never released and its location was unknown. This blocks independent verification of the dramatic claimed displacement/speed.",
+      "claim_ceiling": "HIGH_QUALITY_WITNESS_AND_AUTHENTIC_MEDIA_RESIDUAL__NO_PUBLICLY_REPRODUCIBLE_EXTREME_KINEMATICS"
+    },
+    {
+      "case_id": "AARO_PR036_2020",
+      "classification": "TIER_C_SENSOR_MOTION_ARTIFACT_SUPPORTED_FOR_ERRATIC_MOTION_CLAIM",
+      "gate_states": {
+        "G0_PRIMARY_SOURCE_BIND": "PASS__AARO_OFFICIAL_VIDEO_AND_RANGE_FOULER_DOCUMENT_LINEAGE",
+        "G1_INDEPENDENT_MODALITIES": "FAIL_STRICT__IR_SENSOR_PLUS_OPERATOR_NARRATIVE_DO_NOT_ESTABLISH_TWO_INDEPENDENT_PHYSICAL_MODALITIES",
+        "G2_SHARED_OBJECT_IDENTITY": "PASS_WITHIN_SINGLE_SENSOR_STREAM",
+        "G3_CALIBRATED_MEASUREMENT": "FAIL__NO_INDEPENDENT_RANGE_LOCK_OR_FULL_KINEMATIC_TELEMETRY_BOUND",
+        "G4_ENVIRONMENT_CONTROLS": "INCOMPLETE",
+        "G5_SENSOR_ARTIFACT_CONTROLS": "PROSAIC_CONTROL_SURVIVES__AARO_NOTES_MANUAL_TRACKING_AT_4X_ZOOM_LIKELY_AMPLIFIED_RELATIVE_MOTION",
+        "G6_ROBUST_ANOMALOUS_KINEMATICS": "FAIL_OR_NOT_TESTABLE",
+        "G7_INDEPENDENCE_OF_EXTRAORDINARY_CLAIM": "FAIL_FOR_EXTRAORDINARY_PROMOTION"
+      },
+      "official_evidence": [
+        "https://www.aaro.mil/UAP-Cases/Official-UAP-Imagery/",
+        "https://www.aaro.mil/Next-AARO-Home-redesign/Next-Parent/Next-UAP-Report-Documents/"
+      ],
+      "evidence_note": "AARO describes PR-036 as IR footage with an accompanying Range Fouler report, and explicitly notes that manual tracking with 4x zoom likely amplified relative motion effects. The striking 'erratic motion' therefore does not survive the sensor-motion control as robust anomalous kinematics.",
+      "claim_ceiling": "AUTHENTIC_UNIDENTIFIED_SENSOR_TARGET__ERRATIC_MOTION_NOT_PHYSICALLY_ANOMALOUS_ON_PUBLIC_DATA"
+    }
+  ],
+  "ranked_residuals": [
+    {
+      "rank": 1,
+      "case_id": "RB47_1957",
+      "why": "Best reported independence of channels in the frozen historical corpus, but still blocked at calibrated raw-data reconstruction."
+    },
+    {
+      "rank": 2,
+      "case_id": "NIMITZ_2004",
+      "why": "Best combination of authenticated modern media and high-quality firsthand testimony, but the extreme-performance claim is not reproducible without the missing/unreleased radar data and a continuous cross-sensor track."
+    },
+    {
+      "rank": 3,
+      "case_id": "TEHRAN_1976",
+      "why": "Strong contemporaneous military primary report with radar and visual elements, but raw measurements and complete controls are unavailable."
+    }
+  ],
+  "scientific_verdict": {
+    "publicly_reproducible_anomalous_physics_found": false,
+    "unresolved_residuals_exist": true,
+    "strongest_public_residual": "RB47_1957",
+    "strongest_modern_public_residual": "NIMITZ_2004",
+    "reason_for_no_tier_A": "The decisive bottleneck is not absence of intriguing observations; it is absence of a complete public calibrated dataset that binds independent channels to the same object and supports error-bounded physical reconstruction."
+  },
+  "next_gate": {
+    "id": "RESIDUAL-R2-DATA-RECOVERY",
+    "target": "Recover or definitively establish the absence of raw/calibrated sensor records for the top three residuals before any further origin speculation.",
+    "priority_order": ["RB47_1957", "NIMITZ_2004", "TEHRAN_1976"],
+    "promotion_condition": "Only newly recovered primary telemetry, synchronized logs, sensor calibration, or equivalent geometry-enabling records may move a case toward Tier A. More testimony alone cannot."
+  },
+  "canonical_seal": "SIX FAMOUS CASES ENTERED. ZERO PUBLIC TIER-A PHYSICAL ANOMALIES EXITED. THE BOTTLENECK IS MEASUREMENT, NOT MYSTERY."
+}
