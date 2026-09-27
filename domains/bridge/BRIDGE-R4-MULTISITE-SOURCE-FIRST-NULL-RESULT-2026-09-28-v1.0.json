@@ -1,0 +1,888 @@
+{
+  "schema": "janus.cosmos.bridge.multisite_source_first_null_result.v1",
+  "artifact_id": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-RESULT-2026-09-28-v1.0",
+  "generated_at_utc": "2026-09-27T23:18:22.703677+00:00",
+  "status": "PALOMAR_OBSERVATION_OPPORTUNITY_PRESENT__INTERPRET_ONLY_AGAINST_PREREGISTERED_NULLS",
+  "execution_contract": {
+    "earth_cohort_artifact_id": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-EVENT-LEDGER-1949-1957-v0.1",
+    "earth_cohort_status": "FROZEN_BEFORE_NEW_HOLDOUT_PALOMAR_MEMBERSHIP_LOOKUP",
+    "prereg_artifact_id": "BRIDGE-R4-MULTISITE-SOURCE-FIRST-NULL-PREREG-2026-09-28-v1.0",
+    "prereg_status": "FROZEN_BEFORE_NEW_HOLDOUT_PALOMAR_MEMBERSHIP_EVALUATION",
+    "primary_holdout_site_n": 3,
+    "primary_holdout_event_date_n": 6,
+    "site_ids": [
+      "LOS_ALAMOS",
+      "SANDIA_BASE",
+      "SAVANNAH_RIVER_PLANT"
+    ],
+    "radii_days": [
+      0,
+      1,
+      3
+    ],
+    "palomar_study_window": [
+      "1949-11-19",
+      "1957-04-28"
+    ],
+    "palomar_observation_day_rows": 312,
+    "known_outcome_calibration_excluded_from_primary": true,
+    "primary_null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+    "seasonality_sensitivity_null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE"
+  },
+  "source_hashes": {
+    "earth_ledger_sha256": "c46c93272463deb0bf45d316aa396f0b384bc69982a73c8dacd79961e3ddc43d",
+    "palomar_day_ledger_sha256": "4c719bfcf473dcc77e8c65572f3872fa5cb74713ee903869674c8202f36f9cc5",
+    "prereg_sha256": "3ab4a26ef5f5e7297b52020cd8972c70dcbb353d39822f512be9a697505199a5"
+  },
+  "actual_windows": {
+    "radius_0_days": {
+      "T_event_date_hits": 1,
+      "S_sites_with_at_least_one_hit": 1,
+      "U_unique_observation_days": 1,
+      "union_observation_opportunity_dates": [
+        "1950-03-21"
+      ],
+      "sites": {
+        "LOS_ALAMOS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-24",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-24",
+              "translated_center_date": "1950-02-24",
+              "window_start": "1950-02-24",
+              "window_end": "1950-02-24",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-25",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-25",
+              "translated_center_date": "1950-02-25",
+              "window_start": "1950-02-25",
+              "window_end": "1950-02-25",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "SANDIA_BASE": {
+          "event_hits": 1,
+          "site_has_hit": true,
+          "unique_observation_days": 1,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-21",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-21",
+              "translated_center_date": "1950-03-21",
+              "window_start": "1950-03-21",
+              "window_end": "1950-03-21",
+              "observation_opportunity_dates": [
+                "1950-03-21"
+              ],
+              "observation_opportunity_count": 1,
+              "window_hit": true
+            },
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-22",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-22",
+              "translated_center_date": "1950-03-22",
+              "window_start": "1950-03-22",
+              "window_end": "1950-03-22",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": [
+            "1950-03-21"
+          ]
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-05-10",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-05-10",
+              "translated_center_date": "1952-05-10",
+              "window_start": "1952-05-10",
+              "window_end": "1952-05-10",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-08-08",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-08-08",
+              "translated_center_date": "1952-08-08",
+              "window_start": "1952-08-08",
+              "window_end": "1952-08-08",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        }
+      }
+    },
+    "radius_1_days": {
+      "T_event_date_hits": 2,
+      "S_sites_with_at_least_one_hit": 1,
+      "U_unique_observation_days": 2,
+      "union_observation_opportunity_dates": [
+        "1950-03-20",
+        "1950-03-21"
+      ],
+      "sites": {
+        "LOS_ALAMOS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-24",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-24",
+              "translated_center_date": "1950-02-24",
+              "window_start": "1950-02-23",
+              "window_end": "1950-02-25",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-25",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-25",
+              "translated_center_date": "1950-02-25",
+              "window_start": "1950-02-24",
+              "window_end": "1950-02-26",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "SANDIA_BASE": {
+          "event_hits": 2,
+          "site_has_hit": true,
+          "unique_observation_days": 2,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-21",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-21",
+              "translated_center_date": "1950-03-21",
+              "window_start": "1950-03-20",
+              "window_end": "1950-03-22",
+              "observation_opportunity_dates": [
+                "1950-03-20",
+                "1950-03-21"
+              ],
+              "observation_opportunity_count": 2,
+              "window_hit": true
+            },
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-22",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-22",
+              "translated_center_date": "1950-03-22",
+              "window_start": "1950-03-21",
+              "window_end": "1950-03-23",
+              "observation_opportunity_dates": [
+                "1950-03-21"
+              ],
+              "observation_opportunity_count": 1,
+              "window_hit": true
+            }
+          ],
+          "union_observation_opportunity_dates": [
+            "1950-03-20",
+            "1950-03-21"
+          ]
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-05-10",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-05-10",
+              "translated_center_date": "1952-05-10",
+              "window_start": "1952-05-09",
+              "window_end": "1952-05-11",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-08-08",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-08-08",
+              "translated_center_date": "1952-08-08",
+              "window_start": "1952-08-07",
+              "window_end": "1952-08-09",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        }
+      }
+    },
+    "radius_3_days": {
+      "T_event_date_hits": 2,
+      "S_sites_with_at_least_one_hit": 1,
+      "U_unique_observation_days": 2,
+      "union_observation_opportunity_dates": [
+        "1950-03-20",
+        "1950-03-21"
+      ],
+      "sites": {
+        "LOS_ALAMOS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-24",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-24",
+              "translated_center_date": "1950-02-24",
+              "window_start": "1950-02-21",
+              "window_end": "1950-02-27",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-LOSALAMOS-1950-02-25",
+              "site_id": "LOS_ALAMOS",
+              "original_earth_date": "1950-02-25",
+              "translated_center_date": "1950-02-25",
+              "window_start": "1950-02-22",
+              "window_end": "1950-02-28",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "SANDIA_BASE": {
+          "event_hits": 2,
+          "site_has_hit": true,
+          "unique_observation_days": 2,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-21",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-21",
+              "translated_center_date": "1950-03-21",
+              "window_start": "1950-03-18",
+              "window_end": "1950-03-24",
+              "observation_opportunity_dates": [
+                "1950-03-20",
+                "1950-03-21"
+              ],
+              "observation_opportunity_count": 2,
+              "window_hit": true
+            },
+            {
+              "row_id": "EARTH-R4-SANDIA-1950-03-22",
+              "site_id": "SANDIA_BASE",
+              "original_earth_date": "1950-03-22",
+              "translated_center_date": "1950-03-22",
+              "window_start": "1950-03-19",
+              "window_end": "1950-03-25",
+              "observation_opportunity_dates": [
+                "1950-03-20",
+                "1950-03-21"
+              ],
+              "observation_opportunity_count": 2,
+              "window_hit": true
+            }
+          ],
+          "union_observation_opportunity_dates": [
+            "1950-03-20",
+            "1950-03-21"
+          ]
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-05-10",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-05-10",
+              "translated_center_date": "1952-05-10",
+              "window_start": "1952-05-07",
+              "window_end": "1952-05-13",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-SAVANNAH-RIVER-1952-08-08",
+              "site_id": "SAVANNAH_RIVER_PLANT",
+              "original_earth_date": "1952-08-08",
+              "translated_center_date": "1952-08-08",
+              "window_start": "1952-08-05",
+              "window_end": "1952-08-11",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        }
+      }
+    }
+  },
+  "primary_null": {
+    "radius_0_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "shift_min_days": -94,
+          "shift_max_days": 2616,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 2215,
+            "1": 374,
+            "2": 122
+          },
+          "site_has_hit_histogram": {
+            "0": 2215,
+            "1": 496
+          }
+        },
+        "SANDIA_BASE": {
+          "shift_min_days": -119,
+          "shift_max_days": 2591,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 2215,
+            "1": 374,
+            "2": 122
+          },
+          "site_has_hit_histogram": {
+            "0": 2215,
+            "1": 496
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "shift_min_days": -900,
+          "shift_max_days": 1721,
+          "admissible_shift_count": 2622,
+          "event_hit_histogram": {
+            "0": 2075,
+            "1": 481,
+            "2": 66
+          },
+          "site_has_hit_histogram": {
+            "0": 2075,
+            "1": 547
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 19270444062,
+      "T_event_date_hit_histogram": {
+        "0": 10180416875,
+        "1": 5797795725,
+        "2": 2532438470,
+        "3": 625947936,
+        "4": 119680612,
+        "5": 13182100,
+        "6": 982344
+      },
+      "S_site_hit_histogram": {
+        "0": 10180416875,
+        "1": 7243061075,
+        "2": 1712395360,
+        "3": 134570752
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_shift_vectors_T_ge_actual": 0.47170823660078043,
+      "fraction_shift_vectors_T_le_actual": 0.829156429846261,
+      "fraction_shift_vectors_S_ge_actual": 0.47170823660078043,
+      "fraction_shift_vectors_S_le_actual": 0.9041554981266835,
+      "fraction_shift_vectors_T_zero": 0.5282917633992196,
+      "max_T_in_null": 6,
+      "shift_vectors_at_max_T": 982344,
+      "max_S_in_null": 3,
+      "shift_vectors_at_max_S": 134570752
+    },
+    "radius_1_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "shift_min_days": -94,
+          "shift_max_days": 2616,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 1974,
+            "1": 213,
+            "2": 524
+          },
+          "site_has_hit_histogram": {
+            "0": 1974,
+            "1": 737
+          }
+        },
+        "SANDIA_BASE": {
+          "shift_min_days": -119,
+          "shift_max_days": 2591,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 1974,
+            "1": 213,
+            "2": 524
+          },
+          "site_has_hit_histogram": {
+            "0": 1974,
+            "1": 737
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "shift_min_days": -900,
+          "shift_max_days": 1721,
+          "admissible_shift_count": 2622,
+          "event_hit_histogram": {
+            "0": 1616,
+            "1": 764,
+            "2": 242
+          },
+          "site_has_hit_histogram": {
+            "0": 1616,
+            "1": 1006
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 19270444062,
+      "T_event_date_hit_histogram": {
+        "0": 6297028416,
+        "1": 4335993648,
+        "2": 5001881064,
+        "3": 2179422036,
+        "4": 1125875234,
+        "5": 263796272,
+        "6": 66447392
+      },
+      "S_site_hit_histogram": {
+        "0": 6297028416,
+        "1": 8622092472,
+        "2": 3804895160,
+        "3": 546428014
+      },
+      "actual_T": 2,
+      "actual_S": 1,
+      "fraction_shift_vectors_T_ge_actual": 0.44822122262519143,
+      "fraction_shift_vectors_T_le_actual": 0.8113410919694872,
+      "fraction_shift_vectors_S_ge_actual": 0.6732286814076428,
+      "fraction_shift_vectors_S_le_actual": 0.7741970470425997,
+      "fraction_shift_vectors_T_zero": 0.3267713185923572,
+      "max_T_in_null": 6,
+      "shift_vectors_at_max_T": 66447392,
+      "max_S_in_null": 3,
+      "shift_vectors_at_max_S": 546428014
+    },
+    "radius_3_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "shift_min_days": -94,
+          "shift_max_days": 2616,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 1642,
+            "1": 152,
+            "2": 917
+          },
+          "site_has_hit_histogram": {
+            "0": 1642,
+            "1": 1069
+          }
+        },
+        "SANDIA_BASE": {
+          "shift_min_days": -119,
+          "shift_max_days": 2591,
+          "admissible_shift_count": 2711,
+          "event_hit_histogram": {
+            "0": 1642,
+            "1": 152,
+            "2": 917
+          },
+          "site_has_hit_histogram": {
+            "0": 1642,
+            "1": 1069
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "shift_min_days": -900,
+          "shift_max_days": 1721,
+          "admissible_shift_count": 2622,
+          "event_hit_histogram": {
+            "0": 1197,
+            "1": 889,
+            "2": 536
+          },
+          "site_has_hit_histogram": {
+            "0": 1197,
+            "1": 1425
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 19270444062,
+      "T_event_date_hit_histogram": {
+        "0": 3227308308,
+        "1": 2994393892,
+        "2": 5521239060,
+        "3": 3298938292,
+        "4": 2880878037,
+        "5": 896969969,
+        "6": 450716504
+      },
+      "S_site_hit_histogram": {
+        "0": 3227308308,
+        "1": 8044217112,
+        "2": 6370484217,
+        "3": 1628434425
+      },
+      "actual_T": 2,
+      "actual_S": 1,
+      "fraction_shift_vectors_T_ge_actual": 0.6771375802247976,
+      "fraction_shift_vectors_T_le_actual": 0.6093757477626724,
+      "fraction_shift_vectors_S_ge_actual": 0.8325254831898746,
+      "fraction_shift_vectors_S_le_actual": 0.5849125938009222,
+      "fraction_shift_vectors_T_zero": 0.1674745168101254,
+      "max_T_in_null": 6,
+      "shift_vectors_at_max_T": 450716504,
+      "max_S_in_null": 3,
+      "shift_vectors_at_max_S": 1628434425
+    }
+  },
+  "seasonality_sensitivity_null": {
+    "radius_0_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 7,
+            "2": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 7,
+            "1": 1
+          }
+        },
+        "SANDIA_BASE": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 6,
+            "1": 1,
+            "2": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 6,
+            "1": 2
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 4,
+            "1": 3
+          },
+          "site_has_hit_histogram": {
+            "0": 4,
+            "1": 3
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 448,
+      "T_event_date_hit_histogram": {
+        "0": 168,
+        "1": 154,
+        "2": 73,
+        "3": 43,
+        "4": 7,
+        "5": 3
+      },
+      "S_site_hit_histogram": {
+        "0": 168,
+        "1": 206,
+        "2": 68,
+        "3": 6
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_year_shift_vectors_T_ge_actual": 0.625,
+      "fraction_year_shift_vectors_T_le_actual": 0.71875,
+      "fraction_year_shift_vectors_S_ge_actual": 0.625,
+      "fraction_year_shift_vectors_S_le_actual": 0.8348214285714286,
+      "fraction_year_shift_vectors_T_zero": 0.375,
+      "max_T_in_null": 5,
+      "year_shift_vectors_at_max_T": 3,
+      "max_S_in_null": 3,
+      "year_shift_vectors_at_max_S": 6
+    },
+    "radius_1_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 6,
+            "1": 1,
+            "2": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 6,
+            "1": 2
+          }
+        },
+        "SANDIA_BASE": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 6,
+            "2": 2
+          },
+          "site_has_hit_histogram": {
+            "0": 6,
+            "1": 2
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 2,
+            "1": 4,
+            "2": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 2,
+            "1": 5
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 448,
+      "T_event_date_hit_histogram": {
+        "0": 72,
+        "1": 156,
+        "2": 96,
+        "3": 82,
+        "4": 30,
+        "5": 10,
+        "6": 2
+      },
+      "S_site_hit_histogram": {
+        "0": 72,
+        "1": 228,
+        "2": 128,
+        "3": 20
+      },
+      "actual_T": 2,
+      "actual_S": 1,
+      "fraction_year_shift_vectors_T_ge_actual": 0.49107142857142855,
+      "fraction_year_shift_vectors_T_le_actual": 0.7232142857142857,
+      "fraction_year_shift_vectors_S_ge_actual": 0.8392857142857143,
+      "fraction_year_shift_vectors_S_le_actual": 0.6696428571428571,
+      "fraction_year_shift_vectors_T_zero": 0.16071428571428573,
+      "max_T_in_null": 6,
+      "year_shift_vectors_at_max_T": 2,
+      "max_S_in_null": 3,
+      "year_shift_vectors_at_max_S": 20
+    },
+    "radius_3_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "LOS_ALAMOS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 6,
+            "2": 2
+          },
+          "site_has_hit_histogram": {
+            "0": 6,
+            "1": 2
+          }
+        },
+        "SANDIA_BASE": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "admissible_year_offset_count": 8,
+          "event_hit_histogram": {
+            "0": 5,
+            "1": 1,
+            "2": 2
+          },
+          "site_has_hit_histogram": {
+            "0": 5,
+            "1": 3
+          }
+        },
+        "SAVANNAH_RIVER_PLANT": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 1,
+            "1": 4,
+            "2": 2
+          },
+          "site_has_hit_histogram": {
+            "0": 1,
+            "1": 6
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 448,
+      "T_event_date_hit_histogram": {
+        "0": 30,
+        "1": 126,
+        "2": 106,
+        "3": 102,
+        "4": 56,
+        "5": 20,
+        "6": 8
+      },
+      "S_site_hit_histogram": {
+        "0": 30,
+        "1": 208,
+        "2": 174,
+        "3": 36
+      },
+      "actual_T": 2,
+      "actual_S": 1,
+      "fraction_year_shift_vectors_T_ge_actual": 0.6517857142857143,
+      "fraction_year_shift_vectors_T_le_actual": 0.5848214285714286,
+      "fraction_year_shift_vectors_S_ge_actual": 0.9330357142857143,
+      "fraction_year_shift_vectors_S_le_actual": 0.53125,
+      "fraction_year_shift_vectors_T_zero": 0.06696428571428571,
+      "max_T_in_null": 6,
+      "year_shift_vectors_at_max_T": 8,
+      "max_S_in_null": 3,
+      "year_shift_vectors_at_max_S": 36
+    }
+  },
+  "calibration_reuse": {
+    "Oak_Ridge_in_primary_statistic": false,
+    "reason": "Oak Ridge R2/R3 outcomes were known before R4 and therefore cannot contribute holdout evidence."
+  },
+  "interpretation": {
+    "T_r": "Counts frozen holdout site-dates with at least one Palomar observation opportunity. It is not a count of anomalous objects.",
+    "S_r": "Counts independently sourced sites with at least one temporal observation-opportunity hit and is a site-balance diagnostic.",
+    "primary_null": "Each site cluster moves independently as a rigid day pattern; exact aggregate T and S null distributions are computed by count convolution, not Monte Carlo.",
+    "seasonality_null": "Each site cluster moves only by whole calendar years, preserving month/day as a sensitivity check for the Palomar observing calendar.",
+    "no_observation_opportunity": "Means the materialized POSS-I observation-day ledger contains no observing day in the frozen window; it is not an observed-zero sky.",
+    "temporal_overlap": "Means only that Palomar supplied an observation opportunity near the independently frozen Earth date."
+  },
+  "claim_ceiling": "R4 TESTS TEMPORAL OBSERVATION-OPPORTUNITY COINCIDENCE ONLY. IT DOES NOT ESTABLISH THAT AN EARTH EVENT WAS IMAGED, THAT ANY PALOMAR CANDIDATE IS RELATED, OR THAT NUCLEAR ATTRACTION, NONHUMAN ORIGIN, OR CAUSATION EXISTS.",
+  "canonical_seal": "THE EARTH COHORT WAS FROZEN BEFORE THE SKY CALENDAR WAS OPENED. REPORT EVERY RADIUS AND BOTH NULLS; TEMPORAL OPPORTUNITY IS NOT ORIGIN."
+}
