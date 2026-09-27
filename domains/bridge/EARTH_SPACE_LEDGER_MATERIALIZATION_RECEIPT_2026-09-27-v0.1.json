@@ -1,0 +1,79 @@
+{
+  "schema": "janus.cosmos.bridge.ledger_materialization_receipt.v0.1",
+  "artifact_id": "JANUS-COSMOS-EARTH-SPACE-LEDGER-MATERIALIZATION-RECEIPT-2026-09-27-v0.1",
+  "status": "EXECUTED_PARTIAL_MATERIALIZATION__EXACT_DAY_JOIN_NOT_EXECUTED",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "base_before_ledger_work": "98e5a87a0f66d64fda687862cf428b8ed76da1a1",
+  "ledger_commits": {
+    "earth": "7a1fc8a4b8f45394d0983cbb3112dae099c0ee52",
+    "space": "fcb884ed11428371ea8f9bf0e4096608885fca47",
+    "bridge_contract": "bcce713c54d9553fa1050d45e7bc9f54d5e93d2d",
+    "manifest_registration": "ab3e5d19a7b683f021bc124a111aa280491ce388"
+  },
+  "materialized_files": [
+    "domains/earth/NUC_EVENT_LEDGER_v0.1.json",
+    "domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json",
+    "domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json",
+    "DUAL_DOMAIN_MANIFEST.json"
+  ],
+  "earth_materialization": {
+    "rows": 7,
+    "exact_day_bridge_eligible_rows": 1,
+    "primary_content": [
+      "Pantex 2015 source-bound multi-channel event",
+      "Pilgrim 2015 provisional event/reporting-pipeline row pending primary byte bind",
+      "NARA RG615 NRC archive-series row",
+      "NRC 2024 reporting-policy changepoint",
+      "AARO FY2024 nuclear-site UAS aggregate",
+      "AARO FY2025 nuclear-site UAS aggregate",
+      "Los Alamos 1949 historical archival case-family row"
+    ]
+  },
+  "space_materialization": {
+    "rows": 10,
+    "exact_day_rows": 0,
+    "public_release_bound": "jannefi/poss1-plate-slice results/s0-642-20260814",
+    "release_rows": 122820,
+    "release_tiles": 31458,
+    "release_plates": 642,
+    "in_window_rows": 122511,
+    "in_window_plates": 640,
+    "unique_observation_dates_known_from_JANUS_analysis": 312,
+    "stage_S0_uncompressed_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0",
+    "tile_manifest_uncompressed_sha256": "5dcb90dc5d98550e5a60246aced2b097922a267c69e81f27d45d16a288142a99"
+  },
+  "transport_and_retrieval_notes": [
+    {
+      "object": "historical JANUS POSS-I workflow artifact 9242798656",
+      "attempt": "GitHub Actions artifact retrieval",
+      "result": "NOT_AVAILABLE",
+      "interpretation": "Artifact list for workflow run 31868766687 is empty, consistent with artifact expiry/removal; this is not evidence that the historical run did not execute."
+    },
+    {
+      "object": "public stage_S0.csv.gz and tile_manifest.csv.gz",
+      "attempt": "connector/runtime binary ingest",
+      "result": "BINARY_TRANSPORT_NOT_MATERIALIZED_IN_THIS_PASS",
+      "interpretation": "The files are publicly visible and their hashes/counts are source-bound, but the current connector path does not expose compressed binary contents as UTF-8 text. The exact 312-day table therefore remains a materialization task rather than being reconstructed from memory."
+    }
+  ],
+  "cousteau_kusto_isolation": {
+    "policy": "NO_TOUCH",
+    "comparison_base": "98e5a87a0f66d64fda687862cf428b8ed76da1a1",
+    "comparison_head_before_manifest_registration": "bcce713c54d9553fa1050d45e7bc9f54d5e93d2d",
+    "observed_changed_files_before_manifest_registration": [
+      "domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json",
+      "domains/earth/NUC_EVENT_LEDGER_v0.1.json",
+      "domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json"
+    ],
+    "protected_cousteau_or_kusto_path_touched": false,
+    "note": "The manifest update also touches only DUAL_DOMAIN_MANIFEST.json. No ocean/Cousteau/Kusto research file was modified."
+  },
+  "cross_join": {
+    "exact_day_join_executed": false,
+    "status": "BLOCKED_BY_SPACE_DAY_LEDGER_NOT_MATERIALIZED",
+    "reason": "One Earth event is exact-day bridge-eligible, but Space has zero materialized exact-day rows in Janus-Cosmos. Performing the join now would require inventing or approximating the Palomar day table.",
+    "next_gate": "BRIDGE-R1-PALOMAR-DAY-MATERIALIZATION"
+  },
+  "scientific_result": "The repository now contains real source-bound Earth and Space ledgers plus an explicit join contract. The first legitimate cross-domain test is intentionally not yet run because compatible exact-day Space rows are missing.",
+  "canonical_seal": "THE FIRST REAL TABLES EXIST. THE FIRST REAL JOIN WAITS UNTIL BOTH SIDES HAVE THE SAME RIGHT TO SPEAK ABOUT TIME."
+}
