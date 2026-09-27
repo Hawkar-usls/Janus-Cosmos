@@ -1,0 +1,156 @@
+{
+  "schema": "janus.cosmos.bridge.earth_space_ledger_join_contract.v0.1",
+  "artifact_id": "JANUS-COSMOS-EARTH-SPACE-LEDGER-JOIN-CONTRACT-2026-09-27-v0.1",
+  "status": "ACTIVE_CONTRACT__EXACT_DAY_JOIN_BLOCKED_UNTIL_SPACE_DAY_LEDGER_EXISTS",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "BRIDGE",
+  "parents": {
+    "earth_ledger": "domains/earth/NUC_EVENT_LEDGER_v0.1.json",
+    "space_ledger": "domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json",
+    "manifest": "DUAL_DOMAIN_MANIFEST.json"
+  },
+  "purpose": "Define exactly when EARTH and SPACE rows are allowed to be compared, joined or interpreted as a shared residual. This prevents aggregate, policy and detector-pipeline rows from being silently treated as physical events.",
+  "representation_contract": {
+    "target_invariant": "prospectively defined shared temporal/spatial residual surviving independent Earth and Space controls",
+    "earth_representation": "source-bound terrestrial event ledger with reporting-pipeline state",
+    "space_representation": "observation-opportunity-aware Palomar/transient ledger with detector state",
+    "metric_rights": "A temporal coincidence metric is admissible only when both rows have compatible temporal precision and each domain has independently valid observation/reporting opportunity.",
+    "blocked_state": "BLOCKED_NO_VALID_JOIN_CONTRACT"
+  },
+  "row_type_rules": {
+    "EARTH.EVENT": {
+      "joinable": true,
+      "conditions": [
+        "exact or explicitly bounded date/time",
+        "primary/source-bound provenance",
+        "event is not merely an archive/policy aggregate",
+        "classification uncertainty is preserved"
+      ]
+    },
+    "EARTH.AGGREGATE": {
+      "joinable": false,
+      "reason": "Fiscal-year/reporting-period counts cannot be matched to individual Space observation days without event-level rows."
+    },
+    "EARTH.POLICY_CHANGE": {
+      "joinable": false,
+      "reason": "Policy rows are covariates for reporting opportunity, not sky events."
+    },
+    "EARTH.ARCHIVE_SERIES": {
+      "joinable": false,
+      "reason": "Archive coverage is provenance, not event identity."
+    },
+    "SPACE.OBSERVATION_DAY": {
+      "joinable": true,
+      "conditions": [
+        "date materialized from source-bound plate/tile metadata",
+        "observed-zero distinguished from no-observation",
+        "candidate count and opportunity columns present",
+        "detector/astrometry quality state present"
+      ]
+    },
+    "SPACE.COHORT_OR_MODEL_RESULT": {
+      "joinable": false,
+      "reason": "Cohort/model summaries are evidence about populations, not individual day witnesses."
+    }
+  },
+  "join_levels": [
+    {
+      "level": "L0_PROVENANCE_ONLY",
+      "allowed": true,
+      "description": "Compare which sources, detector chains and reporting rules exist. No physical coincidence inference."
+    },
+    {
+      "level": "L1_INTERVAL_CONTEXT",
+      "allowed": true,
+      "description": "Compare broad historical/reporting intervals for design purposes only. No event-level enrichment claim."
+    },
+    {
+      "level": "L2_EXACT_DAY",
+      "allowed": false,
+      "current_blocker": "SPACE ledger has no materialized 312-row observation-day table yet.",
+      "unlock": "Materialize and freeze the 312 unique Palomar observation days with observation opportunity and detector-state columns."
+    },
+    {
+      "level": "L3_SHARED_RESIDUAL",
+      "allowed": false,
+      "current_blocker": "Requires independent survival of Earth and Space null models plus a prospectively frozen shared feature."
+    }
+  ],
+  "future_exact_day_schema": {
+    "required_earth_columns": [
+      "row_id",
+      "event_date",
+      "site",
+      "nuclear_context",
+      "detector_or_witness_channels",
+      "classification_state",
+      "source_grade",
+      "reporting_regime"
+    ],
+    "required_space_columns": [
+      "observation_date",
+      "observed_flag",
+      "candidate_count",
+      "plate_count",
+      "tile_count",
+      "exposure_opportunity",
+      "sky_position_summary",
+      "detector_quality_state",
+      "artifact_control_state"
+    ],
+    "derived_columns_allowed_after_freeze": [
+      "same_day",
+      "lag_days",
+      "predeclared_window_membership",
+      "earth_event_class",
+      "space_candidate_rate_per_opportunity"
+    ]
+  },
+  "null_and_control_contract": {
+    "earth_nulls": [
+      "reporting-policy-era matched controls",
+      "non-nuclear facility or site-class controls where available",
+      "known UAS/drone baseline",
+      "weather/air-traffic/military-activity opportunity controls"
+    ],
+    "space_nulls": [
+      "observation-schedule preserving shifts",
+      "sky-position/field-density controls",
+      "plate/scanner/astrometry quality strata",
+      "observed-zero versus no-observation separation"
+    ],
+    "cross_domain_null": "Preserve Earth event timing and Space observation schedule separately; randomization/permutation must not destroy each domain's internal opportunity structure."
+  },
+  "admissible_outputs": [
+    "EARTH_ONLY",
+    "SPACE_ONLY",
+    "BOTH_SAME_WINDOW",
+    "BOTH_NONALIGNING",
+    "SHARED_RESIDUAL_CANDIDATE",
+    "NULL",
+    "BLOCKED_NO_VALID_JOIN_CONTRACT"
+  ],
+  "extraordinary_claim_firewall": [
+    "BOTH_SAME_WINDOW != SAME_PHYSICAL_OBJECT",
+    "SHARED_RESIDUAL_CANDIDATE != NONHUMAN_ORIGIN",
+    "SHARED_RESIDUAL_CANDIDATE != NUCLEAR_ATTRACTION",
+    "SHARED_RESIDUAL_CANDIDATE != RETROCAUSALITY",
+    "SHARED_RESIDUAL_CANDIDATE != QUANTUM_BRANCHING",
+    "CORRELATION != CAUSATION"
+  ],
+  "current_execution_state": {
+    "earth_rows_materialized": 7,
+    "earth_exact_day_bridge_eligible_rows": 1,
+    "space_rows_materialized": 10,
+    "space_exact_day_rows_materialized": 0,
+    "exact_day_cross_join_executed": false,
+    "reason": "The contract refuses to invent a 312-day Palomar table from aggregate summaries."
+  },
+  "next_execution": {
+    "id": "BRIDGE-R1-PALOMAR-DAY-MATERIALIZATION",
+    "goal": "Create the source-bound 312-row Palomar observation-day table, then freeze it before joining any Earth event dates.",
+    "success": "Every historical day in the study interval can be classified as NO_OBSERVATION, OBSERVED_ZERO or OBSERVED_WITH_CANDIDATES using explicit public metadata.",
+    "failure_or_blocked": "If day-level metadata cannot be source-bound, preserve the block and do not perform a coincidence test."
+  },
+  "canonical_seal": "DO NOT JOIN STORIES. JOIN SOURCE-BOUND ROWS WITH COMPATIBLE TIME, DENOMINATORS AND DETECTOR CONTRACTS."
+}
