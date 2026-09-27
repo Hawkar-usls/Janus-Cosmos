@@ -1,0 +1,19 @@
+{
+  "schema": "janus.cosmos.earth.site_coordinate_registry.v0.2",
+  "artifact_id": "JANUS-COSMOS-EARTH-SITE-COORDINATE-REGISTRY-2026-09-27-v0.2",
+  "status": "ACTIVE_BOOTSTRAP_REGISTRY__AUTOSCAN_EXTENDS_AT_BUILD_TIME",
+  "purpose": "Bootstrap canonical coordinates for named source-bound Earth sites. The Observer build additionally scans Janus-Cosmos and the public JANUS Meta Registry for explicit latitude/longitude pairs, so this file is not a closed list.",
+  "laws": [
+    "REGISTRY_COORDINATE != EVENT_ORIGIN",
+    "AUTOSCAN_DISCOVERY != SCIENTIFIC_PROMOTION",
+    "UNMAPPED_SOURCE_ROW MUST REMAIN VISIBLE AS UNRESOLVED",
+    "RA_DEC != EARTH_LAT_LON"
+  ],
+  "sites": [
+    {"canonical_name":"Pantex Plant","aliases":["Pantex","Pantex Plant"],"lat":35.321,"lon":-101.563,"precision":"approximate public facility centroid","role":"source-bound nuclear-site event location","source":"Janus-Cosmos NUC_EVENT_LEDGER_v0.1"},
+    {"canonical_name":"Pilgrim Nuclear Power Station","aliases":["Pilgrim","Pilgrim Nuclear Power Station","Pilgrim Nuclear Power Plant"],"lat":41.944,"lon":-70.579,"precision":"approximate public facility centroid","role":"source-bound nuclear-site report location","source":"Janus-Cosmos NUC_EVENT_LEDGER_v0.1"},
+    {"canonical_name":"Los Alamos","aliases":["Los Alamos","Los Alamos National Laboratory","LANL"],"lat":35.881,"lon":-106.299,"precision":"approximate city/laboratory area","role":"historical archival case-family location","source":"Janus-Cosmos NUC_EVENT_LEDGER_v0.1"},
+    {"canonical_name":"Palomar Observatory","aliases":["Palomar Observatory","Palomar"],"lat":33.3563,"lon":-116.865,"precision":"observatory site","role":"detector/source-provenance site; not a celestial transient location","source":"Janus-Cosmos SPACE provenance"}
+  ],
+  "canonical_seal": "BOOTSTRAP THE KNOWN SITES; DISCOVER THE REST FROM EXPLICIT SOURCE COORDINATES; NEVER DROP AN UNMAPPED WITNESS."
+}
