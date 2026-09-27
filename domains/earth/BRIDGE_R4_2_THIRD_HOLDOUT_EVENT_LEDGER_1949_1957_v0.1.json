@@ -1,0 +1,209 @@
+{
+  "schema": "janus.cosmos.earth.bridge_r4_2_third_holdout_event_ledger.v0.1",
+  "artifact_id": "BRIDGE-R4.2-THIRD-INDEPENDENT-HOLDOUT-EVENT-LEDGER-1949-1957-v0.1",
+  "status": "FROZEN_BEFORE_R4_2_PRIMARY_PALOMAR_MEMBERSHIP_LOOKUP",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "EARTH",
+  "purpose": "Freeze a third independent exact-day strategic/special-weapons-site aerial-event holdout inside the POSS-I study window before any Palomar observation-day membership lookup for the new primary dates. Preserve Hanford and Offutt as unopened holdbacks until stronger direct primary-byte/page binding is closed.",
+  "palomar_study_window": {
+    "start": "1949-11-19",
+    "end": "1957-04-28",
+    "use_in_this_artifact": "ELIGIBILITY_BOUND_ONLY__NO_R4_2_PRIMARY_OR_SEALED_HOLDBACK_MEMBERSHIP_LOOKUP"
+  },
+  "primary_unit": "UNIQUE_SITE_DATE",
+  "same_site_same_day_reports_collapse_to_one_primary_unit": true,
+  "source_selection_firewall": {
+    "primary_dates_selected_without_Palomar_day_membership_lookup": true,
+    "Palomar_candidate_count_used_for_selection": false,
+    "all_R2_R3_R4_R4_1_exposed_dates_excluded_from_R4_2_primary": true,
+    "all_R4_and_R4_1_primary_sites_excluded_from_R4_2_primary": true,
+    "Hanford_1950_07_30_membership_lookup_forbidden_until_primary_byte_or_official_page_bind": true,
+    "Offutt_1952_06_05_membership_lookup_forbidden_until_direct_case_byte_bind": true,
+    "out_of_study_window_events_excluded": true,
+    "same_site_same_day_report_multiplicity_cannot_inflate_primary_n": true,
+    "case_disposition_not_used_as_selection_filter": true,
+    "source_requirement": "Exact calendar day plus Project Blue Book / Air Intelligence / federal archival lineage. Where bytes are accessed through a public scan mirror rather than an official host, that limitation is explicit and the scan hash is preserved when available.",
+    "anti_cherry_pick_law": "FREEZE THE THIRD EARTH HOLDOUT BEFORE OPENING THE SKY CALENDAR; DO NOT SELECT ON PALOMAR MEMBERSHIP OR ON WHETHER BLUE BOOK CALLED A CASE UNKNOWN."
+  },
+  "primary_holdout_sites": [
+    {
+      "site_id": "DAVIS_MONTHAN",
+      "site": "Davis-Monthan Air Force Base, Tucson, Arizona",
+      "strategic_context": "Strategic Air Command bomber installation; 43rd Bombardment Wing / B-36 era",
+      "context_state": "HISTORICAL_USAF_SAC_CONTEXT_BOUND_SEPARATELY_FROM_EVENT_CLASSIFICATION",
+      "source_bundle": {
+        "archive_lineage": "Project Blue Book / Project 10073 and Air Intelligence Information Report archival records; National Archives microfilm lineage",
+        "source_grade": "P0_OFFICIAL_ARCHIVAL_LINEAGE__PRIMARY_SCAN_MIRROR_BOUND",
+        "limitations": "Publicly accessible scans are used as reproductions of federal Project Blue Book records. The repository does not represent the mirror host itself as the originating federal authority.",
+        "sources": [
+          {
+            "date": "1952-05-01",
+            "record_type": "PROJECT_10073_RECORD_CARD_AND_CASE_FILE",
+            "public_scan_page": "https://www.govweird.com/topics/ufo/project-blue-book/davis-monthan-afb-az-may-1952",
+            "nara_naid_reported_by_scan_index": "28941698",
+            "binding_state": "PROJECT_BLUE_BOOK_RECORD_CARD_VISIBLE__NARA_NAID_BOUND__HISTORICAL_CASE_FILE_LINEAGE_VERIFIED",
+            "limitation": "Surviving/reconstructed case-file history is complicated; R4.2 uses only the exact federal case date and does not depend on the case being classified unknown."
+          },
+          {
+            "date": "1952-08-06",
+            "record_type": "AIR_INTELLIGENCE_INFORMATION_REPORT_IR_130_52",
+            "reference_no": "IR-130-52",
+            "public_scan_page": "https://www.ufoscans.com/1952-08-8757519-tucson-arizona/",
+            "scan_sha256": "cee14c16b9444fb2406f16c2a6cb350d90f60908e11eebcbf3aa989c12db59d5",
+            "binding_state": "AIR_INTELLIGENCE_REPORT_SCAN_AND_SHA256_BOUND__PROJECT_BLUE_BOOK_ARCHIVE_LINEAGE_VERIFIED"
+          }
+        ]
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-2-DAVIS-MONTHAN-1952-05-01",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-05-01",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_2",
+          "bridge_eligible": true,
+          "bridge_key": "1952-05-01",
+          "reported_summary": "Project Blue Book records preserve a Davis-Monthan exact-day case on 1 May 1952 involving base personnel and a B-36-related visual report. R4.2 records only the source-bound date and site.",
+          "classification_state": "DOCUMENTED_PROJECT_BLUE_BOOK_EXACT_DAY_CASE__DISPOSITION_NOT_USED_FOR_SELECTION",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_ARCHIVAL_REPORTING_EVENT_ONLY__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        },
+        {
+          "row_id": "EARTH-R4-2-DAVIS-MONTHAN-1952-08-06",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-08-06",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_2",
+          "bridge_eligible": true,
+          "bridge_key": "1952-08-06",
+          "reported_summary": "Air Intelligence Information Report IR-130-52 records an exact-day Davis-Monthan tower/C-47 observation on 6 August 1952. The intelligence assessment discussed a balloon explanation; R4.2 retains the date regardless of explanatory disposition to avoid cherry-picking only unresolved cases.",
+          "classification_state": "DOCUMENTED_AIR_INTELLIGENCE_EXACT_DAY_REPORT__CONVENTIONAL_EXPLANATION_NOT_EXCLUDED",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_REPORTING_EVENT_ONLY__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    },
+    {
+      "site_id": "BARKSDALE_AFB",
+      "site": "Barksdale Air Force Base, Louisiana",
+      "strategic_context": "Strategic Air Command installation; 301st Bombardment Wing / air-refueling context",
+      "context_state": "HISTORICAL_USAF_SAC_CONTEXT_BOUND_SEPARATELY_FROM_EVENT_CLASSIFICATION",
+      "source_bundle": {
+        "archive_lineage": "Project 10073 / Project Blue Book record card and Air Intelligence Information Report",
+        "source_grade": "P0_OFFICIAL_ARCHIVAL_LINEAGE__PRIMARY_SCAN_MIRROR_BOUND",
+        "reference_no": "IR-137-52",
+        "public_scan_page": "https://www.ufoscans.com/1952-08-8769891-barksdale-afb-louisiana/",
+        "scan_sha256": "be5081e19975f16a06e7d0ed10eff1a43f82c62e4ee573b1a8e12d505e092b69",
+        "binding_state": "PROJECT_10073_AND_AIR_INTELLIGENCE_REPORT_SCAN_AND_SHA256_BOUND",
+        "limitations": "The public mirror supplies the scan and file hash; federal Project Blue Book provenance is the authority lineage, not the mirror host."
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-2-BARKSDALE-1952-08-24",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-08-24",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_2",
+          "bridge_eligible": true,
+          "bridge_key": "1952-08-24",
+          "reported_summary": "Project 10073 / Air Intelligence Report IR-137-52 records an exact-day Barksdale AFB observation on 24 August 1952 by military and civilian witnesses. R4.2 uses only the frozen site-date as its primary unit.",
+          "classification_state": "DOCUMENTED_PROJECT_10073_EXACT_DAY_MULTI_WITNESS_REPORT__DISPOSITION_NOT_USED_FOR_SELECTION",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_ARCHIVAL_REPORTING_EVENT_ONLY__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    },
+    {
+      "site_id": "LAKE_CHARLES_AFB",
+      "site": "Lake Charles Air Force Base, Louisiana",
+      "strategic_context": "Strategic Air Command bombardment installation; 68th Bombardment Wing medium / B-29 era",
+      "context_state": "HISTORICAL_USAF_SAC_CONTEXT_BOUND_SEPARATELY_FROM_EVENT_CLASSIFICATION",
+      "source_bundle": {
+        "archive_lineage": "Project 10073 / Project Blue Book record card and Air Intelligence Information Report",
+        "source_grade": "P0_OFFICIAL_ARCHIVAL_LINEAGE__PRIMARY_SCAN_MIRROR_BOUND",
+        "reference_no": "IR-162-52",
+        "public_scan_page": "https://www.ufoscans.com/1952-10-6383700-lakecharlesafb-la/",
+        "scan_sha256": "b0d58cdb4d20eb333b3584668449fbac63e1aa3cd1076d806ec6202c3efa9a43",
+        "binding_state": "PROJECT_10073_AND_AIR_INTELLIGENCE_REPORT_SCAN_AND_SHA256_BOUND",
+        "limitations": "The public mirror supplies the scan and file hash; federal Project Blue Book provenance is the authority lineage, not the mirror host."
+      },
+      "rows": [
+        {
+          "row_id": "EARTH-R4-2-LAKE-CHARLES-1952-10-06",
+          "row_kind": "EVENT_DATE_CLUSTER",
+          "date": "1952-10-06",
+          "date_precision": "DAY",
+          "cohort_role": "HOLDOUT_PRIMARY_NEW_R4_2",
+          "bridge_eligible": true,
+          "bridge_key": "1952-10-06",
+          "reported_summary": "Project 10073 / Air Intelligence Report IR-162-52 records an exact-day Lake Charles AFB observation on 6 October 1952 by multiple USAF personnel. R4.2 freezes the site-date without using later interpretive disposition as a selection criterion.",
+          "classification_state": "DOCUMENTED_PROJECT_10073_EXACT_DAY_MULTI_WITNESS_REPORT__DISPOSITION_NOT_USED_FOR_SELECTION",
+          "claim_ceiling": "EXACT_DAY_FEDERAL_ARCHIVAL_REPORTING_EVENT_ONLY__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+        }
+      ]
+    }
+  ],
+  "sealed_future_holdbacks": [
+    {
+      "site_id": "HANFORD_AEC_PLANT",
+      "site": "Hanford Atomic Energy Commission Plant, Washington",
+      "date": "1950-07-30",
+      "date_precision": "DAY_AS_SERIES_ONSET_IN_MEMORANDUM",
+      "cohort_role": "FROZEN_PENDING_PRIMARY_BYTE_OR_OFFICIAL_PAGE_BIND__DO_NOT_EVALUATE_R4_2",
+      "bridge_eligible": false,
+      "palomar_membership_lookup_forbidden": true,
+      "identified_document": {
+        "title": "Memorandum for Record — Subject: Flying Discs",
+        "document_date": "1950-08-04",
+        "author": "U. G. Carlan, Major, Survey Section",
+        "public_scan_mirror": "https://www.nicap.org/docs/hanford_let500804doc.pdf",
+        "binding_state": "PRIMARY_DOCUMENT_SCAN_IDENTIFIED_AND_TRANSCRIPTION_VERIFIED__OFFICIAL_FEDERAL_HOST_AND_REPOSITORY_BYTE_HASH_NOT_YET_BOUND"
+      },
+      "source_summary": "The memorandum states that since 30 July 1950 round objects had been sighted over the Hanford AEC Plant, Air Force jets attempted interception, and AEC investigation continued.",
+      "promotion_rule": "DO_NOT_QUERY_PALOMAR_UNTIL_PRIMARY_BYTE_OR_EQUIVALENT_OFFICIAL_PAGE_BIND_IS_CLOSED_IN_A_FUTURE_PREREGISTERED_HOLDOUT."
+    },
+    {
+      "site_id": "OFFUTT_AFB",
+      "site": "Offutt Air Force Base, Nebraska",
+      "date": "1952-06-05",
+      "date_precision": "DAY",
+      "cohort_role": "PROVISIONAL_PENDING_DIRECT_CASE_BYTE_BIND__DO_NOT_EVALUATE_R4_2",
+      "bridge_eligible": false,
+      "palomar_membership_lookup_forbidden": true,
+      "source_summary": "A Project Blue Book exact-day Offutt case is preserved in secondary/compiled archival indexes, but a sufficiently direct case-byte/page bind was not closed before the R4.2 Earth freeze.",
+      "promotion_rule": "DO_NOT_PROMOTE_AFTER_PALOMAR_LOOKUP; BIND THE DIRECT CASE FILE FIRST."
+    }
+  ],
+  "explicit_exclusions": [
+    {"site": "Oak Ridge, Tennessee", "reason": "R2/R3 outcomes already exposed."},
+    {"site": "Los Alamos, New Mexico", "reason": "R4 primary site already exposed."},
+    {"site": "Sandia Base, New Mexico", "reason": "R4 primary site already exposed."},
+    {"site": "Savannah River Plant, South Carolina", "reason": "R4 primary site already exposed."},
+    {"site": "Holloman / White Sands, New Mexico", "reason": "R4.1 primary site already exposed."},
+    {"site": "Walker AFB / 509th, New Mexico", "reason": "R4.1 primary site already exposed."}
+  ],
+  "row_counts": {
+    "primary_holdout_sites": 3,
+    "primary_holdout_unique_site_dates": 4,
+    "primary_holdout_dates_by_site": {
+      "DAVIS_MONTHAN": 2,
+      "BARKSDALE_AFB": 1,
+      "LAKE_CHARLES_AFB": 1
+    },
+    "sealed_future_holdback_sites": 2,
+    "sealed_future_holdback_dates": 2
+  },
+  "frozen_primary_holdout_dates": [
+    {"site_id": "DAVIS_MONTHAN", "date": "1952-05-01"},
+    {"site_id": "DAVIS_MONTHAN", "date": "1952-08-06"},
+    {"site_id": "BARKSDALE_AFB", "date": "1952-08-24"},
+    {"site_id": "LAKE_CHARLES_AFB", "date": "1952-10-06"}
+  ],
+  "next_gate": {
+    "id": "BRIDGE-R4.2-B-THIRD-HOLDOUT-NULL-PREREG",
+    "must_happen_before": "ANY_R4_2_PRIMARY_PALOMAR_DATE_MEMBERSHIP_EVALUATION",
+    "required_windows": ["EXACT_DAY", "PLUS_MINUS_1_DAY", "PLUS_MINUS_3_DAY"],
+    "required_primary_statistic": "NUMBER_OF_R4_2_PRIMARY_HOLDOUT_SITE_DATES_WITH_AT_LEAST_ONE_PALOMAR_OBSERVATION_OPPORTUNITY",
+    "required_site_balance_statistic": "NUMBER_OF_R4_2_PRIMARY_SITES_WITH_AT_LEAST_ONE_HIT",
+    "null_requirement": "Preserve each new site's internal date clustering; exclude all previously exposed sites/dates and both sealed holdbacks."
+  },
+  "claim_ceiling": "THIS LEDGER ESTABLISHES ONLY A THIRD SOURCE-FIRST EARTH DATE COHORT. IT DOES NOT ESTABLISH PALOMAR COINCIDENCE, ANOMALOUS ORIGIN, NUCLEAR ATTRACTION, STRATEGIC-SITE ATTRACTION, OR EARTH-SPACE CAUSAL COUPLING.",
+  "canonical_seal": "THE THIRD HOLDOUT IS FROZEN BEFORE THE SKY CALENDAR OPENS. HANFORD AND OFFUTT REMAIN UNSPENT. CASE DISPOSITION DOES NOT SELECT THE DATES."
+}
