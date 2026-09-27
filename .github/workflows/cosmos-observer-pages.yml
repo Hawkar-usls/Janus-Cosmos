@@ -39,9 +39,17 @@ jobs:
               with p.open(encoding='utf-8') as f:
                   json.load(f)
               print('PASS JSON', p)
-          for p in [Path('docs/observer/index.html'), Path('docs/observer/styles.css'), Path('docs/observer/app.js')]:
+          for p in [
+              Path('docs/observer/index.html'),
+              Path('docs/observer/styles.css'),
+              Path('docs/observer/app.js'),
+              Path('docs/observer/plate_manifest_seed.csv'),
+          ]:
               assert p.exists() and p.stat().st_size > 0, p
               print('PASS ASSET', p)
+          app = Path('docs/observer/app.js').read_text(encoding='utf-8')
+          assert 'Globe()' not in app and 'THREE.' not in app, 'Observer must not depend on external Globe/Three runtime'
+          print('PASS SELF-CONTAINED RENDER CONTRACT')
           PY
       - name: Enforce Cousteau/Kusto no-touch boundary
         run: |
@@ -66,10 +74,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Build self-contained observer bundle
+        run: |
+          set -euo pipefail
+          rm -rf site
+          mkdir -p site/data
+          cp docs/observer/index.html site/
+          cp docs/observer/styles.css site/
+          cp docs/observer/app.js site/
+          cp domains/earth/NUC_EVENT_LEDGER_v0.1.json site/data/earth-ledger.json
+          cp domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json site/data/space-ledger.json
+          cp domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json site/data/bridge-ledger.json
+          cp docs/observer/plate_manifest_seed.csv site/data/plate_manifest.csv
+
+          TMP="$(mktemp)"
+          if curl -fsSL --retry 3 --connect-timeout 10 --max-time 45 \
+            https://raw.githubusercontent.com/jannefi/poss1-plate-slice/main/data/plate_manifest.csv \
+            -o "$TMP"; then
+            python - "$TMP" <<'PY'
+          import csv, pathlib, sys
+          p = pathlib.Path(sys.argv[1])
+          rows = list(csv.DictReader(p.open(encoding='utf-8')))
+          assert len(rows) >= 7, len(rows)
+          assert {'plate_id','ra_deg','dec_deg'} <= set(rows[0]), rows[0].keys()
+          print('PASS UPSTREAM PLATE MANIFEST', len(rows))
+          PY
+            mv "$TMP" site/data/plate_manifest.csv
+          else
+            echo 'WARN: upstream plate manifest unavailable; shipping source-bound seed instead.'
+            rm -f "$TMP"
+          fi
+
+          python - <<'PY'
+          import json, pathlib
+          root = pathlib.Path('site/data')
+          for name in ['earth-ledger.json','space-ledger.json','bridge-ledger.json']:
+              json.load((root/name).open(encoding='utf-8'))
+          assert (root/'plate_manifest.csv').stat().st_size > 0
+          print('PASS BUILT SITE DATA')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/observer
+          path: site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
