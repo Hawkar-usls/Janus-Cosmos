@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.residual.data_recovery_contract.v1",
+  "artifact_id": "RESIDUAL-R2-DATA-RECOVERY-CONTRACT-2026-09-28-v1.0",
+  "status": "FROZEN_AFTER_R1__RB47_DISCOVERY_SEARCH_ALREADY_PARTIAL",
+  "parent_result": "RESIDUAL-R1-MULTISENSOR-FALSIFICATION-RESULT-2026-09-28-v1.0",
+  "purpose": "Attempt to recover geometry-enabling primary data for the three highest-ranked R1 residuals. R2 cannot promote a case using additional testimony, later narrative synthesis, or a reanalysis that substitutes assumptions for missing sensor records.",
+  "transparency_note": "The R2 target set and priority order were frozen in R1 before R2 began. A targeted RB-47 discovery search was already underway before this standalone contract file was committed; this is recorded rather than presented as a blind preregistration.",
+  "frozen_targets": [
+    "RB47_1957",
+    "NIMITZ_2004",
+    "TEHRAN_1976"
+  ],
+  "required_data_classes": {
+    "D0_CONTEMPORANEOUS_PRIMARY_REPORT": "Official report created near the event, not only retrospective testimony.",
+    "D1_RAW_SENSOR_RECORD": "Raw or minimally processed radar/ELINT/IR/optical/avionics data with preserved timebase.",
+    "D2_SENSOR_CALIBRATION_CONFIGURATION": "Mode, field of view, frequency, scan geometry, gain/range settings, platform state or equivalent information needed to interpret D1.",
+    "D3_PLATFORM_NAVIGATION_TIMEBASE": "Position, velocity, attitude and synchronized timestamps sufficient to reconstruct observer geometry.",
+    "D4_CROSS_SENSOR_SYNCHRONIZATION": "Records that independently bind two or more channels to the same event/object on a common timebase.",
+    "D5_ENVIRONMENT_TRAFFIC_CONTROLS": "Weather, astronomical, aircraft/balloon/traffic and propagation context sufficient to attack ordinary alternatives."
+  },
+  "promotion_gate": "A case may reopen G3/G6 from R1 only if public primary material supplies D1 plus enough of D2-D4 to calculate at least one physical parameter with an explicit uncertainty interval. D0 alone is insufficient.",
+  "search_priority": [
+    {
+      "case_id": "RB47_1957",
+      "primary_repositories": ["NARA Project Blue Book / RG341", "Department of War PURSUE releases"],
+      "specific_targets": ["17 July 1957 case file", "Duncanville 745th ACWRON TWX", "E.T. Piwetz case summary", "Major Chase AISOP #2 Airborne Observer Data Sheet", "raw ALA-6/APR-9/ALA-5 recordings or logs", "ground radar plot/tape"]
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "primary_repositories": ["DoD", "Department of the Navy/SECNAV FOIA Reading Room", "NAVAIR FOIA"],
+      "specific_targets": ["USS Princeton radar tape/track data", "E-2C radar data", "F/A-18 APG-73 radar data", "original ATFLIR file/metadata beyond public video", "CIC/radar contact logs", "synchronized platform/navigation data"]
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "primary_repositories": ["DIA FOIA Electronic Reading Room", "DoD/JCS message archives", "NARA/Presidential holdings where applicable"],
+      "specific_targets": ["F-4 radar tape or scope recording", "F-4 avionics/maintenance record", "Mehrabad/air-defense ground radar logs", "air-traffic logs", "weapon-system malfunction record", "synchronized aircraft position/time data"]
+    }
+  ],
+  "result_states": {
+    "RECOVERED_GEOMETRY_ENABLING_PRIMARY_DATA": "At least D1 plus sufficient D2-D4 recovered publicly.",
+    "CONTEMPORANEOUS_REPORTS_ONLY": "D0 recovered but no geometry-enabling sensor record.",
+    "PUBLIC_ARCHIVE_SERIES_IDENTIFIED_NOT_DIGITALLY_RECOVERED": "Official custody is known but target bytes were not obtained in this run.",
+    "NOT_FOUND_IN_SEARCHED_PUBLIC_OFFICIAL_SOURCES": "No qualifying primary data found in the enumerated official public sources; this does not prove nonexistence elsewhere.",
+    "KNOWN_UNRELEASED_OR_LOCATION_UNKNOWN": "An official/hearing source explicitly describes a relevant record as unreleased, missing, or of unknown location."
+  },
+  "stop_rule": "After each frozen target has an inventory across D0-D5 and the named official public repositories have been searched, freeze R2. Do not widen to additional cases or testimony-only sources to manufacture a recovery.",
+  "claim_ceiling": "Failure to recover public raw data is an evidence-access result, not evidence that an event was ordinary and not evidence of concealment.",
+  "canonical_seal": "REPORTS CAN PRESERVE AN EVENT. ONLY MEASUREMENTS CAN RECONSTRUCT ITS PHYSICS. R2 RECOVERS MEASUREMENTS OR RECORDS THEIR PUBLIC ABSENCE; IT DOES NOT REPLACE THEM WITH STORIES."
+}
