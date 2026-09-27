@@ -1,0 +1,75 @@
+name: JANUS Palomar Day Materialization
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/materialize_palomar_day_ledger.py'
+      - '.github/workflows/palomar-day-materialization.yml'
+  schedule:
+    - cron: '43 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: janus-palomar-day-materialization
+  cancel-in-progress: true
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Materialize source-bound 312-day Palomar ledger
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/materialize_palomar_day_ledger.py
+          python tools/materialize_palomar_day_ledger.py \
+            --out domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
+
+      - name: Validate scientific gate
+        run: |
+          python - <<'PY'
+          import json
+          p='domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+          d=json.load(open(p,encoding='utf-8'))
+          assert d['status']=='MATERIALIZED_SOURCE_BOUND_312_DAY_LEDGER'
+          assert d['counts']['rows']==312, d['counts']
+          assert d['counts']['plates_in_window']==640, d['counts']
+          assert d['counts']['candidate_rows_in_window']==122511, d['counts']
+          assert len({r['date'] for r in d['rows']})==312
+          required={'date','observed_flag','candidate_count','plate_count','tile_count','exposure','sky_position','detector_quality','artifact_state'}
+          for r in d['rows']:
+              assert required <= set(r), (required-set(r), r.get('date'))
+              assert r['observed_flag'] is True
+          print('PASS PALOMAR 312-DAY SCIENTIFIC GATE')
+          PY
+
+      - name: Commit ledger if source-derived content changed
+        id: commit
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            echo 'NO CHANGE: canonical ledger already matches source reconstruction.'
+            exit 0
+          fi
+          git config user.name 'JANUS Cosmos Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
+          git commit -m 'Materialize source-bound 312-day Palomar ledger'
+          git push origin HEAD:main
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+
+      - name: Refresh Observer after ledger update
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cosmos-observer-pages.yml --ref main
