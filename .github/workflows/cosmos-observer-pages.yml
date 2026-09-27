@@ -9,6 +9,7 @@ on:
       - 'domains/space/**'
       - 'domains/bridge/**'
       - 'tools/build_observer_index.py'
+      - 'tools/build_observer_index_v0_5.py'
       - '.github/workflows/cosmos-observer-pages.yml'
   pull_request:
     branches: [main]
@@ -18,6 +19,7 @@ on:
       - 'domains/space/**'
       - 'domains/bridge/**'
       - 'tools/build_observer_index.py'
+      - 'tools/build_observer_index_v0_5.py'
       - '.github/workflows/cosmos-observer-pages.yml'
   schedule:
     - cron: '17 * * * *'
@@ -40,7 +42,7 @@ jobs:
       - name: Validate observer inputs
         run: |
           set -euo pipefail
-          python -m py_compile tools/build_observer_index.py
+          python -m py_compile tools/build_observer_index.py tools/build_observer_index_v0_5.py
           python - <<'PY'
           import json
           from pathlib import Path
@@ -70,15 +72,19 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/smoke"
           cp docs/observer/plate_manifest_seed.csv "$RUNNER_TEMP/smoke/plates.csv"
-          python tools/build_observer_index.py --repo-root . --plate-manifest "$RUNNER_TEMP/smoke/plates.csv" --out "$RUNNER_TEMP/smoke/index.json"
+          DAY_ARGS=()
+          if [ -f domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json ]; then
+            DAY_ARGS=(--day-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json)
+          fi
+          python tools/build_observer_index_v0_5.py --repo-root . --plate-manifest "$RUNNER_TEMP/smoke/plates.csv" "${DAY_ARGS[@]}" --out "$RUNNER_TEMP/smoke/index.json"
           python - "$RUNNER_TEMP/smoke/index.json" <<'PY'
           import json, sys
           d=json.load(open(sys.argv[1],encoding='utf-8'))
           assert d['counts']['earth_points'] >= 3, d['counts']
           assert d['counts']['poss1_plate_centers'] >= 7, d['counts']
-          assert d['bridge']['exact_day_join_gate'].startswith('BLOCKED')
-          assert d['representation_quotient']['law'].startswith('SAME_SKY_ENTITY')
-          print('PASS OBSERVER INDEX SMOKE', d['counts'])
+          assert 'suppressed_earth_coordinate_rows' in d['representation_quotient']
+          assert 'primary_test_state_counts' in d['bridge']
+          print('PASS OBSERVER INDEX V0.5 SMOKE', d['counts'], d['bridge']['primary_test_state_counts'])
           PY
 
       - name: Enforce Cousteau/Kusto no-touch boundary
@@ -144,7 +150,7 @@ jobs:
           if [ -f domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json ]; then
             DAY_ARGS=(--day-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json)
           fi
-          python tools/build_observer_index.py --repo-root . "${META_ARGS[@]}" --plate-manifest site/data/plate_manifest.csv "${DAY_ARGS[@]}" --out site/data/observer-index.json
+          python tools/build_observer_index_v0_5.py --repo-root . "${META_ARGS[@]}" --plate-manifest site/data/plate_manifest.csv "${DAY_ARGS[@]}" --out site/data/observer-index.json
 
           python - <<'PY'
           import json, pathlib
@@ -155,12 +161,13 @@ jobs:
           assert idx['counts']['earth_points'] >= 3
           assert idx['counts']['poss1_plate_centers'] >= 7
           q=idx['representation_quotient']
-          assert q['suppressed_sky_coordinate_rows'] >= 0
           if idx['bridge']['palomar_day_rows_materialized'] == 312:
               assert q['suppressed_sky_coordinate_rows'] >= 640, q
               assert q['plate_centers_enriched_with_observation_day'] >= 640, q
+          assert q['suppressed_earth_coordinate_rows'] >= 1, q
           print('AUTOSYNC COUNTS', idx['counts'])
-          print('AUTOSYNC BRIDGE', idx['bridge'])
+          print('AUTOSYNC PRESENTATION BRIDGE', idx['bridge']['presentation_match_state_counts'])
+          print('AUTOSYNC PRIMARY BRIDGE', idx['bridge']['primary_test_state_counts'])
           print('AUTOSYNC QUOTIENT', q)
           PY
       - uses: actions/configure-pages@v5
