@@ -1,0 +1,80 @@
+name: JANUS Bridge R3 Oak Ridge Window Null
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/earth/OAK_RIDGE_EXACT_DAY_EVENT_LEDGER_1950_v0.1.json'
+      - 'domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+      - 'domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0.json'
+      - 'domains/bridge/BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-PREREG-2026-09-27-v1.0.json'
+      - 'tools/build_bridge_r3_oak_ridge_window_null.py'
+      - '.github/workflows/bridge-r3-oak-ridge-window-null.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: janus-bridge-r3-oak-ridge-window-null
+  cancel-in-progress: true
+
+jobs:
+  window-null:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build preregistered window-null result
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/build_bridge_r3_oak_ridge_window_null.py
+          python tools/build_bridge_r3_oak_ridge_window_null.py \
+            --earth-ledger domains/earth/OAK_RIDGE_EXACT_DAY_EVENT_LEDGER_1950_v0.1.json \
+            --palomar-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json \
+            --exact-day-result domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0.json \
+            --prereg domains/bridge/BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-PREREG-2026-09-27-v1.0.json \
+            --out domains/bridge/BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-RESULT-2026-09-27-v1.0.json
+
+      - name: Validate frozen R3 contract
+        run: |
+          python - <<'PY'
+          import json
+          p='domains/bridge/BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-RESULT-2026-09-27-v1.0.json'
+          d=json.load(open(p,encoding='utf-8'))
+          ex=d['execution_contract']
+          assert ex['primary_n'] == 3, ex
+          assert ex['provisional_n'] == 1, ex
+          assert ex['window_radii_days'] == [1, 3], ex
+          assert ex['actual_shift_days'] == 0, ex
+          assert ex['pairwise_primary_date_gaps_days'] == [228, 292, 64], ex
+          assert ex['palomar_observation_day_rows'] == 312, ex
+          assert ex['feasible_rigid_translations'] == 2420, ex
+          assert ex['rigid_shift_min_days'] == -99, ex
+          assert ex['rigid_shift_max_days'] == 2320, ex
+          for key in ('plus_minus_1_day','plus_minus_3_day'):
+              n=d['calendar_null'][key]['feasible_rigid_translations']
+              hist=sum(d['calendar_null'][key]['event_hit_histogram'].values())
+              assert n == 2420 and hist == n, (key,n,hist)
+          assert d['provisional_descriptive_only']['excluded_from_primary_null'] is True
+          print('PASS BRIDGE R3 WINDOW-NULL GATE', d['status'])
+          print('PM1', d['primary_actual_windows']['plus_minus_1_day']['events_with_observation_opportunity'], d['calendar_null']['plus_minus_1_day']['fraction_translations_with_zero_event_hits'])
+          print('PM3', d['primary_actual_windows']['plus_minus_3_day']['events_with_observation_opportunity'], d['calendar_null']['plus_minus_3_day']['fraction_translations_with_zero_event_hits'])
+          PY
+
+      - name: Commit result if changed
+        run: |
+          set -euo pipefail
+          TARGET='domains/bridge/BRIDGE-R3-OAK-RIDGE-WINDOW-NULL-RESULT-2026-09-27-v1.0.json'
+          if [ -z "$(git status --porcelain -- "$TARGET")" ]; then
+            echo 'NO CHANGE: R3 window-null result already frozen.'
+            exit 0
+          fi
+          git config user.name 'JANUS Cosmos Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add "$TARGET"
+          git commit -m 'Freeze Bridge R3 Oak Ridge window null result'
+          git push origin HEAD:main
