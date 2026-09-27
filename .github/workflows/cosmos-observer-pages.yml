@@ -20,7 +20,7 @@ on:
       - 'tools/build_observer_index.py'
       - '.github/workflows/cosmos-observer-pages.yml'
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -77,6 +77,7 @@ jobs:
           assert d['counts']['earth_points'] >= 3, d['counts']
           assert d['counts']['poss1_plate_centers'] >= 7, d['counts']
           assert d['bridge']['exact_day_join_gate'].startswith('BLOCKED')
+          assert d['representation_quotient']['law'].startswith('SAME_SKY_ENTITY')
           print('PASS OBSERVER INDEX SMOKE', d['counts'])
           PY
 
@@ -139,7 +140,11 @@ jobs:
             echo 'WARN: JANUS Meta Registry unavailable; Janus-Cosmos sources still build.'
           fi
 
-          python tools/build_observer_index.py --repo-root . "${META_ARGS[@]}" --plate-manifest site/data/plate_manifest.csv --day-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json --out site/data/observer-index.json
+          DAY_ARGS=()
+          if [ -f domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json ]; then
+            DAY_ARGS=(--day-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json)
+          fi
+          python tools/build_observer_index.py --repo-root . "${META_ARGS[@]}" --plate-manifest site/data/plate_manifest.csv "${DAY_ARGS[@]}" --out site/data/observer-index.json
 
           python - <<'PY'
           import json, pathlib
@@ -149,8 +154,14 @@ jobs:
           idx=json.load((root/'observer-index.json').open(encoding='utf-8'))
           assert idx['counts']['earth_points'] >= 3
           assert idx['counts']['poss1_plate_centers'] >= 7
+          q=idx['representation_quotient']
+          assert q['suppressed_sky_coordinate_rows'] >= 0
+          if idx['bridge']['palomar_day_rows_materialized'] == 312:
+              assert q['suppressed_sky_coordinate_rows'] >= 640, q
+              assert q['plate_centers_enriched_with_observation_day'] >= 640, q
           print('AUTOSYNC COUNTS', idx['counts'])
           print('AUTOSYNC BRIDGE', idx['bridge'])
+          print('AUTOSYNC QUOTIENT', q)
           PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
