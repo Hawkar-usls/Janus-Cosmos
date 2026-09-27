@@ -57,14 +57,15 @@ jobs:
         id: commit
         run: |
           set -euo pipefail
-          if git diff --quiet -- domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json; then
+          TARGET='domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+          if [ -z "$(git status --porcelain -- "$TARGET")" ]; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
             echo 'NO CHANGE: canonical ledger already matches source reconstruction.'
             exit 0
           fi
           git config user.name 'JANUS Cosmos Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
+          git add "$TARGET"
           git commit -m 'Materialize source-bound 312-day Palomar ledger'
           git push origin HEAD:main
           echo 'changed=true' >> "$GITHUB_OUTPUT"
