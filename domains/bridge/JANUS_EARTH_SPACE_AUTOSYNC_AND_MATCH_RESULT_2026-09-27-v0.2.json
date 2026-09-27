@@ -1,0 +1,75 @@
+{
+  "schema": "janus.cosmos.bridge.autosync_match_result.v0.2",
+  "artifact_id": "JANUS-EARTH-SPACE-AUTOSYNC-AND-MATCH-RESULT-2026-09-27-v0.2",
+  "status": "EXECUTED_SOURCE_COMPARISON__EXACT_DAY_BRIDGE_STILL_BLOCKED",
+  "scope": "Current source-bound EARTH nuclear/UAP ledger versus the current public POSS-I SPACE cohort, with explicit temporal and representation controls.",
+  "inputs": [
+    "domains/earth/NUC_EVENT_LEDGER_v0.1.json",
+    "domains/earth/UAP_NUCLEAR_EARTH_INDEX.json",
+    "domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json",
+    "domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json",
+    "Hawkar-usls/TOPA:research/uap-nuclear/NUC-R1-NRC-RG615-PRIMARY-LEDGER-2026-09-27-v0.1.json",
+    "jannefi/poss1-plate-slice:results/s0-642-20260814"
+  ],
+  "current_matches": [
+    {
+      "earth_row": "EARTH-EVENT-001-PANTEX-2015-09-01",
+      "earth_date": "2015-09-01",
+      "space_window": ["1949-11-19", "1957-04-28"],
+      "state": "NULL_TEMPORAL_NONOVERLAP",
+      "meaning": "The Pantex event cannot be exact-day joined to POSS-I because it occurs decades after the frozen Palomar cohort.",
+      "firewall": "TEMPORAL_NONOVERLAP != PHYSICAL_NONCORRELATION"
+    },
+    {
+      "earth_row": "EARTH-EVENT-002-PILGRIM-2015-10-01",
+      "earth_date": "2015-10-01",
+      "state": "NULL_TEMPORAL_NONOVERLAP__PRIMARY_BYTE_BIND_PENDING",
+      "meaning": "Pilgrim is outside the POSS-I window and its document-level transcription remains below primary-byte authority.",
+      "firewall": "MIRROR_TRANSCRIPTION != PRIMARY_DOCUMENT"
+    },
+    {
+      "earth_row": "EARTH-HIST-001-LOS-ALAMOS-1949",
+      "earth_date_precision": "YEAR",
+      "state": "BLOCKED_DATE_PRECISION",
+      "meaning": "Los Alamos is historically close to the POSS-I era, but a year-only row has no right to an exact-day join.",
+      "unlock": "Bind exact contemporaneous event/conference dates from primary records before comparing to Palomar observation days."
+    },
+    {
+      "earth_rows": ["EARTH-AGG-001-AARO-FY2024-NUCLEAR-UAS", "EARTH-AGG-002-AARO-FY2025-NUCLEAR-UAS"],
+      "state": "AGGREGATE_NOT_EVENT_JOINABLE",
+      "meaning": "Modern AARO nuclear-site UAS counts are reporting aggregates, not day-level physical-event rows.",
+      "firewall": "REPORT_COUNT != PHYSICAL_EVENT_RATE"
+    }
+  ],
+  "space_controls_already_survived": {
+    "strict_plus_minus_1_day": {"IRR": 0.9292915705367555, "p": 0.2320255020513916, "verdict": "NO_SIGNIFICANT_POSITIVE_ENHANCEMENT"},
+    "broad_plus_minus_1_day": {"IRR": 0.9432092331404573, "p": 0.29987344685191564, "verdict": "NO_SIGNIFICANT_POSITIVE_ENHANCEMENT"},
+    "schedule_identity": "ANY_CANDIDATE == PALOMAR_OBSERVED_NIGHT in the dense S0 cohort",
+    "detector_warning": "An astrometric defect on 8 repaired tiles created 12,273 false-survivor rows and left only 30 after repair on those tiles.",
+    "field_density_warning": "Candidate density is strongly sky-position dependent.",
+    "independent_digitization_warning": "SuperCOSMOS disagrees with roughly two fifths of the compact S0 catalogue according to the bound SPACE control row."
+  },
+  "new_observer_autosync_contract": {
+    "earth": "Scan Janus-Cosmos plus public JANUS Meta Registry JSON for explicit latitude/longitude pairs and registry-resolved named sites.",
+    "space": "Scan explicit RA/Dec pairs separately and layer them over the public 642-center POSS-I survey manifest.",
+    "unmapped": "Preserve source rows with unresolved coordinates instead of silently dropping them.",
+    "protected_exclusions": ["Cousteau", "Kusto"],
+    "schedule": "GitHub Pages rebuild every six hours plus source pushes/manual dispatch.",
+    "authority_boundary": "AUTOSYNC_DISCOVERY != CLAIM_PROMOTION"
+  },
+  "blocking_gate": {
+    "id": "BRIDGE-R1-PALOMAR-DAY-MATERIALIZATION",
+    "required_rows": 312,
+    "required_fields": ["date", "observed_flag", "candidate_count", "plate_count", "tile_count", "exposure", "sky_position", "detector_quality", "artifact_state"],
+    "current_state": "BLOCKED_NOT_YET_MATERIALIZED",
+    "reason": "The current compact public plate manifest carries angular plate centers but not observation dates; the day-level denominator must be source-bound from plate/tile metadata before exact joins are allowed."
+  },
+  "epistemic_ceiling": "CURRENT DATA SUPPORT SOURCE-BOUND EVENTS, NULL TEMPORAL OVERLAPS, REPORTING-PIPELINE CONTROLS AND A PUBLIC PALOMAR NULL/NO-ROBUST-POSITIVE-RESIDUAL RESULT. THEY DO NOT ESTABLISH NUCLEAR ATTRACTION, NONHUMAN ORIGIN OR CROSS-DOMAIN CAUSATION.",
+  "next_actions": [
+    "Materialize the 312 Palomar observation-day rows from source-bound plate/tile metadata.",
+    "Bind exact dates for historical Los Alamos case-family rows.",
+    "Continue NRC RG615 primary-byte binding and reporting-regime timeline.",
+    "Let the autosync index surface every newly added explicit Earth or sky coordinate without hand-editing the visualization."
+  ],
+  "canonical_seal": "FIRST MAKE THE MAP COMPLETE; THEN MAKE THE JOIN LEGAL. A POINT MAY BE DISCOVERED AUTOMATICALLY, BUT A CAUSAL CLAIM MAY NOT."
+}

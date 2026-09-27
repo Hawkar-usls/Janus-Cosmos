@@ -8,7 +8,19 @@ on:
       - 'domains/earth/**'
       - 'domains/space/**'
       - 'domains/bridge/**'
+      - 'tools/build_observer_index.py'
       - '.github/workflows/cosmos-observer-pages.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/observer/**'
+      - 'domains/earth/**'
+      - 'domains/space/**'
+      - 'domains/bridge/**'
+      - 'tools/build_observer_index.py'
+      - '.github/workflows/cosmos-observer-pages.yml'
+  schedule:
+    - cron: '17 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +29,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: janus-cosmos-pages
+  group: janus-cosmos-pages-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'main' }}
   cancel-in-progress: true
 
 jobs:
@@ -27,54 +39,70 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate observer inputs
         run: |
+          set -euo pipefail
+          python -m py_compile tools/build_observer_index.py
           python - <<'PY'
           import json
           from pathlib import Path
           required = [
               Path('domains/earth/NUC_EVENT_LEDGER_v0.1.json'),
+              Path('domains/earth/UAP_NUCLEAR_EARTH_INDEX.json'),
+              Path('domains/earth/SITE_COORDINATE_REGISTRY_v0.2.json'),
               Path('domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json'),
               Path('domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json'),
+              Path('domains/bridge/JANUS_EARTH_SPACE_AUTOSYNC_AND_MATCH_RESULT_2026-09-27-v0.2.json'),
           ]
           for p in required:
               with p.open(encoding='utf-8') as f:
                   json.load(f)
               print('PASS JSON', p)
-          for p in [
-              Path('docs/observer/index.html'),
-              Path('docs/observer/styles.css'),
-              Path('docs/observer/app.js'),
-              Path('docs/observer/plate_manifest_seed.csv'),
-          ]:
+          for p in [Path('docs/observer/index.html'), Path('docs/observer/styles.css'), Path('docs/observer/app.js'), Path('docs/observer/plate_manifest_seed.csv')]:
               assert p.exists() and p.stat().st_size > 0, p
               print('PASS ASSET', p)
           app = Path('docs/observer/app.js').read_text(encoding='utf-8')
-          assert 'Globe()' not in app and 'THREE.' not in app, 'Observer must not depend on external Globe/Three runtime'
-          print('PASS SELF-CONTAINED RENDER CONTRACT')
+          assert 'Globe()' not in app and 'THREE.' not in app
+          assert 'observer-index.json' in app
+          print('PASS SELF-CONTAINED AUTOSYNC RENDER CONTRACT')
           PY
+          node --check docs/observer/app.js
+
+      - name: Smoke-build local Observer index
+        run: |
+          mkdir -p "$RUNNER_TEMP/smoke"
+          cp docs/observer/plate_manifest_seed.csv "$RUNNER_TEMP/smoke/plates.csv"
+          python tools/build_observer_index.py --repo-root . --plate-manifest "$RUNNER_TEMP/smoke/plates.csv" --out "$RUNNER_TEMP/smoke/index.json"
+          python - "$RUNNER_TEMP/smoke/index.json" <<'PY'
+          import json, sys
+          d=json.load(open(sys.argv[1],encoding='utf-8'))
+          assert d['counts']['earth_points'] >= 3, d['counts']
+          assert d['counts']['poss1_plate_centers'] >= 7, d['counts']
+          assert d['bridge']['exact_day_join_gate'].startswith('BLOCKED')
+          print('PASS OBSERVER INDEX SMOKE', d['counts'])
+          PY
+
       - name: Enforce Cousteau/Kusto no-touch boundary
+        if: github.event_name != 'schedule'
         run: |
           git fetch origin main --depth=2 || true
-          BASE="${{ github.event.before }}"
-          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
-            BASE="HEAD^"
-          fi
+          BASE="${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then BASE="HEAD^"; fi
           CHANGED="$(git diff --name-only "$BASE" HEAD || true)"
           printf '%s\n' "$CHANGED"
           if printf '%s\n' "$CHANGED" | grep -Ei '^(data/cousteau/|archive/cousteau|.*cousteau.*|.*kusto.*)'; then
-            echo 'FAIL: observer change touched protected Cousteau/Kusto content.'
-            exit 1
+            echo 'FAIL: observer change touched protected Cousteau/Kusto content.'; exit 1
           fi
           echo 'PASS: no protected Cousteau/Kusto content touched.'
 
   deploy:
     needs: validate
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build self-contained observer bundle
+      - name: Build self-updating source bundle
         run: |
           set -euo pipefail
           rm -rf site
@@ -88,30 +116,41 @@ jobs:
           cp docs/observer/plate_manifest_seed.csv site/data/plate_manifest.csv
 
           TMP="$(mktemp)"
-          if curl -fsSL --retry 3 --connect-timeout 10 --max-time 45 \
-            https://raw.githubusercontent.com/jannefi/poss1-plate-slice/main/data/plate_manifest.csv \
-            -o "$TMP"; then
+          if curl -fsSL --retry 3 --connect-timeout 10 --max-time 45 https://raw.githubusercontent.com/jannefi/poss1-plate-slice/main/data/plate_manifest.csv -o "$TMP"; then
             python - "$TMP" <<'PY'
           import csv, pathlib, sys
-          p = pathlib.Path(sys.argv[1])
-          rows = list(csv.DictReader(p.open(encoding='utf-8')))
-          assert len(rows) >= 7, len(rows)
-          assert {'plate_id','ra_deg','dec_deg'} <= set(rows[0]), rows[0].keys()
+          p=pathlib.Path(sys.argv[1]); rows=list(csv.DictReader(p.open(encoding='utf-8')))
+          assert len(rows) >= 642, len(rows)
+          assert {'plate_id','ra_deg','dec_deg'} <= set(rows[0])
           print('PASS UPSTREAM PLATE MANIFEST', len(rows))
           PY
             mv "$TMP" site/data/plate_manifest.csv
           else
-            echo 'WARN: upstream plate manifest unavailable; shipping source-bound seed instead.'
+            echo 'WARN: upstream POSS-I plate manifest unavailable; source-bound seed retained.'
             rm -f "$TMP"
           fi
 
+          META="$RUNNER_TEMP/janus-meta-registry"
+          META_ARGS=()
+          if git clone --depth 1 --filter=blob:limit=3m https://github.com/Hawkar-usls/janus-meta-registry.git "$META"; then
+            META_ARGS=(--meta-root "$META")
+            echo 'PASS JANUS META AUTOSYNC'
+          else
+            echo 'WARN: JANUS Meta Registry unavailable; Janus-Cosmos sources still build.'
+          fi
+
+          python tools/build_observer_index.py --repo-root . "${META_ARGS[@]}" --plate-manifest site/data/plate_manifest.csv --day-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json --out site/data/observer-index.json
+
           python - <<'PY'
           import json, pathlib
-          root = pathlib.Path('site/data')
-          for name in ['earth-ledger.json','space-ledger.json','bridge-ledger.json']:
-              json.load((root/name).open(encoding='utf-8'))
-          assert (root/'plate_manifest.csv').stat().st_size > 0
-          print('PASS BUILT SITE DATA')
+          root=pathlib.Path('site/data')
+          for name in ['earth-ledger.json','space-ledger.json','bridge-ledger.json','observer-index.json']:
+              d=json.load((root/name).open(encoding='utf-8')); print('PASS BUILT JSON', name, d.get('schema'))
+          idx=json.load((root/'observer-index.json').open(encoding='utf-8'))
+          assert idx['counts']['earth_points'] >= 3
+          assert idx['counts']['poss1_plate_centers'] >= 7
+          print('AUTOSYNC COUNTS', idx['counts'])
+          print('AUTOSYNC BRIDGE', idx['bridge'])
           PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
