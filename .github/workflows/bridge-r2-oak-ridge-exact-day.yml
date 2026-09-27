@@ -1,0 +1,66 @@
+name: JANUS Bridge R2 Oak Ridge Exact Day
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/earth/OAK_RIDGE_EXACT_DAY_EVENT_LEDGER_1950_v0.1.json'
+      - 'domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json'
+      - 'domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-PREREG-2026-09-27-v1.0.json'
+      - 'tools/build_bridge_r2_oak_ridge_result.py'
+      - '.github/workflows/bridge-r2-oak-ridge-exact-day.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: janus-bridge-r2-oak-ridge-exact-day
+  cancel-in-progress: true
+
+jobs:
+  exact-day:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build frozen exact-day result
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/build_bridge_r2_oak_ridge_result.py
+          python tools/build_bridge_r2_oak_ridge_result.py \
+            --earth-ledger domains/earth/OAK_RIDGE_EXACT_DAY_EVENT_LEDGER_1950_v0.1.json \
+            --palomar-ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json \
+            --prereg domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-PREREG-2026-09-27-v1.0.json \
+            --out domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0.json
+
+      - name: Validate primary cohort and no posthoc widening
+        run: |
+          python - <<'PY'
+          import json
+          p='domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0.json'
+          d=json.load(open(p,encoding='utf-8'))
+          assert d['primary_cohort']['n'] == 3, d['primary_cohort']
+          assert d['provisional_excluded_from_primary']['n'] == 1
+          assert d['execution_contract']['window_widening_used'] is False
+          assert d['execution_contract']['palomar_day_rows'] == 312
+          assert len(d['all_frozen_dates']) == 4
+          print('PASS BRIDGE R2 PRIMARY EXACT-DAY GATE', d['status'], d['primary_cohort']['outcome_counts'])
+          PY
+
+      - name: Commit result if changed
+        run: |
+          set -euo pipefail
+          TARGET='domains/bridge/BRIDGE-R2-OAK-RIDGE-EXACT-DAY-RESULT-2026-09-27-v1.0.json'
+          if [ -z "$(git status --porcelain -- "$TARGET")" ]; then
+            echo 'NO CHANGE: exact-day result already frozen.'
+            exit 0
+          fi
+          git config user.name 'JANUS Cosmos Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add "$TARGET"
+          git commit -m 'Freeze Bridge R2 Oak Ridge exact-day result'
+          git push origin HEAD:main

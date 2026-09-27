@@ -1,0 +1,37 @@
+{
+  "schema": "janus.cosmos.observer.representation_quotient_analysis.v1",
+  "artifact_id": "JANUS-COSMOS-OBSERVER-REPRESENTATION-QUOTIENT-ANALYSIS-2026-09-27-v1.0",
+  "status": "CANONICAL_METHOD_REPAIR__PRESENTATION_AND_COUNTING_QUOTIENT",
+  "purpose": "Record two independently discovered UI/counting duplication failures and the general representation law extracted from them.",
+  "cases": [
+    {
+      "id": "SPACE_DUPLICATION",
+      "observed_failure": "The 312-day Palomar ledger nested 640 in-window plate-center RA/Dec rows. The generic coordinate scanner rendered those as new JANUS sky targets while the canonical POSS-I manifest already rendered the same plate centers.",
+      "bad_effect": "One astronomical survey entity appeared through two representations, making the SPACE lane look structurally strange and inflating rendered point counts.",
+      "repair": "Render POSS-I plate centers once; use observation-day rows only to enrich those plate entities with date, candidate, exposure and detector metadata.",
+      "law": "PALOMAR_DAY_METADATA_ABOUT_PLATE != NEW_SKY_OBJECT"
+    },
+    {
+      "id": "EARTH_BRIDGE_DUPLICATION",
+      "observed_failure": "Bridge preregistration/result JSON can repeat site/date information already represented by canonical Earth event ledgers. The generic scanner therefore risks turning methodological metadata into additional Earth events and counting the same frozen date more than once.",
+      "bad_effect": "Presentation match-state counts can be inflated and become unsafe as an inferential cohort.",
+      "repair": "Treat domains/bridge as relation/test metadata only; do not render it as a second Earth or sky entity layer. Treat the site-coordinate registry as coordinate authority only, not as an event source.",
+      "law": "BRIDGE_METADATA_ABOUT_EVENT != SECOND_EVENT"
+    }
+  ],
+  "general_laws": [
+    "METADATA ABOUT AN ENTITY != NEW ENTITY",
+    "DIFFERENT REPRESENTATIONS OF THE SAME DECISION-RELEVANT OBJECT -> ONE CANONICAL RENDERED ENTITY",
+    "QUOTIENT BEFORE RENDER",
+    "QUOTIENT BEFORE COUNT",
+    "PRESENTATION ROWS != INFERENTIAL COHORT",
+    "A CONTROL OR PREREGISTRATION MAY DESCRIBE AN EVENT WITHOUT BECOMING ANOTHER EVENT"
+  ],
+  "relation_to_janus_representation_contract": {
+    "connection": "The Observer exposed the same general failure class already seen in JANUS quotient computation: naming/history/metadata multiplicity can create artificial state multiplicity unless representation identity is contracted before comparison.",
+    "formula": "RAW_SOURCE_REPRESENTATIONS -> CONTRACTED_ENTITY_IDENTITY -> RENDER_OR_COUNT",
+    "anti_formula": "RAW_JSON_NODES -> COUNT"
+  },
+  "epistemic_boundary": "Quotienting removes representation duplicates; it must never merge genuinely independent witnesses merely because they are similar. Identity must be supported by the representation contract, not visual resemblance.",
+  "canonical_seal": "THE MAP MUST NOT CREATE NEW EVENTS BY READING ABOUT THE SAME EVENT TWICE. CONTRACT IDENTITY FIRST; THEN RENDER AND COUNT."
+}

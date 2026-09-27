@@ -1,0 +1,70 @@
+{
+  "schema": "janus.cosmos.bridge.palomar_day_materialization_result.v1",
+  "artifact_id": "BRIDGE-R1-PALOMAR-DAY-MATERIALIZATION-RESULT-2026-09-27-v1.0",
+  "status": "PASS__312_DAY_DENOMINATOR_MATERIALIZED__FAILURES_PRESERVED",
+  "purpose": "Freeze the complete execution history that turned the public POSS-I products plus IRSA plate headers into a source-bound 312-row observation-day denominator for Earth↔Space matching.",
+  "final_product": {
+    "path": "domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json",
+    "status": "MATERIALIZED_SOURCE_BOUND_312_DAY_LEDGER",
+    "rows": 312,
+    "plates_in_window": 640,
+    "candidate_rows_in_window": 122511,
+    "processed_tiles_in_window": 31358,
+    "all_observed_days_candidate_positive": true,
+    "laws": [
+      "NO_OBSERVATION != OBSERVED_ZERO",
+      "AN_OBSERVED_ZERO_REQUIRES_AN_OBSERVATION_ROW",
+      "RA_DEC_IS_ANGULAR_LOCATION_NOT_PHYSICAL_DISTANCE",
+      "NO_REPAIR_LOG != ARTIFACT_FREE"
+    ]
+  },
+  "source_freeze": {
+    "poss1_stage_tile_release_commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "stage_uncompressed_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0",
+    "tile_manifest_uncompressed_sha256": "5dcb90dc5d98550e5a60246aced2b097922a267c69e81f27d45d16a288142a99",
+    "current_public_plate_manifest_sha256_at_materialization": "d462750ccb14e4f9b74aa2c8848459bab05f91a6ef80ad448f8d39a02a771730",
+    "irsa_headers_parsed": 642
+  },
+  "execution_history": [
+    {
+      "workflow_run_id": 36338901021,
+      "job_id": 108674982684,
+      "outcome": "FAIL_CLOSED",
+      "failure": "The historical pinned commit's data/plate_manifest.csv carried plate_id only and did not provide the RA/Dec columns required by this materializer.",
+      "scientific_effect": "NO LEDGER PROMOTED; source mismatch preserved instead of filling coordinates from memory."
+    },
+    {
+      "workflow_run_id": 36339027168,
+      "job_id": 108675341245,
+      "outcome": "SCIENTIFIC_GATE_PASS__PERSISTENCE_BUG",
+      "facts": [
+        "642/642 IRSA headers parsed with zero errors",
+        "312 unique observation dates reconstructed",
+        "640 in-window plates reconstructed",
+        "122511 candidate rows reconstructed"
+      ],
+      "failure": "Generated ledger was a new untracked file and git diff --quiet did not detect it, so the workflow incorrectly emitted NO CHANGE.",
+      "scientific_effect": "Computation passed but result was not yet materialized in repository authority."
+    },
+    {
+      "workflow_run_id": 36339205814,
+      "job_id": 108675837771,
+      "outcome": "PASS_AND_MATERIALIZED",
+      "repository_commit": "5b75d57a8c595fdd53a3501d8a1a586961624160",
+      "repair": "Use git status --porcelain to detect first-time untracked materialized ledger.",
+      "scientific_effect": "312-row denominator became repository-visible and Bridge exact-day matching gate could open."
+    }
+  ],
+  "representation_contract": {
+    "row_unit": "unique UTC Palomar observation date",
+    "meaning_of_absent_date": "NO_OBSERVATION_OPPORTUNITY_IN_THIS_MATERIALIZED_POSS1_COHORT",
+    "meaning_of_present_date": "PALOMAR_OBSERVATION_OPPORTUNITY_EXISTS; candidate-level interpretation still requires detector/artifact controls",
+    "must_not_infer": [
+      "no astronomical phenomenon existed on an absent date",
+      "a candidate is an external astrophysical source",
+      "a candidate is a UAP",
+      "temporal overlap implies common cause"
+    ]
+  },
+  "canonical_seal": "BRIDGE-R1 DID NOT MATERIALIZE 312 ZEROS. IT MATERIALIZED 312 OBSERVATION OPPORTUNITIES, SO JANUS CAN FINALLY DISTINGUISH NO OBSERVATION FROM AN OBSERVED RESULT."
+}
