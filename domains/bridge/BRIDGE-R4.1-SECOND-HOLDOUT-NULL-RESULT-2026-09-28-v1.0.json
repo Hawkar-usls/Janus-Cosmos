@@ -1,0 +1,633 @@
+{
+  "schema": "janus.cosmos.bridge.r4_1_second_holdout_null_result.v1",
+  "artifact_id": "BRIDGE-R4.1-SECOND-HOLDOUT-NULL-RESULT-2026-09-28-v1.0",
+  "generated_at_utc": "2026-09-27T23:26:43.128424+00:00",
+  "status": "PALOMAR_OBSERVATION_OPPORTUNITY_PRESENT__INTERPRET_ONLY_AGAINST_R4_1_PREREGISTERED_NULLS",
+  "execution_contract": {
+    "earth_cohort_artifact_id": "BRIDGE-R4.1-SECOND-INDEPENDENT-HOLDOUT-EVENT-LEDGER-1949-1957-v0.1",
+    "earth_cohort_status": "FROZEN_BEFORE_R4_1_PRIMARY_PALOMAR_MEMBERSHIP_LOOKUP",
+    "prereg_artifact_id": "BRIDGE-R4.1-SECOND-HOLDOUT-NULL-PREREG-2026-09-28-v1.0",
+    "prereg_status": "FROZEN_BEFORE_R4_1_PRIMARY_PALOMAR_MEMBERSHIP_EVALUATION",
+    "primary_holdout_site_n": 2,
+    "primary_holdout_event_date_n": 4,
+    "site_ids": [
+      "HOLLOMAN_WHITE_SANDS",
+      "WALKER_AFB_509TH"
+    ],
+    "radii_days": [
+      0,
+      1,
+      3
+    ],
+    "palomar_study_window": [
+      "1949-11-19",
+      "1957-04-28"
+    ],
+    "palomar_observation_day_rows": 312,
+    "primary_null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+    "seasonality_sensitivity_null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+    "hanford_holdback_evaluated": false,
+    "hanford_holdback_date_disclosed_to_builder_but_not_queried_as_an_event": "1950-07-30"
+  },
+  "source_hashes": {
+    "earth_ledger_sha256": "481c02c600a4dd760903862854ced5d70640b6b62e751fe9dba63d67ecea096d",
+    "palomar_day_ledger_sha256": "4c719bfcf473dcc77e8c65572f3872fa5cb74713ee903869674c8202f36f9cc5",
+    "prereg_sha256": "d46f3603c4e70a4b45412b3a5b378836673c3b2f98eb1cc549a276516b158b15"
+  },
+  "actual_windows": {
+    "radius_0_days": {
+      "T_event_date_hits": 0,
+      "S_sites_with_at_least_one_hit": 0,
+      "U_unique_observation_days": 0,
+      "union_observation_opportunity_dates": [],
+      "sites": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-01-13",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-01-13",
+              "translated_center_date": "1950-01-13",
+              "window_start": "1950-01-13",
+              "window_end": "1950-01-13",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-08-31",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-08-31",
+              "translated_center_date": "1950-08-31",
+              "window_start": "1950-08-31",
+              "window_end": "1950-08-31",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "WALKER_AFB_509TH": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-06-16",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-06-16",
+              "translated_center_date": "1952-06-16",
+              "window_start": "1952-06-16",
+              "window_end": "1952-06-16",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-07-29",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-07-29",
+              "translated_center_date": "1952-07-29",
+              "window_start": "1952-07-29",
+              "window_end": "1952-07-29",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        }
+      }
+    },
+    "radius_1_days": {
+      "T_event_date_hits": 1,
+      "S_sites_with_at_least_one_hit": 1,
+      "U_unique_observation_days": 1,
+      "union_observation_opportunity_dates": [
+        "1952-07-30"
+      ],
+      "sites": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-01-13",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-01-13",
+              "translated_center_date": "1950-01-13",
+              "window_start": "1950-01-12",
+              "window_end": "1950-01-14",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-08-31",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-08-31",
+              "translated_center_date": "1950-08-31",
+              "window_start": "1950-08-30",
+              "window_end": "1950-09-01",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "WALKER_AFB_509TH": {
+          "event_hits": 1,
+          "site_has_hit": true,
+          "unique_observation_days": 1,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-06-16",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-06-16",
+              "translated_center_date": "1952-06-16",
+              "window_start": "1952-06-15",
+              "window_end": "1952-06-17",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-07-29",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-07-29",
+              "translated_center_date": "1952-07-29",
+              "window_start": "1952-07-28",
+              "window_end": "1952-07-30",
+              "observation_opportunity_dates": [
+                "1952-07-30"
+              ],
+              "observation_opportunity_count": 1,
+              "window_hit": true
+            }
+          ],
+          "union_observation_opportunity_dates": [
+            "1952-07-30"
+          ]
+        }
+      }
+    },
+    "radius_3_days": {
+      "T_event_date_hits": 1,
+      "S_sites_with_at_least_one_hit": 1,
+      "U_unique_observation_days": 2,
+      "union_observation_opportunity_dates": [
+        "1952-07-27",
+        "1952-07-30"
+      ],
+      "sites": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "event_hits": 0,
+          "site_has_hit": false,
+          "unique_observation_days": 0,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-01-13",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-01-13",
+              "translated_center_date": "1950-01-13",
+              "window_start": "1950-01-10",
+              "window_end": "1950-01-16",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-HOLLOMAN-1950-08-31",
+              "site_id": "HOLLOMAN_WHITE_SANDS",
+              "original_earth_date": "1950-08-31",
+              "translated_center_date": "1950-08-31",
+              "window_start": "1950-08-28",
+              "window_end": "1950-09-03",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            }
+          ],
+          "union_observation_opportunity_dates": []
+        },
+        "WALKER_AFB_509TH": {
+          "event_hits": 1,
+          "site_has_hit": true,
+          "unique_observation_days": 2,
+          "event_rows": [
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-06-16",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-06-16",
+              "translated_center_date": "1952-06-16",
+              "window_start": "1952-06-13",
+              "window_end": "1952-06-19",
+              "observation_opportunity_dates": [],
+              "observation_opportunity_count": 0,
+              "window_hit": false
+            },
+            {
+              "row_id": "EARTH-R4-1-WALKER-1952-07-29",
+              "site_id": "WALKER_AFB_509TH",
+              "original_earth_date": "1952-07-29",
+              "translated_center_date": "1952-07-29",
+              "window_start": "1952-07-26",
+              "window_end": "1952-08-01",
+              "observation_opportunity_dates": [
+                "1952-07-27",
+                "1952-07-30"
+              ],
+              "observation_opportunity_count": 2,
+              "window_hit": true
+            }
+          ],
+          "union_observation_opportunity_dates": [
+            "1952-07-27",
+            "1952-07-30"
+          ]
+        }
+      }
+    }
+  },
+  "primary_null": {
+    "radius_0_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "shift_min_days": -52,
+          "shift_max_days": 2429,
+          "admissible_shift_count": 2482,
+          "event_hit_histogram": {
+            "0": 1947,
+            "1": 486,
+            "2": 49
+          },
+          "site_has_hit_histogram": {
+            "0": 1947,
+            "1": 535
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "shift_min_days": -937,
+          "shift_max_days": 1731,
+          "admissible_shift_count": 2669,
+          "event_hit_histogram": {
+            "0": 2076,
+            "1": 572,
+            "2": 21
+          },
+          "site_has_hit_histogram": {
+            "0": 2076,
+            "1": 593
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 6624458,
+      "T_event_date_hit_histogram": {
+        "0": 4041972,
+        "1": 2122620,
+        "2": 420603,
+        "3": 38234,
+        "4": 1029
+      },
+      "S_site_hit_histogram": {
+        "0": 4041972,
+        "1": 2265231,
+        "2": 317255
+      },
+      "actual_T": 0,
+      "actual_S": 0,
+      "fraction_shift_vectors_T_ge_actual": 1.0,
+      "fraction_shift_vectors_T_le_actual": 0.610158899037476,
+      "fraction_shift_vectors_S_ge_actual": 1.0,
+      "fraction_shift_vectors_S_le_actual": 0.610158899037476,
+      "fraction_shift_vectors_T_zero": 0.610158899037476,
+      "max_T_in_null": 4,
+      "max_S_in_null": 2
+    },
+    "radius_1_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "shift_min_days": -52,
+          "shift_max_days": 2429,
+          "admissible_shift_count": 2482,
+          "event_hit_histogram": {
+            "0": 1479,
+            "1": 813,
+            "2": 190
+          },
+          "site_has_hit_histogram": {
+            "0": 1479,
+            "1": 1003
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "shift_min_days": -937,
+          "shift_max_days": 1731,
+          "admissible_shift_count": 2669,
+          "event_hit_histogram": {
+            "0": 1522,
+            "1": 1043,
+            "2": 104
+          },
+          "site_has_hit_histogram": {
+            "0": 1522,
+            "1": 1147
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 6624458,
+      "T_event_date_hit_histogram": {
+        "0": 2251038,
+        "1": 2779983,
+        "2": 1290955,
+        "3": 282722,
+        "4": 19760
+      },
+      "S_site_hit_histogram": {
+        "0": 2251038,
+        "1": 3222979,
+        "2": 1150441
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_shift_vectors_T_ge_actual": 0.6601928791759265,
+      "fraction_shift_vectors_T_le_actual": 0.7594615287771468,
+      "fraction_shift_vectors_S_ge_actual": 0.6601928791759265,
+      "fraction_shift_vectors_S_le_actual": 0.8263343204832758,
+      "fraction_shift_vectors_T_zero": 0.33980712082407344,
+      "max_T_in_null": 4,
+      "max_S_in_null": 2
+    },
+    "radius_3_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "shift_min_days": -52,
+          "shift_max_days": 2429,
+          "admissible_shift_count": 2482,
+          "event_hit_histogram": {
+            "0": 1033,
+            "1": 1013,
+            "2": 436
+          },
+          "site_has_hit_histogram": {
+            "0": 1033,
+            "1": 1449
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "shift_min_days": -937,
+          "shift_max_days": 1731,
+          "admissible_shift_count": 2669,
+          "event_hit_histogram": {
+            "0": 1025,
+            "1": 1320,
+            "2": 324
+          },
+          "site_has_hit_histogram": {
+            "0": 1025,
+            "1": 1644
+          }
+        }
+      },
+      "aggregate_shift_vector_count": 6624458,
+      "T_event_date_hit_histogram": {
+        "0": 1058825,
+        "1": 2401885,
+        "2": 2118752,
+        "3": 903732,
+        "4": 141264
+      },
+      "S_site_hit_histogram": {
+        "0": 1058825,
+        "1": 3183477,
+        "2": 2382156
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_shift_vectors_T_ge_actual": 0.8401642821193824,
+      "fraction_shift_vectors_T_le_actual": 0.5224140601389577,
+      "fraction_shift_vectors_S_ge_actual": 0.8401642821193824,
+      "fraction_shift_vectors_S_le_actual": 0.6403998636567702,
+      "fraction_shift_vectors_T_zero": 0.15983571788061757,
+      "max_T_in_null": 4,
+      "max_S_in_null": 2
+    }
+  },
+  "seasonality_sensitivity_null": {
+    "radius_0_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 6,
+            "1": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 6,
+            "1": 1
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 7
+          },
+          "site_has_hit_histogram": {
+            "0": 7
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 49,
+      "T_event_date_hit_histogram": {
+        "0": 42,
+        "1": 7
+      },
+      "S_site_hit_histogram": {
+        "0": 42,
+        "1": 7
+      },
+      "actual_T": 0,
+      "actual_S": 0,
+      "fraction_year_shift_vectors_T_ge_actual": 1.0,
+      "fraction_year_shift_vectors_T_le_actual": 0.8571428571428571,
+      "fraction_year_shift_vectors_S_ge_actual": 1.0,
+      "fraction_year_shift_vectors_S_le_actual": 0.8571428571428571,
+      "fraction_year_shift_vectors_T_zero": 0.8571428571428571,
+      "max_T_in_null": 1,
+      "max_S_in_null": 1
+    },
+    "radius_1_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 3,
+            "1": 4
+          },
+          "site_has_hit_histogram": {
+            "0": 3,
+            "1": 4
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 2,
+            "1": 5
+          },
+          "site_has_hit_histogram": {
+            "0": 2,
+            "1": 5
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 49,
+      "T_event_date_hit_histogram": {
+        "0": 6,
+        "1": 23,
+        "2": 20
+      },
+      "S_site_hit_histogram": {
+        "0": 6,
+        "1": 23,
+        "2": 20
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_year_shift_vectors_T_ge_actual": 0.8775510204081632,
+      "fraction_year_shift_vectors_T_le_actual": 0.5918367346938775,
+      "fraction_year_shift_vectors_S_ge_actual": 0.8775510204081632,
+      "fraction_year_shift_vectors_S_le_actual": 0.5918367346938775,
+      "fraction_year_shift_vectors_T_zero": 0.12244897959183673,
+      "max_T_in_null": 2,
+      "max_S_in_null": 2
+    },
+    "radius_3_days": {
+      "null_name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+      "by_site": {
+        "HOLLOMAN_WHITE_SANDS": {
+          "admissible_year_offsets": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 3,
+            "1": 3,
+            "2": 1
+          },
+          "site_has_hit_histogram": {
+            "0": 3,
+            "1": 4
+          }
+        },
+        "WALKER_AFB_509TH": {
+          "admissible_year_offsets": [
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "admissible_year_offset_count": 7,
+          "event_hit_histogram": {
+            "0": 2,
+            "1": 5
+          },
+          "site_has_hit_histogram": {
+            "0": 2,
+            "1": 5
+          }
+        }
+      },
+      "aggregate_year_shift_vector_count": 49,
+      "T_event_date_hit_histogram": {
+        "0": 6,
+        "1": 21,
+        "2": 17,
+        "3": 5
+      },
+      "S_site_hit_histogram": {
+        "0": 6,
+        "1": 23,
+        "2": 20
+      },
+      "actual_T": 1,
+      "actual_S": 1,
+      "fraction_year_shift_vectors_T_ge_actual": 0.8775510204081632,
+      "fraction_year_shift_vectors_T_le_actual": 0.5510204081632653,
+      "fraction_year_shift_vectors_S_ge_actual": 0.8775510204081632,
+      "fraction_year_shift_vectors_S_le_actual": 0.5918367346938775,
+      "fraction_year_shift_vectors_T_zero": 0.12244897959183673,
+      "max_T_in_null": 3,
+      "max_S_in_null": 2
+    }
+  },
+  "sealed_holdback": {
+    "HANFORD_AEC_PLANT_1950_07_30_evaluated": false,
+    "reason": "Primary federal byte/page binding is not closed; R4.1 intentionally preserves its future holdout blindness."
+  },
+  "interpretation": {
+    "T_r": "Counts R4.1 frozen holdout site-dates with at least one Palomar observation opportunity. It is not a count of anomalous objects.",
+    "S_r": "Counts R4.1 independent sites with at least one temporal observation-opportunity hit.",
+    "primary_null": "Each new site cluster moves independently as a rigid day pattern; exact aggregate T and S distributions are computed by convolution, not Monte Carlo.",
+    "seasonality_null": "Each new site cluster moves only by whole calendar years, preserving month/day as a sensitivity check for seasonal Palomar scheduling.",
+    "sequential_status": "R4.1 stands as a second holdout. R4 is already known and is not retroactively merged into a fictitious jointly blinded p-value."
+  },
+  "claim_ceiling": "THIS RESULT TESTS TEMPORAL OBSERVATION-OPPORTUNITY COINCIDENCE IN A SECOND INDEPENDENT HOLDOUT ONLY. IT DOES NOT ESTABLISH UAP IDENTITY, NONHUMAN ORIGIN, NUCLEAR ATTRACTION, OR EARTH-SPACE CAUSAL COUPLING.",
+  "canonical_seal": "THE SECOND HOLDOUT WAS FROZEN BEFORE THE SKY CALENDAR OPENED; HANFORD REMAINED CLOSED."
+}
