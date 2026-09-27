@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/materialize_palomar_day_ledger.py'
+      - 'tools/materialize_palomar_day_ledger_v1_1.py'
       - '.github/workflows/palomar-day-materialization.yml'
   schedule:
     - cron: '43 2 * * *'
@@ -30,8 +31,8 @@ jobs:
       - name: Materialize source-bound 312-day Palomar ledger
         run: |
           set -euo pipefail
-          python -m py_compile tools/materialize_palomar_day_ledger.py
-          python tools/materialize_palomar_day_ledger.py \
+          python -m py_compile tools/materialize_palomar_day_ledger.py tools/materialize_palomar_day_ledger_v1_1.py
+          python tools/materialize_palomar_day_ledger_v1_1.py \
             --out domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
 
       - name: Validate scientific gate
