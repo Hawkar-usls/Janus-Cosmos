@@ -1,0 +1,182 @@
+{
+  "schema": "janus.cosmos.earth.nuclear_uap_event_ledger.v0.1",
+  "artifact_id": "JANUS-COSMOS-EARTH-NUCLEAR-UAP-EVENT-LEDGER-2026-09-27-v0.1",
+  "status": "ACTIVE_PARTIAL_LEDGER__SOURCE_GRADED__NO_ORIGIN_PROMOTION",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "EARTH",
+  "purpose": "Materialize source-bound terrestrial nuclear-site aerial-event, aggregate and reporting-policy rows for later cross-domain comparison with the SPACE ledger. Event rows, aggregate rows and policy rows are deliberately not conflated.",
+  "representation_contract": {
+    "target_invariant": "source-bound terrestrial aerial-event/reporting structure near nuclear infrastructure",
+    "must_preserve": [
+      "event or reporting interval",
+      "site/facility identity at the available precision",
+      "detector/witness channel",
+      "reporting/classification status",
+      "source authority and provenance grade",
+      "unknowns and disagreements",
+      "whether a row is an EVENT, AGGREGATE, POLICY_CHANGE or ARCHIVE_SERIES"
+    ],
+    "must_not_infer": [
+      "nonhuman origin from unresolved status",
+      "physical event rate from archive counts without denominator",
+      "nuclear attraction from nuclear-site context",
+      "cross-domain identity before an independent SPACE witness survives its own controls"
+    ]
+  },
+  "rows": [
+    {
+      "row_id": "EARTH-EVENT-001-PANTEX-2015-09-01",
+      "row_kind": "EVENT",
+      "date": "2015-09-01",
+      "date_precision": "DAY",
+      "site": "Pantex Plant",
+      "region": "Texas, USA",
+      "nuclear_context": "nuclear-weapons facility",
+      "source_grade": "P0_PRIMARY_OFFICIAL_INCIDENT_RECORD",
+      "source_authority": "U.S. Department of Energy / NNSA release",
+      "source_url": "https://www.energy.gov/sites/default/files/2026-09/5%20-%20%28UCNI%29%20NNSA-2015-009581%20-%20COR-NPO-20%20SS-992015-642025.pdf",
+      "witness_channels": [
+        "ground_surveillance_radar",
+        "protective_force_visual",
+        "GSR_imagery",
+        "later_image_enhancement"
+      ],
+      "reported_features": {
+        "motion": "slow-moving",
+        "reported_speed_mph": "approximately 10-15",
+        "reported_altitude_ft_one_account": "approximately 100-200",
+        "reported_size_one_account": "approximately 4 ft tall x 2 ft wide",
+        "color_descriptions": "inconsistent across witnesses"
+      },
+      "official_read": "Unidentified slow-moving object; report did not establish unique propulsion or origin and described it as non-threatening.",
+      "classification_state": "UNRESOLVED_SOURCE_IDENTITY",
+      "denominator_state": "EVENT_LEVEL_ONLY__NO_SITE_TIME_RATE_DENOMINATOR",
+      "bridge_eligible": true,
+      "bridge_key": "2015-09-01",
+      "claim_ceiling": "DOCUMENTED_MULTI_CHANNEL_NUCLEAR_SITE_UNKNOWN_OBJECT_EVENT__NO_EXTRAORDINARY_ORIGIN_CLAIM"
+    },
+    {
+      "row_id": "EARTH-EVENT-002-PILGRIM-2015-10-01",
+      "row_kind": "EVENT",
+      "date": "2015-10-01",
+      "date_precision": "DAY_FROM_SERIES_FILENAME_AND_PUBLIC_MIRROR_TRANSCRIPTION",
+      "site": "Pilgrim Nuclear Power Station",
+      "region": "Massachusetts, USA",
+      "nuclear_context": "commercial nuclear power plant",
+      "source_grade": "P0_NARA_SERIES_BOUND__DOCUMENT_TEXT_PENDING_PRIMARY_BYTE_BIND",
+      "source_authority": "U.S. Nuclear Regulatory Commission / NARA RG615",
+      "nara_series_naid": 488808322,
+      "primary_series_url": "https://www.archives.gov/research/catalog/catalog-bulk-downloads/uap-bulk-download",
+      "file_name": "Klukan_Oct_2015_Emails_re_Pilgrim_Drone_Spotting.pdf",
+      "reported_mirror_summary": "NRC email chain concerning a distant initially described possible drone/UFO. Public mirror transcription says local police and a state-police helicopter did not identify the object; a weather balloon was considered; the event did not meet then-current security-incident reporting criteria and no SIDS report was made.",
+      "classification_state": "UNRESOLVED_OBSERVATION__FORMAL_REPORTING_THRESHOLD_NOT_MET",
+      "denominator_state": "REPORTING_PIPELINE_EXAMPLE__NOT_RATE_EVIDENCE",
+      "bridge_eligible": false,
+      "bridge_blocker": "Primary document bytes/text not yet bound; do not promote the mirror transcription to primary evidence.",
+      "claim_ceiling": "REPORTING_PIPELINE_EXAMPLE__ORIGIN_UNRESOLVED"
+    },
+    {
+      "row_id": "EARTH-ARCHIVE-001-NRC-RG615",
+      "row_kind": "ARCHIVE_SERIES",
+      "coverage_start": "2015-10-01",
+      "coverage_end": "2023-12-04",
+      "source_grade": "P0_OFFICIAL_ARCHIVE",
+      "source_authority": "U.S. National Archives and Records Administration",
+      "naid": 488808322,
+      "title": "Records from the Nuclear Regulatory Commission Relating to Unidentified Anomalous Phenomena",
+      "digital_object_count": 3,
+      "format": "PDF",
+      "access": "Unrestricted",
+      "metadata_url": "https://catalog.archives.gov/medialz/bulk-downloads/uaps/JSON/catalog-export-488808322.json",
+      "bulk_zip_url": "https://catalog.archives.gov/medialz/bulk-downloads/uaps/zips/electronic-records/488808322.zip",
+      "classification_state": "PRIMARY_DISCOVERY_AND_PROVENANCE_LAYER",
+      "denominator_state": "SERIES_IS_NOT_A_COMPLETE_EVENT_DENOMINATOR",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "EARTH-POLICY-001-NRC-2024-DRONE-REPORTING",
+      "row_kind": "POLICY_CHANGE",
+      "effective_period": "2024",
+      "date_precision": "YEAR",
+      "source_grade": "P0_OFFICIAL_REGULATORY",
+      "source_authority": "U.S. Nuclear Regulatory Commission",
+      "source_url": "https://www.nrc.gov/regulations-legislation/fact-sheets-brochures/drones-and-nuclear-power-plant-security",
+      "policy_fact": "NRC states regulations were updated in 2024 to require nuclear power plant licensees to report drone sightings; reports are shared with NRC, FAA, FBI and local law enforcement.",
+      "classification_state": "REPORTING_PIPELINE_CHANGEPOINT",
+      "denominator_state": "MANDATORY_COVARIATE_FOR_YEAR_TO_YEAR_REPORT_COUNTS",
+      "bridge_eligible": false,
+      "derived_law": "REPORT_COUNT_CHANGE_ACROSS_2024 != PHYSICAL_EVENT_RATE_CHANGE_WITHOUT_POLICY_NORMALIZATION"
+    },
+    {
+      "row_id": "EARTH-AGG-001-AARO-FY2024-NUCLEAR-UAS",
+      "row_kind": "AGGREGATE",
+      "interval": "FY2024 reporting period",
+      "source_grade": "P0_OFFICIAL_REPORT",
+      "source_authority": "AARO / ODNI / DoD",
+      "source_url": "https://www.dni.gov/files/ODNI/documents/assessments/DOD-AARO-Consolidated-Annual-Report-on-UAP-Nov2024.pdf",
+      "nuclear_site_aerial_reports": 18,
+      "reporting_authority_classification": "UAS",
+      "uap_count_in_this_nuclear_site_subset": 0,
+      "classification_state": "MODERN_UAS_BASELINE",
+      "denominator_state": "AGGREGATE_COUNT__SITE_YEARS_AND_REPORTING_COVERAGE_REQUIRED",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "EARTH-AGG-002-AARO-FY2025-NUCLEAR-UAS",
+      "row_kind": "AGGREGATE",
+      "interval": "FY2025 reporting period",
+      "source_grade": "P0_OFFICIAL_REPORT",
+      "source_authority": "AARO / DoD",
+      "source_url": "https://www.aaro.mil/Congressional-Press-Products/",
+      "nuclear_site_aerial_reports": 50,
+      "reported_percent_change_vs_FY2024": 177.8,
+      "reported_as_UAP": 0,
+      "single_UAS_incidents": 33,
+      "multi_UAS_incidents": 17,
+      "incidents_1700_to_0500_local": 47,
+      "classification_state": "MODERN_UAS_BASELINE",
+      "denominator_state": "AGGREGATE_COUNT__2024_REPORTING_CHANGEPOINT_PREVENTS_NAIVE_TREND_INFERENCE",
+      "bridge_eligible": false
+    },
+    {
+      "row_id": "EARTH-HIST-001-LOS-ALAMOS-1949",
+      "row_kind": "HISTORICAL_ARCHIVAL_CASE_FAMILY",
+      "date": "1949",
+      "date_precision": "YEAR_ONLY_IN_THIS_LEDGER_VERSION",
+      "site": "Los Alamos",
+      "region": "New Mexico, USA",
+      "nuclear_context": "nuclear laboratory",
+      "source_grade": "P0_OFFICIAL_ARCHIVAL_RELEASE",
+      "source_authority": "DOE / PURSUE release",
+      "source_url": "https://www.war.gov/UFO/search/UFO/release/04/",
+      "reported_scope": "Los Alamos Conference on Aerial Phenomena; green-fireball observations and competing hypotheses were institutionally discussed.",
+      "classification_state": "INSTITUTIONAL_INVESTIGATION__NO_UNIQUE_ORIGIN_ESTABLISHED",
+      "denominator_state": "CASE_FAMILY_ONLY",
+      "bridge_eligible": false,
+      "bridge_blocker": "Exact event/conference dates and contemporaneous logs must be bound before day-level joins."
+    }
+  ],
+  "row_counts": {
+    "EVENT": 2,
+    "ARCHIVE_SERIES": 1,
+    "POLICY_CHANGE": 1,
+    "AGGREGATE": 2,
+    "HISTORICAL_ARCHIVAL_CASE_FAMILY": 1,
+    "total": 7,
+    "currently_exact_day_bridge_eligible": 1
+  },
+  "known_missingness": [
+    "The three NARA NRC PDFs are series-bound but their primary bytes are not mirrored into this repository yet.",
+    "AARO FY2024/FY2025 public aggregate counts are not event-level tables and therefore cannot be exact-date joined.",
+    "Site-time exposure/reporting denominators are not yet complete.",
+    "No-record is not encoded as no-event."
+  ],
+  "next_actions": [
+    "Bind the three NRC RG615 PDF bytes and SHA-256 hashes.",
+    "Extract exact policy-change dates and category definitions from primary NRC text.",
+    "Obtain event-level AARO/NRC rows where publicly available.",
+    "Build site-year reporting denominators before rate modeling.",
+    "Promote Pilgrim to bridge-eligible only after primary-byte validation."
+  ],
+  "canonical_seal": "THE EARTH LEDGER RECORDS EVENTS, AGGREGATES AND REPORTING RULES AS DIFFERENT OBJECTS. AN ARCHIVE COUNT IS NOT THE SKY."
+}
