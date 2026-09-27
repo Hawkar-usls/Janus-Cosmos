@@ -1,0 +1,103 @@
+{
+  "schema": "janus.cosmos.bridge.r4_2_third_holdout_null_prereg.v1",
+  "artifact_id": "BRIDGE-R4.2-THIRD-HOLDOUT-NULL-PREREG-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_R4_2_PRIMARY_PALOMAR_MEMBERSHIP_EVALUATION",
+  "earth_cohort_artifact": "BRIDGE-R4.2-THIRD-INDEPENDENT-HOLDOUT-EVENT-LEDGER-1949-1957-v0.1",
+  "earth_cohort_path": "domains/earth/BRIDGE_R4_2_THIRD_HOLDOUT_EVENT_LEDGER_1949_1957_v0.1.json",
+  "palomar_ledger_path": "domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json",
+  "palomar_study_window": ["1949-11-19", "1957-04-28"],
+  "frozen_primary_holdout": {
+    "site_n": 3,
+    "event_date_n": 4,
+    "sites": {
+      "DAVIS_MONTHAN": ["1952-05-01", "1952-08-06"],
+      "BARKSDALE_AFB": ["1952-08-24"],
+      "LAKE_CHARLES_AFB": ["1952-10-06"]
+    },
+    "unit": "UNIQUE_SITE_DATE",
+    "same_site_same_day_reports_collapse": true
+  },
+  "sealed_holdbacks_excluded_from_all_R4_2_evaluation": {
+    "HANFORD_AEC_PLANT": {
+      "date": "1950-07-30",
+      "reason": "Primary scan is identified but official-federal-host byte/page bind remains incomplete; preserve blindness for a future holdout.",
+      "palomar_membership_lookup_forbidden": true
+    },
+    "OFFUTT_AFB": {
+      "date": "1952-06-05",
+      "reason": "Direct Project Blue Book case-byte/page bind not closed before Earth freeze; preserve blindness for a future holdout.",
+      "palomar_membership_lookup_forbidden": true
+    }
+  },
+  "frozen_windows": {
+    "radii_days": [0, 1, 3],
+    "inclusive": true,
+    "interpretation": {
+      "0": "exact calendar day",
+      "1": "plus or minus one UTC calendar day",
+      "3": "plus or minus three UTC calendar days"
+    },
+    "common_null_support_uses_widest_radius_days": 3
+  },
+  "primary_statistics": {
+    "T_r": "number of frozen R4.2 site-dates whose radius-r window contains at least one materialized Palomar observation-day row",
+    "S_r": "number of frozen R4.2 sites with at least one radius-r event-date hit",
+    "U_r": "number of unique materialized Palomar observation days in the union of all R4.2 event windows; descriptive only"
+  },
+  "primary_null": {
+    "name": "INDEPENDENT_SITE_CLUSTER_RIGID_TRANSLATION_EXHAUSTIVE",
+    "description": "Translate every site's entire frozen date cluster by an independent integer number of days. Preserve all within-site date separations exactly. Retain only translations whose full plus/minus-three-day support stays inside the Palomar study window. Compute exact per-site hit histograms and combine them by integer-count convolution; do not Monte Carlo sample.",
+    "preserves": [
+      "number of sites",
+      "number of event dates per site",
+      "within-site date gaps",
+      "Palomar observation schedule and gaps",
+      "window radii"
+    ],
+    "moves": "EARTH_SITE_CLUSTERS_ONLY",
+    "does_not_move": "PALOMAR_LEDGER"
+  },
+  "seasonality_sensitivity_null": {
+    "name": "INDEPENDENT_SITE_CLUSTER_CALENDAR_YEAR_SHIFT_EXHAUSTIVE",
+    "description": "Translate each site's full date cluster only by independent whole-calendar-year offsets, preserving month/day and within-site clustering. Include every year offset for which the full plus/minus-three-day support remains inside the study window. Combine exact per-site count distributions by convolution.",
+    "purpose": "Sensitivity check against Palomar seasonality and calendar-month observation-density structure."
+  },
+  "multiple_window_and_candidate_gate": {
+    "familywise_alpha": 0.05,
+    "number_of_preregistered_windows": 3,
+    "bonferroni_per_window_alpha": 0.016666666666666666,
+    "candidate_level_sky_analysis_default": "BLOCKED",
+    "open_candidate_level_only_if": {
+      "same_window_required": true,
+      "primary_rigid_null_T_upper_tail_lte": 0.016666666666666666,
+      "seasonality_null_T_upper_tail_lte": 0.016666666666666666,
+      "primary_rigid_null_S_upper_tail_lte": 0.05,
+      "seasonality_null_S_upper_tail_lte": 0.05
+    },
+    "law": "DO NOT OPEN PLATE CANDIDATES BECAUSE A DATE LOOKS PRETTY. TEMPORAL EXCESS MUST FIRST SURVIVE BOTH NULL FAMILIES AND THE FROZEN MULTIPLE-WINDOW GATE."
+  },
+  "execution_firewall": {
+    "earth_cohort_frozen_before_prereg": true,
+    "new_primary_Palomar_membership_not_consulted_before_prereg": true,
+    "case_disposition_not_used_for_date_selection": true,
+    "known_outcome_R2_R3_R4_R4_1_sites_and_dates_excluded": true,
+    "Hanford_holdback_must_not_be_evaluated": true,
+    "Offutt_holdback_must_not_be_evaluated": true,
+    "candidate_count_not_primary_statistic": true,
+    "no_posthoc_window_widening": true
+  },
+  "interpretation_contract": {
+    "hit": "A hit means only that the POSS-I materialized ledger contains at least one Palomar observation opportunity inside the preregistered Earth-date window.",
+    "miss": "A miss means no materialized Palomar observation-day row fell inside that window. It does not mean the sky was observed and empty.",
+    "significance": "A small null-tail fraction would establish only unusual temporal observation-opportunity coincidence under the frozen calendar nulls, not physical identity or causation.",
+    "forbidden_promotions": [
+      "UAP identity from temporal overlap",
+      "nonhuman origin",
+      "nuclear or strategic-site attraction",
+      "Earth-space causal coupling",
+      "candidate-level anomaly claim before the frozen gate passes"
+    ]
+  },
+  "claim_ceiling": "R4.2 MAY TEST ONLY WHETHER AN INDEPENDENT THIRD SOURCE-FIRST EARTH HOLDOUT HAS MORE PALOMAR OBSERVATION-OPPORTUNITY OVERLAP THAN EXPECTED UNDER THE PREREGISTERED NULLS.",
+  "canonical_seal": "FREEZE EARTH, FREEZE THE NULLS, THEN OPEN THE PALOMAR CALENDAR. HANFORD AND OFFUTT STAY CLOSED. PRETTY COINCIDENCES DO NOT BYPASS THE GATE."
+}
