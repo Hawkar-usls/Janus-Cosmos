@@ -1,0 +1,75 @@
+name: JANUS Cosmos Observer Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/observer/**'
+      - 'domains/earth/**'
+      - 'domains/space/**'
+      - 'domains/bridge/**'
+      - '.github/workflows/cosmos-observer-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: janus-cosmos-pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate observer inputs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          required = [
+              Path('domains/earth/NUC_EVENT_LEDGER_v0.1.json'),
+              Path('domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json'),
+              Path('domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json'),
+          ]
+          for p in required:
+              with p.open(encoding='utf-8') as f:
+                  json.load(f)
+              print('PASS JSON', p)
+          for p in [Path('docs/observer/index.html'), Path('docs/observer/styles.css'), Path('docs/observer/app.js')]:
+              assert p.exists() and p.stat().st_size > 0, p
+              print('PASS ASSET', p)
+          PY
+      - name: Enforce Cousteau/Kusto no-touch boundary
+        run: |
+          git fetch origin main --depth=2 || true
+          BASE="${{ github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD^"
+          fi
+          CHANGED="$(git diff --name-only "$BASE" HEAD || true)"
+          printf '%s\n' "$CHANGED"
+          if printf '%s\n' "$CHANGED" | grep -Ei '^(data/cousteau/|archive/cousteau|.*cousteau.*|.*kusto.*)'; then
+            echo 'FAIL: observer change touched protected Cousteau/Kusto content.'
+            exit 1
+          fi
+          echo 'PASS: no protected Cousteau/Kusto content touched.'
+
+  deploy:
+    needs: validate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/observer
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
