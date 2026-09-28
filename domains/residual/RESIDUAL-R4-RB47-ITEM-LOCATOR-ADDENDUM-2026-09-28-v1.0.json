@@ -1,0 +1,48 @@
+{
+  "schema": "janus.cosmos.residual.r4_rb47_item_locator_addendum.v1",
+  "artifact_id": "RESIDUAL-R4-RB47-ITEM-LOCATOR-ADDENDUM-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "status": "ITEM_ID_CANDIDATE_STRONGLY_RESOLVED__DIRECT_OFFICIAL_NARA_BYTE_BIND_STILL_OPEN",
+  "official_archive_surface": {
+    "series": "Project Blue Book Case Files on Sightings of Unidentified Flying Objects (UFOs), June 1947-December 1969",
+    "series_naid": "595466",
+    "official_bulk_page": "https://www.archives.gov/research/catalog/catalog-bulk-downloads/uap-bulk-download",
+    "official_metadata_object": "catalog-export-595466.json",
+    "official_bulk_zip": "595466.zip",
+    "retrieval_state": "OFFICIAL_ENDPOINTS_IDENTIFIED__BINARY_OCTET_STREAM_NOT_READABLE_IN_CURRENT_RETRIEVAL_SURFACE"
+  },
+  "locator_evidence": {
+    "candidate_archive_reference": "6961835",
+    "date": "1957-07-17",
+    "location_label": "Forbes AFB, Kansas / Oklahoma City / Fort Worth sequence",
+    "frame_count_reported_by_nara_derived_mirror": 56,
+    "project_blue_book_case_number_reported_by_independent_index": "4810",
+    "microfilm_publication": "T-1206",
+    "reported_index_page": "NARA-PBB1-167",
+    "project_form_identifier": "PROJECT 10073",
+    "locator_sources": [
+      "NARA-derived T-1206 mirror exposing case reference 6961835 and 56-frame transcription",
+      "Independent Blue Book index identifying the RB-47 event as case 4810 / T-1206 roll 1 index page NARA-PBB1-167"
+    ]
+  },
+  "identifier_firewall": {
+    "6961835": "candidate NARA archive/catalog reference from a NARA-derived mirror; direct official Catalog bind not retrieved",
+    "4810": "Project Blue Book case number reported by an independent index",
+    "T-1206": "NARA microfilm publication identifier",
+    "PROJECT_10073": "USAF project/form identifier printed on Blue Book record cards; NOT a case number",
+    "law": "NEVER SUBSTITUTE ONE IDENTIFIER NAMESPACE FOR ANOTHER."
+  },
+  "content_boundary": {
+    "record_card": "The recovered mirror transcription includes a 17 July 1957 Project 10073 record card and later analytical/research material in the same 56-frame grouping.",
+    "important_conflict": "The record card carries an American Airlines Flight 655 identification language while later analyses dispute that fit. R4 therefore treats the archive grouping as documentary evidence requiring frame-level provenance, not as a single internally consistent measurement record.",
+    "raw_data_state": "No continuous ELINT recording, ground-radar scope film/plot, synchronized navigation stream, or calibration/error model was recovered."
+  },
+  "scientific_effect": {
+    "G0_PRIMARY_SOURCE_BIND": "MATERIALLY_NARROWED_BUT_NOT_CLOSED_AT_DIRECT_OFFICIAL_BYTE_LEVEL",
+    "G3_CALIBRATED_MEASUREMENT": "UNCHANGED_CLOSED",
+    "physical_anomaly_promotion": false,
+    "pattern_effect": "STRENGTHENS_PROVENANCE_HAZARD_AND_EVIDENCE_ATTRITION; DOES_NOT_ADD_A_PHYSICAL_SIGNATURE"
+  },
+  "next_exact_action": "Obtain the official NARA 595466 metadata/bulk bytes through a compatible client or NARA reference service and verify whether 6961835 is the official item/file-unit NAID for the 17 July 1957 RB-47 grouping. Then bind exact frame/object URLs and hashes before any content-level promotion.",
+  "canonical_seal": "RB47 NOW HAS A PRECISE ARCHIVAL ADDRESS CANDIDATE, NOT NEW PHYSICS. 6961835 MUST BE VERIFIED BY NARA BEFORE IT BECOMES CANONICAL."
+}
