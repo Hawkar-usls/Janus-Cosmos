@@ -1,0 +1,41 @@
+{
+  "schema": "janus.cosmos.residual.r4_nimitz_retention_applicability_addendum.v1",
+  "artifact_id": "RESIDUAL-R4-NIMITZ-RETENTION-APPLICABILITY-ADDENDUM-2026-09-28-v1.0",
+  "parent_addendum": "RESIDUAL-R4-NIMITZ-PRE2010-RETENTION-ADDENDUM-2026-09-28-v1.0",
+  "status": "HISTORICAL_CIC_RETENTION_PATHWAY_STRONGLY_ESTABLISHED__RAW_SPY1_RECORD_CLASS_MAPPING_STILL_OPEN",
+  "official_evidence": [
+    {
+      "authority": "N1-NU-89-005",
+      "record_class": "SSIC 3560/1 Combat Information Center Logs",
+      "disposition": "Destroy when 3 years old.",
+      "source": "NARA Operations and Readiness Records schedule"
+    },
+    {
+      "authority": "N1-NU-89-005",
+      "record_class": "SSIC 3560/2 Dead Reckoning Traces for Realtime/Routine Operations",
+      "disposition": "Destroy when 3 months old.",
+      "source": "NARA Operations and Readiness Records schedule"
+    },
+    {
+      "authority": "DAA-NU-2015-0003",
+      "approved": "2018-07-14",
+      "finding": "The later approved Navy Operations and Readiness schedule explicitly lists N1-NU-89-5 / 3560/1 among superseded agency disposition authorities.",
+      "source": "NARA approved records schedule DAA-NU-2015-0003"
+    }
+  ],
+  "inference": {
+    "ordinary_short_retention_for_CIC_logs_before_2018": "STRONGLY_SUPPORTED",
+    "compatibility_with_missing_2004_operational_records_by_2023": "STRONGLY_SUPPORTED_AS_A_GENERAL_MECHANISM",
+    "proof_that_Princeton_SPY1_raw_returns_were_3560_1_CIC_logs": false,
+    "proof_that_specific_2004_Nimitz_records_were_destroyed": false,
+    "proof_of_concealment": false
+  },
+  "critical_mapping_gap": "The remaining records-management question is not whether short retention existed. It did. The question is which exact SSIC/data system governed USS Princeton AN/SPY-1/Aegis raw track data, tactical display/event-reconstruction data, and associated network audio in November 2004.",
+  "pattern_effect": {
+    "P_RETENTION_POLICY_ATTRITION": "MATERIALLY_STRENGTHENED",
+    "P_EVIDENCE_ATTRITION": "STRENGTHENED_BY_DOCUMENTED_ORDINARY_MECHANISM",
+    "physical_phenomenon_patterns": "UNCHANGED"
+  },
+  "next_exact_action": "Resolve the 2004 data product definitions and SSIC mapping for AN/SPY-1/Aegis track history, CIC tactical records and exercise-monitoring communications; then search for any transfer/destruction exception tied to USS Princeton CG-59 and 14 November 2004.",
+  "canonical_seal": "SHORT-LIVED CIC RECORDS ARE NO LONGER SPECULATION. WHAT REMAINS UNPROVEN IS WHETHER THE MISSING PRINCETON RAW SENSOR PRODUCTS BELONGED TO THAT RECORD CLASS."
+}
