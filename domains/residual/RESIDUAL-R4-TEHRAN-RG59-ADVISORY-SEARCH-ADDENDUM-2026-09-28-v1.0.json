@@ -1,0 +1,40 @@
+{
+  "schema": "janus.cosmos.residual.r4_tehran_rg59_advisory_search_addendum.v1",
+  "artifact_id": "RESIDUAL-R4-TEHRAN-RG59-ADVISORY-SEARCH-ADDENDUM-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "status": "DETERMINISTIC_US_DOCUMENTARY_SHADOW_TARGET_ESTABLISHED__EVENT_LEVEL_RECORD_NOT_RECOVERED",
+  "official_findings": [
+    {
+      "source": "NARA RG59 Central Foreign Policy Files 1973-1979",
+      "naid": "654098",
+      "finding": "The series contains electronic telegrams plus electronically indexed microfilmed hard-copy records; declassified telegrams and index information through 1979 are searchable by NARA tools."
+    },
+    {
+      "source": "Foreign Relations of the United States / State Department historical record",
+      "finding": "By FY1976 roughly 1,708 DoD personnel were projected in Iran, with the increase attributed almost entirely to security-assistance activities; ARMISH/MAAG remained part of the U.S. military-assistance structure."
+    },
+    {
+      "source": "Foreign Relations of the United States / State Department historical record",
+      "finding": "U.S. technical/advisory support had long included Iranian F-4 acquisition, training, maintenance/support functions and air-defense modernization, creating plausible U.S. reporting channels for operational or maintenance anomalies."
+    }
+  ],
+  "search_result": {
+    "web_indexed_event_specific_RG59_telegram_recovered": false,
+    "meaning": "No event-specific RG59 telegram was recovered through the searched public web-indexed subset. This is NOT a claim that AAD/microfilm contains no such record.",
+    "primary_DIA_JCS_message_state": "STILL_CANONICAL_EVENT_REPORT__REPORT_OF_MEASUREMENTS_NOT_RAW_MEASUREMENT"
+  },
+  "target_query_dimensions": [
+    "date 1976-09-19 plus adjacent 1976-09-18 through 1976-09-21",
+    "origin/destination TEHRAN / STATE / USDAO / SECDEF / CJCS",
+    "terms Mehrabad, Shahrokhi, F-4, interceptor, radar, communications failure, avionics, unidentified object",
+    "microfilm index records where the telegram text itself is not in the electronic database"
+  ],
+  "scientific_effect": {
+    "G0_ARCHIVE_LINEAGE": "STRENGTHENED",
+    "G3_CALIBRATED_MEASUREMENT": "UNCHANGED_CLOSED",
+    "P_EVIDENCE_ATTRITION": "STRENGTHENED_BY_EXISTENCE_OF_RICH_US_REPORTING_INFRASTRUCTURE_WITHOUT_RECOVERED_INSTRUMENT_LAYER",
+    "P_EM_INSTRUMENT_EFFECTS": "UNCHANGED_SINGLE_CASE_NARRATIVE_UNTIL_MAINTENANCE_OR_FAULT_RECORDS_APPEAR"
+  },
+  "next_exact_action": "Run an item/date/MRN-level query against NARA AAD/CFPF and request indexed microfilm hits for 18-21 September 1976 from/to Tehran, then cross-reference any USDAO/ARMISH-MAAG or Defense identifiers against maintenance/advisory holdings.",
+  "canonical_seal": "TEHRAN NOW HAS A SECOND SEARCH AXIS: NOT 'UFO FILES' BUT THE 1976 U.S. SECURITY-ASSISTANCE AND DIPLOMATIC REPORTING SHADOW. NO EVENT-LEVEL NEW RECORD HAS YET BEEN RECOVERED."
+}
