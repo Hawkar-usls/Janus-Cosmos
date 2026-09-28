@@ -1,0 +1,48 @@
+{
+  "schema": "janus.cosmos.residual.named_record_request_packet.v1",
+  "artifact_id": "RESIDUAL-R5-NAMED-RECORD-REQUEST-PACKET-2026-09-28-v1.0",
+  "parent_r4": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "status": "READY_NOT_SENT",
+  "rule": "Requests are intentionally narrow. Do not ask for 'all UFO/UAP records' when an exact archive object, date, unit, data product, or disposition question is available.",
+  "requests": [
+    {
+      "request_id": "R5-RB47-NARA-ITEM-BIND",
+      "destination_type": "NARA reference inquiry / Modern Military or UAP reference",
+      "official_contacts": ["inquire@nara.gov", "archives2reference@nara.gov"],
+      "subject": "Project Blue Book RB-47 case, 17 July 1957 — exact file-unit/item NAID and digital object URLs",
+      "request_body": "I am trying to resolve the Project Blue Book case concerning the RB-47 electronic reconnaissance aircraft event of 17 July 1957 to its exact NARA Catalog file-unit/item identity. NARA's official UAP bulk-download page identifies Project Blue Book Case Files series NAID 595466 and sanitized series 597821. Non-NARA discovery indexes point to Project Blue Book case 4810, T-1206 roll 1 index page NARA-PBB1-167, and a possible archive reference 6961835. I am not asking NARA to validate those external identifiers. Could you please provide the exact NARA file-unit/item NAID(s), Catalog URL(s), and available digital-object/file URLs for the 17 July 1957 RB-47 case, and indicate whether the associated item contains only case paperwork or any original radar/ELINT recording media or instrument data?",
+      "success_fields": ["official item/file-unit NAID", "official Catalog URL", "digital object URLs", "microfilm roll/frame or file-unit boundaries", "statement whether original sensor media/data are present"]
+    },
+    {
+      "request_id": "R5-NIMITZ-2004-RECORD-CLASS-DISPOSITION",
+      "destination_type": "Department of the Navy FOIA / records-management routing",
+      "official_submission_surface": "https://www.secnav.navy.mil/foia/pages/default.aspx",
+      "subject": "USS Princeton CG-59 November 2004 — applicable records schedule and disposition for Aegis/CIC track-history records",
+      "request_body": "This request is limited to records-management provenance, not a renewed request for the underlying UAP sensor data. For USS Princeton (CG-59) during 10-16 November 2004, please identify the records schedule/SSIC and disposition authority that governed: (1) AN/SPY-1/Aegis track-history or tactical target data, (2) Combat Information Center tactical/event logs, (3) any exercise-monitoring electronic video/data used for event reconstruction, and (4) air-defense-control-net or comparable tactical communications recordings. If available, please provide any records-transfer, destruction, disposition, or retention-exception documentation for those data classes for USS Princeton or the relevant carrier strike group/exercise. Historical NARA schedule N1-NU-89-005 lists SSIC 3560/1 Combat Information Center Logs as temporary, but this request does not assume raw SPY-1 products were classified under that item. I am asking for the exact 2004 mapping and disposition authority.",
+      "success_fields": ["2004 applicable SSIC/schedule item", "data-product-to-record-class mapping", "retention period", "transfer/destruction/disposition record", "exception or permanent-retention rule if applicable"]
+    },
+    {
+      "request_id": "R5-TEHRAN-1976-CFPF-USDAO",
+      "destination_type": "NARA textual/electronic reference",
+      "official_contacts": ["archives2reference@nara.gov", "cer@nara.gov", "inquire@nara.gov"],
+      "subject": "Tehran 18-21 September 1976 — RG59 CFPF / USDAO / military-advisory records concerning F-4 intercept and equipment faults",
+      "request_body": "I am researching records surrounding the Imperial Iranian Air Force F-4 intercept reported in the contemporaneous U.S. DIA/JCS message for 19 September 1976. I am specifically seeking primary records beyond the already released narrative message. Could you identify RG59 Central Foreign Policy Files (NAID 654098), indexed microfilm, Foreign Service Post, USDAO, ARMISH/MAAG, or related U.S. advisory records dated 18-21 September 1976 that concern Tehran/Mehrabad/Shahrokhi, F-4 interceptor operations, radar contacts, communications/instrument failures, maintenance/fault reports, or follow-up reporting? For any hits, please provide MRN/document number, date, from/to, subject, film/index identifier, and digital image or ordering reference. I am particularly interested in maintenance/fault or radar/communications records that could independently test the reported instrumentation effects and geometry.",
+      "success_fields": ["MRN/document number", "date/from/to/subject", "film or index identifier", "digital image/order reference", "maintenance/fault record", "ground-radar or communications record"]
+    }
+  ],
+  "response_classification": {
+    "FOUND_GEOMETRY_ENABLING_PRIMARY_DATA": "REOPEN_G3_FOR_THAT_CASE_ONLY",
+    "FOUND_CASE_PAPERWORK_ONLY": "IMPROVE_G0_PROVENANCE_ONLY",
+    "FOUND_DISPOSITION_RECORD": "CLOSE_OR_NARROW_EVIDENCE_ATTRITION_PATHWAY",
+    "NO_RECORDS_LOCATED": "RECORD_SEARCH_OUTCOME_ONLY__NOT_PROOF_OF_DESTRUCTION_OR_CONCEALMENT",
+    "REFERRED_TO_OTHER_COMPONENT": "FOLLOW_REFERRAL_WITH_SAME_NARROW_SCOPE",
+    "FEE_OR_ONSITE_ONLY": "PRESERVE_LOCATOR_AND_ORDERING_INFORMATION"
+  },
+  "do_not_infer": [
+    "No Records Located means the record never existed",
+    "A short retention schedule proves a specific sensor record was destroyed",
+    "An official case file proves extraordinary physics",
+    "A precise narrative number is calibrated measurement"
+  ],
+  "canonical_seal": "R5 ASKS FOR IDENTIFIERS, DATA PRODUCTS, AND DISPOSITION — NOT FOR BETTER UFO STORIES."
+}
