@@ -1,0 +1,202 @@
+{
+  "schema": "janus.cosmos.residual.pattern_registry.v1",
+  "artifact_id": "RESIDUAL-PATTERN-REGISTRY-2026-09-28-v1.0",
+  "contract_artifact_id": "RESIDUAL-PATTERN-REGISTRY-CONTRACT-2026-09-28-v1.0",
+  "status": "INITIAL_PATTERN_REGISTRY_MATERIALIZED__NO_COMMON_ORIGIN_INFERENCE",
+  "corpus_n": 6,
+  "cases": ["WASHINGTON_1952","RB47_1957","TEHRAN_1976","JAL1628_1986","NIMITZ_2004","AARO_PR036_2020"],
+  "patterns": [
+    {
+      "pattern_id": "P-EVIDENCE-ATTRITION",
+      "layer": "EVIDENCE_PIPELINE",
+      "name": "Narrative survives better than geometry-enabling raw data",
+      "definition": "Strong reports, official summaries, testimony, or authenticated media survive while synchronized raw sensor streams, calibration, platform state, and error models are missing or incomplete.",
+      "case_support": ["WASHINGTON_1952","RB47_1957","TEHRAN_1976","JAL1628_1986","NIMITZ_2004","AARO_PR036_2020"],
+      "case_counterexamples": [],
+      "support_state": "VERY_STRONG_DATASET_PATTERN__6_OF_6_FAIL_OR_CANNOT_PASS_G3; R2_TOP3_GEOMETRY_ENABLING_RAW_DATASET=0_OF_3",
+      "ordinary_explanations": ["historical retention policy","sensor classification","records-management fragmentation","FOIA component mismatch","data never recorded or not preserved"],
+      "nonordinary_hypotheses_not_excluded": [],
+      "discriminating_measurement": "Recover original synchronized raw tracks plus calibration and platform/navigation timebase.",
+      "epistemic_ceiling": "A property of the evidence pipeline, not evidence about the object's origin."
+    },
+    {
+      "pattern_id": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "layer": "EVIDENCE_PIPELINE",
+      "name": "Multiple reported channels without reproducible common-time fusion",
+      "definition": "Several cases report visual, radar, ELINT, IR, or system-effect channels, yet the public record does not supply synchronized calibrated data proving that every channel measured the same physical object.",
+      "case_support": ["RB47_1957","TEHRAN_1976","JAL1628_1986","NIMITZ_2004"],
+      "case_counterexamples": ["WASHINGTON_1952","AARO_PR036_2020"],
+      "support_state": "STRONG_REPORTED_PATTERN__4_OF_6; MEASUREMENT_VALIDATED_COMMON_OBJECT_FUSION=0_OF_4",
+      "ordinary_explanations": ["coincidental targets","operator association after the event","time/bearing uncertainty","different sensors observing different objects"],
+      "nonordinary_hypotheses_not_excluded": ["one physical target genuinely observed through multiple channels"],
+      "discriminating_measurement": "Common-clock raw sensor records with geometry showing intersecting uncertainty volumes for the same target.",
+      "epistemic_ceiling": "Multi-channel testimony raises evidential interest but is not equivalent to multi-sensor measurement."
+    },
+    {
+      "pattern_id": "P-HIGH-SENSOR-DENSITY-CONTEXT",
+      "layer": "CONTEXT",
+      "name": "Events are enriched in high-observation military/aviation environments",
+      "definition": "Most frozen cases occur where trained observers, radar/IR/ELINT systems, intercept procedures, or formal reporting channels are unusually dense.",
+      "case_support": ["WASHINGTON_1952","RB47_1957","TEHRAN_1976","NIMITZ_2004","AARO_PR036_2020"],
+      "case_counterexamples": ["JAL1628_1986"],
+      "support_state": "STRONG_CONTEXT_PATTERN__5_OF_6_DEFENSE_OR_MILITARY_SENSOR_ENVIRONMENTS; JAL1628_IS_CIVIL_AVIATION_CONTROL",
+      "ordinary_explanations": ["observation opportunity bias","reporting-policy bias","more sensors per unit time","security-driven investigation and retention"],
+      "nonordinary_hypotheses_not_excluded": ["a real phenomenon preferentially approaching strategic activity"],
+      "discriminating_measurement": "Compare event rate per sensor-hour/observer-hour against matched non-strategic environments with the same sensor suite and reporting policy.",
+      "epistemic_ceiling": "Raw case counts near military assets cannot establish attraction without a denominator."
+    },
+    {
+      "pattern_id": "P-GEOMETRY-DEGENERACY",
+      "layer": "MEASUREMENT_VALIDATED",
+      "name": "Range/parallax/propagation/tracking ambiguity can manufacture apparent performance",
+      "definition": "Cases or controls lose extraordinary-motion interpretations when range, atmospheric propagation, platform motion, zoom, or target distance are treated correctly.",
+      "case_support": ["WASHINGTON_1952","AARO_PR036_2020"],
+      "case_counterexamples": [],
+      "support_state": "DIRECT_IN_FROZEN_CORPUS_2_OF_6__STRONGLY_REINFORCED_BY_MODERN_AARO_RESOLVED_CONTROLS",
+      "ordinary_explanations": ["temperature inversion/anomalous propagation","manual tracking amplification","parallax","incorrect range assumption","distant conventional aircraft","wind-drifting balloons","optical distortion"],
+      "nonordinary_hypotheses_not_excluded": [],
+      "discriminating_measurement": "Independent range plus platform pose plus atmospheric profile and raw imagery/radar.",
+      "epistemic_ceiling": "Apparent speed or acceleration without independent range is not robust kinematics."
+    },
+    {
+      "pattern_id": "P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL",
+      "layer": "PHENOMENON_REPORTED",
+      "name": "Bright, smooth, or low-detail targets recur among strong residual narratives",
+      "definition": "Several top residuals describe high-contrast/luminous or feature-poor targets rather than richly resolved structures.",
+      "case_support": ["RB47_1957","TEHRAN_1976","NIMITZ_2004"],
+      "case_counterexamples": [],
+      "support_state": "REPORTED_TOP3_PATTERN__NOT_GEOMETRY_VALIDATED",
+      "ordinary_explanations": ["saturation/glare","distance-limited angular resolution","night observation","sensor point-spread function","aircraft/balloon appearance under poor geometry"],
+      "nonordinary_hypotheses_not_excluded": ["a genuinely featureless or luminous physical platform"],
+      "discriminating_measurement": "Unsaturated multispectral imagery with known range and angular resolution sufficient to resolve structure.",
+      "epistemic_ceiling": "Low structural detail is expected under many ordinary imaging conditions and is not a technology signature."
+    },
+    {
+      "pattern_id": "P-INTERCEPT-RESPONSE-NARRATIVE",
+      "layer": "PHENOMENON_REPORTED",
+      "name": "Target behavior is sometimes reported as contingent on interception or approach",
+      "definition": "In several high-interest narratives the unknown appears to change position, range, or behavior during an aircraft approach/intercept.",
+      "case_support": ["RB47_1957","TEHRAN_1976","NIMITZ_2004"],
+      "case_counterexamples": [],
+      "support_state": "NARRATIVE_PATTERN_ONLY__RAW_COMMON-TIME_KINEMATICS_NOT_RECOVERED",
+      "ordinary_explanations": ["relative-motion geometry","pilot pursuit geometry","controller interpretation","multiple-target association","range uncertainty"],
+      "nonordinary_hypotheses_not_excluded": ["responsive autonomous physical target"],
+      "discriminating_measurement": "Synchronized target and interceptor state vectors showing statistically contingent maneuvers beyond geometric expectation.",
+      "epistemic_ceiling": "Reported responsiveness is interesting but currently cannot be separated from pursuit geometry."
+    },
+    {
+      "pattern_id": "P-EM-INSTRUMENT-EFFECTS",
+      "layer": "PHENOMENON_REPORTED",
+      "name": "Electromagnetic/instrument disruption",
+      "definition": "Loss or degradation of aircraft communications/instrumentation temporally associated with the reported object.",
+      "case_support": ["TEHRAN_1976"],
+      "case_counterexamples": ["WASHINGTON_1952","NIMITZ_2004","AARO_PR036_2020"],
+      "support_state": "NOT_A_RECURRING_STRONG-CORPUS_PATTERN_YET__ONE_CLEAR_PRIMARY-NARRATIVE_CASE",
+      "ordinary_explanations": ["aircraft electrical fault","radio/intercom fault","maintenance issue","coincidental failure","reporting compression"],
+      "nonordinary_hypotheses_not_excluded": ["external electromagnetic interaction"],
+      "discriminating_measurement": "Maintenance logs, bus voltage/current, RF spectrum, fault codes, independent aircraft experiencing correlated effects at known geometry.",
+      "epistemic_ceiling": "Do not generalize the Tehran system-effects report to UAP as a class."
+    },
+    {
+      "pattern_id": "P-MORPHOLOGY-ROUND-ORB",
+      "layer": "CONTEXT",
+      "name": "Round/orb reports dominate modern AARO morphology statistics",
+      "definition": "AARO's published reporting trends show round/orb/sphere as the largest morphology category in the modern reporting corpus.",
+      "case_support": [],
+      "case_counterexamples": [],
+      "support_state": "EXTERNAL_MODERN_POPULATION_PATTERN__NOT_USED_AS_FIXED-SIX_CASE_COUNT",
+      "ordinary_explanations": ["small unresolved targets become approximately circular point-spread functions","balloons","distant aircraft/lights","classification vocabulary"],
+      "nonordinary_hypotheses_not_excluded": ["a real population with simple round geometry"],
+      "discriminating_measurement": "Resolved imagery with angular size above instrument PSF and independent range.",
+      "epistemic_ceiling": "Reported shape frequency is not physical-shape frequency until resolution effects are modeled."
+    }
+  ],
+  "cross_pattern_relationships": [
+    {
+      "relation_id": "R-PAT-01",
+      "from": "P-HIGH-SENSOR-DENSITY-CONTEXT",
+      "to": "P-EVIDENCE-ATTRITION",
+      "relation": "High-end military sensors create unusually rich narratives but also increase classification/custody/retention barriers, so case vividness and public reproducibility can move in opposite directions.",
+      "state": "PLAUSIBLE_DATASET_LEVEL_RELATION__NOT_CAUSALLY_PROVEN"
+    },
+    {
+      "relation_id": "R-PAT-02",
+      "from": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "to": "P-INTERCEPT-RESPONSE-NARRATIVE",
+      "relation": "Perceived responsiveness is hardest to validate precisely where different channels cannot be fused on a common timebase; narrative correlation can therefore overstate target-interceptor coupling.",
+      "state": "METHODLOGICAL_DEPENDENCY"
+    },
+    {
+      "relation_id": "R-PAT-03",
+      "from": "P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL",
+      "to": "P-GEOMETRY-DEGENERACY",
+      "relation": "Bright/low-detail targets tend to have poor range and shape constraints, which makes apparent speed, size, and maneuver estimates especially geometry-sensitive.",
+      "state": "PHYSICS_AND_SENSOR_MODEL_EXPECTATION__CASE_LEVEL_TESTS_REQUIRED"
+    },
+    {
+      "relation_id": "R-PAT-04",
+      "from": "P-MORPHOLOGY-ROUND-ORB",
+      "to": "P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL",
+      "relation": "Unresolved point-like targets can become round in optical/IR imagery, so orb morphology may partly be a resolution phenotype rather than an object phenotype.",
+      "state": "STRONG_SENSOR-OPTICS_ALTERNATIVE"
+    }
+  ],
+  "hypothesis_map": [
+    {
+      "hypothesis": "H0_SENSOR_GEOMETRY_OR_ARTIFACT",
+      "current_state": "STRONGLY_SUPPORTED_AS_AN_EXPLANATION_FOR_A_SUBSET",
+      "supporting_patterns": ["P-GEOMETRY-DEGENERACY","P-MORPHOLOGY-ROUND-ORB","P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL"],
+      "cannot_explain_yet": ["all reported RB47 cross-channel correlations","all Tehran narrative correlations"],
+      "falsifier": "Two independent calibrated sensor systems on a common timebase reconstruct the same target performing outside ordinary envelopes after artifact models fail."
+    },
+    {
+      "hypothesis": "H1_ATMOSPHERIC_ASTRONOMICAL_OR_PROPAGATION",
+      "current_state": "SUPPORTED_FOR_SOME_CASES_NOT_A_UNIVERSAL_EXPLANATION",
+      "supporting_patterns": ["P-GEOMETRY-DEGENERACY"],
+      "cannot_explain_yet": ["every multi-channel residual without case-specific reconstruction"],
+      "falsifier": "Complete environmental model excludes propagation/astronomical sources while calibrated target tracks remain anomalous."
+    },
+    {
+      "hypothesis": "H2_ORDINARY_OR_CLASSIFIED_HUMAN_PLATFORM",
+      "current_state": "NOT_EXCLUDED_CASE-BY-CASE",
+      "supporting_patterns": ["P-HIGH-SENSOR-DENSITY-CONTEXT"],
+      "cannot_explain_yet": ["claims of extreme performance if those claims were later independently validated"],
+      "falsifier": "Calibrated trajectory exceeds plausible human platform envelope with contemporaneous airspace/test-program controls."
+    },
+    {
+      "hypothesis": "H3_REPORTING_SELECTION_AND_HIGH_SENSOR_DENSITY",
+      "current_state": "STRONG_DATASET-LEVEL_CONFOUNDER",
+      "supporting_patterns": ["P-HIGH-SENSOR-DENSITY-CONTEXT","P-EVIDENCE-ATTRITION"],
+      "cannot_explain_yet": ["the physical nature of any individual residual"],
+      "falsifier": "Matched sensor-hour study shows a persistent excess in strategic contexts after equalizing instrumentation and reporting policy."
+    },
+    {
+      "hypothesis": "H4_HETEROGENEOUS_MIXTURE_NO_SINGLE_CAUSE",
+      "current_state": "CURRENT_LEADING_WORKING_MODEL",
+      "supporting_patterns": ["P-GEOMETRY-DEGENERACY","P-EVIDENCE-ATTRITION","P-EM-INSTRUMENT-EFFECTS"],
+      "reason": "The frozen corpus already contains prosaic/artifact-supported cases and unresolved cases blocked for different evidentiary reasons; no validated physical signature currently unifies them.",
+      "falsifier": "A repeated calibrated signature appears across independent cases and cannot be generated by the known mixture components."
+    },
+    {
+      "hypothesis": "H5_UNKNOWN_PHYSICAL_PLATFORM_OR_PHENOMENON",
+      "current_state": "NOT_EXCLUDED_FOR_INDIVIDUAL_TIER-B_RESIDUALS__NOT_POSITIVELY_ESTABLISHED",
+      "supporting_patterns": ["P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION","P-INTERCEPT-RESPONSE-NARRATIVE"],
+      "blocking_patterns": ["P-EVIDENCE-ATTRITION","P-GEOMETRY-DEGENERACY"],
+      "promotion_condition": "At least two independent cases pass calibrated measurement, shared-object identity, environmental/artifact controls, and retain a common physically quantified signature."
+    }
+  ],
+  "initial_analysis": {
+    "strongest_repeated_finding": "THE_MISSING-MEASUREMENT_PATTERN_IS MORE ROBUST THAN ANY CLAIMED_OBJECT_PROPERTY",
+    "second_strongest": "MULTICHANNEL_REPORTING_RECURS, BUT PUBLIC_COMMON-TIME_SENSOR_FUSION_DOES_NOT",
+    "most_important_selection_effect": "MILITARY_AND_HIGH-SENSOR-DENSITY_ENVIRONMENTS_DOMINATE_THE_STRONG_CASES",
+    "most_dangerous_false-pattern": "UNRESOLVED_EQUALS_ANOMALOUS_PHYSICS",
+    "current_best_explanatory_frame": "HETEROGENEOUS_MIXTURE_WITH_A_SMALL_UNRESOLVED_RESIDUAL; NO SINGLE COMMON-ORIGIN MODEL IS CURRENTLY REQUIRED BY THE DATA"
+  },
+  "source_surface_notes": [
+    "R1/R2 Janus frozen artifacts are canonical for fixed-six case gate states.",
+    "AARO official reporting trends are used only as modern population/control context, not retroactively as evidence about a historical case.",
+    "NARA Project Blue Book holdings establish the existence and structure of archival case/OSI collections; archive presence does not imply raw telemetry exists."
+  ],
+  "next_update_rule": "Add a pattern only when at least two cases support it, unless the entry is explicitly marked NOT_RECURRING_YET as a guard against overgeneralization. Update hypothesis relationships only after source-bound case changes or new matched controls.",
+  "canonical_seal": "THE FIRST COMMON PATTERN IS NOT A CRAFT SHAPE. IT IS THE GAP BETWEEN A STRONG REPORT AND A REPRODUCIBLE MEASUREMENT."
+}
