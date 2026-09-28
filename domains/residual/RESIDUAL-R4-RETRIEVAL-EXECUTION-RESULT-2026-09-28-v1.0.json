@@ -1,0 +1,100 @@
+{
+  "schema": "janus.cosmos.residual.r4_retrieval_execution_result.v1",
+  "artifact_id": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "contract_artifact_id": "RESIDUAL-R4-RETRIEVAL-EXECUTION-CONTRACT-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY-RESULT-2026-09-28-v1.0",
+  "status": "NO_GEOMETRY_ENABLING_RAW_DATA_RECOVERED__ARCHIVAL_PROVENANCE_AND_RETENTION_MECHANISMS_MATERIALLY_NARROWED",
+  "counts": {
+    "targets": 3,
+    "geometry_enabling_raw_dataset_recovered": 0,
+    "cases_reopening_G3": 0,
+    "new_official_archive_or_retention_mechanisms_identified": 3,
+    "new_validated_recurring_physical_signatures": 0
+  },
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "result_class": "OFFICIAL_BULK_SURFACE_CONFIRMED__ITEM_LEVEL_BIND_NOT_YET_RESOLVED",
+      "new_findings": [
+        "NARA officially exposes Project Blue Book Case Files series 595466 as machine-readable metadata plus a small bulk package, while sanitized series 597821 is exposed as very large image/PDF packages. This validates the metadata-first retrieval strategy.",
+        "A nonofficial discovery index identifies the 17 July 1957 event as Project Blue Book case 4810 and index page NARA-PBB1-167. This is retained only as a locator hint and is not promoted to an official item bind.",
+        "NARA's official UAP bulk-download page and its record-group collection page currently expose inconsistent title-to-NAID mappings for several 238571xx series. Therefore those neighboring identifiers are treated as unresolved until a Catalog/API item bind is obtained.",
+        "The NARA Catalog API can perform fielded metadata search but requires an assigned API key for requests. No API key is stored in this repository."
+      ],
+      "not_recovered": [
+        "official Catalog item/file-unit identifier specifically binding the RB-47 event",
+        "continuous ALA-6/APR-9/ALA-5 raw recording",
+        "ground-radar raw scope/plot",
+        "synchronized calibrated navigation/sensor package"
+      ],
+      "next_named_action": "Use a NARA Catalog API key or NARA textual-reference staff request against stable series 595466/597821 with date 1957-07-17; include case 4810/NARA-PBB1-167 only as a nonofficial locator hint and ask for the exact file-unit/item NAID and digital-object URLs.",
+      "G3_state": "CLOSED__NO_CALIBRATED_RAW_MEASUREMENT_RECOVERED"
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "result_class": "RETENTION_MECHANISM_IDENTIFIED__2004_APPLICABILITY_NOT_ESTABLISHED",
+      "new_findings": [
+        "NARA schedule N1-NU-10-003, submitted in 2010, defines electronic/digital shipboard operations monitoring records to include audio, communications, video, and event reconstruction such as an AEGIS electronic war diary.",
+        "Under that 2010 schedule, routine video could be destroyed after two days or eight hours depending on frame rate; exercise video after ten years or when no longer required; significant-event video after ten years or completion of studies/operational analysis. Routine communications could be destroyed after two days, while exercise/event communications commonly used ten-year-or-later rules.",
+        "The same schedule explicitly says it was prompted by DDG-1000 enhanced capture/storage and that existing SSICs did not address retention of these record types. Therefore it cannot be retroactively asserted as the controlling schedule for USS Princeton in November 2004.",
+        "NARA marks N1-NU-10-003 inactive/superseded today; it remains historical evidence that Navy shipboard electronic records can be temporary rather than automatically permanent.",
+        "The FY2023 Navy FOIA log separately shows a request for Nimitz Daily Air Plan/Flight Schedule and related ADMACS/ONI records was closed as a duplicate request, reinforcing that multiple requesters have pursued adjacent custody objects without producing the missing raw multi-sensor track."
+      ],
+      "interpretation": "A normal records-retention/custody pathway is now demonstrably plausible for loss/nonavailability of shipboard electronic records in later Navy policy. This weakens any inference from 'No Records Located' to concealment. It does NOT establish what happened to Princeton 2004 data, because the identified schedule postdates the event and says earlier SSIC coverage was inadequate.",
+      "not_recovered": [
+        "a 2004-applicable SPY-1/AEGIS electronic-war-diary retention authority",
+        "Princeton AN/SPY-1 raw returns",
+        "E-2C/APG-73 raw tracks",
+        "air-defense-net common-time audio",
+        "specific destruction/transfer certificate for the November 2004 data"
+      ],
+      "next_named_action": "Resolve the 2004-applicable SSIC/records schedule and search transfer/destruction/disposition logs for USS Princeton/Carrier Strike Group exercise-monitoring and AEGIS records; do not repeat generic raw-radar wording already answered No Records Located.",
+      "G3_state": "CLOSED__AUTHENTIC_VIDEO_WITHOUT_RANGE_OR_COMMON_TIME_MULTI_SENSOR_GEOMETRY"
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "result_class": "ARCHIVE_TARGETS_RESOLVED_TO_SERIES_LEVEL__INSTRUMENT_RECORDS_NOT_RECOVERED",
+      "new_findings": [
+        "NARA lists RG330 Near East and South Asia - Iran Country Files, 1972-1979, accession TR-0330-2020-0097 / W330-81-0223, as a specific two-container archive target.",
+        "The Department of State Central Foreign Policy File for 1973-1979 is a date/index-driven system containing electronic telegrams and indexed microfilmed hard-copy records; NARA explicitly recommends electronic tools rather than subject browsing for this period.",
+        "The recovered DIA/JCS event message remains a report of radar/instrument observations, not the raw F-4 radar, avionics, maintenance, or Mehrabad ground-radar data needed for replayable physics."
+      ],
+      "not_recovered": [
+        "F-4 radar tape/scope recording",
+        "maintenance/fault records for the two interceptors",
+        "Mehrabad/ground-radar raw plot",
+        "synchronized communications/radar/aircraft-state package"
+      ],
+      "next_named_action": "Search/request RG330 Iran Country Files accession TR-0330-2020-0097 / W330-81-0223 and State Central Foreign Policy File entries centered on 1976-09-19 using date, Tehran/Mehrabad, USDAO and message/document identifiers rather than the generic term UFO.",
+      "G3_state": "CLOSED__REPORTED_NUMBERS_STILL_LACK_RAW_DATA_AND_ERROR_MODEL"
+    }
+  ],
+  "cross_case_result": {
+    "geometry_enabling_dataset": null,
+    "new_physical_signature": null,
+    "most_material_new_result": "NIMITZ_RETENTION_MECHANISM_NOW_HAS_AN_OFFICIAL_RECORDS-SCHEDULE_ANALOG_BUT_NO_2004_DISPOSITION_BIND",
+    "most_actionable_archive_target": "RB47_STABLE_NARA_SERIES_595466_597821_PLUS_ITEM_LEVEL_RESOLUTION",
+    "most_actionable_foreign_affairs_target": "TEHRAN_RG330_IRAN_COUNTRY_FILES_AND_RG59_CFPF_DATE_INDEX"
+  },
+  "scientific_verdict": "R4 STILL DOES NOT PRODUCE A PUBLICLY REPLAYABLE PHYSICAL ANOMALY. IT DOES STRENGTHEN AN ORDINARY EVIDENCE-PIPELINE EXPLANATION FOR WHY STRONG MILITARY NARRATIVES CAN OUTLIVE THEIR SENSOR DATA, AND IT REDUCES EACH TOP-THREE BRANCH TO A NAMED RECORDS-MANAGEMENT OR ARCHIVAL REQUEST.",
+  "source_surfaces": [
+    "https://www.archives.gov/research/catalog/catalog-bulk-downloads/uap-bulk-download",
+    "https://www.archives.gov/research/topics/uaps/rg-collections",
+    "https://www.archives.gov/research/catalog/help/api",
+    "https://www.archives.gov/files/records-mgmt/rcs/schedules/departments/department-of-defense/department-of-the-navy/rg-nu/n1-nu-10-003_sf115.pdf",
+    "https://www.secnav.navy.mil/foia/readingroom/CaseFiles/FOIA%20Logs/FY%2023%20FOIA%20Log_Redacted.pdf",
+    "https://www.archives.gov/research/accessions",
+    "https://www.archives.gov/research/foreign-policy/state-dept/rg-59-central-files/1973-1979"
+  ],
+  "next_gate": {
+    "id": "RESIDUAL-R5-NAMED-RECORD-REQUESTS-AND-ITEM-BINDS",
+    "success_condition": "At least one official item-level primary record changes D1-D4 to geometry-enabling, or a specific disposition record closes the fate of a missing data class.",
+    "do_not_accept_as_progress": [
+      "additional witness retellings",
+      "new derived speed estimates without new range/time measurements",
+      "nonofficial case numbering promoted without NARA bind",
+      "No Records Located interpreted as evidence of concealment"
+    ]
+  },
+  "canonical_seal": "R4 DID NOT FIND THE MACHINE. IT FOUND THE RECORDS-MANAGEMENT BOUNDARY: WHAT IS STABLE, WHAT IS TEMPORARY, WHAT IS MIS-MAPPED, AND THE EXACT ARCHIVE OBJECTS NEEDED TO CROSS G3."
+}
