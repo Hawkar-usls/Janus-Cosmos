@@ -1,0 +1,100 @@
+{
+  "schema": "janus.cosmos.residual.archive_targeted_recovery_result.v1",
+  "artifact_id": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY-RESULT-2026-09-28-v1.0",
+  "contract_artifact_id": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY-CONTRACT-2026-09-28-v1.0",
+  "status": "NO_GEOMETRY_ENABLING_RAW_DATA_RECOVERED__ARCHIVE_TARGETS_NARROWED",
+  "scope_note": "Result is limited to searched public official/archive surfaces. Absence from these surfaces is not proof that a record never existed, was destroyed, remains classified, or is concealed.",
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "result_class": "ARCHIVE_SURFACE_NARROWED_NO_TARGET_DATA",
+      "new_findings": [
+        "NARA now exposes UAP bulk-download surfaces with machine-readable metadata for Project Blue Book holdings.",
+        "Relevant public NARA series include Project Blue Book Case Files NAID/series 595466, sanitized case files 597821, Project Bluebook Artifacts 23857158, and OSI UFO investigations 23857159.",
+        "The sanitized Blue Book corpus is available as multiple very large image/PDF bulk packages, while the series metadata are separately exposed. This creates a deterministic retrieval surface rather than an open-ended web hunt.",
+        "Department of War PURSUE republishes a government-source historical analysis describing RB-47 as a reported visual/radar/pulsed-microwave multi-channel case, but this is not the original raw sensor stream and does not reopen G3."
+      ],
+      "not_recovered": [
+        "original ALA-6/APR-9/ALA-5 continuous recording",
+        "raw Duncanville/ground-radar scope film/tape/plot",
+        "common-time calibrated sensor package"
+      ],
+      "next_exact_retrieval": "Resolve the 17 July 1957 RB-47 case to exact item/file-unit IDs within NARA 595466/597821 and OSI 23857159; retrieve only the corresponding file-unit bytes before touching the multi-hundred-GB corpus.",
+      "G3_state": "CLOSED_FOR_NOW__NO_GEOMETRY_ENABLING_DATA"
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "result_class": "CUSTODY_OR_DISPOSITION_RECORD_RECOVERED",
+      "new_findings": [
+        "Department of the Navy FY2023 FOIA log contains request DON-NAVY-2023-012523 explicitly seeking USS Princeton radar returns, E-2C AN/APS-145 returns, air-defense-control-net audio, USS Louisville sonar data, and official reports for 10-16 Nov 2004.",
+        "The official disposition for that request is Full Denial - No Records Located.",
+        "An official Navy-hosted NASA brief states that aircrew/personnel debriefs validated the event but that there was very limited data to support technical analysis and reporting stopped at 3rd Fleet with no process to share it.",
+        "An earlier FY2017 Navy FOIA request also explicitly sought radar data/FLIR and related records for 14 Nov 2004, demonstrating repeated attempts to retrieve the measurement layer."
+      ],
+      "not_recovered": [
+        "Princeton AN/SPY-1 raw returns",
+        "E-2C AN/APS-145 raw returns",
+        "APG-73 raw track",
+        "common-time air-defense audio",
+        "continuous cross-sensor target track"
+      ],
+      "next_exact_retrieval": "Shift from generic sensor-data requests to records-management provenance: retention schedules, data-handling SOPs, exercise data-capture procedures, transfer logs, and destruction/disposition records for the named systems/units and dates.",
+      "G3_state": "CLOSED_FOR_NOW__AUTHENTIC_VIDEO_EXISTS_BUT_RANGE_AND_MULTI-SENSOR_GEOMETRY_NOT_RECOVERED"
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "result_class": "PRIMARY_REPORT_BYTES_RECOVERED_ONLY",
+      "new_findings": [
+        "DIA Electronic Reading Room primary JCS/DoD message remains the strongest official event-level object and reports the second F-4 lock at 27 NM, closure 150 NMPH, and an approximately maintained 25 NM range.",
+        "DIA FOIA logs show historical public requests specifically targeting the October 1976 report, confirming an official retrieval lineage but not adding raw sensor data.",
+        "NARA exposes Tehran political/subject-file archival surfaces from 1976-1978, including Political Subject Files, Tehran, Lot 85 F 132 (HS1-79786561), but no item-level bind to the UAP incident was established in this pass.",
+        "Department of War PURSUE republishes secondary government historical discussion of the Tehran incident, but this does not substitute for F-4 or ground-radar telemetry."
+      ],
+      "not_recovered": [
+        "F-4 raw radar tape/scope recording",
+        "weapon-system telemetry",
+        "maintenance/fault logs for the two interceptors",
+        "Mehrabad/ground-radar raw plots",
+        "common-time communications/radar reconstruction"
+      ],
+      "next_exact_retrieval": "Target Iranian/US advisory and embassy archival series by item-level date and unit; prioritize maintenance/fault and ground-radar records over additional narrative UFO files.",
+      "G3_state": "CLOSED_FOR_NOW__REPORTED_VALUES_HAVE_NO_PUBLIC_ERROR_MODEL"
+    }
+  ],
+  "cross_case_counts": {
+    "targets": 3,
+    "geometry_enabling_raw_dataset_recovered": 0,
+    "new_exact_archive_surfaces_or_disposition_records": 3,
+    "cases_reopening_G3": 0,
+    "cases_with_public_primary_or_authenticated_sensor_artifact": 3
+  },
+  "pattern_registry_updates": [
+    {
+      "pattern_id": "P-EVIDENCE-ATTRITION",
+      "effect": "STRENGTHENED",
+      "reason": "R3 converted generic missing-data claims into named archive/disposition outcomes: one exact No Records Located FOIA result, one massive but targetable NARA archival surface, and one primary narrative report without instrument records."
+    },
+    {
+      "pattern_id": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "effect": "UNCHANGED_STRONG",
+      "reason": "No target gained common-time calibrated multi-sensor fusion."
+    },
+    {
+      "pattern_id": "P-HIGH-SENSOR-DENSITY-CONTEXT",
+      "effect": "UNCHANGED",
+      "reason": "All three targeted residuals arose in military/high-instrumentation environments, but the public denominator and retention policies remain poorly matched."
+    }
+  ],
+  "scientific_verdict": "R3 DID NOT RECOVER THE PHYSICS-ENABLING MEASUREMENT LAYER. IT DID, HOWEVER, TURN THREE VAGUE 'MISSING DATA' PROBLEMS INTO THREE DIFFERENT TESTABLE ARCHIVAL PROBLEMS: RB47=ITEM-LEVEL NARA RESOLUTION; NIMITZ=CUSTODY/RETENTION/DISPOSITION; TEHRAN=INSTRUMENT/MAINTENANCE/GROUND-RADAR ARCHIVE RECOVERY.",
+  "next_gate": {
+    "id": "RESIDUAL-R4-RETRIEVAL-EXECUTION-AND-PATTERN-DISCRIMINATION",
+    "actions": [
+      "Resolve RB47 to exact NARA file-unit/item IDs using bulk metadata before downloading large binaries.",
+      "For Nimitz, search retention/disposition records rather than repeating raw-radar FOIA wording already answered No Records Located.",
+      "For Tehran, search maintenance/ground-radar/advisory records by unit/date rather than the generic UFO label.",
+      "Use RESIDUAL-PATTERN-REGISTRY to score whether any newly recovered data strengthen a phenomenon pattern or only an evidence-pipeline pattern."
+    ],
+    "promotion_condition": "At least one primary artifact makes target geometry replayable with calibration/uncertainty, or a repeated physically quantified signature emerges in two independent cases."
+  },
+  "canonical_seal": "THE RAW DATA DID NOT APPEAR, BUT THE SEARCH SPACE COLLAPSED FROM 'FIND UFO FILES' TO NAMED ARCHIVE OBJECTS, CUSTODY CHAINS, AND INSTRUMENT RECORDS."
+}
