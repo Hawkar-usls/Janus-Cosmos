@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.residual.r4_retrieval_execution_contract.v1",
+  "artifact_id": "RESIDUAL-R4-RETRIEVAL-EXECUTION-CONTRACT-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY-RESULT-2026-09-28-v1.0",
+  "status": "EXECUTION_CONTRACT_FROZEN_AFTER_INITIAL_DISCOVERY_BEFORE_CANONICAL_R4_RESULT",
+  "epistemic_note": "R4 is a targeted archival recovery stage, not a blinded statistical experiment. Initial discovery occurred before this contract; no claim of preregistered blindness is made. The target classes and promotion rules are inherited from frozen R3.",
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "goal": "Resolve 17 July 1957 RB-47 documentary material to official NARA item/file-unit identifiers and recover only the corresponding bytes before any large bulk download.",
+      "official_surfaces": [
+        "NARA Project Blue Book Case Files series 595466",
+        "NARA sanitized Project Blue Book case files series 597821",
+        "NARA Project Bluebook artifacts / OSI UAP series exposed through official bulk-download surfaces"
+      ],
+      "discovery_only_locator": {
+        "reported_case_number": "4810",
+        "reported_index_page": "NARA-PBB1-167",
+        "authority": "NONOFFICIAL_DISCOVERY_LOCATOR_ONLY",
+        "promotion_forbidden_until_official_bind": true
+      },
+      "success_condition": "Official NARA catalog/file-unit/item bind to the event plus recoverable primary bytes; geometry gate G3 reopens only if those bytes contain calibrated sensor measurements, not merely reports."
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "goal": "Determine records-management provenance for missing Princeton/E-2C/APG-73/audio data: applicable retention schedules, custody/transfer rules, and disposition records.",
+      "do_not_repeat": "Generic raw-radar FOIA wording already returned No Records Located in FY2023.",
+      "success_condition": "A contemporaneously applicable schedule, transfer/disposition record, or recovered raw dataset that materially changes the custody state."
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "goal": "Resolve maintenance/fault, ground-radar, US advisory/embassy, and State/DIA archive objects by date/unit rather than generic UFO keywords.",
+      "priority_surfaces": [
+        "NARA RG330 Near East and South Asia - Iran Country Files, 1972-1979",
+        "NARA/State Central Foreign Policy File, 1973-1979",
+        "DIA/USDAO and related official release lineage"
+      ],
+      "success_condition": "Primary F-4 maintenance/avionics record, ground-radar record, or synchronized communications/operations record that permits error-bounded reconstruction."
+    }
+  ],
+  "source_promotion_rules": {
+    "official_primary_or_archive_metadata": "MAY_PROMOTE_ARCHIVE_STATE",
+    "official_summary_or_secondary_government_analysis": "MAY_SUPPORT_LINEAGE_BUT_NOT_G3",
+    "nonofficial_mirror_or_researcher_index": "DISCOVERY_ONLY__MUST_NOT_PROMOTE_CANONICAL_BIND",
+    "testimony_or_retelling": "NO_G3_PROMOTION",
+    "geometry_enabling_raw_measurement_plus_calibration": "MAY_REOPEN_G3"
+  },
+  "pattern_update_rule": "Every R4 finding must be classified as PHENOMENON_PATTERN, EVIDENCE_PIPELINE_PATTERN, NEGATIVE_PATTERN, or NO_PATTERN_CHANGE. No common-origin inference from documentary recurrence alone.",
+  "stop_rule": "Do not broaden to generic UAP browsing. Stop each branch when the next missing object is a named archive/API/reference-staff request rather than a publicly retrievable artifact.",
+  "claim_ceiling": "ARCHIVE RECOVERY CAN CHANGE WHAT IS REPLAYABLE; IT CANNOT BY ITSELF ESTABLISH EXOTIC ORIGIN."
+}
