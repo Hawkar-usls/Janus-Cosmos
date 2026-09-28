@@ -1,0 +1,61 @@
+{
+  "schema": "janus.cosmos.residual.r5_named_record_requests_contract.v1",
+  "artifact_id": "RESIDUAL-R5-NAMED-RECORD-REQUESTS-CONTRACT-2026-09-28-v1.0",
+  "parent_result": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_R5_REQUEST_PACKET_MATERIALIZATION",
+  "purpose": "Convert the top-three residual branches into exact named archival/records-management requests whose answers can change D1-D4 or close the documented fate of a missing data class. No broad UFO browsing and no origin inference are authorized by this contract.",
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "event_date": "1957-07-17",
+      "stable_official_archive_anchors": [
+        "NARA Project Blue Book Case Files series 595466",
+        "NARA Sanitized Project Blue Book Case Files series 597821"
+      ],
+      "locator_hints_not_yet_officially_bound": [
+        "Project Blue Book case 4810",
+        "NARA-PBB1-167"
+      ],
+      "request_object": "Exact NARA file-unit/item NAID(s), title(s), box/roll/page or digital-object URL(s) for the 17 July 1957 RB-47 event, including any cross-reference to OSI or other Air Force investigative files.",
+      "success_condition": "Official NARA response or Catalog object binds the date/event to an exact file-unit/item and, if available, identifies original sensor media or records explicitly stating their absence/disposition.",
+      "forbidden_promotion": "Do not promote case 4810 or NARA-PBB1-167 to canonical identifiers until NARA itself binds them."
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "event_date": "2004-11-14",
+      "platform": "USS Princeton (CG-59) / Nimitz Carrier Strike Group",
+      "named_data_classes": [
+        "AN/SPY-1 / AEGIS target-track or radar-return records",
+        "Combat Information Center logs",
+        "electronic warfare / ESM records",
+        "air-defense-control-net audio or communications",
+        "exercise/event reconstruction records"
+      ],
+      "historical_schedule_anchor": "N1-NU-89-005 Operations and Readiness Records",
+      "known_schedule_facts": [
+        "SSIC 3560 Combat Information Center Logs: destroy when 3 years old in the historical schedule text.",
+        "SSIC 3610-3613 cover Electronic Warfare/ESM/ECM/ECCM record families with a mixture of permanent primary-program records and shorter-lived correspondence/routine records.",
+        "DAA-NU-2015-0003 later superseded most N1-NU-89-005 items; it was approved in 2018.",
+        "The exact 2004 classification of Princeton AN/SPY-1 raw returns is NOT established by these schedule texts."
+      ],
+      "request_object": "Identify the disposition authority/SSIC actually governing USS Princeton CG-59 AN/SPY-1/AEGIS target-track data, CIC logs, EW/ESM records, and related exercise/event recordings on 14 November 2004; identify any transfer, destruction, or disposition documentation for those records.",
+      "success_condition": "A Navy/NARA records-management authority maps the named 2004 data class to a specific schedule/item and, ideally, a specific disposition/transfer record.",
+      "forbidden_inference": "Short retention in neighboring record classes does not prove that the missing Princeton radar data were destroyed."
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "event_date": "1976-09-19",
+      "official_primary_anchor": "DIA/DoD/JCS message forwarded by USDAO Tehran describing the 19 September 1976 F-4 interception",
+      "archive_anchors": [
+        "NARA RG59 Central Foreign Policy File 1973-1979, electronic telegram and P-Reel index system",
+        "NARA RG330 Near East and South Asia - Iran Country Files, 1972-1979, accession TR-0330-2020-0097 / W330-81-0223"
+      ],
+      "request_object": "Locate item-level records for 19-20 September 1976 using Tehran, Mehrabad, IIAF, F-4, Shahrokhi, USDAO, ARMISH/MAAG, radar, maintenance, communications and fault terminology; identify any aircraft maintenance/fault, ground-radar, advisory, attaché, or embassy records beyond the already public DIA/JCS narrative message.",
+      "success_condition": "An official item-level record supplies raw/near-raw radar, avionics/maintenance, communications, or ground-radar evidence with timestamps/configuration sufficient to improve D1-D4, or definitively identifies custody/disposition.",
+      "forbidden_substitute": "Additional narrative retellings or later witness testimony do not satisfy the gate."
+    }
+  ],
+  "global_success_condition": "At least one official response or item-level primary record either makes target geometry materially more replayable or closes the provenance/disposition of a named missing data class.",
+  "pattern_registry_rule": "Every R5 finding must be classified first as PHENOMENON_PATTERN, EVIDENCE_PIPELINE_PATTERN, SELECTION_CONTEXT, or NEGATIVE_FINDING before any hypothesis update.",
+  "canonical_seal": "R5 ASKS NAMED RECORDS QUESTIONS. AN ANSWER MUST CHANGE MEASUREMENT OR PROVENANCE, NOT JUST ADD ANOTHER STORY."
+}
