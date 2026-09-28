@@ -1,0 +1,99 @@
+{
+  "schema": "janus.cosmos.residual.pattern_registry_r4_addendum.v1.1",
+  "artifact_id": "RESIDUAL-PATTERN-REGISTRY-R4-ADDENDUM-2026-09-28-v1.1",
+  "parent_registry": "RESIDUAL-PATTERN-REGISTRY-2026-09-28-v1.0",
+  "parent_update": "RESIDUAL-PATTERN-REGISTRY-R4-UPDATE-2026-09-28-v1.0",
+  "new_evidence": [
+    "RESIDUAL-R4-RB47-ITEM-LOCATOR-ADDENDUM-2026-09-28-v1.0",
+    "RESIDUAL-R4-NIMITZ-PRE2010-RETENTION-ADDENDUM-2026-09-28-v1.0",
+    "RESIDUAL-R4-NIMITZ-RETENTION-APPLICABILITY-ADDENDUM-2026-09-28-v1.0",
+    "RESIDUAL-R4-TEHRAN-RG59-ADVISORY-SEARCH-ADDENDUM-2026-09-28-v1.0"
+  ],
+  "status": "EVIDENCE_PIPELINE_PATTERNS_STRENGTHENED__NO_NEW_VALIDATED_PHYSICAL_PATTERN",
+  "pattern_updates": [
+    {
+      "pattern_id": "P-EVIDENCE-ATTRITION",
+      "effect": "FURTHER_STRENGTHENED",
+      "reason": "RB47 now resolves to a precise archival-address candidate while raw measurements remain absent; Nimitz has an official short-retention CIC-log authority in the historical records regime; Tehran has a dense U.S. reporting/advisory shadow without recovered instrument records. The report layer repeatedly survives more robustly than replayable geometry."
+    },
+    {
+      "pattern_id": "P-RETENTION-POLICY-ATTRITION",
+      "effect": "MATERIALLY_STRENGTHENED_AS_NIMITZ_EVIDENCE_MECHANISM",
+      "reason": "NARA N1-NU-89-005 explicitly assigns SSIC 3560/1 Combat Information Center Logs a three-year retention and DAA-NU-2015-0003 later lists that authority among superseded Navy schedules. This establishes a concrete ordinary short-retention pathway in the correct operational neighborhood, although mapping raw AN/SPY-1 products to that class remains unresolved."
+    },
+    {
+      "pattern_id": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "effect": "UNCHANGED_STRONG",
+      "reason": "No recovered artifact supplies common-time calibrated fusion for RB47, Nimitz or Tehran."
+    },
+    {
+      "pattern_id": "P-PRECISION-WITHOUT-UNCERTAINTY",
+      "effect": "UNCHANGED_STRONG_TOP3",
+      "reason": "R4 added archive/custody precision, not measurement uncertainty. Reported numerical values still cannot be promoted to error-bounded state vectors."
+    },
+    {
+      "pattern_id": "P-EM-INSTRUMENT-EFFECTS",
+      "effect": "UNCHANGED_SINGLE_CLEAR_CASE",
+      "reason": "Tehran's U.S. reporting infrastructure is now better bounded, but no F-4 maintenance/fault record was recovered to validate the reported instrumentation effects."
+    },
+    {
+      "pattern_id": "P-INTERCEPT-RESPONSE-NARRATIVE",
+      "effect": "UNCHANGED_NARRATIVE_ONLY",
+      "reason": "No synchronized target/interceptor state vectors were recovered."
+    }
+  ],
+  "new_relationships": [
+    {
+      "relation_id": "R-PAT-07",
+      "from": "P-RETENTION-POLICY-ATTRITION",
+      "to": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "relation": "Short-lived operational log/data classes provide an ordinary mechanism by which later investigators retain testimony and summaries from multiple channels but lose the common-time electronic records required to fuse those channels.",
+      "state": "DOCUMENTED_GENERAL_MECHANISM__SPECIFIC_NIMITZ_RAW_DATA_MAPPING_NOT_YET_PROVEN"
+    },
+    {
+      "relation_id": "R-PAT-08",
+      "from": "P-EVIDENCE-ATTRITION",
+      "to": "P-PRECISION-WITHOUT-UNCERTAINTY",
+      "relation": "When summaries survive after raw records disappear, exact-looking numbers can persist detached from sensor mode, calibration and covariance, making narrative precision outlive physical accuracy.",
+      "state": "STRONG_EVIDENCE_PIPELINE_RELATION"
+    }
+  ],
+  "provenance_updates": [
+    {
+      "case_id": "RB47_1957",
+      "finding": "Candidate archive reference 6961835 plus Blue Book case number 4810 and T-1206 locator materially narrow retrieval, but identifier namespaces remain distinct and the direct NARA byte bind is still open."
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "finding": "Routine short retention is now documented in the relevant Navy operational-record neighborhood. No evidence yet maps specific Princeton raw track products to SSIC 3560/1 or proves their destruction."
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "finding": "RG59 CFPF plus the large FY1976 U.S. security-assistance presence create a deterministic American documentary-shadow search surface, but no event-specific new telegram or maintenance record has been recovered."
+    }
+  ],
+  "physical_pattern_status": {
+    "new_common_morphology": false,
+    "new_common_spectrum_or_RF_signature": false,
+    "new_common_acceleration_or_speed_signature": false,
+    "new_common_EM_effect": false,
+    "new_validated_intercept_response": false,
+    "common_origin_required_by_data": false
+  },
+  "hypothesis_effects": {
+    "H4_HETEROGENEOUS_MIXTURE_NO_SINGLE_CAUSE": "STRENGTHENED_AS_LEADING_WORKING_MODEL",
+    "H5_UNKNOWN_PHYSICAL_PLATFORM_OR_PHENOMENON": "UNCHANGED_NOT_EXCLUDED_FOR_INDIVIDUAL_RESIDUALS__NO_POSITIVE_COMMON_SIGNATURE",
+    "H3_REPORTING_SELECTION_AND_HIGH_SENSOR_DENSITY": "STRENGTHENED_AS_DATASET_CONFOUNDER",
+    "CONCEALMENT_REQUIRED_FOR_MISSING_DATA": false
+  },
+  "current_pattern_ranking": [
+    "1. P-EVIDENCE-ATTRITION",
+    "2. P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+    "3. P-PRECISION-WITHOUT-UNCERTAINTY",
+    "4. P-HIGH-SENSOR-DENSITY-CONTEXT",
+    "5. P-RETENTION-POLICY-ATTRITION (strong mechanism, currently Nimitz-specific)",
+    "6. P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL",
+    "7. P-INTERCEPT-RESPONSE-NARRATIVE"
+  ],
+  "canonical_seal": "THE NEW REPEATABLE STRUCTURE IS STILL IN THE EVIDENCE PIPELINE, NOT IN THE MACHINE. UNTIL TWO CASES SHARE A CALIBRATED PHYSICAL SIGNATURE, COMMON ORIGIN REMAINS UNNECESSARY."
+}
