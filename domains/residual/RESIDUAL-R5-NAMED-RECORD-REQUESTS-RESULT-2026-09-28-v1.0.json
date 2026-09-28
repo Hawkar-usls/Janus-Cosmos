@@ -1,0 +1,78 @@
+{
+  "schema": "janus.cosmos.residual.r5_named_record_requests_result.v1",
+  "artifact_id": "RESIDUAL-R5-NAMED-RECORD-REQUESTS-RESULT-2026-09-28-v1.0",
+  "contract_artifact_id": "RESIDUAL-R5-NAMED-RECORD-REQUESTS-CONTRACT-2026-09-28-v1.0",
+  "status": "REQUEST_PACKETS_MATERIALIZED__NO_NEW_GEOMETRY_ENABLING_DATA__NIMITZ_2004_RETENTION_BOUNDARY_MATERIALLY_NARROWED",
+  "counts": {
+    "targets": 3,
+    "request_packets_materialized": 3,
+    "gmail_drafts_created": 3,
+    "geometry_enabling_raw_dataset_recovered": 0,
+    "cases_reopening_G3": 0,
+    "specific_historical_retention_mechanism_strengthened": 1,
+    "official_item_level_bind_recovered": 0
+  },
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "request_packet": "domains/residual/requests/R5-RB47-NARA-ITEM-BIND-REQUEST-2026-09-28.md",
+      "result_class": "EXACT_REQUEST_READY__ITEM_BIND_PENDING_EXTERNAL_NARA_RESPONSE",
+      "new_findings": [
+        "NARA's official UAP bulk-download page confirms stable series 595466 and 597821 and exposes separate metadata objects for each series.",
+        "The NARA public page confirms individual Blue Book case files are chronologically arranged and have date/location finding aids/microfilm access, making a date-first reference request appropriate.",
+        "The current execution environment could not directly decode the NARA bulk JSON/ZIP MIME object; no attempt was made to infer an item identifier from that technical limitation.",
+        "Case 4810 / NARA-PBB1-167 remains a nonofficial locator hint only."
+      ],
+      "external_state": "PENDING_NARA_REFERENCE_RESPONSE_OR_CATALOG_BIND",
+      "G3_state": "CLOSED"
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "request_packet": "domains/residual/requests/R5-NIMITZ-2004-DISPOSITION-AUTHORITY-REQUEST-2026-09-28.md",
+      "result_class": "2004_ERA_RETENTION_MECHANISM_STRENGTHENED__EXACT_SPY1_CLASS_PENDING",
+      "new_findings": [
+        "Historical Navy Operations and Readiness schedule N1-NU-89-005 predates the 2004 event and explicitly lists SSIC 3560 Combat Information Center Logs with a three-year disposition.",
+        "The same historical schedule contains SSIC 3610-3613 Electronic Warfare/ESM/ECM/ECCM record families with permanent primary-program records but shorter-lived routine/general records.",
+        "NARA's current notice states that most remaining items from N1-NU-89-005 were later superseded by DAA-NU-2015-0003; that successor schedule was approved in 2018.",
+        "This makes finite operational-record retention a historically contemporaneous plausible mechanism around 2004, not merely a post-2010 analogy.",
+        "No public source found in R5 maps Princeton AN/SPY-1 raw returns themselves to SSIC 3560 or 361x, so destruction of the specific radar data is NOT established."
+      ],
+      "external_state": "PENDING_NARA_RCS_OR_NAVY_RECORDS_OFFICER_SCHEDULE_MAPPING",
+      "G3_state": "CLOSED"
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "request_packet": "domains/residual/requests/R5-TEHRAN-1976-RG59-RG330-REQUEST-2026-09-28.md",
+      "result_class": "DATE_UNIT_RECORD_REQUEST_READY__ITEM_BIND_PENDING",
+      "new_findings": [
+        "NARA confirms that the 1973-1979 Central Foreign Policy File was indexed electronically, with most telegrams electronic and hard-copy documents on microfilm/P-Reels but electronically indexed.",
+        "NARA identifies the CFPF series as NAID 654098 with electronic telegram and index files, supporting date/message-based retrieval rather than generic subject browsing.",
+        "DIA's public primary message remains the event-level measurement narrative; DIA FOIA logs show multiple later requests specifically targeting the 19 September 1976 Tehran F-4 incident, confirming a formal retrieval lineage but not additional telemetry.",
+        "No new F-4 radar tape, maintenance/fault log, or Mehrabad ground-radar record was recovered in public indexed surfaces in R5."
+      ],
+      "external_state": "PENDING_NARA_RG59_RG330_REFERENCE_RESPONSE",
+      "G3_state": "CLOSED"
+    }
+  ],
+  "gmail_draft_state": {
+    "RB47_NARA": "DRAFT_CREATED_NOT_SENT",
+    "NIMITZ_RCS": "DRAFT_CREATED_NOT_SENT",
+    "TEHRAN_NARA": "DRAFT_CREATED_NOT_SENT",
+    "note": "Draft creation preserves user review before an external archival request is sent."
+  },
+  "cross_case_result": {
+    "new_physical_signature": null,
+    "new_geometry_enabling_dataset": null,
+    "strongest_new_fact": "A pre-2004 Navy schedule provides a concrete ordinary short-retention pathway for Combat Information Center and some electronic-warfare record classes, while the exact Princeton SPY-1 classification remains unresolved.",
+    "evidence_pipeline_effect": "STRONGLY_STRENGTHENED",
+    "unknown_physical_platform_hypothesis_effect": "UNCHANGED_NOT_EXCLUDED_NOT_ESTABLISHED"
+  },
+  "scientific_verdict": "R5 DOES NOT REOPEN PHYSICS. IT CONVERTS THE THREE TOP RESIDUALS INTO EXTERNAL NAMED-RECORD QUESTIONS AND STRENGTHENS A CONTEMPORANEOUS ORDINARY RECORDS-RETENTION MECHANISM FOR NIMITZ. THE NEXT MATERIAL ADVANCE REQUIRES AN ARCHIVE/RECORDS-OFFICER ANSWER OR A NEW PRIMARY ITEM, NOT MORE CASE NARRATIVE.",
+  "next_gate": {
+    "id": "RESIDUAL-R6-EXTERNAL-RESPONSE-AND-ITEM-INGEST",
+    "trigger": "Receipt of any NARA/Navy response or official item-level bind for the three R5 requests.",
+    "ingest_rule": "Hash/archive the response or cited official record, classify its effect on D1-D4, then update Pattern Registry before any origin interpretation.",
+    "parallel_nonexternal_action": "Continue only deterministic public index resolution that does not duplicate the exact named requests."
+  },
+  "canonical_seal": "R5 SENT NO CLAIM INTO THE WORLD. IT BUILT THREE PRECISE QUESTIONS. NIMITZ NOW HAS A CONTEMPORANEOUS RETENTION MECHANISM; RB47 AND TEHRAN STILL NEED ITEM-LEVEL BINDS."
+}
