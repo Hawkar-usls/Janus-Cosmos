@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.residual.archive_targeted_recovery_contract.v1",
+  "artifact_id": "RESIDUAL-R3-ARCHIVE-TARGETED-RECOVERY-CONTRACT-2026-09-28-v1.0",
+  "status": "FROZEN_BEFORE_TARGETED_ARCHIVE_RECOVERY",
+  "parent_result": "RESIDUAL-R2-DATA-RECOVERY-RESULT-2026-09-28-v1.0",
+  "targets": [
+    {
+      "case_id": "RB47_1957",
+      "priority": 1,
+      "archive_targets": [
+        {
+          "repository": "NARA",
+          "series": "Project Blue Book Case Files on Sightings of Unidentified Flying Objects, June 1947-December 1969",
+          "catalog_series_id": "595466",
+          "sanitized_series_id": "597821",
+          "microfilm": "T-1206",
+          "wanted_objects": [
+            "17 July 1957 case-file primary bytes",
+            "Airborne Observer Data Sheet attributed to Maj. Lewis Chase",
+            "745th ACWRON/Duncanville same-day TWX or radar report",
+            "E. T. Piwetz/wing-intelligence summary",
+            "any original ALA-6/APR-9/ALA-5 recording or raw ELINT plot",
+            "any original ground-radar scope film/tape/plot"
+          ]
+        }
+      ],
+      "success_condition": "Recover an authenticated record with raw or sufficiently dense calibrated time-bearing/range information that changes D1-D4 from report-level to geometry-enabling."
+    },
+    {
+      "case_id": "NIMITZ_2004",
+      "priority": 2,
+      "archive_targets": [
+        {
+          "repository": "Department of the Navy / SECNAV FOIA / NAVAIR",
+          "known_request_id": "DON-NAVY-2023-012523",
+          "known_disposition": "FULL_DENIAL_NO_RECORDS_LOCATED",
+          "wanted_objects": [
+            "USS Princeton AN/SPY-1 raw returns 10-16 Nov 2004",
+            "E-2C AN/APS-145 raw returns 10-16 Nov 2004",
+            "F/A-18 APG-73 raw radar track if retained",
+            "air-defense control net audio",
+            "USS Louisville sonar data",
+            "official incident/exercise reports",
+            "records-retention or destruction/disposition schedule identifying what happened to the above"
+          ]
+        }
+      ],
+      "success_condition": "Recover raw common-time radar/aircraft data or a definitive official custody/disposition record establishing the status of the missing sensor data."
+    },
+    {
+      "case_id": "TEHRAN_1976",
+      "priority": 3,
+      "archive_targets": [
+        {
+          "repository": "DIA",
+          "known_primary_file_id": "237664",
+          "known_primary_object": "DoD/JCS message forwarding 19 Sep 1976 Tehran incident",
+          "wanted_objects": [
+            "F-4 radar scope/tape or weapon-system telemetry",
+            "aircraft maintenance/fault records for both interceptors",
+            "Mehrabad or other ground-radar raw logs/plots",
+            "communications logs on a common timebase"
+          ]
+        },
+        {
+          "repository": "NARA RG 59 candidate retrieval surface",
+          "candidate_entry": "Political Subject Files, Tehran, Lot 85 F 132",
+          "candidate_entry_id": "HS1-79786561",
+          "warning": "Candidate archival surface only; not claimed to contain the UAP event until item-level binding is achieved."
+        }
+      ],
+      "success_condition": "Recover instrument-level primary data or maintenance/ground-radar records sufficient to independently test the reported 27 NM lock, 150 NMPH closure, and system-failure sequence."
+    }
+  ],
+  "forbidden_substitutes": [
+    "new witness interview",
+    "later retelling",
+    "documentary reconstruction",
+    "uncalibrated screenshot",
+    "secondary acceleration calculation",
+    "government report that merely repeats older narrative measurements"
+  ],
+  "result_classes": [
+    "GEOMETRY_ENABLING_DATA_RECOVERED",
+    "PRIMARY_REPORT_BYTES_RECOVERED_ONLY",
+    "CUSTODY_OR_DISPOSITION_RECORD_RECOVERED",
+    "ARCHIVE_SURFACE_NARROWED_NO_TARGET_DATA",
+    "NOT_FOUND_IN_SEARCHED_PUBLIC_SURFACES"
+  ],
+  "pattern_registry_link": "RESIDUAL-PATTERN-REGISTRY-2026-09-28-v1.0",
+  "canonical_seal": "R3 DOES NOT ASK WHETHER THE CASE IS FAMOUS. R3 ASKS WHERE THE MEASUREMENT LIVED, WHETHER IT SURVIVES, AND WHETHER WE CAN REPLAY IT."
+}
