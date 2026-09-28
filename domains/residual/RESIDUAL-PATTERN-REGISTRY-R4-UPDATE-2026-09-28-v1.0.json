@@ -1,0 +1,118 @@
+{
+  "schema": "janus.cosmos.residual.pattern_registry_r4_update.v1",
+  "artifact_id": "RESIDUAL-PATTERN-REGISTRY-R4-UPDATE-2026-09-28-v1.0",
+  "parent_registry": "RESIDUAL-PATTERN-REGISTRY-2026-09-28-v1.0",
+  "parent_r4_result": "RESIDUAL-R4-RETRIEVAL-EXECUTION-RESULT-2026-09-28-v1.0",
+  "status": "R4_PATTERN_UPDATE_MATERIALIZED__NO_NEW_VALIDATED_PHYSICAL_SIGNATURE",
+  "existing_pattern_updates": [
+    {
+      "pattern_id": "P-EVIDENCE-ATTRITION",
+      "effect": "STRENGTHENED",
+      "reason": "R4 identified concrete records-management and archive mechanisms: later Navy shipboard monitoring schedules explicitly permit short/finite retention for several electronic record classes; RB47 item retrieval is complicated by archive metadata/provenance resolution; Tehran remains preserved mainly as narrative/diplomatic reporting rather than instrument data."
+    },
+    {
+      "pattern_id": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "effect": "UNCHANGED_STRONG",
+      "reason": "No top-three case gained a common-time calibrated multi-sensor dataset."
+    },
+    {
+      "pattern_id": "P-INTERCEPT-RESPONSE-NARRATIVE",
+      "effect": "UNCHANGED_NARRATIVE_ONLY",
+      "reason": "R4 recovered no target/interceptor state vectors capable of testing contingent response quantitatively."
+    },
+    {
+      "pattern_id": "P-EM-INSTRUMENT-EFFECTS",
+      "effect": "UNCHANGED_SINGLE_CLEAR_CASE",
+      "reason": "No new Tehran maintenance/fault data were recovered; the effect remains a reported single-case feature rather than a recurring validated signature."
+    }
+  ],
+  "new_patterns": [
+    {
+      "pattern_id": "P-PRECISION-WITHOUT-UNCERTAINTY",
+      "layer": "EVIDENCE_PIPELINE",
+      "name": "Precise-looking reported quantities survive without the uncertainty model required to use them as physics",
+      "definition": "High-interest cases preserve numerical ranges, closure rates, frequencies, bearings, altitudes or controller estimates, while the raw measurement, calibration state and uncertainty propagation needed to treat those numbers as physical state vectors are absent.",
+      "case_support": ["RB47_1957","TEHRAN_1976","NIMITZ_2004"],
+      "support_state": "STRONG_TOP3_EVIDENCE_PATTERN__3_OF_3__NOT_A_PHYSICAL_OBJECT_SIGNATURE",
+      "examples": [
+        "RB47 preserves reported receiver frequencies/bearings/times without a recovered continuous calibrated ELINT/navigation stream.",
+        "Tehran preserves reported radar range/closure values without radar tape, calibration or error model.",
+        "Nimitz preserves reported controller/aircrew quantities and authentic video without the raw common-time radar/range solution required for extreme kinematics."
+      ],
+      "ordinary_explanations": ["instrument readout precision exceeds true physical accuracy","retrospective transcription","unknown sensor mode/calibration","range and platform-state uncertainty"],
+      "discriminating_measurement": "Raw sensor sample/track, sensor mode and calibration, common clock, platform state and explicit covariance/error bounds.",
+      "epistemic_ceiling": "Digits are not error bars. Reported precision cannot substitute for measured accuracy."
+    },
+    {
+      "pattern_id": "P-RETENTION-POLICY-ATTRITION",
+      "layer": "EVIDENCE_PIPELINE",
+      "name": "Operational electronic records can be intentionally temporary under records schedules",
+      "definition": "Official records-management policy can assign finite or very short retention to shipboard video/communications/event-monitoring data, creating an ordinary pathway by which a memorable event narrative survives while electronic records do not.",
+      "case_support": ["NIMITZ_2004"],
+      "support_state": "DOCUMENTED_ARCHIVAL_MECHANISM__SINGLE_CASE_CONTEXT__NOT_YET_A_RECURRING_PHENOMENON_PATTERN",
+      "evidence_note": "N1-NU-10-003 was submitted in 2010 and explicitly covers audio, communications, video and event reconstruction such as AEGIS electronic war diary; it includes short routine retention and ten-year-or-later exercise/event rules. Because the schedule postdates 2004 and says prior SSICs did not address these record types, it cannot be asserted as Princeton's 2004 controlling authority.",
+      "ordinary_explanations": ["routine records disposition","exercise-data lifecycle","records never selected for permanent retention","fragmented custody"],
+      "discriminating_measurement": "Identify the exact 2004-applicable schedule and a transfer/destruction/disposition record for the named Nimitz/Princeton data class.",
+      "epistemic_ceiling": "Explains a plausible missing-data pathway; does not prove the 2004 records were destroyed and does not imply concealment."
+    }
+  ],
+  "new_relationships": [
+    {
+      "relation_id": "R-PAT-05",
+      "from": "P-RETENTION-POLICY-ATTRITION",
+      "to": "P-EVIDENCE-ATTRITION",
+      "relation": "Finite operational-data retention is a documented ordinary mechanism capable of generating the broader pattern in which summaries/testimony survive while replayable sensor data disappear.",
+      "state": "MECHANISM_DOCUMENTED_IN_LATER_NAVY_SCHEDULE__2004_CASE_CAUSATION_NOT_ESTABLISHED"
+    },
+    {
+      "relation_id": "R-PAT-06",
+      "from": "P-PRECISION-WITHOUT-UNCERTAINTY",
+      "to": "P-GEOMETRY-DEGENERACY",
+      "relation": "Precise-looking range/speed/frequency values can anchor extreme reconstructions even when range, calibration, platform state or covariance are unknown; apparent numerical precision can therefore hide geometric degeneracy.",
+      "state": "METHODOLOGICAL_RELATION__DIRECT_PHYSICAL_RECONSTRUCTION_STILL_REQUIRED"
+    }
+  ],
+  "provenance_hazards": [
+    {
+      "hazard_id": "H-RB47-NARA-MAPPING",
+      "description": "Official NARA UAP bulk-download and record-group collection pages currently expose inconsistent title-to-NAID mappings for some 238571xx series. Stable series 595466/597821 are retained; neighboring IDs must not be promoted until Catalog/item-level resolution."
+    },
+    {
+      "hazard_id": "H-RB47-CASE4810",
+      "description": "Case 4810 / NARA-PBB1-167 is retained only as a nonofficial discovery locator until NARA itself binds the item/file unit."
+    }
+  ],
+  "hypothesis_effects": [
+    {
+      "hypothesis": "H4_HETEROGENEOUS_MIXTURE_NO_SINGLE_CAUSE",
+      "effect": "STRENGTHENED_AS_LEADING_WORKING_MODEL",
+      "reason": "R4 added evidence-pipeline mechanisms without adding a shared physical signature. Different cases remain blocked for different reasons."
+    },
+    {
+      "hypothesis": "H5_UNKNOWN_PHYSICAL_PLATFORM_OR_PHENOMENON",
+      "effect": "UNCHANGED_NOT_EXCLUDED_BUT_NOT_ESTABLISHED",
+      "reason": "No new calibrated physical measurement was recovered, so R4 neither confirms nor falsifies an unknown physical target in the strongest individual residuals."
+    },
+    {
+      "hypothesis": "H2_ORDINARY_OR_CLASSIFIED_HUMAN_PLATFORM",
+      "effect": "UNCHANGED_CASE_BY_CASE",
+      "reason": "No recovered trajectory now exceeds human-platform envelopes with defensible uncertainty."
+    }
+  ],
+  "negative_findings": [
+    "No newly validated common morphology across the top three.",
+    "No newly validated common electromagnetic effect.",
+    "No calibrated repeated acceleration/speed signature.",
+    "No recovered common-time fusion proving a single target across modalities.",
+    "No evidence that missing records require a concealment hypothesis; ordinary retention/custody mechanisms remain viable."
+  ],
+  "current_pattern_ranking": [
+    "1. P-EVIDENCE-ATTRITION — strongest repeated finding",
+    "2. P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION — strongest repeated high-interest report pattern",
+    "3. P-PRECISION-WITHOUT-UNCERTAINTY — strong top-three evidence pattern",
+    "4. P-HIGH-SENSOR-DENSITY-CONTEXT — strong selection/context pattern",
+    "5. P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL — reported but not geometry-validated physical-description pattern",
+    "6. P-INTERCEPT-RESPONSE-NARRATIVE — intriguing but narrative-only physical-behavior pattern"
+  ],
+  "canonical_seal": "R4 ADDED NO NEW MACHINE SIGNATURE. IT ADDED A NEW CAUTION: RECORDS POLICY AND FALSE NUMERICAL PRECISION CAN MAKE A CASE LOOK PHYSICALLY STRONGER THAN THE REPLAYABLE DATA ALLOW."
+}
