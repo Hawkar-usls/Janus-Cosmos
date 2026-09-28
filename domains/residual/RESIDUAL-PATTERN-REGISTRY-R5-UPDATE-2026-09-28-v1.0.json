@@ -1,0 +1,100 @@
+{
+  "schema": "janus.cosmos.residual.pattern_registry_r5_update.v1",
+  "artifact_id": "RESIDUAL-PATTERN-REGISTRY-R5-UPDATE-2026-09-28-v1.0",
+  "parent_registry": "RESIDUAL-PATTERN-REGISTRY-R4-UPDATE-2026-09-28-v1.0",
+  "parent_r5_result": "RESIDUAL-R5-NAMED-RECORD-REQUESTS-RESULT-2026-09-28-v1.0",
+  "status": "R5_PATTERN_UPDATE_MATERIALIZED__EVIDENCE_PIPELINE_MODEL_STRENGTHENED__NO_NEW_PHYSICAL_SIGNATURE",
+  "existing_pattern_updates": [
+    {
+      "pattern_id": "P-EVIDENCE-ATTRITION",
+      "effect": "STRENGTHENED",
+      "reason": "R5 identifies a historically pre-2004 Navy schedule with short retention for CIC logs and some routine EW-related records, while RB47 and Tehran remain split across multiple archival/custody surfaces."
+    },
+    {
+      "pattern_id": "P-RETENTION-POLICY-ATTRITION",
+      "effect": "STRENGTHENED_FROM_LATER_ANALOG_TO_CONTEMPORANEOUS_PLAUSIBLE_MECHANISM",
+      "reason": "N1-NU-89-005 predates the Nimitz event and assigns finite retention to SSIC 3560 Combat Information Center Logs and portions of SSIC 3610-3613 record families. The exact AN/SPY-1 raw-data classification remains unresolved, so case-specific destruction is not established."
+    },
+    {
+      "pattern_id": "P-PRECISION-WITHOUT-UNCERTAINTY",
+      "effect": "UNCHANGED_STRONG",
+      "reason": "R5 recovered no calibration/error model for the preserved numerical claims in RB47, Tehran or Nimitz."
+    },
+    {
+      "pattern_id": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "effect": "UNCHANGED_STRONG",
+      "reason": "No common-time calibrated multi-sensor data were recovered."
+    }
+  ],
+  "new_patterns": [
+    {
+      "pattern_id": "P-CUSTODY-FRAGMENTATION",
+      "layer": "EVIDENCE_PIPELINE",
+      "name": "High-interest events span multiple records owners and record classes",
+      "definition": "The strongest residuals distribute potentially relevant evidence across different operational units, sensors, agencies, record schedules and national custodians, so a single FOIA/archive search can legitimately recover only a narrative subset.",
+      "case_support": ["RB47_1957","NIMITZ_2004","TEHRAN_1976"],
+      "support_state": "STRONG_TOP3_EVIDENCE_PATTERN__3_OF_3",
+      "case_notes": {
+        "RB47_1957": "Potential records span Project Blue Book, OSI, Air Defense/radar units and aircraft/ELINT reporting channels.",
+        "NIMITZ_2004": "Potential records span USS Princeton CIC/AEGIS, E-2C, air wing/air-defense communications and multiple Navy records/FOIA components.",
+        "TEHRAN_1976": "Potential records span DIA/JCS, USDAO Tehran, State/RG59, Defense/RG330 and Iranian IIAF/Mehrabad custody."
+      },
+      "ordinary_explanations": ["organizational boundaries","different records schedules by data class","foreign-government custody","classified system ownership","temporary operational records"],
+      "discriminating_measurement": "Build a custody graph for each sensor/data class with named originating unit, records owner, schedule, transfer path and disposition state.",
+      "epistemic_ceiling": "Custody fragmentation explains missing fusion data; it says nothing by itself about the physical origin of the reported target."
+    }
+  ],
+  "new_relationships": [
+    {
+      "relation_id": "R-PAT-07",
+      "from": "P-HIGH-SENSOR-DENSITY-CONTEXT",
+      "to": "P-CUSTODY-FRAGMENTATION",
+      "relation": "More independent military sensors usually means more independent records owners, classifications and retention rules; evidential richness can therefore increase archival fragmentation.",
+      "state": "STRONG_ORGANIZATIONAL_MECHANISM__CASE_SPECIFIC_MAPPING_STILL_REQUIRED"
+    },
+    {
+      "relation_id": "R-PAT-08",
+      "from": "P-CUSTODY-FRAGMENTATION",
+      "to": "P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+      "relation": "When sensor channels are owned and retained separately, post-event narratives may correlate them while raw common-time fusion becomes unavailable.",
+      "state": "PLAUSIBLE_CAUSAL_EVIDENCE_PIPELINE_MECHANISM"
+    },
+    {
+      "relation_id": "R-PAT-09",
+      "from": "P-RETENTION-POLICY-ATTRITION",
+      "to": "P-CUSTODY-FRAGMENTATION",
+      "relation": "Different components can apply different schedules to neighboring data classes, making partial survival of reports alongside loss of tactical data unsurprising.",
+      "state": "DOCUMENTED_RECORDS_MANAGEMENT_MECHANISM__NOT_PROOF_OF_ANY_SPECIFIC_LOSS"
+    }
+  ],
+  "physical_pattern_status": {
+    "validated_common_morphology": false,
+    "validated_common_acceleration_or_speed_signature": false,
+    "validated_common_RF_or_EM_signature": false,
+    "validated_common_response_to_intercept_signature": false,
+    "validated_common_time_multisensor_identity": false
+  },
+  "hypothesis_effects": [
+    {
+      "hypothesis": "H4_HETEROGENEOUS_MIXTURE_NO_SINGLE_CAUSE",
+      "effect": "STRENGTHENED_AS_DEFAULT_MODEL",
+      "reason": "Another iteration added evidence-pipeline structure but no repeated calibrated physical property."
+    },
+    {
+      "hypothesis": "H5_UNKNOWN_PHYSICAL_PLATFORM_OR_PHENOMENON",
+      "effect": "UNCHANGED_NOT_EXCLUDED_NOT_ESTABLISHED",
+      "reason": "The top residuals remain unresolved, but R5 supplied no new physical measurement requiring a common unknown platform."
+    }
+  ],
+  "current_pattern_ranking": [
+    "1. P-EVIDENCE-ATTRITION",
+    "2. P-MULTICHANNEL-REPORT-NO-CALIBRATED-FUSION",
+    "3. P-CUSTODY-FRAGMENTATION",
+    "4. P-PRECISION-WITHOUT-UNCERTAINTY",
+    "5. P-HIGH-SENSOR-DENSITY-CONTEXT",
+    "6. P-RETENTION-POLICY-ATTRITION",
+    "7. P-HIGH-VISUAL-SALIENCE-LOW-STRUCTURAL-DETAIL",
+    "8. P-INTERCEPT-RESPONSE-NARRATIVE"
+  ],
+  "canonical_seal": "R5 FOUND A REPEATING ORGANIZATIONAL SIGNATURE, NOT A MACHINE SIGNATURE: THE MORE CHANNELS A CASE HAS, THE MORE CUSTODY PATHS MUST SURVIVE BEFORE THE PHYSICS CAN BE REPLAYED."
+}
