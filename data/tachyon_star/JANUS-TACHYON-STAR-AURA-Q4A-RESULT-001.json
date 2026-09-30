@@ -1,0 +1,83 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "heuristic_contract_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "deterministic_request_sha256": "d8ef6de8a3a0ee18cc6438452e09675bcf02b451bff7f5909c8ba27c5e475987"
+  },
+  "request": {
+    "schema": "aura.oracle.shabitat_heuristic_request.v1",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001",
+    "speaker": "JANUS_COSMOS",
+    "topic": "Choose the next gate after Q4A successfully froze LUCI sky-fixed versus detector-fixed geometry without new forced photometry.",
+    "question": "Q4A passed with the frozen candidate sky coordinate and strong geometric separation between sky-fixed and detector-fixed trajectories in the bracketing frames. What should JANUS execute next to maximally discriminate H_SKY_FIXED versus H_DETECTOR_OR_BACKGROUND while preserving the frozen centroid, frames, WCS mapping, control grid, and no post-hoc recentering or control selection?",
+    "context": "Q4A derived RA=307.3382686775776 deg, Dec=40.223696223058276 deg from the frozen B-frame candidate centroid. WCS roundtrip error is 4.47e-10 pixel. The same sky coordinate maps 163.8537 pixels away from the detector-fixed candidate pixel in A/0114 and 80.2378 pixels away in C/0120, while the B positions coincide by construction. All three 17x17 patches are in bounds. Thirteen same-y edge-matched detector controls were frozen before any new Q4 forced photometry. Q4A did not dereference image arrays and made no flux measurement. The previous external timing-replication line remains closed and must not contribute evidential credit.",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "q4a_geometry_is_immutable": true,
+      "no_free_centroid_recentering": true,
+      "no_posthoc_control_removal": true,
+      "no_epoch_substitution": true,
+      "closed_replication_line_may_not_be_reopened": true
+    }
+  },
+  "response": {
+    "schema": "aura.oracle.shabitat_heuristic_response.v1",
+    "status": "HEURISTIC_ONLY",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "deterministic_request_sha256": "d8ef6de8a3a0ee18cc6438452e09675bcf02b451bff7f5909c8ba27c5e475987",
+    "cards": [
+      {
+        "id": "MIRROR",
+        "name": "Mirror",
+        "lens": "Separate what is observed from what is being interpreted.",
+        "question": "Which assumption would change the reading most if it were false?",
+        "caution": "Familiarity and repetition are not evidence."
+      },
+      {
+        "id": "THRESHOLD",
+        "name": "Threshold",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?",
+        "caution": "Urgency does not create authority."
+      },
+      {
+        "id": "CAT",
+        "name": "Cat",
+        "lens": "When a loop becomes unproductive, change the input before arguing with the loop.",
+        "question": "Would a lighter neutral bridge restore perspective here?",
+        "caution": "A mood-reset heuristic is not treatment or proof."
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "permission_granted": false,
+    "evidence_upgrade": false,
+    "verification_claim": false,
+    "prediction_claim": false,
+    "professional_advice": false,
+    "world_effect_requested": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "may_be_ignored": true,
+    "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+  },
+  "janus_interpretation": {
+    "mirror": "Measure fixed-coordinate amplitudes and uncertainties first; origin labels are downstream interpretations and must not alter the measurement estimator.",
+    "threshold": "Execute one minimal Q4B forced-photometry pass on only the three frozen LUCI1 Br-gamma frames and the already-frozen 13 detector controls.",
+    "cat": "Do not reopen cross-archive timing replication or add new epochs. Change the input to direct sky-track versus detector-track photometric origin adjudication."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-Q4B-LUCI-FIXED-COORDINATE-FORCED-PHOTOMETRY",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}

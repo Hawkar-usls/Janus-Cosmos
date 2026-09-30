@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.tachyon_star.q4b.luci_fixed_coordinate_forced_photometry.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-Q4B-LUCI-FIXED-COORDINATE-FORCED-PHOTOMETRY-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "EVIDENCE_FAVORS_DETECTOR_FIXED_PERSISTENCE",
+  "scientific_status": "B_FIXED_EXCESS_CONFIRMED__PERSISTENT_SKY_FIXED_B_LEVEL_REJECTED_UNDER_FROZEN_MODEL__DETECTOR_FIXED_BROAD_EDGE_PEDESTAL_PRESENT_ACROSS_TARGET_AND_ALL_13_CONTROLS__UNIQUE_LOCAL_B_EXCESS_NOT_ESTABLISHED",
+  "lineage": {
+    "q4a_result": "data/tachyon_star/JANUS-TACHYON-STAR-Q4A-RUN-001.json",
+    "q4a_result_commit": "acd214cd5c79c58e4637d28980c4e727f93926ea",
+    "q4a_workflow_run_id": 31957191345,
+    "q4a_artifact_id": 9266260023,
+    "q4a_geometry_manifest_sha256": "4cb21ddf893489f150447170fdc206ae56c1eede6b6adf4965a51b9773742eb9",
+    "aura_advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-Q4A-RESULT-001.json",
+    "aura_request_sha256": "d8ef6de8a3a0ee18cc6438452e09675bcf02b451bff7f5909c8ba27c5e475987",
+    "prereg_and_code_commit": "0ffdab0e54d189ab228ff35835b3690919c2de3d"
+  },
+  "workflow": {
+    "run_id": 31957495791,
+    "job_id": 95190236112,
+    "head_sha": "0ffdab0e54d189ab228ff35835b3690919c2de3d",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 0
+  },
+  "artifact": {
+    "id": 9266355031,
+    "name": "janus-tachyon-star-q4b",
+    "zip_sha256": "ffe2956b9479e85481a1a1c9615e92b82ea5620c2806a72511594c44d022c050",
+    "receipt_sha256": "3814c5653a529b355fcffed7153e584e6eb4e05170284ebc04298f50a4f9a64b",
+    "measurements_sha256": "0d6375bb0f58f77b4aa986e1cb675faecbc0a2e47ba6ed496eb4922f8da90912",
+    "scientific_runner_exit_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "b_fixed_measurement": {
+    "amplitude": 2325.4554548598708,
+    "amplitude_sigma": 294.85086702038717,
+    "forced_z": 7.886886948509734,
+    "fixed_excess_confirmed": true
+  },
+  "sky_fixed_track": {
+    "A_BEFORE": {"amplitude": 9.424961369731891, "amplitude_sigma": 15.360342841669322, "forced_z": 0.6135905602421834},
+    "B_CANDIDATE": {"amplitude": 2325.4554548598708, "amplitude_sigma": 294.85086702038717, "forced_z": 7.886886948509734},
+    "C_AFTER": {"amplitude": -8.679612058145857, "amplitude_sigma": 14.146843296606265, "forced_z": -0.6135370185536754},
+    "constant_flux_difference_z": {"A": 7.844284600181778, "C": 7.907228068781847},
+    "b_equivalent_detectability_sigma": {"A": 151.39346034330742, "C": 164.37981294510644},
+    "persistent_b_level_compatible": false
+  },
+  "detector_fixed_track": {
+    "A_BEFORE": {"amplitude": 2392.0767796086225, "amplitude_sigma": 300.57555257683066, "forced_z": 7.958321157863228},
+    "B_CANDIDATE": {"amplitude": 2325.455455012585, "amplitude_sigma": 294.85086700570645, "forced_z": 7.8868869494203615},
+    "C_AFTER": {"amplitude": 2243.341603642889, "amplitude_sigma": 289.5471435428083, "forced_z": 7.7477594017819085},
+    "constant_flux_difference_z": {"A": -0.15822681633428712, "C": 0.1987031746314234},
+    "persistent_b_level_compatible": true,
+    "temporal_contrast": 7.746263234114849,
+    "temporal_contrast_rank_descending": 5,
+    "temporal_contrast_one_sided_rank_p": 0.35714285714285715
+  },
+  "frozen_same_y_detector_controls": {
+    "count": 13,
+    "A_amplitude": {"median": 2348.5709285542403, "min": 2263.29891970781, "max": 2415.291852592042, "sample_std": 49.87866617734544, "robust_mad_sigma": 54.517124609175625},
+    "B_amplitude": {"median": 2266.823564284215, "min": 2204.824019627328, "max": 2313.0720121248232, "sample_std": 36.214324326309566, "robust_mad_sigma": 50.53759352642931},
+    "C_amplitude": {"median": 2197.51729790847, "min": 2109.343260461556, "max": 2331.315189243101, "sample_std": 57.3934243534732, "robust_mad_sigma": 54.047357505419626},
+    "A_forced_z": {"median": 7.825919266007948, "min": 7.517968751860585, "max": 8.329672211323542},
+    "B_forced_z": {"median": 7.812590714059985, "min": 7.558522673908857, "max": 8.264219089430458},
+    "C_forced_z": {"median": 7.788258897512203, "min": 7.158276623643319, "max": 8.430993392942437},
+    "interpretation": "The fixed Gaussian-plus-plane estimator returns a strong positive amplitude across the entire frozen same-y detector-control ensemble in every frame. Therefore the approximately 8-sigma fixed fit at the candidate detector pixel is not unique and contains a broad detector-edge/row/background component."
+  },
+  "candidate_uniqueness_relative_to_B_controls": {
+    "candidate_minus_control_median_amplitude": 58.63189057565569,
+    "candidate_minus_control_median_in_control_robust_sigma": 1.1601638796867793,
+    "candidate_amplitude_rank_descending_among_target_plus_13_controls": 1,
+    "candidate_amplitude_one_sided_rank_p": 0.07142857142857142,
+    "candidate_forced_z_rank_descending_among_target_plus_13_controls": 6,
+    "unique_local_excess_established": false,
+    "reason": "The amplitude is the largest of fourteen but only about 1.16 robust control-spread sigma above the control median; the forced-z value is ordinary within the control ensemble and the minimum rank p with thirteen controls is 1/14."
+  },
+  "sky_temporal_contrast": {
+    "value": 2325.0827802040776,
+    "rank_descending": 1,
+    "one_sided_rank_p": 0.07142857142857142,
+    "interpretation": "The large sky-track temporal contrast establishes that a persistent B-level sky-fixed source is absent in the bracketing frames under the frozen estimator. It does not distinguish a genuine one-frame sky transient from an instrumental one-frame component superposed on the common detector pedestal."
+  },
+  "admitted_claim": "Q4B confirms a strong fixed-coordinate Gaussian-plus-plane excess in the B frame. A source with the same B-level flux persistently anchored to the same sky coordinate is strongly incompatible with the A and C forced measurements and would have been detected there with very high equivalent sensitivity. In contrast, the same detector location is consistent with a nearly constant positive fitted amplitude across A/B/C. Critically, all thirteen preregistered same-y detector controls show a similar approximately 7-8 sigma positive fitted amplitude in all three frames, demonstrating that most of this fixed-fit signal is a broad detector-edge/row/background pedestal rather than a unique localized candidate. The candidate B amplitude is only about 1.16 robust control-spread sigma above the B-control median, so a unique local B-frame residual above that pedestal is not established by Q4B.",
+  "not_admitted": [
+    "Q4B does not prove that the entire original B-frame candidate was instrumental.",
+    "Q4B does not exclude a genuine one-frame sky transient superposed on the common detector-edge/background pedestal.",
+    "The broad common component is not identified specifically as a bad pixel, cosmic ray, persistence event, or any single detector mechanism.",
+    "The 13-control rank test cannot establish conventional statistical significance because its minimum one-sided p is 1/14.",
+    "No evidential credit is inherited from the closed ZTF/TESS timing-replication line.",
+    "No tachyon, faster-than-light, retrocausal, UAP, artificial, ETI, or nuclear-causality interpretation is admitted."
+  ],
+  "next_gate": "AURA_RECONSULT_FROM_Q4B_BROAD_DETECTOR_PEDESTAL_AND_UNRESOLVED_LOCAL_RESIDUAL",
+  "claim_ceiling": "THREE_FRAME_FIXED_COORDINATE_ORIGIN_ADJUDICATION_ONLY__BROAD_DETECTOR_COMPONENT_ESTABLISHED__UNIQUE_LOCAL_B_RESIDUAL_NOT_ESTABLISHED__NO_TACHYON_OR_FTL_OR_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2d.ztf_residual_forensics.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2D-ZTF-RESIDUAL-FORENSICS-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "PASS_FORENSIC_CHARACTERIZATION_COMPLETE",
+  "scientific_status": "SIX_SENSITIVITY_BOUNDS_CHARACTERIZED__THREE_MISSING_PRODUCT_METADATA_IDENTITIES_CONFIRMED__NO_T2C_NEGATIVE_UPGRADE",
+  "lineage": {
+    "parent_result": "data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-RUN-001.json",
+    "parent_result_commit": "40d391df27a928cea8db38226c30581aec9a5599",
+    "aura_advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2D-001.json",
+    "aura_request_sha256": "fb811cc2c7645e95074bd08c413f044c49fa2341f8c205104d0a56453787fe43",
+    "prereg_and_code_commit": "cca5f910d4185088387f7f20bd7c82a521ab9d95",
+    "parent_manifest_git_blob_sha1": "902ac74624b8c30c365544555f5071c78ec4cae2",
+    "parent_manifest_sha256": "f8242864c1822ee6636c885cbe3cc0bf9aa53d4829213ce1ea13c2ee068c6ecb"
+  },
+  "workflow": {
+    "run_id": 31950925588,
+    "job_id": 95174141458,
+    "head_sha": "cca5f910d4185088387f7f20bd7c82a521ab9d95",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 0
+  },
+  "artifact": {
+    "id": 9264624223,
+    "name": "janus-tachyon-star-t2d-ztf",
+    "zip_sha256": "aef9fa9be3a4c684fd531ccd07b3c0f2dfe9f9afff62fbe1bfc3b0dba523e8ad",
+    "receipt_sha256": "25c4b781276bff08a8528c66d0a5f5f4beebcee3d8e618ae5382a2607e634e52",
+    "events_sha256": "c44ed4530e09a4a6483d3e8d02035c08fca2a393eb8f6872fe2a7bdcd88f4181",
+    "scientific_runner_exit_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "parent_state_preserved": {
+    "qualified_null_trials_immutable": 23,
+    "qualified_null_trials_reopened": 0,
+    "isolated_b_candidates": 0,
+    "remaining_t2c_unresolved_trials": 5,
+    "t2d_retroactive_negative_upgrades": 0
+  },
+  "sensitivity_bounds": [
+    {
+      "trial_id": "TS-T2B-ZTF-03",
+      "epoch": "b",
+      "smallest_monotonic_all_ratio_recovery_snr": 10
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-03",
+      "epoch": "c",
+      "smallest_monotonic_all_ratio_recovery_snr": 12
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-09",
+      "epoch": "b",
+      "smallest_monotonic_all_ratio_recovery_snr": 10
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-10",
+      "epoch": "a",
+      "smallest_monotonic_all_ratio_recovery_snr": ">20"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-10",
+      "epoch": "b",
+      "smallest_monotonic_all_ratio_recovery_snr": 20
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-10",
+      "epoch": "c",
+      "smallest_monotonic_all_ratio_recovery_snr": 10
+    }
+  ],
+  "sensitivity_interpretation": "The six T2C sensitivity-blocked epochs are now quantitatively characterized. Their required monotonic all-PSF-ratio recovery floors range from SNR 10 to greater than SNR 20, explaining why the frozen SNR8 T2C gate could not qualify them. These bounds do not convert any T2C unresolved epoch into a qualified absence.",
+  "product_provenance": [
+    {
+      "trial_id": "TS-T2B-ZTF-16",
+      "epoch": "b",
+      "status": "EXACT_METADATA_MATCH_FOUND",
+      "exact_match_count": 1,
+      "filefracday": "20180413268183",
+      "pid": "467268180115",
+      "field": 755,
+      "ccdid": 1,
+      "qid": 2,
+      "filtercode": "zr",
+      "metadata_product_exists": true,
+      "t2c_exact_product_retrieval": "HTTP_404_CUTOUT_AND_FULL_FRAME"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-39",
+      "epoch": "a",
+      "status": "EXACT_METADATA_MATCH_FOUND",
+      "exact_match_count": 1,
+      "filefracday": "20191026441655",
+      "pid": "1028441703315",
+      "field": 605,
+      "ccdid": 9,
+      "qid": 2,
+      "filtercode": "zr",
+      "metadata_product_exists": true,
+      "t2c_exact_product_retrieval": "HTTP_404_CUTOUT_AND_FULL_FRAME"
+    },
+    {
+      "trial_id": "TS-T2B-ZTF-39",
+      "epoch": "b",
+      "status": "EXACT_METADATA_MATCH_FOUND",
+      "exact_match_count": 1,
+      "filefracday": "20191026444421",
+      "pid": "1028444453315",
+      "field": 605,
+      "ccdid": 9,
+      "qid": 2,
+      "filtercode": "zr",
+      "metadata_product_exists": true,
+      "t2c_exact_product_retrieval": "HTTP_404_CUTOUT_AND_FULL_FRAME"
+    }
+  ],
+  "product_path_audit": {
+    "official_irsa_pattern_matches_runner_construction": true,
+    "interpretation": "The IRSA-published science-product path pattern agrees with the deterministic path construction used by the runner. T2D therefore found exact metadata identities for all three missing products but no evidence that changing the frozen product identity is justified. The remaining 404s are retained as archive/product-availability limitations rather than silently repaired by neighboring epochs."
+  },
+  "admitted_claim": "T2D completed all six preregistered ZTF sensitivity curves and all three metadata-only product-provenance audits. The residual sensitivity limitations are quantitatively bounded, and each of the three previously missing exact products has a unique matching IRSA metadata record. No T2C unresolved trial was retroactively upgraded to a negative result, so the ZTF prepointed evidence remains 23 of 28 fully qualified null trials, zero isolated-B candidates, and five explicitly characterized unresolved trials.",
+  "not_admitted": [
+    "An all-28 negative ZTF result.",
+    "Treating a higher-SNR sensitivity bound as an SNR8 qualified absence.",
+    "Treating metadata existence as proof that the image bytes remain retrievable.",
+    "Replacing an unavailable exact product with a neighboring exposure.",
+    "A global rejection of short-lived optical transients.",
+    "Physical tachyon identification or exclusion, faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "next_gate": "JANUS-TACHYON-STAR-T3A-TESS-CADENCE-NATIVE-PREPOINTED-DISCOVERY",
+  "claim_ceiling": "ZTF_RESIDUAL_FORENSIC_CHARACTERIZATION_ONLY__NO_NEW_NEGATIVE_UPGRADE__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY"
+}

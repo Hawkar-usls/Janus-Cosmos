@@ -1,0 +1,78 @@
+{
+  "admitted_claim": "T1 preregistered nine source-level A-B-C trials before target-pixel access. Eight trials were fully sensitivity-adjudicable and all eight showed qualified absence at A, B, and C. The ninth showed qualified absence at A and C and no point-source candidate at B, but B failed the frozen SNR8 local-sensitivity requirement while recovering SNR12, so that trial remains unresolved. Therefore the trained one-exposure A-absent/B-candidate/C-absent motif did not replicate in any fully adjudicable primary T1 trial, but an all-nine negative result is not admitted.",
+  "artifact": {
+    "events_sha256": "94a247ba06730630dfa9472d80ff99cc917d3a9d1cf4b1fa87e7b476bcb51cee",
+    "id": 9256294254,
+    "name": "janus-tachyon-star-t1",
+    "receipt_sha256": "74e4c6b80d94fc9b88ff7a555e3323c283b77ad83ceb7c96de47f2a3c5d115b3",
+    "zip_sha256": "5daa79548adf925ef007297085492bd852abf8d68ebfcd25a369a1fec48d9f8b"
+  },
+  "claim_ceiling": "PREREGISTERED_LUCI_HOLDOUT_ISOLATED_TRANSIENT_MOTIF_TEST_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY__NO_NUCLEAR_CAUSALITY__NO_UAP_ORIGIN_CLAIM",
+  "date_utc": "2026-08-16",
+  "experiment_id": "JANUS-TACHYON-STAR-T1-LOOKBACK-HOLDOUT-RUN-001",
+  "lineage": {
+    "implementation_commit": "f5abbb109cb27b443f2e5711a82f1056a73f3ed2",
+    "manifest_path": "data/luci_palomar/JANUS-TACHYON-STAR-T1-LOOKBACK-HOLDOUT-MANIFEST.csv",
+    "manifest_sha256": "334fe0cacd0b056214d991be5256e05ab678fe5edb072d46a26ad07d4ae803b7",
+    "prereg_commit": "2f0bcc879d5cc3c00d3cf4243e05407e9972545d",
+    "training_motif": {
+      "delta_post_s": 432.2595,
+      "delta_pre_s": -232.5827,
+      "status": "ONE_EXPOSURE_MARGINAL_NEAR_IR_POINT_SOURCE_CANDIDATE_NOT_PHYSICAL_IDENTITY"
+    },
+    "training_parent": "LUCI-PALOMAR-JPFM-2F-F-RUN-001"
+  },
+  "next_gate": {
+    "goal": "Replicate the prepointed A-B-C architecture on an independent high-cadence corpus (priority TESS 200-s FFI / selected 20-s or 120-s pixels, then ZTF 30-s optical images) while preserving T1 as a negative/incomplete holdout certificate and keeping the six paired LUCI witnesses unopened unless a predeclared adjudication gate requires them.",
+    "name": "JANUS-TACHYON-STAR-T2-EXTERNAL-CADENCE-REPLICATION"
+  },
+  "not_admitted": [
+    "An all-nine negative result.",
+    "A physical tachyon, faster-than-light propagation, backward causation, UAP origin, artificial origin, ETI, or nuclear causality.",
+    "The original TACHYON-STAR-001 LUCI event being physically identified by T1.",
+    "Global rejection of all short-duration sky-origin transient classes from this 9-source holdout."
+  ],
+  "primary_summary": {
+    "all_absence_abc_trials": 8,
+    "fully_adjudicable_trials": 8,
+    "isolated_b_event_candidates": 0,
+    "paired_witnesses_available_by_prereg": 6,
+    "paired_witnesses_opened": 0,
+    "paired_witnesses_preserved_blind_after_t1": 6,
+    "sealed_trials": 9,
+    "unresolved_trials": 1
+  },
+  "schema": "janus.cosmos.tachyon_star.lookback_holdout.result.v1",
+  "scientific_status": "PRIMARY_HOLDOUT_INCOMPLETE__ZERO_ISOLATED_B_EVENTS_IN_8_FULLY_ADJUDICABLE_TRIALS",
+  "status": "BLOCKED",
+  "trials": [
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2021-01-03T05:55:16.8734","b_exptime_s":60.0,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":425.1292,"delta_pre_s":142.2158,"filters":"clear J","instrument":"LUCI1","src_id":"tile_RA124.680_DECp26.727:572","trial_id":"TS-T1-01"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2023-04-16T03:43:21.7551","b_exptime_s":60.24,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":224.019,"delta_pre_s":148.244,"filters":"clear J","instrument":"LUCI1","src_id":"tile_RA171.876_DECp42.079:866","trial_id":"TS-T1-02"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2023-10-31T22:22:01.5864","b_exptime_s":2.502421,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":268.9209,"delta_pre_s":160.6824,"filters":"Br_gam Ks","instrument":"LUCI1","src_id":"tile_RA193.420_DECp31.903:1206","trial_id":"TS-T1-03"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2023-06-01T06:02:32.3607","b_exptime_s":60.24,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":156.3302,"delta_pre_s":173.5674,"filters":"clear J","instrument":"LUCI1","src_id":"tile_RA196.981_DECp7.071:145","trial_id":"TS-T1-04"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2024-05-01T07:59:10.2452","b_exptime_s":9.0,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":223.0739,"delta_pre_s":178.6107,"filters":"clear K","instrument":"LUCI2","src_id":"tile_RA214.811_DECp53.168:1436","trial_id":"TS-T1-05"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2022-05-14T10:09:37.2370","b_exptime_s":65.26,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":427.2453,"delta_pre_s":309.3552,"filters":"P_beta clear","instrument":"LUCI1","src_id":"tile_RA283.395_DECp33.345:866","trial_id":"TS-T1-06"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2022-05-03T19:32:22.8657","b_exptime_s":10.0,"b_local_sensitivity":{"background_sigma":7.412999999999999,"injection_fwhm_px":2.0,"passed":false,"trials":[{"recovered":false,"snr":8.0},{"recovered":true,"snr":12.0}]},"b_status":"BLOCKED_LOCAL_SENSITIVITY","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"UNRESOLVED_PRIMARY_TRIAL","delta_post_s":130.1466,"delta_pre_s":255.2874,"filters":"clear J","instrument":"LUCI2","src_id":"tile_RA31.333_DECp32.501:3","trial_id":"TS-T1-07"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2020-12-24T03:32:24.3327","b_exptime_s":90.0,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":284.1163,"delta_pre_s":142.1887,"filters":"clear Ks","instrument":"LUCI1","src_id":"tile_RA351.661_DECp14.647:2451","trial_id":"TS-T1-08"},
+    {"a_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","b_date_obs":"2020-12-26T02:15:05.3597","b_exptime_s":90.0,"b_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","c_status":"QUALIFIED_NO_COUNTERPART_INHERITED_R1","classification":"NO_ISOLATED_B_EVENT","delta_post_s":127.31,"delta_pre_s":127.2646,"filters":"clear Ks","instrument":"LUCI2","src_id":"tile_RA352.628_DECp14.636:2011","trial_id":"TS-T1-09"}
+  ],
+  "unresolved_trial": {
+    "b_date_obs": "2022-05-03T19:32:22.8657",
+    "b_exptime_s": 10.0,
+    "b_file": "luci2.20220504.0006.fits.gz",
+    "b_status": "BLOCKED_LOCAL_SENSITIVITY",
+    "frame_r1_gate_passed": true,
+    "interpretation": "No target candidate was measured at B, but the frozen binary absence gate cannot qualify the frame at SNR8; the trial is unresolved rather than negative.",
+    "local_snr12_recovered": true,
+    "local_snr8_recovered": false,
+    "src_id": "tile_RA31.333_DECp32.501:3",
+    "trial_id": "TS-T1-07"
+  },
+  "workflow": {
+    "github_actions_conclusion": "success",
+    "head_sha": "f5abbb109cb27b443f2e5711a82f1056a73f3ed2",
+    "job_id": 95099820260,
+    "run_id": 31920618315,
+    "scientific_runner_exit_code": 3
+  }
+}

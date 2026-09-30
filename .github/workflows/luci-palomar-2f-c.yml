@@ -1,0 +1,81 @@
+name: LUCI Palomar JPFM 2F-C
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'janus_cosmos/luci_psf.py'
+      - 'experiments/luci/run_palomar_2f_c.py'
+      - 'tests/test_luci_palomar_2f_c.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-PREREG.json'
+      - 'docs/LUCI_PALOMAR_2F_C_PROTOCOL.md'
+      - '.github/workflows/luci-palomar-2f-c.yml'
+  pull_request:
+    paths:
+      - 'janus_cosmos/luci_psf.py'
+      - 'experiments/luci/run_palomar_2f_c.py'
+      - 'tests/test_luci_palomar_2f_c.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-C-PREREG.json'
+      - 'docs/LUCI_PALOMAR_2F_C_PROTOCOL.md'
+      - '.github/workflows/luci-palomar-2f-c.yml'
+
+jobs:
+  luci-palomar-2f-c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests for PSF-aware source gate
+        run: python -m unittest tests/test_luci_palomar_2f_c.py -v
+      - name: Build preregistered LUCI validation manifests
+        run: |
+          mkdir -p data/runtime/luci/2f_c
+          python experiments/luci/build_luci_archive_manifest.py --target 'HIP 65599' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c/hip65599.json
+          python experiments/luci/build_luci_archive_manifest.py --target '0848-0021928' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c/0848-0021928.json
+          python experiments/luci/build_luci_archive_manifest.py --target '3C 294' --filters J,Ks --limit 5000 --max-targets 1 --output data/runtime/luci/2f_c/3c294.json
+      - name: Execute 2F-C frozen-corpus and exact-WCS chain
+        shell: bash
+        run: |
+          set +e
+          python -m experiments.luci.run_palomar_2f_c \
+            --validation-manifest data/runtime/luci/2f_c/hip65599.json \
+            --validation-manifest data/runtime/luci/2f_c/0848-0021928.json \
+            --validation-manifest data/runtime/luci/2f_c/3c294.json \
+            --output-dir results/luci_palomar_2f_c \
+            --cache-dir .cache/luci_palomar_2f_c
+          rc=$?
+          set -e
+          echo "$rc" > results/luci_palomar_2f_c/scientific_runner_exit_code.txt
+          test -s results/luci_palomar_2f_c/receipt.json
+          test -s results/luci_palomar_2f_c/frozen_palomar_640.csv
+      - name: Print admitted result
+        run: |
+          python - <<'PY'
+          import json
+          p='results/luci_palomar_2f_c/receipt.json'
+          d=json.load(open(p, encoding='utf-8'))
+          print(json.dumps({
+              'status': d['status'],
+              'scientific_status': d['scientific_status'],
+              'corpus_n': d['frozen_palomar_corpus']['sample_n'],
+              'corpus_sha256': d['frozen_palomar_corpus']['sha256'],
+              'validation_pass_fraction': d['validation_injection_recovery']['pass_fraction'],
+              'conservative_overlap_pairs': d['archive_overlap_preflight']['conservative_overlap_pairs'],
+              'exact_wcs_overlap_pairs': d['exact_wcs_overlap_pair_count'],
+              'admitted_ir_counterparts': d['admitted_ir_counterpart_count'],
+              'claim_ceiling': d['claim_ceiling'],
+          }, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-palomar-jpfm-2f-c
+          path: |
+            data/runtime/luci/2f_c/
+            results/luci_palomar_2f_c/
+          if-no-files-found: error

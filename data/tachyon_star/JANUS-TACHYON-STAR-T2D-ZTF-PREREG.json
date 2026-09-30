@@ -1,0 +1,67 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2d.ztf_residual_forensics.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2D-ZTF-RESIDUAL-FORENSICS",
+  "date_utc": "2026-08-16",
+  "parent": {
+    "result_path": "data/tachyon_star/JANUS-TACHYON-STAR-T2C-ZTF-RUN-001.json",
+    "result_commit": "40d391df27a928cea8db38226c30581aec9a5599",
+    "combined_qualified_null_trials_immutable": 23,
+    "isolated_b_candidates": 0,
+    "remaining_unresolved_trials": 5
+  },
+  "aura_advisory": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T2D-001.json",
+    "request_sha256": "fb811cc2c7645e95074bd08c413f044c49fa2341f8c205104d0a56453787fe43",
+    "cards": ["THRESHOLD", "THREAD", "LANTERN"],
+    "authority_delta": 0,
+    "evidence_upgrade": false
+  },
+  "immutable_rules": {
+    "qualified_null_trials_reopened": 0,
+    "frozen_coordinates_changed": false,
+    "frozen_abc_times_changed": false,
+    "replacement_epochs_allowed": false,
+    "t2c_thresholds_reinterpreted": false,
+    "t2d_sensitivity_bounds_may_upgrade_t2c_to_pass": false
+  },
+  "sensitivity_bound_arm": {
+    "trials": {
+      "TS-T2B-ZTF-03": ["b", "c"],
+      "TS-T2B-ZTF-09": ["b"],
+      "TS-T2B-ZTF-10": ["a", "b", "c"]
+    },
+    "epoch_count": 6,
+    "product_identity": "UNCHANGED_FROM_T2B_MANIFEST",
+    "cutout_size_arcsec": 360,
+    "native_psf_estimator": "estimate_native_psf_fwhm",
+    "fwhm_ratios_to_native": [0.8, 1.0, 1.2],
+    "snr_grid": [8.0, 10.0, 12.0, 15.0, 20.0],
+    "sensitivity_floor_definition": "Smallest SNR such that all three PSF-ratio injections recover at that SNR and at every higher preregistered SNR; if none, report GREATER_THAN_20.",
+    "hot_pixel_control_snr": 12.0,
+    "target_mask_required_zero": true,
+    "interpretation": "A sensitivity bound only. It does not convert an epoch that failed T2C into QUALIFIED_ABSENCE."
+  },
+  "product_provenance_arm": {
+    "targets": [
+      {
+        "trial_id": "TS-T2B-ZTF-16",
+        "epochs": ["b"]
+      },
+      {
+        "trial_id": "TS-T2B-ZTF-39",
+        "epochs": ["a", "b"]
+      }
+    ],
+    "target_epoch_count": 3,
+    "query": "IRSA IBE ZTF science metadata at the frozen sky coordinate with no COLUMNS restriction, followed by exact matching on frozen filefracday/field/ccdid/qid/filtercode and pid when present.",
+    "pixels_opened": false,
+    "neighboring_epoch_substitution": false,
+    "goal": "Distinguish a path-construction problem from a metadata record whose exact science product is unavailable."
+  },
+  "success_semantics": {
+    "PASS_FORENSIC_CHARACTERIZATION_COMPLETE": "All six sensitivity curves and all three exact product-provenance audits produce receipts.",
+    "BLOCKED_FORENSIC_CHARACTERIZATION_INCOMPLETE": "Any targeted sensitivity curve or exact product-provenance audit cannot be completed."
+  },
+  "next_decision_after_t2d": "Freeze the ZTF branch with explicit sensitivity/product limitations, then evaluate an independent TESS cadence-native prepointed replication unless T2D exposes a correctable provenance bug that can be repaired without changing product identity.",
+  "claim_ceiling": "ZTF_RESIDUAL_FORENSIC_CHARACTERIZATION_ONLY__NO_NEW_NEGATIVE_UPGRADE__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY"
+}

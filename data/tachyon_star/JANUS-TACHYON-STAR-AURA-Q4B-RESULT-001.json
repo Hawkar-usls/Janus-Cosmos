@@ -1,0 +1,83 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "heuristic_contract_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "deterministic_request_sha256": "20ecc1ed6fd4e6603698b9acf60954ea54435edb9ea69de6163485ba3f3092a0"
+  },
+  "request": {
+    "schema": "aura.oracle.shabitat_heuristic_request.v1",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001",
+    "speaker": "JANUS_COSMOS",
+    "topic": "Choose the next scientific gate after Q4B fixed-coordinate LUCI forced photometry favored detector-fixed persistence and revealed a broad same-y edge/background pedestal across all frozen detector controls.",
+    "question": "Q4B confirmed a strong fixed-coordinate B excess but the same Gaussian-plus-plane estimator returns a similar approximately 7-8 sigma positive amplitude at all thirteen preregistered same-y detector controls in A, B, and C. The sky-fixed track is incompatible with a persistent B-level source, while the detector-fixed track is constant across the sequence. What should JANUS test next to determine whether the candidate contains any unique local B-frame excess above the common detector-edge/background structure, without changing frames, target coordinate, controls, or reopening the closed cross-archive timing line?",
+    "context": "Q4B status is EVIDENCE_FAVORS_DETECTOR_FIXED_PERSISTENCE. Frozen B target amplitude is 2325.4554548598708 +/- 294.85086702038717, forced_z 7.886886948509734. Same sky coordinate in A and C is incompatible with constant B amplitude by 7.844 and 7.907 sigma and would have B-equivalent detectability of about 151 and 164 sigma. Same detector pixel amplitudes are 2392.077, 2325.455, and 2243.342 with B-vs-A/C differences only 0.158 and 0.199 sigma. All thirteen frozen same-y detector controls also show broad positive amplitudes in every frame: B control median 2266.824, range 2204.824-2313.072, forced_z median 7.813. Target B amplitude is only 58.632 above control median, about 1.16 robust control-spread sigma; target forced_z ranks 6 of 14, while detector temporal contrast rank p is 0.357. A one-frame sky transient superposed on the detector pedestal remains possible; bad-pixel/cosmic-ray identity is not established. Q4B is post-candidate adjudication, not blind discovery.",
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "q4a_q4b_frames_and_geometry_immutable": true,
+      "no_posthoc_control_removal": true,
+      "no_new_epoch_selection": true,
+      "closed_replication_line_may_not_be_reopened": true,
+      "no_artifact_label_without_specific_evidence": true
+    }
+  },
+  "response": {
+    "schema": "aura.oracle.shabitat_heuristic_response.v1",
+    "status": "HEURISTIC_ONLY",
+    "request_id": "JANUS-TACHYON-STAR-AURA-Q4B-RESULT-001",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "deterministic_request_sha256": "20ecc1ed6fd4e6603698b9acf60954ea54435edb9ea69de6163485ba3f3092a0",
+    "cards": [
+      {
+        "id": "LANTERN",
+        "name": "Lantern",
+        "lens": "Look for the missing piece of information with the highest value.",
+        "question": "What single observation would most reduce uncertainty?",
+        "caution": "A heuristic score is not a probability."
+      },
+      {
+        "id": "CAT",
+        "name": "Cat",
+        "lens": "When a loop becomes unproductive, change the input before arguing with the loop.",
+        "question": "Would a lighter neutral bridge restore perspective here?",
+        "caution": "A mood-reset heuristic is not treatment or proof."
+      },
+      {
+        "id": "OPEN_DOOR",
+        "name": "Open Door",
+        "lens": "Offer a useful direction without closing the other person's choice space.",
+        "question": "Can the same help be offered with an easy refusal or exit?",
+        "caution": "Care is not capture."
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "permission_granted": false,
+    "evidence_upgrade": false,
+    "verification_claim": false,
+    "prediction_claim": false,
+    "professional_advice": false,
+    "world_effect_requested": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "may_be_ignored": true,
+    "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+  },
+  "janus_interpretation": {
+    "lantern": "Measure whether the B target contains a unique local temporal residual above the broad detector-edge pedestal rather than reinterpreting the approximately 8-sigma fixed fit as unique evidence.",
+    "cat": "Change the input from the original 13-point target-centric comparison to a dense detector-matched same-y residual ensemble while retaining the exact A/B/C frames and fixed fit model.",
+    "open_door": "Keep both a short-lived sky component and detector/background explanations alive unless the dense residual test discriminates them; do not force an artifact or astrophysical label."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-Q4C-LUCI-DENSE-SAME-Y-EDGE-RESIDUAL",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}

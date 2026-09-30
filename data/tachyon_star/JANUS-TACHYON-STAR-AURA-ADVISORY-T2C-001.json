@@ -1,0 +1,70 @@
+{
+  "schema": "janus.cosmos.aura_advisory.v1",
+  "advisory_id": "JANUS-TACHYON-STAR-AURA-ADVISORY-T2C-001",
+  "date_utc": "2026-08-16",
+  "oracle": {
+    "repository": "Hawkar-usls/aura-oracle-tg",
+    "engine": "AURA_SHABITAT_REFLECTIVE_V1",
+    "source_commit": "85eddeba17c5330ebd5e57b8fe87dd7b410de969",
+    "mode": "REFLECTIVE_HEURISTIC",
+    "request_sha256": "2c5abb92bbe2a89d9db877c8dfdec2b0d74bb1dcc74fcf0077326a191659eee2"
+  },
+  "request": {
+    "topic": "Choose the next scientific gate after preregistered ZTF prepointed replication with zero isolated-B candidates and incomplete sensitivity coverage.",
+    "question": "Given the frozen evidence, which next gate should be executed first to maximize information gain while preserving the preregistered thresholds, coordinates, A/B/C times, and the twenty already-qualified null trials?",
+    "frozen_facts": {
+      "t2a_tess_metadata_coverage": "42/42",
+      "t2a_ztf_metadata_coverage": "42/42",
+      "t2a_eligible_abc_sequences": 6530,
+      "t2b_quality_admissible_trials": 28,
+      "t2b_fully_qualified_null_trials": 20,
+      "t2b_unresolved_trials": 8,
+      "t2b_isolated_b_candidates": 0,
+      "t2b_nonisolated_source_patterns": 0,
+      "three_strongest_timing_matches": "ALL_QUALIFIED_A_B_C_ABSENCE"
+    },
+    "constraints": {
+      "advisory_only": true,
+      "no_authority": true,
+      "no_prediction_claim": true,
+      "no_professional_advice": true,
+      "no_threshold_weakening": true,
+      "no_epoch_replacement": true,
+      "twenty_parent_nulls_immutable": true
+    }
+  },
+  "response": {
+    "status": "HEURISTIC_ONLY",
+    "cards": [
+      {
+        "id": "THRESHOLD",
+        "lens": "Prefer a reversible next step before an irreversible commitment.",
+        "question": "What is the smallest move that preserves the most future choices?"
+      },
+      {
+        "id": "MIRROR",
+        "lens": "Separate what is observed from what is being interpreted.",
+        "question": "Which assumption would change the reading most if it were false?"
+      },
+      {
+        "id": "FORK",
+        "lens": "Keep at least one materially different alternative hypothesis alive.",
+        "question": "What would a reasonable person who disagrees examine first?"
+      }
+    ],
+    "heuristics": [
+      "Rank the next moves by reversibility, information gain, and cost of being wrong.",
+      "Separate source identity, observation, inference, and confidence into different fields."
+    ],
+    "decision_authority": "CALLER_RETAINS_CHOICE",
+    "evidence_upgrade": false,
+    "prediction_claim": false
+  },
+  "janus_interpretation": {
+    "threshold": "Execute the smallest reversible gate first: recover only the eight unresolved ZTF trials before opening a new large external arm.",
+    "mirror": "Replace the LUCI-specific global clean-position sensitivity dependency with a preregistered ZTF-local PSF/sensitivity procedure while preserving the same sky coordinates and epochs.",
+    "fork": "Keep TESS cadence-native replication as an independent later branch rather than using it to bypass unresolved ZTF evidence."
+  },
+  "selected_next_gate": "JANUS-TACHYON-STAR-T2C-ZTF-NATIVE-SENSITIVITY-RECOVERY",
+  "claim_ceiling": "AURA_HEURISTIC_IS_REFLECTIVE_INPUT_NOT_EVIDENCE_COMMAND_PERMISSION_OR_PREDICTION"
+}

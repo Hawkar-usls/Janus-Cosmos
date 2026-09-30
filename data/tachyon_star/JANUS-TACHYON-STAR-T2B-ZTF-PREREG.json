@@ -1,0 +1,64 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t2b.ztf_prepointed.prereg.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-PIXEL-REPLICATION",
+  "created_on": "2026-08-16",
+  "status": "PREREGISTERED_BEFORE_EXTERNAL_TARGET_PIXEL_ACCESS",
+  "parent_metadata_snapshot": {
+    "workflow_run_id": 31921427302,
+    "workflow_job_id": 95101776657,
+    "head_sha": "d02e1141c087ee38b3a9c061de0dc29931d0f732",
+    "artifact_id": 9256495662,
+    "artifact_name": "janus-tachyon-star-t2a-metadata",
+    "artifact_zip_sha256": "6a7a83fcaa2ccb12e2438456eaaca7a7f13f4918ab930d2012f49c2a3023c2a6",
+    "note": "All 42 TESS and 42 ZTF metadata responses were saved before the R1 serializer failed on unrequested IRSA input-echo columns. No target pixels were opened by T2A."
+  },
+  "training_timing_motif_seconds": {
+    "pre": 232.5827,
+    "post": 432.2595
+  },
+  "frozen_manifest": {
+    "path": "data/tachyon_star/JANUS-TACHYON-STAR-T2B-ZTF-PREPOINTED-MANIFEST.csv",
+    "sha256": "86665d8468ee7cee6f30afb6cdbb074d4b80185480f6e1b1ef34cb217d5b9229",
+    "source_trials": 41,
+    "unique_b_exposures": 34,
+    "source_without_eligible_ztf_triple": "tile_RA122.762_DECp56.240:1372",
+    "selection_rule": "For each source, among consecutive same-field/same-CCD/same-quadrant/same-filter/same-exptime ZTF triples with both adjacent gaps in [30,900] s, select the triple minimizing |delta_pre-232.5827| + |delta_post-432.2595|. Ties are broken by B obsdate, B filefracday, field, ccdid, qid. Selection uses metadata only."
+  },
+  "metadata_quality_gate": {
+    "rule": "A, B and C must each have imgtypecode=o and INFOBITS < 33554432. A trial failing this gate is BLOCKED_METADATA_QUALITY and is never replaced by another triple.",
+    "official_threshold_origin": "ZTF single-exposure archive guidance: INFOBITS < 33554432 excludes the general bad/unusable epoch bit.",
+    "fully_quality_admissible_trials_at_freeze": 28,
+    "blocked_trials_retained_in_manifest": 13
+  },
+  "pixel_access_contract": {
+    "science_cutout_size_arcsec": 180,
+    "products_opened_for_every_quality_admissible_epoch": ["sciimg.fits", "mskimg.fits"],
+    "candidate_only_products": ["scimrefdiffimg.fits.fz", "diffimgpsf.fits"],
+    "reason_for_candidate_only_products": "Preserve independent subtraction evidence until an isolated B candidate actually exists.",
+    "coordinate_binding": "All products are evaluated at the frozen RA/Dec in the manifest using FITS WCS; no coordinate retuning after pixel access.",
+    "mask_rule": "Any non-zero ZTF mask value within the frozen target aperture blocks candidate elevation; no post-read mask-bit cherry-picking.",
+    "sensitivity_rule": "An epoch with no measured target source counts as qualified absence only if the unchanged fixed-coordinate detector recovers preregistered local injections at SNR 8 and SNR 12.",
+    "threshold_relaxation_after_pixel_read": false
+  },
+  "primary_endpoint": {
+    "name": "ISOLATED_B_EVENT",
+    "definition": "A is sensitivity-qualified absent; B has a fixed-coordinate point-source candidate with a clean target mask; C is sensitivity-qualified absent.",
+    "l0": "science-image isolated B event under frozen sensitivity and mask gates",
+    "l1": "L0 plus a spatially consistent PSF-like B signal in the ZTF difference-image product",
+    "candidate_is_not_tachyon_identity": true
+  },
+  "statistics_contract": {
+    "source_trials": 41,
+    "unique_b_exposure_clusters": 34,
+    "rule": "Do not treat all 41 source trials as independent Bernoulli draws. Report source-level counts and unique-B-exposure-cluster counts separately."
+  },
+  "candidate_adjudication_if_needed": [
+    "ZTF difference-image confirmation",
+    "same-exposure mask inspection under frozen nonzero-mask veto",
+    "moving Solar-System object check",
+    "nearby-source / subtraction-residual morphology check",
+    "independent-instrument or independent-epoch replication when available"
+  ],
+  "append_only_rule": "Negative, blocked, unresolved and positive results are preserved. No B time, source coordinate, timing offset, quality threshold or detector threshold may be replaced after target-pixel access.",
+  "claim_ceiling": "PREPOINTED_ZTF_ISOLATED_TRANSIENT_REPLICATION_ONLY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_NUCLEAR_CAUSALITY__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

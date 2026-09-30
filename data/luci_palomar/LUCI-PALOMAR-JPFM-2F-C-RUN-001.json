@@ -1,0 +1,47 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_c.result.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-C-RUN-001",
+  "date_utc": "2026-08-15",
+  "workflow_run_id": 31886485509,
+  "workflow_head_sha": "1b10a11dc7099ee2db7a64b82f17b75da5121061",
+  "artifact": {
+    "id": 9247398588,
+    "name": "luci-palomar-jpfm-2f-c",
+    "sha256": "04a6952742070123c98ce0af1b8042f21418f7570bfc0416f14407cccc08f355",
+    "size_bytes": 21971
+  },
+  "frozen_palomar_corpus": {
+    "sample_n": 640,
+    "sha256": "b5211c2224a8db031e4ae87b31a155f5ee7be0b96927123b5b0593ba4390f71d",
+    "selection": "20 median-near typical + 20 highest structural-anomaly unusual per each of 16 frozen clusters"
+  },
+  "validation": {
+    "frame_count": 6,
+    "passed_frame_count": 0,
+    "pass_fraction": 0.0,
+    "hot_pixel_acceptance_fraction_all_frames": 0.0,
+    "frames": [
+      {"target":"HIP 65599","filter":"J","native_psf_sources":256,"star_recovery_all":0.2777777777777778,"star_recovery_snr_ge_8":0.4166666666666667,"hot_pixel_acceptance":0.0},
+      {"target":"HIP 65599","filter":"Ks","native_psf_sources":159,"star_recovery_all":0.3611111111111111,"star_recovery_snr_ge_8":0.4166666666666667,"hot_pixel_acceptance":0.0},
+      {"target":"0848-0021928","filter":"J","native_psf_sources":256,"star_recovery_all":0.0,"star_recovery_snr_ge_8":0.0,"hot_pixel_acceptance":0.0},
+      {"target":"0848-0021928","filter":"Ks","native_psf_sources":2,"star_recovery_all":0.3611111111111111,"star_recovery_snr_ge_8":0.4583333333333333,"hot_pixel_acceptance":0.0},
+      {"target":"3C 294","filter":"J","native_psf_sources":256,"star_recovery_all":0.0,"star_recovery_snr_ge_8":0.0,"hot_pixel_acceptance":0.0},
+      {"target":"3C 294","filter":"Ks","native_psf_sources":256,"star_recovery_all":0.16666666666666666,"star_recovery_snr_ge_8":0.25,"hot_pixel_acceptance":0.0}
+    ]
+  },
+  "archive_overlap": {
+    "tap_rows_returned_across_chunks": 251,
+    "conservative_overlap_pairs": 0,
+    "exact_wcs_overlap_pairs": 0,
+    "admitted_ir_counterparts": 0
+  },
+  "ci_status": "PASS",
+  "scientific_status": "PSF_INJECTION_RECOVERY_VALIDATION_FAILED",
+  "admitted": false,
+  "diagnosis": [
+    "The hot-pixel rejection objective succeeded: no injected single-pixel impulse was admitted as a PSF source.",
+    "Four validation frames reached the global catalogue cap of 256 sources, so recovery based on membership in a global top-N catalogue censors faint injections in crowded fields.",
+    "The absolute 1.5-pixel FWHM injection cell also probes structures close to the deliberately rejected unresolved regime instead of matching each frame's measured PSF."
+  ],
+  "claim_ceiling": "NEGATIVE_METHOD_CERTIFICATE_ONLY__NO_LUCI_PALOMAR_COUNTERPART_CLAIM__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM"
+}

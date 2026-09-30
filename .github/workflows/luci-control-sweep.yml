@@ -1,0 +1,42 @@
+name: LUCI J+Ks matched-control sweep
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - '.github/workflows/luci-control-sweep.yml'
+
+jobs:
+  luci-jks-controls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Build deterministic three-target LUCI J+Ks control manifest
+        run: >-
+          python experiments/luci/build_luci_archive_manifest.py
+          --filters J,Ks
+          --limit 20000
+          --max-targets 3
+          --output data/runtime/luci/luci_jks_controls.json
+      - name: Run powered control sweep
+        run: >-
+          python -m janus_cosmos.luci_pipeline
+          --manifest data/runtime/luci/luci_jks_controls.json
+          --output-dir results/luci_jks_controls
+          --cache-dir .cache/janus_cosmos_luci_controls
+          --nulls 256
+          --seeds 20260821,20260822,20260823,20260824
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-jks-matched-controls
+          path: |
+            data/runtime/luci/luci_jks_controls.json
+            results/luci_jks_controls/
+          if-no-files-found: warn

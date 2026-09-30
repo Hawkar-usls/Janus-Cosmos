@@ -1,0 +1,80 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3c.tess_residual_sensitivity_bound.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3C-TESS-RESIDUAL-SENSITIVITY-BOUND-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "PASS_RESIDUAL_SENSITIVITY_CHARACTERIZED",
+  "scientific_status": "TWO_TESS_RESIDUAL_SENSITIVITY_FLOORS_CHARACTERIZED__NO_NEW_PIXEL_READ__NO_PARENT_RECLASSIFICATION",
+  "lineage": {
+    "parent_result": "data/tachyon_star/JANUS-TACHYON-STAR-T3B-TESS-RUN-001.json",
+    "parent_result_commit": "03ed7a8b69bd811f9a0e74f9d2627b07d6f84b08",
+    "parent_workflow_run_id": 31951674363,
+    "parent_artifact_id": 9264860453,
+    "parent_trial_results_sha256": "25763a6ad7db994717e0e698cc2fa1612672baf63e3f8d7b0aa61be6ace45162",
+    "aura_advisory": "data/tachyon_star/JANUS-TACHYON-STAR-AURA-ADVISORY-T3C-001.json",
+    "aura_request_sha256": "e70c13176addc8e9a80c1ac84c371fd8549bacd6fe7c2516c63b17d7671fd727",
+    "prereg_and_code_commit": "4d6a6a05c3070d049fc211eaeabebec2089a5332"
+  },
+  "workflow": {
+    "run_id": 31952142658,
+    "job_id": 95177153487,
+    "head_sha": "4d6a6a05c3070d049fc211eaeabebec2089a5332",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 0
+  },
+  "artifact": {
+    "id": 9264951604,
+    "name": "janus-tachyon-star-t3c-tess",
+    "zip_sha256": "0a9b14803e2c2a64f8c4dd27ca39beb172eb80a890681c67ccea370fa6d1a409",
+    "receipt_sha256": "0737c8cfb5930016eb59cd4cc0c6baf4fbab699367d53a98af4e8819f9408e46",
+    "scientific_runner_exit_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "parent_state_preserved": {
+    "qualified_null_trials_immutable": 40,
+    "candidate_trials": 0,
+    "targeted_unresolved_trials": 2,
+    "parent_trials_reclassified": 0,
+    "new_pixel_read": false
+  },
+  "sensitivity_bounds": [
+    {
+      "trial_id": "TS-T3B-TESS-15",
+      "src_id": "tile_RA178.400_DECp25.947:195",
+      "raw_contrast_z": -3.0210452396422274,
+      "raw_b_minus_a_sigma": -2.548671064219578,
+      "raw_b_minus_c_sigma": -3.540625574654188,
+      "required_injected_snr_exact": 11.021045239642227,
+      "smallest_integer_injected_snr_meeting_candidate_gate": 12,
+      "frozen_10sigma_recovered": false,
+      "frozen_12sigma_recovered": true,
+      "analytic_10sigma_candidate": false,
+      "analytic_12sigma_candidate": true,
+      "analytic_consistent_with_frozen_bracket": true,
+      "parent_reclassification": "NONE"
+    },
+    {
+      "trial_id": "TS-T3B-TESS-39",
+      "src_id": "tile_RA352.628_DECp14.636:2011",
+      "raw_contrast_z": -2.09740353666039,
+      "raw_b_minus_a_sigma": -1.481312020972129,
+      "raw_b_minus_c_sigma": -2.650206332926144,
+      "required_injected_snr_exact": 10.09740353666039,
+      "smallest_integer_injected_snr_meeting_candidate_gate": 11,
+      "frozen_10sigma_recovered": false,
+      "frozen_12sigma_recovered": true,
+      "analytic_10sigma_candidate": false,
+      "analytic_12sigma_candidate": true,
+      "analytic_consistent_with_frozen_bracket": true,
+      "parent_reclassification": "NONE"
+    }
+  ],
+  "admitted_claim": "T3C analytically characterized the detector-sensitivity deficit of the two T3B unresolved TESS trials using only the frozen T3B trial-results receipt. The exact additional B-aperture signal required to meet the frozen T3B candidate gate is approximately 11.021 sigma for TS-T3B-TESS-15 and 10.097 sigma for TS-T3B-TESS-39. Both analytic bounds are consistent with the already-recorded +10 sigma failure and +12 sigma recovery. No new TESS pixel values were read, none of the forty T3B qualified null trials were reopened, and neither unresolved parent trial was retroactively reclassified as negative.",
+  "not_admitted": [
+    "An all-42 sensitivity-qualified TESS null result.",
+    "Retrospective conversion of either unresolved trial into a qualified absence.",
+    "A claim that the TESS aperture isolates a unique astrophysical source.",
+    "A global rejection of transient phenomena.",
+    "Physical tachyon identification or exclusion, faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "next_gate": "JANUS-TACHYON-STAR-EXTERNAL-REPLICATION-CLOSURE-001",
+  "claim_ceiling": "TESS_RESIDUAL_SENSITIVITY_CHARACTERIZATION_ONLY__NO_PARENT_NEGATIVE_UPGRADE__NO_NEW_PIXEL_READ__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_IDENTITY"
+}

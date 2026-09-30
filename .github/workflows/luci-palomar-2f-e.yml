@@ -1,0 +1,99 @@
+name: LUCI Palomar JPFM 2F-E Staged Exact WCS
+
+on:
+  push:
+    branches:
+      - research/luci-only-v1
+    paths:
+      - 'experiments/luci/run_palomar_2f_e.py'
+      - 'tests/test_luci_palomar_2f_e.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-D-RUN-001.json'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-E-PREREG.json'
+      - '.github/workflows/luci-palomar-2f-e.yml'
+  pull_request:
+    paths:
+      - 'experiments/luci/run_palomar_2f_e.py'
+      - 'tests/test_luci_palomar_2f_e.py'
+      - 'data/luci_palomar/LUCI-PALOMAR-JPFM-2F-E-PREREG.json'
+      - '.github/workflows/luci-palomar-2f-e.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  luci-palomar-2f-e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests for staged exact-WCS firewall
+        run: python -m unittest tests/test_luci_palomar_2f_e.py -v
+      - name: Fetch exact frozen 2F-D parent artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/runtime/2f_e_parent
+          curl -fL \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2026-03-10' \
+            'https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/9247843315/zip' \
+            -o data/runtime/2f_e_parent/parent.zip
+          echo '1240a600dfb0189243dfb3188ab53dcc8ad6f7b270236c56756b49c2e4fc6184  data/runtime/2f_e_parent/parent.zip' | sha256sum -c -
+          mkdir -p data/runtime/2f_e_parent/extracted
+          unzip -q data/runtime/2f_e_parent/parent.zip -d data/runtime/2f_e_parent/extracted
+          echo 'aa57e64deca11bb2afd09364fa8b72837e92fc3c2187357c5041b273023754c6  data/runtime/2f_e_parent/extracted/frozen_metadata_wcs_overlap_pairs.csv' | sha256sum -c -
+      - name: Execute 2F-E exact-header freeze then representative pixel replay
+        shell: bash
+        run: |
+          set +e
+          python -m experiments.luci.run_palomar_2f_e \
+            --parent-artifact-dir data/runtime/2f_e_parent/extracted \
+            --output-dir results/luci_palomar_2f_e \
+            --cache-dir .cache/luci_palomar_2f_e
+          rc=$?
+          set -e
+          mkdir -p results/luci_palomar_2f_e
+          echo "$rc" > results/luci_palomar_2f_e/scientific_runner_exit_code.txt
+          test -s results/luci_palomar_2f_e/receipt.json
+          test -s results/luci_palomar_2f_e/frozen_exposure_admissible_pairs.csv
+          test -s results/luci_palomar_2f_e/frozen_header_shards.json
+          test -s results/luci_palomar_2f_e/frozen_exact_fits_wcs_pairs.csv
+          test -s results/luci_palomar_2f_e/frozen_temporal_representatives.csv
+      - name: Print admitted interpretation
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/luci_palomar_2f_e/receipt.json', encoding='utf-8'))
+          h=d['header_replay']; p=d['pixel_replay']; s=d['representative_selection']
+          print(json.dumps({
+              'status': d['status'],
+              'scientific_status': d['scientific_status'],
+              'exposure_admissible_pairs': d['exposure_admissibility']['pair_count'],
+              'header_shard_count': h['shard_count'],
+              'exact_fits_wcs_pairs': h['exact_fits_wcs']['pair_count'],
+              'exact_fits_wcs_sources': h['exact_fits_wcs']['unique_sources'],
+              'exact_fits_wcs_files': h['exact_fits_wcs']['unique_files'],
+              'representative_pairs': s['pair_count'],
+              'representative_sources': s['unique_sources'],
+              'r1_gate_fail': p['r1_gate_fail_count'],
+              'counterpart_present': p['counterpart_present_count'],
+              'counterpart_absent_sensitive': p['counterpart_absent_with_local_sensitivity_pass_count'],
+              'local_sensitivity_block': p['no_source_local_sensitivity_block_count'],
+              'morphology_available': p['matched_morphology_available_count'],
+              'claim_ceiling': d['claim_ceiling'],
+          }, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: luci-palomar-jpfm-2f-e
+          path: |
+            results/luci_palomar_2f_e/
+          if-no-files-found: error

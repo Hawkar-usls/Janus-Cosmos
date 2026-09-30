@@ -1,0 +1,91 @@
+{
+  "schema": "janus.cosmos.tachyon_star.t3b.tess_prepointed_flux.result.v1",
+  "experiment_id": "JANUS-TACHYON-STAR-T3B-TESS-PREPOINTED-FLUX-REPLICATION-RUN-001",
+  "date_utc": "2026-08-16",
+  "status": "BLOCKED_PREPOINTED_REPLICATION_INCOMPLETE",
+  "scientific_status": "ZERO_PREPOINTED_ISOLATED_B_CANDIDATES__FORTY_OF_FORTY_TWO_SENSITIVITY_QUALIFIED_NULL__TWO_UNRESOLVED_BY_INJECTION_RECOVERY",
+  "lineage": {
+    "parent_result": "data/tachyon_star/JANUS-TACHYON-STAR-T3A-TESS-RUN-001.json",
+    "parent_result_commit": "8b43dba449ede196182d28bfa98e06d4342e477f",
+    "parent_workflow_run_id": 31951308441,
+    "parent_artifact_id": 9264741704,
+    "parent_prepointed_manifest_sha256": "be8bc23021e9b9a6fa6efa65815e79bc39a1bb011192acab2825c013c1ac4202",
+    "prereg_and_code_commit": "0542462124e4e4c98f745a022cba2b1b5c0f9302"
+  },
+  "workflow": {
+    "run_id": 31951674363,
+    "job_id": 95175961504,
+    "head_sha": "0542462124e4e4c98f745a022cba2b1b5c0f9302",
+    "github_actions_conclusion": "success",
+    "scientific_runner_exit_code": 3
+  },
+  "artifact": {
+    "id": 9264860453,
+    "name": "janus-tachyon-star-t3b-tess",
+    "zip_sha256": "b8291b7ef74704fe820cf5deae8526f4c225730999441e5680e5bec26bccefc9",
+    "receipt_sha256": "9ee08092645cb8e81d67e797472b5a101c09d22caa58097cc9b2ea9c96a45e1f",
+    "trial_results_sha256": "25763a6ad7db994717e0e698cc2fa1612672baf63e3f8d7b0aa61be6ace45162",
+    "scientific_runner_exit_file_sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2"
+  },
+  "accounting": {
+    "trials_total": 42,
+    "qualified_null_trials": 40,
+    "candidate_trials": 0,
+    "nonisolated_trials": 0,
+    "unresolved_trials": 2
+  },
+  "frozen_selection_integrity": {
+    "parent_manifest_sha_verified_before_flux_access": true,
+    "a_b_c_time_cadenceno_quality_verified_on_replay": true,
+    "replacement_sector_or_b_allowed": false,
+    "exact_regenerated_tesscut_fits_sha_matches": 0,
+    "exact_regenerated_tesscut_zip_sha_matches": 0,
+    "interpretation_of_hash_change": "TESSCut regenerated archive containers did not reproduce the parent byte-level ZIP/FITS hashes, but every admitted trial was required to match the frozen source FITS name plus A/B/C TIME, CADENCENO and QUALITY=0 within the preregistered tolerance before FLUX was analyzed. No B cadence was reselected."
+  },
+  "unresolved_trials": [
+    {
+      "trial_id": "TS-T3B-TESS-15",
+      "src_id": "tile_RA178.400_DECp25.947:195",
+      "sector": 49,
+      "ffi_cadence_s": 600,
+      "raw_contrast_z": -3.0210452396422274,
+      "raw_b_minus_a_sigma": -2.548671064219578,
+      "raw_b_minus_c_sigma": -3.540625574654188,
+      "control_count": 158,
+      "control_sigma": 5.735844946289062,
+      "injection_recovery": {
+        "8_sigma": false,
+        "10_sigma": false,
+        "12_sigma": true
+      },
+      "reason": "Raw B is not a positive isolated event; trial remains unresolved only because the preregistered +10sigma sensitivity injection did not pass while +12sigma did."
+    },
+    {
+      "trial_id": "TS-T3B-TESS-39",
+      "src_id": "tile_RA352.628_DECp14.636:2011",
+      "sector": 56,
+      "ffi_cadence_s": 200,
+      "raw_contrast_z": -2.09740353666039,
+      "raw_b_minus_a_sigma": -1.481312020972129,
+      "raw_b_minus_c_sigma": -2.650206332926144,
+      "control_count": 234,
+      "control_sigma": 6.073742960357666,
+      "injection_recovery": {
+        "8_sigma": false,
+        "10_sigma": false,
+        "12_sigma": true
+      },
+      "reason": "Raw B is not a positive isolated event; trial remains unresolved only because the preregistered +10sigma sensitivity injection did not pass while +12sigma did."
+    }
+  ],
+  "admitted_claim": "In the independently prepointed TESS cadence-native aperture test, none of the 42 frozen B cadences passed the preregistered isolated-B candidate gate. Forty trials were sensitivity-qualified as no isolated-B events by recovering both +10sigma and +12sigma synthetic central-cadence injections. Two trials remain unresolved because +10sigma was not recovered even though +12sigma was recovered; both raw B measurements were negative, not positive, excursions relative to their local isolated-contrast controls. These two are not counted as null trials.",
+  "not_admitted": [
+    "An all-42 negative TESS result.",
+    "Treating negative raw excursions in the two unresolved trials as sensitivity-qualified absence.",
+    "A claim that the central TESS aperture isolates a unique astrophysical source.",
+    "A global rejection of transient phenomena.",
+    "Physical tachyon identification or exclusion, faster-than-light propagation, retrocausality, backward signaling, UAP origin, artificial origin, ETI, or nuclear causality."
+  ],
+  "next_gate": "AURA_RECONSULT_FROM_TESS_40_OF_42_QUALIFIED_NULL_ZERO_CANDIDATES",
+  "claim_ceiling": "PREPOINTED_TESS_CADENCE_NATIVE_APERTURE_EVENT_REPLICATION_ONLY__NO_SOURCE_IDENTITY__NO_FTL__NO_RETROCAUSALITY__NO_TACHYON_PARTICLE_IDENTIFICATION__NO_UAP_OR_ARTIFICIAL_ORIGIN_CLAIM"
+}

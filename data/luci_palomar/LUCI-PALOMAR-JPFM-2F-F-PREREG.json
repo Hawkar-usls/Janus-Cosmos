@@ -1,0 +1,11 @@
+{
+  "schema": "janus.cosmos.luci_palomar.jpfm_2f_f.prereg.v1",
+  "experiment_id": "LUCI-PALOMAR-JPFM-2F-F-UNRESOLVED-SENSITIVITY-RECOVERY",
+  "date_utc": "2026-08-16",
+  "parent": {"artifact_id": 9248259268, "artifact_zip_sha256": "87ce38fe9c6d0977a009efbd2df67c668656a4a82889128bbcf962d666aecff7", "exact_fits_wcs_sha256": "53cb2d94566eabb35b431f027d5958362f0e3fcd0640efb61593eb06c0068c22", "temporal_representatives_sha256": "b5d81da2ddb4a0bf21370184641b1616693af300458b00117494b5f84f4df52b", "qualified_negative_pairs_preserved_untouched": 92},
+  "frozen_problem_sources": {"count": 8, "fully_unresolved": 3, "mixed": 5, "source_ids": ["tile_RA122.762_DECp56.240:1372", "tile_RA160.223_DECp32.041:1277", "tile_RA188.616_DECp45.284:633", "tile_RA217.768_DECp44.372:762", "tile_RA264.754_DECp26.740:2753", "tile_RA307.409_DECp40.547:701", "tile_RA41.145_DECp27.430:1698", "tile_RA65.091_DECp15.163:1317"]},
+  "untested_exact_overlap_recovery": {"rule": "Use only exact-WCS pairs belonging to the frozen 8-source problem set that were not in the 2F-E temporal representative set.", "expected_pairs": 100, "expected_unique_files": 100, "pixel_rule": "unchanged LUCI image reader, explicit WCS-HDU=image-HDU binding, unchanged R1 frame gate, unchanged measure_psf_at and inherited local injection first."},
+  "edge_recovery": {"scope": "Only local blocks caused solely by the inherited 12-pixel coordinate margin may enter edge-aware replay.", "minimum_retained_gaussian_psf_flux_fraction": 0.995, "snr_grid": [8,12], "detector_change": false, "rule": "Remove only the arbitrary 12-pixel firewall after proving >=99.5% modeled PSF flux remains on detector; use unchanged measure_psf_at. Failure remains blocked."},
+  "admission": {"source_level_pass": "All 42 sources have at least one sensitivity-qualified no-counterpart epoch after combining frozen parent negatives with qualified 2F-F recovery, and no counterpart candidate is produced.", "otherwise": "BLOCKED"},
+  "claim_ceiling": "TARGETED_NEAR_IR_SENSITIVITY_RECOVERY_ONLY__NO_ANOMALY_OR_UAP_ORIGIN_CLAIM__NO_CAUSALITY"
+}

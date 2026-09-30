@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.luci_palomar.result.v1",
+  "experiment_id": "LUCI-JPFM-2F-TRANSFER-001",
+  "date_utc": "2026-08-15",
+  "branch": "research/luci-only-v1",
+  "workflow_run_id": 31886061094,
+  "workflow_head_sha": "1967126bed6d480d8806d8f460255c5710b87110",
+  "artifact": {
+    "id": 9247286927,
+    "name": "luci-palomar-jpfm-transfer",
+    "sha256": "0c763dc942b42178133d0237bb83691277a67d519e6965c0d340c191e3925ff9",
+    "size_bytes": 150750
+  },
+  "frozen_palomar_parent": {
+    "registry_commit": "7890cd5c8f4650c02dd439dbf96f09bc45638654",
+    "poss_commit": "4005e200541b321ead3d6608f0162a14430ef1c2",
+    "sample_n": 64,
+    "selection": "JPFM-2F-B deterministic 2 typical + 2 unusual per structural cluster",
+    "structural_manifest_gzip_sha256": "166f5e6621ed2b065b7981b3c8208670f3c989b1394bd559c9005ab1fa6d07d9",
+    "structural_manifest_csv_sha256": "34b0ccde7c3683d07626774e52dac0a197451f729242204e59aae81397bdbc2e",
+    "stage_S0_gzip_sha256": "f19cf987756c62a68f55a472992d860e73ae63b3a4664189092b0e1fda77f7bb",
+    "stage_S0_csv_sha256": "2ff92f2210acb387ef9ef4b88d561595d3883e9aab27065042627272b96590f0"
+  },
+  "direct_sky_overlap_preflight": {
+    "tap_service": "LBT Archive / IA2 TAP",
+    "instrument_scope": "LUCI/LUCIFER only; FREE SCIENCE; GRATNAME=Mirror",
+    "generous_archive_center_search_radius_deg": 0.2,
+    "tap_rows_returned": 2,
+    "conservative_geometry_overlaps": 0,
+    "unique_frozen_palomar_sources_with_overlap": 0,
+    "sample_n": 64,
+    "outcome": "NO_PUBLIC_LUCI_FOOTPRINT_OVERLAP_IN_FROZEN_64_SOURCE_SAMPLE",
+    "interpretation": "No direct Palomar-to-LUCI counterpart test is admitted for this exact frozen sample from the currently queried public LUCI archive. This does not assert that LUCI never observed any broader Palomar/POSS field."
+  },
+  "generic_luci_morphology_transfer": {
+    "raw_runner_outcome": "TRANSFER_FEASIBILITY_PASS",
+    "raw_frame_count": 8,
+    "raw_frame_pass_fraction": 1.0,
+    "corrective_audit_status": "IMPLEMENTATION_INVALID_MORPHOLOGY_MEASUREMENT",
+    "invalid_frame_count": 8,
+    "admitted": false,
+    "reason": "The source-shape implementation produced unresolved/single-pixel and/or mathematically invalid shape estimates; the raw morphology PASS is void for scientific interpretation."
+  },
+  "ci_status": "PASS",
+  "scientific_status": "DIRECT_OVERLAP_NEGATIVE__MORPHOLOGY_IMPLEMENTATION_INVALID",
+  "claim_ceiling": "NO_LUCI_CONFIRMATION_OF_PALOMAR_STARS__NO_ANOMALY_CONFIRMATION__NO_UAP_ORIGIN_IDENTIFICATION__NO_CAUSALITY",
+  "next_gate": {
+    "name": "LUCI-PALOMAR-JPFM-2F-C",
+    "requirements": [
+      "Replace the hot/single-pixel-sensitive LUCI source detector with a PSF-aware multi-pixel source extractor and validate it by injection-recovery before morphology inference.",
+      "Use a larger Palomar coordinate set than the 64-source pilot when searching LUCI archive footprints, but freeze that expanded set before querying LUCI outcomes.",
+      "For any future archive overlap, require exact downloaded-FITS WCS containment before inspecting local morphology or counterpart presence.",
+      "Keep temporal/UAP labels firewalled from LUCI source extraction and morphology scoring."
+    ]
+  }
+}
