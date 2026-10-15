@@ -10,7 +10,12 @@ from pathlib import Path
 
 
 def run():
-    p = Path(__file__).with_name("cosmos_case.json")
+    # In Janus-Cosmos this verifier lives in tools/ and the source-bound
+    # dataset lives in domains/space/. The fallback is for an isolated replay.
+    repo_root = Path(__file__).resolve().parents[1]
+    p = repo_root / "domains" / "space" / "JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json"
+    if not p.exists():
+        p = Path(__file__).with_name("cosmos_case.json")
     case = json.loads(p.read_text(encoding="utf-8"))
     obs = case["derived_checks"]["lambda_observed_angstrom"]
     for line in case["derived_checks"]["candidate_lines"]:
