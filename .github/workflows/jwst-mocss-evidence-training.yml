@@ -1,0 +1,31 @@
+name: JANUS COSMOS JWST MOCSS Evidence-Training Check
+
+on:
+  pull_request:
+    paths:
+      - 'domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json'
+      - 'tools/verify_jwst_mocss_hudf_single_line.py'
+      - '.github/workflows/jwst-mocss-evidence-training.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-bound-training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: JSON syntax
+        run: python -m json.tool domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json > /dev/null
+      - name: Arithmetic replay and scientific authority firewall
+        run: python tools/verify_jwst_mocss_hudf_single_line.py
+      - name: Explicit science ceiling
+        run: |
+          echo 'PASS_FINITE_ARITHMETIC_ONLY'
+          echo 'MAST_RAW_REPLAY=NOT_EXECUTED'
+          echo 'PHYSICAL_IDENTITY=UNRESOLVED'
+          echo 'MODEL_WEIGHTS_UNCHANGED=true'
