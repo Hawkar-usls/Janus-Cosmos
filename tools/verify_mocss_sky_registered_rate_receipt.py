@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     p = ROOT / 'MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json'
+    if not p.exists():
+        p = ROOT.parent / 'domains' / 'space' / p.name
     x = json.loads(p.read_text())
     assert x['schema'] == 'janus-mocss-independent-wcs-sky-rate-probe-v1'
     assert x['finding_classification'] == 'GEOMETRY_VALIDATED_RATE_LINE_CONTRAST_UNCALIBRATED'
