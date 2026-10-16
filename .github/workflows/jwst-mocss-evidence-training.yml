@@ -16,6 +16,11 @@ on:
       - 'tools/build_mocss_16_exposure_manifest.py'
       - 'tools/analyze_mocss_geometry_and_hypotheses.py'
       - 'tools/verify_mocss_16_exposure_receipt.py'
+      - 'domains/space/MOCSS_16_SKY_REGISTERED_RATE_*.json'
+      - 'domains/space/MOCSS_16_SKY_REGISTERED_RATE_*.md'
+      - 'domains/space/MOCSS_16_SKY_WCS_REPRODUCTION_2026-10-16.md'
+      - 'domains/space/MOCSS_LOCAL_SKY_*.json'
+      - 'tools/*mocss*'
       - '.github/workflows/jwst-mocss-evidence-training.yml'
   workflow_dispatch:
 
@@ -37,6 +42,9 @@ jobs:
           python -m json.tool domains/space/JWST_MOCSS_HUDF_ORIGIN_SPATIAL_TEST_2026-10-16.json > /dev/null
           python -m json.tool domains/space/MOCSS_16_EXPOSURE_MANIFEST_2026-10-16.json > /dev/null
           python -m json.tool domains/space/MOCSS_16_EXPOSURE_GEOMETRY_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_LOCAL_SKY_COHERENCE_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_LOCAL_SKY_WCS_PROJECTION_2026-10-16.json > /dev/null
       - name: Python replay scripts compile
         run: |
           python -m py_compile tools/fetch_jwst_mocss_mast_subset.py
@@ -44,21 +52,31 @@ jobs:
           python -m py_compile tools/build_mocss_16_exposure_manifest.py
           python -m py_compile tools/analyze_mocss_geometry_and_hypotheses.py
           python -m py_compile tools/verify_mocss_16_exposure_receipt.py
+          python -m py_compile tools/verify_mocss_sky_registered_rate_receipt.py
+          python -m py_compile tools/prepare_mocss_wcs_probe.py
+          python -m py_compile tools/calibrate_mocss_wcs_grid.py
+          python -m py_compile tools/prepare_all_mocss_target_wcs.py
+          python -m py_compile tools/trace_mocss_all_16.py
+          python -m py_compile tools/stack_mocss_wcs_registered_rate.py
+          python -m py_compile tools/map_mocss_local_sky.py
+          python -m py_compile tools/assess_mocss_local_sky_coherence.py
       - name: Published-source arithmetic and epistemic gates
         run: python tools/verify_jwst_mocss_hudf_single_line.py
       - name: Independent MAST receipt and spatial-origin gates
         run: python tools/verify_jwst_mocss_archive_receipt.py
       - name: Sixteen exposure MSA input integrity and corrected OIII wavelength
         run: python tools/verify_mocss_16_exposure_receipt.py
+      - name: Sky-registered 32-FITS WCS replay and uncalibrated RATE science gates
+        run: python tools/verify_mocss_sky_registered_rate_receipt.py
       - name: Explicit scientific ceiling
         run: |
           echo 'MAST_ARCHIVE_METADATA=CHECKED'
-          echo 'TWO_NIRSPEC_DETECTOR_RATES=INSPECTED'
+          echo 'THIRTY_TWO_ORIGINAL_NIRSPEC_RATE_FITS=HASHED_AND_SKY_REGISTERED'
           echo 'SIXTEEN_EXPOSURE_PRIMARY_HEADERS=INSPECTED'
           echo 'SIXTEEN_MSA_SHUTTER_IDS=CROSS_VERIFIED'
           echo 'OIII_COMPANION_WINDOW=15850.79_ANGSTROM_PREDICTION_ONLY'
           echo 'THREE_NIRCAM_EPOCHS=DIAGNOSTIC_APERTURE_ONLY'
-          echo 'MOCSS_SKY_WAVELENGTH_REEXTRACTION=NOT_EXECUTED'
+          echo 'MOCSS_SKY_WAVELENGTH_REEXTRACTION=UNVALIDATED_RATE_WCS_PROJECTION_ONLY'\n          echo 'SCIENCE_GRADE_SPECTROPHOTOMETRY=NOT_EXECUTED'\n          echo 'OIII_15850p8_AND_PAGAMMA_FLUX_LIMITS=NOT_CALIBRATED'
           echo 'PHYSICAL_IDENTITY=UNRESOLVED'
           echo 'SPATIAL_EXTENT=UNRESOLVED'
           echo 'MODEL_WEIGHTS_UNCHANGED=true'
