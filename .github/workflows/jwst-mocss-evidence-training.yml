@@ -6,10 +6,16 @@ on:
       - 'domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json'
       - 'domains/space/JWST_MOCSS_HUDF_MAST_INDEPENDENT_RECEIPT_2026-10-16.json'
       - 'domains/space/JWST_MOCSS_HUDF_ORIGIN_SPATIAL_TEST_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_MANIFEST_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_GEOMETRY_RECEIPT_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_GEOMETRY_AND_ORIGIN_2026-10-16.md'
       - 'tools/verify_jwst_mocss_hudf_single_line.py'
       - 'tools/verify_jwst_mocss_archive_receipt.py'
       - 'tools/fetch_jwst_mocss_mast_subset.py'
       - 'tools/replay_jwst_mocss_mast_subset.py'
+      - 'tools/build_mocss_16_exposure_manifest.py'
+      - 'tools/analyze_mocss_geometry_and_hypotheses.py'
+      - 'tools/verify_mocss_16_exposure_receipt.py'
       - '.github/workflows/jwst-mocss-evidence-training.yml'
   workflow_dispatch:
 
@@ -29,18 +35,28 @@ jobs:
           python -m json.tool domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json > /dev/null
           python -m json.tool domains/space/JWST_MOCSS_HUDF_MAST_INDEPENDENT_RECEIPT_2026-10-16.json > /dev/null
           python -m json.tool domains/space/JWST_MOCSS_HUDF_ORIGIN_SPATIAL_TEST_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_EXPOSURE_MANIFEST_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_EXPOSURE_GEOMETRY_RECEIPT_2026-10-16.json > /dev/null
       - name: Python replay scripts compile
         run: |
           python -m py_compile tools/fetch_jwst_mocss_mast_subset.py
           python -m py_compile tools/replay_jwst_mocss_mast_subset.py
+          python -m py_compile tools/build_mocss_16_exposure_manifest.py
+          python -m py_compile tools/analyze_mocss_geometry_and_hypotheses.py
+          python -m py_compile tools/verify_mocss_16_exposure_receipt.py
       - name: Published-source arithmetic and epistemic gates
         run: python tools/verify_jwst_mocss_hudf_single_line.py
       - name: Independent MAST receipt and spatial-origin gates
         run: python tools/verify_jwst_mocss_archive_receipt.py
+      - name: Sixteen exposure MSA input integrity and corrected OIII wavelength
+        run: python tools/verify_mocss_16_exposure_receipt.py
       - name: Explicit scientific ceiling
         run: |
           echo 'MAST_ARCHIVE_METADATA=CHECKED'
           echo 'TWO_NIRSPEC_DETECTOR_RATES=INSPECTED'
+          echo 'SIXTEEN_EXPOSURE_PRIMARY_HEADERS=INSPECTED'
+          echo 'SIXTEEN_MSA_SHUTTER_IDS=CROSS_VERIFIED'
+          echo 'OIII_COMPANION_WINDOW=15850.79_ANGSTROM_PREDICTION_ONLY'
           echo 'THREE_NIRCAM_EPOCHS=DIAGNOSTIC_APERTURE_ONLY'
           echo 'MOCSS_SKY_WAVELENGTH_REEXTRACTION=NOT_EXECUTED'
           echo 'PHYSICAL_IDENTITY=UNRESOLVED'
