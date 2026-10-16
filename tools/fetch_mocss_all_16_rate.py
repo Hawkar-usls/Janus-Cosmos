@@ -28,13 +28,16 @@ def main():
         filename = record['exposure_prefix'] + f'_{args.detector}_rate.fits'
         downloads.append((BASE + quote(ROOT_URI + filename, safe=''),
                           Path(args.dest) / filename))
+    for filename in ('jw03290001001_05_msa.fits', 'jw03290002001_01_msa.fits'):
+        downloads.append((BASE + quote(ROOT_URI + filename, safe=''),
+                          Path(args.dest) / filename))
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = {pool.submit(read_and_store, url, path): path
                    for url, path in downloads}
         for future in as_completed(futures):
             future.result()
     print('PASS: 16/16 MAST', args.detector.upper(),
-          'RATE inputs present; NO SPECTRAL ANALYSIS')
+          'RATE inputs + 2 MSA reference tables present; NO SPECTRAL ANALYSIS')
 
 
 if __name__ == '__main__':
