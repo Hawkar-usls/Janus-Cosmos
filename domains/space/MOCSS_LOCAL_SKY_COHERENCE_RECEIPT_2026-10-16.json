@@ -1,0 +1,88 @@
+{
+  "status": "DESCRIPTIVE_UNVALIDATED_LOCAL_SKY_COMPARISON",
+  "source_field_arcsec": 3.0,
+  "source_location_preselected": true,
+  "wavelength_16004A": {
+    "groups": {
+      "A": {
+        "background_median_dn_per_s": 0.0005282990750856698,
+        "background_mad_dn_per_s": 0.0036306796245742586,
+        "target_relative_robust_units": 3.0949636535947698
+      },
+      "B": {
+        "background_median_dn_per_s": -0.0003520863247103989,
+        "background_mad_dn_per_s": 0.003005760864727199,
+        "target_relative_robust_units": 4.211884747990535
+      },
+      "C": {
+        "background_median_dn_per_s": 0.0011416334891691804,
+        "background_mad_dn_per_s": 0.011601336338650434,
+        "target_relative_robust_units": -0.0984459710050741
+      },
+      "D": {
+        "background_median_dn_per_s": -0.007960498332977295,
+        "background_mad_dn_per_s": 0.013111103189777349,
+        "target_relative_robust_units": 1.9277388795616857
+      }
+    },
+    "combined_target_relative_robust_units": 2.284035327535479,
+    "fraction_of_map_cells_at_least_as_high_as_target_not_pvalue": 0.05098855359001041,
+    "max_map_east_north_arcsec": [
+      -0.5999999999999992,
+      -0.5999999999999992
+    ],
+    "max_map_relative_robust_units": 10.430574339309558
+  },
+  "companion_control_15850p8A": {
+    "groups": {
+      "A": {
+        "background_median_dn_per_s": -4.3130423364345916e-05,
+        "background_mad_dn_per_s": 0.0028541214014519934,
+        "target_relative_robust_units": -0.6389058544644315
+      },
+      "B": {
+        "background_median_dn_per_s": 0.00013393436529440805,
+        "background_mad_dn_per_s": 0.003790713176880672,
+        "target_relative_robust_units": -0.5473108022682803
+      },
+      "C": {
+        "background_median_dn_per_s": 0.0002780453214654699,
+        "background_mad_dn_per_s": 0.010914081282075494,
+        "target_relative_robust_units": -0.3364225119935637
+      },
+      "D": {
+        "background_median_dn_per_s": -0.002586215268820524,
+        "background_mad_dn_per_s": 0.01056637665904127,
+        "target_relative_robust_units": -0.5696489365382154
+      }
+    },
+    "combined_target_relative_robust_units": -0.5230720263161227,
+    "fraction_of_map_cells_at_least_as_high_as_target_not_pvalue": 0.8387096774193549,
+    "max_map_east_north_arcsec": [
+      1.2000000000000024,
+      1.1000000000000023
+    ],
+    "max_map_relative_robust_units": 11.435391188308653
+  },
+  "neighbors": {
+    "NW_low_z_photo": {
+      "16004A_relative_robust_units": -0.581701432687752,
+      "15850p8A_relative_robust_units": -0.11638312476389429
+    },
+    "S_low_z_photo": {
+      "16004A_relative_robust_units": 0.6644889833451458,
+      "15850p8A_relative_robust_units": 0.21980507577926459
+    },
+    "E_high_z_photo": {
+      "16004A_relative_robust_units": 0.3406265842769842,
+      "15850p8A_relative_robust_units": -0.19318792079217167
+    }
+  },
+  "interpretation_guardrails": [
+    "A rank fraction is NOT a false-alarm probability or significance",
+    "WCS registration was tested but no standard spectrophotometric calibration",
+    "Spatial cells and detector residuals are highly correlated",
+    "No physical emission length or propagation direction can be measured",
+    "Validation requires full flat, source extraction, simulated injection and independent epoch or IFU"
+  ]
+}
