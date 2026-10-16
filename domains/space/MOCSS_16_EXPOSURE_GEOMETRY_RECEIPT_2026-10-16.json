@@ -1,0 +1,354 @@
+{
+  "schema_version": "janus-mocss-shutter-geometry-and-hypothesis-test-v1",
+  "created_utc": "2026-10-16T00:16:42.854489+00:00",
+  "target": {
+    "ra_deg": 53.13127,
+    "dec_deg": -27.78908,
+    "line_A": 16004
+  },
+  "source_references": [
+    "https://arxiv.org/html/2610.12553v1",
+    "https://arxiv.org/html/2609.36003",
+    "https://doi.org/10.17909/tct8-jr92",
+    "https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph/nirspec-observing-modes/nirspec-ifu-spectroscopy"
+  ],
+  "research_stage": "PARTIAL_INPUT_VERIFICATION_NOT_AN_INDEPENDENT_LINE_MAP",
+  "replay_coverage": {
+    "long_exposures_with_FITS_headers_verified": 16,
+    "detector_FITS_headers_verified": 32,
+    "MSA_shutter_metadata_ids_verified": 16,
+    "full_detector_rate_images_independently_processed": 2,
+    "independent_line_reextractions": 0,
+    "off_source_at_16004A_sky_map_reconstructions": 0
+  },
+  "msa_representative_archives": {
+    "1": {
+      "archived_file": {
+        "filename": "jw03290001001_05_msa.fits",
+        "bytes": 80426880,
+        "sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44"
+      },
+      "row_count": 1829633,
+      "msaid_signed_16bit_to_counts": {
+        "-28198": 228120,
+        "-18590": 228167,
+        "-8979": 228245,
+        "1": 229201,
+        "593": 228059,
+        "9352": 229229,
+        "18690": 229324,
+        "28020": 229288
+      },
+      "normalized_ids_unsigned_16bit": [
+        1,
+        593,
+        9352,
+        18690,
+        28020,
+        37338,
+        46946,
+        56557
+      ],
+      "source_info_rows": 75716,
+      "caution": "SHUTTER_INFO msa_metadata_id stored as signed int16 in archival FITS; values >32767 wrap modulo 65536. Compare after normalization, do not compare raw integers."
+    },
+    "2": {
+      "archived_file": {
+        "filename": "jw03290002001_01_msa.fits",
+        "bytes": 80470080,
+        "sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e"
+      },
+      "row_count": 1829291,
+      "msaid_signed_16bit_to_counts": {
+        "-27156": 229097,
+        "-17698": 229279,
+        "-8226": 229254,
+        "1": 227975,
+        "1233": 229281,
+        "9615": 228051,
+        "19253": 228111,
+        "28810": 228243
+      },
+      "normalized_ids_unsigned_16bit": [
+        1,
+        1233,
+        9615,
+        19253,
+        28810,
+        38380,
+        47838,
+        57310
+      ],
+      "source_info_rows": 76222,
+      "caution": "SHUTTER_INFO msa_metadata_id stored as signed int16 in archival FITS; values >32767 wrap modulo 65536. Compare after normalization, do not compare raw integers."
+    }
+  },
+  "per_exposure_msa_id_consistency": [
+    {
+      "exposure": 1,
+      "orientation": 1,
+      "group": "A",
+      "rate_primary_header_msa_id": 1,
+      "msa_shutter_info_signed16_id": 1,
+      "matching_open_shutter_rows": 229201,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 2,
+      "orientation": 1,
+      "group": "A",
+      "rate_primary_header_msa_id": 9352,
+      "msa_shutter_info_signed16_id": 9352,
+      "matching_open_shutter_rows": 229229,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 3,
+      "orientation": 1,
+      "group": "A",
+      "rate_primary_header_msa_id": 18690,
+      "msa_shutter_info_signed16_id": 18690,
+      "matching_open_shutter_rows": 229324,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 4,
+      "orientation": 1,
+      "group": "A",
+      "rate_primary_header_msa_id": 28020,
+      "msa_shutter_info_signed16_id": 28020,
+      "matching_open_shutter_rows": 229288,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 5,
+      "orientation": 1,
+      "group": "B",
+      "rate_primary_header_msa_id": 37338,
+      "msa_shutter_info_signed16_id": -28198,
+      "matching_open_shutter_rows": 228120,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 6,
+      "orientation": 1,
+      "group": "B",
+      "rate_primary_header_msa_id": 46946,
+      "msa_shutter_info_signed16_id": -18590,
+      "matching_open_shutter_rows": 228167,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 7,
+      "orientation": 1,
+      "group": "B",
+      "rate_primary_header_msa_id": 56557,
+      "msa_shutter_info_signed16_id": -8979,
+      "matching_open_shutter_rows": 228245,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 8,
+      "orientation": 1,
+      "group": "B",
+      "rate_primary_header_msa_id": 66129,
+      "msa_shutter_info_signed16_id": 593,
+      "matching_open_shutter_rows": 228059,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 9,
+      "orientation": 2,
+      "group": "C",
+      "rate_primary_header_msa_id": 1,
+      "msa_shutter_info_signed16_id": 1,
+      "matching_open_shutter_rows": 227975,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 10,
+      "orientation": 2,
+      "group": "C",
+      "rate_primary_header_msa_id": 9615,
+      "msa_shutter_info_signed16_id": 9615,
+      "matching_open_shutter_rows": 228051,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 11,
+      "orientation": 2,
+      "group": "C",
+      "rate_primary_header_msa_id": 19253,
+      "msa_shutter_info_signed16_id": 19253,
+      "matching_open_shutter_rows": 228111,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 12,
+      "orientation": 2,
+      "group": "C",
+      "rate_primary_header_msa_id": 28810,
+      "msa_shutter_info_signed16_id": 28810,
+      "matching_open_shutter_rows": 228243,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 13,
+      "orientation": 2,
+      "group": "D",
+      "rate_primary_header_msa_id": 38380,
+      "msa_shutter_info_signed16_id": -27156,
+      "matching_open_shutter_rows": 229097,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 14,
+      "orientation": 2,
+      "group": "D",
+      "rate_primary_header_msa_id": 47838,
+      "msa_shutter_info_signed16_id": -17698,
+      "matching_open_shutter_rows": 229279,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 15,
+      "orientation": 2,
+      "group": "D",
+      "rate_primary_header_msa_id": 57310,
+      "msa_shutter_info_signed16_id": -8226,
+      "matching_open_shutter_rows": 229254,
+      "metadata_id_verified": true
+    },
+    {
+      "exposure": 16,
+      "orientation": 2,
+      "group": "D",
+      "rate_primary_header_msa_id": 66769,
+      "msa_shutter_info_signed16_id": 1233,
+      "matching_open_shutter_rows": 229281,
+      "metadata_id_verified": true
+    }
+  ],
+  "mast_product_availability": {
+    "aug_rate": {
+      "request_response_sha256": "b41e17912f83c3c07cba227e6ad11a4dcc2d88cdf549eb0e67be201e465501a1",
+      "product_count": 7,
+      "available_subgroups": [
+        "",
+        "MSA",
+        "RATE",
+        "RATEINTS",
+        "UNCAL"
+      ],
+      "pipeline_stage2_s2d_or_cal_present": false
+    },
+    "nov_rate": {
+      "request_response_sha256": "7470ea44eab1f065acdafceb2c94d3665d4461e5e70cce23d77f05594ee024c3",
+      "product_count": 7,
+      "available_subgroups": [
+        "",
+        "MSA",
+        "RATE",
+        "RATEINTS",
+        "UNCAL"
+      ],
+      "pipeline_stage2_s2d_or_cal_present": false
+    }
+  },
+  "hypothesis_diagnostics": {
+    "OIII_5008_primary_hypothesis": {
+      "published_primary_line_A": 16004.0,
+      "vacuum_rest_5008_A": 5008.239,
+      "vacuum_rest_4960_A": 4960.295,
+      "derived_companion_A": 15850.79,
+      "paper_companion_claim_A": 15864,
+      "paper_minus_derived_A": 13.21,
+      "predicted_companion_flux_erg_s_cm2": 8.333333333333334e-19,
+      "paper_reported_local_3sigma_limit_around_15864_erg_s_cm2": 9.4e-19,
+      "interpretation": "A nondetection evaluated at 15864 A cannot exclude a feature at 15850.8 A. Additionally, the predicted companion flux is smaller than the reported 3-sigma limit. Re-extract actual spectrum at correct position, with a local uncertainty and wavelength solution. No line detection claimed."
+    },
+    "stack_flux_constancy": {
+      "provenance": "Huberty et al. 2026 Table 2; no independent 1D re-extraction",
+      "source_flux_unit": "1e-18 erg s-1 cm-2",
+      "measurements_ABCD": [
+        2.3,
+        3.5,
+        2.9,
+        2.9
+      ],
+      "errors_ABCD": [
+        0.5,
+        0.6,
+        0.7,
+        1.2
+      ],
+      "inverse_variance_weighted_mean": 2.8229,
+      "chi_square": 2.3835,
+      "degrees_of_freedom": 3,
+      "null_survival_probability": 0.4967,
+      "interpretation": "Published four-stack fluxes are compatible with a constant line over ~88 days; they do not classify the emitter or exclude a long-duration transient."
+    },
+    "nearby_galaxies": {
+      "northwest": {
+        "ra_deg": 53.131165,
+        "dec_deg": -27.78893,
+        "zphot": 0.22,
+        "east_offset_arcsec": -0.3344,
+        "north_offset_arcsec": 0.54,
+        "angular_sep_arcsec": 0.6352,
+        "bearing_from_line_deg_east_of_north": 328.23,
+        "if_same_z_as_Pa_beta": {
+          "projected_separation_kpc": 2.553,
+          "minimum_source_to_cloud_light_travel_years": 8328
+        },
+        "association_status": "unverified, photometric redshift only"
+      },
+      "east": {
+        "ra_deg": 53.131584,
+        "dec_deg": -27.789105,
+        "zphot": 6.03,
+        "east_offset_arcsec": 1.0,
+        "north_offset_arcsec": -0.09,
+        "angular_sep_arcsec": 1.0041,
+        "bearing_from_line_deg_east_of_north": 95.14,
+        "if_same_z_as_Pa_beta": {
+          "projected_separation_kpc": 4.036,
+          "minimum_source_to_cloud_light_travel_years": 13165
+        },
+        "association_status": "unverified, photometric redshift only"
+      },
+      "south": {
+        "ra_deg": 53.131301,
+        "dec_deg": -27.789367,
+        "zphot": 0.19,
+        "east_offset_arcsec": 0.0987,
+        "north_offset_arcsec": -1.0332,
+        "angular_sep_arcsec": 1.0379,
+        "bearing_from_line_deg_east_of_north": 174.54,
+        "if_same_z_as_Pa_beta": {
+          "projected_separation_kpc": 4.172,
+          "minimum_source_to_cloud_light_travel_years": 13608
+        },
+        "association_status": "unverified, photometric redshift only"
+      }
+    }
+  },
+  "ifu_observation_design": {
+    "single_pointing_field_arcsec": [
+      3,
+      3
+    ],
+    "spaxel_size_arcsec": [
+      0.1,
+      0.1
+    ],
+    "all_three_neighbors_within_1p05arcsec": true,
+    "search_requirements": [
+      "One deep NIRSpec IFU pointing, approximately centered on the reported orphan, measures all three proposed illuminators and line-emitting region.",
+      "Mosaic IFU pointings needed for a blind >=5-arcsec sky-extent search.",
+      "Extract 16004 +/- 10 A and continuum-matched adjacent wavelengths, 15850.8 A ([O III] doublet), Pa gamma at ~1.365 um, plus other expected transitions.",
+      "Simultaneous F150W imaging and comparison between 2023 October mosaic and 2023 August-November MOCSS spectra."
+    ]
+  },
+  "scientific_stop_condition": "Cannot conclude source class, emission direction, extension or whether 15850.8-A line is present without wavelength-aware detector registration and calibrated spectral extraction."
+}
