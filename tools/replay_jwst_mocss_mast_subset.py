@@ -5,8 +5,10 @@ Inputs are untouched public MAST rate FITS, NIRCam I2D FITS and ECSV catalogs.
 This is NOT a NIRSpec MOCSS 1-D spectral re-extraction: that requires the
 custom MSA geometry, background treatment and wavelength/sky registration.
 
-Run with: PYTHONPATH=/tmp/janus_astrolib python3 janus_jwst/replay_mast.py
-The defaults point at the explicitly named files downloaded from MAST.
+Run after installing astropy and numpy, and downloading the exact MAST FITS
+byte ranges via fetch_jwst_mocss_mast_subset.py:
+    python3 tools/replay_jwst_mocss_mast_subset.py
+Set JANUS_RECEIPT_OUTPUT=/path/file.json to override the output location.
 """
 
 import csv
@@ -30,7 +32,7 @@ from astropy.wcs.utils import proj_plane_pixel_area, proj_plane_pixel_scales
 
 RA = 53.13127
 DEC = -27.78908
-ROOT = Path('/tmp')
+ROOT = Path(os.environ.get('JANUS_DATA_ROOT', '/tmp'))
 CATALOGS = {
     '2023-10-03': ROOT / 'janus_jwst_2023_f150w_cat.ecsv',
     '2025-10-06': ROOT / 'janus_jwst_2025_f150w_cat.ecsv',
@@ -45,7 +47,8 @@ RATES = {
     '2023-08-24': ROOT / 'jw03290001001_03109_00002_nrs2_rate.fits',
     '2023-11-19': ROOT / 'jw03290002001_11101_00002_nrs2_rate.fits',
 }
-OUTPUT = Path('janus_jwst/MAST_HUDF_INDEPENDENT_REPLAY_RECEIPT_2026-10-16.json')
+OUTPUT = Path(os.environ.get('JANUS_RECEIPT_OUTPUT',
+                           '/tmp/JWST_MOCSS_HUDF_MAST_REPLAY.json'))
 
 
 def archive_discovery():
