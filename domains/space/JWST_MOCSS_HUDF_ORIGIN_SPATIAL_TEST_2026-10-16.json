@@ -26,6 +26,17 @@
     "propagation_length": "UNIDENTIFIABLE_FROM_ONE_SIGHTLINE",
     "warning": "Spectral-line photons received from one direction do not prove a collimated signal or that the line 'continues' through a contiguous track of sky. NIRSpec slitless dispersion produces detector streaks that are not spatial extension of the emitter."
   },
+  "published_MOCSS_same_wavelength_catalog_screen": {
+    "source": "https://arxiv.org/html/2609.36003v1 ; Huberty et al., MOCSS method paper, Table 1, source IDs MOCSSHUDF1 through MOCSSHUDF23 (the orphan is ID 24).",
+    "independent_calculation": "For every one of the 23 other listed emitters, use its rounded published spectroscopic z and listed Lines of Interest; calculate lambda_observed = lambda_rest*(1+z) for representative strong rest-frame transitions. Compare against 16004 A.",
+    "other_reported_emitter_sources_screened": 23,
+    "representative_line_identifications_screened": 41,
+    "representative_lines_within_plusminus_10_angstrom": 0,
+    "representative_lines_within_plusminus_100_angstrom": 0,
+    "closest_listed_transition": {"source_id": "MOCSSHUDF1", "ra_deg": 53.1327744, "dec_deg": -27.7888699, "angular_separation_arcsec_approx": 4.8, "line_id": "H-alpha", "published_z_rounded": 1.395, "predicted_observed_angstrom_approx": 15722.2, "difference_from_16004_angstrom_approx": 281.8},
+    "what_this_does_not_prove": "The 23-object published source catalog is not a blinded, complete same-wavelength spectral map; noncataloged single-line objects, faint secondary transitions, sky background artifacts and sources in other parts of the Universe remain untested.",
+    "status": "SOURCE_BOUND_CATALOG_COMPARISON__NO_NEAR_16004A_REPRESENTATIVE_MATCH"
+  },
   "neighbor_positions_from_paper_table_3": [
     {"label": "NORTHWEST", "ra_deg": 53.131165, "dec_deg": -27.788930, "separation_arcsec_approx": 0.635, "bearing_east_of_north_deg_approx": 328.3, "photometric_redshift": "0.22 +3.11/-0.09; highly ambiguous"},
     {"label": "EAST", "ra_deg": 53.131584, "dec_deg": -27.789105, "separation_arcsec_approx": 1.003, "bearing_east_of_north_deg_approx": 95.1, "photometric_redshift": "6.03 +0.04/-0.29"},
