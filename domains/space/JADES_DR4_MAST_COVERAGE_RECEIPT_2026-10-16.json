@@ -1,0 +1,171 @@
+{
+  "source_ra_deg": 53.13127,
+  "source_dec_deg": -27.78908,
+  "jades_dr4": {
+    "url": "https://jades.herts.ac.uk/DR4/Combined_DR4_external_v1.2.1.fits",
+    "sha256": "4b4e7fd4306208ee801406c7ed73fdab895a2e67184af7f639a91e5f9c8ab7d4",
+    "n_target_rows": 5190,
+    "n_target_centers_within_2arcsec": 0,
+    "n_target_centers_within_5arcsec": 0,
+    "closest_12": [
+      {
+        "separation_arcsec": 5.282,
+        "ra_deg": 53.1319185,
+        "dec_deg": -27.7904304,
+        "unique_id": "goods-s-mediumjwst_117995",
+        "z_spec": -1.0,
+        "z_phot": 1.37905,
+        "z_spec_flag": "E",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 5.8593,
+        "ra_deg": 53.1294346,
+        "dec_deg": -27.788968,
+        "unique_id": "goods-s-mediumjwst_119146",
+        "z_spec": 1.84051,
+        "z_phot": 1.84051,
+        "z_spec_flag": "D",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 6.8791,
+        "ra_deg": 53.1302932,
+        "dec_deg": -27.7907843,
+        "unique_id": "goods-s-mediumhst_4929",
+        "z_spec": 3.7550848171285978,
+        "z_phot": 3.75,
+        "z_spec_flag": "A",
+        "pid": "1180"
+      },
+      {
+        "separation_arcsec": 6.8791,
+        "ra_deg": 53.1302932,
+        "dec_deg": -27.7907843,
+        "unique_id": "goods-s-mediumjwst_10004929",
+        "z_spec": 3.756040777776274,
+        "z_phot": 3.75,
+        "z_spec_flag": "A",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 7.514,
+        "ra_deg": 53.1299591,
+        "dec_deg": -27.7908154,
+        "unique_id": "goods-s-mediumjwst_47184",
+        "z_spec": -1.0,
+        "z_phot": 3.69982,
+        "z_spec_flag": "E",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 8.8864,
+        "ra_deg": 53.12851,
+        "dec_deg": -27.7887175,
+        "unique_id": "goods-s-mediumjwst_10002437",
+        "z_spec": -1.0,
+        "z_phot": 3.44,
+        "z_spec_flag": "E",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 9.4137,
+        "ra_deg": 53.1331672,
+        "dec_deg": -27.7910852,
+        "unique_id": "goods-s-mediumhst_8654",
+        "z_spec": 2.3436527065019526,
+        "z_phot": 2.67,
+        "z_spec_flag": "A",
+        "pid": "1180"
+      },
+      {
+        "separation_arcsec": 9.4212,
+        "ra_deg": 53.1331619,
+        "dec_deg": -27.7910918,
+        "unique_id": "goods-s-mediumjwst_117482",
+        "z_spec": 2.343462238394265,
+        "z_phot": 2.25168,
+        "z_spec_flag": "A",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 9.5255,
+        "ra_deg": 53.1286011,
+        "dec_deg": -27.7878857,
+        "unique_id": "goods-s-mediumjwst_10105748",
+        "z_spec": -1.0,
+        "z_phot": -1.0,
+        "z_spec_flag": "E",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 9.989,
+        "ra_deg": 53.1343949,
+        "dec_deg": -27.788842,
+        "unique_id": "goods-s-mediumjwst_119227",
+        "z_spec": 2.868224787380291,
+        "z_phot": 2.66362,
+        "z_spec_flag": "A",
+        "pid": "1286"
+      },
+      {
+        "separation_arcsec": 10.6858,
+        "ra_deg": 53.1281494,
+        "dec_deg": -27.7879895,
+        "unique_id": "goods-s-mediumjwst_10002371",
+        "z_spec": -1.0,
+        "z_phot": 2.78,
+        "z_spec_flag": "E",
+        "pid": "1180"
+      },
+      {
+        "separation_arcsec": 10.7471,
+        "ra_deg": 53.1342175,
+        "dec_deg": -27.7905335,
+        "unique_id": "goods-s-mediumjwst_117882",
+        "z_spec": 2.28734,
+        "z_phot": 2.28734,
+        "z_spec_flag": "C",
+        "pid": "1286"
+      }
+    ]
+  },
+  "mast_cone": {
+    "service": "Mast.Caom.Cone",
+    "radius_arcsec": 1.008,
+    "all_mission_rows": 3288,
+    "jwst_rows": 275,
+    "raw_query_sha256": "29f75c440f4e05865a4b45a202bb36410cc9fd75da6c67eb822a73d800a70bef",
+    "jwst_archived_spectrum_caom_rows_covering_1600nm": 5,
+    "individual_programs": [
+      {
+        "proposal": "1210",
+        "instrument": "NIRSPEC/MSA",
+        "mode": "CLEAR;PRISM",
+        "number_caom_rows": 2,
+        "earliest_utc": "2022-10-20T17:23",
+        "footprint_only_not_proof_of_slit_overlap": true
+      },
+      {
+        "proposal": "1286",
+        "instrument": "NIRSPEC/MSA",
+        "mode": "CLEAR;PRISM",
+        "number_caom_rows": 1,
+        "earliest_utc": "2023-10-19T06:36",
+        "footprint_only_not_proof_of_slit_overlap": true
+      },
+      {
+        "proposal": "3215",
+        "instrument": "NIRSPEC/MSA",
+        "mode": "CLEAR;PRISM",
+        "number_caom_rows": 2,
+        "earliest_utc": "2023-10-16T22:26",
+        "footprint_only_not_proof_of_slit_overlap": true
+      }
+    ],
+    "source_point_is_not_necessarily_inside_any_MSA_slit": true,
+    "MOCSS_go3290_rate_images_indexed_as_images_not_spectra": true
+  },
+  "science_conclusion": "No known JADES DR4 NIRSpec targeted object within 5 arcsec; do NOT attribute any catalog redshift to the orphan. Other footprint-covering NIRSpec PRISM rows do not establish an open slit at this coordinate.",
+  "gate": "CATALOG_CROSSMATCH_ONLY__NO_NEW_ORPHAN_SPECTRUM_OR_SPECTROSCOPIC_DISTANCE"
+}
