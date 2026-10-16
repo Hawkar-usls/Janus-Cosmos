@@ -1,0 +1,120 @@
+{
+  "science_status": "diagnostic astrometric and positive-control validation, NOT definitive deblended PSF photometry",
+  "source_ra": 53.13127,
+  "source_dec": -27.78908,
+  "epochs": [
+    {
+      "date": "2023-10-01T08:33:52.626000",
+      "product": "jw01180-o014_t023_nircam_clear-f150w_i2d.fits",
+      "target_flux_aperture_njy": 0.4534,
+      "one_sigma_controls_njy": 1.0777,
+      "neighbor_apertures_njy": {
+        "NW": 2.6275,
+        "East": 0.9207,
+        "South": 3.8324
+      }
+    },
+    {
+      "date": "2023-10-02T19:23:13.319000",
+      "product": "jw01180-o016_t013_nircam_clear-f150w_i2d.fits",
+      "target_flux_aperture_njy": 0.3411,
+      "one_sigma_controls_njy": 0.9945,
+      "neighbor_apertures_njy": {
+        "NW": 2.8828,
+        "East": 4.7645,
+        "South": 3.2128
+      }
+    },
+    {
+      "date": "2023-10-03T14:14:08.229000",
+      "product": "jw01180-o013_t011_nircam_clear-f150w_i2d.fits",
+      "target_flux_aperture_njy": 0.5042,
+      "one_sigma_controls_njy": 0.9053,
+      "neighbor_apertures_njy": {
+        "NW": 2.7448,
+        "East": 3.1599,
+        "South": 3.4709
+      }
+    },
+    {
+      "date": "2023-10-09T07:58:58.525000",
+      "product": "jw01180-o024_t020_nircam_clear-f150w_i2d.fits",
+      "target_flux_aperture_njy": -0.5461,
+      "one_sigma_controls_njy": 1.2982,
+      "neighbor_apertures_njy": {
+        "NW": 4.4527,
+        "East": 4.2688,
+        "South": 2.1257
+      }
+    }
+  ],
+  "neighbor_positive_controls": {
+    "NW": {
+      "weighted_mean_aperture_njy": 3.0302,
+      "nominal_sigma_njy": 0.5209,
+      "published_total_flux_2022_njy": 4.75
+    },
+    "East": {
+      "weighted_mean_aperture_njy": 3.2555,
+      "nominal_sigma_njy": 0.5209,
+      "published_total_flux_2022_njy": 4.69
+    },
+    "South": {
+      "weighted_mean_aperture_njy": 3.268,
+      "nominal_sigma_njy": 0.5209,
+      "published_total_flux_2022_njy": 3.57
+    }
+  },
+  "offset_grid_spacing_arcsec": 0.025,
+  "offset_grid_radius_arcsec": 0.15,
+  "number_of_offset_trials": 113,
+  "offset_peak_UNCORRECTED_for_trials": [
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.15000000000000002,
+      "mean_njy": 0.4607,
+      "nominal_sigma_njy": 0.5209,
+      "snr": 0.884
+    },
+    {
+      "offset_east_arcsec": -0.025,
+      "offset_north_arcsec": -0.025,
+      "mean_njy": 0.4559,
+      "nominal_sigma_njy": 0.5209,
+      "snr": 0.875
+    },
+    {
+      "offset_east_arcsec": -0.07500000000000001,
+      "offset_north_arcsec": -0.05,
+      "mean_njy": 0.3444,
+      "nominal_sigma_njy": 0.5209,
+      "snr": 0.661
+    },
+    {
+      "offset_east_arcsec": -0.05,
+      "offset_north_arcsec": -0.025,
+      "mean_njy": 0.3373,
+      "nominal_sigma_njy": 0.5209,
+      "snr": 0.648
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.0,
+      "mean_njy": 0.3297,
+      "nominal_sigma_njy": 0.5209,
+      "snr": 0.633
+    }
+  ],
+  "at_zero_offset": {
+    "offset_east_arcsec": 0.0,
+    "offset_north_arcsec": 0.0,
+    "mean_njy": 0.3297,
+    "nominal_sigma_njy": 0.5209,
+    "snr": 0.633
+  },
+  "caveats": [
+    "Nearby galaxies may contaminate some sky annuli and are extended, not PSF standards.",
+    "Grid peak is a post-selection statistic and cannot be cited as an independent significant detection.",
+    "Per-image mosaic noise and mosaicking covariance have not been cross-validated by injection/recovery."
+  ]
+}

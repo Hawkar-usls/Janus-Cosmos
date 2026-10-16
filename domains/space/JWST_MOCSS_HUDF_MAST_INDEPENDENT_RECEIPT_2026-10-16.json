@@ -1,0 +1,400 @@
+{
+  "schema": "janus.independent_mast_subset_receipt.v1",
+  "target": {
+    "ra_deg": 53.13127,
+    "dec_deg": -27.78908,
+    "observation_line_angstrom": 16004
+  },
+  "archive": "https://mast.stsci.edu/api/v0/invoke",
+  "program": "JWST GO-3290",
+  "analysis_scope": "Archive enumeration; two independent detector-rate FITS quality summaries; three NIRCam catalog crossmatches; image-space forced aperture checks for available public mosaics.",
+  "not_done": [
+    "MOCSS sky-to-detector solution and wavelength extraction",
+    "Independently measured 1.6004 micron line flux and companion-line limits",
+    "Exposure time-domain periodogram capable of ruling out pulsar",
+    "Contemporaneous (same-day) F150W imaging and G140M spectroscopy"
+  ],
+  "archive_discovery": {
+    "query_program_3290": {
+      "service": "Mast.Caom.Filtered",
+      "filter": "proposal_id=3290",
+      "total_observation_rows": 80,
+      "long_science_detector_rows": 32
+    },
+    "query_sky_cone": {
+      "service": "Mast.Caom.Cone",
+      "ra_deg": 53.13127,
+      "dec_deg": -27.78908,
+      "radius_deg": 0.002,
+      "all_missions_observation_rows": 4232,
+      "jwst_rows": 329
+    },
+    "retrieved_f150w_mosaic_parent_observations": [
+      {
+        "date": "2023-10-03",
+        "obsid": 224250361,
+        "proposal_id": "1180",
+        "data_rights": "PUBLIC",
+        "archive_observation_id": "jw01180-o013_t011_nircam_clear-f150w"
+      },
+      {
+        "date": "2025-10-06",
+        "obsid": 354772591,
+        "proposal_id": "8060",
+        "data_rights": "PUBLIC",
+        "archive_observation_id": "jw08060-o002_t002_nircam_clear-f150w"
+      },
+      {
+        "date": "2026-10-10",
+        "obsid": 454216900,
+        "proposal_id": "12577",
+        "data_rights": "PUBLIC",
+        "archive_observation_id": "jw12577-o002_t002_nircam_clear-f150w"
+      }
+    ],
+    "caveat": "MAST CAOM footprint intersection and MSA survey target IDs alone do not establish that a spectral slit exposes this precise source; FITS science WCS determines imaging coverage."
+  },
+  "atnf_pulsar_crossmatch": {
+    "catalog": "ATNF pulsar catalogue mirror, data.xao.ac.cn/pulsarcatalog/q/cone/scs.xml",
+    "cone_0p1_degree": {
+      "query_status": [
+        "OK"
+      ],
+      "decoded_binary_stream_byte_counts": [
+        0
+      ],
+      "archive_response_sha256": "b726af7b70150293c5af056e6fd0338392f4ed38f41ce52a83fc4fa05304ee46"
+    },
+    "cone_1p0_degree": {
+      "query_status": [
+        "OK"
+      ],
+      "decoded_binary_stream_byte_counts": [
+        0
+      ],
+      "archive_response_sha256": "e214d2c191ab790a9903795f5b39e52646bdba947085dba37f36a5a46aa41d4e"
+    },
+    "positive_control_crab_0p1_degree": {
+      "query_status": [
+        "OK"
+      ],
+      "decoded_binary_stream_byte_counts": [
+        82
+      ],
+      "archive_response_sha256": "7a5daf7bc5eb1bb4da6ca8e5b9a9110d7e4240095d3659a211d6817c4ade0381"
+    },
+    "interpretation": "Valid zero-row ATNF cones after a non-empty Crab positive control. Only catalogued pulsars are excluded as a positional match; unknown pulsars are not ruled out.",
+    "time_resolution_caveat": "Each chosen JWST long rate frame coadds six integrations over 8315.667 s; an ordinary subsecond or second pulsar period cannot be tested in a rate image."
+  },
+  "line_companion_predictions": {
+    "if_primary_is_OIII_5008": {
+      "predicted_OIII_4960_angstrom": 15850.79,
+      "predicted_Hbeta_angstrom": 15538.87,
+      "OIII_4960_to_5008_expected_flux_ratio_approximately": 0.3333333333333333,
+      "note": "The prior COSMOS draft gave ~15864 A for 4960; that approximation is wrong. The consistent prediction is ~15850.79 A."
+    },
+    "if_primary_is_OII_3730": {
+      "predicted_OII_3727_angstrom": 15992.06,
+      "doublet_separation_angstrom": 11.94
+    },
+    "science_gate": "PREDICTIONS_ONLY__NO_COMPANION_LINE_LIMIT_WAS_REEXTRACTED"
+  },
+  "catalog_crossmatches": {
+    "2023-10-03": {
+      "archive_file": {
+        "filename": "janus_jwst_2023_f150w_cat.ecsv",
+        "size_bytes": 4767568,
+        "sha256": "d3ea9c48eb4865843917684e385197e6eefbf5c871230ad0a5c3dd3f894d1e43"
+      },
+      "source_count": 4395,
+      "matches_lt_1arcsec": 0,
+      "matches_lt_2arcsec": 0,
+      "nearest": [
+        {
+          "label": "2069",
+          "separation_arcsec": 3.6517,
+          "catalog_aper_total_abmag": 27.03805542550878
+        },
+        {
+          "label": "4145",
+          "separation_arcsec": 4.6859,
+          "catalog_aper_total_abmag": 25.659834218598604
+        },
+        {
+          "label": "4147",
+          "separation_arcsec": 4.9367,
+          "catalog_aper_total_abmag": 24.05773201389756
+        }
+      ],
+      "catalog_nonmatch_is_not_forced_photometry": true
+    },
+    "2025-10-06": {
+      "archive_file": {
+        "filename": "janus_jwst_2025_f150w_cat.ecsv",
+        "size_bytes": 2667736,
+        "sha256": "c17fb47720f5d2966701cefe3c33af7a90fdebe0e77b49900c0908795e974f90"
+      },
+      "source_count": 2444,
+      "matches_lt_1arcsec": 0,
+      "matches_lt_2arcsec": 0,
+      "nearest": [
+        {
+          "label": "1494",
+          "separation_arcsec": 3.6744,
+          "catalog_aper_total_abmag": 27.026309393046716
+        },
+        {
+          "label": "1550",
+          "separation_arcsec": 4.6972,
+          "catalog_aper_total_abmag": 28.73645802170538
+        },
+        {
+          "label": "1515",
+          "separation_arcsec": 4.9098,
+          "catalog_aper_total_abmag": 24.87512648489406
+        }
+      ],
+      "catalog_nonmatch_is_not_forced_photometry": true
+    },
+    "2026-10-10": {
+      "archive_file": {
+        "filename": "janus_jwst_2026_f150w_cat.ecsv",
+        "size_bytes": 3152947,
+        "sha256": "725ed7aa4723df8117f61508deee8c5e4e280a43814ceea23012a22fd6407073"
+      },
+      "source_count": 2894,
+      "matches_lt_1arcsec": 0,
+      "matches_lt_2arcsec": 0,
+      "nearest": [
+        {
+          "label": "1356",
+          "separation_arcsec": 2.7683,
+          "catalog_aper_total_abmag": 26.181650656027905
+        },
+        {
+          "label": "1312",
+          "separation_arcsec": 3.6891,
+          "catalog_aper_total_abmag": 27.034822984954886
+        },
+        {
+          "label": "2690",
+          "separation_arcsec": 4.6976,
+          "catalog_aper_total_abmag": 25.678306419428075
+        }
+      ],
+      "catalog_nonmatch_is_not_forced_photometry": true
+    }
+  },
+  "detector_rate_fits": {
+    "2023-08-24": {
+      "archive_file": {
+        "filename": "jw03290001001_03109_00002_nrs2_rate.fits",
+        "size_bytes": 83966400,
+        "sha256": "6a44f39b5b6b5cf572e4461b5c666e89b7effa830304972613b71b0a12742e42"
+      },
+      "primary": {
+        "TELESCOP": "JWST",
+        "INSTRUME": "NIRSPEC",
+        "DETECTOR": "NRS2",
+        "FILTER": "F100LP",
+        "GRATING": "G140M",
+        "EXP_TYPE": "NRS_MSASPEC",
+        "DATE-OBS": "2023-08-24",
+        "TIME-OBS": "06:12:40.291",
+        "EXPTIME": null,
+        "EFFEXPTM": 8315.667,
+        "NINTS": 6,
+        "NGROUPS": 19,
+        "READPATT": "NRSIRS2",
+        "SUBARRAY": "FULL",
+        "CRDS_CTX": "jwst_1584.pmap"
+      },
+      "science_shape": [
+        2048,
+        2048
+      ],
+      "science_unit": "DN/s",
+      "sample_stride_pixels": 16,
+      "sample_count": 16384,
+      "sample_finite_fraction": 0.981506,
+      "sample_finite_median": 1.0241767168045044,
+      "sample_finite_p01_p99": [
+        -9.838376136030989e-05,
+        3.81923260688782
+      ],
+      "dq_sample_nonzero_fraction": 0.642212
+    },
+    "2023-11-19": {
+      "archive_file": {
+        "filename": "jw03290002001_11101_00002_nrs2_rate.fits",
+        "size_bytes": 83966400,
+        "sha256": "200fd4e4ad6fee7295df2ca5675981057994caeae2119c5e8c34e741576f58ff"
+      },
+      "primary": {
+        "TELESCOP": "JWST",
+        "INSTRUME": "NIRSPEC",
+        "DETECTOR": "NRS2",
+        "FILTER": "F100LP",
+        "GRATING": "G140M",
+        "EXP_TYPE": "NRS_MSASPEC",
+        "DATE-OBS": "2023-11-19",
+        "TIME-OBS": "12:10:01.138",
+        "EXPTIME": null,
+        "EFFEXPTM": 8315.667,
+        "NINTS": 6,
+        "NGROUPS": 19,
+        "READPATT": "NRSIRS2",
+        "SUBARRAY": "FULL",
+        "CRDS_CTX": "jwst_1584.pmap"
+      },
+      "science_shape": [
+        2048,
+        2048
+      ],
+      "science_unit": "DN/s",
+      "sample_stride_pixels": 16,
+      "sample_count": 16384,
+      "sample_finite_fraction": 0.981506,
+      "sample_finite_median": 0.9403781294822693,
+      "sample_finite_p01_p99": [
+        -2.3410186258843118e-05,
+        3.4223634243011474
+      ],
+      "dq_sample_nonzero_fraction": 0.641418
+    }
+  },
+  "mosaic_forced_aperture": {
+    "2023-10-03": {
+      "archive_product": "jw01180-o013_t011_nircam_clear-f150w_i2d.fits",
+      "mast_data_uri": "mast:JWST/product/jw01180-o013_t011_nircam_clear-f150w_i2d.fits",
+      "retrieved_sci_range_bytes_inclusive": [
+        93813672,
+        129875295
+      ],
+      "science_stripe_digest": {
+        "filename": "janus_2023_f150w_stripe.bin",
+        "size_bytes": 36061624,
+        "sha256": "d22d721a17c84370def43e15114a8c2fd9222ed5c7e469a77ce05cea31b791ab"
+      },
+      "fits_primary_plus_sci_header_digest": {
+        "filename": "janus_2023_i2d_header.bin",
+        "size_bytes": 131072,
+        "sha256": "224b5723ce6137e7a30763193d782d6775c55ce51fd49cc25265ebbbafcc7f39"
+      },
+      "science_image_naxis_xy": [
+        10006,
+        4506
+      ],
+      "science_stripe_row_start_zero_indexed": 2343,
+      "science_stripe_nrows": 901,
+      "target_on_valid_image": true,
+      "pipeline_image_unit": "MJy/sr",
+      "aperture_radius_arcsec": 0.12,
+      "annulus_inner_outer_arcsec": [
+        0.24,
+        0.38
+      ],
+      "target_wcs_pixel_xy_zero_indexed": [
+        6058.238,
+        2793.85
+      ],
+      "target_aperture_pixels": 44,
+      "pixel_scale_arcsec": 0.031227931325000374,
+      "target_background_subtracted_aperture_njy": 0.55366,
+      "blank_aperture_control_count": 250,
+      "blank_aperture_control_median_njy": -0.06689,
+      "blank_aperture_control_robust_sigma_njy": 0.96639,
+      "target_aperture_snr_empirical": 0.6421,
+      "local_aperture_3sigma_conservative_bound_njy": 3.51972,
+      "interpretation": "Diagnostic 0.12-arcsec aperture only, 901-row SCI cutout from exact public FITS byte range; no PSF aperture correction, injected-source completeness, or correlated-noise calibration. Do not treat this as a certified total-flux limit."
+    },
+    "2025-10-06": {
+      "archive_product": "jw08060-o002_t002_nircam_clear-f150w_i2d.fits",
+      "mast_data_uri": "mast:JWST/product/jw08060-o002_t002_nircam_clear-f150w_i2d.fits",
+      "retrieved_sci_range_bytes_inclusive": [
+        86662400,
+        122269919
+      ],
+      "science_stripe_digest": {
+        "filename": "janus_2025_f150w_stripe.bin",
+        "size_bytes": 35607520,
+        "sha256": "21d98e36003b6b25bce3c83f69863ab7081901a49ee8328cf29091b8270fb09f"
+      },
+      "fits_primary_plus_sci_header_digest": {
+        "filename": "janus_2025_i2d_header.bin",
+        "size_bytes": 131072,
+        "sha256": "c63596fe21801b9376552c100d13093ff95e4d98950293e88bae350c0c931c69"
+      },
+      "science_image_naxis_xy": [
+        9880,
+        4380
+      ],
+      "science_stripe_row_start_zero_indexed": 2192,
+      "science_stripe_nrows": 901,
+      "target_on_valid_image": true,
+      "pipeline_image_unit": "MJy/sr",
+      "aperture_radius_arcsec": 0.12,
+      "annulus_inner_outer_arcsec": [
+        0.24,
+        0.38
+      ],
+      "target_wcs_pixel_xy_zero_indexed": [
+        7071.574,
+        2642.648
+      ],
+      "target_aperture_pixels": 49,
+      "pixel_scale_arcsec": 0.031227817320480994,
+      "target_background_subtracted_aperture_njy": -0.35825,
+      "blank_aperture_control_count": 250,
+      "blank_aperture_control_median_njy": -0.17518,
+      "blank_aperture_control_robust_sigma_njy": 1.47898,
+      "target_aperture_snr_empirical": -0.1238,
+      "local_aperture_3sigma_conservative_bound_njy": 4.43693,
+      "interpretation": "Diagnostic 0.12-arcsec aperture only, 901-row SCI cutout from exact public FITS byte range; no PSF aperture correction, injected-source completeness, or correlated-noise calibration. Do not treat this as a certified total-flux limit."
+    },
+    "2026-10-10": {
+      "archive_product": "jw12577-o002_t002_nircam_clear-f150w_i2d.fits",
+      "mast_data_uri": "mast:JWST/product/jw12577-o002_t002_nircam_clear-f150w_i2d.fits",
+      "retrieved_sci_range_bytes_inclusive": [
+        83896000,
+        119503519
+      ],
+      "science_stripe_digest": {
+        "filename": "janus_2026_f150w_stripe.bin",
+        "size_bytes": 35607520,
+        "sha256": "a6eafc1a60b9a68032c1d63897c559ee5bf51fc34ac2fe056d7fd1be2726f1d4"
+      },
+      "fits_primary_plus_sci_header_digest": {
+        "filename": "janus_2026_i2d_header.bin",
+        "size_bytes": 65536,
+        "sha256": "a5f6dae912d92d58830198f7204bba60ff596097b13453943165ca0f0b0e6c67"
+      },
+      "science_image_naxis_xy": [
+        9880,
+        4380
+      ],
+      "science_stripe_row_start_zero_indexed": 2122,
+      "science_stripe_nrows": 901,
+      "target_on_valid_image": true,
+      "pipeline_image_unit": "MJy/sr",
+      "aperture_radius_arcsec": 0.12,
+      "annulus_inner_outer_arcsec": [
+        0.24,
+        0.38
+      ],
+      "target_wcs_pixel_xy_zero_indexed": [
+        7085.168,
+        2572.913
+      ],
+      "target_aperture_pixels": 46,
+      "pixel_scale_arcsec": 0.031227701733021602,
+      "target_background_subtracted_aperture_njy": -1.14337,
+      "blank_aperture_control_count": 250,
+      "blank_aperture_control_median_njy": 0.10221,
+      "blank_aperture_control_robust_sigma_njy": 1.67895,
+      "target_aperture_snr_empirical": -0.7419,
+      "local_aperture_3sigma_conservative_bound_njy": 5.03686,
+      "interpretation": "Diagnostic 0.12-arcsec aperture only, 901-row SCI cutout from exact public FITS byte range; no PSF aperture correction, injected-source completeness, or correlated-noise calibration. Do not treat this as a certified total-flux limit."
+    }
+  }
+}
