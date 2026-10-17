@@ -1,0 +1,866 @@
+{
+  "batch_id": "4032e4d0834f966c4ceb",
+  "claim_ceiling": "DISCOVERY_MEMORY_ONLY__TARGET_REPO_MUST_VERIFY_INDEPENDENTLY",
+  "items": [
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "7f4e9273b2a7e20271accf58",
+      "context_id": "b5a979643af585d47334ce6a",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone",
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 9.2083,
+      "source": "arxiv",
+      "source_published": "2026-10-14T07:48:19Z",
+      "source_updated": "2026-10-14T07:48:19Z",
+      "summary": "Recent advances in deep learning have significantly improved underwater acoustic vessel recognition. However, existing publicly available datasets are typically limited in scale, hindering large-scale representation learning and downstream task evaluation. To address this limitation, we introduce ONCship, a large-scale underwater acoustic dataset comprising 4521 hours of curated recordings from Ocean Networks Canada (ONC) hydrophones and Automatic Identification System (AIS) data. We evaluate the proposed dataset across three tasks: self-supervised representation learning, vessel-type classification, and MMSI-Level Vessel Classification. Experiments on DeepShip and ShipsEar demonstrate the effectiveness of ONCship for acoustic representation learning, with joint pre-training on ONCship and AudioSet achieving a classification accuracy of 62.45% on DeepShip through linear probing. Furthermore, incorporating ONCship as auxiliary training data improves downstream vessel-type classification performance. Beyond conventional vessel-type classification, we further investigate MMSI-Level Vessel Classification, treating each vessel as a distinct identity. Experimental results show that models fine-tuned with different loss functions achieve Top-1 accuracies exceeding 53% and Top-5 accuracies approaching 69%, demonstrating the feasibility of distinguishing individual vessels through MMSI-Level Vessel Classification. Overall, ONCship provides a valuable resource for underwater acoustic representation learning and vessel recognition, while its rich vessel-level metadata enables further exploration of MMSI-Level Vessel Classification.",
+      "tags": [
+        "cs.SD",
+        "cs.AI",
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "ONCship: A Large-Scale Underwater Acoustic Corpus for Ship Recognition",
+      "url": "https://arxiv.org/abs/2610.19722v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "31d08e99dfa18d5f744e2241",
+      "context_id": "4727d6b644f664c4618943c5",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "multipath",
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 6.1667,
+      "source": "arxiv",
+      "source_published": "2026-10-12T11:46:34Z",
+      "source_updated": "2026-10-12T11:46:34Z",
+      "summary": "Adaptive modulation and coding (AMC) improves the spectral efficiency of underwater acoustic (UWA) links, but its feedback is inevitably stale: sound propagates slowly, and by the time channel state information (CSI) arrives, the fast time-varying multipath channel has moved on. Predictive link adaptation therefore needs more than a point forecast: it needs a distribution over each candidate action's consequences. We propose PRB-WM, a physics-regularized Beta world model for predictive per-subcarrier link adaptation on real time-varying UWA channels. A persistence-anchored stochastic latent-space dynamics model learns how the channel evolves; a counterfactual outcome head evaluates, for every candidate modulation and coding scheme (MCS), a Beta-binomial distribution of bit errors on shared imagined futures; and a chance-constrained receding-horizon model predictive controller maximizes expected spectral efficiency subject to a bounded probability of violating the bit error rate (BER) target. To the best of our knowledge, PRB-WM is the first world model for UWA communications. In closed-loop replay of six measured sea-trial links from the public UWA Channel Library against a 24-method pool spanning the full methodological spectrum, PRB-WM attains a mean goodput 87% above the strongest baseline, ranks first on all six time-varying links at the longest lookahead, and is the only method whose realized frame risk decreases systematically with lookahead, meeting the BER-violation contract where no baseline does. Ablations confirm that rollout sampling dispersion is essential to the chance constraint and that the physics anchor is necessary for trainability.",
+      "tags": [
+        "cs.SD",
+        "cs.IT"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "PRB-WM: Physics-Regularized Beta World Models for Predictive Link Adaptation on Real Time-Varying Underwater Acoustic Channels",
+      "url": "https://arxiv.org/abs/2610.16628v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "5f019b9847d10c28d0d4438d",
+      "context_id": "1ad867b6f6762e708e26d966",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "multipath",
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 6.1667,
+      "source": "arxiv",
+      "source_published": "2026-10-12T15:18:11Z",
+      "source_updated": "2026-10-12T15:18:11Z",
+      "summary": "Large audio-language models (LALMs) are fast becoming a general interface to sound, yet how far their broad pretraining carries into specialized domains remains largely open. Vessel monitoring, maritime safety, and ocean sensing all depend on recognizing underwater signals, but to our knowledge LALMs have not been systematically evaluated on them. Annotated recordings are costly to collect, and a faithful synthetic alternative has to bring together many interacting factors: the structure of detection pulses, communication waveforms, and ship-radiated noise, and the sound-speed profile, geometry, and multipath propagation through which each reaches the receiver. We address this by proposing \\textbf{UA-Bench}, to our knowledge the first large-scale benchmark for evaluating LALMs on underwater acoustic signal recognition. It comprises 375,051 audio records that couple parameterized sources with modeled propagation, so that every record can be traced to the conditions that produced it. The records span these three signal families, and each carries a three-level label hierarchy (13 leaf classes), a templated multi-turn dialogue, and source and channel metadata. We evaluate on a balanced 2,600-record subset with a gated coarse-to-fine protocol that locates each error at source routing, fine-grained classification, or output format, and add a paired silent-audio control to test whether the waveform is actually used. Nine open LALMs, evaluated without task-specific adaptation, reach only 2.0\\%--13.1\\% leaf accuracy, against a random reference of 7.7\\%. The waveform helps source routing far more than leaf recognition (for one model, +29.5 versus +2.3 points over silence), and just four models gain reliably at the leaf level, by at most 4.7 points. UA-Bench thus gives a reference point for these models, and its released training partition supports follow-up adaptation work.",
+      "tags": [
+        "cs.SD",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "UA-Bench: Benchmarking Large Audio-Language Models on Underwater Acoustic Recognition",
+      "url": "https://arxiv.org/abs/2610.16942v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "a4f88e7fee51a4b0127572b4",
+      "context_id": "cde6141dfb7a55587f39b7e8",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone",
+        "multipath"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-09-11T08:46:15Z",
+      "source_updated": "2026-09-11T08:46:15Z",
+      "summary": "The individual attribution of sperm whale (Physeter macrocephalus) vocalizations during surface interactions constitutes a methodological challenge due to acoustic overlaps, multipath propagation, body shadowing, and indistinguishable inter-pulse intervals among similar-sized individuals. A multimodal audio-visual workflow is presented to deinterleave and attribute uncharacterized click trains produced by immature males during ``vocal sparring'' using a portable three-hydrophone array coupled with synchronized video. The approach combines spectro-temporal tracking, based on inter-click interval dynamics and the Constant-Q Transform, with spatial time-difference-of-arrival modeling projected onto the image plane for optical validation. Analysis of 2,655 manually validated clicks shows that purely acoustic clustering diarization errors remain low, peaking at 25.79% only during extreme temporal superpositions. Integrating the optical modality resolves residual spatial indeterminacies; although near-planar array geometry induces vertical ambiguities, the system achieves up to 100% horizontal visual concordance for primary emitters. Crucially, this framework successfully reconstructed and assigned 11 distinct, intertwined click trains totaling 882 clicks to specific focal individuals despite near-field tactile constraints. Because ethological descriptions remain incomplete without identifying the emitter, explicitly correlating these emissions with physical kinematics provides the fine-scale resolution required to define this socio-acoustic behavior.",
+      "tags": [
+        "q-bio.QM",
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Audiovisual diarization of overlapping click trains in sperm whale (Physeter macrocephalus) vocal sparring using a three-hydrophone array",
+      "url": "https://arxiv.org/abs/2609.12593v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "633e8a904569a66eb28a0b97",
+      "context_id": "f8628c329a224c434681c307",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "arxiv",
+      "source_published": "2026-04-19T21:12:06Z",
+      "source_updated": "2026-09-10T19:00:34Z",
+      "summary": "Advances in computational methods have made full-wave simulations in large disordered media increasingly feasible, but the resulting volume of field data, scaling with the cube of the ratio of system size to wavelength, creates a severe storage and post-processing bottleneck. Generic compression methods are sample-specific and preclude operations on compressed data. We introduce OSCAR, a physics-based lossy compression scheme for monochromatic wave fields in weakly scattering media. OSCAR exploits the universal confinement of the Fourier representation of wave fields to a thin dispersion shell, a direct consequence of wave propagation when the scattering mean free path significantly exceeds the wavelength, and a property of every disorder realization rather than of the ensemble average, so that one mask serves an entire ensemble. The resulting compression ratio reflects two distinct scale separations: on-shell confinement due to weak scattering, and the excess Fourier-space volume introduced by sub-wavelength discretization of the scatterers. Crucially, second-order quantities, demonstrated here on sensitivity maps, can be computed via convolution entirely in compressed space while preserving the interference effects. We validate the method in 2D scalar and 3D vector simulations of electromagnetic waves, spanning quasi-ballistic to diffusive transport. The reconstruction error is set by the discarded spectral weight. Demonstrated compression ratios reach ~810x in 2D and ~420x in 3D at a 3% error, with cell-averaged second-order observables accurate to an even smaller error. Tested from quasi-ballistic to diffusive transport, OSCAR stores the fields in up to 19x less space at a 2.5-4.2x lower runtime cost than SZ3. This lowers the storage barrier to ensemble studies at scales relevant to biomedical optics, seismology, and underwater acoustics.",
+      "tags": [
+        "physics.optics",
+        "cond-mat.dis-nn"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On-shell compression and reconstruction (OSCAR) of monochromatic wave fields in weakly scattering media",
+      "url": "https://arxiv.org/abs/2604.17617v2"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "058bcc3b98ad49cf5e6339fb",
+      "context_id": "ea072bb529707fcaacc6d35a",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "zenodo",
+      "source_published": "2026-10-17",
+      "source_updated": null,
+      "summary": "Companion code for the preprint \"Benchmarking Real-Time DETR Detectors for Multibeam Forward-Looking Sonar: DEIMv2, Detector-Specific Test-Time Fusion, and Domain Shift Analysis on UATD\" (Preprints 2026, 2026090449, doi:10.20944/preprints202609.0449.v3). Contains the DEIMv2 engine with UATD configs, the TTA/WBF fusion tooling (default --wbf-rule view-dedup; query-level retained as reproduction control), the paired image-level bootstrap CI scripts, the paper's three central results tables as CSV, and unit tests pinning the WBF view-dedup rule and the bootstrap identity property. The UATD dataset itself is NOT redistributed; fetch it from the official figshare channel (article 21331143) via the included download scripts. License: benchmark code MIT; the DEIMv2 engine remains under the DEIMv2 non-commercial license (LICENSE-DEIMv2.md). v3 (2026-09-29): reviewer-comment C13 fix — analysis/bootstrap_ci.py now averages AR@100 over valid recall entries only (excluding the -1 sentinel for classes absent from a bootstrap resample), matching the COCOeval convention already used for mAP. Adds analysis/bootstrap_arfix_recompute.py (analytic recompute of all 14 archived AR@100 bootstrap intervals from the per-replicate CSVs), results/boot_out/*_arfixed.json (defective-vs-fixed intervals; max change 0.001 on any bound, no reported number changes), and tests/test_bootstrap_missing_class.py pinning the fixed behavior. v4 (2026-10-17): adds the DEIMv2-S seed-43/44 fusion summary ( results/ablation_wbf_dedup_seed4344_summary.json ) with its generation script ( tools/ablation_wbf_dedup_seed4344.py ) and the run log ( results/S_seed4344_fusion_20261014.md ), as referenced in the paper's Table II note; README updated (preprint v3 DOI, 90/10 seed-42 split reproduction command, seed-43/44 result registration, and a note cross-checking the vendored WBF against the reference PyPI package ensemble-boxes 1.0.6); manifests regenerated (252 files). v5 (2026-10-18): adds the score-only control ablation for the view-deduplication analysis (paper Sec. III-B): generation script ( tools/ablation_scoreonly_test1.py ) and results ( results/ablation_scoreonly_test1.json , Test_1: query-level vs score-only vs view-dedup, isolating score normalization from member removal); README updated (tool and result registration); manifests regenerated (254 files). The preprint reference remains doi:10.20944/preprints202609.0449.v3.",
+      "tags": [
+        "forward-looking sonar",
+        "object detection",
+        "DEIMv2",
+        "DETR",
+        "UATD",
+        "weighted boxes fusion",
+        "bootstrap",
+        "underwater acoustics"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Code release: Benchmarking Real-Time DETR Detectors for Multibeam Forward-Looking Sonar (DEIMv2/UATD)",
+      "url": "https://zenodo.org/records/23438453"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "ea0512727bbf22c4320ffd3f",
+      "context_id": "a718a422b9c3dc2bae102af0",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "github_repository_search",
+      "source_published": null,
+      "source_updated": "2026-10-16T13:46:40Z",
+      "summary": "Observability-aware trust-based grayhole detection for underwater acoustic networks. A watchdog that only counts a missed forward as a drop when the monitor could actually hear it, benchmarked against fixed-threshold and channel-aware baselines in UnetStack 7.",
+      "tags": [
+        "computer-networks",
+        "grayhole-attack",
+        "groovy",
+        "intrusion-detection",
+        "network-layer",
+        "network-security",
+        "nitk",
+        "routing-security",
+        "selective-forwarding",
+        "simulation",
+        "trust-management",
+        "underwater-acoustic-networks",
+        "unetstack",
+        "watchdog"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "AppajiDheeraj/uwan-grayhole-detection",
+      "url": "https://github.com/AppajiDheeraj/uwan-grayhole-detection"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "a2aac1bf0f53fb863219de07",
+      "context_id": "773c50d1b1c618aa808e9143",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "github_repository_search",
+      "source_published": null,
+      "source_updated": "2026-10-14T11:00:08Z",
+      "summary": "A Python-based Virtual Underwater Acoustic Sensor Network (UASN) simulator that combines acoustic signal denoising, underwater channel modelling, and AUV-assisted multi-hop communication",
+      "tags": [],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Shankar-48/Under_Water_Acoustic_signal_Filter_and_Transmission",
+      "url": "https://github.com/Shankar-48/Under_Water_Acoustic_signal_Filter_and_Transmission"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "6b93af79b363fc4e7e4483f6",
+      "context_id": "6d81c855a17005fdc4092342",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T15:27:49Z",
+      "source_updated": "2026-10-15T15:27:49Z",
+      "summary": "Underwater acoustic target detection and recognition are essential to marine surveillance and intelligent ocean sensing. Despite substantial advances in deep learning, existing systems typically produce binary detection decisions, categorical labels, or scalar confidence scores, offering limited insight into the physical evidence underlying their outputs. Large language models (LLMs) offer an opportunity to move underwater acoustic sensing toward interpretable, evidence-grounded understanding; however, generic audio encoders struggle to capture the distinctive physical characteristics of underwater acoustics, and physically annotated data are scarce. In this paper, the first of a two-part series, we propose a from-signals-to-evidence framework that integrates physics-aware acoustic encoding with a pretrained LLM, organized around a unified feature-evidence-decision chain with a shared reasoning core. An open input layer accommodates heterogeneous information-raw waveforms, time-frequency representations, environmental and geographic data, and textual physical priors-unifying detection and recognition within a common formulation. In Part I, we instantiate this framework for target recognition through an Underwater Acoustic Physics-aware Transformer (UPT), which tokenizes complementary acoustic representations and learns task-disentangled physical representations through four physics-oriented learning tasks. We develop a physics-parameterized data engine that provides traceable supervision at two levels of granularity and introduce an attribute-level evaluation protocol to assess the physical fidelity of generated descriptions. Experiments on simulated recordings of four vessels demonstrate accurate vessel recognition and reliable estimation of shaft frequency, blade-passing frequency, and machinery-related attributes.",
+      "tags": [
+        "cs.SD",
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "From Signals to Evidence: Interpretable Underwater Acoustic Target Sensing with Large Language Models - Part I: Framework and Recognition",
+      "url": "https://arxiv.org/abs/2610.22064v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "5d020bc2b9a2bd24a7319e8e",
+      "context_id": "486de7d5a58787c9ef49b136",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T20:29:05Z",
+      "source_updated": "2026-10-07T20:29:05Z",
+      "summary": "The underwater sound speed distribution directly governs acoustic propagation paths, rendering it critically important for underwater acoustic communication and target localization. Conventional sound speed profile (SSP) prediction methods provide a good way to estimate the underwater sound speed distribution without on-site data measurement, thus breaking through the coverage area constraints of sonar observation equipment and making the model universal in most marine areas. However, underwater sound speed exhibits multi-scale variations, such as diurnal, quarterly, and intermittent fluctuations caused by ocean processes such as internal waves. This makes it difficult for the fixed structure models in existing methods to have good generalization ability for multi-scale sound speed distribution patterns. To tackle this problem, we proposed a lightweight hybrid basis-function empowered Kolmogorov-Arnold network (LHBF-KAN) model for multi-scale sound speed prediction. We aim to construct a multi-branch representation layer in which different basis functions respond to distinct temporal patterns, from slowly varying background trends to rapid fluctuations induced by dynamic ocean processes, allowing the model to naturally accommodate the inherently multi-scale evolution of sound speed at different depths. To prevent the multi-branch structure from increasing model size, a pruning strategy is further introduced to suppress branches with consistently low contribution during training, yielding a compact architecture, suitable for deployment on resource constrained underwater platforms.",
+      "tags": [
+        "eess.SP",
+        "cs.SD"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Robust Prediction of Internal Wave-Affected Multi-Scale Sound Speed Distribution Using Lightweight Kolmogorov-Arnold Networks with Hybrid Basis Functions",
+      "url": "https://arxiv.org/abs/2610.10877v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "d496194b1461795f00560901",
+      "context_id": "b12a13bcda4c55c0ada3a81f",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.4167,
+      "source": "arxiv",
+      "source_published": "2026-09-15T19:57:26Z",
+      "source_updated": "2026-09-15T19:57:26Z",
+      "summary": "This study aims to improve the directional sensitivity of magnetic resonance hydrophone (MRH) methods and allow for detection and quantification of waves traveling at any angle relative to the MRI bore-axis. Doing so may better integrate MRH technology into transcranial focused ultrasound neuromodulation therapies. Existing MRH implementations only encode acoustic waves propagating along the MRI bore-axis, precluding use with wide aperture transducers or temporal skull windows. This study expands the MRH technique into a MR-based Omni-directional Hydrophone (MRbOH) that can quantify the magnitude pressure and phase of waves propagating at any angle. The MRbOH method formulates a system of equations around uniquely sensitized images that, when solved, introduce sensitivity to oblique acoustic waves. The method was tested experimentally in a gel phantom that was insonated at $0^o$, $45^o$, and $90^o$ relative to the MRI bore-axis. The method reconstructed pressure maps at all three angles of propagation, including features such as peak pressure, partial reflections, and beamwidth. The MRbOH method measured an average beamwidth of 16.2 mm while the hydrophone measured a beamwidth of 14.5 mm. Average hydrophone-measured pressure within a region of interest was 416.19 $\\boldsymbol{\\pm}$ 78.07 kPa. Average MRbOH measured pressure in the same region at $0^o$, $45^o$, and $90^o$, respectively, were: 285.5 $\\boldsymbol{\\pm}$ 49.5 kPa, 193.13 $\\boldsymbol{\\pm}$ 43.55 kPa, 194.7 $\\boldsymbol{\\pm}$ 47.38 kPa. In addition, the study presents and experimentally verifies a statistical noise model that predicted the mean with $R^2 = 0.85$, and standard deviation with $R^2 = 0.83$.",
+      "tags": [
+        "physics.med-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "The Magnetic-Resonance-Based, Omni-Directional Hydrophone",
+      "url": "https://arxiv.org/abs/2609.17793v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "b8a81919cf2e5e56b57b64d6",
+      "context_id": "9638367550625954eb7b5592",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.4167,
+      "source": "arxiv",
+      "source_published": "2026-10-05T12:57:49Z",
+      "source_updated": "2026-10-05T12:57:49Z",
+      "summary": "Ultrasound (US)-based auricular vagus nerve stimulation (aVNS) is emerging as a versatile, noninvasive modality for neuromodulation - spanning clinical therapies (e.g., pain management, depression) and general well-being applications. However, most existing US-based aVNS systems remain bulky and require wet coupling media (e.g., ultrasound gel) to achieve both spatially localized stimulation and efficient acoustic transmission. We present a wearable US stimulation system combining a personalized, dry-coupled earpiece with a battery-powered, wireless US probe. The earpiece integrates a 2 MHz piezoelectric transducer fully encapsulated in Humimic material designed for anatomical fit and stable coupling without externally applied gel. Hydrophone measurements of the fully encapsulated earpiece in water give a peak rarefactional pressure of 0.24 MPa at 15 mm for a 15 V unipolar excitation. We further demonstrate in vivo feasibility through fully dry, in-ear 2 MHz pulse-echo acquisitions under realistic wearing conditions, confirming effective US transmission without the need for coupling gel. These results demonstrate the integration of a personalized dry acoustic interface with battery-powered stimulation electronics, providing a wearable platform for investigating US-based aVNS. Future studies will focus on functional outcomes, including heart rate variability and pupillary responses during stimulation.",
+      "tags": [
+        "eess.SY"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Towards an Earpiece for Wearable and Dry Ultrasonic Vagus Nerve Stimulation",
+      "url": "https://arxiv.org/abs/2610.06263v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "25c11547126f8f95aadeea6d",
+      "context_id": "1d82d5e204faf5e897940888",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.4167,
+      "source": "arxiv",
+      "source_published": "2026-09-23T11:29:56Z",
+      "source_updated": "2026-09-23T11:29:56Z",
+      "summary": "Localizing an autonomous underwater vehicle without pre-deployed seabed transponders, or direct access to onboard vehicle sensors remains a core challenge. We present a receiver-passive 3-D localization and spatial mapping system utilizing a single floating surface buoy equipped with a hydrophone array and an inertial measurement unit (IMU). The central difficulty is that surface wave motion induces six-degree-of-freedom (6-DOF) perturbations that rotate the array between snapshots, degrading conventional subspace processing. We resolve this by introducing a fixed-point iterative MUltiple SIgnal Classification algorithm (FP-MUSIC) that uses IMU measurements to de-warp snapshot covariances prior to direction-of-arrival estimation. Furthermore, we employ a subspace-projected wideband matched filter to resolve beacon ranges and use power asymmetry for independent front-back identification. Evaluations across simulated sea states demonstrate that FP-MUSIC substantially reduces localization error relative to uncompensated methods and sustains robust 3-D tracking and vehicle orientation estimation under wave-induced motion. At moderate sea state, FP-MUSIC increases the 2-m beacon-separation accuracy from approximately 45% to 75%.",
+      "tags": [
+        "cs.RO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Wave-Robust Passive AUV Localization Using FP-MUSIC",
+      "url": "https://arxiv.org/abs/2609.27712v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "e5327948817c79ae6572e47d",
+      "context_id": "a713fa609f9e592cc73e3ea1",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-15T10:46:03Z",
+      "source_updated": "2026-10-15T10:46:03Z",
+      "summary": "The logistic smooth-to-hard shrinker is the proximal map of an explicit saturating spectral penalty for general linear inverse problems. Its exact weak convexity yields a unique scaled update and proximal-gradient stationarity guarantees, while independent validation provides finite-grid parameter-selection control. We use MRI as an illustrative example.",
+      "tags": [
+        "math.OC",
+        "eess.IV",
+        "eess.SP",
+        "math.NA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Data-driven Smooth-to-hard Spectral Regularization for General Linear Inverse Problems",
+      "url": "https://arxiv.org/abs/2610.21664v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "ac0d48f28745eb6355b55478",
+      "context_id": "a674a57675159ca98878597b",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-07T15:10:31Z",
+      "source_updated": "2026-10-07T15:10:31Z",
+      "summary": "A natural strategy for inverse problems with scarce labelled data is to transfer relational structure learned from abundant forward-simulation data. We show this strategy fails systematically, even when it satisfies the standard theoretical justification for why structure should help. We prove that approximate structure provides estimation-error benefits whenever the edge error satisfies $Δ< n^2 - kn$, reducing sample complexity from $O(n^2)$ to $O(kn+Δ)$. Structure learned via Neural Relational Inference (NRI) from dynamics prediction satisfies this condition, yet on a source-localisation task across 180 CFD-simulated hydrogen-leak scenarios and 180 acoustic scenarios, it degrades performance by 116% and 201% relative to a flexible, task-optimised attention baseline, while a physics-based prior (Green's function) degrades by only 69-72%. Four independent lines of evidence show this is not a tuning failure: NRI improves only 0.5% when given 18x more training data (versus 16.6% for the task-optimised baseline, $p<0.001$); performance is insensitive to the NRI edge threshold across a wide range; the dynamics-learned graph overlaps the task-optimal graph on only 6% of edges; and two further dynamics-derived structure estimators (correlation- and mutual-information-based) show no measurable benefit over a structure-free baseline, with the correlation-based estimator performing markedly worse. We formalise this gap as a statement about approximation error that the edge-accuracy condition cannot control, and we provide a lightweight transferability test (Jaccard similarity against a partially-observed target-task graph) that separates successful from failed transfer in all four domain/structure pairs we evaluate, using under an hour of computation and 15-20% of target-domain data; we present this as a heuristic calibrated on few cases, not a validated general threshold.",
+      "tags": [
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Edge Accuracy Is Not Enough: Why Dynamics-Learned Structure Fails to Transfer to Inverse Problems",
+      "url": "https://arxiv.org/abs/2610.10213v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "09978b7a690a0a257722d5d1",
+      "context_id": "9fa6b0e8aed6284afa07d666",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-07T14:53:32Z",
+      "source_updated": "2026-10-07T14:53:32Z",
+      "summary": "Split Gibbs sampling (SGS) is a popular framework for posterior sampling in Bayesian imaging inverse problems. It decouples a Gaussian data-fidelity term from a complex prior through an auxiliary variable, so the data variable is updated exactly and only the prior-side conditional is hard to sample. Existing samplers treat this conditional in one of two ways. Plug-and-play SGS runs a multi-step diffusion denoiser at every iteration, which is expensive and lacks non-asymptotic guarantees. Langevin-within-SGS takes cheap overdamped Langevin steps but needs many iterations. We propose RED-KLwSGS, which keeps the exact Gaussian update for the data variable and updates the auxiliary variable with underdamped (kinetic) Langevin diffusions driven by a one-shot denoising score, at the same per-iteration cost as Langevin-within-SGS. We prove non-asymptotic Wasserstein-2 convergence in continuous and discrete time for strongly log-concave priors. We also introduce Joint-RED-KLwSGS, which applies kinetic Langevin diffusions to both variables. Experiments with Denoising diffusion probabilistic models as diffusion priors on FFHQ and ImageNet datasets show faster convergence and high-quality image reconstruction.",
+      "tags": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Kinetic Langevin Meets Split Gibbs: Accelerated Posterior Sampling for Imaging Inverse Problems with Diffusion Priors",
+      "url": "https://arxiv.org/abs/2610.10187v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "b1a2526519295de16e04e87e",
+      "context_id": "9f95503879ab62f7da46caca",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-15T11:33:12Z",
+      "source_updated": "2026-10-15T11:33:12Z",
+      "summary": "We consider the inverse problem of recovering time-dependent coefficients in a system of Schrödinger equations with coupled nonlinear terms. We first address the well-posedness of the system for small boundary data and trivial initial data. Then, we show that the linearized Neumann data stably determines the nonlinear coefficients provided that, at any given time, they are known in some neighborhood of the boundary. The proof relies on linearization and complex geometric optics (CGO) solutions for the linear Schrödinger equation. We conclude by outlining an approach based on the direct use of Carleman estimates to recover time-independent coefficients in the setting of trivial boundary data but nontrivial initial data.",
+      "tags": [
+        "math.AP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Recovery of coefficients in a Schrödinger system with nonlinear coupling",
+      "url": "https://arxiv.org/abs/2610.21715v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "470295c32d4324a2ea74a528",
+      "context_id": "8d7d465ee6ad632b58a98e2d",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-08T13:44:36Z",
+      "source_updated": "2026-10-08T13:44:36Z",
+      "summary": "Solutions to geophysical inverse problems are generally non-unique, and greatly benefit from additional geological prior information. Generative Neural Networks (GNNs) are commonly used to parametrise such information, typically restricting solutions to a lower-dimensional latent space. The final inversion result is obtained by mapping the latent space parameters to the original higher-dimensional model space using the GNNs. However, solutions then remain confined to a low-dimensional geological generative manifold; if the true Earth model lies outside of this manifold, standard latent space inversion fails. We propose a Bayesian model space inversion method that uses the generative manifold as a guide to find the solutions that lie outside this manifold. We validate our approach in non-linear travel-time tomography experiments on both simple and more geological structures. By comparing our method with model space inversion using uniform prior probabilities and standard latent-space inversion, we demonstrate that the less informative uniform prior fails to constrain the solution, while the latent space approach fails when the true Earth model lies outside of the generative manifold. Conversely, our new model-space inversion method successfully recovers complex off-manifold geological features while maintaining low solution uncertainty.",
+      "tags": [
+        "physics.geo-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Escaping Geological Generative Prior Distributions in Bayesian Travel Time Tomography",
+      "url": "https://arxiv.org/abs/2610.11962v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "06d9acc05e3599a4ec4b7820",
+      "context_id": "8000444042c870e12cea9f4d",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-07T16:56:44Z",
+      "source_updated": "2026-10-07T16:56:44Z",
+      "summary": "We consider the inverse problem of recovering a potential $q$, depending on space and time, in the wave equation $(\\Box_g+q)u=0$ on a Lorentzian manifold. We prove Lipschitz stability for a formally determined version of this problem under a \\textit{null-cone foliation} assumption. As a consequence, we obtain uniqueness in the Lorentzian Calderón problem for $q$ under this assumption. Our approach is based on a modification of the Bukhgeim--Klibanov method using distorted plane waves.",
+      "tags": [
+        "math.AP",
+        "math.DG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Stability for a formally determined Lorentzian inverse problem",
+      "url": "https://arxiv.org/abs/2610.10413v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "3c0242f9b3169bba6dc3caf7",
+      "context_id": "7528a09d4d4cec226e6d4b5a",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-08T12:20:24Z",
+      "source_updated": "2026-10-08T12:20:24Z",
+      "summary": "We study the relation between equal-weight circle quadrature, Gauss--Chebyshev quadrature, and planar Minkowski reconstruction. The regular $N$-point grid is an $\\mathbb S^1$-design of strength $N-1$; a half-step rotation of the $2M$-point grid projects to the classical $M$-point Gauss--Chebyshev rule. A common family of quadrature-error functionals gives exact identities for integration error, mixed-area error, and support-function error. For $N\\ge3$, the centered Minkowski polygon $P_N$ with perimeter $2π$ has the exact Hausdorff distance from the unit disk $B^2$ \\[ d_H(P_N,B^2)=1-\\fracπ{N}\\cot\\fracπ{N} =\\frac{π^2}{3N^2}+O(N^{-4}). \\] With Steiner centering, we obtain $d_H(K_μ,K_ν)\\leπW_1(μ,ν)$ for balanced, nondegenerate probability measures, where $W_1$ uses geodesic distance. Its exponent is sharp even for smooth positive densities near the uniform measure. The identity $W_1(ν_N,σ)=π/(2N)$ yields a general $O(N^{-1})$ bound for the regular grid. The sharper $O(N^{-2})$ rate follows from the sparse discrepancy spectrum and the inverse multiplier $(1-k^2)^{-1}$. Finally, a perturbation estimate gives sufficient conditions for preserving the quadratic rate and its leading constant.",
+      "tags": [
+        "math.NA",
+        "math.MG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Gauss--Chebyshev Quadrature, $\\mathbb S^1$-Designs, and the Planar Minkowski Inverse Problem: A One-Dimensional Model for Design-Induced Convex Geometry",
+      "url": "https://arxiv.org/abs/2610.11814v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "94febf8a0a03630a6c6fb727",
+      "context_id": "7515653a5b7d7ffb40f5273a",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "zenodo",
+      "source_published": "2026-10-07",
+      "source_updated": null,
+      "summary": "",
+      "tags": [
+        "inverse problems",
+        "lensless microscopy",
+        "in-line holography",
+        "multi-height phase retrieval",
+        "quantitative phase imaging",
+        "phase retrieval"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Conditioning-aware reconstruction for robust phase retrieval in lensless multi-height in‑line holography",
+      "url": "https://zenodo.org/records/23218936"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "7ce30c6c6643d9eb51ef97a8",
+      "context_id": "3e9267841e704627189e6bd4",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-08T14:10:51Z",
+      "source_updated": "2026-10-08T14:10:51Z",
+      "summary": "Physics-informed machine learning has gained significant attention in recent years. In regimes of limited data, parametrized Gaussian processes have become popular. Existing approaches, however, often face limitations, such as requiring parametrizable (also called controllable) systems or a large number of output tasks. In this work, we introduce a systematic procedure we call \"ghost tasking\", using auxiliary tasks to circumvent these limitations. We prove that such ghost tasks can render any non-parametrizable system effectively parametrizable, enabling algorithmic construction of parametrized Gaussian Processes while keeping the number of required tasks (i.e. output dimensions) and latent functions low. We find that ghost tasking performs especially well in an inverse problem setting, even with very few available data. We show the usage and power of ghost tasking in three experiments, providing systematic comparisons to the only other currently available method applicable to all experiments. We provide necessary syntax and explications for two computer algebra programs that compute parametrizations for systems with polynomial or rational coefficients. Our theoretical results extend to systems with meromorphic functions.",
+      "tags": [
+        "physics.comp-ph",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Ghost tasking for parametrized Gaussian Processes solving linear differential equations",
+      "url": "https://arxiv.org/abs/2610.12009v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "184a91076b56e4a34903cec1",
+      "context_id": "322c725131f74b04770c0816",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "zenodo",
+      "source_published": "2026-10-17",
+      "source_updated": null,
+      "summary": "Code and results for the manuscript *Identifying the Caputo order of time-fractional diffusion with physics-informed neural networks: a controlled benchmark against classical inversion* (A. Boucenna). All data are synthetic, generated from the exact Mittag-Leffler solution; no experimental or patient data are used.",
+      "tags": [
+        "time-fractional diffusion, Caputo derivative, physics-informed neural networks, inverse problem."
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Code and data for: Identifying the Caputo order of time-fractional diffusion with physics-informed neural networks",
+      "url": "https://zenodo.org/records/23434623"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "70a191d69f9f36fc96385177",
+      "context_id": "29816a546d759317209c35a9",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "inverse problem"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.625,
+      "source": "arxiv",
+      "source_published": "2026-10-07T17:39:51Z",
+      "source_updated": "2026-10-07T17:39:51Z",
+      "summary": "We develop a regularized finite element method for the fractional conductivity equation, recovering the conductivity on an exterior observation region from noisy Dirichlet-to-Neumann measurements and using this reconstruction to determine the interior conductivity. Mesh-localized inputs and mass-lumped Tikhonov regularization discretize the exterior determination principle of Covi--Railo--Zimmermann (2026, Calc. Var. PDE). We prove exterior \\(L^2\\)- and \\(L^\\infty\\)-convergence with error estimates, including the logarithmic correction at the critical Hölder exponent. The exterior reconstruction enables the Liouville reduction to the Calderón problem for the fractional Schrödinger equation. Separated measurements recover the interior potential, after which overlapping measurements determine the exterior potential tail. Together with the recovered exterior conductivity, the tail supplies the exterior Cauchy data for a Tikhonov-regularized finite element least-squares continuation. We prove \\(H^s\\)-convergence of the transformed conductivity and \\(L^2\\)-convergence of the interior conductivity, together with logarithmic state-bias and conductivity error estimates for full observation spaces. The admissible reconstructions remain uniformly positive and bounded. We present one- and two-dimensional numerical experiments illustrating the accuracy of the exterior and interior reconstructions and their sensitivity to measurement noise and discretization.",
+      "tags": [
+        "math.NA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A finite element exterior-to-interior reconstruction in the fractional conductivity inverse problem",
+      "url": "https://arxiv.org/abs/2610.10484v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "7a209631725a69e9c4d7e3a0",
+      "context_id": "9e22d2a9ebd48e63df0424e9",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "multipath"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.375,
+      "source": "zenodo",
+      "source_published": "2026-10-17",
+      "source_updated": null,
+      "summary": "This book (in Croatian) covers operating systems and Linux, Storage and Networks (protocols &amp; standards), virtualization, and Linux containers. Since this book is in a light but constant review and update process, please use the most recent version. This book may also be used to prepare/learn, or extend the knowledge needed for the next certifications: Red Hat&reg;: Certified System Administrator (RHCSA&reg;). Certified Architect (RHCA&reg;). Linux Professional Institute&reg;: LPIC-1. LPIC-2. LPIC-3*. Linux Foundation&reg;: Linux Foundation Certified IT Associate (LFCA). Linux Foundation Certified System Administrator (LFCS).&nbsp; &nbsp; The book covers the following chapters (in summary): Open source licenses and philosophy, open source software &amp; license comparison. What are the advantages of Linux and open source software. Linux distributions and distribution types. Principles of operating systems: basic mechanisms and way of working of operating systems. System administration: Work with user accounts and groups. System security configuration (file permissions, timestamps, ACL, SELinux ). Service management (installation, configuration, ...) Software/package management: Patch management Archiving and backup. Process management. Computer components and optimizations: Motherboard and chipset. Buses: PCI, PCI-X, PCI Express, USB, SMBus/I2C IRQ and DMA, ... CPU and RAM CPU architecture: Registers, instructions, and ISA. CPU microarchitecture. SMP and NUMA architecture and optimizations. Kernel: Purpose and design. Upgrade, configure, compile the new one, etc. Virtual memory subsystem, RAM memory, and optimizations: Types of RAM memory. Memory management and virtual memory subsystem. Out of memory (OOM) and optimizations. Data storage and disk subsystems: Types of disk drives and standards. Disk geometry and logical scheme. Block devices and partitioning, disk formats, and filesystems. RAID (hardware and software) and LVM2 NAS and SAN storage systems overview SAN storage systems: iSCSI Fibre Channel (FC) Disk I/O subsystems and optimizations. Disk I/O performance and monitoring&nbsp; System analysis and optimizations (perf, strace, ltrace, dstat). Working with log files and services. Kernel dump/core dump. Computer networks: Copper vs Optical networks: Copper: cabling and standards. Fiberoptics: standards, cabling, FTTH specifics. Network interfaces (NIC) design and details, classic (copper) NICs (RJ-45), and SFP specifics. Networking concepts and protocols (topology, CSMA/CD, Bridging, OSI model): OSI 2 model and protocols: Bridges, ARP, and Flow control. STP, LACP, LLDP, OSI 2 network interfaces,.... OSI 3 model and protocols: IP, QoS, IP Fragmentation. TTL, MTU. NAT (DNAT, SNAT). Redundancy and VRRP, .... Transport layer: UDP&nbsp; TCP: SYN, ACK, SACK.&nbsp; TCP Window, Window scaling, congestion control.&nbsp; PSH&amp;URG, ... . Multipath TCP Network in Linux (configuration and details). Optimizing network interfaces and services for 10+Gbps (10/25/100Gbps) Common network commands:&nbsp; traceroute, nslookup. netstat, nstat, ss, lsof. ip, ethtool. tcpdump. Network services and protocols: DHCP, Bootp, TFTP DNS: Protocol details Types of DNS requests DNS records: A, AAA, PTR, CNAME, DNAME, MX, NS, SOA, SPF, DKIM, DMARC, ... Telnet and SSH. NFS E-mail: SMTP, POP3, IMAP HTTP/HTTPS, Proxy NTP Syslog SNMP Work with the firewall: iptables ipset nftables eBPF Namespaces and isolation Virtualization and Linux containers: LXC&nbsp; Podman Security: Enforcements Compliance (NIST, CIS, DISA STIG, ...) Many extras: list of Linux commands, list of terms, list of important files, interface bandwidth, ... Advanced and expert chapters as an addition to all the mentioned chapters and units. Posters covering major chapters of the book (with links to the posters at the end of the book).&nbsp; &nbsp; Who may use this book: Books cover the work in the Linux text environment (shell/CLI).&nbsp; It is intended for everyone with very little ",
+      "tags": [
+        "Linux",
+        "Networking",
+        "Operating systems",
+        "Virtualization",
+        "Linux Containers",
+        "TCP/IP",
+        "Linux kernel",
+        "Linux tuning",
+        "Storages",
+        "NAS",
+        "SAN"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Operativni sustavi i računalne mreže - Linux u primjeni",
+      "url": "https://zenodo.org/records/23437374"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "64a76da58b0e9cd47180ed13",
+      "context_id": "395593621041df00f4528dc4",
+      "direction_id": "ocean_reader::FORWARD",
+      "direction_title": "Ocean Reader / transceiver / invertibility [FORWARD]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "multipath"
+      ],
+      "mirror_lens": "FORWARD",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 1.375,
+      "source": "github_repository_search",
+      "source_published": null,
+      "source_updated": "2026-09-18T06:03:58Z",
+      "summary": "Lattice noise × wave noise: LWE/PQC payloads over acoustic channels (multipath, Doppler, underwater). Novel air-gap / stego lab.",
+      "tags": [],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "wifiknight45/hushwave",
+      "url": "https://github.com/wifiknight45/hushwave"
+    }
+  ],
+  "schema": "janus.beetle.repo_memory_batch.v1",
+  "selection": "BALANCED_LENS_ROLLING_TOP",
+  "snapshot_cap": 48,
+  "target_repository": "Hawkar-usls/Janus-Cosmos"
+}
