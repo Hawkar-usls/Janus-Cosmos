@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.bhb.batch-input.v1",
+  "experiment_id": "BHB-COSMOS-R1-RADIAL-PROVENANCE-MATRIX-2026-10-17",
+  "description": "Frozen near-horizon radial collision matrix. Cases mix admissible infall, white-hole counterfactual, forbidden collapsing-BH white-hole path, and source-debt controls.",
+  "cases": [
+    {
+      "scenario_id": "BH-IN-IN-EQUAL",
+      "r_over_rs": "1.000001",
+      "physical_context": "collapsing_black_hole",
+      "particle_1": {"direction": "in", "origin": "infinity", "specific_energy": "1"},
+      "particle_2": {"direction": "in", "origin": "infinity", "specific_energy": "1"}
+    },
+    {
+      "scenario_id": "BH-IN-IN-UNEQUAL-ENERGY",
+      "r_over_rs": "1.000001",
+      "physical_context": "collapsing_black_hole",
+      "particle_1": {"direction": "in", "origin": "infinity", "specific_energy": "1"},
+      "particle_2": {"direction": "in", "origin": "infinity", "specific_energy": "2"}
+    },
+    {
+      "scenario_id": "ETERNAL-WHITE-HOLE-HEAD-ON",
+      "r_over_rs": "1.000001",
+      "physical_context": "eternal_schwarzschild",
+      "particle_1": {"direction": "in", "origin": "infinity", "specific_energy": "1"},
+      "particle_2": {"direction": "out", "origin": "white_hole", "specific_energy": "1"}
+    },
+    {
+      "scenario_id": "COLLAPSING-BH-WHITE-HOLE-COUNTERFACTUAL",
+      "r_over_rs": "1.000001",
+      "physical_context": "collapsing_black_hole",
+      "particle_1": {"direction": "in", "origin": "infinity", "specific_energy": "1"},
+      "particle_2": {"direction": "out", "origin": "white_hole", "specific_energy": "1"}
+    },
+    {
+      "scenario_id": "COLLAPSING-BH-OUTGOING-LOCAL-SOURCE-DEBT",
+      "r_over_rs": "1.01",
+      "physical_context": "collapsing_black_hole",
+      "particle_1": {"direction": "in", "origin": "infinity", "specific_energy": "1"},
+      "particle_2": {"direction": "out", "origin": "local_production", "specific_energy": "1.2"}
+    }
+  ]
+}

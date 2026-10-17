@@ -1,0 +1,206 @@
+{
+  "cases": [
+    {
+      "E_cm_GeV": "1.876544",
+      "E_cm_squared_GeV2": "3.521417383936",
+      "claim_ceiling": "LOCAL_KINEMATIC_INVARIANT_ONLY__NO_EXPLOSION_OR_OBSERVABLE_ENERGY_CLAIM",
+      "escaped_energy_gate": "OPEN_NO_RAY_TRACING_OR_EMISSION_MODEL",
+      "kinematics_cross_check": "PASS",
+      "lapse_squared": "9.99999000000999999000001e-7",
+      "model_class": "MODEL_ONLY_SCHWARZSCHILD_TEST_PARTICLE_GEODESICS",
+      "observation_gate": "NO_OBSERVATION_INPUT",
+      "particle_1": {
+        "beta_over_c_signed": "-0.999999500000374999687500",
+        "direction": "in",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "particle_2": {
+        "beta_over_c_signed": "-0.999999500000374999687500",
+        "direction": "in",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "physical_context": "collapsing_black_hole",
+      "r_over_rs": "1.000001",
+      "relative_gamma": "1",
+      "result_sha256": "24d902cc4d7c03431f242992259b5cff6108804dfd6c5943e73a3e4c51d248be",
+      "scenario_id": "BH-IN-IN-EQUAL",
+      "schema": "janus.cosmos.bhb.schwarzschild-radial.v1",
+      "tetrad_invariant_absolute_residual_GeV2": "1e-83",
+      "trajectory_source_gate": "IDEALIZED_GEODESIC_KINEMATICS_ADMISSIBLE",
+      "trajectory_source_reasons": [
+        "JOINT_SPACETIME_EVENT_AND_COLLISION_RATE_NOT_MODELED"
+      ]
+    },
+    {
+      "E_cm_GeV": "1.99037554359160245339216",
+      "E_cm_squared_GeV2": "3.96159480452756695817110",
+      "claim_ceiling": "LOCAL_KINEMATIC_INVARIANT_ONLY__NO_EXPLOSION_OR_OBSERVABLE_ENERGY_CLAIM",
+      "escaped_energy_gate": "OPEN_NO_RAY_TRACING_OR_EMISSION_MODEL",
+      "kinematics_cross_check": "PASS",
+      "lapse_squared": "9.99999000000999999000001e-7",
+      "model_class": "MODEL_ONLY_SCHWARZSCHILD_TEST_PARTICLE_GEODESICS",
+      "observation_gate": "NO_OBSERVATION_INPUT",
+      "particle_1": {
+        "beta_over_c_signed": "-0.999999500000374999687500",
+        "direction": "in",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "particle_2": {
+        "beta_over_c_signed": "-0.999999875000117187389649",
+        "direction": "in",
+        "one_minus_abs_beta": "1.24999882812610351458160e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "2"
+      },
+      "physical_context": "collapsing_black_hole",
+      "r_over_rs": "1.000001",
+      "relative_gamma": "1.25000014062494726564972",
+      "result_sha256": "33e104540f352d52c673b4c6e638c62e2110ef5c759cab61140b7a0797cb514e",
+      "scenario_id": "BH-IN-IN-UNEQUAL-ENERGY",
+      "schema": "janus.cosmos.bhb.schwarzschild-radial.v1",
+      "tetrad_invariant_absolute_residual_GeV2": "1.732623e-83",
+      "trajectory_source_gate": "IDEALIZED_GEODESIC_KINEMATICS_ADMISSIBLE",
+      "trajectory_source_reasons": [
+        "JOINT_SPACETIME_EVENT_AND_COLLISION_RATE_NOT_MODELED"
+      ]
+    },
+    {
+      "E_cm_GeV": "1876.54493827176543211728",
+      "E_cm_squared_GeV2": "3521420.90535338393600000",
+      "claim_ceiling": "LOCAL_KINEMATIC_INVARIANT_ONLY__NO_EXPLOSION_OR_OBSERVABLE_ENERGY_CLAIM",
+      "escaped_energy_gate": "OPEN_NO_RAY_TRACING_OR_EMISSION_MODEL",
+      "kinematics_cross_check": "PASS",
+      "lapse_squared": "9.99999000000999999000001e-7",
+      "model_class": "MODEL_ONLY_SCHWARZSCHILD_TEST_PARTICLE_GEODESICS",
+      "observation_gate": "NO_OBSERVATION_INPUT",
+      "particle_1": {
+        "beta_over_c_signed": "-0.999999500000374999687500",
+        "direction": "in",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "particle_2": {
+        "beta_over_c_signed": "0.999999500000374999687500",
+        "direction": "out",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "white_hole",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "physical_context": "eternal_schwarzschild",
+      "r_over_rs": "1.000001",
+      "relative_gamma": "2000001.00000000000000000",
+      "result_sha256": "8d4d9a9cdab80be853f8d0d68a73c965c020776524b93aa8e52b999361dc23f1",
+      "scenario_id": "ETERNAL-WHITE-HOLE-HEAD-ON",
+      "schema": "janus.cosmos.bhb.schwarzschild-radial.v1",
+      "tetrad_invariant_absolute_residual_GeV2": "3e-83",
+      "trajectory_source_gate": "CONDITIONAL_ETERNAL_WHITE_HOLE_ONLY",
+      "trajectory_source_reasons": [
+        "NOT_AN_ASTROPHYSICAL_COLLAPSING_BLACK_HOLE_PREDICTION"
+      ]
+    },
+    {
+      "E_cm_GeV": "1876.54493827176543211728",
+      "E_cm_squared_GeV2": "3521420.90535338393600000",
+      "claim_ceiling": "LOCAL_KINEMATIC_INVARIANT_ONLY__NO_EXPLOSION_OR_OBSERVABLE_ENERGY_CLAIM",
+      "escaped_energy_gate": "OPEN_NO_RAY_TRACING_OR_EMISSION_MODEL",
+      "kinematics_cross_check": "PASS",
+      "lapse_squared": "9.99999000000999999000001e-7",
+      "model_class": "MODEL_ONLY_SCHWARZSCHILD_TEST_PARTICLE_GEODESICS",
+      "observation_gate": "NO_OBSERVATION_INPUT",
+      "particle_1": {
+        "beta_over_c_signed": "-0.999999500000374999687500",
+        "direction": "in",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "particle_2": {
+        "beta_over_c_signed": "0.999999500000374999687500",
+        "direction": "out",
+        "one_minus_abs_beta": "4.99999625000312499726563e-7",
+        "origin": "white_hole",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "physical_context": "collapsing_black_hole",
+      "r_over_rs": "1.000001",
+      "relative_gamma": "2000001.00000000000000000",
+      "result_sha256": "0addc26ff2555c6257d13be4e5218b5133b200200f75b0d13cf2a5a93f86dda5",
+      "scenario_id": "COLLAPSING-BH-WHITE-HOLE-COUNTERFACTUAL",
+      "schema": "janus.cosmos.bhb.schwarzschild-radial.v1",
+      "tetrad_invariant_absolute_residual_GeV2": "3e-83",
+      "trajectory_source_gate": "NOT_ESTABLISHED_OR_INCOMPATIBLE",
+      "trajectory_source_reasons": [
+        "WHITE_HOLE_WORLDLINE_NOT_IN_COLLAPSING_BH_SPACETIME"
+      ]
+    },
+    {
+      "E_cm_GeV": "20.6583202507718077294938",
+      "E_cm_squared_GeV2": "426.766195583448564995214",
+      "claim_ceiling": "LOCAL_KINEMATIC_INVARIANT_ONLY__NO_EXPLOSION_OR_OBSERVABLE_ENERGY_CLAIM",
+      "escaped_energy_gate": "OPEN_NO_RAY_TRACING_OR_EMISSION_MODEL",
+      "kinematics_cross_check": "PASS",
+      "lapse_squared": "0.00990099009900990099009901",
+      "model_class": "MODEL_ONLY_SCHWARZSCHILD_TEST_PARTICLE_GEODESICS",
+      "observation_gate": "NO_OBSERVATION_INPUT",
+      "particle_1": {
+        "beta_over_c_signed": "-0.995037190209989135665274",
+        "direction": "in",
+        "one_minus_abs_beta": "0.00496280979001086433472625",
+        "origin": "infinity",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1"
+      },
+      "particle_2": {
+        "beta_over_c_signed": "0.996556226427411934171063",
+        "direction": "out",
+        "one_minus_abs_beta": "0.00344377357258806582893684",
+        "origin": "local_production",
+        "rest_energy_GeV": "0.938272",
+        "specific_energy": "1.2"
+      },
+      "physical_context": "collapsing_black_hole",
+      "r_over_rs": "1.01",
+      "relative_gamma": "241.383193500588924898221",
+      "result_sha256": "294fe011fd2eadd4c29c439f114e6ca559e277dca4c9f4cb4035452a735c514b",
+      "scenario_id": "COLLAPSING-BH-OUTGOING-LOCAL-SOURCE-DEBT",
+      "schema": "janus.cosmos.bhb.schwarzschild-radial.v1",
+      "tetrad_invariant_absolute_residual_GeV2": "2e-87",
+      "trajectory_source_gate": "NOT_ESTABLISHED_OR_INCOMPATIBLE",
+      "trajectory_source_reasons": [
+        "LOCAL_PRODUCTION_REQUIRES_INDEPENDENT_ENERGY_BUDGET_AND_CAUSAL_SOURCE"
+      ]
+    }
+  ],
+  "experiment_id": "BHB-COSMOS-R1-RADIAL-PROVENANCE-MATRIX-2026-10-17",
+  "gates": {
+    "ALL_TRAJECTORIES_ADMISSIBLE": "NOT_ESTABLISHED",
+    "ESCAPING_SIGNAL": "OPEN",
+    "KERR_ROTATION": "NOT_MODELED",
+    "REAL_BHB_DETECTION": "NOT_ESTABLISHED",
+    "SCHWARZSCHILD_LOCAL_INVARIANT": "PASS"
+  },
+  "model_precision_digits": 90,
+  "result_sha256": "586f19182e1c6ec8530deae6b14691723f9fbe50e19963ad577630399c1e7a46",
+  "schema": "janus.cosmos.bhb.batch.v1",
+  "status": "REPRODUCIBLE_MODEL_ONLY",
+  "upstream": {
+    "blob_sha": "10ca85cab017a936ef5d3511d932dcc85cbb7696",
+    "commit": "5b41a09c0e7885a649610a9e3b3ffe2a1c4778f2",
+    "repo": "Hawkar-usls/janus-meta-registry"
+  }
+}

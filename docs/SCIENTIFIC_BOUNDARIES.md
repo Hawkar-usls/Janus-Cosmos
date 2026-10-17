@@ -13,3 +13,13 @@
 - `ANCIENT_TEXT != MODERN_ALGORITHM`; `STRUCTURAL_PARALLEL != HISTORICAL_INTENT`.
 - Reverse replay is verification/falsification, not physical retrocausality.
 - Incompatible cost units are not summed into a fake total.
+
+## BHB near-horizon physics firewall
+
+- `LOCAL_E_CM != ENERGY_ESCAPING_TO_INFINITY`.
+- `ANALYTIC_GR_MODEL != OBSERVATION`; a locally high-energy collision is not a detected explosion.
+- `ETERNAL_WHITE_HOLE_TRAJECTORY != OUTGOING_GEODESIC_OF_COLLAPSING_BLACK_HOLE`.
+- `KINEMATICALLY_ALLOWED != SOURCE_PRODUCED`; locally produced outward streams need independent energy accounting.
+- Static Schwarzschild tetrads exist only for `r>r_s`; no simulated point has `r=r_s` or a massive particle moving at light speed.
+- `SCHWARZSCHILD_R1_PASS != KERR_BSW_PASS`; rotating Kerr collisions, collision rates and escaping radiation are separate OPEN gates.
+- Pinned external BHB receipts are revalidated before use, and never automatically promoted to scientific discovery or OSIRIS proof authority.
