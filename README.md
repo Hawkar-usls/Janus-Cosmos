@@ -169,12 +169,33 @@ or:
 }
 ```
 
+## BHB — Black Hole Boom: relativistic collision research
+
+`Janus-Cosmos` now has a **separate general-relativistic kinematics lane** for
+near-horizon radial particle collisions in a Schwarzschild spacetime. It
+independently replays the frozen seven-point BHB R0 benchmark from JANUS Meta
+Registry and evaluates new provenance-aware collision case matrices.
+
+```bash
+python3 workspace/janus_bhb.py --replay-upstream
+python3 workspace/janus_bhb.py --batch data/bhb/BHB-COSMOS-R1-CASES-2026-10-17.json
+python3 -m unittest discover -s tests -p 'test_bhb_cosmos.py' -v
+```
+
+The scientific gates distinguish invariant local collision energy from a
+physically available outgoing trajectory, and both from escaping radiation.
+This is an analytic model, **not** measured black-hole emission, an explosion,
+or a Kerr/BSW simulation. See [BHB operating guide](docs/BHB_BLACK_HOLE_BOOM.md).
+
 ## Repository layout
 
 - `vendor/Janus-Fundamentum/` — exact inherited project/source snapshot at the S𓂸ḥ/2 head.
 - `vendor/janus-meta-registry/` — exact inherited receipt/source registry snapshot.
 - `experiments/direct` — convenience symlink into the inherited canonical experiment directory.
 - `workspace/` — native OSIRIS v3+ development and spiral runtime.
+- `workspace/janus_bhb.py` — independent relativistic Schwarzschild collision engine.
+- `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
+- `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.

@@ -1,0 +1,54 @@
+name: JANUS Cosmos BHB Schwarzschild Science Gate
+
+on:
+  pull_request:
+    paths:
+      - 'workspace/janus_bhb.py'
+      - 'tests/test_bhb_cosmos.py'
+      - 'data/bhb/**'
+      - 'docs/BHB_BLACK_HOLE_BOOM.md'
+      - '.github/workflows/bhb-schwarzschild-gate.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'workspace/janus_bhb.py'
+      - 'tests/test_bhb_cosmos.py'
+      - 'data/bhb/**'
+      - 'docs/BHB_BLACK_HOLE_BOOM.md'
+      - '.github/workflows/bhb-schwarzschild-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bhb-r1-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile BHB and run negative controls
+        run: |
+          set -euo pipefail
+          python -m py_compile workspace/janus_bhb.py tests/test_bhb_cosmos.py
+          python -m unittest discover -s tests -p 'test_bhb_cosmos.py' -v
+      - name: Replay frozen JANUS Meta Registry input and compare Cosmos R1 receipt
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/bhb
+          python workspace/janus_bhb.py --replay-upstream > artifacts/bhb/BHB-R0-REPLAY.json
+          python workspace/janus_bhb.py --batch data/bhb/BHB-COSMOS-R1-CASES-2026-10-17.json > artifacts/bhb/BHB-COSMOS-R1-RESULT.json
+          cmp artifacts/bhb/BHB-COSMOS-R1-RESULT.json data/bhb/BHB-COSMOS-R1-RESULT-2026-10-17.json
+      - name: Retain machine-readable run receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cosmos-bhb-r1-receipts
+          path: artifacts/bhb/*.json
+          retention-days: 30
+          if-no-files-found: error
