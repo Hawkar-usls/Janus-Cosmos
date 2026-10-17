@@ -1,0 +1,1572 @@
+{
+  "batch_id": "d78ad5a17cd37da0fedf",
+  "claim_ceiling": "DISCOVERY_MEMORY_ONLY__TARGET_REPO_MUST_VERIFY_INDEPENDENTLY",
+  "items": [
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "872d52968f8409005d07775b",
+      "context_id": "eb29c1710325b09bc8a306fe",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode",
+        "limitation"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 7.2083,
+      "source": "zenodo",
+      "source_published": "2026-10-06",
+      "source_updated": null,
+      "summary": "This Zenodo record is a permanently preserved version of a PREreview. You can view the complete PREreview at https://prereview.org/reviews/23197406 . ## Summary This paper studies Leni, a production enterprise AI business-analyst agent, and asks a question most vendor papers avoid: where does the system's measured reliability actually come from? Rather than reporting a single headline score, the author decomposes the uplift over the bare frontier base model across three public benchmarks chosen to stress different failure modes — SpreadsheetBench Verified (silent computation error), BullshitBench v2 (premise confabulation), and the GAIA validation split (cascade error over long tool chains). The full system improves by +11.0 percentage points on SpreadsheetBench (91.25% vs 80.25%, n=400, p&lt;0.001), +7 to +10 points on BullshitBench (n=100), and roughly +15 points on GAIA validation (75.2% pass@1, n=165). The central finding is a decomposition: most of the uplift comes from scaffolding, routing, and specialist models rather than from the verification loop itself, whose isolated contribution is small (+1.5 points on SpreadsheetBench) but positionally decisive — it converts tasks at the top of the score distribution, the difference between mid-leaderboard and near-top. The author instruments the deterministic loop end to end, producing an empirical verifier confusion matrix (catch rate about 0.20, fix rate 0.75, no false-alarm regressions), and formalizes a compounding-reliability model with imperfect verification. Specialist-swap ablations suggest the observer matters as much as the loop: replacing the small post-trained verifier with the generating frontier model eliminates most rescues. A valid-premise control (100 expert-level questions, zero over-rejections) bounds the firewall's false-positive rate. ## Strengths 1. Honesty as a feature. The paper states which cross-system comparisons are statistically resolvable and which are not, and — remarkably — corrects its own company's previously published GAIA headline after re-grading every stored trajectory with the official scorer. That kind of self-correction in a vendor paper is rare and builds trust. 2. The decomposition is the right question for practitioners. Anyone who has shipped an agent knows the leaderboard number tells you nothing about what to build. Breaking the +11 points into scaffolding (+9.5) versus verification (+1.5) tells an engineering team where to spend effort. 3. The independent-observer finding rings true. My experience with self-critique in production matches this: a model checking its own work mostly agrees with itself. The specialist-swap result (rescues drop from 6 tasks to 2 when the frontier model verifies its own artifact) is the paper's most actionable insight. 4. A usable reliability model. Equation (1), p' = p(1−fb) + (1−p)cr, makes the verifier's error profile a first-class quantity. The condition under which a loop *reduces* reliability ((1−p)cr &gt; pfb) is exactly the kind of guardrail a production deployment needs. ## Major comments 1. This is a vendor evaluating its own system. The limitations section says so, which I respect — but the decomposition rests on one production system and one team's scaffolding. Independent replication on a different stack is needed before treating \"most uplift comes from scaffolding, not verification\" as a general result. 2. No cost or latency accounting. Verification loops, specialist models, and multi-pass scaffolding multiply inference cost per task, yet the paper never reports dollars-per-task, token budgets, or latency. A production reader cannot decide whether the +1.5 points from the loop is worth the compute — the biggest gap in an otherwise production-minded paper. 3. GAIA validation split only (n=165). The author is candid about the corrected score, but the corrected pass@1 still sits on the validation split with a hidden-test-set submission listed as future work. The decomposition claims should be",
+      "tags": [],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "PREreview of \"Where Does Agent Reliability Come From? A Cross-Benchmark Decomposition of Verification Loops, Specialist Models, and Scaffolding in a Production Enterprise Agent\"",
+      "url": "https://zenodo.org/records/23197406"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "ac0d48f28745eb6355b55478",
+      "context_id": "022c663fadb190e20f122969",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "inverse problem"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.9167,
+      "source": "arxiv",
+      "source_published": "2026-10-07T15:10:31Z",
+      "source_updated": "2026-10-07T15:10:31Z",
+      "summary": "A natural strategy for inverse problems with scarce labelled data is to transfer relational structure learned from abundant forward-simulation data. We show this strategy fails systematically, even when it satisfies the standard theoretical justification for why structure should help. We prove that approximate structure provides estimation-error benefits whenever the edge error satisfies $Δ< n^2 - kn$, reducing sample complexity from $O(n^2)$ to $O(kn+Δ)$. Structure learned via Neural Relational Inference (NRI) from dynamics prediction satisfies this condition, yet on a source-localisation task across 180 CFD-simulated hydrogen-leak scenarios and 180 acoustic scenarios, it degrades performance by 116% and 201% relative to a flexible, task-optimised attention baseline, while a physics-based prior (Green's function) degrades by only 69-72%. Four independent lines of evidence show this is not a tuning failure: NRI improves only 0.5% when given 18x more training data (versus 16.6% for the task-optimised baseline, $p<0.001$); performance is insensitive to the NRI edge threshold across a wide range; the dynamics-learned graph overlaps the task-optimal graph on only 6% of edges; and two further dynamics-derived structure estimators (correlation- and mutual-information-based) show no measurable benefit over a structure-free baseline, with the correlation-based estimator performing markedly worse. We formalise this gap as a statement about approximation error that the edge-accuracy condition cannot control, and we provide a lightweight transferability test (Jaccard similarity against a partially-observed target-task graph) that separates successful from failed transfer in all four domain/structure pairs we evaluate, using under an hour of computation and 15-20% of target-domain data; we present this as a heuristic calibrated on few cases, not a validated general threshold.",
+      "tags": [
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Edge Accuracy Is Not Enough: Why Dynamics-Learned Structure Fails to Transfer to Inverse Problems",
+      "url": "https://arxiv.org/abs/2610.10213v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "d49dc261e891361a33bde374",
+      "context_id": "e329074caea4360b5af5b186",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T16:35:26Z",
+      "source_updated": "2026-10-15T16:35:26Z",
+      "summary": "We present an algorithm that computes the structural signature and the mean time-to-failure (MTTF) of a monotone binary system at every one of its states, rather than only at the state in which all components work. It makes no assumption on the structure function and evaluates it exactly once per state, as many times as needed for the signature of the complete system alone, so computing the MTTF everywhere costs only a factor polynomial in the number of components over computing it once. As a by-product, it identifies all minimal path sets. We assume exchangeable component failure times whose survivor count is a continuous-time Markov chain. This setting admits simultaneous failures, as in the Lévy-frailty Marshall-Olkin, binomial failure rate and lethal-shock models, where the simplifications available for single failures do not apply. We use the per-state MTTF to define threshold repair policies. We show that the per-state signature is a strictly finer decision criterion than the MTTF: signature dominance at a common failure count implies MTTF dominance, but not conversely. Under the Lévy-frailty Marshall-Olkin model the MTTF is monotone in the state, which yields the long-run cost rate of every threshold policy in a single pass. Experiments on 22 benchmark networks with up to 30 components and 31 failure models show that the best MTTF-threshold policy has a median excess cost of 0.36% over the optimal state-based policy, and that it is never worse than the best policy that repairs after a fixed number of failures.",
+      "tags": [
+        "cs.DS",
+        "math.OC",
+        "math.PR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Per-State Signatures and Mean Time-to-Failure: An Algorithm for Systems With Simultaneous Failures",
+      "url": "https://arxiv.org/abs/2610.22181v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "82a03542a97aaaa61e9a1dec",
+      "context_id": "e27057cb9a1d30814c501e25",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T13:48:33Z",
+      "source_updated": "2026-10-06T13:48:33Z",
+      "summary": "Post-training quantization is a standard route to fitting vision transformers (ViTs) into edge compute and memory budgets, yet quantized models become especially brittle under distribution shift. Test-time adaptation (TTA) addresses such shifts without labels, but most existing approaches are poorly aligned with the constraints of quantized inference. Prevailing TTA methods recover accuracy through backpropagation, while backprop-free methods often still incur overhead from extra forward passes or parameter updates, and lightweight feature- or logit-level methods recover only part of the loss. Across these approaches, a quantization-specific failure mode that amplifies the drop is not directly targeted: under shift, activations occupy frozen quantizers' calibrated ranges differently, distorting their code distribution. We propose Quantizer-Aligned Recalibration (QuAR), a single-pass TTA method tailored to quantized ViTs that neither backpropagates nor updates any model parameters. QuAR recalibrates activations at the input to a frozen quantizer, mapping the test stream's running per-channel statistics back toward the source calibration. On ImageNet-C with ViT-B, QuAR achieves the highest mean accuracy among state-of-the-art backprop-free TTA methods at 3-, 4-, 6- and 8-bit weight/activation precision, outperforming the strongest baseline by 2.28 points at 8 bits and 4.00 at 3 bits, with 46% lower latency and a memory overhead of only 0.17 MB (0.01% of peak inference memory). Analysis and diagnostics trace the gain to a reduced per-channel mismatch at these quantizers, which restores the code distribution the baselines leave unchanged or distort further. A single fixed configuration remains ahead across continual streams, non-i.i.d. label shift, seven out-of-distribution suites, and three other backbones.",
+      "tags": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Test-Time Adaptation of Quantized ViTs via Single-Pass Quantizer-Aligned Recalibration",
+      "url": "https://arxiv.org/abs/2610.08358v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "f4b886c29ab0ccf5b9aea215",
+      "context_id": "e0d5641f84e7d76cbb32c354",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T17:24:36Z",
+      "source_updated": "2026-10-06T17:24:36Z",
+      "summary": "We study path-flow alignment as a unified training objective for flow matching. Instead of fixing the interpolation path and learning only the velocity field, we jointly train an endpoint-preserving path network and a flow network using the same alignment loss: the flow learns to match the path velocity, and the path learns to align its velocity to the current flow. Although every fixed learned path defines a valid flow-matching objective, the alignment loss alone is not a reliable criterion for path learning. We identify path overfitting, a failure mode in which the alignment loss decreases while sample quality worsens. We find that this failure is associated with low-entropy bottlenecks in the induced probability path, where the learned path routes samples through overly concentrated intermediate marginals. Motivated by this diagnosis, we introduce a stochastic path regularizer that hides part of the source information from the path network while preserving exact endpoints. The resulting regularization gives an explicit entropy floor for the stochastic training-path marginals and empirically suppresses the bottleneck in the learned sampler, making joint path-flow training effective. On ImageNet-256x256 with SiT backbones, our method consistently improves FID across model scales, extends to model-guidance training, and leaves the inference-time architecture and sampler unchanged. Code is available at https://github.com/lizeyu090312/traj_opt_paper",
+      "tags": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Co-Evolving Paths and Flows via Path-Flow Alignment",
+      "url": "https://arxiv.org/abs/2610.08717v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "f1eef78dbf363b335fee9ab2",
+      "context_id": "d3ebe77bd91a0a22b4e46660",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T19:15:58Z",
+      "source_updated": "2026-10-07T19:15:58Z",
+      "summary": "Long-horizon robotic manipulation is often built by chaining independently trained skills. Although each skill can be reliable in isolation, performance degrades sharply when skills are chained: each downstream skill must start from the state its predecessor leaves behind rather than from its training distribution. We study this failure mode, Observation-Space Shift (OSS), and ask what causes these skill-seam failures. Using privileged simulator resets, we find that the dominant shift comes from displaced scene state (e.g., an open drawer or secondary objects left behind by earlier skills), not from the robot's joint configuration or the object the downstream skill manipulates. To test this diagnosis, we build a fully learned detect-restore-resume system: a task-progress monitor detects the stall, a learned policy restores the displaced scene components, and seam-robust fine-tuning lets the skill resume. It recovers the seam where every tested alternative fails, which we treat as evidence for the diagnosis rather than as a general-purpose method. On the BOSS-44 benchmark, the system improves full-chain success from 7.6% to 26.5%, a 3.5x improvement over the base policy and 51% of a privileged restoration oracle, whereas best-of-K resampling, a Diffusion Policy, and world-model baselines fail to recover from the evaluated seam states. On a real Franka arm running a fine-tuned $π_{0.5}$ policy, the same monitor is limited by exterior-camera observability, yet closing the loop still recovers some otherwise-terminal failures, motivating wrist and gripper sensing. These results suggest that some long-horizon composition failures are better addressed by restoring the scene before resuming the policy than by retrying from an off-support state.",
+      "tags": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Diagnosing and Recovering from Observation-Space Shift at Long-Horizon Skill Seams",
+      "url": "https://arxiv.org/abs/2610.10810v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "18a42f15fb419e2ff5c23ece",
+      "context_id": "b74cce00cf394bbf0ee459b8",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T17:56:01Z",
+      "source_updated": "2026-10-07T17:56:01Z",
+      "summary": "GNN-to-MLP distillation aims to retain the predictive accuracy of a message-passing teacher while deploying a graph-free MLP at inference. Existing methods mainly transfer node-wise predictions or use confidence-based reweighting, but they do not specify where the student should preserve the teacher's graph-induced geometry. We show that this omission leads to two spectral failure modes in the student's representation space. On sparse graphs, the student suffers from spectral underfit, missing high-energy teacher directions concentrated near boundary regions. On dense graphs, it suffers from spectral overfit, retaining spurious directions that the teacher has collapsed through aggregation. Motivated by an energy-weighted teacher-student alignment objective, we propose Graph Geometry-aware MLP (G^2MLP), a training-time distillation framework guided by Ollivier-Ricci curvature. Curvature identifies where the two spectral errors concentrate and is used to allocate supervision between prediction-level and representation-level alignment. The deployed model remains a standard MLP and requires no graph access at inference. Across node-classification benchmarks, G^2MLP consistently improves over graph-free distillation baselines, reduces the teacher-student rank gap in both regimes, and transfers without architectural changes to Graph Transformer teachers and link prediction.",
+      "tags": [
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Distilling Graph Geometry: Knowledge Gap from GNNs to MLPs",
+      "url": "https://arxiv.org/abs/2610.10520v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "085e41491c9f0cef123f97ef",
+      "context_id": "adb3235d6b55f910c03e5a7b",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-05T23:14:39Z",
+      "source_updated": "2026-10-05T23:14:39Z",
+      "summary": "Long-history recommenders often compress each user's history into a compact, candidate-independent memory that is cached and reused to score large candidate pools. We show that real user histories exhibit multi-scale semantic structure, with short-lived intent, medium-term interests, and long-term preferences coexisting in one sequence, and that monolithic cached memories preserve these scales unevenly: linear probes recover recent and mid-range content far worse than long-range content. We call this failure mode \\textit{temporal aliasing}. We propose \\textbf{MARS}, a multi-resolution user memory that writes the full history into recurrent state tracks anchored to different half-lives, and a sparse routing reader that materializes compact seed memories by selecting the relevant temporal resolutions for each seed, preserving fixed-size candidate scoring. MARS outperforms strong baselines on three public datasets, with gains that grow with history length. Component-matched ablations with paired tests show that temporal diversity and selective routing each contribute beyond what hard-window memories or added capacity provide. The advantage of MARS over its interface-matched baseline also widens after within-user behavioral shifts, at about $1.02\\times$ that baseline's warm-cache serving latency for $1{,}000$ candidates per user.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "MARS: Multi-resolution Adaptive Routing for Sequential Recommendation",
+      "url": "https://arxiv.org/abs/2610.07505v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "7caf07e8f01a78c2a5a39dc8",
+      "context_id": "a326970d2e436c522c7f5e2f",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T10:00:53Z",
+      "source_updated": "2026-10-15T10:00:53Z",
+      "summary": "Distilling vision-language features into 3D Gaussian Splatting yields a language map that can be queried with arbitrary text. In deployment, however, a small set of user-specified targets must be reliably located, which current distilled maps often miss, while open-vocabulary queryability for other words must remain intact. We propose a training-free, target-aware refinement of an already-distilled language map. Guided by a text-promptable segmenter, the visual embedding inside each detected target region is blended with the target text embedding, a convex combination whose coefficient sets the amount of injected prior, while non-target regions are left untouched. Injecting too much overwrites appearance cues and general queryability, so we seek, for each target, the smallest coefficient that still lets it win, and we obtain every coefficient in closed form, leaving no hyperparameters to tune. We further identify a failure mode of injection in language-goal localization. Text embeddings share a common component, and injecting them makes the standard cosine read-out query-agnostic, which a centering step in the read-out removes. Across three benchmarks, the refinement consistently improves open-vocabulary segmentation, roughly doubling the base mIoU on Replica, and localizes language goals more reliably than the base map. It also transfers as a plug-in to off-the-shelf field-based and object-level language maps and supports a real-world demonstration in which a legged robot navigates to natural-language goals. Project page and code: https://lab-of-ai-and-robotics.github.io/target-aware-langmap/",
+      "tags": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Training-Free Target-Aware Refinement of 3D Gaussian Language Map",
+      "url": "https://arxiv.org/abs/2610.21619v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "321d8144fd716c05d9d5f37a",
+      "context_id": "a0ac9fbbe7f110e60ffdcd12",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-14T01:31:59Z",
+      "source_updated": "2026-10-14T01:31:59Z",
+      "summary": "Large language model (LLM) agents can self-evolve at test time by accumulating experience: retrieving relevant memories before acting and writing new lessons back afterwards. Yet most are single-level: trajectories, distilled workflows and reasoning items all land in one undifferentiated pool indexed by embedding similarity, with no typed abstraction hierarchy. They never forget or deduplicate, and are prone to negative transfer, where a superficially similar but directionally opposite experience is recalled and its concrete steps are copied verbatim, actively harming the agent. We introduce STRATA, a structured, outcome-grounded, self-maintaining memory that organizes experience into a three-layer graph of atomic skills and code snippets, task workflows and generalized meta-frameworks, connected by typed edges. STRATA maintains itself through five mechanisms sharing one similarity geometry: a multi-dimensional similarity that scores retrieval by operation and target; a typed reflector crystallizing procedures from successes and pitfalls from failures; community detection that induces meta-frameworks; pressure-triggered garbage collection with articulation-point protection; and contrast edges that flag confusable, direction-opposite experiences. Across four interactive benchmarks (AppWorld, WebArena, ALFWorld, ScienceWorld), two frozen backbones and seven baselines, STRATA attains the best average score while simultaneously using the lowest latency and fewest environment steps of any memory-augmented method, and 44% fewer lines of injected memory than the most context-hungry baseline. We isolate two failure modes of prior memories: single-level memory degrades sharply as the task set grows, and single-level concrete memories suffer catastrophic negative transfer, which contrast edges repair, lifting ScienceWorld from 78.7 to 96.7 within the same system.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "STRATA: Self-Maintaining Structured Experience Graphs for Self-Evolving Language Agents",
+      "url": "https://arxiv.org/abs/2610.19386v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "066b7de10cef97e4336fee39",
+      "context_id": "9c0099464a7826b93305f94a",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T01:23:57Z",
+      "source_updated": "2026-10-15T01:23:57Z",
+      "summary": "Computational biologists increasingly delegate substantial analyses to AI agents in long-horizon, multi-turn sessions, yet most benchmarks of agents' bioinformatics capabilities pose a single short task with a single-shot prompt. We present OmicsBench, a long-horizon, multi-turn bioinformatics benchmark for AI agents. Each of its 97 tasks links dependent subtasks into a directed acyclic graph, for 662 underlying subtasks in all. Each subtask is posed as one user turn and graded deterministically against an answer key, with optional in-context feedback on incorrect answers. Across 12 models on three harnesses, the slowest agent averages 3.6 hours per task, and no combination comes near saturating the benchmark, with mean scores of 0.43 to 0.57 out of a possible 1 without in-context feedback and 0.54 to 0.67 with it. Multi-turn evaluation also uncovers behavior that single-shot prompts cannot, as agents score lower on subtasks that depend on earlier subtasks, and in-context feedback helps agents recover some of that loss. Because deterministic scoring gives no qualitative account of how an agent failed, we also introduce an unsupervised failure mode discovery pipeline that describes, embeds, and clusters agents' failed attempts to surface emergent failure modes. Applied to OmicsBench, this pipeline exposes qualitative shortcomings in how agents carry out bioinformatics analyses, ranging from agents applying their own statistical filters in place of the specified ones to agents writing whole answers from memory.",
+      "tags": [
+        "cs.AI",
+        "q-bio.GN",
+        "q-bio.QM"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "OmicsBench: a long-horizon multi-turn benchmark of AI agents on research-study-scale bioinformatics",
+      "url": "https://arxiv.org/abs/2610.21074v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "5d6447797fb22ed8b911c908",
+      "context_id": "88b4516c4dce009cc887e580",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-14T10:17:47Z",
+      "source_updated": "2026-10-14T10:17:47Z",
+      "summary": "Segment Anything Model 3 (SAM 3) is a foundation model for image and video segmentation that sets the state of the art in visual object tracking. Its tracker, inherited from SAM 2, stores information from past frames in a memory bank, managed by a simple First-In-First-Out rule, allowing temporal consistency in complex videos. Several recent methods improve SAM 2 with hand-crafted memory update rules, each targeting a specific failure mode, such as distractors, occlusions, or object motion. However, their gains transfer only partially to the stronger SAM 3 backbone. We instead present a more general, data-driven approach that frames memory control as a sequential decision-making task. SAM3RL is an extension of the SAM 3 tracker with a lightweight memory controller, trained by reinforcement learning, that decides which frames enter the memory bank in order to maximize tracking performance. SAM3RL sets a new state of the art on 10 of 12 tracking and video object segmentation benchmarks, outperforming all hand-crafted rules without any runtime overhead. The same approach applied to SAM 2 gives SAM2RL, which outperforms hand-crafted rules on 9 of the 12 benchmarks, showing the generality of our method across model generations.",
+      "tags": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "SAM3RL: Memory Control via Reinforcement Learning for Visual Object Tracking",
+      "url": "https://arxiv.org/abs/2610.19931v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "5775d0981f0a041089f37b20",
+      "context_id": "87a54004010ec66d9a501106",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T13:48:27Z",
+      "source_updated": "2026-10-08T06:18:32Z",
+      "summary": "Offline MARL increasingly relies on generative policies to model multimodal joint behavior, typically by distilling a centralized teacher into decentralized one-step actors under the CTDE. We identify a failure mode at the teacher training stage: standard flow-based teachers pair noise with replay targets independently, so nearby noise samples can be routed toward conflicting coordination modes. The teacher then produces samples between valid modes, and because the distillation loss regresses each local actor onto the conditional mean of the teacher's output given local input, this error is not absorbed but propagated to the student. To remove this teacher-side artifact, we propose Mode-Support Semi-Discrete Optimal Transport (MoSDOT), which summarizes multimodal replay into a finite mode support with prescribed capacities and uses conditional semi-discrete optimal transport to assign each noise sample to a single mode before teacher training. We additionally study a shared-randomness variant that uses a shared noise component at execution to expose the residual gap intrinsic to strict-product execution. On controlled diagnostics and offline MARL benchmarks, MoSDOT improves endpoint quality and routing consistency, particularly on datasets exhibiting multimodal joint behavior.",
+      "tags": [
+        "cs.LG",
+        "cs.MA",
+        "cs.RO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Multi-Agent Coordination via Support-Preserving Distillation",
+      "url": "https://arxiv.org/abs/2610.10087v2"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "7c0a3d52732e9b9c94f18122",
+      "context_id": "7f3219e80045576270e22c04",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T16:58:12Z",
+      "source_updated": "2026-10-15T16:58:12Z",
+      "summary": "Agent memory benchmarks evaluate whether an agent's responses reflect correct knowledge, measuring downstream question-answering accuracy as a proxy for memory quality. We show this evaluation paradigm is incomplete: it conflates memory correctness with retrieval and generation quality, producing both false positives where correct responses mask broken memory and false negatives where incorrect responses blame correct memory for retrieval failures. We introduce FEB-30, a benchmark of 30 fact-evolution trajectories spanning 6 diagnostic categories and 3 difficulty levels, constructed via paradigm inversion: documents are generated from known fact trajectories, yielding deterministic ground truth without human annotation. Each trajectory defines how a fact should evolve across multi-author artifacts (documents, emails, conversations), enabling direct inspection of the memory store after each ingestion step. Applying FEB-30 to a representative memory system, we demonstrate that intrinsic and extrinsic evaluation diverge by an average of 16 percentage points, with 44% of trajectories exceeding meaningful divergence thresholds. Diagnostic decomposition reveals that the system correctly classifies memory operations (create, update, reinforce, supersede) only 20% of the time, a failure entirely invisible to extrinsic evaluation, and that failure modes differ systematically by category and difficulty. We release the benchmark, document generation pipeline, and scoring framework to support reproducible evaluation of agent memory systems.",
+      "tags": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Beyond Downstream QA: Rethinking How We Evaluate Agent Memory",
+      "url": "https://arxiv.org/abs/2610.22209v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "0a77c877298978d8a7c70963",
+      "context_id": "7ad51e9b2553b98d11e92fac",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T16:16:24Z",
+      "source_updated": "2026-10-07T16:16:24Z",
+      "summary": "Face de-identification (FDeID) has emerged as a critical privacy-preserving technology, yet its evaluation remains fundamentally fragmented. Existing protocols rely on inconsistent metrics, heterogeneous datasets, and partial annotation coverage, so methods targeting different utility dimensions, such as landmark versus expression preservation, are reported on different benchmarks under different metrics, rendering cross-method comparison infeasible. We revisit FDeID evaluation from both the data and metric perspectives. On the data side, we introduce UtilFace, a curated, demographically balanced benchmark with high identity diversity, assembled from four large-scale face datasets through identity-aware cleaning, resolution enhancement, and stratified filtering. On the metric side, we propose HiFD, a Hierarchical Face De-identification metric that unifies identity suppression, multi-level utility preservation, and image quality under a single consistency-based paradigm: every component is computed from pretrained estimators' outputs on the original face and its de-identified counterpart, directly quantifying how much identity is suppressed and how much downstream-perceivable utility survives. HiFD organizes facial signals into a three-level utility hierarchy spanning macro cues (L1), micro cues (L2), and imperceptible cues (L3), and aggregates the five resulting components into a single interpretable score via weighted harmonic mean, with configurable application-specific profiles. Using this unified protocol, we conduct a comprehensive comparative study spanning adversarial, GAN-based, and diffusion-based methods, surfacing trade-offs and failure modes that remain invisible under existing protocols. We release the benchmark and evaluation toolkit to foster systematic and reproducible research in privacy-preserving human face analysis.",
+      "tags": [
+        "cs.CV"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "How Private is Private? A Comparative Study for Face De-Identification",
+      "url": "https://arxiv.org/abs/2610.10334v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "17d517502bc09f6c377b4ed0",
+      "context_id": "79089c0580a090598a31af5b",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T13:48:27Z",
+      "source_updated": "2026-10-07T13:48:27Z",
+      "summary": "Offline MARL increasingly relies on generative policies to model multimodal joint behavior, typically by distilling a centralized teacher into decentralized one-step actors under the CTDE. We identify a failure mode at the teacher training stage: standard flow-based teachers pair noise with replay targets independently, so nearby noise samples can be routed toward conflicting coordination modes. The teacher then produces samples between valid modes, and because the distillation loss regresses each local actor onto the conditional mean of the teacher's output given local input, this error is not absorbed but propagated to the student. To remove this teacher-side artifact, we propose Mode-Support Semi-Discrete Optimal Transport (MoSDOT), which summarizes multimodal replay into a finite mode support with prescribed capacities and uses conditional semi-discrete optimal transport to assign each noise sample to a single mode before teacher training. We additionally study a shared-randomness variant that uses a shared noise component at execution to expose the residual gap intrinsic to strict-product execution. On controlled diagnostics and offline MARL benchmarks, MoSDOT improves endpoint quality and routing consistency, particularly on datasets exhibiting multimodal joint behavior.",
+      "tags": [
+        "cs.LG",
+        "cs.MA",
+        "cs.RO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Multi-Agent Coordination via Support-Preserving Distillation",
+      "url": "https://arxiv.org/abs/2610.10087v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "f08cd5c4c21de0923d86cae6",
+      "context_id": "73a2a2ef5edf6c977a4dd72b",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-14T02:17:07Z",
+      "source_updated": "2026-10-14T02:17:07Z",
+      "summary": "LLM system capabilities depend not only on model parameters but also on the executable harnesses that organize information acquisition, tool use, reasoning, and memory. Recursive harness evolution can automate their design, but how it can reliably discover generalizable systems from limited, noisy, and repeatedly reused feedback remains unclear. We study this question in agentic video understanding, where rich multimodal evidence and coupled mechanisms make harness optimization challenging. We first introduce VideoHarness-BRSI, a recursive self-improvement framework that evolves video harnesses around a frozen vision-language model. Analyzing over 4,000 evolved candidates, we find it competitive with hand-engineered systems but identify three interconnected failure modes: validation overfitting, search-budget dilution, and the early-experience trap. We trace all three to a common root: the same imperfect validation evidence drives both harness revisions and the proposer's search strategy. We therefore propose VideoHarness-SRSI, an evidence-governed framework in which every search decision rests on evidence that is transferable, sufficient, and gathered before the search commits. It restricts the proposer to content-free feedback, informs exploration with instrumented warm-up experiments, and develops mechanisms in isolated probe-race branches before factorial composition and joint refinement. Across four video understanding benchmarks, VideoHarness-SRSI improves the equally weighted mean held-out score by 6.2% relative to VideoHarness-BRSI and reduces the mean validation-test gap by 37.9%. Reliable harness evolution thus depends on how search is organized and informed, not only on how well it optimizes validation performance.",
+      "tags": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "VideoHarness-SRSI: Structured Recursive Self-Improvement for Video Understanding Harness",
+      "url": "https://arxiv.org/abs/2610.19424v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "bb791e3efa5aa5efee914e45",
+      "context_id": "72295a6e3581660e9b85d264",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T07:58:47Z",
+      "source_updated": "2026-10-06T07:58:47Z",
+      "summary": "Demonstration-conditioned policies provide a natural interface for specifying robot behavior, yet long-horizon manipulation remains difficult when visually similar states recur across different stages or when demonstrations and executions proceed at different speeds. We identify the resulting failure mode as stage confusion and introduce Progress-Aligned Context for Execution (PACE), a stateful method that continually reinterprets a complete demonstration according to realized execution progress. PACE compresses the demonstration into ordered multimodal prompt tokens and uses training-only dual-edge attention supervision to expose its latent stage structure. During execution, an episode-local fast-weight memory causally encodes realized action-observation transitions and modulates prompt cross-attention, producing a progress-aligned context for a unified diffusion action expert without test-time stage labels or stage-specific policies. PACE improves success from 88.9% to 94.0% on LIBERO-Gen Goal Chain, from 79.1% to 83.3% on Spatial Combination, and from 33.3% to 73.3% on the two-step Block Routing tasks. Failure analysis further indicates that structured demonstration alignment and causal execution memory jointly mitigate stage confusion.",
+      "tags": [
+        "cs.RO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "PACE: Stage-Consistent Long-Horizon Robot Manipulation via Progress-Aligned Context for Execution",
+      "url": "https://arxiv.org/abs/2610.07917v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "3c2c890336dc5576728b19c6",
+      "context_id": "6a38952ceddced8394d7abfb",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T14:07:48Z",
+      "source_updated": "2026-10-07T14:07:48Z",
+      "summary": "Multi-agent LLM systems coordinate task execution through exchanges of information among agents. When coordination breaks down, similar symptoms in execution traces can reflect different problems in how information is passed, used, or verified. Communication topology captures how agents exchange information and provides structural cues for distinguishing coordination failure modes. Using these cues for diagnosis requires establishing how topology relates to failure patterns and recovering the relevant structure from execution traces that lack explicit topology labels. We analyze the relationship between communication topology and failure patterns and introduce MAScope, a two-stage framework for topology-conditioned diagnosis. Its Trace Structural Extractor TSE recovers communication topology from heterogeneous execution traces by grounding an interaction graph in message evidence. The Topology-Conditioned Judge TC-Judge then classifies failures using the trace, predicted topology, an empirical failure prior estimated from separate labeled traces, and a short description of topology-specific failure patterns. Under a fixed orchestration structure, the recovered topology can be reused across executions. Experimental results show a statistically significant association between communication topology and failure type, with $χ^2 = 409.9$ and $p = 1.2 \\times 10^{-70}$. On the \\num{851} MAST-clean traces, ground-truth topology context raises gpt-mini's Macro-F1 from $0.173$ to $0.350$. With predicted topology, the pipeline achieves $0.346$, approaching the trace-only gpt-5.4 baseline of $0.372$. For \\num{1000} traces under a fixed orchestration structure, the projected pipeline cost, including one topology extraction, is approximately $6\\%$ of repeated gpt-5.4 diagnosis cost. These results show that topology-conditioned context improves failure diagnosis and supports lower-cost deployment.",
+      "tags": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Know the Shape, Find the Fault: Topology-Conditioned Diagnosis of Multi-Agent LLM Failures",
+      "url": "https://arxiv.org/abs/2610.10126v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "a4f88e7fee51a4b0127572b4",
+      "context_id": "67782938893a758e9d93109b",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone",
+        "multipath"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-09-11T08:46:15Z",
+      "source_updated": "2026-09-11T08:46:15Z",
+      "summary": "The individual attribution of sperm whale (Physeter macrocephalus) vocalizations during surface interactions constitutes a methodological challenge due to acoustic overlaps, multipath propagation, body shadowing, and indistinguishable inter-pulse intervals among similar-sized individuals. A multimodal audio-visual workflow is presented to deinterleave and attribute uncharacterized click trains produced by immature males during ``vocal sparring'' using a portable three-hydrophone array coupled with synchronized video. The approach combines spectro-temporal tracking, based on inter-click interval dynamics and the Constant-Q Transform, with spatial time-difference-of-arrival modeling projected onto the image plane for optical validation. Analysis of 2,655 manually validated clicks shows that purely acoustic clustering diarization errors remain low, peaking at 25.79% only during extreme temporal superpositions. Integrating the optical modality resolves residual spatial indeterminacies; although near-planar array geometry induces vertical ambiguities, the system achieves up to 100% horizontal visual concordance for primary emitters. Crucially, this framework successfully reconstructed and assigned 11 distinct, intertwined click trains totaling 882 clicks to specific focal individuals despite near-field tactile constraints. Because ethological descriptions remain incomplete without identifying the emitter, explicitly correlating these emissions with physical kinematics provides the fine-scale resolution required to define this socio-acoustic behavior.",
+      "tags": [
+        "q-bio.QM",
+        "eess.SP"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Audiovisual diarization of overlapping click trains in sperm whale (Physeter macrocephalus) vocal sparring using a three-hydrophone array",
+      "url": "https://arxiv.org/abs/2609.12593v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "5ce4f7f24f2d4f01da8666e1",
+      "context_id": "53b3bbdd442a9f6b9ecc1c4d",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T14:15:44Z",
+      "source_updated": "2026-10-06T14:15:44Z",
+      "summary": "Large Language Models have emerged as promising tools for software vulnerability analysis, but their effectiveness depends heavily on prompt design. Existing research primarily compares prompting strategies using aggregate performance metrics, providing limited insight into why models fail or how prompts can be improved systematically. We propose Failure-Driven Prompt Refinement (FDPR), a methodology that analyzes recurring model failures to guide evidence-based prompt refinement. Using the Damn Vulnerable Java Application (DVJA), we identify recurring failure modes, including false positives, false negatives, unsupported reasoning, and CWE misclassification, and translate them into targeted prompt refinements. We then evaluate the resulting prompt on the Juliet Test Suite and perform cross-model validation to assess generalizability. The results show that failure-driven refinement improves the reliability of LLM-based vulnerability analysis while yielding reusable prompt design principles. More broadly, this work demonstrates that recurring model failures provide a principled foundation for prompt engineering, enabling the systematic development of more reliable LLM-based vulnerability analysis systems.",
+      "tags": [
+        "cs.SE",
+        "cs.AI",
+        "cs.CR"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Learning from Failures: A Failure-Driven Prompt Refinement for LLM-Based Vulnerability Analysis",
+      "url": "https://arxiv.org/abs/2610.08405v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "417a3fe7ded8e69563463704",
+      "context_id": "2b7a8ac395ba72776000ef10",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T15:40:52Z",
+      "source_updated": "2026-10-07T15:40:52Z",
+      "summary": "Token-based world models enable fine-grained latent planning, but repeatedly processing large spatial token grids makes action search expensive. We introduce COSTGRAD, a training-free, goal-conditioned selector that ranks spatial tokens by the gradient norm of the planning cost with respect to each input token. By deriving importance from the downstream control objective, COSTGRAD targets tokens that matter for planning rather than merely for prediction. On AdaLN-conditioned predictors at $50\\%$ sparsity, COSTGRAD matches or exceeds full-token planning on three of four continuous-control benchmarks, while giving a measured $2.6\\times$ wall-clock speedup per environment planning step. Combining token sparsity with reduced CEM search increases this to a $\\sim 5\\times$ total speedup while still exceeding the full-token baseline. We also identify an architecture-dependent failure mode: in a matched AdaLN-vs-concat comparison, concat maintains comparable full-token performance but pure COSTGRAD loses its advantage over random selection. This difference tracks action-pathway drift: gradient-selected removal produces less drift than random removal on AdaLN, but more on concat. These results highlight selector-architecture compatibility as a design axis for sparse world-model planning. Project page and demos: https://ycxuyingchen.github.io/costgrad/",
+      "tags": [
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Sparse Planning in Visual World Models via Cost Gradients",
+      "url": "https://arxiv.org/abs/2610.10274v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "cd39b207acfa5dcdebfd04bd",
+      "context_id": "263e18396de57d362c635b87",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-14T00:36:08Z",
+      "source_updated": "2026-10-15T17:38:29Z",
+      "summary": "Agents are increasingly interacting with other agents that act for different principals (people or organizations on whose behalf they work), such as a buyer's personal agent negotiating with an enterprise's seller agent. In such agent-to-agent (A2A) scenarios, each agent has its own environment and holds information and authority that the other cannot see. Moreover, the interests of each agent may be aligned (cooperative), partly aligned (mixed-motive), or opposed (competitive). Existing multi-agent system failure studies assume one orchestrator, shared workspace, or single principal. We ask how A2A systems fail when these assumptions are removed. We study more than 2,500 recorded runs of A2A systems built from different agent harnesses and models, spanning 488 scenarios across eight families (legal, CRM, security, commerce, etc.). From these traces, we derive $A^2$-Failures, a taxonomy of 20 A2A failure modes in four categories: (i) discovery and delegation, (ii) grounding and record consistency, (iii) verification, and (iv) conduct and fidelity. Three findings hold across every harness, model, and scenario studied: (1) discovery and interaction are driven by the phrasing of the task rather than the availability of peer agents; (2) no agent verifies a peer's factual claim on its own initiative, so an A2A system inherits the reliability of its least reliable participant unless the protocol or mechanism performs the check; and (3) the aggregate outcome score credits the agent completing the task while staying blind to the coordination, verification, and conduct failures beneath it, so A2A systems must be evaluated per agent, against each agent's own principal. We release the run logs behind the taxonomy at https://huggingface.co/datasets/a2a-salesforce/a2-failures.",
+      "tags": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Why Do Agent Teams Fail Across Boundaries? A Failure Taxonomy for Agent-to-Agent Systems with Private States",
+      "url": "https://arxiv.org/abs/2610.19342v2"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "d947af6dae686c49649fd460",
+      "context_id": "1ec19b234a4bc056906dbded",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-08T14:02:35Z",
+      "source_updated": "2026-10-08T14:02:35Z",
+      "summary": "Data video is a media form that integrates data visualization with video narrative, widely adopted in news reporting and business analysis. Compared with general video understanding, data video understanding places greater emphasis on accurately reading data from animated charts, integrating evidence across charts and time, and understanding how narrative organization and visual design communicate information. Yet existing benchmarks target either general videos or static charts, and data video understanding has not been systematically evaluated. We present DataVista, the first benchmark for data video understanding, containing 961 real-world data videos and 6,775 evaluation questions organized under a three-level progressive capability framework (data perception, temporal reasoning, narrative understanding) with 10 fine-grained question types across five topic domains. Systematic evaluation of 19 mainstream MLLMs shows that the best-performing model, Gemini-3.1-Pro, achieves 70.0% overall accuracy, still far below human expert performance, with models performing worst on Causal Reasoning and Narrative Structure. Increasing frame counts and adding subtitles mainly benefit data perception and temporal reasoning, with limited gains in narrative understanding. Further analysis of model responses identifies typical failure modes in chart reading, evidence judgment, and instruction understanding. The benchmark is available at https://github.com/HKUSTDial/DataVista.",
+      "tags": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "DataVista: Diagnosing Multimodal LLMs on Data Video Understanding",
+      "url": "https://arxiv.org/abs/2610.11993v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "3c28e5f1fa4dd990b91abd2f",
+      "context_id": "07c2cf41468d10b8db2b6903",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "failure mode"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7917,
+      "source": "arxiv",
+      "source_published": "2026-10-05T19:48:54Z",
+      "source_updated": "2026-10-05T19:48:54Z",
+      "summary": "Agentic memory allows LLM agents to reuse past experience, yet retrieved memories can also distort inference even when they are benign, correctly stored, and appropriately retrieved. We study this failure mode, which we call memory over-reliance. Across benchmarks and memory architectures, we find that memory is useful when past experience transfers to the current task, but can become misleading when only part of the evidence transfers. Failures are strongest under partial query-memory overlap, a pattern further confirmed by controlled experiments thatvary the amount of overlapping evidence. Motivated by this finding, we propose MEMTRIM, a plug-and-play framework that indexes memory evidence at write time and controls its reuse at read time. MEMTRIM removes repeated or conflicting evidence while preserving useful memory-specific information, requires no retraining, and applies to both embedding-based and structured memory systems.Experiments show that MEMTRIM reduces memory overreliance while preserving the benefits of useful memory across models and memory settings.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Understanding and Mitigating Inference-Time Overreliance Using Agentic Memory",
+      "url": "https://arxiv.org/abs/2610.07311v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "b1f191fa1e0b2cabf90f0f2d",
+      "context_id": "bfefef8f26d6924bc72efcb0",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "limitation"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7083,
+      "source": "zenodo",
+      "source_published": "2026-10-08",
+      "source_updated": null,
+      "summary": "This repository contains the replication materials used in the study &ldquo;How Much Model Detail Is Enough? Discrete Event Simulation for Capacity Planning in SMEs.&rdquo; The study investigates how increasing the level of detail in a discrete-event simulation model affects capacity-planning conclusions in a small and medium-sized manufacturing enterprise. Three model variants were developed in JaamSim: M1 &ndash; a simplified model using aggregated processing-time variability; M2 &ndash; a more detailed model distinguishing processing-time variability by sheet-thickness category; M3 &ndash; an extended model including the shared human-resource constraint and employee breaks. The repository includes: 3 JaamSim configuration files ( .cfg ) representing models M1&ndash;M3; 2 anonymised order-portfolio input files ( .tsv ), representing the normal weekly order portfolio and a portfolio increased by 20%; 6 JaamSim replication-result files ( .rep ), containing 30 replications for each combination of model variant and order portfolio. The simulation experiments were designed to compare how model detail affects weekly production-capacity assessment, machine utilisation, regular overtime, backlog at the end of the working week, and the additional capacity required to complete unfinished orders. The models intentionally simplify some aspects of the real production system. They do not explicitly represent production defects and rework, material transport from the warehouse, workstation storage-space limitations, machine failures, or NC-program preparation as a separate process. These simplifications reflect the scope of the study, which focuses on decision-relevant model detail for weekly capacity planning. The files support transparency, reproducibility, and further research on discrete-event simulation and capacity planning in non-repetitive SME manufacturing. The models were developed for JaamSim 2026-05 . The order portfolios were anonymised and contain no commercially sensitive customer or pricing information. &nbsp;",
+      "tags": [
+        "Discrete-event simulation",
+        "JaamSim",
+        "capacity planning",
+        "SMEs"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "JaamSim models, order portfolios, and replication results for capacity planning in an SME manufacturing system",
+      "url": "https://zenodo.org/records/23229885"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "021d5155fb427853e4bee109",
+      "context_id": "802def0948902c3415fb6c58",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure",
+        "limitation"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.7083,
+      "source": "arxiv",
+      "source_published": "2026-10-06T13:51:58Z",
+      "source_updated": "2026-10-06T13:51:58Z",
+      "summary": "Maritime systems operate in highly dynamic environments where unexpected equipment failures can compromise safety, reliability, and operational efficiency. Recent advances in artificial intelligence (AI), machine learning, digital twins, and predictive maintenance enable proactive failure prediction and prevention. However, ensuring trustworthy and explainable decision-making remains a major challenge in safety-critical maritime applications. This chapter reviews key AI technologies required for explainable failure prediction and prevention in maritime systems and presents a conceptual architecture capable of supporting autonomous or human-in-the-loop corrective actions. This architecture integrates data acquisition, time-series forecasting, anomaly detection, risk assessment, decision-making, and explainable AI into a closed-loop framework. With reference to the architectural components, a review and discussion of relevant maritime studies is performed, outlining their methods, advantages, and limitations. Furthermore, it highlights current challenges, including uncertainty and robustness, model generalization, explainability, limited availability of maritime datasets, and operational deployment, and identifies future research directions toward trustworthy AI-assisted maritime decision-making.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Explainable Failure Prediction and Prevention in Maritime",
+      "url": "https://arxiv.org/abs/2610.08363v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "07fa77eae68a1b607f084f37",
+      "context_id": "ccec53fdeb8f28eda9f248ee",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "confound",
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.625,
+      "source": "arxiv",
+      "source_published": "2026-10-06T11:49:18Z",
+      "source_updated": "2026-10-06T11:49:18Z",
+      "summary": "Sharp bounds on two potential-outcome means need not combine into sharp bounds on their difference. We characterize exactly when composition is guaranteed across environments sharing a joint potential-outcome law. For binary treatment and outcome, fix strict selection-probability bounds and interior treatment propensities. Subtracting the full model's sharp mean intervals gives sharp average-treatment-effect bounds for every compatible observed law if and only if the absolute selection bounds coincide across environments. Under this alignment, the complete mean region is rectangular; its endpoints and attaining causal models require $O(K)$ arithmetic operations for $K$ environments. For every mismatch, failure occurs on a relatively open set of positive observed tables at the prescribed propensities and persists under small joint drift. We give computable perturbation certificates and an exact family whose gap is first order in the mismatch. A separate finite-confounding family shows when the lost joint information changes an identified causal sign. These results distinguish local marginal sharpness from joint attainability after combining environments.",
+      "tags": [
+        "stat.ME"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "The Missing Corner: When Sharp Causal Bounds Fail to Compose",
+      "url": "https://arxiv.org/abs/2610.08197v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "e659ea165434623778492d9b",
+      "context_id": "4ce1e802df0e011879188c90",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "bias",
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 5.4583,
+      "source": "arxiv",
+      "source_published": "2026-10-09T00:02:59Z",
+      "source_updated": "2026-10-12T20:41:24Z",
+      "summary": "Multi-agent systems are increasingly used to solve coding tasks by coordinating agents that share code and plans. These agents are often optimized with reinforcement learning (RL) using automated evaluators, but bypassing evaluation can earn reward without producing a genuine solution. Prior work has largely treated reward hacking as a single-agent failure. In this work, we show that a reward-hacking strategy elicited in one agent can propagate to others and affect system coordination. Across four open-weight backbones, coding RL elicits and amplifies reward hacking in two settings: explicit mechanism descriptions in the system prompt and mid-training that models upstream exposure to facts about the coding environment. Using post-RL agents from the mid-training setting as sources, we observe propagation through code and shared memory, and across roles through natural-language plans. Even agents based on small open-weight models induce reward hacking in stronger closed-weight targets. On hard tasks, propagation can intensify along a transmission chain after the original source leaves as the code acquires more persuasive justifications. We also theoretically analyze conditions under which reward hacking amplifies, persists, or decays across agent interactions. Beyond propagation, reward hacking can bias task routing toward reward-hacking agents and survive candidate aggregation. As potential mitigations, we evaluate code review by the coder or a separate verifier, both of which reduce delivered hacks. Together, these results establish reward hacking as a transmissible strategy whose effects extend beyond the agent in which it first emerges.",
+      "tags": [
+        "cs.AI",
+        "cs.CR",
+        "cs.MA"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Reward Hacking as a Transmissible Strategy in Multi-Agent Coding Systems",
+      "url": "https://arxiv.org/abs/2610.12822v2"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "633e8a904569a66eb28a0b97",
+      "context_id": "29f75f875bb6fa7af7029746",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "underwater acoustic"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.7917,
+      "source": "arxiv",
+      "source_published": "2026-04-19T21:12:06Z",
+      "source_updated": "2026-09-10T19:00:34Z",
+      "summary": "Advances in computational methods have made full-wave simulations in large disordered media increasingly feasible, but the resulting volume of field data, scaling with the cube of the ratio of system size to wavelength, creates a severe storage and post-processing bottleneck. Generic compression methods are sample-specific and preclude operations on compressed data. We introduce OSCAR, a physics-based lossy compression scheme for monochromatic wave fields in weakly scattering media. OSCAR exploits the universal confinement of the Fourier representation of wave fields to a thin dispersion shell, a direct consequence of wave propagation when the scattering mean free path significantly exceeds the wavelength, and a property of every disorder realization rather than of the ensemble average, so that one mask serves an entire ensemble. The resulting compression ratio reflects two distinct scale separations: on-shell confinement due to weak scattering, and the excess Fourier-space volume introduced by sub-wavelength discretization of the scatterers. Crucially, second-order quantities, demonstrated here on sensitivity maps, can be computed via convolution entirely in compressed space while preserving the interference effects. We validate the method in 2D scalar and 3D vector simulations of electromagnetic waves, spanning quasi-ballistic to diffusive transport. The reconstruction error is set by the discarded spectral weight. Demonstrated compression ratios reach ~810x in 2D and ~420x in 3D at a 3% error, with cell-averaged second-order observables accurate to an even smaller error. Tested from quasi-ballistic to diffusive transport, OSCAR stores the fields in up to 19x less space at a 2.5-4.2x lower runtime cost than SZ3. This lowers the storage barrier to ensemble studies at scales relevant to biomedical optics, seismology, and underwater acoustics.",
+      "tags": [
+        "physics.optics",
+        "cond-mat.dis-nn"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "On-shell compression and reconstruction (OSCAR) of monochromatic wave fields in weakly scattering media",
+      "url": "https://arxiv.org/abs/2604.17617v2"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "127160181564513c60bb0927",
+      "context_id": "3f95083c4c0ae0bb7b636f88",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "negative result"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.625,
+      "source": "arxiv",
+      "source_published": "2026-10-05T19:02:27Z",
+      "source_updated": "2026-10-05T19:02:27Z",
+      "summary": "A team of coding agents can look fine agent by agent yet fail as a team: each passes its own tests while the merged result is broken, and single-agent evaluation never catches it. As teams run several LLM coding agents in parallel on one codebase, the agents collide: two rewrite the same function, one codes against a contract a teammate just changed, and integration fails after the work is done. Most coordination tools react (watch for a conflict, then warn), but at agent speed the warning arrives after the wasted edit. We recast the problem as scheduling: take each work item's declared scope, partition the work into disjoint scopes, and order merges along the producer->consumer graph, all up front. We build this planner into Nerveplane and evaluate it with NP-Bench, an environment-grounded three-arm benchmark (no coordination; reactive detection; proactive planning) that verifies integration off a real git merge, both in a deterministic simulation and with live agents. The planner lifts clean-integration from 1/9 to 9/9 scenarios and cuts merge conflicts from 13 to 0, with a gap that grows in the number of agents. On a live breaking contract change it rescues an outcome both baselines miss on every seed: the clean-integration rate rises from 0 (no coordination and reactive detection) to 1.0 on a frontier model and 0.6 on a small one, while agents respect assigned scopes (0/5 leakage). A cross-session memory drops the repeated-mistake rate from 1.00 to 0.00 on strong and weak models alike. We also report a negative result: routing facts to agents does not rescue long-context accuracy at window-fitting scales; its value is cost and capacity, not attention. Across two capability tiers and two vendors, the benefit did not shrink as models got stronger, because it comes from how work is allocated, not model reasoning.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Verifying Coordination in Parallel Coding Agents: NP-Bench and a Scheduling Planner",
+      "url": "https://arxiv.org/abs/2610.07261v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "95dbfadbe9ae619f5ba9f4b4",
+      "context_id": "9e142939575ee17d9f80201a",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "counterexample"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "arxiv",
+      "source_published": "2026-10-15T14:21:21Z",
+      "source_updated": "2026-10-15T14:21:21Z",
+      "summary": "In the paper, we establish congruences for twisted Dirac indices and signatures on closed string manifolds by specializing the two-parameter modular forms of Liu and Wang to the tangent bundle. Fourier coefficient comparisons yield uniform congruences modulo $3$ in dimensions $4k$, $1\\leq k\\leq7$. Suitable parameter choices give explicit formulas involving only genuine twisting bundles in dimensions $8,12,16,20,24,$ and $28$, and recover the comparisons of Chen and Han in dimension $24$. The level-one Witten genus further strengthens selected Dirac congruences to moduli $729,27,27,$ and $9$ in dimensions $16,20,24,$ and $28$, respectively. The proofs use Fourier expansions in reduced $K$-theory and integer identities obtained by clearing powers of two from the denominators before reduction modulo $3$. We also construct non-string spin counterexamples in each of the six listed dimensions and identify the additional coefficient that obstructs extending the uniform argument to dimension $32$ without further information.",
+      "tags": [
+        "math.DG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Mod 3 Congruence Families for twisted signatures of string manifolds in dimensions up to twenty-eight",
+      "url": "https://arxiv.org/abs/2610.21959v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "b45d6a77a097cc58ca21aed3",
+      "context_id": "302417fb5d0e9e134361ef7c",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "counterexample"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.5833,
+      "source": "zenodo",
+      "source_published": "2026-10-10",
+      "source_updated": null,
+      "summary": "We give a written counterexample to the arbitrary-positive-mass statement of Heilman 2019 Conjecture 1.16. For every 0&lt;p&lt;1/4, the mass vector (p,(1-p)/3,(1-p)/3,(1-p)/3) has a strict non-regular improvement. The equal-mass tetrahedral problem is untouched. The record contains the frozen PDF, source package, exact Q(sqrt(2)) diagnostics, partial Lean algebra, and a targeted prior-work comparison. No external peer review or worldwide priority claim is made.",
+      "tags": [
+        "Gaussian partitions",
+        "Gaussian first moments",
+        "simplex conjecture",
+        "counterexample",
+        "mass-constrained optimization"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "A facet-exchange counterexample to the fixed-mass regular-simplex conjecture",
+      "url": "https://zenodo.org/records/23272760"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "d496194b1461795f00560901",
+      "context_id": "3e51bc9d83560625d089be29",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "hydrophone"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.4167,
+      "source": "arxiv",
+      "source_published": "2026-09-15T19:57:26Z",
+      "source_updated": "2026-09-15T19:57:26Z",
+      "summary": "This study aims to improve the directional sensitivity of magnetic resonance hydrophone (MRH) methods and allow for detection and quantification of waves traveling at any angle relative to the MRI bore-axis. Doing so may better integrate MRH technology into transcranial focused ultrasound neuromodulation therapies. Existing MRH implementations only encode acoustic waves propagating along the MRI bore-axis, precluding use with wide aperture transducers or temporal skull windows. This study expands the MRH technique into a MR-based Omni-directional Hydrophone (MRbOH) that can quantify the magnitude pressure and phase of waves propagating at any angle. The MRbOH method formulates a system of equations around uniquely sensitized images that, when solved, introduce sensitivity to oblique acoustic waves. The method was tested experimentally in a gel phantom that was insonated at $0^o$, $45^o$, and $90^o$ relative to the MRI bore-axis. The method reconstructed pressure maps at all three angles of propagation, including features such as peak pressure, partial reflections, and beamwidth. The MRbOH method measured an average beamwidth of 16.2 mm while the hydrophone measured a beamwidth of 14.5 mm. Average hydrophone-measured pressure within a region of interest was 416.19 $\\boldsymbol{\\pm}$ 78.07 kPa. Average MRbOH measured pressure in the same region at $0^o$, $45^o$, and $90^o$, respectively, were: 285.5 $\\boldsymbol{\\pm}$ 49.5 kPa, 193.13 $\\boldsymbol{\\pm}$ 43.55 kPa, 194.7 $\\boldsymbol{\\pm}$ 47.38 kPa. In addition, the study presents and experimentally verifies a statistical noise model that predicted the mean with $R^2 = 0.85$, and standard deviation with $R^2 = 0.83$.",
+      "tags": [
+        "physics.med-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "The Magnetic-Resonance-Based, Omni-Directional Hydrophone",
+      "url": "https://arxiv.org/abs/2609.17793v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "c25b558401c18ab98d1f1a7e",
+      "context_id": "ff333f445ae4f518f7f4b63e",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T13:41:16Z",
+      "source_updated": "2026-10-07T13:41:16Z",
+      "summary": "We study bijective nonexpansive maps in $T_0$-quasi-metric spaces, distinguishing preservation of directed distances from pointwise rigidity. Our focus is their behaviour under passage to the $q$-hyperconvex hull. The upper quasi-metric integers are $q$-plastic and bicomplete, but their hull is the non-$q$-plastic upper real line. An explicit hull calculation and an established metric dense-rigidity theorem give the same failure of inheritance for a $q$-rigid original space. Tightness propagates distance preservation from the canonical copy throughout the hull. Under compactness and a bounded lattice structure for the zero-distance order, identifying that copy with the complemented elements gives a sufficient condition for inheritance of $q$-rigidity. A four-vertex asymmetric rectangle verifies this criterion. We also record metric transfer mechanisms and show that a directed interval condition gives an endpoint-coordinate representation, automatic $q$-plasticity, and $q$-rigidity under uniqueness of the ordered diametral pair.",
+      "tags": [
+        "math.GN"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Nonexpansive Bijections in $T_0$-Quasi-Metric Spaces and Their $q$-Hyperconvex Hulls",
+      "url": "https://arxiv.org/abs/2610.10077v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "1fc84f6afd538d01ea900c20",
+      "context_id": "fd06fd418b5811d520f261c7",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-08T17:52:03Z",
+      "source_updated": "2026-10-08T17:52:03Z",
+      "summary": "Multimodal large language models (MLLMs) struggle with spatial, embodied, physical, and temporal reasoning. We hypothesize that these failures reflect a shared deficit in visual transition reasoning, and test whether this capability can serve as a shared training primitive, one that different models can learn from different supervision sources and reuse across different tasks, with a systematic training recipe. Existing benchmarks document these deficits separately but do not support controlled comparisons across scenes, actions, and reasoning operations. We therefore introduce WOVEN, a training source and benchmark for visual transition reasoning that organizes transition supervision by scene, action, and reasoning type, using diverse, realistic rollouts from video-pretrained generative models: 36,076 examples across 20 scene types, 5 action types, and 8 reasoning types. We first evaluate 38 frontier MLLMs (e.g., GPT-5.4 and Qwen3-VL-235B-A22B) and find a substantial and systematic deficit: even the strongest models fall far below humans, and the failures recur across model families and persist with scale. We then train MLLMs at multiple scales on WOVEN and find that they learn a shared capability that transfers broadly: training subsets of only about 2,000 items each collectively improve 22 of 26 external benchmarks by up to 27.3 percentage points, and WOVEN data can replace 30-50% of a task's own training data with comparable accuracy. Controlled comparisons further yield a training recipe for visual world modeling, validated prospectively on held-out benchmarks: select supervision by the reasoning operation it teaches rather than by the actions, scenes, or domains it shows, and prefer larger changes to the visual state for robustness. Our work establishes visual transition reasoning as a reusable foundation for systematic visual world-model training in MLLMs.",
+      "tags": [
+        "cs.CV",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
+      "url": "https://arxiv.org/abs/2610.12417v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "11de0c7ff823d823ac4ea1eb",
+      "context_id": "f713a3329a69e5ed951f4054",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-08T17:59:20Z",
+      "source_updated": "2026-10-08T17:59:20Z",
+      "summary": "Frontier multimodal foundation models (e.g., GPT-6 Astra) have recently shown strong potential for direct robotic control, yet their performance on fine manipulation remains limited. We argue that an important source of failure is not necessarily insufficient policy capability, but insufficient spatial observability, where task-critical spatial relationships may be poorly revealed by the existing physical camera setup. We introduce SpatialHarness, a test-time embodied harness that provides test-time spatial scaffolding for fine robotic manipulation without policy fine-tuning or changes to the physical sensing setup. SpatialHarness maintains an online simulated scene synchronized with real-world execution, identifies task-critical spatial relationships, and renders complementary virtual views that expose them to a frozen multimodal policy. To keep the simulated scene aligned during interaction, we develop interaction-aware scene synchronization that distinguishes static, held, and transition modes. We evaluate SpatialHarness on four real-robot manipulation tasks spanning precise geometric alignment, object-relative placement, and articulated-object interaction. Using the same frozen GPT-6 Astra policy, SpatialHarness substantially improves task success, including from 26.7% to 66.7% on plug insertion and from 0% to 100% on Tower of Hanoi. These results indicate that improving spatial observability at test time can unlock fine-manipulation capabilities already present in strong multimodal foundation models. Project website: https://emilia113.github.io/SpatialHarness/.",
+      "tags": [
+        "cs.RO"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "SpatialHarness: Test-Time Spatial Scaffolding for Fine Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2610.12457v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "49d20464eb697571815497e0",
+      "context_id": "f36e85b1cdcc0951b512e053",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T10:29:41Z",
+      "source_updated": "2026-10-06T10:29:41Z",
+      "summary": "Shared memory coordinates agents' actions, but correct records do not establish that those actions satisfy task requirements. Memory governance and failure diagnosis regulate or inspect recorded information; they do not by themselves establish whether it is sufficient to judge task duties. We define execution consistency through duties governing state use, information handoffs, and final-state agreement, with explicit evidence conditions for judging fulfillment. Our core claim is that identical retained records can correspond to compliant and violating executions under the same task rule. Controlled removal of evidence such as receipt, action dependence, or response validity leaves 82.4% of opposite-label pairs indistinguishable; restoration separates 97.9% of the merged pairs. Natural-log annotations identify the defined violations in actual executions. However, existing logs do not always explicitly represent the execution relationships needed for these judgments. To assess the definition's practical value, we use CAVERT, a framework for consistency diagnosis and recovery, to extract supported relationships from logs and apply these criteria. It consistently outperforms contract-prompted LLM and rule-based baselines in diagnosis across all 12 benchmark-executor settings. Under the same gate and executor limits, it also outperforms rule-guided recovery in all four evaluated environments. These findings identify execution evidence that agent-memory and execution interfaces should preserve for reliable judgment.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Beyond Corrected Memory: Execution Consistency in Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2610.08101v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "0920605c4110e8e754dcf5e6",
+      "context_id": "f306676aa43e284f965e1ff1",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T14:44:21Z",
+      "source_updated": "2026-10-07T14:44:21Z",
+      "summary": "Split conformal prediction uses prediction errors on held-out (calibration) data to determine how wide the prediction intervals should be. It guarantees distribution-free finite-sample coverage when these errors and the error at the target site are exchangeable. This assumption may fail under spatial dependence and nonrandom sampling geometry. Existing spatial methods use fitting residuals to remove the predictable part of spatial variation from calibration and target errors. However, the spatial variation that only the calibration residuals can predict remains in both the target and calibration errors, reducing the efficiency and stability of the interval. We address this by additionally conditioning on the calibration residuals sequentially, which scales to large networks through nearest-neighbour approximations. Under a correct working covariance and an elliptical residual law, the resulting interval has exact finite-sample coverage under any spatial design, and under further conditions it is asymptotically oracle efficient. We also bound coverage loss under covariance misspecification and develop a diagnostic that identifies regions at risk of undercoverage. In simulated data, our method produces narrower and more stable intervals than global and localized state-of-the-art alternatives. In a national PM2.5 application, it produces narrower intervals within the network and identifies regions at risk of coverage failure.",
+      "tags": [
+        "stat.ML",
+        "cs.LG",
+        "stat.AP",
+        "stat.ME"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Conformal Prediction for Spatially Dependent Data via Sequential Whitening",
+      "url": "https://arxiv.org/abs/2610.10168v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "3d0ee1699bdf6ebbb780ef67",
+      "context_id": "e54454fad900df8f9d905f51",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T04:50:29Z",
+      "source_updated": "2026-10-06T04:50:29Z",
+      "summary": "Tool-using agents make consequential changes to external state, yet correct outcomes do not guarantee that their actions were supported by evidence established beforehand. We study where this evidence-to-action chain breaks as agents move from deciding whether to act to executing single actions and dependent workflows. Across ten model-harness configurations, strong static action assessment can coexist with much weaker interactive execution. Failures often begin before execution: agents stop with incomplete investigation or act before required evidence is established. Once required evidence is obtained, single-action execution is usually reliable, while multi-action workflows additionally expose unresolved prerequisites and incomplete execution. For this analysis, we introduce SafeActBench, comprising 656 cases across six operational domains and five protocols that progress from static action judgment and investigated non-action to single- and multi-action workflows. A provenance-bound Evidence Ledger and deterministic trajectory evaluator track what information was established, when actions occurred, and whether downstream dependencies were satisfied. These results show that failures arise not only from missing information, but also from how agents use established evidence when deciding and executing actions.",
+      "tags": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "From Evidence to Action: How Tool-Using Agents Fail",
+      "url": "https://arxiv.org/abs/2610.07753v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "c6c4a844c1c53b81257065db",
+      "context_id": "e0ddc00c9b3562e402f6c409",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T05:18:10Z",
+      "source_updated": "2026-10-15T05:18:10Z",
+      "summary": "We propose a novel soft-aided hard-decision decoding scheme for product codes based on two-bit quantized reliability markers. In particular, one bit is used for a two-level tolerance miscorrection check to validate the bounded distance decoding (BDD) result, while the other identifies bits to be randomly flipped upon BDD failure and miscorrection. List decoding is incorporated to further facilitate the error performance. Density evolution is performed for the design of the quantization thresholds. Compared to iterative BDD, the proposed scheme requires only moderate increases in memory and computational overhead. Simulation results verify that our scheme outperforms several unquantized soft-aided decoders, while maintaining small memory costs and low BDD attempts.",
+      "tags": [
+        "cs.IT"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Iterative Bounded Distance Decoding With 2-Bit Reliability Marker For Product-Like Codes",
+      "url": "https://arxiv.org/abs/2610.21279v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "423d27f88f2e8217f8f0337a",
+      "context_id": "dc0e8bf03285b2520fc28e92",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-12T22:35:08Z",
+      "source_updated": "2026-10-12T22:35:08Z",
+      "summary": "Multi-agent systems promise a new axis for scaling inference: rather than having one agent think longer or sample more attempts, a task is split across many agents that work in parallel and coordinate. However, in practice, more agents can easily produce duplicate work, coordination failures, and higher costs. We therefore formulate team design as a compute allocation problem: starting from a solo agent, where should additional inference compute go to reach the reward-cost Pareto frontier? We build a minimal multi-agent harness from the ground up and trace this frontier by varying, one at a time, the workflow stage at which a lead delegates to its workers (planning, implementation, or verification), the models that form the team, and the number of workers. On ProgramBench, teams outperform solo agents but cost three to seven times as much. With the right compute allocation, however, a heterogeneous 17-agent team comes within 1.4 points of a strong homogeneous 5-agent team at 70% lower cost. This efficiency stems from three findings. First, planning is the most valuable use of workers: in a homogeneous team whose lead decides how many workers to spawn, a lead that delegates only planning to its workers, and then implements and verifies the code itself, matches the reward of a lead that delegates to workers throughout planning, implementation, and verification, at half the cost. Second, cheap models pay off as planners but not as implementers: a strong lead with cheap planners recovers 47.5% of the reward gain of an all-strong team for only 13.9% of its additional cost, whereas cheap implementers lower reward. Third, planners keep improving reward as the team grows, whereas implementers and verifiers plateau beyond four workers. Together, our results offer a guide to spending an agent budget where it counts, given the task, cost, and latency constraints a user has.",
+      "tags": [
+        "cs.MA",
+        "cs.CL"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Scaling Inference-Time Compute with Teams of Coding Agents",
+      "url": "https://arxiv.org/abs/2610.17471v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "c4f083a92951fa7707331a57",
+      "context_id": "d4c57dc66e36918b371cd280",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-08T03:45:28Z",
+      "source_updated": "2026-10-08T03:45:28Z",
+      "summary": "Persistent memory can improve personalization in LLM agents but can also induce sycophancy and cross-domain leakage. We distinguish two governance decisions: admission, which determines what recalled information enters the working context, and presentation, which determines how admitted information is expressed. We implement two inference-time designs without retraining: factor-compiled admission (FC), which assesses whole memory entries, and permission-semantic admission (PS), which decomposes entries into typed units; both translate adjudicated attributes into eligibility decisions via deterministic policies. We evaluate on a four-backbone development suite and an external benchmark with four tasks of 300 samples each. Relative to verbatim injection, FC and PS reduce pooled judge-assessed failure rates on the external benchmark by 6.7 and 8.8 percentage points (p = 2.7e-7 and 4.1e-12), and development-set cross-domain leakage falls by up to 29.5 percentage points. A query-conditioned gating baseline shows no significant change in objective-fact failure or pooled failure. Under matched admission budgets, PS outperforms random and relevance-based selection on external objective-fact judgment after Holm correction. Holding presentation fixed, tightening admission cuts cross-domain failure by a further 17.5 percentage points (p = 1.6e-4); in contrast, no comparison between two renderings of identical adjudicated outputs survives multiple-comparison correction. Both designs increase personalization failures, and PS misses the preregistered improvement and personalization-preservation criteria. These results support evaluating admission and presentation separately: selection quality provides task-specific safety gains, while preserving beneficial memory use remains unresolved.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "What to Admit and How to Present: Governing Persistent Memory in LLM Agents",
+      "url": "https://arxiv.org/abs/2610.11188v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "fbadaa359eec70c561c51316",
+      "context_id": "d1445fcdbc53d20f65749f93",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-06T04:21:11Z",
+      "source_updated": "2026-10-06T04:21:11Z",
+      "summary": "Modern voice assistants may be shared by multiple users and should be able to answer questions about earlier conversations such as \"When did I originally plan to leave?\" or adapt their behavior to individual users based on past interactions. This requires more than retrieving a topically similar passage: the assistant must identify the current speaker, recover the relevant past state, and distinguish it from later revisions. We present PERSIST, a persistent memory system for multi-session, multi-speaker spoken dialogue that explicitly models Who, What, and When. PERSIST structures cross-session histories into readable event records and retrieves them with a 3W joint scoring mechanism that combines semantic content, acoustic speaker identity, and temporal state. For real-time full-duplex interaction, PERSIST further reuses intermediate representations from the dialogue backbone, avoiding query-audio re-encoding and reducing retrieval latency from 578.42 ms to 7.03 ms. We also introduce SpokenTrace, a diagnostic benchmark that factorizes evaluation along memory tasks and speaker-query types, exposing failures in recall, speaker attribution, and temporal-state tracking. On SpokenTrace, PERSIST achieves 85.08% end-to-end task accuracy and improves all-support EM@3 from 49.01% with BGE-large to 82.10%.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "PERSIST: Who-What-When Memory Across Sessions for Full-Duplex Spoken Dialogue",
+      "url": "https://arxiv.org/abs/2610.07725v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "0c86198947179f4f9608958e",
+      "context_id": "c61f4ea858cb2be78ff572d8",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-07T15:33:38Z",
+      "source_updated": "2026-10-07T15:33:38Z",
+      "summary": "Quantum libraries are now critical infrastructure for quantum algorithm development, yet their correctness remains difficult to test. Existing testing techniques mainly rely on failure-based or comparison-based oracles, exposing bugs only when executions fail, violate runtime checks, or disagree with another implementation. Their applicability is limited when suitable execution-based oracles are unavailable, leaving some silent bugs undetected. Such missed bugs can produce incorrect results that propagate into experimental conclusions, simulation studies, and algorithmic designs. Here we present QuSema, an autonomous testing agent for finding silent bugs in quantum libraries. QuSema uses constraints from quantum semantics and documentation as a source-level semantic oracle to assess whether implementation logic can produce invalid outputs from valid inputs. It operates through an agentic loop that repeatedly inspects library API documentation and source code, reasons about the intended behavior of quantum operations, identifies potential semantic deviations, and validates them by generating executable tests through library APIs. Guided by quantum-domain reasoning, QuSema turns high-level behavioral mismatches into concrete, user-triggerable bug reports, enabling it to uncover non-crash defects. We implement QuSema for Qiskit and PennyLane. On a benchmark of 20 historical silent bugs, QuSema achieves higher mean bug relocation counts than Claude Code and Codex, with the DeepSeek configuration costing less than Claude Code. QuSema also discovers 40 previously unknown bugs confirmed by the developers, including 30 silent bugs.",
+      "tags": [
+        "cs.SE",
+        "cs.AI",
+        "quant-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "QuSema: Detecting Silent Bugs in Quantum Libraries via Quantum-knowledge-enhanced Agents",
+      "url": "https://arxiv.org/abs/2610.10258v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "83adc34392342487c7890b4b",
+      "context_id": "bf3fea6afe69b0ff508a5c5f",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "zenodo",
+      "source_published": "2026-10-08",
+      "source_updated": null,
+      "summary": "Poster presented at the 2026 Korean Society of Artificial Intelligence in Medicine (KoSAIM) Annual Conference. Generative text-to-image-to-3D pipelines produce plausible anatomical models and report their own outputs as successful. A silent failure is a specification violation that the generator does not identify in its self-report. This pilot study tested whether auditing each output against a formal specification of automatically measurable structural invariants detects such failures, and whether greater prompt specificity improves topological compliance. A fixed Nano Banana 2 and Meshy 6 multi-view pipeline generated 18 heart models, six at each of three prompt-specificity levels. A geometric probe measured connected components, open boundary loops, watertightness, and genus; the closed external-surface target required genus 0 and no open boundary loops. All 18 meshes were watertight, yet 16 had genus&gt;0. No statistically significant difference in genus was detected across levels (Kruskal&ndash;Wallis; protocol-specified primary analysis, N=15, H=0.89, p=0.64; sensitivity analysis, N=18, H=0.47, p=0.79). Generator responses (27 reviewed) asserted success on outputs that failed the audit. Specification-based structural-invariant auditing detected these violations automatically, supporting per-output topological verification. Expert scoring of vessel identity and spatial anatomy is pending. Version 2 (2026-10-08): wording revised in Methods (analysis cohorts and Gemini access tiers stated, 27 image-stage responses reviewed), in the genus figure legend (group means marked as descriptive) and in the Discussion; keyword spelling corrected. Data, analyses and results are unchanged from version 1 (10.5281/zenodo.23230933). Disclosure: The author is an inventor on a pending patent application related to this work.",
+      "tags": [
+        "Generative artificial intelligence",
+        "Three-dimensional heart model",
+        "Structural invariant",
+        "Topological verification",
+        "Silent failure"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Specification-Based Structural-Invariant Auditing Detects Silent Topological Failures in Generative 3D Heart Models: A Pilot Study",
+      "url": "https://zenodo.org/records/23246086"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "f403801848a1ec63b03d9fe2",
+      "context_id": "bc96ee6b9aaab4ed5c450406",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T15:29:42Z",
+      "source_updated": "2026-10-15T15:29:42Z",
+      "summary": "Classical simulation of quantum many-body dynamics is challenged by the rapid growth of operator complexity, particularly in higher dimensions where tensor-network methods become increasingly demanding. We develop state-adapted Pauli-weight propagation based on generalized $m$-body mean-field projections, which compress many-body observables into optimal low-body representations in a covariance geometry induced by the initial state. Combined with adaptive Krylov-like restricted Heisenberg dynamics, this provides an alternative to conventional Hilbert--Schmidt Pauli-weight truncation. We derive necessary and conditional sufficient bounds on low-body approximation accuracy using standard operator complexity measures and characterize possible dynamical failure mechanisms of the state-adapted method. Numerical benchmarks demonstrate substantial state-dependent accuracy gains, while identifying regimes of reduced accuracy or violations of Pauli spectral bounds. For a three-dimensional system of $80$ interacting spins, our method achieves strong body-order convergence, close agreement with independently converging tensor-network simulations, and substantially smaller sparse Pauli representations. These results establish state-adapted Pauli propagation as a promising approach to classical simulation of higher-dimensional coherent many-body dynamics.",
+      "tags": [
+        "quant-ph"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "Generalized $m$-body mean-field projections for classical simulation of $d$-dimensional Heisenberg-picture dynamics",
+      "url": "https://arxiv.org/abs/2610.22069v1"
+    },
+    {
+      "base_direction_id": "ocean_reader",
+      "candidate_id": "3400d057da1f3449f1283d8d",
+      "context_id": "b62a3027ac1f191b97060779",
+      "direction_id": "ocean_reader::COUNTEREVIDENCE",
+      "direction_title": "Ocean Reader / transceiver / invertibility [COUNTEREVIDENCE]",
+      "epistemic_status": "DISCOVERY_INBOX__UNVERIFIED__NO_PROOF_AUTHORITY",
+      "firewall": [
+        "ROUTED_NE_VERIFIED",
+        "INBOX_NE_EVIDENCE",
+        "PRIORITY_NE_TRUTH",
+        "MIRROR_LENS_NE_CONFIRMATION",
+        "SAME_SOURCE_CONTEXTS_NE_INDEPENDENT_SOURCES"
+      ],
+      "keyword_hits": [
+        "failure"
+      ],
+      "mirror_lens": "COUNTEREVIDENCE",
+      "schema": "janus.beetle.repo_memory_item.v2",
+      "score": 4.2917,
+      "source": "arxiv",
+      "source_published": "2026-10-15T03:27:34Z",
+      "source_updated": "2026-10-15T03:27:34Z",
+      "summary": "Agent memory architectures define how LLM agents store and reuse experience across tasks, but they are typically fixed after deployment, limiting their adaptability across task types. Recent self-evolving approaches instead adapt these memory architectures using execution feedback, typically represented as evaluation scores or compressed summaries. However, such coarse-grained feedback is insufficient for precise failure localization in current agent systems, where long-horizon task execution involves multiple interacting components. Without a precise failure location, existing approaches lack a clear code-level target for modification, leaving the update scope weakly constrained and often leading to large-scale rewrites of an otherwise capable memory architecture. We propose MemScope, a framework for evidence-grounded, localized evolution of an existing memory architecture. Its tool-using Patch Agent jointly inspects raw execution traces, runtime memory state, and current architecture code to identify repair targets and apply bounded, in-place edits under provider-identity and memory-compatibility constraints. On GAIA, the trace-and-memory inspection variant achieves 86.67% accuracy, compared with 70.00% for trace-only and 63.33% for summary-only feedback. Under xBench tasks, the evolved memory architecture improves over its original version from 49 to 55 correct answers with DeepSeek V3.2 and from 50 to 53 with Kimi K2.7 Code. On disjoint ALFWorld unseen tasks, success rises from 50.75% to 71.64%. Across archived architecture-snapshot transitions, the median code-change ratio is 4.4%. These results support fine-grained execution evidence as a basis for localized, in-place memory-architecture evolution.",
+      "tags": [
+        "cs.AI"
+      ],
+      "target_repository": "Hawkar-usls/Janus-Cosmos",
+      "title": "MemScope: Evolving Agent Memory Architectures through Localized Code Repair",
+      "url": "https://arxiv.org/abs/2610.21170v1"
+    }
+  ],
+  "schema": "janus.beetle.repo_memory_batch.v1",
+  "selection": "BALANCED_LENS_ROLLING_TOP",
+  "snapshot_cap": 48,
+  "target_repository": "Hawkar-usls/Janus-Cosmos"
+}
