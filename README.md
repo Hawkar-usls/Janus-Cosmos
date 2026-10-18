@@ -171,21 +171,25 @@ or:
 
 ## BHB — Black Hole Boom: relativistic collision research
 
-`Janus-Cosmos` now has a **separate general-relativistic kinematics lane** for
-near-horizon radial particle collisions in a Schwarzschild spacetime. It
-independently replays the frozen seven-point BHB R0 benchmark from JANUS Meta
-Registry and evaluates new provenance-aware collision case matrices.
+`Janus-Cosmos` has a **separate general-relativistic kinematics lane** for
+near-horizon radial Schwarzschild (R1) and equatorial rotating Kerr (R2)
+test-particle collisions. It replays the seven-point BHB R0 benchmark from
+JANUS Meta Registry and freezes provenance-aware collision case matrices.
 
 ```bash
 python3 workspace/janus_bhb.py --replay-upstream
 python3 workspace/janus_bhb.py --batch data/bhb/BHB-COSMOS-R1-CASES-2026-10-17.json
-python3 -m unittest discover -s tests -p 'test_bhb_cosmos.py' -v
+python3 workspace/janus_bhb_kerr.py --batch data/bhb/BHB-COSMOS-R2-CASES-2026-10-18.json
+python3 -m unittest discover -s tests -p 'test_bhb*.py' -v
 ```
 
 The scientific gates distinguish invariant local collision energy from a
 physically available outgoing trajectory, and both from escaping radiation.
-This is an analytic model, **not** measured black-hole emission, an explosion,
-or a Kerr/BSW simulation. See [BHB operating guide](docs/BHB_BLACK_HOLE_BOOM.md).
+R2 adds Kerr angular momentum, analytic radial-barrier tests for infinity
+infall, and hypothetical equatorial photon escape with a ZAMO redshift
+factor. **It does not compute photons actually made in a collision.** This is
+not measured black-hole emission or an explosion. See the
+[BHB operating guide](docs/BHB_BLACK_HOLE_BOOM.md).
 
 ## Repository layout
 
@@ -194,8 +198,10 @@ or a Kerr/BSW simulation. See [BHB operating guide](docs/BHB_BLACK_HOLE_BOOM.md)
 - `experiments/direct` — convenience symlink into the inherited canonical experiment directory.
 - `workspace/` — native OSIRIS v3+ development and spiral runtime.
 - `workspace/janus_bhb.py` — independent relativistic Schwarzschild collision engine.
+- `workspace/janus_bhb_kerr.py` — Kerr equatorial collision and null-geodesic transport engine.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
+- `tests/test_bhb_kerr.py` — Kerr radial-barrier and photon escape negative controls.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
