@@ -23,8 +23,11 @@ on:
       - 'tools/*mocss*'
       - 'domains/space/NIRCAM_F150W_COVARIANCE_SENSITIVITY_2026-10-18.json'
       - 'domains/space/NIRCAM_F150W_MATCHED_SKY_COVARIANCE_OBSERVED_2026-10-18.json'
+      - 'domains/space/MOCSS_THREE_LINE_CALIBRATION_GATE_2026-10-18.json'
       - 'tools/verify_nircam_f150w_covariance_sensitivity.py'
       - 'tools/verify_nircam_measured_covariance_receipt.py'
+      - 'tools/fit_mocss_calibrated_three_lines.py'
+      - 'tools/verify_mocss_three_line_calibration_gate.py'
       - '.github/workflows/jwst-mocss-evidence-training.yml'
   workflow_dispatch:
 
@@ -51,6 +54,7 @@ jobs:
           python -m json.tool domains/space/MOCSS_LOCAL_SKY_WCS_PROJECTION_2026-10-16.json > /dev/null
           python -m json.tool domains/space/NIRCAM_F150W_COVARIANCE_SENSITIVITY_2026-10-18.json > /dev/null
           python -m json.tool domains/space/NIRCAM_F150W_MATCHED_SKY_COVARIANCE_OBSERVED_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_THREE_LINE_CALIBRATION_GATE_2026-10-18.json > /dev/null
       - name: Python replay scripts compile
         run: |
           python -m py_compile tools/fetch_jwst_mocss_mast_subset.py
@@ -68,6 +72,8 @@ jobs:
           python -m py_compile tools/assess_mocss_local_sky_coherence.py
           python -m py_compile tools/verify_nircam_f150w_covariance_sensitivity.py
           python -m py_compile tools/verify_nircam_measured_covariance_receipt.py
+          python -m py_compile tools/fit_mocss_calibrated_three_lines.py
+          python -m py_compile tools/verify_mocss_three_line_calibration_gate.py
       - name: Published-source arithmetic and epistemic gates
         run: python tools/verify_jwst_mocss_hudf_single_line.py
       - name: Independent MAST receipt and spatial-origin gates
@@ -80,6 +86,12 @@ jobs:
         run: python tools/verify_nircam_f150w_covariance_sensitivity.py
       - name: Observed matched-sky covariance from archival pixels, provenance and scientific bounds
         run: python tools/verify_nircam_measured_covariance_receipt.py
+      - name: Three-line spectroscopic gate and arithmetic checks
+        run: python tools/verify_mocss_three_line_calibration_gate.py
+      - name: Spectral flux fitter unit test (synthetic data ONLY)
+        run: |
+          python -m pip install --disable-pip-version-check numpy
+          python tools/fit_mocss_calibrated_three_lines.py --selftest
       - name: Explicit scientific ceiling
         run: |
           echo 'MAST_ARCHIVE_METADATA=CHECKED'
@@ -90,6 +102,7 @@ jobs:
           echo 'FOUR_INTERLEAVED_OCTOBER_2023_NIRCAM_EPOCHS=DIAGNOSTIC_APERTURE_ONLY'
           echo 'MOCSS_SKY_WAVELENGTH_REEXTRACTION=UNVALIDATED_RATE_WCS_PROJECTION_ONLY'
           echo 'SCIENCE_GRADE_SPECTROPHOTOMETRY=NOT_EXECUTED'
+          echo 'THREE_WAVELENGTH_STAGE2_FITS=BLOCKED_PENDING_CALIBRATED_X1D'
           echo 'F150W_PSF_INJECTION=NOT_EXECUTED'
           echo 'F150W_MATCHED_SKY_APERTURE_COVARIANCE=MEASURED_95_CONTROLS'
           echo 'F150W_PURE_INSTRUMENT_COVARIANCE=NOT_ISOLATED'
