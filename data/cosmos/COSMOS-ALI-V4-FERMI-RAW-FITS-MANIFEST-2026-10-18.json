@@ -1,0 +1,64 @@
+{
+  "schema": "janus.cosmos.fermi-lat-fits-manifest.v4",
+  "experiment_id": "JANUS-COSMOS-ALI-V4-FERMI-LAT-RAW-JOINT-2026-10-18",
+  "retrieval_date_utc": "2026-10-18",
+  "archive": "NASA Fermi Science Support Center LATDataQuery.cgi / Extended Pass8 event and spacecraft products",
+  "official_query_help": "https://fermi.gsfc.nasa.gov/ssc/LATDataQuery_help.html",
+  "official_event_columns": "https://fermi.gsfc.nasa.gov/ssc/data/access/lat/lat_data_columns.html",
+  "pass8_class_doc": "https://fermi.gsfc.nasa.gov/ssc/data/analysis/documentation/Pass8_usage.html",
+  "processing_note": "FSSC query outputs are public generated subsets (EV00/SC00), not the original complete weekly archive; each downloaded byte stream is SHA256 pinned. Raw binaries are not committed; --raw-dir requires exact archived files. Query outputs may be ephemeral.",
+  "time_note": "MET at GBM trigger is provisionally reconstructed by adding the rounded fractional UTC seconds after the archive Gregorian query-window start to the FITS TSTART; not an authenticated GBM-to-LAT clock calibration. Time of emission remains unknown.",
+  "redshift_note": "Published approximate source redshifts used only to specify model projections; not independently remeasured here.",
+  "selection_note": "Fixed simple quality cuts for diagnostic extraction only. Not optimized for individual sources, not an aperture correction, not a background fit and not an IRF forward fold.",
+  "common_selection": {
+    "min_energy_MeV": 1000,
+    "max_energy_MeV": 300000,
+    "max_zenith_deg": 90,
+    "max_theta_deg": 65,
+    "max_roi_deg": 5,
+    "source_bit_mask": 128,
+    "spacecraft_data_qual": 1,
+    "spacecraft_lat_config": 1,
+    "spacecraft_in_saa": false,
+    "require_gti": true
+  },
+  "bursts": [
+    {
+      "grb": "090510", "class": "SHORT", "redshift": "0.903", "ra_deg": 333.55208, "dec_deg": -26.58311,
+      "gbm_trigger_utc": "2009-05-10T00:22:59.97Z", "trigger_met_estimated": "263607781.97",
+      "query_start_utc": "2009-05-10T00:21:00Z", "query_end_utc": "2009-05-10T00:30:00Z",
+      "query_radius_deg": 10, "query_energy_MeV": [100,300000],
+      "query_id": "L261018113415F357373F80",
+      "query_status_url": "https://fermi.gsfc.nasa.gov/cgi-bin/ssc/LAT/QueryResults.cgi?id=L261018113415F357373F80",
+      "selection": {"min_energy_MeV": 1000, "max_energy_MeV": 300000, "max_zenith_deg": 90, "max_theta_deg": 65, "max_roi_deg": 5, "source_bit_mask": 128, "spacecraft_data_qual": 1, "spacecraft_lat_config": 1, "spacecraft_in_saa": false, "require_gti": true},
+      "event": {"filename": "090510_EV00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113415F357373F80_EV00.fits", "sha256": "22ff6d71f66a6b8b88b1b37dbd058a7f652aead93cc112bc402bc3cae36db945", "bytes": 92160},
+      "spacecraft": {"filename": "090510_SC00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113415F357373F80_SC00.fits", "sha256": "dc0b461fc0e1350f940bce5d73e28bfb57d1040cd46bb8a49a539c75103f27ec", "bytes": 23040}
+    },
+    {
+      "grb": "090902B", "class": "LONG", "redshift": "1.822", "ra_deg": 264.94, "dec_deg": 27.32,
+      "gbm_trigger_utc": "2009-09-02T11:05:08.31Z", "trigger_met_estimated": "273582310.31",
+      "query_start_utc": "2009-09-02T11:00:00Z", "query_end_utc": "2009-09-02T11:25:00Z",
+      "query_radius_deg": 10, "query_energy_MeV": [100,300000],
+      "query_id": "L261018113434F357373F55",
+      "query_status_url": "https://fermi.gsfc.nasa.gov/cgi-bin/ssc/LAT/QueryResults.cgi?id=L261018113434F357373F55",
+      "selection": {"min_energy_MeV": 1000, "max_energy_MeV": 300000, "max_zenith_deg": 90, "max_theta_deg": 65, "max_roi_deg": 5, "source_bit_mask": 128, "spacecraft_data_qual": 1, "spacecraft_lat_config": 1, "spacecraft_in_saa": false, "require_gti": true},
+      "event": {"filename": "090902B_EV00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113434F357373F55_EV00.fits", "sha256": "edd071490e553900276a040a203658e410bd5a4c6925b14d34dbd1fba4af10f6", "bytes": 288000},
+      "spacecraft": {"filename": "090902B_SC00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113434F357373F55_SC00.fits", "sha256": "6c937e278ef15996ef8f6878960572706b7ba62b64e0c6b63d9bce0f68476b60", "bytes": 25920}
+    },
+    {
+      "grb": "130427A", "class": "LONG", "redshift": "0.34", "ra_deg": 173.148, "dec_deg": 27.709,
+      "gbm_trigger_utc": "2013-04-27T07:47:06.42Z", "trigger_met_estimated": "388741629.42",
+      "query_start_utc": "2013-04-27T07:40:00Z", "query_end_utc": "2013-04-27T09:00:00Z",
+      "query_radius_deg": 10, "query_energy_MeV": [100,300000],
+      "query_id": "L261018113434F357373F97",
+      "query_status_url": "https://fermi.gsfc.nasa.gov/cgi-bin/ssc/LAT/QueryResults.cgi?id=L261018113434F357373F97",
+      "selection": {"min_energy_MeV": 1000, "max_energy_MeV": 300000, "max_zenith_deg": 90, "max_theta_deg": 65, "max_roi_deg": 5, "source_bit_mask": 128, "spacecraft_data_qual": 1, "spacecraft_lat_config": 1, "spacecraft_in_saa": false, "require_gti": true},
+      "event": {"filename": "130427A_EV00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113434F357373F97_EV00.fits", "sha256": "f6961902842263c67c048b56afdf648c92cf72086ddc0aa42386d0576b80f060", "bytes": 1071360},
+      "spacecraft": {"filename": "130427A_SC00.fits", "url": "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/L261018113434F357373F97_SC00.fits", "sha256": "a7f72a9a239c29a80db9d750786198975b50da7b5f661c09d4b7882443bb6e7e", "bytes": 46080}
+    }
+  ],
+  "source_lag_constraint": "NONE",
+  "irf_asset": "NOT_ACQUIRED",
+  "gbm_time_resolved_spectrum": "NOT_ACQUIRED",
+  "claim_ceiling": "NO_OBSERVATIONAL_LIV_INFERENCE_WITHOUT_IRF_GBM_SOURCE_LAG_MODEL"
+}
