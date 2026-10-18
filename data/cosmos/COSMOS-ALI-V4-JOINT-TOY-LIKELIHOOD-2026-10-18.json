@@ -1,0 +1,76 @@
+{
+  "claim_ceiling": "A synthetic likelihood engine and identifiability stress test; no measured limit, discovery statistic, astrophysical p-value or black-hole-firewall inference.",
+  "cosmology": {
+    "H0_km_s_Mpc": "70",
+    "Omega_lambda": "0.7",
+    "Omega_m": "0.3"
+  },
+  "data_kind": "DETERMINISTIC_GAUSSIAN_SYNTHETIC_TIMING_ONLY_NOT_OBSERVED_FERMI_EVENTS",
+  "eta_definition": "(a/4e-27_m)^2_leading_order_V2_relative_to_1GeV",
+  "experiment_id": "JANUS-COSMOS-ALI-V4-FERMI-LAT-RAW-JOINT-2026-10-18",
+  "gates": {
+    "AMPS_FIREWALL": "OPEN_UNCONFIRMED",
+    "ASTROPHYSICAL_MULTIBURST_LRT": "BLOCKED_NO_FORWARD_FOLDED_INSTRUMENT_AND_SOURCE_MODEL",
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "LIV_OBSERVED": "NOT_ESTABLISHED",
+    "SOURCE_LAG_UNBOUNDED": "EXACT_NONIDENTIFIABILITY_DEMONSTRATED",
+    "SPACETIME_DISCRETENESS": "NOT_ESTABLISHED",
+    "SYNTHETIC_JOINT_PROFILE": "PASS_CONDITIONAL_ONLY",
+    "SYNTHETIC_NULL_CALIBRATION": "PASS_TOY_ONLY"
+  },
+  "gaussian_intrinsic_lag_prior": {
+    "fit": {
+      "eta_mle": 0.80431831,
+      "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+      "twice_delta_log_likelihood": 7.740654424
+    },
+    "interpretation": "Bayesian/ridge assumption drives an optional conditional result; prior is not empirically calibrated",
+    "source_beta_sigma": 0.5
+  },
+  "intrinsic_mimic_negative_control": {
+    "correct_source_free_fit": {
+      "eta_mle": null,
+      "identifiability": "EXACT_DEGENERACY_BETA_PER_BURST_PLUS_ETA",
+      "twice_delta_log_likelihood": 0.0
+    },
+    "incorrect_source_fixed_zero_fit": {
+      "eta_mle": 0.7988681,
+      "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+      "twice_delta_log_likelihood": 29922.860906034
+    },
+    "injected_propagation_eta": 0.0,
+    "injected_source_beta_per_burst": 0.8
+  },
+  "known_zero_intrinsic_lag": {
+    "fit": {
+      "eta_mle": 0.7988681,
+      "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+      "twice_delta_log_likelihood": 29922.860906034
+    },
+    "interpretation": "Only identifiable if source delays are independently known to vanish"
+  },
+  "lattice_spacing_reference_m": "4e-27",
+  "n_bursts": 3,
+  "n_synthetic_photons": 126,
+  "real_lat_likelihood_result": null,
+  "result_sha256": "db433328e0cacabc5c0c29f7aa980748641e17d09cfb559bad8729d5ec68e70d",
+  "schema": "janus.cosmos.fermi-multiburst-identifiability-synthetic.v4",
+  "seed": 20261018,
+  "synthetic_injected_eta": 0.8,
+  "synthetic_null_calibration": {
+    "conditional_injection_empirical_p_upper": 0.006211180124223602,
+    "not_an_observed_p_value": true,
+    "null_fraction_TS_ge_3p841": 0.03125,
+    "seed_base": 20261118,
+    "test": "TOY_ONLY_BOUNDARY_PROFILE_TS_ETA_GE_ZERO",
+    "trials": 160
+  },
+  "unbounded_intrinsic_lag": {
+    "fit": {
+      "eta_mle": null,
+      "identifiability": "EXACT_DEGENERACY_BETA_PER_BURST_PLUS_ETA",
+      "twice_delta_log_likelihood": 0.0
+    },
+    "interpretation": "Exact eta + beta_j degeneracy; no observed speed bound"
+  }
+}
