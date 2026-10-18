@@ -1,0 +1,133 @@
+{
+  "schema": "janus-cosmos-f150w-measured-matched-sky-receipt-v1",
+  "created_utc": "2026-10-18",
+  "status": "ARCHIVAL_MATCHED_SKY_COVARIANCE_OBSERVED_NOT_PURE_NOISE",
+  "provenance": {
+    "workflow_run_id": 39141250321,
+    "workflow_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39141250321",
+    "workflow_conclusion": "success",
+    "source_script": "tools/measure_nircam_matched_covariance.py",
+    "source_branch_commit": "76eeefb97d527c4a80b82b02ba528ca84131c45e",
+    "full_precision_artifact_id": 12141611861,
+    "full_precision_artifact_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39141250321/artifacts/12141611861",
+    "original_artifact_json_sha256": "0f34b428e5ff05d22b1e94789db25e319c482bef11e8723d0bc08e70745d7c98",
+    "original_pinned_receipt": "domains/space/NIRCAM_F150W_TIME_DOMAIN_RECEIPT_2026-10-16.json",
+    "input_sci_sha256": [
+      "6cb9a632f1304baee322e17a39e7d7de0001b1f4140a7e1d24c0261e71df89b3",
+      "688546072ff3580bda934cd3113b25734bc015bbcdc76a5286f1a45668db655d",
+      "66890a937ce87b0035c5ba8b4364ffe329ed606bdaee4885d032686b2e95f3fb",
+      "567130cdcec20e7ed80866c0a95d46fbb04901b03ef422bb49a9281ea9b95d91"
+    ]
+  },
+  "source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "epochs_utc": [
+    "2023-10-01",
+    "2023-10-02",
+    "2023-10-03",
+    "2023-10-09"
+  ],
+  "control_locations_candidate": 102,
+  "control_locations_joint_unclipped": 102,
+  "control_locations_joint_clipped": 95,
+  "aperture_arcsec": 0.12,
+  "background_annulus_arcsec": [
+    0.24,
+    0.38
+  ],
+  "grid_spacing_arcsec": 0.9,
+  "grid_radius_arcsec": 5.4,
+  "matched_aperture_covariance_njy_squared": [
+    [
+      1.2479873614726082,
+      0.2927142543624808,
+      0.30657177597517365,
+      0.05541838066172896
+    ],
+    [
+      0.2927142543624808,
+      1.1032122181636408,
+      0.19001079248203925,
+      0.05861898136259718
+    ],
+    [
+      0.30657177597517365,
+      0.19001079248203925,
+      0.9455767745681551,
+      0.161623469356064
+    ],
+    [
+      0.05541838066172896,
+      0.05861898136259718,
+      0.161623469356064,
+      1.4948143410604422
+    ]
+  ],
+  "matched_aperture_correlation": [
+    [
+      1,
+      0.24946478409601955,
+      0.28221408031888745,
+      0.04057468061567597
+    ],
+    [
+      0.24946478409601955,
+      1,
+      0.18603743350589408,
+      0.045647301413224727
+    ],
+    [
+      0.28221408031888745,
+      0.18603743350589408,
+      1,
+      0.13594473699605375
+    ],
+    [
+      0.04057468061567597,
+      0.045647301413224727,
+      0.13594473699605375,
+      1
+    ]
+  ],
+  "fixed_nominal_weights": [
+    0.23361207014205468,
+    0.2743351577538482,
+    0.3310594604251588,
+    0.16099331167893818
+  ],
+  "source_aperture_flux_njy": 0.27849716735074215,
+  "previous_diagonal_noise_sigma_njy": 0.5208894025194579,
+  "matched_sky_covariance_sigma_njy": 0.662980825637632,
+  "conditional_updated_sensitivity": [
+    {
+      "effective_aperture_fraction_ASSUMED": 0.5,
+      "expected_aperture_njy": 2.75,
+      "spectral_model_1sigma_njy": 0.33,
+      "conditional_standardized_residual_NOT_formal_sigma": 3.3372991353621377
+    },
+    {
+      "effective_aperture_fraction_ASSUMED": 0.7,
+      "expected_aperture_njy": 3.8499999999999996,
+      "spectral_model_1sigma_njy": 0.46199999999999997,
+      "conditional_standardized_residual_NOT_formal_sigma": 4.419758503322051
+    },
+    {
+      "effective_aperture_fraction_ASSUMED": 0.8,
+      "expected_aperture_njy": 4.4,
+      "spectral_model_1sigma_njy": 0.528,
+      "conditional_standardized_residual_NOT_formal_sigma": 4.862888741739379
+    }
+  ],
+  "epistemic_limits": [
+    "Same sky positions share faint astrophysical-source structure; this covariance is not isolated instrumental noise",
+    "Correlated sky apertures are used here as a stress test, not an exact sample covariance of source-position measurement errors",
+    "Source PSF and sky-annulus injection recovery are NOT measured",
+    "F150W detection physics from NIRSpec spectral flux remains conditional",
+    "Any standardized residual shown is diagnostic, not a globally calibrated p-value",
+    "NO_CALIBRATED_NIRSPEC_LINE_FLUX",
+    "NO_INTRINSIC_VARIABILITY_PROOF",
+    "NO_PHYSICAL_SOURCE_REDSHIFT_OR_TRAIL"
+  ]
+}
