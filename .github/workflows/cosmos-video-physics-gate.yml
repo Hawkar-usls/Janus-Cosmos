@@ -5,11 +5,14 @@ on:
     paths:
       - 'workspace/janus_cosmos_simulation_audit.py'
       - 'workspace/janus_cosmos_lattice_tof.py'
+      - 'workspace/janus_cosmos_fermi_observation_gate.py'
       - 'tests/test_cosmos_simulation_audit.py'
       - 'tests/test_cosmos_lattice_tof.py'
+      - 'tests/test_cosmos_fermi_observation_gate.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
       - 'docs/COSMOS_LATTICE_TOF_V2.md'
+      - 'docs/COSMOS_FERMI_OBSERVATION_GATE_V3.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   push:
@@ -17,11 +20,14 @@ on:
     paths:
       - 'workspace/janus_cosmos_simulation_audit.py'
       - 'workspace/janus_cosmos_lattice_tof.py'
+      - 'workspace/janus_cosmos_fermi_observation_gate.py'
       - 'tests/test_cosmos_simulation_audit.py'
       - 'tests/test_cosmos_lattice_tof.py'
+      - 'tests/test_cosmos_fermi_observation_gate.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
       - 'docs/COSMOS_LATTICE_TOF_V2.md'
+      - 'docs/COSMOS_FERMI_OBSERVATION_GATE_V3.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   workflow_dispatch:
@@ -43,7 +49,7 @@ jobs:
       - name: Compile and run whole JANUS BHB plus video-physics test family
         run: |
           set -euo pipefail
-          python -m py_compile workspace/janus_cosmos_simulation_audit.py workspace/janus_cosmos_lattice_tof.py tests/test_cosmos_simulation_audit.py tests/test_cosmos_lattice_tof.py
+          python -m py_compile workspace/janus_cosmos_simulation_audit.py workspace/janus_cosmos_lattice_tof.py workspace/janus_cosmos_fermi_observation_gate.py tests/test_cosmos_simulation_audit.py tests/test_cosmos_lattice_tof.py tests/test_cosmos_fermi_observation_gate.py
           python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Byte-exact replay against frozen ALI video-topic audit receipt
         run: |
@@ -71,6 +77,13 @@ jobs:
             --truth data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-SEALED-TRUTH-2026-10-18.json \
             > artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL.json
           cmp artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL.json data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL-2026-10-18.json
+      - name: V3 recheck primary Fermi catalog transcription and byte-exact observation gate
+        run: |
+          set -euo pipefail
+          python workspace/janus_cosmos_fermi_observation_gate.py \
+            --batch data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json \
+            > artifacts/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT.json
+          cmp artifacts/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT.json data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT-2026-10-18.json
       - uses: actions/upload-artifact@v4
         with:
           name: janus-cosmos-ali-simulation-hypothesis-audit

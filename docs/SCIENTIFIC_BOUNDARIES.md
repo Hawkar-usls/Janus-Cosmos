@@ -55,3 +55,13 @@
 - `ADOPTED_LCDM_AND_REDSHIFT_RULE != MICROSCOPIC_EXPANDING_LATTICE_DERIVATION`; the forward delay is only leading-order and excludes `q>0.01`.
 - `NO_LIV_DETECTION != FIREWALL_DETECTION != SIMULATED_UNIVERSE`; BHB and AMPS gates and the scientific ceiling inherited from V1 stay unchanged.
 - Process-blind scoring does not read truth injection labels; the committed truth file makes this a **reproducibility demonstration**, not a secure blinded challenge or a real-data likelihood analysis.
+
+## Cosmos V3 real Fermi-LAT catalog observation gate
+
+- `REAL_PUBLISHED_FERMI_TABLE_7_PHOTONS != REAL_LIV_FIT`: the rounded catalog energy and trigger-relative arrival-time data are genuine measured-source summaries, but are **not** a calibrated instrument/astrophysical likelihood.
+- `GBM_TRIGGER_EPOCH != KNOWN_LOW_ENERGY_PHOTON_EMISSION_TIME`; reporting a high-energy photon arriving 0.83 s after trigger does not determine its propagation delay relative to a coincident emission event.
+- `HYPOTHETICAL_1GEV_REFERENCE != MATCHED_OBSERVED_PHOTON`; V3 records conditional propagation overlays without inventing a lower-energy detection.
+- `GRB_PHOTONS_IN_SAME_BURST != SIMULTANEOUSLY_EMITTED`; published within-burst nonmonotonic photon energy/time ordering cannot be converted into a measured speed dispersion or spacing estimate without a source model.
+- `PUBLISHED_GT_90_PERCENT_ASSOCIATION_SELECTION != PER_EVENT_P_1`; V3 does not invent the missing individual probability, PSF, background, event classification or instrument response.
+- `11_KNOWN_REDSHIFT_BURSTS != UNBIASED_BURST_POPULATION`; 162 within-source pairs share only 38 photons, so pair counts are not independent statistical trials.
+- Frozen V1 and V2 SHA pins and all BHB/AMPS non-detection gates stay in force; missing raw FITS and emission-time constraints make `LATTICE_SPACING_CONSTRAINT=NOT_DERIVED` mandatory.
