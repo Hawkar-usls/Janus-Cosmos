@@ -22,7 +22,7 @@ import numpy as np
 from astropy.io import fits
 from astropy.wcs import WCS
 
-from replay_mast import RA, DEC, aperture_photometry
+from replay_jwst_mocss_mast_subset import RA, DEC, aperture_photometry
 
 MAST = 'https://mast.stsci.edu/api/v0.1/Download/file?uri='
 INPUTS = Path('/tmp/janus_mast_exact_cone_20261016.json')
