@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.lattice-tof-protocol.v2",
+  "experiment_id": "JANUS-COSMOS-ALI-V2-LATTICE-TOF-2026-10-18",
+  "source_video_id": "QBpuorUxuSM",
+  "all_observations": "SYNTHETIC_ONLY",
+  "scientific_ceiling": "NO_OBSERVED_LIV_NO_SIMULATION_DETECTION",
+  "cosmology": {
+    "assumption": "ILLUSTRATIVE_FLAT_LAMBDA_CDM_SMALL_DISPERSION",
+    "H0_km_s_Mpc": "70",
+    "Omega_m": "0.3",
+    "Omega_lambda": "0.7"
+  },
+  "quadrature": {"method": "SIMPSON_FIXED_DECIMAL_384"},
+  "sources": {
+    "nist": {"url": "https://www.nist.gov/si-redefinition/definitions-si-base-units", "relevance": "SI definitions of c, h, elementary charge"},
+    "magic": {"url": "https://arxiv.org/abs/2001.09728", "relevance": "Original GRB 190114C LIV time-of-flight study, cosmological integral and nuisance emission delays"},
+    "beane": {"url": "https://arxiv.org/abs/1210.1847", "relevance": "A specific discretized universe has model-dependent observational tests; generic simulation does not follow"},
+    "prior_v1": {"url": "https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/data/cosmos/COSMOS-ALI-SIMULATION-AUDIT-RESULT-2026-10-18.json", "sha256": "3b78e75eb93933e25755f501b45db1d78c4385356e0778e251055fd4353cba49"}
+  },
+  "preregistration": {
+    "hypotheses": ["LORENTZ_INVARIANT", "LATTICE_DISPERSION"],
+    "lattice_relation": "omega(k)=2*c*sin(k*a/2)/a; E=hbar*omega; v_group/c=sqrt(1-q^2); q=a*Eobs*(1+z)/(2*hbar*c)",
+    "lattice_parameter_status": "EXPLICIT_TOY_BENCHMARK_NOT_PHYSICAL_MEASUREMENT",
+    "decision_threshold": "abs(chi2_LI-chi2_lattice)>=25; heuristic only, not calibrated significance",
+    "control_policy": "A single photon-energy pair is nonidentifiable under an unrestricted intrinsic source-lag nuisance",
+    "inference_limit": "No real photon timestamps or energy measurements; this is a reproducibility and identifiability benchmark"
+  },
+  "cases": [
+    {"case_id":"V2-LI-KNOWN","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-LATTICE-KNOWN","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-LATTICE-FREE","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"FREE_UNBOUNDED"},
+    {"case_id":"V2-LI-MIMIC-FALSEPOSITIVE","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-LI-MIMIC-FREE","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"FREE_UNBOUNDED"},
+    {"case_id":"V2-LI-BOUNDED","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"BOUNDED_SYMMETRIC","max_abs_intrinsic_source_lag_s":"3"},
+    {"case_id":"V2-LATTICE-BOUNDED","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"BOUNDED_SYMMETRIC","max_abs_intrinsic_source_lag_s":"3"},
+    {"case_id":"V2-PLANCK-NEGLIGIBLE","redshift":"0.5","lattice_spacing_m":"1.616255e-35","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-EQUAL-ENERGY","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e12","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-ZERO-BASELINE","redshift":"0","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"0.5","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-LARGE-UNCERTAINTY","redshift":"0.5","lattice_spacing_m":"4e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"100","source_lag_policy":"KNOWN_ZERO"},
+    {"case_id":"V2-SUBTHRESHOLD","redshift":"0.5","lattice_spacing_m":"1e-27","energy_low_eV":"1e9","energy_high_eV":"1e12","timing_sigma_s":"1","source_lag_policy":"KNOWN_ZERO"}
+  ]
+}

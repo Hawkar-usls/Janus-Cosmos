@@ -1,0 +1,83 @@
+{
+  "case_count": 12,
+  "observations": [
+    {
+      "case_id": "V2-LI-KNOWN",
+      "observed_high_minus_low_arrival_s": "0.1",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LATTICE-KNOWN",
+      "observed_high_minus_low_arrival_s": "15.42844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LATTICE-FREE",
+      "observed_high_minus_low_arrival_s": "15.62844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LI-MIMIC-FALSEPOSITIVE",
+      "observed_high_minus_low_arrival_s": "15.52844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LI-MIMIC-FREE",
+      "observed_high_minus_low_arrival_s": "15.52844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LI-BOUNDED",
+      "observed_high_minus_low_arrival_s": "3.1",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LATTICE-BOUNDED",
+      "observed_high_minus_low_arrival_s": "16.92844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-PLANCK-NEGLIGIBLE",
+      "observed_high_minus_low_arrival_s": "0.1",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-EQUAL-ENERGY",
+      "observed_high_minus_low_arrival_s": "0.1",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-ZERO-BASELINE",
+      "observed_high_minus_low_arrival_s": "0.1",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "0.5"
+    },
+    {
+      "case_id": "V2-LARGE-UNCERTAINTY",
+      "observed_high_minus_low_arrival_s": "16.52844766987926469304408784891508063862563949052300128730849503964498",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "100"
+    },
+    {
+      "case_id": "V2-SUBTHRESHOLD",
+      "observed_high_minus_low_arrival_s": "1.070527979367454005037881263933692526375466580491912800323761983527156",
+      "origin": "SYNTHETIC_ONLY",
+      "timing_sigma_s": "1"
+    }
+  ],
+  "origin": "SYNTHETIC_ONLY",
+  "preparation_gate": "SEALED_LABELS_NOT_COPIED_TO_OBSERVATIONS",
+  "protocol_file_sha256": "4d8afa4d09d2aff80374dfde850fcc4b046efeb64dc43acf7cc6d169687d8024",
+  "result_sha256": "79433285d2ccbc2292c6ed204e01e88111a136bf16beae59b14d17926f26d40e",
+  "schema": "janus.cosmos.lattice-tof-synthetic-observations.v2",
+  "sealed_truth_file_sha256": "e92e3134c3445813fcb2b55819d2681a1b7dd8aa0df9b3e2a0b25f7520973f1f"
+}

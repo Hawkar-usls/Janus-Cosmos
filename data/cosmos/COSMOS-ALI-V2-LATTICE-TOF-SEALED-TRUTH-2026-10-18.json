@@ -1,0 +1,19 @@
+{
+  "schema": "janus.cosmos.lattice-tof-synthetic-truth.v2",
+  "origin": "DETERMINISTIC_SYNTHETIC_INJECTIONS",
+  "disclosure": "Committed holdout is process-blind to scorer, not a cryptographically secured or human-blind challenge; never scientific data",
+  "injections": [
+    {"case_id":"V2-LI-KNOWN","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"0","noise_s":"0.1"},
+    {"case_id":"V2-LATTICE-KNOWN","injected_model":"LATTICE_DISPERSION","intrinsic_source_lag_s":"0","noise_s":"-0.1"},
+    {"case_id":"V2-LATTICE-FREE","injected_model":"LATTICE_DISPERSION","intrinsic_source_lag_s":"0","noise_s":"0.1"},
+    {"case_id":"V2-LI-MIMIC-FALSEPOSITIVE","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"MIMIC_LATTICE","noise_s":"0"},
+    {"case_id":"V2-LI-MIMIC-FREE","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"MIMIC_LATTICE","noise_s":"0"},
+    {"case_id":"V2-LI-BOUNDED","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"2","noise_s":"0.1"},
+    {"case_id":"V2-LATTICE-BOUNDED","injected_model":"LATTICE_DISPERSION","intrinsic_source_lag_s":"1","noise_s":"-0.1"},
+    {"case_id":"V2-PLANCK-NEGLIGIBLE","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"0","noise_s":"0.1"},
+    {"case_id":"V2-EQUAL-ENERGY","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"0","noise_s":"0.1"},
+    {"case_id":"V2-ZERO-BASELINE","injected_model":"LORENTZ_INVARIANT","intrinsic_source_lag_s":"0","noise_s":"0.1"},
+    {"case_id":"V2-LARGE-UNCERTAINTY","injected_model":"LATTICE_DISPERSION","intrinsic_source_lag_s":"0","noise_s":"1"},
+    {"case_id":"V2-SUBTHRESHOLD","injected_model":"LATTICE_DISPERSION","intrinsic_source_lag_s":"0","noise_s":"0.1"}
+  ]
+}

@@ -228,6 +228,27 @@ cases, retains 18 claim provenance records and refuses to convert an AMPS
 firewall, a discretization toy or philosophical counting into astrophysical
 evidence or BHB radiation. The exact output is frozen under `data/cosmos/`.
 
+## Cosmos V2: falsifiable photon-lattice time-of-flight benchmark
+
+The [V2 photon TOF experiment](docs/COSMOS_LATTICE_TOF_V2.md) defines a
+specific nearest-neighbor lattice dispersion relation and compares its
+energy-dependent photon arrival delays against Lorentz-invariant propagation
+in an illustrative expanding universe. Twelve **synthetic** holdout cases
+cover source-intrinsic lag degeneracy, false-positive controls, a near-Planck
+spacing limit, timing uncertainties and zero-baseline comparisons.
+
+```bash
+python3 workspace/janus_cosmos_lattice_tof.py --score \
+  --protocol data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-PROTOCOL-2026-10-18.json \
+  --observations data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS-2026-10-18.json
+python3 -m unittest discover -s tests -p 'test_cosmos_lattice_tof.py' -v
+```
+
+The blind score alone cannot reveal truth injection labels; separate `--prepare`
+and `--reveal` phases reproduce and audit them. **No real GRB photons, observed
+Lorentz violation, spacetime lattice, simulation evidence, black-hole quantum
+firewall, or BHB explosion is claimed.**
+
 ## Repository layout
 
 - `vendor/Janus-Fundamentum/` — exact inherited project/source snapshot at the S𓂸ḥ/2 head.
@@ -239,6 +260,7 @@ evidence or BHB radiation. The exact output is frozen under `data/cosmos/`.
 - `workspace/janus_bhb_firewall.py` — conditional quantum-firewall hypothesis audit over pinned R2.
 - `workspace/janus_bhb_collision_radiation.py` — R3A QED pair-annihilation products, conserved energy and radial escape.
 - `workspace/janus_cosmos_simulation_audit.py` — video-inspired six-model physics / interpretation gate.
+- `workspace/janus_cosmos_lattice_tof.py` — V2 fixed photon-dispersion model, process-blind synthetic scoring and label reveal.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
 - `data/cosmos/` — versioned ALI topic matrix and deterministic physics-audit result.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
@@ -246,6 +268,7 @@ evidence or BHB radiation. The exact output is frozen under `data/cosmos/`.
 - `tests/test_bhb_firewall.py` — AMPS premises, unchanged-source and non-promotion controls.
 - `tests/test_bhb_collision_radiation.py` — R3A local/infinity conservation, escape and support negative controls.
 - `tests/test_cosmos_simulation_audit.py` — Lorentz, Schwarzschild, entropy, topology, lattice and provenance gates.
+- `tests/test_cosmos_lattice_tof.py` — 12-case TOF replay, source-lag degeneracy and false-positive controls.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
