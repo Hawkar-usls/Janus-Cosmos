@@ -43,3 +43,15 @@
 - `DELAYED_CHOICE != OBSERVATIONAL_RETROCAUSAL_SIGNAL`; interpretations of measurements are not demonstration of backwards signaling or consciousness-based rendering.
 - `AMPS_FIREWALL != CONFIRMED_HAWKING_RADIATION_WALL`, and `VIDEO_IDEAS != OBSERVED_BHB_BOOM`.
 - The pinned R3A receipt is checked before the video-inspired math can import prior horizon results. No previous BHB/FW1 gate or OSIRIS authority is promoted.
+
+## Cosmos V2 testable photon-lattice time-of-flight firewall
+
+- `SPECIFIC_1D_NEAREST_NEIGHBOR_LATTICE_TOY != GENERIC_DISCRETE_SPACETIME`; the selected isotropized radial dispersion is a declared ansatz, not a completed covariant microscopic theory.
+- `SYNTHETIC_PHOTON_ARRIVAL_LAG != OBSERVED_LIV`; all V2 arrivals, redshifts, energies and timing errors are illustration-only inputs, never retrieved telescope observations.
+- `LATTICE_SPACING_BENCHMARK != MEASURED_SPACETIME_PIXEL`; arbitrary `a=4e-27 m` is a diagnostic injection parameter, not an estimate of Nature's lattice spacing.
+- `EMISSION_LAG != PROPAGATION_LAG`; with an unrestricted intrinsic source lag, a single two-energy pair does **not** identify either propagation model.
+- `UNKNOWN_SOURCE_LAG_CAN_MIMIC_LATTICE`: a deliberately mis-specified zero-source-lag control produces a known false lattice preference under an H0 injection; this failure remains visible in the reveal JSON.
+- `ABS_DELTA_CHI2_25 != FIVE_SIGMA`; the simple fixed threshold is an engineering heuristic with no calibrated significance, search trials or systematic errors.
+- `ADOPTED_LCDM_AND_REDSHIFT_RULE != MICROSCOPIC_EXPANDING_LATTICE_DERIVATION`; the forward delay is only leading-order and excludes `q>0.01`.
+- `NO_LIV_DETECTION != FIREWALL_DETECTION != SIMULATED_UNIVERSE`; BHB and AMPS gates and the scientific ceiling inherited from V1 stay unchanged.
+- Process-blind scoring does not read truth injection labels; the committed truth file makes this a **reproducibility demonstration**, not a secure blinded challenge or a real-data likelihood analysis.
