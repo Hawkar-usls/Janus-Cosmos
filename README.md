@@ -208,6 +208,26 @@ support acceleration diverges in the horizon limit. Neither a natural
 positron shell, an AMPS firewall, an event rate nor an observed gamma-ray
 flash is inferred from this synthetic reaction.
 
+## Video-inspired Cosmos V1: ALI simulation hypothesis audit
+
+The [ALI video audit guide](docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md)
+maps 18 time-coded topics from a **third-party summary** of
+`Что-то странное происходит с миром | ALI` into six auditable models:
+Lorentz kinematics, Schwarzschild horizon kinematics, area-law entropy,
+compact flat spatial topology, conditional lattice-wave dispersion and
+conditional observer counting. Direct video transcript access was blocked;
+the summaries are **not verified quotes**. None proves a simulated universe.
+
+```bash
+python3 workspace/janus_cosmos_simulation_audit.py --batch data/cosmos/COSMOS-ALI-SIMULATION-CLAIMS-2026-10-18.json
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+This additive lane locks the existing BHB R3A SHA-256 receipt, checks 16
+cases, retains 18 claim provenance records and refuses to convert an AMPS
+firewall, a discretization toy or philosophical counting into astrophysical
+evidence or BHB radiation. The exact output is frozen under `data/cosmos/`.
+
 ## Repository layout
 
 - `vendor/Janus-Fundamentum/` — exact inherited project/source snapshot at the S𓂸ḥ/2 head.
@@ -218,11 +238,14 @@ flash is inferred from this synthetic reaction.
 - `workspace/janus_bhb_kerr.py` — Kerr equatorial collision and null-geodesic transport engine.
 - `workspace/janus_bhb_firewall.py` — conditional quantum-firewall hypothesis audit over pinned R2.
 - `workspace/janus_bhb_collision_radiation.py` — R3A QED pair-annihilation products, conserved energy and radial escape.
+- `workspace/janus_cosmos_simulation_audit.py` — video-inspired six-model physics / interpretation gate.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
+- `data/cosmos/` — versioned ALI topic matrix and deterministic physics-audit result.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
 - `tests/test_bhb_kerr.py` — Kerr radial-barrier and photon escape negative controls.
 - `tests/test_bhb_firewall.py` — AMPS premises, unchanged-source and non-promotion controls.
 - `tests/test_bhb_collision_radiation.py` — R3A local/infinity conservation, escape and support negative controls.
+- `tests/test_cosmos_simulation_audit.py` — Lorentz, Schwarzschild, entropy, topology, lattice and provenance gates.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.

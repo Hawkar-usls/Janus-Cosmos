@@ -1,0 +1,340 @@
+{
+  "assessment_counts": {
+    "CONDITIONAL_PHILOSOPHICAL_ARGUMENT": 2,
+    "ESTABLISHED_THEORY_NOT_SIMULATION_EVIDENCE": 3,
+    "INTERPRETATION_NOT_EMPIRICAL_DETECTION": 4,
+    "MATHEMATICAL_COUNTEREXAMPLE_NOT_COSMOLOGY_OBSERVATION": 1,
+    "MISLEADING_IF_PRESENTED_AS_PROOF": 3,
+    "MODEL_SPECIFIC_TEST_POSSIBLE_NOT_DETECTION": 1,
+    "OPEN_THEORETICAL_PROPOSAL": 3,
+    "UNESTABLISHED_EMPIRICAL_CLAIM": 1
+  },
+  "case_count": 16,
+  "cases": [
+    {
+      "case_id": "ALI-SR-REST",
+      "case_sha256": "71c75301f02babdb2a01fd9b87d934e279b5465ffa9409d2e4d30551047b4361",
+      "model": "lorentz",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "beta": "0",
+        "contracted_length_over_rest_length": "1",
+        "exact_si_light_speed_m_per_s": 299792458,
+        "gamma": "1",
+        "interpretation": "SPECIAL_RELATIVITY_NOT_CPU_FRAME_RATE",
+        "proper_time_over_coordinate_time": "1",
+        "signal_in_rest_frame_over_c": "1",
+        "transformed_signal_speed_over_c": "1"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-SR-HALF-C",
+      "case_sha256": "5244eacdfdb1e856d91eaea2d3b33cb5d19af55627d21f4a01842292648b631e",
+      "model": "lorentz",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "beta": "0.5",
+        "contracted_length_over_rest_length": "0.8660254037844386467637231707529361834714026269051903140279034897259665",
+        "exact_si_light_speed_m_per_s": 299792458,
+        "gamma": "1.154700538379251529018297561003914911295203502540253752037204652967955",
+        "interpretation": "SPECIAL_RELATIVITY_NOT_CPU_FRAME_RATE",
+        "proper_time_over_coordinate_time": "0.8660254037844386467637231707529361834714026269051903140279034897259665",
+        "signal_in_rest_frame_over_c": "1",
+        "transformed_signal_speed_over_c": "1"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-SR-NEAR-C",
+      "case_sha256": "0725e3ba402824df2533e60cfac35b13548801d88386dd2c3e65c3fec9bc57d2",
+      "model": "lorentz",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "beta": "0.999999",
+        "contracted_length_over_rest_length": "0.001414213208819660261343053817658531129856424735300740909576583448688846",
+        "exact_si_light_speed_m_per_s": 299792458,
+        "gamma": "707.1069579633091123260830718708015003289625321316365206065520276204371",
+        "interpretation": "SPECIAL_RELATIVITY_NOT_CPU_FRAME_RATE",
+        "proper_time_over_coordinate_time": "0.001414213208819660261343053817658531129856424735300740909576583448688846",
+        "signal_in_rest_frame_over_c": "1",
+        "transformed_signal_speed_over_c": "1"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-HORIZON-1P01",
+      "case_sha256": "84f5c06a8d942557cf80d10c40ae8bb75e4288d6cc6f30af4299d36e5693adba",
+      "model": "schwarzschild",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "firewall_existence": "OPEN_UNCONFIRMED",
+        "horizon_crossing_kinematics": "STATIC_TETRAD_DEFINED_ONLY_OUTSIDE_HORIZON",
+        "infall_speed_relative_to_static_observer_over_c": "0.9950371902099891356652737537385718996975270762402353753042404254780684",
+        "one_minus_infall_speed_over_c": "0.004962809790010864334726246261428100302472923759764624695759574521931562",
+        "outgoing_radial_photon_E_infinity_over_E_local": "0.09950371902099891356652737537385718996975270762402353753042404254780684",
+        "outgoing_radial_photon_local_speed_over_c": "1",
+        "r_over_rs": "1.01",
+        "relative_lorentz_gamma": "10.04987562112089027021926491275957618694502347002637729057282829732849",
+        "static_lapse": "0.09950371902099891356652737537385718996975270762402353753042404254780684"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-HORIZON-1P000001",
+      "case_sha256": "458c5035e37307fea7fe92e3b63527334e53791e080d038f7f3d373abb134117",
+      "model": "schwarzschild",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "firewall_existence": "OPEN_UNCONFIRMED",
+        "horizon_crossing_kinematics": "STATIC_TETRAD_DEFINED_ONLY_OUTSIDE_HORIZON",
+        "infall_speed_relative_to_static_observer_over_c": "0.9999995000003749996875002734372539064755857280275401304297639701421963",
+        "one_minus_infall_speed_over_c": "4.999996250003124997265627460935244142719724598695702360298578036859809E-7",
+        "outgoing_radial_photon_E_infinity_over_E_local": "0.0009999995000003749996875002734372539064755857280275401304297639701421963",
+        "outgoing_radial_photon_local_speed_over_c": "1",
+        "r_over_rs": "1.000001",
+        "relative_lorentz_gamma": "1000.000499999875000062499960937527343729492203613268157969894399906166",
+        "static_lapse": "0.0009999995000003749996875002734372539064755857280275401304297639701421963"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-HORIZON-1P24",
+      "case_sha256": "75c1596ceb576a98ebb909138bf284f458b142ddaab0d62be91bf102aec63b22",
+      "model": "schwarzschild",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "firewall_existence": "OPEN_UNCONFIRMED",
+        "horizon_crossing_kinematics": "STATIC_TETRAD_DEFINED_ONLY_OUTSIDE_HORIZON",
+        "infall_speed_relative_to_static_observer_over_c": "0.9999999999999999999999995000000000000000000000003750000000000000000000",
+        "one_minus_infall_speed_over_c": "4.999999999999999999999996250000000000000000000003125000000000000000000E-25",
+        "outgoing_radial_photon_E_infinity_over_E_local": "9.999999999999999999999995000000000000000000000003750000000000000000000E-13",
+        "outgoing_radial_photon_local_speed_over_c": "1",
+        "r_over_rs": "1.000000000000000000000001",
+        "relative_lorentz_gamma": "1000000000000.000000000000499999999999999999999999875000000000000000000",
+        "static_lapse": "9.999999999999999999999995000000000000000000000003750000000000000000000E-13"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-ENTROPY-R10",
+      "case_sha256": "9a14248edec9616059110be3f5f65e28fb323d72c9b185e1f166f6bf067aec5a",
+      "model": "bh_area_entropy",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "area_law": "S/kB=A/(4*l_P^2)",
+        "area_over_planck_length_squared": "1256.637061435917295385057353311801153678867759750042328389977836923127",
+        "bekenstein_hawking_entropy_over_kB": "314.1592653589793238462643383279502884197169399375105820974944592307818",
+        "dimensionless_entropy_in_bits": "453.2360141827193809627682945716666810171861467723795584186016547940603",
+        "interpretation": "AREA_SCALING_NOT_COMPUTER_SCREEN_EVIDENCE",
+        "radius_over_planck_length": "10"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-ENTROPY-R20",
+      "case_sha256": "c8aecc383cc7d7bd89ffd172f81985b51b2bb650d3a1a69f4a78a9a596e04713",
+      "model": "bh_area_entropy",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "area_law": "S/kB=A/(4*l_P^2)",
+        "area_over_planck_length_squared": "5026.548245743669181540229413247204614715471039000169313559911347692508",
+        "bekenstein_hawking_entropy_over_kB": "1256.637061435917295385057353311801153678867759750042328389977836923127",
+        "dimensionless_entropy_in_bits": "1812.944056730877523851073178286666724068744587089518233674406619176241",
+        "interpretation": "AREA_SCALING_NOT_COMPUTER_SCREEN_EVIDENCE",
+        "radius_over_planck_length": "20"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-TORUS-CUBE",
+      "case_sha256": "83785fe79c1a824c90cd288934f328dcb2ebc936397a10445ae366e12c74bc9b",
+      "model": "flat_torus",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "compact": true,
+        "has_boundary": false,
+        "identified_side_lengths": [
+          "1",
+          "1",
+          "1"
+        ],
+        "interpretation": "FLAT_AND_FINITE_MATHEMATICALLY_COMPATIBLE_NO_MEASURED_UNIVERSE_TOPOLOGY",
+        "intrinsic_spatial_curvature": "0",
+        "shortest_noncontractible_loop": "1",
+        "volume": "1"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-TORUS-RECTANGULAR",
+      "case_sha256": "f45e9da1dd382785818436aaf2e93d6817797629b3eb70122611a0c1c0e24567",
+      "model": "flat_torus",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "compact": true,
+        "has_boundary": false,
+        "identified_side_lengths": [
+          "2",
+          "3",
+          "5"
+        ],
+        "interpretation": "FLAT_AND_FINITE_MATHEMATICALLY_COMPATIBLE_NO_MEASURED_UNIVERSE_TOPOLOGY",
+        "intrinsic_spatial_curvature": "0",
+        "shortest_noncontractible_loop": "2",
+        "volume": "30"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-LATTICE-LOW-K",
+      "case_sha256": "faf952fddcabaeb487b6e1b0b0d500cc92fe03f8e41c32b0bca7e218b982a615",
+      "model": "lattice_wave",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "angular_frequency_times_spacing_over_c": "0.0009999999583333338541666635664682647328317656585072341721782444273189320",
+        "dispersion_relation": "omega=(2*c/a)*sin(k*a/2)",
+        "group_velocity_over_c": "0.9999998750000026041666449652778746589779054887295661238389697278651590",
+        "interpretation": "CHOSEN_NEAREST_NEIGHBOR_LATTICE_TOY_NOT_PLANCK_PIXELS_OR_UNIVERSE_FPS",
+        "low_k_continuum_limit": "1",
+        "phase_velocity_over_c": "0.9999999583333338541666635664682647328317656585072341721782444273189320",
+        "wave_number_times_spacing": "0.001"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-LATTICE-MID-K",
+      "case_sha256": "7351320e0e7e76efa8e317b91a7ef9d22fb5ba3f81406b134fd0545a7b1a7e59",
+      "model": "lattice_wave",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "angular_frequency_times_spacing_over_c": "0.4948079185090458591936974096987783917867819607739316213530896609887962",
+        "dispersion_relation": "omega=(2*c/a)*sin(k*a/2)",
+        "group_velocity_over_c": "0.9689124217106447841445954494941891998041341902874428311481281242889426",
+        "interpretation": "CHOSEN_NEAREST_NEIGHBOR_LATTICE_TOY_NOT_PLANCK_PIXELS_OR_UNIVERSE_FPS",
+        "low_k_continuum_limit": "1",
+        "phase_velocity_over_c": "0.9896158370180917183873948193975567835735639215478632427061793219775924",
+        "wave_number_times_spacing": "0.5"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-LATTICE-ZONE-EDGE",
+      "case_sha256": "1a85a282975e5cd6b004908336d6ed00a0322bac6ba7d5bdcab01b8b0235dbeb",
+      "model": "lattice_wave",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "angular_frequency_times_spacing_over_c": "1.999999999999999999999999999999999999999999999999999999999999999999995",
+        "dispersion_relation": "omega=(2*c/a)*sin(k*a/2)",
+        "group_velocity_over_c": "-4.430701737182772616330565802619599702667974899140796645531917127154E-70",
+        "interpretation": "CHOSEN_NEAREST_NEIGHBOR_LATTICE_TOY_NOT_PLANCK_PIXELS_OR_UNIVERSE_FPS",
+        "low_k_continuum_limit": "1",
+        "phase_velocity_over_c": "0.6366197723675813430755350534900574481378385829618257949906693762355856",
+        "wave_number_times_spacing": "3.141592653589793238462643383279502884197169399375105820974944592307816"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-COUNT-NO-SIM",
+      "case_sha256": "fd8f11b646b3bd6e49ae0ad38efcba8e657496aa0c245a9475b978081f3d4208",
+      "model": "conditional_observer_count",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "assumption": "EQUALLY_WEIGHTED_COUNTING_WITH_STIPULATED_POPULATIONS_ONLY",
+        "empirical_likelihood_or_prior": null,
+        "illustrative_simulation_fraction": "0",
+        "interpretation": "CONDITIONAL_COUNT_NOT_ESTIMATED_PROBABILITY_OF_OUR_UNIVERSE",
+        "non_simulated_observers": "1",
+        "simulated_observers": "0"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-COUNT-EQUAL",
+      "case_sha256": "27da24ef007ae97582371044b5db6eda140e62e16d0d3436d5bdad034a620fc5",
+      "model": "conditional_observer_count",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "assumption": "EQUALLY_WEIGHTED_COUNTING_WITH_STIPULATED_POPULATIONS_ONLY",
+        "empirical_likelihood_or_prior": null,
+        "illustrative_simulation_fraction": "0.5",
+        "interpretation": "CONDITIONAL_COUNT_NOT_ESTIMATED_PROBABILITY_OF_OUR_UNIVERSE",
+        "non_simulated_observers": "1",
+        "simulated_observers": "1"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    },
+    {
+      "case_id": "ALI-COUNT-999",
+      "case_sha256": "421b26f4f2cea96ef5c8218bff37e7a8b3306519dfe1b0604de2b035dd3111f7",
+      "model": "conditional_observer_count",
+      "numerical_gate": "PASS_DEFINED_MODEL_ONLY",
+      "outputs": {
+        "assumption": "EQUALLY_WEIGHTED_COUNTING_WITH_STIPULATED_POPULATIONS_ONLY",
+        "empirical_likelihood_or_prior": null,
+        "illustrative_simulation_fraction": "0.999",
+        "interpretation": "CONDITIONAL_COUNT_NOT_ESTIMATED_PROBABILITY_OF_OUR_UNIVERSE",
+        "non_simulated_observers": "1",
+        "simulated_observers": "999"
+      },
+      "simulation_detection_gate": "NOT_ESTABLISHED"
+    }
+  ],
+  "claims_count": 18,
+  "claims_sha256": "eedef99ed2f5cfc68d3da9854a06c0a06415d15017f8ac0d13c6549ae7f3dba5",
+  "experiment_id": "JANUS-COSMOS-ALI-VIDEO-SIMULATION-AUDIT-V1-2026-10-18",
+  "gates": {
+    "AMPS_FIREWALL_PHYSICAL_EXISTENCE": "OPEN_UNCONFIRMED",
+    "BHB_EXPLOSION_OBSERVED": "NOT_ESTABLISHED",
+    "FROZEN_BHB_R3A_CONTINUITY": "PASS",
+    "HOLOGRAPHY_IMPLIED_COMPUTER_SIMULATION": "NOT_ESTABLISHED",
+    "LATTICE_SPACING_OBSERVED": "NOT_ESTABLISHED",
+    "OSIRIS_PROOF_AUTHORITY": "NO_CHANGE",
+    "SIMULATION_HYPOTHESIS_OBSERVED": "NOT_ESTABLISHED",
+    "SIX_MODEL_NUMERICAL_CONTROLS": "PASS",
+    "VIDEO_FULL_TRANSCRIPT_VERIFIED": "NO_SECONDARY_SUMMARY_ONLY"
+  },
+  "models": [
+    "bh_area_entropy",
+    "conditional_observer_count",
+    "flat_torus",
+    "lattice_wave",
+    "lorentz",
+    "schwarzschild"
+  ],
+  "r3a_cross_checks": [
+    {
+      "case_id": "ALI-HORIZON-1P01",
+      "gate": "PASS",
+      "lapse_absolute_difference": "2.462614281003024729237597646246957595745219316E-26",
+      "r3a_scenario_id": "R3A-R1P01"
+    },
+    {
+      "case_id": "ALI-HORIZON-1P000001",
+      "gate": "PASS",
+      "lapse_absolute_difference": "2.734372539064755857280275401304297639701421963E-28",
+      "r3a_scenario_id": "R3A-R1P000001"
+    },
+    {
+      "case_id": "ALI-HORIZON-1P24",
+      "gate": "PASS",
+      "lapse_absolute_difference": "4.999999999999999999999996250000000000000000000E-37",
+      "r3a_scenario_id": "R3A-R1P24"
+    }
+  ],
+  "r3a_pin": {
+    "file_sha256": "f5bd22dc7864b54775011b8cfb9cce5918b58574b121f3e0f8f1a7c5ad092502",
+    "firewall_gate": "NOT_MODELED",
+    "internal_sha256": "1d772de42de04ac8d6079e1c0d72d0012f42ae2c9efe1c954aeb7019dab18e1b",
+    "observation_gate": "NOT_ESTABLISHED"
+  },
+  "result_sha256": "57dffdb11657bdfccde608d59acaca05704bbe6592b10e576f0f0c9754db92ce",
+  "schema": "janus.cosmos.video-physics-audit.v1",
+  "scientific_claim_ceiling": "CHECKED_SELECTED_MODELS_AND_SECONDARY_VIDEO_SUMMARY_NOT_PROOF_OF_SIMULATION_FIREWALL_OR_BHB_BOOM",
+  "video": {
+    "attribution_scope": "SECONDARY_TIMESTAMPED_SUMMARY_NOT_VIDEO_VERBATIM",
+    "title": "Что-то странное происходит с миром | ALI",
+    "transcript_status": "UNAVAILABLE_THIRD_PARTY_TIMESTAMPED_SUMMARY",
+    "youtube_id": "QBpuorUxuSM"
+  }
+}
