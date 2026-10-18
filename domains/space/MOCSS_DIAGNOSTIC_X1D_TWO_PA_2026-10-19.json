@@ -1,0 +1,98 @@
+{
+  "schema": "janus-mocss-diagnostic-source-aware-x1d-two-angle-v1",
+  "date_utc": "2026-10-19",
+  "status": "TWO_ANGLES_REAL_ARCHIVE_DIAGNOSTIC_X1D_VERIFIED_NOT_SCIENCE_GRADE",
+  "source_ra_deg": 53.13127,
+  "source_dec_deg": -27.78908,
+  "pinned_pipeline": "jwst 1.19.1",
+  "crds_context": "jwst_1413.pmap",
+  "original_inputs": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+  "experiment_groups": [
+    "B",
+    "D"
+  ],
+  "experiment_runs": {
+    "WCS_offcenter": {
+      "run_id": 39159808143,
+      "artifact_id": 12147869813,
+      "original_json_sha256": "0f1cd40f61299eac0f8803f3076fa6530d580788179259e7243d4d416d6127e",
+      "wcs_position_record": "domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json"
+    },
+    "shutter_midpoint_control": {
+      "run_id": 39159440762,
+      "artifact_id": 12148593138,
+      "original_json_sha256": "ee63363da43bb28f11bc03ee3de4ba7b480ea93ec19b37a7a3621a4c713c269e"
+    }
+  },
+  "source_test_fits": [
+    {
+      "group": "B",
+      "exposure_index": 8,
+      "detector": "NRS2",
+      "rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+      "source_id_in_test_msa_only": 16004,
+      "center_fraction_xy": [
+        0.6854857284214204,
+        0.7574539661709843
+      ],
+      "slit_count": 1,
+      "model": "MultiSlitModel",
+      "returned_x1d_spectra": 1,
+      "reference_sha256": {
+        "WCS_offcenter": "7ada9a63610f3a1ec075dcb854b3e6f780251f57836e939a77f69405cb527765",
+        "shutter_midpoint": "aba6d878a9e98b764cf1d71f31b93d85e793487f29b01d084012ddec46b2bd59"
+      },
+      "pipeline_steps": {
+        "assign_wcs": "COMPLETE",
+        "extract_2d": "COMPLETE",
+        "srctype": "COMPLETE",
+        "wavecorr": "COMPLETE",
+        "flat_field": "COMPLETE",
+        "photom": "COMPLETE",
+        "extract_1d_pipeline": "None",
+        "manual_extract_1d": "one MultiSpecModel spectrum"
+      }
+    },
+    {
+      "group": "D",
+      "exposure_index": 13,
+      "detector": "NRS1",
+      "rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+      "source_id_in_test_msa_only": 16004,
+      "center_fraction_xy": [
+        0.2781984438413271,
+        0.3903103215248744
+      ],
+      "slit_count": 1,
+      "model": "MultiSlitModel",
+      "returned_x1d_spectra": 1,
+      "reference_sha256": {
+        "WCS_offcenter": "3bb4d0993d218b99f3de7a0ef701bddd224eed637302bc2f5a6984353858d623",
+        "shutter_midpoint": "8972533e10e0fba0f3a1b15852b22391ad4ae2dde3525d898155018e90f2e6f6"
+      },
+      "pipeline_steps": {
+        "assign_wcs": "COMPLETE",
+        "extract_2d": "COMPLETE",
+        "srctype": "COMPLETE",
+        "wavecorr": "COMPLETE",
+        "flat_field": "COMPLETE",
+        "photom": "COMPLETE",
+        "extract_1d_pipeline": "None",
+        "manual_extract_1d": "one MultiSpecModel spectrum"
+      }
+    }
+  ],
+  "evidence_limits": {
+    "all_16_exposures_in_four_dither_stacks": false,
+    "real_original_MPT_source_identification": false,
+    "verified_custom_full_row_background": false,
+    "physically_calibrated_three_shutter_bar_transmission": false,
+    "physical_PSF_injection_recovery": false,
+    "wavelength_window_flux_measurements": false,
+    "science_valid_flux_or_limits": false,
+    "source_class": null,
+    "redshift": null,
+    "gas_trail": null
+  },
+  "next_valid_step": "Retrieve diagnostic FITS via GitHub Action artifacts, inspect actual spectral coverage at 16004, 15850.793 and 13656.748 A, and confirm DQ/flux units; run all A-D control groups without promoting tentative fluxes."
+}
