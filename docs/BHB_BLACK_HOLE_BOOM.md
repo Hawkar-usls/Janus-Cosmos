@@ -164,3 +164,57 @@ Primary references: Bañados, Silk & West `arXiv:0909.0169`; Jacobson &
 Sotiriou `arXiv:0911.3363` (physical limitations); Yan, Guo & Chen
 `arXiv:2104.07889` (Kerr photon escape and energy shifts). R2 does not claim
 to reproduce their full emission probability calculations.
+
+## FW1 — the quantum black-hole firewall (AMPS), not the classical horizon
+
+`FW1` is a separate **hypothesis overlay**, not a modification to the R2
+classical Kerr equations. The original Almheiri–Marolf–Polchinski–Sully
+argument (`arXiv:1207.3123`) makes three statements mutually incompatible
+under its assumptions for an old, evaporating black hole:
+
+1. Hawking evaporation is unitary (radiation eventually has a pure state).
+2. Low-energy semiclassical field theory describes the exterior sufficiently
+   close to the horizon.
+3. An infalling observer encounters a locally ordinary, smooth horizon
+   (*no drama*).
+
+The hypothetical firewall is one **proposed resolution**, not a universally
+accepted or directly observed physical membrane. Entanglement structure,
+post-Page-time state, quantum backreaction, possible nonlocality and
+microstate-based alternatives require theory well beyond classical R2
+geodesics. See also AMPS et al. `arXiv:1304.6483` and Mathur
+`arXiv:0909.1038`. Neither ``the event horizon'' nor ``the AMPS firewall''
+means that a massive infaller achieves the local speed of light.
+
+The JSON contract is in
+`data/bhb/BHB-FIREWALL-FW1-HYPOTHESES-2026-10-18.json`; the machine-generated
+frozen output is in
+`data/bhb/BHB-FIREWALL-FW1-RESULT-2026-10-18.json`.
+
+```bash
+python3 workspace/janus_bhb_firewall.py
+python3 -m unittest discover -s tests -p 'test_bhb_firewall.py' -v
+```
+
+FW1 binds the **byte-exact** R2 frozen JSON SHA-256 and its internal receipt
+hash; it rejects modified baselines, altered quantum premises and any attempt
+to set `physical_firewall_presence=true` or claim a detection. For each of
+the seven R2 cases it records the coordinate gap `r-r+` solely as geometry,
+not an assumed firewall thickness or proper distance. It preserves local
+classical `E_cm` only as a **conditional** baseline, with quantum-firewall
+collision energy, deposited energy, emitted spectrum and escaped luminosity
+all `null` until a defensible dynamic model exists.
+
+| FW1 scientific gate | State |
+| --- | --- |
+| `CLASSICAL_R2_RECEIPT_INTEGRITY` | `PASS` |
+| `AMPS_LOGICAL_PREMISES` | `REGISTERED_CONDITIONAL_CONFLICT` |
+| `FIREWALL_PHYSICAL_EXISTENCE` | `OPEN_UNCONFIRMED` |
+| `BLACK_HOLE_AGE_POST_PAGE_TIME` | `UNKNOWN_NO_QUANTUM_STATE_DATA` |
+| `QUANTUM_FIREWALL_DYNAMICS` | `NOT_MODELED` |
+| `ESCAPED_COLLISION_SIGNAL` | `OPEN_NO_PRODUCT_MODEL` |
+| `REAL_BHB_OR_FIREWALL_DETECTION` | `NOT_ESTABLISHED` |
+
+The physical firewall must not be confused with the **JANUS science
+firewall**, which is only a software evidence boundary preventing promotion
+of unverified conjectures into scientific claims.
