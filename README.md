@@ -180,6 +180,7 @@ JANUS Meta Registry and freezes provenance-aware collision case matrices.
 python3 workspace/janus_bhb.py --replay-upstream
 python3 workspace/janus_bhb.py --batch data/bhb/BHB-COSMOS-R1-CASES-2026-10-17.json
 python3 workspace/janus_bhb_kerr.py --batch data/bhb/BHB-COSMOS-R2-CASES-2026-10-18.json
+python3 workspace/janus_bhb_firewall.py
 python3 -m unittest discover -s tests -p 'test_bhb*.py' -v
 ```
 
@@ -191,6 +192,12 @@ factor. **It does not compute photons actually made in a collision.** This is
 not measured black-hole emission or an explosion. See the
 [BHB operating guide](docs/BHB_BLACK_HOLE_BOOM.md).
 
+The additional **FW1 AMPS quantum-firewall hypothesis** is registered and
+checked separately via `workspace/janus_bhb_firewall.py`; it audits the AMPS
+information-paradox premises, replays the frozen R2 receipt, and deliberately
+produces **no physical firewall spectrum, collision-energy prediction or
+observation claim**. It does not modify the classical Kerr model.
+
 ## Repository layout
 
 - `vendor/Janus-Fundamentum/` — exact inherited project/source snapshot at the S𓂸ḥ/2 head.
@@ -199,9 +206,11 @@ not measured black-hole emission or an explosion. See the
 - `workspace/` — native OSIRIS v3+ development and spiral runtime.
 - `workspace/janus_bhb.py` — independent relativistic Schwarzschild collision engine.
 - `workspace/janus_bhb_kerr.py` — Kerr equatorial collision and null-geodesic transport engine.
+- `workspace/janus_bhb_firewall.py` — conditional quantum-firewall hypothesis audit over pinned R2.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
 - `tests/test_bhb_kerr.py` — Kerr radial-barrier and photon escape negative controls.
+- `tests/test_bhb_firewall.py` — AMPS premises, unchanged-source and non-promotion controls.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
