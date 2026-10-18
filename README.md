@@ -265,8 +265,35 @@ python3 workspace/janus_cosmos_fermi_observation_gate.py \
 python3 -m unittest discover -s tests -p 'test_cosmos_fermi_observation_gate.py' -v
 ```
 
-Raw LAT extended-event FITS, spacecraft data, GBM prompt models, IRFs and
-astrophysical intrinsic-lag control are the next separate observational gate.
+At the time of V3, raw LAT extended-event FITS, spacecraft data, GBM prompt
+models, IRFs and intrinsic-lag control were outstanding; V4 below now closes
+the raw LAT/spacecraft ingest portion only.
+
+## Cosmos V4: real individual Fermi-LAT FITS events, spacecraft and joint-GRB identifiability
+
+The [V4 raw-event / multi-GRB protocol](docs/COSMOS_FERMI_RAW_JOINT_V4.md)
+records six exact-hash NASA FSSC Extended Event/Spacecraft FITS downloads for
+GRBs 090510, 090902B and 130427A. A strict standard-library parser validates
+event classes, GTIs, spacecraft quality, incident/zenith angles and query
+provenance. The frozen [V4 observational result](data/cosmos/COSMOS-ALI-V4-FERMI-RAW-EVENT-DIAGNOSTICS-2026-10-18.json)
+contains 6,520 original ROI events and **175 individual diagnostic candidates**
+(32 + 67 + 76) surviving fixed cuts. The 175 are *aperture candidates*, not
+175 background-subtracted or association-verified burst photons.
+
+The [separate synthetic joint likelihood](data/cosmos/COSMOS-ALI-V4-JOINT-TOY-LIKELIHOOD-2026-10-18.json)
+profiles independent source-emission lags over three redshifts and proves
+an exact identifiability obstruction: an unconstrained intrinsic lag of the
+same energy form can absorb any common lattice propagation coefficient. A
+prior-conditional toy detection can be mimicked by source evolution alone.
+**No observational LAT+GBM/IRF likelihood, astrophysical p-value, LIV detection,
+or lattice-spacing constraint is reported.**
+
+```bash
+python3 scripts/fetch_fermi_lat_v4.py --raw-dir /tmp/janus-v4-lat
+python3 workspace/janus_cosmos_fermi_raw_v4.py --raw-dir /tmp/janus-v4-lat
+python3 workspace/janus_cosmos_fermi_joint_v4.py
+python3 -m unittest discover -s tests -p 'test_cosmos_fermi_raw_v4.py' -v
+```
 
 ## Repository layout
 
@@ -281,6 +308,9 @@ astrophysical intrinsic-lag control are the next separate observational gate.
 - `workspace/janus_cosmos_simulation_audit.py` — video-inspired six-model physics / interpretation gate.
 - `workspace/janus_cosmos_lattice_tof.py` — V2 fixed photon-dispersion model, process-blind synthetic scoring and label reveal.
 - `workspace/janus_cosmos_fermi_observation_gate.py` — V3 source-pinned Fermi-LAT Table 7 real photon summary and no-false-inference controls.
+- `workspace/janus_cosmos_fermi_raw_v4.py` — V4 exact-SHA FITS EVENTS/GTI/SC_DATA extraction, query and LAT instrument-quality gate.
+- `workspace/janus_cosmos_fermi_joint_v4.py` — V4 conditional synthetic three-GRB timing profile and intrinsic-lag nonidentifiability tests.
+- `scripts/fetch_fermi_lat_v4.py` — opt-in checksum-verified NASA archival FITS rehydration.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
 - `data/cosmos/` — versioned ALI topic matrix and deterministic physics-audit result.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
@@ -290,6 +320,7 @@ astrophysical intrinsic-lag control are the next separate observational gate.
 - `tests/test_cosmos_simulation_audit.py` — Lorentz, Schwarzschild, entropy, topology, lattice and provenance gates.
 - `tests/test_cosmos_lattice_tof.py` — 12-case TOF replay, source-lag degeneracy and false-positive controls.
 - `tests/test_cosmos_fermi_observation_gate.py` — V3 real catalog provenance, source-time semantics and integrity gates.
+- `tests/test_cosmos_fermi_raw_v4.py` — V4 offline FITS parsing, manifest/observed-event provenance, and adversarial source-lag controls.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
