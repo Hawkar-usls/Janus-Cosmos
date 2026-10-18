@@ -1,0 +1,13 @@
+{
+  "experiment_id": "BHB-R3A-EXPLICIT-QED-PAIR-ANNIHILATION-2026-10-18",
+  "description": "Radial infalling electron plus externally supported static positron; selected e-+e+ -> two radial photons. Only event-level conserved four-momentum and outbound photon Killing energy. No physical AMPS firewall assumed.",
+  "cases": [
+    {"scenario_id": "R3A-FAR-R10", "r_over_rs": "10", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-R1P1", "r_over_rs": "1.1", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-R1P01", "r_over_rs": "1.01", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-R1P000001", "r_over_rs": "1.000001", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-R1P12", "r_over_rs": "1.000000000001", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-R1P24", "r_over_rs": "1.000000000000000000000001", "electron_specific_energy": "1", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"},
+    {"scenario_id": "R3A-E2-FAST-INFALL", "r_over_rs": "1.01", "electron_specific_energy": "2", "process": "electron_positron_to_two_radial_photons", "target": "externally_supported_static_positron"}
+  ]
+}

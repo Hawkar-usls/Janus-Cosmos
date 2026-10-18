@@ -26,4 +26,7 @@
 - `AMPS_FIREWALL_HYPOTHESIS != CONFIRMED_PHYSICAL_MEMBRANE`; the quantum information paradox is not evidence that a high-energy barrier was observed at a black-hole horizon.
 - `AMPS_QUANTUM_FIREWALL != BSW_LOCAL_COLLISION_ENERGY != SOFTWARE_SCIENCE_GATE`; no classical Kerr R2 kinematic invariant resolves the post-Page-time quantum entanglement puzzle or predicts AMPS stress-energy.
 - `PAGE_TIME_STATUS = UNKNOWN_NO_QUANTUM_STATE_DATA`; there is no justified physical firewall thickness, interaction spectrum, radiation yield or test-particle equation of motion to substitute into the R2 engine.
+- `R3A_QED_TWO_PHOTON_CHANNEL != VERIFIED_AMPS_FIREWALL_INTERACTION`; an infalling electron annihilating on an externally supported stationary positron is an explicitly conditional local physics benchmark, not a quantum-horizon microstate model.
+- `ONE_CONSERVATION_COMPATIBLE_ESCAPING_PHOTON != OBSERVABLE_RADIATIVE_FLUX`; an exact two-body final state and radial escape do not supply collision cross section, target population, event rate, shell support or detector prediction.
+- `STATIC_TARGET_ACCELERATION -> INFINITY_AS_R_TO_HORIZON`; near-horizon stationary targets require an independently verified, diverging-support limit and cannot be silently admitted as freely falling matter.
 - Pinned external BHB receipts are revalidated before use, and never automatically promoted to scientific discovery or OSIRIS proof authority.

@@ -1,4 +1,4 @@
-name: JANUS Cosmos BHB R0-R2 and AMPS FW1 Science Gate
+name: JANUS Cosmos BHB R0-R3A and AMPS FW1 Science Gate
 
 on:
   pull_request:
@@ -6,9 +6,11 @@ on:
       - 'workspace/janus_bhb.py'
       - 'workspace/janus_bhb_kerr.py'
       - 'workspace/janus_bhb_firewall.py'
+      - 'workspace/janus_bhb_collision_radiation.py'
       - 'tests/test_bhb_cosmos.py'
       - 'tests/test_bhb_kerr.py'
       - 'tests/test_bhb_firewall.py'
+      - 'tests/test_bhb_collision_radiation.py'
       - 'data/bhb/**'
       - 'docs/BHB_BLACK_HOLE_BOOM.md'
       - '.github/workflows/bhb-schwarzschild-gate.yml'
@@ -19,9 +21,11 @@ on:
       - 'workspace/janus_bhb.py'
       - 'workspace/janus_bhb_kerr.py'
       - 'workspace/janus_bhb_firewall.py'
+      - 'workspace/janus_bhb_collision_radiation.py'
       - 'tests/test_bhb_cosmos.py'
       - 'tests/test_bhb_kerr.py'
       - 'tests/test_bhb_firewall.py'
+      - 'tests/test_bhb_collision_radiation.py'
       - 'data/bhb/**'
       - 'docs/BHB_BLACK_HOLE_BOOM.md'
       - '.github/workflows/bhb-schwarzschild-gate.yml'
@@ -31,7 +35,7 @@ permissions:
   contents: read
 
 jobs:
-  bhb-r0-r1-r2-fw1-replay:
+  bhb-r0-r1-r2-fw1-r3a-replay:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -41,10 +45,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Compile BHB R1/R2/FW1 and run negative controls
+      - name: Compile BHB R1/R2/FW1/R3A and run negative controls
         run: |
           set -euo pipefail
-          python -m py_compile workspace/janus_bhb.py workspace/janus_bhb_kerr.py workspace/janus_bhb_firewall.py tests/test_bhb_cosmos.py tests/test_bhb_kerr.py tests/test_bhb_firewall.py
+          python -m py_compile workspace/janus_bhb.py workspace/janus_bhb_kerr.py workspace/janus_bhb_firewall.py workspace/janus_bhb_collision_radiation.py tests/test_bhb_cosmos.py tests/test_bhb_kerr.py tests/test_bhb_firewall.py tests/test_bhb_collision_radiation.py
           python -m unittest discover -s tests -p 'test_bhb*.py' -v
       - name: Replay frozen JANUS Meta Registry input and compare Cosmos R1 receipt
         run: |
@@ -63,10 +67,15 @@ jobs:
           set -euo pipefail
           python workspace/janus_bhb_firewall.py > artifacts/bhb/BHB-FIREWALL-FW1-RESULT.json
           cmp artifacts/bhb/BHB-FIREWALL-FW1-RESULT.json data/bhb/BHB-FIREWALL-FW1-RESULT-2026-10-18.json
+      - name: Replay R3A conservation-compatible QED photon products and escape gate
+        run: |
+          set -euo pipefail
+          python workspace/janus_bhb_collision_radiation.py --batch data/bhb/BHB-R3A-QED-COLLISION-CASES-2026-10-18.json > artifacts/bhb/BHB-R3A-QED-COLLISION-RESULT.json
+          cmp artifacts/bhb/BHB-R3A-QED-COLLISION-RESULT.json data/bhb/BHB-R3A-QED-COLLISION-RESULT-2026-10-18.json
       - name: Retain machine-readable run receipts
         uses: actions/upload-artifact@v4
         with:
-          name: cosmos-bhb-r0-r1-r2-fw1-receipts
+          name: cosmos-bhb-r0-r1-r2-fw1-r3a-receipts
           path: artifacts/bhb/*.json
           retention-days: 30
           if-no-files-found: error
