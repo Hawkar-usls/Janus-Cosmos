@@ -30,3 +30,16 @@
 - `ONE_CONSERVATION_COMPATIBLE_ESCAPING_PHOTON != OBSERVABLE_RADIATIVE_FLUX`; an exact two-body final state and radial escape do not supply collision cross section, target population, event rate, shell support or detector prediction.
 - `STATIC_TARGET_ACCELERATION -> INFINITY_AS_R_TO_HORIZON`; near-horizon stationary targets require an independently verified, diverging-support limit and cannot be silently admitted as freely falling matter.
 - Pinned external BHB receipts are revalidated before use, and never automatically promoted to scientific discovery or OSIRIS proof authority.
+
+## ALI video / computational-universe hypothesis firewall
+
+- `VIDEO_SECONDARY_SUMMARY != VERIFIED_VERBATIM_TRANSCRIPT`: timestamps and paraphrases may be wrong; the exact YouTube transcript is not verified.
+- `LORENTZ_INVARIANCE != PROCESSOR_FRAME_RATE`; the exact SI value `299792458 m/s` does not reveal a universe CPU clock.
+- `LOCAL_MASSIVE_INFALL_SPEED < C`; Schwarzschild coordinate descriptions never license a massive local observer reaching the speed of light.
+- `BH_AREA_ENTROPY != LITERAL_COMPUTER_PIXEL_COUNT`; finite entropy models do not identify a digital creator.
+- `FLAT_SPACE != NECESSARILY_INFINITE_VOLUME`; a compact flat 3-torus is a mathematical counterexample, not the measured cosmic topology.
+- `DISCRETIZATION_TOY != OBSERVED_PLANCK_LATTICE`; any chosen dispersion relation must be independently compared with physical data and alternative explanations.
+- `BOSTROM_CONDITIONAL_COUNT != EMPIRICAL_POSTERIOR_PROBABILITY`; chosen observer populations are not priors or evidence.
+- `DELAYED_CHOICE != OBSERVATIONAL_RETROCAUSAL_SIGNAL`; interpretations of measurements are not demonstration of backwards signaling or consciousness-based rendering.
+- `AMPS_FIREWALL != CONFIRMED_HAWKING_RADIATION_WALL`, and `VIDEO_IDEAS != OBSERVED_BHB_BOOM`.
+- The pinned R3A receipt is checked before the video-inspired math can import prior horizon results. No previous BHB/FW1 gate or OSIRIS authority is promoted.

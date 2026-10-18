@@ -1,0 +1,181 @@
+{
+  "schema": "janus.cosmos.video-physics-cases.v1",
+  "experiment_id": "JANUS-COSMOS-ALI-VIDEO-SIMULATION-AUDIT-V1-2026-10-18",
+  "created_utc_date": "2026-10-18",
+  "video": {
+    "youtube_id": "QBpuorUxuSM",
+    "url": "https://www.youtube.com/watch?v=QBpuorUxuSM",
+    "title": "Что-то странное происходит с миром | ALI",
+    "channel": "ALI",
+    "published": "2025-03-15",
+    "approximate_duration": "01:13:58",
+    "transcript_status": "UNAVAILABLE_THIRD_PARTY_TIMESTAMPED_SUMMARY",
+    "source_access_issue": "YouTube returned automated-traffic CAPTCHA. We inspected indexed public timestamped summaries, not the video stream or verified transcript.",
+    "attribution_rule": "All claim text is an audit paraphrase of a third-party summary, never attributed as a verified direct quote of the presenter."
+  },
+  "sources": {
+    "video_summary": {"kind": "SECONDARY_TIMESTAMPED_SUMMARY", "url": "https://videohighlight.com/v/QBpuorUxuSM", "purpose": "Locate topics and approximate timecodes; third-party AI output may contain errors"},
+    "video_summary_ru": {"kind": "SECONDARY_SUMMARY", "url": "https://www.echonote.ru/s/tRQhUfrOnGOglhuOy9os-PRGbar_JrwL1aSaAV7vTlo", "purpose": "Cross-check broad Russian thematic framing, not verify wording"},
+    "nist_si": {"kind": "OFFICIAL_METROLOGY", "url": "https://www.nist.gov/si-redefinition/definitions-si-base-units", "purpose": "Exact SI value of c"},
+    "amps": {"kind": "ORIGINAL_THEORY_PAPER", "url": "https://arxiv.org/abs/1207.3123", "authors": "Almheiri, Marolf, Polchinski, Sully", "purpose": "Mutually incompatible semiclassical premises under AMPS assumptions"},
+    "bostrom": {"kind": "ORIGINAL_PHILOSOPHY_PAPER", "url": "https://simulation-argument.com/simulation.pdf", "author": "Nick Bostrom", "purpose": "Conditional trilemma, not empirical probability"},
+    "lattice_paper": {"kind": "ORIGINAL_CONDITIONAL_THEORY_PAPER", "url": "https://arxiv.org/abs/1210.1847", "authors": "Beane, Davoudi, Savage", "purpose": "Specific discretization model and potential anisotropy signature"},
+    "topology_paper": {"kind": "ORIGINAL_COSMOLOGY_PAPER", "url": "https://arxiv.org/abs/1604.02179", "purpose": "Compact topology search limitations; geometric torus is not a measurement"},
+    "black_hole_entropy": {"kind": "ORIGINAL_THEORY_PAPER", "url": "https://arxiv.org/abs/hep-th/9601029", "authors": "Strominger, Vafa", "purpose": "Black-hole entropy area-law microstate derivation in a specific string-theory class"},
+    "frozen_bhb_r3a": {"kind": "REPRODUCIBLE_JANUS_RECEIPT", "url": "https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/data/bhb/BHB-R3A-QED-COLLISION-RESULT-2026-10-18.json", "sha256": "f5bd22dc7864b54775011b8cfb9cce5918b58574b121f3e0f8f1a7c5ad092502"}
+  },
+  "cases": [
+    {"case_id":"ALI-SR-REST", "model":"lorentz", "speed_over_c":"0", "signal_speed_over_c":"1"},
+    {"case_id":"ALI-SR-HALF-C", "model":"lorentz", "speed_over_c":"0.5", "signal_speed_over_c":"1"},
+    {"case_id":"ALI-SR-NEAR-C", "model":"lorentz", "speed_over_c":"0.999999", "signal_speed_over_c":"1"},
+    {"case_id":"ALI-HORIZON-1P01", "model":"schwarzschild", "r_over_rs":"1.01", "specific_energy":"1"},
+    {"case_id":"ALI-HORIZON-1P000001", "model":"schwarzschild", "r_over_rs":"1.000001", "specific_energy":"1"},
+    {"case_id":"ALI-HORIZON-1P24", "model":"schwarzschild", "r_over_rs":"1.000000000000000000000001", "specific_energy":"1"},
+    {"case_id":"ALI-ENTROPY-R10", "model":"bh_area_entropy", "schwarzschild_radius_over_planck_length":"10"},
+    {"case_id":"ALI-ENTROPY-R20", "model":"bh_area_entropy", "schwarzschild_radius_over_planck_length":"20"},
+    {"case_id":"ALI-TORUS-CUBE", "model":"flat_torus", "Lx":"1", "Ly":"1", "Lz":"1"},
+    {"case_id":"ALI-TORUS-RECTANGULAR", "model":"flat_torus", "Lx":"2", "Ly":"3", "Lz":"5"},
+    {"case_id":"ALI-LATTICE-LOW-K", "model":"lattice_wave", "wave_number_times_spacing":"0.001"},
+    {"case_id":"ALI-LATTICE-MID-K", "model":"lattice_wave", "wave_number_times_spacing":"0.5"},
+    {"case_id":"ALI-LATTICE-ZONE-EDGE", "model":"lattice_wave", "wave_number_times_spacing":"3.141592653589793238462643383279502884197169399375105820974944592307816406286"},
+    {"case_id":"ALI-COUNT-NO-SIM", "model":"conditional_observer_count", "non_simulated_observers":"1", "simulated_observers":"0"},
+    {"case_id":"ALI-COUNT-EQUAL", "model":"conditional_observer_count", "non_simulated_observers":"1", "simulated_observers":"1"},
+    {"case_id":"ALI-COUNT-999", "model":"conditional_observer_count", "non_simulated_observers":"1", "simulated_observers":"999"}
+  ],
+  "claims": [
+    {
+      "claim_id":"ALI-01-DEREALIZATION", "timecode":"00:27-04:54", "domain":"psychology_vs_cosmology",
+      "paraphrase_ru":"Дереализация вызывает субъективное ощущение, что окружающий мир ненастоящий; это может служить драматургической аналогией Матрицы.",
+      "assessment":"INTERPRETATION_NOT_EMPIRICAL_DETECTION", "assessment_detail_ru":"Субъективное ощущение не измеряет геометрию пространства-времени и не является наблюдением вычислительного субстрата.",
+      "falsification_or_control_ru":"Не использовать психологическое переживание как датчик симуляции; требуется отдельная физическая наблюдаемая с предсказанием и контрольной гипотезой.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","video_summary_ru"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-02-HORIZON-CROSSING", "timecode":"10:12-12:01", "domain":"general_relativity",
+      "paraphrase_ru":"Падающий наблюдатель пересекает горизонт за конечное собственное время; удалённый статический наблюдатель описывает сильное замедление координатного времени.",
+      "assessment":"ESTABLISHED_THEORY_NOT_SIMULATION_EVIDENCE", "assessment_detail_ru":"Статические наблюдатели и их тетрады определены лишь вне горизонта; собственное время падающего нельзя отождествлять с внешним временем и нельзя заключать, что локальная скорость массивного тела становится c.",
+      "falsification_or_control_ru":"Сверить красное смещение alpha и gamma в трёх случаях с замороженным R3A, проверить |v|<c при любом r>r_s.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","frozen_bhb_r3a"], "linked_case_ids":["ALI-HORIZON-1P01","ALI-HORIZON-1P000001","ALI-HORIZON-1P24"]
+    },
+    {
+      "claim_id":"ALI-03-FIREWALL", "timecode":"12:23-13:31", "domain":"black_hole_quantum_information",
+      "paraphrase_ru":"Упоминается смертельный фаервол у горизонта как контраст к гладкому пересечению и парадоксу комплементарности.",
+      "assessment":"OPEN_THEORETICAL_PROPOSAL", "assessment_detail_ru":"AMPS показывает несовместимость набора предпосылок, а не наблюдение высокоэнергетической оболочки. Обычное излучение Хокинга нельзя автоматически отождествлять с разрушительным фаерволом.",
+      "falsification_or_control_ru":"Сохранить статус FW1=OPEN_UNCONFIRMED и R3A=NOT_MODELED; для физического взаимодействия необходимы квантовое состояние, стресс-тензор, сечения и поток.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","amps","frozen_bhb_r3a"], "linked_case_ids":["ALI-HORIZON-1P24"]
+    },
+    {
+      "claim_id":"ALI-04-COMPLEMENTARITY", "timecode":"13:07-14:13", "domain":"black_hole_information",
+      "paraphrase_ru":"Комплементарность использует взаимно недоступные описания снаружи и изнутри горизонта.",
+      "assessment":"OPEN_THEORETICAL_PROPOSAL", "assessment_detail_ru":"Важное отличие между допустимыми описаниями в квантовой гравитации и логическим утверждением, что один человек буквально одновременно жив и мёртв; AMPS как раз проверяет совместимость постулатов.",
+      "falsification_or_control_ru":"Не повышать интерпретационную схему до наблюдательной двойной истории без согласованной квантовой модели.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","amps"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-05-AREA-ENTROPY", "timecode":"17:35-19:03", "domain":"black_hole_thermodynamics",
+      "paraphrase_ru":"Энтропия чёрной дыры связана с площадью горизонта, а не наивно с объёмом.",
+      "assessment":"ESTABLISHED_THEORY_NOT_SIMULATION_EVIDENCE", "assessment_detail_ru":"В полуклассическом режиме S/k_B=A/(4l_P²); счёт микросостояний известен для отдельных классов решений. Не следует буквальное хранение информации в пикселях монитора.",
+      "falsification_or_control_ru":"При удвоении r_s проверить четырёхкратный рост S и число бит, не присваивая модели экран или разработчика.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","black_hole_entropy"], "linked_case_ids":["ALI-ENTROPY-R10","ALI-ENTROPY-R20"]
+    },
+    {
+      "claim_id":"ALI-06-HOLOGRAPHIC-COMPUTER", "timecode":"18:20-20:52", "domain":"quantum_gravity_vs_simulation",
+      "paraphrase_ru":"Голографическое описание связывается с метафорой компьютерного кода и 2D-границы мира.",
+      "assessment":"MISLEADING_IF_PRESENTED_AS_PROOF", "assessment_detail_ru":"Голографическая дуальность и классическая компьютерная симуляция — разные физические/онтологические утверждения. Площадная энтропия не выбирает компьютерную реализацию.",
+      "falsification_or_control_ru":"Требовать предсказания, различающего голографическую теорию и компьютерную гипотезу; площадь сама этого не делает.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","black_hole_entropy"], "linked_case_ids":["ALI-ENTROPY-R10"]
+    },
+    {
+      "claim_id":"ALI-07-SIMULATION-TRILEMMA", "timecode":"25:40-26:46", "domain":"philosophy_probability",
+      "paraphrase_ru":"Аргумент Бострома и популярные оценки вероятности симуляции обсуждаются как возможное объяснение реальности.",
+      "assessment":"CONDITIONAL_PHILOSOPHICAL_ARGUMENT", "assessment_detail_ru":"Трилемма Бострома не даёт измеренной апостериорной вероятности для нашей Вселенной; результат численного подсчёта зависит от гипотетических численностей наблюдателей и меры отбора.",
+      "falsification_or_control_ru":"Показать изменение условной доли при 0, 1 и 999 симулированных наблюдателях, не приписывая ей байесовский эмпирический статус.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","bostrom"], "linked_case_ids":["ALI-COUNT-NO-SIM","ALI-COUNT-EQUAL","ALI-COUNT-999"]
+    },
+    {
+      "claim_id":"ALI-08-FERMI-PARADOX", "timecode":"29:46-30:52", "domain":"astrobiology",
+      "paraphrase_ru":"Молчание внеземных цивилизаций можно метафорически сравнить с пустыми декорациями игры.",
+      "assessment":"INTERPRETATION_NOT_EMPIRICAL_DETECTION", "assessment_detail_ru":"Отсутствие обнаруженного сигнала допускает множество астрофизических и наблюдательных объяснений; сам по себе парадокс Ферми не указывает на искусственный симулятор.",
+      "falsification_or_control_ru":"Сформулировать распределение цивилизаций, модель чувствительности поиска и конкурирующие гипотезы до вычисления отношения правдоподобия.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-09-FLAT-FINITE", "timecode":"31:13-35:35", "domain":"spatial_geometry_topology",
+      "paraphrase_ru":"Плоская Вселенная может иметь конечную топологию, например трёхмерный тор с периодическими координатами.",
+      "assessment":"MATHEMATICAL_COUNTEREXAMPLE_NOT_COSMOLOGY_OBSERVATION", "assessment_detail_ru":"Локальная пространственная кривизна k=0 и глобальная компактность независимы; 3-тор имеет конечный объём без края, но это не измеренная топология нашей Вселенной.",
+      "falsification_or_control_ru":"Сконструировать два плоских тора с объёмами 1 и 30 и замкнутыми геодезическими; наблюдательная проверка требует поиска согласованных CMB-кругов с учётом ограничений.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","topology_paper"], "linked_case_ids":["ALI-TORUS-CUBE","ALI-TORUS-RECTANGULAR"]
+    },
+    {
+      "claim_id":"ALI-10-DISCRETE-SPACETIME", "timecode":"35:56-38:27", "domain":"quantum_gravity",
+      "paraphrase_ru":"Предполагается, что пространство-время может быть дискретным, а движение напоминает череду кадров.",
+      "assessment":"OPEN_THEORETICAL_PROPOSAL", "assessment_detail_ru":"Квантование энергии и наличие планковской длины не доказывают решётку или дискретность времени. Численно заданная решётка является отдельной проверяемой моделью.",
+      "falsification_or_control_ru":"Указать дисперсионное соотношение и измеримый масштаб a; сравнить с непрерывным пределом и экспериментальными ограничениями нарушения Лоренц-инвариантности.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","lattice_paper"], "linked_case_ids":["ALI-LATTICE-LOW-K","ALI-LATTICE-ZONE-EDGE"]
+    },
+    {
+      "claim_id":"ALI-11-LIGHT-C-SI", "timecode":"39:11-41:28", "domain":"special_relativity_metrology",
+      "paraphrase_ru":"Скорость света в вакууме одинакова у инерциальных наблюдателей и равна 299792458 м/с в СИ.",
+      "assessment":"ESTABLISHED_THEORY_NOT_SIMULATION_EVIDENCE", "assessment_detail_ru":"Точное десятичное значение в м/с фиксируется определением метра в СИ; принцип локальной инвариантности c — часть специальной теории относительности, не доказательство тактовой частоты процессора.",
+      "falsification_or_control_ru":"Проверить релятивистское сложение скоростей: для фотона u=c и любого |v|<c итоговая скорость остаётся c.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","nist_si"], "linked_case_ids":["ALI-SR-REST","ALI-SR-HALF-C","ALI-SR-NEAR-C"]
+    },
+    {
+      "claim_id":"ALI-12-RELATIVITY-LAG", "timecode":"41:50-45:16", "domain":"special_relativity_vs_simulation",
+      "paraphrase_ru":"Замедление времени и сокращение длин сравниваются с задержками и оптимизацией рендеринга игры.",
+      "assessment":"MISLEADING_IF_PRESENTED_AS_PROOF", "assessment_detail_ru":"Лоренцевы преобразования следуют из постулатов инерциальной кинематики и имеют симметрию взаимных измерений; «нехватка CPU» не является расчётной физической причиной этих эффектов.",
+      "falsification_or_control_ru":"Проверить gamma, Δτ/Δt, L/L0 и неизменность фотонной скорости при beta=0.5 и beta=0.999999 без понятия частоты кадров.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","nist_si"], "linked_case_ids":["ALI-SR-HALF-C","ALI-SR-NEAR-C"]
+    },
+    {
+      "claim_id":"ALI-13-LATTICE-DISPERSION", "timecode":"35:56-39:36", "domain":"falsifiable_discretization",
+      "paraphrase_ru":"Если конечная вычислительная сетка физически реальна, некоторым конкретным моделям сопутствуют модификации дисперсии и анизотропия.",
+      "assessment":"MODEL_SPECIFIC_TEST_POSSIBLE_NOT_DETECTION", "assessment_detail_ru":"В выбранном 1D ближайшем-соседе v_group/c=cos(ka/2). Это следствие заданной решётки, а не универсальная черта всех симуляций или фундаментальной квантовой гравитации.",
+      "falsification_or_control_ru":"На низких ka проверить v_g≈c, у края зоны v_g≈0. Применять наблюдения лишь после определения физического a и конкурирующих моделей.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","lattice_paper"], "linked_case_ids":["ALI-LATTICE-LOW-K","ALI-LATTICE-MID-K","ALI-LATTICE-ZONE-EDGE"]
+    },
+    {
+      "claim_id":"ALI-14-DELAYED-CHOICE", "timecode":"47:07-50:50", "domain":"quantum_measurement",
+      "paraphrase_ru":"Эксперимент Уилера с отложенным выбором трактуется как будто наблюдение сейчас меняет прошлую траекторию фотона или включает рендеринг реальности.",
+      "assessment":"MISLEADING_IF_PRESENTED_AS_PROOF", "assessment_detail_ru":"Интерференция и информация о пути описываются квантовой теорией; нельзя выводить управляемый сигнал в прошлое или обязательного сознательного наблюдателя. Здесь нет реализованного ретрокаузального вычислителя.",
+      "falsification_or_control_ru":"Для отдельного исследования построить явную квантовую схему, правила условного отбора и no-signaling контроль; не считать пересказ экспериментальным доказательством симуляции.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","video_summary_ru"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-15-DARK-MATTER", "timecode":"57:16-59:02", "domain":"cosmology",
+      "paraphrase_ru":"Необъяснённая тёмная материя связывается по аналогии с ограничениями ресурсов симуляции.",
+      "assessment":"UNESTABLISHED_EMPIRICAL_CLAIM", "assessment_detail_ru":"Гравитационные признаки недостающей массы существуют, но «оптимизация вычислений» не даёт здесь заданного гравитационного поля, функции распределения или отличительного спектра.",
+      "falsification_or_control_ru":"Требовать явного распределения, уравнений динамики и прогнозов для линзирования и структуры, включая сравнительный likelihood против стандартных космологических моделей.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","video_summary_ru"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-16-ERROR-CODES", "timecode":"01:00:51-01:01:11", "domain":"mathematical_structure",
+      "paraphrase_ru":"Упоминание помехоустойчивых кодов в математических структурах некоторых физических теорий связывается с компьютерным происхождением мира.",
+      "assessment":"INTERPRETATION_NOT_EMPIRICAL_DETECTION", "assessment_detail_ru":"Математическая эквивалентность структур кодирования не определяет ни исторического программиста, ни вычислительного носителя физики; нужны независимые эмпирические последствия.",
+      "falsification_or_control_ru":"Отделить доказуемое отображение алгебраических структур от онтологического вывода о программировании.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-17-CONSCIOUSNESS", "timecode":"01:01:11-01:05:58", "domain":"philosophy_of_mind",
+      "paraphrase_ru":"Сознание и субъективный опыт обсуждаются как возможные ключи к гипотезе симуляции.",
+      "assessment":"CONDITIONAL_PHILOSOPHICAL_ARGUMENT", "assessment_detail_ru":"Отсутствие общепринятой физической теории сознания не есть свидетельство симулированного мира; гипотетические сознательные симуляции не заданы проверяемой физической динамикой.",
+      "falsification_or_control_ru":"Разделять функциональные критерии, феноменальный опыт и физическую модель; не выводить вероятность симуляции из пробела объяснения.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","bostrom"], "linked_case_ids":[]
+    },
+    {
+      "claim_id":"ALI-18-SIMULATION-CONCLUSION", "timecode":"01:06:44-01:13:58", "domain":"science_philosophy_boundary",
+      "paraphrase_ru":"Разные загадки современной науки допускают философское переосмысление через образ симуляции.",
+      "assessment":"INTERPRETATION_NOT_EMPIRICAL_DETECTION", "assessment_detail_ru":"Совместное перечисление настоящих физических эффектов и нерешённых вопросов не создаёт независимого подтверждения идеи вычислительной Вселенной.",
+      "falsification_or_control_ru":"Предрегистрировать модель, уникальную наблюдаемую, диапазон параметров и альтернативы; при их отсутствии science gate=OPEN, simulation detected=NO.",
+      "evidence_status":"SECONDARY_SUMMARY_NOT_VERBATIM", "reference_ids":["video_summary","video_summary_ru","bostrom","lattice_paper"], "linked_case_ids":[]
+    }
+  ],
+  "scientific_policy": {
+    "quantum_firewall": "AMPS_OPEN_UNCONFIRMED_NOT_HAWKING_RADIATION_MEMBRANE",
+    "black_hole_boom": "NO_DETECTION_OR_ASTROPHYSICAL_RATE",
+    "simulation": "NO_OBSERVATION_OR_ESTIMATED_POSTERIOR",
+    "coordinates": "DO_NOT_INTERPRET_LOCAL_SPEED_AS_SCHWARZSCHILD_COORDINATE_SPEED",
+    "data_sources": "THIRD_PARTY_SUMMARY_PARAPHRASE_WITH_NO_VERIFIED_FULL_TRANSCRIPT",
+    "scope": "STANDALONE_SIX_MODE_PHYSICS_AND_PHILOSOPHY_GATE_AUDIT"
+  }
+}
