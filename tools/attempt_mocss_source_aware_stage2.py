@@ -42,6 +42,11 @@ def prepare_source_aware(entry,base):
                 "column":where["column"]},half_width=1)
     target_r,target_c=where["row"],where["column"]
     source_msa=Path(probe["probe_msa"])
+    sky_trace=det["sky_registered_trace"]["16004A"]
+    sky_position_x=0.5+float(sky_trace["slit_x"])
+    sky_position_y=0.5+float(sky_trace["slit_y"])
+    if not (0<sky_position_x<1 and 0<sky_position_y<1):
+        raise ValueError("Sky WCS outside nominal microshutter fractional bounds")
     with fits.open(source_msa,memmap=False,mode="update") as f:
         shutter=f["SHUTTER_INFO"]
         rows=shutter.data
@@ -55,12 +60,15 @@ def prepare_source_aware(entry,base):
         # metadata: only the central shutter contains the alleged source.
         new["slitlet_id"]=1
         new["source_id"]=SOURCE_ID
+        new["estimated_source_in_shutter_x"]=np.nan
+        new["estimated_source_in_shutter_y"]=np.nan
         for i in range(len(new)):
             central=int(new[i]["shutter_column"])==target_c
             new[i]["background"]="N" if central else "Y"
             new[i]["primary_source"]="Y" if central else "N"
-            new[i]["estimated_source_in_shutter_x"]=0.5
-            new[i]["estimated_source_in_shutter_y"]=0.5
+            if central:
+                new[i]["estimated_source_in_shutter_x"]=sky_position_x
+                new[i]["estimated_source_in_shutter_y"]=sky_position_y
         f["SHUTTER_INFO"]=fits.BinTableHDU(
             data=new,header=shutter.header,name="SHUTTER_INFO")
         info=f["SOURCE_INFO"]
@@ -82,6 +90,9 @@ def prepare_source_aware(entry,base):
         assert len(sh)==3 and len(sources)==1
         assert sum(sh["primary_source"]=="Y")==1
         assert sum(sh["background"]=="N")==1
+        center=sh[sh["background"]=="N"][0]
+        assert abs(float(center["estimated_source_in_shutter_x"])-sky_position_x)<1e-6
+        assert abs(float(center["estimated_source_in_shutter_y"])-sky_position_y)<1e-6
         assert int(sources[0]["source_id"])==SOURCE_ID
         assert abs(float(sources[0]["ra"])-RA)<1e-8
         assert len(set(sh["slitlet_id"]))==1
@@ -95,7 +106,8 @@ def prepare_source_aware(entry,base):
         "test_msa_sha256":sha(source_msa),
         "source_id_diagnostic_only":SOURCE_ID,
         "source_ra_dec_deg":[RA,DEC],
-        "synthetic_source_position_center_fractional":[0.5,0.5],
+        "synthetic_source_position_WCS_fractional":[sky_position_x,sky_position_y],
+        "source_position_method":"0.5 + sky WCS slit_x/slit_y from pinned original jwst_1413.pmap projection at 16004 Angstrom; this is not measured PSF centering",
         "three_shutter_cols":list(range(target_c-1,target_c+2)),
         "shutter_row":target_r,"shutter_quadrant":where["quadrant"],
         "source_metadata_inserted_in_test_copy_only":True,
