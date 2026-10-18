@@ -1,0 +1,55 @@
+{
+  "experiment_id": "BHB-COSMOS-KERR-R2-2026-10-18",
+  "model_assumptions": "Stationary equatorial Kerr, test-particle geodesics, a/M signed, r/M, geometrized G=M=c=1. Test photon independent of collision products.",
+  "cases": [
+    {
+      "scenario_id": "R2-K0-SCHWARZSCHILD-CONTROL",
+      "spin_a_over_M": "0", "r_over_M": "5",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0"}
+    },
+    {
+      "scenario_id": "R2-K09-GENERIC-ACCESSIBLE",
+      "spin_a_over_M": "0.9", "r_over_M": "1.6",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "2"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0"}
+    },
+    {
+      "scenario_id": "R2-K09-LOCAL-BUT-INFINITY-BARRIER-NEGATIVE-CONTROL",
+      "spin_a_over_M": "0.9", "r_over_M": "1.5",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "2.7"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0"}
+    },
+    {
+      "scenario_id": "R2-K1-CRITICAL-NEAR-HORIZON-LIMIT",
+      "spin_a_over_M": "1", "r_over_M": "1.0001",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "2"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0"}
+    },
+    {
+      "scenario_id": "R2-SCHWARZSCHILD-ESCAPE-CONE-BLOCKED",
+      "spin_a_over_M": "0", "r_over_M": "2.5",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0.99"}
+    },
+    {
+      "scenario_id": "R2-SCHWARZSCHILD-OUTSIDE-PHOTON-SPHERE",
+      "spin_a_over_M": "0", "r_over_M": "4",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0.99"}
+    },
+    {
+      "scenario_id": "R2-K09-OUTGOING-SOURCE-DEBT",
+      "spin_a_over_M": "0.9", "r_over_M": "1.6",
+      "particle_1": {"origin": "infinity", "direction": "in", "specific_energy": "1", "specific_Lz_over_M": "0"},
+      "particle_2": {"origin": "local_production", "direction": "out", "specific_energy": "1.1", "specific_Lz_over_M": "0"},
+      "photon": {"source": "hypothetical_zamo_emission", "azimuth_sine": "0"}
+    }
+  ]
+}

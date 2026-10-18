@@ -1,10 +1,12 @@
-name: JANUS Cosmos BHB Schwarzschild Science Gate
+name: JANUS Cosmos BHB Schwarzschild and Kerr Science Gate
 
 on:
   pull_request:
     paths:
       - 'workspace/janus_bhb.py'
+      - 'workspace/janus_bhb_kerr.py'
       - 'tests/test_bhb_cosmos.py'
+      - 'tests/test_bhb_kerr.py'
       - 'data/bhb/**'
       - 'docs/BHB_BLACK_HOLE_BOOM.md'
       - '.github/workflows/bhb-schwarzschild-gate.yml'
@@ -13,7 +15,9 @@ on:
       - main
     paths:
       - 'workspace/janus_bhb.py'
+      - 'workspace/janus_bhb_kerr.py'
       - 'tests/test_bhb_cosmos.py'
+      - 'tests/test_bhb_kerr.py'
       - 'data/bhb/**'
       - 'docs/BHB_BLACK_HOLE_BOOM.md'
       - '.github/workflows/bhb-schwarzschild-gate.yml'
@@ -23,7 +27,7 @@ permissions:
   contents: read
 
 jobs:
-  bhb-r1-replay:
+  bhb-r0-r1-r2-replay:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -33,11 +37,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Compile BHB and run negative controls
+      - name: Compile BHB R1/R2 and run negative controls
         run: |
           set -euo pipefail
-          python -m py_compile workspace/janus_bhb.py tests/test_bhb_cosmos.py
-          python -m unittest discover -s tests -p 'test_bhb_cosmos.py' -v
+          python -m py_compile workspace/janus_bhb.py workspace/janus_bhb_kerr.py tests/test_bhb_cosmos.py tests/test_bhb_kerr.py
+          python -m unittest discover -s tests -p 'test_bhb*.py' -v
       - name: Replay frozen JANUS Meta Registry input and compare Cosmos R1 receipt
         run: |
           set -euo pipefail
@@ -45,10 +49,15 @@ jobs:
           python workspace/janus_bhb.py --replay-upstream > artifacts/bhb/BHB-R0-REPLAY.json
           python workspace/janus_bhb.py --batch data/bhb/BHB-COSMOS-R1-CASES-2026-10-17.json > artifacts/bhb/BHB-COSMOS-R1-RESULT.json
           cmp artifacts/bhb/BHB-COSMOS-R1-RESULT.json data/bhb/BHB-COSMOS-R1-RESULT-2026-10-17.json
+      - name: Replay rotating Kerr R2 case matrix against frozen receipt
+        run: |
+          set -euo pipefail
+          python workspace/janus_bhb_kerr.py --batch data/bhb/BHB-COSMOS-R2-CASES-2026-10-18.json > artifacts/bhb/BHB-COSMOS-R2-RESULT.json
+          cmp artifacts/bhb/BHB-COSMOS-R2-RESULT.json data/bhb/BHB-COSMOS-R2-RESULT-2026-10-18.json
       - name: Retain machine-readable run receipts
         uses: actions/upload-artifact@v4
         with:
-          name: cosmos-bhb-r1-receipts
+          name: cosmos-bhb-r0-r1-r2-receipts
           path: artifacts/bhb/*.json
           retention-days: 30
           if-no-files-found: error

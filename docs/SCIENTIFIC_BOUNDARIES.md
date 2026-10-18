@@ -21,5 +21,6 @@
 - `ETERNAL_WHITE_HOLE_TRAJECTORY != OUTGOING_GEODESIC_OF_COLLAPSING_BLACK_HOLE`.
 - `KINEMATICALLY_ALLOWED != SOURCE_PRODUCED`; locally produced outward streams need independent energy accounting.
 - Static Schwarzschild tetrads exist only for `r>r_s`; no simulated point has `r=r_s` or a massive particle moving at light speed.
-- `SCHWARZSCHILD_R1_PASS != KERR_BSW_PASS`; rotating Kerr collisions, collision rates and escaping radiation are separate OPEN gates.
+- `SCHWARZSCHILD_R1_PASS != KERR_BSW_PASS`; Kerr R2 now checks *equatorial test-geodesic kinematics* but not finite astrophysical production rates, spin evolution or collisions at the horizon.
+- `HYPOTHETICAL_NULL_RAY_ESCAPES != COLLISION_PRODUCT_ESCAPES`; R2 photon escape assumes a prescribed ZAMO emission direction and makes no particle-production, luminosity or detection prediction.
 - Pinned external BHB receipts are revalidated before use, and never automatically promoted to scientific discovery or OSIRIS proof authority.
