@@ -249,6 +249,25 @@ and `--reveal` phases reproduce and audit them. **No real GRB photons, observed
 Lorentz violation, spacetime lattice, simulation evidence, black-hole quantum
 firewall, or BHB explosion is claimed.**
 
+## Cosmos V3: published Fermi-LAT photon data without source-lag overclaim
+
+The [V3 Fermi observation methodology gate](docs/COSMOS_FERMI_OBSERVATION_GATE_V3.md)
+pins 38 actual **published** LAT photon energies and times from 11 GRBs with
+known redshift, transcribed from Ajello et al. Table 7. It maps the precisely
+specified V2 model onto their measured energies/distances and audits 162
+within-GRB arrival-order comparisons; **there is no emission-synchronized
+low-energy photon in this catalog subset, so no physical propagation-delay
+measurement or LIV bound is computed**.
+
+```bash
+python3 workspace/janus_cosmos_fermi_observation_gate.py \
+  --batch data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json
+python3 -m unittest discover -s tests -p 'test_cosmos_fermi_observation_gate.py' -v
+```
+
+Raw LAT extended-event FITS, spacecraft data, GBM prompt models, IRFs and
+astrophysical intrinsic-lag control are the next separate observational gate.
+
 ## Repository layout
 
 - `vendor/Janus-Fundamentum/` — exact inherited project/source snapshot at the S𓂸ḥ/2 head.
@@ -261,6 +280,7 @@ firewall, or BHB explosion is claimed.**
 - `workspace/janus_bhb_collision_radiation.py` — R3A QED pair-annihilation products, conserved energy and radial escape.
 - `workspace/janus_cosmos_simulation_audit.py` — video-inspired six-model physics / interpretation gate.
 - `workspace/janus_cosmos_lattice_tof.py` — V2 fixed photon-dispersion model, process-blind synthetic scoring and label reveal.
+- `workspace/janus_cosmos_fermi_observation_gate.py` — V3 source-pinned Fermi-LAT Table 7 real photon summary and no-false-inference controls.
 - `data/bhb/` — pinned external BHB reference and frozen Cosmos experiment receipts.
 - `data/cosmos/` — versioned ALI topic matrix and deterministic physics-audit result.
 - `tests/test_bhb_cosmos.py` — near-horizon replay and physical-provenance negative controls.
@@ -269,6 +289,7 @@ firewall, or BHB explosion is claimed.**
 - `tests/test_bhb_collision_radiation.py` — R3A local/infinity conservation, escape and support negative controls.
 - `tests/test_cosmos_simulation_audit.py` — Lorentz, Schwarzschild, entropy, topology, lattice and provenance gates.
 - `tests/test_cosmos_lattice_tof.py` — 12-case TOF replay, source-lag degeneracy and false-positive controls.
+- `tests/test_cosmos_fermi_observation_gate.py` — V3 real catalog provenance, source-time semantics and integrity gates.
 - `receipts` — convenience symlink into the pinned meta-registry data directory.
 - `data/cousteau/` — marine/ocean research artifacts on the `janus-echo-cousteau` branch.
 - `docs/` — architecture, provenance, lineage, scope and scientific boundaries.
