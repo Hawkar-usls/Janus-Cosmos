@@ -218,3 +218,73 @@ all `null` until a defensible dynamic model exists.
 The physical firewall must not be confused with the **JANUS science
 firewall**, which is only a software evidence boundary preventing promotion
 of unverified conjectures into scientific claims.
+
+## R3A — conservation-compatible photons from one explicit reaction
+
+The AMPS firewall's microphysics remains **UNKNOWN**. As a falsifiable
+kinematic control only, R3A chooses a *different, conventional* process:
+
+1. Electron with rest mass energy `m=0.00051099895 GeV` (rounded), falling
+   radially from infinity with conserved specific energy `e>=1`.
+2. A positron of the same mass, held **static** at exterior radius
+   `x=r/r_s>1` by an unspecified external force or screen; its creation,
+   holding force and population are unverified.
+3. A selected `e- + e+ -> gamma_out + gamma_in` two-photon channel where both
+   photons are radial in the Schwarzschild static orthonormal frame.
+
+This is a physically defined local reaction channel consistent with QED
+particle content and exact **1+1 local four-momentum conservation**. It is
+**not** a modeled spin-dependent QED matrix element, differential cross
+section, angular distribution, rate or natural stationary firewall. Exactly
+radial emission is a selected phase-space configuration, not an integrated
+probability for outward emission.
+
+Define `alpha=sqrt(1-1/x)`, `q=sqrt(e²-alpha²)`, `gamma=e/alpha`. Then
+
+\[
+E_{cm}^2=2m^2(1+\gamma),\quad
+E_{\gamma,\mathrm{out}}^{\mathrm{local}}=\frac{m}{2}\left(1+\frac{\alpha}{e+q}\right),\quad
+E_{\gamma,\mathrm{in}}^{\mathrm{local}}=\frac{m}{2}\left(1+\frac{e+q}{\alpha}\right).
+\]
+
+The outgoing radial photon is propagated using R2's null-geodesic escape
+checker and has energy at infinity `E_out_inf=alpha*E_out_local`. The inward
+photon is captured. The stationary target contributes conserved energy
+`alpha*m`, so the Killing-energy budget is explicitly
+
+\[
+m(e+\alpha)=E_{\gamma,\mathrm{out}}^\infty+E_{\gamma,\mathrm{in}}^\infty.
+\]
+
+The target's required proper acceleration multiplied by `M` is
+`1/(r_over_M²*alpha)`; it diverges approaching the horizon. It is a debt in
+the source model, **not** an available AMPS mechanism.
+
+### Frozen illustrative R3A output
+
+| Schwarzschild `r/r_s` | Local `E_cm` | Energy of outward product at infinity |
+| --- | ---: | ---: |
+| `1.01` | 0.0024022251 GeV | 0.00002669114 GeV |
+| `1.000001` | 0.022863997 GeV | 2.55627 × 10⁻⁷ GeV |
+| `1+10⁻¹²` | 0.72266201 GeV | 2.554996 × 10⁻¹⁰ GeV |
+| `1+10⁻²⁴` | 722.66165 GeV | 2.554995 × 10⁻¹⁶ GeV |
+
+At the final point, the local annihilation `E_cm` becomes large while this
+**specific outward product's** energy received at infinity becomes tiny.
+This is not a universal upper bound on all Kerr collision products or an
+AMPS firewall prediction. Other channels, angular momenta and rotating-hole
+energy extraction may yield different results (see `arXiv:1205.7088` for
+limits on escape from high-energy Kerr collisions).
+
+Run the code and independent checks:
+
+```bash
+python3 workspace/janus_bhb_collision_radiation.py --batch data/bhb/BHB-R3A-QED-COLLISION-CASES-2026-10-18.json
+python3 -m unittest discover -s tests -p 'test_bhb_collision_radiation.py' -v
+```
+
+The seven-case machine-readable receipt is frozen at
+`data/bhb/BHB-R3A-QED-COLLISION-RESULT-2026-10-18.json`, referencing the
+unaltered FW1 hypothesis receipt by SHA-256. Local Minkowski momentum,
+Killing-energy conservation and photon radial null escape are separately
+checked. All observation/event-rate gates remain **NOT_ESTABLISHED**.
