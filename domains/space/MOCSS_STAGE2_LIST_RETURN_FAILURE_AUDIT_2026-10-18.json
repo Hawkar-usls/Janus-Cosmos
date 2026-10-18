@@ -1,0 +1,73 @@
+{
+  "schema": "janus-mocss-spec2-feasibility-failure-audit-v1",
+  "created_utc": "2026-10-18",
+  "science_status": "PIPELINE_RETURN_TYPE_DIAGNOSTIC_ERROR_RESOLVED_IN_CODE_REAL_CALIBRATED_SOURCE_X1D_NOT_CONFIRMED",
+  "previous_run": {
+    "run_id": 39143330154,
+    "artifact_id": 12142533598,
+    "artifact_json_sha256": "01a04f3f3376b98b1dafe8f98fae3edd623991494f0b6f14804ba765cebef59c",
+    "jwst_pipeline_version": "1.19.1",
+    "crds_context": "jwst_1413.pmap",
+    "archive_exposures": [
+      {
+        "group": "B",
+        "exposure_index": 8,
+        "rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+        "returned_model_type": "list",
+        "observed_error": "AttributeError: 'list' object has no attribute 'meta'",
+        "output_calibrated_x1d": false
+      },
+      {
+        "group": "D",
+        "exposure_index": 13,
+        "rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+        "returned_model_type": "list",
+        "observed_error": "AttributeError: 'list' object has no attribute 'meta'",
+        "output_calibrated_x1d": false
+      }
+    ],
+    "workflow_conclusion": "success",
+    "workflow_success_misleading": true,
+    "error_occurred_after_pipeline_return": true,
+    "scientific_negative_result_established": false
+  },
+  "official_docs": {
+    "Spec2Pipeline": "https://jwst-pipeline.readthedocs.io/en/1.19.x/api/jwst.pipeline.Spec2Pipeline.html",
+    "NIRSpec_MOS_metadata": "https://jwst-docs.stsci.edu/known-issues/nirspec-known-issues/nirspec-mos-known-issues",
+    "known_steps": [
+      "master_background_mos",
+      "bkg_subtract",
+      "pathloss",
+      "barshadow"
+    ]
+  },
+  "fix": {
+    "commit_sha": "15c717e85c9711e3061cbd6db4aa3862d2012cce",
+    "module": "tools/attempt_mocss_stage2_open_shutter_pilot.py",
+    "changes": [
+      "Accept Spec2Pipeline.run() list of data models and inspect metadata per model",
+      "Replace nonexistent master_background with real stage 2 master_background_mos",
+      "Raise nonzero CI exit if internal pipeline exception / configuration failure",
+      "Keep diagnostic x1d and real scientifically valid MOCSS spectra separate"
+    ],
+    "verification_status": "GITHUB_ACTIONS_PENDING_AT_RECEIPT_WRITING",
+    "rerun_id": 39150480150
+  },
+  "remaining_calibration": {
+    "original_3_shutter_source_aware_MSA": true,
+    "four_dither_group_stack": true,
+    "custom_full_row_background": true,
+    "flat_field_sflat_photom": true,
+    "wavelength_position_solution": true,
+    "physical_psf_bar_throughput_and_injection_recovery": true,
+    "quantitative_real_line_flux_by_group": false,
+    "oiii_companion_15850p793": false,
+    "pagamma_companion_13656p748": false
+  },
+  "no_claims": {
+    "source_identity": null,
+    "redshift": null,
+    "gas_trail": null,
+    "astro_variability_confirmed": false
+  }
+}
