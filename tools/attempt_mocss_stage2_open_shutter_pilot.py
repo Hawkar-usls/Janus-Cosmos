@@ -99,7 +99,7 @@ def attempt(entry,base,model_name="TEST_PILOT"):
         out["available_stage2_steps"]=sorted(pipeline.step_defs)
         out["skipped_stage2_steps"]=[]
         out["missing_requested_skip_steps"]=[]
-        for name in ("master_background","bkg_subtract","pathloss","barshadow","resample_spec"):
+        for name in ("master_background_mos","bkg_subtract","pathloss","barshadow","resample_spec"):
             if hasattr(pipeline,name):
                 getattr(pipeline,name).skip=True
                 out["skipped_stage2_steps"].append(name)
@@ -109,13 +109,20 @@ def attempt(entry,base,model_name="TEST_PILOT"):
         # creates any formally readable x1d from a virtual background shutter.
         result=pipeline.run(probe["probe_rate"])
         out["stage2_result"]="CALL_RETURNED"
-        if result is not None:
-            out["returned_model_type"]=type(result).__name__
+        out["returned_model_type"]=type(result).__name__
+        models=result if isinstance(result,(list,tuple)) else ([] if result is None else [result])
+        out["returned_model_count"]=len(models)
+        out["returned_model_types"]=[type(m).__name__ for m in models]
+        out["calibration_step_states_by_model"]=[]
+        for model in models:
+            meta=getattr(model,"meta",None)
+            cal_step=getattr(meta,"cal_step",None)
+            states={}
             for step in ("assign_wcs","extract_2d","srctype","wavecorr","flat_field","photom","extract_1d"):
-                v=getattr(getattr(result.meta,"cal_step",object()),step,None)
-                if v is not None:out.setdefault("calibration_step_states",{})[step]=str(v)
-            try:result.close()
-            except Exception:pass
+                v=getattr(cal_step,step,None)
+                if v is not None:states[step]=str(v)
+            out["calibration_step_states_by_model"].append(states)
+            if hasattr(model,"close"):model.close()
     except Exception as exc:
         out["stage2_result"]="PIPELINE_OR_CONFIGURATION_FAILURE_NOT_NEGATIVE_SPECTRAL_RESULT"
         out["exception_class"]=type(exc).__name__
@@ -127,11 +134,14 @@ def attempt(entry,base,model_name="TEST_PILOT"):
         try:
             with fits.open(p,memmap=True) as f:
                 spec=[h for h in f if getattr(h,"name","").upper()=="EXTRACT1D"]
-                if spec: out["x1d_has_extract1d_table"]=True
-            files.append({"name":p.name,"bytes":p.stat().st_size,"sha256":sha(p)})
+            files.append({"name":p.name,"bytes":p.stat().st_size,"sha256":sha(p),"has_extract1d":bool(spec)})
         except Exception as exc:
             files.append({"name":p.name,"inspection_error":str(exc)[:100]})
     out["stage2_output_fits"]=files
+    out["x1d_table_count"]=sum(1 for f in files if f.get("has_extract1d"))
+    out["astrophysical_calibrated_x1d"]=False
+    if out["stage2_result"]=="CALL_RETURNED" and not out["x1d_table_count"]:
+        out["stage2_result"]="NO_DIAGNOSTIC_X1D_REPRODUCED"
     out["source_redshift"]=None
     out["directional_trail_detected"]=False
     return out
@@ -175,5 +185,9 @@ def main():
         print("STAGE2_PILOT",i,r["stage2_result"],r.get("exception_class",""),
               "OUTPUT",str(output),flush=True)
     print("SCIENTIFIC_VERDICT=NO_CALIBRATED_MOCSS_LINE_FLUX_CLAIM",flush=True)
+    if any(r.get("stage2_result") not in ("CALL_RETURNED","NO_DIAGNOSTIC_X1D_REPRODUCED") for r in data["results"]):
+        raise SystemExit("CI_FAIL: Stage2 pipeline exception or malformed data; saved receipt is NOT a successful calibration")
+    if any(r.get("stage2_result") == "NO_DIAGNOSTIC_X1D_REPRODUCED" for r in data["results"]):
+        print("STAGE2_PILOT_NOT_SCIENTIFIC_SUCCESS: No virtual-background-shutter x1d; need MOCSS source-aware extraction.",flush=True)
 
 if __name__=="__main__":main()
