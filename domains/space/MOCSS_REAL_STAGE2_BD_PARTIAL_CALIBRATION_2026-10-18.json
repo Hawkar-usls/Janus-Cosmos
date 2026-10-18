@@ -1,0 +1,87 @@
+{
+  "schema": "janus-cosmos-2023-mocss-two-angle-stage2-partial-calibration-audit-v1",
+  "created_utc": "2026-10-18",
+  "scientific_status": "ARCHIVAL_RATE_MSA_CALWEBB_SPEC2_PARTIAL_CALIBRATION_CONFIRMED_NO_ASTROPHYSICAL_X1D",
+  "provenance": {
+    "archive": "MAST JWST GO-3290",
+    "run_id": 39150480150,
+    "run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39150480150",
+    "artifact_id": 12144873008,
+    "artifact_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39150480150/artifacts/12144873008",
+    "raw_json_sha256": "b5a8597c7ce524fb86c916fbb4da7fb5b6f869e9d7e5931543aa280fa6fcc982",
+    "source_script": "tools/attempt_mocss_stage2_open_shutter_pilot.py",
+    "jwst_version": "1.19.1",
+    "crds": "jwst_1413.pmap",
+    "source_msa_is_virtual_background": true
+  },
+  "test": {
+    "two_archive_detector_exposures": [
+      8,
+      13
+    ],
+    "models_returned": [
+      {
+        "group": "B",
+        "detector": "nrs2",
+        "exposure_index": 8,
+        "rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+        "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+        "returned_model_type": "MultiSlitModel",
+        "returned_count": 1,
+        "calibration_steps": {
+          "assign_wcs": "COMPLETE",
+          "extract_2d": "COMPLETE",
+          "srctype": "COMPLETE",
+          "wavecorr": "SKIPPED",
+          "flat_field": "COMPLETE",
+          "photom": "COMPLETE"
+        },
+        "x1d_table_count": 0,
+        "stage2_result": "NO_DIAGNOSTIC_X1D_REPRODUCED"
+      },
+      {
+        "group": "D",
+        "detector": "nrs1",
+        "exposure_index": 13,
+        "rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+        "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+        "returned_model_type": "MultiSlitModel",
+        "returned_count": 1,
+        "calibration_steps": {
+          "assign_wcs": "COMPLETE",
+          "extract_2d": "COMPLETE",
+          "srctype": "COMPLETE",
+          "wavecorr": "SKIPPED",
+          "flat_field": "COMPLETE",
+          "photom": "COMPLETE"
+        },
+        "x1d_table_count": 0,
+        "stage2_result": "NO_DIAGNOSTIC_X1D_REPRODUCED"
+      }
+    ],
+    "skipped_steps": [
+      "master_background_mos",
+      "bkg_subtract",
+      "pathloss",
+      "barshadow",
+      "resample_spec"
+    ],
+    "model_meta_missing_error_fixed": true,
+    "archival_data_sha_check": true,
+    "valid_source_science_extract": false
+  },
+  "interpretation": [
+    "Real JWST partial flat/photom/WCS calibration succeeded on both test virtual background slits.",
+    "The input MSA source_id 0, BACKGROUND Y, PRIMARY_SOURCE N intentionally represents a virtual background, not an astrophysical source.",
+    "No SCIENCE_VALID 1D line flux, slit throughput, injected-source corrected spectrum or wavelength companion limit is available from this run.",
+    "A source-aware three adjacent shutter test is separate and requires real 16-exposure sky subtraction/throughput and full injection for astrophysical validity."
+  ],
+  "physical_states": {
+    "lambda_16004_flux_cgs": null,
+    "lambda_15850p793_flux_cgs": null,
+    "lambda_13656p748_flux_cgs": null,
+    "source_class": null,
+    "redshift": null,
+    "gas_trail_detected": false
+  }
+}
