@@ -1,0 +1,69 @@
+name: JANUS MOCSS Three-Shutter Source-Aware Stage2 Pilot
+on:
+  pull_request:
+    paths:
+      - 'tools/attempt_mocss_source_aware_stage2.py'
+      - '.github/workflows/jwst-mocss-source-aware-stage2.yml'
+      - 'tools/prepare_mocss_wcs_probe.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-source-metadata-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify three-shutter synthetic SOURCE_INFO on real archived MSA and RATE
+        run: |
+          python -m pip install --disable-pip-version-check numpy astropy
+          PYTHONPATH=tools python -u tools/attempt_mocss_source_aware_stage2.py \
+            --indices 8,13 --geometry-only \
+            --root /tmp/janus_source_aware_geometry \
+            --output /tmp/janus_source_aware_geometry.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-mocss-source-aware-geometry-only
+          path: /tmp/janus_source_aware_geometry.json
+          retention-days: 30
+  spec2-source-aware-compatibility:
+    needs: frozen-source-metadata-geometry
+    runs-on: ubuntu-latest
+    timeout-minutes: 37
+    env:
+      CRDS_PATH: /tmp/janus_crds
+      CRDS_SERVER_URL: https://jwst-crds.stsci.edu
+      CRDS_CONTEXT: jwst_1413.pmap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pin original JWST pipeline
+        run: |
+          python -m pip install --disable-pip-version-check 'jwst==1.19.1'
+          python -c 'import jwst; assert jwst.__version__ == "1.19.1"'
+      - name: Test diagnostic source-aware MSA in Stage2 on two actual position angles
+        run: |
+          PYTHONPATH=tools python -u tools/attempt_mocss_source_aware_stage2.py \
+            --indices 8,13 \
+            --root /tmp/janus_source_aware_stage2 \
+            --output /tmp/janus_source_aware_stage2.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-mocss-source-aware-stage2-non-scientific
+          path: /tmp/janus_source_aware_stage2.json
+          retention-days: 30
+      - name: Scientific ceiling
+        if: always()
+        run: |
+          echo 'SYNTHETIC_SOURCE_INFO=NOT_ORIGINAL_MPT_SOURCE'
+          echo 'THREE_SHUTTER_MSA_SOURCE_AWARE=DIAGNOSTIC_ONLY'
+          echo 'FOUR_DITHER_REAL_MOCSS_SKY_AND_PSF_THROUGHPUT=NOT_REPRODUCED'
+          echo 'FITTED_X1D_FLUX_AND_LINE_IDENTIFICATION=NOT_SCIENCE_GRADE'
+          echo 'REDSHIFT_OR_TRAIL=NOT_DETERMINED'
