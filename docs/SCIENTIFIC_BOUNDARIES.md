@@ -65,3 +65,13 @@
 - `PUBLISHED_GT_90_PERCENT_ASSOCIATION_SELECTION != PER_EVENT_P_1`; V3 does not invent the missing individual probability, PSF, background, event classification or instrument response.
 - `11_KNOWN_REDSHIFT_BURSTS != UNBIASED_BURST_POPULATION`; 162 within-source pairs share only 38 photons, so pair counts are not independent statistical trials.
 - Frozen V1 and V2 SHA pins and all BHB/AMPS non-detection gates stay in force; missing raw FITS and emission-time constraints make `LATTICE_SPACING_CONSTRAINT=NOT_DERIVED` mandatory.
+
+## Cosmos V4: actual Extended LAT FITS vs nonidentifiable propagation inference
+
+- `REAL_FERMI_EXTENDED_FITS != BACKGROUND_FREE_GRB_PHOTONS`: three exact-hash NASA EV00/SC00 pairs were ingested; the 175 surviving SOURCE-class, 1–300 GeV, quality/geometry diagnostic candidates have not been assigned per-photon GRB association probabilities.
+- `PARSED_SC_ATTITUDE_AND_GTI != IRF_FORWARD_FOLDED`: spacecraft livetime, LAT configuration and data-quality/pointing fields are genuinely parsed, but effective area, energy dispersion, PSF, background, and exposure-weighted selection have **not** been fitted.
+- `GBM_TRIGGER != SOURCE_PHOTON_EMISSION_TIME`: trigger MET offsets are approximate convenience metadata and do not establish emission simultaneity or precision cross-instrument clock calibration.
+- `THREE_DIFFERENT_REDSHIFTS != IDENTIFIABLE_LIV`: independent unknown intrinsic slopes \(\beta_j\) in each GRB are algebraically degenerate with the common propagation coefficient \(\eta\); redshift leverage is no cure without source constraints.
+- `SYNTHETIC_PROFILE_TS != ASTROPHYSICAL_LRT`: null-bootstrap p-values and recovered injections are generated from a toy Gaussian timing model only; there is **no observed physical LAT/GBM likelihood statistic or bounds**.
+- `INTRINSIC_SOURCE_LAG_MIMIC != LATTICE_DISCOVERY`: a no-dispersion simulation with source-intrinsic slopes reproduces the apparent positive estimate when source evolution is falsely fixed to zero; the unrestricted model reports `eta_mle=null` and `TS=0`.
+- V1–V3 frozen SHA lineages, AMPS `OPEN_UNCONFIRMED`, `BHB_BOOM=NOT_ESTABLISHED`, and `OSIRIS_PROOF_AUTHORITY=NO_CHANGE` remain mandatory.
