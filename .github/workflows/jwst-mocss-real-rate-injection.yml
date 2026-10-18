@@ -1,0 +1,42 @@
+name: JANUS MOCSS Three-Line Real RATE Injection Controls
+on:
+  pull_request:
+    paths:
+      - 'tools/inject_mocss_three_lines_raw_rate.py'
+      - 'domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json'
+      - '.github/workflows/jwst-mocss-real-rate-injection.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-detector-injection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install necessary original FITS support
+        run: python -m pip install --disable-pip-version-check numpy astropy
+      - name: Read, SHA verify and inject three fixed wavelengths in original real detector pixels
+        run: |
+          PYTHONPATH=tools python -u tools/inject_mocss_three_lines_raw_rate.py \
+            --data-dir /tmp/janus_mocss_three_line_injection \
+            --output /tmp/janus_mocss_three_line_rate_injection.json
+      - name: Upload full real-detector injection controls
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-three-line-real-rate-injection
+          path: /tmp/janus_mocss_three_line_rate_injection.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Scientific ceiling
+        if: always()
+        run: |
+          echo 'REAL_RATE_PIXELS_WITH_SHA256=CHECKED_IF_PREVIOUS_STEP_PASS'
+          echo 'GAUSSIAN_INJECTION_IN_DN_PER_SECOND_ONLY'
+          echo 'ASTROPHYSICAL_THREE_SHUTTER_THROUGHPUT=NOT_CALIBRATED'
+          echo 'STAGE2_FLUX=NOT_MEASURED'
+          echo 'OI_III_AND_PAGAMMA_IDENTIFICATION=OPEN'
