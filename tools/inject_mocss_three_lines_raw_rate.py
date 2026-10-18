@@ -106,7 +106,7 @@ def main():
         f=v["detectors"][detector]
         filename=f["rate_file"]
         p=get(Path(args.data_dir)/filename,f["sha256"])
-        with fits.open(p,memmap=True) as hdul:
+        with fits.open(p,memmap=False) as hdul:
             sci=hdul["SCI"].data;dq=hdul["DQ"].data
             lines={}
             for label in LABELS:
