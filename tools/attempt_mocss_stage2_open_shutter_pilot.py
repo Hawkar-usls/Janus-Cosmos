@@ -96,11 +96,15 @@ def attempt(entry,base,model_name="TEST_PILOT"):
         pipeline=Spec2Pipeline()
         pipeline.output_dir=str(tmp)
         pipeline.save_results=True
-        pipeline.master_background.skip=True
-        pipeline.bkg_subtract.skip=True
-        pipeline.pathloss.skip=True
-        pipeline.barshadow.skip=True
-        pipeline.resample_spec.skip=True
+        out["available_stage2_steps"]=sorted(pipeline.step_defs)
+        out["skipped_stage2_steps"]=[]
+        out["missing_requested_skip_steps"]=[]
+        for name in ("master_background","bkg_subtract","pathloss","barshadow","resample_spec"):
+            if hasattr(pipeline,name):
+                getattr(pipeline,name).skip=True
+                out["skipped_stage2_steps"].append(name)
+            else:
+                out["missing_requested_skip_steps"].append(name)
         # extract_1d is left enabled to test whether the pipeline actually
         # creates any formally readable x1d from a virtual background shutter.
         result=pipeline.run(probe["probe_rate"])
@@ -113,7 +117,7 @@ def attempt(entry,base,model_name="TEST_PILOT"):
             try:result.close()
             except Exception:pass
     except Exception as exc:
-        out["stage2_result"]="PIPELINE_REJECTED_TEST_GEOMETRY"
+        out["stage2_result"]="PIPELINE_OR_CONFIGURATION_FAILURE_NOT_NEGATIVE_SPECTRAL_RESULT"
         out["exception_class"]=type(exc).__name__
         out["exception_short"]=str(exc)[:1200]
         out["traceback_tail"]=traceback.format_exc()[-4000:]
