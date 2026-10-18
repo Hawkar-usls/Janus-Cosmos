@@ -1,0 +1,122 @@
+{
+  "blind_score_internal_sha256": "6fe5b96709d48f96657fa7d75b18bdcfc6f31716973475fc8bdda7a6a744a361",
+  "cases": [
+    {
+      "blind_model_preference": "LORENTZ_PREFERRED_SYNTHETIC",
+      "case_id": "V2-LI-KNOWN",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "correct_preferences",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "LATTICE_PREFERRED_SYNTHETIC",
+      "case_id": "V2-LATTICE-KNOWN",
+      "injected_model": "LATTICE_DISPERSION",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "correct_preferences",
+      "synthetic_noise_s": "-0.1"
+    },
+    {
+      "blind_model_preference": "UNIDENTIFIABLE_FREE_INTRINSIC_LAG",
+      "case_id": "V2-LATTICE-FREE",
+      "injected_model": "LATTICE_DISPERSION",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "unidentifiable",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "LATTICE_PREFERRED_SYNTHETIC",
+      "case_id": "V2-LI-MIMIC-FALSEPOSITIVE",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "MIMIC_LATTICE",
+      "recovery_class": "incorrect_preferences",
+      "synthetic_noise_s": "0"
+    },
+    {
+      "blind_model_preference": "UNIDENTIFIABLE_FREE_INTRINSIC_LAG",
+      "case_id": "V2-LI-MIMIC-FREE",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "MIMIC_LATTICE",
+      "recovery_class": "unidentifiable",
+      "synthetic_noise_s": "0"
+    },
+    {
+      "blind_model_preference": "LORENTZ_PREFERRED_SYNTHETIC",
+      "case_id": "V2-LI-BOUNDED",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "2",
+      "recovery_class": "correct_preferences",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "LATTICE_PREFERRED_SYNTHETIC",
+      "case_id": "V2-LATTICE-BOUNDED",
+      "injected_model": "LATTICE_DISPERSION",
+      "intrinsic_source_lag_generation": "1",
+      "recovery_class": "correct_preferences",
+      "synthetic_noise_s": "-0.1"
+    },
+    {
+      "blind_model_preference": "INCONCLUSIVE_SYNTHETIC",
+      "case_id": "V2-PLANCK-NEGLIGIBLE",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "inconclusive",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "INCONCLUSIVE_SYNTHETIC",
+      "case_id": "V2-EQUAL-ENERGY",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "inconclusive",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "INCONCLUSIVE_SYNTHETIC",
+      "case_id": "V2-ZERO-BASELINE",
+      "injected_model": "LORENTZ_INVARIANT",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "inconclusive",
+      "synthetic_noise_s": "0.1"
+    },
+    {
+      "blind_model_preference": "INCONCLUSIVE_SYNTHETIC",
+      "case_id": "V2-LARGE-UNCERTAINTY",
+      "injected_model": "LATTICE_DISPERSION",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "inconclusive",
+      "synthetic_noise_s": "1"
+    },
+    {
+      "blind_model_preference": "INCONCLUSIVE_SYNTHETIC",
+      "case_id": "V2-SUBTHRESHOLD",
+      "injected_model": "LATTICE_DISPERSION",
+      "intrinsic_source_lag_generation": "0",
+      "recovery_class": "inconclusive",
+      "synthetic_noise_s": "0.1"
+    }
+  ],
+  "counters": {
+    "correct_preferences": 4,
+    "inconclusive": 5,
+    "incorrect_preferences": 1,
+    "known_source_lag_mismatch_false_positive_controls": 1,
+    "unidentifiable": 2
+  },
+  "gates": {
+    "ACTUAL_LIV_OBSERVED": "NOT_ESTABLISHED",
+    "QUANTUM_FIREWALL": "OPEN_UNCONFIRMED",
+    "SEALED_TRUTH_REPLAY": "PASS_BYTE_EXACT",
+    "SIMULATED_UNIVERSE": "NOT_ESTABLISHED",
+    "SOURCE_INTRINSIC_LAG_CAN_MIMIC_LIV": "DEMONSTRATED_BY_NEGATIVE_CONTROL",
+    "SYNTHETIC_INJECTION_RECOVERY": "PASS_TEST_ONLY"
+  },
+  "observations_internal_sha256": "79433285d2ccbc2292c6ed204e01e88111a136bf16beae59b14d17926f26d40e",
+  "origin": "DETERMINISTIC_SYNTHETIC_ONLY",
+  "protocol_file_sha256": "4d8afa4d09d2aff80374dfde850fcc4b046efeb64dc43acf7cc6d169687d8024",
+  "result_sha256": "71bea4af3b28a3873f34776d58f848819c3b92f4822297c16e31126aea0fb9ac",
+  "schema": "janus.cosmos.lattice-tof-reveal.v2",
+  "truth_file_sha256": "e92e3134c3445813fcb2b55819d2681a1b7dd8aa0df9b3e2a0b25f7520973f1f"
+}
