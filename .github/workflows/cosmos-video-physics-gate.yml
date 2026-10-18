@@ -4,18 +4,24 @@ on:
   pull_request:
     paths:
       - 'workspace/janus_cosmos_simulation_audit.py'
+      - 'workspace/janus_cosmos_lattice_tof.py'
       - 'tests/test_cosmos_simulation_audit.py'
+      - 'tests/test_cosmos_lattice_tof.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
+      - 'docs/COSMOS_LATTICE_TOF_V2.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   push:
     branches: [main]
     paths:
       - 'workspace/janus_cosmos_simulation_audit.py'
+      - 'workspace/janus_cosmos_lattice_tof.py'
       - 'tests/test_cosmos_simulation_audit.py'
+      - 'tests/test_cosmos_lattice_tof.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
+      - 'docs/COSMOS_LATTICE_TOF_V2.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   workflow_dispatch:
@@ -37,7 +43,7 @@ jobs:
       - name: Compile and run whole JANUS BHB plus video-physics test family
         run: |
           set -euo pipefail
-          python -m py_compile workspace/janus_cosmos_simulation_audit.py tests/test_cosmos_simulation_audit.py
+          python -m py_compile workspace/janus_cosmos_simulation_audit.py workspace/janus_cosmos_lattice_tof.py tests/test_cosmos_simulation_audit.py tests/test_cosmos_lattice_tof.py
           python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Byte-exact replay against frozen ALI video-topic audit receipt
         run: |
@@ -45,6 +51,26 @@ jobs:
           mkdir -p artifacts/cosmos
           python workspace/janus_cosmos_simulation_audit.py --batch data/cosmos/COSMOS-ALI-SIMULATION-CLAIMS-2026-10-18.json > artifacts/cosmos/COSMOS-ALI-SIMULATION-AUDIT-RESULT.json
           cmp artifacts/cosmos/COSMOS-ALI-SIMULATION-AUDIT-RESULT.json data/cosmos/COSMOS-ALI-SIMULATION-AUDIT-RESULT-2026-10-18.json
+      - name: V2 three-phase photon TOF injection, blind score, and reveal byte replay
+        run: |
+          set -euo pipefail
+          python workspace/janus_cosmos_lattice_tof.py --prepare \
+            --protocol data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-PROTOCOL-2026-10-18.json \
+            --truth data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-SEALED-TRUTH-2026-10-18.json \
+            > artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS.json
+          cmp artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS.json data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS-2026-10-18.json
+          python workspace/janus_cosmos_lattice_tof.py --score \
+            --protocol data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-PROTOCOL-2026-10-18.json \
+            --observations artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS.json \
+            > artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-BLIND-SCORE.json
+          cmp artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-BLIND-SCORE.json data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-BLIND-SCORE-2026-10-18.json
+          python workspace/janus_cosmos_lattice_tof.py --reveal \
+            --protocol data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-PROTOCOL-2026-10-18.json \
+            --observations artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-OBSERVATIONS.json \
+            --blind-score artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-BLIND-SCORE.json \
+            --truth data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-SEALED-TRUTH-2026-10-18.json \
+            > artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL.json
+          cmp artifacts/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL.json data/cosmos/COSMOS-ALI-V2-LATTICE-TOF-REVEAL-2026-10-18.json
       - uses: actions/upload-artifact@v4
         with:
           name: janus-cosmos-ali-simulation-hypothesis-audit
