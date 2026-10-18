@@ -6,13 +6,18 @@ on:
       - 'workspace/janus_cosmos_simulation_audit.py'
       - 'workspace/janus_cosmos_lattice_tof.py'
       - 'workspace/janus_cosmos_fermi_observation_gate.py'
+      - 'workspace/janus_cosmos_fermi_raw_v4.py'
+      - 'workspace/janus_cosmos_fermi_joint_v4.py'
+      - 'scripts/fetch_fermi_lat_v4.py'
       - 'tests/test_cosmos_simulation_audit.py'
       - 'tests/test_cosmos_lattice_tof.py'
       - 'tests/test_cosmos_fermi_observation_gate.py'
+      - 'tests/test_cosmos_fermi_raw_v4.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
       - 'docs/COSMOS_LATTICE_TOF_V2.md'
       - 'docs/COSMOS_FERMI_OBSERVATION_GATE_V3.md'
+      - 'docs/COSMOS_FERMI_RAW_JOINT_V4.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   push:
@@ -21,13 +26,18 @@ on:
       - 'workspace/janus_cosmos_simulation_audit.py'
       - 'workspace/janus_cosmos_lattice_tof.py'
       - 'workspace/janus_cosmos_fermi_observation_gate.py'
+      - 'workspace/janus_cosmos_fermi_raw_v4.py'
+      - 'workspace/janus_cosmos_fermi_joint_v4.py'
+      - 'scripts/fetch_fermi_lat_v4.py'
       - 'tests/test_cosmos_simulation_audit.py'
       - 'tests/test_cosmos_lattice_tof.py'
       - 'tests/test_cosmos_fermi_observation_gate.py'
+      - 'tests/test_cosmos_fermi_raw_v4.py'
       - 'data/cosmos/**'
       - 'docs/ALI_SIMULATION_HYPOTHESIS_AUDIT.md'
       - 'docs/COSMOS_LATTICE_TOF_V2.md'
       - 'docs/COSMOS_FERMI_OBSERVATION_GATE_V3.md'
+      - 'docs/COSMOS_FERMI_RAW_JOINT_V4.md'
       - 'docs/SCIENTIFIC_BOUNDARIES.md'
       - '.github/workflows/cosmos-video-physics-gate.yml'
   workflow_dispatch:
@@ -49,7 +59,7 @@ jobs:
       - name: Compile and run whole JANUS BHB plus video-physics test family
         run: |
           set -euo pipefail
-          python -m py_compile workspace/janus_cosmos_simulation_audit.py workspace/janus_cosmos_lattice_tof.py workspace/janus_cosmos_fermi_observation_gate.py tests/test_cosmos_simulation_audit.py tests/test_cosmos_lattice_tof.py tests/test_cosmos_fermi_observation_gate.py
+          python -m py_compile workspace/janus_cosmos_simulation_audit.py workspace/janus_cosmos_lattice_tof.py workspace/janus_cosmos_fermi_observation_gate.py workspace/janus_cosmos_fermi_raw_v4.py workspace/janus_cosmos_fermi_joint_v4.py scripts/fetch_fermi_lat_v4.py tests/test_cosmos_simulation_audit.py tests/test_cosmos_lattice_tof.py tests/test_cosmos_fermi_observation_gate.py tests/test_cosmos_fermi_raw_v4.py
           python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Byte-exact replay against frozen ALI video-topic audit receipt
         run: |
@@ -84,6 +94,14 @@ jobs:
             --batch data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json \
             > artifacts/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT.json
           cmp artifacts/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT.json data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-TOF-METHOD-RESULT-2026-10-18.json
+      - name: V4 offline real raw-FITS provenance receipt and synthetic joint likelihood control
+        run: |
+          set -euo pipefail
+          python workspace/janus_cosmos_fermi_joint_v4.py > artifacts/cosmos/COSMOS-ALI-V4-JOINT-TOY-LIKELIHOOD.json
+          cmp artifacts/cosmos/COSMOS-ALI-V4-JOINT-TOY-LIKELIHOOD.json data/cosmos/COSMOS-ALI-V4-JOINT-TOY-LIKELIHOOD-2026-10-18.json
+          python -m unittest discover -s tests -p 'test_cosmos_fermi_raw_v4.py' -v
+          # Actual FSSC FITS are SHA-pinned and were ingested for the frozen JSON;
+          # do not demand ephemeral NASA-generated URLs during the offline PR gate.
       - uses: actions/upload-artifact@v4
         with:
           name: janus-cosmos-ali-simulation-hypothesis-audit
