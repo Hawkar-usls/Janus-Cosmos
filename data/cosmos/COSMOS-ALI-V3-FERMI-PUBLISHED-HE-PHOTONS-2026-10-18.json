@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.published-fermi-photon-summary.v3",
+  "experiment_id": "JANUS-COSMOS-ALI-V3-FERMI-PHOTON-TOF-2026-10-18",
+  "provenance_status": "TRANSCRIBED_FROM_PRIMARY_PUBLISHED_FERMI_LAT_SECOND_GRB_CATALOG_TABLE_7",
+  "catalog_subset": "11_GRBS_WITH_REDSHIFTS_AND_10GEV_PHOTONS_SELECTED_FOR_METHOD_VALIDATION_NOT_A_STATISTICAL_SAMPLE",
+  "source": {
+    "paper_title": "A Decade of Gamma-Ray Bursts Observed by Fermi-LAT: The Second GRB Catalog",
+    "authors_short": "Ajello et al. (Fermi-LAT Collaboration)",
+    "original_paper_url": "https://arxiv.org/abs/1906.11403",
+    "versioned_html_table_url": "https://arxiv.org/html/1906.11403v1",
+    "table": "Table 7: Fermi-LAT GRBs with photon energies E>10 GeV",
+    "official_field_definitions": "https://heasarc.gsfc.nasa.gov/w3browse/fermi/fermilgrb.html",
+    "official_event_columns": "https://fermi.gsfc.nasa.gov/ssc/data/access/lat/lat_data_columns.html",
+    "event_catalog_fits": "NOT_DOWNLOADED_OR_VERIFIED",
+    "association_selection": "P_ASSOCIATED_GREATER_THAN_0_90_PER_PUBLISHED_TABLE_CRITERION_NOT_PER_EVENT_PROBABILITY",
+    "time_zero": "SECONDS_AFTER_FERMI_GBM_TRIGGER_NOT_SOURCE_EMISSION_TIME",
+    "precision": "PUBLISHED_ROUNDED_TABLE_VALUES_NOT_FULL_PRECISION_TIMESTAMPS",
+    "redshift_source": "SAME_PRIMARY_TABLE_7",
+    "curation": "ALL_PUBLISHED_10GEV_EVENTS_FOR_THE_11_PREREGISTERED_KNOWN_REDSHIFT_GRBS_LISTED_BELOW"
+  },
+  "analysis_protocol": {
+    "reference_energy_eV": "1e9",
+    "reference_energy_status": "HYPOTHETICAL_ONLY_NO_MATCHED_LOW_ENERGY_PHOTON_MEASURED",
+    "lattice_spacings_m": ["4e-27", "1.616255e-35"],
+    "lattice_parameter_status": "CONDITIONAL_BENCHMARK_NOT_ESTIMATE",
+    "cosmology": {"H0_km_s_Mpc":"70", "Omega_m":"0.3", "Omega_lambda":"0.7"},
+    "lat_event_selection": "PUBLISHED_ASSOCIATION_THRESHOLD_GT_0_9_NO_EVENT_BY_EVENT_BACKGROUND_MODEL",
+    "inference_ceiling": "PREDICTION_OVERLAYS_AND_SOURCE_ORDER_CONTROLS_ONLY_NO_ASTROPHYSICAL_LIV_BOUND",
+    "true_event_pair_lag_available": false,
+    "source_intrinsic_lag_calibrated": false,
+    "instrument_response_reconstructed": false,
+    "statistical_trials_calibrated": false,
+    "raw_event_files_ingested": false,
+    "prohibited_operations": ["FIT_LATTICE_SPACING_TO_TRIGGER_RELATIVE_SINGLE_PHOTON_TIME", "ASSUME_GBM_TRIGGER_IS_EMISSION_OF_A_LOW_ENERGY_PHOTON", "REPORT_LIV_OR_SIMULATION_DETECTION"]
+  },
+  "bursts": [
+    {"grb":"080916C","class":"LONG","redshift":"4.35","events":[{"energy_GeV":"27.4","time_s":"40.5"},{"energy_GeV":"12.4","time_s":"16.5"}]},
+    {"grb":"090510","class":"SHORT","redshift":"0.90","events":[{"energy_GeV":"30.0","time_s":"0.83"}]},
+    {"grb":"090902B","class":"LONG","redshift":"1.82","events":[{"energy_GeV":"40.0","time_s":"81.7"},{"energy_GeV":"21.7","time_s":"331.9"},{"energy_GeV":"18.1","time_s":"26.2"},{"energy_GeV":"15.4","time_s":"45.6"},{"energy_GeV":"14.2","time_s":"14.2"},{"energy_GeV":"12.7","time_s":"42.4"},{"energy_GeV":"11.9","time_s":"11.7"}]},
+    {"grb":"090926A","class":"LONG","redshift":"2.11","events":[{"energy_GeV":"19.4","time_s":"24.8"},{"energy_GeV":"10.4","time_s":"3785.0"}]},
+    {"grb":"100414A","class":"LONG","redshift":"1.37","events":[{"energy_GeV":"30.0","time_s":"33.4"},{"energy_GeV":"25.1","time_s":"358.5"}]},
+    {"grb":"130427A","class":"LONG","redshift":"0.34","events":[{"energy_GeV":"94.1","time_s":"243.1"},{"energy_GeV":"77.1","time_s":"18.6"},{"energy_GeV":"57.4","time_s":"256.0"},{"energy_GeV":"38.7","time_s":"78.4"},{"energy_GeV":"38.2","time_s":"3409.0"},{"energy_GeV":"33.6","time_s":"34366.0"},{"energy_GeV":"28.4","time_s":"47.6"},{"energy_GeV":"26.9","time_s":"84.7"},{"energy_GeV":"25.4","time_s":"141.0"},{"energy_GeV":"19.3","time_s":"6062.0"},{"energy_GeV":"17.1","time_s":"217.0"},{"energy_GeV":"14.9","time_s":"119.3"},{"energy_GeV":"12.9","time_s":"80.5"},{"energy_GeV":"12.2","time_s":"64.5"},{"energy_GeV":"12.0","time_s":"23.5"},{"energy_GeV":"11.7","time_s":"214.0"},{"energy_GeV":"10.8","time_s":"23.2"}]},
+    {"grb":"131231A","class":"LONG","redshift":"0.64","events":[{"energy_GeV":"48.3","time_s":"110.3"},{"energy_GeV":"17.1","time_s":"844.2"}]},
+    {"grb":"160509A","class":"LONG","redshift":"1.17","events":[{"energy_GeV":"51.9","time_s":"76.5"},{"energy_GeV":"41.5","time_s":"242.0"}]},
+    {"grb":"160623A","class":"LONG","redshift":"0.37","events":[{"energy_GeV":"18.2","time_s":"12038.5"}]},
+    {"grb":"160625B","class":"LONG","redshift":"1.41","events":[{"energy_GeV":"15.3","time_s":"346.2"}]},
+    {"grb":"171010A","class":"LONG","redshift":"0.33","events":[{"energy_GeV":"19.0","time_s":"2891.0"}]}
+  ]
+}
