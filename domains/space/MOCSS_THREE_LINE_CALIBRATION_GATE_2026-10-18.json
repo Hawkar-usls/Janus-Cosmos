@@ -126,6 +126,40 @@
     "mocss_throughput_injection": "NOT_PERFORMED",
     "line_ratio_redshift": "OPEN",
     "source_class": "OPEN",
-    "directed_gas_trail": "NOT_DETECTED"
+    "directed_gas_trail": "NOT_DETECTED",
+    "two_angle_source_aware_three_shutter_geometry": "PASS_DIAGNOSTIC",
+    "two_angle_source_aware_stage2_spectrophotometric_validity": "OPEN_NOT_VERIFIED"
+  },
+  "stage2_source_aware_progress_2026_10_18": {
+    "status": "THREE_SHUTTER_SOURCE_INFO_GEOMETRY_WCS_OFFCENTER_PASS_NO_AUTHENTIC_SOURCE_FLUX",
+    "underlying_stage2_real_background_BD_receipt": "domains/space/MOCSS_REAL_STAGE2_BD_PARTIAL_CALIBRATION_2026-10-18.json",
+    "synthetic_source_MSA_3shutter_offcenter_receipt": "domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json",
+    "pilot_script": "tools/attempt_mocss_source_aware_stage2.py",
+    "geometry_run_id": 39159808143,
+    "groups": {
+      "B": {
+        "exposure_index": 8,
+        "detector": "NRS2",
+        "source_fraction_xy": [
+          0.6854857284214204,
+          0.7574539661709843
+        ]
+      },
+      "D": {
+        "exposure_index": 13,
+        "detector": "NRS1",
+        "source_fraction_xy": [
+          0.2781984438413271,
+          0.3903103215248744
+        ]
+      }
+    },
+    "real_MPT_source_record_found": false,
+    "injection_with_physical_PSF_and_bar_losses_done": false,
+    "per_group_stage2_ASTROPHYSICAL_line_flux_cgs": null,
+    "realistic_line_completeness_calibrated": false,
+    "source_redshift": null,
+    "source_class": null,
+    "explicit_ceiling": "Source-aware synthetic MSA copies validate software geometry, not a real source detection. True MOCSS requires custom full-row sky, all four dither stacks, wavelength-dependent transmission/PSF injection and independent spectral line significance."
   }
 }
