@@ -15,7 +15,7 @@ from astropy.io import fits
 from astropy.wcs import WCS
 
 from recheck_nircam_time_domain import DATA, OUTPUT, parse_headers
-from replay_mast import RA, DEC, aperture_photometry
+from replay_jwst_mocss_mast_subset import RA, DEC, aperture_photometry
 
 REPORT = Path('/tmp/janus_nircam_f150w_astrometry_controls_20261016.json')
 NEIGHBORS = {
