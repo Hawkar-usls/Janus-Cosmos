@@ -133,7 +133,11 @@
     "MOCSS_FOUR_GROUP_THREE_ROW_TEST_GEOMETRY": "PASS_SOURCE_INFO_TEST_ONLY",
     "MOCSS_THREE_ROW_CALIBRATED_SPECTRUM": "OPEN",
     "MOCSS_FULL_ROW_BACKGROUND_4_DITHER_STACK": "NOT_PERFORMED",
-    "MOCSS_STPSF_THROUGHPUT_AND_DETECTOR_INJECTION": "NOT_PERFORMED"
+    "MOCSS_STPSF_THROUGHPUT_AND_DETECTOR_INJECTION": "NOT_PERFORMED",
+    "original_MSA_16_exact_pattern_masks": "PASS_64",
+    "crds_projected_16_detector_illumination": "NOT_PERFORMED",
+    "open_closed_shutter_sky_physical_calibration": "NOT_PERFORMED",
+    "strong_source_line_photometry_with_validated_noise": "OPEN"
   },
   "stage2_source_aware_progress_2026_10_18": {
     "status": "THREE_SHUTTER_SOURCE_INFO_GEOMETRY_WCS_OFFCENTER_PASS_NO_AUTHENTIC_SOURCE_FLUX",
@@ -181,5 +185,29 @@
     "secondary_lines_confirmed": false,
     "class_or_redshift_established": false,
     "reason": "Corrected geometry and diagnostic off-line null control data supersede any previous claims that three neighboring columns adequately reproduce open-dispersion-shutter losses."
+  },
+  "exact_original_MSA_plane_audit_2026_10_19": {
+    "status": "PASS_64_ORIGINAL_MSA_APERTURE_RASTERS_DETECTOR_ILLUMINATION_STILL_OPEN",
+    "source": "domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json",
+    "run_id": 39237389277,
+    "original_rate_files": 16,
+    "original_MSA_files": 2,
+    "original_SHUTTER_INFO_header_pair_verified": 16,
+    "all_RATE_PATT_NUM": 1,
+    "source_nearest_center_marked_open": 16,
+    "source_nearest_three_dispersion_rows_marked_open": 48,
+    "source_nearby_open_fraction_minmax": [
+      0.9181286549707602,
+      0.9532163742690059
+    ],
+    "detector_pixel_illumination_projection_with_crds": false,
+    "empirical_open_mask_illumination_correction": false,
+    "exact_background_subtraction_using_projected_MSA": false,
+    "full_spectral_stage2_in_group_stacks": false,
+    "absolute_physical_flux": null,
+    "physical_STPSF_detector_forward_model_2D_injections": false,
+    "source_identification": null,
+    "redshift": null,
+    "epistemic_caveat": "Original MSA metadata aperture-state masks are not wavelength-dependent detector illumination or transmission. Shutter availability is not source line confirmation."
   }
 }
