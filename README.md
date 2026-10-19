@@ -339,6 +339,17 @@ JANUS Cosmos V5 verifies all nine `P8R3_SOURCE_V3` LAT CALDB Aeff/PSF/EDISP tabu
 
 **Science gate:** genuine joint LAT/GBM forward-folded observational Lorentz-invariance test **not yet implemented**. No observed LIV, spacetime discreteness, AMPS firewall or BHB Boom detection is claimed.
 
+## V6-R0 — OGIP response-aware GBM + real LAT control region (2026-10-19)
+
+V6-R0 rehydrates and SHA-verifies **42 official Fermi files**: 27 GBM TTE/CSPEC/RSP2, nine LAT `P8R3_SOURCE_V3` CALDB grids, and six original V4 LAT EVENTS/SC_DATA. The complete V5 audit replay is **byte-for-byte identical** (SHA-256 `53c4e8ba...`).
+
+- `workspace/janus_cosmos_fermi_response_v6.py` — 17 real time-resolved, **time-overlap-weighted OGIP RSP2 forward-folds**, 3 detectors per GRB and channel-wise Poisson on/off background profiling.
+- `workspace/janus_cosmos_fermi_lat_diagnostics_v6.py` — recovers exactly 175 LAT candidates; 5° source region versus 5–10° annulus, Pass8 event-type partitions, real spacecraft/GTI-based **approximate** effective exposure.
+- `workspace/janus_cosmos_fermi_joint_v6.py` — pairs LAT/GBM observed diagnostics while maintaining structural GeV intrinsic emission-time degeneracy and **no observed LIV p-value**.
+- [Scientific guide and reproduction](docs/JANUS-COSMOS-LAT-GBM-JOINT-V6-R0-2026-10-19.md) · `data/cosmos/COSMOS-ALI-V6-*` · `tests/test_cosmos_fermi_v6.py`.
+
+**Critical falsification:** the one-component cutoff power-law misses bright real GBM windows (090902B 5–10 s; 130427A 0–10/10–20 s). **99/99 offline tests pass.** Complete LAT PSF/EDISP+diffuse likelihood, time-variable GBM background, Band+hard-component source model and defensible GeV emission-lag prior remain open. No new physics or black-hole-firewall detection is claimed.
+
 ## Historical/source firewall
 
 `S𓂸ḥ` is a modern project alias/overlay. It is not claimed to be an ancient Egyptian spelling or SAT terminology. Historical Pyramid Text material was heuristic semantic/operator inspiration only. Correctness and authority come from executable CNF mechanics, exact replay, current verification and certificates.
