@@ -19,7 +19,7 @@ def main():
     for case in cases:
         assert 3.29 < case["redshift_if_oii"] < 3.30
         assert math.isclose(case["expected_observed_doublet_separation_A"], 11.945, abs_tol=0.004)
-        assert case["rest_equivalent_width_lower_bound_A"] > 1700
+        assert case["rest_ew_lower_bound_if_persistent_A"] > 1700
         previous = float("inf")
         for item in case["conditional_gaussian_lsf_predictions"]:
             width = item["predicted_second_moment_equivalent_fwhm_A"]
@@ -27,6 +27,7 @@ def main():
             previous = width
     assert frozen["science_gate"]["oii_ruled_out"] is False
     assert frozen["science_gate"]["redshift_or_distance_measured"] is False
+    assert "if_persistent" in next(k for k in frozen["published_line"] if "ew_" in k)
     print("MOCSS_OII_LSF_MOMENT_SENSITIVITY_REPRODUCED_NOT_AN_IDENTIFICATION")
 
 
