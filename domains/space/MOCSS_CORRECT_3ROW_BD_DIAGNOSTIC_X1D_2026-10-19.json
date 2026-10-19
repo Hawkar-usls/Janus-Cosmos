@@ -1,0 +1,72 @@
+{
+  "schema": "janus-cosmos-correct-three-dispersion-rows-two-angle-x1d-v1",
+  "date_utc": "2026-10-19",
+  "status": "PROVISIONAL_REAL_ARCHIVE_3ROW_BD_STAGE2_X1D_EXISTS_NOT_PHYSICAL_FLUX",
+  "provenance": {
+    "run_id": 39223778736,
+    "artifact_id": 12173376301,
+    "artifact_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39223778736/artifacts/12173376301",
+    "json_three_lines_sha256": "e6df92e05716f4d5f3e5a6fb61a09005286a180eedd087e0e5df33c18cd5d2c5",
+    "geometry": "domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json"
+  },
+  "groups": {
+    "B": {
+      "exposure": 8,
+      "rows": [
+        164,
+        165,
+        166
+      ],
+      "column": 93,
+      "fits_sha256": "47430bc196e9562a21ab9617b7e79d01c47ba9b9fa0a801994251335b56db6d7",
+      "line_formal_r": [
+        2.00413,
+        0.93462,
+        4.45503
+      ],
+      "reduced_chi2": [
+        2.09091,
+        1.7027,
+        96.3483
+      ]
+    },
+    "D": {
+      "exposure": 13,
+      "rows": [
+        245,
+        246,
+        247
+      ],
+      "column": 107,
+      "fits_sha256": "dd780aacbff407dfe0a03a209be6a464a51816904caca3cf487a3c88f4d93fec",
+      "line_formal_r": [
+        3.29794,
+        4.09309,
+        1.90741
+      ],
+      "reduced_chi2": [
+        52.79921,
+        64.78753,
+        60.6881
+      ]
+    }
+  },
+  "line_order": [
+    "16004A",
+    "OIII_15850p793",
+    "Pagamma_13656p748"
+  ],
+  "compare_wrong_axis": {
+    "B_primary_old_2p5_to_new_2p0": true,
+    "D_primary_old_1p25_to_new_3p30": true,
+    "D_OIII_old_minus15p29_to_new_plus4p09": true
+  },
+  "source_MSA_record_inserted_in_test_copy_only": true,
+  "custom_row_sky_and_16_dither_stack": false,
+  "verified_PSF_bar_transmission": false,
+  "detector_level_physical_injection": false,
+  "science_valid_spectral_flux": false,
+  "line_identification": null,
+  "redshift": null,
+  "physical_gas_trail": null
+}
