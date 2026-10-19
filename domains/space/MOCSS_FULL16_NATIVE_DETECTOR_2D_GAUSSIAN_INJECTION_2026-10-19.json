@@ -1,0 +1,145 @@
+{
+  "schema": "janus-cosmos-mocss-full16-native-detector-gaussian-injection-v1",
+  "created_utc": "2026-10-19",
+  "status": "ALL_16_ORIGINAL_RATE_2_MSA_SHA_PASS_FOUR_4_DITHER_WINDOW_STACKS_AND_NATIVE_RATE_2D_GAUSSIAN_INJECTION_ONLY",
+  "provenance": {
+    "run_id": 39231058856,
+    "url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39231058856",
+    "artifact_id": 12176064764,
+    "full_json_sha256": "6afb51b6c7248be67edd500dd47816d2dc50f0df779c7e2025e75f63504d7a29",
+    "stack_arrays_npz_sha256": "0b8974e9f761e111abce46d16e0db322f368fd67306b7e8920cfc92fefbe8190",
+    "reference_script": "tools/replay_mocss_16_rate_four_stacks_2d_injection.py",
+    "original_16_receipt": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "parent_initial_stack_receipt": "domains/space/MOCSS_16_REAL_RATE_FOUR_STACKS_ROW_SKY_PROXY_2026-10-19.json"
+  },
+  "source_center_ra_dec": [
+    53.13127,
+    -27.78908
+  ],
+  "inputs": {
+    "original_rate_count": 16,
+    "original_MSA_count": 2,
+    "hashes_verified": true,
+    "group_four_dithers": {
+      "A": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "B": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "C": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "D": [
+        13,
+        14,
+        15,
+        16
+      ]
+    }
+  },
+  "line_wavelengths_A": {
+    "primary": 16004,
+    "OIII_4960": 15850.7932988,
+    "Pa_gamma": 13656.7483309
+  },
+  "native_detector_trial": {
+    "injected_peak_DN_per_s": 0.04,
+    "scenarioA": {
+      "name": "center_sx1p2",
+      "sigma_dispersion_pixel": 1.2,
+      "x_shift_detector_pixels": 0,
+      "sigma_cross_dispersion_pixel": 1.6
+    },
+    "scenarioB": {
+      "name": "shift_p07_sx2p0",
+      "sigma_dispersion_pixel": 2,
+      "x_shift_detector_pixels": 0.7,
+      "sigma_cross_dispersion_pixel": 1.6
+    },
+    "injection_done_into_original_2D_RATE_before_full_row_local_sky_recompute": true,
+    "shutter_source_excluded_from_sky_median": true,
+    "sky_row_reestimation_absolute_change_DN_per_s": 0,
+    "source_model_physical_STPSF": false
+  },
+  "per_group_response_ratio_by_wavelength": {
+    "A": {
+      "primary": [
+        0.9881,
+        1.1617
+      ],
+      "OIII_4960": [
+        0.9781,
+        1.1513
+      ],
+      "Pa_gamma": [
+        0.9727,
+        1.1476
+      ]
+    },
+    "B": {
+      "primary": [
+        0.9894,
+        1.1589
+      ],
+      "OIII_4960": [
+        0.9946,
+        1.1674
+      ],
+      "Pa_gamma": [
+        0.977,
+        1.1495
+      ]
+    },
+    "C": {
+      "primary": [
+        0.9977,
+        1.1748
+      ],
+      "OIII_4960": [
+        0.9908,
+        1.1693
+      ],
+      "Pa_gamma": [
+        0.9883,
+        1.1566
+      ]
+    },
+    "D": {
+      "primary": [
+        0.9903,
+        1.1619
+      ],
+      "OIII_4960": [
+        0.9853,
+        1.1564
+      ],
+      "Pa_gamma": [
+        0.9953,
+        1.1749
+      ]
+    }
+  },
+  "science_ceiling": {
+    "median_per_full_detector_row_4mad_with_mask_is_proxy_not_shutter_illumination": true,
+    "full_open_closed_MSA_to_detector_pixel_mapping_done": false,
+    "source_psf_model_matches_calibrated_observation": false,
+    "stpsf_mono_optics_separately_measured_not_dispersed": "domains/space/MOCSS_STPSF_OPTICAL_THREE_WAVELENGTHS_2026-10-19.json",
+    "stage2_calibrated_four_dither_physical_flux": false,
+    "independent_Gaussian_pvalue_from_native_trials": false,
+    "absolute_flux_cgs": null,
+    "source_class": null,
+    "redshift": null,
+    "directed_gas_trail": null
+  },
+  "interpretation": "True 2D injection into original real JWST NIRSpec RATE detector SCI of a Gaussian of known DN/s and re-estimation of masked row background demonstrates numerical recovery in four WCS-aligned raw-rate stacks; it is not a realistic physical STPSF dispersed point-source completeness or flux calibration. Ratio >1 for broad shifted template is algorithm shape mismatch, not telescope optical throughput."
+}
