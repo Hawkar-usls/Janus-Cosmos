@@ -104,7 +104,7 @@ def main() -> None:
             "real_v4_lat_roi_candidates": obs["counts"]["lat_v4_selected_roi_candidates"],
             "instrument_roles_count": obs["counts"],
             "gbm_tte_units": "SECONDS_RELATIVE_TO_EXACT_TRIGTIME",
-            "gbm_rspf_tstart_tstop_units": "FERMI_MET_SECONDS",
+            "gbm_rsp2_tstart_tstop_units": "FERMI_MET_SECONDS",
             "time_alignment": "TRIGTIME_FROM_TTE_CSPEC_RSP2_MATCHED_PER_DETECTOR_AND_COHORT",
             "pretrigger_background_window": "[-20,-5]_s_RELATIVE_TRIGGER_STATIONARY_RATE_PROXY_ONLY",
             "per_grb_per_detector_counts_energy_edges_rsp2_and_complete_time_series": obs["gbm_bursts"],
@@ -166,8 +166,24 @@ def main() -> None:
             "offline_gate": "PASS_87_TESTS_AND_FROZEN_RECEIPTS",
             "source_tree_sha256": files,
             "registry_ingest_requires_integrity_and_scientific_nonpromotion": True},
+        "claim_ceiling": "REAL_GBM_TTE_CSPEC_RSP2_AND_LAT_CALDB_TABLE_PROVENANCE_AND_LIGHTCURVES_ONLY_NO_OBSERVED_LIV_OR_FIREWALL_DETECTION",
+        "science_gates": {
+            "REAL_GBM_TTE_CSPEC_RSP2": "PASS_SOURCE_SHA256_VERIFIED",
+            "REAL_LAT_P8R3_SOURCE_V3_CALDB_TABLES": "PASS_SOURCE_SHA256_GRID_SHAPE_ONLY",
+            "JOINT_LAT_GBM_FORWARD_FOLDED_LRT": "BLOCKED_NO_VALIDATED_SOURCE_LAG_MODEL",
+            "SOURCE_LAG_IDENTIFIABILITY": "EXACT_DEGENERACY_UNBOUNDED_BETA_PER_BURST",
+            "LIV_OBSERVED": "NOT_ESTABLISHED",
+            "SPACETIME_DISCRETENESS": "NOT_ESTABLISHED",
+            "AMPS_FIREWALL": "OPEN_UNCONFIRMED",
+            "BHB_BOOM": "NOT_ESTABLISHED"},
+        "unresolved_scientific_requirements": [
+            "full event-type-specific LAT PSF/EDISP and time-dependent exposure",
+            "validated GBM detector response-channel edge reconciliation and spectral fit",
+            "GRB population intrinsic emission lag constraints independent of propagation",
+            "real LAT/GBM jointly calibrated likelihood and null-test coverage",
+            "physically specified quantum firewall scattering/emission mechanism and external observable"],
         "epistemic_guard": "A calibrated instrument input is necessary but insufficient for a calibrated physics likelihood. No observational speed-of-light deviation, granular spacetime, firewall radiation, or BHB explosion is established."}
-    registry["registry_payload_sha256"] = digest(registry)
+    registry["payload_sha256"] = digest(registry)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(registry, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"output": str(args.output), "sha256": sha(args.output.read_bytes()),
