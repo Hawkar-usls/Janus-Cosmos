@@ -1,0 +1,187 @@
+{
+  "schema": "janus-mocss-four-group-real-x1d-controls-and-axis-correction-v1",
+  "date_utc": "2026-10-19",
+  "status": "EMPIRICAL_OFFLINE_SPIKES_AND_X1D_TEMPLATE_MISMATCH_FOUND_PREVIOUS_THREE_COLUMN_GEOMETRY_NONPHYSICAL_FOR_MOCSS",
+  "evidence": {
+    "real_fits_from_run_id": 39172038085,
+    "real_fits_artifacts": [
+      12153067969,
+      12153078118
+    ],
+    "control_run_id": 39223778656,
+    "control_run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39223778656",
+    "control_artifact_id": 12172687924,
+    "control_full_json_sha256": "a334152deffb3ff48efd5f4d6def77decc6c4ac6af47228b99f59fbcb9c26093",
+    "control_full_json_size_bytes": 144201,
+    "script": "tools/stress_mocss_four_x1d_offline_and_injection.py",
+    "source_doc_geometry_correction": "domains/space/MOCSS_DISPERSION_THREE_ROW_CORRECTION_2026-10-19.json",
+    "data_reprocessed_SCIENCE_VALID": false
+  },
+  "data": [
+    {
+      "group": "A",
+      "x1d_sha256": "2cf1be76ec8d2b5e14a1c34bbb9d2c96d080dd38f8545162b898a9b76e2f4d49",
+      "windows": {
+        "primary_16004": {
+          "formal_ratio": 2.17697,
+          "reduced_chi2": 1.454,
+          "control_n": 19,
+          "max_abs_formal_control": 16.6,
+          "control_fraction_abs3": 0.42
+        },
+        "OIII_15850": {
+          "formal_ratio": 3.41079,
+          "reduced_chi2": 57.99,
+          "control_n": 19,
+          "max_abs_formal_control": 12.51,
+          "control_fraction_abs3": 0.26
+        },
+        "Pa_gamma_13656": {
+          "formal_ratio": -1.60271,
+          "reduced_chi2": 1.566,
+          "control_n": 26,
+          "max_abs_formal_control": 106.25,
+          "control_fraction_abs3": 0.19
+        }
+      }
+    },
+    {
+      "group": "B",
+      "x1d_sha256": "b4737c1f7ebaa63fc0eda06906517fe40090ece797dd562969ff4b20bbaab9ce",
+      "windows": {
+        "primary_16004": {
+          "formal_ratio": 2.49735,
+          "reduced_chi2": 1.945,
+          "control_n": 19,
+          "max_abs_formal_control": 8.14,
+          "control_fraction_abs3": 0.21
+        },
+        "OIII_15850": {
+          "formal_ratio": 1.74342,
+          "reduced_chi2": 1.706,
+          "control_n": 19,
+          "max_abs_formal_control": 37.61,
+          "control_fraction_abs3": 0.37
+        },
+        "Pa_gamma_13656": {
+          "formal_ratio": 5.26074,
+          "reduced_chi2": 107.48,
+          "control_n": 26,
+          "max_abs_formal_control": 29.36,
+          "control_fraction_abs3": 0.27
+        }
+      }
+    },
+    {
+      "group": "C",
+      "x1d_sha256": "e0d168db6371942a64549249504474b4efb3c4031912a6b4469bfc6e6430f81b",
+      "windows": {
+        "primary_16004": {
+          "formal_ratio": 42.17985,
+          "reduced_chi2": 1054.47,
+          "control_n": 19,
+          "max_abs_formal_control": 30.74,
+          "control_fraction_abs3": 0.84
+        },
+        "OIII_15850": {
+          "formal_ratio": 1.40671,
+          "reduced_chi2": 2.28,
+          "control_n": 19,
+          "max_abs_formal_control": 21.7,
+          "control_fraction_abs3": 0.68
+        },
+        "Pa_gamma_13656": {
+          "formal_ratio": -0.94663,
+          "reduced_chi2": 2.016,
+          "control_n": 26,
+          "max_abs_formal_control": 26.04,
+          "control_fraction_abs3": 0.5
+        }
+      }
+    },
+    {
+      "group": "D",
+      "x1d_sha256": "eaeca5b4e9918d799ef1240db2ec2c44d0f84a4bf99ad390556fc8564ae2c538",
+      "windows": {
+        "primary_16004": {
+          "formal_ratio": 1.24661,
+          "reduced_chi2": 11.494,
+          "control_n": 19,
+          "max_abs_formal_control": 38.1,
+          "control_fraction_abs3": 0.58
+        },
+        "OIII_15850": {
+          "formal_ratio": -15.28881,
+          "reduced_chi2": 70.54,
+          "control_n": 19,
+          "max_abs_formal_control": 30.5,
+          "control_fraction_abs3": 0.37
+        },
+        "Pa_gamma_13656": {
+          "formal_ratio": 3.62052,
+          "reduced_chi2": 84.29,
+          "control_n": 26,
+          "max_abs_formal_control": 73.29,
+          "control_fraction_abs3": 0.62
+        }
+      }
+    }
+  ],
+  "one_dimensional_mismatch_injections": {
+    "input_integrated_fluxes_cgs": {
+      "primary_16004": 2.5e-18,
+      "OIII_15850": 8.333333333333334e-19,
+      "Pa_gamma_13656": 1.5625e-18
+    },
+    "nominal_gaussian_fwhm_A": 13.2,
+    "experiment_fwhm_A": [
+      7,
+      13.2,
+      22
+    ],
+    "centroid_shift_A": [
+      -3,
+      0,
+      3
+    ],
+    "approx_centered_responses_fwhm7_vs22": {
+      "primary_16004_A": [
+        1.32,
+        0.692
+      ],
+      "primary_16004_B": [
+        1.238,
+        0.696
+      ],
+      "primary_16004_C": [
+        1.207,
+        0.7
+      ],
+      "primary_16004_D": [
+        1.232,
+        0.694
+      ]
+    },
+    "test_stage": "ONE_DIMENSIONAL_X1D_SPECTRAL_SPACE_NOT_ACTUAL_DETECTOR_PSF_SLIT",
+    "response_fraction_is_NOT_optical_throughput": true
+  },
+  "scientific_limits": [
+    "All 4 archival X1D diagnostic FITS were derived from synthetic source MSA and physically WRONG three-column aperture orientation for MOCSS.",
+    "Off-line fit centers are overlapping and may contain astronomical lines or instrumental artifacts. Control counts are NOT independent Bernoulli trials and their fractions are descriptive only.",
+    "Reduced chi2 1054.47 (group C primary) and large off-target ratios demonstrate that formal fitting errors are not a validated noise model.",
+    "Injected 1D profile mismatch recovers ~0.69 to ~1.32 even at fixed known input flux; this is NOT measured MSA slit throughput.",
+    "True MOCSS full-row background, 16 original exposure four group stacking, STPSF bar loss and pixel-level injection remain NOT EXECUTED."
+  ],
+  "gate_states": {
+    "four_old_geometry_diagnostic_x1d": "PASS_SOFTWARE_ONLY",
+    "old_three_column_throughput_geometry": "INVALID_FOR_MOCSS_DISPERSION_LOSS",
+    "matched_offline_control_systematics": "OBSERVED_STRESS",
+    "one_dimensional_mismatched_gaussian_recovery": "MEASURED_DIAGNOSTIC",
+    "physical_three_row_source_pipeline": "AWAIT_RESULT",
+    "science_grade_three_line_flux": "NOT_MEASURED",
+    "real_detector_PSFinjection": "NOT_PERFORMED",
+    "source_identification": "OPEN",
+    "redshift": "OPEN",
+    "directed_gas_trail": "NOT_DETECTED"
+  }
+}

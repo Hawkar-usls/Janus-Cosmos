@@ -1,0 +1,177 @@
+{
+  "schema": "janus-mocss-four-x1d-calibration-failure-and-local-control-audit-v1",
+  "date_utc": "2026-10-19",
+  "upstream_action_run_id": 39172038085,
+  "upstream_action_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39172038085",
+  "upstream_full_stress_reproducer": "tools/stress_mocss_four_x1d_offline_and_injection.py",
+  "replay_environment": "Python 3.12, numpy 2.5.4, astropy 8.0.2",
+  "source_archive_zip_artifact_sha256": {
+    "A_C": {
+      "artifact_id": 12153067969,
+      "sha256": "b9dcc599a13094729e61e3dfdf5a8db3413c3051a1441f0e93a7a2d68269f941"
+    },
+    "B_D": {
+      "artifact_id": 12153078118,
+      "sha256": "37907dde426f898452de43a3e996d43db71d5ac189474feb90843ab04e071fe5"
+    }
+  },
+  "source": "Four actual MAST RATE-derived NIRSpec x1d FITS from synthetic-source three-shutter Stage2 compatibility experiment; NOT original MOCSS pipeline output",
+  "source_is_original_MPT_target": false,
+  "pre_fix_three_shutter_axis": "CROSS_DISPERSION_COLUMNS__WRONG_FOR_MOCSS_DISPERSION_ROW_BAND",
+  "groups": {
+    "A": {
+      "sha256_of_actual_real_rate_derived_diagnostic_x1d": "2cf1be76ec8d2b5e14a1c34bbb9d2c96d080dd38f8545162b898a9b76e2f4d49",
+      "line_windows": {
+        "16004A": {
+          "reduced_chi2": 1.454,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 2.177,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 8,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 16.598
+        },
+        "OIII_4960": {
+          "reduced_chi2": 57.993,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 3.411,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 5,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 12.506
+        },
+        "Pa_gamma": {
+          "reduced_chi2": 1.566,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": -1.603,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 26,
+          "off_line_controls_formal_ratio_ge_3_count": 5,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 106.249
+        }
+      }
+    },
+    "B": {
+      "sha256_of_actual_real_rate_derived_diagnostic_x1d": "b4737c1f7ebaa63fc0eda06906517fe40090ece797dd562969ff4b20bbaab9ce",
+      "line_windows": {
+        "16004A": {
+          "reduced_chi2": 1.945,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 2.497,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 4,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 8.137
+        },
+        "OIII_4960": {
+          "reduced_chi2": 1.706,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 1.743,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 7,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 37.61
+        },
+        "Pa_gamma": {
+          "reduced_chi2": 107.476,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 5.261,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 26,
+          "off_line_controls_formal_ratio_ge_3_count": 7,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 29.359
+        }
+      }
+    },
+    "C": {
+      "sha256_of_actual_real_rate_derived_diagnostic_x1d": "e0d168db6371942a64549249504474b4efb3c4031912a6b4469bfc6e6430f81b",
+      "line_windows": {
+        "16004A": {
+          "reduced_chi2": 1054.474,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 42.18,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 16,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 30.742
+        },
+        "OIII_4960": {
+          "reduced_chi2": 2.28,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 1.407,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 13,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 21.703
+        },
+        "Pa_gamma": {
+          "reduced_chi2": 2.016,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": -0.947,
+          "quality_model_rejected_at_reduced_chi2_gt_3": false,
+          "off_line_control_window_count": 26,
+          "off_line_controls_formal_ratio_ge_3_count": 13,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 26.04
+        }
+      }
+    },
+    "D": {
+      "sha256_of_actual_real_rate_derived_diagnostic_x1d": "eaeca5b4e9918d799ef1240db2ec2c44d0f84a4bf99ad390556fc8564ae2c538",
+      "line_windows": {
+        "16004A": {
+          "reduced_chi2": 11.494,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 1.247,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 11,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 38.103
+        },
+        "OIII_4960": {
+          "reduced_chi2": 70.541,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": -15.289,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 19,
+          "off_line_controls_formal_ratio_ge_3_count": 7,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 30.502
+        },
+        "Pa_gamma": {
+          "reduced_chi2": 84.285,
+          "formal_amplitude_over_error_NOT_SIGNIFICANCE": 3.621,
+          "quality_model_rejected_at_reduced_chi2_gt_3": true,
+          "off_line_control_window_count": 26,
+          "off_line_controls_formal_ratio_ge_3_count": 16,
+          "off_line_largest_absolute_formal_ratio_NOT_SIGNIFICANCE": 73.293
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "groups": 4,
+    "fixed_window_fits": 12,
+    "fixed_window_reduced_chi2_above_3": 6,
+    "fixed_windows_with_formal_absolute_ratio_ge_5_AND_bad_fit": [
+      {
+        "group": "B",
+        "wavelength_window": "Pa_gamma",
+        "formal_amplitude_over_error_NOT_SIGNIFICANCE": 5.261,
+        "reduced_chi2": 107.476
+      },
+      {
+        "group": "C",
+        "wavelength_window": "16004A",
+        "formal_amplitude_over_error_NOT_SIGNIFICANCE": 42.18,
+        "reduced_chi2": 1054.474
+      },
+      {
+        "group": "D",
+        "wavelength_window": "OIII_4960",
+        "formal_amplitude_over_error_NOT_SIGNIFICANCE": -15.289,
+        "reduced_chi2": 70.541
+      }
+    ],
+    "local_control_window_measurements_not_independent": 256,
+    "local_control_formal_absolute_ratio_ge_3_not_independent": 112,
+    "largest_offline_control_absolute_formal_ratio_NOT_SIGNIFICANCE": 106.249
+  },
+  "interpretation": "Control-window formal ratios and severe fit residuals demonstrate that nominal per-bin x1d errors do not calibrate detection significance in this synthetic-MSA extraction. Off-line regions can contain real lines and share wavelength windows, so they are NOT an independent blank-sky false-positive distribution. Any nominal x1d line flux, significance or limit is invalid.",
+  "science_gate": {
+    "independent_valid_mocss_line_detection": false,
+    "oiii_companion_at_15850A_verified": false,
+    "pagamma_at_13656A_verified": false,
+    "source_class_or_distance_verified": false,
+    "directed_spatial_trail_verified": false,
+    "next_test": "Reconstruct original open-MSA dispersion-row geometry, four-dither background and PSF/bar throughput before calibrated profile/line-ratio inference"
+  },
+  "full_stress_receipt_sha256": "49ff7b339a499de09f55db9e2ee03170485d922c93dfbc13c17d30337f9993fe"
+}

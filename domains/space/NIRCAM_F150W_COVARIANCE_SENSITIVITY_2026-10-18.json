@@ -1,0 +1,123 @@
+{
+  "schema": "janus-cosmos-nircam-f150w-analytic-covariance-sensitivity-v1",
+  "date_utc": "2026-10-18",
+  "status": "SCENARIO_SENSITIVITY_ONLY_NOT_CALIBRATED_INJECTION_RECOVERY",
+  "source_ra_deg": 53.13127,
+  "source_dec_deg": -27.78908,
+  "source_input": "domains/space/NIRCAM_F150W_ASTROMETRY_RECEIPT_2026-10-16.json",
+  "source_four_dates_utc": [
+    "2023-10-01",
+    "2023-10-02",
+    "2023-10-03",
+    "2023-10-09"
+  ],
+  "measured_aperture_njy": [
+    0.4534,
+    0.3411,
+    0.5042,
+    -0.5461
+  ],
+  "empirical_one_sigma_njy": [
+    1.0777,
+    0.9945,
+    0.9053,
+    1.2982
+  ],
+  "weights_nominal_independent": [
+    0.23361207,
+    0.274335158,
+    0.33105946,
+    0.160993312
+  ],
+  "weighted_mean_njy": 0.278497167,
+  "nominal_independent_mean_sigma_njy": 0.520889403,
+  "mean_sigma_if_all_pairwise_rho_one_njy": 1.033299689,
+  "published_line_f150w_equivalent_total_njy": 5.5,
+  "published_line_flux_cgs": 2.5e-18,
+  "published_line_flux_sigma_cgs": 3e-19,
+  "propagated_spectral_to_f150w_sigma_njy": 0.66,
+  "model": "fixed inverse-variance weights derived from original individual errors; Cov(Y_i,Y_j)=rho*sigma_i*sigma_j for i!=j; var(mean)=var0+rho*(var1-var0); expected aperture=fraction*5.5; spectral prediction sigma=fraction*0.66; extra additive systematic independent; z=(expected-mean)/sqrt(var_mean+spectral_variance+extra_variance)",
+  "scenarios": [
+    {
+      "id": "idealized_low_recovery",
+      "fraction": 0.5,
+      "rho": 0,
+      "additive_systematic_njy": 0,
+      "predicted_aperture_njy": 2.75,
+      "combined_error_njy": 0.616624496,
+      "conditional_residual_over_combined_error": 4.008116523
+    },
+    {
+      "id": "reference_independent",
+      "fraction": 0.7,
+      "rho": 0,
+      "additive_systematic_njy": 0,
+      "predicted_aperture_njy": 3.85,
+      "combined_error_njy": 0.696254098,
+      "conditional_residual_over_combined_error": 5.129596853
+    },
+    {
+      "id": "reference_partial_covariance",
+      "fraction": 0.7,
+      "rho": 0.5,
+      "additive_systematic_njy": 0,
+      "predicted_aperture_njy": 3.85,
+      "combined_error_njy": 0.939660049,
+      "conditional_residual_over_combined_error": 3.800845672
+    },
+    {
+      "id": "reference_fully_correlated",
+      "fraction": 0.7,
+      "rho": 1,
+      "additive_systematic_njy": 0,
+      "predicted_aperture_njy": 3.85,
+      "combined_error_njy": 1.131879962,
+      "conditional_residual_over_combined_error": 3.155372437
+    },
+    {
+      "id": "conservative_recovery_correlated",
+      "fraction": 0.5,
+      "rho": 1,
+      "additive_systematic_njy": 0.5,
+      "predicted_aperture_njy": 2.75,
+      "combined_error_njy": 1.194407069,
+      "conditional_residual_over_combined_error": 2.06922991
+    },
+    {
+      "id": "conservative_recovery_extra_systematic",
+      "fraction": 0.5,
+      "rho": 1,
+      "additive_systematic_njy": 1,
+      "predicted_aperture_njy": 2.75,
+      "combined_error_njy": 1.475333267,
+      "conditional_residual_over_combined_error": 1.675216637
+    },
+    {
+      "id": "reference_high_recovery",
+      "fraction": 0.8,
+      "rho": 0,
+      "additive_systematic_njy": 0,
+      "predicted_aperture_njy": 4.4,
+      "combined_error_njy": 0.741693852,
+      "conditional_residual_over_combined_error": 5.556878789
+    }
+  ],
+  "assumptions": [
+    "The 5.5 nJy published model line-only synthetic photometry applies at the frozen sky position and is linearly proportional to the NIRSpec flux.",
+    "The fraction parameter is an ASSUMED effective net aperture fraction including sky-annulus subtraction; it is not measured encircled energy or PSF injection result.",
+    "rho is an ASSUMED nonnegative uniform cross-epoch noise correlation; it has not been measured from common blank-sky control positions.",
+    "The optional additive systematic in nJy is a stress parameter, not an estimated error budget.",
+    "NIRSpec and NIRCam uncertainties are treated as independent; line-flux calibration and potential spatial confusion are not fully modeled.",
+    "No photometric event timing or intrinsic variability is inferred from these scenarios alone."
+  ],
+  "distinguish": [
+    "ANALYTIC_CALCULATION_REPRODUCIBLE",
+    "OCTOBER_NIRCAM_APERTURES_EMPIRICAL_FROM_PREVIOUS_RECEIPT",
+    "PSF_INJECTION_NOT_RUN",
+    "EPOCH_COVARIANCE_NOT_ESTIMATED",
+    "SOURCE_CLASS_UNRESOLVED",
+    "REDSHIFT_UNRESOLVED",
+    "DIRECTIONAL_TRAIL_NOT_DETECTED"
+  ],
+  "next_experiment": "Measure co-located aperture residual covariances across four original i2d mosaics with independent blank sky coordinates and PSF+annulus injection-recovery for 2023 epochs; then perform correctly calibrated NIRSpec extraction at 15850.793 and 13656.748 Å with stage-2 background, shutters, and wavelength-dependent throughput."
+}

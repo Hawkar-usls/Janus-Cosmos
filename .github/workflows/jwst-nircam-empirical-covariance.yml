@@ -1,0 +1,50 @@
+name: JANUS NIRCam 2023 Matched Aperture Covariance Replay
+
+on:
+  pull_request:
+    paths:
+      - 'tools/measure_nircam_matched_covariance.py'
+      - 'tools/recheck_nircam_time_domain.py'
+      - 'tools/replay_jwst_mocss_mast_subset.py'
+      - 'domains/space/NIRCAM_F150W_TIME_DOMAIN_RECEIPT_2026-10-16.json'
+      - '.github/workflows/jwst-nircam-empirical-covariance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  matched-sky-real-pixels:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install minimal independent photometry dependencies
+        run: python -m pip install --disable-pip-version-check numpy astropy
+      - name: Check imports and syntax before archival transfer
+        run: |
+          python -m py_compile tools/recheck_nircam_time_domain.py tools/summarize_nircam_time_domain.py tools/measure_nircam_matched_covariance.py
+          PYTHONPATH=tools python -c 'import measure_nircam_matched_covariance; import recheck_nircam_time_domain; import summarize_nircam_time_domain'
+      - name: Reproduce matched-sky covariance from pinned real 2023 archive image bytes
+        run: |
+          PYTHONPATH=tools python -u tools/measure_nircam_matched_covariance.py \
+            --data-dir /tmp/janus_f150w_time_domain \
+            --output /tmp/janus_f150w_matched_covariance.json
+      - name: Upload real-input covariance receipt for independent audit
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jwst-f150w-2023-matched-sky-covariance
+          path: /tmp/janus_f150w_matched_covariance.json
+          retention-days: 30
+      - name: Scientific authority ceiling
+        if: always()
+        run: |
+          echo 'MATCHED_SKY_COVARIANCE_NOT_PURE_DETECTOR_NOISE'
+          echo 'PSF_INJECTION_NOT_PERFORMED'
+          echo 'NIRSPEC_STAGE2_CALIBRATED_LINE_FLUX=NOT_MEASURED'
+          echo 'ASTROPHYSICAL_VARIABILITY=UNCONFIRMED'
+          echo 'SOURCE_CLASS_REDSHIFT_GAS_TRAIL=OPEN'

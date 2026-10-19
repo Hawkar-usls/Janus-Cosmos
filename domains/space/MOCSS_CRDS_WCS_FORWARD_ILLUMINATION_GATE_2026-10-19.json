@@ -1,0 +1,128 @@
+{
+  "schema": "janus-mocss-physical-detector-illumination-forward-operator-gate-v1",
+  "created_utc": "2026-10-19",
+  "target": {
+    "source_ra_deg": 53.13127,
+    "source_dec_deg": -27.78908,
+    "wavelength_A": [
+      13656.7483309,
+      15850.7932988,
+      16004
+    ]
+  },
+  "frozen_instrument": {
+    "JWST_python_pipeline": "1.19.1",
+    "CRDS_CONTEXT": "jwst_1413.pmap",
+    "NIRSpec_configuration": "G140M/F100LP",
+    "detectors": [
+      "NRS1",
+      "NRS2"
+    ],
+    "shutter_rows": 365,
+    "shutter_columns": 171,
+    "num_MSA_quadrants": 4
+  },
+  "existing_verified_evidence": {
+    "original_16_rate_2msa_SHA": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "exact_original_MSA_64_bitmasks": "domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json",
+    "original_16_RATE_four_window_stacks": "domains/space/MOCSS_16_REAL_RATE_FOUR_STACKS_ROW_SKY_PROXY_2026-10-19.json",
+    "native_rate_24_gaussian_injections": "domains/space/MOCSS_FULL16_NATIVE_DETECTOR_2D_GAUSSIAN_INJECTION_2026-10-19.json",
+    "three_lambda_optical_model": "domains/space/MOCSS_STPSF_OPTICAL_THREE_WAVELENGTHS_2026-10-19.json"
+  },
+  "real_CRDS_GWCS_pilot": {
+    "source": "tools/probe_mocss_crds_gwcs_shutter_footprints.py",
+    "workflow": ".github/workflows/jwst-mocss-crds-wcs-footprints.yml",
+    "workflow_run_latest_known": 39241354824,
+    "input_original_exposure_indices": [
+      1,
+      8,
+      10,
+      13
+    ],
+    "physical_original_MSA_mask_coordinates_for_three_adjacent_dispersion_rows": true,
+    "synthetic_nine_slit_background_only_TEST_MSAs": true,
+    "official_WCS_detector_footprints_measured": "PASS_12_ORIGINAL_OPEN_SHUTTERS_36_FINITE_ON_DETECTOR_WCS_GEOMETRIES_ONLY",
+    "full_WCS_all_shutters_all_exposures": false,
+    "real_illumination_weight_map": false,
+    "measured_receipt": "domains/space/MOCSS_CRDS_GWCS_FOUR_ANCHOR_OPEN_SHUTTER_FOOTPRINT_2026-10-19.json",
+    "action_run_id": 39243207739,
+    "numeric_slit_id_error_corrected": true,
+    "all16_near_source_3_original_open_shutter_3_lambda": "PASS_144_CENTERS_OFFICIAL_CRDS_GWCS",
+    "all16_near_source_receipt": "domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json",
+    "all16_run_id": 39243558142
+  },
+  "physical_forward_model_requirements": [
+    {
+      "step": 1,
+      "operator": "O_e(q,row,column)",
+      "meaning": "Original per-exposure MSA shutter transmission state, selected by matching FITS MSAMETID and PATT_NUM",
+      "status": "ORIGINAL_COMMAND_APERTURE_MASK_VERIFIED"
+    },
+    {
+      "step": 2,
+      "operator": "P_e(xdet,ydet | q,row,column,lambda; CRDS)",
+      "meaning": "Geometric NIRSpec dispersed slit-to-detector transformation with detector validity and wavelength calibration",
+      "status": "GEOMETRIC_ALL16_THREE_OPEN_NEIGHBOR_CENTERS_CRDS_GWCS_PASS_NOT_ALL_OPEN_SHUTTERS"
+    },
+    {
+      "step": 3,
+      "operator": "K_e(xdet,ydet | slit,lambda,source_position)",
+      "meaning": "Wavelength-dependent spatial/spectral PSF including illumination, grating LSF, slit losses, shutter bars, diffraction, telescope orientation",
+      "status": "NOT_CONSTRUCTED"
+    },
+    {
+      "step": 4,
+      "operator": "L_e(lambda,xdet,ydet)",
+      "meaning": "Detector sensitivity, flat/sflat/phom response and DQ, correlated variance, shutter throughput and leakage",
+      "status": "NOT_CONSTRUCTED"
+    },
+    {
+      "step": 5,
+      "operator": "S_e(detector,lambda)",
+      "meaning": "Science and thermal backgrounds projected through every illuminated MSA aperture plus shutter leakage, interlopers and instrumental pedestal",
+      "status": "NOT_CONSTRUCTED"
+    },
+    {
+      "step": 6,
+      "operator": "stack_A_B_C_D",
+      "meaning": "Four separately calibrated 4-exposure stacks preserving per-dither WCS, detector noise correlations, null controls and source-position differences",
+      "status": "ONLY_GAUSSIAN_RATE_WINDOW_DIAGNOSTIC_EXISTS"
+    },
+    {
+      "step": 7,
+      "operator": "physical_source_injection_recovery",
+      "meaning": "Inject a physically normalized known cgs line flux into ORIGINAL 2D detector RATE models using P,K,L and rerun the same sky/stack/extraction to obtain completeness and valid upper limits",
+      "status": "NOT_PERFORMED"
+    },
+    {
+      "step": 8,
+      "operator": "three_line_independent_assessment",
+      "meaning": "Pre-registered fixed windows with blinded off-line controls, multiple-testing and calibration uncertainties, independent 4 group consistency",
+      "status": "NOT_PERFORMED"
+    }
+  ],
+  "invariants": {
+    "do_not_use_MSA_open_fraction_as_detector_sky_fraction": true,
+    "do_not_promote_GWCS_footprint_to_PSF_or_throughput": true,
+    "do_not_use_STPSF_finite_FOV_mask_sums_as_absolute_photometry": true,
+    "do_not_claim_2D_raw_rate_gaussian_injection_as_physical_PSF": true,
+    "do_not_use_green_CI_as_detection_evidence": true,
+    "prefer_fail_closed_on_missing_per_shutter_transform": true,
+    "source_is_original_MPT_catalog_source": false
+  },
+  "scientific_status": {
+    "full_source_flux_at_16004": null,
+    "OIII_15850_detected": null,
+    "Pa_gamma_13656_detected": null,
+    "source_redshift": null,
+    "source_class": null,
+    "gas_trail": null,
+    "full_physical_calibration": "OPEN"
+  },
+  "official_reference_links": [
+    "https://jwst-pipeline.readthedocs.io/en/1.19.x/api/jwst.assign_wcs.AssignWcsStep.html",
+    "https://jwst-pipeline.readthedocs.io/en/1.19.x/api/jwst.assign_wcs.nrs_wcs_set_input.html",
+    "https://jwst-pipeline.readthedocs.io/en/1.19.x/jwst/data_products/msa_metadata.html",
+    "https://arxiv.org/html/2610.12553v1"
+  ]
+}

@@ -1,0 +1,743 @@
+{
+  "schema": "janus-mocss-original-crds-16rate-adjacent-shutter-spectral-alias-v1",
+  "status": "GEOMETRIC_NEIGHBORING_OPEN_SHUTTER_WAVELENGTH_ALIAS_POSSIBLE_NOT_PHOTOMETRICALLY_DEMONSTRATED",
+  "primary_assumed_measured_wavelength_A": 16004.0,
+  "secondary_crds_sample_wavelength_A": 15850.7932988,
+  "official_wcs": "jwst 1.19.1 + jwst_1413.pmap",
+  "input_provenance": {
+    "A": {
+      "artifact_id": 12186247363,
+      "zip_sha256": "b5a1d60dcc5680ad889f7027cbebd13739e33c67b8367b86bbe1460ade8fe680",
+      "workflow_run_id": 39251950005
+    },
+    "B": {
+      "artifact_id": 12184714901,
+      "zip_sha256": "1fecd6dca98b556c78be86d0564a145673b07823cc45419c155d14903ca7cb25",
+      "workflow_run_id": 39251950005
+    },
+    "C": {
+      "artifact_id": 12185693370,
+      "zip_sha256": "b3f8bcd48b7410a41d87f69b34a40657fc81850ad4882c3efb75e63bfdbd8aa3",
+      "workflow_run_id": 39251950005
+    },
+    "D": {
+      "artifact_id": 12186316819,
+      "zip_sha256": "bd0279d59364d7317318c54d2365de458d4fcbc1f3ae4e2176c767d112417257",
+      "workflow_run_id": 39251950005
+    }
+  },
+  "read_inputs_all_four_zip_original_digests_verified": true,
+  "original_rate_exposures_distinct_sha256": 16,
+  "exposure_count": 16,
+  "official_msa_original_three_source_adjacent_rows_open_every_exposure": true,
+  "virtual_background_source_wcs_warning": "The official pipeline WCS was calculated on a synthetic 9-slit MSA with real OPEN shutter geometry and source_id=0. It is not the author's complete science spec2 WCS / cross-contamination solution.",
+  "method": "In each adjacent OPEN row, linearly estimate lambda solving x_neighbor(lambda)=x_target(16004A), using two official detector WCS x(lambda) evaluations at 15850.7933 and 16004 A. Then evaluate y residual using same local slope. A geometric degeneracy is possible; no photon flux or astrophysical identification follows.",
+  "summary_nearest_open_row_minus_1": {
+    "same_line_center_x_gap_pixels": {
+      "min": 2.5942161621712785,
+      "median": 2.6135545634633672,
+      "max": 2.631106264748496
+    },
+    "same_line_footprint_x_gap_pixels": {
+      "min": 0.4982273948455713,
+      "median": 0.5308827488341876,
+      "max": 0.562711731230138
+    },
+    "local_neighbor_dispersion_dx_pixels_per_angstrom": {
+      "min": 0.15665986390718947,
+      "median": 0.15726655145035623,
+      "max": 0.15799708445792232
+    },
+    "first_order_neighbor_true_lambda_for_primary_x_A": {
+      "min": 15987.345130851207,
+      "median": 15987.381521252508,
+      "max": 15987.441884626767
+    },
+    "first_order_neighbor_wavelength_alias_shift_A": {
+      "min": -16.654869148793296,
+      "median": -16.61847874749219,
+      "max": -16.558115373232795
+    },
+    "first_order_residual_y_pixels": {
+      "min": -0.01591591047156271,
+      "median": -0.00092510881094654,
+      "max": 0.014027198125063478
+    }
+  },
+  "summary_nearest_open_row_plus_1": {
+    "same_line_center_x_gap_pixels": {
+      "min": -2.631042401552122,
+      "median": -2.6133861583217595,
+      "max": -2.59379779330402
+    },
+    "same_line_footprint_x_gap_pixels": {
+      "min": 0.49827597772036825,
+      "median": 0.5305759015932381,
+      "max": 0.5626487689098667
+    },
+    "local_neighbor_dispersion_dx_pixels_per_angstrom": {
+      "min": 0.15665732980178435,
+      "median": 0.15726232030379778,
+      "max": 0.15799096977981547
+    },
+    "first_order_neighbor_true_lambda_for_primary_x_A": {
+      "min": 16020.55669571593,
+      "median": 16020.61728657766,
+      "max": 16020.655185071151
+    },
+    "first_order_neighbor_wavelength_alias_shift_A": {
+      "min": 16.55669571592989,
+      "median": 16.617286577659797,
+      "max": 16.65518507115121
+    },
+    "first_order_residual_y_pixels": {
+      "min": -0.014115202850121022,
+      "median": 0.0008309292985302363,
+      "max": 0.015821460603490323
+    }
+  },
+  "cross_orientation_wavelength_only_not_host_solution": [
+    {
+      "neighbor_relative_row_in_each_instrument_orientation": -1,
+      "orientation_1_AB_wavelength_median_A": 15987.34748818081,
+      "orientation_2_CD_wavelength_median_A": 15987.427292399014,
+      "absolute_wavelength_median_difference_A": 0.07980421820320771,
+      "wavelength_only_within_paper_6A_tolerance": true,
+      "same_physical_sky_location_between_orientations_proven": false,
+      "paper_already_tested_host_shutter_and_wavelength_cross_orientation": true
+    },
+    {
+      "neighbor_relative_row_in_each_instrument_orientation": 1,
+      "orientation_1_AB_wavelength_median_A": 16020.652720232758,
+      "orientation_2_CD_wavelength_median_A": 16020.570775039523,
+      "absolute_wavelength_median_difference_A": 0.08194519323478744,
+      "wavelength_only_within_paper_6A_tolerance": true,
+      "same_physical_sky_location_between_orientations_proven": false,
+      "paper_already_tested_host_shutter_and_wavelength_cross_orientation": true
+    }
+  ],
+  "per_exposure": [
+    {
+      "group": "A",
+      "index": 1,
+      "original_rate_sha256": "840c7d51819f6be61a51d7c4d1fd4ffcd18ebde36d3966332ac949588bdb4675",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 84,
+      "main_shutter_column": 89,
+      "target_line_center_pixel_xy": [
+        967.8355567828087,
+        387.9194796772829
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 83,
+          "same_line_center_x_gap_pixels": 2.631016964908895,
+          "same_line_footprint_x_gap_pixels": 0.5621303315188015,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15799708445792232,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.347686611207,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.652313388793118,
+          "first_order_residual_y_pixels": -0.01591591047156271,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 85,
+          "same_line_center_x_gap_pixels": -2.630942488814071,
+          "same_line_footprint_x_gap_pixels": 0.5620441947889958,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15799096977981547,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.652486483757,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.652486483757457,
+          "first_order_residual_y_pixels": 0.015821460603490323,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "A",
+      "index": 2,
+      "original_rate_sha256": "1a187cd401af353e5a4e43b91a801f2b749f98ca40c14b6b2a5dd0aa35e5d1d5",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 86,
+      "main_shutter_column": 91,
+      "target_line_center_pixel_xy": [
+        961.8052988002437,
+        377.82642374833904
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 85,
+          "same_line_center_x_gap_pixels": 2.630976807832667,
+          "same_line_footprint_x_gap_pixels": 0.5623640828639509,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15798675877528373,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.346852431001,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.653147568998975,
+          "first_order_residual_y_pixels": -0.01578917098419197,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 87,
+          "same_line_center_x_gap_pixels": -2.631042401552122,
+          "same_line_footprint_x_gap_pixels": 0.5624179207827638,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15798066562653196,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.654205064384,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.65420506438386,
+          "first_order_residual_y_pixels": 0.015695814604100633,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "A",
+      "index": 3,
+      "original_rate_sha256": "1cd1af134917d244debcddca2217f8c4f89e6e06ae586a9f3c507fcae5b6eb44",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 87,
+      "main_shutter_column": 92,
+      "target_line_center_pixel_xy": [
+        959.7571811143082,
+        372.76088191447957
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 86,
+          "same_line_center_x_gap_pixels": 2.631106264748496,
+          "same_line_footprint_x_gap_pixels": 0.5626797850000003,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15798206719143143,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.345538442914,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.654461557085597,
+          "first_order_residual_y_pixels": -0.01572677915720533,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 88,
+          "same_line_center_x_gap_pixels": -2.6307751008923788,
+          "same_line_footprint_x_gap_pixels": 0.5623368216911331,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1579759836137963,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.653006619816,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.653006619815642,
+          "first_order_residual_y_pixels": 0.015631183438472362,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "A",
+      "index": 4,
+      "original_rate_sha256": "9554c9fca9bbac11ef98967d7da901f290e5cf8faa5a2e40224c5740ff908792",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 89,
+      "main_shutter_column": 93,
+      "target_line_center_pixel_xy": [
+        953.7478907257266,
+        367.71033109514156
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 88,
+          "same_line_center_x_gap_pixels": 2.6310316769904603,
+          "same_line_footprint_x_gap_pixels": 0.562711731230138,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15797372248829653,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.345130851207,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.654869148793296,
+          "first_order_residual_y_pixels": -0.015618699515755452,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 90,
+          "same_line_center_x_gap_pixels": -2.6309805793905525,
+          "same_line_footprint_x_gap_pixels": 0.5626487689098667,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15796765800866264,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.655185071151,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.65518507115121,
+          "first_order_residual_y_pixels": 0.015524886407092708,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "B",
+      "index": 5,
+      "original_rate_sha256": "6a44f39b5b6b5cf572e4461b5c666e89b7effa830304972613b71b0a12742e42",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 160,
+      "main_shutter_column": 89,
+      "target_line_center_pixel_xy": [
+        767.7702491454102,
+        387.6826274390678
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 159,
+          "same_line_center_x_gap_pixels": 2.627295225586977,
+          "same_line_footprint_x_gap_pixels": 0.5574715351062878,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15777567145835306,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.347906547933,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.652093452066765,
+          "first_order_residual_y_pixels": -0.012417770356478286,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 161,
+          "same_line_center_x_gap_pixels": -2.6266829739840887,
+          "same_line_footprint_x_gap_pixels": 0.5568467879543277,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15777014016347687,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.648796605381,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.648796605380994,
+          "first_order_residual_y_pixels": 0.012320385093346431,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "B",
+      "index": 6,
+      "original_rate_sha256": "70acff205b7c217a3ffa327e64d9831eeb381044e6371f45fd38c961747ae45f",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 162,
+      "main_shutter_column": 90,
+      "target_line_center_pixel_xy": [
+        762.352099896272,
+        382.62381731448386
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 161,
+          "same_line_center_x_gap_pixels": 2.6269686871839895,
+          "same_line_footprint_x_gap_pixels": 0.5572782238989475,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1577682116059388,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.349188911734,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.650811088265982,
+          "first_order_residual_y_pixels": -0.01231003370827466,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 163,
+          "same_line_center_x_gap_pixels": -2.627055544011,
+          "same_line_footprint_x_gap_pixels": 0.5573525509532828,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15776269617220132,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.651943759529,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.651943759528876,
+          "first_order_residual_y_pixels": 0.012216029508124393,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "B",
+      "index": 7,
+      "original_rate_sha256": "76b4ff28bc0d77f39fa547efcc454ad543974cecb296e624899e6f3ba0109354",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 164,
+      "main_shutter_column": 92,
+      "target_line_center_pixel_xy": [
+        756.8938984497365,
+        372.54468475528347
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 163,
+          "same_line_center_x_gap_pixels": 2.626982342407473,
+          "same_line_footprint_x_gap_pixels": 0.5575883677345246,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15775892307950293,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.348121988107,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.65187801189313,
+          "first_order_residual_y_pixels": -0.01219118335342273,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 165,
+          "same_line_center_x_gap_pixels": -2.6269759863155286,
+          "same_line_footprint_x_gap_pixels": 0.5575694247461342,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15775342528530556,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.65241804775,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.65241804774996,
+          "first_order_residual_y_pixels": 0.012096955673939647,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "B",
+      "index": 8,
+      "original_rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "main_shutter_row": 165,
+      "main_shutter_column": 93,
+      "target_line_center_pixel_xy": [
+        754.4120588866565,
+        367.4806936937225
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 164,
+          "same_line_center_x_gap_pixels": 2.627038179446572,
+          "same_line_footprint_x_gap_pixels": 0.5578055323710487,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15775439193222812,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.347289750416,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.652710249583834,
+          "first_order_residual_y_pixels": -0.012132083830351803,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 166,
+          "same_line_center_x_gap_pixels": -2.626985215344803,
+          "same_line_footprint_x_gap_pixels": 0.5577399524861448,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15774890258043783,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.652953981758,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.6529539817584,
+          "first_order_residual_y_pixels": 0.012037742592895029,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "C",
+      "index": 9,
+      "original_rate_sha256": "c6f0de6b6bed0a875613c53d1fbac304e4308b61304fc66a676f4b8bbb8d65ff",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 170,
+      "main_shutter_column": 107,
+      "target_line_center_pixel_xy": [
+        1753.3395171063755,
+        295.07130262389563
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 169,
+          "same_line_center_x_gap_pixels": 2.599871676056182,
+          "same_line_footprint_x_gap_pixels": 0.5036048717372523,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1567787109684843,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.416934225344,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.58306577465555,
+          "first_order_residual_y_pixels": 0.010281866208458723,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 171,
+          "same_line_center_x_gap_pixels": -2.5999850617217817,
+          "same_line_footprint_x_gap_pixels": 0.5037193391974597,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1567757380271577,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.584103474426,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.58410347442623,
+          "first_order_residual_y_pixels": -0.010375883995834556,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "C",
+      "index": 10,
+      "original_rate_sha256": "9af02b780399d954f6bdb0fb7498d99e3c8f37cf22e7891bf4f5515387ce1b14",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 171,
+      "main_shutter_column": 108,
+      "target_line_center_pixel_xy": [
+        1750.1376862394607,
+        290.0173752162531
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 170,
+          "same_line_center_x_gap_pixels": 2.6000383499374493,
+          "same_line_footprint_x_gap_pixels": 0.5039097768587908,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15677537004255485,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.415517697507,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.584482302492688,
+          "first_order_residual_y_pixels": 0.010322320452644362,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 172,
+          "same_line_center_x_gap_pixels": -2.5998287390632413,
+          "same_line_footprint_x_gap_pixels": 0.5037013389010099,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15677240192899577,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.58345925095,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.58345925095091,
+          "first_order_residual_y_pixels": -0.010414939437737303,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "C",
+      "index": 11,
+      "original_rate_sha256": "05069b38d8303d580def7af981b0b2282733303599ae8006b6e07254dd015152",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 173,
+      "main_shutter_column": 110,
+      "target_line_center_pixel_xy": [
+        1745.1456703671345,
+        279.90063856744183
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 172,
+          "same_line_center_x_gap_pixels": 2.599837803833452,
+          "same_line_footprint_x_gap_pixels": 0.5040521339126371,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15676916982642378,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.41614102625,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.583858973750466,
+          "first_order_residual_y_pixels": 0.010400597772502351,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 174,
+          "same_line_center_x_gap_pixels": -2.6000893426594303,
+          "same_line_footprint_x_gap_pixels": 0.5043050152321484,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15676621078493577,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.585776549939,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.5857765499386,
+          "first_order_residual_y_pixels": -0.010494835612576026,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "C",
+      "index": 12,
+      "original_rate_sha256": "bec0633a68b20dd68ac7abc61f673a6441b25f7bc6428adb6b311391babec750",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 174,
+      "main_shutter_column": 111,
+      "target_line_center_pixel_xy": [
+        1741.8052630126604,
+        274.8279891642944
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 173,
+          "same_line_center_x_gap_pixels": 2.600140439742745,
+          "same_line_footprint_x_gap_pixels": 0.5044872737694277,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1567657957420187,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.413853593282,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.5861464067184,
+          "first_order_residual_y_pixels": 0.010441156033607513,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 175,
+          "same_line_center_x_gap_pixels": -2.599423176237906,
+          "same_line_footprint_x_gap_pixels": 0.5037714466229772,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1567628417683228,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.581883480267,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.581883480266697,
+          "first_order_residual_y_pixels": -0.010531363511233849,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "D",
+      "index": 13,
+      "original_rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 246,
+      "main_shutter_column": 107,
+      "target_line_center_pixel_xy": [
+        1556.29633986885,
+        294.73141267134537
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 245,
+          "same_line_center_x_gap_pixels": 2.5942161621712785,
+          "same_line_footprint_x_gap_pixels": 0.4982273948455713,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15667339571537262,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.441884626767,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.558115373232795,
+          "first_order_residual_y_pixels": 0.01384714536897036,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 247,
+          "same_line_center_x_gap_pixels": -2.594416819577418,
+          "same_line_footprint_x_gap_pixels": 0.49843404605053365,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15667083658368552,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.559666598778,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.559666598777767,
+          "first_order_residual_y_pixels": -0.013940205996618715,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "D",
+      "index": 14,
+      "original_rate_sha256": "5103decc6113b6ab104a36d658ec49b6cb7be7ad3a54df1c83337a67687137e2",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 247,
+      "main_shutter_column": 108,
+      "target_line_center_pixel_xy": [
+        1554.4015897266333,
+        289.67015977865566
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 246,
+          "same_line_center_x_gap_pixels": 2.594487349984547,
+          "same_line_footprint_x_gap_pixels": 0.4987048673042409,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15667064742613576,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.439863225129,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.560136774871353,
+          "first_order_residual_y_pixels": 0.01388168410437629,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 248,
+          "same_line_center_x_gap_pixels": -2.5942276038297223,
+          "same_line_footprint_x_gap_pixels": 0.4984512148403155,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15666809252363814,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.558748894184,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.558748894183736,
+          "first_order_residual_y_pixels": -0.013972137684788777,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "D",
+      "index": 15,
+      "original_rate_sha256": "9d55d46cb94fbe30fe2e71a715c4d2d63c654e590276543832f828f78091b645",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 249,
+      "main_shutter_column": 110,
+      "target_line_center_pixel_xy": [
+        1547.1830477517326,
+        279.5743863608145
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 248,
+          "same_line_center_x_gap_pixels": 2.5942418331194403,
+          "same_line_footprint_x_gap_pixels": 0.4987136889405974,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15666410495022323,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.440738809035,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.559261190965117,
+          "first_order_residual_y_pixels": 0.01394643631067538,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 250,
+          "same_line_center_x_gap_pixels": -2.59379779330402,
+          "same_line_footprint_x_gap_pixels": 0.49827597772036825,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.1566615608456536,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.55669571593,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.55669571592989,
+          "first_order_residual_y_pixels": -0.014035593148491898,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    },
+    {
+      "group": "D",
+      "index": 16,
+      "original_rate_sha256": "c783ebcf91ef3ba31e305e989ce7f181fe0b85143af9e942a74342289d3e5763",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "main_shutter_row": 251,
+      "main_shutter_column": 111,
+      "target_line_center_pixel_xy": [
+        1541.9256526029114,
+        274.5112202789337
+      ],
+      "adjacent_open_shutter_aliases": [
+        {
+          "neighbor_relative_row": -1,
+          "neighbor_row": 250,
+          "same_line_center_x_gap_pixels": 2.594655407266373,
+          "same_line_footprint_x_gap_pixels": 0.49930484974743194,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15665986390718947,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 15987.437650572685,
+          "first_order_neighbor_wavelength_alias_shift_A": -16.562349427314984,
+          "first_order_residual_y_pixels": 0.014027198125063478,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        },
+        {
+          "neighbor_relative_row": 1,
+          "neighbor_row": 252,
+          "same_line_center_x_gap_pixels": -2.5940270897240225,
+          "same_line_footprint_x_gap_pixels": 0.4986830414616179,
+          "local_neighbor_dispersion_dx_pixels_per_angstrom": 0.15665732980178435,
+          "first_order_neighbor_true_lambda_for_primary_x_A": 16020.558606565082,
+          "first_order_neighbor_wavelength_alias_shift_A": 16.5586065650823,
+          "first_order_residual_y_pixels": -0.014115202850121022,
+          "linear_approximation_not_exact_inverse_GWCS": true,
+          "actual_neighbor_photon_flux_measured": false
+        }
+      ]
+    }
+  ],
+  "science_cautions": {
+    "actual_open_shutter_flux_overlap": null,
+    "full_MSAs_all_open_illumination_model": null,
+    "real_sky_sources_projected_onto_neighbors": null,
+    "source_calibrated_spectral_line_identification": null,
+    "wavelength_solution_is_exact_inverse_GWCS": false,
+    "author_cross_orientation_host_test_replicated": false,
+    "line_16004_must_be_neighbor_contamination": false,
+    "redshift": null,
+    "physical_propagation_vector": null,
+    "trail_size": null,
+    "interpretation": "Original paper Sec. III.2 explicitly anticipated slitless wavelength/sky degeneracy and used two near-perpendicular orientations plus common sky-shutter and <=6A matching. Our official-WCS audit confirms the per-orientation geometric degeneracy but does NOT reverse or replicate the author's two-orientation source matching. Both sky and wavelength must be matched; first-order same-sign 1-row aliases match by wavelength alone, which is insufficient. No actual neighboring photons or motion measured."
+  },
+  "next_test": "Reproduce author Sec. III.2 two-orientation common-SKY-host-and-<6A gate independently with all open-shutter WCS and measured line centroids, before entertaining adjacent-shutter alias alternatives; then fit original calibrated science detector data with STPSF leakage and sky DQ/background."
+}

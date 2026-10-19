@@ -1,0 +1,820 @@
+{
+  "schema": "janus-cosmos-actual-f150w-four-epoch-local-offset-aperture-scan-v1",
+  "status": "BROADBAND_LOCAL_MAX_SCANNED_WITH_MATCHED_FIELD_MAX_CONTROLS_NO_LINE_HOST_IDENTIFICATION",
+  "source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "images": [
+    {
+      "date": "2023-10-01",
+      "mast_original_i2d_fits": "jw01180-o014_t023_nircam_clear-f150w_i2d.fits",
+      "sha256": "6cb9a632f1304baee322e17a39e7d7de0001b1f4140a7e1d24c0261e71df89b3"
+    },
+    {
+      "date": "2023-10-02",
+      "mast_original_i2d_fits": "jw01180-o016_t013_nircam_clear-f150w_i2d.fits",
+      "sha256": "688546072ff3580bda934cd3113b25734bc015bbcdc76a5286f1a45668db655d"
+    },
+    {
+      "date": "2023-10-03",
+      "mast_original_i2d_fits": "jw01180-o013_t011_nircam_clear-f150w_i2d.fits",
+      "sha256": "66890a937ce87b0035c5ba8b4364ffe329ed606bdaee4885d032686b2e95f3fb"
+    },
+    {
+      "date": "2023-10-09",
+      "mast_original_i2d_fits": "jw01180-o024_t020_nircam_clear-f150w_i2d.fits",
+      "sha256": "567130cdcec20e7ed80866c0a95d46fbb04901b03ef422bb49a9281ea9b95d91"
+    }
+  ],
+  "method": {
+    "aperture_radius_arcsec": 0.12,
+    "annulus_arcsec": [
+      0.24,
+      0.38
+    ],
+    "east_north_offset_grid_arcsec": 0.075,
+    "max_search_radius_arcsec": 0.45,
+    "num_scan_positions": 113,
+    "fixed_weights": [
+      0.23361207014205473,
+      0.27433515775384826,
+      0.3310594604251588,
+      0.16099331167893824
+    ],
+    "shared_clipped_controls": 95,
+    "complete_control_field_grid_count": 95,
+    "post_selection_is_accounted_for_using_fieldwise_maxima": true,
+    "source_companions_ra_dec_deg": [
+      [
+        53.131165,
+        -27.78893
+      ],
+      [
+        53.131584,
+        -27.789105
+      ],
+      [
+        53.131301,
+        -27.789367
+      ]
+    ],
+    "warning": "This is observed F150W broad-band aperture light. Positional scan has multiple tested points, repeated sky backgrounds, potential galaxies and drizzled noise; no formal p-value or line flux inferred."
+  },
+  "replayed_control_frame_medians_njy": [
+    -0.030058041685330064,
+    -0.0322264687477501,
+    -0.07398519190913413,
+    -0.005779322383971571
+  ],
+  "target_map_all_offset_positions": [
+    {
+      "offset_east_arcsec": -0.44999999999999996,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": 0.011169751161090122,
+      "radius_arcsec": 0.44999999999999996
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.07258281306873679,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.0703882766243015,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.6047139048082456,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.2611330254635468,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.39087506413266127,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.4027471900866974,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": -0.375,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.7031152267164497,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": -0.07446663157690714,
+      "radius_arcsec": 0.4242640687119285
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.1637547269109112,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.11332527626473486,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.4173130985058511,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.3001059587654393,
+      "radius_arcsec": 0.3
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.14204356675763016,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.33059886128314614,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.6584546917548647,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": -0.3,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": 0.811893036259472,
+      "radius_arcsec": 0.4242640687119285
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": -0.15099984960487323,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.15724798109326876,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": -0.07386660619765952,
+      "radius_arcsec": 0.31819805153394637
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.0949908298608852,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.6328347985410926,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.011815015049645175,
+      "radius_arcsec": 0.22499999999999998
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.27970491016649046,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.2505166630369998,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.5879073491307627,
+      "radius_arcsec": 0.31819805153394637
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": 0.42784480402335634,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": 0.9504061140192013,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": -0.29455451520837717,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": -0.1384246138168004,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": -0.09485760051540712,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.059355570314970824,
+      "radius_arcsec": 0.21213203435596426
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.06131148112636456,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.3417694767399178,
+      "radius_arcsec": 0.15
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": -0.3300214850107439,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": -0.5137877497238704,
+      "radius_arcsec": 0.21213203435596426
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": -0.24767927159867698,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": -0.15514438929146224,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": -0.15,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": 0.477522049542488,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": 0.23314532307044675,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.5033585567366683,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.047247928721548094,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.14845540098939022,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": 0.27668851012939527,
+      "radius_arcsec": 0.10606601717798213
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.23252259525013205,
+      "radius_arcsec": 0.075
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": -0.5912690839143393,
+      "radius_arcsec": 0.10606601717798213
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": -0.6216555690149628,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": -0.9830033596728662,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": -0.8175457145038256,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": -0.075,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": -0.553828026219769,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.44999999999999996,
+      "weighted_aperture_njy": 0.11312641763650091,
+      "radius_arcsec": 0.44999999999999996
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": 0.20113618662992372,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.12153978794795581,
+      "radius_arcsec": 0.3
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.05102993307889603,
+      "radius_arcsec": 0.22499999999999998
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.5019594172726292,
+      "radius_arcsec": 0.15
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.09344022640662965,
+      "radius_arcsec": 0.075
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": 0.3709779623339893,
+      "radius_arcsec": 0.0
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": -0.7186391172449447,
+      "radius_arcsec": 0.075
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": -0.9031330798937285,
+      "radius_arcsec": 0.15
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": -1.3583503617288466,
+      "radius_arcsec": 0.22499999999999998
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": -1.103463961739659,
+      "radius_arcsec": 0.3
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": -0.7578629083282642,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": 0.44999999999999996,
+      "weighted_aperture_njy": -0.36721634896645816,
+      "radius_arcsec": 0.44999999999999996
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": -0.15565611665374313,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.16265911461213894,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": -0.0032279771189139828,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.006808348862272384,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": 0.12228050391121423,
+      "radius_arcsec": 0.10606601717798213
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.24621879681424375,
+      "radius_arcsec": 0.075
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.12532614674985867,
+      "radius_arcsec": 0.10606601717798213
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": -0.7948158914591583,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": -0.9022700568918322,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": -0.9355456850250319,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": 0.075,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": -0.5031923584913292,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": 0.5725982245134628,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.237984864236764,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": -0.1775980863798023,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.2019226182939038,
+      "radius_arcsec": 0.21213203435596426
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.044049775329970384,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.0969071888084385,
+      "radius_arcsec": 0.15
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": -0.029515368340121296,
+      "radius_arcsec": 0.16770509831248423
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": -0.34091577316630267,
+      "radius_arcsec": 0.21213203435596426
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": -0.46489166813033506,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": 0.024645900236874414,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": 0.15,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": -0.16591494124506823,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": -0.375,
+      "weighted_aperture_njy": 0.8752691949740585,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.48529735966778265,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.03793903806848352,
+      "radius_arcsec": 0.31819805153394637
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.5363655179502557,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.4030913183200585,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": 0.05820468569115918,
+      "radius_arcsec": 0.22499999999999998
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.11049229310668351,
+      "radius_arcsec": 0.23717082451262841
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.326091466350411,
+      "radius_arcsec": 0.27041634565979916
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.07269219843840333,
+      "radius_arcsec": 0.31819805153394637
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": 0.01119874314652633,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.22499999999999998,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": -0.10892261768052722,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": -0.3,
+      "weighted_aperture_njy": 0.8382436202337926,
+      "radius_arcsec": 0.4242640687119285
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.0943817118198313,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.4076591665738273,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.6715281384794194,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.23509199683987506,
+      "radius_arcsec": 0.3
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": -0.11394105086841408,
+      "radius_arcsec": 0.3092329219213245
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.38223006331435605,
+      "radius_arcsec": 0.33541019662496846
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.1420633177377581,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.3,
+      "offset_north_arcsec": 0.3,
+      "weighted_aperture_njy": -0.009478308828571619,
+      "radius_arcsec": 0.4242640687119285
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": -0.22499999999999998,
+      "weighted_aperture_njy": 0.6923531784367121,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": -0.04293235625121103,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": -0.075,
+      "weighted_aperture_njy": -0.22530808250447834,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.2869616970222336,
+      "radius_arcsec": 0.375
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": 0.075,
+      "weighted_aperture_njy": 0.08311443325065479,
+      "radius_arcsec": 0.38242646351945886
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": 0.15,
+      "weighted_aperture_njy": 0.48552176747672254,
+      "radius_arcsec": 0.4038873605350878
+    },
+    {
+      "offset_east_arcsec": 0.375,
+      "offset_north_arcsec": 0.22499999999999998,
+      "weighted_aperture_njy": 0.2634377804217536,
+      "radius_arcsec": 0.43732139211339754
+    },
+    {
+      "offset_east_arcsec": 0.44999999999999996,
+      "offset_north_arcsec": 0.0,
+      "weighted_aperture_njy": -0.44097874107095825,
+      "radius_arcsec": 0.44999999999999996
+    }
+  ],
+  "target_field_maxima_by_radius": {
+    "0.15": {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.5019594172726292,
+      "radius_arcsec": 0.15
+    },
+    "0.225": {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.5019594172726292,
+      "radius_arcsec": 0.15
+    },
+    "0.3": {
+      "offset_east_arcsec": 0.0,
+      "offset_north_arcsec": -0.15,
+      "weighted_aperture_njy": 0.5019594172726292,
+      "radius_arcsec": 0.15
+    },
+    "0.45": {
+      "offset_east_arcsec": -0.22499999999999998,
+      "offset_north_arcsec": 0.375,
+      "weighted_aperture_njy": 0.9504061140192013,
+      "radius_arcsec": 0.43732139211339754
+    }
+  },
+  "matched_control_fieldmax_distribution": {
+    "0.15": {
+      "target_field_max_njy": 0.5019594172726292,
+      "same_radius_matched_control_fields": 95,
+      "control_field_max_median_njy": 0.7135142155284363,
+      "control_field_max_95pct_njy": 3.5621866845794945,
+      "control_fields_with_max_ge_target_max": 65,
+      "empirical_control_exceedance_fraction_NOT_a_pvalue": 0.6842105263157895
+    },
+    "0.225": {
+      "target_field_max_njy": 0.5019594172726292,
+      "same_radius_matched_control_fields": 95,
+      "control_field_max_median_njy": 1.0086025212805774,
+      "control_field_max_95pct_njy": 5.019671055119657,
+      "control_fields_with_max_ge_target_max": 92,
+      "empirical_control_exceedance_fraction_NOT_a_pvalue": 0.968421052631579
+    },
+    "0.3": {
+      "target_field_max_njy": 0.5019594172726292,
+      "same_radius_matched_control_fields": 95,
+      "control_field_max_median_njy": 1.138385191624035,
+      "control_field_max_95pct_njy": 7.715765904584911,
+      "control_fields_with_max_ge_target_max": 94,
+      "empirical_control_exceedance_fraction_NOT_a_pvalue": 0.9894736842105263
+    },
+    "0.45": {
+      "target_field_max_njy": 0.9504061140192013,
+      "same_radius_matched_control_fields": 95,
+      "control_field_max_median_njy": 1.4690009724759383,
+      "control_field_max_95pct_njy": 12.311060487863255,
+      "control_fields_with_max_ge_target_max": 86,
+      "empirical_control_exceedance_fraction_NOT_a_pvalue": 0.9052631578947369
+    }
+  },
+  "science_limits": {
+    "line_identification": null,
+    "source_class": null,
+    "redshift": null,
+    "sky_direction_of_emitting_gas": null,
+    "multi_aperture_extended_source_test_done": false,
+    "completely_independent_noise_realizations": false,
+    "true_science_target_psf_calibration": false,
+    "statistically_calibrated_false_alarm_p": null
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "schema": "janus-cosmos-mocss-calibrated-three-line-gate-v1",
+  "created_utc": "2026-10-18",
+  "science_status": "PRE_REGISTERED_REQUIRED_CALIBRATION_NO_NEW_LINE_FLUX_MEASURED",
+  "source": {
+    "ra_deg": 53.13127,
+    "dec_deg": -27.78908,
+    "programme": "JWST GO-3290",
+    "archive_doi": "10.17909/tct8-jr92",
+    "publication": "https://arxiv.org/html/2610.12553v1"
+  },
+  "known_spectroscopy": {
+    "observation_groups": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "n_rate_input_detector_frames": 32,
+    "n_science_spectral_exposures": 16,
+    "group_detectors": {
+      "A": "NRS2",
+      "B": "NRS2",
+      "C": "NRS1",
+      "D": "NRS1"
+    },
+    "author_reported_per_group": {
+      "A": {
+        "date": "2023-08-23",
+        "flux_1e18_cgs": 2.3,
+        "one_sigma_1e18_cgs": 0.5,
+        "nominal_snr": 4.7
+      },
+      "B": {
+        "date": "2023-08-24",
+        "flux_1e18_cgs": 3.5,
+        "one_sigma_1e18_cgs": 0.6,
+        "nominal_snr": 6.1
+      },
+      "C": {
+        "date": "2023-11-19",
+        "flux_1e18_cgs": 2.9,
+        "one_sigma_1e18_cgs": 0.7,
+        "nominal_snr": 4.5
+      },
+      "D": {
+        "date": "2023-11-19",
+        "flux_1e18_cgs": 2.9,
+        "one_sigma_1e18_cgs": 1.2,
+        "nominal_snr": 2.5
+      }
+    },
+    "independent_sky_wcs_input_receipt": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "author_fluxes_not_independently_remeasured": true
+  },
+  "calibration_requirements": {
+    "reproduction_baseline_pipeline": "jwst 1.19.1",
+    "reproduction_baseline_crds": "jwst_1413.pmap",
+    "need_pin_sflat_and_reference_checksums": true,
+    "need_report_all_input_original_rate_and_msa_sha256": true,
+    "effective_virtual_shutter_geometry_crossmatched_all_16": true,
+    "pipeline_author_method_skipped": [
+      "master_background",
+      "pathloss",
+      "barshadow"
+    ],
+    "custom_full_row_background_for_open_msa_REQUIRED": true,
+    "source_throughput_must_be_calibrated_from_mocss_three_adjacent_shutter_geometry": true,
+    "author_claimed_shutter_bar_loss_fraction_approx": 0.033,
+    "author_claim_is_not_independently_calibrated_here": true,
+    "compare_standard_and_mocss_specific_correction_as_sensitivity_not_blindly_apply": true,
+    "detector_flat_and_sflat": true,
+    "wavelength_solution_position_dependent": true,
+    "dq_err_variance_and_background_correlation_required": true,
+    "fixed_sky_nulls_and_off_line_wavelength_nulls_required": true,
+    "synthetic_line_injection_recovery_per_group_and_wavelength_required": true,
+    "line_profile_fwhm_A_predeclared_source_model": 13.2,
+    "line_profile_width_is_parameter_not_fixed_if_model_incompatible": true,
+    "all_4_groups_and_both_angles_required": true,
+    "search_trials_adjustment_required": true
+  },
+  "three_line_hypotheses": {
+    "primary": {
+      "observed_lambda_A": 16004,
+      "published_integrated_flux_cgs": 2.5e-18,
+      "published_integrated_flux_1sigma_cgs": 3e-19,
+      "published_fwhm_A": 13.2,
+      "published_fwhm_sigma_A": 2
+    },
+    "oiii_4960": {
+      "conditional_if_primary": "[O III] 5008.239",
+      "rest_primary_A": 5008.239,
+      "rest_companion_A": 4960.295,
+      "observed_lambda_A": 15850.793298802237,
+      "expected_ratio_companion_to_primary": 0.3333333333333333,
+      "conditional_companion_flux_cgs": 8.333333333333334e-19,
+      "conditional_flux_1sigma_from_primary_only_cgs": 1e-19,
+      "expected_snr_reported_by_authors_at_different_window": 2.9,
+      "article_tested_incorrect_wavelength_A": 15864,
+      "physics_status": "PREDICTED_ONLY_NEEDS_SAME_POSITION_CALIBRATED_EXTRACTION"
+    },
+    "pagamma": {
+      "conditional_if_primary": "Pa beta 12821.6",
+      "rest_primary_A": 12821.6,
+      "rest_companion_A": 10941.1,
+      "observed_lambda_A": 13656.748330941537,
+      "expected_case_b_Pabeta_over_Pagamma": 1.6,
+      "conditional_pagamma_unreddened_flux_cgs": 1.5625e-18,
+      "conditional_flux_1sigma_from_primary_only_cgs": 1.875e-19,
+      "physical_caveat": "Case B ratio is not guaranteed for dense shock conditions; attenuation preferentially suppresses Pa gamma",
+      "physics_status": "PREDICTED_ONLY_NEEDS_SAME_POSITION_CALIBRATED_EXTRACTION"
+    }
+  },
+  "test_decision_rules": {
+    "primary_16004": "Publish flux and error independently for A, B, C, D from calibrated 1D with common astrometry and throughput; compare group χ² including correlated systematics.",
+    "companion_15850": "At frozen same sky position extract at 15850.793 A, produce injection-verified local 3σ limit; do not borrow limit at 15864 A; weak expected 2.9σ alone cannot establish nondetection as contradiction.",
+    "pagamma_13656": "Extract 13656.748 A independently in A, B, C, D; compare with conditional Case B Paβ/Paγ≈1.6 and dust-conditioned model; no raw residual may be called a calibrated line.",
+    "classification_policy": "Confirmed companion wavelength + line ratios and independent continuum/host association are prerequisites for redshift and physical class; no emission-trail inference without resolved map."
+  },
+  "gate_states": {
+    "original_rate_and_2pa_geometry": "VERIFIED_PREVIOUS_RECEIPT",
+    "NIRCam_october_measured_sky_covariance": "PASS_SEPARATE_RECEIPT",
+    "stage2_16004_independent_photometry": "NOT_PERFORMED",
+    "stage2_15850p793_companion_measurement": "NOT_PERFORMED",
+    "stage2_13656p748_pagamma_measurement": "NOT_PERFORMED",
+    "mocss_throughput_injection": "NOT_PERFORMED",
+    "line_ratio_redshift": "OPEN",
+    "source_class": "OPEN",
+    "directed_gas_trail": "NOT_DETECTED",
+    "two_angle_source_aware_three_shutter_geometry": "PASS_DIAGNOSTIC",
+    "two_angle_source_aware_stage2_spectrophotometric_validity": "OPEN_NOT_VERIFIED",
+    "MOCSS_THREE_COLUMN_SOURCE_AWARE_MODEL": "INVALID_PHYSICAL_DISPERSION_ORIENTATION",
+    "MOCSS_FOUR_GROUP_THREE_ROW_TEST_GEOMETRY": "PASS_SOURCE_INFO_TEST_ONLY",
+    "MOCSS_THREE_ROW_CALIBRATED_SPECTRUM": "OPEN",
+    "MOCSS_FULL_ROW_BACKGROUND_4_DITHER_STACK": "NOT_PERFORMED",
+    "MOCSS_STPSF_THROUGHPUT_AND_DETECTOR_INJECTION": "NOT_PERFORMED",
+    "original_MSA_16_exact_pattern_masks": "PASS_64",
+    "crds_projected_16_detector_illumination": "NOT_PERFORMED",
+    "open_closed_shutter_sky_physical_calibration": "NOT_PERFORMED",
+    "strong_source_line_photometry_with_validated_noise": "OPEN",
+    "MOCSS_ALL16_CRDS_WCS_SOURCE_NEIGHBOR_GEOMETRY": "PASS_144_ON_DETECTOR",
+    "MOCSS_ORIGINAL_ALL_OPEN_SHUTTER_PHOTON_PIXEL_WEIGHTS": "NOT_CONSTRUCTED",
+    "MOCSS_FULL_ROW_BACKGROUND_LEAKAGE_PHYSICAL_CALIBRATION": "NOT_CONSTRUCTED",
+    "MOCSS_ABSOLUTE_THREE_LINE_ASTROPHYSICAL_FLUX": "OPEN"
+  },
+  "stage2_source_aware_progress_2026_10_18": {
+    "status": "THREE_SHUTTER_SOURCE_INFO_GEOMETRY_WCS_OFFCENTER_PASS_NO_AUTHENTIC_SOURCE_FLUX",
+    "underlying_stage2_real_background_BD_receipt": "domains/space/MOCSS_REAL_STAGE2_BD_PARTIAL_CALIBRATION_2026-10-18.json",
+    "synthetic_source_MSA_3shutter_offcenter_receipt": "domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json",
+    "pilot_script": "tools/attempt_mocss_source_aware_stage2.py",
+    "geometry_run_id": 39159808143,
+    "groups": {
+      "B": {
+        "exposure_index": 8,
+        "detector": "NRS2",
+        "source_fraction_xy": [
+          0.6854857284214204,
+          0.7574539661709843
+        ]
+      },
+      "D": {
+        "exposure_index": 13,
+        "detector": "NRS1",
+        "source_fraction_xy": [
+          0.2781984438413271,
+          0.3903103215248744
+        ]
+      }
+    },
+    "real_MPT_source_record_found": false,
+    "injection_with_physical_PSF_and_bar_losses_done": false,
+    "per_group_stage2_ASTROPHYSICAL_line_flux_cgs": null,
+    "realistic_line_completeness_calibrated": false,
+    "source_redshift": null,
+    "source_class": null,
+    "explicit_ceiling": "Source-aware synthetic MSA copies validate software geometry, not a real source detection. True MOCSS requires custom full-row sky, all four dither stacks, wavelength-dependent transmission/PSF injection and independent spectral line significance."
+  },
+  "dispersion_axis_correction_2026_10_19": {
+    "authority": "STSci 365 MSA rows dispersion / 171 columns crossdispersion and Huberty et al. MOCSS open neighbors dispersion",
+    "incorrect_previous_axis": "Three neighboring MSA columns in previous source-aware synthetic-MSA x1d test, therefore physical MOCSS throughput interpretation INVALID",
+    "verified_corrected_axis": "Three contiguous MSA ROWS at one column per dither and detector",
+    "source_provenance_json": "domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json",
+    "previous_diagnostic_1D_control_json": "domains/space/MOCSS_FOUR_X1D_OFFLINE_NULL_STRESS_2026-10-19.json",
+    "github_corrected_axis_run": 39223778736,
+    "four_corrected_axis_geometry_pass": true,
+    "four_corrected_axis_real_science_x1d_validated": false,
+    "physical_psf_slitloss_measured": false,
+    "actual_background_and_stack_reproduced": false,
+    "secondary_lines_confirmed": false,
+    "class_or_redshift_established": false,
+    "reason": "Corrected geometry and diagnostic off-line null control data supersede any previous claims that three neighboring columns adequately reproduce open-dispersion-shutter losses."
+  },
+  "exact_original_MSA_plane_audit_2026_10_19": {
+    "status": "PASS_64_ORIGINAL_MSA_APERTURE_RASTERS_DETECTOR_ILLUMINATION_STILL_OPEN",
+    "source": "domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json",
+    "run_id": 39237389277,
+    "original_rate_files": 16,
+    "original_MSA_files": 2,
+    "original_SHUTTER_INFO_header_pair_verified": 16,
+    "all_RATE_PATT_NUM": 1,
+    "source_nearest_center_marked_open": 16,
+    "source_nearest_three_dispersion_rows_marked_open": 48,
+    "source_nearby_open_fraction_minmax": [
+      0.9181286549707602,
+      0.9532163742690059
+    ],
+    "detector_pixel_illumination_projection_with_crds": false,
+    "empirical_open_mask_illumination_correction": false,
+    "exact_background_subtraction_using_projected_MSA": false,
+    "full_spectral_stage2_in_group_stacks": false,
+    "absolute_physical_flux": null,
+    "physical_STPSF_detector_forward_model_2D_injections": false,
+    "source_identification": null,
+    "redshift": null,
+    "epistemic_caveat": "Original MSA metadata aperture-state masks are not wavelength-dependent detector illumination or transmission. Shutter availability is not source line confirmation."
+  },
+  "frozen_full16_original_MSA_CRDS_wcs_2026_10_19": {
+    "status": "PASS_ALL16_CRDS_GWCS_48_PHYSICAL_OPEN_SHUTTER_SITES_144_FINITE_ON_DETECTOR_WAVELENGTH_CENTERS",
+    "artifact_run_id": 39243558142,
+    "provenance_receipt": "domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json",
+    "three_preregistered_wavelengths_A": [
+      13656.7483309,
+      15850.7932988,
+      16004
+    ],
+    "full_64_quadrant_mask_all_original_open_shutter_projection_done": false,
+    "full_spectral_detector_illumination_weight_map_created": false,
+    "open_closed_shutter_background_sky_with_leakage_calibrated": false,
+    "dispersed_STPSF_bar_pathloss_transmission_and_cgs_photom_done": false,
+    "full_author_MOCSS_stage2_four_coadd_x1d_physical": false,
+    "source_spectral_line_flux_established": null,
+    "independent_line_identity": null,
+    "redshift": null,
+    "directional_gas_trail": null
+  }
+}

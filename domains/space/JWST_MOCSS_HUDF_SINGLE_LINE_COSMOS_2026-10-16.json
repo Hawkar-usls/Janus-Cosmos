@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.space.spectral_transient_training.v1",
+  "artifact_id": "JANUS-COSMOS-JWST-MOCSS-HUDF-SINGLE-LINE-2026-10-16-v1",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "domain": "SPACE",
+  "created_date_local": "2026-10-16",
+  "classification": "PUBLISHED_OBSERVATIONAL_DETECTION__SOURCE_IDENTITY_UNRESOLVED",
+  "world_truth": false,
+  "scientific_authority": "SOURCE_BOUND_FACT_ONLY__INDEPENDENT_REDUCTION_PENDING",
+  "links": {
+    "paper_doi": "10.3847/1538-4357/ae9a94",
+    "paper_url": "https://doi.org/10.3847/1538-4357/ae9a94",
+    "arxiv_id": "2610.12553",
+    "arxiv_url": "https://arxiv.org/html/2610.12553v1",
+    "data_archive": "https://doi.org/10.17909/tct8-jr92",
+    "jwst_program": "GO-3290",
+    "topa_companion": "Hawkar-usls/TOPA:research/astronomy/JWST_MOCSS_HUDF_SINGLE_LINE_TOPA_2026-10-16.json"
+  },
+  "measured_reported": {
+    "position": {"ra_deg_j2000":53.13127,"dec_deg_j2000":-27.78908},
+    "instrument": "JWST NIRSpec G140M/F100LP MOCSS; R about 1000; wavelength range 0.97-1.89 micron",
+    "lambda_center_angstrom":16004,
+    "lambda_center_error_angstrom":1,
+    "line_flux_erg_s_cm2":2.5e-18,
+    "line_flux_error_erg_s_cm2":3e-19,
+    "observed_fwhm_angstrom":13.2,
+    "fwhm_error_angstrom":2.0,
+    "imaging": {"filter":"JADES NIRCam F150W","dates":["2022-10-08","2022-10-10"],"counterpart":"NONE_IDENTIFIED"},
+    "spectroscopy": {"first_epoch":["2023-08-23","2023-08-24"],"second_epoch":["2023-11-19"],"stack_count":4,"total_individual_exposures":16,"position_angles":2,"epoch_gap_days_approximately":88},
+    "paper_significance_not_harmonized": {"table_2_combined_sigma":8.4,"conclusion_reported_snr":5.4,"status":"ESTIMATOR_OR_EDITING_DIFFERENCE_UNRESOLVED"},
+    "line_search_context": {"candidate_lines_total":42,"secure_two_orientation_matches":7,"secure_with_jades_hosts":6}
+  },
+  "derived_checks": {
+    "redshift_rule": "z = lambda_observed / lambda_rest - 1",
+    "lambda_observed_angstrom":16004,
+    "candidate_lines": [
+      {"id":"H_ALPHA","rest_vacuum_angstrom":6564.61,"expected_redshift_rounded":1.44,"persistent_source_rest_ew_lower_angstrom":3130},
+      {"id":"O_III_5008","rest_vacuum_angstrom":5008.24,"expected_redshift_rounded":2.20,"persistent_source_rest_ew_lower_angstrom":2380},
+      {"id":"O_II_3730","rest_vacuum_angstrom":3729.88,"expected_redshift_rounded":3.29,"persistent_source_rest_ew_lower_angstrom":1770},
+      {"id":"LYMAN_ALPHA","rest_vacuum_angstrom":1215.67,"expected_redshift_rounded":12.16,"persistent_source_rest_ew_lower_angstrom":580}
+    ],
+    "persistent_source_ew_observed_lower_angstrom":7620,
+    "transient_source_spectrum_only_ew_observed_lower_angstrom":41,
+    "inferred_line_only_nircam_f150w_njy":5.5,
+    "imaging_nondetection_equivalent_line_flux_erg_s_cm2":1.1e-18,
+    "cross_epoch_flux_vs_imaging_limit_factor":2.27,
+    "instrumental_resolution_caveat": "FWHM about 13.2 Angstrom is instrument-sensitive and must not be treated as a directly resolved intrinsic gas velocity; the paper quotes an unresolved width of order <=300 km/s."
+  },
+  "observation_machine": [
+    "SKY_EMISSION_OR_NONASTROPHYSICAL_SIGNAL",
+    "JWST_OPTICS_AND_MSA_SHUTTERS",
+    "NIRSPEC_DETECTOR_EXPOSURE",
+    "DITHER_AND_POSITION_ANGLE_ALIGNMENT",
+    "BACKGROUND_CRDS_CALIBRATION_AND_EXTRACTION",
+    "LINE_SELECTION_AND_SPECTRAL_WAVELENGTH_SOLUTION",
+    "CROSS_EPOCH_AND_JADES_IMAGE_COMPARISON",
+    "PHYSICAL_MODEL_TEST"
+  ],
+  "model_competition": [
+    {"id":"DETECTOR_PIPELINE","class":"HYPOTHESIS_ONLY","prediction":"Detector-coordinate feature, extraction/CRDS sensitivity or unexpectedly high background false-positive rate emerges during independent raw replay.","falsifier":"Sky-fixed 16004A feature persists in individual raw exposures, both orientations and independently calibrated reductions with predeclared detection threshold."},
+    {"id":"HA_STAR_FORMATION_Z1_44","class":"HYPOTHESIS_ONLY","prediction":"Extremely young metal-poor galaxy or transient H-alpha; discriminating H-beta/[OIII]/[NII] limits and contemporaneous continuum.","falsifier":"Decisive line-ratio or independently established redshift incompatible with z=1.44."},
+    {"id":"OIII_Z2_20","class":"HYPOTHESIS_ONLY","prediction":"[OIII] 4960 vacuum line near 15850.8A with approximately one third of 5008 flux and possible H-beta near 15538.9A, conditional on the observed 16004A being [OIII] 5008.","falsifier":"Deep calibrated upper bound excludes fixed 4960/5008 doublet ratio at a sufficiently sensitive threshold."},
+    {"id":"OII_Z3_29","class":"HYPOTHESIS_ONLY","prediction":"[OII] doublet separation near 11.6 observed Angstrom; density and collisional quenching must explain narrow profile.","falsifier":"Resolved single-line profile incompatible with every physically allowed doublet ratio and instrumental line spread function."},
+    {"id":"LYA_Z12_16","class":"HYPOTHESIS_ONLY","prediction":"Reionization-era Ly-alpha transmission with a sufficiently large ionized bubble and extremely faint continuum; deep IFU spectral break test.","falsifier":"Identification of lower-redshift companion features, or Lyman break inconsistent with z about 12.16."},
+    {"id":"NEIGHBOR_AGN_GAS_ECHO","class":"HYPOTHESIS_ONLY","prediction":"Spatially offset line-emitting gas and one physically associated nearby ionizing host; IFU surface-brightness and redshift coherence.","falsifier":"Independent spectroscopy rules out spatial/redshift/energy compatibility for proposed illuminating hosts."},
+    {"id":"TRANSIENT_SN_OR_TDE","class":"HYPOTHESIS_ONLY","prediction":"Flux evolution on future epochs or retrospective light curve, and possible Pa-gamma/H-alpha companion constraints.","falsifier":"Demonstrably persistent continuum and line through the 2022 imaging epoch with no allowed transient profile."}
+  ],
+  "selection_and_null_controls": [
+    "Keep exposure time and observation opportunity distinct from detections.",
+    "Report 42 searched candidate lines and seven secure two-orientation matches; do not translate post-selection SNR to a global p-value without trials and correlated-noise model.",
+    "Inject synthetic lines into blind off-source shutters and nearby wavelengths to estimate detection/completeness and artifact rate.",
+    "Run detector-frame and sky-frame nulls, alternate reduction contexts, and cross-orientation wavelength consistency.",
+    "Maintain a time-indexed source/counterpart graph; the 2022 imaging is not same-epoch evidence against a 2023 transient.",
+    "Do not equate arXiv, journal paper, its figure, media repost and archive pointer to independent scientific witnesses."
+  ],
+  "gates": {
+    "MEASUREMENT_REPORTED":"SOURCE_BOUND_FACT",
+    "RAW_JWST_REPLAY":"INSUFFICIENT_DATA",
+    "ASTROPHYSICAL_REDSHIFT":"UNRESOLVED",
+    "PHYSICAL_SOURCE_ID":"UNRESOLVED",
+    "EXOTIC_MECHANISM":"INSUFFICIENT_DATA",
+    "NEXT_IFU_CAMPAIGN":"DESIGN_TARGET"
+  },
+  "experiment_backlog": [
+    {"priority":1,"id":"C1_RAW_REPLAY","procedure":"Fetch GO-3290 MAST products and exposure metadata; pin pipeline 1.19 and CRDS jwst_1413.pmap as the published baseline; reproduce individual and coadded spectra with independent nulls.","pass":"Sky-position and line centroid/flux consistent within declared errors across independent reductions and orientations.","fail":"Feature fails preregistered sky-consistency or control tests.","status":"NOT_EXECUTED"},
+    {"priority":2,"id":"C2_EPOCH_MATCHED_PHOTOMETRY","procedure":"Acquire or schedule deep imaging simultaneous with line spectroscopy and forced photometry at frozen coordinates.","pass":"Quantified continuum detection or upper limit with the exact same temporal source state.","fail":"No usable contemporaneous data.","status":"NOT_EXECUTED"},
+    {"priority":3,"id":"C3_IFU_DISCRIMINATION","procedure":"Request NIRSpec IFU field over fixed coordinates and neighboring galaxies, reaching flux sensitivity for [OIII] 4959, H-beta and Pa-gamma alternatives; predeclare model comparisons.","pass":"One identifiable redshift or line-ratio model decisively survives published instrument/selection controls.","fail":"Only same isolated line remains, yielding UNRESOLVED rather than exotic promotion.","status":"NOT_EXECUTED"},
+    {"priority":4,"id":"C4_TIMED_TRANSIENT_TEST","procedure":"Use subsequent multi-epoch spectra/photometry to fit and hold out SN, AGN-changing-look and TDE light curves without temporal data leakage.","pass":"Calibrated, independent out-of-sample discrimination between persistent and transient regimes.","fail":"Insufficient or uninformative epochs.","status":"NOT_EXECUTED"}
+  ],
+  "training_policy": {"context_replay":true,"gradients_or_model_weights_changed":false,"automatic_physics_promotions":false,"next_replay_must_return_receipt":true},
+  "claim_ceiling": "A robust reported emission line without a known 2022 imaging counterpart is neither a radio message nor an identified exotic source. Physical identity awaits independent spectral/temporal evidence."
+}

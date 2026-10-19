@@ -1,0 +1,51 @@
+name: JANUS MOCSS Four-Group Real X1D Null and Injection Stress
+on:
+  pull_request:
+    paths:
+      - 'tools/stress_mocss_four_x1d_offline_and_injection.py'
+      - '.github/workflows/jwst-mocss-four-x1d-stress.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  pinned-real-archive-x1d-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch actual A/B/C/D diagnostic x1d FITS generated from archived JWST RATE
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 39172038085
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: janus-mocss-source-aware-three-windows-*
+          merge-multiple: true
+          path: /tmp/janus-mocss-four-real-x1d
+      - name: Verify source FITS SHA and run off-line controls on all four groups
+        run: |
+          python -m pip install --disable-pip-version-check numpy astropy
+          PYTHONPATH=tools python -u tools/stress_mocss_four_x1d_offline_and_injection.py \
+            --root /tmp/janus-mocss-four-real-x1d \
+            --output /tmp/janus-mocss-four-real-x1d-controls.json
+      - name: Preserve full empirical null and 1D injection diagnostic receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-four-x1d-empirical-offline-null-injection
+          path: /tmp/janus-mocss-four-real-x1d-controls.json
+          retention-days: 30
+      - name: Explicit scientific ceiling
+        if: always()
+        run: |
+          echo 'SOURCE_METADATA=DIAGNOSTIC_SYNTHETIC'
+          echo '4x_DIAGNOSTIC_X1D_ARCHIVAL_FITS=SHA_CHECKED_IF_ANALYSIS_PASSED'
+          echo 'OFFLINE_CONTROLS=CORRELATED_NON_INDEPENDENT'
+          echo 'INJECTION_STAGE=X1D_NOT_PHYSICAL_PSF_OR_DETECTOR'
+          echo 'FULL_ROW_SKY_AND_FOUR_DITHER_STACKING=NOT_REPRODUCED'
+          echo 'WAVELENGTH_DEPENDENT_MSA_BAR_THROUGHPUT=NOT_MEASURED'
+          echo 'SECONDARY_EMISSION_LINES=NOT_CONFIRMED'
+          echo 'SOURCE_CLASS_AND_REDSHIFT=OPEN'

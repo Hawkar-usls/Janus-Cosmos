@@ -1,0 +1,91 @@
+{
+  "schema": "janus-mocss-three-shutter-source-aware-geometry-receipt-v1",
+  "created_utc": "2026-10-18",
+  "status": "REAL_RATE_AND_MSA_SHA_VERIFIED_SYNTHETIC_SOURCE_INFO_GEOMETRY_PASS_NOT_SCIENCE",
+  "provenance": {
+    "repository": "Hawkar-usls/Janus-Cosmos",
+    "research_branch": "research/jwst-mocss-hudf-16004a-cosmos-2026-10-16",
+    "source_commit": "5bfc45e76974eef01b556f0ec7e6b94c85fa4011",
+    "action_run_id": 39159440762,
+    "job": "frozen-source-metadata-geometry",
+    "workflow_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39159440762",
+    "artifact_id": 12148093315,
+    "artifact_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39159440762/artifacts/12148093315",
+    "full_artifact_raw_json_sha256": "017661c079f5e2c916e0efe0dd4f9051daacbcbcd68a1044217cab685bba68c4",
+    "script": "tools/attempt_mocss_source_aware_stage2.py",
+    "upstream_wcs_receipt": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json"
+  },
+  "science_position": {
+    "ra_deg": 53.13127,
+    "dec_deg": -27.78908,
+    "source_id_in_test_copies_only": 16004
+  },
+  "frames": [
+    {
+      "group": "B",
+      "detector": "nrs2",
+      "exposure_index": 8,
+      "msa_quadrant": 2,
+      "msa_row": 165,
+      "columns": [
+        92,
+        93,
+        94
+      ],
+      "primary_column": 93,
+      "normalized_original_slit_xy": [
+        0.18548572842142041,
+        0.2574539661709842
+      ],
+      "original_rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "test_rate_sha256": "708124b08268afae1c6fb3012e49a997636a38450999484b4fd514532be1224e",
+      "test_msa_sha256": "9a905580c8a5e3ee2f2270b772167b3a2643c2d47c8f963d6a465ab5628724a6"
+    },
+    {
+      "group": "D",
+      "detector": "nrs1",
+      "exposure_index": 13,
+      "msa_quadrant": 4,
+      "msa_row": 246,
+      "columns": [
+        106,
+        107,
+        108
+      ],
+      "primary_column": 107,
+      "normalized_original_slit_xy": [
+        -0.22180155615867295,
+        -0.10968967847512563
+      ],
+      "original_rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "test_rate_sha256": "549b158787d8150150c71aa2ae0935d3bb52482d0cea2cec74a4de1cadc1e03b",
+      "test_msa_sha256": "606afd393b1db91c3024b48328c5354a92a1ff6bdae756e8ebffcfe5cbf45ec6"
+    }
+  ],
+  "source_info_change": {
+    "source_name": "JANUS16004",
+    "source_alias": "TEST_ONLY",
+    "synthetic_stellarity": 1,
+    "source_position_fractional_inside_shutter": [
+      0.5,
+      0.5
+    ],
+    "one_marked_primary_per_slitlet": true,
+    "adjacent_two_background_shutters": true,
+    "orig_mpt_catalog_source": false,
+    "original_rate_and_msa_files_mutated": false
+  },
+  "gate_states": {
+    "three_shutter_geometry_source_info": "PASS_BOTH_ORIENTATIONS",
+    "source_centroid_and_shutter_throughput_calibrated": "NOT_PERFORMED",
+    "full_16_exposure_four_group_mocss_stacks": "NOT_PERFORMED",
+    "physically_realistic_PSF_bar_injection": "NOT_PERFORMED",
+    "stage2_calibrated_astrophysical_x1d": "NOT_CLAIMED",
+    "oiii_identification": "OPEN",
+    "pagamma_identification": "OPEN",
+    "source_redshift": "OPEN",
+    "gas_trail": "NOT_DETECTED"
+  }
+}

@@ -1,0 +1,58 @@
+name: JANUS MOCSS All16 Original CRDS WCS Neighbor Footprint Map
+on:
+  pull_request:
+    paths:
+      - 'tools/probe_mocss_crds_gwcs_shutter_footprints.py'
+      - '.github/workflows/jwst-mocss-crds-wcs-all16-neighbors.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-wcs-four-dither-geometry:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - group: A
+            exposure_indices: 1,2,3,4
+          - group: B
+            exposure_indices: 5,6,7,8
+          - group: C
+            exposure_indices: 9,10,11,12
+          - group: D
+            exposure_indices: 13,14,15,16
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      CRDS_PATH: /tmp/janus_crds
+      CRDS_SERVER_URL: https://jwst-crds.stsci.edu
+      CRDS_CONTEXT: jwst_1413.pmap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official pinned JWST NIRSpec CRDS/GWCS
+        run: python -m pip install --disable-pip-version-check 'jwst==1.19.1'
+      - name: Measure A-D per-dither three neighbor 3-line detector WCS footprints against original FITS SHA
+        shell: bash
+        run: |
+          PYTHONPATH=tools python -u tools/probe_mocss_crds_gwcs_shutter_footprints.py \
+             --indices "${{ matrix.exposure_indices }}" \
+             --data-dir "/tmp/janus_mocss_gwcs_full_${{ matrix.group }}" \
+             --output "/tmp/janus_mocss_${{ matrix.group }}_four_dither_gwcs_neighbor_map.json"
+      - name: Archive exact original FITS & CRDS per-dither footprint receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-CRDS-all16-neighbor-${{ matrix.group }}
+          path: /tmp/janus_mocss_${{ matrix.group }}_four_dither_gwcs_neighbor_map.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Scientific caveat
+        if: always()
+        run: |
+          echo 'ORIGINAL_16_RATE_3_SOURCE_NEIGHBOR_SHUTTERS_CRDS_WCS=SCOPED_GEOMETRY_ONLY'
+          echo 'FULL_64_MSA_ALL_OPEN_SHUTTER_SPECTRAL_TRANSMISSION_MAP=NOT_GENERATED'
+          echo 'STPSF_SPECTROSCOPIC_DETECTOR_ILLUMINATION_AND_CALIBRATED_FLUX=NOT_GENERATED'
+          echo 'AUTHOR_FULL_MOCSS_STAGE2_AND_DETECTION_SIGNIFICANCE=OPEN'

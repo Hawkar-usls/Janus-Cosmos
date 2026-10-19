@@ -1,0 +1,51 @@
+name: JANUS NIRCam October 2023 Real-Pixel Spatial Offset Search
+
+on:
+  pull_request:
+    paths:
+      - 'tools/scan_nircam_f150w_local_offset_candidates.py'
+      - 'tools/measure_nircam_matched_covariance.py'
+      - 'tools/recheck_nircam_time_domain.py'
+      - 'tools/replay_jwst_mocss_mast_subset.py'
+      - 'domains/space/NIRCAM_F150W_TIME_DOMAIN_RECEIPT_2026-10-16.json'
+      - '.github/workflows/jwst-nircam-2023-local-offset-search.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-real-sky-spatial-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install original MAST pixel photometry dependencies
+        run: python -m pip install --disable-pip-version-check numpy astropy
+      - name: Check analytical code can import
+        run: |
+          python -m py_compile tools/scan_nircam_f150w_local_offset_candidates.py
+          PYTHONPATH=tools python -c 'import scan_nircam_f150w_local_offset_candidates'
+      - name: Independent SHA256-pinned original archive four-image spatial offset scan
+        run: |
+          PYTHONPATH=tools python -u tools/scan_nircam_f150w_local_offset_candidates.py \
+            --data-dir /tmp/janus_f150w_time_domain \
+            --output /tmp/janus_nircam_f150w_local_offset_scan.json
+      - name: Preserve original-image spatial-search result
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-nircam-f150w-four-epoch-local-offset-fieldmax-controls
+          path: /tmp/janus_nircam_f150w_local_offset_scan.json
+          retention-days: 30
+      - name: Guard scientific interpretation
+        if: always()
+        run: |
+          echo 'F150W_BROADBAND_SCAN_ONLY_NOT_16004A_LINE_PHOTOMETRY'
+          echo 'FIELD_MAX_SKY_CONTROLS_NOT_FORMAL_FALSE_ALARM_PVALUE'
+          echo 'STATIC_GALAXY_CONFUSION_NOT_EXCLUDED'
+          echo 'NEEDS_ORIGINAL_SPEC2_AND_TWO_ORIENTATION_COMMON_SKY_HOST_REPLAY'
+          echo 'SOURCE_CLASS_DISTANCE_DIRECTION=OPEN'

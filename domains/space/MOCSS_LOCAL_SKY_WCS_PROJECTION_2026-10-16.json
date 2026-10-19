@@ -1,0 +1,177 @@
+{
+  "status": "WCS_LOCAL_SKY_RATE_CONTRAST_NOT_SPECTRAL_IFU_MAP",
+  "target_ra_dec": [
+    53.13127,
+    -27.78908
+  ],
+  "grid_half_field_arcsec": 1.5,
+  "grid_step_arcsec": 0.1,
+  "wavelength_primary_angstrom": 16004,
+  "wavelength_oiii_companion_angstrom": 15850.7933,
+  "neighbors": {
+    "NW_low_z_photo": {
+      "east_arcsec": -0.33440520244515426,
+      "north_arcsec": 0.5399999999923466
+    },
+    "S_low_z_photo": {
+      "east_arcsec": 0.09872915500934111,
+      "north_arcsec": -1.0332000000005337
+    },
+    "E_high_z_photo": {
+      "east_arcsec": 1.0000307958915782,
+      "north_arcsec": -0.09000000000298769
+    }
+  },
+  "groups": {
+    "A": {
+      "anchor_exposure_index": 1,
+      "detector": "nrs2",
+      "jacobian_detector_pixels_per_arcsec": [
+        [
+          -6.658214409248444,
+          7.261050182627287
+        ],
+        [
+          6.95109088405502,
+          6.675073199798476
+        ]
+      ],
+      "anchor_target_x_y": [
+        967.0487934683854,
+        386.7560566977879
+      ],
+      "line_maps": {
+        "16004A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": 0.011765120550990105,
+            "NW_low_z_photo": -0.0039298199117183685,
+            "S_low_z_photo": 0.006410767324268818,
+            "E_high_z_photo": -9.256754856323823e-05
+          }
+        },
+        "15850p8A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": -0.0018666452961042523,
+            "NW_low_z_photo": -0.004574314691126347,
+            "S_low_z_photo": -0.0005783992819488049,
+            "E_high_z_photo": 0.0007216394296847284
+          }
+        }
+      }
+    },
+    "B": {
+      "anchor_exposure_index": 8,
+      "detector": "nrs2",
+      "jacobian_detector_pixels_per_arcsec": [
+        [
+          -6.643243611322873,
+          7.273233707713871
+        ],
+        [
+          6.949230272610407,
+          6.686353351190064
+        ]
+      ],
+      "anchor_target_x_y": [
+        754.017995398666,
+        366.34969572630985
+      ],
+      "line_maps": {
+        "16004A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": 0.012307832017540932,
+            "NW_low_z_photo": 0.0004051261057611555,
+            "S_low_z_photo": 0.0025350567884743214,
+            "E_high_z_photo": 0.0031001826282590628
+          }
+        },
+        "15850p8A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": -0.0019407639047130942,
+            "NW_low_z_photo": 0.0005475563812069595,
+            "S_low_z_photo": 0.0018003475852310658,
+            "E_high_z_photo": -0.0005448393640108407
+          }
+        }
+      }
+    },
+    "C": {
+      "anchor_exposure_index": 10,
+      "detector": "nrs1",
+      "jacobian_detector_pixels_per_arcsec": [
+        [
+          7.396634667539388,
+          6.374333518534172
+        ],
+        [
+          6.617976152687106,
+          -7.03467630310314
+        ]
+      ],
+      "anchor_target_x_y": [
+        1749.6568254010506,
+        289.06021290421126
+      ],
+      "line_maps": {
+        "16004A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": -4.713316457127803e-07,
+            "NW_low_z_photo": 0.01224458683282137,
+            "S_low_z_photo": 0.0025293948128819466,
+            "E_high_z_photo": -0.01577470637857914
+          }
+        },
+        "15850p8A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": -0.0033936973195523024,
+            "NW_low_z_photo": 0.011354414746165276,
+            "S_low_z_photo": -0.0014353180304169655,
+            "E_high_z_photo": -0.0038986874278634787
+          }
+        }
+      }
+    },
+    "D": {
+      "anchor_exposure_index": 13,
+      "detector": "nrs1",
+      "jacobian_detector_pixels_per_arcsec": [
+        [
+          7.387287890296648,
+          6.339575323021904
+        ],
+        [
+          6.621429093387121,
+          -7.024704204858807
+        ]
+      ],
+      "anchor_target_x_y": [
+        1556.7423595056216,
+        295.2165502958963
+      ],
+      "line_maps": {
+        "16004A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": 0.017314285039901733,
+            "NW_low_z_photo": -0.038219153881073,
+            "S_low_z_photo": -0.008516576141119003,
+            "E_high_z_photo": 0.016204554587602615
+          }
+        },
+        "15850p8A": {
+          "sampled_rate_contrast_dn_per_s": {
+            "target": -0.008605340495705605,
+            "NW_low_z_photo": -0.002606537425890565,
+            "S_low_z_photo": 0.005699357017874718,
+            "E_high_z_photo": -0.007646982558071613
+          }
+        }
+      }
+    }
+  },
+  "important_limitations": [
+    "Two-PA sky coordinates reconstructed from open-shutter MOS; no spectrophotometric calibration",
+    "Each map is a model of 16004-A photon arrival locations, not evidence for an emission beam",
+    "2D RATE background was high-pass filtered; artifacts/systematics require independent science-grade calibration",
+    "No corrected source intensity, extension limit or line detection significance"
+  ]
+}

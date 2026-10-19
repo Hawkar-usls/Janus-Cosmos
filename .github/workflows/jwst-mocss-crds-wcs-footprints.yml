@@ -1,0 +1,45 @@
+name: JANUS MOCSS CRDS WCS Open Shutter Detector Footprint Pilot
+on:
+  pull_request:
+    paths:
+      - 'tools/probe_mocss_crds_gwcs_shutter_footprints.py'
+      - '.github/workflows/jwst-mocss-crds-wcs-footprints.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-CRDS-target-neighbor-3wavelength-footprints:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CRDS_PATH: /tmp/janus_crds
+      CRDS_SERVER_URL: https://jwst-crds.stsci.edu
+      CRDS_CONTEXT: jwst_1413.pmap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact original pipeline
+        run: python -m pip install --disable-pip-version-check 'jwst==1.19.1'
+      - name: Audit real MSA open neighbors under 4 original exposure CRDS/GWCS
+        run: |
+          PYTHONPATH=tools python -u tools/probe_mocss_crds_gwcs_shutter_footprints.py \
+            --indices 1,8,10,13 \
+            --data-dir /tmp/janus_wcs_original_near_source \
+            --output /tmp/janus_mocss_crds_original_near_source_detector_footprints.json
+      - name: Preserve actual 3-wavelength footprint evidence and WCS execution errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-crds-original-MSA-neighbor-3lambda-footprints
+          path: /tmp/janus_mocss_crds_original_near_source_detector_footprints.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Scientific authority ceiling
+        if: always()
+        run: |
+          echo 'OFFICIAL_CRDS_WCS_3_SHUTTER_DETECTOR_FOOTPRINTS_IF_STEP_SUCCEEDED'
+          echo 'FULL_16_EXPOSURE_3D_SHUTTER_X_WAVELENGTH_PIXEL_WEIGHT_MAP=NOT_REPRODUCED'
+          echo 'CALIBRATED_STAGE2_FULL_4STACK_MOCSS_SOURCE_FLUX=NOT_REPRODUCED'
+          echo 'SOURCE_CLASS_REDSHIFT_LINE_IDENTIFICATION=OPEN'

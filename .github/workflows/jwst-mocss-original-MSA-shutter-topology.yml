@@ -1,0 +1,43 @@
+name: JANUS MOCSS Exact Original MSA Plane 16-Exposure Configuration
+on:
+  pull_request:
+    paths:
+      - 'tools/audit_mocss_original_16_msa_pattern_masks.py'
+      - '.github/workflows/jwst-mocss-original-MSA-shutter-topology.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-msa-meta-exposure-raster:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FITS+NumPy only
+        run: python -m pip install --disable-pip-version-check numpy astropy
+      - name: 16 original-rate FITS headers x official matching MSA IDs and PATT_NUM rasters
+        run: |
+          PYTHONPATH=tools python -u tools/audit_mocss_original_16_msa_pattern_masks.py \
+            --data-dir /tmp/janus_mocss_original_MSA_mask_inputs \
+            --output /tmp/janus_mocss_16original_shutter_masks.json \
+            --raster /tmp/janus_mocss_16original_shutter_masks.npz --workers 4
+      - name: Preserve original bit masks and independently auditable configuration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-exact-16-original-msa-pattern-raster
+          path: |
+            /tmp/janus_mocss_16original_shutter_masks.json
+            /tmp/janus_mocss_16original_shutter_masks.npz
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Science gate
+        if: always()
+        run: |
+          echo 'ORIGINAL_MSA_PATTERN=EXPOSURE_SPECIFIC_MSAMETID_PLUS_PATT_NUM'
+          echo 'MSA_365x171x4x16_BINARY_OPEN_SHUTTER_RASTERS=FROM_ORIGINAL_MSA_IF_CHECK_PASS'
+          echo 'WAVELENGTH_DEPENDENT_DETECTOR_PIXEL_ILLUMINATION=NOT_YET_COMPUTED'
+          echo 'SOURCE_DETECTION_ABSOLUTE_LINE_FLUX=OPEN'

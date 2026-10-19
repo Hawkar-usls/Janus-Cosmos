@@ -1,0 +1,95 @@
+{
+  "schema": "janus.cosmos.space.spatial_origin_falsification.v1",
+  "case_id": "JWST-MOCSS-HUDF-16004A-SPATIAL",
+  "status": "SKY_DIRECTION_KNOWN__SPATIAL_EXTENT_AND_SOURCE_DISTANCE_UNRESOLVED",
+  "world_truth": false,
+  "reference": {
+    "paper": "https://arxiv.org/html/2610.12553v1",
+    "paper_sections": ["III.2", "III.3", "IV.1", "IV.3"],
+    "mast_archive": "https://doi.org/10.17909/tct8-jr92",
+    "independent_mast_receipt": "domains/space/JWST_MOCSS_HUDF_MAST_INDEPENDENT_RECEIPT_2026-10-16.json"
+  },
+  "sky_direction": {
+    "coordinate_frame": "ICRS approximately J2000 as published",
+    "right_ascension_deg": 53.13127,
+    "declination_deg": -27.78908,
+    "galactic_longitude_deg_approx": 223.544,
+    "galactic_latitude_deg_approx": -54.4218,
+    "class": "SOURCE_BOUND_FACT_AND_COORDINATE_TRANSFORM",
+    "meaning": "Line of sight from telescope to the sky patch. It is NOT an emission-beam axis or a measurement of propagation farther through a galaxy."
+  },
+  "spectral_source_localization": {
+    "source_bound_evidence": "Huberty et al. report the line in stacks A-D spanning two dispersion angles approximately 89 degrees apart, matching one source position and wavelength (16004 +/- 1 Angstrom).",
+    "same_sky_position_across_orientations": "REPORTED_BY_AUTHORS__NOT_YET_REEXTRACTED_FROM_DETECTOR_FILES",
+    "galaxy_like_spatial_extension_or_surface_brightness_profile": "NOT_MEASURED_IN_THIS_REPLAY",
+    "more_spatial_emission_at_identical_wavelength_in_other_MSA_shutters": "NOT_SEARCHED_INDEPENDENTLY",
+    "propagation_length": "UNIDENTIFIABLE_FROM_ONE_SIGHTLINE",
+    "warning": "Spectral-line photons received from one direction do not prove a collimated signal or that the line 'continues' through a contiguous track of sky. NIRSpec slitless dispersion produces detector streaks that are not spatial extension of the emitter."
+  },
+  "published_MOCSS_same_wavelength_catalog_screen": {
+    "source": "https://arxiv.org/html/2609.36003v1 ; Huberty et al., MOCSS method paper, Table 1, source IDs MOCSSHUDF1 through MOCSSHUDF23 (the orphan is ID 24).",
+    "independent_calculation": "For every one of the 23 other listed emitters, use its rounded published spectroscopic z and listed Lines of Interest; calculate lambda_observed = lambda_rest*(1+z) for representative strong rest-frame transitions. Compare against 16004 A.",
+    "other_reported_emitter_sources_screened": 23,
+    "representative_line_identifications_screened": 41,
+    "representative_lines_within_plusminus_10_angstrom": 0,
+    "representative_lines_within_plusminus_100_angstrom": 0,
+    "closest_listed_transition": {"source_id": "MOCSSHUDF1", "ra_deg": 53.1327744, "dec_deg": -27.7888699, "angular_separation_arcsec_approx": 4.8, "line_id": "H-alpha", "published_z_rounded": 1.395, "predicted_observed_angstrom_approx": 15722.2, "difference_from_16004_angstrom_approx": 281.8},
+    "what_this_does_not_prove": "The 23-object published source catalog is not a blinded, complete same-wavelength spectral map; noncataloged single-line objects, faint secondary transitions, sky background artifacts and sources in other parts of the Universe remain untested.",
+    "status": "SOURCE_BOUND_CATALOG_COMPARISON__NO_NEAR_16004A_REPRESENTATIVE_MATCH"
+  },
+  "neighbor_positions_from_paper_table_3": [
+    {"label": "NORTHWEST", "ra_deg": 53.131165, "dec_deg": -27.788930, "separation_arcsec_approx": 0.635, "bearing_east_of_north_deg_approx": 328.3, "photometric_redshift": "0.22 +3.11/-0.09; highly ambiguous"},
+    {"label": "EAST", "ra_deg": 53.131584, "dec_deg": -27.789105, "separation_arcsec_approx": 1.003, "bearing_east_of_north_deg_approx": 95.1, "photometric_redshift": "6.03 +0.04/-0.29"},
+    {"label": "SOUTH", "ra_deg": 53.131301, "dec_deg": -27.789367, "separation_arcsec_approx": 1.038, "bearing_east_of_north_deg_approx": 174.5, "photometric_redshift": "0.19 +2.60/-0.03; highly ambiguous"}
+  ],
+  "conditional_distance_scenarios": {
+    "cosmological_assumption": "Approximate flat LCDM: H0=67.66 km/s/Mpc, Omega_m=0.3111, radiation ignored, c=299792.458 km/s. All distances conditional on line ID.",
+    "interpretation": "Luminosity distance is a flux-distance definition, not photon path length. Lookback years approximate time light has been in transit; proper kpc per arcsec converts *observed angular extent*, which is not yet constrained.",
+    "cases": [
+      {"candidate": "Pa_beta / Type_IIn_possible", "rest_wavelength_angstrom_approx": 12818, "z": 0.24856, "luminosity_distance_gpc": 1.293, "lookback_gyr": 3.023, "proper_kpc_per_arcsec": 4.02},
+      {"candidate": "H_alpha", "rest_wavelength_angstrom": 6564.61, "z": 1.43792, "luminosity_distance_gpc": 10.627, "lookback_gyr": 9.362, "proper_kpc_per_arcsec": 8.668},
+      {"candidate": "OIII_5008", "rest_wavelength_angstrom": 5008.24, "z": 2.19553, "luminosity_distance_gpc": 17.843, "lookback_gyr": 10.801, "proper_kpc_per_arcsec": 8.472},
+      {"candidate": "OII_3730", "rest_wavelength_angstrom": 3729.88, "z": 3.29075, "luminosity_distance_gpc": 29.069, "lookback_gyr": 11.857, "proper_kpc_per_arcsec": 7.655},
+      {"candidate": "Lyman_alpha", "rest_wavelength_angstrom": 1215.67, "z": 12.16476, "luminosity_distance_gpc": 132.321, "lookback_gyr": 13.430, "proper_kpc_per_arcsec": 3.702}
+    ]
+  },
+  "test_design": [
+    {
+      "id": "S1_REAL_SKY_LOCALIZATION",
+      "procedure": "From all 16 original GO-3290 exposures, use WCS/MSA shutter mask and grating model to deproject the same 16004 Angstrom wavelength into common RA/Dec coordinates; make independent images for each orientation and each dither, with detector-frame negative controls.",
+      "would_count_as_evidence_for_spatial_extension": "Statistically significant surface-brightness distribution wider than the calibrated PSF in both sky-aligned orientations, not following detector dispersion direction.",
+      "current_status": "NOT_EXECUTED__CUSTOM_MOCSS_WCS_REQUIRED"
+    },
+    {
+      "id": "S2_ADJACENT_SAME_WAVELENGTH_SEARCH",
+      "procedure": "Pre-register aperture grid across at least +/- 5 arcsec around frozen source, search line at 16004+/-10 Angstrom in separate sky apertures, subtract source PSF and local sky, repeat in each orientation, inject fake lines at blank positions, correct for spatial and wavelength trials.",
+      "would_count_as_evidence_for_extended_line": "Independent adjacent apertures with reproducible line flux in both orientations and spatially coherent redshift or velocity gradient.",
+      "current_status": "NOT_EXECUTED__NO_CLAIM_OF_SECOND_LOCATION"
+    },
+    {
+      "id": "S3_IFU_2D_LINE_RASTER",
+      "procedure": "New NIRSpec IFU observation centered at published coordinates plus the three neighboring galaxies; coeval NIRCam F150W imaging; 2D line maps at 16004, 15851 (OIII4959 test), 15539 (Hbeta), around 13655 Angstrom (Pa-gamma under Pa-beta model), plus off-line and off-target nulls. Recompute exact air/vacuum line centers using one convention before requesting observations.",
+      "would_count_as_evidence_for_AGN_illuminated_gas": "Resolved offset cloud and statistically matched redshift/ionization diagnostics of one neighboring AGN with plausible illumination geometry.",
+      "current_status": "FOLLOWUP_PROPOSAL_ONLY"
+    },
+    {
+      "id": "S4_TIME_MATCHED_NIRCam_F150W",
+      "procedure": "Confirm October 2023 between spectral visits and 2025/2026 forced-aperture non-detections with independent PSF aperture correction, injected-source completeness, WHT/ERR checks and exact F150W throughput before physical-model ranking.",
+      "independent_preliminary_evidence": "Three 0.12-arcsec-aperture fluxes from direct image pixels are all below 1 sigma in magnitude, as recorded in the companion machine-readable receipt.",
+      "current_status": "PARTIAL_REPLAY__DIAGNOSTIC_FLUX_ONLY"
+    }
+  ],
+  "physical_hypothesis_priorities_no_probability_claim": [
+    {"id": "NEARBY_AGN_ILLUMINATED_CLOUD", "status": "HYPOTHESIS_ONLY", "unique_spatial_prediction": "Line surface brightness offset from adjacent ionizing galaxy; common redshift, velocity/ionization coherence. Persistent cloud requires reconciling middle-epoch imaging."},
+    {"id": "VARIABLE_TRANSIENT_LINE_SN_TDE", "status": "HYPOTHESIS_ONLY", "unique_spatial_prediction": "Compact source with epoch-dependent line, possible underlying host; 2023 October intervening nondetection is a newly relevant temporal falsifier."},
+    {"id": "STARBURST_OR_LYA", "status": "HYPOTHESIS_ONLY", "unique_spatial_prediction": "Galaxy-sized emission at one of conditional redshifts, characteristic companion line or Lyman break; persistent F150W flux test."},
+    {"id": "INSTRUMENTAL_OR_SELECTION", "status": "HYPOTHESIS_ONLY", "unique_spatial_prediction": "Fails to deproject to same sky morphology and wavelength under alternate reduction, blank shutter controls or injected-line trials."}
+  ],
+  "epistemic_gate": {
+    "KNOWN_SIGHTLINE": "SOURCE_BOUND_FACT",
+    "SECOND_SKY_POSITION_SAME_LINE": "INSUFFICIENT_DATA",
+    "SPATIAL_PROPAGATION_LENGTH": "UNIDENTIFIABLE",
+    "PHYSICAL_DISTANCE": "CONDITIONAL_ON_LINE_ID",
+    "SOURCE_IDENTITY": "UNRESOLVED"
+  }
+}

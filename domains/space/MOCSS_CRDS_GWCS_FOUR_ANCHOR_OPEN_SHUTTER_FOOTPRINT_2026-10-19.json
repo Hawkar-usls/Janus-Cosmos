@@ -1,0 +1,132 @@
+{
+  "schema": "janus-mocss-original-open-msa-four-anchor-crds-gwcs-three-lambda-v1",
+  "created_utc": "2026-10-19",
+  "science_status": "12_ORIGINAL_OPEN_SHUTTER_CRDS_GWCS_36_FINITE_ON_DETECTOR_SAMPLE_GEOMETRIES_ONLY",
+  "provenance": {
+    "action_run_id": 39243207739,
+    "action_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39243207739",
+    "artifact_id": 12182661300,
+    "artifact_json_sha256": "10b87cfd2abff98117f97bc9d3c9b319ec51e3542062959f763cb80e812426f4",
+    "original_rate_and_msa_sha256": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "original_open_shutter_state": "domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json",
+    "script": "tools/probe_mocss_crds_gwcs_shutter_footprints.py",
+    "jwst": "1.19.1",
+    "crds": "jwst_1413.pmap",
+    "num_original_exposures": 4,
+    "num_actual_MSA_open_shutters": 12,
+    "num_three_wavelength_center_tests": 36
+  },
+  "wavelength_A": {
+    "Pa_gamma": 13656.7483309,
+    "OIII_4960": 15850.7932988,
+    "primary": 16004
+  },
+  "sampled_source_nearest_shutter_detector_xy_pix": {
+    "A": {
+      "exposure": 1,
+      "detector": "NRS2",
+      "quadrant": 2,
+      "msa_row": 84,
+      "msa_col": 89,
+      "Pa_gamma": [
+        597.43,
+        385.67
+      ],
+      "OIII_4960": [
+        943.63,
+        387.74
+      ],
+      "primary": [
+        967.84,
+        387.92
+      ]
+    },
+    "B": {
+      "exposure": 8,
+      "detector": "NRS2",
+      "quadrant": 2,
+      "msa_row": 165,
+      "msa_col": 93,
+      "Pa_gamma": [
+        384.53,
+        365.79
+      ],
+      "OIII_4960": [
+        730.24,
+        367.34
+      ],
+      "primary": [
+        754.41,
+        367.48
+      ]
+    },
+    "C": {
+      "exposure": 10,
+      "detector": "NRS1",
+      "quadrant": 4,
+      "msa_row": 171,
+      "msa_col": 108,
+      "Pa_gamma": [
+        1382.36,
+        291.31
+      ],
+      "OIII_4960": [
+        1726.12,
+        290.07
+      ],
+      "primary": [
+        1750.14,
+        290.02
+      ]
+    },
+    "D": {
+      "exposure": 13,
+      "detector": "NRS1",
+      "quadrant": 4,
+      "msa_row": 246,
+      "msa_col": 107,
+      "Pa_gamma": [
+        1188.72,
+        296.51
+      ],
+      "OIII_4960": [
+        1532.29,
+        294.82
+      ],
+      "primary": [
+        1556.3,
+        294.73
+      ]
+    }
+  },
+  "results": {
+    "original_rate_sha_match": "PASS_4",
+    "original_MSA_sha_match": "PASS_2_DISTINCT_REFERENCE_FILES",
+    "source_neighbor_three_consecutive_dispersion_rows_actual_open": "PASS_12_SHUTTERS",
+    "official_assign_wcs": "COMPLETE_ALL4",
+    "selected_slit_numeric_id_contract": "PASS",
+    "finite_three_lambda_center_projection": "PASS_36",
+    "all_center_coordinates_on_detector": "PASS_36"
+  },
+  "method": {
+    "wcs_coordinates_units": "zero-indexed physical NIRSpec detector pixels",
+    "source_coordinates_constructed_using_original_open_MSA_locations": true,
+    "selected_MSA_shutters_from_synthetic_9_virtual_background_slits": true,
+    "source_original_MPT_identification": false,
+    "each_slit_3x3_slit_frame_grid_half_width_0p5": true,
+    "pixel_bounding_boxes_are_sampling_envelopes_only": true
+  },
+  "physical_calibration_gates": {
+    "full_original_16_exposure_crds_wcs_nearest_shutters": "PENDING_SEPARATE_MATRIX_RUN_39243558142",
+    "spectral_pixel_illumination_weighting_for_all_original_open_shutters": false,
+    "real_closed_shutter_leakage_scattered_sky": false,
+    "all_four_full_stage2_science_coadds": false,
+    "dispersed_STPSF_in_original_detector_and_physical_flux_injection": false,
+    "line_16004_absolute_cgs": null,
+    "line_15850_OIII_confirmed": null,
+    "line_13656_Pagamma_confirmed": null,
+    "source_identity": null,
+    "redshift": null,
+    "directed_gas_trail": null
+  }
+}

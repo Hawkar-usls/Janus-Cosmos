@@ -1,0 +1,100 @@
+{
+  "schema": "janus-mocss-two-pa-source-aware-diagnostic-x1d-v1",
+  "date_utc": "2026-10-19",
+  "status": "DIAGNOSTIC_X1D_CREATED_FOR_TWO_ARCHIVAL_ANGLES_NOT_CALIBRATED_ASTROPHYSICAL_FLUX",
+  "source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "pipeline_version": "1.19.1",
+  "crds_context": "jwst_1413.pmap",
+  "virtual_msa_source_id": 16004,
+  "synthetic_source_info_not_original_mpt": true,
+  "source_exposures": [
+    8,
+    13
+  ],
+  "results": [
+    {
+      "position_method": "shutter_midpoint_fractional_0p5",
+      "run_id": 39159440762,
+      "artifact_id": 12148593138,
+      "artifact_json_sha256": "2cad505c6b34063072a6687fa38a700c6649e000634ece6dc62b31109aee8440",
+      "groups": {
+        "B": {
+          "detector": "NRS2",
+          "exposure_index": 8,
+          "x1d_created": true,
+          "x1d_fits_sha256": "aba6d878a9e98b764cf1d71f31b93d85e793487f29b01d084012ddec46b2bd59",
+          "x1d_fits_bytes": 256320
+        },
+        "D": {
+          "detector": "NRS1",
+          "exposure_index": 13,
+          "x1d_created": true,
+          "x1d_fits_sha256": "8972533e10e0fba0f3a1b15852b22391ad4ae2dde3525d898155018e90f2e6f6",
+          "x1d_fits_bytes": 293760
+        }
+      }
+    },
+    {
+      "position_method": "sky_wcs_offcenter_fractional",
+      "run_id": 39159808143,
+      "artifact_id": 12147869813,
+      "artifact_json_sha256": "67bef00b1e7bf05cebe76ecc69a38924c887c3c9e2227a1599cb491338b758f0",
+      "groups": {
+        "B": {
+          "detector": "NRS2",
+          "exposure_index": 8,
+          "source_fraction_xy": [
+            0.6854857284214204,
+            0.7574539661709843
+          ],
+          "x1d_created": true,
+          "x1d_fits_sha256": "7ada9a63610f3a1ec075dcb854b3e6f780251f57836e939a77f69405cb527765",
+          "x1d_fits_bytes": 256320
+        },
+        "D": {
+          "detector": "NRS1",
+          "exposure_index": 13,
+          "source_fraction_xy": [
+            0.2781984438413271,
+            0.3903103215248744
+          ],
+          "x1d_created": true,
+          "x1d_fits_sha256": "3bb4d0993d218b99f3de7a0ef701bddd224eed637302bc2f5a6984353858d623",
+          "x1d_fits_bytes": 293760
+        }
+      }
+    }
+  ],
+  "reported_completed_steps": [
+    "assign_wcs",
+    "extract_2d",
+    "srctype",
+    "wavecorr",
+    "flat_field",
+    "photom"
+  ],
+  "manual_extract_1d_number_per_group": 1,
+  "photometric_calibration_status": "DIAGNOSTIC_STEPS_COMPLETE_BUT_SOURCE_FLUX_INVALID",
+  "confidence_limits": [
+    "Test slit SOURCE_INFO is artificially inserted in a modified temporary MSA copy; MPT did not natively declare this source.",
+    "Only exposure 8 (B) and exposure 13 (D) tested, not the 16-frame 4-group science reduction.",
+    "Full-row sky subtraction, published four-dither group stacking, wavelength-dependent source pathloss/barshadow/transmission, background covariance and realistic PSF injection are missing.",
+    "The GitHub Actions JSON artifact stores metadata and output spectral FITS checksums, not the x1d FITS bytes themselves.",
+    "The full workflow success and diagnostic x1d creation do not establish line detection, line flux or limits."
+  ],
+  "science_gates": {
+    "B_D_diagnostic_x1d_creation": "PASS",
+    "A_C_diagnostic_x1d_creation": "NOT_TESTED",
+    "A_B_C_D_valid_MOCSS_science_spectra": "OPEN",
+    "line_16004_absolute_flux": "NOT_MEASURED",
+    "line_15850p793_OIII": "NOT_MEASURED",
+    "line_13656p748_Pagamma": "NOT_MEASURED",
+    "PSF_injection_physical_flux_recovery": "NOT_DONE",
+    "source_identity": "OPEN",
+    "redshift": "OPEN",
+    "directed_trail": "NOT_DETECTED"
+  }
+}

@@ -1,0 +1,211 @@
+name: JANUS COSMOS JWST MOCSS Evidence-Training Check
+
+on:
+  pull_request:
+    paths:
+      - 'domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json'
+      - 'domains/space/JWST_MOCSS_HUDF_MAST_INDEPENDENT_RECEIPT_2026-10-16.json'
+      - 'domains/space/JWST_MOCSS_HUDF_ORIGIN_SPATIAL_TEST_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_MANIFEST_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_GEOMETRY_RECEIPT_2026-10-16.json'
+      - 'domains/space/MOCSS_16_EXPOSURE_GEOMETRY_AND_ORIGIN_2026-10-16.md'
+      - 'tools/verify_jwst_mocss_hudf_single_line.py'
+      - 'tools/verify_jwst_mocss_archive_receipt.py'
+      - 'tools/fetch_jwst_mocss_mast_subset.py'
+      - 'tools/replay_jwst_mocss_mast_subset.py'
+      - 'tools/build_mocss_16_exposure_manifest.py'
+      - 'tools/analyze_mocss_geometry_and_hypotheses.py'
+      - 'tools/verify_mocss_16_exposure_receipt.py'
+      - 'domains/space/MOCSS_16_SKY_REGISTERED_RATE_*.json'
+      - 'domains/space/MOCSS_16_SKY_REGISTERED_RATE_*.md'
+      - 'domains/space/MOCSS_16_SKY_WCS_REPRODUCTION_2026-10-16.md'
+      - 'domains/space/MOCSS_LOCAL_SKY_*.json'
+      - 'tools/*mocss*'
+      - 'domains/space/NIRCAM_F150W_COVARIANCE_SENSITIVITY_2026-10-18.json'
+      - 'domains/space/NIRCAM_F150W_MATCHED_SKY_COVARIANCE_OBSERVED_2026-10-18.json'
+      - 'domains/space/MOCSS_THREE_LINE_CALIBRATION_GATE_2026-10-18.json'
+      - 'domains/space/MOCSS_THREE_LINE_REAL_RATE_INJECTION_2026-10-18.json'
+      - 'domains/space/MOCSS_STAGE2_LIST_RETURN_FAILURE_AUDIT_2026-10-18.json'
+      - 'domains/space/MOCSS_THREE_SHUTTER_SOURCE_AWARE_GEOMETRY_2026-10-18.json'
+      - 'tools/verify_mocss_source_aware_geometry_receipt.py'
+      - 'domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json'
+      - 'tools/verify_mocss_two_pa_offcenter_source.py'
+      - 'domains/space/MOCSS_BD_DIAGNOSTIC_X1D_SUCCESS_2026-10-19.json'
+      - 'tools/verify_mocss_bd_diagnostic_x1d_receipt.py'
+      - 'domains/space/MOCSS_DISPERSION_THREE_ROW_CORRECTION_2026-10-19.json'
+      - 'domains/space/MOCSS_FOUR_X1D_OFFLINE_NULL_STRESS_2026-10-19.json'
+      - 'tools/verify_mocss_four_x1d_null_and_axis.py'
+      - 'domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json'
+      - 'tools/verify_mocss_four_group_correct_row_geometry.py'
+      - 'domains/space/MOCSS_FOUR_CORRECT_ROWS_DIAGNOSTIC_X1D_2026-10-19.json'
+      - 'tools/verify_mocss_four_correct_row_diagnostic_x1d.py'
+      - 'domains/space/MOCSS_CORRECT_ROW_FOUR_X1D_EMPIRICAL_NULLS_2026-10-19.json'
+      - 'tools/verify_mocss_correct_row_empirical_nulls.py'
+      - 'domains/space/MOCSS_STPSF_OPTICAL_THREE_WAVELENGTHS_2026-10-19.json'
+      - 'tools/verify_mocss_stpsf_optical_receipt.py'
+      - 'domains/space/MOCSS_16_REAL_RATE_FOUR_STACKS_ROW_SKY_PROXY_2026-10-19.json'
+      - 'tools/verify_mocss_16_real_rate_row_sky_proxy.py'
+      - 'domains/space/MOCSS_FULL16_NATIVE_DETECTOR_2D_GAUSSIAN_INJECTION_2026-10-19.json'
+      - 'tools/verify_mocss_full16_native_detector_injection.py'
+      - 'domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json'
+      - 'tools/verify_mocss_original_16_msa_topology.py'
+      - 'domains/space/MOCSS_CRDS_WCS_FORWARD_ILLUMINATION_GATE_2026-10-19.json'
+      - 'tools/verify_mocss_crds_illumination_gate.py'
+      - 'domains/space/MOCSS_CRDS_GWCS_FOUR_ANCHOR_OPEN_SHUTTER_FOOTPRINT_2026-10-19.json'
+      - 'tools/verify_mocss_four_anchor_crds_gwcs_receipt.py'
+      - 'domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json'
+      - 'tools/verify_mocss_all16_crds_gwcs_receipt.py'
+      - 'tools/verify_mocss_stage2_false_green_audit.py'
+      - 'tools/verify_mocss_three_line_real_rate_injection.py'
+      - 'tools/verify_nircam_f150w_covariance_sensitivity.py'
+      - 'tools/verify_nircam_measured_covariance_receipt.py'
+      - 'tools/fit_mocss_calibrated_three_lines.py'
+      - 'tools/verify_mocss_three_line_calibration_gate.py'
+      - '.github/workflows/jwst-mocss-evidence-training.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-bound-training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: JSON syntax
+        run: |
+          python -m json.tool domains/space/JWST_MOCSS_HUDF_SINGLE_LINE_COSMOS_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/JWST_MOCSS_HUDF_MAST_INDEPENDENT_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/JWST_MOCSS_HUDF_ORIGIN_SPATIAL_TEST_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_EXPOSURE_MANIFEST_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_EXPOSURE_GEOMETRY_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_LOCAL_SKY_COHERENCE_RECEIPT_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/MOCSS_LOCAL_SKY_WCS_PROJECTION_2026-10-16.json > /dev/null
+          python -m json.tool domains/space/NIRCAM_F150W_COVARIANCE_SENSITIVITY_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/NIRCAM_F150W_MATCHED_SKY_COVARIANCE_OBSERVED_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_THREE_LINE_CALIBRATION_GATE_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_THREE_LINE_REAL_RATE_INJECTION_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_STAGE2_LIST_RETURN_FAILURE_AUDIT_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_THREE_SHUTTER_SOURCE_AWARE_GEOMETRY_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json > /dev/null
+          python -m json.tool domains/space/MOCSS_BD_DIAGNOSTIC_X1D_SUCCESS_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_DISPERSION_THREE_ROW_CORRECTION_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_FOUR_X1D_OFFLINE_NULL_STRESS_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_FOUR_CORRECT_ROWS_DIAGNOSTIC_X1D_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_CORRECT_ROW_FOUR_X1D_EMPIRICAL_NULLS_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_STPSF_OPTICAL_THREE_WAVELENGTHS_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_16_REAL_RATE_FOUR_STACKS_ROW_SKY_PROXY_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_FULL16_NATIVE_DETECTOR_2D_GAUSSIAN_INJECTION_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_CRDS_WCS_FORWARD_ILLUMINATION_GATE_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_CRDS_GWCS_FOUR_ANCHOR_OPEN_SHUTTER_FOOTPRINT_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json > /dev/null
+      - name: Python replay scripts compile
+        run: |
+          python -m py_compile tools/fetch_jwst_mocss_mast_subset.py
+          python -m py_compile tools/replay_jwst_mocss_mast_subset.py
+          python -m py_compile tools/build_mocss_16_exposure_manifest.py
+          python -m py_compile tools/analyze_mocss_geometry_and_hypotheses.py
+          python -m py_compile tools/verify_mocss_16_exposure_receipt.py
+          python -m py_compile tools/verify_mocss_sky_registered_rate_receipt.py
+          python -m py_compile tools/prepare_mocss_wcs_probe.py
+          python -m py_compile tools/calibrate_mocss_wcs_grid.py
+          python -m py_compile tools/prepare_all_mocss_target_wcs.py
+          python -m py_compile tools/trace_mocss_all_16.py
+          python -m py_compile tools/stack_mocss_wcs_registered_rate.py
+          python -m py_compile tools/map_mocss_local_sky.py
+          python -m py_compile tools/assess_mocss_local_sky_coherence.py
+          python -m py_compile tools/verify_nircam_f150w_covariance_sensitivity.py
+          python -m py_compile tools/verify_nircam_measured_covariance_receipt.py
+          python -m py_compile tools/fit_mocss_calibrated_three_lines.py
+          python -m py_compile tools/verify_mocss_three_line_calibration_gate.py
+          python -m py_compile tools/verify_mocss_three_line_real_rate_injection.py
+          python -m py_compile tools/verify_mocss_stage2_false_green_audit.py
+          python -m py_compile tools/verify_mocss_source_aware_geometry_receipt.py
+          python -m py_compile tools/verify_mocss_two_pa_offcenter_source.py
+          python -m py_compile tools/verify_mocss_bd_diagnostic_x1d_receipt.py
+          python -m py_compile tools/verify_mocss_four_x1d_null_and_axis.py
+          python -m py_compile tools/verify_mocss_four_group_correct_row_geometry.py
+          python -m py_compile tools/verify_mocss_four_correct_row_diagnostic_x1d.py
+          python -m py_compile tools/verify_mocss_correct_row_empirical_nulls.py
+          python -m py_compile tools/verify_mocss_stpsf_optical_receipt.py
+          python -m py_compile tools/verify_mocss_16_real_rate_row_sky_proxy.py
+          python -m py_compile tools/verify_mocss_full16_native_detector_injection.py
+          python -m py_compile tools/verify_mocss_original_16_msa_topology.py
+          python -m py_compile tools/verify_mocss_crds_illumination_gate.py
+          python -m py_compile tools/verify_mocss_four_anchor_crds_gwcs_receipt.py
+          python -m py_compile tools/verify_mocss_all16_crds_gwcs_receipt.py
+      - name: Published-source arithmetic and epistemic gates
+        run: python tools/verify_jwst_mocss_hudf_single_line.py
+      - name: Independent MAST receipt and spatial-origin gates
+        run: python tools/verify_jwst_mocss_archive_receipt.py
+      - name: Sixteen exposure MSA input integrity and corrected OIII wavelength
+        run: python tools/verify_mocss_16_exposure_receipt.py
+      - name: Sky-registered 32-FITS WCS replay and uncalibrated RATE science gates
+        run: python tools/verify_mocss_sky_registered_rate_receipt.py
+      - name: F150W October covariance sensitivity, source data and science ceilings
+        run: python tools/verify_nircam_f150w_covariance_sensitivity.py
+      - name: Observed matched-sky covariance from archival pixels, provenance and scientific bounds
+        run: python tools/verify_nircam_measured_covariance_receipt.py
+      - name: Three-line spectroscopic gate and arithmetic checks
+        run: python tools/verify_mocss_three_line_calibration_gate.py
+      - name: Archival detector injection with strict no-calibration scientific gate
+        run: python tools/verify_mocss_three_line_real_rate_injection.py
+      - name: Stage2 old green run must not imply calibrated spectra
+        run: python tools/verify_mocss_stage2_false_green_audit.py
+      - name: Real NIRSpec MSA two-orientation three-shutter synthetic source geometry provenance
+        run: python tools/verify_mocss_source_aware_geometry_receipt.py
+      - name: Independent original sky WCS offset to source MSA fractional position
+        run: python tools/verify_mocss_two_pa_offcenter_source.py
+      - name: Verify Stage2 diagnostic B/D real x1d artifacts without astrophysical calibration promotion
+        run: python tools/verify_mocss_bd_diagnostic_x1d_receipt.py
+      - name: Freeze real x1d empirical local nulls and correct MOCSS shutter dispersion axis
+        run: python tools/verify_mocss_four_x1d_null_and_axis.py
+      - name: Four original archival MSA geometries corrected to dispersion rows
+        run: python tools/verify_mocss_four_group_correct_row_geometry.py
+      - name: Four real correctly oriented diagnostic x1d are NOT physical source flux
+        run: python tools/verify_mocss_four_correct_row_diagnostic_x1d.py
+      - name: Strict real four correct-row MSA x1d empirical no-sky-source null gate
+        run: python tools/verify_mocss_correct_row_empirical_nulls.py
+      - name: STPSF 3-lambda optical MSA mask experiment and throughput authority ceiling
+        run: python tools/verify_mocss_stpsf_optical_receipt.py
+      - name: Four original 4-dither MOCSS raw RATE source windows must not promote incomplete illuminated sky
+        run: python tools/verify_mocss_16_real_rate_row_sky_proxy.py
+      - name: Verify all 16 native RATE 2D injection recovery with 24 physical-authority-locked controls
+        run: python tools/verify_mocss_full16_native_detector_injection.py
+      - name: Exact original MSA shutter-plane 16-exposure topology remains distinct from detector illuminated pixels
+        run: python tools/verify_mocss_original_16_msa_topology.py
+      - name: Original MSA masks and CRDS footprint are insufficient for a physical source flux
+        run: python tools/verify_mocss_crds_illumination_gate.py
+      - name: Verify official CRDS 36 original-open-shutter detector geometries, no physical flux
+        run: python tools/verify_mocss_four_anchor_crds_gwcs_receipt.py
+      - name: All16 official JWST CRDS three-open-shutter 144 spectral center geometry scientific guard
+        run: python tools/verify_mocss_all16_crds_gwcs_receipt.py
+      - name: Spectral flux fitter unit test (synthetic data ONLY)
+        run: |
+          python -m pip install --disable-pip-version-check numpy
+          python tools/fit_mocss_calibrated_three_lines.py --selftest
+      - name: Explicit scientific ceiling
+        run: |
+          echo 'MAST_ARCHIVE_METADATA=CHECKED'
+          echo 'THIRTY_TWO_ORIGINAL_NIRSPEC_RATE_FITS=HASHED_AND_SKY_REGISTERED'
+          echo 'SIXTEEN_EXPOSURE_PRIMARY_HEADERS=INSPECTED'
+          echo 'SIXTEEN_MSA_SHUTTER_IDS=CROSS_VERIFIED'
+          echo 'OIII_COMPANION_WINDOW=15850.79_ANGSTROM_PREDICTION_ONLY'
+          echo 'FOUR_INTERLEAVED_OCTOBER_2023_NIRCAM_EPOCHS=DIAGNOSTIC_APERTURE_ONLY'
+          echo 'MOCSS_SKY_WAVELENGTH_REEXTRACTION=UNVALIDATED_RATE_WCS_PROJECTION_ONLY'
+          echo 'SCIENCE_GRADE_SPECTROPHOTOMETRY=NOT_EXECUTED'
+          echo 'THREE_WAVELENGTH_STAGE2_FITS=BLOCKED_PENDING_CALIBRATED_X1D'
+          echo 'F150W_PSF_INJECTION=NOT_EXECUTED'
+          echo 'F150W_MATCHED_SKY_APERTURE_COVARIANCE=MEASURED_95_CONTROLS'
+          echo 'F150W_PURE_INSTRUMENT_COVARIANCE=NOT_ISOLATED'
+          echo 'INTRINSIC_VARIABILITY=UNCONFIRMED'
+          echo 'OIII_15850p8_AND_PAGAMMA_FLUX_LIMITS=NOT_CALIBRATED'
+          echo 'PHYSICAL_IDENTITY=UNRESOLVED'
+          echo 'SPATIAL_EXTENT=UNRESOLVED'
+          echo 'MODEL_WEIGHTS_UNCHANGED=true'

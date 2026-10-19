@@ -1,0 +1,101 @@
+{
+  "schema": "janus-cosmos-mocss-real16-rate-four-point-window-stacks-v1",
+  "created_utc": "2026-10-19",
+  "status": "16_ORIGINAL_RATE_2_ORIGINAL_MSA_SHA_VERIFIED_FOUR_FOUR_DITHER_WCS_POINT_WINDOW_STACKS_WITH_ROW_SKY_PROXY",
+  "provenance": {
+    "run_id": 39230522837,
+    "artifact_id": 12176970014,
+    "artifact_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39230522837/artifacts/12176970014",
+    "original_json_sha256": "1125bd1cbabd7721c3a583d058ac18a4eb2bc0d5a3ebee1997d4fdda07dd1b96",
+    "wcs_stack_npz_sha256": "0b8974e9f761e111abce46d16e0db322f368fd67306b7e8920cfc92fefbe8190",
+    "source_script": "tools/replay_mocss_16_rate_four_stacks_2d_injection.py",
+    "original_reference": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "number_original_RATE": 16,
+    "number_MSA_reference": 2,
+    "original_SHA_verified": true
+  },
+  "method": "Each full detector row sigma-clipped median with source-window exclusions, 9 detector rows per input sky-profile interpolated; 4-dither WCS alignment of 3 narrow line-centered cutouts per group using approximate RATE ERR-derived weights; original MSA open-shutter row fractions tallied but physical MSA-row-to-detector-pixel illumination map NOT applied",
+  "MSA_original_row_open_fraction_median_typical": [
+    0.9,
+    0.94
+  ],
+  "groups": {
+    "A": {
+      "indices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "detector": "NRS2",
+      "line_center_relative_robust_units_NOT_SNR": {
+        "primary": 0.08425,
+        "OIII_4960": -0.05449,
+        "Pa_gamma": -0.13689
+      },
+      "all_three_center_coverage": 4
+    },
+    "B": {
+      "indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "detector": "NRS2",
+      "line_center_relative_robust_units_NOT_SNR": {
+        "primary": 0.11648,
+        "OIII_4960": -0.02234,
+        "Pa_gamma": 0.06167
+      },
+      "all_three_center_coverage": 4
+    },
+    "C": {
+      "indices": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "detector": "NRS1",
+      "line_center_relative_robust_units_NOT_SNR": {
+        "primary": 0.24294,
+        "OIII_4960": 0.00126,
+        "Pa_gamma": -0.09167
+      },
+      "all_three_center_coverage": 4
+    },
+    "D": {
+      "indices": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "detector": "NRS1",
+      "line_center_relative_robust_units_NOT_SNR": {
+        "primary": 3.21955,
+        "OIII_4960": 1.72886,
+        "Pa_gamma": 1.73333
+      },
+      "all_three_center_coverage": 4
+    }
+  },
+  "experiment_limits": {
+    "valid_original_MSA_open_closed_shutter_config_counted": true,
+    "physical_open_closed_row_to_detector_sky_calibration_completed": false,
+    "authors_full_row_illumination_corrected_sky_reproduced": false,
+    "full_calibrated_2D_spectrum_from_stacked_images": false,
+    "three_narrow_windows_only": true,
+    "original_RATE_native_2D_detector_injection_in_this_artifact": false,
+    "post_sky_resampled_2D_Gaussian_injection_only": true,
+    "independent_detector_covariance_measured": false,
+    "STPSF_3wavelength_optical_mask_separate_receipt": "domains/space/MOCSS_STPSF_OPTICAL_THREE_WAVELENGTHS_2026-10-19.json",
+    "stpsf_dispersed_detector_PSF_used": false,
+    "line_flux_absolute_cgs": null,
+    "line_identification": null,
+    "redshift": null,
+    "gas_trail": null
+  },
+  "next_run_native_original_RATE_injection": "39231058856"
+}

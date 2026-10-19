@@ -1,0 +1,74 @@
+{
+  "schema": "janus-mocss-two-orientation-wcs-positioned-source-info-v1",
+  "created_utc": "2026-10-18",
+  "status": "ORIGINAL_RATE_AND_MSA_SHA_VERIFIED_SOURCE_INFO_WITH_WCS_CANDIDATE_OFFCENTER_POSITION_NOT_ASTROPHYSICAL_CALIBRATION",
+  "provenance": {
+    "workflow_run_id": 39159808143,
+    "geometry_job": "frozen-source-metadata-geometry",
+    "artifact_id": 12147999527,
+    "raw_json_sha256": "0131e20f4448b530f88bd87f2f8c53a6340cc9497bcc17de7117e5fe79d6497c",
+    "archive_receipt": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "source_script": "tools/attempt_mocss_source_aware_stage2.py",
+    "crds": "jwst_1413.pmap",
+    "jwst_pipeline": "1.19.1"
+  },
+  "frames": [
+    {
+      "group": "B",
+      "index": 8,
+      "detector": "nrs2",
+      "msa_quadrant": 2,
+      "msa_row": 165,
+      "msa_columns": [
+        92,
+        93,
+        94
+      ],
+      "primary_column": 93,
+      "wcs_normalized_source_slit_xy": [
+        0.18548572842142041,
+        0.2574539661709842
+      ],
+      "synthetic_source_info_fraction_xy": [
+        0.6854857284214204,
+        0.7574539661709843
+      ],
+      "original_rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "test_msa_sha256": "6a5313672116ad780faedca77561883942d92f4a5cb20ef6941fed019f6c8fe3"
+    },
+    {
+      "group": "D",
+      "index": 13,
+      "detector": "nrs1",
+      "msa_quadrant": 4,
+      "msa_row": 246,
+      "msa_columns": [
+        106,
+        107,
+        108
+      ],
+      "primary_column": 107,
+      "wcs_normalized_source_slit_xy": [
+        -0.22180155615867295,
+        -0.10968967847512563
+      ],
+      "synthetic_source_info_fraction_xy": [
+        0.2781984438413271,
+        0.3903103215248744
+      ],
+      "original_rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "test_msa_sha256": "592ddacd343293a0d239b9793a56448c2cfe8f125df3d946cabbb2342b99bde2"
+    }
+  ],
+  "method": "fixed source RA/DEC projected to source slit_frame x,y using independent original JWST WCS, then converted to MSA fractional source positions as 0.5+normalized x/y; background shutters retain NaN source positions; testing intentionally virtual source metadata.",
+  "source_marked_from_original_MPT": false,
+  "scientific_calibrated_source_x1d": false,
+  "shutter_transmission_calibrated": false,
+  "wavelength_offset_fully_calibrated": false,
+  "source_redshift": null,
+  "source_class": null,
+  "gas_trail": null,
+  "future_reduction_requirement": "Compare per-exposure WCS source position and 3-shutter bar throughput, rerun all 16 observations with full-row background and physically realistic PSF injection."
+}

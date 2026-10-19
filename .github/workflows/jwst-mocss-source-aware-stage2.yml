@@ -1,0 +1,97 @@
+name: JANUS MOCSS Three-Shutter Source-Aware Stage2 Pilot
+on:
+  pull_request:
+    paths:
+      - 'tools/attempt_mocss_source_aware_stage2.py'
+      - 'tools/audit_mocss_diagnostic_x1d_three_windows.py'
+      - '.github/workflows/jwst-mocss-source-aware-stage2.yml'
+      - 'tools/prepare_mocss_wcs_probe.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-source-metadata-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install basic FITS geometry dependencies
+        run: python -m pip install --disable-pip-version-check numpy astropy
+      - name: Archive-check WCS geometry for B and D
+        run: |
+          PYTHONPATH=tools python -u tools/attempt_mocss_source_aware_stage2.py \
+            --indices 8,13 --geometry-only \
+            --root /tmp/janus_source_aware_geometry_BD \
+            --output /tmp/janus_source_aware_geometry_BD.json
+      - name: Archive-check WCS geometry for A and C
+        run: |
+          PYTHONPATH=tools python -u tools/attempt_mocss_source_aware_stage2.py \
+            --indices 1,10 --geometry-only \
+            --root /tmp/janus_source_aware_geometry_AC \
+            --output /tmp/janus_source_aware_geometry_AC.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-mocss-source-aware-four-group-geometry
+          path: |
+            /tmp/janus_source_aware_geometry_BD.json
+            /tmp/janus_source_aware_geometry_AC.json
+          retention-days: 30
+  spec2-source-aware-compatibility:
+    needs: frozen-source-metadata-geometry
+    runs-on: ubuntu-latest
+    timeout-minutes: 42
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - pair: BD
+            indices: "8,13"
+          - pair: AC
+            indices: "1,10"
+    env:
+      CRDS_PATH: /tmp/janus_crds
+      CRDS_SERVER_URL: https://jwst-crds.stsci.edu
+      CRDS_CONTEXT: jwst_1413.pmap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned JWST original calibration
+        run: |
+          python -m pip install --disable-pip-version-check 'jwst==1.19.1'
+          python -c 'import jwst; assert jwst.__version__=="1.19.1"'
+      - name: Run real RATE diagnostic copied-MSA Spec2 for ${{ matrix.pair }}
+        run: |
+          PYTHONPATH=tools python -u tools/attempt_mocss_source_aware_stage2.py \
+            --indices ${{ matrix.indices }} \
+            --root /tmp/janus_source_aware_stage2_${{ matrix.pair }} \
+            --output /tmp/janus_source_aware_stage2_${{ matrix.pair }}.json
+      - name: Audit three frozen spectral windows from saved diagnostic x1d FITS
+        run: |
+          PYTHONPATH=tools python -u tools/audit_mocss_diagnostic_x1d_three_windows.py \
+            --source-receipt /tmp/janus_source_aware_stage2_${{ matrix.pair }}.json \
+            --output /tmp/janus_source_aware_three_windows_${{ matrix.pair }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-mocss-source-aware-three-windows-${{ matrix.pair }}
+          path: |
+            /tmp/janus_source_aware_stage2_${{ matrix.pair }}.json
+            /tmp/janus_source_aware_three_windows_${{ matrix.pair }}.json
+            /tmp/janus_source_aware_stage2_${{ matrix.pair }}/source_test_*/*_x1d.fits
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Scientific ceiling
+        if: always()
+        run: |
+          echo 'SOURCE_INFO=ARTIFICIAL_NOT_ORIGINAL_MPT'
+          echo 'FITS_X1D=DIAGNOSTIC_NOT_CALIBRATED_SOURCE_FLUX'
+          echo 'FOUR_DITHER_MOCSS_SKY_SUBTRACTION=NOT_REPRODUCED'
+          echo 'MOSAIC_PSF_THREE_SHUTTER_THROUGHPUT=NOT_REPRODUCED'
+          echo 'OIII_AND_PAGAMMA=UNCONFIRMED'
+          echo 'PHYSICAL_CLASS_REDSHIFT_TRAIL=OPEN'

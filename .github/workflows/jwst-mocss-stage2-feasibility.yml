@@ -1,0 +1,57 @@
+name: JANUS MOCSS Real-Archive Stage2 Feasibility Probe
+on:
+  pull_request:
+    paths:
+      - 'tools/attempt_mocss_stage2_open_shutter_pilot.py'
+      - '.github/workflows/jwst-mocss-stage2-feasibility.yml'
+      - 'tools/prepare_mocss_wcs_probe.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-stage2-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 42
+    env:
+      CRDS_PATH: /tmp/janus_crds
+      CRDS_SERVER_URL: https://jwst-crds.stsci.edu
+      CRDS_CONTEXT: jwst_1413.pmap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned original JWST pipeline, not latest
+        run: |
+          python -m pip install --disable-pip-version-check 'jwst==1.19.1'
+          python - <<'PY'
+          import jwst, os
+          assert jwst.__version__ == '1.19.1'
+          assert os.environ['CRDS_CONTEXT'] == 'jwst_1413.pmap'
+          print("PINNED_PIPELINE",jwst.__version__,os.environ['CRDS_CONTEXT'])
+          PY
+      - name: Test real MAST RATE + MSA from both angles; collect rejected geometry or diagnostic products
+        run: |
+          PYTHONPATH=tools python -u tools/attempt_mocss_stage2_open_shutter_pilot.py \
+            --exposures 8,13 \
+            --data-dir /tmp/janus_mocss_stage2_pilot \
+            --output /tmp/janus_mocss_stage2_pilot_receipt.json
+      - name: Preserve source hashes and pipeline feasibility receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-real-stage2-feasibility-non-authoritative
+          path: /tmp/janus_mocss_stage2_pilot_receipt.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Strict evidence boundary
+        if: always()
+        run: |
+          echo 'THIS_IS_VIRTUAL_BACKGROUND_SHUTTER_PIPELINE_COMPATIBILITY_ONLY'
+          echo 'CUSTOM_MOCSS_ROW_BACKGROUND_AND_FOUR_DITHER_STACK=NOT_PERFORMED'
+          echo 'STPSF_OPEN_THREE_SHUTTER_THROUGHPUT_INJECTION=NOT_PERFORMED'
+          echo 'NIRSPEC_CALIBRATED_ASTROPHYSICAL_LINE_FLUX=NOT_ESTABLISHED'
+          echo 'OIII_15850p793_AND_PA_GAMMA_13656p748=OPEN'
+          echo 'SOURCE_IDENTITY_REDSHIFT_TRAIL=OPEN'

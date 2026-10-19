@@ -1,0 +1,892 @@
+{
+  "schema": "janus-mocss-four-rate-stack-same-wavelength-neighbor-azimuth-v1",
+  "case_id": "JWST-MOCSS-HUDF-16004A",
+  "inputs": {
+    "original_Rate_stack_npz_sha256": "0b8974e9f761e111abce46d16e0db322f368fd67306b7e8920cfc92fefbe8190",
+    "sky_geometry_json_sha256": "ef8e501c7dbcc56daaebf5423a75ca48d8eebf73c9416742680a5b7dc530d6af",
+    "expected_stack_npz_sha256": "0b8974e9f761e111abce46d16e0db322f368fd67306b7e8920cfc92fefbe8190",
+    "16_original_RATE_and_2_MSA_verified_upstream": true,
+    "upstream_run": 39230522837,
+    "upstream_artifact": 12176970014,
+    "archive_validation": "No new raw FITS re-reduction; checks upstream artifact hash"
+  },
+  "line_lambda_A": 16004,
+  "positions": {
+    "NW_low_z_photo": {
+      "east_arcsec": -0.33440520244515426,
+      "north_arcsec": 0.5399999999923466
+    },
+    "S_low_z_photo": {
+      "east_arcsec": 0.09872915500934111,
+      "north_arcsec": -1.0332000000005337
+    },
+    "E_high_z_photo": {
+      "east_arcsec": 1.0000307958915782,
+      "north_arcsec": -0.09000000000298769
+    }
+  },
+  "group_results": {
+    "A": {
+      "image_finite_fraction": 1.0,
+      "position_tests": {
+        "NW_low_z_photo": {
+          "radius_arcsec": 0.6351589087890674,
+          "position_angle_degrees_east_of_north": 328.2313551887452,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            6.147508636011132,
+            1.2800585735430046
+          ],
+          "relative_value_dn_per_s_not_calibrated": 0.6435845399188135,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 0.6496511794384322,
+          "ring_robust_mad_dn_per_s": 0.0330356472792989,
+          "offset_from_ring_median_in_mad_not_snr": -0.18363919036695417,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5555555555555556
+        },
+        "S_low_z_photo": {
+          "radius_arcsec": 1.0379063956108765,
+          "position_angle_degrees_east_of_north": 174.5415794000463,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -8.159476931190506,
+            -6.210410300659461
+          ],
+          "relative_value_dn_per_s_not_calibrated": 0.7110675899494828,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 0.6654076094388881,
+          "ring_robust_mad_dn_per_s": 0.03677976581592471,
+          "offset_from_ring_median_in_mad_not_snr": 1.241442937377951,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.1111111111111111
+        },
+        "E_high_z_photo": {
+          "radius_arcsec": 1.0040725037227547,
+          "position_angle_degrees_east_of_north": 95.14260703611752,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -7.311913971355645,
+            6.35054836109443
+          ],
+          "relative_value_dn_per_s_not_calibrated": 0.6588388862813472,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 0.6669983659202514,
+          "ring_robust_mad_dn_per_s": 0.03542663126071306,
+          "offset_from_ring_median_in_mad_not_snr": -0.23032050602995843,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5972222222222222
+        }
+      },
+      "directed_radii_tests": {
+        "NW_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              3.3875428539701695,
+              0.7053675773739903
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6607519916877583,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6665125926549818,
+            "ring_robust_mad_dn_per_s": 0.016703445639640074,
+            "offset_from_ring_median_in_mad_not_snr": -0.34487500911503827,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.6388888888888888
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              5.807216321091719,
+              1.2092015612125548
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6453770961503679,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6473384270912632,
+            "ring_robust_mad_dn_per_s": 0.028070700443491938,
+            "offset_from_ring_median_in_mad_not_snr": -0.06987110794914526,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5138888888888888
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              8.22688978821327,
+              1.7130355450511185
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.641931901421513,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6683666537862911,
+            "ring_robust_mad_dn_per_s": 0.040021644495696555,
+            "offset_from_ring_median_in_mad_not_snr": -0.6605113982165469,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7638888888888888
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              10.646563255334819,
+              2.216869528889683
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6469944319580028,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6594192302084505,
+            "ring_robust_mad_dn_per_s": 0.03555394394514812,
+            "offset_from_ring_median_in_mad_not_snr": -0.34946329075661625,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.6388888888888888
+          }
+        ],
+        "S_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -2.751516840047835,
+              -2.094257839071777
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6718851227011489,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6665125926549818,
+            "ring_robust_mad_dn_per_s": 0.016703445639640074,
+            "offset_from_ring_median_in_mad_not_snr": 0.32164202297382277,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.375
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -4.716886011510574,
+              -3.590156295551618
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6647051017615606,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6473384270912632,
+            "ring_robust_mad_dn_per_s": 0.028070700443491938,
+            "offset_from_ring_median_in_mad_not_snr": 0.6186762138428855,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.2638888888888889
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -6.6822551829733134,
+              -5.08605475203146
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.681447696491807,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6683666537862911,
+            "ring_robust_mad_dn_per_s": 0.040021644495696555,
+            "offset_from_ring_median_in_mad_not_snr": 0.3268492054823606,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3611111111111111
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -8.647624354436052,
+              -6.581953208511301
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.7200199544014393,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6594192302084505,
+            "ring_robust_mad_dn_per_s": 0.03555394394514812,
+            "offset_from_ring_median_in_mad_not_snr": 1.7044726257790788,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.08333333333333333
+          }
+        ],
+        "E_high_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -2.548789933481851,
+              2.213676719701092
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6962229625921836,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6665125926549818,
+            "ring_robust_mad_dn_per_s": 0.016703445639640074,
+            "offset_from_ring_median_in_mad_not_snr": 1.778697077128458,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.05555555555555555
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -4.369354171683174,
+              3.7948743766304442
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6438290868584485,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6473384270912632,
+            "ring_robust_mad_dn_per_s": 0.028070700443491938,
+            "offset_from_ring_median_in_mad_not_snr": -0.12501790754666786,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5694444444444444
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -6.189918409884495,
+              5.376072033559795
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6347248361394224,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6683666537862911,
+            "ring_robust_mad_dn_per_s": 0.040021644495696555,
+            "offset_from_ring_median_in_mad_not_snr": -0.8405905871880432,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.9027777777777778
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -8.01048264808582,
+              6.957269690489149
+            ],
+            "relative_value_dn_per_s_not_calibrated": 0.6795514134581881,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 0.6594192302084505,
+            "ring_robust_mad_dn_per_s": 0.03555394394514812,
+            "offset_from_ring_median_in_mad_not_snr": 0.5662433197508877,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3472222222222222
+          }
+        ]
+      }
+    },
+    "B": {
+      "image_finite_fraction": 1.0,
+      "position_tests": {
+        "NW_low_z_photo": {
+          "radius_arcsec": 0.6351589087890674,
+          "position_angle_degrees_east_of_north": 328.2313551887452,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            6.149081426846728,
+            1.2867720534411835
+          ],
+          "relative_value_dn_per_s_not_calibrated": 1.5779247966034962,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 1.482747949948147,
+          "ring_robust_mad_dn_per_s": 0.05104467673366401,
+          "offset_from_ring_median_in_mad_not_snr": 1.8645792812432462,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.06944444444444445
+        },
+        "S_low_z_photo": {
+          "radius_arcsec": 1.0379063956108765,
+          "position_angle_degrees_east_of_north": 174.5415794000463,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -8.170586895080964,
+            -6.222248649672984
+          ],
+          "relative_value_dn_per_s_not_calibrated": 1.4966102095565612,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 1.4967680879026752,
+          "ring_robust_mad_dn_per_s": 0.06606990110272358,
+          "offset_from_ring_median_in_mad_not_snr": -0.002389565346383095,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5138888888888888
+        },
+        "E_high_z_photo": {
+          "radius_arcsec": 1.0040725037227547,
+          "position_angle_degrees_east_of_north": 95.14260703611752,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -7.2980392296488334,
+            6.347672478725352
+          ],
+          "relative_value_dn_per_s_not_calibrated": 1.5285732626569073,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": 1.4954396165344224,
+          "ring_robust_mad_dn_per_s": 0.0678814190713421,
+          "offset_from_ring_median_in_mad_not_snr": 0.48811068736883784,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.20833333333333334
+        }
+      },
+      "directed_radii_tests": {
+        "NW_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              3.3884095296710712,
+              0.7090669948455051
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5639438741176437,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.5136262154507067,
+            "ring_robust_mad_dn_per_s": 0.03957599224256761,
+            "offset_from_ring_median_in_mad_not_snr": 1.2714187520184441,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.1388888888888889
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              5.808702050864694,
+              1.2155434197351522
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5741312615892713,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4771447937629627,
+            "ring_robust_mad_dn_per_s": 0.04381252710333517,
+            "offset_from_ring_median_in_mad_not_snr": 2.2136697935172434,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.06944444444444445
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              8.228994572058316,
+              1.722019844624798
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5669541508592701,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4887271834982116,
+            "ring_robust_mad_dn_per_s": 0.04701134032848677,
+            "offset_from_ring_median_in_mad_not_snr": 1.6640020644903089,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.05555555555555555
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              10.649287093251939,
+              2.2284962695144444
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.4899893362003784,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4761854047971144,
+            "ring_robust_mad_dn_per_s": 0.05777491193529975,
+            "offset_from_ring_median_in_mad_not_snr": 0.2389260483637371,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4444444444444444
+          }
+        ],
+        "S_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -2.755263312155632,
+              -2.0982499352494814
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5229375461769132,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.5136262154507067,
+            "ring_robust_mad_dn_per_s": 0.03957599224256761,
+            "offset_from_ring_median_in_mad_not_snr": 0.23527725266206467,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3888888888888889
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -4.72330853512394,
+              -3.596999888999111
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.487818277807957,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4771447937629627,
+            "ring_robust_mad_dn_per_s": 0.04381252710333517,
+            "offset_from_ring_median_in_mad_not_snr": 0.24361717414336814,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3194444444444444
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -6.69135375809225,
+              -5.0957498427487415
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.4769337702777408,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4887271834982116,
+            "ring_robust_mad_dn_per_s": 0.04701134032848677,
+            "offset_from_ring_median_in_mad_not_snr": -0.250863156380262,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5555555555555556
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -8.659398981060558,
+              -6.59449979649837
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5103297929852406,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4761854047971144,
+            "ring_robust_mad_dn_per_s": 0.05777491193529975,
+            "offset_from_ring_median_in_mad_not_snr": 0.5909898785542669,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3055555555555556
+          }
+        ],
+        "E_high_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -2.5439534703983795,
+              2.212674243460138
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5381916300560743,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.5136262154507067,
+            "ring_robust_mad_dn_per_s": 0.03957599224256761,
+            "offset_from_ring_median_in_mad_not_snr": 0.6207150652042323,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.2638888888888889
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -4.3610630921115074,
+              3.7931558459316657
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.481558190985519,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4771447937629627,
+            "ring_robust_mad_dn_per_s": 0.04381252710333517,
+            "offset_from_ring_median_in_mad_not_snr": 0.10073368313466764,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4166666666666667
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -6.178172713824635,
+              5.373637448403192
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5017799090197808,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4887271834982116,
+            "ring_robust_mad_dn_per_s": 0.04701134032848677,
+            "offset_from_ring_median_in_mad_not_snr": 0.2776505717634207,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4027777777777778
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -7.995282335537766,
+              6.954119050874721
+            ],
+            "relative_value_dn_per_s_not_calibrated": 1.5319485244834188,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": 1.4761854047971144,
+            "ring_robust_mad_dn_per_s": 0.05777491193529975,
+            "offset_from_ring_median_in_mad_not_snr": 0.9651787915964586,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.19444444444444445
+          }
+        ]
+      }
+    },
+    "C": {
+      "image_finite_fraction": 1.0,
+      "position_tests": {
+        "NW_low_z_photo": {
+          "radius_arcsec": 0.6351589087890674,
+          "position_angle_degrees_east_of_north": 328.2313551887452,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            0.9686669865483122,
+            -6.011810858738391
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.09334102909058888,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.08761010550906578,
+          "ring_robust_mad_dn_per_s": 0.029973533154220133,
+          "offset_from_ring_median_in_mad_not_snr": -0.19119946761151863,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5694444444444444
+        },
+        "S_low_z_photo": {
+          "radius_arcsec": 1.0379063956108765,
+          "position_angle_degrees_east_of_north": 174.5415794000463,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -5.855697900713946,
+            7.921614749796687
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.4314287738169863,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.10571976218642813,
+          "ring_robust_mad_dn_per_s": 0.13937579838557318,
+          "offset_from_ring_median_in_mad_not_snr": -2.3369122573885277,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7916666666666666
+        },
+        "E_high_z_photo": {
+          "radius_arcsec": 1.0040725037227547,
+          "position_angle_degrees_east_of_north": 95.14260703611752,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            6.823172436811532,
+            7.2513008264634715
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.36844330214585785,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.10462269693229503,
+          "ring_robust_mad_dn_per_s": 0.12544988484348746,
+          "offset_from_ring_median_in_mad_not_snr": -2.102995993521302,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7777777777777778
+        }
+      },
+      "directed_radii_tests": {
+        "NW_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              0.5337773596504816,
+              -3.3127675160377974
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.10167472206748827,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08776593755080161,
+            "ring_robust_mad_dn_per_s": 0.023786007588958998,
+            "offset_from_ring_median_in_mad_not_snr": -0.5847464928558607,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.6666666666666666
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              0.9150469022579686,
+              -5.679030027493367
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.08192575728996225,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08581020023968479,
+            "ring_robust_mad_dn_per_s": 0.025235093776355556,
+            "offset_from_ring_median_in_mad_not_snr": 0.15393019673904015,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4583333333333333
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              1.2963164448654543,
+              -8.045292538948937
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.10231673313746407,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.11126086967639083,
+            "ring_robust_mad_dn_per_s": 0.11440429564507251,
+            "offset_from_ring_median_in_mad_not_snr": 0.07818007609325277,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4722222222222222
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              1.6775859874729413,
+              -10.411555050404505
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.01811878101915735,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.10912721123934443,
+            "ring_robust_mad_dn_per_s": 0.1320258973334639,
+            "offset_from_ring_median_in_mad_not_snr": 0.6893225651807001,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.125
+          }
+        ],
+        "S_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -1.9746426786816533,
+              2.6713055957199323
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.10181994061424093,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08776593755080161,
+            "ring_robust_mad_dn_per_s": 0.023786007588958998,
+            "offset_from_ring_median_in_mad_not_snr": -0.5908517018199773,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.6666666666666666
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -3.3851017348828343,
+              4.57938102123417
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.08876389461566976,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08581020023968479,
+            "ring_robust_mad_dn_per_s": 0.025235093776355556,
+            "offset_from_ring_median_in_mad_not_snr": -0.11704709331226998,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5555555555555556
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -4.795560791084016,
+              6.487456446748408
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.26369475772082107,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.11126086967639083,
+            "ring_robust_mad_dn_per_s": 0.11440429564507251,
+            "offset_from_ring_median_in_mad_not_snr": -1.33241402505847,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.8055555555555556
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -6.206019847285196,
+              8.395531872262644
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4629311520428571,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.10912721123934443,
+            "ring_robust_mad_dn_per_s": 0.1320258973334639,
+            "offset_from_ring_median_in_mad_not_snr": -2.6798071283688665,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7916666666666666
+          }
+        ],
+        "E_high_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              2.378424211428703,
+              2.527661378886835
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.08128696253684406,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08776593755080161,
+            "ring_robust_mad_dn_per_s": 0.023786007588958998,
+            "offset_from_ring_median_in_mad_not_snr": 0.27238598111626644,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4166666666666667
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              4.077298648163492,
+              4.333133792377431
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.09407151336781043,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.08581020023968479,
+            "ring_robust_mad_dn_per_s": 0.025235093776355556,
+            "offset_from_ring_median_in_mad_not_snr": -0.3273739816994941,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7083333333333334
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              5.776173084898279,
+              6.138606205868027
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.21441487241081406,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.11126086967639083,
+            "ring_robust_mad_dn_per_s": 0.11440429564507251,
+            "offset_from_ring_median_in_mad_not_snr": -0.9016619712816365,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7777777777777778
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              7.475047521633067,
+              7.944078619358626
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4469587587989238,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.10912721123934443,
+            "ring_robust_mad_dn_per_s": 0.1320258973334639,
+            "offset_from_ring_median_in_mad_not_snr": -2.5588278843983363,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.7777777777777778
+          }
+        ]
+      }
+    },
+    "D": {
+      "image_finite_fraction": 1.0,
+      "position_tests": {
+        "NW_low_z_photo": {
+          "radius_arcsec": 0.6351589087890674,
+          "position_angle_degrees_east_of_north": 328.2313551887452,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            0.953023171908022,
+            -6.007580607020348
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.518880067760192,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.4672055306948112,
+          "ring_robust_mad_dn_per_s": 0.027861526274517365,
+          "offset_from_ring_median_in_mad_not_snr": -1.854691539732454,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.9166666666666666
+        },
+        "S_low_z_photo": {
+          "radius_arcsec": 1.0379063956108765,
+          "position_angle_degrees_east_of_north": 174.5415794000463,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            -5.820708532529888,
+            7.911652483808247
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.4288338131742607,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.42799395516738153,
+          "ring_robust_mad_dn_per_s": 0.0462090192233866,
+          "offset_from_ring_median_in_mad_not_snr": -0.018175196552411017,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.5
+        },
+        "E_high_z_photo": {
+          "radius_arcsec": 1.0040725037227547,
+          "position_angle_degrees_east_of_north": 95.14260703611752,
+          "predicted_detector_offset_x_y_px_at_16004A": [
+            6.8169536093226615,
+            7.253856384657854
+          ],
+          "relative_value_dn_per_s_not_calibrated": -0.385545947996102,
+          "ring_control_n_correlated": 72,
+          "ring_median_dn_per_s": -0.4294332247110524,
+          "ring_robust_mad_dn_per_s": 0.04922531259142919,
+          "offset_from_ring_median_in_mad_not_snr": 0.8915591268909847,
+          "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.1527777777777778
+        }
+      },
+      "directed_radii_tests": {
+        "NW_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              0.5251569419119657,
+              -3.310436464578348
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4719585369707052,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4314614573230486,
+            "ring_robust_mad_dn_per_s": 0.023900099317499406,
+            "offset_from_ring_median_in_mad_not_snr": -1.6944314376972107,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.9305555555555556
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              0.9002690432776559,
+              -5.675033939277167
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.5344816246242539,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.46238756963596533,
+            "ring_robust_mad_dn_per_s": 0.025155822200716767,
+            "offset_from_ring_median_in_mad_not_snr": -2.8658993696590183,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.9305555555555556
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              1.2753811446433443,
+              -8.039631413975988
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.346941368812675,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4417588648719257,
+            "ring_robust_mad_dn_per_s": 0.03708153286240449,
+            "offset_from_ring_median_in_mad_not_snr": 2.5570004457766755,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.041666666666666664
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              1.6504932460090345,
+              -10.404228888674806
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.3220853092334222,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.435647075572108,
+            "ring_robust_mad_dn_per_s": 0.04447597126515986,
+            "offset_from_ring_median_in_mad_not_snr": 2.553328530177465,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.027777777777777776
+          }
+        ],
+        "S_low_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              -1.9628436581570592,
+              2.6679461472082946
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.3947246471933176,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4314614573230486,
+            "ring_robust_mad_dn_per_s": 0.023900099317499406,
+            "offset_from_ring_median_in_mad_not_snr": 1.5370986388676906,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.05555555555555555
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              -3.364874842554959,
+              4.573621966642791
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.46136734330654317,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.46238756963596533,
+            "ring_robust_mad_dn_per_s": 0.025155822200716767,
+            "offset_from_ring_median_in_mad_not_snr": 0.0405562704840989,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.4583333333333333
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              -4.766906026952858,
+              6.479297786077288
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4602179560059148,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4417588648719257,
+            "ring_robust_mad_dn_per_s": 0.03708153286240449,
+            "offset_from_ring_median_in_mad_not_snr": -0.497797413135098,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.6805555555555556
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              -6.168937211350758,
+              8.384973605511783
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4187192453033123,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.435647075572108,
+            "ring_robust_mad_dn_per_s": 0.04447597126515986,
+            "offset_from_ring_median_in_mad_not_snr": 0.3806061967230407,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3472222222222222
+          }
+        ],
+        "E_high_z_photo": [
+          {
+            "radius_arcsec": 0.35,
+            "detector_offset_x_y_px": [
+              2.376256450023989,
+              2.5285521963972415
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.42291854130235706,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4314614573230486,
+            "ring_robust_mad_dn_per_s": 0.023900099317499406,
+            "offset_from_ring_median_in_mad_not_snr": 0.3574426995973394,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.2916666666666667
+          },
+          {
+            "radius_arcsec": 0.6,
+            "detector_offset_x_y_px": [
+              4.073582485755409,
+              4.334660908109557
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.45154120294109795,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.46238756963596533,
+            "ring_robust_mad_dn_per_s": 0.025155822200716767,
+            "offset_from_ring_median_in_mad_not_snr": 0.4311672506000752,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.3055555555555556
+          },
+          {
+            "radius_arcsec": 0.85,
+            "detector_offset_x_y_px": [
+              5.77090852148683,
+              6.140769619821872
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.4170081488776137,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.4417588648719257,
+            "ring_robust_mad_dn_per_s": 0.03708153286240449,
+            "offset_from_ring_median_in_mad_not_snr": 0.6674674449449682,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.2361111111111111
+          },
+          {
+            "radius_arcsec": 1.1,
+            "detector_offset_x_y_px": [
+              7.468234557218253,
+              7.946878331534188
+            ],
+            "relative_value_dn_per_s_not_calibrated": -0.38198186999009753,
+            "ring_control_n_correlated": 72,
+            "ring_median_dn_per_s": -0.435647075572108,
+            "ring_robust_mad_dn_per_s": 0.04447597126515986,
+            "offset_from_ring_median_in_mad_not_snr": 1.20661121174995,
+            "empirical_fraction_ring_directions_at_least_as_bright_not_pvalue": 0.18055555555555555
+          }
+        ]
+      }
+    }
+  },
+  "coordinate_meaning": "Offsets east/north are tangent-plane angular separations from line-emitter; 2x2 WCS Jacobians map same observed lambda to a nearby detector location.",
+  "statistics_meaning": "Annular 5-degree angles are correlated and central source PSF may contaminate small radii; ring fractions are NOT independent probabilities or calibrated SNR.",
+  "a_priori_directional_track_radii_arcsec": [
+    0.35,
+    0.6,
+    0.85,
+    1.1
+  ],
+  "radius_coverage_warning": "Tests extend only to 1.1 arcsec along three preselected bearings; cutout edge, approximate WCS, incomplete optics and raw-sky defects prohibit any physical length upper limit.",
+  "science_limits": {
+    "original_row_shutter_illumination_sky_model_reproduced": false,
+    "independent_line_flux_detection_or_upper_limit": false,
+    "NIRSpec_dispersed_source_PSF_and_neighbor_deblending": false,
+    "trials_corrected_spatial_detection": false,
+    "line_spatial_extent_established": false,
+    "direction_or_physical_trail_established": false,
+    "emitting_source_identity_and_distance": null
+  }
+}

@@ -1,0 +1,40 @@
+name: JANUS MOCSS STPSF Three Wavelength Optical Shutter Test
+on:
+  pull_request:
+    paths:
+      - 'tools/stpsf_mocss_three_lambda_masks.py'
+      - '.github/workflows/jwst-mocss-stpsf-3lam.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-stpsf-optical-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen STPSF code and official reference data
+        run: python -m pip install --disable-pip-version-check 'stpsf==2.1.0'
+      - name: Run official NIRSpec MSA three-row optical model at all three frozen wavelengths
+        run: |
+          PYTHONPATH=tools python -u tools/stpsf_mocss_three_lambda_masks.py \
+            --output /tmp/janus_stpsf_mocss_3lambda.json --oversample 4 --fov 1.8
+      - name: Archive wavelength-dependent optical ratio, input assumptions, and hashes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-three-lambda-STPSF-optical-PSF-receipt
+          path: /tmp/janus_stpsf_mocss_3lambda.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Explicit model authority ceiling
+        if: always()
+        run: |
+          echo 'OPTICAL_MONOCHROMATIC_PSF_ONLY'
+          echo 'NOT_DISPERSED_SPECTRAL_PSF'
+          echo 'STPSF_FOV_MASK_RATIO_NOT_ABSOLUTE_FLUX_CALIBRATION'
+          echo 'NO_PHYSICAL_DETECTOR_INJECTION_COMPLETED'
+          echo 'NO_SOURCE_REDSHIFT_OR_TRAIL_CLAIM'

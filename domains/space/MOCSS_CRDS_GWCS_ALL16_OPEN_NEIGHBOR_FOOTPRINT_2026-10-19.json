@@ -1,0 +1,155 @@
+{
+  "schema": "janus-mocss-all16-three-original-open-neighbor-crds-gwcs-3lambda-v1",
+  "created_utc": "2026-10-19",
+  "status": "ALL16_ORIGINAL_SHA_VERIFIED_48_OPEN_NEIGHBOR_SLITS_144_CRDS_WCS_CENTERS_ON_DETECTOR",
+  "upstream": {
+    "run_id": 39243558142,
+    "script": "tools/probe_mocss_crds_gwcs_shutter_footprints.py",
+    "jwst": "1.19.1",
+    "crds": "jwst_1413.pmap",
+    "rate_receipt": "domains/space/MOCSS_16_SKY_REGISTERED_RATE_RECEIPT_2026-10-16.json",
+    "msa_receipt": "domains/space/MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json"
+  },
+  "wavelength_angstrom": {
+    "Pa_gamma": 13656.7483309,
+    "OIII_4960": 15850.7932988,
+    "primary": 16004
+  },
+  "groups": {
+    "A": {
+      "detector": "NRS2",
+      "exps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "xy": [
+        [
+          967.84,
+          387.92
+        ],
+        [
+          961.81,
+          377.83
+        ],
+        [
+          959.76,
+          372.76
+        ],
+        [
+          953.75,
+          367.71
+        ]
+      ],
+      "artifact": 12181894758,
+      "sha": "840abebaee9623a93a0f9eda0b9fd67d37fb4fc5da84876c47beaf9e4c0c7db3"
+    },
+    "B": {
+      "detector": "NRS2",
+      "exps": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "xy": [
+        [
+          767.77,
+          387.68
+        ],
+        [
+          762.35,
+          382.62
+        ],
+        [
+          756.89,
+          372.54
+        ],
+        [
+          754.41,
+          367.48
+        ]
+      ],
+      "artifact": 12182064159,
+      "sha": "ce0baf0afcf2031a0affe4f53934e2284cf59cb68a128517101165342151848c"
+    },
+    "C": {
+      "detector": "NRS1",
+      "exps": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "xy": [
+        [
+          1753.34,
+          295.07
+        ],
+        [
+          1750.14,
+          290.02
+        ],
+        [
+          1745.15,
+          279.9
+        ],
+        [
+          1741.81,
+          274.83
+        ]
+      ],
+      "artifact": 12182466888,
+      "sha": "546d89b0a8dd983ee2761bb0d7b12d2fe0d04045d8947fc9cb3dd651ae2423ff"
+    },
+    "D": {
+      "detector": "NRS1",
+      "exps": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "xy": [
+        [
+          1556.3,
+          294.73
+        ],
+        [
+          1554.4,
+          289.67
+        ],
+        [
+          1547.18,
+          279.57
+        ],
+        [
+          1541.93,
+          274.51
+        ]
+      ],
+      "artifact": 12182476952,
+      "sha": "a811c08c93a2848386d485e5044c254f641289580545434a4031132afcbec3d6"
+    }
+  },
+  "n_rate": 16,
+  "n_original_MSA": 2,
+  "n_open_shutter_slits": 48,
+  "n_three_line_center_samples": 144,
+  "science_gates": {
+    "CRDS_GWCS_nearest_open_shutter_geometry": "PASS_144",
+    "all_original_open_shutter_detector_illumination_map": "NOT_CONSTRUCTED",
+    "dispersed_STPSF_PSF_throughput": "NOT_CONSTRUCTED",
+    "custom_projected_sky_and_leakage": "NOT_CONSTRUCTED",
+    "calibrated_four_stack_stage2": "NOT_EXECUTED",
+    "physical_flux_injected_detector_source": "NOT_EXECUTED",
+    "source_flux_cgs": null,
+    "oiii_detected": null,
+    "pagamma_detected": null,
+    "source_class": null,
+    "redshift": null,
+    "gas_trail": null
+  },
+  "caveat": "The 144 values are official WCS slit-detector positions from test background MSA using original open shutter coordinates. They establish geometry, not physically measured illumination, slit throughput, source identity or line significance."
+}
