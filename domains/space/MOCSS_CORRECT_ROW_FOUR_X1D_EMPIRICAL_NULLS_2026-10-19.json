@@ -1,0 +1,77 @@
+{
+  "schema": "janus-mocss-correct-three-row-empirical-offline-null-v1",
+  "date_utc": "2026-10-19",
+  "status": "REAL_JWST_FOUR_GROUP_CORRECT_ROW_DIAGNOSTIC_NULLS_SHOW_NON_GAUSSIAN_SYSTEMATICS",
+  "run": {
+    "id": 39225995639,
+    "url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39225995639",
+    "artifact_id": 12173473370,
+    "raw_artifact_json_sha256": "885a9f4ddaea383d955bb76be12e127442a844a18e6e3b3f2c8cb0c09a0fc548",
+    "source_code": "tools/stress_mocss_correct_dispersion_three_row_x1d.py",
+    "source_four_corrected_x1d_run": 39223778736
+  },
+  "groups": [
+    {
+      "group": "A",
+      "primary_formal_ratio": 2.02,
+      "primary_reduced_chi2": 39.69,
+      "primary_offline_controls": 19,
+      "primary_fraction_formal_abs3": 0.32
+    },
+    {
+      "group": "B",
+      "primary_formal_ratio": 2,
+      "primary_reduced_chi2": 2.09,
+      "primary_offline_controls": 19,
+      "primary_fraction_formal_abs3": 0.05
+    },
+    {
+      "group": "C",
+      "primary_formal_ratio": 40.1,
+      "primary_reduced_chi2": 1354.03,
+      "primary_offline_controls": 19,
+      "primary_fraction_formal_abs3": 0.79
+    },
+    {
+      "group": "D",
+      "primary_formal_ratio": 3.3,
+      "primary_reduced_chi2": 52.8,
+      "primary_offline_controls": 19,
+      "primary_fraction_formal_abs3": 0.53
+    }
+  ],
+  "companions": {
+    "A_OIII_formal_ratio": 6.37,
+    "A_OIII_reduced_chi2": 64.4,
+    "B_Pagamma_formal_ratio": 4.46,
+    "B_Pagamma_reduced_chi2": 96.35,
+    "D_OIII_formal_ratio": 4.09,
+    "D_OIII_reduced_chi2": 64.79
+  },
+  "matched_filter_fwhm_A": 13.2,
+  "mismatch_injection_fwhm_A": [
+    7,
+    13.2,
+    22
+  ],
+  "observed_recovery_fraction_example_C_primary_at_center": [
+    1.22,
+    1,
+    0.7
+  ],
+  "bad_model_indicator": "CHI2_DOF_1354_AND_MANY_OFFLINE_FORMAL_SPIKES__NO_FORMAL_SNR_IS_CALIBRATED",
+  "nonindependent_null_centers": true,
+  "only_one_of_four_dithers_per_group": true,
+  "source_info_artificial": true,
+  "PSF_bar_loss_calibrated": false,
+  "full_row_sky_background_validated": false,
+  "full_four_dither_stacks": false,
+  "two_dimensional_optical_line_injection": false,
+  "calibrated_flux_or_upper_limit": null,
+  "detected_companion_OIII": null,
+  "detected_companion_Pagamma": null,
+  "source_class": null,
+  "redshift": null,
+  "directed_gas_trail": null,
+  "science_rule": "The 3-adjacent-dispersion-row geometry fixes the previous MSA axis error but does not validate astrophysical flux. Off-line spikes and huge chi-square prohibit line significance or source classification."
+}
