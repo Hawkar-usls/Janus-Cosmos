@@ -40,6 +40,7 @@ def hash_file(path):
     return h.hexdigest()
 
 def fetch(originaldir,name,expected):
+    originaldir.mkdir(parents=True,exist_ok=True)
     p=originaldir/name
     if not p.exists():
         read_and_store(BASE+quote(ROOT_URI+name,safe=""),p)
