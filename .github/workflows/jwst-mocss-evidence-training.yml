@@ -37,6 +37,8 @@ on:
       - 'tools/verify_mocss_four_x1d_null_and_axis.py'
       - 'domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json'
       - 'tools/verify_mocss_four_group_correct_row_geometry.py'
+      - 'domains/space/MOCSS_FOUR_CORRECT_ROWS_DIAGNOSTIC_X1D_2026-10-19.json'
+      - 'tools/verify_mocss_four_correct_row_diagnostic_x1d.py'
       - 'tools/verify_mocss_stage2_false_green_audit.py'
       - 'tools/verify_mocss_three_line_real_rate_injection.py'
       - 'tools/verify_nircam_f150w_covariance_sensitivity.py'
@@ -78,6 +80,7 @@ jobs:
           python -m json.tool domains/space/MOCSS_DISPERSION_THREE_ROW_CORRECTION_2026-10-19.json > /dev/null
           python -m json.tool domains/space/MOCSS_FOUR_X1D_OFFLINE_NULL_STRESS_2026-10-19.json > /dev/null
           python -m json.tool domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json > /dev/null
+          python -m json.tool domains/space/MOCSS_FOUR_CORRECT_ROWS_DIAGNOSTIC_X1D_2026-10-19.json > /dev/null
       - name: Python replay scripts compile
         run: |
           python -m py_compile tools/fetch_jwst_mocss_mast_subset.py
@@ -104,6 +107,7 @@ jobs:
           python -m py_compile tools/verify_mocss_bd_diagnostic_x1d_receipt.py
           python -m py_compile tools/verify_mocss_four_x1d_null_and_axis.py
           python -m py_compile tools/verify_mocss_four_group_correct_row_geometry.py
+          python -m py_compile tools/verify_mocss_four_correct_row_diagnostic_x1d.py
       - name: Published-source arithmetic and epistemic gates
         run: python tools/verify_jwst_mocss_hudf_single_line.py
       - name: Independent MAST receipt and spatial-origin gates
@@ -132,6 +136,8 @@ jobs:
         run: python tools/verify_mocss_four_x1d_null_and_axis.py
       - name: Four original archival MSA geometries corrected to dispersion rows
         run: python tools/verify_mocss_four_group_correct_row_geometry.py
+      - name: Four real correctly oriented diagnostic x1d are NOT physical source flux
+        run: python tools/verify_mocss_four_correct_row_diagnostic_x1d.py
       - name: Spectral flux fitter unit test (synthetic data ONLY)
         run: |
           python -m pip install --disable-pip-version-check numpy
