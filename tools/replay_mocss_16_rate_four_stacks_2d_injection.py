@@ -122,6 +122,47 @@ def sample(image,good,x0,y0):
     denom=map_coordinates(good.astype(float),coords,order=1,mode="constant",cval=0)
     return np.divide(numerator,denom,out=np.full_like(numerator,np.nan),where=denom>.95),denom
 
+def inject_native_detector_then_row_sky(sci,sci_sub,valid,sky_baseline,
+                                        original_good,source_x,source_y,excluded_x,variants):
+    """Inject into original 2D SCI detector pixels then redo ROW sky locally.
+
+    A Gaussian is still a parametric test source, not STPSF-dispered optics.
+    The SCI frame and WCS are restored after every scenario; the stamp is
+    extracted from the modified native-pixel detector model, not created
+    by adding a Gaussian to an already-resampled WCS stamp.
+    """
+    center_x=int(round(source_x));center_y=int(round(source_y))
+    hs=12
+    ys=slice(max(0,center_y-hs),min(sci.shape[0],center_y+hs+1))
+    xs=slice(max(0,center_x-hs),min(sci.shape[1],center_x+hs+1))
+    yy,xx=np.mgrid[ys.start:ys.stop,xs.start:xs.stop]
+    original=sci[ys,xs].copy()
+    baseline_corrected=sci_sub[ys,:].copy()
+    results={}
+    for name,sigx,shift in variants:
+        template=.04*np.exp(-.5*((xx-source_x-shift)/sigx)**2-.5*((yy-source_y)/1.6)**2)
+        try:
+            sci[ys,xs]=original+template
+            # This re-estimates full-detector-row sky using the modified
+            # native pixels in the affected detector rows. The source
+            # positions have been masked from sky sampling in both cases.
+            sky_new,_=robust_row_background(sci[ys,:],original_good[ys,:],excluded_x)
+            sky_delta=sky_new-sky_baseline[ys]
+            sci_sub[ys,:]=baseline_corrected-sky_delta[:,None]
+            sci_sub[ys,xs]=sci_sub[ys,xs]+template
+            injection_stamp,_=sample(sci_sub,valid,source_x,source_y)
+            results[name]={"image_dn_per_s":injection_stamp,
+                          "max_absolute_affected_row_sky_change_dn_per_s":float(np.max(np.abs(sky_delta))),
+                          "injected_native_detector_peak_dn_per_s":.04,
+                          "input_native_gaussian_sigma_x_pixels":sigx,
+                          "input_native_x_shift_pixels":shift,
+                          "source_template_is_STPSF":False}
+        finally:
+            sci[ys,xs]=original
+            sci_sub[ys,:]=baseline_corrected
+    return results
+
+
 def per_exposure(rec,data_dir):
     index=rec["exposure_index"];g=rec["group"];det=rec["expected_science_detector_from_WCS"]
     f=rec["detectors"][det]
@@ -145,7 +186,12 @@ def per_exposure(rec,data_dir):
             # Bilinear interpolation needs square-weight variance, so
             # interpolated ERR^2 is a CONSERVATIVE indicative proxy only.
             if not np.all(np.isfinite(im[np.isfinite(variance)])):raise RuntimeError("Bad resampling")
+            variants=(("center_sx1p2",1.2,0.0),("shift_p07_sx2p0",2.0,0.7))
+            native=inject_native_detector_then_row_sky(
+               sci,sci_sub,vgood,row,good,center["x_px"],center["y_px"],
+               [v["x_px"] for v in centers.values()],variants)
             stamps[name]={
+              "raw_native_detector_injection_variants":native,
               "image_dn_per_s":im,
               "variance_proxy":variance,
               "valid_fraction":float(np.isfinite(im).mean()),
@@ -221,8 +267,24 @@ def process(rows):
                                     "wcs_x_centroid_offset_pixels_TEST":shift,
                                     "recovered_delta_template_dn_per_s":recovered-info["center_template_response_dn_per_s"],
                                     "recovery_ratio_not_PSF_throughput":(recovered-info["center_template_response_dn_per_s"])/amp})
+            native_models=[]
+            for name in ("center_sx1p2","shift_p07_sx2p0"):
+                test_stamps=[dict(stamp,
+                    image_dn_per_s=stamp["raw_native_detector_injection_variants"][name]["image_dn_per_s"])
+                    for stamp in ls]
+                meas=coadd(test_stamps)[1]["center_template_response_dn_per_s"]
+                native_models.append({
+                    "mode":"NATIVE_2D_ORIGINAL_RATE_PIXEL_INJECTION_WITH_AFFECTED_DETECTOR_ROW_SKY_RECALC",
+                    "scenario":name,
+                    "input_peak_original_rate_dn_per_s":.04,
+                    "recovered_delta_coadd_template_dn_per_s":meas-info["center_template_response_dn_per_s"],
+                    "response_ratio_not_physical_PSF_throughput":(meas-info["center_template_response_dn_per_s"])/.04,
+                    "max_affected_row_sky_change_dn_per_s":max(
+                       stamp["raw_native_detector_injection_variants"][name]["max_absolute_affected_row_sky_change_dn_per_s"]
+                       for stamp in ls)})
             current["lines"][key]=dict(info,
-                injected_detector_patch_2D_real_rate_challenge=rec,
+                injected_post_resampling_WCS_patch_2D_GAUSSIAN_CONTROL_ONLY=rec,
+                injected_native_original_RATE_detector_2D_gaussian_with_row_sky=native_models,
                 injected_physical_source_flux_cgs=None)
             images[g+"_"+key]=co.astype(np.float32)
             print("STACK",g,key,"dithers",info["n_input"],"MAD",round(info["off_line_MAD_dn_per_s"],6),flush=True)
@@ -269,6 +331,7 @@ def main():
      "scientific_limits":{"authors_full_row_MOCSS_sky_reproduced":False,
                           "calwebb_spec2_on_all_four_coadds":False,
                           "STPSF_in_detector_space":False,
+                          "original_RATE_native_2D_gaussian_injection_and_row_background_recompute":True,
                           "absolute_line_flux":None,
                           "realistic_dispersed_PSF_shutter_injection":False,
                           "independent_detection_significance":None,
@@ -293,6 +356,6 @@ def main():
     report["output_2D_rate_stacks_npz_sha256"]=digest(a.images)
     a.output.write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
     print("PASS: 16 RAW JWST RATE SHA, 4 empirical line window stacks with row-median SKY PROXY, 2D GAUSSIAN RATE INJECTIONS")
-    print("ABSOLUTE_PHYSICAL_FLUX=NOT_MEASURED; STPSF_DETECTOR_INJECTION=NOT_RUN")
+    print("ABSOLUTE_PHYSICAL_FLUX=NOT_MEASURED; ORIGINAL_NATIVE_2D_RATE_GAUSSIAN_INJECTION=EXECUTED; STPSF_DISPERSED_DETECTOR_PSF=NOT_RUN")
 
 if __name__=="__main__":main()
