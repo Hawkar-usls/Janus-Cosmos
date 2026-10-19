@@ -66,7 +66,7 @@ def compute():
             "doublet_only_second_moment_equivalent_fwhm_A": round(
                 blend_fwhm_equivalent, 4
             ),
-            "rest_equivalent_width_lower_bound_A": round(
+            "rest_ew_lower_bound_if_persistent_A": round(
                 EW_OBS_LOWER_A / (1.0 + z), 1
             ),
             "minimum_effective_resolving_power_required": min_r_by_upper_bound,
@@ -81,7 +81,7 @@ def compute():
             "single_gaussian_fwhm_A": FWHM_OBS_A,
             "fwhm_1sigma_A": FWHM_ERR_A,
             "reported_flux_erg_s_cm2": F_OII_ASSUMED_ERG_S_CM2,
-            "observed_ew_lower_bound_A": EW_OBS_LOWER_A,
+            "reported_observed_ew_bound_if_persistent_A": EW_OBS_LOWER_A,
         },
         "oii_rest_vacuum_A": [LAMBDA_OII1_VAC_A, LAMBDA_OII2_VAC_A],
         "density_limited_oii_3729_to_3726_ratio_range": [0.35, 1.5],
@@ -92,6 +92,7 @@ def compute():
             "Published Gaussian-fit FWHM approximated by Gaussian-equivalent second moment",
             "The true local MOCSS line-spread function and slitless source morphology are UNMEASURED",
             "Ratio endpoints are idealized density limits, not an astrophysical likelihood prior",
+            "EW bound combines non-contemporaneous continuum imaging and line spectroscopy: not a transient-EW bound",
             "No noise covariance or profile-fitting likelihood enters heuristic differences",
         ],
         "ratio_cases": tests,
@@ -100,6 +101,7 @@ def compute():
             "oii_identified": False,
             "redshift_or_distance_measured": False,
             "spatial_trail_measured": False,
+            "reported_ew_bound_applies_to_transient": False,
             "decisive_next_test": "Measure effective MOCSS LSF on a compact known narrow line at the same detector wavelength and fit convolved [O II] doublet directly to all original A-D spectra with injection-calibrated uncertainties",
         },
         "primary_references": [
