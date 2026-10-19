@@ -137,7 +137,11 @@
     "original_MSA_16_exact_pattern_masks": "PASS_64",
     "crds_projected_16_detector_illumination": "NOT_PERFORMED",
     "open_closed_shutter_sky_physical_calibration": "NOT_PERFORMED",
-    "strong_source_line_photometry_with_validated_noise": "OPEN"
+    "strong_source_line_photometry_with_validated_noise": "OPEN",
+    "MOCSS_ALL16_CRDS_WCS_SOURCE_NEIGHBOR_GEOMETRY": "PASS_144_ON_DETECTOR",
+    "MOCSS_ORIGINAL_ALL_OPEN_SHUTTER_PHOTON_PIXEL_WEIGHTS": "NOT_CONSTRUCTED",
+    "MOCSS_FULL_ROW_BACKGROUND_LEAKAGE_PHYSICAL_CALIBRATION": "NOT_CONSTRUCTED",
+    "MOCSS_ABSOLUTE_THREE_LINE_ASTROPHYSICAL_FLUX": "OPEN"
   },
   "stage2_source_aware_progress_2026_10_18": {
     "status": "THREE_SHUTTER_SOURCE_INFO_GEOMETRY_WCS_OFFCENTER_PASS_NO_AUTHENTIC_SOURCE_FLUX",
@@ -209,5 +213,24 @@
     "source_identification": null,
     "redshift": null,
     "epistemic_caveat": "Original MSA metadata aperture-state masks are not wavelength-dependent detector illumination or transmission. Shutter availability is not source line confirmation."
+  },
+  "frozen_full16_original_MSA_CRDS_wcs_2026_10_19": {
+    "status": "PASS_ALL16_CRDS_GWCS_48_PHYSICAL_OPEN_SHUTTER_SITES_144_FINITE_ON_DETECTOR_WAVELENGTH_CENTERS",
+    "artifact_run_id": 39243558142,
+    "provenance_receipt": "domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json",
+    "three_preregistered_wavelengths_A": [
+      13656.7483309,
+      15850.7932988,
+      16004
+    ],
+    "full_64_quadrant_mask_all_original_open_shutter_projection_done": false,
+    "full_spectral_detector_illumination_weight_map_created": false,
+    "open_closed_shutter_background_sky_with_leakage_calibrated": false,
+    "dispersed_STPSF_bar_pathloss_transmission_and_cgs_photom_done": false,
+    "full_author_MOCSS_stage2_four_coadd_x1d_physical": false,
+    "source_spectral_line_flux_established": null,
+    "independent_line_identity": null,
+    "redshift": null,
+    "directional_gas_trail": null
   }
 }
