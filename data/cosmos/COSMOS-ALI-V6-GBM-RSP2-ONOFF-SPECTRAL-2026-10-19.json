@@ -1,0 +1,1416 @@
+{
+  "GBM_detector_coupling": "TWO_NAI_ONE_BGO_SHARED_ALPHA_EPEAK_AND_NORMALIZATION_PER_TIME_SEGMENT",
+  "background_treatment": "ONOFF_POISSON_PROFILE_CHANNEL_NUISANCE_WITH_FIXED_-20_TO_-5_s_OFFWINDOW",
+  "black_hole_firewall_detection": false,
+  "claim_ceiling": "REAL_GBM_RSP2_ONOFF_FORWARD_FOLDED_SPECTRAL_DIAGNOSTIC_ONLY_NOT_PHYSICAL_JOINT_LAT_GBM_LIV_TEST",
+  "data_kind": "ACTUAL_GBM_COUNTS_OGIP_RSP2_FORWARD_FOLDED_PILOT_NOT_VALIDATED_GLOBAL_MODEL",
+  "experiment_id": "JANUS-COSMOS-ALI-V6-LAT-GBM-JOINT-2026-10-19",
+  "gbm_bursts": [
+    {
+      "background_model_time_variable": false,
+      "exact_trigger_met": 263607781.97109,
+      "gbm_trigger_id": "bn090510016",
+      "grb": "090510",
+      "response_ebounds_reconciliation_calibrated": false,
+      "spectral_goodness_of_fit_calibrated": false,
+      "time_resolved_spectral_fit_segments": [
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 286,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 317,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 566,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.4,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.003649088029592821,
+            "epeak_keV": 300.0,
+            "fit_deviance": 351.884914,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 355.000457,
+            "onoff_poisson_deviance": 351.8849140832201,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 3.115542,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 0.980181
+          },
+          "start_relative_trigger_s": 0.0,
+          "stop_relative_trigger_s": 0.25
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 315,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 370,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 574,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.4,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.013631995536177135,
+            "epeak_keV": 300.0,
+            "fit_deviance": 373.106878,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 413.865697,
+            "onoff_poisson_deviance": 373.10687817777375,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 40.758818,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.039295
+          },
+          "start_relative_trigger_s": 0.25,
+          "stop_relative_trigger_s": 0.5
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 1135,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 1022,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 1810,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.8,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.06991737177276429,
+            "epeak_keV": 4800.0,
+            "fit_deviance": 337.191304,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 5327.928052,
+            "onoff_poisson_deviance": 337.19130395535,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 4990.736748,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 0.939252
+          },
+          "start_relative_trigger_s": 0.5,
+          "stop_relative_trigger_s": 0.75
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 589,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 535,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 699,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.2,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.024536582567797307,
+            "epeak_keV": 4800.0,
+            "fit_deviance": 403.377522,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 961.476395,
+            "onoff_poisson_deviance": 403.3775223629874,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 558.098872,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.123614
+          },
+          "start_relative_trigger_s": 0.75,
+          "stop_relative_trigger_s": 1.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 588,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 652,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 1225,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.4,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.0011436513209468293,
+            "epeak_keV": 4800.0,
+            "fit_deviance": 416.952138,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 435.622268,
+            "onoff_poisson_deviance": 416.95213844723486,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 18.670129,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.161427
+          },
+          "start_relative_trigger_s": 1.0,
+          "stop_relative_trigger_s": 1.5
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 16128,
+              "on_selected_counts": 607,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 17667,
+              "on_selected_counts": 625,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 34174,
+              "on_selected_counts": 1128,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.8,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.0013800087138796007,
+            "epeak_keV": 4800.0,
+            "fit_deviance": 414.989441,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 423.198824,
+            "onoff_poisson_deviance": 414.9894414350293,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 8.209382,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.155959
+          },
+          "start_relative_trigger_s": 1.5,
+          "stop_relative_trigger_s": 2.0
+        }
+      ]
+    },
+    {
+      "background_model_time_variable": false,
+      "exact_trigger_met": 273582310.312714,
+      "gbm_trigger_id": "bn090902462",
+      "grb": "090902B",
+      "response_ebounds_reconciliation_calibrated": false,
+      "spectral_goodness_of_fit_calibrated": false,
+      "time_resolved_spectral_fit_segments": [
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n0",
+              "fitted_channel_count": 122,
+              "off_selected_counts": 14895,
+              "on_selected_counts": 13492,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n1",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 16167,
+              "on_selected_counts": 14441,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b0",
+              "fitted_channel_count": 117,
+              "off_selected_counts": 27549,
+              "on_selected_counts": 13495,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.4,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.06215101612223942,
+            "epeak_keV": 600.0,
+            "fit_deviance": 418.386835,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 20798.545621,
+            "onoff_poisson_deviance": 418.38683517558474,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 20380.158786,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.162186
+          },
+          "start_relative_trigger_s": 0.0,
+          "stop_relative_trigger_s": 5.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n0",
+              "fitted_channel_count": 122,
+              "off_selected_counts": 14895,
+              "on_selected_counts": 26289,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n1",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 16167,
+              "on_selected_counts": 28805,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b0",
+              "fitted_channel_count": 117,
+              "off_selected_counts": 27549,
+              "on_selected_counts": 23538,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.8,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.11705291083868882,
+            "epeak_keV": 1200.0,
+            "fit_deviance": 2912.134141,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 75921.939767,
+            "onoff_poisson_deviance": 2912.134141299708,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 73009.805626,
+            "spectral_mismatch_stress_gate": "HIGH_RESIDUAL_MODEL_REVISE",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 8.089262
+          },
+          "start_relative_trigger_s": 5.0,
+          "stop_relative_trigger_s": 10.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n0",
+              "fitted_channel_count": 122,
+              "off_selected_counts": 14895,
+              "on_selected_counts": 58392,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n1",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 16167,
+              "on_selected_counts": 65027,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b0",
+              "fitted_channel_count": 117,
+              "off_selected_counts": 27549,
+              "on_selected_counts": 37067,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.8,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.16388660784720538,
+            "epeak_keV": 600.0,
+            "fit_deviance": 1551.117466,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 120154.674206,
+            "onoff_poisson_deviance": 1551.1174657529623,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 118603.55674,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 4.30866
+          },
+          "start_relative_trigger_s": 10.0,
+          "stop_relative_trigger_s": 20.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n0",
+              "fitted_channel_count": 122,
+              "off_selected_counts": 14895,
+              "on_selected_counts": 24918,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n1",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 16167,
+              "on_selected_counts": 27715,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b0",
+              "fitted_channel_count": 117,
+              "off_selected_counts": 27549,
+              "on_selected_counts": 20540,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.2,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.0499547321790455,
+            "epeak_keV": 300.0,
+            "fit_deviance": 467.009899,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 19963.614856,
+            "onoff_poisson_deviance": 467.00989932019513,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 19496.604957,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.29725
+          },
+          "start_relative_trigger_s": 20.0,
+          "stop_relative_trigger_s": 30.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n0",
+              "fitted_channel_count": 122,
+              "off_selected_counts": 14895,
+              "on_selected_counts": 11242,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n1",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 16167,
+              "on_selected_counts": 12133,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b0",
+              "fitted_channel_count": 117,
+              "off_selected_counts": 27549,
+              "on_selected_counts": 18405,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.6,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.0031408808274024486,
+            "epeak_keV": 150.0,
+            "fit_deviance": 302.871022,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 525.099029,
+            "onoff_poisson_deviance": 302.8710215771806,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 222.228007,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 0.841308
+          },
+          "start_relative_trigger_s": 30.0,
+          "stop_relative_trigger_s": 40.0
+        }
+      ]
+    },
+    {
+      "background_model_time_variable": false,
+      "exact_trigger_met": 388741629.420158,
+      "gbm_trigger_id": "bn130427324",
+      "grb": "130427A",
+      "response_ebounds_reconciliation_calibrated": false,
+      "spectral_goodness_of_fit_calibrated": false,
+      "time_resolved_spectral_fit_segments": [
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 234754,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 99965,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 167737,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -0.8,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.7178663919297247,
+            "epeak_keV": 1200.0,
+            "fit_deviance": 11732.092471,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 682982.553014,
+            "onoff_poisson_deviance": 11732.09247089459,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 671250.460543,
+            "spectral_mismatch_stress_gate": "HIGH_RESIDUAL_MODEL_REVISE",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 32.679923
+          },
+          "start_relative_trigger_s": 0.0,
+          "stop_relative_trigger_s": 10.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 118291,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 45765,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 54038,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.2,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.4072289595360331,
+            "epeak_keV": 600.0,
+            "fit_deviance": 3926.288922,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 219492.32625,
+            "onoff_poisson_deviance": 3926.28892241374,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 215566.037328,
+            "spectral_mismatch_stress_gate": "HIGH_RESIDUAL_MODEL_REVISE",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 10.936738
+          },
+          "start_relative_trigger_s": 10.0,
+          "stop_relative_trigger_s": 20.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 38755,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 0.8432271
+                },
+                {
+                  "matrix_number": 2,
+                  "weight": 0.1567729
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 28296,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 0.8432271
+                },
+                {
+                  "matrix_number": 2,
+                  "weight": 0.1567729
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 26624,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 1,
+                  "weight": 0.8432271
+                },
+                {
+                  "matrix_number": 2,
+                  "weight": 0.1567729
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.6,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.032057884730938846,
+            "epeak_keV": 150.0,
+            "fit_deviance": 737.734014,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 6796.952975,
+            "onoff_poisson_deviance": 737.7340142745617,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 6059.218961,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 2.054969
+          },
+          "start_relative_trigger_s": 20.0,
+          "stop_relative_trigger_s": 40.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 39488,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 38939,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 38873,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 1.0
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.6,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.012618601984598738,
+            "epeak_keV": 150.0,
+            "fit_deviance": 353.090326,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 1569.151589,
+            "onoff_poisson_deviance": 353.09032623055157,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 1216.061263,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 0.983539
+          },
+          "start_relative_trigger_s": 40.0,
+          "stop_relative_trigger_s": 70.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 36800,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 0.22670473
+                },
+                {
+                  "matrix_number": 3,
+                  "weight": 0.54614333
+                },
+                {
+                  "matrix_number": 4,
+                  "weight": 0.22715193
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 37999,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 0.22670473
+                },
+                {
+                  "matrix_number": 3,
+                  "weight": 0.54614333
+                },
+                {
+                  "matrix_number": 4,
+                  "weight": 0.22715193
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 38749,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 2,
+                  "weight": 0.22670473
+                },
+                {
+                  "matrix_number": 3,
+                  "weight": 0.54614333
+                },
+                {
+                  "matrix_number": 4,
+                  "weight": 0.22715193
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.6,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.00853679129189575,
+            "epeak_keV": 150.0,
+            "fit_deviance": 383.764871,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 1066.253167,
+            "onoff_poisson_deviance": 383.7648706528706,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 682.488296,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.068983
+          },
+          "start_relative_trigger_s": 70.0,
+          "stop_relative_trigger_s": 100.0
+        },
+        {
+          "detector_counts_and_time_weighted_rsp2": [
+            {
+              "detector": "n6",
+              "fitted_channel_count": 123,
+              "off_selected_counts": 14374,
+              "on_selected_counts": 67015,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 4,
+                  "weight": 0.23924105
+                },
+                {
+                  "matrix_number": 5,
+                  "weight": 0.4096075
+                },
+                {
+                  "matrix_number": 6,
+                  "weight": 0.35115145
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "n7",
+              "fitted_channel_count": 121,
+              "off_selected_counts": 18656,
+              "on_selected_counts": 58220,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 4,
+                  "weight": 0.23924105
+                },
+                {
+                  "matrix_number": 5,
+                  "weight": 0.4096075
+                },
+                {
+                  "matrix_number": 6,
+                  "weight": 0.35115145
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            },
+            {
+              "detector": "b1",
+              "fitted_channel_count": 115,
+              "off_selected_counts": 18355,
+              "on_selected_counts": 53904,
+              "rsp2_matrices_used": [
+                {
+                  "matrix_number": 4,
+                  "weight": 0.23924105
+                },
+                {
+                  "matrix_number": 5,
+                  "weight": 0.4096075
+                },
+                {
+                  "matrix_number": 6,
+                  "weight": 0.35115145
+                }
+              ],
+              "rsp2_total_weight": 1.0
+            }
+          ],
+          "onoff_spectral_grid_fit": {
+            "alpha": -1.6,
+            "amplitude_boundary_warning": false,
+            "amplitude_ph_cm2_s_keV_at_100keV": 0.01698428526730522,
+            "epeak_keV": 600.0,
+            "fit_deviance": 455.27321,
+            "fixed_template_search_alpha": [
+              -1.6,
+              -1.2,
+              -0.8,
+              -0.4
+            ],
+            "fixed_template_search_epeak_keV": [
+              150.0,
+              300.0,
+              600.0,
+              1200.0,
+              2400.0,
+              4800.0
+            ],
+            "no_interpolation_between_template_grid_nodes": true,
+            "not_a_discovery_significance_or_calibrated_p_value": true,
+            "null_no_photon_source_deviance": 5382.952453,
+            "onoff_poisson_deviance": 455.27320988563355,
+            "photon_model": "SINGLE_CUTOFF_POWERLAW_MIDPOINT_BIN_QUADRATURE_NOT_BAND_PLUS_POWERLAW",
+            "profiled_background_per_channel": true,
+            "source_vs_no_source_diagnostic_delta_deviance": 4927.679243,
+            "spectral_mismatch_stress_gate": "INCONCLUSIVE_WITHOUT_CALIBRATED_PREDICTIVE_CHECKS",
+            "stress_gate_threshold_descriptive_not_p_value": 5.0,
+            "unscaled_deviance_per_fitted_channel_diagnostic": 1.268171
+          },
+          "start_relative_trigger_s": 100.0,
+          "stop_relative_trigger_s": 140.0
+        }
+      ]
+    }
+  ],
+  "observational_joint_p_value": null,
+  "observational_liv_eta_estimate": null,
+  "photon_model_units": "ph_cm_minus2_s_minus1_keV_minus1",
+  "pulse_spectral_evolution": "MULTIPLE_FIXED_TIME_WINDOWS_INDEPENDENT_CUTOFF_POWERLAW_GRID",
+  "response_units": "cm2",
+  "result_sha256": "922b75e663505561b942116c09be5e17d49c6b3ea94dfe4ffd760843139be2de",
+  "schema": "janus.cosmos.fermi-gbm-rsp2-onoff-folded-spectral-pilot.v6",
+  "scientific_gates": {
+    "AMPS_FIREWALL": "OPEN_UNCONFIRMED",
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "GBM_MODEL_COMPLETENESS": "NOT_ESTABLISHED_SINGLE_CPL_NOT_BAND_PLUS_PL",
+    "GBM_TIME_VARYING_BACKGROUND_AND_RESPONSE_CHANNEL_SYSTEMATICS": "UNVALIDATED",
+    "INDEPENDENT_GE_V_SOURCE_LAG_PRIOR": "NOT_ESTABLISHED",
+    "LAT_FULL_PSF_EDISP_EXPOSURE_BACKGROUND": "NOT_YET_VALIDATED",
+    "LORENTZ_VIOLATION": "NOT_ESTABLISHED",
+    "OBSERVED_LAT_GBM_LIV_HYPOTHESIS_TEST": "BLOCKED",
+    "REAL_GBM_ONOFF_SPECTRAL_COUNT_FORWARD_FOLD": "PILOT_GRID_WITH_SIMPLE_SPECTRAL_LAW",
+    "REAL_GBM_RSP2_OGIP_HEAP_MATRICES": "PASS_BYTE_PINNED_AND_DECODED"
+  },
+  "source_manifest": "data/cosmos/COSMOS-ALI-V5-FERMI-LAT-GBM-CALDB-MANIFEST-2026-10-19.json",
+  "source_manifest_sha256": "70e8aae34c101831ff5c17557bcd89e8c8545e87a936e3eaf53574c1048ab905",
+  "spectral_template_limitation": "SINGLE_COMPONENT_CUTOFF_POWERLAW_IGNORES_POSSIBLE_ADDITIONAL_GE_V_OR_HARD_COMPONENT",
+  "time_variable_background_inference": "NOT_IMPLEMENTED",
+  "time_weighted_RSP2": "ATTITUDE_DEPENDENT_DRMS_EXPOSURE_WEIGHTED_OVER_SEGMENT"
+}
