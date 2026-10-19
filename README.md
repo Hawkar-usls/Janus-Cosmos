@@ -350,6 +350,14 @@ V6-R0 rehydrates and SHA-verifies **42 official Fermi files**: 27 GBM TTE/CSPEC/
 
 **Critical falsification:** the one-component cutoff power-law misses bright real GBM windows (090902B 5–10 s; 130427A 0–10/10–20 s). **99/99 offline tests pass.** Complete LAT PSF/EDISP+diffuse likelihood, time-variable GBM background, Band+hard-component source model and defensible GeV emission-lag prior remain open. No new physics or black-hole-firewall detection is claimed.
 
+## Cosmos V6-R1: real Band+PL GBM stress-test and LAT IRF parameter audit (partial gate)
+
+The [V6-R1 preregistered scientific protocol](docs/JANUS-COSMOS-V6-R1-BAND-IRF-SOURCE-LAG-GATE-2026-10-19.md) adds a Band+extra-power-law photon model, time-variable pretrigger GBM Poisson background with a held-out off interval, and NaI-training/BGO-heldout detector checks to all **17 actual GBM prompt segments**. It also parses every P8R3_SOURCE_V3 PSF, EDISP, effective-area, phi-dependence and efficiency parameter family in the nine byte-verified CALDB tables.
+
+Three frozen receipts: [GBM Band+PL results](data/cosmos/COSMOS-ALI-V6R1-GBM-BAND-POWERLAW-DRIFT-2026-10-19.json), [LAT full IRF parameter readiness](data/cosmos/COSMOS-ALI-V6R1-LAT-FULL-IRF-READINESS-2026-10-19.json) and [synthetic source-delay identifiability/coverage](data/cosmos/COSMOS-ALI-V6R1-SOURCE-LAG-TOY-INJECTION-COVERAGE-2026-10-19.json). **112 offline tests pass.** The conditional toy demonstrates that ignoring independently unknown source-intrinsic GeV delays can make nominal 95% intervals cover the true propagation parameter 0% of the time under a confounded source scenario.
+
+**Still blocked:** LAT normalized PSF/EDISP event-level convolution, livetime/phi corrections, diffuse sky models, GBM shared-off/background/response systematics, physically supported intrinsic-lag priors and end-to-end coverage. Thus **no observed LIV p-value, discrete-spacetime finding, AMPS quantum-firewall detection or BHB Boom** is claimed. V6-R1 is a *partial* scientific gate, not the complete validated joint likelihood.
+
 ## Historical/source firewall
 
 `S𓂸ḥ` is a modern project alias/overlay. It is not claimed to be an ancient Egyptian spelling or SAT terminology. Historical Pyramid Text material was heuristic semantic/operator inspiration only. Correctness and authority come from executable CNF mechanics, exact replay, current verification and certificates.
