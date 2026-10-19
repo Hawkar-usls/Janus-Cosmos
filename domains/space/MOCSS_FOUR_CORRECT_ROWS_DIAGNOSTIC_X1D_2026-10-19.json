@@ -1,0 +1,133 @@
+{
+  "schema": "janus-mocss-four-group-three-dispersion-row-diagnostic-x1d-v1",
+  "date_utc": "2026-10-19",
+  "state": "FOUR_REAL_ARCHIVAL_DIAGNOSTIC_X1D_CORRECT_THREE_ROW_MSA_GEOMETRY_NOT_SCIENCE_GRADE",
+  "source": {
+    "source_ra": 53.13127,
+    "source_dec": -27.78908,
+    "mission": "JWST NIRSpec G140M/F100LP",
+    "original_mpt_contains_source": false,
+    "test_SOURCE_INFO_inserted": true,
+    "calibration_version": "jwst 1.19.1",
+    "crds": "jwst_1413.pmap"
+  },
+  "provenance": {
+    "run_id": 39223778736,
+    "artifacts": {
+      "AC": 12173357628,
+      "BD": 12173376301
+    },
+    "artifact_full_json_sha256": {
+      "AC": "5b38a799205844402f256db6b59545eec797bb3f945988ba426e499731a8e5ac",
+      "BD": "e6df92e05716f4d5f3e5a6fb61a09005286a180eedd087e0e5df33c18cd5d2c5"
+    },
+    "frozen_geometry": "domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json"
+  },
+  "groups": [
+    {
+      "group": "A",
+      "exp": 1,
+      "shutter_rows": [
+        83,
+        84,
+        85
+      ],
+      "column": 89,
+      "detector": "NRS2",
+      "fits_sha256": "79eb00de3556ee94ecb67901cf621479371a26467603fc1bfeb1251071a6bcbb",
+      "diagnostic_formal_ratio": [
+        2.02,
+        6.37,
+        0.49
+      ],
+      "diagnostic_chi2_per_dof": [
+        39.69,
+        64.4,
+        1.26
+      ]
+    },
+    {
+      "group": "B",
+      "exp": 8,
+      "shutter_rows": [
+        164,
+        165,
+        166
+      ],
+      "column": 93,
+      "detector": "NRS2",
+      "fits_sha256": "47430bc196e9562a21ab9617b7e79d01c47ba9b9fa0a801994251335b56db6d7",
+      "diagnostic_formal_ratio": [
+        2,
+        0.93,
+        4.46
+      ],
+      "diagnostic_chi2_per_dof": [
+        2.09,
+        1.7,
+        96.35
+      ]
+    },
+    {
+      "group": "C",
+      "exp": 10,
+      "shutter_rows": [
+        170,
+        171,
+        172
+      ],
+      "column": 108,
+      "detector": "NRS1",
+      "fits_sha256": "e18a6afa000e006985dcc8c6f582500d4ebff0de17149fff382839a8",
+      "diagnostic_formal_ratio": [
+        40.1,
+        0.84,
+        2.08
+      ],
+      "diagnostic_chi2_per_dof": [
+        1354.03,
+        2.98,
+        29.47
+      ]
+    },
+    {
+      "group": "D",
+      "exp": 13,
+      "shutter_rows": [
+        245,
+        246,
+        247
+      ],
+      "column": 107,
+      "detector": "NRS1",
+      "fits_sha256": "dd780aacbff407dfe0a03a209be6a464a51816904caca3cf487a3c88f4d93fec",
+      "diagnostic_formal_ratio": [
+        3.3,
+        4.09,
+        1.91
+      ],
+      "diagnostic_chi2_per_dof": [
+        52.8,
+        64.79,
+        60.69
+      ]
+    }
+  ],
+  "order_of_three_fixed_windows_A": [
+    16004,
+    15850.793298802237,
+    13656.748330941537
+  ],
+  "all_formal_ratios_diagnostic_not_detection_significance": true,
+  "full_16_exposure_4_dither_stacks_reproduced": false,
+  "author_row_sky_subtraction_reproduced": false,
+  "three_shutter_real_optical_throughput_calibrated": false,
+  "physical_psf_detector_injection_recovery_run": false,
+  "spectral_source_fluxes_or_upper_limits": null,
+  "companion_OIII_detected": null,
+  "companion_Pagamma_detected": null,
+  "physical_source_type": null,
+  "redshift": null,
+  "directional_gas_trail": null,
+  "strict_science_rule": "Do not interpret large raw model coefficients as line detections. These FITS use synthetic MSA SOURCE_INFO, only 1 of 4 dithers per group, and omit validated row sky, flux throughput, systematic covariance, and physical injection."
+}
