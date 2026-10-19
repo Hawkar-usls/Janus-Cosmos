@@ -1,0 +1,98 @@
+{
+  "actual_gbm_tte_count_used_for_source_lag_prior_calibration": 0,
+  "actual_lat_event_count_used_in_likelihood": 0,
+  "claim_ceiling": "source lag priors change synthetic fits; real GBM pulse timings do not identify GeV intrinsic emission delays",
+  "data_kind": "THREE_BURST_SYNTHETIC_TIMING_PRIOR_SENSITIVITY_CONDITIONED_ON_REAL_INSTRUMENT_READINESS_ONLY",
+  "exact_reparameterization": "eta_prime=eta+delta; beta_j_prime=beta_j-delta; predicted_times_invariant",
+  "experiment_id": "JANUS-COSMOS-ALI-V5-GBM-LAT-IRF-2026-10-19",
+  "gates": {
+    "AMPS_FIREWALL": "OPEN_UNCONFIRMED",
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "OBSERVED_LIV_TEST": "BLOCKED_NO_VALIDATED_RESPONSE_AND_SOURCE_PRIOR",
+    "SYNTHETIC_EXACT_NONIDENTIFIABILITY": "PASS",
+    "SYNTHETIC_SOURCE_LAG_PRIOR_SENSITIVITY": "PASS_PRIOR_DEPENDENT_ONLY"
+  },
+  "independent_high_energy_intrinsic_emission_prior": null,
+  "observational_liv_limit": null,
+  "observational_liv_p_value": null,
+  "observational_liv_test_statistic": null,
+  "real_instrument_data_are_in_separate_v5_audit": true,
+  "result_sha256": "32fc4f6de832e892c6731f9f6de262671aea79a2762df75b29133db655e205af",
+  "schema": "janus.cosmos.fermi-multiburst-source-lag-sensitivity.v5",
+  "seed": 20261019,
+  "source_lag_parameterization": "t_ji = mu_j + (eta + beta_j) K_j(E,z) + normal_noise",
+  "source_lag_prior_sensitivity_synthetic_only": [
+    {
+      "hypothetical_intrinsic_beta_prior_sigma": 0.1,
+      "prior_is_not_derived_from_gbm_tte": true,
+      "source_only_mimic": {
+        "eta_mle": 0.79358402,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 177.262478811
+      },
+      "synthetic_liv_injection": {
+        "eta_mle": 0.79358402,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 177.262478811
+      },
+      "zero_effect_null": {
+        "eta_mle": 0.0,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 0.0
+      }
+    },
+    {
+      "hypothetical_intrinsic_beta_prior_sigma": 0.5,
+      "prior_is_not_derived_from_gbm_tte": true,
+      "source_only_mimic": {
+        "eta_mle": 0.79262063,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 7.517137818
+      },
+      "synthetic_liv_injection": {
+        "eta_mle": 0.79262063,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 7.517137818
+      },
+      "zero_effect_null": {
+        "eta_mle": 0.0,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 0.0
+      }
+    },
+    {
+      "hypothetical_intrinsic_beta_prior_sigma": 2.0,
+      "prior_is_not_derived_from_gbm_tte": true,
+      "source_only_mimic": {
+        "eta_mle": 0.79257777,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 0.471048788
+      },
+      "synthetic_liv_injection": {
+        "eta_mle": 0.79257777,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 0.471048788
+      },
+      "zero_effect_null": {
+        "eta_mle": 0.0,
+        "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+        "twice_delta_log_likelihood": 0.0
+      }
+    }
+  ],
+  "source_only_mimic_unconstrained": {
+    "eta_mle": null,
+    "identifiability": "EXACT_DEGENERACY_BETA_PER_BURST_PLUS_ETA",
+    "twice_delta_log_likelihood": 0.0
+  },
+  "synthetic_zero_source_prior_false_positive_demo": {
+    "eta_mle": 0.79874261,
+    "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+    "twice_delta_log_likelihood": 29913.461123955
+  },
+  "unconstrained_source_lag_true_identifiability": {
+    "eta_mle": null,
+    "identifiability": "EXACT_DEGENERACY_BETA_PER_BURST_PLUS_ETA",
+    "twice_delta_log_likelihood": 0.0
+  }
+}
