@@ -1,0 +1,46 @@
+name: JANUS MOCSS All-16 RATE Four-Stack Row-Sky and 2D Injection
+on:
+  pull_request:
+    paths:
+      - 'tools/replay_mocss_16_rate_four_stacks_2d_injection.py'
+      - '.github/workflows/jwst-mocss-all16-2d-injection.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-original-archive-coadds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install reproducible FITS numerical dependencies
+        run: python -m pip install --disable-pip-version-check 'numpy>=1.26,<3' 'astropy>=6,<9' 'scipy>=1.13,<2'
+      - name: Download and hash all 16 real MAST RATE and two original MSA files; row-proxy sky; four WCS coadds; 2D Gaussian detector patch injection
+        run: |
+          PYTHONPATH=tools python -u tools/replay_mocss_16_rate_four_stacks_2d_injection.py \
+             --data-dir /tmp/janus_mocss_16_original_RATE \
+             --output /tmp/janus_mocss_16_row_proxy_four_stacks.json \
+             --images /tmp/janus_mocss_16_row_proxy_2d_stack_arrays.npz --workers 4
+      - name: Archive original SHA, 16 detector sky profiles, dither maps and null/injection receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mocss-original-16rate-four-stacks-2d-diagnostic
+          path: |
+            /tmp/janus_mocss_16_row_proxy_four_stacks.json
+            /tmp/janus_mocss_16_row_proxy_2d_stack_arrays.npz
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Immutable scientific ceiling
+        if: always()
+        run: |
+          echo '16_REAL_RATE_AND_2_MSA_SHA_CHECKED_IF_EXPERIMENT_PASS'
+          echo 'FOUR_4_DITHER_POINT_WINDOW_COADDS=RATE_LEVEL_ONLY'
+          echo 'FULL_ROW_CLIPPED_SKY_MEDIAN=PROXY_NOT_VERIFIED_MSA_ILLUMINATION_MODEL'
+          echo 'ORIGINAL_SHUTTER_OPEN_FRACTION_AUDITED_NOT_MAPPED_TO_DETECTOR_ROW'
+          echo 'STPSF_DISPERSED_DETECTOR_INJECTION=NOT_PERFORMED'
+          echo 'ABSOLUTE_PHOTOMETRIC_FLUX=NOT_CALIBRATED'
+          echo 'SOURCE_CLASS_REDSHIFT_GAS_TRAIL=OPEN'
