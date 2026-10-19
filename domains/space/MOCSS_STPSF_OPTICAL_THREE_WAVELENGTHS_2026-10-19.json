@@ -1,0 +1,55 @@
+{
+  "schema": "janus-mocss-nirspec-stpsf-three-wavelength-optical-mask-receipt-v1",
+  "date_utc": "2026-10-19",
+  "status": "OFFICIAL_STPSF_MONOCHROMATIC_OPTICAL_MASK_FOV_RATIOS_MEASURED_NOT_MOCSS_SCIENCE_THROUGHPUT",
+  "provenance": {
+    "run_id": 39229599393,
+    "run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39229599393",
+    "artifact_id": 12176347616,
+    "artifact_json_sha256": "3567ab9ef5a59d8ad29b65a033cbbb6d1333adf91b741838cbeae4eb99ce2fc2",
+    "script": "tools/stpsf_mocss_three_lambda_masks.py",
+    "stpsf_version": "2.1.0",
+    "filter": "F100LP",
+    "pupil_mask": "NIRSpec grating",
+    "fov_arcsec": 1.8,
+    "oversample": 4,
+    "jitter_sigma_arcsec_ASSUMED": 0.007,
+    "model_open_grid": "MSA all open",
+    "model_3shutter": "Three adjacent MSA open shutters"
+  },
+  "results": {
+    "Pa_gamma": {
+      "lambda_A": 13656.7483309,
+      "center_fraction": 0.928955436693495,
+      "center_loss": 0.071044563306505,
+      "offcenter_fraction": 0.9183950072671941,
+      "offcenter_loss": 0.08160499273280586
+    },
+    "OIII_4960": {
+      "lambda_A": 15850.7932988,
+      "center_fraction": 0.9145157945152076,
+      "center_loss": 0.08548420548479241,
+      "offcenter_fraction": 0.9162147412448391,
+      "offcenter_loss": 0.08378525875516085
+    },
+    "primary": {
+      "lambda_A": 16004,
+      "center_fraction": 0.9164828985201712,
+      "center_loss": 0.08351710147982883,
+      "offcenter_fraction": 0.9175370437076634,
+      "offcenter_loss": 0.08246295629233658
+    }
+  },
+  "author_reported_bar_only_loss_at_1p6_um_about": 0.033,
+  "model_vs_author_mismatch": "NON_IDENTICAL_APERTURE_BUDGET_AND_FINITE_FOV_RATIO_NO_DIRECT_CONFLICT_TEST",
+  "limits": [
+    "STPSF produces monochromatic optical PSF not a dispersed spectroscopic NIRSpec detector PSF.",
+    "All-open MSA image and three-shutter finite field sums include different optical stops and model assumptions; dividing their sums is not a calibrated slit loss correction for source flux.",
+    "Offcenter ±0.05,0.12 arcsec offsets are stress parameters, not measured MOCSS centroids.",
+    "No physical 2D detector-level STPSF-distributed emission line injection was executed in this run.",
+    "Per-group 4-dither PSF+bar throughput and true original MSA shutter mask remain uncalibrated."
+  ],
+  "source_class": null,
+  "redshift": null,
+  "companions_detected": null
+}
