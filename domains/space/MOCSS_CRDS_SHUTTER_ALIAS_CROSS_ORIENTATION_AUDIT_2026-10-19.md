@@ -16,6 +16,8 @@ Compare the virtual WCS detector centers of three adjacent, actually OPEN MSA ro
 
 The two virtual adjacent-row positions differ from the central trace by ≈2.6 detector X pixels at the *same* 16004 Å wavelength. Shifting the **hypothetical** neighbor wavelength by ≈16.6 Å realigns their detector X coordinates; the linear-model Y residual is below **0.016 detector pixel** across all 32 neighbor tests. This demonstrates a finite *single-orientation* NIRSpec slitless sky-position/wavelength degeneracy; it does **not** show photons at 15987.38 or 16020.62 Å.
 
+The original CRDS probe artifacts additionally report **48/48 finite on-detector WCS centers for each of the three line windows** — 13656.748 Å (Paγ under the Paβ identification), 15850.793 Å (the corrected [OIII] companion) and 16004 Å (main line), for three sample shutters × 16 exposures. This establishes only that the *geometric sampled centers* are on detector; it does **not** establish throughput, noise sensitivity, a detected companion line, or the absence of contamination at those locations.
+
 ## Essential two-orientation correction: the original authors already knew this
 
 The original MOCSS [paper Section III.2](https://arxiv.org/html/2610.12553v1) explicitly describes that a detector pixel can mean different wavelengths for sources at different sky positions. This motivated their two position angles separated by approximately **89°**. They enumerated candidate host shutters in both orientations and required **a common sky host plus wavelength agreement within 6 Å**. The paper's 16004 ±1 Å sky origin was reported after this cross-orientation matching and 2D-spectrum WCS verification.
