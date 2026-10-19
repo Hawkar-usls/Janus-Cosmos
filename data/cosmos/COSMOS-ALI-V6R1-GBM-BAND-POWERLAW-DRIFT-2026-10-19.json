@@ -1,0 +1,1276 @@
+{
+  "background_and_fit_important_limitations": [
+    "two off intervals give weak slope constraints; fit ignores slope uncertainty",
+    "prompt windows share the same OFF counts and are statistically dependent",
+    "late prompt intervals extrapolate beyond short pretrigger background control",
+    "GBM TTE/CSPEC/RSP2 channel-edge systematics uncalibrated",
+    "no LAT response or intrinsic GeV emission-lag prior is in this file",
+    "predeclared coarse grid fit lacks calibrated search and predictive coverage"
+  ],
+  "background_model": "PER_DETECTOR_SHARED_LOG_LINEAR_DRIFT_PRETRIGGER_OFF_TRAIN_TWO_WINDOWS_FINAL_PRETRIGGER_WINDOW_HELD_OUT",
+  "claim_ceiling": "REAL_GBM_RSP2_BAND_PLUS_PL_DRIFT_STRESS_TEST_ONLY_NO_PHYSICAL_LIV_DETECTION",
+  "data_kind": "REAL_TTE_RSP2_ONOFF_SPECTRAL_DIAGNOSTIC_NOT_CALIBRATED_JOINT_LIV_LIKELIHOOD",
+  "gbm_bursts": [
+    {
+      "detector_pretrigger_train_and_holdout_background": [
+        {
+          "detector": "n6",
+          "heldout_interval": [
+            -11.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 6457,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 6563.1535,
+          "log_linear_drift_per_second": 0.00222806,
+          "train_counts": [
+            6390,
+            6476
+          ],
+          "train_intervals": [
+            [
+              -23.0,
+              -17.0
+            ],
+            [
+              -17.0,
+              -11.0
+            ]
+          ]
+        },
+        {
+          "detector": "n7",
+          "heldout_interval": [
+            -11.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 7007,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 7087.2158,
+          "log_linear_drift_per_second": -0.00093291,
+          "train_counts": [
+            7167,
+            7127
+          ],
+          "train_intervals": [
+            [
+              -23.0,
+              -17.0
+            ],
+            [
+              -17.0,
+              -11.0
+            ]
+          ]
+        },
+        {
+          "detector": "b1",
+          "heldout_interval": [
+            -11.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 13644,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 14029.6967,
+          "log_linear_drift_per_second": 0.00307769,
+          "train_counts": [
+            13521,
+            13773
+          ],
+          "train_intervals": [
+            [
+              -23.0,
+              -17.0
+            ],
+            [
+              -17.0,
+              -11.0
+            ]
+          ]
+        }
+      ],
+      "gbm_trigger_id": "bn090510016",
+      "grb": "090510",
+      "spectral_segments": [
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 95.627112,
+            "bgo_holdout_band_plus_powerlaw_deviance": 95.627112,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00125896,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 260.364811
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00125896,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 260.364811
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.0,
+            0.25
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00202208,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 353.95001
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00202208,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 353.95001
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 109.095724,
+            "bgo_holdout_band_plus_powerlaw_deviance": 109.095724,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.01004677,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 270.601899
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.01004677,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 270.601899
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.25,
+            0.5
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00946675,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 379.595533
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00946675,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 379.595533
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 125.599498,
+            "bgo_holdout_band_plus_powerlaw_deviance": 125.599498,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.06438596,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 219.714492
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.06438596,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 219.714492
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.5,
+            0.75
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.06869169,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 337.327308
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.06869169,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 337.327308
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 128.635213,
+            "bgo_holdout_band_plus_powerlaw_deviance": 128.635213,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.03689159,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 278.366478
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.03689159,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 278.366478
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.75,
+            1.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.03722097,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 406.978044
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.03722097,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 406.978044
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 135.440053,
+            "bgo_holdout_band_plus_powerlaw_deviance": 135.440053,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00149373,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 286.264763
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00149373,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 286.264763
+            }
+          },
+          "relative_trigger_interval_s": [
+            1.0,
+            1.5
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00132295,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 421.585967
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00132295,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 421.585967
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 128.256862,
+            "bgo_holdout_band_plus_powerlaw_deviance": 128.256862,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00145718,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 289.784505
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00145718,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 289.784505
+            }
+          },
+          "relative_trigger_interval_s": [
+            1.5,
+            2.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00206624,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 414.367745
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.00206624,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 414.367745
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        }
+      ]
+    },
+    {
+      "detector_pretrigger_train_and_holdout_background": [
+        {
+          "detector": "n0",
+          "heldout_interval": [
+            -12.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 7023,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 6709.586,
+          "log_linear_drift_per_second": -0.00368684,
+          "train_counts": [
+            7065,
+            6885
+          ],
+          "train_intervals": [
+            [
+              -26.0,
+              -19.0
+            ],
+            [
+              -19.0,
+              -12.0
+            ]
+          ]
+        },
+        {
+          "detector": "n1",
+          "heldout_interval": [
+            -12.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 7620,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 7507.9974,
+          "log_linear_drift_per_second": -3.808e-05,
+          "train_counts": [
+            7512,
+            7510
+          ],
+          "train_intervals": [
+            [
+              -26.0,
+              -19.0
+            ],
+            [
+              -19.0,
+              -12.0
+            ]
+          ]
+        },
+        {
+          "detector": "b0",
+          "heldout_interval": [
+            -12.0,
+            -5.0
+          ],
+          "heldout_observed_counts": 12765,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 13280.7464,
+          "log_linear_drift_per_second": 0.00349252,
+          "train_counts": [
+            12647,
+            12960
+          ],
+          "train_intervals": [
+            [
+              -26.0,
+              -19.0
+            ],
+            [
+              -19.0,
+              -12.0
+            ]
+          ]
+        }
+      ],
+      "gbm_trigger_id": "bn090902462",
+      "grb": "090902B",
+      "spectral_segments": [
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 482.713071,
+            "bgo_holdout_band_plus_powerlaw_deviance": 482.713071,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.04978293,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 322.910269
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.04978293,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 322.910269
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.0,
+            5.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.04789622,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 785.079844
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.04789622,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 785.079844
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": false,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 1769.700899,
+            "bgo_holdout_band_plus_powerlaw_deviance": 1769.700899,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.1031404,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1652.341798
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.1031404,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1652.341798
+            }
+          },
+          "relative_trigger_interval_s": [
+            5.0,
+            10.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.10332748,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 3141.908107
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.10332748,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 3141.908107
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 650.288462,
+            "bgo_holdout_band_plus_powerlaw_deviance": 650.288462,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.13806514,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 752.388761
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.13806514,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 752.388761
+            }
+          },
+          "relative_trigger_interval_s": [
+            10.0,
+            20.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.13646733,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1390.598097
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.13646733,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1390.598097
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 628.119898,
+            "bgo_holdout_band_plus_powerlaw_deviance": 460.797248,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.03794751,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 486.001925
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.03575124,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.5,
+              "onoff_deviance": 433.117272
+            }
+          },
+          "relative_trigger_interval_s": [
+            20.0,
+            30.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.07985299,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 887.390812
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.09384585,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.5,
+              "onoff_deviance": 777.914852
+            },
+            "descriptive_deviance_improvement_not_lrt": 109.47596,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 474.329873,
+            "bgo_holdout_band_plus_powerlaw_deviance": 513.921213,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.0066065,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 380.150037
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 4.991e-05,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 361.726699
+            }
+          },
+          "relative_trigger_interval_s": [
+            30.0,
+            40.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.0065067,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 845.759034
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.0065067,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 845.759034
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        }
+      ]
+    },
+    {
+      "detector_pretrigger_train_and_holdout_background": [
+        {
+          "detector": "n6",
+          "heldout_interval": [
+            -50.0,
+            -15.0
+          ],
+          "heldout_observed_counts": 33701,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 33876.4749,
+          "log_linear_drift_per_second": 1.33e-06,
+          "train_counts": [
+            38712,
+            38714
+          ],
+          "train_intervals": [
+            [
+              -130.0,
+              -90.0
+            ],
+            [
+              -90.0,
+              -50.0
+            ]
+          ]
+        },
+        {
+          "detector": "n7",
+          "heldout_interval": [
+            -50.0,
+            -15.0
+          ],
+          "heldout_observed_counts": 42975,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 42633.8313,
+          "log_linear_drift_per_second": -3.16e-05,
+          "train_counts": [
+            48844,
+            48782
+          ],
+          "train_intervals": [
+            [
+              -130.0,
+              -90.0
+            ],
+            [
+              -90.0,
+              -50.0
+            ]
+          ]
+        },
+        {
+          "detector": "b1",
+          "heldout_interval": [
+            -50.0,
+            -15.0
+          ],
+          "heldout_observed_counts": 42604,
+          "heldout_predicted_counts_plugin_not_predictive_interval": 41735.179,
+          "log_linear_drift_per_second": 6.681e-05,
+          "train_counts": [
+            47451,
+            47578
+          ],
+          "train_intervals": [
+            [
+              -130.0,
+              -90.0
+            ],
+            [
+              -90.0,
+              -50.0
+            ]
+          ]
+        }
+      ],
+      "gbm_trigger_id": "bn130427324",
+      "grb": "130427A",
+      "spectral_segments": [
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 13043.241554,
+            "bgo_holdout_band_plus_powerlaw_deviance": 13043.241554,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.77170543,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 6434.106442
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.77170543,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 6434.106442
+            }
+          },
+          "relative_trigger_interval_s": [
+            0.0,
+            10.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.69974049,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 15116.011987
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 0.69974049,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 1000.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 15116.011987
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 1557.921668,
+            "bgo_holdout_band_plus_powerlaw_deviance": 1557.921668,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.48230833,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1971.051192
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.48230833,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1971.051192
+            }
+          },
+          "relative_trigger_interval_s": [
+            10.0,
+            20.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.49736856,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 3380.955869
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.49736856,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 400.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 3380.955869
+            },
+            "descriptive_deviance_improvement_not_lrt": 0.0,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 127.873101,
+            "bgo_holdout_band_plus_powerlaw_deviance": 130.235527,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.04024852,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1138.184414
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.00923117,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 900.729977
+            }
+          },
+          "relative_trigger_interval_s": [
+            20.0,
+            40.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.04045094,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 1265.835361
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.01481612,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 1015.545719
+            },
+            "descriptive_deviance_improvement_not_lrt": 250.289642,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 201.852801,
+            "bgo_holdout_band_plus_powerlaw_deviance": 139.118863,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.01561389,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 314.004228
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.00580111,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 293.284493
+            }
+          },
+          "relative_trigger_interval_s": [
+            40.0,
+            70.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.01575283,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 494.669796
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.00362527,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 424.84613
+            },
+            "descriptive_deviance_improvement_not_lrt": 69.823666,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 194.051787,
+            "bgo_holdout_band_plus_powerlaw_deviance": 134.488125,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.01057938,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 293.172744
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.00243064,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 275.303173
+            }
+          },
+          "relative_trigger_interval_s": [
+            70.0,
+            100.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.01072099,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 469.987265
+            },
+            "band_plus_powerlaw": {
+              "alpha": -0.6,
+              "amplitude_at_100_keV": 8.078e-05,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 2500.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 8.0,
+              "onoff_deviance": 399.852867
+            },
+            "descriptive_deviance_improvement_not_lrt": 70.134398,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        },
+        {
+          "background_extrapolation_over_30s": true,
+          "nai_train_bgo_holdout": {
+            "bgo_absolute_fit_p_value": null,
+            "bgo_holdout_band_deviance": 278.243963,
+            "bgo_holdout_band_plus_powerlaw_deviance": 236.444919,
+            "bgo_predeclared_independent_detector_evaluation": true,
+            "nai_only_best_band": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.02540965,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 340.73132
+            },
+            "nai_only_best_band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.02800775,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -3.0,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 2.0,
+              "onoff_deviance": 332.186145
+            }
+          },
+          "relative_trigger_interval_s": [
+            100.0,
+            140.0
+          ],
+          "three_detector_fit": {
+            "band_only": {
+              "alpha": -1.4,
+              "amplitude_at_100_keV": 0.02575717,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 0.0,
+              "onoff_deviance": 616.890695
+            },
+            "band_plus_powerlaw": {
+              "alpha": -1.0,
+              "amplitude_at_100_keV": 0.02019452,
+              "amplitude_fit_boundary_warning": false,
+              "beta": -2.4,
+              "epeak_keV": 150.0,
+              "extra_index": -1.8,
+              "extra_relative_flux_at_1MeV": 2.0,
+              "onoff_deviance": 497.494671
+            },
+            "descriptive_deviance_improvement_not_lrt": 119.396024,
+            "grid_is_coarse_and_fit_parameter_coverage_unvalidated": true,
+            "model_selection_significance": null,
+            "num_predeclared_shape_templates": 96
+          }
+        }
+      ]
+    }
+  ],
+  "input_manifest": "data/cosmos/COSMOS-ALI-V5-FERMI-LAT-GBM-CALDB-MANIFEST-2026-10-19.json",
+  "input_v5_manifest_sha256": "70e8aae34c101831ff5c17557bcd89e8c8545e87a936e3eaf53574c1048ab905",
+  "observed_liv_p_value": null,
+  "photons_per_energy_units": "shape_x_amplitude_ph_cm_minus2_s_minus1_keV_minus1",
+  "real_grb_instrument_aware_liv_lrt": null,
+  "result_sha256": "ca7e1bf6ac4d45d849a57e173aaa81e1b29b3602552e8cd7fb4f02cc695439fb",
+  "schema": "janus.cosmos.fermi-gbm-band-plus-powerlaw-drift-independent-holdouts.v6r1",
+  "scientific_gates": {
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "BHB_FIREWALL": "OPEN_UNCONFIRMED",
+    "GBM_INDEPENDENT_DETECTOR_VALIDATION": "BGO_HOLDOUT_DIAGNOSTIC_NOT_CALIBRATED_P",
+    "GBM_TIME_VARIABLE_BACKGROUND": "LOG_LINEAR_FIT_AND_INDEPENDENT_PRETRIGGER_HOLDOUT_PILOT",
+    "LAT_FULL_PSF_EDISP_DIFFUSE": "NOT_IMPLEMENTED_HERE",
+    "OBSERVED_MULTIBURST_LIV_P_VALUE": "BLOCKED",
+    "REAL_GBM_TTE_RSP2_FOLD": "PASS_SHA256_PINNED_BAND_PLUS_PL_PILOT",
+    "SOURCE_INTRINSIC_LAG_PRIOR": "NOT_ESTABLISHED"
+  },
+  "spectral_photon_model": "BAND_PLUS_POWERLAW_AT_1MEV_RATIO_FIXED_GRID_SIMPSON_TRUE_ENERGY_QUADRATURE"
+}
