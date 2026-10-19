@@ -68,6 +68,7 @@ def main():
     a=ap.parse_args()
     rows=sorted([r for r in json.loads(RECEIPT.read_text())["results"] if r.get("coverage") and
                  r.get("date_time_utc","").startswith("2023-10")],key=lambda r:r["date_time_utc"])
+    a.data_dir.mkdir(parents=True,exist_ok=True)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         frames=[materialize(r,a.data_dir) for r in rows]
