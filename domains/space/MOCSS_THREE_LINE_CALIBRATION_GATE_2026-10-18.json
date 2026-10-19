@@ -128,7 +128,12 @@
     "source_class": "OPEN",
     "directed_gas_trail": "NOT_DETECTED",
     "two_angle_source_aware_three_shutter_geometry": "PASS_DIAGNOSTIC",
-    "two_angle_source_aware_stage2_spectrophotometric_validity": "OPEN_NOT_VERIFIED"
+    "two_angle_source_aware_stage2_spectrophotometric_validity": "OPEN_NOT_VERIFIED",
+    "MOCSS_THREE_COLUMN_SOURCE_AWARE_MODEL": "INVALID_PHYSICAL_DISPERSION_ORIENTATION",
+    "MOCSS_FOUR_GROUP_THREE_ROW_TEST_GEOMETRY": "PASS_SOURCE_INFO_TEST_ONLY",
+    "MOCSS_THREE_ROW_CALIBRATED_SPECTRUM": "OPEN",
+    "MOCSS_FULL_ROW_BACKGROUND_4_DITHER_STACK": "NOT_PERFORMED",
+    "MOCSS_STPSF_THROUGHPUT_AND_DETECTOR_INJECTION": "NOT_PERFORMED"
   },
   "stage2_source_aware_progress_2026_10_18": {
     "status": "THREE_SHUTTER_SOURCE_INFO_GEOMETRY_WCS_OFFCENTER_PASS_NO_AUTHENTIC_SOURCE_FLUX",
@@ -161,5 +166,20 @@
     "source_redshift": null,
     "source_class": null,
     "explicit_ceiling": "Source-aware synthetic MSA copies validate software geometry, not a real source detection. True MOCSS requires custom full-row sky, all four dither stacks, wavelength-dependent transmission/PSF injection and independent spectral line significance."
+  },
+  "dispersion_axis_correction_2026_10_19": {
+    "authority": "STSci 365 MSA rows dispersion / 171 columns crossdispersion and Huberty et al. MOCSS open neighbors dispersion",
+    "incorrect_previous_axis": "Three neighboring MSA columns in previous source-aware synthetic-MSA x1d test, therefore physical MOCSS throughput interpretation INVALID",
+    "verified_corrected_axis": "Three contiguous MSA ROWS at one column per dither and detector",
+    "source_provenance_json": "domains/space/MOCSS_FOUR_GROUP_CORRECT_ROW_AXIS_GEOMETRY_2026-10-19.json",
+    "previous_diagnostic_1D_control_json": "domains/space/MOCSS_FOUR_X1D_OFFLINE_NULL_STRESS_2026-10-19.json",
+    "github_corrected_axis_run": 39223778736,
+    "four_corrected_axis_geometry_pass": true,
+    "four_corrected_axis_real_science_x1d_validated": false,
+    "physical_psf_slitloss_measured": false,
+    "actual_background_and_stack_reproduced": false,
+    "secondary_lines_confirmed": false,
+    "class_or_redshift_established": false,
+    "reason": "Corrected geometry and diagnostic off-line null control data supersede any previous claims that three neighboring columns adequately reproduce open-dispersion-shutter losses."
   }
 }
