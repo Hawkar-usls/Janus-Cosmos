@@ -104,12 +104,15 @@ def robust_row_background(sci,valid,exclude_x):
         good=np.where(allow&(np.abs(sci-med[:,None])<4*np.maximum(mad[:,None],1e-8)),sci,np.nan)
         sky=np.nanmedian(good,axis=1)
     if np.mean(np.isfinite(sky))<.95:raise RuntimeError("Too many sky rows undefined")
-    sky=np.where(np.isfinite(sky),sky,med)
+    # Missing detector sky rows must not silently poison nearby coadds.
+    finite=np.isfinite(sky)
+    sky=np.interp(np.arange(len(sky)),np.flatnonzero(finite),sky[finite])
     return sky, {"method":"FULL_DETECTOR_ROW_SIGMA_CLIPPED_MEDIAN_4MAD_PROXY",
-                 "finite_fraction":float(np.mean(np.isfinite(sky))),
-                 "median_sky_dn_per_s":float(np.median(sky)),
+                 "finite_fraction_before_interpolation":float(np.mean(finite)),
+                 "interpolated_missing_rows_count":int(np.count_nonzero(~finite)),
+                 "median_sky_dn_per_s":float(np.nanmedian(sky)),
                  "median_row_mad_dn_per_s":float(np.median(mad[np.isfinite(mad)])),
-                 "absolute_sky_peak_to_peak_dn_per_s":float(np.ptp(sky)),
+                 "absolute_sky_peak_to_peak_dn_per_s":float(np.nanmax(sky)-np.nanmin(sky)),
                  "n_sky_columns_max":sci.shape[1],
                  "physical_msa_row_projection_applied":False}
 
