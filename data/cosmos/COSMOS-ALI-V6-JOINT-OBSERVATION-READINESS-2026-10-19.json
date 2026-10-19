@@ -1,0 +1,116 @@
+{
+  "claim_ceiling": "NO_OBSERVED_LIV_P_VALUE_AND_NO_BHB_FIREWALL_INFERENCE",
+  "conditional_hypothetical_GeV_lag_prior": null,
+  "conditional_source_mimic_negative_control_SYNTHETIC_ONLY": {
+    "injected_liv_eta": 0.0,
+    "intrinsic_beta": 0.8,
+    "naive_eta_fit": {
+      "eta_mle": 0.79874261,
+      "identifiability": "CONDITIONAL_ON_ASSUMED_SOURCE_PRIOR",
+      "twice_delta_log_likelihood": 29913.461123955
+    },
+    "unconstrained_eta": {
+      "eta_mle": null,
+      "identifiability": "EXACT_DEGENERACY_BETA_PER_BURST_PLUS_ETA",
+      "twice_delta_log_likelihood": 0.0
+    }
+  },
+  "experiment_id": "JANUS-COSMOS-ALI-V6-LAT-GBM-JOINT-2026-10-19",
+  "firewall_emission_observation": null,
+  "next_gate": "V6_R1_BAND_PLUS_PL_BG_POLYNOMIAL_LAT_FULL_PSF_EDISP_FORWARD_MODEL_INJECTION_COVERAGE",
+  "observational_lattice_spacing_confidence_interval": null,
+  "observational_liv_p_value": null,
+  "observational_liv_test_statistic": null,
+  "real_GBM_forward_folding": "OGIP_RSP2_WITH_POISSON_ONOFF_CPL_GRID_PILOT",
+  "real_LAT_forward_folding": "SC_LIVETIME_NEAREST_AEFF_EXPOSURE_PROXY_NO_PSF_OR_EDISP",
+  "real_data_kind": "JOINT_READY_OBSERVATIONAL_INSTRUMENT_DIAGNOSTICS_NOT_JOINT_LIV_LIKELIHOOD",
+  "real_multiwavelength_diagnostic_pairs": [
+    {
+      "GBM_CPL_high_residual_segments": 0,
+      "GBM_CPL_high_residual_window_bounds": [],
+      "GBM_NaI_soft_band_peak_relative_trigger_s": 0.56,
+      "GBM_RSP2_time_resolved_spectral_segments": 6,
+      "GBM_peak_not_GeV_emission_start": true,
+      "LAT_ROI_candidates_not_event_source_posteriors": true,
+      "LAT_prompt_ROI_5deg_candidates": 19,
+      "LAT_prompt_exposure_proxy_at_1GeV_cm2_s": 14509.9891,
+      "LAT_prompt_ring_5to10deg_controls": 0,
+      "grb": "090510",
+      "lat_geV_minus_gbm_keV_intrinsic_emission_offset_constraint": null,
+      "prompt_window_s": [
+        0.0,
+        2.0
+      ],
+      "redshift": "0.903"
+    },
+    {
+      "GBM_CPL_high_residual_segments": 1,
+      "GBM_CPL_high_residual_window_bounds": [
+        [
+          5.0,
+          10.0
+        ]
+      ],
+      "GBM_NaI_soft_band_peak_relative_trigger_s": 13.184,
+      "GBM_RSP2_time_resolved_spectral_segments": 5,
+      "GBM_peak_not_GeV_emission_start": true,
+      "LAT_ROI_candidates_not_event_source_posteriors": true,
+      "LAT_prompt_ROI_5deg_candidates": 42,
+      "LAT_prompt_exposure_proxy_at_1GeV_cm2_s": 193584.8812,
+      "LAT_prompt_ring_5to10deg_controls": 0,
+      "grb": "090902B",
+      "lat_geV_minus_gbm_keV_intrinsic_emission_offset_constraint": null,
+      "prompt_window_s": [
+        0.0,
+        40.0
+      ],
+      "redshift": "1.822"
+    },
+    {
+      "GBM_CPL_high_residual_segments": 2,
+      "GBM_CPL_high_residual_window_bounds": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          10.0,
+          20.0
+        ]
+      ],
+      "GBM_NaI_soft_band_peak_relative_trigger_s": 6.528,
+      "GBM_RSP2_time_resolved_spectral_segments": 6,
+      "GBM_peak_not_GeV_emission_start": true,
+      "LAT_ROI_candidates_not_event_source_posteriors": true,
+      "LAT_prompt_ROI_5deg_candidates": 47,
+      "LAT_prompt_exposure_proxy_at_1GeV_cm2_s": 694391.7286,
+      "LAT_prompt_ring_5to10deg_controls": 1,
+      "grb": "130427A",
+      "lat_geV_minus_gbm_keV_intrinsic_emission_offset_constraint": null,
+      "prompt_window_s": [
+        0.0,
+        140.0
+      ],
+      "redshift": "0.34"
+    }
+  ],
+  "result_sha256": "6385eb8c57e386c64cd5c787a3217cf0656ebdbbd34531e2fecc1baaff848b49",
+  "schema": "janus.cosmos.fermi-lat-gbm-cross-instrument-readiness.v6",
+  "scientific_gates": {
+    "ACTUAL_LAT_GBM_COHORT_AND_INSTRUMENT_PROVENANCE": "PASS",
+    "AMPS_FIREWALL": "OPEN_UNCONFIRMED",
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "LORENTZ_VIOLATION": "NOT_ESTABLISHED",
+    "OBSERVED_MULTIBURST_LIV_LRT": "BLOCKED_NO_FREQUENTIST_COVERAGE_OR_VALID_SOURCE_MODEL",
+    "PHYSICAL_GE_V_SOURCE_EMISSION_PRIOR": "BLOCKED_NO_INDEPENDENT_INFORMATION",
+    "REAL_GBM_RSP2_FORWARD_FOLD": "PILOT_CPL_ONOFF_NOT_A_VALIDATED_GLOBAL_SOURCE_MODEL",
+    "REAL_LAT_FULL_IRF_LIKELIHOOD": "BLOCKED_PSF_EDISP_EXPOSURE_BACKGROUND",
+    "SPACETIME_DISCRETENESS": "NOT_ESTABLISHED"
+  },
+  "source_physics": "GEV_EMISSION_TIME_UNRECONSTRUCTED_GBM_SOFT_PEAK_NOT_PROPAGATION_BASELINE",
+  "unreconciled_response_systematics": [
+    "LAT PSF and energy dispersion not included in likelihood",
+    "GBM response-channel edge mismatches not propagated as nuisance",
+    "GBM time varying background and additional source spectral components missing"
+  ]
+}
