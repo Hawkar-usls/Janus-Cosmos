@@ -1,0 +1,117 @@
+{
+  "claim_ceiling": "SYNTHETIC_NEGATIVE_CONTROL_ONLY_NO_OBSERVATIONAL_LIV_CONSTRAINT",
+  "injection_recovery_status": "SYNTHETIC_GAUSSIAN_TOY_ONLY_NOT_INSTRUMENT_PLUS_SOURCE_COVERAGE",
+  "intrinsic_GeV_lag_prior_physically_justified": false,
+  "observed_eta_confidence_interval": null,
+  "observed_multiburst_LIV_p_value": null,
+  "pseudo_experiments_each_scenario": 2000,
+  "result_sha256": "7afb13fb39a8e1dae7d4373907d99ac97dd9bc3a02bd7618d4f0f3e7aeb2ebed",
+  "scenarios": [
+    {
+      "mean_naive_estimator_bias": 0.000379,
+      "naive_95pct_interval_empirical_coverage": 0.947,
+      "naive_model_asserts_beta_zero": true,
+      "naive_null_eta0_excluded_fraction": 0.053,
+      "not_an_observed_fermi_significance": true,
+      "pseudo_experiments": 2000,
+      "scenario": "null_no_intrinsic_delay",
+      "synthetic_intrinsic_beta": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "synthetic_true_eta": 0.0
+    },
+    {
+      "mean_naive_estimator_bias": -0.000378,
+      "naive_95pct_interval_empirical_coverage": 0.9535,
+      "naive_model_asserts_beta_zero": true,
+      "naive_null_eta0_excluded_fraction": 0.9895,
+      "not_an_observed_fermi_significance": true,
+      "pseudo_experiments": 2000,
+      "scenario": "injected_eta_without_intrinsic_delay",
+      "synthetic_intrinsic_beta": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "synthetic_true_eta": 0.5
+    },
+    {
+      "mean_naive_estimator_bias": 0.80217,
+      "naive_95pct_interval_empirical_coverage": 0.0,
+      "naive_model_asserts_beta_zero": true,
+      "naive_null_eta0_excluded_fraction": 1.0,
+      "not_an_observed_fermi_significance": true,
+      "pseudo_experiments": 2000,
+      "scenario": "adversarial_intrinsic_delay_mimics_propagation",
+      "synthetic_intrinsic_beta": [
+        0.64,
+        1.2,
+        0.24
+      ],
+      "synthetic_true_eta": 0.0
+    }
+  ],
+  "schema": "janus.cosmos.fermi-synthetic-source-lag-degeneracy-coverage-controls.v6r1",
+  "scientific_gates": {
+    "BHB_BOOM": "NOT_ESTABLISHED",
+    "BHB_FIREWALL": "OPEN_UNCONFIRMED",
+    "FULL_FERMI_INJECTION_RECOVERY_COVERAGE": "NOT_DONE",
+    "OBSERVED_LIV_TEST": "BLOCKED",
+    "PHYSICAL_INTRINSIC_GE_V_SOURCE_DELAY_PRIOR": "BLOCKED",
+    "TOY_BETA_ETA_EXACT_DEGENERACY": "PASS_ALGEBRAIC",
+    "TOY_INJECTION_COVERAGE": "PASS_SEE_CONDITIONAL_RESULTS"
+  },
+  "seed": 20261019,
+  "synthetic_dimensionless_weights_NOT_cosmology": {
+    "090510": 0.8,
+    "090902B": 1.5,
+    "130427A": 0.3
+  },
+  "synthetic_observation_errors": {
+    "090510": 0.2,
+    "090902B": 0.2,
+    "130427A": 0.3
+  },
+  "theorem": "For independent beta_j per burst, replace beta_j by beta_j+(eta_old-eta_new)*K_j; all predicted delays are unchanged, for any eta_new.",
+  "unconstrained_source_delay_exact_profile": [
+    {
+      "eta_candidate": -1.0,
+      "nuisance_intrinsic_beta_by_burst": [
+        2.0,
+        1.2,
+        1.1
+      ],
+      "profile_chisquare": 0.0
+    },
+    {
+      "eta_candidate": 0.0,
+      "nuisance_intrinsic_beta_by_burst": [
+        1.2,
+        -0.3,
+        0.8
+      ],
+      "profile_chisquare": 0.0
+    },
+    {
+      "eta_candidate": 0.5,
+      "nuisance_intrinsic_beta_by_burst": [
+        0.7999999999999999,
+        -1.05,
+        0.65
+      ],
+      "profile_chisquare": 0.0
+    },
+    {
+      "eta_candidate": 5.0,
+      "nuisance_intrinsic_beta_by_burst": [
+        -2.8,
+        -7.8,
+        -0.7
+      ],
+      "profile_chisquare": 0.0
+    }
+  ],
+  "valid_real_LAT_GBM_coverage_calibration": false
+}
