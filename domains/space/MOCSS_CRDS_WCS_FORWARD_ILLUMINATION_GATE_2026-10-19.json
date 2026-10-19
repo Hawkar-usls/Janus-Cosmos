@@ -41,9 +41,12 @@
     ],
     "physical_original_MSA_mask_coordinates_for_three_adjacent_dispersion_rows": true,
     "synthetic_nine_slit_background_only_TEST_MSAs": true,
-    "official_WCS_detector_footprints_measured": "PENDING_GITHUB_ACTIONS_RESULT",
+    "official_WCS_detector_footprints_measured": "PASS_12_ORIGINAL_OPEN_SHUTTERS_36_FINITE_ON_DETECTOR_WCS_GEOMETRIES_ONLY",
     "full_WCS_all_shutters_all_exposures": false,
-    "real_illumination_weight_map": false
+    "real_illumination_weight_map": false,
+    "measured_receipt": "domains/space/MOCSS_CRDS_GWCS_FOUR_ANCHOR_OPEN_SHUTTER_FOOTPRINT_2026-10-19.json",
+    "action_run_id": 39243207739,
+    "numeric_slit_id_error_corrected": true
   },
   "physical_forward_model_requirements": [
     {
@@ -56,7 +59,7 @@
       "step": 2,
       "operator": "P_e(xdet,ydet | q,row,column,lambda; CRDS)",
       "meaning": "Geometric NIRSpec dispersed slit-to-detector transformation with detector validity and wavelength calibration",
-      "status": "SMALL_NEIGHBOR_PILOT_PENDING"
+      "status": "GEOMETRIC_NEIGHBOR_4_ANCHOR_CRDS_GWCS_PASS_NOT_FULL_16_ALL_SHUTTERS"
     },
     {
       "step": 3,
