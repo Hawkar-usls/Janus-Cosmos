@@ -61,7 +61,7 @@ def audit_msa_open_masks(metafiles,source):
         name=("jw03290001001_05_msa.fits" if entry["orientation"]==1
               else "jw03290002001_01_msa.fits")
         file=metafiles[name]
-        idvalue=entry["source_msametid_unwrapped"]
+        idvalue=entry["source_msametid_signed16"]
         with fits.open(file,memmap=False) as f:
             rows=f["SHUTTER_INFO"].data
             names=rows.dtype.names
