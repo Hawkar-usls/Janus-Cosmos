@@ -81,7 +81,7 @@ def process(entry,dir):
             pos=(int(z["shutter_quadrant"]),int(z["shutter_row"]),int(z["shutter_column"]))
             if pos in desired:
                 assert str(z["shutter_state"]).strip()=="OPEN"
-                found[pos]=str(int(z["slitlet_id"]))
+                found[pos]=int(z["slitlet_id"])
         assert set(found)==desired,(found,desired)
     result={
         "group":group,"exposure_index":entry["exposure_index"],
@@ -103,13 +103,19 @@ def process(entry,dir):
         opens=gwcs.get_transform("gwa","slit_frame").slits
         result["official_assign_wcs_cal_step"]=str(cal.meta.cal_step.assign_wcs)
         result["official_gwcs_open_slits"]=len(opens)
-        slitnames={str(s.name) for s in opens}
+        slitnames={int(s.name) for s in opens}
+        result["official_wcs_slit_name_types"]=[type(s.name).__name__ for s in opens]
+        result["official_wcs_slit_names"]=[int(s.name) for s in opens]
         for coord,name in sorted(found.items(),key=lambda x:x[0][1]):
             out={"quadrant":coord[0],"row":coord[1],"column":coord[2],
-                 "test_virtual_slit_name":name,"wcs_slit_exists":name in slitnames,
+                 "test_virtual_slit_name":str(name),"official_numeric_slit_id":int(name),
+                 "wcs_slit_exists":name in slitnames,
                  "lines":{}}
             if name in slitnames:
-                sw=nrs_wcs_set_input(cal,name)
+                # New 1.19.x WCS stores numeric integer slit_ids. Passing
+                # the string representation fails membership even when the
+                # original slit is present (see instrument GWCS source).
+                sw=nrs_wcs_set_input(cal,int(name))
                 mapper=sw.get_transform("slit_frame","detector")
                 for label,w in WAVES.items():
                     try:out["lines"][label]=finite_transform(mapper,w)
