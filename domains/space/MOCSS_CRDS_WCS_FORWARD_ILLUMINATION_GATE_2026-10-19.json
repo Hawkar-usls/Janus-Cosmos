@@ -46,7 +46,10 @@
     "real_illumination_weight_map": false,
     "measured_receipt": "domains/space/MOCSS_CRDS_GWCS_FOUR_ANCHOR_OPEN_SHUTTER_FOOTPRINT_2026-10-19.json",
     "action_run_id": 39243207739,
-    "numeric_slit_id_error_corrected": true
+    "numeric_slit_id_error_corrected": true,
+    "all16_near_source_3_original_open_shutter_3_lambda": "PASS_144_CENTERS_OFFICIAL_CRDS_GWCS",
+    "all16_near_source_receipt": "domains/space/MOCSS_CRDS_GWCS_ALL16_OPEN_NEIGHBOR_FOOTPRINT_2026-10-19.json",
+    "all16_run_id": 39243558142
   },
   "physical_forward_model_requirements": [
     {
@@ -59,7 +62,7 @@
       "step": 2,
       "operator": "P_e(xdet,ydet | q,row,column,lambda; CRDS)",
       "meaning": "Geometric NIRSpec dispersed slit-to-detector transformation with detector validity and wavelength calibration",
-      "status": "GEOMETRIC_NEIGHBOR_4_ANCHOR_CRDS_GWCS_PASS_NOT_FULL_16_ALL_SHUTTERS"
+      "status": "GEOMETRIC_ALL16_THREE_OPEN_NEIGHBOR_CENTERS_CRDS_GWCS_PASS_NOT_ALL_OPEN_SHUTTERS"
     },
     {
       "step": 3,
