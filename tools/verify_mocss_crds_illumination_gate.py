@@ -11,7 +11,7 @@ g=json.loads((p/"MOCSS_CRDS_WCS_FORWARD_ILLUMINATION_GATE_2026-10-19.json").read
 e=json.loads((p/"MOCSS_ORIGINAL_MSA_16_EXPOSURE_TOPOLOGY_2026-10-19.json").read_text())
 assert g["schema"]=="janus-mocss-physical-detector-illumination-forward-operator-gate-v1"
 assert g["real_CRDS_GWCS_pilot"]["input_original_exposure_indices"]==[1,8,10,13]
-assert g["real_CRDS_GWCS_pilot"]["official_WCS_detector_footprints_measured"]=="PENDING_GITHUB_ACTIONS_RESULT"
+assert g["real_CRDS_GWCS_pilot"]["official_WCS_detector_footprints_measured"].startswith("PASS_12_ORIGINAL_OPEN_SHUTTERS_36_FINITE")
 assert g["real_CRDS_GWCS_pilot"]["full_WCS_all_shutters_all_exposures"] is False
 assert len(g["physical_forward_model_requirements"])==8
 assert g["physical_forward_model_requirements"][0]["status"]=="ORIGINAL_COMMAND_APERTURE_MASK_VERIFIED"
@@ -25,4 +25,4 @@ assert g["scientific_status"]["full_physical_calibration"]=="OPEN"
 for key in ("full_source_flux_at_16004","OIII_15850_detected","Pa_gamma_13656_detected",
             "source_redshift","source_class","gas_trail"):
     assert g["scientific_status"][key] is None
-print("PASS: shutter plane verified, CRDS footprint pending, physical forward illumination/line flux still OPEN")
+print("PASS: original shutter plane and 4 anchor 36 CRDS geometries, physical forward illumination/line flux OPEN")
