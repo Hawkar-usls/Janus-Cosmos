@@ -23,7 +23,7 @@ from fit_mocss_calibrated_three_lines import CENTER_ANGSTROM, line_fit, read_x1d
 EXPECTED_SHA={
   "A":"79eb00de3556ee94ecb67901cf621479371a26467603fc1bfeb1251071a6bcbb",
   "B":"47430bc196e9562a21ab9617b7e79d01c47ba9b9fa0a801994251335b56db6d7",
-  "C":"e18a6afa000e006985dcc8c6f582500d4ebff0de17149fff382839a8",
+  "C":"e18a6afa000e006985dcc8c6f582500d4ebff262badff0de17149fff382839a8",
   "D":"dd780aacbff407dfe0a03a209be6a464a51816904caca3cf487a3c88f4d93fec",
 }
 ORIGINAL_RUN_ID=39223778736
