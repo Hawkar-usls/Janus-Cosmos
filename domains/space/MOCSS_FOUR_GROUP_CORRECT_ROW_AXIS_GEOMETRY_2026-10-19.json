@@ -1,0 +1,100 @@
+{
+  "schema": "janus-mocss-four-group-dispersion-row-source-info-archive-proof-v1",
+  "date_utc": "2026-10-19",
+  "status": "FOUR_ORIGINAL_ARCHIVAL_RATE_MSA_INPUTS_SHA_PASS_CORRECTED_THREE_DISPERSION_ADJACENT_ROWS_DIAGNOSTIC_ONLY",
+  "workflow_run_id": 39223778736,
+  "workflow_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/39223778736",
+  "geometry_artifact_id": 12172339294,
+  "source_json_sha256": {
+    "AC": "193ef08a4a0325e613547e49b9718f592f781ea01fa72b16f5b41e0ef0d5b3fa",
+    "BD": "06a0ec4d0e1af85d58da0993ab00933b1bb61909b94fee55225a1777b01a35aa"
+  },
+  "code_fix_sha": "af6f239a95ebbae974e3cd29e080377e75e28895",
+  "method": "REAL_ARCHIVE_RATE_PLUS_MSA_SHA_VERIFIED__SYNTHETIC_TEST_SOURCE_INFO__THREE_ADJACENT_DISPERSION_ROWS_WITH_SOURCE_IN_PRIMARY_ROW",
+  "frozen_source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "source_in_original_MPT": false,
+  "original_archive_modified": false,
+  "rows_dispersion_direction": true,
+  "columns_crossdispersion": true,
+  "groups": [
+    {
+      "group": "A",
+      "exposure_index": 1,
+      "detector": "nrs2",
+      "quadrant": 2,
+      "rows": [
+        83,
+        84,
+        85
+      ],
+      "column": 89,
+      "source_row": 84,
+      "original_rate_sha256": "840c7d51819f6be61a51d7c4d1fd4ffcd18ebde36d3966332ac949588bdb4675",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "test_msa_sha256": "870954a021480266421430e04c760b19b09e50c65e599e01364fdf24b8056598"
+    },
+    {
+      "group": "B",
+      "exposure_index": 8,
+      "detector": "nrs2",
+      "quadrant": 2,
+      "rows": [
+        164,
+        165,
+        166
+      ],
+      "column": 93,
+      "source_row": 165,
+      "original_rate_sha256": "f11dfe517d42267c4605a4e23fab107607a6dc28e03bf76772bad9920cf74ff9",
+      "original_msa_sha256": "fb6239b287d25c478d2e22737ff956850a9bc1e0f365500cfc5661abbfe17a44",
+      "test_msa_sha256": "1270b8890fc1edb46c34195a84c29b14986b3005786518773987af280e39c954"
+    },
+    {
+      "group": "C",
+      "exposure_index": 10,
+      "detector": "nrs1",
+      "quadrant": 4,
+      "rows": [
+        170,
+        171,
+        172
+      ],
+      "column": 108,
+      "source_row": 171,
+      "original_rate_sha256": "9af02b780399d954f6bdb0fb7498d99e3c8f37cf22e7891bf4f5515387ce1b14",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "test_msa_sha256": "78ac0deebc48188a0acc5eb565a6fb209ceefea33430c8881895a346f0cf008a"
+    },
+    {
+      "group": "D",
+      "exposure_index": 13,
+      "detector": "nrs1",
+      "quadrant": 4,
+      "rows": [
+        245,
+        246,
+        247
+      ],
+      "column": 107,
+      "source_row": 246,
+      "original_rate_sha256": "043f3f0e6f84f2668913778c2beb42ce1bb864d1060143175e78974033b29e7f",
+      "original_msa_sha256": "25a061a226521a8bbf2f30d3f6922a22fb13437800047f12c8511e354820c91e",
+      "test_msa_sha256": "b6fe17caa839419fd5adfe16b88e25aad09f28e0546bc8c1cf9794bf340c9125"
+    }
+  ],
+  "pipeline_stage2_status": "IN_PROGRESS_OR_NOT_YET_VERIFIED_IN_THIS_RECEIPT",
+  "source_shutter_PSF_throughput_verified": false,
+  "full_16_exposure_four_stacks_done": false,
+  "custom_full_row_background_science_valid": false,
+  "physical_injection_recovery_done": false,
+  "absolute_flux_16004_cgs": null,
+  "companion_OIII_15850_cgs": null,
+  "companion_Pagamma_13656_cgs": null,
+  "source_class": null,
+  "redshift": null,
+  "directed_trail": null,
+  "past_three_column_x1d_flux_assumptions": "SUPERSEDED_AND_INVALID_FOR_DISPERSION_AXIS"
+}
