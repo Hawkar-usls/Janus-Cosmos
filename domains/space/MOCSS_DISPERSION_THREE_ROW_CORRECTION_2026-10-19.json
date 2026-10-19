@@ -1,0 +1,111 @@
+{
+  "schema": "janus-mocss-dispersion-direction-shutter-axis-correction-v1",
+  "date_utc": "2026-10-19",
+  "science_status": "PREVIOUS_THREE_COLUMN_X1D_IS_WRONG_AXIS_FOR_MOCSS_THROUGHPUT_NO_ASTROPHYSICAL_FLUX",
+  "source_bases": [
+    {
+      "url": "https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph/nirspec-instrumentation/nirspec-micro-shutter-assembly",
+      "rule": "365 shutter rows along dispersion; 171 shutter columns along cross-dispersion"
+    },
+    {
+      "url": "https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph/nirspec-observing-modes/nirspec-multi-object-spectroscopy",
+      "rule": "single open shutter 0.20 by 0.46 arcsec; pitch 0.27 by 0.53 arcsec; bar 0.07 arcsec"
+    },
+    {
+      "url": "https://arxiv.org/html/2610.12553v1",
+      "rule": "MOCSS authors use neighboring open shutters along dispersion; their throughput model is STPSF three-shutter 1.6 um with quoted bar-only loss ~3.3 percent"
+    }
+  ],
+  "frozen_science_sky_position": {
+    "ra_deg": 53.13127,
+    "dec_deg": -27.78908
+  },
+  "previous_diagnostic_geometries": {
+    "earlier_method": "fixed shutter row; three neighboring COLUMNS",
+    "artifacts": [
+      "domains/space/MOCSS_THREE_SHUTTER_SOURCE_AWARE_GEOMETRY_2026-10-18.json",
+      "domains/space/MOCSS_TWO_PA_OFFCENTER_SOURCE_INFO_2026-10-18.json",
+      "domains/space/MOCSS_BD_DIAGNOSTIC_X1D_SUCCESS_2026-10-19.json"
+    ],
+    "previous_run_with_all_four_diag_x1d": 39172038085,
+    "scientific_reuse_allowed": "ONLY_AS_WRONG_AXIS_INSTRUMENT_SOFTWARE_STRESS_CONTROL",
+    "physical_throughput_reproduction_valid": false,
+    "source_absolute_flux_valid": false
+  },
+  "corrected_geometry": {
+    "physical_dispersion_axis": "MSA_SHUTTER_ROW",
+    "cross_dispersion_axis": "MSA_SHUTTER_COLUMN",
+    "three_adjacent_shutters": "same quadrant and column; rows source_row-1, source_row, source_row+1",
+    "test_center_source_id": 16004,
+    "original_archival_rate_or_msa_mutated": false,
+    "source_metadata_synthetic_not_original_MPT": true,
+    "per_group_sample_geometry": [
+      {
+        "group": "A",
+        "exposure": 1,
+        "detector": "NRS2",
+        "quad": 2,
+        "column": 89,
+        "rows": [
+          83,
+          84,
+          85
+        ]
+      },
+      {
+        "group": "B",
+        "exposure": 8,
+        "detector": "NRS2",
+        "quad": 2,
+        "column": 93,
+        "rows": [
+          164,
+          165,
+          166
+        ]
+      },
+      {
+        "group": "C",
+        "exposure": 10,
+        "detector": "NRS1",
+        "quad": 4,
+        "column": 108,
+        "rows": [
+          170,
+          171,
+          172
+        ]
+      },
+      {
+        "group": "D",
+        "exposure": 13,
+        "detector": "NRS1",
+        "quad": 4,
+        "column": 107,
+        "rows": [
+          245,
+          246,
+          247
+        ]
+      }
+    ],
+    "source_position_xy_offset_from_original_sky_wcs_not_measured_PSF": true,
+    "reference_script": "tools/attempt_mocss_source_aware_stage2.py",
+    "code_fix_commit": "af6f239a95ebbae974e3cd29e080377e75e28895",
+    "pipeline_may_reject_nonstandard_dispersion_triplet": true,
+    "original_MPT_source_claim": false
+  },
+  "scientific_gates": {
+    "three_shutter_physical_axis_specification": "CORRECTED_PASS",
+    "real_three_dispersion_row_source_aware_pipeline": "RUN_IN_PROGRESS_OR_NOT_VERIFIED",
+    "source_aware_background_reproduction": "NOT_PERFORMED",
+    "four_dither_per_group_stacking": "NOT_PERFORMED",
+    "point_source_STPSF_3shutter_wavelength_dependent_loss": "NOT_PERFORMED",
+    "calibrated_flux_16004": "NOT_MEASURED",
+    "calibrated_OIII_15850p793": "NOT_MEASURED",
+    "calibrated_Pa_gamma_13656p748": "NOT_MEASURED",
+    "source_identification": "OPEN",
+    "redshift": "OPEN",
+    "directed_trail": "NOT_DETECTED"
+  }
+}
