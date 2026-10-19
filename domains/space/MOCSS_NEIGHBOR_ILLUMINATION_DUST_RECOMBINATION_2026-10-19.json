@@ -1,0 +1,128 @@
+{
+  "schema": "janus-mocss-conditional-source-cloud-path-dust-time-v1",
+  "observed_line_wavelength_A": 16004,
+  "source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "scientific_status": "CONDITIONAL_PHYSICS_BOUNDS_NOT_SOURCE_OR_TRAIL_IDENTIFICATION",
+  "hypothesis": "Pa beta at z about 0.249, possibly dense-gas Type IIn or off-nuclear AGN illuminated cloud",
+  "line_model": {
+    "Pa_beta_vacuum_rest_A_approx_paper": 12818,
+    "z": 0.24856,
+    "luminosity_distance_gpc_conditional": 1.293,
+    "proper_kpc_per_arcsec_conditional": 4.02,
+    "observed_line_flux_erg_s_cm2_from_paper": 2.5e-18,
+    "observed_line_luminosity_erg_s_conditional": 5.000898187437927e+38
+  },
+  "geometry": {
+    "NORTHWEST": {
+      "separation_arcsec": 0.6351589087890674,
+      "galaxy_to_line_east_and_north_arcsec": [
+        0.33440520244515426,
+        -0.5399999999923466
+      ],
+      "candidate_illumination_bearing_deg_east_of_north": 148.23135518874523,
+      "projected_distance_kpc_if_shared_z": 2.5533388133320507,
+      "minimum_direct_light_travel_years_if_shared_z": 8327.877384399495,
+      "galaxy_photometric_redshift": "0.22 +3.11/-0.09; highly ambiguous",
+      "path_is_measured": false,
+      "association_is_measured": false
+    },
+    "EAST": {
+      "separation_arcsec": 1.0040725037227547,
+      "galaxy_to_line_east_and_north_arcsec": [
+        -1.0000307958915782,
+        0.09000000000298769
+      ],
+      "candidate_illumination_bearing_deg_east_of_north": 275.1426070361175,
+      "projected_distance_kpc_if_shared_z": 4.036371464965473,
+      "minimum_direct_light_travel_years_if_shared_z": 13164.882961323634,
+      "galaxy_photometric_redshift": "6.03 +0.04/-0.29",
+      "path_is_measured": false,
+      "association_is_measured": false
+    },
+    "SOUTH": {
+      "separation_arcsec": 1.0379063956108765,
+      "galaxy_to_line_east_and_north_arcsec": [
+        -0.09872915500934111,
+        1.0332000000005337
+      ],
+      "candidate_illumination_bearing_deg_east_of_north": 354.54157940004626,
+      "projected_distance_kpc_if_shared_z": 4.172383710355723,
+      "minimum_direct_light_travel_years_if_shared_z": 13608.49557413968,
+      "galaxy_photometric_redshift": "0.19 +2.60/-0.03; highly ambiguous",
+      "path_is_measured": false,
+      "association_is_measured": false
+    }
+  },
+  "dust_model": {
+    "Pa_beta_rest_um_approx": 1.2818,
+    "Pa_gamma_rest_um_approx": 1.0938,
+    "assumed_caseB_intrinsic_Pa_beta_over_Pa_gamma": 1.6,
+    "expected_Pa_gamma_erg_s_cm2_if_no_dust": 1.5625e-18,
+    "published_global_three_sigma_line_limit_range_erg_s_cm2_NOT_VERIFIED_AT_Pagamma": [
+      8.2e-19,
+      1.06e-18
+    ],
+    "law": "CCM89 near-IR extinction at Rv3.1: A(lambda)/A(V)=(0.574-0.527/Rv)*(1/lambda_um)^1.61",
+    "A_Pabeta_divided_by_Av": 0.2708886038365861,
+    "A_Pagamma_divided_by_Av": 0.34969652402853063,
+    "delta_A_Pagamma_minus_Pabeta_divided_by_Av": 0.07880792019194455,
+    "limits": [
+      {
+        "assumed_Pagamma_3sigma_limit_erg_s_cm2": 1.06e-18,
+        "required_minimal_differential_attenuation_mag": 0.4212854018783565,
+        "required_Av_mag_IF_CaseB_CCM_and_limit_hold": 5.345724146155284,
+        "intrinsic_Pabeta_luminosity_lower_erg_s_IF_dust_screen": 1.897956756252667e+39
+      },
+      {
+        "assumed_Pagamma_3sigma_limit_erg_s_cm2": 8.2e-19,
+        "required_minimal_differential_attenuation_mag": 0.7000154340809903,
+        "required_Av_mag_IF_CaseB_CCM_and_limit_hold": 8.882551809209442,
+        "intrinsic_Pabeta_luminosity_lower_erg_s_IF_dust_screen": 4.586916519133457e+39
+      }
+    ]
+  },
+  "time_model": {
+    "spectral_epoch_dates_from_paper": [
+      "2023-08-23",
+      "2023-11-19"
+    ],
+    "intermediate_imaging_dates_from_archived_F150W": [
+      "2023-10-01",
+      "2023-10-02",
+      "2023-10-03",
+      "2023-10-09"
+    ],
+    "non_detection_F150W_measured_matched_aperture_njy": 0.27849716735074215,
+    "non_detection_F150W_covariance_sigma_njy_diagnostic": 0.662980825637632,
+    "line_only_F150W_expected_total_njy_if_persistent_reported_paper": 5.5,
+    "spectroscopy_Aug_to_first_Oct_imaging_days": 39,
+    "last_Oct_imaging_to_spectroscopy_Nov_days": 41,
+    "shortest_rest_frame_fade_or_rebrighten_timescale_days_if_real": 31.23598385339912,
+    "assumed_H_caseB_recombination_alpha_cm3_s_T10000K": 2.6e-13,
+    "electron_density_at_least_cm_minus3_for_recombination_response_on_this_rest_timescale": 1425140.6238585724,
+    "comparison_recombination_times_years": {
+      "100": 1218.7726082318825,
+      "10000": 12.187726082318825,
+      "1000000": 0.12187726082318827
+    },
+    "critical_warning": "This density follows ONLY IF the October aperture non-detection is a genuine large, rapid fade at constant sky coordinates, and IF Case-B recombination dominates the response. It is not a measured density nor a proven variability event."
+  },
+  "separation_vs_time_delay_warning": "Projected physical separation constrains straight source-to-cloud path below, NOT directly the difference in observed light arrival times: 3D echo-delay geometry is unknown.",
+  "evidence_inputs": {
+    "source_paper": "https://arxiv.org/html/2610.12553v1",
+    "dust_extinction_law": "Cardelli, Clayton, Mathis (1989) ApJ 345,245; https://adsabs.harvard.edu/pdf/1989ApJ...345..245C",
+    "case_B_recombination_coefficient": "Hydrogen T=10^4 K alpha_B=2.6e-13 cm^3/s",
+    "nircam_contemporaneous_diagnostic": "domains/space/NIRCAM_F150W_MATCHED_SKY_COVARIANCE_OBSERVED_2026-10-18.json"
+  },
+  "not_demonstrated": [
+    "Association between MOCSS emitter and any neighboring galaxy",
+    "Measured emission beaming axis, shock direction, or gas filament",
+    "Uniform source and gas redshift, physical distance, or 3D orientation",
+    "Valid science-grade MOCSS line flux or Pa-gamma line limit re-extracted independently",
+    "True 2023 October turn-off and on, pending NIRCam PSF injection and covariance calibration",
+    "Case-B recombination ratio or CCM89 dust screen necessarily applies to shocked, dense supernova gas"
+  ]
+}
