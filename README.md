@@ -327,6 +327,18 @@ python3 -m unittest discover -s tests -p 'test_cosmos_fermi_raw_v4.py' -v
 - `archive/` — pointer to the preserved pre-OSIRIS astronomy repository state.
 - `run_osiris.py` — single canonical OSIRIS entrypoint.
 
+## V5 — real LAT CALDB and GBM pulse audit (2026-10-19)
+
+JANUS Cosmos V5 verifies all nine `P8R3_SOURCE_V3` LAT CALDB Aeff/PSF/EDISP tabular files and 27 NASA GBM TTE/CSPEC/RSP2 FITS files for GRB 090510, 090902B, and 130427A. The nine real TTE detector files contain **6,962,621 GBM events**; the 175 V4 LAT SOURCE-region candidates remain frozen. Real 25–100/100–300/300–3000 keV channel-overlap prompt counts and exact GBM trigger times are recorded; mismatch in some CSPEC/TTE/RSP2 channel edges is preserved as a systematic caveat.
+
+- [V5 method, reproducibility and limitations](docs/JANUS-COSMOS-FERMI-LAT-GBM-V5-2026-10-19.md)
+- `workspace/janus_cosmos_fermi_calibration_v5.py` — strict source-hash verification, instrument FITS/IRF table checks and GBM time-binned pulse diagnostics.
+- `workspace/janus_cosmos_fermi_joint_v5.py` — synthetic-only intrinsic-source-lag prior sensitivity and exact nonidentifiability gates.
+- `data/cosmos/COSMOS-ALI-V5-*` — pinned source manifest, real GBM pulse/IRF receipt, and separate synthetic likelihood receipt.
+- `tests/test_cosmos_fermi_calibration_v5.py` — adversarial checks and nonpromotion assertions. All **87** local offline tests pass.
+
+**Science gate:** genuine joint LAT/GBM forward-folded observational Lorentz-invariance test **not yet implemented**. No observed LIV, spacetime discreteness, AMPS firewall or BHB Boom detection is claimed.
+
 ## Historical/source firewall
 
 `S𓂸ḥ` is a modern project alias/overlay. It is not claimed to be an ancient Egyptian spelling or SAT terminology. Historical Pyramid Text material was heuristic semantic/operator inspiration only. Correctness and authority come from executable CNF mechanics, exact replay, current verification and certificates.
