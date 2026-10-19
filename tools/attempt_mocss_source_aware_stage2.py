@@ -50,21 +50,28 @@ def prepare_source_aware(entry,base):
     with fits.open(source_msa,memmap=False,mode="update") as f:
         shutter=f["SHUTTER_INFO"]
         rows=shutter.data
+        # The instrument has 365 shutter ROWS along dispersion and 171
+        # COLUMNS cross-dispersion. MOCSS flux-loss modeling requires
+        # neighboring open shutters along DISPERSION (three ROWS), not
+        # the three columns of a standard MOS spatial slitlet.
         selected=rows[(rows["shutter_quadrant"]==where["quadrant"])&
-                      (rows["shutter_row"]==target_r)&
-                      (np.abs(rows["shutter_column"].astype(int)-target_c)<=1)]
+                      (rows["shutter_column"]==target_c)&
+                      (np.abs(rows["shutter_row"].astype(int)-target_r)<=1)]
         assert len(selected)==3,[(v["shutter_row"],v["shutter_column"]) for v in selected]
-        assert set(map(int,selected["shutter_column"]))==set(range(target_c-1,target_c+2))
+        assert set(map(int,selected["shutter_row"]))==set(range(target_r-1,target_r+2))
+        assert set(map(int,selected["shutter_column"]))=={int(target_c)}
         new=np.array(selected,dtype=rows.dtype,copy=True)
-        # Three adjacent columns cross the dispersion/slit axis in MSA
-        # metadata: only the central shutter contains the alleged source.
+        # These are three adjacent ROWS along the physical dispersion
+        # direction. The artificial source is assigned to the central row.
+        # This non-standard source pattern may be REJECTED by a pipeline
+        # designed for spatial three-shutter MOS slitlets.
         new["slitlet_id"]=1
         new["source_id"]=SOURCE_ID
         new["estimated_source_in_shutter_x"]=np.nan
         new["estimated_source_in_shutter_y"]=np.nan
         for i in range(len(new)):
-            central=int(new[i]["shutter_column"])==target_c
-            new[i]["background"]="N" if central else "Y"
+            central=int(new[i]["shutter_row"])==target_r
+            new[i]["background"]="N"
             new[i]["primary_source"]="Y" if central else "N"
             if central:
                 new[i]["estimated_source_in_shutter_x"]=sky_position_x
@@ -89,8 +96,11 @@ def prepare_source_aware(entry,base):
         sources=f["SOURCE_INFO"].data
         assert len(sh)==3 and len(sources)==1
         assert sum(sh["primary_source"]=="Y")==1
-        assert sum(sh["background"]=="N")==1
-        center=sh[sh["background"]=="N"][0]
+        assert sum(sh["background"]=="N")==3
+        assert set(map(int,sh["shutter_row"]))==set(range(target_r-1,target_r+2))
+        assert set(map(int,sh["shutter_column"]))=={int(target_c)}
+        center=sh[sh["primary_source"]=="Y"][0]
+        assert int(center["shutter_row"])==int(target_r)
         assert abs(float(center["estimated_source_in_shutter_x"])-sky_position_x)<1e-6
         assert abs(float(center["estimated_source_in_shutter_y"])-sky_position_y)<1e-6
         assert int(sources[0]["source_id"])==SOURCE_ID
@@ -108,8 +118,10 @@ def prepare_source_aware(entry,base):
         "source_ra_dec_deg":[RA,DEC],
         "synthetic_source_position_WCS_fractional":[sky_position_x,sky_position_y],
         "source_position_method":"0.5 + sky WCS slit_x/slit_y from pinned original jwst_1413.pmap projection at 16004 Angstrom; this is not measured PSF centering",
-        "three_shutter_cols":list(range(target_c-1,target_c+2)),
-        "shutter_row":target_r,"shutter_quadrant":where["quadrant"],
+        "three_shutter_rows_along_dispersion":list(range(target_r-1,target_r+2)),
+        "shutter_column":target_c,"shutter_row":target_r,
+        "shutter_quadrant":where["quadrant"],
+        "geometry_science_gate":"PHYSICAL_MOCSS_THREE_DISPERSION_ADJACENT_ROWS_DIAGNOSTIC_NOT_ORIGINAL_MPT",
         "source_metadata_inserted_in_test_copy_only":True,
         "group_wcs_16004_original_slit_x":det["sky_registered_trace"]["16004A"]["slit_x"],
         "group_wcs_16004_original_slit_y":det["sky_registered_trace"]["16004A"]["slit_y"],
