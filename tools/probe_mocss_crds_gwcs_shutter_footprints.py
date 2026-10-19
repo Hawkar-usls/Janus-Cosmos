@@ -115,7 +115,16 @@ def process(entry,dir):
                     except Exception as exc:
                         out["lines"][label]={"status":"EXCEPTION","exception":type(exc).__name__,"details":str(exc)[:600]}
             result["samples_by_shutter"].append(out)
-        result["status"]="OFFICIAL_CRDS_ASSIGN_WCS_CALL_RETURNED"
+        primary_nearest=next((sh for sh in result["samples_by_shutter"] if
+            sh["row"]==proposal["row"] and sh["column"]==proposal["column"]),None)
+        if primary_nearest is None:
+            result["status"]="NO_MATCHING_SOURCE_NEIGHBOR_IN_OFFICIAL_WCS"
+        elif primary_nearest["lines"].get("primary",{}).get("status")!="FINITE_GWCS_SAMPLE":
+            result["status"]="NO_FINITE_SOURCE_NEIGHBOR_CRDS_DETECTOR_PROJECTION"
+        elif not primary_nearest["lines"]["primary"]["on_detector_center"]:
+            result["status"]="PRIMARY_SOURCE_SHUTTER_WCS_CENTER_OFF_DETECTOR"
+        else:
+            result["status"]="OFFICIAL_CRDS_WCS_SOURCE_NEIGHBOR_ON_DETECTOR"
         cal.close()
     except Exception as exc:
         result["status"]="WCS_EXECUTION_FAILURE"
@@ -155,7 +164,7 @@ def main():
         row=process(all_e[i-1],a.data_dir)
         obj["records"].append(row)
         a.output.write_text(json.dumps(obj,indent=2,allow_nan=False)+"\n")
-    if any(q["status"]=="WCS_EXECUTION_FAILURE" for q in obj["records"]):
-        raise SystemExit("Official JWST assign_wcs failed; consult artifact and fix actual blocker")
+    if any(q["status"]!="OFFICIAL_CRDS_WCS_SOURCE_NEIGHBOR_ON_DETECTOR" for q in obj["records"]):
+        raise SystemExit("Official CRDS WCS missing finite source-neighbor detector footprint; consult artifact, no false green")
     print("GWCS_APERTURE_WAVELENGTH_FOOTPRINT_ONLY; FULL_DETECTOR_ILLUMINATION_UNCALIBRATED",flush=True)
 if __name__=="__main__":main()
