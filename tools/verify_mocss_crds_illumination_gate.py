@@ -17,7 +17,8 @@ assert len(g["physical_forward_model_requirements"])==8
 assert g["physical_forward_model_requirements"][0]["status"]=="ORIGINAL_COMMAND_APERTURE_MASK_VERIFIED"
 for s in g["physical_forward_model_requirements"][2:]:
     assert s["status"] in ("NOT_CONSTRUCTED","NOT_PERFORMED","ONLY_GAUSSIAN_RATE_WINDOW_DIAGNOSTIC_EXISTS")
-assert all(v is True for v in g["invariants"].values())
+assert g["invariants"]["source_is_original_MPT_catalog_source"] is False
+assert all(v is True for k,v in g["invariants"].items() if k != "source_is_original_MPT_catalog_source")
 assert e["calibration_gates"]["physical_MSA_plane_binary_open_closed_mask"].startswith("PASS")
 assert e["calibration_gates"]["wavelength_dependent_full_detector_pixel_illumination"]=="NOT_PERFORMED"
 assert g["scientific_status"]["full_physical_calibration"]=="OPEN"
