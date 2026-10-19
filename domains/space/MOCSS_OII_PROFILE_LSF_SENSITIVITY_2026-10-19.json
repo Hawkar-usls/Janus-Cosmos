@@ -6,7 +6,7 @@
     "single_gaussian_fwhm_A": 13.2,
     "fwhm_1sigma_A": 2.0,
     "reported_flux_erg_s_cm2": 2.5e-18,
-    "observed_ew_lower_bound_A": 7620.0
+    "reported_observed_ew_bound_if_persistent_A": 7620.0
   },
   "oii_rest_vacuum_A": [
     3727.092,
@@ -23,6 +23,7 @@
     "Published Gaussian-fit FWHM approximated by Gaussian-equivalent second moment",
     "The true local MOCSS line-spread function and slitless source morphology are UNMEASURED",
     "Ratio endpoints are idealized density limits, not an astrophysical likelihood prior",
+    "EW bound combines non-contemporaneous continuum imaging and line spectroscopy: not a transient-EW bound",
     "No noise covariance or profile-fitting likelihood enters heuristic differences"
   ],
   "ratio_cases": [
@@ -32,7 +33,7 @@
       "redshift_if_oii": 3.2931332,
       "expected_observed_doublet_separation_A": 11.94779,
       "doublet_only_second_moment_equivalent_fwhm_A": 12.3295,
-      "rest_equivalent_width_lower_bound_A": 1774.9,
+      "rest_ew_lower_bound_if_persistent_A": 1774.9,
       "minimum_effective_resolving_power_required": {
         "published_plus_0sigma": 3394.9,
         "published_plus_1sigma": 1800.3,
@@ -83,7 +84,7 @@
       "redshift_if_oii": 3.2923618,
       "expected_observed_doublet_separation_A": 11.94564,
       "doublet_only_second_moment_equivalent_fwhm_A": 14.0649,
-      "rest_equivalent_width_lower_bound_A": 1775.2,
+      "rest_ew_lower_bound_if_persistent_A": 1775.2,
       "minimum_effective_resolving_power_required": {
         "published_plus_0sigma": null,
         "published_plus_1sigma": 2776.8,
@@ -134,7 +135,7 @@
       "redshift_if_oii": 3.2920414,
       "expected_observed_doublet_separation_A": 11.94475,
       "doublet_only_second_moment_equivalent_fwhm_A": 13.7797,
-      "rest_equivalent_width_lower_bound_A": 1775.4,
+      "rest_ew_lower_bound_if_persistent_A": 1775.4,
       "minimum_effective_resolving_power_required": {
         "published_plus_0sigma": null,
         "published_plus_1sigma": 2494.6,
@@ -185,6 +186,7 @@
     "oii_identified": false,
     "redshift_or_distance_measured": false,
     "spatial_trail_measured": false,
+    "reported_ew_bound_applies_to_transient": false,
     "decisive_next_test": "Measure effective MOCSS LSF on a compact known narrow line at the same detector wavelength and fit convolved [O II] doublet directly to all original A-D spectra with injection-calibrated uncertainties"
   },
   "primary_references": [
