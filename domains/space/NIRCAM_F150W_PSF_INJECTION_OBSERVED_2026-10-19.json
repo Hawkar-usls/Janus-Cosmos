@@ -1,0 +1,874 @@
+{
+  "schema": "janus-cosmos-actual-f150w-mast-pixels-analytic-psf-injection-v3",
+  "status": "REAL_ARCHIVE_PIXEL_INJECTION_APPROXIMATE_PSF_NOT_CALIBRATED_PHYSICAL_IDENTIFICATION",
+  "source_ra_dec_deg": [
+    53.13127,
+    -27.78908
+  ],
+  "science_primary_source": "https://arxiv.org/html/2610.12553v1",
+  "stscI_official_psf_source": "https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-performance/nircam-point-spread-functions",
+  "method": {
+    "original_i2d_sci_pixel_data": true,
+    "all_four_original_sci_sha256_verified": true,
+    "observed_image_pixel_values_edited_on_disk": false,
+    "formal_stpsf_or_extracted_field_psf": false,
+    "analytic_psf_bracket": "Moffat and core+halo Gaussian mixture, each exactly calibrated at official i2d F150W EE50 and EE80 radii",
+    "i2d_pixel_subsamples_per_axis": 7,
+    "aperture_arcsec": 0.12,
+    "background_annulus_arcsec": [
+      0.24,
+      0.38
+    ],
+    "target_subpixel_centers_x_y_in_sci_stripe": [
+      [
+        6036.68782833892,
+        250.16066858303793
+      ],
+      [
+        7985.224452009065,
+        250.0867396303347
+      ],
+      [
+        6058.237579522361,
+        250.85044532469738
+      ],
+      [
+        4211.427625121729,
+        250.26626005591606
+      ]
+    ],
+    "sky_control_grid": "0.9 arcsec matched coordinates inside 5.4 arcsec, bright-sky positions jointly clipped, 95 positions",
+    "source_light_profile_assumption": "unresolved point source, equal observed total flux at all four Oct2023 epochs",
+    "injection_is_in_synthetic_local_pixel_stamps": "Equivalent to inserting 2D PSF pixel-integrals into original SCI images before existing aperture and local-background estimator; original images stay unchanged",
+    "wcs_pixel_scales_arcsec": [
+      0.031228002958102595,
+      0.03122795752955211,
+      0.031227931325000374,
+      0.031227737829863364
+    ],
+    "unproven_assumptions": [
+      "Pointlike emission",
+      "Absolute JWST NIRSpec line flux from paper is correct",
+      "NIRCam synthetic photometry 5.5nJy from NIRSpec line alone is correct",
+      "Official global F150W encircled-energy anchors describe these mosaics",
+      "Sky-control sample approximates target noise and confusion despite spatial correlations"
+    ]
+  },
+  "input_epochs": [
+    {
+      "product": "jw01180-o014_t023_nircam_clear-f150w_i2d.fits",
+      "utc_date": "2023-10-01",
+      "original_sci_subset_sha256": "6cb9a632f1304baee322e17a39e7d7de0001b1f4140a7e1d24c0261e71df89b3"
+    },
+    {
+      "product": "jw01180-o016_t013_nircam_clear-f150w_i2d.fits",
+      "utc_date": "2023-10-02",
+      "original_sci_subset_sha256": "688546072ff3580bda934cd3113b25734bc015bbcdc76a5286f1a45668db655d"
+    },
+    {
+      "product": "jw01180-o013_t011_nircam_clear-f150w_i2d.fits",
+      "utc_date": "2023-10-03",
+      "original_sci_subset_sha256": "66890a937ce87b0035c5ba8b4364ffe329ed606bdaee4885d032686b2e95f3fb"
+    },
+    {
+      "product": "jw01180-o024_t020_nircam_clear-f150w_i2d.fits",
+      "utc_date": "2023-10-09",
+      "original_sci_subset_sha256": "567130cdcec20e7ed80866c0a95d46fbb04901b03ef422bb49a9281ea9b95d91"
+    }
+  ],
+  "matched_sky_controls": 95,
+  "matched_control_aperture_central_njy": [
+    -0.030058041685330064,
+    -0.0322264687477501,
+    -0.07399338914665608,
+    -0.00577163756902923
+  ],
+  "fixed_weights": [
+    0.23361207014205473,
+    0.27433515775384826,
+    0.3310594604251588,
+    0.16099331167893824
+  ],
+  "original_target_epoch_local_background_subtracted_njy": [
+    0.5531762051970882,
+    0.3615032215903302,
+    0.5536595244659938,
+    -0.5093645624609477
+  ],
+  "original_target_weighted_with_this_grid_centered_njy": 0.370979798701665,
+  "measured_matched_sky_covariance_sigma_njy": 0.6629810259046014,
+  "note_different_baseline": "0.371nJy target value here uses exactly the 95 clipped matched-grid control medians. Previously published 0.278nJy uses separate first-stage per-epoch control medians; do not compare/mix conventions.",
+  "profiles": {
+    "moffat": {
+      "psf_parameters": [
+        1.555151927512766,
+        0.03235007613445726
+      ],
+      "official_anchor_ee": {
+        "r0.051_arcsec": 0.5,
+        "r0.134_arcsec": 0.8
+      },
+      "model_predicted_ee_at_aperture_radius": 0.7756206693153052,
+      "target_injections_njy": {
+        "1.1": {
+          "target_epoch_aperture_njy": [
+            1.3880079929713538,
+            1.2008981687890448,
+            1.3921995575779567,
+            0.34421285677590135
+          ],
+          "incremental_aperture_njy": [
+            0.8348317877742656,
+            0.8393949471987145,
+            0.8385400331119629,
+            0.853577419236849
+          ],
+          "target_epoch_recovery_fractions": [
+            0.758937988885696,
+            0.763086315635195,
+            0.7623091210108753,
+            0.775979472033499
+          ],
+          "weighted_aperture_increment_njy": 0.8403291938241242,
+          "weighted_aperture_recovery_fraction": 0.7639356307492038,
+          "weighted_centered_target_after_injection_njy": 1.2113089925257892
+        },
+        "2.5": {
+          "target_epoch_aperture_njy": [
+            2.450521177411355,
+            2.2692190106783423,
+            2.459300704884482,
+            1.4305841176227923
+          ],
+          "incremental_aperture_njy": [
+            1.8973449722142668,
+            1.907715789088012,
+            1.9056411804184883,
+            1.93994868008374
+          ],
+          "target_epoch_recovery_fractions": [
+            0.7589379888857067,
+            0.7630863156352048,
+            0.7622564721673953,
+            0.775979472033496
+          ],
+          "weighted_aperture_increment_njy": 1.909795502128735,
+          "weighted_aperture_recovery_fraction": 0.763918200851494,
+          "weighted_centered_target_after_injection_njy": 2.2807753008304
+        },
+        "5.5": {
+          "target_epoch_aperture_njy": [
+            4.727335144068472,
+            4.55847795758394,
+            4.738928688057544,
+            3.7585225337232933
+          ],
+          "incremental_aperture_njy": [
+            4.174158938871384,
+            4.19697473599361,
+            4.18526916359155,
+            4.267887096184241
+          ],
+          "target_epoch_recovery_fractions": [
+            0.7589379888857061,
+            0.7630863156352018,
+            0.7609580297439181,
+            0.7759794720334984
+          ],
+          "weighted_aperture_increment_njy": 4.199185865618611,
+          "weighted_aperture_recovery_fraction": 0.7634883392033839,
+          "weighted_centered_target_after_injection_njy": 4.570165664320276
+        }
+      },
+      "astrometric_miscentering_stress_test_flux_5p5_njy": [
+        {
+          "injected_offset_arcsec": 0.025,
+          "min_recovery_fraction": 0.7531665188816881,
+          "median_recovery_fraction": 0.7546935519632636,
+          "max_recovery_fraction": 0.7572085833146484,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.7560198947604287
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.7572085833146484
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.7561119699577049
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.7541632876954182
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.7531665188816881
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.753856831136299
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.754641572841419
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.7547455310851081
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.05,
+          "min_recovery_fraction": 0.7217839204545057,
+          "median_recovery_fraction": 0.7248223091443653,
+          "max_recovery_fraction": 0.7318254375646245,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.7275883317983456
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.7318254375646245
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.728708077848263
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.7231582919569903
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.7217839204545057
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.7246300277337765
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.725014590554954
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.7233204271640974
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.075,
+          "min_recovery_fraction": 0.6498282766866432,
+          "median_recovery_fraction": 0.6597673201942478,
+          "max_recovery_fraction": 0.6734252178577977,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.6630558555264802
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.6734252178577977
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.6667634097126762
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.6530046155030829
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.6511651850614102
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.6595425993360872
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.6599920410524084
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.6498282766866432
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.1,
+          "min_recovery_fraction": 0.49560043968553713,
+          "median_recovery_fraction": 0.5222677716349409,
+          "max_recovery_fraction": 0.5456716197132638,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.5269595051788288
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.5456716197132638
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.5375931705917579
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.5012509596893632
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.502261290525346
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.518232807094697
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.5263027361751846
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.49560043968553713
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.15,
+          "min_recovery_fraction": 0.10745719788190657,
+          "median_recovery_fraction": 0.12614343902999564,
+          "max_recovery_fraction": 0.13894495763379014,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.1306821398678843
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.13894495763379014
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.1385831606621589
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.10745719788190657
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.11498086695784684
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.12758827055620556
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.12469860750378574
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.11276132607100257
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.2,
+          "min_recovery_fraction": -0.00173391429180848,
+          "median_recovery_fraction": 0.0028209566428994805,
+          "max_recovery_fraction": 0.009957129304030315,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.005868851761190863
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.009957129304030315
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.0005593252040673016
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": -0.00173391429180848
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.0094781713623949
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.0017313663566642006
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.0039105469291347604
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.001299144233807455
+            }
+          ]
+        }
+      ],
+      "matched_control_injections_5p5_njy": {
+        "num_matched_positions": 95,
+        "weighted_recovery_fraction_quantiles": {
+          "0": 0.7614683103766727,
+          "5": 0.7636521779698756,
+          "16": 0.764487167206714,
+          "50": 0.7666408443765304,
+          "84": 0.7690776014809592,
+          "95": 0.7704681928680994,
+          "100": 0.7718825166501412
+        },
+        "injected_weighted_centered_njy_quantiles": {
+          "0": 2.5860303693013122,
+          "5": 3.33202601887804,
+          "16": 3.6484674089265647,
+          "50": 4.132078567970292,
+          "84": 4.825379765210844,
+          "95": 5.255766911063275,
+          "100": 6.587748986402943
+        },
+        "injected_control_positions_at_or_below_uninjected_target": 0,
+        "injected_control_positions_exceed_uninjected_target": 95,
+        "warning": "Sky control positions are spatially correlated; fractions are descriptive, not calibrated p-values."
+      },
+      "nominal_flux_5p5_diagnostic": {
+        "original_spectral_flux_inferred_f150w_total_njy": 5.5,
+        "spectral_model_bandpass_flux_1sigma_njy": 0.66,
+        "observed_weighted_centered_aperture_njy": 0.370979798701665,
+        "counterfactual_persistent_source_weighted_aperture_njy": 4.199185865618611,
+        "counterfactual_source_plus_observed_target_njy": 4.570165664320276,
+        "model_difference_over_empirical_matched_sky_covariance_sd_NOT_formal_significance": 6.333794937628949,
+        "model_difference_over_empirical_sd_and_spectral_model_uncertainty_NOT_formal_significance": 5.04259350977414
+      }
+    },
+    "two_gaussian": {
+      "psf_parameters": [
+        0.033975979387786744,
+        0.16298324007284454,
+        0.72
+      ],
+      "official_anchor_ee": {
+        "r0.051_arcsec": 0.5,
+        "r0.134_arcsec": 0.8
+      },
+      "model_predicted_ee_at_aperture_radius": 0.7850698274494498,
+      "target_injections_njy": {
+        "1.1": {
+          "target_epoch_aperture_njy": [
+            1.3909537477062968,
+            1.2033873527522976,
+            1.4021167589588062,
+            0.35000989210450023
+          ],
+          "incremental_aperture_njy": [
+            0.8377775425092086,
+            0.8418841311619674,
+            0.8484572344928124,
+            0.859374454565448
+          ],
+          "target_epoch_recovery_fractions": [
+            0.7616159477356441,
+            0.765349210147243,
+            0.7713247586298294,
+            0.7812495041504073
+          ],
+          "weighted_aperture_increment_njy": 0.845916695614665,
+          "weighted_aperture_recovery_fraction": 0.7690151778315135,
+          "weighted_centered_target_after_injection_njy": 1.2168964943163298
+        },
+        "2.5": {
+          "target_epoch_aperture_njy": [
+            2.4572160745361904,
+            2.274876246958402,
+            2.476621191447163,
+            1.4437591979151096
+          ],
+          "incremental_aperture_njy": [
+            1.904039869339102,
+            1.9133730253680719,
+            1.9229616669811693,
+            1.9531237603760574
+          ],
+          "target_epoch_recovery_fractions": [
+            0.7616159477356408,
+            0.7653492101472288,
+            0.7691846667924678,
+            0.7812495041504229
+          ],
+          "weighted_aperture_increment_njy": 1.9207667004564355,
+          "weighted_aperture_recovery_fraction": 0.7683066801825742,
+          "weighted_centered_target_after_injection_njy": 2.2917464991581005
+        },
+        "5.5": {
+          "target_epoch_aperture_njy": [
+            4.742063917743136,
+            4.5690506764727346,
+            4.7741386652094775,
+            3.7875077103663664
+          ],
+          "incremental_aperture_njy": [
+            4.188887712546047,
+            4.207547454882405,
+            4.220479140743484,
+            4.296872272827314
+          ],
+          "target_epoch_recovery_fractions": [
+            0.761615947735645,
+            0.7650086281604372,
+            0.7673598437715424,
+            0.7812495041504207
+          ],
+          "weighted_aperture_increment_njy": 4.221850169046516,
+          "weighted_aperture_recovery_fraction": 0.7676091216448211,
+          "weighted_centered_target_after_injection_njy": 4.592829967748181
+        }
+      },
+      "astrometric_miscentering_stress_test_flux_5p5_njy": [
+        {
+          "injected_offset_arcsec": 0.025,
+          "min_recovery_fraction": 0.760283531334921,
+          "median_recovery_fraction": 0.7618334423242255,
+          "max_recovery_fraction": 0.7638400506683691,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.7624114770416474
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.7638400506683691
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.7634062008082025
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.7613136388064614
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.760283531334921
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.7614142610471838
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.7618925778089853
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.7617743068394656
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.05,
+          "min_recovery_fraction": 0.7303561056787331,
+          "median_recovery_fraction": 0.7344792751364501,
+          "max_recovery_fraction": 0.7427689166792814,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.7365846439594059
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.7427689166792814
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.7397705438690402
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.7318357654311047
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.73075564133151
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.7342970685623267
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.7346614817105734
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.7303561056787331
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.075,
+          "min_recovery_fraction": 0.6415751816972226,
+          "median_recovery_fraction": 0.6577607509277442,
+          "max_recovery_fraction": 0.676052176408973,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.6623760140332285
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.676052176408973
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.6666268266426586
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.6453664071319222
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.6478095855873625
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.65895050687647
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.6565709949790184
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.6415751816972226
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.1,
+          "min_recovery_fraction": 0.47361683029086293,
+          "median_recovery_fraction": 0.5044228776613713,
+          "max_recovery_fraction": 0.5312122233671672,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.5124743667152942
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.5312122233671672
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.5170055938364259
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.4788112653417049
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.4862054705353568
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.507242468517815
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.5016032868049277
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.47361683029086293
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.15,
+          "min_recovery_fraction": 0.11423400538653122,
+          "median_recovery_fraction": 0.1362205665299387,
+          "max_recovery_fraction": 0.15354339050538474,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.1445023399740271
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.15354339050538474
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.14721633343318863
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": 0.11423400538653122
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.12317121270913027
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.13816829981143483
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.13427283324844252
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": 0.11632125121116502
+            }
+          ]
+        },
+        {
+          "injected_offset_arcsec": 0.2,
+          "min_recovery_fraction": -0.010965689155301024,
+          "median_recovery_fraction": 0.0021511903961172613,
+          "max_recovery_fraction": 0.007028771872939817,
+          "all_eight_position_angles": [
+            {
+              "position_angle_deg_east_of_north": 0,
+              "effective_recovery_fraction": 0.006379631310871236
+            },
+            {
+              "position_angle_deg_east_of_north": 45,
+              "effective_recovery_fraction": 0.007028771872939817
+            },
+            {
+              "position_angle_deg_east_of_north": 90,
+              "effective_recovery_fraction": 0.0020322278469963066
+            },
+            {
+              "position_angle_deg_east_of_north": 135,
+              "effective_recovery_fraction": -0.010965689155301024
+            },
+            {
+              "position_angle_deg_east_of_north": 180,
+              "effective_recovery_fraction": 0.005282360697124351
+            },
+            {
+              "position_angle_deg_east_of_north": 225,
+              "effective_recovery_fraction": 0.0005422893019145805
+            },
+            {
+              "position_angle_deg_east_of_north": 270,
+              "effective_recovery_fraction": 0.0022701529452382155
+            },
+            {
+              "position_angle_deg_east_of_north": 315,
+              "effective_recovery_fraction": -0.0016473644145528327
+            }
+          ]
+        }
+      ],
+      "matched_control_injections_5p5_njy": {
+        "num_matched_positions": 95,
+        "weighted_recovery_fraction_quantiles": {
+          "0": 0.7655436462624384,
+          "5": 0.7683017890294657,
+          "16": 0.7691231351954491,
+          "50": 0.7713320356666159,
+          "84": 0.7740648989663272,
+          "95": 0.7751677102253036,
+          "100": 0.7779641605210585
+        },
+        "injected_weighted_centered_njy_quantiles": {
+          "0": 2.614566688015415,
+          "5": 3.353421244927213,
+          "16": 3.68319917583754,
+          "50": 4.146234075766218,
+          "84": 4.854707458510835,
+          "95": 5.270754865000109,
+          "100": 6.626285800671881
+        },
+        "injected_control_positions_at_or_below_uninjected_target": 0,
+        "injected_control_positions_exceed_uninjected_target": 95,
+        "warning": "Sky control positions are spatially correlated; fractions are descriptive, not calibrated p-values."
+      },
+      "nominal_flux_5p5_diagnostic": {
+        "original_spectral_flux_inferred_f150w_total_njy": 5.5,
+        "spectral_model_bandpass_flux_1sigma_njy": 0.66,
+        "observed_weighted_centered_aperture_njy": 0.370979798701665,
+        "counterfactual_persistent_source_weighted_aperture_njy": 4.221850169046516,
+        "counterfactual_source_plus_observed_target_njy": 4.592829967748181,
+        "model_difference_over_empirical_matched_sky_covariance_sd_NOT_formal_significance": 6.367980385692083,
+        "model_difference_over_empirical_sd_and_spectral_model_uncertainty_NOT_formal_significance": 5.059793323908929
+      },
+      "intrinsic_extended_emission_stress_test_5p5_njy": [
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.0,
+          "aperture_recovered_fraction": 0.7676091216448211,
+          "predicted_centered_aperture_njy_if_persistent": 4.221850169046516,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 6.367980385692083
+        },
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0.03,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.07064460135092848,
+          "aperture_recovered_fraction": 0.7416972042968832,
+          "predicted_centered_aperture_njy_if_persistent": 4.079334623632858,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 6.153018660023985
+        },
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0.06,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.14128920270185696,
+          "aperture_recovered_fraction": 0.5948809042565029,
+          "predicted_centered_aperture_njy_if_persistent": 3.271844973410766,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 4.935050696128916
+        },
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0.1,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.23548200450309495,
+          "aperture_recovered_fraction": 0.3525516270150208,
+          "predicted_centered_aperture_njy_if_persistent": 1.9390339485826142,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 2.924720124436304
+        },
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0.15,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.3532230067546424,
+          "aperture_recovered_fraction": 0.16433584568805035,
+          "predicted_centered_aperture_njy_if_persistent": 0.903847151284277,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 1.3633077206863151
+        },
+        {
+          "intrinsic_angular_gaussian_sigma_arcsec": 0.2,
+          "intrinsic_angular_gaussian_fwhm_arcsec": 0.4709640090061899,
+          "aperture_recovered_fraction": 0.08126983563792028,
+          "predicted_centered_aperture_njy_if_persistent": 0.4469840960085616,
+          "conditional_model_difference_over_matched_covariance_sd_not_formal_significance": 0.6742034515975419
+        }
+      ]
+    }
+  },
+  "scientific_limits": {
+    "official_or_field_specific_instrument_psf_injection": false,
+    "validated_confidence_or_false_negative_probability": false,
+    "calibrated_spec2_nirspec_line_flux": false,
+    "2023_october_source_intrinsic_variability_confirmed": false,
+    "source_class": null,
+    "redshift": null,
+    "unique_host": null,
+    "direction_of_physical_propagation": null,
+    "directed_gas_trail": null,
+    "interpretation": "If the reported NIRSpec line generated 5.5 nJy of persistent unresolved F150W emission in Oct2023, both instrument-EE-anchored approximate PSFs predict an aperture excess over the observed flux; this does not identify the line emitter or prove a transient."
+  }
+}
