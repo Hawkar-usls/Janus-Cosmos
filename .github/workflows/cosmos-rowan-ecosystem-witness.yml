@@ -1,0 +1,85 @@
+name: JANUS Cosmos Rowan TOPA AURA Demiurge Witness
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/rowan_cosmos_bridge.py'
+      - 'tests/test_rowan_cosmos_bridge.py'
+      - '.github/workflows/cosmos-rowan-ecosystem-witness.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/rowan_cosmos_bridge.py'
+      - 'tests/test_rowan_cosmos_bridge.py'
+      - '.github/workflows/cosmos-rowan-ecosystem-witness.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-cosmos-rowan-evidence-witness
+  cancel-in-progress: false
+
+jobs:
+  read-only-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: ${{ github.event_name == 'pull_request' && 'read' || 'write' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: ${{ github.event_name != 'pull_request' }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline source and authority adversarial tests
+        run: |
+          python -m py_compile tools/rowan_cosmos_bridge.py tests/test_rowan_cosmos_bridge.py
+          python -m unittest discover -v -s tests -p 'test_rowan_cosmos_bridge.py'
+      - name: Verify independent public source bindings, with no provider API or credits
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python tools/rowan_cosmos_bridge.py --out "$RUNNER_TEMP/rowan-cosmos-witness.json"
+          else
+            python tools/rowan_cosmos_bridge.py --persist-root . --out "$RUNNER_TEMP/rowan-cosmos-witness.json"
+          fi
+      - name: Preserve no-secret scientific evidence packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: cosmos-rowan-witness-${{ github.run_id }}
+          path: ${{ runner.temp }}/rowan-cosmos-witness.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Commit immutable witness receipt and latest source pointer
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'JANUS Cosmos Evidence Witness'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/integrations/rowan/
+          if git diff --cached --quiet; then
+            echo 'COSMOS_ROWAN_ARCHIVE=IDEMPOTENT_NO_CHANGE'
+            exit 0
+          fi
+          git commit -m 'Cosmos: archive source-bound Rowan scientific witness'
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo 'COSMOS_ROWAN_ARCHIVE=CONFLICT_HOLD'
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo 'COSMOS_ROWAN_ARCHIVE=PERSISTED'
+              exit 0
+            fi
+            sleep "$attempt"
+          done
+          echo 'COSMOS_ROWAN_ARCHIVE=PUSH_FAILED'
+          exit 1
