@@ -60,7 +60,7 @@ def acquire() -> dict[str, bytes]:
     c = parse_payload(raw["coordination"], "coordination")
     receipt_path = c.get("receipt_path")
     require(isinstance(receipt_path, str) and re.fullmatch(
-        r"data/rowan/coordination/receipts/ROWAN-COUNCIL-[0-9]+-[0-9a-f]{16}\\.json",
+        r"data/rowan/coordination/receipts/ROWAN-COUNCIL-[0-9]+-[0-9a-f]{16}\.json",
         receipt_path), "UNSAFE_OR_MISSING_COORDINATION_RECEIPT_PATH")
     raw["receipt"] = fetch_public("janus-meta-registry", receipt_path)
     return raw
