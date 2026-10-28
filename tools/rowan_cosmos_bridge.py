@@ -31,6 +31,12 @@ class GateHold(ValueError):
 def digest(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
+def semantic_digest(payload: bytes) -> str:
+    """SHA-256 of the source protocol's sorted compact JSON, not file bytes."""
+    obj = parse_payload(payload, "semantic")
+    return digest(json.dumps(obj, sort_keys=True, separators=(",", ":")).encode())
+
+
 def require(condition: bool, reason: str) -> None:
     if not condition:
         raise GateHold(reason)
@@ -75,7 +81,7 @@ def reconcile(raw: dict[str, bytes]) -> dict:
     require(c.get("schema_id") == "janus.rowan.observer_state.v1" and
             type(run) is int and run > 0 and type(count) is int and 0 <= count <= 8,
             "CANONICAL_IDENTITY_OR_PROGRESS")
-    source_sha = digest(raw["canonical"])
+    source_sha = semantic_digest(raw["canonical"])
     require(HEX64.fullmatch(str(c.get("underlying_state_is_derived_from", ""))) is not None,
             "CANONICAL_SOURCE_ARTIFACT_UNATTESTED")
     require(a.get("schema_id") == "janus.aura.rowan_hypothesis_packet.v1", "AURA_SCHEMA")
@@ -96,7 +102,7 @@ def reconcile(raw: dict[str, bytes]) -> dict:
     require(ds.get("meta_registry", {}).get("canonical_run") == run and
             ds.get("meta_registry", {}).get("sha256") == source_sha and
             ds.get("meta_registry", {}).get("source_artifact_sha256") == c["underlying_state_is_derived_from"] and
-            ds.get("aura_oracle", {}).get("packet_sha256") == digest(raw["aura"]) and
+            ds.get("aura_oracle", {}).get("packet_sha256") == semantic_digest(raw["aura"]) and
             ds.get("aura_oracle", {}).get("packet_digest") == a.get("packet_digest_sha256"),
             "DEMIURGE_AURA_BINDING_DRIFT")
     require(d.get("gates", {}).get("rowan_job_submission_new") is False and
@@ -114,7 +120,7 @@ def reconcile(raw: dict[str, bytes]) -> dict:
             rs.get("rowan_source_artifact_sha256") == c["underlying_state_is_derived_from"] and
             rs.get("aura_packet_sha256") == digest(raw["aura"]) and
             rs.get("aura_packet_digest") == a.get("packet_digest_sha256") and
-            rs.get("demiurge_council_sha256") == digest(raw["demiurge"]),
+            rs.get("demiurge_council_sha256") == semantic_digest(raw["demiurge"]),
             "IMMUTABLE_RECEIPT_SOURCE_DRIFT")
     authority = r.get("authority", {})
     require(all(authority.get(key) is False for key in
