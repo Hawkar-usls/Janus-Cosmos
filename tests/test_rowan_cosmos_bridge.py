@@ -42,7 +42,7 @@ def fixture():
         "last_completed_mutants": 8,
         "underlying_state_is_derived_from": "b" * 64,
     }
-    csha = b.digest(encoded(canonical))
+    csha = b.semantic_digest(encoded(canonical))
     aura = {
         "schema_id": "janus.aura.rowan_hypothesis_packet.v1",
         "source": {"state_sha256": csha, "upstream_run": 12345,
@@ -61,7 +61,7 @@ def fixture():
         "sources": {"meta_registry": {
             "canonical_run": 12345, "sha256": csha,
             "source_artifact_sha256": "b" * 64},
-            "aura_oracle": {"packet_sha256": b.digest(encoded(aura)),
+            "aura_oracle": {"packet_sha256": b.semantic_digest(encoded(aura)),
                             "packet_digest": "c" * 64}},
         "next_independent_control": "external holdout",
     }
@@ -80,7 +80,7 @@ def fixture():
             "rowan_source_artifact_sha256": "b" * 64,
             "aura_packet_sha256": b.digest(encoded(aura)),
             "aura_packet_digest": "c" * 64,
-            "demiurge_council_sha256": b.digest(encoded(demi)),
+            "demiurge_council_sha256": b.semantic_digest(encoded(demi)),
         },
         "authority": {
             "new_credit_spend": False,
