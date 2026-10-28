@@ -118,7 +118,7 @@ def reconcile(raw: dict[str, bytes]) -> dict:
     require(rs.get("meta_canonical_run") == run and
             rs.get("meta_canonical_sha256") == source_sha and
             rs.get("rowan_source_artifact_sha256") == c["underlying_state_is_derived_from"] and
-            rs.get("aura_packet_sha256") == digest(raw["aura"]) and
+            rs.get("aura_packet_sha256") == semantic_digest(raw["aura"]) and
             rs.get("aura_packet_digest") == a.get("packet_digest_sha256") and
             rs.get("demiurge_council_sha256") == semantic_digest(raw["demiurge"]),
             "IMMUTABLE_RECEIPT_SOURCE_DRIFT")
