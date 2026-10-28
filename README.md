@@ -29,6 +29,15 @@ In short:
 COSMOS = SPACE + EARTH + OCEAN + ATMOSPHERE + THEIR COUPLINGS
 ```
 
+## Rowan / TOPA / AURA / Demiurge — independent evidence bridge
+
+Cosmos now has a **read-only, no-credit** scientific-source witness that validates
+the shared Rowan canonical run, TOPA shadow replay, AURA hypotheses, Demiurge
+research council and immutable Meta Registry coordination receipt. It archives
+SHA-bound evidence separately from Cosmos physical/OSIRIS gates; protein results
+**never** become astronomical or SAT proof. See
+[Rowan ecosystem integration](docs/ROWAN_ECOSYSTEM_INTEGRATION.md).
+
 ## Ocean / Cousteau domain
 
 The ocean branch lives on `janus-echo-cousteau` and extends JANUS into marine observation and calibration: multibeam, sidescan, bathymetry, hydroacoustics, navigation, sound-speed profiles, seafloor morphology, instrument-failure controls, synthetic replay and blind target discrimination.
