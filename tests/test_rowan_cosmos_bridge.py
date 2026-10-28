@@ -78,7 +78,7 @@ def fixture():
             "meta_canonical_run": 12345,
             "meta_canonical_sha256": csha,
             "rowan_source_artifact_sha256": "b" * 64,
-            "aura_packet_sha256": b.digest(encoded(aura)),
+            "aura_packet_sha256": b.semantic_digest(encoded(aura)),
             "aura_packet_digest": "c" * 64,
             "demiurge_council_sha256": b.semantic_digest(encoded(demi)),
         },
