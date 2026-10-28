@@ -24,16 +24,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  read-only-witness:
+  validate-and-witness:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     permissions:
-      contents: ${{ github.event_name == 'pull_request' && 'read' || 'write' }}
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: ${{ github.event_name != 'pull_request' }}
-          fetch-depth: 1
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -41,22 +40,34 @@ jobs:
         run: |
           python -m py_compile tools/rowan_cosmos_bridge.py tests/test_rowan_cosmos_bridge.py
           python -m unittest discover -v -s tests -p 'test_rowan_cosmos_bridge.py'
-      - name: Verify independent public source bindings, with no provider API or credits
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            python tools/rowan_cosmos_bridge.py --out "$RUNNER_TEMP/rowan-cosmos-witness.json"
-          else
-            python tools/rowan_cosmos_bridge.py --persist-root . --out "$RUNNER_TEMP/rowan-cosmos-witness.json"
-          fi
-      - name: Preserve no-secret scientific evidence packet
+      - name: Independently validate exact public source bindings; no Rowan API or credits
+        run: python tools/rowan_cosmos_bridge.py --out "$RUNNER_TEMP/rowan-cosmos-witness.json"
+      - name: Preserve no-secret scientific witness artifact
         uses: actions/upload-artifact@v4
         with:
           name: cosmos-rowan-witness-${{ github.run_id }}
           path: ${{ runner.temp }}/rowan-cosmos-witness.json
           retention-days: 14
           if-no-files-found: error
-      - name: Commit immutable witness receipt and latest source pointer
-        if: github.event_name != 'pull_request'
+
+  archive:
+    if: github.event_name != 'pull_request'
+    needs: validate-and-witness
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Revalidate sources and create deterministic immutable Cosmos archive
+        run: python tools/rowan_cosmos_bridge.py --persist-root .
+      - name: Publish source-bound receipt; fail closed on divergent upstream
         shell: bash
         run: |
           set -euo pipefail
