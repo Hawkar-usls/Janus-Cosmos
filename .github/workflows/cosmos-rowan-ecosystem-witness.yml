@@ -1,7 +1,7 @@
 name: JANUS Cosmos Rowan TOPA AURA Demiurge Witness
 on:
   workflow_run:
-    workflows: ['JANUS Cosmos Observer Pages']
+    workflows: ['JANUS Cosmos Observer Pages', 'JANUS Beetle Memory Receiver']
     types: [completed]
     branches: [main]
   workflow_dispatch:

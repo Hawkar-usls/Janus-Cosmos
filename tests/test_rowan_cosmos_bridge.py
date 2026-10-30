@@ -171,5 +171,16 @@ class CosmosWitness(unittest.TestCase):
         self.assertNotIn("rowan_api_key", repr(b.SOURCES).lower())
 
 
+    def test_trusted_receiver_wakes_cosmos_without_bypassing_source_gates(self):
+        workflow = (Path(__file__).resolve().parents[1] /
+                    ".github/workflows/cosmos-rowan-ecosystem-witness.yml").read_text()
+        self.assertIn("JANUS Beetle Memory Receiver", workflow)
+        self.assertIn("github.event.workflow_run.conclusion == 'success'", workflow)
+        self.assertIn("github.event.workflow_run.head_branch == 'main'", workflow)
+        self.assertIn("github.event.workflow_run.head_repository.full_name == github.repository", workflow)
+        self.assertIn("cron: '47 * * * *'", workflow)
+        self.assertIn("Independent", workflow)
+        self.assertIn("contents: read", workflow)
+
 if __name__ == "__main__":
     unittest.main()
