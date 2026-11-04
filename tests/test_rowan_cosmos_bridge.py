@@ -182,5 +182,64 @@ class CosmosWitness(unittest.TestCase):
         self.assertIn("Independent", workflow)
         self.assertIn("contents: read", workflow)
 
+    def test_transient_git_cohort_drift_recovers_with_full_reread(self):
+        broken = fixture()
+        council = json.loads(broken["demiurge"])
+        council["sources"]["aura_oracle"]["packet_sha256"] = "0" * 64
+        broken["demiurge"] = encoded(council)
+        requested = [broken, fixture()]
+        calls = []
+        def acquire_next():
+            return requested.pop(0)
+        packet = b.reconcile_bounded(acquirer=acquire_next,
+                                    sleeper=lambda seconds: calls.append(seconds))
+        self.assertEqual(packet["canonical_rowan_run"], 12345)
+        self.assertEqual(calls, [2])
+        self.assertFalse(requested)
+
+    def test_persistent_cohort_drift_still_holds_after_strict_budget(self):
+        broken = fixture()
+        council = json.loads(broken["demiurge"])
+        council["sources"]["aura_oracle"]["packet_sha256"] = "0" * 64
+        broken["demiurge"] = encoded(council)
+        hits = []
+        delays = []
+        def acquirer():
+            hits.append(1)
+            return broken
+        with self.assertRaisesRegex(b.GateHold, "DEMIURGE_AURA_BINDING_DRIFT"):
+            b.reconcile_bounded(acquirer=acquirer,
+                                sleeper=lambda seconds: delays.append(seconds))
+        self.assertEqual(len(hits), 3)
+        self.assertEqual(delays, [2, 4])
+
+    def test_any_authority_violation_is_not_retried(self):
+        broken = fixture()
+        council = json.loads(broken["demiurge"])
+        council["gates"]["rowan_job_submission_new"] = True
+        broken["demiurge"] = encoded(council)
+        attempts = []
+        with self.assertRaisesRegex(b.GateHold, "DEMIURGE_SPEND_OR_MODEL_PROMOTION"):
+            b.reconcile_bounded(acquirer=lambda: (attempts.append(1), broken)[1],
+                                sleeper=lambda x: self.fail("Unsafe retry"))
+        self.assertEqual(len(attempts), 1)
+
+    def test_forged_immutable_receipt_cannot_enter_bounded_retry(self):
+        broken = fixture()
+        receipt = json.loads(broken["receipt"])
+        receipt["source_binding_sha256"] = "f" * 64
+        broken["receipt"] = encoded(receipt)
+        attempts = []
+        with self.assertRaisesRegex(b.GateHold, "COORDINATION_RECEIPT_DRIFT"):
+            b.reconcile_bounded(acquirer=lambda: (attempts.append(1), broken)[1],
+                                sleeper=lambda x: self.fail("Immutable tampering retried"))
+        self.assertEqual(len(attempts), 1)
+
+    def test_bounded_retry_does_not_change_science_authority(self):
+        self.assertLessEqual(len(b.RETRYABLE_COHORT_DRIFT), 4)
+        self.assertNotIn("AURA_AUTHORITY_LEAK", b.RETRYABLE_COHORT_DRIFT)
+        self.assertNotIn("DEMIURGE_SPEND_OR_MODEL_PROMOTION", b.RETRYABLE_COHORT_DRIFT)
+        self.assertNotIn("COORDINATION_RECEIPT_DRIFT", b.RETRYABLE_COHORT_DRIFT)
+
 if __name__ == "__main__":
     unittest.main()

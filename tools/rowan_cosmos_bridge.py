@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from time import sleep
 from urllib.request import Request, urlopen
 
 BASE = "https://raw.githubusercontent.com/Hawkar-usls/"
@@ -202,13 +203,43 @@ def persist(root: Path, packet: dict) -> tuple[str, bool]:
         changed = True
     return str(receipt), changed
 
+# These are recoverable when separate public GitHub consumer heads move during
+# one acquisition. No source is accepted unless a COMPLETE independent replay
+# of every digest and authority check passes on the same collected cohort.
+RETRYABLE_COHORT_DRIFT = frozenset({
+    "AURA_CANONICAL_BINDING_DRIFT",
+    "DEMIURGE_AURA_BINDING_DRIFT",
+    "COORDINATION_RUN_DRIFT",
+    "IMMUTABLE_RECEIPT_SOURCE_DRIFT",
+})
+
+
+def reconcile_bounded(acquirer=acquire, sleeper=sleep) -> dict:
+    """At most 3 fresh full-cohort reads, 2+4 sec bounded delay.
+
+    On permanent source mismatch, preserve the last original GateHold. Any
+    authority violation, altered immutable binding, malformed/unknown input,
+    missing recipient or audit failure FAILS IMMEDIATELY and still cannot
+    archive evidence. Never patch a source SHA or mix bytes across cohorts.
+    """
+    for attempt in range(3):
+        try:
+            return reconcile(acquirer())
+        except GateHold as exc:
+            if str(exc) not in RETRYABLE_COHORT_DRIFT or attempt == 2:
+                raise
+            print("COSMOS_ROWAN_COHORT_RETRY=TRANSIENT_" + str(exc)
+                  + " attempt=" + str(attempt + 1))
+            sleeper((2, 4)[attempt])
+    raise AssertionError("UNREACHABLE_COHORT_RETRY_EXHAUSTED")
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--persist-root", type=Path)
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
     try:
-        packet = reconcile(acquire())
+        packet = reconcile_bounded()
         if args.out:
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_bytes(render(packet))
