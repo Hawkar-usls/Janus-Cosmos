@@ -6,6 +6,8 @@ on:
     paths:
       - 'tools/materialize_palomar_day_ledger.py'
       - 'tools/materialize_palomar_day_ledger_v1_1.py'
+      - 'tools/verify_palomar_archived_ledger.py'
+      - 'tests/test_verify_palomar_archived_ledger.py'
       - '.github/workflows/palomar-day-materialization.yml'
   schedule:
     - cron: '43 2 * * *'
@@ -28,13 +30,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Materialize source-bound 312-day Palomar ledger
+      - name: Test offline historical archive integrity and refusal modes
+        run: |
+          python -m py_compile tools/verify_palomar_archived_ledger.py tests/test_verify_palomar_archived_ledger.py
+          python -m unittest discover -v -s tests -p test_verify_palomar_archived_ledger.py
+      - name: Re-fetch remote IRSA only on explicit manual request
+        if: github.event_name == 'workflow_dispatch'
         run: |
           set -euo pipefail
           python -m py_compile tools/materialize_palomar_day_ledger.py tools/materialize_palomar_day_ledger_v1_1.py
           python tools/materialize_palomar_day_ledger_v1_1.py \
             --out domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
 
+      - name: Offline validate persisted ledger; never claim a fresh remote replay
+        run: |
+          python tools/verify_palomar_archived_ledger.py --ledger domains/space/PALOMAR_OBSERVATION_DAY_LEDGER_v0.1.json
       - name: Validate scientific gate
         run: |
           python - <<'PY'
