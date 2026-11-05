@@ -1,6 +1,14 @@
 name: JANUS Palomar Day Materialization
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/materialize_palomar_day_ledger.py'
+      - 'tools/materialize_palomar_day_ledger_v1_1.py'
+      - 'tools/verify_palomar_archived_ledger.py'
+      - 'tests/test_verify_palomar_archived_ledger.py'
+      - '.github/workflows/palomar-day-materialization.yml'
   push:
     branches: [main]
     paths:
@@ -64,6 +72,7 @@ jobs:
           PY
 
       - name: Commit ledger if source-derived content changed
+        if: github.event_name == 'workflow_dispatch'
         id: commit
         run: |
           set -euo pipefail
@@ -81,7 +90,7 @@ jobs:
           echo 'changed=true' >> "$GITHUB_OUTPUT"
 
       - name: Refresh Observer after ledger update
-        if: steps.commit.outputs.changed == 'true'
+        if: github.event_name == 'workflow_dispatch' && steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run cosmos-observer-pages.yml --ref main
