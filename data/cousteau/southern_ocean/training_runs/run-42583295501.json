@@ -1,0 +1,17 @@
+{
+  "schema": "janus.cousteau.southern_ocean.train_receipt.v1",
+  "run_id": "42583295501",
+  "date": "2026-11-09",
+  "status": "FAILED_NO_TRAINING_CLAIM",
+  "reason": "segmentation fault exit 139 in Python NetCDF4 parsing with 6 concurrent workers",
+  "run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/42583295501",
+  "failure_job_id": 129046958682,
+  "synthetic_self_test": "PASS__NOT_REAL_TRAINING",
+  "raw_partial_artifact": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/42583295501/artifacts/13657583163",
+  "raw_partial_source_files": 3,
+  "raw_partial_bytes_artifact_zip": 232054,
+  "model_trained": false,
+  "metrics_available": false,
+  "corrective_action": "Serialize native NetCDF parsing before retry",
+  "scientific_firewall": "No promotion and no claim of learning; failure retained as immutable evidence"
+}
