@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cousteau.argo_predeclared_selector.v1",
+  "artifact_id": "COUSTEAU-ARGO-90-TWO-STAGE-SOURCE-YEAR-SELECTOR-2026-11-09",
+  "recorded_date": "2026-11-09",
+  "status": "PREREGISTERED_NEW_EXPLORATORY_TEST",
+  "input_source": "data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json",
+  "input_source_sha256": "bb6d3f30f80dd57d6eb5159d5b1fccdf3fad0a1edcc9afca320b7ec02b726497",
+  "purpose": "Test an evidence-based Ridge-vs-5nearest selection policy separately for T and S without selecting using the tested year",
+  "data_usage": {
+    "fit_initial": "year=2022",
+    "model_choice_calibration": "year=2023",
+    "test": "year=2024, unseen by selector in this test execution but already analyzed in earlier separate posthoc experiments",
+    "refit_final": "train on 2022+2023 after choice, test 2024",
+    "wmo_disjoint": true
+  },
+  "candidate_models": [
+    {
+      "id": "ridge",
+      "features": "9 frozen spatial/time/depth features",
+      "alpha": 10,
+      "standardization": "train-only"
+    },
+    {
+      "id": "geospatial_nearest5",
+      "metric": "haversine",
+      "k": 5,
+      "pressure_matching": "same depth, no extrapolation across depth"
+    }
+  ],
+  "selection_rule": "For each output variable, smallest RMSE on year-2023 calibration wins; ties go to nearest5; report both model outcomes on 2024 even if unselected",
+  "minimum_data_power": {
+    "fit_floats": 15,
+    "calibrate_floats": 10,
+    "test_floats": 30
+  },
+  "hard_limits": {
+    "not_independent_external_test": true,
+    "not_automatically_promoted": true,
+    "not_global_ocean_model": true,
+    "not_glacier_melt": true
+  },
+  "negative_results": "append-only evidence; no cherry-picking"
+}
