@@ -1,0 +1,81 @@
+name: JANUS Cousteau Southern Ocean NOAA SST Training
+on:
+  push:
+    branches:
+      - experiment/cousteau-southern-ocean-20261109
+    paths:
+      - workspace/cousteau_southern_ocean_ersst_train.py
+      - data/cousteau/southern_ocean/COUSTEAU-SOUTHERN-OCEAN-SOURCE-MANIFEST-2026-11-09.json
+      - .github/workflows/cousteau-southern-ocean-train.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cousteau-southern-ocean-training
+  cancel-in-progress: false
+
+jobs:
+  train-noaa-sst:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout isolated Cousteau research branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pinned scientific runtime
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 netCDF4==1.7.2 requests==2.32.5
+
+      - name: Deterministic synthetic engine self-test (NOT training evidence)
+        run: python workspace/cousteau_southern_ocean_ersst_train.py --self-test
+
+      - name: Acquire NOAA source bytes and train using real Southern Ocean SST
+        env:
+          COUSTEAU_RAW_DIR: /tmp/janus-cousteau-southern-raw
+        run: python workspace/cousteau_southern_ocean_ersst_train.py
+
+      - name: Preserve source bytes and source hashes in Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-southern-noaa-raw-${{ github.run_id }}
+          path: /tmp/janus-cousteau-southern-raw/*.nc
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Archive observed series and PASS/FAIL receipt in branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          p="data/cousteau/southern_ocean/training_runs/run-${GITHUB_RUN_ID}.json"
+          if [ ! -f "$p" ]; then
+            echo "No training receipt available (setup failed before Python experiment)."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "data/cousteau/southern_ocean/training_runs/run-${GITHUB_RUN_ID}.json"
+          q="data/cousteau/southern_ocean/observations/NOAA-ERSSTv5-2013-2025-run-${GITHUB_RUN_ID}.json"
+          if [ -f "$q" ]; then git add "$q"; fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Cousteau Southern Ocean: archive NOAA source-grounded run ${GITHUB_RUN_ID} [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Preserve receipt and processed data as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-southern-results-${{ github.run_id }}
+          path: |
+            data/cousteau/southern_ocean/training_runs/*.json
+            data/cousteau/southern_ocean/observations/*.json
+          retention-days: 90
+          if-no-files-found: warn
