@@ -87,6 +87,33 @@ try:
 except Exception as e:
     receipt["state"]="ERROR_NO_CLAIMS"
     receipt["error"]=type(e).__name__+":"+trim(e,700)
+
+# Secondary video candidate found by exact Russian title search. Do NOT assume that
+# a repost is byte-identical to or an authorized copy of the user's YouTube source.
+try:
+    import yt_dlp
+    mirror_url="https://rutube.ru/video/1fc36a4f3002a046f5b188fb2a7747dc/"
+    with yt_dlp.YoutubeDL({"skip_download":True,"quiet":True,
+                            "socket_timeout":12,"retries":1,"extractor_retries":1}) as ydl:
+        mi=ydl.extract_info(mirror_url,download=False)
+    if mi:
+        title=mi.get("title","")
+        canon=receipt.get("yt_dlp",{}).get("title") or next((x.get("title") for x in receipt["metadata_sources"] if x.get("title")),"")
+        receipt["secondary_candidate"]={
+          "mirror_url":mirror_url,"title":trim(title,350),
+          "duration_seconds":mi.get("duration"),
+          "title_matches_original_oembed":title.strip()==canon.strip(),
+          "description":trim(mi.get("description",""),2200),
+          "subtitles_languages":list((mi.get("subtitles") or {}).keys()),
+          "automatic_captions_languages":list((mi.get("automatic_captions") or {}).keys()),
+          "identity_state":"INDEPENDENT_COPY_NOT_VERIFIED_SAME_FRAMES",
+          "used_as_content_evidence":False
+        }
+except Exception as ex:
+    receipt["secondary_candidate"]={"mirror_url":"https://rutube.ru/video/1fc36a4f3002a046f5b188fb2a7747dc/",
+                                    "error":type(ex).__name__+":"+trim(ex,500),
+                                    "used_as_content_evidence":False}
+
 OUT.parent.mkdir(parents=True,exist_ok=True)
 OUT.write_text(json.dumps(receipt,ensure_ascii=False,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
 print("COUSTEAU_VIDEO_EVIDENCE_BEGIN")
