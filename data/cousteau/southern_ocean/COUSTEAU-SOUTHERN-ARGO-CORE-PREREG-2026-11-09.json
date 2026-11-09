@@ -11,7 +11,7 @@
       "https://data-argo.ifremer.fr/",
       "https://nrlgodae1.nrlmry.navy.mil/pub/outgoing/argo/"
     ],
-    "source_index": "argo_profile_index.txt",
+    "source_index": "ar_index_global_prof.txt",
     "netcdf_path": "dac/{dac}/{wmo}/profiles/{profile}.nc",
     "attribution": "International Argo Program and contributing national programs; Argo GDAC DOI 10.17882/42182; CC BY 4.0",
     "snapshot_method": "hash source index and each successfully downloaded profile file; do not assume upstream immutable"
@@ -91,5 +91,10 @@
       "state": "NOT_TRAINED",
       "requirement": "position uncertainty and withheld trajectory/ice satellite geolocation bridge"
     }
-  ]
+  ],
+  "protocol_correction": {
+    "date": "2026-11-09",
+    "reason": "originally pointed to nonexistent argo_profile_index.txt, updated to documented official GDAC ar_index_global_prof.txt; other prereg criteria unchanged",
+    "earlier_failed_run": "42585110195"
+  }
 }
