@@ -1,0 +1,13 @@
+{
+  "schema": "janus.cousteau.argo_train_receipt.v1",
+  "run_id": "42584983408",
+  "date": "2026-11-09",
+  "status": "FAILURE_NO_TRAINING_CLAIM",
+  "phase": "SYNTHETIC_SELF_TEST",
+  "run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/42584983408",
+  "cause": "holdout_errors_by_pressure compared a per-pressure subset against the full truth vector; NumPy broadcasting ValueError",
+  "real_argo_data_fetched": false,
+  "training_executed": false,
+  "correction": "compute RMSE on matched subset of predictions and target values",
+  "scientific_claim": "none"
+}
