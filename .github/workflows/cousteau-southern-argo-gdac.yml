@@ -6,7 +6,6 @@ on:
     paths:
       - workspace/cousteau_southern_ocean_argo_gdac.py
       - data/cousteau/southern_ocean/COUSTEAU-SOUTHERN-ARGO-CORE-PREREG-2026-11-09.json
-      - .github/workflows/cousteau-southern-argo-gdac.yml
   workflow_dispatch:
 
 permissions:
@@ -42,7 +41,7 @@ jobs:
           name: cousteau-argo-gdac-raw-${{ github.run_id }}
           path: |
             /tmp/cousteau-argo-core/*.nc
-            /tmp/cousteau-argo-core/argo_profile_index.txt
+            /tmp/cousteau-argo-core/ar_index_global_prof.txt
           if-no-files-found: warn
           retention-days: 30
       - name: Append source-grounded profile and model evidence to research branch
@@ -61,7 +60,17 @@ jobs:
           if [ -f "$o" ]; then git add "$o"; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Cousteau: append Argo GDAC QC and benchmark run ${GITHUB_RUN_ID} [skip ci]"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          for retry in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then
+              echo "Archived Argo run $GITHUB_RUN_ID safely"
+              exit 0
+            fi
+            echo "Concurrent push detected, retrying $retry"
+          done
+          echo "FAILED to append result to branch; artifact retained independently" >&2
+          exit 1
       - name: Archive QC observations and run receipt
         if: always()
         uses: actions/upload-artifact@v4
