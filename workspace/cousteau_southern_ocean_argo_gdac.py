@@ -51,7 +51,7 @@ def download(url, maximum=250000000):
 def get_index():
     errors = []
     for root in URLS:
-        url = root + "argo_profile_index.txt"
+        url = root + "ar_index_global_prof.txt"
         try:
             payload = download(url, maximum=250000000)
             if b"file,date,latitude,longitude" not in payload[:6000].lower():
@@ -234,7 +234,7 @@ def execute():
         index,index_url,fetch_errors=get_index()
         candidates,stats=find_candidates(index)
         RAW_DIR.mkdir(parents=True,exist_ok=True)
-        idx_path=RAW_DIR/"argo_profile_index.txt"
+        idx_path=RAW_DIR/"ar_index_global_prof.txt"
         idx_path.write_bytes(index)
         accepted=[]
         manifest=[]
