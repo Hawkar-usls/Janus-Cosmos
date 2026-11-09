@@ -219,7 +219,7 @@ def benchmark(accepted):
                                 "intercept":float(Y.mean())},
             "holdout_errors_by_pressure":[
                 {"pressure_dbar":d, "n":sum(p["pressure_dbar"]==d for r,p in holdout),
-                 "ridge_rmse":metric(predicted[np.array([p["pressure_dbar"]==d for r,p in holdout])])["rmse"]}
+                 "ridge_rmse":round(float(np.sqrt(np.mean((predicted[np.array([p["pressure_dbar"]==d for r,p in holdout])] - truth[np.array([p["pressure_dbar"]==d for r,p in holdout])])**2))),6)}
                 for d in TARGET_P if any(p["pressure_dbar"]==d for r,p in holdout)
             ]
         }
