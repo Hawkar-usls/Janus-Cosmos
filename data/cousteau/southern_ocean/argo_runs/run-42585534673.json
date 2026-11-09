@@ -1,0 +1,187 @@
+{
+  "finished_utc": "2026-11-09T08:37:56.570014+00:00",
+  "observations_path": "data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json",
+  "observations_sha256": "bb6d3f30f80dd57d6eb5159d5b1fccdf3fad0a1edcc9afca320b7ec02b726497",
+  "provenance_ceiling": "D-mode QC1 adjusted profile convenience sample, not the full Argo archive",
+  "quality_gate": {
+    "accepted": 90,
+    "attempted": 126,
+    "rejects": {
+      "NO_ADMISSIBLE_D_MODE_QC1_PROFILE": 36
+    }
+  },
+  "result": {
+    "model_benchmark": {
+      "automatic_promotion": false,
+      "claim_ceiling": "LIMITED_CONVENIENCE_SAMPLE__NOT_PROSPECTIVE_FORECAST__NO_ACOUSTIC_CLAIMS",
+      "mode": "float-disjoint retrospective same-era interpolation",
+      "results": {
+        "psal_psu": {
+          "depth_mean_baseline": {
+            "mae": 0.182204,
+            "rmse": 0.213841
+          },
+          "holdout_errors_by_pressure": [
+            {
+              "n": 22,
+              "pressure_dbar": 10,
+              "ridge_rmse": 0.256417
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 100,
+              "ridge_rmse": 0.210471
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 300,
+              "ridge_rmse": 0.162351
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 600,
+              "ridge_rmse": 0.127752
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 1000,
+              "ridge_rmse": 0.097262
+            }
+          ],
+          "n_test_pressure_samples": 110,
+          "n_train_pressure_samples": 329,
+          "ridge": {
+            "mae": 0.141856,
+            "rmse": 0.180103
+          },
+          "ridge_beats_depth_mean_baseline": true,
+          "ridge_parameters": {
+            "alpha": 10,
+            "coefficients": [
+              0.23621837573552174,
+              0.05071765900273593,
+              -0.08059106167590474,
+              -0.10761064999207355,
+              0.008735055372654484,
+              0.0050427282867489525,
+              -0.12614534578429754,
+              0.10947083701500657,
+              0.10984222128805106
+            ],
+            "feature_mean": [
+              0.7374654403709532,
+              0.1770937159763942,
+              0.04292995554263819,
+              -0.028048683328136006,
+              0.11880990051100272,
+              0.23564218675267112,
+              0.13186477887871215,
+              0.029836572383753972,
+              -0.021314476778568823
+            ],
+            "feature_scale": [
+              0.22736761119338705,
+              0.312191494443214,
+              0.7084475280631004,
+              0.703897997057774,
+              0.540476836302981,
+              0.798900342209782,
+              0.24203526841755743,
+              0.5473778741973631,
+              0.5427561526399555
+            ],
+            "intercept": 34.295551993920974
+          }
+        },
+        "temp_c": {
+          "depth_mean_baseline": {
+            "mae": 2.274138,
+            "rmse": 2.898942
+          },
+          "holdout_errors_by_pressure": [
+            {
+              "n": 22,
+              "pressure_dbar": 10,
+              "ridge_rmse": 1.680487
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 100,
+              "ridge_rmse": 2.036409
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 300,
+              "ridge_rmse": 1.875018
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 600,
+              "ridge_rmse": 1.213635
+            },
+            {
+              "n": 22,
+              "pressure_dbar": 1000,
+              "ridge_rmse": 0.971021
+            }
+          ],
+          "n_test_pressure_samples": 110,
+          "n_train_pressure_samples": 329,
+          "ridge": {
+            "mae": 1.312611,
+            "rmse": 1.606393
+          },
+          "ridge_beats_depth_mean_baseline": true,
+          "ridge_parameters": {
+            "alpha": 10,
+            "coefficients": [
+              -0.24190530492807502,
+              2.7468653730309565,
+              -0.6583819598517956,
+              -1.2591511160876887,
+              0.24644301978576474,
+              0.11542407911609744,
+              -0.8773058788852691,
+              0.13305563692554467,
+              0.30271374359804665
+            ],
+            "feature_mean": [
+              0.7374654403709532,
+              0.1770937159763942,
+              0.04292995554263819,
+              -0.028048683328136006,
+              0.11880990051100272,
+              0.23564218675267112,
+              0.13186477887871215,
+              0.029836572383753972,
+              -0.021314476778568823
+            ],
+            "feature_scale": [
+              0.22736761119338705,
+              0.312191494443214,
+              0.7084475280631004,
+              0.703897997057774,
+              0.540476836302981,
+              0.798900342209782,
+              0.24203526841755743,
+              0.5473778741973631,
+              0.5427561526399555
+            ],
+            "intercept": 2.867238291793313
+          }
+        }
+      },
+      "split": {
+        "test_wmos": 22,
+        "train_wmos": 68
+      }
+    },
+    "state": "REAL_ARGO_DATA_TRAINED_AND_EVALUATED"
+  },
+  "run_id": "42585534673",
+  "schema": "janus.cousteau.argo_train_receipt.v1",
+  "source_doi": "https://doi.org/10.17882/42182",
+  "source_index_sha256": "a7b4f6408f4537349d2b8cf774a7464404f4f85a92b2d66616f898ccbac4f02f",
+  "started_utc": "2026-11-09T08:23:10.609466+00:00",
+  "status": "REAL_ARGO_DATA_TRAINED_AND_EVALUATED"
+}

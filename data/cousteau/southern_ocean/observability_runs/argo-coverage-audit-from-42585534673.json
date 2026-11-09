@@ -1,0 +1,563 @@
+{
+  "existing_float_holdout_metrics": {
+    "psal_psu": {
+      "depth_mean_baseline": {
+        "mae": 0.182204,
+        "rmse": 0.213841
+      },
+      "holdout_errors_by_pressure": [
+        {
+          "n": 22,
+          "pressure_dbar": 10,
+          "ridge_rmse": 0.256417
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 100,
+          "ridge_rmse": 0.210471
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 300,
+          "ridge_rmse": 0.162351
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 600,
+          "ridge_rmse": 0.127752
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 1000,
+          "ridge_rmse": 0.097262
+        }
+      ],
+      "n_test_pressure_samples": 110,
+      "n_train_pressure_samples": 329,
+      "ridge": {
+        "mae": 0.141856,
+        "rmse": 0.180103
+      },
+      "ridge_beats_depth_mean_baseline": true,
+      "ridge_parameters": {
+        "alpha": 10,
+        "coefficients": [
+          0.23621837573552174,
+          0.05071765900273593,
+          -0.08059106167590474,
+          -0.10761064999207355,
+          0.008735055372654484,
+          0.0050427282867489525,
+          -0.12614534578429754,
+          0.10947083701500657,
+          0.10984222128805106
+        ],
+        "feature_mean": [
+          0.7374654403709532,
+          0.1770937159763942,
+          0.04292995554263819,
+          -0.028048683328136006,
+          0.11880990051100272,
+          0.23564218675267112,
+          0.13186477887871215,
+          0.029836572383753972,
+          -0.021314476778568823
+        ],
+        "feature_scale": [
+          0.22736761119338705,
+          0.312191494443214,
+          0.7084475280631004,
+          0.703897997057774,
+          0.540476836302981,
+          0.798900342209782,
+          0.24203526841755743,
+          0.5473778741973631,
+          0.5427561526399555
+        ],
+        "intercept": 34.295551993920974
+      }
+    },
+    "temp_c": {
+      "depth_mean_baseline": {
+        "mae": 2.274138,
+        "rmse": 2.898942
+      },
+      "holdout_errors_by_pressure": [
+        {
+          "n": 22,
+          "pressure_dbar": 10,
+          "ridge_rmse": 1.680487
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 100,
+          "ridge_rmse": 2.036409
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 300,
+          "ridge_rmse": 1.875018
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 600,
+          "ridge_rmse": 1.213635
+        },
+        {
+          "n": 22,
+          "pressure_dbar": 1000,
+          "ridge_rmse": 0.971021
+        }
+      ],
+      "n_test_pressure_samples": 110,
+      "n_train_pressure_samples": 329,
+      "ridge": {
+        "mae": 1.312611,
+        "rmse": 1.606393
+      },
+      "ridge_beats_depth_mean_baseline": true,
+      "ridge_parameters": {
+        "alpha": 10,
+        "coefficients": [
+          -0.24190530492807502,
+          2.7468653730309565,
+          -0.6583819598517956,
+          -1.2591511160876887,
+          0.24644301978576474,
+          0.11542407911609744,
+          -0.8773058788852691,
+          0.13305563692554467,
+          0.30271374359804665
+        ],
+        "feature_mean": [
+          0.7374654403709532,
+          0.1770937159763942,
+          0.04292995554263819,
+          -0.028048683328136006,
+          0.11880990051100272,
+          0.23564218675267112,
+          0.13186477887871215,
+          0.029836572383753972,
+          -0.021314476778568823
+        ],
+        "feature_scale": [
+          0.22736761119338705,
+          0.312191494443214,
+          0.7084475280631004,
+          0.703897997057774,
+          0.540476836302981,
+          0.798900342209782,
+          0.24203526841755743,
+          0.5473778741973631,
+          0.5427561526399555
+        ],
+        "intercept": 2.867238291793313
+      }
+    }
+  },
+  "external_controls": [
+    {
+      "dataset": "IBCSO_2025",
+      "required_grids": [
+        "bed",
+        "tid",
+        "rid"
+      ],
+      "state": "NOT_INGESTED"
+    },
+    {
+      "dataset": "MEOP_CTD",
+      "source": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/accession/details/297525",
+      "state": "NOT_INGESTED_REQUIRES_SEPARATE_QC"
+    },
+    {
+      "dataset": "SOCCOM_BGC_ARGO",
+      "state": "NOT_INGESTED_REQUIRES_BGC_ADJUSTED_QC"
+    }
+  ],
+  "limits_and_warnings": [
+    "Profiles are a WMO-disjoint, 90-float convenience sample, NOT a random sample of the ocean.",
+    "Empty lat-month cells mean no observations in THIS SAMPLE, not no ocean process.",
+    "Geolocated data exclude POSITION_QC=8; zero such records in accepted sample cannot establish zero under-ice observations.",
+    "Reported pressures 10/100/300/600/1000 dbar are linearly interpolated from quality-controlled measured levels, not necessarily direct instrument samples at those exact pressures.",
+    "Index date is measurement date, not necessarily transmission/receipt time.",
+    "Ridge holdout used distinct floats but is retrospective same-era interpolation, not prospective forecasting.",
+    "Argo cannot directly measure submerged ice-shelf undersides, bathymetry, melt flux or robot navigation.",
+    "SUMMER_DOMINATED_SELECTION: Southern Ocean year-round conditions not established.",
+    "NO_PROFILES_80_90S: high-latitude gap in selected sample."
+  ],
+  "research_origin": {
+    "relevant_timecodes": [
+      "15:09-17:50",
+      "19:29-21:54",
+      "23:17-25:25",
+      "32:08-34:48",
+      "45:15-47:43"
+    ],
+    "video_date": "2026-11-06",
+    "video_is_inspiration_not_measurement_source": true,
+    "video_url": "https://youtu.be/oMPHmMnS0Mc"
+  },
+  "review": {
+    "austral_summer_DJF_count": 45,
+    "automated_model_promotion_allowed": false,
+    "bathymetry_direct_sounding_share": "UNKNOWN_REQUIRES_IBCSO_TID_AND_RID",
+    "fraction_lat_month_cells_empty_in_sample": 0.5625,
+    "ice_shelf_melt_estimation_allowed": false,
+    "sample_representative_of_antarctic_ocean": false,
+    "satellite_to_float_communication_latency": "UNKNOWN_NO_JULD_LOCATION_OR_TRANSMISSION_TIMES",
+    "source_receipt_provenance": "VERIFIED_SHA256",
+    "under_ice_navigation_accuracy_estimation_allowed": false,
+    "under_ice_profile_geolocation_completeness": "UNKNOWN_FROM_QC1_ONLY_SAMPLE",
+    "winter_JJA_count": 15
+  },
+  "sample": {
+    "by_60deg_longitude": {
+      "-120_to_-60E": 11,
+      "-180_to_-120E": 18,
+      "-60_to_0E": 14,
+      "0_to_60E": 15,
+      "120_to_180E": 17,
+      "60_to_120E": 15
+    },
+    "by_latitude_band": {
+      "50-60S": 67,
+      "60-70S": 19,
+      "70-80S": 4,
+      "80-90S": 0
+    },
+    "by_month": {
+      "01": 6,
+      "02": 2,
+      "03": 7,
+      "04": 8,
+      "05": 6,
+      "06": 8,
+      "07": 1,
+      "08": 6,
+      "09": 3,
+      "10": 1,
+      "11": 5,
+      "12": 37
+    },
+    "by_season": {
+      "austral_autumn_MAM": 21,
+      "austral_spring_SON": 9,
+      "austral_summer_DJF": 45,
+      "austral_winter_JJA": 15
+    },
+    "by_year": {
+      "2022": 21,
+      "2023": 18,
+      "2024": 51
+    },
+    "download_attempts": 126,
+    "latitude_month_cells": [
+      {
+        "count": 2,
+        "latitude_band": "50-60S",
+        "month": 1,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "50-60S",
+        "month": 2,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 6,
+        "latitude_band": "50-60S",
+        "month": 3,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 4,
+        "latitude_band": "50-60S",
+        "month": 4,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 6,
+        "latitude_band": "50-60S",
+        "month": 5,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 7,
+        "latitude_band": "50-60S",
+        "month": 6,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "50-60S",
+        "month": 7,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 5,
+        "latitude_band": "50-60S",
+        "month": 8,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 3,
+        "latitude_band": "50-60S",
+        "month": 9,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "50-60S",
+        "month": 10,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 3,
+        "latitude_band": "50-60S",
+        "month": 11,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 28,
+        "latitude_band": "50-60S",
+        "month": 12,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "60-70S",
+        "month": 1,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "60-70S",
+        "month": 2,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "60-70S",
+        "month": 3,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 4,
+        "latitude_band": "60-70S",
+        "month": 4,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "60-70S",
+        "month": 5,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "60-70S",
+        "month": 6,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "60-70S",
+        "month": 7,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "60-70S",
+        "month": 8,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "60-70S",
+        "month": 9,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "60-70S",
+        "month": 10,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 2,
+        "latitude_band": "60-70S",
+        "month": 11,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 9,
+        "latitude_band": "60-70S",
+        "month": 12,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 3,
+        "latitude_band": "70-80S",
+        "month": 1,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 1,
+        "latitude_band": "70-80S",
+        "month": 2,
+        "status": "OBSERVED_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 3,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 4,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 5,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 6,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 7,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 8,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 9,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 10,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 11,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "70-80S",
+        "month": 12,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 1,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 2,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 3,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 4,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 5,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 6,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 7,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 8,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 9,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 10,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 11,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      },
+      {
+        "count": 0,
+        "latitude_band": "80-90S",
+        "month": 12,
+        "status": "NO_OBSERVATION_IN_SELECTED_SAMPLE"
+      }
+    ],
+    "pressure_coverage_dbar": {
+      "10": 89,
+      "100": 90,
+      "1000": 80,
+      "300": 90,
+      "600": 90
+    },
+    "rejections": {
+      "NO_ADMISSIBLE_D_MODE_QC1_PROFILE": 36
+    },
+    "unique_floats": 90
+  },
+  "schema": "janus.cousteau.southern_ocean.observability_firewall.v1",
+  "source_doi": "10.17882/42182",
+  "source_gdac_index_sha256": "a7b4f6408f4537349d2b8cf774a7464404f4f85a92b2d66616f898ccbac4f02f",
+  "source_observations_sha256": "bb6d3f30f80dd57d6eb5159d5b1fccdf3fad0a1edcc9afca320b7ec02b726497",
+  "source_run_id": "42585534673",
+  "status": "SOURCE_VERIFIED_COVERAGE_AUDIT__NOT_GLOBAL_OCEAN_MODEL"
+}
