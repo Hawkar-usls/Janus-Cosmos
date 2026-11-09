@@ -1,0 +1,59 @@
+name: JANUS Cousteau Argo Two-Stage Year Selector
+on:
+  push:
+    branches:
+      - experiment/cousteau-southern-ocean-20261109
+    paths:
+      - workspace/cousteau_argo_year_selector.py
+      - .github/workflows/cousteau-argo-year-selector.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cousteau-argo-year-selector
+  cancel-in-progress: false
+jobs:
+  test-predeclared-selector:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned numerical runtime
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6
+      - name: Verify no test leak on synthetic source
+        run: python workspace/cousteau_argo_year_selector.py --self-test
+      - name: Evaluate two-stage selector on real frozen Argo data
+        run: |
+          python workspace/cousteau_argo_year_selector.py \
+            --observations data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json \
+            --receipt data/cousteau/southern_ocean/argo_runs/run-42585534673.json \
+            --out data/cousteau/southern_ocean/argo_year_selector/year-selector-2022-2023-2024-argo90.json
+      - name: Preserve receipt in durable Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-argo-year-selector-${{ github.run_id }}
+          path: data/cousteau/southern_ocean/argo_year_selector/*.json
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Append result to research branch without unsafe push
+        shell: bash
+        run: |
+          set -euo pipefail
+          f=data/cousteau/southern_ocean/argo_year_selector/year-selector-2022-2023-2024-argo90.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$f"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Cousteau: save Argo year-gated selection evidence without automatic promotion [skip ci]"
+          for retry in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+          done
+          exit 1
