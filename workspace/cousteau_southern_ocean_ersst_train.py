@@ -162,7 +162,7 @@ def main():
     observations_path = OUT / "observations" / ("NOAA-ERSSTv5-2013-2025-run-" + RUN_ID + ".json")
     start = dt.datetime.now(dt.timezone.utc).isoformat()
     try:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
             rows = list(pool.map(acquire, months(FIRST, LAST)))
         benchmark = train_and_evaluate(rows)
         write_json(observations_path, {
