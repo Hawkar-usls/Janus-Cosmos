@@ -1,0 +1,122 @@
+{
+  "schema": "janus.cousteau.southern_ocean.video_to_scientific_controls.v1",
+  "artifact_id": "JANUS-COUSTEAU-SOUTHERN-OCEAN-VIDEO-AUDIT-2026-11-09",
+  "created_date": "2026-11-09",
+  "video": {
+    "youtube_id": "oMPHmMnS0Mc",
+    "url": "https://youtu.be/oMPHmMnS0Mc",
+    "title": "Почему мы не можем по-настоящему исследовать Антарктический океан?",
+    "author": "Лошадиная сила",
+    "published_at": "2026-11-06T04:00:01Z",
+    "duration_seconds": 3018,
+    "source_basis": "caption/transcript-based thematic analysis; frame-by-frame technical measurements not independently extracted",
+    "scientific_role": "inspiration_and_claim_index_not_primary_measurements"
+  },
+  "chapter_claims": [
+    {
+      "time": "00:00-03:13",
+      "topic": "loss of continuous observations and access limitation",
+      "scientific_status": "BROADLY_SUPPORTED",
+      "required_control": "spatiotemporal missingness map; distinguish missing data from absence of process"
+    },
+    {
+      "time": "03:29-05:23",
+      "topic": "storm and deployment/recovery limits",
+      "scientific_status": "PLAUSIBLE_BACKGROUND",
+      "required_control": "ship CTD observations have selection and weather-access bias"
+    },
+    {
+      "time": "05:39-09:42",
+      "topic": "moving sea ice and ice-shelf cavities impede sampling",
+      "scientific_status": "SUPPORTED_BACKGROUND",
+      "required_control": "record ice/under-ice field and availability of sensor telemetry"
+    },
+    {
+      "time": "10:14-12:23",
+      "topic": "under-ice autonomous navigation and loss of Ran; exact cause unknown",
+      "scientific_status": "CONFIRMED_UNKNOWN_CAUSE",
+      "primary_reference": "https://www.thwaitesglacier.org/news/final-mission-auv-under-thwaites-glacier",
+      "required_control": "no causal classification of mission failure from data silence"
+    },
+    {
+      "time": "15:09-17:50",
+      "topic": "beautiful global seafloor maps mask interpolated gaps",
+      "scientific_status": "CONFIRMED",
+      "primary_reference": "https://www.gebco.net/data-products/gridded-bathymetry-data/southern-ocean",
+      "required_control": "IBCSO bed + TID + RID all required, interpolated cells cannot count as direct sonar soundings"
+    },
+    {
+      "time": "18:21-21:54",
+      "topic": "circumpolar current, polynyas, dense water formation and winter bias",
+      "scientific_status": "SUPPORTED_REQUIRES_MORE_SENSORS_FOR_CAUSAL_MODEL",
+      "primary_reference": "https://www.nature.com/articles/s41586-018-0182-3",
+      "required_control": "lat x calendar month coverage bins and austral-season balance"
+    },
+    {
+      "time": "23:17-25:25",
+      "topic": "Argo repeated profiles and under-ice delayed transmission with uncertain positions",
+      "scientific_status": "SUPPORTED",
+      "primary_reference": "https://argo.ucsd.edu/data/how-to-use-argo-files/",
+      "required_control": "D-mode QC1 adjusted CTD separately from POSITION_QC8; transmission latency unknown unless timestamps explicitly measured"
+    },
+    {
+      "time": "25:25-26:29",
+      "topic": "CTD profiles from elephant seals and other mammals",
+      "scientific_status": "CONFIRMED",
+      "primary_reference": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/accession/details/297525",
+      "required_control": "MEOP external data source separate from Argo and source-specific QC"
+    },
+    {
+      "time": "32:08-35:19",
+      "topic": "heterogeneous basal melting near Thwaites and stratification",
+      "scientific_status": "SUPPORTED_SITE_SPECIFIC",
+      "primary_reference": "https://www.nature.com/articles/s41586-022-05691-0",
+      "required_control": "No melt rate prediction from isolated CTD profile without ice geometry, local freezing point, velocity, and independently measured interface"
+    },
+    {
+      "time": "37:13-40:59",
+      "topic": "carbon and Southern Ocean circulation feedbacks",
+      "scientific_status": "SUPPORTED_IN_PRINCIPLE",
+      "primary_reference": "https://www.sciencedirect.com/science/article/pii/S0079661123001738",
+      "required_control": "register SOCCOM BGC Argo separately; check oxygen, nitrate, pH adjusted quality"
+    },
+    {
+      "time": "45:15-48:30",
+      "topic": "complementary observatories and long time series",
+      "scientific_status": "SUPPORTED_METHODOLOGY",
+      "required_control": "provenance-by-sensor, uncertainty budgets and independent observation coverage"
+    }
+  ],
+  "implementation": {
+    "research_repo": "Hawkar-usls/Janus-Cosmos",
+    "research_branch": "experiment/cousteau-southern-ocean-20261109",
+    "observability_code": "workspace/cousteau_southern_observability_audit.py",
+    "observability_workflow": ".github/workflows/cousteau-southern-video-observability.yml",
+    "verified_run_url": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/42588440299",
+    "observability_output": "data/cousteau/southern_ocean/observability_runs/argo-coverage-audit-from-42585534673.json",
+    "recovered_argo_raw_derived_data": "data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json",
+    "recovered_argo_train_receipt": "data/cousteau/southern_ocean/argo_runs/run-42585534673.json",
+    "quality_gate": "EXISTING_QC1_AND_SOURCE_SHA_VERIFIED",
+    "training_scope": "retrospective float-disjoint only; models not promoted",
+    "observation_coverage": {
+      "profiles": 90,
+      "latitudes": {
+        "50-60S": 67,
+        "60-70S": 19,
+        "70-80S": 4,
+        "80-90S": 0
+      },
+      "austral_summer_DJF": 45,
+      "austral_winter_JJA": 15,
+      "empty_latitude_month_cells": 27,
+      "total_latitude_month_cells": 48
+    },
+    "warnings": [
+      "This is a selected subset, not the full Argo archive",
+      "latitude-month zero means missing in sample, not zero ocean activity",
+      "Under-ice position-quality QC8 remains out of precise geolocation training",
+      "No claim of deep ocean or ice shelf hydrodynamic prediction from shallow CTD-only data"
+    ]
+  },
+  "next_research": "Use calendar-month x latitude stratified Argo sampling and independent holdout; then separate MEOP/SOCCOM/IBCSO data provenance gates; no automatic model promotion."
+}
