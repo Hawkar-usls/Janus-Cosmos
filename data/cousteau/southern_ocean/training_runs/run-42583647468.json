@@ -1,0 +1,238 @@
+{
+  "benchmark": {
+    "beats_seasonal_baseline": true,
+    "claim_ceiling": "ONE_STEP_REGIONAL_SST_BENCHMARK_ONLY__NO_SONAR_OR_SEAFLOOR_ANOMALY_CLAIM",
+    "evaluation": "retrospective rolling one-step-ahead; lag1 may use prior holdout observation",
+    "holdout_predictions": [
+      {
+        "month": "2024-01",
+        "observed_sst_c": 3.032052,
+        "ridge_sst_c": 3.0088206,
+        "seasonal_naive_sst_c": 2.9622435
+      },
+      {
+        "month": "2024-02",
+        "observed_sst_c": 3.4558673,
+        "ridge_sst_c": 3.3525067,
+        "seasonal_naive_sst_c": 3.3503863
+      },
+      {
+        "month": "2024-03",
+        "observed_sst_c": 3.3098355,
+        "ridge_sst_c": 3.1937708,
+        "seasonal_naive_sst_c": 3.1621829
+      },
+      {
+        "month": "2024-04",
+        "observed_sst_c": 2.8187421,
+        "ridge_sst_c": 2.7111062,
+        "seasonal_naive_sst_c": 2.6613166
+      },
+      {
+        "month": "2024-05",
+        "observed_sst_c": 2.2453561,
+        "ridge_sst_c": 2.201386,
+        "seasonal_naive_sst_c": 2.1300656
+      },
+      {
+        "month": "2024-06",
+        "observed_sst_c": 1.8397249,
+        "ridge_sst_c": 1.7748115,
+        "seasonal_naive_sst_c": 1.7206489
+      },
+      {
+        "month": "2024-07",
+        "observed_sst_c": 1.5415898,
+        "ridge_sst_c": 1.4889052,
+        "seasonal_naive_sst_c": 1.4444595
+      },
+      {
+        "month": "2024-08",
+        "observed_sst_c": 1.3257952,
+        "ridge_sst_c": 1.3007879,
+        "seasonal_naive_sst_c": 1.2416844
+      },
+      {
+        "month": "2024-09",
+        "observed_sst_c": 1.2477833,
+        "ridge_sst_c": 1.2201405,
+        "seasonal_naive_sst_c": 1.1700351
+      },
+      {
+        "month": "2024-10",
+        "observed_sst_c": 1.3002319,
+        "ridge_sst_c": 1.3224472,
+        "seasonal_naive_sst_c": 1.2984739
+      },
+      {
+        "month": "2024-11",
+        "observed_sst_c": 1.6494562,
+        "ridge_sst_c": 1.6356484,
+        "seasonal_naive_sst_c": 1.6007432
+      },
+      {
+        "month": "2024-12",
+        "observed_sst_c": 2.4211787,
+        "ridge_sst_c": 2.3061342,
+        "seasonal_naive_sst_c": 2.2960775
+      },
+      {
+        "month": "2025-01",
+        "observed_sst_c": 3.3355361,
+        "ridge_sst_c": 3.0744505,
+        "seasonal_naive_sst_c": 3.032052
+      },
+      {
+        "month": "2025-02",
+        "observed_sst_c": 3.6583711,
+        "ridge_sst_c": 3.4876028,
+        "seasonal_naive_sst_c": 3.4558673
+      },
+      {
+        "month": "2025-03",
+        "observed_sst_c": 3.4336055,
+        "ridge_sst_c": 3.3077533,
+        "seasonal_naive_sst_c": 3.3098355
+      },
+      {
+        "month": "2025-04",
+        "observed_sst_c": 2.8552869,
+        "ridge_sst_c": 2.8018791,
+        "seasonal_naive_sst_c": 2.8187421
+      },
+      {
+        "month": "2025-05",
+        "observed_sst_c": 2.2577564,
+        "ridge_sst_c": 2.2509816,
+        "seasonal_naive_sst_c": 2.2453561
+      },
+      {
+        "month": "2025-06",
+        "observed_sst_c": 1.793381,
+        "ridge_sst_c": 1.8175199,
+        "seasonal_naive_sst_c": 1.8397249
+      },
+      {
+        "month": "2025-07",
+        "observed_sst_c": 1.4986337,
+        "ridge_sst_c": 1.5057596,
+        "seasonal_naive_sst_c": 1.5415898
+      },
+      {
+        "month": "2025-08",
+        "observed_sst_c": 1.2899745,
+        "ridge_sst_c": 1.3149621,
+        "seasonal_naive_sst_c": 1.3257952
+      },
+      {
+        "month": "2025-09",
+        "observed_sst_c": 1.2252458,
+        "ridge_sst_c": 1.2348188,
+        "seasonal_naive_sst_c": 1.2477833
+      },
+      {
+        "month": "2025-10",
+        "observed_sst_c": 1.2880761,
+        "ridge_sst_c": 1.319334,
+        "seasonal_naive_sst_c": 1.3002319
+      },
+      {
+        "month": "2025-11",
+        "observed_sst_c": 1.6611666,
+        "ridge_sst_c": 1.6496825,
+        "seasonal_naive_sst_c": 1.6494562
+      },
+      {
+        "month": "2025-12",
+        "observed_sst_c": 2.4404979,
+        "ridge_sst_c": 2.3503736,
+        "seasonal_naive_sst_c": 2.4211787
+      }
+    ],
+    "metrics": {
+      "ridge": {
+        "mae_c": 0.06384,
+        "rmse_c": 0.0883074
+      },
+      "seasonal_naive_12m": {
+        "mae_c": 0.0841184,
+        "rmse_c": 0.1093533
+      }
+    },
+    "model": "ridge_month_1hot_trend_lag1_lag12",
+    "model_parameters": {
+      "alpha": 10.0,
+      "bias": 2.0506952833333334,
+      "coefficients": [
+        0.16234516559634313,
+        0.15858680145053128,
+        0.0910391873119973,
+        0.011331550311316841,
+        -0.041831441021988436,
+        -0.07431747670493495,
+        -0.09402487955270948,
+        -0.10246460985720987,
+        -0.09931696232718258,
+        -0.07435712761519275,
+        -0.017073835964369857,
+        0.08008362837339378,
+        0.011067566057132449,
+        0.2695375707540712,
+        0.24176116173168488
+      ],
+      "mean": [
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        5.958333333333333,
+        2.0484715066666666,
+        2.0394741874999998
+      ],
+      "scale": [
+        0.2763853991962836,
+        0.2763853991962836,
+        0.2763853991962835,
+        0.2763853991962836,
+        0.2763853991962835,
+        0.2763853991962836,
+        0.2763853991962835,
+        0.2763853991962836,
+        0.2763853991962835,
+        0.2763853991962836,
+        0.2763853991962835,
+        0.2763853991962835,
+        2.886651109786153,
+        0.8142401839122588,
+        0.8279650312839832
+      ]
+    },
+    "n_test": 24,
+    "n_train": 120,
+    "promotion_authorized": false,
+    "test_end": "2025-12",
+    "test_start": "2024-01",
+    "train_end": "2023-12",
+    "train_start": "2014-01"
+  },
+  "finished_utc": "2026-11-09T08:08:06.834195+00:00",
+  "observations_path": "data/cousteau/southern_ocean/observations/NOAA-ERSSTv5-2013-2025-run-42583647468.json",
+  "observations_sha256": "27c28f1dfec1d79af81298c78593e2fa8048f31cd3db8ffd46b91fc80ab3fb72",
+  "run_id": "42583647468",
+  "schema": "janus.cousteau.southern_ocean.train_receipt.v1",
+  "scientific_note": "Retrospective data may have been revised after observation dates; not prospective performance.",
+  "source": "NOAA ERSSTv5",
+  "source_access_snapshot": "mutable upstream; per-file SHA256 pinned",
+  "source_bytes_total": 26246844,
+  "source_monthly_files": 156,
+  "started_utc": "2026-11-09T08:07:19.587023+00:00",
+  "status": "TRAINED_AND_EVALUATED"
+}

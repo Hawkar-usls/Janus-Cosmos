@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cousteau.video_source_topic_adaptation.v1",
+  "video_id": "oMPHmMnS0Mc",
+  "source_video": "https://www.youtube.com/watch?v=oMPHmMnS0Mc",
+  "metadata_verified_by": "youtube_oembed_and_noembed_both_http200_on_GitHub_Actions_run_42587175613",
+  "title_verified": "Почему мы не можем по-настоящему исследовать Антарктический океан?",
+  "author_verified": "Лошадиная сила",
+  "source_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/42587175613",
+  "source_evidence": "METADATA_ONLY__NO_VERIFIED_CAPTIONS_OR_VISUAL_INSPECTION",
+  "no_author_specific_statements_claimed": true,
+  "derived_scope": "Question of why Antarctic Southern Ocean remains observationally difficult; adapt only facts supported by independent scientific sources, not claims about exact narration",
+  "references": [
+    {
+      "id": "ARGO_POLAR",
+      "url": "https://argo.ucsd.edu/expansion/polar-argo/polar-argo-technical-challenges/",
+      "claim": "Sea ice interrupts telemetry and GPS, poses mechanical risk"
+    },
+    {
+      "id": "ARGO_QC",
+      "url": "https://argo.ucsd.edu/data/how-to-use-argo-files/",
+      "claim": "QC8 estimated positions cannot be interpreted as precise geolocation"
+    },
+    {
+      "id": "ISA_2026",
+      "url": "https://doi.org/10.1175/JTECH-D-25-0009.1",
+      "claim": "Ice-sensing threshold trade-offs require geographic validation"
+    },
+    {
+      "id": "MIZ_WAVES_2026",
+      "url": "https://doi.org/10.1038/s41467-026-73203-z",
+      "claim": "Microwave sea ice extent and wave affected ice zone are not interchangeable"
+    }
+  ],
+  "adaptation": {
+    "code_module": "workspace/cousteau_polar_observability.py",
+    "tests": "workspace/test_cousteau_polar_observability.py",
+    "pipeline": ".github/workflows/cousteau-polar-observability.yml",
+    "capabilities": [
+      "preserve QC8 physical profiles but reject precise-geographic use",
+      "do not infer ice from QC8 alone",
+      "never confuse measurement time with telemetry arrival",
+      "no coverage claim from unsampled cells",
+      "require source SHA and bounded QC for geographic admission",
+      "adversarial unit tests"
+    ],
+    "promotion": "BLOCKED_PENDING_REAL_DATA_EVIDENCE_AND_REVIEW",
+    "base_ocean_model_unchanged": true,
+    "experimental_scope": "research-branch-only"
+  }
+}

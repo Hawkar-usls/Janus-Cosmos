@@ -1,0 +1,78 @@
+name: JANUS Cousteau Stratified Argo Results Recovery and Coverage Audit
+on:
+  push:
+    branches:
+      - experiment/cousteau-southern-ocean-20261109
+    paths:
+      - workspace/cousteau_argo_stratified_compare.py
+      - .github/workflows/cousteau-argo-stratified-recovery.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: cousteau-stratified-argo-recovery
+  cancel-in-progress: false
+jobs:
+  recover-source-verified:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check comparison engine with synthetic control
+        run: python3 workspace/cousteau_argo_stratified_compare.py --self-test
+      - name: Download actual stratified GDAC run artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/argo-strat
+          gh run download 42588785957 --repo Hawkar-usls/Janus-Cosmos \
+            -n cousteau-argo-qc-results-42588785957 -D /tmp/argo-strat
+          test -s /tmp/argo-strat/argo_runs/run-42588785957.json
+          test -s /tmp/argo-strat/argo_observations/argo_core_D_QC1_run-42588785957.json
+      - name: Validate source byte hashes and compare coverage
+        run: |
+          set -euo pipefail
+          mkdir -p data/cousteau/southern_ocean/argo_runs
+          mkdir -p data/cousteau/southern_ocean/argo_observations
+          mkdir -p data/cousteau/southern_ocean/argo_stratified_comparisons
+          cp /tmp/argo-strat/argo_runs/run-42588785957.json data/cousteau/southern_ocean/argo_runs/
+          cp /tmp/argo-strat/argo_observations/argo_core_D_QC1_run-42588785957.json data/cousteau/southern_ocean/argo_observations/
+          python3 workspace/cousteau_argo_stratified_compare.py \
+            --old-observations data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json \
+            --old-receipt data/cousteau/southern_ocean/argo_runs/run-42585534673.json \
+            --new-observations data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42588785957.json \
+            --new-receipt data/cousteau/southern_ocean/argo_runs/run-42588785957.json \
+            --out data/cousteau/southern_ocean/argo_stratified_comparisons/argo90-vs-argo84-coverage-comparison.json
+      - name: Preserve source-derived data and both model results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-argo-stratified-source-recovery-${{ github.run_id }}
+          path: |
+            data/cousteau/southern_ocean/argo_runs/run-42588785957.json
+            data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42588785957.json
+            data/cousteau/southern_ocean/argo_stratified_comparisons/argo90-vs-argo84-coverage-comparison.json
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Append immutable source snapshots to research branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/southern_ocean/argo_runs/run-42588785957.json
+          git add data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42588785957.json
+          git add data/cousteau/southern_ocean/argo_stratified_comparisons/argo90-vs-argo84-coverage-comparison.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Cousteau: recover Argo84 new GDAC source snapshot and coverage audit [skip ci]"
+          for retry in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+          done
+          exit 1

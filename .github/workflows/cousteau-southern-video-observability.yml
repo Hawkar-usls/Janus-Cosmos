@@ -1,0 +1,88 @@
+name: JANUS Cousteau Video Observability and Argo Evidence Recovery
+on:
+  push:
+    branches:
+      - experiment/cousteau-southern-ocean-20261109
+    paths:
+      - workspace/cousteau_southern_observability_audit.py
+      - .github/workflows/cousteau-southern-video-observability.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: cousteau-argo-video-observability-archive
+  cancel-in-progress: false
+
+jobs:
+  verify-and-recover:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Self-test coverage firewall (synthetic only)
+        run: python3 workspace/cousteau_southern_observability_audit.py --self-test
+
+      - name: Recover immutable full observations from prior successful Argo computation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/argo-source
+          gh run download 42585534673 --repo Hawkar-usls/Janus-Cosmos \
+            -n cousteau-argo-qc-results-42585534673 -D /tmp/argo-source
+          test -s /tmp/argo-source/argo_runs/run-42585534673.json
+          test -s /tmp/argo-source/argo_observations/argo_core_D_QC1_run-42585534673.json
+
+      - name: Run provenance and observation-gap audit on real data
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/cousteau/southern_ocean/argo_runs
+          mkdir -p data/cousteau/southern_ocean/argo_observations
+          mkdir -p data/cousteau/southern_ocean/observability_runs
+          cp /tmp/argo-source/argo_runs/run-42585534673.json data/cousteau/southern_ocean/argo_runs/
+          cp /tmp/argo-source/argo_observations/argo_core_D_QC1_run-42585534673.json data/cousteau/southern_ocean/argo_observations/
+          python3 workspace/cousteau_southern_observability_audit.py \
+            --observations data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json \
+            --receipt data/cousteau/southern_ocean/argo_runs/run-42585534673.json \
+            --out data/cousteau/southern_ocean/observability_runs/argo-coverage-audit-from-42585534673.json
+
+      - name: Append full raw-derived observations and audited coverage to research PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cousteau/southern_ocean/argo_runs/run-42585534673.json
+          git add data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json
+          git add data/cousteau/southern_ocean/observability_runs/argo-coverage-audit-from-42585534673.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Cousteau: recover Argo-90 data and audit Antarctic seasonal blind spots [skip ci]"
+          for retry in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            echo "Push race; trying bounded linear rebase $retry"
+          done
+          echo "Cannot append evidence safely to branch" >&2
+          exit 1
+
+      - name: Preserve observation audit independently of repository writes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-video-argo-observability-${{ github.run_id }}
+          path: |
+            data/cousteau/southern_ocean/argo_runs/run-42585534673.json
+            data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json
+            data/cousteau/southern_ocean/observability_runs/argo-coverage-audit-from-42585534673.json
+          if-no-files-found: warn
+          retention-days: 90

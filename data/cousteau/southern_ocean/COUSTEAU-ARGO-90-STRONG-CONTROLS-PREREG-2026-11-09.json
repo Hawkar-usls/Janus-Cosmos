@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cousteau.argo_strong_controls_prereg.v1",
+  "recorded_date": "2026-11-09",
+  "kind": "POSTHOC_EXPLORATORY_PREREG_NEW_COMPARISONS",
+  "source_run": "42585534673",
+  "source_observations_path": "data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-42585534673.json",
+  "source_observations_sha256": "bb6d3f30f80dd57d6eb5159d5b1fccdf3fad0a1edcc9afca320b7ec02b726497",
+  "rationale": "Test Ridge versus nontrivial baselines to falsify possible overclaim from depth-only comparator",
+  "previous_result_known": "Ridge beats depth-only baseline across 8 non-independent posthoc holdouts",
+  "fixed_comparators": [
+    {
+      "id": "depth_only",
+      "method": "mean by depth from train floats"
+    },
+    {
+      "id": "month_depth",
+      "method": "mean by pressure + austral calendar month, fallback depth-only"
+    },
+    {
+      "id": "latitude_depth",
+      "method": "mean by pressure + 10-degree latitude band, fallback depth-only"
+    },
+    {
+      "id": "nearest5_geospatial",
+      "method": "mean five nearest training floats at same pressure by haversine great-circle distance, no tuning"
+    }
+  ],
+  "holdouts": [
+    "2024 vs 2022-23",
+    "winter JJA vs others",
+    "latitude <=-60 vs north",
+    "latitude >-60 vs south",
+    "4 90-degree longitude sectors vs others"
+  ],
+  "ridge_spec": "same 9 features, training-only normalization, fixed alpha=10",
+  "success_gate": "No automatic model promotion; report all comparator losses and wins by split and target; no attempt to optimize on result",
+  "blocked_conclusions": [
+    "not prospective forecasting",
+    "not all Southern Ocean",
+    "not transport or ice-shelf melt estimation"
+  ],
+  "retention": "append-only result JSON with source SHA and GitHub CI link"
+}

@@ -1,0 +1,9 @@
+{
+  "error": "RuntimeError",
+  "finished_utc": "2026-11-09T08:22:28.290262+00:00",
+  "message": "All three GDAC index endpoints unavailable: [{'url': 'https://data-argo.ifremer.fr/ar_index_global_prof.txt', 'error': 'ValueError', 'detail': 'download over byte cap'}, {'url': 'https://nrlgodae1.nrlmry.navy.mil/pub/outgoing/argo/ar_index_global_prof.txt', 'error': 'ChunkedEncodingError', 'detail': \"('Connection broken: IncompleteRead(52855619 bytes read, 266378585 more expected)', IncompleteRead(52855619 bytes read, 266378585 more expected))\"}, {'url': 'https://usgodae.org/ftp/outgoing/argo/ar_index_global_prof.txt', 'error': 'ValueError', 'detail': 'missing Argo GDAC index header'}]",
+  "run_id": "42585244142",
+  "schema": "janus.cousteau.argo_train_receipt.v1",
+  "started_utc": "2026-11-09T08:21:46.938587+00:00",
+  "status": "FAILURE_NO_TRAINING_CLAIM"
+}
