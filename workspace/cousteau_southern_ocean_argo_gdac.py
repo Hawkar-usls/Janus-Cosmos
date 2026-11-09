@@ -2,6 +2,7 @@
 """Bounded, evidence-first Southern Ocean Argo-GDAC D-mode CTD profile benchmark."""
 import argparse
 import csv
+import gzip
 import datetime as dt
 import hashlib
 import io
@@ -51,16 +52,30 @@ def download(url, maximum=250000000):
 def get_index():
     errors = []
     for root in URLS:
-        url = root + "ar_index_global_prof.txt"
-        try:
-            payload = download(url, maximum=250000000)
-            if b"file,date,latitude,longitude" not in payload[:6000].lower():
-                raise ValueError("missing Argo GDAC index header")
-            if len(payload) < 100000: raise ValueError("incomplete Argo index")
-            return payload, url, errors
-        except (requests.RequestException, ValueError) as e:
-            errors.append({"url":url, "error":type(e).__name__, "detail":str(e)[:150]})
-    raise RuntimeError("All three GDAC index endpoints unavailable: "+repr(errors))
+        for name in ("ar_index_global_prof.txt.gz", "ar_index_global_prof.txt"):
+            url = root + name
+            try:
+                raw = download(url, maximum=150000000 if name.endswith(".gz") else 650000000)
+                if raw.startswith(bytes.fromhex("1f8b")):
+                    payload = gzip.decompress(raw)
+                else:
+                    payload = raw
+                if len(payload)>650000000:
+                    raise ValueError("decompressed Argo index exceeds size cap")
+                if b"file,date,latitude,longitude" not in payload[:6000].lower():
+                    raise ValueError("missing Argo GDAC index header")
+                if len(payload)<100000:
+                    raise ValueError("incomplete Argo index")
+                return payload, url, errors, {
+                    "download_sha256":sha(raw),
+                    "download_bytes":len(raw),
+                    "decoded_text_sha256":sha(payload),
+                    "decoded_text_bytes":len(payload),
+                    "download_encoding":"gzip" if raw.startswith(bytes.fromhex("1f8b")) else "plain"
+                }
+            except (requests.RequestException, ValueError, OSError) as e:
+                errors.append({"url":url, "error":type(e).__name__, "detail":str(e)[:150]})
+    raise RuntimeError("All six GDAC index endpoint variants unavailable: "+repr(errors))
 
 def find_candidates(payload):
     txt = io.StringIO(payload.decode("utf-8-sig", errors="replace"))
@@ -231,7 +246,7 @@ def execute():
     run_start=utc()
     receipt=OUT/"argo_runs"/("run-"+RUN_ID+".json")
     try:
-        index,index_url,fetch_errors=get_index()
+        index,index_url,fetch_errors,index_transfer=get_index()
         candidates,stats=find_candidates(index)
         RAW_DIR.mkdir(parents=True,exist_ok=True)
         idx_path=RAW_DIR/"ar_index_global_prof.txt"
@@ -276,7 +291,7 @@ def execute():
         profiles_path=OUT/"argo_observations"/("argo_core_D_QC1_run-"+RUN_ID+".json")
         obs={"schema":"janus.cousteau.argo_core_qc1_observations.v1",
              "generated_utc":utc(),"index_url":index_url,
-             "index_sha256":sha(index),"index_bytes":len(index),
+             "index_sha256":sha(index),"index_bytes":len(index),"index_transfer":index_transfer,
              "index_selection_stats":stats,"index_fetch_errors":fetch_errors,
              "requested_profiles_max":90,"profiles_download_attempted":attempted,
              "admissible_profiles":len(accepted),"rejections":rejection,
