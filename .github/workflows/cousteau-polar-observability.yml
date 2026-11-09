@@ -1,0 +1,39 @@
+name: Cousteau polar observability scientific firewall
+on:
+  push:
+    branches: [experiment/cousteau-southern-ocean-20261109]
+    paths:
+      - 'workspace/cousteau_polar_observability.py'
+      - 'workspace/test_cousteau_polar_observability.py'
+      - '.github/workflows/cousteau-polar-observability.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  polar-evidence-gate:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: QC8 and missing-telemetry adversarial self-tests
+        run: python -m unittest workspace.test_cousteau_polar_observability -v
+      - name: Emit no-data-safe coverage receipt
+        run: python workspace/cousteau_polar_observability.py --out /tmp/cousteau-polar-observability-empty.json
+      - name: Audit any archived Argo QC observations without re-downloading
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          fs=(data/cousteau/southern_ocean/argo_observations/argo_core_D_QC1_run-*.json)
+          if [ ${#fs[@]} -eq 0 ]; then echo "NO_ARCHIVED_ARGO_OBSERVATIONS__NOT_REAL_DATA_CLAIM"; exit 0; fi
+          for p in "${fs[@]}"; do
+            python workspace/cousteau_polar_observability.py --input "$p" --out "/tmp/cousteau-polar-audit-${p##*/}"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cousteau-polar-observability-${{ github.run_id }}
+          path: /tmp/cousteau-polar-*.json
+          retention-days: 90
