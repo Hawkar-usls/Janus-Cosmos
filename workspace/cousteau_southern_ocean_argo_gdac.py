@@ -78,6 +78,14 @@ def get_index():
     raise RuntimeError("All six GDAC index endpoint variants unavailable: "+repr(errors))
 
 def find_candidates(payload):
+    """Deterministically cover latitude x calendar month, without recent-December bias.
+
+    Each float contributes at most one candidate. Choose a source date by a
+    SHA256 lottery over D-mode files rather than always selecting December
+    (last profile) from an active float. Round-robin equally across available
+    latitude-month buckets. This changes the sampling design, not the D/QC1
+    or WMO-disjoint evaluation gates.
+    """
     txt = io.StringIO(payload.decode("utf-8-sig", errors="replace"))
     non_comment = (line for line in txt if not line.lstrip().startswith("#") and line.strip())
     reader = csv.DictReader(non_comment)
@@ -89,29 +97,66 @@ def find_candidates(payload):
     count_d = 0
     for row in reader:
         try:
-            lat=float(row["latitude"])
-            lon=float(row["longitude"])
-            date=row["date"]
-            path=row["file"]
+            lat = float(row["latitude"])
+            lon = float(row["longitude"])
+            date = row["date"]
+            path = row["file"]
             if not (-90 <= lat <= -50 and -180 <= lon <= 180 and
                     date[:8].isdigit() and "20220101" <= date[:8] < "20250101"):
                 continue
             count_region += 1
-            parts=path.split("/")
-            if len(parts)<4 or parts[-2]!="profiles" or ".." in parts: continue
-            name=parts[-1]
-            if not (name.startswith("D") and name.endswith(".nc")): continue
+            parts = path.split("/")
+            if len(parts) < 4 or parts[-2] != "profiles" or ".." in parts:
+                continue
+            name = parts[-1]
+            if not (name.startswith("D") and name.endswith(".nc")):
+                continue
             count_d += 1
-            wmo=parts[-3]
-            if not wmo.isdigit(): continue
-            item={"file":path, "wmo":wmo, "date_utc":date, "lat":lat, "lon":lon}
-            # Keep the most recent candidate from each WMO. One profile per WMO.
-            if wmo not in seen or (date, path) > (seen[wmo]["date_utc"], seen[wmo]["file"]):
-                seen[wmo]=item
-        except (ValueError, TypeError, KeyError): continue
-    arr=sorted(seen.values(),key=lambda z:sha((z["wmo"]+"|20261109").encode()))
-    return arr, {"regional_2022_2024_index_entries":count_region,
-                 "d_mode_file_entries":count_d,"unique_d_mode_wmo_candidates":len(arr)}
+            wmo = parts[-3]
+            if not wmo.isdigit():
+                continue
+            score = sha(("southern-stratified-v2|" + wmo + "|" + date + "|" + path).encode())
+            item = {"file":path, "wmo":wmo, "date_utc":date, "lat":lat, "lon":lon,
+                    "_selection_score":score}
+            if wmo not in seen or score < seen[wmo]["_selection_score"]:
+                seen[wmo] = item
+        except (ValueError, TypeError, KeyError):
+            continue
+
+    buckets = {}
+    for row in seen.values():
+        b = min(3, int((-row["lat"] - 50)//10))
+        month = int(row["date_utc"][4:6])
+        if month not in range(1,13):
+            continue
+        buckets.setdefault((b,month),[]).append(row)
+    for rows in buckets.values():
+        rows.sort(key=lambda x:sha((x["wmo"] + "|bucket-order-v2").encode()))
+    # Rare high-latitude and winter bins get a fair first attempt, not an
+    # inflated data weight. No simulated data are added to empty bins.
+    ordered_keys = sorted(buckets, key=lambda k:(-k[0], (k[1]-6)%12, k[1]))
+    arr=[]
+    cursor=0
+    while True:
+        taken=False
+        for key in ordered_keys:
+            bucket=buckets[key]
+            if cursor < len(bucket):
+                item=dict(bucket[cursor])
+                del item["_selection_score"]
+                arr.append(item)
+                taken=True
+        if not taken: break
+        cursor+=1
+    return arr, {
+        "regional_2022_2024_index_entries":count_region,
+        "d_mode_file_entries":count_d,
+        "unique_d_mode_wmo_candidates":len(arr),
+        "selection_rule":"one SHA256-selected delayed-mode candidate per WMO; latitude-month bucket round-robin",
+        "selection_epoch":"SOUTHERN_STRATIFIED_V2_20261109",
+        "candidate_buckets_available":len(ordered_keys),
+        "no_synthetic_padding":True
+    }
 
 def normalize_path(path):
     if path.startswith("dac/"): return path
@@ -332,6 +377,22 @@ def selftest():
     assert result["split"]["test_wmos"]>0
     assert all(result["results"][var]["ridge"]["rmse"]>=0 for var in ("temp_c","psal_psu"))
     assert len(list(TARGET_P))==5
+    # Source-index sampler test: must vary selected month and avoid duplicate WMO.
+    import csv as _csv
+    import io as _io
+    _i=_io.StringIO()
+    _w=_csv.writer(_i)
+    _w.writerow(["file","date","latitude","longitude","ocean","profiler_type","institution","date_update"])
+    for k in range(36):
+        wmo=str(7000000+k)
+        latitude=-54-(k%4)*10
+        for month in (1,6,12):
+            _w.writerow(["dac/test/"+wmo+"/profiles/D"+wmo+"_%03d.nc"%month,
+                         "2023%02d15000000"%month, latitude, 12.0,"A","0","x","20240101"])
+    selected, stat=find_candidates(_i.getvalue().encode())
+    assert len(selected)==36 and len({v["wmo"] for v in selected})==36
+    assert len({v["date_utc"][4:6] for v in selected})>=2
+    assert stat["selection_epoch"]=="SOUTHERN_STRATIFIED_V2_20261109"
     print("ARGO_SELF_TEST_PASS__SYNTHETIC_ONLY")
 
 if __name__=="__main__":
