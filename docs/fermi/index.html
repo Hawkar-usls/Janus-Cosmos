@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040816">
+  <meta name="description" content="JANUS Cosmos FERMI-V7 — проверяемые событийные данные Fermi-LAT, контроль происхождения и запрет на неподтверждённые выводы LIV.">
+  <title>JANUS COSMOS · FERMI V7 Evidence Lab</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="../" aria-label="JANUS Cosmos Observer"><span class="mark" aria-hidden="true">✧</span><span>JANUS <b>COSMOS</b><small>RESEARCH CONTROL PLANE</small></span></a>
+    <nav class="navlinks" aria-label="Основная навигация">
+      <a href="../">EARTH / SPACE</a>
+      <a href="../galaxy/">COSMOS VOLUME 3D</a>
+      <a href="./" aria-current="page">FERMI V7</a>
+      <a href="https://github.com/Hawkar-usls/Janus-Cosmos" target="_blank" rel="noopener noreferrer">GITHUB</a>
+    </nav>
+    <div class="edition"><span class="dot"></span> V7 · ARCHIVAL EVIDENCE</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="eyebrow">EXPERIMENT / NASA FERMI LAT / PASS 8 · SOURCE BOUND</div>
+      <h1>Время. Энергия. <em>Доказательства.</em></h1>
+      <p>Исследовательский пульт JANUS: события Fermi-LAT из ранее обработанных архивных FITS, точные идентификаторы, воспроизводимый контроль и границы допустимых выводов. Никаких заявлений об обнаружении LIV или ретропричинности.</p>
+      <div class="intro-actions">
+        <a href="https://fermi.gsfc.nasa.gov/ssc/data/access/" target="_blank" rel="noopener noreferrer">NASA FSSC · первичные данные</a>
+        <a href="https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/docs/COSMOS_FERMI_V7.md" target="_blank" rel="noopener noreferrer">Документация V7</a>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Параметры набора">
+      <div class="metric"><span>КОСМИЧЕСКИЕ ГАММА-ВСПЛЕСКИ</span><strong id="metric-bursts">—</strong><small>Источников в ретроспективном V4</small></div>
+      <div class="metric"><span>ЗАПИСЕЙ В ОБЛАСТЯХ ПОИСКА</span><strong id="metric-roi">—</strong><small>До диагностических критериев</small></div>
+      <div class="metric"><span>ДИАГНОСТИЧЕСКИХ КАНДИДАТОВ</span><strong id="metric-selected">—</strong><small>Не доказанная принадлежность GRB</small></div>
+      <div class="metric emphasis"><span>НАУЧНЫЙ ДОПУСК LIV</span><strong>BLOCKED</strong><small>Не установлены модель и независимая проверка</small></div>
+    </section>
+
+    <section class="workspace">
+      <aside class="panel filters">
+        <div class="panel-heading"><b>01 / SELECTION</b><span>READ ONLY</span></div>
+        <h2>Контроль выборки</h2>
+        <label for="burst">Источник GRB</label>
+        <select id="burst"><option value="all">Все 3 источника</option></select>
+        <label for="min-energy">Минимальная энергия <span id="min-energy-value">1 ГэВ</span></label>
+        <input id="min-energy" type="range" min="1" max="100" step="1" value="1">
+        <label for="time-window">Время после триггера GBM</label>
+        <select id="time-window">
+          <option value="all">Все события</option>
+          <option value="2">Первые 2 секунды</option>
+          <option value="30">Первые 30 секунд</option>
+          <option value="300">Первые 300 секунд</option>
+        </select>
+        <label for="event-search">RUN_ID / EVENT_ID / GRB</label>
+        <input id="event-search" type="search" placeholder="Поиск идентификатора" autocomplete="off">
+        <div class="selection-note">
+          <span>ВЫБРАНО</span>
+          <strong id="filtered-count">—</strong>
+          <small>Фильтрация меняет только отображение. Число исходных событий не меняется.</small>
+        </div>
+        <button id="reset" class="secondary" type="button">Сбросить фильтры</button>
+        <a class="link" href="https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/data/cosmos/COSMOS-ALI-V4-FERMI-RAW-EVENT-DIAGNOSTICS-2026-10-18.json" target="_blank" rel="noopener noreferrer">Архивный V4 · event-level JSON</a>
+        <a class="link" href="https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/data/cosmos/COSMOS-ALI-V4-FERMI-RAW-FITS-MANIFEST-2026-10-18.json" target="_blank" rel="noopener noreferrer">FITS manifest · SHA-256</a>
+      </aside>
+
+      <section class="panel plot-panel">
+        <div class="panel-heading"><b>02 / OBSERVATIONS</b><span id="plot-meta">AWAITING SOURCE DATA</span></div>
+        <div class="plot-title">
+          <div><h2>Фотонные события LAT</h2><p>Каждая точка = событийная запись после фиксированных диагностических критериев</p></div>
+          <div class="legend"><span><i></i>090510</span><span><i></i>090902B</span><span><i></i>130427A</span></div>
+        </div>
+        <div class="chart-area">
+          <canvas id="plot" tabindex="0" aria-label="График энергии и времени событий Fermi LAT. Выберите строку в таблице для доступной альтернативы."></canvas>
+        </div>
+        <div class="axes-legend"><span>↑ ENERGY · ГэВ (log scale)</span><span>TIME SINCE ESTIMATED GBM TRIGGER · секунды (log1p) →</span></div>
+        <p class="instrument-note">Ось времени использует оценку времени GBM-триггера, а не время излучения фотона в космосе. Это <strong>диагностическая диаграмма зарегистрированных событий</strong>, не измерение скорости света.</p>
+        <div class="event-details">
+          <div class="panel-heading"><b>SELECTED EVENT</b><span id="selected-identity">NOT SELECTED</span></div>
+          <div id="event-detail" class="detail-body">Нажми на точку графика или на строку таблицы, чтобы изучить идентификаторы, MET, энергию и параметры качества.</div>
+        </div>
+      </section>
+
+      <aside class="panel provenance">
+        <div class="panel-heading"><b>03 / EVIDENCE GATES</b><span>NO CLAIM PROMOTION</span></div>
+        <h2>Происхождение и проверки</h2>
+        <div class="gate"><span>Манифест ↔ архив событий</span><strong id="gate-manifest">Загрузка</strong></div>
+        <div class="gate"><span>Событийные ID и критерии</span><strong id="gate-events">Загрузка</strong></div>
+        <div class="gate"><span>FITS байты в этой сборке</span><strong id="gate-raw" class="neutral">Загрузка</strong></div>
+        <div class="gate"><span>Внешняя независимая проверка</span><strong class="neutral">НЕ ПРОВЕДЕНА</strong></div>
+        <div class="gate"><span>Отклик LAT · PSF/EDISP/фон</span><strong class="warning">НЕ ЗАКРЫТ</strong></div>
+        <div class="gate"><span>Время излучения источника</span><strong class="warning">НЕ ВОССТАНОВЛЕНО</strong></div>
+        <div class="gate"><span>LIV / физическая новая теория</span><strong class="warning">НЕ ДОКАЗАНО</strong></div>
+        <div class="source-card">
+          <div class="eyebrow">SELECTED GRB · NASA FSSC</div>
+          <h3 id="source-title">Выбери источник</h3>
+          <p id="source-criteria">Оригинальные FITS-файлы описаны в архивном манифесте.</p>
+          <div class="hash-label">EVENT FITS SHA-256</div>
+          <code id="source-hash">—</code>
+          <a id="source-fits" href="https://fermi.gsfc.nasa.gov/ssc/data/access/" rel="noopener noreferrer" target="_blank">NASA FSSC · открыть архив</a>
+        </div>
+        <div class="gate-note" id="gate-note">Оригинальные бинарные файлы в Pages не публикуются. JSON-проверка сама по себе не означает повторную проверку FITS.</div>
+      </aside>
+    </section>
+
+    <section class="panel ledger" aria-label="Таблица наблюдений">
+      <div class="panel-heading"><b>04 / EVENT LEDGER</b><span id="ledger-count">—</span></div>
+      <h2>События с исходными идентификаторами</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>GRB</th><th>RUN_ID</th><th>EVENT_ID</th><th>MET · s</th><th>После GBM · s</th><th>Энергия · ГэВ</th><th>От центра · °</th><th>THETA · °</th><th>ZENITH · °</th></tr></thead>
+          <tbody id="ledger"><tr><td colspan="9">Загружаются события…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="caption">Кандидаты отобраны по архивному V4: SOURCE class bit, GTI/spacecraft, энергия, угол прихода, зенит и ROI. Их принадлежность конкретному GRB не была оценена через event-by-event likelihood.</p>
+    </section>
+
+    <section class="limitations">
+      <div><div class="eyebrow">METHOD / FALSIFICATION FIRST</div><h2>Что V7 может — и чего пока не может</h2></div>
+      <p>V7 может показывать измеренные событийные величины, сверять идентификаторы, учет отклонённых записей, ссылку на оригинальные FITS и контрольные суммы. Нельзя интерпретировать время от GBM как физическую задержку распространения. Без модели источника, полноценного отклика LAT и статистического калибрования нельзя получать LIV p-value, ограничение шага решётки или заявлять об обнаружении ретропричинного сигнала.</p>
+    </section>
+  </main>
+  <footer><span>JANUS COSMOS · FERMI-V7 · EVIDENCE IS NOT A VERDICT</span><span>READ ONLY · SOURCE LINKS · NO LIV CONCLUSION</span></footer>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
