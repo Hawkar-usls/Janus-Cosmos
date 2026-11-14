@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#020612">
+  <meta name="description" content="JANUS COSMOS VOLUME — 3D galaxy illustration and source-linked Fermi-LAT photon observations.">
+  <title>JANUS COSMOS · VOLUME OBSERVATORY</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><span></span><i></i></div>
+      <div><div class="eyebrow">JANUS · RESEARCH INFRASTRUCTURE</div><strong>JANUS <em>COSMOS</em></strong></div>
+    </div>
+    <nav class="toplinks">
+      <a href="https://hawkar-usls.github.io/Janus-Cosmos/" rel="noopener">EARTH / SPACE OBSERVER</a>
+      <a href="https://github.com/Hawkar-usls/Janus-Cosmos" target="_blank" rel="noopener noreferrer">SOURCE GITHUB</a>
+    </nav>
+    <div class="topstatus"><span class="status-dot"></span> VOLUME OBSERVATORY · v1</div>
+  </header>
+
+  <main class="layout">
+    <section class="stage" aria-label="Интерактивная объёмная карта">
+      <div class="stage-copy">
+        <div class="eyebrow">01 / SPACE · MATTER · MEASUREMENT</div>
+        <h1 id="heading">Галактика · объемная модель</h1>
+        <p id="subheading">Водородные облака и спиральные рукава: визуальная схема, не измеренное положение газа.</p>
+      </div>
+      <div class="halo" aria-hidden="true"></div>
+      <canvas id="cosmos" aria-label="Трёхмерный интерактивный космос: вращайте курсором и приближайте колесом"></canvas>
+      <div class="stage-bottom">
+        <div class="chip"><span class="tiny-dot"></span><span id="view">ILLUSTRATIVE / NOT MEASURED</span></div>
+        <div class="coordinates" id="axes">Модельные координаты · без физических единиц</div>
+      </div>
+      <div class="compass">DRAG TO ORBIT · SCROLL TO ZOOM · SELECT TO INSPECT</div>
+    </section>
+
+    <aside class="side">
+      <div class="panel control-panel">
+        <div class="panel-kicker">RESEARCH LENSES <span>01 / 03</span></div>
+        <div class="mode-set" role="group" aria-label="Выбор исследовательского слоя">
+          <button class="mode active" type="button" data-mode="galaxy" aria-pressed="true"><span>01</span><b>МЛЕЧНЫЙ ПУТЬ</b><small>3D схема газа</small></button>
+          <button class="mode" type="button" data-mode="fermi" aria-pressed="false"><span>02</span><b>FERMI-LAT</b><small>Измеренные фотоны</small></button>
+          <button class="mode" type="button" data-mode="hi" aria-pressed="false"><span>03</span><b>HI4PI / HI</b><small>Импорт наблюдений</small></button>
+        </div>
+        <div class="divider"></div>
+        <div class="metric-row">
+          <div><span>ВИЗУАЛИЗИРУЕМЫХ ТОЧЕК</span><strong id="points">—</strong></div>
+          <div><span>ИСХОДНЫЙ FERMI</span><strong id="fermi-count">Загрузка…</strong></div>
+        </div>
+        <div class="slider-group">
+          <label for="brightness">Свечение <output id="brightness-value">85%</output></label>
+          <input id="brightness" type="range" min="20" max="170" value="85">
+        </div>
+        <div class="slider-group">
+          <label for="slice">Срез объёма <output id="slice-value">100%</output></label>
+          <input id="slice" type="range" min="5" max="100" value="100">
+        </div>
+        <div class="actions">
+          <button id="spin" type="button">Остановить вращение</button>
+          <button id="reset" type="button">Сброс камеры</button>
+        </div>
+        <label class="upload" for="hi-upload">+ ИМПОРТ ИЗМЕРЕННОГО HI JSON</label>
+        <input id="hi-upload" type="file" accept=".json,application/json" hidden>
+      </div>
+
+      <div class="panel details">
+        <div class="panel-kicker">SOURCE INSPECTOR <span id="engine">—</span></div>
+        <pre id="detail" aria-live="polite">Вращайте поле мышью или пальцем, увеличивайте колесом.</pre>
+        <a id="source" target="_blank" rel="noopener noreferrer" href="https://www.astro.uni-bonn.de/hisurvey/hi4pi/">HI4PI · научный источник для будущего импорта</a>
+      </div>
+      <div class="panel integrity">
+        <div class="panel-kicker">SCIENTIFIC BOUNDARY <span>NO FALSE CLAIMS</span></div>
+        <p id="scientific-note">ILLUSTRATIVE_DENSITY_MODEL_NOT_OBSERVATION</p>
+        <p>Модель Млечного Пути не содержит измеренных расстояний до облаков водорода. Режим Fermi — пространство признаков (энергия, задержка относительно триггера, красное смещение), а не физическая карта Вселенной.</p>
+        <p class="status" id="status" role="status">Схема загружена; исходный Fermi JSON загружается отдельно.</p>
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <span>JANUS COSMOS / VOLUME · observational facts and visual hypotheses are separate</span>
+    <span>Вдохновение: интерактивная карта H I Млечного Пути · <a href="https://now.intellectronica.net/hydrogen-milky-way/" target="_blank" rel="noopener noreferrer">original reference</a></span>
+  </footer>
+  <script type="module" src="./view.mjs"></script>
+</body>
+</html>
