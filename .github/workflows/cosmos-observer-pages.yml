@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'docs/observer/**'
+      - 'docs/galaxy/**'
+      - 'tests/test_cosmos_volume.mjs'
       - 'domains/earth/**'
       - 'domains/space/**'
       - 'domains/bridge/**'
@@ -15,6 +17,8 @@ on:
     branches: [main]
     paths:
       - 'docs/observer/**'
+      - 'docs/galaxy/**'
+      - 'tests/test_cosmos_volume.mjs'
       - 'domains/earth/**'
       - 'domains/space/**'
       - 'domains/bridge/**'
@@ -67,6 +71,9 @@ jobs:
           print('PASS SELF-CONTAINED AUTOSYNC RENDER CONTRACT')
           PY
           node --check docs/observer/app.js
+          node --check docs/galaxy/model.mjs
+          node --check docs/galaxy/view.mjs
+          node --test tests/test_cosmos_volume.mjs
 
       - name: Smoke-build local Observer index
         run: |
@@ -117,6 +124,9 @@ jobs:
           cp docs/observer/index.html site/
           cp docs/observer/styles.css site/
           cp docs/observer/app.js site/
+          mkdir -p site/galaxy
+          cp docs/galaxy/index.html docs/galaxy/style.css docs/galaxy/model.mjs docs/galaxy/view.mjs site/galaxy/
+          cp data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json site/data/fermi.json
           cp domains/earth/NUC_EVENT_LEDGER_v0.1.json site/data/earth-ledger.json
           cp domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json site/data/space-ledger.json
           cp domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json site/data/bridge-ledger.json
