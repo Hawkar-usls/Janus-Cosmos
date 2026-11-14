@@ -6,6 +6,14 @@ on:
     paths:
       - 'docs/observer/**'
       - 'docs/galaxy/**'
+      - 'docs/fermi/**'
+      - 'data/cosmos/COSMOS-ALI-V4-FERMI-RAW-FITS-MANIFEST-2026-10-18.json'
+      - 'data/cosmos/COSMOS-ALI-V4-FERMI-RAW-EVENT-DIAGNOSTICS-2026-10-18.json'
+      - 'data/cosmos/COSMOS-ALI-V6-JOINT-OBSERVATION-READINESS-2026-10-19.json'
+      - 'tools/build_cosmos_fermi_v7.py'
+      - 'tools/verify_fermi_v7_independent.py'
+      - 'tests/test_cosmos_fermi_v7.py'
+      - 'tests/test_cosmos_fermi_v7_browser.py'
       - 'tests/test_cosmos_volume.mjs'
       - 'tests/test_cosmos_volume_browser.py'
       - 'domains/earth/**'
@@ -19,6 +27,14 @@ on:
     paths:
       - 'docs/observer/**'
       - 'docs/galaxy/**'
+      - 'docs/fermi/**'
+      - 'data/cosmos/COSMOS-ALI-V4-FERMI-RAW-FITS-MANIFEST-2026-10-18.json'
+      - 'data/cosmos/COSMOS-ALI-V4-FERMI-RAW-EVENT-DIAGNOSTICS-2026-10-18.json'
+      - 'data/cosmos/COSMOS-ALI-V6-JOINT-OBSERVATION-READINESS-2026-10-19.json'
+      - 'tools/build_cosmos_fermi_v7.py'
+      - 'tools/verify_fermi_v7_independent.py'
+      - 'tests/test_cosmos_fermi_v7.py'
+      - 'tests/test_cosmos_fermi_v7_browser.py'
       - 'tests/test_cosmos_volume.mjs'
       - 'domains/earth/**'
       - 'domains/space/**'
@@ -75,19 +91,27 @@ jobs:
           node --check docs/galaxy/model.mjs
           node --check docs/galaxy/view.mjs
           node --test tests/test_cosmos_volume.mjs
+          node --check docs/fermi/app.mjs
+          python -m py_compile tools/build_cosmos_fermi_v7.py tools/verify_fermi_v7_independent.py
+          python tools/build_cosmos_fermi_v7.py --out docs/fermi/data/v7-events.json
+          python tools/verify_fermi_v7_independent.py --view docs/fermi/data/v7-events.json
+          python -m unittest discover -s tests -p "test_cosmos_fermi_v7.py" -v
 
       - name: Chromium WebGL2 · Galaxy and scientific provenance smoke
         run: |
           python -m pip install --quiet playwright pillow
           python -m playwright install chromium
           python tests/test_cosmos_volume_browser.py
+          python tests/test_cosmos_fermi_v7_browser.py
 
       - name: Attach Cosmos Volume visual preview
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cosmos-volume-preview
-          path: janus-cosmos-volume-preview.png
+          path: |
+            janus-cosmos-volume-preview.png
+            janus-fermi-v7-preview.png
           if-no-files-found: ignore
 
       - name: Smoke-build local Observer index
@@ -142,6 +166,10 @@ jobs:
           mkdir -p site/galaxy
           cp docs/galaxy/index.html docs/galaxy/style.css docs/galaxy/model.mjs docs/galaxy/view.mjs site/galaxy/
           cp data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json site/data/fermi.json
+          mkdir -p site/fermi/data
+          cp docs/fermi/index.html docs/fermi/style.css docs/fermi/app.mjs site/fermi/
+          python tools/build_cosmos_fermi_v7.py --out site/fermi/data/v7-events.json
+          python tools/verify_fermi_v7_independent.py --view site/fermi/data/v7-events.json
           cp domains/earth/NUC_EVENT_LEDGER_v0.1.json site/data/earth-ledger.json
           cp domains/space/PALOMAR_TRANSIENT_LEDGER_v0.1.json site/data/space-ledger.json
           cp domains/bridge/EARTH_SPACE_LEDGER_JOIN_CONTRACT_v0.1.json site/data/bridge-ledger.json
