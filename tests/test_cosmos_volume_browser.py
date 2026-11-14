@@ -55,7 +55,7 @@ def run():
             assert "ANGULAR SKY" in page.locator("#view").inner_text()
             assert "OBSERVED_ANGULAR_SHELL" in page.locator("#scientific-note").inner_text()
             page.locator("#reset").click()
-            page.locator("#slice").fill("60")
+            page.locator("#slice").evaluate("(el) => {el.value = 60; el.dispatchEvent(new Event(\u0027input\u0027, {bubbles:true}));}")
             assert page.locator("#slice-value").inner_text()=="60%"
             page.locator("#spin").click()
             assert "Включить" in page.locator("#spin").inner_text()
