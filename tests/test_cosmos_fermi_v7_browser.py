@@ -1,5 +1,6 @@
 """Read-only browser smoke on the source-derived FERMI-V7 dataset."""
 from __future__ import annotations
+import re
 import os
 import threading
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
@@ -31,7 +32,7 @@ def run():
             assert init["burstCount"]==3,init
             assert init["scientificStatus"]=="BLOCKED",init
             assert init["rawStatus"]=="RAW_FITS_NOT_RECHECKED_THIS_BUILD",init
-            assert "6520" in page.locator("#metric-roi").inner_text().replace(" ",""),page.locator("#metric-roi").inner_text()
+            assert "6520"==re.sub(r"\D","",page.locator("#metric-roi").inner_text()),page.locator("#metric-roi").inner_text()
             png=page.screenshot(path="janus-fermi-v7-preview.png",full_page=True)
             pic=Image.open(BytesIO(png)).convert("RGB")
             assert pic.width>=1500
@@ -45,7 +46,7 @@ def run():
             assert page.evaluate("window.__JANUS_FERMI_V7_DIAG().filteredEvents")==175
             page.locator("#ledger tr").nth(1).click()
             assert page.evaluate("window.__JANUS_FERMI_V7_DIAG().selectedEvent")
-            assert "SOURCE" in page.locator("#event-detail").inner_text()
+            assert "LAT Extended Pass8" in page.locator("#event-detail").inner_text()
             assert page.locator("#source-fits").get_attribute("href").startswith(
                 "https://fermi.gsfc.nasa.gov/FTP/fermi/data/lat/queries/")
             assert not errors,errors
