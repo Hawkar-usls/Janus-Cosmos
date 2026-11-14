@@ -1,0 +1,67 @@
+name: JANUS FERMI-V7 pinned FITS replay (read-only)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cosmos-fermi-v7-fits-replay.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  historical-fits-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Attempt exact NASA FSSC query-byte retrieval and SHA-256
+        id: retrieve
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/fermi-pinned"
+          python scripts/fetch_fermi_lat_v4.py --raw-dir "$RUNNER_TEMP/fermi-pinned"
+          echo success > fermi-v7-retrieve.ok
+      - name: Replay archived V4 event extraction from exact FITS
+        id: replay
+        run: |
+          set -euo pipefail
+          python tools/build_cosmos_fermi_v7.py \
+            --raw-dir "$RUNNER_TEMP/fermi-pinned" \
+            --out "$RUNNER_TEMP/fermi-v7-replay.json"
+          python tools/verify_fermi_v7_independent.py \
+            --view "$RUNNER_TEMP/fermi-v7-replay.json"
+          echo success > fermi-v7-replay.ok
+      - name: Record truthful raw replay evidence state
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os,shutil
+          from pathlib import Path
+          success=Path('fermi-v7-retrieve.ok').exists() and Path('fermi-v7-replay.ok').exists()
+          source=Path(os.environ['RUNNER_TEMP'])/'fermi-v7-replay.json'
+          if success and source.is_file():shutil.copyfile(source,'fermi-v7-replay.json')
+          receipt={
+              'schema':'janus.cosmos.fermi.v7.raw-replay-receipt.v1',
+              'repo_commit':os.environ.get('GITHUB_SHA'),
+              'workflow_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'exact_byte_retrieval_success':Path('fermi-v7-retrieve.ok').exists(),
+              'event_replay_success':Path('fermi-v7-replay.ok').exists(),
+              'result':'PINNED_FITS_BYTES_AND_INTERNAL_V4_REPLAY_MATCHED' if success else 'RAW_BYTES_NOT_REVALIDATED',
+              'independent_fits_parser':False,
+              'independent_external_science_replication':False,
+              'astrophysical_liv_inference':'BLOCKED',
+              'note':'NASA FSSC generated query URLs may expire. A failed download or changed SHA forbids fresh verification claims.'
+          }
+          Path('fermi-v7-raw-replay-receipt.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - name: Upload receipt and exact replay summary (never raw FITS)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fermi-v7-raw-replay-receipt
+          path: |
+            fermi-v7-raw-replay-receipt.json
+            fermi-v7-replay.json
+          if-no-files-found: ignore
