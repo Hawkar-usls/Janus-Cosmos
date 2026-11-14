@@ -7,6 +7,7 @@ on:
       - 'docs/observer/**'
       - 'docs/galaxy/**'
       - 'tests/test_cosmos_volume.mjs'
+      - 'tests/test_cosmos_volume_browser.py'
       - 'domains/earth/**'
       - 'domains/space/**'
       - 'domains/bridge/**'
@@ -74,6 +75,20 @@ jobs:
           node --check docs/galaxy/model.mjs
           node --check docs/galaxy/view.mjs
           node --test tests/test_cosmos_volume.mjs
+
+      - name: Chromium WebGL2 · Galaxy and scientific provenance smoke
+        run: |
+          python -m pip install --quiet playwright pillow
+          python -m playwright install chromium
+          python tests/test_cosmos_volume_browser.py
+
+      - name: Attach Cosmos Volume visual preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cosmos-volume-preview
+          path: janus-cosmos-volume-preview.png
+          if-no-files-found: ignore
 
       - name: Smoke-build local Observer index
         run: |
