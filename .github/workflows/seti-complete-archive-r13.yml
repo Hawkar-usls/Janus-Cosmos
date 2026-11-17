@@ -1,0 +1,111 @@
+name: JANUS SETI R13 complete archive and morphology audit
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-complete-archive-r13.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectral dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 astropy==7.0.2
+      - name: Freeze archive census and independent facility metadata
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python -m py_compile research/seti/r13_complete_archive.py
+          python research/seti/r13_complete_archive.py freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r13-manifest
+          path: runtime/r13/
+          retention-days: 90
+  census:
+    needs: freeze
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard: [0,1,2,3,4,5,6,7]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectral dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 astropy==7.0.2
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: janus-seti-r13-manifest
+          path: runtime/r13/
+      - name: Replay all files in this immutable shard
+        env:
+          PYTHONUNBUFFERED: '1'
+          SHARD: ${{ matrix.shard }}
+        run: python research/seti/r13_complete_archive.py shard "$SHARD"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-r13-shard-${{ matrix.shard }}
+          path: runtime/r13/shard-${{ matrix.shard }}/
+          retention-days: 90
+  aggregate:
+    needs: [freeze,census]
+    if: always() && needs.freeze.result == 'success'
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectral dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 astropy==7.0.2
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: janus-seti-r13-manifest
+          path: runtime/r13/
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: janus-seti-r13-shard-*
+          path: runtime/r13/downloads/
+      - name: Organize shard receipts and aggregate
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          for i in 0 1 2 3 4 5 6 7; do
+            p="runtime/r13/downloads/janus-seti-r13-shard-$i"
+            if [ -f "$p/result.json" ]; then
+              mkdir -p "runtime/r13/shard-$i"
+              cp "$p/result.json" "runtime/r13/shard-$i/result.json"
+            fi
+          done
+          python research/seti/r13_complete_archive.py aggregate
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r13-summary
+          path: runtime/r13/summary.json
+          retention-days: 90
+      - name: Report incomplete coverage as explicit failure
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open("runtime/r13/summary.json"))
+          assert s["planned"]==s["completed"] and not s["missing_shards"]
+          PY
