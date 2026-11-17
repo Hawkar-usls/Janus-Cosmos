@@ -1,0 +1,36 @@
+{
+  "schema": "janus.seti.r15b_r16b_r17b.v1",
+  "r15b": {
+    "source": "https://seti.berkeley.edu/blc1/",
+    "mjd": 58602,
+    "targets": [
+      "ProxCen",
+      "1421-490",
+      "1934-638"
+    ],
+    "types": [
+      "HDF5",
+      "filterbank"
+    ],
+    "method": "Find actual indexed basename/URL by timestamp or metadata; no assumed filename regex. Preserve exact matching records, inspect HDF5 headers before power; for compatible fine products replay 982.002571 MHz ± 2500 Hz, drift ±0.15 Hz/s. If no valid product hold; filterbank rows inventory only.",
+    "limit_per_role": 8
+  },
+  "r16b": {
+    "artifact": {
+      "id": 14331034609,
+      "digest": "29f3825c241062c6b74441988d7f1de0317b721e3ef8d5d889c9972893fc2ac6"
+    },
+    "method": "Verify SHA256, retrieve sole frozen forward preliminary candidate; replay all six full tiles using fixed original drift, zero drift, continuous track, and wider drift corridor descriptive diagnostic ±0.2 Hz/s and ±100 Hz around fixed and extrapolated anchor. Read header coordinates from original files and compare ON/OFF. Preserve exact fixed criteria; any strong OFF match in original frozen hypotheses raises interference concern. Wider corridor is exploratory, not same-emitter proof.",
+    "thresholds": {
+      "score": 8,
+      "persistence": 0.5
+    },
+    "scope": "Same session only; archive file labels do not establish pointing independent of metadata."
+  },
+  "r17b": {
+    "source": "R17 source artifacts, training R9 and development evaluation R11 (already inspected, NOT fresh prospective test).",
+    "method": "Use identical frozen paired samples from R17 plus deterministic hard real OFF peak-centered patches with injected counterparts. Train standard classifier on mathematical features (blind maximum track score, persistence, drift, stationary score, spectral concentration, recurrence of peaks within patch); threshold calibrated on R9 only; compare classical baseline and hybrid on R11 without modifying production. Report per-target breakdown, no astrophysical origin labels.",
+    "seed": 20261117,
+    "claim_ceiling": "Development only; even a gain requires fresh independent target exam. Unmodified controls are not known null."
+  }
+}
