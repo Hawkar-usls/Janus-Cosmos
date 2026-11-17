@@ -5,7 +5,7 @@ import numpy as np
 import r24_odontocrystal as od
 import r17c_frozen_holdout as hold
 import r9_expanded_search as eng
-import r15d_r16d_r17d_replay as blc
+import os,io,zipfile,requests
 P=pathlib.Path("research/seti/r26c_reference_protocol.json")
 S=json.loads(P.read_text());OUT=pathlib.Path("runtime/r26c");OUT.mkdir(parents=True,exist_ok=True)
 hold.S={**hold.S,"seed":S["seed"],"exclude":sorted(set(hold.S["exclude"]+S["exclude_extra"]))}
@@ -121,8 +121,31 @@ def selftest():
     t={"df_hz":2.,"channel0_mhz":1000.,"ts":1.};b={**t,"channel0_mhz":1000.000004}
     a,rr,lo=common(t,b,np.zeros((16,140)),np.ones((16,140)));assert lo==2 and a.shape==rr.shape==(16,138)
     return {"shift_recovery":"PASS","unmatched_fallback":"PASS","physical_grid_overlap":"PASS"}
+BLC_P=json.loads(pathlib.Path("research/seti/r15d_r16d_r17d_protocol.json").read_text())
+BLC_OUT=OUT/"blc"
+def archive(key):
+    a=BLC_P["artifacts"][key];path=BLC_OUT/(key+".zip");h=hashlib.sha256();n=0
+    with requests.get(f"https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/{a['id']}/zip",headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"},stream=True,timeout=(15,120)) as r:
+        r.raise_for_status()
+        with path.open("wb") as f:
+            for b in r.iter_content(1024*1024):
+                n+=len(b);assert n<=500*1024**2;h.update(b);f.write(b)
+    assert h.hexdigest()==a["digest"]
+    z=zipfile.ZipFile(path);assert sum(i.file_size for i in z.infolist())<=1200*1024**2
+    names={}
+    for i in z.infolist():
+        if i.is_dir():continue
+        b=pathlib.PurePosixPath(i.filename).name
+        assert b not in names;names[b]=i.filename
+    return z,names,path
+def get(z,n,k):return json.loads(z.read(n[k]))
+def tile(z,n,t,k=None):
+    x=np.load(io.BytesIO(z.read(n[k or t["artifact"]])),allow_pickle=False)
+    assert list(x.shape)==t["shape"] and hashlib.sha256(x.tobytes()).hexdigest()==t["slice_sha256"]
+    return x
+
 def blc_search(y,t):
-    s=blc.P["r15d"]
+    s=BLC_P["r15d"]
     nr,nc=y.shape;df=t["df_hz"];ts=t["ts"];best=[]
     for width in sorted(set(min(nr,w) for w in s["windows"])):
         ans=None
@@ -148,12 +171,12 @@ def blc_search(y,t):
     return best
 
 def blc_replay():
-    blc.OUT=OUT/"blc";blc.OUT.mkdir(exist_ok=True)
-    z,n,p=blc.archive("blc");m,mn,mp=blc.archive("blc_manifest")
-    manifest=blc.get(m,mn,"manifest.json");result=blc.get(z,n,"result.json")
+    BLC_OUT.mkdir(exist_ok=True)
+    z,n,p=archive("blc");m,mn,mp=archive("blc_manifest")
+    manifest=get(m,mn,"manifest.json");result=get(z,n,"result.json")
     rr=[r for r in result["rows"] if "tile" in r];assert len(rr)==15
     hs={f["name"]:f["header"] for f in manifest["selected"]}
-    data={r["name"]:blc.tile(z,n,r["tile"],r["artifact"]) for r in rr}
+    data={r["name"]:tile(z,n,r["tile"],r["artifact"]) for r in rr}
     results=[]
     for row in rr:
         off=[r for r in rr if r["role"].startswith("OFF") and r["name"]!=row["name"]]
@@ -163,7 +186,7 @@ def blc_replay():
         X=eng.normalized(x)[None].astype(float);R=eng.normalized(r)[None].astype(float);v,g,sh,c=register(X,R)
         raw=blc_search(X[0],tt);clean=blc_search(v[0],tt)
         results.append({"name":row["name"],"role":row["role"],"reference":ref["name"],"regime":int(g[0]),"shift":int(sh[0]),"similarity":float(c[0]),"raw":raw,"registered":clean})
-    anchor=next(r for r in results if r["name"]==blc.P["r15d"]["anchor"])
+    anchor=next(r for r in results if r["name"]==BLC_P["r15d"]["anchor"])
     def match(r):
         return bool(any(x is not None and x["score"]>=10 and abs(x["frequency_mhz"]-982.002472)*1e6<=10 and abs(x["drift_hz_s"]-.028)<=.012 for x in r))
     d={"rows":results,"anchor":anchor,"anchor_raw_recovered":match(anchor["raw"]),"anchor_registered_recovered":match(anchor["registered"]),"scope":"Targeted replay of known BLC1, terrestrial RFI per published investigation; not blind or source classification. Any failure is retained. OFF scans are not certified signal-free."}
