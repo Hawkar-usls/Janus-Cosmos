@@ -1,0 +1,88 @@
+{
+  "schema": "janus.seti.frozen_r4_targets.v1",
+  "prior_run": 44038683414,
+  "catalogs": {
+    "GBT_L": {
+      "url": "https://seti.berkeley.edu/listen2019/lband2019_events.csv",
+      "sha256": "86ffab24a0725d2f6b5f722973b8a419ac3eeaa3208ac1f18dd0e1f92ac9dcda"
+    },
+    "GBT_S": {
+      "url": "https://seti.berkeley.edu/listen2019/sband2019_events.csv",
+      "sha256": "37e7f97b41dedfcdfb00c96805aee2ae148b51ccc64a534a9ba034c31e3950df"
+    },
+    "PARKES_10CM": {
+      "url": "https://seti.berkeley.edu/listen2019/pks10cm2019_events.csv",
+      "sha256": "0cd55ee1f9af9aa382b827eb7b88106e730d0f50d8378e02947e54cfc096012a"
+    }
+  },
+  "targets": {
+    "HIP40875": {
+      "target": "HIP40875",
+      "band": "GBT_L",
+      "filename": "spliced_blc0001020304050607_guppi_57591_66984_Hip40875_0008.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT16A_999_243/holding/spliced_blc0001020304050607_guppi_57591_66984_Hip40875_0008.gpuspec.0000.h5",
+      "frequencies": [
+        1678.070112,
+        1677.971553
+      ]
+    },
+    "HIP83601": {
+      "target": "HIP83601",
+      "band": "GBT_S",
+      "filename": "spliced_blc3031323334353637_guppi_57915_30339_HIP83601_0038.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT17A_999_82/holding/spliced_blc3031323334353637_guppi_57915_30339_HIP83601_0038.gpuspec.0000.h5",
+      "frequencies": [
+        1820.621109,
+        1821.0966645,
+        1820.389546,
+        1820.8861205
+      ]
+    },
+    "HIP42418": {
+      "target": "HIP42418",
+      "band": "GBT_S",
+      "filename": "spliced_blc1011121314151617_guppi_58174_23673_HIP42418_0026.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT18A_999_14/holding/spliced_blc1011121314151617_guppi_58174_23673_HIP42418_0026.gpuspec.0000.h5",
+      "frequencies": [
+        1853.89998,
+        1853.503343
+      ]
+    },
+    "HIP11029": {
+      "target": "HIP11029",
+      "band": "GBT_S",
+      "filename": "spliced_blc0001020304050607_guppi_57728_08526_HIP11029_0039.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT16B_999_86/holding/spliced_blc0001020304050607_guppi_57728_08526_HIP11029_0039.gpuspec.0000.h5",
+      "frequencies": [
+        2256.1067255
+      ]
+    },
+    "HIP42748": {
+      "target": "HIP42748",
+      "band": "GBT_S",
+      "filename": "spliced_blc0001020304050607_guppi_57860_79718_HIP42748_0002.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT17A_999_46/holding/spliced_blc0001020304050607_guppi_57860_79718_HIP42748_0002.gpuspec.0000.h5",
+      "frequencies": [
+        2029.928548
+      ]
+    },
+    "HIP88684": {
+      "target": "HIP88684",
+      "band": "GBT_S",
+      "filename": "spliced_blc0001020304050607_guppi_57811_53520_HIP88684_0020.gpuspec.0000.h5",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT17A_999_15/holding/spliced_blc0001020304050607_guppi_57811_53520_HIP88684_0020.gpuspec.0000.h5",
+      "frequencies": [
+        2177.669081
+      ]
+    },
+    "HIP47425_S": {
+      "target": "HIP47425_S",
+      "band": "PARKES_10CM",
+      "filename": "spliced_blc000102030405_guppi_57854_41329_56305256_HIP47425_S_0001.gpuspec.0000.h5",
+      "url": null,
+      "frequencies": [
+        3426.114709
+      ]
+    }
+  }
+}
