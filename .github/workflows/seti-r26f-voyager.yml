@@ -38,3 +38,5 @@ jobs:
           d=json.load(open("runtime/r26f/result.json"))
           assert d["status"]=="KNOWN_CARRIER_RECOVERED" and not d["production_adoption"]
           PY
+
+# Retry public archive transport; immutable source digest required.
