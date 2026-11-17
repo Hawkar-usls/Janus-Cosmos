@@ -129,7 +129,7 @@ def r16():
 def r17():
     z,n,p=archive("hybrid");d=get(z,n,"result.json");cal=[];test=[]
     for k in sorted(n):
-        if k.startswith("target-") and k.endswith(".json"):
+        if k.startswith("target-HIP") and k.endswith(".json"):
             a=get(z,n,k);cal.extend(r for r in a if r["split"]=="calibration");test.extend(r for r in a if r["split"]=="evaluation")
     assert len(cal)==512 and len(test)==1024
     ct=d["lock"]["thresholds"]["classical"];ht=d["lock"]["thresholds"]["hybrid"]
