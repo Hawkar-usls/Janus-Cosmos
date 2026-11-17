@@ -39,15 +39,15 @@ def tile(h,lo):
 def valid(h,f):
     return eng.valid(h,f,TARGET) and h["bounds"][0]<F-.5 and h["bounds"][1]>F+.5
 def injections(x,t,f,dr):
-    n,m=x.shape;df=t["df_hz"];ts=t["ts"];y=eng.normalized(x)
+    n,m=x.shape;df=t["df_hz"];ts=t["ts"];scale=1.4826*np.median(np.abs(x-np.median(x,axis=1)[:,None]),axis=1)
     s=int(round(dr*(n-1)*ts/df));ds=np.rint(np.arange(n)*s/(n-1)).astype(int)
     results=[]
     for amp in (4,8):
         for shift in (-70,70):
             ft=f+shift*abs(df)/1e6;k=round((ft-t["channel0_mhz"])*1e6/df)
             if k+min(ds)<0 or k+max(ds)>=m:continue
-            z=y.copy();z[np.arange(n),k+ds]+=amp
-            a=eng.matched(z,t,ft,dr)
+            z=x.copy();z[np.arange(n),k+ds]+=amp*scale
+            a=eng.matched(eng.normalized(z),t,ft,dr)
             results.append({"amplitude":amp,"offset_bins":shift,"recovered":eng.present(a)})
     return results
 def morphology(x,t,out,key):
@@ -142,7 +142,7 @@ def aggregate():
             ap=a["morphology"]["peaks"];bp=b["morphology"]["peaks"]
             pairs.append({"on":a["name"],"off":b["name"],"on_peaks":len(ap),"off_peaks":len(bp),"on_peaks_matched_within_3_channels":sum(any(abs(p["frequency_mhz"]-q["frequency_mhz"])*1e6<=3*abs(a["header"]["df"]*1e6) for q in bp) for p in ap)})
     off_hit=any(r["position"]=="R" and strong(r,fixed) for r in done)
-    s={"schema":"janus.seti.r13.summary.v1","manifest_sha256":digest,"planned":len(m["files"]),"reported":len(rows),"completed":len(done),"days_completed":len({r["day"] for r in done}),"days_planned":len(m["days"]),"missing_shards":missing,"tallies":tallies,"wide_scans":len(wide),"morphology_pairs":pairs,"targeted_relative_injection":inj,"status":"HOLD_INCOMPLETE_ARCHIVE" if len(done)!=len(m["files"]) else ("RFI_CONCERN_REVIEW" if off_hit else "HOLD_INDEPENDENT_CONFIRMATION"),"independently_confirmed":0,"confirmed_technosignatures":0,"limitations":["Local fixed model matches and stationary peak similarity do not establish common emitter. Barycentric hypothesis assumes constant emitted frequency.","Matched normalized injections are not blind full-window calibration, nor Jy/EIRP or beam sensitivity.","Public archive coverage only, not every physical observation; no independent new telescope time.","External metadata query is not actual independent coverage verification; no observations commissioned."]}
+    s={"schema":"janus.seti.r13.summary.v1","manifest_sha256":digest,"planned":len(m["files"]),"reported":len(rows),"completed":len(done),"days_completed":len({r["day"] for r in done}),"days_planned":len(m["days"]),"missing_shards":missing,"tallies":tallies,"wide_scans":len(wide),"morphology_pairs":pairs,"targeted_relative_injection":inj,"status":"HOLD_INCOMPLETE_ARCHIVE" if len(done)!=len(m["files"]) else ("RFI_CONCERN_REVIEW" if off_hit else "HOLD_INDEPENDENT_CONFIRMATION"),"independently_confirmed":0,"confirmed_technosignatures":0,"limitations":["Local fixed model matches and stationary peak similarity do not establish common emitter. Barycentric hypothesis assumes constant emitted frequency.","Matched raw-power injections scaled by robust row noise are not blind full-window calibration, nor Jy/EIRP or beam sensitivity.","Public archive coverage only, not every physical observation; no independent new telescope time.","External metadata query is not actual independent coverage verification; no observations commissioned."]}
     save(ROOT/"summary.json",{**s,"rows":rows,"external_queries":m["external_queries"]});emit("R13_SUMMARY",s)
 if __name__=="__main__":
     if sys.argv[1]=="freeze":freeze()
