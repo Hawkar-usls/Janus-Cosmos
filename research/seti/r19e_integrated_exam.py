@@ -22,7 +22,7 @@ def gather(q):
     rng=np.random.default_rng(int.from_bytes(hashlib.sha256((S["seed"]+"|"+q["target"]).encode()).digest()[:8],"big"))
     for k,(raw,label,hard,sha) in enumerate(v for v in data if v[1]==0):
         n,w=raw.shape;t=np.arange(n);mode=k%4;curve=bool(mode&1);inter=bool(mode&2)
-        amp=S["amplitudes"][(k//4)%4];center=int(rng.integers(42,w-42))
+        amp=S["amplitudes"][((k//4)+(k//16))%4];center=int(rng.integers(42,w-42))
         if curve:
             slope=int(rng.integers(-1,2));a=float(rng.choice(S["curve_accel"]))
             path=center+np.rint(slope*t+a*(t-(n-1)/2)**2).astype(int)
