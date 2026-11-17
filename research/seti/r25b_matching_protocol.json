@@ -1,0 +1,40 @@
+{
+  "schema": "janus.cosmos.seti.r25b.matching.v1",
+  "status": "PRECOMMITTED",
+  "donors": [
+    {
+      "repo": "Hawkar-usls/Janus-Fundamentum",
+      "ref": "4433c4673f818aa9ad68155e2e0deb612990b480",
+      "path": "experiments/r5_e46_conflict_line_graph_matching.py",
+      "blob": "026fe93a9ebabe12bd67ded4d1ab9a94fd38730e"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Fundamentum",
+      "ref": "4433c4673f818aa9ad68155e2e0deb612990b480",
+      "path": "research/tools/apma_factorized_feedback/factorized_portfolio.py",
+      "blob": "ab3cd177eb1e554f5119238c8556f05feb988bb3"
+    }
+  ],
+  "source_artifact": {
+    "id": 14352959003,
+    "digest": "b249bdbfe7d7de36637c4b21adc48a8d4d7412f2963be5294d748ce166e4a5d0"
+  },
+  "frequency_tolerance_hz": 25,
+  "drift_tolerance_hz_s": 0.03,
+  "seed": 25021,
+  "sizes": [
+    8,
+    32,
+    128
+  ],
+  "families": [
+    "sparse",
+    "crowded",
+    "dropout",
+    "clutter"
+  ],
+  "replicates": 8,
+  "objective": "maximum cardinality then minimum sum of integer normalized pair distances (rounded 1e6); no claim of true identity from assignment",
+  "scope": "Bipartite two-scan catalog assignment only. Global exact versus independently solved disconnected components and greedy; exact finite brute force small graphs. Alternative optimality check by excluding each selected edge on small graphs only; retain all raw compatibility edges. Known synthetic truth, report TP/FP/FN separately; archive replay no labels; no origin inference. No production adoption.",
+  "production_adoption": false
+}
