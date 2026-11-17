@@ -1,0 +1,60 @@
+{
+  "schema": "janus.cosmos.seti.r19e.integrated.v1",
+  "status": "PRECOMMITTED",
+  "seed": "R19E-20261117",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990",
+    "HIP80686",
+    "HIP91438",
+    "HIP13218",
+    "HIP84709"
+  ],
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "wave_width": 2,
+  "calibration_control_fraction": 0.05,
+  "hybrid_threshold": 0.9178171157836914,
+  "selective_band": 2,
+  "amplitudes": [
+    3,
+    4,
+    6,
+    8
+  ],
+  "curve_accel": [
+    -0.09,
+    0.09,
+    -0.14,
+    0.14
+  ],
+  "repeats": 3,
+  "modes": [
+    "scalar_straight",
+    "vector_straight",
+    "curved_dp",
+    "joint_matched_control",
+    "full_hybrid",
+    "selective_hybrid"
+  ],
+  "scope": "two new targets calibration, four new evaluation. Balanced synthetic straight/curved and intermittent/continuous factors in real OFF patches; compare prospectively frozen thresholds, actual route timing and per subtype; joint OR calibrated at same 5% control budget; selective AI preserves all math alerts, not matched-control claim; no source classification",
+  "production_adoption": false
+}
