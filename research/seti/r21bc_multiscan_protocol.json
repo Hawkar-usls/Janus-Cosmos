@@ -1,0 +1,83 @@
+{
+  "schema": "janus.cosmos.seti.r21bc.multiscan.v1",
+  "status": "PRECOMMITTED",
+  "seed": "R21BC-20261117",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990",
+    "HIP80686",
+    "HIP91438",
+    "HIP13218",
+    "HIP84709",
+    "HIP55454",
+    "HIP16069",
+    "HIP52462",
+    "HIP80018",
+    "HIP63490",
+    "HIP58345",
+    "HIP54532",
+    "HIP22738",
+    "HIP47780",
+    "HIP76074",
+    "HIP61874",
+    "HIP27887",
+    "HIP33817",
+    "HIP40706",
+    "HIP27654",
+    "HIP27947",
+    "HIP7751",
+    "HIP113283"
+  ],
+  "amplitudes": [
+    0.75,
+    1.25,
+    1.5,
+    2
+  ],
+  "gap_levels": [
+    0,
+    0.25
+  ],
+  "presence": [
+    "both",
+    "first_only"
+  ],
+  "slopes": {
+    "min": -1,
+    "max": 1,
+    "step": 0.025
+  },
+  "injection_slopes": [
+    -0.913,
+    -0.637,
+    -0.337,
+    -0.113,
+    0.087,
+    0.287,
+    0.613,
+    0.887
+  ],
+  "patch_width": 256,
+  "calibration_control_fraction": 0.05,
+  "repeats": 3,
+  "modes": [
+    "single1",
+    "single_best",
+    "unconstrained_sum",
+    "timestamp_joint",
+    "timestamp_zero_shift",
+    "timestamp_joint_semijoin"
+  ],
+  "scope": "Four fresh evaluation and two calibration targets, two same-pointing real OFF scans each. Timestamp continuous constant-drift injections off bank grid, noncoherent power summation; no phase coherence assumed. 128 paired injections/controls per target; equal control-calibration budget; localization independently checked against true injected tracks. Extra discordant and stationary artificial RFI challenges diagnostic only. Semijoin exact shared hypothesis key and conservative upper support; no requirement of detection in both individual scans. Missing data fail closed; no origin inference.",
+  "production_adoption": false
+}
