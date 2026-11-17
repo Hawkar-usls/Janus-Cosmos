@@ -1,0 +1,23 @@
+{
+  "schema": "janus.cosmos.seti.r26f.voyager.v1",
+  "status": "PRECOMMITTED_TARGETED_KNOWN_CONTROL",
+  "url": "https://blpd0.ssl.berkeley.edu/Voyager_data/Voyager1.single_coarse.fine_res.h5",
+  "bytes": 50549227,
+  "sha256": "c9a9a54f4140e3754ffb2455fae4eeb2eb70c8207123116ee953e4fce15c36ac",
+  "hash_source": "https://github.com/Biswajit1999/technosignature-doppler-search",
+  "official_reference": "https://github.com/UCBerkeleySETI/turbo_seti",
+  "expected": {
+    "frequency_mhz": 8419.297028,
+    "drift_hz_s": -0.373093,
+    "frequency_tolerance_hz": 100,
+    "drift_tolerance": 0.06
+  },
+  "search": {
+    "max_abs_drift": 0.7,
+    "chunk_bins": 65536,
+    "guard_bins": 128,
+    "top_per_chunk": 4,
+    "minimum_robust_score": 10
+  },
+  "scope": "Known human spacecraft control from official Berkeley sample. Whole coarse band and fixed drift range, plus predeclared anchor. No ON/OFF origin inference or external detection code. Power spectra, no voltage coherence. Exact SHA pin crosschecked against publicly reported digest; mismatch blocks execution."
+}
