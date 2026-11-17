@@ -1,0 +1,41 @@
+name: JANUS SETI R6 held groups wide replay and controls
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-candidate-falsification-r6.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        target: [HIP40875, HIP47425_S]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectral dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4
+      - name: Recover all frozen held hits with wider source windows
+        env:
+          TARGET: ${{ matrix.target }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python -m py_compile research/seti/r6_wide_replay.py research/seti/r6_track_diagnostics.py
+          python research/seti/r6_wide_replay.py --target "$TARGET" --out "runtime/$TARGET"
+          python research/seti/r6_track_diagnostics.py "runtime/$TARGET"
+      - name: Preserve all observations and diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: seti-r6-${{ matrix.target }}
+          path: runtime/${{ matrix.target }}/
+          retention-days: 90
