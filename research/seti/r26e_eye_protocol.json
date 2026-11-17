@@ -1,0 +1,41 @@
+{
+  "schema": "janus.cosmos.seti.r26e.witness.v1",
+  "status": "PRECOMMITTED_DEVELOPMENT",
+  "seed": 260501,
+  "donor": {
+    "repo": "Hawkar-usls/janus-meta-registry",
+    "ref": "b6fd56d5136239d37495b3b935db3dd0773a9e81",
+    "path": "EYE/r4_4/eye_r4_4_robust_witness_planner.py",
+    "blob": "0ad14c5a7020f10cd8842c436cbb1472e732a66a"
+  },
+  "source_protocol": "research/seti/r26d_family_protocol.json",
+  "target_classes": {
+    "family": "SUPPORTED_SYNTHETIC_FAMILY",
+    "mirror": "SUPPORTED_SYNTHETIC_FAMILY",
+    "isolated": "CONTROL_PATTERN",
+    "unrelated": "CONTROL_PATTERN",
+    "repeat_only": "CONTROL_PATTERN",
+    "on_only_comb": "ON_ONLY_AMBIGUOUS"
+  },
+  "confidence_threshold": 0.9,
+  "smoothing": 0.5,
+  "prior_models": {
+    "balanced": [
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666
+    ],
+    "family_rare": [
+      0.05,
+      0.05,
+      0.2333333333333333,
+      0.2333333333333333,
+      0.2333333333333333,
+      0.2
+    ]
+  },
+  "scope": "New injection seed on previously viewed R26C backgrounds. Fit thresholds and 8-outcome joint categorical likelihood only on 2 calibration targets. Treat correlated frequency, morphology and OFF scores as one test, not independent evidence; two per-target empirical models with two declared prior sensitivities. Finite synthetic pattern classes, no sky/terrestrial causal probabilities. Real archive test likelihood unavailable, must abstain. No automatic veto or production adoption."
+}
