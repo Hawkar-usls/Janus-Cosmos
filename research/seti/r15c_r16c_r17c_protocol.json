@@ -1,0 +1,75 @@
+{
+  "schema": "janus.seti.r15c_r16c_r17c.v1",
+  "r15c": {
+    "artifact": {
+      "id": 14335937128,
+      "digest": "ced589b5a8cbdd68cfe55ee54afcccc2d7e762fc346542e08d1ea721bf18bdd"
+    },
+    "published_anchor": "blc03_ProxCen_S_2019-04-29T13:47:46.000.fil",
+    "published_source": "https://www.nature.com/articles/s41550-021-01508-8",
+    "selection": "exact blc03 same-date indexed ProxCen_S and 1421-490 non-noise-diode S/R products, exact published anchor first, max 9 ON and 12 control products; metadata only before power. 32-bit little-endian single IF, strict length, bounded ranges, all rows; other formats explicit HOLD",
+    "center_mhz": 982.002571,
+    "half_hz": 2500,
+    "drift_max_hz_s": 0.15
+  },
+  "r16c": {
+    "centers_mhz": [
+      1200,
+      1250,
+      1450,
+      1550,
+      1650,
+      1750,
+      2300,
+      4800,
+      6500,
+      8500,
+      10500
+    ],
+    "half_hz": 50000,
+    "scope": "Fixed centers; metadata-only exact six-scan alternating ON/OFF cadences at same backend and resolution, any available band on MJD61027; first compatible complete cadence per center. Reuse R11 thresholds, report unsupported windows and both directions. No full-band claim."
+  },
+  "r17c": {
+    "weights_artifact": {
+      "id": 14336505544,
+      "digest": "d966cb02b39c287b113c581cd34fa209496331e8c19de7309ab44dbfe1f80629",
+      "weights_sha256": "ec33b218cf893bb6a0b1e5ae8c77c6d25cbefe04fa11a2d4a699cd143a3c168f"
+    },
+    "exclude": [
+      "HIP40875",
+      "HIP83601",
+      "HIP42418",
+      "HIP11029",
+      "HIP42748",
+      "HIP88684",
+      "HIP47425",
+      "HIP80337",
+      "HIP8102",
+      "HIP113368",
+      "HIP15510",
+      "HIP57443",
+      "HIP15330",
+      "HIP47103",
+      "HIP48659",
+      "HIP52296",
+      "HIP89211",
+      "HIP16537",
+      "HIP71681",
+      "HIP71683",
+      "HIP2021",
+      "HIP7978",
+      "HIP19849"
+    ],
+    "seed": "R17C-20261117",
+    "selection": "SHA256 sorted new targets official index, first six eligible S/R/S/R cadences; first two calibration only, last four evaluation. No weight training. Exact R17B 128-channel feature recipe, 12 random +4 hard pairs per OFF tile, same injection amplitude schedule. Fixed 95% calibration recall via kth positive score for both methods, freeze thresholds before evaluation data read. Report realized recall (may differ), and descriptive same-recall empirical operating points separate from prospective comparison. Timing both score routes, report paired differences per target.",
+    "calibration_recall": 0.95,
+    "windows_mhz": [
+      2860,
+      3010,
+      3150,
+      3400
+    ],
+    "max_queries": 48
+  },
+  "claims": "Archive tests only, no astrophysical source classification or independent confirmation; no production adoption."
+}
