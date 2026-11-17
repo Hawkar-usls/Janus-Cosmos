@@ -1,0 +1,32 @@
+{
+  "schema": "janus.cosmos.seti.r19a.physarum.v1",
+  "status": "PRECOMMITTED_DEVELOPMENT",
+  "source": {
+    "repo": "Hawkar-usls/Janus-Demiurge",
+    "commit": "aca0390ea966782df8dde15bc1dde80901b48283",
+    "path": "janus_genesis/physarum_engine.py",
+    "blob": "f5a71ae0c5e79636ac6c1b865415ee71dc22a081"
+  },
+  "train": "R9 OFF backgrounds",
+  "test": "R11 OFF backgrounds; previously examined, development only",
+  "samples_per_split": 256,
+  "curve_max_step": 3,
+  "seed": 19001,
+  "amplitudes": [
+    2,
+    3,
+    4,
+    6
+  ],
+  "particles": 32,
+  "steps": 12,
+  "threshold_target_control_max": 0.05,
+  "modes": [
+    "straight",
+    "exact_dp",
+    "smooth_dp",
+    "physarum_trail_dp"
+  ],
+  "scope": "All path scores evaluated using original normalized input; swarm only proposes paths. No source origin inference. Equal-control target calibration, report realized alerts and path accuracy. Algorithm bases Tero/Nakagaki and Jones are published prior art; JANUS engine is donor implementation.",
+  "production_adoption": false
+}
