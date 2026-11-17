@@ -1,0 +1,150 @@
+{
+  "schema": "janus.cosmos.seti.r24b.cousteau.v1",
+  "status": "PRECOMMITTED",
+  "seed": "R24B-20261117",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990",
+    "HIP80686",
+    "HIP91438",
+    "HIP13218",
+    "HIP84709",
+    "HIP55454",
+    "HIP16069",
+    "HIP52462",
+    "HIP80018",
+    "HIP63490",
+    "HIP58345",
+    "HIP54532",
+    "HIP22738",
+    "HIP47780",
+    "HIP76074",
+    "HIP61874",
+    "HIP27887",
+    "HIP33817",
+    "HIP40706",
+    "HIP27654",
+    "HIP27947",
+    "HIP7751",
+    "HIP113283",
+    "HIP560",
+    "HIP950",
+    "HIP69454",
+    "HIP27072",
+    "HIP56998",
+    "HIP40702",
+    "HIP69972",
+    "HIP110109",
+    "HIP106440",
+    "HIP19884",
+    "HIP84405",
+    "HIP63550"
+  ],
+  "amplitudes": [
+    0.75,
+    1.25,
+    1.5,
+    2
+  ],
+  "calibration_control_fraction": 0.05,
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "wave_width": 2,
+  "penalty": 0.7,
+  "template_slopes": [
+    -2,
+    -1.5,
+    -1,
+    -0.5,
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+  ],
+  "template_curvatures": [
+    -0.16,
+    -0.12,
+    -0.08,
+    -0.04,
+    0,
+    0.04,
+    0.08,
+    0.12,
+    0.16
+  ],
+  "clip_values": [
+    3,
+    5
+  ],
+  "injection_models": [
+    "straight",
+    "off_grid_quadratic",
+    "slope_break",
+    "smooth_sinusoid"
+  ],
+  "gap_levels": [
+    0,
+    0.25
+  ],
+  "modes": [
+    "raw_pooled",
+    "raw_stratified",
+    "residual_pooled",
+    "residual_stratified",
+    "residual_gap_stratified",
+    "raw_residual_union",
+    "raw_fast_exact"
+  ],
+  "repeats": 3,
+  "scope": "Fresh 2 calibration and 4 eval targets, paired injections 0.75–2 robust scales. Separate shape/scale and strata, adaptation of HA10/KUSTO not native sonar replay. Residual fit from unlabelled candidate patch only, cannot distinguish stationary sky and RFI. Raw versus residual union threshold calibrated within regime, not OR of unadjusted alarms. Primary localized positive recovery and realized control alerts. Exact witnesses on transformed observed evidence, no raw physical source inference. Equivalent raw fast arm tests same objective, no production adoption.",
+  "production_adoption": false,
+  "donor": {
+    "repo": "Hawkar-usls/Janus-Fundamentum",
+    "commit": "5c2afcf7936ddbbf693657bbdd8f610ec21d3570",
+    "path": "tools/OdontoForge_PNP_EXP.py",
+    "blob": "3a6397f4201f2471a237a0be664d48da806ab285"
+  },
+  "growth": {
+    "radius": 3,
+    "curvature_penalty": 0.7,
+    "max_unobserved_layers": 4,
+    "skip_cost": 0.5,
+    "clip": 3
+  },
+  "cousteau": {
+    "donors": [
+      {
+        "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+        "path": "workspace/kusto_cd169_empirical_residual_bootstrap_library.py",
+        "blob": "6508804e7c1c4d644ef0d40bcdd97f54d1928397"
+      },
+      {
+        "ref": "79b5d6e87db3fa107248eca35c895e2d2dc10dc7",
+        "path": "workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py",
+        "blob": "734d7d2256386a2f73e36d0a9a26d6e62375bf"
+      }
+    ],
+    "regime": "95th percentile of column temporal medians, split at median calibration controls; two strata, minimum 64 controls each",
+    "residual": "Subtract 75% of positive persistent column median after row normalization; robust per-column scale shrinkage, floor 1, cap 4; clip residual upper 3; raw route retained separately. No independent reference scan, stationary signal may attenuate.",
+    "stratum_control_fraction": 0.05
+  }
+}
