@@ -19,5 +19,7 @@
     "top_per_chunk": 4,
     "minimum_robust_score": 10
   },
-  "scope": "Known human spacecraft control from official Berkeley sample. Whole coarse band and fixed drift range, plus predeclared anchor. No ON/OFF origin inference or external detection code. Power spectra, no voltage coherence. Exact SHA pin crosschecked against publicly reported digest; mismatch blocks execution."
+  "scope": "Known human spacecraft control from official Berkeley sample. Whole coarse band and fixed drift range, plus predeclared anchor. No ON/OFF origin inference or external detection code. Power spectra, no voltage coherence. Exact SHA pin crosschecked against publicly reported digest; mismatch blocks execution.",
+  "public_http_fallback": "http://blpd0.ssl.berkeley.edu/Voyager_data/Voyager1.single_coarse.fine_res.h5",
+  "transport_scope": "Public unauthenticated archive only; HTTPS certificate verification never disabled. HTTP fallback allowed only after HTTPS certificate error; fixed SHA-256 and byte count mandatory; no credentials or tokens sent; redirects restricted to exact same host."
 }
