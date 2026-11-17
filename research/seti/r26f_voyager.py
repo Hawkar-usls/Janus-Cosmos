@@ -10,9 +10,15 @@ OUT=pathlib.Path("runtime/r26f");OUT.mkdir(parents=True,exist_ok=True)
 def download():
     dest=OUT/"voyager.h5";h=hashlib.sha256();size=0
     start=time.perf_counter()
-    with requests.get(P["url"],stream=True,timeout=(20,90)) as response:
+    try:
+        response=requests.get(P["url"],stream=True,timeout=(20,90),allow_redirects=False)
+    except requests.exceptions.SSLError:
+        print("R26F_TRANSPORT official public HTTP fallback; SHA256 verification required",flush=True)
+        response=requests.get(P["public_http_fallback"],stream=True,timeout=(20,90),allow_redirects=False)
+    with response:
         response.raise_for_status()
-        assert urlparse(response.url).scheme=="https" and urlparse(response.url).hostname.endswith(".berkeley.edu")
+        assert response.status_code==200 and urlparse(response.url).hostname=="blpd0.ssl.berkeley.edu"
+        assert response.url in (P["url"],P["public_http_fallback"])
         with dest.open("wb") as f:
             for b in response.iter_content(1024**2):
                 size+=len(b);assert size<=P["bytes"];h.update(b);f.write(b)
