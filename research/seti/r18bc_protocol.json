@@ -1,0 +1,50 @@
+{
+  "schema": "janus.seti.r18bc.pilot.v1",
+  "registry": "https://github.com/Hawkar-usls/janus-meta-registry/commit/2d68a1c3b1836631bd24f172f18135e514ad8356",
+  "status": "PRECOMMITTED_RESEARCH_ONLY",
+  "threshold": 9,
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "seed": "R18BC-20261117",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312"
+  ],
+  "modes": [
+    "full",
+    "center",
+    "juxtapose",
+    "fixed",
+    "undina",
+    "sham",
+    "center_undina",
+    "markov",
+    "markov_undina",
+    "vectorized"
+  ],
+  "calibration": "R9 only for scheduler/Markov; no evaluation data before locks",
+  "evaluation": "fresh metadata hash ranked targets excluding R17C and prior targets; four evaluation targets, two calibration-target reservations unused",
+  "cap": 4,
+  "quota": 16,
+  "margin": 1,
+  "latency_p95_seconds": 0.0001,
+  "repeats": 3,
+  "claim_limits": [
+    "pilot fixed parameters, not full R18B grid; no production adoption",
+    "binary threshold only; not strongest/persistent trajectory",
+    "sham fixed lead-free waves, not timestamp-matched; full sham experiment remains pending",
+    "all results including negative and UNKNOWN preserved"
+  ]
+}
