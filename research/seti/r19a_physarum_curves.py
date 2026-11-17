@@ -19,7 +19,7 @@ def dp(y):
     assert np.max(np.abs(np.diff(path)))<=radius and np.all((path>=0)&(path<w))
     return path
 def straight(y):
-    a,b,s=max((j.score(y,s)[0],j.score(y,s)[1],s) for s in j.ASC)
+    a,b,s=max((*j.score(y,s),s) for s in j.ASC)
     return b+np.rint(np.arange(len(y))*s/(len(y)-1)).astype(int)
 def smooth(y):
     p=np.pad(y,((0,0),(1,1)),mode="edge")
