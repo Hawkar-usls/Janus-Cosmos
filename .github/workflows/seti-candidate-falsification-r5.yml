@@ -1,0 +1,59 @@
+name: JANUS SETI R5 frozen matched-track ON OFF ON replay
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-candidate-falsification-r5.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - name: Install replay dependency
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 requests==2.32.3
+      - name: Fetch and verify immutable R4 artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib,io,os,pathlib,zipfile,requests
+          pairs=[
+              ("HIP47425_S",14310161416,"9b960813073941bf925ecf634ce2757eacd055e2b8c6e6d8da4c92c4ca5d9637"),
+              ("HIP40875",14309586866,"f3cd9abe9ec42f0377db1cf42edb244666820920652e91d211ab51d637260ed8"),
+              ("HIP42748",14309453563,"e8a84748cb03be7ce60ffc105535610749cd73cbe750be282638d6047e943437"),
+              ("HIP88684",14309407840,"e13f612a9f346b790f6716c364a466dbc09bc6653459d6ac32157f5d2c30f3c7"),
+              ("HIP42418",14309014656,"28ea489e51761c26b7a0e0e6f22486b65d4814da7c066db9d95f630fbeffd48d"),
+              ("HIP83601",14308869807,"92f4b03dabe60c4db7f7d5dc54f62551feacabafe015f865cfcf59f5232fd824"),
+              ("HIP11029",14308859693,"e7dab569d5f3499fb39878a17df5a0d0ae8c5b8de76dbf3402f81c95258729e8")]
+          for target,aid,digest in pairs:
+              endpoint=f"https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/{aid}/zip"
+              r=requests.get(endpoint,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"},timeout=40)
+              r.raise_for_status()
+              assert len(r.content)<5*1024*1024 and hashlib.sha256(r.content).hexdigest()==digest
+              out=pathlib.Path("r4")/target;out.mkdir(parents=True,exist_ok=True)
+              with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+                  assert sum(i.file_size for i in z.infolist())<10*1024*1024
+                  for info in z.infolist():
+                      name=pathlib.PurePosixPath(info.filename).name
+                      assert name=="result.json" or (name.endswith(".npy") and len(name)==28)
+                      (out/name).write_bytes(z.read(info))
+              print(target,"BYTES_SHA256_PASS")
+          PY
+      - name: Calculate narrowband matched-track scores
+        run: python research/seti/r5_track_screen.py r4 runtime
+      - name: Preserve R5 result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r5-track-screen
+          path: runtime/
+          retention-days: 90
