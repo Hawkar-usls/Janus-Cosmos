@@ -38,7 +38,7 @@ def main():
     rng=np.random.default_rng(2703);tests=[]
     for name,track in (("stationary_center",np.full(16,64)),("stationary_off_center",np.full(16,40)),("crossing_center",np.arange(56,72))):
         v=rng.normal(0,.1,(16,128));v[np.arange(16),track]+=8
-        raw,clean=bank(v,np.arange(63,66));tests.append({"case":name,"raw":raw,"separated":clean,"raw_recovered":abs(raw["start_bin"]-track[0])<=1 and abs(raw["shift"]-(track[-1]-track[0]))<=1})
+        raw,clean=bank(v,np.arange(63,66));tests.append({"case":name,"raw":raw,"separated":clean,"raw_recovered":bool(abs(raw["start_bin"]-track[0])<=1 and abs(raw["shift"]-(track[-1]-track[0]))<=1)})
     assert all(q["raw_recovered"] for q in tests)
     q=best["separated"];ok=abs(q["frequency_mhz"]-voy.P["expected"]["frequency_mhz"])*1e6<=100 and abs(q["drift_hz_s"]-voy.P["expected"]["drift_hz_s"])<=.06
     d={"status":"SEPARATE_RANKING_ONLY","center_bin":dc,"center_frequency_mhz":f0+dc*df/1e6,"best":best,"voyager_first_after_separation":ok,"synthetic_controls":tests,"seconds":time.perf_counter()-t0,"source_sha256":voy.P["sha256"],"scope":"Fixed central 3-bin mask on candidate trajectories, raw ranking retained. Instrumental origin of center spike is not independently verified. Crossing or stationary physical signals may touch center; no automatic physical veto.","production_adoption":False}
