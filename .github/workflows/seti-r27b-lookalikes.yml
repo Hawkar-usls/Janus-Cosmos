@@ -40,3 +40,5 @@ jobs:
           d=json.load(open("runtime/r27b/result.json"))
           assert len(d["expected_centers"])==4 and not d["production_adoption"]
           PY
+
+# Bounded metadata-only cap expansion; fixed spectral windows unchanged.
