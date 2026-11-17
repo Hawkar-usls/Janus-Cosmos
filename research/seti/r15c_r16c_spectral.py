@@ -56,7 +56,26 @@ def fil_window(r,h,fc,half):
     if not np.isfinite(x).all():raise ValueError("nonfinite samples")
     return x,{"channel0_mhz":h["fch1"]+lo*h["foff"],"df_hz":h["foff"]*1e6,"ts":h["tsamp"],"shape":list(x.shape),"slice_sha256":hashlib.sha256(x.tobytes()).hexdigest()}
 def freeze15(out):
-    p=S["r15c"];z,n=prior.archive(p["artifact"]);d=json.loads(z.read(n["manifest.json"]));z.close()
+    p=S["r15c"]
+    # R15C2: re-query exactly the previously authenticated R15B public indices.
+    # No bypass of mismatching Actions archive digest.
+    records={}
+    indices=[]
+    for target,digest in (("ProxCen","4f195ff25061b501773c7b6ea09544773abbf8a3f2b6c5e3f43285e121fa6441"),("1421-490","f80af705f32cd1a8a0c341f8d9be24ffd4eca86c3515c26f3f3c31eebed671b5")):
+        raw,url=base.fetch(eng.API,{"target":target,"telescope":"Parkes","file-type":"HDF5"},limit=32*base.MIB)
+        actual=hashlib.sha256(raw).hexdigest()
+        assert actual==digest, "public index digest changed: "+target+" "+actual
+        (out/("index-"+target+".json")).write_bytes(raw)
+        indices.append({"target":target,"sha256":actual,"url":url})
+        obj=json.loads(raw);rs=obj if isinstance(obj,list) else next((obj[k] for k in ("data","files","results") if isinstance(obj.get(k),list)),[])
+        for v in rs:
+            u=v.get("url","")
+            if not isinstance(u,str) or not eng.allowed(u):continue
+            if int(float(v.get("mjd",0)))!=58602:continue
+            name=unquote(base.basename(u))
+            records[u]={"name":name,"url":u,"metadata":v}
+    d={"exact_records":list(records.values())}
+    save(out/"index_receipts.json",indices)
     rows=[]
     for f in d["exact_records"]:
         name=f["name"]
