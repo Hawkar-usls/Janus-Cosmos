@@ -126,15 +126,16 @@ def catalog(data):
     return {"hits":hits,"recurrence_pairs":pairs,"scope":"Top two per tile above fixed score, same-frequency candidates at scan starts only; no whole-band coverage, labels, or origin inference."}
 def main():
     assert test()=="PASS";data=restore();cal=[];ev=[]
-    for target in P["calibration"]+P["evaluation"]:
+    def compute(target):
         X,R,l,t=sample(data[target],target);start=time.perf_counter();s,p,a=scores(X,R)
-        z={"target":target,"label":l,"scores":s,"anchor":np.mean(abs(p-t)<=2,axis=1)>=.75,"seconds":time.perf_counter()-start}
-        (cal if target in P["calibration"] else ev).append(z)
+        return {"target":target,"label":l,"scores":s,"anchor":np.mean(abs(p-t)<=2,axis=1)>=.75,"seconds":time.perf_counter()-start}
+    cal=[compute(target) for target in P["calibration"]]
     th={}
     for k in P["modes"]:
         v=np.concatenate([a["scores"][k][np.isin(a["label"],P["calibration_negative"])] for a in cal])
         th[k]=cut(v)
     save("lock.json",{"thresholds":th,"calibration_examples":sum(len(a["label"]) for a in cal)})
+    ev=[compute(target) for target in P["evaluation"]]
     out={}
     for k in P["modes"]:
         out[k]={}
