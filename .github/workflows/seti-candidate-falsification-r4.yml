@@ -1,0 +1,43 @@
+name: JANUS SETI R4 chunk-aware archived spectra and controls
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-candidate-falsification-r4.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-seti-r4-archive
+  cancel-in-progress: false
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        target: [HIP83601, HIP88684, HIP40875, HIP42418, HIP11029, HIP42748, HIP47425_S]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - name: Install bounded spectrum reader
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4
+      - name: Run chunk-aware archived observation replay
+        env:
+          TARGET: ${{ matrix.target }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python -m py_compile research/seti/r4_chunk_replay.py
+          python research/seti/r4_chunk_replay.py --target "$TARGET" --out "runtime/$TARGET"
+      - name: Preserve real spectrum slices and blocked gates
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: seti-r4-${{ matrix.target }}
+          path: runtime/${{ matrix.target }}/
+          retention-days: 90
