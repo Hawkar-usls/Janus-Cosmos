@@ -1,0 +1,58 @@
+{
+  "schema": "janus.cosmos.seti.r18b2.vector.v1",
+  "status": "PRECOMMITTED",
+  "source_r18bc": 44131620687,
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "seed": "R18B2-20261117",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990"
+  ],
+  "threshold": 9,
+  "groups_per_wave": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "tile_batch": 16,
+  "repeats": 3,
+  "context_rule": "median calibrated stationary peak statistic; two context buckets; frozen tournament on R9; fallback to global unless calibration improvement >= 5% and >=64 examples",
+  "markov_rule": "greedy conditional probability of hit per group cost over all remaining calibration rows consistent with previous failed groups; frozen before fresh target power",
+  "undina_rule": "native synchronous vector waves across active patches; choose coarse next wave width from calibration timing and current active cohort fraction; hard cap 8 groups; no in-flight futures, no latency claim",
+  "modes": [
+    "scalar_j",
+    "vector_full",
+    "vector_center_2",
+    "vector_j_1",
+    "vector_j_2",
+    "vector_j_4",
+    "vector_j_8",
+    "vector_j_fixed_calibrated",
+    "vector_undina",
+    "vector_keymaster",
+    "vector_residual_markov"
+  ],
+  "calibration": "R9 prior training only; count load, cache, tournament and vector tuning; freeze before fresh archive powers. Fixed-wave best comparator selected on calibration; per-target all alternatives reported.",
+  "scope": "binary threshold existence; synchronous coarse gate adaptation, not A18.42 original package or timing-matched sham; no persistent trajectory, no origin claim",
+  "production_adoption": false
+}
