@@ -1,0 +1,41 @@
+{
+  "schema": "janus.cosmos.r27b.targeted_lookalikes.v1",
+  "source": "https://www.nature.com/articles/s41550-021-01508-8",
+  "anchor_mhz": 982.0024719238281,
+  "oscillator_mhz": 2.000004,
+  "multipliers": [
+    -135,
+    -63,
+    0,
+    40
+  ],
+  "half_hz": 1400,
+  "search_half_hz": 600,
+  "drifts": [
+    0,
+    0.004,
+    0.008,
+    0.012,
+    0.016,
+    0.02,
+    0.024,
+    0.028,
+    0.032,
+    0.036,
+    0.04,
+    0.044,
+    0.048,
+    0.052,
+    0.056,
+    0.06,
+    0.064,
+    0.068,
+    0.072,
+    0.076,
+    0.08
+  ],
+  "minimum_score": 10,
+  "max_files": 24,
+  "scope": "Targeted published lookalike windows, not blind whole band. Query exact public archive index for same-date anchor and nearest observed control; all available backend files matching same timestamps; no coverage distinguished from negative. Prediction from published oscillator and anchor; actual recovered line may differ with time. Compare drift morphology on common times; matching frequency not proof of causation.",
+  "production_adoption": false
+}
