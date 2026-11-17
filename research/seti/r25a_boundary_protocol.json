@@ -1,0 +1,730 @@
+{
+  "schema": "janus.cosmos.seti.r25a.boundary_growth.v1",
+  "status": "PRECOMMITTED_RESEARCH_ONLY",
+  "donors": [
+    {
+      "repo": "Hawkar-usls/Janus-Fundamentum",
+      "ref": "4433c4673f818aa9ad68155e2e0deb612990b480",
+      "path": "research/tools/apma_factorized_feedback/factorized_portfolio.py",
+      "blob": "ab3cd177eb1e554f5119238c8556f05feb988bb3"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Fundamentum",
+      "ref": "4433c4673f818aa9ad68155e2e0deb612990b480",
+      "path": "research/tools/apma_component_join_carrier/component_join_carrier_v1_3.py",
+      "blob": "acfa7d0f82f4a0b70074661a6f558831b73c9362"
+    }
+  ],
+  "source_artifact": {
+    "id": 14364760652,
+    "digest": "132de8e5de8bffdf4f5e7f5b14628c3cc152d641b0b1d60bc75e8038e303301e",
+    "size": 92351123
+  },
+  "source_manifest": {
+    "id": 14362089928,
+    "digest": "efa7bc340478893a9e97c7f800e0eb508c5358413325c552e4ba6a8c95d40924"
+  },
+  "files": [
+    {
+      "name": "Parkes_57958_69856_HIP10395_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 201034503,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "5e6fc457a186b4d5e12bd9d7.npy",
+          "slice_sha256": "4ecb65cde8c55e050215fa8049acf9fa4a8382c65e8b7db1c07d818fe7bb1ad3"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "377d0db55953f6309ab75afd.npy",
+          "slice_sha256": "7b00d75c5579e46b7077d03d570bdca4637d19d46148cfe79422db88fed8b426"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "5cfc1f0c125135ba4122dd8e.npy",
+          "slice_sha256": "5a018de6bc1a0a38a13bab409a906ac614ddc0b829d0712ffe5353b4545d0e80"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "f05610b264f07c22a62af7b6.npy",
+          "slice_sha256": "da9d4cdbe91394ff60fef327cfdffcf2a23c7ef9b729e700e27aeed7c01a01b0"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57958_70580_HIP10395_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 201019887,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "638cf4d4d718731904284e47.npy",
+          "slice_sha256": "d52c700cd778b3cbfb358462f78d13a05ff885e2dcac2beafaac1822e5f1ae21"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "96d3a72ff5b7292a91a42d78.npy",
+          "slice_sha256": "a685158982486fd7a1262afac3751c0635cb85a53bb8e6045603c7a23c055e3c"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "cdae11a6871af0458b2e73c6.npy",
+          "slice_sha256": "3e31f94e776a220bfdc3ee5033c7febcc5cb1098f28a4a7eae9af9a74118a5e8"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "3e39f66e31b1372459a36f8f.npy",
+          "slice_sha256": "1be29d69f0433930ec5f591da8ff542543aaeecee12364a9192f8c487a7cb9d9"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_58009_43797_HIP105090_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 202895187,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "0a29df7df4bf6f6d356aefca.npy",
+          "slice_sha256": "a495b79fe3321b5b5add2ea75003f9f2a92aff8037a306f43e2caff8c66ddac7"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "bab90a6789e58c3f125edc17.npy",
+          "slice_sha256": "397e25c3bafce241303343e8504eb6dfbb022237e0b116cf39c845643a4308df"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "295315766f81d6c2193e5990.npy",
+          "slice_sha256": "a8b02be0092224be434c5677948cfb982e98da1fccc9fb3f8b9d9e61ae9fd191"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "0b1692f36484fd7a08f11620.npy",
+          "slice_sha256": "b00ccd13e20d2f204cf4f5979475a5802797f745fcfebf79657b7a1fa7b130ad"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_58009_44504_HIP105090_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 203104072,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "ca7eedef612f17c703130435.npy",
+          "slice_sha256": "115cc5a316bead1c25397fbf99c563c999cda5135c63d2715b2ac56c8e897f52"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "6618a11404437d02234d3431.npy",
+          "slice_sha256": "d498448d48b41710d1348b0afc7c449127816fbca5d2cb93093e5a00e320a9b1"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "0f93c67b7bca50d1a76d015d.npy",
+          "slice_sha256": "4dbdfc624b84fe5bea027176bd7b51ee304ad994fa52db02039622739a1502a1"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "e2e0c6371fc681bead4b837f.npy",
+          "slice_sha256": "6613a9b6b5738c5b8394a9e4b959397286fbc5da344bef6e1dcda87b6c9ff15f"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57833_62989_HIP63613_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 202346848,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "a1c7fa1f863a87a7bd1c59de.npy",
+          "slice_sha256": "f1a0e2f551d4c2c797a46e91c97fe33f8bc56b556289ba265a4c27166464c8c3"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "1e2675c72af0a9ec7e71021a.npy",
+          "slice_sha256": "4a4755b0427090bc6a1d012d389ebd42911cff94e680dd2aa5b411c949ee8412"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "2526bbc13aefd19615fa42c8.npy",
+          "slice_sha256": "3e82cf18ef4d7051fcf87f1863b159c27fb0ad36055aa64a39c14872cf738cf6"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "05a64095a411d4c49d8b336f.npy",
+          "slice_sha256": "8bcad1f355527fcf8442e2a4748e38b1d2263f759075e8e756bdcdaed43cec5a"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57833_63669_HIP63613_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 202382898,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "4d614c36f7b3b4e4213e6085.npy",
+          "slice_sha256": "9714467534c0e17a2290d00595ea8fccbd4cd71d0d10dee85e6a7e689253ce6b"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "359f76c620b383e9fa3f2bf6.npy",
+          "slice_sha256": "af27b9678564340ec33073b1996f3b20585154f89ace835d9d0f5fb3eb4f7cb1"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "7e2c41969f06e31f401a7e5e.npy",
+          "slice_sha256": "fedda39d251643b0f2a7c9e80a54785df61c2e5fbb3c84f45af934207f97bc95"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "be81f12f29299881489d7c19.npy",
+          "slice_sha256": "2308d6a5b6f9792a0a53ad9b157510ec98ccc151996fe73bb728ac48c4dfeb51"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57769_70001_HIP45637_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 201616386,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499986618757,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "ee5eef3ff09555b242ecab5a.npy",
+          "slice_sha256": "6085cbb4fca889d13de2d4c20abddb0d183d92e82486b5752344f69613c7b315"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.949998103082,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "f90ed637af5a8f11e16c1c79.npy",
+          "slice_sha256": "51dcb8b9d64b61896a49fd52a3213000eed1864385fe546643c041b87c6540e3"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499986991286,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "55ee72db50c4237f9385c1ad.npy",
+          "slice_sha256": "bdae24a0e9bcc729c9ca12b4d589eb573d4e7a25796e61e0205b265c7ba7e125"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.949997767806,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "104bea42e8f4116a8af08cd5.npy",
+          "slice_sha256": "88ebc32dbb6cc33a08b33d18ac5845e5164d8c57b6a67b210ad49f51d2c18e97"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57769_70680_HIP45637_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 201598181,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499986618757,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "1e44a5996e70c69fae95b01a.npy",
+          "slice_sha256": "b64b061944f171d79bc96f871494fc252e30ecb599d3bd6ebb17806ee3d98d78"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.949998103082,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "eabf507c6a5d162421d60170.npy",
+          "slice_sha256": "69c700c0212a22925cd7e221701f6feaec32211698b71cd80173f83f804e518d"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499986991286,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "716cdd378d61d4541d20cc12.npy",
+          "slice_sha256": "038bff6faeafc5fea269d63f45802812db6eeb1a488876afa826144be2499aa2"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.949997767806,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "5d7146d70b1a7a2c46fc3de1.npy",
+          "slice_sha256": "c10865fd36d701d57e87dbbdd5a4193e7ca3deede909ecd5bae52b5e1aa4c36f"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57802_03511_HIP86214_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 201193530,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "8be8df790640fff10b90ec42.npy",
+          "slice_sha256": "72abb2bca74a6ac8d2be697d1e8cdffa67e12e90d80f7c53ae09a89a37b019a9"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "2620deed535d353b64c92142.npy",
+          "slice_sha256": "c752b3de22b95f75afea3c3ae5bc96c6ef01c3d90e3aa8d4ec98b750cfdb37a5"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "17fe6f35022bc963761e2e08.npy",
+          "slice_sha256": "1c1bbe0d5e85738f33cd229af5e6296fddd919821c727eed9c6c9c615bc49873"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "aac5da61e383a22002530362.npy",
+          "slice_sha256": "7f60180e8cf204f97e69f81675138fa9def5529ec8aba2b6b15c3d2502f44939"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57802_04191_HIP86214_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 201227827,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "63a133d5e0f6a0dacf2e81df.npy",
+          "slice_sha256": "b85eb219cab1a3ccf1df6e8494ce73632c8059aa89a93c3b2d2ee84e14c506c5"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "2f22bbc0fa3e850f75fc0cd8.npy",
+          "slice_sha256": "0257c5132a75af527fdc2e1dedda4f823783d4cdacee045c289243fa4e2967ca"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "3ba7d364f88bed6aeaffda1c.npy",
+          "slice_sha256": "f8767c36c5af8b123edcca56de0bfa194ea7d37f0d31d70188f7cc2b5e290f78"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "92b36937bd1a9d024950e5a8.npy",
+          "slice_sha256": "9b07c31968688a43dacde08d428968a6e755000216f90f62835d7abbc06ae390"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57993_00532_HIP23708_R_fine.h5",
+      "role": "OFF1",
+      "bytes": 201581405,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "e6a659b534b1a58239f85a99.npy",
+          "slice_sha256": "656b2ef22c4893df920617c9032fa86b9cc02593463ec3a56fba8b0ba6bcf3d8"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "3c2d3ac9cb2595fa732e5cc4.npy",
+          "slice_sha256": "c2f5a239b6c060800b8612b09f6e66f6ce4569a70c3db35521db4b32e16a871d"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "a0e50ddf4dbec48db0ad5786.npy",
+          "slice_sha256": "5f0a055ae0375bf6c0a5a90451c36812615aa8fcf80e7581c545b6e8406ca40b"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "5dea6b13c4e557de67a65b2f.npy",
+          "slice_sha256": "a6baa2711127b843932670ff2a525ae42ca1b49c73d05bd373d0a22b66b52a8f"
+        }
+      ]
+    },
+    {
+      "name": "Parkes_57993_01212_HIP23708_R_fine.h5",
+      "role": "OFF2",
+      "bytes": 201597798,
+      "tiles": [
+        {
+          "center_mhz": 2860,
+          "channel0_mhz": 2859.9499982893467,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "93f90ee216af59ad55b10858.npy",
+          "slice_sha256": "a2e904ea0d14ddaf2a3c8222965b7aedfb836261d72b989ad36557ff8a94f081"
+        },
+        {
+          "center_mhz": 3010,
+          "channel0_mhz": 3009.950000524521,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "9aabba97d6fb3aa1a66c7d8a.npy",
+          "slice_sha256": "f9f4d036023cdad4c3c3dc01689f39230b2241593c4357b71cd2b02cae2327f1"
+        },
+        {
+          "center_mhz": 3150,
+          "channel0_mhz": 3149.9499983265996,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "bb3786f2ac65d566d01252b0.npy",
+          "slice_sha256": "6a5cb72cf1f4d2450005c7ff62d46d88cacba7b0dce9d304904b8000a4a05bcb"
+        },
+        {
+          "center_mhz": 3400,
+          "channel0_mhz": 3399.9500001892447,
+          "df_hz": 2.7939677238464355,
+          "ts": 18.253611008,
+          "shape": [
+            16,
+            35793
+          ],
+          "artifact": "eff617144c26a25ecb58ebbd.npy",
+          "slice_sha256": "a40fee46baa53a74856bd6623cfa198cabaddbd3cf69c2ac68c1d27c27ba0225"
+        }
+      ]
+    }
+  ],
+  "limits": {
+    "zip_bytes": 134217728,
+    "member_bytes": 4194304,
+    "total_uncompressed_tiles": 134217728
+  },
+  "block_sizes": [
+    8,
+    16,
+    32
+  ],
+  "lengths": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "width": 128,
+  "batch": 16,
+  "cal_seed": 25001,
+  "test_seed": 25002,
+  "cal_pairs": 128,
+  "test_pairs": 256,
+  "amplitudes": [
+    0.75,
+    1.25,
+    1.5,
+    2
+  ],
+  "noise": [
+    "white",
+    "ar1",
+    "persistent_rfi",
+    "impulsive"
+  ],
+  "gap_fraction": [
+    0,
+    0.25
+  ],
+  "repeats": 3,
+  "scope": "Exact checkpointed boundary-state recurrence with full frequency, incoming slope, global gap count; no independent-block assumption. Compare entire score and reconstructed witness to full Odonto for raw and gap cases incl adversarial block boundary. Same R24B pinned archive replay 1024 samples, not new archive. Long-duration sensitivity only synthetic independent seeds per length (not concatenated archive, no claim on real observations); matched 5% separate calibration for full and max 16-row independent block scores, report localized recovery and false alerts. Full cost incl traceback recomputation. No production promotion.",
+  "production_adoption": false
+}
