@@ -90,7 +90,7 @@ def main():
         for k in S["modes"]:
             t=time.perf_counter()
             if k=="math_joint":
-                v=vec.normalize(raw);s=np.asarray([hold.classical(q) for q in v]);r,_=reg.reg_sliced(v,.7,True);p=np.maximum(s/a0,r/b0)>=math_t
+                v=vec.normalize(raw).astype(np.float64);s=np.asarray([hold.classical(q) for q in v],np.float32).astype(float);r,_=reg.reg_sliced(v,.7,True);p=np.maximum(s/a0,r.astype(np.float32).astype(float)/b0)>=math_t
             else:
                 f=features(raw);z=np.clip((f-mu)/sd,-20,20);a=np.maximum(f[:,0].astype(float)/a0,f[:,2].astype(float)/b0)
                 q=predict(models["logistic" if k=="logistic" else "mlp"],z)
