@@ -26,7 +26,7 @@ def gather(q):
         if model=="straight":
             d=np.rint(t*int(rng.integers(-32,33))/(n-1)).astype(int)
         elif model=="off_grid_quadratic":
-            slope=float(rng.choice([-1.65,-.85,.35,1.15]));a=float(rng.choice([-.137,-.067,.063,.117]))
+            slope=float(rng.choice([-1.05,-.85,.35,1.05]));a=float(rng.choice([-.137,-.067,.063,.117]))
             d=np.rint(slope*u+a*u*u).astype(int)
         elif model=="slope_break":
             a,b=rng.choice([-1.6,-.7,.6,1.7],2,replace=False);cut=int(rng.integers(5,11))
