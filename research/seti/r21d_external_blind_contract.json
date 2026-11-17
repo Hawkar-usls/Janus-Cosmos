@@ -1,0 +1,59 @@
+{
+  "schema": "janus.cosmos.seti.r21d.external_blind_contract.v1",
+  "status": "AWAITING_INDEPENDENT_CUSTODIAN",
+  "scope": "Independent falsification of weak-signal detector on archived background plus hidden injected tracks, not evidence for sky origin.",
+  "custodian": {
+    "required": "Independent operator with no participation in candidate development; controls selection, hidden labels and injection seed, signs result. Internal agents and GitHub CI cannot satisfy independence.",
+    "before_test": [
+      "Freeze code commit, dependencies, model weights and complete thresholds; freeze source exclusion list including all development and R21BC targets.",
+      "Generate secret 256-bit seed and salt; publish SHA256 commitment and signed split manifest containing target IDs or hidden manifest commitment before opening candidate output.",
+      "Select at least 12 disjoint telescope pointings with at least two same-pointing scans, spanning receiver/day domains. Include candidate-independent selection criterion and publish acquisition failure accounting.",
+      "Create paired background/injected observations without exposing labels, injection positions, amplitude, morphology, or source-label side channels; shuffle IDs independently. Keep a separate calibration cohort unavailable to test."
+    ]
+  },
+  "controls": {
+    "amplitudes": [
+      0.75,
+      1.25,
+      1.5,
+      2
+    ],
+    "morphologies": [
+      "linear off-grid drift",
+      "quadratic off-grid drift",
+      "slope break",
+      "smooth sinusoid",
+      "stationary RFI challenge"
+    ],
+    "presence": [
+      "continuous",
+      "25% gaps",
+      "first scan only"
+    ],
+    "negative_controls": [
+      "unmodified real spectra",
+      "discordant injected tracks",
+      "same receiver repeated interference",
+      "time-sham",
+      "independent source not present"
+    ],
+    "primary": "Unmodified real-spectrum paired controls only for calibration/primary false alert rate; challenge false alerts separately, not pooled.",
+    "source_identity": "Do not count multiple slices from same observation as independent units."
+  },
+  "evaluation": {
+    "primary": "Paired localized recovery at 0.75–1.25 robust local noise scales; localization at least 75% of injected active samples within two bins; also report raw alerts, 1.5/2-scale, per morphology and missing scan, all UNKNOWN and failures.",
+    "comparators": [
+      "frozen straight",
+      "frozen ordinary DP",
+      "frozen JUXTAPOSE+regularized DP",
+      "frozen R21BC timestamp joint if it passes",
+      "frozen R21E model and logistic if eligible"
+    ],
+    "calibration": "Equal predeclared 5% control alert target on separate calibration data, no test threshold fitting. Do not claim equal sensitivity if realized control rates differ.",
+    "statistical_gate": "Predeclare target-cluster bootstrap 95% intervals from 12 or more independent pointings, paired localized recall difference versus frozen joint baseline; success requires lower bound >0 and control alert increase upper bound <=0.02 absolute. Report each receiver/day stratum and abstention. If underpowered, HOLD, not PASS.",
+    "cost": "Report cold I/O, warm cache, calibration, full feature extraction, training, inference, memory, and proof/witness replay separately. Do not multiply stage accelerations.",
+    "disclosure": "Reveal seed, labels and signed manifests only after submitted candidate output digest. Independent reproduce score, validate no label leakage, publish failures."
+  },
+  "adoption": false,
+  "confirmed_technosignatures": 0
+}
