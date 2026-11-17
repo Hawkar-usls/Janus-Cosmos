@@ -1,0 +1,52 @@
+{
+  "schema": "janus.seti.r10.falsification.v1",
+  "source_run": 44056923735,
+  "source_artifact": {
+    "id": 14317465678,
+    "digest": "2d22f8b1c0ea7ca892ae38ca90eac3ed12ffd608273ecb4dc3b179f576592ba9"
+  },
+  "target": "HIP113368",
+  "anchor": {
+    "frequency_mhz": 3000.0231756940484,
+    "drift_hz_s": -0.030612767223120126,
+    "mjd": 57845.15331018518,
+    "ra_hour": 22.960861111111114,
+    "dec_deg": -28.377777777777776
+  },
+  "source_cadence": [
+    "Parkes_57845_13246_HIP113368_S_fine.h5",
+    "Parkes_57845_13590_HIP113368_R_fine.h5",
+    "Parkes_57845_13929_HIP113368_S_fine.h5"
+  ],
+  "frozen_r9_control_targets": [
+    "HIP15510",
+    "HIP57443",
+    "HIP15330"
+  ],
+  "selection": "Use exact R9 artifact first; read all 3 other-target R9 ON/OFF/ON 3000 MHz tiles at fixed candidate frequency. For HIP113368, first subsequent R and S same-day files, if available, and nearest eligible complete S/R/S on earlier and later distinct days (metadata only). No signal-dependent selection.",
+  "models": [
+    "fixed topocentric frequency at original drift",
+    "continuous original track in same session",
+    "constant barycentric frequency across epochs (no unknown intrinsic acceleration)"
+  ],
+  "barycentric": {
+    "location_lon_deg": 148.26351,
+    "location_lat_deg": -32.99841,
+    "height_m": 414.8,
+    "ephemeris": "builtin",
+    "formula": "f_top=f_bary*(1+v_corr/c); correction in optical convention",
+    "reference": "https://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html"
+  },
+  "thresholds": {
+    "score": 8,
+    "persistence": 0.5,
+    "match_bins": 10,
+    "drift_grid_neighbors": 1
+  },
+  "window_half_hz": 5000,
+  "limits": {
+    "extra_scans": 8,
+    "budget_mib_per_file": 192
+  },
+  "claims": "Descriptive signal screen only. Presence of an OFF/cross-target track raises interference concern; absence does not prove extraterrestrial origin. Constant barycentric hypothesis is restrictive; no threshold tuning, no independent confirmation from archival repeat alone."
+}
