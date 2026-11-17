@@ -1,0 +1,47 @@
+{
+  "schema": "janus.seti.r8.preregistered_search.v1",
+  "purpose": "Independent JANUS algorithm search over archive spectra outside the 12-group replay; not guaranteed previously unpublished observations.",
+  "targets_in_fixed_order": [
+    "HIP80337",
+    "HIP8102",
+    "HIP16537",
+    "HIP113368",
+    "HIP71681",
+    "HIP71683"
+  ],
+  "exclude_prior_targets": [
+    "HIP40875",
+    "HIP83601",
+    "HIP42418",
+    "HIP11029",
+    "HIP42748",
+    "HIP88684",
+    "HIP47425"
+  ],
+  "selection": "Metadata only, first two targets with complete Parkes fine S/R/S cadence; prefer MJD >= 58575, then earliest chronological cadence; if older, label archival reanalysis. Fine HDF5 files with matching frequency coverage; never inspect intensities to select.",
+  "window_centers_mhz": [
+    2920,
+    3310
+  ],
+  "window_half_hz": 20000,
+  "drift_range_hz_s": [
+    -4,
+    4
+  ],
+  "drift_grid": "integer total channel displacement across full scan",
+  "min_rows": 12,
+  "anchor_min_score": 12,
+  "anchor_min_row_excess_fraction": 0.5,
+  "top_candidates_per_tile": 5,
+  "off_and_repeat_threshold_score": 8,
+  "frequency_guard_hz": 28,
+  "repeat_max_elapsed_s": 1800,
+  "source": "https://seti.berkeley.edu/opendata",
+  "limits": {
+    "targets": 2,
+    "cadence_scans": 3,
+    "windows_per_scan": 2,
+    "spectrum_budget_per_file_mib": 192
+  },
+  "claims": "All scores descriptive and post-search maxima; no discovery without independent follow-up, calibrated sensitivity and RFI exclusion."
+}
