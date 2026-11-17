@@ -1,0 +1,88 @@
+{
+  "schema": "janus.seti.r15d.r16d.r17d.pilot.v1",
+  "artifacts": {
+    "blc": {
+      "id": 14347646236,
+      "digest": "b108582724d0334289455f81e2e7df3ea6c17b0ba5bd3a3cf879a2fc5a0752b7"
+    },
+    "blc_manifest": {
+      "id": 14348050164,
+      "digest": "999cf5fac9d41fa06efc5ebd8beb8521ec4369875cacab5ed65a3d3151ca9106"
+    },
+    "atlas": {
+      "id": 14349875779,
+      "digest": "2431743cc0490e79d81484d021ef1f154a587169ebb680c23b4f62a60f550f23"
+    },
+    "hybrid": {
+      "id": 14348025706,
+      "digest": "4c3b24d675c63123f41ce99456832a6d1bb3ca4a4fd308023170d1b11422298f"
+    }
+  },
+  "r15d": {
+    "anchor": "blc03_ProxCen_S_2019-04-29T13:47:46.000.fil",
+    "center_mhz": 982.002472,
+    "half_hz": 350,
+    "drift_grid_hz_s": [
+      0,
+      0.004,
+      0.008,
+      0.012,
+      0.016,
+      0.02,
+      0.024,
+      0.028,
+      0.032,
+      0.036000000000000004,
+      0.04,
+      0.044,
+      0.048,
+      0.052000000000000005,
+      0.056,
+      0.06,
+      0.064,
+      0.068,
+      0.07200000000000001,
+      0.076,
+      0.08
+    ],
+    "drift_change_grid_hz_s": [
+      -0.04,
+      -0.02,
+      0,
+      0.02,
+      0.04
+    ],
+    "windows": [
+      16,
+      32,
+      64,
+      107
+    ],
+    "robust_integrated_threshold": 10,
+    "sham_repeats": 5,
+    "source": "https://www.nature.com/articles/s41550-021-01508-8"
+  },
+  "r16d": {
+    "centers": [
+      1450,
+      1550,
+      1750
+    ],
+    "status": "PRELIMINARY_DIRECTIONAL_HOLD",
+    "sham_repeats": 32,
+    "scope": "replay existing same-day data; fixed predictions from R16C, no new candidate selection"
+  },
+  "r17d": {
+    "bands": [
+      0.25,
+      0.5,
+      1,
+      2,
+      4,
+      8
+    ],
+    "min_calibration_recall": 0.95,
+    "scope": "development replay of stored scores; estimated route cost, not measured selective execution; preserve math alerts; AI only adds or prioritizes"
+  },
+  "production_adoption": false
+}
