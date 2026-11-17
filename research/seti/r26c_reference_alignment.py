@@ -9,7 +9,7 @@ import os,io,zipfile,requests
 P=pathlib.Path("research/seti/r26c_reference_protocol.json")
 S=json.loads(P.read_text());OUT=pathlib.Path("runtime/r26c");OUT.mkdir(parents=True,exist_ok=True)
 hold.S={**hold.S,"seed":S["seed"],"exclude":sorted(set(hold.S["exclude"]+S["exclude_extra"]))}
-hold.OUT=OUT;hold.P=P;eng.OUT=OUT
+hold.OUT=OUT;hold.P=P;eng.OUT=OUT;od.S=S
 def emit(k,d):print(k,json.dumps(d),flush=True)
 def save(n,d):(OUT/n).write_text(json.dumps(d,indent=2)+"\n")
 def norm(x):
