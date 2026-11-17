@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.seti.r20b.join_dispatch.v1",
+  "status": "PRECOMMITTED_RESEARCH_ONLY",
+  "donor": "https://github.com/Hawkar-usls/Janus-Fundamentum/blob/4433c4673f818aa9ad68155e2e0deb612990b480/research/tools/apma_bucket_common_core/common_core_semijoin_prefilter_v1_1.py",
+  "source_artifact": {
+    "id": 14352959003,
+    "digest": "b249bdbfe7d7de36637c4b21adc48a8d4d7412f2963be5294d748ce166e4a5d0"
+  },
+  "cal_seed": 20201,
+  "test_seed": 20202,
+  "sizes": [
+    16,
+    64,
+    128,
+    256
+  ],
+  "families": [
+    "sparse",
+    "medium",
+    "dense",
+    "hostile"
+  ],
+  "cal_reps": 2,
+  "test_reps": 4,
+  "repeats": 3,
+  "thresholds": {
+    "frequency": 25,
+    "drift": 0.03
+  },
+  "router_grid": {
+    "min_cube": [
+      4096,
+      65536,
+      1048576
+    ],
+    "max_ratio": [
+      0.005,
+      0.02,
+      0.1,
+      0.5
+    ]
+  },
+  "modes": [
+    "dense",
+    "original_semijoin",
+    "cached_semijoin",
+    "adaptive"
+  ],
+  "scope": "Exact tuple identity for declared predicates, not physical identity. Actual selector, matrix and output costs included; separate cal/test seeds. Same archive candidate replay diagnostic. No raw deletion, no production promotion.",
+  "production_adoption": false
+}
