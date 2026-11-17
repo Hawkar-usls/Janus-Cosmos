@@ -1,0 +1,73 @@
+{
+  "schema": "janus.seti.parallel.r15_r16_r17.v1",
+  "r15": {
+    "source": "https://seti.berkeley.edu/blc1/",
+    "paper": "https://www.nature.com/articles/s41550-021-01508-8",
+    "date_mjd": 58602,
+    "target_names": [
+      "ProxCen",
+      "PROXCEN",
+      "Proxima_Centauri",
+      "PROX_CEN",
+      "PKS1421-490",
+      "PKS1934-638",
+      "1421-490",
+      "1934-638"
+    ],
+    "windows_mhz": [
+      982.002571,
+      712.002031,
+      856.002319,
+      1062.002731
+    ],
+    "half_width_hz": 2500,
+    "selection": "metadata only matching exact day and fine/high resolution name, up to 12 unique Proxima and 8 calibrator products; known frequency targeted replay not blind. companion predictions use published 2.000004 MHz spacing; not exact published centroids",
+    "drift_max": 0.15
+  },
+  "r16": {
+    "source": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "day": 61027,
+    "scans": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "window_mhz": 1400,
+    "half_width_hz": 50000,
+    "selection": "L band first six scans, first lexicographic common backend high resolution product whose metadata covers 1400 MHz; retain all 6 scan files, ON1/OFF1/ON2/OFF2/ON3/OFF3. Fixed window exploratory search only.",
+    "thresholds": "R11 unchanged"
+  },
+  "r17": {
+    "source_artifacts": [
+      {
+        "run": 44056923735,
+        "id": 14317465678,
+        "digest": "2d22f8b1c0ea7ca892ae38ca90eac3ed12ffd608273ecb4dc3b179f576592ba9",
+        "split": "train_R9"
+      },
+      {
+        "run": 44073590539,
+        "id": 14323963279,
+        "digest": "145c1779791b0885f3210efe3f9200abfa9a995156227abd813f18761b29e449",
+        "split": "heldout_R11"
+      }
+    ],
+    "task": "Binary experimental classification of deterministic synthetic narrowband injections versus unmodified real OFF patches; background not known signal-free. Separate catalog of real OFF / reverse-cadence evidence, no extraterrestrial labels. Four R9 training targets separate from four R11 test targets. Tiny transformer, fixed seed, no test-based tuning, compare robust track-statistic baseline; no production change.",
+    "seed": 20261117,
+    "patch_channels": 128,
+    "trials_per_tile": 12,
+    "amplitude": [
+      3,
+      4,
+      6,
+      8
+    ]
+  },
+  "limits": {
+    "per_file_mib": 192
+  },
+  "claim_ceiling": "Development/archive reanalysis only; no extraterrestrial origin, independent confirmation, or automatic weight adoption."
+}
