@@ -6,7 +6,7 @@ import r20c_verified_tile_cache as cache
 import r20a_vector_dp as dp
 import r19e_integrated_exam as prior
 import r17c_frozen_holdout as hold
-import juxtapose_r18b2_vector as vec
+import juxtapose_undina_r18b2_vector as vec
 import juxtapose_undina_r18bc as old
 import r9_expanded_search as eng
 P=pathlib.Path("research/seti/r20d_weak_joint_protocol.json");S=json.loads(P.read_text())
