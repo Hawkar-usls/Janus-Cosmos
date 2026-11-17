@@ -1,0 +1,55 @@
+name: JANUS SETI R11 full window sensitivity and control calibration
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-control-calibration-r11.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectrum dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4
+      - name: Freeze new targets using metadata only
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python -m py_compile research/seti/r11_control_calibration.py
+          python research/seti/r11_control_calibration.py freeze
+      - name: Preserve manifest before power data reads
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r11-frozen-manifest
+          path: runtime/r11/
+          retention-days: 90
+      - name: Run full window search and real OFF calibration
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python research/seti/r11_control_calibration.py scan
+      - name: Preserve full windows and control receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r11-result
+          path: runtime/r11/
+          retention-days: 90
+      - name: Gate on completed observations
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/r11/result.json"))
+          assert d["completed"]>=1 and d["completed"]==d["selected"]
+          assert d["completed_tiles"]==4*d["completed"]
+          assert d["off_tiles"]==8*d["completed"]
+          assert d["calibration"]["paired_tracks"]==d["off_tiles"]
+          assert all(v["trials"]==d["off_tiles"] for v in d["calibration"]["levels"])
+          PY
