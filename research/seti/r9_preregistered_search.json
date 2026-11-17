@@ -1,0 +1,70 @@
+{
+  "schema": "janus.seti.r9.expanded_search.v1",
+  "purpose": "Prospective expansion of R8 archive search and relative-power injection/recovery calibration. No discovery claim.",
+  "targets_in_fixed_order": [
+    "HIP16537",
+    "HIP113368",
+    "HIP71681",
+    "HIP71683",
+    "HIP15510",
+    "HIP57443",
+    "HIP2021",
+    "HIP15330",
+    "HIP7978",
+    "HIP19849"
+  ],
+  "exclude_prior_targets": [
+    "HIP80337",
+    "HIP8102",
+    "HIP40875",
+    "HIP83601",
+    "HIP42418",
+    "HIP11029",
+    "HIP42748",
+    "HIP88684",
+    "HIP47425"
+  ],
+  "selection": "First four distinct eligible target names in fixed order, metadata-only identical Parkes fine S/R/S cadence rule as R8; prefer dates MJD >=58575 within each target. No intensity selection. R8 and original groups excluded.",
+  "window_centers_mhz": [
+    2800,
+    3000,
+    3200,
+    3370
+  ],
+  "window_half_hz": 50000,
+  "drift_range_hz_s": [
+    -4,
+    4
+  ],
+  "drift_grid": "integer total channel displacement across complete scan",
+  "min_rows": 12,
+  "anchor_min_score": 12,
+  "anchor_min_row_excess_fraction": 0.5,
+  "top_candidates_per_tile": 5,
+  "off_and_repeat_threshold_score": 8,
+  "frequency_guard_hz": 28,
+  "repeat_max_elapsed_s": 1800,
+  "calibration": {
+    "seed": 2026111709,
+    "raw_power_row_robust_noise_amplitudes": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
+    "subtile_channels": 4096,
+    "trials_per_tile": 2,
+    "method": "For each actual OFF tile, two fixed seeded positions and slopes; test original subtile for baseline coincidence, add one-channel signal in raw power scaled by per-row MAD*1.4826, re-normalize and run the exact R8 top-five blind search; paired same background and track at every amplitude. Recover when start/end within 2 channels. Record all attempts including baseline coincidence; no threshold tuning.",
+    "scope": "Algorithm sensitivity on sampled OFF subtiles, not absolute flux/SEFD calibration or survey-wide false-alarm probability. Correlated paired trials, descriptive fractions only."
+  },
+  "limits": {
+    "targets": 4,
+    "cadence_scans": 3,
+    "windows_per_scan": 4,
+    "spectrum_budget_per_file_mib": 320
+  },
+  "claims": "No calibrated astronomical detection or independent new observation. Archive reanalysis only; negative results bounded to selected tiles and threshold.",
+  "source": "https://seti.berkeley.edu/opendata"
+}
