@@ -1,0 +1,253 @@
+{
+  "schema": "janus.cosmos.r28.hybrid_detector.v1",
+  "status": "PRECOMMITTED",
+  "seed": "R28-HYBRID-20261117-v1",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990",
+    "HIP80686",
+    "HIP91438",
+    "HIP13218",
+    "HIP84709",
+    "HIP55454",
+    "HIP16069",
+    "HIP52462",
+    "HIP80018",
+    "HIP63490",
+    "HIP58345",
+    "HIP54532",
+    "HIP22738",
+    "HIP47780",
+    "HIP76074",
+    "HIP61874",
+    "HIP27887",
+    "HIP33817",
+    "HIP40706",
+    "HIP27654",
+    "HIP27947",
+    "HIP7751",
+    "HIP113283",
+    "HIP560",
+    "HIP950",
+    "HIP69454",
+    "HIP27072",
+    "HIP56998",
+    "HIP40702",
+    "HIP69972",
+    "HIP110109",
+    "HIP106440",
+    "HIP19884",
+    "HIP84405",
+    "HIP63550",
+    "HIP10395",
+    "HIP105090",
+    "HIP63613",
+    "HIP45637",
+    "HIP86214",
+    "HIP23708",
+    "HIP32366",
+    "HIP24186",
+    "HIP99461",
+    "HIP79537",
+    "HIP113576",
+    "HIP23452",
+    "HIP110750",
+    "HIP13402",
+    "HIP8497",
+    "HIP84051",
+    "HIP29052",
+    "HIP15799",
+    "HIP41926",
+    "HIP108569",
+    "HIP43797"
+  ],
+  "amplitudes": [
+    0.75,
+    1.25,
+    1.5,
+    2
+  ],
+  "calibration_control_fraction": 0.05,
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "wave_width": 2,
+  "penalty": 0.7,
+  "template_slopes": [
+    -2,
+    -1.5,
+    -1,
+    -0.5,
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+  ],
+  "template_curvatures": [
+    -0.16,
+    -0.12,
+    -0.08,
+    -0.04,
+    0,
+    0.04,
+    0.08,
+    0.12,
+    0.16
+  ],
+  "clip_values": [
+    3,
+    5
+  ],
+  "injection_models": [
+    "stationary",
+    "straight",
+    "off_grid_quadratic",
+    "smooth_sinusoid"
+  ],
+  "gap_levels": [
+    0,
+    0.25
+  ],
+  "modes": [
+    "raw_linear",
+    "raw_odonto",
+    "registered_linear",
+    "registered_odonto",
+    "registered_taylor",
+    "registered_hybrid",
+    "protected_hybrid"
+  ],
+  "repeats": 3,
+  "scope": "Fresh target-disjoint 2 calibration + 4 evaluation Parkes cadences, 1024 paired examples on measured backgrounds and 128 separate stationary reference leakage challenges. All registered arms see identical input, linear and Odonto exact plus original pinned turboSETI CPU kernel (not full pipeline). No threshold selection on evaluation; all arms logged incl failures. Source labels synthetic, instrument/day dependence possible. Raw candidate evidence retained. Compare total preprocessing plus kernel time; no source origin inference.",
+  "production_adoption": false,
+  "donor": {
+    "repo": "Hawkar-usls/Janus-Fundamentum",
+    "commit": "5c2afcf7936ddbbf693657bbdd8f610ec21d3570",
+    "path": "tools/OdontoForge_PNP_EXP.py",
+    "blob": "3a6397f4201f2471a237a0be664d48da806ab285"
+  },
+  "growth": {
+    "radius": 3,
+    "curvature_penalty": 0.7,
+    "max_unobserved_layers": 4,
+    "skip_cost": 0.5,
+    "clip": 3
+  },
+  "cousteau": {
+    "donors": [
+      {
+        "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+        "path": "workspace/kusto_cd169_empirical_residual_bootstrap_library.py",
+        "blob": "6508804e7c1c4d644ef0d40bcdd97f54d1928397"
+      },
+      {
+        "ref": "79b5d6e87db3fa107248eca35c895e2d2dc10dc7",
+        "path": "workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py",
+        "blob": "734d7d2256386a2f73e36d0a9a26d6e62375bf"
+      }
+    ],
+    "regime": "95th percentile of column temporal medians, split at median calibration controls; two strata, minimum 64 controls each",
+    "residual": "Subtract 75% of positive persistent column median after row normalization; robust per-column scale shrinkage, floor 1, cap 4; clip residual upper 3; raw route retained separately. No independent reference scan, stationary signal may attenuate.",
+    "stratum_control_fraction": 0.05
+  },
+  "registration": {
+    "shift_bins": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3
+    ],
+    "minimum_cosine": 0.8,
+    "clean_max_median": 1.5,
+    "profile_floor": 1,
+    "min_stratum_controls": 30,
+    "patch_width": 128,
+    "reference": "nearest paired OFF scan; physical channel grids checked before shift; no wrap; reject mismatched physical grids; candidate-local alignment uses no labels",
+    "edge_guard": 3
+  },
+  "donors": [
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "41c7e4efccbcf8506fa40b33b8ddd84dda054adc",
+      "path": "workspace/janus_cosmos_fermi_spectral_v6r1.py",
+      "blob": "90773b1e3e8c0db408a6339d2228f85fb061c6a3"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_cand003_support_matched_sensitivity.py",
+      "blob": "22a85c8e9fa1656c4bf0b5ce845a40df2b0daa36"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_mar4deg02s_em12_acquisition_regime_calibration.py",
+      "blob": "9a5b55e44bc19695785b8b74a3a005209d60abdd"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_first_unseen_residual_transfer_validation.py",
+      "blob": "3483772d5348ebcfaf38cd8334fba682d64e584f"
+    }
+  ],
+  "external_reference": "https://www.nature.com/articles/s41550-021-01508-8",
+  "comparators": {
+    "turbo": {
+      "ref": "7d9b4fde9bc98d834dc11cfc0acd2380e6676f0e",
+      "files": [
+        [
+          "turbo_seti/find_doppler/kernels/_bitrev/__init__.py",
+          "e98d02b4d7334c659d9551bead15fbf79d322acb"
+        ],
+        [
+          "turbo_seti/find_doppler/kernels/_taylor_tree/_core_numba.py",
+          "d1dac5f1d00cbeabb017c6e9fd44784b7914db09"
+        ]
+      ],
+      "scope": "Original unchanged CPU Taylor kernel loaded by verified source, common preprocessing and custom symmetric shear range wrapper; not full turboSETI pipeline."
+    },
+    "hyperseti": "GPU not available in standard hosted CPU runner",
+    "bliss": "full pipeline build and integration open",
+    "ma": "random forest weights not shipped; full cadence shape and training required"
+  },
+  "fusion": {
+    "primary": "registered_hybrid",
+    "rule": "max of dimensionless branch margins (score - calibration control 95% threshold) / max(0.1, q95-q80) ; select corresponding path; separate joint threshold on calibration controls",
+    "protected": "max over both raw and registered linear and Odonto margins, separately calibrate a single threshold; raw individual candidate retained as advisory output, not automatic veto",
+    "threshold": "at most floor(0.05 * calibration controls) alerts for each mode, strict nextafter above descending order statistic",
+    "no_retuning": true
+  },
+  "gate": {
+    "primary_compare": [
+      "registered_linear",
+      "registered_odonto",
+      "registered_taylor"
+    ],
+    "primary_metric": "localized positives",
+    "weak_metric": "localized positives at 0.75 and 1.25 robust sigma",
+    "control_alerts_increase_allowed": 0,
+    "rule": "Development gate: primary hybrid must exceed both native component localized counts and not exceed either native component control alerts; compare Taylor separately. Report per-target and paired deltas; no independent external validation or production adoption."
+  }
+}
