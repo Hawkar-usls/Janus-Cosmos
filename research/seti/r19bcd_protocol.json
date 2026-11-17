@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.seti.r19bcd.v1",
+  "status": "PRECOMMITTED_RESEARCH",
+  "sources": {
+    "eye": {
+      "blob": "0ee15caf20d1303a242f1cf7c2f308c5533cf348",
+      "commit": "ffacf79df2c22f1847748b32eaa3ca2d44ed2ca3"
+    },
+    "semijoin": {
+      "blob": "c29229bbaebf2935ab03c77c7d444e2a33422f17",
+      "commit": "4433c4673f818aa9ad68155e2e0deb612990b480"
+    },
+    "topa": {
+      "blob": "ebcb0884692c9e6ebc86ba9460467e975958f038",
+      "commit": "0890172493d6ed0d3a62e79904c6a7593eb8a9f3"
+    }
+  },
+  "artifacts": {
+    "r16c": {
+      "id": 14349875779,
+      "digest": "2431743cc0490e79d81484d021ef1f154a587169ebb680c23b4f62a60f550f23"
+    },
+    "manifest": {
+      "id": 14346289997,
+      "digest": "961a4939b7d2f054c5ca24a3fbfcf8b4c809918a7ddc322df0764c2c23b49d16"
+    }
+  },
+  "match": {
+    "freq_tolerance_bins": 8,
+    "drift_tolerance_bins_per_scan": 2
+  },
+  "stress": {
+    "seed": 19023,
+    "sizes": [
+      24,
+      64,
+      128
+    ],
+    "replicates": 8,
+    "density": [
+      "sparse",
+      "dense",
+      "hostile"
+    ]
+  },
+  "eye": {
+    "independence_required": 2,
+    "scope": "synthetic exact test model, real archive cannot establish origin; no unvalidated empirical separation edges"
+  },
+  "topa": {
+    "scope": "source-family preservation, exact digest dedup, advisory similarity groups by projected frequency/drift; no deletion of raw records or independent provenance",
+    "tests": "duplicate copies, conflicting payload, distinct lineage, chain grouping not equivalence"
+  },
+  "scope": "R16C archive candidate catalog, top-five cap; synthetic relational stress; no new observations, no source classification, no production promotion",
+  "production_adoption": false
+}
