@@ -1,0 +1,47 @@
+{
+  "schema": "janus.seti.r12.frozen_followup.v1",
+  "source_run": 44073590539,
+  "artifact": {
+    "id": 14323963279,
+    "digest": "145c1779791b0885f3210efe3f9200abfa9a995156227abd813f18761b29e449"
+  },
+  "target": "HIP47103",
+  "anchor": {
+    "frequency_mhz": 3149.9781590998173,
+    "drift_hz_s": 0.010204255741040042,
+    "mjd": 57782.62398148148,
+    "ra_hour": 9.600444444444445,
+    "dec_deg": -20.339444444444446
+  },
+  "reverse_control": {
+    "frequency_mhz": 3149.9779942557216,
+    "drift_hz_s": -0.04081702296416017,
+    "mjd": 57782.628067129626
+  },
+  "source_cadence": [
+    "Parkes_57782_53912_HIP47103_S_fine.h5",
+    "Parkes_57782_54265_HIP47103_R_fine.h5",
+    "Parkes_57782_54613_HIP47103_S_fine.h5",
+    "Parkes_57782_54963_HIP47103_R_fine.h5"
+  ],
+  "selection": "All 16 frozen 3150 MHz R11 source and other-target scans; first following S and R within 1800 s of last scan plus nearest earlier/later S/R/S cadences by archive metadata. No intensity-based selection.",
+  "barycentric": {
+    "location_lon_deg": 148.26351,
+    "location_lat_deg": -32.99841,
+    "height_m": 414.8,
+    "ephemeris": "builtin",
+    "formula": "f_top=f_bary*(1+v_corr/c), optical convention; restrictive constant-frequency model"
+  },
+  "thresholds": {
+    "score": 8,
+    "persistence": 0.5,
+    "match_bins": 10,
+    "drift_grid_neighbors": 1
+  },
+  "window_half_hz": 5000,
+  "limits": {
+    "extra_scans": 8,
+    "budget_mib_per_file": 192
+  },
+  "claims": "A related OFF track or reverse-control pattern raises interference concern, does not prove common origin. No independent confirmation or extraterrestrial discovery."
+}
