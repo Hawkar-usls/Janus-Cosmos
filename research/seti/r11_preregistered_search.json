@@ -1,0 +1,67 @@
+{
+  "schema": "janus.seti.r11.control_calibration.v1",
+  "purpose": "Prospective new-target archive search; evaluate real control alert occupancy and reverse-cadence pseudo-directional alerts; full-tile injection recovery.",
+  "exclude_prior_targets": [
+    "HIP40875",
+    "HIP83601",
+    "HIP42418",
+    "HIP11029",
+    "HIP42748",
+    "HIP88684",
+    "HIP47425",
+    "HIP80337",
+    "HIP8102",
+    "HIP113368",
+    "HIP15510",
+    "HIP57443",
+    "HIP15330"
+  ],
+  "selection": {
+    "index": "https://seti.berkeley.edu/opendata/api/list-targets",
+    "rule": "Extract exact HIP<number>_S names from public metadata; exclude previous targets, sort by SHA256('R11-20261117|'+target), inspect first 32 names; first four eligible consecutive S/R/S/R high-resolution Parkes scans, metadata only; prefer post-2019 March then earliest timestamp; max five cadence header attempts per target. Freeze manifest before reading powers.",
+    "min_targets": 1,
+    "max_targets": 4
+  },
+  "window_centers_mhz": [
+    2860,
+    3010,
+    3150,
+    3400
+  ],
+  "window_half_hz": 50000,
+  "drift_range_hz_s": [
+    -4,
+    4
+  ],
+  "anchor_min_score": 12,
+  "anchor_min_row_excess_fraction": 0.5,
+  "top_candidates_per_tile": 5,
+  "off_and_repeat_threshold_score": 8,
+  "frequency_guard_hz": 28,
+  "repeat_max_elapsed_s": 1800,
+  "calibration": {
+    "seed": "R11-20261117",
+    "amplitudes": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
+    "trials_per_off_tile": 1,
+    "scope": "Full input spectral tile including all time rows and all channels; one deterministic track per OFF scan/tile, paired across amplitudes, add raw one-channel power proportional to row robust noise, same full-window blind search incl top-five cap; endpoints <=2 bins; no adaptive thresholds."
+  },
+  "control": {
+    "scope": "Search both OFF scans using identical ON anchor thresholds; count any returned alert, capped count and template exposure. Reverse R/S/R (OFF1, ON2, OFF2) applies same directional gate as S/R/S. Real OFF backgrounds are not known signal-free, and not independent Bernoulli trials; report empirical proxy not calibrated cosmic false-alarm probability.",
+    "thresholds_unchanged_from_r9": true
+  },
+  "limits": {
+    "targets": 4,
+    "cadence_scans": 4,
+    "windows_per_scan": 4,
+    "spectrum_budget_per_file_mib": 320,
+    "max_index_queries": 32
+  },
+  "claims": "No confirmed technosignature or independent confirmation. Archive reanalysis only; no flux calibration, no new observations."
+}
