@@ -1,0 +1,65 @@
+name: JANUS COSMOS observation search - radio candidate audit
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-radio-candidate-search.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  search:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Download and analyze bounded public observation catalogs
+        run: |
+          python - <<'PY'
+          import collections,csv,hashlib,io,json,math,pathlib,urllib.request
+          sources={
+              "GBT_L":"https://seti.berkeley.edu/listen2019/lband2019_events.csv",
+              "GBT_S":"https://seti.berkeley.edu/listen2019/sband2019_events.csv",
+              "PARKES_10CM":"https://seti.berkeley.edu/listen2019/pks10cm2019_events.csv"
+          }
+          result={"schema":"janus.seti.catalog_audit.v1","status":"NO_CONFIRMED_DETECTION","method":"cross-target 1 MHz frequency bins; shared bins flag potential interference, isolated bins are unverified only","thresholds":{"bin_width_assuming_mhz":1,"min_events_per_group":3,"max_targets_in_bin":1},"limitations":["Processed event catalogs, not raw voltage observations.","Repeated frequency across targets is a screening heuristic, not confirmed interference.","No independent repeat observations or localization on Earth.","No inference of extraterrestrial life from isolated frequencies."],"catalogs":{}}
+          def key(row,name):
+              return next((v for k,v in row.items() if k and k.strip().lower().lstrip("\ufeff")==name.lower()),None)
+          for band,url in sources.items():
+              try:
+                  req=urllib.request.Request(url,headers={"User-Agent":"JANUS-COSMOS research catalog audit/1.0"})
+                  with urllib.request.urlopen(req,timeout=60) as response:
+                      raw=response.read(32*1024*1024+1)
+                  if len(raw)>32*1024*1024: raise ValueError("catalog exceeds 32 MiB bound")
+                  reader=csv.DictReader(io.StringIO(raw.decode("utf-8-sig")))
+                  rows=[]; invalid=0
+                  for row in reader:
+                      try:
+                          target=str(key(row,"Source") or "").strip()
+                          f=float(key(row,"FreqMid")); n=int(float(key(row,"Nevent")))
+                          if not target or not math.isfinite(f) or f<=0 or n<1: raise ValueError()
+                          rows.append((target,f,n))
+                      except (TypeError,ValueError,OverflowError): invalid+=1
+                  if not rows: raise ValueError("no parseable event rows; fields="+repr(reader.fieldnames))
+                  bins=collections.defaultdict(set)
+                  for t,f,n in rows: bins[math.floor(f)].add(t)
+                  shared=sum(len(bins[math.floor(f)])>1 for t,f,n in rows)
+                  isolated=[{"target":t,"catalog_frequency":f,"events_in_group":n,"cross_target_bin_count":len(bins[math.floor(f)])} for t,f,n in rows if n>=3 and len(bins[math.floor(f)])==1]
+                  isolated.sort(key=lambda x:(-x["events_in_group"],x["target"],x["catalog_frequency"]))
+                  result["catalogs"][band]={"source":url,"source_sha256":hashlib.sha256(raw).hexdigest(),"bytes":len(raw),"columns":reader.fieldnames,"rows":len(rows),"invalid_rows":invalid,"unique_targets":len({t for t,f,n in rows}),"rows_in_shared_bins":shared,"isolated_group_count":len(isolated),"top_unverified_followup_records":isolated[:10]}
+              except Exception as e:
+                  result["catalogs"][band]={"source":url,"status":"HOLD_SOURCE_OR_PARSE_ERROR","error":str(e)}
+          result["parsed_catalog_count"]=sum("rows" in v for v in result["catalogs"].values())
+          if result["parsed_catalog_count"]==0: result["status"]="HOLD_NO_CATALOG_PARSED"
+          else: result["status"]="SCREEN_COMPLETE_NO_CONFIRMED_DETECTION"
+          out=pathlib.Path("runtime/seti-catalog-audit.json")
+          out.parent.mkdir(exist_ok=True)
+          out.write_text(json.dumps(result,indent=2)+"\n")
+          print("=== JANUS OBSERVATION AUDIT ===")
+          print(json.dumps(result,indent=2))
+          print("=== END JANUS OBSERVATION AUDIT ===")
+          PY
+      - name: Preserve observation audit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-catalog-audit
+          path: runtime/seti-catalog-audit.json
+          retention-days: 90
