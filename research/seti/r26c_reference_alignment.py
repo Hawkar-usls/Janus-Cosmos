@@ -179,8 +179,9 @@ def blc_replay():
     data={r["name"]:tile(z,n,r["tile"],r["artifact"]) for r in rr}
     results=[]
     for row in rr:
-        off=[r for r in rr if r["role"].startswith("OFF") and r["name"]!=row["name"]]
+        off=[r for r in rr if r["role"]=="CONTROL" and r["name"]!=row["name"]]
         off.sort(key=lambda r:abs(hs[r["name"]]["tstart"]-hs[row["name"]]["tstart"]))
+        assert off,"No distinct reference control"
         ref=off[0];x,r,lo=common(row["tile"],ref["tile"],data[row["name"]],data[ref["name"]])
         tt={**row["tile"],"channel0_mhz":row["tile"]["channel0_mhz"]+lo*row["tile"]["df_hz"]/1e6}
         X=eng.normalized(x)[None].astype(float);R=eng.normalized(r)[None].astype(float);v,g,sh,c=register(X,R)
