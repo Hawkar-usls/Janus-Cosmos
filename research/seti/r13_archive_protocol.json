@@ -1,0 +1,25 @@
+{
+  "schema": "janus.seti.r13.complete_archive_falsification.v1",
+  "target": "HIP47103",
+  "reference_protocol": "research/seti/r12_frozen_candidate.json",
+  "scope": "All unique fine-resolution Parkes S/R HDF5 products for HIP47103 returned by official public archive query, including prior observations, partitioned deterministically into eight shards. Maximum 128 files; if exceeded record HOLD rather than silently sample. Freeze exact URL list before power access.",
+  "anchor_mhz": 3149.9781590998173,
+  "reverse_control_mhz": 3149.9779942557216,
+  "anchor_mjd": 57782.62398148148,
+  "models": "Unchanged R12 fixed original drift, fixed zero drift, same-session linear extrapolation, constant barycentric frequency. Reverse line tested separately. Same matched score>=8 and persistence>=0.5. No candidate promotion.",
+  "narrow_half_hz": 5000,
+  "wide_half_hz": 500000,
+  "morphology": "For every original-day scan take entire 1 MHz window; preserve full time rows, frequency grid, SHA256, median spectrum and scan maxima; list stationary peaks (all local maxima with >=8/16 rows >3 relative noise, separated 28 Hz; retain strongest 100, report total and cap). Compare frequency match +/- 3 channels, relative offsets, on/off profiles. Descriptive not proof shared emitter.",
+  "sensitivity": "In each matched candidate window inject one-channel track at deterministic +/- 70 channel offsets, at 4 and 8 per-row robust noise units; matched search, not blind calibration; no thresholds changed.",
+  "limits": {
+    "shards": 8,
+    "max_files": 128,
+    "per_file_mib": 192,
+    "wide_file_mib": 320,
+    "metadata_mib": 16
+  },
+  "external": {
+    "query": "Public BL query-files API: target HIP47103, HIP47103_S, HIP47103_R; all instruments and named GBT/MeerKAT/ATA; record returned telescope names, products and center frequencies, no claim coverage from center alone. Review facilities via official pages. Prepare unsent technical request; no telescope booking or permission implied."
+  },
+  "claims": "Same-session recovery is not independent replication. No evidence of extraterrestrial origin. Separate-day archive data absence only constrains tested emission models and sensitivity."
+}
