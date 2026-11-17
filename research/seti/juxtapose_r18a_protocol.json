@@ -1,0 +1,27 @@
+{
+  "schema": "janus.cosmos.seti.juxtapose.r18a.v1",
+  "source": {
+    "exact": "https://github.com/Hawkar-usls/Janus-Fundamentum/blob/ea82b3b2d26c766f6d7adc1d041556cb8097e4e6/experiments/mad_lab/juxtapose_250x250_exact.py",
+    "exact_blob": "0b2325d8207440a12413edc05351c1bae269dd2f",
+    "cached_blob": "077e99551a86363a500aa5c143ee01f8a5d04cf0",
+    "essence": "https://github.com/Hawkar-usls/Janus-Demiurge/blob/2d91e8c6b7c651a1394e8505b9256e91e6bca667/tools/essence_v36_juxtapose_exact.py"
+  },
+  "adaptation": "Transfer eight preplaced pivot groups, all 8! order tournament, cached exact receipts, lexicographic cost ranking and verified existential stop. SAT resolution itself not used in spectral decoding.",
+  "threshold": 9,
+  "shifts": [
+    -32,
+    32
+  ],
+  "partition": "eight groups of consecutive shifts in center-out order sorted by (abs(s),s), partition with numpy.array_split; groups disjoint and cover 65 shifts. Within-group exact maximum threshold check, stop only on actual witness, full coverage for negative.",
+  "train": "R9 actual OFF tiles, paired 12 uniform plus 4 peak-centered patches; same R17B deterministic injection recipe and archived digest",
+  "test": "R11 disjoint targets, same recipe. Already viewed development data; no claim independent prospective gain. No training on R11.",
+  "ranking": "Full order enumeration, sum individual scan cost measured as number of shift score computations, then max individual cost, then tuple order. Build exact look-up cache once per calibration patch; charge cost including exhaustive tournament, initialization, and preprocessing. No Markov model in this first ablation.",
+  "baselines": [
+    "full exact 65 shifts",
+    "early stop ascending shifts, per shift",
+    "early stop center-out shifts, per shift",
+    "fixed eight-group order, per shift",
+    "JUXTAPOSE champion eight-group order, per shift"
+  ],
+  "validation": "Decision must equal full exact max >=9 in every test patch; each reported positive has exact score witness (recomputed independently); use full search if max track or top-K required. Compare real wall time paired and repeated, not just count. Report break-even test volume, no production change."
+}
