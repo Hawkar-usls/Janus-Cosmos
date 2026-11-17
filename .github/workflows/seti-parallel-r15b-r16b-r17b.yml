@@ -1,0 +1,72 @@
+name: JANUS SETI R15B R16B R17B targeted follow-up and hybrid detector
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-parallel-r15b-r16b-r17b.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  followup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [r15b, r16b, r17b]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned spectral reader
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4
+      - name: Install CPU training dependency
+        if: matrix.lane == 'r17b'
+        run: python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Freeze BLC1 archive metadata before spectral read
+        if: matrix.lane == 'r15b'
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python research/seti/r15b_r16b_followup.py r15b freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: matrix.lane == 'r15b'
+        with:
+          name: janus-seti-r15b-frozen-manifest
+          path: runtime/r15b/
+          retention-days: 90
+      - name: Perform isolated lane
+        env:
+          LANE: ${{ matrix.lane }}
+          GH_TOKEN: ${{ github.token }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          case "$LANE" in
+            r15b) python research/seti/r15b_r16b_followup.py r15b scan ;;
+            r16b) python research/seti/r15b_r16b_followup.py r16b ;;
+            r17b) python research/seti/r17b_hybrid.py ;;
+          esac
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-${{ matrix.lane }}-result
+          path: runtime/${{ matrix.lane }}/
+          retention-days: 90
+      - name: Check required coverage without promoting candidates
+        env:
+          LANE: ${{ matrix.lane }}
+        run: |
+          python - <<'PY'
+          import json,os
+          lane=os.environ["LANE"]
+          d=json.load(open("runtime/"+lane+"/result.json"))
+          if lane=="r15b":
+              assert d["summary"]["read"]>0 and d["summary"]["read"]==d["summary"]["selected"], "Incomplete BLC1 archive replay"
+          elif lane=="r16b":
+              assert d["summary"]["scans"]==6 and d["summary"]["confirmed_technosignatures"]==0
+          else:
+              assert not d["production_adoption"] and d["development_samples"]>0
+          PY
