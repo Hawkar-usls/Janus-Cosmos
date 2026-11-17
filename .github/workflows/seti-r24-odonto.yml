@@ -1,0 +1,54 @@
+name: JANUS SETI R24 Odonto Crystal Growth
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r24-odonto.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paired:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Exact growth and independent finite enumeration tests
+        run: |
+          git hash-object research/seti/donor_odontoforge_pnp.py
+          python -m py_compile research/seti/r24_odontocrystal.py
+          python research/seti/r24_odontocrystal.py selftest
+      - name: Freeze metadata-only targets
+        run: python research/seti/r24_odontocrystal.py freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r24-manifest
+          path: runtime/r24/manifest.json
+      - name: Fresh paired weak signal growth comparison
+        run: python research/seti/r24_odontocrystal.py scan
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-r24-result
+          path: runtime/r24/
+      - run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/r24/result.json"))
+          assert d["samples"]==1024 and d["selftests"]["brute_force_cases"]==18
+          assert d["selftests"]["zero_gap_regular_equivalence_cases"]==32
+          assert len(d["modes"])==7 and not d["production_adoption"]
+          assert all(m["positives"]==512 and m["controls"]==512 for m in d["modes"].values())
+          PY
