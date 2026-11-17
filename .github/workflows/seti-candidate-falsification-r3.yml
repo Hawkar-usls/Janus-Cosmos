@@ -1,0 +1,228 @@
+name: JANUS SETI R3 native HDF5 decompression and independent observation controls
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-candidate-falsification-r3.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    steps:
+      - name: Install spectrum reader and HTML parser
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 fsspec==2025.3.2 aiohttp==3.11.18 requests==2.32.3 beautifulsoup4==4.13.4
+      - name: Replay frozen event identities and try original archive records
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python - <<'PY'
+          import ast,collections,csv,hashlib,io,json,math,os,pathlib,re,time,urllib.parse
+          import requests,bs4,numpy as np
+          from concurrent.futures import ThreadPoolExecutor
+          urls={"GBT_L":"https://seti.berkeley.edu/listen2019/lband2019_events.csv","GBT_S":"https://seti.berkeley.edu/listen2019/sband2019_events.csv","PARKES_10CM":"https://seti.berkeley.edu/listen2019/pks10cm2019_events.csv"}
+          hashes={"GBT_L":"86ffab24a0725d2f6b5f722973b8a419ac3eeaa3208ac1f18dd0e1f92ac9dcda","GBT_S":"37e7f97b41dedfcdfb00c96805aee2ae148b51ccc64a534a9ba034c31e3950df","PARKES_10CM":"0cd55ee1f9af9aa382b827eb7b88106e730d0f50d8378e02947e54cfc096012a"}
+          targets={"GBT_L":[("HIP40875",1678.070112),("HIP40875",1677.971553)],"GBT_S":[("HIP83601",1820.621109),("HIP83601",1821.0966645),("HIP83601",1820.389546),("HIP83601",1820.8861205),("HIP42418",1853.89998),("HIP11029",2256.1067255),("HIP42418",1853.503343),("HIP42748",2029.928548),("HIP88684",2177.669081)],"PARKES_10CM":[("HIP47425_S",3426.114709)]}
+          rows={}; manifest=[]; out=pathlib.Path("runtime"); out.mkdir(exist_ok=True)
+          def get(url,limit=8*1024*1024,params=None):
+              with requests.get(url,params=params,headers={"User-Agent":"JANUS-COSMOS scholarly audit/2.0"},timeout=(12,25),stream=True) as r:
+                  r.raise_for_status(); chunks=[]; n=0
+                  for chunk in r.iter_content(65536):
+                      n+=len(chunk)
+                      if n>limit: raise ValueError("resource exceeds bounded fetch")
+                      chunks.append(chunk)
+                  return b"".join(chunks),r.url
+          def nums(s):
+              return [float(v) for v in re.findall(r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?",str(s))]
+          def files(s):
+              try:
+                  obj=ast.literal_eval(s)
+                  if isinstance(obj,(list,tuple)): return [str(x) for x in obj]
+                  if isinstance(obj,str): return [obj]
+              except (ValueError,SyntaxError): pass
+              return re.findall(r"[A-Za-z0-9_./-]+\.(?:fil|h5|hdf5|dat)",str(s)) or [str(s)]
+          def norm(s): return re.sub(r"\s+","",s).upper().removesuffix("_S")
+          for band,url in urls.items():
+              raw,_=get(url); sha=hashlib.sha256(raw).hexdigest()
+              if sha!=hashes[band]: raise ValueError("frozen catalog hash mismatch "+band)
+              rows[band]=list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
+          for band,wanted in targets.items():
+              for target,f in wanted:
+                  match=[r for r in rows[band] if r["Source"]==target and abs(float(r["FreqMid"])-f)<1e-7]
+                  if len(match)!=1: raise ValueError("nonunique frozen candidate "+target+" "+str(f))
+                  r=match[0]; ds=nums(r["DriftRates"]); sn=nums(r["SNR"]); fs=nums(r["Freqs"]); ids=files(r["FileID"])
+                  others=[x for x in rows[band] if norm(x["Source"])!=norm(target)]
+                  if others:
+                      nearest=min(others,key=lambda x:abs(float(x["FreqMid"])-f))
+                      near={"source":nearest["Source"],"frequency_mhz":float(nearest["FreqMid"]),"separation_hz":round(abs(float(nearest["FreqMid"])-f)*1e6,3)}
+                  else: near=None
+                  sensitivity={}
+                  for w in (.01,.1,1.,2.):
+                      for origin in (0.,w/2):
+                          idx=math.floor((f-origin)/w)
+                          n=len({x["Source"] for x in rows[band] if math.floor((float(x["FreqMid"])-origin)/w)==idx})
+                          sensitivity[str(w)+"MHz_origin_"+str(origin)]=n
+                  same=[x for b,rr in rows.items() if b!=band for x in rr if norm(x["Source"])==norm(target)]
+                  same_window=[x for x in same if abs(float(x["FreqMid"])-f)<=.001]
+                  manifest.append({"band":band,"target":target,"f_mhz":f,"nevent":int(float(r["Nevent"])),"drift_rate_max_hz_s":float(r["DriftRateMax"]),"bandwidth_catalog_value":r["DriftBW"],"event_frequencies":fs,"drift_rates":ds,"snr":sn,"file_id_raw":r["FileID"],"file_ids":ids,"distinct_file_id_count":len(set(ids)),"nearest_other_target":near,"bin_sensitivity":sensitivity,"other_receiver_same_target_groups":len(same),"other_receiver_within_1khz":len(same_window),"status":"HOLD_INDEPENDENT_REPEAT_AND_ORIGINAL_SPECTRUM"})
+          (out/"frozen-candidate-manifest.json").write_text(json.dumps(manifest,indent=2))
+          for x in manifest:
+              print("CANDIDATE_METADATA",json.dumps({k:v for k,v in x.items() if k not in ("event_frequencies","drift_rates","snr","bin_sensitivity")},ensure_ascii=False),flush=True)
+          # Source catalog's FileID is a filterbank filename, NOT an independent observation count.
+          # Query the published observational archive by target; retain only actual returned URLs.
+          archive="https://breakthroughinitiatives.org/opendatasearch"
+          def lookup(target,band):
+              try:
+                  data,url=get(archive,params={"target":target,"project":"GBT" if band.startswith("GBT") else "Parkes","file_type":"all","perPage":100,"search":"Search","sort":"utc","order":"asc"})
+                  soup=bs4.BeautifulSoup(data,"html.parser"); entries=[]
+                  for tr in soup.select("tr"):
+                      cells=[td.get_text(" ",strip=True) for td in tr.select("td")]
+                      links=[urllib.parse.urljoin(url,a["href"]) for a in tr.select("a[href]") if re.search(r"\.(?:fil|h5|hdf5)(?:[?#]|$)",a["href"],re.I)]
+                      if cells and links:
+                          entries.append({"cells":cells,"links":links})
+                  return {"target":target,"query":url,"source_sha256":hashlib.sha256(data).hexdigest(),"entries":entries[:100],"count":len(entries)}
+              except Exception as e: return {"target":target,"error":str(e),"entries":[],"count":0}
+          unique=sorted({(x["target"],x["band"]) for x in manifest})
+          with ThreadPoolExecutor(max_workers=3) as pool:
+              searches=list(pool.map(lambda p:lookup(*p),unique))
+          # Parkes is indexed inconsistently by target suffix and project label; retry by exact observing time.
+          if not any(s["target"]=="HIP47425_S" and any("HIP47425_S_0001.gpuspec.0000" in u for e in s["entries"] for u in e["links"]) for s in searches):
+              for project in ("PKS","Parkes","all"):
+                  try:
+                      data,url=get(archive,params={"target":"HIP47425","project":project,"mjd":"57854.478345","mjd_range":"0.015","file_type":"all","perPage":100,"search":"Search"})
+                      soup=bs4.BeautifulSoup(data,"html.parser")
+                      entries=[]
+                      for tr in soup.select("tr"):
+                          cells=[td.get_text(" ",strip=True) for td in tr.select("td")]
+                          links=[urllib.parse.urljoin(url,a["href"]) for a in tr.select("a[href]") if re.search(r"\.(?:fil|h5|hdf5)(?:[?#]|$)",a["href"],re.I)]
+                          if cells and links: entries.append({"cells":cells,"links":links})
+                      if any("HIP47425_S_0001.gpuspec.0000" in u for e in entries for u in e["links"]):
+                          searches=[q for q in searches if q["target"]!="HIP47425_S"]+[{"target":"HIP47425_S","query":url,"source_sha256":hashlib.sha256(data).hexdigest(),"entries":entries,"count":len(entries)}]
+                          break
+                  except Exception as e: print("PARKES_ARCHIVE_RETRY",project,str(e),flush=True)
+          (out/"archive-index.json").write_text(json.dumps(searches,indent=2))
+          # Only read actual HDF5 file ranges when the archive supports HTTP range and an exact filename match.
+          # Avoid false inference from a metadata match or from a broad/low resolution product.
+          import h5py,hdf5plugin,fsspec
+          def stem(s):
+              b=os.path.basename(urllib.parse.urlparse(str(s)).path)
+              return re.sub(r"\.(fil|h5|hdf5|dat)$","",b,flags=re.I)
+          def matches(x,entry):
+              expected={stem(i) for i in x["file_ids"]}
+              return [u for u in entry["links"] if stem(u) in expected]
+          archive_by_target={x["target"]:x for x in searches}
+          for x in manifest:
+              found=[u for e in archive_by_target[x["target"]]["entries"] for u in matches(x,e)]
+              x["exact_archive_file_urls"]=sorted(set(found))
+              x["archive_rows"]=archive_by_target[x["target"]]["count"]
+              x["spectrum_status"]="HOLD_NO_EXACT_RANGE_READ"
+          # Limit total remote reads: one available exact HDF5 product per candidate, maximum
+          # 64 MiB fetched per file through a bounded seekable reader. Range refusal is a HOLD.
+          class BoundedRange(io.RawIOBase):
+              def __init__(self,url):
+                  self.url=url; self.pos=0; self.total=0; self.cache={}
+                  with requests.get(url,headers={"Range":"bytes=0-0","Accept-Encoding":"identity"},stream=True,timeout=(10,12)) as r:
+                      if r.status_code!=206: raise ValueError("server does not support byte range")
+                      self.size=int(r.headers["Content-Range"].split("/")[-1])
+              def readable(self): return True
+              def seekable(self): return True
+              def tell(self): return self.pos
+              def seek(self,offset,whence=0):
+                  self.pos=(offset if whence==0 else self.pos+offset if whence==1 else self.size+offset)
+                  return self.pos
+              def readinto(self,b):
+                  n=min(len(b),self.size-self.pos)
+                  if n<=0: return 0
+                  if n>32*1024*1024 or self.total+n>64*1024*1024: raise IOError("range budget exceeded")
+                  start=self.pos
+                  with requests.get(self.url,headers={"Range":f"bytes={start}-{start+n-1}","Accept-Encoding":"identity"},stream=True,timeout=(10,12)) as r:
+                      if r.status_code!=206: raise IOError("range refused")
+                      v=r.raw.read(n)
+                  if len(v)!=n: raise IOError("short range")
+                  b[:n]=v; self.total+=n; self.pos+=n; return n
+          def observe(url,frequencies):
+              remote=BoundedRange(url)
+              with h5py.File(remote,"r") as h:
+                  d=h["data"]; a=dict(d.attrs)
+                  f0=float(a["fch1"]); df=float(a["foff"]); ts=float(a.get("tsamp",0.0))
+                  if df==0 or abs(df)*1e6>10: raise ValueError("not narrowband high-resolution data")
+                  if d.ndim!=3 or d.shape[0]>256: raise ValueError("unexpected spectrum shape; no silent truncation")
+                  products=[]
+                  for f in frequencies:
+                      center=int(round((f-f0)/df))
+                      radius=max(8,int(math.ceil(600/(abs(df)*1e6))))
+                      lo=max(0,center-radius); hi=min(d.shape[-1],center+radius+1)
+                      if not lo<center<hi: continue
+                      slab=np.asarray(d[:,0,lo:hi],dtype=np.float32)
+                      finite=slab[np.isfinite(slab)]
+                      if not len(finite): continue
+                      med=float(np.median(finite)); mad=float(np.median(np.abs(finite-med)))
+                      peak=float(np.max(finite))
+                      z=(peak-med)/(1.4826*mad) if mad>0 else None
+                      fn=hashlib.sha256((url+"|"+str(f)).encode()).hexdigest()[:20]
+                      np.save(out/("spectrum-"+fn+".npy"),slab,allow_pickle=False)
+                      products.append({"requested_event_mhz":f,"center_mhz":f0+center*df,"channel_hz":abs(df)*1e6,"time_sampling_s":ts,"shape":list(slab.shape),"median":med,"mad":mad,"max":peak,"peak_robust_z":z,"slice_sha256":hashlib.sha256(slab.tobytes()).hexdigest(),"artifact_file":"spectrum-"+fn+".npy"})
+                  if not products: raise ValueError("none of the actual event frequencies covered")
+                  return {"status":"ORIGINAL_HDF5_EVENT_SLICES_READ","url":url,"source_name":str(a.get("source_name","")),"start_mjd":float(a.get("tstart",0.0)),"products":products,"bytes_read":remote.total}
+          def inspect(x):
+              # Use actual catalog event frequencies, not merely the center of a broad group.
+              freqs=x["event_frequencies"]
+              freqs=[f for f in freqs if abs(f-x["f_mhz"])<2.]
+              if not freqs: return {"status":"HOLD_EVENT_FREQUENCIES_UNPARSED"}
+              # Bounded representative first/median/last actual lines; not a complete event search.
+              fs=sorted(set(freqs)); chosen=sorted(set([fs[0],fs[len(fs)//2],fs[-1]]))
+              for url in x["exact_archive_file_urls"]:
+                  if not re.search(r"\.(h5|hdf5)(?:[?#]|$)",url,re.I): continue
+                  if urllib.parse.urlparse(url).hostname!="bldata.berkeley.edu": continue
+                  try:
+                      sp=observe(url,chosen)
+                      sp["selected_event_frequencies"]=chosen
+                      sp["total_distinct_event_frequencies"]=len(fs)
+                      # An archival same-target spectrum on a different MJD is a repeat observation,
+                      # not independent confirmation of a signal. Screen a single suitable file.
+                      base=os.path.basename(urllib.parse.urlparse(url).path)
+                      m=re.search(r"_guppi_(\d{5})_",base)
+                      prior=int(m.group(1)) if m else None
+                      prefix=base.split("_guppi_")[0]
+                      records=[]
+                      for entry in archive_by_target[x["target"]]["entries"]:
+                          for u in entry["links"]:
+                              n=os.path.basename(urllib.parse.urlparse(u).path)
+                              mm=re.search(r"_guppi_(\d{5})_",n)
+                              if prior is None or not mm or int(mm.group(1))==prior or n==base: continue
+                              if urllib.parse.urlparse(u).hostname!="bldata.berkeley.edu" or not n.endswith(".0000.h5"): continue
+                              if not n.startswith(prefix+"_guppi_") or norm(x["target"]) not in n.upper(): continue
+                              records.append((abs(int(mm.group(1))-prior),u))
+                      sp["distinct_epoch_same_receiver_files"]=len(set(u for _,u in records))
+                      if records:
+                          _,u=sorted(records)[0]
+                          try:
+                              control=observe(u,chosen[:1])
+                              control["status"]="REPEAT_EPOCH_FIXED_FREQUENCY_SLICE_READ_NOT_DOPPLER_CORRECTED"
+                              sp["repeat_epoch"]=control
+                          except Exception as e: sp["repeat_epoch"]={"status":"HOLD_REPEAT_READ","url":u,"error":str(e)}
+                      else: sp["repeat_epoch"]={"status":"HOLD_NO_SAME_BAND_DIFFERENT_EPOCH_MATCH"}
+                      return sp
+                  except Exception as e:
+                      print("SPECTRUM_HOLD",x["target"],x["f_mhz"],str(e),flush=True)
+                      return {"status":"HOLD_SPECTRUM_ACCESS_OR_RANGE_BUDGET","url":url,"error":str(e)}
+              return {"status":"HOLD_NO_MATCHING_HDF5_URL"}
+          # Cap concurrent archive reads, preserving the full result even if all are blocked.
+          with ThreadPoolExecutor(max_workers=2) as pool:
+              for x,sp in zip(manifest,pool.map(inspect,manifest)): x["spectrum"]=sp
+          result={"schema":"janus.seti.r3.original_event_spectra.v1","frozen_inputs_verified":3,"groups":len(manifest),"targets":len({x["target"] for x in manifest}),"archive_exact_file_matches":sum(bool(x["exact_archive_file_urls"]) for x in manifest),"original_spectrum_slices_read":sum(x["spectrum"]["status"].startswith("ORIGINAL") for x in manifest),"repeat_epoch_slice_groups":sum(x["spectrum"].get("repeat_epoch",{}).get("status","").startswith("REPEAT_EPOCH") for x in manifest),"independent_receiver_same_frequency_matches_in_processed_catalogs":sum(bool(x["other_receiver_within_1khz"]) for x in manifest),"independent_observations_confirmed":0,"confirmed_technosignatures":0,"published_original_conclusion":"Price et al. 2020, doi:10.3847/1538-3881/ab65f1: none of 6154 passed manual RFI review","status":"NO_CONFIRMED_TECHNOSIGNATURE_INDEPENDENT_REPLICATION_OPEN","limitations":["Catalog comparisons are not independent observations. Same-frequency matches would not imply astrophysical origin.","Archive result limit 100 rows per target; exact file stem only. Missing matches do not mean missing data.","Partial spectrum reads, if successful, are not full ON/OFF or multi-epoch re-detection.","1 MHz screening heuristic is sensitive to origin and bin width."],"candidates":manifest}
+          (out/"seti-r3-result.json").write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          print("=== SETI R3 SUMMARY ===")
+          print(json.dumps({k:v for k,v in result.items() if k!="candidates"},ensure_ascii=False))
+          for x in manifest:
+              print("R3_RESULT",json.dumps({"target":x["target"],"f_mhz":x["f_mhz"],"file_count":x["distinct_file_id_count"],"nearest_other_target":x["nearest_other_target"],"bin_counts":x["bin_sensitivity"],"other_receiver_groups":x["other_receiver_same_target_groups"],"other_receiver_1khz":x["other_receiver_within_1khz"],"archive_rows":x["archive_rows"],"exact_urls":x["exact_archive_file_urls"],"spectrum":x["spectrum"]},ensure_ascii=False))
+          print("=== END SETI R3 ===")
+          PY
+      - name: Preserve source receipts and failed gates
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-seti-r3-spectra
+          path: runtime/
+          retention-days: 90
