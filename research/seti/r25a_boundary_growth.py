@@ -119,7 +119,7 @@ def generate(n,pairs,seed):
         elif noise=="impulsive":
             for _ in range(n//2):x[int(rng.integers(n)),int(rng.integers(w))]+=float(rng.uniform(4,15))
         tt=np.arange(n);center=float(rng.uniform(36,92));ph=float(rng.uniform(0,2*np.pi))
-        path=np.rint(center+rng.uniform(-.25,.25)*(tt-(n-1)/2)+rng.uniform(4,9)*np.sin(2*np.pi*tt/n+ph)).astype(int)
+        path=np.rint(center+rng.uniform(-.25,.25)*(tt-(n-1)/2)+rng.uniform(4,min(9,2*n/(2*np.pi)))*np.sin(2*np.pi*tt/n+ph)).astype(int)
         assert path.min()>=0 and path.max()<w and np.max(np.abs(np.diff(path)))<=RAD
         ok=np.ones(n,bool)
         if gap:ok[rng.choice(n,int(n*gap),replace=False)]=False
