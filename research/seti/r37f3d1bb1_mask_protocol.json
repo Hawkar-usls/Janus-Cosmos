@@ -1,0 +1,29 @@
+{
+  "schema": "janus.cosmos.r37f3d1bb1.mask_support.v1",
+  "parent": {
+    "run": 44355620714,
+    "artifact": 14453265586,
+    "sha256": "a076487d0834712bd672ce193468fc1e963e946426c934ddff31da4b28b41d76"
+  },
+  "pinned_blobs": {
+    "r37f3d1bb_average.py": "9b25ab6602008f25c9a2f7a2471ac0394f4e2e26",
+    "r37f3d1bb_average_protocol.json": "e1d066c7d69debd50e9451f1e31bb4e1e4e4cab4"
+  },
+  "method": {
+    "scan": 152,
+    "ifnum": 0,
+    "pols": [
+      0,
+      1
+    ],
+    "fdnum": 0,
+    "rows": 151,
+    "channels": 32768,
+    "min_common_channels": 1,
+    "index_atol_K": 0.00001,
+    "index_rtol": 0.00001,
+    "grid_atol_hz": 0.01
+  },
+  "acceptance": "Same full historical archive SHA256 and 14 spatial metadata gates; repeat independent VFRAME sign check. Aggregate counts of raw nonfinite/zero samples by spatial scan, CAL and polarization; calibrated masked/nonfinite counts per integration, shared valid channels across all 151 integrations. Compare dysh uniform average and manual mean only on common valid index support. Conditional heliocentric derivative first reference grid, only points bracketed by adjacent valid samples in every row, no extrapolation, no interpolation across masked gaps or imputation; compare on intersection with valid index support. Synthetic boundary and masked-gap checks. Report coverage and RMS, not raw data or absolute scientific fidelity. Original checksum unchanged. Reject empty common support. Prior all-finite and official Tsys qualification remain HOLD; no lossless claim, detector, candidate processing or production adoption.",
+  "production_adoption": false
+}
