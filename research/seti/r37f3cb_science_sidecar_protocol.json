@@ -1,0 +1,30 @@
+{
+  "schema": "janus.cosmos.r37f3cb.science_sidecar.v1",
+  "parent": {
+    "run": 44343170596,
+    "artifact": 14445041515,
+    "sha256": "013ad60adb12e25550d43f643c11ce9d862f39ce33b6e894db46242f4fa30060"
+  },
+  "pinned_blobs": {
+    "hannah_observation_hook.py": "e032f90718c0c341f0b51ce8e9932da6ff3427e7",
+    "r30c_hannah_memory.py": "14b3a757d6c0c7a8a611c4f98877d30c132ece6e",
+    "memory/hannah_library_v0004.json": "2a0befc492054512bca5593f926fcc797a2d71ec",
+    "r28_hybrid_protocol.json": "3b46b66ccbb94f2c676e9d061c49217bbe319a9a"
+  },
+  "reports": [
+    {
+      "source": "W3OH",
+      "day": 57934,
+      "file": "w3oh_science_report.json",
+      "sha256": "b8b4542f824fef8e444f141f9d5aee86e97586e6dd941ec2b464d661b2359a6d"
+    },
+    {
+      "source": "G42.03+0.19",
+      "day": 57941,
+      "file": "g42_science_report.json",
+      "sha256": "eae7e926cd2c894fad1fa637aa189bff4329329acfecf2d338dd67685e0937f8"
+    }
+  ],
+  "acceptance": "Authenticated parent artifact and exact report bytes. Read-only report references attached to actual isolated HANNAH ObservationAccumulator boundary; invoke empty seal before and after, verify unchanged G4 ledger and files. Test duplicate idempotence and reject malformed JSON, identity mismatch, altered measurements, false claim, derived role and rehashed modified reports. No ingest, no candidate scoring, no padding, no detector changes, no automated signal decisions. This is an experimental sidecar, not full pipeline integration or independent report replay.",
+  "production_adoption": false
+}
