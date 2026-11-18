@@ -1,0 +1,98 @@
+{
+  "schema": "janus.cosmos.r37a.hannah_resolution.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "source": {
+    "stationary": {
+      "artifact": 14412981947,
+      "digest": "fd63f7272380e78a4b3017ce86691c076b5fcf449d82a5664e060dd686fc6500",
+      "sidecar": "research/seti/memory/r33_verified_central_sidecar.json",
+      "sidecar_sha256": "8c12b5aa8d26fd445c98cf652e0f4425f34425a391f5ab1cdcc34e29b47bd411"
+    },
+    "drifting": {
+      "artifact": 14414154131,
+      "digest": "fe97f959ec85a56457002cdf17f07a19e78709ee363d1fa75b7ff92b44200074",
+      "sidecar": "research/seti/memory/r33b2_drift_candidates.json",
+      "sidecar_sha256": "9593bce5c10af104dc9f3556aa3869909d849a06418bdc3c5f139a6826abc648"
+    }
+  },
+  "physical_grid": {
+    "time_edges_seconds": [
+      36,
+      72,
+      108,
+      144,
+      180,
+      216
+    ],
+    "frequency_edges_hz": [
+      -28,
+      -20,
+      -12,
+      -4,
+      4,
+      12,
+      20,
+      28
+    ],
+    "method": "Overlap-weighted area averages of power density; never reconstruct fine resolution from coarse bins. Track coordinate evaluated from measured integer path with linear interpolation solely of track coordinates, not power. Normalize rows robustly, align frequency by physical track, integrate common cells; subtract edge background and L2 normalize positive profile. Fixed physical support, abstain if not covered. Preserve native raw data and physical drift uncertainty.",
+    "transforms": [
+      {
+        "frequency_factor": 1.25,
+        "time_factor": 1.25,
+        "phase": 0
+      },
+      {
+        "frequency_factor": 1.25,
+        "time_factor": 1.25,
+        "phase": 0.25
+      },
+      {
+        "frequency_factor": 1.5,
+        "time_factor": 1.5,
+        "phase": 0
+      },
+      {
+        "frequency_factor": 1.5,
+        "time_factor": 1.5,
+        "phase": 0.25
+      }
+    ]
+  },
+  "gate": {
+    "similarity_min": 0.9,
+    "required_pairs": 40,
+    "rule": "At least 36/40 same-measurement transformed pairs with cosine >=0.9, all overlap/power conservation canaries pass, report worst and per-record, zero silent unsupported cells. Report distinct-scan same-group vs cross-group scores but no threshold tuning and no automatic RFI attribution. Derived transformations not independent observations. Four drift passports remain UNKNOWN. Off-frequency controls not verified non-RFI."
+  },
+  "archive_scout": {
+    "index": "https://seti.berkeley.edu/opendata/api/list-targets",
+    "source": "https://seti.berkeley.edu/listen2019/listen2019_tables.pdf",
+    "scope": "Metadata only. Parkes safe non-HIP _S aliases, GBT L-band target list from published Table 1, one target per listed day where possible; inspect query names, dates, candidate references and archive suffixes. No relaxation of R36F2; create separate GBT protocol if cadence differs. Source dates checked against exclusions.",
+    "gbt_targets": [
+      "HIP113357",
+      "HIP2422",
+      "HIP11048",
+      "HIP63894",
+      "HIP86456",
+      "HIP64797",
+      "HIP33955",
+      "HIP41307",
+      "HIP53020",
+      "HIP60910",
+      "HIP77070",
+      "HIP13976",
+      "HIP14954",
+      "HIP61212",
+      "HIP62523",
+      "HIP19076",
+      "HIP36827",
+      "HIP88574",
+      "HIP36551",
+      "HIP87108",
+      "HIP58576",
+      "HIP19719",
+      "HIP73996",
+      "HIP11452"
+    ]
+  },
+  "production_adoption": false
+}
