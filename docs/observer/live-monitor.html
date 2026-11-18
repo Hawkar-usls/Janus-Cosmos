@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JANUS · Live Monitor / Context Bridge</title>
+<style>
+:root{color-scheme:dark;--bg:#10141e;--panel:#192130;--line:#354158;--muted:#a6b3c7;--accent:#7dd3fc}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f0f4fb;font:15px/1.5 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:28px;line-height:1.15;margin:0 0 10px}h2{font-size:18px;margin:0 0 12px}p{margin:8px 0}a{color:var(--accent)}.muted{color:var(--muted)}.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px;margin:16px 0}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}button,select{background:#253149;color:#fff;border:1px solid #52637e;border-radius:7px;padding:9px;max-width:100%;font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}#runs{flex:1;min-width:190px}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}.metric{border:1px solid var(--line);border-radius:8px;padding:12px}.value{font-size:22px;font-weight:650;overflow-wrap:anywhere}.step{display:grid;grid-template-columns:110px 1fr auto;gap:10px;border-top:1px solid var(--line);padding:7px 0;font-size:14px}.pass{color:#86efac}.fail{color:#fca5a5}.run{color:#fde68a}textarea{background:#10141e;color:#f0f4fb;border:1px solid var(--line);border-radius:8px;width:100%;padding:12px;font:13px/1.5 monospace;min-height:145px}#error{color:#fca5a5;white-space:pre-wrap}.artifact{overflow-wrap:anywhere} @media(max-width:550px){main{padding:14px}.step{grid-template-columns:85px 1fr}.step span:last-child{grid-column:2}}
+</style></head><body><main>
+<h1>JANUS · Live Monitor</h1><p class="muted">COSMOS / SETI — GitHub Actions и преемственность чатов. Только чтение публичных данных. <a href="../">Observer</a></p>
+<section class="panel"><div class="controls"><select id="runs" aria-label="Эксперимент"></select><button id="refresh">Обновить</button><label><input id="auto" type="checkbox" checked> авто / 5 мин</label></div><p id="status" class="muted" aria-live="polite">Загрузка…</p><p id="error" role="alert"></p><div class="metrics" id="metrics"></div><p><a id="runlink" href="https://github.com/Hawkar-usls/Janus-Cosmos/actions">Открыть Actions</a></p><div id="jobs"></div></section>
+<section class="panel"><h2>Артефакты и контрольные точки</h2><p id="coverage" class="muted">Счётчик примеров доступен только при наличии явной контрольной точки.</p><div id="artifacts"></div><p class="muted">Публикуемые checkpoints: <code>janus-progress-samples-N-of-M</code>. Публикация после завершения блока исследования, без токенов и данных частных задач. Процент шагов ≠ процент вычислений.</p></section>
+<section class="panel"><h2>Context Bridge · новый чат</h2><p id="state" class="muted">Загрузка актуального сохранённого состояния…</p><p><a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-CURRENT-STATE.json">Current State JSON</a> · <a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json">Development Journal</a> · <a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-CHAT-CONTEXT-INDEX.json">Контекст всех проектов</a></p><textarea id="prompt" readonly aria-label="Инструкция для нового чата"></textarea><div class="controls"><button id="copy">Копировать инструкцию</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Открыть ChatGPT</a><span id="copied" aria-live="polite"></span></div><p class="muted">Новый чат должен читать GitHub заново: это указатель на живые источники, а не автоматическая передача истории ChatGPT.</p></section>
+<p class="muted">ETA: диапазон исторических длительностей сопоставимого архивного шага минус уже прошедшее время. Не гарантия и не доверительный интервал. При нехватке истории, других типах заданий, превышении наблюдённого диапазона — UNKNOWN. API может ограничивать частоту запросов. Данные незавершённых логов здесь не читаются.</p>
+</main><script>
+"use strict";
+const api="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos";
+const reg="https://raw.githubusercontent.com/Hawkar-usls/janus-meta-registry/main/data/";
+const statePath="JANUS-COSMOS-SETI-CURRENT-STATE.json";
+const $=id=>document.getElementById(id);
+let selected=44257652209,runData=null,jobData=[],artData=[],saved=null,busy=false,last=0,rate=null;
+function el(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(cls)node.className=cls;return node}
+function dur(n){if(!Number.isFinite(n)||n<0)return "—";n=Math.floor(n);return Math.floor(n/60)+"м "+String(n%60).padStart(2,"0")+"с"}
+function elapsed(start,end){return start?(Date.parse(end||new Date().toISOString())-Date.parse(start))/1000:NaN}
+function status(x){return x.conclusion||x.status||"unknown"}
+function cls(s){return s==="success"?"pass":s==="failure"||s==="cancelled"?"fail":s==="in_progress"?"run":"muted"}
+async function get(url){const r=await fetch(url,{cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer",signal:AbortSignal.timeout(20000)});const rem=r.headers.get("x-ratelimit-remaining");if(rem!==null)rate=rem;if(!r.ok)throw Error("HTTP "+r.status+" — "+(r.status===403||r.status===429?"лимит API; откройте Actions или повторите позже":"данные недоступны"));return r.json()}
+function eta(){
+ if(!runData)return "UNKNOWN";
+ if(runData.status==="completed")return "0м 00с";
+ const job=jobData.find(j=>j.name==="paired"&&j.status==="in_progress");
+ const step=job?.steps?.find(s=>s.status==="in_progress"&&/^Fresh .*(comparison|benchmark|examination)/.test(s.name));
+ const hist=saved?.monitor?.historical?.map(h=>h.exam_seconds).filter(x=>Number.isFinite(x)&&x>0)||[];
+ if(!step?.started_at||hist.length<3||!/^JANUS SETI R(27A|28|28B|29)\b/.test(runData.name))return "UNKNOWN";
+ const spent=elapsed(step.started_at),lo=Math.min(...hist)-spent,hi=Math.max(...hist)-spent;
+ return hi<0?"UNKNOWN (дольше истории)":dur(Math.max(0,lo))+" – "+dur(hi)+"*";
+}
+function metric(k,v){const div=el("div",undefined,"metric");div.append(el("div",k,"muted"),el("div",v,"value"));return div}
+function render(){
+ if(!runData)return;
+ const state=status(runData);
+ const active=jobData.flatMap(j=>(j.steps||[]).filter(s=>s.status==="in_progress").map(s=>j.name+": "+s.name));
+ $("metrics").replaceChildren(metric("GitHub",state.toUpperCase()),metric("Прошло",dur(elapsed(runData.run_started_at,runData.status==="completed"?runData.updated_at:null))),metric("Осталось / архивный шаг",eta()),metric("Активные шаги",active.length||"—"));
+ $("runlink").href="https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/"+selected;
+ $("jobs").replaceChildren();
+ for(const j of jobData){
+  const title=el("h3",j.name+" · "+status(j),cls(status(j)));$("jobs").append(title);
+  for(const s of j.steps||[]){const row=el("div",undefined,"step");row.append(el("span",status(s),cls(status(s))),el("span",s.name),el("span",dur(elapsed(s.started_at,s.completed_at||null)),"muted"));$("jobs").append(row)}
+ }
+ $("artifacts").replaceChildren();let best=null;
+ for(const a of artData){
+  const node=el("p",undefined,"artifact"),link=el("a",a.name);link.href="https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/"+selected+"/artifacts/"+a.id;
+  node.append(link,el("span"," · "+(a.expired?"expired":Math.round(a.size_in_bytes/1024)+" KiB"),"muted"));$("artifacts").append(node);
+  const m=/^janus-progress-samples-(\d+)-of-(\d+)$/.exec(a.name);if(m&&!a.expired){const n=Number(m[1]),d=Number(m[2]);if(d>0&&n<=d&&(!best||n/d>best.n/best.d))best={n,d}}
+ }
+ $("coverage").textContent=best?"Опубликованный checkpoint: "+best.n+"/"+best.d+" ("+Math.round(100*best.n/best.d)+"%)":"Подтверждённого счётчика примеров ещё нет. Смотрите шаг и артефакты.";
+ $("status").textContent="Сверка "+new Date(last).toLocaleTimeString()+" · API остаток: "+(rate??"неизвестно")+(Date.now()-last>360000?" · STALE":"");
+}
+const prompt="Продолжи JANUS COSMOS / SETI. Через GitHub прочитай свежий файл Hawkar-usls/janus-meta-registry data/"+statePath+" и data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json. Проверь указанный актуальный run и артефакты Hawkar-usls/Janus-Cosmos. Восстанови текущую задачу, отрицательные результаты, открытые гейты и последний научный статус. При «чек» только чтение; при явной команде продолжать фиксируй новый протокол и дописывай журнал. Не считай успех CI научным PASS.";
+$("prompt").value=prompt;
+async function loadState(){try{saved=await get(reg+statePath);$("state").textContent="Сохранённый этап: "+saved.current.stage+" · "+saved.current.status+" · run "+saved.current.run+" · сверяй с Actions";if(!runData)selected=saved.current.run}catch(e){$("state").textContent="Состояние недоступно: "+e.message}}
+async function refresh(list=true){
+ if(busy)return;busy=true;$("refresh").disabled=true;$("error").textContent="";
+ try{
+ if(list){const data=await get(api+"/actions/runs?per_page=50");const runs=data.workflow_runs.filter(r=>r.name.startsWith("JANUS SETI"));$("runs").replaceChildren();for(const r of runs){const o=el("option",r.name+" · "+status(r));o.value=String(r.id);$("runs").append(o)}if(!runs.some(r=>r.id===selected)&&runs.length)selected=runs[0].id;$("runs").value=String(selected);runData=runs.find(r=>r.id===selected)||null}
+ if(!runData||runData.id!==selected)runData=await get(api+"/actions/runs/"+selected);
+ const [j,a]=await Promise.all([get(api+"/actions/runs/"+selected+"/jobs?per_page=100"),get(api+"/actions/runs/"+selected+"/artifacts?per_page=100")]);jobData=j.jobs;artData=a.artifacts;last=Date.now();render()
+ }catch(e){$("error").textContent=e.message+" · предыдущие данные могут быть устаревшими";if(last)$("status").textContent="STALE · последняя удачная сверка "+new Date(last).toLocaleTimeString()}finally{busy=false;$("refresh").disabled=false}
+}
+$("runs").addEventListener("change",()=>{selected=Number($("runs").value);refresh(false)});
+$("refresh").addEventListener("click",()=>{loadState();refresh()});
+$("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(prompt);$("copied").textContent="Скопировано"}catch(e){$("prompt").select();$("copied").textContent="Выделено — скопируйте вручную"}});
+(async()=>{await loadState();await refresh()})();
+setInterval(()=>{if($("auto").checked&&!document.hidden)refresh()},300000);
+setInterval(()=>{if(!document.hidden&&!busy&&last)render()},1000);
+</script></body></html>
