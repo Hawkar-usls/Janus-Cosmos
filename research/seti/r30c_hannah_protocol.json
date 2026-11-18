@@ -1,0 +1,83 @@
+{
+  "schema": "janus.cosmos.r30c.hannah.rfi.v1",
+  "status": "PRECOMMITTED_DEVELOPMENT_ONLY",
+  "seed": "R30C-HANNAH-20261118-v1",
+  "donor": {
+    "repo": "Hawkar-usls/Janus-Cosmos",
+    "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+    "path": "workspace/cousteau_synesthetic_memory_core.py",
+    "blob": "26249e262c9632a761d4c1fa5048e434c91fbf8d",
+    "adaptation": "Deterministic measurement-only fingerprints, separate raw provenance, common feature comparison, similarity has no verdict authority. Radio-specific implementation, not original native HANNAH execution."
+  },
+  "sources": {
+    "family_protocol": "research/seti/r26d_family_protocol.json",
+    "family_blob": "dfc442bc17ebd53e03d267177290fd57c6dafa0f",
+    "family_artifact": {
+      "id": 14367490249,
+      "digest": "44763a0b6d8cdd1803318261a7186ec82bbdfbab064af8f53069e8e48efb600e"
+    },
+    "family_manifest": {
+      "id": 14366037180,
+      "digest": "55a199d3b0fd3c29344b90cbacd4eee21e2ddedbf86e53cf18929ae9142dbb2f"
+    },
+    "blc_artifact": {
+      "id": 14347646236,
+      "digest": "b108582724d0334289455f81e2e7df3ea6c17b0ba5bd3a3cf879a2fc5a0752b7"
+    },
+    "blc_manifest": {
+      "id": 14348050164,
+      "digest": "999cf5fac9d41fa06efc5ebd8beb8521ec4369875cacab5ed65a3d3151ca9106"
+    }
+  },
+  "verified_seed": {
+    "id": "BLC1_PUBLISHED_ANCHOR",
+    "scan": "blc03_ProxCen_S_2019-04-29T13:47:46.000.fil",
+    "frequency_mhz": 982.0024719238281,
+    "drift_hz_s": 0.028,
+    "source": "https://www.nature.com/articles/s41550-021-01508-8",
+    "receipt": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-R26C-ON-OFF-REFERENCE-ALIGNMENT-2026-11-17.json",
+    "scope": "Only the fixed BLC1 anchor track from original archived scan, not every line or OFF scan. Published human-made interference attribution; no new origin inference."
+  },
+  "feature_contract": {
+    "version": "radio-v1",
+    "path": "Fixed integer frequency track in measured time-frequency power; at least 16 rows, full +/-4 bins support",
+    "normalize": "each row median and robust MAD; measured track and neighbours in normalized power; time profile resampled 16 positions; profile clipped and bounded; spectral contrast, occupancy, modulation, drift and curvature; physical frequency, bandwidth and sample interval separate",
+    "similarity": "full-vector RMS exponential; report frequency/drift distance and physical grid compatibility; no cross-band origin classification",
+    "no_labels_in_fingerprint": true
+  },
+  "observations": {
+    "max_candidates_per_tile": 2,
+    "score_min": 10,
+    "drift_end_bins": [
+      -32,
+      32
+    ],
+    "min_separation_bins": 8,
+    "source_scope": "old R26D actual measured archive 24 scans x4 tiles, developmental catalogue, not fresh validation; unknowns never verified from OFF or recurrence",
+    "recurrence": "distinct source scans, <=8.4 Hz and <=0.011 Hz/s; compatibility only; candidate tier not label"
+  },
+  "ledger": {
+    "schema": "janus.cosmos.hannah.rfi.ledger.v1",
+    "append_only": true,
+    "dedup": "source tile SHA256 + scan + track path + feature version; immutable record content, reject conflicting or duplicate IDs; no auto promotion",
+    "persistence": "GitHub Actions immutable result artifact; next run may read prior artifact by explicit ID + SHA256 and validate immutable entries; permanent repository promotion separate reviewed step. No repository write token in workflow.",
+    "verified_admission": "Only precommitted BLC1 anchor with published evidence and verified bytes; future verified entries require explicit reviewed provenance manifest, not detector guesses.",
+    "authority": "advisory retrieval; no detector veto or source verdict"
+  },
+  "tests": {
+    "contract": [
+      "label firewall",
+      "determinism",
+      "dedup",
+      "tamper detection",
+      "distinct source identities",
+      "unknown not verified",
+      "same source cannot establish recurrence",
+      "missing raw blocked",
+      "synthetic never admitted real",
+      "lookalike retrieval"
+    ],
+    "scope": "synthetic unit/functional tests and existing real archive demonstration, no independent source classification or improvement claim"
+  },
+  "production_adoption": false
+}
