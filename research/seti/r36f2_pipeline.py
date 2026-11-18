@@ -36,9 +36,9 @@ def prior():
             x=z.read(n[0])
         m=json.loads(x);ss=m["selected"];assert len(ss)==(6 if a["stage"]=="R28B" else 8)
         for q in ss:
-            targets.add(q["target"]);days.add(int(q["day"]))
+            targets.add(q["target"]);days.add(int(q.get("day",q["files"][0]["day"])))
             for v in q["files"]:names.add(v["name"]);urls.add(v["url"])
-        receipts.append({**a,"manifest_sha256":sha(x),"groups":[{"target":q["target"],"day":q["day"]} for q in ss]})
+        receipts.append({**a,"manifest_sha256":sha(x),"groups":[{"target":q["target"],"day":int(q.get("day",q["files"][0]["day"]))} for q in ss]})
     return {"targets":sorted(targets),"days":sorted(days),"names":sorted(names),"urls":sorted(urls),"sources":receipts}
 def audit(m,ex):
     targets,days=setup(ex)
@@ -96,11 +96,11 @@ def evidence(d,c,th,known,unknown):
     vv,t=clock(ev)
     return {**c,"y":y,"weak":amp<=1.25,"very_weak":amp==.75,"alarm":alarm,"loc":loc(c["p"]),"raw_loc":loc(c["rp"]),"ev":vv,"hannah_time":t}
 def encode(d,e,policy,label,target):
-    rows=d["rows"];keep,loc,hold,rescue=h.apply(e,policy)
+    rows=d["rows"];(keep,loc,hold,rescue),triage=clock(lambda:h.apply(e,policy))
     z=e["z"];yp=e["y"];p=np.where(rescue[:,None],e["rp"],e["p"]);base=e["alarm"]&e["loc"]&(yp==1);hit=keep&loc&(yp==1)
     arr={"V":d["Y"].astype(np.float32),"y":yp,"truth":np.stack([r[7] for r in rows]),"active":np.stack([r[8] for r in rows]),"amp":np.array([r[4] for r in rows]),"model":np.array([r[2] for r in rows],dtype="U32"),"tile_sha":np.array([r[6] for r in rows],dtype="U128"),"hybrid_r28_localized":base,"galaxy_localized":hit,"hybrid_r28_alert":e["alarm"],"galaxy_alert":keep,"hybrid_r28_paths":e["p"],"galaxy_paths":p,"hybrid_r28_score":z,"raw_score":e["raw"],"raw_path":e["rp"],"hold_advisory":hold,"raw_rescue":rescue}
     path=IN/(label+"_"+target+".npz");np.savez_compressed(path,**arr)
-    return {"name":path.name,"sha256":sha(path.read_bytes()),"array_sha256":sha(arr["V"].tobytes()),"examples":len(rows),"metrics":{"reference":h.metric(e,{}),"galaxy":h.metric(e,policy)},"preprocess":d["preprocess"],"timing":{**e["timing"],"hannah":e["hannah_time"]}}
+    return {"name":path.name,"sha256":sha(path.read_bytes()),"array_sha256":sha(arr["V"].tobytes()),"examples":len(rows),"metrics":{"reference":h.metric(e,{}),"galaxy":h.metric(e,policy)},"preprocess":d["preprocess"],"timing":{**e["timing"],"hannah":e["hannah_time"],"triage":triage}}
 def main():
     ex=json.loads((OUT/"prior_exclusion.json").read_text());m=json.loads((OUT/"manifest.json").read_text());a=json.loads((OUT/"source_audit.json").read_text())
     assert a["prior_exclusion_sha256"]==sha((OUT/"prior_exclusion.json").read_bytes()) and a["manifest_sha256"]==sha((OUT/"manifest.json").read_bytes())
@@ -140,8 +140,8 @@ def main():
     def cost(prefix):
         rr=[r for r in records if r["name"].startswith(prefix)]
         pre=add(*(r["preprocess"] for r in rr))
-        out={k:add(*(r["timing"][k] for r in rr)) for k in ("reference","twin","galaxy_search","hannah")}
-        out["shared_preprocess"]=pre;out["reference_pipeline"]=add(pre,out["reference"]);out["galaxy_pipeline"]=add(pre,out["galaxy_search"],out["hannah"]);return out
+        out={k:add(*(r["timing"][k] for r in rr)) for k in ("reference","twin","galaxy_search","hannah","triage")}
+        out["shared_preprocess"]=pre;out["reference_pipeline"]=add(pre,out["reference"]);out["galaxy_pipeline"]=add(pre,out["galaxy_search"],out["hannah"],out["triage"]);return out
     cost_eval=cost("eval_");cost_cal=cost("cal_");cost_shared=cost("shared_")
     ga=e["galaxy"];base=e["reference"];gs=s["galaxy"]
     gate={"overall":ga["localized"]>base["localized"],"weak":ga["weak"]>base["weak"],"fewer_controls":ga["control_alerts"]<base["control_alerts"],"zero_losses":ga["lost"]==ga["held_positives"]==gs["lost"]==gs["held_positives"]==0,"warm_compute_wall":cost_eval["galaxy_pipeline"]["wall"]<cost_eval["reference_pipeline"]["wall"],"warm_compute_cpu":cost_eval["galaxy_pipeline"]["cpu"]<cost_eval["reference_pipeline"]["cpu"]}
