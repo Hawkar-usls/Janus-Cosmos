@@ -1,0 +1,79 @@
+{
+  "schema": "janus.cosmos.r40b.transfer.v1",
+  "status": "PREREGISTERED_HISTORICAL_GROUP_HELD_OUT_DEVELOPMENT",
+  "source": {
+    "run": 44284089889,
+    "id": 14420977581,
+    "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517"
+  },
+  "donors": [
+    {
+      "repo": "Janus-Demiurge",
+      "path": "experiments/ocean_transformer/retro_calibrator.py",
+      "blob": "b689f8294782388eebd6abf9ed8138963b05fc2d",
+      "transfer": "Separate learned head with frozen parent, group-excluded training, immutable calibration and no production admission."
+    },
+    {
+      "repo": "Janus-HELIOS",
+      "path": "docs/EVIDENCE_INDEPENDENCE_ENGINE.md",
+      "blob": "9f4035b459802d87aa1893981504b039578570a1",
+      "transfer": "Source-group exclusion, same-path votes are correlated features not independent proofs."
+    },
+    {
+      "repo": "Janus-Fundamentum",
+      "path": "research/tools/apma_bucket_common_core/common_core_semijoin_prefilter_v1_1.py",
+      "blob": "c29229bbaebf2935ab03c77c7d444e2a33422f17",
+      "transfer": "Soft common trajectory support; no exact SAT-style rejection on noisy data."
+    },
+    {
+      "repo": "Janus_Genesis",
+      "path": "experiments/semantic_return/janus_sequential_adaptive_witness_lab_v0_1.py",
+      "blob": "f46002c69974707f9772ac88372f0a5ea418c537",
+      "transfer": "Do not treat correlated trial maxima as independent; fixed family and one result per group. Formal historywise null bound deferred until valid conditional caps exist."
+    },
+    {
+      "repo": "Echo-Pyramid",
+      "path": "firmware/JanusPyramidDSP.h",
+      "blob": "551fa8550cb42ec7c19d8c866731c9a6f19058ee",
+      "transfer": "Future matched-filter evidence accumulation; PCM resonator itself not reused in intensity spectra."
+    },
+    {
+      "repo": "Janus-Demiurge",
+      "path": "janus_genesis/physarum_engine.py",
+      "blob": "f5a71ae0c5e79636ac6c1b865415ee71dc22a081",
+      "transfer": "Future soft graph posterior/flow; dense hydraulic solver not imported into spectrogram."
+    }
+  ],
+  "paths": [
+    "hybrid_r28",
+    "native_taylor_core",
+    "registered_linear",
+    "registered_odonto",
+    "registered_smooth_bank",
+    "registered_smooth_clipped",
+    "registered_smooth_neighborhood",
+    "raw_smooth_bank"
+  ],
+  "arms": [
+    "r28_frozen",
+    "learned_path",
+    "r28_plus_learned"
+  ],
+  "train": "Four leave-one-evaluation-group-out folds; train on the other 3 eval and shared groups, separately calibrate on 2 historical null groups, test held eval and held shared; no test labels in features, fitting, calibration or choice of arm. Exact raw tile disjointness enforced, overlap within a group retained. Not a fresh or independent exam.",
+  "features": "Per-candidate detector score, path support within 2 bins on >=12 rows, trace mean/std/quantiles/block sums, local sideband difference, drift roughness, patch profile concentration; path classifier trained on localized injected paths, not arbitrary candidate origin. Preserve candidate paths and all raw R28 scores.",
+  "model": {
+    "kind": "standard scaler + L2 logistic regression",
+    "C": 0.1,
+    "class_weight": "balanced",
+    "max_iter": 1000,
+    "random_state": 401
+  },
+  "calibration": "fixed empirical 5% patch-control budget on two distinct historical calibration groups; fused score max of normalized frozen and learned margins, recalibrated; retain R35G original R28 threshold. No survey-level null claim.",
+  "weak_amplitudes": [
+    0.75,
+    1.25
+  ],
+  "gate": "strict increase in weak localized, strict reduction control alerts, no aggregate localized loss, no shared localized loss; report per-group regressions and paired additions/losses. Any pass is development only.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
