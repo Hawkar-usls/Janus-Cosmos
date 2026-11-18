@@ -1,0 +1,28 @@
+{
+  "schema": "janus.cosmos.r37f3d1bb2.tsys_audit.v1",
+  "parent": {
+    "run": 44357474684,
+    "artifact": 14453262196,
+    "sha256": "53054f24ed3648c487e6ec200d5046a084b93eeae3b8bfaec41a229040290ff6"
+  },
+  "pinned_blobs": {
+    "r37f3d1bb1_mask.py": "19cd832725901193bea95f4b9e6ca5d1e0ff0b8c",
+    "r37f3d1bb1_mask_protocol.json": "20193a7ae9e87aa58de33b7e8fc1c7d1d93b22d6"
+  },
+  "method": {
+    "ifnum": 0,
+    "pols": [
+      0,
+      1
+    ],
+    "nint": 151,
+    "nchan": 32768,
+    "calibration_atol_K": 0.0001,
+    "calibration_rtol": 0.00001,
+    "average_atol_K": 0.00001,
+    "average_rtol": 0.00001,
+    "weight_rtol": 1e-10
+  },
+  "acceptance": "Reauthenticate historical natural NGC2415 archive and metadata. Trace mask from independent FITS FLAGS and four CAL-state masks, finite denominator and calibrated mask. Match all four groups with FITS source/time metadata; independent arithmetic for each valid calibration sample using archived TCAL, central 80% reference and effective exposure, compare official dysh Tsys weights and Scan/ScanBlock averages on all valid common channels. Preserve masks and original hash and all per-integration calibrated values after averaging. No flags disabled, no interpolation or imputation, no line or operational detector processing. If causal origin unresolved, HOLD. A passing mathematical calibration is not proof of astrophysical accuracy or lossless time averaging.",
+  "production_adoption": false
+}
