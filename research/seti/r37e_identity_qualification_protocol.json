@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cosmos.r37e.source_identity.v1",
+  "status": "PREREGISTERED_SOURCE_QUALIFICATION",
+  "scope": "Public controlled civilian laboratory datasets only; no operational/live emitter identification, no astronomy origin inference, no operational fingerprints or G4 mutation.",
+  "sources": [
+    {
+      "name": "INRIA",
+      "doi": "10.5281/zenodo.18268648",
+      "record": 18268648,
+      "filename": "PLA_dataset.zip",
+      "md5": "aff583bee6f4efccd08fe78c731bf03d",
+      "max_bytes": 800000000,
+      "description": "Reported 2.4 GHz, 20 MS/s, complex64; device and capture layout must be independently inspected before selecting groups."
+    },
+    {
+      "name": "WLAN",
+      "doi": "10.5281/zenodo.21237610",
+      "record": 21237610,
+      "files": [
+        {
+          "name": "anechoic_chamber.zip",
+          "md5": "3268c84bbd536313d5424de76ce1031f"
+        },
+        {
+          "name": "office_room.zip",
+          "md5": "da2641adcdf328f8bea01047bb3f12f0"
+        }
+      ],
+      "description": "Five ESP32, two environments; verify same frequency and device labels, capture units and sessions."
+    },
+    {
+      "name": "WiSig",
+      "url": "https://cores.ee.ucla.edu/downloads/datasets/wisig/",
+      "description": "Same configured network identifiers, random payloads, preambles, distinct days and receivers; avoid unsafe pickle loading."
+    },
+    {
+      "name": "ROBUST-6G",
+      "doi": "10.5281/zenodo.14801935",
+      "record": 14801935,
+      "description": "Thirty same-model civilian lab transmitters, 866MHz; official chronological splits and simultaneous captures. Metadata only."
+    }
+  ],
+  "qualification": "Verify official record metadata and published checksum; inventory INRIA archive without extraction or reading IQ samples. No fitting or evaluation until exact independent capture IDs, same carrier configuration, transmitter labels and split eligibility are verified; report ambiguity. Dataset files are untrusted, do not execute or deserialize pickle.",
+  "identifiability": "Demonstrate exact non-injectivity of power spectrum in fixed discrete toy signals: two distinct phase configurations can have identical magnitude spectra; all global phase rotations have identical STFT power. This is mathematical counterexample only, not measured different transmitters. Power-only inference must abstain when features insufficient.",
+  "future_exam": {
+    "scope": "Offline civilian controlled laboratory data, power-only vs shape-only baseline, held out receiver/day/session (or independent whole files), labels not features, device labels and protocol metadata held separate; score same/different balanced pairs without frequency shortcut. Report unknown/abstention, paired error and grouped uncertainty; no claims of telescope applicability without matched narrowband low-resolution measured observations.",
+    "gate": "No evaluation until qualified independent units. No deployment, suppression, label promotion, or release."
+  },
+  "production_adoption": false
+}
