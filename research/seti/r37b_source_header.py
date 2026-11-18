@@ -15,18 +15,35 @@ def artifact(i,d):
     names={pathlib.PurePosixPath(i.filename).name:i.filename for i in z.infolist() if not i.is_dir()}
     assert len(names)==len([i for i in z.infolist() if not i.is_dir()])
     return z,names
-def angle(v,ra):
-    s=str(v).strip();sign=-1 if s.startswith("-") else 1;s=s.lstrip("+-")
-    if ":" in s:
-        a,b,c=map(float,s.split(":"))
-    else:
-        q=float(s);a=int(q//10000);b=int(q//100)%100;c=q%100
-    assert 0<=b<60 and 0<=c<60
-    u=(a+b/60+c/3600)*(15 if ra else sign)
-    assert (0<=u<360 if ra else abs(u)<=90)
-    return u
-def pointing(h):
-    r=angle(h["src_raj"],True);d=angle(h["src_dej"],False);assert r!=0 or d!=0
+def pointing(h,metadata=None):
+    # Parkes HDF5 headers store RA in decimal hours and DEC in decimal degrees.
+    # Cross-check source metadata RA (decimal degrees) before using any pointing.
+    # Explicit colon or packed forms require independent numeric RA agreement as well.
+    def parse(v,ra,packed):
+        s=str(v).strip();sign=-1 if s.startswith("-") else 1;s=s.lstrip("+-")
+        if ":" in s:
+            a,b,c=map(float,s.split(":"));assert 0<=b<60 and 0<=c<60
+            u=(a+b/60+c/3600)*(15 if ra else sign)
+        elif packed:
+            q=float(s);a=int(q//10000);b=int(q//100)%100;c=q%100
+            assert 0<=b<60 and 0<=c<60
+            u=(a+b/60+c/3600)*(15 if ra else sign)
+        else:u=float(s)*(15 if ra else sign)
+        assert math.isfinite(u) and (0<=u<360 if ra else abs(u)<=90)
+        return u
+    m=metadata or {};ar=float(m["ra"]);assert math.isfinite(ar) and 0<=ar<=360
+    options=[]
+    for packed in (False,True):
+        try:
+            r=parse(h["src_raj"],True,packed);d=parse(h["src_dej"],False,packed)
+            if min(abs(r-ar),360-abs(r-ar))>.005:continue
+            for key in ("dec","decl","declination","dec_deg","decl_deg"):
+                if key in m and m[key] is not None:
+                    dd=float(m[key]);assert math.isfinite(dd) and abs(d-dd)<=.005
+            if (r,d) not in options:options.append((r,d))
+        except (AssertionError,ValueError,TypeError):continue
+    assert len(options)==1,"Coordinate units or metadata do not uniquely agree"
+    r,d=options[0];assert r!=0 or d!=0
     return r,d
 def sep(a,b):
     r,d=map(math.radians,a);v,w=map(math.radians,b)
@@ -40,7 +57,7 @@ def history():
             targets.add(q["target"]);days.add(int(q.get("day",q["files"][0]["day"])))
             hh=q["files"][0]["header"]; mm=q["files"][0].get("metadata",{})
             print("R37B_HISTORY_COORD",json.dumps({"target":q["target"],"stage":a["stage"],"src_raj":hh.get("src_raj"),"src_dej":hh.get("src_dej"),"archive_coordinates":{k:v for k,v in mm.items() if k.lower() in ("ra","dec","raj","dej","src_raj","src_dej","ra_deg","dec_deg")}}),flush=True)
-            coords.append({"target":q["target"],"pointing":pointing(hh)})
+            coords.append({"target":q["target"],"pointing":pointing(hh,mm)})
             for v in q["files"]:ns.add(v["name"]);urls.add(v["url"])
     return targets,days,ns,urls,coords
 def entries(rows,tel,target,days,ns,urls):
@@ -90,7 +107,7 @@ def qualify(tel,target,group,coords):
         assert h["source"].upper()==expected.upper()
     assert len({(h["shape"][0],round(h["ts"],7),round(h["df"],12)) for h in hs})==1
     df=hs[0]["df"];assert all(abs((h["f0"]-hs[0]["f0"])/df-round((h["f0"]-hs[0]["f0"])/df))<.001 for h in hs)
-    pp=[pointing(h) for h in hs];assert sep(pp[0],pp[2])<.001
+    pp=[pointing(h,v["metadata"]) for h,v in zip(hs,group)];assert sep(pp[0],pp[2])<.001
     assert sep(pp[0],pp[1])>=.01 and sep(pp[0],pp[3])>=.01
     if tel=="Parkes":assert pp[1]==pp[3]
     assert all(sep(pp[0],c["pointing"])>=A["pointing_separation_degrees"] for c in coords),"Prior or duplicate sky pointing"
