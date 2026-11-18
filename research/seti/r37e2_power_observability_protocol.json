@@ -1,0 +1,72 @@
+{
+  "schema": "janus.cosmos.r37e2.aggregate_power_observability.v1",
+  "status": "PREREGISTERED",
+  "parent": {
+    "run": 44299491719,
+    "artifact": 14425796394,
+    "sha256": "c84ec23704d73b15605c153d2451f36e257781069ac449b5747a5f5d80f80aeb",
+    "protocol": "research/seti/r37e1_session_qualification_protocol.json"
+  },
+  "source": {
+    "record": 21237610,
+    "archives": [
+      {
+        "name": "anechoic_chamber.zip",
+        "bytes": 552028579,
+        "md5": "3268c84bbd536313d5424de76ce1031f",
+        "sha256": "00daa28263d337f75ee04818c04df05ac0195ba776251ad7a77b85ce56689cb9",
+        "environment": "anechoic_chamber"
+      },
+      {
+        "name": "office_room.zip",
+        "bytes": 601379584,
+        "md5": "da2641adcdf328f8bea01047bb3f12f0",
+        "sha256": "0d5f5fb7008cb06a8dfef1ef5466a667469ef81ba6e9a59c69b684d42306c33f",
+        "environment": "office_room"
+      }
+    ],
+    "expected_days": {
+      "2025-12-08": 67,
+      "2025-12-09": 97,
+      "2025-12-19": 42,
+      "2026-02-03": 225
+    },
+    "expected_sessions": 12,
+    "expected_recordings": 431
+  },
+  "scope": "Offline aggregate power observability and exact data integrity only. All hardware identifiers excluded from numerical statistics. No emitter classification, fingerprints, classifier fit, or real-device identity conclusions. No signal demodulation, no MAC/BSSID processing. Pooled cohort results not per-device descriptors. Date/environment confounded.",
+  "method": {
+    "sample_rate_hz": 55000000,
+    "receiver_center_hz": 2412000000,
+    "fft_size": 1024,
+    "additional_fft_sizes": [
+      4096,
+      16384
+    ],
+    "coarsening_factors": [
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "window": "Rectangular nonoverlapping complete FFT blocks; no padding, compute averaged bin power from all complete finite blocks. Sum coarse bins, verify integrated discrete power conservation; project coarse distribution uniformly onto constituent fine bins and measure total variation vs fine normalized distribution. This is loss relative to a fixed discrete representation, not recovered signal identity.",
+    "temporal": "Report recorded durations and available block counts; compare actual span to telescope integration interval; do not concatenate unrelated recordings or synthesize missing coverage.",
+    "checks": "Reauthenticate exact R37E1 metadata-inventory artifact, all archive bytes/checksums and every paired meta hash, hash actual sample bytes, reject duplicates across dates and within date, sample size and datatype, finite power, power conservation. Do not deserialize MAT/NPZ or raw executable content.",
+    "cohorts": "Report only count, median/p10/p90 for pooled entire-date summaries (not labels). Same separate days as R37E1; no examination of identity and no threshold fit."
+  },
+  "telescope_reference": {
+    "channel_width_hz": [
+      2.7939677238464355,
+      3.814697265625
+    ],
+    "integration_s": [
+      16.777216,
+      18.253611008
+    ],
+    "rule": "If actual instantaneous observation duration or attainable frequency resolution cannot support target, mark INSUFFICIENT_OBSERVATION; no claim of matched telescope resolution. Finite record duration limits resolvable frequency even if zero padding."
+  },
+  "gate": "Integrity and aggregate observability measurements may PASS separately. Physical source discrimination, change-of-receiver transfer, calibrated identification abstention and R38 remain HOLD without independent labels, payload controls and comparable measured astronomy spectra. No G4 or production changes.",
+  "production_adoption": false
+}
