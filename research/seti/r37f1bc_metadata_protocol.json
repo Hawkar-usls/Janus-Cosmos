@@ -1,0 +1,47 @@
+{
+  "schema": "janus.cosmos.r37f1bc.metadata.v1",
+  "parent": {
+    "run": 44308615507,
+    "artifact": 14429266606,
+    "digest": "bfa752993623a55f9563d78b326e04e42c7f6c44bf10a84f3f7f91fa589e0899"
+  },
+  "scope": "Historical public science archive metadata and natural astronomical sky calibration only. No receiver voltage reads, operational source classification, tracking, emitter fingerprinting, or automatic suppression.",
+  "cassini": {
+    "base": "https://atmos.nmsu.edu/pdsd/archive/data/co-s-rss-1-sroc1-v10/cors_0104/",
+    "pds4": "https://atmos.nmsu.edu/PDS/data/PDS4/cassini-rss-raw-sroc/data-rsr16/collection_sroc_rsr16.csv",
+    "days": [
+      123,
+      141,
+      159,
+      177
+    ],
+    "max_depth": 3,
+    "max_dirs_per_day": 24,
+    "max_labels_per_day": 8,
+    "selection": "Lexical breadth-first listing, labels only, no raw data. Verify timestamps, durations and file size where metadata permits; actual sample continuity remains HOLD."
+  },
+  "berkeley": {
+    "aliases": [
+      "W3",
+      "W3OH",
+      "DR_21",
+      "NGC_7538"
+    ],
+    "epoch": 57424.92,
+    "api": "https://seti.berkeley.edu/opendata/api/query-files",
+    "max_headers": 16,
+    "selection": "Inspect actual API schema, URL basenames and suffixes before filtering. Deduplicate unchanged returned URLs, retain exact catalogue target metadata when present, use dates from independently parseable MJD. Header verification only, no power reads. Exact publication epoch first, then earliest/latest per alias; no filename grammar prerequisite.",
+    "line_mhz": [
+      1665.4018,
+      1667.359,
+      1667.5
+    ],
+    "grid": {
+      "max_df_hz": 10,
+      "max_ts_s": 60,
+      "min_rows": 2
+    }
+  },
+  "gates": "Metadata-only. Nominal durations not actual continuity, publication target is not line detection. Independent repeated measurements and protected-source line verification needed for R37F2/3 and R38. Preserve G4 and R28.",
+  "production_adoption": false
+}
