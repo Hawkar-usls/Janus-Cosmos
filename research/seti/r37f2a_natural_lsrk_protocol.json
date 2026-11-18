@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.r37f2a.natural_epoch_and_lsrk.v1",
+  "parent": {
+    "run": 44311844159,
+    "artifact": 14430901518,
+    "sha256": "1044e36b0c5e02728e37b0a8f5d30571c19f2e23f5c8805a584adf01121345e2"
+  },
+  "source": {
+    "field": "W3OH",
+    "ra_deg": 36.76541666666667,
+    "dec_deg": 61.87372222222222,
+    "rest_mhz": [
+      1665.402,
+      1667.359
+    ],
+    "reference_velocity_km_s": -45,
+    "location": {
+      "lon_deg": -79.83984,
+      "lat_deg": 38.433129,
+      "height_m": 824.55,
+      "reference": "https://www.gb.nrao.edu/~gbvlbi/vlbinfo.html"
+    },
+    "references": [
+      "https://docs.astropy.org/en/stable/coordinates/spectralcoord.html",
+      "https://arxiv.org/abs/1906.07391",
+      "https://breakthroughinitiatives.org/opendatasearch"
+    ],
+    "days": [
+      57934,
+      57941,
+      58110
+    ]
+  },
+  "archive": {
+    "scope": "Public archived natural sky observations only. No artificial transmitter processing, suppression or tracking.",
+    "query": "https://seti.berkeley.edu/opendata/api/query-files",
+    "official_https_index": "https://breakthroughinitiatives.org/opendatasearch",
+    "max_probes_per_day": 6,
+    "selection": "Exact catalogue W3OH ON/OFF, separate dates and native formats; choose L-band metadata first and .0000 product where available; retain metadata differences. Search official alternate index, exact basename/epoch join only; HTTPS original or HTTPS upgrade. Original HTTP bounded header probe only if archive lists it, mark untrusted, no automatic trust, never disable certificate validation. No full raw downloads.",
+    "header_bytes": 65536
+  },
+  "transform": {
+    "method": "Astropy SpectralCoord from EarthLocation.get_itrs(obstime) to LSRK (kinematic), radio velocity convention. Use bundled IERS-B, auto_download false, record hash and versions; reject out-of-range time. Direct vs via ICRS agreement and inverse roundtrip, compare approximate barycentric correction + classic LSRK solar apex projection. Conditional on observed frame; if HDF5 header missing or conflicting flags, retain conditional, never apply silently.",
+    "tolerance_hz": 1,
+    "approx_velocity_tolerance_km_s": 0.05,
+    "observed_peaks": "Re-read only already-qualified parent W3OH pair and reproduce R37F2 fixed block difference, attach conditional LSRK radio velocity of the positive block midpoint and bin bounds. Does not establish line origin or exact reference frame.",
+    "max_bytes_per_file": 268435456
+  },
+  "gate": "No independent repeat certification until verified observation file/pointing/grid and actual natural emission. G4/R28 unchanged, R37F3/R38 HOLD.",
+  "production_adoption": false
+}
