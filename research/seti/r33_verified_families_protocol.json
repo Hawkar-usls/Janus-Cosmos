@@ -1,0 +1,127 @@
+{
+  "schema": "janus.cosmos.r33.verified_families.v1",
+  "status": "PREREGISTERED_RESEARCH",
+  "parent": {
+    "path": "research/seti/memory/hannah_library_v0004.json",
+    "commit": "17c8e5550741d8ae490523131442d879793b89b8",
+    "sha256": "17acaca5bf50a5872b51647984b49dadb46b3c2a3aa4536dd150ae70673d7bb3",
+    "entries": 169,
+    "verified": 1
+  },
+  "publication": {
+    "doi": "10.1038/s41550-021-01508-8",
+    "url": "https://www.nature.com/articles/s41550-021-01508-8",
+    "open_paper": "https://seti.berkeley.edu/blc1/BLC1_NatAstron_arXiv_sheikh.pdf",
+    "supplement": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41550-021-01508-8/MediaObjects/41550_2021_1508_MOESM1_ESM.pdf",
+    "archive": "https://seti.berkeley.edu/blc1/",
+    "reported": {
+      "positive_lookalikes": 36,
+      "mirrored_lookalikes": 27,
+      "scope": "Externally published RFI population, not 63 uniquely joined raw observations",
+      "families": [
+        {
+          "id": "TF",
+          "spacing_mhz": 133.33,
+          "central_interferer_mhz": 1400
+        },
+        {
+          "id": "SF",
+          "spacing_mhz": [
+            15,
+            128
+          ],
+          "central_interferer_mhz": 1200
+        },
+        {
+          "id": "XY99",
+          "central_interferer_mhz": 1332,
+          "ambiguous_possible_centers_mhz": [
+            1330,
+            1331.2,
+            1332.1805
+          ]
+        },
+        {
+          "id": "BLC1_2MHZ",
+          "oscillator_mhz": 2.000004,
+          "companion_mhz": [
+            712,
+            856,
+            1062
+          ]
+        }
+      ],
+      "claim": "TF/SF central interferers are explicitly reported at the indicated exact frequencies, but membership of other signals requires raw join."
+    }
+  },
+  "archive_selection": {
+    "mjd": 58602,
+    "anchor_suffix": "ProxCen_S_2019-04-29T13:47:46.000.fil",
+    "query_index": [
+      {
+        "target": "ProxCen",
+        "sha256": "4f195ff25061b501773c7b6ea09544773abbf8a3f2b6c5e3f43285e121fa6441"
+      },
+      {
+        "target": "1421-490",
+        "sha256": "f80af705f32cd1a8a0c341f8d9be24ffd4eca86c3515c26f3f3c31eebed671b5"
+      }
+    ],
+    "scope": "Freeze matching exact ON timestamp multi-band files, then nearest OFF calibrator before/after (at most two, same backend; valid headers and distinct pointing), before power access. Never use later target selection based on signal.",
+    "max_off_gap_seconds": 7200,
+    "window_half_hz": 400,
+    "source_telescope": "Parkes/Murriyang"
+  },
+  "targets": [
+    {
+      "id": "TF_CENTRAL",
+      "family": "TF",
+      "frequency_mhz": 1400,
+      "gate": "EXACT_PUBLISHED_ZERO_DRIFT",
+      "source_section": "4.4.2",
+      "tolerance_hz": 4
+    },
+    {
+      "id": "SF_CENTRAL",
+      "family": "SF",
+      "frequency_mhz": 1200,
+      "gate": "EXACT_PUBLISHED_ZERO_DRIFT",
+      "source_section": "4.4.2",
+      "tolerance_hz": 4
+    },
+    {
+      "id": "BLC1_COMP_712",
+      "family": "BLC1_2MHZ",
+      "frequency_mhz": 712.001816,
+      "gate": "DIAGNOSTIC_ONLY",
+      "frequency_derivation": "982.002472 - 126.000305 - 144.000351",
+      "tolerance_hz": 100
+    },
+    {
+      "id": "BLC1_COMP_856",
+      "family": "BLC1_2MHZ",
+      "frequency_mhz": 856.002167,
+      "gate": "DIAGNOSTIC_ONLY",
+      "frequency_derivation": "982.002472 - 126.000305",
+      "tolerance_hz": 100
+    },
+    {
+      "id": "BLC1_COMP_1062",
+      "family": "BLC1_2MHZ",
+      "frequency_mhz": 1062.00267,
+      "gate": "DIAGNOSTIC_ONLY",
+      "frequency_derivation": "982.002472 + 80.000198",
+      "tolerance_hz": 100
+    }
+  ],
+  "admission": {
+    "rule": "For exact published central interferer only: matching frozen ON and at least one distinct OFF pointing, zero drift fixed frequency within 4 Hz; one unique strongest isolated spectral peak (reject competing local maxima), median robust track sigma >=6, occupancy >3 >=0.75 on both. Check raw hash, header, scan, publication and distinct tile; no automatic shape/approximate companion admission. Measure full available rows, store externally labelled evidence wrapper alongside existing immutable UNKNOWN-format raw passport, do not change original G4 or legacy single-anchor validator.",
+    "scope": "An externally documented central interferer occurrence, not blanket membership of its lookalikes. Multiple scans of one family not independent families; no proof of source hardware origin. Distinct occurrence groups and source date recorded.",
+    "output": "R33 separate quarantine verified-occurrence candidates, with machine-checked evidence. Any promotion into verified retrieval index requires separate review; no classifier, no veto."
+  },
+  "supplement_scouter": {
+    "limit_bytes": 60000000,
+    "method": "Download official supplement and hash full bytes; enumerate pages with table/figure captions and machine-readable frequency strings; no OCR or automatic labels. Unreadable plots or absent exact table remain BLOCKED."
+  },
+  "production_adoption": false
+}
