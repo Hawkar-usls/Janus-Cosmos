@@ -1,0 +1,96 @@
+{
+  "schema": "janus.cosmos.r37f2d.natural_fine_grid.v1",
+  "parent": {
+    "run": 44319868519,
+    "artifact": 14434242214,
+    "sha256": "98b0cebcd984bcf40cbd65a1adb402c05492f82ee5aa7da03d7015cd9de551fd"
+  },
+  "scope": "Historical natural astronomy calibration metadata qualification only. No artificial emitter identification, classifier, suppression or promotion.",
+  "publication": "https://doi.org/10.3847/1538-3881/ab9361",
+  "archive_release": "https://seti.berkeley.edu/etz/",
+  "projects": [
+    "AGBT17A_999_89",
+    "AGBT17A_999_90",
+    "AGBT17A_999_92",
+    "AGBT17B_999_50"
+  ],
+  "known_sources": [
+    {
+      "name": "S235",
+      "aliases": [
+        "S235",
+        "S_235",
+        "S235_OFF"
+      ]
+    },
+    {
+      "name": "S231",
+      "aliases": [
+        "S231",
+        "S_231",
+        "S231_OFF"
+      ]
+    },
+    {
+      "name": "W3OH",
+      "aliases": [
+        "W3OH",
+        "DIAG_W3OH_OFF",
+        "W3OH_OFF"
+      ]
+    },
+    {
+      "name": "G35.03+0.35",
+      "aliases": [
+        "35.03+0.35",
+        "G35.03+0.35",
+        "35_03",
+        "G35_03"
+      ]
+    },
+    {
+      "name": "G42.03+0.19",
+      "aliases": [
+        "42.03+0.19",
+        "G42.03+0.19",
+        "42_03",
+        "G42_03"
+      ]
+    },
+    {
+      "name": "NGC7538",
+      "aliases": [
+        "NGC_7538",
+        "NGC7538",
+        "NGC_7538_OFF"
+      ]
+    }
+  ],
+  "reference_rest_mhz": 6668.5192,
+  "coverage_window_mhz": [
+    6663,
+    6674
+  ],
+  "grid": {
+    "max_channel_hz": 10,
+    "max_integration_s": 60,
+    "min_rows": 2,
+    "reference_df_hz": 2.7939677238464355,
+    "reference_ts_s": 18.253611008
+  },
+  "selection": {
+    "max_headers_per_source": 4,
+    "max_metadata_bytes": 16777216,
+    "exclude_mjd": [
+      57800,
+      57424
+    ],
+    "require_exact_header_target": true,
+    "require_epoch_tolerance_s": 3,
+    "prefer_fine_suffix": true,
+    "dates_before_power_read": true,
+    "allow_https_header_only": true
+  },
+  "scope_limit": "Catalogue sources and frequency coverage not confirmed line presence. C-band is a separate frequency band; comparable sampling grid does not imply identical receiver response. OFF is a distinct pointing, never inferred from merely a different source. No natural power decoded in this scout.",
+  "production_adoption": false
+}
