@@ -1,0 +1,75 @@
+name: JANUS SETI R33 verified family source join
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r33-verified-families.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-seti-r33-families
+  cancel-in-progress: false
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 numba==0.61.2 pypdf==5.4.0
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Validate exact peak and frozen G4
+        run: |
+          python -m py_compile research/seti/r33_verified_families.py research/seti/r33_supplement_scout.py
+          python research/seti/r33_verified_families.py selftest
+          python - <<'PY'
+          import hashlib,pathlib
+          assert hashlib.sha256(pathlib.Path("research/seti/memory/hannah_library_v0004.json").read_bytes()).hexdigest()=="17acaca5bf50a5872b51647984b49dadb46b3c2a3aa4536dd150ae70673d7bb3"
+          PY
+      - name: Retrieve official supplementary source receipt
+        run: python research/seti/r33_supplement_scout.py
+      - name: Freeze exact 2019 file identity and calibrator metadata
+        run: python research/seti/r33_verified_families.py freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        id: manifest
+        with:
+          name: janus-r33-source-manifest
+          path: runtime/r33/manifest.json
+      - name: Read source spectral windows and verify exact occurrence joins
+        env:
+          R33_MANIFEST_ARTIFACT: ${{ steps.manifest.outputs.artifact-id }}
+          R33_MANIFEST_DIGEST: ${{ steps.manifest.outputs.artifact-digest }}
+        run: python research/seti/r33_verified_families.py scan
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r33-source-join
+          path: |
+            runtime/r33/*.json
+            runtime/r33/*.npy
+          if-no-files-found: warn
+      - name: Verify evidence wrappers and conservative label boundary
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path("runtime/r33")
+          d=json.loads((p/"result.json").read_text())
+          c=json.loads((p/"external_label_candidates.json").read_text())
+          assert d["candidate_sha256"]==hashlib.sha256((p/"external_label_candidates.json").read_bytes()).hexdigest()
+          assert d["candidate_occurrences"]==len(c["entries"])
+          assert d["verified_promoted"]==0 and d["verified_in_parent"]==1 and not d["production_adoption"]
+          for e in c["entries"]:
+              assert e["family"] in ("TF","SF") and e["passport"]["label"]=="UNKNOWN"
+              assert e["label"]=="VERIFIED_RFI_CANDIDATE_REVIEW_REQUIRED"
+              assert len(set(e["paired_tile_sha256"]))>=2 and len(set(e["paired_scans"]))>=2
+          PY
