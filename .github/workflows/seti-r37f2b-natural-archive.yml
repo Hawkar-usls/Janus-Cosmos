@@ -23,6 +23,7 @@ jobs:
       - run: python -m pip install --disable-pip-version-check numpy==2.2.6 astropy==7.1.0 requests==2.32.3
       - name: Qualify public W3OH frequency switching and spatial OFF catalogue
         run: |
+          # R37F2B1 bounded same-authority redirects; retain original result.
           python -m py_compile research/seti/r37f2b_natural_archive.py
           python research/seti/r37f2b_natural_archive.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
