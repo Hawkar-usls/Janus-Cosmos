@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.r39.discovery.v1",
+  "status": "PREREGISTERED_ARCHIVE_DISCOVERY_PILOT",
+  "source_manifest": {
+    "run": 44295277201,
+    "artifact": 14422818714,
+    "sha256": "b0ec1760f487db164a1b6efee0d28d96b5552ca0103b5320a4de0c1b6b64c624"
+  },
+  "targets": [
+    [
+      "LHS138",
+      58025
+    ],
+    [
+      "LHS288",
+      57791
+    ],
+    [
+      "GJ682",
+      57855
+    ],
+    [
+      "GJ845A",
+      57925
+    ],
+    [
+      "DEN1048",
+      57799
+    ]
+  ],
+  "excluded": [
+    "PROXCEN"
+  ],
+  "detector": {
+    "run": 44174903998,
+    "job": 134363543700,
+    "source_commit": "051225298ab8721e117985d7ff73ec75f85f06d9",
+    "lock": {
+      "thresholds": {
+        "raw_linear": 4.943382362931877,
+        "raw_odonto": 5.936043621113396,
+        "registered_linear": 4.943382362931877,
+        "registered_odonto": 5.936043621113396,
+        "registered_taylor": 5.070681661963689,
+        "registered_hybrid": 0.27312236715460925,
+        "protected_hybrid": 0.27312236715460925
+      },
+      "scales": {
+        "raw_linear": 0.5673519597879295,
+        "raw_odonto": 0.5618198436848116,
+        "registered_linear": 0.5673519597879295,
+        "registered_odonto": 0.5618198436848116,
+        "registered_taylor": 0.719898151065113
+      },
+      "calibration_controls": 256,
+      "actual_control_alerts": {
+        "raw_linear": 12,
+        "raw_odonto": 12,
+        "registered_linear": 12,
+        "registered_odonto": 12,
+        "registered_taylor": 12,
+        "registered_hybrid": 12,
+        "protected_hybrid": 12
+      },
+      "targets": [
+        "HIP117828",
+        "HIP64475"
+      ]
+    }
+  },
+  "windows_mhz": [
+    2800,
+    3000,
+    3200,
+    3370
+  ],
+  "half_hz": 50000,
+  "patch": 128,
+  "stride": 64,
+  "chunk": 128,
+  "roles": [
+    "ON1",
+    "OFF1",
+    "ON2",
+    "OFF2"
+  ],
+  "max_mib_per_scan": 320,
+  "shortlist_per_window": 20,
+  "repeat_rule": "For ON1 registered hybrid alerts in descending frozen score order, compare all ON2 registered or OFF raw-linear/raw-odonto alert tracks in same window using linear extrapolation of endpoint drift; within 4 native channels at both start and end, descriptive only. Report separately component threshold crossing and same-path correspondence. Keep every score/path and original tile; no suppression, no altered inputs, no injection or tuning.",
+  "limits": "Only four bounded 100kHz windows; 5 groups are header-qualified not externally independent; aliases, provenance of unknown sources and survey-wide multiple testing unresolved. Patch thresholds from R28, no calibrated global significance. Native external BLISS/fastDD/turboSETI full comparison pending; Taylor is kernel baseline only. No production promotion, no discovery claim.",
+  "production_adoption": false
+}
