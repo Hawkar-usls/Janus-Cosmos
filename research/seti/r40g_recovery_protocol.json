@@ -1,0 +1,63 @@
+{
+  "schema": "janus.cosmos.r40g.recovery.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "source": {
+    "id": 14470274311,
+    "sha256": "e4d527ed05d2bde262574b77c29fead5189ca13ff64765a8b25b7804d0c5d585",
+    "lock_sha256": "9b932dca7f2c1c9b1cd3fe4879f42f759efc5b157812dec0182c432e711a2604"
+  },
+  "donors": [
+    {
+      "repo": "SkinGPT",
+      "path": "pc/calibrate_thresholds.py",
+      "blob": "92650bc91ab0e1b98b0e6c96b1baaf12eb25a816",
+      "transfer": "robust median/MAD noise estimates; independent historical controls"
+    },
+    {
+      "repo": "Janus-Demiurge",
+      "path": "restored/ghost_rider_adversarial_challenger.py",
+      "blob": "3a5fd09b3f41e29deeb442d6699e2ad6ce9af2a1",
+      "transfer": "test rival shifted tracks and impulse/broadband alternative, not synthetic proof"
+    },
+    {
+      "repo": "Janus_Genesis",
+      "path": "genesis_v18_7_18_threshold_guard_review_precision.py",
+      "blob": "4615199dfae7e0cdad1f1a444f7ce9a336c2e6f9",
+      "transfer": "preserve suppressed candidates for separate review, no destructive decisions"
+    },
+    {
+      "repo": "Janus_Genesis",
+      "path": "experiments/semantic_return/janus_anytime_valid_witness_lab_v0_1.py",
+      "blob": "7c4720c2237c8a57abed6ad06defe37c5ecf1a5b",
+      "transfer": "conditional null required; deferred formal e-process"
+    }
+  ],
+  "features": "Fixed path selected by R40C; compare clipped path trace with translated rivals at offsets -32..32 excluding -3..3, valid entire trajectory, no wrap; robust row baseline and MAD, median across time, alternating halves, four blocks, max leverage, relative rank and contrast. No truth used in features. Fit separate logistic classifier and ExtraTrees controls; keep R40F frozen.",
+  "train": "Historical R35G four eval and shared groups train; two cal groups disjoint. Fit only R40C alert rows. Target is localized injection, not physical origin. Rescue thresholds fixed before transfer read: minimum score among historical train localized alerts rejected by frozen R40F; if none use minimum score among historical training localized alerts. Calibration records used as zero-loss verification; no retuning.",
+  "models": {
+    "logistic": {
+      "C": 0.1,
+      "class_weight": "balanced",
+      "max_iter": 1000,
+      "random_state": 401
+    },
+    "tree": {
+      "n_estimators": 128,
+      "max_depth": 4,
+      "min_samples_leaf": 8,
+      "class_weight": "balanced",
+      "random_state": 401,
+      "n_jobs": 1
+    }
+  },
+  "arms": [
+    "r40c_fused",
+    "r40f_screen",
+    "r40g_logistic",
+    "r40g_tree"
+  ],
+  "gate": "Restore all 11 R40F lost localizations, zero lost weak/shared vs R40C, fewer alerts than R40C and at least half of 37 R40F removed controls retained (<=41 controls). No tuning on viewed transfer. Report all arms even failures. Advisory only.",
+  "scope": "Previously viewed transfer replay, not independent performance validation; alternate tracks are correlated and not p-values; no production or new survey.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
