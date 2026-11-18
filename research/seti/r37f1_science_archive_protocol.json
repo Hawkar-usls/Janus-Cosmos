@@ -1,0 +1,70 @@
+{
+  "schema": "janus.cosmos.r37f1.historical_science_qualification.v1",
+  "status": "PREREGISTERED_METADATA_ONLY",
+  "parent": {
+    "r37e2_run": 44302684812,
+    "artifact": 14425858927,
+    "digest": "b8f2788377b5fb564ab5c35500175cae44e8b4a2cc329a5c21e03b7b61438213"
+  },
+  "scope": "Historical public scientific archive qualification only. No live telemetry, operational tracking, source identity classifier, signal suppression, or spectrum processing. No automatic label promotion.",
+  "archives": [
+    {
+      "id": "VG1-SSA-RSS-1-ROCC-V1.0",
+      "host": "VOYAGER 1",
+      "date": "1980-11-12",
+      "url": "https://pds-ppi.igpp.ucla.edu/data/VG1-SSA-RSS-1-ROCC-V1.0/",
+      "profile": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=VG1-SSA-RSS-1-ROCC-V1.0"
+    },
+    {
+      "id": "VG2-S-RSS-1-ROCC-V1.0",
+      "host": "VOYAGER 2",
+      "date": "1981-08-26",
+      "url": "https://pds-ppi.igpp.ucla.edu/data/VG2-S-RSS-1-ROCC-V1.0/",
+      "profile": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=VG2-S-RSS-1-ROCC-V1.0"
+    }
+  ],
+  "selection": {
+    "max_labels_per_archive": 16,
+    "order": "Evenly spaced deterministic indices over sorted paired label/data filenames, no spectral outcome selection.",
+    "max_metadata_bytes": 2097152,
+    "check_data_head": true,
+    "record_bytes": 5056,
+    "expected_sample_bytes_per_record": 5000
+  },
+  "cassini": {
+    "profile": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=CO-S-RSS-1-SROC1-V1.0",
+    "doi": "10.17189/5azd-js41",
+    "official_dates": [
+      "2005-05-03",
+      "2005-05-21",
+      "2005-06-08",
+      "2005-06-26"
+    ],
+    "caveat": "NASA reports historical open-loop files screened for gaps; individual file continuity and labels still unverified in our experiment."
+  },
+  "natural_control": {
+    "name": "W3 OH maser",
+    "publication": "https://doi.org/10.1088/1538-3873/aa5800",
+    "arxiv": "https://arxiv.org/abs/1701.06227",
+    "figure": 7,
+    "mjd": 57424.92,
+    "reported_band_center_mhz": 1667.5,
+    "reported_channel_width_hz": 2.8,
+    "reported_integration_seconds": 20,
+    "query_aliases": [
+      "W3",
+      "W3OH",
+      "W3_OH",
+      "W3-OH"
+    ],
+    "api": "https://seti.berkeley.edu/opendata/api/query-files",
+    "gate": "Published figure qualifies natural signal as literature evidence only; exact archive file, metadata, original frequency/time array, and independently dated repeat observations required before protected exam. Query metadata only; no power read."
+  },
+  "rules": [
+    "Nominal duration from PDS label START_TIME/STOP_TIME is not continuity; actual record counters and dropout decoding require original format docs and separate audit. Do not infer effective sample rate from recorded file bytes alone.",
+    "Contiguous or overlapping tapes, polarization/band/receiver variations in a single occultation are not independent sessions. Two spacecraft and two campaigns do not constitute same-frequency controlled discrimination; instrument and propagation confounds.",
+    "Cassini gap-free statement is archive-level documentation, not independent validation by JANUS.",
+    "S/X broad band labels do not establish exact same carrier. No raw reads or source classifier."
+  ],
+  "production_adoption": false
+}
