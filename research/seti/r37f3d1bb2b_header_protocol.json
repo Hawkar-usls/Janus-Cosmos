@@ -1,0 +1,32 @@
+{
+  "schema": "janus.cosmos.r37f3d1bb2b.header_tsys_audit.v1",
+  "parent": {
+    "run": 44362962457,
+    "artifact": 14455811967,
+    "sha256": "c8764c3e90882157e4a9714d32d382973cfa6b882ec9d0ba6790ebea2e273bdd"
+  },
+  "pinned_blobs": {
+    "r37f3d1bb1_mask.py": "19cd832725901193bea95f4b9e6ca5d1e0ff0b8c",
+    "r37f3d1bb1_mask_protocol.json": "20193a7ae9e87aa58de33b7e8fc1c7d1d93b22d6",
+    "r37f3d1bb2_tsys.py": "e2f681598e884ca5168db2258ff1faf49eb34cae",
+    "r37f3d1bb2_tsys_protocol.json": "4e38630772209494cd7c191ccbcf6a14426826ae",
+    "r37f3d1bb2a_vegas.py": "14ba46f906fed5f87a397adffb4c1eb8c70721c0",
+    "r37f3d1bb2a_vegas_protocol.json": "546701cf44ad3c5a9af679842c85813b38945fcd"
+  },
+  "method": {
+    "ifnum": 0,
+    "pols": [
+      0,
+      1
+    ],
+    "nint": 151,
+    "nchan": 32768,
+    "calibration_atol_K": 0.0001,
+    "calibration_rtol": 0.00001,
+    "average_atol_K": 0.00001,
+    "average_rtol": 0.00001,
+    "weight_rtol": 1e-10
+  },
+  "acceptance": "Reauthenticate historical natural NGC2415 archive and metadata. Trace mask from independent FITS FLAGS and four CAL-state masks, finite denominator and calibrated mask. Match all four groups with FITS source/time metadata; independent arithmetic for each valid calibration sample using archived TCAL, central 80% reference and effective exposure, compare official dysh Tsys weights and Scan/ScanBlock averages on all valid common channels. Preserve masks and original hash and all per-integration calibrated values after averaging. No flags disabled, no interpolation or imputation, no line or operational detector processing. If causal origin unresolved, HOLD. A passing mathematical calibration is not proof of astrophysical accuracy or lossless time averaging. Additional predeclared mask-origin branch: independently reconstruct only the documented instrumental VEGAS spur mask from the historical FITS VSP metadata and compare it to all four actual input masks and output mask; retain all flags. No claim of independent instrument hardware diagnosis. Preserve the original failed B2 result. B2B repairs only metadata lookup: audit primary/table header and binary columns; resolve scalar header metadata only if consistent, compare against dysh index for selected actual rows; absent/conflicting metadata stays HOLD. No disabled flags; preserve all arithmetic tolerances.",
+  "production_adoption": false
+}
