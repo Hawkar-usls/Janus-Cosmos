@@ -1,0 +1,18 @@
+{
+  "schema": "janus.cosmos.r37f3d2c.w3_arithmetic.v1",
+  "status": "PREREGISTERED_ISOLATED_ARITHMETIC_AUDIT",
+  "source_sha256": "f48450007a9d4a58c4ea6338be0d4a92175e53853bf875c05d0101affa9ce9a3",
+  "method": "Use four raw CAL phase row IDs explicitly matched to R37F3D2B positive-exposure mask; independent Tsys median support per dysh mean_tsys mode0 formula, effective harmonic exposure, Tsys weight and calibrated TA; native WCS independently from CRVAL1/CRPIX1/CDELT1; do not interpolate or pretend index-wise ON/OFF equals same physical frequency.",
+  "nint": 30,
+  "nchan": 32768,
+  "tolerances": {
+    "tsys_atol": 1e-9,
+    "tsys_rtol": 1e-9,
+    "calibration_atol_K": 0.0001,
+    "calibration_rtol": 0.000001,
+    "grid_atol_hz": 0.01,
+    "weight_rtol": 1e-9
+  },
+  "qualification": "Even arithmetic PASS does not qualify W3 as physical common-grid natural detector control; fractional ON/OFF offset remains a separate physical modeling gate. No fill or resampling.",
+  "production_adoption": false
+}
