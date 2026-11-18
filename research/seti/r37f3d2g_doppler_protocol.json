@@ -1,0 +1,12 @@
+{
+  "schema": "janus.cosmos.r37f3d2g.doppler.v1",
+  "source_sha256": "f48450007a9d4a58c4ea6338be0d4a92175e53853bf875c05d0101affa9ce9a3",
+  "docs": [
+    "https://gbtdocs.readthedocs.io/en/latest/references/observing/configure.html",
+    "https://gbtdocs.readthedocs.io/en/latest/references/software/gbtidl/users_guide/spectrum_dc_content.html",
+    "https://dysh.readthedocs.io/en/latest/reference/sdfits_files/gbt_sdfits.html"
+  ],
+  "rule": "Metadata only. Compare measured ON/OFF OBSFREQ differences to documented radio Doppler formula for actual VELDEF and DOPFREQ, VELOCITY, VFRAME. Report alternative special relativistic factor as diagnostic, no model fitting. Where VELDEF is nonradio, HOLD linear formula claim. Compare differential residual tolerance 5 Hz (predeclared; not a hardware accuracy guarantee). Absolute offset may include backend configuration. Independently compute barycentric observer and LSRK frame projected motion via astropy built-in ephemeris on target and pointing coordinates only if coordinate system unambiguous; do not infer telescope tuning from fit; no power read. Physical qualification HOLD until independently verified tuning/coordinate system and natural signal preservation.",
+  "no_imputation": true,
+  "production_adoption": false
+}
