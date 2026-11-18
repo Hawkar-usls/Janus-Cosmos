@@ -1,0 +1,69 @@
+{
+  "schema": "janus.cosmos.r40cde.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_ONLY",
+  "source": {
+    "id": 14420977581,
+    "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517",
+    "run": 44284089889
+  },
+  "manifest": {
+    "id": 14422818714,
+    "sha256": "b0ec1760f487db164a1b6efee0d28d96b5552ca0103b5320a4de0c1b6b64c624"
+  },
+  "targets": [
+    "LHS138",
+    "LHS288",
+    "GJ682",
+    "GJ845A",
+    "DEN1048"
+  ],
+  "days": [
+    58025,
+    57791,
+    57855,
+    57925,
+    57799
+  ],
+  "windows_mhz": [
+    2850,
+    3050,
+    3250,
+    3330
+  ],
+  "half_hz": 50000,
+  "max_mib_per_scan": 320,
+  "seed": "R40CDE-20261118-NEW-FREQUENCY-INJECTION-v1",
+  "model": "Exactly R40B features/scaler/logistic hyperparameters; fit once on all 4 historical eval+shared groups; calibration 2 historical distinct groups; freeze before opening evaluation spectra. IDs and SHA checks; no refit.",
+  "graph": {
+    "donor": "Hawkar-usls/Janus-Demiurge/ janus_genesis/physarum_engine.py",
+    "blob": "f5a71ae0c5e79636ac6c1b865415ee71dc22a081",
+    "scope": "New Physarum-inspired finite 8-branch flow network; not unchanged donor implementation; soft evidence, no destructive veto.",
+    "iterations": 4,
+    "decay": 0.25,
+    "growth": 1,
+    "dt": 0.25,
+    "conductance_floor": 0.0001,
+    "similarity_floor": 0.01,
+    "score_log_weight": 0.25
+  },
+  "arms": [
+    "r28_frozen",
+    "r40c_fused",
+    "r40d_static",
+    "r40d_adaptive"
+  ],
+  "gate": "strict weak improvement, strict control reduction, nondecreasing aggregate and shared localized vs R28; report all arms and individual losses. R40D adaptive compared with static and R40C, no selection on held test.",
+  "r40e": {
+    "alpha": 0.05,
+    "planned_campaign_groups": 5,
+    "method": "Group-level maxima of frozen scores on 2 historical calibration groups, empirical add-one tail ranks, conditional validity only if exchangeability/null verified; Bonferroni allocation alpha/5, no independence assumed. Report rank resolution and HOLD if impossible. Controls may include real RFI/real signals. Do not claim formal FWER for observational controls.",
+    "donors": [
+      "Genesis sequential adaptive witness conditional bound",
+      "HELIOS independence roots"
+    ],
+    "no_posthoc_budget": true
+  },
+  "limits": "New frequency windows and synthetic injection cases on five previously surveyed Parkes sessions; disjoint from R35G fit/cal/eval target names and dates (asserted); aliases remain unverified; not new observing sessions, not independent blind labels. R38 remains HOLD; no new discovery campaign.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
