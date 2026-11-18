@@ -1,0 +1,30 @@
+{
+  "schema": "janus.cosmos.r40l.joint_shield.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "parent": "R40K joint_min; R40G immutable",
+  "source": {
+    "r40k": {
+      "id": 14479412305,
+      "sha256": "18ea16128c61089361d8d6bb8b920510818e3d674075adb60a2de4735a8fcddd"
+    },
+    "r40h": {
+      "id": 14476995403,
+      "sha256": "cbb45f9fda24c56b8eddda710e1206c7a1adf1136f90e1d1979458e70a4e31ac"
+    },
+    "historical": {
+      "id": 14420977581,
+      "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517"
+    }
+  },
+  "donor": {
+    "path": "research/seti/r30_false_alarm_shield.py",
+    "blob": "e1d9d15ea9b4b895e6314beaad26cd407ef946b0",
+    "adaptation": "second-smallest four-block support; reference-only regime split and conditional empirical null; pooled fallback if fewer than 128 controls or 3 targets in a stratum"
+  },
+  "fit": "Reconstruct exactly four historical R35G evaluation groups and shared challenges with original seed and windows; verify registered arrays and labels against authenticated historical artifact. Fit only here. For selected R40K stationary joint_min path, compute ON/OFF temporal contrast features. Fit standardized class-balanced logistic C=.1 to correct candidate localization, not detection alone. Fit KUSTO reference-only median regime split here.",
+  "calibration": "Reconstruct two historical null groups exactly. R40G control alerts 10/256, joint_min additional zero. TOPA guard min of second-smallest four-block mean of clipped local contrast independently in ON and OFF. KUSTO guard reference-regime pooled fallback (2 null target groups cannot meet 3-target minimum). Guard rates fixed 5% (strict TOPA), 10% (TOPA loose), 10% (conditional TOPA/KUSTO), 5% and 10% learned; cuts above empirical score order statistic among parent-rejected controls including non-rescue controls; no R40H labels or scores used for fit/calibration. KUSTO pooled fallback must be explicitly reported; no claims of calibrated FAP from 2 groups. Each guard is a subset of frozen joint_min rescue; parent R40G never vetoed or overwritten.",
+  "evaluation": "R40H previously viewed replay. Reconstruct matched raw pairs and exact registered array/labels, verify raw source hashes plus frozen R40K scores, paths and rescue flags exactly. Compare all arms; keep candidate path fixed. Count paired losses vs R40G and R40K, control alerts, shared weak and all shared positives, per session. Shared artificial injection stress not real source origin or RFI classification; no matched native raw-pipeline superiority claim.",
+  "gate": "At least 214 localized; >=41 weak; >=21 shared weak; <=35 control alerts; zero parent loss. Strong preservation target shared weak >=36 and 111 total shared (R40K joint_min); report any loss. No deployment; fresh independent controls and full R38 gate required.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
