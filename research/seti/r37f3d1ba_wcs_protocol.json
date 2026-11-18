@@ -1,0 +1,23 @@
+{
+  "schema": "janus.cosmos.r37f3d1ba.spectral_wcs_diagnostic.v1",
+  "parent": {
+    "run": 44353039016,
+    "artifact": 14450030617,
+    "sha256": "f0e157830db87621dd9582f2e9cf752bd42397b552d669bf438184077e5b3fc2"
+  },
+  "archive_sha256": "abeefab2f0f5b67a5032dd1c79f7ea344a41da1fd552fe2f892761ac196376b2",
+  "archive_bytes": 795479040,
+  "pinned_blobs": {
+    "r37f3d1a_metadata.py": "de52fd0a965b74162f9dc0cdc0813ee27d1095fc",
+    "r37f3d1a_metadata_protocol.json": "3dc69f482f46bde02ba6ba3c39ab699fe26ccc1c"
+  },
+  "dysh": "1.0.1",
+  "documentation": [
+    "https://dysh.readthedocs.io/en/release-1.0.0/reference/sdfits_files/gbt_sdfits.html",
+    "https://dysh.readthedocs.io/en/release-1.0.0/_modules/dysh/spectra/scan.html",
+    "https://dysh.readthedocs.io/en/release-1.0.0/users_guide/align_spectra.html"
+  ],
+  "method": "Repeat original full checksum and 14 metadata gates. Audit every row's CRVAL1, CRPIX1, CDELT1, VFRAME and declared WCS metadata; aggregate by scan/window/pol/cal. Compare observer-grid variation and conditional relativistic Doppler transformations in both signs, neither chosen as verified convention solely on fit. Inspect installed dysh source for PSScan, ScanBlock and spectral averaging methods, use_wcs parameter and documented semantics. Do not calibrate or average spectral samples in this diagnostic; do not change 0.01 Hz prior gate. Evaluate feasibility only, no claim of lossless averaging. Preserve original bytes; no raw spectral arrays, per-row telemetry or operational processing exported.",
+  "acceptance": "Complete row audit, reproducible code source receipt and checks, original digest unchanged. Diagnostic PASS only; calibration remains HOLD until physically validated frame/alignment and native information preservation demonstrated.",
+  "production_adoption": false
+}
