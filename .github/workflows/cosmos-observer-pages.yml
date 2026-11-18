@@ -87,6 +87,14 @@ jobs:
           assert 'observer-index.json' in app
           print('PASS SELF-CONTAINED AUTOSYNC RENDER CONTRACT')
           PY
+          python - <<'PY'
+          import pathlib, re
+          s=pathlib.Path('docs/observer/live-monitor.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script>(.*?)</script>',s,re.S)
+          assert len(scripts)==1
+          pathlib.Path('/tmp/janus-live-monitor.js').write_text(scripts[0],encoding='utf-8')
+          PY
+          node --check /tmp/janus-live-monitor.js
           node --check docs/observer/app.js
           node --check docs/galaxy/model.mjs
           node --check docs/galaxy/view.mjs
@@ -163,6 +171,7 @@ jobs:
           cp docs/observer/index.html site/
           cp docs/observer/styles.css site/
           cp docs/observer/app.js site/
+          cp docs/observer/live-monitor.html site/
           mkdir -p site/galaxy
           cp docs/galaxy/index.html docs/galaxy/style.css docs/galaxy/model.mjs docs/galaxy/view.mjs site/galaxy/
           cp data/cosmos/COSMOS-ALI-V3-FERMI-PUBLISHED-HE-PHOTONS-2026-10-18.json site/data/fermi.json
