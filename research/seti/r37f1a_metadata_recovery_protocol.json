@@ -1,0 +1,77 @@
+{
+  "schema": "janus.cosmos.r37f1a.metadata_recovery.v1",
+  "parent": {
+    "run": 44306559063,
+    "artifact": 14428591531,
+    "digest": "1ed1589c9fd3e1046d6d0026992fea432dab827597ef8ea2b157feb2beaa9fbe",
+    "status": "HOLD_ARCHIVE_ACCESS_AND_EXACT_NATURAL_JOIN"
+  },
+  "voyager": [
+    {
+      "dataset": "VG1-SSA-RSS-1-ROCC-V1.0",
+      "file": "VJ6281AA.LBL",
+      "nominal_span_s": 297
+    },
+    {
+      "dataset": "VG2-S-RSS-1-ROCC-V1.0",
+      "file": "C0SR01AA.LBL",
+      "nominal_span_s": 297
+    }
+  ],
+  "cassini": {
+    "pds4": "https://atmos.nmsu.edu/PDS/data/PDS4/cassini-rss-raw-sroc/data-rsr16/",
+    "pds3": "https://atmos.nmsu.edu/pdsd/archive/data/co-s-rss-1-sroc1-v10/cors_0104/",
+    "collection": "collection_sroc_rsr16.xml",
+    "index": "collection_sroc_rsr16.csv",
+    "expected_days": [
+      "2005-05-03",
+      "2005-05-21",
+      "2005-06-08",
+      "2005-06-26"
+    ],
+    "scope": "Collection metadata, historical recording provenance and individual detached XML label where accessible. No receiver waveform or engineering data accessed. No operational use."
+  },
+  "natural": {
+    "publication": "10.1088/1538-3873/aa5800",
+    "epoch": 57424.92,
+    "aliases": [
+      "W3",
+      "W3OH",
+      "W3_OH",
+      "W3-OH",
+      "W3(OH)",
+      "DR21",
+      "DR_21",
+      "NGC7538",
+      "NGC_7538"
+    ],
+    "oh_aliases": [
+      "W3",
+      "W3OH",
+      "W3_OH",
+      "W3-OH",
+      "W3(OH)"
+    ],
+    "frequency_mhz": [
+      1665.4018,
+      1667.359,
+      1667.5
+    ],
+    "max_headers": 16,
+    "selection": "Exact published epoch candidates first, then earliest and latest distinct dates of exact aliases, fine-format candidates only. Do not discard HTTP catalog URLs; use HTTPS equivalent only after validating official hostname; never infer observation from name alone. For other maser fields report observation grid only, not line presence.",
+    "accept_grid": {
+      "max_channel_hz": 10,
+      "max_integration_s": 60,
+      "min_rows": 2
+    },
+    "scope": "Natural sky source header audit, no intensity read or emission verification."
+  },
+  "limits": {
+    "metadata_bytes": 8388608
+  },
+  "gates": [
+    "Catalogue or detached label is not a verified signal. Verify actual source time, native grid, continuity, line detection and independent session later.",
+    "No physical emitter identification model; G4/Hybrid R28 unchanged; no veto or new labels."
+  ],
+  "production_adoption": false
+}
