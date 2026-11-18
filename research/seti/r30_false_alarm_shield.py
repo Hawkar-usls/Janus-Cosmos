@@ -76,7 +76,6 @@ def pack(rows,R,pre,L):
     # Reference-only covariate: cannot see the ON injection or truth labels.
     feature=np.quantile(np.maximum(np.median(r.norm(R),axis=1),0),.95,axis=1)
     v=support(Y,p)
-    rawz,rawp,_,_=h.fuse(q,L,"protected_hybrid")
     # Distinct raw route is retained even when registered path wins.
     branch=("raw_linear","raw_odonto")
     raw_marg=np.stack([(q[k][0]-L["thresholds"][k])/L["scales"][k] for k in branch],1)
