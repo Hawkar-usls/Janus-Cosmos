@@ -1,0 +1,73 @@
+name: JANUS R39B native archive comparison
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r39b-native.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r39b-native-archive
+  cancel-in-progress: false
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        mode: [bliss, fastdd, turbo]
+        target: [LHS138, LHS288, GJ682, GJ845A, DEN1048]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMBA_NUM_THREADS: '1'
+      CMAKE_BUILD_PARALLEL_LEVEL: '2'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned BLISS
+        if: matrix.mode == 'bliss'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libhdf5-dev libfftw3-dev liblz4-dev pkg-config
+          python -m pip install numpy==2.2.6 h5py==3.13.0 requests==2.32.3 matplotlib==3.10.1
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --no-deps 'git+https://github.com/UCBerkeleySETI/bliss.git@2b98afe960f13ee7e467aca499576d87ee7502f5'
+      - name: Install fastDD build dependencies
+        if: matrix.mode == 'fastdd'
+        run: python -m pip install numpy==2.2.6 requests==2.32.3
+      - name: Install pinned turboSETI
+        if: matrix.mode == 'turbo'
+        run: |
+          python -m pip install numpy==1.26.4 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 numba==0.61.2
+          python -m pip install 'git+https://github.com/UCBerkeleySETI/turbo_seti.git@7d9b4fde9bc98d834dc11cfc0acd2380e6676f0e'
+      - name: Install R28 archive replay dependencies
+        run: |
+          python -m pip install h5py==3.13.0 hdf5plugin==5.0.0 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Compare native CPU method on identical arrays
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ matrix.mode }}
+          TARGET: ${{ matrix.target }}
+        run: |
+          lscpu
+          python -m py_compile research/seti/r39b_native_compare.py
+          /usr/bin/time -v python research/seti/r39b_native_compare.py "$MODE" "$TARGET"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r39b-native-${{ matrix.mode }}-${{ matrix.target }}
+          path: |
+            runtime/r39b_native/${{ matrix.mode }}/${{ matrix.target }}/*.json
+            runtime/r39b_native/${{ matrix.mode }}/${{ matrix.target }}/*.npz
+          if-no-files-found: warn
