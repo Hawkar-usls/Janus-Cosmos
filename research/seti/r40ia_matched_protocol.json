@@ -1,0 +1,26 @@
+{
+  "schema": "janus.cosmos.r40i.a.matched_calibration.v1",
+  "status": "PREREGISTERED_RETROSPECTIVE_OPERATING_POINT_AUDIT",
+  "scope": "R40H already viewed; no new independent claim. Native frozen scores and exact R40G decisions on common arrays, not full independent pipelines.",
+  "calibration": "Two historical R35G null groups, 256 unchanged controls. Count R40G fixed model control alerts K; select native threshold nextafter(descending score[K], +inf) to permit at most K; ties report actual count. Never use R40H labels to select thresholds. Native paths and scores unchanged; no refit or threshold change for JANUS.",
+  "source": {
+    "id": 14476995403,
+    "sha256": "cbb45f9fda24c56b8eddda710e1206c7a1adf1136f90e1d1979458e70a4e31ac"
+  },
+  "native_artifacts": {
+    "bliss": {
+      "id": 14476552256,
+      "sha256": "6358d6f8ced73c2bdfe952979eb1a67a2f2586ce8d3a375b3487309afa3ed186"
+    },
+    "fastdd": {
+      "id": 14477280210,
+      "sha256": "f710878424b6fe1b559017060d8ec6207f9c3d22436451481fd653617a92c54c"
+    },
+    "turbo": {
+      "id": 14476751225,
+      "sha256": "92e6477e282e941ae0827cd8bf72557d5f33cf7701997a6bbd869ccd22c48e1f"
+    }
+  },
+  "gate": "Report all paired counts, weak shared stress, observed control counts and calibration ties. Full superiority HOLD if any regression, not matched actual evaluation FAP, full raw pipeline costs absent, external R38 absent. Do not tune on R40H. No production adoption.",
+  "production_adoption": false
+}
