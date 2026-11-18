@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cosmos.r40a.sensitivity-development.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "priority": "Increase weak localized recovery AND reduce control alerts; no new survey until independent gate.",
+  "source": {
+    "run": 44284089889,
+    "id": 14420977581,
+    "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517"
+  },
+  "candidate_paths": [
+    "hybrid_r28",
+    "registered_linear",
+    "registered_odonto",
+    "registered_smooth_bank",
+    "registered_smooth_neighborhood"
+  ],
+  "arms": [
+    "r28_frozen",
+    "local_contrast",
+    "block_balanced",
+    "r28_plus_balanced"
+  ],
+  "side_offsets": [
+    -5,
+    -4,
+    -3,
+    3,
+    4,
+    5
+  ],
+  "side_scale_floor": 0.75,
+  "clip": 4,
+  "blocks": 4,
+  "cal_control_fraction": 0.05,
+  "weak_amplitudes": [
+    0.75,
+    1.25
+  ],
+  "gate": {
+    "min_added_weak": 1,
+    "min_control_reduction": 1,
+    "no_total_localized_loss": true,
+    "no_shared_localized_loss": true,
+    "per_group_regression_report": true,
+    "only_development": true
+  },
+  "limits": "R35G historical labelled injections on measured backgrounds; already viewed data, never independent exam. No tuning on evaluation or shared sets, no destructive deletion or HANNAH veto. Alternative scoring uses archived finite candidate path bank, does not guarantee global optimum. Calibration on two historic control groups, compare original R28 and historical native comparisons; full prospective proof requires fresh, externally held out physical controls and source-disjoint blind data.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
