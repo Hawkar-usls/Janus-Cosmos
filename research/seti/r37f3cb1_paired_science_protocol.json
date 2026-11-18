@@ -1,0 +1,35 @@
+{
+  "schema": "janus.cosmos.r37f3cb1.paired_natural_science.v1",
+  "parent": {
+    "run": 44345352270,
+    "artifact": 14445508052,
+    "sha256": "04256dc4fb4a3ab34c6c81b4ace87ea387869affc85d629143f4984d02d47cc5"
+  },
+  "pinned_blobs": {
+    "r37f3cb_science_sidecar.py": "448edd6f8a9cef4059e5798a7bdfefdbda2425fa",
+    "r37f3cb_science_sidecar_protocol.json": "6b2adde8fdb4c1434f0f9a1e5486eda1d6914321",
+    "r37f3ca_science_provenance.py": "9e93f66ab98d1cf1acf0304d1308186614a6a635",
+    "r37f3b1_native_authority.py": "b9339c3b9cba087536f8a04533195141abbd799b"
+  },
+  "order": {
+    "W3OH": [
+      "A",
+      "B",
+      "B",
+      "A"
+    ],
+    "G42.03+0.19": [
+      "B",
+      "A",
+      "A",
+      "B"
+    ]
+  },
+  "arms": {
+    "A": "Same authorized scientific measurement with actual isolated empty observation hook and no report sidecar",
+    "B": "Same measurement with report-only reference attached to actual isolated observation hook, compare report against recomputed original measurements"
+  },
+  "acceptance": "Both originals full MD5+SHA256; eight measurements (four per source) byte-exact canonical measurement equality and identical internal native array digest within source; exact historical coarse reference and published frozen report measurement fields; unchanged originals and pinned G4/R28, zero candidate records, valid report reference in B only. Log per-arm wall times including hook/attachment/measurement/seal, excluding download and frozen artifact fetch; descriptive only. No threshold changes. No raw spectra or fingerprints exported.",
+  "scope": "Historical natural astronomy reporting regression only. No detector, scoring, candidate ingestion, operational emitter profiling, automatic signal exclusion or production adoption. Not full HANNAH, independent external replication, permanent archive or independent signature.",
+  "production_adoption": false
+}
