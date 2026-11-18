@@ -1,0 +1,22 @@
+{
+  "schema": "janus.cosmos.r36f1.full_registered_hybrid.v1",
+  "status": "PREREGISTERED_HISTORICAL_DEVELOPMENT",
+  "source": {
+    "r36_run": 44287522512,
+    "input_artifact": 14405617460,
+    "input_sha256": "fa60d60f8c961d521fe9bfb0f915447b327a05f03c5756d5b743a965ce46a9b0",
+    "r36_result_sha256": "8d97df8492c9832bc1c78f4d8fa224e77a723f035da4af5954fee636b63315c3"
+  },
+  "arms": [
+    "original_R28_registered_linear_plus_ODONTO",
+    "compiled_exact_linear_plus_ODONTO_serial",
+    "ANCHOR_GLADIUS_parallel_linear_plus_ODONTO",
+    "separate_linear_smooth_ODONTO_auxiliary",
+    "shared_linear_smooth_ODONTO_auxiliary"
+  ],
+  "policy": "Fit original margins and 5% control cut on exact two R28B cal arrays. No changes to original ODONTO, thresholds, fusion tie or alert policy. Reproduce archived per-example baseline alert and localization arrays exactly; assert exact scores and paths across methods and extra smooth advisory only. No HANNAH changes.",
+  "cost": "3 rotated repeat timings of each complete registered detector computation incl fusion and thread scheduling; CPU and wall, JIT startup separately, peak process RSS, no preprocessing/acquisition timing because already registered inputs. Compare archived native numbers descriptively, no cross-run latency or equal realized FAP claim.",
+  "gate": "Exact no loss vs archived R28; warm CPU and wall reductions vs original; cold and calibration overhead separately; no independent superiority from historical data.",
+  "r36f": "HOLD fresh common raw/registered pipeline, HANNAH true-family and protected real measurement, all external methods incl GPU.",
+  "production_adoption": false
+}
