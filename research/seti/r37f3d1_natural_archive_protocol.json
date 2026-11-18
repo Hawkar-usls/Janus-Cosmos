@@ -1,0 +1,40 @@
+{
+  "schema": "janus.cosmos.r37f3d1.natural_archive_qualification.v1",
+  "parent": {
+    "run": 44346855528,
+    "artifact": 14446996090,
+    "sha256": "5206587a357c1cfbeacf22dcb0ee8b6bcff1748bae51cb7fa2f867bc05fb8bbe"
+  },
+  "source": {
+    "name": "NGC2415",
+    "project": "TGBT21A_501_11",
+    "archive": "https://www.gb.nrao.edu/dysh/example_data/onoff-L/data/TGBT21A_501_11.raw.vegas.fits",
+    "documentation": "https://dysh.readthedocs.io/en/release-0.3.0/examples/positionswitch.html",
+    "scans": [
+      152,
+      153
+    ],
+    "min_unique_integrations": 16,
+    "expected_integrations_per_scan": 151,
+    "expected_windows": 5,
+    "max_bytes": 1100000000
+  },
+  "additional_documented_candidates": [
+    {
+      "source": "NGC5291",
+      "project": "AGBT05B_047_01",
+      "documentation": "https://dysh.readthedocs.io/en/latest/users_guide/velocity_frames.html",
+      "limitation": "11 integrations per scan; do not concatenate across gaps to pass 16-row gate"
+    },
+    {
+      "source": "W51",
+      "project": "AGBT16A_353_39",
+      "documentation": "https://gbtdocs.readthedocs.io/en/latest/tutorials/kfpa_nh3_mapping_tutorial.html",
+      "limitation": "Mapping and reference scans documented; public file access unverified"
+    }
+  ],
+  "goal": "Qualify six additional natural astronomical observation sessions eventually; first audit one public documented SDFITS dataset. Count distinct physical sessions, not channels or polarizations.",
+  "acceptance": "HTTPS official archive download bounded; validate FITS structure, compute complete file SHA256 and record internal FITS checksum status when present (not an independent published hash); verify source, scan, procedure, spatial reference coordinates and independent time rows per fixed IF/polarization/cal phase. Preserve exact native grid and distinguish metadata qualification from calibrated line confirmation. Require at least 16 unique timestamps per scan and spatial separation; no spectral signal detection or raw export.",
+  "scope": "Historical natural astronomy metadata, not emitter classification, candidate detection, suppression or detector training. No production changes, no padding, no independent validation claim.",
+  "production_adoption": false
+}
