@@ -38,7 +38,9 @@ def history():
         z,n=artifact(a["id"],a["digest"]);d=json.loads(z.read(n["manifest.json"]));z.close()
         for q in d["selected"]:
             targets.add(q["target"]);days.add(int(q.get("day",q["files"][0]["day"])))
-            coords.append({"target":q["target"],"pointing":pointing(q["files"][0]["header"])})
+            hh=q["files"][0]["header"]; mm=q["files"][0].get("metadata",{})
+            print("R37B_HISTORY_COORD",json.dumps({"target":q["target"],"stage":a["stage"],"src_raj":hh.get("src_raj"),"src_dej":hh.get("src_dej"),"archive_coordinates":{k:v for k,v in mm.items() if k.lower() in ("ra","dec","raj","dej","src_raj","src_dej","ra_deg","dec_deg")}}),flush=True)
+            coords.append({"target":q["target"],"pointing":pointing(hh)})
             for v in q["files"]:ns.add(v["name"]);urls.add(v["url"])
     return targets,days,ns,urls,coords
 def entries(rows,tel,target,days,ns,urls):
