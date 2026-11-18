@@ -32,7 +32,7 @@ jobs:
         run: |
           python -m py_compile research/seti/r37b_source_header.py
           python research/seti/r37b_source_header.py
-          # R37B corrected units, independently check archive right ascension
+          # R37B conservative unknown-declination exclusion; no guessed coordinate
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
