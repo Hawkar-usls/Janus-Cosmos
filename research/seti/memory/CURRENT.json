@@ -17,11 +17,30 @@
   "authority": "RETRIEVAL_ONLY",
   "promotion": "Only exact validated append-only snapshot after separate review; no autonomous label promotion or detector veto.",
   "active_candidate": {
-    "run": 44272297122,
-    "protocol": "research/seti/r33_verified_families_protocol.json",
-    "status": "RUNNING_UNMEASURED"
+    "stage": "R33B-D",
+    "run": 44274269530,
+    "status": "COMPLETED_HOLD_INDEPENDENT_GENERALIZATION"
   },
   "production_adoption": false,
   "recovery_run": 44271425216,
-  "recovery_job": 134688714428
+  "recovery_job": 134688714428,
+  "external_reference_index": {
+    "status": "VERIFIED_EXTERNAL_SOURCE_REPLAY_REFERENCE_ONLY",
+    "sidecar": {
+      "path": "research/seti/memory/r33_verified_central_sidecar.json",
+      "commit": "fe5fd689b4c174c62764a543d316d0a218bce96d",
+      "sha256": "8c12b5aa8d26fd445c98cf652e0f4425f34425a391f5ab1cdcc34e29b47bd411",
+      "occurrences": 6,
+      "central_groups": 2
+    },
+    "catalog": {
+      "path": "research/seti/memory/r33_published_catalog.json",
+      "commit": "05ca0bec0688e6bd4148a2f1dda08d0d30752a3a",
+      "sha256": "83b1ff9259cbc11fe16c4b9b55a9c66978e46ea08d2d37fdd0e2e7704776a9ba",
+      "direct": 18,
+      "mirrored": 18
+    },
+    "run": 44274269530,
+    "scope": "Separate stationary central interferer references, no automatic origin inference, no raw identity for rounded figure frequencies, no veto."
+  }
 }
