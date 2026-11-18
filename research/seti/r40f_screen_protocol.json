@@ -1,0 +1,50 @@
+{
+  "schema": "janus.cosmos.r40f.protected_alert_screen.v1",
+  "status": "PREREGISTERED_HISTORICAL_DEVELOPMENT",
+  "model": {
+    "id": 14471145431,
+    "sha256": "20eccaaccaca110de5c9b7894f5f0ecfd57de5245590be6b22bbb601032a7864",
+    "model_sha256": "a5afcdd963f011424f3182a7a414599b1268557ce25d09da60ffa25bd7f8e32f"
+  },
+  "artifacts": {
+    "LHS138": {
+      "id": 14470696325,
+      "sha256": "0e3690ffbdc27c6fd90979d0d70f99c51528ecbc7891914b7c57349e449c2f47"
+    },
+    "LHS288": {
+      "id": 14470825761,
+      "sha256": "a4428fff515fbede34eec3e15ea8582fe3622e6a994ca212cfa35e02f1c3296c"
+    },
+    "GJ682": {
+      "id": 14471701031,
+      "sha256": "af70bcf5eff739213550a4b248ca79bc244b50a4f0cc4cc0e0c48ff13beff4f5"
+    },
+    "GJ845A": {
+      "id": 14470921536,
+      "sha256": "16b745c9e4286600012440e1c1155dc98cff40733472c9ab7fdf3ebe5b7d54bc"
+    },
+    "DEN1048": {
+      "id": 14470391483,
+      "sha256": "6f91f03bf3e70d4cf7cc19e6f696d510840cca49a9faec53bca311e50fa9b8fd"
+    }
+  },
+  "training": "R35G four evaluation and four shared groups, already used by R40C; frozen R40C inference for generating features. Fit only R40C alert rows with localized-positive labels vs control or mislocalized alerts. Separate two R35G calibration groups; no R40C transfer rows used to fit or tune.",
+  "features": "Two candidate paths, R40C and R28 score (signed log transform), path agreement, robust local trace, background profile, temporal consistency, isolated extreme pixels, path roughness; winsorize each feature at historical training quantiles 1 and 99%, standardize.",
+  "model_options": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "max_iter": 1000,
+    "random_state": 401
+  },
+  "arms": [
+    "r28_frozen",
+    "r40c_fused",
+    "r40f_screen",
+    "r40f_protected"
+  ],
+  "screen": "A logistic score applied to already alerted R40C candidates; cutoff equals minimum among ALL localized calibration positives (no calibration localized loss), or no-op if no positive alerts. Protected arm additionally retains any R40C alert with R28 alert and same-path agreement on >=12 rows within 2 channels. No threshold tuned on new transfer data. Keep every unscreened alert and path in artifacts; screen is a review priority not destructive deletion.",
+  "gate": "Fewer control alerts than R40C, zero lost R40C localized positives including weak and shared-reference positives on transfer, preserve R40C weak gain vs R28; report per-group and added/lost. No selection on viewed transfer. If loss >0 HOLD even with improved aggregate. No independent claim.",
+  "scope": "Development replay of previously observed transfer dataset. Neither R38 nor campaign-wide false alarm proof. Future blind data required.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
