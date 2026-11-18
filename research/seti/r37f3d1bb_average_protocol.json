@@ -1,0 +1,41 @@
+{
+  "schema": "janus.cosmos.r37f3d1bb.natural_science_average.v1",
+  "parent": {
+    "run": 44354276840,
+    "artifact": 14448489943,
+    "sha256": "92512942545a21f70d7e22f6605a509f92892345c990f425bb72e90abe40bac9"
+  },
+  "archive_sha256": "abeefab2f0f5b67a5032dd1c79f7ea344a41da1fd552fe2f892761ac196376b2",
+  "archive_bytes": 795479040,
+  "pinned_blobs": {
+    "r37f3d1a_metadata.py": "de52fd0a965b74162f9dc0cdc0813ee27d1095fc",
+    "r37f3d1a_metadata_protocol.json": "3dc69f482f46bde02ba6ba3c39ab699fe26ccc1c"
+  },
+  "dysh": "1.0.1",
+  "source_docs": [
+    "https://dysh.readthedocs.io/en/release-1.0.0/_modules/dysh/spectra/scan.html",
+    "https://dysh.readthedocs.io/en/release-1.0.0/_modules/dysh/spectra/spectrum.html",
+    "https://gbtdocs.readthedocs.io/en/latest/references/observing/configure.html"
+  ],
+  "method": {
+    "scan": 152,
+    "ifnum": 0,
+    "pols": [
+      0,
+      1
+    ],
+    "fdnum": 0,
+    "rows": 151,
+    "channels": 32768,
+    "physical_site": {
+      "lat_deg": 38.433129,
+      "lon_deg": -79.83984,
+      "height_m": 824
+    },
+    "frame_tolerance_m_s": 20,
+    "grid_tolerance_hz": 0.01,
+    "weighting": "uniform diagnostic, not official tsys final calibration"
+  },
+  "acceptance": "Reauthenticate complete archive, all 14 spatial/time metadata gates. Inspect installed dysh exact call sites for getspec/average/alignment. Independently compare frozen VFRAME and negative Astropy heliocentric radial correction for historical natural field at actual observation times (20 m/s tolerance, independent of spectral samples). For tutorial IF0 both pols, calibrate individual ON/OFF integrations and compare dysh uniform time average against independently calculated channel-index average and independently frame-labelled diagnostic average on common interior support. Aggregate RMS differences and temporal residual energy only; no data arrays, line profiling, candidate processing or detector comparison. No claim of reversible averaging, exact frame alignment, generality, or production calibration; retain original native bytes. If physical frame check fails, do not calculate frame-aligned diagnostic. No threshold relaxation.",
+  "production_adoption": false
+}
