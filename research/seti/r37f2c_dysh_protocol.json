@@ -1,0 +1,70 @@
+{
+  "schema": "janus.cosmos.r37f2c.dysh_calibration.v1",
+  "parent": {
+    "run": 44314156077,
+    "artifact": 14430459835,
+    "sha256": "7e65ed1def9502f7fcfb917af128c9121bb655c339fa342c752edbbea519ec95"
+  },
+  "source": {
+    "url": "https://www.gb.nrao.edu/dysh/example_data/frequencyswitch/data/TREG_050627/TREG_050627.raw.acs/TREG_050627.raw.acs.fits",
+    "sha256": "d650fd91d41b4163d2100343e4816a3d09a31f3db8b5d69679667e9f09e1e2a0",
+    "bytes": 31625280,
+    "target": "W3OH",
+    "date": "2005-06-28",
+    "scans": [
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "polarizations": [
+      0,
+      1
+    ],
+    "ifnum": 0,
+    "fdnum": 0,
+    "rest_hz": 1667359000
+  },
+  "method": {
+    "dysh": "1.0.1",
+    "docs": "https://dysh.readthedocs.io/en/release-1.0.0/users_guide/frequencyswitch.html",
+    "fold": true,
+    "weights": "tsys",
+    "baseline": "chebyshev",
+    "degree": 5,
+    "include_channels": [
+      [
+        4200,
+        10000
+      ],
+      [
+        22000,
+        32000
+      ]
+    ],
+    "velocity_frame": "lsrk",
+    "velocity_convention": "radio",
+    "line_intervals_km_s": [
+      [
+        -47.77,
+        -43.31
+      ]
+    ],
+    "noise_intervals_km_s": [
+      [
+        -120,
+        -80
+      ],
+      [
+        -20,
+        20
+      ]
+    ],
+    "descriptive_threshold": 5,
+    "minimum_scans_supported": 4,
+    "minimum_polarizations_supported": 2
+  },
+  "scope": "Natural astronomical emission calibration only. Fixed published velocity window, published dysh baseline example, report per scan and polarisation without tuning. Frequency switching SIG/REF is not spatial OFF. Five scans are one observing date. No fine-grid equivalence, no automatic label, no artificial emitter classification or suppression.",
+  "production_adoption": false
+}
