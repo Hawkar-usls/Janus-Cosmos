@@ -1,0 +1,136 @@
+{
+  "schema": "janus.cosmos.r39b.expanded.v1",
+  "status": "PREREGISTERED_EXPANDED_ARCHIVE_PILOT",
+  "source_manifest": {
+    "run": 44295277201,
+    "artifact": 14422818714,
+    "sha256": "b0ec1760f487db164a1b6efee0d28d96b5552ca0103b5320a4de0c1b6b64c624"
+  },
+  "targets": [
+    [
+      "LHS138",
+      58025
+    ],
+    [
+      "LHS288",
+      57791
+    ],
+    [
+      "GJ682",
+      57855
+    ],
+    [
+      "GJ845A",
+      57925
+    ],
+    [
+      "DEN1048",
+      57799
+    ]
+  ],
+  "excluded": [
+    "PROXCEN"
+  ],
+  "detector": {
+    "run": 44174903998,
+    "job": 134363543700,
+    "source_commit": "051225298ab8721e117985d7ff73ec75f85f06d9",
+    "lock": {
+      "thresholds": {
+        "raw_linear": 4.943382362931877,
+        "raw_odonto": 5.936043621113396,
+        "registered_linear": 4.943382362931877,
+        "registered_odonto": 5.936043621113396,
+        "registered_taylor": 5.070681661963689,
+        "registered_hybrid": 0.27312236715460925,
+        "protected_hybrid": 0.27312236715460925
+      },
+      "scales": {
+        "raw_linear": 0.5673519597879295,
+        "raw_odonto": 0.5618198436848116,
+        "registered_linear": 0.5673519597879295,
+        "registered_odonto": 0.5618198436848116,
+        "registered_taylor": 0.719898151065113
+      },
+      "calibration_controls": 256,
+      "actual_control_alerts": {
+        "raw_linear": 12,
+        "raw_odonto": 12,
+        "registered_linear": 12,
+        "registered_odonto": 12,
+        "registered_taylor": 12,
+        "registered_hybrid": 12,
+        "protected_hybrid": 12
+      },
+      "targets": [
+        "HIP117828",
+        "HIP64475"
+      ]
+    }
+  },
+  "windows_mhz": [
+    2799.8,
+    2800.2,
+    2999.8,
+    3000.2,
+    3199.8,
+    3200.2,
+    3369.8,
+    3370.2
+  ],
+  "half_hz": 50000,
+  "patch": 128,
+  "stride": 64,
+  "chunk": 128,
+  "roles": [
+    "ON1",
+    "OFF1",
+    "ON2",
+    "OFF2"
+  ],
+  "max_mib_per_scan": 640,
+  "shortlist_per_window": 20,
+  "repeat_rule": "For ON1 registered hybrid alerts in descending frozen score order, compare all ON2 registered or OFF raw-linear/raw-odonto alert tracks in same window using linear extrapolation of endpoint drift; within 4 native channels at both start and end, descriptive only. Report separately component threshold crossing and same-path correspondence. Keep every score/path and original tile; no suppression, no altered inputs, no injection or tuning.",
+  "limits": "Eight additional disjoint 100 kHz windows selected geometrically around the R39 centers, no score-based selection; same five archive groups, not independent new observations. Cumulative 1.2 MHz per target if all succeed. Frozen R28 thresholds. No global false-alarm calibration or new-origin claim. Native comparison on R39 archive separate. No production adoption.",
+  "production_adoption": false,
+  "parent_run": 44388703107,
+  "parent_search_artifacts": {
+    "DEN1048": {
+      "id": 14467925526,
+      "sha256": "863ce94606ea672c0dbc584be8652bb618430f401384f42f9f63861f71c4c6b1"
+    },
+    "GJ845A": {
+      "id": 14467880109,
+      "sha256": "97338c3cab11dcd5d6bb0becfb4f7b20ff6befcd2fa73814ae8e63a9f6a13e48"
+    },
+    "LHS138": {
+      "id": 14466903482,
+      "sha256": "015fa16b38a2358014fec6ea279ee759d45986dc44f7ab6f54a58e173adc30fa"
+    },
+    "LHS288": {
+      "id": 14466244538,
+      "sha256": "a4f8c913a1d365c98a373be438fc415728d28516a0dc876aedd3bcd16b906e49"
+    },
+    "GJ682": {
+      "id": 14465789961,
+      "sha256": "a09c6c6219020c1fe9b651bb0263ee4f87eea063bfa638bbb2bf35478a1cf7cd"
+    }
+  },
+  "native_compare": {
+    "scope": "All R39 original patch starts (not a candidate-selected sample); paired native BLISS CPU, fastDD CPU core and turboSETI native DAT adapters on identical regenerated registered float32 arrays. R28 recomputed on same input, with common historical R35G control-only calibration; report original R39 candidate IDs, matched same-scan tracks, ON/OFF alert burden and out-of-bounds native paths separately. Historical calibration is not survey-wide or independent external validation.",
+    "calibration": {
+      "id": 14420977581,
+      "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517",
+      "run": 44284089889
+    },
+    "rate": 0.05,
+    "window_centers": [
+      2800,
+      3000,
+      3200,
+      3370
+    ],
+    "tolerance_channels": 2,
+    "chunk": 128
+  }
+}
