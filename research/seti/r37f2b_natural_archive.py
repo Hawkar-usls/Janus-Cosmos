@@ -9,8 +9,15 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 def save(n,x):(O/n).write_text(json.dumps(x,indent=2,allow_nan=False)+"\n")
 def download(u,cap,hosts,params=None):
     assert urllib.parse.urlparse(u).scheme=="https" and urllib.parse.urlparse(u).hostname in hosts
-    with requests.get(u,params=params,stream=True,timeout=(15,60),allow_redirects=False) as r:
-        r.raise_for_status();assert r.status_code==200
+    # Follow bounded HTTPS redirects only within the explicitly authorized host set.
+    for _ in range(5):
+        r=requests.get(u,params=params,stream=True,timeout=(15,60),allow_redirects=False)
+        if r.status_code not in (301,302,303,307,308):break
+        nxt=urllib.parse.urljoin(r.url,r.headers.get('Location',''));r.close();p=urllib.parse.urlparse(nxt)
+        if p.scheme!='https' or p.hostname not in hosts:raise ValueError('unexpected redirect host: '+str(p.hostname))
+        u=nxt;params=None
+    with r:
+        r.raise_for_status();assert r.status_code==200, f'HTTP {r.status_code}'
         if r.headers.get("Content-Length","").isdigit():assert int(r.headers["Content-Length"])<=cap
         b=bytearray()
         for x in r.iter_content(65536):
@@ -67,7 +74,7 @@ def catalogue():
                 role="OFF" if "_OFF" in t else "ON";seen[u]={"target":t,"day":int(m),"role":role,"format":pathlib.PurePosixPath(urllib.parse.urlparse(u).path).suffix.lower(),"mjd":m,"url":u}
                 n+=1
             row.update(status="PASS",rows=len(rr),exact_source_rows=n,sha256=sha(b))
-        except Exception as e:row.update(status="HOLD",error=str(e)[:200])
+        except Exception as e:row.update(status="HOLD",error=type(e).__name__+": "+str(e)[:200])
         queries.append(row)
     dates=[]
     for day in cfg["days"]:
