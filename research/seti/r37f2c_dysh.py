@@ -52,7 +52,10 @@ def main():
                 integral=float(np.sum(y[line]-med)*dv)
                 row.update(status="CALIBRATED",peak_radio_lsrk_km_s=float(v[j]),peak_K=float(y[j]),noise_median_K=med,noise_robust_K=sigma,descriptive_z=z,integrated_K_km_s=integral,velocity_bin_km_s=dv,line_channels=int(line.sum()),noise_channels=int(noise.sum()),supported=bool(z>=M["descriptive_threshold"] and integral>0))
                 arrays[f"scan{scan}_pol{pol}"]=np.stack([v,x,y])
-            except Exception as e:row["error"]=type(e).__name__+": "+str(e)[:400]
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                row["error"]=type(e).__name__+": "+str(e)[:400]
             rows.append(row);print("R37F2C_SCAN",json.dumps(row),flush=True)
     if arrays:np.savez_compressed(O/"calibrated_spectra.npz",**arrays)
     f.unlink()
