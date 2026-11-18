@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.r38.exam.gate.v1",
+  "status": "HOLD_PREREQUISITES_NOT_MET",
+  "primary_objective": "Prospectively increase weak-signal recovery and decrease false alarms relative to frozen R28 and native competing detectors without destroying real signals.",
+  "development_only_sources": [
+    "R28",
+    "R30-R35",
+    "R35G",
+    "R36",
+    "R37 viewed controls",
+    "R39",
+    "R39B",
+    "R40A"
+  ],
+  "never_use_as_closed_exam": [
+    "all targets, observing sessions, raw tile hashes, and source families used in development, calibration, comparison, or candidate search"
+  ],
+  "prerequisites": [
+    {
+      "id": "R37_NATURAL",
+      "condition": "At least six independently qualified source/session controls, with original spectra, source identity, native physical grid, verified calibration and spatial OFF where relevant; known physical positives and independently corroborated interference controls. No invented exposure or interpolation into missing channels.",
+      "current": "1/6 from prior inventory; W3_1 native-grid audit pending."
+    },
+    {
+      "id": "HANNAH",
+      "condition": "Freeze G4 or successor immutable memory and audit provenance, compatible-grid feature representation, source family separation, full archive-to-report workflow, unknown abstention, no destructive veto; protect same-frequency distinct emitters and shared reference signals."
+    },
+    {
+      "id": "DEVELOPMENT",
+      "condition": "Candidate must improve weak localized detections and decrease control alerts vs R28 while preserving aggregate localized count and shared-signal stress recovery; evaluate all predeclared arms, no post hoc selection on held test."
+    },
+    {
+      "id": "CUSTODIAN",
+      "condition": "Independent custodian holds undisclosed new inputs and labels, freezes hashes before evaluation, releases only after frozen outputs. No claim of external validation absent independent custodian."
+    }
+  ],
+  "exam": {
+    "methods": [
+      "frozen R28",
+      "frozen candidate",
+      "BLISS",
+      "fastDD",
+      "turboSETI"
+    ],
+    "common_inputs": "Same authenticated physical input, comparable drift/grid/bandwidth and calibration budget; log native pipeline differences, compare whole pipeline overhead separately from kernel time.",
+    "split": "Disjoint by source family/session/date and raw hashes; development, calibration and held exam never overlap. Freeze calibration targets, threshold policy, and label manifest hash before exam.",
+    "co_primary": [
+      "Higher weak-signal localized recall at lower independently measured false-alarm rate than R28",
+      "Higher weak-signal recall at matched false-alarm operating points compared with competitors"
+    ],
+    "secondary": [
+      "Overall signal localization",
+      "Real protected signals and same-frequency disambiguation",
+      "Survey-level false alerts per searched MHz-hour; event-level deduplicated rate",
+      "Full wall time and CPU/RSS including acquisition, calibration and preprocessing"
+    ],
+    "statistics": "Predeclare sample size and effect sizes with custodian using independent group-level power analysis before accessing held data. Report paired group-level confidence intervals, multiplicity correction, dependence of overlapping patches, all failures and no winner on ambiguous intervals. Do not optimize thresholds after unblinding.",
+    "promotion": "HOLD unless both co-primary improvements vs R28 are independently supported, protected physical positives are not lost under predeclared noninferiority margin, and native comparisons pass stated criteria. Native CPU core vs complete pipeline distinction mandatory."
+  },
+  "no_new_discovery_campaign_until": "R38 gate and explicit decision; preserve already-running R39B as frozen baseline; LHS138 archived follow-up may be audited read-only, not used to train or as blind exam.",
+  "production_adoption": false
+}
