@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.r37f2.w3oh_natural_validation.v1",
+  "parent": {
+    "run": 44310886570,
+    "artifact": 14429153798,
+    "sha256": "a13e81a2dc2ab9731ea61fac60d6ca35c876eec5d6eb5f0f26f3c0ba7f45a5c9"
+  },
+  "source": {
+    "field": "W3OH",
+    "coordinate_ra_deg": 36.76541666666667,
+    "coordinate_dec_deg": 61.87372222222222,
+    "coordinate_source": "https://doi.org/10.1093/mnras/stu776",
+    "line_source": "https://academic.oup.com/mnras/article/350/4/1253/985954",
+    "line_rest_mhz": [
+      1665.402,
+      1667.359
+    ],
+    "typical_lsr_km_s": -45,
+    "topocentric_velocity_search_km_s": [
+      -110,
+      20
+    ],
+    "note": "Conservative window allowing annual motion; not a precise LSR transformation. No claim of Doppler agreement until reference frame independently established.",
+    "target_alias": "W3OH",
+    "max_on_pointing_separation_deg": 0.04,
+    "min_off_pointing_separation_deg": 0.15
+  },
+  "selection": {
+    "query": "https://seti.berkeley.edu/opendata/api/query-files",
+    "telescope": "GBT",
+    "allowed_host": "bldata.berkeley.edu",
+    "max_pairs": 3,
+    "max_gap_s": 600,
+    "max_header_candidates": 18,
+    "primary_pair": "Previously qualified parent ON/OFF URLs, identical grid and UTC epoch; all other dates metadata selected before spectrum read. Alternate same-date scans not independent dates.",
+    "max_rows": 16,
+    "max_bytes_per_file": 268435456
+  },
+  "measurement": {
+    "scope": "Offline natural astronomic emission validation only. No artificial emitter identification or signal suppression.",
+    "method": "Fixed rest-line velocity windows, compare independently median normalized ON/OFF mean spectra at overlapping native channels. Smooth into disjoint 64-bin blocks (about 179 Hz at 2.794 Hz grid); use MAD of all differential block values as descriptive background, report strongest positive block z, number of rows supporting it, and nearby adjacent block support. No calibrated discovery p-values. Do not publish signal fingerprint/model or automatic labels.",
+    "minimum_descriptive_z": 8,
+    "minimum_on_relative_excess": 0.1,
+    "require_all_rows_positive_at_selected_block": true,
+    "require_both_lines_for_candidate": true
+  },
+  "gate": "Single date is development natural-control candidate only even if both lines meet criteria; independent epoch and accurate velocity-frame confirmation required for scientific confirmation. No automatic protected label or veto. Preserve G4/R28.",
+  "production_adoption": false
+}
