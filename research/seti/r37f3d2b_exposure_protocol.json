@@ -1,0 +1,20 @@
+{
+  "schema": "janus.cosmos.r37f3d2b.exposure.v1",
+  "status": "PREREGISTERED_MASK_AND_CALIBRATION_AUDIT",
+  "source": {
+    "id": "w3_1",
+    "sha256": "f48450007a9d4a58c4ea6338be0d4a92175e53853bf875c05d0101affa9ce9a3",
+    "bytes": 130800960,
+    "scans": [
+      60,
+      61
+    ],
+    "ifnum": 0,
+    "plnum": 0,
+    "fdnum": 0
+  },
+  "rule": "Match CAL T/F by UTC timestamp within scan; pair ON/OFF by ordinal after verifying equal original cadence and counts. Retain only paired indices for which all four raw exposures are strictly positive and finite; omit no other rows based on measured power. Record excluded indices, WCS and fractional grid differences; no interpolation, replacement exposure, or modification of original file.",
+  "software": "dysh==1.0.1 getps(scan=60,fdnum=0,ifnum=0,plnum=0) with instrument flags; inspect installed source and compare exposure array and weights; official output is observational diagnostic, not independent arithmetic parity or source identity.",
+  "gate": "PASS metadata pairing only if 30 valid four-phase integrations and original hashes unchanged; official software calibration diagnostics separate; no automatic qualification or scientific promotion. Native WCS agreement, line identity, instrument mask and mathematical parity remain required.",
+  "production_adoption": false
+}
