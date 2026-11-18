@@ -1,0 +1,21 @@
+{
+  "schema": "janus.cosmos.r30c.ingest.v1",
+  "status": "PRECOMMITTED_RESEARCH_ONLY",
+  "parent": {
+    "id": 14408723659,
+    "digest": "8c053a4d0581a8d378c86002786c25c3087f255c9ed695c67ffcacea3af18269",
+    "library_sha256": "390bb4c938918bc0e3d7cdd86b7e9c42ca3e9d18755411ab985278310ce75da3",
+    "expected_entries": 59
+  },
+  "new_observations": {
+    "id": 14409292043,
+    "digest": "0cb1606683bafacd2ca6c66028b9b1fccbafe0dcd9f12f64474c0a60f15b54af",
+    "run": 44262281770,
+    "selected_index": 0,
+    "scope": "Use first predeclared R30B component-fit target only; metadata frozen before R30B exam. Retrieve actual archive tiles via existing verified COSMOS reader. No injection or exam labels. No modification to concurrent R30B."
+  },
+  "dedup_fix": "Require distinct scan and distinct source tile content SHA for recurrence. Parent entries immutable; review derived anew.",
+  "persistence": "Output full public ledger as artifact and hashable bounded log chunks for controlled registry snapshot; no write credentials in Actions. Future ingestion needs pinned verified parent and new archive manifest. Automatic ingestion hook and label review remain separate.",
+  "gate": "Parent entries exact preserved; new measured observations hashed; repeat ingestion adds zero; verified count unchanged; all selftests pass. No efficacy claim.",
+  "production_adoption": false
+}
