@@ -1,0 +1,62 @@
+name: JANUS SETI R33B-D external family and protected controls
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r33bcd-family-catalog.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-seti-r33bcd
+  cancel-in-progress: false
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Compile and replay exact source sidecar, labelled table, held scans and spacecraft control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m py_compile research/seti/r33bcd_family_catalog.py
+          python research/seti/r33bcd_family_catalog.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r33bcd-family-catalog
+          path: runtime/r33bcd/*.json
+          if-no-files-found: warn
+      - name: Verify exact catalogue, group separation, and no production promotion
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib
+          p=pathlib.Path("runtime/r33bcd")
+          d=json.loads((p/"result.json").read_text())
+          cat=json.loads((p/"published_catalog.json").read_text())
+          side=json.loads((p/"verified_central_sidecar.json").read_text())
+          c=json.loads((p/"recognition.json").read_text())
+          assert len(cat["direct"])==len(cat["mirrored"])==18
+          assert len(side["entries"])==6 and d["central_groups"]==2
+          assert all(e["family_member_kind"]=="STATIONARY_CENTRAL_ANCHOR_NOT_LOOKALIKE" for e in side["entries"])
+          assert all(e["raw_evidence"]["passport"]["label"]=="UNKNOWN" for e in side["entries"])
+          assert d["catalog_sha256"]==hashlib.sha256((p/"published_catalog.json").read_bytes()).hexdigest()
+          assert d["sidecar_sha256"]==hashlib.sha256((p/"verified_central_sidecar.json").read_bytes()).hexdigest()
+          assert d["verified_main_ledger"]==1 and d["r34"]=="HOLD_FAMILY_DISJOINT_VALIDATION_REQUIRED"
+          assert c["held_scans"]==4 and c["independent_family_generalization"]=="NOT_TESTED"
+          assert not d["production_adoption"]
+          PY
