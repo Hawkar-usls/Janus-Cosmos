@@ -1,0 +1,36 @@
+name: JANUS R37F3CB science report boundary
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r37f3cb-science-sidecar.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r37f3cb-science-sidecar
+  cancel-in-progress: false
+jobs:
+  boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check numpy==2.2.6 requests==2.32.3
+      - name: Verify scientific report references without candidate ingestion
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m py_compile research/seti/r37f3cb_science_sidecar.py
+          python research/seti/r37f3cb_science_sidecar.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r37f3cb-science-sidecar
+          path: runtime/r37f3cb/*.json
+          if-no-files-found: warn
