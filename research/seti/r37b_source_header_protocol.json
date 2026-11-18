@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.r37b.source_header_qualification.v1",
+  "status": "PREREGISTERED_METADATA_ONLY",
+  "source": {
+    "run": 44292499460,
+    "id": 14422377242,
+    "digest": "4c2f8097c453059abf9f44d4ecd1b46202c757288707fe4370d38febf3f0957b"
+  },
+  "history": "research/seti/r36f2_pipeline_protocol.json",
+  "selection": {
+    "per_telescope": 8,
+    "required_roles": [
+      "ON1",
+      "OFF1",
+      "ON2",
+      "OFF2"
+    ],
+    "fit": 2,
+    "null": 2,
+    "eval": 4,
+    "max_gap_seconds": 600,
+    "header_attempts_per_target": 5,
+    "common_rows": 16,
+    "pointing_separation_degrees": 0.1,
+    "max_header_mib_per_file": 8
+  },
+  "parkes": {
+    "windows_mhz": [
+      2800,
+      3000,
+      3200,
+      3370
+    ],
+    "half_hz": 50000,
+    "cadence": "Historical same S/R positions, two ON two OFF; strict original file names and headers"
+  },
+  "gbt": {
+    "windows_mhz": [
+      1370,
+      1390,
+      1410,
+      1430
+    ],
+    "half_hz": 50000,
+    "cadence": "ON1/OFF1/ON2/OFF2 in time order, separate OFF pointings allowed; header source_name checks, matched backend and frequency coverage, multiple OFF pointings recorded. Separate telescope protocol; not interchangeable with R36F2 Parkes."
+  },
+  "rule": "Authenticate source metadata and all pinned previous manifests. Exclude prior target names, days, URLs, names; compare on-source pointing to previously known and newly selected ON coordinates with 0.1deg guard. Distinct source days across both lanes. Only metadata and HDF5 headers, no power data, no outcome-based selection. Unknown alias correspondence remains a limitation; no external independence claim. Insufficient count = HOLD; do not relax.",
+  "production_adoption": false
+}
