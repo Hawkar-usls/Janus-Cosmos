@@ -1,0 +1,20 @@
+{
+  "schema": "janus.cosmos.r37d.quantized_drift.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "parent": {
+    "r37c_run": 44295180264,
+    "artifact": 14422698936,
+    "digest": "f96908fe6e691631522f74fb10324dbe247623d3b419491741f8bb999d6c66e9",
+    "protocol": "research/seti/r37c_physical_identity_protocol.json"
+  },
+  "source": "Exact ten measured passports already verified against source raw powers in R37A/R37C, using full stored track lengths as well as first 16 rows. Four drift passports remain UNKNOWN.",
+  "model": "Conditional affine observed frequency f(t)=a+b*t. Each track bin implies closed interval f_i +/- |df|/2; for all i<j intersect [(f_j-f_i-(w_i+w_j))/(t_j-t_i),(f_j-f_i+(w_i+w_j))/(t_j-t_i)]. If time equal require overlapping intervals. Intersection gives exact feasibility of one line with some intercept, within quantized-bin model. No claimed instrument or detector error bound. Report infeasible separately. Numerical tolerance 1e-10 Hz/s, sign only if both endpoints strictly on one side of zero.",
+  "tests": [
+    "Full and first 16 bin tracks; known stationary 6, review-only signed 4. Compare slope interval and sign with R37C wide bounds.",
+    "Same-group distinct-scan 8 pairs: joint single linear track across actual UTC epochs, no assumption it is same emitter; reject inconsistent frequency/time; diagnostic only.",
+    "Single-channel perturbation stress: for each track, shift one observed bin +/- one channel; count feasible and unchanged sign. No independent observations.",
+    "Synthetic canaries stationary, positive, negative, impossible (same time disjoint), inconsistent curved path and exact edge tie. Check no fabricated subchannel center."
+  ],
+  "gate": "Development-only: full-track signed 4/4 review candidates with expected direction, stationary sign unresolved 0/6 signed, canaries pass. Do not promote source labels or make veto from model. Independent cross-instrument real labelled source and same-frequency different-emitter validation HOLD.",
+  "production_adoption": false
+}
