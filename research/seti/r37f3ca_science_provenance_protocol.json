@@ -1,0 +1,15 @@
+{
+  "schema": "janus.cosmos.r37f3ca.science_provenance.v1",
+  "parent": {
+    "run": 44339841887,
+    "artifact": 14443661125,
+    "sha256": "57df4a08fca882a5a183bac5ad96a8e886a84a694f1e164f6b4336bcff1ff39a"
+  },
+  "pinned_blobs": {
+    "r37f3b1_native_authority.py": "b9339c3b9cba087536f8a04533195141abbd799b",
+    "r37f3b1_native_authority_protocol.json": "115d00513b344c310d4bd2c0c01ccdf76172c158"
+  },
+  "acceptance": "Two independently re-downloaded full archives matching frozen SHA256 and official MD5, exact repeat measurement and frozen coarse scientific array; canonical JSON report linking original reference, method blobs, parent artifact, runtime versions, measurement and limitations; verifier rejects altered fields even when payload digest is recomputed, against trusted original anchors and independently rerun measurement. Twelve mutations per report, independent report roundtrip. No raw arrays or fine fingerprints exported. Reports are hash-linked, not independently digitally signed.",
+  "scope": "Historical natural astronomical data provenance only. No operational emitter identification, classifier, signal exclusion or suppression. No production changes or permanent archive. No full HANNAH qualification.",
+  "production_adoption": false
+}
