@@ -1,0 +1,79 @@
+{
+  "schema": "janus.cosmos.r36.galaxy_swarm.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "source": {
+    "run": 44254920023,
+    "artifact": 14405617460,
+    "sha256": "fa60d60f8c961d521fe9bfb0f915447b327a05f03c5756d5b743a965ce46a9b0",
+    "scope": "Historical R28B exact registered arrays, 2 calibration and 4 evaluation groups, 512 injected positives and 512 controls. Development only."
+  },
+  "donors": {
+    "swarm_tree": "afb655ee0093951940e2f7e857852b62bca963d4",
+    "kenshi": {
+      "path": "tools/kenshi_swarm_blackboard.py",
+      "blob": "cad95f1d8d14fb155069be49550642f1168ba798",
+      "local": "research/seti/r36_kenshi_blackboard.py",
+      "scope": "Exact original implementation for serialized lease/event tests"
+    },
+    "gladius": {
+      "path": "firmware/gladius/Gladius.ino",
+      "blob": "d60f21d8c52f78ad0173997b446c926190742f4f",
+      "scope": "TailGEX inspiration; score-tail density per candidate count, not SHA mining or calibrated confidence"
+    },
+    "anchor": {
+      "path": "firmware/anchor/Anchor_part_02.ino",
+      "blob": "131416fdffd4bb1b3eca1bbd536ba6bf9a67eaa6",
+      "scope": "Disjoint task IDs instead of heuristic lane avoidance"
+    },
+    "core2": {
+      "path": "firmware/core2/CORE2.ino",
+      "blob": "e76c847b13e0ec033d90fb0aad11a4b8bc2270e6",
+      "scope": "Priority/sector service analogue, no game or RF telemetry as evidence"
+    },
+    "fundamentum": {
+      "tree": "86c6fc948246db308abcdff2f1c3222a372fc7c7",
+      "report": "experiments/v2.0-selective-distributed/official-440225/REPORT.md",
+      "cost_warning": "1.96x median aggregate work; require total CPU accounting"
+    }
+  },
+  "bank": {
+    "linear": "65 signed endpoints -32..32",
+    "smooth": "R35B exact bank with rounded quadratic and sinusoidal templates; isolated exact two-bank maximum, not ODONTO DP replacement",
+    "source": "research/seti/r35b_grand_benchmark_protocol.json",
+    "expected_blob": "",
+    "tie": "lowest canonical per-bank template id then start bin",
+    "precision": "float64 exact same left-to-right 16-sample sum /4; strict safe upper bound slack 1e-10*(1+16*maxabs)"
+  },
+  "arms": [
+    "A_duplicate_exhaustive",
+    "A_kenshi_shared",
+    "B_twin_fixed",
+    "C_tail_order_prune",
+    "D_core_priority",
+    "E_failure_replay"
+  ],
+  "calibration": {
+    "nominal_control_fraction": 0.05,
+    "tail_thresholds": [
+      6,
+      9,
+      12
+    ],
+    "tail_weights": [
+      1,
+      2,
+      4
+    ],
+    "rank": "Fit-only tail count / valid start-bin count, stable id tiebreak. No test labels or adaptation."
+  },
+  "measurement": {
+    "repeat": 3,
+    "chunk": 32,
+    "workers": 2,
+    "scope": "same-process CPU kernels, wall and process CPU seconds, peak process RSS, candidate paths, actual row reads plus bound overhead, cache/communication bookkeeping. Serial vs threaded same bank, no end-to-end speed claim.",
+    "core_priority": "Label-free max absolute/input row peak proxy per chunk; all jobs completed; report priority completion latency vs FIFO, not recall improvement.",
+    "fault": "Inject worker exception after one half-chunk task is computed but before commit; lease expiry and reassign to Anchor; count wasted work, reject stale or duplicate commit, confirm exact output and full coverage."
+  },
+  "gate": "A-E exact scores and witnesses, closed task coverage and no lost results. Performance admission only if end-to-end CPU and wall reductions; preserve full R28 and HANNAH. R36F full swarm vs native methods blocked until R35G/R35H and new independent groups; historical two-bank metrics descriptive only.",
+  "production_adoption": false
+}
