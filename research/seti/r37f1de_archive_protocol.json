@@ -1,0 +1,45 @@
+{
+  "schema": "janus.cosmos.r37f1de.archive_qualification.v1",
+  "parent": {
+    "run": 44309621604,
+    "cassini": {
+      "artifact": 14428234977,
+      "sha256": "f3b96cd5132887e32c62372e0b422c1802ba7ced5e7ccf58abc7b8ac8afb6bdc"
+    },
+    "natural": {
+      "artifact": 14428659278,
+      "sha256": "08f718862f043cd2087a35e6cfe214565b353dc851fbd532856479f073db7ab2"
+    }
+  },
+  "cassini": {
+    "scope": "Historical scientific metadata only. Reverify all previously qualified label SHA256, classify PDS instrument products; inspect record-count, record length, documented interval, time field definitions. Compare count-derived duration only if record interval explicitly specified by label with units. No raw receiver payload, no operational use. Report actual continuity HOLD until documented record timestamps can be independently checked.",
+    "reference": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=CO-S-RSS-1-SROC1-V1.0"
+  },
+  "natural": {
+    "scope": "Astronomical natural-source candidates only, no operational emitter classification or power decoding.",
+    "aliases": [
+      "W3",
+      "W3OH",
+      "DR_21",
+      "NGC_7538"
+    ],
+    "target_roles": "Only strip documented leading DIAG_ or CAL[0-9]+_ and trailing _OFF as separate role; compare original header source name to exact catalogue target before qualification; W3 and W3OH not conflated. OFF excluded from natural ON coverage.",
+    "epoch": 57424.92,
+    "lines_mhz": [
+      1665.4018,
+      1667.359,
+      1667.5
+    ],
+    "header_schema": "https://sigpyproc3.readthedocs.io/en/latest/generated/sigpyproc.io.sigproc.html",
+    "max_headers_per_format": 18,
+    "selection": "Exact literature epoch first, then at most two distinct ON dates per canonical field and format, also corresponding OFF when available; deterministic ordering favor gpuspec.0000 where present (actual fine grid verified only from header). Dedup URLs; no power-based selection.",
+    "max_fil_prefix_bytes": 65536,
+    "grid": {
+      "max_channel_hz": 10,
+      "max_integration_s": 60,
+      "min_rows": 2
+    }
+  },
+  "gate": "R37F2/F3 and R38 remain HOLD until actual independent natural line presence, continuity and comparable measurement grids qualified. No new source labels or G4/R28 modifications.",
+  "production_adoption": false
+}
