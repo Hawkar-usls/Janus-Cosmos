@@ -1,0 +1,467 @@
+{
+  "schema": "janus.cosmos.r35b.grand_benchmark.v1",
+  "status": "PRECOMMITTED_RESEARCH_ONLY",
+  "seed": "R35B-20261118-PREREG-v1",
+  "exclude_extra": [
+    "HIP28764",
+    "HIP107711",
+    "HIP52708",
+    "HIP99240",
+    "HIP27359",
+    "HIP41312",
+    "HIP116745",
+    "HIP44143",
+    "HIP56528",
+    "HIP64550",
+    "HIP32765",
+    "HIP83990",
+    "HIP80686",
+    "HIP91438",
+    "HIP13218",
+    "HIP84709",
+    "HIP55454",
+    "HIP16069",
+    "HIP52462",
+    "HIP80018",
+    "HIP63490",
+    "HIP58345",
+    "HIP54532",
+    "HIP22738",
+    "HIP47780",
+    "HIP76074",
+    "HIP61874",
+    "HIP27887",
+    "HIP33817",
+    "HIP40706",
+    "HIP27654",
+    "HIP27947",
+    "HIP7751",
+    "HIP113283",
+    "HIP560",
+    "HIP950",
+    "HIP69454",
+    "HIP27072",
+    "HIP56998",
+    "HIP40702",
+    "HIP69972",
+    "HIP110109",
+    "HIP106440",
+    "HIP19884",
+    "HIP84405",
+    "HIP63550",
+    "HIP10395",
+    "HIP105090",
+    "HIP63613",
+    "HIP45637",
+    "HIP86214",
+    "HIP23708",
+    "HIP32366",
+    "HIP24186",
+    "HIP99461",
+    "HIP79537",
+    "HIP113576",
+    "HIP23452",
+    "HIP110750",
+    "HIP13402",
+    "HIP8497",
+    "HIP84051",
+    "HIP29052",
+    "HIP15799",
+    "HIP41926",
+    "HIP108569",
+    "HIP43797",
+    "HIP117828",
+    "HIP64475",
+    "HIP10798",
+    "HIP23693",
+    "HIP27628",
+    "HIP42913",
+    "HIP110443",
+    "HIP73184",
+    "HIP45908",
+    "HIP44382",
+    "HIP38939",
+    "HIP63618",
+    "HIP84478",
+    "HIP102141",
+    "HIP56452",
+    "HIP29295",
+    "HIP11964",
+    "HIP10138",
+    "HIP33478",
+    "HIP84720",
+    "HIP37217",
+    "HIP32349",
+    "HIP52341",
+    "HIP16711",
+    "HIP102186",
+    "HIP39342",
+    "HIP8768",
+    "HIP77952",
+    "HIP85523",
+    "HIP102409",
+    "HIP86990",
+    "HIP99701",
+    "HIP1599",
+    "HIP4569"
+  ],
+  "amplitudes": [
+    0.75,
+    1.25,
+    1.5,
+    2
+  ],
+  "calibration_control_fraction": 0.05,
+  "rank": [
+    4,
+    1,
+    7,
+    0,
+    3,
+    6,
+    5,
+    2
+  ],
+  "wave_width": 2,
+  "penalty": 0.7,
+  "template_slopes": [
+    -2,
+    -1.5,
+    -1,
+    -0.5,
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+  ],
+  "template_curvatures": [
+    -0.16,
+    -0.12,
+    -0.08,
+    -0.04,
+    0,
+    0.04,
+    0.08,
+    0.12,
+    0.16
+  ],
+  "clip_values": [
+    3,
+    5
+  ],
+  "injection_models": [
+    "stationary",
+    "straight",
+    "off_grid_quadratic",
+    "smooth_sinusoid"
+  ],
+  "gap_levels": [
+    0,
+    0.25
+  ],
+  "modes": [
+    "raw_linear",
+    "raw_odonto",
+    "registered_linear",
+    "registered_odonto",
+    "registered_taylor",
+    "registered_hybrid",
+    "protected_hybrid"
+  ],
+  "repeats": 3,
+  "scope": "Fresh archive day-disjoint within R35 and explicit R32 excluded groups; exclude known targets; synthetic injections only, not independently labelled RFI. No promotion.",
+  "production_adoption": false,
+  "donor": {
+    "repo": "Hawkar-usls/Janus-Fundamentum",
+    "commit": "5c2afcf7936ddbbf693657bbdd8f610ec21d3570",
+    "path": "tools/OdontoForge_PNP_EXP.py",
+    "blob": "3a6397f4201f2471a237a0be664d48da806ab285"
+  },
+  "growth": {
+    "radius": 3,
+    "curvature_penalty": 0.7,
+    "max_unobserved_layers": 4,
+    "skip_cost": 0.5,
+    "clip": 3
+  },
+  "cousteau": {
+    "donors": [
+      {
+        "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+        "path": "workspace/kusto_cd169_empirical_residual_bootstrap_library.py",
+        "blob": "6508804e7c1c4d644ef0d40bcdd97f54d1928397"
+      },
+      {
+        "ref": "79b5d6e87db3fa107248eca35c895e2d2dc10dc7",
+        "path": "workspace/cousteau_ha10_n1_s2_spectral_shape_vs_scale_diagnostic.py",
+        "blob": "734d7d2256386a2f73e36d0a9a26d6e62375bf"
+      }
+    ],
+    "regime": "95th percentile of column temporal medians, split at median calibration controls; two strata, minimum 64 controls each",
+    "residual": "Subtract 75% of positive persistent column median after row normalization; robust per-column scale shrinkage, floor 1, cap 4; clip residual upper 3; raw route retained separately. No independent reference scan, stationary signal may attenuate.",
+    "stratum_control_fraction": 0.05
+  },
+  "registration": {
+    "shift_bins": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3
+    ],
+    "minimum_cosine": 0.8,
+    "clean_max_median": 1.5,
+    "profile_floor": 1,
+    "min_stratum_controls": 30,
+    "patch_width": 128,
+    "reference": "nearest paired OFF scan; physical channel grids checked before shift; no wrap; reject mismatched physical grids; candidate-local alignment uses no labels",
+    "edge_guard": 3
+  },
+  "donors": [
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "41c7e4efccbcf8506fa40b33b8ddd84dda054adc",
+      "path": "workspace/janus_cosmos_fermi_spectral_v6r1.py",
+      "blob": "90773b1e3e8c0db408a6339d2228f85fb061c6a3"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_cand003_support_matched_sensitivity.py",
+      "blob": "22a85c8e9fa1656c4bf0b5ce845a40df2b0daa36"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_mar4deg02s_em12_acquisition_regime_calibration.py",
+      "blob": "9a5b55e44bc19695785b8b74a3a005209d60abdd"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+      "path": "workspace/kusto_first_unseen_residual_transfer_validation.py",
+      "blob": "3483772d5348ebcfaf38cd8334fba682d64e584f"
+    }
+  ],
+  "external_reference": "https://www.nature.com/articles/s41550-021-01508-8",
+  "comparators": {
+    "turbo": {
+      "ref": "7d9b4fde9bc98d834dc11cfc0acd2380e6676f0e",
+      "files": [
+        [
+          "turbo_seti/find_doppler/kernels/_bitrev/__init__.py",
+          "e98d02b4d7334c659d9551bead15fbf79d322acb"
+        ],
+        [
+          "turbo_seti/find_doppler/kernels/_taylor_tree/_core_numba.py",
+          "d1dac5f1d00cbeabb017c6e9fd44784b7914db09"
+        ]
+      ],
+      "scope": "Original unchanged CPU Taylor kernel loaded by verified source, common preprocessing and custom symmetric shear range wrapper; not full turboSETI pipeline."
+    },
+    "hyperseti": "GPU not available in standard hosted CPU runner",
+    "bliss": "full pipeline build and integration open",
+    "ma": "random forest weights not shipped; full cadence shape and training required"
+  },
+  "fusion": {
+    "primary": "registered_hybrid",
+    "rule": "max of dimensionless branch margins (score - calibration control 95% threshold) / max(0.1, q95-q80) ; select corresponding path; separate joint threshold on calibration controls",
+    "protected": "max over both raw and registered linear and Odonto margins, separately calibrate a single threshold; raw individual candidate retained as advisory output, not automatic veto",
+    "threshold": "at most floor(0.05 * calibration controls) alerts for each mode, strict nextafter above descending order statistic",
+    "no_retuning": true
+  },
+  "gate": {
+    "rule": "Primary shape_recurrent_off vs baseline AND off_only: strictly lower control alerts than baseline and off_only, zero held positive alarms and lost localized/weak, zero lost shared-reference alarms; report per-target and all arms. A no-op is HOLD; no production veto.",
+    "production_adoption": false
+  },
+  "shield": {
+    "fit_targets": 2,
+    "null_targets": 2,
+    "eval_targets": 4,
+    "max_queries": 180,
+    "exclude_days": [
+      57842,
+      57956,
+      57783,
+      57782,
+      57958,
+      57778,
+      57801,
+      57962,
+      58017,
+      57776,
+      57781,
+      57957,
+      57768,
+      57982,
+      57960,
+      58013,
+      57788,
+      57845,
+      58010,
+      57811,
+      57802,
+      57839,
+      57807,
+      58009,
+      58602,
+      58598
+    ],
+    "min_stratum_controls": 128,
+    "min_stratum_targets": 3,
+    "baseline_rate": 0.05,
+    "shield_rate": 0.025,
+    "reference_feature": "95th percentile of positive temporal median over channels of normalized independent OFF patch; split at median on first 2 fit targets (control only); apply frozen split to all patches",
+    "topa_statistic": "Selected full hybrid path from exhaustive linear and Odonto search; second smallest of four four-row block means of registered path values; normalize using fit-control 95% threshold and q95-q80 scale; TOPA composite = min(full hybrid standardized margin, block support normalized margin). Calibrate the composite after path selection on separately acquired full actual control patches, not shuffled pixels; no independent p-value claim. Diagnostic tile-family maxima retain block dependence; tile-level threshold at 5% over null calibration tile maxima.",
+    "modes": [
+      "baseline_full",
+      "pooled_strict",
+      "kusto",
+      "topa",
+      "kusto_topa",
+      "topa_tile_family",
+      "protected_raw_union"
+    ],
+    "thresholds": "All decisions locked before reading evaluation data, component margins fit on first 2 targets; joint baseline threshold on next 4 targets (5%); pooled strict, KUSTO, TOPA, KUSTO+TOPA at 2.5% on same null targets; empirical order-statistic strict above cutoff. Strata lacking 128 controls or >=3 calibration targets use pooled conservative fallback. Tile-family max 5%, diagnostic not exact FAP.",
+    "evaluation": "Same 1024 test examples for all arms, 512 control/512 injected, paired deltas, weakest amplitudes <=1.25, per-target and per-source tile; 128 shared OFF leakage challenge. Record raw paths and scores; separate actual escalations from discovered/HOLD. No source classification. Any positive under threshold remains in retained raw records; no destructive veto. Report control alerts per observed exposure, cluster dependence, timing and added/lost counts.",
+    "primary_gate": "KUSTO+TOPA escalated localized >= baseline, escalated weak localized >= baseline, control alerts <= floor(baseline control alerts/2), baseline control count >0; no decrease in shared-signal challenge localized count; development gate only, no external independence nor deployment. If baseline zero controls, HOLD. Count parity alone not proof of equivalence; paired losses separately.",
+    "known_signal_limitation": "R30B shared-signal challenge only; BLC1/Voyager external reference replays remain separate R30F gate. Do not confuse synthetic injection recovery with confirmed radio source.",
+    "donors": [
+      {
+        "repo": "Hawkar-usls/Janus-Cosmos",
+        "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+        "path": "workspace/kusto_cd169_empirical_residual_bootstrap_library.py",
+        "blob": "6508804e7c1c4d644ef0d40bcdd97f54d1928397"
+      },
+      {
+        "repo": "Hawkar-usls/Janus-Cosmos",
+        "ref": "35bd5ca2cf032e3fb952a5e994897809b0defbd5",
+        "path": "workspace/kusto_mar4deg02s_em12_acquisition_regime_calibration.py",
+        "blob": "9a5b55e44bc19695785b8b74a3a005209d60abdd"
+      },
+      {
+        "repo": "Hawkar-usls/TOPA",
+        "ref": "0890172493d6ed0d3a62e79904c6a7593eb8a9f3",
+        "path": "research/uap-nuclear/topa_geo_mirror_null_v1.py",
+        "blob": "4116dcb7b1ac0a94e9f9ef3e6a14b07fe588b5be"
+      }
+    ]
+  },
+  "hannah": {
+    "parent_path": "research/seti/memory/hannah_library_v0003.json",
+    "parent_sha256": "ec382441e707ebf131e3cb84b7037a9729f31ef3163412e99eca4462dcf0d807",
+    "parent_entries": 109,
+    "parent_artifact": {
+      "id": 14411051155,
+      "digest": "0f1d3d785f566622773150eefc5d262a9613dd90b438b94ffcf378e61cc9c1db"
+    },
+    "exact": {
+      "frequency_hz": 8.4,
+      "drift_hz_s": 0.011,
+      "shape_similarity": 0.9
+    },
+    "shape": "Amplitude-normalized 9-bin profile, 16-point temporal profile, occupancy and log-power stability; compare both native and mirrored spectral profile. Soft drift penalty, no absolute-frequency gate for adaptive arms; physical channel width and sample interval compatibility within 2%. Max over eligible frozen entries; not a source identity verdict.",
+    "off": "Independent measured OFF reference on physical common grid, selected path shifted -2..2 channels and slope perturbation -2,0,2 end bins; second-lowest of 4 temporal block means of robust-normalized power; max over search. Calibrate whole search, not individual tests. Shared signal in OFF considered explicitly.",
+    "arms": [
+      "baseline_full",
+      "exact_g3",
+      "shape_all",
+      "shape_recurrent",
+      "shape_all_off",
+      "shape_recurrent_off",
+      "off_only"
+    ],
+    "grid": {
+      "shape": [
+        0.65,
+        0.75,
+        0.85,
+        0.9,
+        0.95,
+        0.98
+      ],
+      "off": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        12
+      ]
+    },
+    "selection": "2 component fit targets for R28, 2 calibration targets for policy grid. For each adaptive arm choose a fixed threshold pair maximizing removed calibration controls, subject to zero held calibration positive alarms, including any shared-reference alarm; ties choose stricter thresholds; disabled if no useful safe policy. No exam labels. R31 exact comparator remains fixed 8.4 Hz/0.011 Hz/s/0.9; separately report raw match coverage and selected thresholds. All decisions locked before 4 eval targets.",
+    "gate": "Primary shape_recurrent_off vs baseline AND off_only: strictly lower control alerts than baseline and off_only, zero held positive alarms and lost localized/weak, zero lost shared-reference alarms; report per-target and all arms. A no-op is HOLD; no production veto.",
+    "ingestion": "Optional measured-only accumulator via R31 hook, after evaluation, never used for current exam; publish candidate artifact only, no repository writes.",
+    "scope": "8 new target/day-disjoint archive targets, 1024 paired evaluation samples plus 128 shared-reference synthetic challenges; RFI unknown labels and archive controls are not ground truth. one verified BLC1 anchor; independent family-label validation and promotion remain separate.",
+    "external_label_plan": {
+      "source": "https://www.nature.com/articles/s41550-021-01508-8",
+      "data": "https://seti.berkeley.edu/blc1/",
+      "target": "Published BLC1 lookalikes and mirrored family: match exact observation ID/time/frequency/drift to raw data and published supplementary evidence, before reviewed admission. Do not automatically relabel 12 recurrent candidates."
+    }
+  },
+  "r35": {
+    "arms": [
+      "hybrid_r28",
+      "native_taylor_core",
+      "registered_linear",
+      "registered_odonto",
+      "raw_smooth_bank",
+      "registered_smooth_bank",
+      "registered_smooth_clipped",
+      "registered_smooth_neighborhood",
+      "hybrid_plus_smooth"
+    ],
+    "bank": {
+      "linear_endpoints": [
+        -32,
+        32
+      ],
+      "slopes": [
+        -1.5,
+        -1,
+        -0.5,
+        0,
+        0.5,
+        1,
+        1.5
+      ],
+      "curvature": [
+        -0.15,
+        -0.1,
+        -0.05,
+        0,
+        0.05,
+        0.1,
+        0.15
+      ],
+      "sinusoid_slopes": [
+        -0.75,
+        -0.25,
+        0.25,
+        0.75
+      ],
+      "sinusoid_amplitude": [
+        2,
+        4,
+        6
+      ],
+      "phases": 8,
+      "max_step": 3,
+      "clip": 3,
+      "neighbor_weights": [
+        0.25,
+        0.5,
+        0.25
+      ]
+    },
+    "fit": "2 fit targets for branch margins only, 2 disjoint null targets for all thresholds at 5%. No eval metrics used in tuning.",
+    "weak": "Amplitude <=1.25; report 0.75 class separately. Same 512 injections and 512 controls, paired loss counts, 128 shared reference stress. Per-target/day and source tile retain labels and outputs. No claim true astronomical FAP.",
+    "juxtapose": "Use original R18A j.GROUPS, j.score and j.witness, ordered groups calibrated only by fit controls+positives after linear threshold fixed on null. Rank deterministic by marginal hit probability/cost. Compare scalar exhaustive vs exact existential early exit on registered arrays; declare binary decision equivalence, counts, runtime; do not substitute first hit for best localization.",
+    "gate": "primary hybrid_plus_smooth strictly more localized and weak than Hybrid R28, controls no greater, shared localized no less. Report paired losses even when counts improve; any paired weak/shared loss HOLD for adoption. No claim full native pipeline or external independent custody.",
+    "timing": "Wall time per branch plus total preprocessing shared; RSS entire process, not isolated per-arm; full native benchmarks separately. Native Taylor kernel verified upstream, not entire turboSETI."
+  }
+}
