@@ -1,0 +1,152 @@
+{
+  "schema": "janus.cosmos.r33bcd.v1",
+  "status": "PREREGISTERED_RESEARCH_ONLY",
+  "doi": "10.1038/s41550-021-01508-8",
+  "paper": "https://www.nature.com/articles/s41550-021-01508-8",
+  "supplement": "https://seti.berkeley.edu/blc1/BLC1_NatAstron_arXiv_sheikh-supps.pdf",
+  "official_supplement_sha256": "7b4aa525576dfa1795543c59709877455ed0d4b4a7df45d8fb300270fe24399f",
+  "parent": {
+    "path": "research/seti/memory/hannah_library_v0004.json",
+    "sha256": "17acaca5bf50a5872b51647984b49dadb46b3c2a3aa4536dd150ae70673d7bb3",
+    "entries": 169
+  },
+  "r33a": {
+    "id": 14412981947,
+    "digest": "fd63f7272380e78a4b3017ce86691c076b5fcf449d82a5664e060dd686fc6500",
+    "candidate_sha256": "299b515b0c21f6dee6e54d4f6d2629e862c5abe4ac8bcfbd3d4c60f784857c3e",
+    "manifest_sha256": "eb24d10992c1fe914b3ba41ffc12ccb3bbee4807b1bd45b1d3a1ba4dc763bfe5"
+  },
+  "blc": {
+    "id": 14347646236,
+    "digest": "b108582724d0334289455f81e2e7df3ea6c17b0ba5bd3a3cf879a2fc5a0752b7"
+  },
+  "blc_manifest": {
+    "id": 14348050164,
+    "digest": "999cf5fac9d41fa06efc5ebd8beb8521ec4369875cacab5ed65a3d3151ca9106"
+  },
+  "table1": [
+    {
+      "id": "BLC1-T1-1",
+      "utc": "13:17:35",
+      "date": "2019-04-29",
+      "frequency_mhz": 982.00241,
+      "drift_hz_s": 0.0312,
+      "drift_error_proxy_percent": 15.1,
+      "snr": 12.64
+    },
+    {
+      "id": "BLC1-T1-2",
+      "utc": "13:47:46",
+      "date": "2019-04-29",
+      "frequency_mhz": 982.00247,
+      "drift_hz_s": 0.0303,
+      "drift_error_proxy_percent": 22.8,
+      "snr": 28.09
+    },
+    {
+      "id": "BLC1-T1-3",
+      "utc": "14:43:40",
+      "date": "2019-04-29",
+      "frequency_mhz": 982.00257,
+      "drift_hz_s": 0.0305,
+      "drift_error_proxy_percent": 14.8,
+      "snr": 21.17
+    },
+    {
+      "id": "BLC1-T1-4",
+      "utc": "15:21:41",
+      "date": "2019-04-29",
+      "frequency_mhz": 982.00264,
+      "drift_hz_s": 0.0273,
+      "drift_error_proxy_percent": 22.3,
+      "snr": 17.7
+    },
+    {
+      "id": "BLC1-T1-5",
+      "utc": "17:54:26",
+      "date": "2019-04-29",
+      "frequency_mhz": 982.00281,
+      "drift_hz_s": 0.0112,
+      "drift_error_proxy_percent": 67,
+      "snr": 10.18
+    }
+  ],
+  "figure7_direct_mhz": [
+    732.599,
+    741.985,
+    1320.107,
+    865.799,
+    899.099,
+    1250.014,
+    1466.681,
+    733.985,
+    960.006,
+    1198.799,
+    832.499,
+    818.001,
+    812.001,
+    736.864,
+    1298.699,
+    1065.599,
+    704.499,
+    816.001
+  ],
+  "figure9_mirrored_mhz": [
+    2400.238,
+    2400.195,
+    2400.014,
+    2283.223,
+    2097.898,
+    1749.962,
+    1366.124,
+    1920.156,
+    1890.011,
+    1755.01,
+    1439.492,
+    1498.499,
+    1485.009,
+    1365.299,
+    1298.699,
+    1333.347,
+    1312.585,
+    1200.012
+  ],
+  "table2_harmonic_mhz": [
+    799.199932,
+    865.799927,
+    899.099922,
+    1065.599907,
+    1198.799896,
+    1298.699886
+  ],
+  "family_catalog": {
+    "TF": {
+      "spacing_mhz": 133.33,
+      "members": 5,
+      "central_interferer_mhz": 1400,
+      "example_file_direct": "blc06_ProxCen_S_2019-04-29T13:02:35.000.fil",
+      "example_drift_direct": 0.045,
+      "example_file_mirrored": "blc05_ProxCen_S_2019-04-29T13:02:35.000.fil",
+      "example_drift_mirrored": -0.043
+    },
+    "SF": {
+      "spacing_mhz": 15,
+      "exception_mhz": 128.003,
+      "members": 7,
+      "central_interferer_mhz": 1200
+    },
+    "XY99": {
+      "spacing_mhz": 33.3,
+      "members": 14
+    }
+  },
+  "catalog_scope": "Figures 7/9 rounded illustrative frequencies, not precise time-frequency joins; 1298.699 occurs in both directions. Table 2 exact harmonic frequencies but no individual scan/drift identity. Figure 10 exact file IDs/drift but not explicit absolute frequency. Do not infer identities across figures. Central 1200/1400 are stationary interferers associated with families, not drifting lookalike members.",
+  "admission": {
+    "r33a": "Recompute six raw fingerprints from pinned result ZIP, exact tile hashes, metadata, stationary peak, distinct pointing. Validate evidence hashes and parent; sidecar only for published central interferer occurrence.",
+    "table1": "Unique containing ON scan from frozen BLC manifest, allow time rounding <= one tsamp and nearest row; start frequency tolerance 8 Hz, drift range published proxy ± max(0.008, proxy * nominal), fixed 16/32/full available windows beginning within one row of published start; dedrift integrated robust score >=10, occupancy>=0.5. Candidate wrapper only; exclude Table1 row 2 from new admission. Ambiguous scan/no path HOLD.",
+    "recognition": "R33C: use ON reference and two OFF tests for each stationary source group; no same scan/tile; compare full and R32 adaptive shape, matching coverage and wrong-group rankings; same campaign, not family-independent. Fixed threshold 0.9 and no tuning on test. Synthetic shifts and mirrors are diagnostic only.",
+    "protection": "R33D: fetch authenticated official Voyager sample using existing R26F downloader, recover carrier on fixed frequency/drift gate, compare native grid and report abstention; grid mismatch not classification evidence. No automatic veto.",
+    "r34": "OPEN: no launch before labelled family-disjoint controls and validation of protected signals; avoid overclaiming from same campaign."
+  },
+  "production_adoption": false
+}
