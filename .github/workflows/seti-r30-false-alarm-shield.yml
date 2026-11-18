@@ -1,0 +1,67 @@
+name: JANUS SETI R30 False Alarm Shield
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r30-false-alarm-shield.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-seti-r30-shield-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  paired:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMBA_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.0.0 requests==2.32.3 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Syntax and focused selftests
+        run: |
+          python -m py_compile research/seti/r30_false_alarm_shield.py
+          python research/seti/r30_false_alarm_shield.py selftest
+      - name: Freeze day-disjoint metadata before scoring
+        run: python research/seti/r30_false_alarm_shield.py freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-r30-manifest
+          path: runtime/r30/manifest.json
+          if-no-files-found: warn
+      - name: Frozen KUSTO TOPA paired archive exam
+        run: python research/seti/r30_false_alarm_shield.py scan
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-r30-result
+          path: runtime/r30/*.json
+          if-no-files-found: warn
+      - name: Verify scientific receipt contract (HOLD is a valid result)
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path("runtime/r30")
+          d=json.loads((p/"result.json").read_text())
+          assert d["samples"]==1024 and len(d["modes"])==7
+          assert len(d["targets"])==10 and len({x["day"] for x in d["targets"]})==10
+          assert all(v["positives"]==512 and v["controls"]==512 for v in d["modes"].values())
+          assert all(v["positives"]==128 for v in d["leak_challenge"].values())
+          assert all(d["selftests"][k]=="PASS" for k in ("tie_safe_cut","block_support","tile_max","sparse_fallback","joint_calibration","tree_witness"))
+          assert d["lock_sha256"]==hashlib.sha256((p/"lock.json").read_bytes()).hexdigest()
+          assert d["sources_sha256"]==hashlib.sha256((p/"sources.json").read_bytes()).hexdigest()
+          assert d["gate"]==("PASS_DEVELOPMENT" if all(d["gate_checks"].values()) else "HOLD")
+          assert not d["production_adoption"]
+          PY
