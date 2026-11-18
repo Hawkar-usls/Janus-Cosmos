@@ -1,0 +1,24 @@
+{
+  "schema": "janus.cosmos.r37f3d1bb3.natural_calibration_extension.v1",
+  "parent": {
+    "run": 44364270996,
+    "artifact": 14456262951,
+    "sha256": "ec9835204834b7f2d575fb54fd12676191fb4c85b4cb053b2d546b1d2c258d5b"
+  },
+  "pinned_blobs": {
+    "r37f3d1bb2b_header.py": "ba126a9414df7c9427b01b47faa740377435b21c",
+    "r37f3d1bb2b_header_protocol.json": "6bf15401277db2bc8cbaa63c84d8b9e5f9271ec9"
+  },
+  "ifnums": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "pols": [
+    0,
+    1
+  ],
+  "acceptance": "Execute exact pinned historical natural calibration audit per remaining window, changing only IF selection. All numerical tolerances, source, mask, native grid, valid support and no imputation gates remain unchanged. If any group differs from established support contract preserve HOLD and record failure. Reauthenticate complete original and repeat 14 metadata gates; preserve original digest. Report per-window aggregate calibration only. No detector, signal classification, memory changes, physical alignment or lossless averaging claims. No production adoption.",
+  "production_adoption": false
+}
