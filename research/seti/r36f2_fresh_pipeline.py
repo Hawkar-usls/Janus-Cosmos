@@ -92,7 +92,7 @@ def extract(d,L,th,known,unknown):
     x={"y":d["y"],"weak":amp<=1.25,"very_weak":amp==.75,"alarm":alarm,"loc":loc(p),"raw_loc":loc(rp),"raw":r,"p":p,"rp":rp,"z":z,"ev":ev}
     return x,{"original_prep":d["original_prep"],"original_search_fuse":add([d["original_search"],ot]),"galaxy_prep":d["galaxy_prep"],"galaxy_search_fuse":add([d["galaxy_search"],gt]),"hannah":et}
 def export(d,x,label,name,policy,costs):
-    rows=d["rows"];keep,loc,hold,rescue=h.apply(x,policy);base=x["alarm"]&x["loc"]&(x["y"]==1);joint=keep&loc&(x["y"]==1)
+    rows=d["rows"];(keep,loc,hold,rescue),policy_apply=timed(lambda:h.apply(x,policy));base=x["alarm"]&x["loc"]&(x["y"]==1);joint=keep&loc&(x["y"]==1)
     a={"V":d["Y"],"y":x["y"],"truth":np.stack([r[7] for r in rows]),"active":np.stack([r[8] for r in rows]),"amp":np.asarray([r[4] for r in rows]),"model":np.asarray([r[2] for r in rows],dtype="U32"),"tile_sha":np.asarray([r[6] for r in rows],dtype="U64"),"r28_alert":x["alarm"],"r28_localized":base,"galaxy_alert":keep,"galaxy_localized":joint,"galaxy_hold":hold,"galaxy_rescue":rescue,"r28_score":x["z"],"r28_path":x["p"],"raw_score":x["raw"],"raw_path":x["rp"]}
     path=IN/(label+"_"+name+".npz")
     _,dt=timed(lambda:np.savez_compressed(path,**a))
@@ -101,7 +101,7 @@ def export(d,x,label,name,policy,costs):
     def write():
         ev.write_text(json.dumps({"evidence":x["ev"],"held":hold.tolist(),"rescued":rescue.tolist()},allow_nan=False)+"\n")
     _,et=timed(write)
-    return {"name":path.name,"sha256":sha(path.read_bytes()),"array_sha256":sha(a["V"].tobytes()),"examples":len(rows),"timing":{**costs,"common_export":dt,"galaxy_evidence_write":et},"baseline":h.metric(x,{}),"galaxy":h.metric(x,policy)}
+    return {"name":path.name,"sha256":sha(path.read_bytes()),"array_sha256":sha(a["V"].tobytes()),"examples":len(rows),"timing":{**costs,"common_export":dt,"galaxy_evidence_write":et,"galaxy_policy_apply":policy_apply},"baseline":h.metric(x,{}),"galaxy":h.metric(x,policy)}
 def main():
     m=json.loads((OUT/"manifest.json").read_text());ex=json.loads((OUT/"exclusion.json").read_text())
     assert m["protocol_sha256"]==sha(P.read_bytes());ss=m["selected"];assert len(ss)==8 and len({q["day"] for q in ss})==8
