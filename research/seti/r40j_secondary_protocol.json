@@ -1,0 +1,35 @@
+{
+  "schema": "janus.cosmos.r40j.secondary_track.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "models": "Two candidate stationary-track scores: fixed clipped temporal accumulation with local contrast, and balanced ridge logistic trained per column using historical R35G eval+shared four groups; no R40H or R40CDE labels used in fit/calibration. Search every valid center channel; zero drift is a predeclared specialization for stationary shared stress, no truth at inference.",
+  "donors": [
+    {
+      "path": "research/seti/r35b_grand_benchmark.py",
+      "sha": "115681a05419112b05fd530a80e7abaa2d5641e3",
+      "adaptation": "exact stationary template bank, no early heuristic loss"
+    },
+    {
+      "path": "research/seti/r28_hybrid.py",
+      "sha": "90b8e34a05796ad40d8a02c6636beb48c0d06b36",
+      "adaptation": "preserve parent path and separate rescue lane; raw ON branch deferred because inputs not retained in R40H"
+    },
+    {
+      "path": "research/seti/r40a_sensitivity.py",
+      "adaptation": "robust adjacent background and temporal block support"
+    },
+    {
+      "repo": "Janus-Fundamentum",
+      "path": "research/tools/apma_bucket_common_core/common_core_semijoin_prefilter_v1_1.py",
+      "sha": "c29229bbaebf2935ab03c77c7d444e2a33422f17",
+      "adaptation": "common evidence across blocks; analogy not mathematical transfer"
+    }
+  ],
+  "source": {
+    "id": 14476995403,
+    "sha256": "cbb45f9fda24c56b8eddda710e1206c7a1adf1136f90e1d1979458e70a4e31ac"
+  },
+  "calibration": "Frozen R40G historical baseline 10/256 control alerts. Fix threshold above maximum candidate score among historically rejected null rows for primary-only rescue. Also separate two-path variant calibrated above maximum all historical null candidate scores; second path only if different by more than 2 bins on >=5 rows. Keep primary unchanged, report number of additional paths and false candidate count separately. No relaxed threshold if underpowered.",
+  "gate": "Preserve all R40G localizations and weak/shared positives; >=21 shared weak on R40H, total alerts <=35/640 there; report all R40CDE and R40H viewable replay, never independent. Single-primary and two-path localization explicitly separate. Do not choose threshold using any replay. Full superiority not proven, no deployment.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
