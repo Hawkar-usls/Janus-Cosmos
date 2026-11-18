@@ -1,0 +1,17 @@
+{
+  "schema": "janus.cosmos.r37f3d1a.metadata_diagnostic.v1",
+  "parent": {
+    "run": 44349551148,
+    "artifact": 14447846881,
+    "sha256": "4cc9b4fe76f93d9d13cb2454120aad7cd6a01a8f71e105c32b95051c0c59b161"
+  },
+  "archive_sha256": "abeefab2f0f5b67a5032dd1c79f7ea344a41da1fd552fe2f892761ac196376b2",
+  "archive_bytes": 795479040,
+  "documentation": [
+    "https://dysh.readthedocs.io/en/release-0.3.0/examples/positionswitch.html",
+    "https://dysh.readthedocs.io/en/latest/reference/sdfits_files/gbt_sdfits.html"
+  ],
+  "rules": "Same complete archive as prior HOLD, frozen SHA256 (not independently published). Scan152/153 sequence 1/2 and documented OnOff total power, real pointing separation >0.1 deg and within-scan spread < separation/4. SIG/CAL states separately logged; do not equate SIG with sky position when total-power metadata and position sequence demonstrate otherwise; unexpected phase states HOLD. At fixed IF, PL, FD and CAL, >=16 distinct parseable integration start times, no duplicate rows or overlapping starts within phase, exact matched CAL timestamps, 151 per group expected from documentation. Five IF, two pol, one feed; no concatenation. Metadata only; no signal processing, candidate classification or detector changes.",
+  "scope": "Historical natural galaxy observation metadata qualification only. No calibrated line validation, no independent algorithm validation or production adoption.",
+  "pinned_blob": "7245b268f1406cec8f8d6d6a51af50ccbbb7ea8c"
+}
