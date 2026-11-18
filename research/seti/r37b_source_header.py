@@ -49,6 +49,26 @@ def sep(a,b):
     r,d=map(math.radians,a);v,w=map(math.radians,b)
     x=math.sin((d-w)/2)**2+math.cos(d)*math.cos(w)*math.sin((r-v)/2)**2
     return math.degrees(2*math.asin(math.sqrt(min(1,max(0,x)))))
+def history_pointing(h,m):
+    try:
+        return {"pointing":pointing(h,m),"status":"FULL_HEADER_POINTING"}
+    except (AssertionError,ValueError,TypeError,KeyError):
+        # Unknown historical declination: retain independently corroborated RA,
+        # then reject any candidate within the guard for ANY possible declination.
+        # This is stricter than assuming an invented historical declination.
+        ar=float(m["ra"]);rh=float(h["src_raj"])*15
+        assert math.isfinite(ar) and 0<=ar<360 and 0<=rh<360
+        assert min(abs(ar-rh),360-abs(ar-rh))<=.005
+        return {"ra_deg":ar,"status":"UNKNOWN_DECLINATION_CONSERVATIVE_EXCLUSION",
+                "original_declination":h["src_dej"]}
+def history_distance(point,c):
+    if "pointing" in c:return sep(point,c["pointing"])
+    r,d=map(math.radians,point);v=math.radians(c["ra_deg"])
+    delta=abs(math.remainder(r-v,2*math.pi));delta=max(0.,delta-math.radians(.005))
+    # Maximize cos angular distance over all physically possible DEC.
+    # For cos(delta)<0 maximum occurs at a celestial pole.
+    cosine=math.sqrt(math.sin(d)**2+math.cos(d)**2*math.cos(delta)**2) if math.cos(delta)>=0 else abs(math.sin(d))
+    return math.degrees(math.acos(min(1.,max(-1.,cosine))))
 def history():
     targets=set(H["exclude_extra"])|{"HIP93069"};days=set(H["shield"]["exclude_days"])|{58000};ns=set();urls=set();coords=[]
     for a in H["r36f2"]["prior_manifests"]:
@@ -57,7 +77,8 @@ def history():
             targets.add(q["target"]);days.add(int(q.get("day",q["files"][0]["day"])))
             hh=q["files"][0]["header"]; mm=q["files"][0].get("metadata",{})
             print("R37B_HISTORY_COORD",json.dumps({"target":q["target"],"stage":a["stage"],"src_raj":hh.get("src_raj"),"src_dej":hh.get("src_dej"),"archive_coordinates":{k:v for k,v in mm.items() if k.lower() in ("ra","dec","raj","dej","src_raj","src_dej","ra_deg","dec_deg")}}),flush=True)
-            coords.append({"target":q["target"],"pointing":pointing(hh,mm)})
+            cc={"target":q["target"],**history_pointing(hh,mm)};coords.append(cc)
+            if cc["status"]!="FULL_HEADER_POINTING":print("R37B_CONSERVATIVE_HISTORY",json.dumps(cc),flush=True)
             for v in q["files"]:ns.add(v["name"]);urls.add(v["url"])
     return targets,days,ns,urls,coords
 def entries(rows,tel,target,days,ns,urls):
@@ -110,7 +131,7 @@ def qualify(tel,target,group,coords):
     pp=[pointing(h,v["metadata"]) for h,v in zip(hs,group)];assert sep(pp[0],pp[2])<.001
     assert sep(pp[0],pp[1])>=.01 and sep(pp[0],pp[3])>=.01
     if tel=="Parkes":assert pp[1]==pp[3]
-    assert all(sep(pp[0],c["pointing"])>=A["pointing_separation_degrees"] for c in coords),"Prior or duplicate sky pointing"
+    assert all(history_distance(pp[0],c)>=A["pointing_separation_degrees"] for c in coords),"Prior or duplicate sky pointing"
     return hs,pp
 def main():
     q=S["source"];z,n=artifact(q["id"],q["digest"]);rr=json.loads(z.read(n["queries.json"]));z.close()
@@ -131,7 +152,7 @@ def main():
             attempts.append(a);save("partial.json",{"selected":selected,"attempts":attempts})
             if len(selected[tel])==A["per_telescope"]:break
     flat=selected["Parkes"]+selected["GBT"];assert len({r["day"] for r in flat})==len(flat) and len({r["target"] for r in flat})==len(flat)
-    d={"status":"METADATA_QUALIFICATION_COMPLETE","protocol_sha256":sha(P.read_bytes()),"source":S["source"],"selected":selected,"attempts":attempts,"parkes_count":len(selected["Parkes"]),"gbt_count":len(selected["GBT"]),"required_per_telescope":8,"parkes_gate":"READY_HEADER_ONLY" if len(selected["Parkes"])==8 else "HOLD","gbt_gate":"READY_HEADER_ONLY" if len(selected["GBT"])==8 else "HOLD","new_obs_power_read":False,"source_origin_labels":False,"exam_started":False,"production_adoption":False}
+    d={"status":"METADATA_QUALIFICATION_COMPLETE","protocol_sha256":sha(P.read_bytes()),"source":S["source"],"selected":selected,"attempts":attempts,"parkes_count":len(selected["Parkes"]),"gbt_count":len(selected["GBT"]),"required_per_telescope":8,"parkes_gate":"READY_HEADER_ONLY" if len(selected["Parkes"])==8 else "HOLD","gbt_gate":"READY_HEADER_ONLY" if len(selected["GBT"])==8 else "HOLD","history_unknown_declination":[v for v in coords if v.get("status")=="UNKNOWN_DECLINATION_CONSERVATIVE_EXCLUSION"],"new_obs_power_read":False,"source_origin_labels":False,"exam_started":False,"production_adoption":False}
     save("manifest.json",d);summary={k:v for k,v in d.items() if k not in ("selected","attempts")};summary["groups"]={k:[{i:v[i] for i in ("target","day","split","pointing")} for v in vv] for k,vv in selected.items()};summary["attempts"]=len(attempts);summary["header_attempts"]=sum(len(a["header_attempts"]) for a in attempts)
     print("R37B_SUMMARY",json.dumps(summary),flush=True)
 if __name__=="__main__":main()
