@@ -1,0 +1,38 @@
+{
+  "schema": "janus.cosmos.r37c.hannah_physical_identity.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "parent": {
+    "run": 44292499460,
+    "grid_artifact": 14421149472,
+    "grid_digest": "bcbc7d4ed91eea37bcfcdeeb23d3efd2aff5a08e0a10d6526f8a788767b8b6e0",
+    "protocol": "research/seti/r37a_hannah_resolution_protocol.json"
+  },
+  "source": "Same 10 authenticated measurement tiles as R37A, 6 published central occurrences from TF/SF, 4 review-only drifting passports. Distinct scans within one campaign, not independent physical emitter identity.",
+  "features": {
+    "shape": "R37A fixed physical cells cosine",
+    "frequency": "Use header channel0 + signed df times known path, timestamp from exact scan name plus row start, interval based on half-channel quantization and a half-channel drift uncertainty; evaluate at midpoint of two track centers, max separation 7200s. Linear model is conditional, not an observed frequency outside scan.",
+    "drift": "Least-squares slope on first 16 measured rows in Hz/s, interval using deterministic quantization bound plus residual magnitude. Keep sign only when uncertainty interval excludes zero.",
+    "modulation": "Row-normalized aligned central +/-4Hz cell average, 36s physical blocks, contrast-normalized centered profile, mean absolute successive differences, relative robust variability; only diagnostic, no invented periodicity from short series.",
+    "harmonics": "Report published candidate comb spacings 133.33,15,33.3,128.003 MHz and approximate 2.000004 MHz as residual to nearest positive integer multiple, with diagnostic tolerance 0.01 MHz and n<=1000. No promotion, no selected ratio fitting, no actual harmonic if not supported by independent observation."
+  },
+  "arms": [
+    "shape",
+    "shape_frequency",
+    "shape_frequency_drift",
+    "shape_modulation",
+    "joint"
+  ],
+  "thresholds": {
+    "shape": 0.9,
+    "modulation_distance": 0.3,
+    "frequency_guard_hz": 8.4,
+    "drift_guard_hz_s": 0.011,
+    "max_time_gap_s": 7200
+  },
+  "tests": {
+    "pairs": "All 45 unordered distinct tiles; primary known central comparisons six within reported central group and nine between reported central groups, remaining candidate pairs explicitly review-only. Same-group does not prove same hardware.",
+    "counterfactual": "Align different-group measured shape observations to identical frequency and drift metadata; diagnostic test of discriminating shape/modulation against hard collisions, not real labels. Report all 37 cross-group pairs; cannot claim origin validation.",
+    "gates": "Require all 6 within verified central group retained and 0/9 between known central groups passing joint gate; also report shape-only cross group, all review-only results and artificial collisions. PASS is development retrieval only, no promotion/veto. Real different emitters at same frequency and independently labelled cross-instrument exam remain HOLD."
+  },
+  "production_adoption": false
+}
