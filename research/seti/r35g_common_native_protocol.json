@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.r35g.common_native_replay.v1",
+  "stage": "R35G",
+  "scope": "Reconstruct precommitted R35B common input with separate component-fit/null/eval partitions, compare real upstream CPU implementations against identical registered arrays. This is cross-implementation development evidence, not externally blind validation.",
+  "source": {
+    "run": 44281785113,
+    "manifest": {
+      "id": 14418220586,
+      "digest": "bcbde36c711bce156b554b763fa8fb08af53d0843b13328ae54490b96f6e9888"
+    },
+    "protocol": "research/seti/r35b_grand_benchmark_protocol.json",
+    "implementation": "research/seti/r35b_grand_benchmark.py",
+    "source_commit": "c892784a485ce793efe3ee39b3bf479f2958163a"
+  },
+  "freshness_audit": {
+    "known_r32_targets": [
+      "HIP33499",
+      "HIP56244",
+      "HIP522",
+      "HIP111960",
+      "HIP15371",
+      "HIP99825",
+      "HIP16536",
+      "HIP44899"
+    ],
+    "known_r32_days": [
+      57789,
+      57961,
+      57803,
+      57983,
+      57985,
+      57844,
+      57959,
+      57769
+    ],
+    "scope": "R35B protocol inadvertently omitted these actual R32 groups. Report any overlap and fail prospective qualification, but permit labelled retrospective reproduction. No retuning."
+  },
+  "comparators": {
+    "bliss": {
+      "commit": "2b98afe960f13ee7e467aca499576d87ee7502f5",
+      "adapter": "research/seti/r35a_bliss_native.py"
+    },
+    "fastdd": {
+      "commit": "2ba67ea833b330c2f507a790c0f45e864f76126e",
+      "adapter": "research/seti/r35c_fastdd_native.py"
+    },
+    "turbo": {
+      "commit": "7d9b4fde9bc98d834dc11cfc0acd2380e6676f0e",
+      "adapter": "research/seti/r35d_turbo_native.py"
+    }
+  },
+  "calibration": "All native score thresholds frozen at <=5% of the same two null target controls, not on evaluation; no calibration from R28B. Separate fit groups for JANUS component margins. No labels passed to native score functions.",
+  "timing": "Native kernel, I/O, validation bridge, compile costs separately. Peak RSS process, CPU model and threads environment, no cross-run speed assertion absent compatible measurement. Realized control rates reported; no equal-FAP claim from calibration budget alone.",
+  "promotion": "No production changes; compare per-patch paired losses, weak and very weak, all four injection classes, and 128 shared positives. Need held-out source-family data and independent external custody for scientific validation.",
+  "production_adoption": false
+}
