@@ -1,0 +1,60 @@
+name: JANUS SETI R35A native BLISS repair
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r35a-bliss-native.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  bliss:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      CMAKE_BUILD_PARALLEL_LEVEL: '2'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Build pinned native BLISS CPU
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libhdf5-dev libfftw3-dev liblz4-dev pkg-config
+          python -m pip install numpy==2.2.6 h5py==3.13.0 requests==2.32.3 matplotlib==3.10.1
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --no-deps 'git+https://github.com/UCBerkeleySETI/bliss.git@2b98afe960f13ee7e467aca499576d87ee7502f5'
+      - name: Restore exact common input artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ID: '14405617460'
+          INPUT_DIGEST: 'fa60d60f8c961d521fe9bfb0f915447b327a05f03c5756d5b743a965ce46a9b0'
+        run: |
+          python - <<'PY'
+          import os,hashlib,io,zipfile,pathlib,requests
+          aid=os.environ["INPUT_ID"];assert aid.isdigit()
+          u="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/"+aid+"/zip"
+          r=requests.get(u,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"},timeout=60);r.raise_for_status()
+          b=r.content;assert len(b)<64*1024**2
+          assert hashlib.sha256(b).hexdigest()==os.environ["INPUT_DIGEST"].removeprefix("sha256:")
+          p=pathlib.Path("runtime/r28b/bliss_inputs");p.mkdir(parents=True,exist_ok=True)
+          with zipfile.ZipFile(io.BytesIO(b)) as z:
+              assert len(z.namelist())==6 and sum(i.file_size for i in z.infolist())<64*1024**2
+              for i in z.infolist():
+                  assert pathlib.PurePosixPath(i.filename).name==i.filename and i.filename.endswith(".npz")
+                  (p/i.filename).write_bytes(z.read(i))
+          PY
+      - name: Compare native BLISS on identical inputs
+        run: python research/seti/r35a_bliss_native.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-seti-r35a-bliss-result
+          path: runtime/r35a_bliss/
