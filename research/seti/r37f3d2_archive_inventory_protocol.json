@@ -1,0 +1,73 @@
+{
+  "schema": "janus.cosmos.r37f3d2.natural_archive_inventory.v1",
+  "parent": {
+    "run": 44367923873,
+    "artifact": 14458986143,
+    "sha256": "0325d3f838acbc8784640294ba6c1f925d1ece247cb6682dbf6ae8edc883247f"
+  },
+  "sources": [
+    {
+      "id": "w3_1",
+      "project": "TGBT22A_503_02",
+      "name": "W3_1",
+      "url": "https://www.gb.nrao.edu/dysh/example_data/nod-KFPA/data/TGBT22A_503_02.raw.vegas.trim.fits",
+      "pair": [
+        60,
+        61
+      ],
+      "ifnum": 0,
+      "plnum": 0,
+      "fdnum": 0,
+      "docs": "https://dysh.readthedocs.io/en/latest/users_guide/nodding.html"
+    },
+    {
+      "id": "ngc6946",
+      "project": "TGBT17A_506_11",
+      "name": "NGC6946",
+      "url": "https://www.gb.nrao.edu/dysh/example_data/mapping-L/data/TGBT17A_506_11.raw.vegas/TGBT17A_506_11.raw.vegas.A.fits",
+      "inventory_only": true,
+      "docs": "https://dysh.readthedocs.io/en/latest/users_guide/on_the_fly.html"
+    },
+    {
+      "id": "ngc5291",
+      "project": "AGBT05B_047_01",
+      "name": "NGC5291",
+      "url": "https://www.gb.nrao.edu/dysh/example_data/positionswitch/data/AGBT05B_047_01/AGBT05B_047_01.raw.acs/AGBT05B_047_01.raw.acs.fits",
+      "pair": [
+        51,
+        52
+      ],
+      "ifnum": 0,
+      "plnum": 0,
+      "fdnum": 0,
+      "docs": "https://dysh.readthedocs.io/en/latest/users_guide/positionswitch.html"
+    },
+    {
+      "id": "m32",
+      "project": "TGBT24B_613_04",
+      "name": "MESSIER32",
+      "url": "https://www.gb.nrao.edu/dysh/example_data/mixed-fs-ps/data/TGBT24B_613_04.raw.vegas.trim.fits",
+      "inventory_only": true,
+      "docs": "https://dysh.readthedocs.io/en/release-1.0.0/users_guide/align_spectra.html"
+    },
+    {
+      "id": "hi_survey",
+      "project": "AGBT04A_008_02",
+      "name": "HI survey",
+      "url": "https://www.gb.nrao.edu/dysh/example_data/hi-survey/data/AGBT04A_008_02.raw.acs/AGBT04A_008_02.raw.acs.fits",
+      "inventory_only": true,
+      "docs": "https://dysh.readthedocs.io/en/latest/users_guide/hi_survey.html"
+    }
+  ],
+  "limits": {
+    "max_bytes_per_archive": 1100000000,
+    "min_unique_per_scan": 16,
+    "min_separation_deg": 0.1
+  },
+  "qualification": "Bounded complete HTTPS archives, FITS structure, SHA256, internal checksums when available; metadata only. Inventory scan/time groups, classify documented position-switch pairs only if actual physical ON/OFF separation, documented sequence, matching source and CAL phase timelines and >=16 unique nonoverlapping times per scan on fixed IF/pol/feed pass. OTF and other modes inventory-only; no concatenating short scans or counting windows as sessions. Distinct projects are candidates, not proof of statistical independence. No raw spectra exported, no operational detection or production changes.",
+  "evaluation_plan": {
+    "status": "PROPOSED_NOT_RUN",
+    "scope": "Historical natural astronomy scientific preservation only; independent whole-session split before analysis. Keep G4 and Hybrid R28 frozen. Predeclare metrics for scientific line integrity, false-alarm control on labelled reference observations, sensitivity and total resource cost in any future separately qualified scientific comparison. No tuning on held-out observations. Do not equate metadata or arithmetic PASS with sensitivity or false-alarm improvement."
+  },
+  "production_adoption": false
+}
