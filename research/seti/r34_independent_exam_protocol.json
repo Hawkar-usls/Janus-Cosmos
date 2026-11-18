@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.r34.independent_exam.design.v1",
+  "status": "HOLD_INPUT_QUALIFICATION",
+  "basis": {
+    "r33b2_run": 44276705393,
+    "protocol": "research/seti/r33b2_drift_replay_protocol.json",
+    "parent_sha256": "17acaca5bf50a5872b51647984b49dadb46b3c2a3aa4536dd150ae70673d7bb3",
+    "stationary_sidecar_sha256": "8c12b5aa8d26fd445c98cf652e0f4425f34425a391f5ab1cdcc34e29b47bd411"
+  },
+  "independent_scout": [
+    {
+      "doi": "10.1017/pasa.2025.10060",
+      "publication": "Barrett et al. 2025",
+      "figure": 3,
+      "target": "TIC31268146",
+      "center_mhz": 3448.76,
+      "precision": "rounded centre only; exact hit ID and scan epoch still required",
+      "origin": "Published RFI in paired source/reference scans; proposed network attribution not confirmed",
+      "archive": "https://seti.berkeley.edu/opendata/",
+      "status": "METADATA_SCOUT_ONLY"
+    },
+    {
+      "doi": "10.5061/dryad.wm37pvn0b",
+      "publication": "UCLA GBT 11680 targets 2020–2023",
+      "archive": "https://datadryad.org/dataset/doi%3A10.5061/dryad.wm37pvn0b",
+      "status": "CATALOG_ONLY_RAW_JOIN_REQUIRED",
+      "scope": "RFICODE probable attribution; not automatically verified source identity"
+    }
+  ],
+  "frozen_gate": {
+    "reference": "Only exact audited measured references and provenance; R33B2 rounded figure-guided candidates are not admitted unless independently reviewed and exact join documented.",
+    "partition": "Disjoint source families, acquisition dates, original scans, hashes and overlapping spectral windows. BLC1 direct/mirror from one campaign is one grouped exposure; same campaign never used as independent test. Exclude all R29-R33 development targets/dates and all source-derived transformations. External test labels held apart until lock; metadata scout not score selection.",
+    "protected": "Independent measured useful source with same native grid or preregistered conservative physical representation validated on independent data. If incompatible only, HOLD. Include blinded weak injections and shared ON/OFF useful-signal stress on real backgrounds separately; report synthetic vs actual.",
+    "arms": [
+      "Hybrid R28",
+      "OFF-only",
+      "verified-reference shape",
+      "verified-reference shape + OFF",
+      "unknown-reference ablation"
+    ],
+    "primary": "Strictly fewer control alerts than Hybrid R28 AND OFF-only at matched sensitivity, zero paired loss of detected weak/localized/protected signals; report all missed baseline signals, ambiguous cases, match coverage and per-family statistics. Raw detections retained. If none qualify, HOLD.",
+    "science": "No independent replication claim without external custodian. Public previously studied source labels do not constitute a blind test; freeze exact sources and judge on non-overlapping data; evaluate real origin labels separately from synthetic positives. For independent origin claim use custody split."
+  },
+  "source_metadata_preflight": {
+    "query_targets": [
+      "TIC31268146",
+      "TIC 31268146",
+      "31268146"
+    ],
+    "telescope": "Parkes",
+    "file_types": [
+      "HDF5"
+    ],
+    "scope": "Query official archive metadata only; no spectral power access and no policy selection. Record exact headers if allowed, but no admission from frequency approximation."
+  },
+  "production_adoption": false
+}
