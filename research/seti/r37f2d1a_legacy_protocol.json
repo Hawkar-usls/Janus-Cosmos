@@ -1,0 +1,55 @@
+{
+  "schema": "janus.cosmos.r37f2d1a.catalogue_exact_name_repair.v1",
+  "parent": {
+    "run": 44322467181,
+    "artifact": 14435326697,
+    "sha256": "f93ef7e156d145b61a334ad0ca37f74b1cc509fd9129cb791b6cfae435c576ca"
+  },
+  "literature": "https://doi.org/10.3847/1538-3881/ab9361",
+  "release": "https://seti.berkeley.edu/etz/",
+  "fields": [
+    {
+      "name": "G35.03+0.35",
+      "alias": "35_03",
+      "galactic": [
+        35.03,
+        0.35
+      ],
+      "verified_catalogue_aliases": [
+        "35.03"
+      ]
+    },
+    {
+      "name": "G42.03+0.19",
+      "alias": "42_03",
+      "galactic": [
+        42.03,
+        0.19
+      ],
+      "verified_catalogue_aliases": [
+        "42.03"
+      ]
+    }
+  ],
+  "limits": {
+    "per_source_headers": 5,
+    "header_prefix_bytes": 65536,
+    "catalogue_bytes": 16777216,
+    "timeout_s": 20
+  },
+  "rest_mhz": 6668.5192,
+  "coverage_mhz": [
+    6663,
+    6674
+  ],
+  "grid": {
+    "df_hz_max": 10,
+    "ts_s_max": 60,
+    "min_rows": 2,
+    "df_reference": 2.7939677238464355,
+    "ts_reference": 18.253611008
+  },
+  "selection": "Observed exact CAL4_35.03 and CAL5_42.03 aliases allowed only with unchanged independent catalogue coordinate separation <=0.05 deg. CAL4_B1642_03 excluded. No alteration of grid or transport requirements.",
+  "scope": "Astronomical natural source metadata only. HTTP provisional, no power, no full-file authentication, no spatial pair or automatic classification.",
+  "production_adoption": false
+}
