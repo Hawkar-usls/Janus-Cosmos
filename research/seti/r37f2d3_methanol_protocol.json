@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.r37f2d3.natural_methanol.v1",
+  "parent": {
+    "run": 44324775316,
+    "artifact": 14434669787,
+    "sha256": "38314433dcb49d12179ccae9d644b316956cc7d8fc76faf39cf00582e97fdc6e"
+  },
+  "rest_mhz": 6668.5192,
+  "publication": "https://doi.org/10.3847/1538-3881/ab9361",
+  "sources": [
+    {
+      "name": "W3OH",
+      "day": 57934,
+      "expected_sha256": "6b9b77da6a4b9976a7a66e071249aba24a4d03fcb5efea65f23c936ce330641e",
+      "md5": "1dafee83409a3fe7981766f226438744",
+      "ra_deg": 36.76541666666667,
+      "dec_deg": 61.87372222222222,
+      "lsr_window": [
+        -50,
+        -40
+      ],
+      "literature": "https://academic.oup.com/mnras/article/360/3/1162/998639"
+    },
+    {
+      "name": "G42.03+0.19",
+      "day": 57941,
+      "md5": "6b2cfeb5746ceb1574917f1e5510d429",
+      "ra_deg": 286.8674583333333,
+      "dec_deg": 8.181527777777777,
+      "lsr_window": [
+        6,
+        15
+      ],
+      "literature": "https://academic.oup.com/view-large/102995749"
+    }
+  ],
+  "site": {
+    "longitude_deg": -79.83984,
+    "latitude_deg": 38.433129,
+    "height_m": 824
+  },
+  "method": {
+    "conditional_frame": "topocentric to radio LSRK via Astropy 7.1.0, built-in ephemeris, bundled IERS data; do not claim exact input frame if flags missing",
+    "native_df_hz": 2.7939677238464355,
+    "native_ts_s": 18.253611008,
+    "block_bins": 256,
+    "baseline_margin_km_s": 20,
+    "threshold_descriptive_z": 8,
+    "minimum_relative_excess": 0.1,
+    "require_two_time_halves": true,
+    "require_adjacent_block": true,
+    "minimum_rows": 4,
+    "full_bytes_cap_each": 2147483648
+  },
+  "scope": "Historical astronomical natural line analysis only; full file integrity before analysis; average native spectral power within fixed literature velocity windows and sidebands; compare independent time halves, no calibrated discovery probability, flux calibration, artificial transmitter identification or suppression. No spatial OFF inference. All spectra development controls only; prohibit automatic label, G4/R28 modifications or R38 promotion.",
+  "production_adoption": false
+}
