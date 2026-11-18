@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.r40h.frozen_prospective.v1",
+  "status": "PREREGISTERED_FROZEN_ARCHIVE_TRANSFER",
+  "locks": {
+    "r40c": {
+      "id": 14471145431,
+      "sha256": "20eccaaccaca110de5c9b7894f5f0ecfd57de5245590be6b22bbb601032a7864",
+      "file": "model.json",
+      "lock_sha256": "a5afcdd963f011424f3182a7a414599b1268557ce25d09da60ffa25bd7f8e32f"
+    },
+    "r40f": {
+      "id": 14470274311,
+      "sha256": "e4d527ed05d2bde262574b77c29fead5189ca13ff64765a8b25b7804d0c5d585",
+      "file": "lock.json",
+      "lock_sha256": "9b932dca7f2c1c9b1cd3fe4879f42f759efc5b157812dec0182c432e711a2604"
+    },
+    "r40g": {
+      "id": 14472841362,
+      "sha256": "e478d04057898e7d949dc3da762929cc5674e47c77e77f8f4851c10cec121911",
+      "file": "lock.json",
+      "lock_sha256": "5403b59ebf6b2fdbac1ad4b30378b000f33df0986e039a3e4002b9928bf7a430"
+    }
+  },
+  "historical": {
+    "id": 14420977581,
+    "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517"
+  },
+  "r37_manifest": {
+    "id": 14422818714,
+    "sha256": "b0ec1760f487db164a1b6efee0d28d96b5552ca0103b5320a4de0c1b6b64c624"
+  },
+  "seed": "R40H-20261118-FROZEN-NEW-SESSIONS-v1",
+  "targets": 5,
+  "max_queries": 180,
+  "windows_mhz": [
+    2850,
+    3050,
+    3250,
+    3330
+  ],
+  "half_hz": 50000,
+  "max_mib_per_scan": 320,
+  "selection": "Metadata-only R30 deterministic selection, exclude historical R35G component fit/cal/eval, R32 audited groups, all R37B Parkes/GBT selected groups, inherited prior exclusions. Exclude names and days, check raw tile hashes vs full R40CDE historical archives before scoring. Name/coordinate alias unresolved means not fully independent. No selection on powers. If insufficient valid candidates HOLD, never relax exclusions.",
+  "serialization": "Numeric-only tree evaluator: cast X float32 as sklearn does, compare to thresholds, average per-leaf normalized positive probabilities in serialized tree order. Verify all 1440 R40CDE rows against sealed R40G scores and decisions before opening new spectra (atol 1e-12, exact flags/paths). No fit.",
+  "eval": "640 paired injected/unchanged-background controls, 160 shared stress, five new metadata-qualified source/session groups; identical registered float32 arrays for native CPU adapters; calibrate native on same two historical null groups at <=12/256, never test data; report operating point, all failures and internal timing, do not conflate native kernels with independent pipelines.",
+  "gate": "Greater weak localized count and fewer control alerts than R28; no total or shared localized regression, zero lost R40C localized incl weak/shared, report paired old R28 losses and native comparisons. No claim of blinded external validation; R38 HOLD until actual external custodian, natural controls, HANNAH E2E and campaign null.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
