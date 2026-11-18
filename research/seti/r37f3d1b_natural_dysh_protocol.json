@@ -1,0 +1,38 @@
+{
+  "schema": "janus.cosmos.r37f3d1b.natural_calibration.v1",
+  "parent": {
+    "run": 44350996631,
+    "artifact": 14447513481,
+    "sha256": "79c5548d0b6763f8975f03be110e6bef45b7f22f09592224f5f397604906beb5"
+  },
+  "pinned_blobs": {
+    "r37f3d1a_metadata.py": "de52fd0a965b74162f9dc0cdc0813ee27d1095fc",
+    "r37f3d1a_metadata_protocol.json": "3dc69f482f46bde02ba6ba3c39ab699fe26ccc1c"
+  },
+  "archive_sha256": "abeefab2f0f5b67a5032dd1c79f7ea344a41da1fd552fe2f892761ac196376b2",
+  "archive_bytes": 795479040,
+  "method": {
+    "dysh": "1.0.1",
+    "docs": "https://dysh.readthedocs.io/en/release-0.3.0/getting_started/tutorials/GBT/tutorial-positionswitch.html",
+    "scan": 152,
+    "off": 153,
+    "ifnums": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "pols": [
+      0,
+      1
+    ],
+    "fdnum": 0,
+    "weights": "tsys",
+    "channels": 32768,
+    "native_df_hz": 715.2557373046875,
+    "frequency_spacing_atol_hz": 0.01
+  },
+  "acceptance": "Reauthenticate exact full archive; repeat all 14 metadata gates. Run official dysh getps/timeaverage for five windows x two polarizations; require exactly 32768 channels, finite unmasked values and same native absolute channel spacing, no spectral resampling or baseline subtraction. Verify scan selection, raw per-group spectral WCS (CRVAL1 CRPIX1 CDELT1) consistency and output grid matches native ON reference (atol 0.01 Hz, if output is observer-frame). Repeat tutorial IF0 pol0 and compare full arrays internally. Record calibration summaries and checks, not raw samples or operational fingerprints. No claim of line detection or flux calibration beyond antenna temperature; no full detector or independent validation.",
+  "production_adoption": false
+}
