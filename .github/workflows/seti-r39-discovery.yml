@@ -50,3 +50,5 @@ jobs:
           path: runtime/r39/${{ matrix.target }}/
           if-no-files-found: warn
           retention-days: 90
+
+# Retry after restoring frozen acquisition parameters; no detector changes.
