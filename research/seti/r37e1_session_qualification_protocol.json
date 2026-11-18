@@ -1,0 +1,56 @@
+{
+  "schema": "janus.cosmos.r37e1.session_qualification.v1",
+  "status": "PREREGISTERED_METADATA_ONLY",
+  "scope": "Public civilian controlled WLAN experiment; qualify dated capture cohorts and published carrier metadata before any power-only aggregate astronomy observability study. No classifier, deployment or live signal collection.",
+  "source": {
+    "record": 21237610,
+    "doi": "10.5281/zenodo.21237610",
+    "metadata_sha256": "5e5914eb4ac89b3828b2f5aa8a882c453fe302a43cf3ad2980c3eb144af322ee",
+    "publication": "10.23919/MIKON66970.2026.11577981",
+    "description": "Five ESP32 devices transmitting 802.11b beacon signals in controlled chamber and office. Filename prefix is a candidate group token, not authoritative hardware label until metadata/author mapping verified.",
+    "files": [
+      {
+        "name": "anechoic_chamber.zip",
+        "bytes": 552028579,
+        "md5": "3268c84bbd536313d5424de76ce1031f",
+        "environment": "anechoic_chamber"
+      },
+      {
+        "name": "office_room.zip",
+        "bytes": 601379584,
+        "md5": "da2641adcdf328f8bea01047bb3f12f0",
+        "environment": "office_room"
+      }
+    ]
+  },
+  "other_sources": {
+    "INRIA": {
+      "status": "HOLD_INDEPENDENT_SESSIONS",
+      "reason": "Official record describes headerless device burst files; archive contains one raw file per device and no independently identified acquisition dates."
+    },
+    "temporal": {
+      "record": 18952487,
+      "doi": "10.5281/zenodo.18952487",
+      "status": "RESTRICTED_NO_DOWNLOAD",
+      "reason": "Record expressly restricts raw files; 30 devices, two phases over 67 days, not available for current exam."
+    },
+    "WiSig": {
+      "status": "OPEN_ALTERNATIVE",
+      "reason": "Four documented capture days; compact subsets overlap, no pickle deserialization."
+    }
+  },
+  "qualification": {
+    "unit": "Whole environment/day/timestamp session, all devices and all replicate files assigned together; MAT and SigMF representations of same recording not independent.",
+    "checks": [
+      "Verify archive byte length and published MD5, record SHA256",
+      "Use SigMF metadata only; verify one-to-one data/meta pair by name, data-size consistency where datatype known, finite center frequency and sampling rate",
+      "Parse acquisition timestamps from filename, compare date/time against SigMF capture timestamp if present; report missing or mismatching metadata rather than infer",
+      "Record candidate group token counts, unique environment/day/time groups, overlap of labels across dates, frequency and sample rate; reject duplicate data CRC/size or repeated identity across cohorts",
+      "Hold until authoritative mapping of filename groups to physical devices and common transmit channel verified; receiver/session independence bounded by publication, no assumption about power cycle."
+    ],
+    "candidate_split": "Earliest chamber day fit, next chamber day calibration, latest chamber day evaluation; office is separate environment challenge. Require >=3 chamber dates and all five candidate group tokens present in each selected cohort; no choosing groups using power values.",
+    "safe_scope": "Only archive directory and bounded SigMF JSON read. No waveform read, feature training, identity models, or operational fingerprints.",
+    "gate": "Metadata qualification only. If any device/center-frequency ambiguity remains, HOLD actual examination; freeze separate aggregate power observability protocol before consuming samples.",
+    "production_adoption": false
+  }
+}
