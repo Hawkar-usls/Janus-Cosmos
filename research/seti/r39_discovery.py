@@ -12,6 +12,8 @@ TARGET=sys.argv[1]
 OUT=pathlib.Path("runtime/r39")/TARGET
 OUT.mkdir(parents=True,exist_ok=True)
 h.OUT=OUT; h.r.OUT=OUT; h.eng.OUT=OUT
+# Imported legacy modules share the acquisition spec. Restore only the preregistered R39 acquisition keys.
+h.eng.SPEC={**h.eng.SPEC,"window_centers_mhz":S["windows_mhz"],"window_half_hz":S["half_hz"],"limits":{**h.eng.SPEC["limits"],"spectrum_budget_per_file_mib":S["max_mib_per_scan"]}}
 assert h.eng.SPEC["window_centers_mhz"]==S["windows_mhz"]
 assert h.eng.SPEC["window_half_hz"]==S["half_hz"]
 assert h.eng.SPEC["limits"]["spectrum_budget_per_file_mib"]==S["max_mib_per_scan"]
