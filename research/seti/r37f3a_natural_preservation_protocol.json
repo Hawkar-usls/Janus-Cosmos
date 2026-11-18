@@ -1,0 +1,86 @@
+{
+  "schema": "janus.cosmos.r37f3a.natural_profile_preservation.v1",
+  "parent": {
+    "run": 44326838227,
+    "artifact": 14438355308,
+    "sha256": "474037c955daa95dbf732f630a625b5069ce0893a89cb4477b0a6bd33765fe51"
+  },
+  "implementation": {
+    "path": "research/seti/r37a_hannah_resolution.py",
+    "commit": "e7f2720ec726da9a007b47fcabda2beba5c08703",
+    "method": "rebin/weights area-overlap, actual R37A; no production hook modification"
+  },
+  "controls": [
+    {
+      "source": "W3OH",
+      "day": 57934,
+      "profile": "W3OH_science_profile.npz",
+      "line": [
+        -50,
+        -40
+      ]
+    },
+    {
+      "source": "G42.03+0.19",
+      "day": 57941,
+      "profile": "G42_03_0_19_science_profile.npz",
+      "line": [
+        6,
+        15
+      ]
+    }
+  ],
+  "baseline": "Frozen original median of sideband centers outside line endpoints by 10 km/s. Identical fixed physical line support partitioned at literal endpoints. Compare signed baseline-subtracted normalized area, positive-excess centroid, peak, relative integral L1 shape error, original vs conservative reverse grid; no absolute flux calibration.",
+  "transforms": [
+    {
+      "factor": 1.25,
+      "phase": 0
+    },
+    {
+      "factor": 1.25,
+      "phase": 0.25
+    },
+    {
+      "factor": 1.5,
+      "phase": 0
+    },
+    {
+      "factor": 1.5,
+      "phase": 0.25
+    },
+    {
+      "factor": 2,
+      "phase": 0
+    },
+    {
+      "factor": 2,
+      "phase": 0.25
+    },
+    {
+      "factor": 4,
+      "phase": 0
+    },
+    {
+      "factor": 4,
+      "phase": 0.25
+    }
+  ],
+  "limits": {
+    "area_rel": 0.01,
+    "centroid_km_s": 0.05,
+    "peak_rel": 0.1,
+    "profile_l1_rel": 0.1,
+    "conservation_rel": 1e-10
+  },
+  "canaries": [
+    "unchanged",
+    "attenuation_50pct",
+    "peak_notch",
+    "shift_0.5km_s",
+    "nonfinite",
+    "incomplete_support"
+  ],
+  "acceptance": "All canaries must respond as expected; report each transform independently without threshold retuning. Derived profile can be marked REVIEW on violation; original immutable always. No classification, no automatic suppression, no line removal or production changes.",
+  "limitations": "715.2557 Hz scientific averaged spectra, not original 2.794Hz time-frequency data. Conditional LSRK, no spatial OFF, two sources in development not blind. This is R37A mathematical processing + new isolated preservation check, not end-to-end R28/HANNAH detector.",
+  "production_adoption": false
+}
