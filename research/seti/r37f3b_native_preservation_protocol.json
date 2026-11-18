@@ -1,0 +1,75 @@
+{
+  "schema": "janus.cosmos.r37f3b.natural_native_preservation.v1",
+  "parents": [
+    {
+      "run": 44326838227,
+      "artifact": 14438355308,
+      "sha256": "474037c955daa95dbf732f630a625b5069ce0893a89cb4477b0a6bd33765fe51"
+    },
+    {
+      "run": 44328641563,
+      "artifact": 14437328398,
+      "sha256": "6243dfdc613d89d1dddb06a388cdaa4f224b13be71bccbc7674cdf9c3620c91a"
+    }
+  ],
+  "expected_sha256": {
+    "W3OH": "6b9b77da6a4b9976a7a66e071249aba24a4d03fcb5efea65f23c936ce330641e",
+    "G42.03+0.19": "a386a31d9243230ab6a13999dfa5fc2021f196a3056c7cecc28e4efdff4ca987"
+  },
+  "pinned_blobs": {
+    "r37f2d3_methanol.py": "efe9064658e624e61be24cac0a1fc8bd5b31a265",
+    "r37f3a_natural_preservation.py": "81981449689832df674a6e09721be71d7eac904a",
+    "r37f2d3_methanol_protocol.json": "97c7bd8da5fc04db5cc1f84db333c5a526319702",
+    "r37a_hannah_resolution.py": "e9010d9905a6100fecc719281d30581b74826d68"
+  },
+  "transforms": [
+    {
+      "factor": 1.25,
+      "phase": 0
+    },
+    {
+      "factor": 1.25,
+      "phase": 0.25
+    },
+    {
+      "factor": 1.5,
+      "phase": 0
+    },
+    {
+      "factor": 1.5,
+      "phase": 0.25
+    },
+    {
+      "factor": 2,
+      "phase": 0
+    },
+    {
+      "factor": 2,
+      "phase": 0.25
+    },
+    {
+      "factor": 4,
+      "phase": 0
+    },
+    {
+      "factor": 4,
+      "phase": 0.25
+    }
+  ],
+  "limits": {
+    "area_rel": 0.01,
+    "centroid_km_s": 0.05,
+    "peak_rel": 0.1,
+    "profile_l1_rel": 0.1,
+    "conservation_rel": 1e-10
+  },
+  "groups": [
+    "all",
+    "first_half",
+    "second_half"
+  ],
+  "method": "Revalidate full published MD5 and frozen SHA256 for each file. Reproduce R37F2D3 science gate. Native channels, same row normalization and science bounds; compare time-average and both non-overlapping time halves. Area-overlap integration via cumulative piecewise constant integral; verify algebra against pinned R37A on small test arrays. Report native-profile fidelity separately from 256-channel historical comparator. Do not change thresholds after results. Retain aggregate metrics only; no fine-grid samples in artifacts, no automatic processing decisions.",
+  "acceptance": "All 48 comparisons at native resolution must meet original R37F3A thresholds; all damage/clean canaries must pass. Failed transforms remain HOLD; no threshold fitting, no deployment. Full support conservation alone insufficient.",
+  "scope": "Historical natural astronomical data preservation only, no operational emitter profiling, identification, suppression, classifier or automatic exclusion, no production adoption. Not end-to-end HANNAH or blind validation.",
+  "production_adoption": false
+}
