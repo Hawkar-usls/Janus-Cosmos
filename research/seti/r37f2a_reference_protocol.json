@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.r37f2a.natural_reference_frame.v1",
+  "parent": {
+    "run": 44311844159,
+    "artifact": 14430901518,
+    "sha256": "1044e36b0c5e02728e37b0a8f5d30571c19f2e23f5c8805a584adf01121345e2"
+  },
+  "scope": "Historical natural astronomical OH emission only; no physical transmitter profiling, tracking, classifier or automatic suppression.",
+  "days": [
+    57934,
+    57941,
+    58110
+  ],
+  "catalogue": "https://seti.berkeley.edu/opendata/api/query-files",
+  "metadata_limit": 16777216,
+  "header_probe_max_per_day": 8,
+  "header_probe_bytes": 65536,
+  "archive_policy": "Try original archive HTTP URL as published and HTTPS if different; official Berkeley host only, no TLS verification disable. HTTP header metadata provisional, not authenticated raw signal. Do not synthesize mirror URLs.",
+  "source": {
+    "ra_deg": 36.76541666666667,
+    "dec_deg": 61.87372222222222,
+    "catalogue": "https://doi.org/10.1093/mnras/stu776",
+    "rest_mhz": [
+      1665.402,
+      1667.359
+    ],
+    "published_lsr_ranges_km_s": [
+      [
+        -48.9,
+        -40.02
+      ],
+      [
+        -47.77,
+        -43.31
+      ]
+    ],
+    "tolerance_km_s": 1
+  },
+  "frame": {
+    "site": "GBT",
+    "itrf_source": "https://gbtdocs.readthedocs.io/en/latest/references/backends/vlbi.html",
+    "longitude_deg": -79.83984,
+    "latitude_deg": 38.433129,
+    "approx_height_m": 824,
+    "astropy": "7.1.0",
+    "iers_auto_download": false,
+    "ephemeris": "builtin",
+    "convention": "radio LSRK; verify frame flags, otherwise conditional topocentric hypothesis. Use scan midpoint and report variation at endpoints. No assumption that metadata alone establishes reference frame.",
+    "documentation": "https://docs.astropy.org/en/stable/coordinates/spectralcoord.html",
+    "archive_format_reference": "https://escholarship.org/uc/item/07f870rt"
+  },
+  "measure": {
+    "block_bins": 64,
+    "threshold_z": 8,
+    "min_excess": 0.1,
+    "require_adjacent": true,
+    "require_all_on_rows": true,
+    "read_budget_bytes": 268435456,
+    "description": "Replay frozen ON/OFF observation only; test within predeclared published LSR intervals plus margin, using frequency-axis transformation, not a posteriori shift. Descriptive statistics only. Round-trip transform check; no independent astronomy confirmation until extra epochs qualified."
+  },
+  "production_adoption": false
+}
