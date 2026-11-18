@@ -183,12 +183,14 @@ def main():
     assert not set(q["target"] for q in parts)&set(hold.S["exclude"])
     assert [q["split"] for q in parts]==["component_fit"]*nf+["null_calibration"]*nc+["evaluation"]*ne
     assert len({f["url"] for q in parts for f in q["files"]})==4*len(parts)
-    seen=set();load_seconds=0.;panel_seconds=0.
+    seen=set();source_ledger={};load_seconds=0.;panel_seconds=0.
     def fetch(q):
         nonlocal load_seconds,panel_seconds
         t0=time.perf_counter();rows,R,ch,hs=r.gather(q);load_seconds+=time.perf_counter()-t0
         assert not seen&hs and len(hs)==16;seen.update(hs)
         assert len(rows)==256
+        source_ledger[q["target"]]={"day":q["day"],"split":q["split"],"source_tile_hashes":sorted(hs),"files":[f["name"] for f in q["files"]]}
+        save("sources.json",source_ledger)
         t0=time.perf_counter();pre=rb.panel(rows,R);panel_seconds+=time.perf_counter()-t0
         emit("R30_LOADED",{"target":q["target"],"day":q["day"],"split":q["split"],"sources":sorted(hs)})
         return {**q,"rows":rows,"R":R,"pre":pre,"challenge":ch}
@@ -226,7 +228,7 @@ def main():
         total[k]["paired_target_deltas"]={q:{"localized":v0[k]["localized"]-v0["baseline_full"]["localized"],"controls":v0[k]["control_alerts"]-v0["baseline_full"]["control_alerts"],"weak":v0[k]["weak_localized"]-v0["baseline_full"]["weak_localized"]} for q,v0 in out.items()}
     result={"schema":"janus.cosmos.r30.false_alarm.result.v1","status":"ARCHIVE_SYNTHETIC_DEVELOPMENT_EXAM",
        "gate":"PASS_DEVELOPMENT" if all(gate.values()) else "HOLD","gate_checks":gate,"samples":256*ne,
-       "selftests":checks,"lock_sha256":lock,"manifest_sha256":F["manifest_sha256"],"protocol_sha256":sha(P),
+       "selftests":checks,"lock_sha256":lock,"manifest_sha256":F["manifest_sha256"],"protocol_sha256":sha(P),"sources_sha256":sha(OUT/"sources.json"),
        "targets":[{"target":q["target"],"day":q["day"],"split":q["split"]} for q in parts],
        "modes":total,"per_target":out,"leak_challenge":lt,"fit_and_null_and_exam_panel_wall_seconds":panel_seconds,
        "archive_load_seconds":load_seconds,"external_fetch_and_jit_seconds":jit,
