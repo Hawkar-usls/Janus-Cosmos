@@ -1,0 +1,40 @@
+name: JANUS R37E2 aggregate power observability
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r37e2-power-observability.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r37e2-power-observability
+  cancel-in-progress: false
+jobs:
+  power:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check numpy==2.2.6 requests==2.32.3
+      - name: Verify authenticated samples and measure pooled power loss
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m py_compile research/seti/r37e2_power_observability.py
+          /usr/bin/time -v python research/seti/r37e2_power_observability.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r37e2-power-observability
+          path: runtime/r37e2/result.json
+          if-no-files-found: warn
