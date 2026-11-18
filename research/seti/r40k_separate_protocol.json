@@ -1,0 +1,32 @@
+{
+  "schema": "janus.cosmos.r40k.separate_on_off.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "parent": "R40G frozen",
+  "sources": {
+    "historical": {
+      "id": 14420977581,
+      "sha256": "1c7e48d3fdf788233fa24e6db3e97f9f505d3c5d759720158ca200584057e517"
+    },
+    "r40h": {
+      "id": 14476995403,
+      "sha256": "cbb45f9fda24c56b8eddda710e1206c7a1adf1136f90e1d1979458e70a4e31ac"
+    }
+  },
+  "donors": [
+    "R26C exact native integer overlap, immutable paired injections",
+    "R28 protected raw path",
+    "R35B exact template accumulation",
+    "Fundamentum common support principle"
+  ],
+  "arms": [
+    "on_only",
+    "joint_min",
+    "joint_mean"
+  ],
+  "score": "Normalize ON and OFF independently with existing R26C norm. Search all stationary channels 5..122 using signed local contrast: each row center minus median offsets +/-3,4,5; clip contrast [-4,4]; mean over 16 rows. ON only; min of ON and OFF evidence; mean of ON/OFF evidence, with individual evidence positive. Require no circular wrap. Select one best path per arm. No use of injection truth at inference.",
+  "calibration": "Reacquire exact original two historical R35G calibration groups; verify regenerated registered V digest and labels/paths/active against archive. Freeze threshold above max score among null controls rejected by R40G (zero additional historical nulls). Use single-primary rescue only on R40G nonalert rows, no replacement. Historical calibration controls exactly 256, R40G 10. Joint signal is not physical identity or RFI veto.",
+  "evaluation": "Reacquire exact R40H five archived sessions using original windows and seed, verify regenerated V, labels and truth against sealed R40H artifact, raw tile hashes against receipt; preserve parent candidate paths and decisions. No use of R40H labels in fit or calibration. Report all arms including misses, added controls, shared weak. Previously examined archive, not independent exam.",
+  "gate": "R40H >=214 localized, >=41 weak, >=21 shared weak, <=35 controls, zero parent hits lost. No production or R38 promotion even if pass; fresh source-disjoint comparison needed.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
