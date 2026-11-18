@@ -1,0 +1,67 @@
+{
+  "schema": "janus.cosmos.r37f2d1.maser_catalog_integrity.v1",
+  "parent": {
+    "run": 44321067547,
+    "artifact": 14434233598,
+    "sha256": "676cbe32e46a55bbec84b6291560983c5ad4a6cee92d1083ef21c99d2b881b95"
+  },
+  "literature": "https://doi.org/10.3847/1538-3881/ab9361",
+  "release": "https://seti.berkeley.edu/etz/",
+  "fields": [
+    {
+      "name": "G35.03+0.35",
+      "alias": "35_03",
+      "galactic": [
+        35.03,
+        0.35
+      ],
+      "expected_rows": 72
+    },
+    {
+      "name": "G42.03+0.19",
+      "alias": "42_03",
+      "galactic": [
+        42.03,
+        0.19
+      ],
+      "expected_rows": 145
+    },
+    {
+      "name": "S235",
+      "alias": "S235"
+    },
+    {
+      "name": "S231",
+      "alias": "S231"
+    },
+    {
+      "name": "NGC7538",
+      "alias": "NGC_7538"
+    },
+    {
+      "name": "W3OH",
+      "alias": "W3OH"
+    }
+  ],
+  "limits": {
+    "per_source_headers": 5,
+    "header_prefix_bytes": 65536,
+    "catalogue_bytes": 16777216,
+    "timeout_s": 20
+  },
+  "selection": "All returned row names and coordinate consistency audited. G35/G42 provisional match requires both galactic coordinates within 0.05deg and explicit name longitude/latitude numbers, no guessed physical label. Choose .0000.fil first by catalogue center-frequency closeness to rest frequency and distinct epochs. Original HTTPS and original HTTP only; no guessed mirror, no bypass of certificate validation. HTTP provisional; catalogue MD5 availability is not verified file integrity.",
+  "rest_mhz": 6668.5192,
+  "coverage_mhz": [
+    6663,
+    6674
+  ],
+  "grid": {
+    "df_hz_max": 10,
+    "ts_s_max": 60,
+    "min_rows": 2,
+    "df_reference": 2.7939677238464355,
+    "ts_reference": 18.253611008
+  },
+  "scope": "Historical natural methanol astronomy archive audit only. No raw receiver data, spectral power analysis, classification, tracking or suppression. Spatial OFF requires explicit separate pointing and paired observation. No production adoption.",
+  "production_adoption": false
+}
