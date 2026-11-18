@@ -91,7 +91,7 @@ def compare(a,b):
     compatible=math.isclose(u["channel_width_hz"],v["channel_width_hz"],rel_tol=.02) and math.isclose(u["sample_interval_s"],v["sample_interval_s"],rel_tol=.02)
     return {"shape_similarity":float(np.exp(-np.sqrt(np.mean((x-y)**2)))),"grid_compatible":compatible,
        "frequency_delta_hz":abs(a["frequency_hz"]-b["frequency_hz"]),"drift_delta_hz_s":abs(u["drift_hz_s"]-v["drift_hz_s"]),
-       "distinct_scan":a["provenance"]["source_scan"]!=b["provenance"]["source_scan"],"authority":"RETRIEVAL_ONLY"}
+       "distinct_scan":a["provenance"]["source_scan"]!=b["provenance"]["source_scan"],"distinct_tile":a["provenance"]["source_tile_sha256"]!=b["provenance"]["source_tile_sha256"],"authority":"RETRIEVAL_ONLY"}
 def review(ledger):
     entries=ledger["entries"];known=[r for r in entries if r["label"]=="VERIFIED_RFI"]
     unknown=[r for r in entries if r["label"]=="UNKNOWN"];recurrence=set();pairs=[]
@@ -99,7 +99,7 @@ def review(ledger):
     for i,a in enumerate(unknown):
         for b in unknown[i+1:]:
             d=compare(a,b)
-            if d["distinct_scan"] and d["grid_compatible"] and d["frequency_delta_hz"]<=8.4 and d["drift_delta_hz_s"]<=.011:
+            if d["distinct_scan"] and d["distinct_tile"] and d["grid_compatible"] and d["frequency_delta_hz"]<=8.4 and d["drift_delta_hz_s"]<=.011:
                 recurrence.update([a["id"],b["id"]]);pairs.append({"a":a["id"],"b":b["id"],**d})
     matches=[]
     for a in unknown:
@@ -194,7 +194,9 @@ def selftest():
     assert a["fingerprint_sha256"]==b["fingerprint_sha256"] and a["id"]!=b["id"]
     assert compare(a,a)["shape_similarity"]==1 and not compare(a,a)["distinct_scan"]
     ledger,c=append(empty(),[a,a]);assert c=={"added":1,"duplicates":1,"total":1}
-    ledger,c=append(ledger,[b]);assert c["total"]==2 and review(ledger)["rfi_candidates"]==2 and review(ledger)["verified_rfi"]==0
+    ledger,c=append(ledger,[b]);assert c["total"]==2 and review(ledger)["rfi_candidates"]==0 and review(ledger)["verified_rfi"]==0
+    x2=x.copy();x2[0,0]+=0.01;mm2={**mm,"source_scan":"TEST_FIXTURE_3","source_tile_sha256":hashlib.sha256(x2.tobytes()).hexdigest()};cc=make_record(x2,p,mm2)
+    ledger,c=append(ledger,[cc]);assert c["total"]==3 and review(ledger)["rfi_candidates"]==3 and review(ledger)["verified_rfi"]==0
     bad={**a,"frequency_hz":0};blocked(lambda:append(ledger,[bad]))
     blocked(lambda:make_record(x,p,mm,label="VERIFIED_RFI",evidence={}))
     blocked(lambda:make_record(x,p,{**mm,"source_tile_sha256":"1"*64}))
