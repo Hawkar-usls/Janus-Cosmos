@@ -3,7 +3,7 @@
 <style>
 :root{color-scheme:dark;--bg:#10141e;--panel:#192130;--line:#354158;--muted:#a6b3c7;--accent:#7dd3fc}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f0f4fb;font:15px/1.5 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:28px;line-height:1.15;margin:0 0 10px}h2{font-size:18px;margin:0 0 12px}p{margin:8px 0}a{color:var(--accent)}.muted{color:var(--muted)}.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px;margin:16px 0}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}button,select{background:#253149;color:#fff;border:1px solid #52637e;border-radius:7px;padding:9px;max-width:100%;font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}#runs{flex:1;min-width:190px}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}.metric{border:1px solid var(--line);border-radius:8px;padding:12px}.value{font-size:22px;font-weight:650;overflow-wrap:anywhere}.step{display:grid;grid-template-columns:110px 1fr auto;gap:10px;border-top:1px solid var(--line);padding:7px 0;font-size:14px}.pass{color:#86efac}.fail{color:#fca5a5}.run{color:#fde68a}textarea{background:#10141e;color:#f0f4fb;border:1px solid var(--line);border-radius:8px;width:100%;padding:12px;font:13px/1.5 monospace;min-height:145px}#error{color:#fca5a5;white-space:pre-wrap}.artifact{overflow-wrap:anywhere} @media(max-width:550px){main{padding:14px}.step{grid-template-columns:85px 1fr}.step span:last-child{grid-column:2}}
 </style></head><body><main>
-<h1>JANUS · Live Monitor</h1><p class="muted">COSMOS / SETI — GitHub Actions и преемственность чатов. Только чтение публичных данных. <a href="../">Observer</a></p>
+<h1>JANUS · Live Monitor</h1><p class="muted">COSMOS / SETI — GitHub Actions и преемственность чатов. Только чтение публичных данных. <a href="./">Observer</a></p>
 <section class="panel"><div class="controls"><select id="runs" aria-label="Эксперимент"></select><button id="refresh">Обновить</button><label><input id="auto" type="checkbox" checked> авто / 5 мин</label></div><p id="status" class="muted" aria-live="polite">Загрузка…</p><p id="error" role="alert"></p><div class="metrics" id="metrics"></div><p><a id="runlink" href="https://github.com/Hawkar-usls/Janus-Cosmos/actions">Открыть Actions</a></p><div id="jobs"></div></section>
 <section class="panel"><h2>Артефакты и контрольные точки</h2><p id="coverage" class="muted">Счётчик примеров доступен только при наличии явной контрольной точки.</p><div id="artifacts"></div><p class="muted">Публикуемые checkpoints: <code>janus-progress-samples-N-of-M</code>. Публикация после завершения блока исследования, без токенов и данных частных задач. Процент шагов ≠ процент вычислений.</p></section>
 <section class="panel"><h2>Context Bridge · новый чат</h2><p id="state" class="muted">Загрузка актуального сохранённого состояния…</p><p><a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-CURRENT-STATE.json">Current State JSON</a> · <a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json">Development Journal</a> · <a href="https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-CHAT-CONTEXT-INDEX.json">Контекст всех проектов</a></p><textarea id="prompt" readonly aria-label="Инструкция для нового чата"></textarea><div class="controls"><button id="copy">Копировать инструкцию</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Открыть ChatGPT</a><span id="copied" aria-live="polite"></span></div><p class="muted">Новый чат должен читать GitHub заново: это указатель на живые источники, а не автоматическая передача истории ChatGPT.</p></section>
@@ -14,7 +14,7 @@ const api="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos";
 const reg="https://raw.githubusercontent.com/Hawkar-usls/janus-meta-registry/main/data/";
 const statePath="JANUS-COSMOS-SETI-CURRENT-STATE.json";
 const $=id=>document.getElementById(id);
-let selected=44257652209,runData=null,jobData=[],artData=[],saved=null,busy=false,last=0,rate=null;
+let selected=44257652209,runData=null,jobData=[],artData=[],saved=null,busy=false,last=0,rate=null,stale=false;
 function el(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(cls)node.className=cls;return node}
 function dur(n){if(!Number.isFinite(n)||n<0)return "—";n=Math.floor(n);return Math.floor(n/60)+"м "+String(n%60).padStart(2,"0")+"с"}
 function elapsed(start,end){return start?(Date.parse(end||new Date().toISOString())-Date.parse(start))/1000:NaN}
@@ -50,7 +50,7 @@ function render(){
   const m=/^janus-progress-samples-(\d+)-of-(\d+)$/.exec(a.name);if(m&&!a.expired){const n=Number(m[1]),d=Number(m[2]);if(d>0&&n<=d&&(!best||n/d>best.n/best.d))best={n,d}}
  }
  $("coverage").textContent=best?"Опубликованный checkpoint: "+best.n+"/"+best.d+" ("+Math.round(100*best.n/best.d)+"%)":"Подтверждённого счётчика примеров ещё нет. Смотрите шаг и артефакты.";
- $("status").textContent="Сверка "+new Date(last).toLocaleTimeString()+" · API остаток: "+(rate??"неизвестно")+(Date.now()-last>360000?" · STALE":"");
+ $("status").textContent="Сверка "+new Date(last).toLocaleTimeString()+" · API остаток: "+(rate??"неизвестно")+(stale||Date.now()-last>360000?" · STALE":"");
 }
 const prompt="Продолжи JANUS COSMOS / SETI. Через GitHub прочитай свежий файл Hawkar-usls/janus-meta-registry data/"+statePath+" и data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json. Проверь указанный актуальный run и артефакты Hawkar-usls/Janus-Cosmos. Восстанови текущую задачу, отрицательные результаты, открытые гейты и последний научный статус. При «чек» только чтение; при явной команде продолжать фиксируй новый протокол и дописывай журнал. Не считай успех CI научным PASS.";
 $("prompt").value=prompt;
@@ -58,10 +58,11 @@ async function loadState(){try{saved=await get(reg+statePath);$("state").textCon
 async function refresh(list=true){
  if(busy)return;busy=true;$("refresh").disabled=true;$("error").textContent="";
  try{
- if(list){const data=await get(api+"/actions/runs?per_page=50");const runs=data.workflow_runs.filter(r=>r.name.startsWith("JANUS SETI"));$("runs").replaceChildren();for(const r of runs){const o=el("option",r.name+" · "+status(r));o.value=String(r.id);$("runs").append(o)}if(!runs.some(r=>r.id===selected)&&runs.length)selected=runs[0].id;$("runs").value=String(selected);runData=runs.find(r=>r.id===selected)||null}
- if(!runData||runData.id!==selected)runData=await get(api+"/actions/runs/"+selected);
- const [j,a]=await Promise.all([get(api+"/actions/runs/"+selected+"/jobs?per_page=100"),get(api+"/actions/runs/"+selected+"/artifacts?per_page=100")]);jobData=j.jobs;artData=a.artifacts;last=Date.now();render()
- }catch(e){$("error").textContent=e.message+" · предыдущие данные могут быть устаревшими";if(last)$("status").textContent="STALE · последняя удачная сверка "+new Date(last).toLocaleTimeString()}finally{busy=false;$("refresh").disabled=false}
+ let nextRun=null;
+ if(list){const data=await get(api+"/actions/runs?per_page=50");const runs=data.workflow_runs.filter(r=>r.name.startsWith("JANUS SETI"));$("runs").replaceChildren();for(const r of runs){const o=el("option",r.name+" · "+status(r));o.value=String(r.id);$("runs").append(o)}if(!runs.some(r=>r.id===selected)&&runs.length)selected=runs[0].id;$("runs").value=String(selected);nextRun=runs.find(r=>r.id===selected)||null}
+ if(!nextRun||nextRun.id!==selected)nextRun=await get(api+"/actions/runs/"+selected);
+ const [j,a]=await Promise.all([get(api+"/actions/runs/"+selected+"/jobs?per_page=100"),get(api+"/actions/runs/"+selected+"/artifacts?per_page=100")]);runData=nextRun;jobData=j.jobs;artData=a.artifacts;last=Date.now();stale=false;render()
+ }catch(e){stale=true;if(runData)$("runs").value=String(runData.id);$("error").textContent=e.message+" · предыдущие данные могут быть устаревшими";if(last)$("status").textContent="STALE · последняя удачная сверка "+new Date(last).toLocaleTimeString()}finally{busy=false;$("refresh").disabled=false}
 }
 $("runs").addEventListener("change",()=>{selected=Number($("runs").value);refresh(false)});
 $("refresh").addEventListener("click",()=>{loadState();refresh()});
