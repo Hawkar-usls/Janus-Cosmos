@@ -17,9 +17,9 @@
   "authority": "RETRIEVAL_ONLY",
   "promotion": "Only exact validated append-only snapshot after separate review; no autonomous label promotion or detector veto.",
   "active_candidate": {
-    "stage": "R33B-D",
-    "run": 44274269530,
-    "status": "COMPLETED_HOLD_INDEPENDENT_GENERALIZATION"
+    "stage": "R33B3",
+    "status": "COMPLETED_REVIEW_REQUIRED",
+    "run": 44277919489
   },
   "production_adoption": false,
   "recovery_run": 44271425216,
@@ -42,5 +42,23 @@
     },
     "run": 44274269530,
     "scope": "Separate stationary central interferer references, no automatic origin inference, no raw identity for rounded figure frequencies, no veto."
+  },
+  "drift_reference_candidates": {
+    "status": "PASS_EXACT_MEASURED_DRIFT_REVALIDATION__REVIEW_REQUIRED",
+    "path": "research/seti/memory/r33b2_drift_candidates.json",
+    "commit": "4527b9d729ad5ff278c821ee3ab0d48f3f5280d1",
+    "sha256": "9593bce5c10af104dc9f3556aa3869909d849a06418bdc3c5f139a6826abc648",
+    "bytes": 18392,
+    "groups": 2,
+    "passports": 4,
+    "distinct_raw_tiles": 4,
+    "direct": 1,
+    "mirrored": 1,
+    "run": 44276705393,
+    "revalidation_run": 44277919489,
+    "raw_artifact": 14414154131,
+    "revalidation_artifact": 14415726857,
+    "authority": "REVIEW_ONLY_NO_VETO",
+    "origin_identity": "Exact individual published hit identities not proven; same observation campaign; no verified promotion."
   }
 }
