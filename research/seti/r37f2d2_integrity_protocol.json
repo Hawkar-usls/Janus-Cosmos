@@ -1,0 +1,30 @@
+{
+  "schema": "janus.cosmos.r37f2d2.trusted_catalogue.v1",
+  "parents": [
+    {
+      "run": 44322467181,
+      "artifact": 14435326697,
+      "sha256": "f93ef7e156d145b61a334ad0ca37f74b1cc509fd9129cb791b6cfae435c576ca"
+    },
+    {
+      "run": 44322829452,
+      "artifact": 14435387397,
+      "sha256": "1883d2ba4d9c29f6f67edd1a1b63b368a576db5896873f1accc8099f9ecc034c"
+    }
+  ],
+  "official_release": "https://seti.berkeley.edu/etz/",
+  "portal": "https://breakthroughinitiatives.org/opendatasearch",
+  "allowed_portal_hosts": [
+    "breakthroughinitiatives.org",
+    "www.breakthroughinitiatives.org"
+  ],
+  "scope": "Historical natural astronomy archival integrity only. No power analysis or physical emitter identification.",
+  "target": "All 11 provisional fine-grid methanol covering SIGPROC headers. Match distinct exact full URL path and original allowed host, exact target, MJD tolerance 3s, size, MD5. No fuzzy basename-only joins.",
+  "limits": {
+    "metadata_bytes": 4194304,
+    "maximum_pages_per_query": 12,
+    "full_file_bytes": 1073741824
+  },
+  "integrity": "HTTPS-only verified certificates for reference catalog; no downgraded requests. Official MD5 supports accidental corruption check, not cryptographic proof against adversarial replacement; store local SHA256 only after complete byte stream. Full file download permitted only within fixed aggregate cap; no partial hash called full integrity. Request no authentication secrets from third parties.",
+  "production_adoption": false
+}
