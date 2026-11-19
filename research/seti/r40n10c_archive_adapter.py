@@ -36,9 +36,13 @@ def prepare():
     require(sum(e["error"]=="AssertionError: " for q in old["attempts"] for e in q["errors"])==80,"expected 80 old assertion records")
     z0,nn0,p=prev.old_source()
     g=p["development"][0]["group"];cache={}
-    hd,pp=prev.headers_same(g["target"],g["files"],[],load("exclusions.json")["reference"],cache)
-    require(hd==[f["header"] for f in g["files"]],"known N10 header parity")
-    cp("01-positive-parkes",{"stage":"KNOWN_PARKES_CONTROL","target":g["target"],"day":g["day"],"headers":hd,"pointing":pp,"pass":True,"eligible_for_fresh":False})
+    try:
+        hd,pp=prev.headers_same(g["target"],g["files"],[],load("exclusions.json")["reference"],cache)
+        require(hd==[f["header"] for f in g["files"]],"known N10 header parity")
+        rec={"stage":"KNOWN_PARKES_CONTROL","target":g["target"],"day":g["day"],"headers":hd,"pointing":pp,"pass":True,"eligible_for_fresh":False}
+    except Exception as e:
+        rec={"stage":"KNOWN_PARKES_CONTROL","target":g["target"],"day":g["day"],"pass":False,"error":error(e),"eligible_for_fresh":False}
+    cp("01-positive-parkes",rec)
 def summarize_error(e):
     f=e["frames"][-1] if e["frames"] else {}
     return "|".join([e["type"],e["message"] or f.get("code",""),f.get("file",""),str(f.get("line",""))])
@@ -52,14 +56,15 @@ def parkes():
         # Reconstruct original N10B candidates against the unchanged historical exclusions,
         # before adding any newly chosen target/day. Match old records by day AND ordinal.
         fs=qual.entries(rr,"Parkes",target,set(ctx["days"]),set(ctx["files"]),set(ctx["urls"]))
-        cand=qual.cadence(fs)[:C["header_attempts"]]
-        item={"target":target,"old_cadences":rec["cadences"],"current_cadences":len(cand),"query_errors":qe,"records":[]}
+        allcand=qual.cadence(fs);cand=allcand[:C["header_attempts"]]
+        newhash=[x["index_sha256"] for x in rr];index_same=newhash==rec["index_sha256"]
+        item={"target":target,"old_cadences":rec["cadences"],"current_cadences":len(allcand),"query_errors":qe,"index_sha256":newhash,"old_index_sha256":rec["index_sha256"],"index_snapshot_equal":index_same,"records":[]}
         for j,old_err in enumerate(rec["errors"]):
             e={"ordinal":j,"old":old_err,"matched":False}
-            if len(cand)!=rec["cadences"] or j>=len(cand) or cand[j][0]["day"]!=old_err["day"]:
+            if len(allcand)!=rec["cadences"] or j>=len(cand) or cand[j][0]["day"]!=old_err["day"]:
                 e["status"]="UNRESOLVED_METADATA_CHANGED"
                 item["records"].append(e);continue
-            g=cand[j];e.update(matched=True,files=[f["name"] for f in g],day=g[0]["day"])
+            g=cand[j];e.update(matched=True,index_snapshot_equal=index_same,files=[f["name"] for f in g],day=g[0]["day"])
             try:
                 hs,pp=prev.headers_same(target,g,ctx["coords"],ctx["reference"],cache)
                 e["status"]="NOW_QUALIFIED_METADATA"
@@ -78,7 +83,7 @@ def parkes():
     manifest["eligible"]=len(manifest["selected"])>=2
     rr=[e for q in manifest["attempts"] for e in q["records"] if e["old"]["error"]=="AssertionError: "]
     require(len(rr)==80,"all original assertion records retained")
-    manifest["diagnosis"]={"matched":sum(e["matched"] for e in rr),"unresolved":sum(not e["matched"] for e in rr),"reasons":dict(collections.Counter(summarize_error(e["error"]) if "error" in e else e["status"] for e in rr))}
+    manifest["diagnosis"]={"matched":sum(e["matched"] for e in rr),"exact_index_snapshot_matches":sum(e.get("index_snapshot_equal",False) for e in rr),"unresolved":sum(not e["matched"] for e in rr),"reasons":dict(collections.Counter(summarize_error(e["error"]) if "error" in e else e["status"] for e in rr))}
     save("same_receiver_manifest.json",manifest)
     cp("02-parkes",{"stage":"PARKES_AUDIT","diagnosis":manifest["diagnosis"],"qualified":len(manifest["selected"]),"seconds":time.perf_counter()-t0})
 def uwl_control():
@@ -174,7 +179,7 @@ def uwl():
         oldhdr=eng.hdr
         try:
             def canonical_hdr(f):
-                hd=header(f,cache);pos=role(hd["source"],target)
+                hd=cache[f["url"]];pos=role(hd["source"],target)
                 return {**hd,"source":prev.key(target)+"_"+pos} if pos is not None else hd
             eng.hdr=canonical_hdr
             cand=prev.uwl_cadences(series);count["complete_scans"]=len(series);count["cadences"]=len(cand)
@@ -232,6 +237,8 @@ def gbt():
 def freeze():
     ctx=load("exclusions.json");lanes={k:load(k+"_manifest.json") for k in LANES};allg=sum([m["selected"] for m in lanes.values()],[])
     require(len({g["day"] for g in allg})==len(allg) and len({g["target"] for g in allg})==len(allg),"overlap across lanes")
+    # Known old-source control must pass before the same-receiver lane is admitted.
+    if not json.loads((PROG/"01-positive-parkes.json").read_text())["pass"]:lanes["same_receiver"]["eligible"]=False
     fresh=sum([m["selected"] if m["eligible"] else [] for m in lanes.values()],[])
     m={"status":"FROZEN_METADATA_ONLY","source_n10_lock_sha256":S["source"]["lock_sha256"],"lanes":{k:{"manifest_sha256":c.sha((O/(k+"_manifest.json")).read_bytes()),"qualified":len(v["selected"]),"eligible":v["eligible"],"targets":[{"target":g["target"],"day":g["day"]} for g in v["selected"]]} for k,v in lanes.items()},"selected":fresh}
     save("manifest.json",m)
