@@ -1,0 +1,92 @@
+{
+  "schema": "janus.cosmos.r41.consolidation.tournament.v1",
+  "date": "2026-11-19",
+  "status": "PREREGISTERED_DEVELOPMENT_TOURNAMENT",
+  "source": {
+    "id": 14557149553,
+    "sha256": "42135d88595a53b0bdd3cb5b3ed12d18dffb4d4f9debfcd1ce067fb67ef2898b",
+    "lock_sha256": "ecb99e581270f3617171578a9983e0f2ad5069267318d7cc9210756769794646",
+    "manifest_sha256": "ef1994b6a55e180bf4251bc951c061d9d30b4c724d04d785ea00afd81b559329",
+    "run": 44570657066
+  },
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "n7": {
+      "id": 14535335679,
+      "sha256": "769b6aeab2fabb9d58707babc4b9e8d1d06e6215cb0b4d2b54f5a2e3eb5af803",
+      "lock_sha256": "81a49cd42dac1762d77ec8cc6ea3a75ed8ac3c9695bc28cf4562e42e274ec494",
+      "manifest_sha256": "a6579533eeb1e3bc3c9b72b36df2e2ba0e7986d1303f3a798baf0d50bb6250b3"
+    },
+    "n8": {
+      "id": 14539143940,
+      "sha256": "850913e6f4ba1cfe0905685173014a817a55f7573ba705dc55c75abdf5a87e6f",
+      "lock_sha256": "7d3105e57c85b9a28e3f4bba87b65f3e5986cb30cdbe87e49ab63a4bff75c315",
+      "manifest_sha256": "849490acbc7790a9c0300f8a91b978d35d9bc8f654141421a6581f3a898bc137"
+    },
+    "n9": {
+      "id": 14550292453,
+      "sha256": "3dae37aacb3df5b195118fb60141239e14528c44121e0fc6cc2037ebd88aa934",
+      "lock_sha256": "e71d68cd8f3dcfebcbce1e9155ce4630deefae6db73fa51339e528311bb9801b",
+      "manifest_sha256": "84be305b813e47b1f367c43ec95d595ad0a97ea3c6bc81d5e7d2622d14a12c98"
+    }
+  },
+  "selection": {
+    "seed": "R40N10-20261119-ARTMONEY-TURBO",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Same metadata-only selection, exclude all N1/N2/N6/N7/N8/N9 and historical/R40H/R37/R40CDE targets, days, sky and raw source hashes including N5A bank/replay; four fresh Parkes groups, minimum two, otherwise HOLD. Freeze manifest before any new power; freeze model before fresh reads."
+  },
+  "blocks": [
+    "temporal",
+    "rival",
+    "runs",
+    "folds",
+    "halo",
+    "artmoney",
+    "repeat"
+  ],
+  "subsets": "7 singles, all 21 two-block combinations, all seven, seven leave-one-out, plus explicitly registered historical base, base+runs, base+runs+folds, base+halo+artmoney, halo+artmoney+repeat, base+repeat (deduplicate exactly). Two fixed classifiers logistic/ExtraTrees, thresholds preserve/q01/q05. No hyperparameter search.",
+  "panel": "Authenticated N10 development archive: six N6 fit days (leave-one-day-out within fit; fit final on all six), five previously viewed other days audit only. All 11 are developmental, 3168 examples total, 1408 controls, 1408 ordinary positives, 352 shared. No new power exposure, no independent validation. Exact source and row hashes. Reacquire same 176 tiles for cost and original baseline replay; all 11 days, same seeds and arrays. No replacement after failure. Compare raw candidate bank components on identical rows using historical fit-only control quantile <=35/640, and separately exact original R28/R40C/R40F/R40G, Joint Min, Learned05, N7/N8/N9/N10 immutable arms.",
+  "method": "Parent-alert classifier evaluated with common all-feature support for matched ablation; operational support per subset also reported, fail-open on absent features. Protect Joint Min rescue. For each subset compute group-OOF AUC and fold-local preserve/q01/q05 masks, then frozen scores on five audit days, separate ordinary weak/shared weak/stationary repeat stress. Models use features only, never truth/amp as features. Rank on developmental audit only after all arms registered. Report multiplicity, no test-set tuning claim. Legacy detector thresholds fixed on fit controls, no audit adjustment. Report exact paired loss vs R40G and Joint Min, not just totals, against real background controls (not confirmed physical RFI).",
+  "cost": "Reacquire every known group; measure raw HDF5 acquisition plus injection/preprocessing, parent path including existing n.encode, base bank, parent scoring, temporal+rival combined, runs+folds combined, halo+ArtMoney combined via exact TURBO, repeat witness, classifier scoring. Shared dependencies charged once per candidate using conservative measured block costs; full observed wall/CPU/rss plus total pipeline cost estimate by block, not falsely claimed exact standalone end-to-end. Report actual legacy component timing as provided by bank; cold JIT and reference overhead separately. R41B must execute actual selected minimal implementation end-to-end before any efficiency claim. No cost-driven deletion until parity and audit.",
+  "decision": "Strict gate on all five viewed audit days pooled and report each day: zero paired losses relative R40G and Joint Min ordinary/shared/weak, zero repeated stress loss, control fraction <=35/640 and <=7/8 Learned05. If no qualified candidate, HOLD and freeze no winner; preserve safe baselines, rank descriptive zero-loss candidates. For qualified candidates order by controls, measured conservative cost, number of blocks, lexical stable tie. Freeze exactly one tentative development winner and model hash after cost replay; independent fresh evaluation required. No production adoption.",
+  "roadmap": {
+    "R40N10C": "Independent ongoing audit; do not overwrite active experiment",
+    "R41": "Development common panel tournament, exact replay and cost",
+    "R41A": "Feature pruning decision based on paired gates, dependency and cost; no destructive removal from repo",
+    "R41B": "Implement minimal candidate, verify exact parity and measure actual full wall/CPU and bytes",
+    "R42": "New disjoint data, calibrate matched FAP on separate null groups; BLISS/fastDD/turboSETI identical common inputs and native full pipeline separately",
+    "R38": "External custodian, independent natural signals and blind exam; existing HANNAH physical source compatibility gate unchanged"
+  },
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
