@@ -219,7 +219,7 @@ def controls():
         ix=np.array([v[1]==0 for v in rr]);assert ix.sum()==128
         rows=[v for v,x in zip(rr,ix) if x];mm=[v for v,x in zip(meta,ix) if x];R=R[ix]
         d=encode(rows,R,mm,pre);pan=b.panel(rows,R);arms=b.base_arms(pan,L["r40c"]["original"]["component_fit"])
-        q={"V":pan["Y"].astype(np.float32),"y":np.zeros(128,int),"truth":np.stack([v[7] for v in rows]),"active":np.stack([v[8] for v in rows]),"amp":np.array([v[4] for v in rows])}
+        q={"V":pan["Y"].astype(np.float32),"y":np.zeros(128,int),"truth":np.stack([v[7] for v in rows]),"active":np.stack([v[8] for v in rows]),"amp":np.array([v[4] for v in rows]),"tile_sha":np.array([v[6] for v in rows])}
         for a in t.S["paths"]:q[a+"_score"],q[a+"_paths"]=arms[a][:2]
         hh=f.historical(q,L["r40c"]);_,_,_,a=h.replay(hh,L);a=a.astype(bool);reg=d["regime"]>old["reference_cut"];d.update({"parent_alert":a,"parent_hit":np.zeros(128,bool),"joint_rescue":(~a)&(d["s"]>=old["parent_joint_min_threshold"]),"regime_high":reg})
         np.savez_compressed(O/(name+".npz"),**d)
