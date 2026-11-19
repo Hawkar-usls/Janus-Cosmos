@@ -1,0 +1,47 @@
+{
+  "schema": "janus.cosmos.r40n7.parent_trajectory.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    }
+  },
+  "selection": {
+    "seed": "R40N7-20261119-FRESH-PARENT-HOLDOUT",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Use metadata-qualified Parkes cadence and 0.1 degree sky exclusion same as N6. Exclude N6 all eight groups and N1/N2, historical, R40H/R37/R40CDE. Up to 4 new test days, minimum 2; all new days test only, no fitting. Freeze manifest before power. No weakening if insufficient."
+  },
+  "development": "Reacquire all eight N6 days using exact N6 injection seed, verify 128 raw tile hashes, prior truth, paths, y, parent alerts/hits, Joint Min and Learned05 decisions. All N6 is viewed development; six original fit days only used for model fitting, original two holdout days audit only. Investigate all 15 control alerts on two audited holdout days; dump per-row actual full 16-row selected path, frequency trajectory, ON/OFF contrasts, strongest different ON and OFF rival paths, score margins, temporal block and support, hashes. Include wrong localizations separately.",
+  "features": "Use independent raw ON/OFF row normalization, local contrast with boundaries explicitly masked and no wrapping; parent path may be nonstationary. Alternative exhaustive native R35B templates all legal starts, distinct >2 bins on >=5/16 rows; compute strongest ON and OFF alternatives independently; independent direct witness recalculation, not independent external validation. Compare parent ON coherence with OFF along same path, narrowness, four temporal block stability, odd/even, gap statistics, rival margins. Candidate path unchanged; features do not use labels or truth. Compare base parent R40G compact F+parent score? use actual parent selected path features; alternative ablation temporal only vs temporal+rival. No CROSSDAY promotion. Boundary unsupported rows explicit feature; fail-open veto if insufficient >=12 rows. Protect all correct parent hits via fitted min positive cutoff, additionally compare predeclared quantile 1% and 5% of historical correct scores (development only). Logistic and ExtraTrees trained on parent-alert rows only, class balanced. OOF group diagnostic. No fit to old heldout two days.",
+  "decision": "Keep original R40G mask and Joint Min rescue set. Veto only original parent alerts, no rerouting and no new rescue for vetoed parent alerts. Fixed Learned05 rescue; compare unfiltered Joint Min plus parent veto as main arms and Learned05 rescue plus parent veto secondary, all paired to original Joint Min. No losses of any parent or Joint Min localization including weak/shared. Compare fixed baseline R40G/Joint Min/Learned05. Freeze every model, threshold and manifest before new test powers. New holdout >=2 days, control <=35/640 rate and <=7/8 Learned05 count if nonzero. Report all arms, exact per-day losses, false paths, cost; no claim of external replication or FAP.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
