@@ -1,0 +1,49 @@
+{
+  "schema": "janus.cosmos.penrose.billiard.r41p.v1",
+  "date": "2026-11-20",
+  "status": "PREREGISTERED_ISOLATED_DEVELOPMENT",
+  "physical_inspiration": [
+    "https://mathworld.wolfram.com/IlluminationProblem.html",
+    "https://arxiv.org/abs/1703.02268"
+  ],
+  "interpretation": "Penrose room motivates explicit inaccessible-sector diagnosis; use actual specular elliptical billiard dynamics in abstract bank coordinates, not a simulation of the full Penrose room and not reflection of radio power or physical signal. No new paths outside legal existing bank.",
+  "source_r41a_lock_sha256": "94ddfe6a690f8e78253aa9387c409687ca1a37d3a69672be870f75ac77252c67",
+  "source_n10_lock_sha256": "ecb99e581270f3617171578a9983e0f2ad5069267318d7cc9210756769794646",
+  "data": "Same 11 already-viewed groups, 176 native tiles, 3168 rows, same seed, reference R41B minimal. Six fit days descriptive and five audit separately. No training or new independent science.",
+  "methods": [
+    "canonical",
+    "random",
+    "stratified",
+    "ellipse_single",
+    "ellipse_multi",
+    "ellipse_multi_darkfill"
+  ],
+  "geometry": {
+    "a": 1,
+    "b": 0.63,
+    "seed": 41201,
+    "orbits": 8,
+    "bounces_per_orbit": 4096,
+    "chord_samples": [
+      0.2,
+      0.5,
+      0.8
+    ],
+    "sector_grid": [
+      8,
+      8
+    ],
+    "darkfill_every": 4,
+    "budgets": [
+      512,
+      2048,
+      8192
+    ]
+  },
+  "comparison": "Every schedule is a permutation of same canonical bank. Ellipse samples map to ordered template index (endpoint drift/curvature/shape) and relative legal start bin. Deduplicate; explicit canonical completion for unreachable points. Darkfill interleaves least-visited nonempty sectors with fixed deterministic queues. Fixed budgets count candidate attempts incl excluded parent basin. Compare coverage of 64 sectors, unique true winners, max score gap, frozen tree counterfactual decisions, paired losses/control alerts, and actual warm kernel wall and term evaluations. No approximate candidate is promoted.",
+  "exact": "Exact branch-and-bound: only prune a legal candidate if observed prefix sum plus suffix of per-row maxima is strictly below incumbent sum by 1e-10 (values clipped [-4,4]), no fastmath, canonical tie ID, every geometry considered. Verify full bank rivals scores and paths bitwise against original on all parents, frozen tree decisions likewise. No claim of speed if not measured. Every exact arm must reproduce minimal JANUS, approximate prefix diagnostic only. Include one synthetic selftest for reflection speed conservation, ellipse boundary, full tie ordering, clipped row bound, and prefix oracle.",
+  "control_target": "R41A 53 on five viewed audit groups, 38 parent +15 rescue; <=35/640 and zero paired loss not changed. Exact reorder cannot remove more alarms by definition, tests computational efficiency; approximate prefix could change signals, cannot deploy without independent scientific validation.",
+  "cost": "Measure ordering setup independently, cold compilation, warm scan kernel time, shared common baseline/acq time, term visits vs total candidate attempts, report no full pipeline speed claim. Per-group checkpoints and final summary. Preserve R41B active run and R28 production.",
+  "production_adoption": false,
+  "external_validation": false
+}
