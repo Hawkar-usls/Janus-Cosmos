@@ -1,0 +1,59 @@
+{
+  "schema": "janus.cosmos.r40n9.edge_invariance.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "n7": {
+      "id": 14535335679,
+      "sha256": "769b6aeab2fabb9d58707babc4b9e8d1d06e6215cb0b4d2b54f5a2e3eb5af803",
+      "lock_sha256": "81a49cd42dac1762d77ec8cc6ea3a75ed8ac3c9695bc28cf4562e42e274ec494",
+      "manifest_sha256": "a6579533eeb1e3bc3c9b72b36df2e2ba0e7986d1303f3a798baf0d50bb6250b3"
+    },
+    "n8": {
+      "id": 14539143940,
+      "sha256": "850913e6f4ba1cfe0905685173014a817a55f7573ba705dc55c75abdf5a87e6f",
+      "lock_sha256": "7d3105e57c85b9a28e3f4bba87b65f3e5986cb30cdbe87e49ab63a4bff75c315",
+      "manifest_sha256": "849490acbc7790a9c0300f8a91b978d35d9bc8f654141421a6581f3a898bc137"
+    }
+  },
+  "selection": {
+    "seed": "R40N9-20261119-EDGE-INVARIANCE",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Strict Parkes metadata selection as N8; exclude N8 four, N7 four, N6 eight, N1/N2, historical/R40H/R37/R40CDE, prior raw hashes; four new days, minimum two. Freeze before fresh power; all new days holdout only."
+  },
+  "development": "Authenticate manifests/locks N6 N7 N8. Reacquire 16 previous groups, exact 256 source tiles and N8 feature/decision parity. Audit all N8 Combined Tree q01 vs N7 tree-preserve control changes (including increases), and losses of runs tree q05 against Joint Min; audit WISE0350-5658 row129 and prior two suppressions. All viewed holdouts audit only; fit same six N6 fit days. No case-specific tuning.",
+  "features": "For original 128-bin parent path, locate exact signed native-bin coordinate in original raw ON/OFF aligned tiles; require real 40-bin halo on both sides (208 samples total). Copy raw halo; replay only original center patch including synthetic injections, verify unmodified background and exact center. No padding/resampling, fail open if halo unavailable. Compare three translated 176-bin contexts (start -16, 0, +16 relative to 24-bin halo around 128 core) on same absolute parent coordinates. Fixed full-halo row normalization, local ±3,4,5 contrasts, direct exact mapped parity across crops; separately calculate context-specific normalization and fixed physical common legal alternative search domain (absolute 37..170 inclusive in 208-bin coordinate), distinct >2 bins in >=5 rows, R35B native bank. Compute independent ON/OFF parent mean, lower block, restored formerly masked contrast, local ±2 residual, rival margin, crop-specific score spread, alternative winner disagreement; separately record shifted 128-core support. Compact 18 halo features (9 per ON/OFF), exact parity on all 16 rows with fixed scaling, extra diagnostic no causal attribution. On synthetic test perturb shifted context, check coordinate parity and edge abstention. Original parent path fixed; no independent new detection claim; no label/true path in features. Train baseline 42, baseline+18 halo, halo-only and compact N8+halo hybrid? use three feature sets baseline, baseline+halo, halo-only; logistic/tree and preserve/q01/q05. Compare fixed N7 and N8. No addition of high-dimensional folds to new model.",
+  "decision": "Freeze 18 new candidate arms and exact old baselines before fresh power reads. Same support definition in trained arms, fail-open insufficient halo; exact fixed N7/N8 unaffected. Joint rescue and original parent path untouched; no new rescue for vetoed parents. Zero original paired losses ordinary/shared/weak, <=35/640 fraction and <=7/8 Learned05, report exact counts and abstention, by-day and OOF. External validation and production HOLD.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
