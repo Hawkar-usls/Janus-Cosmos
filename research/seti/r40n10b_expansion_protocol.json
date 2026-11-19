@@ -1,0 +1,126 @@
+{
+  "schema": "janus.cosmos.r40n10b.expansion.v1",
+  "date": "2026-11-19",
+  "status": "PREREGISTERED_FROZEN_TRANSFER",
+  "source": {
+    "id": 14557149553,
+    "sha256": "42135d88595a53b0bdd3cb5b3ed12d18dffb4d4f9debfcd1ce067fb67ef2898b",
+    "lock_sha256": "ecb99e581270f3617171578a9983e0f2ad5069267318d7cc9210756769794646",
+    "manifest_sha256": "ef1994b6a55e180bf4251bc951c061d9d30b4c724d04d785ea00afd81b559329",
+    "run": 44570657066
+  },
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "n7": {
+      "id": 14535335679,
+      "sha256": "769b6aeab2fabb9d58707babc4b9e8d1d06e6215cb0b4d2b54f5a2e3eb5af803",
+      "lock_sha256": "81a49cd42dac1762d77ec8cc6ea3a75ed8ac3c9695bc28cf4562e42e274ec494",
+      "manifest_sha256": "a6579533eeb1e3bc3c9b72b36df2e2ba0e7986d1303f3a798baf0d50bb6250b3"
+    },
+    "n8": {
+      "id": 14539143940,
+      "sha256": "850913e6f4ba1cfe0905685173014a817a55f7573ba705dc55c75abdf5a87e6f",
+      "lock_sha256": "7d3105e57c85b9a28e3f4bba87b65f3e5986cb30cdbe87e49ab63a4bff75c315",
+      "manifest_sha256": "849490acbc7790a9c0300f8a91b978d35d9bc8f654141421a6581f3a898bc137"
+    },
+    "n9": {
+      "id": 14550292453,
+      "sha256": "3dae37aacb3df5b195118fb60141239e14528c44121e0fc6cc2037ebd88aa934",
+      "lock_sha256": "e71d68cd8f3dcfebcbce1e9155ce4630deefae6db73fa51339e528311bb9801b",
+      "manifest_sha256": "84be305b813e47b1f367c43ec95d595ad0a97ea3c6bc81d5e7d2622d14a12c98"
+    }
+  },
+  "selection": {
+    "seed": "R40N10B-20261119-FROZEN-EXPANSION",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 400,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Same metadata-only selection, exclude all N1/N2/N6/N7/N8/N9 and historical/R40H/R37/R40CDE targets, days, sky and raw source hashes including N5A bank/replay; four fresh Parkes groups, minimum two, otherwise HOLD. Freeze manifest before any new power; freeze model before fresh reads.",
+    "workers": 4
+  },
+  "prior_rejection": {
+    "queries": 237,
+    "zero_eligible_files": 133,
+    "targets_with_cadence": 50,
+    "cadences": 123,
+    "unlabelled_assertion": 93,
+    "range_refusal": 28,
+    "sky_overlap": 2
+  },
+  "lanes": {
+    "same_receiver": {
+      "target": 4,
+      "minimum": 2,
+      "rule": "Re-query exact base and _S/_R aliases from full old 237-candidate ledger and current archive index. Deterministic priority: previously candidate cadence then all other names. Detailed gate labels replacing unlabeled assertions; original strict 16 rows, expected source, frequency, time, WCS and pointing gates unchanged; exact N6 native resolution/time match. No power until both manifests frozen."
+    },
+    "uwl": {
+      "target": 4,
+      "minimum": 2,
+      "rule": "Separately report Parkes UWL subband transfer (receiver, native cadence/frequency differences; no pooled same-receiver conclusion). Query metadata-only 22 published TIC systems excluding corrupt TIC 251852984, additional TIC aliases from index, explicit _S/_R, published dates not selection by event results. Four native windows 2850/3050/3250/3330 MHz; high-resolution HDF5, matching headers, same physical scan per four subbands, exactly four alternating ON/OFF independent scans in same cadence, actual source and pointing and signed WCS checked. At least 16 native integrations, first 16 consecutive original rows with no resampling, record original nrows/df/ts; only Stokes/total-intensity one IF, no polarization mixing. Header-based timing, metadata MJD rounding <=5 sec; same sky exclusion and same-day disjointness across lanes. Fail closed if missing subband or incompatible metadata. Predeclare fixed one-file-per-window selection, no power-based replacement. Use old N10 model, no fit or cutoff changes, score same bin/time template as a transfer test."
+    }
+  },
+  "published_uwl": {
+    "paper": "https://doi.org/10.1017/pasa.2025.10060",
+    "table": "https://arxiv.org/html/2506.13459v1#S8",
+    "targets": [
+      "TIC118327533",
+      "TIC130924120",
+      "TIC134200185",
+      "TIC183985250",
+      "TIC220016044",
+      "TIC230982885",
+      "TIC260304296",
+      "TIC260647166",
+      "TIC280206394",
+      "TIC299799658",
+      "TIC31268146",
+      "TIC317060587",
+      "TIC33911302",
+      "TIC351601843",
+      "TIC370133522",
+      "TIC371443216",
+      "TIC380589029",
+      "TIC38509907",
+      "TIC402026209",
+      "TIC440887364",
+      "TIC70524163",
+      "TIC80166433"
+    ],
+    "excluded": [
+      "TIC251852984"
+    ],
+    "note": "Published study describes 25 sessions, 3650 HDF5 files, but availability/qualification of particular files is unverified; use only public source metadata, not published signal labels."
+  },
+  "independence": "All pinned historical manifests, N1/N2/N6/N7/N8/N9 and N10 864 excluded native hashes, target aliases, days, files, sky guard 0.1 deg. Metadata-only freeze before power. No use of previously assessed 3I/ATLAS data; explicitly exclude ATLAS variants. Separate lane gates require >=2 qualified and acquired groups; no pooled results; count failed acquisitions as HOLD for entire lane, do not replace after exposure.",
+  "model": "Exact authenticated N10 lock reused byte-for-byte, no training, no threshold selection, parent N7/N8/N9 frozen and unchanged. Test all 24 N10 variants descriptively; no external exam. Use N10 measure and exact Turbo parity. Same synthetic injection and stationary repeat stress, native recorded backgrounds. Gate zero paired ordinary/shared/weak/stress losses, at least one stress case, controls <=35/640 and <=7/8 Learned05. Retain per-group artifacts, source hashes, metadata rejection ledger. Production R28 unchanged.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
