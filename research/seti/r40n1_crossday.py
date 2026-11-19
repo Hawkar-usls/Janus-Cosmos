@@ -2,7 +2,7 @@
 """R40N1 frozen expanded metadata census, cross-day witness and KUSTO research replay."""
 import sys
 sys.argv[1:]=["controls"]
-import json,pathlib,time,hashlib
+import json,pathlib,time,hashlib,io
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -110,7 +110,7 @@ def main():
     seen=set(fr["excluded_raw_hashes"]);seen.update(v for r in kr["rows"] for v in r["raw_tile_hashes"]);seen.update(v for r in kl["calibration"] for v in r["raw_tile_hashes"])
     for name in rn:
         if name.endswith(".npz"):
-            q=f.load(rz,rn,name);seen.update(q["source_tile_sha"].tolist())
+            with np.load(io.BytesIO(rz.read(rn[name])),allow_pickle=False) as q:seen.update(q["source_tile_sha"].tolist())
     bank=[];controls=[];records=[]
     for g in m["selected"]:
         name=g["target"];rr,R,ch,hs,meta,cm,pre=n.gather(g,name);assert len(hs)==16 and not seen&hs;seen.update(hs)
