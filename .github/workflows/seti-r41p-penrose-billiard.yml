@@ -1,0 +1,200 @@
+name: JANUS R41P Penrose billiard exact search
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r41p-penrose-billiard.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r41p-penrose-billiard
+  cancel-in-progress: false
+jobs:
+  development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install numpy==2.2.6 requests==2.32.3 scipy==1.15.3 scikit-learn==1.6.1 h5py==3.13.0 hdf5plugin==5.0.0 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Compile Penrose-inspired search
+        run: python -m py_compile research/seti/r41p_penrose_billiard.py
+      - name: Authenticate source locks, simulate ellipse, verify synthetic prefix and exact ties
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py prepare
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-00-prepare
+          path: |
+            runtime/r41p/progress/00-prepare.json
+            runtime/r41p/schedule_receipt.json
+            runtime/r41p/schedule.npz
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 01 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-01
+          path: |
+            runtime/r41p/progress/group-01.json
+            runtime/r41p/group-01.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 02 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-02
+          path: |
+            runtime/r41p/progress/group-02.json
+            runtime/r41p/group-02.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 03 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-03
+          path: |
+            runtime/r41p/progress/group-03.json
+            runtime/r41p/group-03.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 04 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-04
+          path: |
+            runtime/r41p/progress/group-04.json
+            runtime/r41p/group-04.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 05 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-05
+          path: |
+            runtime/r41p/progress/group-05.json
+            runtime/r41p/group-05.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 06 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 5
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-06
+          path: |
+            runtime/r41p/progress/group-06.json
+            runtime/r41p/group-06.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 07 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 6
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-07
+          path: |
+            runtime/r41p/progress/group-07.json
+            runtime/r41p/group-07.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 08 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-08
+          path: |
+            runtime/r41p/progress/group-08.json
+            runtime/r41p/group-08.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 09 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 8
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-09
+          path: |
+            runtime/r41p/progress/group-09.json
+            runtime/r41p/group-09.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 10 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 9
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-10
+          path: |
+            runtime/r41p/progress/group-10.json
+            runtime/r41p/group-10.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Paired six-order exact and bounded search group 11 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py group 10
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-group-11
+          path: |
+            runtime/r41p/progress/group-11.json
+            runtime/r41p/group-11.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Summarize exact parity, dark sector coverage and bounded counterfactuals
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41p_penrose_billiard.py summary
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41p-progress-99-summary
+          path: |
+            runtime/r41p/progress/99-summary.json
+            runtime/r41p/result.json
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r41p-penrose-billiard
+          path: |
+            runtime/r41p/*.json
+            runtime/r41p/*.npz
+            runtime/r41p/progress/*.json
+          retention-days: 90
+          if-no-files-found: warn
