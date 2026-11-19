@@ -1,0 +1,53 @@
+{
+  "schema": "janus.cosmos.r40n8.temporal_fold_witness.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "n7": {
+      "id": 14535335679,
+      "sha256": "769b6aeab2fabb9d58707babc4b9e8d1d06e6215cb0b4d2b54f5a2e3eb5af803",
+      "lock_sha256": "81a49cd42dac1762d77ec8cc6ea3a75ed8ac3c9695bc28cf4562e42e274ec494",
+      "manifest_sha256": "a6579533eeb1e3bc3c9b72b36df2e2ba0e7986d1303f3a798baf0d50bb6250b3"
+    }
+  },
+  "selection": {
+    "seed": "R40N8-20261119-FRESH-FOLD-WITNESS",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Same strict Parkes metadata selection as N7; exclude all N7 four fresh days, N6 eight groups, N1/N2, historical/R40H/R37/R40CDE; up to four new days, minimum two. No fit or threshold selection on fresh spectra, labels or outcomes."
+  },
+  "development": "Authenticate N6 and N7 exact manifests, locks and receipts; reacquire 12 old groups (192 unique tile hashes) using original N6 or N7 seed. Confirm exact raw hashes, labels, parent path/decision, R40N7 temporal and rival features; reproduce frozen N7 tree-preserve and logistic-q01 decision masks on all four previously fresh groups. Audit exactly the two removed control alerts (WISE0350-5658 and GJ1005) and single lost positive WISE0350-5658: original parent/true path, active rows (audit only), actual ON/OFF contrasts, frequency trajectory, old/new features, fold winners and heldout scores. N7 four and N6 two old holdout groups audit only, same six N6 fit groups for all learning; no optimization on individual failures.",
+  "features": "Run N7 witness unchanged. New continuity features from valid row masks at fixed contrast .5/1/2: longest positive run, longest gap, transitions, isolated support, count, support fraction; masked rows terminate runs. Parent residual local maximum within ±2 native bins, mean absolute offset, stability and amplitude; ON/OFF independent. Four directed 8-row folds: first-to-second, second-to-first, even-to-odd, odd-to-even. For each ON/OFF independently, choose best alternative template from all legal full 16-row R35B paths using ONLY the selected 8 training rows, require >2-bin distinction from parent on >=3 training rows; evaluate that fixed path in heldout 8 rows, contrast parent vs rival and train-test spread; compare winners' heldout agreement. Candidate parent path was preselected on all 16 rows, so fold witness is not independent detection, only disjoint rival selection/evaluation. Require >=4 valid candidate rows per fold plus prior >=12/16 or fail-open. Direct recalculation of both scores. No truth/gap injection labels in features.",
+  "decision": "Frozen N7 rivals tree preserve and rivals logistic q01 as exact comparators, with unfiltered Joint Min rescue; compare new base+runs, base+folds, base+runs+folds, with logistic/ExtraTrees and three fixed thresholds preserve/q01/q05. Also matched retrained base. 24 new joint-veto variants plus fixed comparators; report all. Original parent path and Joint Min rescue unchanged, no rerouting; freeze fit and cutoffs before fresh test power reads. Zero paired losses ordinary/shared/weak, <=35/640 control rate and <=7/8 Learned05, compare previous rival gains. No external validation or promotion.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
