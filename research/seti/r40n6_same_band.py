@@ -116,8 +116,8 @@ def main():
             for path in t.S["paths"]:inp[path+"_score"],inp[path+"_paths"]=arms[path][:2]
             alert,path,hit=l.parent(inp,L);assert np.array_equal(inp["y"],d["y"])
             joint=(~alert)&(d["s"]>=old["parent_joint_min_threshold"])
-            v=old["models"] if "models" in old else None
-            d.update(parent_alert=alert,parent_hit=hit,parent_path=path,joint_rescue=joint,truth=inp["truth"],active=inp["active"],amp=inp["amp"])
+            learned=((d["F"]-np.asarray(old["mean"]))/np.asarray(old["scale"]))@np.asarray(old["coef"])[0]+old["intercept"][0]
+            d.update(parent_alert=alert,parent_hit=hit,parent_path=path,joint_rescue=joint,learned05_alert=alert|(joint&(learned>=old["thresholds"]["learned05"])),truth=inp["truth"],active=inp["active"],amp=inp["amp"])
             augment(d,day);out.append((kind,d))
         rec={"target":name,"day":day,"split":g["split"],"raw_tile_hashes":sorted(hs),"ordinary":256,"shared":32}
         emit("R40N6_ACQUIRED",rec)
@@ -187,8 +187,6 @@ def main():
         assert c.sha((O/"lock.json").read_bytes())==lh
         rec,ds=acquire(g);holdout_records.append(rec);save("holdout_records.json",holdout_records)
         for kind,d in ds:
-            # R40L learned score is reproduced from its frozen logistic parameters.
-            # Use the exact frozen R40L model/threshold keys, see source contract below.
             row={"record":kind+"_"+g["target"],"metrics":measure(d,True)}
             results.append(row);np.savez_compressed(O/("holdout_"+kind+"_"+g["target"]+".npz"),**d)
             save("partial.json",results);emit("R40N6_GROUP",row)
@@ -197,6 +195,6 @@ def main():
         rr=[r["metrics"] for r in results if r["record"].startswith(kind+"_")];assert len(rr)==2
         return {a:{k:sum(v[a][k] for v in rr) for k in rr[0][a]} for a in rr[0]}
     e=total("eval");sh=total("shared");base=e["learned05"]["control_alerts"]
-    gates={a:e[a]["lost_joint"]==sh[a]["lost_joint"]==0 and e[a]["lost_parent"]==sh[a]["lost_parent"]==0 and e[a]["control_alerts"]*640<=35*256 and e[a]["control_alerts"]*8<=7*base for a in e}
+    gates={a:e[a]["lost_joint"]==sh[a]["lost_joint"]==0 and e[a]["lost_parent"]==sh[a]["lost_parent"]==0 and e[a]["control_alerts"]*640<=35*256 and (base==0 and e[a]["control_alerts"]==0 or base>0 and e[a]["control_alerts"]*8<=7*base) for a in e}
     result={"status":"NEW_DAY_DEVELOPMENT_HOLDOUT_ONLY","manifest_sha256":mh,"fit_groups":len(groups0)-2,"holdout_groups":2,"fit_records":records,"holdout_records":holdout_records,"eval":e,"shared":sh,"gates":gates,"oof":auc,"rows":results,"lock_sha256":lh,"seconds":time.perf_counter()-start,"production_adoption":False};save("result.json",result);emit("R40N6_SUMMARY",{k:v for k,v in result.items() if k not in ("rows","fit_records","holdout_records")})
 if __name__=="__main__":main()
