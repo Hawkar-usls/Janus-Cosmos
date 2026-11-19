@@ -1,0 +1,189 @@
+name: JANUS R41 consolidation tournament
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r41-consolidation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r41-consolidation
+  cancel-in-progress: false
+jobs:
+  development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install numpy==2.2.6 requests==2.32.3 scipy==1.15.3 scikit-learn==1.6.1 h5py==3.13.0 hdf5plugin==5.0.0 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Compile R41 common-panel tournament
+        run: python -m py_compile research/seti/r41_consolidation.py
+      - name: Authenticate all 11 old groups and frozen model
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py prepare
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-00-prepare
+          path: |
+            runtime/r41/progress/00-prepare.json
+            runtime/r41/plan.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 01 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-01
+          path: |
+            runtime/r41/progress/profile-01.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 02 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-02
+          path: |
+            runtime/r41/progress/profile-02.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 03 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-03
+          path: |
+            runtime/r41/progress/profile-03.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 04 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-04
+          path: |
+            runtime/r41/progress/profile-04.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 05 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-05
+          path: |
+            runtime/r41/progress/profile-05.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 06 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 5
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-06
+          path: |
+            runtime/r41/progress/profile-06.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 07 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 6
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-07
+          path: |
+            runtime/r41/progress/profile-07.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 08 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-08
+          path: |
+            runtime/r41/progress/profile-08.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 09 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 8
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-09
+          path: |
+            runtime/r41/progress/profile-09.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 10 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 9
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-10
+          path: |
+            runtime/r41/progress/profile-10.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Exact raw replay and cost profile 11 of 11
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py profile 10
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-profile-11
+          path: |
+            runtime/r41/progress/profile-11.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Common-support ablations, legacy baselines, paired gates and tentative winner lock
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r41_consolidation.py tournament
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r41-progress-99-summary
+          path: |
+            runtime/r41/progress/99-summary.json
+            runtime/r41/winner_lock.json
+            runtime/r41/result.json
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r41-consolidation
+          path: |
+            runtime/r41/*.json
+            runtime/r41/*.npz
+            runtime/r41/progress/*.json
+          retention-days: 90
+          if-no-files-found: warn
