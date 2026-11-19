@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.r40n5a.verified_frequency_bank.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n3": {
+      "id": 14520361984,
+      "sha256": "7847b6370662c6f3975e9d775065b54d4c908ffa9a53bfaf82308e47a712c53a",
+      "lock_sha256": "32640d0b3a0f9ce283bde07555313f1e69e788921072ed7c2dadb8f02df33189"
+    },
+    "replay": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5": {
+      "id": 14525438133,
+      "sha256": "681a867613b1c162794db6148540bf40b8d5accbde86f9fd6bc654c98cd6c9fd"
+    }
+  },
+  "windows": {
+    "historical_mhz": [
+      2860,
+      3010,
+      3150,
+      3400
+    ],
+    "evaluation_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "historical_read_half_hz": 52000,
+    "original_candidate_half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "retained_unused_mhz": [
+      2800,
+      3000,
+      3200,
+      3370
+    ]
+  },
+  "bank": "Authenticate N3 banks; verify N1/N2 manifests, exact same 8 days, target and raw identity. Read four additional historical windows per each of the 32 frozen scans only, native HDF5 header parity, no injected power and no new selection; 128 additional raw tile hashes, disjoint from prior known raw tile hashes. Preserve original 128 grid hashes and N5 unused 128 grid hashes separately; disjoint new tile hashes. Retained blocks are contrast grids and raw tile hashes, not original power arrays; raw files remain in source archive. Use 52 kHz half-window to cover ±32-bin neighborhood and ±256-bin placebo shift at edges. Route to band using actual candidate MHz and fixed centers with <=50.1kHz tolerance, never based on labels. No interpolation. Separate indexed four-window banks. Matched seven-day support using N4 method. Frequency-shift placebo sign reversed only if initial direction lacks full coverage; same coverage required for real and placebo.",
+  "audit_gate": "Before any fit, audit measured candidate MHz range and per-window counts for all historical groups and calibration; old bank must show historical missing coverage, new bank central, neighborhood and placebo coverage exactly 1 for every historical and calibration candidate. Require at least one nonconstant noncoverage feature for each central, neighborhood and placebo on parent-rejected historical data (std>1e-12); report all values, coefficients and group-held-out AUC. If missing or degenerate, HOLD before fit. After lock, require full evaluation coverage, separately report any failure and never silently impute zero. Historical window data used for learning, existing 1024 new-window null patches for threshold calibration, R40H new-window evaluation; no new-window labels in fitting. Domain transfer remains a limitation.",
+  "fit": "Same N4 raw/central/neighborhood/placebo, logistic C=.1, ExtraTrees128 depth4 minleaf8 seed401, historical group OOF, identical 5 cuts, 487/487 strata, lock before evaluation labels. Explicitly compare real recurrence vs equal-dimensional shifted placebo. No tuning to viewed R40H, no parent/path changes. Replay developmental only; 215/43 ordinary, 111/36 shared, <=35 alerts, zero paired Joint Min losses. Compare fixed R40L and N3. No independent exam or deployment.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false,
+  "frequency_authority": {
+    "run": 44485687228,
+    "job": 135428447854,
+    "scope": "44 R9_READ receipts; actual historical centers 2860/3010/3150/3400, R40H 2850/3050/3250/3330. Do not use default config."
+  },
+  "preflight": "Before any new power download, read only frequency_mhz member of every replay NPZ (historical cal/eval/shared and eval/shared) and N3 control NPZ; report actual native frequency ranges and counts; require all 1664 historical and 1440 evaluation and 1024 calibration rows within declared windows. Check frozen header bounds for 52kHz historical windows and all 32 scans. Save and hash preflight report; no evaluation labels or other features before lock. Authenticate N5 unused grids and 128 source hashes, copy to separate archive with explicit unused flag; no model access to unused windows. 384 total source blocks across twelve windows if complete, 256 actively used. Keep coverage/variance and all metrics gates unchanged."
+}
