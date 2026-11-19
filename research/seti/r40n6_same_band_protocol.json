@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.r40n6.same_band_development.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n3": {
+      "id": 14520361984,
+      "sha256": "7847b6370662c6f3975e9d775065b54d4c908ffa9a53bfaf82308e47a712c53a",
+      "lock_sha256": "32640d0b3a0f9ce283bde07555313f1e69e788921072ed7c2dadb8f02df33189"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "replay": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    }
+  },
+  "selection": {
+    "seed": "R40N6-20261119-SAME-BAND-DEVELOPMENT",
+    "groups": 8,
+    "min_groups": 6,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Parkes only; deterministic all exact S aliases including HIP, GJ etc from published list-targets. Same strict R37B native cadence/headers, target/day/file/URL and 0.1 degree sky exclusions including N1+N2, historical/R40H/R37/R40CDE. Exclude all known original and new raw tile hashes; manifest fixed before power. Stop at 8 eligible groups, if 6-7 use first N-2 fit and last 2 holdout; fewer than 6 report partial metadata only, no relaxed rules."
+  },
+  "labels": "128 synthetic injected positives, 128 corresponding unmodified backgrounds and 32 shared-reference stationary leakage injections per day via pinned R40N gather methodology and new fixed seed. Same 4 candidate windows and amplitude/path/gap distribution. No natural-null or real source label claim. Recompute frozen R40G and Joint Min with no path changes; record provenance and truth arrays for development. Holdout spectra/labels not read before candidate lock. No external exam claim.",
+  "fit": "New same-band fit groups only. Separate authenticated 8-day N3 recurrence bank and 1024 null calibration patches (487/487 parent-rejected strata) unchanged; no own training day in bank. Neighborhood and matched-placebo from N5A, full coverage and nonconstant noncoverage columns required. Fixed raw, central, neighborhood, placebo logistic/tree; group-held-out OOF diagnostic and five prespecified cuts. Also report prior N5A/R40H as historical comparison only; no use of R40H in fit or candidate selection. Freeze all models/cuts before acquiring 2 new holdout days; report all variants, no tuning on holdout.",
+  "gate": "On new holdout: zero paired Joint Min losses ordinary/shared including weak, no R40G loss, control alert fraction <=35/640 and <=7/8 of frozen Learned05 count if nonzero. Report exact counts and per-day data, wrong paths and coverage. Gate not external validation; 2 days not sufficient for general FAP. No production/adoption/exam start.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
