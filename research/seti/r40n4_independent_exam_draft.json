@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cosmos.r40n4.external_exam_draft.v1",
+  "status": "DRAFT_AWAITING_EXTERNAL_CUSTODIAN_AND_ELIGIBLE_FROZEN_MODEL",
+  "scope": "Independent prospective raw-archive injection exam and separate natural-control lane; no real discovery claims. R40H excluded from independent performance evidence.",
+  "roles": {
+    "custodian": "Independent party (not yet engaged) selects and seals target/session metadata, background hashes, injected labels, paths, strengths and natural-control provenance. No label or test-spectrum access by developers before lock.",
+    "developer": "Nominate one model only after development gate passes; publish code, environment/dependency digests, weights, threshold lock, reference-bank hashes and inference-only command before receiving exam inputs. No refit, threshold adjustment, manual review or dropout.",
+    "reviewer": "Verify input hashes, frozen model execution, native comparator settings, complete per-row outputs, paired metrics and exclusions before label release."
+  },
+  "design": {
+    "instrument": "Parkes native S-band and fixed windows 2850/3050/3250/3330 MHz, 16 rows, native df/ts. A separately preregistered stratum is required for GBT or different hardware.",
+    "minimum_groups": 12,
+    "patches_per_group": {
+      "injected_positive": 128,
+      "unchanged_background": 128,
+      "shared_reference_stress": 32
+    },
+    "selection": "Metadata-only, target, observing day, source-file SHA, raw tile SHA and angular separation >=0.1 deg from all prior training/calibration/development/test groups and custodian groups. Independent custodian verifies catalog aliases as far as possible; no silent relaxation. If 12 eligible groups unavailable, HOLD or preregister a different instrument with separate fit/calibration before exam.",
+    "split": "No exam group in training, calibration or frequency recurrence bank. New independent calibration groups if needed must be distinct and acquired before candidate freeze. Exact test size fixed by custodian and sealed before access; no sequential stopping.",
+    "truth": "Custodian privately chooses fixed injection distribution and disjoint seeds, amplitudes and physically valid drift paths; preserve unmodified backgrounds. Shared injection stress is not a physical extraterrestrial signal. Natural controls require measured hardware and independent physical provenance, separate metrics; unknown background is not verified null sky."
+  },
+  "comparators": {
+    "required": [
+      "frozen R28",
+      "frozen R40G",
+      "Joint Min",
+      "R40L Learned05",
+      "selected single JANUS candidate",
+      "BLISS",
+      "fastDD",
+      "turboSETI"
+    ],
+    "rule": "Same native data, search coverage, matched calibration budget from disjoint calibration, frozen settings, localization tolerance <=2 native bins on >=75% active rows, complete CPU/wall acquisition and inference costs reported separately. Preserve timeouts/failures in denominators; no silent exclusions."
+  },
+  "gates": {
+    "paired": "Zero paired Joint Min localized-positive losses, including weak and shared stress. Candidate ordinary/shared sensitivity no lower than Joint Min. Evaluate baseline alert rate and candidate alert rate on unchanged backgrounds; target <=35/640 (5.46875%), and <=7/8 of R40L control-alert rate. Exact realized paired counts and day-cluster bootstrap 95% intervals, all per-day data, no claim of formal campaign FAP from patch counts.",
+    "independence": "All locked outputs committed/hashes before label release, external custodian verifies and documents result. Failed exam cannot be relabeled independent after tuning. New unused groups required for retest.",
+    "production": "HOLD until independent evidence, natural control and full native pipeline safety/efficiency gates pass."
+  },
+  "production_adoption": false,
+  "external_custodian_confirmed": false,
+  "exam_started": false
+}
