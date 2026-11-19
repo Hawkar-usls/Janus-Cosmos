@@ -1,0 +1,22 @@
+{
+  "schema": "janus.cosmos.r40n4.neighborhood.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n3": {
+      "id": 14520361984,
+      "sha256": "7847b6370662c6f3975e9d775065b54d4c908ffa9a53bfaf82308e47a712c53a",
+      "lock_sha256": "32640d0b3a0f9ce283bde07555313f1e69e788921072ed7c2dadb8f02df33189"
+    },
+    "replay": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    }
+  },
+  "audit": "Authenticate 8 bank grids and reproduce R40N3 crossday vectors exactly; report per-column variance, range, unique counts, historical label AUC, coefficient magnitudes, and zero variance. Group-held-out historical train comparison with out-of-fold AUC on parent-rejected rows. No exam labels before candidate lock.",
+  "neighborhood": "Use native day grids of clipped time-mean local contrast, same topocentric frequency, signed df, nearest bin, no power interpolation. At fixed ±2, ±8 and ±32 native channels quantify matched ON/OFF local maxima, surrounding occupancy and recurrent peak alignment across different days. Hold missing coverage flag explicit; aggregate robust median and mean, not an automatic veto. On control day exclude same day, match train/test support by computing each 7-day leave-one-day-out subset from eight and averaging their feature vectors; do not use identity as feature. Add synthetic canaries for offset recurrence, signed channels and off-band abstention. Compare raw-only, central-only, neighborhood-only increment and same-dimensional deterministic frequency-shift placebo (+/- 256 bins), all predeclared. No claims of physical attribution.",
+  "fit": "Historical 4 groups ordinary/shared only; group held-out AUC diagnostic. Fit fixed balanced logistic C=.1 and ExtraTrees128 maxdepth4 minleaf8 seed401, same parent-rejected correct-label objective. Preserve threshold from historical joint correctly localized rescues plus new control pooled and conditional 2.5% cuts; additional historically calibrated 0.5% cuts for specificity, no threshold searches on R40H. Compare with fixed R40N3 lossless tree and learned05. No changes to R40G or candidate paths. Freeze all candidate models and score thresholds with full bank hashes before any R40H feature/label read. Report every arm, paired losses, wrong paths and exact alert decisions. Strict gate <=35 control alerts, >=215/43 and >=111/36 shared, zero paired Joint Min loss. No production adoption.",
+  "exam": "Protocol only: independent custodian selects additional native Parkes target/day/sky-disjoint groups or separately calibrated telescope; keep raw hashes/labels private, freeze selected single candidate before release, matched BLISS/fastDD/turboSETI, identical raw inputs, report clustered intervals and costs, real natural controls and no post-hoc exclusions. R40H replay not independent, no claim of exam started or external custodian obtained.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
