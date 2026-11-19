@@ -1,0 +1,34 @@
+{
+  "schema": "janus.cosmos.r40n1.crossday.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "partial": {
+      "id": 14510779142,
+      "sha256": "1336eb5d0f7fb83751306c06f4d62f7e4d80355ada8a1a61620269829d12ffb4"
+    },
+    "replay": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    }
+  },
+  "selection": {
+    "seed": "R40N1-20261119-METADATA-EXTENSION",
+    "target_groups": 8,
+    "max_queries": 800,
+    "max_header_candidates_per_target": 20,
+    "retain": [
+      "HIP29271",
+      "HIP42808",
+      "HIP93069",
+      "HIP55691"
+    ],
+    "rule": "Authenticate R40N partial manifest, revalidate four retained metadata groups; exclude all prior targets/days/exact coordinates and all known raw hashes; no reuse of retained day or coordinate. Extend deterministic metadata-only Parkes target search over up to 800 names, including alternate valid cadences not previously inspected. Save attempts and manifest before opening power. If fewer than 8, preserve partial acquisition but HOLD KUSTO and model gate. No mixing telescopes or loosening cadence criteria. Exact coordinate only; alias completeness unproven."
+  },
+  "controls": "128 unmodified ON background patches per independent target/day, paired OFF; source hashes disjoint. Exactly 1024 patches at 8 groups. These are not verified physical nulls. KUSTO fixed R40L reference regime split, each stratum >=128 parent-rejected patches and >=3 days; pooled fallback and no promotion otherwise.",
+  "crossday": "From each raw 16-row tile, compute clipped mean local contrast at every native channel using row-wise full-tile median/MAD normalization and median offsets +/-3..5. Compare candidate topocentric frequency to nearest native bin (within half channel, no interpolation); aggregate per independent day across two ON/OFF pairs: max min(ON,OFF) and max OFF, record coverage, mean/max shared and OFF, fraction of covered days with shared contrast >=.75, maximum bin residual in Hz. No same-day bank entries for candidate. For bank controls use leave-one-day-out; train historical and replay eval use entire independent bank; coverage difference audited. Recurrence is not physical proof of interference or astrophysical origin. No power from final R40H before lock.",
+  "model": "Train standardized balanced logistic C=.1 and ExtraTrees depth4 minleaf8 seed401 on historical R40N parent-rejected rows; compare raw-only vs raw+crossday. Frozen R40G and Joint Min paths and alerts. Guard thresholds: historical minimum successful rescue (preserve), new calibration 2.5% parent-rejected null pooled, conditional 2.5% KUSTO with pooled fallback, same fixed strata. No R40H label or score used for fit/cut. Replay on previously viewed R40H only; report paired losses and false localized paths on injected positives separately. No tuning on replay.",
+  "gate": "Eight day/source-disjoint groups, 1024 controls and qualified strata necessary for full KUSTO; replay >=215/43 ordinary, >=111/36 shared, <=35 control alerts and zero paired Joint Min loss. Further independent prospective test still necessary. No production, R38/R43 HOLD.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
