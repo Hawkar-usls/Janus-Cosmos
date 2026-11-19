@@ -1,0 +1,260 @@
+name: JANUS R40N10C archive adapter audit and frozen transfer
+on:
+  push:
+    branches: [research/seti-radio-candidate-search-20261117]
+    paths: ['.github/workflows/seti-r40n10c-archive-adapter.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r40n10c-archive-adapter
+  cancel-in-progress: false
+jobs:
+  development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install numpy==2.2.6 requests==2.32.3 scipy==1.15.3 scikit-learn==1.6.1 h5py==3.13.0 hdf5plugin==5.0.0 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Compile diagnostic adapter
+        run: python -m py_compile research/seti/r40n10c_archive_adapter.py research/seti/r40n10b_expansion.py research/seti/r40n10_artmoney_turbo.py
+      - name: Authenticate N10B ledger and N10 frozen model; test known Parkes header
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py prepare
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-01-prepare
+          path: |
+            runtime/r40n10c/progress/00-prepare.json
+            runtime/r40n10c/progress/01-positive-parkes.json
+            runtime/r40n10c/old_rejection.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Reconstruct and diagnose 80 unknown Parkes assertion records
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py parkes
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-02-parkes
+          path: |
+            runtime/r40n10c/same_receiver_manifest.json
+            runtime/r40n10c/progress/02-parkes.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Read known public UWL directory and headers; control only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py uwl-control
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-03-uwl-control
+          path: |
+            runtime/r40n10c/uwl_control.json
+            runtime/r40n10c/progress/03-uwl-control.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Audit exact catalogue role and native UWL header association
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py uwl
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-04-uwl
+          path: |
+            runtime/r40n10c/uwl_manifest.json
+            runtime/r40n10c/progress/04-uwl.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Search independent GBT S-band metadata under strict native cadence gates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py gbt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-05-gbt
+          path: |
+            runtime/r40n10c/gbt_s_manifest.json
+            runtime/r40n10c/progress/05-gbt.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Freeze all independent manifests before reading science power
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py freeze
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-06-freeze
+          path: |
+            runtime/r40n10c/manifest.json
+            runtime/r40n10c/progress/06-freeze.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 same_receiver test 01
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group same_receiver 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-same_receiver-01
+          path: |
+            runtime/r40n10c/progress/same_receiver-01.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 same_receiver test 02
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group same_receiver 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-same_receiver-02
+          path: |
+            runtime/r40n10c/progress/same_receiver-02.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 same_receiver test 03
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group same_receiver 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-same_receiver-03
+          path: |
+            runtime/r40n10c/progress/same_receiver-03.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 same_receiver test 04
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group same_receiver 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-same_receiver-04
+          path: |
+            runtime/r40n10c/progress/same_receiver-04.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 uwl test 01
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group uwl 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-uwl-01
+          path: |
+            runtime/r40n10c/progress/uwl-01.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 uwl test 02
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group uwl 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-uwl-02
+          path: |
+            runtime/r40n10c/progress/uwl-02.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 uwl test 03
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group uwl 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-uwl-03
+          path: |
+            runtime/r40n10c/progress/uwl-03.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 uwl test 04
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group uwl 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-uwl-04
+          path: |
+            runtime/r40n10c/progress/uwl-04.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 gbt_s test 01
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group gbt_s 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-gbt_s-01
+          path: |
+            runtime/r40n10c/progress/gbt_s-01.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 gbt_s test 02
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group gbt_s 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-gbt_s-02
+          path: |
+            runtime/r40n10c/progress/gbt_s-02.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 gbt_s test 03
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group gbt_s 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-gbt_s-03
+          path: |
+            runtime/r40n10c/progress/gbt_s-03.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Frozen N10 gbt_s test 04
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py group gbt_s 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-gbt_s-04
+          path: |
+            runtime/r40n10c/progress/gbt_s-04.json
+          retention-days: 90
+          if-no-files-found: error
+      - name: Report adapter diagnosis and separate receiver science
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python research/seti/r40n10c_archive_adapter.py summary
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r40n10c-progress-99-summary
+          path: |
+            runtime/r40n10c/result.json
+            runtime/r40n10c/progress/99-summary.json
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r40n10c-archive-adapter
+          path: |
+            runtime/r40n10c/*.json
+            runtime/r40n10c/*.npz
+            runtime/r40n10c/progress/*.json
+          retention-days: 90
+          if-no-files-found: warn
