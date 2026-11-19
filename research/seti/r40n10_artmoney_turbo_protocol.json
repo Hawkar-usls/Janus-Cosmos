@@ -1,0 +1,66 @@
+{
+  "schema": "janus.cosmos.r40n10.artmoney_turbo.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n6": {
+      "id": 14530830405,
+      "sha256": "7db874a56e635e2dbacc182afa676fb0a92c4a69aab13d50f38f583cab3b437b",
+      "lock_sha256": "8d2fb79400d55669fbe71b006c3073b0ec3485b9fafe8090b13623cf999e8dbf",
+      "manifest_sha256": "fe83ccfe8ce9fea1dae1bb162ab2d64161d97815d68cfd14165bf116c8e4421a"
+    },
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "n5a": {
+      "id": 14526598455,
+      "sha256": "585433cda0bada902c95553496f8031ab0b91e3df3c436eaa64a742d4f5cef91",
+      "lock_sha256": "81e338539ce1854faf562674f8d7b2cce9d374a6dc85554cbc984040802017df"
+    },
+    "n7": {
+      "id": 14535335679,
+      "sha256": "769b6aeab2fabb9d58707babc4b9e8d1d06e6215cb0b4d2b54f5a2e3eb5af803",
+      "lock_sha256": "81a49cd42dac1762d77ec8cc6ea3a75ed8ac3c9695bc28cf4562e42e274ec494",
+      "manifest_sha256": "a6579533eeb1e3bc3c9b72b36df2e2ba0e7986d1303f3a798baf0d50bb6250b3"
+    },
+    "n8": {
+      "id": 14539143940,
+      "sha256": "850913e6f4ba1cfe0905685173014a817a55f7573ba705dc55c75abdf5a87e6f",
+      "lock_sha256": "7d3105e57c85b9a28e3f4bba87b65f3e5986cb30cdbe87e49ab63a4bff75c315",
+      "manifest_sha256": "849490acbc7790a9c0300f8a91b978d35d9bc8f654141421a6581f3a898bc137"
+    },
+    "n9": {
+      "id": 14550292453,
+      "sha256": "3dae37aacb3df5b195118fb60141239e14528c44121e0fc6cc2037ebd88aa934",
+      "lock_sha256": "e71d68cd8f3dcfebcbce1e9155ce4630deefae6db73fa51339e528311bb9801b",
+      "manifest_sha256": "84be305b813e47b1f367c43ec95d595ad0a97ea3c6bc81d5e7d2622d14a12c98"
+    }
+  },
+  "selection": {
+    "seed": "R40N10-20261119-ARTMONEY-TURBO",
+    "groups": 4,
+    "min_groups": 2,
+    "holdout_groups": 2,
+    "max_targets": 1000,
+    "header_attempts": 20,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "Same metadata-only selection, exclude all N1/N2/N6/N7/N8/N9 and historical/R40H/R37/R40CDE targets, days, sky and raw source hashes including N5A bank/replay; four fresh Parkes groups, minimum two, otherwise HOLD. Freeze manifest before any new power; freeze model before fresh reads."
+  },
+  "development": "Use authenticated N9 arrays as original parent baseline on eleven selected previously viewed groups: six original N6 fit, WISE0350-5658 N7 audit, four N9 fresh now audit. Reacquire 176 tiles with exact raw hashes and exact synthetic labels/truth/active/amp; replay turbo halo features, support, paths, counts, margins and source hashes against N9 for every parent alert. On the first halo batch of each group and synthetic arrays, compare entire score banks, legal masks, winner paths and scores exactly against reference. Replay every frozen N9 arm decision on four N9 audit days. Record all losses of frozen N8/N9 and WISE edge case, no per-case tuning. Remaining nine viewed groups excluded, not re-read. Quantify speedup on identical calls (warm JIT, include grid, same N/crops) and full group wall times separately.",
+  "features": "Preserve N9 entire algorithm, precompute native path identities once, cache same candidate exclusion mask per batch across all six contexts; Numba nopython loop over measured grid, fastmath disabled, preserve original float64 NumPy reduction order including singleton pairwise sum. Require exact equality on real and synthetic score banks, fail closed on parity mismatch. No pruning before scoring; rank intersection unchanged. Repeat scan witness: same receiver-native physical frequency mapping at signed df exactly and measured halo on independent other ON/OFF scan pair, no interpolation, no artificial repeat injection in primary feature. Compare same trajectory shape at fixed offsets -8..+8 in each other scan; choose strongest shift independently, compute selected score, strongest score, positive-row fraction, ON/OFF differences and coincident shift overlap, 12 compact features. No truth or labels as inputs; absence of recurrence is not proof of artifact, scans are separate but same cadence, injected positives absent in untouched repeat context so report this limitation. Hold out an additional stationary repeated-injection stress: replay declared original stationary injection at same native frequency in other ON/OFF contexts (measured background, same amplitude scaled to repeat patch); features recomputed without label access; evaluate paired loss separately, no fitting on stress. Keep original parent path and Joint Min rescue.",
+  "decision": "Four matched feature sets: fixed N9 halo+ArtMoney 22, repeat-only 12, halo+ArtMoney+repeat 34, base+rival+repeat 54; logistic and ExtraTrees; preserve/q01/q05 (24 arms). Optional guard with repeat availability fail-open. All new arms use same joint availability. Compare exact frozen N8 combined, N9 halo_art_tree_preserve and N9 matched base/halo/art baselines; no threshold tuning on old audits. Same six N6 fit days. Group OOF, freeze all before fresh, strict zero paired ordinary/shared/weak and repeated stress losses, <=35/640 and <=7/8 Learned05. Publish immutable progress JSON artifact after every old and new group (no repo write or secret); separate GitHub steps, runner budget 180 min. No external validation or production adoption.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false,
+  "artmoney": "Exact N9 intersection; no semantic change in TURBO. Independent repeat evidence is a separately evaluated feature ablation."
+}
