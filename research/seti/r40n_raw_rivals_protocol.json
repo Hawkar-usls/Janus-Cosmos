@@ -1,0 +1,60 @@
+{
+  "schema": "janus.cosmos.r40n.raw_rival_repeat.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "r40l": {
+      "id": 14483101417,
+      "sha256": "d4dba2711961d40f3a6eb460bd9579f014658ce246740cce4ec890c07379d37f",
+      "lock_sha256": "861831eafce068efb159d5302def0befaba7aff4390c170582b760101a6d97f7"
+    },
+    "r40k": {
+      "id": 14479412305,
+      "sha256": "18ea16128c61089361d8d6bb8b920510818e3d674075adb60a2de4735a8fcddd"
+    },
+    "historical_manifest": {
+      "id": 14418220586,
+      "sha256": "bcbde36c711bce156b554b763fa8fb08af53d0843b13328ae54490b96f6e9888"
+    },
+    "r40h_freeze": {
+      "id": 14473224552,
+      "sha256": "0f45519a57965262d6b3bcd90c1cc34b88daab2766022ac1b8213259ac490717"
+    },
+    "r37_manifest": {
+      "id": 14422818714,
+      "sha256": "b0ec1760f487db164a1b6efee0d28d96b5552ca0103b5320a4de0c1b6b64c624"
+    }
+  },
+  "donors": [
+    {
+      "path": "research/seti/r35b_grand_benchmark.py",
+      "blob": "115681a05419112b05fd530a80e7abaa2d5641e3"
+    },
+    {
+      "path": "research/seti/r26c_reference_alignment.py",
+      "blob": "2bdbfa9b9ccc392a6e3e8cde53ddf6fe6965b1bb"
+    },
+    {
+      "path": "Hawkar-usls/Janus-Demiurge/restored/ghost_rider_adversarial_challenger.py",
+      "blob": "3a5fd09b3f41e29deeb442d6699e2ad6ce9af2a1"
+    }
+  ],
+  "raw_features": "Use independently normalized ON/OFF exact same patches; R35B bank exhaustive all valid nonwrapping starts 5..122, rival is different by >2 bins on >=5 rows; compare joint min and individual ON/OFF rival scores to selected stationary path. Narrowness from center vs +/-1..2 and +/-3..5, +/-8..12, and fraction of high surrounding channels. Preserve one candidate path; do not pick using truth. Recurrence: other ON/OFF pair from same session, exact native signed df and integer mapping of absolute physical frequency, 128-bin matching patch; no synthetic injection into other pair; missing coverage explicit flag, no veto solely on recurrence. Not proof of RFI or source identity.",
+  "replay": "Reconstruct historical 4 train groups, 2 cal, and 5 R40H groups. Compare exact prior candidate scores, paths, y/weak/correct and R40L frozen 30 features (recomputed) plus R40K raw hashes on R40H and calibration. Fit logistic C=.1 and ExtraTrees128 depth4 minleaf8 balanced seed401 on historical parent-rejected rows only: raw rival+narrow features and raw+recurrence; freeze cut above 2.5% historical rejected null and minimum historical successful Joint Min rescue; compare both, learned05 baseline, preserve parent. No R40H access before lock. Record paired losses and all arms. Already viewed test not external.",
+  "new_controls": {
+    "seed": "R40N-20261119-KUSTO-NEW-CONTROLS-v1",
+    "targets": 8,
+    "max_queries": 240,
+    "windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "selection": "metadata-only deterministic R30 search; exclude named/date/coordinate identities in R35G, R37, R40H and R40CDE, R32 known names/days and prior exclusions. Actual alias completeness unproven. Lock manifest before power. No selection via powers. Unmodified backgrounds only, not verified empty sky. Compute all features and frozen parent scores. Expand by 1024 controls, 8 groups, 64 ON source tile blocks. Check each KUSTO stratum >=128 parent-rejected controls and >=3 targets, fixed R40L reference cut. Store exact data and max per target; no fit to R40H."
+  },
+  "gate": "<=35 controls, >=215/43 eval, >=111/36 shared, zero paired Joint Min loss. Minimum >=214/41, >=21 shared weak, zero R40G losses. New controls alone do not qualify prospective evaluation or campaign FAP. R38 external blind and real controls remain HOLD.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
