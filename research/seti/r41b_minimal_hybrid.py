@@ -15,8 +15,31 @@ def load(k):return json.loads((O/k).read_text())
 def cp(k,d):
     write(PROG/(k+".json"),d);print("R41B_PROGRESS",json.dumps(d,allow_nan=False),flush=True)
 def sha(raw):return c.sha(raw)
+def r41a_archive(spec):
+    # This archive intentionally contains group-NN.json both at its root and in progress/.
+    # Authenticate the whole ZIP first, then resolve required files relative to the unique
+    # pruning lock directory; never collapse paths to basenames or extract untrusted files.
+    import io,os,zipfile,requests
+    u=f"https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions/artifacts/{spec['id']}/zip"
+    r=requests.get(u,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"},timeout=120)
+    r.raise_for_status();raw=r.content
+    assert len(raw)<32*1024**2 and sha(raw)==spec["sha256"]
+    z=zipfile.ZipFile(io.BytesIO(raw));entries=[i for i in z.infolist() if not i.is_dir()]
+    assert sum(i.file_size for i in entries)<512*1024**2
+    names=[i.filename for i in entries];assert len(names)==len(set(names))
+    assert all(not pathlib.PurePosixPath(s).is_absolute() and ".." not in pathlib.PurePosixPath(s).parts for s in names)
+    locks=[s for s in names if pathlib.PurePosixPath(s).name=="pruning_lock.json"]
+    assert len(locks)==1 and sha(z.read(locks[0]))==spec["lock_sha256"]
+    root=pathlib.PurePosixPath(locks[0]).parent
+    required=["pruning_lock.json"]+["group-"+str(i+1).zfill(2)+".json" for i in range(11)]
+    n={s:str(root/s) for s in required};assert all(v in names for v in n.values())
+    # Verify group payload schema rather than silently using a short checkpoint.
+    for s in required[1:]:
+        d=json.loads(z.read(n[s]));assert "modes" in d and "operational" in d["modes"] and d["stage"]=="GROUP"
+    print("R41B_ARCHIVE_NAMESPACE",json.dumps({"root":str(root),"entries":len(names),"resolved":len(n)}),flush=True)
+    return z,n
 def prepare():
-    za,na=c.artifact(S["source_r41a"],32);zr,nr=c.artifact(S["source_r41"],32);z,nn=c.artifact(S["source_n10"],128)
+    za,na=r41a_archive(S["source_r41a"]);zr,nr=c.artifact(S["source_r41"],32);z,nn=c.artifact(S["source_n10"],128)
     raw=za.read(na["pruning_lock.json"]);assert sha(raw)==S["source_r41a"]["lock_sha256"]
     lock=json.loads(raw);assert lock["engineering_comparator"]=="minimal__joint" and lock["winner"] is None and lock["rule"]=="minimal" and lock["rescue"]=="joint"
     (C/"pruning_lock.json").write_bytes(raw)
