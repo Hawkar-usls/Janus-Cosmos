@@ -1,0 +1,24 @@
+{
+  "schema": "janus.cosmos.r40n3.crossday_kusto.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "n2": {
+      "id": 14518963307,
+      "sha256": "4b5c36c94c89e1a4a450bc1b2e74d6fb344ca0612ec09aa4ae8ed2770ea4d027"
+    },
+    "replay": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    }
+  },
+  "bank": "Authenticate N1/N2 artifacts and manifests; retain 4 N1 reference grids; reconstruct 4 N2 reference grids from archived native power using frozen N2 seed/windows, assert all 64 raw hashes and exact candidate features versus archived controls. 8 unique days, targets and 128 disjoint source tile hashes. Exclude all known prior raw hashes and days. CROSSDAY uses native topocentric frequency and no interpolation. Calibration excludes own day; historical training and R40H use all 8 days. Drop absolute coverage count from learning (retain fraction and other features); explicitly report seven/eight-day support mismatch and coverage, no RFI identity claim.",
+  "calibration": "1024 unmodified Parkes background patches, parent-rejected 974; fixed R40L regime cut and exactly 487/487 across 8 days. Reproduce R40N2 joint/raw-logistic pooled and stratum conditional thresholds exactly to 1e-10. Fit raw-only and raw+crossday logistic C=.1 and ExtraTrees128 depth4 minleaf8 balanced seed401 on historical R40N parent-rejected rows only; compare historical preserve, pooled 2.5%, KUSTO stratum 2.5% cuts. Include fixed joint-score and raw-logistic-score R40N2 guard and intersection with fixed Learned05. All guards restrict frozen Joint Min rescues, never change R40G or paths. No R40H scores or labels before immutable lock. Report actual calibration rescue counts; 2.5% is empirical score rank, not FAP.",
+  "evaluation": "Replay previously viewed R40H, same source arrays and identities; all variants, no tuning; report ordinary and shared localizations, weak, null alerts, paired losses vs Joint Min and R40G, wrong paths on injected positives, coverage and costs. Gate <=35 control alerts, 215/43 ordinary and 111/36 shared, zero paired losses. No external qualification or production changes. GBT separate HOLD.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
