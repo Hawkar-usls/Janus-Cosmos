@@ -1,0 +1,75 @@
+{
+  "schema": "janus.cosmos.r41a.pruning.v1",
+  "date": "2026-11-19",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "source_r41": {
+    "id": 14567129415,
+    "sha256": "a2945829a401d73aa8bf722421c5f1ee150f1e66af653dbdb0108983041379eb",
+    "run": 44596694966,
+    "winner_lock_sha256": "5d040be02d1e71895807424605e1dd3a97af76f4f4cdff8f7045f7239ae39d30"
+  },
+  "source_n10": {
+    "id": 14557149553,
+    "sha256": "42135d88595a53b0bdd3cb5b3ed12d18dffb4d4f9debfcd1ce067fb67ef2898b",
+    "lock_sha256": "ecb99e581270f3617171578a9983e0f2ad5069267318d7cc9210756769794646"
+  },
+  "blocks": [
+    "temporal",
+    "rival",
+    "runs",
+    "folds",
+    "halo",
+    "artmoney",
+    "repeat"
+  ],
+  "parents": {
+    "rival": "rival__tree",
+    "runs": "runs__tree",
+    "minimal": "rival+runs__tree",
+    "full": "temporal+rival+runs+folds+halo+artmoney+repeat__tree"
+  },
+  "parent_rules": {
+    "identity": [],
+    "minimal": [
+      "minimal"
+    ],
+    "full": [
+      "full"
+    ],
+    "rival": [
+      "rival"
+    ],
+    "runs": [
+      "runs"
+    ],
+    "minimal_and_full": [
+      "minimal",
+      "full"
+    ],
+    "minimal_or_full": [
+      "minimal",
+      "full"
+    ],
+    "rival_and_runs": [
+      "rival",
+      "runs"
+    ],
+    "rival_or_runs": [
+      "rival",
+      "runs"
+    ],
+    "minimal_and_rival": [
+      "minimal",
+      "rival"
+    ],
+    "minimal_and_runs": [
+      "minimal",
+      "runs"
+    ]
+  },
+  "rule": "Fixed R41 tree models with original preserve cut only. AND keeps iff all supported gates keep; OR keeps iff any keeps; unsupported individual features fail open. For each parent rule evaluate unmodified Joint Min rescue and existing immutable Learned05 subset of rescue (diagnostic comparator only; no threshold changes). Reproduce all four constituent R41 per-group metrics exactly plus Joint Min/Learned05. Record operational and common-support modes separately. Synthetic repeat stress uses archived perturbed repeat features, recombined by exact rule. No fit, no new features, no tuning on individual alarms. Group-specific counts, source tile and row identifiers, pairwise overlap of removed controls, losses and stress losses. Separate parent/added-rescue alert floor; future candidate must remove 18 more vs 53 on five old days. Historical six fit groups descriptive in-sample only. 11 already-viewed development groups; no fresh claim. No individual target or label used at inference.",
+  "cost": "Reuse R41 measured acquisition/cold and shared block costs; measure cached scoring per rule; account feature dependencies once (rivals requires joint temporal/rival routine, runs requires runs/folds routine). R41B actual end-to-end minimal implementation parity and cost still mandatory.",
+  "gate": "On five old audit groups, both operational and common support: zero paired ordinary/shared/weak losses relative Joint Min and R40G, zero repeat stress losses, controls<=35/640 and <=7/8 Learned05. Only modified rules with existing Joint Min rescue unchanged eligible for promotion to development candidate; Learned05 rescue diagnostic otherwise. Rank eligible by alerts, required dependency blocks, score wall not selection tie (lexical); if none, HOLD, preserve fixed Rivals+Runs as engineering comparator only, no scientific winner. No production changes; all old locks retained.",
+  "production_adoption": false,
+  "external_validation": false
+}
