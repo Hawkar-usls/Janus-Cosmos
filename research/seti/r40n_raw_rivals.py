@@ -126,7 +126,7 @@ def selftest():
     rng=np.random.default_rng(4019);X=rng.normal(0,.1,(2,16,128));D=X.copy();p=np.full((2,16),64)
     X[:,:,64]+=4;D[:,:,64]+=4
     alt=30+np.rint(np.arange(16)/2).astype(int);X[1,np.arange(16),alt]+=5;D[1,np.arange(16),alt]+=5
-    f0,rp=rivals(X,D,p);assert f0[0,0]<1 and (abs(rp[1]-alt)<=1).sum()>=12
+    f0,rp=rivals(X,D,p);assert f0[0,3]>0 and (abs(rp[1]-alt)<=1).sum()>=12
     a={"df_hz":-2.8,"channel0_mhz":3000.};v=np.random.default_rng(7).normal(size=(16,256));v[:,74]+=10;pre=[[(a,v)]]*4
     rr,fq=repeat([(0,0,3000.-10*2.8/1e6,-2.8)],pre,np.full((1,16),64));assert rr[0,0]==1 and rr[0,1]>3 and abs(fq[0]-(3000.-74*2.8/1e6))<1e-9
     emit("R40N_SELFTEST",{"rival_exclusion":"PASS","alternative_drift":"PASS","signed_frequency_mapping":"PASS"})
