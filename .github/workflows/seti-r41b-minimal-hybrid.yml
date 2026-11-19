@@ -31,7 +31,7 @@ jobs:
           python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
       - name: Compile standalone hybrid
         run: python -m py_compile research/seti/r41b_minimal_hybrid.py
-      - name: Authenticate R41A frozen models and prior native spectra
+      - name: Authenticate R41A frozen models and exact archive namespaces
         env:
           GH_TOKEN: ${{ github.token }}
         run: python research/seti/r41b_minimal_hybrid.py prepare
