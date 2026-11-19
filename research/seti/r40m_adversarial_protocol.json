@@ -1,0 +1,29 @@
+{
+  "schema": "janus.cosmos.r40m.adversarial_joint_shield.v1",
+  "status": "PREREGISTERED_DEVELOPMENT_REPLAY",
+  "source": {
+    "id": 14483101417,
+    "sha256": "d4dba2711961d40f3a6eb460bd9579f014658ce246740cce4ec890c07379d37f",
+    "lock_sha256": "861831eafce068efb159d5302def0befaba7aff4390c170582b760101a6d97f7"
+  },
+  "donor": {
+    "repo": "Hawkar-usls/Janus-Demiurge",
+    "path": "restored/ghost_rider_adversarial_challenger.py",
+    "blob": "3a5fd09b3f41e29deeb442d6699e2ad6ce9af2a1",
+    "scope": "counterhypothesis discipline only; deterministic tests are new adaptation, not independent physical evidence"
+  },
+  "arms": [
+    "topa_learned",
+    "ghost_preserve",
+    "learned_ghost_preserve",
+    "topa_learned_ghost_preserve",
+    "ghost_null025",
+    "learned_ghost_null025",
+    "ghost_tree_preserve"
+  ],
+  "features": "Use archived R40L F only (30 features). Ghost Rider rivals: burst concentration, odd/even imbalance, single-receiver dominance and across-time noncoincidence. Four oriented scores: min(x_even,x_odd,d_even,d_odd); min(x_block2,d_block2); -abs(ONmean-OFFmean); simultaneous min contrast mean. Fifth score negative max receiver block concentration (max minus median of middle blocks). Center and scale each by median/IQR on historical parent-rejected controls from training groups; take minimum of standardized margins. Tree model ExtraTrees(128,max_depth=4,min_samples_leaf=8,class_weight=balanced,random_state=401,n_jobs=1) on original F plus five oriented scores, training on all historical parent-rejected rows, correct candidate localization label only. No eval scores/labels before lock.",
+  "thresholds": "Preservation cutoff for ghost and tree = nextafter(min(score among HISTORICAL training localized Joint Min rescues), -inf), requires nonempty positives. Audit historical calibration null count. Ghost null cutoff = strict above 2.5% order statistic on historical calibration parent-rejected controls. Existing TOPA05 and learned05 flags are reproduced from fixed R40L lock. Guard subset of Joint Min; R40G always preserved. No selection/tuning on R40H. Report all variants, including losses.",
+  "gate": "Strict: >=215 localized, >=43 weak, <=35 control alerts, >=111 shared and >=36 shared weak, zero paired lost Joint Min positive on eval and shared. Reduced gate reported separately: >=214, >=41, <=35, >=21 shared weak, zero R40G loss. Development only: R40H already viewed. KUSTO fallback unchanged. Physical alternatives (RFI, independently observed recurrence, shifted rival tracks on raw arrays) require new evidence; no source identity claim, no production adoption.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
