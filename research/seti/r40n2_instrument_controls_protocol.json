@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.r40n2.instrument_controls.v1",
+  "status": "PREREGISTERED_DEVELOPMENT",
+  "sources": {
+    "r40n1": {
+      "id": 14516701462,
+      "sha256": "179e3de23f29c2787117dc136ae7831e9b4aa063b1b1085b00485f61ee8ec0d7"
+    },
+    "r40n": {
+      "id": 14511753349,
+      "sha256": "2e303135fb09652f18f76db4172811bb4caada7f2a04073df1b37c1a9959333f",
+      "lock_sha256": "e6e05d98b9f0a9469e4d9599e87aef16171287f177893e387c32d2e4cc036857"
+    }
+  },
+  "selection": {
+    "seed": "R40N2-20261119-GBT-L-CONTROLS",
+    "groups": 4,
+    "max_gbt_targets": 220,
+    "max_parkes_aliases": 80,
+    "header_attempts": 12,
+    "pointing_guard_degrees": 0.1,
+    "windows_mhz": [
+      1370,
+      1390,
+      1410,
+      1430
+    ],
+    "parkes_windows_mhz": [
+      2850,
+      3050,
+      3250,
+      3330
+    ],
+    "half_hz": 50000,
+    "max_mib_per_scan": 320,
+    "rule": "R37B exact ON/OFF cadence, same backend/native grid, signed df, 16 rows, archive/header coordinate corroboration. Exclude all known prior target/day/file/URL/sky positions, R40N1 and R40N replay hashes. Metadata only before any power. Select up to four GBT groups; if scarce, fill from additional non-HIP Parkes aliases using same strict rules (separate instrument/window records). No relaxed dates. Report partial."
+  },
+  "calibration": "128 unmodified paired-background patches per group; retain 512 R40N1 Parkes patches separately; raw power not certified blank sky. Transfer frozen Parkes parent and Joint Min to GBT as diagnostic only; separate KUSTO per instrument/reference regime, split at median reference-only regime from new instrument controls (development, not externally tested); >=128 parent-rejected and >=3 days per stratum else pooled threshold, no formal FAP; also report day-maximum scores and per-group null counts. No mixing GBT L-band and Parkes S-band recurrence. No GBT positives or independent evaluation in this stage. No Parkes threshold update based on GBT. 1024 new controls total across instruments is acquisition goal, not qualification of either instrument individually.",
+  "gate": ">=4 extra groups and 512 extra controls to reach 8/1024 across instruments; counts, provenance and grid qualification; independent instrument-specific exam later; <=35 alerts at zero loss remains untested here.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false
+}
