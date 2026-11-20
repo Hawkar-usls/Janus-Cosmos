@@ -1,7 +1,7 @@
 {
   "schema": "janus.cosmos.r41s1c.evidence_differentiation.v1",
   "date": "2026-11-20",
-  "status": "FROZEN_DIAGNOSTIC_ONLY",
+  "status": "FROZEN_DIAGNOSTIC_ONLY__R1_CONSTRAINED_SHIFT_AMENDMENT",
   "source": {
     "run": 44711647088,
     "head_sha": "eb664322808271f99715358dc309c509f51c9a3e",
@@ -28,12 +28,12 @@
   },
   "controls": "Independent synthetic holdout seed 413101, 32 base noise realizations per class: noise, narrow drifting, broad burst, shared stationary instrument proxy. Matched independent repeat scan pairs, injection 8 robust units, 20-bin shift, 16 rows, broad width 17. Report predefined feature distributions by simulated class; no training. Synthetic control class is not actual instrument identity.",
   "evaluation": "Fixed feature names; AUC control=1 as retrospective descriptive effect size, per-target median only where both classes exist; correlated paired rows not independent. Fit/audit separately, parent/rescue, missingness and denominator; no winning feature or threshold chosen. Synthetic controls separate. Verify archive SHA and 22 trace hashes, exact replay, append content-addressed diagnostic state. Record network, CPU, wall, memory. No new stress claim.",
-  "gate": "PASS engineering only if archive/22 traces verified, 11 exact baseline and first/second trace replays, 891 qualified diagnostics (409 audit), synthetic controls show expected directions, no alert/hit changes. Scientific adoption HOLD; external independent fresh data still needed.",
+  "gate": "PASS R1 diagnostic engineering only: archive/22 traces verified, 11 exact baseline and first/second replay, 891 qualified diagnostics; template plus morphology/instrument simulation gate; full bank separate status; zero alert/hit changes. No promotion of v1 or scientific adoption.",
   "limits": {
     "max_native_width": 208,
     "side_bins": 12,
     "half_rows": 8,
-    "synthetic_seed": 413101,
+    "synthetic_seed": 413102,
     "synthetic_n_per_class": 32,
     "synthetic_amplitude": 8,
     "shift_bins": 20,
@@ -42,5 +42,27 @@
     "channel_persistence_fraction": 0.5
   },
   "production_adoption": false,
-  "external_validation": false
+  "external_validation": false,
+  "previous_attempt": {
+    "run": 44730088286,
+    "job": 136267313287,
+    "commit": "cd6fc201a1536276ebd18e6bc3dcbd06d558b36d",
+    "artifact": 14626351046,
+    "archive_sha256": "db0a8d8270b4cff0cf3656f594f548953ae6ad8a5845921abe30784613bb466d",
+    "result": "HOLD_SYNTHETIC_FULL_BANK_CROSSFIT_NEGATIVE",
+    "checks": {
+      "shifted_narrow_positive_heldout_gain": false,
+      "broad_more_occupied_than_narrow": true,
+      "shared_off_fixed_stronger_than_narrow": true
+    },
+    "narrow_full_bank_median_heldout_gain": -0.04670425403265359,
+    "shared_full_bank_median_heldout_gain": -4.065807019251723
+  },
+  "amendment": {
+    "reason": "Free full-bank different shapes can agree with training half yet fail extrapolation to the other half. Add separate physically interpretable translation-only family of the already selected candidate path. No threshold relaxation or replacement of failed full-bank result. Full bank diagnostic still reported, not promoted.",
+    "method": "For each ON/OFF repeat scan enumerate all integer shifts k of frozen candidate p satisfying every bin in [5,202]; use the exact same disjoint half fit/other-half score and canonical ties. Fixed-path score and full-bank outputs unchanged. Report independently both families, shift agreement, signed shift Hz, held-out gain; no choosing one by held-out scores.",
+    "new_simulation_seed": 413102,
+    "old_seed_retained_in_failed_artifact": true,
+    "gate": "New seed synthetic gate tests positive shifted-narrow template heldout gain, broad occupancy > narrow, shared OFF fixed > narrow. Full-bank direction check remains an explicitly separate diagnostic; failure not declared recovered. No mask changes; historical screen remains HOLD. Original v1 remains failed. Diagnostic only; no external claim."
+  }
 }
