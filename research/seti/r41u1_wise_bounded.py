@@ -42,6 +42,26 @@ def prepare():
     for label in old.S["infrared"]["gaia_source_ids"]:
         name=f"{label}-sia.xml";raw=zz.read(name);assert sha(raw)==rr["hashes"][name];tab=sia_table(raw);assert {"W1","W3"}.issubset({str(x).strip() for x in tab["sia_bp_id"]});(O/f"{label}-prior-sia.xml").write_bytes(raw)
     save("prepare.json",{"gaia":7,"orbit":11,"source":p,"prior_sia_replayed":7,"protocol_sha256":sha(P.read_bytes())})
+    fix=L["amendment_r3"];md=json.loads(get(f"{root}/artifacts/{fix['artifact']}",headers=h));assert md["workflow_run"]["id"]==fix["previous_run"] and md["digest"]=="sha256:"+fix["archive_sha256"]
+    raw=get(f"{root}/artifacts/{fix['artifact']}/zip",headers=h,cap=64*1024**2);assert sha(raw)==fix["archive_sha256"]
+    zz=zipfile.ZipFile(io.BytesIO(raw));assert len(zz.namelist())==len(set(zz.namelist())) and sum(i.file_size for i in zz.infolist())<128*1024**2
+    result=zz.read("result.json");assert sha(result)==fix["result_sha256"];rr=json.loads(result)
+    for name,digest in rr["hashes"].items():assert sha(zz.read(name))==digest
+    restored=[]
+    for label in old.S["infrared"]["gaia_source_ids"]:
+        name=f"{label}-sia.xml";raw=zz.read(name);assert sha(raw)==rr["hashes"][name];sia_table(raw);(O/name).write_bytes(raw)
+        for band in ("W1","W3"):
+            name=f"{label}-{band}-native-ibe.fits"
+            if name in rr["hashes"]:
+                (O/name).write_bytes(zz.read(name));restored.append(name)
+    assert len(restored)==6
+    save("r3-restore.json",{"source":fix,"verified_hashes":len(rr["hashes"]),"restored_fits":restored})
+def retry_503(url,params):
+    for attempt in (1,2):
+        try:return get(url,params=params,cap=2*1024**2),attempt
+        except requests.HTTPError as e:
+            if attempt==2 or e.response is None or e.response.status_code!=503:raise
+            time.sleep(2)
 def measure(label):
     sid=old.S["infrared"]["gaia_source_ids"][label];d=json.loads((O/"gaia.json").read_text())["rows"][sid]
     ra,de,pmra,pmdec,ep=[old.num(d[k]) for k in ("ra","dec","pmra","pmdec","ref_epoch")]
@@ -49,7 +69,7 @@ def measure(label):
     c=SkyCoord(ra*u.deg,de*u.deg).spherical_offsets_by(pmra*(2010.5-ep)*u.mas,pmdec*(2010.5-ep)*u.mas)
     out={"label":label,"gaia_id":sid,"position_deg":[float(c.ra.deg),float(c.dec.deg)],"epoch_approx":2010.5,"bands":{}}
     try:
-        raw=get(L["endpoint"],{"POS":f"{c.ra.deg},{c.dec.deg}","SIZE":"0.000277777778","FORMAT":"ALL"},cap=2*1024**2);(O/f"{label}-sia.xml").write_bytes(raw)
+        raw=(O/f"{label}-sia.xml").read_bytes()
         table=sia_table(raw)
         def val(row,k):
             x=row[k];return (x.decode() if isinstance(x,bytes) else str(x)).strip()
@@ -62,15 +82,20 @@ def measure(label):
         assert choices,"no common W1/W3 tile";_,cid,bands=min(choices,key=lambda x:(x[0],x[1]));out["coadd_id"]=cid
         for k,fwhm in (("W1",6.1),("W3",6.5)):
             try:
-                url=bands[k][0];params={"center":f"{c.ra.deg:.10f},{c.dec.deg:.10f}deg","size":"200arcsec","gzip":"false"};raw=get(url,params=params,cap=2*1024**2);path=O/f"{label}-{k}-native-ibe.fits";path.write_bytes(raw)
+                url=bands[k][0];params={"center":f"{c.ra.deg:.10f},{c.dec.deg:.10f}deg","size":"200arcsec","gzip":"false"};path=O/f"{label}-{k}-native-ibe.fits";cached=path.exists()
+                if cached:raw=path.read_bytes();attempts=0
+                else:raw,attempts=retry_503(url,params);path.write_bytes(raw)
                 with fits.open(io.BytesIO(raw),memmap=False) as hd:
                     h=hd[0];data=np.asarray(h.data,float).squeeze();w=WCS(h.header).celestial;assert data.ndim==2
                     assert min(data.shape)>=115 and max(data.shape)<=200 and np.allclose(proj_plane_pixel_scales(w)*3600,bands[k][3],rtol=1e-3,atol=1e-5),"native scale/size mismatch"
                     cut=Cutout2D(data,c,(160*u.arcsec,160*u.arcsec),wcs=w,mode="strict")
-                    y,x=np.indices(cut.data.shape);world=cut.wcs.pixel_to_world(x,y);dx,dy=c.spherical_offsets_to(world);xx=dx.arcsec;yy=dy.arcsec
+                    y,x=np.indices(cut.data.shape);world=cut.wcs.pixel_to_world(x,y)
+                    rx,ry=cut.wcs.world_to_pixel(world);assert np.max(abs(rx-x))<1e-5 and np.max(abs(ry-y))<1e-5,"WCS roundtrip mismatch"
+                    same=world.transform_to(c.frame);dx,dy=c.spherical_offsets_to(same);xx=dx.arcsec;yy=dy.arcsec
+                    assert np.isfinite(xx).all() and np.isfinite(yy).all() and np.min(np.hypot(xx,yy))<2.0,"target not within native pixel grid"
                     head=cut.wcs.to_header();head["BUNIT"]=str(h.header.get("BUNIT","UNKNOWN"));fits.PrimaryHDU(cut.data,header=head).writeto(O/f"{label}-{k}-cutout.fits",overwrite=True)
                     q=old.psf_fit(cut.data,xx,yy,fwhm);ctl=old.controls(cut.data,xx,yy)
-                    out["bands"][k]={"status":"OK" if q is not None else "HOLD_INSUFFICIENT_PIXELS","url":url,"query":params,"source_kind":"native IBE server cutout, not full atlas","source_shape":list(data.shape),"source_sha256":sha(raw),"cutout_sha256":sha((O/f"{label}-{k}-cutout.fits").read_bytes()),"shape":list(cut.shape),"unit":h.header.get("BUNIT"),"pixel_scale_arcsec":(proj_plane_pixel_scales(cut.wcs)*3600).tolist(),"psf_fit":q,"controls":ctl}
+                    out["bands"][k]={"status":"OK" if q is not None else "HOLD_INSUFFICIENT_PIXELS","url":url,"query":params,"source_kind":"native IBE server cutout, not full atlas","archive_reused":cached,"http_attempts":attempts,"wcs_native_frame":world.frame.name,"offset_frame":same.frame.name,"source_shape":list(data.shape),"source_sha256":sha(raw),"cutout_sha256":sha((O/f"{label}-{k}-cutout.fits").read_bytes()),"shape":list(cut.shape),"unit":h.header.get("BUNIT"),"pixel_scale_arcsec":(proj_plane_pixel_scales(cut.wcs)*3600).tolist(),"psf_fit":q,"controls":ctl}
             except Exception as e:out["bands"][k]={"status":"HOLD","error":str(e)[:400]}
             save("ir-"+label+".json",out)
     except Exception as e:out["error"]=str(e)[:400]
