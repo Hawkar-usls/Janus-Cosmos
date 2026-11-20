@@ -1,0 +1,15 @@
+{
+  "schema": "janus.cosmos.r41u1.wise_bounded.v1",
+  "date": "2026-11-20",
+  "source": {
+    "run": 44735205228,
+    "artifact": 14633532953,
+    "archive_sha256": "489ffea94950e0082ba92ba6b0682da5345fe174c3d132b1dc0805c56287139e"
+  },
+  "prior": "Gaia 7/7 and JPL 11/11, zero WISE, 90-minute timeout retained",
+  "endpoint": "https://irsa.ipac.caltech.edu/ibe/sia/wise/allwise/p3am_cdd",
+  "method": "IRSA documented AllWISE SIA query, W1 and W3 common tile matched by coadd id, native FITS files, 160 arcsec local Cutout2D without resampling, fixed position propagated from frozen Gaia, inherited rival fit and controls unchanged. Archive all source FITS and query response. Distinct survey coadd vs prior SkyView projection; no claim of independent exposures.",
+  "timeouts": "one child per target, hard 150 s; HTTP connect 10/read 25; bounded response 32 MiB per FITS, no retries in same job; per-target timeout/error receipt, no absent-as-zero; continue all seven. Whole job <=35 min.",
+  "gate": "Verify frozen catalog payload SHA and exact seven IDs, orbital source hashes (preserve). Native WCS local coverage, all source hashes, both fixed and rival scores. Report partial on missing; no claim of artificial origin or exclusion of blend; old timeout preserved.",
+  "production_adoption": false
+}
