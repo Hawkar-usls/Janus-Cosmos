@@ -11,5 +11,11 @@
   "method": "IRSA documented AllWISE SIA query, W1 and W3 common tile matched by coadd id, native FITS files, 160 arcsec local Cutout2D without resampling, fixed position propagated from frozen Gaia, inherited rival fit and controls unchanged. Archive all source FITS and query response. Distinct survey coadd vs prior SkyView projection; no claim of independent exposures.",
   "timeouts": "one child per target, hard 150 s; HTTP connect 10/read 25; bounded response 32 MiB per FITS, no retries in same job; per-target timeout/error receipt, no absent-as-zero; continue all seven. Whole job <=35 min.",
   "gate": "Verify frozen catalog payload SHA and exact seven IDs, orbital source hashes (preserve). Native WCS local coverage, all source hashes, both fixed and rival scores. Report partial on missing; no claim of artificial origin or exclusion of blend; old timeout preserved.",
-  "production_adoption": false
+  "production_adoption": false,
+  "amendment": {
+    "reason": "R41U1 run 44759469112 completed all 7 but SIA v1 returned QUERY_STATUS=ERROR: FORMAT=image/fits invalid; accepted METADATA or ALL. Same frozen target, tile choice, band and deadline; use FORMAT=ALL and retain MIME/intensity URL restriction. No scientific gate change.",
+    "previous_run": 44759469112,
+    "artifact": 14640522924,
+    "archive_sha256": "93bace77adece3ad9d079ddc06e7bf6fa87b14034635edb5d04e4ed05e8a6a49"
+  }
 }
