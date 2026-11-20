@@ -1,0 +1,46 @@
+name: JANUS COSMOS R3775 — Independent archival epochs and matched controls
+on:
+  push:
+    branches: [research/zerkalo-3775-independent-epochs-20261121]
+    paths: ['.github/workflows/zerkalo-r3775-independent-epochs.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-zerkalo-r3775-independent-archival-repeat
+  cancel-in-progress: false
+jobs:
+  independent-epochs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      PYTHONUNBUFFERED: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify frozen independent-epoch protocol
+        run: |
+          python -m py_compile research/numeric_sky/3775_independent_epochs.py
+          python -m json.tool research/numeric_sky/3775_independent_epochs_protocol.json >/dev/null
+          python -m pip install requests==2.32.3
+      - name: Execute read-only AllWISE control, NEOWISE temporal and Pan-STARRS checks
+        run: |
+          python research/numeric_sky/3775_independent_epochs.py
+          test -s runtime/numeric_sky/3775_epochs/preflight.json
+          test -s runtime/numeric_sky/3775_epochs/matched_field_controls.json
+          test -s runtime/numeric_sky/3775_epochs/selected_source_controls.json
+          test -s runtime/numeric_sky/3775_epochs/audit_result.json
+      - name: Publish all source and science receipts including failed external endpoints
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-r3775-independent-epoch-control-evidence
+          path: runtime/numeric_sky/3775_epochs/
+          if-no-files-found: warn
+          retention-days: 90
