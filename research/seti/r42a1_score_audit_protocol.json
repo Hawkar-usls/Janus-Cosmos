@@ -1,0 +1,38 @@
+{
+  "schema": "janus.cosmos.r42a1.protocol.v1",
+  "scope": "Read existing authenticated historic score artifacts only; no model change or threshold selection. Competitor ROC/DET with localization-aware TPR, weak and shared counts, report empirical caps; JANUS exported only binary alerts and hits, plot fixed operating markers, no fabricated curve.",
+  "run": 44785055340,
+  "common": {
+    "id": 14657744482,
+    "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+  },
+  "competitors": {
+    "bliss": {
+      "id": 14658622495,
+      "digest": "8a9662c28e1abc9c54900f164c5ab292e267a3c1b4922c16e7f277883f65a0dc"
+    },
+    "fastdd": {
+      "id": 14656849802,
+      "digest": "e0f927a204efe974b6507c0bf3d285336cc9ca325744f5bb406e18ad9609b50d"
+    },
+    "turbo": {
+      "id": 14658167380,
+      "digest": "623bebc8d6f186753230ce57c78ed6eb6e4291896cf110df93b2190427bb9e35"
+    }
+  },
+  "fpr_caps": [
+    0.01,
+    0.02,
+    0.05,
+    0.0546875,
+    0.0796875,
+    0.1,
+    0.2,
+    0.5,
+    1
+  ],
+  "localization": "active >=75% within ±2 channels of injected truth, same original formula",
+  "audit": "Reconcile locked masks and per-group metrics against scores and original artifact. Use all observed score thresholds only for descriptive curves, no selection for adoption. Nonlocalizing positives always counted as missed, so curve need not reach TPR=1. Distinguish full pipeline binary reference from single-view native curves.",
+  "external_validation": false,
+  "production_adoption": false
+}
