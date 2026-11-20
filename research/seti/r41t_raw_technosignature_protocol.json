@@ -1,0 +1,51 @@
+{
+  "schema": "janus.cosmos.r41t.raw_technosignature_replay.v1",
+  "date": "2026-11-20",
+  "status": "PREREGISTERED_BOUNDED_EXISTING_ARCHIVE_ENGINEERING_TEST",
+  "source": {
+    "r41b": {
+      "run": 44622933443,
+      "artifact": 14586506850,
+      "head_sha": "d7932e505259805ff0eed4da2072157e5831fad7",
+      "archive_sha256": "e2b530244b2263341aeffc02685a5c75f0c83f98fbeaefa195e409cb3e90ba19",
+      "result_sha256": "4d0cd9a21c3acdd6635503146ce77d918d6d85985b598f6609b28be8ce022372"
+    },
+    "pruning_lock_sha256": "94ddfe6a690f8e78253aa9387c409687ca1a37d3a69672be870f75ac77252c67"
+  },
+  "scope": "Five previously viewed audit groups from the fixed R41B plan, four 100 kHz native windows per group, four cadence roles ON1 OFF1 ON2 OFF2 (80 raw tiles). Reacquire same source hashes, no new selection, no synthetic injections, no training. Engineering natural-background replay only, not R39 discovery relaunch, no independent external qualification, no claim of artificial structure or origin. Radio technosignature candidate is distinct from infrared/optical megastructure search.",
+  "scan": {
+    "patch": 128,
+    "stride": 64,
+    "chunk": 64,
+    "edge": "include last full patch; exact common signed native bins; no padding or resampling",
+    "roles": [
+      "ON1",
+      "OFF1",
+      "ON2",
+      "OFF2"
+    ],
+    "pairing": "ON1 vs OFF1, ON2 vs OFF2; OFF1 vs ON1, OFF2 vs ON2 (reverse diagnostic roles, not pure noise labels)",
+    "algorithm": "Exact R41B minimal Rivals+Runs tree unchanged, R40G parent and Joint Min rescue comparison, original native paths, original frozen cuts and masks. No Penrose/5D unqualified variant. Legacy evaluation-only placeholder fields in native row adapter are never labels of real data; invariant alert/path test using alternate placeholders before each group. Persist all patch paths and flags; do not count them as distinct sources."
+  },
+  "association": {
+    "tolerance_bins": 4,
+    "min_rows": 12,
+    "rule": "Match absolute receiver-native frequency tracks within 4 channels on >=12 of 16 rows in same four-role window. No extrapolation across time gaps, source-frame Doppler or physical identity claim. Deduplicate ON1 anchors only by same track rule; deterministic first patch ordinal. Record independent ON2 match and all OFF matches from more permissive Joint Min masks as well as minimal. Retain candidate if no corroboration; descriptive review class only. Keep every raw alert including unmatched and OFF. A match is not proof of interference, absence is not a null detection or calibrated p-value.",
+    "direct_control": "For each deduplicated ON1 minimal anchor whose native path maps exactly to each scan including sideband support, measure actual clipped local ON/OFF contrast at registered receiver frequency (no interpolating), report missing explicitly. Mark lineage, not suppression."
+  },
+  "metrics": [
+    "scanned patches per role",
+    "native band coverage",
+    "R40G, Joint Min, Minimal patch counts",
+    "deduplicated ON1 anchors",
+    "ON2 matched anchors",
+    "ON2 matched with no matched OFF in Joint Min",
+    "shared OFF evidence",
+    "direct control contrasts and source receipts",
+    "network payload, requests, elapsed and CPU"
+  ],
+  "gate": "5/5 exact raw tile hash groups, frozen locks and placeholder invariance; store all paths and masks, no raw injection. Review only; no global false alarm calibration, no confirmed technosignals, no production adoption, R38/R42/fresh discovery gates remain HOLD.",
+  "production_adoption": false,
+  "discovery_relaunch_allowed": false,
+  "external_validation": false
+}
