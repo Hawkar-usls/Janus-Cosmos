@@ -1,0 +1,32 @@
+{
+  "schema": "janus.cosmos.r42a.competitor.protocol.v1",
+  "stage": "R42A_COMMON_HISTORICAL_COMPETITOR",
+  "scope": "Retrospective engineering exam on exact 11 groups of R41S1F: 6 fit calibration, 5 audit, 3168 records. No new data, thresholds or production changes. Rebuild original native rows and verify both raw tile and frozen decision parity; archive frozen NOISE hypothetical mask only, not new model inference.",
+  "source": {
+    "run": 44760007574,
+    "artifact": 14644725660,
+    "sha256": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "arms": [
+    "R41 Minimal + Joint Min",
+    "R41 archived raw NOISE hypothetical",
+    "BLISS CPU",
+    "fastDD CPU",
+    "turboSETI FindDoppler"
+  ],
+  "competitors": {
+    "bliss": "2b98afe960f13ee7e467aca499576d87ee7502f5",
+    "fastdd": "2ba67ea833b330c2f507a790c0f45e864f76126e",
+    "turbo": "7d9b4fde9bc98d834dc11cfc0acd2380e6676f0e"
+  },
+  "input": "Same exact injected examples and native ON/OFF pair; native competitor primary view is identical float32 registered representation used by R41 core; reference registration common; JANUS uses richer raw/paired evidence, native competitors are single-view kernels, not full origin pipelines. Synthetic index frequency headers, turbo path approximate.",
+  "thresholds": "Each native score threshold fixed from six fit-group null controls only: <=5% and <= frozen R41 Minimal fit null fraction (secondary matched calibration). No audit labels for threshold. Report actual audit FAP and paired losses; cannot claim equal realized FAP or scientific dominance.",
+  "metrics": "ordinary/shared localization, weak original labels, control alerts, denominators, paired added/lost vs Minimal/NOISE, per-group results, native timings and preparation separate; no ranking by incompatible costs. Preserve full score records.",
+  "gates": {
+    "production_adoption": false,
+    "external_validation": false,
+    "independent_exam": false
+  },
+  "next": "R42B prospectively freeze fresh native groups with independent custodian, then same matrix with full operational baselines and independent natural labels."
+}
