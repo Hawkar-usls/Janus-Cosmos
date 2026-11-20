@@ -35,5 +35,12 @@
     "archive_sha256": "a99ba4008ea2c345d8a6b872f9f5684d91a341a16aaf6dda3d0f8771c8e938f9",
     "result_sha256": "f2033ed1c36a51b2f422222bc09f37c9f7291aaca36344b80759aa2614d90532",
     "reason": "Six native FITS available, all failed spherical_offsets_to frame mismatch; eight 503. Verify all 44 prior hashes and replay exact archived SIA tables, reuse six FITS before network. Explicitly transform WCS SkyCoord to target ICRS, verify pixel->world->pixel and center angular offset, preserve native grid and PSF/control gate. For unavailable bands retry only HTTP 503 twice total, bounded 150s child; keep missing as HOLD. No change of target or origin gate."
+  },
+  "amendment_r4": {
+    "previous_run": 44772213232,
+    "artifact": 14646923540,
+    "archive_sha256": "4c3ee0b91276dd934c63b028895a5c9d8f4c2e6b7cab1eee4fea34f635f50788",
+    "result_sha256": "febeba9a24b78234deb8687eaa848647a23086d4dab8e824c3cacfd50e96eb79",
+    "reason": "R3 recovered all fourteen native FITS and 53 file hashes verified but Astropy spherical_offsets_to still rejects frame equivalence. Use explicit numeric ICRS unit-vector rotation into local east/north/toward basis; validate angular difference independently against ICRS SkyCoord separation, WCS roundtrip and native center. No use of spherical_offsets_to for pixel offsets; offline pixel replay of all 14 verified native files, no WISE network, no gate changes."
   }
 }
