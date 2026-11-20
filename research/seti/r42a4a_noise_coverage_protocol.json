@@ -1,0 +1,36 @@
+{
+  "schema": "janus.cosmos.r42a4a.noise_all_candidates.v1",
+  "date": "2026-11-20",
+  "stage": "R42A4A",
+  "status": "DEVELOPMENT_FEASIBILITY",
+  "objective": "Test whether frozen R41S1F raw NOISE feature extractor and lane-specific logistic models can score candidates excluded by the original Minimal baseline. No retraining; no parameter changes, threshold selection or production adoption.",
+  "reference": {
+    "minimal_run": 44808892544,
+    "minimal_artifact": 14667942238,
+    "minimal_digest": "c9a414cf3b4e8eb3663d87245e53d3c74c7d3a2319251b5e947b89b644b8b3d6",
+    "common_run": 44785055340,
+    "common_artifact": 14657744482,
+    "common_digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6",
+    "noise_run": 44760007574,
+    "noise_artifact": 14644725660,
+    "noise_digest": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "noise_result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "pilot_groups": [
+    1,
+    7
+  ],
+  "pilot_fit_audit_split": true,
+  "rows_per_group": 288,
+  "method": "Replay exact frozen Minimal on group 1 fit and group 7 historical audit using identical raw SHA and R42A common registered arrays. For every row select original frozen path and lane, read four raw ON/OFF power contexts at physical frequency with r41s_5d_spiral.provenance; overlay input injection in original ON/OFF role only (as R41S1F); run unmodified R41S1F raw_diagnose; apply archived lane-specific imputation, scale, logistic coefficients, intercept and positive fit cutoff. No labels/truth in score computation. Exactly compare features for original supported archived alerts, and archived prediction scores/masks for original supported historical audit alerts. Archive null reason and score coverage for rejected candidates; fail closed on any original supported-score mismatch.",
+  "additional_output": "Newly accessible previously rejected rows, feature support coverage and score-margins. No automatic inference when provenance or model unsupported; NaN with explicit reason. Do not infer full pipeline scalar or a valid global ROC from partial coverage; pilot qualifies only extraction and model parity.",
+  "gates": [
+    "Authentic raw source and archive checksums, original R42A registered input equal",
+    "Frozen Minimal decisions and paths exact; original supported raw NOISE scores match archived for audit",
+    "No model tuning, no label leak into feature derivation",
+    "Coverage for originally rejected candidates explicitly measured, including null reasons",
+    "Full R42B still HOLD: original Parkes actual per-scan pointing and independent custodian"
+  ],
+  "production_adoption": false,
+  "external_validation": false
+}
