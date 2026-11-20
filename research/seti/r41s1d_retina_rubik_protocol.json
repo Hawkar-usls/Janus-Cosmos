@@ -1,0 +1,34 @@
+{
+  "schema": "janus.cosmos.r41s1d.retina_rubik.v1",
+  "date": "2026-11-20",
+  "status": "FROZEN_ADVISORY_DIAGNOSTIC",
+  "parent": {
+    "run": 44730508064,
+    "head_sha": "58c041375bd0d46921fa52d7ecc4407ca342d3be",
+    "artifact": 14629936008,
+    "archive_sha256": "3d5ad4e54f590a72bb5108f065df752d53ff8e874761cc86474205f11bb90b2d",
+    "result_sha256": "4c6d4f8e2fa129c51daac1197e4dcecc0beecc6167553eda1ca97b5b8333e3b5",
+    "traces": 22
+  },
+  "concept": {
+    "retina": "Native 16x208 cells, no interpolation or claimed increase of telescope resolution. Align a 49-bin strip to inherited candidate p; preserve exact original four scan roles and raw hashes. Robust normalization unchanged from R41S1C.",
+    "pixel_matrix": "Core widths 1,3,5 against side bands 8..12 bins; pool contiguous time cells at scales 1,2,4,8 with exact averaging and phase offsets. Measure temporal persistence, density, concentration, phase stability. Each scale auxiliary, native always retained.",
+    "rubik": "Four-face scan-time-frequency tensor; exact reversible 90-degree rotation and axis transpose verify coordinate invariance, not new physical information. Diagnostic null: independently rotate each contiguous 4-row face slab along aligned frequency axis by fixed nonzero shifts 6..18 bins (32 permutations, seed 413201), same geometry and intensities; compare native center statistics with null q90. These are conditioned perturbation contrasts, NOT calibrated p-values; selected path stays fixed; no resampling, no data exchange across physical scans."
+  },
+  "scope": "All 11 previously viewed groups, 3168 examples; all 891 source-qualified baseline alerts, 409 audit. Verify R41S1C archive and 22 hashes and exact full parent trace replay. Append evidence state, do not mutate baseline/roles/path/no training/no veto/no Penrose. Primary injection may not exist in independent repeat; do not reject non-repeat. Report parent/rescue separately; descriptive AUC only, no threshold selection.",
+  "simulation": {
+    "seed": 413202,
+    "n": 32,
+    "classes": [
+      "noise on selected translated path",
+      "coherent narrow",
+      "weak narrow",
+      "scrambled narrow with same row histogram",
+      "broad burst",
+      "shared stationary"
+    ],
+    "description": "Matched independent Gaussian noise faces; amplitude 6 or 1.5 robust units; broad width17. Scramble coherent narrow via exact frequency rolls of primary ON per 4-row slab preserving each row multiset. Simulated path known for injected cases, noise candidate selected by full-primary score among translated templates. Synthetic only; no claim of real interference or origin.",
+    "expected_directions": "Native coherent > scrambled on slab-null excess and persistence; narrow > broad concentration; shared OFF contrast > target-only. Weak sensitivity diagnostic only. Failure preserved; no thresholds modified."
+  },
+  "gate": "Technical PASS if rotation and inverse exact, all parent trace parity, 891 diagnostics, zero decisions changed. Synthetic direction outcomes reported independently even if fail; science HOLD pending genuinely new observations. No claim 53->35 in this run."
+}
