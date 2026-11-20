@@ -17,5 +17,16 @@
     "previous_run": 44759469112,
     "artifact": 14640522924,
     "archive_sha256": "93bace77adece3ad9d079ddc06e7bf6fa87b14034635edb5d04e4ed05e8a6a49"
+  },
+  "amendment_r2": {
+    "previous_run": 44760371360,
+    "artifact": 14640278194,
+    "archive_sha256": "0dac4520dce2eefd79593809e44207f0f28230fe3f89d6c25ddfb767fb7e3b64",
+    "reason": "All seven authentic SIA responses QUERY_STATUS OK, 4 rows per target and W1/W3 same coadd; VOTable field ID col_13 differs from name sia_bp_id. Astropy to_table defaults to IDs. Fix use_names_over_ids=True; mandatory required names; qualification of all seven frozen replies before fetching pixels. Full 4095^2 image also exceeds 32MiB cap; IRSA documented native IBE cutout at 200 arcsec, gzip=false, then original strict 160 arcsec local cutout and unchanged approximate PSF rival fits. Verify pixel scales against SIA native scale and WCS position; archive exact cutout response, URL/query and hashes, do not claim whole original atlas FITS downloaded. No changes to targets or scientific threshold.",
+    "documentation": [
+      "https://docs.astropy.org/en/stable/io/votable/index.html",
+      "https://irsa.ipac.caltech.edu/ibe/cutouts.html"
+    ],
+    "cutout": "200arcsec outer, 160arcsec analysis, native grid, <=2MiB each, no reprojection."
   }
 }
