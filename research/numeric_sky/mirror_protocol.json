@@ -1,0 +1,44 @@
+{
+  "schema": "janus.numeric.sky.mirror.v1",
+  "date": "2026-11-21",
+  "stage": "JANUS-NUMERIC-SKY-AUDIT-R0M",
+  "source_run": 44833839206,
+  "source_shard_count": 8,
+  "scientific_mode": "INDEPENDENT_DETERMINISTIC_MIRROR_TRANSFORMS__NO_RETROFITTING",
+  "numeric_mirror_contract": {
+    "preserve_original": true,
+    "negate": "x -> -x",
+    "decimal_reverse": "Take the exact recorded base-10 decimal numeric representation (not raw source literal for JSON scalars). Preserve sign, reverse digits on either side of decimal as one string; 123.45 -> 54.321, 117 -> 711. Skip exponent notation, nonfinite and values beyond 1e12; report skipped counts.",
+    "source_context": "Preserve exact repository, HEAD revision, source hash, path, line, and original numeric row."
+  },
+  "celestial_mirror_contract": {
+    "frame": "ICRS",
+    "RA_mirror": "(360 - RA) mod 360, Dec unchanged",
+    "equatorial_reflection": "RA unchanged, Dec becomes -Dec",
+    "antipode": "(RA+180) mod 360, Dec becomes -Dec",
+    "interpretation": "Pure coordinate transforms not independent astrophysical measurements; original and mirrors must remain separate."
+  },
+  "synthetic_mirror_contract": {
+    "base_projection": "Already fixed in R0",
+    "variants": [
+      "original",
+      "minus_a",
+      "minus_b",
+      "reverse_both_base10",
+      "swap_ab"
+    ],
+    "null": "Same number of uniform-sky random controls as each selected variant, seeded 20261121.",
+    "note": "Mirroring arbitrary math literals cannot define an actual sky target without an independently justified decoding rule."
+  },
+  "catalog_gate": {
+    "service": "SIMBAD TAP, attempt Harvard and Strasbourg mirrors",
+    "sample_explicit": 24,
+    "sample_synthetic": 8,
+    "cone_arcsec": 30,
+    "control": "Precommitted uniform ICRS directions and their mirrors; match query radius and number; unavailable catalog yields NO_VERDICT.",
+    "multiplicity": "Report all attempted directions and group totals; no significance claims from raw nearby-object matches; proper matched sky controls needed."
+  },
+  "source_limitations": "Original R0 only scans code/default branch of public repos with file-size and extension limits, not 3 private repos; mirror layer inherits same incompleteness.",
+  "production_write": false,
+  "external_discovery_claim": false
+}
