@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.r41s.numeric_operator.v1",
+  "status": "FROZEN_BEFORE_R41S_EXECUTION",
+  "protocol_commit": "360d6a5858994447dd943ddc695ffb8547f98fa3",
+  "parents": {
+    "r41b": {
+      "id": 14586506850,
+      "run": 44622933443,
+      "head_sha": "d7932e505259805ff0eed4da2072157e5831fad7",
+      "sha256": "e2b530244b2263341aeffc02685a5c75f0c83f98fbeaefa195e409cb3e90ba19",
+      "result_sha256": "4d0cd9a21c3acdd6635503146ce77d918d6d85985b598f6609b28be8ce022372",
+      "status": "PASS_STANDALONE_EXACT_PARITY__HOLD_SCIENTIFIC_CONTROL_BUDGET"
+    },
+    "r41p": {
+      "id": 14586565503,
+      "run": 44635980793,
+      "head_sha": "8e0fe07d1f127ae568888bf19f1ff13308479c5f",
+      "sha256": "c2d25dd30949b19de0fbce0d6ae45759fcbc18a3e9257218096c2142c896eada",
+      "result_sha256": "b75a51810ef4323e9bb8a6eb36679b71d5e02a05bfa8cff98f52d5ce226bc307",
+      "status": "PASS_EXACT_BILLIARD_ORDERING__DEVELOPMENT_ONLY"
+    }
+  },
+  "operators": {
+    "D1": "Exact canonical enumeration of existing legal native bank. Select competitor by primary ON clipped contrast in first 8 samples, independently last 8; evaluate each on untouched other 8. Distinct basin >=5 of 16 bins differing >2, both fits agree within 2 throughout, cross-fit improvements on both holdouts.",
+    "D2": "Same candidate positive OFF contrast in both blocks and OFF exceeds primary ON in both; candidate alone shared detection cannot veto.",
+    "D3": "Native stationary candidate only for repeat mapping; compare exact measured bin and neighbor sidebands ±3,4,5 on both independent blocks and wide ±8..12. Require legal unmixed native bins, no padding, no edge filling. Fine vs coarse diagnostic; neither alone vetoes.",
+    "D4": "Maintain candidate, common receiver-frequency contaminant, competing independent coherent trajectory and unconfirmed hypotheses. Conjunction is single prespecified veto; not a fitted classifier. Local micro-pass opens only where D1/D2/D3 conjunction holds; disputed cases retained.",
+    "D5": "Verify 4 distinct raw file URIs, ordered nonoverlapping time intervals, same signed df, cadence roles on/off, matching source slice hashes, legal native mapped bin within 0.001 channel, 16 measured rows and 40-bin halo; independently replay primary and repeat off and repeat on. No missing data counts as evidence."
+  },
+  "thresholds": {
+    "fit_half_rows": 8,
+    "block_margin": 1,
+    "off_floor": 2,
+    "on_ceiling": 0.5,
+    "rescue_on_ceiling": 0,
+    "rescue_off_floor": 2.5,
+    "rescue_margin": 1.5,
+    "alternative_on_floor": 1.5,
+    "wide_narrow_margin": 0.5,
+    "distinct_rows": 5,
+    "distinct_bin_distance": 2,
+    "fit_consensus_max_bin_difference": 2,
+    "grid_error_bins": 0.001,
+    "df_rtol": 1e-12,
+    "ts_rtol": 1e-9,
+    "halo_bins": 40,
+    "max_turns": 3,
+    "max_calls": 15,
+    "max_depth": 2
+  },
+  "decision": "Veto only when D1 competitor predicts both disjoint held-out intervals, D2 primary OFF candidate contrasts >= floor and primary ON <= ceiling with OFF-ON gap >= margin in BOTH blocks, D3 narrow OFF witness on exact native path and wide-side contrast, D5 second independent OFF scan corroborates same stationary receiver-native frequency with BOTH blocks above floor and repeat ON <= ceiling, independent second ON alternative stationary competing frequency with both blocks >= alternative floor and stronger than candidate by margin; second OFF alternative is not required absent. Both half-fitted competitors must be stationary and agree exactly in frequency for cross-scan replay. Rescue margins stricter; if any missing or disagreement retain. Meaning is experimental common-frequency contamination veto, not proof of terrestrial origin. No retraining or threshold adjustment based on outcome.",
+  "state": "Content addressed evidence, not turn/time. 5 first-pass operations (one per axis); if strong conflict and data qualified, 5 second-pass operations on disjoint repeat data. Stop when no new evidence or gate resolved; zero state delta HOLD; never reset. C0 uses same operator and preserves all A alerts; C applies strict veto. Stress test uses separate synthetic repeat perturbation, evaluator only uses truth/labels for perturbation and accounting, no routing or threshold input.",
+  "comparison": "A and C independent fresh native acquisition in separate CPU processes, counterbalanced order; C0 counterfactual identical to A, C0/C share measured operator (do not count as independent physical executions). Stress work excluded from normal inference timing but separately reported. Audit 5 viewed groups / fit 6 viewed groups independent summaries; no B/D until C sealed, no automatic deployment."
+}
