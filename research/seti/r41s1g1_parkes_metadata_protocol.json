@@ -1,0 +1,15 @@
+{
+  "schema": "janus.cosmos.r41s1g1.parkes.metadata.v1",
+  "source": {
+    "run": 44593785066,
+    "id": 14566527135,
+    "sha256": "973c232a126676dc98136442a66f129b747c4a38df740825ce78b58ee7683dba"
+  },
+  "scope": "80 matched zero-coordinate assertions in N10C. Metadata diagnostics only; no spectrum power, no change to pointing/independence gates; no target catalog substitution.",
+  "method": "Restore authenticated original audit; re-query exact original target/role/cadence filename and index snapshot. Sample up to 16 distinct cadences across targets, 64 files; read all pointing-related attrs from HDF5 root and dataset plus exact catalog records. Seek exact original .fil counterpart in separately requested filterbank catalog (same filename stem, source role, MJD, frequency/time matching). Parse only bounded SIGPROC header; reject unknown format. Preserve all evidence. Nonzero original header is a recovery candidate, not independently corroborated pointing. No fresh qualification until independent per-scan actual coordinates satisfy original cadence, prior sky and hash gates.",
+  "max_cadences": 16,
+  "max_header_bytes": 65536,
+  "model_lock": "4b1e5551026c8015ed7598f7f75abd54895285b5b3c8c199e179eabd8e2d6fc9",
+  "production_adoption": false,
+  "external_validation": false
+}
