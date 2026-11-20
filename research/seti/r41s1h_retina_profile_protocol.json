@@ -1,0 +1,10 @@
+{
+  "schema": "janus.cosmos.r41s1h.retina_profile.v1",
+  "date": "2026-11-20",
+  "parent": "R41S1F 44760007574",
+  "scope": "New parent-lane advisory diagnostic on same 11 viewed groups; reuse exact R41S1F raw native input and frozen baseline, no training or veto. Report parent separately; compute same operator for all supported rows for engineering replay but do not apply to rescue.",
+  "method": "Register native 49-bin strip on inherited path. Four disjoint contiguous blocks of 4 time rows; using the other 12 rows fit nonnegative amplitude plus constant background for fixed narrow Gaussian sigma1 pixel, broad Gaussian sigma5 pixels and constant; choose rival narrow center from +/-6..12 channels on training SSE only, then compare on untouched 4 rows. Compare held-out losses in unmodified native values normalized by training shoulder MAD. Keep per-fold signed differences (broad minus narrow, zero minus narrow, rival minus narrow), min and mean, independent ON/OFF role observations. No interpolation, no source identification, path selected on full primary scan conditions the test.",
+  "synthetic": "64 matched base draws each of noise, narrow coherent, weak narrow, broad coherent, block-scrambled narrow, shared narrow with equal ON/OFF strengths; frozen seed 413601. Known injected path, not blind; report matched medians and direction checks. Shared RFI is a deliberate counterexample; no veto from narrowness alone.",
+  "evaluation": "Historical descriptive AUC control=1 per group/lane, no selecting thresholds. Exact original decision maps and localization counts preserved. Fresh qualification HOLD.",
+  "production_adoption": false
+}
