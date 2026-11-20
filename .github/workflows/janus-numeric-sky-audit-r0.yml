@@ -2,7 +2,11 @@ name: JANUS Numeric Sky Audit R0 — complete public code numerics
 on:
   push:
     branches: [research/numeric-sky-audit-r0-20261121]
-    paths: ['.github/workflows/janus-numeric-sky-audit-r0.yml']
+    paths:
+      - '.github/workflows/janus-numeric-sky-audit-r0.yml'
+      - 'research/numeric_sky/scan_numeric_sources.py'
+      - 'research/numeric_sky/aggregate_verify.py'
+      - 'research/numeric_sky/audit_protocol.json'
   workflow_dispatch:
 permissions:
   contents: read
