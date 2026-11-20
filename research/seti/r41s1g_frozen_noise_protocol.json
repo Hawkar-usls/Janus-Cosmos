@@ -1,0 +1,18 @@
+{
+  "schema": "janus.cosmos.r41s1g.frozen_noise.v1",
+  "date": "2026-11-20",
+  "source": {
+    "run": 44760007574,
+    "artifact": 14644725660,
+    "archive_sha256": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "prior_qualification": {
+    "run": 44593785066,
+    "artifact": 14567515709,
+    "archive_sha256": "53d477f6dd1f7a2bb9c5ff1a8c97448aacfae651b3422cfed64c8200681957d4"
+  },
+  "scope": "Freeze exact 40-feature raw_noise rescue model from R41S1F, original feature order, imputation, drop flags, scale, coefficients, intercept, threshold. Verify score replay on every historical rescue prediction (within 1e-9) and 2 control/0 localized losses. No parent lane change, no refitting. Old fresh archive search R40N10C produced zero eligible groups; authenticate evidence. This phase is model qualification, not independent fresh validation.",
+  "fresh_gate": "Require at least two independent native 10cm Parkes ON1/OFF1/ON2/OFF2 groups with matching resolution and windows; globally disjoint target/day/coordinates/file/source hashes against all historical manifests. Selection metadata only; seal before power read. Frozen detector and frozen R41S1G score, identical injection protocol and native role semantics; compare paired counts, exact lost IDs/weak/shared/stress, zero loss and at least one control removed, no optimistic replacement. Distinct receiver transfer separate. If no qualified sources HOLD; no independent claim.",
+  "production_adoption": false
+}
