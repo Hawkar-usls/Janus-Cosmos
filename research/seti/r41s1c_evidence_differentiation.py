@@ -12,6 +12,7 @@ O=pathlib.Path("runtime/r41s1c");O.mkdir(parents=True,exist_ok=True)
 C=O/"parent";C.mkdir(exist_ok=True);PROG=O/"progress";PROG.mkdir(exist_ok=True)
 P=pathlib.Path("research/seti/r41s1c_evidence_differentiation_protocol.json");L=json.loads(P.read_text());T=L["limits"];HALO=s.T["halo_bins"];K=("eval","shared")
 FEATURES=("on_shape_cosine","off_shape_cosine","on_time_pearson","off_time_pearson","on_width_delta","off_width_delta","on_repeat_width","off_repeat_width","on_repeat_core_shoulder","off_repeat_core_shoulder","on_heldout_gain","off_heldout_gain","on_heldout_score","off_heldout_score","on_consensus_fraction","off_consensus_fraction","on_abs_offset_hz","off_abs_offset_hz","on_slope_delta_abs_hz_s","off_slope_delta_abs_hz_s","on_off_path_agreement","on_off_persistent_jaccard","repeat_on_occupancy","repeat_off_occupancy","repeat_on_persistent_fraction","repeat_off_persistent_fraction","repeat_on_broad_row_mean","repeat_off_broad_row_mean","repeat_on_fixed_contrast","repeat_off_fixed_contrast","repeat_off_minus_on_fixed","repeat_on_active","repeat_off_active")
+FEATURES=FEATURES+tuple(k+"_template_"+v for k in ("on","off") for v in ("heldout_gain","heldout_score","abs_offset_hz","shape_cosine","width","consensus_fraction"))
 def save(name,d):a.write(O/name,d)
 def read(name):return json.loads((O/name).read_text())
 def cp(name,d):
@@ -61,10 +62,15 @@ def diagnose(primary_on,primary_off,repeat_on,repeat_off,p,df,ts,bank):
     assert df!=0 and ts>0 and all(x.shape==(16,208) and np.isfinite(x).all() for x in (primary_on,primary_off,repeat_on,repeat_off))
     z=[s.norm(x) for x in (primary_on,primary_off,repeat_on,repeat_off)]
     pa,pb=profile(z[0],p),profile(z[1],p);result={};features={};hps={};occ={}
+    shift_bank=p[None,:]+np.arange(5-int(p.min()),203-int(p.max()))[:,None]
+    assert len(shift_bank)>0 and np.all((shift_bank>=5)&(shift_bank<203))
     for k,pri,rep in (("on",pa,z[2]),("off",pb,z[3])):
         q,hp,held,fixed=search(rep,p,bank,df,ts);pr=profile(rep,hp,held);oc,persist=occupancy(rep);hps[k]=hp;occ[k]=persist
         result[k]={"primary_morphology":pri,"repeat_crossfit_morphology":pr,"trajectory":q,"instrument_proxies":oc}
         features.update({k+"_shape_cosine":cosine(pri["profile"],pr["profile"]),k+"_time_pearson":pearson(pri["trace"],pr["trace"]),k+"_width_delta":None if pri["width"] is None or pr["width"] is None else pr["width"]-pri["width"],k+"_repeat_width":pr["width"],k+"_repeat_core_shoulder":pr["core_shoulder"],k+"_heldout_gain":mean(held-fixed),k+"_heldout_score":mean(held),k+"_consensus_fraction":q["consensus_fraction"],k+"_abs_offset_hz":q["mean_abs_offset_hz"],k+"_slope_delta_abs_hz_s":q["slope_delta_abs_hz_s"],"repeat_"+k+"_occupancy":oc["occupancy"],"repeat_"+k+"_persistent_fraction":oc["persistent_fraction"],"repeat_"+k+"_broad_row_mean":oc["broad_row_mean"],"repeat_"+k+"_fixed_contrast":mean(fixed),"repeat_"+k+"_active":pr["active"]})
+        tq,thp,theld,tfixed=search(rep,p,shift_bank,df,ts);tp=profile(rep,thp,theld)
+        result[k]["template_shift"]={"trajectory":tq,"crossfit_morphology":tp,"family":"translation_only"}
+        features.update({k+"_template_heldout_gain":mean(theld-tfixed),k+"_template_heldout_score":mean(theld),k+"_template_abs_offset_hz":tq["mean_abs_offset_hz"],k+"_template_shape_cosine":cosine(pri["profile"],tp["profile"]),k+"_template_width":tp["width"],k+"_template_consensus_fraction":tq["consensus_fraction"]})
     union=(occ["on"]|occ["off"]).sum()
     features.update(on_off_path_agreement=mean(abs(hps["on"]-hps["off"])<=2),on_off_persistent_jaccard=float((occ["on"]&occ["off"]).sum()/union) if union else None,repeat_off_minus_on_fixed=features["repeat_off_fixed_contrast"]-features["repeat_on_fixed_contrast"])
     assert set(features)==set(FEATURES) and all(v is None or np.isfinite(v) for v in features.values())
@@ -90,8 +96,9 @@ def synthetic(bank):
         v=[x["features"][k] for x in rows if x["class"]==cl and x["features"][k] is not None]
         return float(np.median(v)) if v else None
     medians={cl:{k:med(cl,k) for k in FEATURES} for cl in classes}
-    d={"shifted_narrow_positive_heldout_gain":med("narrow_drifting","on_heldout_gain")>0,"broad_more_occupied_than_narrow":med("broad_burst","repeat_on_occupancy")>med("narrow_drifting","repeat_on_occupancy"),"shared_off_fixed_stronger_than_narrow":med("shared_stationary_proxy","repeat_off_fixed_contrast")>med("narrow_drifting","repeat_off_fixed_contrast")}
-    save("synthetic_controls.json",{"seed":T["synthetic_seed"],"synthetic_only":True,"rows":rows,"medians":medians,"direction_checks":d});assert all(d.values()),d
+    full_bank_check=med("narrow_drifting","on_heldout_gain")>0
+    d={"shifted_narrow_template_positive_heldout_gain":med("narrow_drifting","on_template_heldout_gain")>0,"broad_more_occupied_than_narrow":med("broad_burst","repeat_on_occupancy")>med("narrow_drifting","repeat_on_occupancy"),"shared_off_fixed_stronger_than_narrow":med("shared_stationary_proxy","repeat_off_fixed_contrast")>med("narrow_drifting","repeat_off_fixed_contrast")}
+    save("synthetic_controls.json",{"seed":T["synthetic_seed"],"synthetic_only":True,"rows":rows,"medians":medians,"direction_checks":d,"full_bank_direction_check_diagnostic_only":full_bank_check});assert all(d.values()),d
     return d
 def prepare():
     spec=L["source"];head={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"};root="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions"
@@ -175,8 +182,8 @@ def summary():
     assert tables["fit"]["qualified"]==482 and tables["audit"]["qualified"]==409 and sum(x["qualified"] for x in gr)==891
     cost={k:max(g[k] for g in gr) if "rss" in k else sum(g[k] for g in gr) for k in ("acquisition_wall","baseline_wall","parent_replay_wall","diagnostic_wall","full_wall","cpu","peak_rss_kib","payload_bytes","requests","files")}
     ss=read("synthetic_controls.json");assert all(ss["direction_checks"].values())
-    d={"status":"PASS_EVIDENCE_DIFFERENTIATION_DIAGNOSTIC__HOLD_SCIENTIFIC_SCREEN","groups":11,"rows":3168,"qualified":891,"decision_changes":0,"baseline":{"localized":318,"weak":69,"controls":53},"tables":tables,"cost":cost,"synthetic_direction_checks":ss["direction_checks"],"synthetic_sha256":s.sha((O/"synthetic_controls.json").read_bytes()),"source":L["source"],"trace_sha256":{p.name:s.sha(p.read_bytes()) for p in sorted(O.glob("trace-*.json"))},"production_adoption":False,"external_validation":False}
-    save("result.json",d);cp("99-summary",{"status":d["status"],"groups":11,"qualified":891,"decision_changes":0,"baseline":d["baseline"],"audit_auc":tables["audit"]["descriptive_auc_control_positive"],"synthetic_direction_checks":ss["direction_checks"],"cost":cost})
+    d={"status":"PASS_EVIDENCE_DIFFERENTIATION_DIAGNOSTIC__HOLD_SCIENTIFIC_SCREEN","groups":11,"rows":3168,"qualified":891,"decision_changes":0,"baseline":{"localized":318,"weak":69,"controls":53},"tables":tables,"cost":cost,"synthetic_direction_checks":ss["direction_checks"],"full_bank_direction_check_diagnostic_only":ss["full_bank_direction_check_diagnostic_only"],"synthetic_sha256":s.sha((O/"synthetic_controls.json").read_bytes()),"source":L["source"],"trace_sha256":{p.name:s.sha(p.read_bytes()) for p in sorted(O.glob("trace-*.json"))},"production_adoption":False,"external_validation":False}
+    save("result.json",d);cp("99-summary",{"status":d["status"],"groups":11,"qualified":891,"decision_changes":0,"baseline":d["baseline"],"audit_auc":tables["audit"]["descriptive_auc_control_positive"],"synthetic_direction_checks":ss["direction_checks"],"full_bank_direction_check_diagnostic_only":ss["full_bank_direction_check_diagnostic_only"],"cost":cost})
 if __name__=="__main__":
     if ARGS[0]=="prepare":prepare()
     elif ARGS[0]=="group":group(int(ARGS[1]))
