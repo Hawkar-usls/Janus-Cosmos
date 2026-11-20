@@ -2,7 +2,9 @@ name: JANUS R42A4A full-candidate NOISE coverage pilot
 on:
   push:
     branches: [research/seti-r42a4a-noise-all-candidates-20261120]
-    paths: ['.github/workflows/seti-r42a4a-noise-all-candidates.yml']
+    paths:
+      - '.github/workflows/seti-r42a4a-noise-all-candidates.yml'
+      - 'research/seti/r42a4a_noise_coverage.py'
   workflow_dispatch:
 permissions:
   contents: read
