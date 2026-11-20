@@ -1,0 +1,63 @@
+name: JANUS Numeric Sky R0M2 — recovered-source mirrors and catalog
+on:
+  push:
+    branches: [research/numeric-sky-audit-r0-mirror-20261121]
+    paths: ['.github/workflows/janus-numeric-sky-r0m2-recovered.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-numsky-r0m2-recovered
+  cancel-in-progress: false
+jobs:
+  combined-mirror:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      PYTHONUNBUFFERED: '1'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify exact mirror and source merge implementation
+        run: |
+          python -m py_compile research/numeric_sky/merge_recovered_shards.py research/numeric_sky/mirror_numbers_and_sky.py research/numeric_sky/aggregate_verify.py
+          python -m pip install requests==2.32.3
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 44833839206
+          github-token: ${{ github.token }}
+          pattern: numsky-shard-*
+          path: runtime/numeric_sky/original
+          merge-multiple: false
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 44834866914
+          github-token: ${{ github.token }}
+          pattern: numsky-repaired-*
+          path: runtime/numeric_sky/repaired
+          merge-multiple: false
+      - name: Merge source archives and check frozen HEAD revisions
+        run: |
+          python research/numeric_sky/merge_recovered_shards.py
+          test -s runtime/numeric_sky/numeric_source_merge_receipt.json
+      - name: Mirror every recovered numeric literal and explicit sky coordinate
+        run: |
+          python research/numeric_sky/mirror_numbers_and_sky.py
+          test -s runtime/numeric_sky/mirror/mirror_summary.json
+          test -s runtime/numeric_sky/mirror/mirrored_explicit_icrs_directions.json
+          test -s runtime/numeric_sky/mirror/mirrored_numeric_all.jsonl.gz
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-numeric-sky-r0m2-complete-mirror-results
+          path: |
+            runtime/numeric_sky/numeric_source_merge_receipt.json
+            runtime/numeric_sky/mirror/
+          if-no-files-found: warn
+          retention-days: 90
