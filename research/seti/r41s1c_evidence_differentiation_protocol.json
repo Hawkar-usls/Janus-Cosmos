@@ -1,0 +1,46 @@
+{
+  "schema": "janus.cosmos.r41s1c.evidence_differentiation.v1",
+  "date": "2026-11-20",
+  "status": "FROZEN_DIAGNOSTIC_ONLY",
+  "source": {
+    "run": 44711647088,
+    "head_sha": "eb664322808271f99715358dc309c509f51c9a3e",
+    "artifact": 14618353623,
+    "archive_sha256": "0c70ac769ab01d45753ab27d503881cecc7a707234474454e48e61fd1a4061c0",
+    "result_sha256": "5d2b88df2584296a945aefbc92b623268915ced64ec24b5f750e351e003d3cdc",
+    "trace_count": 22
+  },
+  "scope": {
+    "groups": 11,
+    "rows": 3168,
+    "fit_viewed": 6,
+    "audit_viewed": 5,
+    "qualified_alerts": 891,
+    "audit_qualified": 409,
+    "audit_controls": 53,
+    "claim": "Retrospective synthetic injections on measured backgrounds; not independent new astronomy or physical origin labels."
+  },
+  "routing": "Reacquire original 176 exact hashed tiles and regenerate identical frozen Minimal inference. Replay original C and R41S1B advisory traces for every alert; assert exact trace ancestry and baseline masks. Apply all three diagnostic operators to every qualified alert, no y, truth, amplitude, target-specific routing or archived residual identifiers. Unsupported or unqualified remain unchanged. No veto, ranking, fitting, tuning, Penrose or decision changes.",
+  "operators": {
+    "morphology": "Compare primary candidate and independently selected repeat paths: ridge-aligned frequency profiles +/-12, positive excess width proxy, core vs shoulders, active fraction, temporal half means, profile cosine and time-profile Pearson (undefined if zero norm or constant). ON and OFF separately; shape agreement not physical identity. Primary uses injected test spectrum; repeat measured raw. No resampling or padding.",
+    "trajectory": "On second ON and OFF separately search full frozen R35B path shapes translated to legal 208-channel halo. On first 8 rows select exact best canonical path; evaluate on held-out last 8; then reverse. Compare to fixed receiver candidate. Clipped contrast [-4,4], canonical ties. Record held-out gains, consensus, signed frequency offsets, slope Hz/s, curvature, boundary flags, ON/OFF agreement. No physical extrapolation across gaps. Count search multiplicity, maximum not p-value.",
+    "instrument": "Per-scan robust normalized >3 occupancy, fraction of channels with >50% rows above 3, row common-mode occupancy, narrow core vs shoulders and width, persistent ON/OFF channel occupancy Jaccard, ON/OFF selected-path agreement. Proxies only, not confirmed RFI classifications."
+  },
+  "controls": "Independent synthetic holdout seed 413101, 32 base noise realizations per class: noise, narrow drifting, broad burst, shared stationary instrument proxy. Matched independent repeat scan pairs, injection 8 robust units, 20-bin shift, 16 rows, broad width 17. Report predefined feature distributions by simulated class; no training. Synthetic control class is not actual instrument identity.",
+  "evaluation": "Fixed feature names; AUC control=1 as retrospective descriptive effect size, per-target median only where both classes exist; correlated paired rows not independent. Fit/audit separately, parent/rescue, missingness and denominator; no winning feature or threshold chosen. Synthetic controls separate. Verify archive SHA and 22 trace hashes, exact replay, append content-addressed diagnostic state. Record network, CPU, wall, memory. No new stress claim.",
+  "gate": "PASS engineering only if archive/22 traces verified, 11 exact baseline and first/second trace replays, 891 qualified diagnostics (409 audit), synthetic controls show expected directions, no alert/hit changes. Scientific adoption HOLD; external independent fresh data still needed.",
+  "limits": {
+    "max_native_width": 208,
+    "side_bins": 12,
+    "half_rows": 8,
+    "synthetic_seed": 413101,
+    "synthetic_n_per_class": 32,
+    "synthetic_amplitude": 8,
+    "shift_bins": 20,
+    "broad_width": 17,
+    "normalized_occupancy_threshold": 3,
+    "channel_persistence_fraction": 0.5
+  },
+  "production_adoption": false,
+  "external_validation": false
+}
