@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.r41u1r5a.protocol.v1",
+  "stage": "R41U1R5A",
+  "source": {
+    "run": 44773280928,
+    "artifact": 14647574450,
+    "archive_sha256": "7dbc00006144ecea67911cadcf36bc1be712f512f2a66178bbd80a573b2ba9fe",
+    "result_sha256": "1e889945e32ca2c594d4b6d1a87b82d999a1fdedc7ea2caafdcc4c7b939b402b"
+  },
+  "selection": {
+    "catalog": "Gaia DR3",
+    "radius_deg": 0.12,
+    "min_target_sep_arcsec": 90,
+    "max_g_diff": 1.5,
+    "max_color_diff": 0.5,
+    "controls_per_target": 3,
+    "minimum_control_sep_arcsec": 45,
+    "score": "abs(delta_G)/1.5 + abs(delta_BP_RP)/0.5; source_id tie break",
+    "before_ir": true,
+    "exclude_all_original_targets": true,
+    "retain_unmatched": true
+  },
+  "measurement": {
+    "bands": [
+      "W1",
+      "W3"
+    ],
+    "same_native_tile": true,
+    "method": "unchanged archived R4 WCS and Gaussian PSF diagnostic",
+    "neighbor_radius_arcsec": 18,
+    "epoch_approx": 2010.5,
+    "report_w3_flux_proxy_and_boundary": true
+  },
+  "gates": {
+    "independent_exposures": false,
+    "real_psf": false,
+    "calibrated_significance": false,
+    "production_adoption": false,
+    "origin_claim": false
+  },
+  "next": "R5B: independently acquired individual WISE exposures or genuinely independent higher-resolution images; empirical PSF, uncertainties and W3 SNR matching; no origin inference from R5A."
+}
