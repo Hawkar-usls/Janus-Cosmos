@@ -170,7 +170,23 @@ def scan_repository(repo,base,number_sink):
     try:
         run(["git","clone","-q","--depth","1","--filter=blob:none","--no-checkout","--single-branch","https://github.com/"+repo+".git",str(dest)],timeout=420)
         record["head_sha"]=run(["git","-C",str(dest),"rev-parse","HEAD"],timeout=15).strip()
-        listing=run(["git","-C",str(dest),"ls-tree","-r","-l","HEAD"],timeout=60)
+        # GitHub's recursive Trees REST endpoint avoids slow lazy-tree fetching from
+        # blob-filtered Git clones. Freeze the exact Git commit (not a moving branch).
+        import urllib.request
+        tree_url="https://api.github.com/repos/"+repo+"/git/trees/"+record["head_sha"]+"?recursive=1"
+        headers={"Accept":"application/vnd.github+json","User-Agent":"JANUS-Numeric-Sky-R0-Recovery"}
+        if os.environ.get("GH_TOKEN"):headers["Authorization"]="Bearer "+os.environ["GH_TOKEN"]
+        try:
+            request=urllib.request.Request(tree_url,headers=headers)
+            with urllib.request.urlopen(request,timeout=100) as response:
+                tree=json.load(response)
+            if tree.get("truncated") or not tree.get("tree"):raise ValueError("TREE_UNAVAILABLE_OR_TRUNCATED")
+            listing="\n".join("100644 blob "+str(o.get("sha"))+" "+str(o.get("size",-1))+"\t"+o["path"]
+                for o in tree["tree"] if o.get("type")=="blob")
+        except Exception as api_err:
+            record["errors"].append({"stage":"tree_rest_fallback","error":str(api_err)[:150]})
+            listing=run(["git","-C",str(dest),"ls-tree","-r","-l","HEAD"],timeout=240)
+
         selected=[];total=0
         for line in listing.splitlines():
             try:
