@@ -39,7 +39,7 @@ def measure(label):
     c=SkyCoord(ra*u.deg,de*u.deg).spherical_offsets_by(pmra*(2010.5-ep)*u.mas,pmdec*(2010.5-ep)*u.mas)
     out={"label":label,"gaia_id":sid,"position_deg":[float(c.ra.deg),float(c.dec.deg)],"epoch_approx":2010.5,"bands":{}}
     try:
-        raw=get(L["endpoint"],{"POS":f"{c.ra.deg},{c.dec.deg}","SIZE":"0.000277777778","FORMAT":"image/fits"},cap=2*1024**2);(O/f"{label}-sia.xml").write_bytes(raw)
+        raw=get(L["endpoint"],{"POS":f"{c.ra.deg},{c.dec.deg}","SIZE":"0.000277777778","FORMAT":"ALL"},cap=2*1024**2);(O/f"{label}-sia.xml").write_bytes(raw)
         table=parse_single_table(io.BytesIO(raw)).to_table()
         def val(row,k):
             x=row[k];return x.decode() if isinstance(x,bytes) else str(x)
