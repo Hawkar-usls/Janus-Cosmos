@@ -20,6 +20,11 @@ def get(url,params=None,headers=None,cap=32*1024**2):
             data.extend(block)
             if len(data)>cap:raise RuntimeError("response exceeds limit")
         return bytes(data)
+def sia_table(raw):
+    tab=parse_single_table(io.BytesIO(raw)).to_table(use_names_over_ids=True)
+    required={"sia_bp_id","sia_url","coadd_id","sia_ra","sia_dec","sia_scale","sia_fmt"}
+    assert required.issubset(tab.colnames),f"missing SIA named columns: {required-set(tab.colnames)}"
+    return tab
 def prepare():
     p=L["source"];h={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"};root="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions"
     md=json.loads(get(f"{root}/artifacts/{p['artifact']}",headers=h));assert md["workflow_run"]["id"]==p["run"] and md["digest"]=="sha256:"+p["archive_sha256"]
@@ -31,7 +36,12 @@ def prepare():
     g=json.loads((O/"gaia.json").read_text());assert sha((O/"gaia.csv").read_bytes())==g["sha256"] and set(g["rows"])==set(old.S["infrared"]["gaia_source_ids"].values())
     oc=json.loads((O/"orbit_catalog.json").read_text());assert len(oc)==11
     for i,v in enumerate(oc):assert v["status"]=="MEASURED_CATALOG_ONLY" and sha((O/f"jpl-{i:02d}.json").read_bytes())==v["sha256"]
-    save("prepare.json",{"gaia":7,"orbit":11,"source":p,"protocol_sha256":sha(P.read_bytes())})
+    prev=L["amendment_r2"];meta=json.loads(get(f"{root}/artifacts/{prev['artifact']}",headers=h));assert meta["workflow_run"]["id"]==prev["previous_run"] and meta["digest"]=="sha256:"+prev["archive_sha256"]
+    prior=get(f"{root}/artifacts/{prev['artifact']}/zip",headers=h,cap=64*1024**2);assert sha(prior)==prev["archive_sha256"]
+    zz=zipfile.ZipFile(io.BytesIO(prior));rr=json.loads(zz.read("result.json"));assert rr["qualified"]==0 and rr["gaia_preserved"]==7 and rr["orbit_preserved"]==11
+    for label in old.S["infrared"]["gaia_source_ids"]:
+        name=f"{label}-sia.xml";raw=zz.read(name);assert sha(raw)==rr["hashes"][name];tab=sia_table(raw);assert {"W1","W3"}.issubset({str(x).strip() for x in tab["sia_bp_id"]});(O/f"{label}-prior-sia.xml").write_bytes(raw)
+    save("prepare.json",{"gaia":7,"orbit":11,"source":p,"prior_sia_replayed":7,"protocol_sha256":sha(P.read_bytes())})
 def measure(label):
     sid=old.S["infrared"]["gaia_source_ids"][label];d=json.loads((O/"gaia.json").read_text())["rows"][sid]
     ra,de,pmra,pmdec,ep=[old.num(d[k]) for k in ("ra","dec","pmra","pmdec","ref_epoch")]
@@ -40,26 +50,27 @@ def measure(label):
     out={"label":label,"gaia_id":sid,"position_deg":[float(c.ra.deg),float(c.dec.deg)],"epoch_approx":2010.5,"bands":{}}
     try:
         raw=get(L["endpoint"],{"POS":f"{c.ra.deg},{c.dec.deg}","SIZE":"0.000277777778","FORMAT":"ALL"},cap=2*1024**2);(O/f"{label}-sia.xml").write_bytes(raw)
-        table=parse_single_table(io.BytesIO(raw)).to_table()
+        table=sia_table(raw)
         def val(row,k):
-            x=row[k];return x.decode() if isinstance(x,bytes) else str(x)
+            x=row[k];return (x.decode() if isinstance(x,bytes) else str(x)).strip()
         grouped={}
         for row in table:
             band=val(row,"sia_bp_id");url=val(row,"sia_url");id=val(row,"coadd_id")
             if band in ("W1","W3") and urllib.parse.urlparse(url).hostname=="irsa.ipac.caltech.edu" and url.endswith("-int-3.fits"):
-                grouped.setdefault(id,{})[band]=(url,float(row["sia_ra"]),float(row["sia_dec"]))
+                grouped.setdefault(id,{})[band]=(url,float(row["sia_ra"]),float(row["sia_dec"]),np.abs(np.asarray(row["sia_scale"],float))*3600)
         choices=[(float(c.separation(SkyCoord(v["W1"][1]*u.deg,v["W1"][2]*u.deg)).deg),k,v) for k,v in grouped.items() if set(v)=={"W1","W3"}]
         assert choices,"no common W1/W3 tile";_,cid,bands=min(choices,key=lambda x:(x[0],x[1]));out["coadd_id"]=cid
         for k,fwhm in (("W1",6.1),("W3",6.5)):
             try:
-                url=bands[k][0];raw=get(url);path=O/f"{label}-{k}-atlas.fits";path.write_bytes(raw)
+                url=bands[k][0];params={"center":f"{c.ra.deg:.10f},{c.dec.deg:.10f}deg","size":"200arcsec","gzip":"false"};raw=get(url,params=params,cap=2*1024**2);path=O/f"{label}-{k}-native-ibe.fits";path.write_bytes(raw)
                 with fits.open(io.BytesIO(raw),memmap=False) as hd:
                     h=hd[0];data=np.asarray(h.data,float).squeeze();w=WCS(h.header).celestial;assert data.ndim==2
+                    assert min(data.shape)>=115 and max(data.shape)<=200 and np.allclose(proj_plane_pixel_scales(w)*3600,bands[k][3],rtol=1e-3,atol=1e-5),"native scale/size mismatch"
                     cut=Cutout2D(data,c,(160*u.arcsec,160*u.arcsec),wcs=w,mode="strict")
                     y,x=np.indices(cut.data.shape);world=cut.wcs.pixel_to_world(x,y);dx,dy=c.spherical_offsets_to(world);xx=dx.arcsec;yy=dy.arcsec
                     head=cut.wcs.to_header();head["BUNIT"]=str(h.header.get("BUNIT","UNKNOWN"));fits.PrimaryHDU(cut.data,header=head).writeto(O/f"{label}-{k}-cutout.fits",overwrite=True)
                     q=old.psf_fit(cut.data,xx,yy,fwhm);ctl=old.controls(cut.data,xx,yy)
-                    out["bands"][k]={"status":"OK" if q is not None else "HOLD_INSUFFICIENT_PIXELS","url":url,"source_sha256":sha(raw),"cutout_sha256":sha((O/f"{label}-{k}-cutout.fits").read_bytes()),"shape":list(cut.shape),"unit":h.header.get("BUNIT"),"pixel_scale_arcsec":(proj_plane_pixel_scales(cut.wcs)*3600).tolist(),"psf_fit":q,"controls":ctl}
+                    out["bands"][k]={"status":"OK" if q is not None else "HOLD_INSUFFICIENT_PIXELS","url":url,"query":params,"source_kind":"native IBE server cutout, not full atlas","source_shape":list(data.shape),"source_sha256":sha(raw),"cutout_sha256":sha((O/f"{label}-{k}-cutout.fits").read_bytes()),"shape":list(cut.shape),"unit":h.header.get("BUNIT"),"pixel_scale_arcsec":(proj_plane_pixel_scales(cut.wcs)*3600).tolist(),"psf_fit":q,"controls":ctl}
             except Exception as e:out["bands"][k]={"status":"HOLD","error":str(e)[:400]}
             save("ir-"+label+".json",out)
     except Exception as e:out["error"]=str(e)[:400]
