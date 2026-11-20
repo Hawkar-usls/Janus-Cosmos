@@ -1,0 +1,69 @@
+{
+  "schema": "janus.cosmos.r42a4b.full_noise_coverage.v1",
+  "date": "2026-11-20",
+  "stage": "R42A4B",
+  "status": "PREREGISTERED_FULL_HISTORICAL_COVERAGE_AUDIT",
+  "scope": "No changes to R42A4A frozen NOISE model or raw extraction: reuse signed pilot groups 01+07 and replay remaining nine groups. Count supported all-candidate raw NOISE scores and reasons for missing raw provenance, and assert previously qualified features plus frozen audit predictions exact. No new thresholds, no new global score assembly, and no production adoption.",
+  "pilot": {
+    "run": 44822205236,
+    "artifact": 14672099636,
+    "digest": "e89fc1ba0d6cebe1b01ef02817605fdd4d99de7961c8ded2f0315e5cc13cebcf",
+    "groups": [
+      1,
+      7
+    ],
+    "result": {
+      "rows": 576,
+      "scores": 574,
+      "original_qualified": 175,
+      "rejected_scored": 395
+    }
+  },
+  "reference": {
+    "minimal_run": 44808892544,
+    "minimal_artifact": 14667942238,
+    "minimal_digest": "c9a414cf3b4e8eb3663d87245e53d3c74c7d3a2319251b5e947b89b644b8b3d6",
+    "common_run": 44785055340,
+    "common_artifact": 14657744482,
+    "common_digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6",
+    "noise_run": 44760007574,
+    "noise_artifact": 14644725660,
+    "noise_digest": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "noise_result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "pilot_groups": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "expected": {
+    "total_groups": 11,
+    "fit": 6,
+    "audit": 5,
+    "total_rows": 3168,
+    "original_audit": {
+      "localized": 318,
+      "weak": 69,
+      "controls": 53
+    }
+  },
+  "scoring": "Exactly original R42A4A raw_diagnose and archived lane-specific logistic transform; original Minimal paths/roles frozen; no model refit, no extrapolated confidence claims. All-candidate scored fraction and unsupported reasons are diagnostic; scores on previously rejected rows are out of original selection distribution. Mask equality and input provenance SHA checks mandatory.",
+  "gates": [
+    "Pilot ZIP authenticated and pilot group-01/07 NPZ SHA-256 equals archived records",
+    "All remaining source raw tile SHA and R42A common-input parity",
+    "Frozen NOISE raw features and audit predictions match original qualified candidate archive",
+    "Report coverage, unsupported reasons, accepted and rejected strata by fit/audit and group",
+    "No cross-lane continuous JANUS+NOISE curve claimed until a separate predetermined scalar and calibration qualify"
+  ],
+  "external_validation": false,
+  "production_adoption": false,
+  "independent_pointing_hold": true
+}
