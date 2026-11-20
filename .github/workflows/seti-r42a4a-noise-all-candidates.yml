@@ -1,0 +1,75 @@
+name: JANUS R42A4A full-candidate NOISE coverage pilot
+on:
+  push:
+    branches: [research/seti-r42a4a-noise-all-candidates-20261120]
+    paths: ['.github/workflows/seti-r42a4a-noise-all-candidates.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r42a4a-noise-all-candidates
+  cancel-in-progress: false
+jobs:
+  pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMBA_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install numpy==2.2.6 requests==2.32.3 scipy==1.15.3 scikit-learn==1.6.1 h5py==3.13.0 hdf5plugin==5.0.0 beautifulsoup4==4.13.4 numba==0.61.2
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Authenticate frozen R41 R42 and prepare NOISE model
+        run: |
+          python -m py_compile research/seti/r42a4a_noise_coverage.py
+          PYTHONPATH=research/seti python -c 'import r42a4a_noise_coverage as m; m.prepare()'
+          test -s runtime/r42a4a/preparation.json
+      - name: Replay fit group 01 NOISE for all input rows
+        run: |
+          PYTHONPATH=research/seti python -c 'import r42a4a_noise_coverage as m; m.group(0)'
+          test -s runtime/r42a4a/group-01.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r42a4a-fit-group-01
+          path: |
+            runtime/r42a4a/group-01.json
+            runtime/r42a4a/rows-01.json
+            runtime/r42a4a/01-*-noise-all.npz
+          if-no-files-found: error
+          retention-days: 90
+      - name: Replay historical audit group 07 and prove frozen NOISE score parity
+        run: |
+          PYTHONPATH=research/seti python -c 'import r42a4a_noise_coverage as m; m.group(6)'
+          test -s runtime/r42a4a/group-07.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r42a4a-audit-group-07
+          path: |
+            runtime/r42a4a/group-07.json
+            runtime/r42a4a/rows-07.json
+            runtime/r42a4a/07-*-noise-all.npz
+          if-no-files-found: error
+          retention-days: 90
+      - name: Summarize original-rejected score coverage without any retraining
+        run: |
+          PYTHONPATH=research/seti python -c 'import r42a4a_noise_coverage as m; m.summary()'
+          test -s runtime/r42a4a/result.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r42a4a-noise-all-candidates-pilot
+          path: runtime/r42a4a/
+          if-no-files-found: warn
+          retention-days: 90
