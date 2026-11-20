@@ -1,0 +1,45 @@
+name: JANUS COSMOS — 3773 зеркала 3774–3776
+on:
+  push:
+    branches: [research/zerkalo-janusa-3773-mirrors-20261121]
+    paths: ['.github/workflows/zerkalo-janusa-singularity-mirrors.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-zerkalo-singularity-3774-3776
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PYTHONUNBUFFERED: '1'
+      META_COMMIT: b835d7f0e8f74cba33b40f73598c2b1aaf8271a6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Freeze and validate mirrored sky calculation
+        run: |
+          python -m py_compile research/numeric_sky/singularity_3773_mirrors.py research/numeric_sky/collapse_3773.py research/numeric_sky/direct_gaia_irsa_3773.py
+          python -m json.tool research/numeric_sky/singularity_3773_mirrors_protocol.json >/dev/null
+          python -m pip install requests==2.32.3
+      - name: Recompute source atlas and inspect three new ICRS directions in SIMBAD Gaia and IRSA with matched mirrors of random controls
+        run: |
+          PYTHONPATH=research/numeric_sky python research/numeric_sky/singularity_3773_mirrors.py
+          test -s runtime/numeric_sky/singularity_mirrors/3773_3776_result.json
+          test -s runtime/numeric_sky/singularity_mirrors/3774_3776_external_catalog.json
+          test -s runtime/numeric_sky/singularity_mirrors/3774_3776_random_control_results.json
+      - name: Retain complete mirror audit, including unavailable services
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-zerkalo-singularity-3774-3776-mirrors
+          path: runtime/numeric_sky/singularity_mirrors/
+          if-no-files-found: warn
+          retention-days: 90
