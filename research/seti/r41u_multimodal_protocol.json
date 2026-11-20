@@ -1,0 +1,52 @@
+{
+  "schema": "janus.cosmos.r41u.multimodal.v1",
+  "date": "2026-11-20",
+  "status": "PREREGISTERED_EXPLORATORY",
+  "radio": {
+    "run": 44733648612,
+    "scope": "unchanged R41B actual radio detector, separately running; no duplicate launch"
+  },
+  "transfer": "Reuse R41B competing hypothesis and continuity principles and fail-open/Joint Min retention, not its radio-trained weights on incompatible data; nonradio adapters are new unqualified comparators.",
+  "infrared": {
+    "source": "https://doi.org/10.1093/mnras/stae1186",
+    "gaia_source_ids": {
+      "A": "3496509309189181184",
+      "B": "4843191593270342656",
+      "C": "4649396037451459712",
+      "D": "2660349163149053824",
+      "E": "3190232820489766656",
+      "F": "2956570141274256512",
+      "G": "2644370304260053376"
+    },
+    "data": "Gaia DR3 positions and proper motions propagated approximately to 2010.5; SkyView WISE 3.4 and 12 micron FITS cutouts (resampled survey images, not individual exposures). Known target list, not independent blind sample. Fixed PSF approximate Gaussian FWHM 6.1/6.5 arcsec, compare fixed stellar vs free centroid within +/-6 arcsec on checkerboard pixel halves, held-pixel error on swapped halves; source flux and 24 ring control apertures. Pixel correlation prevents calibrated significance; no physical source exclusion or assertion. Preserve candidate despite competing fit, report centroid offsets and gains; synthetic fixed/shifted source software test. If unavailable HOLD, no substitute catalog values.",
+    "followup_sources": [
+      "https://arxiv.org/abs/2607.09460",
+      "https://arxiv.org/abs/2607.03619",
+      "https://doi.org/10.1093/mnrasl/slaf006"
+    ],
+    "disclosure": "Known follow-up outcomes before test; retrospective stress, not blind; independent raw images and optical/IR calibration required."
+  },
+  "orbit": {
+    "source": "https://ssd-api.jpl.nasa.gov/doc/sbdb.html",
+    "targets": [
+      "1I",
+      "2I",
+      "3I"
+    ],
+    "natural_controls": [
+      "1P",
+      "2P",
+      "67P",
+      "C/1995 O1",
+      "C/2020 F3",
+      "101955",
+      "99942",
+      "433"
+    ],
+    "data": "JPL SBDB full-precision orbit, covariance if returned, physical parameters and model parameters; one request at a time; distinguish absent acceleration estimate from zero. Record e/sigma, q, inclination, arc, observation count, A1/A2/A3 with units, uncertainties and model. No independent residuals in SBDB solution, no claim of maneuver or origin. List natural-control overlaps.",
+    "synthetic": "Separate fixed-seed toy astrometric residual control (not physical ephemeris): 48 time samples, 64 cases per noise/smooth acceleration/impulsive slope-change/periodic residual; fit linear+quadratic, hinge and sinusoidal rivals on first 24 and test future 24; also interleaved halves for interpolation. Fixed hinge events and frequencies, no fitting to real targets; compare heldout errors; no claims of detecting probes, and no real astrometric residual inference. Explicitly distinguish catalog data intake vs actual residual test."
+  },
+  "gates": "No candidate promotion, no production change. Missing data gives HOLD; report all targets and costs. Need raw astrometry with errors, independent time arcs and natural force models for real orbital tests; actual manufactured positives absent. No evidence of self replication from one object. Optical transit and optical artifact lane not implemented here; later TESS/Palomar with labeled natural controls.",
+  "production_adoption": false,
+  "external_validation": false
+}
