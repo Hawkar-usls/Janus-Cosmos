@@ -21,7 +21,7 @@ def frozen_score(features,model):
     return z
 def prepare():
     base.prepare()
-    original,rd=f.download(f.L["source"])
+    original,rd=f.download({"run":S["reference"]["noise_run"],"artifact":S["reference"]["noise_artifact"],"sha256":S["reference"]["noise_digest"]})
     assert sha(rd("result.json"))==S["reference"]["noise_result_sha256"]
     assert original["baseline"]=={"controls":53,"localized":318,"weak":69,"ordinary":205,"shared":113}
     assert original["models"]["raw_noise"]["hypothetical"]["controls"]==51
@@ -35,7 +35,7 @@ def prepare():
     print("R42A4A_PREPARED",flush=True)
 def group(i):
     assert (i+1) in S["pilot_groups"]
-    original,rd=f.download(f.L["source"])
+    original,rd=f.download({"run":S["reference"]["noise_run"],"artifact":S["reference"]["noise_artifact"],"sha256":S["reference"]["noise_digest"]})
     assert sha(rd("result.json"))==S["reference"]["noise_result_sha256"]
     models=original["models"]["raw_noise"];common,rc=full.unpack()
     plan=base.plan();g=plan["groups"][i];num=f"{i+1:02d}"
