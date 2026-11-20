@@ -28,5 +28,12 @@
       "https://irsa.ipac.caltech.edu/ibe/cutouts.html"
     ],
     "cutout": "200arcsec outer, 160arcsec analysis, native grid, <=2MiB each, no reprojection."
+  },
+  "amendment_r3": {
+    "previous_run": 44765412986,
+    "artifact": 14644555536,
+    "archive_sha256": "a99ba4008ea2c345d8a6b872f9f5684d91a341a16aaf6dda3d0f8771c8e938f9",
+    "result_sha256": "f2033ed1c36a51b2f422222bc09f37c9f7291aaca36344b80759aa2614d90532",
+    "reason": "Six native FITS available, all failed spherical_offsets_to frame mismatch; eight 503. Verify all 44 prior hashes and replay exact archived SIA tables, reuse six FITS before network. Explicitly transform WCS SkyCoord to target ICRS, verify pixel->world->pixel and center angular offset, preserve native grid and PSF/control gate. For unavailable bands retry only HTTP 503 twice total, bounded 150s child; keep missing as HOLD. No change of target or origin gate."
   }
 }
