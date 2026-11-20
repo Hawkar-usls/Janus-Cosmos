@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install numpy==2.2.6 requests==2.32.3 scikit-learn==1.6.1
-      - name: Compute descriptive ROC DET only and classify historical profile preferences
+      - name: Recompute identical ROC DET and classify exact result-relative residual profiles
         run: |
           python -m py_compile research/seti/r41s1h2a_diagnostics.py
           PYTHONPATH=research/seti python -c 'import r41s1h2a_diagnostics as m; m.main()'
