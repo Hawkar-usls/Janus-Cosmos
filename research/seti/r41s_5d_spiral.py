@@ -137,7 +137,11 @@ def spiral(x,y,p,lane,meta,src,fs,pre,bank,repeat_override=None):
 def selftest(bank):
     # Fixed synthetic data; scientific threshold not selected on outcome.
     rng=np.random.default_rng(41231);x=rng.normal(0,0.04,(16,128));p=np.full(16,64);z=x.copy();z[:,40]+=10
-    f=fit(norm(z),p,bank);assert f["stationary_agreement"] and f["forward_path"]==[40]*16
+    small=np.array([[20]*16,[40]*16,[64]*16],np.int64)
+    f=fit(norm(z),p,small);assert f["stationary_agreement"] and f["forward_path"]==[40]*16
+    # Full bank test: each reported rival matches an independent direct fit objective.
+    u=n.normalized_contrast(norm(z)[None,:,:])[0];legal=bank[(abs(bank-p)>2).sum(1)>=5];v=u[np.arange(16)[None,:],legal];f0=fit(norm(z),p,bank)
+    assert f0["forward_path"]==legal[int(v[:,:8].sum(1).argmax())].tolist() and f0["backward_path"]==legal[int(v[:,8:].sum(1).argmax())].tolist()
     hist=[];assert state({"x":1},hist,["a"]);assert not state({"x":1},hist,["a"]);assert state({"x":2},hist,["a"]);assert hist[1]["parent_state_sha256"]==hist[0]["state_sha256"]
     q=spiral(z,z,p,"parent",(0,0,3000.,2.8),"0"*64,[],[],bank);assert not q["veto"]
     q=spiral(z,z,np.full(16,0),"rescue",(0,0,3000.,2.8),"0"*64,[],[],bank);assert not q["veto"] and q["calls"]==0
@@ -147,15 +151,18 @@ def selftest(bank):
     pp=[]
     for k in range(4):
         raw=rng.normal(0,.04,(16,256));raw[:,104 if k%2 else 80]+=10
+        if k%2==0:raw[:,104]-=10
         pp.append([({"df_hz":2.8,"channel0_mhz":3000.-40*2.8/1e6,"slice_sha256":str(k)*64},raw)])
     assert provenance(fs,pp,(0,0,3000.,2.8),"0"*64) is not None
     assert provenance(fs,pp,(0,0,3000.,2.8),"f"*64) is None
     bad=[dict(q) for q in fs];bad[2]["url"]=bad[0]["url"];assert provenance(bad,pp,(0,0,3000.,2.8),"0"*64) is None
     on=pp[0][0][1][:,40:168];off=pp[1][0][1][:,40:168]
-    rr=spiral(on,off,p,"parent",(0,0,3000.,2.8),"0"*64,fs,pp,bank)
-    # A failed corroboration is always retained; true veto is not required for random synthetic example.
-    if rr["veto"]:assert rr["turns"]==2 and rr["calls"]==10
-    broken=spiral(on,off,p,"parent",(0,0,3000.,2.8),"f"*64,fs,pp,bank);assert not broken["veto"]
+    rr=spiral(on,off,p,"parent",(0,0,3000.,2.8),"0"*64,fs,pp,small)
+    assert rr["veto"] and rr["turns"]==2 and rr["calls"]==10
+    # Corroboration removed: preserve the candidate despite the same primary spectrum.
+    repeat_bad=(pp[2][0][1][:,:208].copy(),pp[3][0][1][:,:208].copy());repeat_bad[0][:,104]+=20
+    assert not spiral(on,off,p,"parent",(0,0,3000.,2.8),"0"*64,fs,pp,small,repeat_bad)["veto"]
+    broken=spiral(on,off,p,"parent",(0,0,3000.,2.8),"f"*64,fs,pp,small);assert not broken["veto"]
     assert not spiral(np.full_like(on,np.nan),off,p,"parent",(0,0,3000.,2.8),"0"*64,fs,pp,bank)["veto"]
     return {"bank_size":len(bank),"disjoint_crossfit":True,"content_hash_no_gain":True,"source_invalidation":True,"unsupported_fail_open":True,"synthetic_example_veto":rr["veto"]}
 def prepare():
