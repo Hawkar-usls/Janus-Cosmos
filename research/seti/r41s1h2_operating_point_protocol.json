@@ -1,0 +1,52 @@
+{
+  "schema": "janus.cosmos.r41s1h2.operating_point.v1",
+  "date": "2026-11-20",
+  "stage": "R41S1H2_LOCK",
+  "source": {
+    "run": 44785397749,
+    "artifact": 14654131578,
+    "archive_sha256": "5dee42ae965d2f70dcb9a67a5ce002b5bb8b118c287c2bed3905c0ebff35f38d",
+    "protocol_sha256": "06eb74df6458f6bfb8a7505d765132b701d07650f050bba8e720f12489b789e5",
+    "code_sha256": "e0b5e7c767b0654d3ca2d24889d2441075cb0bdb712bc1b897da56ce70be8cef"
+  },
+  "threshold_policy": {
+    "physical": "Keep iff score >= minimum positive physical score on the 768 development examples, inclusive; one predetermined point; no optimization on heldout or historical.",
+    "fixed": "Identical method with fixed profile score on same development positives; independently determined numeric cut, identical zero development-positive-loss policy.",
+    "development_seeds": [
+      413701,
+      413702
+    ],
+    "heldout_seeds": [
+      413791,
+      413792,
+      413793
+    ],
+    "positive_classes": [
+      "target_narrow",
+      "target_weak",
+      "target_intermittent"
+    ],
+    "negative_classes": [
+      "shared_narrow",
+      "broad_rfi",
+      "stationary_off",
+      "noise",
+      "shifted_rival"
+    ],
+    "unsupported": "Keep alert; unknown/unsupported evidence never treated as zero or veto. No thresholds selected from historical data. These are simulation-calibrated operating points, not physical FAP calibration."
+  },
+  "native_evaluation": {
+    "status": "HOLD_NO_QUALIFIED_INDEPENDENT_GROUPS",
+    "scope": "Do not access real held-out spectra before immutable lock and a frozen manifest, with exact native ON/OFF role, coordinates, grid/time, target/day and raw hash disjointness. No synthetic index headers in native inference. R41S1H1 uses 16x49 power strip centered at inherited path, actual df Hz, tsamp seconds; retain native channel orientation and original H1 shoulder normalization including clip ±12, no re-fits or parameter modifications. If acquisition/adapter unsupported, fail open. Model is analytical, no learned weights; code, protocol and numeric thresholds are the freeze authority.",
+    "historical": "38 known parent alert controls may be evaluated once after lock and adapter audit, tracked as already-viewed historical development evidence, not independent closed exam. Do not tune or choose thresholds on these controls. Report exact same rows and paired decisions; if old archive is replayed, preserve 318 localized (205 ordinary +113 shared), 69 weak, 13 remaining rescue controls unchanged, ≤35 total alerts (at least 16 parent reductions), zero paired localization losses, zero lost weak/shared; 640 eval controls. No alternative threshold after evaluation.",
+    "independent": "Use new qualified groups with distinct calibration vs evaluation only if a future separately preregistered stage is required; current H2 threshold fully frozen from synthetic dev. R42B requires independent external custodian and fresh manifest. Use baseline Minimal+frozen NOISE, fixed and physical; baseline/noise rescue unchanged. Compare paired losses even if aggregate recovers other hits. Report denominators, actual TPR and FPR at locked operating point, rejection fractions by class, worst group, SNR strata using documented original weak labels and physical SNR only if calibrated; no invented SNR. AUC descriptive only, no alternate cutoff in same report.",
+    "gates": [
+      "zero paired localized/weak/shared losses",
+      "historical total controls <=35 only on common 640-control panel",
+      "independent test predeclared group-wise control rate and detection preservation, report confidence intervals by independent group; no universal superiority claim",
+      "R42B and R38 before production"
+    ]
+  },
+  "production_adoption": false,
+  "external_validation": false
+}
