@@ -1,0 +1,39 @@
+name: JANUS COSMOS R3775 — focused target epoch audit
+on:
+  push:
+    branches: [research/zerkalo-3775-independent-epochs-20261121]
+    paths: ['.github/workflows/zerkalo-r3775-target-quick.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-zerkalo-r3775-target-only
+  cancel-in-progress: false
+jobs:
+  target:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Validate target-only frozen code
+        run: |
+          python -m py_compile research/numeric_sky/3775_target_only_quick.py research/numeric_sky/3775_independent_epochs.py
+          python -m pip install requests==2.32.3
+      - name: Query NASA NEOWISE exposures and independent MAST optical detections at preselected AllWISE source
+        run: |
+          python research/numeric_sky/3775_target_only_quick.py
+          test -s runtime/numeric_sky/3775_epochs/target_only_quick.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: janus-r3775-temporal-target-only-preflight
+          path: runtime/numeric_sky/3775_epochs/
+          if-no-files-found: warn
+          retention-days: 90
