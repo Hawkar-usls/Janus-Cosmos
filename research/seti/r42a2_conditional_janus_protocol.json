@@ -1,0 +1,35 @@
+{
+  "schema": "janus.cosmos.r42a2.protocol.v1",
+  "stage": "R42A2",
+  "scope": "Historical diagnostic only. Authenticate existing Minimal binary decisions and lane-specific archived raw NOISE logistic scores. Sweep common additive margin offset around each frozen lane threshold, no fitting, no threshold adopted. This is conditional on Minimal baseline alerts and not a full JANUS continuous detector curve.",
+  "common": {
+    "run": 44785055340,
+    "id": 14657744482,
+    "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+  },
+  "noise": {
+    "run": 44760007574,
+    "id": 14644725660,
+    "digest": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "arms": [
+    "both_lanes",
+    "parent_only_rescue_locked",
+    "rescue_only_parent_locked"
+  ],
+  "score": "For each supported Minimal-alert row margin = archived raw NOISE score minus its own lane's frozen positive cutoff. Threshold offset zero must reproduce existing 318/69/51 exactly. Sweep margin only on eligible rows in selected arm; other lane uses frozen archived decisions, unsupported rows fail open, non-alerts remain rejected. Compare exact paired localization, weak losses, false alerts by lane, at observed distinct offsets. Not a new deployable calibration; no offsets exported as operating thresholds.",
+  "fpr_caps": [
+    0.01,
+    0.02,
+    0.05,
+    0.0546875,
+    0.0796875,
+    0.1,
+    0.0828125,
+    1
+  ],
+  "must_report": "At each cap maximum empirical retained localized with actual FA, weak, paired loss, floor if impossible. Include strict no-loss Pareto summary. Historical evaluation-only; no tuning on 38 controls. H2 lock unchanged. All 160 shared positives are duplicated stationary synthetic injections in ON and corresponding OFF with per-scan MAD-scaled amplitude, same active trajectory; not independently sourced signals. Do not pool shared as independent pairs.",
+  "production_adoption": false,
+  "external_validation": false
+}
