@@ -68,7 +68,7 @@ def constnum(n):
     if isinstance(n,ast.Constant):return numeric(n.value)
     if isinstance(n,ast.UnaryOp) and isinstance(n.op,(ast.USub,ast.UAdd)):
         v=constnum(n.operand);return (-v if isinstance(n.op,ast.USub) else v) if v is not None else None
-    if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Mult)):
+    if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Mult):
         l,r=n.left,n.right
         if isinstance(l,ast.Attribute) and l.attr=="deg":return constnum(r)
         if isinstance(r,ast.Attribute) and r.attr=="deg":return constnum(l)
