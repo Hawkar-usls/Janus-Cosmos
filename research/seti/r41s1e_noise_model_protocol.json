@@ -1,0 +1,39 @@
+{
+  "schema": "janus.cosmos.r41s1e.noise_model.v1",
+  "date": "2026-11-20",
+  "parent": {
+    "run": 44730508064,
+    "head_sha": "58c041375bd0d46921fa52d7ecc4407ca342d3be",
+    "artifact": 14629936008,
+    "archive_sha256": "3d5ad4e54f590a72bb5108f065df752d53ff8e874761cc86474205f11bb90b2d",
+    "result_sha256": "4c6d4f8e2fa129c51daac1197e4dcecc0beecc6167553eda1ca97b5b8333e3b5"
+  },
+  "scope": "Archive-only retrospective diagnostic on all 891 source-qualified alerts (482 fit-viewed,409 audit-viewed); verify parent ZIP and 22 trace hashes; match frozen group feature rows and labels, no new spectra, labels only for summary; keep all alerts. R41S1D separate, no production change.",
+  "inputs": "16 clipped normalized local contrast samples along inherited primary ON/OFF path; repeat ON/OFF translation-only crossfit fragments saved in parent (not continuous tracks or independent replications of injected lines); fixed-path repeat block means only available separately. All samples are short and clipped, not raw complex voltages. No extrapolation or frequency alignment claim.",
+  "features": [
+    "median3 residual RMS and MAD",
+    "Savitzky-Golay 5-point polynomial order2 residual RMS",
+    "FFT high-frequency fraction (bins >=4 of 8 positive bins, after mean removal)",
+    "Haar adjacent pair detail/centered energy ratio",
+    "lag1 residual correlation and difference RMS",
+    "repeat contrast profile disagreement and fixed block differences",
+    "conditional equal-variance Gaussian prediction log score for target-only, shared, independent means and zero models; estimate scale separately from training OFF differences, floor 0.5; both parity folds, no true source inference"
+  ],
+  "hypotheses": "Noise present in every hypothesis; conditional working approximation using OFF scale, not calibrated likelihood or posterior. ON/OFF contamination and clipping make it misspecified; compare heldout log scores, not origin. Selection of primary path on whole scan remains bias. No inference from roughness alone.",
+  "synthetic": {
+    "seed": 413301,
+    "pairs": 64,
+    "classes": [
+      "noise_iid",
+      "noise_ar1",
+      "smooth_target",
+      "jagged_target",
+      "weak_target",
+      "shared_narrow",
+      "transient_target"
+    ],
+    "count": 448,
+    "description": "All 64 base draws matched across 7 classes; independent 4x16 Gaussian sequences, AR1 coefficient .75 for correlated noise, clip all to [-4,4]. Synthetic persistent target and shared narrow lines may be equally smooth."
+  },
+  "gates": "Verify archive provenance and exact match, report diagnostic features per case and paired synthetic summaries incl false separability from smoothness. No directional feature tuning, no veto or prospective improvement. Real raw shoulder samples and independent noise calibration needed next."
+}
