@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cosmos.zerkalo_janusa.singularity.mirror.audit.v1",
+  "date": "2026-11-21",
+  "name_ru": "Зеркало Януса — зеркальные точки 3774–3776",
+  "source": {
+    "meta_repository": "Hawkar-usls/janus-meta-registry",
+    "meta_commit": "672e593a87abef2246ac1fe5b4ca3cdcdabcde26",
+    "meta_path": "data/JANUS-ZERKALO-JANUSA-SINGULARITY-3773-MIRRORS-2026-11-21.json",
+    "base_ordinal": 3773,
+    "base_fingerprint_sha256": "1c42dc53a9591f477cfba9678121c7ab331cc2afa2286b7d5187ef376fced080"
+  },
+  "inputs": {
+    "original_atlas_size": 3772,
+    "mirrored_singularity_points": 4,
+    "new_targets": [
+      3774,
+      3775,
+      3776
+    ],
+    "frames": "ICRS",
+    "units": "degrees",
+    "source_recompute": "Unmodified collapse_3773.compute() checks SHA256 of original 3772 coordinates."
+  },
+  "catalog": {
+    "simbad_radii_arcsec": [
+      2,
+      10,
+      30,
+      60
+    ],
+    "random_controls_per_new_mirror": 64,
+    "random_control_source": "Existing SHA256-frozen 256 controls from collapse_3773.simulate_random_controls; first 64 indices mirrored by same operator as the target",
+    "multi_catalog": [
+      "Gaia DR3 via official ESA TAP",
+      "AllWISE via NASA/IPAC IRSA TAP"
+    ],
+    "no_source_means": "UNKNOWN if catalog unavailable; absence only within service limits",
+    "interpretation": "Catalog neighbors are not discovery nor detection; controls and survey coverage are required before claims",
+    "all_observations_read_only": true
+  },
+  "no_model_training": true,
+  "production_unchanged": true
+}
