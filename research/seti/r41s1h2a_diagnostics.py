@@ -8,7 +8,7 @@ P=pathlib.Path("research/seti/r41s1h2a_diagnostics_protocol.json");S=json.loads(
 O=pathlib.Path("runtime/r41s1h2a");O.mkdir(parents=True,exist_ok=True)
 def sha(b):return hashlib.sha256(b).hexdigest()
 def write(n,d):(O/n).write_text(json.dumps(d,indent=2,allow_nan=False)+"\n")
-def archive(q):
+def archive(q,anchor='result.json'):
     api="https://api.github.com/repos/Hawkar-usls/Janus-Cosmos/actions"
     h={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"}
     def get(u):
@@ -18,9 +18,13 @@ def archive(q):
     z=zipfile.ZipFile(io.BytesIO(b));files=[x for x in z.infolist() if not x.is_dir()]
     assert sum(x.file_size for x in files)<256*1024**2
     assert len({x.filename for x in files})==len(files)
+    a=[x for x in files if pathlib.PurePosixPath(x.filename).name==anchor]
+    assert len(a)==1,(anchor,len(a))
+    root=pathlib.PurePosixPath(a[0].filename).parent
     def rd(name):
-        m=[x for x in files if pathlib.PurePosixPath(x.filename).name==name]
-        assert len(m)==1,(name,len(m))
+        exact=str(root/name)
+        m=[x for x in files if x.filename==exact]
+        assert len(m)==1,(exact,len(m))
         return z.read(m[0])
     return rd
 def curves():
@@ -48,7 +52,7 @@ def curves():
 def morph():
     rd=archive(S["source_f"]);d=rd("result.json");assert sha(d)==S["source_f"]["result_sha256"];f=json.loads(d)
     assert f["baseline"]["controls"]==53 and f["models"]["raw_noise"]["hypothetical"]["controls"]==51
-    h=archive(S["source_h"]);res=json.loads(h("h_result.json"));assert res["groups"]==11 and res["decision_changes"]==0
+    h=archive(S["source_h"],"h_result.json");res=json.loads(h("h_result.json"));assert res["groups"]==11 and res["decision_changes"]==0
     pred={(p["group"],p["kind"],p["row"]):p["would_keep"] for lane in ("parent","rescue") for p in f["models"]["raw_noise"][lane]["predictions"]}
     controls=[];tot=collections.Counter()
     names=("broad","zero","rival")
