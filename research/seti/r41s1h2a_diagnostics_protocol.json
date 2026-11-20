@@ -1,0 +1,53 @@
+{
+  "schema": "janus.cosmos.r41s1h2a.diagnostics.v1",
+  "scope": "Retrospective descriptive ROC/DET and archived parent residual attributes only, no fit, no threshold selection or veto. H2 frozen point unchanged. H3 on hold.",
+  "source_h2": {
+    "run": 44786812937,
+    "id": 14653828217,
+    "digest": "608643dd148242a53b6134cf11645b99c3476a5d2fbb8be5a37c553e60b30842",
+    "lock_sha256": "52d6e811ea95484c14f130a4bc70cda588d988d3446ba64ed1c32424f7ce56e2"
+  },
+  "source_h": {
+    "run": 44772939503,
+    "id": 14652428666,
+    "digest": "ed0e50ee645f7af8542fa6bedcef51d4736b7ef369816cb2a01a930aea725b17"
+  },
+  "source_f": {
+    "run": 44760007574,
+    "id": 14644725660,
+    "digest": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+    "result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+  },
+  "panel": {
+    "full_controls": 640,
+    "baseline_controls": 51,
+    "target_controls": 35,
+    "parent": 38,
+    "rescue": 13,
+    "required_parent_removals": 16,
+    "parent_retention_max": 0.5789473684210527,
+    "weak": 69,
+    "localizations": 318
+  },
+  "roc": {
+    "empirical_fpr_caps": [
+      0.01,
+      0.02,
+      0.05,
+      0.0546875,
+      0.0796875,
+      0.1,
+      0.2,
+      0.5,
+      0.5789473684210527,
+      0.75,
+      1
+    ],
+    "rule": "Descriptive highest empirical TPR among actual ROC points <= cap. No threshold exported or adopted. Conditional synthetic candidate FPR differs from pipeline FPR. Report count resolution 1/720 and per-seed curves; 432 positive, 720 negative. DET false rejection vs false acceptance."
+  },
+  "residual": {
+    "rule": "Read authenticated H and F group rows, assert exact row parity and frozen noise parent survival. All 38 parent controls including unsupported; use signed held-block differences averaged over primary ON; nearest competing hypothesis vs narrow: broad/constant/shifted choose lowest loss (most negative difference) only if nonzero and strictly unique, otherwise narrow or ambiguous. Compare primary and repeat ON consistency; OFF narrow over constant in both ON/OFF pairs flag descriptive shared-like. No causal RFI labels; no random-noise assertion from constant-like. No change thresholds or model. Tabulate count of supported, unknown, disagreement, class overlap, per row and per group; historical labels already viewed."
+  },
+  "external_validation": false,
+  "production_adoption": false
+}
