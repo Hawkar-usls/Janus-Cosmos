@@ -45,9 +45,11 @@ def query(services,adql):
                 r.raise_for_status()
                 s=r.text.strip()
                 if not s or s.startswith(("<?xml","<html","<!DOCTYPE")):raise ValueError("Non-CSV/no-response body from TAP")
-                rows=list(csv.DictReader([line for line in s.splitlines() if not line.startswith("#")]))
-                if rows and (not "ra" in {x.lower() for x in rows[0]} or not "dec" in {x.lower() for x in rows[0]}):
-                    raise ValueError("Unexpected CSV headers: "+str(list(rows[0]))[:200])
+                reader=csv.DictReader([line for line in s.splitlines() if not line.startswith("#")])
+                fields={x.lower() for x in (reader.fieldnames or [])}
+                if "ra" not in fields or "dec" not in fields:
+                    raise ValueError("Unexpected CSV headers: "+str(reader.fieldnames)[:200])
+                rows=list(reader)
                 return {"status":"OK","service":service,"method":method,"rows":rows,"errors":errors}
             except Exception as e:errors.append(service+" "+method+": "+str(e)[:190])
     return {"status":"UNAVAILABLE","service":None,"rows":[],"errors":errors}
