@@ -1,0 +1,95 @@
+{
+  "schema": "janus.cosmos.zerkalo.3775.archival_reproducibility.v1",
+  "name_ru": "Зеркало Януса — R3775 независимые эпохи и сопоставимые контрольные поля",
+  "date": "2026-11-21",
+  "status": "PREREGISTERED_RESEARCH_ONLY",
+  "research_question": "Does an independently measured infrared or optical source around the arbitrary 3775th sky coordinate show repeatable properties beyond comparable nearby control fields?",
+  "origin": {
+    "ordinal": 3775,
+    "ra_deg": 39.742276528418486,
+    "dec_deg": 1.3505804808702793,
+    "frame": "ICRS",
+    "source_fingerprint_sha256": "1c42dc53a9591f477cfba9678121c7ab331cc2afa2286b7d5187ef376fced080",
+    "construction": "SHA256 arbitrary direction and its equatorial mirror, not a physical prediction"
+  },
+  "preselected_allwise_neighbor": {
+    "catalog": "NASA/IPAC AllWISE",
+    "id": "J023858.36+012107.9",
+    "ra_deg": 39.7431798,
+    "dec_deg": 1.3521946,
+    "separation_arcsec": 6.658371344110135,
+    "w1_mag": 17.924,
+    "w2_mag": 16.46,
+    "w3_mag": 12.754,
+    "w4_mag": 8.975,
+    "warning": "Selected after seeing catalog. No physical identity to direction 3775 and W3/W4 photometric values without quality flags are not validated detections."
+  },
+  "field_controls": {
+    "count": 16,
+    "offset_degrees": [
+      0.3,
+      0.6
+    ],
+    "position_angle_degrees": [
+      0,
+      45,
+      90,
+      135,
+      180,
+      225,
+      270,
+      315
+    ],
+    "approximation": "tangent-plane local offsets keeping nearby Galactic latitude and observing conditions; count local source densities with equivalent search radius",
+    "freeze_before_observation": true
+  },
+  "source_controls": {
+    "count": 12,
+    "annulus_deg": [
+      0.033333333333,
+      0.35
+    ],
+    "catalog": "AllWISE",
+    "magnitude_match": {
+      "w1_range": [
+        16.5,
+        19
+      ],
+      "w2_range": [
+        15,
+        17.9
+      ]
+    },
+    "selection": "Deterministic smallest W1/W2/color-distance after rejecting catalog artifacts where flags are available; freeze before NEOWISE observations; require >=8 for empirical comparison"
+  },
+  "archived_epoch_observations": {
+    "primary": "NEOWISE-R single-exposure",
+    "tap_table": "neowiser_p1bs_psd",
+    "match_radius_arcsec": 2.5,
+    "min_seasons": 3,
+    "min_exposures_per_season": 3,
+    "season_gap_days": 90,
+    "quality": "0 < mag_err <= 0.35; SNR >=5, reduced chi2 <=3 and no known artifact flags if available. Missing quality fields must be flagged.",
+    "variability": "Delta season mean >=0.4 magnitudes and >=5 estimated standard errors, both must hold",
+    "calibration": "12 brightness-matched source controls and 16 matched local sky fields"
+  },
+  "independent_observations": {
+    "optical": "Pan-STARRS DR2 multi-epoch detections, query fixed RA/Dec, preserve observation time and photometric quality",
+    "infrared": "WISE and NEOWISE are same instrument family but separate temporal exposures, not two independent instruments",
+    "missing_data": "UNAVAILABLE is never proof of no source"
+  },
+  "interpretation": {
+    "source_association": "At 6.66 arcsec offset and without astrometric evidence, AllWISE neighbor cannot automatically be assigned to theoretical sky point",
+    "novelty": "No novel probe or technosignature from catalog neighbors, a rare variable or hash-mapped coordinate. Independent new observations and replication required.",
+    "production_change": false,
+    "R42B": "HOLD until authenticated original telescope pointing and external blind data"
+  },
+  "outputs": [
+    "preflight.json",
+    "matched_field_controls.json",
+    "selected_source_controls.json",
+    "per_source_epochs.json",
+    "panstarrs_optical.json",
+    "audit_result.json"
+  ]
+}
