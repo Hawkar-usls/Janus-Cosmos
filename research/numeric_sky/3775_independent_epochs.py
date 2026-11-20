@@ -89,7 +89,7 @@ def query_allwise():
         result["anchor_status"]="PASS_FROZEN_NEIGHBOR_MATCH";result["anchor"]=match
     result["within_10arcsec"]=sum(distance(ra,dec,val(x,"ra"),val(x,"dec"))<=10 for x in result["rows"])
     save("frozen_neighbor_verification.json",result)
-    print("R3775_ALLWISE_ANCHOR",json.dumps({k:v for k,v in result.items() if k!="rows"},flush=True))
+    print("R3775_ALLWISE_ANCHOR",json.dumps({k:v for k,v in result.items() if k!="rows"}),flush=True)
     return result
 def field_controls():
     ra=P["origin"]["ra_deg"];dec=P["origin"]["dec_deg"];q=[]
@@ -147,7 +147,7 @@ def select_source_controls():
         "catalog_errors":query_result.get("errors",[]),
         "matching_method":"Frozen chi-square scaled W1/W2/color distance within 0.35 deg and no repeated source within 30 arcsec; no epoch results used"}
     save("selected_source_controls.json",result)
-    print("R3775_CONTROLS",json.dumps({k:v for k,v in result.items() if k!="selected"},flush=True))
+    print("R3775_CONTROLS",json.dumps({k:v for k,v in result.items() if k!="selected"}),flush=True)
     return chosen
 def density_controls(fields):
     out=[]
@@ -243,7 +243,7 @@ def panstarrs_one(source):
         except Exception as e:out[kind]={"status":"UNAVAILABLE","error":str(e)[:270]}
     save("panstarrs_"+source["id"].replace("/","_")+".json",out)
     print("R3775_PANSTARRS",json.dumps({"source":source["id"],"mean":out["mean"]["status"],"detections":out["detection"]["status"],
-        "n_detections":out["detection"].get("rows")},flush=True))
+        "n_detections":out["detection"].get("rows")}),flush=True)
     return out
 def main():
     source=fixed_source()
