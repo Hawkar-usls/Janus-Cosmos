@@ -1,0 +1,43 @@
+{
+  "schema": "janus.cosmos.r42a3b.protocol.v1",
+  "stage": "R42A3B",
+  "date": "2026-11-20",
+  "scope": "Extend exact R42A3A diagnostic Minimal scalar to remaining ten historical groups. Reuse authenticated group 01 pilot without recomputation. No modifications to score construction, routing, frozen thresholds or production; no threshold adoption.",
+  "pilot": {
+    "run": 44803265356,
+    "artifact": 14660324590,
+    "digest": "1685fd6a9179d9a8ad686655825e07381f52778227ef96dd28158c95798842cb",
+    "protocol_sha256": "9ecfcde9c79f146f2e21c8d2a1a9bac87a07a42367dd57d22671a57cd6b2f388",
+    "code_sha256": "a9cd672910cfdeaf9fe9a19484bf0292ed3c95884aa6fbe0d5f5a9388bc527ef",
+    "group": 1
+  },
+  "common": {
+    "run": 44785055340,
+    "artifact": 14657744482,
+    "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+  },
+  "groups": 11,
+  "rows": 3168,
+  "fit_groups": 6,
+  "audit_groups": 5,
+  "expected_audit": {
+    "localized": 318,
+    "weak": 69,
+    "controls": 53
+  },
+  "score_rule": "Byte-preserve original pilot score block (fixed original routing, transform m/(1+abs(m)), parent min/max gates, prune fail-open, joint rescue margin). Every row finite; exact zero threshold matches original Minimal decision/path correctness. Scalar is diagnostic, cross-stage scaling arbitrary; not a fully rerouted detector or continuous NOISE model.",
+  "analysis": "Reconcile 22 score arrays including pilot against exact R42A common artifact, validate every score/path and identity, summarize descriptive group-wise and pooled audit localization-aware curves (FNR=1-TPR), mark locked operating point. No threshold selection or changes. Optional fit-only threshold at target budget as separately labelled hypothetical diagnostic, predefined before audit; no adoption. Do not infer power on fresh data.",
+  "caps": [
+    0.01,
+    0.02,
+    0.05,
+    0.0546875,
+    0.0796875,
+    0.1,
+    0.2,
+    0.5,
+    1
+  ],
+  "production_adoption": false,
+  "external_validation": false
+}
