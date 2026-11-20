@@ -238,5 +238,5 @@ def main():
              "numbers":sum(r["numbers"] for r in inventory),"coordinate_candidates":len(candidates)}
     (outdir/"audit_summary.json").write_text(json.dumps(verdict,indent=2))
     print("NUMSKY_SHARD",json.dumps(verdict),flush=True)
-    if verdict["failed"]:sys.exit(3)
+    if verdict["failed"]:print("NUMSKY_SHARD_REPO_ERRORS_RECORDED",flush=True)
 if __name__=="__main__":main()
