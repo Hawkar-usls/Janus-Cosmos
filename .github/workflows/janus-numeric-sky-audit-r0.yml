@@ -1,0 +1,87 @@
+name: JANUS Numeric Sky Audit R0 — complete public code numerics
+on:
+  push:
+    branches: [research/numeric-sky-audit-r0-20261121]
+    paths: ['.github/workflows/janus-numeric-sky-audit-r0.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-numeric-sky-r0
+  cancel-in-progress: false
+jobs:
+  code-scan:
+    name: Code scan shard ${{ matrix.shard }}/8
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7]
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
+      GIT_TERMINAL_PROMPT: "0"
+      GIT_HTTP_LOW_SPEED_LIMIT: "1000"
+      GIT_HTTP_LOW_SPEED_TIME: "120"
+      PYTHONUNBUFFERED: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Compile and validate preregistered schema
+        run: |
+          python -m py_compile research/numeric_sky/scan_numeric_sources.py research/numeric_sky/aggregate_verify.py
+          python -m json.tool research/numeric_sky/audit_protocol.json > /dev/null
+      - name: Scan numeric tokens and qualified RA/Dec across assigned default-branch snapshots
+        run: |
+          python research/numeric_sky/scan_numeric_sources.py --shard ${{ matrix.shard }} --shards 8
+          test -s runtime/numeric_sky/shard-0${{ matrix.shard }}/numbers.jsonl.gz
+          test -s runtime/numeric_sky/shard-0${{ matrix.shard }}/inventory.json
+      - name: Save exact source numbers and immutable SHA provenance for shard
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: numsky-shard-${{ matrix.shard }}
+          path: runtime/numeric_sky/shard-0${{ matrix.shard }}/
+          if-no-files-found: warn
+          retention-days: 90
+          compression-level: 6
+  verify-sky:
+    name: Combined source audit and independent catalog control
+    needs: code-scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install catalog read-only HTTPS client
+        run: python -m pip install requests==2.32.3
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: numsky-shard-*
+          path: runtime/numeric_sky/collected
+          merge-multiple: false
+      - name: Verify all 48 repositories, compute fixed sky projections, and compare SIMBAD with controls
+        run: |
+          python research/numeric_sky/aggregate_verify.py
+          test -s runtime/numeric_sky/final/audit_summary.json
+          test -s runtime/numeric_sky/final/explicit_icrs_candidates.json
+      - name: Publish final audit and all results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-numeric-sky-audit-r0-final
+          path: runtime/numeric_sky/final/
+          if-no-files-found: warn
+          retention-days: 90
