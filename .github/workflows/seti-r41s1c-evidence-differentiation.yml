@@ -1,4 +1,4 @@
-name: JANUS R41S1C evidence differentiation
+name: JANUS R41S1C evidence differentiation R1
 on:
   push:
     branches: [research/seti-r41s-5d-spiral-20261120]
@@ -31,7 +31,7 @@ jobs:
           python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
       - name: Compile evidence differentiation operator
         run: python -m py_compile research/seti/r41s1c_evidence_differentiation.py
-      - name: Authenticate transition audit and test independent simulated controls
+      - name: Authenticate transition audit and test translation family on new simulated controls
         env:
           GH_TOKEN: ${{ github.token }}
         run: python research/seti/r41s1c_evidence_differentiation.py prepare
