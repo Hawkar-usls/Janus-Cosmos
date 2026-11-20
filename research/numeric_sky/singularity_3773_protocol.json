@@ -1,0 +1,40 @@
+{
+  "schema": "janus.cosmos.zerkalo_janusa.singularity.v1",
+  "name_ru": "Зеркало Януса — Сингулярность №3773",
+  "date": "2026-11-21",
+  "scope": "Exactly the 3772 archived ICRS direction records: 943 source coordinate pairs and three mirrors each; do not include 320 unrelated arbitrary scalar projections in this coordinate collapse. Do not add a fabricated sky observation.",
+  "source": {
+    "repository": "Hawkar-usls/janus-meta-registry",
+    "file": "data/JANUS-ZERKALO-JANUSA-R0M2-CELESTIAL-COORDINATES-2026-11-21.json",
+    "source_sha256": "6f8d9bc5c034ac023df84002a5fadfadb7491766ebbb931f140a51d4838310ef",
+    "archive_run": 44835058758,
+    "archive_artifact": 14678325996,
+    "archive_zip_sha256": "a6737de1bd44b74b56e04358d23ca635856f73d9c61a33e469eaa77ccaa22d2f",
+    "original_count": 943,
+    "all_mirrored_count": 3772
+  },
+  "geometry": "Compute unit-vector sum of all 3772 directions. If nonzero, report spherical resultant RA/Dec and normalized length. The RA reflection/equator/antipode quartet breaks rotational symmetry and can force equator/RA-axis degeneracy; this geometric resultant is not presumed physical.",
+  "fingerprint_collapse": {
+    "normalization": "For each of 3772 records take fields ra_deg and dec_deg formatted as fixed 12 digits after decimal, plus operator verbatim. Form CSV line 'ra,dec,operator'; lexicographically sort all 3772 lines including duplicates; concatenate as UTF-8 with a terminal newline. No source path or file order included.",
+    "domain_separator": "JANUS-ZERKALO-JANUSA-3773-V1\\n",
+    "digest": "SHA-256 over domain_separator ASCII followed by canonical sorted coordinate lines",
+    "direction": "Interpret digest bytes[0:8] and bytes[8:16] as unsigned big-endian 64-bit integers; ra_deg=360*u0/2**64; dec_deg=asin(2*u1/2**64-1) in degrees. This yields a uniform-sphere, pseudorandom fingerprint direction. It is mathematically deterministic, NOT an astronomical estimator or prediction.",
+    "count": 1
+  },
+  "preregistered_catalog": {
+    "target": "singularity fingerprint and geometric resultant separately",
+    "coordinates": "ICRS",
+    "radius_arcsec": [
+      2,
+      10,
+      30,
+      60
+    ],
+    "service": "SIMBAD TAP independently query after digest freeze",
+    "controls": "256 independent uniform-sphere random directions via SHA256(domain_separator + digest_hex + ':control:' + i), same 30 arcsec cone; report background rate and no significance if unavailable. Additionally repeat on mirrored fingerprint as negative-control exploratory directions only.",
+    "repeatability": "Propose Gaia+WISE independent epochs/instruments only if both datasets permit unambiguous source matching; existing external telescope pointing still HOLD.",
+    "significance": "A catalog neighbor is not unknown or anomalous; no claim without documented independent measurements, multiplicity and selection controls."
+  },
+  "output": "research artifacts + GitHub Meta Registry JSON manifest; production models unchanged",
+  "limitations": "A cryptographic hash of coordinates generates a uniform random sky position by design; no reason to expect a probe at that location. The spherical mean of mirrored points may be a symmetry artifact."
+}
