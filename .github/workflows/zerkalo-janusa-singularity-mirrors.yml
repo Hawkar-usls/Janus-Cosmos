@@ -16,6 +16,7 @@ jobs:
     timeout-minutes: 60
     env:
       PYTHONUNBUFFERED: '1'
+      GH_TOKEN: ${{ github.token }}
       META_COMMIT: b835d7f0e8f74cba33b40f73598c2b1aaf8271a6
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
