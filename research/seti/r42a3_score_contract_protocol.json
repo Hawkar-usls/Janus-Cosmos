@@ -1,0 +1,24 @@
+{
+  "schema": "janus.cosmos.r42a3.score_contract.v1",
+  "date": "2026-11-20",
+  "stage": "R42A3A",
+  "scope": "Pilot exact component-score export on one historical group, before larger replay. Reacquire exact raw native tiles and compare R42A common registered input hashes, baseline masks, paths and metrics. No fitting, no threshold tuning, no production changes.",
+  "source": {
+    "run": 44785055340,
+    "artifact": 14657744482,
+    "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+  },
+  "pilot": "First of the six fit groups in frozen R41 plan order; no audit group selected to develop scalar. Use exact raw tile hashes. Export full vectors and paths; no labels or truth in score assembly. Original label-bearing interface only used for original metric parity and later evaluation.",
+  "score": {
+    "parent": "r40c fused margin; R40F screen and R40G tree margins, AND/OR gate reconstructed with min/max of monotonically transformed margins; parent routing still frozen. Frozen Minimal tree margin and support flags for parent-alert rows only; fail-open unsupported guard. Non-parent branch uses Joint Min margin for every row including rejections. All rows finite scalar; transform each raw margin m to m/(1+abs(m)), strictly sign-preserving; parent min of gate margins and pruning margin, rescue joint margin. Score >=0 must reproduce exact original Minimal alerts; active path chosen by original parent routing. Export all underlying raw margins, missing-stage masks, path and decision for each row. This is a new diagnostic scalar with arbitrary cross-stage scale and fixed routing; not a native probability or a full rerouted ROC. Do not claim NOISE continuous score for pre-baseline rejected rows; its archived score exists only for original supported alerts. Separate future score design and calibration needed."
+  },
+  "gates": [
+    "Exact raw hashes and R42A registered arrays",
+    "Exact original parent gate bool and Minimal alert parity via scalar>=0",
+    "Exact path/correctness parity against archived N10 and R41",
+    "No score depends on injection truth, label or amplitude",
+    "No claim of full NOISE score, no promotion"
+  ],
+  "production_adoption": false,
+  "external_validation": false
+}
