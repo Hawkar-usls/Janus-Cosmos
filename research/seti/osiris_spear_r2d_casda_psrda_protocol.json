@@ -1,0 +1,96 @@
+{
+  "schema": "janus.cosmos.osiris_spear.r2d.casda_psrda.v1",
+  "date": "2026-11-21",
+  "stage": "OSIRIS_SPEAR_R2D",
+  "status": "PRE_REGISTERED_BEFORE_NEW_ARCHIVE_READ",
+  "science_question": "Do public CASDA and CSIRO DAP Parkes Pulsar Data Archive metadata actually document authenticated on-target native spectra or scan footprints at previously frozen OSIRIS directions?",
+  "background": {
+    "R2C2": "ATNF ATOA Parkes-only search completed for 5 fixed sources; 90 rows within 1.5 deg but all s_fov/s_region missing; no measured beam or on-target spectrum established.",
+    "baseline": "No causal origin or non-detection can be drawn from an unobserved direction."
+  },
+  "archive_routes": [
+    {
+      "id": "CASDA",
+      "tap_sync": "https://casda.csiro.au/casda_vo_tools/tap/sync",
+      "table": "ivoa.obscore",
+      "purpose": "ASKAP science-ready image/spectral cube products and possible migrated Parkes spectra; imaging footprint distinct from native high-resolution SETI waterfall",
+      "source": "https://www.csiro.au/en/about/facilities-collections/ATNF/ATNF-data-archives"
+    },
+    {
+      "id": "PSRDA_DAP",
+      "tap_sync": "https://data.csiro.au/psrdavo/tap/sync",
+      "table": "psrda.pulsar_obs",
+      "purpose": "Parkes pulsar high-time-resolution raw observations, not presumed continuous SETI high-spectral-resolution files",
+      "query_template": "https://data.csiro.au/psrdavo/tap/examples"
+    }
+  ],
+  "frozen_target_list": [
+    {
+      "id": "LOVE_G1_007",
+      "ra_deg": 204.30267916666668,
+      "dec_deg": -36.78240527777778,
+      "role": "original"
+    },
+    {
+      "id": "EDEM_CANONICAL",
+      "ra_deg": 139.22409686590188,
+      "dec_deg": 30.26038779947318,
+      "role": "original"
+    },
+    {
+      "id": "LOVE_EDEM_BISECTOR",
+      "ra_deg": 170.38390326101873,
+      "dec_deg": -3.8654180644718967,
+      "role": "derived"
+    },
+    {
+      "id": "EDEM_GIZA_CONDITIONAL",
+      "ra_deg": 191.6974004645,
+      "dec_deg": -6.4273101156,
+      "role": "earlier_optical_gate_failed"
+    },
+    {
+      "id": "ABYDOS_SKY_NUMERIC",
+      "ra_deg": 223.415064,
+      "dec_deg": 33.979316,
+      "role": "separate_auxiliary"
+    }
+  ],
+  "search_limits": {
+    "max_results_per_target": 200,
+    "max_html_or_vo_bytes": 7000000,
+    "max_request_seconds": 28,
+    "max_parallel_requests": 2,
+    "read_only": true,
+    "radius_deg": 0.2,
+    "secondary_radius_deg": 1.5,
+    "query_count_max": 25
+  },
+  "tests": {
+    "CASDA": "First query native TAP_SCHEMA for ivoa.obscore. Test direct STC-S s_region containment for each frozen target with native ADQL. If unsupported or null, bounded center distance <= 0.2 degrees only; never claim footprint from center.",
+    "DAP": "Get psrda.pulsar_obs schema and use ra_angle,dec_angle in degrees (verify by inspected unit). For each target query original files/observation rows within 0.2 deg; store whether rows are raw, calibration, search, pulsar fold, and disclose right ascension metadata semantics.",
+    "matching": "Pure spherical great-circle angular separation using frozen ICRS coordinate, no posthoc search changes, record all targets even no rows. No sky transforms added in R2D.",
+    "control": "Search archive type and data limitations; R2C2 RA-rotated footprint controls remain unchanged, no new controls tuned from test."
+  },
+  "gates": {
+    "can_qualify_native_JANUS": false,
+    "requires_original_file_bytes_md5_or_sha256": true,
+    "requires_instrument_tcs_beam": true,
+    "requires_native_frequency_time_axis": true,
+    "requires_matched_real_ONOFF_or_independent_epoch": true,
+    "R42B_external_custodian_not_met": true,
+    "production_unchanged": true,
+    "historical_reference": {
+      "false_alerts": 51,
+      "localizations": 318,
+      "weak": 69
+    }
+  },
+  "failure_semantics": "TAP unavailable, schema incompatible, or no matching archive rows => UNKNOWN/NO_LISTED_METADATA_IN_BOUNDED_QUERY, never 'no signal' and never 'no radio observation'.",
+  "outputs": [
+    "tap_schema_receipts.json",
+    "casda_sky_coverage.json",
+    "psrda_sky_coverage.json",
+    "r2d_gate_report.json"
+  ]
+}
