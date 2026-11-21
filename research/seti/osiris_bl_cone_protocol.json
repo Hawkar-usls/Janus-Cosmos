@@ -1,0 +1,42 @@
+{
+  "schema": "janus.cosmos.osiris_spear.bl_cone_coverage.v1",
+  "stage": "OSIRIS_SPEAR_RADIO_R1C",
+  "date": "2026-11-21",
+  "status": "FROZEN_BEFORE_COORDINATE_LOOKUP",
+  "source_form_verified_by_run": 44944064961,
+  "source_form_sha256": "6d858b541211398e4af057d0e034621306b6dd8e47085d633a7860e5447ce65f",
+  "archive": "https://breakthroughinitiatives.org/opendatasearch",
+  "exact_get_fields": [
+    "project",
+    "file_type",
+    "ra",
+    "ra_range",
+    "decl",
+    "decl_range",
+    "perPage",
+    "search",
+    "page"
+  ],
+  "type": "HDF5",
+  "telescopes": [
+    "GBT",
+    "Parkes"
+  ],
+  "coordinate_source": "research/seti/osiris_spear_radio_protocol.json",
+  "positions": "all 5 canonical/alternate OSIRIS sky hypotheses with 3 mirror transforms and 2 fixed RA-rotation controls = 30 direction queries",
+  "search_tolerance_deg": 0.5,
+  "report_radii_deg": [
+    0.1,
+    0.5
+  ],
+  "per_page": 100,
+  "max_results_per_query": 100,
+  "query_count_max": 60,
+  "requests_concurrency": 4,
+  "timeout_seconds": 24,
+  "response_bytes_max": 2500000,
+  "safety": "No assumption archive listing RA/Dec proves real antenna encoder pointing; no radio source claim, no scoring synthetic mirror directions as additional independent observations; if result truncated or field filter not honored, mark coverage ambiguous not a scientific nondetection.",
+  "selection_rule": "For each position and telescope, query ±0.5deg Dec and ±0.5/cos(Dec) RA, then filter angular separation <=0.5deg and report <=0.1 separately; only direct original spectrum archive links can make a candidate eligible for verified download.",
+  "next": "Only download and run frozen JANUS native radio pipeline on source-specific HDF5 if positive original sky match with valid checksum and original scan pointing; matched ON/OFF/custodian needed before origin conclusions.",
+  "production_modified": false
+}
