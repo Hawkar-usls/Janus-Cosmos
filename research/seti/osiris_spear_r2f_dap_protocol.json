@@ -1,0 +1,63 @@
+{
+  "schema": "janus.cosmos.osiris.r2f.dap_public_file_probe.v1",
+  "stage": "OSIRIS_SPEAR_R2F",
+  "date": "2026-11-21",
+  "status": "PRE_REGISTERED_FROZEN_SOURCE_BEFORE_FILE_NETWORK_REQUEST",
+  "goal": "Verify whether the smallest earlier-frozen Parkes raw SEARCH file near LOVE can be accessed through official CSIRO DAP documented API; read at most the start of public FITS header, not the full 26MB file and not the signal power.",
+  "selection": {
+    "project": "P360",
+    "filename": "BJ0093_03051.sf",
+    "collection_id": 19838,
+    "raw_path_in_archive": "/raw/BJ0093_03051.sf",
+    "expected_byte_size": 26530560,
+    "source_archive_metadata_run": 44954252510,
+    "source_sha256": "b02ba0b1fa8700fc5432bc314b59775442fe82f80798c87afbaf98db4f9f9598",
+    "reason": "Smallest (26.5MB) among two nearest raw Parkes SEARCH files preselected from OSIRIS LOVE direction, no power inspection"
+  },
+  "official_api_route": "https://data.csiro.au/ws/v2/collections/19838/data",
+  "documented_file_route_template": "https://data.csiro.au/ws/v2/collections/{collectionId}/downloadfile",
+  "access_policy": "Read-only public HTTP only; no bypass of sign-in, collection embargo, IP restrictions or session. If API is unavailable or file path uncertain, fail closed.",
+  "limits": {
+    "max_index_bytes": 4000000,
+    "max_fits_header_bytes": 5760,
+    "request_timeout_seconds": 25,
+    "range_header": "bytes=0-5759",
+    "allowed_public_content_type": [
+      "application/fits",
+      "application/octet-stream",
+      "binary/octet-stream",
+      "application/x-fits"
+    ],
+    "no_full_file_download": true,
+    "no_private_secrets_in_artifacts": true
+  },
+  "expected_metadata_fields": [
+    "RA",
+    "DEC",
+    "OBSFREQ",
+    "OBSBW",
+    "OBSNCHAN",
+    "FRONTEND",
+    "BACKEND",
+    "STT_IMJD",
+    "STT_SMJD",
+    "STT_OFFS",
+    "OBSMODE",
+    "SRC_NAME",
+    "BEAM_ID",
+    "COORD_MD"
+  ],
+  "science_gate": {
+    "not_qualified_actual_on_sky_pointing": true,
+    "no_original_byte_hash_until_full_stream": true,
+    "coarse_channel_width_hz": 3000000,
+    "no_narrowband_JANUS_detection": true,
+    "no_control_available": true,
+    "production_changed": false,
+    "R42B_unblocked": false
+  },
+  "outputs": [
+    "dap_file_access.json",
+    "r2f_gate_report.json"
+  ]
+}
