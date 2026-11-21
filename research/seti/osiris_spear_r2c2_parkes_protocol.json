@@ -1,0 +1,62 @@
+{
+  "schema": "janus.cosmos.osiris_spear.r2c2.parkes_only_footprints.v1",
+  "stage": "OSIRIS_SPEAR_R2C2",
+  "date": "2026-11-21",
+  "status": "FROZEN_BEFORE_FOOTPRINT_QUALIFICATION",
+  "reason": "R2C ATOA TAP metadata discovery yielded 4 original sky searches (3 with Parkes 1.5deg candidates) and one truncated alternative-EDEM query; many rows were ATCA. Narrow to the explicitly verified instrument_name='Parkes', not to observed sky signal strength.",
+  "frozen_source": {
+    "protocol": "research/seti/osiris_spear_r2c_atoa_protocol.json",
+    "run": 44949743263,
+    "artifact_id": 14724492786,
+    "artifact_digest": "7c2523c34b7e6b5e56554c4668c4ea1a17437e93c20cdc138852c9f4225055fc"
+  },
+  "tap": "https://atoavo.atnf.csiro.au/tap/sync",
+  "table": "ivoa.obscore",
+  "instrument_filter": "instrument_name='Parkes'",
+  "direction_source": "research/seti/osiris_spear_r2c_atoa_protocol.json",
+  "primary_and_controls": 15,
+  "radius_deg": 1.5,
+  "query_limit_rows": 1500,
+  "timeout_seconds": 30,
+  "max_parallel_requests": 3,
+  "fields": [
+    "obs_id",
+    "obs_collection",
+    "instrument_name",
+    "facility_name",
+    "s_ra",
+    "s_dec",
+    "s_fov",
+    "s_region",
+    "target_name",
+    "t_min",
+    "t_max",
+    "frequency",
+    "bandwidth",
+    "em_min",
+    "em_max",
+    "t_resolution",
+    "em_res_power",
+    "access_url",
+    "md5chksum",
+    "access_estsize",
+    "data_flag",
+    "dataproduct_type",
+    "number_scans"
+  ],
+  "query_semantics": "Parkes-only raw catalog scan centers within predeclared ±1.5deg rectangle; true angular distance recomputed. s_fov interpreted as nominal field diameter according to IVOA, not proof of primary-beam sensitivity or scan track. s_region may be descriptive, not verified antenna scan pointing. Truncation remains UNKNOWN; all Parkes sources part of ordinary archive background.",
+  "cadence_controls": "Group metadata by obs_id/UTC/project only. Require original spectral bytes and actual TCS/per-feed pointing before asserting ON/OFF source coverage.",
+  "safety": {
+    "no_posthoc_coordinate_modification": true,
+    "no_spectral_data_loaded": true,
+    "zero_new_sky_claims": true,
+    "selection_hypotheses_count_frozen": true,
+    "keep_original_JANUS_R42B_HOLD": true,
+    "production_unchanged": true
+  },
+  "outputs": [
+    "parkes_queries.json",
+    "beam_footprint_diagnostics.json",
+    "r2c2_result.json"
+  ]
+}
