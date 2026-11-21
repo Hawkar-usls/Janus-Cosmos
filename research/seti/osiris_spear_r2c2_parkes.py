@@ -103,14 +103,21 @@ def main():
     save("beam_footprint_diagnostics.json",{"potential_metadata_fov_covers":potential[:150],
        "s_region_is_not_encoder_log":True,"multi_beam_feed_offsets_unknown":True,"response_not_valid_footprint_mask":True})
     qualified=[x for x in original if x["status"]=="OK"]
+    total_rows=sum(x["parkes_rows_in_1p5"] for x in original)
+    missing_fov=sum(x["missing_fov"] for x in original)
+    all_fov_absent=bool(total_rows>0 and missing_fov==total_rows)
     state=("CATALOG_NOMINAL_FOV_HINTS_EXIST__HOLD_ACTUAL_POINTING" if potential else
-           "NO_CATALOG_NOMINAL_FOV_CONTAINMENT__HOLD_ACTUAL_POINTING")
+           ("ATOA_FOOTPRINT_FIELDS_MISSING__HOLD_ACTUAL_POINTING" if all_fov_absent else
+            "NO_CATALOG_NOMINAL_FOV_CONTAINMENT__HOLD_ACTUAL_POINTING"))
     if any(x["status"]!="OK" for x in original):state="INCOMPLETE_PARKES_ARCHIVE_SEARCH__HOLD_ACTUAL_POINTING"
     report={"stage":"OSIRIS_SPEAR_R2C2","status":state,
       "method":"Parkes-only ATOA ivoa.obscore, frozen ICRS targets and exact native metadata fields, no spectral power.",
       "query_total":len(r),"original_queries_clean":len(qualified),
       "original_position_summary":summaries,
       "nominal_fov_candidate_rows":len(potential),
+      "original_parkes_rows":total_rows,"s_fov_missing_rows":missing_fov,
+      "all_original_s_fov_unavailable":all_fov_absent,
+      "meaning_of_missing_footprint":"Cannot infer that any scan missed or covered source when s_fov and s_region are empty. Only original beam and TCS can decide.",
       "real_on_source_scans_qualified":0,"real_source_spectra_downloaded":0,
       "real_per_feed_antenna_pointing_verified":False,
       "native_JANUS_radiodetector_applied":False,
