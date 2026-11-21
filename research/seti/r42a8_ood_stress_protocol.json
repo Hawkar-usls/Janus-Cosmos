@@ -1,0 +1,68 @@
+{
+  "schema": "janus.cosmos.r42a8.ood.v1",
+  "stage": "R42A8A",
+  "date": "2026-11-21",
+  "status": "PREREGISTERED_NEW_SIMULATOR_TEST",
+  "purpose": "Test a previously locked research R42A7A shadow classifier on newly generated out-of-distribution spectrograms. Never retune on old audit labels or adopt automatic veto.",
+  "frozen_model": {
+    "run": 44901446300,
+    "artifact": 14706350937,
+    "sha256": "4a34a54a92a52d17b5f9d143e226cd3711bb5e5cc4e8e29958a963effb809d24",
+    "fit_lock_sha256": "bb00bb9bff24cd3997a581291cd440794efdc1f8794ef62963badb31eff9056e"
+  },
+  "panel": {
+    "seed": 420826,
+    "shape": [
+      16,
+      128
+    ],
+    "new_rows_per_regime": 512,
+    "positive_per_regime": 256,
+    "null_per_regime": 256,
+    "regimes": [
+      "new_colored_noise_01",
+      "new_impulse_and_comb_02"
+    ],
+    "positive_families": [
+      "weak_drift",
+      "intermittent_line",
+      "curved_drift",
+      "modulated_line"
+    ],
+    "null_families": [
+      "colored_noise",
+      "broadband_bursts",
+      "frequency_comb",
+      "competing_rfi"
+    ],
+    "fixed_trajectory_search": "Blind best linear candidate from start bin 16..111 and slopes -1.5,-1,-0.5,0,0.5,1,1.5; true path never fed to detector."
+  },
+  "measurement": {
+    "primary": "Frozen R42A7A decision-function AUC against simulated injected-positive vs synthetic control labels on each regime",
+    "baseline": "Best linear ridge-energy score AUC on the same samples",
+    "secondary": "Frequency-window shift stability of score, generator family metrics, weak subgroup localization",
+    "no_new_threshold": true,
+    "no_model_training": true,
+    "old_groups_train_tune": false,
+    "old_audit_scoring": false
+  },
+  "acceptance": {
+    "potential_generalization_only": "Frozen ranker AUC >=0.70 on each regime and >=simple ridge baseline in both; else FAIL",
+    "full_JANUS_detector_claim": false,
+    "real_radio_validity_claim": false,
+    "external_blind_exam": false,
+    "automatic_veto": false,
+    "production_modified": false
+  },
+  "technical": {
+    "archive_authenticated": true,
+    "no_direct_telescope_download": true,
+    "retain_outputs": [
+      "model_lock_verification.json",
+      "result.json",
+      "invariance_probe.json",
+      "r42a8_scores.npz"
+    ]
+  },
+  "continued_R42A7B3": "Original GBT pointing witness #58509 still HOLD, no relationship between these simulator labels and extraterrestrial origin."
+}
