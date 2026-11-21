@@ -103,7 +103,8 @@ def verified_fit_features(d):
     assert idx==1728
     X=np.concatenate(chunks,axis=0);assert X.shape==(1728,8) and np.isfinite(X).all()
     save("frozen_feature_receipt.json",{"input_sha256s":refs,"features":FEATURES,
-        "source_rows":1728,"loaded_groups":[1,2,3,4,5,6],"audit_groups_read":False,
+        "source_rows":1728,"loaded_groups":[1,2,3,4,5,6],"audit_raw_spectra_loaded":False,
+        "historical_audit_labels_checked_only_by_upstream_parity":True,"historical_audit_scored_by_R42A7":False,
         "uses_truth_in_extractor":False,"independent_instrument":False})
     np.savez_compressed(OUT/"feature_archive_fit_only.npz",features=X,groups=df["group"],row=df["row"],
         original_reference_alert=df["reference"])
