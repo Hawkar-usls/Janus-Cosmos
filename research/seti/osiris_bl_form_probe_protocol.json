@@ -1,0 +1,26 @@
+{
+  "schema": "janus.cosmos.osiris_spear.breakthrough_archive_schema.v1",
+  "date": "2026-11-21",
+  "stage": "OSIRIS_SPEAR_RADIO_R1B",
+  "status": "PREREGISTERED_BEFORE_REMOTE_FORM_INSPECTION",
+  "archive_urls": [
+    "https://breakthroughinitiatives.org/opendatasearch",
+    "https://seti.berkeley.edu/opendata/"
+  ],
+  "goal": "Find actual public archive RA/Dec form field names and official bounded data search path; not automatically assume a direct URL or invent available radio sessions.",
+  "intended_target_ids": [
+    "LOVE_G1_007",
+    "EDEM_CANONICAL",
+    "LOVE_EDEM_BISECTOR",
+    "EDEM_GIZA_CONDITIONAL",
+    "ABYDOS_SKY_NUMERIC"
+  ],
+  "limits": {
+    "max_response_bytes": 2500000,
+    "timeout_seconds": 20,
+    "read_only": true,
+    "max_urls": 2,
+    "no_original_HDF5_download": true
+  },
+  "safety": "No target redefinition, no interpreting archive source-name hits as physical detections, no scientific negative claim from absence in sampled index."
+}
