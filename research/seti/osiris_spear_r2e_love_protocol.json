@@ -1,0 +1,135 @@
+{
+  "schema": "janus.cosmos.osiris_spear.r2e.dap.love.original_source_lock.v1",
+  "stage": "OSIRIS_SPEAR_R2E",
+  "date": "2026-11-21",
+  "status": "SOURCE_FILE_SELECTION_FROZEN_BEFORE_ANY_RAW_SPECTRAL_BYTES",
+  "goal": "Qualify earliest candidate native Parkes pulsar SEARCH PSRFITS raw files for pre-frozen OSIRIS LOVE direction based only on exact archive filename, physical beam coverage, time-frequency metadata and acquisition status.",
+  "source_service": "https://data.csiro.au/psrdavo/tap/sync",
+  "table": "psrda.pulsar_obs",
+  "source_discovery": {
+    "run": 44954020508,
+    "artifact_id": 14726138466,
+    "artifact_sha256": "c4879a38681a85f7ba1ae7da6b5524cf66695f12c26264859e6b0236243944aa",
+    "program": "OSIRIS_SPEAR_R2D"
+  },
+  "fixed_target": {
+    "id": "LOVE_G1_007",
+    "ra_deg": 204.30267916666668,
+    "dec_deg": -36.78240527777778
+  },
+  "preselected_original_files": [
+    {
+      "project": "P892",
+      "filename": "bpsr170815_073330_beam04.sf",
+      "recorded_center_deg": [
+        204.2695666667,
+        -36.684905
+      ],
+      "archive_time_utc": "2017-08-15T07:33:30Z",
+      "archive_frequency_mhz": 1382,
+      "raw_status": "raw",
+      "obs_mode": "SEARCH",
+      "angular_offset_deg": 0.1010471423086394
+    },
+    {
+      "project": "P360",
+      "filename": "BJ0093_03051.sf",
+      "recorded_center_deg": [
+        204.181737917,
+        -36.7463905555
+      ],
+      "archive_time_utc": "2002-06-30T11:29:12",
+      "archive_frequency_mhz": 1374,
+      "raw_status": "raw",
+      "obs_mode": "SEARCH",
+      "angular_offset_deg": 0.10336364165085568
+    }
+  ],
+  "same_source_panel": {
+    "supporting_catalog_files_from_unseen_power": [
+      {
+        "project": "P892",
+        "filename": "bpsr170815_074318_beam04.sf"
+      },
+      {
+        "project": "P360",
+        "filename": "BJ0093_02951.sf"
+      },
+      {
+        "project": "P858",
+        "filename": "bpsr150822_051112_beam06.sf"
+      },
+      {
+        "project": "P892",
+        "filename": "bpsr170815_075306_beam04.sf"
+      },
+      {
+        "project": "P360",
+        "filename": "BJ0093_03141.sf"
+      }
+    ],
+    "original_pulsar_bisector_control": {
+      "project": "P050",
+      "filename": "S43310_7.sf",
+      "date_obs": "1993-00-00T02:58:11",
+      "note": "Invalid date, do not use as independent epoch unless source confirms."
+    },
+    "matched_epoch_discovery": [
+      "P892 bpsr170815_ prefix",
+      "P360 BJ0093_ prefix"
+    ],
+    "exclude_look_elsewhere_selection": "Files selected only from geometric R2D ≤0.2deg panel; no spectral power read or optimized candidate threshold."
+  },
+  "nominal_Parkes_multibeam_FWHM_arcmin": [
+    14,
+    14.5
+  ],
+  "half_power_radius_arcmin": [
+    7,
+    7.25
+  ],
+  "meaning": "If recorded coordinate is true beam center AND receiver is Parkes 21cm multibeam, offsets ~6.1arcmin are nominally in beam half-power. Both antecedents must be checked from actual PSRFITS pointing and receiver metadata; no source signal can be inferred from catalog alone.",
+  "inspect_metadata_fields": [
+    "projid",
+    "filename",
+    "ra_angle",
+    "dec_angle",
+    "date_obs",
+    "obsfreq",
+    "obsbw",
+    "obsnchan",
+    "frontend",
+    "backend",
+    "beconfig",
+    "obs_mode",
+    "obstype",
+    "obs_length",
+    "coord_md",
+    "telescop",
+    "stt_imjd",
+    "stt_smjd",
+    "stt_offs",
+    "filesize",
+    "filepath",
+    "published",
+    "data_collection_id",
+    "collection_fedora_pid"
+  ],
+  "experiment_gates": {
+    "must_verify_original_bytes_sha256_before_detector": true,
+    "PSRFITS_true_telescope_pointing_or_attestation": true,
+    "beam_feed_label_must_match_actual_encoder": true,
+    "aligned_UTC_MJD_and_native_frequency_grid": true,
+    "raw_SEARCH_mode_required": true,
+    "OFF_or_multibeam_independent_controls_required_for_source_claim": true,
+    "do_not_treat_nearby_ASKAP_cube_as_matching_ONOFF": true,
+    "R42B_unblocked": false,
+    "production_unchanged": true,
+    "historical_alerts": 51
+  },
+  "expected_outputs": [
+    "file_identity_and_metadata.json",
+    "epoch_control_survey.json",
+    "r2e_gate_report.json"
+  ]
+}
