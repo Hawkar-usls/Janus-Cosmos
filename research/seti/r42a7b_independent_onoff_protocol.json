@@ -1,0 +1,57 @@
+{
+  "schema": "janus.cosmos.r42a7b.independent.onoff.v1",
+  "stage": "R42A7B1",
+  "date": "2026-11-21",
+  "status": "FROZEN_PRE_ARCHIVE_DISCOVERY",
+  "purpose": "New raw telescope spectra with actual ON/OFF roles, per-scan pointing, independent provenance, UTC/MJD and file checksums. Do not use previously viewed R42A5/R42A6 groups for tuning.",
+  "archive": "https://breakthroughinitiatives.org/opendatasearch",
+  "origin": {
+    "shadow_run": 44901446300,
+    "shadow_artifact": 14706350937,
+    "shadow_discrimination_auc": 0.478257823592042,
+    "shadow_veto_allowed": false
+  },
+  "search": {
+    "project": "GBT",
+    "file_type": "HDF5",
+    "max_pages": 6,
+    "per_page": 100,
+    "min_bytes": 16384,
+    "max_bytes": 3500000000,
+    "query_sort": "utc desc",
+    "download_bulk_files": false,
+    "request_timeout_seconds": 25
+  },
+  "pair_gate": {
+    "on_off_roles": "Explicit _OFF suffix first; alternate ABACAD names require separately documented cadence mapping",
+    "max_time_minutes": 45,
+    "min_separation_deg": 0.02,
+    "max_separation_deg": 5,
+    "same_telescope": true,
+    "same_center_frequency": true,
+    "valid_mjd_and_utc": true,
+    "distinct_native_pointing": true,
+    "original_file_md5_required": true
+  },
+  "scientific_gates": [
+    "Source URLs, UTC/MJD, recorded coordinate and center frequency from authoritative archive",
+    "Native original FITS/fil/HDF5 header per-scan position, pointing role and frequency verified after authorized bounded download",
+    "Independent telescope TCS or backend pointing corroboration; archive target catalog coordinate alone insufficient",
+    "Independent file hash and observation exclusion relative to all R41/R42 historical groups",
+    "Disjoint development/calibration/closed test with independent blinded custodian",
+    "Frozen JANUS and baseline models plus equal-information ON/OFF input",
+    "No production promotion until zero paired lost signals and verified background FPR with groupwise uncertainty"
+  ],
+  "limits": {
+    "archive_listing_only": "NOT QUALIFIED",
+    "synthesized_onoff": "PROHIBITED",
+    "unavailable_metadata": "HOLD",
+    "no_new_sky_detection_claim": true,
+    "production_unchanged": true
+  },
+  "outputs": [
+    "archive_inventory.json",
+    "provisional_onoff_pairs.json",
+    "gate_report.json"
+  ]
+}
