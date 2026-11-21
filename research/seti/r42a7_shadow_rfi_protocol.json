@@ -1,0 +1,82 @@
+{
+  "schema": "janus.cosmos.r42a7.nondestructive.rfi.v1",
+  "stage": "R42A7A",
+  "date": "2026-11-21",
+  "status": "PREREGISTERED_SHADOW_ONLY",
+  "goal": "Preserve every existing JANUS+NOISE detection and 69 weak injections by construction; seek new RFI discrimination features without another retrospective audit threshold search.",
+  "source": {
+    "r42a6_run": 44886028278,
+    "r42a6_artifact": 14700117269,
+    "reference": "R42A6 code/source-verified R42A5 merged 3168 rows and common V [N,16,128] spectrogram",
+    "r42a5_run": 44885476789,
+    "common_run": 44785055340,
+    "old_audit_groups": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "experiment": {
+    "fit_groups": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "previous_audit_groups_must_not_train": true,
+    "previous_audit_groups_must_not_select_threshold": true,
+    "use_previous_audit_for_this_stage": false,
+    "fresh_holdout_required_for_scientific_generalization": true,
+    "production_adoption": false,
+    "hard_veto_disabled": true,
+    "rank_only": true
+  },
+  "new_feature_family": {
+    "name": "Alternative-hypothesis background and instrumental common-mode",
+    "source": "Same registered original spectrogram V plus frozen candidate path, no labels or truth fields in feature extraction",
+    "data_independence": "New transform and feature family, NOT independent instrument/sky observation",
+    "features": [
+      "spectral_broad_3sigma_fraction",
+      "spectral_broad_5sigma_fraction",
+      "row_global_commonmode_std",
+      "offpath_peak_to_onpath_ratio",
+      "alternate_trajectory_best_ratio",
+      "alternate_trajectory_win_fraction",
+      "offpath_epoch_correlation",
+      "spectral_bin_persistence"
+    ],
+    "normalization": "per-row robust median and MAD floor 0.02, capped normalized values [-30,+30]",
+    "off_path_rule": "mask +/-4 bins around frozen JANUS path, leave all other bins",
+    "alternative_trajectories": "16 fixed alternative paths of signed offsets +/-8,+/-16,+/-24,+/-32 with zero or +/-1 channel/epoch slope; compute strongest over first/middle/last epochs. Precommitted before labels."
+  },
+  "model": {
+    "classifier": "StandardScaler + LogisticRegression",
+    "C": 0.1,
+    "class_weight": "balanced",
+    "random_state": 424207,
+    "max_iter": 2000,
+    "inputs": "new 8 independent-transform diagnostic features only, no JANUS/NOISE score or prior morphology features",
+    "training_rows": "Only reference-positive correctly localized signals and reference false-alert negative controls in fit groups 1–6",
+    "audit": "Leave-one-fit-group-out; each fold trains exclusively on five other fit groups",
+    "ranking": "Fixed top 5 shadow-flagged original alerts per held-out fit group. Flag means inspect only, never suppress/reject.",
+    "selection": "No threshold tuning, fit-only model and fixed control-review budget; if data are not discriminative report FAIL."
+  },
+  "success": {
+    "hard_preservation_invariant": "For every source candidate and every positive/weak injection original accepted JANUS+NOISE route remains accepted; all reported false alarms remain 51 until actual independent adjudication",
+    "cv": "Report number of control alerts and true injected positive alerts in top-5 shadow review queue per group, plus AUC if both labels",
+    "external": "Only new untouched groups or genuinely independent telescope data can support generalization",
+    "no_new_technosignature_claim": true
+  },
+  "pending_new_data": "R42A7B new independent source/survey design with original pointing and mutually independent source context; no scientific PASS from prior groups",
+  "outputs": [
+    "frozen_feature_receipt.json",
+    "fit_only_cv.json",
+    "shadow_review_queue.json",
+    "result.json",
+    "feature_archive_fit_only.npz"
+  ]
+}
