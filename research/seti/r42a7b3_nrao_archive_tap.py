@@ -20,9 +20,9 @@ FROZEN={
 }
 QUERIES={
  "table_schema":"SELECT TOP 15 table_name,description FROM TAP_SCHEMA.tables WHERE table_name LIKE '%obscore%'",
- "by_native_mjd":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM ivoa.obscore WHERE instrument_name='GBT' AND t_min BETWEEN 57431.35 AND 57431.39",
- "by_2016_project":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM ivoa.obscore WHERE obs_publisher_did LIKE '%AGBT16A_999_42%'",
- "by_source":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM ivoa.obscore WHERE instrument_name='GBT' AND target_name LIKE '%HIP53020%'"
+ "by_native_mjd":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM tap_schema.obscore WHERE instrument_name='GBT' AND t_min BETWEEN 57431.35 AND 57431.39",
+ "by_2016_project":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM tap_schema.obscore WHERE obs_publisher_did LIKE '%AGBT16A_999_42%'",
+ "by_source":"SELECT TOP 100 target_name, s_ra, s_dec, t_min, t_max, obs_publisher_did, instrument_name, access_url FROM tap_schema.obscore WHERE instrument_name='GBT' AND target_name LIKE '%HIP53020%'"
 }
 def sha(x):return hashlib.sha256(x).hexdigest()
 def save(n,x):(OUT/n).write_text(json.dumps(x,ensure_ascii=False,indent=2,allow_nan=False)+"\n")
