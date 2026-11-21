@@ -2,7 +2,9 @@ name: JANUS COSMOS R42A7B3 — official NRAO archive TAP metadata crosscheck
 on:
   push:
     branches: [research/seti-r42a7b-independent-onoff-20261121]
-    paths: ['.github/workflows/seti-r42a7b3-nrao-tap.yml']
+    paths:
+      - '.github/workflows/seti-r42a7b3-nrao-tap.yml'
+      - 'research/seti/r42a7b3_nrao_archive_tap.py'
   workflow_dispatch:
 permissions:
   contents: read
