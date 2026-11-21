@@ -1,0 +1,59 @@
+{
+  "schema": "janus.cosmos.r42a7b2.raw.source.freeze.v1",
+  "date": "2026-11-21",
+  "stage": "R42A7B2",
+  "status": "FIXED_BEFORE_SOURCE_BYTES_DOWNLOAD",
+  "source_archive": "https://breakthroughinitiatives.org/opendatasearch",
+  "source_listing_page": "https://breakthroughinitiatives.org/opendatasearch?file_type=HDF5&project=GBT&sort=utc&order=asc&perPage=100&page=4&search=Search",
+  "selection": "From R42A7B1b 800-index records, choose smallest total size ON/OFF pair with same HDF5 suffix, matching target root, same GBT frequency, nearby UTC, and listed 2 degree sky difference, without inspecting spectral power. Archive labels provisional, not signed TCS.",
+  "scope": "One independent instrument ON/OFF candidate pair. Original two high-resolution HDF5 data files streamed in full, byte size and MD5 verified. Sample only metadata and bounded non-label spectral snippets; no JANUS model calibration or performance test.",
+  "telescope": "GBT",
+  "target": "HIP53020",
+  "utc": "2016-02-13",
+  "freq_mhz": 1501.46484375,
+  "scan_gap_minutes": 5.328,
+  "listed_spatial_separation_degrees": 2,
+  "inputs": [
+    {
+      "role": "ON",
+      "target": "HIP53020",
+      "utc": "2016-02-13 08:42:31",
+      "mjd": 57431.3629,
+      "archive_ra_deg": 162.7133125,
+      "archive_dec_deg": 6.8044336111,
+      "expected_bytes": 124030000,
+      "expected_size_relaxed": true,
+      "md5": "9a772f2529b6634fa4b6f4d10e427d68",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT16A_999_42/holding/spliced_blc02030405_2bit_guppi_57431_31352_HIP53020_0019.gpuspec.8.0001.h5"
+    },
+    {
+      "role": "OFF",
+      "target": "HIP53020_OFF",
+      "utc": "2016-02-13 08:47:58",
+      "mjd": 57431.3666,
+      "archive_ra_deg": 162.7133375,
+      "archive_dec_deg": 8.8044316667,
+      "expected_bytes": 161300000,
+      "expected_size_relaxed": true,
+      "md5": "4440a2b2aba3a2cefe147e5208bc55d8",
+      "url": "https://bldata.berkeley.edu/pipeline/AGBT16A_999_42/holding/spliced_blc02030405_2bit_guppi_57431_31679_HIP53020_OFF_0020.gpuspec.8.0001.h5"
+    }
+  ],
+  "limits": {
+    "max_file_bytes": 210000000,
+    "max_total_bytes": 380000000,
+    "timeout_per_file_seconds": 420,
+    "no_decompressed_full_spectrogram_export": true,
+    "keep_raw_files_only_ephemeral": true,
+    "no_external_custodian": true,
+    "require_mjd_native_and_header_source": true,
+    "requires_TCS_independent_to_qualify": true,
+    "hold_if_any_integrity_failure": true
+  },
+  "outputs": [
+    "raw_download_receipt.json",
+    "native_header_audit.json",
+    "bounded_spectra_research.json",
+    "gate_report.json"
+  ]
+}
