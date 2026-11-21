@@ -1,0 +1,123 @@
+{
+  "schema": "janus.cosmos.osiris_spear.radio_recheck.v1",
+  "date": "2026-11-21",
+  "stage": "OSIRIS_SPEAR_RADIO_R1",
+  "status": "FROZEN_BEFORE_RADIO_ARCHIVE_QUERY",
+  "purpose": "Reassess pre-JANUS SPEAR OF OSIRIS celestial directions using actual JANUS COSMOS radio workflow eligibility, not optical-geometric coincidences. Test authentic archive scan coverage first; only if original native spectra and pointing qualify may run frozen JANUS candidate search. Never substitute catalog photometry for radio waterfall.",
+  "primary_historical_authorities": [
+    "Hawkar-usls/janus-meta-registry:data/JANUS-SPEAR-OF-OSIRIS-ECHO-MOON-G1-007-LOVE-COORDINATE-BINDING-2026-08-19-v1.0.json",
+    "Hawkar-usls/janus-meta-registry:data/JANUS-SPEAR-OF-OSIRIS-EDAN-LOVE-PYRAMID-REVERSAL-2026-08-19-v1.0.json",
+    "Hawkar-usls/Janus-Cosmos:data/love/JANUS-LOVE-EDEM-BISECTOR-RELAY-EARTH-LOCUS-2026-08-20-v1.0.json",
+    "Hawkar-usls/janus-meta-registry:data/JANUS-REVERSE-SPEAR-INBOUND-GEOMETRY-RUN-001-2026-08-19-v1.0.json"
+  ],
+  "coordinates_icrs_j2000": [
+    {
+      "id": "LOVE_G1_007",
+      "ra_deg": 204.30267916666668,
+      "dec_deg": -36.78240527777778,
+      "role": "frozen_original_target",
+      "scientific_confidence": "project-specified direction; not independently confirmed source"
+    },
+    {
+      "id": "EDEM_CANONICAL",
+      "ra_deg": 139.22409686590188,
+      "dec_deg": 30.26038779947318,
+      "role": "frozen_original_target",
+      "scientific_confidence": "project-specified direction; astronomical identity unconfirmed"
+    },
+    {
+      "id": "LOVE_EDEM_BISECTOR",
+      "ra_deg": 170.38390326101873,
+      "dec_deg": -3.8654180644718967,
+      "role": "derived_geometry_only",
+      "scientific_confidence": "deterministic geometric construction, not an independent celestial candidate"
+    },
+    {
+      "id": "EDEM_GIZA_CONDITIONAL",
+      "ra_deg": 191.6974004645,
+      "dec_deg": -6.4273101156,
+      "role": "obsolete_alternative_not_primary",
+      "scientific_confidence": "previous Giza reflection produced no admissible optical alignment; must not silently replace canonical EDEM"
+    },
+    {
+      "id": "ABYDOS_SKY_NUMERIC",
+      "ra_deg": 223.415064,
+      "dec_deg": 33.979316,
+      "role": "separate_prior_numeric_sky_hypothesis",
+      "scientific_confidence": "not proven to belong to original SPEAR operator; separate hypothesis with prior WISE nondetection"
+    }
+  ],
+  "mirror_policy": {
+    "operators": [
+      {
+        "id": "ORIGINAL",
+        "formula": "(RA, Dec)"
+      },
+      {
+        "id": "RA_MERIDIAN_REFLECTION",
+        "formula": "(360-RA)%360, Dec"
+      },
+      {
+        "id": "EQUATORIAL_REFLECTION",
+        "formula": "RA, -Dec"
+      },
+      {
+        "id": "ANTIPODE",
+        "formula": "(RA+180)%360, -Dec"
+      }
+    ],
+    "scientifically_independent_observation": false,
+    "correction": "All mirror directions are new look directions, not independently observed counterparts or additional data. Count all target/mirror/control trials and avoid post-hoc best-of-multiple claim."
+  },
+  "controls": {
+    "rule": "For each original target check RA rotations +40 and +80 degrees preserving Dec, once only; same archive search and footprint classification. Exposure-matching not guaranteed.",
+    "scientific_use": "Coverage-descriptive only; not a null distribution for actual radio SNR or technosignature significance."
+  },
+  "archive_preflight": {
+    "official_service": "https://data-query.nrao.edu/tap/sync",
+    "source": "NRAO TAP ObsCore archive metadata",
+    "query": "SELECT TOP 100 target_name,s_ra,s_dec,t_min,t_max,obs_publisher_did,instrument_name,access_url FROM tap_schema.obscore WHERE instrument_name='GBT' AND spatial bounding box around frozen coordinate",
+    "radii_deg": [
+      0.1,
+      0.5
+    ],
+    "max_rows_per_query": 100,
+    "frequency_sensitive_beam": "Not modelled: catalog angular separation alone does not prove target inside telescope spectral primary beam.",
+    "required_for_real_spectral_test": [
+      "nonzero original per-scan pointing from authenticated raw antenna TCS or backend, not merely requested/catalog coordinates",
+      "source native waterfall (.fil/.h5) with bytes checksum and valid frequency grid/time stamps",
+      "observation band/time, matched OFF and repeat if claim concerns source origin",
+      "frozen JANUS engine/version/score threshold, all candidate traces saved",
+      "independent controls at matched instrument/band/noise and multiple testing accounting",
+      "external custodian for validation claims"
+    ],
+    "no_rows_status": "NO_QUALIFIED_NRAO_GBT_OBSCORE_MATCH_IN_BOUNDED_SEARCH; NOT NO_RADIO_EMISSION",
+    "partial_match_status": "CANDIDATE_ARCHIVE_COVERAGE_ONLY; NOT_SPECTRAL_SIGNAL_RESULT",
+    "fail_closed": true
+  },
+  "prior_optical_result": {
+    "status": "PRIMARY_GATE_FAIL",
+    "best_error_deg": 2.2980180549,
+    "gate_deg": 0.25,
+    "controls_p_value": 0.813,
+    "claim": "Prior optical alignment not confirmed; this new radio test is independent hypothesis."
+  },
+  "baseline_JANUS_reference": {
+    "historical_false_alerts": 51,
+    "correct_localizations": 318,
+    "weak_localizations": 69,
+    "production_unchanged": true
+  },
+  "scientific_gates": {
+    "actual_radio_detector_run_must_be_distinct_from_catalog_cone_search": true,
+    "externally_qualified_new_ONOFF_spectra": false,
+    "automatic_rfi_veto": false,
+    "scientific_detection_on_catalog_only": false
+  },
+  "outputs": [
+    "original_targets.json",
+    "radio_coverage_inventory.json",
+    "mirror_and_control_coverage.json",
+    "gate_report.json"
+  ]
+}
