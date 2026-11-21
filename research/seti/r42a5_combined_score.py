@@ -18,8 +18,19 @@ def archive(q):
     b=get(url+"/zip").content;assert len(b)<256*1024**2 and sha(b)==q["digest"]
     z=zipfile.ZipFile(io.BytesIO(b));files=[x for x in z.infolist() if not x.is_dir()]
     assert sum(x.file_size for x in files)<1024*1024**2
-    names={pathlib.PurePosixPath(x.filename).name:x for x in files};assert len(names)==len(files)
-    return lambda n:z.read(names[n])
+    from collections import defaultdict
+    names=defaultdict(list)
+    for info in files:names[pathlib.PurePosixPath(info.filename).name].append(info)
+    duplicates={n:[x.filename for x in vv] for n,vv in names.items() if len(vv)>1}
+    if duplicates:print("R42A5_ARCHIVE_BASENAME_COLLISIONS",json.dumps({"artifact":q["artifact"],"examples":dict(list(duplicates.items())[:15]),"count":len(duplicates)}),flush=True)
+    def read(n):
+        matches=names[n]
+        if not matches:raise KeyError("Missing archival file: "+n)
+        if len(matches)==1:return z.read(matches[0])
+        blobs=[z.read(v) for v in matches]
+        if all(sha(x)==sha(blobs[0]) for x in blobs[1:]):return blobs[0]
+        raise ValueError("AMBIGUOUS_ARCHIVE_BASENAME:"+n+":"+str([v.filename for v in matches]))
+    return read
 def checked(read,n,digest):
     raw=read(n);assert sha(raw)==digest,n;return raw
 def npz(raw):
