@@ -1,0 +1,99 @@
+{
+  "schema": "janus.cosmos.r42a6.signal_preservation.v1",
+  "date": "2026-11-21",
+  "stage": "R42A6",
+  "status": "PREREGISTERED_POST_R42A5_EXPLORATORY",
+  "intent": "Diagnose six primary and eight secondary historical signal losses, test an additional spatial/spectral feature family from registered V and path that can reject control alerts without suppressing existing correctly localized signals.",
+  "provenance": {
+    "r42a5": {
+      "run": 44885476789,
+      "artifact": 14699472406,
+      "digest": "dfa1d4eedc0822c00c60472e23e4a80c243473427c1a6212af5def9867e52eb0",
+      "fit_lock_sha256": "1772da102cc56b8cbe99134d10b818aa8f3b67125c392255b9459670de573a7f"
+    },
+    "minimal": {
+      "run": 44808892544,
+      "artifact": 14667942238,
+      "digest": "c9a414cf3b4e8eb3663d87245e53d3c74c7d3a2319251b5e947b89b644b8b3d6"
+    },
+    "common": {
+      "run": 44785055340,
+      "artifact": 14657744482,
+      "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+    }
+  },
+  "split": {
+    "fit_groups": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "audit_groups": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "note": "Previously viewed historical audit; cannot claim prospective, independent or blind validation."
+  },
+  "loss_diagnostic": {
+    "source": "R42A5 artifact all_scores.npz, authenticated JSON fit_lock and result",
+    "examine": [
+      "Row-identical lost true-positive IDs and recovered false alert IDs",
+      "Group, route, weak status, Minimal margin M, frozen NOISE margin N, valid/missing mask",
+      "Signed distance to each R42A5 fit-locked threshold, path-independent shape feature correlations"
+    ],
+    "labels_for_analysis_only": true,
+    "no_audit_optimization": true
+  },
+  "shape_features": {
+    "data": "R42A common V array shape [rows,16,128], original registered receiver spectrogram; predicted path from R42A3B fixed-route archive. All hashes verified before computation.",
+    "transforms": "At 16 path positions compare path-bin intensities to eight fixed sidebands +/-3,5,8,12; median sideband and MAD. Compute seven predeclared features: median local ridge contrast/MAD, 25th-percentile ridge contrast/MAD, fraction epochs with contrast>1 MAD, path-bin versus shoulder (+/-1,+/-2) median contrast/MAD, epoch-to-epoch absolute contrast difference, fraction path near edge (<8 or >=120), and mean absolute path drift per bin. Clip each ratio to [-30,+30] and missing sidebands to zero with explicit no-valid flags.",
+    "physical_claim": "Feature diagnostics on same registered spectra are not independent optical/radio observation or source classification."
+  },
+  "predictor": {
+    "rule": "Only begin from frozen original JANUS+NOISE alerts. Train one L2 logistic discriminator from spectral features plus existing signed JANUS and NOISE margins, route and noise score support; NO new routing. Fit only reference-positive correctly localized hits and reference false-alert rows from six FIT groups. Exclude injected positives with incorrect localization from classifier training, preserve output for all rows.",
+    "features": [
+      "M",
+      "N",
+      "N_supported",
+      "parent_route",
+      "ridge_median_snr",
+      "ridge_q25_snr",
+      "ridge_occupancy",
+      "ridge_shoulder",
+      "ridge_jitter",
+      "path_edge_frac",
+      "path_drift"
+    ],
+    "hyperparams": {
+      "model": "LogisticRegression",
+      "C": 0.1,
+      "class_weight": "balanced",
+      "random_state": 424206,
+      "max_iter": 2000,
+      "scaler": "StandardScaler fit groups only"
+    },
+    "fit_lock": "Threshold nextafter(min training score over all correctly localized original fit hits,-infinity) to retain 100% fit reference true positives; if no valid separability, fail closed. All original accepted rows outside this filter are retained unless confidently classified control. No per-group/calibration based on audit."
+  },
+  "cross_validation": {
+    "procedure": "Leave-one-fit-group-out, fit 5 groups using fixed features/hyperparameters, lock score cutoff to preserve all training reference hits, report held-out fit-group positive loss and false-alert removal. No selection of model or thresholds from CV results."
+  },
+  "audit": {
+    "evaluate_once": "Use fixed full-fit model and locked threshold on groups 7–11. Report exact lost IDs and weak IDs, 51 control baseline to <=35 target, 318 localized and 69 weak reference hit preservation. Compare historical locked R42A5 A 43/312/65 and B 43/310/65. A failure is a scientifically valid negative result.",
+    "no_audit_retraining": true,
+    "prior_exposure_warning": true
+  },
+  "gates": {
+    "no_production_model_change": true,
+    "no_new_signal_claim": true,
+    "no_external_validation": true,
+    "freeze_original_detector": true,
+    "R42B_pointing": "HOLD authentic antenna pointing and prospective independent custodian",
+    "phase_after_failure": "If historical fails, diagnose; do not tune on audit. Seek new independent groups/physical features, not a posthoc threshold."
+  }
+}
