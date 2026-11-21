@@ -1,0 +1,41 @@
+name: JANUS COSMOS R42A7B3 — official NRAO archive TAP metadata crosscheck
+on:
+  push:
+    branches: [research/seti-r42a7b-independent-onoff-20261121]
+    paths: ['.github/workflows/seti-r42a7b3-nrao-tap.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-cosmos-r42a7b3-official-nrao-tap
+  cancel-in-progress: false
+jobs:
+  nrao-obscore-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify read-only NRAO TAP query
+        run: |
+          python -m py_compile research/seti/r42a7b3_nrao_archive_tap.py
+          python -m pip install requests==2.32.3
+      - name: Crosscheck GBT observation metadata in official NRAO TAP without claiming antenna position
+        run: |
+          python research/seti/r42a7b3_nrao_archive_tap.py
+          test -s runtime/r42a7b3_tap/gate_report.json
+          test -s runtime/r42a7b3_tap/nrao_tap_metadata.json
+      - name: Retain TAP receipt and explicit independent pointing HOLD
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-r42a7b3-nrao-official-archive-metadata-not-tcs
+          path: runtime/r42a7b3_tap/*.json
+          if-no-files-found: warn
+          retention-days: 90
