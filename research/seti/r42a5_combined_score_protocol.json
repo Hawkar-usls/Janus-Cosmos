@@ -1,0 +1,81 @@
+{
+  "schema": "janus.cosmos.r42a5.v1",
+  "date": "2026-11-21",
+  "stage": "R42A5",
+  "status": "PREREGISTERED_HISTORICAL_FIXED_ROUTE",
+  "sources": {
+    "minimal": {
+      "run": 44808892544,
+      "artifact": 14667942238,
+      "digest": "c9a414cf3b4e8eb3663d87245e53d3c74c7d3a2319251b5e947b89b644b8b3d6"
+    },
+    "noise": {
+      "run": 44823500701,
+      "artifact": 14677735610,
+      "digest": "5df52dcdb55258a83493b5e84795b0f9448ddaa14b5bcbf7b2d1685d8952d174"
+    },
+    "common": {
+      "run": 44785055340,
+      "artifact": 14657744482,
+      "digest": "7e6a2dd1e09a12780dabcd78f0cca545af595b49c2267c53974c04e9aeb86cb6"
+    },
+    "models": {
+      "run": 44760007574,
+      "artifact": 14644725660,
+      "digest": "3fc68cc3e1dfb928d943a5445d5d18af90fa04b87f5361b0940b53f6a61ba239",
+      "result_sha256": "c744150bb3cdcee3236c279a3c7c323c59dfc1d93ef06e2ccaae2c754e67590f"
+    }
+  },
+  "split": {
+    "fit": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "audit": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "fit_rows": 1728,
+    "audit_rows": 1440,
+    "fit_nulls": 768,
+    "audit_nulls": 640
+  },
+  "reference": {
+    "minimal": {
+      "localized": 318,
+      "weak": 69,
+      "controls": 53
+    },
+    "noise": {
+      "localized": 318,
+      "weak": 69,
+      "controls": 51
+    },
+    "coverage": 3143,
+    "missing": 25
+  },
+  "score_contract": {
+    "baseline": "M is R42A3B frozen fixed-routing signed score. N=(z-cut)/(1+abs(z-cut)), with original lane-specific NOISE fit-only cutoff. Missing N explicit. Reference J=min(M,N) where original eligible; else M; exact zero-threshold audit mask parity required.",
+    "primary": "Frozen all-candidate score S=min(M,N) where valid and (eligible OR original Minimal reject); otherwise M. Reference parity at zero required. Cross-stage scales are heuristic, not probability. No rerouting.",
+    "secondary": "Separate exploratory fixed-C logistic ranking; inputs M, bounded N (zero if missing), missingness, parent route, M*N. StandardScaler and L2 logistic C=0.1, balanced classes, random_state=42. Fit on six fit groups only, target labeled positive AND path localized; other rows negative. No hyperparameter search. Missing N is explicitly marked. This is a new research ranking head, not a production update.",
+    "calibration": "Each arm separately choose minimum threshold meeting at most 42 fit nulls (floor(768*35/640)). For ties use nextafter over 43rd highest null. Record fit paired preservation and whether feasible, then lock before computing audit results. No audit threshold changes. Primary and secondary reported separately, never select by audit. Audit already viewed by prior research, no blind claim.",
+    "metrics": "Audit 640 nulls, 800 injected positives (including 160 shared stress), count localized, weak, ordinary/shared, and exact reference-hit lost/gained row IDs. Goal <=35 false alerts, no loss of any of 318 reference hits including 69 weak; report false-alert removed/added. Historical success not independent validation."
+  },
+  "gates": [
+    "Authenticate ZIP digests and per-group NPZ hashes; align tile SHA, selected path, y/active/truth and masks",
+    "Exact zero-cut historical Minimal and NOISE parity",
+    "Finite scores for 3168, explicit 25 missing NOISE",
+    "Freeze thresholds on six fit groups before evaluating five historical audit groups",
+    "Evaluate each arm once and preserve failures; no production updates"
+  ],
+  "production_adoption": false,
+  "external_validation": false,
+  "independent_pointing_hold": true
+}
