@@ -1,0 +1,46 @@
+name: JANUS COSMOS OSIRIS SPEAR R2E · original Parkes LOVE files
+on:
+  push:
+    branches: [research/seti-osiris-spear-r2e-love-raw-metadata-20261121]
+    paths:
+      - '.github/workflows/seti-osiris-spear-r2e-love.yml'
+      - 'research/seti/osiris_spear_r2e_love.py'
+      - 'research/seti/osiris_spear_r2e_love_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-osiris-r2e-love-files
+  cancel-in-progress: false
+jobs:
+  raw-file-qualification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify fixed source lock and file-inspection code
+        run: |
+          python -m py_compile research/seti/osiris_spear_r2e_love.py
+          python -m json.tool research/seti/osiris_spear_r2e_love_protocol.json > /dev/null
+          python -m pip install requests==2.32.3
+      - name: Query original DAP Parkes raw observation metadata and same-session controls
+        run: |
+          python research/seti/osiris_spear_r2e_love.py
+          test -s runtime/osiris_spear_r2e/file_identity_and_metadata.json
+          test -s runtime/osiris_spear_r2e/epoch_control_survey.json
+          test -s runtime/osiris_spear_r2e/r2e_gate_report.json
+      - name: Preserve source metadata and all fail-closed science checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-osiris-r2e-LOVE-Parkes-raw-search-metadata
+          path: runtime/osiris_spear_r2e/
+          retention-days: 90
+          if-no-files-found: warn
