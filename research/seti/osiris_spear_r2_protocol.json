@@ -1,0 +1,98 @@
+{
+  "schema": "janus.cosmos.osiris_spear.r2.real_spectral_admission.v1",
+  "stage": "OSIRIS_SPEAR_R2A",
+  "created_date": "2026-11-21",
+  "status": "FROZEN_BEFORE_SOURCE_ORIGIN_CHECKS",
+  "purpose": "Find real original archive radio observations that actually cover frozen SPEAR directions, with telescope-frequency-dependent beam admission, raw-byte integrity, real pointing and independent ON/OFF. Only then consider unchanged JANUS native detector; no score or discovery claims from listing alone.",
+  "source": "https://breakthroughinitiatives.org/opendatasearch",
+  "source_interface_verified_run": 44944064961,
+  "inherited_r1": {
+    "meta_receipt": "Hawkar-usls/janus-meta-registry:data/JANUS-COSMOS-OSIRIS-SPEAR-RADIO-R1-2026-11-21.json",
+    "run": 44944183023,
+    "original_within_0p1_deg": 0
+  },
+  "target_authority": "research/seti/osiris_spear_radio_protocol.json",
+  "target_scope": [
+    "LOVE_G1_007",
+    "EDEM_CANONICAL",
+    "LOVE_EDEM_BISECTOR",
+    "EDEM_GIZA_CONDITIONAL",
+    "ABYDOS_SKY_NUMERIC"
+  ],
+  "direction_roles": [
+    "original",
+    "control_plus40",
+    "control_plus80"
+  ],
+  "target_date_2026_11_21_semantics": "target positions fixed in original R1; geometry derived positions are exploratory, not independent objects",
+  "public_archive_search": {
+    "telescopes": [
+      "GBT",
+      "Parkes"
+    ],
+    "file_types": [
+      "HDF5",
+      "filterbank",
+      "baseband+data"
+    ],
+    "radius_deg": 1.5,
+    "query_fields": [
+      "project",
+      "file_type",
+      "ra",
+      "ra_range",
+      "decl",
+      "decl_range",
+      "search",
+      "perPage",
+      "page"
+    ],
+    "per_page": 100,
+    "max_pages_per_query": 2,
+    "concurrency": 4,
+    "timeout_seconds": 25,
+    "max_html_response_bytes": 2800000,
+    "max_total_requests": 270,
+    "selection": "Archive coordinates/filename matched using haversine 3D angular separation; correct RA wrap. Include all catalog listings, not just nearest."
+  },
+  "beam_preflight": {
+    "GBT": "Gregorian FWHM ≈ 12.60 / freq_GHz arcmin (GBO site); half-power radial threshold FWHM/2. Prime focus ~13.01 / freq_GHz if receiver proven; otherwise use Gregorian for conservative screening.",
+    "Parkes": "Conservative UWL/Multibeam APPROX FWHM 12 arcmin*(1.4GHz/frequency_GHz); receiver dependent, not an observation claim; Parkes multi-beam 14.3 arcmin at 1.42 GHz, UWL ~12 arcmin at 1.4 GHz. No confirmed per-feed offset beam or pointing.",
+    "frequency": "Archive center frequency is not a verified native spectral band; rank by center only; require original HDF5/filterbank header and receiver for physically valid coverage.",
+    "candidate_categories": [
+      "IN_NOMINAL_HALF_POWER_CATALOG_ONLY",
+      "BETWEEN_HALF_POWER_AND_FWHM",
+      "NEARBY_OUTSIDE_FWHM",
+      "NO_MATCH_OR_UNAVAILABLE"
+    ],
+    "science_gate": "Catalog source coordinates are not measured encoder pointing. A center-frequency half-power match only makes a raw-data acquisition candidate, not a verified on-sky radio spectrum of OSIRIS."
+  },
+  "group_selection": {
+    "deterministic_priority": [
+      "exact original ≤0.5*FWHM archive-center original HDF5, file byte-size≤350MB with valid archive MD5 and ON/OFF same epoch",
+      "same for filterbank",
+      "same with bytes≤1.5GB read-only metadata control",
+      "catalog off-beam candidates are NOT a substitute for pointing"
+    ],
+    "freeze_before_original_power": true,
+    "allow_single_targets_with_no_off_only_for_metadata_qa": true,
+    "external_custodian_for_R42B": true,
+    "independent_control": "At least one matched instrument sky negative and independent pointing; null-control RA rotations are search-footprint controls only, not matched radio-noise examples."
+  },
+  "claim_ceiling": {
+    "not_confirmed_technosignature": true,
+    "not_proven_nondetection": true,
+    "no_JANUS_detector_run_unless_native_radio_verified": true,
+    "no_prod_change": true,
+    "history": {
+      "false_alerts": 51,
+      "detected": 318,
+      "weak": 69
+    }
+  },
+  "outputs": [
+    "expanded_public_radio_inventory.json",
+    "beam_screened_candidates.json",
+    "r2a_gate_report.json"
+  ]
+}
