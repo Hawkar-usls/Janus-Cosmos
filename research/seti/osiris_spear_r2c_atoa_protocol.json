@@ -1,0 +1,133 @@
+{
+  "schema": "janus.cosmos.osiris_spear.r2c.atoa_tap.v1",
+  "date": "2026-11-21",
+  "stage": "OSIRIS_SPEAR_R2C_ATOA",
+  "status": "PREREGISTERED_BEFORE_ATOA_TAP_SOURCE_QUERY",
+  "authority": {
+    "original": "research/seti/osiris_spear_radio_protocol.json",
+    "prior_R2A": "data/JANUS-COSMOS-OSIRIS-SPEAR-R2A-REAL-RADIO-COVERAGE-2026-11-21.json",
+    "issue": "https://github.com/Hawkar-usls/Janus-Cosmos/issues/64"
+  },
+  "service": {
+    "url": "https://atoavo.atnf.csiro.au/tap",
+    "sync": "https://atoavo.atnf.csiro.au/tap/sync",
+    "table": "ivoa.obscore",
+    "documentation": "https://www.atnf.csiro.au/observers/docs/atoa/atoaguide.html",
+    "native_archive": "https://atoa.atnf.csiro.au",
+    "archive_scope": "ATNF Parkes non-pulsar spectral line/continuum metadata distinct from BL GBT/Parkes files; data access may require OPAL login"
+  },
+  "frozen_targets": [
+    {
+      "id": "LOVE_G1_007",
+      "ra_deg": 204.30267916666668,
+      "dec_deg": -36.78240527777778,
+      "role": "original"
+    },
+    {
+      "id": "EDEM_CANONICAL",
+      "ra_deg": 139.22409686590188,
+      "dec_deg": 30.26038779947318,
+      "role": "original"
+    },
+    {
+      "id": "LOVE_EDEM_BISECTOR",
+      "ra_deg": 170.38390326101873,
+      "dec_deg": -3.8654180644718967,
+      "role": "derived"
+    },
+    {
+      "id": "EDEM_GIZA_CONDITIONAL",
+      "ra_deg": 191.6974004645,
+      "dec_deg": -6.4273101156,
+      "role": "prior_failed_optical_variant"
+    },
+    {
+      "id": "ABYDOS_SKY_NUMERIC",
+      "ra_deg": 223.415064,
+      "dec_deg": 33.979316,
+      "role": "separate_auxiliary"
+    }
+  ],
+  "control_directions": [
+    {
+      "formula": "RA+40 degrees, unchanged Dec",
+      "role": "coverage_control"
+    },
+    {
+      "formula": "RA+80 degrees, unchanged Dec",
+      "role": "coverage_control"
+    }
+  ],
+  "search": {
+    "all_directions": 15,
+    "max_rows_per_direction": 500,
+    "half_width_declination_deg": 1.5,
+    "half_width_ra_deg_formula": "1.5 / max(0.12,cos(dec))",
+    "cone_radii_for_report_deg": [
+      0.05,
+      0.1,
+      0.5,
+      1.5
+    ],
+    "candidate_selection": "Spherical separation using true original catalog coordinates; do not infer primary beam from sky center alone.",
+    "per_query_timeout_seconds": 25,
+    "max_parallel_requests": 3,
+    "max_raw_response_bytes": 10000000,
+    "known_columns_from_doc": [
+      "obs_id",
+      "obs_collection",
+      "s_ra",
+      "s_dec",
+      "ra_hms",
+      "dec_dms",
+      "frequency",
+      "bandwidth",
+      "access_url",
+      "data_flag",
+      "access_estsize"
+    ],
+    "prefer_metadata_columns": [
+      "obs_id",
+      "obs_collection",
+      "s_ra",
+      "s_dec",
+      "t_min",
+      "t_max",
+      "instrument_name",
+      "facility_name",
+      "frequency",
+      "bandwidth",
+      "access_url",
+      "data_flag",
+      "access_estsize",
+      "ra_hms",
+      "dec_dms"
+    ],
+    "require_instrument_parkes_where_available": true,
+    "source_metadata_schema_probe_before_query": true,
+    "fallback_request_methods": [
+      "GET",
+      "POST"
+    ],
+    "no_private_credentials": true
+  },
+  "provenance_gates": {
+    "query_results_are_metadata_not_antenna_pointing": true,
+    "source_is_not_independent_contemporaneous_bl_off": true,
+    "real_spectral_bytes_downloaded": 0,
+    "no_source_spectrum_without_true_instrument_beam": true,
+    "no_technosignature_or_nondetection_claim": true,
+    "no_legacy_threshold_tuning": true,
+    "production_unchanged": true
+  },
+  "outcomes": {
+    "if_available": "Report Parkes-only metadata candidates by separation, observing frequency, time, project and available access URL, required per-feed/pointing checks; preserve exact ADQL and output digest",
+    "if_unavailable": "Mark ATOA TAP UNAVAILABLE, do not infer zero coverage. Escalate route to open ATNFDATSUP-1670 / CASDA, keeping existing historic BL R2A negative catalog footprint separate."
+  },
+  "outputs": [
+    "atoa_schema.json",
+    "atoa_candidates.json",
+    "atoa_query_receipts.json",
+    "r2c_gate_report.json"
+  ]
+}
