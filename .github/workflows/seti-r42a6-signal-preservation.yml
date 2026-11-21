@@ -1,0 +1,63 @@
+name: JANUS R42A6 — signal preservation and morphology audit
+on:
+  push:
+    branches: [research/seti-r42a6-signal-preservation-20261121]
+    paths:
+      - '.github/workflows/seti-r42a6-signal-preservation.yml'
+      - 'research/seti/r42a6_signal_preservation.py'
+      - 'research/seti/r42a6_signal_preservation_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: janus-r42a6-signal-preservation
+  cancel-in-progress: false
+jobs:
+  diagnose-and-guard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify frozen code and install pinned dependencies
+        run: |
+          python -m py_compile research/seti/r42a5_combined_score.py research/seti/r42a6_signal_preservation.py
+          python -m json.tool research/seti/r42a6_signal_preservation_protocol.json >/dev/null
+          python -m pip install numpy==2.2.6 scipy==1.15.3 scikit-learn==1.6.1 requests==2.32.3
+      - name: Check spectral features do not require truth labels
+        run: |
+          PYTHONPATH=research/seti python - <<'PY'
+          import numpy as np
+          import r42a6_signal_preservation as a
+          v=np.random.default_rng(424206).normal(0,1,(3,16,128)).astype('float32')
+          path=np.tile(np.arange(16)+64,(3,1))
+          x=a.shape_rows(v,path)
+          assert x.shape==(3,7) and np.isfinite(x).all()
+          print("R42A6_PURE_FEATURE_TEST_PASS")
+          PY
+      - name: Authenticate frozen R42A5 and R42 common raw spectra, analyze losses, train preservation guard on FIT and evaluate fixed audit
+        run: |
+          python research/seti/r42a6_signal_preservation.py
+          test -s runtime/r42a6/paired_loss_diagnostic.json
+          test -s runtime/r42a6/feature_sources.json
+          test -s runtime/r42a6/guard_fit_lock.json
+          test -s runtime/r42a6/result.json
+      - name: Archive loss forensics and source-verified fit/audit outputs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-r42a6-signal-preservation-experiment
+          path: runtime/r42a6/
+          if-no-files-found: warn
+          retention-days: 90
