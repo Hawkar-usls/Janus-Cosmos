@@ -1,0 +1,98 @@
+{
+  "schema": "janus.cosmos.r41s1h3.retina.hawking_rfi.v1",
+  "stage": "R41S1H3",
+  "date": "2026-11-21",
+  "status": "PREREGISTERED_SYNTHETIC_SHADOW_DIAGNOSTIC",
+  "priority": "Subtask under existing RETINA R41S1H workstream; R42B independent antenna/custodian evidence remains critical path",
+  "interpretation": "Hawking co-launched Breakthrough Listen; BLC1 analysis motivates physically distinct clock sidebands and intermodulation diagnostics. No claim that Hawking invented RFI filters.",
+  "lineage": {
+    "parent_branch": "research/seti-r41s1h2a-diagnostics-20261120",
+    "h2_frozen_run": 44786812937,
+    "h2a_descriptive_run": 44788620149,
+    "R42_reference": {
+      "controls": 51,
+      "localized": 318,
+      "weak": 69
+    },
+    "parent_only_control_alerts": 38,
+    "rescue_alerts": 13
+  },
+  "science": "Predefine oscillator sideband and 2f1-f2 intermod closure evidence, and off-trajectory frequency-coherent peaks. A narrow isolated extraterrestrial-looking line cannot be automatically distinguished from a solitary terrestrial oscillator based on one view. Require independent ON/OFF/pointing before any causal source assignment.",
+  "feature_spec": {
+    "source": "16x256 synthetic narrowband native-like spectrograms and a label-blind candidate path. Real native R42B features must use actual Hz, reference frame, absolute oscillator spacing and matched scan time. No source labels fed to feature function.",
+    "transforms": "Per-epoch median and MAD-normalized power, candidate-relative offsets Δ={8,12,16,24} bins; ±Δ, ±2Δ. Score clock symmetric and harmonically spaced sidebands with common drift, intermod closure f0=2f1-f2 when f1=f0±Δ and f2=f0±2Δ, coherent modulation and off-path broadband occupancy. Offset in bins is only engineering approximation; do not infer real clock Hz without native frequency calibration.",
+    "features": [
+      "four_sideband_min_strength",
+      "intermod_two_sideband_closure",
+      "offpath_tracks_above_mad",
+      "candidate_sideband_temporal_coherence",
+      "offpath_broadband_occupancy",
+      "offpath_commonmode_variability"
+    ],
+    "fundamental_harmonic_rule": "Never claim 2*f0 is present if outside observed native band; store coverage=false and do not assign harmonic classification.",
+    "no_truth_leakage": true
+  },
+  "synthetic_simulators": {
+    "independent_seeds_dev": [
+      411103,
+      411107,
+      411113
+    ],
+    "independent_seeds_heldout": [
+      411117,
+      411119
+    ],
+    "rows_per_seed": {
+      "positive": 128,
+      "null": 128
+    },
+    "spectrum_shape": [
+      16,
+      256
+    ],
+    "positive_families": [
+      "faint_single",
+      "drifting_single",
+      "intermittent_single",
+      "curved_single"
+    ],
+    "negative_families": [
+      "clock_sideband_comb",
+      "intermod_triplet",
+      "broadband_impulses",
+      "single_electronic_carrier"
+    ],
+    "count_each_family_per_seed": 32,
+    "generator": "Colored noise and independent time-varying baseline per spectrum; positive families single-line tracks at different amplitudes/active rows; null families clock sidebands, 2f1-f2 closure, impulsive broadband and single electronic carrier, where latter is deliberately visually indistinguishable from an isolated source.",
+    "source_claim_limit": "Synthetic 'positive' and 'null' mean declared generator labels only, not astrophysical origin of single-view morphology."
+  },
+  "method": {
+    "blind_candidate_search": "One frozen straight-line candidate search for both classes, start bins 48..207 step2 and slopes -1.25,-.75,-.25,0,.25,.75,1.25; no truth path",
+    "model": "StandardScaler+LogisticRegression C=0.1 class_weight=balanced random_state=411103, intercept; only six physical RFI features, no JANUS/NOISE scores",
+    "train": "All dev seeds only; holdout seeds entirely unseen before model/threshold fixed",
+    "locked_veto_threshold": "Higher RFI score means stronger evidence for family RFI. nextafter(max(development positive scores), +infinity) to preserve every dev positive; audit hypothetical only, zero actual veto",
+    "comparison": "Fixed baseline family evidence via comb strength only; AUC and family breakdown on heldout; no selection among variants after seeing test",
+    "shift_stability": "No-wrap +/-8/16 frequency bins, fill new edge bins from each row median, transform path by identical shift. Compare normalized features and frozen-model margins without retuning.",
+    "negative_control": "Single-electronic-carrier RFI cannot be physically distinguished from single narrow source without independent supporting evidence; report conditional performance and never suppress based on this type."
+  },
+  "gates": {
+    "engineering_pass": "Original/provisional fixed protocol validated, source code unit tests pass, each evaluation run returns all per-seed counts and invariant raw identity.",
+    "exploratory_discrimination": "AUC >=0.70 on both heldout seeds, with no cheating on labels, report simpler comb baseline; not a production gate",
+    "conservative_preservation": "Zero positive injection losses under locked advisory threshold on both heldout seeds, no more than 1% polarity flips under shifts; any failure rejects proposed hard-veto pathway",
+    "baseline_alert_preservation": "All original 318 and 69 remain because shadow-only; no empirical claim of reduced 51 historical false alerts.",
+    "external_real_validation": "HOLD R42B, authentic TCS/ScanLog and external custodian for new ON/OFF groups; no use of historical 38 control truth to train or calibrate",
+    "production_adoption": false,
+    "automatic_veto": false
+  },
+  "deferred": {
+    "hawking_transient": "HOLD until after R42B; separate astrophysical transients need independent time resolution/polarimetry and physical sensitivity limits",
+    "monitor": "NRAO GBT ticket 58509 is separate and pending"
+  },
+  "artifact_files": [
+    "result.json",
+    "model_lock.json",
+    "feature_contract.json",
+    "family_matrix.json",
+    "per_example_scores.npz"
+  ]
+}
