@@ -2,7 +2,10 @@ name: JANUS R42A5 combined JANUS NOISE historical audit
 on:
   push:
     branches: [research/seti-r42a5-combined-score-20261121]
-    paths: ['.github/workflows/seti-r42a5-combined-score.yml']
+    paths:
+      - '.github/workflows/seti-r42a5-combined-score.yml'
+      - 'research/seti/r42a5_combined_score.py'
+      - 'research/seti/r42a5_combined_score_protocol.json'
   workflow_dispatch:
 permissions:
   contents: read
