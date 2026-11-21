@@ -1,0 +1,47 @@
+name: JANUS COSMOS OSIRIS SPEAR R2D · CASDA and DAP pulsar archive survey
+on:
+  push:
+    branches: [research/seti-osiris-spear-r2d-casda-psrda-20261121]
+    paths:
+      - '.github/workflows/seti-osiris-spear-r2d-casda-psrda.yml'
+      - 'research/seti/osiris_spear_r2d_casda_psrda.py'
+      - 'research/seti/osiris_spear_r2d_casda_psrda_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-osiris-r2d-casda-psrda
+  cancel-in-progress: false
+jobs:
+  two-official-archives:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Check immutable target protocol and python source before contacting archives
+        run: |
+          python -m py_compile research/seti/osiris_spear_r2d_casda_psrda.py
+          python -m json.tool research/seti/osiris_spear_r2d_casda_psrda_protocol.json > /dev/null
+          python -m pip install requests==2.32.3
+      - name: Query official CASDA and Parkes Pulsar DAP TAP service for frozen sky directions
+        run: |
+          python research/seti/osiris_spear_r2d_casda_psrda.py
+          test -s runtime/osiris_spear_r2d/tap_schema_receipts.json
+          test -s runtime/osiris_spear_r2d/casda_sky_coverage.json
+          test -s runtime/osiris_spear_r2d/psrda_sky_coverage.json
+          test -s runtime/osiris_spear_r2d/r2d_gate_report.json
+      - name: Keep all scientific query results, failures and service metadata
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-osiris-r2d-real-CASDA-PSRDA-metadata
+          path: runtime/osiris_spear_r2d/
+          if-no-files-found: warn
+          retention-days: 90
