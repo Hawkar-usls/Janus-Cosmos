@@ -1,0 +1,45 @@
+name: JANUS COSMOS OSIRIS SPEAR R2C2 · Parkes-only original footprint
+on:
+  push:
+    branches: [research/seti-osiris-spear-r2c2-parkes-footprint-20261121]
+    paths:
+      - '.github/workflows/seti-osiris-spear-r2c2-parkes.yml'
+      - 'research/seti/osiris_spear_r2c2_parkes.py'
+      - 'research/seti/osiris_spear_r2c2_parkes_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-osiris-r2c2-parkes-footprint
+  cancel-in-progress: false
+jobs:
+  parkes-only-footprints:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Validate frozen Parkes-only protocol and SQL syntax
+        run: |
+          python -m py_compile research/seti/osiris_spear_r2c2_parkes.py research/seti/osiris_spear_r2c_atoa.py
+          python -m json.tool research/seti/osiris_spear_r2c2_parkes_protocol.json > /dev/null
+          python -m pip install requests==2.32.3
+      - name: Query real ATNF ATOA Parkes-only original archival scan and footprint metadata
+        run: |
+          python research/seti/osiris_spear_r2c2_parkes.py
+          test -s runtime/osiris_spear_r2c2/r2c2_result.json
+          test -s runtime/osiris_spear_r2c2/beam_footprint_diagnostics.json
+      - name: Preserve both positive and negative archive metadata results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-osiris-r2c2-parkes-only-ATOA-footprint-audit
+          path: runtime/osiris_spear_r2c2/
+          retention-days: 90
+          if-no-files-found: warn
