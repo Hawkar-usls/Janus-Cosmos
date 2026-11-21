@@ -1,0 +1,50 @@
+name: JANUS RETINA R41S1H3 — clock-family and intermodulation shadow
+on:
+  push:
+    branches: [research/seti-r41s1h3-hawking-rfi-20261121]
+    paths:
+      - '.github/workflows/seti-r41s1h3-retina-rfi.yml'
+      - 'research/seti/r41s1h3_retina_rfi.py'
+      - 'research/seti/r41s1h3_retina_rfi_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-r41s1h3-retina-rfi
+  cancel-in-progress: false
+jobs:
+  physical-shadow-exam:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Validate preregistered R41S1H3 physics and environment
+        run: |
+          python -m py_compile research/seti/r41s1h3_retina_rfi.py
+          python -m json.tool research/seti/r41s1h3_retina_rfi_protocol.json > /dev/null
+          python -m pip install numpy==2.2.6 scipy==1.15.3 scikit-learn==1.6.1
+      - name: Generate and evaluate unseen synthetic clock RFI versus single sources
+        run: |
+          python research/seti/r41s1h3_retina_rfi.py
+          test -s runtime/r41s1h3/result.json
+          test -s runtime/r41s1h3/model_lock.json
+          test -s runtime/r41s1h3/family_matrix.json
+          test -s runtime/r41s1h3/per_example_scores.npz
+      - name: Preserve all results including failed preservation and shift checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-r41s1h3-retina-clock-intermod-shadow
+          path: runtime/r41s1h3/
+          retention-days: 90
+          if-no-files-found: warn
