@@ -1,0 +1,97 @@
+{
+  "schema": "janus.cosmos.r42a8b.ood.replication.v1",
+  "stage": "R42A8B",
+  "date": "2026-11-21",
+  "status": "FROZEN_BEFORE_GENERATION_AND_SCORING",
+  "parent": {
+    "r42a8a_run": 44911310841,
+    "receipt": "data/JANUS-COSMOS-SETI-R42A8A-FROZEN-OOD-STRESS-2026-11-21.json"
+  },
+  "frozen_ranker": {
+    "model_source_run": 44901446300,
+    "artifact_id": 14706350937,
+    "archive_sha256": "4a34a54a92a52d17b5f9d143e226cd3711bb5e5cc4e8e29958a963effb809d24",
+    "fit_lock_sha256": "bb00bb9bff24cd3997a581291cd440794efdc1f8794ef62963badb31eff9056e",
+    "no_training": true
+  },
+  "design": {
+    "seeds": [
+      421101,
+      421102,
+      421103
+    ],
+    "generator_environments": [
+      "AR_stationary_receiver_plus_speckle",
+      "student_t_nonstationary_receiver_plus_moving_RFI"
+    ],
+    "per_seed_per_environment": {
+      "positive": 128,
+      "negative": 128,
+      "rows": 256
+    },
+    "rows_total": 1536,
+    "shape": [
+      16,
+      128
+    ],
+    "families_positive": [
+      "faint_linear",
+      "intermittent",
+      "quadratic",
+      "amplitude_modulated"
+    ],
+    "families_null": [
+      "colored_only",
+      "comb",
+      "broadband_bursts",
+      "moving_RFI"
+    ],
+    "construction": "New independent simulator routines (NOT R42A8A.example or batch), deterministic seeds fixed now, randomized order within class only; physical plausibility limited to synthetic hypotheses.",
+    "class_imbalance": "Exactly 32 of each label family per environment per seed, label-blind candidate search shared for both labels.",
+    "candidate_method": "Frozen R42A8A.blind_line_candidate() with same starts and slopes for all spectra; true injection coordinates for evaluation only.",
+    "noise_models": "AR Gaussian low-level spectral correlation with power gradient/offset; independent student-t heavy tails with non-stationary gain and variable interference; no refitting on generated panels."
+  },
+  "perturbations": {
+    "frequency_shifts": [
+      -16,
+      -8,
+      8,
+      16
+    ],
+    "method": "Strict no-wrap shift of 128 channels; fill entering channels with per-epoch spectral median. Keep original candidate paths shifted, score paired frozen model on both. Restrict to original paths with all shifted bins within [16,111] for ±16 so no candidate leaves valid spectrum; do not re-detect and interpret as end-to-end invariance.",
+    "fixed_score_tolerance": 0.2,
+    "model_zero_crossing_alert": "If any tested shift changes sign across zero or exceeds absolute 0.2, mark abstain/keep; no suppression ever",
+    "shadow_invariance_guard": "Conservative unchanged-candidate veto abstains if any sign crossing OR max |score shift|>0.2, automatically KEEP every abstention. Research-only non-destructive diagnostic, not production."
+  },
+  "analysis": {
+    "primary": "AUC frozen R42A7 shadow score vs AUC blind simple ridge-energy baseline per seed/environment; no threshold selection",
+    "weak": "Weak-localization and weak-positive-versus-null AUC separately per environment and seed; sampled at 32 faint positives vs 128 nulls.",
+    "shift": "Median, 95th percentile max abs score change, fraction with sign flips or over tolerance; paired weak subgroup abstention rate.",
+    "reproducibility": "Repeat same seed twice, byte-for-byte hash of generated V, labels and original candidate paths; precommitted determinism test.",
+    "control": "No historic R42A5/A6 audit group loading or calibration, frozen R42A7A ranker, no R42A7B real GBT test. Standardized metrics report all seed/environment combinations; no selecting the best seed."
+  },
+  "predeclared_gates": {
+    "potential_generalization": "Every seed/environment frozen AUC>=0.70 AND frozen AUC >= simple ridge-energy AUC. Report FAIL if any domain misses.",
+    "weak_recovery": "Each seed/environment faint-line blind trajectory correctly localized >= 24/32 (75%); this is independent of shadow score and NOT a full JANUS detector result.",
+    "score_shift": "At most 1% sign crossings among all eligible paired shifts, p95 max abs delta <=0.20 across all tested candidates; FAIL otherwise.",
+    "safety": "Always zero automatic suppression. Any failing property means HOLD, no posthoc tuning or production model adoption."
+  },
+  "blocked": {
+    "real_pointing": "NRAO ticket #58509 awaiting independent TCS / ScanLog, no verified telescope test admission",
+    "external_custodian": false,
+    "claimed_new_technosignatures": false,
+    "production_modified": false,
+    "original_historical_counts": {
+      "false_alerts": 51,
+      "localized": 318,
+      "weak": 69
+    }
+  },
+  "artifacts": [
+    "freeze_and_source.json",
+    "replications.json",
+    "translation_invariance.json",
+    "result.json",
+    "per_example_scores.npz"
+  ]
+}
