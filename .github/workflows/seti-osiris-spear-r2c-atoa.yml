@@ -1,0 +1,46 @@
+name: JANUS COSMOS OSIRIS SPEAR R2C · independent ATNF ATOA TAP
+on:
+  push:
+    branches: [research/seti-osiris-spear-r2c-atoa-tap-20261121]
+    paths:
+      - '.github/workflows/seti-osiris-spear-r2c-atoa.yml'
+      - 'research/seti/osiris_spear_r2c_atoa.py'
+      - 'research/seti/osiris_spear_r2c_atoa_protocol.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-osiris-r2c-atoa-tap
+  cancel-in-progress: false
+jobs:
+  atnf-atoa-original-survey:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify frozen ATOA protocol and code before touching external service
+        run: |
+          python -m py_compile research/seti/osiris_spear_r2c_atoa.py
+          python -m json.tool research/seti/osiris_spear_r2c_atoa_protocol.json > /dev/null
+          python -m pip install requests==2.32.3
+      - name: Query documented ATNF ATOA VO TAP original Parkes metadata by fixed coordinates
+        run: |
+          python research/seti/osiris_spear_r2c_atoa.py
+          test -s runtime/osiris_spear_r2c/atoa_schema.json
+          test -s runtime/osiris_spear_r2c/atoa_candidates.json
+          test -s runtime/osiris_spear_r2c/r2c_gate_report.json
+      - name: Preserve complete read-only source receipts including connection errors
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-osiris-spear-r2c-ATNF-ATOA-TAP-receipts
+          path: runtime/osiris_spear_r2c/
+          if-no-files-found: warn
+          retention-days: 90
