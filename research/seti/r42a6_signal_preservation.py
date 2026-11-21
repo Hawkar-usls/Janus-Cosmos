@@ -50,7 +50,7 @@ def lost_diagnostic(d,result,lock):
     audit=d["group"]>=7
     reference_hits=d["reference"]&d["y"]&d["loc"]
     reference_nulls=d["reference"]&~d["y"]
-    diagnosis={"status":"PAIRED_ROW_DIAGNOSIS_ONLY","source_rows":len(d),
+    diagnosis={"status":"PAIRED_ROW_DIAGNOSIS_ONLY","source_rows":len(d["m"]),
                "audit_reference_hits":int((reference_hits&audit).sum()),
                "audit_reference_weak":int((reference_hits&d["weak"]&audit).sum()),
                "audit_reference_false":int((reference_nulls&audit).sum()),"arms":{}}
@@ -143,8 +143,8 @@ def make_shape_features(d):
             assert np.array_equal(q["y"],d["y"][start:stop])
             assert np.array_equal(q["weak"],d["weak"][start:stop])
             assert np.array_equal(m["parent_route"],d["route"][start:stop])
-            assert np.array_equal(d["group"][start:stop],g)
-            assert np.array_equal(d["shared"][start:stop],kind=="shared")
+            assert np.all(d["group"][start:stop]==g)
+            assert np.all(d["shared"][start:stop]==(kind=="shared"))
             assert np.array_equal(d["row"][start:stop],np.arange(n))
             shape=shape_rows(q["V"],m["path"])
             all_shape.append(shape)
