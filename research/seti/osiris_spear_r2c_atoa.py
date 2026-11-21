@@ -19,7 +19,7 @@ def angle(ra1,de1,ra2,de2):
     q=math.sin((b-d)/2)**2+math.cos(b)*math.cos(d)*math.sin((a-c)/2)**2
     return 2*math.degrees(math.asin(min(1.,math.sqrt(max(0,q)))))
 def parse_rows(raw):
-    txt=raw.decode("utf8-sig","replace").strip()
+    txt=raw.decode("utf-8-sig","replace").strip()
     if txt.startswith("<"):
         root=ET.fromstring(raw)
         for info in root.iter():
