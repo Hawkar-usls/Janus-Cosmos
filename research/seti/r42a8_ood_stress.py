@@ -108,7 +108,7 @@ def blind_line_candidate(V):
     for slope in (-1.5,-1.,-.5,0.,.5,1.,1.5):
         pp=np.rint(starts[:,None]+slope*(TIX[None,:]-7.5)).astype(int)
         assert pp.min()>=0 and pp.max()<128
-        scores=norm[:,np.arange(T)[None,None,:],pp[None,:,:]].mean(axis=2)
+        scores=norm[np.arange(n)[:,None,None],np.arange(T)[None,None,:],pp[None,:,:]].mean(axis=2)
         idx=np.argmax(scores,axis=1)
         val=scores[nidx,idx]
         ok=val>best
