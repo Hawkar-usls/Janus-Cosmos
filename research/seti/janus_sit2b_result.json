@@ -1,0 +1,164 @@
+{
+  "schema": "janus.cosmos.sit2b.strong_controls_sideband_reverse_temporal_result.v1",
+  "artifact_id": "JANUS-SIT2B-GBT-WEAK-SIGNAL-POSITIVE-CONTROL-2026-11-22",
+  "date": "2026-11-22",
+  "status": "REAL_GBT_SYNTHETIC_INJECTION_ENGINEERING_CI_PASS__STRONG_CONTROL_CAVEATS__NO_DETECTION_SENSITIVITY_GAIN__SCIENCE_HOLD",
+  "dedication": "JANUS SIT program research tribute to Stephen Hawking; no physical reverse causality claimed",
+  "source_repository": "Hawkar-usls/Janus-Cosmos",
+  "research_branch": "research/janus-sit2b-positive-control-matched-filter-20261122",
+  "pull_request": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/69",
+  "first_successful_action": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45052126023",
+  "artifact": {
+    "id": 14766395876,
+    "name": "janus-sit2b-real-gbt-strong-weak-matched-filter",
+    "sha256": "a2cde1cb4b1e45c428ab275bdd332d4a4272d38f53bc6bdec4330823e1ab51a9"
+  },
+  "protocol": "research/seti/janus_sit2b_protocol.json",
+  "implementation": "research/seti/janus_sit2b_temporal_recovery.py",
+  "unit_tests": "research/seti/test_janus_sit2b_temporal_recovery.py",
+  "unit_tests_pass": 18,
+  "input_sources": {
+    "real_radio": "Six SHA-verified 2025-12-18 GBT 3I/ATLAS blc20 X band HDF5 time frequency spectrograms (SIT1 source hashes frozen)",
+    "source_cadence": "One dependent ABACAD sequence 3 nominal ON / 3 OFF; not independently qualified antenna tracking",
+    "real_radio_panels": 24,
+    "real_injected_sky_truth": false,
+    "synthetic_line_and_RFI_overlays": true,
+    "native_frequency_resolution_hz": 2861.02294921875,
+    "source_file_sha256_against_SIT1_lock": "REVERIFIED_IN_CI__SHA_VALUES_IN_ORIGINAL_SIT1_JSON_AND_FULL_ACTION_ARTIFACT"
+  },
+  "benchmark_design": {
+    "development_scans": [
+      "0061",
+      "0062"
+    ],
+    "evaluation_scans": [
+      "0063",
+      "0064",
+      "0065",
+      "0066"
+    ],
+    "total_cases": 384,
+    "development_cases": 128,
+    "heldout_cases": 256,
+    "heldout_synthetic_weak": 64,
+    "heldout_synthetic_strong": 64,
+    "heldout_no_injection_or_artificial_RFI_controls": 128,
+    "sample_dependency": "Multiple seeded artificial perturbations of the same 24 original real panels; one observational cadence",
+    "synthetic_injection_amplitudes_row_MAD": {
+      "weak": [
+        1.2,
+        2
+      ],
+      "strong": [
+        8,
+        11
+      ]
+    },
+    "scoring_threshold": "Fixed per arm p95 of 64 developer-only negative controls; heldout not used to tune",
+    "path_localization": "At least 12 of 16 original frequency bins within ±2 of artificial truth after inference; never available to inference",
+    "detector_arms": [
+      "A_NATIVE_COSMOS_RIDGE",
+      "B_FROZEN_COSMOS_SHADOW",
+      "C_STRONG_DIRECT_MATCHED_FILTER",
+      "D_STRONG_DIRECT_SIDEBAND",
+      "E_TACHYON_REVERSE_SIDEBAND"
+    ],
+    "same_budget": "Matched 672 hypotheses ×16 real time frames for direct and reverse path search; identical sideband ±3 for D/E, R5F replay extra verification overhead",
+    "positive_guard": "At least 56/64 strong positives both localized and thresholded, and at most 8/128 controls above threshold",
+    "no_training_or_production_updates": true
+  },
+  "measured_outcomes": {
+    "A_NATIVE_COSMOS_RIDGE": {
+      "frozen_development_negative_p95_threshold": 4.5018978483242735,
+      "heldout_controls_count": 128,
+      "heldout_strong_count": 64,
+      "heldout_strong_path_localized": 64,
+      "heldout_strong_recovered": 64,
+      "heldout_synthetic_controls_above_threshold": 19,
+      "heldout_weak_count": 64,
+      "heldout_weak_path_localized": 44,
+      "heldout_weak_recovered": 0,
+      "positive_guard_qualified": false,
+      "weak_positive_id_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "B_FROZEN_COSMOS_SHADOW": {
+      "frozen_development_negative_p95_threshold": -0.6925411798712673,
+      "heldout_controls_count": 128,
+      "heldout_strong_count": 64,
+      "heldout_strong_path_localized": 64,
+      "heldout_strong_recovered": 0,
+      "heldout_synthetic_controls_above_threshold": 0,
+      "heldout_weak_count": 64,
+      "heldout_weak_path_localized": 44,
+      "heldout_weak_recovered": 0,
+      "positive_guard_qualified": false,
+      "weak_positive_id_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "C_STRONG_DIRECT_MATCHED_FILTER": {
+      "frozen_development_negative_p95_threshold": 4.5018978483242735,
+      "heldout_controls_count": 128,
+      "heldout_strong_count": 64,
+      "heldout_strong_path_localized": 64,
+      "heldout_strong_recovered": 64,
+      "heldout_synthetic_controls_above_threshold": 19,
+      "heldout_weak_count": 64,
+      "heldout_weak_path_localized": 44,
+      "heldout_weak_recovered": 0,
+      "positive_guard_qualified": false,
+      "weak_positive_id_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "D_STRONG_DIRECT_SIDEBAND": {
+      "frozen_development_negative_p95_threshold": 4.433870152767726,
+      "heldout_controls_count": 128,
+      "heldout_strong_count": 64,
+      "heldout_strong_path_localized": 64,
+      "heldout_strong_recovered": 64,
+      "heldout_synthetic_controls_above_threshold": 20,
+      "heldout_weak_count": 64,
+      "heldout_weak_path_localized": 48,
+      "heldout_weak_recovered": 0,
+      "positive_guard_qualified": false,
+      "weak_positive_id_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "E_TACHYON_REVERSE_SIDEBAND": {
+      "frozen_development_negative_p95_threshold": 4.433870152767726,
+      "heldout_controls_count": 128,
+      "heldout_strong_count": 64,
+      "heldout_strong_path_localized": 64,
+      "heldout_strong_recovered": 64,
+      "heldout_synthetic_controls_above_threshold": 20,
+      "heldout_weak_count": 64,
+      "heldout_weak_path_localized": 48,
+      "heldout_weak_recovered": 0,
+      "positive_guard_qualified": false,
+      "weak_positive_id_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "paired_gains": {
+    "all_arms_positive_guards_pass": false,
+    "reverse_extra_weak_vs_exact_matched_filter": 0,
+    "reverse_extra_weak_vs_frozen_shadow": 0,
+    "reverse_extra_weak_vs_native_ridge": 0,
+    "reverse_extra_weak_vs_same_objective_strong_direct_sideband": 0,
+    "reverse_missing_weak_vs_strong_direct_sideband": 0,
+    "reverse_scientific_claim_allowed": false,
+    "reverse_vs_strong_direct_same_objective_identical_weak_ids": true,
+    "tachyon_specific_benchmark_gain_gate": false
+  },
+  "scientific_interpretation_ru": "SIT2B на шести достоверных архивных HDF5 радионаблюдений GBT и известной искусственной инъекции выявил 64/64 сильных сигналов в native ridge и в новом временном накоплении, но замороженный R42A7A shadow дал 0/64 даже на сильном контроле. На 64 слабых экзаменационных инъекциях sideband-TACHYON локализовал 48 против 44 у native, однако 0/64 пересекли замороженный порог. Условие по ложным поднятиям на 128 синтетических контролях не прошло: 20 у sideband и 19 у native против допустимых 8. Точный сильный прямой sideband matched filter в точности повторил TACHYON, поэтому TACHYON-specific gain = 0. Квалификационный научный status HOLD.",
+  "scientific_limits": {
+    "strong_positive_guard_all_arms_passed": false,
+    "original_native_strong_guard_recovered_64_of_64": true,
+    "shadow_strong_guard_recovered_0_of_64": true,
+    "real_ETI_detection": false,
+    "genuine_astro_sensitivity_improvement_proved": false,
+    "genuine_RFI_false_alarms_reduced": null,
+    "independent_external_blind_data": false,
+    "independent_antenna_pointing": false,
+    "high_frequency_resolution": false,
+    "physical_time_reversal": false,
+    "production_weights_changed": false,
+    "science_gate": "HOLD_POSITIVE_CONTROLS_AND_REAL_OBSERVATIONAL_GENERALIZATION"
+  },
+  "next_scientific_step": "New independent radio observing sessions and/or different telescope; calibrate RFI-aware thresholds on separate DEVELOPMENT sessions only, require all strong positive controls and controlled FPR before weak exams; run external blackbox holdout using the same-information exact sideband matched filter. No retrospective threshold changes to SIT2B."
+}
