@@ -19,7 +19,14 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "research/seti"))
 import janus_sit2eb_full_integrity as integrity
 import janus_sit2e_parkes_range_headers as headers
-import janus_sit2b_temporal_recovery as sit2b
+import r42a8_ood_stress as cosmos
+
+TIME = np.arange(16, dtype=np.int32)
+STARTS = np.arange(16,112,dtype=np.int32)
+SLOPES = (-1.5,-1.,-.5,0.,.5,1.,1.5)
+PATHS = np.stack([np.rint(st+s*(TIME-7.5)).astype(np.int32) for s in SLOPES for st in STARTS])
+assert PATHS.shape == (672,16)
+TIX = TIME[None,:]
 
 OUT = ROOT / "runtime/sit2eb_power"
 DATES = ("2025-07-31", "2025-09-12")
@@ -96,22 +103,62 @@ def read_panels(path, date, spec):
         foff=float(attrs.get("foff",attrs.get("FOFF")))
         return reduce(lambda a,b:d[:,0,a:b],300,64000,f0,foff)
 
-def score(panel, model):
-    native_path, shadow, ridge = sit2b.SIT1.score_one(panel,model)
-    norm, _ = sit2b.robust_normalize(panel)
-    full_path, full_score, _ = sit2b.direct_matched(panel,sideband=False)
-    side_path, side_score, _ = sit2b.direct_matched(panel,sideband=True)
-    if not np.array_equal(native_path,full_path) or not np.isclose(ridge,full_score,atol=1e-9,rtol=0):
+def robust_normalize(panel):
+    a=np.asarray(panel,dtype=np.float64)
+    if a.shape!=(16,128) or not np.isfinite(a).all():
+        raise ValueError("BAD_PANEL")
+    med=np.median(a,axis=1)
+    mad=np.maximum(1.4826*np.median(abs(a-med[:,None]),axis=1),.02)
+    return (a-med[:,None])/mad[:,None],mad
+
+def direct_matched(panel,sideband=False):
+    z,_=robust_normalize(panel)
+    center=z[TIX,PATHS]
+    if sideband:
+        center=center-.5*(z[TIX,PATHS-3]+z[TIX,PATHS+3])
+    bank=center.mean(axis=1)
+    idx=int(np.argmax(np.round(bank,10)))
+    return PATHS[idx].copy(),float(bank[idx])
+
+def score(panel, model=None):
+    native_path,native_ridge=cosmos.blind_line_candidate(panel[None,:,:])
+    full_path,full_score=direct_matched(panel,sideband=False)
+    side_path,side_score=direct_matched(panel,sideband=True)
+    if not np.array_equal(native_path[0],full_path) or not np.isclose(native_ridge[0],full_score,atol=1e-9,rtol=0):
         raise AssertionError("NATIVE_AND_MATCHED_SAME_OBJECTIVE_DIVERGE")
     return {
-        METHODS[0]: (native_path,ridge),
-        METHODS[1]: (full_path,full_score),
-        METHODS[2]: (side_path,side_score)
+        METHODS[0]:(native_path[0],float(native_ridge[0])),
+        METHODS[1]:(full_path,full_score),
+        METHODS[2]:(side_path,side_score)
     }
 
-def create_overlay(panel, category, rng):
-    # Existing SIT2B generator; no ground truth sent into score().
-    return sit2b.generate_overlay(panel, sit2b.CATEGORIES[ALL_CLASSES.index(category)], rng)
+def create_overlay(panel,category,rng):
+    out=np.array(panel,dtype=np.float32,copy=True)
+    _,mad=robust_normalize(out)
+    if category=="NO_INJECTION":return out,None
+    if category=="SYNTHETIC_RFI":
+        gap=int(rng.integers(6,13))
+        offset=int(rng.integers(2,gap+1))
+        strength=float(rng.uniform(1,2.5))
+        out[:,offset::gap]+=np.asarray(strength*mad[:,None],dtype=np.float32)
+        for ti in rng.choice(16,3,replace=False):
+            out[ti,:]+=float(rng.uniform(1,2))*mad[ti]
+        return out,None
+    if category not in POS_CLASSES:
+        raise ValueError("UNREGISTERED_INJECTION_CLASS")
+    first=int(rng.integers(34,97))
+    slope=float((-1,-.5,0,.5,1)[int(rng.integers(5))])
+    truth=np.rint(first+slope*(TIME-7.5)).astype(np.int32)
+    bounds=(1.2,2.0) if category=="WEAK_LINE" else (3.0,5.0)
+    amp=rng.uniform(*bounds,size=16)*mad
+    for t,k in enumerate(truth):
+        out[t,k]+=amp[t]
+        out[t,k-1]+=.2*amp[t]
+        out[t,k+1]+=.2*amp[t]
+    return out,truth
+
+def localizes(path,truth):
+    return bool(truth is not None and (np.abs(path-truth)<=2).sum()>=12)
 
 def run():
     manifest_bytes=integrity.MANIFEST.read_bytes()
@@ -162,7 +209,7 @@ def run():
                 finally:
                     response.close()
                     (source_dir/spec["filename"]).unlink(missing_ok=True)
-        model=sit2b.SIT1.cosmos.frozen_model()
+        model=None  # Native ridge and matched comparators do not need the unrelated shadow weights.
         rng=np.random.default_rng(SEED)
         records=[]
         # July is development. September controls calibrate; no October path exists.
@@ -180,7 +227,7 @@ def run():
                             records.append({"date":date,"role":role,"band":idx,
                                             "rep":rep,"kind":category,
                                             "scores":{k:float(v[1]) for k,v in scored.items()},
-                                            "located":{k:sit2b.localizes(v[0],truth)
+                                            "located":{k:localizes(v[0],truth)
                                                        for k,v in scored.items()}})
         july=[r for r in records if r["date"]==DATES[0]]
         september=[r for r in records if r["date"]==DATES[1]]
