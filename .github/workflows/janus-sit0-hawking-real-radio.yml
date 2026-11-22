@@ -1,0 +1,105 @@
+name: JANUS SIT0 — Hawking | Real Archived Spectral Replay
+on:
+  push:
+    branches:
+      - research/janus-sit0-hawking-real-spectral-replay-20261122
+    paths:
+      - '.github/workflows/janus-sit0-hawking-real-radio.yml'
+      - 'research/seti/janus_sit0_hawking.py'
+      - 'research/seti/janus_sit0_hawking_protocol.json'
+      - 'research/seti/test_janus_sit0_hawking.py'
+      - 'research/seti/janus_sit0_hawking_result.json'
+  pull_request:
+    paths:
+      - '.github/workflows/janus-sit0-hawking-real-radio.yml'
+      - 'research/seti/janus_sit0_hawking.py'
+      - 'research/seti/janus_sit0_hawking_protocol.json'
+      - 'research/seti/test_janus_sit0_hawking.py'
+      - 'research/seti/janus_sit0_hawking_result.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  sit0-archived-real-spectra:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - name: Checkout COSMOS R37F3A real archival adapter
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout pinned DemiHead TACHYON R5F mirror (research only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - name: Install strict minimal runtime
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check numpy==2.2.6 requests==2.32.3
+      - name: Verify pinned real-derived loader, native rebinner and TACHYON source
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r37f3a_natural_preservation.py)" = "81981449689832df674a6e09721be71d7eac904a"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m json.tool research/seti/janus_sit0_hawking_protocol.json > /dev/null
+          python -m py_compile research/seti/janus_sit0_hawking.py
+          python - <<'PY'
+          import json
+          q=json.load(open('research/seti/janus_sit0_hawking_protocol.json'))
+          src=json.load(open('research/seti/r37f3a_natural_preservation_protocol.json'))
+          assert src['parent']['artifact']==q['source']['parent_artifact_id']
+          assert src['parent']['sha256']==q['source']['parent_artifact_archive_sha256']
+          assert len(src['controls'])==2 and len(src['transforms'])==8
+          assert q['observational_sample']['n_real_source_derived_rebin_chains']==16
+          assert not q['observational_sample']['time_frequency_original_input_available_here']
+          PY
+      - name: Unit controls for SIT0 provenance and mirror
+        run: python -m unittest discover -s research/seti -p 'test_janus_sit0_hawking.py' -v
+      - name: Replay TWO actual historical spectral profiles from authenticated archive and compare strong baselines
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit0_hawking.py --audit
+          test -s runtime/janus_sit0/result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/janus_sit0/result.json').read_text())
+          assert r['physical_sources_count']==2
+          assert r['real_native_spectral_rebin_chains']==16
+          assert r['metadata_overlay_trials']==128
+          assert len(r['real_spectrum_profiles'])==2
+          assert set(r['overlay_counts'].values())=={16}
+          assert r['C_mirror_plus_replay_passed_all_16_intact']
+          assert r['C_mirror_plus_replay_rejected_all_112_metadata_mutations']
+          assert r['equal_to_strong_direct_exact_check']
+          assert r['original_native_spectral_decisions_modified'] is False
+          assert r['full_COSMOS_R28_or_R42_detector_executed'] is False
+          assert r['spatial_OFF_measured'] is False
+          assert r['real_technosignature_detected'] is False
+          assert r['production_model_weights_changed'] is False
+          print('JANUS_SIT0_REAL_SOURCES=2')
+          print('JANUS_SIT0_REAL_DERIVED_PROFILE_CHAINS=16')
+          print('JANUS_SIT0_SIMULATED_METADATA_MUTATIONS_REJECTED=112')
+          print('JANUS_SIT0_STRONG_BASELINE_EQUAL='+str(r['equal_to_strong_direct_exact_check']))
+          print('JANUS_SIT0_REAL_OBSERVATION_DERIVED_AUDIT_PASS__FULL_SETI_SCIENCE_HOLD')
+          PY
+      - name: Upload source-verified real spectrum audit receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit0-hawking-real-spectra-audit
+          path: runtime/janus_sit0/result.json
+          retention-days: 90
+          if-no-files-found: warn
