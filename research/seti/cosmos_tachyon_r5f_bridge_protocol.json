@@ -1,0 +1,89 @@
+{
+  "schema": "janus.cosmos.tachyon_r5f_mirror_provenance_integration_protocol.v1",
+  "stage": "COSMOS_X_TACHYON_R5F_R1",
+  "date": "2026-11-22",
+  "status": "PREREGISTERED_BEFORE_FIRST_CI_RUN",
+  "purpose": "Evaluate whether frozen TACHYON R5F mirror (C->B->A) adds safe provenance/forward replay checking of JANUS COSMOS R42A8A synthetic radio candidates, without changing detector decisions.",
+  "source_pins": {
+    "cosmos_repository": "Hawkar-usls/Janus-Cosmos",
+    "research_base_ref": "research/seti-r42a8-frozen-ood-stress-20261121",
+    "cosmos_r42a8_script": "research/seti/r42a8_ood_stress.py",
+    "cosmos_r42a8_git_blob": "4f11b407e5271a058c38b3186c9f5c8192130655",
+    "frozen_model_source": "R42A7A shadow score from R42A8A protocol, original authentic GitHub Actions model artifact SHA checked before use",
+    "tachyon_repository": "Hawkar-usls/Demi_Head",
+    "tachyon_pin": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+    "tachyon_module": "tools/tachyon_r5f_stock_mirror_audit.py",
+    "tachyon_module_git_blob": "819936767bdf637adc2d9e24cc26176e060e8bfd",
+    "tachyon_operation_budget_per_case": 500,
+    "source_label": "Frozen research model, not production JANUS SETI detector"
+  },
+  "dataset": {
+    "rows": 1024,
+    "simulated_positives": 512,
+    "simulated_controls": 512,
+    "from_original_r42a8_seed": 420826,
+    "two_original_synthetic_regimes": [
+      "new_colored_noise_01",
+      "new_impulse_and_comb_02"
+    ],
+    "input_shape_time_frequency": [
+      16,
+      128
+    ],
+    "candidate_path": "Actual R42A8A blind_line_candidate applied to identical simulated spectra before any labels, no ground-truth trajectory as feature",
+    "frozen_score": "Actual R42A7A signed shadow score computed from R42A7A features, no training or thresholds",
+    "quality_labels": "Original generator labels used only after decisions for descriptive AUC; not a physical telescope source origin or real RFI truth.",
+    "not_externally_blind": true
+  },
+  "graph_bridge": {
+    "A": "Synthetic time-frequency spectrum row, byte-level sha256 evidence handle",
+    "B": "COSMOS blind 16-sample candidate frequency path, hash and original array index",
+    "C": "Frozen R42A7A shadow score, hash and candidate reference",
+    "physical_event_time": "No real observation timestamps exist; no fictitious clocks or independent physical witnesses will be introduced",
+    "mirror": "Build synthetic R5F-compatible graph A->B->C, then call pinned TACHYON mirror_case to transpose C->B->A; verify mirror path returns source identity and evidence handles; validate all metadata by forward replay",
+    "provenance_mode": "Simulation source and computation provenance only, no independent physical sensor provenance"
+  },
+  "adversarial_overlay": {
+    "seed": 514207,
+    "cases_per_type": 128,
+    "types": [
+      "INTACT",
+      "BAD_RAW_DIGEST",
+      "BAD_PATH_DIGEST",
+      "BAD_SCORE_DIGEST",
+      "BAD_MODEL_LOCK",
+      "MISSING_RAW_DIGEST",
+      "INCOMPLETE_PREDECESSOR_INDEX",
+      "GHOST_REVERSE_PREDECESSOR"
+    ],
+    "definition": "Perturb metadata claims only. Original spectrograms, native COSMOS model scores, detector candidate paths, outcome labels and frozen weights remain unchanged.",
+    "no_label_dependency": "Assign overlay permutation using an independent fixed RNG without reference to simulated positive/null labels.",
+    "objective": "All 128 intact accepted; all 896 damaged/incomplete metadata rejected by complete forward/reverse audit, with zero incorrect confident provenance acceptances.",
+    "limitation": "Toy corruption categories chosen by our own development suite, not externally authored adversarial corruptions"
+  },
+  "paired_arms": {
+    "A_COSMOS_ONLY": "Existing native COSMOS synthetic candidate and frozen shadow score accepted without provenance audit; no modification to scores or decisions",
+    "B_TACHYON_MIRROR_GRAPH_ONLY": "Pinned mirror_case+mirrored_exact, no full digest/model/source proof, weak ablation",
+    "C_TACHYON_MIRROR_FORWARD_REPLAY": "Pinned mirror_case+mirrored_replay, plus source/raw-path-score/model SHA comparison and reverse proposals to frozen authoritative DAG",
+    "D_STRONG_DIRECT_PROVENANCE": "Strong transparent exact direct graph/digest check on same data, no TACHYON mirror",
+    "E_ALWAYS_ABSTAIN": "Null control"
+  },
+  "metrics": [
+    "All native R42A8A 1024 spectrogram score/candidate path parity, two baseline AUCs descriptive",
+    "Per-arm accepted candidate metadata, rejection count and unsupported accepts of corrupted records",
+    "Preservation of original 1024 frozen model scores and candidate paths exactly, 0 automatic vetoes",
+    "Paired coverage and unsupported metadata acceptance vs strong direct baseline, correctness of 128 intact",
+    "Postprocessing time and counted graph operations; full detector feature extraction costs separately stated, no unsupported speedup claim"
+  ],
+  "safety": {
+    "production_detector_modified": false,
+    "automatic_RFI_veto": false,
+    "retina_noise_weights_modified": false,
+    "real_telescope_ONOFF_used": false,
+    "real_318_detection_or_69_weak_replayed": false,
+    "external_physical_causality_or_retrocausality_proved": false,
+    "model_training": false,
+    "scientific_gate": "ENGINEERING_SYNTHETIC_PROVENANCE_ONLY__PRODUCTION_AND_EXTERNAL_SCIENCE_HOLD"
+  },
+  "expected_interpretation": "Mirrored audit may catch corrupted metadata vs unverified COSMOS-only, but cannot be called an increase in astronomical sensitivity or superiority to strong exact provenance checking. Strong direct replay is mandatory comparator."
+}
