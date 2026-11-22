@@ -1,0 +1,110 @@
+{
+  "schema": "janus.cosmos.sit2b.positive_guard_reverse_temporal_stack_vs_strong_matched_filter.v1",
+  "name": "JANUS SIT2B — Temporal Recovery Qualification",
+  "date": "2026-11-22",
+  "status": "FROZEN_BEFORE_FIRST_CI_EXECUTION",
+  "dedication": "Continuing JANUS SIT program in tribute to Stephen Hawking. Graph and time-index reversal are computation, not physical retrocausality.",
+  "research_question": "Can a newly specified backward temporal coherent-integrator selector increase known injected weak-line recovery on authentic GBT radio backgrounds at frozen false-positive budget, beyond original COSMOS, a full same-information matched-filter, and an independent direct sideband-matched control?",
+  "immutable_inputs": {
+    "repository": "Hawkar-usls/Janus-Cosmos",
+    "base_branch": "research/cosmos-tachyon-r5f-mirror-provenance-20261122",
+    "SIT1_source": "research/seti/janus_sit1_open_3iatlas.py",
+    "SIT1_git_blob_sha1": "0c03eef6ff489a517308f9f1e16de801ea84dfcb",
+    "SIT2_source": "research/seti/janus_sit2_weak_rfi.py",
+    "SIT2_git_blob_sha1": "44f76e30b20a0bcda613a079eac3cc1cb70204c4",
+    "native_R42A8A": "research/seti/r42a8_ood_stress.py::blind_line_candidate",
+    "native_R42A8A_git_blob_sha1": "4f11b407e5271a058c38b3186c9f5c8192130655",
+    "frozen_R42A7A_model": "COSMOS R42A8A frozen_model(), artifact zip SHA + fit lock checked by native code",
+    "TACHYON_repo": "Hawkar-usls/Demi_Head",
+    "TACHYON_commit": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+    "TACHYON_original_r5f_mirror_git_blob_sha1": "819936767bdf637adc2d9e24cc26176e060e8bfd",
+    "real_radio_source": "Six actual 2025-12-18 GBT 3I/ATLAS X-band blc20 .rawspec.0002 HDF5 scans, 3 nominal ON and 3 OFF; exactly one dependent ABACAD cadence, previously SHA256-locked in SIT1",
+    "real_frequency_resolution_hz": 2861.02294921875,
+    "backgrounds": 24,
+    "source_hash_policy": "Re-download all six original HDF5 files, SHA256 must exactly match original SIT1 archived values for any score to be issued.",
+    "sensitivity_limit": "Low-res selected windows, no independently authenticated antenna pointing or true sky-signal labels; injection-recovery metrics only"
+  },
+  "preregistered_dataset": {
+    "seed": 2026112203,
+    "panels": 24,
+    "repetitions_per_panel": 4,
+    "conditions": [
+      "ORIGINAL_REAL_BACKGROUND_NO_ADDED_SIGNAL",
+      "ENGINEERED_BROAD_AND_COMB_RFI",
+      "WEAK_INJECTED_LINEAR_DRIFT",
+      "STRONG_POSITIVE_INJECTED_LINEAR_DRIFT"
+    ],
+    "rows_total": 384,
+    "development_scans": [
+      "0061",
+      "0062"
+    ],
+    "evaluation_scans": [
+      "0063",
+      "0064",
+      "0065",
+      "0066"
+    ],
+    "development_rows": 128,
+    "evaluation_rows": 256,
+    "evaluation_weak_injections": 64,
+    "evaluation_strong_injections": 64,
+    "evaluation_controls": 128,
+    "weak_amplitude_range_robust_row_mad": [
+      1.2,
+      2
+    ],
+    "strong_amplitude_range_robust_row_mad": [
+      8,
+      11
+    ],
+    "injected_center_start_range_inclusive": [
+      34,
+      96
+    ],
+    "injected_slope_grid_bins_per_16time_frame": [
+      -1,
+      -0.5,
+      0,
+      0.5,
+      1
+    ],
+    "injected_local_shoulder_fraction": 0.2,
+    "engineered_RFI_is_not_real_instrument_labeled_RFI": true,
+    "labels_visible_to_algorithms": false,
+    "history_replay_source": "No hidden target path or injected kind travels into source graph, path search, scoring or threshold fitting. Truth evaluated after predictions only."
+  },
+  "same_input_baselines": {
+    "A_NATIVE_COSMOS_RIDGE": "Original R42A8A candidate path + robust ridge statistic, no retuning",
+    "B_FROZEN_COSMOS_SHADOW": "Original native path + pre-existing SHA-locked R42A7A shadow score, no retraining",
+    "C_STRONG_EXACT_MATCHED_FILTER": "Forward exhaustive 672 linear path hypotheses, same grid as native (starts 16..111, slopes -1.5,-1,-.5,0,.5,1,1.5), robust row-median/MAD normalization, sum over all 16 time bins; no label path.",
+    "D_STRONG_DIRECT_SIDEBAND_MATCHED_FILTER": "Same 672 hypotheses, per-row MAD normalization and median subtraction of symmetric off-track channels p±3, exact forward-time scoring.",
+    "E_TACHYON_BACKWARD_COHERENT_SIDEBAND": "Exactly the SAME 672 paths and SAME off-track objective as D, traverse reverse from each endpoint through 16 time samples, then direct forward score replay and pinned TACHYON R5F causal graph mirror and provenance verify. No additional observations or truth labels.",
+    "F_ALWAYS_ABSTAIN": "Null control"
+  },
+  "threshold_and_recovery": {
+    "dev_negative_only": "For each of the five scoring arms choose conservative 95th percentile (method=higher) threshold based only on dev scans 0061/0062 with no injection or engineered RFI. Strong-positive dev cases never used to tune score threshold.",
+    "primary_eval": "Recall on evaluation weak injected signals at threshold AND 12/16 path samples within ±2 bins of injected path. Count all eval no-signal and synthetic-RFI controls above threshold even when no known true sky class.",
+    "strong_positive_gate": "For a scorer to be qualified for weak-positives claims: at least 56 of 64 STRONG injected controls correctly localized and exceeding dev-only confidence threshold, with at most 8 of 128 eval negative/RFI controls above threshold. Otherwise weak outcome diagnostic only, not qualified sensitivity.",
+    "minimum_incremental_gain_claim": "E must recover >=5 of 64 EXTRA heldout WEAK injections that strong direct sideband D misses, with no increase in heldout control exceedances, and same information/cost; if identical, explicitly report NO TACHYON-SPECIFIC GAIN.",
+    "additional_report": "Compare E vs A/B/C; any improvement relative native that D also achieves must be described as general sideband matched-filter gain, NOT TACHYON-specific.",
+    "same_budget": "C/D/E evaluate 672 predeclared path candidates per panel with 16 temporal samples; D/E both evaluate symmetric p±3 sidebands. E additionally executes 500-operation-budget R5F mirrored graph provenance and forward replay. Account for extra inference and verification wall time.",
+    "uncertainty": "All repeats in one six-scan cadence are correlated; do not calculate statistical significance treating 256 eval cases as independent observations.",
+    "positive_control_fails": "Return POSITIVE_GUARD_HOLD and do not claim scientific sensitivity gain."
+  },
+  "physical_science_gate": {
+    "independent_control_sources": 0,
+    "original_real_emission_ground_truth": false,
+    "high_resolution_native_RFI_analysis": false,
+    "independently_verified_telescope_antenna_pointing": false,
+    "external_custodian": false,
+    "production_updates": false,
+    "possible_techno_signal_claim": false,
+    "physical_retrocausality_claim": false,
+    "scientific_status": "HOLD_EXTERNAL_NEW_BAND_HIGH_RESOLUTION_AND_INDEPENDENT_SOURCE_TRUTH"
+  },
+  "background_reference": [
+    "https://turbo-seti.readthedocs.io/en/stable/find_doppler.html",
+    "https://doi.org/10.3847/1538-3881/acf576"
+  ]
+}
