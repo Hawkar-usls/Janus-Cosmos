@@ -1,7 +1,7 @@
 {
   "schema": "janus.cosmos.sit2e.parkes_three_dates_source_qualification.v1",
   "id": "JANUS-SIT2E-PARKES-THREE-DATE-PREFLIGHT-2026-11-22",
-  "status": "SOURCE_QUALIFICATION_PROTOCOL_LOCKED_BEFORE_FIRST_ACTION",
+  "status": "SOURCE_QUALIFICATION_PROTOCOL_LOCKED_PRE_SCIENCE__METADATA_DISCOVERY_DEPTH_INCREASED_AFTER_FIRST_INCOMPLETE_INDEX_NO_POWER_READ",
   "date": "2026-11-22",
   "objective": "Qualify original open Parkes/Murriyang 3I/ATLAS radio HDF5 source/reference samples on July 31, September 12, October 5 2025 before any weak-signal experiment.",
   "source": "https://bldata.berkeley.edu/ATLAS/",
@@ -37,11 +37,12 @@
   ],
   "resources": {
     "index_max_bytes": 7000000,
-    "recursive_depth": 2,
-    "directory_max": 8,
+    "recursive_depth": 4,
+    "directory_max": 65,
     "maximum_file_bytes": 90000000,
     "selected_files_per_date_max": 2,
-    "timeout_seconds": 35
+    "timeout_seconds": 35,
+    "expected_note": "May expose many deep branches; exact href host/root audit and bounded length. No radio power read."
   },
   "scientific_gate": {
     "source_ready": "Each date has at least one genuine on-target and one genuine reference HDF5, verified SHA256 and readable physical time/frequency metadata; usable common spectral coverage to be established",
