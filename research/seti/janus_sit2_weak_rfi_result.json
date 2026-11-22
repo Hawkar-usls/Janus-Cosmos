@@ -1,0 +1,123 @@
+{
+  "schema": "janus.cosmos.sit2.weak_injection_rfi_challenge_result.v1",
+  "artifact_id": "JANUS-SIT2-GBT-REAL-BACKGROUND-WEAK-RECOVERY-2026-11-22",
+  "as_of": "2026-11-22",
+  "status": "REAL_GBT_BACKGROUND_INJECTION_EVALUATION_ENGINEERING_PASS__NO_WEAK_RECOVERY_GAIN__SCIENCE_HOLD",
+  "pr": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/68",
+  "ci_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45051197408",
+  "ci_artifact_id": 14765606245,
+  "ci_artifact_name": "janus-sit2-real-gbt-weak-injection-receipt",
+  "ci_artifact_digest": "sha256:3554743bdc98eb9efe164ff71c78deec33c39d6e0c80f9c671d745ba69a68234",
+  "protocol": "research/seti/janus_sit2_weak_rfi_protocol.json",
+  "code": "research/seti/janus_sit2_weak_rfi.py",
+  "tests": "research/seti/test_janus_sit2_weak_rfi.py",
+  "unit_tests_pass": 13,
+  "source": {
+    "real_observatory": "Green Bank Telescope",
+    "observation_date": "2025-12-18",
+    "open_archive": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "real_source_scans": [
+      {
+        "scan": "0061",
+        "role": "ON",
+        "sha256_from_SIT1_parent": "689295b24b39c3902016d71e3665927251f847666d0e8b7c371f1b9fce534720"
+      },
+      {
+        "scan": "0062",
+        "role": "OFF",
+        "sha256_from_SIT1_parent": "492ee7ceae9f83482a83c2704a9cf9b86a7f0d243bed726d054143dcadef2d6b"
+      },
+      {
+        "scan": "0063",
+        "role": "ON",
+        "sha256_from_SIT1_parent": "c71a7ea8259b57c9886f094c1a0d18c37fb81dcc2d65808251501a9b92462588"
+      },
+      {
+        "scan": "0064",
+        "role": "OFF",
+        "sha256_from_SIT1_parent": "0f513447ba0031c510545a86617d93953bc9e98b84fbe0b20682a15863ea3026"
+      },
+      {
+        "scan": "0065",
+        "role": "ON",
+        "sha256_from_SIT1_parent": "9e674c2e28295bba9bdd43a613d48d6884e81b435e470a75488496838a7a6867"
+      },
+      {
+        "scan": "0066",
+        "role": "OFF",
+        "sha256_from_SIT1_parent": "1b8988be200242fb465ccc97dc0b6dc52d0403cb1af39777821c74a5a55d4c3b"
+      }
+    ],
+    "original_hdf5_6_6_revalidated_against_unchanged_parent_sha256": true,
+    "original_real_time_frequency_panels": 24,
+    "frequency_channel_width_hz": 2861.02294921875,
+    "source_scan_cadences": 1,
+    "independent_actual_antenna_pointing_confirmed": false
+  },
+  "experimental": {
+    "applied_to": "Authentic 16x128 measured radio backgrounds with transparent artificial post-extraction overlays, not original unaltered telescope emission",
+    "rows_total": 288,
+    "development_rows": 96,
+    "heldout_rows": 192,
+    "synthetic_positive_injections_total": 96,
+    "heldout_synthetic_weak_positives": 64,
+    "heldout_negative_controls": 128,
+    "negative_controls": "real backgrounds with no artificial injection AND artificial RFI comb/broad impulse fixtures; may contain unknown natural sky and RFI",
+    "independent_radio_observations": 1,
+    "original_antenna_pointing_certified": false,
+    "truth_source": "Our disclosed synthetic injection parameters, never inference inputs",
+    "frozen_threshold_selection": "Only 0061/0062 development scans, no adjustment on 0063–0066 heldout outputs",
+    "threshold_policy": "A single 95th percentile of developer negative score distribution for each of two preregistered scores; pass only if native score greater threshold and path localized within ±2 bins in ≥12 of 16 time rows."
+  },
+  "measurements": {
+    "blind_native_ridge": {
+      "dev_negative_count": 64,
+      "eval_injected_weak_found_with_localization": 0,
+      "eval_injected_weak_missed": 64,
+      "eval_synthetic_control_above_threshold": 20,
+      "eval_synthetic_control_below_or_equal_threshold": 108,
+      "evaluation_cases": 192,
+      "evaluation_no_injection_or_engineered_RFI_controls": 128,
+      "evaluation_path_localized_weak": 36,
+      "evaluation_score_AUC_descriptive": 0.468994140625,
+      "evaluation_weak_injections": 64,
+      "threshold_fixed_on_development": 4.5018978483242735
+    },
+    "frozen_R42A7A_shadow": {
+      "dev_negative_count": 64,
+      "eval_injected_weak_found_with_localization": 0,
+      "eval_injected_weak_missed": 64,
+      "eval_synthetic_control_above_threshold": 0,
+      "eval_synthetic_control_below_or_equal_threshold": 128,
+      "evaluation_cases": 192,
+      "evaluation_no_injection_or_engineered_RFI_controls": 128,
+      "evaluation_path_localized_weak": 36,
+      "evaluation_score_AUC_descriptive": 0.545654296875,
+      "evaluation_weak_injections": 64,
+      "threshold_fixed_on_development": -0.6925411798712673
+    },
+    "both_native_candidates_mirror_and_direct_verified": true,
+    "heldout_weak_path_localized_36_of_64": true,
+    "weak_injected_recovered_with_detection_threshold": 0,
+    "additional_missed_weak_recovered_by_tachyon": 0,
+    "additional_missed_weak_recovered_by_strong_direct": 0,
+    "incremental_gain_over_strong_baseline": false,
+    "real_radio_false_alarm_reduction": null,
+    "real_technosignature_detected": false
+  },
+  "scientific_limitations": {
+    "one_dependent_cadence": true,
+    "injected_synthetic_signal_ground_truth_not_real_sky": true,
+    "OOD_frozen_model_trained_on_synthetic_input": true,
+    "coarse_2861_Hz_resolution_limits_weak_narrowband_sensitivity": true,
+    "reference_detector_not_retrained": true,
+    "no_real_independently_labeled_interference": true,
+    "no_external_blind_custodian": true,
+    "no_physical_time_reversal_or_retrocausality": true,
+    "no_production_weight_or_threshold_changes": true,
+    "engineering_status": "PASS",
+    "astronomical_science_status": "HOLD"
+  },
+  "interpretation_ru": "На шести подлинных архивных HDF5 GBT, после извлечения 24 настоящих радио-фоновых панелей, построено 288 контролируемых случаев с искусственными слабыми линиями и помехами. У 64 положительных экзаменационных примеров стандартный поиск правильно локализовал 36 траекторий, но под заранее выбранным developer-only score threshold не выдал ни одного полного обнаружения (0/64). Замороженный shadow scorer выдал 0 ложных повышений на 128 синтетических контролях, но также 0/64 полных обнаружений. AUC ridge .468994, shadow .545654, указывающие на слабую диагностическую способность в этой OOD setting. Зеркальный R5F проверил источники и прямое воспроизведение, но не изменял путь или score, поэтому 0 пропущенных сигналов восстановлено; сильный прямой аудит имел идентичный результат. Результат отрицательный для чувствительности связки, но положительный для воспроизводимости исследовательского конвейера.",
+  "next": "SIT2B pre-register stronger positive-injection guard; compare unaltered strong matched-filter/temporal stacking and ON/OFF RFI morphology with a genuine new candidate selector against the exact strongest same-information alternative. Require independent validated physical antenna pointing and new sessions for scientific claims."
+}
