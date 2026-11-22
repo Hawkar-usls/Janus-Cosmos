@@ -73,33 +73,46 @@ def hash_array(a:np.ndarray, dtype="<f8")->str:
 
 
 def retrieve(scan:dict,folder:pathlib.Path)->dict:
+    """Download exact original file, retry transient network errors only.
+
+    A retry re-downloads the whole exact URL from byte zero; partial bytes
+    never become a scientific observation or a substitute file.
+    """
     path=folder/scan["path"]
     result={"scan":scan["number"],"role":scan["role"],"filename":scan["path"],
             "url":BASE_URL+scan["path"],"provider_sha256_known":False}
-    h=hashlib.sha256()
-    size=0
-    try:
-        with requests.get(result["url"],timeout=(18,100),stream=True,headers={"User-Agent":"JANUS-SIT1-Open-Academic-Provenance/1.0"}) as resp:
-            resp.raise_for_status()
-            if resp.headers.get("content-length") and int(resp.headers["content-length"])>MAX_BYTES:
-                raise ValueError("DOWNLOAD_EXCEEDS_PRESET_MAX_BYTES")
-            with path.open("wb") as output:
-                for block in resp.iter_content(chunk_size=1024*1024):
-                    if not block:continue
-                    size+=len(block)
-                    if size>MAX_BYTES:
-                        raise ValueError("DOWNLOAD_EXCEEDS_PRESET_MAX_BYTES")
-                    h.update(block)
-                    output.write(block)
-        if size<4096:
-            raise ValueError("DOWNLOAD_TOO_SMALL_FOR_HDF5")
-        result.update({"ok":True,"bytes":size,"first_seen_sha256":h.hexdigest()})
-        return result
-    except Exception as exc:
-        path.unlink(missing_ok=True)
-        result.update({"ok":False,"bytes_received_before_error":size,
-                       "error_type":type(exc).__name__,"error":str(exc)[:300]})
-        return result
+    failures=[]
+    for attempt in range(1,4):
+        h=hashlib.sha256()
+        size=0
+        try:
+            with requests.get(result["url"],timeout=(18,55),stream=True,
+                    headers={"User-Agent":"JANUS-SIT1-Open-Academic-Provenance/1.0"}) as resp:
+                resp.raise_for_status()
+                if resp.headers.get("content-length") and int(resp.headers["content-length"])>MAX_BYTES:
+                    raise ValueError("DOWNLOAD_EXCEEDS_PRESET_MAX_BYTES")
+                with path.open("wb") as output:
+                    for block in resp.iter_content(chunk_size=1024*1024):
+                        if not block:continue
+                        size+=len(block)
+                        if size>MAX_BYTES:
+                            raise ValueError("DOWNLOAD_EXCEEDS_PRESET_MAX_BYTES")
+                        h.update(block)
+                        output.write(block)
+            if size<4096:raise ValueError("DOWNLOAD_TOO_SMALL_FOR_HDF5")
+            result.update({"ok":True,"bytes":size,"first_seen_sha256":h.hexdigest(),
+                           "attempts":attempt,"retry_errors":failures})
+            return result
+        except Exception as exc:
+            path.unlink(missing_ok=True)
+            failures.append({"attempt":attempt,"bytes_before_error":size,
+                             "error_type":type(exc).__name__,"error":str(exc)[:240]})
+            if (not isinstance(exc,requests.RequestException) or attempt==3):
+                break
+            time.sleep(attempt)  # bounded deterministic retry; do not mutate source
+    result.update({"ok":False,"attempts":len(failures),
+                   "retry_errors":failures,"error":failures[-1]["error"]})
+    return result
 
 
 def python_scalar(x):
