@@ -1,0 +1,146 @@
+{
+  "schema": "janus.cosmos.sit2d.archive_donor_four_role_morphology.v1",
+  "name": "JANUS SIT2D — Archived Physical Profile Donor Verification",
+  "date_utc": "2026-11-22",
+  "status": "PREREGISTERED_BEFORE_CI",
+  "question": "Does the exact prior JANUS R41S1H1 cross-validated physical narrow-vs-broad morphology + repeated ON/OFF contrast recover weak artificial drifting lines on authentic measured GBT backgrounds at fixed false-control rate, beyond strong direct ON/OFF matched evidence and the original donor fixed-Gaussian comparator?",
+  "archive_audit": {
+    "meta_records": [
+      "data/JANUS-COSMOS-SETI-R41S1H2A-ROC-MORPHOLOGY-2026-11-20.json",
+      "data/JANUS-COSMOS-SETI-R41S1H2-FROZEN-OPERATING-POINT-2026-11-20.json",
+      "data/JANUS-COSMOS-SETI-R40K-ON-OFF-SEPARATION-2026-11-18.json",
+      "data/JANUS-COSMOS-SETI-R26-WEAKNESS-DIAGNOSTIC-2026-11-17.json",
+      "data/JANUS-COSMOS-SETI-R30-FALSE-ALARM-SHIELD-2026-11-18.json",
+      "data/JANUS-COSMOS-ALGORITHM-DONOR-SCOUT-R18B2-R19A-2026-11-17.json"
+    ],
+    "selected_source": "Hawkar-usls/Janus-Cosmos@research/seti-r41s1h2a-diagnostics-20261120:research/seti/r41s1h1_physical_profile.py",
+    "exact_donor_blob_sha1": "43683dee60433ea2612bb1a433d8e7afc9704494",
+    "exact_donor_protocol_blob_sha1": "f05c58e83c4aa053bae4a37ea24db5be5ad597c8",
+    "donor_functions": "templates(), role_score(), score() byte-exact transplanted, no changes to donor source",
+    "original_R41_scope": "Preregistered synthetic four-role physical Gaussian source model, not previously validated for 3I/ATLAS, full detection, or astrophysical true positive classes",
+    "rejected_injection_methods": {
+      "R26_envelope": "Prior reference-shift failure with >140 false alerts; do not auto-deploy",
+      "R30_shield": "Prior reduction in control alerts lost weak true injections; not safe",
+      "R40K_joint": "Prior stationary rescue produced excess 43 controls against 35, not yet vetted"
+    }
+  },
+  "real_radio": {
+    "official_archive": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "date_utc": "2025-12-18",
+    "dev": "Previously inspected X receiver blc20 0061–0066 with exact SHA256 from SIT1, never use for fresh independent discovery claims",
+    "evaluation": "Previously untested blc22 receiver 0013–0018 (source file names verified in official catalog); label receiver using physical fch1 from real HDF5, not assumptions from prefix",
+    "file_format": "rawspec.0002.h5 279×1×65536 expected; 16×128 real measured panels 4 windows/scan by pinned SIT1 source decoder",
+    "dev_files": [
+      {
+        "scan": "0061",
+        "role": "ON",
+        "filename": "blc20_guppi_61027_31308_DIAG_3I_ATLAS_0061.rawspec.0002.h5"
+      },
+      {
+        "scan": "0062",
+        "role": "OFF",
+        "filename": "blc20_guppi_61027_31626_DIAG_3I_ATLAS_OFF_0062.rawspec.0002.h5"
+      },
+      {
+        "scan": "0063",
+        "role": "ON",
+        "filename": "blc20_guppi_61027_31945_DIAG_3I_ATLAS_0063.rawspec.0002.h5"
+      },
+      {
+        "scan": "0064",
+        "role": "OFF",
+        "filename": "blc20_guppi_61027_32266_DIAG_3I_ATLAS_OFF_0064.rawspec.0002.h5"
+      },
+      {
+        "scan": "0065",
+        "role": "ON",
+        "filename": "blc20_guppi_61027_32588_DIAG_3I_ATLAS_0065.rawspec.0002.h5"
+      },
+      {
+        "scan": "0066",
+        "role": "OFF",
+        "filename": "blc20_guppi_61027_32906_DIAG_3I_ATLAS_OFF_0066.rawspec.0002.h5"
+      }
+    ],
+    "evaluation_files": [
+      {
+        "scan": "0013",
+        "role": "ON",
+        "filename": "blc22_guppi_61027_17226_DIAG_3I_ATLAS_0013.rawspec.0002.h5"
+      },
+      {
+        "scan": "0014",
+        "role": "OFF",
+        "filename": "blc22_guppi_61027_17543_DIAG_3I_ATLAS_OFF_0014.rawspec.0002.h5"
+      },
+      {
+        "scan": "0015",
+        "role": "ON",
+        "filename": "blc22_guppi_61027_17861_DIAG_3I_ATLAS_0015.rawspec.0002.h5"
+      },
+      {
+        "scan": "0016",
+        "role": "OFF",
+        "filename": "blc22_guppi_61027_18179_DIAG_3I_ATLAS_OFF_0016.rawspec.0002.h5"
+      },
+      {
+        "scan": "0017",
+        "role": "ON",
+        "filename": "blc22_guppi_61027_18497_DIAG_3I_ATLAS_0017.rawspec.0002.h5"
+      },
+      {
+        "scan": "0018",
+        "role": "OFF",
+        "filename": "blc22_guppi_61027_18814_DIAG_3I_ATLAS_OFF_0018.rawspec.0002.h5"
+      }
+    ],
+    "truth_limit": "Nominal ON/OFF archive labels and measured HDF5 header direction, no independent antenna tracking/ephemerides or real sky emission class.",
+    "independence": "Only a new receiver/cadence, same telescope, date and target, not independent external replication.",
+    "preservation": "No original HDF5 mutation or changes to production COSMOS."
+  },
+  "study": {
+    "seed": 2026112205,
+    "roles": "All combinations of two nominal ON scans from three and their paired two nominal OFF scans (3 overlapping role groups ×4 frequency windows =12 base four-role examples for each receiver).",
+    "roles_per_receiver": 12,
+    "synthetic_repetitions_per_base": 3,
+    "classes": [
+      "REAL_BACKGROUND_NO_INJECTION",
+      "SYNTHETIC_SHARED_COMB_AND_BROAD_RFI",
+      "SYNTHETIC_WEAK_REPEATED_ON_DRIFT",
+      "SYNTHETIC_STRONG_REPEATED_ON_DRIFT"
+    ],
+    "development_cases": 144,
+    "evaluation_cases": 144,
+    "evaluation_weak": 36,
+    "evaluation_strong": 36,
+    "evaluation_controls": 72,
+    "amplitudes_row_MAD_weak": [
+      1.2,
+      2
+    ],
+    "amplitudes_row_MAD_strong": [
+      8,
+      11
+    ],
+    "source_frequency_tracks": "Known injected path is concealed from candidate selector/donor score and only used by evaluator.",
+    "blinded_path_selector": "Identical for all arms: full registered R42A8A 672 linear hypotheses on mean of two ON measured/perturbed panels, restricted to path bins 24..103 to permit exact 49-channel H1 support; no oracle access.",
+    "donor_adaptation": "After blind track selection, extract 49 original frequency channels around each selected path separately for both ON and paired OFF observations. This is a de-drift coordinate transformation shared with direct comparator. Apply exact donor score() and its fixed control, same measured bandwidth and data.",
+    "source_format_assertion": "All six scans in a receiver must share identical physical fch1/foff and 16x128 output geometry; fail closed, no interpolation.",
+    "sideband_strong_direct": "For identical selected track, per-time row median/MAD normalized center minus p±3 sidebands, min of both ON evidences minus max(0,both paired OFF evidences).",
+    "four_role_donor_fixed": "Original R41S1H1 score() returns physical vs fixed Gaussian model; fixed score acts as separate comparator.",
+    "more_exhaustive_competitor": "Same 672 hypothesis search bank used for path selection in all arms; original native ridge score included as contextual diagnostic only.",
+    "transposed_TACHYON": "Pinned R5F graph traces the selected H1 outcome C→B→A and independent forward reexecution; cannot alter candidate track or donor score and gain must be zero vs same-objective direct H1."
+  },
+  "gates": {
+    "threshold": "Frozen p95 per arm on X development synthetic no-injection / engineered shared-RFI controls; no eval receiver score used for fit.",
+    "strong_positive_pass": ">=32/36 synthetic strong injections correctly localized and score strictly above development cutoff",
+    "false_control_budget": "<=3/72 evaluation synthetic controls above cutoff",
+    "weak_gain_over_strong_direct": ">=4 more of 36 weak injection cases than direct 4-role contrast and donor fixed score, with no extra control exceedances; donor cross-validation cost counted.",
+    "TACHYON_specific_gain": "Compare identical physical donor score direct and reverse provenance; any gain beyond direct must be separately demonstrated (not expected).",
+    "scientific_status": "HOLD_UNTIL_INDEPENDENT_REAL_SKY_LABELS_NEW_DATES_HIGH_RES_AND_MATCHED_TEST",
+    "external_replication": false,
+    "no_automatic_RFI_veto": true,
+    "no_train_on_eval": true,
+    "no_prod_changes": true
+  }
+}
