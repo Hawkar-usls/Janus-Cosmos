@@ -58,12 +58,12 @@
     "scientific_limits": "No real authenticated radio frames evaluated; no physical IF mapping, independent scan confirmation or astronomical false-alarm calibration; test generator is simplified; July/September viewed experiments cannot become new blind holdout."
   },
   "gates": {
-    "engineering": "six local unittests must PASS; parity/determinism/provenance/non-mutation",
+    "engineering": "Nine local unit/integrity tests must PASS; parity/determinism/provenance/non-mutation, TOPA manifest SHA256 and PTS validation",
     "science": "HOLD: independently replay matched native Parkes/GBT measurements and new untouched sessions against frozen R41S/R42 and direct matched filter; require zero protected weak losses at matched realized controls and confidence intervals by independent parent scan",
     "production": "HOLD and separate authorization; no false-alarm suppression, no hard veto"
   },
   "usage": [
-    "python -m unittest discover -s research/seti -p test_retina_5d_mosaic.py -v",
+    "python -m unittest discover -s research/seti -p 'test_retina_5d_mosaic*.py' -v",
     "python research/seti/benchmark_retina_5d_mosaic.py"
   ],
   "original_sit2e_thresholds_unchanged": true,
