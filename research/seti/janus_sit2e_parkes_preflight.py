@@ -72,7 +72,7 @@ def session_index(spec,session:requests.Session):
                 raise ValueError("NOT_DIRECTORY_HTML:"+content_type)
             parsed=LinkParser();parsed.feed(r.text)
             indexed.append({"url":u,"status_code":r.status_code,"index_sha256":hashlib.sha256(r.content).hexdigest(),
-                            "href_count":len(parsed.hrefs)})
+                            "href_count":len(parsed.hrefs),"sample_hrefs":parsed.hrefs[:16]})
             for h in parsed.hrefs:
                 h=unquote(h).split("?",1)[0].split("#",1)[0]
                 if not h or h in ("../","./") or h.startswith("/") or h.startswith("../"):continue
@@ -140,7 +140,7 @@ def qualify_candidates(report,session):
     files=report["filenames"]
     candidate=[x for x in files if x["product"] in ("mid","time","fine","other_hdf5")]
     order={"mid":0,"time":1,"fine":2,"other_hdf5":3}
-    candidate.sort(key=lambda x:(order[x["product"]],x["role_name_only"]=="UNKNOWN",x["filename"]))
+    candidate.sort(key=lambda x:(0 if x["filename"].endswith(".0002.h5") else 1 if x["filename"].endswith(".0001.h5") else 2,order[x["product"]],x["role_name_only"]=="UNKNOWN",x["filename"]))
     for role in ("SOURCE_NAME_ONLY","REFERENCE_NAME_ONLY"):
         selected=[x for x in candidate if x["role_name_only"]==role]
         # Early HEAD evidence on up to 4 files per role. No arbitrary blind download.
@@ -213,6 +213,7 @@ def run():
             "qualification":report.get("qualification"),
             "first_12_filenames":[x["filename"] for x in report["filenames"][:12]],
             "first_12_directory_urls":[x["url"] for x in report["directories"][:12]],
+            "sample_own_index_hrefs":[{"url":x["url"],"hrefs":x.get("sample_hrefs",[])} for x in report["directories"][:3]],
             "probe":report.get("metadata_probe",[])[:12],
             "headers":report.get("downloaded_headers",[])},ensure_ascii=False,allow_nan=False),flush=True)
     count=sum(x.get("qualification")=="PAIRED_ARCHIVE_HEADERS_AND_SHA256_OBSERVED__POINTING_HOLD" for x in result["sessions"])
