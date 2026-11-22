@@ -176,7 +176,7 @@ def score_one(panel:np.ndarray,model):
     v=panel[None,:,:]
     path,ranking=cosmos.blind_line_candidate(v)
     feat=shadow.features(v,path)
-    val=float(((feat-mean)/scale)@coef+intercept)
+    val=float((((feat-mean)/scale)@coef+intercept).item())
     if not np.isfinite(val):raise ValueError("NONFINITE_FROZEN_COSMOS_SCORE")
     return path[0],val,float(ranking[0])
 
