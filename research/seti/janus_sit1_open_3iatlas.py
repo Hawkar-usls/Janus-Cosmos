@@ -27,6 +27,7 @@ import time
 import traceback
 from collections import Counter
 
+import hdf5plugin  # Registers actual HDF5 BitShuffle/LZ4/Blosc filters for BL archives.
 import h5py
 import numpy as np
 import requests
