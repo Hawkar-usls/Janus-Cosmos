@@ -1,0 +1,236 @@
+{
+  "schema": "janus.cosmos.sit2d.archive_donor_r41h1_gbt_four_role_result.v1",
+  "name": "JANUS SIT2D — Archive Donor Search and Genuine GBT Real-Background Four-Role Test",
+  "date_utc": "2026-11-22",
+  "status": "ENGINEERING_PASS__ARCHIVED_H1_WEAK_GAIN_NOT_CONFIRMED__CONTROL_BUDGET_FAILED__SCIENCE_HOLD",
+  "research_repo": "Hawkar-usls/Janus-Cosmos",
+  "branch": "research/janus-sit2d-archive-donor-morphology-20261122",
+  "PR": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/71",
+  "workflow_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45055266337",
+  "artifact": {
+    "id": 14766858465,
+    "name": "janus-sit2d-r41h1-real-gbt-new-receiver-receipt",
+    "digest": "sha256:10633c44b92b3b3ce1ac1b8c84dddf8503756e2a11a87e95ea3c62aef4c52f7c"
+  },
+  "CI_unit_tests_passed": 16,
+  "selected_archived_source": {
+    "repo": "Hawkar-usls/Janus-Cosmos",
+    "ref": "research/seti-r41s1h2a-diagnostics-20261120",
+    "source": "research/seti/r41s1h1_physical_profile.py",
+    "exact_source_blob_sha1": "43683dee60433ea2612bb1a433d8e7afc9704494",
+    "original_protocol": "research/seti/r41s1h1_physical_protocol.json",
+    "protocol_blob_sha1": "f05c58e83c4aa053bae4a37ea24db5be5ad597c8",
+    "r41_prior_result": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-COSMOS-SETI-R41S1H2A-ROC-MORPHOLOGY-2026-11-20.json",
+    "exact_reused_functions": [
+      "templates",
+      "role_score",
+      "score"
+    ],
+    "archived_evidence_limit": "Original R41H1/H2/H2A strong ROC was in historical synthetic simulation and is not independent proof for current GBT astrophysical data"
+  },
+  "other_donors_scanned": [
+    {
+      "method": "R40K Joint ON/OFF",
+      "prior": "PASS_SHARED_RECOVERY__HOLD_CONTROL_BUDGET",
+      "caveat": "43 control alerts above 35 allowed",
+      "promote": false
+    },
+    {
+      "method": "R26 OFF Envelope",
+      "prior": "SYNTHETIC_DEVELOPMENT_GAIN_REFERENCE_MISMATCH_HOLD",
+      "caveat": "False alerts increased under reference shifts, not transport qualified",
+      "promote": false
+    },
+    {
+      "method": "R30 False Alarm Shield",
+      "prior": "HOLD_NO_SCIENTIFIC_GAIN",
+      "caveat": "False-alarm reductions accompanied losses of true injected positives",
+      "promote": false
+    },
+    {
+      "method": "R32 HANNAH Memory",
+      "prior": "HOLD_NO_SAFE_FALSE_ALARM_GAIN",
+      "caveat": "Only one verified RFI family anchor; no prospective benefit or safe veto",
+      "promote": false
+    },
+    {
+      "method": "Physarum Swarm donor R19A",
+      "prior": "CURVED_DP_DEVELOPMENT_GAIN_PHYSARUM_INCREMENT_HOLD",
+      "caveat": "Exact DP matched same discovery in prior test, extra overhead; not a score-calibration cure",
+      "promote": false
+    },
+    {
+      "method": "JUXTAPOSE R18B",
+      "prior": "EXACT_PASS_VECTOR_GAIN_ADAPTIVE_INCREMENT_HOLD",
+      "caveat": "Search ordering/cost, not stronger signal-vs-RFI discriminative evidence",
+      "promote": false
+    }
+  ],
+  "source_provenance": {
+    "official_public_archive": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "observation_date": "2025-12-18",
+    "telescope": "GBT",
+    "files": [
+      {
+        "split": "X_DEV",
+        "scan": "0061",
+        "sha256": "689295b24b39c3902016d71e3665927251f847666d0e8b7c371f1b9fce534720"
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0062",
+        "sha256": "492ee7ceae9f83482a83c2704a9cf9b86a7f0d243bed726d054143dcadef2d6b"
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0063",
+        "sha256": "c71a7ea8259b57c9886f094c1a0d18c37fb81dcc2d65808251501a9b92462588"
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0064",
+        "sha256": "0f513447ba0031c510545a86617d93953bc9e98b84fbe0b20682a15863ea3026"
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0065",
+        "sha256": "9e674c2e28295bba9bdd43a613d48d6884e81b435e470a75488496838a7a6867"
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0066",
+        "sha256": "1b8988be200242fb465ccc97dc0b6dc52d0403cb1af39777821c74a5a55d4c3b"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0013",
+        "sha256": "52e5e6b72ef6000896d4e9f14b6ed58e62f419b6bb564443a16a88d76edbb300"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0014",
+        "sha256": "4553a01505930594daaf04d41be54b4817ff952115e6d47f3f4d69fda1304c71"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0015",
+        "sha256": "26cd3fb4e6d97e40e2d59bd510987c22b772eb8fa1d3b3dc858e48656f1fe238"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0016",
+        "sha256": "1abd7aef08c9ed34fa822b66146fe668aa0cb07e78043b7517e8ec995ca11421"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0017",
+        "sha256": "b06ad2833a75f73d7a11e4a3ae931d99aa7643be43ecde1ae036d5076b93e335"
+      },
+      {
+        "split": "BLC22_EVAL",
+        "scan": "0018",
+        "sha256": "b1ded61d932941a5618eed1a4a3648ec249d77fec87c1b4d59289988"
+      }
+    ],
+    "development_X_6_original_files_sha256_match_SIT1": true,
+    "blc22_6_new_subband_file_sha256_first_seen_only": true,
+    "physical_headers": {
+      "X_dev_fch1_MHz": 12376.46484375,
+      "blc22_eval_fch1_MHz": 1876.46484375,
+      "both_foff_MHz": -0.00286102294921875
+    },
+    "time_bins_native": 279,
+    "frequency_bins_native": 65536,
+    "one_original_interleaved_cadence_per_receiver": true,
+    "source_type": "Authentic receiver power backgrounds, artificial post-extraction weak/strong line injection only",
+    "published_independent_telescope_SHA_available": false
+  },
+  "protocol_erratum": {
+    "pre_registered_statement": "The protocol described new blc22 as a new receiver/cadence relative to the prior SIT2C blc21 run.",
+    "observed_correction": "blc22 HDF5 scan IDs 0013–0018, observation timestamps and role pattern match the blc21 scans 0013–0018 already used by SIT2C. Thus this is an adjacent/different frequency subband of the SAME observational cadence, not an independent scan session nor proven different front-end receiver.",
+    "new_evaluation_not_prior_independent_sky_data": true,
+    "pre_registered_thresholds_and_case_counts_unchanged": true,
+    "impact": "The claimed cross-receiver prospective independence was overstated; all SIT2D results are an exploratory cross-subband engineering check only. No external/new cadence validation, do not promote.",
+    "scientific_score_signal_class": "Artificial injection labels; real source/true RFI/technosignature unknown"
+  },
+  "design": {
+    "genuine_radio_background_four_role_groups_per_split": 12,
+    "synthetic_reps_per_group": 3,
+    "conditions": [
+      "no injection",
+      "engineered common ON/OFF comb+broad bursts",
+      "repeated synthetic weak narrowband ON-only drift",
+      "repeated synthetic strong narrowband ON-only drift"
+    ],
+    "X_development_cases": 144,
+    "BLC22_evaluation_cases": 144,
+    "eval_weak": 36,
+    "eval_strong": 36,
+    "eval_controls": 72,
+    "source_truth_hidden_from_algorithm": true,
+    "strong_control_pass": "at least 32/36 and no more than 3/72 controls above dev-only X p95",
+    "real_antenna_pointing_authenticated": false,
+    "new_receiver_label_verified": false,
+    "full_scan_independent_source_witness": false,
+    "same_672_linear_bank_source_for_all_methods": true,
+    "original_H1_four_role_profile_models_not_retrained": true,
+    "real_observational_backgrounds_untouched": true
+  },
+  "measured_arms": {
+    "A_STRONG_DIRECT_FOUR_ROLE": {
+      "dev_cutoff": 0.31881901507035226,
+      "weak_localized": 36,
+      "weak_detected": 36,
+      "strong_detected": 36,
+      "controls_above_threshold": 8,
+      "qualified": false
+    },
+    "B_R41_H1_FIXED_ORIGINAL": {
+      "dev_cutoff": 0.004223292188376299,
+      "weak_localized": 36,
+      "weak_detected": 36,
+      "strong_detected": 36,
+      "controls_above_threshold": 8,
+      "qualified": false
+    },
+    "C_R41_H1_PHYSICAL_ORIGINAL": {
+      "dev_cutoff": -0.005675976653816069,
+      "weak_localized": 36,
+      "weak_detected": 23,
+      "strong_detected": 34,
+      "controls_above_threshold": 6,
+      "qualified": false
+    },
+    "D_TACHYON_R41_H1_PHYSICAL": {
+      "dev_cutoff": -0.005675976653816069,
+      "weak_localized": 36,
+      "weak_detected": 23,
+      "strong_detected": 34,
+      "controls_above_threshold": 6,
+      "qualified": false
+    }
+  },
+  "paired_result": {
+    "physical_donor_extra_weak_vs_strong_direct": 0,
+    "physical_donor_extra_weak_vs_archived_fixed": 0,
+    "physical_donor_lost_weak_vs_strong_direct": 13,
+    "physical_donor_removed_controls_vs_strong_direct": 2,
+    "TACHYON_specific_recovery_gain": 0,
+    "all_methods_failed_false_control_budget": true,
+    "weak_sensitivity_scientific_gain_confirmed": false,
+    "experimental_scoring_seconds_excluding_download": 2.5881,
+    "counted_R5F_graph_operations": 1152,
+    "weak_gain_vs_prior_SIT2C_comparison_invalid_due_different_injection_design": true
+  },
+  "scientific_gate": {
+    "production_detector_unchanged": true,
+    "no_proven_physical_retrocausality": true,
+    "not_independent_external_replication": true,
+    "synthetic_truth_not_real_sky_detection": true,
+    "no_real_RFI_ground_truth": true,
+    "actual_antenna_pointing_not_independent": true,
+    "full_native_high_resolution_not_tested": true,
+    "status": "HOLD_CONTROL_BUDGET_AND_NO_DONOR_GAIN"
+  },
+  "next": "Do not tune to blc22 already-inspected results. Explore physically separate dated archive sessions, with true scan pointing/ONOFF, use guarded third-ON repeat agreement, pilot only on new development data then independent heldout with strong same-information baseline."
+}
