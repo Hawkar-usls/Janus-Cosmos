@@ -1,0 +1,98 @@
+name: JANUS SIT2 - Weak Signal Recovery on Real GBT Background
+on:
+  push:
+    branches:
+      - research/janus-sit2-weak-signal-rfi-challenge-20261122
+    paths:
+      - 'research/seti/janus_sit2_weak_rfi.py'
+      - 'research/seti/janus_sit2_weak_rfi_protocol.json'
+      - 'research/seti/test_janus_sit2_weak_rfi.py'
+      - 'research/seti/janus_sit2_weak_rfi_result.json'
+      - '.github/workflows/janus-sit2-weak-rfi.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  real-background-weak-injection:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install native frozen COSMOS and HDF5 scientific runtime
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 scikit-learn==1.6.1 scipy==1.15.3 requests==2.32.3
+      - name: Verify unchanged frozen COSMOS, original SIT1 source and actual TACHYON
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r42a8_ood_stress.py)" = "4f11b407e5271a058c38b3186c9f5c8192130655"
+          test "$(git hash-object research/seti/janus_sit1_open_3iatlas.py)" = "0c03eef6ff489a517308f9f1e16de801ea84dfcb"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m json.tool research/seti/janus_sit2_weak_rfi_protocol.json > /dev/null
+          python -m py_compile research/seti/janus_sit2_weak_rfi.py
+          python - <<'PY'
+          import json
+          p=json.load(open('research/seti/janus_sit2_weak_rfi_protocol.json'))
+          parent=json.load(open('research/seti/janus_sit1_open_result.json'))
+          assert p['benchmark']['total_controlled_cases']==288
+          assert p['benchmark']['development_cases']==96 and p['benchmark']['evaluation_cases']==192
+          assert parent['runtime_inputs']['source_files_downloaded_and_decompressed']==6
+          assert len(parent['runtime_inputs']['hdf5_files'])==6
+          assert not p['gates']['promotion_allowed']
+          print("SIT2_FROZEN_PROTOCOL_AND_SIX_SOURCE_SHA256_PARENT_LOCK_PASS")
+          PY
+      - name: Run 13 offline provenance and controlled-injection guards
+        run: |
+          python -m unittest discover -s research/seti -p 'test_janus_sit2_weak_rfi.py' -v
+      - name: Re-download SHA-locked original six GBT spectra and score 288 injected cases
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit2_weak_rfi.py --audit
+          test -s runtime/sit2/sit2_result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/sit2/sit2_result.json').read_text())
+          assert r['model_and_production_weights_unchanged']
+          if not r['status'].startswith('REAL_GBT_BACKGROUND'):
+              print('SIT2_SOURCE_QUALIFICATION_HOLD',json.dumps(r.get('errors',[]),ensure_ascii=False))
+          else:
+              assert len(r['downloads'])==6 and r['real_background_panels_reduced']==24
+              a=r['evaluation']
+              assert a['research_case_count']==288
+              assert a['development_cases']==96 and a['heldout_cases']==192
+              assert a['weak_synthetic_injections']==96
+              assert a['true_original_native_missed_weak_rescued_by_mirror']==0
+              assert not a['mirrored_and_strong_provenance_disagreements']
+              assert a['independent_real_observational_groups']==1
+              print('SIT2_NATIVE_FROZEN_VS_MIRROR_VS_STRONG_REAL_RADIO_BACKGROUND_RESULT='+json.dumps(a['blind_ridge_and_frozen_shadow_results'],sort_keys=True))
+              print('SIT2_REAL_GBT_BACKGROUND_CONTROLLED_WEAK_INJECTION_PASS__FULL_SCIENCE_HOLD')
+          PY
+      - name: Preserve full actual source hash and paired scientific receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit2-real-gbt-weak-injection-receipt
+          path: runtime/sit2/sit2_result.json
+          if-no-files-found: warn
+          retention-days: 90
