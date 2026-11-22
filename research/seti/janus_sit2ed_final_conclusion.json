@@ -1,0 +1,151 @@
+{
+  "schema": "janus.cosmos.sit2ed.final_pol_806_forensic_conclusion.v1",
+  "created_utc": "2026-11-23",
+  "status": "SIT2ED_ENGINEERING_PASS__JULY_806150_COMMON_ONOFF_CONFIRMED__HYPOTHETICAL_POL_SUM_NO_TRANSFER_GAIN__SCIENCE_HOLD",
+  "repository": "Hawkar-usls/Janus-Cosmos",
+  "branch": "research/janus-sit2ed-polarization-806-forensics-20261123",
+  "draft_pr": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/75",
+  "final_successful_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45078272093",
+  "final_run_sha": "e273d6744f808662c54f53386b655e28e8eec9f5",
+  "final_artifact": {
+    "id": 14776645153,
+    "name": "janus-sit2ed-polarization-806-witness",
+    "zip_sha256": "f3fe196386de3f12275bdf33eaf66c17c448c611ea74a48573a0b07fb607de33",
+    "json_sha256": "d0a81b601dd2e951bab83205a31b51848eb8b553cfc269a6a86b9ac60b5961a1"
+  },
+  "full_source_sha256": {
+    "july_source": "7aaa17698201c4eb84694432b0ea193b02ad9604fa2e91ede320f60ea1b399eb",
+    "july_reference": "3c925ea095ed0bfaeae418136550d7990a8776efc465bf0cfbd3db01675aa5ff",
+    "sept_source": "eb0418945b33ddf6ade273534290bb5080d524766ea3838688cb73d128f7c69b",
+    "sept_reference": "323fda755f581204b881de151ca039c21f6dd3c8953b1fbccafbabc9c7324962"
+  },
+  "original_numeric_thresholds_unchanged": {
+    "JANUS_NATIVE_RIDGE": 2.834103476282684,
+    "DIRECT_672_MATCHED": 2.834103476282684,
+    "DIRECT_672_SIDEBAND": 3.3193816056219645
+  },
+  "input_scope": {
+    "dates": [
+      "2025-07-31",
+      "2025-09-12"
+    ],
+    "receiver_bank": "blc00",
+    "roles": [
+      "source",
+      "reference"
+    ],
+    "physical_frequency_window_mhz": [
+      806,
+      806.75
+    ],
+    "native_channel_width_hz": 2000,
+    "original_time_rows_per_scan": 300,
+    "native_IF_products_per_scan": 4,
+    "evaluated_full_band_16_by_128_panels_per_role_per_IF": 4,
+    "october_read": false,
+    "july_and_sept_full_sha256_match": true,
+    "true_antenna_pointing_telemetry": false
+  },
+  "july_common_spectral_features": {
+    "strongest_frequency_mhz": 806.15,
+    "robust_IF0_median_time_z_source": 212.4,
+    "robust_IF0_median_time_z_reference": 189.44,
+    "source_time_fraction_z_above_5_at_806150": 1,
+    "reference_time_fraction_z_above_5_at_806150": 1,
+    "IF0_source_reference_spectrum_r": 0.9984913518979317,
+    "IF1_source_reference_spectrum_r": 0.9969120408823712,
+    "IF0_above5_shared_bins": 10,
+    "IF0_above5_union_bins": 11,
+    "strong_neighboring_peaks_mhz": [
+      806.084,
+      806.152,
+      806.218
+    ],
+    "sept_IF0_shared_above5_bins": 0,
+    "sept_IF1_shared_above5_bins": 0,
+    "warning": "Target and reference scans separated in time ~342s. Structural overlap rejects target-unique interpretation, not a physical source proof."
+  },
+  "polarization_hypotheses": {
+    "July": "nifs=4, July SIGPROC header contains no basis label",
+    "Sept": "HDF5 data shape [300,4,64000], nifs=4, no pol_type/stokes metadata",
+    "on_806_0_to806_75_inequality_test": [
+      {
+        "date": "2025-07-31",
+        "role": "source",
+        "IQUV_order_fraction": 0.00387,
+        "XXYY_ReIm_cross_fraction": 1
+      },
+      {
+        "date": "2025-07-31",
+        "role": "reference",
+        "IQUV_order_fraction": 0.00637,
+        "XXYY_ReIm_cross_fraction": 1
+      },
+      {
+        "date": "2025-09-12",
+        "role": "source",
+        "IQUV_order_fraction": 0,
+        "XXYY_ReIm_cross_fraction": 1
+      },
+      {
+        "date": "2025-09-12",
+        "role": "reference",
+        "IQUV_order_fraction": 0,
+        "XXYY_ReIm_cross_fraction": 1
+      }
+    ],
+    "source_context": {
+      "observing_modes": "https://seti.berkeley.edu/atlas/",
+      "rawspec_polarization_modes": "https://github.com/UCBerkeleySETI/rawspec",
+      "rawspec_syntax": "1 total power, 4 cross-polarization products, -4 full Stokes"
+    },
+    "conclusion": "AABBCRCI-like correlation product basis plausible in BOTH original selected 2025 files despite public narrative about dates. The exact producer configuration, IF mapping, Stokes conversion, and absolute receiver intensity normalization are NOT independently known. Statistical inequalities are insufficient to certify a physical transform."
+  },
+  "symmetric_hypothesis_control_test": {
+    "data_origin": "The same real 4x128 frequency panels per role/date, simulated weak/strong/RFI overlays using matched deterministic RNG; 8 independent parent panels per date, not 192 independent controls.",
+    "hypothesis_IF0_only": {
+      "July_JANUS_negative_exceedances": 74,
+      "July_strong_detected": 72,
+      "July_weak_detected": 0,
+      "Sept_JANUS_negative_exceedances": 9,
+      "Sept_strong_detected": 96,
+      "Sept_weak_detected": 0,
+      "Sept_p95_reproduced": 2.834103476282684
+    },
+    "hypothesis_IF0_plus_IF1_on_both_dates": {
+      "July_JANUS_negative_exceedances": 75,
+      "July_direct_matched_negative_exceedances": 75,
+      "July_direct_sideband_negative_exceedances": 71,
+      "July_strong_detected": 72,
+      "July_weak_detected": 0,
+      "Sept_JANUS_negative_exceedances": 9,
+      "Sept_strong_detected": 96,
+      "Sept_weak_detected": 0,
+      "diagnostic_only_sept_JANUS_p95": 2.97560822349421,
+      "diagnostic_only_sept_sideband_p95": 3.39699368530904,
+      "new_threshold_approved": false,
+      "physical_IF_mode_mapping_certified": false,
+      "transfer_improvement": false,
+      "incremental_weak_sensitivity_gain_vs_direct": 0
+    }
+  },
+  "external_frequency_context": {
+    "official_Australian_ACMA": "https://www.acma.gov.au/publications/2019-09/instruction/rali-lm08-land-mobile-service",
+    "official_2025_receivers": "https://www.legislation.gov.au/F2023L00248/2025-10-01/2025-10-01/text/original/epub/OEBPS/document_1/document_1.html",
+    "band_note": "806-809 MHz is allocated to trunked land-mobile base-station receivers, i.e. potential terrestrial service vicinity; does not identify a transmitter or prove RFI source at Parkes."
+  },
+  "scientific_decision": {
+    "engineering_reproducibility": "PASS",
+    "mapping_stokes_to_total_intensity": "HOLD_NO_PRODUCER_MODE_METADATA",
+    "actual_pointing_and_ephemeris": "HOLD_NO_TCS_ENCODER_RECEIPTS",
+    "line_provenance": "CONSISTENT_WITH_SHARED_INSTRUMENTAL_OR_TERRESTRIAL_STRUCTURE__NOT_PROVEN",
+    "spectral_sensitivity_gain": "NOT_OBSERVED_ON_TESTED_SYNTHETIC_WEAK_CASES",
+    "false_alarm_budget_prospective": "NOT_VERIFIED",
+    "threshold_updates_allowed": false,
+    "production_changed": false,
+    "october_heldout_opened": false,
+    "october_exam_allowed": false,
+    "science_gate": "HOLD",
+    "next": "Obtain original rawspec command-line/output polarization mode/pol_product mapping and actual Parkes TCS/ephemeris per-scan logs, verify matched full-Stokes-I reconstruction from the July/Sep products; preregister fresh disjoint negative/positive controls before any prospective October exam. An IF0+IF1 sum alone does not clear 806 MHz contamination."
+  }
+}
