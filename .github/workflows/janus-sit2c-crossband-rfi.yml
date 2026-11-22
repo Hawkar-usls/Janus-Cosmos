@@ -1,0 +1,101 @@
+name: JANUS SIT2C - Prospective X-to-L RFI-Aware Crossband Challenge
+on:
+  push:
+    branches:
+      - research/janus-sit2c-crossband-rfi-20261122
+    paths:
+      - '.github/workflows/janus-sit2c-crossband-rfi.yml'
+      - 'research/seti/janus_sit2c_crossband_rfi.py'
+      - 'research/seti/test_janus_sit2c_crossband_rfi.py'
+      - 'research/seti/janus_sit2c_protocol.json'
+      - 'research/seti/janus_sit2c_result.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  cross-receiver-prospective-rfi-challenge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PYTHONUNBUFFERED: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install exact reader/native frozen model runtime
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 scikit-learn==1.6.1 scipy==1.15.3 requests==2.32.3
+      - name: Verify pinned algorithms and pre-registered separate receiver roles
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r42a8_ood_stress.py)" = "4f11b407e5271a058c38b3186c9f5c8192130655"
+          test "$(git hash-object research/seti/janus_sit1_open_3iatlas.py)" = "0c03eef6ff489a517308f9f1e16de801ea84dfcb"
+          test "$(git hash-object research/seti/janus_sit2b_temporal_recovery.py)" = "48ff51029938d9ae1206e3c3998de1842c86e37e"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m py_compile research/seti/janus_sit2c_crossband_rfi.py
+          python -m json.tool research/seti/janus_sit2c_protocol.json > /dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open('research/seti/janus_sit2c_protocol.json'))
+          parent=json.load(open('research/seti/janus_sit1_open_result.json'))
+          assert len(p['inputs']['dev_files'])==2 and len(p['inputs']['heldout_files'])==6
+          assert all(x['filename'].startswith('blc20') for x in p['inputs']['dev_files'])
+          assert all(x['filename'].startswith('blc21') for x in p['inputs']['heldout_files'])
+          assert len(parent['runtime_inputs']['hdf5_files'])==6
+          assert p['dataset']['development_cases']==128 and p['dataset']['heldout_cases']==384
+          assert p['safety']['no_training_on_L'] and p['safety']['no_manual_threshold_tuning_after_L']
+          print('SIT2C_FROZEN_X_DEV_L_NEW_RECEIVER_EVAL_AND_EQUAL_INFORMATION_PASS')
+          PY
+      - name: Run offline reverse parity and RFI score contracts
+        run: |
+          python -m unittest discover -s research/seti -p 'test_janus_sit2c_crossband_rfi.py' -v
+      - name: Retrieve two archived X development scans and six new L receiver scans for prospective 512-case benchmark
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit2c_crossband_rfi.py --audit
+          test -s runtime/sit2c/sit2c_result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/sit2c/sit2c_result.json').read_text())
+          assert not r['native_model_weights_modified']
+          assert not r['production_detector_or_threshold_modified']
+          assert not r['physical_time_reversal']
+          if not r.get('outcomes'):
+              print('SIT2C_L_RECEIVER_QUALIFICATION_HOLD='+json.dumps(r['error_receipts']))
+          else:
+              assert r['dataset']['total_cases']==512
+              assert r['dataset']['heldout_cases']==384
+              assert r['dataset']['heldout_weak_injections']==96
+              assert r['dataset']['heldout_control_cases']==192
+              assert r['all_exact_forward_reverse_equal']
+              assert r['paired_gains']['tachyon_reverse_extra_weak_vs_same_objective_direct']==0
+              for k,v in r['outcomes'].items():
+                  print('SIT2C_ARM_'+k+'='+json.dumps(v,sort_keys=True))
+              print('SIT2C_GAINS='+json.dumps(r['paired_gains'],sort_keys=True))
+              print('SIT2C_PROSPECTIVE_REAL_L_RECEIVER_OOD_ENGINEERING_PASS__ASTRONOMICAL_SCIENCE_HOLD')
+          PY
+      - name: Preserve actual L-band first-seen SHA256 and prospective controls
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit2c-prospective-gbt-x-to-l-rfi-receipt
+          path: runtime/sit2c/sit2c_result.json
+          if-no-files-found: warn
+          retention-days: 90
