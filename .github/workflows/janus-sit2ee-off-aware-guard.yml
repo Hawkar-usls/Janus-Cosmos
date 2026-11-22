@@ -1,0 +1,80 @@
+name: JANUS SIT2E-E - Real Parkes ON OFF Soft Contrast and Protection
+on:
+  push:
+    branches:
+      - research/janus-sit2ee-common-source-reference-soft-null-20261123
+    paths:
+      - 'research/seti/janus_sit2ee_off_aware_signal_protection.py'
+      - '.github/workflows/janus-sit2ee-off-aware-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-power-paired-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    env:
+      PYTHONPATH: '.'
+      PYTHONUNBUFFERED: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - name: Read-only research checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned research dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 requests==2.32.3 beautifulsoup4==4.12.3 scikit-learn==1.6.1
+      - name: Fail-closed test for only original July September and untouched threshold
+        run: |
+          python -m py_compile research/seti/janus_sit2ee_off_aware_signal_protection.py
+          python - <<'PY'
+          import ast,json,pathlib
+          p=pathlib.Path('research/seti/janus_sit2ee_off_aware_signal_protection.py')
+          d=ast.parse(p.read_text())
+          vals={}
+          for n in d.body:
+              if isinstance(n,ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],ast.Name) and n.targets[0].id in ('DATES','OFF_COEFFICIENT','CATEGORIES'):
+                  vals[n.targets[0].id]=ast.literal_eval(n.value)
+          assert vals['DATES']==('2025-07-31','2025-09-12')
+          assert vals['OFF_COEFFICIENT']==1.0
+          assert len(vals['CATEGORIES'])==6
+          assert 'PKS_Oct_' not in p.read_text()
+          q=json.loads(pathlib.Path('research/seti/janus_sit2eb_july_september_calibration_receipt.json').read_text())
+          assert q['inference_limits']['allow_october_one_shot_exam'] is False
+          print('SIT2EE_OCTOBER_SEALED_OLD_THRESHOLDS_LOCKED')
+          PY
+      - name: Soft-contrast synthetic smoke tests with no archive access
+        run: |
+          python - <<'PY'
+          import sys,numpy as np
+          sys.path.insert(0,'research/seti')
+          import janus_sit2ee_off_aware_signal_protection as s
+          rng=np.random.default_rng(31)
+          on=np.float32(rng.normal(100,3,(16,128)))
+          off=np.float32(rng.normal(100,3,(16,128)))
+          before=off.tobytes()
+          for cls in s.CATEGORIES:
+              a,r,truth=s.case_overlay(on,off,cls,rng)
+              assert r.shape==(16,128) and a.shape==(16,128)
+              assert r.dtype==a.dtype==np.float32
+              assert np.isfinite(a).all() and np.isfinite(r).all()
+              assert len(s.all_scores(a,r)[0])==4
+          assert before==off.tobytes(), 'OFF_CONTROL_MUTATED_IN_PLACE'
+          assert s.OFF_COEFFICIENT==1.
+          print('SIT2EE_PAIRED_AND_FROZEN_SCORER_SMOKE_PASS')
+          PY
+      - name: Read four original SHA-verified files and score same-panel paired controls
+        run: python research/seti/janus_sit2ee_off_aware_signal_protection.py --audit
+      - name: Upload redacted audit stats only, no original radio power
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit2ee-off-aware-signal-preservation
+          path: runtime/sit2ee/sit2ee_result.json
+          if-no-files-found: warn
+          retention-days: 90

@@ -1,0 +1,177 @@
+{
+  "schema": "janus.cosmos.sit2ee.real_radio_common_rfi_contrast_conclusion.v1",
+  "date_utc": "2026-11-23",
+  "status": "SIT2EE_ENGINEERING_PASS__TARGETED_806_SOFT_NULL_REDUCES_FIXED_PATH__SEARCH_LOCALIZATION_FAILURE__SCIENCE_HOLD",
+  "dates_allowed": [
+    "2025-07-31",
+    "2025-09-12"
+  ],
+  "protected_unopened_holdout": "2025-10-05",
+  "detector": "JANUS native R42A8 blind ridge vs identical-information direct full matched, direct sideband matched, fixed unit-coefficient direct ON-OFF sideband contrast",
+  "pipeline": {
+    "branch": "research/janus-sit2ee-common-source-reference-soft-null-20261123",
+    "first_successful_full_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45080217619",
+    "final_successful_full_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45080338591",
+    "final_artifact_id": 14775949938,
+    "final_artifact_zip_sha256": "00abc44ec5995e20137c915e4e064383aac5d250458d15b9a6bb8ba0a401f4e1",
+    "final_result_json_sha256": "ec9755d5d9292fb35ca650f8acc53546c952df34c8990696c89a05e4fafd99c4",
+    "files_full_sha256_verified": 4,
+    "source_file_full_sha256": {
+      "july_source": "7aaa17698201c4eb84694432b0ea193b02ad9604fa2e91ede320f60ea1b399eb",
+      "july_reference": "3c925ea095ed0bfaeae418136550d7990a8776efc465bf0cfbd3db01675aa5ff",
+      "september_source": "eb0418945b33ddf6ade273534290bb5080d524766ea3838688cb73d128f7c69b",
+      "september_reference": "323fda755f581204b881de151ca039c21f6dd3c8953b1fbccafbabc9c7324962"
+    }
+  },
+  "original_sit2eb_threshold_lock": {
+    "sha256": "ef7b8ce94d08ec1abd824bfc91711495c0d0983df3627f223711ec99c07c60d1",
+    "thresholds": {
+      "JANUS_NATIVE_RIDGE": 2.834103476282684,
+      "DIRECT_672_MATCHED": 2.834103476282684,
+      "DIRECT_672_SIDEBAND": 3.3193816056219645
+    },
+    "unchanged": true
+  },
+  "broad_four_windows_pair_experiment": {
+    "cases": 768,
+    "parent_groups_per_date": 4,
+    "replicates_per_parent": 16,
+    "synthetic_control_groups": [
+      "no added signal",
+      "ON-only comb-like RFI",
+      "Source-and-Reference shared narrowband RFI"
+    ],
+    "synthetic_positive_groups": [
+      "weak Source-only line",
+      "strong Source-only line",
+      "weak Source line coinciding with existing Reference line"
+    ],
+    "reference_data_used_as_auxiliary_input_only": true,
+    "comparison_operating_point": "independently calculated September in-sample p95 for each research method; not adopted",
+    "july_direct_sideband": {
+      "control_exceedances": 58,
+      "controls": 192,
+      "strong_detected": 48,
+      "strong_count": 64,
+      "weak_detected": 0,
+      "weak_count": 64,
+      "weak_at_reference_frequency": 16,
+      "reference_collision_cases": 64,
+      "shared_rfi_control_exceedances": 26,
+      "shared_rfi_controls": 64,
+      "diagnostic_sep_p95": 7.432584452294755
+    },
+    "july_off_contrast": {
+      "control_exceedances": 50,
+      "controls": 192,
+      "strong_detected": 53,
+      "strong_count": 64,
+      "weak_detected": 0,
+      "weak_count": 64,
+      "weak_at_reference_frequency": 16,
+      "reference_collision_cases": 64,
+      "shared_rfi_control_exceedances": 24,
+      "shared_rfi_controls": 64,
+      "diagnostic_sep_p95": 7.262010095545985
+    },
+    "september_both": {
+      "control_exceedances": 9,
+      "controls": 192,
+      "strong_detected": 64,
+      "strong_count": 64,
+      "weak_detected": 0,
+      "weak_count": 64
+    },
+    "key_limits": "Only four independent source-reference parent frequency windows per date; 192 correlated/constructed negatives; July was inspected in design. No prospective false alarm or efficacy estimate.",
+    "candidate_july_false_alert_5percent_gate": false,
+    "candidate_july_strong_positive_90percent_gate": false,
+    "candidate_new_weak_gain_zero": true,
+    "adoption_gate": false
+  },
+  "exact_806150_frequency_probe": {
+    "tested_native_frequency_mhz": 806.15,
+    "physical_window_mhz": [
+      806,
+      806.254
+    ],
+    "source_and_reference_samples_each": 300,
+    "tested_IF_indices": [
+      0,
+      1
+    ],
+    "method": "Unmodified signed source-minus-reference normalized sideband score on the fixed zero-drift frequency path; this is NOT the max across all 672 search paths",
+    "July_IF0": {
+      "source_on_fixed_path": 416.83469832353643,
+      "reference_fixed_path": 434.25324810625915,
+      "residual": -17.41854978272272,
+      "abs_score_reduction_fraction": 0.958211,
+      "weak_injection_increment_positive": 32,
+      "weak_injections": 32,
+      "weak_full_search_localized": 0,
+      "strong_injection_increment_positive": 32,
+      "strong_injections": 32,
+      "strong_full_search_localized": 0,
+      "weak_median_fixed_path_increment": 1.5856902484515274,
+      "strong_median_fixed_path_increment": 9.400144428540528
+    },
+    "July_IF1": {
+      "source_on_fixed_path": 671.0048465341259,
+      "reference_fixed_path": 411.4819705412513,
+      "residual": 259.5228759928746,
+      "abs_score_reduction_fraction": 0.613237,
+      "weak_injection_increment_positive": 32,
+      "weak_injections": 32,
+      "weak_full_search_localized": 32,
+      "strong_injection_increment_positive": 32,
+      "strong_injections": 32,
+      "strong_full_search_localized": 32
+    },
+    "September_IF0": {
+      "source_on_fixed_path": -0.3660597102390122,
+      "reference_fixed_path": 0.27847497275693395,
+      "residual": -0.6445346829959462,
+      "weak_full_search_localized": 1,
+      "strong_full_search_localized": 32,
+      "each_positive_class_cases": 32
+    },
+    "cannot_use_peak_as_confirmed_rfi_origin": true,
+    "cannot_claim_true_sky_weak_signal_preservation": true,
+    "physical_pol_mapping_unverified": true,
+    "conclusion": "Fixed-path shared-line magnitude is strongly reduced on July IF0, but full blind search failed to localize even strong ON-only overlays injected exactly atop the shared line; this violates the scientific preservation requirement."
+  },
+  "external_instrument_evidence": {
+    "independent_documents": [
+      {
+        "name": "BL 3I/ATLAS data overview",
+        "url": "https://seti.berkeley.edu/atlas/",
+        "what_it_verifies": "July full pol, September descriptive total intensity, publicly indexed data; does NOT certify exact IF order or TCS pointing"
+      },
+      {
+        "name": "UCBerkeleySETI rawspec documentation",
+        "url": "https://github.com/UCBerkeleySETI/rawspec",
+        "what_it_verifies": "-p 1, 4, -4 processing modes; does not reveal the producing invocation used for these four specific files"
+      }
+    ],
+    "direct_ATNF_CSIRO_witness_request_sent_2026_11_23": true,
+    "direct_Berkeley_SETI_rawspec_witness_request_sent_2026_11_23": true,
+    "prior_ATNFDATSUP_1670": "Only acknowledgement for a separate five-sky-direction archive coverage inquiry; not TCS proof for 3I/ATLAS.",
+    "true_receiver_processing_commands_received": false,
+    "authoritative_IF_to_Stokes_mapping_received": false,
+    "per_scan_encoder_TCS_logs_received": false,
+    "original_806MHz_environment_monitor_logs_received": false,
+    "awaiting_independent_response": true
+  },
+  "decision": {
+    "engineering_scoring": "PASS",
+    "independent_instrument_evidence": "PENDING_EXTERNAL",
+    "strong_positive_guard": "FAIL",
+    "weak_signal_sensitivity_gain": "ZERO",
+    "July_controls_5pct": "FAIL",
+    "threshold_change_allowed": false,
+    "October_holdout_open_allowed": false,
+    "no_automatic_frequency_veto": true,
+    "no_production_changes": true,
+    "science_gate": "HOLD",
+    "next": "Independent rawspec command line and IF order plus per-scan TCS/RFI logs; then preregister signal-protective candidate with off-target collision controls on additional truly independent observing cadence and prospective blinded validation. Do NOT optimize the model on July/September and call October untouched."
+  }
+}
