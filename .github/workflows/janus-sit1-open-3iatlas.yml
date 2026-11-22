@@ -1,0 +1,107 @@
+name: JANUS SIT1-OPEN - Real GBT 3I ATLAS ON-OFF
+on:
+  push:
+    branches:
+      - research/janus-sit1-open-3iatlas-gbt-x-20261122
+    paths:
+      - 'research/seti/janus_sit1_open_3iatlas.py'
+      - 'research/seti/janus_sit1_open_protocol.json'
+      - 'research/seti/test_janus_sit1_open_3iatlas.py'
+      - 'research/seti/janus_sit1_open_result.json'
+      - '.github/workflows/janus-sit1-open-3iatlas.yml'
+  pull_request:
+    paths:
+      - 'research/seti/janus_sit1_open_3iatlas.py'
+      - 'research/seti/janus_sit1_open_protocol.json'
+      - 'research/seti/test_janus_sit1_open_3iatlas.py'
+      - 'research/seti/janus_sit1_open_result.json'
+      - '.github/workflows/janus-sit1-open-3iatlas.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  public-real-onoff-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 23
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - name: Checkout current COSMOS research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout frozen TACHYON mirror code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install reader and original frozen COSMOS runtime
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 scikit-learn==1.6.1 scipy==1.15.3 requests==2.32.3
+      - name: Prove source/model pins and validate pre-registered URLs
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r42a8_ood_stress.py)" = "4f11b407e5271a058c38b3186c9f5c8192130655"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m json.tool research/seti/janus_sit1_open_protocol.json > /dev/null
+          python -m py_compile research/seti/janus_sit1_open_3iatlas.py
+          python - <<'PY'
+          import json
+          p=json.load(open("research/seti/janus_sit1_open_protocol.json"))
+          files=p["immutable_real_archive"]["scans"]
+          assert len(files)==6
+          assert [x["number"] for x in files]==["0061","0062","0063","0064","0065","0066"]
+          assert [x["role"] for x in files]==["ON","OFF","ON","OFF","ON","OFF"]
+          assert all(x["path"].endswith(".rawspec.0002.h5") for x in files)
+          assert p["frozen_algorithms"]["native_COSMOS_source_blob_sha"]=="4f11b407e5271a058c38b3186c9f5c8192130655"
+          assert p["gates"]["full_R28_R42_production_sensitivity_tested"] is False
+          print("SIT1_OPEN_OFFICIAL_GBT_HDF5_CADENCE_LOCKED")
+          PY
+      - name: Run SIT1 offline adapter and chain controls
+        run: |
+          python -m unittest discover -s research/seti -p 'test_janus_sit1_open_3iatlas.py' -v
+      - name: Acquire actual six GBT HDF5 files and evaluate frozen 3-arm model
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit1_open_3iatlas.py --audit
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("runtime/sit1_open/sit1_open_receipt.json").read_text())
+          assert len(r["downloads"])==6
+          assert r["production_models_modified"] is False
+          assert r["actual_pointing_independently_authenticated"] is False
+          if not r["status"].startswith("REAL_GBT_3IATLAS"):
+              print("SIT1_OPEN_DATA_QUALIFICATION_HOLD",r["errors"])
+          else:
+              assert r["replayed_real_files"]==6
+              assert r["real_panels_count"]==24
+              assert r["same_native_physical_freq_grid_across_six"]
+              a=r["paired_arms"]["COSMOS_PLUS_TACHYON_MIRROR_REPLAY"]
+              b=r["paired_arms"]["COSMOS_PLUS_STRONG_DIRECT_PROVENANCE"]
+              assert a==b
+              assert a["intact_accepted"]==24 and a["corrupted_rejected"]==144
+              assert r["production_decisions_changed"]==0
+              print("SIT1_OPEN_REAL_GBT_ONOFF_READONLY_COMPUTED__FULL_SCIENTIFIC_HOLD")
+          PY
+      - name: Upload evidence-only receiver headers, hashes, candidate paths and receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit1-open-gbt-3iatlas-real-hdf5-receipt
+          path: runtime/sit1_open/sit1_open_receipt.json
+          if-no-files-found: warn
+          retention-days: 90
