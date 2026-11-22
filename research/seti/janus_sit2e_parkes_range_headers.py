@@ -160,12 +160,32 @@ def probe_date(spec):
                 sizeprobe.append({**x,"bytes":size})
             except Exception as e:report["range_probe_errors"].append({"name":x["filename"],"stage":"HEAD","error":str(e)[:150]})
         report["sampled_head_sizes"]=sizeprobe
-        # 0-length and 7624-byte placeholders were observed in Sep;
-        # don't count them as genuine spectra. Prefer valid files >1MB.
+        # Exclude archive's small partial/placeholder data products:
+        # a five-minute 64k-channel 2-kHz 4-IF full cadence is ~250-307 MB.
+        # Select the FIRST temporally ADJACENT complete Source/Reference
+        # rather than unrelated 49-second and later 300-second scans.
+        full=[x for x in sizeprobe if x["bytes"]>=200_000_000]
+        def clock(x):
+            m=re.search(r"guppi_(\\d{5})_(\\d{5})_",x["filename"])
+            return (int(m[1]),int(m[2])) if m else None
+        pairs=[]
+        for sr in full:
+            if sr["role"]!="SOURCE_NAME_ONLY":continue
+            for rr in full:
+                if rr["role"]!="REFERENCE_NAME_ONLY":continue
+                a,b=clock(sr),clock(rr)
+                if a and b and a[0]==b[0] and 280<=b[1]-a[1]<=440:
+                    pairs.append((a[1],sr,rr,b[1]-a[1]))
+        pairs.sort(key=lambda p:p[0])
+        if pairs:
+            _,src,ref,gap=pairs[0]
+            selected={"SOURCE_NAME_ONLY":src,"REFERENCE_NAME_ONLY":ref}
+            report["selected_source_to_reference_start_gap_seconds"]=gap
+        else:
+            selected={}
         for role,key in (("SOURCE_NAME_ONLY","source"),("REFERENCE_NAME_ONLY","reference")):
-            possible=[x for x in sizeprobe if x["role"]==role and x["bytes"]>1_000_000]
-            if not possible:continue
-            candidate=min(possible,key=lambda x:x["bytes"])
+            candidate=selected.get(role)
+            if candidate is None:continue
             try:
                 if mode=="SIGPROC_FIL":
                     meta=bytes_range_header(candidate["url"])
@@ -174,6 +194,11 @@ def probe_date(spec):
                 else:
                     physical=hdf5_remote_header(candidate["url"])
                     meta={"total_source_file_sha256":None,"full_file_downloaded":False}
+                if mode=="SIGPROC_FIL":
+                    each=int(physical["nchans"])*int(physical["nifs"])*(int(physical["nbits"])//8)
+                    physical["inferred_time_rows"]=(candidate["bytes"]-physical["header_bytes"])//each
+                else:
+                    physical["inferred_time_rows"]=physical["data_shape"][0]
                 report[key]={**candidate,"physical":physical,**meta,
                              "role_measured_telemetry":False}
                 report["physical_headers_read"]+=1
@@ -186,7 +211,11 @@ def probe_date(spec):
         b=report["reference"]["physical"]["frequency_range_mhz"]
         overlap=max(a[0],b[0])<min(a[1],b[1])
         report["ON_OFF_same_backend_physical_frequency_overlap"]=overlap
-        report["status"]="PAIR_HEADER_RANGE_PASS__FULL_BYTES_AND_INDEPENDENT_POINTING_HOLD" if overlap else "HOLD_SAME_BACKEND_PHYSICAL_FREQUENCY_OVERLAP"
+        complete=all(250<=z["physical"]["inferred_time_rows"]<=330 for z in
+                     (report["source"],report["reference"]))
+        report["both_role_scans_full_five_minutes"]=complete
+        report["status"]=("PAIR_HEADER_RANGE_PASS__FULL_BYTES_AND_INDEPENDENT_POINTING_HOLD"
+                           if overlap and complete else "HOLD_INCOMPLETE_OR_MISMATCHED_5_MIN_CADENCE")
     else:
         report["status"]="HOLD_NO_VALID_TWO_ROLE_PHYSICAL_HEADER_PAIR"
     return report
