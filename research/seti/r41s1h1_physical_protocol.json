@@ -1,0 +1,38 @@
+{
+  "schema": "janus.cosmos.r41s1h1.physical.profile.v1",
+  "scope": "Synthetic only, independent new seeds, no historical training or threshold selection, never alter production or decisions. Parent lane only; Joint Min NOISE untouched.",
+  "physical_model": "Channel integrated Gaussian with width in Hz convolved with channel response and integration smearing, drift Hz/s and acceleration Hz/s², time-dependent amplitudes; compare narrow repeat ON with OFF, broad, instrumental stationary, coherent shared and transient rival. Fit nuisance/template parameters on alternating time blocks, test on held blocks. Noise estimates from shoulders; compare robust loss. Synthetic model misspecification stress with Lorentzian, correlated noise and intermittent signals.",
+  "split": {
+    "development_seeds": [
+      413701,
+      413702
+    ],
+    "heldout_seeds": [
+      413791,
+      413792,
+      413793
+    ],
+    "examples_per_class_per_seed": 48
+  },
+  "classes": [
+    "target_narrow",
+    "target_weak",
+    "target_intermittent",
+    "shared_narrow",
+    "broad_rfi",
+    "stationary_off",
+    "noise",
+    "shifted_rival"
+  ],
+  "threshold": "No operating threshold, summarize held-out AUC by independent seed and subgroup. No historical 38-tail evaluation used for selection. Compare simpler H-style fixed Gaussian score. Hold natural validation until independent observed data.",
+  "gates": {
+    "historical_target": [
+      318,
+      69,
+      35
+    ],
+    "external_validation": false,
+    "production_adoption": false,
+    "decision_changes": 0
+  }
+}

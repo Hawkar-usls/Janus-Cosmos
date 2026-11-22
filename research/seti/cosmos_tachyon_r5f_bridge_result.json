@@ -1,0 +1,137 @@
+{
+  "schema": "janus.cosmos.tachyon_r5f_mirror_provenance_result.v1",
+  "artifact_id": "JANUS-COSMOS-TACHYON-R5F-MIRRORED-PROVENANCE-2026-11-22",
+  "as_of": "2026-11-22",
+  "status": "ENGINEERING_NATIVE_MODEL_REUSE_AND_MIRROR_PROVENANCE_PASS__NO_GAIN_OVER_STRONG_PROVENANCE__SCIENTIFIC_HOLD",
+  "source_repo": "Hawkar-usls/Janus-Cosmos",
+  "research_branch": "research/cosmos-tachyon-r5f-mirror-provenance-20261122",
+  "pull_request": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/65",
+  "successful_ci": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45045928726",
+  "ci_artifact": {
+    "id": 14763811009,
+    "name": "cosmos-tachyon-r5f-mirror-frozen-provenance",
+    "digest": "sha256:eeda29086227fd63eb5e7bda2a7222c73db4bf28e251a2a4fffe3b8324e26dc6"
+  },
+  "protocol": "research/seti/cosmos_tachyon_r5f_bridge_protocol.json",
+  "implementation": "research/seti/cosmos_tachyon_r5f_bridge.py",
+  "tests": "research/seti/test_cosmos_tachyon_r5f_bridge.py",
+  "tests_pass": 22,
+  "source_pins": {
+    "cosmos_R42A8_script_blob": "4f11b407e5271a058c38b3186c9f5c8192130655",
+    "cosmos_model_R42A7A_frozen_lock_sha256": "bb00bb9bff24cd3997a581291cd440794efdc1f8794ef62963badb31eff9056e",
+    "tachyon_demihead_commit": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+    "tachyon_mirror_git_blob": "819936767bdf637adc2d9e24cc26176e060e8bfd",
+    "tachyon_budget_operations": 500
+  },
+  "experiment": {
+    "source": "Native COSMOS R42A8A simulated spectra (NOT real telescope/sky measurements)",
+    "rows": 1024,
+    "synthetic_injected_positive": 512,
+    "synthetic_null_control": 512,
+    "regime_count": 2,
+    "spectrogram_shape": [
+      16,
+      128
+    ],
+    "seed": 420826,
+    "original_candidate_path_search": "r42a8_ood_stress.blind_line_candidate",
+    "original_shadow_frozen_score": "r42a7_shadow_rfi.features plus authenticated R42A7 model lock",
+    "mirror_source": "Pinned R5F mirror_case/mirrored_exact/mirrored_replay",
+    "mirror_semantics": "Computational provenance graph A spectrum -> B candidate path -> C frozen score transposed to C -> B -> A, then forward replay; not telescope physics or time reversal.",
+    "metadata_overlay": {
+      "equal_per_category": 128,
+      "categories": [
+        "INTACT",
+        "BAD_RAW_DIGEST",
+        "BAD_PATH_DIGEST",
+        "BAD_SCORE_DIGEST",
+        "BAD_MODEL_LOCK",
+        "MISSING_RAW_DIGEST",
+        "INCOMPLETE_PREDECESSOR_INDEX",
+        "GHOST_REVERSE_PREDECESSOR"
+      ],
+      "original_spectral_values_mutated": false,
+      "original_candidate_paths_mutated": false,
+      "original_shadow_scores_mutated": false,
+      "no_label_access_during_decision": true,
+      "prevalence_artificial": true
+    }
+  },
+  "results": {
+    "A_COSMOS_ONLY_NO_PROVENANCE": {
+      "intact_accepted": 128,
+      "corrupt_accepted": 896,
+      "corrupt_rejected": 0,
+      "postprocess_seconds_single_worker": 0.001,
+      "mean_counted_graph_operations": 0
+    },
+    "B_TACHYON_MIRROR_GRAPH_ONLY": {
+      "intact_accepted": 128,
+      "corrupt_accepted": 896,
+      "corrupt_rejected": 0,
+      "postprocess_seconds_single_worker": 0.0195,
+      "mean_counted_graph_operations": 2
+    },
+    "C_TACHYON_MIRROR_FORWARD_REPLAY": {
+      "intact_accepted": 128,
+      "corrupt_accepted": 0,
+      "corrupt_rejected": 896,
+      "postprocess_seconds_single_worker": 0.0271,
+      "mean_counted_graph_operations": 3.875
+    },
+    "D_STRONG_DIRECT_PROVENANCE": {
+      "intact_accepted": 128,
+      "corrupt_accepted": 0,
+      "corrupt_rejected": 896,
+      "postprocess_seconds_single_worker": 0.0111,
+      "mean_counted_graph_operations": 0.25
+    },
+    "E_ALWAYS_ABSTAIN": {
+      "intact_accepted": 0,
+      "corrupt_accepted": 0,
+      "corrupt_rejected": 896,
+      "postprocess_seconds_single_worker": 0.0007,
+      "mean_counted_graph_operations": 0
+    },
+    "native_model_AUC_by_regime": [
+      {
+        "regime": "new_colored_noise_01",
+        "frozen_shadow_auc": 0.7122802734375,
+        "ridge_baseline_auc": 0.5998687744140625
+      },
+      {
+        "regime": "new_impulse_and_comb_02",
+        "frozen_shadow_auc": 0.71795654296875,
+        "ridge_baseline_auc": 0.601470947265625
+      }
+    ],
+    "native_model_pipeline_seconds_including_authenticated_artifact_fetch": 1.5401,
+    "unchanged_candidate_path_array_sha256": "9d9ae2fea717e714b87b8f91cbcc02b3be6fbb41c769d7d02b116234d8990501",
+    "unchanged_score_array_sha256": "381a2d0d3e2e65cd808a00c6acf7350bdde35cdef21b3ec099f664110531197d",
+    "record_manifest_sha256": "ea7e8261819768c98c2238a88601a835ded314dcee0a194ccf89d0a48a8d2f05",
+    "gain_in_integrity_detection_vs_no_metadata_check": true,
+    "gain_vs_equally_informed_strong_direct_provenance": false,
+    "additional_cost_relative_strong": true,
+    "all_injected_corrupt_records_detected": true,
+    "all_intact_records_retained": true
+  },
+  "epistemic_limits": {
+    "external_custodian": false,
+    "real_telescope_spectra": false,
+    "authenticated_independent_ON_OFF": false,
+    "full_cosmos_detector_rerun": false,
+    "historical_318_localizations_69_weak_currently_retested": false,
+    "actual_new_signal_detections": false,
+    "actual_false_alarms_reduced": 0,
+    "actual_protected_signals_lost": 0,
+    "interpret_zero_losses": "No production decisions altered; not proof of protection on real events",
+    "scientific_improvement_over_standards": false,
+    "physical_time_reversal": false,
+    "retrocausality_measured": false,
+    "model_weights_updated": false,
+    "production_integration": false,
+    "scientific_gate": "HOLD_UNTIL_SAME_INFORMATION_PROSPECTIVE_INDEPENDENT_REAL_SPECTRA"
+  },
+  "interpretation_ru": "Связка реально повторно использует исходные функции COSMOS R42A8A/R42A7A и закреплённый зеркальный алгоритм DemiHead. На 1024 синтетических спектрограммах 128 искусственно целых метаданных сохранены и 896 искусственно повреждённых/неполных отклонены. Графовый R5F без проверки сам по себе не выявил повреждения. Сильная прямая проверка показала абсолютно те же решения и потребовала меньше времени на данном CI-runner, поэтому прирост над сильным сравнительным алгоритмом не обнаружен. Полная радиоастрономическая чувствительность и подлинность сигналов не испытаны.",
+  "next": "Fresh sealed independent native telescope ON/OFF with authenticated pointing/timestamps, tested as nonveto review provenance sidecar against strong direct source audit. Preserve frozen sensitivity and zero paired losses before any adoption."
+}

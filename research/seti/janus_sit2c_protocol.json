@@ -1,0 +1,142 @@
+{
+  "schema": "janus.cosmos.sit2c.crossband_real_gbt_rfi_aware_protocol.v1",
+  "id": "JANUS-SIT2C-20261122",
+  "status": "FROZEN_BEFORE_FIRST_SIT2C_CI",
+  "dedication": "JANUS SIT research tribute to Stephen Hawking; algorithmic reverse traversal does not reverse physical time.",
+  "goal": "Prospectively test whether fixed, non-learned RFI-aware coherent path statistics discriminate artificial weak drifting signals from controlled interference more effectively than strongest matched same-information baselines at a development-frozen false-control budget.",
+  "inputs": {
+    "archive": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "date_utc": "2025-12-18",
+    "source": "GBT 3I/ATLAS",
+    "development": "Previously used 0061 ON / 0062 OFF, X-band blc20, strictly threshold calibration only (NOT fresh heldout)",
+    "evaluation": "New untouched by SIT2B analysis L-band six-scan cadence 0013–0018, blc21 lowest spectral resolution; one DIFFERENT receiver/cadence, SAME telescope/date/target: not fully independent sky sessions",
+    "dev_files": [
+      {
+        "scan": "0061",
+        "role": "ON",
+        "filename": "blc20_guppi_61027_31308_DIAG_3I_ATLAS_0061.rawspec.0002.h5"
+      },
+      {
+        "scan": "0062",
+        "role": "OFF",
+        "filename": "blc20_guppi_61027_31626_DIAG_3I_ATLAS_OFF_0062.rawspec.0002.h5"
+      }
+    ],
+    "heldout_files": [
+      {
+        "scan": "0013",
+        "role": "ON",
+        "filename": "blc21_guppi_61027_17226_DIAG_3I_ATLAS_0013.rawspec.0002.h5"
+      },
+      {
+        "scan": "0014",
+        "role": "OFF",
+        "filename": "blc21_guppi_61027_17543_DIAG_3I_ATLAS_OFF_0014.rawspec.0002.h5"
+      },
+      {
+        "scan": "0015",
+        "role": "ON",
+        "filename": "blc21_guppi_61027_17861_DIAG_3I_ATLAS_0015.rawspec.0002.h5"
+      },
+      {
+        "scan": "0016",
+        "role": "OFF",
+        "filename": "blc21_guppi_61027_18179_DIAG_3I_ATLAS_OFF_0016.rawspec.0002.h5"
+      },
+      {
+        "scan": "0017",
+        "role": "ON",
+        "filename": "blc21_guppi_61027_18497_DIAG_3I_ATLAS_0017.rawspec.0002.h5"
+      },
+      {
+        "scan": "0018",
+        "role": "OFF",
+        "filename": "blc21_guppi_61027_18814_DIAG_3I_ATLAS_OFF_0018.rawspec.0002.h5"
+      }
+    ],
+    "original_x_sha_lock": "research/seti/janus_sit1_open_result.json:runtime_inputs.hdf5_files, exact SHA256 on dev X files",
+    "new_l_sha_policy": "First-seen SHA256 from real public downloaded bytes; on repeated run demand identical SHA256. No published independent source hash claimed.",
+    "source_modules": [
+      "research/seti/janus_sit1_open_3iatlas.py real HDF5 loader and 16×128 deterministic reduction",
+      "research/seti/janus_sit2b_temporal_recovery.py 672 full linear track hypotheses and original SIT2B injection scheme"
+    ],
+    "main_data_scope": "Four preregistered nonoverlapping 128-bin chunks per scan, 16 aggregated time bins, authentic measured background; added weak/strong labels are synthetic, not sky observations",
+    "pointing": "Archive nominal ON/OFF metadata only, not independent antenna TCS; real ON/OFF pattern insufficient as true ETI truth"
+  },
+  "dataset": {
+    "seed": 2026112204,
+    "repetitions_per_real_panel": 4,
+    "classes": [
+      "UNINJECTED_REAL_BACKGROUND",
+      "ARTIFICIAL_RFI_COMB_BURSTS",
+      "ARTIFICIAL_WEAK_DRIFT",
+      "ARTIFICIAL_STRONG_DRIFT"
+    ],
+    "development_real_panels": 8,
+    "heldout_real_panels": 24,
+    "development_cases": 128,
+    "heldout_cases": 384,
+    "heldout_weak": 96,
+    "heldout_strong": 96,
+    "heldout_controls": 192,
+    "signal_weak_amplitude_row_MAD": [
+      1.2,
+      2
+    ],
+    "signal_strong_amplitude_row_MAD": [
+      8,
+      11
+    ],
+    "slopes_bins_per_16_time_frame": [
+      -1,
+      -0.5,
+      0,
+      0.5,
+      1
+    ],
+    "selection_bright_path_truth_invisible_to_algorithms": true,
+    "no_holdout_labels_for_fitting": true,
+    "seed_frozen_before_run": true
+  },
+  "equal_information_methods": {
+    "hypotheses": 672,
+    "time_steps": 16,
+    "sideband_offsets": [
+      -3,
+      3
+    ],
+    "A_NATIVE_COSMOS_RIDGE": "Original R42A8A blind_line_candidate and frozen path ridge, no fit",
+    "B_STRONG_DIRECT_SIDEBAND": "All 672 temporal paths, robust row-MAD center minus two symmetric sidebands",
+    "C_STRONG_DIRECT_OFF_AWARE": "Exact B plus frozen 0.35× time-median OFF nuisance occupancy penalty along path; same physical OFF measurements available to RFI-aware arm",
+    "D_RFI_AWARE_DIRECT": "All 672 paths; per row z=center minus symmetric sidebands; score=median(z)+0.25*mean(clip(z,0,5))-0.30*mean(z<0.2)-0.15*max(std(z)-2,0)-0.35*mean(clip(off_ref_at_path-1.5,0,10)). Optimize all paths, fixed no learning.",
+    "E_TACHYON_REVERSE_RFI_AWARE": "Exactly same D objective and 672 candidate paths/identical OFF mask; process rows in reverse order, use pinned R5F mirror causal provenance C→B→A and independent forward score/bytes replay. Gain over D must be measured, not assumed.",
+    "strongest_matched_control": "max(B,C) on heldout recall subject to false-control budget, NOT combine per-example oracle."
+  },
+  "OFF_reference": {
+    "source": "Time-median z values from three untouched, original nominal-OFF scans in SAME receiver and cadence, computed per fixed 128-bin window; source is NOT injection labels and reference is not independently authenticated pointing.",
+    "computed_before_any_synthetic_overlay": true,
+    "both_RFI_aware_and_strong_OFF_matched_get_identical_reference": true,
+    "unlabeled_test_covariates_allowed_no_test_labels_or_thresholds": true,
+    "no_borrowed_frequency_grid_across_L_vs_X": true
+  },
+  "decision_gate": {
+    "threshold": "Separate arm's 95th percentile of X dev NO-injection or artificial-RFI negatives only, method='higher'; freeze before L band eval. No L threshold adaptation, no checkpoint fitting.",
+    "positive": "In injected weak/strong rows, path within ±2 channel bins in >=12/16 time steps AND arm score strictly above dev-only threshold",
+    "negative": "No artificial weak/strong overlay; count any above-threshold score on each L eval control as synthetic challenge false positive; these controls can contain genuine unknown sky/RFI signals.",
+    "qualified_strong": "At least 87/96 strong injected detections; at most 9/192 synthetic controls above threshold; otherwise no scientific sensitivity gain claim",
+    "incremental_RFI_aware_gain": "At least 10 additional heldout weak injections detected over best qualified B/C full-bank matched filter without more synthetic control exceedances, with strong-positive gate PASS. Never promote on a single dependent L-band cadence.",
+    "incremental_TACHYON_specific_gain": "At least 10 more heldout weak than identical objective D at equal reference/score information and no more controls; expected 0 for graph-only reverse replay.",
+    "single_L_cadence_sample_dependence": true,
+    "no_standalone_significance_claim": true
+  },
+  "safety": {
+    "no_veto_on_production": true,
+    "no_training_on_L": true,
+    "no_manual_threshold_tuning_after_L": true,
+    "no_true_RFI_labels": true,
+    "no_external_heldout_custodian": true,
+    "no_physical_time_reversal": true,
+    "no_technosignature_discovery_claim": true,
+    "science_status": "RFI_AWARE_CROSS_BAND_PILOT_ONLY__INDEPENDENT_OBSERVATION_AND_HIGH_RESOLUTION_HOLD"
+  }
+}

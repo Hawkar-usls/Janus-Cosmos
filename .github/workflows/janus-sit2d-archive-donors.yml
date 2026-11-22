@@ -1,0 +1,102 @@
+name: JANUS SIT2D - Archived Physical Morphology Donor on New Real GBT Receiver
+on:
+  push:
+    branches:
+      - research/janus-sit2d-archive-donor-morphology-20261122
+    paths:
+      - '.github/workflows/janus-sit2d-archive-donors.yml'
+      - 'research/seti/janus_sit2d_archive_donors.py'
+      - 'research/seti/janus_sit2d_archive_donors_protocol.json'
+      - 'research/seti/test_janus_sit2d_archive_donors.py'
+      - 'research/seti/r41s1h1_physical_profile.py'
+      - 'research/seti/r41s1h1_physical_protocol.json'
+      - 'research/seti/janus_sit2d_archive_donors_result.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  exact-physical-donor-vs-strong-four-role:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PYTHONUNBUFFERED: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - name: Checkout current JANUS COSMOS research
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout original TACHYON R5F mirror
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned HDF5 filters and original scipy physics scorer
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.2.6 scipy==1.15.3 h5py==3.13.0 hdf5plugin==5.1.0 scikit-learn==1.6.1 requests==2.32.3
+      - name: Enforce byte-exact historical donor and untouched native model inputs
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r41s1h1_physical_profile.py)" = "43683dee60433ea2612bb1a433d8e7afc9704494"
+          test "$(git hash-object research/seti/r41s1h1_physical_protocol.json)" = "f05c58e83c4aa053bae4a37ea24db5be5ad597c8"
+          test "$(git hash-object research/seti/janus_sit1_open_3iatlas.py)" = "0c03eef6ff489a517308f9f1e16de801ea84dfcb"
+          test "$(git hash-object research/seti/r42a8_ood_stress.py)" = "4f11b407e5271a058c38b3186c9f5c8192130655"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m json.tool research/seti/janus_sit2d_archive_donors_protocol.json > /dev/null
+          python -m py_compile research/seti/janus_sit2d_archive_donors.py
+          python - <<'PY'
+          import json
+          p=json.load(open('research/seti/janus_sit2d_archive_donors_protocol.json'))
+          sit1=json.load(open('research/seti/janus_sit1_open_result.json'))
+          assert len(p['real_radio']['dev_files'])==len(p['real_radio']['evaluation_files'])==6
+          assert all(x['filename'].startswith('blc22') for x in p['real_radio']['evaluation_files'])
+          assert len(sit1['runtime_inputs']['hdf5_files'])==6
+          assert p['study']['evaluation_cases']==144
+          print('SIT2D_ARCHIVED_H1_DONOR_BLOB_SHA1_AND_NEW_RECEIVER_PREREG_LOCK_PASS')
+          PY
+      - name: Run source and independence guards
+        run: |
+          python -m unittest discover -s research/seti -p 'test_janus_sit2d_archive_donors.py' -v
+      - name: Download original twelve public HDF5 files and test exact H1 physical morphology
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit2d_archive_donors.py --audit
+          test -s runtime/sit2d/result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/sit2d/result.json').read_text())
+          assert r['production_modified'] is False
+          assert r['physical_retrocausality'] is False
+          if not r.get('matched_four_role_methods'):
+              print('SIT2D_SOURCE_OR_FORMAT_HOLD='+json.dumps(r['errors'],ensure_ascii=False))
+          else:
+              assert r['dataset']['dev_cases']==r['dataset']['eval_cases']==144
+              assert r['dataset']['eval_weak']==36 and r['dataset']['eval_strong']==36
+              assert r['dataset']['eval_controls']==72
+              assert r['real_gbt_sha256_dev_matches_prior_sit1'] is True
+              assert r['comparisons']['tachyon_extra_weak_over_identical_donor_direct']==0
+              for k,v in r['matched_four_role_methods'].items():
+                  print('SIT2D_DONOR_ARM_'+k+'='+json.dumps(v,sort_keys=True))
+              print('SIT2D_DONOR_COMPARISON='+json.dumps(r['comparisons'],sort_keys=True))
+              print('SIT2D_HISTORICAL_H1_EXACT_DONOR_REAL_GBT_PILOT_COMPLETE__SCIENCE_HOLD')
+          PY
+      - name: Preserve exact real source SHA256 and fully paired donor receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit2d-r41h1-real-gbt-new-receiver-receipt
+          path: runtime/sit2d/result.json
+          if-no-files-found: warn
+          retention-days: 90

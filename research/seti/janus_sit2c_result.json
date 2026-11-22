@@ -1,0 +1,258 @@
+{
+  "schema": "janus.cosmos.sit2c.real_crossband_rfi_aware_result.v1",
+  "id": "JANUS-SIT2C-GBT-X-TO-L-RFI-AWARE-2026-11-22",
+  "as_of": "2026-11-22",
+  "status": "REAL_GBT_CROSSBAND_ENGINEERING_PASS__STRONG_POSITIVES_AND_SYNTHETIC_CONTROL_GATE_PASS__WEAK_DETECTION_GAIN_ZERO__SCIENCE_HOLD",
+  "context": "Follow SIT2B positive-control and matched-filter failure; new RFI-aware score on independent receiver cadence, not independent day/telescope",
+  "source": {
+    "repo": "Hawkar-usls/Janus-Cosmos",
+    "branch": "research/janus-sit2c-crossband-rfi-20261122",
+    "pr": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/70",
+    "first_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45054138752",
+    "first_run_artifact_id": 14767050348,
+    "first_run_artifact_zip_sha256": "dc727e563f67b0ec609ccd2e4676bd3f0678744506161b84abf84305e85742e3",
+    "first_run_source_receipt_json": "GitHub Actions artifact janus-sit2c-prospective-gbt-x-to-l-rfi-receipt/sit2c_result.json",
+    "frozen_protocol": "research/seti/janus_sit2c_protocol.json",
+    "script": "research/seti/janus_sit2c_crossband_rfi.py",
+    "test_script": "research/seti/test_janus_sit2c_crossband_rfi.py",
+    "tests_pass": 18,
+    "official_public_data": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "real_scans": [
+      {
+        "split": "X_DEV",
+        "scan": "0061",
+        "role": "ON",
+        "file": "blc20_guppi_61027_31308_DIAG_3I_ATLAS_0061.rawspec.0002.h5",
+        "first_seen_sha256": "689295b24b39c3902016d71e3665927251f847666d0e8b7c371f1b9fce534720",
+        "bytes": 52401843,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 12376.46484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "X_DEV",
+        "scan": "0062",
+        "role": "OFF",
+        "file": "blc20_guppi_61027_31626_DIAG_3I_ATLAS_OFF_0062.rawspec.0002.h5",
+        "first_seen_sha256": "492ee7ceae9f83482a83c2704a9cf9b86a7f0d243bed726d054143dcadef2d6b",
+        "bytes": 52369263,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 12376.46484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0013",
+        "role": "ON",
+        "file": "blc21_guppi_61027_17226_DIAG_3I_ATLAS_0013.rawspec.0002.h5",
+        "first_seen_sha256": "04d52bdca1b6870f25af01531bd0ec96cbef65196bf6711da3a42bbcc637eec5",
+        "bytes": 51731342,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0014",
+        "role": "OFF",
+        "file": "blc21_guppi_61027_17543_DIAG_3I_ATLAS_OFF_0014.rawspec.0002.h5",
+        "first_seen_sha256": "cf5969af38d6842c5f20ffbd6e73b41b5acd34c4a80e46ce58933249b3aef7bf",
+        "bytes": 51657023,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0015",
+        "role": "ON",
+        "file": "blc21_guppi_61027_17861_DIAG_3I_ATLAS_0015.rawspec.0002.h5",
+        "first_seen_sha256": "e6d0daa795f1889263363521fdcda9848393424981b304e14bcff9268b568a6f",
+        "bytes": 51512781,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0016",
+        "role": "OFF",
+        "file": "blc21_guppi_61027_18179_DIAG_3I_ATLAS_OFF_0016.rawspec.0002.h5",
+        "first_seen_sha256": "946447065fe97665f783cc7794a4caf2cc8d462413e03b052272b1f05da49931",
+        "bytes": 51573911,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0017",
+        "role": "ON",
+        "file": "blc21_guppi_61027_18497_DIAG_3I_ATLAS_0017.rawspec.0002.h5",
+        "first_seen_sha256": "6e2a72c8d0b00032324939fb36ca6643567dfb5f8c977e92baf73c96b581a73d",
+        "bytes": 51532802,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      },
+      {
+        "split": "L_EVAL",
+        "scan": "0018",
+        "role": "OFF",
+        "file": "blc21_guppi_61027_18814_DIAG_3I_ATLAS_OFF_0018.rawspec.0002.h5",
+        "first_seen_sha256": "16102729b13bb4059f450aa7478413aa5a89e9068af5fcc9f82f03f5e16d44de",
+        "bytes": 51527890,
+        "hdf5_shape": [
+          279,
+          1,
+          65536
+        ],
+        "fch1_mhz": 2063.96484375,
+        "foff_mhz": -0.00286102294921875,
+        "tsamp_sec": 1.073741823999999
+      }
+    ],
+    "L_sha256_external_published_provenance": false,
+    "original_X_SHA256_matched_archived_SIT1": true,
+    "new_L_SHA256_first_seen_only": true,
+    "verified_time_frequency_axes": true,
+    "physical_antenna_tracking_independent_witness": false
+  },
+  "design": {
+    "development_receiver": "GBT X, blc20 0061/0062 (previously seen); thresholds fixed on 64 artificial negative development cases",
+    "prospective_receiver": "GBT L, blc21 0013–0018, different band and interleaved cadence but same telescope/day/target",
+    "strong_independent_dates": false,
+    "total_cases": 512,
+    "dev_cases": 128,
+    "heldout_cases": 384,
+    "eval_weak_injections": 96,
+    "eval_strong_injections": 96,
+    "eval_artificial_controls": 192,
+    "real_background_panels": 32,
+    "real_L_background_panels": 24,
+    "score_hypotheses_per_case": 672,
+    "time_samples_per_path": 16,
+    "injected_lines_and_RFI_are_synthetic": true,
+    "same_physical_observations_shared_with_baselines": true,
+    "same_OFF_reference_given_to_matched_OFF_control_and_RFI_AWARE": true,
+    "no_labels_given_to_scorers": true,
+    "no_test_threshold_tuning": true,
+    "decision_gate": "strong >=87/96 and controls <=9/192; new RFI score >=10 extra weak detections over best direct MF with equal control exceedances; TACHYON must gain over identical-objective direct to qualify specific incremental gain"
+  },
+  "results": {
+    "measured_arms": {
+      "A_NATIVE_COSMOS_RIDGE": {
+        "X_dev_only_threshold_p95": 4.5018978483242735,
+        "L_eval_weak_path_localized": 82,
+        "L_eval_strong_path_localized": 96,
+        "L_eval_weak_detected": 0,
+        "L_eval_strong_detected": 96,
+        "L_eval_artificial_control_exceedances": 0,
+        "positive_and_control_gate_pass": true
+      },
+      "B_STRONG_DIRECT_SIDEBAND": {
+        "X_dev_only_threshold_p95": 4.433870152767726,
+        "L_eval_weak_path_localized": 96,
+        "L_eval_strong_path_localized": 96,
+        "L_eval_weak_detected": 0,
+        "L_eval_strong_detected": 96,
+        "L_eval_artificial_control_exceedances": 0,
+        "positive_and_control_gate_pass": true
+      },
+      "C_STRONG_DIRECT_OFF_AWARE": {
+        "X_dev_only_threshold_p95": 3.587379110829156,
+        "L_eval_weak_path_localized": 96,
+        "L_eval_strong_path_localized": 96,
+        "L_eval_weak_detected": 0,
+        "L_eval_strong_detected": 96,
+        "L_eval_artificial_control_exceedances": 0,
+        "positive_and_control_gate_pass": true
+      },
+      "D_RFI_AWARE_DIRECT": {
+        "X_dev_only_threshold_p95": 4.674877792252681,
+        "L_eval_weak_path_localized": 96,
+        "L_eval_strong_path_localized": 96,
+        "L_eval_weak_detected": 0,
+        "L_eval_strong_detected": 96,
+        "L_eval_artificial_control_exceedances": 0,
+        "positive_and_control_gate_pass": true
+      },
+      "E_TACHYON_REVERSE_RFI_AWARE": {
+        "X_dev_only_threshold_p95": 4.674877792252681,
+        "L_eval_weak_path_localized": 96,
+        "L_eval_strong_path_localized": 96,
+        "L_eval_weak_detected": 0,
+        "L_eval_strong_detected": 96,
+        "L_eval_artificial_control_exceedances": 0,
+        "positive_and_control_gate_pass": true
+      }
+    },
+    "primary_result": "Native weak paths 82/96 vs 96/96 by all complete MF including RFI; native and MF strong positives 96/96; NO thresholded weak detections 0/96 in all arms, NO controls above threshold 0/192 in all arms",
+    "RFI_aware_extra_weak_detected_over_best_strong_direct": 0,
+    "TACHYON_extra_weak_detected_over_identical_RFI_direct": 0,
+    "no_gain_over_identical_strong_comparator": true,
+    "rfi_aware_candidate_qualification": false,
+    "real_radio_false_alarm_reduction": null,
+    "real_sky_signal_sensitivity_gain": null,
+    "source_sha_manifest_sha256": "849f29e73bba1c02d784797ba785a16c6470008bbcc06972dceb1829d6bef4a1",
+    "score_and_label_receipt_sha256": "faeda368abf4fe2b67f8b1cc504141e4123d00ff5ad2643005c1dc235724ee0c",
+    "exploratory_wall_seconds": {
+      "native": 1.78533,
+      "strong_direct_sideband": 0.14967,
+      "strong_direct_offaware": 0.15487,
+      "new_RFI_aware_direct": 0.30467,
+      "TACHYON_reverse_RFI_aware": 0.34475,
+      "extra_R5F_trace": 0.03292
+    },
+    "R5F_provenance_graph_operations": 2048,
+    "cost_caveat": "single CI-run wall timings exploratory; direct MF and reverse used same 672×16 score bank, R5F incurs extra cost"
+  },
+  "interpretation_ru": "На 6 новых настоящих L-диапазонных спектрограммах GBT (3 номинальных ON, 3 OFF), с порогами, зафиксированными по прежним X-сканам, новая RFI-aware оценка точно локализовала 96/96 искусственно слабых линий против 82/96 у исходного COSMOS. Но обычный сильный прямой matched filter и обычный OFF-aware matched filter также локализовали 96/96. Все методы обнаружили 96/96 искусственных сильных сигналов и допустили 0/192 контрольных превышений порога, однако ни одна слабая линия не была признана обнаружением при исходном X пороге (0/96). Обратный TACHYON полностью совпал с прямым RFI-aware на всех 384 экзаменационных задачах и оказался вычислительно дороже; специфического улучшения чувствительности нет.",
+  "scientific_gate": {
+    "not_an_external_independent_telescope_or_day": true,
+    "unconfirmed_original_antenna_actual_pointing": true,
+    "artificial_weak_signals_not_real_extraterrestrial_signals": true,
+    "uncalibrated_OOD_cross_receiver_conditions": true,
+    "no_truth_labels_for_natural_RFI": true,
+    "no_published_provider_SHA_for_new_L": true,
+    "all_production_weights_or_thresholds_unchanged": true,
+    "no_physical_retrocausality": true,
+    "status": "ENGINEERING_PASS__SENSITIVITY_GAIN_AND_TRUE_RFI_FPR_SCIENTIFIC_HOLD"
+  },
+  "next": "On externally different date/telescope and higher-native spectral resolution, freeze robust detection statistic that produces thresholded weak positives without excess controls, compare matched direct and reverse under equal budgets. No tuning to L heldout results. Consider separately reporting partial path localization, never call it detection."
+}

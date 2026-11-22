@@ -1,0 +1,75 @@
+{
+  "schema": "janus.cosmos.sit2.weak_injection_recovery_rfi_on_real_gbt_background.v1",
+  "id": "JANUS-SIT2-GBT-3IATLAS-WEAK-RECOVERY-2026-11-22",
+  "date": "2026-11-22",
+  "status": "PREREGISTERED_BEFORE_FIRST_SIT2_EXECUTION",
+  "dedication": "Continuation of JANUS SIT1 Stephen Hawking research tribute; mathematical backward evidence tracing is not physical backward time.",
+  "hypothesis": "At equal input and equal frozen detector score, a TACHYON R5F mirror+replay provenance sidecar alone does not add discriminative observations. Test explicitly whether it improves rescue of synthetic weak drifting lines implanted in authentic GBT data, against direct provenance replay and native COSMOS.",
+  "data": {
+    "source": "2025-12-18 public GBT 3I/ATLAS X-band one nominal ABACAD cadence, 0061 through 0066",
+    "official": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "parent_result": "research/seti/janus_sit1_open_result.json",
+    "parent_git_ref": "research/cosmos-tachyon-r5f-mirror-provenance-20261122",
+    "file_sha256_reproducibility": "All six first-seen sha256 checked twice in SIT1; MUST verify downloaded file sha256 exactly matches frozen parent-result values before use.",
+    "real_original_panels": "Six GBT rawspec.0002 HDF5 subband scans → four preregistered 16×128 measured time-frequency windows each, 24 true radio background panels",
+    "independent_observational_groups": 1,
+    "physical_pointing_truth": "UNVERIFIED, nominal ON/OFF archive labels only",
+    "original_resolution_limit_hz": 2861.02294921875,
+    "no_raw_native_full_band": true
+  },
+  "benchmark": {
+    "base_panels": 24,
+    "repetitions_per_panel": 4,
+    "classes": [
+      "BASE_REAL_BACKGROUND_NO_INJECTION",
+      "WEAK_ARTIFICIAL_DRIFT_INJECTION",
+      "ARTIFICIAL_BROAD_RFI_CONTROL"
+    ],
+    "total_controlled_cases": 288,
+    "positive_cases": 96,
+    "negative_cases": 192,
+    "independent_injections": false,
+    "seed": 2026112202,
+    "development_scans": [
+      "0061",
+      "0062"
+    ],
+    "evaluation_scans": [
+      "0063",
+      "0064",
+      "0065",
+      "0066"
+    ],
+    "development_cases": 96,
+    "evaluation_cases": 192,
+    "positive_generator": "Add to real 16×128 background a weak sloped (fixed slope grid) line with amplitude 0.8–1.5 × per-row robust MAD; source-continuity path start 30..96, slope −1.0,−0.5,0,0.5,1.0; no truth supplied to algorithms.",
+    "rfi_generator": "Add to real background a 6–12-bin-separated frequency comb with vertical lines and a few broadband impulse time rows, 1–2.5 × per-row robust MAD; does not represent instrument-authenticated RFI.",
+    "control_real_background": "Real background may contain unknown RFI, cannot label no injection as absence of physical signal.",
+    "frozen_model": "Native R42A8A blind_line_candidate and original R42A7A frozen shadow score; no fitting on SIT2",
+    "threshold_selection": "Only first ON/OFF development pair 0061,0062. Threshold selected from negative developer examples to target empirical <=5% injected-control false positive rate per scoring statistic, and never adjusted using 0063–0066 heldout cases.",
+    "multiple_testing": "Only two declared statistics: native ridge score and frozen shadow score; do not choose favorable after evaluation",
+    "path_localization_truth": "For injected positives, ≥12/16 candidate path time steps within ±2 original panel channel bins of known injected path (truth used after outputs only).",
+    "true_positive_for_declared_statistic": "Score above frozen threshold AND path localized. Controls have no injected target; any above-threshold score is a simulated challenge false positive, not genuine astrophysical false alarm.",
+    "TACHYON_role": "Replay fixed candidate provenance on every case with pinned 500-op mirror graph and unchanged frozen native path/score. No additional raw signal, no label or truth, no target location in graph.",
+    "matched_strong_direct": "Recompute frozen native path/score and source/input/SHA checks without mirror on exact same cases.",
+    "fair_cost": "Log wall time separately for native detector, mirrored replay, exact direct verification. No model training, no switching thresholds, no production modifications.",
+    "no_ground_truth_leak": "Injected path and category never passed to native detector, mirror graph or strong direct verifier; only evaluator accesses them after predictions."
+  },
+  "primary_metrics": [
+    "Paired heldout weak line localization and recovered under score cutoff, by native ridge and frozen scorer",
+    "Simulated control false positive rate on real background and engineered RFI controls (not astrophysical FPR)",
+    "Recall gain of mirror sidecar over native COSMOS at same score and same physical data, and matched direct gain",
+    "Number of genuinely rescued original detector misses with supported raw remeasurement",
+    "Full scorer + forward/reverse time and counted operations on heldout",
+    "Parity of all source hashes, input panel hashes, scores/paths and detector decisions",
+    "Negative metrics and uncertainty with scan-level paired dependence, no pseudo-independent claims"
+  ],
+  "gates": {
+    "engineering_pass": "Six authentic files SHA-match frozen SIT1; all 288 cases use real readouts + transparent injected perturbations, 192 heldout cases compared with no target-label leak, all mirrored and direct replay verified, no model weights or actual source changes.",
+    "scientific_claim": "Cannot establish improved real ETI sensitivity, RFI specificity, telescope localization or false alarms without independent labeled original observations and pointing.",
+    "promotion_allowed": false,
+    "retrocausality_claim": false,
+    "expected_sidecar_incremental_sensitivity_gain": "NONE unless TACHYON actually changes candidate selection and passes strong control, which the frozen R5F provenance-only code does not do.",
+    "external_custodian": false
+  }
+}

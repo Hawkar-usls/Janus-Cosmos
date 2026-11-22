@@ -1,0 +1,115 @@
+{
+  "schema": "janus.cosmos.sit1_open.3iatlas_gbt_xband_protocol.v1",
+  "id": "JANUS-SIT1-OPEN-3IATLAS-GBT-X-2026-11-22",
+  "created_date_utc": "2026-11-22",
+  "name": "JANUS SIT1-OPEN · Stephen Hawking Dedication",
+  "dedication": "Independent research tribute to Stephen Hawking's studies of physical time asymmetry and causality; does not imply his endorsement.",
+  "preregistration": "FILE_IDENTITIES_AND_ANALYSIS_LOCKED_BEFORE_FIRST_CI",
+  "immutable_real_archive": {
+    "official_overview": "https://seti.berkeley.edu/atlas/",
+    "public_index": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+    "published_paper": "https://doi.org/10.3847/2515-5172/ae3083",
+    "date_utc": "2025-12-18",
+    "telescope": "Robert C. Byrd Green Bank Telescope",
+    "receiver": "X band",
+    "selected_compute_slice": "blc20 coarse subband, HDF5 rawspec.0002 lowest spectral resolution product (~50 MB each), not full 1-12 GHz nor full-resolution search",
+    "cadence": "ABACAD, six 5-minute 3I/ATLAS/3I_ATLAS_OFF scans, all same one cadence",
+    "paired_scan_groups": 1,
+    "scans": [
+      {
+        "number": "0061",
+        "role": "ON",
+        "path": "blc20_guppi_61027_31308_DIAG_3I_ATLAS_0061.rawspec.0002.h5"
+      },
+      {
+        "number": "0062",
+        "role": "OFF",
+        "path": "blc20_guppi_61027_31626_DIAG_3I_ATLAS_OFF_0062.rawspec.0002.h5"
+      },
+      {
+        "number": "0063",
+        "role": "ON",
+        "path": "blc20_guppi_61027_31945_DIAG_3I_ATLAS_0063.rawspec.0002.h5"
+      },
+      {
+        "number": "0064",
+        "role": "OFF",
+        "path": "blc20_guppi_61027_32266_DIAG_3I_ATLAS_OFF_0064.rawspec.0002.h5"
+      },
+      {
+        "number": "0065",
+        "role": "ON",
+        "path": "blc20_guppi_61027_32588_DIAG_3I_ATLAS_0065.rawspec.0002.h5"
+      },
+      {
+        "number": "0066",
+        "role": "OFF",
+        "path": "blc20_guppi_61027_32906_DIAG_3I_ATLAS_OFF_0066.rawspec.0002.h5"
+      }
+    ],
+    "source_sha256": "TO_BE_COMPUTED_FROM_ACTUAL_BYTES_IN_CI__DO_NOT_INVENT",
+    "pointing": "Scan target labels and HDF5 header coordinates are not independently authenticated antenna/ephemeris truth.",
+    "actual_external_verification": "Neither TCS/Antenna FITS logs nor independent custodian included in this open data pilot",
+    "independence_warning": "Six scans belong to a single interleaved cadence, not six independent observational challenges"
+  },
+  "numerical_adapter": {
+    "expected_hdf5_dataset": "data",
+    "genuine_time_frequency_matrices": true,
+    "fixed_time_bins": 16,
+    "fixed_frequency_bins": 128,
+    "four_relative_windows": [
+      "0.20",
+      "0.40",
+      "0.60",
+      "0.80"
+    ],
+    "frequency_policy": "Select 128 contiguous original frequency channels at each fixed fractional index; do NOT fake extra frequency resolution or frequencies from filenames",
+    "time_policy": "Aggregate genuine time rows into 16 equal consecutive groups by numpy array_split, averaging finite measured power (no inpainting); reject insufficient time rows",
+    "astronomical_limitation": "This deterministic coarse and sparse slice is not full-band sensitivity or a validated deployment transformation",
+    "require_source_header_fields": [
+      "tstart",
+      "tsamp",
+      "fch1",
+      "foff"
+    ],
+    "require_overlapping_freq_grid_for_onoff": true,
+    "missing_or_misaligned_data": "Fail closed and HOLD, no interpolation between different physical frequencies"
+  },
+  "frozen_algorithms": {
+    "source_research_branch": "research/cosmos-tachyon-r5f-mirror-provenance-20261122",
+    "native_COSMOS": "research/seti/r42a8_ood_stress.py::blind_line_candidate; r42a7_shadow_rfi.py::features",
+    "native_COSMOS_source_blob_sha": "4f11b407e5271a058c38b3186c9f5c8192130655",
+    "frozen_R42A7A_model": "r42a8_ood_stress.py::frozen_model locked by checked-in artifact SHA and no retraining",
+    "tachyon_research_repo": "Hawkar-usls/Demi_Head",
+    "tachyon_pin": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+    "tachyon": "tools/tachyon_r5f_stock_mirror_audit.py::mirror_case/mirrored_replay, graph budget=500",
+    "direct_strong_baseline": "Independent exact SHA and forward score recomputation using frozen original functions and inputs",
+    "research_scope": "OOD diagnostic: frozen classifier trained on synthetic 16x128 panels. Application to genuine GBT data is unvalidated OOD exploratory research, not scientifically calibrated detection."
+  },
+  "paired_design": {
+    "windows_per_scan": 4,
+    "total_windows_if_all_scans": 24,
+    "matched_onoff_windows": 12,
+    "algorithms": [
+      "COSMOS_NATIVE_FROZEN",
+      "COSMOS_PLUS_TACHYON_MIRROR_REPLAY",
+      "COSMOS_PLUS_STRONG_DIRECT_PROVENANCE"
+    ],
+    "no_unfair_observations": "All three arms have identical 24 real 16x128 panels; only extra provenance sidecar metadata differs.",
+    "modified_detection_decisions_allowed": 0,
+    "source_integrity_challenges": "Once 24 real windows computed, create intact and deliberately corrupted metadata manifests; no measured radio values changed.",
+    "simulated_corruption_note": "Corrupted provenance controls are simulated, their rejection is not astronomical false-alarm reduction.",
+    "calibration": "Do not assume OFF has no RFI or ON contains ETI. Without confirmed truth labels, AUROC/recall, genuine false-alarm reduction and weak signal preservation are undefined.",
+    "detected_output_scope": "Native algorithm computes exploratory paths and frozen scores only; no thresholded real science detections, no per-file FITS pointing truth",
+    "inference_gain_test": "Sidecar compared to exact direct provenance baseline for any incremental safety/cost; any claimed gain must exceed strong comparator."
+  },
+  "gates": {
+    "engineering_source_pass": "Six exact verified files fetched, SHA256 recorded for each, HDF5 data/header time/frequency extracted, ON/OFF grid matched, native algorithms and pinned TACHYON actually invoked, JSON receipt + heldout control",
+    "partial_failure": "Record per-file HTTP/timeout/header/shape error, emit HOLD without synthetic replacement",
+    "science_status": "SIT1_OPEN_REAL_ONOFF_TIMESERIES_PILOT_ONLY__INDEPENDENT_POINTING_AND_FULL_NATIVE_DETECTION_HOLD",
+    "real_ETI_claim": false,
+    "retrocausality_claim": false,
+    "original_models_modified": false,
+    "full_R28_R42_production_sensitivity_tested": false
+  }
+}

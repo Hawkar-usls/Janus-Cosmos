@@ -1,0 +1,288 @@
+{
+  "schema": "janus.cosmos.sit1_open.3iatlas_gbt_x_real_hdf5_result.v1",
+  "artifact_id": "JANUS-SIT1-OPEN-3IATLAS-GBT-X-2026-11-22",
+  "date": "2026-11-22",
+  "status": "REAL_GBT_HDF5_6_OF_6_AND_FROZEN_COSMOS_TACHYON_ENGINEERING_PASS__SCIENCE_HOLD",
+  "dedication": "JANUS Stephen Hawking time-asymmetry research tribute, not endorsement or evidence of physical reversed time.",
+  "repo": "Hawkar-usls/Janus-Cosmos",
+  "branch": "research/janus-sit1-open-3iatlas-gbt-x-20261122",
+  "pull_request": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/67",
+  "first_reliable_real_data_ci": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45049114006",
+  "real_results_hash_logged_ci": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45049255742",
+  "real_results_artifact": {
+    "id": 14765260010,
+    "name": "janus-sit1-open-gbt-3iatlas-real-hdf5-receipt",
+    "zip_sha256": "ec8bad91a3ea15d36679984682b08b7ec9393741978ee8f7d4222f156107098e"
+  },
+  "official_source": "https://bldata.berkeley.edu/ATLAS/GB_ATLAS/",
+  "official_metadata": "https://seti.berkeley.edu/atlas/",
+  "source_telescope": "GBT (Green Bank Telescope), four-receiver published observation, selected X receiver blc20 coarse subband",
+  "source_date_utc": "2025-12-18",
+  "cadence": {
+    "scan_sequence": [
+      "0061 ON",
+      "0062 OFF",
+      "0063 ON",
+      "0064 OFF",
+      "0065 ON",
+      "0066 OFF"
+    ],
+    "independent_observing_cadences": 1,
+    "nominal_scans": 6,
+    "independent_antenna_pointing_certificates": 0
+  },
+  "experimental_protocol": "research/seti/janus_sit1_open_protocol.json",
+  "implementation": "research/seti/janus_sit1_open_3iatlas.py",
+  "tests": "research/seti/test_janus_sit1_open_3iatlas.py",
+  "tests_pass": 15,
+  "runtime_inputs": {
+    "source_files_downloaded_and_decompressed": 6,
+    "hdf5_files": [
+      {
+        "bytes": 52401843,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "689295b24b39c3902016d71e3665927251f847666d0e8b7c371f1b9fce534720",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_31308_DIAG_3I_ATLAS_0061.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 6.7498000000000005,
+          "src_raj": 10.836826666666667,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.36236111111
+        },
+        "role": "ON",
+        "scan": "0061"
+      },
+      {
+        "bytes": 52369263,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "492ee7ceae9f83482a83c2704a9cf9b86a7f0d243bed726d054143dcadef2d6b",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_31626_DIAG_3I_ATLAS_0062.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 7.6113,
+          "src_raj": 10.836106666666668,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.36604166667
+        },
+        "role": "OFF",
+        "scan": "0062"
+      },
+      {
+        "bytes": 52414938,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "c71a7ea8259b57c9886f094c1a0d18c37fb81dcc2d65808251501a9b92462588",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_31945_DIAG_3I_ATLAS_0063.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 6.7966,
+          "src_raj": 10.836393333333334,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.369733796295
+        },
+        "role": "ON",
+        "scan": "0063"
+      },
+      {
+        "bytes": 52421865,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "0f513447ba0031c510545a86617d93953bc9e98b84fbe0b20682a15863ea3026",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_32266_DIAG_3I_ATLAS_0064.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 6.7901,
+          "src_raj": 10.901060000000001,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.373449074075
+        },
+        "role": "OFF",
+        "scan": "0064"
+      },
+      {
+        "bytes": 52407811,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "9e674c2e28295bba9bdd43a613d48d6884e81b435e470a75488496838a7a6867",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_32588_DIAG_3I_ATLAS_0065.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 6.731,
+          "src_raj": 10.857013333333333,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.377175925925
+        },
+        "role": "ON",
+        "scan": "0065"
+      },
+      {
+        "bytes": 52413955,
+        "data_shape": [
+          279,
+          1,
+          65536
+        ],
+        "first_seen_sha256": "1b8988be200242fb465ccc97dc0b6dc52d0403cb1af39777821c74a5a55d4c3b",
+        "header": {
+          "fch1": 12376.46484375,
+          "foff": -0.00286102294921875,
+          "machine_id": 20,
+          "nbits": 32,
+          "nchans": 65536,
+          "nifs": 1,
+          "rawdatafile": "guppi_61027_32906_DIAG_3I_ATLAS_0066.0000.raw",
+          "source_name": "DIAG_3I_ATLAS",
+          "src_dej": 6.2074,
+          "src_raj": 10.835633333333334,
+          "telescope_id": 6,
+          "tsamp": 1.073741823999999,
+          "tstart": 61027.38085648148
+        },
+        "role": "OFF",
+        "scan": "0066"
+      }
+    ],
+    "provider_published_sha256_independently_checked": false,
+    "sha_status": "SOURCE_BYTES_HASHED_ON_FIRST_GITHUB_ACTIONS_DOWNLOAD, NOT EXTERNAL_PROVIDER_MD5/SHA CERTIFICATION",
+    "hdf5_data_shape_all_scans": [
+      279,
+      1,
+      65536
+    ],
+    "tsamp_seconds": 1.073741823999999,
+    "frequency_bin_spacing_mhz": -0.00286102294921875,
+    "fixed_measured_panels_per_scan": 4,
+    "real_16x128_time_frequency_panels": 24,
+    "native_physical_frequency_grids_aligned": true,
+    "source_name_header_warning": "Even OFF files report source_name DIAG_3I_ATLAS; OFF is identified by filename and distinct archived RA/Dec headers, not independent antenna position telemetry.",
+    "sample_dependency_warning": "24 panels derive from 6 dependent scans of just one observing cadence, not 24 independent sky targets.",
+    "raw_data_scope": "These are instrument-derived rawspec.0002 HDF5 (low spectral resolution) time-frequency data, NOT raw-voltage baseband nor full L/S/C/X telescope recordings.",
+    "spectral_adapter": "Four pre-fixed 128-contiguous-channel windows at 20/40/60/80% frequency indices and mean of measured time rows into 16 bins; no generated or inpainted radio samples."
+  },
+  "algorithms": {
+    "native_cosmos": "Pinned R42A8A blind_line_candidate and R42A7A shadow features, frozen R42A7A model lock from Actions, no training",
+    "tachyon": "Pinned DemiHead R5F 500 operation mirror_case and mirrored_replay plus forward provenance recomputation",
+    "strong_baseline": "Direct authoritative SHA and frozen original path/score recomputation on identical real panels and metadata",
+    "weights_changed": false,
+    "production_detector_or_threshold_changed": false,
+    "scientific_caveat": "Frozen R42A7A classifier was trained on synthetic 16x128 data; output on real HDF5 is OOD exploration, not a validated astrophysical classifier or calibrated technosignature probability."
+  },
+  "paired_metadata_integrity_test": {
+    "total_trial_manifests": 168,
+    "intact_real_panel_chains": 24,
+    "synthetic_manifest_corruptions": 144,
+    "actual_corrupt_observatory_data_samples": 0,
+    "results": {
+      "COSMOS_NATIVE_FROZEN": {
+        "cases": 168,
+        "corrupted_accepted": 144,
+        "corrupted_rejected": 0,
+        "intact_accepted": 24,
+        "intact_rejected": 0
+      },
+      "COSMOS_PLUS_STRONG_DIRECT_PROVENANCE": {
+        "cases": 168,
+        "corrupted_accepted": 0,
+        "corrupted_rejected": 144,
+        "intact_accepted": 24,
+        "intact_rejected": 0
+      },
+      "COSMOS_PLUS_TACHYON_MIRROR_REPLAY": {
+        "cases": 168,
+        "corrupted_accepted": 0,
+        "corrupted_rejected": 144,
+        "intact_accepted": 24,
+        "intact_rejected": 0
+      }
+    },
+    "COSMOS_plus_TACHYON_equals_STRONG_DIRECT": true,
+    "incremental_provenance_gain_over_strong_direct": false,
+    "historical_318_localizations_69_weak_replayed": false,
+    "real_false_alarm_change": null,
+    "true_signal_detection_sensitivity_gain": null,
+    "production_signal_loss_zero_by_no_mutation": true,
+    "reason_baseline_without_overlay_audit_accepts_corrupt": "The untouched COSMOS score is deliberately not a provenance verifier, so its acceptance of fabricated metadata cases is not an astrophysical false-alarm count."
+  },
+  "real_frozen_score_exploratory_distribution": {
+    "OFF": {
+      "max": -0.6925411798712673,
+      "median": -3.2092779471403405,
+      "min": -9.383542164968814,
+      "n": 12
+    },
+    "ON": {
+      "max": -0.7670588909848277,
+      "median": -7.604280001232255,
+      "min": -80.49288201299518,
+      "n": 12
+    }
+  },
+  "score_units": "Uncalibrated OOD frozen linear research score, not probabilities, not physical flux, not per-ON/OFF detection significance.",
+  "effect_of_ON_OFF_on_real_signal_science": "NOT ASSESSED: no independent source/pointing truth, no prospective positives, just same-frequency matched snapshots.",
+  "first_failed_attempt": {
+    "run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45048971584",
+    "reason": "The HDF5 files fetched successfully but BitShuffle/LZ4 HDF5 compression decoder was unavailable. Fixed by adding pinned hdf5plugin==5.1.0 and import registration; no source or algorithm modification."
+  },
+  "validation": {
+    "engineering_result": "PASS actual public source files and frozen research native inference",
+    "research_result": "SIT1_OPEN_PILOT_PARTIAL__NO_STRONG_BASELINE_GAIN",
+    "scientific_result": "HOLD independent pointing, native full resolution/ON-OFF qualified field challenge and blind external measurement",
+    "physical_time_reversal": false,
+    "retrocausal_information": false,
+    "technosignature_detection_claim": false
+  },
+  "next": "SIT1B: qualify actual Antenna FITS/ScanLog or independent on-source ephemerides, use fully original high-spectral-resolution 0000 10GB datasets or appropriate bandwidth with accurate ON/OFF, compare full native COSMOS detection and frozen TACHYON with equal cost and strong direct baseline, no signal suppression."
+}

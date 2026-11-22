@@ -1,0 +1,78 @@
+{
+  "schema": "janus.cosmos.sit2e.parkes_temporal_recurrence_candidate_selection_preregistration.v1",
+  "name": "JANUS SIT2E · Multi-Date Repeat-Coherence Before October Blind Test",
+  "created_utc": "2026-11-22",
+  "state": "METHOD_AND_PHYSICAL_SOURCE_MANIFEST_FROZEN__NUMERIC_THRESHOLDS_NOT_YET_FITTED__OCTOBER_UNOPENED",
+  "source_qualification": "research/seti/janus_sit2e_parkes_preflight_result.json",
+  "physical_selection": {
+    "bank": "blc00",
+    "range_mhz": [
+      704,
+      831.998
+    ],
+    "df_hz": 2000,
+    "tsamp_seconds": 1,
+    "source_per_date": 1,
+    "reference_per_date": 1,
+    "format": "2025-07-31 SIGPROC .fil, 2025-09-12/2025-10-05 HDF5",
+    "primary_cadence": "300s source plus 300s reference at each independent observing date",
+    "partitions": [
+      {
+        "date": "2025-07-31",
+        "role": "development",
+        "data_access": "radio power allowed only AFTER whole source integrity established",
+        "full_sha256": null
+      },
+      {
+        "date": "2025-09-12",
+        "role": "calibration",
+        "data_access": "radio power allowed only AFTER whole source integrity established",
+        "full_sha256": null
+      },
+      {
+        "date": "2025-10-05",
+        "role": "one-shot heldout",
+        "data_access": "FORBID RADIO POWER until calibration file hashes, baseline code, fixed thresholds and negative control rates are committed",
+        "full_sha256": null
+      }
+    ]
+  },
+  "method_lock": {
+    "A": "original untouched COSMOS 672 path-bank line candidate + original score",
+    "B": "full 672 path same-information forward matched filter with robust row normalization",
+    "C": "same-information matched filter with physical sideband control and true contemporaneous Source/Reference comparisons",
+    "D": "multi-date recurrence by time-aligned source/reference evidence from available dates, but NEVER use October power or labels for threshold fit and NEVER hard-veto intermittent genuine signals",
+    "E": "TACHYON R5F backwards computational provenance replay of exact same candidate inputs and score; strong exact direct replay is mandatory comparator",
+    "onoff_comparison": "Only compare genuinely matched physical frequency bins, separately each receiver/spectral segment, and before comparing source positions normalize date-specific RA/Dec header units/ephemeris",
+    "rfi_controls": "Synthetic injected comb+broad burst controls on real background only; these are NOT independently instrument-labeled real RFI",
+    "positive_controls": "Synthetic strong and weak drifting lines on identical real background; labels for evaluator only, no hidden truth for scorers",
+    "cross_date_repeat": "Synthetic persistent and intermittent source classes, equal to direct bank; moving 3I/ATLAS ephemeris Doppler correction must be verified independently before any real-sky alignment",
+    "threshold_selection_rule": "Empirical upper p95 on ONLY September calibration negative injection/no-injection controls, after development methods frozen on July. No evaluation peeking, no post hoc threshold relaxations.",
+    "numerical_thresholds": {
+      "COSMOS": null,
+      "full_direct_matched": null,
+      "source_reference_direct": null,
+      "repeat_coherent": null,
+      "tachyon_replay": null
+    },
+    "reason_numeric_thresholds_unset": "Only radio-power metadata has been read; cannot derive any numerical threshold without observing actual July/Sep calibration power. October remains blinded."
+  },
+  "pre_registered_success_gates": {
+    "strong_positive_control": ">=90% strong injected signals detected and localized at the fixed threshold",
+    "false_control_rate": "<=5% of calibration + heldout artificial no-injection / engineered-RFI controls, with group-aware reported confidence and no pseudo-independent counts",
+    "incremental_weak_vs_direct": "At least 5 additionally recovered heldout weak injected cases beyond strongest same-information direct matched filter, with no added control exceedances, no loss of paired strong positives; measured paired same input",
+    "tachyon_specific_benefit": "Above strong exact direct replay of identical candidate/path and verification task, not merely overhead",
+    "real_ETI_claim_allowed": false,
+    "real_observational_independence": "Only three observation dates of one moving target; no independent telescope pointing/effects lab confirmation",
+    "external_validation_required": true,
+    "production_model_updates_allowed": false
+  },
+  "blocking_facts": [
+    "Only selected headers/HTTP ranges verified, not all six whole-file SHA256 hashes. Archive did not publish an external checksum verified in this pilot.",
+    "Parkes historical metadata review R41S1G1 found no 64/64 exact .fil join or external real antenna pointing witness in prior separate historical group.",
+    "July .fil raw src_raj/src_dej sexagesimal-style vs later HDF5 decimal-style, must normalize and independently verify telescope tracking.",
+    "One source/reference pair per date and a moving target yield weak empirical false-positive precision and no physically verified persistent signal truth.",
+    "October radio array and injected truth remain unread; do not claim thresholded findings before calibration."
+  ],
+  "scientific_status": "SCIENCE_HOLD_UNTIL_INDEPENDENT_POINTING_AND_CROSS_DATE_REAL_INJECTION_COMPARISON"
+}

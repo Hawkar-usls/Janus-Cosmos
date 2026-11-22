@@ -1,0 +1,108 @@
+name: JANUS SIT2B - Real GBT Positive Controls and Temporal Recovery
+on:
+  push:
+    branches:
+      - research/janus-sit2b-positive-control-matched-filter-20261122
+    paths:
+      - 'research/seti/janus_sit2b_temporal_recovery.py'
+      - 'research/seti/janus_sit2b_protocol.json'
+      - 'research/seti/test_janus_sit2b_temporal_recovery.py'
+      - 'research/seti/janus_sit2b_result.json'
+      - '.github/workflows/janus-sit2b-temporal-recovery.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  real-background-strong-positive-and-matched-controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - name: Checkout frozen research COSMOS branch and SIT2B
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout pinned actual DemiHead TACHYON R5F
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 91ef855a6f7119a733990c8f3adeb478e79beb05
+          path: _tachyon
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install original COSMOS and real HDF5 native runtime
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 scikit-learn==1.6.1 scipy==1.15.3 requests==2.32.3
+      - name: Audit unmodified frozen research sources
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/seti/r42a8_ood_stress.py)" = "4f11b407e5271a058c38b3186c9f5c8192130655"
+          test "$(git hash-object research/seti/janus_sit1_open_3iatlas.py)" = "0c03eef6ff489a517308f9f1e16de801ea84dfcb"
+          test "$(git hash-object research/seti/janus_sit2_weak_rfi.py)" = "44f76e30b20a0bcda613a079eac3cc1cb70204c4"
+          test "$(git -C _tachyon rev-parse HEAD)" = "91ef855a6f7119a733990c8f3adeb478e79beb05"
+          test "$(git -C _tachyon hash-object tools/tachyon_r5f_stock_mirror_audit.py)" = "819936767bdf637adc2d9e24cc26176e060e8bfd"
+          python -m json.tool research/seti/janus_sit2b_protocol.json > /dev/null
+          python -m py_compile research/seti/janus_sit2b_temporal_recovery.py
+          python - <<'PY'
+          import json
+          p=json.load(open('research/seti/janus_sit2b_protocol.json'))
+          previous=json.load(open('research/seti/janus_sit1_open_result.json'))
+          assert p['preregistered_dataset']['rows_total']==384
+          assert p['preregistered_dataset']['evaluation_rows']==256
+          assert p['immutable_inputs']['real_frequency_resolution_hz']>2800
+          assert len(previous['runtime_inputs']['hdf5_files'])==6
+          assert p['physical_science_gate']['production_updates'] is False
+          print('SIT2B_FROZEN_672_PATHS_AND_SIX_REAL_SHA256_RECEIPTS_LOCKED')
+          PY
+      - name: Test source-isolated injections, pinned TACHYON graph replay and identical strong controls
+        run: |
+          python -m unittest discover -s research/seti -p 'test_janus_sit2b_temporal_recovery.py' -v
+      - name: Real GBT 3I-ATLAS original HDF5 plus 384 controlled sensitivity cases
+        run: |
+          set -euo pipefail
+          python research/seti/janus_sit2b_temporal_recovery.py --audit
+          test -s runtime/sit2b/sit2b_result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/sit2b/sit2b_result.json').read_text())
+          assert r['original_measurements_modified'] is False
+          assert r['production_model_or_threshold_modified'] is False
+          assert r['model_training'] is False
+          assert r['independent_sky_signal_truth'] is False
+          if not r.get('outcomes'):
+              print('SIT2B_SOURCE_HOLD',json.dumps(r['errors'],ensure_ascii=False))
+          else:
+              assert r['real_gbt_sources_hash_verified']
+              assert r['dataset']['cases']==384
+              assert r['dataset']['heldout_cases']==256
+              assert r['dataset']['weak_heldout']==64
+              assert r['dataset']['strong_heldout']==64
+              assert r['dataset']['controls_heldout']==128
+              assert r['score_predictions_independently_verified_all_cases']
+              assert r['paired_gains']['reverse_vs_strong_direct_same_objective_identical_weak_ids']
+              assert r['paired_gains']['reverse_extra_weak_vs_same_objective_strong_direct_sideband']==0
+              assert r['cost']['same_hypotheses_per_match_filter']==672
+              for arm,s in r['outcomes'].items():
+                  print('SIT2B_ARM='+arm+':'+json.dumps(s,sort_keys=True))
+              print('SIT2B_STRONG_POSITIVE_GUARD_ALL_ARMS='+str(r['paired_gains']['all_arms_positive_guards_pass']))
+              print('SIT2B_GAINS='+json.dumps(r['paired_gains'],sort_keys=True))
+              print('SIT2B_SCIENCE_HOLD__REAL_BACKGROUND_WITH_SYNTHETIC_INJECTIONS')
+          PY
+      - name: Preserve strict reproducible actual-source and comparison receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: janus-sit2b-real-gbt-strong-weak-matched-filter
+          path: runtime/sit2b/sit2b_result.json
+          if-no-files-found: warn
+          retention-days: 90
