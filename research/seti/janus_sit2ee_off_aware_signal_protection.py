@@ -20,6 +20,7 @@ sys.path.insert(0,str(ROOT/"research"/"seti"))
 import janus_sit2eb_power_calibration as b
 import janus_sit2ec_shift_diagnostics as c
 import janus_sit2eb_full_integrity as integrity
+import janus_sit2ed_polarization_806_witness as d
 
 OUT=ROOT/"runtime/sit2ee"
 DATES=("2025-07-31","2025-09-12")
@@ -183,6 +184,70 @@ def evaluate(rows):
     }
     return outcome,guard
 
+def exact_806150_channel_audit(cubes):
+    """Probe actual 806.150 MHz in all four archived files, IF0 and IF1.
+
+    Static 128-bin window 806.000–806.254 MHz extracted from genuine 300-row
+    spectra, no signal-dependent frequency selection. Fixed zero-drift path at
+    channel 75 = 806.150 MHz. No threshold fit, hard veto, or cosmic claim.
+    """
+    rows=[]
+    fixed_path=np.full(16,75,dtype=np.int32)
+    choices=np.where(np.all(PATHS==fixed_path[None,:],axis=1))[0]
+    if len(choices)!=1:raise AssertionError("FIXED_806150_PATH_NOT_IN_ORIGINAL_672_BANK")
+    idx=int(choices[0])
+    for date in DATES:
+        for iff in (0,1):
+            cube_src=cubes[(date,"source")]
+            cube_ref=cubes[(date,"reference")]
+            assert cube_src.shape==cube_ref.shape==(300,4,376)
+            # d.CSTART=51000 => 806.000 MHz and 806.150 is channel 75.
+            s=np.stack([x.mean(axis=0) for x in np.array_split(cube_src[:,iff,:128],16)]).astype(np.float32)
+            ref=np.stack([x.mean(axis=0) for x in np.array_split(cube_ref[:,iff,:128],16)]).astype(np.float32)
+            zs,_=b.robust_normalize(s)
+            zr=reference_profile(ref)
+            on=float(sideband_bank(zs)[idx])
+            off=float((zr[PATHS]-.5*(zr[PATHS-3]+zr[PATHS+3])).mean(axis=1)[idx])
+            contrast=on-off
+            best_path,best_val,aud=off_contrast(s,ref)
+            rng=np.random.default_rng(SEED+iff+(0 if date==DATES[0] else 100))
+            injection_diagnostics={}
+            for kind,strength in (("WEAK_ON_COLLISION",(1.2,2.0)),
+                                  ("STRONG_ON_COLLISION",(8.0,11.0))):
+                deltas=[]
+                selected=[]
+                for rep in range(32):
+                    augmented=overlay_path(s,fixed_path,rng,strength)
+                    zaug,_=b.robust_normalize(augmented)
+                    newer=float(sideband_bank(zaug)[idx])-off
+                    deltas.append(newer-contrast)
+                    pa,_,_=off_contrast(augmented,ref)
+                    selected.append(bool(b.localizes(pa,fixed_path)))
+                injection_diagnostics[kind]={
+                   "cases":32,
+                   "fixed_path_signal_increment_median":float(np.median(deltas)),
+                   "fixed_path_signal_increment_min":float(min(deltas)),
+                   "positive_increment_count":int(sum(x>0 for x in deltas)),
+                   "chosen_path_localized_count":int(sum(selected)),
+                   "ground_truth":"SYNTHETIC_ADDED_ON_ONLY",
+                   "pre_existing_common_line_not_an_on_target_detection":True
+                }
+            rows.append({
+                "date":date,"IF_index_not_certified_polarization":iff,
+                "frequency_mhz":806.150,
+                "window_mhz":[806.0,806.254],
+                "source_reference_fixed_path_on_sideband_score":on,
+                "reference_fixed_path_sideband_score":off,
+                "source_minus_reference_fixed_path_contrast_score":contrast,
+                "fixed_path_signed_magnitude_suppression":float(abs(on)-abs(contrast)),
+                "best_contrast_score_after_full_672_bank_search":float(best_val),
+                "best_contrast_selected_fixed_806150_path":bool(np.array_equal(best_path,fixed_path)),
+                "injections":injection_diagnostics,
+                "same_300s_source_and_reference_time_cadence":False,
+                "original_radio_power_verified_by_full_file_sha256":True
+            })
+    return rows
+
 def run():
     OUT.mkdir(parents=True,exist_ok=True)
     archive=OUT/"archive";archive.mkdir(exist_ok=True)
@@ -201,9 +266,10 @@ def run():
        "methods":list(METHODS),"test_classes":list(CATEGORIES),
        "seed":SEED,"replicates_per_parent":REPLICATES,
        "parent_groups_per_date":4,"synthetic_repeats_non_independent":True,
-       "files":[],"panel_hashes":[],"methods_outcomes":{},
+       "files":[],"panel_hashes":[],"exact_806150_test":[],"methods_outcomes":{},
        "protection_gates":{},"errors":[]}
     pairs={}
+    narrow_cubes={}
     try:
         with requests.Session() as sess:
             for date,role,spec in selected:
@@ -211,6 +277,8 @@ def run():
                 try:
                     p,receipt=c.download_verified(sess,date,role,spec,archive)
                     panels=b.read_panels(p,date,spec)
+                    cube,header=d.power_cube(p,date)
+                    narrow_cubes[(date,role)]=cube
                     pairs[(date,role)]=panels
                     record["files"].append(receipt)
                     record["panel_hashes"].extend([{
@@ -219,6 +287,7 @@ def run():
                     } for i,x in enumerate(panels)])
                 finally:
                     if p is not None:p.unlink(missing_ok=True)
+        record["exact_806150_test"]=exact_806150_channel_audit(narrow_cubes)
         rows=calc_cases(pairs)
         record["dataset_cases"]=len(rows)
         record["methods_outcomes"],record["protection_gates"]=evaluate(rows)
@@ -232,7 +301,7 @@ def run():
         digest=hashlib.sha256(output.read_bytes()).hexdigest()
         print("SIT2EE_RESULT",json.dumps({"status":record["status"],"errors":record["errors"],
             "files_verified":len(record["files"]),"cases":record.get("dataset_cases"),
-            "guard":record["protection_gates"],"report_sha256":digest,
+            "guard":record["protection_gates"],"exact_806150_test":record["exact_806150_test"],"report_sha256":digest,
             "methods_outcomes":record["methods_outcomes"]},sort_keys=True),flush=True)
     if record["errors"]:raise RuntimeError(record["errors"][0]["message"])
     return record
