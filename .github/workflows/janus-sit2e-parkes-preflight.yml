@@ -7,6 +7,8 @@ on:
       - 'research/seti/janus_sit2e_parkes_preflight_protocol.json'
       - 'research/seti/janus_sit2e_parkes_preflight.py'
       - 'research/seti/test_janus_sit2e_parkes_preflight.py'
+      - 'research/seti/janus_sit2e_parkes_range_headers.py'
+      - 'research/seti/test_janus_sit2e_parkes_range_headers.py'
       - '.github/workflows/janus-sit2e-parkes-preflight.yml'
   workflow_dispatch:
 permissions:
@@ -36,6 +38,7 @@ jobs:
           python -m json.tool research/seti/janus_sit2e_parkes_preflight_protocol.json > /dev/null
           python -m py_compile research/seti/janus_sit2e_parkes_preflight.py research/seti/janus_sit2e_parkes_range_headers.py
           python -m unittest discover -s research/seti -p 'test_janus_sit2e_parkes_preflight.py' -v
+          python -m unittest discover -s research/seti -p 'test_janus_sit2e_parkes_range_headers.py' -v
       - name: Discover exact official Parkes HDF5 names, HEAD sizes and available physical headers
         run: |
           python research/seti/janus_sit2e_parkes_preflight.py
