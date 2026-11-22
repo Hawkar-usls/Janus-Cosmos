@@ -1,0 +1,110 @@
+{
+  "schema": "janus.cosmos.sit0.hawking.real_spectral_replay_protocol.v1",
+  "name": "JANUS SIT0 — Hawking Dedication: Source-Invariant Trace & Observational Replay",
+  "short_name": "JANUS SIT0",
+  "dedication": {
+    "dedicatee": "Stephen Hawking (1942–2018)",
+    "note_ru": "Исследовательское посвящение Стивену Хокингу за исследования стрелы времени, физических следов и причинности; не является утверждением о его участии или одобрении.",
+    "physics_scope": "Physical observed past stays unchanged; only post-hoc computational evidence tracing goes C→B→A, then forwards A→B→C."
+  },
+  "date": "2026-11-22",
+  "status": "PROTOCOL_FROZEN_BEFORE_FIRST_SIT0_CI",
+  "purpose": "First real-observation-derived test of Janus Cosmos R37F3A native natural-line preservation processing combined with pinned TACHYON R5F stock-mirror provenance graph and forward replay. Research-only read-only sidecar.",
+  "source": {
+    "repo": "Hawkar-usls/Janus-Cosmos",
+    "base": "research/cosmos-tachyon-r5f-mirror-provenance-20261122",
+    "native_real_profile_loader": "research/seti/r37f3a_natural_preservation.py::fetch",
+    "native_real_rebin": "research/seti/r37f3a_natural_preservation.py::pinned_rebin",
+    "native_real_rebin_git_source": "research/seti/r37a_hannah_resolution.py",
+    "native_rebin_source_expected_sha": "e9010d9905a6100fecc719281d30581b74826d68",
+    "loader_source_blob_sha1": "81981449689832df674a6e09721be71d7eac904a",
+    "protocol_path": "research/seti/r37f3a_natural_preservation_protocol.json",
+    "parent_artifact_id": 14438355308,
+    "parent_artifact_run": 44326838227,
+    "parent_artifact_archive_sha256": "474037c955daa95dbf732f630a625b5069ce0893a89cb4477b0a6bd33765fe51",
+    "original_observations": "Two Breakthrough Listen observed 6.6685192 GHz methanol-maser lines with native 2.7939677 Hz filterbank source and 715.2557 Hz averaged real derived profiles.",
+    "physical_source_lineage": "R37F2D3 published-MD5-pinned raw filterbank download → archived real derived NPZ normalized profile → R37F3A previous source checksum and science checks. SIT0 does not redownload raw original .fil.",
+    "model_source": "R37A deterministic area-overlap rebin functions; NO R42A8A frozen shadow scorer, because 1D real native profile is not the validated input schema of the frozen 16×128 synthetic R42A8A learner",
+    "tachyon_repo": "Hawkar-usls/Demi_Head",
+    "tachyon_pin": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+    "tachyon_module": "tools/tachyon_r5f_stock_mirror_audit.py",
+    "tachyon_module_sha1": "819936767bdf637adc2d9e24cc26176e060e8bfd",
+    "tachyon_stock_budget_ops": 500
+  },
+  "observational_sample": {
+    "n_independent_source_fields": 2,
+    "physical_sources": [
+      {
+        "source": "W3OH",
+        "mjd_day": 57934,
+        "native_profile": "W3OH_science_profile.npz",
+        "natural_line_window_lsrk_km_s": [
+          -50,
+          -40
+        ]
+      },
+      {
+        "source": "G42.03+0.19",
+        "mjd_day": 57941,
+        "native_profile": "G42_03_0_19_science_profile.npz",
+        "natural_line_window_lsrk_km_s": [
+          6,
+          15
+        ]
+      }
+    ],
+    "transforms_per_source": 8,
+    "transform_settings": "Exactly the eight predetermined R37F3A factors/phases; no calibration parameter retuning.",
+    "n_real_source_derived_rebin_chains": 16,
+    "time_frequency_original_input_available_here": false,
+    "filtered_1d_profile_used": true,
+    "no_spatial_OFF": true,
+    "exact_input_frequency_reference_frame_not_confirmed": true,
+    "no_independent_holdout": true,
+    "natural_source_not_technosignature": true
+  },
+  "adversarial": {
+    "overlays": [
+      "INTACT",
+      "BAD_RAW_SHA",
+      "BAD_REBIN_SHA",
+      "BAD_METRIC_SHA",
+      "WRONG_SOURCE_ID",
+      "MISSING_SOURCE_ID",
+      "INCOMPLETE_REVERSE_INDEX",
+      "GHOST_REVERSE_EDGE"
+    ],
+    "overlays_per_chain": 8,
+    "real_data_derived_chains": 16,
+    "integrity_audit_requests": 128,
+    "genuine_independently_corrupted_observations": 0,
+    "all_nonintact_cases_are_simulated_metadata_tampering": true,
+    "label_leakage_rule": "Mutation type never given to inference functions or used by witness validation; only scorer uses overlay category after predictions.",
+    "guard": "Corruptions do not alter original archived spectrum, measured line, native rebin output, or any detection/observational source."
+  },
+  "computational_lineage": {
+    "A": "Authenticated real-derived spectral profile (SHA256 and original source/MJD)",
+    "B": "Native COSMOS R37A area-conserving rebin spectrum (SHA256, width factor/phase)",
+    "C": "COSMOS R37F3A measured feature profile and preservation/review verdict (SHA256)",
+    "reverse": "TACHYON R5F mirror_case, mirrored_replay C→B→A",
+    "forward": "Recompute original untouched COSMOS rebin and feature verdict and verify every SHA/provenance assertion",
+    "metric_note": "Even a native REVIEW verdict may have intact provenance; SIT0 must not silently filter its observations."
+  },
+  "arms": {
+    "COSMOS_NATIVE_WITHOUT_OVERLAY_AUDIT": "Native real-derived 16 real reductions are computed and unchanged; deliberately no checking of newly injected metadata.",
+    "TACHYON_MIRROR_GRAPH_ONLY": "Actual pinned DemiHead transposed DAG path check, no data/hash verification.",
+    "TACHYON_MIRROR_PLUS_FORWARD_REPLAY": "Pinned mirror DAG path + full source/artifact/digest verification and actual area-rebin + feature verdict recomputation.",
+    "STRONG_DIRECT_PROVENANCE_REPLAY": "Strong standalone exact provenance and native rebin/feature checks on exactly same evidence.",
+    "ALWAYS_ABSTAIN": "Null control."
+  },
+  "gates": {
+    "acceptance": "16 authentic real-derived profile/transform chains loaded and hash/shape/finite verified, each source separate; all 128 metadata-overlay trials completed; for TACHYON forward replay and strong direct require 16 intact accepted and 112 flawed metadata rejected; no original spectral/detection changes.",
+    "no_scientific_sensitivity_claim": "Do NOT score astronomical false positives, localization, drift sensitivity, weak transmitter recovery or physical ON/OFF from 1D natural methanol profile.",
+    "required_gold_scope": "Gold means manifest integrity after controlled overlays, NOT whether source physically emitted signal or whether detector is correct.",
+    "strong_baseline": "Do not claim win over exact direct provenance unless real paired metric shows it; research preview expects equality.",
+    "scientific_gate": "REAL_DERIVED_RADIO_PROFILE_PROVENANCE_PILOT_ONLY__FULL_DETECTOR_AND_EXTERNAL_BLIND_HOLD",
+    "production_detector_changed": false,
+    "active_COSMOS_NOISE_HANNAH_weights_changed": false,
+    "physical_time_reversal_or_retrocausal_signal_claim": false
+  }
+}
