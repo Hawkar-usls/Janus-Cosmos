@@ -95,7 +95,31 @@ jobs:
               assert a==b
               assert a["intact_accepted"]==24 and a["corrupted_rejected"]==144
               assert r["production_decisions_changed"]==0
-              print("SIT1_OPEN_REAL_GBT_ONOFF_READONLY_COMPUTED__FULL_SCIENTIFIC_HOLD")
+              import statistics
+          summary={
+              "status":r["status"],
+              "file_count":r["replayed_real_files"],
+              "header_and_first_seen_sha256":[{
+                  "scan":v["scan"],"role":v["role"],"bytes":v.get("bytes"),
+                  "first_seen_sha256":v.get("first_seen_sha256"),
+                  "data_shape":v.get("data_shape"),
+                  "header":v.get("header")
+               } for v in r["downloads"]],
+              "same_physical_frequency_grid":r["same_native_physical_freq_grid_across_six"],
+              "arms":r["paired_arms"],
+              "scores_by_role":{
+                  role:{
+                      "n":len(z),
+                      "min":min(z),"max":max(z),"median":statistics.median(z)
+                  } for role in ("ON","OFF")
+                  for z in [[p["frozen_shadow_score"] for p in r["real_candidate_panels"] if p["role"]==role]]
+              },
+              "false_alarm_sensitivity_score":None,
+              "independent_pointing":False,
+              "independent_groups":1
+          }
+          print("SIT1_OPEN_VERIFIED_METRICS="+json.dumps(summary,sort_keys=True))
+          print("SIT1_OPEN_REAL_GBT_ONOFF_READONLY_COMPUTED__FULL_SCIENTIFIC_HOLD")
           PY
       - name: Upload evidence-only receiver headers, hashes, candidate paths and receipt
         if: always()
