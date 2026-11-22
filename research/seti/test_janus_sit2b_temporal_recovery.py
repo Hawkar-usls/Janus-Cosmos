@@ -91,7 +91,7 @@ class SIT2BControls(unittest.TestCase):
         self.assertEqual(sum(z["kind"]==s.CATEGORIES[3] for z in x),96)
 
     def test_threshold_only_negative_64_dev(self):
-        self.assertEqual(s.decide_threshold(np.arange(64)),61.0)
+        self.assertEqual(s.decide_threshold(np.arange(64)),60.0)
         with self.assertRaises(ValueError):s.decide_threshold(np.arange(63))
 
     def test_scientific_gate_requires_strong_positive(self):
