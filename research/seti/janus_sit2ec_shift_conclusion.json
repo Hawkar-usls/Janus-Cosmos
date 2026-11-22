@@ -122,6 +122,15 @@
     "allow_october_exam": false,
     "production_modified": false,
     "scientific_gate": "HOLD",
-    "next": "Qualify native IF/polarization semantics from independent instrument docs and measured pointing; measure matched Source/Reference interference identity with predeclared frequency-alignment diagnostics on July and September only. If considering any robust score change or band veto, preregister and validate on independent new data without using sealed October."
+    "next": "Independently verify archived July full-polarization to September total-intensity IF/Stokes product mapping, inspect source/reference common-line provenance and pointing, and only then evaluate a predeclared physically comparable July/September transform. Do NOT access October or change locked thresholds."
+  },
+  "external_instrument_mode_evidence": {
+    "provider": "Breakthrough Listen / Berkeley SETI",
+    "official_page": "https://seti.berkeley.edu/atlas/",
+    "excerpt_summary": "The first Parkes observing session (July 31 2025) used full polarization; later sessions (September 12 and October 5) recorded total intensity only.",
+    "review_date_utc": "2026-11-22",
+    "implication": "Header nifs=4 and shape 300x4x64000 are not sufficient to establish equivalence of physical IF indices or Stokes meaning across July and September. The IF0-to-IF0 comparison is an engineering same-array-index score transfer, not a physically calibrated same-polarization transfer.",
+    "status": "PUBLISHED_MODE_DIFFERENCE_CONFIRMED__EXACT_IF_MAPPING_UNVERIFIED",
+    "scientific_required_next": "Before any re-scoring claim, obtain validated channel/Stokes mapping and reconstruct a genuinely comparable total-intensity product from July full-polarization data without referencing October."
   }
 }
