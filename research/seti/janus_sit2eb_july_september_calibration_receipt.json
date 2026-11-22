@@ -1,0 +1,110 @@
+{
+  "schema": "janus.cosmos.sit2eb.parkes_july_september_calibration_receipt.v1",
+  "date_utc": "2026-11-22",
+  "status": "REAL_PARKES_POWER_SCORED__SEPTEMBER_P95_NUMERIC_LOCK__JULY_TRANSFER_FAIL__WEAK_GAIN_ZERO__OCTOBER_HOLD",
+  "source_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45073354692",
+  "source_run_head_commit": "65eb70eaa2b82b5464f367b091a73d18d84208ff",
+  "source_artifact": {
+    "id": 14773983701,
+    "name": "janus-sit2eb-july-september-power-calibration",
+    "zip_sha256": "a180e434da133497bef5e89b2218cef79d9d3711b80545905ee30dcd6c3ea5b6"
+  },
+  "computation_sha256": "ef7b8ce94d08ec1abd824bfc91711495c0d0983df3627f223711ec99c07c60d1",
+  "source_code_git_blob_sha1": "b7ff78ac8fd796e1e76b671bcc226b53df29214b",
+  "workflow_git_blob_sha1": "dac26202a8a8a83fdb3865dd1373904e03285722",
+  "source_file_full_sha256": {
+    "2025-07-31_source": "7aaa17698201c4eb84694432b0ea193b02ad9604fa2e91ede320f60ea1b399eb",
+    "2025-07-31_reference": "3c925ea095ed0bfaeae418136550d7990a8776efc465bf0cfbd3db01675aa5ff",
+    "2025-09-12_source": "eb0418945b33ddf6ade273534290bb5080d524766ea3838688cb73d128f7c69b",
+    "2025-09-12_reference": "323fda755f581204b881de151ca039c21f6dd3c8953b1fbccafbabc9c7324962"
+  },
+  "scoring_configuration": {
+    "spectral_resolution_hz": 2000,
+    "receiver_bank": "blc00",
+    "timesamples_per_scan": 300,
+    "panels_per_role_per_date": 4,
+    "panel_shape": [
+      16,
+      128
+    ],
+    "path_hypotheses": 672,
+    "seed": 22061122,
+    "if_index": 0,
+    "control_groups": "synthetic no-injection and synthetic RFI overlays on real Source/Reference power",
+    "threshold_rule": "September negative-score empirical p95, numpy quantile(method='higher'), strict score>threshold",
+    "july_role": "development/retrospective transfer",
+    "september_role": "in-sample calibration",
+    "october_role": "sealed holdout"
+  },
+  "numeric_thresholds": {
+    "JANUS_NATIVE_RIDGE": 2.834103476282684,
+    "DIRECT_672_MATCHED": 2.834103476282684,
+    "DIRECT_672_SIDEBAND": 3.3193816056219645
+  },
+  "july_retrospective": {
+    "JANUS_NATIVE_RIDGE": {
+      "controls": 192,
+      "exceedances": 74,
+      "strong_detected": 72,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    },
+    "DIRECT_672_MATCHED": {
+      "controls": 192,
+      "exceedances": 74,
+      "strong_detected": 72,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    },
+    "DIRECT_672_SIDEBAND": {
+      "controls": 192,
+      "exceedances": 63,
+      "strong_detected": 72,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    }
+  },
+  "september_in_sample": {
+    "JANUS_NATIVE_RIDGE": {
+      "controls": 192,
+      "exceedances": 9,
+      "strong_detected": 96,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    },
+    "DIRECT_672_MATCHED": {
+      "controls": 192,
+      "exceedances": 9,
+      "strong_detected": 96,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    },
+    "DIRECT_672_SIDEBAND": {
+      "controls": 192,
+      "exceedances": 9,
+      "strong_detected": 96,
+      "strong_total": 96,
+      "weak_detected": 0,
+      "weak_total": 96
+    }
+  },
+  "inference_limits": {
+    "calibration_controls_not_independent": true,
+    "real_astronomical_false_alarm_rate_measured": false,
+    "positive_and_rfi_labels_are_synthetic": true,
+    "antenna_pointing_independently_certified": false,
+    "july_strong_guard_90percent_pass": false,
+    "july_false_alert_5percent_pass": false,
+    "weak_gain_over_best_direct": 0,
+    "oct_exam_opened": false,
+    "production_changed": false,
+    "science_gate": "HOLD",
+    "allow_october_one_shot_exam": false,
+    "next": "Investigate July/September distribution shift and instrument/IF/polarization/normalization without examining October. Freeze independently qualified methods/thresholds before requesting October exam."
+  }
+}
