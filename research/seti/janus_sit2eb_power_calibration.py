@@ -149,7 +149,7 @@ def create_overlay(panel,category,rng):
     first=int(rng.integers(34,97))
     slope=float((-1,-.5,0,.5,1)[int(rng.integers(5))])
     truth=np.rint(first+slope*(TIME-7.5)).astype(np.int32)
-    bounds=(1.2,2.0) if category=="WEAK_LINE" else (3.0,5.0)
+    bounds=(1.2,2.0) if category=="WEAK_LINE" else (8.0,11.0)
     amp=rng.uniform(*bounds,size=16)*mad
     for t,k in enumerate(truth):
         out[t,k]+=amp[t]
