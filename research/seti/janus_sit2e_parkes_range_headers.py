@@ -166,7 +166,7 @@ def probe_date(spec):
         # rather than unrelated 49-second and later 300-second scans.
         full=[x for x in sizeprobe if x["bytes"]>=200_000_000]
         def clock(x):
-            m=re.search(r"guppi_(\\d{5})_(\\d{5})_",x["filename"])
+            m=re.search(r"guppi_(\d{5})_(\d{5})_",x["filename"])
             return (int(m[1]),int(m[2])) if m else None
         pairs=[]
         for sr in full:
