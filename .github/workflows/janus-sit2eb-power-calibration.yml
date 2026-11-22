@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install pinned decoding dependencies
-        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 requests==2.32.3 beautifulsoup4==4.12.3
+        run: python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 requests==2.32.3 beautifulsoup4==4.12.3 scikit-learn==1.6.1
       - name: Verify only July and September are eligible for decoded radio power
         run: |
           python -m py_compile research/seti/janus_sit2eb_power_calibration.py
