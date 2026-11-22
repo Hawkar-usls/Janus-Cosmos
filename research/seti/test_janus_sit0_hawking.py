@@ -21,7 +21,7 @@ class SIT0RealProvenanceContracts(unittest.TestCase):
         f,z,err=sit.edge_rebin(e,y,transform,rebin)
         bg=float(np.median(y[(v<-60)|(v>-30)]))
         comp=sit.native.compare(e,y,f,z,bg,[-50,-40])
-        cls.rebin=rebin
+        cls.rebin=staticmethod(rebin)  # Avoid descriptor binding extra 'self' arg.
         cls.ctx={
           "tag":"W3OH:57934:T0","source":"W3OH","mjd_day":57934,
           "profile_name":"W3OH_science_profile.npz",
