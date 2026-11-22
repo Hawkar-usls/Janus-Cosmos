@@ -30,11 +30,11 @@ jobs:
           python-version: '3.11'
       - name: Install read-only archive HDF5 dependencies
         run: |
-          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 requests==2.32.3
+          python -m pip install --disable-pip-version-check numpy==2.2.6 h5py==3.13.0 hdf5plugin==5.1.0 requests==2.32.3 beautifulsoup4==4.12.3
       - name: Verify protocol and no October radio-power processing
         run: |
           python -m json.tool research/seti/janus_sit2e_parkes_preflight_protocol.json > /dev/null
-          python -m py_compile research/seti/janus_sit2e_parkes_preflight.py
+          python -m py_compile research/seti/janus_sit2e_parkes_preflight.py research/seti/janus_sit2e_parkes_range_headers.py
           python -m unittest discover -s research/seti -p 'test_janus_sit2e_parkes_preflight.py' -v
       - name: Discover exact official Parkes HDF5 names, HEAD sizes and available physical headers
         run: |
@@ -57,11 +57,35 @@ jobs:
               },sort_keys=True,ensure_ascii=False))
           print("SIT2E_FINAL_GATE",x["status"])
           PY
+      - name: Inspect the actual July FIL / Sep-Oct HDF5 physical axes over bounded HTTP ranges
+        run: |
+          python research/seti/janus_sit2e_parkes_range_headers.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("runtime/sit2e_parkes/sit2e_parkes_range_headers.json")
+          q=json.loads(p.read_text())
+          assert len(q["dates"])==3
+          assert q["all_radio_power_unread"]
+          assert q["october_algorithmic_scoring_unopened"]
+          assert not q["whole_source_SHA256_computed"]
+          assert not q["thresholds_fitted"]
+          assert not q["actual_antenna_pointing_authenticated"]
+          print("SIT2E_PHYSICAL_HEADERS_METADATA_ONLY_QUALIFICATION="+json.dumps({
+              "status":q["status"],"band_overlap":q["three_date_source_band_overlap"],
+              "dates":[{"date":v["date"],"status":v["status"],
+                        "sources":v.get("physical_headers_read",0),
+                        "errors":v.get("range_probe_errors",[])}
+                       for v in q["dates"]]
+          },ensure_ascii=False,sort_keys=True))
+          PY
       - name: Preserve actual live archive listing and metadata-source receipt
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: janus-sit2e-parkes-three-date-real-archive-preflight
-          path: runtime/sit2e_parkes/sit2e_parkes_preflight.json
+          path: |
+            runtime/sit2e_parkes/sit2e_parkes_preflight.json
+            runtime/sit2e_parkes/sit2e_parkes_range_headers.json
           if-no-files-found: warn
           retention-days: 90
