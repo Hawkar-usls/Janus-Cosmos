@@ -135,9 +135,7 @@ def run():
     try:
         with __import__("requests").Session() as sess:
             for date,role,spec in selected:
-                downloaded = integrity.full_sha256(sess,date,role,spec,source_dir)
-                # integrity helper deletes the file after hashing to avoid retaining data.
-                # We intentionally use a separate verified download for actual decoded power.
+                # Re-download each file exactly once and verify complete byte SHA before decoding.
                 response = sess.get(spec["url"],stream=True,timeout=(20,100),
                                     headers={"Accept-Encoding":"identity"},allow_redirects=False)
                 try:
