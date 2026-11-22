@@ -1,0 +1,127 @@
+{
+  "schema": "janus.cosmos.sit2ec.parkes_domain_shift_conclusion.v1",
+  "date_utc": "2026-11-22",
+  "status": "EXACT_SIT2EB_REPLAY_PASS__JULY_806MHZ_COMMON_SOURCE_REFERENCE_STRUCTURE_IDENTIFIED__SCIENCE_HOLD",
+  "scope": "Original Parkes July 31 and September 12 2025, blc00, four physical IF indices, four 128-channel windows, original Source and Reference",
+  "experiment": {
+    "ci_run": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45073947226",
+    "artifact_id": 14774341393,
+    "artifact_name": "janus-sit2ec-july-september-if-power-shift",
+    "artifact_zip_sha256": "2678c29f26d60fb91ced934f33eb8531e66433cc1bc55638ba92e21d30a97262",
+    "report_json_sha256": "a2379d5e5131d0f53ed530b04527c5d9d6ebb3d8439012e3ee8eb6816c707a3c",
+    "full_original_source_files_verified": 4,
+    "panel_audits": 64,
+    "independent_base_panel_groups_per_date": 8,
+    "no_injection_same_base_duplicates": 12,
+    "original_SIT2EB_full_input_and_threshold_hash": "ef7b8ce94d08ec1abd824bfc91711495c0d0983df3627f223711ec99c07c60d1",
+    "original_threshold_native_ridge": 2.834103476282684,
+    "original_threshold_direct_matched": 2.834103476282684,
+    "original_threshold_direct_sideband": 3.3193816056219645
+  },
+  "control_exceedances_native_ridge": {
+    "July": {
+      "total": 74,
+      "controls": 192,
+      "band0": 0,
+      "band1": 5,
+      "band2": 21,
+      "band3": 48,
+      "no_injection": 36,
+      "synthetic_rfi": 38
+    },
+    "September": {
+      "total": 9,
+      "controls": 192,
+      "band0": 1,
+      "band1": 4,
+      "band2": 4,
+      "band3": 0,
+      "no_injection": 0,
+      "synthetic_rfi": 9
+    }
+  },
+  "control_exceedances_sideband": {
+    "July": {
+      "total": 63,
+      "controls": 192,
+      "band0": 0,
+      "band1": 0,
+      "band2": 15,
+      "band3": 48
+    },
+    "September": {
+      "total": 9,
+      "controls": 192,
+      "band0": 0,
+      "band1": 0,
+      "band2": 9,
+      "band3": 0
+    }
+  },
+  "primary_shift": {
+    "IF_index": 0,
+    "band_index": 3,
+    "physical_frequency_mhz": [
+      806.194,
+      806.448
+    ],
+    "July_ridge_score": {
+      "Source": 23.462,
+      "Reference": 24.821
+    },
+    "September_ridge_score": {
+      "Source": 0.978,
+      "Reference": 1.416
+    },
+    "July_raw_power_median_approx": {
+      "Source": 133.0859,
+      "Reference": 132.157
+    },
+    "September_raw_power_median_approx": {
+      "Source": 123.8148,
+      "Reference": 125.9458
+    },
+    "normalized_z_fraction_greater_than_5": {
+      "July_Source": 0.0439453125,
+      "July_Reference": 0.03759765625,
+      "September_Source": 0,
+      "September_Reference": 0
+    },
+    "July_cross_IF_z_correlation": {
+      "Source_IF1_vs_IF0": 0.7454687688290872,
+      "Reference_IF1_vs_IF0": 0.7332518358684718,
+      "Source_IF3_vs_IF0": -0.5977072662632837,
+      "Reference_IF3_vs_IF0": -0.8836995678979346
+    },
+    "September_cross_IF_z_correlation": {
+      "Source_IF1_vs_IF0": 0.06465258428238119,
+      "Reference_IF1_vs_IF0": 0.09240891352120377
+    },
+    "interpretation": "Strong narrowband/persistent structure in identical frequency windows of July Source and Reference, present in multiple IF numerical products; likely RFI or instrument/common observing-path structure; NOT demonstrated celestial source or confirmed RFI origin.",
+    "inference_limit": "Physical native IF / polarization (Stokes) identities not externally attested; negative cross-correlations do not uniquely reveal polarization or instrument physics."
+  },
+  "additional_distributions": {
+    "july_minus_september_control_score_median_native": 0.7995759612595104,
+    "july_minus_september_control_score_median_sideband": 0.7529408932029833,
+    "jul_in_sample_counterfactual_p95_native_NOT_FROZEN": 24.8214689240722,
+    "september_calibration_p95_native": 2.834103476282684,
+    "note": "July retrospective p95 is diagnostic only, not a selected replacement threshold. High score is specific to channel structure, not merely absolute power gain: the 806MHz raw-power medians are comparable across dates."
+  },
+  "study_limits": [
+    "Only 4 windows x 128 frequency bins out of 64000 channels per IF, not the full receiver band.",
+    "4 native IF indices inspected, but exact polarization/Stokes semantics unverified.",
+    "Control examples are correlated injections/no-injection repeats from 8 parent windows per observing date; n=192 is not n=192 independent tests.",
+    "July was already used for development and September for calibration; no prospective independent transfer validation.",
+    "Source and Reference names from archive do not establish telescope antenna encoder pointing.",
+    "A failed July cross-date hold does not prove RFI origin or any ETI signal."
+  ],
+  "decision": {
+    "original_thresholds_unchanged": true,
+    "no_model_retraining": true,
+    "october_power_read": false,
+    "allow_october_exam": false,
+    "production_modified": false,
+    "scientific_gate": "HOLD",
+    "next": "Qualify native IF/polarization semantics from independent instrument docs and measured pointing; measure matched Source/Reference interference identity with predeclared frequency-alignment diagnostics on July and September only. If considering any robust score change or band veto, preregister and validate on independent new data without using sealed October."
+  }
+}
