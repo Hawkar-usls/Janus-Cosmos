@@ -199,6 +199,70 @@ def comparable_processing_probe(per_if):
     assert len(records)==24
     return records
 
+def symmetric_intensity_proxy_experiment(per_if):
+    """Post-SIT2E-C exploratory diagnostic, NO adoption or prospective validation.
+
+    Both dates receive identical IF0 versus (IF0+IF1) hypothesis transforms,
+    with identical injection RNG streams; no thresholds selected on October.
+    """
+    out={}
+    for model in ("IF0_only","IF0_plus_IF1_conditional"):
+        rng=np.random.default_rng(b.SEED)
+        rows=[]
+        for date in DATES:
+            for band in range(4):
+                for role in ("source","reference"):
+                    src=per_if[(date,role)]
+                    panel=np.array(src[0][band]["panel"],copy=True)
+                    if model=="IF0_plus_IF1_conditional":
+                        panel=panel+np.asarray(src[1][band]["panel"],dtype=np.float32)
+                    for rep in range(12):
+                        for cat in b.ALL_CLASSES:
+                            x,truth=b.create_overlay(panel,cat,rng)
+                            scores=b.score(x)
+                            rows.append({
+                                "date":date,"band":band,"role":role,"rep":rep,"category":cat,
+                                "scores":{k:float(v[1]) for k,v in scores.items()},
+                                "localized":{k:b.localizes(v[0],truth) for k,v in scores.items()}
+                            })
+        assert len(rows)==768
+        metrics={}
+        for method in b.METHODS:
+            neg=[x["scores"][method] for x in rows if x["date"]==DATES[1]
+                 and x["category"] in b.CONTROL_CLASSES]
+            assert len(neg)==192
+            # IN-SAMPLE SEPT retrospective diagnostic only (not a new freeze).
+            p95=float(np.quantile(neg,.95,method="higher"))
+            metrics[method]={"diagnostic_sept_p95_NOT_FROZEN":p95}
+            for date in DATES:
+                sub=[x for x in rows if x["date"]==date]
+                negatives=[x for x in sub if x["category"] in b.CONTROL_CLASSES]
+                weak=[x for x in sub if x["category"]=="WEAK_LINE"]
+                strong=[x for x in sub if x["category"]=="STRONG_LINE"]
+                metrics[method][date]={
+                    "negatives":len(negatives),
+                    "negative_exceedances":int(sum(x["scores"][method]>p95 for x in negatives)),
+                    "weak_detected":int(sum(x["scores"][method]>p95 and x["localized"][method] for x in weak)),
+                    "strong_detected":int(sum(x["scores"][method]>p95 and x["localized"][method] for x in strong)),
+                    "positives_per_class":96,
+                    "true_parent_panels":8,
+                    "calibration_in_sample":date==DATES[1]
+                }
+        out[model]={
+          "status":"RETROSPECTIVE_DIAGNOSTIC_ONLY",
+          "assumed_IF_basis_confirmed":False,
+          "new_operating_point_approved":False,
+          "october_eligibility":False,
+          "matched_hypotheses":672,
+          "groups_not_independent":True,
+          "thresholds_and_rates":metrics
+        }
+        if model=="IF0_only":
+            for method in b.METHODS:
+                if abs(metrics[method]["diagnostic_sept_p95_NOT_FROZEN"]-LOCK["numeric_thresholds"][method])>1e-9:
+                    raise AssertionError("ORIGINAL_SIT2EB_THRESHOLD_NOT_REPRODUCED")
+    return out
+
 def run():
     OUT.mkdir(parents=True,exist_ok=True)
     folder=OUT/"verified_orig";folder.mkdir(exist_ok=True)
@@ -216,7 +280,7 @@ def run():
        "candidate_region_mhz":REGION,"target_806_mhz_window_mhz":[806.194,806.448],
        "hash_receipts":[],"per_scan_headers":[],"per_role_if_profiles":[],
        "if_order_hypotheses":[],"paired_frequency_structure":[],
-       "conditional_total_intensity_mapping":[],"errors":[],
+       "conditional_total_intensity_mapping":[],"symmetric_total_intensity_proxy_replay":{},"errors":[],
        "proven_stokes_channel_mapping":False,
        "independent_tcs_encoder_pointing":False,
        "real_transmitter_identified":False,
@@ -243,6 +307,7 @@ def run():
         result["paired_frequency_structure"]=common_line(cubes)
         result["if_order_hypotheses"]=polarization_hypothesis_diagnostics(cubes)
         result["conditional_total_intensity_mapping"]=comparable_processing_probe(all_panels)
+        result["symmetric_total_intensity_proxy_replay"]=symmetric_intensity_proxy_experiment(all_panels)
         result["status"]="SIT2ED_PHYSICAL_806_FREQ_AND_IF_HYPOTHESES_PASS__MAPPING_AND_POINTING_HOLD"
     except Exception as exc:
         result["errors"].append({"type":type(exc).__name__,"message":str(exc)[:400]})
@@ -256,7 +321,8 @@ def run():
             "files":len(result["hash_receipts"]),
             "report_sha256":result["report_sha256"],
             "october_files_read":result["october_files_read"],
-            "role_pair_frequency_structure":result["paired_frequency_structure"]},
+            "role_pair_frequency_structure":result["paired_frequency_structure"],
+            "symmetric_proxy_scores":result["symmetric_total_intensity_proxy_replay"]},
             sort_keys=True),flush=True)
     if result["errors"]:raise RuntimeError(result["errors"][0]["message"])
     return result
