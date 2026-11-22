@@ -211,6 +211,9 @@ def run():
             "candidate_hdf5_files":report["filenames_found"],
             "candidate_role_counts":{r:sum(x["role_name_only"]==r for x in report["filenames"]) for r in ("SOURCE_NAME_ONLY","REFERENCE_NAME_ONLY","UNKNOWN")},
             "qualification":report.get("qualification"),
+            "first_12_filenames":[x["filename"] for x in report["filenames"][:12]],
+            "first_12_directory_urls":[x["url"] for x in report["directories"][:12]],
+            "probe":report.get("metadata_probe",[])[:12],
             "headers":report.get("downloaded_headers",[])},ensure_ascii=False,allow_nan=False),flush=True)
     count=sum(x.get("qualification")=="PAIRED_ARCHIVE_HEADERS_AND_SHA256_OBSERVED__POINTING_HOLD" for x in result["sessions"])
     result["paired_dates_qualified_at_header_level"]=count
