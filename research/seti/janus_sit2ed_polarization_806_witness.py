@@ -170,24 +170,34 @@ def polarization_hypothesis_diagnostics(cubes):
                 })
     return results
 
-def comparable_processing_probe(cubes):
-    # Candidate total-intensity formulas without documentary mode certification:
-    # July H1: channel0 is already Stokes I. July H2: channel0+channel1
-    # are two auto-power channels. September H0: IF0 is total I.
-    # These are conditional, not adopted/calibrated. Score fixed 4 windows only;
-    # no OCT or threshold-selection adaptation.
-    rows=[]
+def comparable_processing_probe(per_if):
+    """Actually compute frozen native/matched scores under explicit basis hypotheses.
+
+    No new thresholds or pretense of known physical polarization mapping.
+    """
+    records=[]
     for date in DATES:
-        for role in ("source","reference"):
-            for model in ("IF0_only","IF0_plus_IF1_conditional"):
-                if date==DATES[1] and model!="IF0_only":continue
-                # Reuse SIT2E-C's full-band four-panel source decoding, not the 806 excerpt.
-                # Parent paneI scores are emitted by audit stage separately.
-                rows.append({"date":date,"role":role,"hypothesis":model,
-                   "status":"CANDIDATE_ONLY_NOT_PHYSICALLY_QUALIFIED",
-                   "calibration_usable":False,
-                   "cannot_compare_to_september_threshold_as_new_candidate":True})
-    return rows
+        for band in range(4):
+            for mode in (("IF0_only",) if date==DATES[1]
+                         else ("IF0_only","IF0_plus_IF1_conditional")):
+                for role in ("source","reference"):
+                    x=per_if[(date,role)][0][band]["panel"].copy()
+                    if mode=="IF0_plus_IF1_conditional":
+                        x=x+per_if[(date,role)][1][band]["panel"]
+                    scores=b.score(x)
+                    records.append({
+                        "date":date,"role":role,"band":band,
+                        "frequency_start_mhz":round(704+int((64000-128)*FRACTIONS[band])*.002,6),
+                        "hypothesis":mode,
+                        "frozen_original_objective_scores":{
+                            k:float(v[1]) for k,v in scores.items()},
+                        "panel_sha256":hashlib.sha256(x.tobytes()).hexdigest(),
+                        "polarization_basis_verified":False,
+                        "threshold_fitted_or_changed":False,
+                        "eligible_for_science_or_october":False
+                    })
+    assert len(records)==24
+    return records
 
 def run():
     OUT.mkdir(parents=True,exist_ok=True)
@@ -213,6 +223,7 @@ def run():
        "science_gate":"HOLD",
        "allow_october_exam":False}
     cubes={}
+    all_panels={}
     try:
         with requests.Session() as sess:
             for date,role,spec in selected:
@@ -220,6 +231,8 @@ def run():
                 try:
                     file,receipt=c.download_verified(sess,date,role,spec,folder)
                     cube,h=power_cube(file,date)
+                    _,per_if=c.extract_all_if(file,date)
+                    all_panels[(date,role)]=per_if
                     cubes[(date,role)]=cube
                     result["hash_receipts"].append(receipt)
                     result["per_scan_headers"].append({"date":date,"role":role,"header":h})
@@ -229,7 +242,7 @@ def run():
                     if file is not None:file.unlink(missing_ok=True)
         result["paired_frequency_structure"]=common_line(cubes)
         result["if_order_hypotheses"]=polarization_hypothesis_diagnostics(cubes)
-        result["conditional_total_intensity_mapping"]=comparable_processing_probe(cubes)
+        result["conditional_total_intensity_mapping"]=comparable_processing_probe(all_panels)
         result["status"]="SIT2ED_PHYSICAL_806_FREQ_AND_IF_HYPOTHESES_PASS__MAPPING_AND_POINTING_HOLD"
     except Exception as exc:
         result["errors"].append({"type":type(exc).__name__,"message":str(exc)[:400]})
