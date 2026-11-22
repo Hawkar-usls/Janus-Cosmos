@@ -1,0 +1,222 @@
+{
+  "schema": "janus.cosmos.sit2e.parkes_three_real_date_source_preflight.v1",
+  "id": "JANUS-SIT2E-PARKES-THREE-DATE-2026-11-22",
+  "as_of_utc": "2026-11-22",
+  "status": "THREE_DATE_REAL_PHYSICAL_FREQ_HEADERS_SOURCE_REFERENCE_PAIR_PASS__FULL_SHA_AND_POINTING_AND_SIGNAL_ANALYSIS_HOLD",
+  "research_repository": "Hawkar-usls/Janus-Cosmos",
+  "research_branch": "research/janus-sit2e-parkes-three-date-qualification-20261122",
+  "research_pr": "https://github.com/Hawkar-usls/Janus-Cosmos/pull/72",
+  "official_archive": "https://bldata.berkeley.edu/ATLAS/",
+  "official_context": "https://seti.berkeley.edu/atlas/",
+  "ci_first_catalogue": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45057770855",
+  "ci_final_header_probe": "https://github.com/Hawkar-usls/Janus-Cosmos/actions/runs/45058462740",
+  "verified_ci_artifact": {
+    "id": 14768078726,
+    "name": "janus-sit2e-parkes-three-date-real-archive-preflight",
+    "digest": "sha256:b4d4a10d5243cd334f4d2ef5ab27366df885a967b72167db865e83d93424b761"
+  },
+  "tests_passed": 15,
+  "data_provenance": {
+    "three_distinct_observing_dates": true,
+    "same_target_label": "3I/ATLAS",
+    "receiver": "Murriyang Parkes UWL (704–4032 MHz overall), verified selected backend blc00 704–831.998 MHz",
+    "selected_bank": "blc00",
+    "selected_product_suffix": ".0002.fil July / .0002.h5 Sept and Oct",
+    "frequency_range_all_dates_mhz": [
+      704,
+      831.998
+    ],
+    "native_frequency_channel_spacing_hz": 2000,
+    "native_time_sample_seconds": 1,
+    "source_reference_scans_six_roles_verified_by_header": true,
+    "each_one_300_second_source_and_reference": true,
+    "official_source_reference_nominal_header_different_positions": true,
+    "physical_antenna_encoder_pointing_verified": false,
+    "July_HDF5_wrong_format": "July 31 is SIGPROC filterbank .fil, NOT HDF5, unlike Sept 12/Oct 5. Mixed-format loader required.",
+    "Jul_source_ra_encoding_warning": "July SIGPROC numeric src_raj uses HHMMSS-style field versus later HDF5 decimal-style right ascension; direct numeric coordinate comparison invalid until normalized.",
+    "published_reference_SHA256_known": false,
+    "all_six_original_full_file_SHA256_verified": false,
+    "first_8192_byte_range_SHA256_for_July_only": true,
+    "HDF5_metadata_read_from_exact_bounded_HTTP_Range": true,
+    "original_radio_power_arrays_read": false,
+    "October_exam_label_or_score_read": false,
+    "model_trained_or_threshold_fitted": false
+  },
+  "frozen_selected_pairs": [
+    {
+      "date": "2025-07-31",
+      "split": "DEVELOPMENT",
+      "backend": "https://bldata.berkeley.edu/ATLAS/PKS_Jul_31_2025/blc00/",
+      "source": {
+        "filename": "guppi_60887_50760_6690867462_3IATLAS_S_0001.0002.fil",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Jul_31_2025/blc00/guppi_60887_50760_6690867462_3IATLAS_S_0001.0002.fil",
+        "bytes": 307200395,
+        "source_name": "3IATLAS_S",
+        "tstart_mjd": 60887.5875,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": null,
+        "source_ra_raw": 165410.008,
+        "source_dec_raw": -173459.88,
+        "first_8192_bytes_sha256": "1da49aa7ad273063b24a836e28a2a5855021400fe575d836d47dc18d5b0ed2e9",
+        "complete_file_sha256": null
+      },
+      "reference": {
+        "filename": "guppi_60887_51102_6690868766_3IATLAS_R_0001.0002.fil",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Jul_31_2025/blc00/guppi_60887_51102_6690868766_3IATLAS_R_0001.0002.fil",
+        "bytes": 307200395,
+        "source_name": "3IATLAS_R",
+        "tstart_mjd": 60887.591458333336,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": null,
+        "reference_ra_raw": 165410.008,
+        "reference_dec_raw": -170459.88,
+        "first_8192_bytes_sha256": "88b3d26ad6ba27bb9a92c1ca62ef0c7b6945f9efaa69aeef0285c6ed4b0fc37a",
+        "complete_file_sha256": null
+      },
+      "Source_to_Reference_start_gap_seconds": 342,
+      "both_roles_full_five_min": true,
+      "full_overlapping_physical_spectral_grid": true,
+      "actual_pointing_verified": false
+    },
+    {
+      "date": "2025-09-12",
+      "split": "CALIBRATION",
+      "backend": "https://bldata.berkeley.edu/ATLAS/PKS_Sep_12_2025/blc00/",
+      "source": {
+        "filename": "guppi_60930_18846_6704918083_3IATLAS_S_0001.0002.h5",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Sep_12_2025/blc00/guppi_60930_18846_6704918083_3IATLAS_S_0001.0002.h5",
+        "bytes": 248080351,
+        "source_name": "3IATLAS_S",
+        "tstart_mjd": 60930.218125,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": [
+          300,
+          4,
+          64000
+        ],
+        "source_ra_raw": 15.063620000000002,
+        "source_dec_raw": -13.158800000000003,
+        "first_8192_bytes_sha256": null,
+        "complete_file_sha256": null
+      },
+      "reference": {
+        "filename": "guppi_60930_19193_6704919406_3IATLAS_R_0001.0002.h5",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Sep_12_2025/blc00/guppi_60930_19193_6704919406_3IATLAS_R_0001.0002.h5",
+        "bytes": 249673304,
+        "source_name": "3IATLAS_R",
+        "tstart_mjd": 60930.2221412037,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": [
+          300,
+          4,
+          64000
+        ],
+        "reference_ra_raw": 15.063620000000002,
+        "reference_dec_raw": -12.658800000000003,
+        "first_8192_bytes_sha256": null,
+        "complete_file_sha256": null
+      },
+      "Source_to_Reference_start_gap_seconds": 347,
+      "both_roles_full_five_min": true,
+      "full_overlapping_physical_spectral_grid": true,
+      "actual_pointing_verified": false
+    },
+    {
+      "date": "2025-10-05",
+      "split": "FUTURE_OCTOBER_HELDOUT",
+      "backend": "https://bldata.berkeley.edu/ATLAS/PKS_Oct_05_2025/blc00/",
+      "source": {
+        "filename": "guppi_60953_19456_6712500976_3IATLAS_S_0001.0002.h5",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Oct_05_2025/blc00/guppi_60953_19456_6712500976_3IATLAS_S_0001.0002.h5",
+        "bytes": 248798909,
+        "source_name": "3IATLAS_S",
+        "tstart_mjd": 60953.22518518518,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": [
+          300,
+          4,
+          64000
+        ],
+        "source_ra_raw": 14.288926666666667,
+        "source_dec_raw": -10.369499999999999,
+        "first_8192_bytes_sha256": null,
+        "complete_file_sha256": null
+      },
+      "reference": {
+        "filename": "guppi_60953_19802_6712502296_3IATLAS_R_0001.0002.h5",
+        "url": "https://bldata.berkeley.edu/ATLAS/PKS_Oct_05_2025/blc00/guppi_60953_19802_6712502296_3IATLAS_R_0001.0002.h5",
+        "bytes": 248714327,
+        "source_name": "3IATLAS_R",
+        "tstart_mjd": 60953.22918981482,
+        "tsamp_s": 1,
+        "frequency_start_mhz": 704,
+        "foff_mhz": 0.002,
+        "physical_frequency_range_mhz": [
+          704,
+          831.998
+        ],
+        "time_rows": 300,
+        "radio_axis_shape": [
+          300,
+          4,
+          64000
+        ],
+        "reference_ra_raw": 14.288926666666667,
+        "reference_dec_raw": -9.869499999999999,
+        "first_8192_bytes_sha256": null,
+        "complete_file_sha256": null
+      },
+      "Source_to_Reference_start_gap_seconds": 346,
+      "both_roles_full_five_min": true,
+      "full_overlapping_physical_spectral_grid": true,
+      "actual_pointing_verified": false
+    }
+  ],
+  "scientific_status": {
+    "engineering_original_index_and_headers": "PASS",
+    "full_radio_sha256_integrity": "OPEN",
+    "physical_antenna_pointing_external": "HOLD",
+    "October_radio_data_unopened": "PASS_SAFETY",
+    "candidate_detection_sensitivity_gain": null,
+    "true_RFI_origin_labels": null,
+    "technosignature_detection_claim": false,
+    "TACHYON_incremental_gain": null,
+    "production_detector_or_model_changed": false
+  },
+  "next_gate": "Before octave heldout: use existing verified range reader to obtain source bytes/sha or independent exact checksums for selected three-date files, qualify polarization and true tracking/ephemerides, estimate calibration scores on July and September ONLY. Freeze numerical detection threshold and false-alert budget before opening ANY October power sample. Compare strongest same-information direct matched filter, repeat-aware and TACHYON; no science PASS without multiple independent observing groups and real source truth."
+}
