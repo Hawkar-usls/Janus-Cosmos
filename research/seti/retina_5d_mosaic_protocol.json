@@ -1,0 +1,73 @@
+{
+  "schema": "janus.cosmos.retina_5d_mosaic.protocol.v1",
+  "stage": "R-RETINA-5D-MOSAIC-20261123",
+  "status": "RESEARCH_PROTOTYPE_SYNTHETIC_ONLY__SCIENCE_HOLD",
+  "purpose": "Transfer JANUS canonical analytical 5D Spiral as a provenance-aware mosaic of native time/frequency evidence, with reversible kaleidoscope views as invariance checks (never independent votes), and a separate visual-only sampled-frame QC adapter for shared TOPA Retina.",
+  "origins": [
+    {
+      "repo": "Hawkar-usls/janus-meta-registry",
+      "path": "data/JANUS-DEEP-ANALYSIS-5D-SPIRAL-ORIGIN-PRIME-ORACLE-PROTOCOL-2026-08-21-v2.1.json",
+      "blob": "b4922c58fde2254fa625f80d5e0de07d9aec3293"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "ref": "research/seti-r41s-5d-spiral-20261120",
+      "path": "research/seti/r41s_5d_spiral_protocol.json",
+      "blob": "5716ff06cb8ae9505b9e0ce40b3af8ac08cb2ce6"
+    },
+    {
+      "repo": "Hawkar-usls/TOPA",
+      "path": "tools/topa_retina_video.py",
+      "blob": "206056bce5b9b980311df680dffdc53393d3bd3e"
+    },
+    {
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "path": ".janus/RETINA_VIDEO_LINK.json",
+      "blob": "afe135457ca90a7e6883cc26912cc6c39b624bd9"
+    }
+  ],
+  "adaptation_status": "The numerical mosaic and mirrored invariance checks are new experimental signal-processing operators; they are not claimed to be a pre-existing canonical kaleidoscope code implementation.",
+  "dimensions": {
+    "D1": "time forwards/backwards at a fixed native candidate path; check score invariance and four-block persistence",
+    "D2": "native frequency mirror plus inverse index map; parity check only, never duplicated independent evidence",
+    "D3": "four-by-four mosaic is a navigation/diagnostic view; native resolution is scored and retained",
+    "D4": "retain competing noise/coherent/shared hypotheses; no automatic signal-origin verdict",
+    "D5": "hash source and reference native arrays, check caller-attested scan identity and same native grid; attestation alone is not physical TCS/IF proof"
+  },
+  "input_contract": {
+    "radio": "2D native (time,frequency) finite numeric data, optional matching independent OFF; no JPEG power input",
+    "video": "3D sampled grayscale frames from already source-bound TOPA Retina manifest, visual-only QC; preserve original video SHA256 and frame PTS externally",
+    "slope_grid_bins_per_time_sample": [
+      -0.125,
+      0,
+      0.125
+    ],
+    "temporal_blocks": 4,
+    "no_interpolation": true,
+    "no_resampling": true,
+    "no_threshold_change": true,
+    "no_label_guided_routing": true,
+    "no_raw_mutation": true,
+    "baseline_alert_always_preserved": true
+  },
+  "comparison": {
+    "comparator": "direct matched mean on same 3-slope bank with same rowwise robust normalization and sidebands",
+    "score": "0.5 full-path mean + 0.5 minimum four-block mean",
+    "controls": "synthetic Gaussian noise, impulse interference, weak/strong source-only lines and shared source/reference line",
+    "calibration": "80 synthetic noise-only arrays; separate seeded synthetic 200-case evaluation; threshold p95 computed independently per method; diagnostics only",
+    "scientific_limits": "No real authenticated radio frames evaluated; no physical IF mapping, independent scan confirmation or astronomical false-alarm calibration; test generator is simplified; July/September viewed experiments cannot become new blind holdout."
+  },
+  "gates": {
+    "engineering": "Nine local unit/integrity tests must PASS; parity/determinism/provenance/non-mutation, TOPA manifest SHA256 and PTS validation",
+    "science": "HOLD: independently replay matched native Parkes/GBT measurements and new untouched sessions against frozen R41S/R42 and direct matched filter; require zero protected weak losses at matched realized controls and confidence intervals by independent parent scan",
+    "production": "HOLD and separate authorization; no false-alarm suppression, no hard veto"
+  },
+  "usage": [
+    "python -m unittest discover -s research/seti -p 'test_retina_5d_mosaic*.py' -v",
+    "python research/seti/benchmark_retina_5d_mosaic.py"
+  ],
+  "original_sit2e_thresholds_unchanged": true,
+  "october_2025_holdout_opened": false,
+  "external_validation": false,
+  "production_adoption": false
+}

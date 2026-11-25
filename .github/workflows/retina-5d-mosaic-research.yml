@@ -1,0 +1,39 @@
+name: RETINA 5D Mosaic Research (synthetic only)
+
+on:
+  pull_request:
+    paths:
+      - 'research/seti/retina_5d_mosaic*'
+      - 'research/seti/test_retina_5d_mosaic*'
+      - '.github/workflows/retina-5d-mosaic-research.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install only research-QC dependencies
+        run: python -m pip install numpy==2.3.5 pillow==12.3.0
+      - name: Nine synthetic and integrity unit tests
+        run: python -m unittest discover -s research/seti -p 'test_retina_5d_mosaic*.py' -v
+      - name: Synthetic paired benchmark (not an astrophysical test)
+        run: |
+          python research/seti/benchmark_retina_5d_mosaic.py > /tmp/retina_5d_synthetic.json
+          python - <<'PY'
+          import json
+          with open('/tmp/retina_5d_synthetic.json') as f:
+              data=json.load(f)
+          assert data['source_kind']=='SYNTHETIC_GAUSSIAN_ONLY'
+          assert data['evaluation_cases']==200
+          assert data['production_adoption'] is False
+          assert data['metrics']['weak']['mosaic_exceed'] <= data['metrics']['weak']['direct_exceed']
+          print(json.dumps(data,indent=2))
+          PY

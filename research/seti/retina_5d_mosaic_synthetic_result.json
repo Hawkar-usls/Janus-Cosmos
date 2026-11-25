@@ -1,0 +1,54 @@
+{
+  "schema": "janus.cosmos.retina_5d_mosaic.synthetic_diagnostic.v1",
+  "seed_calibration": 2026112301,
+  "seed_evaluation": 2026112302,
+  "calibration_noise_only": 80,
+  "evaluation_cases": 200,
+  "threshold_basis": "synthetic in-sample noise p95 for each method; NOT SCIENTIFIC FPR",
+  "direct_95th": 0.8083670822088079,
+  "mosaic_95th": 0.629121450685,
+  "metrics": {
+    "noise": {
+      "count": 40,
+      "direct_exceed": 1,
+      "mosaic_exceed": 3,
+      "shared_advisory": 0
+    },
+    "impulse": {
+      "count": 40,
+      "direct_exceed": 27,
+      "mosaic_exceed": 3,
+      "shared_advisory": 0
+    },
+    "weak": {
+      "count": 40,
+      "direct_exceed": 35,
+      "mosaic_exceed": 31,
+      "shared_advisory": 0
+    },
+    "strong": {
+      "count": 40,
+      "direct_exceed": 40,
+      "mosaic_exceed": 40,
+      "shared_advisory": 0
+    },
+    "shared": {
+      "count": 40,
+      "direct_exceed": 40,
+      "mosaic_exceed": 40,
+      "shared_advisory": 39
+    }
+  },
+  "source_kind": "SYNTHETIC_GAUSSIAN_ONLY",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "platform": "Linux"
+  },
+  "local_tests": "9/9 PASS",
+  "local_source_sha256": "e4a43b2ed364d1c939c2a478cbe0d26f11d32a8915350a4dd114735d53537698",
+  "failure_to_preserve_weak_detections": "4/40 fewer weak test cases than direct at separately calibrated synthetic p95; not adoptable",
+  "science_limits": "Synthetic correlated-morphology test; not physical RFI origin, not independent astronomy false-alarm rate, not full native JANUS benchmark.",
+  "production_adoption": false,
+  "scientific_status": "HOLD_FRESH_REAL_INDEPENDENT_REPLAY"
+}
