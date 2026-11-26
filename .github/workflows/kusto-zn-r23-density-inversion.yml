@@ -1,0 +1,157 @@
+name: KUSTO ZN-R2.3 DENSITY INVERSION
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r23-density-inversion.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r23-density-inversion.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  density-forward:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray h5netcdf h5py fsspec aiohttp requests matplotlib
+      - name: Physical model compatibility and conditional sensitivity
+        run: |
+          mkdir -p zn-r23
+          PYTHONPATH=workspace python - <<'PY'
+          import json,os,hashlib,math
+          from pathlib import Path
+          import numpy as np
+          import requests,xarray as xr,fsspec,aiohttp
+          from scipy.signal import fftconvolve
+          from scipy.ndimage import gaussian_filter
+          from scipy.interpolate import RegularGridInterpolator
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r23');core.TARGET_LAT,core.TARGET_LON=-47.3,47.9
+          G=6.67430e-11
+          baseurl='https://topex.ucsd.edu/pub/global_grav_1min_SWOT/'
+          diameters=[2,4,6,8,12,16,20,30,40]
+          # Density contrasts are assumptions, not measured local geology.
+          families=[
+            {'id':'BATHYMETRIC_DEPRESSION','contrast_kg_m3':-1700,'top_km':3.45,'thickness_km':[.05,.1,.25,.5],'aspect':1},
+            {'id':'SEDIMENT_LENS','contrast_kg_m3':-400,'top_km':3.45,'thickness_km':[.25,.5,1,2],'aspect':1},
+            {'id':'LOW_DENSITY_CRUST','contrast_kg_m3':-200,'top_km':5,'thickness_km':[.5,1,2,4],'aspect':1},
+            {'id':'ELONGATED_LOW_DENSITY_ZONE','contrast_kg_m3':-400,'top_km':3.45,'thickness_km':[.25,.5,1,2],'aspect':3},
+            {'id':'DENSE_BODY_POSITIVE_CONTROL','contrast_kg_m3':500,'top_km':5,'thickness_km':[.5,1,2,4],'aspect':1}]
+          protocol={'experiment':'ZN-R2.3','parent_runs':[45818287802,45819402971],'target':[-47.3,47.9],'nominal_bathymetry_depth_km':3.448,'context_halfwidth_km':46,'fit_annulus_km':[25,45],'evaluation_radius_km':20,'aperture_km':5,'diameters_km':diameters,'families':families,'smoothing_fwhm_km':[8,12,16],'smoothing_role':'hypothetical Gaussian response, not calibrated SWOT transfer function','trend_orders':[1,2],'thresholds_mgal':[1,3,6],'conditional_detectability':'absolute detrended aperture median versus illustrative thresholds; not empirical power','model_role':'finite horizontal constant-density cylinder or ellipse; not actual fault geometry','orientation_deg':[0,45,90,135],'no_recentering':True,'exploratory':True,'production_promotion':False,'G_SI':G}
+          def clean(v):
+              if isinstance(v,dict): return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,(list,tuple)): return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)): return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer): return int(v)
+              return v
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),sort_keys=True,indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'protocol_sha256':write('protocol.json',protocol),'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'decision':'NOT_EXECUTED','production_promotion':False,'sources':{}}
+          def save(): write('receipt.json',r)
+          save()
+          try:
+              doc=requests.get(baseurl+'README_SWOT_06.txt',timeout=30);doc.raise_for_status()
+              p=out/'README_SWOT_06.txt';p.write_bytes(doc.content)
+              assert 'free-air gravity anomaly, milliGal, netcdf' in doc.text
+              r['sources']['unit_documentation']={'url':doc.url,'sha256':sha(p),'units':'mGal','note':'README describes NetCDF format for SWOT series; z attribute may be absent'}
+              save()
+              w,e,s,n=core.bbox_for_halfwidth_km(-47.3,47.9,46)
+              url=baseurl+'grav_SWOT_06.nc'
+              with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=120)}) as f:
+                  with xr.open_dataset(f,engine='h5netcdf') as ds:
+                      lk=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'))
+                      ok=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                      key=next(k for k,a in ds.data_vars.items() if a.ndim==2 and lk in a.dims and ok in a.dims)
+                      def span(k,a,b): return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                      a=ds[key].sel({lk:span(lk,s,n),ok:span(ok,w,e)}).transpose(lk,ok).sortby(lk).sortby(ok).load()
+                      lat,lon,z=a[lk].values,a[ok].values,np.asarray(a.values,dtype=float)
+              assert z.shape==(50,72) and np.isfinite(z).all()
+              p=out/'swot06_local.npz';np.savez_compressed(p,lat=lat,lon=lon,gravity=z)
+              r['sources']['SWOT06']={'url':url,'subset_sha256':sha(p),'shape':list(z.shape),'units':'mGal','full_source_sha256':None}
+              # Match the exact R2.2 coordinate grid and detrending rule.
+              x,y=core.grid_local_xy(lat,lon,-47.3,47.9);xx,yy=np.broadcast_arrays(x/1000,y/1000)
+              d=np.hypot(xx,yy);ann=(d>=25)&(d<=45);ap=d<=5;ev=d<=20
+              base=[np.ones_like(xx),xx/45,yy/45]
+              matrices={i:np.stack(base if i==1 else base+[xx**2/45**2,xx*yy/45**2,yy**2/45**2],axis=-1) for i in (1,2)}
+              def detrend(v,i):
+                  A=matrices[i];coef=np.linalg.lstsq(A[ann],v[ann],rcond=None)[0]
+                  return v-A@coef
+              obs={i:detrend(z,i) for i in (1,2)}
+              r['observed']={str(i):{'aperture_median_mgal':float(np.median(v[ap])),'background_robust_sigma_mgal':float(1.4826*np.median(np.abs(v[ann]-np.median(v[ann])))),'null_rmse_mgal':float(np.sqrt(np.mean(v[ev]**2)))} for i,v in obs.items()}
+              assert abs(r['observed']['2']['aperture_median_mgal']+5.409894334259119)<.05, 'R2.2 replay mismatch'
+              # Finite layer exact vertical integral of Newtonian kernel, horizontal quadrature.
+              # 0.5 km cells, support +/- 90 km, then hypothetical smoothing and interpolation.
+              step=.5;axis=np.arange(-90,90+step/2,step)
+              X,Y=np.meshgrid(axis*1000,axis*1000);R2=X*X+Y*Y
+              area=(step*1000)**2;coords=np.stack([yy,xx],axis=-1)
+              def kernel(top,thick,rho):
+                  return 1e5*G*rho*area*(1/np.sqrt(R2+(top*1000)**2)-1/np.sqrt(R2+((top+thick)*1000)**2))
+              # Independent analytic on-axis finite cylinder check, before smoothing.
+              radius=10000.;top=3450.;bottom=3950.;rho=-1700.
+              exact=2*np.pi*G*rho*1e5*((bottom-top)+np.sqrt(radius**2+top**2)-np.sqrt(radius**2+bottom**2))
+              disk=R2<=radius**2;num=float(np.sum(kernel(3.45,.5,rho)*disk))
+              rel=abs(num-exact)/abs(exact)
+              assert rel<.04 and num<0
+              r['physics_self_test']={'status':'PASS','analytic_mgal':float(exact),'numerical_mgal':num,'relative_error':rel}
+              rows=[];best={}
+              for family in families:
+                  fid=family['id'];aspect=family['aspect']
+                  for thick in family['thickness_km']:
+                      k=kernel(family['top_km'],thick,family['contrast_kg_m3'])
+                      for dia in diameters:
+                          for angle in ([0] if aspect==1 else protocol['orientation_deg']):
+                              t=np.deg2rad(angle);u=X*np.cos(t)+Y*np.sin(t);v=-X*np.sin(t)+Y*np.cos(t)
+                              mask=(u/(dia*500))**2+(v/(dia*500/aspect))**2<=1
+                              raw=fftconvolve(mask.astype(float),k,mode='same')
+                              for fwhm in protocol['smoothing_fwhm_km']:
+                                  sm=gaussian_filter(raw,fwhm/(2.35482*step),mode='constant')
+                                  model=RegularGridInterpolator((axis,axis),sm,bounds_error=True)(coords)
+                                  for order in (1,2):
+                                      m=detrend(model,order);o=obs[order]
+                                      center=float(np.median(m[ap]));rmse=float(np.sqrt(np.mean((o[ev]-m[ev])**2)))
+                                      null=r['observed'][str(order)]['null_rmse_mgal']
+                                      row={'family':fid,'diameter_km':dia,'thickness_km':thick,'orientation_deg':angle,'fwhm_km':fwhm,'trend_order':order,'modeled_aperture_mgal':center,'observed_aperture_mgal':r['observed'][str(order)]['aperture_median_mgal'],'rmse_mgal':rmse,'rmse_improvement_fraction':1-rmse/null,'amplitude_error_mgal':abs(center-r['observed'][str(order)]['aperture_median_mgal'])}
+                                      rows.append(row)
+                                      # Prespecified primary transfer hypothesis (12 km) and order 2.
+                                      if fwhm==12 and order==2 and (fid not in best or rmse<best[fid][0]['rmse_mgal']):
+                                          best[fid]=(row,m.copy())
+              r['model_count']=len(rows);r['primary_best_by_family']={k:v[0] for k,v in best.items()}
+              r['conditional_sensitivity']=[]
+              for family in families:
+                  fid=family['id']
+                  for thick in family['thickness_km']:
+                      for fwhm in protocol['smoothing_fwhm_km']:
+                          subset=[x for x in rows if x['family']==fid and x['thickness_km']==thick and x['fwhm_km']==fwhm and x['trend_order']==2 and x['orientation_deg']==0]
+                          r['conditional_sensitivity'].append({'family':fid,'thickness_km':thick,'fwhm_km':fwhm,'minimum_tested_diameter_km':{str(t):min((v['diameter_km'] for v in subset if abs(v['modeled_aperture_mgal'])>=t),default=None) for t in protocol['thresholds_mgal']}})
+              r['models_sha256']=write('model_grid.json',rows)
+              fig,axes=plt.subplots(2,3,figsize=(13,8),constrained_layout=True)
+              plots=[('Observed quadratic residual',obs[2])]+[(k,v[1]) for k,v in best.items()]
+              lim=max(float(np.max(np.abs(obs[2][ev]))),1)
+              for ax,(label,v) in zip(axes.ravel(),plots):
+                  im=ax.pcolormesh(xx,yy,v,cmap='RdBu_r',vmin=-lim,vmax=lim,shading='auto');ax.set_xlim(-25,25);ax.set_ylim(-25,25);ax.set_aspect('equal');ax.set_title(label.replace('_',' '),fontsize=9);ax.plot(0,0,'k+');fig.colorbar(im,ax=ax,label='mGal')
+              fig.savefig(out/'model_comparison.png',dpi=120);plt.close(fig)
+              r['decision']='CONDITIONAL_FORWARD_MODELS_ONLY'
+              r['limitations']=['No independent local depth, geology, sediment thickness or density data','No unique inversion; centered simple shapes are proxies','Hypothetical Gaussian smoothing not measured instrument transfer','Grid-search compatibility in same data not statistical detection','Sensitivity conditional on density, thickness, depth and smoothing, not empirical power','No direct sonar, no artificial-object inference','Exact September baseline not bound']
+              save()
+              # Compact log, full sensitivity/model grid in artifact.
+              summary=dict(r);summary['conditional_sensitivity']=[x for x in r['conditional_sensitivity'] if x['fwhm_km']==12]
+              print(json.dumps(clean(summary),indent=2,allow_nan=False))
+          except Exception as exc:
+              r['decision']='EXECUTION_BLOCKED';r['error']=str(exc);save();print(json.dumps(clean(r),indent=2));raise
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r23-density-inversion
+          path: zn-r23/
+          retention-days: 90
+          if-no-files-found: error
