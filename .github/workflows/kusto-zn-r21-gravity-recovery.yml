@@ -1,0 +1,130 @@
+name: KUSTO ZN-R2.1 GRAVITY RECOVERY
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r21-gravity-recovery.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r21-gravity-recovery.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gravity-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy requests xarray netCDF4 pillow fsspec h5netcdf h5py aiohttp scipy
+      - name: Extract fixed grids and compare controls
+        run: |
+          mkdir -p zn-r21
+          PYTHONPATH=workspace python - <<'PY'
+          import hashlib,json,os,tempfile,math
+          from pathlib import Path
+          import numpy as np
+          import xarray as xr
+          import requests,fsspec,aiohttp,h5py
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.stats import spearmanr
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r21')
+          core.TARGET_LAT,core.TARGET_LON=-47.3,47.9
+          w,e,s,n=core.bbox_for_halfwidth_km(-47.3,47.9,46)
+          controls=core.deterministic_controls()
+          protocol={'experiment':'ZN-R2.1 GRAVITY RECOVERY','target':[-47.3,47.9],'target_radius_km':25,'context_halfwidth_km':46,'control_centers':controls,'aperture_km':5,'rings_km':[0,5,10,20,25,40],'no_recentering':True,'gravity_role':'INDIRECT_ONLY','bathymetry_role':'GLOBAL_CONTEXT_ONLY_POSSIBLY_GRAVITY_DERIVED','baseline':'September receipt not bound','parent_run':45817000578,'production_promotion':False}
+          def clean(v):
+              if isinstance(v,dict): return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,list): return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)): return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer): return int(v)
+              return v
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),indent=2,sort_keys=True,allow_nan=False)+'\n');return hashlib.sha256(p.read_bytes()).hexdigest()
+          def digest(p):
+              with open(p,'rb') as f: return hashlib.file_digest(f,'sha256').hexdigest()
+          r={'protocol_sha256':write('protocol.json',protocol),'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'h5py_version':h5py.__version__,'sources':{},'production_promotion':False,'morphology_authority':'NONE_NO_DIRECT_SONAR'}
+          def save(): write('receipt.json',r)
+          save()
+          url='https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_06.nc'
+          def subset(ds):
+              lat=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'))
+              lon=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+              def span(k,a,b): return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+              v=ds.sel({lat:span(lat,s,n),lon:span(lon,w,e)})
+              key=next(k for k,a in v.data_vars.items() if a.ndim==2 and lat in a.dims and lon in a.dims)
+              a=v[key].transpose(lat,lon).sortby(lat).sortby(lon).load()
+              if a.size==0 or not np.isfinite(a.values).any(): raise ValueError('No finite local gravity samples')
+              return a[lat].values,a[lon].values,np.asarray(a.values,dtype=float),key,a.attrs.get('units'),{k:str(x) for k,x in ds.attrs.items()}
+          g=None
+          try:
+              mode='HTTP_RANGE';full_sha=None;range_error=None
+              try:
+                  with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=90)}) as f:
+                      with xr.open_dataset(f,engine='h5netcdf') as ds: g=subset(ds)
+              except Exception as exc:
+                  range_error=str(exc);mode='BOUNDED_FULL_DOWNLOAD'
+                  with tempfile.TemporaryDirectory() as tmp:
+                      p=Path(tmp)/'gravity.nc';total=0
+                      with requests.get(url,stream=True,timeout=(20,90)) as response:
+                          response.raise_for_status()
+                          with p.open('wb') as f:
+                              for chunk in response.iter_content(1048576):
+                                  total+=len(chunk)
+                                  if total>800*1024**2: raise ValueError('800 MiB source cap exceeded')
+                                  f.write(chunk)
+                      full_sha=digest(p)
+                      with xr.open_dataset(p,engine='netcdf4') as ds: g=subset(ds)
+              lat,lon,z,key,units,attrs=g
+              p=out/'swot_local.npz';np.savez_compressed(p,lat=lat,lon=lon,gravity=z)
+              r['sources']['SWOT_06']={'status':'LOCAL_SUBSET_READ','source':url,'mode':mode,'range_error':range_error,'full_source_sha256':full_sha,'subset_sha256':digest(p),'shape':list(z.shape),'finite_count':int(np.isfinite(z).sum()),'variable':key,'units':units,'attrs':attrs}
+          except Exception as exc: r['sources']['SWOT_06']={'status':'EXTRACTION_FAILED','source':url,'error':str(exc)}
+          save()
+          b=None
+          try:
+              params={'west':w,'east':e,'south':s,'north':n,'layer':'topo','format':'coards','resolution':'med'}
+              response=requests.get(core.GMRT_URL,params=params,timeout=180);response.raise_for_status()
+              p=out/'gmrt_global_context.nc';p.write_bytes(response.content)
+              with xr.open_dataset(p,engine='netcdf4') as ds:
+                  bl,bo,bz,key=core._pick_grid(ds)
+                  units=ds[key].attrs.get('units')
+              if not np.isfinite(bz).any(): raise ValueError('No finite bathymetry samples')
+              b=(bl,bo,bz)
+              r['sources']['GMRT_GLOBAL']={'status':'CONTEXT_READ','request_url':response.url,'sha256':digest(p),'shape':list(bz.shape),'units':units,'role':'NOT_DIRECT_SONAR; GEBCO infill may depend on altimetric gravity'}
+          except Exception as exc: r['sources']['GMRT_GLOBAL']={'status':'EXTRACTION_FAILED','error':str(exc)}
+          save()
+          def stats(a):
+              a=np.asarray(a);a=a[np.isfinite(a)]
+              return {'n':int(a.size),'median':float(np.median(a)) if a.size else None,'min':float(a.min()) if a.size else None,'max':float(a.max()) if a.size else None,'mad':float(np.median(np.abs(a-np.median(a)))) if a.size else None}
+          if g is not None:
+              lat,lon,z,key,units,attrs=g
+              def dist(la,lo):
+                  x,y=core.grid_local_xy(lat,lon,la,lo);return np.hypot(x,y)/1000
+              d=dist(-47.3,47.9)
+              def apertures(v):
+                  target=stats(v[d<=5]);cs=[dict(c,**stats(v[dist(c['lat'],c['lon'])<=5])) for c in controls]
+                  cm=[c['median'] for c in cs if c['n']>=4]
+                  t=target['median'];ref=stats(cm)
+                  return {'target':target,'control_medians':ref,'controls':cs,'delta_from_control_median':t-ref['median'] if t is not None and cm else None,'descriptive_two_sided_rank':(1+sum(abs(x-ref['median'])>=abs(t-ref['median']) for x in cm))/(1+len(cm)) if t is not None and cm else None,'rank_not_pvalue':'spatial correlation and overlapping apertures'}
+              r['gravity']={'rings':[dict(inner_km=a,outer_km=c,**stats(z[(d>=a)&(d<c)])) for a,c in zip(protocol['rings_km'][:-1],protocol['rings_km'][1:])],'apertures':apertures(z)}
+              if b is not None:
+                  bl,bo,bz=b
+                  yy,xx=np.meshgrid(lat,lon,indexing='ij')
+                  v=RegularGridInterpolator((bl,bo),bz,bounds_error=False,fill_value=np.nan)(np.stack([yy,xx],axis=-1))
+                  np.savez_compressed(out/'paired_grid.npz',lat=lat,lon=lon,gravity=z,bathymetry=v)
+                  mask=np.isfinite(z)&np.isfinite(v)&(d<=25)
+                  r['bathymetry']={'apertures':apertures(v),'paired_grid_sha256':digest(out/'paired_grid.npz'),'paired_n':int(mask.sum()),'spearman_rho':float(spearmanr(z[mask],v[mask]).statistic) if mask.sum()>=10 else None,'interpretation':'DESCRIPTIVE_SHARED_SOURCE_POSSIBLE_NOT_INDEPENDENT_REPLICATION'}
+          r['decision']='INDIRECT_CONTEXT_ONLY' if g is not None else 'GRAVITY_EXTRACTION_BLOCKED'
+          save()
+          print(json.dumps(clean(r),indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r21-gravity-recovery
+          path: zn-r21/
+          retention-days: 90
+          if-no-files-found: error
