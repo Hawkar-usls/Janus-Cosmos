@@ -1,0 +1,277 @@
+name: KUSTO ZN-R2.7 LOCAL ISOLATION
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r27-local-isolation.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r27-local-isolation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fields:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray netCDF4 h5netcdf h5py fsspec aiohttp requests rasterio pyproj geopandas pyogrio matplotlib
+      - name: Matched physical grids and field separation
+        run: |
+          mkdir -p zn-r27
+          PYTHONPATH=workspace python - <<'PY'
+          import json,os,hashlib,math,tempfile,traceback,zipfile
+          from pathlib import Path
+          import numpy as np
+          import requests,xarray as xr,fsspec,aiohttp,rasterio
+          from rasterio.warp import reproject,Resampling
+          from rasterio.transform import from_origin
+          from pyproj import CRS,Transformer
+          from scipy.ndimage import gaussian_filter,label
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.stats import spearmanr
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          out=Path('zn-r27')
+          sites={'ZERO_NODE':[-47.3,47.9]}
+          for i,la in enumerate([-41,-45,-49,-53]):
+              for j,lo in enumerate([40,45,50,55]):sites[f'CONTROL_{i}_{j}']=[la,lo]
+          bands=[(4,8),(8,16),(16,32),(32,64)]
+          protocol={'experiment':'ZN-R2.7','parent_run':45827752304,'sites':sites,'versions':['04','06'],'control_versions':['06'],'gravity_step_km':2,'paired_step_km':4,'halfwidth_km':360,'search_radii_km':[20,50,100,150,250],'fixed_local_node_xy_km':[-2,6],'local_search_radius_km':12,'background_fit_annulus_km':[50,250],'highpass_sigma_km':[8,16,32,64],'local_aperture_km':4,'dog_sigma_pairs_km':bands,'paired_sigma_pairs_km':bands[1:],'region_of_correlation_km':100,'component_threshold':'half absolute extremum within 100 km, same sign, 8-connected','direction':'PCA major axis of connected component, axial azimuth from north','local_grid':'WGS84 azimuthal equidistant','no_recentering':True,'magnetic_source':'NOAA single-band float32 sea level GeoTIFF','geology_context':'R2.4 age and GlobSed numeric grids; no direct sonar','production_promotion':False}
+          def clean(v):
+              if isinstance(v,dict):return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,(list,tuple)):return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)):return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer):return int(v)
+              if isinstance(v,np.bool_):return bool(v)
+              return v
+          def sha(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'protocol_sha256':write('protocol.json',protocol),'gravity':{},'magnetic':{},'geology':{},'paired':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          def err(e):return {'status':'FAILED','error_type':type(e).__name__,'error':repr(e),'traceback':traceback.format_exc(limit=4)}
+          save()
+          def grid(la,lo,step):
+              crs=CRS.from_proj4(f'+proj=aeqd +lat_0={la} +lon_0={lo} +datum=WGS84 +units=m +no_defs')
+              a=np.arange(-360,360.01,step);x,y=np.meshgrid(a,a[::-1])
+              lon,lat=Transformer.from_crs(crs,4326,always_xy=True).transform(x*1000,y*1000)
+              tr=from_origin((-360-step/2)*1000,(360+step/2)*1000,step*1000,step*1000)
+              return crs,x,y,lon,lat,tr
+          def sample(ds,la,lo,step):
+              crs,x,y,lon,lat,tr=grid(la,lo,step)
+              lk=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'));ok=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+              key=next(k for k,v in ds.data_vars.items() if v.ndim==2 and lk in v.dims and ok in v.dims)
+              def span(k,a,b):return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+              a=ds[key].sel({lk:span(lk,float(lat.min())-.15,float(lat.max())+.15),ok:span(ok,float(lon.min())-.15,float(lon.max())+.15)}).transpose(lk,ok).sortby(lk).sortby(ok).load()
+              v=RegularGridInterpolator((a[lk].values,a[ok].values),np.asarray(a.values,float),bounds_error=False,fill_value=np.nan)(np.stack([lat,lon],axis=-1))
+              return v,x,y
+          def filt(v,sigma,step):
+              # Normalized convolution; reject inadequately supported estimates.
+              good=np.isfinite(v);weight=gaussian_filter(good.astype(float),sigma/step,mode='constant')
+              num=gaussian_filter(np.where(good,v,0.),sigma/step,mode='constant')
+              return np.divide(num,weight,out=np.full_like(num,np.nan),where=weight>=.95)
+          def dog(v,a,b,step):return filt(v,a,step)-filt(v,b,step)
+          def metrics(f,x,y):
+              d=np.hypot(x,y);ap=f[(d<=5)&np.isfinite(f)]
+              ans={'center_median':float(np.median(ap)) if ap.size else None,'extrema':{}}
+              for rad in (20,50,100,150,250):
+                  m=(d<=rad)&np.isfinite(f)
+                  if not m.any():continue
+                  peaks={}
+                  for sign in (-1,1):
+                      ix=np.unravel_index(np.argmax(np.where(m,sign*f,-np.inf)),f.shape);v=float(f[ix]);px=float(x[ix]);py=float(y[ix])
+                      peaks[str(sign)]={'value':v,'x_km':px,'y_km':py,'distance_km':math.hypot(px,py),'near_search_edge':math.hypot(px,py)>=rad-4}
+                      if rad==250 and sign*v>0:
+                          labels,_=label(m&(sign*f>=abs(v)/2),structure=np.ones((3,3),int))
+                          mask=labels==labels[ix];pts=np.column_stack([x[mask],y[mask]])
+                          if len(pts)>=3:
+                              eig,vec=np.linalg.eigh(np.cov(pts.T));u=vec[:,-1];w=vec[:,0];a=pts@u;b=pts@w
+                              peaks[str(sign)].update({'component_cells':len(pts),'major_extent_km':float(np.ptp(a)),'minor_extent_km':float(np.ptp(b)),'azimuth_deg_axial':float(np.degrees(np.arctan2(u[0],u[1]))%180),'elongation_pca':float(np.sqrt(eig[-1]/eig[0])) if eig[0]>0 else None,'component_touches_search_edge':bool(np.any(d[mask]>=246))})
+                  ans['extrema'][str(rad)]=peaks
+              return ans
+          def summarize(v,x,y,step,pairs):
+              f={f'{a}_{b}':dog(v,a,b,step) for a,b in pairs}
+              return {k:metrics(z,x,y) for k,z in f.items()},f
+          gravity={}
+          for ver in ('04','06'):
+              url=f'https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_{ver}.nc'
+              try:
+                  with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=360)}) as f:
+                      with xr.open_dataset(f,engine='h5netcdf') as ds:
+                          for name,(la,lo) in sites.items():
+                              if ver=='04' and name!='ZERO_NODE':continue
+                              sid=name+'_'+ver
+                              try:
+                                  v,x,y=sample(ds,la,lo,2)
+                                  if not np.isfinite(v).all():raise ValueError('incomplete SWOT grid')
+                                  m,fields=summarize(v,x,y,2,bands)
+                                  p=out/(sid+'_gravity.npz');np.savez_compressed(p,x=x[0],y=y[:,0],gravity=v)
+                                  r['gravity'][sid]={'status':'ANALYZED','url':url,'sha256':sha(p),'bands':m}
+                                  if name=='ZERO_NODE' or ver=='06':gravity[sid]=(v,x,y,fields)
+                              except Exception as e:r['gravity'][sid]=err(e)
+                              save()
+              except Exception as e:r['gravity']['VERSION_'+ver]=err(e);save()
+          if all('ZERO_NODE_'+v in gravity for v in ('04','06')):
+              a=gravity['ZERO_NODE_04'];b=gravity['ZERO_NODE_06'];mask=np.hypot(a[1],a[2])<=250
+              r['version_comparison']={}
+              for k in a[3]:
+                  ma=r['gravity']['ZERO_NODE_04']['bands'][k]['extrema']['250'];mb=r['gravity']['ZERO_NODE_06']['bands'][k]['extrema']['250']
+                  r['version_comparison'][k]={'rho':float(spearmanr(a[3][k][mask],b[3][k][mask]).statistic),'peak_shifts_km':{s:math.hypot(ma[s]['x_km']-mb[s]['x_km'],ma[s]['y_km']-mb[s]['y_km']) for s in ('-1','1')}}
+          save()
+          def fetch(url,p,cap):
+              n=0
+              with requests.get(url,stream=True,timeout=(20,90)) as resp:
+                  resp.raise_for_status()
+                  with p.open('wb') as f:
+                      for chunk in resp.iter_content(1048576):
+                          n+=len(chunk)
+                          if n>cap:raise ValueError('download cap')
+                          f.write(chunk)
+              return {'url':url,'bytes':n,'sha256':sha(p)}
+          def correlation(a,b,mask):
+              m=mask&np.isfinite(a)&np.isfinite(b)
+              return {'paired_grid_cells':int(m.sum()),'spearman_rho':float(spearmanr(a[m],b[m]).statistic) if m.sum()>=20 else None,'not_independent_sample_count':True}
+          url='https://www.ngdc.noaa.gov/geomag/data/EMAG2/EMAG2_V3_20170530/EMAG2_V3_20170530_Sealevel.tif'
+          try:
+              with tempfile.TemporaryDirectory() as tmp:
+                  p=Path(tmp)/'emag.tif';r['magnetic']['source']=fetch(url,p,350*1024**2);save()
+                  with rasterio.open(p) as ds:
+                      md={'crs':str(ds.crs),'wkt':ds.crs.to_wkt() if ds.crs else None,'transform':list(ds.transform),'bounds':list(ds.bounds),'shape':list(ds.shape),'dtypes':list(ds.dtypes),'bands':ds.count,'scales':list(ds.scales),'offsets':list(ds.offsets),'nodata':ds.nodata,'tags':{k:str(v)[:500] for k,v in ds.tags().items()}}
+                      r['magnetic']['metadata']=md;save()
+                      if ds.count!=1 or ds.dtypes[0]!='float32':raise ValueError('not scientific Float32 source')
+                      iso='https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.geophysical_models%3AEMAG2_V3'
+                      response=requests.get(iso,timeout=60);response.raise_for_status()
+                      doc=out/'NOAA_EMAG2_ISO.html';doc.write_bytes(response.content)
+                      if '4326' not in response.text or 'EMAG2_V3_20170530_Sealevel.tif' not in response.text:raise ValueError('ISO CRS/file binding not found')
+                      if r['magnetic']['source']['sha256']!='57a5ef84123f17c71387fc790d73c8692fcdf853b8c82aa2350016e3c565d615':raise ValueError('scientific file changed since R2.6')
+                      if ds.shape!=(5399,10800) or not np.allclose([ds.transform.a,ds.transform.e,ds.transform.b,ds.transform.d],[1/30,-1/30,0,0],atol=1e-9) or not np.allclose([ds.bounds.left,ds.bounds.right],[-1/60,360-1/60],atol=1e-5):raise ValueError('unexpected geographic raster geometry')
+                      if ds.crs and ds.crs.to_epsg()!=4326:raise ValueError('embedded CRS conflicts with ISO')
+                      r['magnetic']['crs_recovery']={'status':'DOCUMENTED_EPSG4326','iso_url':iso,'metadata_sha256':sha(doc),'source_longitude_domain':'0..360','method':'native affine sampling','embedded_crs_present':bool(ds.crs)}
+                      save()
+                      for name,(la,lo) in sites.items():
+                          try:
+                              crs,x,y,lons,lats,tr=grid(la,lo,4)
+                              # GDAL performs transformation from embedded native CRS, including projected CRS.
+                              from rasterio.windows import from_bounds,Window
+                              lons=lons%360
+                              win=from_bounds(float(lons.min())-.15,float(lats.min())-.15,float(lons.max())+.15,float(lats.max())+.15,ds.transform)
+                              win=Window(math.floor(win.col_off),math.floor(win.row_off),math.ceil(win.width)+2,math.ceil(win.height)+2)
+                              raw=ds.read(1,window=win,masked=True).astype(float).filled(np.nan)
+                              raw[(raw==99999)|(np.abs(raw)>1e6)]=np.nan
+                              t=ds.window_transform(win)
+                              nx=t.c+(np.arange(raw.shape[1])+.5)*t.a;ny=t.f+(np.arange(raw.shape[0])+.5)*t.e
+                              dest=RegularGridInterpolator((ny[::-1],nx),raw[::-1],bounds_error=False,fill_value=np.nan)(np.stack([lats,lons],axis=-1))
+                              dest=dest*ds.scales[0]+ds.offsets[0]
+                              d=np.hypot(x,y);good=np.isfinite(dest);coverage=float(good[d<=100].mean())
+                              if coverage<.95:raise ValueError(f'local coverage {coverage:.3f} below 0.95')
+                              p=out/(name+'_magnetic.npz');np.savez_compressed(p,x=x[0],y=y[:,0],magnetic_nT=dest)
+                              m,mf=summarize(dest,x,y,4,bands[1:])
+                              r['magnetic'][name]={'status':'ANALYZED','units':'nT','sha256':sha(p),'coverage_100km':coverage,'center_median_nT':float(np.nanmedian(dest[d<=5])),'bands':m}
+                              if name+'_06' in gravity:
+                                  v,gx,gy,gf=gravity[name+'_06'];g=v[::2,::2]
+                                  if not (np.allclose(gx[::2,::2],x) and np.allclose(gy[::2,::2],y)):raise ValueError('paired grid mismatch')
+                                  # Filter at 2 km then sample on shared 4 km grid; compare only >=8 km sigma.
+                                  r['paired'][name]={'raw':correlation(g,dest,d<=100),'bands':{k:correlation(gf[k][::2,::2],f,d<=100) for k,f in mf.items()}}
+                                  if name=='ZERO_NODE':
+                                      fig,axs=plt.subplots(2,3,figsize=(12,8),constrained_layout=True)
+                                      for i,(k,f) in enumerate(mf.items()):
+                                          for ax,z,title in ((axs[0,i],gf[k][::2,::2],'Gravity mGal'),(axs[1,i],f,'Magnetic nT')):
+                                              lim=np.nanpercentile(np.abs(z[d<=100]),98);im=ax.pcolormesh(x,y,z,cmap='RdBu_r',vmin=-lim,vmax=lim,shading='auto');ax.set(xlim=(-100,100),ylim=(-100,100),title=title+' '+k+' km',aspect='equal');ax.plot(0,0,'k+');fig.colorbar(im,ax=ax)
+                                      fig.savefig(out/'paired_fields.png',dpi=140);plt.close(fig)
+                          except Exception as e:r['magnetic'][name]=err(e)
+                          save()
+          except Exception as e:r['magnetic']['failure']=err(e);save()
+          # Re-fetch geological numerical grids, bind to R2.4 source hashes, compare only broad bands.
+          for name,url,expected in [('AGE','https://www.earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GTS2012.6m.nc','3abeed4f6e9bfe9332ac6b5dff4c4f19c8a6374528a185f87e677db8152ba39e'),('GLOBSED','https://data.caltech.edu/records/k4070-ngc79/files/GlobSed.zip?download=1','e063ee6603d65c9cee6420cb52a4c6afb520143711b12d618f1a2f591d248bd9')]:
+              meta={}
+              try:
+                  with tempfile.TemporaryDirectory() as tmp:
+                      p=Path(tmp)/'source';meta=fetch(url,p,150*1024**2);meta['matches_r24']=meta['sha256']==expected
+                      if not meta['matches_r24']:raise ValueError('source changed since R2.4')
+                      if name=='GLOBSED':
+                          with zipfile.ZipFile(p) as f:
+                              q=Path(tmp)/'sed.nc';q.write_bytes(f.read('GlobSed/GlobSed_package3/GlobSed-v3.nc'));p=q
+                      with xr.open_dataset(p,engine='netcdf4') as ds:v,x,y=sample(ds,-47.3,47.9,4)
+                      d=np.hypot(x,y);meta['coverage_100km']=float(np.isfinite(v[d<=100]).mean());meta['median_25km']=float(np.nanmedian(v[d<=25]));meta['units_reference']='Ma' if name=='AGE' else 'm'
+                      p=out/(name+'_local.npz');np.savez_compressed(p,x=x[0],y=y[:,0],value=v);meta['subset_sha256']=sha(p)
+                      if 'ZERO_NODE_06' in gravity:
+                          _,_,_,gf=gravity['ZERO_NODE_06'];meta['gravity_broad_bands']={k:correlation(gf[k][::2,::2],dog(v,a,b,4),d<=100) for a,b in [(16,32),(32,64)] for k in [f'{a}_{b}']}
+                      if r['magnetic'].get('ZERO_NODE',{}).get('status')=='ANALYZED':
+                          with np.load(out/'ZERO_NODE_magnetic.npz') as a:mag=a['magnetic_nT']
+                          meta['magnetic_broad_bands']={f'{a}_{b}':correlation(dog(mag,a,b,4),dog(v,a,b,4),d<=100) for a,b in [(16,32),(32,64)]}
+                      meta['status']='CONTEXT_READ'
+              except Exception as e:meta.update(err(e))
+              r['geology'][name]=meta;save()
+          r['local_isolation']={}
+          def local_metrics(v,x,y):
+              d=np.hypot(x,y);dl=np.hypot(x+2,y-6);m=(dl<=12)&np.isfinite(v)
+              if not m.any():return {'status':'NO_FINITE_LOCAL_FIELD'}
+              i=np.unravel_index(np.argmin(np.where(m,v,np.inf)),v.shape)
+              def med(mask):
+                  a=v[mask&np.isfinite(v)]
+                  return float(np.median(a)) if a.size else None
+              center=med(dl<=4);ring=med((dl>=8)&(dl<=15));j=np.unravel_index(np.argmin(dl),dl.shape)
+              return {'zero_aperture_median':med(d<=4),'local_aperture_median':center,'local_fixed_cell':float(v[j]),'local_annulus_median':ring,'local_prominence':center-ring if center is not None and ring is not None else None,'local_minimum':float(v[i]),'min_x_km':float(x[i]),'min_y_km':float(y[i]),'shift_from_frozen_local_km':float(dl[i]),'near_search_edge':bool(dl[i]>=10)}
+          for sid,(v,x,y,fields) in gravity.items():
+              d=np.hypot(x,y);ann=(d>=50)&(d<=250);A=np.stack([np.ones_like(x),x/250,y/250,(x/250)**2,x*y/250**2,(y/250)**2],axis=-1)
+              fit=np.linalg.lstsq(A[ann],v[ann],rcond=None)[0];res=v-A@fit
+              layers={'raw':v,'regional_quadratic':res}
+              for sigma in (8,16,32,64):layers[f'highpass_{sigma}']=v-filt(v,sigma,2)
+              layers.update({'dog_'+k:f for k,f in fields.items()})
+              r['local_isolation'][sid]={k:local_metrics(f,x,y) for k,f in layers.items()}
+              if sid.startswith('ZERO_NODE'):
+                  p=out/(sid+'_local_fields.npz');np.savez_compressed(p,x=x[0],y=y[:,0],**layers)
+                  r['local_isolation'][sid]['field_sha256']=sha(p)
+          r['control_comparison']={}
+          for key in ('regional_quadratic','highpass_8','highpass_16','highpass_32','highpass_64','dog_4_8','dog_8_16'):
+              t=r['local_isolation'].get('ZERO_NODE_06',{}).get(key)
+              cs=[v[key]['local_prominence'] for k,v in r['local_isolation'].items() if k.startswith('CONTROL') and v.get(key,{}).get('local_prominence') is not None]
+              if t and t.get('local_prominence') is not None and cs:
+                  r['control_comparison'][key]={'control_count':len(cs),'target_local_prominence_mgal':t['local_prominence'],'control_as_or_more_negative':sum(v<=t['local_prominence'] for v in cs),'descriptive_rank':(1+sum(v<=t['local_prominence'] for v in cs))/(1+len(cs))}
+          r['geological_background']={}
+          if 'ZERO_NODE_06' in gravity and all(r['geology'].get(k,{}).get('status')=='CONTEXT_READ' for k in ('AGE','GLOBSED')):
+              try:
+                  v,x,y,_=gravity['ZERO_NODE_06'];d=np.hypot(x,y)
+                  def interp_file(name,key):
+                      with np.load(out/name) as q:
+                          a=q['x'];b=q['y'];z=q[key]
+                          return RegularGridInterpolator((b[::-1],a),z[::-1],bounds_error=False,fill_value=np.nan)(np.stack([y,x],axis=-1))
+                  predictors={'AGE':interp_file('AGE_local.npz','value'),'GLOBSED':interp_file('GLOBSED_local.npz','value')}
+                  if r['magnetic'].get('ZERO_NODE',{}).get('status')=='ANALYZED':predictors['EMAG2']=interp_file('ZERO_NODE_magnetic.npz','magnetic_nT')
+                  for names in [[],['AGE','GLOBSED']]+([['AGE','GLOBSED','EMAG2']] if 'EMAG2' in predictors else []):
+                      cols=[np.ones_like(x),x/250,y/250,(x/250)**2,x*y/250**2,(y/250)**2]
+                      for name in names:cols.append(filt(predictors[name],16,2))
+                      A=np.stack(cols,axis=-1);finite=np.isfinite(A).all(axis=-1)&np.isfinite(v)
+                      train=(d>=50)&(d<=250)&finite;validation=(d>=20)&(d<50)&finite
+                      if train.sum()<200 or validation.sum()<50:continue
+                      for j in range(6,A.shape[-1]):
+                          mu=np.mean(A[...,j][train]);sd=np.std(A[...,j][train]);A[...,j]=(A[...,j]-mu)/max(sd,1e-12)
+                      coef,_,rank,_=np.linalg.lstsq(A[train],v[train],rcond=None)
+                      if rank!=A.shape[-1]:continue
+                      residual=v-A@coef;key='+'.join(names) or 'POLYNOMIAL_ONLY'
+                      r['geological_background'][key]={'fit_cells':int(train.sum()),'validation_cells':int(validation.sum()),'validation_rmse_mgal':float(np.sqrt(np.mean(residual[validation]**2))),'local_metrics':local_metrics(residual,x,y),'local_highpass_8':local_metrics(residual-filt(residual,8,2),x,y),'local_dog_4_8':local_metrics(dog(residual,4,8,2),x,y),'interpretation':'exploratory spatial prediction, not causal geology or independent acquisition'}
+                      p=out/('background_'+key.replace('+','_')+'.npz');np.savez_compressed(p,x=x[0],y=y[:,0],residual=residual)
+                      r['geological_background'][key]['residual_sha256']=sha(p)
+              except Exception as e:r['geological_background']['failure']=err(e)
+          save()
+          r['decision']='DESCRIPTIVE_LOCAL_ISOLATION' if r['magnetic'].get('ZERO_NODE',{}).get('status')=='ANALYZED' and 'ZERO_NODE_06' in gravity else 'PARTIAL_LOCAL_ISOLATION'
+          r['limitations']=['DoG scales are Gaussian sigmas not exact wavelengths or depth layers','Connected half-peak contours are descriptive and can be edge-truncated','PCA orientation not mapped fault strike','Magnetic and gravity grids have different effective resolution; spatial correlation not independent observations','Age and sediment grids are regional interpolations','R2.4 fabric map found no mapped lines in local box; does not exclude unmapped faults','No sonar or verified negative controls','No unique inversion','Fixed local point selected in R2.6; exploratory, shared SWOT observations','Geological regression fit outside 50 km, not proof of cause']
+          save()
+          compact=dict(r)
+          compact['gravity']={k:v if k.startswith('ZERO_NODE') else {'status':v.get('status'),'sha256':v.get('sha256'),'error':v.get('error'),'center_by_band':{b:m['center_median'] for b,m in v.get('bands',{}).items()}} for k,v in r['gravity'].items()}
+          compact['magnetic']={k:v if k in ('ZERO_NODE','source','metadata','failure') else {'status':v.get('status'),'sha256':v.get('sha256'),'error':v.get('error')} for k,v in r['magnetic'].items()}
+          compact['local_isolation']={k:v for k,v in r['local_isolation'].items() if k.startswith('ZERO_NODE')}
+          print(json.dumps(clean(compact),indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r27-local-isolation
+          path: zn-r27/
+          retention-days: 90
