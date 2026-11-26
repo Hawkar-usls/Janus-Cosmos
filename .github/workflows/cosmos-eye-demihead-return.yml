@@ -1,0 +1,72 @@
+name: COSMOS EYE DemiHead return witness R1
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/cosmos-eye-demihead-return.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/cosmos-eye-demihead-return.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  return-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 642643963bd143ded068c22107d1e2f6a204c1da
+          path: demihead
+          sparse-checkout: |
+            tools/cosmos_eye_spatial_review.py
+            tools/nexus_guardian_ingress.py
+            tools/epistemic_execution_gate.py
+            contracts/NEXUS_COSMOS_EYE_SPATIAL_R1_FROZEN_CONTRACT.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 4411695e1e54b690613fe6db45809a663e0f3b47
+          path: registry
+          sparse-checkout: |
+            experiments/kusto/zn-r2/2026-11-26-run-45830969841.json
+            experiments/janus-eye/r1/2026-11-26-run-45833030382.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: COSMOS consumes native DemiHead review and verifies return
+        run: |
+          mkdir -p cosmos-eye-review
+          test "$(git -C demihead rev-parse HEAD)" = 642643963bd143ded068c22107d1e2f6a204c1da
+          PYTHONPATH=demihead/tools python - <<'PY'
+          import json,os,copy
+          from pathlib import Path
+          from cosmos_eye_spatial_review import build_request,review,verify_review
+          root=Path('registry');out=Path('cosmos-eye-review')
+          req=build_request(root);res=review(root,req)
+          assert verify_review(root,req,res)
+          assert res['decision']=='ACCEPT_DESCRIPTIVE_MODEL_ONLY'
+          assert res['authority_delta']==0 and not res['production_promotion']
+          bad=copy.deepcopy(res);bad['unique_object_established']=True
+          assert not verify_review(root,req,bad)
+          holds={}
+          for claim in ('UNIQUE_OBJECT','DIRECT_SONAR','INDEPENDENT_REPLICATION'):
+              q=build_request(root,claim);r=review(root,q)
+              assert verify_review(root,q,r)
+              assert r['release']['status']=='WAIT_FOR_NEW_EVIDENCE'
+              holds[claim]=r['decision']
+          receipt={'schema':'janus.cosmos.eye.demihead_return.v1','run_id':os.environ['GITHUB_RUN_ID'],'provider_commit':'642643963bd143ded068c22107d1e2f6a204c1da','request':req,'returned_review':res,'held_claims':holds,'forged_return_rejected':True,'decision':'NATIVE_REVIEW_REPLAY_PASS','transport_scope':'native DemiHead code executed in COSMOS runner; not live remote exchange','production_promotion':False}
+          (out/'receipt.json').write_text(json.dumps(receipt,indent=2))
+          print(json.dumps(receipt,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cosmos-eye-demihead-return
+          path: cosmos-eye-review/
