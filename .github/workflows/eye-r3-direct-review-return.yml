@@ -1,4 +1,4 @@
-name: EYE R3 COSMOS direct review return
+name: EYE R3.1 COSMOS direct review return
 on:
   push:
     branches: [experiment/kusto-zn-r2-deep-scan-20261126]
@@ -49,7 +49,7 @@ jobs:
           from pathlib import Path
           import requests
           from cosmos_eye_spatial_review import build_request,verify_review
-          p=Path('r3-return');repo='Hawkar-usls/Demi_Head';head='c66c7beb017e43d040d5499f513e3eaf8f108fbc'
+          p=Path('r3-return');repo='Hawkar-usls/Demi_Head';head='0814de95f0761b3820f5a1c381733b1459110444'
           base='https://api.github.com/repos/'+repo
           headers={'Authorization':'Bearer '+os.environ['GH_READ_TOKEN'],'Accept':'application/vnd.github+json'}
           receipt={'schema':'janus.eye.r3.cosmos_direct_return.v1','run_id':os.environ['GITHUB_RUN_ID'],'producer_repo':repo,'producer_head':head,'production_promotion':False}
