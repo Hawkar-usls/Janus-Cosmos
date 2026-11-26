@@ -1,0 +1,156 @@
+name: KUSTO ZN-R2.2 GRAVITY TOMOGRAPHY
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r22-gravity-tomography.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r22-gravity-tomography.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  residual-field:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy xarray h5netcdf h5py fsspec aiohttp requests scipy contourpy matplotlib
+      - name: Frozen residual geometry and natural controls
+        run: |
+          mkdir -p zn-r22
+          PYTHONPATH=workspace python - <<'PY'
+          import json,os,hashlib,math
+          from pathlib import Path
+          import numpy as np
+          import xarray as xr
+          import fsspec,aiohttp
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.stats import spearmanr
+          from contourpy import contour_generator
+          from matplotlib.path import Path as MPath
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r22')
+          sites={'ZERO_NODE':[-47.3,47.9],'GREAT_METEOR':[30,-28.5],'AXIAL':[46,-130],'DAVIDSON':[35.76,-122.70]}
+          refs={'GREAT_METEOR':'https://doi.org/10.1007/s12526-024-01484-y','AXIAL':'https://www.pmel.noaa.gov/eoi/featured-publication/1998-eruption-axial-seamount/','DAVIDSON':'https://doi.org/10.1029/2004GC000833'}
+          protocol={'experiment':'ZN-R2.2','parent_run':45818287802,'sites':sites,'natural_control_sources':refs,'versions':['04','06'],'domain_halfwidth_km':46,'fit_annulus_km':[25,45],'trend_orders':[1,2],'aperture_km':5,'geometry_radii_km':[8,12,20],'contour_levels_sigma':[-2,-1,1,2],'harmonics':[1,2,3,4],'local_control_rings_km':[10,20,30,40],'no_recentering':True,'exploratory':True,'claim_ceiling':'2D_INDIRECT_RESIDUAL_GEOMETRY_NOT_DEPTH_TOMOGRAPHY','effective_resolution_not_grid_spacing':True,'production_promotion':False}
+          def clean(v):
+              if isinstance(v,dict): return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,(list,tuple)): return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)): return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer): return int(v)
+              return v
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),sort_keys=True,indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'protocol_sha256':write('protocol.json',protocol),'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'sites':{},'comparisons':{},'production_promotion':False,'september_exact_baseline':'NOT_BOUND','morphology_authority':'NONE_NO_DIRECT_SONAR'}
+          def save(): write('receipt.json',r)
+          save()
+          grids={}
+          def analyze(lat,lon,z,la,lo):
+              core.TARGET_LAT,core.TARGET_LON=la,lo
+              x,y=core.grid_local_xy(lat,lon,la,lo)
+              xx,yy=np.broadcast_arrays(x/1000,y/1000)
+              d=np.hypot(xx,yy); theta=np.arctan2(yy,xx)
+              base=[np.ones_like(xx),xx/45,yy/45]
+              fit=(d>=25)&(d<=45)&np.isfinite(z)
+              assert fit.sum()>100
+              results={}; fields={}
+              for order in (1,2):
+                  cols=base if order==1 else base+[xx**2/45**2,xx*yy/45**2,yy**2/45**2]
+                  A=np.stack(cols,axis=-1)
+                  coef,_,rank,_=np.linalg.lstsq(A[fit],z[fit],rcond=None)
+                  assert rank==len(cols)
+                  res=z-A@coef
+                  sigma=1.4826*np.median(np.abs(res[fit]-np.median(res[fit])))
+                  if not np.isfinite(sigma) or sigma<=0: raise ValueError('invalid background scale')
+                  gy,gx=np.gradient(res,yy[:,0],xx[0,:]); grad=np.hypot(gx,gy)
+                  def median(mask,v=res):
+                      a=v[mask&np.isfinite(v)]
+                      return float(np.median(a)) if a.size else None
+                  center=median(d<=5)
+                  cs=[]
+                  for c in core.deterministic_controls():
+                      u,v=core.grid_local_xy(lat,lon,c['lat'],c['lon'])
+                      a=np.hypot(u,v)<=5000
+                      if (a&np.isfinite(res)).sum()>=4: cs.append(median(a))
+                  cm=float(np.median(cs))
+                  rank=(1+sum(abs(v-cm)>=abs(center-cm) for v in cs))/(1+len(cs))
+                  harmonics=[]
+                  for rad in (8,12,20):
+                      mask=(d>=rad-2)&(d<=rad+2)&np.isfinite(res)
+                      # least squares handles irregular angular sampling
+                      a=theta[mask]; v=res[mask]
+                      H=np.column_stack([np.ones_like(a)]+[f(k*a) for k in range(1,5) for f in (np.cos,np.sin)])
+                      if len(v)<18 or np.linalg.matrix_rank(H)<9:
+                          harmonics.append({'radius_km':rad,'status':'INSUFFICIENT_SAMPLES'});continue
+                      c=np.linalg.lstsq(H,v,rcond=None)[0]
+                      powers=[float(c[i]**2+c[i+1]**2) for i in (1,3,5,7)]
+                      total=sum(powers)
+                      harmonics.append({'radius_km':rad,'n':len(v),'power_fractions':[p/total if total else 0 for p in powers],'k4_phase_deg':float(np.degrees(np.arctan2(c[8],c[7]))/4)%90})
+                  cg=contour_generator(x=xx[0],y=yy[:,0],z=res/sigma)
+                  contours=[]
+                  for lev in (-2,-1,1,2):
+                      paths=cg.lines(lev)
+                      closed=[p for p in paths if len(p)>=5 and np.allclose(p[0],p[-1]) and np.max(np.hypot(p[:,0],p[:,1]))<=25]
+                      enclosing=[p for p in closed if MPath(p).contains_point((0,0))]
+                      contours.append({'level_sigma':lev,'closed_inside_25km':len(closed),'enclosing_center':len(enclosing)})
+                  results[str(order)]={'fit_n':int(fit.sum()),'coefficients':coef.tolist(),'background_robust_sigma':sigma,'center_residual':center,'center_sigma':center/sigma,'control_median':cm,'control_count':len(cs),'descriptive_two_sided_rank':rank,'center_gradient_median_per_km':median(d<=5,grad),'background_gradient_median_per_km':median(fit,grad),'harmonics':harmonics,'contours':contours}
+                  fields[order]=res
+              return results,fields,xx,yy
+          for version in ('04','06'):
+              url=f'https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_{version}.nc'
+              try:
+                  with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=120)}) as f:
+                      with xr.open_dataset(f,engine='h5netcdf') as ds:
+                          latkey=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'))
+                          lonkey=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                          key=next(k for k,a in ds.data_vars.items() if a.ndim==2 and latkey in a.dims and lonkey in a.dims)
+                          def span(k,a,b): return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                          for name,(la,lo) in sites.items():
+                              sid=f'{name}_{version}'
+                              try:
+                                  w,e,s,n=core.bbox_for_halfwidth_km(la,lo,46)
+                                  a=ds[key].sel({latkey:span(latkey,s,n),lonkey:span(lonkey,w,e)}).transpose(latkey,lonkey).sortby(latkey).sortby(lonkey).load()
+                                  lat,lon,z=a[latkey].values,a[lonkey].values,np.asarray(a.values,dtype=float)
+                                  if not z.size or not np.isfinite(z).all(): raise ValueError('incomplete grid')
+                                  p=out/f'{sid}.npz';np.savez_compressed(p,lat=lat,lon=lon,gravity=z)
+                                  result,fields,xx,yy=analyze(lat,lon,z,la,lo)
+                                  grids[sid]=(lat,lon,z,fields)
+                                  r['sites'][sid]={'status':'READ_AND_ANALYZED','url':url,'subset_sha256':sha(p),'shape':list(z.shape),'units_metadata':a.attrs.get('units'),'trend_results':result}
+                                  fig,ax=plt.subplots(1,3,figsize=(12,4),constrained_layout=True)
+                                  for axes,v,label in zip(ax,[z,fields[1],fields[2]],['Raw','Linear residual','Quadratic residual']):
+                                      im=axes.pcolormesh(xx,yy,v,shading='auto',cmap='RdBu_r');axes.set_aspect('equal');axes.set_title(label);axes.plot(0,0,'k+',ms=10);fig.colorbar(im,ax=axes)
+                                  fig.suptitle(sid+' | indirect gravity');fig.savefig(out/f'{sid}.png',dpi=120);plt.close(fig)
+                              except Exception as exc: r['sites'][sid]={'status':'SITE_FAILED','error':str(exc),'url':url}
+                              save()
+              except Exception as exc: r['sites'][f'VERSION_{version}']={'status':'SOURCE_FAILED','error':str(exc),'url':url}
+              save()
+          for name in sites:
+              a=grids.get(f'{name}_04');b=grids.get(f'{name}_06')
+              if a is None or b is None: continue
+              al,ao,az,af=a;bl,bo,bz,bf=b
+              if not (np.array_equal(al,bl) and np.array_equal(ao,bo)):
+                  r['comparisons'][name]={'status':'GRID_MISMATCH_NO_COMPARISON'};continue
+              c={}
+              for key,v,w in [('raw',az,bz),('linear',af[1],bf[1]),('quadratic',af[2],bf[2])]:
+                  diff=w-v;c[key]={'n':int(v.size),'rms_difference':float(np.sqrt(np.mean(diff**2))),'median_difference':float(np.median(diff)),'spearman_rho':float(spearmanr(v.ravel(),w.ravel()).statistic)}
+              r['comparisons'][name]={'status':'SAME_GRID_COMPARISON','metrics':c,'interpretation':'SHARED_OBSERVATIONS_NOT_INDEPENDENT_REPLICATION'}
+          r['decision']='DESCRIPTIVE_RESIDUAL_GEOMETRY_ONLY' if 'ZERO_NODE' in r['comparisons'] else 'VERSION_COMPARISON_INCOMPLETE'
+          r['limitations']=['No direct sonar at ZERO NODE','No depth inversion','Spatially correlated cells; descriptive ranks not p-values','Natural reference sites not matched random nulls','Same mission versions share observations','No exact September run baseline']
+          save()
+          print(json.dumps(clean(r),indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r22-gravity-tomography
+          path: zn-r22/
+          retention-days: 90
+          if-no-files-found: error

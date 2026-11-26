@@ -1,0 +1,76 @@
+name: KUSTO JANUS EYE R1 Real Scene
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-janus-eye-r1.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-janus-eye-r1.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  eye:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Janus_Genesis
+          ref: 6426b70f140fbe887f9e08def0d409ffa9c6ca80
+          path: genesis-eye
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          test "$(git -C genesis-eye rev-parse HEAD)" = 6426b70f140fbe887f9e08def0d409ffa9c6ca80
+          pip install ./genesis-eye scipy plotly requests
+      - name: Transfer fixed KUSTO data into native Genesis EYE
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p eye-real
+          python - <<'PY'
+          import os,json,zipfile,tempfile
+          from pathlib import Path
+          import requests,numpy as np
+          from janus_genesis.spatial_eye import analyze,digest,write
+          p=Path('eye-real')
+          with tempfile.TemporaryDirectory() as tmp:
+              q=Path(tmp)/'parent.zip'
+              api=f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/15122838520/zip"
+              with requests.get(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'},stream=True,timeout=(20,90)) as resp:
+                  resp.raise_for_status()
+                  with q.open('wb') as f:
+                      for chunk in resp.iter_content(1048576):
+                          f.write(chunk)
+                          if f.tell()>10*1024**2:raise ValueError('archive cap')
+              assert digest(q)=='1de7032febea4ebc12db315c2db5725831ad312d78b55ca20401efadb296cbc1'
+              with zipfile.ZipFile(q) as z:
+                  ms=[m for m in z.infolist() if Path(m.filename).name=='scientific_layers.npz']
+                  assert len(ms)==1 and ms[0].file_size<10*1024**2
+                  q=Path(tmp)/'layers.npz';q.write_bytes(z.read(ms[0]))
+                  assert digest(q)=='15bcc32c14a7e5a700bb3b05ff7aa039d9793426e7a2be0d7ed85916358ee442'
+                  with np.load(q,allow_pickle=False) as a:
+                      x,y=a['x_km'],a['y_km'];h=a['elevation_m'];g=a['gravity_mgal'];m=a['magnetic_nT']
+                      assert np.allclose(x,x[0][None,:]) and np.allclose(y,y[:,0][:,None])
+                      np.savez_compressed(p/'scene.npz',x=x[0],y=y[:,0],height=h,gravity=g,magnetic=m)
+          frame='WGS84 AEQD center -47.3,47.9'
+          provenance={'run_id':45832385030,'artifact_id':15122838520,'member_sha256':'15bcc32c14a7e5a700bb3b05ff7aa039d9793426e7a2be0d7ed85916358ee442','authority_note':'GMRT global modelled bathymetry may be derived from gravity; no direct sonar'}
+          meta={'schema':'janus.eye.heightfield.v1','scene_id':'KUSTO_ZERO_NODE','sha256':digest(p/'scene.npz'),'authority':'MODELLED','frame':frame,'xy_unit':'km','height_unit':'m','provenance':provenance,'fields':{'gravity':{'unit':'mGal','authority':'DERIVED','frame':frame,'provenance':'SWOT06 DoG 4-8 km; R2.8'},'magnetic':{'unit':'nT','authority':'DERIVED','frame':frame,'provenance':'EMAG2 DoG 4-8 km; R2.8'}},'sigma_m':[0,2000,4000,8000],'depression_threshold_m':20,'nodes':[{'id':'ZERO_NODE','xy_m':[0,0]},{'id':'LOCAL_NODE','xy_m':[-2000,6000]}]}
+          write(p/'scene.json',meta)
+          r=analyze(p/'scene.npz',p/'scene.json',p/'view')
+          assert r['nodes'][0]['height_m']<0 and r['authority']=='MODELLED'
+          assert r['mesh']['source_geometry_mutated'] is False
+          print('EYE_RECEIPT_BEGIN')
+          print(json.dumps(r,indent=2,allow_nan=False))
+          print('EYE_RECEIPT_END')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-janus-eye-r1
+          path: eye-real/
+          retention-days: 90

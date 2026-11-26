@@ -1,0 +1,104 @@
+name: EYE R3.1 COSMOS direct review return
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/eye-r3-direct-review-return.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/eye-r3-direct-review-return.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  consume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Demi_Head
+          ref: 642643963bd143ded068c22107d1e2f6a204c1da
+          path: demihead
+          sparse-checkout: tools
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 4411695e1e54b690613fe6db45809a663e0f3b47
+          path: registry
+          sparse-checkout: |
+            experiments/kusto/zn-r2/2026-11-26-run-45830969841.json
+            experiments/janus-eye/r1/2026-11-26-run-45833030382.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Discover only registered DemiHead run; fetch its actual result bytes
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p r3-return
+          PYTHONPATH=demihead/tools python - <<'PY'
+          import hashlib,io,json,os,re,time,zipfile
+          from pathlib import Path
+          import requests
+          from cosmos_eye_spatial_review import build_request,verify_review
+          p=Path('r3-return');repo='Hawkar-usls/Demi_Head';head='0814de95f0761b3820f5a1c381733b1459110444'
+          base='https://api.github.com/repos/'+repo
+          headers={'Authorization':'Bearer '+os.environ['GH_READ_TOKEN'],'Accept':'application/vnd.github+json'}
+          receipt={'schema':'janus.eye.r3.cosmos_direct_return.v1','run_id':os.environ['GITHUB_RUN_ID'],'producer_repo':repo,'producer_head':head,'production_promotion':False}
+          def save():
+              (p/'receipt.json').write_text(json.dumps(receipt,indent=2,allow_nan=False)+'\n')
+          def get(path,params=None,cap=2*1024*1024):
+              with requests.get(base+path,params=params,headers=headers,timeout=(10,30),stream=True) as r:
+                  r.raise_for_status();b=bytearray()
+                  for c in r.iter_content(65536):
+                      b.extend(c)
+                      if len(b)>cap:raise ValueError('response cap')
+                  return bytes(b)
+          try:
+              selected=None
+              for _ in range(8):
+                  rows=json.loads(get('/actions/workflows/eye-r3-direct-intake.yml/runs',{'head_sha':head,'per_page':10}))['workflow_runs']
+                  matching=[x for x in rows if x.get('head_sha')==head and x.get('head_branch')=='research/nexus-cosmos-eye-spatial' and x.get('head_repository',{}).get('full_name')==repo]
+                  ok=[x for x in matching if x['status']=='completed' and x['conclusion']=='success']
+                  if ok:selected=min(ok,key=lambda x:x['id']);break
+                  if matching and all(x['status']=='completed' for x in matching):raise ValueError('registered producer completed without success')
+                  time.sleep(12)
+              if selected is None:raise ValueError('producer not ready within bounded observation window')
+              rid=selected['id']
+              rows=json.loads(get(f'/actions/runs/{rid}/artifacts',{'per_page':10}))['artifacts']
+              candidates=[a for a in rows if a['name']=='eye-r3-demihead-delivery' and not a['expired']]
+              if len(candidates)!=1:raise ValueError('artifact identity ambiguous or absent')
+              a=candidates[0];expected=a.get('digest','')
+              if not re.fullmatch('sha256:[a-f0-9]{64}',expected):raise ValueError('missing digest')
+              raw=get(f"/actions/artifacts/{a['id']}/zip")
+              if 'sha256:'+hashlib.sha256(raw).hexdigest()!=expected:raise ValueError('archive digest mismatch')
+              with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                  ms=[m for m in z.infolist() if m.filename.rsplit('/',1)[-1]=='receipt.json']
+                  if len(ms)!=1 or ms[0].file_size>1000000:raise ValueError('invalid receipt member')
+                  b=z.read(ms[0])
+              v=json.loads(b)
+              if v.get('schema')!='janus.eye.r3.demihead_delivery.v1' or str(v.get('run_id'))!=str(rid) or v.get('decision')!='DIRECT_EYE_INTAKE_PASS':raise ValueError('producer receipt identity')
+              req=build_request(Path('registry'))
+              if v['request']!=req or not verify_review(Path('registry'),req,v['review']):raise ValueError('review replay mismatch')
+              assert v['source']['source_run_id']==45833030382 and v['source']['artifact_id']==15123013441
+              assert v['review']['authority_delta']==0 and v['production_promotion'] is False
+              (p/'received.json').write_bytes(b)
+              receipt.update({'decision':'DIRECT_REMOTE_REVIEW_RETURN_PASS','producer_run_id':rid,'artifact_id':a['id'],'archive_sha256':expected,'member_sha256':hashlib.sha256(b).hexdigest(),'review_sha256':v['review']['review_sha256'],'source_run_id':v['source']['source_run_id'],'direct_artifact_transfer':True})
+          except Exception as e:
+              receipt.update({'decision':'TRANSPORT_HOLD','error_type':type(e).__name__,'error':str(e)[:300],'direct_artifact_transfer':False})
+          save();print(json.dumps(receipt,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eye-r3-cosmos-direct-return
+          path: r3-return/
+          retention-days: 90

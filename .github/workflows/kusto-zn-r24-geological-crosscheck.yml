@@ -1,0 +1,235 @@
+name: KUSTO ZN-R2.4 GEOLOGICAL CROSSCHECK
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r24-geological-crosscheck.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r24-geological-crosscheck.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray netCDF4 h5py h5netcdf requests rasterio geopandas pyogrio
+      - name: Source-bound geological extraction
+        run: |
+          mkdir -p zn-r24-geology
+          PYTHONPATH=workspace python - <<'PY'
+          import json,os,hashlib,math,zipfile,tempfile
+          from pathlib import Path
+          import numpy as np
+          import requests,xarray as xr,rasterio,geopandas as gp
+          from rasterio.windows import from_bounds
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r24-geology');la,lo=-47.3,47.9
+          w,e,s,n=core.bbox_for_halfwidth_km(la,lo,100)
+          sources={'AGE':'https://www.earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GTS2012.6m.nc','GLOBSED':'https://data.caltech.edu/records/k4070-ngc79/files/GlobSed.zip?download=1','EMAG2':'https://www.ngdc.noaa.gov/geomag/data/EMAG2/EMAG2_V3_SeaLevel_DataTiff.tif','FABRIC':'https://www.soest.hawaii.edu/PT/GSFML/SF/DATA/GSFML_SF.zip'}
+          report={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'target':[la,lo],'bbox':[w,s,e,n],'sources':{},'production_promotion':False,'claim_ceiling':'REGIONAL_GEOLOGICAL_CONTEXT_ONLY'}
+          def save(): (out/'receipt.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
+          def digest(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def fetch(url,p):
+              size=0
+              with requests.get(url,stream=True,timeout=(20,90)) as r:
+                  r.raise_for_status()
+                  with p.open('wb') as f:
+                      for b in r.iter_content(1048576):
+                          size+=len(b)
+                          if size>300*1024**2:raise ValueError('download cap')
+                          f.write(b)
+              return {'url':url,'sha256':digest(p),'bytes':size}
+          def stats(z,x,y):
+              z=np.asarray(z,dtype=float);x=np.asarray(x);y=np.asarray(y)
+              if x.ndim==1 and y.ndim==1:x,y=np.meshgrid(x,y)
+              if z.shape!=x.shape or z.shape!=y.shape:raise ValueError('coordinate mismatch')
+              mlat,mlon=core.meters_per_degree(la);dist=np.hypot((x-lo)*mlon,(y-la)*mlat)/1000
+              ans={}
+              for rad in (10,25,50,100):
+                  a=z[(dist<=rad)&np.isfinite(z)]
+                  ans[str(rad)]={'n':int(a.size),'median':float(np.median(a)) if a.size else None,'min':float(a.min()) if a.size else None,'max':float(a.max()) if a.size else None}
+              return ans
+          def netcdf(p,name):
+              with xr.open_dataset(p,engine='netcdf4') as ds:
+                  lat=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'));lon=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                  # Target positive longitude works for both standard longitude conventions.
+                  def span(k,a,b):return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                  d=ds.sel({lat:span(lat,s,n),lon:span(lon,w,e)})
+                  key=next(k for k,v in d.data_vars.items() if v.ndim==2 and lat in v.dims and lon in v.dims)
+                  a=d[key].transpose(lat,lon).load();z=np.asarray(a.values,dtype=float)
+                  if not np.isfinite(z).any():raise ValueError('no finite cells in requested region')
+                  p2=out/(name+'_local.npz');np.savez_compressed(p2,lat=a[lat].values,lon=a[lon].values,value=z)
+                  return {'variable':key,'units_metadata':a.attrs.get('units'),'attrs':{k:str(v) for k,v in a.attrs.items()},'subset_sha256':digest(p2),'rings':stats(z,a[lon].values,a[lat].values)}
+          save()
+          for name,url in sources.items():
+              meta={'url':url}
+              try:
+                  with tempfile.TemporaryDirectory() as tmp:
+                      t=Path(tmp);p=t/({'AGE':'age.nc','GLOBSED':'sed.zip','EMAG2':'mag.tif','FABRIC':'fabric.zip'}[name])
+                      meta.update(fetch(url,p))
+                      if name=='AGE':meta.update(netcdf(p,name))
+                      elif name=='GLOBSED':
+                          assert hashlib.md5(p.read_bytes()).hexdigest()=='4e3f112e0cdc820bd74d3b261414e2cd','archive MD5 mismatch'
+                          with zipfile.ZipFile(p) as f:
+                              names=[k for k in f.namelist() if k.lower().endswith(('.nc','.grd')) and 'globsed' in k.lower() and '__macosx' not in k.lower()]
+                              meta['grid_members']=names
+                              if not names:raise ValueError('GlobSed grid not found')
+                              item=sorted(names,key=lambda k:('5m' not in k.lower(),len(k)))[0]
+                              q=t/'sed.nc';q.write_bytes(f.read(item))
+                          meta['selected_member']=item;meta.update(netcdf(q,name))
+                      elif name=='EMAG2':
+                          with rasterio.open(p) as ds:
+                              assert ds.crs and ds.crs.is_geographic,'nongeographic raster'
+                              win=from_bounds(w,s,e,n,ds.transform).round_offsets().round_lengths()
+                              a=ds.read(1,window=win,masked=True).astype(float).filled(np.nan)
+                              a[a==99999]=np.nan
+                              tr=ds.window_transform(win)
+                              assert abs(tr.b)<1e-9 and abs(tr.d)<1e-9
+                              x=tr.c+(np.arange(a.shape[1])+.5)*tr.a;y=tr.f+(np.arange(a.shape[0])+.5)*tr.e
+                              q=out/'EMAG2_local.npz';np.savez_compressed(q,lat=y,lon=x,value=a)
+                              meta.update({'units':'nT','rings':stats(a,x,y),'subset_sha256':digest(q),'nodata':str(ds.nodata)})
+                      else:
+                          with zipfile.ZipFile(p) as f:
+                              members=[k for k in f.namelist() if k.lower().endswith('.shp')]
+                              meta['shapefiles']=members
+                              for m in f.infolist():
+                                  q=(t/m.filename).resolve()
+                                  if not q.is_relative_to(t.resolve()):raise ValueError('unsafe archive')
+                              if sum(m.file_size for m in f.infolist())>500*1024**2:raise ValueError('unpacked archive cap')
+                              f.extractall(t)
+                          from shapely.geometry import Point
+                          from shapely.ops import nearest_points
+                          from pyproj import CRS
+                          point=Point(lo,la);crs=CRS.from_proj4(f'+proj=aeqd +lat_0={la} +lon_0={lo} +datum=WGS84 +units=m')
+                          pt=gp.GeoSeries([point],crs=4326).to_crs(crs).iloc[0]
+                          layers=[]
+                          for m in members:
+                              try:
+                                  g=gp.read_file(t/m)
+                                  if g.crs is None:raise ValueError('missing CRS')
+                                  g=g.to_crs(4326).cx[w:e,s:n]
+                                  if g.empty:layers.append({'layer':m,'bbox_features':0});continue
+                                  g=g.to_crs(crs)
+                                  ds=g.distance(pt);j=ds.idxmin();geom=g.loc[j].geometry
+                                  near=nearest_points(pt,geom)[1]
+                                  layers.append({'layer':m,'bbox_features':len(g),'nearest_distance_km':float(ds.loc[j]/1000),'nearest_point_azimuth_deg':float(np.degrees(np.arctan2(near.x,near.y))%360)})
+                              except Exception as exc:layers.append({'layer':m,'error':str(exc)})
+                          meta['layers']=layers
+                          if not any('bbox_features' in x for x in layers):raise ValueError('no readable fabric layers')
+                          meta['interpretation']='Mapped lineations can be gravity-derived; nearest point bearing is not strike'
+                      meta['status']='CONTEXT_READ'
+                  if name!='FABRIC' and not any(x['n'] for x in meta['rings'].values()):meta['status']='NO_FINITE_LOCAL_VALUES'
+              except Exception as exc:meta.update({'status':'EXTRACTION_FAILED','error':str(exc)})
+              report['sources'][name]=meta;save()
+          print(json.dumps(report,indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r24-geology
+          path: zn-r24-geology/
+          retention-days: 90
+  spatial-holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray h5netcdf h5py fsspec aiohttp
+      - name: Expanded forward bank and blocked spatial holdout
+        run: |
+          mkdir -p zn-r24-models
+          PYTHONPATH=workspace python - <<'PY'
+          import os,json,hashlib,math
+          from pathlib import Path
+          import numpy as np
+          import xarray as xr,fsspec,aiohttp
+          from scipy.signal import fftconvolve
+          from scipy.ndimage import gaussian_filter
+          from scipy.interpolate import RegularGridInterpolator
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r24-models')
+          # Coordinate-only predetermined separated regional sites; not known nulls.
+          sites={'ZERO_NODE':[-47.3,47.9]}
+          for i,la in enumerate([-41,-45,-49,-53]):
+              for j,lo in enumerate([40,45,50,55]):sites[f'CONTROL_{i}_{j}']=[la,lo]
+          diams=[8,12,16,20,30,40,50,60,80,100]
+          protocol={'experiment':'ZN-R2.4','parent_run':45820363467,'sites':sites,'diameters_km':diams,'fit_annulus_km':[105,135],'evaluation_radius_km':65,'fwhm_km':12,'grid_km':2,'selection':'fit model on alternating 20km checkerboard blocks, evaluate other blocks excluding 4km border buffer','threshold_improvement_fraction':.10,'threshold_role':'illustrative, not calibrated','controls_role':'spatially separated candidate controls, not confirmed null geology','density_kg_m3':-400,'top_km':3.45,'thickness_km':[.25,.5,1,2],'aspects':[1,3],'orientations_deg':[0,45,90,135],'no_recentering':True,'production_promotion':False}
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n');return hashlib.sha256(p.read_bytes()).hexdigest()
+          r={'protocol_sha256':write('protocol.json',protocol),'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'sites':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          save()
+          axis=np.arange(-140,142,2.);xx,yy=np.meshgrid(axis,axis);d=np.hypot(xx,yy)
+          ann=(d>=105)&(d<=135);ap=d<=5
+          A=np.stack([np.ones_like(xx),xx/135,yy/135,(xx/135)**2,xx*yy/135**2,(yy/135)**2],axis=-1)
+          def detrend(v):
+              coef=np.linalg.lstsq(A[ann],v[ann],rcond=None)[0]
+              return v-A@coef
+          block=(np.floor((xx+140)/20)+np.floor((yy+140)/20)).astype(int)%2
+          gapx=(xx+140)%20;gapy=(yy+140)%20
+          valid=(d<=65)&(gapx>=4)&(gapx<=16)&(gapy>=4)&(gapy<=16)
+          train=valid&(block==0);test=valid&(block==1)
+          assert train.sum()>100 and test.sum()>100
+          fine=np.arange(-240,241,1.);X,Y=np.meshgrid(fine*1000,fine*1000);R2=X*X+Y*Y
+          coords=np.stack([yy,xx],axis=-1);models=[];params=[]
+          for thick in protocol['thickness_km']:
+              kernel=1e5*6.67430e-11*(-400)*1e6*(1/np.sqrt(R2+3450**2)-1/np.sqrt(R2+(3450+thick*1000)**2))
+              for dia in diams:
+                  for aspect in (1,3):
+                      for angle in ([0] if aspect==1 else [0,45,90,135]):
+                          t=np.deg2rad(angle);u=X*np.cos(t)+Y*np.sin(t);v=-X*np.sin(t)+Y*np.cos(t)
+                          mask=(u/(dia*500))**2+(v/(dia*500/aspect))**2<=1
+                          raw=fftconvolve(mask.astype(float),kernel,mode='same')
+                          sm=gaussian_filter(raw,12/2.35482,mode='constant')
+                          m=detrend(RegularGridInterpolator((fine,fine),sm)(coords))
+                          models.append(m);params.append({'major_diameter_km':dia,'aspect':aspect,'angle_deg':angle,'thickness_km':thick})
+          M=np.asarray(models);r['bank_count']=len(M);r['train_cells']=int(train.sum());r['test_cells']=int(test.sum());save()
+          url='https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_06.nc'
+          try:
+              with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=300)}) as f:
+                  with xr.open_dataset(f,engine='h5netcdf') as ds:
+                      lk=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'));ok=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                      key=next(k for k,v in ds.data_vars.items() if v.ndim==2 and lk in v.dims and ok in v.dims)
+                      def span(k,a,b):return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                      for name,(la,lo) in sites.items():
+                          try:
+                              w,e,s,n=core.bbox_for_halfwidth_km(la,lo,145)
+                              a=ds[key].sel({lk:span(lk,s,n),ok:span(ok,w,e)}).transpose(lk,ok).sortby(lk).sortby(ok).load()
+                              lat,lon,z=a[lk].values,a[ok].values,np.asarray(a.values,dtype=float)
+                              assert np.isfinite(z).all() and z.size>0
+                              p=out/(name+'.npz');np.savez_compressed(p,lat=lat,lon=lon,gravity=z)
+                              ml,mo=core.meters_per_degree(la)
+                              obs=detrend(RegularGridInterpolator(((lat-la)*ml/1000,(lon-lo)*mo/1000),z,bounds_error=True)(coords))
+                              tr=np.sqrt(np.mean((M[:,train]-obs[train])**2,axis=1))
+                              j=int(np.argmin(tr));m=M[j]
+                              nulltrain=float(np.sqrt(np.mean(obs[train]**2)));nulltest=float(np.sqrt(np.mean(obs[test]**2)))
+                              improvement=1-float(np.sqrt(np.mean((obs[test]-m[test])**2)))/nulltest
+                              r['sites'][name]={'status':'ANALYZED','source':url,'subset_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'best_train_model':params[j],'train_improvement':1-float(tr[j])/nulltrain,'test_improvement':improvement,'candidate_threshold_pass':bool(improvement>=.10),'center_observed_mgal':float(np.median(obs[ap])),'center_model_mgal':float(np.median(m[ap]))}
+                          except Exception as exc:r['sites'][name]={'status':'FAILED','error':str(exc)}
+                          save()
+          except Exception as exc:r['source_error']=str(exc)
+          cs=[v for k,v in r['sites'].items() if k!='ZERO_NODE' and v['status']=='ANALYZED']
+          target=r['sites'].get('ZERO_NODE',{})
+          r['control_count']=len(cs);r['control_threshold_passes']=sum(v['candidate_threshold_pass'] for v in cs)
+          r['control_pass_fraction']=r['control_threshold_passes']/len(cs) if cs else None
+          r['target_descriptive_rank']=(1+sum(v['test_improvement']>=target['test_improvement'] for v in cs))/(1+len(cs)) if cs and target.get('status')=='ANALYZED' else None
+          r['decision']='EXPLORATORY_SPATIAL_HOLDOUT_ONLY'
+          r['limitations']=['Controls are not verified negatives; pass fraction is not FPR','Same SWOT field spatially correlated; no independent survey','Expanded context differs from R2.3; not direct RMSE comparison','Single assumed density and depth; smoothing hypothetical','No direct sonar or unique inversion']
+          save();print(json.dumps(r,indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r24-models
+          path: zn-r24-models/
+          retention-days: 90

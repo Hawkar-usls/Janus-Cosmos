@@ -1,0 +1,190 @@
+name: KUSTO ZN-R2.10 GENESIS SPATIAL ANALYSIS
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r210-genesis-spatial.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r210-genesis-spatial.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  spatial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Janus_Genesis
+          ref: 54652cad778feb25e6327a080415be5cacb68e2b
+          path: pla-genesis
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned original engine
+        run: |
+          test "$(git -C pla-genesis rev-parse HEAD)" = 54652cad778feb25e6327a080415be5cacb68e2b
+          pip install ./pla-genesis scipy requests matplotlib
+      - name: Geometric measurements in physical units and shared-coordinate overlays
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p zn-r210
+          python - <<'PY'
+          import os,json,hashlib,zipfile,tempfile,heapq
+          from pathlib import Path
+          import numpy as np
+          import requests
+          from scipy.ndimage import gaussian_filter,label
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.stats import spearmanr
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          from janus_genesis.mesh_ops import load_mesh,metrics
+          out=Path('zn-r210')
+          specs={
+              'TERRAIN':('5e8346c366aa1ec61a6765b2238f05c56c97dea7d02137ae9badcae848903801','e16eeef4fef253f16d9522408af8a566418b4c99ae29814dc0bacfb9381f6554'),
+              'GRAVITY':('5a9bff8901a28d148607fae60dfb1073eb1d3e9fdaed47f1593d2a3ac5cc7b9a','575679e0ac553be9a04ab07e2ffa170453c3641511c7fb3e48fd9db61ab0454b'),
+              'MAGNETIC':('574dd9a98d05a2a4839a4929481a5b4d8b3720cbec77a55d5f71855c548b5af7','fc75cbdec560fedf68aa95a91e4c53a5caf2a29394b52df3a1bbe54b40056a98')}
+          protocol={'experiment':'ZN-R2.10','parent_run':45831836291,'parent_artifact':15121699522,'parent_sha256':'ab7e2f895951e64a37aebf5630f2477f0c48dde81578cf0b24c357aac680b7a0','genesis_commit':'54652cad778feb25e6327a080415be5cacb68e2b','sources':specs,'grid_step_km':2,'zero_node_xy_km':[0,0],'local_node_xy_km':[-2,6],'derivative_smoothing_sigma_km':[2,4,8],'terrain_dog_sigma_km':[4,8],'region_of_correlation_km':25,'profile_length_km':60,'profile_azimuths_deg':[0,45,90,135],'depression_method':'8-neighbor priority flood with all boundary cells draining, no physical fill applied to source','component_threshold_m':20,'claim_ceiling':'MODELLED_GEOMETRY_ONLY','production_promotion':False}
+          def sha(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def write(name,obj):
+              p=out/name;p.write_text(json.dumps(obj,indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'protocol_sha256':write('protocol.json',protocol),'source_checks':{},'geometry':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          save()
+          # Retrieve immutable parent archive, not a regenerated approximation.
+          with tempfile.TemporaryDirectory() as tmp:
+              tmp=Path(tmp);p=tmp/'parent.zip'
+              api=f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/15121699522/zip"
+              with requests.get(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'},stream=True,timeout=(20,90)) as resp:
+                  resp.raise_for_status()
+                  with p.open('wb') as f:
+                      for chunk in resp.iter_content(1048576):
+                          f.write(chunk)
+                          if f.tell()>30*1024**2:raise ValueError('archive cap')
+              if sha(p)!=protocol['parent_sha256']:raise ValueError('parent archive hash mismatch')
+              arrays={}
+              with zipfile.ZipFile(p) as z:
+                  def member(name,expected):
+                      ms=[m for m in z.infolist() if Path(m.filename).name==name]
+                      if len(ms)!=1 or ms[0].file_size>10*1024**2:raise ValueError('unexpected member '+name)
+                      q=tmp/name;q.write_bytes(z.read(ms[0]))
+                      if sha(q)!=expected:raise ValueError('member hash mismatch '+name)
+                      return q
+                  for name,(grid_hash,mesh_hash) in specs.items():
+                      q=member('KUSTO_'+name+'_grid.npz',grid_hash)
+                      m=member('KUSTO_'+name+'__janus_candidate.stl',mesh_hash)
+                      with np.load(q,allow_pickle=False) as a:
+                          x,y,v=a['x_km'],a['y_km'],a['value']
+                      assert v.shape==(41,41) and x.shape==y.shape==v.shape and np.isfinite(v).all()
+                      assert np.allclose(x,np.arange(-40,41,2)[None,:]) and np.allclose(y,np.arange(-40,41,2)[:,None])
+                      arrays[name]=v
+                      mesh=load_mesh(m);me=metrics(mesh).to_dict()
+                      assert mesh.is_watertight and mesh.is_winding_consistent
+                      # Decode upper mesh vertices to physical source values; reject misalignment.
+                      scale=.02 if name=='TERRAIN' else 20/(v.max()-v.min())
+                      top=mesh.vertices[mesh.vertices[:,2]>0]
+                      assert len(top)==v.size
+                      ix=np.rint((top[:,0]/2+40)/2).astype(int);iy=np.rint((top[:,1]/2+40)/2).astype(int)
+                      assert len(set(zip(ix,iy)))==v.size and np.all((ix>=0)&(ix<41)&(iy>=0)&(iy<41))
+                      assert np.max(np.abs(top[:,0]-2*x[iy,ix]))<1e-4 and np.max(np.abs(top[:,1]-2*y[iy,ix]))<1e-4
+                      decode=v.min()+(top[:,2]-3)/scale
+                      error=float(np.max(np.abs(decode-v[iy,ix])))
+                      assert error<1e-3
+                      r['source_checks'][name]={'grid_sha256':grid_hash,'mesh_sha256':mesh_hash,'genesis_mesh_metrics':me,'decoded_max_error_native_units':error}
+          save()
+          X,Y=x,y;terrain=arrays['TERRAIN'];g=arrays['GRAVITY'];m=arrays['MAGNETIC'];D=np.hypot(X,Y)
+          def flood(z):
+              ny,nx=z.shape;filled=z.copy();seen=np.zeros(z.shape,bool);heap=[]
+              for j in range(ny):
+                  for i in range(nx):
+                      if j in (0,ny-1) or i in (0,nx-1):
+                          seen[j,i]=True;heapq.heappush(heap,(float(z[j,i]),j,i))
+              while heap:
+                  h,j,i=heapq.heappop(heap)
+                  for dj in (-1,0,1):
+                      for di in (-1,0,1):
+                          a,b=j+dj,i+di
+                          if 0<=a<ny and 0<=b<nx and not seen[a,b]:
+                              seen[a,b]=True;hh=max(h,float(z[a,b]));filled[a,b]=hh;heapq.heappush(heap,(hh,a,b))
+              return filled-z
+          # Analytic controls of flat/planar slope, quadratic curvature and closed/open basin.
+          def derivatives(z):
+              zy,zx=np.gradient(z,2000.,2000.,edge_order=2)
+              zyy,zyx=np.gradient(zy,2000.,2000.,edge_order=2);zxy,zxx=np.gradient(zx,2000.,2000.,edge_order=2)
+              cross=(zyx+zxy)/2
+              slope=np.degrees(np.arctan(np.hypot(zx,zy)))
+              lap=zxx+zyy
+              hmean=((1+zy**2)*zxx-2*zx*zy*cross+(1+zx**2)*zyy)/(2*(1+zx*zx+zy*zy)**1.5)
+              return slope,lap,hmean
+          plane=.05*X*1000
+          a,b,c=derivatives(plane);assert np.allclose(a,np.degrees(np.arctan(.05))) and np.max(np.abs(b))<1e-10
+          bowl=1e-7*((X*1000)**2+(Y*1000)**2)
+          assert np.allclose(derivatives(bowl)[1],4e-7,atol=1e-12)
+          z=np.zeros((9,9));z[2:7,2:7]=-10
+          assert flood(z)[4,4]==10
+          z[4,:4]=-10;assert flood(z)[4,4]==0
+          r['synthetic_gates']={'plane_slope':True,'quadratic_laplacian':True,'closed_basin':True,'open_channel':True}
+          def stat(z,mask):
+              v=z[mask]
+              return {'min':float(v.min()),'median':float(np.median(v)),'max':float(v.max())}
+          nodes={'ZERO_NODE':(0,0),'LOCAL_NODE':(-2,6)}
+          for name,(px,py) in nodes.items():
+              d=np.hypot(X-px,Y-py);ap=d<=4;ring=(d>=8)&(d<=15)
+              j,i=np.unravel_index(np.argmin(d),d.shape)
+              r['geometry'][name]={'depth_at_fixed_cell_m':float(-terrain[j,i]),'median_depth_aperture_m':float(-np.median(terrain[ap])),'relative_elevation_vs_ring_m':float(np.median(terrain[ap])-np.median(terrain[ring])),'scales':{}}
+          layers={}
+          for s in (2,4,8):
+              z=gaussian_filter(terrain,s/2,mode='nearest');slope,lap,hmean=derivatives(z)
+              fill=flood(z);labs,_=label(fill>=20,structure=np.ones((3,3),int))
+              layers.update({f'slope_sigma{s}_deg':slope,f'laplacian_sigma{s}_per_m':lap,f'mean_curvature_sigma{s}_per_m':hmean,f'fill_depth_sigma{s}_m':fill})
+              for name,(px,py) in nodes.items():
+                  d=np.hypot(X-px,Y-py);ap=d<=4;j,i=np.unravel_index(np.argmin(d),d.shape);k=int(labs[j,i]);component=labs==k if k else np.zeros_like(labs,bool)
+                  r['geometry'][name]['scales'][str(s)]={'slope_deg':stat(slope,ap),'laplacian_per_m':stat(lap,ap),'mean_curvature_per_m':stat(hmean,ap),'fill_depth_at_node_m':float(fill[j,i]),'depression_component_area_km2':float(component.sum()*4),'depression_component_max_fill_m':float(fill[component].max()) if k else None}
+          td=gaussian_filter(terrain,2,mode='nearest')-gaussian_filter(terrain,4,mode='nearest')
+          mask=D<=25
+          def corr(a,b):
+              rho=float(spearmanr(a[mask],b[mask]).statistic)
+              return rho if np.isfinite(rho) else None
+          r['overlay']={'cells':int(mask.sum()),'terrain_dog_gravity_rho':corr(td,g),'terrain_dog_magnetic_rho':corr(td,m),'gravity_magnetic_rho':corr(g,m),'correlation_role':'descriptive; bathymetry can be gravity-derived; spatial cells not independent'}
+          r['terrain_range_m']=stat(terrain,np.ones_like(terrain,bool))
+          # Directional profiles all retain source units and common XY frame.
+          profile={}
+          along=np.arange(-30,30.01,2)
+          for angle in (0,45,90,135):
+              rad=np.deg2rad(angle);pts=np.column_stack([6+along*np.cos(rad),-2+along*np.sin(rad)])
+              profile[str(angle)]={'distance_km':along.tolist()}
+              for key,v in [('elevation_m',terrain),('gravity_mgal',g),('magnetic_nT',m)]:
+                  profile[str(angle)][key]=RegularGridInterpolator((Y[:,0],X[0]),v,bounds_error=True)(pts).tolist()
+          r['profiles_sha256']=write('profiles.json',profile)
+          p=out/'scientific_layers.npz';np.savez_compressed(p,x_km=X,y_km=Y,elevation_m=terrain,gravity_mgal=g,magnetic_nT=m,terrain_dog_m=td,**layers);r['layers_sha256']=sha(p)
+          fig=plt.figure(figsize=(10,7),constrained_layout=True);ax=fig.add_subplot(111,projection='3d')
+          import matplotlib.colors as colors
+          from matplotlib.cm import ScalarMappable
+          norm=colors.TwoSlopeNorm(vmin=float(g.min()),vcenter=0,vmax=float(g.max()))
+          ax.plot_surface(X,Y,terrain/1000,facecolors=plt.cm.RdBu_r(norm(g)),shade=False,linewidth=0)
+          ax.set(xlabel='East km',ylabel='North km',zlabel='Elevation km',title='GMRT modelled seabed; SWOT gravity as colour, not height')
+          ax.set_box_aspect((80,80,30))
+          fig.colorbar(ScalarMappable(norm=norm,cmap='RdBu_r'),ax=ax,label='Gravity DoG mGal',shrink=.6)
+          fig.savefig(out/'terrain_gravity_overlay.png',dpi=150);plt.close(fig)
+          for name,z in [('terrain',terrain),('slope_sigma4',layers['slope_sigma4_deg']),('depression_sigma4',layers['fill_depth_sigma4_m']),('magnetic',m)]:
+              fig,ax=plt.subplots(figsize=(6,6),constrained_layout=True);im=ax.pcolormesh(X,Y,z,shading='auto')
+              ax.plot(0,0,'w+');ax.plot(-2,6,'r+');ax.set(xlabel='East km',ylabel='North km',title=name,aspect='equal');fig.colorbar(im,ax=ax)
+              fig.savefig(out/(name+'.png'),dpi=150);plt.close(fig)
+          r['decision']='GENESIS_SPATIAL_ANALYSIS_DESCRIPTIVE'
+          r['limitations']=['GMRT modeled bathymetry not direct sonar; may be derived from gravity','2 km sampling is not effective observation resolution','Priority flood depression depends on finite window, grid and smoothing; not a physical cavity','No independent acquisition or causal inversion','Visualization vertical aspect exaggerated; numeric geometry uses native units','No production promotion']
+          save();print(json.dumps(r,indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r210-genesis-spatial
+          path: zn-r210/
+          retention-days: 90

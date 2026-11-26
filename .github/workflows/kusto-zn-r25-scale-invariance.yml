@@ -1,0 +1,194 @@
+name: KUSTO ZN-R2.5 SCALE INVARIANCE
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r25-scale-invariance.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r25-scale-invariance.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scale-invariance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray h5netcdf h5py fsspec aiohttp requests rasterio matplotlib
+      - name: Factorial scale and magnetic provenance audit
+        run: |
+          mkdir -p zn-r25
+          PYTHONPATH=workspace python - <<'PY'
+          import json,os,hashlib,math,tempfile
+          from pathlib import Path
+          import numpy as np
+          import requests,xarray as xr,fsspec,aiohttp,rasterio
+          from rasterio.windows import from_bounds
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.ndimage import gaussian_filter
+          from scipy.stats import spearmanr
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r25')
+          sites={'ZERO_NODE':[-47.3,47.9]}
+          for i,la in enumerate([-41,-45,-49,-53]):
+              for j,lo in enumerate([40,45,50,55]):sites[f'CONTROL_{i}_{j}']=[la,lo]
+          radii=[25,40,45,60,80,100,120,135,160,200,250]
+          steps=[2,4,8];orders=[0,1,2];bands=[(4,8),(8,16),(16,32),(32,64)]
+          protocol={'experiment':'ZN-R2.5','parent_runs':[45819402971,45821253832],'sites':sites,'versions':['04','06'],'radii_km':radii,'steps_km':steps,'orders':orders,'fit_annulus':'0.6R to R','aperture_km':5,'fixed_aperture_sampling_km':1,'grid_domain_halfwidth_km':280,'resolution_method':'native grid Gaussian prefilter then regular grid interpolation; not sensor resolution','bandpass_sigma_km':bands,'peak_search_radius_km':20,'spectral_window':'fixed 192 km square, Hann taper','no_recentering':True,'control_role':'spatial candidate controls not verified nulls','versions_not_independent':True,'production_promotion':False}
+          def clean(v):
+              if isinstance(v,dict):return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,(list,tuple)):return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)):return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer):return int(v)
+              if isinstance(v,np.bool_):return bool(v)
+              return v
+          def sha(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'protocol_sha256':write('protocol.json',protocol),'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'sites':{},'comparisons':{},'magnetic':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          save()
+          aperture=np.arange(-5,6,1.);ax,ay=np.meshgrid(aperture,aperture);am=np.hypot(ax,ay)<=5;ac=np.stack([ay[am],ax[am]],axis=-1)
+          def design(x,y,order,R):
+              a=[np.ones_like(x)]
+              if order>=1:a.extend([x/R,y/R])
+              if order>=2:a.extend([(x/R)**2,x*y/R**2,(y/R)**2])
+              return np.stack(a,axis=-1)
+          def analyze(lat,lon,z,la,lo):
+              ml,mo=core.meters_per_degree(la); y=(lat-la)*ml/1000;x=(lon-lo)*mo/1000
+              dx=float(np.median(np.diff(x)));dy=float(np.median(np.diff(y)))
+              rows=[];fields={}
+              for step in steps:
+                  # Preserve native grid for 2 km; apply stated anti-alias hypothesis for coarser grids.
+                  sigma=max(0.,math.sqrt(max(0.,(step/2.35482)**2-(max(dx,dy)/2.35482)**2)))
+                  zz=gaussian_filter(z,(sigma/dy,sigma/dx),mode='nearest') if sigma else z
+                  axis=np.arange(-272,272.01,step);xx,yy=np.meshgrid(axis,axis);dist=np.hypot(xx,yy)
+                  interp=RegularGridInterpolator((y,x),zz,bounds_error=True)
+                  v=interp(np.stack([yy,xx],axis=-1));center_interp=RegularGridInterpolator((axis,axis),v,bounds_error=True)
+                  center_v=center_interp(ac)
+                  for R in radii:
+                      fit=(dist>=.6*R)&(dist<=R)
+                      for order in orders:
+                          A=design(xx[fit],yy[fit],order,R)
+                          coef,_,rank,_=np.linalg.lstsq(A,v[fit],rcond=None)
+                          assert rank==A.shape[1]
+                          res=center_v-design(ac[:,1],ac[:,0],order,R)@coef
+                          bg=v[fit]-A@coef;sig=1.4826*np.median(np.abs(bg-np.median(bg)))
+                          rows.append({'radius_km':R,'step_km':step,'order':order,'center_mgal':float(np.median(res)),'background_sigma_mgal':float(sig),'fit_n':int(fit.sum())})
+                  if step==2:
+                      fields['axis']=axis;fields['v']=v
+              axis=fields['axis'];v=fields['v'];xx,yy=np.meshgrid(axis,axis);d=np.hypot(xx,yy)
+              dogs=[];dogfields={}
+              for a,b in bands:
+                  f=gaussian_filter(v,a/2,mode='nearest')-gaussian_filter(v,b/2,mode='nearest')
+                  mask=d<=20;idx=np.unravel_index(np.argmax(np.where(mask,np.abs(f),-np.inf)),f.shape)
+                  peak=float(f[idx]);cx=float(xx[idx]);cy=float(yy[idx])
+                  cv=float(np.median(RegularGridInterpolator((axis,axis),f)(ac)))
+                  dogs.append({'sigma_pair_km':[a,b],'center_mgal':cv,'peak_mgal':peak,'peak_x_km':cx,'peak_y_km':cy,'peak_distance_km':math.hypot(cx,cy),'peak_at_search_edge':math.hypot(cx,cy)>=18})
+                  dogfields[f'{a}_{b}']=f
+              # Directional-independent radial Fourier energy for the same central square.
+              keep=np.abs(axis)<=96;tile=v[np.ix_(keep,keep)]
+              X,Y=np.meshgrid(axis[keep],axis[keep]);D=design(X.ravel(),Y.ravel(),1,96);coef=np.linalg.lstsq(D,tile.ravel(),rcond=None)[0]
+              residual=tile-(D@coef).reshape(tile.shape)
+              win=np.outer(np.hanning(tile.shape[0]),np.hanning(tile.shape[1]))
+              power=np.abs(np.fft.fft2(residual*win))**2
+              ky,kx=np.meshgrid(np.fft.fftfreq(tile.shape[0],d=2),np.fft.fftfreq(tile.shape[1],d=2),indexing='ij');freq=np.hypot(kx,ky);total=power[freq>0].sum()
+              spectrum=[]
+              for a,b in [(8,16),(16,32),(32,64),(64,128)]:
+                  m=(freq>=1/b)&(freq<1/a);spectrum.append({'wavelength_km':[a,b],'energy_fraction':float(power[m].sum()/total) if total>0 else None})
+              return rows,dogs,spectrum,axis,v,dogfields
+          target={}
+          for ver in ('04','06'):
+              url=f'https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_{ver}.nc'
+              try:
+                  with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=300)}) as f:
+                      with xr.open_dataset(f,engine='h5netcdf') as ds:
+                          lk=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'));ok=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                          key=next(k for k,v in ds.data_vars.items() if v.ndim==2 and lk in v.dims and ok in v.dims)
+                          def span(k,a,b):return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                          for name,(la,lo) in sites.items():
+                              if ver=='04' and name!='ZERO_NODE':continue
+                              sid=f'{name}_{ver}'
+                              try:
+                                  w,e,s,n=core.bbox_for_halfwidth_km(la,lo,285)
+                                  a=ds[key].sel({lk:span(lk,s,n),ok:span(ok,w,e)}).transpose(lk,ok).sortby(lk).sortby(ok).load()
+                                  lat,lon,z=a[lk].values,a[ok].values,np.asarray(a.values,dtype=float)
+                                  assert z.size and np.isfinite(z).all()
+                                  p=out/(sid+'.npz');np.savez_compressed(p,lat=lat,lon=lon,gravity=z)
+                                  rows,dogs,spec,axis,v,df=analyze(lat,lon,z,la,lo)
+                                  grid_sha=write(sid+'_factorial.json',rows)
+                                  r['sites'][sid]={'status':'ANALYZED','source':url,'subset_sha256':sha(p),'factorial_sha256':grid_sha,'factorial_count':len(rows),'negative_count':sum(x['center_mgal']<0 for x in rows),'positive_count':sum(x['center_mgal']>0 for x in rows),'min_center_mgal':min(x['center_mgal'] for x in rows),'max_center_mgal':max(x['center_mgal'] for x in rows),'dog':dogs,'spectrum':spec}
+                                  if name=='ZERO_NODE':
+                                      target[ver]=(rows,dogs,axis,v,df);r['sites'][sid]['factorial']=rows
+                              except Exception as exc:r['sites'][sid]={'status':'FAILED','error':str(exc),'source':url}
+                              save()
+              except Exception as exc:r['sites']['VERSION_'+ver]={'status':'SOURCE_FAILED','error':str(exc)}
+              save()
+          if '04' in target and '06' in target:
+              a,ad,axis,av,af=target['04'];b,bd,_,bv,bf=target['06']
+              r['comparisons']['ZERO_NODE']={'same_sign_factorial_count':sum(np.sign(x['center_mgal'])==np.sign(y['center_mgal']) for x,y in zip(a,b)),'factorial_count':len(a),'dog_versions':[{'sigma_pair_km':x['sigma_pair_km'],'same_center_sign':bool(np.sign(x['center_mgal'])==np.sign(y['center_mgal'])),'peak_shift_km':math.hypot(x['peak_x_km']-y['peak_x_km'],x['peak_y_km']-y['peak_y_km']),'field_rho':float(spearmanr(af[k].ravel(),bf[k].ravel()).statistic)} for k,x,y in zip(af,ad,bd)]}
+              fig,axs=plt.subplots(1,3,figsize=(12,4),constrained_layout=True)
+              for ax,step in zip(axs,steps):
+                  for o in orders:
+                      rr=[x for x in b if x['step_km']==step and x['order']==o];ax.plot([x['radius_km'] for x in rr],[x['center_mgal'] for x in rr],marker='.',label=f'order {o}')
+                  ax.axhline(0,color='gray');ax.set_title(f'grid {step} km');ax.set_xlabel('fit outer radius (km)');ax.set_ylabel('central residual (mGal)');ax.legend()
+              fig.savefig(out/'scale_sweep.png',dpi=150);plt.close(fig)
+          # NOAA scientific Float32 raster vs previously used visualization.
+          la,lo=sites['ZERO_NODE'];w,e,s,n=core.bbox_for_halfwidth_km(la,lo,100)
+          mag_urls={'R24_VISUAL_CANDIDATE':'https://www.ngdc.noaa.gov/geomag/data/EMAG2/EMAG2_V3_SeaLevel_DataTiff.tif','NOAA_FLOAT32':'https://www.ngdc.noaa.gov/geomag/data/EMAG2/EMAG2_V3_20170530/EMAG2_V3_20170530_Sealevel.tif'}
+          for name,url in mag_urls.items():
+              meta={'url':url}
+              try:
+                  with tempfile.TemporaryDirectory() as tmp:
+                      p=Path(tmp)/'mag.tif';size=0
+                      with requests.get(url,stream=True,timeout=(20,90)) as resp:
+                          resp.raise_for_status()
+                          with p.open('wb') as f:
+                              for chunk in resp.iter_content(1048576):
+                                  size+=len(chunk)
+                                  if size>350*1024**2:raise ValueError('download cap')
+                                  f.write(chunk)
+                      meta.update({'sha256':sha(p),'bytes':size})
+                      with rasterio.open(p) as ds:
+                          meta.update({'dtypes':list(ds.dtypes),'bands':ds.count,'colorinterp':[str(c) for c in ds.colorinterp],'nodata':ds.nodata,'scales':list(ds.scales),'offsets':list(ds.offsets)})
+                          if ds.count!=1 or ds.dtypes[0]!='float32':
+                              meta['status']='REJECT_NON_FLOAT32_PHYSICAL_GRID'
+                          elif name!='NOAA_FLOAT32':
+                              meta['status']='FLOAT32_FORMAT_ONLY_NOT_AUTHORIZED_SOURCE'
+                          else:
+                              assert ds.crs and ds.crs.is_geographic
+                              win=from_bounds(w,s,e,n,ds.transform).round_offsets().round_lengths();a=ds.read(1,window=win,masked=True).astype(float).filled(np.nan)
+                              a[a==99999]=np.nan;a=a*ds.scales[0]+ds.offsets[0];tr=ds.window_transform(win)
+                              assert abs(tr.b)<1e-9 and abs(tr.d)<1e-9
+                              x=tr.c+(np.arange(a.shape[1])+.5)*tr.a;y=tr.f+(np.arange(a.shape[0])+.5)*tr.e;xx,yy=np.meshgrid(x,y)
+                              ml,mo=core.meters_per_degree(la);d=np.hypot((xx-lo)*mo,(yy-la)*ml)/1000
+                              meta['rings']={}
+                              for rad in (10,25,50,100):
+                                  v=a[(d<=rad)&np.isfinite(a)]
+                                  meta['rings'][str(rad)]={'n':int(v.size),'median_nT':float(np.median(v)) if v.size else None,'min_nT':float(v.min()) if v.size else None,'max_nT':float(v.max()) if v.size else None}
+                              if not np.isfinite(a).any():raise ValueError('no finite magnetic data')
+                              q=out/'emag2_scientific.npz';np.savez_compressed(q,lat=y,lon=x,magnetic_nT=a)
+                              meta.update({'status':'NUMERICAL_GRID_READ','subset_sha256':sha(q),'units':'nT','units_source':'https://www.ncei.noaa.gov/products/earth-magnetic-model-anomaly-grid-2'})
+              except Exception as exc:meta.update({'status':'FAILED','error':str(exc)})
+              r['magnetic'][name]=meta;save()
+          r['decision']='FACTORIAL_DESCRIPTIVE_ONLY' if len(target)==2 else 'VERSION_COMPARISON_INCOMPLETE'
+          r['limitations']=['Same source versions not independent','Grid step not effective resolution','Fixed annulus ratio differs from R2.3/R2.4; exploratory scale sensitivity','DoG peak can lie at search edge; not a detected object','Controls not verified negatives','No direct sonar or unique density inversion']
+          save()
+          compact=dict(r);compact['sites']={k:{j:v for j,v in s.items() if j!='factorial'} for k,s in r['sites'].items()}
+          for ver,(rows,*_) in target.items():compact['sites']['ZERO_NODE_'+ver]['quadratic_2km']=[x for x in rows if x['step_km']==2 and x['order']==2]
+          print(json.dumps(clean(compact),indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r25-scale-invariance
+          path: zn-r25/
+          retention-days: 90
