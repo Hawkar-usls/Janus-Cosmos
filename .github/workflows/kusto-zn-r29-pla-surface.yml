@@ -1,0 +1,176 @@
+name: KUSTO ZN-R2.9 PLA GENESIS SURFACE
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r29-pla-surface.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r29-pla-surface.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  surface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Janus_Genesis
+          ref: 54652cad778feb25e6327a080415be5cacb68e2b
+          path: pla-genesis
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify and install existing PLA engine
+        run: |
+          test "$(git -C pla-genesis rev-parse HEAD)" = 54652cad778feb25e6327a080415be5cacb68e2b
+          test "$(git -C pla-genesis hash-object src/janus_genesis/mesh_ops.py)" = 0fd50c415282260041770bc9c0d4844df5a36496
+          test "$(git -C pla-genesis hash-object src/janus_genesis/pipeline.py)" = 6a351fe7aa900302c5e57d2c43663f1d2505cef9
+          pip install ./pla-genesis scipy xarray netCDF4 requests pyproj matplotlib pillow
+      - name: Build immutable-data reliefs and validate through PLA Genesis
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p zn-r29-surface
+          PYTHONPATH=workspace python - <<'PY'
+          import os,json,hashlib,zipfile,tempfile,traceback
+          from pathlib import Path
+          import numpy as np
+          import requests,xarray as xr,trimesh
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.spatial import cKDTree
+          from pyproj import CRS,Transformer
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          from janus_genesis.config import JanusConfig
+          from janus_genesis.pipeline import transform_model
+          from janus_genesis.mesh_ops import load_mesh,metrics
+          import kusto_frozen_point_morphology_gen4 as core
+          out=Path('zn-r29-surface'); src=out/'source_models'; src.mkdir()
+          dst=out/'genesis_models';dst.mkdir(); reports=out/'genesis_reports';reports.mkdir()
+          def sha(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def write(name,data):
+              p=out/name;p.write_text(json.dumps(data,indent=2,allow_nan=False)+'\n');return sha(p)
+          def fail(e):return {'status':'FAILED','type':type(e).__name__,'error':repr(e),'traceback':traceback.format_exc(limit=3)}
+          protocol={'experiment':'ZN-R2.9 PLA GENESIS SURFACE','parent_run':45830969841,'artifact_id':15121113558,'artifact_sha256':'0ea8bb127007cb788c1fced13bf185e03886567182629b125932890577ce3ad5','genesis_commit':'54652cad778feb25e6327a080415be5cacb68e2b','center_lat_lon':[-47.3,47.9],'local_node_xy_km':[-2,6],'projection':'WGS84 AEQD centered at ZERO NODE','halfwidth_km':40,'horizontal_mm_per_km':2,'base_mm':3,'terrain_vertical_mm_per_m':.02,'terrain_vertical_exaggeration':10,'field_relief_range_mm':20,'grid_step_km':2,'no_auto_orientation':True,'no_geometry_mutation':True,'production_promotion':False,'claim_ceiling':'MODELLED_BATHYMETRY_AND_SEPARATE_FIELD_RELIEFS_NOT_SONAR'}
+          r={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'protocol_sha256':write('protocol.json',protocol),'models':{},'source_checks':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          save()
+          axis=np.arange(-40,40.01,2.);X,Y=np.meshgrid(axis,axis)
+          crs=CRS.from_proj4('+proj=aeqd +lat_0=-47.3 +lon_0=47.9 +datum=WGS84 +units=m')
+          lon,lat=Transformer.from_crs(crs,4326,always_xy=True).transform(X*1000,Y*1000)
+          cfg=JanusConfig();cfg.transform.auto_orient=False;cfg.transform.repair_mesh=True;cfg.transform.export_format='stl'
+          def mesh_solid(z):
+              ny,nx=z.shape;N=ny*nx
+              vs=np.column_stack([X.ravel()*2,Y.ravel()*2,z.ravel()])
+              vb=vs.copy();vb[:,2]=0
+              faces=[]
+              for j in range(ny-1):
+                  for i in range(nx-1):
+                      a=j*nx+i;b=a+1;c=a+nx;d=c+1
+                      faces.extend([(a,b,d),(a,d,c),(N+a,N+d,N+b),(N+a,N+c,N+d)])
+              edge=list(range(nx))+[j*nx+nx-1 for j in range(1,ny)]+[(ny-1)*nx+i for i in range(nx-2,-1,-1)]+[j*nx for j in range(ny-2,0,-1)]
+              for a,b in zip(edge,edge[1:]+edge[:1]):
+                  faces.extend([(a,N+a,N+b),(a,N+b,b)])
+              m=trimesh.Trimesh(vertices=np.vstack([vs,vb]),faces=np.asarray(faces),process=True)
+              trimesh.repair.fix_normals(m)
+              if not (m.is_watertight and m.is_winding_consistent and m.volume>0):raise ValueError('input mesh geometry gate')
+              return m
+          def make(name,values,units,role,provenance,vertical=None):
+              if values.shape!=X.shape or not np.isfinite(values).all():raise ValueError('nonfinite or shape mismatch; no invented fill')
+              low=float(values.min());high=float(values.max())
+              if high<=low:raise ValueError('flat field')
+              scale=vertical if vertical is not None else 20/(high-low)
+              z=3+(values-low)*scale
+              m=mesh_solid(z)
+              if np.any(m.extents>np.asarray(cfg.printer.build_volume_mm)):raise ValueError('outside A1 build volume')
+              p=src/(name+'.stl');m.export(p)
+              original=load_mesh(p)
+              rep=transform_model(p,dst,reports,cfg)
+              cand=Path(rep['output']);mesh=load_mesh(cand)
+              # Compare every vertex in both directions; no relief edits or rescaling permitted.
+              a=original.vertices;b=mesh.vertices
+              delta=float(max(cKDTree(a).query(b)[0].max(),cKDTree(b).query(a)[0].max()))
+              if delta>1e-4 or not mesh.is_watertight or not mesh.is_winding_consistent or mesh.volume<=0:raise ValueError('Genesis output failed immutable geometry gate')
+              if len(original.faces)!=len(mesh.faces):raise ValueError('face count changed')
+              obj=dst/(name+'.obj');mesh.export(obj)
+              fig=plt.figure(figsize=(9,5),constrained_layout=True);ax=fig.add_subplot(111,projection='3d')
+              surf=ax.plot_surface(X,Y,values,cmap='viridis',linewidth=0,antialiased=True)
+              ax.set(xlabel='East km',ylabel='North km',zlabel=units,title=role);fig.colorbar(surf,ax=ax,shrink=.65,label=units)
+              fig.savefig(out/(name+'_preview.png'),dpi=150);plt.close(fig)
+              fig,ax=plt.subplots(figsize=(6,6),constrained_layout=True);im=ax.pcolormesh(X,Y,values,cmap='viridis',shading='auto')
+              ax.plot(0,0,'w+',label='ZERO NODE');ax.plot(-2,6,'r+',label='LOCAL NODE');ax.set(xlabel='East km',ylabel='North km',title=role,aspect='equal');ax.legend();fig.colorbar(im,ax=ax,label=units)
+              fig.savefig(out/(name+'_map.png'),dpi=150);plt.close(fig)
+              q=out/(name+'_grid.npz');np.savez_compressed(q,x_km=X,y_km=Y,value=values)
+              data={'status':'GENESIS_GEOMETRY_PASS','role':role,'units':units,'source':provenance,'native_value_range':[low,high],'z_mm_formula':'3 + (value - min_value) * vertical_scale','vertical_scale_mm_per_unit':scale,'horizontal_mm_per_km':2,'geometry_preservation_max_vertex_delta_mm':delta,'metrics':metrics(mesh).to_dict(),'stl':str(cand),'stl_sha256':sha(cand),'obj':str(obj),'obj_sha256':sha(obj),'grid_sha256':sha(q),'genesis_report':rep['report'],'slicer_validation':'NOT_RUN','print_permission':'NOT_CERTIFIED'}
+              write(name+'_manifest.json',data)
+              return data
+          # Read exact R2.8 scientific fields from Actions artifact, with archive and member hashes.
+          try:
+              api=f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/15121113558/zip"
+              with tempfile.TemporaryDirectory() as tmp:
+                  p=Path(tmp)/'r28.zip'
+                  with requests.get(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'},stream=True,timeout=(20,90)) as resp:
+                      resp.raise_for_status()
+                      with p.open('wb') as f:
+                          for chunk in resp.iter_content(1048576):
+                              f.write(chunk)
+                              if f.tell()>50*1024**2:raise ValueError('artifact cap')
+                  digest=sha(p);r['source_checks']['R28']={'archive_sha256':digest,'expected':protocol['artifact_sha256']}
+                  if digest!=protocol['artifact_sha256']:raise ValueError('R2.8 archive digest mismatch')
+                  with zipfile.ZipFile(p) as z:
+                      for name,member,key,unit,role,expected in [
+                          ('KUSTO_GRAVITY','target06.npz','dog','mGal','SWOT06 DoG 4-8 km gravity field','be5f3205985b5e64c3f55079895634b76655ff3b96d9e27f1bc5feccc1d3b3a4'),
+                          ('KUSTO_MAGNETIC','magnetic_local.npz','dog_nT','nT','EMAG2 DoG 4-8 km magnetic field','6dd6a0ab762caab129cbd34c2718d07e4e063606c746e01621448eef435b0b20')]:
+                          try:
+                              members=[m for m in z.infolist() if Path(m.filename).name==member]
+                              if len(members)!=1 or members[0].file_size>10*1024**2:raise ValueError('unexpected artifact member')
+                              q=Path(tmp)/member;q.write_bytes(z.read(members[0]))
+                              if sha(q)!=expected:raise ValueError('R2.8 member digest mismatch')
+                              with np.load(q,allow_pickle=False) as a:
+                                  x=a['x'];y=a['y'];v=a[key]
+                                  if x.ndim!=2 or y.ndim!=2 or x.shape!=v.shape or y.shape!=v.shape:raise ValueError('unexpected grid geometry')
+                                  assert np.allclose(x,x[0][None,:]) and np.allclose(y,y[:,0][:,None])
+                                  vals=RegularGridInterpolator((y[:,0],x[0]),v,bounds_error=True)(np.stack([Y,X],axis=-1))
+                              r['models'][name]=make(name,vals,unit,role,{'run_id':45830969841,'member':member,'member_sha256':expected})
+                          except Exception as e:r['models'][name]=fail(e)
+                          save()
+          except Exception as e:r['source_checks']['R28_failure']=fail(e);save()
+          # Separate global modelled bathymetry, NOT direct sonar. Same geographic footprint as field reliefs.
+          try:
+              url='https://www.gmrt.org/services/GridServer'
+              params={'west':float(lon.min())-.08,'east':float(lon.max())+.08,'south':float(lat.min())-.08,'north':float(lat.max())+.08,'layer':'topo','format':'coards','resolution':'med'}
+              with tempfile.TemporaryDirectory() as tmp:
+                  p=Path(tmp)/'gmrt.nc'
+                  with requests.get(url,params=params,stream=True,timeout=(20,120)) as resp:
+                      resp.raise_for_status()
+                      with p.open('wb') as f:
+                          for chunk in resp.iter_content(1048576):
+                              f.write(chunk)
+                              if f.tell()>150*1024**2:raise ValueError('GMRT cap')
+                  provenance={'url':url,'params':params,'sha256':sha(p),'layer':'topo','authority':'GLOBAL_MODELLED_BATHYMETRY_POSSIBLY_GRAVITY_DERIVED_NOT_DIRECT_SONAR'}
+                  with xr.open_dataset(p) as ds:
+                      la,lo,v,key=core._pick_grid(ds);la=np.asarray(la,float);lo=np.asarray(lo,float);v=np.asarray(v,float)
+                      if v.shape!=(len(la),len(lo)):raise ValueError('unexpected GMRT grid')
+                      iy=np.argsort(la);ix=np.argsort(lo);vals=RegularGridInterpolator((la[iy],lo[ix]),v[np.ix_(iy,ix)],bounds_error=True)(np.stack([lat,lon],axis=-1))
+                      provenance.update({'grid_key':str(key),'grid_shape':list(v.shape),'units_metadata':ds[str(key)].attrs.get('units') if str(key) in ds else None})
+                  if np.median(vals)>=0:raise ValueError('unexpected sign for underwater elevation')
+                  r['models']['KUSTO_TERRAIN']=make('KUSTO_TERRAIN',vals,'m elevation','GMRT modelled seabed elevation (not sonar)',provenance,vertical=.02)
+                  r['source_checks']['GMRT']=provenance
+          except Exception as e:r['models']['KUSTO_TERRAIN']=fail(e)
+          r['decision']='GENESIS_RELIEF_EXPORT_PASS' if sum(v.get('status')=='GENESIS_GEOMETRY_PASS' for v in r['models'].values())==3 else 'PARTIAL_OR_BLOCKED'
+          r['limitations']=['GMRT global topography may use gravity and is not independent direct sonar','Field relief z is symbolic and units differ; never merge as physical depth','STL has no units; manifest specifies mm','Grid step is sampling, not effective resolution','No slicer test, no print certification','No new source observations or unique physical inversion']
+          save();print(json.dumps(r,indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r29-pla-surface
+          path: zn-r29-surface/
+          retention-days: 90
