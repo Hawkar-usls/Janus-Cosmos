@@ -1,0 +1,203 @@
+name: KUSTO ZN-R2.8 LOCAL FINGERPRINT
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r28-local-fingerprint.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r28-local-fingerprint.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fingerprint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy xarray h5netcdf h5py fsspec aiohttp requests rasterio pyproj matplotlib
+      - name: Matched selection, morphology, physical models and magnetic recovery
+        run: |
+          mkdir -p zn-r28
+          python - <<'PY'
+          import json,os,hashlib,math,tempfile,traceback
+          from pathlib import Path
+          import numpy as np
+          import xarray as xr,fsspec,aiohttp,requests,rasterio
+          from pyproj import CRS,Transformer,Geod
+          from scipy.interpolate import RegularGridInterpolator
+          from scipy.ndimage import gaussian_filter,label
+          from scipy.signal import fftconvolve
+          from scipy.stats import spearmanr
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          out=Path('zn-r28'); geod=Geod(ellps='WGS84')
+          target=(-47.3,47.9);sites={'ZERO_NODE':target}
+          # Fixed geographic lattice, exclude target vicinity and previously used R2.4 centers.
+          old=[(a,b) for a in (-41,-45,-49,-53) for b in (40,45,50,55)]
+          for i in range(12):
+              for j in range(12):
+                  la=-54+i*1.2;lo=38+j*1.8
+                  if min(geod.inv(lo,la,b,a)[2] for a,b in [target]+old)<80000:continue
+                  sites[f'C_{i:02d}_{j:02d}']=(la,lo)
+          assert 100<=len(sites)-1<=200
+          protocol={'experiment':'ZN-R2.8','parent_run':45829716679,'sites':sites,'target_frozen_local_xy_km':[-2,6],'selection':'minimum signed DoG sigma 4,8 km within 20 km of each fixed site; identical for target and controls','grid_step_km':2,'grid_halfwidth_km':100,'local_aperture_km':4,'local_ring_km':[8,15],'morphology':'8-connected below half depth relative to ring median, restricted to 30 km of selected minimum; edge flagged','magnetic_comparison':'same DoG scale at target only, descriptive not equal effective resolution','model_diameters_km':[4,6,8,12,16,20,24,32],'model_depths_from_surface_km':[3.45,5,8],'model_density_contrasts_kg_m3':[-1700,-400,-200],'model_thicknesses_km':[.1,.25,.5,1,2],'instrument_smoothing_fwhm_km':[8,12,16],'production_promotion':False,'control_role':'spatial candidate controls, not verified negatives; same mission field; nearby windows may correlate'}
+          def clean(v):
+              if isinstance(v,dict):return {k:clean(x) for k,x in v.items()}
+              if isinstance(v,(list,tuple)):return [clean(x) for x in v]
+              if isinstance(v,(float,np.floating)):return float(v) if math.isfinite(v) else None
+              if isinstance(v,np.integer):return int(v)
+              if isinstance(v,np.bool_):return bool(v)
+              return v
+          def sha(p):
+              with open(p,'rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          def write(name,v):
+              p=out/name;p.write_text(json.dumps(clean(v),indent=2,allow_nan=False)+'\n');return sha(p)
+          r={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'protocol_sha256':write('protocol.json',protocol),'decision':'NOT_EXECUTED','controls':{},'target':{},'magnetic':{},'models':{},'production_promotion':False}
+          def save():write('receipt.json',r)
+          def err(e):return {'status':'FAILED','type':type(e).__name__,'error':repr(e),'traceback':traceback.format_exc(limit=3)}
+          save()
+          axis=np.arange(-100,101,2.);X,Y=np.meshgrid(axis,axis);D=np.hypot(X,Y)
+          def coordinates(la,lo):
+              crs=CRS.from_proj4(f'+proj=aeqd +lat_0={la} +lon_0={lo} +datum=WGS84 +units=m')
+              return Transformer.from_crs(crs,4326,always_xy=True).transform(X*1000,Y*1000)
+          def filt(v,s):
+              valid=np.isfinite(v);w=gaussian_filter(valid.astype(float),s/2,mode='constant')
+              a=gaussian_filter(np.where(valid,v,0.),s/2,mode='constant')
+              return np.divide(a,w,out=np.full_like(a,np.nan),where=w>=.95)
+          def dog(v):return filt(v,4)-filt(v,8)
+          def fp(f):
+              m=(D<=20)&np.isfinite(f)
+              if not m.any():raise ValueError('no search cells')
+              i=np.unravel_index(np.argmin(np.where(m,f,np.inf)),f.shape);x=float(X[i]);y=float(Y[i]);z=float(f[i])
+              d=np.hypot(X-x,Y-y);ap=f[(d<=4)&np.isfinite(f)];ring=f[(d>=8)&(d<=15)&np.isfinite(f)]
+              if len(ap)<5 or len(ring)<20:raise ValueError('insufficient local cells')
+              bg=float(np.median(ring));contrast=float(np.median(ap))-bg
+              threshold=(z+bg)/2;mask=(d<=30)&np.isfinite(f)&(f<=threshold)
+              lab,_=label(mask,structure=np.ones((3,3),int));component=lab==lab[i] if lab[i]>0 and z<bg else np.zeros_like(mask)
+              pts=np.column_stack([X[component],Y[component]])
+              touch=bool(np.any(d[component]>=28))
+              ans={'status':'ANALYZED','peak_mgal':z,'x_km':x,'y_km':y,'search_edge':bool(math.hypot(x,y)>=18),'aperture_median_mgal':float(np.median(ap)),'ring_median_mgal':bg,'prominence_mgal':contrast,'half_depth_threshold_mgal':threshold,'half_depth_area_km2':float(len(pts)*4),'equivalent_diameter_km':float(2*np.sqrt(len(pts)*4/np.pi)),'component_edge':touch,'closed_proxy':bool(len(pts)>=3 and not touch)}
+              if len(pts)>=3:
+                  eig,vec=np.linalg.eigh(np.cov(pts.T));u=vec[:,-1];w=vec[:,0]
+                  ans.update({'major_extent_km':float(np.ptp(pts@u)),'minor_extent_km':float(np.ptp(pts@w)),'azimuth_deg':float(np.degrees(np.arctan2(u[0],u[1]))%180),'elongation':float(np.sqrt(eig[-1]/eig[0])) if eig[0]>0 else None})
+              return ans,component
+          target_fields={}
+          for ver in ('04','06'):
+              url=f'https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_{ver}.nc'
+              try:
+                  with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':aiohttp.ClientTimeout(total=360)}) as f:
+                      with xr.open_dataset(f,engine='h5netcdf') as ds:
+                          lk=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'));ok=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                          key=next(k for k,v in ds.data_vars.items() if v.ndim==2 and lk in v.dims and ok in v.dims)
+                          def span(k,a,b):return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                          # Read one contiguous regional subset rather than 100+ remote requests.
+                          bounds=(-57,-38,34,63) if ver=='06' else (-49,-45,45,51)
+                          s,n,w,e=bounds
+                          a=ds[key].sel({lk:span(lk,s,n),ok:span(ok,w,e)}).transpose(lk,ok).sortby(lk).sortby(ok).load()
+                          p=out/f'swot{ver}_regional.npz';np.savez_compressed(p,lat=a[lk].values,lon=a[ok].values,gravity=a.values)
+                          r.setdefault('sources',{})[ver]={'url':url,'sha256':sha(p),'shape':list(a.shape)}
+                          interp=RegularGridInterpolator((a[lk].values,a[ok].values),np.asarray(a.values,float),bounds_error=False,fill_value=np.nan)
+                          for name,(la,lo) in sites.items():
+                              if ver=='04' and name!='ZERO_NODE':continue
+                              try:
+                                  lon,lat=coordinates(la,lo);v=interp(np.stack([lat,lon],axis=-1))
+                                  if not np.isfinite(v).all():raise ValueError('incomplete local grid')
+                                  ff=dog(v);m,component=fp(ff)
+                                  if name=='ZERO_NODE':
+                                      m['shift_from_r26_km']=math.hypot(m['x_km']+2,m['y_km']-6);r['target'][ver]=m;target_fields[ver]=(v,ff,component)
+                                      p=out/f'target{ver}.npz';np.savez_compressed(p,x=X,y=Y,gravity=v,dog=ff,component=component);m['sha256']=sha(p)
+                                  else:r['controls'][name]=m
+                              except Exception as e:
+                                  if name=='ZERO_NODE':r['target'][ver]=err(e)
+                                  else:r['controls'][name]=err(e)
+                  save()
+              except Exception as e:r.setdefault('source_failures',{})[ver]=err(e);save()
+          cs=[c for c in r['controls'].values() if c['status']=='ANALYZED'];t=r['target'].get('06',{})
+          r['control_summary']={'planned':len(sites)-1,'analyzed':len(cs),'edge_selected':sum(c['search_edge'] for c in cs)}
+          if t.get('status')=='ANALYZED' and cs:
+              r['control_summary'].update({'as_or_more_negative_peak':sum(c['peak_mgal']<=t['peak_mgal'] for c in cs),'as_or_more_negative_prominence':sum(c['prominence_mgal']<=t['prominence_mgal'] for c in cs),'descriptive_prominence_rank':(1+sum(c['prominence_mgal']<=t['prominence_mgal'] for c in cs))/(len(cs)+1),'closed_proxy_count':sum(c['closed_proxy'] for c in cs)})
+          save()
+          # Reviewed NOAA metadata cached in Meta Registry; no dependency on metadata service at runtime.
+          provenance={'registry_commit':'89371f8cbbc68549920f0a6e946cc059eb65ca57','registry_path':'experiments/kusto/zn-r2/emag2-v3-coordinate-provenance.json','metadata_url':'https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ngdc.mgg.geophysical_models%3AEMAG2_V3/html','epsg':4326,'longitude_domain':[0,360],'units':'nT','source_sha256':'57a5ef84123f17c71387fc790d73c8692fcdf853b8c82aa2350016e3c565d615'}
+          r['magnetic']['provenance']=provenance
+          url='https://www.ngdc.noaa.gov/geomag/data/EMAG2/EMAG2_V3_20170530/EMAG2_V3_20170530_Sealevel.tif'
+          try:
+              with tempfile.TemporaryDirectory() as tmp:
+                  p=Path(tmp)/'mag.tif';size=0
+                  with requests.get(url,stream=True,timeout=(20,90)) as resp:
+                      resp.raise_for_status()
+                      with p.open('wb') as f:
+                          for chunk in resp.iter_content(1048576):
+                              size+=len(chunk)
+                              if size>350*1024**2:raise ValueError('download cap')
+                              f.write(chunk)
+                  digest=sha(p);r['magnetic']['source']={'url':url,'sha256':digest,'bytes':size}
+                  if digest!=provenance['source_sha256']:raise ValueError('source digest changed')
+                  with rasterio.open(p) as ds:
+                      assert ds.count==1 and ds.dtypes[0]=='float32' and ds.shape==(5399,10800)
+                      assert np.allclose([ds.transform.a,ds.transform.e,ds.transform.b,ds.transform.d],[1/30,-1/30,0,0],atol=1e-9)
+                      assert np.allclose([ds.bounds.left,ds.bounds.right],[-1/60,360-1/60],atol=1e-5)
+                      assert ds.crs is None or ds.crs.to_epsg()==4326
+                      from rasterio.windows import from_bounds,Window
+                      lon,lat=coordinates(*target);lon=lon%360
+                      win=from_bounds(float(lon.min())-.15,float(lat.min())-.15,float(lon.max())+.15,float(lat.max())+.15,ds.transform)
+                      win=Window(math.floor(win.col_off),math.floor(win.row_off),math.ceil(win.width)+2,math.ceil(win.height)+2)
+                      raw=ds.read(1,window=win,masked=True).astype(float).filled(np.nan);raw[(raw==99999)|(np.abs(raw)>1e6)]=np.nan
+                      tr=ds.window_transform(win);xx=tr.c+(np.arange(raw.shape[1])+.5)*tr.a;yy=tr.f+(np.arange(raw.shape[0])+.5)*tr.e
+                      mag=RegularGridInterpolator((yy[::-1],xx),raw[::-1],bounds_error=False,fill_value=np.nan)(np.stack([lat,lon],axis=-1))*ds.scales[0]+ds.offsets[0]
+                      mf=dog(mag);mask=(D<=30)&np.isfinite(mf)
+                      if mask.sum()<500:raise ValueError('insufficient magnetic coverage')
+                      r['magnetic'].update({'status':'NUMERICAL_GRID_READ','units':'nT','finite_fraction_30km':float(np.isfinite(mag[D<=30]).mean()),'center_raw_nT':float(mag[D==0][0]),'coordinate_method':'source-hash bound NOAA metadata plus native affine sampling'})
+                      if '06' in target_fields:
+                          _,gf,_=target_fields['06'];q=mask&np.isfinite(gf);d=np.hypot(X-t['x_km'],Y-t['y_km']);ap=(d<=4)&np.isfinite(mf);ring=(d>=8)&(d<=15)&np.isfinite(mf)
+                          r['magnetic'].update({'local_dog_median_nT':float(np.median(mf[ap])),'local_dog_prominence_nT':float(np.median(mf[ap])-np.median(mf[ring])),'gravity_magnetic_rho_30km':float(spearmanr(gf[q],mf[q]).statistic),'paired_cells':int(q.sum())})
+                          mm=mask&(d<=12);i=np.unravel_index(np.argmax(np.where(mm,np.abs(mf),-np.inf)),mf.shape)
+                          r['magnetic']['local_absolute_extremum']={'value_nT':float(mf[i]),'x_km':float(X[i]),'y_km':float(Y[i]),'distance_from_gravity_peak_km':float(d[i]),'search_edge':bool(d[i]>=10)}
+                      p=out/'magnetic_local.npz';np.savez_compressed(p,x=X,y=Y,magnetic_nT=mag,dog_nT=mf);r['magnetic']['subset_sha256']=sha(p)
+          except Exception as e:r['magnetic'].update(err(e))
+          save()
+          # Model only fixed selected local minimum, no amplitude fitting beyond explicit density/thickness bank.
+          if '06' in target_fields:
+              _,g,component=target_fields['06'];px=t['x_km'];py=t['y_km'];dist=np.hypot(X-px,Y-py)
+              evalmask=(dist<=15)&np.isfinite(g);ring=(dist>=8)&(dist<=15)&np.isfinite(g)
+              obs=g-float(np.median(g[ring]));null=float(np.sqrt(np.mean(obs[evalmask]**2)))
+              fine=np.arange(-100,100.01,.5);fx,fy=np.meshgrid(fine*1000,fine*1000);R2=fx*fx+fy*fy
+              coords=np.stack([Y-py,X-px],axis=-1);rows=[];best=None;bestfield=None
+              for depth in protocol['model_depths_from_surface_km']:
+                  for thick in protocol['model_thicknesses_km']:
+                      kernel=1e5*6.67430e-11*250000*(1/np.sqrt(R2+(depth*1000)**2)-1/np.sqrt(R2+((depth+thick)*1000)**2))
+                      for dia in protocol['model_diameters_km']:
+                          disk=(R2<=(dia*500)**2).astype(float);raw=fftconvolve(disk,kernel,mode='same')
+                          for fwhm in protocol['instrument_smoothing_fwhm_km']:
+                              # Hypothetical transfer only; then apply exactly the same DoG.
+                              sm=gaussian_filter(raw,fwhm/(2.35482*.5),mode='constant')
+                              # Apply DoG on padded fine grid before cropping target-centered evaluation.
+                              band=gaussian_filter(sm,4/.5)-gaussian_filter(sm,8/.5)
+                              m=RegularGridInterpolator((fine,fine),band,bounds_error=False,fill_value=np.nan)(coords)
+                              for rho in protocol['model_density_contrasts_kg_m3']:
+                                  v=m*rho;v=v-float(np.median(v[ring]));rmse=float(np.sqrt(np.mean((obs[evalmask]-v[evalmask])**2)))
+                                  row={'diameter_km':dia,'top_depth_km':depth,'thickness_km':thick,'density_contrast_kg_m3':rho,'fwhm_km':fwhm,'rmse_mgal':rmse,'improvement':1-rmse/null}
+                                  rows.append(row)
+                                  if fwhm==12 and (best is None or rmse<best['rmse_mgal']):best=row;bestfield=v.copy()
+              r['models']={'status':'CONDITIONAL_MODELS','count':len(rows),'null_rmse_mgal':null,'primary_best':best,'bank_sha256':write('model_bank.json',rows),'fit_role':'same data selected and fitted; not independent confirmation; model shape disk and assumed density/depth'}
+              fig,axs=plt.subplots(1,3,figsize=(12,4),constrained_layout=True)
+              for ax,z,title in zip(axs,[obs,bestfield,obs-bestfield],['Observed DoG contrast','Best conditional model','Residual']):
+                  im=ax.pcolormesh(X,Y,z,shading='auto',cmap='RdBu_r');ax.set(xlim=(px-20,px+20),ylim=(py-20,py+20),aspect='equal',title=title);ax.plot(px,py,'k+');fig.colorbar(im,ax=ax,label='mGal')
+              fig.savefig(out/'local_fingerprint.png',dpi=140);plt.close(fig)
+          r['decision']='DESCRIPTIVE_LOCAL_FINGERPRINT' if r['magnetic'].get('status')=='NUMERICAL_GRID_READ' and len(cs)>=100 and r['models'].get('status')=='CONDITIONAL_MODELS' else 'PARTIAL_LOCAL_FINGERPRINT'
+          r['limitations']=['Same SWOT versions share data','Control sites not confirmed negatives or independent surveys; spatial dependence','Half-depth component is threshold geometry of filtered field not physical object','Magnetic and gravity resolution differ','No direct sonar; no unique inversion','Conditional centered disk models fitted on selected signal; assumed smoothing not calibrated']
+          save()
+          compact=dict(r);compact['controls']={k:{j:v.get(j) for j in ('status','peak_mgal','prominence_mgal','search_edge','closed_proxy','error')} for k,v in r['controls'].items()}
+          print(json.dumps(clean(compact),indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r28-local-fingerprint
+          path: zn-r28/
+          retention-days: 90
