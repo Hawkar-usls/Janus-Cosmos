@@ -1,0 +1,104 @@
+name: KUSTO ZN-R2 DEEP SCAN
+on:
+  push:
+    branches: [experiment/kusto-zn-r2-deep-scan-20261126]
+    paths: ['.github/workflows/kusto-zn-r2-deep-scan.yml']
+  pull_request:
+    branches: [feature/kusto-frozen-point-morphology-gen4]
+    paths: ['.github/workflows/kusto-zn-r2-deep-scan.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deep-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy requests xarray netCDF4 pillow fsspec h5netcdf aiohttp
+      - name: Frozen source audit and Gen4
+        run: |
+          mkdir -p zn-r2
+          PYTHONPATH=workspace python - <<'PY'
+          import json, hashlib, os, time, traceback
+          from pathlib import Path
+          import numpy as np
+          import requests
+          import xarray as xr
+          import fsspec
+          import kusto_frozen_point_morphology_gen4_iofix as shim
+          core=shim.core
+          out=Path('zn-r2')
+          core.TARGET_LAT,core.TARGET_LON=-47.3,47.9
+          protocol={'id':'KUSTO_ZN_R2_DEEP_SCAN','target':[-47.3,47.9],'target_radius_km':25,'control_rings_km':[10,20,30,40],'gmrt_context_halfwidth_km':46,'no_recentering':True,'gen4_scale_bands':core.SCALE_BANDS,'baseline':'SEPTEMBER_RECEIPT_NOT_YET_BOUND','source_independence':'GEBCO/GMRT/NOAA may share surveys; SWOT is indirect','claim_ceiling':'MORPHOLOGY_ONLY_NOT_OBJECT_IDENTITY','production_promotion':False}
+          def write(name,obj):
+              (out/name).write_text(json.dumps(obj,sort_keys=True,indent=2,default=str,allow_nan=False)+'\n')
+          def sha(b): return hashlib.sha256(b).hexdigest()
+          def clean(obj):
+              if isinstance(obj,float) and not np.isfinite(obj): return None
+              if isinstance(obj,dict): return {k:clean(v) for k,v in obj.items()}
+              if isinstance(obj,list): return [clean(v) for v in obj]
+              return obj
+          write('protocol.json',protocol)
+          core.CONTRACT_PATH=out/'protocol.json'
+          report={'protocol_sha256':sha(core.CONTRACT_PATH.read_bytes()),'commit':os.environ.get('GITHUB_SHA'),'run_id':os.environ.get('GITHUB_RUN_ID'),'source_results':{},'new_since_september':'UNKNOWN_NO_BOUND_BASELINE','production_promotion':False}
+          def save(): write('receipt.json',clean(report))
+          save()
+          try:
+              report['gen4_self_test']=core.self_test()
+              gen=core.run_live()
+              assert gen['frozen_target']['latitude_deg']==-47.3 and gen['frozen_target']['longitude_deg']==47.9
+              assert gen['underwater_pyramid_detected'] is False
+              write('gen4.json',clean(gen))
+              report['source_results']['GEBCO_TID']=gen.get('gebco_2026_tid_wms')
+              report['source_results']['GMRT_TOPO_MASK']=gen.get('gmrt_topo_mask')
+              report['gen4_decision']=gen['decision']
+          except Exception as e:
+              report['gen4_decision']='EXECUTION_ERROR'
+              report['gen4_error']=str(e)
+          save()
+          west,east,south,north=core.bbox_for_halfwidth_km(-47.3,47.9,25)
+          report['query_bbox']=[west,south,east,north]
+          noaa='https://services2.arcgis.com/C8EMgrsFcRFL6LrL/ArcGIS/rest/services/Multibeam_Bathymetry_Datasets/FeatureServer'
+          layers=[]
+          for i in range(4):
+              url=f'{noaa}/{i}/query'
+              params={'f':'json','where':'1=1','geometry':f'{west},{south},{east},{north}','geometryType':'esriGeometryEnvelope','inSR':4326,'spatialRel':'esriSpatialRelIntersects','returnGeometry':'false','outFields':'*','resultRecordCount':2000}
+              try:
+                  r=requests.get(url,params=params,timeout=45); r.raise_for_status()
+                  (out/f'noaa-layer-{i}.json').write_bytes(r.content)
+                  j=r.json()
+                  if 'error' in j or 'features' not in j: raise ValueError(str(j)[:500])
+                  layers.append({'layer':i,'status':'CATALOG_MATCHES' if j['features'] else 'NO_CATALOG_MATCH_IN_BBOX','count':len(j['features']),'truncated':j.get('exceededTransferLimit',False),'sha256':sha(r.content),'url':r.url})
+              except Exception as e: layers.append({'layer':i,'status':'DATA_SOURCE_UNAVAILABLE','error':str(e)})
+          report['source_results']['NOAA_MULTIBEAM']={'layers':layers,'interpretation':'BBOX_TRACK_OR_PRODUCT_MATCH_ONLY_NOT_SONAR_COVERAGE; raw soundings not ingested'}
+          save()
+          url='https://topex.ucsd.edu/pub/global_grav_1min_SWOT/grav_SWOT_06.nc'
+          try:
+              with fsspec.open(url,mode='rb',block_size=1048576,cache_type='readahead',client_kwargs={'timeout':__import__('aiohttp').ClientTimeout(total=60)}) as f:
+                  with xr.open_dataset(f,engine='h5netcdf') as ds:
+                      lat=next(k for k in ds.coords if k.lower() in ('lat','latitude','y'))
+                      lon=next(k for k in ds.coords if k.lower() in ('lon','longitude','x'))
+                      def span(k,a,b): return slice(a,b) if float(ds[k][0])<float(ds[k][-1]) else slice(b,a)
+                      sub=ds.sel({lat:span(lat,south,north),lon:span(lon,west,east)})
+                      var=next(k for k,v in sub.data_vars.items() if v.ndim==2 and lat in v.dims and lon in v.dims)
+                      a=sub[var].load()
+                      v=np.asarray(a.values,dtype=float); finite=v[np.isfinite(v)]
+                      if not finite.size: raise ValueError('Empty/nonfinite local subset')
+                      np.savez_compressed(out/'swot06-local.npz',lat=sub[lat].values,lon=sub[lon].values,gravity=v)
+                      report['source_results']['SWOT_06']={'status':'LOCAL_SUBSET_READ','source':url,'variable':var,'units':a.attrs.get('units'),'shape':list(v.shape),'finite_count':int(finite.size),'min':float(finite.min()),'max':float(finite.max()),'median':float(np.median(finite)),'subset_sha256':sha((out/'swot06-local.npz').read_bytes()),'interpretation':'INDIRECT_GRAVITY_ONLY_NOT_SONAR; subset hash not full-source hash'}
+          except Exception as e:
+              report['source_results']['SWOT_06']={'status':'DATA_SOURCE_UNAVAILABLE','source':url,'error':str(e)}
+          save()
+          print(json.dumps(clean(report),indent=2,default=str))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kusto-zn-r2-deep-scan
+          path: zn-r2/
+          if-no-files-found: error
+          retention-days: 90
